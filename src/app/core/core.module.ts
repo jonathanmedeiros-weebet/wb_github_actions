@@ -1,0 +1,40 @@
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { throwIfAlreadyLoaded } from './module-import-guard';
+
+// Providers
+import {
+    AuthService,
+    AuthGuard,
+    HeadersService,
+    MessageService,
+    ErrorService,
+    HelperService
+} from '../services';
+
+import * as moment from 'moment';
+moment.locale('pt-BR');
+
+@NgModule({
+    imports: [CommonModule],
+    exports: [],
+    declarations: [],
+    providers: [
+        AuthService,
+        AuthGuard,
+        HeadersService,
+        MessageService,
+        ErrorService,
+        HelperService
+    ]
+})
+export class CoreModule {
+    constructor(
+        @Optional()
+        @SkipSelf()
+        parentModule: CoreModule
+    ) {
+        throwIfAlreadyLoaded(parentModule, 'CoreModule');
+    }
+}

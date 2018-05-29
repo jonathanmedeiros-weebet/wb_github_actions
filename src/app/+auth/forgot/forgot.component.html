@@ -1,0 +1,41 @@
+<div id="forgot-password">
+    <div class="row justify-content-center">
+        <div id="forgot-box" class="col-lg-4 col-xs-12 shadow bg-white">
+            <div class="row">
+                <div id="forgot-form" class="col-12">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal form-material" id="forget-password-form" novalidate>
+                        <h3 class="box-title">Recuperar senha</h3>
+                        <div>
+                            <div class="form-group" [ngClass]="applyCssErrorDiv('username')">
+                                <div class="col-xs-12">
+                                    <input type="text" class="form-control" placeholder="CPF/CNPJ" formControlName="username">
+                                    <span *ngIf="hasError('username', 'required')" class="help-block">Campo obrigatório</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="col-md-12">
+                                <a routerLink="/auth/login" class="pull-right">
+                                    Lembro da minha senha
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase" type="submit" [disabled]="disabledButton">Recuperar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 text-center align-self-end" id="forgot-footer">
+            Powered by:
+            <a href="http://www.sisgr.com" target="_blank">
+                <img src="assets/images/logo_sisgr.png" alt="SISGR" />
+            </a>
+        </div>
+    </div>
+</div>
+
