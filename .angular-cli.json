@@ -20,12 +20,14 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/jquery-toast-plugin/dist/jquery.toast.min.css",
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/jquery-toast-plugin/dist/jquery.toast.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

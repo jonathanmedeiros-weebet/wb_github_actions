@@ -5,7 +5,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { ClienteService } from '../services';
 
 @NgModule({
     imports: [SharedModule, AuthRoutingModule],
@@ -14,6 +13,6 @@ import { ClienteService } from '../services';
         ForgotComponent,
         ResetPasswordComponent
     ],
-    providers: [ClienteService]
+    providers: []
 })
 export class AuthModule { }

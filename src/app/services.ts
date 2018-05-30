@@ -1,5 +1,5 @@
 /* General Services */
-export * from './shared/services/cliente.service';
+export * from './shared/services/tipo-aposta.service';
 
 /* Utils Services */
 export * from './shared/services/utils/cep.service';

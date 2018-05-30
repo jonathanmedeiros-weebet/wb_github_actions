@@ -1,2 +1,2 @@
-export * from './shared/models/cliente';
+export * from './shared/models/tipo-aposta';
 export * from './shared/models/usuario';

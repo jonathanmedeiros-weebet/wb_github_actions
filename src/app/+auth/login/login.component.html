@@ -1,8 +1,11 @@
 <div id="login">
     <div class="col-lg-12">
-        <div>
+        <div class="login-box">
             <div class="card">
                 <div class="card-body">
+                    <div class="text-center">
+                        <h1>Weebet</h1>
+                    </div>
                     <div id="login-form">
                         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="" id="loginform" novalidate>
                             <div class="field-group">
@@ -16,7 +19,7 @@
                                     <div class="col-xs-12">
                                         <input class="form-control" type="password" placeholder="Senha" formControlName="password">
                                         <span *ngIf="hasError('password', 'required')" class="help-block">Campo obrigatório</span>
-                                        <span *ngIf="hasError('password', 'minlength')" class="help-block">Por favor, digite no minimo 4 caracteres</span>
+                                        <span *ngIf="hasError('password', 'minlength')" class="help-block">Por favor, digite no minimo 2 caracteres</span>
                                     </div>
                                 </div>
                             </div>

@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { TipoApostaService } from '../services';
 
 @NgModule({
-  imports: [SharedModule, HomeRoutingModule],
-  declarations: [HomeComponent],
-  providers: []
+    imports: [SharedModule, HomeRoutingModule],
+    declarations: [HomeComponent],
+    providers: [TipoApostaService]
 })
-export class HomeModule {}
+export class HomeModule { }

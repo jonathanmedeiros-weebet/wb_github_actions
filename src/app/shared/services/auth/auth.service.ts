@@ -28,7 +28,7 @@ export class AuthService {
                     let usuarioSerializado = JSON.stringify(res.usuario);
 
                     localStorage.setItem('token', res.token);
-                    localStorage.setItem('usuario', usuarioSerializado);
+                    localStorage.setItem('user', usuarioSerializado);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -36,7 +36,7 @@ export class AuthService {
 
     logout(): void {
         localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
+        localStorage.removeItem('user');
     }
 
     isLoggedIn(): boolean {
@@ -71,7 +71,7 @@ export class AuthService {
         return localStorage.getItem('token');
     }
 
-    getUsuario(){
-      return JSON.parse(localStorage.getItem('usuario'));
+    getUser() {
+        return JSON.parse(localStorage.getItem('user'));
     }
 }

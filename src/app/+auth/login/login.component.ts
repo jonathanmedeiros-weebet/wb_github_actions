@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.compose([Validators.required])],
             password: [
                 '',
-                Validators.compose([Validators.required, Validators.minLength(4)])
+                Validators.compose([Validators.required, Validators.minLength(2)])
             ]
         });
     }

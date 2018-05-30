@@ -7,8 +7,6 @@ import { MainLayoutComponent } from './app-layouts/main-layout.component';
 import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
 import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
 import { HeaderComponent } from './header/header.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
@@ -18,16 +16,12 @@ import { FooterComponent } from './footer/footer.component';
     EmptyLayoutComponent,
     AuthLayoutComponent,
     HeaderComponent,
-    NavigationComponent,
-    BreadcrumbComponent,
     FooterComponent
   ],
   exports: [
     MainLayoutComponent,
     AuthLayoutComponent,
     HeaderComponent,
-    NavigationComponent,
-    BreadcrumbComponent,
     FooterComponent
   ]
 })
