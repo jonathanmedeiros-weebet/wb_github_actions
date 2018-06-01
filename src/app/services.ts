@@ -1,4 +1,6 @@
 /* General Services */
+export * from './shared/services/aposta.service';
+export * from './shared/services/sorteio.service';
 export * from './shared/services/tipo-aposta.service';
 
 /* Utils Services */
