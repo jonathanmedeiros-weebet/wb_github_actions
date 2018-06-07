@@ -1,58 +1,24 @@
-.square-group{
+#futebol-section{
     display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
+    flex-direction: row;
+}
+.campeonatos-regios ul{
+    padding-left: 0px;
 }
 
-.square{
-    width: 50px;
-    height: 50px;
-    background-color: whitesmoke;
-    margin: 3px;
-    cursor: pointer;
+.campeonatos-regios ul li{
+    list-style: none;
+    background-color: #3492ff;
 }
 
-.square-group .active{
-    background-color:#3492ff;
+.campeonatos-regios ul li a{
+    display: inline-block;
+    padding: 5px 10px;
 }
 
-.square .content, .circle .content{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.bet-types{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.bet-types .active .circle, .bet-types .active .price {
-    background-color:#3492ff;
-    font-weight: bolder;
-    color: #fff;
-}
-
-.bet-type{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-right: 15px;
-}
-
-.bet-type .price{
-    background-color: whitesmoke;
-    padding: 10px 15px;
-}
-
-.circle{
-    border: 1px solid black;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: whitesmoke;
-    margin-bottom: 15px;
-    cursor: pointer;
+#jogos-section{
+    height: 400px;
+    min-width: 300px;
+    background-color: red;
 }
