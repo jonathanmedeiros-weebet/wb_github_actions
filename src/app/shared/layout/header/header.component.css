@@ -1,3 +1,7 @@
+.bg-dark{
+    background-color: var(--background-primario)!important;
+}
+
 .navbar-expand-md .navbar-nav{
     margin-right: 0!important;
     margin-left: auto!important;
@@ -22,13 +26,15 @@
 }
 
 .navbar ul li a{
-    font-size: 2em;
+    font-size: 1.8em;
     padding: 5px 15px;
+    text-transform: uppercase;
 }
 
 .navbar-2{
     top: 75px;
-    border-top: 1px solid #ccc
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 .navbar-2 ul{
     width: 100%;
@@ -43,7 +49,8 @@
     list-style: none;
 }
 .navbar-2 ul li a{
-    font-size: 1.2em;
+    font-size: 1.1em;
     padding: 5px 15px;
+    color: white;
 }
 
