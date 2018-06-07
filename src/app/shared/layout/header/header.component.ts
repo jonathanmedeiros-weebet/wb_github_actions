@@ -8,17 +8,20 @@ import { config } from './../../config';
 
 @Component({
     selector: 'app-header',
-    templateUrl: 'header.component.html'
+    templateUrl: 'header.component.html',
+    styleUrls: ['header.component.css']
 })
 export class HeaderComponent implements OnInit {
     usuario = new Usuario();
     LOGO;
+    BANCA_NOME;
 
     constructor(private router: Router, private auth: AuthService) { }
 
     ngOnInit() {
         this.usuario = this.auth.getUser();
         this.LOGO = config.LOGO;
+        this.BANCA_NOME = config.BANCA_NOME;
     }
 
     logout() {

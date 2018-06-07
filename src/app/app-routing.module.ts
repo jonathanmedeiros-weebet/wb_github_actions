@@ -18,7 +18,7 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: 'futebol',
                 pathMatch: 'full'
             },
             {
@@ -26,6 +26,13 @@ const appRoutes: Routes = [
                 loadChildren: 'app/+home/home.module#HomeModule',
                 data: {
                     pageTitle: 'Home'
+                }
+            },
+            {
+                path: 'futebol',
+                loadChildren: 'app/+futebol/futebol.module#FutebolModule',
+                data: {
+                    pageTitle: 'Futebol'
                 }
             }
         ]

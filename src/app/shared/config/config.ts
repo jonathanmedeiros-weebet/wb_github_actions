@@ -4,5 +4,6 @@ export const config: any = {
     LOTTERIES_URL: 'http://localhost/weebet/api/loteria',
     PRIMARY_COLOR: '#4CAF50',
     SECONDARY_COLOR: '#B8C633',
-    LOGO: ''
+    LOGO: '',
+    BANCA_NOME: 'Weebet'
 };

@@ -1,25 +1,33 @@
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">Weebet</a>
+        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active"><img class="logo-banca" alt="{{BANCA_NOME}}" src="../../../../assets/logo_banca.png"/> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['/futebol']">Futebol</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Seninha</a>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['/ao-vivo']">Ao Vivo</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Quininha</a>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['/seninha']">Seninha</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
                 </li>
             </ul>
         </div>
+    </nav>
+    <nav style="top: 85px; border: 1px solid #ccc" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <ul>
+            <li><a href="#">Consultar bilhete</a></li>
+            <li><a href="#">Regras</a></li>
+            <li><a href="#">Imprimir Tabela</a></li>
+        </ul>
     </nav>
 </header>
