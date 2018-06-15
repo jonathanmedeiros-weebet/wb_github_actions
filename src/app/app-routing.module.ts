@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './+home/home.component';
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
@@ -18,7 +17,7 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'futebol',
+                redirectTo: 'home',
                 pathMatch: 'full'
             },
             {
@@ -29,10 +28,31 @@ const appRoutes: Routes = [
                 }
             },
             {
+                path: 'apuracao',
+                loadChildren: 'app/+apuracao/apuracao.module#ApuracaoModule',
+                data: {
+                    pageTitle: 'Apuração'
+                }
+            },
+            {
                 path: 'futebol',
                 loadChildren: 'app/+futebol/futebol.module#FutebolModule',
                 data: {
                     pageTitle: 'Futebol'
+                }
+            },
+            {
+                path: 'resultados',
+                loadChildren: 'app/+resultados/resultados.module#ResultadosModule',
+                data: {
+                    pageTitle: 'Resultados'
+                }
+            },
+            {
+                path: 'seninha',
+                loadChildren: 'app/+seninha/seninha.module#SeninhaModule',
+                data: {
+                    pageTitle: 'Seninha'
                 }
             }
         ]

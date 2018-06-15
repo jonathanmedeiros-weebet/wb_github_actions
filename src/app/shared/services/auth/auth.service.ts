@@ -25,7 +25,7 @@ export class AuthService {
             .post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    let usuarioSerializado = JSON.stringify(res.usuario);
+                    let usuarioSerializado = JSON.stringify(res.user);
 
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', usuarioSerializado);
@@ -40,6 +40,7 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
+        console.log(localStorage.getItem('token'));
         return localStorage.getItem('token') ? true : false;
     }
 

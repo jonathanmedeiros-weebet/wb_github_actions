@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" routerLinkActive="active">
+                <!-- <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/futebol']">Futebol</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
@@ -16,21 +16,24 @@
                 </li>
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/basquetebol']">Basquetebol</a>
-                </li>
+                </li> -->
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/seninha']">Seninha</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
                 </li>
+                <li class="nav-item" (click)="logout()">
+                    <a class="nav-link">Sair</a>
+                </li>
             </ul>
         </div>
     </nav>
     <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul>
-            <li><a href="#">Consultar bilhete</a></li>
-            <li><a href="#">Regras</a></li>
-            <li><a href="#">Imprimir Tabela</a></li>
+            <li><a [routerLink]="['/apuracao']">Apuração</a></li>
+            <li><a [routerLink]="['/resultados']">Resultados</a></li>
+            <!-- <li><a href="#">Regras</a></li> -->
         </ul>
     </nav>
 </header>
