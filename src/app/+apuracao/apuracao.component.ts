@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApostaService, MessageService } from './../services';
+import { ApostaService, MessageService, PrintService } from './../services';
 import { Aposta } from './../models';
 
 @Component({
@@ -13,17 +13,19 @@ export class ApuracaoComponent implements OnInit {
 
     constructor(
         private apostaService: ApostaService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private printService: PrintService
     ) { }
 
     ngOnInit() {
         this.apostaService.getApostas().subscribe(
-            apostas => {
-                this.apostas = apostas;
-                console.log(apostas);
-            },
+            apostas => this.apostas = apostas,
             error => this.handleError(error)
         );
+    }
+
+    imprimirBilhete(aposta) {
+        this.printService.bilhete(aposta);
     }
 
     handleError(msg) {

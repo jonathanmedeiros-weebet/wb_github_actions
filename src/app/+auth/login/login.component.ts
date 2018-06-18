@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { AuthService, MessageService } from '../../services';
-import { config } from './../../shared/config/config';
+import { config } from './../../shared/config';
 
 @Component({
     selector: 'app-login',

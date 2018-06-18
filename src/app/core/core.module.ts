@@ -10,7 +10,8 @@ import {
     HeadersService,
     MessageService,
     ErrorService,
-    HelperService
+    HelperService,
+    PrintService
 } from '../services';
 
 import * as moment from 'moment';
@@ -26,7 +27,8 @@ moment.locale('pt-BR');
         HeadersService,
         MessageService,
         ErrorService,
-        HelperService
+        HelperService,
+        PrintService
     ]
 })
 export class CoreModule {

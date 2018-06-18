@@ -2,34 +2,28 @@
     <div class="content-header" style="margin-bottom: 30px">
         <h2>Apuração</h2>
         <div class="filters">
-            <div class="row">
-                <div class="col-xs-12 col-md-2">
-                    <div class="form-group">
+            <form action="">
+                <div class="row">
+                    <div class="col">
                         <label>Periodo Inicial</label>
                         <input type="date" class="form-control" value="">
                     </div>
-                </div>
-                <div class="col-xs-12 col-md-2">
-                    <div class="form-group">
+                    <div class="col">
                         <label>Periodo Final</label>
                         <input type="date" class="form-control" value="">
                     </div>
-                </div>
-                <div class="col-xs-12 col-md-2">
-                    <div class="form-group">
+                    <div class="col">
                         <label>Status</label>
                         <select class="form-control">
                             <option value="">Todos</option>
                             <option value="">Vencedores</option>
                         </select>
                     </div>
-                </div>
-                <div class="col-xs-12 col-md-2">
-                    <div class="form-group">
+                    <div class="col">
                         <button class="btn btn-primary" type="button">Filtrar</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="content-body">
@@ -45,6 +39,11 @@
                         </div>
                         <div>
                             Horário: {{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}
+                        </div>
+                        <div>
+                            <button type="button" (click)="imprimirBilhete(aposta)" class="btn btn-primary">
+                                <i class="fa fa-print"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="aposta-itens">
