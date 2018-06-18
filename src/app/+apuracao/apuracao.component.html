@@ -1,5 +1,73 @@
-<div class="row">
-    <div class="col-xs-12">
-        apuracao
+<div id="apuracao">
+    <div class="content-header" style="margin-bottom: 30px">
+        <h2>Apuração</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <label>Periodo Inicial</label>
+                        <input type="date" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <label>Periodo Final</label>
+                        <input type="date" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control">
+                            <option value="">Todos</option>
+                            <option value="">Vencedores</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="button">Filtrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div>
+                <div *ngFor="let aposta of apostas" class="aposta">
+                    <div class="aposta-header">
+                        <div>
+                            Número: #{{aposta.id}}
+                        </div>
+                        <div>
+                            Apostador: {{aposta.apostador}}
+                        </div>
+                        <div>
+                            Horário: {{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}
+                        </div>
+                    </div>
+                    <div class="aposta-itens">
+                        <div class="aposta-item" *ngFor="let item of aposta.itens">
+                            <div>
+                                {{item.sorteio_nome}}
+                            </div>
+                            <div>
+                                {{item.numeros}}
+                            </div>
+                            <div>
+                                {{item.cotacao | currency: 'BRL':true:'2.2'}}
+                            </div>
+                            <div>
+                                {{(item.valor * item.cotacao) | currency: 'BRL':true:'2.2'}}
+                            </div>
+                            <div>
+                                {{item.status | uppercase}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

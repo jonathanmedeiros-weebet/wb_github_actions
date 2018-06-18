@@ -1,0 +1,18 @@
+.aposta{
+    border: 1px solid;
+    border-color: rgb(197, 119, 119);
+    margin-bottom: 15px;
+}
+
+.aposta-header{
+    margin-bottom: 15px;
+}
+
+.aposta-item{
+    display: flex;
+    flex-wrap: wrap
+}
+
+.aposta-item div{
+   margin-right: 15px;
+}

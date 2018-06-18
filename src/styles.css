@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 html{
     position: relative;
-    font-size: 10px;
+    /* font-size: 10px; */
     --background-primario: green;
     --background-menu: #575657;
     --text-menu: white;
@@ -38,7 +38,7 @@ html, body{
 }
 
 #main-wrapper {
-    padding: 103px 0 0 0;
+    padding: 120px 0 0 0;
 }
 
 #content{

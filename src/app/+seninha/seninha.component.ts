@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { TipoApostaService, MessageService, SorteioService, ApostaService } from '../services';
@@ -26,12 +25,13 @@ export class SeninhaComponent implements OnInit {
         private apostaService: ApostaService,
         private tipoApostaService: TipoApostaService,
         private sorteioService: SorteioService,
-        private messageService: MessageService,
-        private http: HttpClient
+        private messageService: MessageService
     ) { }
 
     ngOnInit() {
-        this.tipoApostaService.getTiposAposta().subscribe(
+        let queryParams = { tipo: "seninha" };
+
+        this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => this.tiposAposta = tiposAposta,
             error => this.messageService.error(error)
         );
@@ -46,7 +46,6 @@ export class SeninhaComponent implements OnInit {
         if (index < 0) {
             this.item.numeros.push(number);
             this.item.numeros.sort((a, b) => a - b);
-            console.log(this.item.numeros);
         } else {
             this.item.numeros.splice(index, 1);
         }
@@ -271,18 +270,18 @@ export class SeninhaComponent implements OnInit {
     }
 
     save() {
-        this.print();
-        // if (this.aposta.itens.length) {
-        //     this.apostaService.create(this.aposta).subscribe(
-        //         result => this.success(result.message),
-        //         error => this.handleError(error)
-        //     );
-        // } else {
-        //     this.messageService.warning('Por favor, inclua um palpite.');
-        // }
+        if (this.aposta.itens.length) {
+            this.apostaService.create(this.aposta).subscribe(
+                result => this.success(result.message),
+                error => this.handleError(error)
+            );
+        } else {
+            this.messageService.warning('Por favor, inclua um palpite.');
+        }
     }
 
     success(msg) {
+        // this.print();
         this.aposta = new Aposta();
         this.messageService.success(msg);
     }

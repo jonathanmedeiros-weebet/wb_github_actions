@@ -1,25 +1,21 @@
 <div id="resultados">
-    <div class="content-header">
+    <div class="content-header" style="margin-bottom: 30px">
         <h2>Resultados</h2>
     </div>
     <div class="content-body">
         <div class="content">
-            <h4></h4>
-            <p></p>
-            <div class="square-group">
-                <div class="square" *ngFor="let number of numbers">
-                    <div class="content">
-                        {{number | number:'2.0'}}
+            <div class="result" *ngFor="let sorteio of sorteios">
+                <h4>{{sorteio.tipo}} - {{sorteio.nome}}</h4>
+                <p *ngIf="!sorteio.resultado">
+                    Sem Resultado
+                </p>
+                <div class="circle-group">
+                    <div class="circle" *ngFor="let numero of sorteio.resultado">
+                        <div class="content">
+                            {{numero | number:'2.0'}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div></div>
-                <div></div>
-            </div>
-            <div>
-                <div></div>
-                <div></div>
             </div>
         </div>
     </div>
