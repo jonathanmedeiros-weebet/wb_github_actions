@@ -28,7 +28,7 @@
     </nav>
     <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul>
-            <li style="flex-grow: 1;"><a style="padding-left: 4px;"><i class="fa fa-clock-o"></i> 21:23:30</a></li>
+            <li style="flex-grow: 1;"><a style="padding-left: 4px;"><i class="fa fa-clock-o"></i> {{now | moment:'HH:mm:ss'}}</a></li>
 
             <li><a [routerLink]="['/apuracao']"><i class="fa fa-check"></i> Apuração</a></li>
             <li><a [routerLink]="['/resultados']"><i class="fa fa-list"></i> Resultados</a></li>

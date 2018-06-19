@@ -12,12 +12,12 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-seninha',
-    templateUrl: 'seninha.component.html',
-    styleUrls: ['seninha.component.css']
+    selector: 'app-quininha',
+    templateUrl: 'quininha.component.html',
+    styleUrls: ['quininha.component.css']
 })
-export class SeninhaComponent implements OnInit {
-    private numbers = _.range(1, 61);
+export class QuininhaComponent implements OnInit {
+    private numbers = _.range(1, 81);
     private tiposAposta: TipoAposta[] = [];
     private sorteios: Sorteio[] = [];
     private tipoAposta: TipoAposta;
@@ -34,7 +34,7 @@ export class SeninhaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let queryParams = { tipo: "seninha" };
+        let queryParams = { tipo: "quininha" };
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => this.tiposAposta = tiposAposta,

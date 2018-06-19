@@ -9,20 +9,27 @@ import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { UtilsModule } from './../utils/utils.module';
+
 @NgModule({
-  imports: [CommonModule, FormsModule, RouterModule],
-  declarations: [
-    MainLayoutComponent,
-    EmptyLayoutComponent,
-    AuthLayoutComponent,
-    HeaderComponent,
-    FooterComponent
-  ],
-  exports: [
-    MainLayoutComponent,
-    AuthLayoutComponent,
-    HeaderComponent,
-    FooterComponent
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule,
+        UtilsModule
+    ],
+    declarations: [
+        MainLayoutComponent,
+        EmptyLayoutComponent,
+        AuthLayoutComponent,
+        HeaderComponent,
+        FooterComponent
+    ],
+    exports: [
+        MainLayoutComponent,
+        AuthLayoutComponent,
+        HeaderComponent,
+        FooterComponent
+    ]
 })
-export class LayoutModule {}
+export class LayoutModule { }

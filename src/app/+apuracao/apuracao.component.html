@@ -2,25 +2,27 @@
     <div class="content-header" style="margin-bottom: 30px">
         <h2>Apuração</h2>
         <div class="filters">
-            <form action="">
+            <form (ngSubmit)="search()" [formGroup]="searchForm">
                 <div class="row">
                     <div class="col">
                         <label>Periodo Inicial</label>
-                        <input type="date" class="form-control" value="">
+                        <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssErrorInput(searchForm, 'dataInicial')">
+                        <span *ngIf="hasError(searchForm, 'dataInicial', 'required')" class="invalid-feedback">Campo obrigatório</span>
                     </div>
                     <div class="col">
                         <label>Periodo Final</label>
-                        <input type="date" class="form-control" value="">
+                        <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssErrorInput(searchForm, 'dataFinal')">
+                        <span *ngIf="hasError(searchForm, 'dataFinal', 'required')" class="invalid-feedback">Campo obrigatório</span>
                     </div>
                     <div class="col">
                         <label>Status</label>
-                        <select class="form-control">
+                        <select class="form-control" formControlName="status">
                             <option value="">Todos</option>
-                            <option value="">Vencedores</option>
+                            <option value="vencedores">Vencedores</option>
                         </select>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary btn-line" type="button">Filtrar</button>
+                        <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
                     </div>
                 </div>
             </form>
@@ -32,16 +34,20 @@
                 <div *ngFor="let aposta of apostas" class="aposta card">
                     <div class="aposta-header">
                         <div>
-                            Número: <em>#{{aposta.id}}</em>
+                            Número:
+                            <em>#{{aposta.id}}</em>
                         </div>
                         <div>
-                            Apostador: <em>{{aposta.apostador}}</em>
+                            Apostador:
+                            <em>{{aposta.apostador}}</em>
                         </div>
                         <div>
-                            Telefone: <em>{{aposta.apostador}}</em>
+                            Telefone:
+                            <em>{{aposta.apostador}}</em>
                         </div>
                         <div>
-                            Horário: <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
+                            Horário:
+                            <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
                         </div>
                         <div>
                             <button type="button" (click)="imprimirBilhete(aposta)" class="btn btn-primary">
@@ -64,11 +70,11 @@
                             </div>
                             <div>
                                 <label>aposta</label>
-                                <span>{{item.valor | currency: 'BRL':true:'2.2'}}</span>
+                                <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
                             <div>
                                 <label>prêmio</label>
-                                <span>{{(item.valor * item.cotacao) | currency: 'BRL':true:'2.2'}}</span>
+                                <span>{{(item.valor * item.cotacao) | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
                             <div>
                                 <label>status</label>

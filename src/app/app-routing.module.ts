@@ -54,6 +54,13 @@ const appRoutes: Routes = [
                 data: {
                     pageTitle: 'Seninha'
                 }
+            },
+            {
+                path: 'quininha',
+                loadChildren: 'app/+quininha/quininha.module#QuininhaModule',
+                data: {
+                    pageTitle: 'Quininha'
+                }
             }
         ]
     },

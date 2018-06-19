@@ -2,18 +2,18 @@
     <div class="content-header">
         <h2>Resultados</h2>
         <div class="filters">
-            <form action="">
+            <form (ngSubmit)="search()" [formGroup]="searchForm">
                 <div class="row">
                     <div class="col">
                         <label>Tipo</label>
-                        <select class="form-control">
+                        <select class="form-control" formControlName="tipo">
                             <option value="">Todos</option>
-                            <option value="">Seninha</option>
-                            <option value="">Quininha</option>
+                            <option value="seninha">Seninha</option>
+                            <option value="quininha">Quininha</option>
                         </select>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary btn-line" type="button">Filtrar</button>
+                        <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
                     </div>
                 </div>
             </form>
@@ -25,6 +25,7 @@
                 <div class="col col-xs-12 col-lg-6">
                     <div class="result card" *ngFor="let sorteio of sorteios">
                         <h4>{{sorteio.tipo}} - {{sorteio.nome}}</h4>
+                        <h6>{{sorteio.data | moment: 'HH:mm'}}</h6>
                         <p *ngIf="!sorteio.resultado">
                             Sem Resultado
                         </p>
