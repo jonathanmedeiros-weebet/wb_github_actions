@@ -1,18 +1,61 @@
 .aposta{
-    border: 1px solid;
-    border-color: rgb(197, 119, 119);
     margin-bottom: 15px;
 }
 
 .aposta-header{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.aposta-header .btn{
+    margin-top: -5px;
+}
+
+.aposta-header em{
+    font-style: normal;
+    font-weight: bold;
+}
+
+.aposta-itens{
+    display: flex;
+    flex-direction: row;
 }
 
 .aposta-item{
     display: flex;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    border: 1px solid #d7dfe3;
+    padding: 7px;
+    border-radius: 4px;
+    background: #eef5f9;
 }
 
-.aposta-item div{
-   margin-right: 15px;
+.aposta-item > div + div{
+   margin-left: 10px;
 }
+
+.aposta-item div > label{
+    display: block;
+    text-align: center;
+    color: #99abb4;
+    margin-bottom: -2px;
+}
+
+.aposta-item div > span{
+    display: block;
+    text-align: center;
+}
+
+.aposta-item .circle-group{
+    padding-top: 6px;
+}
+
+.circle{
+    height: 25px;
+    width: 25px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+

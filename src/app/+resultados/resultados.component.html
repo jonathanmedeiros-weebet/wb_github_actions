@@ -1,11 +1,11 @@
 <div id="resultados">
-    <div class="content-header" style="margin-bottom: 30px">
+    <div class="content-header">
         <h2>Resultados</h2>
         <div class="filters">
             <form action="">
                 <div class="row">
                     <div class="col">
-                        <label>Status</label>
+                        <label>Tipo</label>
                         <select class="form-control">
                             <option value="">Todos</option>
                             <option value="">Seninha</option>
@@ -13,7 +13,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary" type="button">Filtrar</button>
+                        <button class="btn btn-primary btn-line" type="button">Filtrar</button>
                     </div>
                 </div>
             </form>
@@ -21,15 +21,19 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div class="result" *ngFor="let sorteio of sorteios">
-                <h4>{{sorteio.tipo}} - {{sorteio.nome}}</h4>
-                <p *ngIf="!sorteio.resultado">
-                    Sem Resultado
-                </p>
-                <div class="circle-group">
-                    <div class="circle" *ngFor="let numero of sorteio.resultado">
-                        <div class="content">
-                            {{numero | number:'2.0'}}
+            <div class="row">
+                <div class="col col-xs-12 col-lg-6">
+                    <div class="result card" *ngFor="let sorteio of sorteios">
+                        <h4>{{sorteio.tipo}} - {{sorteio.nome}}</h4>
+                        <p *ngIf="!sorteio.resultado">
+                            Sem Resultado
+                        </p>
+                        <div class="circle-group">
+                            <div class="circle" *ngFor="let numero of sorteio.resultado">
+                                <div class="content">
+                                    {{numero | number:'2.0'}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
