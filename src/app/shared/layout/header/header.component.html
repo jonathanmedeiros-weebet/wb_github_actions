@@ -1,6 +1,6 @@
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar-1 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active"><img class="logo-banca" alt="{{BANCA_NOME}}" src="../../../../assets/logo_banca.png"/> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -23,17 +23,19 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
                 </li>
-                <li class="nav-item" (click)="logout()">
-                    <a class="nav-link">Sair</a>
-                </li>
             </ul>
         </div>
     </nav>
     <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul>
-            <li><a [routerLink]="['/apuracao']">Apuração</a></li>
-            <li><a [routerLink]="['/resultados']">Resultados</a></li>
+            <li style="flex-grow: 1"><a><i class="fa fa-clock-o"></i> 21:23:30</a></li>
+
+            <li><a [routerLink]="['/apuracao']"><i class="fa fa-check"></i> Apuração</a></li>
+            <li><a [routerLink]="['/resultados']"><i class="fa fa-list"></i> Resultados</a></li>
             <!-- <li><a href="#">Regras</a></li> -->
+            <li (click)="logout()">
+                <a><i class="fa fa-sign-out"></i> Sair</a>
+            </li>
         </ul>
     </nav>
 </header>

@@ -57,3 +57,11 @@
     margin-bottom: 15px;
     cursor: pointer;
 }
+
+.content-header{
+    margin-bottom: 15px;
+}
+
+.content-header h2{
+    color: var(--background-primario);
+}

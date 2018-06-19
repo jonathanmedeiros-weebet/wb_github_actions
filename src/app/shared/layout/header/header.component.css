@@ -28,7 +28,16 @@
 .navbar ul li a{
     font-size: 1.8em;
     padding: 5px 15px;
-    text-transform: uppercase;
+    color: white;
+}
+
+.navbar-1 ul li a{
+    padding: 17px 2px;
+    margin: 0 25px;
+}
+
+.navbar-1 ul li.active a{
+    border-bottom: 3px solid white;
 }
 
 .navbar-2{
