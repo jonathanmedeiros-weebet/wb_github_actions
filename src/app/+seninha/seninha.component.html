@@ -79,6 +79,19 @@
                         <pre>
                             {{aposta | json}}
                         </pre>
+                        <div class="form-row">
+                            <div class="form-group col-xs-12">
+                                <label for="">Apostador</label>
+                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" #apostador="ngModel">
+                                <!-- <span [hidden]="apostador.valid || apostador.pristine" class="help-block">Campo obrigatório</span> -->
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-xs-12">
+                                <label for="">Telefone</label>
+                                <input type="text" [(ngModel)]="aposta.telefone" name="telefone" class="form-control" required>
+                            </div>
+                        </div>
                         <div>
                             <button type="button" (click)="save()" class="btn btn-primary">Finalizar</button>
                         </div>
