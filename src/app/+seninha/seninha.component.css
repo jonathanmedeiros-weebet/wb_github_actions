@@ -69,6 +69,10 @@
     margin-top: 12px;
 }
 
+.pre-bilhete button{
+    width: 100%;
+}
+
 .form-row select,
 .form-row input{
     font-size: 1.5rem;
