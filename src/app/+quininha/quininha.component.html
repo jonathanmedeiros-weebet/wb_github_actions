@@ -12,25 +12,7 @@
                         </p>
                         <div class="square-group">
                             <div class="square" *ngFor="let number of numbers" (click)="checkNumber(number)" [ngClass]="{'active': isChecked(number)}">
-                                <div class="content">
-                                    {{number | number:'2.0'}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="alert alert-primary" role="alert">
-                            Para gerar seu palpite aleatório basta clicar na quantidade de Dezenas abaixo.
-                        </div>
-                        <p>
-                            Qtd. de Dezenas e suas contações:
-                        </p>
-                        <div class="bet-types">
-                            <div class="bet-type" *ngFor="let tipoAposta of tiposAposta" [ngClass]="{'active': checkBetType(tipoAposta)}">
-                                <div class="circle" (click)="generateGuess(tipoAposta.qtdNumeros)">
-                                    <div class="content">
-                                        {{tipoAposta.qtdNumeros}}
-                                    </div>
-                                </div>
-                                <span class="price">{{tipoAposta.cotacao}}</span>
+                                {{number | number:'2.0'}}
                             </div>
                         </div>
                         <hr>
@@ -38,7 +20,7 @@
                             <div class="col-xs-12">
                                 <form class="form" (ngSubmit)="includeGuess()">
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
                                             <select class="form-control" [(ngModel)]="item.sorteio_id" name="sorteioId" required>
                                                 <option [value]="null">Selecione</option>
@@ -47,43 +29,79 @@
                                                 </option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
                                             <input type="number" [(ngModel)]="item.valor" name="valor" class="form-control" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Incluir Palpite</button>
+                                        <div class="form-group col-xs-12 col-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-line">Incluir Palpite</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
+                        <hr>
+                        <div class="alert alert-primary" role="alert">
+                            Para gerar seu palpite aleatório basta clicar na quantidade de Dezenas abaixo.
+                        </div>
+                        <p>
+                            Quantidade de dezenas e suas contações:
+                        </p>
+                        <div class="bet-types">
+                            <div class="bet-type" *ngFor="let tipoAposta of tiposAposta" [ngClass]="{'active': checkBetType(tipoAposta)}">
+                                <div class="circle" (click)="generateGuess(tipoAposta.qtdNumeros)">
+                                    <div class="content">
+                                        {{tipoAposta.qtdNumeros}}
+                                    </div>
+                                </div>
+                                <span class="price">{{tipoAposta.cotacao | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="pre-bilhete col-xs-12 col-md-4">
                     <div class="card">
                         Pré-Bilhete
-                        <pre>
+                        <!--<pre>
                             {{aposta | json}}
-                        </pre>
+                        </pre>-->
+                        <div class="aposta-item" *ngFor="let item of aposta.itens">
+                            <div class="item-header">
+                                <div>
+                                    <label>sorteio</label>
+                                    <span>{{item.sorteio_nome}}</span>
+                                </div>
+                                <div>
+                                    <label>valor:</label>
+                                    <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                                </div>
+                                <div>
+                                    <label>prêmio:</label>
+                                    <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                </div>
+                            </div>
+                            <div class="circle-group">
+                                <div class="circle" *ngFor="let numero of item.numeros">
+                                    <div class="content">
+                                        {{numero | number:'2.0'}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <form>
                             <div class="form-row">
-                                <div class="form-group col-xs-12">
+                                <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Apostador</label>
                                     <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" #apostador="ngModel">
                                     <!-- <span [hidden]="apostador.valid || apostador.pristine" class="help-block">Campo obrigatório</span> -->
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-xs-12">
+                                <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Telefone</label>
                                     <input type="text" [(ngModel)]="aposta.telefone" name="telefone" class="form-control" required>
                                 </div>
                             </div>
                             <div>
-                                <button type="button" (click)="create()" class="btn btn-primary">Finalizar</button>
+                                <button type="button" (click)="create()" class="btn btn-primary">Concluir Aposta</button>
                             </div>
                         </form>
                     </div>

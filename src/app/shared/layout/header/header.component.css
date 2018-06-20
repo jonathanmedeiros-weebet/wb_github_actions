@@ -14,7 +14,6 @@
 
 .navbar{
     display: flex;
-    justify-content: center;
 }
 
 .navbar .navbar-collapse{
@@ -31,8 +30,12 @@
     color: white;
 }
 
+.navbar-1{
+    z-index: 9001;
+}
+
 .navbar-1 ul li a{
-    padding: 17px 2px;
+    padding: 15px 2px;
     margin: 0 25px;
 }
 
@@ -41,7 +44,7 @@
 }
 
 .navbar-2{
-    top: 75px;
+    top: 80px;
     border-top: 1px solid rgba(255,255,255,0.2);
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
@@ -61,5 +64,30 @@
     font-size: 1.1em;
     padding: 5px 15px;
     color: white;
+    cursor: pointer;
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .navbar-1{
+        justify-content: space-between;
+        height: auto;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .navbar-1{
+        justify-content: center;
+        height: 80px;
+    }
+    .navbar-1 ul li a {
+        padding: 22px 2px;
+    }
+}
+
 

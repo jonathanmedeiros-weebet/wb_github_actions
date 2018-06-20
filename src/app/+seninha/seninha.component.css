@@ -111,3 +111,41 @@
     font-weight: bold;
 }
 
+#fixed-bar-bilhete{
+    padding: 5px;
+    background: var(--background-primario);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+#fixed-bar-bilhete > div{
+    flex-grow: 1;
+}
+
+#fixed-bar-bilhete > div > *{
+    display: block;
+    text-align: center;
+}
+#fixed-bar-bilhete > div label{
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+#fixed-bar-bilhete > div span{
+    font-weight: bold;
+}
+#fixed-bar-bilhete > div .open-bilhete .fa{
+    padding: 15px 5px;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #fixed-bar-bilhete{
+        display: none
+    }
+}
+
