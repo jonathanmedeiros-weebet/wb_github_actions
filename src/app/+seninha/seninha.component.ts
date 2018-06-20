@@ -23,6 +23,7 @@ export class SeninhaComponent implements OnInit {
     private tipoAposta: TipoAposta;
     private aposta = new Aposta();
     private item = new Item();
+    private exibirPreBilhete = false;
     BANCA_NOME = config.BANCA_NOME;
 
     constructor(
@@ -128,5 +129,13 @@ export class SeninhaComponent implements OnInit {
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    openCupom(){
+        this.exibirPreBilhete = true;
+    }
+
+    closeCupom(){
+        this.exibirPreBilhete = false;
     }
 }

@@ -59,12 +59,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="pre-bilhete col-xs-12 col-md-4">
+                <div class="pre-bilhete col-xs-12 col-md-4" [ngClass]="{'pre-bilhete-mobile': exibirPreBilhete}">
                     <div class="card">
-                        Pré-Bilhete
+                        <span>Pré-Bilhete</span>
                         <!--<pre>
                             {{aposta | json}}
                         </pre>-->
+                        <a (click)="closeCupom()" class="fechar-pre-bilhete"><i class="fa fa-lg fa-close"></i></a>
                         <div class="aposta-item" *ngFor="let item of aposta.itens">
                             <div class="item-header">
                                 <div>
@@ -110,7 +111,7 @@
         </div>
     </div>
 
-    <div id="fixed-bar-bilhete">
+    <div id="fixed-bar-bilhete" [ngStyle]="{'display': exibirPreBilhete? 'none' : ''}">
         <div>
             <label>Valor</label>
             <span>R$ 10,00</span>
@@ -124,7 +125,7 @@
             <span>R$ 20.000,00</span>
         </div>
         <div class="open-bilhete">
-            <i class="fa fa-lg fa-chevron-circle-up"></i>
+            <a (click)="openCupom()"><i class="fa fa-lg fa-chevron-circle-up"></i></a>
         </div>
     </div>
 </div>
