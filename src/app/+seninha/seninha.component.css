@@ -1,12 +1,15 @@
 .square-group{
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
+    justify-content: flex-start;
 }
 
 .square{
     width: 50px;
     height: 50px;
+    padding: 17px 0;
+    text-align: center;
     background-color: whitesmoke;
     margin: 3px;
     cursor: pointer;
@@ -40,13 +43,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    margin: 7px 7px 7px 0;
 }
 
 .bet-type .price{
     background-color: whitesmoke;
     padding: 10px 15px;
+}
+
+.bet-type .circle{
+    margin: 0 0 3px 0;
 }
 
 .circle{
@@ -58,3 +64,46 @@
     margin-bottom: 15px;
     cursor: pointer;
 }
+
+.pre-bilhete .form-row{
+    margin-top: 12px;
+}
+
+.form-row select,
+.form-row input{
+    font-size: 1.5rem;
+    height: 38px;
+}
+
+.form-row button{
+    line-height: 27px;
+}
+
+.pre-bilhete .aposta-item{
+    border: 1px solid #d7dfe3;
+    background: #eef5f9;
+    border-radius: 4px;
+    padding: 10px 5px 10px 10px;
+    margin-top: 15px;
+}
+
+.pre-bilhete .aposta-item .circle{
+    height: 25px;
+    width: 25px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.pre-bilhete .item-header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.pre-bilhete .item-header > div{
+    flex-grow: 1;
+    text-transform: capitalize;
+}
+.pre-bilhete .item-header > div span{
+    font-weight: bold;
+}
+

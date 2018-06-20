@@ -61,13 +61,6 @@
                                 <label>sorteio</label>
                                 <span>{{item.sorteio_nome}}</span>
                             </div>
-                            <div class="circle-group">
-                                <div class="circle" *ngFor="let numero of item.numeros">
-                                    <div class="content">
-                                        {{numero | number:'2.0'}}
-                                    </div>
-                                </div>
-                            </div>
                             <div>
                                 <label>aposta</label>
                                 <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
@@ -79,6 +72,13 @@
                             <div>
                                 <label>status</label>
                                 <span>{{item.status | uppercase}}</span>
+                            </div>
+                            <div class="circle-group">
+                                <div class="circle" *ngFor="let numero of item.numeros">
+                                    <div class="content">
+                                        {{numero | number:'2.0'}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -21,19 +21,22 @@
 .aposta-itens{
     display: flex;
     flex-direction: row;
+    margin: -7px;
+    flex-wrap: wrap;
 }
 
 .aposta-item{
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #d7dfe3;
-    padding: 7px;
+    padding: 7px 0 7px 7px;
     border-radius: 4px;
     background: #eef5f9;
+    margin: 7px;
 }
 
-.aposta-item > div + div{
-   margin-left: 10px;
+.aposta-item > div{
+   margin-right: 10px;
 }
 
 .aposta-item div > label{
@@ -55,7 +58,6 @@
 .circle{
     height: 25px;
     width: 25px;
-    margin-right: 3px;
-    margin-left: 3px;
+    margin: 3px;
 }
 
