@@ -17,12 +17,12 @@ import * as moment from 'moment';
     styleUrls: ['quininha.component.css']
 })
 export class QuininhaComponent implements OnInit {
-    private numbers = _.range(1, 81);
-    private tiposAposta: TipoAposta[] = [];
-    private sorteios: Sorteio[] = [];
-    private tipoAposta: TipoAposta;
-    private aposta = new Aposta();
-    private item = new Item();
+    numbers = _.range(1, 81);
+    tiposAposta: TipoAposta[] = [];
+    sorteios: Sorteio[] = [];
+    tipoAposta: TipoAposta;
+    aposta = new Aposta();
+    item = new Item();
     BANCA_NOME = config.BANCA_NOME;
 
     constructor(

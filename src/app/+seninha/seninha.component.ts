@@ -17,13 +17,13 @@ import * as moment from 'moment';
     styleUrls: ['seninha.component.css']
 })
 export class SeninhaComponent implements OnInit {
-    private numbers = _.range(1, 61);
-    private tiposAposta: TipoAposta[] = [];
-    private sorteios: Sorteio[] = [];
-    private tipoAposta: TipoAposta;
-    private aposta = new Aposta();
-    private item = new Item();
-    private exibirPreBilhete = false;
+    numbers = _.range(1, 61);
+    tiposAposta: TipoAposta[] = [];
+    sorteios: Sorteio[] = [];
+    tipoAposta: TipoAposta;
+    aposta = new Aposta();
+    item = new Item();
+    exibirPreBilhete = false;
     BANCA_NOME = config.BANCA_NOME;
 
     constructor(
@@ -122,9 +122,15 @@ export class SeninhaComponent implements OnInit {
     }
 
     success(data) {
-        this.printService.bilhete(data.results);
-        this.aposta = new Aposta();
-        this.messageService.success("Aposta realizada!");
+
+        //if(true){//no app
+            parent.postMessage({data: data.results, tipo:'aposta-loteria'}, 'file://');
+        //}
+        /*else {
+            this.printService.bilhete(data.results);
+            this.aposta = new Aposta();
+            this.messageService.success("Aposta realizada!");
+        }*/
     }
 
     handleError(msg) {
