@@ -133,16 +133,16 @@ export class SeninhaComponent implements OnInit {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor: ${aposta.valor}
+Valor Total: ${aposta.valor}
 `;
 
         for(let i in aposta.itens){
             let item = aposta.itens[i];
             bilhete += `----------------------------
 ${item.sorteio_nome}
-${item.numeros.join(' - ')}
-${item.valor}
-${item.valor * item.cotacao}
+Dezenas: ${item.numeros.join(' - ')}
+Valor: {{item.valor}}
+Premio: ${item.valor * item.cotacao}
 `;
         }
 
