@@ -37,6 +37,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('app-mobile');
     }
 
     isLoggedIn(): boolean {
@@ -73,5 +74,18 @@ export class AuthService {
 
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    isAppMobile() {
+        let result = false;
+        let appMobile = JSON.parse(localStorage.getItem('app-mobile'));
+        if (appMobile) {
+            result = appMobile
+        }
+        return result;
+    }
+
+    setAppMobile() {
+        localStorage.setItem('app-mobile', 'true');
     }
 }

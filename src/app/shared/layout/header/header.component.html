@@ -1,7 +1,8 @@
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar-1 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active"><img class="logo-banca" alt="{{BANCA_NOME}}" src="../../../../assets/logo_banca.png"/> </a>
+        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
+            <img class="logo-banca" alt="{{BANCA_NOME}}" src="../../../../assets/logo_banca.png" /> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,13 +29,31 @@
     </nav>
     <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul>
-            <li style="flex-grow: 1;"><a style="padding-left: 4px;"><i class="fa fa-clock-o"></i> {{now | moment:'HH:mm:ss'}}</a></li>
-
-            <li><a [routerLink]="['/apuracao']"><i class="fa fa-check"></i> Apuração</a></li>
-            <li><a [routerLink]="['/resultados']"><i class="fa fa-list"></i> Resultados</a></li>
+            <li style="flex-grow: 1;">
+                <a style="padding-left: 4px;">
+                    <i class="fa fa-clock-o"></i> {{now | moment:'HH:mm:ss'}}
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" (click)="configuration()">
+                    <i class="fa fa-cogs"></i> Configurações
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/apuracao']">
+                    <i class="fa fa-check"></i> Apuração
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/resultados']">
+                    <i class="fa fa-list"></i> Resultados
+                </a>
+            </li>
             <!-- <li><a href="#">Regras</a></li> -->
             <li (click)="logout()">
-                <a style="padding-right: 4px;"><i class="fa fa-sign-out"></i> Sair</a>
+                <a style="padding-right: 4px;">
+                    <i class="fa fa-sign-out"></i> Sair
+                </a>
             </li>
         </ul>
     </nav>
