@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import {
     TipoApostaService, MessageService,
@@ -22,7 +23,7 @@ export class SeninhaComponent implements OnInit {
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
     aposta = new Aposta();
-    item = new Item();
+    itemForm: FormGroup;
     exibirPreBilhete = false;
     BANCA_NOME = config.BANCA_NOME;
 
@@ -31,7 +32,8 @@ export class SeninhaComponent implements OnInit {
         private tipoApostaService: TipoApostaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private printService: PrintService
+        private printService: PrintService,
+        private fb: FormBuilder
     ) { }
 
     ngOnInit() {
@@ -68,22 +70,25 @@ export class SeninhaComponent implements OnInit {
     }
 
     checkNumber(number) {
-        let index = this.item.numeros.findIndex(n => number == n);
+        let numeros = this.numeros.value;
+        let index = numeros.findIndex(n => number == n);
+
         if (index < 0) {
-            this.item.numeros.push(number);
-            this.item.numeros.sort((a, b) => a - b);
+            numeros.push(number);
+            numeros.sort((a, b) => a - b);
+            this.setNumeros(numeros);
         } else {
-            this.item.numeros.splice(index, 1);
+            this.numeros.removeAt(index);
         }
     }
 
     isChecked(number) {
-        return this.item.numeros.find(n => number == n);
+        return this.numeros.value.find(n => number == n);
     }
 
     checkBetType(tipoAposta: TipoAposta) {
         let result = false;
-        if (tipoAposta.qtdNumeros == this.item.numeros.length) {
+        if (tipoAposta.qtdNumeros == this.numeros.length) {
             result = true;
             this.tipoAposta = tipoAposta;
         }
@@ -91,11 +96,11 @@ export class SeninhaComponent implements OnInit {
     }
 
     generateGuess(length) {
-        this.item.numeros = [];
+        let numbers = [];
         for (let index = 0; index < length; index++) {
             let number = this.generateRandomNumber();
-            this.item.numeros.push(number);
-            this.item.numeros.sort((a, b) => a - b);
+            numbers.push(number);
+            numbers.sort((a, b) => a - b);
         }
 
         this.setNumeros(numbers);
@@ -103,7 +108,7 @@ export class SeninhaComponent implements OnInit {
 
     generateRandomNumber() {
         let number = _.random(1, 61);
-        let find = this.item.numeros.find(n => n == number);
+        let find = this.numeros.value.find(n => n == number);
 
         if (!find) {
             return number;
@@ -112,21 +117,22 @@ export class SeninhaComponent implements OnInit {
         }
     }
 
-    resetGuess() {
-        this.item = new Item();
-    }
-
     includeGuess() {
-        let tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros == this.item.numeros.length);
+        let tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros == this.numeros.length);
 
         if (tipoAPosta) {
-            // let item: Item = clone(this.item);
-            this.item.premio = this.item.valor * this.tipoAposta.cotacao;
+            if (this.itemForm.valid) {
+                // let item: Item = clone(this.item);
+                let item = this.itemForm.value;
+                item.premio = item.valor * this.tipoAposta.cotacao;
 
-            this.aposta.valor += this.item.valor;
-            this.aposta.premio += this.item.premio;
-            this.aposta.itens.push(this.item);
-            this.resetGuess();
+                this.aposta.valor += item.valor;
+                this.aposta.premio += item.premio;
+                this.aposta.itens.push(item);
+                this.itemForm.reset();
+            } else {
+                alert('invalido');
+            }
         } else {
             this.messageService.warning('Quantidade de dezenas insuficiente.');
         }
