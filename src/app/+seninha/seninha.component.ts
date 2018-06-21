@@ -1,4 +1,4 @@
-import {Component, LOCALE_ID, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
     TipoApostaService, MessageService,
@@ -10,7 +10,6 @@ import { config } from './../shared/config';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {CurrencyPipe} from "@angular/common";
 
 @Component({
     selector: 'app-seninha',
@@ -46,6 +45,26 @@ export class SeninhaComponent implements OnInit {
             sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );
+
+        this.createForms();
+    }
+
+    createForms() {
+        this.itemForm = this.fb.group({
+            valor: ['', Validators.required],
+            sorteio_id: ['', Validators.required],
+            numeros: this.fb.array([])
+        });
+    }
+
+    get numeros() {
+        return this.itemForm.get('numeros') as FormArray;
+    }
+
+    setNumeros(numeros: Number[]) {
+        const numerosFCs = numeros.map(numeros => this.fb.control(numeros));
+        const numerosFormArray = this.fb.array(numerosFCs);
+        this.itemForm.setControl('numeros', numerosFormArray);
     }
 
     checkNumber(number) {
@@ -78,6 +97,8 @@ export class SeninhaComponent implements OnInit {
             this.item.numeros.push(number);
             this.item.numeros.sort((a, b) => a - b);
         }
+
+        this.setNumeros(numbers);
     }
 
     generateRandomNumber() {
@@ -129,7 +150,7 @@ export class SeninhaComponent implements OnInit {
         let aposta = data.results;
 
         let bilhete = `{br}Weebet
-        
+
 #${aposta.id}
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}

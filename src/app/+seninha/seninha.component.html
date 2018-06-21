@@ -18,11 +18,11 @@
                         <hr>
                         <div>
                             <div class="col-xs-12">
-                                <form class="form" (ngSubmit)="includeGuess()">
+                                <form class="form" [formGroup]="itemForm" (ngSubmit)="includeGuess()">
                                     <div class="form-row">
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
-                                            <select class="form-control" [(ngModel)]="item.sorteio_id" name="sorteioId" required>
+                                            <select class="form-control" formControlName="sorteio_id" required>
                                                 <option [value]="null">Selecione</option>
                                                 <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">
                                                     {{sorteio.nome}}
@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
-                                            <input type="number" [(ngModel)]="item.valor" name="valor" class="form-control" required>
+                                            <input type="number" min="10" formControlName="valor" name="valor" class="form-control" required>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <button type="submit" class="btn btn-primary btn-line">Incluir Palpite</button>
@@ -62,9 +62,9 @@
                 <div class="pre-bilhete col-xs-12 col-md-4" [ngClass]="{'pre-bilhete-mobile': exibirPreBilhete}">
                     <div class="card">
                         <span>Pré-Bilhete</span>
-                        <!--<pre>
+                        <pre>
                             {{aposta | json}}
-                        </pre>-->
+                        </pre>
                         <a (click)="closeCupom()" class="fechar-pre-bilhete"><i class="fa fa-lg fa-close"></i></a>
                         <div class="aposta-item" *ngFor="let item of aposta.itens">
                             <div class="item-header">

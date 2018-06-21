@@ -33,4 +33,14 @@ export class HeaderComponent implements OnInit {
         this.auth.logout();
         this.router.navigate(['/auth/login']);
     }
+
+    configuration(){
+        let message = {
+            data: '',
+            action: 'listPrinters',
+        };
+
+        parent.postMessage(message, 'file://'); //file://
+        console.log('configuracoes');
+    }
 }
