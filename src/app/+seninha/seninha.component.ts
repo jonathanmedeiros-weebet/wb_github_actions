@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, LOCALE_ID, OnInit} from '@angular/core';
 
 import {
     TipoApostaService, MessageService,
@@ -10,6 +10,7 @@ import { config } from './../shared/config';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {CurrencyPipe} from "@angular/common";
 
 @Component({
     selector: 'app-seninha',
@@ -133,7 +134,7 @@ export class SeninhaComponent implements OnInit {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${aposta.valor}
+Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(aposta.valor)}
 `;
 
         for(let i in aposta.itens){
@@ -141,8 +142,8 @@ Valor Total: ${aposta.valor}
             bilhete += `----------------------------
 ${item.sorteio_nome}
 Dezenas: ${item.numeros.join(' - ')}
-Valor: {{item.valor}}
-Premio: ${item.valor * item.cotacao}
+Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
+Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}
 `;
         }
 
