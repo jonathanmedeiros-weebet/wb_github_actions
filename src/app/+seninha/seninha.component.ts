@@ -127,9 +127,10 @@ export class SeninhaComponent implements OnInit {
 
         let aposta = data.results;
 
-        let bilhete = `{br}{br}Weebet
+        let bilhete = `{br}Weebet
         
-#${aposta.id} | ${aposta.horario}
+#${aposta.id}
+Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
 Valor: ${aposta.valor}
@@ -137,15 +138,15 @@ Valor: ${aposta.valor}
 
         for(let i in aposta.itens){
             let item = aposta.itens[i];
-            bilhete += `${item.sorteio_nome}
-${item.numeros.toString()}
+            bilhete += `----------------------------
+${item.sorteio_nome}
+${item.numeros.join(' - ')}
 ${item.valor}
 ${item.valor * item.cotacao}
-----------------------------
 `;
         }
 
-        bilhete += `{br}{br}{br}{br}`;
+        bilhete += `{br}`;
 
             parent.postMessage(bilhete, 'file://'); //file://
         //}
