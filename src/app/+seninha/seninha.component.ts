@@ -124,7 +124,30 @@ export class SeninhaComponent implements OnInit {
     success(data) {
 
         //if(true){//no app
-            parent.postMessage({data: data.results, tipo:'aposta-loteria'}, 'file://');
+
+        let aposta = data.results;
+
+        let bilhete = `{br}{br}Weebet
+        
+#${aposta.id} | ${aposta.horario}
+Cambista: ${aposta.passador.nome}
+Apostador: ${aposta.apostador}
+Valor: ${aposta.valor}
+`;
+
+        for(let i in aposta.itens){
+            let item = aposta.itens[i];
+            bilhete += `${item.sorteio_nome}
+${item.numeros.toString()}
+${item.valor}
+${item.valor * item.cotacao}
+----------------------------
+`;
+        }
+
+        bilhete += `{br}{br}{br}{br}`;
+
+            parent.postMessage(bilhete, 'file://'); //file://
         //}
         /*else {
             this.printService.bilhete(data.results);
