@@ -196,7 +196,7 @@ Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
 
         bilhete += `{br}`;
 
-        parent.postMessage(bilhete, 'file://'); //file://
+            parent.postMessage({data: bilhete, action: 'printLottery'}, 'file://'); //file://
         //}
         /*else {
             this.printService.bilhete(data.results);
