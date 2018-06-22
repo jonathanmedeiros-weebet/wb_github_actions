@@ -171,38 +171,10 @@ export class SeninhaComponent implements OnInit {
 
     success(data) {
 
-        //if(true){//no app
-
-        let aposta = data.results;
-
-        let bilhete = `{br}Weebet
-
-#${aposta.id}
-Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
-Cambista: ${aposta.passador.nome}
-Apostador: ${aposta.apostador}
-Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(aposta.valor)}
-`;
-
-        for (let i in aposta.itens) {
-            let item = aposta.itens[i];
-            bilhete += `----------------------------
-${item.sorteio_nome}
-Dezenas: ${item.numeros.join(' - ')}
-Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
-Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}
-`;
-        }
-
-        bilhete += `{br}`;
-
-            parent.postMessage({data: bilhete, action: 'printLottery'}, 'file://'); //file://
-        //}
-        /*else {
-            this.printService.bilhete(data.results);
-            this.aposta = new Aposta();
-            this.messageService.success("Aposta realizada!");
-        }*/
+        this.printService.bilhete(data.results);
+        this.aposta = new Aposta();
+        this.messageService.success("Aposta realizada!");
+        this.closeCupom();
     }
 
     handleError(msg) {

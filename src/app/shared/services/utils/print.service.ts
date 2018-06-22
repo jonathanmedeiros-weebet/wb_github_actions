@@ -187,5 +187,24 @@ export class PrintService {
     }
 
     bilheteAppMobile(aposta) {
+        let bilhete = `Weebet
+
+#${aposta.id}
+Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
+Cambista: ${aposta.passador.nome}
+Apostador: ${aposta.apostador}
+Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(aposta.valor)}
+`;
+
+        for (let i in aposta.itens) {
+            let item = aposta.itens[i];
+            bilhete += `----------------------------
+${item.sorteio_nome}
+Dezenas: ${item.numeros.join('-')}
+Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
+Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}`;
+        }
+
+        parent.postMessage({data: bilhete, action: 'printLottery'}, 'file://'); //file://
     }
 }
