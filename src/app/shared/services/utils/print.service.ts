@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
 
+import { AuthService } from './../auth/auth.service';
+
 import { config } from './../../config';
 import * as moment from 'moment';
 
 @Injectable()
 export class PrintService {
-    constructor() { }
+    constructor(private auth: AuthService) { }
 
     bilhete(aposta) {
+        if (this.auth.isAppMobile()) {
+            this.bilheteAppMobile(aposta);
+        } else {
+            this.bilheteDestkop(aposta);
+        }
+    }
+
+    bilheteDestkop(aposta) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -174,5 +184,8 @@ export class PrintService {
         popupWin.document.open();
         popupWin.document.write(html);
         popupWin.document.close();
+    }
+
+    bilheteAppMobile(aposta) {
     }
 }

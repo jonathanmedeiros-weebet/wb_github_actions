@@ -66,6 +66,7 @@ export class ResultadosComponent implements OnInit {
         }
     }
 
+    /* Validation Functions */
     checkFormValidations(form) {
         Object.keys(form.controls).forEach(field => {
             const control = form.get(field);
@@ -103,4 +104,5 @@ export class ResultadosComponent implements OnInit {
 
         return hasError;
     }
+    /* END Validation Functions */
 }

@@ -1,31 +1,35 @@
 <div id="apuracao">
-    <div class="content-header" style="margin-bottom: 30px">
+    <div class="content-header">
         <h2>Apuração</h2>
         <div class="filters">
-            <form (ngSubmit)="search()" [formGroup]="searchForm">
-                <div class="row">
-                    <div class="col">
-                        <label>Periodo Inicial</label>
-                        <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssErrorInput(searchForm, 'dataInicial')">
-                        <span *ngIf="hasError(searchForm, 'dataInicial', 'required')" class="invalid-feedback">Campo obrigatório</span>
-                    </div>
-                    <div class="col">
-                        <label>Periodo Final</label>
-                        <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssErrorInput(searchForm, 'dataFinal')">
-                        <span *ngIf="hasError(searchForm, 'dataFinal', 'required')" class="invalid-feedback">Campo obrigatório</span>
-                    </div>
-                    <div class="col">
-                        <label>Status</label>
-                        <select class="form-control" formControlName="status">
-                            <option value="">Todos</option>
-                            <option value="vencedores">Vencedores</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
-                    </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="search()" [formGroup]="searchForm">
+                        <div class="row">
+                            <div class="col">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssErrorInput(searchForm, 'dataInicial')">
+                                <span *ngIf="hasError(searchForm, 'dataInicial', 'required')" class="invalid-feedback">Campo obrigatório</span>
+                            </div>
+                            <div class="col">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssErrorInput(searchForm, 'dataFinal')">
+                                <span *ngIf="hasError(searchForm, 'dataFinal', 'required')" class="invalid-feedback">Campo obrigatório</span>
+                            </div>
+                            <div class="col">
+                                <label>Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="vencedores">Vencedores</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <div class="content-body">

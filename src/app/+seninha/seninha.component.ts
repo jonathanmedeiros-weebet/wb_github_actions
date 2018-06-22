@@ -24,7 +24,7 @@ export class SeninhaComponent implements OnInit {
     tipoAposta: TipoAposta;
     aposta = new Aposta();
     itemForm: FormGroup;
-    exibirPreBilhete = false;
+    displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
 
     constructor(
@@ -69,6 +69,7 @@ export class SeninhaComponent implements OnInit {
         this.itemForm.setControl('numeros', numerosFormArray);
     }
 
+    /* Selecionar número */
     checkNumber(number) {
         let numeros = this.numeros.value;
         let index = numeros.findIndex(n => number == n);
@@ -82,10 +83,13 @@ export class SeninhaComponent implements OnInit {
         }
     }
 
+
+    /* Verificar se o número está selecionado */
     isChecked(number) {
         return this.numeros.value.find(n => number == n);
     }
 
+    /* Verificar  a quantidade de números selecionados */
     checkBetType(tipoAposta: TipoAposta) {
         let result = false;
         if (tipoAposta.qtdNumeros == this.numeros.length) {
@@ -95,6 +99,7 @@ export class SeninhaComponent implements OnInit {
         return result;
     }
 
+    /* Geração dos números aleatórios */
     generateGuess(length) {
         let numbers = [];
         for (let index = 0; index < length; index++) {
@@ -106,6 +111,7 @@ export class SeninhaComponent implements OnInit {
         this.setNumeros(numbers);
     }
 
+    /* Gerar número randômico */
     generateRandomNumber() {
         let number = _.random(1, 61);
         let find = this.numeros.value.find(n => n == number);
@@ -117,6 +123,7 @@ export class SeninhaComponent implements OnInit {
         }
     }
 
+    /* Incluir palpite */
     includeGuess() {
         let tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros == this.numeros.length);
 
@@ -130,8 +137,9 @@ export class SeninhaComponent implements OnInit {
                 this.aposta.premio += item.premio;
                 this.aposta.itens.push(item);
                 this.itemForm.reset();
+                this.setNumeros([]);
             } else {
-                alert('invalido');
+                this.checkFormValidations(this.itemForm);
             }
         } else {
             this.messageService.warning('Quantidade de dezenas insuficiente.');
@@ -164,7 +172,7 @@ Apostador: ${aposta.apostador}
 Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(aposta.valor)}
 `;
 
-        for(let i in aposta.itens){
+        for (let i in aposta.itens) {
             let item = aposta.itens[i];
             bilhete += `----------------------------
 ${item.sorteio_nome}
@@ -176,7 +184,7 @@ Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
 
         bilhete += `{br}`;
 
-            parent.postMessage(bilhete, 'file://'); //file://
+        parent.postMessage(bilhete, 'file://'); //file://
         //}
         /*else {
             this.printService.bilhete(data.results);
@@ -189,11 +197,51 @@ Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
         this.messageService.error(msg);
     }
 
-    openCupom(){
-        this.exibirPreBilhete = true;
+    openCupom() {
+        this.displayPreTicker = true;
     }
 
-    closeCupom(){
-        this.exibirPreBilhete = false;
+    closeCupom() {
+        this.displayPreTicker = false;
     }
+
+    /* Validation Functions */
+    checkFormValidations(form) {
+        Object.keys(form.controls).forEach(field => {
+            const control = form.get(field);
+            control.markAsTouched();
+            if (control instanceof FormGroup || control instanceof FormArray) {
+                this.checkFormValidations(control);
+            }
+        });
+    }
+
+    verifyInvalidTouch(form, field) {
+        const control = form.get(field);
+        return !control.valid && control.touched;
+    }
+
+    applyCssErrorInput(form, field: string, children?: string) {
+        if (children != undefined) {
+            field = field.concat(`.${children}`);
+        }
+        return {
+            'is-invalid': this.verifyInvalidTouch(form, field)
+        };
+    }
+
+    hasError(form, field: string, errorName: string, children?: string): boolean {
+        if (children != undefined) {
+            field = field.concat(`.${children}`);
+        }
+        let hasError = false;
+        const control = form.get(field);
+
+        if (control.touched) {
+            hasError = control.hasError(errorName);
+        }
+
+        return hasError;
+    }
+    /* END Validation Functions */
 }

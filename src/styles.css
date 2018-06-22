@@ -63,11 +63,12 @@ html, body{
 }
 
 .content-header{
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .content-header h2{
     color: var(--background-primario);
+    margin-bottom: 15px;
 }
 
 .btn-line{
