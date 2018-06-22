@@ -7,6 +7,7 @@ import { Usuario } from './../../../models';
 import { config } from './../../config';
 
 import * as moment from 'moment';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-header',
@@ -19,7 +20,10 @@ export class HeaderComponent implements OnInit {
     BANCA_NOME;
     now = moment();
 
-    constructor(private router: Router, private auth: AuthService) { }
+    constructor(
+        private router: Router,
+        private auth: AuthService
+    ) { }
 
     ngOnInit() {
         this.usuario = this.auth.getUser();
@@ -27,6 +31,8 @@ export class HeaderComponent implements OnInit {
         this.BANCA_NOME = config.BANCA_NOME;
 
         setInterval(() => this.now = moment(), 1000);
+
+        $('.nav-item').click(() => $('.navbar-toggler').click());
     }
 
     logout() {
@@ -34,7 +40,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/auth/login']);
     }
 
-    configuration(){
+    configuration() {
         let message = {
             data: '',
             action: 'listPrinters',

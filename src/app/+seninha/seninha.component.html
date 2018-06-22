@@ -22,7 +22,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
-                                            <select class="form-control" formControlName="sorteio_id" [ngClass]="applyCssErrorInput(itemForm, 'sorteio_id')">
+                                            <select class="form-control" formControlName="sorteio_id" (change)="setSorteioNome()" [ngClass]="applyCssErrorInput(itemForm, 'sorteio_id')">
                                                 <option value="">Selecione</option>
                                                 <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">
                                                     {{sorteio.nome}}
@@ -93,20 +93,23 @@
                                 </div>
                             </div>
                         </div>
-                        <form>
+                        <form #apostaForm="ngForm" (ngSubmit)="create()">
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Apostador</label>
-                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" #apostador="ngModel">
-                                    <!-- <span [hidden]="apostador.valid || apostador.pristine" class="help-block">Campo obrigatório</span> -->
+                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador"
+                                    [ngClass]="{'is-invalid': apostador.invalid && (apostador.dirty || apostador.touched)}" #apostador="ngModel">
+                                    <div class="invalid-feedback" [hidden]="apostador.valid && (apostador.dirty || apostador.touched)">Campo obrigatório</div>
                                 </div>
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Telefone</label>
-                                    <input type="text" [(ngModel)]="aposta.telefone" name="telefone" class="form-control" required>
+                                    <input type="text" class="form-control" required [(ngModel)]="aposta.telefone" name="telefone"
+                                    [ngClass]="{'is-invalid': telefone.invalid && (telefone.dirty || telefone.touched)}" #telefone="ngModel">
+                                    <div class="invalid-feedback" [hidden]="telefone.valid && (telefone.dirty || telefone.touched)">Campo obrigatório</div>
                                 </div>
                             </div>
                             <div>
-                                <button type="button" (click)="create()" class="btn btn-primary">Concluir Aposta</button>
+                                <button type="submit" [disabled]="!apostaForm.form.valid" class="btn btn-primary">Concluir Aposta</button>
                             </div>
                         </form>
                     </div>

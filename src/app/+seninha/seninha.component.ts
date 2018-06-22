@@ -43,7 +43,7 @@ export class SeninhaComponent implements OnInit {
             tiposAposta => this.tiposAposta = tiposAposta,
             error => this.messageService.error(error)
         );
-        this.sorteioService.getSorteios().subscribe(
+        this.sorteioService.getSorteios(queryParams).subscribe(
             sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );
@@ -55,9 +55,11 @@ export class SeninhaComponent implements OnInit {
         this.itemForm = this.fb.group({
             valor: ['', Validators.required],
             sorteio_id: ['', Validators.required],
+            sorteio_nome: [''],
             numeros: this.fb.array([])
         });
     }
+
 
     get numeros() {
         return this.itemForm.get('numeros') as FormArray;
@@ -67,6 +69,16 @@ export class SeninhaComponent implements OnInit {
         const numerosFCs = numeros.map(numeros => this.fb.control(numeros));
         const numerosFormArray = this.fb.array(numerosFCs);
         this.itemForm.setControl('numeros', numerosFormArray);
+    }
+
+    setSorteioNome() {
+        let sorteioId = this.itemForm.value.sorteio_id;
+        let sorteio = this.sorteios.find(sorteio => sorteio.id == sorteioId);
+        if (sorteio) {
+            if (sorteio) {
+                this.itemForm.patchValue({ sorteio_nome: sorteio.nome });
+            }
+        }
     }
 
     /* Selecionar número */

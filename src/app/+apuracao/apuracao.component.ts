@@ -21,12 +21,28 @@ export class ApuracaoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.apostaService.getApostas().subscribe(
+        this.getApostas();
+        this.createForm();
+    }
+
+    getApostas(params?) {
+        let queryParams: any = {
+            'sort': "-horario"
+        };
+
+        if (params) {
+            queryParams = {
+                'data-inicial': params.dataInicial,
+                'data-final': params.dataFinal,
+                'status': params.status,
+                'sort': '-horario'
+            };
+        }
+
+        this.apostaService.getApostas(queryParams).subscribe(
             apostas => this.apostas = apostas,
             error => this.handleError(error)
         );
-
-        this.createForm();
     }
 
     createForm() {
@@ -39,17 +55,7 @@ export class ApuracaoComponent implements OnInit {
 
     search() {
         if (this.searchForm.valid) {
-            const values = this.searchForm.value;
-            let queryParams = {
-                "data-inicial": values.dataInicial,
-                "data-final": values.dataFinal,
-                "status": values.status
-            };
-
-            this.apostaService.getApostas(queryParams).subscribe(
-                apostas => this.apostas = apostas,
-                error => this.handleError(error)
-            );
+            this.getApostas(this.searchForm.value);
         } else {
             this.checkFormValidations(this.searchForm);
         }
@@ -63,6 +69,7 @@ export class ApuracaoComponent implements OnInit {
         this.messageService.error(msg);
     }
 
+    /* Validation Functions */
     checkFormValidations(form) {
         Object.keys(form.controls).forEach(field => {
             const control = form.get(field);
@@ -100,4 +107,5 @@ export class ApuracaoComponent implements OnInit {
 
         return hasError;
     }
+    /* END Validation Functions */
 }

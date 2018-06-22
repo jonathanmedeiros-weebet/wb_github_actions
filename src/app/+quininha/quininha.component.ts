@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import {
     TipoApostaService, MessageService,
@@ -17,12 +18,13 @@ import * as moment from 'moment';
     styleUrls: ['quininha.component.css']
 })
 export class QuininhaComponent implements OnInit {
-    numbers = _.range(1, 81);
+    numbers = _.range(1, 61);
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
     aposta = new Aposta();
-    item = new Item();
+    itemForm: FormGroup;
+    displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
 
     constructor(
@@ -30,7 +32,8 @@ export class QuininhaComponent implements OnInit {
         private tipoApostaService: TipoApostaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private printService: PrintService
+        private printService: PrintService,
+        private fb: FormBuilder
     ) { }
 
     ngOnInit() {
@@ -40,47 +43,90 @@ export class QuininhaComponent implements OnInit {
             tiposAposta => this.tiposAposta = tiposAposta,
             error => this.messageService.error(error)
         );
-        this.sorteioService.getSorteios().subscribe(
+        this.sorteioService.getSorteios(queryParams).subscribe(
             sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );
+
+        this.createForms();
     }
 
-    checkNumber(number) {
-        let index = this.item.numeros.findIndex(n => number == n);
-        if (index < 0) {
-            this.item.numeros.push(number);
-            this.item.numeros.sort((a, b) => a - b);
-        } else {
-            this.item.numeros.splice(index, 1);
+    createForms() {
+        this.itemForm = this.fb.group({
+            valor: ['', Validators.required],
+            sorteio_id: ['', Validators.required],
+            sorteio_nome: [''],
+            numeros: this.fb.array([])
+        });
+    }
+
+
+    get numeros() {
+        return this.itemForm.get('numeros') as FormArray;
+    }
+
+    setNumeros(numeros: Number[]) {
+        const numerosFCs = numeros.map(numeros => this.fb.control(numeros));
+        const numerosFormArray = this.fb.array(numerosFCs);
+        this.itemForm.setControl('numeros', numerosFormArray);
+    }
+
+    setSorteioNome() {
+        let sorteioId = this.itemForm.value.sorteio_id;
+        let sorteio = this.sorteios.find(sorteio => sorteio.id == sorteioId);
+        if (sorteio) {
+            if (sorteio) {
+                this.itemForm.patchValue({ sorteio_nome: sorteio.nome });
+            }
         }
     }
 
-    isChecked(number) {
-        return this.item.numeros.find(n => number == n);
+    /* Selecionar número */
+    checkNumber(number) {
+        let numeros = this.numeros.value;
+        let index = numeros.findIndex(n => number == n);
+
+        if (index < 0) {
+            numeros.push(number);
+            numeros.sort((a, b) => a - b);
+            this.setNumeros(numeros);
+        } else {
+            this.numeros.removeAt(index);
+        }
     }
 
+
+    /* Verificar se o número está selecionado */
+    isChecked(number) {
+        return this.numeros.value.find(n => number == n);
+    }
+
+    /* Verificar  a quantidade de números selecionados */
     checkBetType(tipoAposta: TipoAposta) {
         let result = false;
-        if (tipoAposta.qtdNumeros == this.item.numeros.length) {
+        if (tipoAposta.qtdNumeros == this.numeros.length) {
             result = true;
             this.tipoAposta = tipoAposta;
         }
         return result;
     }
 
+    /* Geração dos números aleatórios */
     generateGuess(length) {
-        this.item.numeros = [];
+        let numbers = [];
         for (let index = 0; index < length; index++) {
             let number = this.generateRandomNumber();
-            this.item.numeros.push(number);
-            this.item.numeros.sort((a, b) => a - b);
+            numbers.push(number);
+            numbers.sort((a, b) => a - b);
         }
+
+        this.setNumeros(numbers);
     }
 
+    /* Gerar número randômico */
     generateRandomNumber() {
         let number = _.random(1, 61);
-        let find = this.item.numeros.find(n => n == number);
+        let find = this.numeros.value.find(n => n == number);
 
         if (!find) {
             return number;
@@ -89,21 +135,24 @@ export class QuininhaComponent implements OnInit {
         }
     }
 
-    resetGuess() {
-        this.item = new Item();
-    }
-
+    /* Incluir palpite */
     includeGuess() {
-        let tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros == this.item.numeros.length);
+        let tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros == this.numeros.length);
 
         if (tipoAPosta) {
-            // let item: Item = clone(this.item);
-            this.item.premio = this.item.valor * this.tipoAposta.cotacao;
+            if (this.itemForm.valid) {
+                // let item: Item = clone(this.item);
+                let item = this.itemForm.value;
+                item.premio = item.valor * this.tipoAposta.cotacao;
 
-            this.aposta.valor += this.item.valor;
-            this.aposta.premio += this.item.premio;
-            this.aposta.itens.push(this.item);
-            this.resetGuess();
+                this.aposta.valor += item.valor;
+                this.aposta.premio += item.premio;
+                this.aposta.itens.push(item);
+                this.itemForm.reset();
+                this.setNumeros([]);
+            } else {
+                this.checkFormValidations(this.itemForm);
+            }
         } else {
             this.messageService.warning('Quantidade de dezenas insuficiente.');
         }
@@ -121,12 +170,90 @@ export class QuininhaComponent implements OnInit {
     }
 
     success(data) {
-        this.printService.bilhete(data.results);
-        this.aposta = new Aposta();
-        this.messageService.success("Aposta realizada!");
+
+        //if(true){//no app
+
+        let aposta = data.results;
+
+        let bilhete = `{br}Weebet
+
+#${aposta.id}
+Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
+Cambista: ${aposta.passador.nome}
+Apostador: ${aposta.apostador}
+Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(aposta.valor)}
+`;
+
+        for (let i in aposta.itens) {
+            let item = aposta.itens[i];
+            bilhete += `----------------------------
+${item.sorteio_nome}
+Dezenas: ${item.numeros.join(' - ')}
+Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
+Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}
+`;
+        }
+
+        bilhete += `{br}`;
+
+        parent.postMessage(bilhete, 'file://'); //file://
+        //}
+        /*else {
+            this.printService.bilhete(data.results);
+            this.aposta = new Aposta();
+            this.messageService.success("Aposta realizada!");
+        }*/
     }
 
     handleError(msg) {
         this.messageService.error(msg);
     }
+
+    openCupom() {
+        this.displayPreTicker = true;
+    }
+
+    closeCupom() {
+        this.displayPreTicker = false;
+    }
+
+    /* Validation Functions */
+    checkFormValidations(form) {
+        Object.keys(form.controls).forEach(field => {
+            const control = form.get(field);
+            control.markAsTouched();
+            if (control instanceof FormGroup || control instanceof FormArray) {
+                this.checkFormValidations(control);
+            }
+        });
+    }
+
+    verifyInvalidTouch(form, field) {
+        const control = form.get(field);
+        return !control.valid && control.touched;
+    }
+
+    applyCssErrorInput(form, field: string, children?: string) {
+        if (children != undefined) {
+            field = field.concat(`.${children}`);
+        }
+        return {
+            'is-invalid': this.verifyInvalidTouch(form, field)
+        };
+    }
+
+    hasError(form, field: string, errorName: string, children?: string): boolean {
+        if (children != undefined) {
+            field = field.concat(`.${children}`);
+        }
+        let hasError = false;
+        const control = form.get(field);
+
+        if (control.touched) {
+            hasError = control.hasError(errorName);
+        }
+
+        return hasError;
+    }
+    /* END Validation Functions */
 }

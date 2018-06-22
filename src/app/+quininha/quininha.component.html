@@ -18,20 +18,22 @@
                         <hr>
                         <div>
                             <div class="col-xs-12">
-                                <form class="form" (ngSubmit)="includeGuess()">
+                                <form class="form" [formGroup]="itemForm" (ngSubmit)="includeGuess()">
                                     <div class="form-row">
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
-                                            <select class="form-control" [(ngModel)]="item.sorteio_id" name="sorteioId" required>
-                                                <option [value]="null">Selecione</option>
+                                            <select class="form-control" formControlName="sorteio_id" (change)="setSorteioNome()" [ngClass]="applyCssErrorInput(itemForm, 'sorteio_id')">
+                                                <option value="">Selecione</option>
                                                 <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">
                                                     {{sorteio.nome}}
                                                 </option>
                                             </select>
+                                            <div class="invalid-feedback" *ngIf="hasError(itemForm, 'sorteio_id', 'required')"> Campo obrigatório </div>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
-                                            <input type="number" [(ngModel)]="item.valor" name="valor" class="form-control" required>
+                                            <input type="number" class="form-control" min="10" formControlName="valor" [ngClass]="applyCssErrorInput(itemForm, 'valor')">
+                                            <div class="invalid-feedback" *ngIf="hasError(itemForm, 'valor', 'required')"> Campo obrigatório </div>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <button type="submit" class="btn btn-primary btn-line">Incluir Palpite</button>
@@ -59,12 +61,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="pre-bilhete col-xs-12 col-md-4">
+                <div class="pre-bilhete col-xs-12 col-md-4" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
                     <div class="card">
-                        Pré-Bilhete
-                        <!--<pre>
-                            {{aposta | json}}
-                        </pre>-->
+                        <span>Pré-Bilhete</span>
+                        <!-- <pre>
+                                {{aposta | json}}
+                            </pre> -->
+                        <a (click)="closeCupom()" class="fechar-pre-bilhete">
+                            <i class="fa fa-lg fa-close"></i>
+                        </a>
                         <div class="aposta-item" *ngFor="let item of aposta.itens">
                             <div class="item-header">
                                 <div>
@@ -88,25 +93,48 @@
                                 </div>
                             </div>
                         </div>
-                        <form>
+                        <form #apostaForm="ngForm" (ngSubmit)="create()">
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Apostador</label>
-                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" #apostador="ngModel">
-                                    <!-- <span [hidden]="apostador.valid || apostador.pristine" class="help-block">Campo obrigatório</span> -->
+                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" [ngClass]="{'is-invalid': apostador.invalid && (apostador.dirty || apostador.touched)}"
+                                        #apostador="ngModel">
+                                    <div class="invalid-feedback" [hidden]="apostador.valid && (apostador.dirty || apostador.touched)">Campo obrigatório</div>
                                 </div>
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Telefone</label>
-                                    <input type="text" [(ngModel)]="aposta.telefone" name="telefone" class="form-control" required>
+                                    <input type="text" class="form-control" required [(ngModel)]="aposta.telefone" name="telefone" [ngClass]="{'is-invalid': telefone.invalid && (telefone.dirty || telefone.touched)}"
+                                        #telefone="ngModel">
+                                    <div class="invalid-feedback" [hidden]="telefone.valid && (telefone.dirty || telefone.touched)">Campo obrigatório</div>
                                 </div>
                             </div>
                             <div>
-                                <button type="button" (click)="create()" class="btn btn-primary">Concluir Aposta</button>
+                                <button type="submit" [disabled]="!apostaForm.form.valid" class="btn btn-primary">Concluir Aposta</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="fixed-bar-bilhete" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
+        <div>
+            <label>Valor</label>
+            <span>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+        </div>
+        <div>
+            <label>Palpite(s)</label>
+            <span>{{aposta.itens.length}}</span>
+        </div>
+        <div>
+            <label>P. de Prêmio</label>
+            <span>{{(aposta.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+        </div>
+        <div class="open-bilhete">
+            <a (click)="openCupom()">
+                <i class="fa fa-lg fa-chevron-circle-up"></i>
+            </a>
         </div>
     </div>
 </div>
