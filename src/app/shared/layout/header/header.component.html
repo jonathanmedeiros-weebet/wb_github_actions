@@ -36,13 +36,17 @@
                 </a>
             </li>
             <li *ngIf="!appMobile">
-                <a href="javascript:void(0);" (click)="configuration()">
-                    <i class="fa fa-cogs"></i> Configurações
+                <a>
+                    <i class="fa fa-cogs"></i> Configs
                 </a>
+                <ul class="sub-menu">
+                    <li><a href="javascript:void(0);" (click)="listPrinters()"><i class="fa fa-print"></i> Impressora</a></li>
+                    <li><a href="javascript:void(0);" (click)="appVersion()"><i class="fa fa-info"></i> Versão App</a></li>
+                </ul>
             </li>
             <li>
                 <a [routerLink]="['/apuracao']">
-                    <i class="fa fa-check"></i> Apuração
+                    <i class="fa fa-check"></i> <span class="hidden-sm-down">Apuração</span>
                 </a>
             </li>
             <li>
