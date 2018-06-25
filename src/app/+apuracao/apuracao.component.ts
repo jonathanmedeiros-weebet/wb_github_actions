@@ -92,7 +92,7 @@ export class ApuracaoComponent implements OnInit {
     }
 
     printTicket(aposta: Aposta) {
-        this.printService.bilhete(aposta);
+        this.printService.ticket(aposta);
     }
 
     checkResult(sorteioId, numero) {

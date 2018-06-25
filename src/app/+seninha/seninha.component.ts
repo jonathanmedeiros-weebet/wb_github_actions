@@ -171,7 +171,7 @@ export class SeninhaComponent implements OnInit {
 
     success(data) {
 
-        this.printService.bilhete(data.results);
+        this.printService.ticket(data.results);
         this.aposta = new Aposta();
         this.messageService.success("Aposta realizada!");
         this.closeCupom();

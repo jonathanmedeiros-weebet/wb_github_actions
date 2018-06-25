@@ -9,15 +9,15 @@ import * as moment from 'moment';
 export class PrintService {
     constructor(private auth: AuthService) { }
 
-    bilhete(aposta) {
+    ticket(aposta) {
         if (this.auth.isAppMobile()) {
-            this.bilheteAppMobile(aposta);
+            this.ticketAppMobile(aposta);
         } else {
-            this.bilheteDestkop(aposta);
+            this.ticketDestkop(aposta);
         }
     }
 
-    bilheteDestkop(aposta) {
+    ticketDestkop(aposta) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -186,8 +186,8 @@ export class PrintService {
         popupWin.document.close();
     }
 
-    bilheteAppMobile(aposta) {
-        let bilhete = `Weebet
+    ticketAppMobile(aposta) {
+        let ticket = `Weebet
 
 #${aposta.id}
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
@@ -198,13 +198,13 @@ Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BR
 
         for (let i in aposta.itens) {
             let item = aposta.itens[i];
-            bilhete += `----------------------------
+            ticket += `----------------------------
 ${item.sorteio_nome}
 Dezenas: ${item.numeros.join('-')}
 Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
 Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}`;
         }
 
-        parent.postMessage({data: bilhete, action: 'printLottery'}, 'file://'); //file://
+        parent.postMessage({data: ticket, action: 'printLottery'}, 'file://'); //file://
     }
 }
