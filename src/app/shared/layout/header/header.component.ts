@@ -31,10 +31,9 @@ export class HeaderComponent implements OnInit {
         this.LOGO = config.LOGO;
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
-
         setInterval(() => this.now = moment(), 1000);
 
-        $('.nav-item').click(() => $('.navbar-toggler').click());
+        $('.nav-item').click(() => $('.navbar-toggler:visible').click());
     }
 
     logout() {

@@ -76,8 +76,8 @@ export class ApuracaoComponent implements OnInit {
 
     createForm() {
         this.searchForm = this.fb.group({
-            dataInicial: ['', Validators.required],
-            dataFinal: ['', Validators.required],
+            dataInicial: [moment().subtract('7', 'd').format('YYYY-MM-DD'), Validators.required],
+            dataFinal: [moment().format('YYYY-MM-DD'), Validators.required],
             status: ['']
         });
     }
