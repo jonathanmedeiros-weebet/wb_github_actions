@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from './services';
+import { config } from './shared/config';
+
+declare var $;
 
 @Component({
     selector: 'app-root',
@@ -14,6 +17,9 @@ export class AppComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        let element = document.querySelector('html');
+        element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
+
         this.route.queryParams.subscribe(params => {
             if (params['app'] && !this.auth.isAppMobile()) {
                 this.auth.setAppMobile();
