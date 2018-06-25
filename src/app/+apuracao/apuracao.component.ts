@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
-import { ApostaService, MessageService, PrintService } from './../services';
-import { Aposta } from './../models';
+import { ApostaService, MessageService, PrintService, SorteioService } from './../services';
+import { Aposta, Sorteio } from './../models';
+
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-apuracao',
@@ -11,10 +13,12 @@ import { Aposta } from './../models';
 })
 export class ApuracaoComponent implements OnInit {
     apostas: Aposta[];
+    sorteios: Sorteio[] = [];
     searchForm: FormGroup;
 
     constructor(
         private apostaService: ApostaService,
+        private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
         private fb: FormBuilder
@@ -22,11 +26,36 @@ export class ApuracaoComponent implements OnInit {
 
     ngOnInit() {
         this.getApostas();
+        this.getSorteios();
         this.createForm();
+    }
+
+    getSorteios(params?) {
+        let queryParams: any = {
+            'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
+            'data-final': moment().format('YYYY-MM-DD 23:59:59'),
+            'sort': "-data"
+        };
+
+        if (params) {
+            queryParams = {
+                'data-inicial': params.dataInicial,
+                'data-final': params.dataFinal,
+                'status': params.status,
+                'sort': '-data'
+            };
+        }
+
+        this.sorteioService.getSorteios(queryParams).subscribe(
+            sorteios => this.sorteios = sorteios,
+            error => this.handleError(error)
+        );
     }
 
     getApostas(params?) {
         let queryParams: any = {
+            'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
+            'data-final': moment().format('YYYY-MM-DD 23:59:59'),
             'sort': "-horario"
         };
 
@@ -56,13 +85,31 @@ export class ApuracaoComponent implements OnInit {
     search() {
         if (this.searchForm.valid) {
             this.getApostas(this.searchForm.value);
+            this.getSorteios(this.searchForm.value);
         } else {
             this.checkFormValidations(this.searchForm);
         }
     }
 
-    imprimirBilhete(aposta) {
+    printTicket(aposta: Aposta) {
         this.printService.bilhete(aposta);
+    }
+
+    checkResult(sorteioId, numero) {
+        let sorteio: Sorteio = this.sorteios.find(sorteio => sorteio.id == sorteioId);
+        let result: any = {};
+
+        if (sorteio && sorteio.resultado) {
+            let exist = sorteio.resultado.find(n => n == numero);
+
+            if (exist) {
+                result.hit = true;
+            } else {
+                result.miss = true;
+            }
+        }
+
+        return result;
     }
 
     handleError(msg) {

@@ -54,7 +54,7 @@
                             <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
                         </div>
                         <div>
-                            <button type="button" (click)="imprimirBilhete(aposta)" class="btn btn-primary">
+                            <button type="button" (click)="printTicket(aposta)" class="btn btn-primary">
                                 <i class="fa fa-print"></i>
                             </button>
                         </div>
@@ -78,7 +78,7 @@
                                 <span>{{item.status | uppercase}}</span>
                             </div>
                             <div class="circle-group">
-                                <div class="circle" *ngFor="let numero of item.numeros">
+                                <div class="circle" *ngFor="let numero of item.numeros" [ngClass]="checkResult(item.sorteio_id, numero)">
                                     <div class="content">
                                         {{numero | number:'2.0'}}
                                     </div>

@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
     usuario = new Usuario();
     LOGO;
     BANCA_NOME;
+    appMobile;
     now = moment();
 
     constructor(
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
         this.usuario = this.auth.getUser();
         this.LOGO = config.LOGO;
         this.BANCA_NOME = config.BANCA_NOME;
+        this.appMobile = this.auth.isAppMobile();
 
         setInterval(() => this.now = moment(), 1000);
 

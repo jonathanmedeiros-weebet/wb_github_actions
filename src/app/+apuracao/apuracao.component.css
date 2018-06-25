@@ -61,3 +61,15 @@
     margin: 3px;
 }
 
+.hit, .miss{
+    color:#fff;
+    border-color:#000;
+}
+
+.hit{
+    background-color: green;
+}
+
+.miss{
+    background-color: red;
+}

@@ -12,7 +12,7 @@ import * as moment from 'moment';
     styleUrls: ['resultados.component.css']
 })
 export class ResultadosComponent implements OnInit {
-    sorteios: Sorteio[];
+    sorteios: Sorteio[] = [];
     searchForm: FormGroup;
 
     constructor(
