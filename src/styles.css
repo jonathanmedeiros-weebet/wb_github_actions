@@ -101,3 +101,13 @@ html, body{
 .jq-toast-wrap{
     z-index: 9001!important;
 }
+
+
+.form-control{
+    font-size: 1.5rem;
+    height: 38px;
+}
+
+.btn{
+    line-height: 27px;
+}
