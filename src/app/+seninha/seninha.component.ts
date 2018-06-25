@@ -14,8 +14,7 @@ import * as moment from 'moment';
 
 @Component({
     selector: 'app-seninha',
-    templateUrl: 'seninha.component.html',
-    styleUrls: ['seninha.component.css']
+    templateUrl: 'seninha.component.html'
 })
 export class SeninhaComponent implements OnInit {
     numbers = _.range(1, 61);
