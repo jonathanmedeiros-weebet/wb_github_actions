@@ -48,7 +48,7 @@
     border-top: 1px solid rgba(255,255,255,0.2);
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
-.navbar-2 ul{
+.navbar-2 > ul{
     width: 100%;
     padding-left: 0;
     margin-bottom: 0;
@@ -57,14 +57,32 @@
     justify-content: flex-end;
 
 }
-.navbar-2 ul li{
+.navbar-2 > ul li{
     list-style: none;
 }
-.navbar-2 ul li a{
+.navbar-2 > ul li a{
     font-size: 1.1em;
     padding: 5px 15px;
     color: white;
     cursor: pointer;
+}
+
+li .sub-menu{
+    display: none;
+    position: absolute;
+    background: var(--background-primario);
+    opacity: 0.8;
+    top: 28px;
+    padding: 5px 0;
+}
+
+li:hover .sub-menu{
+    display: block;
+}
+
+li .sub-menu a{
+    display: inline-block;
+    padding: 5px 25px!important;
 }
 
 /* Small devices (landscape phones, 576px and up) */

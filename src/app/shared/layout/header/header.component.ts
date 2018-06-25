@@ -40,13 +40,23 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/auth/login']);
     }
 
-    configuration() {
+    listPrinters() {
         let message = {
             data: '',
             action: 'listPrinters',
         };
 
         parent.postMessage(message, 'file://'); //file://
-        console.log('configuracoes');
+        console.log('listPrinters');
+    }
+
+    appVersion() {
+        let message = {
+            data: '',
+            action: 'appVersion',
+        };
+
+        parent.postMessage(message, 'file://'); //file://
+        console.log('app version');
     }
 }
