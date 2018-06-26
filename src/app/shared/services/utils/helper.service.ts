@@ -123,4 +123,13 @@ export class HelperService {
         // format a string result
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
+
+    moneyFormat(value) {
+        let money = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(value);
+
+        return money;
+    }
 }

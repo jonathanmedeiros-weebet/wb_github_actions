@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './../auth/auth.service';
+import { HelperService } from './helper.service';
 
 import { config } from './../../config';
 import * as moment from 'moment';
 
 @Injectable()
 export class PrintService {
-    constructor(private auth: AuthService) { }
+    constructor(
+        private auth: AuthService,
+        private helperService: HelperService
+    ) { }
 
     ticket(aposta) {
         if (this.auth.isAppMobile()) {
@@ -121,7 +125,7 @@ export class PrintService {
                         Valor
                     </div>
                     <div style="float: right;">
-                        R$ ${item.valor}
+                        ${this.helperService.moneyFormat(item.valor)}
                     </div>
                 </div>
                 <div class="clearfix">
@@ -129,7 +133,7 @@ export class PrintService {
                         Prêmio
                     </div>
                     <div style="float: right;">
-                        R$ ${item.cotacao * item.valor}
+                        ${this.helperService.moneyFormat(item.cotacao * item.valor)}
                     </div>
                 </div>
             `;
@@ -161,7 +165,7 @@ export class PrintService {
                         Total
                     </div>
                     <div style="float: right;">
-                        R$ ${aposta.valor}
+                        ${this.helperService.moneyFormat(aposta.valor)}
                     </div>
                 </div>
             </div>
@@ -193,7 +197,7 @@ export class PrintService {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(aposta.valor)}
+Valor Total: ${this.helperService.moneyFormat(aposta.valor)}
 `;
 
         for (let i in aposta.itens) {
@@ -201,8 +205,8 @@ Valor Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BR
             ticket += `----------------------------
 ${item.sorteio_nome}
 Dezenas: ${item.numeros.join('-')}
-Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
-Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}`;
+Valor: ${this.helperService.moneyFormat(item.valor)}
+Premio: ${this.helperService.moneyFormat(item.valor * item.cotacao)}`;
         }
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); //file://
