@@ -26,7 +26,9 @@ export class AuthService {
             .pipe(
                 map(res => {
                     let usuarioSerializado = JSON.stringify(res.user);
+                    let expires = moment().add(1, "d").valueOf();
 
+                    localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', usuarioSerializado);
                 }),
@@ -38,6 +40,7 @@ export class AuthService {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('app-mobile');
+        localStorage.removeItem('expires');
     }
 
     isLoggedIn(): boolean {
@@ -87,5 +90,11 @@ export class AuthService {
 
     setAppMobile() {
         localStorage.setItem('app-mobile', 'true');
+    }
+
+    isExpired() {
+        const expires = localStorage.getItem('expires');
+        //+expired converte a string para inteiro
+        return moment(+expires).isBefore(new Date());
     }
 }

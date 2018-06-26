@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard } from './services';
+import { AuthGuard, ExpiresGuard } from './services';
 
 const appRoutes: Routes = [
     {
@@ -14,6 +14,7 @@ const appRoutes: Routes = [
             pageTitle: 'Dashboard'
         },
         canActivate: [AuthGuard],
+        canActivateChild: [ExpiresGuard],
         children: [
             {
                 path: '',
