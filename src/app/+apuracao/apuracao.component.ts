@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
-import { ApostaService, MessageService, PrintService, SorteioService } from './../services';
+import {
+    ApostaService, MessageService,
+    PrintService, SorteioService,
+    AuthService
+} from './../services';
 import { Aposta, Sorteio } from './../models';
+import { config } from './../shared/config';
 
 import * as moment from 'moment';
 
@@ -15,16 +20,19 @@ export class ApuracaoComponent implements OnInit {
     apostas: Aposta[];
     sorteios: Sorteio[] = [];
     searchForm: FormGroup;
+    appMobile;
 
     constructor(
         private apostaService: ApostaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
+        private auth: AuthService,
         private fb: FormBuilder
     ) { }
 
     ngOnInit() {
+        this.appMobile = this.auth.isAppMobile();
         this.getApostas();
         this.getSorteios();
         this.createForm();
@@ -93,6 +101,16 @@ export class ApuracaoComponent implements OnInit {
 
     printTicket(aposta: Aposta) {
         this.printService.ticket(aposta);
+    }
+
+    sharedTicket(aposta: Aposta) {
+        parent.postMessage(
+            {
+                data: `${config.HOST}/aposta/${aposta.chave}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
     }
 
     checkResult(sorteioId, numero) {

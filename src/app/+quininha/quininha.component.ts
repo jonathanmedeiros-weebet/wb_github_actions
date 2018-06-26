@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
-    PrintService
+    PrintService, HelperService
 } from '../services';
 import { TipoAposta, Aposta, Item, Sorteio } from '../models';
 import { config } from './../shared/config';
@@ -21,7 +21,7 @@ export class QuininhaComponent implements OnInit {
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
-    aposta = new Aposta();
+    aposta = new Aposta(this.helper.guidGenerate());
     itemForm: FormGroup;
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
@@ -32,6 +32,7 @@ export class QuininhaComponent implements OnInit {
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
+        private helper: HelperService,
         private fb: FormBuilder
     ) { }
 
@@ -157,6 +158,12 @@ export class QuininhaComponent implements OnInit {
         }
     }
 
+    /* Remover palpite */
+    removeGuess(index) {
+        this.aposta.itens.splice(index, 1);
+    }
+
+    /* Finalizar aposta */
     create() {
         if (this.aposta.itens.length) {
             this.apostaService.create(this.aposta).subscribe(
@@ -171,7 +178,7 @@ export class QuininhaComponent implements OnInit {
     success(data) {
 
         this.printService.ticket(data.results);
-        this.aposta = new Aposta();
+        this.aposta = new Aposta(this.helper.guidGenerate());
         this.messageService.success("Aposta realizada!");
         this.closeCupom();
     }

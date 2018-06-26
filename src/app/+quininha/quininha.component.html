@@ -72,6 +72,9 @@
                         </a>
                         <div class="aposta-item" *ngFor="let item of aposta.itens">
                             <div class="item-header">
+                                <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
+                                    <i class="fa fa-lg fa-close"></i>
+                                </a>
                                 <div>
                                     <label>sorteio</label>
                                     <span>{{item.sorteio_nome}}</span>
