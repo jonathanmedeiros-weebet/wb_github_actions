@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 
 import { SharedModule } from './../shared/shared.module';
 import { SeninhaRoutingModule } from './seninha-routing.module';

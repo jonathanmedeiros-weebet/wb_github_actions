@@ -205,6 +205,6 @@ Valor: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).
 Premio: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor * item.cotacao)}`;
         }
 
-        parent.postMessage({data: ticket, action: 'printLottery'}, 'file://'); //file://
+        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); //file://
     }
 }

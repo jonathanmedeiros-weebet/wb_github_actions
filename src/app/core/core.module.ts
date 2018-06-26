@@ -1,5 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -30,7 +31,8 @@ moment.locale('pt-BR');
         ErrorService,
         HelperService,
         PrintService,
-        ExpiresGuard
+        ExpiresGuard,
+        Title
     ]
 })
 export class CoreModule {

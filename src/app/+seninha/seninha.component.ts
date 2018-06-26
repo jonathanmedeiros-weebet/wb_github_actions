@@ -10,7 +10,6 @@ import { TipoAposta, Aposta, Item, Sorteio } from '../models';
 import { config } from './../shared/config';
 
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-seninha',

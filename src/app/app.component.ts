@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from './services';
@@ -13,10 +14,13 @@ declare var $;
 export class AppComponent implements OnInit {
     constructor(
         private auth: AuthService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private titleService: Title
     ) { }
 
     ngOnInit() {
+        this.titleService.setTitle(config.BANCA_NOME);
+
         let element = document.querySelector('html');
         element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
 
