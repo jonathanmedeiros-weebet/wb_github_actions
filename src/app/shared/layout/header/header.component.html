@@ -44,6 +44,11 @@
                     <li><a href="javascript:void(0);" (click)="appVersion()"><i class="fa fa-info"></i> Versão App</a></li>
                 </ul>
             </li>
+            <li *ngIf="!appMobile">
+                <a target="_blank" href="app.apk">
+                    <i class="fa fa-android"></i> App
+                </a>
+            </li>
             <li>
                 <a [routerLink]="['/apuracao']">
                     <i class="fa fa-check"></i> <span class="hidden-sm-down">Apuração</span>

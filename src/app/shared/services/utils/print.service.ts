@@ -206,8 +206,10 @@ Valor Total: ${this.helperService.moneyFormat(aposta.valor)}
 ${item.sorteio_nome}
 Dezenas: ${item.numeros.join('-')}
 Valor: ${this.helperService.moneyFormat(item.valor)}
-Premio: ${this.helperService.moneyFormat(item.valor * item.cotacao)}`;
+Premio: ${this.helperService.moneyFormat(item.valor * item.cotacao)}
+`;
         }
+
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); //file://
     }
