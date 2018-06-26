@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
     appVersion() {
         let message = {
             data: '',
-            action: 'appVersion',
+            action: 'showVersion',
         };
 
         parent.postMessage(message, 'file://'); //file://
