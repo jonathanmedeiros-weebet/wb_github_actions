@@ -126,10 +126,10 @@ export class HelperService {
 
     moneyFormat(value) {
         let money = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
+            minimumFractionDigits: 2
         }).format(value);
 
-        return money;
+        //precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
+        return `R$ ${money}`;
     }
 }
