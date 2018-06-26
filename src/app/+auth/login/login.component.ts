@@ -13,6 +13,8 @@ import { config } from './../../shared/config';
 export class LoginComponent implements OnInit {
     form: FormGroup;
     LOGO = config.LOGO;
+    BANCA_NOME = config.BANCA_NOME;
+    BG = config.BG;
     disabledButton = false;
 
     constructor(

@@ -1,10 +1,10 @@
-<div id="login">
+<div id="login" [ngStyle]="{'background-image': 'url('+BG+')'}">
     <div class="col-lg-12">
         <div class="login-box">
             <div class="card">
                 <div class="card-body">
                     <div class="text-center">
-                        <h1>Weebet</h1>
+                        <img class="logo-banca" alt="{{BANCA_NOME}}" src="{{LOGO}}" />
                     </div>
                     <div id="login-form">
                         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="" id="loginform" novalidate>
