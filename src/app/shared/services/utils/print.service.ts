@@ -118,7 +118,7 @@ export class PrintService {
                     </div>
                 </div>
                 <div class="text-center bilhete-numeros">
-                    ${item.numeros.toString().replace(/,/g, "-")}
+                    ${item.numeros.join("-")}
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
