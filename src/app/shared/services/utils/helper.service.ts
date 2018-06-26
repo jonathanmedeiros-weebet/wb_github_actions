@@ -129,6 +129,7 @@ export class HelperService {
             minimumFractionDigits: 2
         }).format(value);
 
+
         //precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
         return `R$ ${money}`;
     }

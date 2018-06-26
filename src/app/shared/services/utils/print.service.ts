@@ -197,7 +197,7 @@ export class PrintService {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${this.helperService.moneyFormat(aposta.valor)}
+Valor Total: R$ ${this.helperService.moneyFormat(aposta.valor)}
 `;
 
         for (let i in aposta.itens) {
@@ -205,9 +205,11 @@ Valor Total: ${this.helperService.moneyFormat(aposta.valor)}
             ticket += `----------------------------
 ${item.sorteio_nome}
 Dezenas: ${item.numeros.join('-')}
-Valor: ${this.helperService.moneyFormat(item.valor)}
-Premio: ${this.helperService.moneyFormat(item.valor * item.cotacao)}`;
+Valor: R$ ${this.helperService.moneyFormat(item.valor)}
+Premio: R$ ${this.helperService.moneyFormat(item.valor * item.cotacao)}
+`;
         }
+
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); //file://
     }
