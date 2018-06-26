@@ -1,5 +1,5 @@
 
-const _host = 'http://weebet.local';
+const _host = 'http://teste.wee.bet';
 
 export const config: any = {
     HOST: _host,
