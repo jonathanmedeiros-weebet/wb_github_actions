@@ -1,5 +1,5 @@
 
-const _host = 'http://localhost/weebet';
+const _host = 'http://teste.wee.bet';
 
 export const config: any = {
     HOST: _host,
@@ -8,5 +8,6 @@ export const config: any = {
     PRIMARY_COLOR: '#14805e',
     SECONDARY_COLOR: '#B8C633',
     LOGO: `${_host}/tema/logo_banca.png`,
-    BANCA_NOME: 'Weebet'
+    BG: `${_host}/tema/bk.jpg`,
+    BANCA_NOME: 'Wee2bet'
 };
