@@ -163,10 +163,10 @@ export class SeninhaComponent implements OnInit {
     }
 
     /* Finalizar aposta */
-    create() {
+    create(action) {
         if (this.aposta.itens.length) {
             this.apostaService.create(this.aposta).subscribe(
-                result => this.success(result),
+                result => this.success(result, action),
                 error => this.handleError(error)
             );
         } else {
@@ -174,9 +174,13 @@ export class SeninhaComponent implements OnInit {
         }
     }
 
-    success(data) {
+    success(data, action) {
+        if (action == 'compartilhar') {
+            this.helper.sharedTicket(data.results);
+        } else {
+            this.printService.ticket(data.results);
+        }
 
-        this.printService.ticket(data.results);
         this.aposta = new Aposta(this.helper.guidGenerate());
         this.messageService.success("Aposta realizada!");
         this.closeCupom();

@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import {
     ApostaService, MessageService,
     PrintService, SorteioService,
-    AuthService
+    AuthService, HelperService
 } from './../services';
 import { Aposta, Sorteio } from './../models';
 import { config } from './../shared/config';
@@ -28,6 +28,7 @@ export class ApuracaoComponent implements OnInit {
         private messageService: MessageService,
         private printService: PrintService,
         private auth: AuthService,
+        private helper: HelperService,
         private fb: FormBuilder
     ) { }
 
@@ -103,14 +104,8 @@ export class ApuracaoComponent implements OnInit {
         this.printService.ticket(aposta);
     }
 
-    sharedTicket(aposta: Aposta) {
-        parent.postMessage(
-            {
-                data: `${config.HOST}/aposta/${aposta.chave}`,
-                action: 'shareURL'
-            },
-            'file://'
-        );
+    sharedTicket(aposta) {
+        this.helper.sharedTicket(aposta);
     }
 
     checkResult(sorteioId, numero) {

@@ -106,11 +106,22 @@ button{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    position: relative;
 }
+
+.pre-bilhete .remover-palpite{
+    font-size: 18px;
+    color: red;
+    position: absolute;
+    right: 5px;
+    top: -5px;
+}
+
 .pre-bilhete .item-header > div{
     flex-grow: 1;
     text-transform: capitalize;
 }
+
 .pre-bilhete .item-header > div span{
     font-weight: bold;
 }

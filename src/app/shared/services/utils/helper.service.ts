@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { config } from './../../config';
 import * as moment from 'moment';
 
 @Injectable()
@@ -144,4 +145,14 @@ export class HelperService {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
     };
+
+    sharedTicket(aposta) {
+        parent.postMessage(
+            {
+                data: `${config.HOST}/aposta/${aposta.chave}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
 }

@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form #apostaForm="ngForm" (ngSubmit)="create()">
+                        <form #apostaForm="ngForm">
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Apostador</label>
@@ -111,8 +111,13 @@
                                     <div class="invalid-feedback" [hidden]="telefone.valid && (telefone.dirty || telefone.touched)">Campo obrigatório</div>
                                 </div>
                             </div>
-                            <div>
-                                <button type="submit" [disabled]="!apostaForm.form.valid" class="btn btn-primary">Concluir Aposta</button>
+                            <div class="form-row">
+                                <div class="col">
+                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary" (click)="create('imprimir')">Finalizar e Imprimir</button>
+                                </div>
+                                <div class="col">
+                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary" (click)="create('compartilhar')">Finalizar e Compartilhar</button>
+                                </div>
                             </div>
                         </form>
                     </div>
