@@ -40,19 +40,19 @@
                 <div *ngFor="let aposta of apostas" class="aposta card">
                     <div class="aposta-header">
                         <div>
-                            Número:
+                            <label>Número:</label>
                             <em>#{{aposta.id}}</em>
                         </div>
                         <div>
-                            Apostador:
+                            <label>Apostador:</label>
                             <em>{{aposta.apostador}}</em>
                         </div>
                         <div>
-                            Telefone:
+                            <label>Telefone:</label>
                             <em>{{aposta.apostador}}</em>
                         </div>
                         <div>
-                            Horário:
+                            <label>Horário:</label>
                             <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
                         </div>
                         <div>
@@ -60,7 +60,7 @@
                                 <i class="fa fa-print"></i>
                             </button>
                             <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
-                                <i class="fa fa-share"></i>
+                                <i class="fa fa-share-alt"></i>
                             </button>
                         </div>
                     </div>

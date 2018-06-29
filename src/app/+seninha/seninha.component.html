@@ -115,7 +115,7 @@
                                 <div class="col">
                                     <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary" (click)="create('imprimir')">Finalizar e Imprimir</button>
                                 </div>
-                                <div class="col">
+                                <div class="col" *ngIf="appMobile">
                                     <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary" (click)="create('compartilhar')">Finalizar e Compartilhar</button>
                                 </div>
                             </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../services';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import {
@@ -25,6 +26,7 @@ export class QuininhaComponent implements OnInit {
     itemForm: FormGroup;
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
+    appMobile;
 
     constructor(
         private apostaService: ApostaService,
@@ -33,7 +35,8 @@ export class QuininhaComponent implements OnInit {
         private messageService: MessageService,
         private printService: PrintService,
         private helper: HelperService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private auth: AuthService
     ) { }
 
     ngOnInit() {

@@ -17,9 +17,17 @@
     margin-top: -5px;
 }
 
+.aposta-header label{
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+}
+
 .aposta-header em{
     font-style: normal;
     font-weight: bold;
+    text-align: center;
+    display: block;
 }
 
 .aposta-itens{
@@ -40,7 +48,7 @@
 }
 
 .aposta-item > div{
-   margin-right: 10px;
+   margin-right: 15px;
 }
 
 .aposta-item div > label{
@@ -76,4 +84,15 @@
 
 .miss{
     background-color: red;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .aposta-header label {
+        display: inline;
+    }
+
+    .aposta-header em {
+        display: inline;
+    }
 }
