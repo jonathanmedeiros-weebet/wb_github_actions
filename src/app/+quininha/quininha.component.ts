@@ -18,7 +18,7 @@ import * as moment from 'moment';
     templateUrl: 'quininha.component.html'
 })
 export class QuininhaComponent implements OnInit {
-    numbers = _.range(1, 61);
+    numbers = _.range(1, 81);
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
