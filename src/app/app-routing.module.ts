@@ -18,7 +18,7 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: 'live',
                 pathMatch: 'full'
             },
             {
@@ -40,6 +40,13 @@ const appRoutes: Routes = [
                 loadChildren: 'app/+futebol/futebol.module#FutebolModule',
                 data: {
                     pageTitle: 'Futebol'
+                }
+            },
+            {
+                path: 'live',
+                loadChildren: 'app/+live/live.module#LiveModule',
+                data: {
+                    pageTitle: 'Live'
                 }
             },
             {
