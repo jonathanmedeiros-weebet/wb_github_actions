@@ -1,8 +1,11 @@
 /* General Services */
 export * from './shared/services/aposta.service';
+export * from './shared/services/campeonato.service';
+export * from './shared/services/cotacao.service';
+export * from './shared/services/jogo.service';
+export * from './shared/services/live.service';
 export * from './shared/services/sorteio.service';
 export * from './shared/services/tipo-aposta.service';
-export * from './shared/services/live.service';
 
 /* Utils Services */
 export * from './shared/services/utils/cep.service';

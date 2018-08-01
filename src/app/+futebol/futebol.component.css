@@ -1,3 +1,7 @@
+li{
+    cursor: pointer;
+}
+
 #futebol-section{
     display: flex;
     flex-direction: row;

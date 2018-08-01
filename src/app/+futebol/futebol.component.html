@@ -5,176 +5,198 @@
         <nav class="campeonatos-regios-nav">
             <ul>
                 <li class="group">Data</li>
-                <li><a>Jogos de Hoje</a></li>
-                <li><a>Jogos de Amanhã</a></li>
+                <li (click)="getJogosPorData(hoje)">
+                    <a>Jogos de Hoje</a>
+                </li>
+                <li (click)="getJogosPorData(amanha)">
+                    <a>Jogos de Amanhã</a>
+                </li>
 
                 <li class="group">Principais</li>
-                <li><a><img src="assets/images/flag.png"/> BRASIL SÉRIE A</a></li>
-                <li><a><img src="assets/images/flag.png"/> COPA DO BRASIL</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIBERTADORES</a></li>
+                <li>
+                    <a>
+                        <img src="assets/images/flag.png" /> LOREM IPSUM
+                    </a>
+                </li>
 
                 <li class="group">Outros Campeonatos</li>
-                <li><a><img src="assets/images/flag.png"/> PERNAMBUCANO</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIGA ARGENTINA</a></li>
-                <li><a><img src="assets/images/flag.png"/> PERNAMBUCANO</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIGA ARGENTINA</a></li>
-                <li><a><img src="assets/images/flag.png"/> PERNAMBUCANO</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIGA ARGENTINA</a></li>
-                <li><a><img src="assets/images/flag.png"/> PERNAMBUCANO</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIGA ARGENTINA</a></li>
-                <li><a><img src="assets/images/flag.png"/> PERNAMBUCANO</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIGA ARGENTINA</a></li>
-                <li><a><img src="assets/images/flag.png"/> PERNAMBUCANO</a></li>
-                <li><a><img src="assets/images/flag.png"/> LIGA ARGENTINA</a></li>
+                <li *ngFor="let camp of campeonatos" (click)="getJogosPorCampeonato(camp)">
+                    <a>
+                        <img src="assets/images/flag.png" /> {{camp.nome}}
+                    </a>
+                </li>
             </ul>
         </nav>
 
     </section>
 
-    <section class="content-sports">
-
-        <div class="campeonato">
+    <section class="content-sports" *ngIf="diaEspecifico;else templateName">
+        <div class="campeonato" *ngFor="let campeonato of campeonatos">
             <div class="campeonato-header">
-                <h1>Brasileiração Série A</h1>
+                <h1>{{campeonato.nome}}</h1>
             </div>
             <div class="jogos">
-                <div class="jogo">
+                <div class="jogo" *ngFor="let jogo of campeonato.jogos">
                     <div class="jogo-header">
                         <div class="indentificacao">
-                            <span class="horario">14:50</span>
-                            <h3>SPORT RECIFE</h3>
-                            <img src="assets/images/timea.png"/>
+                            <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
+                            <h3>{{jogo.time_a_nome}}</h3>
+                            <img src="assets/images/timea.png" />
                             <span>x</span>
-                            <img src="assets/images/timeb.png"/>
-                            <h3>SÃO PAULO</h3>
+                            <img src="assets/images/timeb.png" />
+                            <h3>{{jogo.time_b_nome}}</h3>
+                            <div style="background-color: red; color:white; padding: 3px;" *ngIf="jogo.ao_vivo">
+                                AO VIVO
+                            </div>
                         </div>
                         <div class="odds-principais">
-                            <div>
-                                CASA: <span>2.45</span>
-                            </div>
-                            <div>
-                                CASA: <span>2.45</span>
-                            </div>
-                            <div>
-                                CASA: <span>2.45</span>
+                            <div *ngFor="let cotacao of jogo.cotacoes_principais">
+                                {{cotacao.chave}}:
+                                <span>{{cotacao.valor}}</span>
                             </div>
                             <div class="mais-opcoes">
                                 <i class="fa fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="jogo-content">
-                        <div class="tipos-odds">
-                            <h2 class="tipo-odd">HANDICAP</h2>
-                            <div class="odds">
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                            </div>
-                            <h2 class="tipo-odd">HANDICAP</h2>
-                            <div class="odds">
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="jogo">
-                    <div class="jogo-header">
-                        <div class="indentificacao">
-                            <span class="horario">14:50</span>
-                            <h3>SPORT RECIFE</h3>
-                            <img src="assets/images/timea.png"/>
-                            <span>x</span>
-                            <img src="assets/images/timeb.png"/>
-                            <h3>SÃO PAULO</h3>
-                        </div>
-                        <div class="odds-principais">
-                            <div>
-                                CASA: <span>2.45</span>
-                            </div>
-                            <div>
-                                CASA: <span>2.45</span>
-                            </div>
-                            <div>
-                                CASA: <span>2.45</span>
-                            </div>
-                            <div class="mais-opcoes">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="jogo-content">
-                        <div class="tipos-odds">
-                            <h2 class="tipo-odd">HANDICAP</h2>
-                            <div class="odds">
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                            </div>
-                            <h2 class="tipo-odd">HANDICAP</h2>
-                            <div class="odds">
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
-                                <div>CASA: <span>2.45</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
+    <ng-template #templateName>
+        <div class="campeonato">
+            <div class="campeonato-header">
+                <h1>{{campeonatoAtual?.nome}}</h1>
+            </div>
+            <div class="jogos">
+                <div class="jogo" *ngFor="let jogo of jogos">
+                    <div class="jogo-header">
+                        <div class="indentificacao">
+                            <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
+                            <h3>{{jogo.time_a_nome}}</h3>
+                            <img src="assets/images/timea.png" />
+                            <span>x</span>
+                            <img src="assets/images/timeb.png" />
+                            <h3>{{jogo.time_b_nome}}</h3>
+                            <div style="background-color: red; color:white; padding: 3px;" *ngIf="jogo.ao_vivo">
+                                AO VIVO
+                            </div>
+                        </div>
+                        <div class="odds-principais">
+                            <div *ngFor="let cotacao of jogo.cotacoes_principais">
+                                {{cotacao.chave}}:
+                                <span>{{cotacao.valor}}</span>
+                            </div>
+                            <div class="mais-opcoes">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="jogo-content">
+                                <div class="tipos-odds">
+                                    <h2 class="tipo-odd">HANDICAP</h2>
+                                    <div class="odds">
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                    </div>
+                                    <h2 class="tipo-odd">HANDICAP</h2>
+                                    <div class="odds">
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                        <div>CASA:
+                                            <span>2.45</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
 
     <section class="side-2-sports">
         <div class="pre-bilhete-esportes">
