@@ -39,7 +39,7 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        localStorage.removeItem('app-mobile');
+        //localStorage.removeItem('app-mobile');
         localStorage.removeItem('expires');
     }
 
