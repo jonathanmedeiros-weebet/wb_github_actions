@@ -33,7 +33,7 @@ export class FutebolComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        // this.sub.unsubscribe();
     }
 
 
@@ -64,5 +64,18 @@ export class FutebolComponent implements OnInit, OnDestroy {
             jogos => this.jogos = jogos,
             error => this.messageService.error(error)
         );
+    }
+
+    getCotacoes(jogo) {
+        console.log('jogo');
+
+        this.jogoService.getCotacoes(jogo._id)
+            .subscribe(
+                cotacoes => {
+                    console.log(cotacoes);
+                    jogo.cotacoes = cotacoes;
+                },
+                error => this.messageService.error(error)
+            );
     }
 }

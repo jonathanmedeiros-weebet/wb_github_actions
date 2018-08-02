@@ -21,13 +21,11 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.titleService.setTitle(config.BANCA_NOME);
 
+        if(location.search.indexOf('app') >= 0) {
+            this.auth.setAppMobile();
+        }
+
         let element = document.querySelector('html');
         element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
-
-        this.route.queryParams.subscribe(params => {
-            if (params['app'] && !this.auth.isAppMobile()) {
-                this.auth.setAppMobile();
-            }
-        });
     }
 }

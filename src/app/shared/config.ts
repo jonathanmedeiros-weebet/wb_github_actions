@@ -11,5 +11,5 @@ export const config: any = {
     SECONDARY_COLOR: '#B8C633',
     LOGO: `${_host}/tema/logo_banca.png`,
     BG: `${_host}/tema/bk.jpg`,
-    BANCA_NOME: 'Wee2bet'
+    BANCA_NOME: 'Demo'
 };

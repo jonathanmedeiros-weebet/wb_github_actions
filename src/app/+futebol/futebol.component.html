@@ -54,8 +54,19 @@
                                 {{cotacao.chave}}:
                                 <span>{{cotacao.valor}}</span>
                             </div>
-                            <div class="mais-opcoes">
+                            <div class="mais-opcoes" (click)="getCotacoes(jogo)">
                                 <i class="fa fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jogo-content" *ngIf="jogo.cotacoes">
+                        <div class="tipos-odds">
+                            <h2 class="tipo-odd">HANDICAP</h2>
+                            <div class="odds">
+                                <div *ngFor="let cotacao of jogo.cotacoes">
+                                    {{cotacao.chave}}:
+                                    <span>{{cotacao.valor}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,111 +98,22 @@
                                 {{cotacao.chave}}:
                                 <span>{{cotacao.valor}}</span>
                             </div>
-                            <div class="mais-opcoes">
+                            <div class="mais-opcoes" (click)="getCotacoes(jogo)">
                                 <i class="fa fa-plus"></i>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="jogo-content">
-                                <div class="tipos-odds">
-                                    <h2 class="tipo-odd">HANDICAP</h2>
-                                    <div class="odds">
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                    </div>
-                                    <h2 class="tipo-odd">HANDICAP</h2>
-                                    <div class="odds">
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                        <div>CASA:
-                                            <span>2.45</span>
-                                        </div>
-                                    </div>
+                    <div class="jogo-content" *ngIf="jogo.cotacoes">
+                        <div class="tipos-odds">
+                            <h2 class="tipo-odd">HANDICAP</h2>
+                            <div class="odds">
+                                <div *ngFor="let cotacao of jogo.cotacoes">
+                                    {{cotacao.chave}}:
+                                    <span>{{cotacao.valor}}</span>
                                 </div>
-                            </div> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
