@@ -118,24 +118,26 @@ export class SeninhaComponent implements OnInit {
     /* Geração dos números aleatórios */
     generateGuess(length) {
         let numbers = [];
+
         for (let index = 0; index < length; index++) {
-            let number = this.generateRandomNumber();
+            let number = this.generateRandomNumber(numbers);
             numbers.push(number);
-            numbers.sort((a, b) => a - b);
         }
 
+        numbers.sort((a, b) => a - b);
         this.setNumeros(numbers);
     }
 
     /* Gerar número randômico */
-    generateRandomNumber() {
-        let number = _.random(1, 61);
-        let find = this.numeros.value.find(n => n == number);
+    generateRandomNumber(numbers: Number[]) {
+        let number = _.random(1, 60);
+
+        let find = numbers.find(n => n == number);
 
         if (!find) {
             return number;
         } else {
-            return this.generateRandomNumber();
+            return this.generateRandomNumber(numbers);
         }
     }
 

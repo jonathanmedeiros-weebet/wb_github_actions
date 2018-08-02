@@ -6,12 +6,12 @@ import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './utils/headers.service';
 import { ErrorService } from './utils/error.service';
-import { TipoAposta } from './../../models';
+import { Campeonato, Jogo } from './../../models';
 import { config } from '../config';
 
 @Injectable()
-export class TipoApostaService {
-    private TipoApostaUrl = `${config.LOTTERIES_URL}/tipos-aposta`; // URL to web api
+export class CampeonatoService {
+    private CampeonatoUrl = `${config.CENTER_URL}/campeonatos`;
 
     constructor(
         private http: HttpClient,
@@ -19,7 +19,9 @@ export class TipoApostaService {
         private errorService: ErrorService
     ) { }
 
-    getTiposAposta(queryParams?: any): Observable<any> {
+    getJogos(id: number, queryParams: any): Observable<Jogo[]> {
+        const url = `${this.CampeonatoUrl}/${id}/jogos`;
+
         let requestOptions;
 
         if (queryParams) {
@@ -28,20 +30,11 @@ export class TipoApostaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.TipoApostaUrl, requestOptions)
+        return this.http.get(url, requestOptions)
             .pipe(
-                map((res: any) => res.results),
+                map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
     }
 
-    getTipoAposta(id: number): Observable<TipoAposta> {
-        const url = `${this.TipoApostaUrl}/${id}`;
-
-        return this.http.get(url, this.header.getRequestOptions(true))
-            .pipe(
-                map((res: any) => res.results),
-                catchError(this.errorService.handleError)
-            );
-    }
 }

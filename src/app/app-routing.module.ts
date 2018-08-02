@@ -43,6 +43,13 @@ const appRoutes: Routes = [
                 }
             },
             {
+                path: 'live',
+                loadChildren: 'app/+live/live.module#LiveModule',
+                data: {
+                    pageTitle: 'Live'
+                }
+            },
+            {
                 path: 'resultados',
                 loadChildren: 'app/+resultados/resultados.module#ResultadosModule',
                 data: {

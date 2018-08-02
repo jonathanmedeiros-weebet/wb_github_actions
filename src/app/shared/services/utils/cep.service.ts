@@ -1,11 +1,10 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
-import { ErrorService } from './error.service';
+import { throwError as observableThrowError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { ErrorService } from './error.service';
 
 @Injectable()
 export class CepService {
@@ -22,10 +21,10 @@ export class CepService {
 
             //Valida o formato do CEP.
             if (validacep.test(cep)) {
-                return this.http.get(`//viacep.com.br/ws/${cep}/json`)
-                    .catch(this.errorService.handleError);
+                return this.http.get(`//viacep.com.br/ws/${cep}/json`).pipe(
+                    catchError(this.errorService.handleError));
             } else {
-                return Observable.throw('CEP inválido.');
+                return observableThrowError('CEP inválido.');
             }
         }
     }

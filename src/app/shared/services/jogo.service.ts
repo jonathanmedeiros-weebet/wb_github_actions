@@ -6,12 +6,12 @@ import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './utils/headers.service';
 import { ErrorService } from './utils/error.service';
-import { TipoAposta } from './../../models';
+import { Jogo, Cotacao, Campeonato } from './../../models';
 import { config } from '../config';
 
 @Injectable()
-export class TipoApostaService {
-    private TipoApostaUrl = `${config.LOTTERIES_URL}/tipos-aposta`; // URL to web api
+export class JogoService {
+    private JogoUrl = `${config.CENTER_URL}/jogos`;
 
     constructor(
         private http: HttpClient,
@@ -19,7 +19,7 @@ export class TipoApostaService {
         private errorService: ErrorService
     ) { }
 
-    getTiposAposta(queryParams?: any): Observable<any> {
+    getJogosPorData(queryParams?: any): Observable<Campeonato[]> {
         let requestOptions;
 
         if (queryParams) {
@@ -28,20 +28,31 @@ export class TipoApostaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.TipoApostaUrl, requestOptions)
+        return this.http.get(this.JogoUrl, requestOptions)
             .pipe(
-                map((res: any) => res.results),
+                map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
     }
 
-    getTipoAposta(id: number): Observable<TipoAposta> {
-        const url = `${this.TipoApostaUrl}/${id}`;
+    getCotacoes(id: number): Observable<Cotacao[]> {
+        const url = `${this.JogoUrl}/${id}/cotacoes`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
-                map((res: any) => res.results),
+                map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
     }
+
+    getCotacao(id: number, chave: string): Observable<Cotacao[]> {
+        const url = `${this.JogoUrl}/${id}/cotacoes/${chave}`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
 }

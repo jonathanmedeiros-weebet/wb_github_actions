@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './utils/headers.service';
@@ -48,6 +48,8 @@ export class ApostaService {
     create(aposta): Observable<any> {
         let url = `${this.ApostaUrl}/create`;
         return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
-            .catch(this.errorService.handleError);
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 }

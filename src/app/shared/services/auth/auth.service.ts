@@ -1,13 +1,12 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
 import { config } from './../../config';
 
-import * as _ from 'lodash';
 import * as moment from 'moment';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class AuthService {
         private errorService: ErrorService
     ) { }
 
-    login(data: any): Observable<void> {
+    login(data: any): Observable<any> {
         return this.http
             .post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
@@ -47,28 +46,34 @@ export class AuthService {
         return localStorage.getItem('token') ? true : false;
     }
 
-    forgot(data: any): Observable<void> {
+    forgot(data: any): Observable<any> {
         const url = `${this.AuthUrl}/forgotPassword`;
 
         return this.http
             .post(url, JSON.stringify(data), this.header.getRequestOptions())
-            .catch(this.errorService.handleError);
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
-    resetPassword(data: any): Observable<void> {
+    resetPassword(data: any): Observable<any> {
         const url = `${this.AuthUrl}/resetPassword`;
 
         return this.http
             .post(url, JSON.stringify(data), this.header.getRequestOptions())
-            .catch(this.errorService.handleError);
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
-    changePassword(data: any): Observable<void> {
+    changePassword(data: any): Observable<any> {
         const url = `${this.AuthUrl}/changePassword`;
 
         return this.http
             .post(url, JSON.stringify(data), this.header.getRequestOptions(true))
-            .catch(this.errorService.handleError);
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
     getToken() {
