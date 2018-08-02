@@ -1,0 +1,33 @@
+<section id="futebol-section">
+
+    <section class="side-1-sports">
+
+        <nav class="campeonatos-regios-nav">
+            <ul>
+                <li class="group">Data</li>
+                <li>
+                    <a [routerLink]="['/futebol/jogos']">Jogos de Hoje</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/futebol/jogos']" [queryParams]="{ data: amanha }">
+                        Jogos de Amanhã
+                    </a>
+                </li>
+                <li class="group">Campeonatos</li>
+                <li *ngFor="let camp of campeonatos">
+                    <a [routerLink]="['/futebol/jogos']" [queryParams]="{ campeonato: camp._id }">
+                        <img src="assets/images/flag.png" /> {{camp.nome}}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+    <router-outlet></router-outlet>
+
+    <section class="side-2-sports">
+        <div class="pre-bilhete-esportes">
+        </div>
+    </section>
+
+</section>

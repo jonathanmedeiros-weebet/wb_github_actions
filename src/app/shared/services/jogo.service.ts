@@ -19,6 +19,16 @@ export class JogoService {
         private errorService: ErrorService
     ) { }
 
+    getJogo(id: Number): Observable<Jogo> {
+        const url = `${this.JogoUrl}/${id}`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getJogosPorData(queryParams?: any): Observable<Campeonato[]> {
         let requestOptions;
 

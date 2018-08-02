@@ -1,0 +1,17 @@
+<p>
+    {{jogo.time_a_nome}} x {{jogo.time_b_nome}}
+</p>
+<p>
+    {{jogo?.horario | moment: 'DD/MM/YYYY HH:mm'}}
+</p>
+<div class="jogo-content" *ngIf="jogo.cotacoes">
+    <div class="tipos-odds">
+        <h2 class="tipo-odd">Cotações</h2>
+        <div class="odds">
+            <div *ngFor="let cotacao of jogo.cotacoes">
+                <b>{{cotacao.chave}}: </b>
+                <span>{{cotacao.valor}}</span>
+            </div>
+        </div>
+    </div>
+</div>

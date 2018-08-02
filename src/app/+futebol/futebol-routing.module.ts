@@ -1,17 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FutebolComponent } from './futebol.component';
+import { FutebolComponent } from './wrapper/futebol.component';
+import { JogosComponent } from './jogos/jogos.component';
+import { JogoComponent } from './jogo/jogo.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: FutebolComponent
-  }
+    {
+        path: '',
+        component: FutebolComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'jogos',
+                pathMatch: 'full'
+            },
+            {
+                path: 'jogos',
+                component: JogosComponent
+            },
+            {
+                path: 'jogo/:id',
+                component: JogoComponent
+            }
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class FutebolRoutingModule {}
+export class FutebolRoutingModule { }
