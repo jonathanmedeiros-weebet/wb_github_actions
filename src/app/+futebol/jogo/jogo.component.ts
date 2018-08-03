@@ -39,8 +39,7 @@ export class JogoComponent implements OnInit, OnDestroy {
             }
         });
 
-        this.bilhete = this.bilheteService.getBilhete();
-        this.bilheteSub = this.bilheteService.emitirBilhete.subscribe(bilhete => this.bilhete = bilhete);
+        this.bilheteSub = this.bilheteService.bilheteAtual.subscribe(bilhete => this.bilhete = bilhete);
     }
 
     ngOnDestroy() {
@@ -49,10 +48,16 @@ export class JogoComponent implements OnInit, OnDestroy {
     }
 
     addCotacao(jogo, cotacao) {
-        this.bilhete.itens.push({
-            nomeJogo: jogo.nome,
-            cotacao: cotacao
-        });
+        const index = this.bilhete.itens.findIndex(item => item.cotacao.chave == cotacao.chave);
+
+        if (index >= 0) {
+            this.bilhete.itens.splice(index, 1);
+        } else {
+            this.bilhete.itens.push({
+                nomeJogo: jogo.nome,
+                cotacao: cotacao
+            });
+        }
 
         this.bilheteService.atualizarBilhete(this.bilhete);
     }

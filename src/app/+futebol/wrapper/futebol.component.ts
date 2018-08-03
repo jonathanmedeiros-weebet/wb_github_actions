@@ -27,8 +27,7 @@ export class FutebolComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.getJogos();
 
-        this.bilhete = this.bilheteService.getBilhete();
-        this.bilheteSub = this.bilheteService.emitirBilhete.subscribe(bilhete => this.bilhete = bilhete);
+        this.bilheteSub = this.bilheteService.bilheteAtual.subscribe(bilhete => this.bilhete = bilhete);
     }
 
     ngOnDestroy() {

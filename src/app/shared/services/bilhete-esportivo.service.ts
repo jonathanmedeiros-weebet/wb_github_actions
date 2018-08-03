@@ -1,21 +1,29 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 
 import { BilheteEsportivo } from '../../models';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class BilheteEsportivoService {
-    @Output() emitirBilhete: EventEmitter<BilheteEsportivo> = new EventEmitter();
-    bilhete: BilheteEsportivo = new BilheteEsportivo();
+    private bilheteSource = new BehaviorSubject<BilheteEsportivo>(new BilheteEsportivo());
+    bilheteAtual = this.bilheteSource.asObservable();
 
-    constructor() { }
+    constructor() {
+        const bilhete = this.getBilheteEsportivo();
 
-    atualizarBilhete(bilhete): void {
-        this.bilhete = bilhete;
-
-        this.emitirBilhete.emit(this.bilhete);
+        if (bilhete) {
+            this.atualizarBilhete(bilhete);
+        }
     }
 
-    getBilhete() {
-        return this.bilhete;
+    atualizarBilhete(bilhete): void {
+        const bilheteSerializado = JSON.stringify(bilhete);
+        localStorage.setItem('bilhete-esportivo', bilheteSerializado);
+
+        this.bilheteSource.next(bilhete);
+    }
+
+    getBilheteEsportivo() {
+        return JSON.parse(localStorage.getItem('bilhete-esportivo'));
     }
 }
