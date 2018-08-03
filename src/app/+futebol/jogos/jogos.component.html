@@ -37,7 +37,7 @@
             <h1>{{campeonato.nome}}</h1>
         </div>
         <div class="jogos">
-            <div class="jogo" *ngFor="let jogo of jogos">
+            <div class="jogo" *ngFor="let jogo of campeonato.jogos">
                 <div class="jogo-header">
                     <div class="indentificacao">
                         <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>

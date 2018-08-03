@@ -6,7 +6,7 @@ import { FutebolComponent } from './wrapper/futebol.component';
 import { JogosComponent } from './jogos/jogos.component';
 import { JogoComponent } from './jogo/jogo.component';
 
-import { JogoService, CampeonatoService } from './../services';
+import { JogoService, CampeonatoService, BilheteEsportivoService } from './../services';
 
 @NgModule({
     imports: [SharedModule, FutebolRoutingModule],
@@ -17,7 +17,8 @@ import { JogoService, CampeonatoService } from './../services';
     ],
     providers: [
         JogoService,
-        CampeonatoService
+        CampeonatoService,
+        BilheteEsportivoService
     ]
 })
 export class FutebolModule { }

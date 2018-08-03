@@ -29,7 +29,7 @@ export class JogoService {
             );
     }
 
-    getJogosPorData(queryParams?: any): Observable<Campeonato[]> {
+    getJogos(queryParams?: any): Observable<Campeonato[]> {
         let requestOptions;
 
         if (queryParams) {

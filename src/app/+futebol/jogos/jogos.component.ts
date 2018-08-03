@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Campeonato, Jogo } from './../../models';
 import { JogoService, CampeonatoService, MessageService } from './../../services';
@@ -18,46 +18,40 @@ export class JogosComponent implements OnInit {
     diaEspecifico = true;
     campeonato: Campeonato = new Campeonato();
     campeonatos: Campeonato[];
-    jogos: Jogo[];
     sub: Subscription;
 
     constructor(
         private jogoService: JogoService,
         private campeonatoService: CampeonatoService,
         private messageService: MessageService,
-        private route: ActivatedRoute,
-        private router: Router
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
-
         this.sub = this.route.queryParams.subscribe((params: any) => {
             if (params['campeonato']) {
-                this.diaEspecifico = false;
-                this.campeonato.nome = "TESTE";
-
                 const campeonatoId = +params['campeonato'];
-                const queryParams = { dataInicial: moment().format('YYYY-MM-DD') };
 
-                this.campeonatoService.getJogos(campeonatoId, queryParams).subscribe(
-                    jogos => {
-                        this.jogos = jogos;
+                this.campeonatoService.getCampeonato(campeonatoId).subscribe(
+                    campeonato => {
+                        this.diaEspecifico = false;
+                        this.campeonato = campeonato;
                     },
                     error => this.messageService.error(error)
                 );
             } else {
-                console.log('xd');
-                let data = moment().format('YYYY-MM-DD');
+                let queryParams = {};
 
                 if (params['data']) {
-                    data = moment(params['data']).format('YYYY-MM-DD');
+                    const data = moment(params['data']).format('YYYY-MM-DD');
+                    queryParams = { data: data };
+                } else {
+                    queryParams = { data: moment().format('YYYY-MM-DD') };
                 }
 
-                this.diaEspecifico = true;
-                const queryParams = { data: data };
-
-                this.jogoService.getJogosPorData(queryParams).subscribe(
+                this.jogoService.getJogos(queryParams).subscribe(
                     campeonatos => {
+                        this.diaEspecifico = true;
                         this.campeonatos = campeonatos;
                     },
                     error => this.messageService.error(error)

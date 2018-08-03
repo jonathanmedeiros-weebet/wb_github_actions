@@ -19,6 +19,24 @@ export class CampeonatoService {
         private errorService: ErrorService
     ) { }
 
+    getCampeonato(id: number, queryParams?: any): Observable<Campeonato> {
+        const url = `${this.CampeonatoUrl}/${id}`;
+
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getJogos(id: number, queryParams: any): Observable<Jogo[]> {
         const url = `${this.CampeonatoUrl}/${id}/jogos`;
 

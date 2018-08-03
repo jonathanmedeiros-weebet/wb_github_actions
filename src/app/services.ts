@@ -1,5 +1,6 @@
 /* General Services */
 export * from './shared/services/aposta.service';
+export * from './shared/services/bilhete-esportivo.service';
 export * from './shared/services/campeonato.service';
 export * from './shared/services/cotacao.service';
 export * from './shared/services/jogo.service';

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Rx';
-import { MessageService, JogoService } from '../../services';
-import { Campeonato } from '../../models';
+import { MessageService, JogoService, BilheteEsportivoService } from '../../services';
+import { Campeonato, BilheteEsportivo } from '../../models';
 
 import * as moment from 'moment';
 
@@ -12,28 +12,34 @@ import * as moment from 'moment';
     styleUrls: ['futebol.component.css']
 })
 export class FutebolComponent implements OnInit, OnDestroy {
-    hoje = moment().format('YYYY-MM-DD');
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     campeonatos: Campeonato[];
+    bilhete: BilheteEsportivo;
+    bilheteSub: Subscription;
     sub: Subscription;
 
     constructor(
         private jogoService: JogoService,
+        private bilheteService: BilheteEsportivoService,
         private messageService: MessageService
     ) { }
 
     ngOnInit() {
-        this.getJogosPorData(this.hoje);
+        this.getJogos();
+
+        this.bilhete = this.bilheteService.getBilhete();
+        this.bilheteSub = this.bilheteService.emitirBilhete.subscribe(bilhete => this.bilhete = bilhete);
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+        this.bilheteSub.unsubscribe();
     }
 
-    getJogosPorData(data) {
-        const params = { data: data };
+    getJogos() {
+        const params = { fields: ['_id', 'nome'] };
 
-        this.jogoService.getJogosPorData(params).subscribe(
+        this.sub = this.jogoService.getJogos(params).subscribe(
             campeonatos => this.campeonatos = campeonatos,
             error => this.messageService.error(error)
         );

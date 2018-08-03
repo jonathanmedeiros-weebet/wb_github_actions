@@ -2,36 +2,46 @@ li{
     cursor: pointer;
 }
 
-#futebol-section{
+#sports-wrapper{
     display: flex;
     flex-direction: row;
 }
 
-.side-1-sports{
+.sports-menu{
     width: 180px;
 }
 
+.sports-content{
+    flex-grow: 1;
+    padding: 0px 15px;
+}
 
-.campeonatos-regios-nav ul{
+.sports-ticket{
+    border-left: 1px solid;
+    width: 270px;
+    text-align: center;
+}
+
+.leagues-regional-nav ul{
     padding-left: 0px;
 }
 
-.campeonatos-regios-nav ul li{
+.leagues-regional-nav ul li{
     list-style: none;
     background-color: var(--background-menu);
 }
 
-.campeonatos-regios-nav ul li.group{
+.leagues-regional-nav ul li.group{
     padding: 5px;
     color: #000;
 }
 
-.campeonatos-regios-nav ul li a{
+.leagues-regional-nav ul li a{
     display: block;
     padding: 5px;
     color: var(--text-menu);
 }
 
-.campeonatos-regios-nav ul li a img{
+.leagues-regional-nav ul li a img{
     width: 20px;
 }
