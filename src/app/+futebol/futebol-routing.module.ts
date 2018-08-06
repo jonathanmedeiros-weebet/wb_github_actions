@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FutebolComponent } from './wrapper/futebol.component';
+import { FutebolWrapperComponent } from './wrapper/futebol-wrapper.component';
 import { JogosComponent } from './jogos/jogos.component';
 import { JogoComponent } from './jogo/jogo.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: FutebolComponent,
+        component: FutebolWrapperComponent,
         children: [
             {
                 path: '',

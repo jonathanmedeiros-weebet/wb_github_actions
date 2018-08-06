@@ -8,7 +8,7 @@ export class HelperService {
 
     constructor() { }
 
-    timeSubtraction(timeOne, timeTwo) {
+    static timeSubtraction(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
 
@@ -23,7 +23,7 @@ export class HelperService {
         return this.hoursDecimalToTime(time);
     }
 
-    timeAddition(timeOne, timeTwo) {
+    static timeAddition(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
         const firstChar1 = hourOneArray[0].charAt(0);
@@ -48,7 +48,7 @@ export class HelperService {
         return this.hoursDecimalToTime(time);
     }
 
-    hoursDecimalToTime(hoursDecimal) {
+    static hoursDecimalToTime(hoursDecimal) {
         let time: any = '';
         let hours: any = Math.trunc(hoursDecimal);
         let minutes: any = '';
@@ -83,7 +83,7 @@ export class HelperService {
         return time;
     }
 
-    hoursTimeToDecimal(hoursTime) {
+    static hoursTimeToDecimal(hoursTime) {
         let hoursTimeArray: any = hoursTime.split(':');
         let hours: any = parseInt(hoursTimeArray[0]);
         let minutes: any = parseInt(hoursTimeArray[1]);
@@ -98,7 +98,7 @@ export class HelperService {
         return parseFloat(hoursFormat.toFixed(2));
     }
 
-    orderDate(dateOne, dateTwo) {
+    static orderDate(dateOne, dateTwo) {
         let first = moment(dateOne, 'YYYY/MM/DD');
         let last = moment(dateTwo, 'YYYY/MM/DD');
 
@@ -111,7 +111,7 @@ export class HelperService {
         return [first, last];
     }
 
-    totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
+    static totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
         let initial = moment(dateTimeBegin);
         let end = moment(dateTimeEnd);
 
@@ -125,7 +125,7 @@ export class HelperService {
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
 
-    moneyFormat(value) {
+    static moneyFormat(value) {
         let money = new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: 2
         }).format(value);
@@ -135,7 +135,7 @@ export class HelperService {
         return `R$ ${money}`;
     }
 
-    guidGenerate() {
+    static guidGenerate() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
@@ -146,7 +146,7 @@ export class HelperService {
             s4() + '-' + s4() + s4() + s4();
     };
 
-    sharedTicket(aposta) {
+    static sharedTicket(aposta) {
         parent.postMessage(
             {
                 data: `${config.HOST}/aposta/${aposta.chave}`,

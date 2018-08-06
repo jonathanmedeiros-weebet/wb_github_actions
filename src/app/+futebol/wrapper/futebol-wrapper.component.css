@@ -1,0 +1,10 @@
+#sports-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.sports-content{
+    flex-grow: 1;
+    border-right: 1px solid black;
+    padding: 0 5px;
+}

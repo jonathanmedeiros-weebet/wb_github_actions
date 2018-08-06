@@ -21,7 +21,7 @@ export class SeninhaComponent implements OnInit {
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
-    aposta = new Aposta(this.helper.guidGenerate());
+    aposta = new Aposta();
     itemForm: FormGroup;
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
@@ -33,7 +33,6 @@ export class SeninhaComponent implements OnInit {
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
-        private helper: HelperService,
         private fb: FormBuilder,
         private auth: AuthService
     ) { }
@@ -183,12 +182,12 @@ export class SeninhaComponent implements OnInit {
 
     success(data, action) {
         if (action == 'compartilhar') {
-            this.helper.sharedTicket(data.results);
+            HelperService.sharedTicket(data.results);
         } else {
             this.printService.ticket(data.results);
         }
 
-        this.aposta = new Aposta(this.helper.guidGenerate());
+        this.aposta = new Aposta();
         this.messageService.success("Aposta realizada!");
         this.closeCupom();
     }

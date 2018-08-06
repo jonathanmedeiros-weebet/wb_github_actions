@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Jogo, BilheteEsportivo } from './../../models';
+import { Jogo, ItemBilheteEsportivo } from './../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../services';
 
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-futebol-jogo',
+    selector: 'futebol-jogo',
     templateUrl: 'jogo.component.html',
     styleUrls: ['jogo.component.css']
 })
 
 export class JogoComponent implements OnInit, OnDestroy {
     jogo: Jogo = new Jogo();
-    bilhete: BilheteEsportivo;
+    itens: ItemBilheteEsportivo[];
     bilheteSub: Subscription;
     sub: Subscription;
 
@@ -39,7 +39,7 @@ export class JogoComponent implements OnInit, OnDestroy {
             }
         });
 
-        this.bilheteSub = this.bilheteService.bilheteAtual.subscribe(bilhete => this.bilhete = bilhete);
+        this.bilheteSub = this.bilheteService.itensAtuais.subscribe(itens => this.itens = itens);
     }
 
     ngOnDestroy() {
@@ -48,17 +48,28 @@ export class JogoComponent implements OnInit, OnDestroy {
     }
 
     addCotacao(jogo, cotacao) {
-        const index = this.bilhete.itens.findIndex(item => item.cotacao.chave == cotacao.chave);
+        let modificado = false;
+        const index = this.itens.findIndex(item => (item.jogoId == jogo._id) && (item.cotacao.chave == cotacao.chave));
 
         if (index >= 0) {
-            this.bilhete.itens.splice(index, 1);
+            this.itens.splice(index, 1);
+            modificado = true;
         } else {
-            this.bilhete.itens.push({
-                nomeJogo: jogo.nome,
-                cotacao: cotacao
-            });
+            const item = this.itens.find(item => item.jogoId == jogo._id);
+
+            if (!item) {
+                this.itens.push({
+                    jogoId: jogo._id,
+                    jogoNome: jogo.nome,
+                    cotacao: cotacao
+                });
+
+                modificado = true;
+            }
         }
 
-        this.bilheteService.atualizarBilhete(this.bilhete);
+        if (modificado) {
+            this.bilheteService.atualizarItens(this.itens);
+        }
     }
 }

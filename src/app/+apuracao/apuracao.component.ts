@@ -28,7 +28,6 @@ export class ApuracaoComponent implements OnInit {
         private messageService: MessageService,
         private printService: PrintService,
         private auth: AuthService,
-        private helper: HelperService,
         private fb: FormBuilder
     ) { }
 
@@ -105,7 +104,7 @@ export class ApuracaoComponent implements OnInit {
     }
 
     sharedTicket(aposta) {
-        this.helper.sharedTicket(aposta);
+        HelperService.sharedTicket(aposta);
     }
 
     checkResult(sorteioId, numero) {

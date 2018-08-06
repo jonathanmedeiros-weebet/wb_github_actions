@@ -2,24 +2,8 @@ li{
     cursor: pointer;
 }
 
-#sports-wrapper{
-    display: flex;
-    flex-direction: row;
-}
-
 .sports-menu{
     width: 180px;
-}
-
-.sports-content{
-    flex-grow: 1;
-    padding: 0px 15px;
-}
-
-.sports-ticket{
-    border-left: 1px solid;
-    width: 270px;
-    text-align: center;
 }
 
 .leagues-regional-nav ul{

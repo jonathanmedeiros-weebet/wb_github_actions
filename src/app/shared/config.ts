@@ -6,6 +6,7 @@ export const config: any = {
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_URL: _center,
+    SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
     PRIMARY_COLOR: '#0165b1',
     SECONDARY_COLOR: '#0165b1',

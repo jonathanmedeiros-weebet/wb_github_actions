@@ -4,14 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { HeadersService } from './utils/headers.service';
-import { ErrorService } from './utils/error.service';
-import { Sorteio } from './../../models';
-import { config } from '../config';
+import { HeadersService } from './../utils/headers.service';
+import { ErrorService } from './../utils/error.service';
+import { TipoAposta } from './../../../models';
+import { config } from '../../config';
 
 @Injectable()
-export class SorteioService {
-    private SorteioUrl = `${config.LOTTERIES_URL}/sorteios`; // URL to web api
+export class TipoApostaService {
+    private TipoApostaUrl = `${config.LOTTERIES_URL}/tipos-aposta`; // URL to web api
 
     constructor(
         private http: HttpClient,
@@ -19,7 +19,7 @@ export class SorteioService {
         private errorService: ErrorService
     ) { }
 
-    getSorteios(queryParams?: any): Observable<any> {
+    getTiposAposta(queryParams?: any): Observable<any> {
         let requestOptions;
 
         if (queryParams) {
@@ -28,15 +28,15 @@ export class SorteioService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.SorteioUrl, requestOptions)
+        return this.http.get(this.TipoApostaUrl, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
 
-    getSorteio(id: number): Observable<Sorteio> {
-        const url = `${this.SorteioUrl}/${id}`;
+    getTipoAposta(id: number): Observable<TipoAposta> {
+        const url = `${this.TipoApostaUrl}/${id}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(

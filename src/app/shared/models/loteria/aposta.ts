@@ -1,8 +1,9 @@
+import { HelperService } from './../../services/utils/helper.service';
 import { Item } from './item';
 
 export class Aposta {
-    constructor(chave) {
-        this.chave = chave;
+    constructor() {
+        this.chave = HelperService.guidGenerate();
     }
 
     itens: Item[] = [];

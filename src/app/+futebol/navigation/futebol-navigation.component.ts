@@ -1,38 +1,32 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Rx';
-import { MessageService, JogoService, BilheteEsportivoService } from '../../services';
-import { Campeonato, BilheteEsportivo } from '../../models';
+import { MessageService, JogoService } from '../../services';
+import { Campeonato } from '../../models';
 
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-futebol',
-    templateUrl: 'futebol.component.html',
-    styleUrls: ['futebol.component.css']
+    selector: 'futebol-navigation',
+    templateUrl: 'futebol-navigation.component.html',
+    styleUrls: ['futebol-navigation.component.css']
 })
-export class FutebolComponent implements OnInit, OnDestroy {
+export class FutebolNavigationComponent implements OnInit, OnDestroy {
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     campeonatos: Campeonato[];
-    bilhete: BilheteEsportivo;
-    bilheteSub: Subscription;
     sub: Subscription;
 
     constructor(
         private jogoService: JogoService,
-        private bilheteService: BilheteEsportivoService,
         private messageService: MessageService
     ) { }
 
     ngOnInit() {
         this.getJogos();
-
-        this.bilheteSub = this.bilheteService.bilheteAtual.subscribe(bilhete => this.bilhete = bilhete);
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-        this.bilheteSub.unsubscribe();
     }
 
     getJogos() {

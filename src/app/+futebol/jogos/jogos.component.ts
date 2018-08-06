@@ -9,7 +9,7 @@ import * as moment from 'moment';
 
 
 @Component({
-    selector: 'app-futebol-jogos',
+    selector: 'futebol-jogos',
     templateUrl: 'jogos.component.html',
     styleUrls: ['jogos.component.css']
 })

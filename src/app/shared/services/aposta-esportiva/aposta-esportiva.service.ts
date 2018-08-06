@@ -4,14 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { HeadersService } from './utils/headers.service';
-import { ErrorService } from './utils/error.service';
-import { Aposta } from './../../models';
-import { config } from '../config';
+import { HeadersService } from './../utils/headers.service';
+import { ErrorService } from './../utils/error.service';
+import { Aposta } from './../../../models';
+import { config } from '../../config';
 
 @Injectable()
-export class ApostaService {
-    private ApostaUrl = `${config.LOTTERIES_URL}/apostas`; // URL to web api
+export class ApostaEsportivaService {
+    private ApostaUrl = `${config.SPORTS_URL}/apostas`; // URL to web api
 
     constructor(
         private http: HttpClient,

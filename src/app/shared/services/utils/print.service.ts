@@ -9,8 +9,7 @@ import * as moment from 'moment';
 @Injectable()
 export class PrintService {
     constructor(
-        private auth: AuthService,
-        private helperService: HelperService
+        private auth: AuthService
     ) { }
 
     ticket(aposta) {
@@ -125,7 +124,7 @@ export class PrintService {
                         Valor
                     </div>
                     <div style="float: right;">
-                        ${this.helperService.moneyFormat(item.valor)}
+                        ${HelperService.moneyFormat(item.valor)}
                     </div>
                 </div>
                 <div class="clearfix">
@@ -133,7 +132,7 @@ export class PrintService {
                         Prêmio
                     </div>
                     <div style="float: right;">
-                        ${this.helperService.moneyFormat(item.cotacao * item.valor)}
+                        ${HelperService.moneyFormat(item.cotacao * item.valor)}
                     </div>
                 </div>
             `;
@@ -165,7 +164,7 @@ export class PrintService {
                         Total
                     </div>
                     <div style="float: right;">
-                        ${this.helperService.moneyFormat(aposta.valor)}
+                        ${HelperService.moneyFormat(aposta.valor)}
                     </div>
                 </div>
             </div>
@@ -197,7 +196,7 @@ export class PrintService {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${this.helperService.moneyFormat(aposta.valor)}
+Valor Total: ${HelperService.moneyFormat(aposta.valor)}
 `;
 
         for (let i in aposta.itens) {
@@ -205,8 +204,8 @@ Valor Total: ${this.helperService.moneyFormat(aposta.valor)}
             ticket += `----------------------------
 ${item.sorteio_nome}
 Dezenas: ${item.numeros.join('-')}
-Valor: ${this.helperService.moneyFormat(item.valor)}
-Premio: ${this.helperService.moneyFormat(item.valor * item.cotacao)}
+Valor: ${HelperService.moneyFormat(item.valor)}
+Premio: ${HelperService.moneyFormat(item.valor * item.cotacao)}
 `;
         }
 
