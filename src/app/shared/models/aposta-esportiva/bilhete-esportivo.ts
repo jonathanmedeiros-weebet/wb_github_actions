@@ -1,5 +1,5 @@
-import { ItemBilheteEsportivo } from "./item-bilhete-esportivo";
-import { HelperService } from "../../services/utils/helper.service";
+import { ItemBilheteEsportivo } from './item-bilhete-esportivo';
+import { HelperService } from '../../services/utils/helper.service';
 
 export class BilheteEsportivo {
     constructor() {
@@ -8,9 +8,9 @@ export class BilheteEsportivo {
 
     cambistaId: number;
     apostador: string;
-    valor: number = 0;
+    valor = 0;
     horario: string;
     itens: ItemBilheteEsportivo[] = [];
     chave: string;
-    versao_app: string = "1.0";
+    versao_app = '1.0';
 }

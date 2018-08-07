@@ -7,7 +7,7 @@ import { JogoService, MessageService, BilheteEsportivoService } from './../../se
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'futebol-jogo',
+    selector: 'app-futebol-jogo',
     templateUrl: 'jogo.component.html',
     styleUrls: ['jogo.component.css']
 })
@@ -49,18 +49,19 @@ export class JogoComponent implements OnInit, OnDestroy {
 
     addCotacao(jogo, cotacao) {
         let modificado = false;
-        const index = this.itens.findIndex(item => (item.jogoId == jogo._id) && (item.cotacao.chave == cotacao.chave));
+        const index = this.itens.findIndex(item => (item.jogo_id === jogo._id) && (item.cotacao.chave === cotacao.chave));
 
         if (index >= 0) {
             this.itens.splice(index, 1);
             modificado = true;
         } else {
-            const item = this.itens.find(item => item.jogoId == jogo._id);
+            const item = this.itens.find(i => i.jogo_id === jogo._id);
 
             if (!item) {
                 this.itens.push({
-                    jogoId: jogo._id,
-                    jogoNome: jogo.nome,
+                    jogo_id: jogo._id,
+                    jogo_nome: jogo.nome,
+                    ao_vivo: jogo.ao_vivo,
                     cotacao: cotacao
                 });
 

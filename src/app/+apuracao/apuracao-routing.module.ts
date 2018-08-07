@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ApuracaoComponent } from './apuracao.component';
+import { ApuracaoFutebolComponent } from './futebol/apuracao-futebol.component';
+import { ApuracaoLoteriaComponent } from './loteria/apuracao-loteria.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    component: ApuracaoComponent
+    path: 'futebol',
+    component: ApuracaoFutebolComponent
+  },
+  {
+    path: 'loteria',
+    component: ApuracaoLoteriaComponent
   }
 ];
 

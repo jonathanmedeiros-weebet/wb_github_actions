@@ -6,7 +6,7 @@ export class HeadersService {
     constructor() { }
 
     getRequestOptions(sendToken?: boolean, queryParams?: any) {
-        let token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
 
         let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
         headers = headers.set('Content-Type', 'application/jsond');
@@ -17,8 +17,10 @@ export class HeadersService {
 
         let params = new HttpParams();
         if (queryParams) {
-            for (let key in queryParams) {
-                params = params.set(key, queryParams[key]);
+            for (const key in queryParams) {
+                if (queryParams.hasOwnProperty(key)) {
+                    params = params.set(key, queryParams[key]);
+                }
             }
         }
 

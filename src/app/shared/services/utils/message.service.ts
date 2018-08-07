@@ -41,6 +41,6 @@ export class MessageService {
             showHideTransition: 'plain',
             icon: 'warning',
             hideAfter: 7000
-        })
+        });
     }
 }

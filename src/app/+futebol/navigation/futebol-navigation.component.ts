@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs/Rx';
+// import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import { MessageService, JogoService } from '../../services';
 import { Campeonato } from '../../models';
 
 import * as moment from 'moment';
 
 @Component({
-    selector: 'futebol-navigation',
+    selector: 'app-futebol-navigation',
     templateUrl: 'futebol-navigation.component.html',
     styleUrls: ['futebol-navigation.component.css']
 })

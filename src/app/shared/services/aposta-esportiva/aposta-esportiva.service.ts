@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
-import { Aposta } from './../../../models';
+import { ApostaEsportiva } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
@@ -28,14 +28,16 @@ export class ApostaEsportivaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.ApostaUrl, requestOptions)
+        const url = `assets/apostas.json`;
+
+        return this.http.get(url, requestOptions)
             .pipe(
-                map((res: any) => res.results),
+                // map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
 
-    getAposta(id: number): Observable<Aposta> {
+    getAposta(id: number): Observable<ApostaEsportiva> {
         const url = `${this.ApostaUrl}/${id}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
@@ -45,8 +47,20 @@ export class ApostaEsportivaService {
             );
     }
 
+    apostaPorCodigo(codigo: number): Observable<ApostaEsportiva> {
+        // const url = `${this.ApostaUrl}/${codigo}`;
+        const url = `assets/aposta.json`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                tap((res: ApostaEsportiva) => console.log(res)),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     create(aposta): Observable<any> {
-        let url = `${this.ApostaUrl}/create`;
+        const url = `${this.ApostaUrl}/create`;
+
         return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
                 catchError(this.errorService.handleError)

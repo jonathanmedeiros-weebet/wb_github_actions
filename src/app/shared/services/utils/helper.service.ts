@@ -12,10 +12,10 @@ export class HelperService {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
 
-        const hourOne = parseInt(hourOneArray[0]);
-        const minuteOne = parseInt(hourOneArray[1]);
-        const hourTwo = parseInt(hourTwoArray[0]);
-        const minuteTwo = parseInt(hourTwoArray[1]);
+        const hourOne = parseInt(hourOneArray[0], 10);
+        const minuteOne = parseInt(hourOneArray[1], 10);
+        const hourTwo = parseInt(hourTwoArray[0], 10);
+        const minuteTwo = parseInt(hourTwoArray[1], 10);
         const timeInMinutesOne = hourOne * 60 + minuteOne;
         const timeInMinutesTwo = hourTwo * 60 + minuteTwo;
         const time = (timeInMinutesOne - timeInMinutesTwo) / 60;
@@ -37,14 +37,14 @@ export class HelperService {
         minuteTwo = Math.abs(hourTwoArray[1]);
         timeInMinutesTwo = hourTwo * 60 + minuteTwo;
 
-        if (firstChar1 === "-") {
+        if (firstChar1 === '-') {
             timeInMinutesOne = timeInMinutesOne * (-1);
         }
-        if (firstChar2 === "-") {
+        if (firstChar2 === '-') {
             timeInMinutesTwo = timeInMinutesTwo * (-1);
         }
 
-        let time = (timeInMinutesOne + timeInMinutesTwo) / 60;
+        const time = (timeInMinutesOne + timeInMinutesTwo) / 60;
         return this.hoursDecimalToTime(time);
     }
 
@@ -84,12 +84,12 @@ export class HelperService {
     }
 
     static hoursTimeToDecimal(hoursTime) {
-        let hoursTimeArray: any = hoursTime.split(':');
-        let hours: any = parseInt(hoursTimeArray[0]);
-        let minutes: any = parseInt(hoursTimeArray[1]);
+        const hoursTimeArray: any = hoursTime.split(':');
+        const hours: any = parseInt(hoursTimeArray[0], 10);
+        const minutes: any = parseInt(hoursTimeArray[1], 10);
         let hoursFormat: any = 0;
 
-        if (hoursTime.charAt(0) == '-') {
+        if (hoursTime.charAt(0) === '-') {
             hoursFormat = hours - minutes / 60;
         } else {
             hoursFormat = hours + minutes / 60;
@@ -103,7 +103,7 @@ export class HelperService {
         let last = moment(dateTwo, 'YYYY/MM/DD');
 
         if (first.isAfter(last)) {
-            let aux = dateOne;
+            const aux = dateOne;
             first = dateTwo;
             last = aux;
         }
@@ -112,26 +112,26 @@ export class HelperService {
     }
 
     static totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
-        let initial = moment(dateTimeBegin);
-        let end = moment(dateTimeEnd);
+        const initial = moment(dateTimeBegin);
+        const end = moment(dateTimeEnd);
 
         // calculate the difference
-        let ms = end.diff(initial);
+        const ms = end.diff(initial);
 
         // calculate the duration
-        let d = moment.duration(ms);
+        const d = moment.duration(ms);
 
         // format a string result
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
 
     static moneyFormat(value) {
-        let money = new Intl.NumberFormat('pt-BR', {
+        const money = new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: 2
         }).format(value);
 
 
-        //precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
+        // precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
         return `R$ ${money}`;
     }
 
@@ -144,7 +144,7 @@ export class HelperService {
 
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
-    };
+    }
 
     static sharedTicket(aposta) {
         parent.postMessage(

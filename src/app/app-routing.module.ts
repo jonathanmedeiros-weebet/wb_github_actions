@@ -36,6 +36,13 @@ const appRoutes: Routes = [
                 }
             },
             {
+                path: 'consultar-aposta',
+                loadChildren: 'app/+consultar-aposta/consultar-aposta.module#ConsultarApostaModule',
+                data: {
+                    pageTitle: 'Consultar Aposta'
+                }
+            },
+            {
                 path: 'futebol',
                 loadChildren: 'app/+futebol/futebol.module#FutebolModule',
                 data: {
@@ -68,6 +75,13 @@ const appRoutes: Routes = [
                 loadChildren: 'app/+quininha/quininha.module#QuininhaModule',
                 data: {
                     pageTitle: 'Quininha'
+                }
+            },
+            {
+                path: 'validar-aposta',
+                loadChildren: 'app/+validar-aposta/validar-aposta.module#ValidarApostaModule',
+                data: {
+                    pageTitle: 'Validar Aposta'
                 }
             }
         ]

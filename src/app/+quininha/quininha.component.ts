@@ -39,7 +39,7 @@ export class QuininhaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let queryParams = { tipo: "quininha" };
+        const queryParams = { tipo: 'quininha' };
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => this.tiposAposta = tiposAposta,
@@ -74,8 +74,8 @@ export class QuininhaComponent implements OnInit {
     }
 
     setSorteioNome() {
-        let sorteioId = this.itemForm.value.sorteio_id;
-        let sorteio = this.sorteios.find(sorteio => sorteio.id == sorteioId);
+        const sorteioId = this.itemForm.value.sorteio_id;
+        const sorteio = this.sorteios.find(s => s.id === sorteioId);
         if (sorteio) {
             if (sorteio) {
                 this.itemForm.patchValue({ sorteio_nome: sorteio.nome });
@@ -85,8 +85,8 @@ export class QuininhaComponent implements OnInit {
 
     /* Selecionar número */
     checkNumber(number) {
-        let numeros = this.numeros.value;
-        let index = numeros.findIndex(n => number == n);
+        const numeros = this.numeros.value;
+        const index = numeros.findIndex(n => number === n);
 
         if (index < 0) {
             numeros.push(number);
@@ -100,13 +100,13 @@ export class QuininhaComponent implements OnInit {
 
     /* Verificar se o número está selecionado */
     isChecked(number) {
-        return this.numeros.value.find(n => number == n);
+        return this.numeros.value.find(n => number === n);
     }
 
     /* Verificar  a quantidade de números selecionados */
     checkBetType(tipoAposta: TipoAposta) {
         let result = false;
-        if (tipoAposta.qtdNumeros == this.numeros.length) {
+        if (tipoAposta.qtdNumeros === this.numeros.length) {
             result = true;
             this.tipoAposta = tipoAposta;
         }
@@ -115,10 +115,10 @@ export class QuininhaComponent implements OnInit {
 
     /* Geração dos números aleatórios */
     generateGuess(length) {
-        let numbers = [];
+        const numbers = [];
 
         for (let index = 0; index < length; index++) {
-            let number = this.generateRandomNumber(numbers);
+            const number = this.generateRandomNumber(numbers);
             numbers.push(number);
         }
 
@@ -128,9 +128,9 @@ export class QuininhaComponent implements OnInit {
 
     /* Gerar número randômico */
     generateRandomNumber(numbers: Number[]) {
-        let number = _.random(1, 80);
+        const number = _.random(1, 80);
 
-        let find = numbers.find(n => n == number);
+        const find = numbers.find(n => n === number);
 
         if (!find) {
             return number;
@@ -141,12 +141,12 @@ export class QuininhaComponent implements OnInit {
 
     /* Incluir palpite */
     includeGuess() {
-        let tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros == this.numeros.length);
+        const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
 
         if (tipoAPosta) {
             if (this.itemForm.valid) {
                 // let item: Item = clone(this.item);
-                let item = this.itemForm.value;
+                const item = this.itemForm.value;
                 item.premio = item.valor * this.tipoAposta.cotacao;
 
                 this.aposta.valor += item.valor;
@@ -180,14 +180,14 @@ export class QuininhaComponent implements OnInit {
     }
 
     success(data, action) {
-        if (action == 'compartilhar') {
+        if (action === 'compartilhar') {
             HelperService.sharedTicket(data.results);
         } else {
             this.printService.ticket(data.results);
         }
 
         this.aposta = new Aposta();
-        this.messageService.success("Aposta realizada!");
+        this.messageService.success('Aposta realizada!');
         this.closeCupom();
     }
 
@@ -220,7 +220,7 @@ export class QuininhaComponent implements OnInit {
     }
 
     applyCssErrorInput(form, field: string, children?: string) {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         return {
@@ -229,7 +229,7 @@ export class QuininhaComponent implements OnInit {
     }
 
     hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         let hasError = false;

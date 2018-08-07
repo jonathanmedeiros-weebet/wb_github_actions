@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Campeonato, Jogo } from './../../models';
@@ -9,12 +9,12 @@ import * as moment from 'moment';
 
 
 @Component({
-    selector: 'futebol-jogos',
+    selector: 'app-futebol-jogos',
     templateUrl: 'jogos.component.html',
     styleUrls: ['jogos.component.css']
 })
 
-export class JogosComponent implements OnInit {
+export class JogosComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
     campeonato: Campeonato = new Campeonato();
     campeonatos: Campeonato[];

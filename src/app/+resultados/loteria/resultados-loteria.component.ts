@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
-import { SorteioService, MessageService } from './../services';
-import { Sorteio } from './../models';
+import { SorteioService, MessageService } from './../../services';
+import { Sorteio } from './../../models';
 
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-resultados',
-    templateUrl: 'resultados.component.html',
-    styleUrls: ['resultados.component.css']
+    selector: 'app-resultados-loteria',
+    templateUrl: 'resultados-loteria.component.html',
+    styleUrls: ['resultados-loteria.component.css']
 })
-export class ResultadosComponent implements OnInit {
+export class ResultadosLoteriaComponent implements OnInit {
     sorteios: Sorteio[] = [];
     searchForm: FormGroup;
 
@@ -34,17 +34,17 @@ export class ResultadosComponent implements OnInit {
 
     getSorteios(params?) {
         let queryParams: any = {
-            "data-inicial": moment().subtract('7', 'd').format('YYYY-MM-DD'),
-            "data-final": moment().format('YYYY-MM-DD 23:59:59'),
-            "sort": "-data"
+            'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
+            'data-final': moment().format('YYYY-MM-DD 23:59:59'),
+            'sort': '-data'
         };
 
         if (params && params.tipo) {
             queryParams = {
-                "data-inicial": moment().subtract('7', 'd').format('YYYY-MM-DD'),
-                "data-final": moment().format('YYYY-MM-DD 23:59:59'),
-                "sort": "-data",
-                "tipo": params.tipo
+                'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
+                'data-final': moment().format('YYYY-MM-DD 23:59:59'),
+                'sort': '-data',
+                'tipo': params.tipo
             };
         }
 
@@ -83,7 +83,7 @@ export class ResultadosComponent implements OnInit {
     }
 
     applyCssErrorInput(form, field: string, children?: string) {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         return {
@@ -92,7 +92,7 @@ export class ResultadosComponent implements OnInit {
     }
 
     hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         let hasError = false;

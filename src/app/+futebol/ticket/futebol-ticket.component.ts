@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import {
     MessageService, BilheteEsportivoService, HelperService,
     PrintService, ApostaEsportivaService
 } from '../../services';
-import { BilheteEsportivo, ItemBilheteEsportivo } from '../../models';
+import { ItemBilheteEsportivo } from '../../models';
 
 @Component({
-    selector: 'futebol-ticket',
+    selector: 'app-futebol-ticket',
     templateUrl: 'futebol-ticket.component.html',
     styleUrls: ['futebol-ticket.component.css']
 })
@@ -96,7 +96,7 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
 
 
     success(data, action) {
-        if (action == 'compartilhar') {
+        if (action === 'compartilhar') {
             HelperService.sharedTicket(data.results);
         } else {
             this.printService.ticket(data.results);

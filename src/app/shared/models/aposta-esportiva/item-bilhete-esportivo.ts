@@ -1,9 +1,10 @@
-import { Cotacao } from "./cotacao";
+import { Cotacao } from './cotacao';
 
 export class ItemBilheteEsportivo {
     constructor() { }
 
-    jogoNome: string;
-    jogoId: number;
+    jogo_nome: string;
+    jogo_id: number;
+    ao_vivo: boolean;
     cotacao: Cotacao;
 }

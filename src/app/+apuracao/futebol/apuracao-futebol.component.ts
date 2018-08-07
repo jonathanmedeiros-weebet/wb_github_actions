@@ -2,29 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 import {
-    ApostaService, MessageService,
-    PrintService, SorteioService,
-    AuthService, HelperService
-} from './../services';
-import { Aposta, Sorteio } from './../models';
-import { config } from './../shared/config';
+    ApostaEsportivaService, MessageService,
+    PrintService, AuthService,
+    HelperService
+} from './../../services';
+import { ApostaEsportiva } from './../../models';
 
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-apuracao',
-    templateUrl: 'apuracao.component.html',
-    styleUrls: ['apuracao.component.css']
+    selector: 'app-apuracao-futebol',
+    templateUrl: 'apuracao-futebol.component.html',
+    styleUrls: ['apuracao-futebol.component.css']
 })
-export class ApuracaoComponent implements OnInit {
-    apostas: Aposta[];
-    sorteios: Sorteio[] = [];
+export class ApuracaoFutebolComponent implements OnInit {
+    apostas: ApostaEsportiva[] = [];
     searchForm: FormGroup;
     appMobile;
 
     constructor(
-        private apostaService: ApostaService,
-        private sorteioService: SorteioService,
+        private apostaService: ApostaEsportivaService,
         private messageService: MessageService,
         private printService: PrintService,
         private auth: AuthService,
@@ -34,37 +31,14 @@ export class ApuracaoComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.getApostas();
-        this.getSorteios();
         this.createForm();
-    }
-
-    getSorteios(params?) {
-        let queryParams: any = {
-            'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
-            'data-final': moment().format('YYYY-MM-DD 23:59:59'),
-            'sort': "-data"
-        };
-
-        if (params) {
-            queryParams = {
-                'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal,
-                'status': params.status,
-                'sort': '-data'
-            };
-        }
-
-        this.sorteioService.getSorteios(queryParams).subscribe(
-            sorteios => this.sorteios = sorteios,
-            error => this.handleError(error)
-        );
     }
 
     getApostas(params?) {
         let queryParams: any = {
             'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
             'data-final': moment().format('YYYY-MM-DD 23:59:59'),
-            'sort': "-horario"
+            'sort': '-horario'
         };
 
         if (params) {
@@ -93,35 +67,17 @@ export class ApuracaoComponent implements OnInit {
     search() {
         if (this.searchForm.valid) {
             this.getApostas(this.searchForm.value);
-            this.getSorteios(this.searchForm.value);
         } else {
             this.checkFormValidations(this.searchForm);
         }
     }
 
-    printTicket(aposta: Aposta) {
+    printTicket(aposta: ApostaEsportiva) {
         this.printService.ticket(aposta);
     }
 
     sharedTicket(aposta) {
         HelperService.sharedTicket(aposta);
-    }
-
-    checkResult(sorteioId, numero) {
-        let sorteio: Sorteio = this.sorteios.find(sorteio => sorteio.id == sorteioId);
-        let result: any = {};
-
-        if (sorteio && sorteio.resultado) {
-            let exist = sorteio.resultado.find(n => n == numero);
-
-            if (exist) {
-                result.hit = true;
-            } else {
-                result.miss = true;
-            }
-        }
-
-        return result;
     }
 
     handleError(msg) {
@@ -145,7 +101,7 @@ export class ApuracaoComponent implements OnInit {
     }
 
     applyCssErrorInput(form, field: string, children?: string) {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         return {
@@ -154,7 +110,7 @@ export class ApuracaoComponent implements OnInit {
     }
 
     hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         let hasError = false;

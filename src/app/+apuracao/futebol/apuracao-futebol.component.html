@@ -1,0 +1,85 @@
+<div id="apuracao">
+    <div class="content-header">
+        <h2>Apuração Futebol</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="search()" [formGroup]="searchForm">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssErrorInput(searchForm, 'dataInicial')">
+                                <span *ngIf="hasError(searchForm, 'dataInicial', 'required')" class="invalid-feedback">Campo obrigatório</span>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssErrorInput(searchForm, 'dataFinal')">
+                                <span *ngIf="hasError(searchForm, 'dataFinal', 'required')" class="invalid-feedback">Campo obrigatório</span>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="ganhou">Ganhou</option>
+                                    <option value="perdeu">Perdeu</option>
+                                    <option value="pendente">Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Horário</th>
+                                <th>Apostador</th>
+                                <th>Jogos</th>
+                                <th>Valor</th>
+                                <th>Comissão</th>
+                                <th>Prêmio</th>
+                                <th>Resultado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let aposta of apostas">
+                                <td>#{{aposta.id}}</td>
+                                <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                                <td>{{aposta.apostador}}</td>
+                                <td>{{aposta.itens.length}}</td>
+                                <td>{{('10') | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td>{{('10') | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td>{{('10') | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td>GANHOU</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0)" class="btn btn-info">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <button type="button" (click)="printTicket(aposta)" class="btn btn-primary">
+                                            <i class="fa fa-print"></i>
+                                        </button>
+                                        <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
+                                            <i class="fa fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

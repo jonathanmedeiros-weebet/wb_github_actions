@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { AuthService, MessageService } from '../../services';
@@ -42,7 +42,7 @@ export class ForgotComponent implements OnInit {
     }
 
     success() {
-        alert("Verifique seu e-mail e siga as instruções para recuperar sua senha.");
+        alert('Verifique seu e-mail e siga as instruções para recuperar sua senha.');
         this.router.navigate(['/']);
     }
 
@@ -67,7 +67,7 @@ export class ForgotComponent implements OnInit {
     }
 
     applyCssErrorDiv(field: string, children?: string) {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         return {
@@ -76,7 +76,7 @@ export class ForgotComponent implements OnInit {
     }
 
     hasError(field: string, errorName: string, children?: string): boolean {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         let hasError = false;

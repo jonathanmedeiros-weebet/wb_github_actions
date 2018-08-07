@@ -13,7 +13,13 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/futebol']">Futebol</a>
                 </li>
-               <!--  <li class="nav-item" routerLinkActive="active">
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['/consultar-aposta']">Consultar Aposta</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="['/validar-aposta']">Validar Aposta</a>
+                </li>
+                <!--  <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/ao-vivo']">Ao Vivo</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
@@ -40,8 +46,14 @@
                     <i class="fa fa-cogs"></i> Configs
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="javascript:void(0);" (click)="listPrinters()"><i class="fa fa-print"></i> Impressora</a></li>
-                    <li><a href="javascript:void(0);" (click)="appVersion()"><i class="fa fa-info"></i> Versão App</a></li>
+                    <li>
+                        <a href="javascript:void(0);" (click)="listPrinters()">
+                            <i class="fa fa-print"></i> Impressora</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" (click)="appVersion()">
+                            <i class="fa fa-info"></i> Versão App</a>
+                    </li>
                 </ul>
             </li>
             <li *ngIf="!appMobile">
@@ -50,12 +62,13 @@
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/apuracao']">
-                    <i class="fa fa-check"></i> <span class="hidden-sm-down">Apuração</span>
+                <a [routerLink]="['/apuracao/loteria']">
+                    <i class="fa fa-check"></i>
+                    <span class="hidden-sm-down">Apuração</span>
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/resultados']">
+                <a [routerLink]="['/resultados/loteria']">
                     <i class="fa fa-list"></i> Result.
                 </a>
             </li>

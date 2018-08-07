@@ -1,4 +1,4 @@
-import { ItemApostaEsportiva } from "./item-aposta-esportiva";
+import { ItemApostaEsportiva } from './item-aposta-esportiva';
 
 export class ApostaEsportiva {
     constructor(chave) {
@@ -11,10 +11,10 @@ export class ApostaEsportiva {
     horario: string;
     ativo: boolean;
     telefone: string;
-    valor: number = 0;
-    preco_final: number = 0;
-    comissao: number = 0;
-    comissao_gerente: number = 0;
+    valor = 0;
+    preco_final = 0;
+    comissa = 0;
+    comissao_gerente = 0;
     pago: boolean;
     resultado: string;
     combinacao: string;
@@ -22,5 +22,5 @@ export class ApostaEsportiva {
     num_reimpressoes: number;
     status_pagamento: string;
     chave: string;
-    versao_app: string = "1.0";
+    versao_app = '1.0';
 }

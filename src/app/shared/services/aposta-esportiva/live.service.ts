@@ -10,7 +10,7 @@ export class LiveService {
     constructor() { }
 
     getGames(): Observable<any> {
-        let observable = new Observable(observer => {
+        const observable = new Observable(observer => {
             this.socket = io(this.url);
 
             this.socket.on('jogo-ao-vivo', (data) => {
@@ -20,7 +20,8 @@ export class LiveService {
             return () => {
                 this.socket.disconnect();
             };
-        })
+        });
+
         return observable;
     }
 

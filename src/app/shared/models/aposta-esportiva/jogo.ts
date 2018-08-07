@@ -10,6 +10,7 @@ export class Jogo {
     horario: string;
     cancelado: boolean;
     finalizado: boolean;
+    ao_vivo: boolean;
     campeonato: Campeonato;
     cotacoes_principais: Cotacao[];
     info: JogoInfo;
