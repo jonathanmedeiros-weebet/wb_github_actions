@@ -1,10 +1,6 @@
 import { ItemApostaEsportiva } from './item-aposta-esportiva';
 
 export class ApostaEsportiva {
-    constructor(chave) {
-        this.chave = chave;
-    }
-
     itens: ItemApostaEsportiva[] = [];
     cambistaId: number;
     apostador: string;
@@ -21,6 +17,5 @@ export class ApostaEsportiva {
     num_jogos: number;
     num_reimpressoes: number;
     status_pagamento: string;
-    chave: string;
     versao_app = '1.0';
 }

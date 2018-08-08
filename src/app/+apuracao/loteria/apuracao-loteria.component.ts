@@ -99,11 +99,11 @@ export class ApuracaoLoteriaComponent implements OnInit {
     }
 
     printTicket(aposta: Aposta) {
-        this.printService.ticket(aposta);
+        this.printService.lotteryTicket(aposta);
     }
 
     sharedTicket(aposta) {
-        HelperService.sharedTicket(aposta);
+        HelperService.sharedLotteryTicket(aposta);
     }
 
     checkResult(sorteioId, numero) {

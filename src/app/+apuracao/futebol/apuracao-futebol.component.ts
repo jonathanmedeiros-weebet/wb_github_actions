@@ -73,11 +73,11 @@ export class ApuracaoFutebolComponent implements OnInit {
     }
 
     printTicket(aposta: ApostaEsportiva) {
-        this.printService.ticket(aposta);
+        this.printService.sportsTicket(aposta);
     }
 
     sharedTicket(aposta) {
-        HelperService.sharedTicket(aposta);
+        HelperService.sharedSportsTicket(aposta);
     }
 
     handleError(msg) {

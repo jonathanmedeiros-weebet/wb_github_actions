@@ -47,7 +47,6 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             apostador: ['', [Validators.required]],
             valor: ['', [Validators.required]],
-            chave: ['', [Validators.required]],
             itens: this.fb.array([])
         });
     }
@@ -78,12 +77,59 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
-        console.log(this.form.value);
+        // const x = {
+        //     id: 7,
+        //     valor: '17',
+        //     premio: 54.586999999999996,
+        //     horario: '08/08/2018 as 16h42',
+        //     apostador: 'thiago',
+        //     itens: [
+        //         {
+        //             jogo: {
+        //                 id: 75610950,
+        //                 nome: 'GENERAL LAMADRID x PLATENSE',
+        //                 time_a_nome: 'GENERAL LAMADRID',
+        //                 time_b_nome: 'PLATENSE',
+        //                 horario: '2018-08-08 21:15:00',
+        //                 ao_vivo: false
+        //             },
+        //             campeonato: {
+        //                 id: 438,
+        //                 nome: 'ARGENTINA CUP'
+        //             },
+        //             cotacao: {
+        //                 chave: 'casa_90',
+        //                 nome: 'CASA (90)',
+        //                 valor: 3.211
+        //             }
+        //         },
+        //         {
+        //             jogo: {
+        //                 id: 75494823,
+        //                 nome: `VELEZ SARSFIELD x NEWELL'S`,
+        //                 time_a_nome: 'VELEZ SARSFIELD',
+        //                 time_b_nome: `NEWELL'S`,
+        //                 horario: '2018-08-08 21:15:00',
+        //                 ao_vivo: false
+        //             },
+        //             campeonato: {
+        //                 id: 438,
+        //                 nome: 'ARGENTINA SUPERLIGA'
+        //             },
+        //             cotacao: {
+        //                 chave: 'empate_90',
+        //                 nome: 'EMPATE (90)',
+        //                 valor: 3
+        //             }
+        //         }
+        //     ]
+        // };
+        // this.printService.sportsTicket(x);
 
         if (this.itens.length) {
             if (this.form.valid) {
                 this.apostaEsportivaService.create(this.form.value).subscribe(
-                    result => this.success(result, ''),
+                    result => this.success(result, 'imprimir'),
                     error => this.handleError(error)
                 );
             } else {
@@ -97,12 +143,14 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
 
     success(data, action) {
         if (action === 'compartilhar') {
-            HelperService.sharedTicket(data.results);
+            HelperService.sharedSportsTicket(data.results);
         } else {
-            this.printService.ticket(data.results);
+            this.printService.sportsTicket(data.results);
         }
 
         this.bilheteService.atualizarItens([]);
+        this.form.reset();
+
         this.messageService.success('Aposta realizada!');
     }
 

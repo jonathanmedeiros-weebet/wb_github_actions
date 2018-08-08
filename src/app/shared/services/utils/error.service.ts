@@ -48,7 +48,7 @@ export class ErrorService {
             // The response body may contain clues as to what went wrong,
             console.error(`Backend returned code ${error.status}, ` + `body was: ${error.message}`);
 
-            message = error.error.errors.message;
+            message = error.error.message;
         }
         // return an observable with a user-facing error message
         return throwError(message);

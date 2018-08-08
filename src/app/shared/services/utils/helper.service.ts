@@ -146,7 +146,17 @@ export class HelperService {
             s4() + '-' + s4() + s4() + s4();
     }
 
-    static sharedTicket(aposta) {
+    static sharedLotteryTicket(aposta) {
+        parent.postMessage(
+            {
+                data: `${config.HOST}/aposta/${aposta.chave}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
+    static sharedSportsTicket(aposta) {
         parent.postMessage(
             {
                 data: `${config.HOST}/aposta/${aposta.chave}`,
