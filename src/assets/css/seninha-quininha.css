@@ -44,6 +44,7 @@
     align-items: center;
     flex-direction: column;
     margin: 7px 7px 7px 0;
+    flex-grow: 1;
 }
 
 .bet-type .price{
@@ -169,6 +170,7 @@ button{
     padding-bottom: 15px;
     background: var(--background-primario);
     display: block;
+    overflow-y: auto;
 }
 
 .fechar-pre-bilhete{
@@ -176,6 +178,11 @@ button{
     top: 9px;
     padding: 9px;
     position: absolute;
+}
+
+.pre-bilhete .botoes .col{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 /* Large devices (desktops, 992px and up) */
