@@ -1,0 +1,76 @@
+.content-sports{
+    flex-grow: 1;
+}
+
+
+.side-2-sports{
+    width: 160px;
+}
+
+.campeonato-header h1{
+    text-transform: uppercase;
+    margin: 10px;
+    font-size: 2rem;
+}
+
+.jogo-header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0,0,0,0.4);
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+}
+
+.jogo-header .indentificacao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.jogo-header .indentificacao > *{
+    margin: 0 2px;
+}
+.jogo-header .indentificacao .horario{
+    margin-left: 0;
+    margin-right: 5px;
+    padding: 5px 10px;
+    color: yellow;
+    background-color: rgba(0,0,0,0.4);
+}
+.jogo-header .indentificacao h3{
+    margin: 0;
+    font-size: 1.5rem;
+}
+.jogo-header .indentificacao img{
+    width: 20px;
+    height: 20px;
+}
+
+.jogo-header .odds-principais{
+    display: flex;
+    flex-direction: row;
+}
+
+.jogo-header .odds-principais > div{
+    padding: 5px 10px;
+}
+
+.jogo-content .tipos-odds .tipo-odd{
+    font-size: 1.2rem;
+    background-color: rgba(0,0,0,0.2);
+    padding: 3px 5px;
+    margin-top: 5px;
+}
+
+.jogo-content .tipos-odds .odds{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.jogo-content .tipos-odds .odds span{
+    color: var(--background-primario);
+}
+
+.jogo-content .tipos-odds .odds > div{
+    padding: 5px 10px;
+}

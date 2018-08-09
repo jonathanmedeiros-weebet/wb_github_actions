@@ -2,13 +2,28 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
 import { FutebolRoutingModule } from './futebol-routing.module';
-import { FutebolComponent } from './futebol.component';
+import { FutebolWrapperComponent } from './wrapper/futebol-wrapper.component';
+import { FutebolNavigationComponent } from './navigation/futebol-navigation.component';
+import { FutebolTicketComponent } from './ticket/futebol-ticket.component';
+import { JogosComponent } from './jogos/jogos.component';
+import { JogoComponent } from './jogo/jogo.component';
 
-import { JogoService, CampeonatoService } from './../services';
+import { JogoService, CampeonatoService, BilheteEsportivoService, ApostaEsportivaService } from './../services';
 
 @NgModule({
     imports: [SharedModule, FutebolRoutingModule],
-    declarations: [FutebolComponent],
-    providers: [JogoService, CampeonatoService]
+    declarations: [
+        FutebolWrapperComponent,
+        FutebolNavigationComponent,
+        FutebolTicketComponent,
+        JogosComponent,
+        JogoComponent
+    ],
+    providers: [
+        JogoService,
+        CampeonatoService,
+        BilheteEsportivoService,
+        ApostaEsportivaService
+    ]
 })
 export class FutebolModule { }

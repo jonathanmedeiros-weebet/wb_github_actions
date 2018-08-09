@@ -8,14 +8,14 @@ export class HelperService {
 
     constructor() { }
 
-    timeSubtraction(timeOne, timeTwo) {
+    static timeSubtraction(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
 
-        const hourOne = parseInt(hourOneArray[0]);
-        const minuteOne = parseInt(hourOneArray[1]);
-        const hourTwo = parseInt(hourTwoArray[0]);
-        const minuteTwo = parseInt(hourTwoArray[1]);
+        const hourOne = parseInt(hourOneArray[0], 10);
+        const minuteOne = parseInt(hourOneArray[1], 10);
+        const hourTwo = parseInt(hourTwoArray[0], 10);
+        const minuteTwo = parseInt(hourTwoArray[1], 10);
         const timeInMinutesOne = hourOne * 60 + minuteOne;
         const timeInMinutesTwo = hourTwo * 60 + minuteTwo;
         const time = (timeInMinutesOne - timeInMinutesTwo) / 60;
@@ -23,7 +23,7 @@ export class HelperService {
         return this.hoursDecimalToTime(time);
     }
 
-    timeAddition(timeOne, timeTwo) {
+    static timeAddition(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
         const firstChar1 = hourOneArray[0].charAt(0);
@@ -37,18 +37,18 @@ export class HelperService {
         minuteTwo = Math.abs(hourTwoArray[1]);
         timeInMinutesTwo = hourTwo * 60 + minuteTwo;
 
-        if (firstChar1 === "-") {
+        if (firstChar1 === '-') {
             timeInMinutesOne = timeInMinutesOne * (-1);
         }
-        if (firstChar2 === "-") {
+        if (firstChar2 === '-') {
             timeInMinutesTwo = timeInMinutesTwo * (-1);
         }
 
-        let time = (timeInMinutesOne + timeInMinutesTwo) / 60;
+        const time = (timeInMinutesOne + timeInMinutesTwo) / 60;
         return this.hoursDecimalToTime(time);
     }
 
-    hoursDecimalToTime(hoursDecimal) {
+    static hoursDecimalToTime(hoursDecimal) {
         let time: any = '';
         let hours: any = Math.trunc(hoursDecimal);
         let minutes: any = '';
@@ -83,13 +83,13 @@ export class HelperService {
         return time;
     }
 
-    hoursTimeToDecimal(hoursTime) {
-        let hoursTimeArray: any = hoursTime.split(':');
-        let hours: any = parseInt(hoursTimeArray[0]);
-        let minutes: any = parseInt(hoursTimeArray[1]);
+    static hoursTimeToDecimal(hoursTime) {
+        const hoursTimeArray: any = hoursTime.split(':');
+        const hours: any = parseInt(hoursTimeArray[0], 10);
+        const minutes: any = parseInt(hoursTimeArray[1], 10);
         let hoursFormat: any = 0;
 
-        if (hoursTime.charAt(0) == '-') {
+        if (hoursTime.charAt(0) === '-') {
             hoursFormat = hours - minutes / 60;
         } else {
             hoursFormat = hours + minutes / 60;
@@ -98,12 +98,12 @@ export class HelperService {
         return parseFloat(hoursFormat.toFixed(2));
     }
 
-    orderDate(dateOne, dateTwo) {
+    static orderDate(dateOne, dateTwo) {
         let first = moment(dateOne, 'YYYY/MM/DD');
         let last = moment(dateTwo, 'YYYY/MM/DD');
 
         if (first.isAfter(last)) {
-            let aux = dateOne;
+            const aux = dateOne;
             first = dateTwo;
             last = aux;
         }
@@ -111,31 +111,31 @@ export class HelperService {
         return [first, last];
     }
 
-    totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
-        let initial = moment(dateTimeBegin);
-        let end = moment(dateTimeEnd);
+    static totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
+        const initial = moment(dateTimeBegin);
+        const end = moment(dateTimeEnd);
 
         // calculate the difference
-        let ms = end.diff(initial);
+        const ms = end.diff(initial);
 
         // calculate the duration
-        let d = moment.duration(ms);
+        const d = moment.duration(ms);
 
         // format a string result
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
 
-    moneyFormat(value) {
-        let money = new Intl.NumberFormat('pt-BR', {
+    static moneyFormat(value) {
+        const money = new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: 2
         }).format(value);
 
 
-        //precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
+        // precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
         return `R$ ${money}`;
     }
 
-    guidGenerate() {
+    static guidGenerate() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
@@ -144,9 +144,19 @@ export class HelperService {
 
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
-    };
+    }
 
-    sharedTicket(aposta) {
+    static sharedLotteryTicket(aposta) {
+        parent.postMessage(
+            {
+                data: `${config.HOST}/aposta/${aposta.chave}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
+    static sharedSportsTicket(aposta) {
         parent.postMessage(
             {
                 data: `${config.HOST}/aposta/${aposta.chave}`,

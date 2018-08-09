@@ -1,0 +1,51 @@
+<section class="sports-ticket">
+    <div class="pre-bilhete-esportes">
+        <h4>BILHETE</h4>
+        <div>
+            <p>
+                Valor da aposta:
+                <span class="valor">{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+            <p>
+                Possível Ganho:
+                <span class="possivel-ganho">{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" formControlName="apostador" class="form-control" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <input type="text" formControlName="valor" class="form-control" placeholder="Valor">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">Apostar</button>
+            </div>
+        </form>
+
+        <div *ngIf="itens.length > 0">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Jogo</th>
+                        <th>Cotação</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of itens.value; let i=index">
+                        <td>{{item.jogo_nome}}</td>
+                        <td>
+                            {{item.cotacao.chave}}: {{item.cotacao.valor}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger remover-item" (click)="removerItem(i)">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

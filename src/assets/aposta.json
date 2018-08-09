@@ -1,0 +1,28 @@
+{
+    "id": "232",
+    "apostador": "thiago",
+    "horario": "2018-08-07 10:32",
+    "valor": "10",
+    "itens": [
+        {
+            "valor": "3.1",
+            "preco": "EMPATE 90",
+            "jogo": {
+                "nome": "AVAI X VILA NOVA",
+                "campeonato": {
+                    "nome": "BRAZIL SERIE B"
+                }
+            }
+        },
+        {
+            "valor": "1.75",
+            "preco": "CASA 90",
+            "jogo": {
+                "nome": "PENAROL X ATLETICO PARANAENSE",
+                "campeonato": {
+                    "nome": "COPA SUDAMERICANA"
+                }
+            }
+        }
+    ]
+}

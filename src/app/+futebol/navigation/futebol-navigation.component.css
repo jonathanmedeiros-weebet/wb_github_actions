@@ -1,0 +1,31 @@
+li{
+    cursor: pointer;
+}
+
+.sports-menu{
+    width: 180px;
+}
+
+.leagues-regional-nav ul{
+    padding-left: 0px;
+}
+
+.leagues-regional-nav ul li{
+    list-style: none;
+    background-color: var(--background-menu);
+}
+
+.leagues-regional-nav ul li.group{
+    padding: 5px;
+    color: #000;
+}
+
+.leagues-regional-nav ul li a{
+    display: block;
+    padding: 5px;
+    color: var(--text-menu);
+}
+
+.leagues-regional-nav ul li a img{
+    width: 20px;
+}

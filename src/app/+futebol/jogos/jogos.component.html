@@ -1,0 +1,66 @@
+<section class="content-sports" *ngIf="diaEspecifico;else elseBlock">
+    <div class="campeonato" *ngFor="let campeonato of campeonatos">
+        <div class="campeonato-header">
+            <h1>{{campeonato.nome}}</h1>
+        </div>
+        <div class="jogos">
+            <div class="jogo" *ngFor="let jogo of campeonato.jogos">
+                <div class="jogo-header">
+                    <div class="indentificacao">
+                        <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
+                        <h3>{{jogo.time_a_nome}}</h3>
+                        <img src="assets/images/timea.png" />
+                        <span>x</span>
+                        <img src="assets/images/timeb.png" />
+                        <h3>{{jogo.time_b_nome}}</h3>
+                        <div style="background-color: red; color:white; padding: 3px;" *ngIf="jogo.ao_vivo">
+                            AO VIVO
+                        </div>
+                    </div>
+                    <div class="odds-principais">
+                        <div *ngFor="let cotacao of jogo.cotacoes_principais">
+                            {{cotacao.chave}}:
+                            <span>{{cotacao.valor}}</span>
+                        </div>
+                        <a routerLink="/futebol/jogo/{{jogo._id}}" class="mais-opcoes">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<ng-template #elseBlock>
+    <div class="campeonato">
+        <div class="campeonato-header">
+            <h1>{{campeonato.nome}}</h1>
+        </div>
+        <div class="jogos">
+            <div class="jogo" *ngFor="let jogo of campeonato.jogos">
+                <div class="jogo-header">
+                    <div class="indentificacao">
+                        <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
+                        <h3>{{jogo.time_a_nome}}</h3>
+                        <img src="assets/images/timea.png" />
+                        <span>x</span>
+                        <img src="assets/images/timeb.png" />
+                        <h3>{{jogo.time_b_nome}}</h3>
+                        <div style="background-color: red; color:white; padding: 3px;" *ngIf="jogo.ao_vivo">
+                            AO VIVO
+                        </div>
+                    </div>
+                    <div class="odds-principais">
+                        <div *ngFor="let cotacao of jogo.cotacoes_principais">
+                            {{cotacao.chave}}:
+                            <span>{{cotacao.valor}}</span>
+                        </div>
+                        <a routerLink="/futebol/jogo/{{jogo._id}}" class="mais-opcoes">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

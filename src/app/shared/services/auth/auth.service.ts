@@ -24,8 +24,8 @@ export class AuthService {
             .post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    let usuarioSerializado = JSON.stringify(res.user);
-                    let expires = moment().add(1, "d").valueOf();
+                    const usuarioSerializado = JSON.stringify(res.user);
+                    const expires = moment().add(1, 'd').valueOf();
 
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
@@ -38,8 +38,9 @@ export class AuthService {
     logout(): void {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        //localStorage.removeItem('app-mobile');
+        // localStorage.removeItem('app-mobile');
         localStorage.removeItem('expires');
+        localStorage.removeItem('itens-bilhete-esportivo');
     }
 
     isLoggedIn(): boolean {
@@ -86,9 +87,9 @@ export class AuthService {
 
     isAppMobile() {
         let result = false;
-        let appMobile = JSON.parse(localStorage.getItem('app-mobile'));
+        const appMobile = JSON.parse(localStorage.getItem('app-mobile'));
         if (appMobile) {
-            result = appMobile
+            result = appMobile;
         }
         return result;
     }
@@ -99,7 +100,7 @@ export class AuthService {
 
     isExpired() {
         const expires = localStorage.getItem('expires');
-        //+expired converte a string para inteiro
+        // +expired converte a string para inteiro
         return moment(+expires).isBefore(new Date());
     }
 }

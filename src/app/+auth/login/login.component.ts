@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.disabledButton = true;
 
         if (this.form.valid) {
-            let dados = {
+            const dados = {
                 username: this.form.value.username,
                 password: this.form.value.password
             };
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
     }
 
     applyCssErrorDiv(field: string, children?: string) {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         return {
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
     }
 
     hasError(field: string, errorName: string, children?: string): boolean {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         let hasError = false;

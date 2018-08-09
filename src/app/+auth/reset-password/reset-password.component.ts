@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs';
 import { AuthService, MessageService } from '../../services';
 import { PasswordValidation } from './../../shared/utils';
 
@@ -12,8 +12,8 @@ import { PasswordValidation } from './../../shared/utils';
     styles: []
 })
 export class ResetPasswordComponent implements OnInit, OnDestroy {
-    form: FormGroup
-    disabledButton: boolean = false;
+    form: FormGroup;
+    disabledButton = false;
     sub: Subscription;
 
     constructor(
@@ -28,8 +28,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         this.createForm();
 
         this.sub = this.route.queryParams.subscribe((params: any) => {
-            let userId = params['user_id'] || null;
-            let passwordKey = params['password_key'] || null;
+            const userId = params['user_id'] || null;
+            const passwordKey = params['password_key'] || null;
 
             this.form.patchValue({
                 user_id: userId,
@@ -61,7 +61,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         this.disabledButton = true;
 
         if (this.form.valid) {
-            let values = this.form.value;
+            const values = this.form.value;
 
             this.auth.resetPassword(values).subscribe(
                 () => this.success(),
@@ -99,7 +99,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
 
     applyCssErrorDiv(field: string, children?: string) {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         return {
@@ -108,7 +108,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
 
     hasError(field: string, errorName: string, children?: string): boolean {
-        if (children != undefined) {
+        if (children !== undefined) {
             field = field.concat(`.${children}`);
         }
         let hasError = false;
