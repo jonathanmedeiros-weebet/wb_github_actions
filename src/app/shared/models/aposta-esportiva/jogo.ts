@@ -12,6 +12,7 @@ export class Jogo {
     finalizado: boolean;
     ao_vivo: boolean;
     campeonato: Campeonato;
+    cotacoes: Cotacao[];
     cotacoes_principais: Cotacao[];
     info: JogoInfo;
 }
