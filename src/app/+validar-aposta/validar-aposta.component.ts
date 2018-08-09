@@ -24,7 +24,7 @@ export class ValidarApostaComponent implements OnInit, OnDestroy {
     }
 
     consultarAposta() {
-        this.apostaEsportivaService.apostaPorCodigo(this.codigo)
+        this.apostaEsportivaService.getAposta(this.codigo)
             .subscribe(
                 aposta => this.aposta = aposta,
                 error => this.handleError(error)

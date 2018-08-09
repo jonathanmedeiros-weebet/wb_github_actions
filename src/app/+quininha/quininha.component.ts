@@ -183,7 +183,7 @@ export class QuininhaComponent implements OnInit {
         if (action === 'compartilhar') {
             HelperService.sharedLotteryTicket(data.results);
         } else {
-            this.printService.lotteryTicket(data.results);
+            this.printService.lotteryTicket(data.results, 'QUININHA');
         }
 
         this.aposta = new Aposta();

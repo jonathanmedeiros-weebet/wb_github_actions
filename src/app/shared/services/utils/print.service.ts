@@ -12,15 +12,15 @@ export class PrintService {
         private auth: AuthService
     ) { }
 
-    lotteryTicket(aposta) {
+    lotteryTicket(aposta, tipo) {
         if (this.auth.isAppMobile()) {
-            this.lotteryTicketAppMobile(aposta);
+            this.lotteryTicketAppMobile(aposta, tipo);
         } else {
-            this.lotteryTicketDestkop(aposta);
+            this.lotteryTicketDestkop(aposta, tipo);
         }
     }
 
-    lotteryTicketDestkop(aposta) {
+    lotteryTicketDestkop(aposta, tipo) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -81,7 +81,7 @@ export class PrintService {
                 <div class="text-center">${config.BANCA_NOME}</div>
                 <hr class="margin-bottom-5">
                 <div class="margin-bottom-5 text-center">
-                    COMPROVANTE
+                    ${tipo}
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -191,8 +191,8 @@ export class PrintService {
         popupWin.document.close();
     }
 
-    lotteryTicketAppMobile(aposta) {
-        let ticket = `Weebet
+    lotteryTicketAppMobile(aposta, tipo) {
+        let ticket = `${tipo}
 
 #${aposta.id}
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}

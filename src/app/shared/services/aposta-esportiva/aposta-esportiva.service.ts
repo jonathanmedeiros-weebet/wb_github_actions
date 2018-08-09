@@ -28,11 +28,9 @@ export class ApostaEsportivaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        const url = `assets/apostas.json`;
-
-        return this.http.get(url, requestOptions)
+        return this.http.get(this.ApostaUrl, requestOptions)
             .pipe(
-                // map((res: any) => res.results),
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
@@ -43,17 +41,6 @@ export class ApostaEsportivaService {
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    apostaPorCodigo(codigo: number): Observable<ApostaEsportiva> {
-        // const url = `${this.ApostaUrl}/${codigo}`;
-        const url = `assets/aposta.json`;
-
-        return this.http.get(url, this.header.getRequestOptions(true))
-            .pipe(
-                tap((res: ApostaEsportiva) => console.log(res)),
                 catchError(this.errorService.handleError)
             );
     }

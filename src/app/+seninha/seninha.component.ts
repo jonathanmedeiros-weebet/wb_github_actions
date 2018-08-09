@@ -184,7 +184,7 @@ export class SeninhaComponent implements OnInit {
         if (action === 'compartilhar') {
             HelperService.sharedLotteryTicket(data.results);
         } else {
-            this.printService.lotteryTicket(data.results);
+            this.printService.lotteryTicket(data.results, 'SENINHA');
         }
 
         this.aposta = new Aposta();
