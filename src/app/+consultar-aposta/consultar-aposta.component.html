@@ -15,12 +15,12 @@
             <div class="aposta">
                 <h4>#{{aposta.id}}</h4>
                 <div *ngFor="let item of aposta.itens" class="aposta-item">
-                    <p>{{item.jogo.campeonato.nome}}</p>
+                    <p>{{item.campeonato.nome}}</p>
                     <p>
                         {{item.jogo.nome}}
                     </p>
                     <p>
-                        <b>{{item.preco}}</b> ( {{item.valor}} )
+                        <b>{{item.cotacao.nome}}:</b> {{item.preco | number: '1.0-2'}}
                     </p>
                 </div>
                 <div>
@@ -37,7 +37,7 @@
                         Valor da aposta: {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
                     </p>
                     <p>
-                        Estimativa de ganho: {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+                        Estimativa de ganho: {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
                     </p>
                 </div>
             </div>

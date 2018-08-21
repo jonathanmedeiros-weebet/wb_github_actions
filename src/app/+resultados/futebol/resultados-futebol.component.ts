@@ -1,74 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
-import { ApostaEsportivaService, MessageService } from './../../services';
-import { ApostaEsportiva } from './../../models';
+import { BaseFormComponent } from '../../shared/base-form/base-form.component';
+import { CampeonatoService, MessageService } from './../../services';
+import { Campeonato, Jogo } from './../../models';
 
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-resultados-futebol',
     templateUrl: 'resultados-futebol.component.html',
     styleUrls: ['resultados-futebol.component.css']
 })
-export class ResultadosFutebolComponent implements OnInit {
-    searchForm: FormGroup;
+export class ResultadosFutebolComponent extends BaseFormComponent implements OnInit {
+    campeonatos: Campeonato[] = [];
 
     constructor(
         private messageService: MessageService,
+        private campeonatoService: CampeonatoService,
         private fb: FormBuilder
-    ) { }
+    ) {
+        super();
+    }
 
     ngOnInit() {
+        this.getResultados();
         this.createForm();
     }
 
     createForm() {
-        this.searchForm = this.fb.group({
-            tipo: ['']
+        this.form = this.fb.group({
+            data: [moment().format('YYYY-MM-DD')]
         });
     }
+
+    submit() {
+        this.getResultados(this.form.value);
+    }
+
+    success() { }
 
     handleError(msg) {
         this.messageService.error(msg);
     }
 
-    /* Validation Functions */
-    checkFormValidations(form) {
-        Object.keys(form.controls).forEach(field => {
-            const control = form.get(field);
-            control.markAsTouched();
-            if (control instanceof FormGroup || control instanceof FormArray) {
-                this.checkFormValidations(control);
-            }
-        });
-    }
-
-    verifyInvalidTouch(form, field) {
-        const control = form.get(field);
-        return !control.valid && control.touched;
-    }
-
-    applyCssErrorInput(form, field: string, children?: string) {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        return {
-            'is-invalid': this.verifyInvalidTouch(form, field)
+    getResultados(params?) {
+        let queryParams: any = {
+            'data': moment().format('YYYY-MM-DD')
         };
-    }
 
-    hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        let hasError = false;
-        const control = form.get(field);
-
-        if (control.touched) {
-            hasError = control.hasError(errorName);
+        if (params) {
+            queryParams = {
+                'data': params.data
+            };
         }
 
-        return hasError;
+        this.campeonatoService.getResultados(queryParams).subscribe(
+            campeonatos => this.campeonatos = campeonatos,
+            error => this.handleError(error)
+        );
     }
-    /* END Validation Functions */
 }

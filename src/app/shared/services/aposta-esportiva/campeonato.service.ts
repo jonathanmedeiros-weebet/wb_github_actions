@@ -55,4 +55,22 @@ export class CampeonatoService {
             );
     }
 
+    getResultados(queryParams?: any): Observable<Campeonato[]> {
+        const url = `${config.SPORTS_URL}/resultados`;
+
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
 }

@@ -4,11 +4,11 @@ import { SharedModule } from './../shared/shared.module';
 import { ResultadosRoutingModule } from './resultados-routing.module';
 import { ResultadosLoteriaComponent } from './loteria/resultados-loteria.component';
 import { ResultadosFutebolComponent } from './futebol/resultados-futebol.component';
-import { SorteioService } from './../services';
+import { SorteioService, CampeonatoService } from './../services';
 
 @NgModule({
     imports: [SharedModule, ResultadosRoutingModule],
     declarations: [ResultadosFutebolComponent, ResultadosLoteriaComponent],
-    providers: [SorteioService]
+    providers: [SorteioService, CampeonatoService]
 })
 export class ResultadosModule { }

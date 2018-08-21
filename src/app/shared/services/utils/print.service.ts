@@ -6,7 +6,9 @@ import { HelperService } from './helper.service';
 import { config } from './../../config';
 import * as moment from 'moment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class PrintService {
     constructor(
         private auth: AuthService

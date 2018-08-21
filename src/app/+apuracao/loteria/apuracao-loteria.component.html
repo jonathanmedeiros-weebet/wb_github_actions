@@ -4,17 +4,17 @@
         <div class="filters">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    <form (ngSubmit)="search()" [formGroup]="searchForm">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
                         <div class="row">
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssErrorInput(searchForm, 'dataInicial')">
-                                <span *ngIf="hasError(searchForm, 'dataInicial', 'required')" class="invalid-feedback">Campo obrigatório</span>
+                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssInputError('dataInicial')">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssErrorInput(searchForm, 'dataFinal')">
-                                <span *ngIf="hasError(searchForm, 'dataFinal', 'required')" class="invalid-feedback">Campo obrigatório</span>
+                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssInputError('dataFinal')">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data final"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
                                 <label>Status</label>

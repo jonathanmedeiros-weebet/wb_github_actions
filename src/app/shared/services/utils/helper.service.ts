@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { config } from './../../config';
 import * as moment from 'moment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class HelperService {
 
     constructor() { }

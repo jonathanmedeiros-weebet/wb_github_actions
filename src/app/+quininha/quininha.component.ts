@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../services';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
@@ -11,19 +11,17 @@ import { TipoAposta, Aposta, Item, Sorteio } from '../models';
 import { config } from './../shared/config';
 
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-quininha',
     templateUrl: 'quininha.component.html'
 })
-export class QuininhaComponent implements OnInit {
+export class QuininhaComponent extends BaseFormComponent implements OnInit {
     numbers = _.range(1, 81);
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
     aposta = new Aposta();
-    itemForm: FormGroup;
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
     appMobile;
@@ -34,9 +32,10 @@ export class QuininhaComponent implements OnInit {
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
-        private fb: FormBuilder,
-        private auth: AuthService
-    ) { }
+        private fb: FormBuilder
+    ) {
+        super();
+    }
 
     ngOnInit() {
         const queryParams = { tipo: 'quininha' };
@@ -50,11 +49,11 @@ export class QuininhaComponent implements OnInit {
             error => this.messageService.error(error)
         );
 
-        this.createForms();
+        this.createForm();
     }
 
-    createForms() {
-        this.itemForm = this.fb.group({
+    createForm() {
+        this.form = this.fb.group({
             valor: ['', Validators.required],
             sorteio_id: ['', Validators.required],
             sorteio_nome: [''],
@@ -62,23 +61,74 @@ export class QuininhaComponent implements OnInit {
         });
     }
 
+    /* Incluir palpite */
+    submit() {
+        const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
+
+        if (tipoAPosta) {
+            // let item: Item = clone(this.item);
+            const item = this.form.value;
+            item.premio = item.valor * this.tipoAposta.cotacao;
+
+            this.aposta.valor += item.valor;
+            this.aposta.premio += item.premio;
+            this.aposta.itens.push(item);
+            this.form.reset();
+            this.setNumeros([]);
+        } else {
+            this.messageService.warning('Quantidade de dezenas insuficiente.');
+        }
+    }
+
+    /* Remover palpite */
+    removeGuess(index) {
+        this.aposta.itens.splice(index, 1);
+    }
+
+    /* Finalizar aposta */
+    create(action) {
+        if (this.aposta.itens.length) {
+            this.apostaService.create(this.aposta).subscribe(
+                result => this.success(result, action),
+                error => this.handleError(error)
+            );
+        } else {
+            this.messageService.warning('Por favor, inclua um palpite.');
+        }
+    }
+
+    success(data, action) {
+        if (action === 'compartilhar') {
+            HelperService.sharedLotteryTicket(data.results);
+        } else {
+            this.printService.lotteryTicket(data.results, 'QUININHA');
+        }
+
+        this.aposta = new Aposta();
+        this.messageService.success('Aposta realizada!');
+        this.closeCupom();
+    }
+
+    handleError(msg) {
+        this.messageService.error(msg);
+    }
 
     get numeros() {
-        return this.itemForm.get('numeros') as FormArray;
+        return this.form.get('numeros') as FormArray;
     }
 
     setNumeros(numeros: Number[]) {
         const numerosFCs = numeros.map(n => this.fb.control(n));
         const numerosFormArray = this.fb.array(numerosFCs);
-        this.itemForm.setControl('numeros', numerosFormArray);
+        this.form.setControl('numeros', numerosFormArray);
     }
 
     setSorteioNome() {
-        const sorteioId = this.itemForm.value.sorteio_id;
+        const sorteioId = this.form.value.sorteio_id;
         const sorteio = this.sorteios.find(s => s.id === sorteioId);
         if (sorteio) {
             if (sorteio) {
-                this.itemForm.patchValue({ sorteio_nome: sorteio.nome });
+                this.form.patchValue({ sorteio_nome: sorteio.nome });
             }
         }
     }
@@ -139,60 +189,8 @@ export class QuininhaComponent implements OnInit {
         }
     }
 
-    /* Incluir palpite */
-    includeGuess() {
-        const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
-
-        if (tipoAPosta) {
-            if (this.itemForm.valid) {
-                // let item: Item = clone(this.item);
-                const item = this.itemForm.value;
-                item.premio = item.valor * this.tipoAposta.cotacao;
-
-                this.aposta.valor += item.valor;
-                this.aposta.premio += item.premio;
-                this.aposta.itens.push(item);
-                this.itemForm.reset();
-                this.setNumeros([]);
-            } else {
-                this.checkFormValidations(this.itemForm);
-            }
-        } else {
-            this.messageService.warning('Quantidade de dezenas insuficiente.');
-        }
-    }
-
-    /* Remover palpite */
-    removeGuess(index) {
-        this.aposta.itens.splice(index, 1);
-    }
-
-    /* Finalizar aposta */
-    create(action) {
-        if (this.aposta.itens.length) {
-            this.apostaService.create(this.aposta).subscribe(
-                result => this.success(result, action),
-                error => this.handleError(error)
-            );
-        } else {
-            this.messageService.warning('Por favor, inclua um palpite.');
-        }
-    }
-
-    success(data, action) {
-        if (action === 'compartilhar') {
-            HelperService.sharedLotteryTicket(data.results);
-        } else {
-            this.printService.lotteryTicket(data.results, 'QUININHA');
-        }
-
-        this.aposta = new Aposta();
-        this.messageService.success('Aposta realizada!');
-        this.closeCupom();
-    }
-
-    handleError(msg) {
-        this.messageService.error(msg);
+    controlInvalid(control) {
+        return control.invalid && (control.dirty || control.touched);
     }
 
     openCupom() {
@@ -202,44 +200,4 @@ export class QuininhaComponent implements OnInit {
     closeCupom() {
         this.displayPreTicker = false;
     }
-
-    /* Validation Functions */
-    checkFormValidations(form) {
-        Object.keys(form.controls).forEach(field => {
-            const control = form.get(field);
-            control.markAsTouched();
-            if (control instanceof FormGroup || control instanceof FormArray) {
-                this.checkFormValidations(control);
-            }
-        });
-    }
-
-    verifyInvalidTouch(form, field) {
-        const control = form.get(field);
-        return !control.valid && control.touched;
-    }
-
-    applyCssErrorInput(form, field: string, children?: string) {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        return {
-            'is-invalid': this.verifyInvalidTouch(form, field)
-        };
-    }
-
-    hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        let hasError = false;
-        const control = form.get(field);
-
-        if (control.touched) {
-            hasError = control.hasError(errorName);
-        }
-
-        return hasError;
-    }
-    /* END Validation Functions */
 }

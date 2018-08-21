@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Core providers
-import { CoreModule } from './core/core.module';
 import { LayoutModule } from './shared/layout/layout.module';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { LayoutModule } from './shared/layout/layout.module';
 
         AppRoutingModule,
 
-        CoreModule,
         LayoutModule
     ],
     providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],

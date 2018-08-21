@@ -9,7 +9,9 @@ import { config } from './../../config';
 
 import * as moment from 'moment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
 

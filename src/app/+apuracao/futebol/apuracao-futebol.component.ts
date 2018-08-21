@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
+import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import {
     ApostaEsportivaService, MessageService,
     PrintService, AuthService,
@@ -15,9 +16,8 @@ import * as moment from 'moment';
     templateUrl: 'apuracao-futebol.component.html',
     styleUrls: ['apuracao-futebol.component.css']
 })
-export class ApuracaoFutebolComponent implements OnInit {
+export class ApuracaoFutebolComponent extends BaseFormComponent implements OnInit {
     apostas: ApostaEsportiva[] = [];
-    searchForm: FormGroup;
     appMobile;
 
     constructor(
@@ -26,7 +26,9 @@ export class ApuracaoFutebolComponent implements OnInit {
         private printService: PrintService,
         private auth: AuthService,
         private fb: FormBuilder
-    ) { }
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
@@ -57,19 +59,19 @@ export class ApuracaoFutebolComponent implements OnInit {
     }
 
     createForm() {
-        this.searchForm = this.fb.group({
+        this.form = this.fb.group({
             dataInicial: [moment().subtract('7', 'd').format('YYYY-MM-DD'), Validators.required],
             dataFinal: [moment().format('YYYY-MM-DD'), Validators.required],
             status: ['']
         });
     }
 
-    search() {
-        if (this.searchForm.valid) {
-            this.getApostas(this.searchForm.value);
-        } else {
-            this.checkFormValidations(this.searchForm);
-        }
+    submit() {
+        this.getApostas(this.form.value);
+    }
+
+    handleError(msg) {
+        this.messageService.error(msg);
     }
 
     printTicket(aposta: ApostaEsportiva) {
@@ -79,48 +81,4 @@ export class ApuracaoFutebolComponent implements OnInit {
     sharedTicket(aposta) {
         HelperService.sharedSportsTicket(aposta);
     }
-
-    handleError(msg) {
-        this.messageService.error(msg);
-    }
-
-    /* Validation Functions */
-    checkFormValidations(form) {
-        Object.keys(form.controls).forEach(field => {
-            const control = form.get(field);
-            control.markAsTouched();
-            if (control instanceof FormGroup || control instanceof FormArray) {
-                this.checkFormValidations(control);
-            }
-        });
-    }
-
-    verifyInvalidTouch(form, field) {
-        const control = form.get(field);
-        return !control.valid && control.touched;
-    }
-
-    applyCssErrorInput(form, field: string, children?: string) {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        return {
-            'is-invalid': this.verifyInvalidTouch(form, field)
-        };
-    }
-
-    hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        let hasError = false;
-        const control = form.get(field);
-
-        if (control.touched) {
-            hasError = control.hasError(errorName);
-        }
-
-        return hasError;
-    }
-    /* END Validation Functions */
 }

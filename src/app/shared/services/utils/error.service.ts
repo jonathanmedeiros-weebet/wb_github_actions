@@ -3,7 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { throwError } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ErrorService {
 
     /*  handleError<T>(operation = 'operation', result?: T) {

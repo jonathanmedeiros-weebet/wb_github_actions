@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
+import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import { SorteioService, MessageService } from './../../services';
 import { Sorteio } from './../../models';
 
@@ -11,15 +12,16 @@ import * as moment from 'moment';
     templateUrl: 'resultados-loteria.component.html',
     styleUrls: ['resultados-loteria.component.css']
 })
-export class ResultadosLoteriaComponent implements OnInit {
+export class ResultadosLoteriaComponent extends BaseFormComponent implements OnInit {
     sorteios: Sorteio[] = [];
-    searchForm: FormGroup;
 
     constructor(
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private fb: FormBuilder
-    ) { }
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.getSorteios();
@@ -27,9 +29,19 @@ export class ResultadosLoteriaComponent implements OnInit {
     }
 
     createForm() {
-        this.searchForm = this.fb.group({
+        this.form = this.fb.group({
             tipo: ['']
         });
+    }
+
+    submit() {
+        this.getSorteios(this.form.value);
+    }
+
+    success() { }
+
+    handleError(msg) {
+        this.messageService.error(msg);
     }
 
     getSorteios(params?) {
@@ -53,56 +65,4 @@ export class ResultadosLoteriaComponent implements OnInit {
             error => this.handleError(error)
         );
     }
-
-    handleError(msg) {
-        this.messageService.error(msg);
-    }
-
-    search() {
-        if (this.searchForm.valid) {
-            this.getSorteios(this.searchForm.value);
-        } else {
-            this.checkFormValidations(this.searchForm);
-        }
-    }
-
-    /* Validation Functions */
-    checkFormValidations(form) {
-        Object.keys(form.controls).forEach(field => {
-            const control = form.get(field);
-            control.markAsTouched();
-            if (control instanceof FormGroup || control instanceof FormArray) {
-                this.checkFormValidations(control);
-            }
-        });
-    }
-
-    verifyInvalidTouch(form, field) {
-        const control = form.get(field);
-        return !control.valid && control.touched;
-    }
-
-    applyCssErrorInput(form, field: string, children?: string) {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        return {
-            'is-invalid': this.verifyInvalidTouch(form, field)
-        };
-    }
-
-    hasError(form, field: string, errorName: string, children?: string): boolean {
-        if (children !== undefined) {
-            field = field.concat(`.${children}`);
-        }
-        let hasError = false;
-        const control = form.get(field);
-
-        if (control.touched) {
-            hasError = control.hasError(errorName);
-        }
-
-        return hasError;
-    }
-    /* END Validation Functions */
 }
