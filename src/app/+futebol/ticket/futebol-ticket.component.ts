@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
+import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import {
     MessageService, BilheteEsportivoService, HelperService,
     PrintService, ApostaEsportivaService
@@ -13,8 +14,7 @@ import { ItemBilheteEsportivo } from '../../models';
     templateUrl: 'futebol-ticket.component.html',
     styleUrls: ['futebol-ticket.component.css']
 })
-export class FutebolTicketComponent implements OnInit, OnDestroy {
-    form: FormGroup;
+export class FutebolTicketComponent extends BaseFormComponent implements OnInit, OnDestroy {
     possibilidadeGanho = 0;
     sub: Subscription;
 
@@ -24,7 +24,9 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private printService: PrintService,
         private fb: FormBuilder
-    ) { }
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.createForm();
@@ -46,7 +48,7 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
     createForm() {
         this.form = this.fb.group({
             apostador: ['', [Validators.required]],
-            valor: ['', [Validators.required]],
+            valor: ['', [Validators.required, Validators.min(1)]],
             itens: this.fb.array([])
         });
     }
@@ -76,65 +78,12 @@ export class FutebolTicketComponent implements OnInit, OnDestroy {
         this.possibilidadeGanho = valor * cotacoes;
     }
 
-    onSubmit() {
-        // const x = {
-        //     id: 7,
-        //     valor: '17',
-        //     premio: 54.586999999999996,
-        //     horario: '08/08/2018 as 16h42',
-        //     apostador: 'thiago',
-        //     itens: [
-        //         {
-        //             jogo: {
-        //                 id: 75610950,
-        //                 nome: 'GENERAL LAMADRID x PLATENSE',
-        //                 time_a_nome: 'GENERAL LAMADRID',
-        //                 time_b_nome: 'PLATENSE',
-        //                 horario: '2018-08-08 21:15:00',
-        //                 ao_vivo: false
-        //             },
-        //             campeonato: {
-        //                 id: 438,
-        //                 nome: 'ARGENTINA CUP'
-        //             },
-        //             cotacao: {
-        //                 chave: 'casa_90',
-        //                 nome: 'CASA (90)',
-        //                 valor: 3.211
-        //             }
-        //         },
-        //         {
-        //             jogo: {
-        //                 id: 75494823,
-        //                 nome: `VELEZ SARSFIELD x NEWELL'S`,
-        //                 time_a_nome: 'VELEZ SARSFIELD',
-        //                 time_b_nome: `NEWELL'S`,
-        //                 horario: '2018-08-08 21:15:00',
-        //                 ao_vivo: false
-        //             },
-        //             campeonato: {
-        //                 id: 438,
-        //                 nome: 'ARGENTINA SUPERLIGA'
-        //             },
-        //             cotacao: {
-        //                 chave: 'empate_90',
-        //                 nome: 'EMPATE (90)',
-        //                 valor: 3
-        //             }
-        //         }
-        //     ]
-        // };
-        // this.printService.sportsTicket(x);
-
+    submit() {
         if (this.itens.length) {
-            if (this.form.valid) {
-                this.apostaEsportivaService.create(this.form.value).subscribe(
-                    result => this.success(result, 'imprimir'),
-                    error => this.handleError(error)
-                );
-            } else {
-
-            }
+            this.apostaEsportivaService.create(this.form.value).subscribe(
+                result => this.success(result, 'imprimir'),
+                error => this.handleError(error)
+            );
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }
