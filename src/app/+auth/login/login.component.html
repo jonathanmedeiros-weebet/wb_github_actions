@@ -15,7 +15,7 @@
                                         <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
                                     </div>
                                 </div>
-                                <div class="form-group" [ngClass]="applyCssErrorDiv('password')">
+                                <div class="form-group" [ngClass]="applyCssDivError('password')">
                                     <div class="col-xs-12">
                                         <input type="password" class="form-control" [ngClass]="applyCssInputError('password')" formControlName="password" placeholder="Senha">
                                         <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
