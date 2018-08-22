@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
-import { ApostaEsportiva } from './../../../models';
+import { ApostaEsportiva, PreApostaEsportiva } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
@@ -45,10 +45,27 @@ export class ApostaEsportivaService {
             );
     }
 
-    create(aposta): Observable<any> {
-        const url = `${this.ApostaUrl}/create`;
+    getPreAposta(id: number): Observable<PreApostaEsportiva> {
+        const url = `${config.SPORTS_URL}/preapostas/${id}`;
 
-        return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    create(aposta): Observable<any> {
+        return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    cancel(id): Observable<any> {
+        const url = `${this.ApostaUrl}/${id}`;
+
+        return this.http.delete(url, this.header.getRequestOptions(true))
             .pipe(
                 catchError(this.errorService.handleError)
             );

@@ -10,34 +10,34 @@
             </form>
         </div>
     </div>
-    <div class="row" *ngIf="aposta">
+    <div class="row" *ngIf="preAposta">
         <div class="col-xs-12 col-md-4">
-            <div class="aposta">
-                <h4>#{{aposta.id}}</h4>
-                <div *ngFor="let item of aposta.itens" class="aposta-item">
-                    <p>{{item.campeonato.nome}}</p>
+            <div class="pre-aposta">
+                <h4>#{{preAposta.id}}</h4>
+                <div *ngFor="let item of preAposta.itens" class="pre-aposta-item">
+                    <p>{{item.jogo.campeonato.nome}}</p>
                     <p>
                         {{item.jogo.nome}}
                     </p>
                     <p>
-                        <b>{{item.cotacao.nome}}:</b> {{item.preco | number: '1.0-2'}}
+                        <b>{{item.aposta_tipo.nome}}:</b> {{item.cotacao | number: '1.0-2'}}
                     </p>
                 </div>
                 <div>
-                    <p>Apostador: {{aposta.apostador}}</p>
+                    <p>Apostador: {{preAposta.apostador}}</p>
                     <p>
-                        Horário: {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                        Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
                     </p>
                 </div>
                 <div>
                     <p>
-                        Total de jogos: {{aposta.itens.length}}
+                        Total de jogos: {{preAposta.itens.length}}
                     </p>
                     <p>
-                        Valor da aposta: {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+                        Valor da Aposta: {{preAposta.valor | currency: 'BRL':'symbol':'1.2'}}
                     </p>
                     <p>
-                        Estimativa de ganho: {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+                        Estimativa de ganho: {{preAposta.premio | currency: 'BRL':'symbol':'1.2'}}
                     </p>
                 </div>
                 <button type="button" (click)="validarAposta()" class="btn btn-primary">Validar</button>

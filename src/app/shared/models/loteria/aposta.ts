@@ -11,7 +11,7 @@ export class Aposta {
     chave: string;
     cambistaId: number;
     apostador: string;
-    telefone: string;
+    telefone = '';
     versao_app = '1.0';
     valor = 0;
     premio = 0;

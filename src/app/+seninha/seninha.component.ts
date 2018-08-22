@@ -101,7 +101,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
         if (action === 'compartilhar') {
             HelperService.sharedLotteryTicket(data.results);
         } else {
-            this.printService.lotteryTicket(data.results, 'SENINHA');
+            this.printService.lotteryTicket(data.results);
         }
 
         this.aposta = new Aposta();

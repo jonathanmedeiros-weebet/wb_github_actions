@@ -14,15 +14,15 @@ export class PrintService {
         private auth: AuthService
     ) { }
 
-    lotteryTicket(aposta, tipo) {
+    lotteryTicket(aposta) {
         if (this.auth.isAppMobile()) {
-            this.lotteryTicketAppMobile(aposta, tipo);
+            this.lotteryTicketAppMobile(aposta);
         } else {
-            this.lotteryTicketDestkop(aposta, tipo);
+            this.lotteryTicketDestkop(aposta);
         }
     }
 
-    lotteryTicketDestkop(aposta, tipo) {
+    lotteryTicketDestkop(aposta) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -82,9 +82,6 @@ export class PrintService {
                 <hr>
                 <div class="text-center">${config.BANCA_NOME}</div>
                 <hr class="margin-bottom-5">
-                <div class="margin-bottom-5 text-center">
-                    ${tipo}
-                </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         ${moment().format('DD/MM/YYYY')}
@@ -120,6 +117,14 @@ export class PrintService {
                 </div>
                 <div class="text-center bilhete-numeros">
                     ${item.numeros.join('-')}
+                </div>
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
+                        Tipo
+                    </div>
+                    <div style="float: right;">
+                        ${item.tipo}
+                    </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -193,8 +198,8 @@ export class PrintService {
         popupWin.document.close();
     }
 
-    lotteryTicketAppMobile(aposta, tipo) {
-        let ticket = `${tipo}
+    lotteryTicketAppMobile(aposta) {
+        let ticket = `${config.BANCA_NOME}
 
 #${aposta.id}
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
@@ -380,7 +385,7 @@ Premio: ${HelperService.moneyFormat(item.valor * item.cotacao)}
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.cotacao.nome} ( ${item.cotacao.valor} )
+                        ${item.aposta_tipo.nome} ( ${item.cotacao} )
                     </p>
                 </div>
             `;
@@ -390,7 +395,7 @@ Premio: ${HelperService.moneyFormat(item.valor * item.cotacao)}
                 <hr>
                 <div class="informacoes">
                     <p>
-                        CAMBISTA:
+                        CAMBISTA: ${aposta.cambista.nome}
                     </p>
                     <p>
                         APOSTADOR: ${aposta.apostador}
@@ -407,9 +412,6 @@ Premio: ${HelperService.moneyFormat(item.valor * item.cotacao)}
                     </p>
                     <p class="ganho">
                         ESTIMATIVA DE GANHO: ${HelperService.moneyFormat(aposta.premio)}
-                    </p>
-                    <p class="cambista-paga">
-                        CAMBISTA PAGA: R$
                     </p>
                 </div>
                 <p class="rodape">

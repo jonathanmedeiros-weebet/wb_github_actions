@@ -119,3 +119,7 @@ html, body{
 .invalid-feedback{
     display: block;
 }
+
+.modal{
+    z-index: 9002;
+}

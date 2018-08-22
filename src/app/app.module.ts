@@ -15,6 +15,8 @@ import { AppComponent } from './app.component';
 // Core providers
 import { LayoutModule } from './shared/layout/layout.module';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -23,6 +25,7 @@ import { LayoutModule } from './shared/layout/layout.module';
 
         AppRoutingModule,
 
+        NgbModule,
         LayoutModule
     ],
     providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],

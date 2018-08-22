@@ -101,7 +101,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
         if (action === 'compartilhar') {
             HelperService.sharedLotteryTicket(data.results);
         } else {
-            this.printService.lotteryTicket(data.results, 'QUININHA');
+            this.printService.lotteryTicket(data.results);
         }
 
         this.aposta = new Aposta();

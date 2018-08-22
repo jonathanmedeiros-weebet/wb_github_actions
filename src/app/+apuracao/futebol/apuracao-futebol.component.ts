@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import {
     ApostaEsportivaService, MessageService,
@@ -18,14 +19,19 @@ import * as moment from 'moment';
 })
 export class ApuracaoFutebolComponent extends BaseFormComponent implements OnInit {
     apostas: ApostaEsportiva[] = [];
+    @ViewChild('modal') modal: ElementRef;
+    @ViewChild('cancelModal') cancelModal: ElementRef;
+    apostaSelecionada: ApostaEsportiva;
     appMobile;
+    closeResult: string;
 
     constructor(
         private apostaService: ApostaEsportivaService,
         private messageService: MessageService,
         private printService: PrintService,
         private auth: AuthService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private modalService: NgbModal
     ) {
         super();
     }
@@ -80,5 +86,49 @@ export class ApuracaoFutebolComponent extends BaseFormComponent implements OnIni
 
     sharedTicket(aposta) {
         HelperService.sharedSportsTicket(aposta);
+    }
+
+    openModal(aposta) {
+        console.log(aposta);
+        this.apostaSelecionada = aposta;
+
+        this.modalService.open(this.modal, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+            console.log('result');
+            console.log(result);
+        }, (reason) => {
+            console.log('reason');
+            console.log(reason);
+        });
+    }
+
+    cancel(aposta) {
+        this.modalService.open(this.cancelModal, { centered: true }).result.then(
+            (result) => {
+                console.log('cancelado');
+
+                // this.apostaService.cancel(aposta.id).subscribe(
+                //     apostas => this.apostas = apostas,
+                //     error => this.handleError(error)
+                // );
+            },
+            (reason) => { }
+        );
+    }
+
+    checkCancellation(items) {
+        let result = true;
+
+        if (items) {
+            for (let index = 0; index < items.length; index++) {
+                const item = items[index];
+
+                if (moment(item.jogo.horario).isBefore()) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+
+        return result;
     }
 }

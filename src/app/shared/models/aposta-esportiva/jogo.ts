@@ -3,6 +3,7 @@ import { Campeonato } from './campeonato';
 import { Cotacao } from './cotacao';
 
 export class Jogo {
+    id: number;
     _id: string;
     nome: string;
     time_a_nome: string;

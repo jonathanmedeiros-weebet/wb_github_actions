@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { MessageService, ApostaEsportivaService } from '../services';
-import { ApostaEsportiva } from '../models';
+import { MessageService, ApostaEsportivaService, PrintService, HelperService } from '../services';
+import { BilheteEsportivo, PreApostaEsportiva } from '../models';
 
 @Component({
     selector: 'app-validar-aposta',
@@ -10,11 +10,13 @@ import { ApostaEsportiva } from '../models';
 })
 export class ValidarApostaComponent implements OnInit, OnDestroy {
     codigo;
-    aposta: ApostaEsportiva;
+    preAposta: PreApostaEsportiva;
+    bilhete: BilheteEsportivo = new BilheteEsportivo();
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private printService: PrintService
     ) { }
 
     ngOnInit() {
@@ -24,19 +26,45 @@ export class ValidarApostaComponent implements OnInit, OnDestroy {
     }
 
     consultarAposta() {
-        this.apostaEsportivaService.getAposta(this.codigo)
+        this.apostaEsportivaService.getPreAposta(this.codigo)
             .subscribe(
-                aposta => this.aposta = aposta,
+                preAposta => this.preAposta = preAposta,
                 error => this.handleError(error)
             );
     }
 
     validarAposta() {
-        this.messageService.success('aposta validada com sucesso!');
+        this.bilhete.apostador = this.preAposta.apostador;
+        this.bilhete.valor = this.preAposta.valor;
+
+        const itens = [];
+        this.preAposta.itens.forEach(item => {
+            itens.push({
+                jogo_id: item.jogo.id,
+                jogo_nome: item.jogo.nome,
+                ao_vivo: item.ao_vivo,
+                cotacao: {
+                    chave: item.aposta_tipo.chave,
+                    valor: item.cotacao
+                }
+            });
+        });
+        this.bilhete.itens = itens;
+
+        this.apostaEsportivaService.create(this.bilhete).subscribe(
+            result => this.success(result, 'imprimir'),
+            error => this.handleError(error)
+        );
     }
 
-    success(msg) {
-        this.messageService.success(msg);
+    success(data, action) {
+        if (action === 'compartilhar') {
+            HelperService.sharedSportsTicket(data.results);
+        } else {
+            this.printService.sportsTicket(data.results);
+        }
+
+        this.messageService.success('Aposta validada!');
     }
 
     handleError(msg) {

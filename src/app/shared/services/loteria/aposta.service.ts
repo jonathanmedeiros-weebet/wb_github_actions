@@ -46,8 +46,7 @@ export class ApostaService {
     }
 
     create(aposta): Observable<any> {
-        let url = `${this.ApostaUrl}/create`;
-        return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
+        return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
                 catchError(this.errorService.handleError)
             );
