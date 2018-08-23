@@ -41,12 +41,12 @@ html, body{
 }
 
 #main-wrapper {
-    padding: 120px 0 0 0;
+    padding: 113px 0 0 0;
 }
 
-#content{
+/*#content{
    padding: 10px 15px;
-}
+}*/
 
 .footer {
     line-height: 60px;

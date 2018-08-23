@@ -1,13 +1,13 @@
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar-1 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
-            <img class="logo-banca" alt="{{BANCA_NOME}}" src="{{LOGO}}" />
-        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
+            <img class="logo-banca" alt="{{BANCA_NOME}}" src="{{LOGO}}" />
+        </a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" routerLinkActive="active">
@@ -33,6 +33,11 @@
                 </li>
             </ul>
         </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse2" aria-controls="navbarCollapse2"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
     </nav>
     <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul>
