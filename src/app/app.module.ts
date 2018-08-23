@@ -25,7 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
         AppRoutingModule,
 
-        NgbModule,
+        NgbModule.forRoot(),
         LayoutModule
     ],
     providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],

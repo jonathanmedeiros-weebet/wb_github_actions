@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs/Rx';
-import { AuthService } from './../../../services';
+import { AuthService, MessageService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
 
@@ -15,6 +14,10 @@ import * as $ from 'jquery';
     styleUrls: ['header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    posicaoFinanceira = {
+        saldo: 0,
+        credito: 0
+    };
     usuario = new Usuario();
     LOGO;
     BANCA_NOME;
@@ -22,18 +25,24 @@ export class HeaderComponent implements OnInit {
     now = moment();
 
     constructor(
+        private messageService: MessageService,
         private router: Router,
         private auth: AuthService
     ) { }
 
     ngOnInit() {
+        setInterval(() => this.now = moment(), 1000);
+
         this.usuario = this.auth.getUser();
         this.LOGO = config.LOGO;
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
-        setInterval(() => this.now = moment(), 1000);
 
         $('.nav-item').click(() => $('.navbar-toggler:visible').click());
+    }
+
+    handleError(msg) {
+        this.messageService.error(msg);
     }
 
     logout() {
@@ -42,22 +51,29 @@ export class HeaderComponent implements OnInit {
     }
 
     listPrinters() {
-        let message = {
+        const message = {
             data: '',
             action: 'listPrinters',
         };
 
-        parent.postMessage(message, 'file://'); //file://
+        parent.postMessage(message, 'file://'); // file://
         console.log('listPrinters');
     }
 
     appVersion() {
-        let message = {
+        const message = {
             data: '',
             action: 'showVersion',
         };
 
-        parent.postMessage(message, 'file://'); //file://
+        parent.postMessage(message, 'file://'); // file://
         console.log('app version');
+    }
+
+    getPosicaoFinanceira(event) {
+        this.auth.getPosicaoFinanceira().subscribe(
+            posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+            error => this.handleError(error)
+        );
     }
 }

@@ -31,6 +31,23 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu text-muted" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
+                            Meu Perfil
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item text-center" disabled type="button">
+                            Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
+                        </button>
+                        <button class="dropdown-item text-center" disabled type="button">
+                            Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
