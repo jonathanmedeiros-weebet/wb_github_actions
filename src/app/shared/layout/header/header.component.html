@@ -8,6 +8,44 @@
         <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
             <img class="logo-banca" alt="{{BANCA_NOME}}" src="{{LOGO}}" />
         </a>
+
+        <div id="menu-conta" class="dropdown">
+            <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-2x fa-user"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+
+                <button class="dropdown-item text-center" disabled type="button">
+                    Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
+                </button>
+                <button class="dropdown-item text-center" disabled type="button">
+                    Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}</button>
+
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
+                    <i class="fa fa-user"></i> Meu Perfil
+                </a>
+
+                <a *ngIf="appMobile" class="dropdown-item" href="javascript:void(0);" (click)="listPrinters()">
+                    <i class="fa fa-print"></i> Impressora
+                </a>
+
+                <a class="dropdown-item" href="javascript:void(0);" class="dropdown-item" (click)="appVersion()">
+                    <i class="fa fa-info"></i> Versão App
+                </a>
+
+                <a *ngIf="!appMobile" class="dropdown-item" target="_blank" href="app.apk">
+                    <i class="fa fa-android"></i> App
+                </a>
+
+                <a (click)="logout()" href="javascript:void(0);" class="dropdown-item">
+                    <i class="fa fa-sign-out"></i> Sair
+                </a>
+            </ul>
+        </div>
+
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" routerLinkActive="active">
@@ -16,9 +54,7 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/consultar-aposta']">Consultar Aposta</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/validar-aposta']">Validar Aposta</a>
-                </li>
+
                 <!-- <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/ao-vivo']">Ao Vivo</a>
                 </li>
@@ -31,56 +67,15 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu text-muted" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
-                            Meu Perfil
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item text-center" disabled type="button">
-                            Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
-                        </button>
-                        <button class="dropdown-item text-center" disabled type="button">
-                            Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}</button>
-                    </div>
-                </li>
             </ul>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse2" aria-controls="navbarCollapse2"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
     </nav>
     <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul>
-            <li class="block-" style="flex-grow: 1;">
+            <li id="relogio" style="flex-grow: 1;">
                 <a style="padding-left: 4px;">
                     <i class="fa fa-clock-o"></i> {{now | moment:'HH:mm:ss'}}
-                </a>
-            </li>
-            <li *ngIf="appMobile">
-                <a>
-                    <i class="fa fa-cogs"></i> Configs
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="javascript:void(0);" (click)="listPrinters()">
-                            <i class="fa fa-print"></i> Impressora</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" (click)="appVersion()">
-                            <i class="fa fa-info"></i> Versão App</a>
-                    </li>
-                </ul>
-            </li>
-            <li *ngIf="!appMobile">
-                <a target="_blank" href="app.apk">
-                    <i class="fa fa-android"></i> App
                 </a>
             </li>
             <li>
@@ -94,12 +89,12 @@
                     <i class="fa fa-list"></i> Result.
                 </a>
             </li>
-            <!-- <li><a href="#">Regras</a></li> -->
-            <li (click)="logout()">
-                <a style="padding-right: 4px;">
-                    <i class="fa fa-sign-out"></i> Sair
+            <li>
+                <a [routerLink]="['/validar-aposta']">
+                    Validar Aposta
                 </a>
             </li>
+
         </ul>
     </nav>
 </header>

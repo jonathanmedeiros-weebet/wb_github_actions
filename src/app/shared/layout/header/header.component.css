@@ -54,7 +54,7 @@
     margin-bottom: 0;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
 
 }
 .navbar-2 > ul li{
@@ -85,6 +85,10 @@ li .sub-menu a{
     padding: 5px 25px!important;
 }
 
+#relogio{
+    display: none;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .navbar-1{
@@ -95,6 +99,12 @@ li .sub-menu a{
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+    #relogio{
+        display: block;
+    }
+    .navbar-2 > ul{
+        justify-content: flex-end;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -105,6 +115,9 @@ li .sub-menu a{
     }
     .navbar-1 ul li a {
         padding: 22px 2px;
+    }
+    #menu-conta{
+        order: 10;
     }
 }
 
