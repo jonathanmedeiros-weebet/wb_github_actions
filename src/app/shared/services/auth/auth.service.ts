@@ -70,10 +70,10 @@ export class AuthService {
     }
 
     changePassword(data: any): Observable<any> {
-        const url = `${this.AuthUrl}/changePassword`;
+        const url = `${config.BASE_URL}/usuarios/alterar-senha`;
 
         return this.http
-            .post(url, JSON.stringify(data), this.header.getRequestOptions(true))
+            .put(url, JSON.stringify(data), this.header.getRequestOptions(true))
             .pipe(
                 catchError(this.errorService.handleError)
             );
@@ -104,5 +104,16 @@ export class AuthService {
         const expires = localStorage.getItem('expires');
         // +expired converte a string para inteiro
         return moment(+expires).isBefore(new Date());
+    }
+
+    getPosicaoFinanceira() {
+        const url = `${config.BASE_URL}/financeiro/posicao`;
+
+        return this.http
+            .get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
     }
 }

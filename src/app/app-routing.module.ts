@@ -64,6 +64,13 @@ const appRoutes: Routes = [
                 }
             },
             {
+                path: 'meu-perfil',
+                loadChildren: 'app/+meu-perfil/meu-perfil.module#MeuPerfilModule',
+                data: {
+                    pageTitle: 'Meu Perfil'
+                }
+            },
+            {
                 path: 'seninha',
                 loadChildren: 'app/+seninha/seninha.module#SeninhaModule',
                 data: {
