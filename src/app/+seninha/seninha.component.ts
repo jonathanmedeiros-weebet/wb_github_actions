@@ -148,10 +148,13 @@ export class SeninhaComponent implements OnInit {
             if (this.itemForm.valid) {
                 // let item: Item = clone(this.item);
                 const item = this.itemForm.value;
-                item.premio = item.valor * this.tipoAposta.cotacao;
+                item.premio6 = item.valor * this.tipoAposta.cotacao6;
+                item.premio5 = item.valor * this.tipoAposta.cotacao5;
+                item.premio4 = item.valor * this.tipoAposta.cotacao4;
+                item.premio3 = item.valor * this.tipoAposta.cotacao3;
 
                 this.aposta.valor += item.valor;
-                this.aposta.premio += item.premio;
+                this.aposta.premio += item.premio6;
                 this.aposta.itens.push(item);
                 this.itemForm.reset();
                 this.setNumeros([]);
@@ -165,6 +168,11 @@ export class SeninhaComponent implements OnInit {
 
     /* Remover palpite */
     removeGuess(index) {
+        const item = this.aposta.itens[index];
+
+        this.aposta.valor -= item.valor;
+        this.aposta.premio -= item.premio6;
+
         this.aposta.itens.splice(index, 1);
     }
 
@@ -184,7 +192,7 @@ export class SeninhaComponent implements OnInit {
         if (action === 'compartilhar') {
             HelperService.sharedLotteryTicket(data.results);
         } else {
-            this.printService.lotteryTicket(data.results, 'SENINHA');
+            this.printService.lotteryTicket(data.results);
         }
 
         this.aposta = new Aposta();

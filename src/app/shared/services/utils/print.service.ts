@@ -12,15 +12,15 @@ export class PrintService {
         private auth: AuthService
     ) { }
 
-    lotteryTicket(aposta, tipo) {
+    lotteryTicket(aposta) {
         if (this.auth.isAppMobile()) {
-            this.lotteryTicketAppMobile(aposta, tipo);
+            this.lotteryTicketAppMobile(aposta);
         } else {
-            this.lotteryTicketDestkop(aposta, tipo);
+            this.lotteryTicketDestkop(aposta);
         }
     }
 
-    lotteryTicketDestkop(aposta, tipo) {
+    lotteryTicketDestkop(aposta) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -80,9 +80,6 @@ export class PrintService {
                 <hr>
                 <div class="text-center">${config.BANCA_NOME}</div>
                 <hr class="margin-bottom-5">
-                <div class="margin-bottom-5 text-center">
-                    ${tipo}
-                </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         ${moment().format('DD/MM/YYYY')}
@@ -110,6 +107,14 @@ export class PrintService {
                 `;
 
         aposta.itens.forEach((item, index, array) => {
+            let cotacao = 0;
+
+            if (item.tipo === 'seninha') {
+                cotacao = item.cotacao6;
+            } else {
+                cotacao = item.cotacao5;
+            }
+
             const content = `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -132,7 +137,7 @@ export class PrintService {
                         Prêmio
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.cotacao * item.valor)}
+                        ${HelperService.moneyFormat(cotacao * item.valor)}
                     </div>
                 </div>
             `;
@@ -191,8 +196,8 @@ export class PrintService {
         popupWin.document.close();
     }
 
-    lotteryTicketAppMobile(aposta, tipo) {
-        let ticket = `${tipo}
+    lotteryTicketAppMobile(aposta) {
+        let ticket = `${config.BANCA_NOME}
 
 #${aposta.id}
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
@@ -204,11 +209,19 @@ Valor Total: ${HelperService.moneyFormat(aposta.valor)}
         for (const i in aposta.itens) {
             if (aposta.itens.hasOwnProperty(i)) {
                 const item = aposta.itens[i];
+                let cotacao = 0;
+
+                if (item.tipo === 'seninha') {
+                    cotacao = item.cotacao6;
+                } else {
+                    cotacao = item.cotacao5;
+                }
+
                 ticket += `----------------------------
                 ${item.sorteio_nome}
                 Dezenas: ${item.numeros.join('-')}
 Valor: ${HelperService.moneyFormat(item.valor)}
-Premio: ${HelperService.moneyFormat(item.valor * item.cotacao)}
+Premio: ${HelperService.moneyFormat(item.valor * cotacao)}
 `;
             }
         }

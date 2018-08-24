@@ -98,8 +98,8 @@ export class ApuracaoLoteriaComponent implements OnInit {
         }
     }
 
-    printTicket(aposta: Aposta, tipo) {
-        this.printService.lotteryTicket(aposta, tipo);
+    printTicket(aposta: Aposta) {
+        this.printService.lotteryTicket(aposta);
     }
 
     sharedTicket(aposta) {

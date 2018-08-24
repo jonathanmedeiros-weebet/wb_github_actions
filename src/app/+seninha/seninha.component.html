@@ -56,7 +56,7 @@
                                         {{tipoAposta.qtdNumeros}}
                                     </div>
                                 </div>
-                                <span class="price">{{tipoAposta.cotacao | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span class="price">{{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
                         </div>
                     </div>
@@ -83,8 +83,20 @@
                                     <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                                 <div>
-                                    <label>prêmio:</label>
-                                    <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                    <label>Prêmio SENA:</label>
+                                    <span>{{(item.premio6) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                </div>
+                                <div>
+                                    <label>Prêmio QUINA:</label>
+                                    <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                </div>
+                                <div>
+                                    <label>Prêmio QUADRA:</label>
+                                    <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                </div>
+                                <div>
+                                    <label>Prêmio TERNO:</label>
+                                    <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                             </div>
                             <div class="circle-group">
