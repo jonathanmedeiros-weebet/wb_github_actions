@@ -148,6 +148,8 @@ export class QuininhaComponent implements OnInit {
                 // let item: Item = clone(this.item);
                 const item = this.itemForm.value;
                 item.premio5 = item.valor * this.tipoAposta.cotacao5;
+                item.premio4 = item.valor * this.tipoAposta.cotacao4;
+                item.premio3 = item.valor * this.tipoAposta.cotacao3;
 
                 this.aposta.valor += item.valor;
                 this.aposta.premio += item.premio5;
