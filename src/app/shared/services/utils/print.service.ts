@@ -7,7 +7,7 @@ import { config } from './../../config';
 import * as moment from 'moment';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class PrintService {
     constructor(
@@ -82,6 +82,9 @@ export class PrintService {
                 <hr>
                 <div class="text-center">${config.BANCA_NOME}</div>
                 <hr class="margin-bottom-5">
+                <div class="clearfix text-center margin-bottom-5">
+                    #${aposta.id}
+                </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         ${moment().format('DD/MM/YYYY')}
@@ -109,15 +112,7 @@ export class PrintService {
                 `;
 
         aposta.itens.forEach((item, index, array) => {
-            let cotacao = 0;
-
-            if (item.tipo === 'seninha') {
-                cotacao = item.cotacao6;
-            } else {
-                cotacao = item.cotacao5;
-            }
-
-            const content = `
+            let content = `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         ${item.sorteio_nome}
@@ -142,15 +137,46 @@ export class PrintService {
                         ${HelperService.moneyFormat(item.valor)}
                     </div>
                 </div>
-                <div class="clearfix">
+                <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
-                        Prêmio
+                        Retorno 3
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(cotacao * item.valor)}
+                        ${HelperService.moneyFormat(item.valor * item.cotacao3)}
+                    </div>
+                </div>
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
+                        Retorno 4
+                    </div>
+                    <div style="float: right;">
+                        ${HelperService.moneyFormat(item.valor * item.cotacao4)}
+                    </div>
+                </div>
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
+                        Retorno 5
+                    </div>
+                    <div style="float: right;">
+                        ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                     </div>
                 </div>
             `;
+
+            if (item.tipo === 'seninha') {
+                content += `
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
+                        Retorno 6
+                    </div>
+                    <div style="float: right;">
+                        ${HelperService.moneyFormat(item.valor * item.cotacao6)}
+                    </div>
+                </div>
+                `;
+            }
+
+
             if (array.length > 1) {
                 if (index === 0) {
                     printContents += `
@@ -213,30 +239,24 @@ export class PrintService {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${HelperService.moneyFormat(aposta.valor)}
-`;
+Valor Total: ${HelperService.moneyFormat(aposta.valor)}`;
 
-        for (const i in aposta.itens) {
-            if (aposta.itens.hasOwnProperty(i)) {
-                const item = aposta.itens[i];
-                let cotacao = 0;
-
-                if (item.tipo === 'seninha') {
-                    cotacao = item.cotacao6;
-                } else {
-                    cotacao = item.cotacao5;
-                }
-
-                ticket += `----------------------------
-                ${item.sorteio_nome}
-                Dezenas: ${item.numeros.join('-')}
+        aposta.itens.forEach(item => {
+            ticket += `
+-------------------------------
+${item.sorteio_nome} (${item.tipo})
+Dezenas: ${item.numeros.join('-')}
 Valor: ${HelperService.moneyFormat(item.valor)}
-Premio: ${HelperService.moneyFormat(item.valor * cotacao)}
+Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotacao3)}
+Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotacao4)}
+Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
 `;
+
+            if (item.tipo === 'seninha') {
+                ticket += `Retorno 6: ${HelperService.moneyFormat(item.valor * item.cotacao6)}`;
             }
-        }
-
-
+        });
+        // console.log(ticket);
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
 
@@ -401,7 +421,7 @@ Premio: ${HelperService.moneyFormat(item.valor * cotacao)}
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.aposta_tipo.nome} ( ${item.cotacao} )
+                        ${item.cotacao.nome} ( ${item.cotacao.valor} )
                     </p>
                 </div>
             `;
@@ -411,7 +431,7 @@ Premio: ${HelperService.moneyFormat(item.valor * cotacao)}
                 <hr>
                 <div class="informacoes">
                     <p>
-                        CAMBISTA: ${aposta.cambista.nome}
+                        CAMBISTA:
                     </p>
                     <p>
                         APOSTADOR: ${aposta.apostador}
@@ -428,6 +448,9 @@ Premio: ${HelperService.moneyFormat(item.valor * cotacao)}
                     </p>
                     <p class="ganho">
                         ESTIMATIVA DE GANHO: ${HelperService.moneyFormat(aposta.premio)}
+                    </p>
+                    <p class="cambista-paga">
+                        CAMBISTA PAGA: R$
                     </p>
                 </div>
                 <p class="rodape">
