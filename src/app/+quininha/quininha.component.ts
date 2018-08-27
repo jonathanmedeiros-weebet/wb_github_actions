@@ -57,7 +57,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
         return sorteio ? sorteio.nome : '';
     }
 
-    createForms() {
+    createForm() {
         this.form = this.fb.group({
             valor: ['', Validators.required],
             sorteio_id: ['', Validators.required],
@@ -73,10 +73,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
         if (tipoAPosta) {
             // let item: Item = clone(this.item);
             const item = this.form.value;
-            item.premio = item.valor * this.tipoAposta.cotacao;
+            item.premio5 = item.valor * this.tipoAposta.cotacao5;
+            item.premio4 = item.valor * this.tipoAposta.cotacao4;
+            item.premio3 = item.valor * this.tipoAposta.cotacao3;
 
             this.aposta.valor += item.valor;
-            this.aposta.premio += item.premio;
+            this.aposta.premio += item.premio5;
             this.aposta.itens.push(item);
             this.form.reset();
             this.setNumeros([]);
