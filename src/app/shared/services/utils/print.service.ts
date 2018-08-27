@@ -254,8 +254,8 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                 ticket += `Retorno 6: ${HelperService.moneyFormat(item.valor * item.cotacao6)}`;
             }
         });
-        console.log(ticket);
-        // parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+        // console.log(ticket);
+        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
 
     sportsTicket(aposta) {
