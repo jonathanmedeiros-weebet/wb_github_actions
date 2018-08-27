@@ -108,6 +108,7 @@ button{
     flex-direction: row;
     flex-wrap: wrap;
     position: relative;
+    padding-right: 22px;
 }
 
 .pre-bilhete .remover-palpite{
@@ -122,6 +123,11 @@ button{
     flex-grow: 1;
     text-transform: capitalize;
 }
+
+.pre-bilhete .item-header > div label{
+    margin-right: 3px;
+}
+
 
 .pre-bilhete .item-header > div span{
     font-weight: bold;

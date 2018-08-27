@@ -109,6 +109,14 @@ export class PrintService {
                 `;
 
         aposta.itens.forEach((item, index, array) => {
+            let cotacao = 0;
+
+            if (item.tipo === 'seninha') {
+                cotacao = item.cotacao6;
+            } else {
+                cotacao = item.cotacao5;
+            }
+
             const content = `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -139,7 +147,7 @@ export class PrintService {
                         Prêmio
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.cotacao * item.valor)}
+                        ${HelperService.moneyFormat(cotacao * item.valor)}
                     </div>
                 </div>
             `;
@@ -211,11 +219,19 @@ Valor Total: ${HelperService.moneyFormat(aposta.valor)}
         for (const i in aposta.itens) {
             if (aposta.itens.hasOwnProperty(i)) {
                 const item = aposta.itens[i];
+                let cotacao = 0;
+
+                if (item.tipo === 'seninha') {
+                    cotacao = item.cotacao6;
+                } else {
+                    cotacao = item.cotacao5;
+                }
+
                 ticket += `----------------------------
                 ${item.sorteio_nome}
                 Dezenas: ${item.numeros.join('-')}
 Valor: ${HelperService.moneyFormat(item.valor)}
-Premio: ${HelperService.moneyFormat(item.valor * item.cotacao)}
+Premio: ${HelperService.moneyFormat(item.valor * cotacao)}
 `;
             }
         }

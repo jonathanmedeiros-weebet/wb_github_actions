@@ -52,7 +52,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
         this.createForm();
     }
 
-    createForm() {
+    getSorteioNome(id){
+        let sorteio  = this.sorteios.find(s => s.id == id);
+        return sorteio ? sorteio.nome : '';
+    }
+
+    createForms() {
         this.form = this.fb.group({
             valor: ['', Validators.required],
             sorteio_id: ['', Validators.required],

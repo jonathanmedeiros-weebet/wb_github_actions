@@ -68,11 +68,16 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
         if (tipoAPosta) {
             // let item: Item = clone(this.item);
             const item = this.form.value;
-            item.premio = item.valor * this.tipoAposta.cotacao;
+
+            item.premio6 = item.valor * this.tipoAposta.cotacao6;
+            item.premio5 = item.valor * this.tipoAposta.cotacao5;
+            item.premio4 = item.valor * this.tipoAposta.cotacao4;
+            item.premio3 = item.valor * this.tipoAposta.cotacao3;
 
             this.aposta.valor += item.valor;
-            this.aposta.premio += item.premio;
+            this.aposta.premio += item.premio6;
             this.aposta.itens.push(item);
+
             this.form.reset();
             this.setNumeros([]);
         } else {
@@ -111,6 +116,10 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+    getSorteioNome(id){
+        let sorteio  = this.sorteios.find(s => s.id == id);
+        return sorteio ? sorteio.nome : '';
     }
 
     get numeros() {
