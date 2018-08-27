@@ -42,22 +42,22 @@ export class HeaderComponent implements OnInit {
     }
 
     listPrinters() {
-        let message = {
+        const message = {
             data: '',
             action: 'listPrinters',
         };
 
-        parent.postMessage(message, 'file://'); //file://
+        parent.postMessage(message, 'file://'); // file://
         console.log('listPrinters');
     }
 
     appVersion() {
-        let message = {
+        const message = {
             data: '',
             action: 'showVersion',
         };
 
-        parent.postMessage(message, 'file://'); //file://
+        parent.postMessage(message, 'file://'); // file://
         console.log('app version');
     }
 }
