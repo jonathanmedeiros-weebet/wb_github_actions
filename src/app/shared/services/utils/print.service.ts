@@ -80,6 +80,9 @@ export class PrintService {
                 <hr>
                 <div class="text-center">${config.BANCA_NOME}</div>
                 <hr class="margin-bottom-5">
+                <div class="clearfix text-center margin-bottom-5">
+                    #${aposta.id}
+                </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         ${moment().format('DD/MM/YYYY')}
@@ -107,15 +110,7 @@ export class PrintService {
                 `;
 
         aposta.itens.forEach((item, index, array) => {
-            let cotacao = 0;
-
-            if (item.tipo === 'seninha') {
-                cotacao = item.cotacao6;
-            } else {
-                cotacao = item.cotacao5;
-            }
-
-            const content = `
+            let content = `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         ${item.sorteio_nome}
@@ -156,6 +151,10 @@ export class PrintService {
                         ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                     </div>
                 </div>
+            `;
+
+            if (item.tipo === 'seninha') {
+                content += `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         Retorno 6
@@ -164,7 +163,10 @@ export class PrintService {
                         ${HelperService.moneyFormat(item.valor * item.cotacao6)}
                     </div>
                 </div>
-            `;
+                `;
+            }
+
+
             if (array.length > 1) {
                 if (index === 0) {
                     printContents += `
