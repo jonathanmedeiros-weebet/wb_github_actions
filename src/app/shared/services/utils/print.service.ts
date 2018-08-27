@@ -121,6 +121,14 @@ export class PrintService {
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
+                        Tipo
+                    </div>
+                    <div style="float: right;">
+                        ${item.tipo}
+                    </div>
+                </div>
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
                         Valor
                     </div>
                     <div style="float: right;">
@@ -234,8 +242,8 @@ Valor Total: ${HelperService.moneyFormat(aposta.valor)}
 
         aposta.itens.forEach(item => {
             ticket += `----------------------------
-                ${item.sorteio_nome}
-                Dezenas: ${item.numeros.join('-')}
+${item.sorteio_nome} (${item.tipo})
+Dezenas: ${item.numeros.join('-')}
 Valor: ${HelperService.moneyFormat(item.valor)}
 Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotacao3)}
 Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotacao4)}
