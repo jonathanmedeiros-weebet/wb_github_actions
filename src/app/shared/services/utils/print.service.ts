@@ -232,32 +232,19 @@ Apostador: ${aposta.apostador}
 Valor Total: ${HelperService.moneyFormat(aposta.valor)}
 `;
 
-        for (const i in aposta.itens) {
-            if (aposta.itens.hasOwnProperty(i)) {
-                const item = aposta.itens[i];
-
-                ticket += `----------------------------
+        aposta.itens.forEach(item => {
+            ticket += `----------------------------
                 ${item.sorteio_nome}
                 Dezenas: ${item.numeros.join('-')}
-Valor: ${HelperService.moneyFormat(item.valor)}`;
-
-                if (item.tipo === 'seninha') {
-                    ticket += `
-Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotaca3)}
-Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotaca4)}
-Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotaca5)}
-Retorno 6: ${HelperService.moneyFormat(item.valor * item.cotaca6)}
+Valor: ${HelperService.moneyFormat(item.valor)}
+Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotacao3)}
+Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotacao4)}
+Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
 `;
-                } else {
-                    ticket += `
-                    Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotaca3)}
-                    Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotaca4)}
-                    Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotaca5)}
-                    `;
-                }
+            if (item.tipo === 'seninha') {
+                ticket += `Retorno 6: ${HelperService.moneyFormat(item.valor * item.cotacao6)}`;
             }
-        }
-
+        });
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
