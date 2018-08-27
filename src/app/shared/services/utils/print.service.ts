@@ -237,11 +237,11 @@ export class PrintService {
 Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${HelperService.moneyFormat(aposta.valor)}
-`;
+Valor Total: ${HelperService.moneyFormat(aposta.valor)}`;
 
         aposta.itens.forEach(item => {
-            ticket += `----------------------------
+            ticket += `
+-------------------------------
 ${item.sorteio_nome} (${item.tipo})
 Dezenas: ${item.numeros.join('-')}
 Valor: ${HelperService.moneyFormat(item.valor)}
@@ -249,12 +249,13 @@ Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotacao3)}
 Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotacao4)}
 Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
 `;
+
             if (item.tipo === 'seninha') {
                 ticket += `Retorno 6: ${HelperService.moneyFormat(item.valor * item.cotacao6)}`;
             }
         });
-
-        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+        console.log(ticket);
+        // parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
 
     sportsTicket(aposta) {
