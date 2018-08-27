@@ -63,6 +63,10 @@ export class SeninhaComponent implements OnInit {
         });
     }
 
+    getSorteioNome(id){
+        let sorteio  = this.sorteios.find(s => s.id == id);
+        return sorteio ? sorteio.nome : '';
+    }
 
     get numeros() {
         return this.itemForm.get('numeros') as FormArray;
@@ -148,6 +152,7 @@ export class SeninhaComponent implements OnInit {
             if (this.itemForm.valid) {
                 // let item: Item = clone(this.item);
                 const item = this.itemForm.value;
+                console.log("EU", item);
                 item.premio6 = item.valor * this.tipoAposta.cotacao6;
                 item.premio5 = item.valor * this.tipoAposta.cotacao5;
                 item.premio4 = item.valor * this.tipoAposta.cotacao4;

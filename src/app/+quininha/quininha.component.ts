@@ -53,6 +53,11 @@ export class QuininhaComponent implements OnInit {
         this.createForms();
     }
 
+    getSorteioNome(id){
+        let sorteio  = this.sorteios.find(s => s.id == id);
+        return sorteio ? sorteio.nome : '';
+    }
+
     createForms() {
         this.itemForm = this.fb.group({
             valor: ['', Validators.required],

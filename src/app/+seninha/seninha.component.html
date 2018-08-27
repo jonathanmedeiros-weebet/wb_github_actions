@@ -76,26 +76,26 @@
                                     <i class="fa fa-lg fa-close"></i>
                                 </a>
                                 <div>
-                                    <span>{{item.sorteio_nome}}</span>
+                                    <span>{{getSorteioNome(item.sorteio_id)}}</span>
                                 </div>
                                 <div>
-                                    <label>valor:</label>
+                                    <label>valor: </label>
                                     <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                                 <div>
-                                    <label>Prêmio SENA:</label>
+                                    <label>Retorno 6: </label>
                                     <span>{{(item.premio6) | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                                 <div>
-                                    <label>Prêmio QUINA:</label>
+                                    <label>Retorno 5: </label>
                                     <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                                 <div>
-                                    <label>Prêmio QUADRA:</label>
+                                    <label>Retorno 4: </label>
                                     <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                                 <div>
-                                    <label>Prêmio TERNO:</label>
+                                    <label>Retorno 3: </label>
                                     <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
                                 </div>
                             </div>
