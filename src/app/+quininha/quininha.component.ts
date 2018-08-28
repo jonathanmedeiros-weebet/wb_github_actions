@@ -53,7 +53,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
     }
 
     getSorteioNome(id){
-        let sorteio  = this.sorteios.find(s => s.id == id);
+        const sorteio  = this.sorteios.find(s => s.id === id);
         return sorteio ? sorteio.nome : '';
     }
 
