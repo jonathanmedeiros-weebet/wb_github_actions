@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
@@ -33,6 +33,9 @@ export class AuthService {
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', usuarioSerializado);
                 }),
+                switchMap(() => this.getTiposAposta()),
+                switchMap(() => this.getCampeonatosBloqueados()),
+                switchMap(() => this.getCotacoesLocais()),
                 catchError(this.errorService.handleError)
             );
     }
@@ -113,6 +116,44 @@ export class AuthService {
             .get(url, this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getTiposAposta() {
+        const url = `${config.SPORTS_URL}/parametros/tipos-aposta`;
+
+        return this.http
+            .get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                map(res => {
+                    localStorage.setItem('tipos-aposta', JSON.stringify(res));
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getCampeonatosBloqueados() {
+        const url = `${config.SPORTS_URL}/parametros/campeonatos-bloqueados`;
+
+        return this.http
+            .get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                map(res => localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res))),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getCotacoesLocais() {
+        const url = `${config.SPORTS_URL}/parametros/cotacoes-local`;
+
+        return this.http
+            .get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                map(res => localStorage.setItem('cotacoes-locais', JSON.stringify(res))),
                 catchError(this.errorService.handleError)
             );
     }

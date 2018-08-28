@@ -40,13 +40,16 @@ export class JogosComponent implements OnInit, OnDestroy {
                     error => this.messageService.error(error)
                 );
             } else {
-                let queryParams = {};
+                const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos-bloqueados'));
+                const queryParams: any = {
+                    'leagues': campeonatosBloqueados
+                };
 
                 if (params['data']) {
                     const data = moment(params['data']).format('YYYY-MM-DD');
-                    queryParams = { data: data };
+                    queryParams.data = data;
                 } else {
-                    queryParams = { data: moment().format('YYYY-MM-DD') };
+                    queryParams.data = moment().format('YYYY-MM-DD');
                 }
 
                 this.jogoService.getJogos(queryParams).subscribe(

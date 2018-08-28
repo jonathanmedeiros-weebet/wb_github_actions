@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 export class JogoComponent implements OnInit, OnDestroy {
     jogo: Jogo = new Jogo();
     itens: ItemBilheteEsportivo[];
+    tiposAposta;
     bilheteSub: Subscription;
     sub: Subscription;
 
@@ -39,6 +40,9 @@ export class JogoComponent implements OnInit, OnDestroy {
             }
         });
 
+        this.tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
+        console.log(this.tiposAposta);
+        console.log(Object.keys(this.tiposAposta).length);
         this.bilheteSub = this.bilheteService.itensAtuais.subscribe(itens => this.itens = itens);
     }
 
@@ -72,5 +76,9 @@ export class JogoComponent implements OnInit, OnDestroy {
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+    }
+
+    showOdd(odd) {
+        return this.tiposAposta[odd] ? true : false;
     }
 }
