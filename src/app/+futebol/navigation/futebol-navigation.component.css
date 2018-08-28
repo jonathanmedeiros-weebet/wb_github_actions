@@ -2,10 +2,6 @@ li{
     cursor: pointer;
 }
 
-.sports-menu{
-    width: 180px;
-}
-
 .leagues-regional-nav ul{
     padding-left: 0px;
 }
@@ -28,4 +24,21 @@ li{
 
 .leagues-regional-nav ul li a img{
     width: 20px;
+}
+
+.sports-menu{
+    position: absolute;
+    left: -100vw;
+}
+
+.sports-menu.aberto{
+    left: 0;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .sports-menu{
+        position: inherit;
+        width: 200px;
+    }
 }
