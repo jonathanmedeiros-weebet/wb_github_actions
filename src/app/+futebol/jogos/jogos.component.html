@@ -19,7 +19,7 @@
                     </div>
                     <div class="odds-principais">
                         <div *ngFor="let cotacao of jogo.cotacoes_principais">
-                            {{cotacao.chave}}:
+                            {{cotacao.chave | tipoaposta}}:
                             <span>{{cotacao.valor}}</span>
                         </div>
                         <a routerLink="/futebol/jogo/{{jogo._id}}" class="mais-opcoes">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="odds-principais">
                         <div *ngFor="let cotacao of jogo.cotacoes_principais">
-                            {{cotacao.chave}}:
+                            {{cotacao.chave | tipoaposta}}:
                             <span>{{cotacao.valor}}</span>
                         </div>
                         <a routerLink="/futebol/jogo/{{jogo._id}}" class="mais-opcoes">

@@ -22,10 +22,12 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let cotacao of jogo.cotacoes" class="odd" (click)="addCotacao(jogo, cotacao)">
-                                <td>
-                                    <b>{{cotacao.chave}}: </b>
-                                </td>
-                                <td>{{cotacao.valor}}</td>
+                                <ng-container *ngIf="showOdd(cotacao.chave)">
+                                    <td>
+                                        <b>{{cotacao.chave | tipoaposta}}: </b>
+                                    </td>
+                                    <td>{{cotacao.valor}}</td>
+                                </ng-container>
                             </tr>
                         </tbody>
                     </table>

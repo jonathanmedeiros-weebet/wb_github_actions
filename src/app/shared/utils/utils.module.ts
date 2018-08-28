@@ -2,17 +2,20 @@ import { NgModule } from '@angular/core';
 
 import {
     MomentPipe,
-    TimeToStringtPipe
+    TimeToStringtPipe,
 } from './index';
+import { TipoApostaPipe } from './tipo-aposta.pipe';
 
 @NgModule({
     declarations: [
         MomentPipe,
-        TimeToStringtPipe
+        TimeToStringtPipe,
+        TipoApostaPipe
     ],
     exports: [
         MomentPipe,
-        TimeToStringtPipe
+        TimeToStringtPipe,
+        TipoApostaPipe
     ]
 })
 export class UtilsModule { }
