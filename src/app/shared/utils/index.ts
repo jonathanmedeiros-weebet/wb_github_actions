@@ -3,8 +3,9 @@
 // Pipes
 export { MomentPipe } from './moment.pipe';
 export { TimeToStringtPipe } from './time-to-string.pipe';
-import { TipoApostaPipe } from './tipo-aposta.pipe';
+export { TipoApostaPipe } from './tipo-aposta.pipe';
+export { CalcularCotacaoPipe } from './calcular-cotacao.pipe';
 
 //
 export { PasswordValidation } from './password-validation';
-import { FormValidations } from './form-validation';
+export { FormValidations } from './form-validation';

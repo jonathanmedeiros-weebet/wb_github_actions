@@ -41,8 +41,6 @@ export class JogoComponent implements OnInit, OnDestroy {
         });
 
         this.tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
-        console.log(this.tiposAposta);
-        console.log(Object.keys(this.tiposAposta).length);
         this.bilheteSub = this.bilheteService.itensAtuais.subscribe(itens => this.itens = itens);
     }
 

@@ -1,26 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as moment from 'moment';
 
 @Pipe({
-  name: 'timeToString'
+    name: 'timeToString'
 })
 export class TimeToStringtPipe implements PipeTransform {
-  transform(value: any): any {
-    if (!value) {
-      return value;
+    transform(value: any): any {
+        if (!value) {
+            return value;
+        }
+
+        let result: string;
+        const time: Array<string> = value.split(':');
+        const hours: string = time[0];
+        const minutes: string = time[1];
+
+        if (parseInt(hours, 10)) {
+            result = `${time[0]} horas e ${time[1]} minutos`;
+        } else {
+            result = `${time[1]} minutos`;
+        }
+
+        return result;
     }
-
-    let result: string;
-    let time: Array<string> = value.split(':');
-    let hours: string = time[0];
-    let minutes: string = time[1];
-
-    if (parseInt(hours)) {
-      result = `${time[0]} horas e ${time[1]} minutos`;
-    } else {
-      result = `${time[1]} minutos`;
-    }
-
-    return result;
-  }
 }

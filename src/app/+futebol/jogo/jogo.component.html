@@ -7,7 +7,6 @@
         </div>
         <div>
             {{jogo?.horario | moment: 'DD/MM/YYYY HH:mm'}}
-
         </div>
         <div class="jogo-content" *ngIf="jogo.cotacoes">
             <div class="tipos-odds">
@@ -24,9 +23,9 @@
                             <tr *ngFor="let cotacao of jogo.cotacoes" class="odd" (click)="addCotacao(jogo, cotacao)">
                                 <ng-container *ngIf="showOdd(cotacao.chave)">
                                     <td>
-                                        <b>{{cotacao.chave | tipoaposta}}: </b>
+                                        <b>{{cotacao.chave | tipoAposta}}: </b>
                                     </td>
-                                    <td>{{cotacao.valor}}</td>
+                                    <td>{{cotacao.valor | calcularCotacao: jogo._id: cotacao.chave}}</td>
                                 </ng-container>
                             </tr>
                         </tbody>

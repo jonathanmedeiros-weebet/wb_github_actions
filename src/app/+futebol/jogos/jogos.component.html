@@ -1,4 +1,4 @@
-<section class="content-sports" *ngIf="diaEspecifico;else elseBlock">
+<section class="content-sports" *ngIf="diaEspecifico;else variosDias">
     <div class="campeonato" *ngFor="let campeonato of campeonatos">
         <div class="campeonato-header">
             <h1>{{campeonato.nome}}</h1>
@@ -19,8 +19,8 @@
                     </div>
                     <div class="odds-principais">
                         <div *ngFor="let cotacao of jogo.cotacoes_principais">
-                            {{cotacao.chave | tipoaposta}}:
-                            <span>{{cotacao.valor}}</span>
+                            {{cotacao.chave | tipoAposta}}:
+                            <span>{{cotacao.valor | calcularCotacao: jogo._id: cotacao.chave}}</span>
                         </div>
                         <a routerLink="/futebol/jogo/{{jogo._id}}" class="mais-opcoes">
                             <i class="fa fa-plus"></i>
@@ -31,7 +31,7 @@
         </div>
     </div>
 </section>
-<ng-template #elseBlock>
+<ng-template #variosDias>
     <div class="campeonato">
         <div class="campeonato-header">
             <h1>{{campeonato.nome}}</h1>
@@ -52,8 +52,8 @@
                     </div>
                     <div class="odds-principais">
                         <div *ngFor="let cotacao of jogo.cotacoes_principais">
-                            {{cotacao.chave | tipoaposta}}:
-                            <span>{{cotacao.valor}}</span>
+                            {{cotacao.chave | tipoAposta}}:
+                            <span>{{cotacao.valor | calcularCotacao: jogo._id: cotacao.chave}}</span>
                         </div>
                         <a routerLink="/futebol/jogo/{{jogo._id}}" class="mais-opcoes">
                             <i class="fa fa-plus"></i>

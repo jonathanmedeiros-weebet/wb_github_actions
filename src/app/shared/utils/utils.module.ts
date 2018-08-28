@@ -3,19 +3,22 @@ import { NgModule } from '@angular/core';
 import {
     MomentPipe,
     TimeToStringtPipe,
+    TipoApostaPipe,
+    CalcularCotacaoPipe
 } from './index';
-import { TipoApostaPipe } from './tipo-aposta.pipe';
 
 @NgModule({
     declarations: [
         MomentPipe,
         TimeToStringtPipe,
-        TipoApostaPipe
+        TipoApostaPipe,
+        CalcularCotacaoPipe
     ],
     exports: [
         MomentPipe,
         TimeToStringtPipe,
-        TipoApostaPipe
+        TipoApostaPipe,
+        CalcularCotacaoPipe
     ]
 })
 export class UtilsModule { }
