@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import { AuthService, MessageService } from '../../services';
 import { config } from './../../shared/config';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends BaseFormComponent implements OnInit {
+export class LoginComponent extends BaseFormComponent implements OnInit, OnDestroy {
     LOGO = config.LOGO;
     BANCA_NOME = config.BANCA_NOME;
     BG = config.BG;
+    unsub$ = new Subject();
 
     constructor(
         private fb: FormBuilder,
@@ -27,6 +30,11 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -45,10 +53,12 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
             password: this.form.value.password
         };
 
-        this.auth.login(dados).subscribe(
-            () => this.router.navigate(['/']),
-            error => this.handleError(error)
-        );
+        this.auth.login(dados)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                () => this.router.navigate(['/']),
+                error => this.handleError(error)
+            );
     }
 
     handleError(error: string) {

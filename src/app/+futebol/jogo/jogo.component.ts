@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Jogo, ItemBilheteEsportivo } from './../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../services';
 
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -16,8 +17,7 @@ export class JogoComponent implements OnInit, OnDestroy {
     jogo: Jogo = new Jogo();
     itens: ItemBilheteEsportivo[];
     tiposAposta;
-    bilheteSub: Subscription;
-    sub: Subscription;
+    unsub$ = new Subject();
 
     constructor(
         private jogoService: JogoService,
@@ -27,26 +27,32 @@ export class JogoComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe((params: any) => {
-            if (params['id']) {
-                const id = +params['id'];
+        this.route.params
+            .pipe(takeUntil(this.unsub$))
+            .subscribe((params: any) => {
+                if (params['id']) {
+                    const id = +params['id'];
 
-                this.jogoService.getJogo(id).subscribe(
-                    jogo => {
-                        this.jogo = jogo;
-                    },
-                    error => this.messageService.error(error)
-                );
-            }
-        });
+                    this.jogoService.getJogo(id)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            jogo => {
+                                this.jogo = jogo;
+                            },
+                            error => this.messageService.error(error)
+                        );
+                }
+            });
 
         this.tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
-        this.bilheteSub = this.bilheteService.itensAtuais.subscribe(itens => this.itens = itens);
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => this.itens = itens);
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
-        this.bilheteSub.unsubscribe();
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     addCotacao(jogo, cotacao) {

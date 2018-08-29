@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import { CampeonatoService, MessageService } from './../../services';
 import { Campeonato, Jogo } from './../../models';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -12,8 +14,9 @@ import * as moment from 'moment';
     templateUrl: 'resultados-futebol.component.html',
     styleUrls: ['resultados-futebol.component.css']
 })
-export class ResultadosFutebolComponent extends BaseFormComponent implements OnInit {
+export class ResultadosFutebolComponent extends BaseFormComponent implements OnInit, OnDestroy {
     campeonatos: Campeonato[] = [];
+    unsub$ = new Subject();
 
     constructor(
         private messageService: MessageService,
@@ -26,6 +29,11 @@ export class ResultadosFutebolComponent extends BaseFormComponent implements OnI
     ngOnInit() {
         this.getResultados();
         this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -55,9 +63,11 @@ export class ResultadosFutebolComponent extends BaseFormComponent implements OnI
             };
         }
 
-        this.campeonatoService.getResultados(queryParams).subscribe(
-            campeonatos => this.campeonatos = campeonatos,
-            error => this.handleError(error)
-        );
+        this.campeonatoService.getResultados(queryParams)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                campeonatos => this.campeonatos = campeonatos,
+                error => this.handleError(error)
+            );
     }
 }

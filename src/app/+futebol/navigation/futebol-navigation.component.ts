@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-// import { Subscription } from 'rxjs/Rx';
-import { Subscription } from 'rxjs';
 import { MessageService, JogoService } from '../../services';
 import { Campeonato } from '../../models';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -15,7 +15,7 @@ import * as moment from 'moment';
 export class FutebolNavigationComponent implements OnInit, OnDestroy {
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     campeonatos: Campeonato[];
-    sub: Subscription;
+    unsub$ = new Subject();
 
     constructor(
         private jogoService: JogoService,
@@ -27,7 +27,8 @@ export class FutebolNavigationComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     getJogos() {
@@ -37,9 +38,11 @@ export class FutebolNavigationComponent implements OnInit, OnDestroy {
             'leagues': campeonatosBloqueados
         };
 
-        this.sub = this.jogoService.getJogos(params).subscribe(
-            campeonatos => this.campeonatos = campeonatos,
-            error => this.messageService.error(error)
-        );
+        this.jogoService.getJogos(params)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                campeonatos => this.campeonatos = campeonatos,
+                error => this.messageService.error(error)
+            );
     }
 }

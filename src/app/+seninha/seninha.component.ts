@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
@@ -9,14 +9,15 @@ import {
 } from '../services';
 import { TipoAposta, Aposta, Item, Sorteio } from '../models';
 import { config } from './../shared/config';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'app-seninha',
     templateUrl: 'seninha.component.html'
 })
-export class SeninhaComponent extends BaseFormComponent implements OnInit {
+export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     numbers = _.range(1, 61);
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
@@ -25,6 +26,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
     appMobile;
+    unsub$ = new Subject();
 
     constructor(
         private apostaService: ApostaService,
@@ -50,6 +52,11 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
         );
 
         this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -93,10 +100,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
     /* Finalizar aposta */
     create(action) {
         if (this.aposta.itens.length) {
-            this.apostaService.create(this.aposta).subscribe(
-                result => this.success(result, action),
-                error => this.handleError(error)
-            );
+            this.apostaService.create(this.aposta)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.success(result, action),
+                    error => this.handleError(error)
+                );
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }

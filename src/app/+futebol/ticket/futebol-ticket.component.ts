@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import {
     MessageService, BilheteEsportivoService, HelperService,
@@ -16,7 +17,7 @@ import { ItemBilheteEsportivo } from '../../models';
 })
 export class FutebolTicketComponent extends BaseFormComponent implements OnInit, OnDestroy {
     possibilidadeGanho = 0;
-    sub: Subscription;
+    unsub$ = new Subject();
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -31,18 +32,23 @@ export class FutebolTicketComponent extends BaseFormComponent implements OnInit,
     ngOnInit() {
         this.createForm();
 
-        this.sub = this.bilheteService.itensAtuais.subscribe(itens => {
-            this.setItens(itens);
-            this.calcularPossibilidadeGanho(this.form.value.valor);
-        });
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => {
+                this.setItens(itens);
+                this.calcularPossibilidadeGanho(this.form.value.valor);
+            });
 
-        this.form.get('valor').valueChanges.subscribe(valor => {
-            this.calcularPossibilidadeGanho(valor);
-        });
+        this.form.get('valor').valueChanges
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(valor => {
+                this.calcularPossibilidadeGanho(valor);
+            });
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -80,10 +86,12 @@ export class FutebolTicketComponent extends BaseFormComponent implements OnInit,
 
     submit() {
         if (this.itens.length) {
-            this.apostaEsportivaService.create(this.form.value).subscribe(
-                result => this.success(result, 'imprimir'),
-                error => this.handleError(error)
-            );
+            this.apostaEsportivaService.create(this.form.value)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.success(result, 'imprimir'),
+                    error => this.handleError(error)
+                );
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }

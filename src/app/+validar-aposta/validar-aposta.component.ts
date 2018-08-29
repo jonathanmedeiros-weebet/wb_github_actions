@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MessageService, ApostaEsportivaService, PrintService, HelperService } from '../services';
 import { BilheteEsportivo, PreApostaEsportiva } from '../models';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-validar-aposta',
@@ -12,6 +14,7 @@ export class ValidarApostaComponent implements OnInit, OnDestroy {
     codigo;
     preAposta: PreApostaEsportiva;
     bilhete: BilheteEsportivo = new BilheteEsportivo();
+    unsub$ = new Subject();
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -23,10 +26,13 @@ export class ValidarApostaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     consultarAposta() {
         this.apostaEsportivaService.getPreAposta(this.codigo)
+            .pipe(takeUntil(this.unsub$))
             .subscribe(
                 preAposta => this.preAposta = preAposta,
                 error => this.handleError(error)
@@ -51,10 +57,12 @@ export class ValidarApostaComponent implements OnInit, OnDestroy {
         });
         this.bilhete.itens = itens;
 
-        this.apostaEsportivaService.create(this.bilhete).subscribe(
-            result => this.success(result, 'imprimir'),
-            error => this.handleError(error)
-        );
+        this.apostaEsportivaService.create(this.bilhete)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                result => this.success(result, 'imprimir'),
+                error => this.handleError(error)
+            );
     }
 
     success(data, action) {

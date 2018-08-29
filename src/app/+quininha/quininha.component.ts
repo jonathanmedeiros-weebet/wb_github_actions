@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
@@ -7,16 +7,17 @@ import {
     SorteioService, ApostaService,
     PrintService, HelperService
 } from '../services';
-import { TipoAposta, Aposta, Item, Sorteio } from '../models';
+import { TipoAposta, Aposta, Sorteio } from '../models';
 import { config } from './../shared/config';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'app-quininha',
     templateUrl: 'quininha.component.html'
 })
-export class QuininhaComponent extends BaseFormComponent implements OnInit {
+export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     numbers = _.range(1, 81);
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
@@ -25,6 +26,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
     appMobile;
+    unsub$ = new Subject();
 
     constructor(
         private apostaService: ApostaService,
@@ -44,16 +46,23 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
             tiposAposta => this.tiposAposta = tiposAposta,
             error => this.messageService.error(error)
         );
-        this.sorteioService.getSorteios(queryParams).subscribe(
-            sorteios => this.sorteios = sorteios,
-            error => this.messageService.error(error)
-        );
+        this.sorteioService.getSorteios(queryParams)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                sorteios => this.sorteios = sorteios,
+                error => this.messageService.error(error)
+            );
 
         this.createForm();
     }
 
-    getSorteioNome(id){
-        const sorteio  = this.sorteios.find(s => s.id === id);
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
+    getSorteioNome(id) {
+        const sorteio = this.sorteios.find(s => s.id === id);
         return sorteio ? sorteio.nome : '';
     }
 
@@ -95,10 +104,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit {
     /* Finalizar aposta */
     create(action) {
         if (this.aposta.itens.length) {
-            this.apostaService.create(this.aposta).subscribe(
-                result => this.success(result, action),
-                error => this.handleError(error)
-            );
+            this.apostaService.create(this.aposta)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.success(result, action),
+                    error => this.handleError(error)
+                );
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }

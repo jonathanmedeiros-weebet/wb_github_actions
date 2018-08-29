@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MessageService, ApostaEsportivaService } from '../services';
 import { ApostaEsportiva } from '../models';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-consultar-aposta',
@@ -11,6 +13,7 @@ import { ApostaEsportiva } from '../models';
 export class ConsultarApostaComponent implements OnInit, OnDestroy {
     codigo;
     aposta: ApostaEsportiva;
+    unsub$ = new Subject();
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -21,10 +24,13 @@ export class ConsultarApostaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     consultarAposta() {
         this.apostaEsportivaService.getAposta(this.codigo)
+            .pipe(takeUntil(this.unsub$))
             .subscribe(
                 aposta => this.aposta = aposta,
                 error => this.handleError(error)

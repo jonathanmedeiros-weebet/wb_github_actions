@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import { SorteioService, MessageService } from './../../services';
 import { Sorteio } from './../../models';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -12,8 +14,9 @@ import * as moment from 'moment';
     templateUrl: 'resultados-loteria.component.html',
     styleUrls: ['resultados-loteria.component.css']
 })
-export class ResultadosLoteriaComponent extends BaseFormComponent implements OnInit {
+export class ResultadosLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     sorteios: Sorteio[] = [];
+    unsub$ = new Subject();
 
     constructor(
         private sorteioService: SorteioService,
@@ -26,6 +29,11 @@ export class ResultadosLoteriaComponent extends BaseFormComponent implements OnI
     ngOnInit() {
         this.getSorteios();
         this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -60,9 +68,11 @@ export class ResultadosLoteriaComponent extends BaseFormComponent implements OnI
             };
         }
 
-        this.sorteioService.getSorteios(queryParams).subscribe(
-            sorteios => this.sorteios = sorteios,
-            error => this.handleError(error)
-        );
+        this.sorteioService.getSorteios(queryParams)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                sorteios => this.sorteios = sorteios,
+                error => this.handleError(error)
+            );
     }
 }

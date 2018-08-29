@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/base-form/base-form.component';
 import {
@@ -8,7 +8,8 @@ import {
     AuthService, HelperService
 } from './../../services';
 import { Aposta, Sorteio } from './../../models';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -16,10 +17,11 @@ import * as moment from 'moment';
     templateUrl: 'apuracao-loteria.component.html',
     styleUrls: ['apuracao-loteria.component.css']
 })
-export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnInit {
+export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     apostas: Aposta[];
     sorteios: Sorteio[] = [];
     appMobile;
+    unsub$ = new Subject();
 
     constructor(
         private apostaService: ApostaService,
@@ -39,6 +41,11 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         this.createForm();
     }
 
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
     getSorteios(params?) {
         let queryParams: any = {
             'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
@@ -55,10 +62,12 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
             };
         }
 
-        this.sorteioService.getSorteios(queryParams).subscribe(
-            sorteios => this.sorteios = sorteios,
-            error => this.handleError(error)
-        );
+        this.sorteioService.getSorteios(queryParams)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                sorteios => this.sorteios = sorteios,
+                error => this.handleError(error)
+            );
     }
 
     getApostas(params?) {
@@ -77,10 +86,12 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
             };
         }
 
-        this.apostaService.getApostas(queryParams).subscribe(
-            apostas => this.apostas = apostas,
-            error => this.handleError(error)
-        );
+        this.apostaService.getApostas(queryParams)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                apostas => this.apostas = apostas,
+                error => this.handleError(error)
+            );
     }
 
     createForm() {

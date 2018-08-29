@@ -8,12 +8,16 @@ import {
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
 import { FormValidations } from './../shared/utils/form-validation';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 @Component({
     selector: 'app-meu-perfil',
     templateUrl: 'meu-perfil.component.html'
 })
-export class MeuPerfilComponent extends BaseFormComponent implements OnInit {
+export class MeuPerfilComponent extends BaseFormComponent implements OnInit, OnDestroy {
     public isCollapsed = false;
+    unsub$ = new Subject();
 
     constructor(
         private messageService: MessageService,
@@ -25,6 +29,11 @@ export class MeuPerfilComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -51,13 +60,15 @@ export class MeuPerfilComponent extends BaseFormComponent implements OnInit {
     submit() {
         const values = this.form.value;
 
-        this.auth.changePassword(values).subscribe(
-            res => {
-                this.form.reset();
-                this.success();
-            },
-            error => this.handleError(error)
-        );
+        this.auth.changePassword(values)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => {
+                    this.form.reset();
+                    this.success();
+                },
+                error => this.handleError(error)
+            );
     }
 
     success() {

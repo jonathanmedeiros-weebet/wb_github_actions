@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +9,8 @@ import {
     HelperService
 } from './../../services';
 import { ApostaEsportiva } from './../../models';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -17,13 +18,14 @@ import * as moment from 'moment';
     templateUrl: 'apuracao-futebol.component.html',
     styleUrls: ['apuracao-futebol.component.css']
 })
-export class ApuracaoFutebolComponent extends BaseFormComponent implements OnInit {
+export class ApuracaoFutebolComponent extends BaseFormComponent implements OnInit, OnDestroy {
     apostas: ApostaEsportiva[] = [];
     @ViewChild('modal') modal: ElementRef;
     @ViewChild('cancelModal') cancelModal: ElementRef;
     apostaSelecionada: ApostaEsportiva;
     appMobile;
     closeResult: string;
+    unsub$ = new Subject();
 
     constructor(
         private apostaService: ApostaEsportivaService,
@@ -42,6 +44,11 @@ export class ApuracaoFutebolComponent extends BaseFormComponent implements OnIni
         this.createForm();
     }
 
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
     getApostas(params?) {
         let queryParams: any = {
             'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
@@ -58,10 +65,12 @@ export class ApuracaoFutebolComponent extends BaseFormComponent implements OnIni
             };
         }
 
-        this.apostaService.getApostas(queryParams).subscribe(
-            apostas => this.apostas = apostas,
-            error => this.handleError(error)
-        );
+        this.apostaService.getApostas(queryParams)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                apostas => this.apostas = apostas,
+                error => this.handleError(error)
+            );
     }
 
     createForm() {
@@ -106,10 +115,12 @@ export class ApuracaoFutebolComponent extends BaseFormComponent implements OnIni
             (result) => {
                 console.log('cancelado');
 
-                // this.apostaService.cancel(aposta.id).subscribe(
-                //     apostas => this.apostas = apostas,
-                //     error => this.handleError(error)
-                // );
+                // this.apostaService.cancel(aposta.id)
+                //     .pipe(takeUntil(this.unsub$))
+                //     .subscribe(
+                //         apostas => this.apostas = apostas,
+                //         error => this.handleError(error)
+                //     );
             },
             (reason) => { }
         );

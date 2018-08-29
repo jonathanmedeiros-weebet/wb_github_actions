@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Campeonato, Jogo } from './../../models';
 import { JogoService, CampeonatoService, MessageService } from './../../services';
 
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
-
 
 @Component({
     selector: 'app-futebol-jogos',
@@ -18,7 +18,7 @@ export class JogosComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
     campeonato: Campeonato = new Campeonato();
     campeonatos: Campeonato[];
-    sub: Subscription;
+    unsub$ = new Subject();
 
     constructor(
         private jogoService: JogoService,
@@ -28,43 +28,50 @@ export class JogosComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.sub = this.route.queryParams.subscribe((params: any) => {
-            if (params['campeonato']) {
-                const campeonatoId = +params['campeonato'];
+        this.route.queryParams
+            .pipe(takeUntil(this.unsub$))
+            .subscribe((params: any) => {
+                if (params['campeonato']) {
+                    const campeonatoId = +params['campeonato'];
 
-                this.campeonatoService.getCampeonato(campeonatoId).subscribe(
-                    campeonato => {
-                        this.diaEspecifico = false;
-                        this.campeonato = campeonato;
-                    },
-                    error => this.messageService.error(error)
-                );
-            } else {
-                const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos-bloqueados'));
-                const queryParams: any = {
-                    'leagues': campeonatosBloqueados
-                };
-
-                if (params['data']) {
-                    const data = moment(params['data']).format('YYYY-MM-DD');
-                    queryParams.data = data;
+                    this.campeonatoService.getCampeonato(campeonatoId)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            campeonato => {
+                                this.diaEspecifico = false;
+                                this.campeonato = campeonato;
+                            },
+                            error => this.messageService.error(error)
+                        );
                 } else {
-                    queryParams.data = moment().format('YYYY-MM-DD');
+                    const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos-bloqueados'));
+                    const queryParams: any = {
+                        'leagues': campeonatosBloqueados
+                    };
+
+                    if (params['data']) {
+                        const data = moment(params['data']).format('YYYY-MM-DD');
+                        queryParams.data = data;
+                    } else {
+                        queryParams.data = moment().format('YYYY-MM-DD');
+                    }
+
+                    this.jogoService.getJogos(queryParams)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            campeonatos => {
+                                this.diaEspecifico = true;
+                                this.campeonatos = campeonatos;
+                            },
+                            error => this.messageService.error(error)
+                        );
                 }
 
-                this.jogoService.getJogos(queryParams).subscribe(
-                    campeonatos => {
-                        this.diaEspecifico = true;
-                        this.campeonatos = campeonatos;
-                    },
-                    error => this.messageService.error(error)
-                );
-            }
-
-        });
+            });
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 }
