@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CalcularCotacaoPipe implements PipeTransform {
 
-    transform(value: number, jogoId: string, chave: string): number {
-        let result: number = value;
+    transform(value: number, jogoId: string, chave: string): string {
+        let result = value;
         const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes-locais'));
         const tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
 
@@ -14,12 +14,19 @@ export class CalcularCotacaoPipe implements PipeTransform {
             result = parseFloat(cotacoesLocais[`${jogoId}${chave}`]);
         }
 
-        if (tiposAposta[chave]) {
-            result *= parseFloat(tiposAposta[chave].fator);
+        const tipoAposta = tiposAposta[chave];
+        if (tipoAposta) {
+            result *= parseFloat(tipoAposta.fator);
+
+            if (result > tipoAposta.limite) {
+                // console.log(`superou limite: ${chave}`);
+                // console.log(result);
+                // console.log(tipoAposta.limite);
+                result = parseFloat(tipoAposta.limite);
+            }
         }
 
-        console.log(typeof result);
-        // result = result.toFixed(2);
-        return result;
+        // console.log(typeof result);
+        return result.toFixed(2);
     }
 }

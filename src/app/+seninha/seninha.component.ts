@@ -118,8 +118,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit {
         this.messageService.error(msg);
     }
 
-    getSorteioNome(id){
-        const sorteio  = this.sorteios.find(s => s.id === id);
+    getSorteioNome(id) {
+        const sorteio = this.sorteios.find(s => s.id === id);
         return sorteio ? sorteio.nome : '';
     }
 
