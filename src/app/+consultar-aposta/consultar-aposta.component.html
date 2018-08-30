@@ -20,10 +20,14 @@
                         {{item.jogo.nome}}
                     </p>
                     <p>
+                        {{item.jogo.horario | moment:'DD/MM/YYYY HH:mm'}}
+                    </p>
+                    <p>
                         <b>{{item.aposta_tipo.nome}}:</b> {{item.cotacao | number: '1.0-2'}}
                     </p>
                 </div>
                 <div>
+                    <p>Cambista: {{aposta.cambista.nome}}</p>
                     <p>Apostador: {{aposta.apostador}}</p>
                     <p>
                         Horário: {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}

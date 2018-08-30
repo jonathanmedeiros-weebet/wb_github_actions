@@ -71,6 +71,13 @@ const appRoutes: Routes = [
                 }
             },
             {
+                path: 'regras',
+                loadChildren: 'app/+regras/regras.module#RegrasModule',
+                data: {
+                    pageTitle: 'Regras'
+                }
+            },
+            {
                 path: 'seninha',
                 loadChildren: 'app/+seninha/seninha.module#SeninhaModule',
                 data: {

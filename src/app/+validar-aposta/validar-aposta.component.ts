@@ -70,30 +70,36 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     submit() {
-        console.log(this.form.value);
-        // this.bilhete.apostador = this.preAposta.apostador;
-        // this.bilhete.valor = this.preAposta.valor;
+        // console.log(this.form.value);
+        const values = this.form.value;
 
-        // const itens = [];
-        // this.preAposta.itens.forEach(item => {
-        //     itens.push({
-        //         jogo_id: item.jogo.id,
-        //         jogo_nome: item.jogo.nome,
-        //         ao_vivo: item.ao_vivo,
-        //         cotacao: {
-        //             chave: item.aposta_tipo.chave,
-        //             valor: item.cotacao
-        //         }
-        //     });
-        // });
-        // this.bilhete.itens = itens;
+        if (values.itens.length) {
+            this.bilhete.apostador = values.apostador;
+            this.bilhete.valor = values.valor;
 
-        // this.apostaEsportivaService.create(this.bilhete)
-        //     .pipe(takeUntil(this.unsub$))
-        //     .subscribe(
-        //         result => this.success(result, 'imprimir'),
-        //         error => this.handleError(error)
-        //     );
+            const itens = [];
+            values.itens.forEach(item => {
+                itens.push({
+                    jogo_id: item.jogo.id,
+                    jogo_nome: item.jogo.nome,
+                    ao_vivo: item.ao_vivo,
+                    cotacao: {
+                        chave: item.aposta_tipo.chave,
+                        valor: item.cotacao
+                    }
+                });
+            });
+            this.bilhete.itens = itens;
+
+            this.apostaEsportivaService.create(this.bilhete)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.success(result, 'imprimir'),
+                    error => this.handleError(error)
+                );
+        } else {
+            this.handleError('Nenhum jogo na aposta!');
+        }
     }
 
     consultarAposta() {

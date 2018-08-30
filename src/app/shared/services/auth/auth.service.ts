@@ -26,26 +26,32 @@ export class AuthService {
             .post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    const usuarioSerializado = JSON.stringify(res.user);
                     const expires = moment().add(1, 'd').valueOf();
-
                     localStorage.setItem('expires', `${expires}`);
+
                     localStorage.setItem('token', res.token);
-                    localStorage.setItem('user', usuarioSerializado);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+
+                    localStorage.setItem('cotacoes-locais', JSON.stringify(res.parametros['cotacoes-local']));
+                    localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res.parametros['campeonatos-bloqueados']));
+                    localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
+                    localStorage.setItem('opcoes', JSON.stringify(res.parametros['opcoes']));
+
                 }),
-                switchMap(() => this.getTiposAposta()),
-                switchMap(() => this.getCampeonatosBloqueados()),
-                switchMap(() => this.getCotacoesLocais()),
                 catchError(this.errorService.handleError)
             );
     }
 
-    logout(): void {
+    logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         // localStorage.removeItem('app-mobile');
         localStorage.removeItem('expires');
         localStorage.removeItem('itens-bilhete-esportivo');
+        localStorage.removeItem('cotacoes-locais');
+        localStorage.removeItem('campeonatos-bloqueados');
+        localStorage.removeItem('tipos-aposta');
+        localStorage.removeItem('opcoes');
     }
 
     isLoggedIn(): boolean {
@@ -116,44 +122,6 @@ export class AuthService {
             .get(url, this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    getTiposAposta() {
-        const url = `${config.SPORTS_URL}/parametros/tipos-aposta`;
-
-        return this.http
-            .get(url, this.header.getRequestOptions(true))
-            .pipe(
-                map((res: any) => res.results),
-                map(res => {
-                    localStorage.setItem('tipos-aposta', JSON.stringify(res));
-                }),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    getCampeonatosBloqueados() {
-        const url = `${config.SPORTS_URL}/parametros/campeonatos-bloqueados`;
-
-        return this.http
-            .get(url, this.header.getRequestOptions(true))
-            .pipe(
-                map((res: any) => res.results),
-                map(res => localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res))),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    getCotacoesLocais() {
-        const url = `${config.SPORTS_URL}/parametros/cotacoes-local`;
-
-        return this.http
-            .get(url, this.header.getRequestOptions(true))
-            .pipe(
-                map((res: any) => res.results),
-                map(res => localStorage.setItem('cotacoes-locais', JSON.stringify(res))),
                 catchError(this.errorService.handleError)
             );
     }

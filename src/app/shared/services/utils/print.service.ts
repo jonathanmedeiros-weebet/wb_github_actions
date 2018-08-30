@@ -269,6 +269,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
     }
 
     sportsTicketDestkop(aposta) {
+        console.log(aposta);
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -421,7 +422,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.cotacao.nome} ( ${item.cotacao.valor} )
+                        ${item.aposta_tipo.nome} ( ${item.cotacao} )
                     </p>
                 </div>
             `;
@@ -431,7 +432,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                 <hr>
                 <div class="informacoes">
                     <p>
-                        CAMBISTA:
+                        CAMBISTA: ${aposta.cambista.nome}
                     </p>
                     <p>
                         APOSTADOR: ${aposta.apostador}
