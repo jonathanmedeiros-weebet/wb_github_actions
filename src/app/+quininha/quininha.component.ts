@@ -61,16 +61,10 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.unsub$.complete();
     }
 
-    getSorteioNome(id) {
-        const sorteio = this.sorteios.find(s => s.id === id);
-        return sorteio ? sorteio.nome : '';
-    }
-
     createForm() {
         this.form = this.fb.group({
             valor: ['', Validators.required],
-            sorteio_id: ['', Validators.required],
-            sorteio_nome: [''],
+            sorteio: [null, Validators.required],
             numeros: this.fb.array([])
         });
     }
@@ -80,15 +74,16 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
 
         if (tipoAPosta) {
-            // let item: Item = clone(this.item);
             const item = this.form.value;
+            item.sorteio_id = this.form.value.sorteio.id;
             item.premio5 = item.valor * this.tipoAposta.cotacao5;
             item.premio4 = item.valor * this.tipoAposta.cotacao4;
             item.premio3 = item.valor * this.tipoAposta.cotacao3;
+            this.aposta.itens.push(item);
 
             this.aposta.valor += item.valor;
             this.aposta.premio += item.premio5;
-            this.aposta.itens.push(item);
+
             this.form.reset();
             this.setNumeros([]);
         } else {
@@ -141,14 +136,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.form.setControl('numeros', numerosFormArray);
     }
 
-    setSorteioNome() {
-        const sorteioId = this.form.value.sorteio_id;
-        const sorteio = this.sorteios.find(s => s.id === sorteioId);
-        if (sorteio) {
-            if (sorteio) {
-                this.form.patchValue({ sorteio_nome: sorteio.nome });
-            }
-        }
+    compararSorteio(obj1, obj2) {
+        return obj1 && obj2 ? (obj1.id === obj2.id) : obj1 === obj2;
     }
 
     /* Selecionar número */

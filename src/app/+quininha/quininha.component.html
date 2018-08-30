@@ -22,13 +22,13 @@
                                     <div class="form-row">
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
-                                            <select class="form-control" formControlName="sorteio_id" (change)="setSorteioNome()" [ngClass]="applyCssInputError('sorteio_id')">
+                                            <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio" [ngClass]="applyCssInputError('sorteio')">
                                                 <option value="">Selecione</option>
-                                                <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">
+                                                <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
                                                     {{sorteio.nome}}
                                                 </option>
                                             </select>
-                                            <app-error-msg [control]="form.get('sorteio_id')" label="Sorteio"></app-error-msg>
+                                            <app-error-msg [control]="form.get('sorteio')" label="Sorteio"></app-error-msg>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
@@ -64,9 +64,6 @@
                 <div class="pre-bilhete col-xs-12 col-md-4" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
                     <div class="card">
                         <span>Pré-Bilhete</span>
-                        <!-- <pre>
-                                {{aposta | json}}
-                            </pre> -->
                         <a (click)="closeCupom()" class="fechar-pre-bilhete">
                             <i class="fa fa-lg fa-close"></i>
                         </a>
@@ -109,7 +106,7 @@
                                     <label for="">Apostador</label>
                                     <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
                                         #apostador="ngModel">
-                                        <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
+                                    <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
                                 </div>
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Telefone</label>

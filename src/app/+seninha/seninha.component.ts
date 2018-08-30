@@ -62,8 +62,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     createForm() {
         this.form = this.fb.group({
             valor: ['', Validators.required],
-            sorteio_id: ['', Validators.required],
-            sorteio_nome: [''],
+            sorteio: [null, Validators.required],
             numeros: this.fb.array([])
         });
     }
@@ -73,17 +72,16 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
 
         if (tipoAPosta) {
-            // let item: Item = clone(this.item);
             const item = this.form.value;
-
+            item.sorteio_id = this.form.value.sorteio.id;
             item.premio6 = item.valor * this.tipoAposta.cotacao6;
             item.premio5 = item.valor * this.tipoAposta.cotacao5;
             item.premio4 = item.valor * this.tipoAposta.cotacao4;
             item.premio3 = item.valor * this.tipoAposta.cotacao3;
+            this.aposta.itens.push(item);
 
             this.aposta.valor += item.valor;
             this.aposta.premio += item.premio6;
-            this.aposta.itens.push(item);
 
             this.form.reset();
             this.setNumeros([]);
@@ -99,16 +97,18 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Finalizar aposta */
     create(action) {
-        if (this.aposta.itens.length) {
-            this.apostaService.create(this.aposta)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    result => this.success(result, action),
-                    error => this.handleError(error)
-                );
-        } else {
-            this.messageService.warning('Por favor, inclua um palpite.');
-        }
+        console.log(this.aposta);
+
+        // if (this.aposta.itens.length) {
+        //     this.apostaService.create(this.aposta)
+        //         .pipe(takeUntil(this.unsub$))
+        //         .subscribe(
+        //             result => this.success(result, action),
+        //             error => this.handleError(error)
+        //         );
+        // } else {
+        //     this.messageService.warning('Por favor, inclua um palpite.');
+        // }
     }
 
     success(data, action) {
@@ -127,11 +127,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.messageService.error(msg);
     }
 
-    getSorteioNome(id) {
-        const sorteio = this.sorteios.find(s => s.id === id);
-        return sorteio ? sorteio.nome : '';
-    }
-
     get numeros() {
         return this.form.get('numeros') as FormArray;
     }
@@ -142,14 +137,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.form.setControl('numeros', numerosFormArray);
     }
 
-    setSorteioNome() {
-        const sorteioId = this.form.value.sorteio_id;
-        const sorteio = this.sorteios.find(s => s.id === sorteioId);
-        if (sorteio) {
-            if (sorteio) {
-                this.form.patchValue({ sorteio_nome: sorteio.nome });
-            }
-        }
+    compararSorteio(obj1, obj2) {
+        return obj1 && obj2 ? (obj1.id === obj2.id) : obj1 === obj2;
     }
 
     /* Selecionar número */
