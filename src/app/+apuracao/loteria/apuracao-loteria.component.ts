@@ -106,12 +106,11 @@ export class ApuracaoLoteriaComponent implements OnInit {
         HelperService.sharedLotteryTicket(aposta);
     }
 
-    checkResult(sorteioId, numero) {
-        const sorteio: Sorteio = this.sorteios.find(s => s.id === sorteioId);
+    checkResult(numero, sorteioResultado) {
         const result: any = {};
 
-        if (sorteio && sorteio.resultado) {
-            const exist = sorteio.resultado.find(n => n === numero);
+        if (sorteioResultado) {
+            const exist = sorteioResultado.find(n => parseInt(n, 10) === numero);
 
             if (exist) {
                 result.hit = true;

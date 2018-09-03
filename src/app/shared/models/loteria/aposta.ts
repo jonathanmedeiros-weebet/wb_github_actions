@@ -6,6 +6,7 @@ export class Aposta {
         this.chave = HelperService.guidGenerate();
     }
 
+    id: number;
     itens: Item[] = [];
     sorteioId: number;
     chave: string;

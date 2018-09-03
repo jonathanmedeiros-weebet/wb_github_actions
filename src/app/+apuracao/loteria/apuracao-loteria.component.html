@@ -76,14 +76,14 @@
                             </div>
                             <div>
                                 <label>prêmio</label>
-                                <span>{{(item.valor * item.cotacao) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
                             <div>
                                 <label>status</label>
                                 <span>{{item.status | uppercase}}</span>
                             </div>
                             <div class="circle-group">
-                                <div class="circle" *ngFor="let numero of item.numeros" [ngClass]="checkResult(item.sorteio_id, numero)">
+                                <div class="circle" *ngFor="let numero of item.numeros" [ngClass]="checkResult(numero, item.sorteio_numeros)">
                                     <div class="content">
                                         {{numero | number:'2.0'}}
                                     </div>
