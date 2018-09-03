@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
@@ -29,22 +29,6 @@ export class JogoService {
             );
     }
 
-    getJogos(queryParams?: any): Observable<Campeonato[]> {
-        let requestOptions;
-
-        if (queryParams) {
-            requestOptions = this.header.getRequestOptions(true, queryParams);
-        } else {
-            requestOptions = this.header.getRequestOptions(true);
-        }
-
-        return this.http.get(this.JogoUrl, requestOptions)
-            .pipe(
-                map((res: any) => res.result),
-                catchError(this.errorService.handleError)
-            );
-    }
-
     getCotacoes(id: number): Observable<Cotacao[]> {
         const url = `${this.JogoUrl}/${id}/cotacoes`;
 
@@ -64,5 +48,4 @@ export class JogoService {
                 catchError(this.errorService.handleError)
             );
     }
-
 }

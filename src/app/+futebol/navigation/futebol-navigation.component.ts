@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { MessageService, JogoService } from '../../services';
+import { MessageService, CampeonatoService } from '../../services';
 import { Campeonato } from '../../models';
 
 import { Subject } from 'rxjs';
@@ -18,7 +18,7 @@ export class FutebolNavigationComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
-        private jogoService: JogoService,
+        private campeonatoService: CampeonatoService,
         private messageService: MessageService
     ) { }
 
@@ -38,7 +38,7 @@ export class FutebolNavigationComponent implements OnInit, OnDestroy {
             'leagues': campeonatosBloqueados
         };
 
-        this.jogoService.getJogos(params)
+        this.campeonatoService.getCampeonatos(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => this.campeonatos = campeonatos,

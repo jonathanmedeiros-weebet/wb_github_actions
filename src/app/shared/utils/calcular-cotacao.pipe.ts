@@ -24,11 +24,6 @@ export class CalcularCotacaoPipe implements PipeTransform {
             // Fator
             result *= parseFloat(tipoAposta.fator);
 
-            // Limite
-            if (result > tipoAposta.limite) {
-                result = parseFloat(tipoAposta.limite);
-            }
-
             // Favorito e Zebra
             const cotacoesFavoritoZebra = [
                 'casa_90',
@@ -45,7 +40,7 @@ export class CalcularCotacaoPipe implements PipeTransform {
                 const fora = filtrados.find(cotacao => cotacao.chave === 'fora_90');
 
                 let favorito;
-                if (casa.valor < fora.valor) {
+                if (casa.valor <= fora.valor) {
                     favorito = 'casa';
                 } else {
                     favorito = 'fora';
@@ -56,6 +51,11 @@ export class CalcularCotacaoPipe implements PipeTransform {
                 } else {
                     result *= favorito === 'fora' ? opcoes.fator_favorito : opcoes.fator_zebra;
                 }
+            }
+
+            // Limite
+            if (result > tipoAposta.limite) {
+                result = parseFloat(tipoAposta.limite);
             }
         }
 

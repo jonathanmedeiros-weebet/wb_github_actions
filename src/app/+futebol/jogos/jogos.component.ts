@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Campeonato, Jogo } from './../../models';
-import { JogoService, CampeonatoService, MessageService } from './../../services';
+import { Campeonato } from './../../models';
+import { CampeonatoService, MessageService } from './../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,7 +21,6 @@ export class JogosComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
-        private jogoService: JogoService,
         private campeonatoService: CampeonatoService,
         private messageService: MessageService,
         private route: ActivatedRoute
@@ -56,7 +55,7 @@ export class JogosComponent implements OnInit, OnDestroy {
                         queryParams.data = moment().format('YYYY-MM-DD');
                     }
 
-                    this.jogoService.getJogos(queryParams)
+                    this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
@@ -66,7 +65,6 @@ export class JogosComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 }
-
             });
     }
 
