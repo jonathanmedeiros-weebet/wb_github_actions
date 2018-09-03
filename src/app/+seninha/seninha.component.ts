@@ -97,18 +97,17 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Finalizar aposta */
     create(action) {
-        console.log(this.aposta);
-
-        // if (this.aposta.itens.length) {
-        //     this.apostaService.create(this.aposta)
-        //         .pipe(takeUntil(this.unsub$))
-        //         .subscribe(
-        //             result => this.success(result, action),
-        //             error => this.handleError(error)
-        //         );
-        // } else {
-        //     this.messageService.warning('Por favor, inclua um palpite.');
-        // }
+        // console.log(this.aposta);
+        if (this.aposta.itens.length) {
+            this.apostaService.create(this.aposta)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.success(result, action),
+                    error => this.handleError(error)
+                );
+        } else {
+            this.messageService.warning('Por favor, inclua um palpite.');
+        }
     }
 
     success(data, action) {
