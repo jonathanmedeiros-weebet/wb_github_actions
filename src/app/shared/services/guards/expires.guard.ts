@@ -17,7 +17,6 @@ export class ExpiresGuard implements CanActivateChild {
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.auth.isExpired()) {
-            // this.messageService.error("Seu login expirou, por favor, faça seu login novamente");
             this.router.navigate(['/auth/login']);
             return false;
         }

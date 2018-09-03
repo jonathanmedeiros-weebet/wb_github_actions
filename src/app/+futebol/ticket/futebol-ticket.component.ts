@@ -17,6 +17,7 @@ import { ItemBilheteEsportivo } from '../../models';
 })
 export class FutebolTicketComponent extends BaseFormComponent implements OnInit, OnDestroy {
     possibilidadeGanho = 0;
+    apostaMinima;
     unsub$ = new Subject();
 
     constructor(
@@ -31,7 +32,8 @@ export class FutebolTicketComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-        console.log(opcoes);
+
+        this.apostaMinima = opcoes.valor_min_aposta;
 
         this.createForm();
 
@@ -57,7 +59,7 @@ export class FutebolTicketComponent extends BaseFormComponent implements OnInit,
     createForm() {
         this.form = this.fb.group({
             apostador: ['', [Validators.required]],
-            valor: ['', [Validators.required, Validators.min(1)]],
+            valor: ['', [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
         });
     }

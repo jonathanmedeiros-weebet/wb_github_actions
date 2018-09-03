@@ -10,6 +10,8 @@ import * as moment from 'moment';
     providedIn: 'root'
 })
 export class PrintService {
+    private opcoes = JSON.parse(localStorage.getItem('opcoes'));
+
     constructor(
         private auth: AuthService
     ) { }
@@ -236,7 +238,7 @@ export class PrintService {
         let ticket = `${config.BANCA_NOME}
 
 #${aposta.id}
-Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
+Data: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
 Valor Total: ${HelperService.moneyFormat(aposta.valor)}`;
@@ -269,7 +271,6 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
     }
 
     sportsTicketDestkop(aposta) {
-        console.log(aposta);
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -416,7 +417,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                         ${item.campeonato.nome}
                     </p>
                     <p class="horario">
-                        ${moment(item.jogo.horario).format('dddd, DD MMMM YYYY, HH:mm')}
+                        ${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
                     </p>
                     <p class="jogo">
                         ${item.jogo.nome}
@@ -438,7 +439,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                         APOSTADOR: ${aposta.apostador}
                     </p>
                     <p>
-                        HORÁRIO: ${aposta.horario}
+                        HORÁRIO: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
                     </p>
                 </div>
                 <hr>
@@ -455,7 +456,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                     </p>
                 </div>
                 <p class="rodape">
-                    Jogue consciente, leia as regras no site! Seu possível premio está impresso no bilhete
+                    ${this.opcoes.informativo_rodape}
                 </p>
             </div>
         </div>`;

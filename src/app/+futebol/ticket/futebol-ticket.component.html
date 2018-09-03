@@ -17,7 +17,7 @@
                 <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
             </div>
             <div class="form-group">
-                <input type="text" formControlName="valor" [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
+                <input type="number" formControlName="valor" [min]="apostaMinima" [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
                 <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
             </div>
             <div class="form-group">

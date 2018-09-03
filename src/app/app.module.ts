@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 
+import * as moment from 'moment';
+moment.locale('pt-BR');
+
 // App routing
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,7 +17,6 @@ import { AppComponent } from './app.component';
 
 // Core providers
 import { LayoutModule } from './shared/layout/layout.module';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -22,7 +24,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     imports: [
         BrowserModule,
         HttpClientModule,
-
         AppRoutingModule,
 
         NgbModule.forRoot(),

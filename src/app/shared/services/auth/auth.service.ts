@@ -36,7 +36,6 @@ export class AuthService {
                     localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res.parametros['campeonatos-bloqueados']));
                     localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
                     localStorage.setItem('opcoes', JSON.stringify(res.parametros['opcoes']));
-
                 }),
                 catchError(this.errorService.handleError)
             );

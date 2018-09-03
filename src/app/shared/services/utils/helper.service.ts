@@ -167,4 +167,8 @@ export class HelperService {
             'file://'
         );
     }
+
+    static dateFormat(date: string, format?: string) {
+        return format ? moment(date).format(format) : moment(date).format();
+    }
 }

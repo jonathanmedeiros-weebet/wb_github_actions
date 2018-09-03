@@ -10,7 +10,7 @@ export class HeadersService {
     getRequestOptions(sendToken?: boolean, queryParams?: any) {
         const token = localStorage.getItem('token');
 
-        let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+        let headers = new HttpHeaders();
         headers = headers.set('Content-Type', 'application/jsond');
 
         if (sendToken) {

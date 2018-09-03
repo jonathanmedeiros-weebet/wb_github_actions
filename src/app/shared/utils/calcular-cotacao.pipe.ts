@@ -19,14 +19,10 @@ export class CalcularCotacaoPipe implements PipeTransform {
             result *= parseFloat(tipoAposta.fator);
 
             if (result > tipoAposta.limite) {
-                // console.log(`superou limite: ${chave}`);
-                // console.log(result);
-                // console.log(tipoAposta.limite);
                 result = parseFloat(tipoAposta.limite);
             }
         }
 
-        // console.log(typeof result);
         return result.toFixed(2);
     }
 }
