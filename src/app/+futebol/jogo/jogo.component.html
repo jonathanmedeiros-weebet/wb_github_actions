@@ -25,7 +25,7 @@
                                     <td>
                                         <b>{{cotacao.chave | tipoAposta}}: </b>
                                     </td>
-                                    <td>{{cotacao.valor | calcularCotacao: jogo._id: cotacao.chave}}</td>
+                                    <td>{{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}</td>
                                 </ng-container>
                             </tr>
                         </tbody>

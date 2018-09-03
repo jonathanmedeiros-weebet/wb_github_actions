@@ -55,22 +55,21 @@ export class JogoComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    addCotacao(jogo, cotacao) {
+    addCotacao(jogo: Jogo, cotacao) {
         let modificado = false;
-        const index = this.itens.findIndex(item => (item.jogo_id === jogo._id) && (item.cotacao.chave === cotacao.chave));
+        const index = this.itens.findIndex(item => (item.jogo._id === jogo._id) && (item.cotacao.chave === cotacao.chave));
 
         if (index >= 0) {
             this.itens.splice(index, 1);
             modificado = true;
         } else {
-            const item = this.itens.find(i => i.jogo_id === jogo._id);
+            const item = this.itens.find(i => i.jogo._id === jogo._id);
 
             if (!item) {
                 this.itens.push({
-                    jogo_id: jogo._id,
-                    jogo_nome: jogo.nome,
                     ao_vivo: jogo.ao_vivo,
-                    cotacao: cotacao
+                    cotacao: cotacao,
+                    jogo: jogo
                 });
 
                 modificado = true;

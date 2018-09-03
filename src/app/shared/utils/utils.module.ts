@@ -4,7 +4,8 @@ import {
     MomentPipe,
     TimeToStringtPipe,
     TipoApostaPipe,
-    CalcularCotacaoPipe
+    CalcularCotacaoPipe,
+    // CalcularCotacaoFavZebPipe
 } from './index';
 
 @NgModule({
@@ -12,13 +13,15 @@ import {
         MomentPipe,
         TimeToStringtPipe,
         TipoApostaPipe,
-        CalcularCotacaoPipe
+        CalcularCotacaoPipe,
+        // CalcularCotacaoFavZebPipe
     ],
     exports: [
         MomentPipe,
         TimeToStringtPipe,
         TipoApostaPipe,
-        CalcularCotacaoPipe
+        CalcularCotacaoPipe,
+        // CalcularCotacaoFavZebPipe
     ]
 })
 export class UtilsModule { }

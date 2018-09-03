@@ -36,9 +36,9 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of itens.value; let i=index">
-                        <td>{{item.jogo_nome}}</td>
+                        <td>{{item.jogo.nome}}</td>
                         <td>
-                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.jogo_id: item.cotacao.chave}}
+                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes }}
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger remover-item" (click)="removerItem(i)">

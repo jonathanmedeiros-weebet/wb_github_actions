@@ -17,6 +17,7 @@ import { ItemBilheteEsportivo } from '../../models';
 })
 export class FutebolTicketComponent extends BaseFormComponent implements OnInit, OnDestroy {
     possibilidadeGanho = 0;
+    opcoes = JSON.parse(localStorage.getItem('opcoes'));
     apostaMinima;
     unsub$ = new Subject();
 
@@ -31,9 +32,7 @@ export class FutebolTicketComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-
-        this.apostaMinima = opcoes.valor_min_aposta;
+        this.apostaMinima = this.opcoes.valor_min_aposta;
 
         this.createForm();
 
@@ -81,20 +80,19 @@ export class FutebolTicketComponent extends BaseFormComponent implements OnInit,
 
     calcularPossibilidadeGanho(valor) {
         let cotacao = 1;
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
 
         this.itens.value.forEach(item => {
             cotacao = cotacao * item.cotacao.valor;
         });
 
         // Fator Máximo
-        if (cotacao > opcoes.fator_max) {
-            cotacao = opcoes.fator_max;
+        if (cotacao > this.opcoes.fator_max) {
+            cotacao = this.opcoes.fator_max;
         }
 
         // Valor Máximo de Prêmio
         const premio = valor * cotacao;
-        this.possibilidadeGanho = premio < opcoes.valor_max_premio ? premio : opcoes.valor_max_premio;
+        this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
     }
 
     submit() {

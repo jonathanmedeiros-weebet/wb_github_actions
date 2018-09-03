@@ -23,8 +23,6 @@ export class MainLayoutComponent implements OnInit {
     getParametros() {
         this.parametroService.getParametros().subscribe(
             parametros => {
-                console.log('main layout', parametros);
-
                 localStorage.setItem('cotacoes-locais', JSON.stringify(parametros['cotacoes-local']));
                 localStorage.setItem('campeonatos-bloqueados', JSON.stringify(parametros['campeonatos-bloqueados']));
                 localStorage.setItem('tipos-aposta', JSON.stringify(parametros['tipos-aposta']));
