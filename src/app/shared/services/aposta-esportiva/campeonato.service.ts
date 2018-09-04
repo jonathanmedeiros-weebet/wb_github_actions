@@ -11,7 +11,7 @@ import { config } from '../../config';
 
 @Injectable()
 export class CampeonatoService {
-    private CampeonatoUrl = `${config.CENTER_URL}/campeonatos`;
+    private CampeonatoUrl = `${config.CENTER_API}/campeonatos`;
 
     constructor(
         private http: HttpClient,

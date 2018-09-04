@@ -1,11 +1,12 @@
 
 const _host = 'http://weebet.local';
-const _center = 'http://192.168.0.125:3002/v1';
+const _center = 'http://localhost:3002';
 
 export const config: any = {
     HOST: _host,
     BASE_URL: `${_host}/api`,
-    CENTER_URL: _center,
+    CENTER_HOST: _center,
+    CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
     PRIMARY_COLOR: '#999',

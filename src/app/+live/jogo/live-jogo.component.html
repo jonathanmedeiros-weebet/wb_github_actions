@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12">
+        <div>
+            <div style="background-color: red; color:white; padding: 3px; width: 70px;">
+                AO VIVO
+            </div>
+            <h4>
+                <b>{{jogo.time_a_nome}}</b>
+                {{jogo.info.time_a_resultado}}-{{jogo.info.time_b_resultado}}
+                <b>{{jogo.time_b_nome}}</b>
+                <span>
+                   [ {{jogo.info.minutos}}' {{jogo.info.tempo}}T ]
+                </span>
+            </h4>
+        </div>
+        <div>
+            {{jogo?.horario | moment: 'DD/MM/YYYY HH:mm'}}
+        </div>
+        <div class="jogo-content" *ngIf="jogo.cotacoes">
+            <div class="tipos-odds">
+                <h2 class="tipo-odd">Cotações</h2>
+                <div class="odds">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td>Chave</td>
+                                <td>Valor</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cotacao of jogo.cotacoes" class="odd">
+                                <ng-container *ngIf="showOdd(cotacao.chave)">
+                                    <td>
+                                        <b>{{cotacao.chave | tipoAposta}}: </b>
+                                    </td>
+                                    <td>{{cotacao.valor}}</td>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

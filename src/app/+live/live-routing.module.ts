@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LiveComponent } from './live.component';
+import { LiveListagemComponent } from './listagem/live-listagem.component';
+import { LiveJogoComponent } from './jogo/live-jogo.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: LiveComponent
+        component: LiveListagemComponent
+    },
+    {
+        path: 'jogo/:id',
+        component: LiveJogoComponent
     }
 ];
 

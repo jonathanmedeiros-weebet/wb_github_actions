@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
 import { LiveRoutingModule } from './live-routing.module';
-import { LiveComponent } from './live.component';
-import { LiveService } from '../services';
+import { LiveListagemComponent } from './listagem/live-listagem.component';
+import { LiveJogoComponent } from './jogo/live-jogo.component';
+import { LiveService, JogoService } from '../services';
 
 @NgModule({
     imports: [SharedModule, LiveRoutingModule],
-    declarations: [LiveComponent],
-    providers: [LiveService]
+    declarations: [LiveListagemComponent, LiveJogoComponent],
+    providers: [LiveService, JogoService]
 })
 export class LiveModule { }

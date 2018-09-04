@@ -11,7 +11,7 @@ import { config } from '../../config';
 
 @Injectable()
 export class JogoService {
-    private JogoUrl = `${config.CENTER_URL}/jogos`;
+    private JogoUrl = `${config.CENTER_API}/jogos`;
 
     constructor(
         private http: HttpClient,
@@ -31,6 +31,16 @@ export class JogoService {
 
     getCotacoes(id: number): Observable<Cotacao[]> {
         const url = `${this.JogoUrl}/${id}/cotacoes`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getJogosAoVivo() {
+        const url = `${this.JogoUrl}/ao-vivo`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(

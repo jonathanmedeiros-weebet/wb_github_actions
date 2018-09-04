@@ -11,7 +11,7 @@
 
         <div id="menu-conta" class="dropdown">
             <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
-               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-2x fa-user"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -52,12 +52,9 @@
                     <a class="nav-link" [routerLink]="['/futebol']">Futebol</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/consultar-aposta']">Consultar Aposta</a>
+                    <a class="nav-link" [routerLink]="['/live']">Ao Vivo</a>
                 </li>
-                <!-- <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/ao-vivo']">Ao Vivo</a>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
+                <!--li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/basquetebol']">Basquetebol</a>
                 </li> -->
                 <li class="nav-item" routerLinkActive="active">
@@ -86,6 +83,11 @@
             <li>
                 <a [routerLink]="['/resultados/loteria']">
                     <i class="fa fa-list"></i> Result.
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/consultar-aposta']">
+                    Consultar Aposta
                 </a>
             </li>
             <li>
