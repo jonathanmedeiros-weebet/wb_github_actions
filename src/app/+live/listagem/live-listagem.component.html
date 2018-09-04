@@ -2,6 +2,9 @@
     <div *ngFor="let key of keys()">
         <div>
             <div>
+                {{jogos[key].campeonato?.nome}}
+            </div>
+            <div>
                 <b>{{jogos[key].time_a_nome}}</b> {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
                 <b>{{jogos[key].time_b_nome}}</b>
                 <span>

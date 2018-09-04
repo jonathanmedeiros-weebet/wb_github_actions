@@ -15,6 +15,9 @@
             </h4>
         </div>
         <div>
+            {{jogo.campeonato?.nome}}
+        </div>
+        <div>
             {{jogo?.horario | moment: 'DD/MM/YYYY HH:mm'}}
         </div>
         <div class="jogo-content" *ngIf="jogo.cotacoes">
