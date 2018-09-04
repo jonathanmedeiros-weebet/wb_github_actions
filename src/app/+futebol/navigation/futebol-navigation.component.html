@@ -15,7 +15,7 @@
             <li class="group">Campeonatos</li>
             <li *ngFor="let camp of campeonatos">
                 <a [routerLink]="['/futebol/jogos']" [queryParams]="{ campeonato: camp._id }">
-                    <img src="assets/images/flag.png" /> {{camp.nome}}
+                    {{camp.nome}}
                 </a>
             </li>
         </ul>
