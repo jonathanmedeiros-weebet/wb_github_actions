@@ -22,8 +22,7 @@ export class AuthService {
     ) { }
 
     login(data: any): Observable<any> {
-        return this.http
-            .post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     const expires = moment().add(1, 'd').valueOf();
@@ -32,10 +31,10 @@ export class AuthService {
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
 
-                    localStorage.setItem('cotacoes-locais', JSON.stringify(res.parametros['cotacoes-local']));
-                    localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res.parametros['campeonatos-bloqueados']));
-                    localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
-                    localStorage.setItem('opcoes', JSON.stringify(res.parametros['opcoes']));
+                    // localStorage.setItem('cotacoes-locais', JSON.stringify(res.parametros['cotacoes-local']));
+                    // localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res.parametros['campeonatos-bloqueados']));
+                    // localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
+                    // localStorage.setItem('opcoes', JSON.stringify(res.parametros['opcoes']));
                 }),
                 catchError(this.errorService.handleError)
             );
