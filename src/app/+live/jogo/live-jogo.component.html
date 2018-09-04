@@ -6,10 +6,11 @@
             </div>
             <h4>
                 <b>{{jogo.time_a_nome}}</b>
-                {{jogo.info.time_a_resultado}}-{{jogo.info.time_b_resultado}}
+                {{jogo.info?.time_a_resultado}}-{{jogo.info?.time_b_resultado}}
                 <b>{{jogo.time_b_nome}}</b>
+
                 <span>
-                   [ {{jogo.info.minutos}}' {{jogo.info.tempo}}T ]
+                    [ {{jogo.info?.minutos}}' {{jogo.info?.tempo}}T ]
                 </span>
             </h4>
         </div>
