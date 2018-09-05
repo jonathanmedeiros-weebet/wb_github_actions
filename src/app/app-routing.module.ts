@@ -23,87 +23,54 @@ const appRoutes: Routes = [
             },
             {
                 path: 'home',
-                loadChildren: 'app/+home/home.module#HomeModule',
-                data: {
-                    pageTitle: 'Home'
-                }
+                loadChildren: 'app/home/home.module#HomeModule'
             },
             {
-                path: 'apuracao',
-                loadChildren: 'app/+apuracao/apuracao.module#ApuracaoModule',
-                data: {
-                    pageTitle: 'Apuração'
-                }
+                path: 'esportes',
+                loadChildren: 'app/esportes/esportes.module#EsportesModule'
             },
+            // {
+            //     path: 'futebol',
+            //     loadChildren: 'app/+futebol/futebol.module#FutebolModule',
+            //     data: {
+            //         pageTitle: 'Futebol'
+            //     }
+            // },
+            // {
+            //     path: 'live',
+            //     loadChildren: 'app/+live/live.module#LiveModule',
+            //     data: {
+            //         pageTitle: 'Live'
+            //     }
+            // },
             {
-                path: 'consultar-aposta',
-                loadChildren: 'app/+consultar-aposta/consultar-aposta.module#ConsultarApostaModule',
-                data: {
-                    pageTitle: 'Consultar Aposta'
-                }
-            },
-            {
-                path: 'futebol',
-                loadChildren: 'app/+futebol/futebol.module#FutebolModule',
-                data: {
-                    pageTitle: 'Futebol'
-                }
-            },
-            {
-                path: 'live',
-                loadChildren: 'app/+live/live.module#LiveModule',
-                data: {
-                    pageTitle: 'Live'
-                }
-            },
-            {
-                path: 'resultados',
-                loadChildren: 'app/+resultados/resultados.module#ResultadosModule',
-                data: {
-                    pageTitle: 'Resultados'
-                }
+                path: 'loterias',
+                loadChildren: 'app/loterias/loterias.module#LoteriasModule'
             },
             {
                 path: 'meu-perfil',
-                loadChildren: 'app/+meu-perfil/meu-perfil.module#MeuPerfilModule',
-                data: {
-                    pageTitle: 'Meu Perfil'
-                }
+                loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule'
             },
             {
                 path: 'regras',
-                loadChildren: 'app/+regras/regras.module#RegrasModule',
+                loadChildren: 'app/regras/regras.module#RegrasModule',
                 data: {
                     pageTitle: 'Regras'
                 }
-            },
-            {
-                path: 'seninha',
-                loadChildren: 'app/+seninha/seninha.module#SeninhaModule',
-                data: {
-                    pageTitle: 'Seninha'
-                }
-            },
-            {
-                path: 'quininha',
-                loadChildren: 'app/+quininha/quininha.module#QuininhaModule',
-                data: {
-                    pageTitle: 'Quininha'
-                }
-            },
-            {
-                path: 'validar-aposta',
-                loadChildren: 'app/+validar-aposta/validar-aposta.module#ValidarApostaModule',
-                data: {
-                    pageTitle: 'Validar Aposta'
-                }
             }
+            // {
+            //     path: 'validar-aposta',
+            //     loadChildren: 'app/+validar-aposta/validar-aposta.module#ValidarApostaModule',
+            //     data: {
+            //         pageTitle: 'Validar Aposta'
+            //     }
+            // }
         ]
     },
     {
         path: 'auth',
         component: AuthLayoutComponent,
-        loadChildren: 'app/+auth/auth.module#AuthModule'
+        loadChildren: 'app/auth/auth.module#AuthModule'
     }
 ];
 

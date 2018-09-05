@@ -1,19 +1,19 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
-
 @NgModule({
+    declarations: [],
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule
+        ReactiveFormsModule,
+        RouterModule,
+        UtilsModule
     ],
-    declarations: [ErrorMsgComponent],
     exports: [
         CommonModule,
         FormsModule,
@@ -21,8 +21,7 @@ import { UtilsModule } from './utils/utils.module';
         RouterModule,
 
         LayoutModule,
-        UtilsModule,
-        ErrorMsgComponent
+        UtilsModule
     ]
 })
 export class SharedModule { }

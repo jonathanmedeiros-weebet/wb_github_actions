@@ -3,5 +3,6 @@ export class Sorteio {
     data: string;
     nome: string;
     ativo: boolean;
+    tipo: string;
     resultado: number[];
 }

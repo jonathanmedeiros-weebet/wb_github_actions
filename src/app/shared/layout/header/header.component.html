@@ -49,19 +49,19 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/futebol']">Futebol</a>
+                    <a class="nav-link" [routerLink]="['/esportes/futebol']">Futebol</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/live']">Ao Vivo</a>
+                    <a class="nav-link" [routerLink]="['/esportes/futebol/live']">Ao Vivo</a>
                 </li>
                 <!--li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/basquetebol']">Basquetebol</a>
-                </li> -->
+                </li-->
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/seninha']">Seninha</a>
+                    <a class="nav-link" [routerLink]="['/loterias/seninha']">Seninha</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
+                    <a class="nav-link" [routerLink]="['/loterias/quininha']">Quininha</a>
                 </li>
             </ul>
         </div>
@@ -75,23 +75,23 @@
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/apuracao/loteria']">
+                <a [routerLink]="['/loterias/apuracao']">
                     <i class="fa fa-check"></i>
                     <span class="hidden-sm-down">Apuração</span>
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/resultados/loteria']">
-                    <i class="fa fa-list"></i> Result.
+                <a [routerLink]="['/loterias/resultados']">
+                    <i class="fa fa-list"></i> Resultados
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/consultar-aposta']">
+                <a [routerLink]="['/esportes/consultar-aposta']">
                     Consultar Aposta
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/validar-aposta']">
+                <a [routerLink]="['/esportes/validar-aposta']">
                     Validar Aposta
                 </a>
             </li>
