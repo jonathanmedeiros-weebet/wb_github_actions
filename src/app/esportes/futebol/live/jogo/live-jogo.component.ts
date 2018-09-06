@@ -36,6 +36,10 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
                     }
                 }
             );
+
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => this.itens = itens);
     }
 
     ngOnDestroy() {
@@ -87,7 +91,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
         }
 
         if (modificado) {
-            console.log('add');
             this.bilheteService.atualizarItens(this.itens);
         }
     }

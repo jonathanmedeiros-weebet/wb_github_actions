@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Campeonato } from './../../../models';
-import { CampeonatoService, MessageService } from './../../../services';
+import { Campeonato } from './../../../../models';
+import { CampeonatoService, MessageService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-futebol-jogos',
-    templateUrl: 'jogos.component.html',
-    styleUrls: ['jogos.component.css']
+    selector: 'app-futebol-listagem',
+    templateUrl: 'futebol-listagem.component.html',
+    styleUrls: ['futebol-listagem.component.css']
 })
 
-export class JogosComponent implements OnInit, OnDestroy {
+export class FutebolListagemComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
     campeonato: Campeonato = new Campeonato();
     campeonatos: Campeonato[];

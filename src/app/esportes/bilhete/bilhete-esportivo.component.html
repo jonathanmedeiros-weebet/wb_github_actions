@@ -1,4 +1,4 @@
-<section class="pre-bilhete sports-ticket" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
+<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
     <div class="pre-bilhete-esportes">
         <h4>BILHETE</h4>
         <div>
@@ -36,7 +36,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of itens.value; let i=index">
-                        <td>{{item.jogo.nome}}</td>
+                        <td>
+                            {{item.jogo.nome}}
+                            <span class="live-odd" *ngIf="item.jogo.ao_vivo">AO VIVO</span>
+                        </td>
                         <td>
                             {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes }}
                         </td>

@@ -2,26 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FutebolWrapperComponent } from './wrapper/futebol-wrapper.component';
-import { JogosComponent } from './jogos/jogos.component';
-import { JogoComponent } from './jogo/jogo.component';
-
 export const routes: Routes = [
     {
         path: '',
         component: FutebolWrapperComponent,
         children: [
-            {
-                path: '',
-                redirectTo: 'jogos',
-                pathMatch: 'full'
-            },
+            // {
+            //     path: '',
+            //     redirectTo: 'jogos',
+            //     pathMatch: 'full'
+            // },
             {
                 path: 'jogos',
-                component: JogosComponent
-            },
-            {
-                path: 'jogos/:id',
-                component: JogoComponent
+                loadChildren: 'app/esportes/futebol/default/futebol-default.module#FutebolDefaultModule'
             },
             {
                 path: 'live',

@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Jogo, ItemBilheteEsportivo } from './../../../models';
-import { JogoService, MessageService, BilheteEsportivoService } from './../../../services';
+import { Jogo, ItemBilheteEsportivo } from './../../../../models';
+import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
-    templateUrl: 'jogo.component.html',
-    styleUrls: ['jogo.component.css']
+    templateUrl: 'futebol-jogo.component.html',
+    styleUrls: ['futebol-jogo.component.css']
 })
 
-export class JogoComponent implements OnInit, OnDestroy {
+export class FutebolJogoComponent implements OnInit, OnDestroy {
     jogo: Jogo = new Jogo();
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;

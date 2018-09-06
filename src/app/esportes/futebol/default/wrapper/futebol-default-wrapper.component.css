@@ -1,8 +1,9 @@
-#futebol-wrapper{
+#default-wrapper{
     display: flex;
     flex-direction: row;
 }
 
-.teste{
+#default-content{
     flex-grow: 1;
+    padding: 0 5px;
 }

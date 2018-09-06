@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -11,11 +11,11 @@ import {
 import { ItemBilheteEsportivo } from '../../models';
 
 @Component({
-    selector: 'app-sports-ticket',
-    templateUrl: 'sports-ticket.component.html',
-    styleUrls: ['sports-ticket.component.css']
+    selector: 'app-bilhete-esportivo',
+    templateUrl: 'bilhete-esportivo.component.html',
+    styleUrls: ['bilhete-esportivo.component.css'],
 })
-export class SportsTicketComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
     possibilidadeGanho = 0;
     opcoes = JSON.parse(localStorage.getItem('opcoes'));
     apostaMinima;

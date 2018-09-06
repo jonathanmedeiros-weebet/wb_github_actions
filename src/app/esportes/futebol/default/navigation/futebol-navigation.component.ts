@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { MessageService, CampeonatoService } from '../../../services';
-import { Campeonato } from '../../../models';
+import { MessageService, CampeonatoService } from '../../../../services';
+import { Campeonato } from '../../../../models';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

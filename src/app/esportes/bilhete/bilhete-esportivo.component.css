@@ -1,0 +1,11 @@
+.pre-bilhete{
+    width: 270px;
+    text-align: center;
+}
+
+.live-odd{
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
