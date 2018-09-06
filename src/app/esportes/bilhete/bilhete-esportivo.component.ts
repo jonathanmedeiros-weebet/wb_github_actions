@@ -102,7 +102,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     submit() {
         if (this.itens.length) {
-            this.apostaEsportivaService.create(this.form.value)
+            const values = this.form.value;
+            values.itens.map(item => {
+                delete item.jogo;
+            });
+            console.log(values);
+
+            this.apostaEsportivaService.create(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     result => this.success(result, 'imprimir'),

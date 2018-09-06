@@ -41,7 +41,7 @@
                             <span class="live-odd" *ngIf="item.jogo.ao_vivo">AO VIVO</span>
                         </td>
                         <td>
-                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes }}
+                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes : item.jogo.ao_vivo }}
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger remover-item" (click)="removerItem(i)">

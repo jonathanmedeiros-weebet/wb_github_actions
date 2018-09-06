@@ -1,4 +1,7 @@
 <section id="live-section">
+    <h1 *ngIf="!keys().length">
+        Nenhum jogo disponível!
+    </h1>
     <div *ngFor="let key of keys()">
         <div>
             <div>

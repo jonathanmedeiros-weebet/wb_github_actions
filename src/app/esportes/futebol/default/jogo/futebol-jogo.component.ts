@@ -67,7 +67,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
 
             if (!item) {
                 this.itens.push({
-                    ao_vivo: jogo.ao_vivo,
+                    aoVivo: jogo.ao_vivo,
+                    jogo_id: jogo._id,
                     cotacao: cotacao,
                     jogo: jogo
                 });
