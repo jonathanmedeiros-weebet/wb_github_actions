@@ -38,10 +38,10 @@
                     <tr *ngFor="let item of itens.value; let i=index">
                         <td>
                             {{item.jogo.nome}}
-                            <span class="live-odd" *ngIf="item.jogo.ao_vivo">AO VIVO</span>
+                            <span class="live-odd" *ngIf="item.jogo && item.jogo.ao_vivo">AO VIVO</span>
                         </td>
                         <td>
-                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes : item.jogo.aoVivo }}
+                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes : item.jogo.ao_vivo }}
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger remover-item" (click)="removerItem(i)">
