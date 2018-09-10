@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -87,7 +87,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         let cotacao = 1;
 
         this.itens.value.forEach(item => {
-            cotacao = cotacao * item.cotacao.valor;
+            cotacao = cotacao * HelperService.calcularCotacao(
+                item.cotacao.valor,
+                item.cotacao.chave,
+                item.jogo._id,
+                item.jogo.cotacoes,
+                item.aoVivo
+            );
         });
 
         // Fator Máximo

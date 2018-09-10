@@ -57,24 +57,28 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
 
     addCotacao(jogo: Jogo, cotacao) {
         let modificado = false;
-        const index = this.itens.findIndex(item => (item.jogo._id === jogo._id) && (item.cotacao.chave === cotacao.chave));
+        const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
+        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
 
-        if (index >= 0) {
-            this.itens.splice(index, 1);
+        const item = {
+            aoVivo: jogo.ao_vivo,
+            jogo_id: jogo._id,
+            cotacao: cotacao,
+            jogo: jogo
+        };
+
+        if (indexGame >= 0) {
+            if (indexOdd >= 0) {
+                this.itens.splice(indexOdd, 1);
+            } else {
+                this.itens.splice(indexGame, 1, item);
+            }
+
             modificado = true;
         } else {
-            const item = this.itens.find(i => i.jogo._id === jogo._id);
+            this.itens.push(item);
 
-            if (!item) {
-                this.itens.push({
-                    aoVivo: jogo.ao_vivo,
-                    jogo_id: jogo._id,
-                    cotacao: cotacao,
-                    jogo: jogo
-                });
-
-                modificado = true;
-            }
+            modificado = true;
         }
 
         if (modificado) {
