@@ -19,8 +19,10 @@ export class ParametroService {
 
     getParametros(): Observable<any> {
         const url = `${config.SPORTS_URL}/parametros`;
+        const token = localStorage.getItem('token');
+        const requestOptions = token ? this.header.getRequestOptions(true) : this.header.getRequestOptions();
 
-        return this.http.get(url, this.header.getRequestOptions())
+        return this.http.get(url, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

@@ -27,14 +27,9 @@ export class AuthService {
                 map(res => {
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
-
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
-
-                    // localStorage.setItem('cotacoes-locais', JSON.stringify(res.parametros['cotacoes-local']));
-                    // localStorage.setItem('campeonatos-bloqueados', JSON.stringify(res.parametros['campeonatos-bloqueados']));
-                    // localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
-                    // localStorage.setItem('opcoes', JSON.stringify(res.parametros['opcoes']));
+                    localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -43,13 +38,8 @@ export class AuthService {
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        // localStorage.removeItem('app-mobile');
         localStorage.removeItem('expires');
-        localStorage.removeItem('itens-bilhete-esportivo');
-        localStorage.removeItem('cotacoes-locais');
-        localStorage.removeItem('campeonatos-bloqueados');
-        localStorage.removeItem('tipos-aposta');
-        localStorage.removeItem('opcoes');
+        // localStorage.removeItem('app-mobile');
     }
 
     isLoggedIn(): boolean {

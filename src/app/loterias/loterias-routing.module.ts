@@ -1,23 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ApuracaoLoteriaComponent } from './apuracao/apuracao-loteria.component';
+import { ResultadosLoteriaComponent } from './resultados/resultados-loteria.component';
+import { SeninhaComponent } from './seninha/seninha.component';
+import { QuininhaComponent } from './quininha/quininha.component';
+import { AuthGuard, ExpiresGuard } from './../services';
+
 export const routes: Routes = [
     {
         path: 'apuracao',
-        loadChildren: 'app/loterias/apuracao/apuracao-loteria.module#ApuracaoLoteriaModule'
+        component: ApuracaoLoteriaComponent,
+        canActivate: [AuthGuard],
+        canActivateChild: [ExpiresGuard]
     },
     {
         path: 'resultados',
-        loadChildren: 'app/loterias/resultados/resultados-loteria.module#ResultadosLoteriaModule'
+        component: ResultadosLoteriaComponent
     },
     {
         path: 'seninha',
-        loadChildren: 'app/loterias/seninha/seninha.module#SeninhaModule'
+        component: SeninhaComponent
     },
     {
         path: 'quininha',
-        loadChildren: 'app/loterias/quininha/quininha.module#QuininhaModule'
-    },
+        component: QuininhaComponent
+    }
 ];
 
 @NgModule({

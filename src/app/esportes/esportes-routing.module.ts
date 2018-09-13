@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ApuracaoEsporteComponent } from './apuracao/apuracao-esporte.component';
+import { ConsultarApostaComponent } from './consultar-aposta/consultar-aposta.component';
+import { ResultadosEsporteComponent } from './resultados/resultados-esporte.component';
+import { ValidarApostaEsportivaComponent } from './validar-aposta/validar-aposta-esportiva.component';
+import { AuthGuard, ExpiresGuard } from './../services';
+
 export const routes: Routes = [
     {
         path: 'apuracao',
-        loadChildren: 'app/esportes/apuracao/apuracao-esporte.module#ApuracaoEsporteModule'
+        component: ApuracaoEsporteComponent,
+        canActivate: [AuthGuard],
+        canActivateChild: [ExpiresGuard]
     },
     {
         path: 'consultar-aposta',
-        loadChildren: 'app/esportes/consultar-aposta/consultar-aposta.module#ConsultarApostaModule'
+        component: ConsultarApostaComponent
     },
     {
         path: 'futebol',
@@ -16,11 +24,13 @@ export const routes: Routes = [
     },
     {
         path: 'resultados',
-        loadChildren: 'app/esportes/resultados/resultados-esporte.module#ResultadosEsporteModule'
+        component: ResultadosEsporteComponent
     },
     {
         path: 'validar-aposta',
-        loadChildren: 'app/esportes/validar-aposta/validar-aposta-esportiva.module#ValidarApostaEsportivaModule'
+        component: ValidarApostaEsportivaComponent,
+        canActivate: [AuthGuard],
+        canActivateChild: [ExpiresGuard]
     }
 ];
 

@@ -13,8 +13,6 @@ const appRoutes: Routes = [
         data: {
             pageTitle: 'Dashboard'
         },
-        canActivate: [AuthGuard],
-        canActivateChild: [ExpiresGuard],
         children: [
             {
                 path: '',
@@ -49,7 +47,9 @@ const appRoutes: Routes = [
             },
             {
                 path: 'meu-perfil',
-                loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule'
+                loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule',
+                canActivate: [AuthGuard],
+                canActivateChild: [ExpiresGuard]
             },
             {
                 path: 'regras',
