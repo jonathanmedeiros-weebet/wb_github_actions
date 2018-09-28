@@ -43,7 +43,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos-bloqueados'));
+                    const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
                     const queryParams: any = {
                         'leagues': campeonatosBloqueados
                     };

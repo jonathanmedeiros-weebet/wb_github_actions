@@ -13,8 +13,8 @@ export class HelperService {
 
     static calcularCotacao(value: number, chave: string, jogoId: number, cotacoes: Cotacao[], aoVivo?: boolean): number {
         let result = value;
-        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes-locais'));
-        const tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
+        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+        const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
         const opcoes = JSON.parse(localStorage.getItem('opcoes'));
 
         const tipoAposta = tiposAposta[chave];

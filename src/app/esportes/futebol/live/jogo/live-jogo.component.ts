@@ -25,7 +25,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
+        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
 
         this.route.params
             .pipe(takeUntil(this.unsub$))

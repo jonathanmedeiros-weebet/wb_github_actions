@@ -32,7 +32,7 @@ export class FutebolNavigationComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos-bloqueados'));
+        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
         const params = {
             fields: ['_id', 'nome'],
             'leagues': campeonatosBloqueados

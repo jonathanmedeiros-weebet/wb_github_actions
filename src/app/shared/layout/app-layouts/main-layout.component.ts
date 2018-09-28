@@ -23,9 +23,9 @@ export class MainLayoutComponent implements OnInit {
     getParametros() {
         this.parametroService.getParametros().subscribe(
             parametros => {
-                localStorage.setItem('cotacoes-locais', JSON.stringify(parametros['cotacoes-local']));
-                localStorage.setItem('campeonatos-bloqueados', JSON.stringify(parametros['campeonatos-bloqueados']));
-                localStorage.setItem('tipos-aposta', JSON.stringify(parametros['tipos-aposta']));
+                localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
+                localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
+                localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
                 localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
             },
             error => this.messageService.error(error)

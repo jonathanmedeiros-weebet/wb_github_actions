@@ -29,7 +29,7 @@ export class AuthService {
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
-                    localStorage.setItem('tipos-aposta', JSON.stringify(res.parametros['tipos-aposta']));
+                    localStorage.setItem('tipos_aposta', JSON.stringify(res.parametros['tipos_aposta']));
                 }),
                 catchError(this.errorService.handleError)
             );

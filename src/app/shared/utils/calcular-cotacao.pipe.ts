@@ -9,8 +9,8 @@ export class CalcularCotacaoPipe implements PipeTransform {
 
     transform(value: number, chave: string, jogoId: number, cotacoes: Cotacao[], aoVivo?: boolean): string {
         let result = value;
-        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes-locais'));
-        const tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
+        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+        const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
         const opcoes = JSON.parse(localStorage.getItem('opcoes'));
         const tipoAposta = tiposAposta[chave];
 

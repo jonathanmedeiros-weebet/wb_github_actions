@@ -44,7 +44,7 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.tiposAposta = JSON.parse(localStorage.getItem('tipos-aposta'));
+        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);

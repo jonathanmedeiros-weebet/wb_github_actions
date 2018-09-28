@@ -93,7 +93,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     atualizarTiposAposta() {
         this.parametroService.getParametros().subscribe(
             parametros => {
-                localStorage.setItem('tipos-aposta', JSON.stringify(parametros['tipos-aposta']));
+                localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
             },
             error => this.messageService.error(error)
         );
