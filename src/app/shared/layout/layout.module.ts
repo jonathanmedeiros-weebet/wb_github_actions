@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './app-layouts/main-layout.component';
 import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
 import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
+import { AdminLayoutComponent } from './app-layouts/admin-layout.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
@@ -24,6 +25,7 @@ import { UtilsModule } from './../utils/utils.module';
         MainLayoutComponent,
         EmptyLayoutComponent,
         AuthLayoutComponent,
+        AdminLayoutComponent,
         HeaderComponent,
         FooterComponent,
         ErrorMsgComponent
@@ -31,6 +33,7 @@ import { UtilsModule } from './../utils/utils.module';
     exports: [
         MainLayoutComponent,
         AuthLayoutComponent,
+        AdminLayoutComponent,
         HeaderComponent,
         FooterComponent,
         ErrorMsgComponent

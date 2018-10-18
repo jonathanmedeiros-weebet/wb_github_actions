@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
+import { AdminLayoutComponent } from './shared/layout/app-layouts/admin-layout.component';
 
 import { AuthGuard, ExpiresGuard } from './services';
 
@@ -71,6 +72,11 @@ const appRoutes: Routes = [
         path: 'auth',
         component: AuthLayoutComponent,
         loadChildren: 'app/auth/auth.module#AuthModule'
+    },
+    {
+        path: 'admin',
+        component: AdminLayoutComponent,
+        loadChildren: 'app/admin/admin.module#AdminModule'
     }
 ];
 
