@@ -12,6 +12,7 @@ export * from './shared/services/aposta-esportiva/campeonato.service';
 export * from './shared/services/aposta-esportiva/cotacao.service';
 export * from './shared/services/aposta-esportiva/jogo.service';
 export * from './shared/services/aposta-esportiva/live.service';
+export * from './shared/services/aposta-esportiva/preaposta-esportiva.service';
 
 /* Utils Services */
 export * from './shared/services/utils/cep.service';

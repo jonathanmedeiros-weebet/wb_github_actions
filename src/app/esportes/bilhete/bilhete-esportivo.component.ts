@@ -6,7 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {
     MessageService, BilheteEsportivoService, HelperService,
-    PrintService, ApostaEsportivaService
+    PrintService, ApostaEsportivaService, AuthService,
+    PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import * as clone from 'clone';
@@ -24,6 +25,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
+        private preApostaService: PreApostaEsportivaService,
+        private auth: AuthService,
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
         private printService: PrintService,
@@ -114,19 +117,27 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 delete item.jogo;
             });
 
-            this.apostaEsportivaService.create(values)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    result => this.success(result, 'imprimir'),
-                    error => this.handleError(error)
-                );
+            if (this.auth.isLoggedIn()) {
+                this.apostaEsportivaService.create(values)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        result => this.apostaSuccess(result, 'imprimir'),
+                        error => this.handleError(error)
+                    );
+            } else {
+                this.preApostaService.create(values)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        result => this.preApostaSuccess(result.id),
+                        error => this.handleError(error)
+                    );
+            }
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }
     }
 
-
-    success(data, action) {
+    apostaSuccess(data, action) {
         if (action === 'compartilhar') {
             HelperService.sharedSportsTicket(data.results);
         } else {
@@ -137,6 +148,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.form.reset();
 
         this.messageService.success('Aposta realizada!');
+    }
+
+    preApostaSuccess(id) {
+        this.bilheteService.atualizarItens([]);
+        this.form.reset();
+        alert(`Procure o cambista da ZEBRINHA.BET de sua preferência e informe o código: #${id}`);
     }
 
     handleError(msg) {

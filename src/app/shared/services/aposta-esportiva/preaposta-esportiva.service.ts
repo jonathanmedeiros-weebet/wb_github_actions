@@ -6,12 +6,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
-import { ApostaEsportiva } from './../../../models';
+import { PreApostaEsportiva } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
-export class ApostaEsportivaService {
-    private ApostaUrl = `${config.SPORTS_URL}/apostas`; // URL to web api
+export class PreApostaEsportivaService {
+    private PreApostaUrl = `${config.SPORTS_URL}/preapostas`; // URL to web api
 
     constructor(
         private http: HttpClient,
@@ -19,7 +19,7 @@ export class ApostaEsportivaService {
         private errorService: ErrorService
     ) { }
 
-    getApostas(queryParams?: any): Observable<any> {
+    getPreApostas(queryParams?: any): Observable<any> {
         let requestOptions;
 
         if (queryParams) {
@@ -28,15 +28,15 @@ export class ApostaEsportivaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.ApostaUrl, requestOptions)
+        return this.http.get(this.PreApostaUrl, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
 
-    getAposta(id: number): Observable<ApostaEsportiva> {
-        const url = `${this.ApostaUrl}/${id}`;
+    getPreAposta(id: number): Observable<PreApostaEsportiva> {
+        const url = `${this.PreApostaUrl}/${id}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
@@ -46,17 +46,9 @@ export class ApostaEsportivaService {
     }
 
     create(aposta): Observable<any> {
-        return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
+        return this.http.post(this.PreApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    cancel(id): Observable<any> {
-        const url = `${this.ApostaUrl}/${id}`;
-
-        return this.http.delete(url, this.header.getRequestOptions(true))
-            .pipe(
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }

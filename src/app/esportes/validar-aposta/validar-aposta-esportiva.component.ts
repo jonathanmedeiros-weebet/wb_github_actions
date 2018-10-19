@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 
-import { MessageService, ApostaEsportivaService, PrintService, HelperService } from '../../services';
+import { MessageService, PreApostaEsportivaService, ApostaEsportivaService, PrintService, HelperService } from '../../services';
 import { BilheteEsportivo, PreApostaEsportiva } from '../../models';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -21,6 +21,7 @@ export class ValidarApostaEsportivaComponent extends BaseFormComponent implement
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
+        private preApostaService: PreApostaEsportivaService,
         private messageService: MessageService,
         private printService: PrintService,
         private fb: FormBuilder
@@ -103,11 +104,8 @@ export class ValidarApostaEsportivaComponent extends BaseFormComponent implement
     }
 
     consultarAposta() {
-        this.apostaEsportivaService.getPreAposta(this.codigo)
-            .pipe(
-                takeUntil(this.unsub$),
-                tap(console.log)
-            )
+        this.preApostaService.getPreAposta(this.codigo)
+            .pipe(takeUntil(this.unsub$))
             .subscribe(
                 preAposta => {
                     this.exibirPreAposta = true;
