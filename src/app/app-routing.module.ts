@@ -28,20 +28,6 @@ const appRoutes: Routes = [
                 path: 'esportes',
                 loadChildren: 'app/esportes/esportes.module#EsportesModule'
             },
-            // {
-            //     path: 'futebol',
-            //     loadChildren: 'app/+futebol/futebol.module#FutebolModule',
-            //     data: {
-            //         pageTitle: 'Futebol'
-            //     }
-            // },
-            // {
-            //     path: 'live',
-            //     loadChildren: 'app/+live/live.module#LiveModule',
-            //     data: {
-            //         pageTitle: 'Live'
-            //     }
-            // },
             {
                 path: 'loterias',
                 loadChildren: 'app/loterias/loterias.module#LoteriasModule'
@@ -59,13 +45,6 @@ const appRoutes: Routes = [
                     pageTitle: 'Regras'
                 }
             }
-            // {
-            //     path: 'validar-aposta',
-            //     loadChildren: 'app/+validar-aposta/validar-aposta.module#ValidarApostaModule',
-            //     data: {
-            //         pageTitle: 'Validar Aposta'
-            //     }
-            // }
         ]
     },
     {
