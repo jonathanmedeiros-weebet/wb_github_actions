@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ApuracaoEsporteComponent } from './apuracao/apuracao-esporte.component';
 import { ConsultarApostaComponent } from './consultar-aposta/consultar-aposta.component';
-import { ResultadosEsporteComponent } from './resultados/resultados-esporte.component';
 import { ValidarApostaEsportivaComponent } from './validar-aposta/validar-aposta-esportiva.component';
 import { AuthGuard, ExpiresGuard } from './../services';
 
@@ -21,10 +20,6 @@ export const routes: Routes = [
     {
         path: 'futebol',
         loadChildren: 'app/esportes/futebol/futebol.module#FutebolModule'
-    },
-    {
-        path: 'resultados',
-        component: ResultadosEsporteComponent
     },
     {
         path: 'validar-aposta',
