@@ -7,16 +7,24 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="#">Apostas</a>
+                <a href="#">
+                    <i class="fa fa-search"></i> Apostas
+                </a>
             </li>
             <li>
-                <a href="#">Admin</a>
+                <a [routerLink]="['/admin/dashboard']">
+                    <i class="fa fa-dashboard"></i> Admin
+                </a>
             </li>
             <li>
-                <a href="#">App</a>
+                <a href="#">
+                    <i class="fa fa-download"></i> App
+                </a>
             </li>
             <li>
-                <a href="#">Regras</a>
+                <a [routerLink]="['/regras']">
+                    <i class="fa fa-book"></i> Regras
+                </a>
             </li>
         </ul>
         <ul class="sidebar-nav">
