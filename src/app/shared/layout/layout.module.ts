@@ -8,6 +8,7 @@ import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
 import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
 import { AdminLayoutComponent } from './app-layouts/admin-layout.component';
 import { HeaderComponent } from './header/header.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
 
@@ -28,6 +29,7 @@ import { UtilsModule } from './../utils/utils.module';
         AdminLayoutComponent,
         HeaderComponent,
         FooterComponent,
+        NavigationComponent,
         ErrorMsgComponent
     ],
     exports: [
@@ -36,6 +38,7 @@ import { UtilsModule } from './../utils/utils.module';
         AdminLayoutComponent,
         HeaderComponent,
         FooterComponent,
+        NavigationComponent,
         ErrorMsgComponent
     ]
 })

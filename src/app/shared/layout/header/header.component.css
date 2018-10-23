@@ -1,3 +1,11 @@
+header{
+    width: calc(100% - 255px);
+    position: fixed;
+    left: auto;
+    right: 0;
+    top: 0;
+}
+
 .bg-dark{
     background-color: var(--background-primario)!important;
 }

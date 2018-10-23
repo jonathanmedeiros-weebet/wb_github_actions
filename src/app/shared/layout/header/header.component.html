@@ -1,13 +1,15 @@
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar-1 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar-1 navbar navbar-expand-md navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
-            <img class="logo-banca" alt="{{BANCA_NOME}}" src="{{LOGO}}" />
-        </a>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div id="menu-conta" class="dropdown">
@@ -82,36 +84,30 @@
                     <a class="nav-link" [routerLink]="['/admin/dashboard']">Admin</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/esportes/futebol/jogos']">Futebol</a>
+                    <a class="nav-link" [routerLink]="['/esportes/futebol/jogos']">
+                        <i class="fa fa-futbol-o"></i> Futebol
+                    </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/esportes/futebol/live']">Ao Vivo</a>
+                    <a class="nav-link" [routerLink]="['/esportes/futebol/live']">
+                        <i class="fa fa-play"></i> Ao Vivo
+                    </a>
                 </li>
                 <!--li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/basquetebol']">Basquetebol</a>
                 </li-->
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/loterias/seninha']">Seninha</a>
+                    <a class="nav-link" [routerLink]="['/loterias/seninha']">
+                        <i class="fa fa-ticket"></i> Seninha
+                    </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/loterias/quininha']">Quininha</a>
+                    <a class="nav-link" [routerLink]="['/loterias/quininha']">
+                        <i class="fa fa-ticket"></i> Quininha
+                    </a>
                 </li>
             </ul>
         </div>
 
-    </nav>
-    <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <ul>
-            <li id="relogio" style="flex-grow: 1;">
-                <a style="padding-left: 4px;">
-                    <i class="fa fa-clock-o"></i> {{now | moment:'HH:mm:ss'}}
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/regras']">
-                    Regras
-                </a>
-            </li>
-        </ul>
     </nav>
 </header>

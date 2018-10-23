@@ -1,0 +1,40 @@
+#sidebar-wrapper{
+    width:255px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #011e46;
+}
+
+.sidebar-menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.sidebar-brand{
+    text-align: center;
+ }
+
+ .sidebar-brand img{
+     height: 60px;
+ }
+
+.sidebar-nav{
+    padding: 0;
+}
+
+.sidebar-nav li{
+    padding: 5px 15px;
+}
+
+.sidebar-nav li:not(:last-child){
+    border-bottom: 1px solid #fff;
+}
+
+#sidebar-wrapper > ul li{
+    list-style: none;
+}
+
+
