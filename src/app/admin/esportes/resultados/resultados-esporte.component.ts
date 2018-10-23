@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { CampeonatoService, MessageService } from './../../services';
-import { Campeonato } from './../../models';
+import { BaseFormComponent } from '../../../shared/layout/base-form/base-form.component';
+import { CampeonatoService, MessageService } from './../../../services';
+import { Campeonato } from './../../../models';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-resultados-esporte',
+    selector: 'app-admin-resultados-esporte',
     templateUrl: 'resultados-esporte.component.html',
     styleUrls: ['resultados-esporte.component.css']
 })

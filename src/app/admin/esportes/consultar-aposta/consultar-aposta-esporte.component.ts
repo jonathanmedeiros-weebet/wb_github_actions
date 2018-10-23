@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { MessageService, ApostaEsportivaService } from '../../services';
-import { ApostaEsportiva } from '../../models';
+import { MessageService, ApostaEsportivaService } from '../../../services';
+import { ApostaEsportiva } from '../../../models';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-consultar-aposta',
-    templateUrl: 'consultar-aposta.component.html',
-    styleUrls: ['./consultar-aposta.component.css']
+    selector: 'app-admin-consultar-aposta-esporte',
+    templateUrl: 'consultar-aposta-esporte.component.html',
+    styleUrls: ['./consultar-aposta-esporte.component.css']
 })
-export class ConsultarApostaComponent implements OnInit, OnDestroy {
+export class ConsultarApostaEsporteComponent implements OnInit, OnDestroy {
     codigo;
     aposta: ApostaEsportiva;
     unsub$ = new Subject();

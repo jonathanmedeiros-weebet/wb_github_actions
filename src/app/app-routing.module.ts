@@ -55,7 +55,9 @@ const appRoutes: Routes = [
     {
         path: 'admin',
         component: AdminLayoutComponent,
-        loadChildren: 'app/admin/admin.module#AdminModule'
+        loadChildren: 'app/admin/admin.module#AdminModule',
+        canActivate: [AuthGuard],
+        canActivateChild: [ExpiresGuard]
     }
 ];
 

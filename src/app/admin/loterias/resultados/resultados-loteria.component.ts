@@ -3,17 +3,17 @@ import { FormBuilder } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SorteioService, MessageService } from './../../services';
-import { Sorteio } from './../../models';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { SorteioService, MessageService } from './../../../services';
+import { Sorteio } from './../../../models';
+import { BaseFormComponent } from '../../../shared/layout/base-form/base-form.component';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-resultados-loteria',
+    selector: 'app-admin-resultados-loteria',
     templateUrl: 'resultados-loteria.component.html',
     styleUrls: ['resultados-loteria.component.css']
 })
-export class ResultadosLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class AdminResultadosLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     sorteios: Sorteio[] = [];
     unsub$ = new Subject();
 

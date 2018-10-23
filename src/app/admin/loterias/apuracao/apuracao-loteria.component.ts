@@ -3,21 +3,21 @@ import { Validators, FormBuilder } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { BaseFormComponent } from '../../../shared/layout/base-form/base-form.component';
 import {
     ApostaService, MessageService,
     PrintService, SorteioService,
     AuthService, HelperService
-} from './../../services';
-import { Aposta, Sorteio } from './../../models';
+} from './../../../services';
+import { Aposta, Sorteio } from './../../../models';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-apuracao-loteria',
+    selector: 'app-admin-apuracao-loteria',
     templateUrl: 'apuracao-loteria.component.html',
     styleUrls: ['apuracao-loteria.component.css']
 })
-export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class AdminApuracaoLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     apostas: Aposta[];
     sorteios: Sorteio[] = [];
     appMobile;
