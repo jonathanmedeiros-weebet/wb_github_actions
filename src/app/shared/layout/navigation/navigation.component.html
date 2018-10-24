@@ -1,5 +1,6 @@
 <aside>
-    <div id="sidebar-wrapper" class="collapse navbar-collapse">
+    <!-- <button type="button" class="btn btn-danger btn-lg" (click)="clickMe()">CLICK ME</button> -->
+    <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
         <div class="sidebar-brand">
             <a class="" [routerLink]="['/']" routerLinkActive="router-link-active">
                 <img class="logo-banca" src="http://weebet.local/tema/logo_banca.png" />
@@ -29,7 +30,7 @@
         </ul>
         <ul class="sidebar-nav">
             <li>
-                <a href="#">Dashboard</a>
+                <a href="#">LOREM LOREM LOREM LOREM LOREM LOREM LOREM </a>
             </li>
             <li>
                 <a href="#">Shortcuts</a>

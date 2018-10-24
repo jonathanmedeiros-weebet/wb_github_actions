@@ -5,6 +5,8 @@
     left: 0;
     bottom: 0;
     background: #011e46;
+    z-index: 100;
+    overflow: hidden;
 }
 
 .sidebar-menu{
@@ -44,4 +46,9 @@
     list-style: none;
 }
 
-
+.btn-danger{
+    position: absolute;
+    top: 110px;
+    left: 260px;
+    z-index: 2000;
+}

@@ -1,5 +1,4 @@
 header{
-    /* width: calc(100% - 255px); */
     width: 100%;
     position: fixed;
     left: auto;
@@ -12,15 +11,20 @@ header{
 }
 
 .menu-categories{
-    background-color: red;
+    background-color: rgb(156, 26, 26);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 15px 20px;
+    height: 48px;
 }
 
 .menu-categories .category{
     margin: 0px 20px;
+}
+
+.menu-categories a{
+    color: #fff;
 }
 
 @media (max-width: 600px)

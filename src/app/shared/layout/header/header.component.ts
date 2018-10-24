@@ -1,20 +1,36 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametroService } from './../../../services';
+import { AuthService, MessageService, ParametroService, SidebarService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
 
 import * as moment from 'moment';
-import * as $ from 'jquery';
 
 @Component({
     selector: 'app-header',
     templateUrl: 'header.component.html',
-    styleUrls: ['header.component.css']
+    styleUrls: ['header.component.css'],
+    animations: [
+        trigger('openClose', [
+            state('open', style({
+                width: 'calc(100% - 255px)',
+            })),
+            state('closed', style({
+                width: '100%'
+            })),
+            transition('open => closed', [
+                animate('400ms ease-in')
+            ]),
+            transition('closed => open', [
+                animate('400ms ease-out')
+            ])
+        ]),
+    ]
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy {
     posicaoFinanceira = {
@@ -27,13 +43,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     BANCA_NOME;
     appMobile;
     now = moment();
+    isOpen = false;
     unsub$ = new Subject();
 
     constructor(
         private fb: FormBuilder,
         private messageService: MessageService,
         private parametroService: ParametroService,
-        private auth: AuthService
+        private auth: AuthService,
+        private sidebarService: SidebarService
     ) {
         super();
     }
@@ -48,7 +66,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        $('.nav-item').click(() => $('.navbar-toggler:visible').click());
+        this.sidebarService.isOpen.subscribe(isOpen => this.isOpen = isOpen);
     }
 
     ngOnDestroy() {
@@ -77,6 +95,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    toggleSidebar() {
+        this.sidebarService.toggle();
+        console.log(this.isOpen);
     }
 
     logout() {
