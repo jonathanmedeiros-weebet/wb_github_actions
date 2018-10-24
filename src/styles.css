@@ -45,7 +45,6 @@ html, body{
 }
 
 #content-wrapper {
-    /* padding: 113px 0 0 0; */
     padding: 30px 0px 0px 255px;
 }
 
@@ -127,4 +126,14 @@ html, body{
 
 .modal{
     z-index: 9002;
+}
+
+@media only screen and (max-width: 600px) {
+    #content-wrapper {
+        padding: 0px;
+    }
+
+    #page-wrapper{
+        margin-top: 100px;
+    }
 }

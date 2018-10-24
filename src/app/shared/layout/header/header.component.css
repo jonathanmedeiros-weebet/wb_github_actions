@@ -1,132 +1,35 @@
 header{
-    width: calc(100% - 255px);
+    /* width: calc(100% - 255px); */
+    width: 100%;
     position: fixed;
     left: auto;
     right: 0;
     top: 0;
 }
 
-.bg-dark{
-    background-color: var(--background-primario)!important;
+.logo-mobile img{
+    height: 40px;
 }
 
-.navbar-expand-md .navbar-nav{
-    margin-right: 0!important;
-    margin-left: auto!important;
-}
-
-.logo-banca{
-    height: 60px;
-    margin-left: 15px;
-}
-
-.navbar{
+.menu-categories{
+    background-color: red;
     display: flex;
-}
-
-.navbar .navbar-collapse{
+    align-items: center;
     justify-content: center;
+    padding: 15px 20px;
 }
 
-.navbar .navbar-collapse .navbar-nav{
-    margin: 0!important;
+.menu-categories .category{
+    margin: 0px 20px;
 }
 
-.navbar ul li a{
-    font-size: 1.8em;
-    padding: 5px 15px;
-    color: white;
-}
-
-.navbar-1{
-    z-index: 9001;
-}
-
-.navbar-1 ul li a{
-    padding: 15px 2px;
-    margin: 0 25px;
-}
-
-.navbar-1 ul li.active a{
-    border-bottom: 3px solid white;
-}
-
-.navbar-2{
-    top: 80px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-.navbar-2 > ul{
-    width: 100%;
-    padding-left: 0;
-    margin-bottom: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+@media (max-width: 600px)
+{
 
 }
-.navbar-2 > ul li{
-    list-style: none;
-}
-.navbar-2 > ul li a{
-    font-size: 1.1em;
-    padding: 5px 15px;
-    color: white;
-    cursor: pointer;
-}
 
-li .sub-menu{
-    display: none;
-    position: absolute;
-    background: var(--background-primario);
-    opacity: 0.8;
-    top: 28px;
-    padding: 5px 0;
-}
-
-li:hover .sub-menu{
-    display: block;
-}
-
-li .sub-menu a{
-    display: inline-block;
-    padding: 5px 25px!important;
-}
-
-#relogio{
-    display: none;
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-    .navbar-1{
-        justify-content: space-between;
-        height: auto;
+@media only screen and (min-width: 768px) {
+    .navbar-mobile{
+        display: none;
     }
 }
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    #relogio{
-        display: block;
-    }
-    .navbar-2 > ul{
-        justify-content: flex-end;
-    }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .navbar-1{
-        justify-content: center;
-        height: 80px;
-    }
-    .navbar-1 ul li a {
-        padding: 22px 2px;
-    }
-    #menu-conta{
-        order: 10;
-    }
-}
-
-
