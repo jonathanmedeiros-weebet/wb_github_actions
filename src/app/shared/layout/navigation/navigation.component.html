@@ -28,28 +28,33 @@
                 </a>
             </li>
         </ul>
-        <ul class="sidebar-nav">
+
+        <ul class="sidebar-nav" *ngIf="contexto == 'esportes'; else loterias">
+            <span class="group">Data</span>
             <li>
-                <a href="#">LOREM LOREM LOREM LOREM LOREM LOREM LOREM </a>
+                <a [routerLink]="['/esportes/futebol/jogos']">
+                    Jogos de Hoje
+                </a>
             </li>
             <li>
-                <a href="#">Shortcuts</a>
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: amanha }">
+                    Jogos de Amanhã
+                </a>
             </li>
-            <li>
-                <a href="#">Overview</a>
+            <span class="group">Campeonatos</span>
+            <li *ngFor="let campeonato of lista">
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+                    {{campeonato.nome}}
+                </a>
             </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
+            <ng-template #loterias>
+                <li>
+                    <a href="#">LOREM LOREM LOREM LOREM LOREM LOREM LOREM </a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+            </ng-template>
         </ul>
     </div>
 </aside>

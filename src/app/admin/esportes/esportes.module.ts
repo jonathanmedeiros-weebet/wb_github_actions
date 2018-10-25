@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared/shared.module';
 import { AdminEsportesRoutingModule } from './esportes-routing.module';
-import { ApostaEsportivaService, PreApostaEsportivaService, CampeonatoService } from '../../services';
+import { ApostaEsportivaService, PreApostaEsportivaService } from '../../services';
 import { ApuracaoEsporteComponent } from './apuracao/apuracao-esporte.component';
 import { ResultadosEsporteComponent } from './resultados/resultados-esporte.component';
 import { ConsultarApostaEsporteComponent } from './consultar-aposta/consultar-aposta-esporte.component';
@@ -19,8 +19,7 @@ import { ConsultarApostaEsporteComponent } from './consultar-aposta/consultar-ap
     ],
     providers: [
         ApostaEsportivaService,
-        PreApostaEsportivaService,
-        CampeonatoService
+        PreApostaEsportivaService
     ]
 })
 export class AdminEsportesModule { }

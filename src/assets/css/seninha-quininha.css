@@ -68,7 +68,7 @@
 
 .pre-bilhete{
     display: none;
-    position: relative;
+    /* position: relative; */
 }
 .pre-bilhete .form-row{
     margin-top: 12px;

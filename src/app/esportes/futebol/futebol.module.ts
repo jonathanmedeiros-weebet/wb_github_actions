@@ -4,7 +4,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { FutebolRoutingModule } from './futebol-routing.module';
 import { FutebolWrapperComponent } from './wrapper/futebol-wrapper.component';
 import { BilheteEsportivoComponent } from '../bilhete/bilhete-esportivo.component';
-import { JogoService, CampeonatoService, BilheteEsportivoService, ApostaEsportivaService } from './../../services';
+import { JogoService, BilheteEsportivoService, ApostaEsportivaService } from './../../services';
 
 @NgModule({
     imports: [
@@ -17,7 +17,6 @@ import { JogoService, CampeonatoService, BilheteEsportivoService, ApostaEsportiv
     ],
     providers: [
         JogoService,
-        CampeonatoService,
         BilheteEsportivoService,
         ApostaEsportivaService
     ]

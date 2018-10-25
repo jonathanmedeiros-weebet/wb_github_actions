@@ -6,11 +6,16 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 export class SidebarService {
-    private open = false;
-    private isOpenSource = new BehaviorSubject<boolean>(this.open);
-    isOpen = this.isOpenSource.asObservable();
+    private open = true;
+    private isOpenSource;
+    isOpen;
 
-    constructor() { }
+    constructor() {
+        const width = window.innerWidth;
+        this.open = width > 667 ? true : false;
+        this.isOpenSource = new BehaviorSubject<boolean>(this.open);
+        this.isOpen = this.isOpenSource.asObservable();
+    }
 
     toggle(): void {
         this.open = !this.open;

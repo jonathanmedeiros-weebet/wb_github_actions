@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
 import { EsportesRoutingModule } from './esportes-routing.module';
-import { ApostaEsportivaService, PreApostaEsportivaService, CampeonatoService } from '../services';
+import { ApostaEsportivaService, PreApostaEsportivaService } from '../services';
 
 @NgModule({
     imports: [
@@ -12,8 +12,7 @@ import { ApostaEsportivaService, PreApostaEsportivaService, CampeonatoService } 
     declarations: [],
     providers: [
         ApostaEsportivaService,
-        PreApostaEsportivaService,
-        CampeonatoService
+        PreApostaEsportivaService
     ]
 })
 export class EsportesModule { }

@@ -10,8 +10,13 @@ header{
     height: 40px;
 }
 
+.navbar-mobile{
+    background-color: #002458;
+    border-bottom: 1px solid #fff;
+}
+
 .menu-categories{
-    background-color: rgb(156, 26, 26);
+    background-color: #002458;
     display: flex;
     align-items: center;
     justify-content: center;

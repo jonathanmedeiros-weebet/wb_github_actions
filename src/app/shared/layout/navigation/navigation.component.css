@@ -6,14 +6,17 @@
     bottom: 0;
     background: #011e46;
     z-index: 100;
-    overflow: hidden;
+}
+
+#sidebar-wrapper a{
+    color: #fff;
 }
 
 .sidebar-menu{
     display: flex;
     justify-content: space-between;
     padding: 0 15px;
-    margin: 20px 0px;
+    margin: 20px 0px 0px 0px;
 }
 
 .sidebar-menu a{
@@ -24,6 +27,7 @@
 
 .sidebar-brand{
     text-align: center;
+    margin-top: 15px;
  }
 
  .sidebar-brand img{
@@ -31,7 +35,18 @@
  }
 
 .sidebar-nav{
+    background-color: #011e46;
     padding: 0;
+}
+
+.sidebar-nav .group{
+  display: inline-block;
+  padding-left: 15px;
+  margin-top: 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
 }
 
 .sidebar-nav li{

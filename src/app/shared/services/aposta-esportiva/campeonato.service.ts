@@ -9,7 +9,9 @@ import { ErrorService } from './../utils/error.service';
 import { Campeonato, Jogo } from './../../../models';
 import { config } from '../../config';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CampeonatoService {
     private CampeonatoUrl = `${config.CENTER_API}/campeonatos`;
 

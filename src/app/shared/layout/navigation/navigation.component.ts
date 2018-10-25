@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     trigger,
     state,
@@ -7,7 +7,9 @@ import {
     transition
 } from '@angular/animations';
 
-import { SidebarService } from './../../../services';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { SidebarService, CampeonatoService, MessageService } from './../../../services';
 
 @Component({
     selector: 'app-navigation',
@@ -32,17 +34,38 @@ import { SidebarService } from './../../../services';
     ]
 })
 export class NavigationComponent implements OnInit {
-    isOpen = false;
+    isOpen;
+    lista: any[];
+    contexto = 'esportes';
+    unsub$ = new Subject();
 
     constructor(
+        private campeonatoService: CampeonatoService,
+        private messageService: MessageService,
         private sidebarService: SidebarService
     ) { }
 
     ngOnInit() {
-        this.sidebarService.isOpen.subscribe(isOpen => this.isOpen = isOpen);
+        this.sidebarService.isOpen
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(isOpen => this.isOpen = isOpen);
+
+        this.getJogos();
     }
 
-    clickMe() {
-        this.isOpen = !this.isOpen;
+    getJogos() {
+        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+        const params = {
+            fields: ['_id', 'nome'],
+            'campeonatos_bloqueados': campeonatosBloqueados,
+            'odds': ['casa_90', 'fora_90']
+        };
+
+        this.campeonatoService.getCampeonatos(params)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                campeonatos => this.lista = campeonatos,
+                error => this.messageService.error(error)
+            );
     }
 }

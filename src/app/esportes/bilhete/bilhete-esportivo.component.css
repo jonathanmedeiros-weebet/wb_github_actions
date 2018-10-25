@@ -1,6 +1,10 @@
 .pre-bilhete{
     width: 270px;
     text-align: center;
+    padding: 20px 15px 0 15px;
+    background-color: #011e46;
+    height: 100%;
+    color: white;
 }
 
 .live-odd{

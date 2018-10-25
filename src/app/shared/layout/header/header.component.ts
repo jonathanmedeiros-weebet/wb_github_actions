@@ -43,7 +43,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     BANCA_NOME;
     appMobile;
     now = moment();
-    isOpen = false;
+    isOpen;
     unsub$ = new Subject();
 
     constructor(
@@ -66,7 +66,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.sidebarService.isOpen.subscribe(isOpen => this.isOpen = isOpen);
+        this.sidebarService.isOpen
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(isOpen => this.isOpen = isOpen);
     }
 
     ngOnDestroy() {
@@ -99,7 +101,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     toggleSidebar() {
         this.sidebarService.toggle();
-        console.log(this.isOpen);
     }
 
     logout() {
