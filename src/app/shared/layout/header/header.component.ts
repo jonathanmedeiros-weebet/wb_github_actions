@@ -18,10 +18,10 @@ import * as moment from 'moment';
     animations: [
         trigger('openClose', [
             state('open', style({
-                width: 'calc(100% - 255px)',
+                'left': '255px',
             })),
             state('closed', style({
-                width: '100%'
+                'left': '0',
             })),
             transition('open => closed', [
                 animate('400ms ease-in')
@@ -43,7 +43,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     BANCA_NOME;
     appMobile;
     now = moment();
-    isOpen;
+    isOpen = false;
     unsub$ = new Subject();
 
     constructor(
@@ -66,9 +66,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.sidebarService.isOpen
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(isOpen => this.isOpen = isOpen);
+        if (window.innerWidth <= 667) {
+            this.sidebarService.isOpen
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(isOpen => this.isOpen = isOpen);
+        }
     }
 
     ngOnDestroy() {

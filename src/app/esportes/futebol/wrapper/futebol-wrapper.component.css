@@ -1,6 +1,7 @@
 #futebol-wrapper{
     display: flex;
     flex-direction: row;
+    min-height: 800px;
 }
 
 .futebol-content{

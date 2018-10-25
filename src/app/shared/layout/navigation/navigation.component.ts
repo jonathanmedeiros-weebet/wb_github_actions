@@ -34,7 +34,7 @@ import { SidebarService, CampeonatoService, MessageService } from './../../../se
     ]
 })
 export class NavigationComponent implements OnInit {
-    isOpen;
+    isOpen = true;
     lista: any[];
     contexto = 'esportes';
     unsub$ = new Subject();
@@ -46,9 +46,11 @@ export class NavigationComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.sidebarService.isOpen
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(isOpen => this.isOpen = isOpen);
+        if (window.innerWidth <= 667) {
+            this.sidebarService.isOpen
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(isOpen => this.isOpen = isOpen);
+        }
 
         this.getJogos();
     }
