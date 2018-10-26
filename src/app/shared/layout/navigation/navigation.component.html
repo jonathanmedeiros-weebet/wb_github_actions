@@ -44,7 +44,7 @@
             <span class="group">Campeonatos</span>
             <li *ngFor="let campeonato of lista">
                 <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ campeonato: campeonato._id }">
-                    {{campeonato.nome}}
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
                 </a>
             </li>
             <ng-template #loterias>

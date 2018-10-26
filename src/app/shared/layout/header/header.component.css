@@ -6,6 +6,11 @@ header{
     top: 0;
 }
 
+header a{
+    text-decoration: none;
+    color: #b1c5e0;
+}
+
 .logo-mobile img{
     height: 40px;
 }
@@ -13,7 +18,19 @@ header{
 .navbar-mobile{
     background-color: #002458;
     border-bottom: 1px solid #fff;
+    justify-content: center;
 }
+
+.navbar-mobile .navbar-toggler{
+    position: absolute;
+    left: 15px;
+}
+
+.navbar-mobile .menu-conta{
+    position: absolute;
+    right: 15px;
+}
+
 
 .menu-categories{
     background-color: #002458;
@@ -27,16 +44,15 @@ header{
     margin: 0px 20px;
 }
 
-.menu-categories a{
-    color: #fff;
+.menu-categories .category a{
+    text-transform: uppercase;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-decoration: none;
 }
 
-.menu-categories a:hover{
-    color: red;
+.menu-categories .category a:hover{
+    color: #1c84d5;
 }
 
 .menu-categories .active{
@@ -48,13 +64,27 @@ header{
     margin-bottom: 5px;
 }
 
-@media (max-width: 600px)
-{
-
+.category a{
+    text-transform: uppercase;
 }
 
-@media only screen and (min-width: 768px) {
+.dropdown-menu a{
+    color: #000;
+}
+
+@media only screen and (min-width: 668px) {
     .navbar-mobile{
+        display: none;
+    }
+
+    .menu-conta{
+        right: 15px;
+        position: absolute;
+    }
+}
+
+@media only screen and (max-width: 667px) {
+    .menu-categories .menu-conta{
         display: none;
     }
 }

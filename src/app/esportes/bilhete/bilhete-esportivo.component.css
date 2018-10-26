@@ -7,9 +7,68 @@
     color: white;
 }
 
+h4{
+    color:#c9def5;
+}
+
+.value-informations{
+    text-transform: uppercase;
+    color: #53698b;
+}
+
+.value-informations p{
+    margin-bottom: 0.5rem;
+}
+
+.div-inputs{
+    background-color: #036ef1;
+    padding: 20px 15px 8px 15px;
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+}
+
 .live-odd{
     display: inline-block;
     background-color: red;
     color: white;
     padding: 5px;
+}
+
+.valor, .possivel-ganho{
+    color: #c9def5;
+}
+
+.div-jogos-selecionados .jogo-selecionado-inner{
+    margin: 0px 30px;
+}
+
+.div-jogos-selecionados h3{
+    margin: 30px 0;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.jogo-selecionado{
+    padding: 15px 0;
+    border-top: 1px dashed #aec3d8;
+    text-align: left;
+}
+
+.jogo-selecionado:first-of-type{
+    border-top: none;
+    padding-top: 0;
+}
+
+.jogo-selecionado > div{
+    color: #94abcb;
+}
+
+.jogo-selecionado .horario{
+    color: #90a3c1;
+    font-weight: bold;
+}
+
+.jogo-selecionado .cotacao .valor{
+    color: #90a3c1;
+    font-weight: bold;
 }

@@ -1,7 +1,7 @@
 <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
     <div class="pre-bilhete-esportes">
         <h4>BILHETE</h4>
-        <div>
+        <div class="value-informations">
             <p>
                 Valor da aposta:
                 <span class="valor">{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
@@ -12,45 +12,52 @@
             </p>
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')" class="form-control" placeholder="Apostador">
-                <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+            <div class="div-inputs">
+                <div class="form-group">
+                    <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')" class="form-control"
+                        placeholder="Apostador">
+                    <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                </div>
+                <div class="form-group">
+                    <input type="number" formControlName="valor" [min]="apostaMinima" [ngClass]="applyCssInputError('valor')"
+                        class="form-control" placeholder="Valor">
+                    <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                </div>
             </div>
             <div class="form-group">
-                <input type="number" formControlName="valor" [min]="apostaMinima" [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
-                <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block">Apostar</button>
+                <button class="btn btn-success btn-block">Apostar</button>
             </div>
         </form>
 
-        <div *ngIf="itens.length > 0">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Jogo</th>
-                        <th>Cotação</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of itens.value; let i=index">
-                        <td>
-                            {{item.jogo.nome}}
-                            <span class="live-odd" *ngIf="item.jogo && item.jogo.ao_vivo">AO VIVO</span>
-                        </td>
-                        <td>
-                            {{item.cotacao.chave | tipoAposta}}: {{item.cotacao.valor | calcularCotacao: item.cotacao.chave: item.jogo._id: item.jogo.cotacoes : item.jogo.ao_vivo }}
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger remover-item" (click)="removerItem(i)">
-                                <i class="fa fa-close"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div *ngIf="itens.length > 0" class="div-jogos-selecionados">
+            <h3>
+                Jogos Selecionados
+            </h3>
+            <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
+                <div class="jogo-selecionado-inner">
+                    <div class="horario">
+                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                    </div>
+                    <div class="jogo-nome">
+                        {{item.jogo.nome}}
+                    </div>
+                    <div class="campeonato-nome">
+                        {{item.jogo.campeonato.nome}}
+                    </div>
+                    <div class="cotacao">
+                        {{item.cotacao.chave | tipoAposta}}:
+                        <span class="valor">
+                            {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
+                            item.jogo._id: item.jogo.cotacoes : item.jogo.ao_vivo }}
+                        </span>
+                    </div>
+                </div>
+                <!-- <div>
+                    <button type="button" class="btn btn-danger remover-item" (click)="removerItem(i)">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div> -->
+            </div>
         </div>
     </div>
 </section>

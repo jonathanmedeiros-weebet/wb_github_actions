@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
@@ -14,12 +14,17 @@ import * as moment from 'moment';
 })
 export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
+    logadoSource;
+    logado;
 
     constructor(
         private http: HttpClient,
         private header: HeadersService,
         private errorService: ErrorService
-    ) { }
+    ) {
+        this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+        this.logado = this.logadoSource.asObservable();
+    }
 
     login(data: any): Observable<any> {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())

@@ -9,8 +9,12 @@
 }
 
 #sidebar-wrapper a{
-    color: #fff;
+    color: #b1c5e0;
     text-decoration: none;
+}
+
+#sidebar-wrapper a:hover{
+    color:#1c84d5;
 }
 
 .sidebar-menu{
@@ -18,6 +22,10 @@
     justify-content: space-between;
     padding: 0 15px;
     margin: 20px 0px 0px 0px;
+}
+
+.sidebar-menu i{
+    font-size: 1.5rem;
 }
 
 .sidebar-menu a{
@@ -40,13 +48,17 @@
     padding: 0;
 }
 
+.sidebar-nav a{
+    text-transform: uppercase;
+}
+
 .sidebar-nav .group{
   display: inline-block;
   padding-left: 15px;
   margin-top: 20px;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #fff;
+  color: #aec3d8;
   text-transform: uppercase;
 }
 
@@ -55,7 +67,7 @@
 }
 
 .sidebar-nav li:not(:last-child){
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
 }
 
 #sidebar-wrapper > ul li{
