@@ -1,9 +1,9 @@
-#default-wrapper{
+#default-wrapper-esportes{
     display: flex;
     flex-direction: row;
 }
 
-#default-content{
+#default-content-esportes{
     flex-grow: 1;
     padding: 0 5px;
 }

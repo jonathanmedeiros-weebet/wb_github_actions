@@ -44,7 +44,7 @@ html, body{
     margin-top: 59px;
 }
 
-#content {
+.default-content {
     padding: 20px 15px 20px 270px;
 }
 
