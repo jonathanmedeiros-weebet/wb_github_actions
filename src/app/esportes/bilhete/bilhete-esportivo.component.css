@@ -11,9 +11,21 @@ h4{
     color:#c9def5;
 }
 
+h4::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: red;
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
 .value-informations{
     text-transform: uppercase;
     color: #53698b;
+    margin: 20px 0;
 }
 
 .value-informations p{
@@ -48,10 +60,22 @@ h4{
     font-size: 16px;
 }
 
+.div-jogos-selecionados h3::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: red;
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
 .jogo-selecionado{
     padding: 15px 0;
     border-top: 1px dashed #aec3d8;
     text-align: left;
+    position: relative;
 }
 
 .jogo-selecionado:first-of-type{
@@ -59,7 +83,7 @@ h4{
     padding-top: 0;
 }
 
-.jogo-selecionado > div{
+.jogo-selecionado > div:not(.remover-item){
     color: #94abcb;
 }
 
@@ -71,4 +95,13 @@ h4{
 .jogo-selecionado .cotacao .valor{
     color: #90a3c1;
     font-weight: bold;
+}
+
+.remover-item{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    font-size: 15px;
+    cursor: pointer;
 }

@@ -54,7 +54,7 @@
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" id="loginform" novalidate>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
                                 placeholder="Usuário">
@@ -169,7 +169,7 @@
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" id="loginform" novalidate>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
                                 placeholder="Usuário">

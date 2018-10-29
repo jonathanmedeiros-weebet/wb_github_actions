@@ -11,6 +11,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SidebarService, CampeonatoService, MessageService } from './../../../services';
 
+import * as moment from 'moment';
+
 @Component({
     selector: 'app-navigation',
     templateUrl: 'navigation.component.html',
@@ -34,6 +36,7 @@ import { SidebarService, CampeonatoService, MessageService } from './../../../se
     ]
 })
 export class NavigationComponent implements OnInit {
+    amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     isOpen = true;
     lista: any[];
     contexto = 'esportes';
