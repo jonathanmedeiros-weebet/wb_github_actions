@@ -1,4 +1,4 @@
-<div id="resultados">
+<div id="loterias-wrapper">
     <div class="content-header">
         <h2>Quininha</h2>
     </div>
@@ -22,7 +22,8 @@
                                     <div class="form-row">
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
-                                            <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio" [ngClass]="applyCssInputError('sorteio')">
+                                            <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio"
+                                                [ngClass]="applyCssInputError('sorteio')">
                                                 <option value="">Selecione</option>
                                                 <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
                                                     {{sorteio.nome}}
@@ -32,7 +33,8 @@
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
-                                            <input type="number" class="form-control" min="1" formControlName="valor" [ngClass]="applyCssInputError('valor')">
+                                            <input type="number" class="form-control" min="1" formControlName="valor"
+                                                [ngClass]="applyCssInputError('valor')">
                                             <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
@@ -104,7 +106,8 @@
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-lg-6">
                                     <label for="">Apostador</label>
-                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
+                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
+                                        name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
                                         #apostador="ngModel">
                                     <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
                                 </div>
@@ -115,12 +118,14 @@
                             </div>
                             <div class="form-row botoes">
                                 <div class="col">
-                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary" (click)="create('imprimir')">
+                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary"
+                                        (click)="create('imprimir')">
                                         Finalizar e Imprimir
                                     </button>
                                 </div>
                                 <div class="col" *ngIf="appMobile">
-                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary" (click)="create('compartilhar')">
+                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-primary"
+                                        (click)="create('compartilhar')">
                                         Finalizar e Compartilhar
                                     </button>
                                 </div>

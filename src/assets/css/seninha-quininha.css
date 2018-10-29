@@ -1,3 +1,7 @@
+#loterias-wrapper{
+    padding: 20px 20px 20px 270px;
+}
+
 .square-group{
     display: flex;
     flex-wrap: wrap;

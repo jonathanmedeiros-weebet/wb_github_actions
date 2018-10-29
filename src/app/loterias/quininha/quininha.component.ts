@@ -7,7 +7,8 @@ import { BaseFormComponent } from '../../shared/layout/base-form/base-form.compo
 import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
-    PrintService, HelperService
+    PrintService, HelperService,
+    SidebarService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
@@ -29,6 +30,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     unsub$ = new Subject();
 
     constructor(
+        private sidebarService: SidebarService,
         private apostaService: ApostaService,
         private tipoApostaService: TipoApostaService,
         private sorteioService: SorteioService,
@@ -49,9 +51,14 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.sorteioService.getSorteios(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                sorteios => this.sorteios = sorteios,
+                sorteios => {
+                    this.sidebarService.changeItens(sorteios, 'loterias');
+                    this.sorteios = sorteios;
+                },
                 error => this.messageService.error(error)
             );
+
+        this.sidebarService.changeItens([], 'loterias');
 
         this.createForm();
     }

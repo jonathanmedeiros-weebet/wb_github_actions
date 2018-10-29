@@ -9,6 +9,11 @@ export class SidebarService {
     private open = true;
     private isOpenSource;
     isOpen;
+    private itensSource = new BehaviorSubject<any>({
+        contexto: 'esportes',
+        itens: []
+    });
+    itens = this.itensSource.asObservable();
 
     constructor() {
         const width = window.innerWidth;
@@ -20,5 +25,12 @@ export class SidebarService {
     toggle(): void {
         this.open = !this.open;
         this.isOpenSource.next(this.open);
+    }
+
+    changeItens(itens, contexto) {
+        this.itensSource.next({
+            itens: itens,
+            contexto: contexto
+        });
     }
 }

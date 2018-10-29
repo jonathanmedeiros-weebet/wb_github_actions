@@ -28,7 +28,6 @@
                 </a>
             </li>
         </ul>
-
         <ul class="sidebar-nav" *ngIf="contexto == 'esportes'; else loterias">
             <span class="group">Data</span>
             <li>
@@ -42,19 +41,21 @@
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li *ngFor="let campeonato of lista">
+            <li *ngFor="let campeonato of itens">
                 <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ campeonato: campeonato._id }">
                     <i class="fa fa-certificate"></i> {{campeonato.nome}}
                 </a>
             </li>
-            <ng-template #loterias>
-                <li>
-                    <a href="#">LOREM LOREM LOREM LOREM LOREM LOREM LOREM </a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-            </ng-template>
         </ul>
+        <ng-template #loterias>
+            <ul class="sidebar-nav">
+                <span class="group">Sorteios</span>
+                <li *ngFor="let sorteio of itens">
+                    <a>
+                        <i class="fa fa-certificate"></i> {{sorteio.nome}}
+                    </a>
+                </li>
+            </ul>
+        </ng-template>
     </div>
 </aside>

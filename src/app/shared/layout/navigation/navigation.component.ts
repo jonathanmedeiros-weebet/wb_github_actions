@@ -9,7 +9,7 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SidebarService, CampeonatoService, MessageService } from './../../../services';
+import { SidebarService } from './../../../services';
 
 import * as moment from 'moment';
 
@@ -38,13 +38,11 @@ import * as moment from 'moment';
 export class NavigationComponent implements OnInit {
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     isOpen = true;
-    lista: any[];
-    contexto = 'esportes';
+    itens: any[];
+    contexto;
     unsub$ = new Subject();
 
     constructor(
-        private campeonatoService: CampeonatoService,
-        private messageService: MessageService,
         private sidebarService: SidebarService
     ) { }
 
@@ -55,22 +53,11 @@ export class NavigationComponent implements OnInit {
                 .subscribe(isOpen => this.isOpen = isOpen);
         }
 
-        this.getJogos();
-    }
-
-    getJogos() {
-        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
-        const params = {
-            fields: ['_id', 'nome'],
-            'campeonatos_bloqueados': campeonatosBloqueados,
-            'odds': ['casa_90', 'fora_90']
-        };
-
-        this.campeonatoService.getCampeonatos(params)
+        this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                campeonatos => this.lista = campeonatos,
-                error => this.messageService.error(error)
-            );
+            .subscribe(dados => {
+                this.contexto = dados.contexto;
+                this.itens = dados.itens;
+            });
     }
 }
