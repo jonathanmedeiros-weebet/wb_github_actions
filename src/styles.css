@@ -12,7 +12,8 @@ html{
 
 html, body{
     height: 100%;
-    background-color: #f6f7f9;
+    /* background-color: #f6f7f9; */
+    background-color: #e1e2e4;
     color: #455a64;
 }
 

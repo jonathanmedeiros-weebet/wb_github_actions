@@ -1,10 +1,37 @@
 <section class="content-sports" *ngIf="diaEspecifico;else variosDias">
     <div class="campeonato" *ngFor="let campeonato of campeonatos">
         <div class="campeonato-header">
-            <h1>{{campeonato.nome}}</h1>
+            {{campeonato.nome}}
         </div>
         <div class="jogos">
             <div class="jogo" *ngFor="let jogo of campeonato.jogos">
+                <div class="indentificacao">
+                    <div class="horario">
+                        <div>{{jogo.horario | moment: 'DD/MM/YYYY'}}</div>
+                        <div>{{jogo.horario | moment: 'HH:mm'}}</div>
+                    </div>
+                    <div class="nome">
+                        <div class="time-a-nome">{{jogo.time_a_nome}}</div>
+                        <div class="time-b-nome">{{jogo.time_b_nome}}</div>
+                    </div>
+                    <div class="mais-opcoes">
+                        <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
+                            <i class="fa fa-plus"></i> Cotações
+                        </a>
+                    </div>
+                </div>
+                <div class="odds-principais">
+                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
+                        <span class="nome">
+                            {{cotacao.chave | tipoAposta}}
+                        </span>
+                        <span class="valor">
+                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="jogo" *ngFor="let jogo of campeonato.jogos">
                 <div class="jogo-header">
                     <div class="indentificacao">
                         <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
@@ -25,7 +52,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
