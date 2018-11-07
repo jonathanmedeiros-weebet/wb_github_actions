@@ -25,7 +25,11 @@ export class CalcularCotacaoPipe implements PipeTransform {
                 result *= parseFloat(tipoAposta.fator_ao_vivo);
             } else {
                 // Fator
-                result *= parseFloat(tipoAposta.fator);
+                let fator = parseFloat(tipoAposta.fator);
+                if (!fator) {
+                    fator = 1;
+                }
+                result *= fator;
 
                 // Favorito e Zebra
                 const cotacoesFavoritoZebra = [
@@ -59,9 +63,20 @@ export class CalcularCotacaoPipe implements PipeTransform {
                 }
             }
 
+            if (!result) {
+                console.log(chave);
+                console.log(value);
+                console.log(result);
+                console.log('\n');
+            }
+
             // Limite
             if (result > tipoAposta.limite) {
                 result = parseFloat(tipoAposta.limite);
+            }
+
+            if (result < 1) {
+                result = 1;
             }
         }
 

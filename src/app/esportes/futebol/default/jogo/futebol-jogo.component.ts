@@ -15,8 +15,10 @@ import { takeUntil } from 'rxjs/operators';
 
 export class FutebolJogoComponent implements OnInit, OnDestroy {
     jogo: Jogo = new Jogo();
+    odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
+    objectKeys = Object.keys;
     unsub$ = new Subject();
 
     constructor(
@@ -38,6 +40,7 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                         .subscribe(
                             jogo => {
                                 this.jogo = jogo;
+                                this.mapearCotacoes(jogo.cotacoes);
                             },
                             error => this.messageService.error(error)
                         );
@@ -45,6 +48,7 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
             });
 
         this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+        console.log(this.tiposAposta);
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
@@ -53,6 +57,29 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    mapearCotacoes(cotacoes) {
+        cotacoes.forEach(cotacao => {
+            const tipoAposta = this.tiposAposta[cotacao.chave];
+
+            if (tipoAposta) {
+                let odd = this.odds[tipoAposta.cat_chave];
+                if (!odd) {
+                    odd = {
+                        'nome': tipoAposta.cat_nome,
+                        'tempo': tipoAposta.tempo,
+                        'principal': tipoAposta.p,
+                        'cotacoes': []
+                    };
+                    this.odds[tipoAposta.cat_chave] = odd;
+                }
+
+                odd.cotacoes.push(cotacao);
+            }
+        });
+
+        console.log(this.odds);
     }
 
     addCotacao(jogo: Jogo, cotacao) {

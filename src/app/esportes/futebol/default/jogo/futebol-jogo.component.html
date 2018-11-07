@@ -1,37 +1,27 @@
-<div class="row">
-    <div class="col-12">
-        <div>
-            <h4>
-                {{jogo.time_a_nome}} x {{jogo.time_b_nome}}
-            </h4>
+<section class="content-sports">
+    <div class="jogo">
+        <div class="indentificacao">
+            <div class="horario">
+                <div>{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</div>
+            </div>
+            <div class="nome">
+                {{jogo.nome}}
+            </div>
         </div>
-        <div>
-            {{jogo?.horario | moment: 'DD/MM/YYYY HH:mm'}}
-        </div>
-        <div class="jogo-content" *ngIf="jogo.cotacoes">
-            <div class="tipos-odds">
-                <h2 class="tipo-odd">Cotações</h2>
+        <div class="tipo-apostas">
+            <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
+                <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <td>Chave</td>
-                                <td>Valor</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let cotacao of jogo.cotacoes" class="odd" (click)="addCotacao(jogo, cotacao)">
-                                <ng-container *ngIf="showOdd(cotacao.chave)">
-                                    <td>
-                                        <b>{{cotacao.chave | tipoAposta}}: </b>
-                                    </td>
-                                    <td>{{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}</td>
-                                </ng-container>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
+                        <span class="nome">
+                            {{cotacao.chave | tipoAposta}}
+                        </span>
+                        <span class="valor">
+                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

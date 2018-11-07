@@ -1,3 +1,52 @@
-.odd{
+.jogo{
+}
 
+.indentificacao{
+    padding: 15px 10px;
+    background-color: #011e46;
+    color: #fff;
+}
+
+.indentificacao .nome{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.horario{
+    text-align: right;
+}
+
+.tipo-apostas{
+    background-color: #fff;
+}
+
+.tipo-aposta{
+    padding: 15px 10px;
+    border-top: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+.odds{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.odds .odd{
+    background-color: #036ef1;
+    margin-right: 3px;
+    flex: 1 1 0px;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    min-width: 200px;
+    margin-bottom: 5px;
+}
+
+.odds .odd:hover{
+    background-color: #094ea2;
+}
+
+.odd .nome, .odd .valor{
+    color: #fff;
 }
