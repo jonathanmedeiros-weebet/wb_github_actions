@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="odds-principais">
-                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
+                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes" (click)="addCotacao(jogo, cotacao)">
                         <span class="nome">
                             {{cotacao.chave | tipoAposta}}
                         </span>

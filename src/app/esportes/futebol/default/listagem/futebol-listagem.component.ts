@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Campeonato } from './../../../../models';
-import { CampeonatoService, MessageService } from './../../../../services';
+import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
+import { CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,16 +13,17 @@ import * as moment from 'moment';
     templateUrl: 'futebol-listagem.component.html',
     styleUrls: ['futebol-listagem.component.css']
 })
-
 export class FutebolListagemComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
     campeonato: Campeonato = new Campeonato();
     campeonatos: Campeonato[];
+    itens: ItemBilheteEsportivo[] = [];
     unsub$ = new Subject();
 
     constructor(
         private campeonatoService: CampeonatoService,
         private messageService: MessageService,
+        private bilheteService: BilheteEsportivoService,
         private route: ActivatedRoute
     ) { }
 
@@ -70,10 +71,45 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         );
                 }
             });
+
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => this.itens = itens);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    addCotacao(jogo: Jogo, cotacao) {
+        let modificado = false;
+        const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
+        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
+
+        const item = {
+            aoVivo: jogo.ao_vivo,
+            jogo_id: jogo._id,
+            cotacao: cotacao,
+            jogo: jogo
+        };
+
+        if (indexGame >= 0) {
+            if (indexOdd >= 0) {
+                this.itens.splice(indexOdd, 1);
+            } else {
+                this.itens.splice(indexGame, 1, item);
+            }
+
+            modificado = true;
+        } else {
+            this.itens.push(item);
+
+            modificado = true;
+        }
+
+        if (modificado) {
+            this.bilheteService.atualizarItens(this.itens);
+        }
     }
 }
