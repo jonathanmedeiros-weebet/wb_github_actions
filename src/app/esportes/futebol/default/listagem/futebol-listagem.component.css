@@ -1,13 +1,15 @@
 .campeonato-header{
     text-transform: uppercase;
     padding: 15px 10px;
-    color: #fff;
-    background-color: #011e46;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .campeonato{
+}
+
+.jogos{
     background-color: #fff;
-    margin-bottom: 15px;
 }
 
 .jogo{
@@ -22,7 +24,11 @@
 }
 
 .indentificacao .horario{
-    margin-right: 30px;
+    background-color: #011e46;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 15px;
 }
 
 .indentificacao .nome{
@@ -38,14 +44,17 @@
     background-color: #036ef1;
     margin-right: 3px;
     flex: 1 1 0px;
-    padding: 10px 8px;
+    padding: 5px 8px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    min-width: 200px;
+    margin-bottom: 5px;
+    border-radius: 4px;
 }
 
-.odd:hover{
-    /* background-color: #002458; */
+.odds-principais .odd:hover{
+    background-color: #094ea2;
 }
 
 .odd .nome, .odd .valor{

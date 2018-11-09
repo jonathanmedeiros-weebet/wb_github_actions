@@ -7,12 +7,10 @@
             <div class="jogo" *ngFor="let jogo of campeonato.jogos">
                 <div class="indentificacao">
                     <div class="horario">
-                        <div>{{jogo.horario | moment: 'DD/MM/YYYY'}}</div>
-                        <div>{{jogo.horario | moment: 'HH:mm'}}</div>
+                        {{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
                     </div>
                     <div class="nome">
-                        <div class="time-a-nome">{{jogo.time_a_nome}}</div>
-                        <div class="time-b-nome">{{jogo.time_b_nome}}</div>
+                        {{jogo.nome}}
                     </div>
                     <div class="mais-opcoes">
                         <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
@@ -31,28 +29,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="jogo" *ngFor="let jogo of campeonato.jogos">
-                <div class="jogo-header">
-                    <div class="indentificacao">
-                        <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
-                        <h3>{{jogo.time_a_nome}}</h3>
-                        <span>x</span>
-                        <h3>{{jogo.time_b_nome}}</h3>
-                        <div style="background-color: red; color:white; padding: 3px;" *ngIf="jogo.ao_vivo">
-                            AO VIVO
-                        </div>
-                    </div>
-                    <div class="odds-principais">
-                        <div *ngFor="let cotacao of jogo.cotacoes">
-                            {{cotacao.chave | tipoAposta}}:
-                            <span>{{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}</span>
-                        </div>
-                        <a routerLink="/esportes/futebol/jogos/{{jogo._id}}" class="mais-opcoes">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </section>
