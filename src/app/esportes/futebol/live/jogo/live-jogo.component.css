@@ -1,14 +1,14 @@
-.jogo{
-}
-
 .indentificacao{
     padding: 15px 10px;
     position: relative;
-}
-
-.indentificacao{
     display: flex;
     align-items: center;
+}
+
+.indentificacao .aovivo-tempo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .indentificacao .nome-placar{
@@ -34,7 +34,14 @@
     margin-right: 15px;
 }
 
-.indentificacao .nome, h4{
+.indentificacao .aovivo-label{
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.indentificacao .tempo{
     font-size: 1.2rem;
     font-weight: bolder;
 }

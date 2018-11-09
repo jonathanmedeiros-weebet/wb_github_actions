@@ -12,6 +12,9 @@
                     <div class="aovivo-label">
                         Ao Vivo
                     </div>
+                    <div class="tempo">
+                        {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
+                    </div>
                     <div class="nome">
                         <b>{{jogos[key].time_a_nome}}</b>
                         {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
@@ -22,9 +25,6 @@
                             <i class="fa fa-plus"></i> Cotações
                         </a>
                     </div>
-                </div>
-                <div>
-                    {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
                 </div>
             </div>
         </div>
