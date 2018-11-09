@@ -48,7 +48,6 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    min-width: 200px;
     margin-bottom: 5px;
     border-radius: 4px;
 }
@@ -131,5 +130,9 @@
 
     .pre-bilhete{
         display: block;
+    }
+
+    .odds-principais .odd{
+        min-width: 200px;
     }
 }

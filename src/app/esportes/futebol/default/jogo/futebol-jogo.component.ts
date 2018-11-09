@@ -48,7 +48,7 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
             });
 
         this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-        console.log(this.tiposAposta);
+
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
@@ -78,8 +78,6 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                 odd.cotacoes.push(cotacao);
             }
         });
-
-        console.log(this.odds);
     }
 
     addCotacao(jogo: Jogo, cotacao) {

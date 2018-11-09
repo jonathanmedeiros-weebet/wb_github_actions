@@ -7,6 +7,9 @@
             <div class="horario">
                 <div>{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</div>
             </div>
+            <a [routerLink]="['/esportes/futebol/jogos']" class="btn btn-sm btn-warning btn-back">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </a>
         </div>
         <div class="tipo-apostas">
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">

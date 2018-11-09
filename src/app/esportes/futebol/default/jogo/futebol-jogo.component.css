@@ -3,6 +3,7 @@
 
 .indentificacao{
     padding: 15px 10px;
+    position: relative;
 }
 
 .indentificacao{
@@ -37,9 +38,9 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    min-width: 200px;
     margin-bottom: 5px;
     border-radius: 4px;
+    min-width: 200px;
 }
 
 .odds .odd:hover{
@@ -48,4 +49,15 @@
 
 .odd .nome, .odd .valor{
     color: #fff;
+}
+
+.btn-back{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
 }
