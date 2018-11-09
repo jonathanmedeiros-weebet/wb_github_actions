@@ -18,6 +18,10 @@
     flex-grow: 1;
 }
 
+.nome-placar .nome{
+    font-weight: bolder;
+}
+
 .nome-placar .placar{
    background: red;
    color: #fff;
