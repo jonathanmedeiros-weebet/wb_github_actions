@@ -63,13 +63,6 @@ export class CalcularCotacaoPipe implements PipeTransform {
                 }
             }
 
-            if (!result) {
-                console.log(chave);
-                console.log(value);
-                console.log(result);
-                console.log('\n');
-            }
-
             // Limite
             if (result > tipoAposta.limite) {
                 result = parseFloat(tipoAposta.limite);
