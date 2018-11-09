@@ -7,7 +7,8 @@ import { Jogo } from '../../../../models';
 
 @Component({
     selector: 'app-live-listagem',
-    templateUrl: 'live-listagem.component.html'
+    templateUrl: 'live-listagem.component.html',
+    styleUrls: ['live-listagem.component.css']
 })
 export class LiveListagemComponent implements OnInit, OnDestroy {
     jogos = {};

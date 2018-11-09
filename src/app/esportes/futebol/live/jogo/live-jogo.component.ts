@@ -8,12 +8,15 @@ import { MessageService, JogoService, LiveService, BilheteEsportivoService } fro
 
 @Component({
     selector: 'app-live-jogo',
-    templateUrl: 'live-jogo.component.html'
+    templateUrl: 'live-jogo.component.html',
+    styleUrls: ['live-jogo.component.css']
 })
 export class LiveJogoComponent implements OnInit, OnDestroy {
     jogo = new Jogo();
-    tiposAposta = [];
+    odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
+    tiposAposta;
+    objectKeys = Object.keys;
     unsub$ = new Subject();
 
     constructor(
@@ -65,8 +68,31 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: Jogo) => {
                 this.jogo.info = jogo.info;
-                this.jogo.cotacoes = jogo.cotacoes;
+                this.mapearCotacoes(jogo.cotacoes);
             });
+    }
+
+    mapearCotacoes(cotacoes) {
+        this.odds = {};
+
+        cotacoes.forEach(cotacao => {
+            const tipoAposta = this.tiposAposta[cotacao.chave];
+
+            if (tipoAposta) {
+                let odd = this.odds[tipoAposta.cat_chave];
+                if (!odd) {
+                    odd = {
+                        'nome': tipoAposta.cat_nome,
+                        'tempo': tipoAposta.tempo,
+                        'principal': tipoAposta.p,
+                        'cotacoes': []
+                    };
+                    this.odds[tipoAposta.cat_chave] = odd;
+                }
+
+                odd.cotacoes.push(cotacao);
+            }
+        });
     }
 
     addCotacao(jogo: Jogo, cotacao) {

@@ -78,6 +78,10 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                 odd.cotacoes.push(cotacao);
             }
         });
+
+        console.log(cotacoes);
+        console.log(this.odds);
+        console.log('\n');
     }
 
     addCotacao(jogo: Jogo, cotacao) {

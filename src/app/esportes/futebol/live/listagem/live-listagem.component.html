@@ -1,25 +1,32 @@
-<section id="live-section">
+<section class="content-sports">
     <h1 *ngIf="!keys().length">
         Nenhum jogo disponível!
     </h1>
-    <div *ngFor="let key of keys()">
-        <div>
-            <div>
-                {{jogos[key].campeonato?.nome}}
+    <div class="campeonato" *ngFor="let key of keys()">
+        <div class="campeonato-header">
+            {{jogos[key].campeonato?.nome}}
+        </div>
+        <div class="jogos">
+            <div class="jogo">
+                <div class="indentificacao">
+                    <div class="aovivo-label">
+                        Ao Vivo
+                    </div>
+                    <div class="nome">
+                        <b>{{jogos[key].time_a_nome}}</b>
+                        {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
+                        <b>{{jogos[key].time_b_nome}}</b>
+                    </div>
+                    <div class="mais-opcoes">
+                        <a routerLink="/esportes/futebol/live/jogos/{{jogos[key]._id}}">
+                            <i class="fa fa-plus"></i> Cotações
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
+                </div>
             </div>
-            <div>
-                <b>{{jogos[key].time_a_nome}}</b> {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
-                <b>{{jogos[key].time_b_nome}}</b>
-                <span>
-                    <a class="btn btn-primary" routerLink="/esportes/futebol/live/jogos/{{jogos[key]._id}}">
-                        Ver
-                    </a>
-                </span>
-            </div>
-            <div>
-                {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
-            </div>
-            <br>
         </div>
     </div>
 </section>

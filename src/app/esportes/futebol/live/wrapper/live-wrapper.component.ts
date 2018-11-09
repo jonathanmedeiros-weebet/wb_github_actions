@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-live-wrapper',
-    templateUrl: 'live-wrapper.component.html',
-    styleUrls: ['live-wrapper.component.css']
+    templateUrl: 'live-wrapper.component.html'
 })
 export class LiveWrapperComponent {
 
