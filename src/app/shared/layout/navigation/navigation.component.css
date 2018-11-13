@@ -19,9 +19,12 @@
 
 .sidebar-menu{
     display: flex;
-    justify-content: space-between;
     padding: 0 15px;
     margin: 20px 0px 0px 0px;
+}
+
+.sidebar-menu li{
+    margin-right: 30px;
 }
 
 .sidebar-menu i{

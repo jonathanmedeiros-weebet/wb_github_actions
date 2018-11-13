@@ -9,7 +9,7 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SidebarService } from './../../../services';
+import { SidebarService, AuthService } from './../../../services';
 
 import * as moment from 'moment';
 
@@ -37,12 +37,14 @@ import * as moment from 'moment';
 })
 export class NavigationComponent implements OnInit {
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
+    isLoggedIn = false;
     isOpen = true;
     itens: any[];
     contexto;
     unsub$ = new Subject();
 
     constructor(
+        private auth: AuthService,
         private sidebarService: SidebarService
     ) { }
 
@@ -59,5 +61,7 @@ export class NavigationComponent implements OnInit {
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
             });
+
+        this.isLoggedIn = this.auth.isLoggedIn();
     }
 }
