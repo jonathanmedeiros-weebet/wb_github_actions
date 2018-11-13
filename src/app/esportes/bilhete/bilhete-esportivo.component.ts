@@ -21,6 +21,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     possibilidadeGanho = 0;
     opcoes = JSON.parse(localStorage.getItem('opcoes'));
     apostaMinima;
+    displayPreTicker = false;
     unsub$ = new Subject();
 
     constructor(
@@ -67,7 +68,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     createForm() {
         this.form = this.fb.group({
             apostador: ['', [Validators.required]],
-            valor: ['', [Validators.required, Validators.min(this.apostaMinima)]],
+            valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
         });
     }
@@ -158,5 +159,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    openCupom() {
+        this.displayPreTicker = true;
+    }
+
+    closeCupom() {
+        this.displayPreTicker = false;
     }
 }

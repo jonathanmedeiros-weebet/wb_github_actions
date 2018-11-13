@@ -35,28 +35,31 @@
 <ng-template #variosDias>
     <div class="campeonato">
         <div class="campeonato-header">
-            <h1>{{campeonato.nome}}</h1>
+            {{campeonato.nome}}
         </div>
         <div class="jogos">
             <div class="jogo" *ngFor="let jogo of campeonato.jogos">
-                <div class="jogo-header">
-                    <div class="indentificacao">
-                        <span class="horario">{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
-                        <h3>{{jogo.time_a_nome}}</h3>
-                        <span>x</span>
-                        <h3>{{jogo.time_b_nome}}</h3>
-                        <div style="background-color: red; color:white; padding: 3px;" *ngIf="jogo.ao_vivo">
-                            AO VIVO
-                        </div>
+                <div class="indentificacao">
+                    <div class="horario">
+                        {{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
                     </div>
-                    <div class="odds-principais">
-                        <div *ngFor="let cotacao of jogo.cotacoes">
-                            {{cotacao.chave | tipoAposta}}:
-                            <span>{{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}</span>
-                        </div>
-                        <a routerLink="/esportes/futebol/jogos/{{jogo._id}}" class="mais-opcoes">
-                            <i class="fa fa-plus"></i>
+                    <div class="nome">
+                        {{jogo.nome}}
+                    </div>
+                    <div class="mais-opcoes">
+                        <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
+                            <i class="fa fa-plus"></i> Cotações
                         </a>
+                    </div>
+                </div>
+                <div class="odds-principais">
+                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes" (click)="addCotacao(jogo, cotacao)">
+                        <span class="nome">
+                            {{cotacao.chave | tipoAposta}}
+                        </span>
+                        <span class="valor">
+                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes}}
+                        </span>
                     </div>
                 </div>
             </div>

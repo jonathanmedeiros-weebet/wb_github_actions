@@ -1,7 +1,9 @@
 <section class="content-sports">
-    <h1 *ngIf="!keys().length">
-        Nenhum jogo disponível!
-    </h1>
+    <div class="sem-jogos" *ngIf="!keys().length">
+        <div class="alert alert-primary" role="alert">
+            Nenhum evento ao vivo disponível no momento!
+        </div>
+    </div>
     <div class="campeonato" *ngFor="let key of keys()">
         <div class="campeonato-header">
             {{jogos[key].campeonato?.nome}}

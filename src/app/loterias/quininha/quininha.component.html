@@ -24,7 +24,7 @@
                                             <label for="">Sorteio</label>
                                             <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio"
                                                 [ngClass]="applyCssInputError('sorteio')">
-                                                <option value="">Selecione</option>
+                                                <option [value]="null">Selecione</option>
                                                 <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
                                                     {{sorteio.nome}}
                                                 </option>

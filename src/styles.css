@@ -125,4 +125,8 @@ html, body{
     #page-wrapper{
         margin-top: 111px;
     }
+
+    .default-content{
+        padding: 10px 15px;
+    }
 }

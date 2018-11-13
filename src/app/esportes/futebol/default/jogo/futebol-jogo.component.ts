@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
@@ -25,7 +26,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private location: Location
     ) { }
 
     ngOnInit() {
@@ -59,6 +61,10 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
+    back() {
+        this.location.back();
+    }
+
     mapearCotacoes(cotacoes) {
         cotacoes.forEach(cotacao => {
             const tipoAposta = this.tiposAposta[cotacao.chave];
@@ -78,10 +84,6 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                 odd.cotacoes.push(cotacao);
             }
         });
-
-        console.log(cotacoes);
-        console.log(this.odds);
-        console.log('\n');
     }
 
     addCotacao(jogo: Jogo, cotacao) {
