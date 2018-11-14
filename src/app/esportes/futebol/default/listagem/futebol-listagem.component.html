@@ -1,3 +1,9 @@
+<div class="lds-ring" *ngIf="showLoadingIndicator">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 <section class="content-sports" *ngIf="diaEspecifico;else variosDias">
     <div class="campeonato" *ngFor="let campeonato of campeonatos">
         <div class="campeonato-header">

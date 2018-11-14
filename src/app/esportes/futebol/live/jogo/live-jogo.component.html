@@ -15,6 +15,12 @@
                 <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
             </div>
         </div>
+        <div class="lds-ring" *ngIf="showLoadingIndicator">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div class="tipo-apostas">
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
                 <h4>{{odds[chave].nome}}</h4>

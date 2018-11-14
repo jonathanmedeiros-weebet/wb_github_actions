@@ -18,6 +18,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     campeonato: Campeonato = new Campeonato();
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
+    showLoadingIndicator = true;
     unsub$ = new Subject();
 
     constructor(
@@ -42,6 +43,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         .subscribe(
                             campeonato => {
                                 this.diaEspecifico = false;
+                                this.showLoadingIndicator = false;
                                 this.campeonato = campeonato;
                             },
                             error => this.messageService.error(error)
@@ -65,6 +67,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         .subscribe(
                             campeonatos => {
                                 this.diaEspecifico = true;
+                                this.showLoadingIndicator = false;
                                 this.campeonatos = campeonatos;
                             },
                             error => this.messageService.error(error)

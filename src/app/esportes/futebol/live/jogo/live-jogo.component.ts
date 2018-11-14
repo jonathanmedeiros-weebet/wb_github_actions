@@ -17,6 +17,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
     objectKeys = Object.keys;
+    showLoadingIndicator = true;
     unsub$ = new Subject();
 
     constructor(
@@ -93,6 +94,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
                 odd.cotacoes.push(cotacao);
             }
         });
+
+        this.showLoadingIndicator = false;
     }
 
     addCotacao(jogo: Jogo, cotacao) {
