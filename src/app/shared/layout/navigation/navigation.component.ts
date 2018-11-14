@@ -37,7 +37,7 @@ import * as moment from 'moment';
 })
 export class NavigationComponent implements OnInit {
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
-    isLoggedIn = false;
+    isLoggedIn;
     isOpen = true;
     itens: any[];
     contexto;
@@ -62,6 +62,10 @@ export class NavigationComponent implements OnInit {
                 this.itens = dados.itens;
             });
 
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.auth.logado
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isLoggedIn => this.isLoggedIn = isLoggedIn
+            );
     }
 }

@@ -35,6 +35,9 @@ export class AuthService {
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
                     localStorage.setItem('tipos_aposta', JSON.stringify(res.parametros['tipos_aposta']));
+
+                    this.logadoSource.next(true);
+                    // window.location.reload();
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -45,6 +48,9 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         // localStorage.removeItem('app-mobile');
+
+        this.logadoSource.next(false);
+        // window.location.reload();
     }
 
     isLoggedIn(): boolean {

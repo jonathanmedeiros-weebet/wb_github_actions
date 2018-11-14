@@ -38,7 +38,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         credito: 0
     };
     usuario = new Usuario();
-    isLoggedIn = false;
+    isLoggedIn;
     LOGO;
     BANCA_NOME;
     appMobile;
@@ -62,6 +62,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.LOGO = config.LOGO;
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
+
+
+        this.auth.logado
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isLoggedIn => this.isLoggedIn = isLoggedIn
+            );
 
         this.getUsuario();
         this.createForm();
@@ -113,16 +120,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     getUsuario() {
         this.usuario = this.auth.getUser();
-        this.isLoggedIn = this.auth.isLoggedIn();
     }
 
     atualizarTiposAposta() {
-        this.parametroService.getParametros().subscribe(
-            parametros => {
-                localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
-            },
-            error => this.messageService.error(error)
-        );
+        this.parametroService.getParametros()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                parametros => {
+                    localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
+                },
+                error => this.messageService.error(error)
+            );
     }
 
     listPrinters() {
@@ -147,10 +155,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     getPosicaoFinanceira(event) {
         if (this.isLoggedIn) {
-            this.auth.getPosicaoFinanceira().subscribe(
-                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
-                error => this.handleError(error)
-            );
+            this.auth.getPosicaoFinanceira()
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                    error => this.handleError(error)
+                );
         }
     }
 }
