@@ -18,13 +18,11 @@
 }
 
 .sidebar-menu{
+    position: relative;
     display: flex;
     padding: 0 15px;
     margin: 20px 0px 0px 0px;
-}
-
-.sidebar-menu li{
-    margin-right: 30px;
+    justify-content: space-between;
 }
 
 .sidebar-menu i{

@@ -13,4 +13,5 @@ export class ItemApostaEsportiva {
     status: string;
     resultado: string;
     removido: boolean;
+    campeonato;
 }

@@ -7,14 +7,14 @@
             </a>
         </div>
         <ul class="sidebar-menu">
-            <li *ngIf="isLoggedIn">
-                <a href="#">
-                    <i class="fa fa-search"></i> Apostas
+            <li>
+                <a href="javascript:void(0)" (click)="openModal()">
+                    <i class="fa fa-search"></i> Pesquisa
                 </a>
             </li>
-            <li *ngIf="isLoggedIn">
-                <a [routerLink]="['/admin/dashboard']">
-                    <i class="fa fa-dashboard"></i> Admin
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="fa fa-ticket"></i> Apostas
                 </a>
             </li>
             <li>
@@ -25,6 +25,11 @@
             <li>
                 <a [routerLink]="['/regras']">
                     <i class="fa fa-book"></i> Regras
+                </a>
+            </li>
+            <li *ngIf="isLoggedIn">
+                <a [routerLink]="['/admin/dashboard']">
+                    <i class="fa fa-dashboard"></i> Admin
                 </a>
             </li>
         </ul>
@@ -59,3 +64,21 @@
         </ng-template>
     </div>
 </aside>
+
+<ng-template #modal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Pesquisa</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
+            <div class="form-group">
+                <input type="text" placeholder="Pesquise por time ou campeonato..." class="form-control"
+                    formControlName="input">
+            </div>
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </form>
+    </div>
+</ng-template>

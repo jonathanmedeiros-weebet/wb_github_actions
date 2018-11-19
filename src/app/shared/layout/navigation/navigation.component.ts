@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {
     trigger,
     state,
@@ -10,6 +12,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SidebarService, AuthService } from './../../../services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import * as moment from 'moment';
 
@@ -32,7 +35,7 @@ import * as moment from 'moment';
             transition('closed => open', [
                 animate('400ms ease-out')
             ])
-        ]),
+        ])
     ]
 })
 export class NavigationComponent implements OnInit {
@@ -42,10 +45,18 @@ export class NavigationComponent implements OnInit {
     itens: any[];
     contexto;
     unsub$ = new Subject();
+    @ViewChild('modal') modal: ElementRef;
+    modalReference;
+    searchForm: FormGroup = this.fb.group({
+        input: ['']
+    });
 
     constructor(
         private auth: AuthService,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private modalService: NgbModal,
+        private router: Router,
+        private fb: FormBuilder
     ) { }
 
     ngOnInit() {
@@ -67,5 +78,21 @@ export class NavigationComponent implements OnInit {
             .subscribe(
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
+    }
+
+    openModal() {
+        this.modalReference = this.modalService.open(this.modal, { ariaLabelledBy: 'modal-basic-title' });
+        this.modalReference.result
+            .then((result) => {
+
+            }, (reason) => {
+
+            });
+    }
+
+    search() {
+        this.modalReference.close('');
+        const input = this.searchForm.value.input;
+        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: input } });
     }
 }

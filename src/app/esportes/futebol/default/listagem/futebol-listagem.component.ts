@@ -15,8 +15,7 @@ import * as moment from 'moment';
 })
 export class FutebolListagemComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
-    campeonato: Campeonato = new Campeonato();
-    campeonatos: Campeonato[];
+    campeonatos: Campeonato[] = [];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
     unsub$ = new Subject();
@@ -42,9 +41,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonato => {
-                                this.diaEspecifico = false;
                                 this.showLoadingIndicator = false;
-                                this.campeonato = campeonato;
+                                this.campeonatos = [campeonato];
                             },
                             error => this.messageService.error(error)
                         );
@@ -62,11 +60,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         queryParams.data = moment().format('YYYY-MM-DD');
                     }
 
+                    if (params['nome']) {
+                        queryParams.nome = params['nome'];
+                    }
+
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                this.diaEspecifico = true;
                                 this.showLoadingIndicator = false;
                                 this.campeonatos = campeonatos;
                             },

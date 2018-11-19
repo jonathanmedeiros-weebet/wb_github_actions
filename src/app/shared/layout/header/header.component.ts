@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
@@ -8,7 +8,6 @@ import { BaseFormComponent } from '../base-form/base-form.component';
 import { AuthService, MessageService, ParametroService, SidebarService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
-
 import * as moment from 'moment';
 
 @Component({
