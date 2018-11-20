@@ -18,7 +18,7 @@ header a{
 
 .navbar-mobile{
     background-color: #002458;
-    border-bottom:1px solid #e1e2e4;
+    border-bottom:1px solid rgba(255,255,255,0.25);
     justify-content: center;
 }
 

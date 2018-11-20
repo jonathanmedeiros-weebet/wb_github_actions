@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from './services';
 import { config } from './shared/config';
-
-declare var $;
 
 @Component({
     selector: 'app-root',
@@ -14,7 +11,6 @@ declare var $;
 export class AppComponent implements OnInit {
     constructor(
         private auth: AuthService,
-        private route: ActivatedRoute,
         private titleService: Title
     ) { }
 
@@ -27,5 +23,6 @@ export class AppComponent implements OnInit {
 
         const element = document.querySelector('html');
         element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
+        element.style.setProperty('--background-secundaria', config.SECONDARY_COLOR);
     }
 }

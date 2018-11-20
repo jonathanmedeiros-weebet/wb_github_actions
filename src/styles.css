@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
     --background-primario: #14805e;
-    --background-menu: #14805e;
+    --background-secundaria: #14805e;
     --text-menu: white;
 }
 
@@ -12,8 +12,7 @@ html{
 
 html, body{
     height: 100%;
-    /* background-color: #f6f7f9; */
-    background-color: #e1e2e4;
+    background-color: var(--background-secundaria);
     color: #455a64;
 }
 
@@ -47,13 +46,14 @@ html, body{
 
 .default-content {
     padding: 20px 15px 20px 270px;
+    background: #e1e2e4;
 }
 
 .footer {
     line-height: 60px;
     text-align: center;
     height: 60px;
-    background-color: transparent;
+    background-color: #e1e2e4;
     width: 100%;
 }
 

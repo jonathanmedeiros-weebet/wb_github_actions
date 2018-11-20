@@ -1,16 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 
-@Component({
-    selector: 'app-base-form',
-    template: '<div></div>'
-})
-export abstract class BaseFormComponent implements OnInit {
+export abstract class BaseFormComponent {
     form: FormGroup;
 
     constructor() { }
-
-    ngOnInit() { }
 
     abstract createForm();
     abstract submit();

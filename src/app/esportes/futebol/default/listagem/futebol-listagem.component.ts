@@ -15,7 +15,7 @@ import * as moment from 'moment';
 })
 export class FutebolListagemComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
-    campeonatos: Campeonato[] = [];
+    campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
     unsub$ = new Subject();
