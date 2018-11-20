@@ -38,11 +38,12 @@ header a{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 15px 0 15px;
+    padding: 15px 15px 0 15px;
 }
 
 .menu-categories .category{
     margin: 0px 20px;
+    padding-bottom: 5px;
 }
 
 .menu-categories .category a{
@@ -58,6 +59,10 @@ header a{
 
 .menu-categories .active{
     border-bottom: 2px solid red;
+}
+
+.menu-categories .active a{
+    color: #fff;
 }
 
 .menu-categories i{
