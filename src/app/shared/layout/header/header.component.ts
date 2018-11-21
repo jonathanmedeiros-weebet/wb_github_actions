@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametroService, SidebarService } from './../../../services';
+import { AuthService, MessageService, ParametroService, SidebarService, PrintService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
 import * as moment from 'moment';
@@ -50,7 +50,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private messageService: MessageService,
         private parametroService: ParametroService,
         private auth: AuthService,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private printService: PrintService
     ) {
         super();
     }
@@ -133,13 +134,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     listPrinters() {
-        const message = {
-            data: '',
-            action: 'listPrinters',
-        };
-
-        parent.postMessage(message, 'file://'); // file://
-        console.log('listPrinters');
+        this.printService.listPrinters();
     }
 
     appVersion() {

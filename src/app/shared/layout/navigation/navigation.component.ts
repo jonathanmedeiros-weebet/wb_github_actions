@@ -11,7 +11,7 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SidebarService, AuthService } from './../../../services';
+import { SidebarService, AuthService, PrintService } from './../../../services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import * as moment from 'moment';
@@ -56,7 +56,8 @@ export class NavigationComponent implements OnInit {
         private sidebarService: SidebarService,
         private modalService: NgbModal,
         private router: Router,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private printService: PrintService
     ) { }
 
     ngOnInit() {
@@ -92,6 +93,10 @@ export class NavigationComponent implements OnInit {
             }, (reason) => {
 
             });
+    }
+
+    listPrinters() {
+        this.printService.listPrinters();
     }
 
     search() {

@@ -483,4 +483,14 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
     }
 
     sportsTicketAppMobile(aposta) { }
+
+    listPrinters() {
+        const message = {
+            data: '',
+            action: 'listPrinters',
+        };
+
+        parent.postMessage(message, 'file://'); // file://
+        console.log('listPrinters');
+    }
 }
