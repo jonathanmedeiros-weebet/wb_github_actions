@@ -215,8 +215,7 @@ button{
 }
 
 .loteria-content .pre-bilhete {
-    padding-top: 20px;
-    padding-left: 0;
+    padding: 20px 0 0 15px;
 }
 
 .loteria-content .pre-bilhete .form-row.inputs {
@@ -254,12 +253,20 @@ button{
     font-weight: bold;
 }
 
+.loteria-content .content-body .content {
+    display: flex;
+}
+
+.loteria-content .content-body .content .col-lg-9 {
+    padding: 0px;
+}
+
 @media only screen and (max-width: 668px) {
     .loteria-content {
         padding: 0;
     }
 
     .loteria-content .pre-bilhete {
-        padding-left: 30px;
+        padding: 40px 15px 0;
     }
 }

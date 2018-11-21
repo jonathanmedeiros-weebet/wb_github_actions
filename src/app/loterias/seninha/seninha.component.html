@@ -1,139 +1,137 @@
 <div class="loteria-content">
     <div class="content-body">
         <div class="content">
-            <div class="row">
-                <div class="col-xs-12 col-lg-9">
-                    <div class="content-header">
-                        Seninha
+            <div class="col-xs-12 col-lg-9">
+                <div class="content-header">
+                    Seninha
+                </div>
+                <div class="card">
+                    <p>
+                        Escolha as suas dezenas:
+                    </p>
+                    <div class="square-group">
+                        <div class="square" *ngFor="let number of numbers" (click)="checkNumber(number)" [ngClass]="{'active': isChecked(number)}">
+                            {{number | number:'2.0'}}
+                        </div>
                     </div>
-                    <div class="card">
-                        <p>
-                            Escolha as suas dezenas:
-                        </p>
-                        <div class="square-group">
-                            <div class="square" *ngFor="let number of numbers" (click)="checkNumber(number)" [ngClass]="{'active': isChecked(number)}">
-                                {{number | number:'2.0'}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div>
-                            <div class="col-xs-12">
-                                <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-                                    <div class="form-row">
-                                        <div class="form-group col-xs-12 col-lg-4">
-                                            <label for="">Sorteio</label>
-                                            <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio"
-                                                [ngClass]="applyCssInputError('sorteio')">
-                                                <option [value]="null">Selecione</option>
-                                                <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
-                                                    {{sorteio.nome}}
-                                                </option>
-                                            </select>
-                                            <app-error-msg [control]="form.get('sorteio')" label="Sorteio"></app-error-msg>
-                                        </div>
-                                        <div class="form-group col-xs-12 col-lg-4">
-                                            <label for="">Valor do Palpite (R$)</label>
-                                            <input type="number" class="form-control" min="1" formControlName="valor"
-                                                [ngClass]="applyCssInputError('valor')">
-                                            <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
-                                        </div>
-                                        <div class="form-group col-xs-12 col-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-line">Incluir Palpite</button>
-                                        </div>
+                    <hr>
+                    <div>
+                        <div class="col-xs-12">
+                            <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                                <div class="form-row">
+                                    <div class="form-group col-xs-12 col-lg-4">
+                                        <label for="">Sorteio</label>
+                                        <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio"
+                                            [ngClass]="applyCssInputError('sorteio')">
+                                            <option [value]="null">Selecione</option>
+                                            <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
+                                                {{sorteio.nome}}
+                                            </option>
+                                        </select>
+                                        <app-error-msg [control]="form.get('sorteio')" label="Sorteio"></app-error-msg>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="alert alert-primary" role="alert">
-                            Para gerar seu palpite aleatório basta clicar na quantidade de Dezenas abaixo.
-                        </div>
-                        <p>
-                            Quantidade de dezenas e suas contações:
-                        </p>
-                        <div class="bet-types">
-                            <div class="bet-type" *ngFor="let tipoAposta of tiposAposta" [ngClass]="{'active': checkBetType(tipoAposta)}">
-                                <div class="circle" (click)="generateGuess(tipoAposta.qtdNumeros)">
-                                    <div class="content">
-                                        {{tipoAposta.qtdNumeros}}
+                                    <div class="form-group col-xs-12 col-lg-4">
+                                        <label for="">Valor do Palpite (R$)</label>
+                                        <input type="number" class="form-control" min="1" formControlName="valor"
+                                            [ngClass]="applyCssInputError('valor')">
+                                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4">
+                                        <button type="submit" class="btn btn-primary btn-line">Incluir Palpite</button>
                                     </div>
                                 </div>
-                                <span class="price">{{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alert alert-primary" role="alert">
+                        Para gerar seu palpite aleatório basta clicar na quantidade de Dezenas abaixo.
+                    </div>
+                    <p>
+                        Quantidade de dezenas e suas contações:
+                    </p>
+                    <div class="bet-types">
+                        <div class="bet-type" *ngFor="let tipoAposta of tiposAposta" [ngClass]="{'active': checkBetType(tipoAposta)}">
+                            <div class="circle" (click)="generateGuess(tipoAposta.qtdNumeros)">
+                                <div class="content">
+                                    {{tipoAposta.qtdNumeros}}
+                                </div>
                             </div>
+                            <span class="price">{{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}}</span>
                         </div>
                     </div>
                 </div>
-                <div class="pre-bilhete col-xs-12 col-lg-3" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
-                    <div>
-                        <h4>PRÉ-BILHETE</h4>
-                        <a (click)="closeCupom()" class="fechar-pre-bilhete">
-                            <i class="fa fa-lg fa-close"></i>
-                        </a>
-                        <div class="aposta-item" *ngFor="let item of aposta.itens; let i=index">
-                            <div class="item-header">
-                                <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
-                                    <i class="fa fa-lg fa-close"></i>
-                                </a>
-                                <div>
-                                    <span>{{item.sorteio.nome}}</span>
-                                </div>
-                                <div>
-                                    <label>valor: </label>
-                                    <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
-                                </div>
-                                <div>
-                                    <label>Retorno 6: </label>
-                                    <span>{{(item.premio6) | currency: 'BRL':'symbol':'1.2'}}</span>
-                                </div>
-                                <div>
-                                    <label>Retorno 5: </label>
-                                    <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
-                                </div>
-                                <div>
-                                    <label>Retorno 4: </label>
-                                    <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
-                                </div>
-                                <div>
-                                    <label>Retorno 3: </label>
-                                    <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
-                                </div>
+            </div>
+            <div class="pre-bilhete col-xs-12 col-lg-3" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
+                <div>
+                    <h4>PRÉ-BILHETE</h4>
+                    <a (click)="closeCupom()" class="fechar-pre-bilhete">
+                        <i class="fa fa-lg fa-close"></i>
+                    </a>
+                    <div class="aposta-item" *ngFor="let item of aposta.itens; let i=index">
+                        <div class="item-header">
+                            <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
+                                <i class="fa fa-lg fa-close"></i>
+                            </a>
+                            <div>
+                                <span>{{item.sorteio.nome}}</span>
                             </div>
-                            <div class="circle-group">
-                                <div class="circle" *ngFor="let numero of item.numeros">
-                                    <div class="content">
-                                        {{numero | number:'2.0'}}
-                                    </div>
+                            <div>
+                                <label>valor: </label>
+                                <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 6: </label>
+                                <span>{{(item.premio6) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 5: </label>
+                                <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 4: </label>
+                                <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 3: </label>
+                                <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                        </div>
+                        <div class="circle-group">
+                            <div class="circle" *ngFor="let numero of item.numeros">
+                                <div class="content">
+                                    {{numero | number:'2.0'}}
                                 </div>
                             </div>
                         </div>
-                        <form #apostaForm="ngForm">
-                            <div class="form-row inputs">
-                                <div class="form-group col-xs-12 col-lg-12">
-                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
-                                        name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
-                                        #apostador="ngModel" placeholder="Apostador">
-                                    <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
-                                </div>
-                                <div class="form-group col-xs-12 col-lg-12">
-                                    <input type="text" class="form-control" [(ngModel)]="aposta.telefone" name="telefone" placeholder="Telefone">
-                                </div>
-                            </div>
-                            <div class="form-row botoes">
-                                <div class="col">
-                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
-                                        (click)="create('imprimir')">
-                                        Finalizar e Imprimir
-                                    </button>
-                                </div>
-                                <div class="col" *ngIf="appMobile">
-                                    <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
-                                        (click)="create('compartilhar')">
-                                        Finalizar e Compartilhar
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
+                    <form #apostaForm="ngForm">
+                        <div class="form-row inputs">
+                            <div class="form-group col-xs-12 col-lg-12">
+                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
+                                    name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
+                                    #apostador="ngModel" placeholder="Apostador">
+                                <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-12">
+                                <input type="text" class="form-control" [(ngModel)]="aposta.telefone" name="telefone" placeholder="Telefone">
+                            </div>
+                        </div>
+                        <div class="form-row botoes">
+                            <div class="col">
+                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
+                                    (click)="create('imprimir')">
+                                    Finalizar e Imprimir
+                                </button>
+                            </div>
+                            <div class="col" *ngIf="appMobile">
+                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
+                                    (click)="create('compartilhar')">
+                                    Finalizar e Compartilhar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
