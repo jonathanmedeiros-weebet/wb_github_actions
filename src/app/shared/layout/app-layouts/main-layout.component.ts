@@ -9,12 +9,10 @@ import { MessageService, ParametroService } from './../../../services';
 export class MainLayoutComponent implements OnInit {
     constructor(
         private messageService: MessageService,
-        private parametroService: ParametroService
+        private parametroService: ParametroService,
     ) { }
 
     ngOnInit() {
-        this.getParametros();
-
         setInterval(() => {
             this.getParametros();
         }, 600000);

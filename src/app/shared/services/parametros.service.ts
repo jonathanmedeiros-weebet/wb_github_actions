@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
@@ -24,6 +24,13 @@ export class ParametroService {
 
         return this.http.get(url, requestOptions)
             .pipe(
+                tap((res: any) => {
+                    const parametros = res.results;
+                    localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
+                    localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
+                    localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
+                    localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
+                }),
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
