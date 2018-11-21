@@ -80,6 +80,10 @@ export class NavigationComponent implements OnInit {
             );
     }
 
+    closeMenu() {
+        this.sidebarService.toggle();
+    }
+
     openModal() {
         this.modalReference = this.modalService.open(this.modal, { ariaLabelledBy: 'modal-basic-title' });
         this.modalReference.result
@@ -93,6 +97,24 @@ export class NavigationComponent implements OnInit {
     search() {
         this.modalReference.close('');
         const input = this.searchForm.value.input;
+        this.closeMenu();
         this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: input } });
+    }
+
+    onSwipeLeft(evend) {
+        // console.log('pos', evend.direction);
+
+        // let ele = document.getElementById('sidebar-wrapper');
+        // let currentMargin = parseInt(ele.style.marginLeft, 10);
+        if (evend.direction == 2) {
+            this.closeMenu();
+            // currentMargin -= 10;
+        } /*else if (evend.direction == 4) {
+            currentMargin += 10;
+        } else if (currentMargin < 0) {
+            currentMargin = 0;
+        }*/
+        // ele.style.marginLeft = currentMargin + 'px';
+        // this.closeMenu();
     }
 }

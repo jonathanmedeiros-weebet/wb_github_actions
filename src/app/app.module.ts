@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import 'hammerjs';
+
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 

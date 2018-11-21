@@ -17,7 +17,7 @@ import * as moment from 'moment';
     animations: [
         trigger('openClose', [
             state('open', style({
-                'left': '255px',
+                'left': '0',
             })),
             state('closed', style({
                 'left': '0',
