@@ -210,12 +210,6 @@ button{
     padding: 0px 15px 0px 255px;
 }
 
-@media only screen and (max-width: 668px) {
-    .loteria-content {
-        padding: 0;
-    }
-}
-
 .loteria-content .card {
     border-radius: 0;
 }
@@ -258,4 +252,14 @@ button{
     padding: 15px 10px;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 668px) {
+    .loteria-content {
+        padding: 0;
+    }
+
+    .loteria-content .pre-bilhete {
+        padding-left: 30px;
+    }
 }
