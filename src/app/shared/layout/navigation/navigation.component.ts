@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
     trigger,
@@ -58,7 +58,13 @@ export class NavigationComponent implements OnInit {
         private router: Router,
         private fb: FormBuilder,
         private printService: PrintService
-    ) { }
+    ) {
+        router.events.forEach((event: NavigationEvent) => {
+            if(event instanceof NavigationEnd) {
+                this.closeMenu();
+            }
+        });
+     }
 
     ngOnInit() {
         if (window.innerWidth <= 667) {
@@ -82,7 +88,7 @@ export class NavigationComponent implements OnInit {
     }
 
     closeMenu() {
-        this.sidebarService.toggle();
+        this.sidebarService.close();
     }
 
     openModal() {
