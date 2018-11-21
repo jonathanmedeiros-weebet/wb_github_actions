@@ -27,6 +27,11 @@ export class SidebarService {
         this.isOpenSource.next(this.open);
     }
 
+    close(): void {
+        this.open = false;
+        this.isOpenSource.next(this.open);
+    }
+
     changeItens(itens, contexto) {
         this.itensSource.next({
             itens: itens,

@@ -6,6 +6,19 @@
     color: white;
 }
 
+.pre-bilhete-mobile{
+    position: fixed;
+    top: 113px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: var(--background-primario);
+    display: block;
+    overflow-y: auto;
+}
+
 h4{
     color:#c9def5;
 }
