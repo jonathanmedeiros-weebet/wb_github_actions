@@ -30,3 +30,4 @@ export * from './shared/services/auth/auth.service';
 /* Guards */
 export * from './shared/services/guards/auth.guard';
 export * from './shared/services/guards/expires.guard';
+export * from './shared/services/guards/parametros.resolver';

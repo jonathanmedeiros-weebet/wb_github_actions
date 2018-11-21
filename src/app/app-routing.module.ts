@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.com
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 import { AdminLayoutComponent } from './shared/layout/app-layouts/admin-layout.component';
 
-import { AuthGuard, ExpiresGuard } from './services';
+import { AuthGuard, ExpiresGuard, ParametrosResolver } from './services';
 
 const appRoutes: Routes = [
     {
@@ -14,6 +14,7 @@ const appRoutes: Routes = [
         data: {
             pageTitle: 'Dashboard'
         },
+        resolve: [ParametrosResolver],
         children: [
             {
                 path: '',
