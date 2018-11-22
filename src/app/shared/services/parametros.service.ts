@@ -31,12 +31,12 @@ export class ParametroService {
 
     getOddsImpressao() {
         const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-        const oddsImpressao = {};
+        const oddsImpressao = [];
         for (const key in tiposAposta) {
             if (tiposAposta.hasOwnProperty(key)) {
                 const tipoAposta = tiposAposta[key];
                 if (parseInt(tipoAposta.exibirImpressao, 10)) {
-                    oddsImpressao[key] = tipoAposta;
+                    oddsImpressao.push(key);
                 }
             }
         }
