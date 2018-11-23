@@ -11,10 +11,12 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SidebarService, AuthService, PrintService } from './../../../services';
+import { SidebarService, AuthService, PrintService, CampeonatoService, ParametroService } from './../../../services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import * as moment from 'moment';
+
+declare var $;
 
 @Component({
     selector: 'app-navigation',
@@ -46,7 +48,11 @@ export class NavigationComponent implements OnInit {
     contexto;
     unsub$ = new Subject();
     @ViewChild('modal') modal: ElementRef;
+    @ViewChild('modalJogo') modalJogo: ElementRef;
     modalReference;
+    modalReferenceJogo;
+    campeonatosImpressao;
+    campeonatosSelecionados;
     searchForm: FormGroup = this.fb.group({
         input: ['']
     });
@@ -54,6 +60,8 @@ export class NavigationComponent implements OnInit {
     constructor(
         private auth: AuthService,
         private sidebarService: SidebarService,
+        private campeonatoService: CampeonatoService,
+        private parametroService: ParametroService,
         private modalService: NgbModal,
         private router: Router,
         private fb: FormBuilder,
@@ -103,6 +111,82 @@ export class NavigationComponent implements OnInit {
 
     listPrinters() {
         this.printService.listPrinters();
+    }
+
+    printJogos() {
+        this.modalReferenceJogo = this.modalService.open(this.modalJogo, { ariaLabelledBy: 'modal-basic-title' });
+
+        const odds = this.parametroService.getOddsImpressao();
+        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+
+        const queryParams: any = {
+            'campeonatos_bloqueados': campeonatosBloqueados,
+            'odds': odds,
+            'data': moment().format('YYYY-MM-DD')
+        };
+
+        this.campeonatoService.getCampeonatos(queryParams).subscribe(
+            campeonatos => {
+                console.log('campiniii1', campeonatos);
+                console.log('campiniii2', this.campeonatosImpressao);
+                this.campeonatosImpressao = campeonatos;
+                console.log('campiniii2', this.campeonatosImpressao);
+                let parent = moment().format('YYYYMMDD');
+                let dataTree = [];
+
+                dataTree.push({
+                    id: parent,
+                    parent: '#',
+                    text: moment().format('DD [de] MMMM [de] YYYY'),
+                    icon: false
+                });
+
+                campeonatos.forEach(campeonato => {
+                    dataTree.push({
+                        id: campeonato._id,
+                        parent: parent,
+                        text: campeonato.nome,
+                        icon: false
+                    });
+                });
+
+                $('#treeJogos').jstree({
+                    core: {
+                        data: dataTree
+                    },
+                    checkbox: {
+                        keep_selected_style: false
+                    },
+                    plugins: ['checkbox']
+                }).on('loaded.jstree', (e, data) => {
+                    console.log('Loaded:', data);
+                }).on('changed.jstree', (e, data) => {
+                    this.campeonatosSelecionados = data.selected;
+                    console.log('Selected:', data.selected);
+                });
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
+
+    printar() {
+        console.log('imprimindo...');
+        console.log('campssss', this.campeonatosImpressao);
+        let campsSelecionados = [];
+        // let camps = this.campeonatosImpressao.reduce((prev, next) => prev.concat(next.jogos), []);
+
+        this.campeonatosSelecionados.forEach(element => {
+            let selected = this.campeonatosImpressao.find(camp => camp._id == element);
+            if(selected) {
+                campsSelecionados.push(selected);
+            }
+        });
+
+        let jogos = [{data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados}];
+
+        this.printService.gamesAppMobile(jogos);
     }
 
     search() {

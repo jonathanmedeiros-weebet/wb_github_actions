@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)">
+                <a href="javascript:void(0)" (click)="printJogos()">
                     <i class="fa fa-ticket"></i> Apostas
                 </a>
             </li>
@@ -95,3 +95,19 @@
     </div>
 </ng-template>
 
+<ng-template #modalJogo let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cotações dos Campeonatos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="searchForm" (ngSubmit)="printar()">
+            <div class="form-group">
+                <div id="treeJogos"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Imprimir</button>
+        </form>
+    </div>
+</ng-template>
