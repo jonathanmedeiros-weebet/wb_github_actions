@@ -17,7 +17,6 @@ header a{
 }
 
 .navbar-mobile{
-    background-color: #002458;
     border-bottom:1px solid rgba(255,255,255,0.25);
     justify-content: center;
 }
@@ -34,7 +33,6 @@ header a{
 
 
 .menu-categories{
-    background-color: #002458;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +56,7 @@ header a{
 }
 
 .menu-categories .active{
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid var(--highlight);
 }
 
 .menu-categories .active a{

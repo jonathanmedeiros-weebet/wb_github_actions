@@ -45,7 +45,7 @@
 }
 
 .odds-principais .odd{
-    background-color: #036ef1;
+    background-color: var(--odds);
     margin-right: 3px;
     flex: 1 1 0px;
     padding: 5px 8px;

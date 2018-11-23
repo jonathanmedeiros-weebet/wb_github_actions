@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-    --background-primario: #14805e;
-    --background-secundaria: #14805e;
-    --text-menu: white;
+    --header: #002458;
+    --foreground-header: #fff;
+    --sidebar-right:red;
+    --foreground-sidebar-right: #fff;
+    --sidebar-left: #011e46;
+    --foreground-sidebar-left: #fff;
+    --highlight: yellow;
+    --foreground-highlight: #fff;
+    --odds: purple;
+    --foreground-odds: #fff;
 }
 
 html{
@@ -12,8 +19,12 @@ html{
 
 html, body{
     height: 100%;
-    background-color: var(--background-secundaria);
+    background-color: var(--sidebar-left);
     color: #455a64;
+}
+
+header{
+    background-color: var(--header);
 }
 
 #auth-layout{
@@ -66,7 +77,7 @@ html, body{
 }
 
 .content-header h2{
-    color: var(--background-primario);
+    color: var(--sidebar-right);
     margin-bottom: 15px;
 }
 
@@ -147,10 +158,10 @@ html, body{
     width: 51px;
     height: 51px;
     margin: 6px;
-    border: 6px solid var(--background-primario);
+    border: 6px solid var(--sidebar-right);
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: var(--background-primario) transparent transparent transparent;
+    border-color: var(--sidebar-right) transparent transparent transparent;
   }
   .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;

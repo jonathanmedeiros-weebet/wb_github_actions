@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
             this.auth.setAppMobile();
         }
 
-        const element = document.querySelector('html');
-        element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
-        element.style.setProperty('--background-secundaria', config.SECONDARY_COLOR);
+        // const element = document.querySelector('html');
+        // element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
+        // element.style.setProperty('--background-secundaria', config.SECONDARY_COLOR);
     }
 }

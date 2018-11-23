@@ -41,7 +41,7 @@
 }
 
 .odds-principais .odd{
-    background-color: #036ef1;
+    background-color: var(--odds);
     margin-right: 3px;
     flex: 1 1 0px;
     padding: 5px 8px;
@@ -62,7 +62,7 @@
 
 #fixed-bar-bilhete{
     padding: 5px;
-    background: var(--background-primario);
+    background: var(--sidebar-right);
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -101,7 +101,7 @@
     bottom: 0;
     padding-top: 15px;
     padding-bottom: 15px;
-    background: var(--background-primario);
+    background: var(--sidebar-right);
     display: block;
     overflow-y: auto;
 }
