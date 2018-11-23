@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './../auth/auth.service';
+import { ParametroService } from '../parametros.service';
 import { HelperService } from './helper.service';
 
 import { config } from './../../config';
@@ -13,8 +14,90 @@ export class PrintService {
     private opcoes = JSON.parse(localStorage.getItem('opcoes'));
 
     constructor(
-        private auth: AuthService
+        private auth: AuthService,
+        private parametroService: ParametroService
     ) { }
+
+    games(aposta) {
+        if (this.auth.isAppMobile()) {
+            this.gamesAppMobile(aposta);
+        } else {
+            this.gamesDestkop(aposta);
+        }
+    }
+
+    gamesDestkop(aposta) {
+
+    }
+
+    gamesAppMobile(jogos) {
+        const cols = 6;
+        const odds = this.parametroService.getOddsImpressao();
+        const linhas = Math.ceil(odds.length / cols);
+        console.log('camp:', jogos);
+
+        let text = `${config.BANCA_NOME}
+
+        Tabela de Jogos`;
+
+        jogos.forEach(jogo => {
+            text += `
+
+==== ${jogo.data_grupo} ====`;
+
+            jogo.camps.forEach(camp => {
+text +=`
+
+${camp.nome}
+`;
+
+
+                camp.jogos.forEach(jogo => {
+                    // "2018-11-23T18:00:00.000Z"
+                    let horario = jogo.horario.substr(11, 5)
+                    text += `
+${horario} ${jogo.nome}
+`;
+                    for (let i = 0; i < linhas; i++) {
+                        let start = i * cols;
+
+                        let oddPos1 = odds[start];
+                        let oddPos2 = odds[++start];
+                        let oddPos3 = odds[++start];
+                        let oddPos4 = odds[++start];
+                        let oddPos5 = odds[++start];
+                        let oddPos6 = odds[++start];
+
+                        text += `${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)} ${this.getSigla(oddPos6)}
+`;
+                        text += `${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)} ${this.getValor(oddPos6, jogo.cotacoes)}
+`;
+                    }
+                });
+            });
+
+        });
+
+        console.log(text);
+        // parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
+    }
+
+    getValor(chave, cotacoes) {
+        let cotacao = cotacoes.find(c => c.chave = chave);
+        if (cotacao) {
+            return cotacao.valor.toFixed(2);
+        }
+        return '----';
+    }
+
+    getSigla(chave) {
+        if (chave) {
+            const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+            let sigla = tiposAposta[chave].sigla.substr(0, 4);
+            return sigla;
+        }
+        return '    ';
+    }
 
     lotteryTicket(aposta) {
         if (this.auth.isAppMobile()) {
