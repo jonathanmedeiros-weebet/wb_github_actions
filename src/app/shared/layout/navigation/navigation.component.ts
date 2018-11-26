@@ -43,6 +43,7 @@ declare var $;
 export class NavigationComponent implements OnInit {
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     isLoggedIn;
+    isAppMobile;
     isOpen = true;
     itens: any[];
     contexto;
@@ -93,6 +94,8 @@ export class NavigationComponent implements OnInit {
             .subscribe(
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
+
+        this.isAppMobile = this.auth.isAppMobile();
     }
 
     closeMenu() {

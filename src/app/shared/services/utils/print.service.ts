@@ -79,7 +79,7 @@ ${horario} ${jogo.nome}
         });
 
         console.log(text);
-        // parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
+        parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
     }
 
     getValor(chave, cotacoes) {
