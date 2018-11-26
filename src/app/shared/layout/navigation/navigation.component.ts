@@ -68,11 +68,11 @@ export class NavigationComponent implements OnInit {
         private printService: PrintService
     ) {
         router.events.forEach((event: NavigationEvent) => {
-            if(event instanceof NavigationEnd) {
+            if (event instanceof NavigationEnd) {
                 this.closeMenu();
             }
         });
-     }
+    }
 
     ngOnInit() {
         if (window.innerWidth <= 667) {
@@ -127,15 +127,12 @@ export class NavigationComponent implements OnInit {
 
         this.campeonatoService.getCampeonatos(queryParams).subscribe(
             campeonatos => {
-                console.log('campiniii1', campeonatos);
-                console.log('campiniii2', this.campeonatosImpressao);
                 this.campeonatosImpressao = campeonatos;
-                console.log('campiniii2', this.campeonatosImpressao);
-                let parent = moment().format('YYYYMMDD');
-                let dataTree = [];
+                const date = moment().format('YYYYMMDD');
+                const dataTree = [];
 
                 dataTree.push({
-                    id: parent,
+                    id: date,
                     parent: '#',
                     text: moment().format('DD [de] MMMM [de] YYYY'),
                     icon: false
@@ -144,7 +141,7 @@ export class NavigationComponent implements OnInit {
                 campeonatos.forEach(campeonato => {
                     dataTree.push({
                         id: campeonato._id,
-                        parent: parent,
+                        parent: date,
                         text: campeonato.nome,
                         icon: false
                     });
@@ -159,10 +156,9 @@ export class NavigationComponent implements OnInit {
                     },
                     plugins: ['checkbox']
                 }).on('loaded.jstree', (e, data) => {
-                    console.log('Loaded:', data);
+
                 }).on('changed.jstree', (e, data) => {
                     this.campeonatosSelecionados = data.selected;
-                    console.log('Selected:', data.selected);
                 });
             },
             err => {
@@ -172,19 +168,16 @@ export class NavigationComponent implements OnInit {
     }
 
     printar() {
-        console.log('imprimindo...');
-        console.log('campssss', this.campeonatosImpressao);
-        let campsSelecionados = [];
-        // let camps = this.campeonatosImpressao.reduce((prev, next) => prev.concat(next.jogos), []);
+        const campsSelecionados = [];
 
-        this.campeonatosSelecionados.forEach(element => {
-            let selected = this.campeonatosImpressao.find(camp => camp._id == element);
-            if(selected) {
-                campsSelecionados.push(selected);
+        this.campeonatosImpressao.forEach(campeonatoImpressao => {
+            const id = `${campeonatoImpressao._id}`;
+            if (this.campeonatosSelecionados.includes(id)) {
+                campsSelecionados.push(campeonatoImpressao);
             }
         });
 
-        let jogos = [{data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados}];
+        const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados }];
 
         this.printService.gamesAppMobile(jogos);
     }

@@ -6,6 +6,7 @@ import { HelperService } from './helper.service';
 
 import { config } from './../../config';
 import * as moment from 'moment';
+import * as clone from 'clone';
 
 @Injectable({
     providedIn: 'root'
@@ -30,23 +31,22 @@ export class PrintService {
 
     }
 
-    gamesAppMobile(jogos) {
+    gamesAppMobile(dias) {
         const cols = 6;
         const odds = this.parametroService.getOddsImpressao();
         const linhas = Math.ceil(odds.length / cols);
-        console.log('camp:', jogos);
 
         let text = `${config.BANCA_NOME}
 
         Tabela de Jogos`;
 
-        jogos.forEach(jogo => {
+        dias.forEach(dia => {
             text += `
 
-==== ${jogo.data_grupo} ====`;
+==== ${dia.data_grupo} ====`;
 
-            jogo.camps.forEach(camp => {
-text +=`
+            dia.camps.forEach(camp => {
+                text += `
 
 ${camp.nome}
 `;
@@ -54,19 +54,19 @@ ${camp.nome}
 
                 camp.jogos.forEach(jogo => {
                     // "2018-11-23T18:00:00.000Z"
-                    let horario = jogo.horario.substr(11, 5)
+                    const horario = moment(jogo.horario).format('HH:mm');
                     text += `
 ${horario} ${jogo.nome}
 `;
                     for (let i = 0; i < linhas; i++) {
                         let start = i * cols;
 
-                        let oddPos1 = odds[start];
-                        let oddPos2 = odds[++start];
-                        let oddPos3 = odds[++start];
-                        let oddPos4 = odds[++start];
-                        let oddPos5 = odds[++start];
-                        let oddPos6 = odds[++start];
+                        const oddPos1 = odds[start];
+                        const oddPos2 = odds[++start];
+                        const oddPos3 = odds[++start];
+                        const oddPos4 = odds[++start];
+                        const oddPos5 = odds[++start];
+                        const oddPos6 = odds[++start];
 
                         text += `${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)} ${this.getSigla(oddPos6)}
 `;
@@ -83,7 +83,7 @@ ${horario} ${jogo.nome}
     }
 
     getValor(chave, cotacoes) {
-        let cotacao = cotacoes.find(c => c.chave = chave);
+        const cotacao = cotacoes.find(c => c.chave == chave);
         if (cotacao) {
             return cotacao.valor.toFixed(2);
         }
@@ -93,7 +93,7 @@ ${horario} ${jogo.nome}
     getSigla(chave) {
         if (chave) {
             const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-            let sigla = tiposAposta[chave].sigla.substr(0, 4);
+            const sigla = tiposAposta[chave].sigla.substr(0, 4);
             return sigla;
         }
         return '    ';
