@@ -49,9 +49,9 @@ export class NavigationComponent implements OnInit {
     contexto;
     unsub$ = new Subject();
     @ViewChild('modal') modal: ElementRef;
-    @ViewChild('modalJogo') modalJogo: ElementRef;
+    @ViewChild('modalTabela') modalTabela: ElementRef;
     modalReference;
-    modalReferenceJogo;
+    modalReferenceTabela;
     campeonatosImpressao;
     campeonatosSelecionados;
     searchForm: FormGroup = this.fb.group({
@@ -103,13 +103,16 @@ export class NavigationComponent implements OnInit {
     }
 
     openModal() {
-        this.modalReference = this.modalService.open(this.modal, { ariaLabelledBy: 'modal-basic-title' });
+        this.modalReference = this.modalService.open(
+            this.modal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
         this.modalReference.result
-            .then((result) => {
-
-            }, (reason) => {
-
-            });
+            .then((result) => { },
+                (reason) => { });
     }
 
     listPrinters() {
@@ -117,7 +120,13 @@ export class NavigationComponent implements OnInit {
     }
 
     printJogos() {
-        this.modalReferenceJogo = this.modalService.open(this.modalJogo, { ariaLabelledBy: 'modal-basic-title' });
+        this.modalReferenceTabela = this.modalService.open(
+            this.modalTabela,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
 
         const odds = this.parametroService.getOddsImpressao();
         const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
@@ -193,19 +202,8 @@ export class NavigationComponent implements OnInit {
     }
 
     onSwipeLeft(evend) {
-        // console.log('pos', evend.direction);
-
-        // let ele = document.getElementById('sidebar-wrapper');
-        // let currentMargin = parseInt(ele.style.marginLeft, 10);
         if (evend.direction == 2) {
             this.closeMenu();
-            // currentMargin -= 10;
-        } /*else if (evend.direction == 4) {
-            currentMargin += 10;
-        } else if (currentMargin < 0) {
-            currentMargin = 0;
-        }*/
-        // ele.style.marginLeft = currentMargin + 'px';
-        // this.closeMenu();
+        }
     }
 }

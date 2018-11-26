@@ -88,6 +88,10 @@ header a{
 }
 
 @media only screen and (max-width: 667px) {
+    .menu-categories{
+        font-size: 0.5rem;
+    }
+
     .menu-categories .menu-conta{
         display: none;
     }
