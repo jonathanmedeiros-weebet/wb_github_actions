@@ -124,7 +124,7 @@ export class NavigationComponent implements OnInit {
 
         const queryParams: any = {
             'campeonatos_bloqueados': campeonatosBloqueados,
-            'odds': odds,
+            'odds': odds.slice(0, 24),
             'data': moment().format('YYYY-MM-DD')
         };
 

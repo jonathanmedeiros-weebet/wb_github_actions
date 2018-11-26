@@ -79,22 +79,26 @@ ${horario} ${jogo.nome}
         });
 
         console.log(text);
-        parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
+        // parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
     }
 
     getValor(chave, cotacoes) {
         const cotacao = cotacoes.find(c => c.chave == chave);
         if (cotacao) {
-            return cotacao.valor.toFixed(2);
+            let result = cotacao.valor.toFixed(2);
+            if (cotacao.valor < 10) {
+                result = `0${result}`;
+            }
+            return result;
         }
-        return '----';
+        return '-----';
     }
 
     getSigla(chave) {
         if (chave) {
             const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-            const sigla = tiposAposta[chave].sigla.substr(0, 4);
-            return sigla;
+            const sigla = `${tiposAposta[chave].sigla}     `;
+            return sigla.substr(0, 5);
         }
         return '    ';
     }
