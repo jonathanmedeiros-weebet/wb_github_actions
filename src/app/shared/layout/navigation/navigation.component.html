@@ -6,7 +6,6 @@
 ></div>
 
 <aside>
-    <!-- <button type="button" class="btn btn-danger btn-lg" (click)="clickMe()">CLICK ME</button> -->
     <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
         <div class="sidebar-brand">
             <a class="" [routerLink]="['/']" routerLinkActive="router-link-active">
@@ -20,8 +19,13 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" (click)="printJogos()">
+                <a href="javascript:void(0)">
                     <i class="fa fa-ticket"></i> Apostas
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" (click)="printJogos()">
+                    <i class="fa fa-print"></i> Tabela
                 </a>
             </li>
             <li *ngIf="isAppMobile" (click)="listPrinters()">
