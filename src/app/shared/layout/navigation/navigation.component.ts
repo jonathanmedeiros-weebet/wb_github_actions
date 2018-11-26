@@ -170,7 +170,7 @@ export class NavigationComponent implements OnInit {
         );
     }
 
-    printar() {
+    imprimirTabela() {
         const campsSelecionados = [];
 
         this.campeonatosImpressao.forEach(campeonatoImpressao => {
