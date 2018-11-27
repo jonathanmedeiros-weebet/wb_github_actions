@@ -11,8 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
-
 import { UtilsModule } from './../utils/utils.module';
+import { ApostaEsportivaService } from '../../services';
 
 @NgModule({
     imports: [
@@ -40,6 +40,7 @@ import { UtilsModule } from './../utils/utils.module';
         FooterComponent,
         NavigationComponent,
         ErrorMsgComponent
-    ]
+    ],
+    providers: [ApostaEsportivaService]
 })
 export class LayoutModule { }

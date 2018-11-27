@@ -49,4 +49,9 @@ export class ParametroService {
         }
         return oddsImpressao;
     }
+
+    getInformativoRodape() {
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        return opcoes.informativo_rodape;
+    }
 }

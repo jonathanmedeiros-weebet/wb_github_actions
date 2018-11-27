@@ -4,6 +4,7 @@ export class ApostaEsportiva {
     id: number;
     itens: ItemApostaEsportiva[] = [];
     cambistaId: number;
+    cambista: any;
     apostador: string;
     horario: string;
     ativo: boolean;

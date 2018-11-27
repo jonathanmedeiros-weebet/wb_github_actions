@@ -11,7 +11,13 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { SidebarService, AuthService, PrintService, CampeonatoService, ParametroService } from './../../../services';
+import {
+    SidebarService, AuthService, PrintService,
+    CampeonatoService, ParametroService, ApostaEsportivaService,
+    MessageService
+} from './../../../services';
+import { ApostaEsportiva } from './../../../models';
+import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import * as moment from 'moment';
@@ -41,22 +47,28 @@ declare var $;
     ]
 })
 export class NavigationComponent implements OnInit {
+    LOGO;
+    informativoRodape;
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     isLoggedIn;
     isAppMobile;
     isOpen = true;
     itens: any[];
     contexto;
-    unsub$ = new Subject();
-    @ViewChild('modal') modal: ElementRef;
-    @ViewChild('modalTabela') modalTabela: ElementRef;
-    modalReference;
-    modalReferenceTabela;
     campeonatosImpressao;
     campeonatosSelecionados;
-    searchForm: FormGroup = this.fb.group({
+    @ViewChild('modalPesquisa') modalPesquisa: ElementRef;
+    @ViewChild('modalTabela') modalTabela: ElementRef;
+    @ViewChild('modalAposta') modalAposta: ElementRef;
+    modalReferencePesquisa;
+    modalReferenceTabela;
+    modalReferenceAposta;
+    exibirBilhete = false;
+    pesquisarForm: FormGroup = this.fb.group({
         input: ['']
     });
+    apostaEsportiva = new ApostaEsportiva();
+    unsub$ = new Subject();
 
     constructor(
         private auth: AuthService,
@@ -66,7 +78,9 @@ export class NavigationComponent implements OnInit {
         private modalService: NgbModal,
         private router: Router,
         private fb: FormBuilder,
-        private printService: PrintService
+        private printService: PrintService,
+        private apostaEsportivaService: ApostaEsportivaService,
+        private messageService: MessageService
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -76,6 +90,9 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.LOGO = config.LOGO;
+        this.informativoRodape = this.parametroService.getInformativoRodape();
+
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
@@ -102,24 +119,32 @@ export class NavigationComponent implements OnInit {
         this.sidebarService.close();
     }
 
-    openModal() {
-        this.modalReference = this.modalService.open(
-            this.modal,
+    listPrinters() {
+        this.printService.listPrinters();
+    }
+
+    abrirModalPesquisa() {
+        this.modalReferencePesquisa = this.modalService.open(
+            this.modalPesquisa,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true
             }
         );
-        this.modalReference.result
+        this.modalReferencePesquisa.result
             .then((result) => { },
                 (reason) => { });
     }
 
-    listPrinters() {
-        this.printService.listPrinters();
+    pesquisar() {
+        this.modalReferencePesquisa.close('');
+        const input = this.pesquisarForm.value.input;
+        this.pesquisarForm.reset();
+        this.closeMenu();
+        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: input } });
     }
 
-    printJogos() {
+    abrirModalTabela() {
         this.modalReferenceTabela = this.modalService.open(
             this.modalTabela,
             {
@@ -192,13 +217,37 @@ export class NavigationComponent implements OnInit {
         const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados }];
 
         this.printService.gamesAppMobile(jogos);
+        this.modalReferenceTabela.close('');
     }
 
-    search() {
-        this.modalReference.close('');
-        const input = this.searchForm.value.input;
-        this.closeMenu();
-        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: input } });
+    abrirModalAposta() {
+        this.modalReferenceAposta = this.modalService.open(
+            this.modalAposta,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                size: 'lg'
+            }
+        );
+        this.modalReferenceAposta.result
+            .then(
+                (result) => { },
+                (reason) => this.exibirBilhete = false
+            );
+    }
+
+    pesquisarAposta() {
+        const input = this.pesquisarForm.value.input;
+        this.apostaEsportivaService.getAposta(input)
+            .subscribe(
+                apostaEsportiva => {
+                    this.pesquisarForm.reset();
+                    this.exibirBilhete = true;
+                    this.apostaEsportiva = apostaEsportiva;
+                    console.log(apostaEsportiva);
+                },
+                error => this.messageService.error(error)
+            );
     }
 
     onSwipeLeft(evend) {
