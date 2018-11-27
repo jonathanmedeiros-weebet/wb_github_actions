@@ -244,7 +244,6 @@ export class NavigationComponent implements OnInit {
                     this.pesquisarForm.reset();
                     this.exibirBilhete = true;
                     this.apostaEsportiva = apostaEsportiva;
-                    console.log(apostaEsportiva);
                 },
                 error => this.messageService.error(error)
             );
