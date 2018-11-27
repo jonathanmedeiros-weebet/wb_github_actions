@@ -14,10 +14,10 @@
                 <span class="possivel-ganho">{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
             </p>
             <p class="valores">
-                <button type="button" (click)="definirValor(5)" class="btn btn-sm btn-primary">R$ 5,00</button>
-                <button type="button" (click)="definirValor(10)" class="btn btn-sm btn-primary">R$ 10,00</button>
-                <button type="button" (click)="definirValor(20)" class="btn btn-sm btn-primary">R$ 20,00</button>
-                <button type="button" (click)="definirValor(50)" class="btn btn-sm btn-primary">R$ 50,00</button>
+                <button type="button" (click)="definirValor(5)" class="btn btn-sm">R$ 5,00</button>
+                <button type="button" (click)="definirValor(10)" class="btn btn-sm">R$ 10,00</button>
+                <button type="button" (click)="definirValor(20)" class="btn btn-sm">R$ 20,00</button>
+                <button type="button" (click)="definirValor(50)" class="btn btn-sm">R$ 50,00</button>
             </p>
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
