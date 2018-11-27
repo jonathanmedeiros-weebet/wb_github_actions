@@ -43,8 +43,12 @@
     min-width: 200px;
 }
 
-.odds .odd:hover{
-    background-color: var(--odds);
+.odds .selecionado, .odds .odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span, .odds .odd:hover span{
+    color: #000;
 }
 
 .odd .nome, .odd .valor{

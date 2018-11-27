@@ -66,6 +66,16 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         this.location.back();
     }
 
+    oddSelecionada(jogoId, chave) {
+        let result = false;
+        this.itens.forEach(item => {
+            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
+                result = true;
+            }
+        });
+        return result;
+    }
+
     mapearCotacoes(cotacoes) {
         cotacoes.forEach(cotacao => {
             const tipoAposta = this.tiposAposta[cotacao.chave];

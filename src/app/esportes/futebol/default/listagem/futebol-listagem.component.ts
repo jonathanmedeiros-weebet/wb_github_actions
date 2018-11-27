@@ -86,6 +86,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
+    oddSelecionada(jogoId, chave) {
+        let result = false;
+        this.itens.forEach(item => {
+            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
+                result = true;
+            }
+        });
+        return result;
+    }
+
     addCotacao(jogo: Jogo, cotacao) {
         let modificado = false;
         const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);

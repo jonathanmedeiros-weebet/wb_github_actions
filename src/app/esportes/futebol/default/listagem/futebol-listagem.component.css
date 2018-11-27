@@ -52,8 +52,12 @@
     border-radius: 4px;
 }
 
-.odds-principais .odd:hover{
-    background-color: #094ea2;
+.odds-principais .selecionado, .odds-principais .odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds-principais .selecionado span, .odds-principais .odd:hover span{
+    color: #000;
 }
 
 .odd .nome, .odd .valor{
