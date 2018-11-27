@@ -32,6 +32,18 @@ h4::before {
     margin-bottom: 0.5rem;
 }
 
+.value-informations .valores{
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.value-informations .valores button{
+    padding: 0;
+    width: 55px;
+}
+
 .div-inputs{
     background-color: #036ef1;
     padding: 20px 15px 8px 15px;
@@ -105,3 +117,4 @@ h4::before {
     font-size: 15px;
     cursor: pointer;
 }
+

@@ -69,15 +69,14 @@
 .pre-bilhete{
     display: none;
     background-color: var(--sidebar-right);
-    /* position: relative; */
 }
 .pre-bilhete .form-row{
     margin-top: 12px;
 }
 
-.pre-bilhete button{
+/* .pre-bilhete button{
     width: 100%;
-}
+} */
 
 .form-row select,
 .form-row input{

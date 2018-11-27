@@ -73,6 +73,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         });
     }
 
+    definirValor(valor) {
+        this.form.patchValue({ 'valor': valor });
+    }
+
     get itens() {
         return this.form.get('itens') as FormArray;
     }
