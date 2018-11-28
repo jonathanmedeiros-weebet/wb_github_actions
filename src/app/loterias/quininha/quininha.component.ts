@@ -14,6 +14,7 @@ import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
+declare var $;
 @Component({
     selector: 'app-quininha',
     templateUrl: 'quininha.component.html'
@@ -61,6 +62,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.sidebarService.changeItens([], 'loterias');
 
         this.createForm();
+
+        let altura = window.innerHeight - 69;
+        $('.wrap-sticky').css('min-height', altura - 60);
+        $('.content-loteria').css('height', altura);
+        $('.pre-bilhete').css('height', altura);
     }
 
     ngOnDestroy() {

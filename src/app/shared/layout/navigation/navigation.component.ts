@@ -104,6 +104,13 @@ export class NavigationComponent implements OnInit {
             .subscribe(dados => {
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
+
+                setTimeout(e => {
+                    let alturaMenuFixo = $('#side-fixed-menu').innerHeight();
+                    let altura = window.innerHeight - (alturaMenuFixo + 15);
+
+                    $('#menu-side-left').css('height', altura);
+                }, 500)
             });
 
         this.auth.logado
@@ -114,6 +121,13 @@ export class NavigationComponent implements OnInit {
 
         this.isAppMobile = this.auth.isAppMobile();
     }
+
+    // ngAfterViewInit() {
+    //     let alturaMenuFixo = $('#side-fixed-menu').innerHeight();
+    //     let altura = window.innerHeight - (alturaMenuFixo + 15);
+
+    //     $('#menu-side-left').css('height', altura);
+    // }
 
     closeMenu() {
         this.sidebarService.close();

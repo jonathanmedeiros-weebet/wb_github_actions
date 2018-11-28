@@ -1,34 +1,37 @@
-<section class="content-sports">
-    <div class="sem-jogos" *ngIf="!keys().length">
-        <div class="alert alert-primary" role="alert">
-            Nenhum evento ao vivo disponível no momento!
+<section class="content-sports" data-simplebar>
+    <div class="wrap-sticky">
+        <div class="sem-jogos" *ngIf="!keys().length">
+            <div class="alert alert-primary" role="alert">
+                Nenhum evento ao vivo disponível no momento!
+            </div>
         </div>
-    </div>
-    <div class="campeonato" *ngFor="let key of keys()">
-        <div class="campeonato-header">
-            {{jogos[key].campeonato?.nome}}
-        </div>
-        <div class="jogos">
-            <div class="jogo">
-                <div class="indentificacao">
-                    <div class="aovivo-label">
-                        Ao Vivo
-                    </div>
-                    <div class="tempo">
-                        {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
-                    </div>
-                    <div class="nome">
-                        <b>{{jogos[key].time_a_nome}}</b>
-                        {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
-                        <b>{{jogos[key].time_b_nome}}</b>
-                    </div>
-                    <div class="mais-opcoes">
-                        <a routerLink="/esportes/futebol/live/jogos/{{jogos[key]._id}}">
-                            <i class="fa fa-plus"></i> Cotações
-                        </a>
+        <div class="campeonato" *ngFor="let key of keys()">
+            <div class="campeonato-header">
+                {{jogos[key].campeonato?.nome}}
+            </div>
+            <div class="jogos">
+                <div class="jogo">
+                    <div class="indentificacao">
+                        <div class="aovivo-label">
+                            Ao Vivo
+                        </div>
+                        <div class="tempo">
+                            {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
+                        </div>
+                        <div class="nome">
+                            <b>{{jogos[key].time_a_nome}}</b>
+                            {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
+                            <b>{{jogos[key].time_b_nome}}</b>
+                        </div>
+                        <div class="mais-opcoes">
+                            <a routerLink="/esportes/futebol/live/jogos/{{jogos[key]._id}}">
+                                <i class="fa fa-plus"></i> Cotações
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <app-footer></app-footer>
 </section>

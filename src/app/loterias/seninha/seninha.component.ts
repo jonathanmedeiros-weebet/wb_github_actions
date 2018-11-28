@@ -14,6 +14,7 @@ import { TipoAposta, Aposta, Item, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
+declare var $;
 @Component({
     selector: 'app-seninha',
     templateUrl: 'seninha.component.html'
@@ -57,6 +58,11 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         );
 
         this.createForm();
+
+        let altura = window.innerHeight - 69;
+        $('.wrap-sticky').css('min-height', altura - 60);
+        $('.content-loteria').css('height', altura);
+        $('.pre-bilhete').css('height', altura);
     }
 
     ngOnDestroy() {

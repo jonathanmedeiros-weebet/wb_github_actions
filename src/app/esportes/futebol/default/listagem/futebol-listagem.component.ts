@@ -8,6 +8,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
+declare var $;
+
 @Component({
     selector: 'app-futebol-listagem',
     templateUrl: 'futebol-listagem.component.html',
@@ -79,6 +81,17 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
+
+        let altura = window.innerHeight - 69;
+        $('.wrap-sticky').css('min-height', altura - 60);
+        $('.content-sports').css('height', altura);
+        $('.pre-bilhete').css('height', altura);
+
+        // window.addEventListener('resize', e => {
+        //     let newAltura = window.innerHeight - 172;
+        //     document.querySelector('.content-sports').style.height = newAltura + 'px';
+        //     document.querySelector('.pre-bilhete').style.height = (newAltura + 40) + 'px';
+        // });
     }
 
     ngOnDestroy() {
