@@ -14,12 +14,12 @@ import { takeUntil } from 'rxjs/operators';
 import {
     SidebarService, AuthService, PrintService,
     CampeonatoService, ParametroService, ApostaEsportivaService,
-    MessageService
+    MessageService, SupresinhaService
 } from './../../../services';
 import { ApostaEsportiva } from './../../../models';
 import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import * as _ from 'lodash';
 import * as moment from 'moment';
 
 declare var $;
@@ -80,7 +80,8 @@ export class NavigationComponent implements OnInit {
         private fb: FormBuilder,
         private printService: PrintService,
         private apostaEsportivaService: ApostaEsportivaService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private supresinhaService: SupresinhaService
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -247,6 +248,32 @@ export class NavigationComponent implements OnInit {
                 },
                 error => this.messageService.error(error)
             );
+    }
+
+    /* Geração dos números aleatórios para loteria */
+    gerarSupresinha(length) {
+        const numbers = [];
+
+        for (let index = 0; index < length; index++) {
+            const number = this.generateRandomNumber(numbers);
+            numbers.push(number);
+        }
+
+        numbers.sort((a, b) => a - b);
+        this.supresinhaService.atualizarSupresinha(numbers);
+    }
+
+    /* Gerar número randômico */
+    generateRandomNumber(numbers: Number[]) {
+        const number = _.random(1, 60);
+
+        const find = numbers.find(n => n === number);
+
+        if (!find) {
+            return number;
+        } else {
+            return this.generateRandomNumber(numbers);
+        }
     }
 
     onSwipeLeft(evend) {

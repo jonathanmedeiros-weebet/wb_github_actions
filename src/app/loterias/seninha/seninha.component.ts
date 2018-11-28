@@ -8,9 +8,9 @@ import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
     PrintService, HelperService,
-    SidebarService
+    SidebarService, SupresinhaService
 } from '../../services';
-import { TipoAposta, Aposta, Item, Sorteio } from '../../models';
+import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
@@ -36,7 +36,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private supresinhaService: SupresinhaService
     ) {
         super();
     }
@@ -45,14 +46,14 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         const queryParams = { tipo: 'seninha' };
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
-            tiposAposta => this.tiposAposta = tiposAposta,
+            tiposAposta => {
+                this.tiposAposta = tiposAposta;
+                this.sidebarService.changeItens(tiposAposta, 'loterias');
+            },
             error => this.messageService.error(error)
         );
         this.sorteioService.getSorteios(queryParams).subscribe(
-            sorteios => {
-                this.sorteios = sorteios;
-                this.sidebarService.changeItens(sorteios, 'loterias');
-            },
+            sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );
 
@@ -69,6 +70,17 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             valor: ['', Validators.required],
             sorteio: [null, Validators.required],
             numeros: this.fb.array([])
+        });
+
+        // Escutando surpresinha vinda do NavigationComponent
+        this.supresinhaService.numeros.subscribe(numeros => {
+            this.tiposAposta.forEach(tipoAposta => {
+                if (tipoAposta.qtdNumeros === numeros.length) {
+                    this.tipoAposta = tipoAposta;
+                }
+            });
+
+            this.setNumeros(numeros);
         });
     }
 
@@ -102,7 +114,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Finalizar aposta */
     create(action) {
-        // console.log(this.aposta);
         if (this.aposta.itens.length) {
             this.apostaService.create(this.aposta)
                 .pipe(takeUntil(this.unsub$))
@@ -157,48 +168,17 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         } else {
             this.numeros.removeAt(index);
         }
-    }
 
+        this.tiposAposta.forEach(tipoAposta => {
+            if (tipoAposta.qtdNumeros === this.numeros.length) {
+                this.tipoAposta = tipoAposta;
+            }
+        });
+    }
 
     /* Verificar se o número está selecionado */
     isChecked(number) {
         return this.numeros.value.find(n => number === n);
-    }
-
-    /* Verificar  a quantidade de números selecionados */
-    checkBetType(tipoAposta: TipoAposta) {
-        let result = false;
-        if (tipoAposta.qtdNumeros === this.numeros.length) {
-            result = true;
-            this.tipoAposta = tipoAposta;
-        }
-        return result;
-    }
-
-    /* Geração dos números aleatórios */
-    generateGuess(length) {
-        const numbers = [];
-
-        for (let index = 0; index < length; index++) {
-            const number = this.generateRandomNumber(numbers);
-            numbers.push(number);
-        }
-
-        numbers.sort((a, b) => a - b);
-        this.setNumeros(numbers);
-    }
-
-    /* Gerar número randômico */
-    generateRandomNumber(numbers: Number[]) {
-        const number = _.random(1, 60);
-
-        const find = numbers.find(n => n === number);
-
-        if (!find) {
-            return number;
-        } else {
-            return this.generateRandomNumber(numbers);
-        }
     }
 
     controlInvalid(control) {

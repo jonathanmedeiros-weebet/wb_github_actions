@@ -65,10 +65,11 @@
         </ul>
         <ng-template #loterias>
             <ul class="sidebar-nav">
-                <span class="group">Sorteios</span>
-                <li *ngFor="let sorteio of itens">
+                <span class="group">Surpresinha</span>
+                <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
                     <a>
-                        <i class="fa fa-certificate"></i> {{sorteio.nome}}
+                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                        ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
                     </a>
                 </li>
             </ul>

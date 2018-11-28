@@ -8,7 +8,7 @@ import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
     PrintService, HelperService,
-    SidebarService
+    SidebarService, SupresinhaService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
@@ -36,7 +36,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private supresinhaService: SupresinhaService
     ) {
         super();
     }
@@ -45,20 +46,18 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         const queryParams = { tipo: 'quininha' };
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
-            tiposAposta => this.tiposAposta = tiposAposta,
+            tiposAposta => {
+                this.tiposAposta = tiposAposta;
+                this.sidebarService.changeItens(tiposAposta, 'loterias');
+            },
             error => this.messageService.error(error)
         );
         this.sorteioService.getSorteios(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                sorteios => {
-                    this.sidebarService.changeItens(sorteios, 'loterias');
-                    this.sorteios = sorteios;
-                },
+                sorteios => this.sorteios = sorteios,
                 error => this.messageService.error(error)
             );
-
-        this.sidebarService.changeItens([], 'loterias');
 
         this.createForm();
     }
@@ -73,6 +72,17 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             valor: ['', Validators.required],
             sorteio: [null, Validators.required],
             numeros: this.fb.array([])
+        });
+
+        // Escutando surpresinha vinda do NavigationComponent
+        this.supresinhaService.numeros.subscribe(numeros => {
+            this.tiposAposta.forEach(tipoAposta => {
+                if (tipoAposta.qtdNumeros === numeros.length) {
+                    this.tipoAposta = tipoAposta;
+                }
+            });
+
+            this.setNumeros(numeros);
         });
     }
 
@@ -159,48 +169,18 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         } else {
             this.numeros.removeAt(index);
         }
+
+        this.tiposAposta.forEach(tipoAposta => {
+            if (tipoAposta.qtdNumeros === this.numeros.length) {
+                this.tipoAposta = tipoAposta;
+            }
+        });
     }
 
 
     /* Verificar se o número está selecionado */
     isChecked(number) {
         return this.numeros.value.find(n => number === n);
-    }
-
-    /* Verificar  a quantidade de números selecionados */
-    checkBetType(tipoAposta: TipoAposta) {
-        let result = false;
-        if (tipoAposta.qtdNumeros === this.numeros.length) {
-            result = true;
-            this.tipoAposta = tipoAposta;
-        }
-        return result;
-    }
-
-    /* Geração dos números aleatórios */
-    generateGuess(length) {
-        const numbers = [];
-
-        for (let index = 0; index < length; index++) {
-            const number = this.generateRandomNumber(numbers);
-            numbers.push(number);
-        }
-
-        numbers.sort((a, b) => a - b);
-        this.setNumeros(numbers);
-    }
-
-    /* Gerar número randômico */
-    generateRandomNumber(numbers: Number[]) {
-        const number = _.random(1, 80);
-
-        const find = numbers.find(n => n === number);
-
-        if (!find) {
-            return number;
-        } else {
-            return this.generateRandomNumber(numbers);
-        }
     }
 
     controlInvalid(control) {

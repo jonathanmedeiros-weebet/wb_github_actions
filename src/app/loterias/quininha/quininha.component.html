@@ -44,23 +44,6 @@
                             </form>
                         </div>
                     </div>
-                    <hr>
-                    <div class="alert alert-primary" role="alert">
-                        Para gerar seu palpite aleatório basta clicar na quantidade de Dezenas abaixo.
-                    </div>
-                    <p>
-                        Quantidade de dezenas e suas contações:
-                    </p>
-                    <div class="bet-types">
-                        <div class="bet-type" *ngFor="let tipoAposta of tiposAposta" [ngClass]="{'active': checkBetType(tipoAposta)}">
-                            <div class="circle" (click)="generateGuess(tipoAposta.qtdNumeros)">
-                                <div class="content">
-                                    {{tipoAposta.qtdNumeros}}
-                                </div>
-                            </div>
-                            <span class="price">{{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}}</span>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="pre-bilhete col-xs-12 col-lg-3" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
