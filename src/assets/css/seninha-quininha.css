@@ -69,6 +69,8 @@
 .pre-bilhete{
     display: none;
     background-color: var(--sidebar-right);
+    /* position: relative; */
+    width: 270px;
 }
 .pre-bilhete .form-row{
     margin-top: 12px;
@@ -204,6 +206,7 @@ button{
 
 .loteria-content .pre-bilhete {
     padding: 20px 15px 0 15px;
+    width: 270px;
 }
 
 .loteria-content .pre-bilhete .form-row.inputs {
@@ -230,6 +233,8 @@ button{
     top: 23px;
     left: 108px;
     position: relative;
+    left: 50%;
+    margin-left: -58px;
 }
 
 .loteria-content .content-header {
@@ -247,6 +252,11 @@ button{
 
 .loteria-content .content-body .content .col-lg-9 {
     padding: 0px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 /* Large devices (desktops, 992px and up) */

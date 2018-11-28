@@ -22,6 +22,16 @@ h4::before {
     position: relative;
 }
 
+.pre-bilhete-esportes h4::before {
+    left: 50%;
+    margin-left: -37px;
+}
+
+.pre-bilhete-esportes h3::before {
+    left: 50%;
+    margin-left: -81px;
+}
+
 .value-informations{
     text-transform: uppercase;
     color: #53698b;

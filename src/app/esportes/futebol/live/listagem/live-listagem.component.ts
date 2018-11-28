@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
 
+declare var $;
 @Component({
     selector: 'app-live-listagem',
     templateUrl: 'live-listagem.component.html',
@@ -33,6 +34,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
                 },
                 error => this.handleError(error)
             );
+
+        let altura = window.innerHeight - 69;
+        $('.wrap-sticky').css('min-height', altura - 60);
+        $('.content-sports').css('height', altura);
+        $('.pre-bilhete').css('height', altura);
     }
 
     ngOnDestroy() {
