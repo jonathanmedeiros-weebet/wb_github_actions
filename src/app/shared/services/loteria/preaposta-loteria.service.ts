@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
-import { PreApostaLoteria } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
@@ -19,7 +18,7 @@ export class PreApostaLoteriaService {
         private errorService: ErrorService
     ) { }
 
-    getPreAposta(id: number): Observable<PreApostaLoteria> {
+    getPreAposta(id: number): Observable<any> {
         const url = `${this.PreApostaUrl}/${id}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))

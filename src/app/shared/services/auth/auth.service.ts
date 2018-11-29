@@ -37,7 +37,7 @@ export class AuthService {
                     localStorage.setItem('tipos_aposta', JSON.stringify(res.parametros['tipos_aposta']));
 
                     this.logadoSource.next(true);
-                    // window.location.reload();
+                    window.location.reload();
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -50,7 +50,7 @@ export class AuthService {
         // localStorage.removeItem('app-mobile');
 
         this.logadoSource.next(false);
-        // window.location.reload();
+        window.location.reload();
     }
 
     isLoggedIn(): boolean {
