@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
-import { PreApostaEsportiva } from './../../../models';
+import { PreApostaLoteria } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
-export class PreApostaEsportivaService {
+export class PreApostaLoteriaService {
     private PreApostaUrl = `${config.BASE_URL}/preapostas`; // URL to web api
 
     constructor(
@@ -19,7 +19,7 @@ export class PreApostaEsportivaService {
         private errorService: ErrorService
     ) { }
 
-    getPreAposta(id: number): Observable<PreApostaEsportiva> {
+    getPreAposta(id: number): Observable<PreApostaLoteria> {
         const url = `${this.PreApostaUrl}/${id}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
@@ -30,7 +30,7 @@ export class PreApostaEsportivaService {
     }
 
     create(aposta): Observable<any> {
-        const url = `${this.PreApostaUrl}/esportes`;
+        const url = `${this.PreApostaUrl}/loteria`;
         return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),

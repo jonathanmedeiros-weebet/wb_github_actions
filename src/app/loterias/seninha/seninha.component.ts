@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,13 +8,15 @@ import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
     PrintService, HelperService,
-    SidebarService, SupresinhaService
+    SidebarService, SupresinhaService,
+    AuthService, PreApostaLoteriaService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
 declare var $;
+
 @Component({
     selector: 'app-seninha',
     templateUrl: 'seninha.component.html'
@@ -32,7 +34,9 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     constructor(
         private sidebarService: SidebarService,
+        private auth: AuthService,
         private apostaService: ApostaService,
+        private preApostaService: PreApostaLoteriaService,
         private tipoApostaService: TipoApostaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
@@ -60,7 +64,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         this.createForm();
 
-        let altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 69;
         $('.wrap-sticky').css('min-height', altura - 60);
         $('.content-loteria').css('height', altura);
         $('.pre-bilhete').css('height', altura);
@@ -79,6 +83,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         });
 
         // Escutando surpresinha vinda do NavigationComponent
+        this.supresinhaService.atualizarSupresinha([]);
+
         this.supresinhaService.numeros.subscribe(numeros => {
             this.tiposAposta.forEach(tipoAposta => {
                 if (tipoAposta.qtdNumeros === numeros.length) {
@@ -121,12 +127,28 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     /* Finalizar aposta */
     create(action) {
         if (this.aposta.itens.length) {
-            this.apostaService.create(this.aposta)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    result => this.success(result, action),
-                    error => this.handleError(error)
-                );
+            if (this.auth.isLoggedIn()) {
+                this.apostaService.create(this.aposta)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        aposta => this.success(aposta, action),
+                        error => this.handleError(error)
+                    );
+            } else {
+                this.preApostaService.create(this.aposta)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        preAposta => {
+                            this.aposta = new Aposta();
+                            const msg = `
+                            Procure o cambista da ${this.BANCA_NOME} de sua preferência e informe o código:
+                            #${preAposta.id}
+                            `;
+                            alert(msg);
+                        },
+                        error => this.handleError(error)
+                    );
+            }
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }

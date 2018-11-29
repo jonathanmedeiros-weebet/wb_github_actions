@@ -8,13 +8,15 @@ import {
     TipoApostaService, MessageService,
     SorteioService, ApostaService,
     PrintService, HelperService,
-    SidebarService, SupresinhaService
+    SidebarService, SupresinhaService,
+    AuthService, PreApostaLoteriaService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
 declare var $;
+
 @Component({
     selector: 'app-quininha',
     templateUrl: 'quininha.component.html'
@@ -32,7 +34,9 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     constructor(
         private sidebarService: SidebarService,
+        private auth: AuthService,
         private apostaService: ApostaService,
+        private preApostaService: PreApostaLoteriaService,
         private tipoApostaService: TipoApostaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
@@ -62,7 +66,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
         this.createForm();
 
-        let altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 69;
         $('.wrap-sticky').css('min-height', altura - 60);
         $('.content-loteria').css('height', altura);
         $('.pre-bilhete').css('height', altura);
@@ -81,6 +85,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         });
 
         // Escutando surpresinha vinda do NavigationComponent
+        this.supresinhaService.atualizarSupresinha([]);
+
         this.supresinhaService.numeros.subscribe(numeros => {
             this.tiposAposta.forEach(tipoAposta => {
                 if (tipoAposta.qtdNumeros === numeros.length) {
@@ -122,12 +128,28 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     create(action) {
         if (this.aposta.itens.length) {
-            this.apostaService.create(this.aposta)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    result => this.success(result, action),
-                    error => this.handleError(error)
-                );
+            if (this.auth.isLoggedIn()) {
+                this.apostaService.create(this.aposta)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        aposta => this.success(aposta, action),
+                        error => this.handleError(error)
+                    );
+            } else {
+                this.preApostaService.create(this.aposta)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        preAposta => {
+                            this.aposta = new Aposta();
+                            const msg = `
+                            Procure o cambista da ${this.BANCA_NOME} de sua preferência e informe o código:
+                            #${preAposta.id}
+                            `;
+                            alert(msg);
+                        },
+                        error => this.handleError(error)
+                    );
+            }
         } else {
             this.messageService.warning('Por favor, inclua um palpite.');
         }

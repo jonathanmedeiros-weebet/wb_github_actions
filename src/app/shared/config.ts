@@ -11,8 +11,6 @@ export const config: any = {
     CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
-    PRIMARY_COLOR: '#002458',
-    SECONDARY_COLOR: '#011e46',
     LOGO: `${_host}/tema/logo_banca.png`,
     BG: `${_host}/tema/bk.jpg`,
     BANCA_NOME: 'Demo'

@@ -201,6 +201,7 @@ button{
 }
 
 .loteria-content .card {
+    min-height: calc(100vh - 180px);
     border-radius: 0;
 }
 

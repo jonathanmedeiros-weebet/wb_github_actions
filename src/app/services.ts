@@ -3,6 +3,7 @@ export * from './shared/services/regra.service';
 export * from './shared/services/parametros.service';
 
 export * from './shared/services/loteria/aposta.service';
+export * from './shared/services/loteria/preaposta-loteria.service';
 export * from './shared/services/loteria/sorteio.service';
 export * from './shared/services/loteria/tipo-aposta.service';
 

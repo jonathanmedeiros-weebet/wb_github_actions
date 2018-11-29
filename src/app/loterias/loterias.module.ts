@@ -4,7 +4,7 @@ import { SharedModule } from './../shared/shared.module';
 import { LoteriasRoutingModule } from './loterias-routing.module';
 import { QuininhaComponent } from './quininha/quininha.component';
 import { SeninhaComponent } from './seninha/seninha.component';
-import { ApostaService, SorteioService, TipoApostaService } from './../services';
+import { ApostaService, PreApostaLoteriaService, SorteioService, TipoApostaService } from './../services';
 
 @NgModule({
     imports: [
@@ -17,8 +17,9 @@ import { ApostaService, SorteioService, TipoApostaService } from './../services'
     ],
     providers: [
         ApostaService,
+        PreApostaLoteriaService,
         SorteioService,
-        TipoApostaService
+        TipoApostaService,
     ]
 })
 export class LoteriasModule { }
