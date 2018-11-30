@@ -45,6 +45,10 @@ const appRoutes: Routes = [
                 data: {
                     pageTitle: 'Regras'
                 }
+            },
+            {
+                path: 'validar-aposta',
+                loadChildren: 'app/validar-aposta/validar-aposta.module#ValidarApostaModule',
             }
         ]
     },
