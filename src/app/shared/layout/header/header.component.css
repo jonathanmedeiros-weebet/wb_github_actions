@@ -72,6 +72,10 @@ header a{
     text-transform: uppercase;
 }
 
+.dropdown-menu{
+    min-width: 200px;
+}
+
 .dropdown-menu a{
     color: #000;
 }
