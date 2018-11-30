@@ -11,7 +11,7 @@ import { config } from '../../config';
 
 @Injectable()
 export class CotacaoService {
-    private CotacaoUrl = `${config.CENTER_URL}/cotacoes`;
+    private CotacaoUrl = `${config.CENTER_API}/cotacoes`;
 
     constructor(
         private http: HttpClient,

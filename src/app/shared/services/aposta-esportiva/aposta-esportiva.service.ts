@@ -46,9 +46,16 @@ export class ApostaEsportivaService {
     }
 
     create(aposta): Observable<any> {
-        const url = `${this.ApostaUrl}/create`;
+        return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
+    }
 
-        return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
+    cancel(id): Observable<any> {
+        const url = `${this.ApostaUrl}/${id}`;
+
+        return this.http.delete(url, this.header.getRequestOptions(true))
             .pipe(
                 catchError(this.errorService.handleError)
             );

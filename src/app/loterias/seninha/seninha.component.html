@@ -1,0 +1,145 @@
+<div class="loteria-content">
+    <div class="content-body">
+        <div class="content">
+            <div class="col nopadding content-loteria" data-simplebar>
+                <div class="wrap-sticky">
+                    <div class="content-header">
+                        Seninha
+                    </div>
+                    <div class="card">
+                        <p>
+                            Escolha as suas dezenas:
+                        </p>
+                        <div class="square-group">
+                            <div class="square" *ngFor="let number of numbers" (click)="checkNumber(number)" [ngClass]="{'active': isChecked(number)}">
+                                {{number | number:'2.0'}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <div class="col-xs-12">
+                                <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                                    <div class="form-row">
+                                        <div class="form-group col-xs-12 col-lg-4">
+                                            <label for="">Sorteio</label>
+                                            <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio"
+                                                [ngClass]="applyCssInputError('sorteio')">
+                                                <option [value]="null">Selecione</option>
+                                                <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
+                                                    {{sorteio.nome}}
+                                                </option>
+                                            </select>
+                                            <app-error-msg [control]="form.get('sorteio')" label="Sorteio"></app-error-msg>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-lg-4">
+                                            <label for="">Valor do Palpite (R$)</label>
+                                            <input type="number" class="form-control" min="1" formControlName="valor"
+                                                [ngClass]="applyCssInputError('valor')">
+                                            <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-line">Incluir Palpite</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <app-footer></app-footer>
+            </div>
+            <div class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" data-simplebar>
+                <div>
+                    <h4>PRÉ-BILHETE</h4>
+                    <a (click)="closeCupom()" class="fechar-pre-bilhete">
+                        <i class="fa fa-lg fa-close"></i>
+                    </a>
+                    <div class="aposta-item" *ngFor="let item of aposta.itens; let i=index">
+                        <div class="item-header">
+                            <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
+                                <i class="fa fa-lg fa-close"></i>
+                            </a>
+                            <div>
+                                <span>{{item.sorteio.nome}}</span>
+                            </div>
+                            <div>
+                                <label>valor: </label>
+                                <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 6: </label>
+                                <span>{{(item.premio6) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 5: </label>
+                                <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 4: </label>
+                                <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>Retorno 3: </label>
+                                <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                        </div>
+                        <div class="circle-group">
+                            <div class="circle" *ngFor="let numero of item.numeros">
+                                <div class="content">
+                                    {{numero | number:'2.0'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form #apostaForm="ngForm">
+                        <div class="form-row inputs">
+                            <div class="form-group col-xs-12 col-lg-12">
+                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
+                                    name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
+                                    #apostador="ngModel" placeholder="Apostador">
+                                <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-12">
+                                <input type="text" class="form-control" [(ngModel)]="aposta.telefone" name="telefone" placeholder="Telefone">
+                            </div>
+                        </div>
+                        <div class="form-row botoes">
+                            <div class="col">
+                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
+                                    (click)="create('imprimir')">
+                                    Finalizar e Imprimir
+                                </button>
+                            </div>
+                            <div class="col" *ngIf="appMobile">
+                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
+                                    (click)="create('compartilhar')">
+                                    Finalizar e Compartilhar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fixed-bar-bilhete" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
+        <div>
+            <label>Valor</label>
+            <span>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+        </div>
+        <div>
+            <label>Palpite(s)</label>
+            <span>{{aposta.itens.length}}</span>
+        </div>
+        <div>
+            <label>P. de Prêmio</label>
+            <span>{{(aposta.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+        </div>
+        <div class="open-bilhete">
+            <a (click)="openCupom()">
+                <i class="fa fa-lg fa-chevron-circle-up"></i>
+            </a>
+        </div>
+    </div>
+</div>

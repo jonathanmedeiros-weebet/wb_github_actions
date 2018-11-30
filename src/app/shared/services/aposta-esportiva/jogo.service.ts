@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
@@ -11,7 +11,7 @@ import { config } from '../../config';
 
 @Injectable()
 export class JogoService {
-    private JogoUrl = `${config.CENTER_URL}/jogos`;
+    private JogoUrl = `${config.CENTER_API}/jogos`;
 
     constructor(
         private http: HttpClient,
@@ -29,24 +29,18 @@ export class JogoService {
             );
     }
 
-    getJogos(queryParams?: any): Observable<Campeonato[]> {
-        let requestOptions;
+    getCotacoes(id: number): Observable<Cotacao[]> {
+        const url = `${this.JogoUrl}/${id}/cotacoes`;
 
-        if (queryParams) {
-            requestOptions = this.header.getRequestOptions(true, queryParams);
-        } else {
-            requestOptions = this.header.getRequestOptions(true);
-        }
-
-        return this.http.get(this.JogoUrl, requestOptions)
+        return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
     }
 
-    getCotacoes(id: number): Observable<Cotacao[]> {
-        const url = `${this.JogoUrl}/${id}/cotacoes`;
+    getJogosAoVivo() {
+        const url = `${this.JogoUrl}/ao-vivo`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
@@ -64,5 +58,4 @@ export class JogoService {
                 catchError(this.errorService.handleError)
             );
     }
-
 }

@@ -1,0 +1,89 @@
+<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" data-simplebar>
+    <div class="pre-bilhete-esportes">
+        <h4>BILHETE</h4>
+        <a (click)="closeCupom()" class="fechar-pre-bilhete">
+            <i class="fa fa-lg fa-close"></i>
+        </a>
+        <div class="value-informations">
+            <p>
+                Valor da aposta:
+                <span class="valor">{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+            <p>
+                Possível Ganho:
+                <span class="possivel-ganho">{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+            <p class="valores">
+                <button type="button" (click)="definirValor(5)" class="btn btn-sm">R$ 5,00</button>
+                <button type="button" (click)="definirValor(10)" class="btn btn-sm">R$ 10,00</button>
+                <button type="button" (click)="definirValor(20)" class="btn btn-sm">R$ 20,00</button>
+                <button type="button" (click)="definirValor(50)" class="btn btn-sm">R$ 50,00</button>
+            </p>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="div-inputs">
+                <div class="form-group">
+                    <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')" class="form-control"
+                        placeholder="Apostador">
+                    <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                </div>
+                <div class="form-group">
+                    <input type="number" formControlName="valor" [min]="apostaMinima" [ngClass]="applyCssInputError('valor')"
+                        class="form-control" placeholder="Valor">
+                    <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success btn-block">Apostar</button>
+            </div>
+        </form>
+
+        <div *ngIf="itens.length > 0" class="div-jogos-selecionados">
+            <h3>
+                Jogos Selecionados
+            </h3>
+            <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
+                <div class="jogo-selecionado-inner">
+                    <div class="horario">
+                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                    </div>
+                    <div class="jogo-nome">
+                        {{item.jogo.nome}}
+                    </div>
+                    <div class="campeonato-nome">
+                        {{item.jogo.campeonato.nome}}
+                    </div>
+                    <div class="cotacao">
+                        {{item.cotacao.chave | tipoAposta}}:
+                        <span class="valor">
+                            {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
+                            item.jogo._id: item.jogo.cotacoes : item.jogo.ao_vivo }}
+                        </span>
+                    </div>
+                </div>
+                <div class="remover-item">
+                    <i class="fa fa-close" (click)="removerItem(i)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="fixed-bar-bilhete" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
+    <div>
+        <label>Valor</label>
+        <span>{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+    </div>
+    <div>
+        <label>Jogo(s)</label>
+        <span>{{form.value.itens.length}}</span>
+    </div>
+    <div>
+        <label>P. de Prêmio</label>
+        <span>{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
+    </div>
+    <div class="open-bilhete">
+        <a (click)="openCupom()">
+            <i class="fa fa-lg fa-chevron-circle-up"></i>
+        </a>
+    </div>
+</div>

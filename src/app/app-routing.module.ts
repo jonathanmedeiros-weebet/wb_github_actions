@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
+import { AdminLayoutComponent } from './shared/layout/app-layouts/admin-layout.component';
 
-import { AuthGuard, ExpiresGuard } from './services';
+import { AuthGuard, ExpiresGuard, ParametrosResolver } from './services';
 
 const appRoutes: Routes = [
     {
@@ -13,75 +14,36 @@ const appRoutes: Routes = [
         data: {
             pageTitle: 'Dashboard'
         },
-        canActivate: [AuthGuard],
-        canActivateChild: [ExpiresGuard],
+        resolve: [ParametrosResolver],
         children: [
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: 'esportes/futebol/jogos',
                 pathMatch: 'full'
             },
             {
                 path: 'home',
-                loadChildren: 'app/+home/home.module#HomeModule',
-                data: {
-                    pageTitle: 'Home'
-                }
+                loadChildren: 'app/home/home.module#HomeModule'
             },
             {
-                path: 'apuracao',
-                loadChildren: 'app/+apuracao/apuracao.module#ApuracaoModule',
-                data: {
-                    pageTitle: 'Apuração'
-                }
+                path: 'esportes',
+                loadChildren: 'app/esportes/esportes.module#EsportesModule'
             },
             {
-                path: 'consultar-aposta',
-                loadChildren: 'app/+consultar-aposta/consultar-aposta.module#ConsultarApostaModule',
-                data: {
-                    pageTitle: 'Consultar Aposta'
-                }
+                path: 'loterias',
+                loadChildren: 'app/loterias/loterias.module#LoteriasModule'
             },
             {
-                path: 'futebol',
-                loadChildren: 'app/+futebol/futebol.module#FutebolModule',
-                data: {
-                    pageTitle: 'Futebol'
-                }
+                path: 'meu-perfil',
+                loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule',
+                canActivate: [AuthGuard],
+                canActivateChild: [ExpiresGuard]
             },
             {
-                path: 'live',
-                loadChildren: 'app/+live/live.module#LiveModule',
+                path: 'regras',
+                loadChildren: 'app/regras/regras.module#RegrasModule',
                 data: {
-                    pageTitle: 'Live'
-                }
-            },
-            {
-                path: 'resultados',
-                loadChildren: 'app/+resultados/resultados.module#ResultadosModule',
-                data: {
-                    pageTitle: 'Resultados'
-                }
-            },
-            {
-                path: 'seninha',
-                loadChildren: 'app/+seninha/seninha.module#SeninhaModule',
-                data: {
-                    pageTitle: 'Seninha'
-                }
-            },
-            {
-                path: 'quininha',
-                loadChildren: 'app/+quininha/quininha.module#QuininhaModule',
-                data: {
-                    pageTitle: 'Quininha'
-                }
-            },
-            {
-                path: 'validar-aposta',
-                loadChildren: 'app/+validar-aposta/validar-aposta.module#ValidarApostaModule',
-                data: {
-                    pageTitle: 'Validar Aposta'
+                    pageTitle: 'Regras'
                 }
             }
         ]
@@ -89,12 +51,19 @@ const appRoutes: Routes = [
     {
         path: 'auth',
         component: AuthLayoutComponent,
-        loadChildren: 'app/+auth/auth.module#AuthModule'
+        loadChildren: 'app/auth/auth.module#AuthModule'
+    },
+    {
+        path: 'admin',
+        component: AdminLayoutComponent,
+        loadChildren: 'app/admin/admin.module#AdminModule',
+        canActivate: [AuthGuard],
+        canActivateChild: [ExpiresGuard]
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
+    imports: [RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

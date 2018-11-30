@@ -1,0 +1,96 @@
+.indentificacao{
+    padding: 15px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.indentificacao .aovivo-tempo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.indentificacao .nome-placar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.nome-placar .nome{
+    font-weight: bolder;
+}
+
+.nome-placar .placar{
+   background: red;
+   color: #fff;
+   padding: 5px 10px;
+}
+
+.nome-placar .placar-time-a{
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+.nome-placar .placar-time-b{
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.indentificacao .aovivo-label{
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.indentificacao .tempo{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.tipo-apostas{
+    background-color: #fff;
+}
+
+.tipo-aposta{
+    padding: 15px 10px;
+    border-top: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+.odds{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.odds .odd{
+    background-color: var(--odds);
+    margin-right: 3px;
+    flex: 1 1 0px;
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.odds .selecionado, .odds .odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span, .odds .odd:hover span{
+    color: #000;
+}
+
+.odd .nome, .odd .valor{
+    color: #fff;
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}

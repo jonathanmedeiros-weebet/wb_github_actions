@@ -1,0 +1,169 @@
+<div class="black-screen" *ngIf="isOpen" (click)="closeMenu()" (pan)="onSwipeLeft($event)"></div>
+
+<aside>
+    <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+        <div id="side-fixed-menu">
+            <div class="sidebar-brand">
+                <a class="" [routerLink]="['/']" routerLinkActive="router-link-active">
+                    <img class="logo-banca" src="http://demo.wee.bet/tema/logo_banca.png" />
+                </a>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="javascript:void(0)" (click)="abrirModalPesquisa()">
+                        <i class="fa fa-search"></i> Pesquisa
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" (click)="abrirModalAposta()">
+                        <i class="fa fa-ticket"></i> Bilhete
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" (click)="abrirModalTabela()">
+                        <i class="fa fa-print"></i> Tabela
+                    </a>
+                </li>
+                <li *ngIf="isAppMobile" (click)="listPrinters()">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-cogs"></i> Config
+                    </a>
+                </li>
+                <li *ngIf="!isAppMobile">
+                    <a href="javascript:void(0)" target="_blank" href="app.apk">
+                        <i class="fa fa-download"></i> App
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/regras']">
+                        <i class="fa fa-book"></i> Regras
+                    </a>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <a [routerLink]="['/admin/dashboard']">
+                        <i class="fa fa-dashboard"></i> Admin
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul id="menu-side-left" class="sidebar-nav" *ngIf="contexto == 'esportes'; else loterias" data-simplebar>
+            <span class="group">Data</span>
+            <li>
+                <a [routerLink]="['/esportes/futebol/jogos']">
+                    Jogos de Hoje
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: amanha }">
+                    Jogos de Amanhã
+                </a>
+            </li>
+            <span class="group">Campeonatos</span>
+            <li *ngFor="let campeonato of itens">
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                </a>
+            </li>
+        </ul>
+        <ng-template #loterias>
+            <ul class="sidebar-nav">
+                <span class="group">Surpresinha</span>
+                <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
+                    <a>
+                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                        ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
+                    </a>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+</aside>
+
+<ng-template #modalPesquisa let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Pesquisa</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="pesquisarForm" (ngSubmit)="pesquisar()">
+            <div class="form-group">
+                <input type="text" placeholder="Pesquise por time ou campeonato..." class="form-control"
+                    formControlName="input">
+            </div>
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #modalTabela let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Imprimir Tabela</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="imprimirTabela()">
+            <div class="form-group">
+                <div id="treeJogos"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Imprimir</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #modalAposta let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Consultar Bilhete</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
+        <form *ngIf="!exibirBilhete" [formGroup]="pesquisarForm" (ngSubmit)="pesquisarAposta()">
+            <div class="form-group">
+                <input type="text" placeholder="Código da aposta" class="form-control" formControlName="input">
+            </div>
+            <button type="submit" class="btn btn-primary">Consultar</button>
+        </form>
+        <div id="cupom" *ngIf="exibirBilhete">
+            <div class="conteudo">
+                <div style="text-align: center;">
+                    <img src="{{LOGO}}" alt="ZEBRINHA.BET">
+                </div>
+                <h1>#{{apostaEsportiva.id}}</h1>
+                <ng-container *ngFor="let item of apostaEsportiva.itens">
+                    <p class="campeonato">
+                        {{item.campeonato.nome}}
+                    </p>
+                    <p class="jogo-horario">
+                        {{item.jogo.horario | moment: 'dddd, DD [de] MMMM [de] YYYY [ÀS] HH:mm'}}
+                    </p>
+                    <p class="jogo-nome">
+                        {{item.jogo.nome}}
+                    </p>
+                    <p class="jogo-cotacao">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )</p>
+                </ng-container>
+                ----------------------------<br>
+                <p class="informacoes-gerais">CAMBISTA: {{apostaEsportiva.cambista.nome}}</p>
+                <p class="informacoes-gerais">APOSTADOR: {{apostaEsportiva.apostador}}</p>
+                <p class="informacoes-gerais">HORÁRIO: {{apostaEsportiva.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+                ----------------------------<br>
+                <p class="valor-aposta">
+                    VALOR DA APOSTA: {{apostaEsportiva.valor | currency: 'BRL':'symbol':'1.2'}}
+                </p>
+                <p class="valor-premio">ESTIMATIVA
+                    DE GANHO: {{apostaEsportiva.premio | currency: 'BRL':'symbol':'1.2'}}
+                </p>
+                <p style="text-align: center; margin: 5px 1px 1px 1px; font-weight: bold; font-size: 14px;">CAMBISTA
+                    PAGA:
+                </p>
+                <p class="mensagem-rodape">
+                    {{informativoRodape}}
+                </p>
+            </div>
+        </div>
+    </div>
+</ng-template>

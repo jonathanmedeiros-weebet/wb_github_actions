@@ -1,0 +1,72 @@
+.campeonato-header{
+    text-transform: uppercase;
+    padding: 15px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.campeonato{
+}
+
+.jogos{
+    background-color: #fff;
+}
+
+.jogo{
+    border-top: 1px solid #ddd;
+    padding: 12px;
+}
+
+.indentificacao{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.indentificacao .horario{
+    background-color: #011e46;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 15px;
+}
+
+.indentificacao .nome{
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.odds-principais{
+    display: flex;
+}
+
+.odds-principais .odd{
+    background-color: var(--odds);
+    margin-right: 3px;
+    flex: 1 1 0px;
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.odds-principais .selecionado, .odds-principais .odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds-principais .selecionado span, .odds-principais .odd:hover span{
+    color: #000;
+}
+
+.odd .nome, .odd .valor{
+    color: #fff;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .odds-principais .odd{
+        min-width: 200px;
+    }
+}

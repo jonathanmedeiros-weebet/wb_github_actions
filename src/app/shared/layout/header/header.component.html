@@ -1,83 +1,151 @@
-<header>
+<header [@openClose]="isOpen ? 'open' : 'closed'">
     <!-- Fixed navbar -->
-    <nav class="navbar-1 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
-            <img class="logo-banca" alt="{{BANCA_NOME}}" src="{{LOGO}}" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-            aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar-mobile navbar navbar-expand-md navbar-dark">
+        <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/futebol']">Futebol</a>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/consultar-aposta']">Consultar Aposta</a>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/validar-aposta']">Validar Aposta</a>
-                </li> -->
-                <!--  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/ao-vivo']">Ao Vivo</a>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/basquetebol']">Basquetebol</a>
-                </li> -->
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/seninha']">Seninha</a>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/quininha']">Quininha</a>
-                </li>
-            </ul>
+
+        <div class="logo-mobile">
+            <img src="{{LOGO}}" alt="">
         </div>
-    </nav>
-    <nav class="navbar-2 navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <ul>
-            <li class="block-" style="flex-grow: 1;">
-                <a style="padding-left: 4px;">
-                    <i class="fa fa-clock-o"></i> {{now | moment:'HH:mm:ss'}}
+
+        <ng-container *ngIf="isLoggedIn; else loggedOut">
+            <div class="dropdown menu-conta">
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-2x fa-user"></i>
                 </a>
-            </li>
-            <li *ngIf="appMobile">
-                <a>
-                    <i class="fa fa-cogs"></i> Configs
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="javascript:void(0);" (click)="listPrinters()">
-                            <i class="fa fa-print"></i> Impressora</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" (click)="appVersion()">
-                            <i class="fa fa-info"></i> Versão App</a>
-                    </li>
+                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+
+                    <button class="dropdown-item text-center" disabled type="button">
+                        Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
+                    </button>
+                    <button class="dropdown-item text-center" disabled type="button">
+                        Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}
+                    </button>
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
+                        <i class="fa fa-user"></i> Meu Perfil
+                    </a>
+
+                    <a (click)="logout()" href="javascript:void(0);" class="dropdown-item">
+                        <i class="fa fa-sign-out"></i> Sair
+                    </a>
                 </ul>
-            </li>
-            <li *ngIf="!appMobile">
-                <a target="_blank" href="app.apk">
-                    <i class="fa fa-android"></i> App
+            </div>
+        </ng-container>
+        <ng-template #loggedOut>
+            <div class="menu-conta dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Entrar
                 </a>
-            </li>
-            <li>
-                <a [routerLink]="['/apuracao/loteria']">
-                    <i class="fa fa-check"></i>
-                    <span class="hidden-sm-down">Apuração</span>
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/resultados/loteria']">
-                    <i class="fa fa-list"></i> Result.
-                </a>
-            </li>
-            <!-- <li><a href="#">Regras</a></li> -->
-            <li (click)="logout()">
-                <a style="padding-right: 4px;">
-                    <i class="fa fa-sign-out"></i> Sair
-                </a>
-            </li>
-        </ul>
+                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
+                                placeholder="Usuário">
+                            <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
+
+                        </div>
+                        <div class="form-group" [ngClass]="applyCssDivError('password')">
+                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
+                                formControlName="password" placeholder="Senha">
+                            <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                    <!-- <div class="dropdown-divider"></div> -->
+                    <!-- <a class="dropdown-item" href="#">Novo aqui? Cadastre-se</a>
+                    <a class="dropdown-item" href="#">Esqueceu sua senha?</a> -->
+                </ul>
+            </div>
+        </ng-template>
     </nav>
+
+    <div class="menu-categories">
+        <div class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/esportes/futebol/jogos']">
+                <i class="fa fa-futbol-o"></i> <span>Futebol</span>
+            </a>
+        </div>
+        <div class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/esportes/futebol/live']">
+                <i class="fa fa-play"></i> Ao Vivo
+            </a>
+        </div>
+        <div class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/loterias/seninha']">
+                <i class="fa fa-ticket"></i> Seninha
+            </a>
+        </div>
+        <div class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/loterias/quininha']">
+                <i class="fa fa-ticket"></i> Quininha
+            </a>
+        </div>
+
+        <ng-container *ngIf="isLoggedIn; else loggedOut">
+            <div class="dropdown menu-conta">
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-2x fa-user"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+
+                    <button class="dropdown-item text-center" disabled type="button">
+                        Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
+                    </button>
+                    <button class="dropdown-item text-center" disabled type="button">
+                        Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}
+                    </button>
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
+                        <i class="fa fa-user"></i> Meu Perfil
+                    </a>
+
+                    <a *ngIf="appMobile" class="dropdown-item" href="javascript:void(0);" (click)="listPrinters()">
+                        <i class="fa fa-print"></i> Impressora
+                    </a>
+
+                    <a class="dropdown-item" href="javascript:void(0);" class="dropdown-item" (click)="appVersion()">
+                        <i class="fa fa-info"></i> Versão App
+                    </a>
+
+                    <a (click)="logout()" href="javascript:void(0);" class="dropdown-item">
+                        <i class="fa fa-sign-out"></i> Sair
+                    </a>
+                </ul>
+            </div>
+        </ng-container>
+        <ng-template #loggedOut>
+            <div class="menu-conta dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Entrar
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
+                                placeholder="Usuário">
+                            <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
+
+                        </div>
+                        <div class="form-group" [ngClass]="applyCssDivError('password')">
+                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
+                                formControlName="password" placeholder="Senha">
+                            <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                    <!-- <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Novo aqui? Cadastre-se</a>
+                    <a class="dropdown-item" href="#">Esqueceu sua senha?</a> -->
+                </ul>
+            </div>
+        </ng-template>
+    </div>
 </header>

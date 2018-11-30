@@ -68,15 +68,17 @@
 
 .pre-bilhete{
     display: none;
-    position: relative;
+    background-color: var(--sidebar-right);
+    /* position: relative; */
+    width: 270px;
 }
 .pre-bilhete .form-row{
     margin-top: 12px;
 }
 
-.pre-bilhete button{
+/* .pre-bilhete button{
     width: 100%;
-}
+} */
 
 .form-row select,
 .form-row input{
@@ -135,7 +137,7 @@ button{
 
 #fixed-bar-bilhete{
     padding: 5px;
-    background: var(--background-primario);
+    background: var(--sidebar-right);
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -169,12 +171,15 @@ button{
 }
 
 .pre-bilhete-mobile{
+    z-index: 1000;
     position: fixed;
-    top: 113px;
+    top: 0;
     bottom: 0;
+    left: 0;
+    width: 100%!important;
     padding-top: 15px;
     padding-bottom: 15px;
-    background: var(--background-primario);
+    background: var(--sidebar-right);
     display: block;
     overflow-y: auto;
 }
@@ -191,6 +196,70 @@ button{
     margin-bottom: 5px;
 }
 
+.loteria-content {
+    padding: 0 0 0 255px;
+}
+
+.loteria-content .card {
+    min-height: calc(100vh - 180px);
+    border-radius: 0;
+}
+
+.loteria-content .pre-bilhete {
+    padding: 20px 15px 0 15px;
+    width: 270px;
+}
+
+.loteria-content .pre-bilhete .form-row.inputs {
+    background-color: #036ef1;
+    padding: 20px 15px 8px 15px;
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.loteria-content .pre-bilhete h4{
+    color: #c9def5;
+    text-align: center;
+}
+
+.loteria-content .pre-bilhete h4::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+    left: 50%;
+    margin-left: -58px;
+}
+
+.loteria-content .content-header {
+    background: #E1E2E4;
+    color: #455a64;
+    text-transform: uppercase;
+    padding: 15px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.loteria-content .content-body .content {
+    display: flex;
+}
+
+.loteria-content .content-body .content .col-lg-9 {
+    padding: 0px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     #fixed-bar-bilhete{
@@ -203,5 +272,15 @@ button{
 
     .pre-bilhete{
         display: block;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .loteria-content {
+        padding: 0;
+    }
+
+    .loteria-content .pre-bilhete {
+        padding: 40px 15px 0;
     }
 }

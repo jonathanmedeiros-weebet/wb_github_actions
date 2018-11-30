@@ -1,3 +1,4 @@
+import { ApostaEsportivaTipo } from './aposta-esportiva-tipo';
 import { Jogo } from './jogo';
 
 export class ItemApostaEsportiva {
@@ -5,11 +6,12 @@ export class ItemApostaEsportiva {
 
     aposta_id: number;
     aposta_tipo_id: number;
+    aposta_tipo: ApostaEsportivaTipo;
     jogo_id: number;
     jogo: Jogo;
-    valor: number;
-    preco: number;
+    cotacao: number;
+    status: string;
     resultado: string;
-    ao_vivo: boolean;
     removido: boolean;
+    campeonato;
 }

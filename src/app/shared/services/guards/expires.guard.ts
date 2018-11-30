@@ -5,7 +5,9 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router/src
 import { AuthService } from './../auth/auth.service';
 import { MessageService } from './../utils/message.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ExpiresGuard implements CanActivateChild {
     constructor(
         private auth: AuthService,
@@ -15,7 +17,6 @@ export class ExpiresGuard implements CanActivateChild {
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.auth.isExpired()) {
-            // this.messageService.error("Seu login expirou, por favor, faça seu login novamente");
             this.router.navigate(['/auth/login']);
             return false;
         }

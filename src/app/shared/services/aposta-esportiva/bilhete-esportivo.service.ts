@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { ItemBilheteEsportivo } from '../../../models';
 import { BehaviorSubject } from 'rxjs';

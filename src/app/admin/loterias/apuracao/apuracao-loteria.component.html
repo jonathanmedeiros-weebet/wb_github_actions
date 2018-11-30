@@ -1,0 +1,98 @@
+<div id="apuracao">
+    <div class="content-header">
+        <h2>Apuração Loteria</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssInputError('dataInicial')">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssInputError('dataFinal')">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data final"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="ganhou">Ganhou</option>
+                                    <option value="perdeu">Perdeu</option>
+                                    <option value="pendente">Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div>
+                <div *ngFor="let aposta of apostas" class="aposta">
+                    <div class="aposta-header">
+                        <div>
+                            <label>Número:</label>
+                            <em>#{{aposta.id}}</em>
+                        </div>
+                        <div>
+                            <label>Apostador:</label>
+                            <em>{{aposta.apostador}}</em>
+                        </div>
+                        <div>
+                            <label>Telefone:</label>
+                            <em>{{aposta.telefone}}</em>
+                        </div>
+                        <div>
+                            <label>Horário:</label>
+                            <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
+                        </div>
+                        <div>
+                            <button type="button" (click)="printTicket(aposta)" class="btn btn-primary">
+                                <i class="fa fa-print"></i>
+                            </button>
+                            <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
+                                <i class="fa fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="aposta-itens">
+                        <div class="aposta-item" *ngFor="let item of aposta.itens">
+                            <div>
+                                <label>sorteio</label>
+                                <span>{{item.sorteio_nome}}</span>
+                            </div>
+                            <div>
+                                <label>aposta</label>
+                                <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>prêmio</label>
+                                <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            </div>
+                            <div>
+                                <label>status</label>
+                                <span>{{item.status | uppercase}}</span>
+                            </div>
+                            <div class="circle-group">
+                                <div class="circle" *ngFor="let numero of item.numeros" [ngClass]="checkResult(numero, item.sorteio_numeros)">
+                                    <div class="content">
+                                        {{numero | number:'2.0'}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

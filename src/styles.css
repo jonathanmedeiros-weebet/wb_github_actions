@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-    --background-primario: #14805e;
-    --background-menu: #14805e;
-    --text-menu: white;
+    --header: #002458;
+    --foreground-header: #fff;
+    --sidebar-right:#011e46;
+    --foreground-sidebar-right: #fff;
+    --sidebar-left: #011e46;
+    --foreground-sidebar-left: #fff;
+    --highlight: yellow;
+    --foreground-highlight: #fff;
+    --odds: #046eef;
+    --foreground-odds: #fff;
 }
 
 html{
@@ -12,8 +19,12 @@ html{
 
 html, body{
     height: 100%;
-    background-color: #eef5f9;
     color: #455a64;
+    overflow: hidden;
+}
+
+header{
+    background-color: var(--header);
 }
 
 #auth-layout{
@@ -40,19 +51,20 @@ html, body{
     color: #fff;
 }
 
-#main-wrapper {
-    padding: 120px 0 0 0;
+#page-wrapper{
+    margin-top: 69px;
 }
 
-#content{
-   padding: 10px 15px;
+.default-content {
+    padding: 20px 15px 20px 270px;
+    background: #e1e2e4;
 }
 
 .footer {
     line-height: 60px;
     text-align: center;
     height: 60px;
-    background-color: transparent;
+    background-color: #e1e2e4;
     width: 100%;
 }
 
@@ -64,12 +76,8 @@ html, body{
     padding: 20px;
 }
 
-.content-header{
-    /*margin-bottom: 30px;*/
-}
-
 .content-header h2{
-    color: var(--background-primario);
+    color: var(--sidebar-right);
     margin-bottom: 15px;
 }
 
@@ -115,3 +123,62 @@ html, body{
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.invalid-feedback{
+    display: block;
+}
+
+.modal{
+    z-index: 9002;
+}
+
+@media only screen and (max-width: 668px) {
+    #page-wrapper{
+        margin-top: 113px;
+    }
+
+    .default-content{
+        padding: 10px 15px;
+    }
+}
+
+/* Spinner */
+.lds-ring {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 50%;
+    margin-left: -32px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid var(--sidebar-right);
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: var(--sidebar-right) transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+

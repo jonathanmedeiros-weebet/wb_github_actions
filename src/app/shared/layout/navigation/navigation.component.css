@@ -1,0 +1,176 @@
+#sidebar-wrapper{
+    width:255px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: var(--sidebar-left);
+    z-index: 1000;
+}
+
+#sidebar-wrapper a{
+    color: #b1c5e0;
+    text-decoration: none;
+}
+
+#sidebar-wrapper a:hover{
+    color:#1c84d5;
+}
+
+.sidebar-menu{
+    position: relative;
+    display: flex;
+    padding: 0 15px;
+    margin: 25px 0px 0px 0px;
+    flex-wrap: wrap;
+}
+
+.sidebar-menu li{
+    width: 56px;
+    margin-bottom: 10px;
+}
+
+.sidebar-menu i{
+    font-size: 1.5rem;
+}
+
+.sidebar-menu a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-brand{
+    text-align: center;
+    margin-top: 15px;
+ }
+
+ .sidebar-brand img{
+     height: 120px;
+ }
+
+.sidebar-nav{
+    background-color: var(--sidebar);
+    padding: 0;
+}
+
+.sidebar-nav a{
+    text-transform: uppercase;
+}
+
+.sidebar-nav .group{
+  display: inline-block;
+  padding-left: 15px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #aec3d8;
+  text-transform: uppercase;
+}
+
+.group::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    position: relative;
+}
+
+.sidebar-nav li{
+    padding: 10px 15px;
+}
+
+.sidebar-nav li:not(:last-child){
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+#sidebar-wrapper ul li{
+    list-style: none;
+}
+
+.btn-danger{
+    position: absolute;
+    top: 110px;
+    left: 260px;
+    z-index: 2000;
+}
+
+.supresinha{
+    cursor: pointer;
+}
+
+.cupom-ativo{
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 15px;
+    background: #333;
+    margin: 0;
+}
+#cupom{
+    width: 19.27em;
+    padding: 1em;
+    background: #fff;
+    margin: 2em auto;
+}
+#cupom img{
+    max-height: 180px;
+    max-width: 290px;
+}
+#cupom h1{
+    text-align: center;
+    font-weight: bold;
+}
+#cupom .campeonato{
+    text-align: center;
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+#cupom .jogo-horario, #cupom .jogo-nome, #cupom .jogo-cotacao{
+    margin: 1px;
+}
+#cupom .jogo-horario{
+    font-size: 12px;
+    text-transform: uppercase;
+}
+#cupom .jogo-nome{
+    font-weight: bold;
+    font-size: 14px;
+}
+#cupom .jogo-cotacao{
+    font-size: 12px;
+}
+#cupom .informacoes-gerais{
+    margin: 1px;
+    font-size: 12px;
+}
+#cupom .valor-aposta{
+    text-align: center;
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+#cupom .valor-premio{
+    text-align: center;
+    margin: 5px 1px 1px 1px;
+    font-weight: bold;
+    font-size: 14px;
+}
+#cupom .mensagem-rodape{
+    margin: 15px 1px 1px 1px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center
+}
+
+@media only screen and (max-width: 667px) {
+    .black-screen {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000; top: 0;
+    }
+}

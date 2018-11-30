@@ -1,0 +1,67 @@
+.jogo{
+}
+
+.indentificacao{
+    padding: 15px 10px;
+    position: relative;
+}
+
+.indentificacao{
+    text-align: center;
+}
+
+.indentificacao .nome, h4{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.tipo-apostas{
+    background-color: #fff;
+}
+
+.tipo-aposta{
+    padding: 15px 10px;
+    border-top: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+.odds{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.odds .odd{
+    background-color: var(--odds);
+    margin-right: 3px;
+    flex: 1 1 0px;
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.odds .selecionado, .odds .odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span, .odds .odd:hover span{
+    color: #000;
+}
+
+.odd .nome, .odd .valor{
+    color: #fff;
+}
+
+.btn-back{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}

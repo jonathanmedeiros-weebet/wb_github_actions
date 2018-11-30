@@ -1,0 +1,147 @@
+<div id="apuracao">
+    <div class="content-header">
+        <h2>Apuração Futebol</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssInputError('dataInicial')">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssInputError('dataFinal')">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="ganhou">Ganhou</option>
+                                    <option value="perdeu">Perdeu</option>
+                                    <option value="pendente">Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Horário</th>
+                            <th>Apostador</th>
+                            <th>Jogos</th>
+                            <th>Valor</th>
+                            <th>Comissão</th>
+                            <th>Prêmio</th>
+                            <th>Resultado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aposta of apostas">
+                            <td>#{{aposta.id}}</td>
+                            <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{aposta.apostador}}</td>
+                            <td>{{aposta.itens.length}}</td>
+                            <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.resultado}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" *ngIf="checkCancellation(aposta.itens)" class="btn btn-danger"
+                                        (click)="cancel(cancelModal)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-info" (click)="openModal(aposta)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button type="button" (click)="printTicket(aposta)" class="btn btn-primary">
+                                        <i class="fa fa-print"></i>
+                                    </button>
+                                    <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
+                                        <i class="fa fa-share-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row" *ngIf="apostaSelecionada">
+            <div class="col-xs-12 col-md-4">
+                <div class="apostaSelecionada">
+                    <h4>#{{apostaSelecionada.id}}</h4>
+                    <div *ngFor="let item of apostaSelecionada.itens" class="aposta-item">
+                        <p>{{item.campeonato.nome}}</p>
+                        <p>
+                            {{item.jogo.nome}}
+                        </p>
+                        <p>
+                            <b>{{item.aposta_tipo.nome}}:</b> {{item.cotacao | number: '1.0-2'}}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Apostador: {{apostaSelecionada.apostador}}</p>
+                        <p>
+                            Horário: {{apostaSelecionada.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            Total de jogos: {{apostaSelecionada.itens.length}}
+                        </p>
+                        <p>
+                            Valor da aposta: {{apostaSelecionada.valor | currency: 'BRL':'symbol':'1.2'}}
+                        </p>
+                        <p>
+                            Estimativa de ganho: {{apostaSelecionada.premio | currency: 'BRL':'symbol':'1.2'}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #cancelModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cancelar Aposta</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Tem certeza que deseja cancelar a aposta?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="d('')" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-primary" (click)="c('')">Sim</button>
+    </div>
+</ng-template>

@@ -1,16 +1,107 @@
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './../auth/auth.service';
+import { ParametroService } from '../parametros.service';
 import { HelperService } from './helper.service';
 
 import { config } from './../../config';
 import * as moment from 'moment';
+import * as clone from 'clone';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PrintService {
+    private opcoes = JSON.parse(localStorage.getItem('opcoes'));
+
     constructor(
-        private auth: AuthService
+        private auth: AuthService,
+        private parametroService: ParametroService
     ) { }
+
+    games(aposta) {
+        if (this.auth.isAppMobile()) {
+            this.gamesAppMobile(aposta);
+        } else {
+            this.gamesDestkop(aposta);
+        }
+    }
+
+    gamesDestkop(aposta) {
+
+    }
+
+    gamesAppMobile(dias) {
+        const cols = 6;
+        const odds = this.parametroService.getOddsImpressao();
+        const linhas = Math.ceil(odds.length / cols);
+
+        let text = `${config.BANCA_NOME}
+
+        Tabela de Jogos`;
+
+        dias.forEach(dia => {
+            text += `
+
+==== ${dia.data_grupo} ====`;
+
+            dia.camps.forEach(camp => {
+                text += `
+
+${camp.nome}
+`;
+
+
+                camp.jogos.forEach(jogo => {
+                    // "2018-11-23T18:00:00.000Z"
+                    const horario = moment(jogo.horario).format('HH:mm');
+                    text += `
+${horario} ${jogo.nome}
+`;
+                    for (let i = 0; i < linhas; i++) {
+                        let start = i * cols;
+
+                        const oddPos1 = odds[start];
+                        const oddPos2 = odds[++start];
+                        const oddPos3 = odds[++start];
+                        const oddPos4 = odds[++start];
+                        const oddPos5 = odds[++start];
+                        const oddPos6 = odds[++start];
+
+                        text += `${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)} ${this.getSigla(oddPos6)}
+`;
+                        text += `${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)} ${this.getValor(oddPos6, jogo.cotacoes)}
+`;
+                    }
+                });
+            });
+
+        });
+
+        console.log(text);
+        // parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
+    }
+
+    getValor(chave, cotacoes) {
+        const cotacao = cotacoes.find(c => c.chave == chave);
+        if (cotacao) {
+            let result = cotacao.valor.toFixed(2);
+            if (cotacao.valor < 10) {
+                result = `0${result}`;
+            }
+            return result;
+        }
+        return '-----';
+    }
+
+    getSigla(chave) {
+        if (chave) {
+            const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+            const sigla = `${tiposAposta[chave].sigla}     `;
+            return sigla.substr(0, 5);
+        }
+        return '    ';
+    }
 
     lotteryTicket(aposta) {
         if (this.auth.isAppMobile()) {
@@ -234,7 +325,7 @@ export class PrintService {
         let ticket = `${config.BANCA_NOME}
 
 #${aposta.id}
-Data: ${moment(aposta.horario).format('DD/MM/YYYY HH:mm')}
+Data: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
 Valor Total: ${HelperService.moneyFormat(aposta.valor)}`;
@@ -413,13 +504,13 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                         ${item.campeonato.nome}
                     </p>
                     <p class="horario">
-                        ${moment(item.jogo.horario).format('dddd, DD MMMM YYYY, HH:mm')}
+                        ${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
                     </p>
                     <p class="jogo">
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.cotacao.nome} ( ${item.cotacao.valor} )
+                        ${item.aposta_tipo.nome} ( ${item.cotacao} )
                     </p>
                 </div>
             `;
@@ -429,13 +520,13 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                 <hr>
                 <div class="informacoes">
                     <p>
-                        CAMBISTA:
+                        CAMBISTA: ${aposta.cambista.nome}
                     </p>
                     <p>
                         APOSTADOR: ${aposta.apostador}
                     </p>
                     <p>
-                        HORÁRIO: ${aposta.horario}
+                        HORÁRIO: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
                     </p>
                 </div>
                 <hr>
@@ -452,7 +543,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                     </p>
                 </div>
                 <p class="rodape">
-                    Jogue consciente, leia as regras no site! Seu possível premio está impresso no bilhete
+                    ${this.opcoes.informativo_rodape}
                 </p>
             </div>
         </div>`;
@@ -479,4 +570,14 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
     }
 
     sportsTicketAppMobile(aposta) { }
+
+    listPrinters() {
+        const message = {
+            data: '',
+            action: 'listPrinters',
+        };
+
+        parent.postMessage(message, 'file://'); // file://
+        console.log('listPrinters');
+    }
 }
