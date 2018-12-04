@@ -74,7 +74,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         $('.pre-bilhete').css('height', altura);
 
         const ps = new PerfectScrollbar('.custom-scroll');
-        const ps = new PerfectScrollbar('.custom-scroll-side');
+        const pss = new PerfectScrollbar('.custom-scroll-side');
     }
 
     ngOnDestroy() {

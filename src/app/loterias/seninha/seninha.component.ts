@@ -72,7 +72,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         $('.pre-bilhete').css('height', altura);
 
         const ps = new PerfectScrollbar('.custom-scroll');
-        const ps = new PerfectScrollbar('.custom-scroll-side');
+        const pss = new PerfectScrollbar('.custom-scroll-side');
     }
 
     ngOnDestroy() {
