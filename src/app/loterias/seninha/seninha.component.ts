@@ -5,8 +5,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {
-    TipoApostaService, MessageService,
-    SorteioService, ApostaService,
+    TipoApostaLoteriaService, MessageService,
+    SorteioService, ApostaLoteriaService,
     PrintService, HelperService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService
@@ -35,9 +35,9 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     constructor(
         private sidebarService: SidebarService,
         private auth: AuthService,
-        private apostaService: ApostaService,
+        private apostaService: ApostaLoteriaService,
         private preApostaService: PreApostaLoteriaService,
-        private tipoApostaService: TipoApostaService,
+        private tipoApostaService: TipoApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,

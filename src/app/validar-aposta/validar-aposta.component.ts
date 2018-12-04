@@ -3,9 +3,8 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import {
     MessageService, PreApostaEsportivaService, ApostaEsportivaService,
-    PrintService, HelperService, SorteioService
+    PrintService, HelperService, SorteioService, ApostaLoteriaService
 } from '../services';
-import { BilheteEsportivo, PreApostaEsportiva } from '../models';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
@@ -23,10 +22,10 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     preAposta: any;
     preApostaItens = [];
     sorteios = [];
-    bilhete: BilheteEsportivo = new BilheteEsportivo();
     unsub$ = new Subject();
 
     constructor(
+        private apostaLoteriaService: ApostaLoteriaService,
         private apostaEsportivaService: ApostaEsportivaService,
         private preApostaService: PreApostaEsportivaService,
         private sorteioService: SorteioService,
@@ -38,8 +37,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
-        this.sorteioService.getSorteios(sorteios => this.sorteios = sorteios);
-
+        this.sorteioService.getSorteios().subscribe(sorteios => this.sorteios = sorteios);
         this.createForm();
     }
 
@@ -51,66 +49,74 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     createForm() {
         this.form = this.fb.group({
             'apostador': ['', Validators.required],
-            'cotacao': ['', Validators.required],
-            'horario': ['', Validators.required],
-            'premio': ['', Validators.required],
-            'valor': ['', Validators.required],
-            'itens': this.fb.array([])
+            'valor': ['', Validators.required]
         });
-
-        this.form.get('valor').valueChanges
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(valor => {
-                const premio = valor * this.form.value.cotacao;
-                this.form.patchValue({ premio: premio });
-            });
-    }
-
-    get itens(): FormArray {
-        return this.form.get('itens') as FormArray;
-    }
-
-    setItens(itens: any[]) {
-        const itensFCs = itens.map(item => this.fb.group(item));
-        const itensFormArray = this.fb.array(itensFCs);
-        this.form.setControl('itens', itensFormArray);
     }
 
     removerItem(i) {
-        this.itens.removeAt(i);
+        this.preAposta.itens.splice(i, 1);
+
+        if (this.preAposta.tipo === 'esportes') {
+            this.preAposta.cotacao = this.preAposta.itens
+                .map(item => item.cotacao)
+                .reduce((acumulador, valorAtual) => acumulador * valorAtual);
+        } else {
+            this.preAposta.valor = this.preAposta.itens
+                .map(item => item.valor)
+                .reduce((acumulador, valorAtual) => acumulador * valorAtual);
+        }
     }
 
     submit() {
         const values = this.form.value;
-        console.log(values);
+        values.preaposta_id = this.preAposta.id;
 
-        // if (values.itens.length) {
-        //     this.bilhete.apostador = values.apostador;
-        //     this.bilhete.valor = values.valor;
+        if (this.preAposta.tipo === 'esportes') {
+            values.itens = this.preApostaItens.map(item => {
+                return {
+                    jogo_id: item.jogo.id,
+                    jogo_nome: item.jogo.nome,
+                    ao_vivo: item.ao_vivo,
+                    cotacao: {
+                        chave: item.aposta_tipo.chave,
+                        valor: item.cotacao,
+                    }
+                };
+            });
 
-        //     const itens = [];
-        //     values.itens.forEach(item => {
-        //         itens.push({
-        //             jogo_id: item.jogo.id,
-        //             jogo_nome: item.jogo.nome,
-        //             aoVivo: item.aoVivo,
-        //             cotacao: {
-        //                 chave: item.aposta_tipo.chave,
-        //                 valor: item.cotacao
-        //             }
-        //         });
-        //     });
-        //     this.bilhete.itens = itens;
+            if (values.itens.length) {
+                this.apostaEsportivaService.create(values)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        result => this.success(result, 'imprimir'),
+                        error => this.handleError(error)
+                    );
+            } else {
+                this.handleError('Nenhum jogo na aposta!');
+            }
+        } else {
+            values.telefone = this.preAposta.telefone;
+            values.versao_app = 'angular';
 
-        //     this.apostaEsportivaService.create(this.bilhete)
-        //         .pipe(takeUntil(this.unsub$))
-        //         .subscribe(
-        //             result => this.success(result, 'imprimir'),
-        //             error => this.handleError(error)
-        //         );
-        // } else {
-        //     this.handleError('Nenhum jogo na aposta!');
-        // }
+            values.itens = this.preApostaItens.map(item => {
+                return {
+                    valor: item.valor,
+                    sorteio_id: item.sorteio_id,
+                    numeros: item.numeros
+                };
+            });
+
+            if (values.itens.length) {
+                this.apostaLoteriaService.create(values)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        result => this.success(result, 'imprimir'),
+                        error => this.handleError(error)
+                    );
+            } else {
+                this.handleError('Nenhum palpite na aposta!');
+            }
+        }
     }
 
     consultarAposta() {
@@ -118,9 +124,9 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 preAposta => {
-                    console.log(preAposta);
                     this.exibirPreAposta = true;
                     this.preAposta = preAposta;
+                    this.preApostaItens = preAposta.itens;
                     this.form.patchValue(preAposta);
                 },
                 error => this.handleError(error)
@@ -128,16 +134,20 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     success(data, action) {
-        if (action === 'compartilhar') {
-            HelperService.sharedSportsTicket(data.results);
-        } else {
-            this.printService.sportsTicket(data.results);
-        }
-
+        // if (action === 'compartilhar') {
+        //     HelperService.sharedSportsTicket(data.results);
+        // } else {
+        //     this.printService.sportsTicket(data.results);
+        // }
         this.messageService.success('Aposta validada!');
     }
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    sorteioNome(sorteioId) {
+        const sorteio = this.sorteios.find(s => s.id === sorteioId);
+        return sorteio ? sorteio.nome : '';
     }
 }

@@ -20,8 +20,8 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="esportes" *ngIf="preAposta.tipo == 'esportes'; else preApostaLoteria">
                             <div class="jogos">
-                                <div *ngFor="let item of preAposta.itens; let i=index" class="jogo-selecionado">
-                                    <div class="jogo-selecionado-inner">
+                                <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
+                                    <div class="item-selecionado-inner">
                                         <div class="horario">
                                             {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
                                         </div>
@@ -50,6 +50,10 @@
                                 <p>
                                     Total de jogos: {{preAposta.itens.length}}
                                 </p>
+                                <p>
+                                    Estimativa de ganho: {{form.value.valor * preAposta.cotacao | currency:
+                                    'BRL':'symbol':'1.2'}}
+                                </p>
                                 <div class="form-group">
                                     <label for="">Apostador</label>
                                     <input type="text" class="form-control" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">
@@ -61,22 +65,18 @@
                                     <input type="text" class="form-control" formControlName="valor" [ngClass]="applyCssInputError('valor')">
                                     <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                                 </div>
-                                <p>
-                                    Estimativa de ganho: {{form.value.premio | currency: 'BRL':'symbol':'1.2'}}
-                                </p>
                             </div>
                         </div>
                         <ng-template #preApostaLoteria>
                             <div class="loteria">
                                 <div class="palpites">
-                                    <div *ngFor="let item of preAposta.itens; let i=index" class="jogo-selecionado">
+                                    <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
                                         <div>
                                             <div>
-                                                <label>sorteio</label>
-                                                <span>{{item.sorteio_nome}}</span>
+                                                <label>{{sorteioNome(item.sorteio_id)}}</label>
                                             </div>
                                             <div>
-                                                <label>aposta</label>
+                                                <label>Valor:</label>
                                                 <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
                                             </div>
                                             <div class="circle-group">
@@ -85,6 +85,22 @@
                                                         {{numero | number:'2.0'}}
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 6: </label>
+                                                <span>{{(item.cotacao6 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 5: </label>
+                                                <span>{{(item.cotacao5 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 4: </label>
+                                                <span>{{(item.cotacao4 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 3: </label>
+                                                <span>{{(item.cotacao3 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
                                             </div>
                                         </div>
                                         <div class="remover-item">
@@ -97,16 +113,13 @@
                                         Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
                                     </p>
                                     <p>
-                                        Total de jogos: {{preAposta.itens.length}}
+                                        Total de palpites: {{preAposta.itens.length}}
                                     </p>
                                     <div class="form-group">
                                         <label for="">Apostador</label>
                                         <input type="text" class="form-control" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">
                                         <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
                                     </div>
-                                    <p>
-                                        Estimativa de ganho: {{form.value.premio | currency: 'BRL':'symbol':'1.2'}}
-                                    </p>
                                 </div>
                             </div>
                         </ng-template>

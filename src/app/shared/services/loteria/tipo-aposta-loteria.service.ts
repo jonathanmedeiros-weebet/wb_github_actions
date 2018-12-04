@@ -10,7 +10,7 @@ import { TipoAposta } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
-export class TipoApostaService {
+export class TipoApostaLoteriaService {
     private TipoApostaUrl = `${config.LOTTERIES_URL}/tipos-aposta`; // URL to web api
 
     constructor(
