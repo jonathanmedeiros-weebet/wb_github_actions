@@ -130,3 +130,10 @@ h4::before {
     cursor: pointer;
 }
 
+@media only screen and (max-width: 668px) {
+    section.pre-bilhete.pre-bilhete-mobile {
+        height: 100% !important;
+        position: fixed !important;
+    }
+
+}

@@ -46,7 +46,7 @@
                 </li>
             </ul>
         </div>
-        <ul id="menu-side-left" class="sidebar-nav" *ngIf="contexto == 'esportes'; else loterias" data-simplebar>
+        <ul id="menu-side-left" class="sidebar-nav custom-scroll-menu" *ngIf="contexto == 'esportes'; else loterias" style="position: relative;">
             <span class="group">Data</span>
             <li>
                 <a [routerLink]="['/esportes/futebol/jogos']">
@@ -66,7 +66,7 @@
             </li>
         </ul>
         <ng-template #loterias>
-            <ul class="sidebar-nav">
+            <ul id="menu-side-left" class="sidebar-nav custom-scroll-menu" style="position: relative;">
                 <span class="group">Surpresinha</span>
                 <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
                     <a>

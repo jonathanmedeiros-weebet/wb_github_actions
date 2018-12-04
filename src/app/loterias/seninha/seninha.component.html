@@ -1,7 +1,7 @@
 <div class="loteria-content">
     <div class="content-body">
         <div class="content">
-            <div class="col nopadding content-loteria" data-simplebar>
+            <div class="col nopadding content-loteria custom-scroll" style="position: relative">
                 <div class="wrap-sticky">
                     <div class="content-header">
                         Seninha
@@ -48,7 +48,7 @@
                 </div>
                 <app-footer></app-footer>
             </div>
-            <div class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" data-simplebar>
+            <div class="pre-bilhete custom-scroll-side" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" style="position: relative">
                 <div>
                     <h4>PRÉ-BILHETE</h4>
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
@@ -105,13 +105,13 @@
                         </div>
                         <div class="form-row botoes">
                             <div class="col">
-                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
+                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success col-12"
                                     (click)="create('imprimir')">
                                     Finalizar e Imprimir
                                 </button>
                             </div>
                             <div class="col" *ngIf="appMobile">
-                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success"
+                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-success col-12"
                                     (click)="create('compartilhar')">
                                     Finalizar e Compartilhar
                                 </button>

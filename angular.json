@@ -26,7 +26,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "src/assets/css/seninha-quininha.css",
               "node_modules/jstree/dist/themes/default/style.min.css",
-              "node_modules/simplebar/dist/simplebar.min.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -34,8 +34,7 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/jquery-toast-plugin/dist/jquery.toast.min.js",
-              "node_modules/jstree/dist/jstree.min.js",
-              "node_modules/simplebar/dist/simplebar.min.js"
+              "node_modules/jstree/dist/jstree.min.js"
             ]
           },
           "configurations": {
