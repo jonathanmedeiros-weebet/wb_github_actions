@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../../shared/layout/base-form/base-form.component';
 import {
-    ApostaService, MessageService,
+    ApostaLoteriaService, MessageService,
     PrintService, SorteioService,
     AuthService, HelperService
 } from './../../../services';
@@ -24,7 +24,7 @@ export class AdminApuracaoLoteriaComponent extends BaseFormComponent implements 
     unsub$ = new Subject();
 
     constructor(
-        private apostaService: ApostaService,
+        private apostaService: ApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,

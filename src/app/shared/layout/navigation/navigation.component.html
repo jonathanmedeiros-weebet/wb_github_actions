@@ -40,10 +40,25 @@
                     </a>
                 </li>
                 <li *ngIf="isLoggedIn">
+                    <a [routerLink]="['/validar-aposta']">
+                        <i class="fa fa-check"></i> Validação
+                    </a>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <a [routerLink]="['/validar-aposta']">
+                        <i class="fa fa-asterisk"></i> Apuração
+                    </a>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <a [routerLink]="['/validar-aposta']">
+                        <i class="fa fa-list"></i> Resultados
+                    </a>
+                </li>
+                <!-- <li *ngIf="isLoggedIn">
                     <a [routerLink]="['/admin/dashboard']">
                         <i class="fa fa-dashboard"></i> Admin
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <ul id="menu-side-left" class="sidebar-nav custom-scroll-menu" *ngIf="contexto == 'esportes'; else loterias" style="position: relative;">

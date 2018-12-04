@@ -2,10 +2,10 @@
 export * from './shared/services/regra.service';
 export * from './shared/services/parametros.service';
 
-export * from './shared/services/loteria/aposta.service';
+export * from './shared/services/loteria/aposta-loteria.service';
 export * from './shared/services/loteria/preaposta-loteria.service';
 export * from './shared/services/loteria/sorteio.service';
-export * from './shared/services/loteria/tipo-aposta.service';
+export * from './shared/services/loteria/tipo-aposta-loteria.service';
 
 export * from './shared/services/aposta-esportiva/aposta-esportiva.service';
 export * from './shared/services/aposta-esportiva/bilhete-esportivo.service';

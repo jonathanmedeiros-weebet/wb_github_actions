@@ -7,5 +7,6 @@ export class PreApostaEsportiva {
     cotacao: number;
     valor: number;
     premio: number;
+    tipo: string;
     itens: ItemPreApostaEsportiva[] = [];
 }

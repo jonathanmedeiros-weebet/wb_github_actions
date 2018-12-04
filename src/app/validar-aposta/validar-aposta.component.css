@@ -1,0 +1,80 @@
+.consulta-form{
+    margin-bottom: 30px;
+}
+
+.consulta-form input{
+    margin-right: 1rem;
+}
+
+#pre-aposta{
+    padding: 10px 14px;
+    border: 1px dashed #aec3d8;
+}
+
+#pre-aposta h1{
+    margin-bottom: 15px;
+}
+
+.jogos, .palpites{
+    margin-bottom: 15px;
+}
+
+.div-jogos-selecionados .item-selecionado-inner{
+    margin: 0px 30px;
+}
+
+.div-jogos-selecionados h3{
+    margin: 30px 0;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.div-jogos-selecionados h3::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: red;
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.item-selecionado{
+    padding: 15px 0;
+    border-bottom: 1px dashed #aec3d8;
+    text-align: left;
+    position: relative;
+}
+
+.item-selecionado:first-of-type{
+    border-top: none;
+    padding-top: 0;
+}
+
+.item-selecionado label{
+    margin-right: 5px;
+}
+
+.item-selecionado > div:not(.remover-item){
+    /* color: #94abcb; */
+}
+
+.item-selecionado .horario{
+    /* color: #90a3c1; */
+    font-weight: bold;
+}
+
+.item-selecionado .cotacao .valor{
+    /* color: #90a3c1; */
+    font-weight: bold;
+}
+
+.remover-item{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    font-size: 15px;
+    cursor: pointer;
+}

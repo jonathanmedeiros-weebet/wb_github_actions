@@ -10,7 +10,7 @@ import { Aposta } from './../../../models';
 import { config } from '../../config';
 
 @Injectable()
-export class ApostaService {
+export class ApostaLoteriaService {
     private ApostaUrl = `${config.LOTTERIES_URL}/apostas`; // URL to web api
 
     constructor(
@@ -48,6 +48,7 @@ export class ApostaService {
     create(aposta): Observable<any> {
         return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }

@@ -1,0 +1,132 @@
+<div id="default-content" data-simplebar>
+    <div class="content-header">
+        <h2>Validar Aposta</h2>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div class="">
+                <form (ngSubmit)="consultarAposta()" #consultaForm="ngForm" class="consulta-form form-inline">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="codigo" name="codigo" class="form-control" placeholder="Código"
+                            required>
+                    </div>
+                    <button type="submit" [disabled]="!consultaForm.valid" class="btn btn-primary">Consultar</button>
+                </form>
+            </div>
+
+            <div *ngIf="exibirPreAposta">
+                <div id="pre-aposta">
+                    <h1>#{{preAposta.id}}</h1>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="esportes" *ngIf="preAposta.tipo == 'esportes'; else preApostaLoteria">
+                            <div class="jogos">
+                                <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
+                                    <div class="item-selecionado-inner">
+                                        <div class="horario">
+                                            {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                                        </div>
+                                        <div class="jogo-nome">
+                                            {{item.jogo.nome}}
+                                        </div>
+                                        <div class="campeonato-nome">
+                                            {{item.jogo.campeonato.nome}}
+                                        </div>
+                                        <div class="cotacao">
+                                            {{item.aposta_tipo.nome}}:
+                                            <span class="valor">
+                                                {{item.cotacao | number: '1.0-2'}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="remover-item">
+                                        <i class="fa fa-close" (click)="removerItem(i)"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="informacoes">
+                                <p>
+                                    Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                                </p>
+                                <p>
+                                    Total de jogos: {{preAposta.itens.length}}
+                                </p>
+                                <p>
+                                    Estimativa de ganho: {{form.value.valor * preAposta.cotacao | currency:
+                                    'BRL':'symbol':'1.2'}}
+                                </p>
+                                <div class="form-group">
+                                    <label for="">Apostador</label>
+                                    <input type="text" class="form-control" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">
+                                    <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Valor da Aposta</label>
+                                    <input type="text" class="form-control" formControlName="valor" [ngClass]="applyCssInputError('valor')">
+                                    <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #preApostaLoteria>
+                            <div class="loteria">
+                                <div class="palpites">
+                                    <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
+                                        <div>
+                                            <div>
+                                                <label>{{sorteioNome(item.sorteio_id)}}</label>
+                                            </div>
+                                            <div>
+                                                <label>Valor:</label>
+                                                <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div class="circle-group">
+                                                <div class="circle" *ngFor="let numero of item.numeros">
+                                                    <div class="content">
+                                                        {{numero | number:'2.0'}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 6: </label>
+                                                <span>{{(item.cotacao6 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 5: </label>
+                                                <span>{{(item.cotacao5 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 4: </label>
+                                                <span>{{(item.cotacao4 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                            <div>
+                                                <label>Retorno 3: </label>
+                                                <span>{{(item.cotacao3 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="remover-item">
+                                            <i class="fa fa-close" (click)="removerItem(i)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="informacoes">
+                                    <p>
+                                        Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                                    </p>
+                                    <p>
+                                        Total de palpites: {{preAposta.itens.length}}
+                                    </p>
+                                    <div class="form-group">
+                                        <label for="">Apostador</label>
+                                        <input type="text" class="form-control" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">
+                                        <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <button type="submit" class="btn btn-primary">Validar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

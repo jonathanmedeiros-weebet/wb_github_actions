@@ -4,7 +4,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { AdminLoteriasRoutingModule } from './loterias-routing.module';
 import { AdminApuracaoLoteriaComponent } from './apuracao/apuracao-loteria.component';
 import { AdminResultadosLoteriaComponent } from './resultados/resultados-loteria.component';
-import { ApostaService, SorteioService, TipoApostaService } from './../../services';
+import { ApostaLoteriaService, SorteioService, TipoApostaLoteriaService } from './../../services';
 
 @NgModule({
     imports: [
@@ -16,9 +16,9 @@ import { ApostaService, SorteioService, TipoApostaService } from './../../servic
         AdminResultadosLoteriaComponent
     ],
     providers: [
-        ApostaService,
+        ApostaLoteriaService,
         SorteioService,
-        TipoApostaService
+        TipoApostaLoteriaService
     ]
 })
 export class AdminLoteriasModule { }
