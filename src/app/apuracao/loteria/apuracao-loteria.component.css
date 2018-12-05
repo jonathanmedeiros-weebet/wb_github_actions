@@ -1,0 +1,98 @@
+.content-body{
+    padding-top: 15px;
+}
+
+.aposta{
+    margin-bottom: 15px;
+}
+
+.aposta-header{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.aposta-header .btn{
+    margin-top: -5px;
+}
+
+.aposta-header label{
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.aposta-header em{
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+.aposta-itens{
+    display: flex;
+    flex-direction: row;
+    margin: -7px;
+    flex-wrap: wrap;
+}
+
+.aposta-item{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #d7dfe3;
+    padding: 7px 0 7px 7px;
+    border-radius: 4px;
+    background: #eef5f9;
+    margin: 7px;
+}
+
+.aposta-item > div{
+   margin-right: 15px;
+}
+
+.aposta-item div > label{
+    display: block;
+    text-align: center;
+    color: #99abb4;
+    margin-bottom: -2px;
+}
+
+.aposta-item div > span{
+    display: block;
+    text-align: center;
+}
+
+.aposta-item .circle-group{
+    padding-top: 6px;
+}
+
+.circle{
+    height: 25px;
+    width: 25px;
+    margin: 3px;
+}
+
+.hit, .miss{
+    color:#fff;
+    border-color:#000;
+}
+
+.hit{
+    background-color: green;
+}
+
+.miss{
+    background-color: red;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .aposta-header label {
+        display: inline;
+    }
+
+    .aposta-header em {
+        display: inline;
+    }
+}

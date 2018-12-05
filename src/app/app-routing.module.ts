@@ -22,6 +22,10 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
             },
             {
+                path: 'apuracao',
+                loadChildren: 'app/apuracao/apuracao.module#ApuracaoModule'
+            },
+            {
                 path: 'home',
                 loadChildren: 'app/home/home.module#HomeModule'
             },

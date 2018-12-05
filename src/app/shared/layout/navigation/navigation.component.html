@@ -44,10 +44,15 @@
                         <i class="fa fa-check"></i> Validação
                     </a>
                 </li>
-                <li *ngIf="isLoggedIn">
-                    <a [routerLink]="['/validar-aposta']">
+                <li *ngIf="isLoggedIn" class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         <i class="fa fa-asterisk"></i> Apuração
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
+                        <a class="dropdown-item" [routerLink]="['//apuracao/loteria']">Loteria</a>
+                    </div>
                 </li>
                 <li *ngIf="isLoggedIn">
                     <a [routerLink]="['/validar-aposta']">

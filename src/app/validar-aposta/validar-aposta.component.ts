@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import {
     MessageService, PreApostaEsportivaService, ApostaEsportivaService,
@@ -8,8 +8,6 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
-
-declare var $;
 
 @Component({
     selector: 'app-validar-aposta',

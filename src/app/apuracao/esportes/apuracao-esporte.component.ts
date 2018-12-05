@@ -2,23 +2,23 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BaseFormComponent } from '../../../shared/layout/base-form/base-form.component';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {
     ApostaEsportivaService, MessageService,
     PrintService, AuthService,
     HelperService
-} from './../../../services';
-import { ApostaEsportiva } from './../../../models';
+} from './../../services';
+import { ApostaEsportiva } from './../../models';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-admin-apuracao-esporte',
+    selector: 'app-apuracao-esporte',
     templateUrl: 'apuracao-esporte.component.html',
     styleUrls: ['apuracao-esporte.component.css']
 })
-export class AdminApuracaoEsporteComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class ApuracaoEsporteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     apostas: ApostaEsportiva[] = [];
     @ViewChild('modal') modal: ElementRef;
     @ViewChild('cancelModal') cancelModal: ElementRef;
