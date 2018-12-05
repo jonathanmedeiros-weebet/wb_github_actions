@@ -22,6 +22,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 declare var $;
 
 @Component({
@@ -111,6 +113,7 @@ export class NavigationComponent implements OnInit {
                     let altura = window.innerHeight - (alturaMenuFixo + 15);
 
                     $('#menu-side-left').css('height', altura);
+                    const ps = new PerfectScrollbar('.custom-scroll-menu');
                 }, 500)
             });
 
@@ -121,6 +124,8 @@ export class NavigationComponent implements OnInit {
             );
 
         this.isAppMobile = this.auth.isAppMobile();
+
+
     }
 
     // ngAfterViewInit() {

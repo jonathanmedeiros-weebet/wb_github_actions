@@ -12,6 +12,8 @@ import {
 import { ItemBilheteEsportivo } from '../../models';
 import * as clone from 'clone';
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 @Component({
     selector: 'app-bilhete-esportivo',
     templateUrl: 'bilhete-esportivo.component.html',
@@ -58,6 +60,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(valor => {
                 this.calcularPossibilidadeGanho(valor);
             });
+
+        const ps = new PerfectScrollbar('.custom-scroll-side');
     }
 
     ngOnDestroy() {

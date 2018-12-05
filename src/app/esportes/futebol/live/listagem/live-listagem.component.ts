@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 import { MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 declare var $;
 @Component({
     selector: 'app-live-listagem',
@@ -39,6 +41,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
         $('.wrap-sticky').css('min-height', altura - 60);
         $('.content-sports').css('height', altura);
         $('.pre-bilhete').css('height', altura);
+
+        const ps = new PerfectScrollbar('.custom-scroll');
     }
 
     ngOnDestroy() {

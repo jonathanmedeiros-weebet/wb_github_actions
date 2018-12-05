@@ -282,5 +282,9 @@ button{
 
     .loteria-content .pre-bilhete {
         padding: 40px 15px 0;
+        position: absolute !important;
+        top: 0;
+        height: 100% !important;
+        width: 100% !important;
     }
 }

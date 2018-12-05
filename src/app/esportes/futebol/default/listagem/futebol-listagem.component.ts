@@ -8,6 +8,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 declare var $;
 
 @Component({
@@ -84,8 +86,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
 
         let altura = window.innerHeight - 69;
         $('.wrap-sticky').css('min-height', altura - 60);
-        $('.content-sports').css('height', altura);
+        $('.content-sports-scroll').css('height', altura);
         $('.pre-bilhete').css('height', altura);
+
+        const ps = new PerfectScrollbar('.custom-scroll');
 
         // window.addEventListener('resize', e => {
         //     let newAltura = window.innerHeight - 172;
