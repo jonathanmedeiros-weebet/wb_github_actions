@@ -70,3 +70,9 @@
         min-width: 200px;
     }
 }
+
+@media only screen and (max-width: 668px) {
+    .content-sports-scroll {
+        padding-bottom: 90px;
+    }
+}

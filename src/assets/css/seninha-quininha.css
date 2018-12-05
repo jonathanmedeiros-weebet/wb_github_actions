@@ -287,4 +287,8 @@ button{
         height: 100% !important;
         width: 100% !important;
     }
+
+    .content-loteria {
+        padding-bottom: 90px !important;
+    }
 }

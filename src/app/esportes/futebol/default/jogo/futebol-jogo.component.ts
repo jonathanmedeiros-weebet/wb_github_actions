@@ -8,6 +8,8 @@ import { JogoService, MessageService, BilheteEsportivoService } from './../../..
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 @Component({
     selector: 'app-futebol-jogo',
     templateUrl: 'futebol-jogo.component.html',
@@ -55,6 +57,12 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
+
+        let altura = window.innerHeight - 69;
+        $('.content-sports').css('height', altura);
+        $('.pre-bilhete').css('height', altura);
+
+        const ps = new PerfectScrollbar('.custom-scroll');
     }
 
     ngOnDestroy() {
