@@ -10,6 +10,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import PerfectScrollbar from 'perfect-scrollbar';
 
+declare var $;
+
 @Component({
     selector: 'app-futebol-jogo',
     templateUrl: 'futebol-jogo.component.html',

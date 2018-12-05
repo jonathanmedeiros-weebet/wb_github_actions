@@ -7,6 +7,9 @@ import { Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
 
 import PerfectScrollbar from 'perfect-scrollbar';
+
+declare var $;
+
 @Component({
     selector: 'app-live-jogo',
     templateUrl: 'live-jogo.component.html',
