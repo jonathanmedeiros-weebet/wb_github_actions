@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
-import { AdminLayoutComponent } from './shared/layout/app-layouts/admin-layout.component';
 
 import { AuthGuard, ExpiresGuard, ParametrosResolver } from './services';
 
@@ -38,6 +37,10 @@ const appRoutes: Routes = [
                 loadChildren: 'app/loterias/loterias.module#LoteriasModule'
             },
             {
+                path: 'resultados',
+                loadChildren: 'app/resultados/resultados.module#ResultadosModule'
+            },
+            {
                 path: 'meu-perfil',
                 loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule',
                 canActivate: [AuthGuard],
@@ -60,13 +63,6 @@ const appRoutes: Routes = [
         path: 'auth',
         component: AuthLayoutComponent,
         loadChildren: 'app/auth/auth.module#AuthModule'
-    },
-    {
-        path: 'admin',
-        component: AdminLayoutComponent,
-        loadChildren: 'app/admin/admin.module#AdminModule',
-        canActivate: [AuthGuard],
-        canActivateChild: [ExpiresGuard]
     }
 ];
 

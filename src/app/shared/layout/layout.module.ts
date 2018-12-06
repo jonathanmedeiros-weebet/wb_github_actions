@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './app-layouts/main-layout.component';
 import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
 import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
-import { AdminLayoutComponent } from './app-layouts/admin-layout.component';
 import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
@@ -26,7 +25,6 @@ import { ApostaEsportivaService } from '../../services';
         MainLayoutComponent,
         EmptyLayoutComponent,
         AuthLayoutComponent,
-        AdminLayoutComponent,
         HeaderComponent,
         FooterComponent,
         NavigationComponent,
@@ -35,7 +33,6 @@ import { ApostaEsportivaService } from '../../services';
     exports: [
         MainLayoutComponent,
         AuthLayoutComponent,
-        AdminLayoutComponent,
         HeaderComponent,
         FooterComponent,
         NavigationComponent,
