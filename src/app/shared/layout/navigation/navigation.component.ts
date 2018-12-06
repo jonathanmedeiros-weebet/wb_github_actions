@@ -230,7 +230,7 @@ export class NavigationComponent implements OnInit {
 
         const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados }];
 
-        this.printService.gamesAppMobile(jogos);
+        this.printService.games(jogos);
         this.modalReferenceTabela.close('');
     }
 

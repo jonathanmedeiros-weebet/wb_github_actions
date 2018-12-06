@@ -19,16 +19,143 @@ export class PrintService {
         private parametroService: ParametroService
     ) { }
 
-    games(aposta) {
+    // Tabela Esportiva
+    games(dias) {
         if (this.auth.isAppMobile()) {
-            this.gamesAppMobile(aposta);
+            this.gamesAppMobile(dias);
         } else {
-            this.gamesDestkop(aposta);
+            this.gamesDestkop(dias);
         }
     }
 
-    gamesDestkop(aposta) {
+    gamesDestkop(dias) {
+        let printContents, popupWin, html, styles;
 
+        styles = `
+        body{
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 15px;
+            background: #333;
+            margin: 0;
+        }
+        .dia-header{
+            font-weight:bolder;
+            padding: 10px 10px;
+            text-align: center;
+            background: #ffffff;
+            color: #d99595;
+        }
+        .campeonato-header{
+            padding: 0 12px !important;
+            font-size: .9em !important;
+            height: 14px;
+            margin: 5px 0;
+        }
+        .jogo{
+            padding: 0 10px !important;
+        }
+        .jogo .jogo-nome{
+            font-size: 1.1em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            background: #eee !important;
+            color: #000 !important;
+            height: 14px;
+            margin-bottom: 0 !important;
+            line-height: 16px !important;
+        }
+        .jogo .jogo-nome span{
+            padding: 0 10px !important;
+            font-size: .9em;
+        }
+        .cotacoes-principais{
+            display:flex;
+            flex-wrap:wrap;
+        }
+        .cotacoes-principais .cotacao{
+            width: 33.33%;
+            padding-right: 15px;
+            padding-left: 15px
+            margin-bottom: 3px;
+        }
+        @page {
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                padding: 4mm;
+            }
+        }
+        `;
+
+        printContents = `
+        <div id="impressao-tabela">
+            <div class="conteudo">
+                <div style="text-align: center;">
+                    <img style="max-height: 150px; "
+                    alt="${config.BANCA_NOME}" src="${config.LOGO}" />
+                </div>
+                `;
+
+        dias.forEach(dia => {
+            printContents += `
+                    <div class="dia-header">
+                        ${dia.data_grupo}
+                    </div>
+                `;
+
+            dia.camps.forEach(campeonato => {
+                printContents += `
+                    <div class="campeonato-header">
+                        ${campeonato.nome}
+                    </div>`;
+
+                campeonato.jogos.forEach(jogo => {
+                    printContents += `
+                    <div class="jogo">
+                        <div class="jogo-nome">
+                            <span style="padding: 10px;">
+                                ${HelperService.dateFormat(jogo.horario, 'HH:mm')}
+                            </span>
+                            <span style="font-weight: bold;">${jogo.nome}</span>
+                        </div>
+                    </div>`;
+
+                    printContents += `<div class="cotacoes-principais">`;
+
+                    jogo.cotacoes.forEach(cotacao => {
+                        printContents += `
+                        <div class="cotacao">
+                            <span class="aposta-tipo-sigla">${this.getSigla(cotacao.chave)}</span>
+                            <span class="valor pull-right"><b>${cotacao.valor}</b></span>
+                        </div>`;
+                    });
+
+                    printContents += `</div>`;
+                });
+            });
+        });
+
+        html = `
+        <html>
+          <head>
+            <title>Print tab</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <style>
+            ${styles}
+            </style>
+          </head>
+          <body onload="window.print();window.close()">${printContents}</body>
+        </html>`;
+
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(html);
+        popupWin.document.close();
     }
 
     gamesAppMobile(dias) {
@@ -78,8 +205,7 @@ ${horario} ${jogo.nome}
 
         });
 
-        console.log(text);
-        // parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
+        parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
     }
 
     getValor(chave, cotacoes) {
@@ -103,6 +229,7 @@ ${horario} ${jogo.nome}
         return '    ';
     }
 
+    // Bilhete Loteria
     lotteryTicket(aposta) {
         if (this.auth.isAppMobile()) {
             this.lotteryTicketAppMobile(aposta);
@@ -349,6 +476,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
 
+    // Bilhete Esportivo
     sportsTicket(aposta) {
         if (this.auth.isAppMobile()) {
             this.sportsTicketAppMobile(aposta);
