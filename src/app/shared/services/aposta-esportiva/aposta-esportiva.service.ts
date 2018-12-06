@@ -29,7 +29,7 @@ export class ApostaEsportivaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.ApostaUrl, requestOptions)
+        return this.http.get(this.ApostaEsportivaUrl, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

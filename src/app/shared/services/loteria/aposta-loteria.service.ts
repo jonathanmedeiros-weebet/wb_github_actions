@@ -29,7 +29,7 @@ export class ApostaLoteriaService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.ApostaUrl, requestOptions)
+        return this.http.get(this.ApostaLoteriaUrl, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
