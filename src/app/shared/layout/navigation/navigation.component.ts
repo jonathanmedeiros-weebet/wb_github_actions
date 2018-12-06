@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
@@ -21,8 +21,6 @@ import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-
-import PerfectScrollbar from 'perfect-scrollbar';
 
 declare var $;
 
@@ -83,7 +81,9 @@ export class NavigationComponent implements OnInit {
         private printService: PrintService,
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private supresinhaService: SupresinhaService
+        private supresinhaService: SupresinhaService,
+        private renderer: Renderer2,
+        private el: ElementRef,
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -95,6 +95,7 @@ export class NavigationComponent implements OnInit {
     ngOnInit() {
         this.LOGO = config.LOGO;
         this.informativoRodape = this.parametroService.getInformativoRodape();
+        this.isAppMobile = this.auth.isAppMobile();
 
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen
@@ -109,10 +110,10 @@ export class NavigationComponent implements OnInit {
                 this.itens = dados.itens;
 
                 setTimeout(e => {
-                    const alturaMenuFixo = $('#side-fixed-menu').innerHeight();
+                    const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
                     const altura = window.innerHeight - (alturaMenuFixo + 15);
-
-                    $('#menu-side-left').css('height', altura);
+                    const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
+                    this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
                 }, 500);
             });
 
@@ -121,12 +122,16 @@ export class NavigationComponent implements OnInit {
             .subscribe(
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
-
-        this.isAppMobile = this.auth.isAppMobile();
     }
 
     closeMenu() {
         this.sidebarService.close();
+    }
+
+    onSwipeLeft(event) {
+        if (parseInt(event.direction, 10) === 2) {
+            this.closeMenu();
+        }
     }
 
     listPrinters() {
@@ -282,12 +287,6 @@ export class NavigationComponent implements OnInit {
             return number;
         } else {
             return this.generateRandomNumber(numbers);
-        }
-    }
-
-    onSwipeLeft(evend) {
-        if (evend.direction == 2) {
-            this.closeMenu();
         }
     }
 }

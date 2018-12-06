@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -14,10 +14,6 @@ import {
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
-
-import PerfectScrollbar from 'perfect-scrollbar';
-
-declare var $;
 
 @Component({
     selector: 'app-quininha',
@@ -44,7 +40,9 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private messageService: MessageService,
         private printService: PrintService,
         private fb: FormBuilder,
-        private supresinhaService: SupresinhaService
+        private supresinhaService: SupresinhaService,
+        private renderer: Renderer2,
+        private el: ElementRef
     ) {
         super();
     }
@@ -69,9 +67,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.createForm();
 
         const altura = window.innerHeight - 69;
-        $('.wrap-sticky').css('min-height', altura - 60);
-        $('.content-loteria').css('height', altura);
-        $('.pre-bilhete').css('height', altura);
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
+        const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.renderer.setStyle(contentLoteriaEl, 'height', `${altura}px`);
+        this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {

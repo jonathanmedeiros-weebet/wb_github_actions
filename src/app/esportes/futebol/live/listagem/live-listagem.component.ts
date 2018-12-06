@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
-
-declare var $;
 
 @Component({
     selector: 'app-live-listagem',
@@ -19,7 +17,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
     constructor(
         private messageService: MessageService,
         private jogoService: JogoService,
-        private liveService: LiveService
+        private liveService: LiveService,
+        private el: ElementRef,
+        private renderer: Renderer2
     ) { }
 
     ngOnInit() {
@@ -37,9 +37,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
             );
 
         const altura = window.innerHeight - 69;
-        $('.wrap-sticky').css('min-height', altura - 60);
-        $('.content-sports').css('height', altura);
-        $('.pre-bilhete').css('height', altura);
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {

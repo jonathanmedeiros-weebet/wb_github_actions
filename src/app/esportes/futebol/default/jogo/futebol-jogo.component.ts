@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,10 +6,6 @@ import { Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-declare var $;
-
-declare var $;
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -31,6 +27,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
         private route: ActivatedRoute,
+        private el: ElementRef,
+        private renderer: Renderer2,
         private location: Location
     ) { }
 
@@ -60,8 +58,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
             .subscribe(itens => this.itens = itens);
 
         const altura = window.innerHeight - 69;
-        $('.content-sports').css('height', altura);
-        $('.pre-bilhete').css('height', altura);
+        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {

@@ -8,8 +8,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
-declare var $;
-
 @Component({
     selector: 'app-futebol-listagem',
     templateUrl: 'futebol-listagem.component.html',
