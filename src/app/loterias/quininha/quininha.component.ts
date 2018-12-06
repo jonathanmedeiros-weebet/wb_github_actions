@@ -72,9 +72,6 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         $('.wrap-sticky').css('min-height', altura - 60);
         $('.content-loteria').css('height', altura);
         $('.pre-bilhete').css('height', altura);
-
-        const ps = new PerfectScrollbar('.custom-scroll');
-        const pss = new PerfectScrollbar('.custom-scroll-side');
     }
 
     ngOnDestroy() {

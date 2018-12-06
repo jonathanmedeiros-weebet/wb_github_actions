@@ -4,11 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
-
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import PerfectScrollbar from 'perfect-scrollbar';
+declare var $;
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -58,11 +57,9 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
 
-        let altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 69;
         $('.content-sports').css('height', altura);
         $('.pre-bilhete').css('height', altura);
-
-        const ps = new PerfectScrollbar('.custom-scroll');
     }
 
     ngOnDestroy() {

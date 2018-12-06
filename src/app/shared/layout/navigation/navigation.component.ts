@@ -109,12 +109,11 @@ export class NavigationComponent implements OnInit {
                 this.itens = dados.itens;
 
                 setTimeout(e => {
-                    let alturaMenuFixo = $('#side-fixed-menu').innerHeight();
-                    let altura = window.innerHeight - (alturaMenuFixo + 15);
+                    const alturaMenuFixo = $('#side-fixed-menu').innerHeight();
+                    const altura = window.innerHeight - (alturaMenuFixo + 15);
 
                     $('#menu-side-left').css('height', altura);
-                    const ps = new PerfectScrollbar('.custom-scroll-menu');
-                }, 500)
+                }, 500);
             });
 
         this.auth.logado
@@ -124,16 +123,7 @@ export class NavigationComponent implements OnInit {
             );
 
         this.isAppMobile = this.auth.isAppMobile();
-
-
     }
-
-    // ngAfterViewInit() {
-    //     let alturaMenuFixo = $('#side-fixed-menu').innerHeight();
-    //     let altura = window.innerHeight - (alturaMenuFixo + 15);
-
-    //     $('#menu-side-left').css('height', altura);
-    // }
 
     closeMenu() {
         this.sidebarService.close();

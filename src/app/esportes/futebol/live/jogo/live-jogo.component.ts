@@ -6,7 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
 
-import PerfectScrollbar from 'perfect-scrollbar';
+declare var $;
+
 @Component({
     selector: 'app-live-jogo',
     templateUrl: 'live-jogo.component.html',
@@ -46,11 +47,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
 
-        let altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 69;
         $('.content-sports').css('height', altura);
         $('.pre-bilhete').css('height', altura);
-
-        const ps = new PerfectScrollbar('.custom-scroll');
     }
 
     ngOnDestroy() {

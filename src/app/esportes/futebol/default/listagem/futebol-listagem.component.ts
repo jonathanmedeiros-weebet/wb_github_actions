@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
@@ -7,8 +7,6 @@ import { CampeonatoService, MessageService, BilheteEsportivoService } from './..
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
-
-import PerfectScrollbar from 'perfect-scrollbar';
 
 declare var $;
 
@@ -28,6 +26,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         private campeonatoService: CampeonatoService,
         private messageService: MessageService,
         private bilheteService: BilheteEsportivoService,
+        private renderer: Renderer2,
+        private el: ElementRef,
         private route: ActivatedRoute
     ) { }
 
@@ -84,18 +84,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
 
-        let altura = window.innerHeight - 69;
-        $('.wrap-sticky').css('min-height', altura - 60);
-        $('.content-sports-scroll').css('height', altura);
-        $('.pre-bilhete').css('height', altura);
-
-        const ps = new PerfectScrollbar('.custom-scroll');
-
-        // window.addEventListener('resize', e => {
-        //     let newAltura = window.innerHeight - 172;
-        //     document.querySelector('.content-sports').style.height = newAltura + 'px';
-        //     document.querySelector('.pre-bilhete').style.height = (newAltura + 40) + 'px';
-        // });
+        const altura = window.innerHeight - 69;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
+        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {

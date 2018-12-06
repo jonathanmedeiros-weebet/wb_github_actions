@@ -5,7 +5,7 @@ import {
     TimeToStringtPipe,
     TipoApostaPipe,
     CalcularCotacaoPipe,
-    // CalcularCotacaoFavZebPipe
+    PerfectScrollDirective
 } from './index';
 
 @NgModule({
@@ -14,14 +14,14 @@ import {
         TimeToStringtPipe,
         TipoApostaPipe,
         CalcularCotacaoPipe,
-        // CalcularCotacaoFavZebPipe
+        PerfectScrollDirective,
     ],
     exports: [
         MomentPipe,
         TimeToStringtPipe,
         TipoApostaPipe,
         CalcularCotacaoPipe,
-        // CalcularCotacaoFavZebPipe
+        PerfectScrollDirective
     ]
 })
 export class UtilsModule { }

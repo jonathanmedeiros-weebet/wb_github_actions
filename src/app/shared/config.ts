@@ -1,8 +1,8 @@
 
-const _host = 'http://demo.wee.bet';
-const _center = 'http://api-center.wee.bet';
-// const _host = 'http://weebet.local';
-// const _center = 'http://localhost:3002';
+// const _host = 'http://demo.wee.bet';
+// const _center = 'http://api-center.wee.bet';
+const _host = 'http://weebet.local';
+const _center = 'http://localhost:3002';
 
 export const config: any = {
     HOST: _host,

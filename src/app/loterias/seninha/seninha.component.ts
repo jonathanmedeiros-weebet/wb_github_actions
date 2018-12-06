@@ -15,8 +15,6 @@ import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
-import PerfectScrollbar from 'perfect-scrollbar';
-
 declare var $;
 
 @Component({
@@ -70,9 +68,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         $('.wrap-sticky').css('min-height', altura - 60);
         $('.content-loteria').css('height', altura);
         $('.pre-bilhete').css('height', altura);
-
-        const ps = new PerfectScrollbar('.custom-scroll');
-        const pss = new PerfectScrollbar('.custom-scroll-side');
     }
 
     ngOnDestroy() {
@@ -161,9 +156,9 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     success(data, action) {
         if (action === 'compartilhar') {
-            HelperService.sharedLotteryTicket(data.results);
+            HelperService.sharedLotteryTicket(data);
         } else {
-            this.printService.lotteryTicket(data.results);
+            this.printService.lotteryTicket(data);
         }
 
         this.aposta = new Aposta();

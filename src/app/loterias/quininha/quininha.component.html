@@ -2,7 +2,7 @@
 
     <div class="content-body">
         <div class="content">
-            <div class="col nopadding content-loteria custom-scroll" style="position: relative;">
+            <div class="col nopadding content-loteria" perfectScroll>
                 <div class="wrap-sticky">
                     <div class="content-header">
                         Quininha
@@ -49,7 +49,7 @@
                 </div>
                 <app-footer></app-footer>
             </div>
-            <div class="pre-bilhete custom-scroll-side" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" style="position: relative;">
+            <div class="pre-bilhete" perfectScroll [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
                 <div>
                     <h4>PRÉ-BILHETE</h4>
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
@@ -91,13 +91,14 @@
                     <form #apostaForm="ngForm">
                         <div class="form-row inputs">
                             <div class="form-group col-xs-12 col-lg-12">
-                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
-                                    name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
-                                    #apostador="ngModel" placeholder="Apostador">
+                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador"
+                                    [ngClass]="{'is-invalid': controlInvalid(apostador)}" #apostador="ngModel"
+                                    placeholder="Apostador">
                                 <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
                             </div>
                             <div class="form-group col-xs-12 col-lg-12">
-                                <input type="text" class="form-control" [(ngModel)]="aposta.telefone" name="telefone" placeholder="Telefone">
+                                <input type="text" class="form-control" [(ngModel)]="aposta.telefone" name="telefone"
+                                    placeholder="Telefone">
                             </div>
                         </div>
                         <div class="form-row botoes">

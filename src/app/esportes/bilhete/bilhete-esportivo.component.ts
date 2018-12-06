@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -11,8 +11,6 @@ import {
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import * as clone from 'clone';
-
-import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -33,6 +31,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
         private printService: PrintService,
+        private renderer: Renderer2,
+        private el: ElementRef,
         private fb: FormBuilder
     ) {
         super();
@@ -61,7 +61,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(valor);
             });
 
-        const ps = new PerfectScrollbar('.custom-scroll-side');
+
+        const altura = window.innerHeight - 69;
+        const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
+        this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {
