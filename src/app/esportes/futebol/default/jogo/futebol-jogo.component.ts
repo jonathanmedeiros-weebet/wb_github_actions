@@ -9,6 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 
 declare var $;
 
+declare var $;
+
 @Component({
     selector: 'app-futebol-jogo',
     templateUrl: 'futebol-jogo.component.html',
