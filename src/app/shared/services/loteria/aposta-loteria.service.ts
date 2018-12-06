@@ -11,7 +11,8 @@ import { config } from '../../config';
 
 @Injectable()
 export class ApostaLoteriaService {
-    private ApostaUrl = `${config.LOTTERIES_URL}/apostas`; // URL to web api
+    private ApostaUrl = `${config.BASE_URL}/apostas`;
+    private ApostaLoteriaUrl = `${config.LOTTERIES_URL}/apostas`;
 
     constructor(
         private http: HttpClient,
@@ -46,7 +47,7 @@ export class ApostaLoteriaService {
     }
 
     create(aposta): Observable<any> {
-        return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
+        return this.http.post(this.ApostaLoteriaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

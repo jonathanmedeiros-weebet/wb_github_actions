@@ -148,42 +148,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Consultar</button>
         </form>
-        <div id="cupom" *ngIf="exibirBilhete">
-            <div class="conteudo">
-                <div style="text-align: center;">
-                    <img src="{{LOGO}}" alt="ZEBRINHA.BET">
-                </div>
-                <h1>#{{apostaEsportiva.id}}</h1>
-                <ng-container *ngFor="let item of apostaEsportiva.itens">
-                    <p class="campeonato">
-                        {{item.campeonato.nome}}
-                    </p>
-                    <p class="jogo-horario">
-                        {{item.jogo.horario | moment: 'dddd, DD [de] MMMM [de] YYYY [ÀS] HH:mm'}}
-                    </p>
-                    <p class="jogo-nome">
-                        {{item.jogo.nome}}
-                    </p>
-                    <p class="jogo-cotacao">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )</p>
-                </ng-container>
-                ----------------------------<br>
-                <p class="informacoes-gerais">CAMBISTA: {{apostaEsportiva.cambista.nome}}</p>
-                <p class="informacoes-gerais">APOSTADOR: {{apostaEsportiva.apostador}}</p>
-                <p class="informacoes-gerais">HORÁRIO: {{apostaEsportiva.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
-                ----------------------------<br>
-                <p class="valor-aposta">
-                    VALOR DA APOSTA: {{apostaEsportiva.valor | currency: 'BRL':'symbol':'1.2'}}
-                </p>
-                <p class="valor-premio">ESTIMATIVA
-                    DE GANHO: {{apostaEsportiva.premio | currency: 'BRL':'symbol':'1.2'}}
-                </p>
-                <p style="text-align: center; margin: 5px 1px 1px 1px; font-weight: bold; font-size: 14px;">CAMBISTA
-                    PAGA:
-                </p>
-                <p class="mensagem-rodape">
-                    {{informativoRodape}}
-                </p>
-            </div>
-        </div>
+        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'"></app-consulta-bilhete-esportivo>
+        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'"></app-consulta-bilhete-loteria>
     </div>
 </ng-template>

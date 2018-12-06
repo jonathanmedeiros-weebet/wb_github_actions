@@ -16,7 +16,6 @@ import {
     CampeonatoService, ParametroService, ApostaEsportivaService,
     MessageService, SupresinhaService
 } from './../../../services';
-import { ApostaEsportiva } from './../../../models';
 import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
@@ -67,7 +66,7 @@ export class NavigationComponent implements OnInit {
     pesquisarForm: FormGroup = this.fb.group({
         input: ['']
     });
-    apostaEsportiva = new ApostaEsportiva();
+    aposta;
     unsub$ = new Subject();
 
     constructor(
@@ -257,8 +256,8 @@ export class NavigationComponent implements OnInit {
             .subscribe(
                 apostaEsportiva => {
                     this.pesquisarForm.reset();
+                    this.aposta = apostaEsportiva;
                     this.exibirBilhete = true;
-                    this.apostaEsportiva = apostaEsportiva;
                 },
                 error => this.messageService.error(error)
             );

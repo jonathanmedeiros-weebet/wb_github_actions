@@ -9,7 +9,9 @@ import { ErrorService } from './../utils/error.service';
 import { Sorteio } from './../../../models';
 import { config } from '../../config';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SorteioService {
     private SorteioUrl = `${config.LOTTERIES_URL}/sorteios`; // URL to web api
 

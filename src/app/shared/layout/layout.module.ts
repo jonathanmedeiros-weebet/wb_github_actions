@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { ConsultaBilheteEsportivoComponent } from './consulta-bilhete/esportes/consulta-bilhete-esportivo.component';
+import { ConsultaBilheteLoteriaComponent } from './consulta-bilhete/loteria/consulta-bilhete-loteria.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService } from '../../services';
 
@@ -28,7 +30,9 @@ import { ApostaEsportivaService } from '../../services';
         HeaderComponent,
         FooterComponent,
         NavigationComponent,
-        ErrorMsgComponent
+        ErrorMsgComponent,
+        ConsultaBilheteEsportivoComponent,
+        ConsultaBilheteLoteriaComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -36,7 +40,9 @@ import { ApostaEsportivaService } from '../../services';
         HeaderComponent,
         FooterComponent,
         NavigationComponent,
-        ErrorMsgComponent
+        ErrorMsgComponent,
+        ConsultaBilheteEsportivoComponent,
+        ConsultaBilheteLoteriaComponent
     ],
     providers: [ApostaEsportivaService]
 })

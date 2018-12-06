@@ -1,0 +1,45 @@
+<div id="cupom">
+    <div class="conteudo">
+        <div class="text-center">
+            <img src="{{LOGO}}" alt="ZEBRINHA.BET">
+        </div>
+        <h1>#{{aposta.id}}</h1>
+        <p class="informacoes-gerais">CAMBISTA: {{aposta.cambista.nome}}</p>
+        <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
+        <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+        ----------------------------<br>
+        <ng-container *ngFor="let item of aposta.itens">
+            <p class="informacoes-item">
+                {{sorteioNome(item.sorteio_id)}}
+            </p>
+            <p class="informacoes-item">
+                VALOR: {{item.valor | currency: 'BRL':'symbol':'1.2'}}
+            </p>
+            <p class="informacoes-item">
+                Retorno 6: {{item.cotacao6 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+            </p>
+            <p class="informacoes-item">
+                Retorno 5: {{item.cotacao5 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+            </p>
+            <p class="informacoes-item">
+                Retorno 4: {{item.cotacao4 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+            </p>
+            <p class="informacoes-item">
+                Retorno 3: {{item.cotacao3 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+            </p>
+            <p class="informacoes-item">
+                DEZENAS: {{item.numeros}}
+            </p>
+            <p class="informacoes-item">
+               <strong>{{item.status}}</strong>
+            </p>
+            ----------------------------<br>
+        </ng-container>
+        <p class="valor-aposta">
+            VALOR TOTAL: {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+        </p>
+        <p class="mensagem-rodape">
+            {{informativoRodape}}
+        </p>
+    </div>
+</div>

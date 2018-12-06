@@ -11,7 +11,8 @@ import { config } from '../../config';
 
 @Injectable()
 export class ApostaEsportivaService {
-    private ApostaUrl = `${config.SPORTS_URL}/apostas`; // URL to web api
+    private ApostaUrl = `${config.BASE_URL}/apostas`;
+    private ApostaEsportivaUrl = `${config.SPORTS_URL}/apostas`;
 
     constructor(
         private http: HttpClient,
@@ -46,14 +47,14 @@ export class ApostaEsportivaService {
     }
 
     create(aposta): Observable<any> {
-        return this.http.post(this.ApostaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
+        return this.http.post(this.ApostaEsportivaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
                 catchError(this.errorService.handleError)
             );
     }
 
     cancel(id): Observable<any> {
-        const url = `${this.ApostaUrl}/${id}`;
+        const url = `${this.ApostaEsportivaUrl}/${id}`;
 
         return this.http.delete(url, this.header.getRequestOptions(true))
             .pipe(
