@@ -151,9 +151,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     apostaSuccess(data, action) {
         if (action === 'compartilhar') {
-            HelperService.sharedSportsTicket(data.results);
+            HelperService.sharedSportsTicket(data);
         } else {
-            this.printService.sportsTicket(data.results);
+            this.printService.sportsTicket(data);
         }
 
         this.bilheteService.atualizarItens([]);

@@ -49,6 +49,7 @@ export class ApostaEsportivaService {
     create(aposta): Observable<any> {
         return this.http.post(this.ApostaEsportivaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }

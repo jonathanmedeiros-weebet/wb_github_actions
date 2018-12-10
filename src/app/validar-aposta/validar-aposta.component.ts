@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {
@@ -29,7 +29,8 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private printService: PrintService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private elRef: ElementRef
     ) {
         super();
     }
@@ -65,6 +66,20 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
         }
     }
 
+    consultarAposta() {
+        this.preApostaService.getPreAposta(this.codigo)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                preAposta => {
+                    this.exibirPreAposta = true;
+                    this.preAposta = preAposta;
+                    this.preApostaItens = preAposta.itens;
+                    this.form.patchValue(preAposta);
+                },
+                error => this.handleError(error)
+            );
+    }
+
     submit() {
         const values = this.form.value;
         values.preaposta_id = this.preAposta.id;
@@ -86,7 +101,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
                 this.apostaEsportivaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        result => this.success(result, 'imprimir'),
+                        result => this.esporteSuccess(result, 'imprimir'),
                         error => this.handleError(error)
                     );
             } else {
@@ -108,7 +123,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
                 this.apostaLoteriaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        result => this.success(result, 'imprimir'),
+                        result => this.loteriaSuccess(result, 'imprimir'),
                         error => this.handleError(error)
                     );
             } else {
@@ -117,35 +132,47 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
         }
     }
 
-    consultarAposta() {
-        this.preApostaService.getPreAposta(this.codigo)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                preAposta => {
-                    this.exibirPreAposta = true;
-                    this.preAposta = preAposta;
-                    this.preApostaItens = preAposta.itens;
-                    this.form.patchValue(preAposta);
-                },
-                error => this.handleError(error)
-            );
+    esporteSuccess(data, action) {
+        this.reboot();
+
+        if (action === 'compartilhar') {
+            HelperService.sharedSportsTicket(data);
+        } else {
+            this.printService.sportsTicket(data);
+        }
     }
 
-    success(data, action) {
-        // if (action === 'compartilhar') {
-        //     HelperService.sharedSportsTicket(data.results);
-        // } else {
-        //     this.printService.sportsTicket(data.results);
-        // }
-        this.messageService.success('Aposta validada!');
+    loteriaSuccess(data, action) {
+        this.reboot();
+
+        if (action === 'compartilhar') {
+            HelperService.sharedLotteryTicket(data);
+        } else {
+            this.printService.lotteryTicket(data);
+        }
     }
 
     handleError(msg) {
         this.messageService.error(msg);
     }
 
+    reboot() {
+        this.exibirPreAposta = false;
+        this.form.reset();
+        this.codigo = '';
+        this.preAposta = null;
+        this.preApostaItens = [];
+        this.messageService.success('Aposta realizada!');
+        this.goToTop('#default-content');
+    }
+
     sorteioNome(sorteioId) {
         const sorteio = this.sorteios.find(s => s.id === sorteioId);
         return sorteio ? sorteio.nome : '';
+    }
+
+    goToTop(selector) {
+        const content = this.elRef.nativeElement.querySelector(selector);
+        content.scrollTop = 0;
     }
 }
