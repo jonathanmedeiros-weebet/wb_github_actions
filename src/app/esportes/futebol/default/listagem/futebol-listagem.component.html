@@ -27,12 +27,14 @@
                             </div>
                             <div class="mais-opcoes">
                                 <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
-                                    <i class="fa fa-plus"></i> Cotações
+                                    <i class="fa fa-plus"></i>
+                                    <span>Cotações</span>
                                 </a>
                             </div>
                         </div>
                         <div class="odds-principais">
-                            <div class="odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}" *ngFor="let cotacao of jogo.cotacoes" (click)="addCotacao(jogo, cotacao)">
+                            <div class="odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}" *ngFor="let cotacao of jogo.cotacoes"
+                                (click)="addCotacao(jogo, cotacao)">
                                 <span class="nome">
                                     {{cotacao.chave | tipoAposta}}
                                 </span>

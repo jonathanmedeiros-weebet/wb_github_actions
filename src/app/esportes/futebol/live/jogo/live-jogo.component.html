@@ -1,18 +1,18 @@
 <section class="content-sports" perfectScroll>
     <div class="jogo">
         <div class="indentificacao">
-            <a [routerLink]="['/esportes/futebol/live']" class="btn btn-sm btn-warning btn-back">
+            <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
                 <i class="fa fa-arrow-left"></i> Voltar
-            </a>
-            <div class="nome-placar">
-                <div class="nome time-a-nome">{{jogo.time_a_nome}}</div>
-                <div class="placar placar-time-a">{{jogo.info?.time_a_resultado}}</div>
-                <div class="placar placar-time-b">{{jogo.info?.time_b_resultado}}</div>
-                <div class="nome time-b-nome">{{jogo.time_b_nome}}</div>
-            </div>
-            <div class="aovivo-tempo">
-                <div class="aovivo-label">Ao Vivo</div>
-                <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
+            </button>
+            <div class="text-center">
+                <div class="nome">
+                    <small>{{jogo.campeonato?.nome}}</small>
+                    <div>{{jogo.nome}}</div>
+                </div>
+                <div class="aovivo-tempo">
+                    <div class="aovivo-label">Ao Vivo</div>
+                    <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
+                </div>
             </div>
         </div>
         <div class="lds-ring" *ngIf="showLoadingIndicator">
@@ -25,7 +25,8 @@
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
                 <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
-                    <div class="odd"  [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
+                    <div class="odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}" *ngFor="let cotacao of odds[chave].cotacoes"
+                        (click)="addCotacao(jogo, cotacao)">
                         <span class="nome">
                             {{cotacao.chave | tipoAposta}}
                         </span>

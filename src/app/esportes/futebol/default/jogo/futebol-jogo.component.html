@@ -1,15 +1,18 @@
 <section class="content-sports" perfectScroll>
     <div class="jogo">
         <div class="indentificacao">
-            <div class="nome">
-                {{jogo.nome}}
-            </div>
-            <div class="horario">
-                <div>{{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}</div>
-            </div>
             <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
                 <i class="fa fa-arrow-left"></i> Voltar
             </button>
+            <div class="text-center">
+                <div class="nome">
+                    <small>{{jogo.campeonato?.nome}}</small>
+                    <div>{{jogo.nome}}</div>
+                </div>
+                <div class="horario">
+                    <div>{{jogo.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
+                </div>
+            </div>
         </div>
         <div class="lds-ring" *ngIf="showLoadingIndicator">
             <div></div>

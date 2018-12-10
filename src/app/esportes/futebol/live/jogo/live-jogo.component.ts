@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
@@ -27,7 +28,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
         private bilheteService: BilheteEsportivoService,
         private el: ElementRef,
         private renderer: Renderer2,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private location: Location
     ) { }
 
     ngOnInit() {
@@ -152,4 +154,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
     handleError(msg) {
         this.messageService.error(msg);
     }
+
+    back() {
+        this.location.back();
+    }
+
 }

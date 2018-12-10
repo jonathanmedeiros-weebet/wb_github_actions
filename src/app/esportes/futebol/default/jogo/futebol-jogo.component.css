@@ -1,18 +1,15 @@
-.jogo{
-}
-
 .indentificacao{
     padding: 15px 10px;
     position: relative;
 }
 
-.indentificacao{
-    text-align: center;
-}
-
 .indentificacao .nome, h4{
     font-size: 1.2rem;
     font-weight: bolder;
+}
+
+.btn-back{
+    margin-bottom: 15px;
 }
 
 .tipo-apostas{
@@ -55,15 +52,14 @@
     color: #fff;
 }
 
-.btn-back{
-    position: absolute;
-    left: 15px;
-    top: 15px;
-}
-
-
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    .btn-back{
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        margin: 0;
+    }
 }
 
 @media only screen and (max-width: 668px) {
