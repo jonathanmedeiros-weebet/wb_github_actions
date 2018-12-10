@@ -21,15 +21,19 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div class="result">
-                <div class="table-responsive">
-                    <table *ngFor="let campeonato of campeonatos" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th colspan="4">{{campeonato.nome}}</th>
+            <div class="lds-ring" *ngIf="showLoadingIndicator">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tbody>
+                        <ng-container *ngFor="let campeonato of campeonatos">
+                            <tr class="campeonato-header">
+                                <td colspan="4">{{campeonato.nome}}</td>
                             </tr>
-                        </thead>
-                        <tbody>
                             <tr *ngFor="let jogo of campeonato.jogos">
                                 <td style="text-align: center;">{{jogo.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td style="text-align: right;">{{jogo.time_a_nome}}</td>
@@ -43,9 +47,9 @@
                                 </td>
                                 <td style="text-align: left;">{{jogo.time_b_nome}}</td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        </ng-container>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

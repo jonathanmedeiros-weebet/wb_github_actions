@@ -16,6 +16,7 @@ import * as moment from 'moment';
 })
 export class ResultadosEsporteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     campeonatos: Campeonato[] = [];
+    showLoadingIndicator = true;
     unsub$ = new Subject();
 
     constructor(
@@ -43,10 +44,9 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     }
 
     submit() {
+        this.showLoadingIndicator = true;
         this.getResultados(this.form.value);
     }
-
-    success() { }
 
     handleError(msg) {
         this.messageService.error(msg);
@@ -66,7 +66,10 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
         this.campeonatoService.getResultados(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.campeonatos = campeonatos,
+                campeonatos => {
+                    this.showLoadingIndicator = false;
+                    this.campeonatos = campeonatos;
+                },
                 error => this.handleError(error)
             );
     }

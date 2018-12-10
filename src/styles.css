@@ -76,6 +76,10 @@ header{
     padding: 20px;
 }
 
+.content-header{
+    margin-bottom: 30px;
+}
+
 .content-header h2{
     color: var(--sidebar-right);
     margin-bottom: 15px;

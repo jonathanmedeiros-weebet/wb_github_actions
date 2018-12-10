@@ -98,32 +98,32 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     openModal(aposta) {
-        console.log(aposta);
         this.apostaSelecionada = aposta;
 
-        this.modalService.open(this.modal, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-            console.log('result');
-            console.log(result);
-        }, (reason) => {
-            console.log('reason');
-            console.log(reason);
-        });
+        this.modalService.open(this.modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true,
+            size: 'lg'
+        }).result.then(
+            (result) => { },
+            (reason) => { }
+        );
     }
 
     cancel(aposta) {
-        this.modalService.open(this.cancelModal, { centered: true }).result.then(
-            (result) => {
-                console.log('cancelado');
-
-                // this.apostaService.cancel(aposta.id)
-                //     .pipe(takeUntil(this.unsub$))
-                //     .subscribe(
-                //         apostas => this.apostas = apostas,
-                //         error => this.handleError(error)
-                //     );
-            },
-            (reason) => { }
-        );
+        this.modalService.open(this.cancelModal, { centered: true })
+            .result
+            .then(
+                (result) => {
+                    this.apostaService.cancel(aposta.id)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            () => this.getApostas(),
+                            error => this.handleError(error)
+                        );
+                },
+                (reason) => { }
+            );
     }
 
     checkCancellation(items) {
@@ -141,5 +141,12 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         }
 
         return result;
+    }
+
+    setStatus(resultado) {
+        return {
+            'perdedor': resultado === 'perdeu',
+            'ganhador': resultado === 'ganhou'
+        };
     }
 }
