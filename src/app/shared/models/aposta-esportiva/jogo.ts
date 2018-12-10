@@ -4,7 +4,7 @@ import { Cotacao } from './cotacao';
 
 export class Jogo {
     id: number;
-    _id: string;
+    _id: any;
     nome: string;
     time_a_nome: string;
     time_b_nome: string;

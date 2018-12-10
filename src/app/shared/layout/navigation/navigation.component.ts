@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import {
     SidebarService, AuthService, PrintService,
     CampeonatoService, ParametroService, ApostaEsportivaService,
-    MessageService, SupresinhaService
+    MessageService, SupresinhaService, HelperService
 } from './../../../services';
 import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -178,7 +178,6 @@ export class NavigationComponent implements OnInit {
 
         this.campeonatoService.getCampeonatos(queryParams).subscribe(
             campeonatos => {
-                this.campeonatosImpressao = campeonatos;
                 const date = moment().format('YYYYMMDD');
                 const dataTree = [];
 
@@ -189,13 +188,26 @@ export class NavigationComponent implements OnInit {
                     icon: false
                 });
 
-                campeonatos.forEach(campeonato => {
+                this.campeonatosImpressao = campeonatos.map(campeonato => {
                     dataTree.push({
                         id: campeonato._id,
                         parent: date,
                         text: campeonato.nome,
                         icon: false
                     });
+
+                    campeonato.jogos.forEach(jogo => {
+                        jogo.cotacoes.forEach(cotacao => {
+                            cotacao.valor = HelperService.calcularCotacao(
+                                cotacao.valor,
+                                cotacao.chave,
+                                jogo._id,
+                                jogo.cotacoes
+                            );
+                        });
+                    });
+
+                    return campeonato;
                 });
 
                 $('#treeJogos').jstree({
