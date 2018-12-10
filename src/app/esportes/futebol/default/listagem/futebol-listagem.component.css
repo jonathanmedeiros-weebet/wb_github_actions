@@ -77,6 +77,10 @@
         padding-bottom: 90px;
     }
 
+    .mais-opcoes i{
+        min-width: 31px;
+    }
+
     .mais-opcoes span{
         display: none;
     }
