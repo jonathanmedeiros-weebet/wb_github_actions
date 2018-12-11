@@ -201,8 +201,10 @@ button{
 }
 
 .loteria-content .card {
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 210px);
     border-radius: 0;
+    border: none;
+    padding-top: 0;
 }
 
 .loteria-content .pre-bilhete {
