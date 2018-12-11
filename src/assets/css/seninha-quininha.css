@@ -16,7 +16,7 @@
 }
 
 .square-group .active{
-    background-color:#3492ff;
+    background-color:var(--odds);
     color: #fff;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .bet-types .active .circle, .bet-types .active .price {
-    background-color:#3492ff;
+    background-color:var(--odds);
     font-weight: bolder;
     color: #fff;
 }
@@ -211,7 +211,7 @@ button{
 }
 
 .loteria-content .pre-bilhete .form-row.inputs {
-    background-color: #036ef1;
+    background-color: var(--odds);
     padding: 20px 15px 8px 15px;
     border-radius: 0.25rem;
     margin-bottom: 15px;

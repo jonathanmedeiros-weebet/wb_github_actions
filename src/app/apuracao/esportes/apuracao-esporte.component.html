@@ -26,7 +26,7 @@
                                 </select>
                             </div>
                             <div class="col-xs-6 col-lg-3">
-                                <button class="btn btn-primary btn-line" type="submit">Filtrar</button>
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
                             </div>
                         </div>
                     </form>
@@ -70,7 +70,7 @@
                                     <button type="button" class="btn btn-info" (click)="openModal(aposta)">
                                         <i class="fa fa-eye"></i>
                                     </button>
-                                    <button type="button" (click)="printTicket(aposta)" class="btn btn-primary">
+                                    <button type="button" (click)="printTicket(aposta)" class="btn btn-custom">
                                         <i class="fa fa-print"></i>
                                     </button>
                                     <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
@@ -110,6 +110,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="d('')" data-dismiss="modal">Não</button>
-        <button type="button" class="btn btn-primary" (click)="c('')">Sim</button>
+        <button type="button" class="btn btn-custom" (click)="c('')">Sim</button>
     </div>
 </ng-template>

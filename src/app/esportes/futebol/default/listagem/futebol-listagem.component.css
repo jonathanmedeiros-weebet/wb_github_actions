@@ -49,16 +49,20 @@
     border-radius: 4px;
 }
 
-.odds-principais .selecionado, .odds-principais .odd:hover{
+.odds-principais .selecionado{
     background-color: var(--highlight);
 }
 
-.odds-principais .selecionado span, .odds-principais .odd:hover span{
+.odds-principais .selecionado span{
     color: #000;
 }
 
 .odd .nome, .odd .valor{
-    color: #fff;
+    color: var(--foreground-odds);
+}
+
+.mais-opcoes a{
+    color: var(--odds);
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -69,6 +73,14 @@
 
     .mais-opcoes i{
         margin-right: 5px;
+    }
+
+    .odds-principais .odd:hover{
+        background-color: var(--highlight);
+    }
+
+    .odds-principais .odd:hover span{
+        color: #000;
     }
 }
 

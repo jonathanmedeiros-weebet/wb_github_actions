@@ -112,7 +112,7 @@
                 <input type="text" placeholder="Pesquise por time ou campeonato..." class="form-control"
                     formControlName="input">
             </div>
-            <button type="submit" class="btn btn-primary">Pesquisar</button>
+            <button type="submit" class="btn btn-custom">Pesquisar</button>
         </form>
     </div>
 </ng-template>
@@ -129,7 +129,7 @@
             <div class="form-group">
                 <div id="treeJogos"></div>
             </div>
-            <button type="submit" class="btn btn-primary">Imprimir</button>
+            <button type="submit" class="btn btn-custom">Imprimir</button>
         </form>
     </div>
 </ng-template>
@@ -146,7 +146,7 @@
             <div class="form-group">
                 <input type="text" placeholder="Código da aposta" class="form-control" formControlName="input">
             </div>
-            <button type="submit" class="btn btn-primary">Consultar</button>
+            <button type="submit" class="btn btn-custom">Consultar</button>
         </form>
         <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'"></app-consulta-bilhete-esportivo>
         <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'"></app-consulta-bilhete-loteria>

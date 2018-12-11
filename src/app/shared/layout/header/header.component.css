@@ -9,7 +9,7 @@ header{
 
 header a{
     text-decoration: none;
-    color: #b1c5e0;
+    color: var(--foreground-header);
 }
 
 .logo-mobile img{
@@ -52,7 +52,7 @@ header a{
 }
 
 .menu-categories .category a:hover{
-    color: #1c84d5;
+    color: var(--highlight);
 }
 
 .menu-categories .active{
@@ -76,7 +76,7 @@ header a{
     min-width: 200px;
 }
 
-.dropdown-menu a{
+.dropdown-menu .dropdown-item{
     color: #000;
 }
 

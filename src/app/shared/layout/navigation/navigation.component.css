@@ -9,12 +9,20 @@
 }
 
 #sidebar-wrapper a{
-    color: #b1c5e0;
+    color: var(--foreground-sidebar-left);
     text-decoration: none;
 }
 
 #sidebar-wrapper a:hover{
-    color:#1c84d5;
+    color: var(--highlight);
+}
+
+#sidebar-wrapper .dropdown-item{
+    color: inherit;
+}
+
+#sidebar-wrapper .dropdown-item:hover{
+    color: inherit;
 }
 
 .sidebar-menu{
@@ -65,7 +73,7 @@
   margin-bottom: 5px;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #aec3d8;
+  color: var(--foreground-highlight);
   text-transform: uppercase;
 }
 

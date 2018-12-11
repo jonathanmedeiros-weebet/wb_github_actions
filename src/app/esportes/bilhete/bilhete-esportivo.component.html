@@ -24,7 +24,7 @@
             <div class="div-inputs">
                 <div class="form-group">
                     <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')" class="form-control"
-                        placeholder="Apostador">
+                        placeholder="Nome do apostador...">
                     <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
                 </div>
                 <div class="form-group">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success btn-block">Apostar</button>
+                <button class="btn btn-custom btn-block">Apostar</button>
             </div>
         </form>
 
