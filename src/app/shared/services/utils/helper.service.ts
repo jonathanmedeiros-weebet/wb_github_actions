@@ -49,17 +49,19 @@ export class HelperService {
                     const casa = filtrados.find(cotacao => cotacao.chave === 'casa_90');
                     const fora = filtrados.find(cotacao => cotacao.chave === 'fora_90');
 
-                    let favorito;
-                    if (casa.valor <= fora.valor) {
-                        favorito = 'casa';
-                    } else {
-                        favorito = 'fora';
-                    }
+                    if (casa && fora) {
+                        let favorito;
+                        if (casa.valor <= fora.valor) {
+                            favorito = 'casa';
+                        } else {
+                            favorito = 'fora';
+                        }
 
-                    if (/casa/.test(chave)) {
-                        result *= favorito === 'casa' ? opcoes.fator_favorito : opcoes.fator_zebra;
-                    } else {
-                        result *= favorito === 'fora' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                        if (/casa/.test(chave)) {
+                            result *= favorito === 'casa' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                        } else {
+                            result *= favorito === 'fora' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                        }
                     }
                 }
             }
