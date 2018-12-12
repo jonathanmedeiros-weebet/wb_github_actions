@@ -27,30 +27,28 @@
                 <div></div>
                 <div></div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <tbody>
-                        <ng-container *ngFor="let campeonato of campeonatos">
-                            <tr class="campeonato-header">
-                                <td colspan="4">{{campeonato.nome}}</td>
-                            </tr>
-                            <tr *ngFor="let jogo of campeonato.jogos">
-                                <td style="text-align: center;">{{jogo.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                                <td style="text-align: right;">{{jogo.time_a_nome}}</td>
-                                <td style="text-align: center;">
-                                    <span *ngIf="jogo.time_a_resultado != null && jogo.time_b_resultado != null; else semResultado">
-                                        <b>{{jogo.time_a_resultado}} - {{jogo.time_b_resultado}}</b>
-                                    </span>
-                                    <ng-template #semResultado>
-                                        <b>Sem Resultado</b>
-                                    </ng-template>
-                                </td>
-                                <td style="text-align: left;">{{jogo.time_b_nome}}</td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
-            </div>
+            <table class="table table-bordered">
+                <tbody>
+                    <ng-container *ngFor="let campeonato of campeonatos">
+                        <tr class="campeonato-header">
+                            <td colspan="4">{{campeonato.nome}}</td>
+                        </tr>
+                        <tr *ngFor="let jogo of campeonato.jogos">
+                            <td style="text-align: center;">{{jogo.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td style="text-align: right;">{{jogo.time_a_nome}}</td>
+                            <td style="text-align: center;">
+                                <span *ngIf="jogo.time_a_resultado != null && jogo.time_b_resultado != null; else semResultado">
+                                    <b>{{jogo.time_a_resultado}} - {{jogo.time_b_resultado}}</b>
+                                </span>
+                                <ng-template #semResultado>
+                                    <b>Sem Resultado</b>
+                                </ng-template>
+                            </td>
+                            <td style="text-align: left;">{{jogo.time_b_nome}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
