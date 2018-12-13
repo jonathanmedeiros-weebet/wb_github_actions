@@ -21,6 +21,7 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
     apostas: Aposta[];
     sorteios: Sorteio[] = [];
     appMobile;
+    showLoadingIndicator = true;
     unsub$ = new Subject();
 
     constructor(
@@ -89,7 +90,10 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         this.apostaService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                apostas => this.apostas = apostas,
+                apostas => {
+                    this.showLoadingIndicator = !this.showLoadingIndicator;
+                    this.apostas = apostas;
+                },
                 error => this.handleError(error)
             );
     }
@@ -103,6 +107,7 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
     }
 
     submit() {
+        this.showLoadingIndicator = !this.showLoadingIndicator;
         this.getApostas(this.form.value);
         this.getSorteios(this.form.value);
     }

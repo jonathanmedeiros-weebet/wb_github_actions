@@ -43,8 +43,6 @@ const appRoutes: Routes = [
             {
                 path: 'meu-perfil',
                 loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule',
-                canActivate: [AuthGuard],
-                canActivateChild: [ExpiresGuard]
             },
             {
                 path: 'regras',

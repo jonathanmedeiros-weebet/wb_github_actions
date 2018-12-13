@@ -1,4 +1,4 @@
-<section class="content-sports" perfectScroll>
+<section class="content-sports" appPerfectScroll>
     <div class="jogo">
         <div class="indentificacao">
             <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
@@ -14,12 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="lds-ring" *ngIf="showLoadingIndicator">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="tipo-apostas">
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
                 <h4>{{odds[chave].nome}}</h4>

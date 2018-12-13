@@ -1,4 +1,4 @@
-<div id="default-content" perfectScroll>
+<div id="default-content" appPerfectScroll>
     <div class="content-header">
         <h2>Resultados Futebol</h2>
         <div class="filters">
@@ -21,13 +21,8 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div class="lds-ring" *ngIf="showLoadingIndicator">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <table class="table table-bordered">
+            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+            <table *ngIf="!showLoadingIndicator" class="table table-bordered">
                 <tbody>
                     <ng-container *ngFor="let campeonato of campeonatos">
                         <tr class="campeonato-header">

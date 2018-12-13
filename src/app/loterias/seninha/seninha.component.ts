@@ -28,6 +28,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
     appMobile;
+    disabled = false;
     unsub$ = new Subject();
 
     constructor(
@@ -129,6 +130,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Finalizar aposta */
     create(action) {
+        this.disabledSubmit();
+
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
                 this.apostaService.create(this.aposta)
@@ -142,6 +145,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         preAposta => {
+                            this.enableSubmit();
                             this.aposta = new Aposta();
                             const msg = `
                             Procure o cambista da ${this.BANCA_NOME} de sua preferência e informe o código:
@@ -153,11 +157,14 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
                     );
             }
         } else {
+            this.enableSubmit();
             this.messageService.warning('Por favor, inclua um palpite.');
         }
     }
 
     success(data, action) {
+        this.enableSubmit();
+
         if (action === 'compartilhar') {
             HelperService.sharedLotteryTicket(data);
         } else {
@@ -170,6 +177,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     handleError(msg) {
+        this.enableSubmit();
         this.messageService.error(msg);
     }
 
@@ -222,5 +230,13 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     closeCupom() {
         this.displayPreTicker = false;
+    }
+
+    disabledSubmit() {
+        this.disabled = true;
+    }
+
+    enableSubmit() {
+        this.disabled = false;
     }
 }

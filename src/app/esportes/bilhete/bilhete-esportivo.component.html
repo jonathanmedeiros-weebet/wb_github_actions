@@ -1,4 +1,4 @@
-<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" perfectScroll>
+<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}" appPerfectScroll>
     <div class="pre-bilhete-esportes">
         <h4>BILHETE</h4>
         <a (click)="closeCupom()" class="fechar-pre-bilhete">
@@ -34,7 +34,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-custom btn-block">Apostar</button>
+                <button [disabled]="disabled" class="btn btn-custom btn-block" (click)="setAction('imprimir')">Apostar e Imprimir</button>
+                <button [disabled]="disabled" *ngIf="appMobile" class="btn btn-custom btn-block" (click)="setAction('compartilhar')">Apostar e Compartilhar</button>
             </div>
         </form>
 

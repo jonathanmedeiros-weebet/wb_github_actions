@@ -28,6 +28,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
     appMobile;
+    disabled = false;
     unsub$ = new Subject();
 
     constructor(
@@ -130,6 +131,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     /* Finalizar aposta */
     create(action) {
+        this.disabledSubmit();
+
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
                 this.apostaService.create(this.aposta)
@@ -143,6 +146,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         preAposta => {
+                            this.enableSubmit();
                             this.aposta = new Aposta();
                             const msg = `
                             Procure o cambista da ${this.BANCA_NOME} de sua preferência e informe o código:
@@ -154,15 +158,18 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
                     );
             }
         } else {
+            this.enableSubmit();
             this.messageService.warning('Por favor, inclua um palpite.');
         }
     }
 
     success(data, action) {
+        this.enableSubmit();
+
         if (action === 'compartilhar') {
-            HelperService.sharedLotteryTicket(data.results);
+            HelperService.sharedLotteryTicket(data);
         } else {
-            this.printService.lotteryTicket(data.results);
+            this.printService.lotteryTicket(data);
         }
 
         this.aposta = new Aposta();
@@ -171,6 +178,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     handleError(msg) {
+        this.enableSubmit();
         this.messageService.error(msg);
     }
 
@@ -224,5 +232,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     closeCupom() {
         this.displayPreTicker = false;
+    }
+
+    disabledSubmit() {
+        this.disabled = true;
+    }
+
+    enableSubmit() {
+        this.disabled = false;
     }
 }

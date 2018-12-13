@@ -66,7 +66,7 @@
                 </li> -->
             </ul>
         </div>
-        <ul id="menu-side-left" class="sidebar-nav" perfectScroll *ngIf="contexto == 'esportes'; else loterias">
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'esportes'; else loterias">
             <span class="group">Data</span>
             <li>
                 <a [routerLink]="['/esportes/futebol/jogos']">
@@ -86,7 +86,7 @@
             </li>
         </ul>
         <ng-template #loterias>
-            <ul id="menu-side-left" class="sidebar-nav" perfectScroll>
+            <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll>
                 <span class="group">Surpresinha</span>
                 <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
                     <a>

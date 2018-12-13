@@ -25,6 +25,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     apostaSelecionada: ApostaEsportiva;
     appMobile;
     closeResult: string;
+    showLoadingIndicator = true;
     unsub$ = new Subject();
 
     constructor(
@@ -68,7 +69,10 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         this.apostaService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                apostas => this.apostas = apostas,
+                apostas => {
+                    this.apostas = apostas;
+                    this.showLoadingIndicator = false;
+                },
                 error => this.handleError(error)
             );
     }
@@ -82,6 +86,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     submit() {
+        this.showLoadingIndicator = !this.showLoadingIndicator;
         this.getApostas(this.form.value);
     }
 

@@ -1,4 +1,4 @@
-<div id="default-content" perfectScroll>
+<div id="default-content" appPerfectScroll>
     <div class="content-header">
         <h2>Apuração Futebol</h2>
         <div class="filters">
@@ -36,8 +36,9 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div perfectScroll>
-                <table class="table table-bordered">
+            <div appPerfectScroll>
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                <table *ngIf="!showLoadingIndicator" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Número</th>

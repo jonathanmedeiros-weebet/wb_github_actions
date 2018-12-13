@@ -2,7 +2,7 @@
 
     <div class="content-body">
         <div class="content">
-            <div class="col nopadding content-loteria" perfectScroll>
+            <div class="col nopadding content-loteria" appPerfectScroll>
                 <div class="wrap-sticky">
                     <div class="content-header">
                         Quininha
@@ -49,7 +49,7 @@
                 </div>
                 <app-footer></app-footer>
             </div>
-            <div class="pre-bilhete" perfectScroll [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
+            <div class="pre-bilhete" appPerfectScroll [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
                 <div>
                     <h4>PRÉ-BILHETE</h4>
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
@@ -103,13 +103,13 @@
                         </div>
                         <div class="form-row botoes">
                             <div class="col">
-                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-custom col-12"
+                                <button type="button" [disabled]="!apostaForm.form.valid || disabled" class="btn btn-custom col-12"
                                     (click)="create('imprimir')">
                                     Finalizar e Imprimir
                                 </button>
                             </div>
                             <div class="col" *ngIf="appMobile">
-                                <button type="button" [disabled]="!apostaForm.form.valid" class="btn btn-custom col-12"
+                                <button type="button" [disabled]="!apostaForm.form.valid || disabled" class="btn btn-custom col-12"
                                     (click)="create('compartilhar')">
                                     Finalizar e Compartilhar
                                 </button>

@@ -22,6 +22,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     opcoes = JSON.parse(localStorage.getItem('opcoes'));
     apostaMinima;
     displayPreTicker = false;
+    action = 'imprimir';
+    appMobile;
+    disabled = false;
     unsub$ = new Subject();
 
     constructor(
@@ -39,6 +42,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        this.appMobile = this.auth.isAppMobile();
         this.apostaMinima = this.opcoes.valor_min_aposta;
 
         this.createForm();
@@ -122,7 +126,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
     }
 
+    setAction(action) {
+        this.action = action;
+    }
+
     submit() {
+        this.disabledSubmit();
+
         if (this.itens.length) {
             const values = clone(this.form.value);
             values.itens.map(item => {
@@ -133,7 +143,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.apostaEsportivaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        result => this.apostaSuccess(result, 'imprimir'),
+                        result => this.apostaSuccess(result),
                         error => this.handleError(error)
                     );
             } else {
@@ -145,12 +155,15 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     );
             }
         } else {
-            this.messageService.warning('Por favor, inclua um palpite.');
+            this.enableSubmit();
+            this.messageService.warning('Por favor, inclua um jogo.');
         }
     }
 
-    apostaSuccess(data, action) {
-        if (action === 'compartilhar') {
+    apostaSuccess(data) {
+        this.enableSubmit();
+
+        if (this.action === 'compartilhar') {
             HelperService.sharedSportsTicket(data);
         } else {
             this.printService.sportsTicket(data);
@@ -169,6 +182,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     handleError(msg) {
+        this.enableSubmit();
         this.messageService.error(msg);
     }
 
@@ -178,5 +192,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     closeCupom() {
         this.displayPreTicker = false;
+    }
+
+    disabledSubmit() {
+        this.disabled = true;
+    }
+
+    enableSubmit() {
+        this.disabled = false;
     }
 }

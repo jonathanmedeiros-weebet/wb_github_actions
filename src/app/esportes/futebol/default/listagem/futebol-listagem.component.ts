@@ -30,9 +30,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
+                this.showLoadingIndicator = true;
+
                 if (params['campeonato']) {
                     const campeonatoId = +params['campeonato'];
                     const queryParams: any = {
