@@ -67,7 +67,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
-                    // this.showLoadingIndicator = false;
+                    this.showLoadingIndicator = false;
                     this.campeonatos = campeonatos;
                 },
                 error => this.handleError(error)
