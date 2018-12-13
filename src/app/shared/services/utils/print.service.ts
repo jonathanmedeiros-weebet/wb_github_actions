@@ -697,7 +697,32 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
         popupWin.document.close();
     }
 
-    sportsTicketAppMobile(aposta) { }
+    sportsTicketAppMobile(aposta) {
+        let ticket = `${config.BANCA_NOME}
+#${aposta.id}
+Data: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+Cambista: ${aposta.cambista.nome}
+Apostador: ${aposta.apostador}
+Valor Aposta: ${HelperService.moneyFormat(aposta.valor)}
+Estimativa Ganho: ${HelperService.moneyFormat(aposta.premio)}`;
+
+        aposta.itens.forEach(item => {
+            ticket += `
+-------------------------------
+${item.campeonato.nome}
+${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
+${item.jogo.nome}
+${item.aposta_tipo.nome} ( ${item.cotacao} )`;
+        });
+
+        ticket += `
+-------------------------------
+
+${this.opcoes.informativo_rodape}
+        `;
+
+        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+    }
 
     listPrinters() {
         const message = {

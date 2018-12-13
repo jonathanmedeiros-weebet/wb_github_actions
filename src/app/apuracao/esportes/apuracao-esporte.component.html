@@ -36,50 +36,52 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Número</th>
-                        <th>Horário</th>
-                        <th>Apostador</th>
-                        <th>Jogos</th>
-                        <th>Valor</th>
-                        <th>Comissão</th>
-                        <th>Prêmio</th>
-                        <th>Resultado</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let aposta of apostas" [ngClass]="setStatus(aposta.resultado)">
-                        <td>#{{aposta.id}}</td>
-                        <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                        <td>{{aposta.apostador}}</td>
-                        <td>{{aposta.itens.length}}</td>
-                        <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
-                        <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
-                        <td>{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
-                        <td>{{aposta.resultado}}</td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" *ngIf="checkCancellation(aposta.itens)" class="btn btn-danger"
-                                    (click)="cancel(aposta)">
-                                    <i class="fa fa-trash-o"></i>
-                                </button>
-                                <button type="button" class="btn btn-info" (click)="openModal(aposta)">
-                                    <i class="fa fa-eye"></i>
-                                </button>
-                                <button type="button" (click)="printTicket(aposta)" class="btn btn-custom">
-                                    <i class="fa fa-print"></i>
-                                </button>
-                                <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
-                                    <i class="fa fa-share-alt"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div perfectScroll>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Horário</th>
+                            <th>Apostador</th>
+                            <th>Jogos</th>
+                            <th>Valor</th>
+                            <th>Comissão</th>
+                            <th>Prêmio</th>
+                            <th>Resultado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aposta of apostas" [ngClass]="setStatus(aposta.resultado)">
+                            <td>#{{aposta.id}}</td>
+                            <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{aposta.apostador}}</td>
+                            <td>{{aposta.itens.length}}</td>
+                            <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.resultado}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" *ngIf="checkCancellation(aposta.itens)" class="btn btn-danger"
+                                        (click)="cancel(aposta)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-info" (click)="openModal(aposta)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button type="button" (click)="printTicket(aposta)" class="btn btn-custom">
+                                        <i class="fa fa-print"></i>
+                                    </button>
+                                    <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
+                                        <i class="fa fa-share-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
