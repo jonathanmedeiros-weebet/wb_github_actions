@@ -64,6 +64,12 @@
     padding-top: 6px;
 }
 
+.itens{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .circle{
     height: 25px;
     width: 25px;

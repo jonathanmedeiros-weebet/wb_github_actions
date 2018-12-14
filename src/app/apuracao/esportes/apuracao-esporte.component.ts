@@ -26,6 +26,12 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     appMobile;
     closeResult: string;
     showLoadingIndicator = true;
+    totais = {
+        'valor': 0,
+        'comissao': 0,
+        'premio': 0,
+        'resultado': 0
+    };
     unsub$ = new Subject();
 
     constructor(
@@ -51,6 +57,11 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     getApostas(params?) {
+        this.totais.comissao = 0;
+        this.totais.premio = 0;
+        this.totais.resultado = 0;
+        this.totais.valor = 0;
+
         let queryParams: any = {
             'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
             'data-final': moment().format('YYYY-MM-DD 23:59:59'),
@@ -71,6 +82,12 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
             .subscribe(
                 apostas => {
                     this.apostas = apostas;
+                    apostas.forEach(aposta => {
+                        this.totais.valor += aposta.valor;
+                        this.totais.comissao += aposta.comissao;
+                        this.totais.premio += aposta.premio;
+                    });
+                    this.totais.resultado = this.totais.valor - this.totais.comissao;
                     this.showLoadingIndicator = false;
                 },
                 error => this.handleError(error)
