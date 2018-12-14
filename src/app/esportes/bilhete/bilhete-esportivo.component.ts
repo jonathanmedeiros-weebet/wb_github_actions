@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -10,6 +10,8 @@ import {
     PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { config } from '../../shared/config';
 import * as clone from 'clone';
 
 @Component({
@@ -18,13 +20,17 @@ import * as clone from 'clone';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('modal') modal: ElementRef;
+    modalReference;
+    ultimaApostaRealizada;
     possibilidadeGanho = 0;
     opcoes = JSON.parse(localStorage.getItem('opcoes'));
     apostaMinima;
     displayPreTicker = false;
-    action = 'imprimir';
     appMobile;
     disabled = false;
+    isLoggedIn = false;
+    mensagemSucesso = '';
     unsub$ = new Subject();
 
     constructor(
@@ -36,16 +42,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private printService: PrintService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private modalService: NgbModal
     ) {
         super();
     }
 
     ngOnInit() {
-        this.appMobile = this.auth.isAppMobile();
-        this.apostaMinima = this.opcoes.valor_min_aposta;
-
         this.createForm();
+
+        this.appMobile = this.auth.isAppMobile();
+        this.isLoggedIn = this.auth.isLoggedIn();
+        this.apostaMinima = this.opcoes.valor_min_aposta;
 
         const itens = this.bilheteService.getItens();
         if (itens) {
@@ -126,10 +134,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
     }
 
-    setAction(action) {
-        this.action = action;
-    }
-
     submit() {
         this.disabledSubmit();
 
@@ -139,7 +143,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 delete item.jogo;
             });
 
-            if (this.auth.isLoggedIn()) {
+            if (this.isLoggedIn) {
                 this.apostaEsportivaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
@@ -160,25 +164,47 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
     }
 
-    apostaSuccess(data) {
+    apostaSuccess(aposta) {
+        this.ultimaApostaRealizada = aposta;
+        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
         this.enableSubmit();
-
-        if (this.action === 'compartilhar') {
-            HelperService.sharedSportsTicket(data);
-        } else {
-            this.printService.sportsTicket(data);
-        }
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
 
-        this.messageService.success('Aposta realizada!');
+        this.modalReference = this.modalService.open(this.modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+
+        this.modalReference.result
+            .then((result) => { },
+                (reason) => { });
     }
 
     preApostaSuccess(id) {
+        this.enableSubmit();
         this.bilheteService.atualizarItens([]);
         this.form.reset();
-        alert(`Procure o cambista da ZEBRINHA.BET de sua preferência e informe o código: #${id}`);
+        this.mensagemSucesso = `Para validar sua aposta, procure um cambista de sua
+         preferência e informe o código: <b>#${id}</b>`;
+
+        this.modalReference = this.modalService.open(this.modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+
+        this.modalReference.result
+            .then((result) => { },
+                (reason) => { });
+    }
+
+    printTicket() {
+        this.printService.sportsTicket(this.ultimaApostaRealizada);
+    }
+
+    shareTicket() {
+        HelperService.sharedSportsTicket(this.ultimaApostaRealizada);
     }
 
     handleError(msg) {
