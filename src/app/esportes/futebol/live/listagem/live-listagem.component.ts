@@ -12,6 +12,7 @@ import { Jogo } from '../../../../models';
 })
 export class LiveListagemComponent implements OnInit, OnDestroy {
     jogos = {};
+    campeonatos = new Map();
     unsub$ = new Subject();
 
     constructor(
@@ -26,9 +27,17 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
         this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                jogos => {
-                    jogos.forEach(jogo => {
-                        this.jogos[jogo._id] = jogo;
+                campeonatos => {
+                    campeonatos.forEach(campeonato => {
+                        const jogos = new Map();
+
+                        campeonato.jogos.forEach(jogo => {
+                            jogos.set(jogo._id, jogo);
+                        });
+
+                        campeonato.jogos = jogos;
+
+                        this.campeonatos.set(campeonato._id, campeonato);
                     });
 
                     this.live();
@@ -52,16 +61,33 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
         this.liveService.getJogos()
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: Jogo) => {
+                let campeonato = this.campeonatos.get(jogo.campeonato._id);
+
+                if (!campeonato) {
+                    campeonato = {
+                        _id: jogo.campeonato._id,
+                        nome: jogo.campeonato.nome,
+                        jogos: new Map()
+                    };
+                    this.campeonatos.set(jogo.campeonato._id, campeonato);
+                }
+
                 if (!jogo.finalizado) {
-                    this.jogos[jogo._id] = jogo;
+                    campeonato.jogos.set(jogo._id, jogo);
                 } else {
-                    delete this.jogos[jogo._id];
+                    campeonato.jogos.delete(jogo._id);
+
+                    if (!campeonato.jogos.size) {
+                        this.campeonatos.delete(campeonato._id);
+                    }
                 }
             });
     }
 
-    keys() {
-        return Object.keys(this.jogos);
+    reOrder(a, b) {
+        if (a.value.nome > b.value.nome) {
+            return b.key;
+        }
     }
 
     handleError(msg) {

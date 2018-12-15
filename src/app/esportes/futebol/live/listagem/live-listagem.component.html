@@ -1,31 +1,33 @@
 <section class="content-sports" appPerfectScroll>
     <div class="wrap-sticky">
-        <div class="sem-jogos" *ngIf="!keys().length">
+        <div class="sem-jogos" *ngIf="!campeonatos.size">
             <div class="alert alert-primary" role="alert">
                 Nenhum evento ao vivo disponível no momento!
             </div>
         </div>
-        <div class="campeonato" *ngFor="let key of keys()">
+        <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder">
             <div class="campeonato-header">
-                {{jogos[key].campeonato?.nome}}
+                {{campeonato.value.nome}}
             </div>
             <div class="jogos">
-                <div class="jogo">
+                <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue">
                     <div class="indentificacao">
                         <div class="aovivo-label">
-                           Vivo
+                            Vivo
                         </div>
                         <div class="tempo">
-                            {{jogos[key].info.minutos}}' {{jogos[key].info.tempo}}T
+                            {{jogo.value.info.minutos}}' {{jogo.value.info.tempo}}T
                         </div>
                         <div class="nome">
-                            <b>{{jogos[key].time_a_nome}}</b>
-                            {{jogos[key].info.time_a_resultado}}-{{jogos[key].info.time_b_resultado}}
-                            <b>{{jogos[key].time_b_nome}}</b>
+                            <b>{{jogo.value.time_a_nome}}</b>
+                            {{jogo.value.info.time_a_resultado}}-{{jogo.value.info.time_b_resultado}}
+                            <b>{{jogo.value.time_b_nome}}</b>
                         </div>
                         <div class="mais-opcoes">
-                            <a routerLink="/esportes/futebol/live/jogos/{{jogos[key]._id}}">
-                                <i class="fa fa-plus"></i>
+                            <a routerLink="/esportes/futebol/live/jogos/{{jogo.value._id}}">
+                                <i class="fa fa-plus">
+                                    {{jogo.value.total_cotacoes}}
+                                </i>
                                 <span>Cotações</span>
                             </a>
                         </div>
