@@ -14,7 +14,9 @@
             <p class="jogo-nome">
                 {{item.jogo.nome}}
             </p>
-            <p class="jogo-cotacao">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )</p>
+            <p class="jogo-cotacao">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )
+                <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+            </p>
         </ng-container>
         ----------------------------<br>
         <p class="informacoes-gerais">CAMBISTA: {{aposta.cambista.nome}}</p>

@@ -632,13 +632,17 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                         ${item.campeonato.nome}
                     </p>
                     <p class="horario">
-                        ${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
+                        ${HelperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY [ÀS] HH:mm')}
                     </p>
                     <p class="jogo">
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.aposta_tipo.nome} ( ${item.cotacao} )
+                        ${item.aposta_tipo.nome} ( ${item.cotacao} )`;
+            if (item.ao_vivo) {
+                printContents += ` | AO VIVO`;
+            }
+            printContents += `
                     </p>
                 </div>
             `;
@@ -713,6 +717,9 @@ ${item.campeonato.nome}
 ${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
 ${item.jogo.nome}
 ${item.aposta_tipo.nome} ( ${item.cotacao} )`;
+            if (item.ao_vivo) {
+                ticket += ` | AO VIVO`;
+            }
         });
 
         ticket += `
