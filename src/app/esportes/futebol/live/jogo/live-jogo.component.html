@@ -1,22 +1,49 @@
 <section class="content-sports" appPerfectScroll>
     <div class="jogo">
         <div class="indentificacao">
-            <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
-                <i class="fa fa-arrow-left"></i> Voltar
-            </button>
+            <div class="div-btn-back">
+                <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
+                    <i class="fa fa-arrow-left"></i> Voltar
+                </button>
+            </div>
             <div class="nome">
-                <div class="nome-placar">
-                    <div class="nome time-a-nome">{{jogo.time_a_nome}}</div>
-                    <div class="placar placar-time-a">{{jogo.info?.time_a_resultado}}</div>
-                    <div class="placar placar-time-b">{{jogo.info?.time_b_resultado}}</div>
-                    <div class="nome time-b-nome">{{jogo.time_b_nome}}</div>
+                <div class="time-a">
+                    <div class="time-a-nome">{{jogo.time_a_nome}}</div>
+                    <div class="placar time-a-placar">{{jogo.info?.time_a_resultado}}</div>
+                </div>
+                <div class="time-b">
+                    <div class="placar time-b-placar">{{jogo.info?.time_b_resultado}}</div>
+                    <div class="time-b-nome">{{jogo.time_b_nome}}</div>
                 </div>
             </div>
             <div class="aovivo-tempo">
-                <div class="aovivo-label">Ao Vivo</div>
                 <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
+                <div class="aovivo-label">Ao Vivo</div>
             </div>
         </div>
+
+        <div class="indentificacao-mobile">
+            <div class="first-line">
+                <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
+                    <i class="fa fa-arrow-left"></i> Voltar
+                </button>
+                <div class="aovivo-tempo">
+                    <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
+                    <div class="aovivo-label">Ao Vivo</div>
+                </div>
+            </div>
+            <div class="nome">
+                <div class="time-a">
+                    <div class="time-a-nome">{{jogo.time_a_nome}}</div>
+                    <div class="placar time-a-placar">{{jogo.info?.time_a_resultado}}</div>
+                </div>
+                <div class="time-b">
+                    <div class="placar time-b-placar">{{jogo.info?.time_b_resultado}}</div>
+                    <div class="time-b-nome">{{jogo.time_b_nome}}</div>
+                </div>
+            </div>
+        </div>
+
         <div class="campeonato-nome">
             <small>{{jogo.campeonato?.nome}}</small>
         </div>
