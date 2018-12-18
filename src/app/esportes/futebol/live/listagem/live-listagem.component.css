@@ -41,30 +41,6 @@
     margin-right: 5px;
 }
 
-.odds-principais{
-    display: flex;
-}
-
-.odds-principais .odd{
-    background-color: var(--odds);
-    margin-right: 3px;
-    flex: 1 1 0px;
-    padding: 5px 8px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    margin-bottom: 5px;
-    border-radius: 4px;
-}
-
-.odds-principais .odd:hover{
-    background-color: #094ea2;
-}
-
-.odd .nome, .odd .valor{
-    color: #fff;
-}
-
 .indentificacao .aovivo-label{
     background-color: red;
     border-radius: 5px;

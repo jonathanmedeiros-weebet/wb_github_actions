@@ -54,7 +54,7 @@
 }
 
 .odds-principais .selecionado span{
-    color: #000;
+    color: var(--foreground-highlight);
 }
 
 .odd .nome, .odd .valor{

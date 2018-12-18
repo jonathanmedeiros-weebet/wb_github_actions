@@ -128,11 +128,11 @@
 }
 
 .odds .selecionado span, .odds .odd:hover span{
-    color: #000;
+    color: var(--foreground-highlight);
 }
 
 .odd .nome, .odd .valor{
-    color: #fff;
+    color: var(--foreground-odds);
 }
 
 /* Large devices (desktops, 992px and up) */
