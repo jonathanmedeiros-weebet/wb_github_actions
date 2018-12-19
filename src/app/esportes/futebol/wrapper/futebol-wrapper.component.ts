@@ -31,6 +31,7 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
         const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
         const params = {
             fields: ['_id', 'nome'],
+            'sport_id': 1,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'odds': ['casa_90', 'fora_90']
         };
@@ -38,7 +39,7 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
         this.campeonatoService.getCampeonatos(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(campeonatos, 'esportes'),
+                campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
                 error => this.messageService.error(error)
             );
     }

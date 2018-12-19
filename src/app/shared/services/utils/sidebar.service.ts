@@ -10,7 +10,7 @@ export class SidebarService {
     private isOpenSource;
     isOpen;
     private itensSource = new BehaviorSubject<any>({
-        contexto: 'esportes',
+        contexto: 'futebol',
         itens: []
     });
     itens = this.itensSource.asObservable();

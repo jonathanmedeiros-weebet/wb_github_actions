@@ -54,6 +54,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 } else {
                     const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
                     const queryParams: any = {
+                        'sport_id': 1,
                         'campeonatos_bloqueados': campeonatosBloqueados,
                         'odds': ['casa_90', 'empate_90', 'fora_90']
                     };

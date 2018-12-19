@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -13,6 +13,7 @@ import {
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { config } from './../../shared/config';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 
 @Component({
@@ -27,8 +28,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     aposta = new Aposta();
     displayPreTicker = false;
     BANCA_NOME = config.BANCA_NOME;
-    appMobile;
     disabled = false;
+    appMobile = false;
+    isLoggedIn = false;
+    mensagemSucesso = '';
+    ultimaApostaRealizada;
+    @ViewChild('modal') modal: ElementRef;
+    modalReference;
     unsub$ = new Subject();
 
     constructor(
@@ -43,18 +49,22 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private fb: FormBuilder,
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
-        private el: ElementRef
+        private el: ElementRef,
+        private modalService: NgbModal
     ) {
         super();
     }
 
     ngOnInit() {
+        this.appMobile = this.auth.isAppMobile();
+        this.isLoggedIn = this.auth.isLoggedIn();
+
         const queryParams = { tipo: 'quininha' };
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
-                this.sidebarService.changeItens(tiposAposta, 'loterias');
+                this.sidebarService.changeItens(tiposAposta, 'seninha');
             },
             error => this.messageService.error(error)
         );
@@ -130,7 +140,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     /* Finalizar aposta */
-    create(action) {
+    create() {
         this.disabledSubmit();
 
         if (this.aposta.itens.length) {
@@ -138,22 +148,14 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
                 this.apostaService.create(this.aposta)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        aposta => this.success(aposta, action),
+                        aposta => this.apostaSuccess(aposta),
                         error => this.handleError(error)
                     );
             } else {
                 this.preApostaService.create(this.aposta)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        preAposta => {
-                            this.enableSubmit();
-                            this.aposta = new Aposta();
-                            const msg = `
-                            Procure o cambista da ${this.BANCA_NOME} de sua preferência e informe o código:
-                            #${preAposta.id}
-                            `;
-                            alert(msg);
-                        },
+                        preAposta => this.preApostaSucess(preAposta.id),
                         error => this.handleError(error)
                     );
             }
@@ -163,18 +165,38 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         }
     }
 
-    success(data, action) {
-        this.enableSubmit();
-
-        if (action === 'compartilhar') {
-            HelperService.sharedLotteryTicket(data);
-        } else {
-            this.printService.lotteryTicket(data);
-        }
-
+    apostaSuccess(aposta) {
+        this.ultimaApostaRealizada = aposta;
+        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
         this.aposta = new Aposta();
-        this.messageService.success('Aposta realizada!');
+        this.enableSubmit();
         this.closeCupom();
+
+        this.modalReference = this.modalService.open(this.modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+
+        this.modalReference.result
+            .then((result) => { },
+                (reason) => { });
+    }
+
+    preApostaSucess(id) {
+        this.mensagemSucesso = `Para validar sua aposta, procure um cambista de sua
+        preferência e informe o código: <b>#${id}</b>`;
+        this.aposta = new Aposta();
+        this.enableSubmit();
+        this.closeCupom();
+
+        this.modalReference = this.modalService.open(this.modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+
+        this.modalReference.result
+            .then((result) => { },
+                (reason) => { });
     }
 
     handleError(msg) {
@@ -216,7 +238,6 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         });
     }
 
-
     /* Verificar se o número está selecionado */
     isChecked(number) {
         return this.numeros.value.find(n => number === n);
@@ -240,5 +261,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    printTicket() {
+        this.printService.lotteryTicket(this.ultimaApostaRealizada);
+    }
+
+    shareTicket() {
+        HelperService.sharedLotteryTicket(this.ultimaApostaRealizada);
     }
 }

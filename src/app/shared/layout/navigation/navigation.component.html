@@ -66,7 +66,7 @@
                 </li> -->
             </ul>
         </div>
-        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'esportes'; else loterias">
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">
             <span class="group">Data</span>
             <li>
                 <a [routerLink]="['/esportes/futebol/jogos']">
@@ -85,17 +85,38 @@
                 </a>
             </li>
         </ul>
-        <ng-template #loterias>
-            <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll>
-                <span class="group">Surpresinha</span>
-                <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
-                    <a>
-                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                        ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
-                    </a>
-                </li>
-            </ul>
-        </ng-template>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'basquete'">
+            <span class="group">Data</span>
+            <li>
+                <a [routerLink]="['/esportes/basquete/jogos']">
+                    Jogos de Hoje
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/esportes/basquete/jogos']" [queryParams]="{ data: amanha }">
+                    Jogos de Amanhã
+                </a>
+            </li>
+            <span class="group">Campeonatos</span>
+            <li *ngFor="let campeonato of itens">
+                <a [routerLink]="['/esportes/basquete/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                </a>
+            </li>
+        </ul>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'seninha' || contexto == 'quininha'">
+            <span class="group">Surpresinha</span>
+            <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
+                <a *ngIf="contexto == 'seninha'">
+                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                    ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
+                </a>
+                <a *ngIf="contexto == 'quininha'">
+                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                    ( {{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}} )
+                </a>
+            </li>
+        </ul>
     </div>
 </aside>
 
