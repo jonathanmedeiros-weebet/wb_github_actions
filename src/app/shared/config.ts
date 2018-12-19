@@ -5,6 +5,7 @@ const _center = 'http://api-center.wee.bet';
 // const _center = 'http://localhost:3002';
 
 export const config: any = {
+    BANCA_NOME: 'DEMO',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
@@ -12,6 +13,5 @@ export const config: any = {
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
-    BG: `${_host}/tema/bk.jpg`,
-    BANCA_NOME: 'Demo'
+    BG: `${_host}/tema/bk.jpg`
 };
