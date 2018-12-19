@@ -139,7 +139,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     /* Finalizar aposta */
-    create(action) {
+    create() {
         this.disabledSubmit();
 
         if (this.aposta.itens.length) {
