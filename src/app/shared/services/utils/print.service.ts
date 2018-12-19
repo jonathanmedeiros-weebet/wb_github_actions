@@ -159,7 +159,7 @@ export class PrintService {
     }
 
     gamesAppMobile(dias) {
-        const cols = 6;
+        const cols = 5;
         const odds = this.parametroService.getOddsImpressao();
         const linhas = Math.ceil(odds.length / cols);
 
@@ -193,11 +193,10 @@ ${horario} ${jogo.nome}
                         const oddPos3 = odds[++start];
                         const oddPos4 = odds[++start];
                         const oddPos5 = odds[++start];
-                        const oddPos6 = odds[++start];
 
-                        text += `${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)} ${this.getSigla(oddPos6)}
+                        text += `${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)}
 `;
-                        text += `${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)} ${this.getValor(oddPos6, jogo.cotacoes)}
+                        text += `${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)}
 `;
                     }
                 });
@@ -213,11 +212,11 @@ ${horario} ${jogo.nome}
         if (cotacao) {
             let result = cotacao.valor.toFixed(2);
             if (cotacao.valor < 10) {
-                result = `0${result}`;
+                result = `${result} `;
             }
             return result;
         }
-        return '-----';
+        return '     ';
     }
 
     getSigla(chave) {
