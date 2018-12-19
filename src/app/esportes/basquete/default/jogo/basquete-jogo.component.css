@@ -1,0 +1,69 @@
+.indentificacao{
+    padding: 15px 10px;
+    position: relative;
+}
+
+.indentificacao .nome, h4{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.btn-back{
+    margin-bottom: 15px;
+}
+
+.tipo-apostas{
+    background-color: #fff;
+}
+
+.tipo-aposta{
+    padding: 15px 10px;
+    border-top: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+.odds{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.odds .odd{
+    background-color: var(--odds);
+    margin-right: 3px;
+    flex: 1 1 0px;
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.odds .selecionado, .odds .odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span, .odds .odd:hover span{
+    color: var(--foreground-highlight);
+}
+
+.odd .nome, .odd .valor{
+    color: var(--foreground-odds);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .btn-back{
+        position: absolute;
+        left: 15px;
+        top: 28px;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .content-sports {
+        padding-bottom: 90px;
+    }
+}

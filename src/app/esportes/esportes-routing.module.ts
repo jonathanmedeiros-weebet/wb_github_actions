@@ -5,6 +5,10 @@ export const routes: Routes = [
     {
         path: 'futebol',
         loadChildren: 'app/esportes/futebol/futebol.module#FutebolModule'
+    },
+    {
+        path: 'basquete',
+        loadChildren: 'app/esportes/basquete/basquete.module#BasqueteModule'
     }
 ];
 
