@@ -85,9 +85,11 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     apostas.forEach(aposta => {
                         this.totais.valor += aposta.valor;
                         this.totais.comissao += aposta.comissao;
-                        this.totais.premio += aposta.premio;
+                        if (aposta.status === 'ganhou') {
+                            this.totais.premio += aposta.premio;
+                        }
                     });
-                    this.totais.resultado = this.totais.valor - this.totais.comissao;
+                    this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
                     this.showLoadingIndicator = false;
                 },
                 error => this.handleError(error)
