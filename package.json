@@ -33,6 +33,7 @@
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.13",
+    "ngx-spinner": "^6.1.2",
     "perfect-scrollbar": "^1.4.0",
     "popper.js": "^1.12.9",
     "rxjs": "^6.2.2",

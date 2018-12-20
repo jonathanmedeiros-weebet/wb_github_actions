@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 // Core providers
 import { LayoutModule } from './shared/layout/layout.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         HttpClientModule,
         AppRoutingModule,
 
+        NgxSpinnerModule,
         NgbModule.forRoot(),
         LayoutModule
     ],

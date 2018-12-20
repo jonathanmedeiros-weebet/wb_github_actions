@@ -13,16 +13,16 @@ const appRoutes: Routes = [
         data: {
             pageTitle: 'Dashboard'
         },
-        resolve: [ParametrosResolver],
         children: [
-            {
-                path: '',
-                redirectTo: 'esportes/futebol/jogos',
-                pathMatch: 'full'
-            },
+            // {
+            //     path: '',
+            //     redirectTo: 'esportes/futebol/jogos',
+            //     pathMatch: 'full'
+            // },
             {
                 path: 'apuracao',
-                loadChildren: 'app/apuracao/apuracao.module#ApuracaoModule'
+                loadChildren: 'app/apuracao/apuracao.module#ApuracaoModule',
+                canActivate: [AuthGuard]
             },
             {
                 path: 'home',
@@ -38,22 +38,23 @@ const appRoutes: Routes = [
             },
             {
                 path: 'resultados',
-                loadChildren: 'app/resultados/resultados.module#ResultadosModule'
+                loadChildren: 'app/resultados/resultados.module#ResultadosModule',
+                canActivate: [AuthGuard]
             },
             {
                 path: 'meu-perfil',
                 loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule',
+                canActivate: [AuthGuard]
             },
             {
                 path: 'regras',
                 loadChildren: 'app/regras/regras.module#RegrasModule',
-                data: {
-                    pageTitle: 'Regras'
-                }
+                canActivate: [AuthGuard]
             },
             {
                 path: 'validar-aposta',
                 loadChildren: 'app/validar-aposta/validar-aposta.module#ValidarApostaModule',
+                canActivate: [AuthGuard]
             }
         ]
     },

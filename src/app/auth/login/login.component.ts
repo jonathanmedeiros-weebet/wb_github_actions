@@ -56,7 +56,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit, OnDestr
         this.auth.login(dados)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                () => this.router.navigate(['/']),
+                () => this.router.navigate(['/esportes/futebol/jogos']),
                 error => this.handleError(error)
             );
     }

@@ -6,7 +6,9 @@
         </button>
 
         <div class="logo-mobile">
-            <img src="{{LOGO}}" alt="">
+            <a class="" [routerLink]="['/esportes/futebol/jogos']">
+                <img src="{{LOGO}}" alt="">
+            </a>
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
