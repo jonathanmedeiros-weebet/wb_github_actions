@@ -47,7 +47,6 @@ declare var $;
 })
 export class NavigationComponent implements OnInit {
     LOGO;
-    informativoRodape;
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     isLoggedIn;
     isAppMobile;
@@ -93,7 +92,6 @@ export class NavigationComponent implements OnInit {
 
     ngOnInit() {
         this.LOGO = config.LOGO;
-        this.informativoRodape = this.parametroService.getInformativoRodape();
         this.isAppMobile = this.auth.isAppMobile();
 
         if (window.innerWidth <= 667) {
