@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
                 this.spinner.hide();
 
-                if (this.router.url === '/') {
+                if (this.router.url === '/' || this.router.url === '/?app=TRUE') {
                     this.router.navigate(['/esportes/futebol/jogos']);
                 }
             }
