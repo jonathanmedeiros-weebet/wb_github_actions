@@ -64,7 +64,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
-                this.sidebarService.changeItens(tiposAposta, 'seninha');
+                this.sidebarService.changeItens(tiposAposta, 'quininha');
             },
             error => this.messageService.error(error)
         );
