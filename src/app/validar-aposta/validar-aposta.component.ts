@@ -19,6 +19,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     exibirPreAposta = false;
     preAposta: any;
     preApostaItens = [];
+    disabled = false;
     sorteios = [];
     unsub$ = new Subject();
 
@@ -81,6 +82,8 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     submit() {
+        this.disabledSubmit();
+
         const values = this.form.value;
         values.preaposta_id = this.preAposta.id;
 
@@ -153,10 +156,12 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     handleError(msg) {
+        this.enableSubmit();
         this.messageService.error(msg);
     }
 
     reboot() {
+        this.enableSubmit();
         this.exibirPreAposta = false;
         this.form.reset();
         this.codigo = '';
@@ -174,5 +179,13 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     goToTop(selector) {
         const content = this.elRef.nativeElement.querySelector(selector);
         content.scrollTop = 0;
+    }
+
+    disabledSubmit() {
+        this.disabled = true;
+    }
+
+    enableSubmit() {
+        this.disabled = false;
     }
 }
