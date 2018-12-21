@@ -89,7 +89,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
                 return {
                     jogo_id: item.jogo.id,
                     jogo_nome: item.jogo.nome,
-                    ao_vivo: item.ao_vivo,
+                    aoVivo: item.ao_vivo,
                     cotacao: {
                         chave: item.aposta_tipo.chave,
                         valor: item.cotacao,
