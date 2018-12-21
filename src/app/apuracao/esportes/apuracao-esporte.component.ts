@@ -126,8 +126,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
 
         this.modalService.open(this.modal, {
             ariaLabelledBy: 'modal-basic-title',
-            centered: true,
-            size: 'lg'
+            centered: true
         }).result.then(
             (result) => { },
             (reason) => { }

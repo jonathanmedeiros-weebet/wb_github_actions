@@ -249,8 +249,7 @@ export class NavigationComponent implements OnInit {
             this.modalAposta,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                centered: true,
-                size: 'lg'
+                centered: true
             }
         );
         this.modalReferenceAposta.result
