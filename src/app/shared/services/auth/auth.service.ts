@@ -44,10 +44,11 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        localStorage.removeItem('expires');
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('user');
+        // localStorage.removeItem('expires');
         // localStorage.removeItem('app-mobile');
+        this.limparStorage();
 
         this.logadoSource.next(false);
         window.location.reload();
@@ -123,5 +124,16 @@ export class AuthService {
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    limparStorage() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('expires');
+        localStorage.removeItem('campeonatos_bloqueados');
+        localStorage.removeItem('cotacoes_locais');
+        localStorage.removeItem('itens-bilhete-esportivo');
+        localStorage.removeItem('opcoes');
+        localStorage.removeItem('tipos_aposta');
     }
 }

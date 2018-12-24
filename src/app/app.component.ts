@@ -25,6 +25,12 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.spinner.show();
         this.titleService.setTitle(config.BANCA_NOME);
+        const versaoLocal = localStorage.getItem('versao');
+
+        if (parseFloat(versaoLocal) !== config.VERSAO) {
+            this.auth.limparStorage();
+            localStorage.setItem('versao', config.VERSAO);
+        }
 
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
