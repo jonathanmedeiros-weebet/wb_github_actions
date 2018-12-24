@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BasqueteGuard } from '../services';
 
 export const routes: Routes = [
     {
@@ -8,7 +9,8 @@ export const routes: Routes = [
     },
     {
         path: 'basquete',
-        loadChildren: 'app/esportes/basquete/basquete.module#BasqueteModule'
+        loadChildren: 'app/esportes/basquete/basquete.module#BasqueteModule',
+        canActivate: [BasqueteGuard]
     }
 ];
 

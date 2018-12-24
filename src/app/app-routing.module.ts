@@ -4,15 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard, ExpiresGuard, ParametrosResolver } from './services';
+import { AuthGuard, LoteriaGuard } from './services';
 
 const appRoutes: Routes = [
     {
         path: '',
         component: MainLayoutComponent,
-        data: {
-            pageTitle: 'Dashboard'
-        },
         children: [
             // {
             //     path: '',
@@ -34,7 +31,8 @@ const appRoutes: Routes = [
             },
             {
                 path: 'loterias',
-                loadChildren: 'app/loterias/loterias.module#LoteriasModule'
+                loadChildren: 'app/loterias/loterias.module#LoteriasModule',
+                canActivate: [LoteriaGuard]
             },
             {
                 path: 'resultados',
@@ -49,7 +47,6 @@ const appRoutes: Routes = [
             {
                 path: 'regras',
                 loadChildren: 'app/regras/regras.module#RegrasModule',
-                canActivate: [AuthGuard]
             },
             {
                 path: 'validar-aposta',

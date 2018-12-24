@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { AuthService, ParametroService } from './services';
 import { config } from './shared/config';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -18,7 +19,6 @@ export class AppComponent implements OnInit {
         private titleService: Title,
         private parametroService: ParametroService,
         private router: Router,
-        private route: ActivatedRoute,
         private spinner: NgxSpinnerService
     ) { }
 
@@ -45,7 +45,9 @@ export class AppComponent implements OnInit {
 
                 this.spinner.hide();
 
-                if (this.router.url === '/' || this.router.url === '/?app=TRUE') {
+                this.parametroService.atualizarParametros(parametros);
+
+                if (window.location.pathname === '/' || window.location.pathname === '/?app=TRUE') {
                     this.router.navigate(['/esportes/futebol/jogos']);
                 }
             }
