@@ -40,8 +40,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isLoggedIn;
     LOGO;
     BANCA_NOME;
+    basqueteHabilitado = false;
+    loteriasHabilitado = false;
+    aoVivoHabilitado = false;
     appMobile;
-    now = moment();
     isOpen = false;
     unsub$ = new Subject();
 
@@ -57,12 +59,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
-        setInterval(() => this.now = moment(), 1000);
-
         this.LOGO = config.LOGO;
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
-
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -70,14 +69,20 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
 
-        this.getUsuario();
-        this.createForm();
+        this.parametroService.parametros.subscribe(parametros => {
+            this.basqueteHabilitado = parametros.opcoes ? parametros.opcoes.basquete : false;
+            this.loteriasHabilitado = parametros.opcoes ? parametros.opcoes.loterias : false;
+            this.aoVivoHabilitado = parametros.opcoes ? parametros.opcoes.aovivo : false;
+        });
 
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(isOpen => this.isOpen = isOpen);
         }
+
+        this.getUsuario();
+        this.createForm();
     }
 
     ngOnDestroy() {

@@ -72,22 +72,22 @@
                 <i class="fa fa-futbol-o"></i> <span>Futebol</span>
             </a>
         </div>
-        <div class="category" routerLinkActive="active">
+        <div *ngIf="basqueteHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/basquete/jogos']">
                 <i class="fa fa-futbol-o"></i> <span>Basquete</span>
             </a>
         </div>
-        <div class="category" routerLinkActive="active">
+        <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/futebol/live']">
                 <i class="fa fa-play"></i> Ao Vivo
             </a>
         </div>
-        <div class="category" routerLinkActive="active">
+        <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/seninha']">
                 <i class="fa fa-ticket"></i> Seninha
             </a>
         </div>
-        <div class="category" routerLinkActive="active">
+        <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/quininha']">
                 <i class="fa fa-ticket"></i> Quininha
             </a>

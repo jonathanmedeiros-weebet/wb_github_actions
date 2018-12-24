@@ -44,10 +44,6 @@ export class AuthService {
     }
 
     logout() {
-        // localStorage.removeItem('token');
-        // localStorage.removeItem('user');
-        // localStorage.removeItem('expires');
-        // localStorage.removeItem('app-mobile');
         this.limparStorage();
 
         this.logadoSource.next(false);
@@ -102,6 +98,39 @@ export class AuthService {
         if (appMobile) {
             result = appMobile;
         }
+        return result;
+    }
+
+    hasBasquete() {
+        let result = false;
+
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        if (opcoes) {
+            result = opcoes.basquete;
+        }
+
+        return result;
+    }
+
+    hasLoterias() {
+        let result = false;
+
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        if (opcoes) {
+            result = opcoes.loterias;
+        }
+
+        return result;
+    }
+
+    hasAoVivo() {
+        let result = false;
+
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        if (opcoes) {
+            result = opcoes.aovivo;
+        }
+
         return result;
     }
 
