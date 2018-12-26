@@ -13,7 +13,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-2x fa-user"></i>
                 </a>
@@ -31,7 +31,7 @@
                         <i class="fa fa-user"></i> Meu Perfil
                     </a>
 
-                    <a (click)="logout()" href="javascript:void(0);" class="dropdown-item">
+                    <a (click)="logout()" href="#" class="dropdown-item">
                         <i class="fa fa-sign-out"></i> Sair
                     </a>
                 </ul>
@@ -39,7 +39,7 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
@@ -95,7 +95,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-2x fa-user"></i>
                 </a>
@@ -113,15 +113,15 @@
                         <i class="fa fa-user"></i> Meu Perfil
                     </a>
 
-                    <a *ngIf="appMobile" class="dropdown-item" href="javascript:void(0);" (click)="listPrinters()">
+                    <a *ngIf="appMobile" class="dropdown-item" href="#" (click)="listPrinters()">
                         <i class="fa fa-print"></i> Impressora
                     </a>
 
-                    <a class="dropdown-item" href="javascript:void(0);" class="dropdown-item" (click)="appVersion()">
+                    <a class="dropdown-item" href="#" class="dropdown-item" (click)="appVersion()">
                         <i class="fa fa-info"></i> Versão App
                     </a>
 
-                    <a (click)="logout()" href="javascript:void(0);" class="dropdown-item">
+                    <a (click)="logout()" href="#" class="dropdown-item">
                         <i class="fa fa-sign-out"></i> Sair
                     </a>
                 </ul>
@@ -129,7 +129,7 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
