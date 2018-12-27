@@ -29,10 +29,12 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
 
     getJogos() {
         const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
         const params = {
             fields: ['_id', 'nome'],
             'sport_id': 1,
             'campeonatos_bloqueados': campeonatosBloqueados,
+            'data_final': opcoes.data_limite_tabela,
             'odds': ['casa_90', 'fora_90']
         };
 

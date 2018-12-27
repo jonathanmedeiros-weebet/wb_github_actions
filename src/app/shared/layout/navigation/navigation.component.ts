@@ -47,6 +47,7 @@ declare var $;
 })
 export class NavigationComponent implements OnInit {
     LOGO;
+    hoje = moment().format('YYYY-MM-DD');
     amanha = moment().add(1, 'd').format('YYYY-MM-DD');
     isLoggedIn;
     isAppMobile;

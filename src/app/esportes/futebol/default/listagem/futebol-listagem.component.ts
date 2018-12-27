@@ -30,7 +30,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
@@ -63,7 +62,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         const data = moment(params['data']).format('YYYY-MM-DD');
                         queryParams.data = data;
                     } else {
-                        queryParams.data = moment().format('YYYY-MM-DD');
+                        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+                        queryParams.data_final = opcoes.data_limite_tabela;
                     }
 
                     if (params['nome']) {
