@@ -10,27 +10,27 @@
             </div>
             <ul class="sidebar-menu">
                 <li>
-                    <a href="#" (click)="abrirModalPesquisa()">
+                    <a (click)="abrirModalPesquisa()">
                         <i class="fa fa-search"></i> Pesquisa
                     </a>
                 </li>
                 <li>
-                    <a href="#" (click)="abrirModalAposta()">
+                    <a (click)="abrirModalAposta()">
                         <i class="fa fa-ticket"></i> Bilhete
                     </a>
                 </li>
                 <li>
-                    <a href="#" (click)="abrirModalTabela()">
+                    <a (click)="abrirModalTabela()">
                         <i class="fa fa-print"></i> Tabela
                     </a>
                 </li>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">
-                    <a href="#">
+                    <a>
                         <i class="fa fa-cogs"></i> Config
                     </a>
                 </li>
                 <li *ngIf="!isAppMobile">
-                    <a href="#" target="_blank" href="app.apk">
+                    <a target="_blank" href="app.apk">
                         <i class="fa fa-download"></i> App
                     </a>
                 </li>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li *ngIf="isLoggedIn" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="fa fa-asterisk"></i> Apuração
                     </a>
@@ -59,11 +59,6 @@
                         <i class="fa fa-list"></i> Resultados
                     </a>
                 </li>
-                <!-- <li *ngIf="isLoggedIn">
-                    <a [routerLink]="['/admin/dashboard']">
-                        <i class="fa fa-dashboard"></i> Admin
-                    </a>
-                </li> -->
             </ul>
         </div>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">

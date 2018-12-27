@@ -15,6 +15,7 @@
 
 #sidebar-wrapper a:hover{
     color: var(--highlight);
+    cursor: pointer;
 }
 
 #sidebar-wrapper .dropdown-item{
