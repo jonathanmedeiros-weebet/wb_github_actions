@@ -1,29 +1,49 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ElementRef,
+    ViewChild
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {
-    MessageService, PreApostaEsportivaService, ApostaEsportivaService,
-    PrintService, HelperService, SorteioService, ApostaLoteriaService
+    AuthService,
+    MessageService,
+    PreApostaEsportivaService,
+    ApostaEsportivaService,
+    PrintService,
+    HelperService,
+    SorteioService,
+    ApostaLoteriaService
 } from '../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-validar-aposta',
     templateUrl: 'validar-aposta.component.html',
     styleUrls: ['./validar-aposta.component.css']
 })
-export class ValidarApostaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class ValidarApostaComponent extends BaseFormComponent
+    implements OnInit, OnDestroy {
     codigo;
     exibirPreAposta = false;
     preAposta: any;
     preApostaItens = [];
     disabled = false;
     sorteios = [];
+    appMobile = false;
+    @ViewChild('modal') modal: ElementRef;
+    modalReference;
+    ultimaApostaRealizada;
+    mensagemSucesso = '';
     unsub$ = new Subject();
 
     constructor(
+        private auth: AuthService,
         private apostaLoteriaService: ApostaLoteriaService,
         private apostaEsportivaService: ApostaEsportivaService,
         private preApostaService: PreApostaEsportivaService,
@@ -31,13 +51,19 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
         private messageService: MessageService,
         private printService: PrintService,
         private fb: FormBuilder,
-        private elRef: ElementRef
+        private elRef: ElementRef,
+        private modalService: NgbModal
     ) {
         super();
     }
 
     ngOnInit() {
-        this.sorteioService.getSorteios().subscribe(sorteios => this.sorteios = sorteios);
+        this.appMobile = this.auth.isAppMobile();
+
+        this.sorteioService
+            .getSorteios()
+            .subscribe(sorteios => (this.sorteios = sorteios));
+
         this.createForm();
     }
 
@@ -48,8 +74,8 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
 
     createForm() {
         this.form = this.fb.group({
-            'apostador': ['', Validators.required],
-            'valor': ['', Validators.required]
+            apostador: ['', Validators.required],
+            valor: ['', Validators.required]
         });
     }
 
@@ -68,7 +94,8 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     consultarAposta() {
-        this.preApostaService.getPreAposta(this.codigo)
+        this.preApostaService
+            .getPreAposta(this.codigo)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 preAposta => {
@@ -95,16 +122,17 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
                     aoVivo: item.ao_vivo,
                     cotacao: {
                         chave: item.aposta_tipo.chave,
-                        valor: item.cotacao,
+                        valor: item.cotacao
                     }
                 };
             });
 
             if (values.itens.length) {
-                this.apostaEsportivaService.create(values)
+                this.apostaEsportivaService
+                    .create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        result => this.esporteSuccess(result, 'imprimir'),
+                        result => this.success(result),
                         error => this.handleError(error)
                     );
             } else {
@@ -123,10 +151,11 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
             });
 
             if (values.itens.length) {
-                this.apostaLoteriaService.create(values)
+                this.apostaLoteriaService
+                    .create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        result => this.loteriaSuccess(result, 'imprimir'),
+                        result => this.success(result),
                         error => this.handleError(error)
                     );
             } else {
@@ -135,24 +164,17 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
         }
     }
 
-    esporteSuccess(data, action) {
+    success(data) {
+        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
+        this.ultimaApostaRealizada = data;
         this.reboot();
 
-        if (action === 'compartilhar') {
-            HelperService.sharedSportsTicket(data);
-        } else {
-            this.printService.sportsTicket(data);
-        }
-    }
+        this.modalReference = this.modalService.open(this.modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
 
-    loteriaSuccess(data, action) {
-        this.reboot();
-
-        if (action === 'compartilhar') {
-            HelperService.sharedLotteryTicket(data);
-        } else {
-            this.printService.lotteryTicket(data);
-        }
+        this.modalReference.result.then(result => {}, reason => {});
     }
 
     handleError(msg) {
@@ -167,7 +189,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
         this.codigo = '';
         this.preAposta = null;
         this.preApostaItens = [];
-        this.messageService.success('Aposta realizada!');
+
         this.goToTop('#default-content');
     }
 
@@ -187,5 +209,21 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    printTicket() {
+        if (this.ultimaApostaRealizada.tipo === 'esportes') {
+            this.printService.sportsTicket(this.ultimaApostaRealizada);
+        } else {
+            this.printService.lotteryTicket(this.ultimaApostaRealizada);
+        }
+    }
+
+    shareTicket() {
+        if (this.ultimaApostaRealizada.tipo === 'esportes') {
+            HelperService.sharedSportsTicket(this.ultimaApostaRealizada);
+        } else {
+            HelperService.sharedLotteryTicket(this.ultimaApostaRealizada);
+        }
     }
 }
