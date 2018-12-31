@@ -112,7 +112,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         this.showLoadingIndicator = false;
 
         const refreshIntervalId = setInterval(() => {
-            console.log('paginacao');
             const c = this.camps.splice(start, sum);
             this.campeonatos = this.campeonatos.concat(c);
             start++;
