@@ -16,6 +16,7 @@ import * as moment from 'moment';
 export class FutebolListagemComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
     campeonatos: Campeonato[];
+    camps = [];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
     unsub$ = new Subject();
@@ -74,8 +75,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                this.showLoadingIndicator = false;
-                                this.campeonatos = campeonatos;
+                                this.camps = campeonatos;
+                                this.paginacao();
                             },
                             error => this.messageService.error(error)
                         );
@@ -96,6 +97,30 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    paginacao() {
+        console.log('paginacao');
+        let start = 0;
+        const sum = 5;
+        const total = Math.ceil(this.camps.length / sum);
+
+        this.campeonatos = [];
+        this.campeonatos = this.campeonatos.concat(this.camps.splice(start, sum));
+        start++;
+
+        this.showLoadingIndicator = false;
+
+        const refreshIntervalId = setInterval(() => {
+            console.log('paginacao');
+            const c = this.camps.splice(start, sum);
+            this.campeonatos = this.campeonatos.concat(c);
+            start++;
+
+            if (start >= total) {
+                clearInterval(refreshIntervalId);
+            }
+        }, 500);
     }
 
     oddSelecionada(jogoId, chave) {
