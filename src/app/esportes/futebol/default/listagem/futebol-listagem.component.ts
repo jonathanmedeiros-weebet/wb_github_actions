@@ -100,7 +100,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     }
 
     paginacao() {
-        console.log('paginacao');
         let start = 0;
         const sum = 5;
         const total = Math.ceil(this.camps.length / sum);
