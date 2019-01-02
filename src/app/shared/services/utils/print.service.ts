@@ -637,7 +637,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.aposta_tipo.nome} ( ${item.cotacao} )`;
+                        ${item.aposta_tipo.nome} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
                 printContents += ` | AO VIVO`;
             }
@@ -715,7 +715,7 @@ Estimativa Ganho: ${HelperService.moneyFormat(aposta.premio)}`;
 ${item.campeonato.nome}
 ${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
 ${item.jogo.nome}
-${item.aposta_tipo.nome} ( ${item.cotacao} )`;
+${item.aposta_tipo.nome} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
                 ticket += ` | AO VIVO`;
             }
