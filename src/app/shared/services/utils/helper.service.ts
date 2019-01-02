@@ -20,8 +20,8 @@ export class HelperService {
         const tipoAposta = tiposAposta[chave];
 
         // Cotacação Local
-        if (cotacoesLocais[`${jogoId}${chave}`]) {
-            result = parseFloat(cotacoesLocais[`${jogoId}${chave}`]);
+        if (cotacoesLocais[jogoId] && cotacoesLocais[jogoId][chave]) {
+            result = parseFloat(cotacoesLocais[jogoId][chave].valor);
         }
 
         if (tipoAposta) {

@@ -25,7 +25,7 @@ export class ParametroService {
     }
 
     getParametros(): Observable<any> {
-        const url = `${config.SPORTS_URL}/parametros`;
+        const url = `${config.SPORTS_URL}/parametros?cotacoes_locais_2`;
         const token = localStorage.getItem('token');
         const requestOptions = token ? this.header.getRequestOptions(true) : this.header.getRequestOptions();
 

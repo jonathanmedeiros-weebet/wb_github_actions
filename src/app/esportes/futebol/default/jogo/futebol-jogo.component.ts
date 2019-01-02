@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/co
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
-import { Jogo, ItemBilheteEsportivo } from './../../../../models';
+import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
+    cotacoesLocais;
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     unsub$ = new Subject();
@@ -33,6 +34,13 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+        this.cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+
+        const altura = window.innerHeight - 69;
+        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+
         this.route.params
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
@@ -51,15 +59,9 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
-
-        const altura = window.innerHeight - 69;
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {
@@ -98,8 +100,44 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
                 }
 
                 odd.cotacoes.push(cotacao);
+
+                if (this.cotacoesLocais[this.jogo._id] && this.cotacoesLocais[this.jogo._id][cotacao.chave]) {
+                    this.cotacoesLocais[this.jogo._id][cotacao.chave].usou = true;
+                }
             }
         });
+
+        // Exibir odds locais que não vinheram no center
+        if (this.cotacoesLocais[this.jogo._id]) {
+            for (const chave in this.cotacoesLocais[this.jogo._id]) {
+                if (this.cotacoesLocais[this.jogo._id].hasOwnProperty(chave)) {
+                    const cotacaoLocal = this.cotacoesLocais[this.jogo._id][chave];
+
+                    if (!cotacaoLocal.usou) {
+                        const tipoAposta = this.tiposAposta[chave];
+
+                        if (tipoAposta) {
+                            let odd = this.odds[tipoAposta.cat_chave];
+                            if (!odd) {
+                                odd = {
+                                    'nome': tipoAposta.cat_nome,
+                                    'tempo': tipoAposta.tempo,
+                                    'principal': tipoAposta.p,
+                                    'cotacoes': []
+                                };
+                                this.odds[tipoAposta.cat_chave] = odd;
+                            }
+
+                            const cotacao = new Cotacao();
+                            cotacao.chave = chave;
+                            cotacao.valor = cotacaoLocal.valor;
+
+                            odd.cotacoes.push(cotacao);
+                        }
+                    }
+                }
+            }
+        }
 
         this.showLoadingIndicator = false;
     }
