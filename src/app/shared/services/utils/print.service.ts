@@ -594,7 +594,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
         }
 
         .rodape{
-            margin: 15px 1px 1px 1px;
+            margin: 10px 1px 1px 1px;
             font-weight: bold;
             font-size: 14px;
             text-align: center;
@@ -626,7 +626,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
 
         aposta.itens.forEach((item, index, array) => {
             printContents += `
-                <div class="item margin-top-10">
+                <div class="item">
                     <p class="campeonato">
                         ${item.campeonato.nome}
                     </p>
@@ -661,7 +661,6 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                     </p>
                 </div>
                 <hr>
-                <br>
                 <div class="valores">
                     <p class="aposta">
                         VALOR DA APOSTA: ${HelperService.moneyFormat(aposta.valor)}
