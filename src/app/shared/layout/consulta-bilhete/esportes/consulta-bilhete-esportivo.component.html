@@ -23,17 +23,20 @@
         <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
         <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
         ----------------------------<br>
+        <p class="total-jogos">
+            TOTAL DE JOGOS: {{aposta.itens.length}}
+        </p>
         <p class="valor-aposta">
             VALOR DA APOSTA: {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
         </p>
-        <p class="valor-premio">ESTIMATIVA
-            DE GANHO: {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+        <p class="valor-premio">
+            ESTIMATIVA DE GANHO: {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
         </p>
-        <p style="text-align: center; margin: 5px 1px 1px 1px; font-weight: bold; font-size: 14px;">CAMBISTA
-            PAGA:
+        <p *ngIf="opcoes.percentual_premio_cambista > 0" style="text-align: center; margin: 5px 1px 1px 1px; font-weight: bold; font-size: 14px;">
+            CAMBISTA PAGA: {{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}
         </p>
         <p class="mensagem-rodape">
-            {{informativoRodape}}
+            {{opcoes.informativoRodape}}
         </p>
     </div>
 </div>

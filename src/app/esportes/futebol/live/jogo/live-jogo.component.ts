@@ -97,7 +97,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
         cotacoes.forEach(cotacao => {
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
-            if (tipoAposta) {
+            if (tipoAposta && parseInt(tipoAposta.ao_vivo, 10)) {
                 let odd = this.odds[tipoAposta.cat_chave];
                 if (!odd) {
                     odd = {

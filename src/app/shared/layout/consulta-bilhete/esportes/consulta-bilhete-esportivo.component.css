@@ -36,7 +36,7 @@
     margin: 1px;
     font-size: 12px;
 }
-#cupom .valor-aposta{
+#cupom .total-jogos, #cupom .valor-aposta{
     text-align: center;
     margin: 1px;
     font-weight: bold;

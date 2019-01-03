@@ -11,14 +11,18 @@ import { config } from './../../../config';
 export class ConsultaBilheteEsportivoComponent implements OnInit {
     @Input() aposta: any;
     LOGO;
-    informativoRodape;
+    opcoes;
+    cambistaPaga;
 
     constructor() { }
 
     ngOnInit() {
         this.LOGO = config.LOGO;
 
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-        this.informativoRodape = opcoes.informativoRodape;
+        this.opcoes = JSON.parse(localStorage.getItem('opcoes'));
+
+        if (this.opcoes.percentual_premio_cambista > 0) {
+            this.cambistaPaga = this.aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+        }
     }
 }

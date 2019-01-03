@@ -194,7 +194,8 @@ export class HelperService {
 
     static moneyFormat(value) {
         const money = new Intl.NumberFormat('pt-BR', {
-            minimumFractionDigits: 2
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
         }).format(value);
 
 

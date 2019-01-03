@@ -572,7 +572,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
             font-size: 12px;
         }
 
-        .valores .aposta{
+        .valores .total-jogos, .valores .aposta{
             text-align: center;
             margin: 1px;
             font-weight: bold;
@@ -662,6 +662,9 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                 </div>
                 <hr>
                 <div class="valores">
+                    <p class="total-jogos">
+                        TOTAL DE JOGOS: ${aposta.itens.length}
+                    </p>
                     <p class="aposta">
                         VALOR DA APOSTA: ${HelperService.moneyFormat(aposta.valor)}
                     </p>
@@ -712,7 +715,8 @@ Data: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.cambista.nome}
 Apostador: ${aposta.apostador}
 Valor Aposta: ${HelperService.moneyFormat(aposta.valor)}
-Estimativa Ganho: ${HelperService.moneyFormat(aposta.premio)}`;
+Estimativa Ganho: ${HelperService.moneyFormat(aposta.premio)}
+Total Jogos: ${aposta.itens.length}`;
 
         aposta.itens.forEach(item => {
             ticket += `
