@@ -616,7 +616,7 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
         <div id="comprovante">
             <div class="conteudo">
                 <div style="text-align: center;">
-                    <img style="max-height: 180px; max-width: 290px;"
+                    <img style="max-height: 80px; max-width: 190;"
                     alt="${config.BANCA_NOME}" src="${config.LOGO}" />
                 </div>
                 <h1 class="numero">
@@ -668,11 +668,17 @@ Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
                     </p>
                     <p class="ganho">
                         ESTIMATIVA DE GANHO: ${HelperService.moneyFormat(aposta.premio)}
-                    </p>
-                    <p class="cambista-paga">
-                        CAMBISTA PAGA: R$
-                    </p>
-                </div>
+                    </p>`;
+
+        if (this.opcoes.percentual_premio_cambista > 0) {
+            const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+            printContents += `   <p class="cambista-paga">
+                            CAMBISTA PAGA: ${HelperService.moneyFormat(cambistaPaga)}
+                        </p>`;
+        }
+
+        printContents += `
+                    </div>
                 <p class="rodape">
                     ${this.opcoes.informativo_rodape}
                 </p>
