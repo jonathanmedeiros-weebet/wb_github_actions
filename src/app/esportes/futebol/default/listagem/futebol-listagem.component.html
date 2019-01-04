@@ -31,7 +31,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="odds-principais">
+                            <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of jogo.cotacoes" (click)="addCotacao(jogo, cotacao)">
                                     <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
                                         <span class="nome">
