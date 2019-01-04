@@ -141,6 +141,53 @@ header{
     z-index: 9002;
 }
 
+.btn-back{
+    margin-bottom: 15px;
+}
+
+/* ODDS FUTEBOL */
+.odds{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.odds .inner-odd{
+    background-color: var(--odds);
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.odds .selecionado, .odds .inner-odd:hover{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span, .odds .inner-odd:hover span{
+    color: var(--foreground-highlight)!important;
+}
+
+.odd .nome, .odd .valor{
+    color: var(--foreground-odds);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .odds .odd{
+        width: 33.33%;
+        padding: 3px;
+    }
+
+    .btn-back{
+        position: absolute;
+        left: 15px;
+        top: 28px;
+        margin: 0;
+    }
+}
+
 @media only screen and (max-width: 668px) {
     #page-wrapper{
         margin-top: 113px;
@@ -149,6 +196,11 @@ header{
     #default-content{
         padding: 10px 15px;
         height: calc(100vh - 111px);
+    }
+
+    .odds .odd{
+        margin-bottom: 5px;
+        width: 100%;
     }
 }
 
@@ -190,5 +242,3 @@ header{
       transform: rotate(360deg);
     }
   }
-
-

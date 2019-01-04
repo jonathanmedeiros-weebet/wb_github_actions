@@ -8,10 +8,6 @@
     font-weight: bolder;
 }
 
-.btn-back{
-    margin-bottom: 15px;
-}
-
 .tipo-apostas{
     background-color: #fff;
 }
@@ -22,55 +18,8 @@
     text-transform: uppercase;
 }
 
-.odds{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.odds .inner-odd{
-    background-color: var(--odds);
-    padding: 5px 8px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.odds .selecionado, .odds .inner-odd:hover{
-    background-color: var(--highlight);
-}
-
-.odds .selecionado span, .odds .inner-odd:hover span{
-    color: var(--foreground-highlight);
-}
-
-.odd .nome, .odd .valor{
-    color: var(--foreground-odds);
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .odds .odd{
-        width: 33.33%;
-        padding: 3px;
-    }
-
-    .btn-back{
-        position: absolute;
-        left: 15px;
-        top: 28px;
-        margin: 0;
-    }
-}
-
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;
-    }
-
-    .odds .odd{
-        margin-bottom: 5px;
-        width: 100%;
     }
 }
