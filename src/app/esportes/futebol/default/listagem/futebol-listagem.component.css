@@ -28,7 +28,7 @@
     margin-right: 15px;
 }
 
-.indentificacao .nome{
+.indentificacao .nome, .indentificacao .nome-mobile{
     flex-grow: 1;
     font-weight: bold;
 }
@@ -42,6 +42,14 @@
     .mais-opcoes i{
         margin-right: 5px;
     }
+
+    .indentificacao .nome{
+        display: block;
+    }
+
+    .indentificacao .nome-mobile{
+         display: none;
+    }
 }
 
 @media only screen and (max-width: 668px) {
@@ -53,7 +61,11 @@
         min-width: 31px;
     }
 
-    .mais-opcoes span{
+    .indentificacao .nome-mobile{
+        display: block;
+    }
+
+    .indentificacao .nome, .mais-opcoes span{
         display: none;
     }
 }

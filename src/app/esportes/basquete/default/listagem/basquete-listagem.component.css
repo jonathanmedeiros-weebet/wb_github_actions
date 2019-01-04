@@ -28,37 +28,9 @@
     margin-right: 15px;
 }
 
-.indentificacao .nome{
+.indentificacao .nome, .indentificacao .nome-mobile{
     flex-grow: 1;
     font-weight: bold;
-}
-
-.odds-principais{
-    display: flex;
-}
-
-.odds-principais .odd{
-    background-color: var(--odds);
-    margin-right: 3px;
-    flex: 1 1 0px;
-    padding: 5px 8px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    margin-bottom: 5px;
-    border-radius: 4px;
-}
-
-.odds-principais .selecionado{
-    background-color: var(--highlight);
-}
-
-.odds-principais .selecionado span{
-    color: var(--foreground-highlight);
-}
-
-.odd .nome, .odd .valor{
-    color: var(--foreground-odds);
 }
 
 .mais-opcoes a{
@@ -67,20 +39,16 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .odds-principais .odd{
-        min-width: 200px;
-    }
-
     .mais-opcoes i{
         margin-right: 5px;
     }
 
-    .odds-principais .odd:hover{
-        background-color: var(--highlight);
+    .indentificacao .nome{
+        display: block;
     }
 
-    .odds-principais .odd:hover span{
-        color: #000;
+    .indentificacao .nome-mobile{
+         display: none;
     }
 }
 
@@ -93,7 +61,11 @@
         min-width: 31px;
     }
 
-    .mais-opcoes span{
+    .indentificacao .nome-mobile{
+        display: block;
+    }
+
+    .indentificacao .nome, .mais-opcoes span{
         display: none;
     }
 }

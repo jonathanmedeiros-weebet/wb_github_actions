@@ -19,9 +19,14 @@
                             {{jogo.value.info.minutos}}' {{jogo.value.info.tempo}}T
                         </div>
                         <div class="nome">
-                            <b>{{jogo.value.time_a_nome}}</b>
-                            {{jogo.value.info.time_a_resultado}}-{{jogo.value.info.time_b_resultado}}
-                            <b>{{jogo.value.time_b_nome}}</b>
+                            <div class="time-a">
+                                <div class="time-a-nome">{{jogo.value.time_a_nome}}</div>
+                                <div class="placar time-a-placar">{{jogo.value.info.time_a_resultado}}</div>
+                            </div>
+                            <div class="time-b">
+                                <div class="placar time-b-placar">{{jogo.value.info.time_b_resultado}}</div>
+                                <div class="time-b-nome">{{jogo.value.time_b_nome}}</div>
+                            </div>
                         </div>
                         <div class="mais-opcoes">
                             <a routerLink="/esportes/futebol/live/jogos/{{jogo.value._id}}">
@@ -31,6 +36,40 @@
                                 <span>Cotações</span>
                             </a>
                         </div>
+                    </div>
+
+                    <div class="indentificacao-mobile">
+                        <div class="header">
+                            <div class="left-side">
+                                <div class="aovivo-label">
+                                    Vivo
+                                </div>
+                                <div class="tempo">
+                                    {{jogo.value.info.minutos}}' {{jogo.value.info.tempo}}T
+                                </div>
+                            </div>
+                            <div class="right-side">
+                                <div class="mais-opcoes">
+                                    <a routerLink="/esportes/futebol/live/jogos/{{jogo.value._id}}">
+                                        <i class="fa fa-plus">
+                                            {{jogo.value.total_cotacoes}}
+                                        </i>
+                                        <span>Cotações</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nome">
+                            <div class="time-a">
+                                <div class="time-a-nome">{{jogo.value.time_a_nome}}</div>
+                                <div class="placar time-a-placar">{{jogo.value.info.time_a_resultado}}</div>
+                            </div>
+                            <div class="time-b">
+                                <div class="time-b-nome">{{jogo.value.time_b_nome}}</div>
+                                <div class="placar time-b-placar">{{jogo.value.info.time_b_resultado}}</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
