@@ -27,10 +27,18 @@ export class HelperService {
         if (tipoAposta) {
             if (aoVivo) {
                 // Fator ao vivo
-                result *= parseFloat(tipoAposta.fator_ao_vivo);
+                let fatorAoVivo = parseFloat(tipoAposta.fator_ao_vivo);
+                if (isNaN(fatorAoVivo) || !fatorAoVivo) {
+                    fatorAoVivo = 1;
+                }
+                result *= fatorAoVivo;
             } else {
                 // Fator
-                result *= parseFloat(tipoAposta.fator);
+                let fator = parseFloat(tipoAposta.fator);
+                if (isNaN(fator) || !fator) {
+                    fator = 1;
+                }
+                result *= fator;
 
                 // Favorito e Zebra
                 const cotacoesFavoritoZebra = [

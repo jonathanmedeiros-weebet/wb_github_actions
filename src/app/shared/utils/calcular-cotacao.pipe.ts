@@ -22,11 +22,15 @@ export class CalcularCotacaoPipe implements PipeTransform {
         if (tipoAposta) {
             if (aoVivo) {
                 // Fator ao vivo
-                result *= parseFloat(tipoAposta.fator_ao_vivo);
+                let fatorAoVivo = parseFloat(tipoAposta.fator_ao_vivo);
+                if (isNaN(fatorAoVivo) || !fatorAoVivo) {
+                    fatorAoVivo = 1;
+                }
+                result *= fatorAoVivo;
             } else {
                 // Fator
                 let fator = parseFloat(tipoAposta.fator);
-                if (!fator) {
+                if (!fator || isNaN(fator)) {
                     fator = 1;
                 }
                 result *= fator;
