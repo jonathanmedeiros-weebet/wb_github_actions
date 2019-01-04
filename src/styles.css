@@ -161,11 +161,11 @@ header{
     border-radius: 4px;
 }
 
-.odds .selecionado, .odds .inner-odd:hover{
+.odds .selecionado{
     background-color: var(--highlight);
 }
 
-.odds .selecionado span, .odds .inner-odd:hover span{
+.odds .selecionado span{
     color: var(--foreground-highlight)!important;
 }
 
@@ -178,6 +178,14 @@ header{
     .odds .odd{
         width: 33.33%;
         padding: 3px;
+    }
+
+    .odds .inner-odd:hover{
+        background-color: var(--highlight);
+    }
+
+    .odds .inner-odd:hover span{
+        color: var(--foreground-highlight)!important;
     }
 
     .btn-back{
