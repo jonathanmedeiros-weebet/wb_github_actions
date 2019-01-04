@@ -105,36 +105,6 @@
     text-transform: uppercase;
 }
 
-.odds{
-    display: flex;
-    flex-flow: wrap;
-}
-
-.odds .odd{
-    background-color: var(--odds);
-    margin-right: 3px;
-    flex: 1 1 0px;
-    padding: 5px 8px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    min-width: 200px;
-}
-
-.odds .selecionado, .odds .odd:hover{
-    background-color: var(--highlight);
-}
-
-.odds .selecionado span, .odds .odd:hover span{
-    color: var(--foreground-highlight);
-}
-
-.odd .nome, .odd .valor{
-    color: var(--foreground-odds);
-}
-
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .indentificacao{

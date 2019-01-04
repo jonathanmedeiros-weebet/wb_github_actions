@@ -52,14 +52,15 @@
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
                 <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
-                    <div class="odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}" *ngFor="let cotacao of odds[chave].cotacoes"
-                        (click)="addCotacao(jogo, cotacao)">
-                        <span class="nome">
-                            {{cotacao.chave | tipoAposta}}
-                        </span>
-                        <span class="valor">
-                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes: true}}
-                        </span>
+                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
+                        <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                            <span class="nome">
+                                {{cotacao.chave | tipoAposta}}
+                            </span>
+                            <span class="valor">
+                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.cotacoes: true}}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

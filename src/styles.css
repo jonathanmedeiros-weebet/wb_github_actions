@@ -141,10 +141,6 @@ header{
     z-index: 9002;
 }
 
-.btn-back{
-    margin-bottom: 15px;
-}
-
 /* ODDS FUTEBOL */
 .odds{
     width: 100%;
@@ -187,13 +183,6 @@ header{
     .odds .inner-odd:hover span{
         color: var(--foreground-highlight)!important;
     }
-
-    .btn-back{
-        position: absolute;
-        left: 15px;
-        top: 28px;
-        margin: 0;
-    }
 }
 
 @media only screen and (max-width: 668px) {
@@ -210,6 +199,13 @@ header{
         margin-bottom: 5px;
         width: 100%;
     }
+
+    /* .btn-back{
+        position: absolute;
+        left: 15px;
+        top: 28px;
+        margin: 0;
+    } */
 }
 
 /* Spinner */
