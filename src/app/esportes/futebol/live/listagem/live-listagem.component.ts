@@ -72,7 +72,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
                     this.campeonatos.set(jogo.campeonato._id, campeonato);
                 }
 
-                if (!jogo.finalizado) {
+                if (!jogo.finalizado && jogo.cotacoes.length > 0) {
                     campeonato.jogos.set(jogo._id, jogo);
                 } else {
                     campeonato.jogos.delete(jogo._id);
