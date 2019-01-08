@@ -62,4 +62,14 @@ export class ApostaEsportivaService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    setPagamento(id) {
+        const url = `${this.ApostaEsportivaUrl}/${id}/pagamento`;
+
+        return this.http.post(url, '', this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

@@ -166,10 +166,43 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         return result;
     }
 
-    setStatus(resultado) {
+    getStatus(resultado) {
         return {
             'perdedor': resultado === 'perdeu',
             'ganhador': resultado === 'ganhou'
         };
+    }
+
+    getPagamento(aposta) {
+        let result = '';
+        if (aposta.resultado && aposta.resultado === 'ganhou') {
+            if (aposta.pago) {
+                result = 'PAGO';
+            } else {
+                result = 'AGUARDANDO PAGAMENTO';
+            }
+        }
+        return result;
+    }
+
+    setPagamento(aposta) {
+        this.apostaService.setPagamento(aposta.id)
+            .subscribe(
+                result => {
+                    aposta.pago = result.pago;
+                    let msg = '';
+                    if (result.pago) {
+                        msg = 'PAGAMENTO REGISTRADO COM SUCESSO!';
+                    } else {
+                        msg = 'PAGAMENTO CANCELADO!';
+                    }
+                    this.messageService.success(msg);
+                },
+                error => this.handleError(error)
+            );
+    }
+
+    pagamentoPermitido(aposta) {
+        return aposta.resultado && aposta.resultado === 'ganhou' && !aposta.pago;
     }
 }

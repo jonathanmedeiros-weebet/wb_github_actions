@@ -49,11 +49,12 @@
                             <th>Comissão</th>
                             <th>Prêmio</th>
                             <th>Resultado</th>
+                            <th>Pagamento</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let aposta of apostas" [ngClass]="setStatus(aposta.resultado)">
+                        <tr *ngFor="let aposta of apostas" [ngClass]="getStatus(aposta.resultado)">
                             <td>#{{aposta.id}}</td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>{{aposta.apostador}}</td>
@@ -62,19 +63,25 @@
                             <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
                             <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
                             <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
+                            <td>{{getPagamento(aposta)}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" *ngIf="checkCancellation(aposta.itens)" class="btn btn-danger"
-                                        (click)="cancel(aposta)">
+                                    <button type="button" *ngIf="checkCancellation(aposta.itens)" title="CANCELAR"
+                                        class="btn btn-danger" (click)="cancel(aposta)">
                                         <i class="fa fa-trash-o"></i>
                                     </button>
-                                    <button type="button" class="btn btn-info" (click)="openModal(aposta)">
+                                    <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
                                         <i class="fa fa-eye"></i>
                                     </button>
-                                    <button type="button" (click)="printTicket(aposta)" class="btn btn-custom">
+                                    <button type="button" (click)="printTicket(aposta)" title="IMPRIMIR" class="btn btn-custom">
                                         <i class="fa fa-print"></i>
                                     </button>
-                                    <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
+                                    <button type="button" *ngIf="aposta.resultado && aposta.resultado == 'ganhou'" (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA"
+                                        class="btn" [ngClass]="{'btn-success': !aposta.pago, 'btn-danger': aposta.pago}">
+                                        <i class="fa fa-money"></i>
+                                    </button>
+                                    <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" title="COMPARTILHAR"
+                                        class="btn btn-info">
                                         <i class="fa fa-share-alt"></i>
                                     </button>
                                 </div>
@@ -87,6 +94,7 @@
                             <th class="text-right">Prêmio</th>
                             <th class="text-right">Resultado</th>
                             <th></th>
+                            <th></th>
                         </tr>
                         <tr class="tr-footer">
                             <th class="header text-right" colspan="4">Totais</th>
@@ -94,6 +102,7 @@
                             <th class="text-right">{{totais.comissao | currency: 'BRL':'symbol':'1.2'}}</th>
                             <th class="text-right">{{totais.premio | currency: 'BRL':'symbol':'1.2'}}</th>
                             <th class="text-right">{{totais.resultado | currency: 'BRL':'symbol':'1.2'}}</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </tbody>
