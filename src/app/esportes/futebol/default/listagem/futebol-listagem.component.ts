@@ -19,6 +19,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     camps = [];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
+    refreshIntervalId;
     unsub$ = new Subject();
 
     constructor(
@@ -47,6 +48,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         .subscribe(
                             campeonato => {
                                 this.showLoadingIndicator = false;
+                                clearInterval(this.refreshIntervalId);
                                 this.campeonatos = [campeonato];
                             },
                             error => this.messageService.error(error)
@@ -110,13 +112,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
 
         this.showLoadingIndicator = false;
 
-        const refreshIntervalId = setInterval(() => {
+        this.refreshIntervalId = setInterval(() => {
             const c = this.camps.splice(start, sum);
             this.campeonatos = this.campeonatos.concat(c);
             start++;
 
             if (start >= total) {
-                clearInterval(refreshIntervalId);
+                clearInterval(this.refreshIntervalId);
             }
         }, 500);
     }
