@@ -45,8 +45,7 @@
                     </a>
                 </li>
                 <li *ngIf="isLoggedIn" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-asterisk"></i> Apuração
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -62,7 +61,12 @@
             </ul>
         </div>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">
-            <span class="group">Data</span>
+            <span class="group">Destaques</span>
+            <li>
+                <a [routerLink]="['/esportes/futebol/jogos']">
+                    Campeonatos Principais
+                </a>
+            </li>
             <li>
                 <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: hoje }">
                     Jogos de Hoje
@@ -81,7 +85,7 @@
             </li>
         </ul>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'basquete'">
-            <span class="group">Data</span>
+            <span class="group">Destaques</span>
             <li>
                 <a [routerLink]="['/esportes/basquete/jogos']">
                     Jogos de Hoje

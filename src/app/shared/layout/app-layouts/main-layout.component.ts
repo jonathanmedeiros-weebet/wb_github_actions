@@ -23,6 +23,7 @@ export class MainLayoutComponent implements OnInit {
             parametros => {
                 localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
                 localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
+                localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
                 localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
                 localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
             },

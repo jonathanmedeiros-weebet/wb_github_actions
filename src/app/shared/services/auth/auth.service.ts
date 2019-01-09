@@ -160,6 +160,7 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('campeonatos_bloqueados');
+        localStorage.removeItem('campeonatos_principais');
         localStorage.removeItem('cotacoes_locais');
         localStorage.removeItem('itens-bilhete-esportivo');
         localStorage.removeItem('opcoes');

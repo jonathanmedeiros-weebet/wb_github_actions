@@ -7,6 +7,7 @@ import { CampeonatoService, MessageService, BilheteEsportivoService } from './..
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -55,11 +56,17 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         );
                 } else {
                     const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+                    const campeonatosPrincipais = JSON.parse(localStorage.getItem('campeonatos_principais'));
+
                     const queryParams: any = {
                         'sport_id': 1,
                         'campeonatos_bloqueados': campeonatosBloqueados,
                         'odds': ['casa_90', 'empate_90', 'fora_90']
                     };
+
+                    if (_.isEmpty(params)) {
+                        queryParams.campeonatos = campeonatosPrincipais.map(campeonato => campeonato.api_id);
+                    }
 
                     if (params['data']) {
                         const data = moment(params['data']).format('YYYY-MM-DD');
