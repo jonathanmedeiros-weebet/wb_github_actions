@@ -13,7 +13,6 @@ import {
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { config } from './../../shared/config';
 import * as _ from 'lodash';
 
 @Component({
@@ -22,12 +21,13 @@ import * as _ from 'lodash';
 })
 export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     numbers = _.range(1, 61);
+    qtdNumerosLista = [];
+    qtdNumeros = 100;
     tiposAposta: TipoAposta[] = [];
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
     aposta = new Aposta();
     displayPreTicker = false;
-    BANCA_NOME = config.BANCA_NOME;
     disabled = false;
     appMobile = false;
     isLoggedIn = false;
@@ -56,24 +56,47 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     ngOnInit() {
+        const queryParams = { tipo: 'seninha' };
+
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
-
-        const queryParams = { tipo: 'seninha' };
+        this.createForm();
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
+                this.tiposAposta.forEach(tipoAposta => {
+                    if (tipoAposta.qtdNumeros < this.qtdNumeros) {
+                        this.qtdNumeros = tipoAposta.qtdNumeros;
+                    }
+                    this.qtdNumerosLista.push(tipoAposta.qtdNumeros);
+                });
                 this.sidebarService.changeItens(tiposAposta, 'seninha');
             },
             error => this.messageService.error(error)
         );
+
         this.sorteioService.getSorteios(queryParams).subscribe(
             sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );
 
-        this.createForm();
+        // Escutando surpresinha vinda do NavigationComponent
+        this.supresinhaService.atualizarSupresinha([]);
+
+        this.supresinhaService.numeros.subscribe(numeros => {
+            if (numeros.length) {
+                this.qtdNumeros = numeros.length;
+            }
+
+            this.tiposAposta.forEach(tipoAposta => {
+                if (tipoAposta.qtdNumeros === numeros.length) {
+                    this.tipoAposta = tipoAposta;
+                }
+            });
+
+            this.setNumeros(numeros);
+        });
 
         const altura = window.innerHeight - 69;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
@@ -94,19 +117,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             valor: ['', Validators.required],
             sorteio: [null, Validators.required],
             numeros: this.fb.array([])
-        });
-
-        // Escutando surpresinha vinda do NavigationComponent
-        this.supresinhaService.atualizarSupresinha([]);
-
-        this.supresinhaService.numeros.subscribe(numeros => {
-            this.tiposAposta.forEach(tipoAposta => {
-                if (tipoAposta.qtdNumeros === numeros.length) {
-                    this.tipoAposta = tipoAposta;
-                }
-            });
-
-            this.setNumeros(numeros);
         });
     }
 
@@ -217,15 +227,25 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         return obj1 && obj2 ? (obj1.id === obj2.id) : obj1 === obj2;
     }
 
+    // Disabilitar seleção da quantidade de dezenas menor que a quantidade já selecionadas.
+    disabledNumber(number) {
+        if (this.numeros.value.length && (number < this.numeros.value.length)) {
+            return true;
+        }
+        return false;
+    }
+
     /* Selecionar número */
     checkNumber(number) {
         const numeros = this.numeros.value;
         const index = numeros.findIndex(n => number === n);
 
         if (index < 0) {
-            numeros.push(number);
-            numeros.sort((a, b) => a - b);
-            this.setNumeros(numeros);
+            if (numeros.length < this.qtdNumeros) {
+                numeros.push(number);
+                numeros.sort((a, b) => a - b);
+                this.setNumeros(numeros);
+            }
         } else {
             this.numeros.removeAt(index);
         }

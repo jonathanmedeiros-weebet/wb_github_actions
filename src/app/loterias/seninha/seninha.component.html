@@ -7,6 +7,21 @@
                         Seninha
                     </div>
                     <div class="card">
+                        <div>
+                            <div class="col-xs-12">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-xs-12 col-lg-4">
+                                            <label>Quantidade de dezenas da aposta</label>
+                                            <select class="form-control" name="qtdNumeros" [(ngModel)]="qtdNumeros">
+                                                <option [value]="null" disabled>Selecione</option>
+                                                <option [value]="numero" [disabled]="disabledNumber(numero)" *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <p>
                             Escolha as suas dezenas:
                         </p>
@@ -22,7 +37,7 @@
                                     <div class="form-row">
                                         <div class="col-md-12 col-xs-12">
                                             <p>
-                                                Dezenas selecionadas: {{numeros.length}}
+                                                Dezenas selecionadas: <b>{{numeros.length}}/{{qtdNumeros}}</b>
                                             </p>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
@@ -61,7 +76,7 @@
                     </a>
                     <div class="aposta-item" *ngFor="let item of aposta.itens; let i=index">
                         <div class="item-header">
-                            <a href="#" (click)="removeGuess(i)" class="remover-palpite">
+                            <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
                                 <i class="fa fa-lg fa-close"></i>
                             </a>
                             <div>

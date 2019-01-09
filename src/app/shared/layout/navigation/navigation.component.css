@@ -55,7 +55,8 @@
  }
 
  .sidebar-brand img{
-     height: 120px;
+    max-height: 120px;
+    max-width: 255px;
  }
 
 .sidebar-nav{
