@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
-                                            <input type="number" class="form-control" min="1" formControlName="valor"
+                                            <input type="number" class="form-control" min="{{opcoes.valor_min_aposta_loterias}}" formControlName="valor"
                                                 [ngClass]="applyCssInputError('valor')">
                                             <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                                         </div>

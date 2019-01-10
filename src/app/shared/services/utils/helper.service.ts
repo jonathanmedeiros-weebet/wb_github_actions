@@ -245,4 +245,15 @@ export class HelperService {
     static dateFormat(date: string, format?: string) {
         return format ? moment(date).format(format) : moment(date).format();
     }
+
+    static calcularPremioLoteria(valor, cotacao) {
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        let result = valor * cotacao;
+
+        if (result > opcoes.valor_max_premio_loterias) {
+            result = opcoes.valor_max_premio_loterias;
+        }
+
+        return this.moneyFormat(result);
+    }
 }

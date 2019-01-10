@@ -316,14 +316,6 @@ ${horario} ${jogo.nome}
                         ${aposta.apostador}
                     </div>
                 </div>
-                <div class="clearfix margin-bottom-5">
-                    <div style="float: left;">
-                        Telefone
-                    </div>
-                    <div style="float: right;">
-                        ${aposta.telefone}
-                    </div>
-                 </div>
                 `;
 
         aposta.itens.forEach((item, index, array) => {
@@ -357,7 +349,7 @@ ${horario} ${jogo.nome}
                         Retorno 3
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.valor * item.cotacao3)}
+                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao3)}
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
@@ -365,7 +357,7 @@ ${horario} ${jogo.nome}
                         Retorno 4
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.valor * item.cotacao4)}
+                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao4)}
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
@@ -373,7 +365,7 @@ ${horario} ${jogo.nome}
                         Retorno 5
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.valor * item.cotacao5)}
+                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                     </div>
                 </div>
             `;
@@ -385,7 +377,7 @@ ${horario} ${jogo.nome}
                         Retorno 6
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.valor * item.cotacao6)}
+                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao6)}
                     </div>
                 </div>
                 `;
@@ -462,13 +454,13 @@ Valor Total: ${HelperService.moneyFormat(aposta.valor)}`;
 ${item.sorteio_nome} (${item.tipo})
 Dezenas: ${item.numeros.join('-')}
 Valor: ${HelperService.moneyFormat(item.valor)}
-Retorno 3: ${HelperService.moneyFormat(item.valor * item.cotacao3)}
-Retorno 4: ${HelperService.moneyFormat(item.valor * item.cotacao4)}
-Retorno 5: ${HelperService.moneyFormat(item.valor * item.cotacao5)}
+Retorno 3: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao3)}
+Retorno 4: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao4)}
+Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
 `;
 
             if (item.tipo === 'seninha') {
-                ticket += `Retorno 6: ${HelperService.moneyFormat(item.valor * item.cotacao6)}`;
+                ticket += `Retorno 6: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao6)}`;
             }
         });
         // console.log(ticket);

@@ -58,6 +58,10 @@ export class ParametroService {
     getBancaNome() {
         const opcoes = JSON.parse(localStorage.getItem('opcoes'));
         return opcoes.banca_nome;
+    }
 
+    getOpcoes() {
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        return opcoes;
     }
 }
