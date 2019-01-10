@@ -9,7 +9,8 @@ import {
     SorteioService, ApostaLoteriaService,
     PrintService, HelperService,
     SidebarService, SupresinhaService,
-    AuthService, PreApostaLoteriaService
+    AuthService, PreApostaLoteriaService,
+    ParametroService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +28,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     sorteios: Sorteio[] = [];
     tipoAposta: TipoAposta;
     aposta = new Aposta();
+    opcoes;
     displayPreTicker = false;
     disabled = false;
     appMobile = false;
@@ -50,7 +52,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private parametroService: ParametroService,
     ) {
         super();
     }
@@ -60,6 +63,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
+        this.opcoes = this.parametroService.getOpcoes();
         this.createForm();
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
@@ -114,7 +118,10 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     createForm() {
         this.form = this.fb.group({
-            valor: ['', Validators.required],
+            valor: ['', Validators.compose([
+                Validators.required,
+                Validators.min(this.opcoes.valor_min_aposta_loterias)
+            ])],
             sorteio: [null, Validators.required],
             numeros: this.fb.array([])
         });
@@ -127,10 +134,26 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         if (tipoAPosta) {
             const item = this.form.value;
             item.sorteio_id = this.form.value.sorteio.id;
-            item.premio6 = item.valor * this.tipoAposta.cotacao6;
-            item.premio5 = item.valor * this.tipoAposta.cotacao5;
-            item.premio4 = item.valor * this.tipoAposta.cotacao4;
-            item.premio3 = item.valor * this.tipoAposta.cotacao3;
+            if ((item.valor * this.tipoAposta.cotacao6) < this.opcoes.valor_max_premio_loterias) {
+                item.premio6 = item.valor * this.tipoAposta.cotacao6;
+            } else {
+                item.premio6 = this.opcoes.valor_max_premio_loterias;
+            }
+            if ((item.valor * this.tipoAposta.cotacao5) < this.opcoes.valor_max_premio_loterias) {
+                item.premio5 = item.valor * this.tipoAposta.cotacao5;
+            } else {
+                item.premio5 = this.opcoes.valor_max_premio_loterias;
+            }
+            if ((item.valor * this.tipoAposta.cotacao4) < this.opcoes.valor_max_premio_loterias) {
+                item.premio4 = item.valor * this.tipoAposta.cotacao4;
+            } else {
+                item.premio4 = this.opcoes.valor_max_premio_loterias;
+            }
+            if ((item.valor * this.tipoAposta.cotacao3) < this.opcoes.valor_max_premio_loterias) {
+                item.premio3 = item.valor * this.tipoAposta.cotacao3;
+            } else {
+                item.premio3 = this.opcoes.valor_max_premio_loterias;
+            }
             this.aposta.itens.push(item);
 
             this.aposta.valor += item.valor;
