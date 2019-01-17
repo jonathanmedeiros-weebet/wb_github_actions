@@ -714,7 +714,7 @@ Total Jogos: ${aposta.itens.length}`;
             ticket += `
 -------------------------------
 ${item.campeonato.nome}
-${HelperService.dateFormat(aposta.horario, 'dddd, DD MMMM YYYY, HH:mm')}
+${HelperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY, HH:mm')}
 ${item.jogo.nome}
 ${item.aposta_tipo.nome} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
