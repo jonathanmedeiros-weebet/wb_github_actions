@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "demo.wee.bet": "gulp demo.wee.bet"
+    "demo.wee.bet": "gulp demo.wee.bet",
+    "mjrsports.com": "gulp mjrsports.com"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "gulp": "^4.0.0",
+    "gulp-exec": "^3.0.2",
     "gulp-replace": "^1.0.0",
     "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",

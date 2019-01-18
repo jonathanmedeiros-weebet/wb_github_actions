@@ -1,0 +1,239 @@
+/* You can add global styles to this file, and also import other style files */
+:root{
+    [CUSTOM]
+}
+
+html{
+    position: relative;
+    font-size: 12px;
+}
+
+html, body{
+    height: 100%;
+    color: #455a64;
+    overflow: hidden;
+}
+
+header{
+    background-color: var(--header);
+}
+
+#auth-layout{
+    height: 100%;
+}
+
+#auth-layout #login{
+    align-items: center;
+    display: flex;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#auth-layout #login .login-box{
+    display: flex;
+    justify-content: center
+}
+
+#auth-footer{
+    position: fixed;
+    bottom: 0;
+    color: #fff;
+}
+
+#page-wrapper{
+    margin-top: 69px;
+}
+
+#default-content {
+    padding: 20px 15px 20px 270px;
+    height: calc(100vh - 67px);
+}
+
+.footer {
+    line-height: 60px;
+    text-align: center;
+    height: 60px;
+    background-color: #e1e2e4;
+    width: 100%;
+}
+
+.btn-custom{
+    background-color: var(--odds);
+    color: #fff;
+}
+
+.card{
+    border: 1px solid #d7dfe3;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.content-header{
+    margin-bottom: 30px;
+}
+
+.content-header h2{
+    color: var(--sidebar-right);
+    margin-bottom: 15px;
+}
+
+.btn-line{
+    margin-top: 24px;
+}
+
+.circle-group{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.circle{
+    border: 1px solid #455a64;
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    margin-right: 10px;
+}
+
+.circle .content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Override JS Toast*/
+.jq-toast-wrap{
+    z-index: 9001!important;
+}
+
+
+.form-control{
+    font-size: 1.5rem;
+    height: 38px!important;
+}
+
+.btn{
+    line-height: 27px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.invalid-feedback{
+    display: block;
+}
+
+.modal{
+    z-index: 9002;
+}
+
+/* ODDS FUTEBOL */
+.odds{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.odds .inner-odd{
+    background-color: var(--odds);
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.odds .selecionado{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span{
+    color: var(--foreground-highlight)!important;
+}
+
+.odd .nome, .odd .valor{
+    color: var(--foreground-odds);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .odds .odd{
+        width: 33.33%;
+        padding: 3px;
+    }
+
+    .odds .inner-odd:hover{
+        background-color: var(--highlight);
+    }
+
+    .odds .inner-odd:hover span{
+        color: var(--foreground-highlight)!important;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    #page-wrapper{
+        margin-top: 113px;
+    }
+
+    #default-content{
+        padding: 10px 15px;
+        height: calc(100vh - 111px);
+    }
+
+    .odds .odd{
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    /* .btn-back{
+        position: absolute;
+        left: 15px;
+        top: 28px;
+        margin: 0;
+    } */
+}
+
+/* Spinner */
+.lds-ring {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 50%;
+    margin-left: -32px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid var(--sidebar-right);
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: var(--sidebar-right) transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

@@ -1,5 +1,5 @@
 
-const _host = 'http://central.[HOST]';
+const _host = 'http://[HOST]';
 const _center = 'http://api-center.wee.bet';
 
 export const config: any = {
@@ -12,5 +12,5 @@ export const config: any = {
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
     BG: `${_host}/tema/bk.jpg`,
-    VERSAO: 1.2
+    VERSAO: 1.5
 };
