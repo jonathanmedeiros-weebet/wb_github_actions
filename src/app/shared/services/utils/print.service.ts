@@ -48,7 +48,6 @@ export class PrintService {
         .campeonato-header{
             padding: 0 12px !important;
             font-size: .9em !important;
-            height: 14px;
             margin: 5px 0;
         }
         .jogo{
@@ -61,7 +60,6 @@ export class PrintService {
             white-space: nowrap;
             background: #eee !important;
             color: #000 !important;
-            height: 14px;
             margin-bottom: 0 !important;
             line-height: 16px !important;
         }
