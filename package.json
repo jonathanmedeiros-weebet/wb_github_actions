@@ -9,8 +9,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "ciabets.wee.bet" : "gulp ciabets.wee.bet",
     "demo.wee.bet": "gulp demo.wee.bet",
-    "mjrsports.com": "gulp mjrsports.com"
+    "maisportes.com": "gulp maisportes.com",
+    "mjrsports.com": "gulp mjrsports.com",
+    "trevodasorte.me": "gulp trevodasorte.me"
+
   },
   "private": true,
   "dependencies": {

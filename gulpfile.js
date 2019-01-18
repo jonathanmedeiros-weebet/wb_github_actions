@@ -56,6 +56,14 @@ function tasks(done, config) {
 
 };
 
+gulp.task('ciabets.wee.bet', function(done) {
+    tasks(done, {
+        host: "ciabets.wee.bet",
+        banca: "CiaBets",
+        styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
+        old: true
+    });
+});
 
 gulp.task('demo.wee.bet', function(done) {
     tasks(done, {
@@ -65,11 +73,29 @@ gulp.task('demo.wee.bet', function(done) {
     });
 });
 
+gulp.task('maisportes.com', function(done) {
+    tasks(done, {
+        host: "maisportes.com",
+        banca: "Maisportes",
+        styles: "--header: #011e46; --foreground-header: #b1c5e0; --sidebar-right:#ce0000; --foreground-sidebar-right: #fff; --sidebar-left: #ce0000; --foreground-sidebar-left: #fff; --highlight:#4CAF50; --foreground-highlight: #aec3d8; --odds: #011e46; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
 gulp.task('mjrsports.com', function(done) {
     tasks(done, {
         host: "mjrsports.com",
         banca: "MJR SPORTS",
         styles: "--header: #3F6826; --foreground-header: #b1c5e0; --sidebar-right: #3B5323; --foreground-sidebar-right: #fff; --sidebar-left: #3B5323; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: #dab600; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
+gulp.task('trevodasorte.me', function(done) {
+    tasks(done, {
+        host: "trevodasorte.me",
+        banca: "Trevo da Sorte",
+        styles: "--header: #4caf50; --foreground-header: #cce2ff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #4caf50; --foreground-odds: #fff;",
         old: true
     });
 });
