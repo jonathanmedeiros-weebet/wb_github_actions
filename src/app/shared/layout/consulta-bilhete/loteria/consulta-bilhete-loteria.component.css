@@ -1,0 +1,36 @@
+#cupom{
+    width: 19.27em;
+    padding: 1em;
+    background: #fff;
+    margin: 2em auto;
+}
+#cupom img{
+    max-height: 80px;
+    max-width: 190;
+}
+#cupom h1{
+    text-align: center;
+    font-weight: bold;
+}
+#cupom .informacoes-gerais{
+    margin: 1px;
+    font-size: 12px;
+}
+#cupom .informacoes-item{
+    margin: 1px;
+    font-size: 12px;
+    text-transform: uppercase;
+    word-break: break-all;
+}
+#cupom .valor-aposta{
+    text-align: center;
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+#cupom .mensagem-rodape{
+    margin: 15px 1px 1px 1px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center
+}

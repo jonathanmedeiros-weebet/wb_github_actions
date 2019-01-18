@@ -1,0 +1,141 @@
+<div id="default-content" appPerfectScroll>
+    <div class="content-header">
+        <h2>Apuração Futebol</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssInputError('dataInicial')">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssInputError('dataFinal')">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="ganhou">Ganhou</option>
+                                    <option value="perdeu">Perdeu</option>
+                                    <option value="pendente">Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div appPerfectScroll>
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                <table *ngIf="!showLoadingIndicator" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Horário</th>
+                            <th>Apostador</th>
+                            <th>Jogos</th>
+                            <th>Valor</th>
+                            <th>Comissão</th>
+                            <th>Prêmio</th>
+                            <th>Resultado</th>
+                            <th>Pagamento</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let aposta of apostas" [ngClass]="getStatus(aposta.resultado)">
+                            <td>#{{aposta.id}}</td>
+                            <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{aposta.apostador}}</td>
+                            <td class="text-right">{{aposta.itens.length}}</td>
+                            <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
+                            <td>{{getPagamento(aposta)}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" *ngIf="checkCancellation(aposta.itens)" title="CANCELAR"
+                                        class="btn btn-danger" (click)="cancel(aposta)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button type="button" (click)="printTicket(aposta)" title="IMPRIMIR" class="btn btn-custom">
+                                        <i class="fa fa-print"></i>
+                                    </button>
+                                    <button type="button" *ngIf="aposta.resultado && aposta.resultado == 'ganhou'" (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA"
+                                        class="btn" [ngClass]="{'btn-success': !aposta.pago, 'btn-danger': aposta.pago}">
+                                        <i class="fa fa-money"></i>
+                                    </button>
+                                    <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" title="COMPARTILHAR"
+                                        class="btn btn-info">
+                                        <i class="fa fa-share-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="tr-footer">
+                            <th class="header text-right" colspan="4"></th>
+                            <th class="text-right">Valor</th>
+                            <th class="text-right">Comissão</th>
+                            <th class="text-right">Prêmio</th>
+                            <th class="text-right">Resultado</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr class="tr-footer">
+                            <th class="header text-right" colspan="4">Totais</th>
+                            <th class="text-right">{{totais.valor | currency: 'BRL':'symbol':'1.2'}}</th>
+                            <th class="text-right">{{totais.comissao | currency: 'BRL':'symbol':'1.2'}}</th>
+                            <th class="text-right">{{totais.premio | currency: 'BRL':'symbol':'1.2'}}</th>
+                            <th class="text-right">{{totais.resultado | currency: 'BRL':'symbol':'1.2'}}</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body cupom-ativo">
+        <app-consulta-bilhete-esportivo [aposta]="apostaSelecionada" *ngIf="apostaSelecionada"></app-consulta-bilhete-esportivo>
+    </div>
+</ng-template>
+
+<ng-template #cancelModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Cancelar Aposta</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Tem certeza que deseja cancelar a aposta?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="d('')" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-custom" (click)="c('')">Sim</button>
+    </div>
+</ng-template>

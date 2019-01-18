@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { throwError } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ErrorService {
-
     handleError(error: HttpErrorResponse) {
-        console.log(error);
+        let message = '';
+
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
+            message = `An error occurred: ${error.error.message}`;
+            console.error(message);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
-            console.error(`Backend returned code ${error.status}, body was:`);
+            // console.error(`Backend returned code ${error.status}, ` + `body was: ${error.message}`);
+
+            message = error.error.errors.message;
         }
-        // return an ErrorObservable with a user-facing error message
-        return new ErrorObservable(error.error.errors.message);
-    };
+        // return an observable with a user-facing error message
+        return throwError(message);
+    }
 
 }

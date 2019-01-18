@@ -1,8 +1,16 @@
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+
+import 'hammerjs';
+
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr);
+
+import * as moment from 'moment';
+moment.locale('pt-BR');
 
 // App routing
 import { AppRoutingModule } from './app-routing.module';
@@ -11,21 +19,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Core providers
-import { CoreModule } from './core/core.module';
 import { LayoutModule } from './shared/layout/layout.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
-
         AppRoutingModule,
 
-        CoreModule,
+        NgxSpinnerModule,
+        NgbModule.forRoot(),
         LayoutModule
     ],
-    providers: [],
+    providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

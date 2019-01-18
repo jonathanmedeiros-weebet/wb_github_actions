@@ -1,0 +1,174 @@
+<div class="black-screen" *ngIf="isOpen" (click)="closeMenu()" (pan)="onSwipeLeft($event)"></div>
+
+<aside>
+    <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+        <div id="side-fixed-menu">
+            <div class="sidebar-brand">
+                <a class="" [routerLink]="['/esportes/futebol/jogos']" routerLinkActive="router-link-active">
+                    <img class="logo-banca" src="{{LOGO}}" />
+                </a>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a (click)="abrirModalPesquisa()">
+                        <i class="fa fa-search"></i> Pesquisa
+                    </a>
+                </li>
+                <li>
+                    <a (click)="abrirModalAposta()">
+                        <i class="fa fa-ticket"></i> Bilhete
+                    </a>
+                </li>
+                <li>
+                    <a (click)="abrirModalTabela()">
+                        <i class="fa fa-print"></i> Tabela
+                    </a>
+                </li>
+                <li *ngIf="isAppMobile" (click)="listPrinters()">
+                    <a>
+                        <i class="fa fa-cogs"></i> Config
+                    </a>
+                </li>
+                <li *ngIf="!isAppMobile">
+                    <a target="_blank" href="app.apk">
+                        <i class="fa fa-download"></i> App
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/regras']">
+                        <i class="fa fa-book"></i> Regras
+                    </a>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <a [routerLink]="['/validar-aposta']">
+                        <i class="fa fa-check"></i> Validação
+                    </a>
+                </li>
+                <li *ngIf="isLoggedIn" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-asterisk"></i> Apuração
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
+                        <a class="dropdown-item" [routerLink]="['//apuracao/loteria']">Loteria</a>
+                    </div>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <a [routerLink]="['/resultados/esportes']">
+                        <i class="fa fa-list"></i> Resultados
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">
+            <span class="group">Destaques</span>
+            <li>
+                <a [routerLink]="['/esportes/futebol/jogos']">
+                    Campeonatos Principais
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: hoje }">
+                    Jogos de Hoje
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: amanha }">
+                    Jogos de Amanhã
+                </a>
+            </li>
+            <span class="group">Campeonatos</span>
+            <li *ngFor="let campeonato of itens">
+                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                </a>
+            </li>
+        </ul>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'basquete'">
+            <span class="group">Destaques</span>
+            <li>
+                <a [routerLink]="['/esportes/basquete/jogos']">
+                    Jogos de Hoje
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/esportes/basquete/jogos']" [queryParams]="{ data: amanha }">
+                    Jogos de Amanhã
+                </a>
+            </li>
+            <span class="group">Campeonatos</span>
+            <li *ngFor="let campeonato of itens">
+                <a [routerLink]="['/esportes/basquete/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                </a>
+            </li>
+        </ul>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'seninha' || contexto == 'quininha'">
+            <span class="group">Surpresinha</span>
+            <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
+                <a *ngIf="contexto == 'seninha'">
+                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                    ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
+                </a>
+                <a *ngIf="contexto == 'quininha'">
+                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                    ( {{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}} )
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<ng-template #modalPesquisa let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Pesquisa</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="pesquisarForm" (ngSubmit)="pesquisar()">
+            <div class="form-group">
+                <input type="text" placeholder="Pesquise por time ou campeonato..." class="form-control"
+                    formControlName="input">
+            </div>
+            <button type="submit" class="btn btn-custom">Pesquisar</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #modalTabela let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Imprimir Tabela</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="imprimirTabela()">
+            <div class="form-group">
+                <div id="treeJogos"></div>
+            </div>
+            <button type="submit" class="btn btn-custom">Imprimir</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #modalAposta let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Consultar Bilhete</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
+        <form *ngIf="!exibirBilhete" [formGroup]="pesquisarForm" (ngSubmit)="pesquisarAposta()">
+            <div class="form-group">
+                <input type="text" placeholder="Código da aposta" class="form-control" formControlName="input">
+            </div>
+            <button type="submit" class="btn btn-custom">Consultar</button>
+        </form>
+        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'"></app-consulta-bilhete-esportivo>
+        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'"></app-consulta-bilhete-loteria>
+    </div>
+</ng-template>

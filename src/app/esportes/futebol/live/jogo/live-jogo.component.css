@@ -1,0 +1,131 @@
+.indentificacao, .indentificacao-mobile{
+    padding: 15px 10px 0 10px;
+}
+
+.indentificacao .nome, .indentificacao-mobile .nome{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    font-weight: bolder;
+}
+
+.indentificacao{
+    position: relative;
+    display: flex;
+}
+
+.indentificacao .div-btn-back{
+    position: absolute;
+    left: 15px;
+    top: 22px;
+}
+
+.indentificacao .nome, h4{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.indentificacao-mobile .first-line{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+    border-bottom: 1px dashed #455a64;
+}
+
+.time-a{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-end
+}
+
+.time-b{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-start;
+}
+
+.placar{
+    background: red;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.time-a-placar{
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+.time-b-placar{
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+.indentificacao .aovivo-tempo{
+    position: absolute;
+    right: 15px;
+    top: 26px;
+}
+
+.aovivo-tempo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aovivo-label{
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.tempo{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.campeonato-nome{
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.tipo-apostas{
+    background-color: #fff;
+}
+
+.tipo-aposta{
+    padding: 15px 10px;
+    border-top: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .indentificacao{
+        display: flex;
+    }
+
+    .indentificacao-mobile{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .content-sports {
+        padding-bottom: 90px;
+    }
+
+    .indentificacao{
+        display: none;
+    }
+
+    .indentificacao-mobile{
+        display: block;
+    }
+}

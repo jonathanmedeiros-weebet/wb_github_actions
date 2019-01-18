@@ -1,0 +1,17 @@
+.ganhador{
+    background: #CFFCCF;
+}
+.perdedor{
+    background: #FFDDDF;
+}
+
+.tr-footer th{
+    border: none;
+}
+
+.cupom-ativo{
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 15px;
+    background: #333;
+    margin: 0;
+}

@@ -2,17 +2,26 @@ import { NgModule } from '@angular/core';
 
 import {
     MomentPipe,
-    TimeToStringtPipe
+    TimeToStringtPipe,
+    TipoApostaPipe,
+    CalcularCotacaoPipe,
+    PerfectScrollDirective
 } from './index';
 
 @NgModule({
     declarations: [
         MomentPipe,
-        TimeToStringtPipe
+        TimeToStringtPipe,
+        TipoApostaPipe,
+        CalcularCotacaoPipe,
+        PerfectScrollDirective,
     ],
     exports: [
         MomentPipe,
-        TimeToStringtPipe
+        TimeToStringtPipe,
+        TipoApostaPipe,
+        CalcularCotacaoPipe,
+        PerfectScrollDirective
     ]
 })
 export class UtilsModule { }

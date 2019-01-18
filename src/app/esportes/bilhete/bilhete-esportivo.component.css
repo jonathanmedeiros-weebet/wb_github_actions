@@ -1,0 +1,142 @@
+.pre-bilhete{
+    width: 270px;
+    text-align: center;
+    padding: 20px 15px 0 15px;
+    height: 100%;
+    background-color: var(--sidebar-right)
+}
+
+.pre-bilhete h4{
+    color:var(--foreground-highlight);
+}
+
+.pre-bilhete h4::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.pre-bilhete-esportes h4::before {
+    left: 50%;
+    margin-left: -37px;
+}
+
+.pre-bilhete-esportes h3::before {
+    left: 50%;
+    margin-left: -81px;
+}
+
+.value-informations{
+    text-transform: uppercase;
+    color: var(--foreground-sidebar-right);
+    margin: 20px 0;
+}
+
+.value-informations p{
+    margin-bottom: 0.5rem;
+}
+
+.value-informations .valores{
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.value-informations .valores button{
+    padding: 0;
+    width: 55px;
+    background-color: var(--odds);
+    color: var(--foreground-odds);
+}
+
+.div-inputs{
+    background-color: var(--odds);
+    padding: 20px 15px 8px 15px;
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+}
+
+.live-odd{
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
+
+.valor, .possivel-ganho{
+    color: var(--foreground-highlight);
+    font-weight: bolder;
+}
+
+.div-jogos-selecionados h3{
+    color: var(--foreground-highlight);
+}
+
+.div-jogos-selecionados .jogo-selecionado-inner{
+    margin: 0px 30px;
+}
+
+.div-jogos-selecionados h3{
+    margin: 30px 0;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.div-jogos-selecionados h3::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.jogo-selecionado{
+    padding: 15px 0;
+    border-top: 1px dashed #aec3d8;
+    text-align: left;
+    position: relative;
+}
+
+.jogo-selecionado:first-of-type{
+    border-top: none;
+    padding-top: 0;
+}
+
+.jogo-selecionado > div:not(.remover-item){
+    color: var(--foreground-sidebar-right);
+}
+
+.jogo-selecionado .horario,.jogo-selecionado .cotacao .valor{
+    color: var(--foreground-highlight);
+    font-weight: bold;
+}
+
+.remover-item{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.codigo-preaposta{
+    font-size: 2rem;
+}
+
+@media only screen and (max-width: 668px) {
+    section.pre-bilhete.pre-bilhete-mobile {
+        height: 100% !important;
+        position: fixed !important;
+    }
+
+}

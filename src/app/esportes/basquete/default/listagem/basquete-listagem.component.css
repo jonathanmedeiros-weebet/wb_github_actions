@@ -1,0 +1,71 @@
+.campeonato-header{
+    text-transform: uppercase;
+    padding: 15px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.jogos{
+    background-color: #fff;
+}
+
+.jogo{
+    border-top: 1px solid #ddd;
+    padding: 12px;
+}
+
+.indentificacao{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.indentificacao .horario{
+    background-color: #011e46;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 15px;
+}
+
+.indentificacao .nome, .indentificacao .nome-mobile{
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.mais-opcoes a{
+    color: var(--odds);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .mais-opcoes i{
+        margin-right: 5px;
+    }
+
+    .indentificacao .nome{
+        display: block;
+    }
+
+    .indentificacao .nome-mobile{
+         display: none;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .content-sports-scroll {
+        padding-bottom: 90px;
+    }
+
+    .mais-opcoes i{
+        min-width: 31px;
+    }
+
+    .indentificacao .nome-mobile{
+        display: block;
+    }
+
+    .indentificacao .nome, .mais-opcoes span{
+        display: none;
+    }
+}

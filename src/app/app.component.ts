@@ -1,29 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
-import { AuthService } from './services';
+import { AuthService, ParametroService } from './services';
 import { config } from './shared/config';
-
-declare var $;
+import { NgxSpinnerService } from 'ngx-spinner';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
-    template: '<router-outlet></router-outlet>'
+    templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
+    loading = true;
+
     constructor(
         private auth: AuthService,
-        private route: ActivatedRoute
+        private titleService: Title,
+        private parametroService: ParametroService,
+        private router: Router,
+        private spinner: NgxSpinnerService
     ) { }
 
     ngOnInit() {
-        let element = document.querySelector('html');
-        element.style.setProperty('--background-primario', config.PRIMARY_COLOR);
+        this.spinner.show();
+        this.titleService.setTitle(config.BANCA_NOME);
+        const versaoLocal = localStorage.getItem('versao');
 
-        this.route.queryParams.subscribe(params => {
-            if (params['app'] && !this.auth.isAppMobile()) {
-                this.auth.setAppMobile();
+        if (parseFloat(versaoLocal) !== config.VERSAO) {
+            this.auth.limparStorage();
+            localStorage.setItem('versao', config.VERSAO);
+        }
+
+        if (location.search.indexOf('app') >= 0) {
+            this.auth.setAppMobile();
+        }
+
+        this.parametroService.getParametros().subscribe(
+            parametros => {
+                localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
+                localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
+                localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
+                localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
+                localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
+
+                this.spinner.hide();
+
+                this.parametroService.atualizarParametros(parametros);
+
+                if (window.location.pathname === '/' || window.location.pathname === '/?app=TRUE') {
+                    this.router.navigate(['/esportes/futebol/jogos']);
+                }
             }
-        });
+        );
     }
 }

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 declare var $: any;
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class MessageService {
     constructor() { }
 
@@ -41,6 +43,6 @@ export class MessageService {
             showHideTransition: 'plain',
             icon: 'warning',
             hideAfter: 7000
-        })
+        });
     }
 }

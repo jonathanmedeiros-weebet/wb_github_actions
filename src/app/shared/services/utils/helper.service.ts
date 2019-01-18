@@ -1,20 +1,96 @@
 import { Injectable } from '@angular/core';
 
+import { Cotacao } from './../../../models';
+import { config } from './../../config';
 import * as moment from 'moment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class HelperService {
 
     constructor() { }
 
-    timeSubtraction(timeOne, timeTwo) {
+    static calcularCotacao(value: number, chave: string, jogoId: number, cotacoes: Cotacao[], aoVivo?: boolean): number {
+        let result = value;
+        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+        const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+
+        const tipoAposta = tiposAposta[chave];
+
+        // Cotacação Local
+        if (cotacoesLocais[jogoId] && cotacoesLocais[jogoId][chave]) {
+            result = parseFloat(cotacoesLocais[jogoId][chave].valor);
+        }
+
+        if (tipoAposta) {
+            if (aoVivo) {
+                // Fator ao vivo
+                let fatorAoVivo = parseFloat(tipoAposta.fator_ao_vivo);
+                if (isNaN(fatorAoVivo) || !fatorAoVivo) {
+                    fatorAoVivo = 1;
+                }
+                result *= fatorAoVivo;
+            } else {
+                // Fator
+                let fator = parseFloat(tipoAposta.fator);
+                if (isNaN(fator) || !fator) {
+                    fator = 1;
+                }
+                result *= fator;
+
+                // Favorito e Zebra
+                const cotacoesFavoritoZebra = [
+                    'casa_90',
+                    'fora_90',
+                    'casa_empate_90',
+                    'fora_empate_90'
+                ];
+
+                if (cotacoesFavoritoZebra.includes(chave)) {
+                    const cotacaoCasaFora = [
+                        'casa_90',
+                        'fora_90'
+                    ];
+                    const filtrados = cotacoes.filter(cotacao => cotacaoCasaFora.includes(cotacao.chave));
+                    const casa = filtrados.find(cotacao => cotacao.chave === 'casa_90');
+                    const fora = filtrados.find(cotacao => cotacao.chave === 'fora_90');
+
+                    if (casa && fora) {
+                        let favorito;
+                        if (casa.valor <= fora.valor) {
+                            favorito = 'casa';
+                        } else {
+                            favorito = 'fora';
+                        }
+
+                        if (/casa/.test(chave)) {
+                            result *= favorito === 'casa' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                        } else {
+                            result *= favorito === 'fora' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                        }
+                    }
+                }
+            }
+
+            // Limite
+            if (result > tipoAposta.limite) {
+                result = parseFloat(tipoAposta.limite);
+            }
+        }
+
+        return parseFloat(result.toFixed(2));
+    }
+
+    static timeSubtraction(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
 
-        const hourOne = parseInt(hourOneArray[0]);
-        const minuteOne = parseInt(hourOneArray[1]);
-        const hourTwo = parseInt(hourTwoArray[0]);
-        const minuteTwo = parseInt(hourTwoArray[1]);
+        const hourOne = parseInt(hourOneArray[0], 10);
+        const minuteOne = parseInt(hourOneArray[1], 10);
+        const hourTwo = parseInt(hourTwoArray[0], 10);
+        const minuteTwo = parseInt(hourTwoArray[1], 10);
         const timeInMinutesOne = hourOne * 60 + minuteOne;
         const timeInMinutesTwo = hourTwo * 60 + minuteTwo;
         const time = (timeInMinutesOne - timeInMinutesTwo) / 60;
@@ -22,7 +98,7 @@ export class HelperService {
         return this.hoursDecimalToTime(time);
     }
 
-    timeAddition(timeOne, timeTwo) {
+    static timeAddition(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
         const firstChar1 = hourOneArray[0].charAt(0);
@@ -36,18 +112,18 @@ export class HelperService {
         minuteTwo = Math.abs(hourTwoArray[1]);
         timeInMinutesTwo = hourTwo * 60 + minuteTwo;
 
-        if (firstChar1 === "-") {
+        if (firstChar1 === '-') {
             timeInMinutesOne = timeInMinutesOne * (-1);
         }
-        if (firstChar2 === "-") {
+        if (firstChar2 === '-') {
             timeInMinutesTwo = timeInMinutesTwo * (-1);
         }
 
-        let time = (timeInMinutesOne + timeInMinutesTwo) / 60;
+        const time = (timeInMinutesOne + timeInMinutesTwo) / 60;
         return this.hoursDecimalToTime(time);
     }
 
-    hoursDecimalToTime(hoursDecimal) {
+    static hoursDecimalToTime(hoursDecimal) {
         let time: any = '';
         let hours: any = Math.trunc(hoursDecimal);
         let minutes: any = '';
@@ -82,13 +158,13 @@ export class HelperService {
         return time;
     }
 
-    hoursTimeToDecimal(hoursTime) {
-        let hoursTimeArray: any = hoursTime.split(':');
-        let hours: any = parseInt(hoursTimeArray[0]);
-        let minutes: any = parseInt(hoursTimeArray[1]);
+    static hoursTimeToDecimal(hoursTime) {
+        const hoursTimeArray: any = hoursTime.split(':');
+        const hours: any = parseInt(hoursTimeArray[0], 10);
+        const minutes: any = parseInt(hoursTimeArray[1], 10);
         let hoursFormat: any = 0;
 
-        if (hoursTime.charAt(0) == '-') {
+        if (hoursTime.charAt(0) === '-') {
             hoursFormat = hours - minutes / 60;
         } else {
             hoursFormat = hours + minutes / 60;
@@ -97,12 +173,12 @@ export class HelperService {
         return parseFloat(hoursFormat.toFixed(2));
     }
 
-    orderDate(dateOne, dateTwo) {
+    static orderDate(dateOne, dateTwo) {
         let first = moment(dateOne, 'YYYY/MM/DD');
         let last = moment(dateTwo, 'YYYY/MM/DD');
 
         if (first.isAfter(last)) {
-            let aux = dateOne;
+            const aux = dateOne;
             first = dateTwo;
             last = aux;
         }
@@ -110,17 +186,74 @@ export class HelperService {
         return [first, last];
     }
 
-    totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
-        let initial = moment(dateTimeBegin);
-        let end = moment(dateTimeEnd);
+    static totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
+        const initial = moment(dateTimeBegin);
+        const end = moment(dateTimeEnd);
 
         // calculate the difference
-        let ms = end.diff(initial);
+        const ms = end.diff(initial);
 
         // calculate the duration
-        let d = moment.duration(ms);
+        const d = moment.duration(ms);
 
         // format a string result
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
+    }
+
+    static moneyFormat(value) {
+        const money = new Intl.NumberFormat('pt-BR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(value);
+
+
+        // precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
+        return `R$ ${money}`;
+    }
+
+    static guidGenerate() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+    }
+
+    static sharedLotteryTicket(aposta) {
+        parent.postMessage(
+            {
+                data: `${config.HOST}/aposta/${aposta.chave}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
+    static sharedSportsTicket(aposta) {
+        parent.postMessage(
+            {
+                data: `${config.HOST}/aposta/${aposta.chave}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
+    static dateFormat(date: string, format?: string) {
+        return format ? moment(date).format(format) : moment(date).format();
+    }
+
+    static calcularPremioLoteria(valor, cotacao) {
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        let result = valor * cotacao;
+
+        if (result > opcoes.valor_max_premio_loterias) {
+            result = opcoes.valor_max_premio_loterias;
+        }
+
+        return this.moneyFormat(result);
     }
 }

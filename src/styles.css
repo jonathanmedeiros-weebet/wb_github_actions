@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-    --background-primario: #14805e;
-    --background-menu: #14805e;
-    --text-menu: white;
+    --header: #002458;
+    --foreground-header: #b1c5e0;
+    --sidebar-right:#011e46;
+    --foreground-sidebar-right: #fff;
+    --sidebar-left: #011e46;
+    --foreground-sidebar-left: #fff;
+    --highlight: yellow;
+    --foreground-highlight: #aec3d8;
+    --odds: #046eef;
+    --foreground-odds: #fff;
 }
 
 html{
@@ -12,8 +19,12 @@ html{
 
 html, body{
     height: 100%;
-    background-color: #eef5f9;
     color: #455a64;
+    overflow: hidden;
+}
+
+header{
+    background-color: var(--header);
 }
 
 #auth-layout{
@@ -40,20 +51,26 @@ html, body{
     color: #fff;
 }
 
-#main-wrapper {
-    padding: 120px 0 0 0;
+#page-wrapper{
+    margin-top: 69px;
 }
 
-#content{
-   padding: 10px 15px;
+#default-content {
+    padding: 20px 15px 20px 270px;
+    height: calc(100vh - 67px);
 }
 
 .footer {
     line-height: 60px;
     text-align: center;
     height: 60px;
-    background-color: transparent;
+    background-color: #e1e2e4;
     width: 100%;
+}
+
+.btn-custom{
+    background-color: var(--odds);
+    color: #fff;
 }
 
 .card{
@@ -65,11 +82,11 @@ html, body{
 }
 
 .content-header{
-    /*margin-bottom: 30px;*/
+    margin-bottom: 30px;
 }
 
 .content-header h2{
-    color: var(--background-primario);
+    color: var(--sidebar-right);
     margin-bottom: 15px;
 }
 
@@ -115,3 +132,117 @@ html, body{
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.invalid-feedback{
+    display: block;
+}
+
+.modal{
+    z-index: 9002;
+}
+
+/* ODDS FUTEBOL */
+.odds{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.odds .inner-odd{
+    background-color: var(--odds);
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.odds .selecionado{
+    background-color: var(--highlight);
+}
+
+.odds .selecionado span{
+    color: var(--foreground-highlight)!important;
+}
+
+.odd .nome, .odd .valor{
+    color: var(--foreground-odds);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .odds .odd{
+        width: 33.33%;
+        padding: 3px;
+    }
+
+    .odds .inner-odd:hover{
+        background-color: var(--highlight);
+    }
+
+    .odds .inner-odd:hover span{
+        color: var(--foreground-highlight)!important;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    #page-wrapper{
+        margin-top: 113px;
+    }
+
+    #default-content{
+        padding: 10px 15px;
+        height: calc(100vh - 111px);
+    }
+
+    .odds .odd{
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    /* .btn-back{
+        position: absolute;
+        left: 15px;
+        top: 28px;
+        margin: 0;
+    } */
+}
+
+/* Spinner */
+.lds-ring {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 50%;
+    margin-left: -32px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid var(--sidebar-right);
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: var(--sidebar-right) transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

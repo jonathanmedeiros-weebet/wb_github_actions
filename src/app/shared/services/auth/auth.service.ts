@@ -1,71 +1,87 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
 import { config } from './../../config';
 
-import * as _ from 'lodash';
 import * as moment from 'moment';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
+    logadoSource;
+    logado;
 
     constructor(
         private http: HttpClient,
         private header: HeadersService,
         private errorService: ErrorService
-    ) { }
+    ) {
+        this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+        this.logado = this.logadoSource.asObservable();
+    }
 
-    login(data: any): Observable<void> {
-        return this.http
-            .post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
+    login(data: any): Observable<any> {
+        return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    let usuarioSerializado = JSON.stringify(res.user);
-
+                    const expires = moment().add(1, 'd').valueOf();
+                    localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
-                    localStorage.setItem('user', usuarioSerializado);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    localStorage.setItem('tipos_aposta', JSON.stringify(res.parametros['tipos_aposta']));
+
+                    this.logadoSource.next(true);
+                    window.location.reload();
                 }),
                 catchError(this.errorService.handleError)
             );
     }
 
-    logout(): void {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        localStorage.removeItem('app-mobile');
+    logout() {
+        this.limparStorage();
+
+        this.logadoSource.next(false);
+        window.location.reload();
     }
 
     isLoggedIn(): boolean {
         return localStorage.getItem('token') ? true : false;
     }
 
-    forgot(data: any): Observable<void> {
+    forgot(data: any): Observable<any> {
         const url = `${this.AuthUrl}/forgotPassword`;
 
         return this.http
             .post(url, JSON.stringify(data), this.header.getRequestOptions())
-            .catch(this.errorService.handleError);
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
-    resetPassword(data: any): Observable<void> {
+    resetPassword(data: any): Observable<any> {
         const url = `${this.AuthUrl}/resetPassword`;
 
         return this.http
             .post(url, JSON.stringify(data), this.header.getRequestOptions())
-            .catch(this.errorService.handleError);
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
-    changePassword(data: any): Observable<void> {
-        const url = `${this.AuthUrl}/changePassword`;
+    changePassword(data: any): Observable<any> {
+        const url = `${config.BASE_URL}/usuarios/alterar-senha`;
 
         return this.http
-            .post(url, JSON.stringify(data), this.header.getRequestOptions(true))
-            .catch(this.errorService.handleError);
+            .put(url, JSON.stringify(data), this.header.getRequestOptions(true))
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
     getToken() {
@@ -78,14 +94,76 @@ export class AuthService {
 
     isAppMobile() {
         let result = false;
-        let appMobile = JSON.parse(localStorage.getItem('app-mobile'));
+        const appMobile = JSON.parse(localStorage.getItem('app-mobile'));
         if (appMobile) {
-            result = appMobile
+            result = appMobile;
         }
+        return result;
+    }
+
+    hasBasquete() {
+        let result = false;
+
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        if (opcoes) {
+            result = opcoes.basquete;
+        }
+
+        return result;
+    }
+
+    hasLoterias() {
+        let result = false;
+
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        if (opcoes) {
+            result = opcoes.loterias;
+        }
+
+        return result;
+    }
+
+    hasAoVivo() {
+        let result = false;
+
+        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        if (opcoes) {
+            result = opcoes.aovivo;
+        }
+
         return result;
     }
 
     setAppMobile() {
         localStorage.setItem('app-mobile', 'true');
+    }
+
+    isExpired() {
+        const expires = localStorage.getItem('expires');
+        // +expired converte a string para inteiro
+        return moment(+expires).isBefore(new Date());
+    }
+
+    getPosicaoFinanceira() {
+        const url = `${config.BASE_URL}/financeiro/posicao`;
+
+        return this.http
+            .get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    limparStorage() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('expires');
+        localStorage.removeItem('campeonatos_bloqueados');
+        localStorage.removeItem('campeonatos_principais');
+        localStorage.removeItem('cotacoes_locais');
+        localStorage.removeItem('itens-bilhete-esportivo');
+        localStorage.removeItem('opcoes');
+        localStorage.removeItem('tipos_aposta');
     }
 }
