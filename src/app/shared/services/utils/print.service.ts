@@ -35,7 +35,7 @@ export class PrintService {
         body{
             font-family: "Lucida Console", Monaco, monospace;
             font-size: 15px;
-            background: #333;
+            background: #fff;
             margin: 0;
         }
         .dia-header{
@@ -46,18 +46,14 @@ export class PrintService {
             color: #d99595;
         }
         .campeonato-header{
-            padding: 0 12px !important;
-            font-size: .9em !important;
-            margin: 5px 0;
+            font-size: 11px !important;
         }
         .jogo{
-            padding: 0 10px !important;
         }
         .jogo .jogo-nome{
-            font-size: 1.1em;
+            font-size: 11px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
             background: #eee !important;
             color: #000 !important;
             margin-bottom: 0 !important;
@@ -70,12 +66,13 @@ export class PrintService {
         .cotacoes-principais{
             display:flex;
             flex-wrap:wrap;
+            font-size: 10px;
+            margin: 0 -15px;
         }
         .cotacoes-principais .cotacao{
             width: 33.33%;
             padding-right: 15px;
             padding-left: 15px
-            margin-bottom: 3px;
         }
         @page {
             margin: 0;
