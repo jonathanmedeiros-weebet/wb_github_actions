@@ -51,6 +51,12 @@ export class AppComponent implements OnInit {
                 if (window.location.pathname === '/' || window.location.pathname === '/?app=TRUE') {
                     this.router.navigate(['/esportes/futebol/jogos']);
                 }
+            },
+            error => {
+                console.log(error);
+                if (error === 'Expired token') {
+                    this.auth.logout();
+                }
             }
         );
     }
