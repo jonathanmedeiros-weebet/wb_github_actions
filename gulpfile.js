@@ -56,6 +56,15 @@ function tasks(done, config) {
 
 };
 
+gulp.task('betcash.club', function(done) {
+    tasks(done, {
+        host: "betcash.club",
+        banca: "Bet Cash",
+        styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
 gulp.task('ciabets.wee.bet', function(done) {
     tasks(done, {
         host: "ciabets.wee.bet",
@@ -86,6 +95,15 @@ gulp.task('mjrsports.com', function(done) {
     tasks(done, {
         host: "mjrsports.com",
         banca: "MJR SPORTS",
+        styles: "--header: #3F6826; --foreground-header: #b1c5e0; --sidebar-right: #3B5323; --foreground-sidebar-right: #fff; --sidebar-left: #3B5323; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: #dab600; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
+gulp.task('netmaniasports.wee.bet', function(done) {
+    tasks(done, {
+        host: "netmaniasports.wee.bet",
+        banca: "Net Mania Sports",
         styles: "--header: #3F6826; --foreground-header: #b1c5e0; --sidebar-right: #3B5323; --foreground-sidebar-right: #fff; --sidebar-left: #3B5323; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: #dab600; --foreground-odds: #fff;",
         old: true
     });
