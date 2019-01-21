@@ -165,5 +165,6 @@ export class AuthService {
         localStorage.removeItem('itens-bilhete-esportivo');
         localStorage.removeItem('opcoes');
         localStorage.removeItem('tipos_aposta');
+        localStorage.removeItem('odds_principais');
     }
 }

@@ -33,15 +33,21 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.showLoadingIndicator = true;
+
+        let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
+
+        if (localStorage.getItem('odds_principais') !== 'undefined') {
+            oddsPrincipais = JSON.parse(localStorage.getItem('odds_principais'));
+        }
+
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
-                this.showLoadingIndicator = true;
-
                 if (params['campeonato']) {
                     const campeonatoId = +params['campeonato'];
                     const queryParams: any = {
-                        'odds': ['casa_90', 'empate_90', 'fora_90']
+                        'odds': oddsPrincipais
                     };
 
                     this.campeonatoService.getCampeonato(campeonatoId, queryParams)
@@ -61,7 +67,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                     const queryParams: any = {
                         'sport_id': 1,
                         'campeonatos_bloqueados': campeonatosBloqueados,
-                        'odds': ['casa_90', 'empate_90', 'fora_90']
+                        'odds': oddsPrincipais
                     };
 
                     if (_.isEmpty(params)) {
