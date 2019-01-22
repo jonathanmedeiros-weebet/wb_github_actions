@@ -13,11 +13,6 @@
     text-decoration: none;
 }
 
-#sidebar-wrapper a:hover{
-    color: var(--highlight);
-    cursor: pointer;
-}
-
 #sidebar-wrapper .dropdown-item{
     color: inherit;
 }
@@ -90,6 +85,11 @@
 
 .sidebar-nav li{
     padding: 10px 15px;
+    cursor: pointer;
+}
+
+.sidebar-nav li:hover a{
+    color: var(--highlight)!important;
 }
 
 .sidebar-nav li:not(:last-child){

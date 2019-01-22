@@ -298,4 +298,8 @@ export class NavigationComponent implements OnInit {
             return this.generateRandomNumber(numbers);
         }
     }
+
+    goTo(url, queryParams) {
+        this.router.navigate([url], { queryParams });
+    }
 }

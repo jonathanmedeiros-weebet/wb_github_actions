@@ -62,43 +62,43 @@
         </div>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">
             <span class="group">Destaques</span>
-            <li>
-                <a [routerLink]="['/esportes/futebol/jogos']">
+            <li (click)="goTo('/esportes/futebol/jogos')">
+                <a>
                     Campeonatos Principais
                 </a>
             </li>
-            <li>
-                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: hoje }">
+            <li (click)="goTo('/esportes/futebol/jogos', { data: hoje })">
+                <a>
                     Jogos de Hoje
                 </a>
             </li>
-            <li>
-                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ data: amanha }">
+            <li (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
+                <a>
                     Jogos de Amanhã
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li *ngFor="let campeonato of itens">
-                <a [routerLink]="['/esportes/futebol/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+            <li *ngFor="let campeonato of itens" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
+                <a>
                     <i class="fa fa-certificate"></i> {{campeonato.nome}}
                 </a>
             </li>
         </ul>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'basquete'">
             <span class="group">Destaques</span>
-            <li>
-                <a [routerLink]="['/esportes/basquete/jogos']">
+            <li (click)="goTo('/esportes/basquete/jogos', { data: hoje })">
+                <a>
                     Jogos de Hoje
                 </a>
             </li>
-            <li>
-                <a [routerLink]="['/esportes/basquete/jogos']" [queryParams]="{ data: amanha }">
+            <li (click)="goTo('/esportes/basquete/jogos', { data: amanha })">
+                <a>
                     Jogos de Amanhã
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li *ngFor="let campeonato of itens">
-                <a [routerLink]="['/esportes/basquete/jogos']" [queryParams]="{ campeonato: campeonato._id }">
+            <li *ngFor="let campeonato of itens" (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
+                <a>
                     <i class="fa fa-certificate"></i> {{campeonato.nome}}
                 </a>
             </li>
