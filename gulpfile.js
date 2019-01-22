@@ -49,12 +49,21 @@ function tasks(done, config) {
 
     gulp.src(['/'])
         .pipe(exec('ng build --prod --aot', options))
-        .pipe(exec('scp -r -i ~/.keystore/weebet.pem ~/projetos/weebet-client/dist/* ubuntu@'+config.host+':/var/www/prod/bets/'+config.host+'/app/', options))
+        .pipe(exec('scp -r -i ~/.keystore/weebet.pem dist/* ubuntu@'+config.host+':/var/www/prod/bets/'+config.host+'/app/', options))
         .pipe(exec.reporter(reportOptions));
 
     done();
 
 };
+
+gulp.task('betcash.club', function(done) {
+    tasks(done, {
+        host: "betcash.club",
+        banca: "Bet Cash",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
+        old: true
+    });
+});
 
 gulp.task('ciabets.wee.bet', function(done) {
     tasks(done, {
@@ -87,6 +96,15 @@ gulp.task('mjrsports.com', function(done) {
         host: "mjrsports.com",
         banca: "MJR SPORTS",
         styles: "--header: #3F6826; --foreground-header: #b1c5e0; --sidebar-right: #3B5323; --foreground-sidebar-right: #fff; --sidebar-left: #3B5323; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: #dab600; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
+gulp.task('netmaniasports.wee.bet', function(done) {
+    tasks(done, {
+        host: "netmaniasports.wee.bet",
+        banca: "Net Mania Sports",
+        styles: "--header: black; --foreground-header: #b1c5e0; --sidebar-right: black; --foreground-sidebar-right: #fff; --sidebar-left: black; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: black; --foreground-odds: #fff;",
         old: true
     });
 });

@@ -9,12 +9,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "betcash.club" : "gulp betcash.club",
     "ciabets.wee.bet" : "gulp ciabets.wee.bet",
     "demo.wee.bet": "gulp demo.wee.bet",
     "maisportes.com": "gulp maisportes.com",
     "mjrsports.com": "gulp mjrsports.com",
-    "trevodasorte.me": "gulp trevodasorte.me"
-
+    "trevodasorte.me": "gulp trevodasorte.me",
+    "netmaniasports.wee.bet": "gulp netmaniasports.wee.bet"
   },
   "private": true,
   "dependencies": {
