@@ -71,7 +71,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                     };
 
                     if (_.isEmpty(params)) {
-                        queryParams.campeonatos = campeonatosPrincipais.map(campeonato => campeonato.api_id);
+                        queryParams.campeonatos = campeonatosPrincipais;
                     }
 
                     if (params['data']) {
