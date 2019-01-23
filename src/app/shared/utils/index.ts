@@ -8,5 +8,6 @@ export { TipoApostaPipe } from './tipo-aposta.pipe';
 export { CalcularCotacaoPipe } from './calcular-cotacao.pipe';
 
 //
-export { PasswordValidation } from './password-validation';
+export { CustomEncoder } from './custom-encoder';
 export { FormValidations } from './form-validation';
+export { PasswordValidation } from './password-validation';

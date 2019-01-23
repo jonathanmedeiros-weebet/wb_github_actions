@@ -166,8 +166,7 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        let odds = this.parametroService.getOddsImpressao();
-        odds = odds.map(odd => odd.replace('+', '%2B'));
+        const odds = this.parametroService.getOddsImpressao();
         const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
 
         const queryParams: any = {

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
+import { CustomEncoder } from './../../utils';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -17,7 +19,7 @@ export class HeadersService {
             headers = headers.set('Authorization', `Bearer ${token}`);
         }
 
-        let params = new HttpParams();
+        let params = new HttpParams({ encoder: new CustomEncoder() });
         if (queryParams) {
             for (const key in queryParams) {
                 if (queryParams.hasOwnProperty(key)) {
