@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
 
         this.getParametros(parametros => {
             localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
+            localStorage.setItem('campeonatos_aovivo', JSON.stringify(parametros['campeonatos_aovivo']));
             localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
             localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
             localStorage.setItem('odds_principais', JSON.stringify(parametros['odds_principais']));
@@ -55,6 +56,7 @@ export class AppComponent implements OnInit {
         setInterval(() => {
             this.getParametros(parametros => {
                 localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
+                localStorage.setItem('campeonatos_aovivo', JSON.stringify(parametros['campeonatos_aovivo']));
                 localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
                 localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
                 localStorage.setItem('odds_principais', JSON.stringify(parametros['odds_principais']));

@@ -13,6 +13,8 @@ import { Jogo } from '../../../../models';
 export class LiveListagemComponent implements OnInit, OnDestroy {
     jogos = {};
     campeonatos = new Map();
+    idsCampeonatosLiberados: string[] = JSON.parse(localStorage.getItem('campeonatos_aovivo'));
+    temJogoAoVivo = false;
     unsub$ = new Subject();
 
     constructor(
@@ -92,5 +94,13 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    campeonatoPermitido(campenatoId) {
+        const result = this.idsCampeonatosLiberados.includes(campenatoId);
+        if (result && !this.temJogoAoVivo) {
+            this.temJogoAoVivo = true;
+        }
+        return result;
     }
 }
