@@ -11,6 +11,7 @@
 #sidebar-wrapper a{
     color: var(--foreground-sidebar-left);
     text-decoration: none;
+    cursor: pointer;
 }
 
 #sidebar-wrapper .dropdown-item{
