@@ -624,7 +624,7 @@ Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.aposta_tipo.nome} ( ${item.cotacao.toFixed(2)} )`;
+                        ${item.aposta_tipo.nome} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
             if (item.ao_vivo) {
                 printContents += ` | AO VIVO`;
             }
