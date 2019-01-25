@@ -32,6 +32,20 @@
 #cupom .jogo-cotacao{
     font-size: 12px;
 }
+#cupom .ganhou{
+    color:green
+}
+#cupom .perdeu{
+    color:red
+}
+#cupom .cancelado{
+    text-decoration: line-through
+}
+#cupom .jogo-resultado{
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+}
 #cupom .informacoes-gerais{
     margin: 1px;
     font-size: 12px;

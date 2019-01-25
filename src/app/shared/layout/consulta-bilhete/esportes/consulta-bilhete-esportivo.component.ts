@@ -25,4 +25,12 @@ export class ConsultaBilheteEsportivoComponent implements OnInit {
             this.cambistaPaga = this.aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
         }
     }
+
+    resultadoClass(item) {
+        return {
+            'ganhou': !item.removido ? item.resultado === 'ganhou' : false,
+            'perdeu': !item.removido ? item.resultado === 'perdeu' : false,
+            'cancelado': item.removido,
+        };
+    }
 }

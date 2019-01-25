@@ -11,11 +11,15 @@
             <p class="jogo-horario">
                 {{item.jogo.horario | moment: 'dddd, DD [de] MMMM [de] YYYY [ÀS] HH:mm'}}
             </p>
-            <p class="jogo-nome">
+            <p class="jogo-nome" [ngClass]="resultadoClass(item)">
                 {{item.jogo.nome}}
             </p>
-            <p class="jogo-cotacao">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )
+            <p class="jogo-cotacao" [ngClass]="resultadoClass(item)">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )
                 <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+            </p>
+            <p class="jogo-resultado">
+                <span *ngIf="item.removido; else resultado">cancelado</span>
+                <ng-template #resultado>{{item.resultado}}</ng-template>
             </p>
         </ng-container>
         ----------------------------<br>
