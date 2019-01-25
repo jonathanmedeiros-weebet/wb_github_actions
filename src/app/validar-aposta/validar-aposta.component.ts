@@ -39,7 +39,6 @@ export class ValidarApostaComponent extends BaseFormComponent
     @ViewChild('modal') modal: ElementRef;
     modalReference;
     ultimaApostaRealizada;
-    mensagemSucesso = '';
     unsub$ = new Subject();
 
     constructor(
@@ -165,7 +164,6 @@ export class ValidarApostaComponent extends BaseFormComponent
     }
 
     success(data) {
-        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
         this.ultimaApostaRealizada = data;
         this.reboot();
 

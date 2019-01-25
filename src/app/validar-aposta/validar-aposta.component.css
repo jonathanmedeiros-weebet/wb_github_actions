@@ -56,17 +56,20 @@
     margin-right: 5px;
 }
 
-.item-selecionado > div:not(.remover-item){
-    /* color: #94abcb; */
-}
-
 .item-selecionado .horario{
-    /* color: #90a3c1; */
     font-weight: bold;
 }
 
 .item-selecionado .cotacao .valor{
-    /* color: #90a3c1; */
+    font-weight: bold;
+}
+
+.success-msg{
+    font-size: 1.3rem;
+}
+
+.success-msg .codigo{
+    font-size: 2rem;
     font-weight: bold;
 }
 

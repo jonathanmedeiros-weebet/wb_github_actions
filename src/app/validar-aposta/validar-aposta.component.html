@@ -140,7 +140,11 @@
         </button>
     </div>
     <div class="modal-body">
-        <p [innerHTML]="mensagemSucesso"></p>
+        <div class="success-msg">
+            CÓDIGO: <span class="codigo">#{{ultimaApostaRealizada.id}}</span>
+            <br>
+            Aposta realizada com <strong>SUCESSO</strong>!
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-custom" (click)="printTicket()">Imprimir</button>

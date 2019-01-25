@@ -30,7 +30,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     appMobile;
     disabled = false;
     isLoggedIn = false;
-    mensagemSucesso = '';
+    codigo = '';
     unsub$ = new Subject();
 
     constructor(
@@ -165,9 +165,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     apostaSuccess(aposta) {
-        this.ultimaApostaRealizada = aposta;
-        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
         this.enableSubmit();
+        this.ultimaApostaRealizada = aposta;
+        this.codigo = aposta.id;
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
@@ -184,10 +184,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     preApostaSuccess(id) {
         this.enableSubmit();
+        this.codigo = id;
+
         this.bilheteService.atualizarItens([]);
         this.form.reset();
-        this.mensagemSucesso = `Para validar sua aposta, procure um cambista de sua
-         preferência e informe o código: <b>#${id}</b>`;
 
         this.modalReference = this.modalService.open(this.modal, {
             ariaLabelledBy: 'modal-basic-title',

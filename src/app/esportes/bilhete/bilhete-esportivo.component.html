@@ -94,7 +94,6 @@
         </a>
     </div>
 </div>
-
 <ng-template #modal let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Atenção</h4>
@@ -103,7 +102,19 @@
         </button>
     </div>
     <div class="modal-body">
-        <p [innerHTML]="mensagemSucesso"></p>
+        <div class="success-msg">
+            <div *ngIf="isLoggedIn; else preApostaMsg">
+                CÓDIGO: <span class="codigo">#{{codigo}}</span>
+                <br>
+                Aposta realizada com <strong>SUCESSO</strong>!
+            </div>
+            <ng-template #preApostaMsg>
+                <div>
+                    Para validar sua aposta, procure um cambista de sua
+                    preferência e informe o código: <span class="codigo">#{{codigo}}</span>
+                </div>
+            </ng-template>
+        </div>
     </div>
     <div class="modal-footer">
         <button *ngIf="!isLoggedIn" type="button" class="btn btn-outline-dark" (click)="modalReference.close('Close click')">Fechar</button>
