@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
@@ -29,6 +29,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
+        private router: Router,
         private route: ActivatedRoute
     ) { }
 
@@ -44,57 +45,74 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
-                if (params['campeonato']) {
-                    const campeonatoId = +params['campeonato'];
-                    const queryParams: any = {
-                        'odds': oddsPrincipais
-                    };
+                let campeonatosStorage;
+                const campUrl = sessionStorage.getItem('camp_url');
+                if (sessionStorage.getItem('campeonatos')) {
+                    campeonatosStorage = JSON.parse(sessionStorage.getItem('campeonatos'));
+                }
 
-                    this.campeonatoService.getCampeonato(campeonatoId, queryParams)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            campeonato => {
-                                this.showLoadingIndicator = false;
-                                clearInterval(this.refreshIntervalId);
-                                this.campeonatos = [campeonato];
-                            },
-                            error => this.messageService.error(error)
-                        );
+                if (campeonatosStorage && this.router.url === campUrl) {
+                    this.campeonatos = campeonatosStorage;
+                    this.showLoadingIndicator = false;
                 } else {
-                    const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
-                    const campeonatosPrincipais = JSON.parse(localStorage.getItem('campeonatos_principais'));
+                    if (params['campeonato']) {
+                        const campeonatoId = +params['campeonato'];
+                        const queryParams: any = {
+                            'odds': oddsPrincipais
+                        };
 
-                    const queryParams: any = {
-                        'sport_id': 1,
-                        'campeonatos_bloqueados': campeonatosBloqueados,
-                        'odds': oddsPrincipais
-                    };
+                        this.campeonatoService.getCampeonato(campeonatoId, queryParams)
+                            .pipe(takeUntil(this.unsub$))
+                            .subscribe(
+                                campeonato => {
+                                    this.showLoadingIndicator = false;
+                                    clearInterval(this.refreshIntervalId);
+                                    this.campeonatos = [campeonato];
 
-                    if (_.isEmpty(params)) {
-                        queryParams.campeonatos = campeonatosPrincipais;
-                    }
-
-                    if (params['data']) {
-                        const data = moment(params['data']).format('YYYY-MM-DD');
-                        queryParams.data = data;
+                                    sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
+                                    sessionStorage.setItem('camp_url', this.router.url);
+                                },
+                                error => this.messageService.error(error)
+                            );
                     } else {
-                        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-                        queryParams.data_final = opcoes.data_limite_tabela;
-                    }
+                        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+                        const campeonatosPrincipais = JSON.parse(localStorage.getItem('campeonatos_principais'));
 
-                    if (params['nome']) {
-                        queryParams.nome = params['nome'];
-                    }
+                        const queryParams: any = {
+                            'sport_id': 1,
+                            'campeonatos_bloqueados': campeonatosBloqueados,
+                            'odds': oddsPrincipais
+                        };
 
-                    this.campeonatoService.getCampeonatos(queryParams)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            campeonatos => {
-                                this.camps = campeonatos;
-                                this.paginacao();
-                            },
-                            error => this.messageService.error(error)
-                        );
+                        if (_.isEmpty(params)) {
+                            queryParams.campeonatos = campeonatosPrincipais;
+                        }
+
+                        if (params['data']) {
+                            const data = moment(params['data']).format('YYYY-MM-DD');
+                            queryParams.data = data;
+                        } else {
+                            const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+                            queryParams.data_final = opcoes.data_limite_tabela;
+                        }
+
+                        if (params['nome']) {
+                            queryParams.nome = params['nome'];
+                        }
+
+                        this.campeonatoService.getCampeonatos(queryParams)
+                            .pipe(takeUntil(this.unsub$))
+                            .subscribe(
+                                campeonatos => {
+                                    this.camps = campeonatos;
+                                    this.paginacao();
+
+                                    sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
+                                    sessionStorage.setItem('camp_url', this.router.url);
+                                },
+                                error => this.messageService.error(error)
+                            );
+                    }
                 }
             });
 
@@ -120,20 +138,22 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         const total = Math.ceil(this.camps.length / sum);
 
         this.campeonatos = [];
-        this.campeonatos = this.campeonatos.concat(this.camps.splice(start, sum));
+        this.campeonatos = this.campeonatos.concat(this.camps.splice(0, sum));
         start++;
 
         this.showLoadingIndicator = false;
 
-        this.refreshIntervalId = setInterval(() => {
-            const c = this.camps.splice(start, sum);
-            this.campeonatos = this.campeonatos.concat(c);
-            start++;
+        if (total > 1) {
+            this.refreshIntervalId = setInterval(() => {
+                const c = this.camps.splice(0, sum);
+                this.campeonatos = this.campeonatos.concat(c);
+                start++;
 
-            if (start >= total) {
-                clearInterval(this.refreshIntervalId);
-            }
-        }, 500);
+                if (start >= total) {
+                    clearInterval(this.refreshIntervalId);
+                }
+            }, 500);
+        }
     }
 
     oddSelecionada(jogoId, chave) {
