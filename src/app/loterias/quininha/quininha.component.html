@@ -87,15 +87,15 @@
                                 <label>valor: </label>
                                 <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
-                            <div>
+                            <div *ngIf="item.premio5">
                                 <label>Retorno 5: </label>
                                 <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
-                            <div>
+                            <div *ngIf="item.premio4">
                                 <label>Retorno 4: </label>
                                 <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
-                            <div>
+                            <div *ngIf="item.premio3">
                                 <label>Retorno 3: </label>
                                 <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
                             </div>
