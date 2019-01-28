@@ -106,6 +106,15 @@ gulp.task('maisportes.com', function(done) {
     });
 });
 
+gulp.task('maissports.net', function(done) {
+    tasks(done, {
+        host: "maissports.net",
+        banca: "MaisSports",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
 gulp.task('mjrsports.com', function(done) {
     tasks(done, {
         host: "mjrsports.com",
@@ -121,6 +130,14 @@ gulp.task('netmaniasports.wee.bet', function(done) {
         banca: "Net Mania Sports",
         styles: "--header: black; --foreground-header: #b1c5e0; --sidebar-right: black; --foreground-sidebar-right: #fff; --sidebar-left: black; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: black; --foreground-odds: #fff;",
         old: true
+    });
+});
+
+gulp.task('oliverbet.com', function(done) {
+    tasks(done, {
+        host: "oliverbet.com",
+        banca: "Oliver Bet",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
     });
 });
 
