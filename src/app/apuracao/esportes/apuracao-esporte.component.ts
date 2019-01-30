@@ -32,6 +32,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         'premio': 0,
         'resultado': 0
     };
+    dataInicial;
+    dataFinal;
     unsub$ = new Subject();
 
     constructor(
@@ -47,6 +49,21 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+
+        if (moment().day() === 0 || moment().day() === 1) {
+            const startWeek = moment().startOf('week');
+            this.dataInicial = startWeek.subtract(6, 'days');
+
+            if (moment().day() === 0) {
+                this.dataFinal = moment();
+            } else {
+                this.dataFinal = moment().subtract(1, 'days');
+            }
+        } else {
+            this.dataInicial = moment().startOf('week').add('1', 'day');
+            this.dataFinal = moment();
+        }
+
         this.getApostas();
         this.createForm();
     }
@@ -63,8 +80,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         this.totais.valor = 0;
 
         let queryParams: any = {
-            'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
-            'data-final': moment().format('YYYY-MM-DD 23:59:59'),
+            'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
+            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
             'sort': '-horario'
         };
 
@@ -98,8 +115,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
 
     createForm() {
         this.form = this.fb.group({
-            dataInicial: [moment().subtract('7', 'd').format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [moment().format('YYYY-MM-DD'), Validators.required],
+            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
+            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
             status: ['']
         });
     }
