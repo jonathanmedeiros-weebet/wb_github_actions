@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li *ngIf="!isAppMobile">
-                    <a target="_blank" href="app.apk">
+                    <a target="_blank" download="app.apk" href="app.apk">
                         <i class="fa fa-download"></i> App
                     </a>
                 </li>
@@ -105,7 +105,7 @@
         </ul>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'seninha' || contexto == 'quininha'">
             <span class="group">Surpresinha</span>
-            <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros)">
+            <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
                 <a *ngIf="contexto == 'seninha'">
                     <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
                     ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )

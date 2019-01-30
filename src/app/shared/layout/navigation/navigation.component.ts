@@ -274,11 +274,11 @@ export class NavigationComponent implements OnInit {
     }
 
     /* Geração dos números aleatórios para loteria */
-    gerarSupresinha(length) {
+    gerarSupresinha(length, context) {
         const numbers = [];
 
         for (let index = 0; index < length; index++) {
-            const number = this.generateRandomNumber(numbers);
+            const number = this.generateRandomNumber(numbers, context);
             numbers.push(number);
         }
 
@@ -287,15 +287,21 @@ export class NavigationComponent implements OnInit {
     }
 
     /* Gerar número randômico */
-    generateRandomNumber(numbers: Number[]) {
-        const number = _.random(1, 60);
+    generateRandomNumber(numbers: Number[], context) {
+        let number;
+
+        if (context === 'seninha') {
+            number = _.random(1, 60);
+        } else {
+            number = _.random(1, 80);
+        }
 
         const find = numbers.find(n => n === number);
 
         if (!find) {
             return number;
         } else {
-            return this.generateRandomNumber(numbers);
+            return this.generateRandomNumber(numbers, context);
         }
     }
 

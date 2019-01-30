@@ -72,6 +72,14 @@ gulp.task('betgyn.com', function(done) {
     });
 });
 
+gulp.task('betsports99.net', function(done) {
+    tasks(done, {
+        host: "betsports99.net",
+        banca: "BET SPORTS 99",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('ciabets.wee.bet', function(done) {
     tasks(done, {
         host: "ciabets.wee.bet",
@@ -97,11 +105,29 @@ gulp.task('eurosportbet.wee.bet', function(done) {
     });
 });
 
+gulp.task('maisporte.com', function(done) {
+    tasks(done, {
+        host: "www.maisporte.com",
+        banca: "MAISPORTE",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
 gulp.task('maisportes.com', function(done) {
     tasks(done, {
         host: "maisportes.com",
         banca: "Maisportes",
         styles: "--header: #011e46; --foreground-header: #b1c5e0; --sidebar-right:#ce0000; --foreground-sidebar-right: #fff; --sidebar-left: #ce0000; --foreground-sidebar-left: #fff; --highlight:#4CAF50; --foreground-highlight: #aec3d8; --odds: #011e46; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
+gulp.task('maissports.net', function(done) {
+    tasks(done, {
+        host: "maissports.net",
+        banca: "MaisSports",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
         old: true
     });
 });
@@ -120,6 +146,23 @@ gulp.task('netmaniasports.wee.bet', function(done) {
         host: "netmaniasports.wee.bet",
         banca: "Net Mania Sports",
         styles: "--header: black; --foreground-header: #b1c5e0; --sidebar-right: black; --foreground-sidebar-right: #fff; --sidebar-left: black; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: black; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
+gulp.task('oliverbet.com', function(done) {
+    tasks(done, {
+        host: "oliverbet.com",
+        banca: "Oliver Bet",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
+gulp.task('superbets.bet', function(done) {
+    tasks(done, {
+        host: "superbets.bet",
+        banca: "SUPERBETS",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
         old: true
     });
 });
