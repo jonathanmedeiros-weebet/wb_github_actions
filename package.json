@@ -11,11 +11,8 @@
     "e2e": "ng e2e",
     "betcash.club": "gulp betcash.club",
     "betgyn.com": "gulp betgyn.com",
-<<<<<<< HEAD
     "chutecerto.club": "gulp chutecerto.club",
-=======
     "betsports99.net": "gulp betsports99.net",
->>>>>>> 7d4bfcd36839ae16d2cfd85122ba46c85ffe8ba9
     "ciabets.wee.bet": "gulp ciabets.wee.bet",
     "eurosportbet.wee.bet": "gulp eurosportbet.wee.bet",
     "demo.wee.bet": "gulp demo.wee.bet",
