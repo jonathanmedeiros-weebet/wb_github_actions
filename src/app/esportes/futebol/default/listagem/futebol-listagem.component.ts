@@ -21,6 +21,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
     refreshIntervalId;
+    cotacoesFaltando = {};
+    cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
     unsub$ = new Subject();
 
     constructor(
@@ -195,5 +197,43 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+    }
+
+    cotacaoManualFaltando(jogoId, cotacoes) {
+        let result = false;
+        const cotacoesLocais = this.cotacoesLocais[jogoId];
+
+        if (cotacoesLocais) {
+            cotacoes.forEach(cotacao => {
+                for (const chave in cotacoesLocais) {
+                    if (chave === cotacao.chave) {
+                        cotacoesLocais[chave].usou = true;
+                    }
+                }
+            });
+
+            for (const chave in cotacoesLocais) {
+                if (cotacoesLocais.hasOwnProperty(chave)) {
+                    const cotacaoLocal = cotacoesLocais[chave];
+
+                    if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
+                        if (!this.cotacoesFaltando[jogoId]) {
+                            this.cotacoesFaltando[jogoId] = [];
+                        }
+
+                        if (!this.cotacoesFaltando[jogoId].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[jogoId].push({
+                                chave: chave,
+                                valor: cotacaoLocal.valor
+                            });
+                        }
+                    }
+                }
+            }
+
+            result = true;
+        }
+
+        return result;
     }
 }

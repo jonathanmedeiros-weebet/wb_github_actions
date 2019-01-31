@@ -48,6 +48,19 @@
                                             </span>
                                         </div>
                                     </div>
+                                    <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
+                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]" (click)="addCotacao(jogo, cotacao)">
+                                            <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                                <span class="nome">
+                                                    {{cotacao.chave | tipoAposta}}
+                                                </span>
+                                                <span class="valor">
+                                                    {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
+                                                    jogo.cotacoes}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
                                 </div>
                             </div>
                         </ng-container>
