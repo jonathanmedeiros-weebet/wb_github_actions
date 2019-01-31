@@ -11,16 +11,22 @@
     "e2e": "ng e2e",
     "betcash.club": "gulp betcash.club",
     "betgyn.com": "gulp betgyn.com",
+<<<<<<< HEAD
     "chutecerto.club": "gulp chutecerto.club",
+=======
+    "betsports99.net": "gulp betsports99.net",
+>>>>>>> 7d4bfcd36839ae16d2cfd85122ba46c85ffe8ba9
     "ciabets.wee.bet": "gulp ciabets.wee.bet",
     "eurosportbet.wee.bet": "gulp eurosportbet.wee.bet",
     "demo.wee.bet": "gulp demo.wee.bet",
+    "maisporte.com": "gulp maisporte.com",
     "maisportes.com": "gulp maisportes.com",
     "maissports.net": "gulp maissports.net",
     "mjrsports.com": "gulp mjrsports.com",
     "oliverbet.com": "gulp oliverbet.com",
-    "trevodasorte.me": "gulp trevodasorte.me",
-    "netmaniasports.wee.bet": "gulp netmaniasports.wee.bet"
+    "superbets.bet": "gulp superbets.bet",
+    "netmaniasports.wee.bet": "gulp netmaniasports.wee.bet",
+    "trevodasorte.me": "gulp trevodasorte.me"
   },
   "private": true,
   "dependencies": {
