@@ -176,6 +176,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         const item = {
             aoVivo: jogo.ao_vivo,
             jogo_id: jogo._id,
+            jogo_nome: jogo.nome,
             cotacao: cotacao,
             jogo: jogo
         };
