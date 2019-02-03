@@ -72,7 +72,7 @@
                     Jogos de Hoje
                 </a>
             </li>
-            <li (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
+            <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
                 <a>
                     Jogos de Amanhã
                 </a>
@@ -91,7 +91,7 @@
                     Jogos de Hoje
                 </a>
             </li>
-            <li (click)="goTo('/esportes/basquete/jogos', { data: amanha })">
+            <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/jogos', { data: amanha })">
                 <a>
                     Jogos de Amanhã
                 </a>
