@@ -16,4 +16,5 @@ export class Jogo {
     cotacoes: Cotacao[];
     cotacoes_principais: Cotacao[];
     info: JogoInfo;
+    favorito: string;
 }

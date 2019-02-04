@@ -204,7 +204,7 @@ export class NavigationComponent implements OnInit {
                                 cotacao.valor,
                                 cotacao.chave,
                                 jogo._id,
-                                jogo.cotacoes
+                                jogo.favorito
                             );
                         });
                     });

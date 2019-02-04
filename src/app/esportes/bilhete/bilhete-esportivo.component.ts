@@ -119,7 +119,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 item.cotacao.valor,
                 item.cotacao.chave,
                 item.jogo._id,
-                item.jogo.cotacoes,
+                item.jogo.favorito,
                 item.aoVivo
             );
         });

@@ -43,8 +43,8 @@
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
-                                                jogo.cotacoes}}
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave:
+                                                jogo._id:jogo.favorito}}
                                             </span>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                                 </span>
                                                 <span class="valor">
                                                     {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
-                                                    jogo.cotacoes}}
+                                                    jogo.favorito}}
                                                 </span>
                                             </div>
                                         </div>

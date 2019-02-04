@@ -11,7 +11,7 @@ export class HelperService {
 
     constructor() { }
 
-    static calcularCotacao(value: number, chave: string, jogoId: number, cotacoes: Cotacao[], aoVivo?: boolean): number {
+    static calcularCotacao(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
         const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
         const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
@@ -40,31 +40,16 @@ export class HelperService {
                 }
                 result *= fator;
 
-                // Favorito e Zebra
-                const cotacoesFavoritoZebra = [
-                    'casa_90',
-                    'fora_90',
-                    'casa_empate_90',
-                    'fora_empate_90'
-                ];
-
-                if (cotacoesFavoritoZebra.includes(chave)) {
-                    const cotacaoCasaFora = [
+                if (favorito) {
+                    // Favorito e Zebra
+                    const cotacoesFavoritoZebra = [
                         'casa_90',
-                        'fora_90'
+                        'fora_90',
+                        'casa_empate_90',
+                        'fora_empate_90'
                     ];
-                    const filtrados = cotacoes.filter(cotacao => cotacaoCasaFora.includes(cotacao.chave));
-                    const casa = filtrados.find(cotacao => cotacao.chave === 'casa_90');
-                    const fora = filtrados.find(cotacao => cotacao.chave === 'fora_90');
 
-                    if (casa && fora) {
-                        let favorito;
-                        if (casa.valor <= fora.valor) {
-                            favorito = 'casa';
-                        } else {
-                            favorito = 'fora';
-                        }
-
+                    if (cotacoesFavoritoZebra.includes(chave)) {
                         if (/casa/.test(chave)) {
                             result *= favorito === 'casa' ? opcoes.fator_favorito : opcoes.fator_zebra;
                         } else {
