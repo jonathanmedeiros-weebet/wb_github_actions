@@ -38,19 +38,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.showLoadingIndicator = true;
+        this.definirAltura();
 
         let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
 
         if (localStorage.getItem('odds_principais') !== 'undefined') {
             oddsPrincipais = JSON.parse(localStorage.getItem('odds_principais'));
         }
-
-
-        const altura = window.innerHeight - 69;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
-        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
-        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
 
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
@@ -63,7 +57,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                     campeonatosStorage = JSON.parse(sessionStorage.getItem('campeonatos'));
                 }
 
-                if (campeonatosStorage && this.router.url === campUrl) {
+                if (campeonatosStorage && campeonatosStorage.length > 0 && this.router.url === campUrl) {
                     this.campeonatos = campeonatosStorage;
                     this.showLoadingIndicator = false;
                 } else {
@@ -116,11 +110,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             .pipe(takeUntil(this.unsub$))
                             .subscribe(
                                 campeonatos => {
-                                    this.camps = campeonatos;
-                                    this.paginacao();
-
                                     sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
                                     sessionStorage.setItem('camp_url', this.router.url);
+
+                                    this.camps = campeonatos;
+                                    this.paginacao();
                                 },
                                 error => this.messageService.error(error)
                             );
@@ -136,6 +130,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    definirAltura() {
+        const altura = window.innerHeight - 69;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     paginacao() {

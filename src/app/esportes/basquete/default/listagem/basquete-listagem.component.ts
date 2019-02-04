@@ -18,6 +18,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
+    contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
@@ -30,11 +31,13 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.showLoadingIndicator = true;
+        this.definirAltura();
 
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
-                this.showLoadingIndicator = true;
+                this.contentSportsEl.scrollTop = 0;
 
                 if (params['campeonato']) {
                     const campeonatoId = +params['campeonato'];
@@ -85,17 +88,19 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
-
-        const altura = window.innerHeight - 69;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    definirAltura() {
+        const altura = window.innerHeight - 69;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     oddSelecionada(jogoId, chave) {
