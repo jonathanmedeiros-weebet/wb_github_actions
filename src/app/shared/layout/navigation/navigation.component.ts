@@ -67,6 +67,7 @@ export class NavigationComponent implements OnInit {
         input: ['']
     });
     aposta;
+    opcoes;
     unsub$ = new Subject();
 
     constructor(
@@ -100,6 +101,8 @@ export class NavigationComponent implements OnInit {
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(isOpen => this.isOpen = isOpen);
         }
+
+        this.opcoes = JSON.parse(localStorage.getItem('opcoes'));
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -307,5 +310,9 @@ export class NavigationComponent implements OnInit {
 
     goTo(url, queryParams) {
         this.router.navigate([url], { queryParams });
+    }
+
+    exibirJogosAmanha() {
+        return !moment(this.opcoes.data_limite_tabela).isSame(moment(), 'day');
     }
 }

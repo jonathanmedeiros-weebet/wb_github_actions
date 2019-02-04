@@ -23,6 +23,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     refreshIntervalId;
     cotacoesFaltando = {};
     cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+    contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
@@ -44,9 +45,18 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
             oddsPrincipais = JSON.parse(localStorage.getItem('odds_principais'));
         }
 
+
+        const altura = window.innerHeight - 69;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
+                this.contentSportsEl.scrollTop = 0;
+
                 let campeonatosStorage;
                 const campUrl = sessionStorage.getItem('camp_url');
                 if (sessionStorage.getItem('campeonatos')) {
@@ -121,12 +131,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
-
-        const altura = window.innerHeight - 69;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
     }
 
     ngOnDestroy() {
