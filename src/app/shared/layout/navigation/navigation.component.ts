@@ -313,6 +313,10 @@ export class NavigationComponent implements OnInit {
     }
 
     exibirJogosAmanha() {
-        return !moment(this.opcoes.data_limite_tabela).isSame(moment(), 'day');
+        let result = true;
+        if (this.opcoes) {
+            result = !moment(this.opcoes.data_limite_tabela).isSame(moment(), 'day');
+        }
+        return result;
     }
 }
