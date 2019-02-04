@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
             localStorage.setItem('campeonatos_aovivo', JSON.stringify(parametros['campeonatos_aovivo']));
             localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
             localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
+            localStorage.setItem('jogos_bloqueados', JSON.stringify(parametros['jogos_bloqueados']));
             localStorage.setItem('odds_principais', JSON.stringify(parametros['odds_principais']));
             localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
             localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
@@ -59,11 +60,12 @@ export class AppComponent implements OnInit {
                 localStorage.setItem('campeonatos_aovivo', JSON.stringify(parametros['campeonatos_aovivo']));
                 localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
                 localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
+                localStorage.setItem('jogos_bloqueados', JSON.stringify(parametros['jogos_bloqueados']));
                 localStorage.setItem('odds_principais', JSON.stringify(parametros['odds_principais']));
                 localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
                 localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
             });
-        }, 600000);
+        }, 300000);
     }
 
     getParametros(fn) {

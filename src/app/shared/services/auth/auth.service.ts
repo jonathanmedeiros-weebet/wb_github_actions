@@ -163,6 +163,7 @@ export class AuthService {
         localStorage.removeItem('campeonatos_bloqueados');
         localStorage.removeItem('campeonatos_principais');
         localStorage.removeItem('cotacoes_locais');
+        localStorage.removeItem('jogos_bloqueados');
         localStorage.removeItem('itens-bilhete-esportivo');
         localStorage.removeItem('opcoes');
         localStorage.removeItem('tipos_aposta');

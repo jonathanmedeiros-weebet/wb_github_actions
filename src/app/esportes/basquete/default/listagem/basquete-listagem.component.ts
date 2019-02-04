@@ -18,6 +18,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
+    jogosBloqueados = JSON.parse(localStorage.getItem('jogos_bloqueados'));
     contentSportsEl;
     unsub$ = new Subject();
 
@@ -143,5 +144,9 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+    }
+
+    jogoBloqueado(id) {
+        return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
     }
 }

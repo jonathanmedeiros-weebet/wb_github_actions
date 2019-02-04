@@ -23,6 +23,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     refreshIntervalId;
     cotacoesFaltando = {};
     cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+    jogosBloqueados = JSON.parse(localStorage.getItem('jogos_bloqueados'));
     contentSportsEl;
     unsub$ = new Subject();
 
@@ -242,5 +243,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         }
 
         return result;
+    }
+
+    jogoBloqueado(id) {
+        return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
     }
 }
