@@ -17,10 +17,16 @@ export class AppComponent implements OnInit {
 
     constructor(
         private auth: AuthService,
-        private titleService: Title
+        private titleService: Title,
+        private params: ParametroService
     ) { }
 
     ngOnInit() {
+        // console.log('AppComponent');
+        // this.params.getParametrosLocais().subscribe(result => {
+        //     console.log('XD');
+        //     console.log(result);
+        // });
         // this.spinner.show();
         // this.titleService.setTitle(config.BANCA_NOME);
 

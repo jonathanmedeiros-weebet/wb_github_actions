@@ -15,6 +15,7 @@ export class ParametrosResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any> {
-        return this.parametroService.getParametros();
+        console.log('ParametrosResolver');
+        return this.parametroService.getParametrosLocais();
     }
 }

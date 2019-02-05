@@ -4,12 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard, LoteriaGuard } from './services';
+import { AuthGuard, LoteriaGuard, ParametrosResolver } from './services';
 
 const appRoutes: Routes = [
     {
         path: '',
         component: MainLayoutComponent,
+        resolve: [ParametrosResolver],
         children: [
             {
                 path: '',

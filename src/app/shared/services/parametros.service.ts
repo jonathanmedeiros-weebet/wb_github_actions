@@ -36,4 +36,10 @@ export class ParametroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    getParametrosLocais(): Observable<any> {
+        console.log("getParametrosLocais");
+        const time = + new Date();
+        return this.http.get(`./param/parametros.json?${time}`);
+    }
 }
