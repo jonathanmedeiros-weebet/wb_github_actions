@@ -1,11 +1,9 @@
 
-// const _host = 'http://demo.wee.bet';
-// const _center = 'http://api-center.wee.bet';
-const _host = 'http://weebet.local';
-const _center = 'http://localhost:3002';
+const _host = 'http://superbets.bet';
+const _center = 'http://api-center.wee.bet';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'SUPERBETS',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
@@ -14,5 +12,5 @@ export const config: any = {
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
     BG: `${_host}/tema/bk.jpg`,
-    VERSAO: 1.0
+    VERSAO: 1.8
 };

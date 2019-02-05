@@ -49,6 +49,7 @@ header a{
     display: flex;
     flex-direction: column;
     align-items: center;
+    white-space: nowrap;
 }
 
 .menu-categories .category a:hover{
