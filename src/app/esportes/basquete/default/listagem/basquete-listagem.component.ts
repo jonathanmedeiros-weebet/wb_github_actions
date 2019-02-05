@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
@@ -19,7 +19,10 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
-    jogosBloqueados = ParametrosLocais.getJogosBloqueados();
+    refreshIntervalId;
+    cotacoesFaltando = {};
+    cotacoesLocais;
+    jogosBloqueados;
     contentSportsEl;
     unsub$ = new Subject();
 
@@ -29,17 +32,25 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) { }
 
     ngOnInit() {
-        this.showLoadingIndicator = true;
         this.definirAltura();
+
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => this.itens = itens);
 
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
+                this.showLoadingIndicator = true;
                 this.contentSportsEl.scrollTop = 0;
+
+                this.jogosBloqueados = ParametrosLocais.getJogosBloqueados();
+                this.cotacoesLocais = ParametrosLocais.getCotacoesLocais();
 
                 if (params['campeonato']) {
                     const campeonatoId = +params['campeonato'];
@@ -51,8 +62,10 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonato => {
-                                this.showLoadingIndicator = false;
                                 this.campeonatos = [campeonato];
+                                this.showLoadingIndicator = false;
+                                sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
+                                sessionStorage.setItem('camp_url', this.router.url);
                             },
                             error => this.messageService.error(error)
                         );
@@ -63,14 +76,12 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                         'campeonatos_bloqueados': campeonatosBloqueados,
                         'odds': ['bkt_casa', 'bkt_fora']
                     };
-
                     if (params['data']) {
                         const data = moment(params['data']).format('YYYY-MM-DD');
                         queryParams.data = data;
                     } else {
                         queryParams.data = moment().format('YYYY-MM-DD');
                     }
-
                     if (params['nome']) {
                         queryParams.nome = params['nome'];
                     }
@@ -79,17 +90,16 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                this.showLoadingIndicator = false;
+                                sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
+                                sessionStorage.setItem('camp_url', this.router.url);
+
                                 this.campeonatos = campeonatos;
+                                this.showLoadingIndicator = false;
                             },
                             error => this.messageService.error(error)
                         );
                 }
             });
-
-        this.bilheteService.itensAtuais
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
     }
 
     ngOnDestroy() {
@@ -145,6 +155,44 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+    }
+
+    cotacaoManualFaltando(jogoId, cotacoes) {
+        let result = false;
+        const cotacoesLocais = this.cotacoesLocais[jogoId];
+
+        if (cotacoesLocais) {
+            cotacoes.forEach(cotacao => {
+                for (const chave in cotacoesLocais) {
+                    if (chave === cotacao.chave) {
+                        cotacoesLocais[chave].usou = true;
+                    }
+                }
+            });
+
+            for (const chave in cotacoesLocais) {
+                if (cotacoesLocais.hasOwnProperty(chave)) {
+                    const cotacaoLocal = cotacoesLocais[chave];
+
+                    if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
+                        if (!this.cotacoesFaltando[jogoId]) {
+                            this.cotacoesFaltando[jogoId] = [];
+                        }
+
+                        if (!this.cotacoesFaltando[jogoId].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[jogoId].push({
+                                chave: chave,
+                                valor: cotacaoLocal.valor
+                            });
+                        }
+                    }
+                }
+            }
+
+            result = true;
+        }
+
+        return result;
     }
 
     jogoBloqueado(id) {

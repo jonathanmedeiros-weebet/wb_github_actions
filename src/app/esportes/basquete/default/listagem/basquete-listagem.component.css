@@ -1,8 +1,16 @@
 .campeonato-header{
     text-transform: uppercase;
-    padding: 15px 10px;
+    padding: 10px 10px;
     font-size: 1.2rem;
     font-weight: bold;
+    border-top: 4px solid white;
+    border-bottom: 4px solid white;
+}
+.campeonato:first-of-type .campeonato-header{
+    border-top: 0;
+}
+.campeonato-header .fa{
+    font-size: 1.5rem;
 }
 
 .jogos{
@@ -10,8 +18,7 @@
 }
 
 .jogo{
-    border-top: 1px solid #ddd;
-    padding: 12px;
+    padding: 12px 10px 0 10px;
 }
 
 .indentificacao{

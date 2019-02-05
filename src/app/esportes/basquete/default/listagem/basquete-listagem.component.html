@@ -11,7 +11,7 @@
             <div *ngIf="!showLoadingIndicator">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos">
                     <div class="campeonato-header">
-                        {{campeonato.nome}}
+                        <span>{{campeonato.nome}}</span>
                     </div>
                     <div class="jogos">
                         <ng-container *ngFor="let jogo of campeonato.jogos">
@@ -43,11 +43,24 @@
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
-                                                jogo.favorito}}
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave:
+                                                jogo._id:jogo.favorito}}
                                             </span>
                                         </div>
                                     </div>
+                                    <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
+                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]" (click)="addCotacao(jogo, cotacao)">
+                                            <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                                <span class="nome">
+                                                    {{cotacao.chave | tipoAposta}}
+                                                </span>
+                                                <span class="valor">
+                                                    {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
+                                                    jogo.favorito}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
                                 </div>
                             </div>
                         </ng-container>
