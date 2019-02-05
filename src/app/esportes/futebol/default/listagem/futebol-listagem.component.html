@@ -12,9 +12,9 @@
                 <div class="campeonato" *ngFor="let campeonato of campeonatos">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
                         <span>{{campeonato.nome}}</span>
-                        <i class="fa fa-2x fa-angle-up" *ngIf="campeonatoPrincipal(campeonato._id); else downIcon"></i>
+                        <i class="fa fa-angle-up" *ngIf="campeonatoPrincipal(campeonato._id); else downIcon"></i>
                         <ng-template #downIcon>
-                            <i class="fa fa-2x fa-angle-down"></i>
+                            <i class="fa fa-angle-down"></i>
                         </ng-template>
                     </div>
                     <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)">
