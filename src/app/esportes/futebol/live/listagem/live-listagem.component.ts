@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, DoCheck } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,11 +11,13 @@ import { ParametrosLocais } from '../../../../shared/utils';
     templateUrl: 'live-listagem.component.html',
     styleUrls: ['live-listagem.component.css']
 })
-export class LiveListagemComponent implements OnInit, OnDestroy {
+export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     jogos = {};
     campeonatos = new Map();
-    idsCampeonatosLiberados: string[] = ParametrosLocais.getCampeonatosAoVivo();
+    idsCampeonatosLiberados = ParametrosLocais.getCampeonatosAoVivo();
     temJogoAoVivo = false;
+    showLoadingIndicator = true;
+    contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
@@ -27,6 +29,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.definindoAlturas();
+
         this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -43,21 +47,30 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
                         this.campeonatos.set(campeonato._id, campeonato);
                     });
 
+                    this.showLoadingIndicator = false;
+
                     this.live();
                 },
                 error => this.handleError(error)
             );
+    }
 
-        const altura = window.innerHeight - 69;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+    ngDoCheck() {
+        const jogosEl = this.el.nativeElement.querySelector('.jogos');
+        this.temJogoAoVivo = jogosEl ? true : false;
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    definindoAlturas() {
+        const altura = window.innerHeight - 69;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     live() {
@@ -98,10 +111,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy {
     }
 
     campeonatoPermitido(campenatoId) {
-        const result = this.idsCampeonatosLiberados.includes(campenatoId);
-        if (result && !this.temJogoAoVivo) {
-            this.temJogoAoVivo = true;
-        }
-        return result;
+        return this.idsCampeonatosLiberados.includes(campenatoId);
     }
 }

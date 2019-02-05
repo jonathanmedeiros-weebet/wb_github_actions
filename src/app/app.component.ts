@@ -17,14 +17,10 @@ export class AppComponent implements OnInit {
 
     constructor(
         private auth: AuthService,
-        private titleService: Title,
-        private parametroService: ParametroService,
-        private router: Router,
-        private spinner: NgxSpinnerService
+        private titleService: Title
     ) { }
 
     ngOnInit() {
-        console.log('ngOnInit');
         // this.spinner.show();
         this.titleService.setTitle(config.BANCA_NOME);
 
@@ -41,15 +37,15 @@ export class AppComponent implements OnInit {
         // this.spinner.hide();
     }
 
-    getParametros(fn) {
-        this.parametroService.getParametros().subscribe(
-            fn,
-            error => {
-                console.log(error);
-                if (error === 'Expired token') {
-                    this.auth.logout();
-                }
-            }
-        );
-    }
+    // getParametros(fn) {
+    //     this.parametroService.getParametros().subscribe(
+    //         fn,
+    //         error => {
+    //             console.log(error);
+    //             if (error === 'Expired token') {
+    //                 this.auth.logout();
+    //             }
+    //         }
+    //     );
+    // }
 }

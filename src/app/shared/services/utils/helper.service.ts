@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Cotacao } from './../../../models';
 import { config } from './../../config';
 import * as moment from 'moment';
+import { ParametrosLocais } from '../../utils';
 
 @Injectable({
     providedIn: 'root',
@@ -13,9 +13,9 @@ export class HelperService {
 
     static calcularCotacao(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
-        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
-        const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const cotacoesLocais = ParametrosLocais.getCotacoesLocais();
+        const tiposAposta = ParametrosLocais.getTiposAposta();
+        const opcoes = ParametrosLocais.getOpcoes();
 
         const tipoAposta = tiposAposta[chave];
 
@@ -232,7 +232,7 @@ export class HelperService {
     }
 
     static calcularPremioLoteria(valor, cotacao) {
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const opcoes = ParametrosLocais.getOpcoes();
         let result = valor * cotacao;
 
         if (result > opcoes.valor_max_premio_loterias) {
