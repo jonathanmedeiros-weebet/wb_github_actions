@@ -12,6 +12,11 @@ const appRoutes: Routes = [
         component: MainLayoutComponent,
         children: [
             {
+                path: '',
+                redirectTo: 'esportes/futebol/jogos',
+                pathMatch: 'full'
+            },
+            {
                 path: 'apuracao',
                 loadChildren: 'app/apuracao/apuracao.module#ApuracaoModule',
                 canActivate: [AuthGuard]

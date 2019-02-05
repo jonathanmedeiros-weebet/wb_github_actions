@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ParametrosLocais } from '../../../../shared/utils';
+
 @Component({
     selector: 'app-futebol-footer',
     templateUrl: 'futebol-footer.component.html',
@@ -12,7 +14,6 @@ export class FutebolFooterComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-        this.informativoRodape = opcoes.informativo_rodape;
+        this.informativoRodape = ParametrosLocais.getInformativoRodape();
     }
 }

@@ -4,6 +4,7 @@ import { config } from './../../../config';
 import { SorteioService } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-consulta-bilhete-loteria',
@@ -25,7 +26,7 @@ export class ConsultaBilheteLoteriaComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.LOGO = config.LOGO;
 
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const opcoes = ParametrosLocais.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
 
         this.sorteioService.getSorteios()

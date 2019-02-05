@@ -6,6 +6,7 @@ import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -34,8 +35,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-        this.cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+        this.tiposAposta = ParametrosLocais.getTiposAposta();
+        this.cotacoesLocais = ParametrosLocais.getCotacoesLocais();
 
         const altura = window.innerHeight - 69;
         const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');

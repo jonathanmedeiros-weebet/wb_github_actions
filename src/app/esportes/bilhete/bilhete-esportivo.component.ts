@@ -5,14 +5,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {
+    ParametroService,
     MessageService, BilheteEsportivoService, HelperService,
     PrintService, ApostaEsportivaService, AuthService,
     PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { config } from '../../shared/config';
 import * as clone from 'clone';
+import { ParametrosLocais } from '../../shared/utils';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -24,7 +25,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     modalReference;
     ultimaApostaRealizada;
     possibilidadeGanho = 0;
-    opcoes = JSON.parse(localStorage.getItem('opcoes'));
+    opcoes = ParametrosLocais.getOpcoes();
     apostaMinima;
     displayPreTicker = false;
     appMobile;

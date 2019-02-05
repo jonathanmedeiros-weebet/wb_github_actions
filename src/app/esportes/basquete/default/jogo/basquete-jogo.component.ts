@@ -6,6 +6,7 @@ import { Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-basquete-jogo',
@@ -51,7 +52,7 @@ export class BasqueteJogoComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+        this.tiposAposta = ParametrosLocais.getTiposAposta();
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))

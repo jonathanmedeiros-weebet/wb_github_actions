@@ -20,6 +20,7 @@ import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { ParametrosLocais } from '../../utils/parametros-locais';
 
 declare var $;
 
@@ -102,7 +103,7 @@ export class NavigationComponent implements OnInit {
                 .subscribe(isOpen => this.isOpen = isOpen);
         }
 
-        this.opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        this.opcoes = ParametrosLocais.getOpcoes();
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -170,7 +171,7 @@ export class NavigationComponent implements OnInit {
         );
 
         const odds = this.parametroService.getOddsImpressao();
-        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
 
         const queryParams: any = {
             'campeonatos_bloqueados': campeonatosBloqueados,

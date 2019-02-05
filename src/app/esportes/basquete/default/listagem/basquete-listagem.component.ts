@@ -7,6 +7,7 @@ import { CampeonatoService, MessageService, BilheteEsportivoService } from './..
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-basquete-listagem',
@@ -18,7 +19,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
-    jogosBloqueados = JSON.parse(localStorage.getItem('jogos_bloqueados'));
+    jogosBloqueados = ParametrosLocais.getJogosBloqueados();
     contentSportsEl;
     unsub$ = new Subject();
 
@@ -56,7 +57,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+                    const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
                     const queryParams: any = {
                         'sport_id': 18,
                         'campeonatos_bloqueados': campeonatosBloqueados,

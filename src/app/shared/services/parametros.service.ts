@@ -6,6 +6,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
 import { config } from '../config';
+import { ParametrosLocais } from '../utils/parametros-locais';
 
 @Injectable({
     providedIn: 'root'
@@ -37,7 +38,7 @@ export class ParametroService {
     }
 
     getOddsImpressao() {
-        const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+        const tiposAposta = ParametrosLocais.getTiposAposta();
         const oddsImpressao = [];
         for (const key in tiposAposta) {
             if (tiposAposta.hasOwnProperty(key)) {
@@ -50,18 +51,4 @@ export class ParametroService {
         return oddsImpressao;
     }
 
-    getInformativoRodape() {
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-        return opcoes.informativo_rodape;
-    }
-
-    getBancaNome() {
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-        return opcoes.banca_nome;
-    }
-
-    getOpcoes() {
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
-        return opcoes;
-    }
 }

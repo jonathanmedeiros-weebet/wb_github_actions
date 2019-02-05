@@ -9,12 +9,12 @@ import {
     SorteioService, ApostaLoteriaService,
     PrintService, HelperService,
     SidebarService, SupresinhaService,
-    AuthService, PreApostaLoteriaService,
-    ParametroService
+    AuthService, PreApostaLoteriaService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
+import { ParametrosLocais } from '../../shared/utils';
 
 @Component({
     selector: 'app-seninha',
@@ -53,7 +53,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
-        private parametroService: ParametroService,
     ) {
         super();
     }
@@ -63,7 +62,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
-        this.opcoes = this.parametroService.getOpcoes();
+        this.opcoes = ParametrosLocais.getOpcoes();
         this.createForm();
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(

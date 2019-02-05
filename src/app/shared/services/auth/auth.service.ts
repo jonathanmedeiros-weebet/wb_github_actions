@@ -5,9 +5,11 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
+import { ParametroService } from './../parametros.service';
 import { config } from './../../config';
 
 import * as moment from 'moment';
+import { ParametrosLocais } from '../../utils/parametros-locais';
 
 @Injectable({
     providedIn: 'root',
@@ -20,7 +22,8 @@ export class AuthService {
     constructor(
         private http: HttpClient,
         private header: HeadersService,
-        private errorService: ErrorService
+        private errorService: ErrorService,
+        private parametroService: ParametroService
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
@@ -104,7 +107,7 @@ export class AuthService {
     hasBasquete() {
         let result = false;
 
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const opcoes = ParametrosLocais.getOpcoes();
         if (opcoes) {
             result = opcoes.basquete;
         }
@@ -115,7 +118,7 @@ export class AuthService {
     hasLoterias() {
         let result = false;
 
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const opcoes = ParametrosLocais.getOpcoes();
         if (opcoes) {
             result = opcoes.loterias;
         }
@@ -126,7 +129,7 @@ export class AuthService {
     hasAoVivo() {
         let result = false;
 
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const opcoes = ParametrosLocais.getOpcoes();
         if (opcoes) {
             result = opcoes.aovivo;
         }
@@ -159,14 +162,6 @@ export class AuthService {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
-        localStorage.removeItem('campeonatos_aovivo');
-        localStorage.removeItem('campeonatos_bloqueados');
-        localStorage.removeItem('campeonatos_principais');
-        localStorage.removeItem('cotacoes_locais');
-        localStorage.removeItem('jogos_bloqueados');
-        localStorage.removeItem('itens-bilhete-esportivo');
-        localStorage.removeItem('opcoes');
         localStorage.removeItem('tipos_aposta');
-        localStorage.removeItem('odds_principais');
     }
 }

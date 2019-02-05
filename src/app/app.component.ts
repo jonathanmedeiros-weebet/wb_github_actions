@@ -6,6 +6,9 @@ import { AuthService, ParametroService } from './services';
 import { config } from './shared/config';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import { ParametrosLocais } from './shared/utils/parametros-locais';
+declare var WB: any;
+
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html'
@@ -35,37 +38,9 @@ export class AppComponent implements OnInit {
             this.auth.setAppMobile();
         }
 
-        this.getParametros(parametros => {
-            localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
-            localStorage.setItem('campeonatos_aovivo', JSON.stringify(parametros['campeonatos_aovivo']));
-            localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
-            localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
-            localStorage.setItem('jogos_bloqueados', JSON.stringify(parametros['jogos_bloqueados']));
-            localStorage.setItem('odds_principais', JSON.stringify(parametros['odds_principais']));
-            localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
-            localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
+        this.parametroService.atualizarParametros(ParametrosLocais.getParametrosLocais());
 
-            this.spinner.hide();
-
-            this.parametroService.atualizarParametros(parametros);
-
-            if (window.location.pathname === '/' || window.location.pathname === '/?app=TRUE') {
-                this.router.navigate(['/esportes/futebol/jogos']);
-            }
-        });
-
-        setInterval(() => {
-            this.getParametros(parametros => {
-                localStorage.setItem('cotacoes_locais', JSON.stringify(parametros['cotacoes_local']));
-                localStorage.setItem('campeonatos_aovivo', JSON.stringify(parametros['campeonatos_aovivo']));
-                localStorage.setItem('campeonatos_bloqueados', JSON.stringify(parametros['campeonatos_bloqueados']));
-                localStorage.setItem('campeonatos_principais', JSON.stringify(parametros['campeonatos_principais']));
-                localStorage.setItem('jogos_bloqueados', JSON.stringify(parametros['jogos_bloqueados']));
-                localStorage.setItem('odds_principais', JSON.stringify(parametros['odds_principais']));
-                localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
-                localStorage.setItem('opcoes', JSON.stringify(parametros['opcoes']));
-            });
-        }, 300000);
+        this.spinner.hide();
     }
 
     getParametros(fn) {

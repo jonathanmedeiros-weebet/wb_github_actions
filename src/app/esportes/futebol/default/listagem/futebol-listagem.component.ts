@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -54,12 +55,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 this.contentSportsEl.scrollTop = 0;
 
                 let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
-                if (localStorage.getItem('odds_principais') !== 'undefined') {
-                    oddsPrincipais = JSON.parse(localStorage.getItem('odds_principais'));
+                if (ParametrosLocais.getOddsPrincipais() !== 'undefined') {
+                    oddsPrincipais = ParametrosLocais.getOddsPrincipais();
                 }
-                this.campeonatosPrincipais = JSON.parse(localStorage.getItem('campeonatos_principais'));
-                this.jogosBloqueados = JSON.parse(localStorage.getItem('jogos_bloqueados'));
-                this.cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
+                this.campeonatosPrincipais = ParametrosLocais.getCampeonatosPrincipais();
+                this.jogosBloqueados = ParametrosLocais.getJogosBloqueados();
+                this.cotacoesLocais = ParametrosLocais.getCotacoesLocais();
 
                 let campeonatosStorage;
                 const campUrl = sessionStorage.getItem('camp_url');
@@ -97,7 +98,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             );
                     } else {
                         this.deixarCampeonatosAbertos = false;
-                        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+                        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
 
                         const queryParams: any = {
                             'sport_id': 1,
@@ -111,7 +112,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             const data = moment(params['data']).format('YYYY-MM-DD');
                             queryParams.data = data;
                         } else {
-                            const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+                            const opcoes = ParametrosLocais.getOpcoes();
                             queryParams.data_final = opcoes.data_limite_tabela;
                         }
                         if (params['nome']) {

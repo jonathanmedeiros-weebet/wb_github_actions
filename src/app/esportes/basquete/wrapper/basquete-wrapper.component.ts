@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CampeonatoService, SidebarService, MessageService } from './../../../services';
+import { ParametrosLocais } from '../../../shared/utils';
 
 @Component({
     selector: 'app-basquete-wrapper',
@@ -28,7 +29,7 @@ export class BasqueteWrapperComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
+        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
         const params = {
             fields: ['_id', 'nome'],
             'sport_id': 18,

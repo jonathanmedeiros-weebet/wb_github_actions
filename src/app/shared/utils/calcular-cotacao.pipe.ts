@@ -1,15 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { ParametrosLocais } from './parametros-locais';
+
 @Pipe({
     name: 'calcularCotacao'
 })
 export class CalcularCotacaoPipe implements PipeTransform {
 
+    constructor() {
+
+    }
+
     transform(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): string {
         let result = value;
-        const cotacoesLocais = JSON.parse(localStorage.getItem('cotacoes_locais'));
-        const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const cotacoesLocais = ParametrosLocais.getCotacoesLocais();
+        const tiposAposta = ParametrosLocais.getTiposAposta();
+        const opcoes = ParametrosLocais.getOpcoes();
         const tipoAposta = tiposAposta[chave];
 
         // Cotacação Local

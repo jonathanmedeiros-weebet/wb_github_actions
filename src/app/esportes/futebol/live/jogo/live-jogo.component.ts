@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-live-jogo',
@@ -33,7 +34,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+        this.tiposAposta = ParametrosLocais.getTiposAposta();
 
         this.route.params
             .pipe(takeUntil(this.unsub$))

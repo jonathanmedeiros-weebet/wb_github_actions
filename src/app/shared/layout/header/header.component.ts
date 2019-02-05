@@ -5,10 +5,11 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametroService, SidebarService, PrintService } from './../../../services';
+import { AuthService, MessageService, SidebarService, PrintService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
 import * as moment from 'moment';
+import { ParametrosLocais } from '../../utils/parametros-locais';
 
 @Component({
     selector: 'app-header',
@@ -50,7 +51,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     constructor(
         private fb: FormBuilder,
         private messageService: MessageService,
-        private parametroService: ParametroService,
         private auth: AuthService,
         private sidebarService: SidebarService,
         private printService: PrintService
@@ -69,11 +69,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
 
-        this.parametroService.parametros.subscribe(parametros => {
-            this.basqueteHabilitado = parametros.opcoes ? parametros.opcoes.basquete : false;
-            this.loteriasHabilitado = parametros.opcoes ? parametros.opcoes.loterias : false;
-            this.aoVivoHabilitado = parametros.opcoes ? parametros.opcoes.aovivo : false;
-        });
+        this.basqueteHabilitado = ParametrosLocais.getOpcoes().basquete;
+        this.loteriasHabilitado = ParametrosLocais.getOpcoes().loterias;
+        this.aoVivoHabilitado = ParametrosLocais.getOpcoes().aovivo;
 
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen
@@ -120,23 +118,23 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     logout() {
         this.auth.logout();
         this.getUsuario();
-        this.atualizarTiposAposta();
+        // this.atualizarTiposAposta();
     }
 
     getUsuario() {
         this.usuario = this.auth.getUser();
     }
 
-    atualizarTiposAposta() {
-        this.parametroService.getParametros()
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                parametros => {
-                    localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
-                },
-                error => this.messageService.error(error)
-            );
-    }
+    // atualizarTiposAposta() {
+    //     this.parametroService.getParametros()
+    //         .pipe(takeUntil(this.unsub$))
+    //         .subscribe(
+    //             parametros => {
+    //                 localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
+    //             },
+    //             error => this.messageService.error(error)
+    //         );
+    // }
 
     listPrinters() {
         this.printService.listPrinters();

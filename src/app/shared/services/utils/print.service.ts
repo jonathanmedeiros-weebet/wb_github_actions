@@ -7,12 +7,13 @@ import { HelperService } from './helper.service';
 import { config } from './../../config';
 import * as moment from 'moment';
 import * as clone from 'clone';
+import { ParametrosLocais } from '../../utils/parametros-locais';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PrintService {
-    private opcoes = JSON.parse(localStorage.getItem('opcoes'));
+    private opcoes = ParametrosLocais.getOpcoes();
 
     constructor(
         private auth: AuthService,
@@ -216,7 +217,7 @@ ${horario} ${jogo.nome}
 
     getSigla(chave) {
         if (chave) {
-            const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+            const tiposAposta = ParametrosLocais.getTiposAposta();
             const sigla = `${tiposAposta[chave].sigla}     `;
             return sigla.substr(0, 5);
         }

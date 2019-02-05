@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
+import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-live-listagem',
@@ -13,7 +14,7 @@ import { Jogo } from '../../../../models';
 export class LiveListagemComponent implements OnInit, OnDestroy {
     jogos = {};
     campeonatos = new Map();
-    idsCampeonatosLiberados: string[] = JSON.parse(localStorage.getItem('campeonatos_aovivo'));
+    idsCampeonatosLiberados: string[] = ParametrosLocais.getCampeonatosAoVivo();
     temJogoAoVivo = false;
     unsub$ = new Subject();
 

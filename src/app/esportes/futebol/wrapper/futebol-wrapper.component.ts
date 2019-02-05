@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CampeonatoService, SidebarService, MessageService } from './../../../services';
+import { ParametrosLocais } from '../../../shared/utils';
 
 @Component({
     selector: 'app-futebol-wrapper',
@@ -28,8 +29,8 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = JSON.parse(localStorage.getItem('campeonatos_bloqueados'));
-        const opcoes = JSON.parse(localStorage.getItem('opcoes'));
+        const campeonatosBloqueados = ParametrosLocais.getCampeonatosAoVivo();
+        const opcoes = ParametrosLocais.getOpcoes();
         const params = {
             fields: ['_id', 'nome'],
             'sport_id': 1,
