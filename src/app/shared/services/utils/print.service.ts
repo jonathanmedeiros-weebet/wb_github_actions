@@ -156,7 +156,7 @@ export class PrintService {
 
     gamesAppMobile(dias) {
         const cols = 5;
-        const odds = this.parametroService.getOddsImpressao();
+        const odds = ParametrosLocais.getOddsImpressao();
         const linhas = Math.ceil(odds.length / cols);
 
         let text = `${config.BANCA_NOME}

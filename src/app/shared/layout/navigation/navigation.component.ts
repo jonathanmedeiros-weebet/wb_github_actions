@@ -170,7 +170,7 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        const odds = this.parametroService.getOddsImpressao();
+        const odds = ParametrosLocais.getOddsImpressao();
         const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
 
         const queryParams: any = {

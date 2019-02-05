@@ -8,7 +8,7 @@
                     Nenhum jogo encontrado!
                 </div>
             </div>
-            <div *ngIf="!showLoadingIndicator">
+            <div>
                 <div class="campeonato" *ngFor="let campeonato of campeonatos">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
                         <span>{{campeonato.nome}}</span>

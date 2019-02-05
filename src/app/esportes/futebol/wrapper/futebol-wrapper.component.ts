@@ -29,7 +29,7 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = ParametrosLocais.getCampeonatosAoVivo();
+        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
         const opcoes = ParametrosLocais.getOpcoes();
         const params = {
             fields: ['_id', 'nome'],

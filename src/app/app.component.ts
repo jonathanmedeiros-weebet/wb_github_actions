@@ -7,7 +7,6 @@ import { config } from './shared/config';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { ParametrosLocais } from './shared/utils/parametros-locais';
-declare var WB: any;
 
 @Component({
     selector: 'app-root',
@@ -25,22 +24,21 @@ export class AppComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.spinner.show();
+        console.log('ngOnInit');
+        // this.spinner.show();
         this.titleService.setTitle(config.BANCA_NOME);
-        const versaoLocal = localStorage.getItem('versao');
 
-        if (parseFloat(versaoLocal) !== config.VERSAO) {
-            this.auth.limparStorage();
-            localStorage.setItem('versao', config.VERSAO);
-        }
+        // const versaoLocal = localStorage.getItem('versao');
+        // if (parseFloat(versaoLocal) !== config.VERSAO) {
+        //     this.auth.limparStorage();
+        //     localStorage.setItem('versao', config.VERSAO);
+        // }
 
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
         }
 
-        this.parametroService.atualizarParametros(ParametrosLocais.getParametrosLocais());
-
-        this.spinner.hide();
+        // this.spinner.hide();
     }
 
     getParametros(fn) {

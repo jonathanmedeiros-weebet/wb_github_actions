@@ -18,7 +18,7 @@ import { ParametrosLocais } from '../../../../shared/utils';
 export class FutebolListagemComponent implements OnInit, OnDestroy {
     diaEspecifico = true;
     campeonatos: Campeonato[];
-    camps = [];
+    aux = [];
     itens: ItemBilheteEsportivo[] = [];
     showLoadingIndicator = true;
     refreshIntervalId;
@@ -55,7 +55,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 this.contentSportsEl.scrollTop = 0;
 
                 let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
-                if (ParametrosLocais.getOddsPrincipais() !== 'undefined') {
+                if (ParametrosLocais.getOddsPrincipais()) {
                     oddsPrincipais = ParametrosLocais.getOddsPrincipais();
                 }
                 this.campeonatosPrincipais = ParametrosLocais.getCampeonatosPrincipais();
@@ -87,10 +87,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             .pipe(takeUntil(this.unsub$))
                             .subscribe(
                                 campeonato => {
+                                    this.campeonatos = [campeonato];
                                     this.showLoadingIndicator = false;
                                     clearInterval(this.refreshIntervalId);
-                                    this.campeonatos = [campeonato];
-
                                     sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
                                     sessionStorage.setItem('camp_url', this.router.url);
                                 },
@@ -98,11 +97,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             );
                     } else {
                         this.deixarCampeonatosAbertos = false;
-                        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
 
                         const queryParams: any = {
                             'sport_id': 1,
-                            'campeonatos_bloqueados': campeonatosBloqueados,
+                            'campeonatos_bloqueados': ParametrosLocais.getCampeonatosBloqueados(),
                             'odds': oddsPrincipais
                         };
                         if (_.isEmpty(params)) {
@@ -112,8 +110,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             const data = moment(params['data']).format('YYYY-MM-DD');
                             queryParams.data = data;
                         } else {
-                            const opcoes = ParametrosLocais.getOpcoes();
-                            queryParams.data_final = opcoes.data_limite_tabela;
+                            queryParams.data_final = ParametrosLocais.getOpcoes().data_limite_tabela;
                         }
                         if (params['nome']) {
                             queryParams.nome = params['nome'];
@@ -126,7 +123,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                                     sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
                                     sessionStorage.setItem('camp_url', this.router.url);
 
-                                    this.camps = campeonatos;
+                                    this.aux = campeonatos;
                                     this.paginacao();
                                 },
                                 error => this.messageService.error(error)
@@ -152,17 +149,17 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     paginacao() {
         let start = 0;
         const sum = 10;
-        const total = Math.ceil(this.camps.length / sum);
+        const total = Math.ceil(this.aux.length / sum);
 
         this.campeonatos = [];
-        this.campeonatos = this.campeonatos.concat(this.camps.splice(0, sum));
+        this.campeonatos = this.campeonatos.concat(this.aux.splice(0, sum));
         start++;
 
         this.showLoadingIndicator = false;
 
         if (total > 1) {
             this.refreshIntervalId = setInterval(() => {
-                const c = this.camps.splice(0, sum);
+                const c = this.aux.splice(0, sum);
                 this.campeonatos = this.campeonatos.concat(c);
                 start++;
 

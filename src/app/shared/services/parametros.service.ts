@@ -36,19 +36,4 @@ export class ParametroService {
                 catchError(this.errorService.handleError)
             );
     }
-
-    getOddsImpressao() {
-        const tiposAposta = ParametrosLocais.getTiposAposta();
-        const oddsImpressao = [];
-        for (const key in tiposAposta) {
-            if (tiposAposta.hasOwnProperty(key)) {
-                const tipoAposta = tiposAposta[key];
-                if (parseInt(tipoAposta.exibirImpressao, 10)) {
-                    oddsImpressao.push(key);
-                }
-            }
-        }
-        return oddsImpressao;
-    }
-
 }
