@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         // this.spinner.show();
-        this.titleService.setTitle(config.BANCA_NOME);
+        // this.titleService.setTitle(config.BANCA_NOME);
 
         // const versaoLocal = localStorage.getItem('versao');
         // if (parseFloat(versaoLocal) !== config.VERSAO) {
