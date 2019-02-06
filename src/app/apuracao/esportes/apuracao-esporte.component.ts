@@ -131,23 +131,54 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     printTicket(aposta: ApostaEsportiva) {
-        this.printService.sportsTicket(aposta);
+        this.showLoadingIndicator = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                aposta_localizada => {
+                    this.printService.sportsTicket(aposta_localizada);
+
+                    this.showLoadingIndicator = false;
+                },
+                error => this.handleError(error)
+            );
     }
 
     sharedTicket(aposta) {
-        HelperService.sharedSportsTicket(aposta);
+        this.showLoadingIndicator = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                aposta_localizada => {
+                    HelperService.sharedSportsTicket(aposta_localizada);
+
+                    this.showLoadingIndicator = false;
+                },
+                error => this.handleError(error)
+            );
     }
 
     openModal(aposta) {
-        this.apostaSelecionada = aposta;
 
-        this.modalService.open(this.modal, {
-            ariaLabelledBy: 'modal-basic-title',
-            centered: true
-        }).result.then(
-            (result) => { },
-            (reason) => { }
-        );
+        this.showLoadingIndicator = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                aposta_localizada => {
+                    this.apostaSelecionada = aposta_localizada;
+
+                    this.modalService.open(this.modal, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    }).result.then(
+                        (result) => { },
+                        (reason) => { }
+                    );
+
+                    this.showLoadingIndicator = false;
+                },
+                error => this.handleError(error)
+            );
     }
 
     cancel(aposta) {
@@ -166,7 +197,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    checkCancellation(items) {
+    /*checkCancellation(items) {
         let result = true;
 
         if (items) {
@@ -181,7 +212,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         }
 
         return result;
-    }
+    }*/
 
     getStatus(resultado) {
         return {
