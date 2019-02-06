@@ -58,7 +58,7 @@
                             <td>#{{aposta.id}}</td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>{{aposta.apostador}}</td>
-                            <td class="text-right">{{aposta.num_jogos}}</td>
+                            <td class="text-right">{{aposta.num_jogos? aposta.num_jogos : aposta.itens.length}}</td>
                             <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
                             <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
                             <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
