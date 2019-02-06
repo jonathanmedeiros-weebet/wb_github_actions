@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService, ParametroService } from './services';
+import { AuthService } from './services';
 
 @Component({
     selector: 'app-root',
