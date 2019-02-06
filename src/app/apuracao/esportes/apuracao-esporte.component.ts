@@ -92,7 +92,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                 'data-inicial': params.dataInicial,
                 'data-final': params.dataFinal,
                 'status': params.status,
-                'sort': '-horario'
+                'sort': '-horario',
+                'otimizado': true
             };
         }
 

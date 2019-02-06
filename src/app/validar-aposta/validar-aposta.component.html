@@ -7,7 +7,7 @@
             <div class="">
                 <form (ngSubmit)="consultarAposta()" #consultaForm="ngForm" class="consulta-form form-inline">
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="codigo" name="codigo" class="form-control" placeholder="Código"
+                        <input type="text" [(ngModel)]="codigo" name="codigo" autocomplete="off" class="form-control" placeholder="Código"
                             required>
                     </div>
                     <button type="submit" [disabled]="!consultaForm.valid" class="btn btn-custom">Consultar</button>
