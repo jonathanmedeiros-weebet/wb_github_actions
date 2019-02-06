@@ -82,7 +82,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         let queryParams: any = {
             'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
             'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
-            'sort': '-horario'
+            'sort': '-horario',
+            'otimizado': true
         };
 
         if (params) {
