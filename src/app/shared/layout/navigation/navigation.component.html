@@ -58,6 +58,11 @@
                         <i class="fa fa-list"></i> Resultados
                     </a>
                 </li>
+                <li>
+                    <a (click)="refresh()">
+                        <i class="fa fa-refresh"></i> Atualizar
+                    </a>
+                </li>
             </ul>
         </div>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">

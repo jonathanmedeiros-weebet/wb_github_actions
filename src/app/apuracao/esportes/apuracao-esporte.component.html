@@ -58,7 +58,7 @@
                             <td>#{{aposta.id}}</td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>{{aposta.apostador}}</td>
-                            <td class="text-right">{{aposta.itens.length}}</td>
+                            <td class="text-right">{{aposta.num_jogos? aposta.num_jogos : aposta.itens.length}}</td>
                             <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
                             <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
                             <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
@@ -66,10 +66,6 @@
                             <td>{{getPagamento(aposta)}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" *ngIf="checkCancellation(aposta.itens)" title="CANCELAR"
-                                        class="btn btn-danger" (click)="cancel(aposta)">
-                                        <i class="fa fa-trash-o"></i>
-                                    </button>
                                     <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
                                         <i class="fa fa-eye"></i>
                                     </button>
@@ -83,6 +79,10 @@
                                     <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" title="COMPARTILHAR"
                                         class="btn btn-info">
                                         <i class="fa fa-share-alt"></i>
+                                    </button>
+                                    <button type="button" title="CANCELAR"
+                                            class="btn btn-danger" (click)="cancel(aposta)">
+                                        <i class="fa fa-trash-o"></i>
                                     </button>
                                 </div>
                             </td>

@@ -83,7 +83,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         let queryParams: any = {
             'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
             'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
-            'sort': '-horario'
+            'sort': '-horario',
+            'otimizado': true
         };
 
         if (params) {
@@ -132,23 +133,54 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     printTicket(aposta: ApostaEsportiva) {
-        this.printService.sportsTicket(aposta);
+        this.showLoadingIndicator = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                aposta_localizada => {
+                    this.printService.sportsTicket(aposta_localizada);
+
+                    this.showLoadingIndicator = false;
+                },
+                error => this.handleError(error)
+            );
     }
 
     sharedTicket(aposta) {
-        this.helperService.sharedSportsTicket(aposta);
+        this.showLoadingIndicator = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                aposta_localizada => {
+                    this.helperService.sharedSportsTicket(aposta_localizada);
+
+                    this.showLoadingIndicator = false;
+                },
+                error => this.handleError(error)
+            );
     }
 
     openModal(aposta) {
-        this.apostaSelecionada = aposta;
 
-        this.modalService.open(this.modal, {
-            ariaLabelledBy: 'modal-basic-title',
-            centered: true
-        }).result.then(
-            (result) => { },
-            (reason) => { }
-        );
+        this.showLoadingIndicator = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                aposta_localizada => {
+                    this.apostaSelecionada = aposta_localizada;
+
+                    this.modalService.open(this.modal, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    }).result.then(
+                        (result) => { },
+                        (reason) => { }
+                    );
+
+                    this.showLoadingIndicator = false;
+                },
+                error => this.handleError(error)
+            );
     }
 
     cancel(aposta) {
@@ -167,7 +199,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    checkCancellation(items) {
+    /*checkCancellation(items) {
         let result = true;
 
         if (items) {
@@ -182,7 +214,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         }
 
         return result;
-    }
+    }*/
 
     getStatus(resultado) {
         return {
