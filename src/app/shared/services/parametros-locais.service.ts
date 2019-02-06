@@ -14,7 +14,7 @@ export class ParametrosLocaisService {
 
     constructor(
         private http: HttpClient,
-        private errorService: ErrorService
+        private errorService: ErrorService,
     ) { }
 
 
@@ -54,7 +54,21 @@ export class ParametrosLocaisService {
     }
 
     getTiposAposta() {
-        return this.parametrosLocais ? this.parametrosLocais.tipos_aposta : null;
+        let result = null;
+        const isLoggedIn = localStorage.getItem('token') ? true : false;
+
+        if (isLoggedIn && localStorage.getItem('tipos_aposta')) {
+            const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
+            if (tiposAposta) {
+                result = tiposAposta;
+            }
+        } else {
+            if (this.parametrosLocais) {
+                result = this.parametrosLocais.tipos_aposta;
+            }
+        }
+
+        return result;
     }
 
     getOpcoes() {

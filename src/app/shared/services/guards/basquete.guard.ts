@@ -12,7 +12,6 @@ export class BasqueteGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        // If user is not logged in we'll send them to the homepage
         if (!this.auth.hasBasquete()) {
             this.router.navigate(['/']);
             return false;

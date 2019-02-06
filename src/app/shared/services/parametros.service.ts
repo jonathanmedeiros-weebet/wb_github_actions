@@ -35,4 +35,16 @@ export class ParametroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    getOdds(): Observable<any> {
+        const url = `${config.SPORTS_URL}/parametros/tipos-aposta`;
+        const token = localStorage.getItem('token');
+        const requestOptions = token ? this.header.getRequestOptions(true) : this.header.getRequestOptions();
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }
