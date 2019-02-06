@@ -126,8 +126,11 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
             aoVivo: jogo.ao_vivo,
             jogo_id: jogo._id,
             jogo_nome: jogo.nome,
-            cotacao: cotacao,
-            jogo: jogo
+            tempo: jogo.info.minutos,
+            time_a_placar: jogo.info.time_a_resultado,
+            time_b_placar: jogo.info.time_b_resultado,
+            jogo: jogo,
+            cotacao: cotacao
         };
 
         if (indexGame >= 0) {

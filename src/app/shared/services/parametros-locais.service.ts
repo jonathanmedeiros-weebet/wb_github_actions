@@ -27,46 +27,46 @@ export class ParametrosLocaisService {
     }
 
     getCampeonatosBloqueados() {
-        return this.parametrosLocais.campeonatos_bloqueados;
+        return this.parametrosLocais ? this.parametrosLocais.campeonatos_bloqueados : null;
     }
 
     getCampeonatosAoVivo() {
-        return this.parametrosLocais.campeonatos_aovivo;
+        return this.parametrosLocais ? this.parametrosLocais.campeonatos_aovivo : null;
     }
 
     getCampeonatosPrincipais() {
-        return this.parametrosLocais.campeonatos_principais;
+        return this.parametrosLocais ? this.parametrosLocais.campeonatos_principais : null;
     }
     getCotacoesLocais() {
-        return this.parametrosLocais.cotacoes_local;
+        return this.parametrosLocais ? this.parametrosLocais.cotacoes_local : null;
     }
 
     getDataLimiteTabela() {
-        return this.parametrosLocais.data_limite_tabela;
+        return this.parametrosLocais ? this.parametrosLocais.data_limite_tabela : null;
     }
 
     getJogosBloqueados() {
-        return this.parametrosLocais.jogos_bloqueados;
+        return this.parametrosLocais ? this.parametrosLocais.jogos_bloqueados : null;
     }
 
     getOddsPrincipais() {
-        return this.parametrosLocais.odds_principais;
+        return this.parametrosLocais ? this.parametrosLocais.odds_principais : null;
     }
 
     getTiposAposta() {
-        return this.parametrosLocais.tipos_aposta;
+        return this.parametrosLocais ? this.parametrosLocais.tipos_aposta : null;
     }
 
     getOpcoes() {
-        return this.parametrosLocais.opcoes;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes : null;
     }
 
     getInformativoRodape() {
-        return this.parametrosLocais.opcoes.informativo_rodape;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.informativo_rodape : null;
     }
 
     getBancaNome() {
-        return this.parametrosLocais.opcoes.banca_nome;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.banca_nome : null;
     }
 
     getOddsImpressao() {
