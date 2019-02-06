@@ -321,7 +321,8 @@ export class NavigationComponent implements OnInit {
         return result;
     }
 
-    refresh(){
+    refresh() {
+        sessionStorage.clear();
         window.location.reload();
     }
 }
