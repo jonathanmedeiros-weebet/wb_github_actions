@@ -319,4 +319,8 @@ export class NavigationComponent implements OnInit {
         }
         return result;
     }
+
+    refresh(){
+        window.location.reload();
+    }
 }
