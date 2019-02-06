@@ -103,15 +103,23 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
                             'odds': oddsPrincipais
                         };
-                        if (_.isEmpty(params)) {
+
+                        if (_.isEmpty(params) || !params['data']) {
                             queryParams.campeonatos = this.campeonatosPrincipais;
                         }
+
+                        const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
                         if (params['data']) {
-                            const data = moment(params['data']).format('YYYY-MM-DD');
-                            queryParams.data = data;
+                            const dt = moment(params['data']);
+                            if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
+                                queryParams.data = dt.format('YYYY-MM-DD');
+                            } else {
+                                queryParams.data = dataLimiteTabela;
+                            }
                         } else {
-                            queryParams.data_final = this.paramsService.getOpcoes().data_limite_tabela;
+                            queryParams.data_final = dataLimiteTabela;
                         }
+
                         if (params['nome']) {
                             queryParams.nome = params['nome'];
                         }
