@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ParametrosLocais } from '../../../../shared/utils';
+import { ParametrosLocaisService } from '../../../../services';
 
 @Component({
     selector: 'app-futebol-footer',
@@ -11,9 +11,9 @@ import { ParametrosLocais } from '../../../../shared/utils';
 export class FutebolFooterComponent implements OnInit {
     informativoRodape;
 
-    constructor() { }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
     ngOnInit() {
-        this.informativoRodape = ParametrosLocais.getInformativoRodape();
+        this.informativoRodape = this.paramsService.getInformativoRodape();
     }
 }

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {
-    ParametroService,
+    ParametrosLocaisService,
     MessageService, BilheteEsportivoService, HelperService,
     PrintService, ApostaEsportivaService, AuthService,
     PreApostaEsportivaService
@@ -13,7 +13,6 @@ import {
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
-import { ParametrosLocais } from '../../shared/utils';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -25,7 +24,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     modalReference;
     ultimaApostaRealizada;
     possibilidadeGanho = 0;
-    opcoes = ParametrosLocais.getOpcoes();
+    opcoes = this.paramsService.getOpcoes();
     apostaMinima;
     displayPreTicker = false;
     appMobile;
@@ -44,7 +43,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private renderer: Renderer2,
         private el: ElementRef,
         private fb: FormBuilder,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private paramsService: ParametrosLocaisService,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -116,7 +117,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         let cotacao = 1;
 
         this.itens.value.forEach(item => {
-            cotacao = cotacao * HelperService.calcularCotacao(
+            cotacao = cotacao * this.helperService.calcularCotacao(
                 item.cotacao.valor,
                 item.cotacao.chave,
                 item.jogo._id,
@@ -205,7 +206,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     shareTicket() {
-        HelperService.sharedSportsTicket(this.ultimaApostaRealizada);
+        this.helperService.sharedSportsTicket(this.ultimaApostaRealizada);
     }
 
     handleError(msg) {

@@ -1,17 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ParametrosLocais } from './parametros-locais';
+import { ParametrosLocaisService } from './../services/parametros-locais.service';
 
 @Pipe({
     name: 'tipoAposta'
 })
 export class TipoApostaPipe implements PipeTransform {
 
-    constructor() { }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
     transform(value: any): any {
-        const tiposAposta = ParametrosLocais.getTiposAposta();
-
+        const tiposAposta = this.paramsService.getTiposAposta();
         return tiposAposta[value] ? tiposAposta[value].nome : '';
     }
 }

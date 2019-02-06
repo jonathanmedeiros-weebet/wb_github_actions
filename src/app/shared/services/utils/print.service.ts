@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './../auth/auth.service';
-import { ParametroService } from '../parametros.service';
 import { HelperService } from './helper.service';
+import { ParametrosLocaisService } from './../parametros-locais.service';
 
 import { config } from './../../config';
 import * as moment from 'moment';
 import * as clone from 'clone';
-import { ParametrosLocais } from '../../utils/parametros-locais';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PrintService {
-    private opcoes = ParametrosLocais.getOpcoes();
+    private opcoes = this.paramsService.getOpcoes();
 
     constructor(
         private auth: AuthService,
-        private parametroService: ParametroService
+        private paramsService: ParametrosLocaisService,
+        private helperService: HelperService
     ) { }
 
     // Tabela Esportiva
@@ -112,7 +112,7 @@ export class PrintService {
                     <div class="jogo">
                         <div class="jogo-nome">
                             <span style="padding: 10px;">
-                                ${HelperService.dateFormat(jogo.horario, 'HH:mm')}
+                                ${this.helperService.dateFormat(jogo.horario, 'HH:mm')}
                             </span>
                             <span style="font-weight: bold;">${jogo.nome}</span>
                         </div>
@@ -156,7 +156,7 @@ export class PrintService {
 
     gamesAppMobile(dias) {
         const cols = 5;
-        const odds = ParametrosLocais.getOddsImpressao();
+        const odds = this.paramsService.getOddsImpressao();
         const linhas = Math.ceil(odds.length / cols);
 
         let text = `${config.BANCA_NOME}
@@ -217,7 +217,7 @@ ${horario} ${jogo.nome}
 
     getSigla(chave) {
         if (chave) {
-            const tiposAposta = ParametrosLocais.getTiposAposta();
+            const tiposAposta = this.paramsService.getTiposAposta();
             const sigla = `${tiposAposta[chave].sigla}     `;
             return sigla.substr(0, 5);
         }
@@ -337,7 +337,7 @@ ${horario} ${jogo.nome}
                         Valor
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(item.valor)}
+                        ${this.helperService.moneyFormat(item.valor)}
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
@@ -345,7 +345,7 @@ ${horario} ${jogo.nome}
                         Retorno 3
                     </div>
                     <div style="float: right;">
-                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao3)}
+                        ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
@@ -353,7 +353,7 @@ ${horario} ${jogo.nome}
                         Retorno 4
                     </div>
                     <div style="float: right;">
-                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao4)}
+                        ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
@@ -361,7 +361,7 @@ ${horario} ${jogo.nome}
                         Retorno 5
                     </div>
                     <div style="float: right;">
-                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
+                        ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                     </div>
                 </div>
             `;
@@ -373,7 +373,7 @@ ${horario} ${jogo.nome}
                         Retorno 6
                     </div>
                     <div style="float: right;">
-                        ${HelperService.calcularPremioLoteria(item.valor, item.cotacao6)}
+                        ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)}
                     </div>
                 </div>
                 `;
@@ -408,7 +408,7 @@ ${horario} ${jogo.nome}
                         Total
                     </div>
                     <div style="float: right;">
-                        ${HelperService.moneyFormat(aposta.valor)}
+                        ${this.helperService.moneyFormat(aposta.valor)}
                     </div>
                 </div>
             </div>
@@ -439,24 +439,24 @@ ${horario} ${jogo.nome}
         let ticket = `${config.BANCA_NOME}
 
 #${aposta.id}
-Data: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
-Valor Total: ${HelperService.moneyFormat(aposta.valor)}`;
+Valor Total: ${this.helperService.moneyFormat(aposta.valor)}`;
 
         aposta.itens.forEach(item => {
             ticket += `
 -------------------------------
 ${item.sorteio_nome} (${item.tipo})
 Dezenas: ${item.numeros.join('-')}
-Valor: ${HelperService.moneyFormat(item.valor)}
-Retorno 3: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao3)}
-Retorno 4: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao4)}
-Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
+Valor: ${this.helperService.moneyFormat(item.valor)}
+Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}
+Retorno 4: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}
+Retorno 5: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}
 `;
 
             if (item.tipo === 'seninha') {
-                ticket += `Retorno 6: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao6)}`;
+                ticket += `Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)}`;
             }
         });
         // console.log(ticket);
@@ -619,7 +619,7 @@ Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                         ${item.campeonato.nome}
                     </p>
                     <p class="horario">
-                        ${HelperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY [ÀS] HH:mm')}
+                        ${this.helperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY [ÀS] HH:mm')}
                     </p>
                     <p class="jogo">
                         ${item.jogo.nome}
@@ -645,7 +645,7 @@ Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                         APOSTADOR: ${aposta.apostador}
                     </p>
                     <p>
-                        HORÁRIO: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+                        HORÁRIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
                     </p>
                 </div>
                 <hr>
@@ -654,16 +654,16 @@ Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                         TOTAL DE JOGOS: ${aposta.itens.length}
                     </p>
                     <p class="aposta">
-                        VALOR DA APOSTA: ${HelperService.moneyFormat(aposta.valor)}
+                        VALOR DA APOSTA: ${this.helperService.moneyFormat(aposta.valor)}
                     </p>
                     <p class="ganho">
-                        ESTIMATIVA DE GANHO: ${HelperService.moneyFormat(aposta.premio)}
+                        ESTIMATIVA DE GANHO: ${this.helperService.moneyFormat(aposta.premio)}
                     </p>`;
 
         if (this.opcoes.percentual_premio_cambista > 0) {
             const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
             printContents += `   <p class="cambista-paga">
-                            CAMBISTA PAGA: ${HelperService.moneyFormat(cambistaPaga)}
+                            CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}
                         </p>`;
         }
 
@@ -699,18 +699,18 @@ Retorno 5: ${HelperService.calcularPremioLoteria(item.valor, item.cotacao5)}
     sportsTicketAppMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
 #${aposta.id}
-Data: ${HelperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.cambista.nome}
 Apostador: ${aposta.apostador}
-Valor Aposta: ${HelperService.moneyFormat(aposta.valor)}
-Estimativa Ganho: ${HelperService.moneyFormat(aposta.premio)}
+Valor Aposta: ${this.helperService.moneyFormat(aposta.valor)}
+Estimativa Ganho: ${this.helperService.moneyFormat(aposta.premio)}
 Total Jogos: ${aposta.itens.length}`;
 
         aposta.itens.forEach(item => {
             ticket += `
 -------------------------------
 ${item.campeonato.nome}
-${HelperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY, HH:mm')}
+${this.helperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY, HH:mm')}
 ${item.jogo.nome}
 ${item.aposta_tipo.nome} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {

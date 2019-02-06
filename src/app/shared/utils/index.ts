@@ -10,5 +10,4 @@ export { CalcularCotacaoPipe } from './calcular-cotacao.pipe';
 //
 export { CustomEncoder } from './custom-encoder';
 export { FormValidations } from './form-validation';
-export { ParametrosLocais } from './parametros-locais';
 export { PasswordValidation } from './password-validation';

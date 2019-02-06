@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 
 import { config } from './../../config';
 import * as moment from 'moment';
-import { ParametrosLocais } from '../../utils';
+
+import { ParametrosLocaisService } from '../parametros-locais.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HelperService {
 
-    constructor() { }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
-    static calcularCotacao(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): number {
+     calcularCotacao(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
-        const cotacoesLocais = ParametrosLocais.getCotacoesLocais();
-        const tiposAposta = ParametrosLocais.getTiposAposta();
-        const opcoes = ParametrosLocais.getOpcoes();
+        const cotacoesLocais = this.paramsService.getCotacoesLocais();
+        const tiposAposta = this.paramsService.getTiposAposta();
+        const opcoes = this.paramsService.getOpcoes();
 
         const tipoAposta = tiposAposta[chave];
 
@@ -68,7 +69,7 @@ export class HelperService {
         return parseFloat(result.toFixed(2));
     }
 
-    static timeSubtraction(timeOne, timeTwo) {
+     timeSubtraction(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
 
@@ -83,7 +84,7 @@ export class HelperService {
         return this.hoursDecimalToTime(time);
     }
 
-    static timeAddition(timeOne, timeTwo) {
+     timeAddition(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
         const firstChar1 = hourOneArray[0].charAt(0);
@@ -108,7 +109,7 @@ export class HelperService {
         return this.hoursDecimalToTime(time);
     }
 
-    static hoursDecimalToTime(hoursDecimal) {
+     hoursDecimalToTime(hoursDecimal) {
         let time: any = '';
         let hours: any = Math.trunc(hoursDecimal);
         let minutes: any = '';
@@ -143,7 +144,7 @@ export class HelperService {
         return time;
     }
 
-    static hoursTimeToDecimal(hoursTime) {
+     hoursTimeToDecimal(hoursTime) {
         const hoursTimeArray: any = hoursTime.split(':');
         const hours: any = parseInt(hoursTimeArray[0], 10);
         const minutes: any = parseInt(hoursTimeArray[1], 10);
@@ -158,7 +159,7 @@ export class HelperService {
         return parseFloat(hoursFormat.toFixed(2));
     }
 
-    static orderDate(dateOne, dateTwo) {
+     orderDate(dateOne, dateTwo) {
         let first = moment(dateOne, 'YYYY/MM/DD');
         let last = moment(dateTwo, 'YYYY/MM/DD');
 
@@ -171,7 +172,7 @@ export class HelperService {
         return [first, last];
     }
 
-    static totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
+     totalTimeByDateTime(dateTimeBegin, dateTimeEnd) {
         const initial = moment(dateTimeBegin);
         const end = moment(dateTimeEnd);
 
@@ -185,7 +186,7 @@ export class HelperService {
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
 
-    static moneyFormat(value) {
+     moneyFormat(value) {
         const money = new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
@@ -196,7 +197,7 @@ export class HelperService {
         return `R$ ${money}`;
     }
 
-    static guidGenerate() {
+     guidGenerate() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
@@ -207,7 +208,7 @@ export class HelperService {
             s4() + '-' + s4() + s4() + s4();
     }
 
-    static sharedLotteryTicket(aposta) {
+     sharedLotteryTicket(aposta) {
         parent.postMessage(
             {
                 data: `${config.HOST}/aposta/${aposta.chave}`,
@@ -217,7 +218,7 @@ export class HelperService {
         );
     }
 
-    static sharedSportsTicket(aposta) {
+     sharedSportsTicket(aposta) {
         parent.postMessage(
             {
                 data: `${config.HOST}/aposta/${aposta.chave}`,
@@ -227,12 +228,12 @@ export class HelperService {
         );
     }
 
-    static dateFormat(date: string, format?: string) {
+     dateFormat(date: string, format?: string) {
         return format ? moment(date).format(format) : moment(date).format();
     }
 
-    static calcularPremioLoteria(valor, cotacao) {
-        const opcoes = ParametrosLocais.getOpcoes();
+     calcularPremioLoteria(valor, cotacao) {
+        const opcoes = this.paramsService.getOpcoes();
         let result = valor * cotacao;
 
         if (result > opcoes.valor_max_premio_loterias) {

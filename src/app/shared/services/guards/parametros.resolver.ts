@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { ParametroService } from './../parametros.service';
+import { ParametrosLocaisService } from './../parametros-locais.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ParametrosResolver implements Resolve<any> {
 
-    constructor(private parametroService: ParametroService) { }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any> {
-        console.log('ParametrosResolver');
-        return this.parametroService.getParametrosLocais();
+        return this.paramsService.getParametros();
     }
 }

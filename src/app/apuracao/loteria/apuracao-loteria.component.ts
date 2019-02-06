@@ -32,7 +32,8 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         private messageService: MessageService,
         private printService: PrintService,
         private auth: AuthService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -138,7 +139,7 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
     }
 
     sharedTicket(aposta) {
-        HelperService.sharedLotteryTicket(aposta);
+        this.helperService.sharedLotteryTicket(aposta);
     }
 
     checkResult(numero, sorteioResultado) {

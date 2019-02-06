@@ -1,9 +1,8 @@
-import { HelperService } from './../../services/utils/helper.service';
 import { Item } from './item';
 
 export class Aposta {
     constructor() {
-        this.chave = HelperService.guidGenerate();
+        this.chave = this.guidGenerate();
     }
 
     id: number;
@@ -21,4 +20,15 @@ export class Aposta {
     horario: string;
     resultado: string;
     tipo: string;
+
+    guidGenerate() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+    }
 }

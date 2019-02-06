@@ -13,14 +13,13 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
     SidebarService, AuthService, PrintService,
-    CampeonatoService, ParametroService, ApostaEsportivaService,
-    MessageService, SupresinhaService, HelperService
+    CampeonatoService, ParametrosLocaisService, ApostaEsportivaService,
+    MessageService, SupresinhaService, HelperService,
 } from './../../../services';
 import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { ParametrosLocais } from '../../utils/parametros-locais';
 
 declare var $;
 
@@ -75,7 +74,7 @@ export class NavigationComponent implements OnInit {
         private auth: AuthService,
         private sidebarService: SidebarService,
         private campeonatoService: CampeonatoService,
-        private parametroService: ParametroService,
+        private paramsService: ParametrosLocaisService,
         private modalService: NgbModal,
         private router: Router,
         private fb: FormBuilder,
@@ -85,6 +84,7 @@ export class NavigationComponent implements OnInit {
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
+        private helperService: HelperService
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -103,7 +103,7 @@ export class NavigationComponent implements OnInit {
                 .subscribe(isOpen => this.isOpen = isOpen);
         }
 
-        this.opcoes = ParametrosLocais.getOpcoes();
+        this.opcoes = this.paramsService.getOpcoes();
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -170,8 +170,8 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        const odds = ParametrosLocais.getOddsImpressao();
-        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
+        const odds = this.paramsService.getOddsImpressao();
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
 
         const queryParams: any = {
             'campeonatos_bloqueados': campeonatosBloqueados,
@@ -201,7 +201,7 @@ export class NavigationComponent implements OnInit {
 
                     campeonato.jogos.forEach(jogo => {
                         jogo.cotacoes.forEach(cotacao => {
-                            cotacao.valor = HelperService.calcularCotacao(
+                            cotacao.valor = this.helperService.calcularCotacao(
                                 cotacao.valor,
                                 cotacao.chave,
                                 jogo._id,

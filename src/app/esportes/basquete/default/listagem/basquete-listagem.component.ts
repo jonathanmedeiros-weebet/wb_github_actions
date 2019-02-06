@@ -2,12 +2,11 @@ import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/co
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
-import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-basquete-listagem',
@@ -33,7 +32,8 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         private renderer: Renderer2,
         private el: ElementRef,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
@@ -49,8 +49,8 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                 this.showLoadingIndicator = true;
                 this.contentSportsEl.scrollTop = 0;
 
-                this.jogosBloqueados = ParametrosLocais.getJogosBloqueados();
-                this.cotacoesLocais = ParametrosLocais.getCotacoesLocais();
+                this.jogosBloqueados = this.paramsService.getJogosBloqueados();
+                this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
                 if (params['campeonato']) {
                     const campeonatoId = +params['campeonato'];
@@ -70,7 +70,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
+                    const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
                     const queryParams: any = {
                         'sport_id': 18,
                         'campeonatos_bloqueados': campeonatosBloqueados,

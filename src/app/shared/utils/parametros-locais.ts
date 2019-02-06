@@ -50,7 +50,7 @@ export class ParametrosLocais {
     }
 
     static getOddsImpressao() {
-        const tiposAposta = ParametrosLocais.getTiposAposta();
+        const tiposAposta = this.getTiposAposta();
         const oddsImpressao = [];
         for (const key in tiposAposta) {
             if (tiposAposta.hasOwnProperty(key)) {

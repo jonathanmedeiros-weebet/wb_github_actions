@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
 
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
 import { config } from '../config';
-import { ParametrosLocais } from '../utils/parametros-locais';
 
 @Injectable({
     providedIn: 'root'
@@ -35,11 +34,5 @@ export class ParametroService {
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
-    }
-
-    getParametrosLocais(): Observable<any> {
-        console.log("getParametrosLocais");
-        const time = + new Date();
-        return this.http.get(`./param/parametros.json?${time}`);
     }
 }

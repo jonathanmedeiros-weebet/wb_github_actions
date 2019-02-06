@@ -5,8 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
-import { ParametrosLocais } from '../../../../shared/utils';
+import { ParametrosLocaisService, MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
 
 @Component({
     selector: 'app-live-jogo',
@@ -30,11 +29,12 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private renderer: Renderer2,
         private route: ActivatedRoute,
-        private location: Location
+        private location: Location,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
-        this.tiposAposta = ParametrosLocais.getTiposAposta();
+        this.tiposAposta = this.paramsService.getTiposAposta();
 
         this.route.params
             .pipe(takeUntil(this.unsub$))

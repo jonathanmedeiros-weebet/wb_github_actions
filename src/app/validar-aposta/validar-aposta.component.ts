@@ -51,7 +51,8 @@ export class ValidarApostaComponent extends BaseFormComponent
         private printService: PrintService,
         private fb: FormBuilder,
         private elRef: ElementRef,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -172,7 +173,7 @@ export class ValidarApostaComponent extends BaseFormComponent
             centered: true
         });
 
-        this.modalReference.result.then(result => {}, reason => {});
+        this.modalReference.result.then(result => { }, reason => { });
     }
 
     handleError(msg) {
@@ -219,9 +220,9 @@ export class ValidarApostaComponent extends BaseFormComponent
 
     shareTicket() {
         if (this.ultimaApostaRealizada.tipo === 'esportes') {
-            HelperService.sharedSportsTicket(this.ultimaApostaRealizada);
+            this.helperService.sharedSportsTicket(this.ultimaApostaRealizada);
         } else {
-            HelperService.sharedLotteryTicket(this.ultimaApostaRealizada);
+            this.helperService.sharedLotteryTicket(this.ultimaApostaRealizada);
         }
     }
 }

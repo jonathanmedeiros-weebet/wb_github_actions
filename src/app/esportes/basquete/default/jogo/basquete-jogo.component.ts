@@ -3,10 +3,9 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-basquete-jogo',
@@ -30,7 +29,8 @@ export class BasqueteJogoComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private el: ElementRef,
         private renderer: Renderer2,
-        private location: Location
+        private location: Location,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
@@ -52,7 +52,7 @@ export class BasqueteJogoComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.tiposAposta = ParametrosLocais.getTiposAposta();
+        this.tiposAposta = this.paramsService.getTiposAposta();
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))

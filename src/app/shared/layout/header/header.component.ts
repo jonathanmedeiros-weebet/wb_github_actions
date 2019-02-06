@@ -5,11 +5,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, SidebarService, PrintService } from './../../../services';
+import { ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
 import * as moment from 'moment';
-import { ParametrosLocais } from '../../utils/parametros-locais';
 
 @Component({
     selector: 'app-header',
@@ -53,7 +52,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private messageService: MessageService,
         private auth: AuthService,
         private sidebarService: SidebarService,
-        private printService: PrintService
+        private printService: PrintService,
+        private paramsService: ParametrosLocaisService
     ) {
         super();
     }
@@ -69,9 +69,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
 
-        this.basqueteHabilitado = ParametrosLocais.getOpcoes().basquete;
-        this.loteriasHabilitado = ParametrosLocais.getOpcoes().loterias;
-        this.aoVivoHabilitado = ParametrosLocais.getOpcoes().aovivo;
+        this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
+        this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
+        this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
 
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen

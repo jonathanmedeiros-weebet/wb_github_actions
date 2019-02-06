@@ -1,21 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ParametrosLocais } from './parametros-locais';
+import { ParametrosLocaisService } from './../services/parametros-locais.service';
 
 @Pipe({
     name: 'calcularCotacao'
 })
 export class CalcularCotacaoPipe implements PipeTransform {
 
-    constructor() {
+    constructor(private paramsService: ParametrosLocaisService) {
 
     }
 
     transform(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): string {
         let result = value;
-        const cotacoesLocais = ParametrosLocais.getCotacoesLocais();
-        const tiposAposta = ParametrosLocais.getTiposAposta();
-        const opcoes = ParametrosLocais.getOpcoes();
+        const cotacoesLocais = this.paramsService.getCotacoesLocais();
+        const tiposAposta = this.paramsService.getTiposAposta();
+        const opcoes = this.paramsService.getOpcoes();
         const tipoAposta = tiposAposta[chave];
 
         // Cotacação Local

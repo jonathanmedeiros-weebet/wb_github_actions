@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy, Renderer2, ElementRef, DoCheck } from '@a
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MessageService, JogoService, LiveService } from '../../../../services';
+import { ParametrosLocaisService, MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
-import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-live-listagem',
@@ -14,7 +13,7 @@ import { ParametrosLocais } from '../../../../shared/utils';
 export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     jogos = {};
     campeonatos = new Map();
-    idsCampeonatosLiberados = ParametrosLocais.getCampeonatosAoVivo();
+    idsCampeonatosLiberados = this.paramsService.getCampeonatosAoVivo();
     temJogoAoVivo = false;
     showLoadingIndicator = true;
     contentSportsEl;
@@ -25,7 +24,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private jogoService: JogoService,
         private liveService: LiveService,
         private el: ElementRef,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {

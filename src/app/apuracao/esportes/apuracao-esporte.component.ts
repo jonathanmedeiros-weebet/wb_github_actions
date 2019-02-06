@@ -42,7 +42,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         private printService: PrintService,
         private auth: AuthService,
         private fb: FormBuilder,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -135,7 +136,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     sharedTicket(aposta) {
-        HelperService.sharedSportsTicket(aposta);
+        this.helperService.sharedSportsTicket(aposta);
     }
 
     openModal(aposta) {

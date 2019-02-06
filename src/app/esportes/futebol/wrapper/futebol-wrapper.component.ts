@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CampeonatoService, SidebarService, MessageService } from './../../../services';
-import { ParametrosLocais } from '../../../shared/utils';
+import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../services';
 
 @Component({
     selector: 'app-futebol-wrapper',
@@ -16,7 +15,8 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
     constructor(
         private campeonatoService: CampeonatoService,
         private sidebarService: SidebarService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
@@ -29,8 +29,8 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = ParametrosLocais.getCampeonatosBloqueados();
-        const opcoes = ParametrosLocais.getOpcoes();
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const opcoes = this.paramsService.getOpcoes();
         const params = {
             fields: ['_id', 'nome'],
             'sport_id': 1,

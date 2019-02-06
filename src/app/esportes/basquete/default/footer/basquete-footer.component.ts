@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ParametrosLocais } from '../../../../shared/utils';
+import { ParametrosLocaisService } from '../../../../services';
 
 @Component({
     selector: 'app-basquete-footer',
@@ -11,9 +11,9 @@ import { ParametrosLocais } from '../../../../shared/utils';
 export class BasqueteFooterComponent implements OnInit {
     informativoRodape;
 
-    constructor() { }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
     ngOnInit() {
-        this.informativoRodape = ParametrosLocais.getInformativoRodape();
+        this.informativoRodape = this.paramsService.getInformativoRodape();
     }
 }

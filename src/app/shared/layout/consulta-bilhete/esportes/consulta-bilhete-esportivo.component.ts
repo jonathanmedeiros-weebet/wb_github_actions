@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { config } from './../../../config';
-import { ParametrosLocais } from '../../../../shared/utils';
+import { ParametrosLocaisService } from '../../../../services';
 
 @Component({
     selector: 'app-consulta-bilhete-esportivo',
@@ -15,12 +15,12 @@ export class ConsultaBilheteEsportivoComponent implements OnInit {
     opcoes;
     cambistaPaga;
 
-    constructor() { }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
     ngOnInit() {
         this.LOGO = config.LOGO;
 
-        this.opcoes = ParametrosLocais.getOpcoes();
+        this.opcoes = this.paramsService.getOpcoes();
 
         if (this.opcoes.percentual_premio_cambista > 0) {
             this.cambistaPaga = this.aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);

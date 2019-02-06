@@ -141,7 +141,7 @@ header{
 
 .odds .inner-odd{
     background-color: var(--odds);
-    padding: 5px;
+    padding: 5px 8px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;

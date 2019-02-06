@@ -2,13 +2,12 @@ import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/co
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -37,7 +36,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         private renderer: Renderer2,
         private el: ElementRef,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
@@ -55,12 +55,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 this.contentSportsEl.scrollTop = 0;
 
                 let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
-                if (ParametrosLocais.getOddsPrincipais()) {
-                    oddsPrincipais = ParametrosLocais.getOddsPrincipais();
+                if (this.paramsService.getOddsPrincipais()) {
+                    oddsPrincipais = this.paramsService.getOddsPrincipais();
                 }
-                this.campeonatosPrincipais = ParametrosLocais.getCampeonatosPrincipais();
-                this.jogosBloqueados = ParametrosLocais.getJogosBloqueados();
-                this.cotacoesLocais = ParametrosLocais.getCotacoesLocais();
+                this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
+                this.jogosBloqueados = this.paramsService.getJogosBloqueados();
+                this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
                 let campeonatosStorage;
                 const campUrl = sessionStorage.getItem('camp_url');
@@ -100,7 +100,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
 
                         const queryParams: any = {
                             'sport_id': 1,
-                            'campeonatos_bloqueados': ParametrosLocais.getCampeonatosBloqueados(),
+                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
                             'odds': oddsPrincipais
                         };
                         if (_.isEmpty(params)) {
@@ -110,7 +110,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             const data = moment(params['data']).format('YYYY-MM-DD');
                             queryParams.data = data;
                         } else {
-                            queryParams.data_final = ParametrosLocais.getOpcoes().data_limite_tabela;
+                            queryParams.data_final = this.paramsService.getOpcoes().data_limite_tabela;
                         }
                         if (params['nome']) {
                             queryParams.nome = params['nome'];

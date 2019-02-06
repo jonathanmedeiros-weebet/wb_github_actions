@@ -3,10 +3,9 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
-import { JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -31,12 +30,13 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private el: ElementRef,
         private renderer: Renderer2,
-        private location: Location
+        private location: Location,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
-        this.tiposAposta = ParametrosLocais.getTiposAposta();
-        this.cotacoesLocais = ParametrosLocais.getCotacoesLocais();
+        this.tiposAposta = this.paramsService.getTiposAposta();
+        this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
         const altura = window.innerHeight - 69;
         const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');

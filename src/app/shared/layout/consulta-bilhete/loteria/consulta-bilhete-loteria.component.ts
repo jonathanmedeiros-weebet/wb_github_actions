@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 import { config } from './../../../config';
-import { SorteioService } from '../../../../services';
+import { SorteioService, ParametrosLocaisService } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocais } from '../../../../shared/utils';
 
 @Component({
     selector: 'app-consulta-bilhete-loteria',
@@ -20,13 +19,14 @@ export class ConsultaBilheteLoteriaComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
+        private paramsService: ParametrosLocaisService,
         private sorteioService: SorteioService
     ) { }
 
     ngOnInit() {
         this.LOGO = config.LOGO;
 
-        const opcoes = ParametrosLocais.getOpcoes();
+        const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
 
         this.sorteioService.getSorteios()

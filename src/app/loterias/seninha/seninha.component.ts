@@ -9,12 +9,12 @@ import {
     SorteioService, ApostaLoteriaService,
     PrintService, HelperService,
     SidebarService, SupresinhaService,
-    AuthService, PreApostaLoteriaService
+    AuthService, PreApostaLoteriaService,
+    ParametrosLocaisService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
-import { ParametrosLocais } from '../../shared/utils';
 
 @Component({
     selector: 'app-seninha',
@@ -53,6 +53,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
+        private paramsService: ParametrosLocaisService,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -62,7 +64,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
-        this.opcoes = ParametrosLocais.getOpcoes();
+        this.opcoes = this.paramsService.getOpcoes();
         this.createForm();
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
@@ -309,6 +311,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     shareTicket() {
-        HelperService.sharedLotteryTicket(this.ultimaApostaRealizada);
+        this.helperService.sharedLotteryTicket(this.ultimaApostaRealizada);
     }
 }
