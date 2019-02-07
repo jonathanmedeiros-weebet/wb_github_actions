@@ -10,7 +10,7 @@ const appRoutes: Routes = [
     {
         path: '',
         component: MainLayoutComponent,
-        resolve: [ParametrosResolver],
+        resolve: { parametros: ParametrosResolver },
         children: [
             {
                 path: '',

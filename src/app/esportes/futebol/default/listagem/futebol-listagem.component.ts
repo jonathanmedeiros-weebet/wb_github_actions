@@ -69,12 +69,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 }
 
                 if (campeonatosStorage && campeonatosStorage.length > 0 && this.router.url === campUrl) {
-                    this.campeonatos = campeonatosStorage;
-                    this.showLoadingIndicator = false;
-
                     if (campeonatosStorage.length === 1) {
                         this.deixarCampeonatosAbertos = true;
                     }
+
+                    this.campeonatos = campeonatosStorage;
+                    this.showLoadingIndicator = false;
                 } else {
                     if (params['campeonato']) {
                         this.deixarCampeonatosAbertos = true;
