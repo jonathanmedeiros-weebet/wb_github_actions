@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('AppComponent');
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
         }
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit {
             this.parametroService.getOdds()
                 .subscribe(
                     tiposAposta => {
-                        console.log('getOdds');
                         localStorage.setItem('tipos_aposta', JSON.stringify(tiposAposta))
                     }
                 );
