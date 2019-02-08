@@ -78,7 +78,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 } else {
                     if (params['campeonato']) {
                         this.deixarCampeonatosAbertos = true;
-                        const campeonatoId = +params['campeonato'];
+                        const campeonatoId = params['campeonato'];
                         const queryParams: any = {
                             'odds': oddsPrincipais
                         };
@@ -263,7 +263,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     }
 
     setPrincipal(campeonatoId) {
-        const index = this.campeonatosPrincipais.findIndex(id => id === parseInt(campeonatoId, 10));
+        const index = this.campeonatosPrincipais.findIndex(id => id === campeonatoId);
         if (index >= 0) {
             this.campeonatosPrincipais.splice(index, 1);
         } else {

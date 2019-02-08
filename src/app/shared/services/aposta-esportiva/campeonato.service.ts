@@ -21,6 +21,23 @@ export class CampeonatoService {
         private errorService: ErrorService
     ) { }
 
+    getCampeonatosPorRegioes(queryParams?: any): Observable<Campeonato[]> {
+        const url = `${this.CampeonatoUrl}/regioes`;
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getCampeonatos(queryParams?: any): Observable<Campeonato[]> {
         let requestOptions;
 

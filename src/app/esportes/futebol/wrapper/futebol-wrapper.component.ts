@@ -32,14 +32,12 @@ export class FutebolWrapperComponent implements OnInit, OnDestroy {
         const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            fields: ['_id', 'nome'],
             'sport_id': 1,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
-            'odds': ['casa_90', 'fora_90']
         };
 
-        this.campeonatoService.getCampeonatos(params)
+        this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),

@@ -83,10 +83,18 @@
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li *ngFor="let campeonato of itens" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
+            <li *ngFor="let regiao of itens">
                 <a>
-                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
                 </a>
+                <ul>
+                    <li *ngFor="let campeonato of regiao.campeonatos" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
+                        <a>
+                            {{campeonato.nome}}
+                        </a>
+                    </li>
+
+                </ul>
             </li>
         </ul>
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'basquete'">
