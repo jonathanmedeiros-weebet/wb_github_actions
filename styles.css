@@ -153,7 +153,7 @@ header{
 }
 
 .odds .selecionado span{
-    color: var(--foreground-highlight)!important;
+    color: #000!important;
 }
 
 .odd .nome, .odd .valor{
@@ -172,7 +172,7 @@ header{
     }
 
     .odds .inner-odd:hover span{
-        color: var(--foreground-highlight)!important;
+        color: #000!important;
     }
 }
 

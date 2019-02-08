@@ -72,6 +72,15 @@ gulp.task('betgyn.com', function(done) {
     });
 });
 
+gulp.task('betsplay.bet', function(done) {
+    tasks(done, {
+        host: "betsplay.bet",
+        banca: "Bets Play",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
 gulp.task('betsports99.net', function(done) {
     tasks(done, {
         host: "betsports99.net",
@@ -189,6 +198,15 @@ gulp.task('trevodasorte.me', function(done) {
         host: "trevodasorte.me",
         banca: "Trevo da Sorte",
         styles: "--header: #4caf50; --foreground-header: #cce2ff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #4caf50; --foreground-odds: #fff;",
+        old: true
+    });
+});
+
+gulp.task('wasports.wee.bet', function(done) {
+    tasks(done, {
+        host: "wasports.wee.bet",
+        banca: "Wasports",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
         old: true
     });
 });
