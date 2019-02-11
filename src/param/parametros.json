@@ -3737,7 +3737,7 @@
     "jogos_bloqueados": [
         78745299
     ],
-    "data_limite_tabela": "2019-02-07",
+    "data_limite_tabela": "2019-02-12",
     "opcoes": {
         "banca_nome": "DEMO",
         "informativo_rodape": "$$$$ Boa sorte $$$$",
@@ -3762,6 +3762,6 @@
         "basquete": true,
         "loterias": true,
         "aovivo": true,
-        "data_limite_tabela": "2019-02-10"
+        "data_limite_tabela": "2019-02-12"
     }
 }

@@ -27,30 +27,30 @@ export class ParametrosLocaisService {
     }
 
     getCampeonatosBloqueados() {
-        return this.parametrosLocais ? this.parametrosLocais.campeonatos_bloqueados : null;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados) : null;
     }
 
     getCampeonatosAoVivo() {
-        return this.parametrosLocais ? this.parametrosLocais.campeonatos_aovivo : null;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_aovivo) : null;
     }
 
     getCampeonatosPrincipais() {
-        return this.parametrosLocais ? this.parametrosLocais.campeonatos_principais : null;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_principais) : null;
     }
     getCotacoesLocais() {
-        return this.parametrosLocais ? this.parametrosLocais.cotacoes_local : null;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.cotacoes_local) : null;
     }
 
     getDataLimiteTabela() {
-        return this.parametrosLocais ? this.parametrosLocais.data_limite_tabela : null;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.data_limite_tabela : null;
     }
 
     getJogosBloqueados() {
-        return this.parametrosLocais ? this.parametrosLocais.jogos_bloqueados : null;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.jogos_bloqueados) : null;
     }
 
     getOddsPrincipais() {
-        return this.parametrosLocais ? this.parametrosLocais.odds_principais : null;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.odds_principais) : null;
     }
 
     getTiposAposta() {
@@ -72,15 +72,15 @@ export class ParametrosLocaisService {
     }
 
     getOpcoes() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes : null;
+        return this.parametrosLocais ? Object.assign({}, this.parametrosLocais.opcoes) : null;
     }
 
     getInformativoRodape() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes.informativo_rodape : null;
+        return this.parametrosLocais ? Object.assign({}, this.parametrosLocais.opcoes.informativo_rodape) : null;
     }
 
     getBancaNome() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes.banca_nome : null;
+        return this.parametrosLocais ? Object.assign({}, this.parametrosLocais.opcoes.banca_nome) : null;
     }
 
     getOddsImpressao() {
