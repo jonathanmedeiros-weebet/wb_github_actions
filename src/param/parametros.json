@@ -11,7 +11,7 @@
             "exibirImpressao": "1",
             "cat_nome": "PRINCIPAL",
             "cat_chave": "principal",
-            "fator": "1.0299999713897705",
+            "fator": "1",
             "fator_ao_vivo": "1"
         },
         "empate_90": {
@@ -25,7 +25,7 @@
             "exibirImpressao": "1",
             "cat_nome": "PRINCIPAL",
             "cat_chave": "principal",
-            "fator": "1.0299999713897705",
+            "fator": "1",
             "fator_ao_vivo": "1"
         },
         "fora_90": {
@@ -39,7 +39,7 @@
             "exibirImpressao": "1",
             "cat_nome": "PRINCIPAL",
             "cat_chave": "principal",
-            "fator": "1.0299999713897705",
+            "fator": "1",
             "fator_ao_vivo": "1"
         },
         "casa_1t": {
