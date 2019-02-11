@@ -160,6 +160,10 @@ header{
     color: var(--foreground-odds);
 }
 
+.flag-icon-ww{
+    background-image: url(/src/assets/images/ww.svg);
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .odds .odd{

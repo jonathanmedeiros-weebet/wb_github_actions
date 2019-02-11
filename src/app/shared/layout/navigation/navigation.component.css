@@ -12,6 +12,7 @@
     color: var(--foreground-sidebar-left);
     text-decoration: none;
     cursor: pointer;
+    display: block;
 }
 
 #sidebar-wrapper .dropdown-item{
@@ -56,7 +57,7 @@
  }
 
 .sidebar-nav{
-    background-color: var(--sidebar);
+    background-color: var(--sidebar-left);
     padding: 0;
 }
 
@@ -89,7 +90,7 @@
     cursor: pointer;
 }
 
-.sidebar-nav li:hover a{
+.sidebar-nav li:hover > a{
     color: var(--highlight)!important;
 }
 
@@ -117,6 +118,16 @@
     font-size: 15px;
     background: #333;
     margin: 0;
+}
+
+.regioes .flag-icon{
+    float: left;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+.regioes ul{
+    padding-left: 0;
 }
 
 @media only screen and (max-width: 667px) {

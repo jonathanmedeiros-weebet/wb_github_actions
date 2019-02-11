@@ -83,11 +83,11 @@
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li *ngFor="let regiao of itens">
-                <a>
+            <li class="regioes"  *ngFor="let regiao of itens">
+                <a (click)="abrirRegiao(regiao._id)">
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
                 </a>
-                <ul>
+                <ul *ngIf="regiao._id == regiaoOpen">
                     <li *ngFor="let campeonato of regiao.campeonatos" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
                         <a>
                             {{campeonato.nome}}

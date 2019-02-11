@@ -69,6 +69,7 @@ export class NavigationComponent implements OnInit {
     aposta;
     opcoes;
     unsub$ = new Subject();
+    regiaoOpen = null;
 
     constructor(
         private auth: AuthService,
@@ -319,6 +320,15 @@ export class NavigationComponent implements OnInit {
             result = !moment(this.opcoes.data_limite_tabela).isSame(moment(), 'day');
         }
         return result;
+    }
+
+    abrirRegiao(regiao){
+        if(regiao == this.regiaoOpen){ //fechando
+            this.regiaoOpen = null;
+        }
+        else{ //abrindo
+            this.regiaoOpen = regiao;
+        }
     }
 
     refresh() {
