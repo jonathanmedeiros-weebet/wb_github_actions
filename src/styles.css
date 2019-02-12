@@ -161,7 +161,7 @@ header{
 }
 
 .flag-icon-ww{
-    background-image: url(/src/assets/images/ww.svg);
+    background-image: url(assets/images/ww.svg);
 }
 
 /* Large devices (desktops, 992px and up) */
