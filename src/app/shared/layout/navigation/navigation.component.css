@@ -12,7 +12,6 @@
     color: var(--foreground-sidebar-left);
     text-decoration: none;
     cursor: pointer;
-    display: block;
 }
 
 #sidebar-wrapper .dropdown-item{
@@ -122,8 +121,10 @@
 
 .regioes .flag-icon{
     float: left;
-    margin-top: 2px;
+    margin-top: 0px;
     margin-right: 2px;
+    width: 17px;
+    height: 17px;
 }
 
 .regioes ul{

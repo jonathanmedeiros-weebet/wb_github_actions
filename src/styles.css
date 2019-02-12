@@ -160,7 +160,6 @@ header{
     color: var(--foreground-odds);
 }
 
-
 .flag-icon-ww{
     background-image: url(/src/assets/images/ww.svg);
 }
