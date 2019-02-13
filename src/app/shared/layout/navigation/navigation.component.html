@@ -83,8 +83,8 @@
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li class="regioes"  *ngFor="let regiao of itens">
-                <a (click)="abrirRegiao(regiao._id)">
+            <li class="regioes" *ngFor="let regiao of itens">
+                <a [ngClass]="{'selected': regiao._id == regiaoOpen}" (click)="abrirRegiao(regiao._id)">
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
                 </a>
                 <ul *ngIf="regiao._id == regiaoOpen">

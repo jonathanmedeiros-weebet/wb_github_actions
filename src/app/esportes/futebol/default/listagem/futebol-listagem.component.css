@@ -1,19 +1,27 @@
 .campeonato-header{
     text-transform: uppercase;
-    padding: 10px 10px;
+    padding: 0px 10px;
     font-size: 1.2rem;
     font-weight: bold;
     border-top: 4px solid white;
     border-bottom: 4px solid white;
-    display: flex;
-    justify-content: space-between;
     cursor: pointer;
 }
 .campeonato:first-of-type .campeonato-header{
     border-top: 0;
 }
+.campeonato-header > span{
+    line-height: 41px;
+}
+.campeonato-header .flag-icon{
+    width: 25px;
+    height: 25px;
+    margin-right: 3px;
+}
 .campeonato-header .fa{
     font-size: 1.5rem;
+    float: right;
+    line-height: 41px;
 }
 
 .jogos{

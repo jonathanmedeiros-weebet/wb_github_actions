@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
+    --foreground-selected-odds: #000;
     [CUSTOM]
 }
 
@@ -153,15 +154,16 @@ header{
 }
 
 .odds .selecionado span{
-    color: var(--foreground-highlight)!important;
+    color: var(--foreground-selected-odds)!important;
 }
 
 .odd .nome, .odd .valor{
     color: var(--foreground-odds);
 }
 
-.flag-icon-ww{
+.flag-icon{
     background-image: url(assets/images/ww.svg);
+    background-color: var(--highlight);
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -176,7 +178,7 @@ header{
     }
 
     .odds .inner-odd:hover span{
-        color: var(--foreground-highlight)!important;
+        color: var(--foreground-selected-odds)!important;
     }
 }
 
