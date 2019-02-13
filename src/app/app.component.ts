@@ -21,7 +21,13 @@ export class AppComponent implements OnInit {
             this.parametroService.getOdds()
                 .subscribe(
                     tiposAposta => {
-                        localStorage.setItem('tipos_aposta', JSON.stringify(tiposAposta))
+                        localStorage.setItem('tipos_aposta', JSON.stringify(tiposAposta));
+                    },
+                    error => {
+                        console.log(error);
+                        if (error === 'Expired token') {
+                            this.auth.logout();
+                        }
                     }
                 );
         }
