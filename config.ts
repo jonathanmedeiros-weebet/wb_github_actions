@@ -12,5 +12,5 @@ export const config: any = {
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
     BG: `${_host}/tema/bk.jpg`,
-    VERSAO: 1.2
+    VERSAO: 2.0
 };

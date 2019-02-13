@@ -90,7 +90,7 @@
                 <ul *ngIf="regiao._id == regiaoOpen">
                     <li *ngFor="let campeonato of regiao.campeonatos" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
                         <a>
-                            {{campeonato.nome}}
+                            {{campeonato.nome.replace(regiao._id+': ', '')}}
                         </a>
                     </li>
 

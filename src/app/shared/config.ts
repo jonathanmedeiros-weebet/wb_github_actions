@@ -1,9 +1,9 @@
 
-const _host = 'http://central.demo.wee.bet';
+const _host = 'http://trevodasorte.me';
 const _center = 'http://api-center2.wee.bet';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'Trevo da Sorte',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
@@ -12,5 +12,5 @@ export const config: any = {
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
     BG: `${_host}/tema/bk.jpg`,
-    VERSAO: 1.2
+    VERSAO: 2.0
 };
