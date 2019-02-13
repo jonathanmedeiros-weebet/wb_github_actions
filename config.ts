@@ -11,6 +11,5 @@ export const config: any = {
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
-    BG: `${_host}/tema/bk.jpg`,
-    VERSAO: 2.0
+    BG: `${_host}/tema/bk.jpg`
 };
