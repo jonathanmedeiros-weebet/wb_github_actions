@@ -1,16 +1,16 @@
-#basquete-wrapper{
+#sport-wrapper{
     display: flex;
     flex-direction: row;
     min-height: 800px;
 }
 
-.basquete-content{
+.sport-content{
     flex-grow: 1;
     padding: 0 0 0 255px;
 }
 
 @media only screen and (max-width: 668px) {
-    .basquete-content{
+    .sport-content{
         padding: 0;
     }
 }

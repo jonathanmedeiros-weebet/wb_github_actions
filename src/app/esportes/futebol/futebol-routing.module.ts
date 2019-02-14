@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FutebolWrapperComponent } from './wrapper/futebol-wrapper.component';
+import { EsportesWrapperComponent } from './../wrapper/esportes-wrapper.component';
 import { AoVivoGuard } from '../../services';
 
 export const routes: Routes = [
     {
         path: '',
-        component: FutebolWrapperComponent,
+        component: EsportesWrapperComponent,
         children: [
             {
                 path: 'jogos',

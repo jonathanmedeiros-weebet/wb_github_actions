@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared/shared.module';
 import { FutebolRoutingModule } from './futebol-routing.module';
-import { FutebolWrapperComponent } from './wrapper/futebol-wrapper.component';
+import { EsportesWrapperModule } from '../wrapper/esportes-wrapper.module';
 import { JogoService, BilheteEsportivoService, ApostaEsportivaService } from './../../services';
 
 @NgModule({
     imports: [
         SharedModule,
-        FutebolRoutingModule
+        FutebolRoutingModule,
+        EsportesWrapperModule
     ],
-    declarations: [
-        FutebolWrapperComponent
-    ],
+    declarations: [],
     providers: [
         JogoService,
         BilheteEsportivoService,

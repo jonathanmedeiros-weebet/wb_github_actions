@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BasqueteWrapperComponent } from './wrapper/basquete-wrapper.component';
+import { EsportesWrapperComponent } from '../wrapper/esportes-wrapper.component';
+
 export const routes: Routes = [
     {
         path: '',
-        component: BasqueteWrapperComponent,
+        component: EsportesWrapperComponent,
         children: [
             {
                 path: 'jogos',
