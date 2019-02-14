@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef, DoCheck } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, delay, tap } from 'rxjs/operators';
 import { ParametrosLocaisService, MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
 
@@ -14,7 +14,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     jogos = {};
     campeonatos = new Map();
     idsCampeonatosLiberados = this.paramsService.getCampeonatosAoVivo();
-    temJogoAoVivo = false;
+    temJogoAoVivo = true;
+    awaiting = true;
     showLoadingIndicator = true;
     contentSportsEl;
     unsub$ = new Subject();
@@ -47,6 +48,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         this.campeonatos.set(campeonato._id, campeonato);
                     });
 
+                    setTimeout(() => {
+                        this.awaiting = false;
+                    }, 3000);
+
                     this.showLoadingIndicator = false;
 
                     this.live();
@@ -56,8 +61,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     ngDoCheck() {
-        const jogosEl = this.el.nativeElement.querySelector('.jogos');
-        this.temJogoAoVivo = jogosEl ? true : false;
+        if (!this.awaiting) {
+            const jogosEl = this.el.nativeElement.querySelector('.jogos');
+            this.temJogoAoVivo = jogosEl ? true : false;
+        }
     }
 
     ngOnDestroy() {
