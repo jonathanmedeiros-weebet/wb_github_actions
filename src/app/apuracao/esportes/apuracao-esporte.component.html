@@ -67,22 +67,22 @@
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
-                                        <i class="fa fa-eye"></i>
+                                        <i class="fas fa-eye"></i>
                                     </button>
                                     <button type="button" (click)="printTicket(aposta)" title="IMPRIMIR" class="btn btn-custom">
-                                        <i class="fa fa-print"></i>
+                                        <i class="fas fa-print"></i>
                                     </button>
                                     <button type="button" *ngIf="aposta.resultado && aposta.resultado == 'ganhou'" (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA"
                                         class="btn" [ngClass]="{'btn-success': !aposta.pago, 'btn-danger': aposta.pago}">
-                                        <i class="fa fa-money"></i>
+                                        <i class="fas fa-money"></i>
                                     </button>
                                     <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" title="COMPARTILHAR"
                                         class="btn btn-info">
-                                        <i class="fa fa-share-alt"></i>
+                                        <i class="fas fa-share-alt"></i>
                                     </button>
                                     <button type="button" title="CANCELAR"
                                             class="btn btn-danger" (click)="cancel(aposta)">
-                                        <i class="fa fa-trash-o"></i>
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
                             </td>

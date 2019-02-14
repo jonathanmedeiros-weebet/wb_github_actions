@@ -18,7 +18,7 @@
     height: 25px;
     margin-right: 3px;
 }
-.campeonato-header .fa{
+.campeonato-header svg{
     font-size: 1.5rem;
     float: right;
     line-height: 41px;
@@ -57,7 +57,7 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .mais-opcoes i{
+    .mais-opcoes svg{
         margin-right: 5px;
     }
 
@@ -75,7 +75,7 @@
         padding-bottom: 90px;
     }
 
-    .mais-opcoes i{
+    .mais-opcoes svg{
         min-width: 31px;
     }
 
