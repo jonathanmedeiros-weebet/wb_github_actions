@@ -28,7 +28,8 @@
     "pagacerto.com": "gulp pagacerto.com",
     "superbets.bet": "gulp superbets.bet",
     "superbetsport.com": "gulp superbetsport.com",
-    "trevodasorte.me": "gulp trevodasorte.me"
+    "trevodasorte.me": "gulp trevodasorte.me",
+    "wasports.wee.bet": "gulp wasports.wee.bet"
   },
   "private": true,
   "dependencies": {
