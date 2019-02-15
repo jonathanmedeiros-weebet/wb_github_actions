@@ -1,8 +1,9 @@
-const _host = 'http://weebet.local';
-const _center = 'http://localhost:3002';
+
+const _host = 'http://central.esportivatop.wee.bet';
+const _center = 'http://api-center2.wee.bet';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'Esportiva Top',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
@@ -10,6 +11,5 @@ export const config: any = {
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
     LOGO: `${_host}/tema/logo_banca.png`,
-    BG: `${_host}/tema/bk.jpg`,
-    VERSAO: 2.0
+    BG: `${_host}/tema/bk.jpg`
 };
