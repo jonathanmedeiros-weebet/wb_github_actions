@@ -3,7 +3,7 @@ var replace = require('gulp-replace');
 var exec = require('gulp-exec');
 
 function tasks(done, config) {
-    if (config.old) {
+    if(config.old) {
         console.log("antigo");
         gulp.src(['config.ts'])
             .pipe(replace('[HOST]', config.host))
@@ -19,7 +19,7 @@ function tasks(done, config) {
             .pipe(replace('[CUSTOM]', config.styles))
             .pipe(gulp.dest('src/'));
     }
-    else {
+    else{
         console.log("novo");
         gulp.src(['config.ts'])
             .pipe(replace('[HOST]', 'central.' + config.host))
@@ -123,7 +123,15 @@ gulp.task('demo.wee.bet', function (done) {
     });
 });
 
-gulp.task('eurosportbet.wee.bet', function (done) {
+gulp.task('esportivatop.wee.bet', function(done) {
+    tasks(done, {
+        host: "esportivatop.wee.bet",
+        banca: "Esportiva Top",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
+gulp.task('eurosportbet.wee.bet', function(done) {
     tasks(done, {
         host: "eurosportbet.wee.bet",
         banca: "Euro Sport",
