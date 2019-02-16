@@ -57,7 +57,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
                 if (this.paramsService.getOddsPrincipais()) {
                     oddsPrincipais = this.paramsService.getOddsPrincipais();
-                    //oddsPrincipais = oddsPrincipais.slice(0, 5);
+                    // oddsPrincipais = oddsPrincipais.slice(0, 5);
                 }
                 this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
                 this.jogosBloqueados = this.paramsService.getJogosBloqueados();
@@ -97,16 +97,21 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                                 error => this.messageService.error(error)
                             );
                     } else {
-                        this.deixarCampeonatosAbertos = false;
-
                         const queryParams: any = {
                             'sport_id': 1,
                             'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
                             'odds': oddsPrincipais
                         };
 
-                        if (_.isEmpty(params) || !params['data']) {
-                            queryParams.campeonatos = this.campeonatosPrincipais;
+                        if (params['nome']) {
+                            this.deixarCampeonatosAbertos = true;
+                            queryParams.nome = params['nome'];
+                        } else {
+                            this.deixarCampeonatosAbertos = false;
+
+                            if (_.isEmpty(params) || !params['data']) {
+                                queryParams.campeonatos = this.campeonatosPrincipais;
+                            }
                         }
 
                         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
@@ -119,10 +124,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             }
                         } else {
                             queryParams.data_final = dataLimiteTabela;
-                        }
-
-                        if (params['nome']) {
-                            queryParams.nome = params['nome'];
                         }
 
                         this.campeonatoService.getCampeonatos(queryParams)
