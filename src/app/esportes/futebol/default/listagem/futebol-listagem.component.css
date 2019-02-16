@@ -6,6 +6,8 @@
     border-top: 4px solid white;
     border-bottom: 4px solid white;
     cursor: pointer;
+    background-color: var(--league);
+    color: var(--foreground-league);
 }
 .campeonato:first-of-type .campeonato-header{
     border-top: 0;
