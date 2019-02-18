@@ -64,33 +64,33 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                             campeonato => {
                                 this.campeonatos = [campeonato];
                                 this.showLoadingIndicator = false;
-                                sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
                                 sessionStorage.setItem('camp_url', this.router.url);
                             },
                             error => this.messageService.error(error)
                         );
                 } else {
-                    const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
                     const queryParams: any = {
                         'sport_id': 18,
-                        'campeonatos_bloqueados': campeonatosBloqueados,
+                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
                         'odds': ['bkt_casa', 'bkt_fora']
                     };
+
+                    const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
                     if (params['data']) {
-                        const data = moment(params['data']).format('YYYY-MM-DD');
-                        queryParams.data = data;
+                        const dt = moment(params['data']);
+                        if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
+                            queryParams.data = dt.format('YYYY-MM-DD');
+                        } else {
+                            queryParams.data = dataLimiteTabela;
+                        }
                     } else {
-                        queryParams.data = moment().format('YYYY-MM-DD');
-                    }
-                    if (params['nome']) {
-                        queryParams.nome = params['nome'];
+                        queryParams.data_final = dataLimiteTabela;
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
                                 sessionStorage.setItem('camp_url', this.router.url);
 
                                 this.campeonatos = campeonatos;

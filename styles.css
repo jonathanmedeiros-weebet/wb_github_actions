@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
     --foreground-selected-odds: #000;
+    --league: #e1e2e4;
+    --foreground-league: #455a64;
     [CUSTOM]
 }
 
