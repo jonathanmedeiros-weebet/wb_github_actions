@@ -149,15 +149,6 @@ gulp.task('eurosportbet.wee.bet', function(done) {
     });
 });
 
-gulp.task('gbaesportes.com', function (done) {
-    tasks(done, {
-        host: "gbaesportes.com",
-        banca: "GBAESPORTES",
-        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
-        old: true
-    });
-});
-
 gulp.task('gol.vlog.br', function (done) {
     tasks(done, {
         host: "gol.vlog.br",
