@@ -20,7 +20,8 @@
                     </div>
                     <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)">
                         <ng-container *ngFor="let jogo of campeonato.jogos">
-                            <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)">
+                            <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)"
+                                (click)="selecionarJogo(jogo._id)" [ngClass]="jogoCss(jogo._id)">
                                 <div class="indentificacao">
                                     <div class="horario">
                                         {{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -33,17 +34,18 @@
                                         <div>{{jogo.time_b_nome}}</div>
                                     </div>
                                     <div class="mais-opcoes">
-                                        <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
+                                        <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
                                             <i class="fa fa-plus">
                                                 {{jogo.total_cotacoes}}
                                             </i>
-                                            <span>Cotações</span>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="odds">
-                                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes" (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
+                                        (click)="addCotacao(jogo, cotacao)">
+                                        <div class="inner-odd"
+                                            [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
@@ -54,8 +56,10 @@
                                         </div>
                                     </div>
                                     <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
-                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]" (click)="addCotacao(jogo, cotacao)">
-                                            <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]"
+                                            (click)="addCotacao(jogo, cotacao)">
+                                            <div class="inner-odd"
+                                                [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
                                                 <span class="nome">
                                                     {{cotacao.chave | tipoAposta}}
                                                 </span>
