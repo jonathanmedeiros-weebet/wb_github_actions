@@ -1,9 +1,9 @@
 
-const _host = 'http://central.esportivatop.wee.bet';
+const _host = 'http://superbetsport.com';
 const _center = 'http://api-center2.wee.bet';
 
 export const config: any = {
-    BANCA_NOME: 'Esportiva Top',
+    BANCA_NOME: 'SUPER BET SPORT',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
