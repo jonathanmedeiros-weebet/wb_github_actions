@@ -98,6 +98,15 @@ gulp.task('betsports99.net', function (done) {
     });
 });
 
+gulp.task('casadinha.wee.bet', function(done) {
+    tasks(done, {
+        host: "casadinha.wee.bet",
+        banca: "Casadinha.com",
+        styles: "--header: #999999; --foreground-header: #b1c5e0; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #fd7e14; --foreground-highlight: #011e46; --odds: #046eef; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
+        old: true
+    });
+});
+
 gulp.task('chutecerto.club', function (done) {
     tasks(done, {
         host: "chutecerto.club",
