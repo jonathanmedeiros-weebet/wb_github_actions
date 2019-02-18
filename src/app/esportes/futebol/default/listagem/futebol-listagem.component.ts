@@ -57,7 +57,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
                 if (this.paramsService.getOddsPrincipais()) {
                     oddsPrincipais = this.paramsService.getOddsPrincipais();
-                    //oddsPrincipais = oddsPrincipais.slice(0, 5);
+                    // oddsPrincipais = oddsPrincipais.slice(0, 5);
                 }
                 this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
                 this.jogosBloqueados = this.paramsService.getJogosBloqueados();

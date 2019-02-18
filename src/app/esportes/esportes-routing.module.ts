@@ -11,6 +11,10 @@ export const routes: Routes = [
         path: 'basquete',
         loadChildren: 'app/esportes/basquete/basquete.module#BasqueteModule',
         canActivate: [BasqueteGuard]
+    },
+    {
+        path: 'combate',
+        loadChildren: 'app/esportes/combate/combate.module#CombateModule',
     }
 ];
 

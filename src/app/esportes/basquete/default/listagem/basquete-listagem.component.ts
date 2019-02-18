@@ -53,7 +53,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                 this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
                 if (params['campeonato']) {
-                    const campeonatoId = +params['campeonato'];
+                    const campeonatoId = params['campeonato'];
                     const queryParams: any = {
                         'odds': ['bkt_casa', 'bkt_fora']
                     };

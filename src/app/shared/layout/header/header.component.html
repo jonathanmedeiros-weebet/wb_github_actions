@@ -39,15 +39,15 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
-                                placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
@@ -67,6 +67,11 @@
     </nav>
 
     <div class="menu-categories">
+        <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/esportes/futebol/live']">
+                <i class="fa fa-play"></i> Ao Vivo
+            </a>
+        </div>
         <div class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/futebol/jogos']">
                 <i class="fa fa-futbol-o"></i> <span>Futebol</span>
@@ -77,9 +82,9 @@
                 <i class="fa fa-futbol-o"></i> <span>Basquete</span>
             </a>
         </div>
-        <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/futebol/live']">
-                <i class="fa fa-play"></i> Ao Vivo
+        <div class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/esportes/combate/eventos']">
+                <i class="fa fa-futbol-o"></i> <span>Boxe/MMA</span>
             </a>
         </div>
         <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
@@ -129,15 +134,15 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
-                                placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>

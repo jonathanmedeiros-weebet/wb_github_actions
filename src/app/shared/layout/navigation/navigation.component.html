@@ -88,7 +88,8 @@
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
                 </a>
                 <ul *ngIf="regiao._id == regiaoOpen">
-                    <li *ngFor="let campeonato of regiao.campeonatos" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
+                    <li *ngFor="let campeonato of regiao.campeonatos"
+                        (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
                         <a>
                             {{campeonato.nome.replace(regiao._id+': ', '')}}
                         </a>
@@ -110,15 +111,27 @@
                 </a>
             </li>
             <span class="group">Campeonatos</span>
-            <li *ngFor="let campeonato of itens" (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
+            <li *ngFor="let campeonato of itens"
+                (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
                 <a>
                     <i class="fa fa-certificate"></i> {{campeonato.nome}}
                 </a>
             </li>
         </ul>
-        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'seninha' || contexto == 'quininha'">
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'combate'">
+            <span class="group">Eventos</span>
+            <li *ngFor="let campeonato of itens"
+                (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
+                <a>
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                </a>
+            </li>
+        </ul>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll
+            *ngIf="contexto == 'seninha' || contexto == 'quininha'">
             <span class="group">Surpresinha</span>
-            <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
+            <li *ngFor="let tipoAposta of itens" class="supresinha"
+                (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
                 <a *ngIf="contexto == 'seninha'">
                     <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
                     ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
@@ -181,7 +194,9 @@
             </div>
             <button type="submit" class="btn btn-custom">Consultar</button>
         </form>
-        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'"></app-consulta-bilhete-esportivo>
-        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'"></app-consulta-bilhete-loteria>
+        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
+        </app-consulta-bilhete-esportivo>
+        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
+        </app-consulta-bilhete-loteria>
     </div>
 </ng-template>
