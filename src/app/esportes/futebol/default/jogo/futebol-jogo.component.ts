@@ -36,9 +36,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
-        const altura = window.innerHeight - 69;
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+        this.definirAltura();
+
+        // Recebendo os itens atuais do bilhete
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => this.itens = itens);
 
         if (this.jogoId) {
             this.jogoService.getJogo(this.jogoId)
@@ -78,6 +81,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.unsub$.complete();
     }
 
+    definirAltura() {
+        const altura = window.innerHeight - 69;
+        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+    }
+
     back() {
         this.exibirMaisCotacoes.emit(false);
     }
@@ -93,6 +102,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     mapearCotacoes(cotacoes) {
+        this.odds = {};
+
         cotacoes.forEach(cotacao => {
             const tipoAposta = this.tiposAposta[cotacao.chave];
 

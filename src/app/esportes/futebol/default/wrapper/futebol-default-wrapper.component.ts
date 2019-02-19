@@ -12,7 +12,7 @@ import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageServ
 export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     jogoId;
     exibirMaisCotacoes = false;
-    mobileScreen;
+    mobileScreen = true;
     unsub$ = new Subject();
 
     constructor(
@@ -24,7 +24,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
-        this.mobileScreen = true;
         this.getJogos();
     }
 
@@ -51,8 +50,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     receptorJogoSelecionadoId(jogoId) {
-        console.log('receptorJogoSelecionadoId');
-        console.log(jogoId);
         this.jogoId = jogoId;
     }
 

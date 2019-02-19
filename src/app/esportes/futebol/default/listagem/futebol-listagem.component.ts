@@ -19,7 +19,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     @Output() exibirMaisCotacoes = new EventEmitter();
     jogoIdAtual;
     diaEspecifico = true;
-    mobileScreen;
+    mobileScreen = true;
     campeonatos: Campeonato[];
     aux = [];
     itens: ItemBilheteEsportivo[] = [];
@@ -27,7 +27,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     refreshIntervalId;
     cotacoesFaltando = {};
     cotacoesLocais;
-    campeonatosPrincipais;
+    oddsPrincipais;
+    campeonatosPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     jogosBloqueados;
     deixarCampeonatosAbertos;
     contentSportsEl;
@@ -46,9 +47,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
-        this.mobileScreen = true;
         this.definirAltura();
+        if (this.paramsService.getOddsPrincipais()) {
+            this.oddsPrincipais = this.paramsService.getOddsPrincipais();
+            // oddsPrincipais = oddsPrincipais.slice(0, 5);
+        }
+        this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
+        this.jogosBloqueados = this.paramsService.getJogosBloqueados();
+        this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
+        // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
@@ -59,15 +67,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 this.deixarCampeonatosAbertos = false;
                 this.showLoadingIndicator = true;
                 this.contentSportsEl.scrollTop = 0;
-
-                let oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
-                if (this.paramsService.getOddsPrincipais()) {
-                    oddsPrincipais = this.paramsService.getOddsPrincipais();
-                    // oddsPrincipais = oddsPrincipais.slice(0, 5);
-                }
-                this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
-                this.jogosBloqueados = this.paramsService.getJogosBloqueados();
-                this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
                 let campeonatosStorage;
                 const campUrl = sessionStorage.getItem('camp_url');
@@ -89,7 +88,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         this.deixarCampeonatosAbertos = true;
                         const campeonatoId = params['campeonato'];
                         const queryParams: any = {
-                            'odds': oddsPrincipais
+                            'odds': this.oddsPrincipais
                         };
 
                         this.campeonatoService.getCampeonato(campeonatoId, queryParams)
@@ -111,7 +110,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         const queryParams: any = {
                             'sport_id': 1,
                             'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
-                            'odds': oddsPrincipais
+                            'odds': this.oddsPrincipais
                         };
 
                         if (params['nome']) {
@@ -235,6 +234,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         }
     }
 
+    // Coloca as cotações faltando nos jogos
     cotacaoManualFaltando(jogoId, cotacoes) {
         let result = false;
         const cotacoesLocais = this.cotacoesLocais[jogoId];
@@ -296,28 +296,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    enviandoJogoId() {
-        // Enviando jogoId para o component pai
-        const jogoId = this.extrairJogoId(this.campeonatos);
-        console.log(jogoId);
-        this.jogoSelecionadoId.emit(jogoId);
-    }
-
-    selecionarJogo(jogoId) {
-        this.jogoIdAtual = jogoId;
-        if (!this.mobileScreen) {
-            this.jogoSelecionadoId.emit(jogoId);
-        }
-    }
-
-    maisCotacoes(jogoId) {
-        if (this.mobileScreen) {
-            this.jogoIdAtual = jogoId;
-            this.jogoSelecionadoId.emit(jogoId);
-        }
-        this.exibirMaisCotacoes.emit(true);
-    }
-
     // Extrai id do primeiro jogo do primeiro campeonato
     extrairJogoId(campeonatos) {
         let jogoId = null;
@@ -353,7 +331,29 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         return jogoId;
     }
 
-    jogoCss(jogoId) {
+    // Enviando jogoId para o component pai
+    enviandoJogoId() {
+        const jogoId = this.extrairJogoId(this.campeonatos);
+        this.jogoSelecionadoId.emit(jogoId);
+    }
+
+    selecionarJogo(jogoId) {
+        this.jogoIdAtual = jogoId;
+        if (!this.mobileScreen) {
+            this.jogoSelecionadoId.emit(jogoId);
+        }
+    }
+
+    // Exibindo todas as cotações daquele jogo selecionado
+    maisCotacoes(jogoId) {
+        if (this.mobileScreen) {
+            this.jogoIdAtual = jogoId;
+            this.jogoSelecionadoId.emit(jogoId);
+        }
+        this.exibirMaisCotacoes.emit(true);
+    }
+
+    aplicarCssJogo(jogoId) {
         return { 'jogo-selecionado': this.jogoIdAtual === jogoId };
     }
 }
