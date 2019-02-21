@@ -15,7 +15,7 @@
             <div class="dropdown menu-conta">
                 <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-2x fa-user"></i>
+                    <i class="fas fa-2x fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
@@ -28,26 +28,26 @@
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user"></i> Meu Perfil
+                        <i class="fas fa-user"></i> Meu Perfil
                     </a>
 
                     <a (click)="logout()" href="#" class="dropdown-item">
-                        <i class="fa fa-sign-out"></i> Sair
+                        <i class="fas fa-sign-out-alt"></i> Sair
                     </a>
                 </ul>
             </div>
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
-                                placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
@@ -69,27 +69,27 @@
     <div class="menu-categories">
         <div class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/futebol/jogos']">
-                <i class="fa fa-futbol-o"></i> <span>Futebol</span>
+                <i class="fas fa-futbol"></i> <span>Futebol</span>
             </a>
         </div>
         <div *ngIf="basqueteHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/basquete/jogos']">
-                <i class="fa fa-futbol-o"></i> <span>Basquete</span>
+                <i class="fas fa-basketball-ball"></i> <span>Basquete</span>
             </a>
         </div>
         <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/futebol/live']">
-                <i class="fa fa-play"></i> Ao Vivo
+                <i class="fas fa-play"></i> Ao Vivo
             </a>
         </div>
         <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/seninha']">
-                <i class="fa fa-ticket"></i> Seninha
+                <i class="fas fa-ticket-alt"></i> Seninha
             </a>
         </div>
         <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/quininha']">
-                <i class="fa fa-ticket"></i> Quininha
+                <i class="fas fa-ticket-alt"></i> Quininha
             </a>
         </div>
 
@@ -97,7 +97,7 @@
             <div class="dropdown menu-conta">
                 <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-2x fa-user"></i>
+                    <i class="fas fa-2x fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
@@ -110,34 +110,34 @@
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user"></i> Meu Perfil
+                        <i class="fas fa-user"></i> Meu Perfil
                     </a>
 
                     <a *ngIf="appMobile" class="dropdown-item" href="#" (click)="listPrinters()">
-                        <i class="fa fa-print"></i> Impressora
+                        <i class="fas fa-print"></i> Impressora
                     </a>
 
-                    <a class="dropdown-item" href="#" class="dropdown-item" (click)="appVersion()">
-                        <i class="fa fa-info"></i> Versão App
+                    <a *ngIf="appMobile" class="dropdown-item" href="#" class="dropdown-item" (click)="appVersion()">
+                        <i class="fas fa-info-circle"></i> Versão App
                     </a>
 
                     <a (click)="logout()" href="#" class="dropdown-item">
-                        <i class="fa fa-sign-out"></i> Sair
+                        <i class="fas fa-sign-out-alt"></i> Sair
                     </a>
                 </ul>
             </div>
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')"
-                                placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>

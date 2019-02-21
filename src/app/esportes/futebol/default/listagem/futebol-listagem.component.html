@@ -11,11 +11,17 @@
             <div *ngIf="!showLoadingIndicator">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
-                        <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
-                        <span>{{campeonato.nome}}</span>
-                        <i class="fa fa-angle-up" *ngIf="campeonatoPrincipal(campeonato._id); else downIcon"></i>
+                        <span class="column-left">
+                            <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
+                            <span class="campeonato-nome">{{campeonato.nome}}</span>
+                        </span>
+                        <span *ngIf="campeonatoPrincipal(campeonato._id); else downIcon">
+                            <i class="fas fa-angle-up"></i>
+                        </span>
                         <ng-template #downIcon>
-                            <i class="fa fa-angle-down"></i>
+                            <span>
+                                <i class="fas fa-angle-down"></i>
+                            </span>
                         </ng-template>
                     </div>
                     <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)">
@@ -34,9 +40,8 @@
                                         <div>{{jogo.time_b_nome}}</div>
                                     </div>
                                     <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
-                                        <i class="fa fa-plus">
-                                            {{jogo.total_cotacoes}}
-                                        </i>
+                                        <i class="fas fa-plus"></i>{{jogo.total_cotacoes}}
+                                        <span>Cotações</span>
                                     </div>
                                 </div>
                                 <div class="odds">

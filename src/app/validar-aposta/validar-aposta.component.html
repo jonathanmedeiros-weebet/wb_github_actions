@@ -38,8 +38,8 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="remover-item">
-                                        <i class="fa fa-close" (click)="removerItem(i)"></i>
+                                    <div class="remover-item" (click)="removerItem(i)">
+                                        <i class="fas fa-times"></i>
                                     </div>
                                 </div>
                             </div>
@@ -103,8 +103,8 @@
                                                 <span>{{(item.cotacao3 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
                                             </div>
                                         </div>
-                                        <div class="remover-item">
-                                            <i class="fa fa-close" (click)="removerItem(i)"></i>
+                                        <div class="remover-item" (click)="removerItem(i)">
+                                            <i class="fas fa-times"></i>
                                         </div>
                                     </div>
                                 </div>
