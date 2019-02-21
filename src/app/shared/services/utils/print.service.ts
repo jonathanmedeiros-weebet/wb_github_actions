@@ -342,7 +342,8 @@ ${horario} ${jogo.nome}
                 </div>`;
 
             if (item.cotacao3 > 0) {
-                content = `<div class="clearfix margin-bottom-5">
+                content += `
+                <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         Retorno 3
                     </div>
@@ -353,23 +354,27 @@ ${horario} ${jogo.nome}
             }
 
             if (item.cotacao4 > 0) {
-                content = `<div class="clearfix margin-bottom-5">
+                content += `
+                <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         Retorno 4
                     </div>
                     <div style="float: right;">
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}
-                    </div>`;
+                    </div>
+                </div>`;
             }
 
             if (item.cotacao5 > 0) {
-                content = `<div class="clearfix margin-bottom-5">
+                content += `
+                <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         Retorno 5
                     </div>
                     <div style="float: right;">
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}
-                    </div>`;
+                    </div>
+                </div>`;
             }
 
             if (item.tipo === 'seninha' && item.cotacao6 > 0) {
@@ -384,7 +389,6 @@ ${horario} ${jogo.nome}
                 </div>
                 `;
             }
-
 
             if (array.length > 1) {
                 if (index === 0) {
