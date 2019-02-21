@@ -1,5 +1,12 @@
 <div id="futebol-default-wrapper">
     <div id="futebol-default-content">
-        <router-outlet></router-outlet>
+        <div class="lista" [hidden]="mobileScreen && exibirMaisCotacoes">
+            <app-futebol-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"></app-futebol-listagem>
+        </div>
+        <div class="jogo" [hidden]="mobileScreen && !exibirMaisCotacoes">
+            <app-futebol-jogo [jogoId]="jogoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            </app-futebol-jogo>
+        </div>
     </div>
 </div>

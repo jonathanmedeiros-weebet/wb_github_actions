@@ -1,6 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
@@ -13,8 +11,10 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['futebol-jogo.component.css']
 })
 
-export class FutebolJogoComponent implements OnInit, OnDestroy {
-    jogo: Jogo = new Jogo();
+export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
+    jogo: Jogo;
+    @Input() jogoId;
+    @Output() exibirMaisCotacoes = new EventEmitter();
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
@@ -27,10 +27,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
-        private route: ActivatedRoute,
         private el: ElementRef,
         private renderer: Renderer2,
-        private location: Location,
         private paramsService: ParametrosLocaisService
     ) { }
 
@@ -38,31 +36,44 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
-        const altura = window.innerHeight - 69;
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+        this.definirAltura();
 
-        this.route.params
+        // Recebendo os itens atuais do bilhete
+        this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
-            .subscribe((params: any) => {
-                if (params['id']) {
-                    const id = +params['id'];
+            .subscribe(itens => this.itens = itens);
 
-                    this.jogoService.getJogo(id)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            jogo => {
-                                this.jogo = jogo;
-                                this.mapearCotacoes(jogo.cotacoes);
-                            },
-                            error => this.messageService.error(error)
-                        );
-                }
-            });
+        if (this.jogoId) {
+            this.jogoService.getJogo(this.jogoId)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    jogo => {
+                        this.jogo = jogo;
+                        this.mapearCotacoes(jogo.cotacoes);
+                    },
+                    error => this.messageService.error(error)
+                );
+        }
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
+    }
+
+    ngOnChanges() {
+        if (this.jogoId) {
+            this.showLoadingIndicator = true;
+
+            this.jogoService.getJogo(this.jogoId)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    jogo => {
+                        this.jogo = jogo;
+                        this.mapearCotacoes(jogo.cotacoes);
+                    },
+                    error => this.messageService.error(error)
+                );
+        }
     }
 
     ngOnDestroy() {
@@ -70,8 +81,14 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
+    definirAltura() {
+        const altura = window.innerHeight - 69;
+        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+    }
+
     back() {
-        this.location.back();
+        this.exibirMaisCotacoes.emit(false);
     }
 
     oddSelecionada(jogoId, chave) {
@@ -85,6 +102,8 @@ export class FutebolJogoComponent implements OnInit, OnDestroy {
     }
 
     mapearCotacoes(cotacoes) {
+        this.odds = {};
+
         cotacoes.forEach(cotacao => {
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
