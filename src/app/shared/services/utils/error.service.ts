@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { throwError } from 'rxjs';
-import { LogService } from './log.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ErrorService {
-    constructor(private log: LogService) { }
+    constructor() { }
 
     handleError(error: HttpErrorResponse) {
         let message = '';
@@ -24,9 +23,6 @@ export class ErrorService {
             if (error.error.errors) {
                 message = error.error.errors.message;
             } else {
-                this.log.registrar(error)
-                    .subscribe(() => console.log('sucesso ao registrar error.'));
-
                 message = 'Ocorreu um problema inesperado, entre em contato com a banca.';
             }
         }
