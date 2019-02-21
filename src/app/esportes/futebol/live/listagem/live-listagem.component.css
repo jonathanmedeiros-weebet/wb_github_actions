@@ -105,10 +105,6 @@
     padding: 5px 10px;
 }
 
-.mais-opcoes svg{
-    margin-right: 5px;
-}
-
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .mais-opcoes svg{
@@ -128,6 +124,10 @@
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;
+    }
+
+    .mais-opcoes{
+        margin-right: 5px;
     }
 
     .indentificacao, .mais-opcoes span{
