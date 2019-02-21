@@ -8,6 +8,8 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    background-color: var(--league);
+    color: var(--foreground-league);
 }
 
 .campeonato:first-of-type .campeonato-header{
@@ -44,6 +46,13 @@
 
 .jogo{
     padding: 12px 10px 0 10px;
+    cursor: pointer;
+}
+
+.jogo-selecionado{
+    background: var(--selected-event);
+    color: var(--foreground-selected-event)!important;
+    cursor: auto;
 }
 
 .indentificacao{
@@ -65,8 +74,16 @@
     font-weight: bold;
 }
 
-.mais-opcoes a{
+.mais-opcoes{
     color: var(--odds);
+    padding: 8px 4px 8px 8px;
+    min-width: 50px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.mais-opcoes i{
+    font-weight: bold;
 }
 
 /* Large devices (desktops, 992px and up) */

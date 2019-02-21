@@ -26,7 +26,8 @@
                     </div>
                     <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)">
                         <ng-container *ngFor="let jogo of campeonato.jogos">
-                            <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)">
+                            <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)"
+                                (click)="selecionarJogo(jogo._id)" [ngClass]="aplicarCssJogo(jogo._id)">
                                 <div class="indentificacao">
                                     <div class="horario">
                                         {{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -38,11 +39,9 @@
                                         <div>{{jogo.time_a_nome}}</div>
                                         <div>{{jogo.time_b_nome}}</div>
                                     </div>
-                                    <div class="mais-opcoes">
-                                        <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
-                                            <i class="fas fa-plus"></i>{{jogo.total_cotacoes}}
-                                            <span>Cotações</span>
-                                        </a>
+                                    <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
+                                        <i class="fas fa-plus"></i>{{jogo.total_cotacoes}}
+                                        <span>Cotações</span>
                                     </div>
                                 </div>
                                 <div class="odds">

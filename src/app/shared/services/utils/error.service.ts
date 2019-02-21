@@ -7,19 +7,24 @@ import { throwError } from 'rxjs';
     providedIn: 'root',
 })
 export class ErrorService {
+    constructor() { }
+
     handleError(error: HttpErrorResponse) {
         let message = '';
 
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            message = `An error occurred: ${error.error.message}`;
-            console.error(message);
+            message = `Um problema ocorreu: ${error.error.message}`;
+            console.log(error);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
             // console.error(`Backend returned code ${error.status}, ` + `body was: ${error.message}`);
-
-            message = error.error.errors.message;
+            if (error.error.errors) {
+                message = error.error.errors.message;
+            } else {
+                message = 'Ocorreu um problema inesperado, entre em contato com a banca.';
+            }
         }
         // return an observable with a user-facing error message
         return throwError(message);
