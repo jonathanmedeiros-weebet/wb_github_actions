@@ -6,18 +6,32 @@
     border-top: 4px solid white;
     border-bottom: 4px solid white;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
+
 .campeonato:first-of-type .campeonato-header{
     border-top: 0;
 }
+
 .campeonato-header > span{
     line-height: 41px;
 }
+
+.campeonato-header .column-left{
+    flex-grow: 1;
+}
+
 .campeonato-header .flag-icon{
     width: 25px;
     height: 25px;
-    margin-right: 3px;
+    position: absolute;
 }
+
+.campeonato-header .campeonato-nome{
+    margin-left: 28px;
+}
+
 .campeonato-header svg{
     font-size: 1.5rem;
     float: right;
@@ -57,10 +71,6 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .mais-opcoes svg{
-        margin-right: 5px;
-    }
-
     .indentificacao .nome{
         display: block;
     }
@@ -75,8 +85,8 @@
         padding-bottom: 90px;
     }
 
-    .mais-opcoes svg{
-        min-width: 31px;
+    .mais-opcoes{
+        margin-right: 5px;
     }
 
     .indentificacao .nome-mobile{

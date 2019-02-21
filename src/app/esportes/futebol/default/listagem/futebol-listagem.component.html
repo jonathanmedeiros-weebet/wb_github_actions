@@ -11,8 +11,10 @@
             <div *ngIf="!showLoadingIndicator">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
-                        <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
-                        <span>{{campeonato.nome}}</span>
+                        <span class="column-left">
+                            <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
+                            <span class="campeonato-nome">{{campeonato.nome}}</span>
+                        </span>
                         <span *ngIf="campeonatoPrincipal(campeonato._id); else downIcon">
                             <i class="fas fa-angle-up"></i>
                         </span>
@@ -38,7 +40,7 @@
                                     </div>
                                     <div class="mais-opcoes">
                                         <a routerLink="/esportes/futebol/jogos/{{jogo._id}}">
-                                            <i class="fas fa-plus"></i> {{jogo.total_cotacoes}}
+                                            <i class="fas fa-plus"></i>{{jogo.total_cotacoes}}
                                             <span>Cotações</span>
                                         </a>
                                     </div>
