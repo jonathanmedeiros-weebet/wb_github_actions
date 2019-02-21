@@ -73,12 +73,12 @@
                 <div>
                     <h4>PRÉ-BILHETE</h4>
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
-                        <i class="fas fa-lg fa-close"></i>
+                        <i class="fas fa-lg fa-times"></i>
                     </a>
                     <div class="aposta-item" *ngFor="let item of aposta.itens; let i=index">
                         <div class="item-header">
                             <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
-                                <i class="fas fa-lg fa-close"></i>
+                                <i class="fas fa-lg fa-times"></i>
                             </a>
                             <div>
                                 <span>{{item.sorteio.nome}}</span>
