@@ -27,8 +27,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
     refreshIntervalId;
     cotacoesFaltando = {};
     cotacoesLocais;
-    oddsPrincipais;
-    campeonatosPrincipais = ['casa_90', 'empate_90', 'fora_90'];
+    campeonatosPrincipais = [];
+    oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     jogosBloqueados;
     deixarCampeonatosAbertos;
     contentSportsEl;
@@ -52,7 +52,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
             this.oddsPrincipais = this.paramsService.getOddsPrincipais();
             // oddsPrincipais = oddsPrincipais.slice(0, 5);
         }
-        this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
@@ -67,6 +66,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                 this.deixarCampeonatosAbertos = false;
                 this.showLoadingIndicator = true;
                 this.contentSportsEl.scrollTop = 0;
+                this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
 
                 let campeonatosStorage;
                 const campUrl = sessionStorage.getItem('camp_url');

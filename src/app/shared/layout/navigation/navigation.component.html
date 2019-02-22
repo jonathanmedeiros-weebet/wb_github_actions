@@ -11,42 +11,42 @@
             <ul class="sidebar-menu">
                 <li>
                     <a (click)="abrirModalPesquisa()">
-                        <i class="fas fa-search"></i> Pesquisa
+                        <i class="fa fa-search"></i> Pesquisa
                     </a>
                 </li>
                 <li>
                     <a (click)="abrirModalAposta()">
-                        <i class="fas fa-ticket-alt"></i> Bilhete
+                        <i class="fa fa-ticket"></i> Bilhete
                     </a>
                 </li>
                 <li>
                     <a (click)="abrirModalTabela()">
-                        <i class="fas fa-print"></i> Tabela
+                        <i class="fa fa-print"></i> Tabela
                     </a>
                 </li>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">
                     <a>
-                        <i class="fas fa-cogs"></i> Config
+                        <i class="fa fa-cogs"></i> Config
                     </a>
                 </li>
                 <li *ngIf="!isAppMobile">
                     <a target="_blank" download="app.apk" href="app.apk">
-                        <i class="fas fa-download"></i> App
+                        <i class="fa fa-download"></i> App
                     </a>
                 </li>
                 <li>
                     <a [routerLink]="['/regras']">
-                        <i class="fas fa-book"></i> Regras
+                        <i class="fa fa-book"></i> Regras
                     </a>
                 </li>
                 <li *ngIf="isLoggedIn">
                     <a [routerLink]="['/validar-aposta']">
-                        <i class="fas fa-check"></i> Validação
+                        <i class="fa fa-check"></i> Validação
                     </a>
                 </li>
                 <li *ngIf="isLoggedIn" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-asterisk"></i> Apuração
+                        <i class="fa fa-asterisk"></i> Apuração
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
@@ -55,12 +55,12 @@
                 </li>
                 <li *ngIf="isLoggedIn">
                     <a [routerLink]="['/resultados/esportes']">
-                        <i class="fas fa-list"></i> Resultados
+                        <i class="fa fa-list"></i> Resultados
                     </a>
                 </li>
                 <li>
                     <a (click)="refresh()">
-                        <i class="fas fa-redo"></i> Atualizar
+                        <i class="fa fa-redo"></i> Atualizar
                     </a>
                 </li>
             </ul>
@@ -112,7 +112,7 @@
             <span class="group">Campeonatos</span>
             <li *ngFor="let campeonato of itens" (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
                 <a>
-                    <i class="fas fa-certificate"></i> {{campeonato.nome}}
+                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
                 </a>
             </li>
         </ul>
@@ -120,11 +120,11 @@
             <span class="group">Surpresinha</span>
             <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
                 <a *ngIf="contexto == 'seninha'">
-                    <i class="fas fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
                     ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
                 </a>
                 <a *ngIf="contexto == 'quininha'">
-                    <i class="fas fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
                     ( {{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}} )
                 </a>
             </li>

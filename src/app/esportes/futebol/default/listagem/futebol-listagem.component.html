@@ -16,11 +16,11 @@
                             <span class="campeonato-nome">{{campeonato.nome}}</span>
                         </span>
                         <span *ngIf="campeonatoPrincipal(campeonato._id); else downIcon">
-                            <i class="fas fa-angle-up"></i>
+                            <i class="fa fa-angle-up"></i>
                         </span>
                         <ng-template #downIcon>
                             <span>
-                                <i class="fas fa-angle-down"></i>
+                                <i class="fa fa-angle-down"></i>
                             </span>
                         </ng-template>
                     </div>
@@ -40,7 +40,7 @@
                                         <div>{{jogo.time_b_nome}}</div>
                                     </div>
                                     <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
-                                        <i class="fas fa-plus"></i>{{jogo.total_cotacoes}}
+                                        <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}
                                         <span>Cotações</span>
                                     </div>
                                 </div>

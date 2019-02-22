@@ -8,12 +8,14 @@
                         <div class="row">
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssInputError('dataInicial')">
+                                <input type="date" class="form-control" formControlName="dataInicial"
+                                    [ngClass]="applyCssInputError('dataInicial')">
                                 <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssInputError('dataFinal')">
+                                <input type="date" class="form-control" formControlName="dataFinal"
+                                    [ngClass]="applyCssInputError('dataFinal')">
                                 <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
@@ -54,39 +56,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let aposta of apostas" [ngClass]="getStatus(aposta.resultado)">
-                            <td>#{{aposta.id}}</td>
-                            <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                            <td>{{aposta.apostador}}</td>
-                            <td class="text-right">{{aposta.num_jogos? aposta.num_jogos : aposta.itens.length}}</td>
-                            <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
-                            <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
-                            <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
-                            <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
-                            <td>{{getPagamento(aposta)}}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button type="button" (click)="printTicket(aposta)" title="IMPRIMIR" class="btn btn-custom">
-                                        <i class="fas fa-print"></i>
-                                    </button>
-                                    <button type="button" *ngIf="aposta.resultado && aposta.resultado == 'ganhou'" (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA"
-                                        class="btn" [ngClass]="{'btn-success': !aposta.pago, 'btn-danger': aposta.pago}">
-                                        <i class="fas fa-money"></i>
-                                    </button>
-                                    <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" title="COMPARTILHAR"
-                                        class="btn btn-info">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                    <button type="button" title="CANCELAR"
-                                            class="btn btn-danger" (click)="cancel(aposta)">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                        <ng-container *ngFor="let aposta of apostas">
+                            <tr>
+                                <td>#{{aposta.id}}</td>
+                                <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                                <td>{{aposta.apostador}}</td>
+                                <td class="text-right">{{aposta.num_jogos? aposta.num_jogos : aposta.itens.length}}</td>
+                                <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
+                                <td>{{aposta.pago ? 'PAGO' : ''}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info" title="VISUALIZAR"
+                                                (click)="openModal(aposta)">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                            <button type="button" (click)="printTicket(aposta)" title="IMPRIMIR"
+                                                class="btn btn-custom">
+                                                <i class="fa fa-print"></i>
+                                            </button>
+                                            <button type="button"
+                                                *ngIf="aposta.resultado && aposta.resultado == 'ganhou'"
+                                                (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA" class="btn"
+                                                [ngClass]="{'btn-success': !aposta.pago, 'btn-danger': aposta.pago}">
+                                                <i class="fa fa-money"></i>
+                                            </button>
+                                            <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)"
+                                                title="COMPARTILHAR" class="btn btn-info">
+                                                <i class="fa fa-share-alt"></i>
+                                            </button>
+                                            <button type="button" title="CANCELAR" class="btn btn-danger"
+                                                (click)="cancel(aposta)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
                         <tr class="tr-footer">
                             <th class="header text-right" colspan="4"></th>
                             <th class="text-right">Valor</th>
@@ -120,7 +130,8 @@
         </button>
     </div>
     <div class="modal-body cupom-ativo">
-        <app-consulta-bilhete-esportivo [aposta]="apostaSelecionada" *ngIf="apostaSelecionada"></app-consulta-bilhete-esportivo>
+        <app-consulta-bilhete-esportivo [aposta]="apostaSelecionada" *ngIf="apostaSelecionada">
+        </app-consulta-bilhete-esportivo>
     </div>
 </ng-template>
 

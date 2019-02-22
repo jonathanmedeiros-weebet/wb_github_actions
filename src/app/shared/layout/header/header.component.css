@@ -64,7 +64,7 @@ header a{
     color: #fff;
 }
 
-.menu-categories svg{
+.menu-categories .fa{
     font-size: 2rem;
     margin-bottom: 5px;
 }
