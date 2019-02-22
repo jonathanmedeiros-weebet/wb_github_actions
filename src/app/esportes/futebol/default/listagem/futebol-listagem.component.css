@@ -46,7 +46,7 @@
 
 .jogo{
     padding: 12px 10px 0 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .jogo-selecionado{
