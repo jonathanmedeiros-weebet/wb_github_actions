@@ -80,8 +80,7 @@
                                             </button>
                                             <button type="button"
                                                 *ngIf="aposta.resultado && aposta.resultado == 'ganhou'"
-                                                (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA" class="btn"
-                                                [ngClass]="{'btn-success': !aposta.pago, 'btn-danger': aposta.pago}">
+                                                (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA" class="btn btn-warning">
                                                 <i class="fa fa-money"></i>
                                             </button>
                                             <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)"

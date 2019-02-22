@@ -107,8 +107,8 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .mais-opcoes svg{
-        margin-right: 5px;
+    .mais-opcoes .fa{
+        margin-right: 10px;
     }
 
     .indentificacao{
