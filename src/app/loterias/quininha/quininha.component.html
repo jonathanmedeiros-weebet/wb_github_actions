@@ -73,12 +73,12 @@
                 <div>
                     <h4>PRÉ-BILHETE</h4>
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
-                        <i class="fas fa-lg fa-times"></i>
+                        <i class="fas fa-times fa-2x"></i>
                     </a>
                     <div class="aposta-item" *ngFor="let item of aposta.itens; let i=index">
                         <div class="item-header">
                             <a href="javascript:void(0)" (click)="removeGuess(i)" class="remover-palpite">
-                                <i class="fas fa-lg fa-times"></i>
+                                <i class="fas fa-times fa-2x"></i>
                             </a>
                             <div>
                                 <span>{{item.sorteio.nome}}</span>
@@ -134,7 +134,7 @@
             </div>
         </div>
     </div>
-    <div id="fixed-bar-bilhete" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
+    <div id="fixed-bar-bilhete" (click)="openCupom()" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
         <div>
             <label>Valor</label>
             <span>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
@@ -148,7 +148,7 @@
             <span>{{(aposta.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
         </div>
         <div class="open-bilhete">
-            <a (click)="openCupom()">
+            <a>
                 <i class="fas fa-lg fa-chevron-circle-up"></i>
             </a>
         </div>

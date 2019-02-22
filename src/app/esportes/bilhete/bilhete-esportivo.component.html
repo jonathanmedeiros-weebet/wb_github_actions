@@ -2,7 +2,7 @@
     <div class="pre-bilhete-esportes">
         <h4>BILHETE</h4>
         <a (click)="closeCupom()" class="fechar-pre-bilhete">
-            <i class="fas fa-lg fa-times"></i>
+            <i class="fas fa-times fa-2x"></i>
         </a>
         <div class="value-informations">
             <p>
@@ -75,7 +75,7 @@
         </div>
     </div>
 </section>
-<div id="fixed-bar-bilhete" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
+<div id="fixed-bar-bilhete" (click)="openCupom()" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
     <div>
         <label>Valor</label>
         <span>{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
@@ -89,7 +89,7 @@
         <span>{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
     </div>
     <div class="open-bilhete">
-        <a (click)="openCupom()">
+        <a>
             <i class="fas fa-lg fa-chevron-circle-up"></i>
         </a>
     </div>
