@@ -9,7 +9,7 @@
 .campeonato:first-of-type .campeonato-header{
     border-top: 0;
 }
-.campeonato-header svg{
+.campeonato-header .fa{
     font-size: 1.5rem;
 }
 
