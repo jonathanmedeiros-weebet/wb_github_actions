@@ -92,7 +92,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             odds: this.oddsPrincipais,
                             data_final: dataLimiteTabela
                         };
-                        console.log(queryParams);
 
                         this.campeonatoService.getCampeonato(campeonatoId, queryParams)
                             .pipe(takeUntil(this.unsub$))
