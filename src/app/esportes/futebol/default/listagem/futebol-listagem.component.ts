@@ -54,6 +54,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
         }
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -88,8 +89,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                         this.deixarCampeonatosAbertos = true;
                         const campeonatoId = params['campeonato'];
                         const queryParams: any = {
-                            'odds': this.oddsPrincipais
+                            odds: this.oddsPrincipais,
+                            data_final: dataLimiteTabela
                         };
+                        console.log(queryParams);
 
                         this.campeonatoService.getCampeonato(campeonatoId, queryParams)
                             .pipe(takeUntil(this.unsub$))
@@ -124,7 +127,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy {
                             }
                         }
 
-                        const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
                         if (params['data']) {
                             const dt = moment(params['data']);
                             if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
