@@ -23,8 +23,15 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        // this.mobileScreen = window.innerWidth <= 668 ? true : false;
-        this.getEventos();
+        this.sidebarService.itens
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                dados => {
+                    if (dados.contexto !== 'futebol') {
+                        this.getJogos();
+                    }
+                }
+            );
     }
 
     ngOnDestroy() {
@@ -32,11 +39,11 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    getEventos() {
+    getJogos() {
         const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            'sport_id': 9,
+            'sport_id': 1,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };
@@ -44,7 +51,7 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
         this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(campeonatos, 'combate'),
+                campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
                 error => this.messageService.error(error)
             );
     }
