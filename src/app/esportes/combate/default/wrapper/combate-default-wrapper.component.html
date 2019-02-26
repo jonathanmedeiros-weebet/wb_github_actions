@@ -1,5 +1,12 @@
 <div id="combate-default-wrapper">
     <div id="combate-default-content">
-        <router-outlet></router-outlet>
+        <div class="lista" [hidden]="mobileScreen && exibirMaisCotacoes">
+            <app-combate-listagem (eventoSelecionadoId)="receptorEventoSelecionadoId($event)"
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"></app-combate-listagem>
+        </div>
+        <div class="evento" [hidden]="mobileScreen && !exibirMaisCotacoes">
+            <app-combate-evento [eventoId]="eventoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            </app-combate-evento>
+        </div>
     </div>
 </div>

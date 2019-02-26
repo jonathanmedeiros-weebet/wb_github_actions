@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
-import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
+import { ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,8 +13,10 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['combate-evento.component.css']
 })
 
-export class CombateEventoComponent implements OnInit, OnDestroy {
-    jogo: Jogo = new Jogo();
+export class CombateEventoComponent implements OnInit, OnDestroy, OnChanges {
+    evento: any;
+    @Input() eventoId;
+    @Output() exibirMaisCotacoes = new EventEmitter();
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
@@ -51,9 +53,9 @@ export class CombateEventoComponent implements OnInit, OnDestroy {
                     this.jogoService.getJogo(id)
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
-                            jogo => {
-                                this.jogo = jogo;
-                                this.mapearCotacoes(jogo.cotacoes);
+                            evento => {
+                                this.evento = evento;
+                                this.mapearCotacoes(evento.cotacoes);
                             },
                             error => this.messageService.error(error)
                         );
@@ -70,14 +72,30 @@ export class CombateEventoComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    back() {
-        this.location.back();
+    ngOnChanges() {
+        if (this.eventoId) {
+            this.showLoadingIndicator = true;
+
+            this.jogoService.getJogo(this.eventoId)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    evento => {
+                        this.evento = evento;
+                        this.mapearCotacoes(evento.cotacoes);
+                    },
+                    error => this.messageService.error(error)
+                );
+        }
     }
 
-    oddSelecionada(jogoId, chave) {
+    back() {
+        this.exibirMaisCotacoes.emit(false);
+    }
+
+    oddSelecionada(eventoId, chave) {
         let result = false;
         this.itens.forEach(item => {
-            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
+            if (item.jogo_id === eventoId && item.cotacao.chave === chave) {
                 result = true;
             }
         });
@@ -85,6 +103,8 @@ export class CombateEventoComponent implements OnInit, OnDestroy {
     }
 
     mapearCotacoes(cotacoes) {
+        this.odds = {};
+
         cotacoes.forEach(cotacao => {
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
@@ -99,61 +119,24 @@ export class CombateEventoComponent implements OnInit, OnDestroy {
                     };
                     this.odds[tipoAposta.cat_chave] = odd;
                 }
-
                 odd.cotacoes.push(cotacao);
-
-                if (this.cotacoesLocais[this.jogo._id] && this.cotacoesLocais[this.jogo._id][cotacao.chave]) {
-                    this.cotacoesLocais[this.jogo._id][cotacao.chave].usou = true;
-                }
             }
         });
-
-        // Exibir odds locais que não vinheram no center
-        if (this.cotacoesLocais[this.jogo._id]) {
-            for (const chave in this.cotacoesLocais[this.jogo._id]) {
-                if (this.cotacoesLocais[this.jogo._id].hasOwnProperty(chave)) {
-                    const cotacaoLocal = this.cotacoesLocais[this.jogo._id][chave];
-
-                    if (!cotacaoLocal.usou) {
-                        const tipoAposta = this.tiposAposta[chave];
-
-                        if (tipoAposta) {
-                            let odd = this.odds[tipoAposta.cat_chave];
-                            if (!odd) {
-                                odd = {
-                                    'nome': tipoAposta.cat_nome,
-                                    'tempo': tipoAposta.tempo,
-                                    'principal': tipoAposta.p,
-                                    'cotacoes': []
-                                };
-                                this.odds[tipoAposta.cat_chave] = odd;
-                            }
-
-                            const cotacao = new Cotacao();
-                            cotacao.chave = chave;
-                            cotacao.valor = cotacaoLocal.valor;
-
-                            odd.cotacoes.push(cotacao);
-                        }
-                    }
-                }
-            }
-        }
 
         this.showLoadingIndicator = false;
     }
 
-    addCotacao(jogo: Jogo, cotacao) {
+    addCotacao(evento, cotacao) {
         let modificado = false;
-        const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
-        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
+        const indexGame = this.itens.findIndex(i => i.jogo._id === evento._id);
+        const indexOdd = this.itens.findIndex(i => (i.jogo._id === evento._id) && (i.cotacao.chave === cotacao.chave));
 
         const item = {
-            aoVivo: jogo.ao_vivo,
-            jogo_id: jogo._id,
-            jogo_nome: jogo.nome,
+            aoVivo: evento.ao_vivo,
+            jogo_id: evento._id,
+            jogo_nome: evento.nome,
             cotacao: cotacao,
-            jogo: jogo
+            jogo: evento
         };
 
         if (indexGame >= 0) {

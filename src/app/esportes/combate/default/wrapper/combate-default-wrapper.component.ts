@@ -10,6 +10,9 @@ import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageServ
     styleUrls: ['combate-default-wrapper.component.css']
 })
 export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
+    eventoId;
+    exibirMaisCotacoes = false;
+    mobileScreen = true;
     unsub$ = new Subject();
 
     constructor(
@@ -20,16 +23,8 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.sidebarService.itens
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                dados => {
-                    console.log(dados.contexto);
-                    if (dados.contexto !== 'futebol') {
-                        this.getJogos();
-                    }
-                }
-            );
+        // this.mobileScreen = window.innerWidth <= 668 ? true : false;
+        this.getEventos();
     }
 
     ngOnDestroy() {
@@ -37,11 +32,11 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    getJogos() {
+    getEventos() {
         const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            'sport_id': 1,
+            'sport_id': 9,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };
@@ -49,8 +44,16 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
         this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
+                campeonatos => this.sidebarService.changeItens(campeonatos, 'combate'),
                 error => this.messageService.error(error)
             );
+    }
+
+    receptorEventoSelecionadoId(eventoId) {
+        this.eventoId = eventoId;
+    }
+
+    changeExibirMaisCotacoes(exibirMaisCotacoes) {
+        this.exibirMaisCotacoes = exibirMaisCotacoes;
     }
 }
