@@ -3,6 +3,8 @@
     --foreground-selected-odds: #000;
     --league: #e1e2e4;
     --foreground-league: #455a64;
+    --selected-event: #002458;
+    --foreground-selected-event: #fff;
     [CUSTOM]
 }
 
@@ -110,6 +112,270 @@ header{
     justify-content: center;
 }
 
+.square-group{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    justify-content: flex-start;
+}
+
+.square{
+    width: 50px;
+    height: 50px;
+    padding: 17px 0;
+    text-align: center;
+    background-color: whitesmoke;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.square-group .active{
+    background-color:var(--odds);
+    color: #fff;
+}
+
+.square .content, .circle .content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bet-types{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bet-types .active .circle, .bet-types .active .price {
+    background-color:var(--odds);
+    font-weight: bolder;
+    color: #fff;
+}
+
+.bet-type{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 7px 7px 7px 0;
+    flex-grow: 1;
+}
+
+.bet-type .price{
+    background-color: whitesmoke;
+    padding: 10px 15px;
+}
+
+.bet-type .circle{
+    margin: 0 0 3px 0;
+}
+
+.circle{
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.pre-bilhete{
+    display: none;
+    background-color: var(--sidebar-right);
+    /* position: relative; */
+    width: 270px;
+}
+.pre-bilhete .form-row{
+    margin-top: 12px;
+}
+
+/* .pre-bilhete button{
+    width: 100%;
+} */
+
+.form-row select,
+.form-row input{
+    font-size: 1.5rem;
+    height: 38px;
+}
+
+button{
+    line-height: 27px;
+}
+
+.pre-bilhete .aposta-item{
+    border: 1px solid #d7dfe3;
+    background: #eef5f9;
+    border-radius: 4px;
+    padding: 10px 5px 10px 10px;
+    margin-top: 15px;
+}
+
+.pre-bilhete .aposta-item .circle{
+    height: 25px;
+    width: 25px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.pre-bilhete .item-header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    padding-right: 22px;
+}
+
+.pre-bilhete .remover-palpite{
+    font-size: 18px;
+    color: red;
+    position: absolute;
+    right: 5px;
+    top: -5px;
+}
+
+.pre-bilhete .item-header > div{
+    flex-grow: 1;
+    text-transform: capitalize;
+}
+
+.pre-bilhete .item-header > div label{
+    margin-right: 3px;
+}
+
+
+.pre-bilhete .item-header > div span{
+    font-weight: bold;
+}
+
+#fixed-bar-bilhete{
+    padding: 5px;
+    background: var(--sidebar-right);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+#fixed-bar-bilhete.opened{
+    top:113px;
+}
+
+#fixed-bar-bilhete > div{
+    flex-grow: 1;
+}
+
+#fixed-bar-bilhete > div > *{
+    display: block;
+    text-align: center;
+}
+#fixed-bar-bilhete > div label{
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+#fixed-bar-bilhete > div span{
+    font-weight: bold;
+}
+
+.pre-bilhete-mobile{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%!important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: var(--sidebar-right);
+    display: block;
+    overflow-y: auto;
+}
+
+.fechar-pre-bilhete{
+    right: 10px;
+    top: 9px;
+    padding: 9px;
+    position: absolute;
+    color: red!important;
+}
+
+.pre-bilhete .botoes .col{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.loteria-content {
+    padding: 0 0 0 255px;
+}
+
+.loteria-content .card {
+    min-height: calc(100vh - 210px);
+    border-radius: 0;
+    border: none;
+    padding-top: 0;
+}
+
+.loteria-content .pre-bilhete {
+    padding: 20px 15px 0 15px;
+    width: 270px;
+}
+
+.loteria-content .pre-bilhete .form-row.inputs {
+    background-color: var(--odds);
+    padding: 20px 15px 8px 15px;
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.loteria-content .pre-bilhete h4{
+    color: #c9def5;
+    text-align: center;
+}
+
+.loteria-content .pre-bilhete h4::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+    left: 50%;
+    margin-left: -58px;
+}
+
+.loteria-content .content-header {
+    background: #E1E2E4;
+    color: #455a64;
+    text-transform: uppercase;
+    padding: 15px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.loteria-content .content-body .content {
+    display: flex;
+}
+
+.loteria-content .content-body .content .col-lg-9 {
+    padding: 0px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* Override JS Toast*/
 .jq-toast-wrap{
     z-index: 9001!important;
@@ -170,6 +436,18 @@ header{
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    #fixed-bar-bilhete{
+        display: none
+    }
+
+    .fechar-pre-bilhete{
+        display: none;
+    }
+
+    .pre-bilhete{
+        display: block;
+    }
+
     .odds .odd{
         width: 33.33%;
         padding: 3px;
@@ -192,6 +470,22 @@ header{
     #default-content{
         padding: 10px 15px;
         height: calc(100vh - 111px);
+    }
+
+    .loteria-content {
+        padding: 0;
+    }
+
+    .loteria-content .pre-bilhete {
+        padding: 40px 15px 0;
+        position: absolute !important;
+        top: 0;
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .content-loteria {
+        padding-bottom: 90px !important;
     }
 
     .odds .odd{

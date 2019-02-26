@@ -46,10 +46,6 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .mais-opcoes i{
-        margin-right: 5px;
-    }
-
     .indentificacao .nome{
         display: block;
     }
@@ -64,8 +60,8 @@
         padding-bottom: 90px;
     }
 
-    .mais-opcoes i{
-        min-width: 31px;
+    .mais-opcoes{
+        margin-right: 5px;
     }
 
     .indentificacao .nome-mobile{

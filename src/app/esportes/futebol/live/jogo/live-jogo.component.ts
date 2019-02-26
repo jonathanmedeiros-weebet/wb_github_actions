@@ -13,7 +13,7 @@ import { ParametrosLocaisService, MessageService, JogoService, LiveService, Bilh
     styleUrls: ['live-jogo.component.css']
 })
 export class LiveJogoComponent implements OnInit, OnDestroy {
-    jogo = new Jogo();
+    jogo;
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
@@ -66,7 +66,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
             .subscribe(
                 jogo => {
                     this.jogo = jogo;
-
+                    this.mapearCotacoes(jogo.cotacoes);
                     this.live();
                 },
                 error => this.handleError(error)

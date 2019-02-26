@@ -224,18 +224,6 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         };
     }
 
-    getPagamento(aposta) {
-        let result = '';
-        if (aposta.resultado && aposta.resultado === 'ganhou') {
-            if (aposta.pago) {
-                result = 'PAGO';
-            } else {
-                result = 'AGUARDANDO PAGAMENTO';
-            }
-        }
-        return result;
-    }
-
     setPagamento(aposta) {
         this.apostaService.setPagamento(aposta.id)
             .subscribe(

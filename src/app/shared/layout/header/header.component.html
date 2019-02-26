@@ -15,7 +15,7 @@
             <div class="dropdown menu-conta">
                 <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-2x fa-user"></i>
+                    <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
@@ -102,7 +102,7 @@
             <div class="dropdown menu-conta">
                 <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-2x fa-user"></i>
+                    <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
@@ -122,8 +122,8 @@
                         <i class="fa fa-print"></i> Impressora
                     </a>
 
-                    <a class="dropdown-item" href="#" class="dropdown-item" (click)="appVersion()">
-                        <i class="fa fa-info"></i> Versão App
+                    <a *ngIf="appMobile" class="dropdown-item" href="#" class="dropdown-item" (click)="appVersion()">
+                        <i class="fa fa-info-circle"></i> Versão App
                     </a>
 
                     <a (click)="logout()" href="#" class="dropdown-item">

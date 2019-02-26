@@ -1,5 +1,6 @@
 <section class="content-sports" appPerfectScroll>
-    <div class="jogo">
+    <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+    <div class="jogo"  *ngIf="!showLoadingIndicator">
         <div class="indentificacao">
             <div class="div-btn-back">
                 <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
@@ -17,7 +18,7 @@
                 </div>
             </div>
             <div class="aovivo-tempo">
-                <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
+                <div class="tempo">{{jogo.info?.minutos}}'</div>
                 <div class="aovivo-label">Ao Vivo</div>
             </div>
         </div>
@@ -28,7 +29,7 @@
                     <i class="fa fa-arrow-left"></i> Voltar
                 </button>
                 <div class="aovivo-tempo">
-                    <div class="tempo">{{jogo.info?.minutos}}' {{jogo.info?.tempo}}T</div>
+                    <div class="tempo">{{jogo.info?.minutos}}'</div>
                     <div class="aovivo-label">Ao Vivo</div>
                 </div>
             </div>
@@ -47,7 +48,6 @@
         <div class="campeonato-nome">
             <small>{{jogo.campeonato?.nome}}</small>
         </div>
-        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="tipo-apostas">
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
                 <h4>{{odds[chave].nome}}</h4>

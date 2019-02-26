@@ -76,11 +76,11 @@ export class ParametrosLocaisService {
     }
 
     getInformativoRodape() {
-        return this.parametrosLocais ? Object.assign({}, this.parametrosLocais.opcoes.informativo_rodape) : null;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.informativo_rodape : null;
     }
 
     getBancaNome() {
-        return this.parametrosLocais ? Object.assign({}, this.parametrosLocais.opcoes.banca_nome) : null;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.banca_nome : null;
     }
 
     getOddsImpressao() {
