@@ -229,6 +229,14 @@ gulp.task('pagacerto.com', function (done) {
     });
 });
 
+gulp.task('sertaobets.com', function (done) {
+    tasks(done, {
+        host: "sertaobets.com",
+        banca: "Sertão Bets",
+        styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
+    });
+});
+
 gulp.task('superbets.bet', function (done) {
     tasks(done, {
         host: "superbets.bet",
