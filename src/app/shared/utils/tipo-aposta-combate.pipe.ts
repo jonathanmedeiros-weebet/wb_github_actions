@@ -15,6 +15,8 @@ export class TipoApostaCombatePipe implements PipeTransform {
 
         if (tiposAposta[value]) {
             const nome = tiposAposta[value].nome;
+            result = nome;
+
             if (nome.search(/casa/ig) >= 0) {
                 result = nome.replace(/casa/ig, atletaA);
             }
