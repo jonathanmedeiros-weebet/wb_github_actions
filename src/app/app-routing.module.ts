@@ -10,7 +10,6 @@ const appRoutes: Routes = [
     {
         path: '',
         component: MainLayoutComponent,
-        resolve: { parametros: ParametrosResolver },
         children: [
             {
                 path: '',
@@ -64,7 +63,9 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
+    imports: [RouterModule.forRoot(appRoutes, {
+        scrollPositionRestoration: 'enabled',
+    })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

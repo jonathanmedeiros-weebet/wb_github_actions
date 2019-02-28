@@ -65,69 +65,74 @@
                 </li>
             </ul>
         </div>
-        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'futebol'">
-            <span class="group">Destaques</span>
-            <li (click)="goTo('/esportes/futebol/jogos')">
-                <a>
-                    Campeonatos Principais
-                </a>
-            </li>
-            <li (click)="goTo('/esportes/futebol/jogos', { data: hoje })">
-                <a>
-                    Jogos de Hoje
-                </a>
-            </li>
-            <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
-                <a>
-                    Jogos de Amanhã
-                </a>
-            </li>
-            <span class="group">Campeonatos</span>
-            <li class="regioes" *ngFor="let regiao of itens">
-                <a [ngClass]="{'selected': regiao._id == regiaoOpen}" (click)="abrirRegiao(regiao._id)">
-                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
-                </a>
-                <ul *ngIf="regiao._id == regiaoOpen">
-                    <li *ngFor="let campeonato of regiao.campeonatos" (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
-                        <a>
-                            {{campeonato.nome.replace(regiao._id+': ', '')}}
-                        </a>
-                    </li>
+        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll>
+            <ng-container *ngIf="contexto == 'futebol'">
+                <span class="group">Destaques</span>
+                <li (click)="goTo('/esportes/futebol/jogos')">
+                    <a>
+                        Campeonatos Principais
+                    </a>
+                </li>
+                <li (click)="goTo('/esportes/futebol/jogos', { data: hoje })">
+                    <a>
+                        Jogos de Hoje
+                    </a>
+                </li>
+                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
+                    <a>
+                        Jogos de Amanhã
+                    </a>
+                </li>
+                <span class="group">Campeonatos</span>
+                <li class="regioes" *ngFor="let regiao of itens">
+                    <a [ngClass]="{'selected': regiao._id == regiaoOpen}" (click)="abrirRegiao(regiao._id)">
+                        <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
+                    </a>
+                    <ul *ngIf="regiao._id == regiaoOpen">
+                        <li *ngFor="let campeonato of regiao.campeonatos"
+                            (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
+                            <a>
+                                {{campeonato.nome.replace(regiao._id+': ', '')}}
+                            </a>
+                        </li>
 
-                </ul>
-            </li>
-        </ul>
-        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'basquete'">
-            <span class="group">Destaques</span>
-            <li (click)="goTo('/esportes/basquete/jogos', { data: hoje })">
-                <a>
-                    Jogos de Hoje
-                </a>
-            </li>
-            <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/jogos', { data: amanha })">
-                <a>
-                    Jogos de Amanhã
-                </a>
-            </li>
-            <span class="group">Campeonatos</span>
-            <li *ngFor="let campeonato of itens" (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
-                <a>
-                    <i class="fa fa-certificate"></i> {{campeonato.nome}}
-                </a>
-            </li>
-        </ul>
-        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll *ngIf="contexto == 'seninha' || contexto == 'quininha'">
-            <span class="group">Surpresinha</span>
-            <li *ngFor="let tipoAposta of itens" class="supresinha" (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
-                <a *ngIf="contexto == 'seninha'">
-                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                    ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
-                </a>
-                <a *ngIf="contexto == 'quininha'">
-                    <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                    ( {{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}} )
-                </a>
-            </li>
+                    </ul>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="contexto == 'basquete'">
+                <span class="group">Destaques</span>
+                <li (click)="goTo('/esportes/basquete/jogos', { data: hoje })">
+                    <a>
+                        Jogos de Hoje
+                    </a>
+                </li>
+                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/jogos', { data: amanha })">
+                    <a>
+                        Jogos de Amanhã
+                    </a>
+                </li>
+                <span class="group">Campeonatos</span>
+                <li *ngFor="let campeonato of itens"
+                    (click)="goTo('/esportes/basquete/jogos', { campeonato: campeonato._id })">
+                    <a>
+                        <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                    </a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
+                <span class="group">Surpresinha</span>
+                <li *ngFor="let tipoAposta of itens" class="supresinha"
+                    (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
+                    <a *ngIf="contexto == 'seninha'">
+                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                        ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
+                    </a>
+                    <a *ngIf="contexto == 'quininha'">
+                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
+                        ( {{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}} )
+                    </a>
+                </li>
+            </ng-container>
         </ul>
     </div>
 </aside>
@@ -181,7 +186,9 @@
             </div>
             <button type="submit" class="btn btn-custom">Consultar</button>
         </form>
-        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'"></app-consulta-bilhete-esportivo>
-        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'"></app-consulta-bilhete-loteria>
+        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
+        </app-consulta-bilhete-esportivo>
+        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
+        </app-consulta-bilhete-loteria>
     </div>
 </ng-template>

@@ -8,17 +8,7 @@ import { FutebolJogoComponent } from './jogo/futebol-jogo.component';
 export const routes: Routes = [
     {
         path: '',
-        component: FutebolDefaultWrapperComponent,
-        children: [
-            {
-                path: '',
-                component: FutebolListagemComponent
-            },
-            {
-                path: ':id',
-                component: FutebolJogoComponent
-            }
-        ]
+        component: FutebolDefaultWrapperComponent
     }
 ];
 

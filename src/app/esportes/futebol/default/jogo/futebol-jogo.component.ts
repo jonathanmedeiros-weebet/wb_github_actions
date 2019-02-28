@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef, EventEmitter, Output, Input, OnChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
@@ -10,7 +11,6 @@ import { takeUntil } from 'rxjs/operators';
     templateUrl: 'futebol-jogo.component.html',
     styleUrls: ['futebol-jogo.component.css']
 })
-
 export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
@@ -21,6 +21,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     cotacoesLocais;
     objectKeys = Object.keys;
     showLoadingIndicator = true;
+    contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
@@ -29,19 +30,25 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private messageService: MessageService,
         private el: ElementRef,
         private renderer: Renderer2,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
-
-        this.definirAltura();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
+
+        this.route.queryParams
+            .pipe(takeUntil(this.unsub$))
+            .subscribe((params: any) => {
+                this.contentSportsEl.scrollTop = 0;
+            });
 
         if (this.jogoId) {
             this.jogoService.getJogo(this.jogoId)
@@ -54,10 +61,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     error => this.messageService.error(error)
                 );
         }
-
-        this.bilheteService.itensAtuais
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
     }
 
     ngOnChanges() {
@@ -83,8 +86,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     definirAltura() {
         const altura = window.innerHeight - 69;
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     back() {
