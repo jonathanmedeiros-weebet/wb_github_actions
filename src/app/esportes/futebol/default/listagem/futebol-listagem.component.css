@@ -87,6 +87,11 @@
     font-weight: bold;
 }
 
+.exibir-mais{
+    text-align: center;
+    margin-top: 15px;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .indentificacao .nome{

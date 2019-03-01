@@ -49,10 +49,10 @@
             <small>{{jogo.campeonato?.nome}}</small>
         </div>
         <div class="tipo-apostas">
-            <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
+            <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds); trackBy">
                 <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
-                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
+                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes; trackBy: trackByKey" (click)="addCotacao(jogo, cotacao)">
                         <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
                             <span class="nome">
                                 {{cotacao.chave | tipoAposta}}

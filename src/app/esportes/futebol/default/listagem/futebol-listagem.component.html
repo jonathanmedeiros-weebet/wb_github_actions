@@ -8,8 +8,9 @@
                     Nenhum jogo encontrado!
                 </div>
             </div>
+
             <div *ngIf="!showLoadingIndicator">
-                <div class="campeonato" *ngFor="let campeonato of campeonatos">
+                <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
                         <span class="column-left">
                             <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
@@ -53,8 +54,8 @@
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave:
-                                                jogo._id:jogo.favorito}}
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
+                                                jogo.favorito}}
                                             </span>
                                         </div>
                                     </div>
@@ -78,8 +79,21 @@
                         </ng-container>
                     </div>
                 </div>
+
+                <div class="exibir-mais" *ngIf="start < total">
+                    <button (click)="exibirMais()" *ngIf="!disabled; else btnProcessando"
+                        class="btn btn-custom" type="button">
+                        Exibir Mais
+                    </button>
+                    <ng-template #btnProcessando>
+                        <button disabled class="btn btn-custom">
+                            Carregando... <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </ng-template>
+                </div>
+
+                <app-futebol-footer></app-futebol-footer>
             </div>
         </div>
-        <app-futebol-footer></app-futebol-footer>
     </section>
 </div>

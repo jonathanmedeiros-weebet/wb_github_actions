@@ -48,6 +48,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         this.campeonatos.set(campeonato._id, campeonato);
                     });
 
+
                     setTimeout(() => {
                         this.awaiting = false;
                     }, 3000);
@@ -108,9 +109,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     reOrder(a, b) {
-        if (a.value.nome > b.value.nome) {
-            return b.key;
-        }
+        return a.value.nome.localeCompare(b.value.nome);
     }
 
     handleError(msg) {
@@ -119,5 +118,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     campeonatoPermitido(campenatoId) {
         return this.idsCampeonatosLiberados.includes(campenatoId);
+    }
+
+    trackById(index: number, campeonato: any): string {
+        return campeonato._id;
     }
 }
