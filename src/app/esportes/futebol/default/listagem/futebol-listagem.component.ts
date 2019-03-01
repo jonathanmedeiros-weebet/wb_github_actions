@@ -10,7 +10,6 @@ import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEspo
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
 import * as _ from 'lodash';
 
 @Component({
@@ -20,29 +19,26 @@ import * as _ from 'lodash';
     styleUrls: ['futebol-listagem.component.css']
 })
 export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
-    @Input() campeonatos: Campeonato[];
     @Input() showLoadingIndicator;
+    @Input() deixarCampeonatosAbertos;
+    @Input() jogoIdAtual;
+    @Input() campeonatos: Campeonato[];
     @Input() campeonatosPrincipais = [];
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
-    jogoIdAtual;
     mobileScreen = true;
     itens: ItemBilheteEsportivo[] = [];
     cotacoesFaltando = {};
     cotacoesLocais;
     jogosBloqueados;
-    deixarCampeonatosAbertos;
     contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
-        private campeonatoService: CampeonatoService,
         private messageService: MessageService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private router: Router,
-        private route: ActivatedRoute,
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef
     ) { }
@@ -83,11 +79,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     oddSelecionada(jogoId, chave) {
         let result = false;
-        this.itens.forEach(item => {
+        for (let index = 0; index < this.itens.length; index++) {
+            const item = this.itens[index];
             if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
                 result = true;
             }
-        });
+        }
         return result;
     }
 
@@ -129,13 +126,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         const cotacoesLocais = this.cotacoesLocais[jogoId];
 
         if (cotacoesLocais) {
-            cotacoes.forEach(cotacao => {
+            for (let index = 0; index < cotacoes.length; index++) {
+                const cotacao = cotacoes[index];
                 for (const chave in cotacoesLocais) {
                     if (chave === cotacao.chave) {
                         cotacoesLocais[chave].usou = true;
                     }
                 }
-            });
+            }
 
             for (const chave in cotacoesLocais) {
                 if (cotacoesLocais.hasOwnProperty(chave)) {
@@ -242,7 +240,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.exibirMaisCotacoes.emit(true);
     }
 
-    aplicarCssJogo(jogoId) {
-        return { 'jogo-selecionado': this.jogoIdAtual === jogoId };
-    }
+    // aplicarCssJogo(jogoId) {
+    //     return { 'jogo-selecionado': this.jogoIdAtual === jogoId };
+    // }
 }
