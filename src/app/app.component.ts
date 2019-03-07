@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
                         localStorage.setItem('tipos_aposta', JSON.stringify(tiposAposta));
                     },
                     error => {
-                        console.log(error);
                         if (error === 'Expired token') {
                             this.auth.logout();
                         }

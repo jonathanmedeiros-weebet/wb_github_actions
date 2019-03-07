@@ -25,7 +25,8 @@
                             </span>
                         </ng-template>
                     </div>
-                    <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)">
+                    <!-- <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)"> -->
+                    <div class="jogos" [hidden]="!campeonatoPrincipal(campeonato._id)">
                         <ng-container *ngFor="let jogo of campeonato.jogos">
                             <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)"
                                 (click)="selecionarJogo(jogo._id)">
@@ -48,8 +49,7 @@
                                 <div class="odds">
                                     <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
                                         (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd"
-                                            [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                        <div class="inner-odd {{itensSelecionados[cotacao._id] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
@@ -62,8 +62,7 @@
                                     <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
                                         <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]"
                                             (click)="addCotacao(jogo, cotacao)">
-                                            <div class="inner-odd"
-                                                [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                            <div class="inner-odd {{itensSelecionados[cotacao._id] ? 'selecionado' : ''}}">
                                                 <span class="nome">
                                                     {{cotacao.chave | tipoAposta}}
                                                 </span>

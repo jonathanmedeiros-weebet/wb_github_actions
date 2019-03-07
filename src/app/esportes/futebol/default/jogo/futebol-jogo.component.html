@@ -1,18 +1,18 @@
 <section class="content-sports" appPerfectScroll>
     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-    <div class="jogo" *ngIf="jogo && !showLoadingIndicator">
+    <div class="jogo" [hidden]="!jogo || showLoadingIndicator">
         <div class="indentificacao">
             <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
                 <i class="fa fa-arrow-left"></i> Voltar
             </button>
             <div class="text-center">
                 <div class="nome">
-                    <small>{{jogo.campeonato?.nome}}</small>
-                    <div>{{jogo.nome}}</div>
+                    <small>{{jogo?.campeonato?.nome}}</small>
+                    <div>{{jogo?.nome}}</div>
                 </div>
                 <div class="horario">
-                    <div>{{jogo.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
+                    <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
                     <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
-                        <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                        <div class="inner-odd {{itensSelecionados[cotacao._id] ? 'selecionado' : ''}}">
                             <span class="nome">
                                 {{cotacao.chave | tipoAposta}}
                             </span>

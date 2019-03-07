@@ -7,11 +7,10 @@ import { ParametrosLocaisService } from './../services/parametros-locais.service
 })
 export class CalcularCotacaoPipe implements PipeTransform {
 
-    constructor(private paramsService: ParametrosLocaisService) {
-
-    }
+    constructor(private paramsService: ParametrosLocaisService) { }
 
     transform(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): string {
+        // console.log('CalcularCotacaoPipe');
         let result = value;
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
         const tiposAposta = this.paramsService.getTiposAposta();

@@ -1,4 +1,8 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, EventEmitter, Output, Input, OnChanges } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, Renderer2, ElementRef,
+    EventEmitter, Output, Input, OnChanges, ChangeDetectionStrategy,
+    ChangeDetectorRef
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
@@ -8,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'futebol-jogo.component.html',
     styleUrls: ['futebol-jogo.component.css']
 })
@@ -17,6 +22,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     @Output() exibirMaisCotacoes = new EventEmitter();
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
+    itensSelecionados = {};
     tiposAposta;
     cotacoesLocais;
     objectKeys = Object.keys;
@@ -31,7 +37,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private el: ElementRef,
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -42,7 +49,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
+            .subscribe(itens => {
+                this.itens = itens;
+
+                this.itensSelecionados = {};
+                for (let i = 0; i < itens.length; i++) {
+                    const item = itens[i];
+                    this.itensSelecionados[item.cotacao._id] = true;
+                }
+
+                this.cd.markForCheck();
+            });
 
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
@@ -165,6 +182,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         this.showLoadingIndicator = false;
+        this.cd.detectChanges();
     }
 
     addCotacao(jogo: Jogo, cotacao) {

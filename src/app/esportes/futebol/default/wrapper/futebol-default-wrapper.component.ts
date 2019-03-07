@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../../services';
 import * as moment from 'moment';
-import * as _ from 'lodash';
+import * as isEmpty from 'lodash.isempty';
 
 @Component({
     selector: 'app-futebol-default-wrapper',
@@ -114,7 +114,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                         } else {
                             this.deixarCampeonatosAbertos = false;
 
-                            if (_.isEmpty(params) || !params['data']) {
+                            if (isEmpty(params) || !params['data']) {
                                 queryParams.campeonatos = this.campeonatosPrincipais;
                             }
                         }

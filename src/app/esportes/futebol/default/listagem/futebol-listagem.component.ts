@@ -29,6 +29,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     mobileScreen = true;
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
+    itensSelecionados = {};
     cotacoesFaltando = {};
     cotacoesLocais;
     jogosBloqueados;
@@ -59,6 +60,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => {
                 this.itens = itens;
+
+                this.itensSelecionados = {};
+                for (let i = 0; i < itens.length; i++) {
+                    const item = itens[i];
+                    this.itensSelecionados[item.cotacao._id] = true;
+                }
+
                 this.cd.markForCheck();
             });
     }
@@ -124,10 +132,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.itens.splice(indexGame, 1, item);
             }
 
+            delete this.itensSelecionados[`${cotacao._id}`];
             modificado = true;
         } else {
             this.itens.push(item);
 
+            this.itensSelecionados[`${cotacao._id}`] = true;
             modificado = true;
         }
 
@@ -249,10 +259,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
         this.exibirMaisCotacoes.emit(true);
     }
-
-    // aplicarCssJogo(jogoId) {
-    //     return { 'jogo-selecionado': this.jogoIdAtual === jogoId };
-    // }
 
     exibirMais() {
         this.disabled = true;
