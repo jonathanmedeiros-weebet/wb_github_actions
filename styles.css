@@ -509,11 +509,13 @@ button{
 /* Spinner */
 .lds-ring {
     display: inline-block;
-    position: absolute;
+    position: fixed;
     width: 64px;
     height: 64px;
     left: 50%;
     margin-left: -32px;
+    top: 50%;
+    margin-top: -32px;
   }
   .lds-ring div {
     box-sizing: border-box;

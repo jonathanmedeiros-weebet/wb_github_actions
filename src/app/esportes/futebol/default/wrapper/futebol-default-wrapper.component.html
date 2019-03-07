@@ -4,7 +4,8 @@
             <app-futebol-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
                 (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
                 [showLoadingIndicator]="showLoadingIndicator"
-                [campeonatos]="campeonatos"
+                [deixarCampeonatosAbertos]="deixarCampeonatosAbertos"
+                [camps]="campeonatos"
                 [campeonatosPrincipais]="campeonatosPrincipais"></app-futebol-listagem>
         </div>
         <div class="jogo" [hidden]="mobileScreen && !exibirMaisCotacoes">

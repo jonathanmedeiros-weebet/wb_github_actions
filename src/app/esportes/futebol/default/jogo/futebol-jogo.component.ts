@@ -96,18 +96,20 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     oddSelecionada(jogoId, chave) {
         let result = false;
-        this.itens.forEach(item => {
+        for (let index = 0; index < this.itens.length; index++) {
+            const item = this.itens[index];
             if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
                 result = true;
             }
-        });
+        }
         return result;
     }
 
     mapearCotacoes(cotacoes) {
         this.odds = {};
 
-        cotacoes.forEach(cotacao => {
+        for (let index = 0; index < cotacoes.length; index++) {
+            const cotacao = cotacoes[index];
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
             if (tipoAposta) {
@@ -128,7 +130,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     this.cotacoesLocais[this.jogo._id][cotacao.chave].usou = true;
                 }
             }
-        });
+        }
 
         // Exibir odds locais que não vinheram no center
         if (this.cotacoesLocais[this.jogo._id]) {

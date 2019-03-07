@@ -19,6 +19,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     campeonatos;
     campeonatosPrincipais;
+    deixarCampeonatosAbertos;
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     refreshIntervalId;
     aux = [];
@@ -70,7 +71,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
                 if (campeonatosStorage && campeonatosStorage.length > 0 && this.router.url === campUrl) {
                     if (campeonatosStorage.length === 1) {
-                        // this.deixarCampeonatosAbertos = true;
+                        this.deixarCampeonatosAbertos = true;
                     }
                     this.campeonatos = campeonatosStorage;
 
@@ -79,7 +80,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 } else {
                     // Sem Cache
                     if (params['campeonato']) {
-                        // this.deixarCampeonatosAbertos = true;
+                        this.deixarCampeonatosAbertos = true;
                         const campeonatoId = params['campeonato'];
                         const queryParams: any = {
                             odds: this.oddsPrincipais,
@@ -108,10 +109,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                         };
 
                         if (params['nome']) {
-                            // this.deixarCampeonatosAbertos = true;
+                            this.deixarCampeonatosAbertos = true;
                             queryParams.nome = params['nome'];
                         } else {
-                            // this.deixarCampeonatosAbertos = false;
+                            this.deixarCampeonatosAbertos = false;
 
                             if (_.isEmpty(params) || !params['data']) {
                                 queryParams.campeonatos = this.campeonatosPrincipais;
@@ -236,6 +237,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
             }
         }
 
+        this.jogoId = jogoId;
         return jogoId;
     }
 }

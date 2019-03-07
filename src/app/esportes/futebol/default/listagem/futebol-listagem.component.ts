@@ -1,7 +1,7 @@
 import {
     Component, OnInit, OnDestroy, Renderer2,
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
-    ChangeDetectorRef, Input, OnChanges
+    ChangeDetectorRef, Input, OnChanges, SimpleChange
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,7 +10,6 @@ import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEspo
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
 import * as _ from 'lodash';
 
 @Component({
@@ -20,29 +19,31 @@ import * as _ from 'lodash';
     styleUrls: ['futebol-listagem.component.css']
 })
 export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
-    @Input() campeonatos: Campeonato[];
     @Input() showLoadingIndicator;
+    @Input() deixarCampeonatosAbertos;
+    @Input() jogoIdAtual;
+    @Input() camps: Campeonato[];
     @Input() campeonatosPrincipais = [];
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
-    jogoIdAtual;
     mobileScreen = true;
+    campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     cotacoesFaltando = {};
     cotacoesLocais;
     jogosBloqueados;
-    deixarCampeonatosAbertos;
     contentSportsEl;
+    start;
+    offset = 10;
+    total;
+    disabled = false;
     unsub$ = new Subject();
 
     constructor(
-        private campeonatoService: CampeonatoService,
         private messageService: MessageService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private router: Router,
-        private route: ActivatedRoute,
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef
     ) { }
@@ -62,15 +63,26 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             });
     }
 
-    ngOnChanges() {
-        if (this.contentSportsEl && this.contentSportsEl.scrollTop) {
+    ngOnChanges(changes: { [propName: string]: SimpleChange }) {
+        if (this.contentSportsEl && changes['showLoadingIndicator']) {
             this.contentSportsEl.scrollTop = 0;
+        }
+
+        if (changes['camps'] && this.camps) {
+            this.start = 0;
+            this.total = Math.ceil(this.camps.length / this.offset);
+            this.campeonatos = [];
+            this.exibirMais();
         }
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    trackById(index: number, campeonato: any): string {
+        return campeonato._id;
     }
 
     definirAltura() {
@@ -83,11 +95,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     oddSelecionada(jogoId, chave) {
         let result = false;
-        this.itens.forEach(item => {
+        for (let index = 0; index < this.itens.length; index++) {
+            const item = this.itens[index];
             if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
                 result = true;
             }
-        });
+        }
         return result;
     }
 
@@ -129,13 +142,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         const cotacoesLocais = this.cotacoesLocais[jogoId];
 
         if (cotacoesLocais) {
-            cotacoes.forEach(cotacao => {
+            for (let index = 0; index < cotacoes.length; index++) {
+                const cotacao = cotacoes[index];
                 for (const chave in cotacoesLocais) {
                     if (chave === cotacao.chave) {
                         cotacoesLocais[chave].usou = true;
                     }
                 }
-            });
+            }
 
             for (const chave in cotacoesLocais) {
                 if (cotacoesLocais.hasOwnProperty(chave)) {
@@ -220,12 +234,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return jogoId;
     }
 
-    // Enviando jogoId para o component pai
-    enviandoJogoId() {
-        const jogoId = this.extrairJogoId(this.campeonatos);
-        this.jogoSelecionadoId.emit(jogoId);
-    }
-
     selecionarJogo(jogoId) {
         this.jogoIdAtual = jogoId;
         if (!this.mobileScreen) {
@@ -242,7 +250,25 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.exibirMaisCotacoes.emit(true);
     }
 
-    aplicarCssJogo(jogoId) {
-        return { 'jogo-selecionado': this.jogoIdAtual === jogoId };
+    // aplicarCssJogo(jogoId) {
+    //     return { 'jogo-selecionado': this.jogoIdAtual === jogoId };
+    // }
+
+    exibirMais() {
+        this.disabled = true;
+
+        // setTimeout(() => {
+        //     this.disabled = false;
+        //     this.cd.markForCheck();
+        // }, 2000);
+
+        if (this.start < this.total) {
+            const splice = this.camps.splice(0, this.offset);
+            this.campeonatos = this.campeonatos.concat(splice);
+            this.start++;
+
+            this.disabled = false;
+            this.cd.markForCheck();
+        }
     }
 }
