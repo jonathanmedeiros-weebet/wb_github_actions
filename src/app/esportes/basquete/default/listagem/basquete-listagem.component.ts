@@ -1,11 +1,14 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy, Output, SimpleChange } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, Renderer2, ElementRef,
+    EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy, Output,
+    SimpleChange, OnChanges
+} from '@angular/core';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-basquete-listagem',
@@ -13,7 +16,7 @@ import * as moment from 'moment';
     templateUrl: 'basquete-listagem.component.html',
     styleUrls: ['basquete-listagem.component.css']
 })
-export class BasqueteListagemComponent implements OnInit, OnDestroy {
+export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
     @Input() eventoIdAtual;
     @Input() camps: Campeonato[];
@@ -30,7 +33,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     start;
     offset = 10;
     total;
-    disabled = false;
+    loadingScroll = false;
     unsub$ = new Subject();
 
     constructor(
@@ -91,6 +94,10 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+
+        this.contentSportsEl.addEventListener('ps-y-reach-end', () => {
+            this.exibirMais();
+        });
     }
 
     oddSelecionada(eventoId, chave) {
@@ -234,20 +241,15 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
     }
 
     exibirMais() {
-        this.disabled = true;
-
-        // setTimeout(() => {
-        //     this.disabled = false;
-        //     this.cd.markForCheck();
-        // }, 2000);
+        this.loadingScroll = true;
 
         if (this.start < this.total) {
             const splice = this.camps.splice(0, this.offset);
             this.campeonatos = this.campeonatos.concat(splice);
             this.start++;
-
-            this.disabled = false;
-            this.cd.markForCheck();
         }
+
+        this.loadingScroll = false;
+        this.cd.markForCheck();
     }
 }

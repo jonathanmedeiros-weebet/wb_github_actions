@@ -68,7 +68,13 @@
                     </div>
                 </div>
 
-                <div class="exibir-mais" *ngIf="start < total">
+                <div class="loading-scroll" *ngIf="loadingScroll">
+                    <div class="alert alert-warning text-center" role="alert">
+                        Carregando...
+                    </div>
+                </div>
+
+                <!-- <div class="exibir-mais" *ngIf="start < total">
                     <button (click)="exibirMais()" *ngIf="!disabled; else btnProcessando" class="btn btn-custom"
                         type="button">
                         Exibir Mais
@@ -78,7 +84,7 @@
                             Carregando... <i class="fa fa-spinner fa-spin"></i>
                         </button>
                     </ng-template>
-                </div>
+                </div> -->
 
                 <app-basquete-footer></app-basquete-footer>
             </div>
