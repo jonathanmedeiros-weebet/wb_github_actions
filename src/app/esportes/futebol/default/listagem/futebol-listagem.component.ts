@@ -6,11 +6,10 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, MessageService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -37,11 +36,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     start;
     offset = 10;
     total;
-    disabled = false;
+    loadingScroll = false;
     unsub$ = new Subject();
 
     constructor(
-        private messageService: MessageService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
@@ -81,6 +79,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.total = Math.ceil(this.camps.length / this.offset);
             this.campeonatos = [];
             this.exibirMais();
+
+            setTimeout(() => {
+                const altura = window.innerHeight - 69;
+                if (this.contentSportsEl.scrollHeight <= altura) {
+                    this.exibirMais();
+                }
+            }, 2000);
         }
     }
 
@@ -99,6 +104,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+
+        this.contentSportsEl.addEventListener('ps-y-reach-end', () => {
+            this.exibirMais();
+        });
     }
 
     oddSelecionada(jogoId, chave) {
@@ -261,20 +270,15 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirMais() {
-        this.disabled = true;
-
-        // setTimeout(() => {
-        //     this.disabled = false;
-        //     this.cd.markForCheck();
-        // }, 2000);
+        this.loadingScroll = true;
 
         if (this.start < this.total) {
             const splice = this.camps.splice(0, this.offset);
             this.campeonatos = this.campeonatos.concat(splice);
             this.start++;
-
-            this.disabled = false;
-            this.cd.markForCheck();
         }
+
+        this.loadingScroll = false;
+        this.cd.markForCheck();
     }
 }

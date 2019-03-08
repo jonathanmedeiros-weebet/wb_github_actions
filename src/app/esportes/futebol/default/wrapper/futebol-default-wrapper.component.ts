@@ -113,10 +113,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             queryParams.nome = params['nome'];
                         } else {
                             this.deixarCampeonatosAbertos = false;
-
-                            if (isEmpty(params) || !params['data']) {
-                                queryParams.campeonatos = this.campeonatosPrincipais;
-                            }
                         }
 
                         if (params['data']) {
@@ -127,7 +123,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 queryParams.data = dataLimiteTabela;
                             }
                         } else {
-                            queryParams.data_final = dataLimiteTabela;
+                            queryParams.data = moment().format('YYYY-MM-DD');
                         }
 
                         this.campeonatoService.getCampeonatos(queryParams)
@@ -140,9 +136,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                     this.campeonatos = campeonatos;
                                     this.showLoadingIndicator = false;
                                     this.jogoId = this.extrairJogoId(this.campeonatos);
-
-                                    // this.aux = campeonatos;
-                                    // this.paginacao();
                                 },
                                 error => this.messageService.error(error)
                             );
@@ -171,31 +164,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
                 error => this.messageService.error(error)
             );
-    }
-
-    paginacao() {
-        let start = 0;
-        const sum = 10;
-        const total = Math.ceil(this.aux.length / sum);
-
-        this.campeonatos = [];
-        this.campeonatos = this.campeonatos.concat(this.aux.splice(0, sum));
-
-        this.showLoadingIndicator = false;
-        this.jogoId = this.extrairJogoId(this.campeonatos);
-
-        start++;
-        if (total > 1) {
-            this.refreshIntervalId = setInterval(() => {
-                const c = this.aux.splice(0, sum);
-                this.campeonatos = this.campeonatos.concat(c);
-                start++;
-
-                if (start >= total) {
-                    clearInterval(this.refreshIntervalId);
-                }
-            }, 500);
-        }
     }
 
     receptorJogoSelecionadoId(jogoId) {
