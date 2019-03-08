@@ -8,14 +8,12 @@
                         <div class="row">
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial"
-                                    [ngClass]="applyCssInputError('dataInicial')">
+                                <input type="date" class="form-control" formControlName="dataInicial">
                                 <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal"
-                                    [ngClass]="applyCssInputError('dataFinal')">
+                                <input type="date" class="form-control" formControlName="dataFinal">
                                 <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
@@ -40,6 +38,7 @@
         <div class="content">
             <div appPerfectScroll>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
                 <table *ngIf="!showLoadingIndicator" class="table table-bordered">
                     <thead>
                         <tr>
@@ -56,8 +55,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let aposta of apostas">
-                            <tr>
+                        <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
+                            <tr
+                                class="{{ aposta.resultado == 'ganhou' ? 'ganhador' : '' }} {{ aposta.resultado == 'perdeu' ? 'perdedor' : ''}}">
                                 <td>#{{aposta.id}}</td>
                                 <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td>{{aposta.apostador}}</td>
@@ -80,7 +80,8 @@
                                             </button>
                                             <button type="button"
                                                 *ngIf="aposta.resultado && aposta.resultado == 'ganhou'"
-                                                (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA" class="btn btn-warning">
+                                                (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA"
+                                                class="btn btn-warning">
                                                 <i class="fa fa-money"></i>
                                             </button>
                                             <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)"
