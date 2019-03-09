@@ -1,7 +1,8 @@
 import {
     Component, OnInit, OnDestroy, Renderer2, ElementRef,
     EventEmitter, Output, Input, ChangeDetectionStrategy,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    OnChanges
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['basquete-evento.component.css']
 })
 
-export class BasqueteEventoComponent implements OnInit, OnDestroy {
+export class BasqueteEventoComponent implements OnInit, OnDestroy, OnChanges {
     evento: Jogo;
     @Input() eventoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
@@ -56,7 +57,7 @@ export class BasqueteEventoComponent implements OnInit, OnDestroy {
                 this.itensSelecionados = {};
                 for (let i = 0; i < itens.length; i++) {
                     const item = itens[i];
-                    this.itensSelecionados[item.cotacao._id] = true;
+                    this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
                 }
 
                 this.cd.markForCheck();

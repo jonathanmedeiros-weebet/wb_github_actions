@@ -62,7 +62,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.itensSelecionados = {};
                 for (let i = 0; i < itens.length; i++) {
                     const item = itens[i];
-                    this.itensSelecionados[item.cotacao._id] = true;
+                    this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
                 }
 
                 this.cd.markForCheck();

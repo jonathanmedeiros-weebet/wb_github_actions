@@ -49,7 +49,7 @@
                                 <div class="odds">
                                     <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
                                         (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd {{itensSelecionados[cotacao._id] ? 'selecionado' : ''}}">
+                                        <div class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
@@ -63,7 +63,7 @@
                                         <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]"
                                             (click)="addCotacao(jogo, cotacao)">
                                             <div
-                                                class="inner-odd {{itensSelecionados[cotacao._id] ? 'selecionado' : ''}}">
+                                                class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                                 <span class="nome">
                                                     {{cotacao.chave | tipoAposta}}
                                                 </span>
