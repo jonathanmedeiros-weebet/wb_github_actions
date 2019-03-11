@@ -1,9 +1,9 @@
 
-const _host = 'http://central.demo.wee.bet';
-const _center = 'http://api-center2.wee.bet';
+const _host = 'http://weebet.local';
+const _center = 'http://localhost:3002';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'BETS PLAY',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,

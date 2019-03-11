@@ -1,5 +1,5 @@
 .indentificacao, .indentificacao-mobile{
-    padding: 15px 10px 0 10px;
+    padding: 10px 10px 0 10px;
 }
 
 .indentificacao .nome, .indentificacao-mobile .nome{
@@ -88,6 +88,7 @@
 .tempo{
     font-size: 1.2rem;
     font-weight: bolder;
+    color: #000;
 }
 
 .campeonato-nome{
@@ -100,7 +101,7 @@
 }
 
 .tipo-aposta{
-    padding: 15px 10px;
+    padding: 10px;
     border-top: 1px solid #ddd;
     text-transform: uppercase;
 }

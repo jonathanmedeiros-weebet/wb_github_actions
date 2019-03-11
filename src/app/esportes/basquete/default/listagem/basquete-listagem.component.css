@@ -3,16 +3,11 @@
     padding: 0px 10px;
     font-size: 1.2rem;
     font-weight: bold;
-    border-top: 4px solid white;
     border-bottom: 4px solid white;
     display: flex;
     align-items: center;
     background-color: var(--league);
     color: var(--foreground-league);
-}
-
-.campeonato:first-of-type .campeonato-header{
-    border-top: 0;
 }
 
 .campeonato-header > span{
@@ -21,10 +16,11 @@
 
 .eventos{
     background-color: #fff;
+    padding-bottom: 4px;
 }
 
 .evento{
-    padding: 12px 10px 0 10px;
+    padding: 0px 10px;
 }
 
 .evento-selecionado{
@@ -36,7 +32,6 @@
 .indentificacao{
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .indentificacao .horario{
@@ -62,6 +57,7 @@
 
 .mais-opcoes i{
     font-weight: bold;
+    margin-right: 2px;
 }
 
 .exibir-mais{

@@ -123,6 +123,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 queryParams.data = dataLimiteTabela;
                             }
                         } else {
+                            this.deixarCampeonatosAbertos = this.paramsService.getExibirCampeonatosHojeExpandido();
                             queryParams.data = moment().format('YYYY-MM-DD');
                         }
 
