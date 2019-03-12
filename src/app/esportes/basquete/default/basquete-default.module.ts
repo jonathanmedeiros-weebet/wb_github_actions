@@ -5,7 +5,7 @@ import { BasqueteDefaultRoutingModule } from './basquete-default-routing.module'
 import { BasqueteDefaultWrapperComponent } from './wrapper/basquete-default-wrapper.component';
 import { BasqueteFooterComponent } from './footer/basquete-footer.component';
 import { BasqueteListagemComponent } from './listagem/basquete-listagem.component';
-import { BasqueteJogoComponent } from './jogo/basquete-jogo.component';
+import { BasqueteEventoComponent } from './evento/basquete-evento.component';
 
 @NgModule({
     imports: [
@@ -16,7 +16,7 @@ import { BasqueteJogoComponent } from './jogo/basquete-jogo.component';
         BasqueteFooterComponent,
         BasqueteDefaultWrapperComponent,
         BasqueteListagemComponent,
-        BasqueteJogoComponent
+        BasqueteEventoComponent
     ],
     providers: []
 })

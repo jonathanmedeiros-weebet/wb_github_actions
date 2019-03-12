@@ -8,8 +8,9 @@
                     Nenhum jogo encontrado!
                 </div>
             </div>
+
             <div *ngIf="!showLoadingIndicator">
-                <div class="campeonato" *ngFor="let campeonato of campeonatos">
+                <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
                         <span class="column-left">
                             <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
@@ -24,7 +25,7 @@
                             </span>
                         </ng-template>
                     </div>
-                    <div class="jogos" *ngIf="campeonatoPrincipal(campeonato._id)">
+                    <div class="jogos" [hidden]="!campeonatoPrincipal(campeonato._id)">
                         <ng-container *ngFor="let jogo of campeonato.jogos">
                             <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)"
                                 (click)="selecionarJogo(jogo._id)">
@@ -47,22 +48,21 @@
                                 <div class="odds">
                                     <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
                                         (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd"
-                                            [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                        <div class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave:
-                                                jogo._id:jogo.favorito}}
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
+                                                jogo.favorito}}
                                             </span>
                                         </div>
                                     </div>
                                     <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
                                         <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]"
                                             (click)="addCotacao(jogo, cotacao)">
-                                            <div class="inner-odd"
-                                                [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                            <div
+                                                class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                                 <span class="nome">
                                                     {{cotacao.chave | tipoAposta}}
                                                 </span>
@@ -78,8 +78,15 @@
                         </ng-container>
                     </div>
                 </div>
+
+                <div class="loading-scroll" *ngIf="loadingScroll">
+                    <div class="alert alert-warning text-center" role="alert">
+                        Carregando...
+                    </div>
+                </div>
+
+                <app-futebol-footer></app-futebol-footer>
             </div>
         </div>
-        <app-footer></app-footer>
     </section>
 </div>

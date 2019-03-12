@@ -12,8 +12,9 @@ export class HeadersService {
     getRequestOptions(sendToken?: boolean, queryParams?: any) {
         const token = localStorage.getItem('token');
 
-        let headers = new HttpHeaders();
-        headers = headers.set('Content-Type', 'application/jsond');
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/jsond',
+        });
 
         if (sendToken) {
             headers = headers.set('Authorization', `Bearer ${token}`);

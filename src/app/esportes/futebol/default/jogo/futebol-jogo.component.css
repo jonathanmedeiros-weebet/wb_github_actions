@@ -1,5 +1,5 @@
 .indentificacao{
-    padding: 15px 10px;
+    padding: 10px;
     position: relative;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .tipo-aposta{
-    padding: 15px 10px;
+    padding: 10px;
     border-top: 1px solid #ddd;
     text-transform: uppercase;
 }

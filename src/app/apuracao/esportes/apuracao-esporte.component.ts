@@ -1,4 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import {
+    Component, OnInit, ElementRef, ViewChild, OnDestroy,
+    ChangeDetectorRef, ChangeDetectionStrategy
+} from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +18,7 @@ import * as moment from 'moment';
 
 @Component({
     selector: 'app-apuracao-esporte',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'apuracao-esporte.component.html',
     styleUrls: ['apuracao-esporte.component.css']
 })
@@ -43,7 +47,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         private auth: AuthService,
         private fb: FormBuilder,
         private modalService: NgbModal,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -111,6 +116,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     });
                     this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
                     this.showLoadingIndicator = false;
+                    this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
@@ -142,6 +148,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     this.printService.sportsTicket(aposta_localizada);
 
                     this.showLoadingIndicator = false;
+                    this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
@@ -154,7 +161,6 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
             .subscribe(
                 aposta_localizada => {
                     this.helperService.sharedSportsTicket(aposta_localizada);
-
                     this.showLoadingIndicator = false;
                 },
                 error => this.handleError(error)
@@ -179,6 +185,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     );
 
                     this.showLoadingIndicator = false;
+                    this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
@@ -217,13 +224,6 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         return result;
     }*/
 
-    getStatus(resultado) {
-        return {
-            'perdedor': resultado === 'perdeu',
-            'ganhador': resultado === 'ganhou'
-        };
-    }
-
     setPagamento(aposta) {
         this.apostaService.setPagamento(aposta.id)
             .subscribe(
@@ -243,5 +243,9 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
 
     pagamentoPermitido(aposta) {
         return aposta.resultado && aposta.resultado === 'ganhou' && !aposta.pago;
+    }
+
+    trackById(index: number, aposta: any): string {
+        return aposta.id;
     }
 }

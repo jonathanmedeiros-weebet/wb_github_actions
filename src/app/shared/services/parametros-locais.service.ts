@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
-import { ErrorService } from './utils/error.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,10 +12,19 @@ export class ParametrosLocaisService {
     parametrosLocais;
 
     constructor(
-        private http: HttpClient,
-        private errorService: ErrorService,
+        private http: HttpClient
     ) { }
 
+    load() {
+        return new Promise((resolve, reject) => {
+            const time = + new Date();
+            return this.http.get(`./param/parametros.json?${time}`)
+                .subscribe(response => {
+                    this.parametrosLocais = response;
+                    resolve(true);
+                });
+        });
+    }
 
     getParametros(): Observable<any> {
         const time = + new Date();
@@ -95,6 +103,10 @@ export class ParametrosLocaisService {
             }
         }
         return oddsImpressao;
+    }
+
+    getExibirCampeonatosHojeExpandido() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.exibir_campeonatos_hoje_expandido : null;
     }
 }
 

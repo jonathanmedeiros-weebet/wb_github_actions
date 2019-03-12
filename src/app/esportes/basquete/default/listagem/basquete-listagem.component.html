@@ -5,60 +5,59 @@
 
             <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
                 <div class="campeonato-header">
-                    Nenhum jogo encontrado!
+                    Nenhum evento encontrado!
                 </div>
             </div>
+
             <div *ngIf="!showLoadingIndicator">
-                <div class="campeonato" *ngFor="let campeonato of campeonatos">
+                <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                     <div class="campeonato-header">
-                        <span>{{campeonato.nome}}</span>
+                        <span class="campeonato-nome">{{campeonato.nome}}</span>
                     </div>
-                    <div class="jogos">
-                        <ng-container *ngFor="let jogo of campeonato.jogos">
-                            <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)">
+                    <div class="eventos">
+                        <ng-container *ngFor="let evento of campeonato.jogos">
+                            <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento._id)"
+                                (click)="selecionarJogo(evento._id)">
                                 <div class="indentificacao">
                                     <div class="horario">
-                                        {{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                                        {{evento.horario | moment: 'DD/MM/YYYY HH:mm'}}
                                     </div>
                                     <div class="nome">
-                                        {{jogo.nome}}
+                                        {{evento.nome}}
                                     </div>
                                     <div class="nome-mobile">
-                                        <div>{{jogo.time_a_nome}}</div>
-                                        <div>{{jogo.time_b_nome}}</div>
+                                        <div>{{evento.time_a_nome}}</div>
+                                        <div>{{evento.time_b_nome}}</div>
                                     </div>
-                                    <div class="mais-opcoes">
-                                        <a routerLink="/esportes/basquete/jogos/{{jogo._id}}">
-                                            <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}
-                                            <span>Cotações</span>
-                                        </a>
+                                    <div class="mais-opcoes" (click)="maisCotacoes(evento._id)">
+                                        <i class="fa fa-plus"></i>{{evento.total_cotacoes}}
+                                        <span>Cotações</span>
                                     </div>
                                 </div>
                                 <div class="odds">
-                                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
-                                        (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd"
-                                            [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                    <div class="odd" *ngFor="let cotacao of evento.cotacoes"
+                                        (click)="addCotacao(evento, cotacao)">
+                                        <div class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave:
-                                                jogo._id:jogo.favorito}}
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:
+                                                evento.favorito}}
                                             </span>
                                         </div>
                                     </div>
-                                    <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
-                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]"
-                                            (click)="addCotacao(jogo, cotacao)">
-                                            <div class="inner-odd"
-                                                [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
+                                    <ng-container *ngIf="cotacaoManualFaltando(evento._id, evento.cotacoes)">
+                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[evento._id]"
+                                            (click)="addCotacao(evento, cotacao)">
+                                            <div
+                                                class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                                 <span class="nome">
                                                     {{cotacao.chave | tipoAposta}}
                                                 </span>
                                                 <span class="valor">
-                                                    {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
-                                                    jogo.favorito}}
+                                                    {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:
+                                                    evento.favorito}}
                                                 </span>
                                             </div>
                                         </div>
@@ -68,8 +67,15 @@
                         </ng-container>
                     </div>
                 </div>
+
+                <div class="loading-scroll" *ngIf="loadingScroll">
+                    <div class="alert alert-warning text-center" role="alert">
+                        Carregando...
+                    </div>
+                </div>
+
+                <app-basquete-footer></app-basquete-footer>
             </div>
         </div>
-        <app-footer></app-footer>
     </section>
 </div>

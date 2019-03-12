@@ -1,110 +1,91 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    Component, OnInit, OnDestroy, Renderer2, ElementRef,
+    EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy, Output,
+    SimpleChange, OnChanges
+} from '@angular/core';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-basquete-listagem',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'basquete-listagem.component.html',
     styleUrls: ['basquete-listagem.component.css']
 })
-export class BasqueteListagemComponent implements OnInit, OnDestroy {
-    diaEspecifico = true;
+export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
+    @Input() showLoadingIndicator;
+    @Input() eventoIdAtual;
+    @Input() camps: Campeonato[];
+    @Output() eventoSelecionadoId = new EventEmitter();
+    @Output() exibirMaisCotacoes = new EventEmitter();
+    mobileScreen = true;
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
-    showLoadingIndicator = true;
-    refreshIntervalId;
+    itensSelecionados = {};
     cotacoesFaltando = {};
     cotacoesLocais;
-    jogosBloqueados;
+    eventosBloqueados;
     contentSportsEl;
+    start;
+    offset = 10;
+    total;
+    loadingScroll = false;
     unsub$ = new Subject();
 
     constructor(
-        private campeonatoService: CampeonatoService,
-        private messageService: MessageService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private route: ActivatedRoute,
-        private router: Router,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
+        // this.mobileScreen = window.innerWidth <= 668 ? true : false;
         this.definirAltura();
+        this.eventosBloqueados = this.paramsService.getJogosBloqueados();
+        this.cotacoesLocais = this.paramsService.getCotacoesLocais();
 
+        // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
+            .subscribe(itens => {
+                this.itens = itens;
 
-        this.route.queryParams
-            .pipe(takeUntil(this.unsub$))
-            .subscribe((params: any) => {
-                this.showLoadingIndicator = true;
-                this.contentSportsEl.scrollTop = 0;
-
-                this.jogosBloqueados = this.paramsService.getJogosBloqueados();
-                this.cotacoesLocais = this.paramsService.getCotacoesLocais();
-
-                if (params['campeonato']) {
-                    const campeonatoId = params['campeonato'];
-                    const queryParams: any = {
-                        'odds': ['bkt_casa', 'bkt_fora']
-                    };
-
-                    this.campeonatoService.getCampeonato(campeonatoId, queryParams)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            campeonato => {
-                                this.campeonatos = [campeonato];
-                                this.showLoadingIndicator = false;
-                                sessionStorage.setItem('camp_url', this.router.url);
-                            },
-                            error => this.messageService.error(error)
-                        );
-                } else {
-                    const queryParams: any = {
-                        'sport_id': 18,
-                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
-                        'odds': ['bkt_casa', 'bkt_fora']
-                    };
-
-                    const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
-                    if (params['data']) {
-                        const dt = moment(params['data']);
-                        if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
-                            queryParams.data = dt.format('YYYY-MM-DD');
-                        } else {
-                            queryParams.data = dataLimiteTabela;
-                        }
-                    } else {
-                        queryParams.data_final = dataLimiteTabela;
-                    }
-
-                    this.campeonatoService.getCampeonatos(queryParams)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            campeonatos => {
-                                sessionStorage.setItem('camp_url', this.router.url);
-
-                                this.campeonatos = campeonatos;
-                                this.showLoadingIndicator = false;
-                            },
-                            error => this.messageService.error(error)
-                        );
+                this.itensSelecionados = {};
+                for (let i = 0; i < itens.length; i++) {
+                    const item = itens[i];
+                    this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
                 }
+
+                this.cd.markForCheck();
             });
+    }
+
+    ngOnChanges(changes: { [propName: string]: SimpleChange }) {
+        if (this.contentSportsEl && changes['showLoadingIndicator']) {
+            this.contentSportsEl.scrollTop = 0;
+        }
+
+        if (changes['camps'] && this.camps) {
+            this.start = 0;
+            this.total = Math.ceil(this.camps.length / this.offset);
+            this.campeonatos = [];
+            this.exibirMais();
+        }
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    trackById(index: number, campeonato: any): string {
+        return campeonato._id;
     }
 
     definirAltura() {
@@ -113,29 +94,34 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+
+        this.contentSportsEl.addEventListener('ps-y-reach-end', () => {
+            this.exibirMais();
+        });
     }
 
-    oddSelecionada(jogoId, chave) {
+    oddSelecionada(eventoId, chave) {
         let result = false;
-        this.itens.forEach(item => {
-            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
+        for (let index = 0; index < this.itens.length; index++) {
+            const item = this.itens[index];
+            if (item.jogo_id === eventoId && item.cotacao.chave === chave) {
                 result = true;
             }
-        });
+        }
         return result;
     }
 
-    addCotacao(jogo: Jogo, cotacao) {
+    addCotacao(evento: Jogo, cotacao) {
         let modificado = false;
-        const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
-        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
+        const indexGame = this.itens.findIndex(i => i.jogo._id === evento._id);
+        const indexOdd = this.itens.findIndex(i => (i.jogo._id === evento._id) && (i.cotacao.chave === cotacao.chave));
 
         const item = {
-            aoVivo: jogo.ao_vivo,
-            jogo_id: jogo._id,
-            jogo_nome: jogo.nome,
+            aoVivo: evento.ao_vivo,
+            jogo_id: evento._id,
+            jogo_nome: evento.nome,
             cotacao: cotacao,
-            jogo: jogo
+            jogo: evento
         };
 
         if (indexGame >= 0) {
@@ -145,10 +131,12 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
                 this.itens.splice(indexGame, 1, item);
             }
 
+            delete this.itensSelecionados[`${cotacao._id}`];
             modificado = true;
         } else {
             this.itens.push(item);
 
+            this.itensSelecionados[`${cotacao._id}`] = true;
             modificado = true;
         }
 
@@ -157,30 +145,32 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         }
     }
 
-    cotacaoManualFaltando(jogoId, cotacoes) {
+    // Coloca as cotações faltando nos eventos
+    cotacaoManualFaltando(eventoId, cotacoes) {
         let result = false;
-        const cotacoesLocais = this.cotacoesLocais[jogoId];
+        const cotacoesLocais = this.cotacoesLocais[eventoId];
 
         if (cotacoesLocais) {
-            cotacoes.forEach(cotacao => {
+            for (let index = 0; index < cotacoes.length; index++) {
+                const cotacao = cotacoes[index];
                 for (const chave in cotacoesLocais) {
                     if (chave === cotacao.chave) {
                         cotacoesLocais[chave].usou = true;
                     }
                 }
-            });
+            }
 
             for (const chave in cotacoesLocais) {
                 if (cotacoesLocais.hasOwnProperty(chave)) {
                     const cotacaoLocal = cotacoesLocais[chave];
 
                     if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
-                        if (!this.cotacoesFaltando[jogoId]) {
-                            this.cotacoesFaltando[jogoId] = [];
+                        if (!this.cotacoesFaltando[eventoId]) {
+                            this.cotacoesFaltando[eventoId] = [];
                         }
 
-                        if (!this.cotacoesFaltando[jogoId].filter(cotacao => cotacao.chave === chave).length) {
-                            this.cotacoesFaltando[jogoId].push({
+                        if (!this.cotacoesFaltando[eventoId].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[eventoId].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor
                             });
@@ -195,7 +185,71 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    jogoBloqueado(id) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
+    eventoBloqueado(id) {
+        return this.eventosBloqueados ? (this.eventosBloqueados.includes(id) ? true : false) : false;
+    }
+
+    // Extrai id do primeiro evento do primeiro campeonato
+    extrairJogoId(campeonatos) {
+        let eventoId = null;
+
+        if (campeonatos.length > 1) {
+            const eventos = campeonatos[0].eventos;
+
+            let start = 0;
+            let stop = false;
+
+            while (!stop) {
+                if (eventos.length > 1) {
+                    eventoId = eventos[start]._id;
+                    stop = true;
+                } else if (eventos.length === 1) {
+                    eventoId = eventos[start]._id;
+                    stop = true;
+                }
+
+                start++;
+            }
+        } else if (campeonatos.length === 1) {
+            const eventos = campeonatos[0].eventos;
+
+            if (eventos.length > 1) {
+                eventoId = eventos[0]._id;
+            } else if (eventos.length === 1) {
+                eventoId = eventos[0]._id;
+            }
+        }
+
+        this.eventoIdAtual = eventoId;
+        return eventoId;
+    }
+
+    selecionarJogo(eventoId) {
+        this.eventoIdAtual = eventoId;
+        if (!this.mobileScreen) {
+            this.eventoSelecionadoId.emit(eventoId);
+        }
+    }
+
+    // Exibindo todas as cotações daquele evento selecionado
+    maisCotacoes(eventoId) {
+        if (this.mobileScreen) {
+            this.eventoIdAtual = eventoId;
+            this.eventoSelecionadoId.emit(eventoId);
+        }
+        this.exibirMaisCotacoes.emit(true);
+    }
+
+    exibirMais() {
+        this.loadingScroll = true;
+
+        if (this.start < this.total) {
+            const splice = this.camps.splice(0, this.offset);
+            this.campeonatos = this.campeonatos.concat(splice);
+            this.start++;
+        }
+
+        this.loadingScroll = false;
+        this.cd.markForCheck();
     }
 }

@@ -1,7 +1,8 @@
 import {
     Component, OnInit, OnDestroy, Renderer2, ElementRef,
-    EventEmitter, Output, Input, OnChanges, ChangeDetectionStrategy,
-    ChangeDetectorRef
+    EventEmitter, Output, Input, ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    OnChanges
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,14 +12,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-futebol-jogo',
+    selector: 'app-basquete-evento',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: 'futebol-jogo.component.html',
-    styleUrls: ['futebol-jogo.component.css']
+    templateUrl: 'basquete-evento.component.html',
+    styleUrls: ['basquete-evento.component.css']
 })
-export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
-    jogo: Jogo;
-    @Input() jogoId;
+
+export class BasqueteEventoComponent implements OnInit, OnDestroy, OnChanges {
+    evento: Jogo;
+    @Input() eventoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
@@ -31,7 +33,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
-        private jogoService: JogoService,
+        private eventoService: JogoService,
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
         private el: ElementRef,
@@ -67,13 +69,13 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 this.contentSportsEl.scrollTop = 0;
             });
 
-        if (this.jogoId) {
-            this.jogoService.getJogo(this.jogoId)
+        if (this.eventoId) {
+            this.eventoService.getJogo(this.eventoId)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
-                    jogo => {
-                        this.jogo = jogo;
-                        this.mapearCotacoes(jogo.cotacoes);
+                    evento => {
+                        this.evento = evento;
+                        this.mapearCotacoes(evento.cotacoes);
                     },
                     error => this.messageService.error(error)
                 );
@@ -81,15 +83,15 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
-        if (this.jogoId) {
+        if (this.eventoId) {
             this.showLoadingIndicator = true;
 
-            this.jogoService.getJogo(this.jogoId)
+            this.eventoService.getJogo(this.eventoId)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
-                    jogo => {
-                        this.jogo = jogo;
-                        this.mapearCotacoes(jogo.cotacoes);
+                    evento => {
+                        this.evento = evento;
+                        this.mapearCotacoes(evento.cotacoes);
                     },
                     error => this.messageService.error(error)
                 );
@@ -111,11 +113,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.exibirMaisCotacoes.emit(false);
     }
 
-    oddSelecionada(jogoId, chave) {
+    oddSelecionada(eventoId, chave) {
         let result = false;
         for (let index = 0; index < this.itens.length; index++) {
             const item = this.itens[index];
-            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
+            if (item.jogo_id === eventoId && item.cotacao.chave === chave) {
                 result = true;
             }
         }
@@ -143,17 +145,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                 odd.cotacoes.push(cotacao);
 
-                if (this.cotacoesLocais[this.jogo._id] && this.cotacoesLocais[this.jogo._id][cotacao.chave]) {
-                    this.cotacoesLocais[this.jogo._id][cotacao.chave].usou = true;
+                if (this.cotacoesLocais[this.evento._id] && this.cotacoesLocais[this.evento._id][cotacao.chave]) {
+                    this.cotacoesLocais[this.evento._id][cotacao.chave].usou = true;
                 }
             }
         }
 
         // Exibir odds locais que não vinheram no center
-        if (this.cotacoesLocais[this.jogo._id]) {
-            for (const chave in this.cotacoesLocais[this.jogo._id]) {
-                if (this.cotacoesLocais[this.jogo._id].hasOwnProperty(chave)) {
-                    const cotacaoLocal = this.cotacoesLocais[this.jogo._id][chave];
+        if (this.cotacoesLocais[this.evento._id]) {
+            for (const chave in this.cotacoesLocais[this.evento._id]) {
+                if (this.cotacoesLocais[this.evento._id].hasOwnProperty(chave)) {
+                    const cotacaoLocal = this.cotacoesLocais[this.evento._id][chave];
 
                     if (!cotacaoLocal.usou) {
                         const tipoAposta = this.tiposAposta[chave];
@@ -185,17 +187,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.cd.detectChanges();
     }
 
-    addCotacao(jogo: Jogo, cotacao) {
+    addCotacao(evento: Jogo, cotacao) {
         let modificado = false;
-        const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
-        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
+        const indexGame = this.itens.findIndex(i => i.jogo._id === evento._id);
+        const indexOdd = this.itens.findIndex(i => (i.jogo._id === evento._id) && (i.cotacao.chave === cotacao.chave));
 
         const item = {
-            aoVivo: jogo.ao_vivo,
-            jogo_id: jogo._id,
-            jogo_nome: jogo.nome,
+            aoVivo: evento.ao_vivo,
+            jogo_id: evento._id,
+            jogo_nome: evento.nome,
             cotacao: cotacao,
-            jogo: jogo
+            jogo: evento
         };
 
         if (indexGame >= 0) {

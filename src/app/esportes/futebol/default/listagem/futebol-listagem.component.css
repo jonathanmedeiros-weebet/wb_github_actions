@@ -3,17 +3,12 @@
     padding: 0px 10px;
     font-size: 1.2rem;
     font-weight: bold;
-    border-top: 4px solid white;
     border-bottom: 4px solid white;
     cursor: pointer;
     display: flex;
     align-items: center;
     background-color: var(--league);
     color: var(--foreground-league);
-}
-
-.campeonato:first-of-type .campeonato-header{
-    border-top: 0;
 }
 
 .campeonato-header > span{
@@ -43,10 +38,11 @@
 
 .jogos{
     background-color: #fff;
+    padding-bottom: 4px;
 }
 
 .jogo{
-    padding: 12px 10px 0 10px;
+    padding: 0px 10px;
     /* cursor: pointer; */
 }
 
@@ -59,7 +55,6 @@
 .indentificacao{
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .indentificacao .horario{
@@ -85,6 +80,11 @@
 
 .mais-opcoes i{
     font-weight: bold;
+}
+
+.exibir-mais{
+    text-align: center;
+    margin-top: 15px;
 }
 
 /* Large devices (desktops, 992px and up) */

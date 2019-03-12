@@ -14,14 +14,14 @@ import {
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
+import * as range from 'lodash.range';
 
 @Component({
     selector: 'app-quininha',
     templateUrl: 'quininha.component.html'
 })
 export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    numbers = _.range(1, 81);
+    numbers = range(1, 81);
     qtdNumerosLista = [];
     qtdNumeros = 100;
     tiposAposta: TipoAposta[] = [];

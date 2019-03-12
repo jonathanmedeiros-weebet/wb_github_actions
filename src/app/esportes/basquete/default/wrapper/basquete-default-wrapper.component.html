@@ -1,5 +1,14 @@
 <div id="basquete-default-wrapper">
     <div id="basquete-default-content">
-        <router-outlet></router-outlet>
+        <div class="lista" [hidden]="mobileScreen && exibirMaisCotacoes">
+            <app-basquete-listagem (eventoSelecionadoId)="receptorEventoSelecionadoId($event)"
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
+                [showLoadingIndicator]="showLoadingIndicator"
+                [camps]="campeonatos"></app-basquete-listagem>
+        </div>
+        <div class="jogo" [hidden]="mobileScreen && !exibirMaisCotacoes">
+            <app-basquete-evento [eventoId]="eventoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            </app-basquete-evento>
+        </div>
     </div>
 </div>
