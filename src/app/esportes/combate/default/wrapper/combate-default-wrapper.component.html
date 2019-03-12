@@ -1,12 +1,8 @@
 <div id="combate-default-wrapper">
     <div id="combate-default-content">
-        <div class="lista" [hidden]="mobileScreen && exibirMaisCotacoes">
-            <app-combate-listagem (eventoSelecionadoId)="receptorEventoSelecionadoId($event)"
-                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"></app-combate-listagem>
-        </div>
-        <div class="evento" [hidden]="mobileScreen && !exibirMaisCotacoes">
-            <app-combate-evento [eventoId]="eventoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
-            </app-combate-evento>
+        <div class="lista">
+            <app-combate-listagem [showLoadingIndicator]="showLoadingIndicator" [camps]="campeonatos">
+            </app-combate-listagem>
         </div>
     </div>
 </div>

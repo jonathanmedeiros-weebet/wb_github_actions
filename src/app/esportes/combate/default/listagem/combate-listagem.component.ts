@@ -1,59 +1,80 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    Component, OnInit, OnDestroy, Renderer2, ElementRef,
+    EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy, Output,
+    SimpleChange, OnChanges
+} from '@angular/core';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, CampeonatoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-combate-listagem',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'combate-listagem.component.html',
     styleUrls: ['combate-listagem.component.css']
 })
-export class CombateListagemComponent implements OnInit, OnDestroy {
+export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
+    @Input() showLoadingIndicator;
+    @Input() camps: Campeonato[];
     @Output() eventoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
-    eventoIdAtual;
-    mobileScreen = true;
     campeonatos: Campeonato[];
-    campeonatosPrincipais = [];
+    campeonatosPrincipais: any[];
     itens: ItemBilheteEsportivo[] = [];
-    showLoadingIndicator = true;
+    itensSelecionados = {};
     eventosBloqueados;
     contentSportsEl;
+    start;
+    offset = 10;
+    total;
+    loadingScroll = false;
     unsub$ = new Subject();
 
     constructor(
-        private campeonatoService: CampeonatoService,
-        private messageService: MessageService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private router: Router,
-        private route: ActivatedRoute,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
+        // this.mobileScreen = window.innerWidth <= 668 ? true : false;
         this.definirAltura();
-
-        this.bilheteService.itensAtuais
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
-
-        this.showLoadingIndicator = true;
-        this.contentSportsEl.scrollTop = 0;
         this.eventosBloqueados = this.paramsService.getJogosBloqueados();
 
-        const queryParams: any = {
-            'sport_id': 9,
-            'odds': ['cmbt_casa', 'cmbt_fora'],
-            data_final: '2030-01-01'
-        };
+        // Recebendo os itens atuais do bilhete
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => {
+                this.itens = itens;
 
-        this.getEventos(queryParams);
+                this.itensSelecionados = {};
+                for (let i = 0; i < itens.length; i++) {
+                    const item = itens[i];
+                    this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
+                }
+
+                this.cd.markForCheck();
+            });
+    }
+
+    ngOnChanges(changes: { [propName: string]: SimpleChange }) {
+        if (this.contentSportsEl && changes['showLoadingIndicator']) {
+            this.contentSportsEl.scrollTop = 0;
+        }
+
+        if (changes['camps'] && this.camps) {
+            this.campeonatosPrincipais = this.camps.map(camp => camp._id);
+
+            this.start = 0;
+            this.total = Math.ceil(this.camps.length / this.offset);
+            this.campeonatos = [];
+            this.exibirMais();
+        }
     }
 
     ngOnDestroy() {
@@ -61,19 +82,8 @@ export class CombateListagemComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    getEventos(queryParams) {
-        this.campeonatoService.getCampeonatos(queryParams)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                campeonatos => {
-                    sessionStorage.setItem('camp_url', this.router.url);
-                    this.campeonatosPrincipais = campeonatos.map(campeonato => campeonato._id);
-                    this.campeonatos = campeonatos;
-                    this.enviandoJogoId();
-                    this.showLoadingIndicator = false;
-                },
-                error => this.messageService.error(error)
-            );
+    trackById(index: number, campeonato: any): string {
+        return campeonato._id;
     }
 
     definirAltura() {
@@ -82,15 +92,20 @@ export class CombateListagemComponent implements OnInit, OnDestroy {
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+
+        this.contentSportsEl.addEventListener('ps-y-reach-end', () => {
+            this.exibirMais();
+        });
     }
 
     oddSelecionada(eventoId, chave) {
         let result = false;
-        this.itens.forEach(item => {
+        for (let index = 0; index < this.itens.length; index++) {
+            const item = this.itens[index];
             if (item.jogo_id === eventoId && item.cotacao.chave === chave) {
                 result = true;
             }
-        });
+        }
         return result;
     }
 
@@ -98,6 +113,7 @@ export class CombateListagemComponent implements OnInit, OnDestroy {
         let modificado = false;
         const indexGame = this.itens.findIndex(i => i.jogo._id === evento._id);
         const indexOdd = this.itens.findIndex(i => (i.jogo._id === evento._id) && (i.cotacao.chave === cotacao.chave));
+
         const item = {
             aoVivo: evento.ao_vivo,
             jogo_id: evento._id,
@@ -112,9 +128,13 @@ export class CombateListagemComponent implements OnInit, OnDestroy {
             } else {
                 this.itens.splice(indexGame, 1, item);
             }
+
+            delete this.itensSelecionados[`${cotacao._id}`];
             modificado = true;
         } else {
             this.itens.push(item);
+
+            this.itensSelecionados[`${cotacao._id}`] = true;
             modificado = true;
         }
 
@@ -128,72 +148,35 @@ export class CombateListagemComponent implements OnInit, OnDestroy {
     }
 
     setPrincipal(campeonatoId) {
-        const index = this.campeonatosPrincipais.findIndex(id => id === campeonatoId);
-        if (index >= 0) {
-            this.campeonatosPrincipais.splice(index, 1);
-        } else {
-            this.campeonatosPrincipais.push(campeonatoId);
+        if (this.campeonatosPrincipais) {
+            const index = this.campeonatosPrincipais.findIndex(id => id === campeonatoId);
+
+            if (index >= 0) {
+                this.campeonatosPrincipais.splice(index, 1);
+            } else {
+                this.campeonatosPrincipais.push(campeonatoId);
+            }
         }
     }
 
     campeonatoPrincipal(campeonatoId) {
-        return this.campeonatosPrincipais.includes(campeonatoId);
+        let result = null;
+        if (this.campeonatosPrincipais) {
+            result = this.campeonatosPrincipais.includes(campeonatoId);
+        }
+        return result;
     }
 
-    // Extrai id do primeiro evento do primeiro campeonato
-    extrairEventoId(campeonatos) {
-        let eventoId = null;
+    exibirMais() {
+        this.loadingScroll = true;
 
-        if (campeonatos.length > 1) {
-            const eventos = campeonatos[0].jogos;
-
-            let start = 0;
-            let stop = false;
-
-            while (!stop) {
-                if (eventos.length > 1) {
-                    eventoId = eventos[start]._id;
-                    stop = true;
-                } else if (eventos.length === 1) {
-                    eventoId = eventos[start]._id;
-                    stop = true;
-                }
-
-                start++;
-            }
-        } else if (campeonatos.length === 1) {
-            const eventos = campeonatos[0].jogos;
-
-            if (eventos.length > 1) {
-                eventoId = eventos[0]._id;
-            } else if (eventos.length === 1) {
-                eventoId = eventos[0]._id;
-            }
+        if (this.start < this.total) {
+            const splice = this.camps.splice(0, this.offset);
+            this.campeonatos = this.campeonatos.concat(splice);
+            this.start++;
         }
 
-        this.eventoIdAtual = eventoId;
-        return eventoId;
-    }
-
-    // Enviando eventoId para o component pai
-    enviandoJogoId() {
-        const eventoId = this.extrairEventoId(this.campeonatos);
-        this.eventoSelecionadoId.emit(eventoId);
-    }
-
-    selecionarEvento(eventoId) {
-        this.eventoIdAtual = eventoId;
-        if (!this.mobileScreen) {
-            this.eventoSelecionadoId.emit(eventoId);
-        }
-    }
-
-    // Exibindo todas as cotações daquele evento selecionado
-    maisCotacoes(eventoId) {
-        if (this.mobileScreen) {
-            this.eventoIdAtual = eventoId;
-            this.eventoSelecionadoId.emit(eventoId);
-        }
-        this.exibirMaisCotacoes.emit(true);
+        this.loadingScroll = false;
+        this.cd.markForCheck();
     }
 }

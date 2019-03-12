@@ -3,31 +3,15 @@
     padding: 0px 10px;
     font-size: 1.2rem;
     font-weight: bold;
-    border-top: 4px solid white;
     border-bottom: 4px solid white;
-    cursor: pointer;
     display: flex;
     align-items: center;
     background-color: var(--league);
     color: var(--foreground-league);
 }
 
-.campeonato:first-of-type .campeonato-header{
-    border-top: 0;
-}
-
-.campeonato-header > span{
-    line-height: 41px;
-}
-
 .campeonato-header .column-left{
     flex-grow: 1;
-}
-
-.campeonato-header .flag-icon{
-    width: 25px;
-    height: 25px;
-    position: absolute;
 }
 
 .campeonato-header .fa{
@@ -39,10 +23,11 @@
 
 .eventos{
     background-color: #fff;
+    padding-bottom: 4px;
 }
 
 .evento{
-    padding: 12px 10px 0 10px;
+    padding: 0px 10px;
 }
 
 .evento-selecionado{
@@ -54,7 +39,7 @@
 .indentificacao{
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    padding: 8px 0;
 }
 
 .indentificacao .horario{
@@ -67,18 +52,6 @@
 
 .indentificacao .nome, .indentificacao .nome-mobile{
     flex-grow: 1;
-    font-weight: bold;
-}
-
-.mais-opcoes{
-    color: var(--odds);
-    padding: 8px 4px 8px 8px;
-    min-width: 50px;
-    text-align: right;
-    cursor: pointer;
-}
-
-.mais-opcoes i{
     font-weight: bold;
 }
 
@@ -97,16 +70,7 @@
     .content-sports-scroll {
         padding-bottom: 90px;
     }
-
-    .mais-opcoes{
-        margin-right: 10px;
-    }
-
     .indentificacao .nome-mobile{
         display: block;
-    }
-
-    .indentificacao .nome, .mais-opcoes span{
-        display: none;
     }
 }

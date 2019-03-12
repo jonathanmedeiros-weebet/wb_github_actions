@@ -1,8 +1,10 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../../services';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-combate-default-wrapper',
@@ -10,16 +12,19 @@ import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageServ
     styleUrls: ['combate-default-wrapper.component.css']
 })
 export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
-    eventoId;
-    exibirMaisCotacoes = false;
-    mobileScreen = true;
+    showLoadingIndicator = true;
+    campeonatos;
+    odds = ['cmbt_casa', 'cmbt_fora'];
+    aux = [];
     unsub$ = new Subject();
 
     constructor(
         private campeonatoService: CampeonatoService,
         private sidebarService: SidebarService,
         private messageService: MessageService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private route: ActivatedRoute,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -32,6 +37,29 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
                     }
                 }
             );
+
+        this.route.queryParams
+            .subscribe((params: any) => {
+                this.showLoadingIndicator = true;
+                const queryParams: any = {
+                    sport_id: 9,
+                    campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(),
+                    odds: this.odds,
+                    data_final: '2030-01-01'
+                };
+
+                this.campeonatoService.getCampeonatos(queryParams)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        campeonatos => {
+                            sessionStorage.setItem('camp_url', this.router.url);
+
+                            this.campeonatos = campeonatos;
+                            this.showLoadingIndicator = false;
+                        },
+                        error => this.messageService.error(error)
+                    );
+            });
     }
 
     ngOnDestroy() {
@@ -54,13 +82,5 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
                 campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
                 error => this.messageService.error(error)
             );
-    }
-
-    receptorEventoSelecionadoId(eventoId) {
-        this.eventoId = eventoId;
-    }
-
-    changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.exibirMaisCotacoes = exibirMaisCotacoes;
     }
 }

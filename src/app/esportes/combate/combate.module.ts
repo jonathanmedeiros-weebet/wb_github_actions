@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared/shared.module';
+import { EsportesModule } from './../esportes.module';
 import { CombateRoutingModule } from './combate-routing.module';
-import { EsportesWrapperModule } from '../wrapper/esportes-wrapper.module';
 import { JogoService, BilheteEsportivoService, ApostaEsportivaService } from './../../services';
 
 @NgModule({
     imports: [
         SharedModule,
-       CombateRoutingModule,
-        EsportesWrapperModule
+        EsportesModule,
+        CombateRoutingModule
     ],
     declarations: [],
     providers: [

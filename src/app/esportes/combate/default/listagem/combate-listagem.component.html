@@ -8,8 +8,9 @@
                     Nenhum evento encontrado!
                 </div>
             </div>
+
             <div *ngIf="!showLoadingIndicator">
-                <div class="campeonato" *ngFor="let campeonato of campeonatos">
+                <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                     <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
                         <span class="column-left">
                             <span class="campeonato-nome">{{campeonato.nome}}</span>
@@ -23,10 +24,9 @@
                             </span>
                         </ng-template>
                     </div>
-                    <div class="eventos" *ngIf="campeonatoPrincipal(campeonato._id)">
+                    <div class="eventos" [hidden]="!campeonatoPrincipal(campeonato._id)">
                         <ng-container *ngFor="let evento of campeonato.jogos">
-                            <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento._id)"
-                                (click)="selecionarEvento(evento._id)">
+                            <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento._id)">
                                 <div class="indentificacao">
                                     <div class="horario">
                                         {{evento.horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -38,22 +38,18 @@
                                         <div>{{evento.time_a_nome}}</div>
                                         <div>{{evento.time_b_nome}}</div>
                                     </div>
-                                    <div class="mais-opcoes" (click)="maisCotacoes(evento._id)">
-                                        <i class="fa fa-plus"></i>{{evento.total_cotacoes}}
-                                        <span>Cotações</span>
-                                    </div>
                                 </div>
                                 <div class="odds">
                                     <div class="odd" *ngFor="let cotacao of evento.cotacoes"
                                         (click)="addCotacao(evento, cotacao)">
-                                        <div class="inner-odd"
-                                            [ngClass]="{selecionado: oddSelecionada(evento._id, cotacao.chave)}">
+                                        <div
+                                            class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoApostaCombate: evento.time_a_nome:evento.time_b_nome}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave:
-                                                evento._id:evento.favorito}}
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:
+                                                evento.favorito}}
                                             </span>
                                         </div>
                                     </div>
@@ -62,8 +58,15 @@
                         </ng-container>
                     </div>
                 </div>
+
+                <div class="loading-scroll" *ngIf="loadingScroll">
+                    <div class="alert alert-warning text-center" role="alert">
+                        Carregando...
+                    </div>
+                </div>
+
+                <app-esportes-footer></app-esportes-footer>
             </div>
         </div>
-        <app-footer></app-footer>
     </section>
 </div>
