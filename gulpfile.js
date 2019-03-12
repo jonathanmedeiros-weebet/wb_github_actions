@@ -108,6 +108,14 @@ gulp.task('betsports99.net', function (done) {
     });
 });
 
+gulp.task('bolbets.net', function (done) {
+    tasks(done, {
+        host: "bolbets.net",
+        banca: "Bol Bets",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('casadinha.wee.bet', function(done) {
     tasks(done, {
         host: "casadinha.wee.bet",
