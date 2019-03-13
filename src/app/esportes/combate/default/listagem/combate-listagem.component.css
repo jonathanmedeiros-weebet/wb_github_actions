@@ -8,6 +8,7 @@
     align-items: center;
     background-color: var(--league);
     color: var(--foreground-league);
+    cursor: pointer;
 }
 
 .campeonato-header .column-left{
