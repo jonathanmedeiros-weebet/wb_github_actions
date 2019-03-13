@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BasqueteGuard } from '../services';
+import { BasqueteGuard, CombateGuard } from '../services';
 
 export const routes: Routes = [
     {
@@ -15,6 +15,7 @@ export const routes: Routes = [
     {
         path: 'combate',
         loadChildren: 'app/esportes/combate/combate.module#CombateModule',
+        canActivate: [CombateGuard]
     }
 ];
 

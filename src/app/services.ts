@@ -34,6 +34,7 @@ export * from './shared/services/auth/auth.service';
 export * from './shared/services/guards/aovivo.guard';
 export * from './shared/services/guards/auth.guard';
 export * from './shared/services/guards/basquete.guard';
+export * from './shared/services/guards/combate.guard';
 export * from './shared/services/guards/expires.guard';
 export * from './shared/services/guards/loteria.guard';
 export * from './shared/services/guards/parametros.resolver';

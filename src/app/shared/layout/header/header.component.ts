@@ -41,6 +41,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     LOGO;
     BANCA_NOME;
     basqueteHabilitado = false;
+    combateHabilitado = false;
     loteriasHabilitado = false;
     aoVivoHabilitado = false;
     appMobile;
@@ -70,6 +71,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             );
 
         this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
+        this.combateHabilitado = this.paramsService.getOpcoes().combate;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
 
