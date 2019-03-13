@@ -4,6 +4,7 @@ import {
     MomentPipe,
     TimeToStringtPipe,
     TipoApostaPipe,
+    TipoApostaCombatePipe,
     CalcularCotacaoPipe,
     PerfectScrollDirective
 } from './index';
@@ -13,6 +14,7 @@ import {
         MomentPipe,
         TimeToStringtPipe,
         TipoApostaPipe,
+        TipoApostaCombatePipe,
         CalcularCotacaoPipe,
         PerfectScrollDirective,
     ],
@@ -20,6 +22,7 @@ import {
         MomentPipe,
         TimeToStringtPipe,
         TipoApostaPipe,
+        TipoApostaCombatePipe,
         CalcularCotacaoPipe,
         PerfectScrollDirective
     ]

@@ -23,13 +23,13 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="div-inputs">
                 <div class="form-group">
-                    <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')" class="form-control"
-                        placeholder="Nome do apostador...">
+                    <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
+                        class="form-control" placeholder="Nome do apostador...">
                     <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
                 </div>
                 <div class="form-group">
-                    <input type="number" formControlName="valor" [min]="apostaMinima" [ngClass]="applyCssInputError('valor')"
-                        class="form-control" placeholder="Valor">
+                    <input type="number" formControlName="valor" [min]="apostaMinima"
+                        [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
                     <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                 </div>
             </div>
@@ -61,7 +61,12 @@
                         {{item.jogo.campeonato.nome}}
                     </div>
                     <div class="cotacao">
-                        {{item.cotacao.chave | tipoAposta}}:
+                        <span *ngIf="item.jogo.sport_id != 9; else nomeOddCombate">
+                            {{item.cotacao.chave | tipoAposta}}:
+                        </span>
+                        <ng-template #nomeOddCombate>
+                            {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}:
+                        </ng-template>
                         <span class="valor">
                             {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
                             item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo }}
@@ -117,8 +122,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button *ngIf="!isLoggedIn" type="button" class="btn btn-outline-dark" (click)="modalReference.close('Close click')">Fechar</button>
+        <button *ngIf="!isLoggedIn" type="button" class="btn btn-outline-dark"
+            (click)="modalReference.close('Close click')">Fechar</button>
         <button *ngIf="isLoggedIn" type="button" class="btn btn-custom" (click)="printTicket()">Imprimir</button>
-        <button *ngIf="isLoggedIn && appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">Compartilhar</button>
+        <button *ngIf="isLoggedIn && appMobile" type="button" class="btn btn-custom"
+            (click)="shareTicket()">Compartilhar</button>
     </div>
 </ng-template>

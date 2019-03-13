@@ -67,6 +67,11 @@
     </nav>
 
     <div class="menu-categories">
+        <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/esportes/futebol/live']">
+                <i class="fa fa-play"></i> Ao Vivo
+            </a>
+        </div>
         <div class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/futebol/jogos']">
                 <i class="fa fa-futbol-o"></i> <span>Futebol</span>
@@ -77,9 +82,9 @@
                 <i class="fa fa-futbol-o"></i> <span>Basquete</span>
             </a>
         </div>
-        <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/futebol/live']">
-                <i class="fa fa-play"></i> Ao Vivo
+        <div class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/esportes/combate/eventos']">
+                <i class="fa fa-futbol-o"></i> <span>Combate</span>
             </a>
         </div>
         <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">

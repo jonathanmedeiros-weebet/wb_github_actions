@@ -14,7 +14,14 @@
             <p class="jogo-nome" [ngClass]="resultadoClass(item)">
                 {{item.jogo.nome}}
             </p>
-            <p class="jogo-cotacao" [ngClass]="resultadoClass(item)">{{item.aposta_tipo.nome}} ( {{item.cotacao}} )
+            <p class="jogo-cotacao" [ngClass]="resultadoClass(item)">
+                <span *ngIf="item.jogo.sport != 9; else nomeOddCombate">
+                    {{item.aposta_tipo.nome}}
+                </span>
+                <ng-template #nomeOddCombate>
+                    {{item.aposta_tipo.chave | tipoApostaCombate: item.jogo.time_a_nome:item.jogo.time_b_nome}}
+                </ng-template>
+                ( {{item.cotacao}} )
                 <span *ngIf="item.ao_vivo"> | AO VIVO</span>
             </p>
             <p class="jogo-resultado">
@@ -36,7 +43,8 @@
         <p class="valor-premio">
             ESTIMATIVA DE GANHO: {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
         </p>
-        <p *ngIf="opcoes.percentual_premio_cambista > 0" style="text-align: center; margin: 5px 1px 1px 1px; font-weight: bold; font-size: 14px;">
+        <p *ngIf="opcoes.percentual_premio_cambista > 0"
+            style="text-align: center; margin: 5px 1px 1px 1px; font-weight: bold; font-size: 14px;">
             CAMBISTA PAGA: {{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}
         </p>
         <p class="mensagem-rodape">
