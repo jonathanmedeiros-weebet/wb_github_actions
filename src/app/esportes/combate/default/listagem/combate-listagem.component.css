@@ -55,6 +55,10 @@
     font-weight: bold;
 }
 
+.odd-combate{
+    width: 50%!important;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .indentificacao .nome{

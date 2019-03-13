@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="odds">
-                                    <div class="odd" *ngFor="let cotacao of evento.cotacoes"
+                                    <div class="odd odd-combate" *ngFor="let cotacao of evento.cotacoes"
                                         (click)="addCotacao(evento, cotacao)">
                                         <div
                                             class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
