@@ -123,12 +123,11 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 queryParams.data = dataLimiteTabela;
                             }
                         } else {
-                            // Verifica se os campeonatos de hoje devem vim abertos
                             if (!params['nome']) {
                                 this.deixarCampeonatosAbertos = this.paramsService.getExibirCampeonatosHojeExpandido();
                                 queryParams.data = moment().format('YYYY-MM-DD');
                             } else {
-                                queryParams.data = dataLimiteTabela;
+                                queryParams.data_final = dataLimiteTabela;
                             }
                         }
 
