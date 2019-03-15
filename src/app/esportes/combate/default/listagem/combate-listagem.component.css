@@ -75,7 +75,12 @@
     .content-sports-scroll {
         padding-bottom: 90px;
     }
+
+    .indentificacao .nome{
+        display: none;
+    }
+
     .indentificacao .nome-mobile{
-        display: block;
+         display: block;
     }
 }
