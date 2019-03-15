@@ -34,7 +34,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     jogosBloqueados;
     contentSportsEl;
     start;
-    offset = 10;
+    offset = 15;
     total;
     loadingScroll = false;
     unsub$ = new Subject();
@@ -48,7 +48,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     ) { }
 
     ngOnInit() {
-        // this.mobileScreen = window.innerWidth <= 668 ? true : false;
+        this.mobileScreen = window.innerWidth <= 668 ? true : false;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
@@ -81,8 +81,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.exibirMais();
 
             setTimeout(() => {
-                const altura = window.innerHeight - 69;
-                if (this.contentSportsEl.scrollHeight <= altura) {
+                let altura;
+                let scrollHeight;
+                if (this.mobileScreen) {
+                    altura = window.innerHeight - 113;
+                    scrollHeight = this.contentSportsEl.scrollHeight - 90;
+                } else {
+                    altura = window.innerHeight - 69;
+                    scrollHeight = this.contentSportsEl.scrollHeight;
+                }
+                if (scrollHeight <= altura) {
                     this.exibirMais();
                 }
             }, 2000);
@@ -253,19 +261,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return jogoId;
     }
 
-    selecionarJogo(jogoId) {
-        this.jogoIdAtual = jogoId;
-        if (!this.mobileScreen) {
-            this.jogoSelecionadoId.emit(jogoId);
-        }
-    }
-
     // Exibindo todas as cotações daquele jogo selecionado
     maisCotacoes(jogoId) {
-        if (this.mobileScreen) {
-            this.jogoIdAtual = jogoId;
-            this.jogoSelecionadoId.emit(jogoId);
-        }
+        this.jogoIdAtual = jogoId;
+        this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);
     }
 
