@@ -23,6 +23,7 @@ import { LayoutModule } from './shared/layout/layout.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ParametrosLocaisService } from './services';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -46,7 +47,8 @@ export const APP_TOKENS = [
         AppRoutingModule,
 
         NgxSpinnerModule,
-        NgbModule.forRoot(),
+        NgbModule,
+        AngularSvgIconModule,
         LayoutModule
     ],
     providers: [APP_TOKENS],

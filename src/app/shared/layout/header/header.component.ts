@@ -8,7 +8,6 @@ import { BaseFormComponent } from '../base-form/base-form.component';
 import { ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-header',
@@ -161,5 +160,16 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     error => this.handleError(error)
                 );
         }
+    }
+
+    svgCss() {
+        console.log('svgCss');
+
+        return {
+            'width.rem': 2,
+            // 'fill': 'yellow',
+            'fill': '#b1c5e0',
+            'margin-bottom.px': '5'
+        };
     }
 }

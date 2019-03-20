@@ -15,6 +15,7 @@ import { ConsultaBilheteLoteriaComponent } from './consulta-bilhete/loteria/cons
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService } from '../../services';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { ApostaEsportivaService } from '../../services';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        UtilsModule
+        UtilsModule,
+        AngularSvgIconModule
     ],
     declarations: [
         MainLayoutComponent,

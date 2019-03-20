@@ -64,6 +64,11 @@ header a{
     color: #fff;
 }
 
+.menu-categories img{
+    height:24px;
+    margin-bottom: 5px;
+}
+
 .menu-categories .fa{
     font-size: 2rem;
     margin-bottom: 5px;
