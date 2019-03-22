@@ -37,6 +37,7 @@ header a{
     align-items: center;
     justify-content: center;
     padding: 15px 15px 0 15px;
+    overflow-x: auto!important;
 }
 
 .menu-categories .category{
