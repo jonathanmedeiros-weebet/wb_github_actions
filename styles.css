@@ -430,11 +430,13 @@ button {
     color: var(--foreground-selected-odds) !important;
 }
 
+/*
 .odd .nome {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+*/
 
 .odd .nome,
 .odd .valor {
