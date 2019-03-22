@@ -1,6 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+    Component, OnInit, ElementRef,
+    Renderer2, ChangeDetectionStrategy, ChangeDetectorRef
+} from '@angular/core';
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import {
     trigger,
     state,
@@ -13,15 +15,14 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
     SidebarService, AuthService, PrintService,
-    CampeonatoService, ParametrosLocaisService, ApostaEsportivaService,
-    MessageService, SupresinhaService, HelperService,
+    ParametrosLocaisService, SupresinhaService
 } from './../../../services';
+import { PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent } from '../modals';
 import { config } from './../../config';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
-
-declare var $;
 
 @Component({
     selector: 'app-navigation',
@@ -56,19 +57,10 @@ export class NavigationComponent implements OnInit {
     isOpen = true;
     itens: any[];
     contexto;
-    campeonatosImpressao;
-    campeonatosSelecionados;
-    @ViewChild('modalPesquisa') modalPesquisa: ElementRef;
-    @ViewChild('modalTabela') modalTabela: ElementRef;
-    @ViewChild('modalAposta') modalAposta: ElementRef;
-    modalReferencePesquisa;
-    modalReferenceTabela;
-    modalReferenceAposta;
-    exibirBilhete = false;
-    pesquisarForm: FormGroup = this.fb.group({
-        input: ['']
-    });
-    aposta;
+    modalRefPesquisa;
+    modalRefTabela;
+    modalRefAposta;
+    opcoes;
     primeiraPagina;
     dataLimiteTabela;
     unsub$ = new Subject();
@@ -77,18 +69,13 @@ export class NavigationComponent implements OnInit {
     constructor(
         private auth: AuthService,
         private sidebarService: SidebarService,
-        private campeonatoService: CampeonatoService,
         private paramsService: ParametrosLocaisService,
         private modalService: NgbModal,
         private router: Router,
-        private fb: FormBuilder,
         private printService: PrintService,
-        private apostaEsportivaService: ApostaEsportivaService,
-        private messageService: MessageService,
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private helperService: HelperService,
         private cd: ChangeDetectorRef
     ) {
         router.events.forEach((event: NavigationEvent) => {
@@ -146,139 +133,57 @@ export class NavigationComponent implements OnInit {
     }
 
     abrirModalPesquisa() {
-        this.modalReferencePesquisa = this.modalService.open(
-            this.modalPesquisa,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-        this.modalReferencePesquisa.result
-            .then((result) => { },
-                (reason) => { });
-    }
-
-    pesquisar() {
-        this.modalReferencePesquisa.close('');
-        const input = this.pesquisarForm.value.input;
-        this.pesquisarForm.reset();
-        this.closeMenu();
-        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: input } });
-    }
-
-    abrirModalTabela() {
-        this.modalReferenceTabela = this.modalService.open(
-            this.modalTabela,
+        this.modalRefPesquisa = this.modalService.open(
+            PesquisaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true
             }
         );
 
-        const odds = this.paramsService.getOddsImpressao();
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
-
-        const queryParams: any = {
-            'campeonatos_bloqueados': campeonatosBloqueados,
-            'odds': odds.slice(0, 24),
-            'data': moment().format('YYYY-MM-DD')
-        };
-
-        this.campeonatoService.getCampeonatos(queryParams).subscribe(
-            campeonatos => {
-                const date = moment().format('YYYYMMDD');
-                const dataTree = [];
-
-                dataTree.push({
-                    id: date,
-                    parent: '#',
-                    text: moment().format('DD [de] MMMM [de] YYYY'),
-                    icon: false
-                });
-
-                this.campeonatosImpressao = campeonatos.map(campeonato => {
-                    dataTree.push({
-                        id: campeonato._id,
-                        parent: date,
-                        text: campeonato.nome,
-                        icon: false
-                    });
-
-                    campeonato.jogos.forEach(jogo => {
-                        jogo.cotacoes.forEach(cotacao => {
-                            cotacao.valor = this.helperService.calcularCotacao(
-                                cotacao.valor,
-                                cotacao.chave,
-                                jogo._id,
-                                jogo.favorito
-                            );
-                        });
-                    });
-
-                    return campeonato;
-                });
-
-                $('#treeJogos').jstree({
-                    core: {
-                        data: dataTree
-                    },
-                    checkbox: {
-                        keep_selected_style: false
-                    },
-                    plugins: ['checkbox']
-                }).on('loaded.jstree', (e, data) => {
-
-                }).on('changed.jstree', (e, data) => {
-                    this.campeonatosSelecionados = data.selected;
-                });
-            },
-            err => {
-                console.log(err);
-            }
-        );
-    }
-
-    imprimirTabela() {
-        const campsSelecionados = [];
-
-        this.campeonatosImpressao.forEach(campeonatoImpressao => {
-            const id = `${campeonatoImpressao._id}`;
-            if (this.campeonatosSelecionados.includes(id)) {
-                campsSelecionados.push(campeonatoImpressao);
-            }
-        });
-
-        const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados }];
-
-        this.printService.games(jogos);
-        this.modalReferenceTabela.close('');
-    }
-
-    abrirModalAposta() {
-        this.modalReferenceAposta = this.modalService.open(
-            this.modalAposta,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-        this.modalReferenceAposta.result
+        this.modalRefPesquisa.result
             .then(
-                (result) => { },
-                (reason) => this.exibirBilhete = false
+                result => {
+                    if (result.input) {
+                        this.closeMenu();
+                        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: result.input } });
+                    }
+                },
+                reason => { }
             );
     }
 
-    pesquisarAposta() {
-        const input = this.pesquisarForm.value.input;
-        this.apostaEsportivaService.getAposta(input)
-            .subscribe(
-                apostaEsportiva => {
-                    this.pesquisarForm.reset();
-                    this.aposta = apostaEsportiva;
-                    this.exibirBilhete = true;
+    abrirModalTabela() {
+        this.modalRefTabela = this.modalService.open(
+            TabelaModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRefTabela.result
+            .then(
+                result => {
+                    this.closeMenu();
                 },
-                error => this.messageService.error(error)
+                reason => { })
+            ;
+    }
+
+    abrirModalAposta() {
+        this.modalRefAposta = this.modalService.open(
+            ApostaModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRefAposta.result
+            .then(
+                result => { },
+                reason => { }
             );
     }
 

@@ -102,14 +102,14 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             queryParams.data = dataLimiteTabela;
                         }
                     } else {
-                        const primeiraPagina = this.paramsService.getPrimeiraPagina();
-                        if (primeiraPagina === 'hoje') {
-                            if (!params['nome']) {
+                        if (!params['nome']) {
+                            const primeiraPagina = this.paramsService.getPrimeiraPagina();
+                            if (primeiraPagina === 'hoje') {
                                 queryParams.data = moment().format('YYYY-MM-DD');
+                            } else {
+                                queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
+                                queryParams.data = dataLimiteTabela;
                             }
-                        } else {
-                            queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
-                            queryParams.data = dataLimiteTabela;
                         }
                     }
 
