@@ -68,11 +68,25 @@
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll>
             <ng-container *ngIf="contexto == 'futebol'">
                 <span class="group">Destaques</span>
-                <li (click)="goTo('/esportes/futebol/jogos')">
-                    <a>
-                        Jogos de Hoje
-                    </a>
-                </li>
+                <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
+                    <li (click)="goTo('/esportes/futebol/jogos')">
+                        <a>
+                            Jogos de Hoje
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-template #principais>
+                    <li (click)="goTo('/esportes/futebol/jogos')">
+                        <a>
+                            Campeonatos Principais
+                        </a>
+                    </li>
+                    <li (click)="goTo('/esportes/futebol/jogos', { data: hoje })">
+                        <a>
+                            Jogos de Hoje
+                        </a>
+                    </li>
+                </ng-template>
                 <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
                     <a>
                         Jogos de Amanhã

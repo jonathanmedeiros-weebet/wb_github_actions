@@ -69,6 +69,7 @@ export class NavigationComponent implements OnInit {
     });
     aposta;
     opcoes;
+    primeiraPagina;
     unsub$ = new Subject();
     regiaoOpen = null;
 
@@ -110,6 +111,7 @@ export class NavigationComponent implements OnInit {
         }
 
         this.opcoes = this.paramsService.getOpcoes();
+        this.primeiraPagina = this.paramsService.getPrimeiraPagina();
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))

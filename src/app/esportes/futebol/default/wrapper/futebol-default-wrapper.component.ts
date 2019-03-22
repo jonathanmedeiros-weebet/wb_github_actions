@@ -18,11 +18,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;
-    campeonatosPrincipais;
     deixarCampeonatosAbertos;
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
-    refreshIntervalId;
-    aux = [];
     unsub$ = new Subject();
 
     constructor(
@@ -50,9 +47,9 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
             );
 
         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+
         if (this.paramsService.getOddsPrincipais()) {
             this.oddsPrincipais = this.paramsService.getOddsPrincipais();
-            // oddsPrincipais = oddsPrincipais.slice(0, 5);
         }
 
         this.route.queryParams
@@ -60,91 +57,75 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
             .subscribe((params: any) => {
                 this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
-                this.campeonatosPrincipais = this.paramsService.getCampeonatosPrincipais();
+                this.deixarCampeonatosAbertos = this.paramsService.getExibirCampeonatosExpandido();
 
-                // Cache Campeonatos
-                let campeonatosStorage;
-                const campUrl = sessionStorage.getItem('camp_url');
-                if (sessionStorage.getItem('campeonatos')) {
-                    campeonatosStorage = JSON.parse(sessionStorage.getItem('campeonatos'));
-                }
+                if (params['campeonato']) {
+                    this.deixarCampeonatosAbertos = true;
+                    const campeonatoId = params['campeonato'];
+                    const queryParams: any = {
+                        odds: this.oddsPrincipais,
+                        data_final: dataLimiteTabela
+                    };
 
-                if (campeonatosStorage && campeonatosStorage.length > 0 && this.router.url === campUrl) {
-                    if (campeonatosStorage.length === 1) {
-                        this.deixarCampeonatosAbertos = true;
-                    }
-                    this.campeonatos = campeonatosStorage;
+                    this.campeonatoService.getCampeonato(campeonatoId, queryParams)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            campeonato => {
+                                this.campeonatos = [campeonato];
 
-                    this.showLoadingIndicator = false;
-                    this.jogoId = this.extrairJogoId(this.campeonatos);
+                                sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
+                                sessionStorage.setItem('camp_url', this.router.url);
+
+                                this.showLoadingIndicator = false;
+                                this.jogoId = this.extrairJogoId(this.campeonatos);
+                            },
+                            error => this.messageService.error(error)
+                        );
                 } else {
-                    // Sem Cache
-                    if (params['campeonato']) {
+                    const queryParams: any = {
+                        'sport_id': 1,
+                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
+                        'odds': this.oddsPrincipais
+                    };
+
+                    if (params['nome']) {
                         this.deixarCampeonatosAbertos = true;
-                        const campeonatoId = params['campeonato'];
-                        const queryParams: any = {
-                            odds: this.oddsPrincipais,
-                            data_final: dataLimiteTabela
-                        };
-
-                        this.campeonatoService.getCampeonato(campeonatoId, queryParams)
-                            .pipe(takeUntil(this.unsub$))
-                            .subscribe(
-                                campeonato => {
-                                    this.campeonatos = [campeonato];
-
-                                    sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
-                                    sessionStorage.setItem('camp_url', this.router.url);
-
-                                    this.showLoadingIndicator = false;
-                                    this.jogoId = this.extrairJogoId(this.campeonatos);
-                                },
-                                error => this.messageService.error(error)
-                            );
-                    } else {
-                        const queryParams: any = {
-                            'sport_id': 1,
-                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
-                            'odds': this.oddsPrincipais
-                        };
-
-                        if (params['nome']) {
-                            this.deixarCampeonatosAbertos = true;
-                            queryParams.nome = params['nome'];
-                        } else {
-                            this.deixarCampeonatosAbertos = false;
-                        }
-
-                        if (params['data']) {
-                            const dt = moment(params['data']);
-                            if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
-                                queryParams.data = dt.format('YYYY-MM-DD');
-                            } else {
-                                queryParams.data = dataLimiteTabela;
-                            }
-                        } else {
-                            if (!params['nome']) {
-                                this.deixarCampeonatosAbertos = this.paramsService.getExibirCampeonatosHojeExpandido();
-                                queryParams.data = moment().format('YYYY-MM-DD');
-                            } else {
-                                queryParams.data_final = dataLimiteTabela;
-                            }
-                        }
-
-                        this.campeonatoService.getCampeonatos(queryParams)
-                            .pipe(takeUntil(this.unsub$))
-                            .subscribe(
-                                campeonatos => {
-                                    sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
-                                    sessionStorage.setItem('camp_url', this.router.url);
-
-                                    this.campeonatos = campeonatos;
-                                    this.showLoadingIndicator = false;
-                                    this.jogoId = this.extrairJogoId(this.campeonatos);
-                                },
-                                error => this.messageService.error(error)
-                            );
+                        queryParams.nome = params['nome'];
+                        queryParams.data_final = dataLimiteTabela;
                     }
+
+                    if (params['data']) {
+                        const dt = moment(params['data']);
+                        if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
+                            queryParams.data = dt.format('YYYY-MM-DD');
+                        } else {
+                            queryParams.data = dataLimiteTabela;
+                        }
+                    } else {
+                        const primeiraPagina = this.paramsService.getPrimeiraPagina();
+                        if (primeiraPagina === 'hoje') {
+                            if (!params['nome']) {
+                                queryParams.data = moment().format('YYYY-MM-DD');
+                            }
+                        } else {
+                            queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
+                            queryParams.data = dataLimiteTabela;
+                        }
+                    }
+
+                    this.campeonatoService.getCampeonatos(queryParams)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            campeonatos => {
+                                sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
+                                sessionStorage.setItem('camp_url', this.router.url);
+
+                                this.campeonatos = campeonatos;
+                                this.showLoadingIndicator = false;
+                                this.jogoId = this.extrairJogoId(this.campeonatos);
+                            },
+                            error => this.messageService.error(error)
+                        );
                 }
             });
     }
