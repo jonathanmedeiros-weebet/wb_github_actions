@@ -20,7 +20,7 @@ export class PesquisaModalComponent implements OnInit {
 
     ngOnInit() { }
 
-    private pesquisar() {
+    pesquisar() {
         this.activeModal.close(this.pesquisarForm.value);
     }
 }

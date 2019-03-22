@@ -26,7 +26,7 @@ export class ApostaModalComponent implements OnInit {
     ngOnInit() {
     }
 
-    private pesquisarAposta() {
+    pesquisarAposta() {
         const input = this.pesquisarForm.value.input;
 
         this.apostaEsportivaService.getAposta(input)
