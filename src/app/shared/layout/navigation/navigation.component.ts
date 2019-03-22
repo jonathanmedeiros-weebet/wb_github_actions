@@ -48,8 +48,9 @@ declare var $;
 })
 export class NavigationComponent implements OnInit {
     LOGO;
-    hoje = moment().format('YYYY-MM-DD');
-    amanha = moment().add(1, 'd').format('YYYY-MM-DD');
+    hoje = moment();
+    amanha = moment().add(1, 'd');
+    dias = [];
     isLoggedIn;
     isAppMobile;
     isOpen = true;
@@ -68,8 +69,8 @@ export class NavigationComponent implements OnInit {
         input: ['']
     });
     aposta;
-    opcoes;
     primeiraPagina;
+    dataLimiteTabela;
     unsub$ = new Subject();
     regiaoOpen = null;
 
@@ -98,9 +99,6 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.LOGO = config.LOGO;
-        this.isAppMobile = this.auth.isAppMobile();
-
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
@@ -110,8 +108,12 @@ export class NavigationComponent implements OnInit {
                 });
         }
 
-        this.opcoes = this.paramsService.getOpcoes();
+        this.LOGO = config.LOGO;
+        this.isAppMobile = this.auth.isAppMobile();
         this.primeiraPagina = this.paramsService.getPrimeiraPagina();
+        this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
+        this.isLoggedIn = this.auth.isLoggedIn();
+        this.preencherDias();
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -127,8 +129,6 @@ export class NavigationComponent implements OnInit {
                     this.cd.detectChanges();
                 }, 500);
             });
-
-        this.isLoggedIn = this.auth.isLoggedIn();
     }
 
     closeMenu() {
@@ -320,17 +320,30 @@ export class NavigationComponent implements OnInit {
 
     exibirJogosAmanha() {
         let result = true;
-        if (this.opcoes) {
-            result = !moment(this.opcoes.data_limite_tabela).isSame(moment(), 'day');
+        if (this.dataLimiteTabela) {
+            result = !moment(this.dataLimiteTabela).isSame(moment(), 'day');
         }
         return result;
     }
 
     abrirRegiao(regiao) {
-        if (regiao == this.regiaoOpen) { //fechando
+        if (regiao == this.regiaoOpen) { // fechando
             this.regiaoOpen = null;
-        } else { //abrindo
+        } else { // abrindo
             this.regiaoOpen = regiao;
+        }
+    }
+
+    preencherDias() {
+        const dtInicial = moment().add(2, 'day');
+        const dataLimiteTabela = moment(this.dataLimiteTabela);
+
+        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) {
+            this.dias.push({
+                'descricao': dtInicial.format('dddd'),
+                'format': dtInicial.format('YYYY-MM-DD')
+            });
+            dtInicial.add('1', 'day');
         }
     }
 

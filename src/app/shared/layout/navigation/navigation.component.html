@@ -81,15 +81,20 @@
                             Campeonatos Principais
                         </a>
                     </li>
-                    <li (click)="goTo('/esportes/futebol/jogos', { data: hoje })">
+                    <li (click)="goTo('/esportes/futebol/jogos', { data: hoje.format('YYYY-MM-DD') })">
                         <a>
                             Jogos de Hoje
                         </a>
                     </li>
                 </ng-template>
-                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
+                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
+                    </a>
+                </li>
+                <li *ngFor="let dia of dias" (click)="goTo('/esportes/futebol/jogos', { data: dia.format })">
+                    <a>
+                        Jogos de {{dia.descricao}}
                     </a>
                 </li>
                 <span class="group">Campeonatos</span>
@@ -110,12 +115,12 @@
             </ng-container>
             <ng-container *ngIf="contexto == 'basquete'">
                 <span class="group">Destaques</span>
-                <li (click)="goTo('/esportes/basquete/eventos', { data: hoje })">
+                <li (click)="goTo('/esportes/basquete/eventos', { data: hoje.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Hoje
                     </a>
                 </li>
-                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/eventos', { data: amanha })">
+                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/eventos', { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
                     </a>
