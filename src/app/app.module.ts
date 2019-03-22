@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -22,6 +22,20 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './shared/layout/layout.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ParametrosLocaisService } from './services';
+
+export function paramsServiceFactory(service: ParametrosLocaisService) {
+    return () => service.load();
+}
+export const APP_TOKENS = [
+    {
+        provide: APP_INITIALIZER,
+        useFactory: paramsServiceFactory,
+        deps: [ParametrosLocaisService],
+        multi: true
+    },
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+];
 
 @NgModule({
     declarations: [AppComponent],
@@ -35,7 +49,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         NgbModule.forRoot(),
         LayoutModule
     ],
-    providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+    providers: [APP_TOKENS],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

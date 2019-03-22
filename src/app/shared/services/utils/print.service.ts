@@ -203,27 +203,6 @@ ${horario} ${jogo.nome}
         parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
     }
 
-    getValor(chave, cotacoes) {
-        const cotacao = cotacoes.find(c => c.chave == chave);
-        if (cotacao) {
-            let result = cotacao.valor.toFixed(2);
-            if (cotacao.valor < 10) {
-                result = `${result} `;
-            }
-            return result;
-        }
-        return '     ';
-    }
-
-    getSigla(chave) {
-        if (chave) {
-            const tiposAposta = this.paramsService.getTiposAposta();
-            const sigla = `${tiposAposta[chave].sigla}     `;
-            return sigla.substr(0, 5);
-        }
-        return '    ';
-    }
-
     // Bilhete Loteria
     lotteryTicket(aposta) {
         if (this.auth.isAppMobile()) {
@@ -640,7 +619,7 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${item.aposta_tipo.nome} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
+                        ${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
             if (item.ao_vivo) {
                 printContents += ` | AO VIVO`;
             }
@@ -727,7 +706,7 @@ Total Jogos: ${aposta.itens.length}`;
 ${item.campeonato.nome}
 ${this.helperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY, HH:mm')}
 ${item.jogo.nome}
-${item.aposta_tipo.nome} ( ${item.cotacao.toFixed(2)} )`;
+${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
                 ticket += ` | AO VIVO`;
             }
@@ -750,5 +729,40 @@ ${this.opcoes.informativo_rodape}
 
         parent.postMessage(message, 'file://'); // file://
         console.log('listPrinters');
+    }
+
+    // Utils
+    getValor(chave, cotacoes) {
+        const cotacao = cotacoes.find(c => c.chave == chave);
+        if (cotacao) {
+            let result = cotacao.valor.toFixed(2);
+            if (cotacao.valor < 10) {
+                result = `${result} `;
+            }
+            return result;
+        }
+        return '     ';
+    }
+
+    getSigla(chave) {
+        if (chave) {
+            const tiposAposta = this.paramsService.getTiposAposta();
+            const sigla = `${tiposAposta[chave].sigla}     `;
+            return sigla.substr(0, 5);
+        }
+        return '    ';
+    }
+
+    getApostaTipoNome(apostaTipo, jogo) {
+        let result = apostaTipo.nome;
+        if (jogo.sport == '9') {
+            if (result.search(/casa/ig) >= 0) {
+                result = result.replace(/casa/ig, jogo.time_a_nome);
+            }
+            if (result.search(/fora/ig) >= 0) {
+                result = result.replace(/fora/ig, jogo.time_b_nome);
+            }
+        }
+        return result;
     }
 }

@@ -1,33 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-:root{
+:root {
     --foreground-selected-odds: #000;
     --league: #e1e2e4;
     --foreground-league: #455a64;
     --selected-event: #002458;
     --foreground-selected-event: #fff;
-    --header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;
+    --header: #002458;
+    --foreground-header: #b1c5e0;
+    --sidebar-right: #011e46;
+    --foreground-sidebar-right: #fff;
+    --sidebar-left: #011e46;
+    --foreground-sidebar-left: #fff;
+    --highlight: yellow;
+    --foreground-highlight: #aec3d8;
+    --odds: #046eef;
+    --foreground-odds: #fff;
 }
 
-html{
+html {
     position: relative;
     font-size: 12px;
 }
 
-html, body{
+html,
+body {
     height: 100%;
     color: #455a64;
     overflow: hidden;
 }
 
-header{
+header {
     background-color: var(--header);
 }
 
-#auth-layout{
+#auth-layout {
     height: 100%;
 }
 
-#auth-layout #login{
+#auth-layout #login {
     align-items: center;
     display: flex;
     height: 100%;
@@ -36,18 +46,18 @@ header{
     background-position: center center;
 }
 
-#auth-layout #login .login-box{
+#auth-layout #login .login-box {
     display: flex;
     justify-content: center
 }
 
-#auth-footer{
+#auth-footer {
     position: fixed;
     bottom: 0;
     color: #fff;
 }
 
-#page-wrapper{
+#page-wrapper {
     margin-top: 69px;
 }
 
@@ -64,12 +74,12 @@ header{
     width: 100%;
 }
 
-.btn-custom{
+.btn-custom {
     background-color: var(--odds);
     color: #fff;
 }
 
-.card{
+.card {
     border: 1px solid #d7dfe3;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
     background: white;
@@ -77,25 +87,25 @@ header{
     padding: 20px;
 }
 
-.content-header{
+.content-header {
     margin-bottom: 30px;
 }
 
-.content-header h2{
+.content-header h2 {
     color: var(--sidebar-right);
     margin-bottom: 15px;
 }
 
-.btn-line{
+.btn-line {
     margin-top: 24px;
 }
 
-.circle-group{
+.circle-group {
     display: flex;
     flex-wrap: wrap;
 }
 
-.circle{
+.circle {
     border: 1px solid #455a64;
     height: 42px;
     width: 42px;
@@ -104,7 +114,7 @@ header{
     margin-right: 10px;
 }
 
-.circle .content{
+.circle .content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -112,14 +122,14 @@ header{
     justify-content: center;
 }
 
-.square-group{
+.square-group {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 5px;
     justify-content: flex-start;
 }
 
-.square{
+.square {
     width: 50px;
     height: 50px;
     padding: 17px 0;
@@ -129,12 +139,13 @@ header{
     cursor: pointer;
 }
 
-.square-group .active{
-    background-color:var(--odds);
+.square-group .active {
+    background-color: var(--odds);
     color: #fff;
 }
 
-.square .content, .circle .content{
+.square .content,
+.circle .content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -142,18 +153,19 @@ header{
     justify-content: center;
 }
 
-.bet-types{
+.bet-types {
     display: flex;
     flex-wrap: wrap;
 }
 
-.bet-types .active .circle, .bet-types .active .price {
-    background-color:var(--odds);
+.bet-types .active .circle,
+.bet-types .active .price {
+    background-color: var(--odds);
     font-weight: bolder;
     color: #fff;
 }
 
-.bet-type{
+.bet-type {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -161,16 +173,16 @@ header{
     flex-grow: 1;
 }
 
-.bet-type .price{
+.bet-type .price {
     background-color: whitesmoke;
     padding: 10px 15px;
 }
 
-.bet-type .circle{
+.bet-type .circle {
     margin: 0 0 3px 0;
 }
 
-.circle{
+.circle {
     border: 1px solid black;
     height: 50px;
     width: 50px;
@@ -180,13 +192,14 @@ header{
     cursor: pointer;
 }
 
-.pre-bilhete{
+.pre-bilhete {
     display: none;
     background-color: var(--sidebar-right);
     /* position: relative; */
     width: 270px;
 }
-.pre-bilhete .form-row{
+
+.pre-bilhete .form-row {
     margin-top: 12px;
 }
 
@@ -195,16 +208,16 @@ header{
 } */
 
 .form-row select,
-.form-row input{
+.form-row input {
     font-size: 1.5rem;
     height: 38px;
 }
 
-button{
+button {
     line-height: 27px;
 }
 
-.pre-bilhete .aposta-item{
+.pre-bilhete .aposta-item {
     border: 1px solid #d7dfe3;
     background: #eef5f9;
     border-radius: 4px;
@@ -212,14 +225,14 @@ button{
     margin-top: 15px;
 }
 
-.pre-bilhete .aposta-item .circle{
+.pre-bilhete .aposta-item .circle {
     height: 25px;
     width: 25px;
     margin-bottom: 5px;
     margin-right: 5px;
 }
 
-.pre-bilhete .item-header{
+.pre-bilhete .item-header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -227,7 +240,7 @@ button{
     padding-right: 22px;
 }
 
-.pre-bilhete .remover-palpite{
+.pre-bilhete .remover-palpite {
     font-size: 18px;
     color: red;
     position: absolute;
@@ -235,21 +248,21 @@ button{
     top: -5px;
 }
 
-.pre-bilhete .item-header > div{
+.pre-bilhete .item-header>div {
     flex-grow: 1;
     text-transform: capitalize;
 }
 
-.pre-bilhete .item-header > div label{
+.pre-bilhete .item-header>div label {
     margin-right: 3px;
 }
 
 
-.pre-bilhete .item-header > div span{
+.pre-bilhete .item-header>div span {
     font-weight: bold;
 }
 
-#fixed-bar-bilhete{
+#fixed-bar-bilhete {
     padding: 5px;
     background: var(--sidebar-right);
     width: 100%;
@@ -263,33 +276,35 @@ button{
     align-items: center;
 }
 
-#fixed-bar-bilhete.opened{
-    top:113px;
+#fixed-bar-bilhete.opened {
+    top: 113px;
 }
 
-#fixed-bar-bilhete > div{
+#fixed-bar-bilhete>div {
     flex-grow: 1;
 }
 
-#fixed-bar-bilhete > div > *{
+#fixed-bar-bilhete>div>* {
     display: block;
     text-align: center;
 }
-#fixed-bar-bilhete > div label{
+
+#fixed-bar-bilhete>div label {
     font-size: 0.9rem;
     margin-bottom: 0;
 }
-#fixed-bar-bilhete > div span{
+
+#fixed-bar-bilhete>div span {
     font-weight: bold;
 }
 
-.pre-bilhete-mobile{
+.pre-bilhete-mobile {
     z-index: 1000;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    width: 100%!important;
+    width: 100% !important;
     padding-top: 15px;
     padding-bottom: 15px;
     background: var(--sidebar-right);
@@ -297,15 +312,15 @@ button{
     overflow-y: auto;
 }
 
-.fechar-pre-bilhete{
+.fechar-pre-bilhete {
     right: 10px;
     top: 9px;
     padding: 9px;
     position: absolute;
-    color: red!important;
+    color: red !important;
 }
 
-.pre-bilhete .botoes .col{
+.pre-bilhete .botoes .col {
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -336,12 +351,12 @@ button{
     margin-left: 0px;
 }
 
-.loteria-content .pre-bilhete h4{
+.loteria-content .pre-bilhete h4 {
     color: #c9def5;
     text-align: center;
 }
 
-.loteria-content .pre-bilhete h4::before{
+.loteria-content .pre-bilhete h4::before {
     content: '';
     display: block;
     height: 2px;
@@ -377,97 +392,106 @@ button{
 }
 
 /* Override JS Toast*/
-.jq-toast-wrap{
-    z-index: 9001!important;
+.jq-toast-wrap {
+    z-index: 9001 !important;
 }
 
 
-.form-control{
+.form-control {
     font-size: 1.5rem;
-    height: 38px!important;
+    height: 38px !important;
 }
 
-.btn{
+.btn {
     line-height: 27px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.invalid-feedback{
+.invalid-feedback {
     display: block;
 }
 
-.modal{
+.modal {
     z-index: 9002;
 }
 
 /* ODDS FUTEBOL */
-.odds{
+.odds {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.odds .inner-odd{
+.odds .inner-odd {
     background-color: var(--odds);
     padding: 5px 8px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    border-radius: 4px;
 }
 
-.odds .selecionado{
+.odds .selecionado {
     background-color: var(--highlight);
 }
 
-.odds .selecionado span{
-    color: var(--foreground-selected-odds)!important;
+.odds .selecionado span {
+    color: var(--foreground-selected-odds) !important;
 }
 
-.odd .nome, .odd .valor{
+.odd .nome {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.odd .nome,
+.odd .valor {
     color: var(--foreground-odds);
 }
 
-.flag-icon{
+.odds .odd {
+    padding: 1px;
+}
+
+.flag-icon {
     background-image: url(assets/images/ww.svg);
     background-color: var(--highlight);
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    #fixed-bar-bilhete{
+    #fixed-bar-bilhete {
         display: none
     }
 
-    .fechar-pre-bilhete{
+    .fechar-pre-bilhete {
         display: none;
     }
 
-    .pre-bilhete{
+    .pre-bilhete {
         display: block;
     }
 
-    .odds .odd{
+    .odds .odd {
         width: 33.33%;
-        padding: 3px;
     }
 
-    .odds .inner-odd:hover{
+    .odds .inner-odd:hover {
         background-color: var(--highlight);
     }
 
-    .odds .inner-odd:hover span{
-        color: var(--foreground-selected-odds)!important;
+    .odds .inner-odd:hover span {
+        color: var(--foreground-selected-odds) !important;
     }
 }
 
 @media only screen and (max-width: 668px) {
-    #page-wrapper{
+    #page-wrapper {
         margin-top: 113px;
     }
 
-    #default-content{
+    #default-content {
         padding: 10px 15px;
         height: calc(100vh - 111px);
     }
@@ -488,13 +512,14 @@ button{
         padding-bottom: 90px !important;
     }
 
-    .odds .odd{
+    .odds .odd {
         margin-bottom: 5px;
         width: 50%;
-        padding: 1px;
     }
 
-    .odds .odd:nth-of-type(1), .odds .odd:nth-of-type(2), .odds .odd:nth-of-type(3){
+    .odds .odd:nth-of-type(1),
+    .odds .odd:nth-of-type(2),
+    .odds .odd:nth-of-type(3) {
         width: 33.33%;
     }
 
@@ -509,13 +534,16 @@ button{
 /* Spinner */
 .lds-ring {
     display: inline-block;
-    position: absolute;
+    position: fixed;
     width: 64px;
     height: 64px;
     left: 50%;
     margin-left: -32px;
-  }
-  .lds-ring div {
+    top: 50%;
+    margin-top: -32px;
+}
+
+.lds-ring div {
     box-sizing: border-box;
     display: block;
     position: absolute;
@@ -526,21 +554,26 @@ button{
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: var(--sidebar-right) transparent transparent transparent;
-  }
-  .lds-ring div:nth-child(1) {
+}
+
+.lds-ring div:nth-child(1) {
     animation-delay: -0.45s;
-  }
-  .lds-ring div:nth-child(2) {
+}
+
+.lds-ring div:nth-child(2) {
     animation-delay: -0.3s;
-  }
-  .lds-ring div:nth-child(3) {
+}
+
+.lds-ring div:nth-child(3) {
     animation-delay: -0.15s;
-  }
-  @keyframes lds-ring {
+}
+
+@keyframes lds-ring {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}

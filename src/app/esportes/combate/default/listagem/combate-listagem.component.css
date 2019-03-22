@@ -1,0 +1,86 @@
+.campeonato-header{
+    text-transform: uppercase;
+    padding: 0px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: 4px solid white;
+    display: flex;
+    align-items: center;
+    background-color: var(--league);
+    color: var(--foreground-league);
+    cursor: pointer;
+}
+
+.campeonato-header .column-left{
+    flex-grow: 1;
+}
+
+.campeonato-header .fa{
+    font-size: 1.5rem;
+    float: right;
+    line-height: 41px;
+    margin-right: 10px;
+}
+
+.eventos{
+    background-color: #fff;
+    padding-bottom: 4px;
+}
+
+.evento{
+    padding: 0px 10px;
+}
+
+.evento-selecionado{
+    background: var(--selected-event);
+    color: var(--foreground-selected-event)!important;
+    cursor: auto;
+}
+
+.indentificacao{
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.indentificacao .horario{
+    background-color: #011e46;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 15px;
+}
+
+.indentificacao .nome, .indentificacao .nome-mobile{
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.odd-combate{
+    width: 50%!important;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .indentificacao .nome{
+        display: block;
+    }
+
+    .indentificacao .nome-mobile{
+         display: none;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .content-sports-scroll {
+        padding-bottom: 90px;
+    }
+
+    .indentificacao .nome{
+        display: none;
+    }
+
+    .indentificacao .nome-mobile{
+         display: block;
+    }
+}

@@ -1,30 +1,37 @@
 .campeonato-header{
     text-transform: uppercase;
-    padding: 10px 10px;
+    padding: 0px 10px;
     font-size: 1.2rem;
     font-weight: bold;
-    border-top: 4px solid white;
     border-bottom: 4px solid white;
-}
-.campeonato:first-of-type .campeonato-header{
-    border-top: 0;
-}
-.campeonato-header .fa{
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--league);
+    color: var(--foreground-league);
 }
 
-.jogos{
+.campeonato-header > span{
+    line-height: 41px;
+}
+
+.eventos{
     background-color: #fff;
+    padding-bottom: 4px;
 }
 
-.jogo{
-    padding: 12px 10px 0 10px;
+.evento{
+    padding: 0px 10px;
+}
+
+.evento-selecionado{
+    background: var(--selected-event);
+    color: var(--foreground-selected-event)!important;
+    cursor: auto;
 }
 
 .indentificacao{
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .indentificacao .horario{
@@ -40,8 +47,22 @@
     font-weight: bold;
 }
 
-.mais-opcoes a{
+.mais-opcoes{
     color: var(--odds);
+    padding: 8px 4px 8px 8px;
+    min-width: 50px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.mais-opcoes i{
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+.exibir-mais{
+    text-align: center;
+    margin-top: 15px;
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -61,7 +82,7 @@
     }
 
     .mais-opcoes{
-        margin-right: 5px;
+        margin-right: 10px;
     }
 
     .indentificacao .nome-mobile{

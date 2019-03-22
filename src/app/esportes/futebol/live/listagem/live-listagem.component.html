@@ -9,13 +9,17 @@
                 </div>
             </div>
 
-            <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder">
+            <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder; trackBy: trackById">
                 <ng-container *ngIf="campeonatoPermitido(campeonato.value._id)">
                     <div class="campeonato-header">
-                        {{campeonato.value.nome}}
+                        <span class="column-left">
+                            <span
+                                class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
+                            <span class="campeonato-nome">{{campeonato.value.nome}}</span>
+                        </span>
                     </div>
                     <div class="jogos">
-                        <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue">
+                        <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
                             <div class="indentificacao">
                                 <div class="aovivo-label">
                                     Vivo

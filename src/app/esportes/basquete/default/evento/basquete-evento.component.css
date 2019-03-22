@@ -1,5 +1,5 @@
 .indentificacao{
-    padding: 15px 10px;
+    padding: 10px;
     position: relative;
 }
 
@@ -8,16 +8,12 @@
     font-weight: bolder;
 }
 
-.btn-back{
-    margin-bottom: 15px;
-}
-
 .tipo-apostas{
     background-color: #fff;
 }
 
 .tipo-aposta{
-    padding: 15px 10px;
+    padding: 10px;
     border-top: 1px solid #ddd;
     text-transform: uppercase;
 }

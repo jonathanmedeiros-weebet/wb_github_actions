@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, EventEmitter, Output, Input, OnChanges } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, Renderer2, ElementRef,
+    EventEmitter, Output, Input, OnChanges, ChangeDetectionStrategy,
+    ChangeDetectorRef
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
@@ -7,20 +12,22 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'futebol-jogo.component.html',
     styleUrls: ['futebol-jogo.component.css']
 })
-
 export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
+    itensSelecionados = {};
     tiposAposta;
     cotacoesLocais;
     objectKeys = Object.keys;
     showLoadingIndicator = true;
+    contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
@@ -29,19 +36,36 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private messageService: MessageService,
         private el: ElementRef,
         private renderer: Renderer2,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private route: ActivatedRoute,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
+        this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
-
-        this.definirAltura();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
+            .subscribe(itens => {
+                this.itens = itens;
+
+                this.itensSelecionados = {};
+                for (let i = 0; i < itens.length; i++) {
+                    const item = itens[i];
+                    this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
+                }
+
+                this.cd.markForCheck();
+            });
+
+        this.route.queryParams
+            .pipe(takeUntil(this.unsub$))
+            .subscribe((params: any) => {
+                this.contentSportsEl.scrollTop = 0;
+            });
 
         if (this.jogoId) {
             this.jogoService.getJogo(this.jogoId)
@@ -54,10 +78,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     error => this.messageService.error(error)
                 );
         }
-
-        this.bilheteService.itensAtuais
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => this.itens = itens);
     }
 
     ngOnChanges() {
@@ -83,8 +103,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     definirAltura() {
         const altura = window.innerHeight - 69;
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     back() {
@@ -93,18 +113,20 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     oddSelecionada(jogoId, chave) {
         let result = false;
-        this.itens.forEach(item => {
+        for (let index = 0; index < this.itens.length; index++) {
+            const item = this.itens[index];
             if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
                 result = true;
             }
-        });
+        }
         return result;
     }
 
     mapearCotacoes(cotacoes) {
         this.odds = {};
 
-        cotacoes.forEach(cotacao => {
+        for (let index = 0; index < cotacoes.length; index++) {
+            const cotacao = cotacoes[index];
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
             if (tipoAposta) {
@@ -125,7 +147,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     this.cotacoesLocais[this.jogo._id][cotacao.chave].usou = true;
                 }
             }
-        });
+        }
 
         // Exibir odds locais que não vinheram no center
         if (this.cotacoesLocais[this.jogo._id]) {
@@ -160,6 +182,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         this.showLoadingIndicator = false;
+        this.cd.detectChanges();
     }
 
     addCotacao(jogo: Jogo, cotacao) {

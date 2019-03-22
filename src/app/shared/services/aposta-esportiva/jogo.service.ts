@@ -19,7 +19,7 @@ export class JogoService {
         private errorService: ErrorService
     ) { }
 
-    getJogo(id: Number): Observable<Jogo> {
+    getJogo(id: Number): Observable<any> {
         const url = `${this.JogoUrl}/${id}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))

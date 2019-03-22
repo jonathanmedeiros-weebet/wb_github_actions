@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ParametrosLocaisService } from '../../../../services';
+import { ParametrosLocaisService } from '../../services';
 
 @Component({
-    selector: 'app-futebol-footer',
-    templateUrl: 'futebol-footer.component.html',
-    styleUrls: ['futebol-footer.component.css']
+    selector: 'app-esportes-footer',
+    templateUrl: 'esportes-footer.component.html',
+    styleUrls: ['esportes-footer.component.css']
 })
 
-export class FutebolFooterComponent implements OnInit {
+export class EsportesFooterComponent implements OnInit {
     informativoRodape;
 
     constructor(private paramsService: ParametrosLocaisService) { }

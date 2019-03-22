@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EsportesWrapperComponent } from '../wrapper/esportes-wrapper.component';
+import { EsportesWrapperComponent } from './../wrapper/esportes-wrapper.component';
 
 export const routes: Routes = [
     {
@@ -9,7 +9,7 @@ export const routes: Routes = [
         component: EsportesWrapperComponent,
         children: [
             {
-                path: 'jogos',
+                path: 'eventos',
                 loadChildren: 'app/esportes/basquete/default/basquete-default.module#BasqueteDefaultModule'
             }
         ]

@@ -164,4 +164,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
         this.location.back();
     }
 
+    trackByKey(index: number, cotacao: any): string {
+        return cotacao.chave;
+    }
 }

@@ -114,6 +114,17 @@ export class AuthService {
         return result;
     }
 
+    hasCombate() {
+        let result = false;
+
+        const opcoes = this.paramsService.getOpcoes();
+        if (opcoes) {
+            result = opcoes.combate;
+        }
+
+        return result;
+    }
+
     hasLoterias() {
         let result = false;
 

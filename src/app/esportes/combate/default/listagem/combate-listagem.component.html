@@ -1,0 +1,72 @@
+<div class="content-sports-scroll" appPerfectScroll>
+    <section class="content-sports">
+        <div class="wrap-sticky">
+            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+            <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
+                <div class="campeonato-header">
+                    Nenhum evento encontrado!
+                </div>
+            </div>
+
+            <div *ngIf="!showLoadingIndicator">
+                <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
+                    <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
+                        <span class="column-left">
+                            <span class="campeonato-nome">{{campeonato.nome}}</span>
+                        </span>
+                        <span *ngIf="campeonatoPrincipal(campeonato._id); else downIcon">
+                            <i class="fa fa-angle-up"></i>
+                        </span>
+                        <ng-template #downIcon>
+                            <span>
+                                <i class="fa fa-angle-down"></i>
+                            </span>
+                        </ng-template>
+                    </div>
+                    <div class="eventos" [hidden]="!campeonatoPrincipal(campeonato._id)">
+                        <ng-container *ngFor="let evento of campeonato.jogos">
+                            <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento._id)">
+                                <div class="indentificacao">
+                                    <div class="horario">
+                                        {{evento.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                                    </div>
+                                    <div class="nome">
+                                        {{evento.nome}}
+                                    </div>
+                                    <div class="nome-mobile">
+                                        <div>{{evento.time_a_nome}}</div>
+                                        <div>{{evento.time_b_nome}}</div>
+                                    </div>
+                                </div>
+                                <div class="odds">
+                                    <div class="odd odd-combate" *ngFor="let cotacao of evento.cotacoes"
+                                        (click)="addCotacao(evento, cotacao)">
+                                        <div
+                                            class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                            <span class="nome">
+                                                {{cotacao.chave | tipoApostaCombate: evento.time_a_nome:evento.time_b_nome}}
+                                            </span>
+                                            <span class="valor">
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:
+                                                evento.favorito}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="loading-scroll" *ngIf="loadingScroll">
+                    <div class="alert alert-warning text-center" role="alert">
+                        Carregando...
+                    </div>
+                </div>
+
+                <app-esportes-footer></app-esportes-footer>
+            </div>
+        </div>
+    </section>
+</div>

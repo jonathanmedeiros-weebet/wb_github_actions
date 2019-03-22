@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
@@ -18,7 +18,7 @@ import {
 } from './../../../services';
 import { config } from './../../config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
+import * as random from 'lodash.random';
 import * as moment from 'moment';
 
 declare var $;
@@ -27,6 +27,7 @@ declare var $;
     selector: 'app-navigation',
     templateUrl: 'navigation.component.html',
     styleUrls: ['navigation.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger('openClose', [
             state('open', style({
@@ -68,6 +69,7 @@ export class NavigationComponent implements OnInit {
     });
     aposta;
     opcoes;
+    primeiraPagina;
     unsub$ = new Subject();
     regiaoOpen = null;
 
@@ -85,7 +87,8 @@ export class NavigationComponent implements OnInit {
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private cd: ChangeDetectorRef
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -101,10 +104,14 @@ export class NavigationComponent implements OnInit {
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
-                .subscribe(isOpen => this.isOpen = isOpen);
+                .subscribe(isOpen => {
+                    this.isOpen = isOpen;
+                    this.cd.detectChanges();
+                });
         }
 
         this.opcoes = this.paramsService.getOpcoes();
+        this.primeiraPagina = this.paramsService.getPrimeiraPagina();
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -117,14 +124,11 @@ export class NavigationComponent implements OnInit {
                     const altura = window.innerHeight - (alturaMenuFixo + 15);
                     const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
                     this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
+                    this.cd.detectChanges();
                 }, 500);
             });
 
-        this.auth.logado
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                isLoggedIn => this.isLoggedIn = isLoggedIn
-            );
+        this.isLoggedIn = this.auth.isLoggedIn();
     }
 
     closeMenu() {
@@ -296,9 +300,9 @@ export class NavigationComponent implements OnInit {
         let number;
 
         if (context === 'seninha') {
-            number = _.random(1, 60);
+            number = random(1, 60);
         } else {
-            number = _.random(1, 80);
+            number = random(1, 80);
         }
 
         const find = numbers.find(n => n === number);
@@ -322,11 +326,10 @@ export class NavigationComponent implements OnInit {
         return result;
     }
 
-    abrirRegiao(regiao){
-        if(regiao == this.regiaoOpen){ //fechando
+    abrirRegiao(regiao) {
+        if (regiao == this.regiaoOpen) { //fechando
             this.regiaoOpen = null;
-        }
-        else{ //abrindo
+        } else { //abrindo
             this.regiaoOpen = regiao;
         }
     }
