@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Pesquisa</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="pesquisarForm" (ngSubmit)="pesquisar()">
+        <div class="form-group">
+            <input type="text" placeholder="Pesquise por time ou campeonato..." class="form-control"
+                formControlName="input">
+        </div>
+        <button type="submit" class="btn btn-custom">Pesquisar</button>
+    </form>
+</div>

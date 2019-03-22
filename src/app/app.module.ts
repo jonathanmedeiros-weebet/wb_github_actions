@@ -46,7 +46,7 @@ export const APP_TOKENS = [
         AppRoutingModule,
 
         NgxSpinnerModule,
-        NgbModule.forRoot(),
+        NgbModule,
         LayoutModule
     ],
     providers: [APP_TOKENS],
