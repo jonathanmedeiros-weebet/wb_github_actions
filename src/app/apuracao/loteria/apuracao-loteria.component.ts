@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -14,6 +14,7 @@ import * as moment from 'moment';
 
 @Component({
     selector: 'app-apuracao-loteria',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'apuracao-loteria.component.html',
     styleUrls: ['apuracao-loteria.component.css']
 })
@@ -24,6 +25,12 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
     showLoadingIndicator = true;
     dataInicial;
     dataFinal;
+    totais = {
+        'valor': 0,
+        'comissao': 0,
+        'premio': 0,
+        'resultado': 0
+    };
     unsub$ = new Subject();
 
     constructor(
@@ -33,7 +40,8 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         private printService: PrintService,
         private auth: AuthService,
         private fb: FormBuilder,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -111,6 +119,15 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
                 apostas => {
                     this.showLoadingIndicator = !this.showLoadingIndicator;
                     this.apostas = apostas;
+                    apostas.forEach(aposta => {
+                        this.totais.valor += aposta.valor;
+                        this.totais.comissao += aposta.comissao;
+                        if (aposta.resultado === 'ganhou') {
+                            this.totais.premio += aposta.premio;
+                        }
+                    });
+                    this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
+                    this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );

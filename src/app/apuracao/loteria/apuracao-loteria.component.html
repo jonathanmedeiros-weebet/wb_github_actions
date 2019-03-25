@@ -8,12 +8,14 @@
                         <div class="row">
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial" [ngClass]="applyCssInputError('dataInicial')">
+                                <input type="date" class="form-control" formControlName="dataInicial"
+                                    [ngClass]="applyCssInputError('dataInicial')">
                                 <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="applyCssInputError('dataFinal')">
+                                <input type="date" class="form-control" formControlName="dataFinal"
+                                    [ngClass]="applyCssInputError('dataFinal')">
                                 <app-error-msg [control]="form.get('dataFinal')" label="Data final"></app-error-msg>
                             </div>
                             <div class="col-xs-6 col-lg-3">
@@ -45,6 +47,15 @@
                     <div *ngFor="let aposta of apostas" class="aposta">
                         <div class="aposta-header">
                             <div>
+                                <button type="button" (click)="printTicket(aposta)" class="btn btn-sm btn-custom">
+                                    <i class="fa fa-print"></i>
+                                </button>
+                                <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)"
+                                    class="btn btn-sm btn-info">
+                                    <i class="fa fa-share-alt"></i>
+                                </button>
+                            </div>
+                            <div>
                                 <label>Número:</label>
                                 <em>#{{aposta.id}}</em>
                             </div>
@@ -60,28 +71,48 @@
                                 <label>Horário:</label>
                                 <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
                             </div>
+
                         </div>
                         <div class="itens">
                             <div class="aposta-itens">
                                 <div class="aposta-item" *ngFor="let item of aposta.itens">
-                                    <div>
-                                        <label>sorteio</label>
-                                        <span>{{item.sorteio_nome}}</span>
-                                    </div>
-                                    <div>
-                                        <label>aposta</label>
-                                        <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
-                                    </div>
-                                    <div>
-                                        <label>prêmio</label>
-                                        <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
-                                    </div>
-                                    <div>
-                                        <label>status</label>
-                                        <span>{{item.status | uppercase}}</span>
+                                    <div class="first-line">
+                                        <div>
+                                            <label>sorteio</label>
+                                            <span>{{item.sorteio_nome}}</span>
+                                        </div>
+                                        <div>
+                                            <label>aposta</label>
+                                            <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                                        </div>
+                                        <div *ngIf="item.cotacao6 > 0">
+                                            <label>retorno 6</label>
+                                            <span>{{(item.cotacao6 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                        </div>
+                                        <div *ngIf="item.cotacao5 > 0">
+                                            <label>retorno 5</label>
+                                            <span>{{(item.cotacao5 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                        </div>
+                                        <div *ngIf="item.cotacao4 > 0">
+                                            <label>retorno 4</label>
+                                            <span>{{(item.cotacao4 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                        </div>
+                                        <div *ngIf="item.cotacao3 > 0">
+                                            <label>retorno 3</label>
+                                            <span>{{(item.cotacao3 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                        </div>
+                                        <div>
+                                            <label>prêmio</label>
+                                            <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                        </div>
+                                        <div>
+                                            <label>status</label>
+                                            <span>{{item.status | uppercase}}</span>
+                                        </div>
                                     </div>
                                     <div class="circle-group">
-                                        <div class="circle" *ngFor="let numero of item.numeros" [ngClass]="checkResult(numero, item.sorteio_numeros)">
+                                        <div class="circle" *ngFor="let numero of item.numeros"
+                                            [ngClass]="checkResult(numero, item.sorteio_numeros)">
                                             <div class="content">
                                                 {{numero | number:'2.0'}}
                                             </div>
@@ -89,14 +120,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <button type="button" (click)="printTicket(aposta)" class="btn btn-custom">
-                                    <i class="fa fa-print"></i>
-                                </button>
-                                <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)" class="btn btn-info">
-                                    <i class="fa fa-share-alt"></i>
-                                </button>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="resumo" *ngIf="apostas.length > 0">
+                        <div class="">
+                            <b>Valor:</b> {{totais.valor | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                        <div class="">
+                            <b>Comissão:</b> {{totais.comissao | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                        <div class="">
+                            <b>Prêmio:</b> {{totais.premio | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                        <div class="">
+                            <b>Resultado</b>: {{totais.resultado | currency: 'BRL':'symbol':'1.2'}}
                         </div>
                     </div>
                 </div>
