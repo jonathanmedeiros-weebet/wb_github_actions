@@ -1,19 +1,22 @@
+import { ApostaModalComponent } from './../../shared/layout/modals/aposta-modal/aposta-modal.component';
 import {
-    Component, OnInit, ElementRef, ViewChild, OnDestroy,
-    ChangeDetectorRef, ChangeDetectionStrategy
+    Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy
 } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { CancelApostaModalComponent } from '../../shared/layout/modals';
 import {
     ApostaEsportivaService, MessageService,
     PrintService, AuthService,
     HelperService
 } from './../../services';
 import { ApostaEsportiva } from './../../models';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 @Component({
@@ -24,11 +27,8 @@ import * as moment from 'moment';
 })
 export class ApuracaoEsporteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     apostas: ApostaEsportiva[] = [];
-    @ViewChild('modal') modal: ElementRef;
-    @ViewChild('cancelModal') cancelModal: ElementRef;
-    apostaSelecionada: ApostaEsportiva;
     appMobile;
-    closeResult: string;
+    modalRef;
     showLoadingIndicator = true;
     totais = {
         'valor': 0,
@@ -46,9 +46,9 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         private printService: PrintService,
         private auth: AuthService,
         private fb: FormBuilder,
-        private modalService: NgbModal,
         private helperService: HelperService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private modalService: NgbModal
     ) {
         super();
     }
@@ -174,15 +174,12 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         this.apostaService.getAposta(aposta.id)
             .subscribe(
                 aposta_localizada => {
-                    this.apostaSelecionada = aposta_localizada;
-
-                    this.modalService.open(this.modal, {
+                    this.modalRef = this.modalService.open(ApostaModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
-                    }).result.then(
-                        (result) => { },
-                        (reason) => { }
-                    );
+                    });
+
+                    this.modalRef.componentInstance.aposta = aposta_localizada;
 
                     this.showLoadingIndicator = false;
                     this.cd.detectChanges();
@@ -192,19 +189,18 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     cancel(aposta) {
-        this.modalService.open(this.cancelModal, { centered: true })
-            .result
-            .then(
-                (result) => {
-                    this.apostaService.cancel(aposta.id)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            () => this.getApostas(),
-                            error => this.handleError(error)
-                        );
-                },
-                (reason) => { }
-            );
+        this.modalRef = this.modalService.open(CancelApostaModalComponent, { centered: true });
+        this.modalRef.result.then(
+            (result) => {
+                this.apostaService.cancel(aposta.id)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        () => this.getApostas(),
+                        error => this.handleError(error)
+                    );
+            },
+            (reason) => { }
+        );
     }
 
     /*checkCancellation(items) {

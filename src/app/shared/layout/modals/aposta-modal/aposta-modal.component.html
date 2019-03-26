@@ -1,18 +1,10 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Consultar Bilhete</h4>
+    <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
-    <form *ngIf="!exibirBilhete" [formGroup]="pesquisarForm" (ngSubmit)="pesquisarAposta()">
-        <div class="form-group">
-            <input type="text" placeholder="Código da aposta" class="form-control" formControlName="input">
-        </div>
-        <button type="submit" class="btn btn-custom">Consultar</button>
-    </form>
-    <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
+<div class="modal-body cupom-ativo">
+    <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="aposta">
     </app-consulta-bilhete-esportivo>
-    <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
-    </app-consulta-bilhete-loteria>
 </div>

@@ -1,13 +1,14 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { LoteriaSuccessModalComponent } from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
-    PrintService, HelperService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService,
     ParametrosLocaisService
@@ -31,12 +32,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     opcoes;
     displayPreTicker = false;
     disabled = false;
-    appMobile = false;
     isLoggedIn = false;
-    mensagemSucesso = '';
-    ultimaApostaRealizada;
-    @ViewChild('modal') modal: ElementRef;
-    modalReference;
+    modalRef;
     unsub$ = new Subject();
 
     constructor(
@@ -47,14 +44,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private tipoApostaService: TipoApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private printService: PrintService,
         private fb: FormBuilder,
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
-        private paramsService: ParametrosLocaisService,
-        private helperService: HelperService
+        private paramsService: ParametrosLocaisService
     ) {
         super();
     }
@@ -62,10 +57,10 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     ngOnInit() {
         const queryParams = { tipo: 'seninha' };
 
-        this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.createForm();
+        this.definirAltura();
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => {
@@ -102,7 +97,14 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
             this.setNumeros(numeros);
         });
+    }
 
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
+    definirAltura() {
         const altura = window.innerHeight - 69;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
@@ -110,11 +112,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.renderer.setStyle(contentLoteriaEl, 'height', `${altura}px`);
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
-    }
-
-    ngOnDestroy() {
-        this.unsub$.next();
-        this.unsub$.complete();
     }
 
     createForm() {
@@ -199,37 +196,31 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     apostaSuccess(aposta) {
-        this.ultimaApostaRealizada = aposta;
-        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
-        this.aposta = new Aposta();
-        this.enableSubmit();
-        this.closeCupom();
-
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(LoteriaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result
-            .then((result) => { },
-                (reason) => { });
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.mensagem = 'Aposta realizada com <strong>SUCESSO</strong>!';
+
+        this.aposta = new Aposta();
+        this.enableSubmit();
+        this.closeCupom();
     }
 
     preApostaSucess(id) {
-        this.mensagemSucesso = `Para validar sua aposta, procure um cambista de sua
-        preferência e informe o código: <b>#${id}</b>`;
-        this.aposta = new Aposta();
-        this.enableSubmit();
-        this.closeCupom();
-
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(LoteriaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result
-            .then((result) => { },
-                (reason) => { });
+        this.modalRef.componentInstance.mensagem = `Para validar sua aposta, procure um cambista de sua
+        preferência e informe o código: <b>#${id}</b>`;
+
+        this.aposta = new Aposta();
+        this.enableSubmit();
+        this.closeCupom();
     }
 
     handleError(msg) {
@@ -304,13 +295,5 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     enableSubmit() {
         this.disabled = false;
-    }
-
-    printTicket() {
-        this.printService.lotteryTicket(this.ultimaApostaRealizada);
-    }
-
-    shareTicket() {
-        this.helperService.sharedLotteryTicket(this.ultimaApostaRealizada);
     }
 }

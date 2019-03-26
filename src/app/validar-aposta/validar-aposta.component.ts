@@ -2,33 +2,32 @@ import {
     Component,
     OnInit,
     OnDestroy,
-    ElementRef,
-    ViewChild
+    ElementRef
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import {
     AuthService,
     MessageService,
     PreApostaEsportivaService,
     ApostaEsportivaService,
-    PrintService,
-    HelperService,
     SorteioService,
     ApostaLoteriaService
 } from '../services';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
+import { ApostaSuccessModalComponent } from '../shared/layout/modals';
 
 @Component({
     selector: 'app-validar-aposta',
     templateUrl: 'validar-aposta.component.html',
     styleUrls: ['./validar-aposta.component.css']
 })
-export class ValidarApostaComponent extends BaseFormComponent
-    implements OnInit, OnDestroy {
+export class ValidarApostaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     codigo;
     exibirPreAposta = false;
     preAposta: any;
@@ -36,9 +35,7 @@ export class ValidarApostaComponent extends BaseFormComponent
     disabled = false;
     sorteios = [];
     appMobile = false;
-    @ViewChild('modal') modal: ElementRef;
-    modalReference;
-    ultimaApostaRealizada;
+    modalRef;
     unsub$ = new Subject();
 
     constructor(
@@ -48,11 +45,9 @@ export class ValidarApostaComponent extends BaseFormComponent
         private preApostaService: PreApostaEsportivaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private printService: PrintService,
         private fb: FormBuilder,
         private elRef: ElementRef,
-        private modalService: NgbModal,
-        private helperService: HelperService
+        private modalService: NgbModal
     ) {
         super();
     }
@@ -164,16 +159,16 @@ export class ValidarApostaComponent extends BaseFormComponent
         }
     }
 
-    success(data) {
-        this.ultimaApostaRealizada = data;
+    success(aposta) {
         this.reboot();
 
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result.then(result => { }, reason => { });
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.codigo = aposta.id;
     }
 
     handleError(msg) {
@@ -208,21 +203,5 @@ export class ValidarApostaComponent extends BaseFormComponent
 
     enableSubmit() {
         this.disabled = false;
-    }
-
-    printTicket() {
-        if (this.ultimaApostaRealizada.tipo === 'esportes') {
-            this.printService.sportsTicket(this.ultimaApostaRealizada);
-        } else {
-            this.printService.lotteryTicket(this.ultimaApostaRealizada);
-        }
-    }
-
-    shareTicket() {
-        if (this.ultimaApostaRealizada.tipo === 'esportes') {
-            this.helperService.sharedSportsTicket(this.ultimaApostaRealizada);
-        } else {
-            this.helperService.sharedLotteryTicket(this.ultimaApostaRealizada);
-        }
     }
 }

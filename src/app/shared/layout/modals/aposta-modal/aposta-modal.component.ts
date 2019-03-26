@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApostaEsportivaService, MessageService } from './../../../../services';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -10,33 +8,9 @@ import { ApostaEsportivaService, MessageService } from './../../../../services';
     styleUrls: ['./aposta-modal.component.css']
 })
 export class ApostaModalComponent implements OnInit {
-    exibirBilhete = false;
-    aposta;
-    pesquisarForm: FormGroup = this.fb.group({
-        input: ['']
-    });
+    @Input() aposta;
 
-    constructor(
-        public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
-        private apostaEsportivaService: ApostaEsportivaService,
-        private messageService: MessageService
-    ) { }
+    constructor(public activeModal: NgbActiveModal) { }
 
-    ngOnInit() {
-    }
-
-    pesquisarAposta() {
-        const input = this.pesquisarForm.value.input;
-
-        this.apostaEsportivaService.getAposta(input)
-            .subscribe(
-                apostaEsportiva => {
-                    this.pesquisarForm.reset();
-                    this.aposta = apostaEsportiva;
-                    this.exibirBilhete = true;
-                },
-                error => this.messageService.error(error)
-            );
-    }
+    ngOnInit() { }
 }

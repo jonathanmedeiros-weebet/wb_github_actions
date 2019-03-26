@@ -17,7 +17,7 @@ import {
     SidebarService, AuthService, PrintService,
     ParametrosLocaisService, SupresinhaService
 } from './../../../services';
-import { PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent } from '../modals';
+import { PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent } from '../modals';
 import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -163,17 +163,14 @@ export class NavigationComponent implements OnInit {
         );
 
         this.modalRefTabela.result
-            .then(
-                result => {
-                    this.closeMenu();
-                },
-                reason => { })
-            ;
+            .then(result => {
+                this.closeMenu();
+            }, reason => { });
     }
 
     abrirModalAposta() {
         this.modalRefAposta = this.modalService.open(
-            ApostaModalComponent,
+            PesquisarApostaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true

@@ -3,7 +3,9 @@ import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { LoteriaSuccessModalComponent } from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
@@ -31,12 +33,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     opcoes;
     displayPreTicker = false;
     disabled = false;
-    appMobile = false;
     isLoggedIn = false;
-    mensagemSucesso = '';
-    ultimaApostaRealizada;
-    @ViewChild('modal') modal: ElementRef;
-    modalReference;
+    modalRef;
     unsub$ = new Subject();
 
     constructor(
@@ -62,10 +60,10 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     ngOnInit() {
         const queryParams = { tipo: 'quininha' };
 
-        this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.createForm();
+        this.definirAltura();
 
         this.tipoApostaService.getTiposAposta(queryParams).subscribe(
             tiposAposta => {
@@ -104,7 +102,14 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
             this.setNumeros(numeros);
         });
+    }
 
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
+    definirAltura() {
         const altura = window.innerHeight - 69;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
@@ -114,10 +119,6 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
 
-    ngOnDestroy() {
-        this.unsub$.next();
-        this.unsub$.complete();
-    }
 
     createForm() {
         this.form = this.fb.group({
@@ -196,37 +197,31 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     apostaSuccess(aposta) {
-        this.ultimaApostaRealizada = aposta;
-        this.mensagemSucesso = 'Aposta realizada com <strong>SUCESSO</strong>!';
-        this.aposta = new Aposta();
-        this.enableSubmit();
-        this.closeCupom();
-
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(LoteriaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result
-            .then((result) => { },
-                (reason) => { });
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.mensagem = 'Aposta realizada com <strong>SUCESSO</strong>!';
+
+        this.aposta = new Aposta();
+        this.enableSubmit();
+        this.closeCupom();
     }
 
     preApostaSucess(id) {
-        this.mensagemSucesso = `Para validar sua aposta, procure um cambista de sua
-        preferência e informe o código: <b>#${id}</b>`;
-        this.aposta = new Aposta();
-        this.enableSubmit();
-        this.closeCupom();
-
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(LoteriaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result
-            .then((result) => { },
-                (reason) => { });
+        this.modalRef.componentInstance.mensagem = `Para validar sua aposta, procure um cambista de sua
+        preferência e informe o código: <b>#${id}</b>`;
+
+        this.aposta = new Aposta();
+        this.enableSubmit();
+        this.closeCupom();
     }
 
     handleError(msg) {
@@ -301,13 +296,5 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     enableSubmit() {
         this.disabled = false;
-    }
-
-    printTicket() {
-        this.printService.lotteryTicket(this.ultimaApostaRealizada);
-    }
-
-    shareTicket() {
-        this.helperService.sharedLotteryTicket(this.ultimaApostaRealizada);
     }
 }

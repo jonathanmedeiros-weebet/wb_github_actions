@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Atenção</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="success-msg">
+        <div *ngIf="isLoggedIn; else preApostaMsg">
+            CÓDIGO: <span class="codigo">#{{codigo}}</span>
+            <br>
+            Aposta realizada com <strong>SUCESSO</strong>!
+        </div>
+        <ng-template #preApostaMsg>
+            <div>
+                Para validar sua aposta, procure um cambista de sua
+                preferência e informe o código: <span class="codigo">#{{codigo}}</span>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<div class="modal-footer">
+    <button *ngIf="!isLoggedIn" type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+        Fechar
+    </button>
+    <button *ngIf="isLoggedIn" type="button" class="btn btn-custom" (click)="printTicket()">
+        Imprimir
+    </button>
+    <button *ngIf="isLoggedIn && appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">
+        Compartilhar
+    </button>
+</div>

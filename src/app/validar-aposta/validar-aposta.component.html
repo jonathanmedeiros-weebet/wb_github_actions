@@ -130,24 +130,3 @@
         </div>
     </div>
 </div>
-
-
-<ng-template #modal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Atenção</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div class="success-msg">
-            CÓDIGO: <span class="codigo">#{{ultimaApostaRealizada.id}}</span>
-            <br>
-            Aposta realizada com <strong>SUCESSO</strong>!
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-custom" (click)="printTicket()">Imprimir</button>
-        <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">Compartilhar</button>
-    </div>
-</ng-template>

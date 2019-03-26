@@ -1,13 +1,14 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { ApostaSuccessModalComponent } from '../../shared/layout/modals';
 import {
     ParametrosLocaisService,
     MessageService, BilheteEsportivoService, HelperService,
-    PrintService, ApostaEsportivaService, AuthService,
+    ApostaEsportivaService, AuthService,
     PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
@@ -20,17 +21,13 @@ import * as clone from 'clone';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('modal') modal: ElementRef;
-    modalReference;
-    ultimaApostaRealizada;
+    modalRef;
     possibilidadeGanho = 0;
     opcoes = this.paramsService.getOpcoes();
     apostaMinima;
     displayPreTicker = false;
-    appMobile;
     disabled = false;
-    isLoggedIn = false;
-    codigo = '';
+    isLoggedIn;
     unsub$ = new Subject();
 
     constructor(
@@ -39,7 +36,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private auth: AuthService,
         private bilheteService: BilheteEsportivoService,
         private messageService: MessageService,
-        private printService: PrintService,
         private renderer: Renderer2,
         private el: ElementRef,
         private fb: FormBuilder,
@@ -53,7 +49,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnInit() {
         this.createForm();
 
-        this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.apostaMinima = this.opcoes.valor_min_aposta;
 
@@ -168,45 +163,32 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     apostaSuccess(aposta) {
         this.enableSubmit();
-        this.ultimaApostaRealizada = aposta;
-        this.codigo = aposta.id;
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
 
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result
-            .then((result) => { },
-                (reason) => { });
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.codigo = aposta.id;
     }
 
     preApostaSuccess(id) {
         this.enableSubmit();
-        this.codigo = id;
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
 
-        this.modalReference = this.modalService.open(this.modal, {
+        this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalReference.result
-            .then((result) => { },
-                (reason) => { });
-    }
-
-    printTicket() {
-        this.printService.sportsTicket(this.ultimaApostaRealizada);
-    }
-
-    shareTicket() {
-        this.helperService.sharedSportsTicket(this.ultimaApostaRealizada);
+        this.modalRef.componentInstance.codigo = id;
+        this.modalRef.componentInstance.aposta = null;
     }
 
     handleError(msg) {

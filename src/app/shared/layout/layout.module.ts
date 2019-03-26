@@ -15,7 +15,11 @@ import { ConsultaBilheteLoteriaComponent } from './consulta-bilhete/loteria/cons
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService } from '../../services';
-import { PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent } from './modals';
+import {
+    PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
+    ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
+    LoteriaSuccessModalComponent
+} from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
@@ -41,11 +45,19 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         PesquisaModalComponent,
         TabelaModalComponent,
         ApostaModalComponent,
+        ApostaSuccessModalComponent,
+        CancelApostaModalComponent,
+        PesquisarApostaModalComponent,
+        LoteriaSuccessModalComponent,
     ],
     entryComponents: [
         PesquisaModalComponent,
+        PesquisarApostaModalComponent,
         TabelaModalComponent,
-        ApostaModalComponent
+        ApostaModalComponent,
+        ApostaSuccessModalComponent,
+        CancelApostaModalComponent,
+        LoteriaSuccessModalComponent
     ],
     exports: [
         MainLayoutComponent,
