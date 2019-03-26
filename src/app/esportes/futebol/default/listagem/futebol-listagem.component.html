@@ -11,12 +11,12 @@
 
             <div *ngIf="!showLoadingIndicator">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
-                    <div class="campeonato-header" (click)="setPrincipal(campeonato._id)">
+                    <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                         <span class="column-left">
                             <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
                             <span class="campeonato-nome">{{campeonato.nome}}</span>
                         </span>
-                        <span *ngIf="campeonatoPrincipal(campeonato._id); else downIcon">
+                        <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
                             <i class="fa fa-angle-up"></i>
                         </span>
                         <ng-template #downIcon>
@@ -25,7 +25,7 @@
                             </span>
                         </ng-template>
                     </div>
-                    <div class="jogos" [hidden]="!campeonatoPrincipal(campeonato._id)">
+                    <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                         <ng-container *ngFor="let jogo of campeonato.jogos">
                             <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)">
                                 <div class="indentificacao">

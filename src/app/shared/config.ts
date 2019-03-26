@@ -3,7 +3,7 @@ const _host = 'http://weebet.local';
 const _center = 'http://localhost:3002';
 
 export const config: any = {
-    BANCA_NOME: 'BETS PLAY',
+    BANCA_NOME: 'DEMO',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,

@@ -3,10 +3,9 @@ import {
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
     ChangeDetectorRef, Input, OnChanges, SimpleChange
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,11 +21,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() deixarCampeonatosAbertos;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
-    @Input() campeonatosPrincipais = [];
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
     campeonatos: Campeonato[];
+    campeonatosAbertos = [];
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
@@ -34,8 +33,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     jogosBloqueados;
     contentSportsEl;
     start;
-    offset = 15;
+    offset;
     total;
+    exibirCampeonatosExpandido;
     loadingScroll = false;
     unsub$ = new Subject();
 
@@ -52,6 +52,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
+        this.offset = this.exibirCampeonatosExpandido ? 5 : 15;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -78,6 +80,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.start = 0;
             this.total = Math.ceil(this.camps.length / this.offset);
             this.campeonatos = [];
+            this.campeonatosAbertos = [];
             this.exibirMais();
 
             setTimeout(() => {
@@ -207,23 +210,17 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
     }
 
-    setPrincipal(campeonatoId) {
-        const index = this.campeonatosPrincipais.findIndex(id => id === campeonatoId);
+    toggleCampeonato(campeonatoId) {
+        const index = this.campeonatosAbertos.findIndex(id => id === campeonatoId);
         if (index >= 0) {
-            this.campeonatosPrincipais.splice(index, 1);
+            this.campeonatosAbertos.splice(index, 1);
         } else {
-            this.campeonatosPrincipais.push(campeonatoId);
+            this.campeonatosAbertos.push(campeonatoId);
         }
     }
 
-    campeonatoPrincipal(campeonatoId) {
-        let result;
-        if (this.deixarCampeonatosAbertos) {
-            result = true;
-        } else {
-            result = this.campeonatosPrincipais.includes(campeonatoId);
-        }
-        return result;
+    campeonatoAberto(campeonatoId) {
+        return this.campeonatosAbertos.includes(campeonatoId);
     }
 
     // Extrai id do primeiro jogo do primeiro campeonato
@@ -274,6 +271,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         if (this.start < this.total) {
             const splice = this.camps.splice(0, this.offset);
             this.campeonatos = this.campeonatos.concat(splice);
+
+            if (this.exibirCampeonatosExpandido || this.deixarCampeonatosAbertos) {
+                const spliceIds = splice.map(campeonato => campeonato._id);
+                this.campeonatosAbertos = this.campeonatosAbertos.concat(spliceIds);
+            }
+
             this.start++;
         }
 

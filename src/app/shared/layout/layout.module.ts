@@ -15,6 +15,7 @@ import { ConsultaBilheteLoteriaComponent } from './consulta-bilhete/loteria/cons
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService } from '../../services';
+import { PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
@@ -36,7 +37,15 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ErrorMsgComponent,
         ConsultaBilheteEsportivoComponent,
         ConsultaBilheteLoteriaComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        PesquisaModalComponent,
+        TabelaModalComponent,
+        ApostaModalComponent,
+    ],
+    entryComponents: [
+        PesquisaModalComponent,
+        TabelaModalComponent,
+        ApostaModalComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -47,7 +56,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ErrorMsgComponent,
         ConsultaBilheteEsportivoComponent,
         ConsultaBilheteLoteriaComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        PesquisaModalComponent
     ],
     providers: [ApostaEsportivaService]
 })

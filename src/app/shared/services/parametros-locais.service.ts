@@ -105,8 +105,12 @@ export class ParametrosLocaisService {
         return oddsImpressao;
     }
 
-    getExibirCampeonatosHojeExpandido() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes.exibir_campeonatos_hoje_expandido : null;
+    getExibirCampeonatosExpandido() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.exibir_campeonatos_expandido : null;
+    }
+
+    getPrimeiraPagina() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.primeira_pagina : null;
     }
 }
 

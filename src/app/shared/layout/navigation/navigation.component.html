@@ -68,14 +68,33 @@
         <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll>
             <ng-container *ngIf="contexto == 'futebol'">
                 <span class="group">Destaques</span>
-                <li (click)="goTo('/esportes/futebol/jogos')">
-                    <a>
-                        Jogos de Hoje
-                    </a>
-                </li>
-                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha })">
+                <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
+                    <li (click)="goTo('/esportes/futebol/jogos')">
+                        <a>
+                            Jogos de Hoje
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-template #principais>
+                    <li (click)="goTo('/esportes/futebol/jogos')">
+                        <a>
+                            Campeonatos Principais
+                        </a>
+                    </li>
+                    <li (click)="goTo('/esportes/futebol/jogos', { data: hoje.format('YYYY-MM-DD') })">
+                        <a>
+                            Jogos de Hoje
+                        </a>
+                    </li>
+                </ng-template>
+                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
+                    </a>
+                </li>
+                <li *ngFor="let dia of dias" (click)="goTo('/esportes/futebol/jogos', { data: dia.format })">
+                    <a>
+                        Jogos de {{dia.descricao}}
                     </a>
                 </li>
                 <span class="group">Campeonatos</span>
@@ -96,12 +115,12 @@
             </ng-container>
             <ng-container *ngIf="contexto == 'basquete'">
                 <span class="group">Destaques</span>
-                <li (click)="goTo('/esportes/basquete/eventos', { data: hoje })">
+                <li (click)="goTo('/esportes/basquete/eventos', { data: hoje.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Hoje
                     </a>
                 </li>
-                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/eventos', { data: amanha })">
+                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/eventos', { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
                     </a>
@@ -131,59 +150,3 @@
         </ul>
     </div>
 </aside>
-
-<ng-template #modalPesquisa let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Pesquisa</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form [formGroup]="pesquisarForm" (ngSubmit)="pesquisar()">
-            <div class="form-group">
-                <input type="text" placeholder="Pesquise por time ou campeonato..." class="form-control"
-                    formControlName="input">
-            </div>
-            <button type="submit" class="btn btn-custom">Pesquisar</button>
-        </form>
-    </div>
-</ng-template>
-
-<ng-template #modalTabela let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Imprimir Tabela</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form (ngSubmit)="imprimirTabela()">
-            <div class="form-group">
-                <div id="treeJogos"></div>
-            </div>
-            <button type="submit" class="btn btn-custom">Imprimir</button>
-        </form>
-    </div>
-</ng-template>
-
-<ng-template #modalAposta let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Consultar Bilhete</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
-        <form *ngIf="!exibirBilhete" [formGroup]="pesquisarForm" (ngSubmit)="pesquisarAposta()">
-            <div class="form-group">
-                <input type="text" placeholder="Código da aposta" class="form-control" formControlName="input">
-            </div>
-            <button type="submit" class="btn btn-custom">Consultar</button>
-        </form>
-        <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
-        </app-consulta-bilhete-esportivo>
-        <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
-        </app-consulta-bilhete-loteria>
-    </div>
-</ng-template>

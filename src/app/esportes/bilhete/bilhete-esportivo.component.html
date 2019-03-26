@@ -62,7 +62,7 @@
                     </div>
                     <div class="cotacao">
                         <span *ngIf="item.jogo.sport_id != 9; else nomeOddCombate">
-                            {{item.cotacao.chave | tipoAposta}}:
+                            {{item.cotacao.chave | tipoAposta:'nome'}}:
                         </span>
                         <ng-template #nomeOddCombate>
                             {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}:
