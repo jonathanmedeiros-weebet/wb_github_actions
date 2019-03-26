@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
+
 @NgModule({
     declarations: [],
     imports: [
@@ -12,6 +13,7 @@ import { UtilsModule } from './utils/utils.module';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+
         UtilsModule
     ],
     exports: [

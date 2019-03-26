@@ -18,9 +18,11 @@ import { ApostaEsportivaService } from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
     ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
-    LoteriaSuccessModalComponent
+    LoteriaSuccessModalComponent, CartaoCadastroModalComponent
 } from './modals';
+
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     imports: [
@@ -28,8 +30,10 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+
         UtilsModule,
-        AngularSvgIconModule
+        AngularSvgIconModule,
+        NgxMaskModule.forRoot()
     ],
     declarations: [
         MainLayoutComponent,
@@ -49,6 +53,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         CancelApostaModalComponent,
         PesquisarApostaModalComponent,
         LoteriaSuccessModalComponent,
+        CartaoCadastroModalComponent,
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -57,7 +62,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ApostaModalComponent,
         ApostaSuccessModalComponent,
         CancelApostaModalComponent,
-        LoteriaSuccessModalComponent
+        LoteriaSuccessModalComponent,
+        CartaoCadastroModalComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -68,8 +74,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ErrorMsgComponent,
         ConsultaBilheteEsportivoComponent,
         ConsultaBilheteLoteriaComponent,
-        SpinnerComponent,
-        PesquisaModalComponent
+        SpinnerComponent
     ],
     providers: [ApostaEsportivaService]
 })

@@ -24,6 +24,36 @@
                         <i class="fa fa-print"></i> Tabela
                     </a>
                 </li>
+                <ng-container *ngIf="isLoggedIn">
+                    <li>
+                        <a [routerLink]="['/validar-aposta']">
+                            <i class="fa fa-check"></i> Validação
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-asterisk"></i> Apuração
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
+                            <a class="dropdown-item" [routerLink]="['/apuracao/loteria']">Loteria</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/resultados/esportes']">
+                            <i class="fa fa-list"></i> Resultados
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-credit-card"></i> Cartões
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" (click)="abrirModalCadastroCartao()">Cadastro</a>
+                            <a class="dropdown-item">Consultar</a>
+                        </div>
+                    </li>
+                </ng-container>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">
                     <a>
                         <i class="fa fa-cogs"></i> Config
@@ -37,25 +67,6 @@
                 <li>
                     <a [routerLink]="['/regras']">
                         <i class="fa fa-book"></i> Regras
-                    </a>
-                </li>
-                <li *ngIf="isLoggedIn">
-                    <a [routerLink]="['/validar-aposta']">
-                        <i class="fa fa-check"></i> Validação
-                    </a>
-                </li>
-                <li *ngIf="isLoggedIn" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-asterisk"></i> Apuração
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
-                        <a class="dropdown-item" [routerLink]="['//apuracao/loteria']">Loteria</a>
-                    </div>
-                </li>
-                <li *ngIf="isLoggedIn">
-                    <a [routerLink]="['/resultados/esportes']">
-                        <i class="fa fa-list"></i> Resultados
                     </a>
                 </li>
                 <li>
@@ -87,7 +98,8 @@
                         </a>
                     </li>
                 </ng-template>
-                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/futebol/jogos', { data: amanha.format('YYYY-MM-DD') })">
+                <li *ngIf="exibirJogosAmanha()"
+                    (click)="goTo('/esportes/futebol/jogos', { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
                     </a>
@@ -120,7 +132,8 @@
                         Jogos de Hoje
                     </a>
                 </li>
-                <li *ngIf="exibirJogosAmanha()" (click)="goTo('/esportes/basquete/eventos', { data: amanha.format('YYYY-MM-DD') })">
+                <li *ngIf="exibirJogosAmanha()"
+                    (click)="goTo('/esportes/basquete/eventos', { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
                     </a>

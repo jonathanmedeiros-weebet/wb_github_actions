@@ -17,7 +17,7 @@ import {
     SidebarService, AuthService, PrintService,
     ParametrosLocaisService, SupresinhaService
 } from './../../../services';
-import { PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent } from '../modals';
+import { PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent, CartaoCadastroModalComponent } from '../modals';
 import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -57,9 +57,7 @@ export class NavigationComponent implements OnInit {
     isOpen = true;
     itens: any[];
     contexto;
-    modalRefPesquisa;
-    modalRefTabela;
-    modalRefAposta;
+    modalRef;
     opcoes;
     primeiraPagina;
     dataLimiteTabela;
@@ -132,8 +130,27 @@ export class NavigationComponent implements OnInit {
         this.printService.listPrinters();
     }
 
+    abrirModalCadastroCartao() {
+        this.modalRef = this.modalService.open(
+            CartaoCadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                    console.log(result);
+                    this.closeMenu();
+                },
+                reason => { }
+            );
+    }
+
     abrirModalPesquisa() {
-        this.modalRefPesquisa = this.modalService.open(
+        this.modalRef = this.modalService.open(
             PesquisaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -141,7 +158,7 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        this.modalRefPesquisa.result
+        this.modalRef.result
             .then(
                 result => {
                     if (result.input) {
@@ -154,7 +171,7 @@ export class NavigationComponent implements OnInit {
     }
 
     abrirModalTabela() {
-        this.modalRefTabela = this.modalService.open(
+        this.modalRef = this.modalService.open(
             TabelaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -162,14 +179,14 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        this.modalRefTabela.result
+        this.modalRef.result
             .then(result => {
                 this.closeMenu();
             }, reason => { });
     }
 
     abrirModalAposta() {
-        this.modalRefAposta = this.modalService.open(
+        this.modalRef = this.modalService.open(
             PesquisarApostaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -177,7 +194,7 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        this.modalRefAposta.result
+        this.modalRef.result
             .then(
                 result => { },
                 reason => { }

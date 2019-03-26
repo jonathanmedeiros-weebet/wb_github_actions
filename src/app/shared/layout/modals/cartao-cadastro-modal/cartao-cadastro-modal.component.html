@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Criar Cartão</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <input type="text" placeholder="Apostador" class="form-control" formControlName="apostador">
+        </div>
+        <div class="form-group">
+            <input type="text" mask="dot_separator.2" placeholder="Valor" class="form-control"
+                formControlName="valor">
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="PIN" class="form-control" formControlName="pin">
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Confirmar PIN" class="form-control" formControlName="confirmacaoPin">
+        </div>
+        <button type="submit" class="btn btn-custom">Confirmar</button>
+    </form>
+</div>

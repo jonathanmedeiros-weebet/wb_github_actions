@@ -21,7 +21,7 @@ import { AppComponent } from './app.component';
 // Core providers
 import { LayoutModule } from './shared/layout/layout.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { ParametrosLocaisService } from './services';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
@@ -45,9 +45,8 @@ export const APP_TOKENS = [
         HttpClientModule,
         AppRoutingModule,
 
-        NgxSpinnerModule,
         NgbModule,
-        LayoutModule
+        LayoutModule,
     ],
     providers: [APP_TOKENS],
     bootstrap: [AppComponent]
