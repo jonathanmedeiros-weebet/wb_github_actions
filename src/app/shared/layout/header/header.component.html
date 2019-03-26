@@ -92,12 +92,14 @@
         </div>
         <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/seninha']">
-                <i class="fa fa-ticket"></i> Seninha
+                <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>
+                <span>Seninha</span>
             </a>
         </div>
         <div *ngIf="loteriasHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/quininha']">
-                <i class="fa fa-ticket"></i> Quininha
+                <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>
+                <span>Quininha</span>
             </a>
         </div>
 
