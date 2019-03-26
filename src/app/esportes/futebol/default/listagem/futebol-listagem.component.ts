@@ -96,7 +96,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 if (scrollHeight <= altura) {
                     this.exibirMais();
                 }
-            }, 2000);
+            }, 1000);
         }
     }
 
