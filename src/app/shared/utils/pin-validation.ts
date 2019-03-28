@@ -1,12 +1,11 @@
 import { AbstractControl } from '@angular/forms';
 
-export class PasswordValidation {
+export class PinValidation {
 
-    static MatchPassword(AC: AbstractControl) {
-        console.log(AC);
+    static MatchPin(AC: AbstractControl) {
         let valid = false;
-        const passwordControl = AC.get('password') || AC.get('new_password');
-        const confirmControl = AC.get('confirm') || AC.get('confirmation_password');
+        const passwordControl = AC.get('pin');
+        const confirmControl = AC.get('pin_confirmacao');
 
         if ((passwordControl.valid && passwordControl.dirty) && (confirmControl.valid && confirmControl.dirty)) {
             if (passwordControl.value === confirmControl.value) {
@@ -19,7 +18,7 @@ export class PasswordValidation {
         if (valid) {
             return null;
         } else {
-            confirmControl.setErrors({ MatchPassword: true });
+            confirmControl.setErrors({ matchPin: true });
         }
     }
 }

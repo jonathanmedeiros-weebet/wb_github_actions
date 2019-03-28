@@ -1,4 +1,5 @@
 export * from './shared/models/usuario';
+export * from './shared/models/cartao-aposta';
 
 // Loteria
 export * from './shared/models/loteria/aposta';

@@ -14,7 +14,7 @@ import { ConsultaBilheteEsportivoComponent } from './consulta-bilhete/esportes/c
 import { ConsultaBilheteLoteriaComponent } from './consulta-bilhete/loteria/consulta-bilhete-loteria.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
-import { ApostaEsportivaService } from '../../services';
+import { ApostaEsportivaService, CartaoService } from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
     ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
@@ -76,6 +76,9 @@ import { NgxMaskModule } from 'ngx-mask';
         ConsultaBilheteLoteriaComponent,
         SpinnerComponent
     ],
-    providers: [ApostaEsportivaService]
+    providers: [
+        ApostaEsportivaService,
+        CartaoService
+    ]
 })
 export class LayoutModule { }

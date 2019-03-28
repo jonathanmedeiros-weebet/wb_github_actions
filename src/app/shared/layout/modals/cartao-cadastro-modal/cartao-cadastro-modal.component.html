@@ -5,20 +5,43 @@
     </button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <input type="text" placeholder="Apostador" class="form-control" formControlName="apostador">
-        </div>
-        <div class="form-group">
-            <input type="text" mask="dot_separator.2" placeholder="Valor" class="form-control"
-                formControlName="valor">
-        </div>
-        <div class="form-group">
-            <input type="text" placeholder="PIN" class="form-control" formControlName="pin">
-        </div>
-        <div class="form-group">
-            <input type="text" placeholder="Confirmar PIN" class="form-control" formControlName="confirmacaoPin">
-        </div>
-        <button type="submit" class="btn btn-custom">Confirmar</button>
-    </form>
+    <div *ngIf="showForm;else detalhesCartao">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="apostador" placeholder="Apostador"
+                    [ngClass]="applyCssInputError('apostador')">
+                <app-error-msg [control]="form.get('apostador')"></app-error-msg>
+            </div>
+            <div class="form-group">
+                <input type="text" mask="dot_separator.2" class="form-control" formControlName="valor"
+                    placeholder="Valor" [ngClass]="applyCssInputError('valor')">
+                <app-error-msg [control]="form.get('valor')"></app-error-msg>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="pin" placeholder="PIN"
+                    [ngClass]="applyCssInputError('pin')">
+                <app-error-msg [control]="form.get('pin')"></app-error-msg>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="pin_confirmacao"
+                    placeholder="Confirmar PIN" [ngClass]="applyCssInputError('pin_confirmacao')">
+                <app-error-msg [control]="form.get('pin_confirmacao')"></app-error-msg>
+            </div>
+            <button type="submit" class="btn btn-custom">Confirmar</button>
+        </form>
+    </div>
+    <ng-template #detalhesCartao>
+        {{cartao | json}}
+    </ng-template>
+</div>
+<div *ngIf="!showForm"  class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+        Fechar
+    </button>
+    <button type="button" class="btn btn-custom" (click)="print()">
+        Imprimir
+    </button>
+    <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shared()">
+        Compartilhar
+    </button>
 </div>

@@ -1,4 +1,5 @@
 /* General Services */
+export * from './shared/services/cartao.service';
 export * from './shared/services/regra.service';
 export * from './shared/services/parametros.service';
 export * from './shared/services/parametros-locais.service';
