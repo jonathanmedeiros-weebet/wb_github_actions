@@ -99,6 +99,14 @@ gulp.task('betsbr.club', function (done) {
     });
 });
 
+gulp.task('betsgame.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsgame.wee.bet",
+        banca: "Bet$game",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('betsplay.bet', function (done) {
     tasks(done, {
         host: "betsplay.bet",
@@ -185,7 +193,7 @@ gulp.task('gol.vlog.br', function (done) {
 
 gulp.task('maisporte.com', function (done) {
     tasks(done, {
-        host: "maisporte.com",
+        host: "www.maisporte.com",
         banca: "MAISPORTE",
         styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;",
         old: true
@@ -260,6 +268,14 @@ gulp.task('soccerbetting.wee.bet', function (done) {
     });
 });
 
+gulp.task('sportsshow.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportsshow.wee.bet",
+        banca: "Sports Show",
+        styles: "--header: #89221a; --foreground-header: #b1c5e0; --sidebar-right:#89221a; --foreground-sidebar-right: #fff; --sidebar-left: #89221a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #711912; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('superbets.bet', function (done) {
     tasks(done, {
         host: "superbets.bet",
@@ -284,6 +300,15 @@ gulp.task('trevodasorte.me', function (done) {
         old: true
     });
 });
+
+gulp.task('starbet.bet', function (done) {
+    tasks(done, {
+        host: "starbet.bet",
+        banca: "Star Bet",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
 
 gulp.task('wasports.wee.bet', function (done) {
     tasks(done, {
