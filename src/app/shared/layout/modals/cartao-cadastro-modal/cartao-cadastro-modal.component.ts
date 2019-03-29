@@ -12,8 +12,7 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 
 @Component({
     selector: 'app-cartao-cadastro-modal',
-    templateUrl: './cartao-cadastro-modal.component.html',
-    styleUrls: ['./cartao-cadastro-modal.component.css']
+    templateUrl: './cartao-cadastro-modal.component.html'
 })
 export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     form: FormGroup;

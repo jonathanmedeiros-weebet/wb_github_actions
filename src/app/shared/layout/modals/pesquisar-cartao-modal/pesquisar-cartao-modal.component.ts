@@ -11,8 +11,7 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 
 @Component({
     selector: 'app-pesquisar-cartao-modal',
-    templateUrl: './pesquisar-cartao-modal.component.html',
-    styleUrls: ['./pesquisar-cartao-modal.component.css']
+    templateUrl: './pesquisar-cartao-modal.component.html'
 })
 export class PesquisarCartaoModalComponent implements OnInit, OnDestroy {
     modalRef;

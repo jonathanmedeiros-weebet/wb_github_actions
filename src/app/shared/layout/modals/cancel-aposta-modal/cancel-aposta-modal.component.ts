@@ -4,8 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cancel-aposta-modal',
-  templateUrl: './cancel-aposta-modal.component.html',
-  styleUrls: ['./cancel-aposta-modal.component.css']
+  templateUrl: './cancel-aposta-modal.component.html'
 })
 export class CancelApostaModalComponent implements OnInit {
 

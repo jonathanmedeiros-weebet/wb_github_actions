@@ -5,8 +5,7 @@ import { AuthService, PrintService, HelperService } from './../../../../services
 
 @Component({
     selector: 'app-aposta-success-modal',
-    templateUrl: './aposta-success-modal.component.html',
-    styleUrls: ['./aposta-success-modal.component.css']
+    templateUrl: './aposta-success-modal.component.html'
 })
 export class ApostaSuccessModalComponent implements OnInit {
     @Input() aposta;

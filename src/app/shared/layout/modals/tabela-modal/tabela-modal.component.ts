@@ -8,8 +8,7 @@ declare var $;
 
 @Component({
     selector: 'app-tabela-modal',
-    templateUrl: './tabela-modal.component.html',
-    styleUrls: ['./tabela-modal.component.css']
+    templateUrl: './tabela-modal.component.html'
 })
 export class TabelaModalComponent implements OnInit {
     campeonatosSelecionados;
