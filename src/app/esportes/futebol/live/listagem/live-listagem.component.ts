@@ -49,9 +49,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     });
 
 
-                    // setTimeout(() => {
+                    setTimeout(() => {
                         this.awaiting = false;
-                    // }, 1000);
+                    }, 2000);
 
                     this.showLoadingIndicator = false;
 

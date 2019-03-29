@@ -117,6 +117,11 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 apostas => {
+                    this.totais.comissao = 0;
+                    this.totais.premio = 0;
+                    this.totais.resultado = 0;
+                    this.totais.valor = 0;
+
                     this.showLoadingIndicator = !this.showLoadingIndicator;
                     this.apostas = apostas;
                     apostas.forEach(aposta => {
