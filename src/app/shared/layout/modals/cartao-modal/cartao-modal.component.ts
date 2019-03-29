@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, MessageService } from './../../../../services';
+import { AuthService, PrintService, HelperService } from './../../../../services';
 import { CartaoAposta } from './../../../../models';
 
 @Component({
@@ -15,7 +15,9 @@ export class CartaoModalComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private auth: AuthService
+        private auth: AuthService,
+        private printService: PrintService,
+        private helperService: HelperService
     ) { }
 
     ngOnInit() {
@@ -23,10 +25,10 @@ export class CartaoModalComponent implements OnInit {
     }
 
     print() {
-
+        this.printService.card(this.cartao);
     }
 
     shared() {
-
+        alert('AINDA NÃO FOI FEITO!');
     }
 }

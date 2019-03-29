@@ -6,7 +6,6 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 
 import { config } from './../../config';
 import * as moment from 'moment';
-import * as clone from 'clone';
 
 @Injectable({
     providedIn: 'root'
@@ -719,6 +718,153 @@ ${this.opcoes.informativo_rodape}
         `;
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+    }
+
+    card(card) {
+        if (this.auth.isAppMobile()) {
+            this.cardMobile(card);
+        } else {
+            this.cardDesktop(card);
+        }
+    }
+
+    cardMobile(card) {
+        const print = `${config.BANCA_NOME}
+        Cartão ${card.chave}
+        Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
+        Cambista: ${card.cambista.nome}
+        Apostador: ${card.apostador}
+        Valor inicial: ${this.helperService.moneyFormat(card.valor)}
+        Bônus: ${this.helperService.moneyFormat(card.bonus)}
+        Saldo: ${this.helperService.moneyFormat(card.saldo)}`;
+
+        parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
+    }
+
+    cardDesktop(card) {
+        let printContents, popupWin, html, styles;
+
+        styles = `
+        body{
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 15px;
+            background: #333;
+            margin: 0;
+        }
+
+        #comprovante{
+            width: 19.27em;
+            padding: 1em;
+            background: #fff;
+            margin: 2em auto;
+        }
+
+        .margin-top-30 {
+            margin-top: 30px;
+        }
+
+        .margin-top-15{
+            margin-top: 15px;
+        }
+
+        .margin-top-10 {
+            margin-top: 10px;
+        }
+
+        .margin-bottom-30 {
+            margin-bottom: 30px;
+        }
+
+        .margin-bottom-15 {
+            margin-bottom: 15px;
+        }
+
+        .margin-bottom-10 {
+            margin-bottom: 10px;
+        }
+
+        .margin-bottom-5 {
+            margin-bottom: 5px;
+        }
+
+        .informacoes{
+            font-size:10px;
+        }
+
+        .chave{
+            font-size:15px;
+        }
+
+        hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px dashed black;
+        }
+
+        @page {
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 75mm;
+                padding: 4mm;
+            }
+        }
+        `;
+
+        printContents = `
+        <div id="comprovante">
+            <div class="conteudo">
+                <div style="text-align: center;">
+                    <img style="max-height: 50;"
+                    alt="${config.BANCA_NOME}" src="${config.LOGO}" />
+                </div>
+                <h1 class="chave margin-bottom-15">
+                    Cartão ${card.chave}
+                </h1>
+                <div class="informacoes">
+                    <div class="margin-bottom-5">
+                        <b>Apostador: </b>${card.apostador}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Cambista: </b>${card.cambista.nome}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Valor inicial: </b>${this.helperService.moneyFormat(card.valor)}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Bônus: </b>${this.helperService.moneyFormat(card.bonus)}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Saldo atual: </b>${this.helperService.moneyFormat(card.saldo)}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Criação: </b>${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+        html = `
+        <html>
+          <head>
+            <title>Print tab</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <style>
+            ${styles}
+            </style>
+          </head>
+          <body onload="window.print();window.close()">${printContents}</body>
+        </html>`;
+
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(html);
+        popupWin.document.close();
     }
 
     listPrinters() {
