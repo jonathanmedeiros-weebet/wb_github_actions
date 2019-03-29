@@ -730,13 +730,14 @@ ${this.opcoes.informativo_rodape}
 
     cardMobile(card) {
         const print = `${config.BANCA_NOME}
-        Cartão ${card.chave}
-        Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
-        Cambista: ${card.cambista.nome}
-        Apostador: ${card.apostador}
-        Valor inicial: ${this.helperService.moneyFormat(card.valor)}
-        Bônus: ${this.helperService.moneyFormat(card.bonus)}
-        Saldo: ${this.helperService.moneyFormat(card.saldo)}`;
+Cartão ${card.chave}
+Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
+Cambista: ${card.cambista.nome}
+Apostador: ${card.apostador}
+Valor inicial: ${this.helperService.moneyFormat(card.valor)}
+Bônus: ${this.helperService.moneyFormat(card.bonus)}
+Saldo: ${this.helperService.moneyFormat(card.saldo)}
+`;
 
         parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
     }
