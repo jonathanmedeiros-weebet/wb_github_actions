@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CartaoService, AuthService, MessageService } from './../../../../services';
-import { CartaoAposta } from './../../../../models';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartaoService, MessageService } from './../../../../services';
 import { PinValidation } from '../../../utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
+import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 
 @Component({
     selector: 'app-cartao-cadastro-modal',
@@ -17,23 +17,20 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 })
 export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     form: FormGroup;
-    showForm = true;
-    appMobile;
-    cartao: CartaoAposta;
+    modalRef;
     unsub$ = new Subject();
 
     constructor(
         public activeModal: NgbActiveModal,
+        private modalService: NgbModal,
         private fb: FormBuilder,
         private cartaoService: CartaoService,
-        private message: MessageService,
-        private auth: AuthService
+        private message: MessageService
     ) {
         super();
     }
 
     ngOnInit() {
-        this.appMobile = this.auth.isAppMobile();
         this.createForm();
     }
 
@@ -65,9 +62,13 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 result => {
-                    this.showForm = false;
-                    this.cartao = result;
+                    this.modalRef = this.modalService.open(CartaoModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    });
+                    this.modalRef.componentInstance.cartao = result;
                     this.message.success('Cartão de Aposta cadastrado com sucesso.');
+                    this.activeModal.close();
                 },
                 error => this.handleError(error)
             );
@@ -75,13 +76,5 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     handleError(error) {
         this.message.error(error);
-    }
-
-    print() {
-
-    }
-
-    shared() {
-
     }
 }

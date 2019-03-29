@@ -17,7 +17,10 @@ import {
     SidebarService, AuthService, PrintService,
     ParametrosLocaisService, SupresinhaService
 } from './../../../services';
-import { PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent, CartaoCadastroModalComponent } from '../modals';
+import {
+    PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent,
+    CartaoCadastroModalComponent, PesquisarCartaoModalComponent
+} from '../modals';
 import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -144,6 +147,24 @@ export class NavigationComponent implements OnInit {
                 result => {
                     console.log('ihuuu');
                     console.log(result);
+                    this.closeMenu();
+                },
+                reason => { }
+            );
+    }
+
+    abrirModalCartao() {
+        this.modalRef = this.modalService.open(
+            PesquisarCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
                     this.closeMenu();
                 },
                 reason => { }

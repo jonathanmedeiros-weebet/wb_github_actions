@@ -18,7 +18,8 @@ import { ApostaEsportivaService, CartaoService } from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
     ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
-    LoteriaSuccessModalComponent, CartaoCadastroModalComponent
+    LoteriaSuccessModalComponent, CartaoCadastroModalComponent, CartaoModalComponent,
+    PesquisarCartaoModalComponent
 } from './modals';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -54,6 +55,8 @@ import { NgxMaskModule } from 'ngx-mask';
         PesquisarApostaModalComponent,
         LoteriaSuccessModalComponent,
         CartaoCadastroModalComponent,
+        CartaoModalComponent,
+        PesquisarCartaoModalComponent,
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -63,7 +66,9 @@ import { NgxMaskModule } from 'ngx-mask';
         ApostaSuccessModalComponent,
         CancelApostaModalComponent,
         LoteriaSuccessModalComponent,
-        CartaoCadastroModalComponent
+        CartaoCadastroModalComponent,
+        CartaoModalComponent,
+        PesquisarCartaoModalComponent
     ],
     exports: [
         MainLayoutComponent,

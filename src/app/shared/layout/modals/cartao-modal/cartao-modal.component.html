@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalhes do Cartão</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="cartao-aposta">
+        <h3>Cartão {{cartao.chave}}</h3>
+        <div>
+            <div>
+                <b>Apostador: </b>
+                <span>{{cartao.apostador}}</span>
+            </div>
+            <div>
+                <b>Cambista: </b>
+                <span>{{cartao.cambista?.nome}}</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <b>Valor inicial: </b>
+                <span>{{cartao.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+            </div>
+            <div>
+                <b>Saldo atual: </b>
+                <span>{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <b>Bônus: </b>
+                <span>{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</span>
+            </div>
+            <div>
+                <b>Criação: </b>
+                <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+        Fechar
+    </button>
+    <button type="button" class="btn btn-custom" (click)="print()">
+        Imprimir
+    </button>
+    <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shared()">
+        Compartilhar
+    </button>
+</div>
