@@ -91,6 +91,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     campeonato = {
                         _id: jogo.campeonato._id,
                         nome: jogo.campeonato.nome,
+                        regiao_sigla: jogo.campeonato.regiao_sigla,
                         jogos: new Map()
                     };
                     this.campeonatos.set(jogo.campeonato._id, campeonato);
