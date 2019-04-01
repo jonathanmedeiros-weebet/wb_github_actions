@@ -39,7 +39,7 @@
                                         (click)="addCotacao(evento, cotacao)">
                                         <div class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
-                                                {{cotacao.chave | tipoAposta}}
+                                                {{cotacao.chave | tipoAposta: 'sigla'}}
                                             </span>
                                             <span class="valor">
                                                 {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:

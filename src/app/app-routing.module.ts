@@ -22,10 +22,6 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'home',
-                loadChildren: 'app/home/home.module#HomeModule'
-            },
-            {
                 path: 'esportes',
                 loadChildren: 'app/esportes/esportes.module#EsportesModule'
             },
