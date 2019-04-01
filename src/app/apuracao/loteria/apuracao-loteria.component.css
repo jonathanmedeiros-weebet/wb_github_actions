@@ -1,5 +1,7 @@
 .aposta{
     margin-bottom: 15px;
+    border-top: 1px dashed #d7dfe3;
+    padding-top: 15px;
 }
 
 .aposta-header{
