@@ -127,9 +127,11 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
                     apostas.forEach(aposta => {
                         this.totais.valor += aposta.valor;
                         this.totais.comissao += aposta.comissao;
-                        if (aposta.resultado === 'ganhou') {
-                            this.totais.premio += aposta.premio;
-                        }
+                        aposta.itens.forEach(item => {
+                            if (item.status === 'ganhou') {
+                                this.totais.premio += item.premio;
+                            }
+                        });
                     });
                     this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
                     this.cd.detectChanges();
