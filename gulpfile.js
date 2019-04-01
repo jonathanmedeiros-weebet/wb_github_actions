@@ -131,10 +131,10 @@ gulp.task('bestgol.wee.bet', function (done) {
     });
 });
 
-gulp.task('betvegas.wee.bet', function (done) {
+gulp.task('betvegas365.wee.bet', function (done) {
     tasks(done, {
-        host: "betvegas.wee.bet",
-        banca: "Bet Vegas",
+        host: "betvegas365.wee.bet",
+        banca: "Bet Vegas 365",
         styles: "--header: #2f891a; --foreground-header: #b1c5e0; --sidebar-right:#2f891a; --foreground-sidebar-right: #fff; --sidebar-left: #2f891a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #1f710c; --foreground-odds: #fff;"
     });
 });
