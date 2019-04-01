@@ -131,11 +131,19 @@ gulp.task('bestgol.wee.bet', function (done) {
     });
 });
 
+gulp.task('betpalmas.wee.bet', function (done) {
+    tasks(done, {
+        host: "betpalmas.wee.bet",
+        banca: "Bet Palmas",
+        styles: "--header: #00465C; --foreground-header: #b1c5e0; --sidebar-right:#00465C; --foreground-sidebar-right: #fff; --sidebar-left: #00465C; --foreground-sidebar-left: #fff; --highlight: #FF9200; --foreground-highlight: #aec3d8; --odds: #FF9200; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('betvegas365.wee.bet', function (done) {
     tasks(done, {
         host: "betvegas365.wee.bet",
         banca: "Bet Vegas 365",
-        styles: "--header: #2f891a; --foreground-header: #b1c5e0; --sidebar-right:#2f891a; --foreground-sidebar-right: #fff; --sidebar-left: #2f891a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #1f710c; --foreground-odds: #fff;"
+        styles: "--header: #027b5a; --foreground-header: #b1c5e0; --sidebar-right:#027b5a; --foreground-sidebar-right: #fff; --sidebar-left: #027b5a; --foreground-sidebar-left: #fff; --highlight: #d0b60a; --foreground-highlight: #aec3d8; --odds: #d0b60a; --foreground-odds: #fff;"
     });
 });
 
