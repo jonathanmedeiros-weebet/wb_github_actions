@@ -123,6 +123,14 @@ gulp.task('betsports99.net', function (done) {
     });
 });
 
+gulp.task('bestgol.wee.bet', function (done) {
+    tasks(done, {
+        host: "bestgol.wee.bet",
+        banca: "Best Gol",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('bolbets.net', function (done) {
     tasks(done, {
         host: "bolbets.net",
@@ -265,6 +273,14 @@ gulp.task('soccerbetting.wee.bet', function (done) {
         host: "soccerbetting.wee.bet",
         banca: "Soccer Betting",
         styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff; --league: #FFFF66;"
+    });
+});
+
+gulp.task('sportsbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportsbets.wee.bet",
+        banca: "Sports Bets",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
     });
 });
 
