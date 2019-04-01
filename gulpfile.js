@@ -333,6 +333,14 @@ gulp.task('trevodasorte.me', function (done) {
     });
 });
 
+gulp.task('sportsweb.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportsweb.wee.bet",
+        banca: "Sports Web",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('starbet.bet', function (done) {
     tasks(done, {
         host: "starbet.bet",
