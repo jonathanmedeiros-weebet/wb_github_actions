@@ -545,7 +545,7 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
         .item .jogo{
             margin: 1px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .item .cotacao{
@@ -553,31 +553,17 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
             font-size: 12px;
         }
 
-        .valores .total-jogos, .valores .aposta{
-            text-align: center;
-            margin: 1px;
+        .valores .total-jogos, .valores .aposta, .valores .ganho, .valores .cambista-paga{
+            text-align: left;
+            margin: 3px 1px 1px 1px;
             font-weight: bold;
             font-size: 12px;
         }
 
-        .valores .ganho{
-            text-align: center;
-            margin: 5px 1px 1px 1px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .valores .cambista-paga{
-           text-align: center;
-           margin: 5px 1px 1px 1px;
-           font-weight: bold;
-           font-size: 14px;
-        }
-
         .rodape{
-            margin: 10px 1px 1px 1px;
-            font-weight: bold;
-            font-size: 14px;
+            margin: 5px 1px 1px 1px;
+            font-weight: normal;
+            font-size: 12px;
             text-align: center;
         }
 
@@ -603,6 +589,21 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
                 <h1 class="numero">
                     #${aposta.id}
                 </h1>
+                <hr>
+                <hr>
+                <div class="informacoes">
+                    <p>
+                        <b>CAMBISTA:</b> ${aposta.cambista.nome}
+                    </p>
+                    <p>
+                        <b>APOSTADOR:</b> ${aposta.apostador}
+                    </p>
+                    <p>
+                        <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
+                    </p>
+                </div>
+                <hr>
+                <hr>
                 `;
 
         aposta.itens.forEach((item, index, array) => {
@@ -612,7 +613,7 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
                         ${item.campeonato.nome}
                     </p>
                     <p class="horario">
-                        ${this.helperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY [ÀS] HH:mm')}
+                        ${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
                     </p>
                     <p class="jogo">
                         ${item.jogo.nome}
@@ -620,47 +621,44 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
                     <p class="cotacao">
                         ${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
             if (item.ao_vivo) {
-                printContents += ` | AO VIVO`;
+                printContents += ` | <b>AO VIVO</b>`;
+            }
+            if (item.status != null) {
+                printContents += ` | <b>${item.status.toUpperCase()}</b>`;
             }
             printContents += `
                     </p>
                 </div>
+                <hr>
             `;
         });
 
         printContents += `
                 <hr>
-                <div class="informacoes">
-                    <p>
-                        CAMBISTA: ${aposta.cambista.nome}
-                    </p>
-                    <p>
-                        APOSTADOR: ${aposta.apostador}
-                    </p>
-                    <p>
-                        HORÁRIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
-                    </p>
-                </div>
-                <hr>
                 <div class="valores">
                     <p class="total-jogos">
-                        TOTAL DE JOGOS: ${aposta.itens.length}
+                        QUANTIDADE DE JOGOS: <span style="float:right">${aposta.itens.length}</span>
                     </p>
                     <p class="aposta">
-                        VALOR DA APOSTA: ${this.helperService.moneyFormat(aposta.valor)}
+                        COTAÇÃO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}</span>
+                    </p>
+                    <p class="aposta">
+                        VALOR APOSTADO: <span style="float:right">${this.helperService.moneyFormat(aposta.valor)}</span>
                     </p>
                     <p class="ganho">
-                        ESTIMATIVA DE GANHO: ${this.helperService.moneyFormat(aposta.premio)}
+                        POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio)}</span>
                     </p>`;
 
         if (this.opcoes.percentual_premio_cambista > 0) {
             const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
             printContents += `   <p class="cambista-paga">
-                            CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}
+                            CAMBISTA PAGA: <span style="float:right">${this.helperService.moneyFormat(cambistaPaga)}</span>
                         </p>`;
         }
 
         printContents += `
+                    <hr>
+                    <hr>
                     </div>
                 <p class="rodape">
                     ${this.opcoes.informativo_rodape}
@@ -703,7 +701,7 @@ Total Jogos: ${aposta.itens.length}`;
             ticket += `
 -------------------------------
 ${item.campeonato.nome}
-${this.helperService.dateFormat(item.jogo.horario, 'dddd, DD MMMM YYYY, HH:mm')}
+${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm')}
 ${item.jogo.nome}
 ${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
