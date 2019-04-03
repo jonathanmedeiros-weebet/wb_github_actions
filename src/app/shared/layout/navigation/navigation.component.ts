@@ -279,7 +279,12 @@ export class NavigationComponent implements OnInit {
         const dtInicial = moment().add(2, 'day');
         const dataLimiteTabela = moment(this.dataLimiteTabela);
 
-        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) {
+        let temDomingo = false;
+        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day') && !temDomingo) {
+            if (dtInicial.day() === 0) {
+                temDomingo = true;
+            }
+
             this.dias.push({
                 'descricao': dtInicial.format('dddd'),
                 'format': dtInicial.format('YYYY-MM-DD')
