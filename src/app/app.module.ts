@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 
 // Core providers
 import { LayoutModule } from './shared/layout/layout.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabsetModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ParametrosLocaisService } from './services';
 
@@ -45,7 +45,6 @@ export const APP_TOKENS = [
         HttpClientModule,
         AppRoutingModule,
 
-        NgbModule,
         LayoutModule,
     ],
     providers: [APP_TOKENS],

@@ -24,6 +24,7 @@ import {
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -34,7 +35,9 @@ import { NgxMaskModule } from 'ngx-mask';
 
         UtilsModule,
         AngularSvgIconModule,
-        NgxMaskModule.forRoot()
+        NgxMaskModule.forRoot(),
+        NgbTabsetModule,
+        NgbModalModule
     ],
     declarations: [
         MainLayoutComponent,

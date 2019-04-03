@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
+import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [],
@@ -14,7 +15,9 @@ import { UtilsModule } from './utils/utils.module';
         ReactiveFormsModule,
         RouterModule,
 
-        UtilsModule
+        UtilsModule,
+        NgbTabsetModule,
+        NgbModalModule
     ],
     exports: [
         CommonModule,
@@ -23,7 +26,9 @@ import { UtilsModule } from './utils/utils.module';
         RouterModule,
 
         LayoutModule,
-        UtilsModule
+        UtilsModule,
+        NgbTabsetModule,
+        NgbModalModule
     ]
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -21,6 +21,7 @@ import * as clone from 'clone';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('content') content;
     modalRef;
     possibilidadeGanho = 0;
     opcoes = this.paramsService.getOpcoes();
@@ -134,30 +135,49 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     submit() {
         this.disabledSubmit();
 
-        if (this.itens.length) {
-            const values = clone(this.form.value);
-            values.itens.map(item => {
-                delete item.jogo;
-            });
+        if (this.isLoggedIn) {
+            if (this.itens.length) {
+                const values = clone(this.form.value);
+                values.itens.map(item => {
+                    delete item.jogo;
+                });
 
-            if (this.isLoggedIn) {
-                this.apostaEsportivaService.create(values)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        result => this.apostaSuccess(result),
-                        error => this.handleError(error)
-                    );
+                if (this.isLoggedIn) {
+                    this.apostaEsportivaService.create(values)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            result => this.apostaSuccess(result),
+                            error => this.handleError(error)
+                        );
+                } else {
+                    this.preApostaService.create(values)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            result => this.preApostaSuccess(result.id),
+                            error => this.handleError(error)
+                        );
+                }
             } else {
-                this.preApostaService.create(values)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        result => this.preApostaSuccess(result.id),
-                        error => this.handleError(error)
-                    );
+                this.enableSubmit();
+                this.messageService.warning('Por favor, inclua um jogo.');
             }
         } else {
             this.enableSubmit();
-            this.messageService.warning('Por favor, inclua um jogo.');
+
+            this.modalRef = this.modalService.open(
+                this.content,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    centered: true
+                }
+            );
+
+            this.modalRef.result
+                .then(
+                    result => {
+                    },
+                    reason => { }
+                );
         }
     }
 
