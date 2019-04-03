@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -29,6 +29,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     displayPreTicker = false;
     disabled = false;
     isLoggedIn;
+    btnText = 'Pré-Aposta';
+    tipoApostaDeslogado = 'cartao';
+    cartaoApostaForm: FormGroup;
     unsub$ = new Subject();
 
     constructor(
@@ -87,6 +90,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             apostador: ['', [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
+        });
+
+        this.cartaoApostaForm = this.fb.group({
+            chave: [null, Validators.required],
+            pin: [null, Validators.compose([
+                Validators.required,
+                Validators.minLength(3),
+            ])]
         });
     }
 
@@ -230,5 +241,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    trocarTipoApostaDeslogado(tipo) {
+        this.tipoApostaDeslogado = tipo;
+        if (tipo === 'preaposta') {
+            this.btnText = 'Pré-Aposta';
+        } else {
+            this.btnText = 'Aposta';
+        }
+    }
+
+    verificarCartaoAposta() {
+
     }
 }

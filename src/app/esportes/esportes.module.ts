@@ -6,11 +6,13 @@ import { BilheteEsportivoComponent } from './bilhete/bilhete-esportivo.component
 import { EsportesFooterComponent } from './footer/esportes-footer.component';
 import { EsportesWrapperComponent } from './wrapper/esportes-wrapper.component';
 import { ApostaEsportivaService, PreApostaEsportivaService } from '../services';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     imports: [
         SharedModule,
-        EsportesRoutingModule
+        EsportesRoutingModule,
+        NgxMaskModule.forRoot(),
     ],
     declarations: [
         BilheteEsportivoComponent,

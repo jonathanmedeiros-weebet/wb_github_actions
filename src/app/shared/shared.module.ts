@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
-import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [],
@@ -16,7 +16,6 @@ import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
         RouterModule,
 
         UtilsModule,
-        NgbTabsetModule,
         NgbModalModule
     ],
     exports: [
@@ -27,7 +26,6 @@ import { NgbModalModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
         LayoutModule,
         UtilsModule,
-        NgbTabsetModule,
         NgbModalModule
     ]
 })
