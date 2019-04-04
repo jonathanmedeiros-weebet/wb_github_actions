@@ -44,16 +44,16 @@
                             <i class="fa fa-list"></i> Resultados
                         </a>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-credit-card"></i> Cartões
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" (click)="abrirModalCadastroCartao()">Cadastro</a>
-                            <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
-                        </div>
-                    </li>
                 </ng-container>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-credit-card"></i> Cartões
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" *ngIf="isLoggedIn" (click)="abrirModalCadastroCartao()">Cadastro</a>
+                        <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
+                    </div>
+                </li>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">
                     <a>
                         <i class="fa fa-cogs"></i> Config

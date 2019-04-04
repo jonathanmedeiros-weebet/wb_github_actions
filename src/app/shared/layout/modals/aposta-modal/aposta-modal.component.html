@@ -8,3 +8,14 @@
     <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="aposta">
     </app-consulta-bilhete-esportivo>
 </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+        Fechar
+    </button>
+    <button type="button" class="btn btn-custom" (click)="printTicket()">
+        Imprimir
+    </button>
+    <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">
+        Compartilhar
+    </button>
+</div>

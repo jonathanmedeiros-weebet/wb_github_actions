@@ -100,16 +100,20 @@
     </div>
 </div>
 
-<ng-template #content let-modal>
-    <div class="modal-body">
-        <div class="text-center" style="margin-bottom: 1rem;">
-            <div class="btn-group">
-                <button class="btn btn-primary" (click)="trocarTipoApostaDeslogado('preaposta')">Pré-Aposta</button>
-                <button class="btn btn-primary" (click)="trocarTipoApostaDeslogado('cartao')">Cartão de Aposta</button>
-            </div>
+<ng-template #apostaDeslogadoModal let-modal>
+    <div class="modal-body" id="aposta-deslogado">
+        <div class="tabs">
+            <button class="btn btn-outline-dark" (click)="trocarTipoApostaDeslogado('preaposta')"
+                [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                Pré-Aposta
+            </button>
+            <button class="btn btn-outline-dark" (click)="trocarTipoApostaDeslogado('cartao')"
+                [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                Cartão de Aposta
+            </button>
         </div>
         <div *ngIf="itens.length > 0">
-            <div *ngFor="let item of itens.value; let i=index" class="">
+            <div *ngFor="let item of itens.value; let i=index" class="aposta-item">
                 <div class="">
                     <div class="horario">
                         {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
@@ -133,18 +137,18 @@
                         </span>
                     </div>
                 </div>
-                <div class="" (click)="removerItem(i)">
+                <div class="remover" (click)="removerItem(i)">
                     <i class="fa fa-times"></i>
                 </div>
             </div>
         </div>
-        <div *ngIf="tipoApostaDeslogado == 'cartao'">
-            <form style="font-size: 1rem;" [formGroup]="cartaoApostaForm" (ngSubmit)="verificarCartaoAposta()">
+        <div class="cartao-form" *ngIf="tipoApostaDeslogado == 'cartao'">
+            <form style="font-size: 1rem;" [formGroup]="cartaoApostaForm">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Chave</label>
                         <input type="text" class="form-control" formControlName="chave"
-                            style="text-transform:uppercase;" mask="AAA-AAA-AAA">
+                            style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
                     </div>
                     <div class="form-group col-md-6">
                         <label>PIN</label>
@@ -156,6 +160,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modalRef.dismiss()">Fechar</button>
-        <button type="button" class="btn btn-outline-dark">Finalizar {{btnText}}</button>
+        <button type="button" class="btn btn-outline-dark" (click)="finalizarApostaDeslogado()">Finalizar
+            {{btnText}}</button>
     </div>
 </ng-template>

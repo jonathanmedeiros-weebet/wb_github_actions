@@ -14,10 +14,9 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
     selector: 'app-cartao-cadastro-modal',
     templateUrl: './cartao-cadastro-modal.component.html'
 })
-export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
     form: FormGroup;
     modalRef;
-    unsub$ = new Subject();
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -31,11 +30,6 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     ngOnInit() {
         this.createForm();
-    }
-
-    ngOnDestroy() {
-        this.unsub$.next();
-        this.unsub$.complete();
     }
 
     createForm() {
@@ -58,7 +52,6 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     submit() {
         this.cartaoService.create(this.form.value)
-            .pipe(takeUntil(this.unsub$))
             .subscribe(
                 result => {
                     this.modalRef = this.modalService.open(CartaoModalComponent, {

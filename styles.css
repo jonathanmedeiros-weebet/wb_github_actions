@@ -384,7 +384,7 @@ button {
 
 /* Override JS Toast*/
 .jq-toast-wrap {
-    z-index: 9001 !important;
+    z-index: 90001 !important;
 }
 
 

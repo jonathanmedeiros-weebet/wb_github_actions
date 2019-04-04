@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, take } from 'rxjs/operators';
 
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
@@ -22,6 +22,7 @@ export class CartaoService {
     create(cartao): Observable<any> {
         return this.http.post(this.CartaoUrl, JSON.stringify(cartao), this.header.getRequestOptions(true))
             .pipe(
+                take(1),
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
@@ -32,6 +33,7 @@ export class CartaoService {
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
+                take(1),
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );

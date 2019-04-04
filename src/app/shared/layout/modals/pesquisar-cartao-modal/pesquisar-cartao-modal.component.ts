@@ -13,12 +13,11 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
     selector: 'app-pesquisar-cartao-modal',
     templateUrl: './pesquisar-cartao-modal.component.html'
 })
-export class PesquisarCartaoModalComponent implements OnInit, OnDestroy {
+export class PesquisarCartaoModalComponent implements OnInit {
     modalRef;
     pesquisarForm: FormGroup = this.fb.group({
         input: ['', Validators.required]
     });
-    unsub$ = new Subject();
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -30,18 +29,11 @@ export class PesquisarCartaoModalComponent implements OnInit, OnDestroy {
 
     ngOnInit() { }
 
-
-    ngOnDestroy() {
-        this.unsub$.next();
-        this.unsub$.complete();
-    }
-
     pesquisarCartao() {
         if (this.pesquisarForm.valid) {
             const input = this.pesquisarForm.value.input;
 
             this.cartaoService.getCartao(input)
-                .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     cartao => {
                         this.modalRef = this.modalService.open(CartaoModalComponent, {
