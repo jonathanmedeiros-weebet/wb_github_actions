@@ -28,6 +28,15 @@ export class CartaoService {
             );
     }
 
+    getCartoes(): Observable<CartaoAposta[]> {
+        return this.http.get(this.CartaoUrl, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getCartao(chave: string): Observable<CartaoAposta> {
         const url = `${this.CartaoUrl}/${chave}`;
 
