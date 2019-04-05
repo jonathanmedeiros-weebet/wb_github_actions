@@ -75,6 +75,14 @@ gulp.task('bet1.wee.bet', function (done) {
     });
 });
 
+gulp.task('betscorrego.com', function (done) {
+    tasks(done, {
+        host: "betscorrego.com",
+        banca: "Bets Corrego",
+        styles: "--header: #000000; --foreground-header: #b1c5e0; --sidebar-right:#000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #292b75; --foreground-odds: #fff;"
+    });
+});
+
 gulp.task('betcash.club', function (done) {
     tasks(done, {
         host: "betcash.club",
