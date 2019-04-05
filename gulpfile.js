@@ -366,3 +366,11 @@ gulp.task('wasports.wee.bet', function (done) {
         old: true
     });
 });
+
+gulp.task('ergol31.wee.bet', function (done) {
+    tasks(done, {
+        host: "ergol31.wee.bet",
+        banca: "ER GOL BET",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
