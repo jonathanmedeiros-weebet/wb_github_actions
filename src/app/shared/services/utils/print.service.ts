@@ -691,12 +691,10 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
     sportsTicketAppMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
 #${aposta.id}
-Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
-Cambista: ${aposta.cambista.nome}
-Apostador: ${aposta.apostador}
-Valor Aposta: ${this.helperService.moneyFormat(aposta.valor)}
-Estimativa Ganho: ${this.helperService.moneyFormat(aposta.premio)}
-Total Jogos: ${aposta.itens.length}`;
+CAMBISTA: ${aposta.cambista.nome}
+APOSTADOR: ${aposta.apostador}
+HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+-------------------------------`;
 
         aposta.itens.forEach(item => {
             ticket += `
@@ -712,7 +710,21 @@ ${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${item.cotacao.toFixed(
 
         ticket += `
 -------------------------------
+-------------------------------
+QUANTIDADE DE JOGOS: ${aposta.itens.length}
+COTAÇÃO: ${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}
+VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
+POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.premio)}
+`;
 
+if (this.opcoes.percentual_premio_cambista > 0) {
+    const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+    ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
+}
+
+        ticket += `
+-------------------------------
+-------------------------------
 ${this.opcoes.informativo_rodape}
         `;
 
