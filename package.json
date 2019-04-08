@@ -48,7 +48,8 @@
     "wasports.wee.bet": "gulp wasports.wee.bet",
     "betscorrego.com": "gulp betscorrego.com",
     "ergol31.wee.bet": "gulp ergol31.wee.bet",
-      "labets365.com": "gulp labets365.com"
+      "labets365.com": "gulp labets365.com",
+      "betsw2.com": "gulp betsw2.com"
   },
   "private": true,
   "dependencies": {
