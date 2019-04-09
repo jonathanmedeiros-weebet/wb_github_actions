@@ -311,6 +311,10 @@ button {
     color: red !important;
 }
 
+.fechar-pre-bilhete i{
+    font-size: 2rem;
+}
+
 .pre-bilhete .botoes .col {
     margin-top: 5px;
     margin-bottom: 5px;
