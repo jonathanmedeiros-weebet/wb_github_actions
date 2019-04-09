@@ -47,4 +47,15 @@ export class CartaoService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    solicitarSaque(dados) {
+        const url = `${this.CartaoUrl}/solicitar-saque`;
+
+        return this.http.post(url, JSON.stringify(dados), this.header.getRequestOptions())
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

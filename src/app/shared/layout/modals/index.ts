@@ -7,4 +7,5 @@ export { LoteriaSuccessModalComponent } from './loteria-success-modal/loteria-su
 export { PesquisaModalComponent } from './pesquisa-modal/pesquisa-modal.component';
 export { PesquisarApostaModalComponent } from './pesquisar-aposta-modal/pesquisar-aposta-modal.component';
 export { PesquisarCartaoModalComponent } from './pesquisar-cartao-modal/pesquisar-cartao-modal.component';
+export { SolicitarSaqueModalComponent } from './solicitar-saque-modal/solicitar-saque-modal.component';
 export { TabelaModalComponent } from './tabela-modal/tabela-modal.component';

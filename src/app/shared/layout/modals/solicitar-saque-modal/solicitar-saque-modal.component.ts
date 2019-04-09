@@ -3,21 +3,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartaoService, MessageService } from './../../../../services';
-import { PinValidation } from '../../../utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
-import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 
 @Component({
-    selector: 'app-cartao-cadastro-modal',
-    templateUrl: './cartao-cadastro-modal.component.html'
+    selector: 'app-solicitar-saque-modal',
+    templateUrl: './solicitar-saque-modal.component.html',
+    styleUrls: ['./solicitar-saque-modal.component.css']
 })
-export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
+export class SolicitarSaqueModalComponent extends BaseFormComponent implements OnInit {
     form: FormGroup;
     modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
-        private modalService: NgbModal,
         private fb: FormBuilder,
         private cartaoService: CartaoService,
         private message: MessageService
@@ -31,32 +29,20 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     createForm() {
         this.form = this.fb.group({
-            apostador: [null, Validators.compose([
-                Validators.required,
-                Validators.minLength(3),
-            ])],
+            chave: [null, Validators.required],
             valor: [null, Validators.required],
             pin: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(3),
-            ])],
-            pin_confirmacao: [null, Validators.compose([
-                Validators.required,
-                Validators.minLength(3),
-            ])],
-        }, { validator: PinValidation.MatchPin });
+            ])]
+        });
     }
 
     submit() {
-        this.cartaoService.create(this.form.value)
+        this.cartaoService.solicitarSaque(this.form.value)
             .subscribe(
                 result => {
-                    this.modalRef = this.modalService.open(CartaoModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true
-                    });
-                    this.modalRef.componentInstance.cartao = result;
-                    this.message.success('Cartão de Aposta cadastrado com sucesso.');
+                    this.message.success('Solicitação de saque realizada com sucesso!');
                     this.activeModal.close();
                 },
                 error => this.handleError(error)
@@ -66,4 +52,5 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
     handleError(error) {
         this.message.error(error);
     }
+
 }

@@ -19,7 +19,7 @@ import {
 } from './../../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent,
-    CartaoCadastroModalComponent, PesquisarCartaoModalComponent
+    CartaoCadastroModalComponent, PesquisarCartaoModalComponent, SolicitarSaqueModalComponent
 } from '../modals';
 import { config } from './../../config';
 
@@ -145,8 +145,6 @@ export class NavigationComponent implements OnInit {
         this.modalRef.result
             .then(
                 result => {
-                    console.log('ihuuu');
-                    console.log(result);
                     this.closeMenu();
                 },
                 reason => { }
@@ -210,6 +208,22 @@ export class NavigationComponent implements OnInit {
     abrirModalAposta() {
         this.modalRef = this.modalService.open(
             PesquisarApostaModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => { },
+                reason => { }
+            );
+    }
+
+    abrirModalSolicitarSaque() {
+        this.modalRef = this.modalService.open(
+            SolicitarSaqueModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true

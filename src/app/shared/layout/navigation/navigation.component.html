@@ -52,6 +52,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" *ngIf="isLoggedIn" (click)="abrirModalCadastroCartao()">Cadastro</a>
                         <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
+                        <a class="dropdown-item" *ngIf="!isLoggedIn" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>
                     </div>
                 </li>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">

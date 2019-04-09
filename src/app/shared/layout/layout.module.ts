@@ -19,7 +19,7 @@ import {
     PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
     ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
     LoteriaSuccessModalComponent, CartaoCadastroModalComponent, CartaoModalComponent,
-    PesquisarCartaoModalComponent
+    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent
 } from './modals';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -59,6 +59,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         CartaoCadastroModalComponent,
         CartaoModalComponent,
         PesquisarCartaoModalComponent,
+        SolicitarSaqueModalComponent,
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -70,7 +71,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         LoteriaSuccessModalComponent,
         CartaoCadastroModalComponent,
         CartaoModalComponent,
-        PesquisarCartaoModalComponent
+        PesquisarCartaoModalComponent,
+        SolicitarSaqueModalComponent
     ],
     exports: [
         MainLayoutComponent,
