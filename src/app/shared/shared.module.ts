@@ -5,15 +5,11 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
     declarations: [],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-        UtilsModule
-    ],
+    imports: [],
     exports: [
         CommonModule,
         FormsModule,
@@ -21,7 +17,8 @@ import { UtilsModule } from './utils/utils.module';
         RouterModule,
 
         LayoutModule,
-        UtilsModule
+        UtilsModule,
+        NgbModalModule
     ]
 })
 export class SharedModule { }
