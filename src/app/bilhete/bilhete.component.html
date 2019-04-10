@@ -1,0 +1,7 @@
+<app-spinner *ngIf="!aposta"></app-spinner>
+<div class="cupom-ativo">
+    <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="aposta && aposta.tipo == 'esportes'">
+    </app-consulta-bilhete-esportivo>
+    <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="aposta && aposta.tipo == 'loteria'">
+    </app-consulta-bilhete-loteria>
+</div>
