@@ -48,8 +48,8 @@
     "wasports.wee.bet": "gulp wasports.wee.bet",
     "betscorrego.com": "gulp betscorrego.com",
     "ergol31.wee.bet": "gulp ergol31.wee.bet",
-      "labets365.com": "gulp labets365.com",
-      "betsw2.com": "gulp betsw2.com"
+    "labets365.com": "gulp labets365.com",
+    "betsw2.com": "gulp betsw2.com"
   },
   "private": true,
   "dependencies": {
@@ -70,6 +70,7 @@
     "flag-icon-css": "^3.2.1",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
+    "html2canvas": "^1.0.0-rc.1",
     "jquery": "^3.3.1",
     "jquery-toast-plugin": "^1.3.2",
     "jstree": "^3.3.7",

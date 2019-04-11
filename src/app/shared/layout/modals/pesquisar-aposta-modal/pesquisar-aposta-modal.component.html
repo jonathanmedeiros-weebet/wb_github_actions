@@ -11,8 +11,8 @@
         </div>
         <button type="submit" class="btn btn-custom">Consultar</button>
     </form>
-    <app-consulta-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
-    </app-consulta-bilhete-esportivo>
-    <app-consulta-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
-    </app-consulta-bilhete-loteria>
+    <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
+    </app-exibir-bilhete-esportivo>
+    <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
+    </app-exibir-bilhete-loteria>
 </div>

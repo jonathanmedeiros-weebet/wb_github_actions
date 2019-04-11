@@ -67,15 +67,6 @@
     font-weight: bold;
 }
 
-.success-msg{
-    font-size: 1.3rem;
-}
-
-.success-msg .codigo{
-    font-size: 2rem;
-    font-weight: bold;
-}
-
 .remover-item{
     position: absolute;
     top: 0;

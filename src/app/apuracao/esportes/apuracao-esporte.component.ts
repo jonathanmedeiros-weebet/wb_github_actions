@@ -160,7 +160,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         this.apostaService.getAposta(aposta.id)
             .subscribe(
                 aposta_localizada => {
-                    this.helperService.sharedSportsTicket(aposta_localizada);
+                    this.helperService.sharedSportsTicket(aposta_localizada.id, '');
                     this.showLoadingIndicator = false;
                 },
                 error => this.handleError(error)

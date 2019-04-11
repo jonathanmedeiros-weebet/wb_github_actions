@@ -129,15 +129,6 @@
     cursor: pointer;
 }
 
-.success-msg{
-    font-size: 1.3rem;
-}
-
-.success-msg .codigo{
-    font-size: 2rem;
-    font-weight: bold;
-}
-
 @media only screen and (max-width: 668px) {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;

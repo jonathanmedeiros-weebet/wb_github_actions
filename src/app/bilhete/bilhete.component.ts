@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ApostaEsportivaService } from './../services';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ApostaEsportivaService } from './../services';
 
 @Component({
     selector: 'app-bilhete',
@@ -19,8 +19,7 @@ export class BilheteComponent implements OnInit, OnDestroy {
         private apostaEsportivaService: ApostaEsportivaService
     ) { }
 
-    ngOnInit(
-    ) {
+    ngOnInit() {
         this.route.params
             .subscribe((params: any) => {
                 if (params['id']) {

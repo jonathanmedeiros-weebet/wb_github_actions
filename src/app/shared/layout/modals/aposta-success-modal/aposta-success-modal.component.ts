@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { AuthService, PrintService, HelperService } from './../../../../services';
 
 @Component({
@@ -9,8 +10,10 @@ import { AuthService, PrintService, HelperService } from './../../../../services
     styleUrls: ['./aposta-success-modal.component.css']
 })
 export class ApostaSuccessModalComponent implements OnInit {
+    @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
     @Input() codigo;
+    title = '';
     appMobile;
     isLoggedIn;
 
@@ -24,6 +27,12 @@ export class ApostaSuccessModalComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
+
+        if (this.isLoggedIn) {
+            this.title = 'Aposta Realizada';
+        } else {
+            this.title = 'Atenção';
+        }
     }
 
     printTicket() {
@@ -36,7 +45,7 @@ export class ApostaSuccessModalComponent implements OnInit {
 
     shareTicket() {
         if (this.aposta.tipo === 'esportes') {
-            this.helperService.sharedSportsTicket(this.aposta);
+            this.bilheteEsportivoComponent.shared();
         } else {
             this.helperService.sharedLotteryTicket(this.aposta);
         }
