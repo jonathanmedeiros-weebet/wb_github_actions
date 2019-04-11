@@ -20,6 +20,7 @@ import {
     ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
     LoteriaSuccessModalComponent
 } from './modals';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ReactiveFormsModule,
         RouterModule,
         UtilsModule,
-        AngularSvgIconModule
+        AngularSvgIconModule,
+        NgbModalModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -68,8 +70,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ErrorMsgComponent,
         ConsultaBilheteEsportivoComponent,
         ConsultaBilheteLoteriaComponent,
-        SpinnerComponent,
-        PesquisaModalComponent
+        SpinnerComponent
     ],
     providers: [ApostaEsportivaService]
 })
