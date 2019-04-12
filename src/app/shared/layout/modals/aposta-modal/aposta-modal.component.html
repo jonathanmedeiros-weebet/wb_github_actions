@@ -1,8 +1,22 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    <div class="action-buttons">
+        <button *ngIf="isLoggedIn" type="button" (click)="printTicket()">
+            <i class="fa fa-print"></i>
+        </button>
+        <button type="button" (click)="cancel()" title="CANCELAR APOSTA">
+            <i class="fa fa-trash-o"></i>
+        </button>
+        <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
+            <i class="fa fa-money"></i>
+        </button>
+        <button *ngIf="isLoggedIn && appMobile" type="button" class="" (click)="shareTicket()">
+            <i class="fa fa-share-alt"></i>
+        </button>
+        <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>
 <div class="modal-body cupom-ativo">
     <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="aposta">

@@ -10,8 +10,9 @@
 }
 
 .table tr td{
-    padding: 1px 3px;
-    vertical-align: middle;
+    cursor: pointer;
+    /* padding: 1px 3px;
+    vertical-align: middle; */
 }
 .table tr th{
     padding-left: 3px;
