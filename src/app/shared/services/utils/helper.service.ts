@@ -222,7 +222,7 @@ export class HelperService {
         parent.postMessage(
             {
                 file: file,
-                data: `${config}/aposta/${aposta.chave}`,
+                data: `${config.HOST}/aposta/${aposta.chave}`,
                 action: 'shareURL'
             },
             'file://'
