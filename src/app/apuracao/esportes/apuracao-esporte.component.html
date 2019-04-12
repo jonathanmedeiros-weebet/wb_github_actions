@@ -51,6 +51,7 @@
                             <th class="text-right">Prêmio</th>
                             <th>Resultado</th>
                             <th>Pagamento</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +67,14 @@
                                 <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
                                 <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
                                 <td>{{aposta.pago ? 'PAGO' : ''}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info" title="VISUALIZAR"
+                                            (click)="openModal(aposta)">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         </ng-container>
                         <tr class="tr-footer">
