@@ -39,25 +39,24 @@
             <div appPerfectScroll>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-                <table *ngIf="!showLoadingIndicator" class="table table-bordered">
+                <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>Número</th>
+                            <th class="text-right">Número</th>
                             <th>Horário</th>
                             <th>Apostador</th>
-                            <th>Jogos</th>
-                            <th>Valor</th>
-                            <th>Comissão</th>
-                            <th>Prêmio</th>
+                            <th class="text-right">Jogos</th>
+                            <th class="text-right">Valor</th>
+                            <th class="text-right">Comissão</th>
+                            <th class="text-right">Prêmio</th>
                             <th>Resultado</th>
                             <th>Pagamento</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
-                            <tr
-                                class="{{ aposta.resultado == 'ganhou' ? 'ganhador' : '' }} {{ aposta.resultado == 'perdeu' ? 'perdedor' : ''}}">
+                            <tr (click)="openModal(aposta)"
+                                class="text-right {{ aposta.resultado == 'ganhou' ? 'ganhador' : '' }} {{ aposta.resultado == 'perdeu' ? 'perdedor' : ''}}">
                                 <td>#{{aposta.id}}</td>
                                 <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td>{{aposta.apostador}}</td>
@@ -67,34 +66,6 @@
                                 <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
                                 <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
                                 <td>{{aposta.pago ? 'PAGO' : ''}}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info" title="VISUALIZAR"
-                                                (click)="openModal(aposta)">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                            <button type="button" (click)="printTicket(aposta)" title="IMPRIMIR"
-                                                class="btn btn-custom">
-                                                <i class="fa fa-print"></i>
-                                            </button>
-                                            <button type="button"
-                                                *ngIf="aposta.resultado && aposta.resultado == 'ganhou'"
-                                                (click)="setPagamento(aposta)" title="PAGAMENTO DA APOSTA"
-                                                class="btn btn-warning">
-                                                <i class="fa fa-money"></i>
-                                            </button>
-                                            <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)"
-                                                title="COMPARTILHAR" class="btn btn-info">
-                                                <i class="fa fa-share-alt"></i>
-                                            </button>
-                                            <button type="button" title="CANCELAR" class="btn btn-danger"
-                                                (click)="cancel(aposta)">
-                                                <i class="fa fa-trash-o"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                         </ng-container>
                         <tr class="tr-footer">

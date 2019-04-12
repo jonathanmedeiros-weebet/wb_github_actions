@@ -20,7 +20,6 @@ export class ApostaSuccessModalComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private auth: AuthService,
-        private printService: PrintService,
         private helperService: HelperService
     ) { }
 
@@ -36,11 +35,7 @@ export class ApostaSuccessModalComponent implements OnInit {
     }
 
     printTicket() {
-        if (this.aposta.tipo === 'esportes') {
-            this.printService.sportsTicket(this.aposta);
-        } else {
-            this.printService.lotteryTicket(this.aposta);
-        }
+        this.bilheteEsportivoComponent.print();
     }
 
     shareTicket() {

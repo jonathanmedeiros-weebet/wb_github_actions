@@ -1,12 +1,11 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
     <div class="action-buttons">
-        <!-- <button *ngIf="isLoggedIn && appMobile" type="button" class="" (click)="shareTicket()"> -->
-        <button type="button" class="" (click)="shareTicket()">
-            <i class="fa fa-share-alt"></i>
-        </button>
         <button *ngIf="isLoggedIn" type="button" class="" (click)="printTicket()">
             <i class="fa fa-print"></i>
+        </button>
+        <button *ngIf="isLoggedIn && appMobile" type="button" class="" (click)="shareTicket()">
+            <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
