@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var replace = require('gulp-replace');
 var exec = require('gulp-exec');
+var remoteSrc = require('gulp-remote-src');
 
 function tasks(done, config) {
     if(config.old) {
@@ -36,6 +37,11 @@ function tasks(done, config) {
         gulp.src(['styles.css'])
             .pipe(replace('[CUSTOM]', config.styles))
             .pipe(gulp.dest('src/'));
+
+        remoteSrc(['logo_banca.png'], {
+            base: 'http://central.' + config.host + '/tema/'})
+            .pipe(gulp.dest('src/assets/images/'));
+
     }
 
     var options = {
