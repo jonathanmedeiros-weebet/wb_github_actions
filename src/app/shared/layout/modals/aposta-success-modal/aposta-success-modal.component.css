@@ -13,3 +13,12 @@
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
 }
+
+.preApostaMsg{
+    font-size: 1.5rem;
+}
+
+.preApostaMsg .codigo{
+    font-size: 2rem;
+    font-weight: bold;
+}

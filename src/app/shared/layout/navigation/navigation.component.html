@@ -45,16 +45,6 @@
                         </a>
                     </li>
                 </ng-container>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-credit-card"></i> Cartões
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" *ngIf="isLoggedIn" (click)="abrirModalCadastroCartao()">Cadastro</a>
-                        <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
-                        <a class="dropdown-item" *ngIf="!isLoggedIn" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>
-                    </div>
-                </li>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">
                     <a>
                         <i class="fa fa-cogs"></i> Config
@@ -74,6 +64,16 @@
                     <a (click)="refresh()">
                         <i class="fa fa-refresh"></i> Atualizar
                     </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-credit-card"></i> Cartões
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" *ngIf="isLoggedIn" (click)="abrirModalCadastroCartao()">Cadastro</a>
+                        <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
+                        <a class="dropdown-item" *ngIf="!isLoggedIn" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>
+                    </div>
                 </li>
             </ul>
         </div>

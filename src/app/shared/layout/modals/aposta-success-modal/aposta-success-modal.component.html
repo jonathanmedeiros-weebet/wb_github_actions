@@ -17,12 +17,11 @@
         <app-exibir-bilhete-esportivo [aposta]="aposta"></app-exibir-bilhete-esportivo>
     </div>
     <ng-template #preApostaMsg>
-        <div>
+        <div class="preApostaMsg">
             Para validar sua aposta, procure um cambista de sua
-            preferência e informe o código: <span class="codigo">#{{codigo}}</span>
+            preferência e informe o código: <span class="codigo">{{codigo}}</span>
         </div>
     </ng-template>
-
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">

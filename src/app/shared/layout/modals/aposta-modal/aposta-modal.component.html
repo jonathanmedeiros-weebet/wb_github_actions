@@ -1,10 +1,10 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
     <div class="action-buttons">
-        <button *ngIf="isLoggedIn" type="button" (click)="printTicket()">
+        <button type="button" (click)="printTicket()">
             <i class="fa fa-print"></i>
         </button>
-        <button type="button" (click)="cancel()" title="CANCELAR APOSTA">
+        <button type="button" *ngIf="isLoggedIn && showCancel" (click)="cancel()" title="CANCELAR APOSTA">
             <i class="fa fa-trash-o"></i>
         </button>
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
@@ -21,15 +21,4 @@
 <div class="modal-body cupom-ativo">
     <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="aposta">
     </app-exibir-bilhete-esportivo>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
-        Fechar
-    </button>
-    <button type="button" class="btn btn-custom" (click)="printTicket()">
-        Imprimir
-    </button>
-    <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">
-        Compartilhar
-    </button>
 </div>

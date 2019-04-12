@@ -6,13 +6,14 @@ import { AuthService, PrintService, HelperService } from './../../../../services
 
 @Component({
     selector: 'app-aposta-success-modal',
-    templateUrl: './aposta-success-modal.component.html'
+    templateUrl: './aposta-success-modal.component.html',
+    styleUrls: ['./aposta-success-modal.component.css']
 })
 export class ApostaSuccessModalComponent implements OnInit {
     @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
     @Input() codigo;
-    title = '';
+    title;
     appMobile;
     isLoggedIn;
 

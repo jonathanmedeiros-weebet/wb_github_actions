@@ -12,9 +12,9 @@ import { HelperService, AuthService } from '../../../../services';
 export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
+    @Input() showCancel = false;
     appMobile;
     isLoggedIn;
-    modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
