@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "baraosports.wee.bet": "gulp baraosports.wee.bet",
-    "bestgol.wee.bet": "gulp bestgol.wee.bet",
+    "betsgol.wee.bet": "gulp betsgol.wee.bet",
     "bet1.wee.bet": "gulp bet1.wee.bet",
     "betcash.club": "gulp betcash.club",
     "betgyn.com": "gulp betgyn.com",
