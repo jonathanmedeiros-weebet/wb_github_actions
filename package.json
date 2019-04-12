@@ -50,7 +50,9 @@
     "ergol31.wee.bet": "gulp ergol31.wee.bet",
       "labets365.com": "gulp labets365.com",
       "betsw2.com": "gulp betsw2.com",
-      "ourobets.wee.bet": "gulp ourobets.wee.bet"
+      "ourobets.wee.bet": "gulp ourobets.wee.bet",
+      "sumobet365.wee.bet": "gulp sumobet365.wee.bet",
+      "sportebets.com.br": "gulp sportebets.com.br"
   },
   "private": true,
   "dependencies": {

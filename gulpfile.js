@@ -406,3 +406,20 @@ gulp.task('ourobets.wee.bet', function (done) {
         styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
     });
 });
+
+gulp.task('sumobet365.wee.bet', function (done) {
+    tasks(done, {
+        host: "sumobet365.wee.bet",
+        banca: "Sumo Bet 365",
+        styles: "--header: #00ab4f; --foreground-header: #b1c5e0; --sidebar-right:#00ab4f; --foreground-sidebar-right: #fff; --sidebar-left: #00ab4f; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #73c48c; --foreground-odds: #fff;"
+    });
+});
+
+
+gulp.task('sportebets.com.br', function (done) {
+    tasks(done, {
+        host: "sportebets.com.br",
+        banca: "Sporte Bets",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
+    });
+});
