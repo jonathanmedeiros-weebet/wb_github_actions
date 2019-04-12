@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
+import { ExibirBilheteEsportivoComponent } from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, PrintService, HelperService } from './../../../../services';
+import { HelperService, AuthService } from '../../../../services';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -9,33 +10,44 @@ import { AuthService, PrintService, HelperService } from './../../../../services
     styleUrls: ['./aposta-modal.component.css']
 })
 export class ApostaModalComponent implements OnInit {
+    @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
     appMobile;
+    isLoggedIn;
+    modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
-        private auth: AuthService,
-        private printService: PrintService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private auth: AuthService
     ) { }
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.isLoggedIn = this.auth.isLoggedIn();
     }
 
     printTicket() {
-        if (this.aposta.tipo === 'esportes') {
-            this.printService.sportsTicket(this.aposta);
-        } else {
-            this.printService.lotteryTicket(this.aposta);
-        }
+        this.bilheteEsportivoComponent.print();
     }
 
     shareTicket() {
         if (this.aposta.tipo === 'esportes') {
-            this.helperService.sharedSportsTicket(this.aposta);
+            this.bilheteEsportivoComponent.shared();
         } else {
             this.helperService.sharedLotteryTicket(this.aposta);
         }
+    }
+
+    cancel() {
+        this.activeModal.close('cancel');
+    }
+
+    setPagamento() {
+        this.activeModal.close('pagamento');
+    }
+
+    pagamentoPermitido() {
+        return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago;
     }
 }

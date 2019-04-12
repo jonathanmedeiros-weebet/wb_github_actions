@@ -9,15 +9,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-
-        UtilsModule,
-        NgbModalModule
-    ],
+    imports: [],
     exports: [
         CommonModule,
         FormsModule,

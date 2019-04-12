@@ -1,0 +1,118 @@
+#cupom{
+    width: 19.27em;
+    padding: 1em;
+    background: #f3f5d3;
+    margin: 2em auto;
+    font-size: 12px;
+}
+
+#cupom img{
+    max-height: 90px;
+    max-width: 150px;
+}
+
+#cupom .ganhou{
+    color:green
+}
+
+#cupom .perdeu{
+    color:red
+}
+
+#cupom .cancelado{
+    text-decoration: line-through
+}
+
+#cupom .jogo-resultado{
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+.margin-top-15{
+    margin-top: 15px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px dashed black;
+}
+
+.numero{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top:15px;
+}
+
+.informacoes p{
+    margin: 1px;
+    font-size: 12px;
+}
+
+.item .campeonato{
+    text-align: center;
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.item .horario{
+    margin: 1px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.item .jogo{
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.item .nome{
+    margin: 1px;
+}
+
+.item .cotacao{
+    margin: 1px;
+    font-size: 12px;
+}
+
+.valores .total-jogos, .valores .aposta, .valores .ganho, .valores .cambista-paga{
+    text-align: left;
+    margin: 3px 1px 1px 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.rodape{
+    margin: 5px 1px 1px 1px;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+}

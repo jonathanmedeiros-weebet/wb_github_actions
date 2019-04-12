@@ -26,18 +26,10 @@ export class LoteriaSuccessModalComponent implements OnInit {
     }
 
     printTicket() {
-        if (this.aposta.tipo === 'esportes') {
-            this.printService.sportsTicket(this.aposta);
-        } else {
-            this.printService.lotteryTicket(this.aposta);
-        }
+        this.printService.lotteryTicket(this.aposta);
     }
 
     shareTicket() {
-        if (this.aposta.tipo === 'esportes') {
-            this.helperService.sharedSportsTicket(this.aposta);
-        } else {
-            this.helperService.sharedLotteryTicket(this.aposta);
-        }
+        this.helperService.sharedLotteryTicket(this.aposta);
     }
 }

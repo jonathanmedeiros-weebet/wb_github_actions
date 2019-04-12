@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
@@ -59,6 +59,7 @@ export class ApostaEsportivaService {
 
         return this.http.delete(url, this.header.getRequestOptions(true))
             .pipe(
+                take(1),
                 catchError(this.errorService.handleError)
             );
     }

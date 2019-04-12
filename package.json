@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "baraosports.wee.bet": "gulp baraosports.wee.bet",
-    "bestgol.wee.bet": "gulp bestgol.wee.bet",
+    "betsgol.wee.bet": "gulp betsgol.wee.bet",
     "bet1.wee.bet": "gulp bet1.wee.bet",
     "betcash.club": "gulp betcash.club",
     "betgyn.com": "gulp betgyn.com",
@@ -45,7 +45,14 @@
     "superbetsport.com": "gulp superbetsport.com",
     "trevodasorte.me": "gulp trevodasorte.me",
     "starbet.bet": "gulp starbet.bet",
-    "wasports.wee.bet": "gulp wasports.wee.bet"
+    "wasports.wee.bet": "gulp wasports.wee.bet",
+    "betscorrego.com": "gulp betscorrego.com",
+    "ergol31.wee.bet": "gulp ergol31.wee.bet",
+      "labets365.com": "gulp labets365.com",
+      "betsw2.com": "gulp betsw2.com",
+      "ourobets.wee.bet": "gulp ourobets.wee.bet",
+      "sumobet365.wee.bet": "gulp sumobet365.wee.bet",
+      "sportebets.com.br": "gulp sportebets.com.br"
   },
   "private": true,
   "dependencies": {
@@ -66,6 +73,7 @@
     "flag-icon-css": "^3.2.1",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
+    "html2canvas": "^1.0.0-rc.1",
     "jquery": "^3.3.1",
     "jquery-toast-plugin": "^1.3.2",
     "jstree": "^3.3.7",

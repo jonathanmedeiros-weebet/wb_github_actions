@@ -9,16 +9,10 @@
     border: none;
 }
 
-.cupom-ativo{
-    font-family: "Lucida Console", Monaco, monospace;
-    font-size: 15px;
-    background: #333;
-    margin: 0;
-}
-
 .table tr td{
-    padding: 1px 3px;
-    vertical-align: middle;
+    cursor: pointer;
+    /* padding: 1px 3px;
+    vertical-align: middle; */
 }
 .table tr th{
     padding-left: 3px;

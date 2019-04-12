@@ -311,6 +311,10 @@ button {
     color: red !important;
 }
 
+.fechar-pre-bilhete i{
+    font-size: 2rem;
+}
+
 .pre-bilhete .botoes .col {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -450,6 +454,13 @@ button {
 .flag-icon {
     background-image: url(assets/images/ww.svg);
     background-color: var(--highlight);
+}
+
+.cupom-ativo{
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 15px;
+    background: #333;
+    margin: 0;
 }
 
 /* Large devices (desktops, 992px and up) */

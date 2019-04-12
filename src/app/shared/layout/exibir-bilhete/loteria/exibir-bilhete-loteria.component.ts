@@ -6,12 +6,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-consulta-bilhete-loteria',
-    templateUrl: 'consulta-bilhete-loteria.component.html',
-    styleUrls: ['consulta-bilhete-loteria.component.css']
+    selector: 'app-exibir-bilhete-loteria',
+    templateUrl: 'exibir-bilhete-loteria.component.html',
+    styleUrls: ['exibir-bilhete-loteria.component.css']
 })
 
-export class ConsultaBilheteLoteriaComponent implements OnInit, OnDestroy {
+export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     @Input() aposta: any;
     LOGO;
     informativoRodape;

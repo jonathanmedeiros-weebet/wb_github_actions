@@ -6,7 +6,7 @@
 }
 #cupom img{
     max-height: 80px;
-    max-width: 190;
+    max-width: 100%;
 }
 #cupom h1{
     text-align: center;

@@ -43,10 +43,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     constructor(
         private apostaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private printService: PrintService,
         private auth: AuthService,
         private fb: FormBuilder,
-        private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal
     ) {
@@ -139,36 +137,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         this.messageService.error(msg);
     }
 
-    printTicket(aposta: ApostaEsportiva) {
-        this.showLoadingIndicator = true;
-
-        this.apostaService.getAposta(aposta.id)
-            .subscribe(
-                aposta_localizada => {
-                    this.printService.sportsTicket(aposta_localizada);
-
-                    this.showLoadingIndicator = false;
-                    this.cd.detectChanges();
-                },
-                error => this.handleError(error)
-            );
-    }
-
-    sharedTicket(aposta) {
-        this.showLoadingIndicator = true;
-
-        this.apostaService.getAposta(aposta.id)
-            .subscribe(
-                aposta_localizada => {
-                    this.helperService.sharedSportsTicket(aposta_localizada);
-                    this.showLoadingIndicator = false;
-                },
-                error => this.handleError(error)
-            );
-    }
-
     openModal(aposta) {
-
         this.showLoadingIndicator = true;
 
         this.apostaService.getAposta(aposta.id)
@@ -178,8 +147,22 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
                     });
-
                     this.modalRef.componentInstance.aposta = aposta_localizada;
+                    this.modalRef.result.then(
+                        (result) => {
+                            switch (result) {
+                                case 'cancel':
+                                    this.cancel(aposta);
+                                    break;
+                                case 'pagamento':
+                                    this.setPagamento(aposta);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        },
+                        (reason) => { }
+                    );
 
                     this.showLoadingIndicator = false;
                     this.cd.detectChanges();
@@ -203,42 +186,21 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         );
     }
 
-    /*checkCancellation(items) {
-        let result = true;
-
-        if (items) {
-            for (let index = 0; index < items.length; index++) {
-                const item = items[index];
-
-                if (moment(item.jogo.horario).isBefore()) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-
-        return result;
-    }*/
-
     setPagamento(aposta) {
         this.apostaService.setPagamento(aposta.id)
             .subscribe(
                 result => {
                     aposta.pago = result.pago;
-                    let msg = '';
+                    this.cd.detectChanges();
+
                     if (result.pago) {
-                        msg = 'PAGAMENTO REGISTRADO COM SUCESSO!';
+                        this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
                     } else {
-                        msg = 'PAGAMENTO CANCELADO!';
+                        this.messageService.success('PAGAMENTO CANCELADO!');
                     }
-                    this.messageService.success(msg);
                 },
                 error => this.handleError(error)
             );
-    }
-
-    pagamentoPermitido(aposta) {
-        return aposta.resultado && aposta.resultado === 'ganhou' && !aposta.pago;
     }
 
     trackById(index: number, aposta: any): string {

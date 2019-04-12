@@ -10,8 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
-import { ConsultaBilheteEsportivoComponent } from './consulta-bilhete/esportes/consulta-bilhete-esportivo.component';
-import { ConsultaBilheteLoteriaComponent } from './consulta-bilhete/loteria/consulta-bilhete-loteria.component';
+import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService, CartaoService } from '../../services';
@@ -21,7 +21,6 @@ import {
     LoteriaSuccessModalComponent, CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent
 } from './modals';
-
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,8 +45,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         FooterComponent,
         NavigationComponent,
         ErrorMsgComponent,
-        ConsultaBilheteEsportivoComponent,
-        ConsultaBilheteLoteriaComponent,
+        ExibirBilheteEsportivoComponent,
+        ExibirBilheteLoteriaComponent,
         SpinnerComponent,
         PesquisaModalComponent,
         TabelaModalComponent,
@@ -81,8 +80,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         FooterComponent,
         NavigationComponent,
         ErrorMsgComponent,
-        ConsultaBilheteEsportivoComponent,
-        ConsultaBilheteLoteriaComponent,
+        ExibirBilheteEsportivoComponent,
+        ExibirBilheteLoteriaComponent,
         SpinnerComponent
     ],
     providers: [

@@ -108,7 +108,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 queryParams.data = moment().format('YYYY-MM-DD');
                             } else {
                                 queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
-                                queryParams.data = dataLimiteTabela;
+                                queryParams.data_final = dataLimiteTabela;
                             }
                         }
                     }
