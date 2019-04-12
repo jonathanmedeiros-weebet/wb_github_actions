@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard, LoteriaGuard, ParametrosResolver } from './services';
+import { AuthGuard, LoteriaGuard } from './services';
+import { BilheteComponent } from './bilhete/bilhete.component';
 
 const appRoutes: Routes = [
     {
@@ -55,6 +56,10 @@ const appRoutes: Routes = [
         path: 'auth',
         component: AuthLayoutComponent,
         loadChildren: 'app/auth/auth.module#AuthModule'
+    },
+    {
+        path: 'bilhete/:id',
+        component: BilheteComponent
     }
 ];
 
