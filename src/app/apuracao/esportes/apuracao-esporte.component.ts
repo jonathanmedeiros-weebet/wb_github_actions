@@ -148,6 +148,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                         centered: true
                     });
                     this.modalRef.componentInstance.aposta = aposta_localizada;
+                    this.modalRef.componentInstance.showCancel = true;
                     this.modalRef.result.then(
                         (result) => {
                             switch (result) {
