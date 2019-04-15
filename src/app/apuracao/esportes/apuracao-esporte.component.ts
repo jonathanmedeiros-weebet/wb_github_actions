@@ -178,7 +178,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                 this.apostaService.cancel(aposta.id)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        () => this.getApostas(),
+                        () => this.getApostas(this.form.value),
                         error => this.handleError(error)
                     );
             },
