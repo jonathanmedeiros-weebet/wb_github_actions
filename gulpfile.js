@@ -255,7 +255,6 @@ gulp.task('maisportes.com', function (done) {
         host: "maisportes.com",
         banca: "Maisportes",
         styles: "--header: #011e46; --foreground-header: #b1c5e0; --sidebar-right:#ce0000; --foreground-sidebar-right: #fff; --sidebar-left: #ce0000; --foreground-sidebar-left: #fff; --highlight:#4CAF50; --foreground-highlight: #aec3d8; --odds: #011e46; --foreground-odds: #fff;",
-        old: true
     });
 });
 
