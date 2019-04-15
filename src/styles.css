@@ -1,11 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+    --header: #002458;
+    --foreground-header: #b1c5e0;
+
+    --sidebar-right:#011e46;
+    --foreground-sidebar-right: #fff;
+
+    --sidebar-left: #011e46;
+    --foreground-sidebar-left: #fff;
+
+    --highlight: yellow;
+    --foreground-highlight: #aec3d8;
+
+    --odds: #046eef;
+    --foreground-odds: #fff;
     --foreground-selected-odds: #000;
+
     --league: #e1e2e4;
     --foreground-league: #455a64;
+
     --selected-event: #002458;
     --foreground-selected-event: #fff;
-    --header: #002458; --foreground-header: #b1c5e0; --sidebar-right:#011e46; --foreground-sidebar-right: #fff; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;
+
+    --event-time: #011e46;
+    --fg-event-time: #fff;
 }
 
 html {
@@ -409,6 +427,14 @@ button {
 
 .modal {
     z-index: 9002;
+}
+
+.indentificacao .horario{
+    background-color: var(--event-time);
+    color: var(--fg-event-time);
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 15px;
 }
 
 /* ODDS FUTEBOL */
