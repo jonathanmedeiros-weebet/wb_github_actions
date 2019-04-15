@@ -431,11 +431,14 @@ button {
 }
 
 .indentificacao .horario{
-    background-color: var(--event-time);
-    color: var(--fg-event-time);
     border-radius: 5px;
     padding: 0 5px;
     margin-right: 15px;
+}
+
+.content-sports-scroll .indentificacao .horario{
+    background-color: var(--event-time);
+    color: var(--fg-event-time);
 }
 
 /* ODDS FUTEBOL */
