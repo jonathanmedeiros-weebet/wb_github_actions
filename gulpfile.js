@@ -19,6 +19,7 @@ function tasks(done, config) {
 
         gulp.src(['styles.css'])
             .pipe(replace('[CUSTOM]', config.styles))
+            .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
             .pipe(gulp.dest('src/'));
     }
     else{
@@ -36,6 +37,7 @@ function tasks(done, config) {
 
         gulp.src(['styles.css'])
             .pipe(replace('[CUSTOM]', config.styles))
+            .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
             .pipe(gulp.dest('src/'));
 
         remoteSrc(['logo_banca.png'], {
@@ -404,7 +406,8 @@ gulp.task('labets365.com', function (done) {
     tasks(done, {
         host: "labets365.com",
         banca: "La Bets 365",
-        styles: ""
+        styles: "",
+        aditional_styles: ".sidebar-brand{ margin-top: 0!important; } .sidebar-brand img{ max-width: 100%!important; max-height: none!important; }"
     });
 });
 
