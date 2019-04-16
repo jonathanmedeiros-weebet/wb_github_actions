@@ -446,6 +446,6 @@ gulp.task('jvsports.bet', function (done) {
     tasks(done, {
         host: "jvsports.bet",
         banca: "JV Sports",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #da251c; --odds: #da251c; --foreground-odds: #fff;"
     });
 });
