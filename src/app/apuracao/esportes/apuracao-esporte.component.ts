@@ -11,7 +11,9 @@ import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { CancelApostaModalComponent } from '../../shared/layout/modals';
 import {
-    ApostaEsportivaService, MessageService, AuthService
+    ApostaEsportivaService, MessageService,
+    PrintService, AuthService,
+    HelperService
 } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -147,7 +149,6 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     });
                     this.modalRef.componentInstance.aposta = aposta_localizada;
                     this.modalRef.componentInstance.showCancel = true;
-
                     this.modalRef.result.then(
                         (result) => {
                             switch (result) {
@@ -178,7 +179,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                 this.apostaService.cancel(aposta.id)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        () => this.getApostas(),
+                        () => this.getApostas(this.form.value),
                         error => this.handleError(error)
                     );
             },
