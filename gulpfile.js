@@ -137,7 +137,8 @@ gulp.task('betsports99.net', function (done) {
     tasks(done, {
         host: "betsports99.net",
         banca: "BET SPORTS 99",
-        styles: ""
+        styles: "--header: #a8cf45; --foreground-header: #fff; --sidebar-right:#00a859; --sidebar-left: #00a859; --foreground-highlight: #000; --odds: #a8cf45; --event-time: #000;",
+        aditional_styles: "body{ font-weight:bold; }"
     });
 });
 
