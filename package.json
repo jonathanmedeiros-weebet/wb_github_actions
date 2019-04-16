@@ -52,7 +52,8 @@
     "betsw2.com": "gulp betsw2.com",
     "ourobets.wee.bet": "gulp ourobets.wee.bet",
     "sumobet365.wee.bet": "gulp sumobet365.wee.bet",
-    "sportebets.com.br": "gulp sportebets.com.br"
+    "sportebets.com.br": "gulp sportebets.com.br",
+      "jvsports.bet": "gulp jvsports.bet"
   },
   "private": true,
   "dependencies": {

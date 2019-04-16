@@ -441,3 +441,11 @@ gulp.task('sportebets.com.br', function (done) {
         "--foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #fd7e14;"
     });
 });
+
+gulp.task('jvsports.bet', function (done) {
+    tasks(done, {
+        host: "jvsports.bet",
+        banca: "JV Sports",
+        styles: ""
+    });
+});
