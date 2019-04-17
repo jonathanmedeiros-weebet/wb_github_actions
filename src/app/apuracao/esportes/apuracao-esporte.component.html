@@ -57,8 +57,11 @@
                     <tbody>
                         <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
                             <tr (click)="openModal(aposta)"
-                                class="text-right {{ aposta.resultado == 'ganhou' ? 'ganhador' : '' }} {{ aposta.resultado == 'perdeu' ? 'perdedor' : ''}}">
-                                <td>#{{aposta.id}}</td>
+                                class="{{ aposta.resultado == 'ganhou' ? 'ganhador' : '' }} {{ aposta.resultado == 'perdeu' ? 'perdedor' : ''}}">
+                                <td class="text-right">
+                                    <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
+                                    #{{aposta.id}}
+                                </td>
                                 <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td>{{aposta.apostador}}</td>
                                 <td class="text-right">{{aposta.num_jogos? aposta.num_jogos : aposta.itens.length}}</td>

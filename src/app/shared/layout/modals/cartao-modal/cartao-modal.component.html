@@ -9,33 +9,58 @@
         <h3>Cartão {{cartao.chave}}</h3>
         <div>
             <div>
-                <b>Apostador: </b>
-                <span>{{cartao.apostador}}</span>
+                <div>
+                    <b>Apostador: </b>
+                    <span>{{cartao.apostador}}</span>
+                </div>
+                <div>
+                    <b>Valor inicial: </b>
+                    <span>{{cartao.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                </div>
+                <div>
+                    <b>Bônus: </b>
+                    <span>{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</span>
+                </div>
             </div>
             <div>
-                <b>Cambista: </b>
-                <span>{{cartao.cambista?.nome}}</span>
+                <div>
+                    <b>Cambista: </b>
+                    <span>{{cartao.cambista?.nome}}</span>
+                </div>
+                <div>
+                    <b>Saldo atual: </b>
+                    <span>{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</span>
+                </div>
+                <div>
+                    <b>Criação: </b>
+                    <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
+                </div>
             </div>
         </div>
-        <div>
-            <div>
-                <b>Valor inicial: </b>
-                <span>{{cartao.valor | currency: 'BRL':'symbol':'1.2'}}</span>
-            </div>
-            <div>
-                <b>Saldo atual: </b>
-                <span>{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</span>
-            </div>
-        </div>
-        <div>
-            <div>
-                <b>Bônus: </b>
-                <span>{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</span>
-            </div>
-            <div>
-                <b>Criação: </b>
-                <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
-            </div>
+    </div>
+    <div class="" *ngIf="cartao.apostas.length">
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Horário</th>
+                    <th>Valor</th>
+                    <th>Possível Retorno</th>
+                    <th>Valor Ganho</th>
+                    <th>Resultado</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let aposta of cartao.apostas">
+                        <td>{{aposta.id}}</td>
+                        <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                        <td>{{aposta.valor| currency: 'BRL':'symbol':'1.2'}}</td>
+                        <td>{{aposta.premio| currency: 'BRL':'symbol':'1.2'}}</td>
+                        <td>{{aposta.possibilidade_ganho| currency: 'BRL':'symbol':'1.2'}}</td>
+                        <td>{{aposta.resultado}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

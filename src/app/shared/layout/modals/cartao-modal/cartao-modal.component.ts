@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, PrintService, HelperService } from './../../../../services';
+import { AuthService, PrintService } from './../../../../services';
 import { CartaoAposta } from './../../../../models';
 
 @Component({
@@ -17,7 +17,6 @@ export class CartaoModalComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private auth: AuthService,
         private printService: PrintService,
-        private helperService: HelperService
     ) { }
 
     ngOnInit() {
