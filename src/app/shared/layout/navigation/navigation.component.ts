@@ -276,7 +276,7 @@ export class NavigationComponent implements OnInit {
     exibirJogosAmanha() {
         let result = true;
         if (this.dataLimiteTabela) {
-            result = !moment(this.dataLimiteTabela).isSame(moment(), 'day');
+            result = !moment(this.dataLimiteTabela).isSameOrBefore(moment(), 'day');
         }
         return result;
     }

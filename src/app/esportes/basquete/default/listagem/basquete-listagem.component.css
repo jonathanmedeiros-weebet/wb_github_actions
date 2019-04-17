@@ -34,14 +34,6 @@
     align-items: center;
 }
 
-.indentificacao .horario{
-    background-color: #011e46;
-    color: #fff;
-    border-radius: 5px;
-    padding: 0 5px;
-    margin-right: 15px;
-}
-
 .indentificacao .nome, .indentificacao .nome-mobile{
     flex-grow: 1;
     font-weight: bold;
