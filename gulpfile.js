@@ -466,6 +466,6 @@ gulp.task('moralsports.net', function (done) {
     tasks(done, {
         host: "moralsports.net",
         banca: "Moral Sports",
-        styles: ""
+        styles: "--header: #006cb7; --foreground-header: #fff; --sidebar-right:#11297e; --foreground-sidebar-right: #fff; --sidebar-left: #11297e; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #006cb7; --foreground-odds: #fff;"
     });
 });
