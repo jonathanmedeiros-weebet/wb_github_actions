@@ -461,3 +461,11 @@ gulp.task('foxsport.wee.bet', function (done) {
         styles: "--header: #00ab4f; --foreground-header: #b1c5e0; --sidebar-right:#00ab4f; --foreground-sidebar-right: #fff; --sidebar-left: #00ab4f; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #73c48c; --foreground-odds: #fff;"
     });
 });
+
+gulp.task('moralsports.net', function (done) {
+    tasks(done, {
+        host: "moralsports.net",
+        banca: "Moral Sports",
+        styles: ""
+    });
+});
