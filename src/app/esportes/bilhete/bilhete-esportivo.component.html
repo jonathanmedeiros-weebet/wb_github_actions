@@ -102,12 +102,12 @@
 
 <ng-template #apostaDeslogadoModal let-modal>
     <div class="modal-body" id="aposta-deslogado">
-        <div class="tabs">
-            <button class="btn btn-outline-dark" (click)="trocarTipoApostaDeslogado('preaposta')"
+        <div style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
+            <button class="btn" (click)="trocarTipoApostaDeslogado('preaposta')"
                 [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
                 Pré-Aposta
             </button>
-            <button class="btn btn-outline-dark" (click)="trocarTipoApostaDeslogado('cartao')"
+            <button class="btn" (click)="trocarTipoApostaDeslogado('cartao')"
                 [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
                 Cartão de Aposta
             </button>
@@ -159,8 +159,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modalRef.dismiss()">Fechar</button>
-        <button type="button" class="btn btn-outline-dark" (click)="finalizarApostaDeslogado()">Finalizar
+        <button type="button" style="background: #e2e2e2;" class="btn" (click)="modalRef.dismiss()">Fechar</button>
+        <button type="button" class="btn btn-custom" (click)="finalizarApostaDeslogado()">Finalizar
             {{btnText}}</button>
     </div>
 </ng-template>

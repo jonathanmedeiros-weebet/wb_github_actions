@@ -141,8 +141,8 @@
 }
 
 #aposta-deslogado .active {
-    background: var(--highlight);
-    color: var(--foreground-highlight);
+    background: var(--odds);
+    color: var(--foreground-odds);
 }
 
 #aposta-deslogado .aposta-item {
@@ -156,11 +156,13 @@
 
 #aposta-deslogado .btn {
     width: 50%;
+    border: 0px;
+    border-radius: 3px 3px 0 0;
 }
 
 #aposta-deslogado .remover {
     color: red;
-    font-size: 15px;
+    font-size: 25px;
     cursor: pointer;
 }
 
