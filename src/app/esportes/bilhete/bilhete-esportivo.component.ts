@@ -166,14 +166,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
                 this.modalRef.result
                     .then(
-                        result => {
-                            console.log('result');
-                            console.log(result);
-                        },
-                        reason => {
-                            console.log('reason');
-                            console.log(reason);
-                        }
+                        result => { },
+                        reason => { }
                     );
             }
         } else {
