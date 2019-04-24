@@ -466,6 +466,15 @@ gulp.task('moralsports.net', function (done) {
     tasks(done, {
         host: "moralsports.net",
         banca: "Moral Sports",
-        styles: "--header: #006cb7; --foreground-header: #fff; --sidebar-right:#11297e; --foreground-sidebar-right: #fff; --sidebar-left: #11297e; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #006cb7; --foreground-odds: #fff;"
+        styles: "--header: #006cb7; --foreground-header: #fff; --sidebar-right:#11297e; --foreground-sidebar-right: #fff; --sidebar-left: #11297e; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #006cb7; --foreground-odds: #fff;",
+        aditional_styles: " .navbar-mobile{ background: #11297e!important } "
+    });
+});
+
+gulp.task('esportbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportbets.wee.bet",
+        banca: "Esport Bets",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #e76942; --foreground-highlight: #05989c; --odds: #006164; --foreground-odds: #fff;"
     });
 });
