@@ -474,8 +474,8 @@ gulp.task('esportbets.wee.bet', function (done) {
     tasks(done, {
         host: "esportbets.wee.bet",
         banca: "Esport Bets",
-        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #333; --foreground-odds: #fff; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
-        aditional_styles: " #futebol-default-wrapper{ background: #333!important } .jogos{ background: #333!important; color: #fff!important } .campeonato-header{ border-bottom-color: #333!important; }"
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; .footer{ background-color:#555!important;  } }"
     });
 });
 
