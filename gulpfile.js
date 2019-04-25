@@ -357,7 +357,6 @@ gulp.task('trevodasorte.me', function (done) {
         host: "trevodasorte.me",
         banca: "Trevo da Sorte",
         styles: "--header: #4caf50; --foreground-header: #cce2ff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #4caf50; --foreground-odds: #fff;",
-        old: true
     });
 });
 
