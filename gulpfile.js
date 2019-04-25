@@ -475,7 +475,7 @@ gulp.task('esportbets.wee.bet', function (done) {
     tasks(done, {
         host: "esportbets.wee.bet",
         banca: "Esport Bets",
-        styles: "--header: #14805e; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #333; --foreground-odds: #fff; --event-time: #14805e;",
-        aditional_styles: " .navbar-mobile{ background: #333!important } "
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #333; --foreground-odds: #fff; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper{ background: #333!important } .jogos{ background: #333!important; color: #fff!important } .campeonato-header{ border-bottom-color: #333!important; }"
     });
 });
