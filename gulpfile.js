@@ -478,3 +478,11 @@ gulp.task('esportbets.wee.bet', function (done) {
         aditional_styles: " #futebol-default-wrapper{ background: #333!important } .jogos{ background: #333!important; color: #fff!important } .campeonato-header{ border-bottom-color: #333!important; }"
     });
 });
+
+gulp.task('falcaosport.wee.bet', function (done) {
+    tasks(done, {
+        host: "falcaosport.wee.bet",
+        banca: "Falcão Sport",
+        styles: ""
+    });
+});
