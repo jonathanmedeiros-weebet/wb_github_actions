@@ -17,7 +17,7 @@ import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService, CartaoService } from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
-    ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
+    ApostaSuccessModalComponent, ConfirmModalComponent, PesquisarApostaModalComponent,
     LoteriaSuccessModalComponent, CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent
 } from './modals';
@@ -52,7 +52,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         TabelaModalComponent,
         ApostaModalComponent,
         ApostaSuccessModalComponent,
-        CancelApostaModalComponent,
+        ConfirmModalComponent,
         PesquisarApostaModalComponent,
         LoteriaSuccessModalComponent,
         CartaoCadastroModalComponent,
@@ -66,7 +66,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         TabelaModalComponent,
         ApostaModalComponent,
         ApostaSuccessModalComponent,
-        CancelApostaModalComponent,
+        ConfirmModalComponent,
         LoteriaSuccessModalComponent,
         CartaoCadastroModalComponent,
         CartaoModalComponent,

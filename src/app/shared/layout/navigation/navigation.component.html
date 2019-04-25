@@ -70,9 +70,16 @@
                         <i class="fa fa-credit-card"></i> Cartões
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" *ngIf="isLoggedIn" (click)="abrirModalCadastroCartao()">Cadastro</a>
                         <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
-                        <a class="dropdown-item" *ngIf="!isLoggedIn" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>
+                        <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+                            <a class="dropdown-item" (click)="abrirModalCadastroCartao()">Criar</a>
+                            <a class="dropdown-item" [routerLink]="['/cartoes/solicitacoes-saque']">
+                                Solicitações Saque
+                            </a>
+                        </ng-container>
+                        <ng-template #notLoggedIn>
+                            <a class="dropdown-item" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>
+                        </ng-template>
                     </div>
                 </li>
             </ul>

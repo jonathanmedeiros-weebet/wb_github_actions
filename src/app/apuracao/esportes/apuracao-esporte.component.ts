@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { CancelApostaModalComponent } from '../../shared/layout/modals';
+import { ConfirmModalComponent } from '../../shared/layout/modals';
 import {
     ApostaEsportivaService, MessageService,
     PrintService, AuthService,
@@ -173,7 +173,10 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     cancel(aposta) {
-        this.modalRef = this.modalService.open(CancelApostaModalComponent, { centered: true });
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+        this.modalRef.componentInstance.title = 'Cancelar Aposta';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
+
         this.modalRef.result.then(
             (result) => {
                 this.apostaService.cancel(aposta.id)

@@ -1,0 +1,78 @@
+<div id="default-content" appPerfectScroll>
+    <div class="content-header">
+        <h2>Solicitações de Saque</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Aprovado</label>
+                                <select class="form-control" formControlName="aprovado">
+                                    <option value="1">Sim</option>
+                                    <option value="0">Não</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div appPerfectScroll>
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-right">#</th>
+                            <th class="text-right">Cartão</th>
+                            <th class="text-right">Saldo Cartão</th>
+                            <th>Apostador</th>
+                            <th>Data</th>
+                            <th class="text-right">Valor</th>
+                            <th>Aprovado</th>
+                            <th>Pago</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let solicitacao of solicitacoes; trackBy:trackById">
+                            <tr>
+                                <td class="text-right">{{solicitacao.id}}</td>
+                                <td class="text-right">{{solicitacao.cartao_aposta_chave}}</td>
+                                <td class="text-right">
+                                    {{solicitacao.cartao_aposta.saldo | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td>{{solicitacao.cartao_aposta.apostador}}</td>
+                                <td>{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
+                                <td class="text-right">{{solicitacao.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td>{{solicitacao.aprovado ? 'SIM' : 'NÃO'}}</td>
+                                <td>{{solicitacao.pago ? 'PAGO' : ''}}</td>
+                                <td>
+                                    <button *ngIf="solicitacao.aprovado && !solicitacao.pago" type="button"
+                                        class="btn btn-primary" (click)="setPagamento(solicitacao.id)">
+                                        <i class="fa fa-money"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
