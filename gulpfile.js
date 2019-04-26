@@ -357,7 +357,6 @@ gulp.task('trevodasorte.me', function (done) {
         host: "trevodasorte.me",
         banca: "Trevo da Sorte",
         styles: "--header: #4caf50; --foreground-header: #cce2ff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #4caf50; --foreground-odds: #fff;",
-        old: true
     });
 });
 
@@ -464,7 +463,7 @@ gulp.task('foxsport.wee.bet', function (done) {
 
 gulp.task('moralsports.net', function (done) {
     tasks(done, {
-        host: "moralsports.net",
+        host: "moralsports.wee.bet",
         banca: "Moral Sports",
         styles: "--header: #006cb7; --foreground-header: #fff; --sidebar-right:#11297e; --foreground-sidebar-right: #fff; --sidebar-left: #11297e; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #006cb7; --foreground-odds: #fff;",
         aditional_styles: " .navbar-mobile{ background: #11297e!important } "
@@ -475,6 +474,16 @@ gulp.task('esportbets.wee.bet', function (done) {
     tasks(done, {
         host: "esportbets.wee.bet",
         banca: "Esport Bets",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #e76942; --foreground-highlight: #05989c; --odds: #006164; --foreground-odds: #fff;"
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
+        " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+    });
+});
+
+gulp.task('falcaosport.wee.bet', function (done) {
+    tasks(done, {
+        host: "falcaosport.wee.bet",
+        banca: "Falcão Sport",
+        styles: ""
     });
 });
