@@ -29,8 +29,16 @@ export class CartaoService {
             );
     }
 
-    getCartoes(): Observable<CartaoAposta[]> {
-        return this.http.get(this.CartaoUrl, this.header.getRequestOptions(true))
+    getCartoes(queryParams): Observable<CartaoAposta[]> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(this.CartaoUrl, requestOptions)
             .pipe(
                 take(1),
                 map((res: any) => res.results),

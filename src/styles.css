@@ -24,6 +24,7 @@
 
     --event-time: #011e46;
     --fg-event-time: #fff;
+    
 }
 
 html {
@@ -626,3 +627,5 @@ button {
         transform: rotate(360deg);
     }
 }
+
+

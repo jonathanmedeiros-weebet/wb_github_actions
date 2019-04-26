@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { CampeonatoService, MessageService } from './../../services';
@@ -28,8 +28,8 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     }
 
     ngOnInit() {
-        this.getResultados();
         this.createForm();
+        this.getResultados();
     }
 
     ngOnDestroy() {
@@ -39,7 +39,8 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
 
     createForm() {
         this.form = this.fb.group({
-            data: [moment().format('YYYY-MM-DD')]
+            data: [moment().format('YYYY-MM-DD'), Validators.required],
+            sport_id: ['1', Validators.required]
         });
     }
 
@@ -54,13 +55,12 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
 
     getResultados(params?) {
         let queryParams: any = {
-            'data': moment().format('YYYY-MM-DD')
+            'data': moment().format('YYYY-MM-DD'),
+            'sport': 1
         };
 
         if (params) {
-            queryParams = {
-                'data': params.data
-            };
+            queryParams = params;
         }
 
         this.campeonatoService.getResultados(queryParams)

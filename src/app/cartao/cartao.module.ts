@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CartaoRoutingModule } from './cartao-routing.module';
 import { SolicitacoesSaqueComponent } from './solicitacoes-saque/solicitacoes-saque.component';
 import { SharedModule } from '../shared/shared.module';
+import { CartaoListagemComponent } from './cartao-listagem/cartao-listagem.component';
 
 @NgModule({
     imports: [
@@ -11,7 +12,8 @@ import { SharedModule } from '../shared/shared.module';
         SharedModule
     ],
     declarations: [
-        SolicitacoesSaqueComponent
+        SolicitacoesSaqueComponent,
+        CartaoListagemComponent
     ],
 })
 export class CartaoModule { }
