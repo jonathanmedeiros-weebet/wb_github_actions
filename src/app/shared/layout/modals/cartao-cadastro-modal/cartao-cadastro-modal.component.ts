@@ -33,16 +33,18 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
         this.form = this.fb.group({
             apostador: [null, Validators.compose([
                 Validators.required,
-                Validators.minLength(3),
+                Validators.minLength(3)
             ])],
             valor: [null, Validators.required],
             pin: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(3),
+                Validators.maxLength(6)
             ])],
             pin_confirmacao: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(3),
+                Validators.maxLength(6),
             ])],
         }, { validator: PinValidation.MatchPin });
     }
