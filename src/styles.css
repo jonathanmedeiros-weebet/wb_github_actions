@@ -492,6 +492,22 @@ button {
     margin: 0;
 }
 
+.action-buttons  {
+    margin: -1rem -1rem -1rem auto;
+}
+
+.action-buttons button  {
+    background-color: transparent;
+    border: 0;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     #fixed-bar-bilhete {
