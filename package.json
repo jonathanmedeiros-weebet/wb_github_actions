@@ -56,7 +56,8 @@
     "jvsports.bet": "gulp jvsports.bet",
     "foxsport.wee.bet": "gulp foxsport.wee.bet",
     "moralsports.net": "gulp moralsports.net",
-    "esportbets.wee.bet": "gulp esportbets.wee.bet"
+    "esportbets.wee.bet": "gulp esportbets.wee.bet",
+    "falcaosport.wee.bet": "gulp falcaosport.wee.bet"
   },
   "private": true,
   "dependencies": {
