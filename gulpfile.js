@@ -487,3 +487,27 @@ gulp.task('falcaosport.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('megapremium.wee.bet', function (done) {
+    tasks(done, {
+        host: "megapremium.wee.bet",
+        banca: "MEGA PREMIUM",
+        styles: "",
+    });
+});
+
+gulp.task('lancenet.wee.bet', function (done) {
+    tasks(done, {
+        host: "lancenet.wee.bet",
+        banca: "Lancenet",
+        styles: "",
+    });
+});
+
+gulp.task('redblue.wee.bet', function (done) {
+    tasks(done, {
+        host: "redblue.wee.bet",
+        banca: "Red Blue",
+        styles: "",
+    });
+});
