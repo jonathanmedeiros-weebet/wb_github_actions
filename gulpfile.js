@@ -508,6 +508,6 @@ gulp.task('redblue.wee.bet', function (done) {
     tasks(done, {
         host: "redblue.wee.bet",
         banca: "Red Blue",
-        styles: "",
+        styles: "--header: #2538ae; --foreground-header: #fff; --sidebar-right:#2538ae; --foreground-sidebar-right: #fff; --sidebar-left: #2538ae; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #de1a42; --foreground-odds: #fff; --event-time: #000;",
     });
 });
