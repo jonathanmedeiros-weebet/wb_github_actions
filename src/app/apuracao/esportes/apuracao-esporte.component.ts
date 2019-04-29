@@ -1,4 +1,3 @@
-import { ApostaModalComponent } from './../../shared/layout/modals/aposta-modal/aposta-modal.component';
 import {
     Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy
 } from '@angular/core';
@@ -9,12 +8,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ConfirmModalComponent } from '../../shared/layout/modals';
-import {
-    ApostaEsportivaService, MessageService,
-    PrintService, AuthService,
-    HelperService
-} from './../../services';
+import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { ApostaEsportivaService, MessageService, AuthService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';

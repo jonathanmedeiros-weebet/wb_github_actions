@@ -1,29 +1,26 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ConfirmModalComponent } from '../../shared/layout/modals';
 import { MessageService, CartaoService } from './../../services';
+import { CartaoAposta } from './../../models';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-solicitacoes-saque',
+    selector: 'app-cartao-listagem',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './solicitacoes-saque.component.html',
-    styleUrls: ['./solicitacoes-saque.component.css']
+    templateUrl: './cartao-listagem.component.html',
+    styleUrls: ['./cartao-listagem.component.css']
 })
-export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class CartaoListagemComponent extends BaseFormComponent implements OnInit, OnDestroy {
     dataInicial;
     dataFinal;
     showLoadingIndicator = true;
-    solicitacoes: any[];
-    modalRef;
+    cartoes: CartaoAposta[];
 
     constructor(
         private fb: FormBuilder,
         private cd: ChangeDetectorRef,
-        private modalService: NgbModal,
         private messageService: MessageService,
         private cartaoService: CartaoService
     ) {
@@ -46,7 +43,7 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
         }
 
         this.createForm();
-        this.getSolicitacoesSaque();
+        this.getCartoes();
     }
 
     ngOnDestroy() { }
@@ -54,60 +51,37 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
     createForm() {
         this.form = this.fb.group({
             dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
-            aprovado: ['1']
+            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required]
         });
     }
 
     submit() {
         this.showLoadingIndicator = !this.showLoadingIndicator;
-        this.getSolicitacoesSaque(this.form.value);
+        this.getCartoes(this.form.value);
     }
 
-    getSolicitacoesSaque(params?) {
+    getCartoes(params?) {
         let queryParams: any = {
             'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
-            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
-            'aprovado': 1
+            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59')
         };
 
         if (params) {
             queryParams = {
                 'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal,
-                'aprovado': params.aprovado
+                'data-final': params.dataFinal
             };
         }
 
-        this.cartaoService.getSolicitacoesSaque(queryParams)
+        this.cartaoService.getCartoes(queryParams)
             .subscribe(
-                solicitacoes => {
-                    this.solicitacoes = solicitacoes;
+                cartoes => {
+                    this.cartoes = cartoes;
                     this.showLoadingIndicator = false;
                     this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
-    }
-
-    setPagamento(id) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
-        this.modalRef.componentInstance.title = 'Pagamento';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirma o pagamento?';
-
-        this.modalRef.result.then(
-            (result) => {
-                this.cartaoService.setPagamento(id)
-                    .subscribe(
-                        () => {
-                            this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
-                            this.getSolicitacoesSaque(this.form.value);
-                        },
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => { }
-        );
     }
 
     handleError(msg) {
@@ -117,4 +91,5 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
     trackById(index: number, record: any): string {
         return record.id;
     }
+
 }
