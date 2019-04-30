@@ -31,16 +31,38 @@
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
                 <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="text-right">Número</th>
-                            <th></th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <th class="">Apostas Esportivas</th>
+                            <td>{{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th class="">Apostas Loterias</th>
+                            <td>{{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th class="">Total Apostado</th>
+                            <td>{{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Recargas de Cartão</th>
+                            <td>{{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Comissões</th>
+                            <td>{{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Prêmios</th>
+                            <td>{{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Saques</th>
+                            <td>{{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Saldo</th>
+                            <td>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</td>
                         </tr>
                     </tbody>
                 </table>
