@@ -78,6 +78,7 @@
                             <a class="dropdown-item" [routerLink]="['/cartoes/solicitacoes-saque']">
                                 Solicitações Saque
                             </a>
+                            <a class="dropdown-item" (click)="abrirModalRecargaCartao()">Recarga</a>
                         </ng-container>
                         <ng-template #notLoggedIn>
                             <a class="dropdown-item" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>

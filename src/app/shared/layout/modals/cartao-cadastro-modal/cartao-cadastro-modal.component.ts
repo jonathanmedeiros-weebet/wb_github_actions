@@ -12,7 +12,6 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
     templateUrl: './cartao-cadastro-modal.component.html'
 })
 export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
-    form: FormGroup;
     modalRef;
 
     constructor(

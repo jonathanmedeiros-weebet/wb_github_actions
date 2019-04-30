@@ -230,6 +230,10 @@ export class HelperService {
         );
     }
 
+    sharedRecargaCartao(recarga) {
+
+    }
+
     dateFormat(date: string, format?: string) {
         return format ? moment(date).format(format) : moment(date).format();
     }

@@ -92,4 +92,16 @@ export class CartaoService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    recarga(chave, valor) {
+        const url = `${this.CartaoUrl}/${chave}/recarga`;
+        const values = { valor: valor };
+
+        return this.http.post(url, values, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

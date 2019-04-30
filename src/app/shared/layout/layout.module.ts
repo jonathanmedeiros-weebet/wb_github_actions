@@ -16,10 +16,13 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaEsportivaService, CartaoService } from '../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
-    ApostaSuccessModalComponent, ConfirmModalComponent, PesquisarApostaModalComponent,
-    LoteriaSuccessModalComponent, CartaoCadastroModalComponent, CartaoModalComponent,
-    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent
+    PesquisaModalComponent, TabelaModalComponent,
+    ApostaModalComponent, ApostaSuccessModalComponent,
+    ConfirmModalComponent, PesquisarApostaModalComponent,
+    LoteriaSuccessModalComponent, CartaoCadastroModalComponent,
+    CartaoModalComponent, PesquisarCartaoModalComponent,
+    SolicitarSaqueModalComponent, RecargaCartaoModalComponent,
+    RecargaSuccessModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -59,6 +62,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         CartaoModalComponent,
         PesquisarCartaoModalComponent,
         SolicitarSaqueModalComponent,
+        RecargaCartaoModalComponent,
+        RecargaSuccessModalComponent,
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -71,7 +76,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         CartaoCadastroModalComponent,
         CartaoModalComponent,
         PesquisarCartaoModalComponent,
-        SolicitarSaqueModalComponent
+        SolicitarSaqueModalComponent,
+        RecargaCartaoModalComponent,
+        RecargaSuccessModalComponent
     ],
     exports: [
         MainLayoutComponent,

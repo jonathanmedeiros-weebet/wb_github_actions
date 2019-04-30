@@ -28,7 +28,7 @@ export class PrintService {
         }
     }
 
-    gamesDestkop(dias) {
+    private gamesDestkop(dias) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -153,7 +153,7 @@ export class PrintService {
         popupWin.document.close();
     }
 
-    gamesAppMobile(dias) {
+    private gamesAppMobile(dias) {
         const cols = 5;
         const odds = this.paramsService.getOddsImpressao();
         const linhas = Math.ceil(odds.length / cols);
@@ -211,7 +211,7 @@ ${horario} ${jogo.nome}
         }
     }
 
-    lotteryTicketDestkop(aposta) {
+    private lotteryTicketDestkop(aposta) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -423,7 +423,7 @@ ${horario} ${jogo.nome}
         popupWin.document.close();
     }
 
-    lotteryTicketAppMobile(aposta) {
+    private lotteryTicketAppMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
 
 #${aposta.id}
@@ -465,7 +465,7 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
         }
     }
 
-    sportsTicketDestkop(aposta) {
+    private sportsTicketDestkop(aposta) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -687,7 +687,7 @@ Valor: ${this.helperService.moneyFormat(item.valor)}
         popupWin.document.close();
     }
 
-    sportsTicketAppMobile(aposta) {
+    private sportsTicketAppMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
 #${aposta.id}
 CAMBISTA: ${aposta.cambista.nome}
@@ -716,10 +716,10 @@ VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
 POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.premio)}
 `;
 
-if (this.opcoes.percentual_premio_cambista > 0) {
-    const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
-    ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
-}
+        if (this.opcoes.percentual_premio_cambista > 0) {
+            const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+            ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
+        }
 
         ticket += `
 -------------------------------
@@ -738,7 +738,7 @@ ${this.opcoes.informativo_rodape}
         }
     }
 
-    cardMobile(card) {
+    private cardMobile(card) {
         const print = `${config.BANCA_NOME}
 Cartão ${card.chave}
 Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
@@ -752,7 +752,7 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
         parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
     }
 
-    cardDesktop(card) {
+    private cardDesktop(card) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -877,6 +877,150 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
         popupWin.document.write(html);
         popupWin.document.close();
     }
+
+    comprovanteRecarga(recarga) {
+        if (this.auth.isAppMobile()) {
+            this.comprovanteRecargaMobile(recarga);
+        } else {
+            this.comprovanteRecargaDesktop(recarga);
+        }
+    }
+
+    private comprovanteRecargaMobile(recarga) {
+        const print = `${config.BANCA_NOME}
+Cartão ${recarga.cartao_aposta}
+Cambista: ${recarga.passador}
+Valor: ${this.helperService.moneyFormat(recarga.valor)}
+Data/Hora: ${this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm')}
+Autenticacao: ${recarga.autenticacao}
+`;
+
+        parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
+    }
+
+    private comprovanteRecargaDesktop(recarga) {
+        let printContents, popupWin, html, styles;
+
+        styles = `
+        body{
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 15px;
+            background: #333;
+            margin: 0;
+        }
+
+        #comprovante{
+            width: 19.27em;
+            padding: 1em;
+            background: #fff;
+            margin: 2em auto;
+        }
+
+        .margin-top-30 {
+            margin-top: 30px;
+        }
+
+        .margin-top-15{
+            margin-top: 15px;
+        }
+
+        .margin-top-10 {
+            margin-top: 10px;
+        }
+
+        .margin-bottom-30 {
+            margin-bottom: 30px;
+        }
+
+        .margin-bottom-15 {
+            margin-bottom: 15px;
+        }
+
+        .margin-bottom-10 {
+            margin-bottom: 10px;
+        }
+
+        .margin-bottom-5 {
+            margin-bottom: 5px;
+        }
+
+        .informacoes{
+            font-size:10px;
+        }
+
+        .chave{
+            font-size:15px;
+        }
+
+        hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px dashed black;
+        }
+
+        @page {
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 75mm;
+                padding: 4mm;
+            }
+        }
+        `;
+
+        printContents = `
+        <div id="comprovante">
+            <div class="conteudo">
+                <div style="text-align: center;">
+                    <img style="max-height: 50;"
+                    alt="${config.BANCA_NOME}" src="${config.LOGO}" />
+                </div>
+                <h1 class="chave margin-bottom-15">
+                    Comprovante de Recarga
+                </h1>
+                <div class="informacoes">
+                    <div class="margin-bottom-5">
+                        <b>Cartão:</b> ${recarga.cartao_aposta}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Cambista:</b> ${recarga.passador}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Valor:</b> ${this.helperService.moneyFormat(recarga.valor)}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Data/Hora:</b> ${this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm')}
+                    </div>
+                    <div class="margin-bottom-5">
+                        <b>Autenticação:</b> ${recarga.autenticacao}
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+        html = `
+        <html>
+          <head>
+            <title>Print tab</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <style>
+            ${styles}
+            </style>
+          </head>
+          <body onload="window.print();window.close()">${printContents}</body>
+        </html>`;
+
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(html);
+        popupWin.document.close();
+    }
+
 
     listPrinters() {
         const message = {

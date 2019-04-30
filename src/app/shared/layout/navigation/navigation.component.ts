@@ -18,8 +18,10 @@ import {
     ParametrosLocaisService, SupresinhaService
 } from './../../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent,
-    CartaoCadastroModalComponent, PesquisarCartaoModalComponent, SolicitarSaqueModalComponent
+    PesquisaModalComponent, TabelaModalComponent,
+    PesquisarApostaModalComponent, CartaoCadastroModalComponent,
+    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
+    RecargaCartaoModalComponent
 } from '../modals';
 import { config } from './../../config';
 
@@ -233,6 +235,24 @@ export class NavigationComponent implements OnInit {
         this.modalRef.result
             .then(
                 result => { },
+                reason => { }
+            );
+    }
+
+    abrirModalRecargaCartao() {
+        this.modalRef = this.modalService.open(
+            RecargaCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
                 reason => { }
             );
     }
