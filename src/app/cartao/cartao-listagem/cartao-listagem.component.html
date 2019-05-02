@@ -35,8 +35,9 @@
                             <th>Chave</th>
                             <th>Data</th>
                             <th>Apostador</th>
-                            <th class="text-right">Valor</th>
+                            <th class="text-right">Recargas</th>
                             <th class="text-right">Bônus</th>
+                            <th class="text-right">Saques</th>
                             <th class="text-right">Saldo</th>
                         </tr>
                     </thead>
@@ -51,8 +52,9 @@
                                 </td>
                                 <td>{{cartao.data_registro | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td>{{cartao.apostador}}</td>
-                                <td class="text-right">{{cartao.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{cartao.total_creditos | currency: 'BRL':'symbol':'1.2'}}</td>
                                 <td class="text-right">{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{cartao.total_saques | currency: 'BRL':'symbol':'1.2'}}</td>
                                 <td class="text-right">{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</td>
                             </tr>
                         </ng-container>

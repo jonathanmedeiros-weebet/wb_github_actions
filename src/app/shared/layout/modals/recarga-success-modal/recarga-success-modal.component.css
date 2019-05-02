@@ -1,3 +1,30 @@
 .modal-body{
+    font-size: 1.2rem;
+}
+
+.informacoes{
+    padding: 1em;
+    background: #f3f5d3;
+    margin: 1.5em auto;
+}
+
+.informacoes h3{
+    text-align: center;
+    font-weight: bold;
     font-size: 1.5rem;
+}
+
+.banca-nome{
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.informacoes > div{
+    margin-bottom: 3px;
+}
+
+.informacoes .autenticacao{
+    font-size: 0.9rem;
+    font-style: italic;
 }

@@ -1,14 +1,10 @@
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Comprovante de Recarga</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
 <div class="modal-body">
     <div class="alert alert-success" role="alert">
         Sua recarga foi realizada com sucesso!
     </div>
     <div class="informacoes" #cupom>
+        <h3>Comprovante de Recarga</h3>
+        <h4 class="banca-nome">{{BANCA_NOME}}</h4>
         <div>
             <b> Cartão:</b> {{recarga.cartao_aposta}}
         </div>
@@ -21,8 +17,8 @@
         <div>
             <b>Data/Hora:</b> {{recarga.data | moment:'DD/MM/YYYY HH:mm'}}
         </div>
-        <div>
-            <b>Autenticação:</b> {{recarga.autenticacao}}
+        <div class="autenticacao">
+            {{recarga.autenticacao}}
         </div>
     </div>
 </div>

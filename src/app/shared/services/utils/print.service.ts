@@ -892,7 +892,7 @@ Cartão ${recarga.cartao_aposta}
 Cambista: ${recarga.passador}
 Valor: ${this.helperService.moneyFormat(recarga.valor)}
 Data/Hora: ${this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm')}
-Autenticacao: ${recarga.autenticacao}
+${recarga.autenticacao}
 `;
 
         parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
@@ -994,7 +994,7 @@ Autenticacao: ${recarga.autenticacao}
                         <b>Data/Hora:</b> ${this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm')}
                     </div>
                     <div class="margin-bottom-5">
-                        <b>Autenticação:</b> ${recarga.autenticacao}
+                        ${recarga.autenticacao}
                     </div>
                 </div>
             </div>

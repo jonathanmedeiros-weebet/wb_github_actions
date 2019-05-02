@@ -14,12 +14,16 @@
                     <span>{{cartao.apostador}}</span>
                 </div>
                 <div>
-                    <b>Valor inicial: </b>
-                    <span>{{cartao.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                    <b>Recargas: </b>
+                    <span>{{cartao.total_creditos | currency: 'BRL':'symbol':'1.2'}}</span>
                 </div>
                 <div>
                     <b>Bônus: </b>
                     <span>{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</span>
+                </div>
+                <div>
+                    <b>Criação: </b>
+                    <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
                 </div>
             </div>
             <div>
@@ -28,12 +32,12 @@
                     <span>{{cartao.cambista?.nome}}</span>
                 </div>
                 <div>
-                    <b>Saldo atual: </b>
-                    <span>{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</span>
+                    <b>Saques: </b>
+                    <span>{{cartao.total_saques | currency: 'BRL':'symbol':'1.2'}}</span>
                 </div>
                 <div>
-                    <b>Criação: </b>
-                    <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
+                    <b>Saldo atual: </b>
+                    <span>{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</span>
                 </div>
             </div>
         </div>

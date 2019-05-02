@@ -3,6 +3,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, PrintService, HelperService } from '../../../../services';
 import * as html2canvas from 'html2canvas';
+import { config } from '../../../config';
 
 @Component({
     selector: 'app-recarga-success-modal',
@@ -12,6 +13,7 @@ import * as html2canvas from 'html2canvas';
 export class RecargaSuccessModalComponent implements OnInit {
     @ViewChild('cupom') cupom: ElementRef;
     @Input() recarga;
+    BANCA_NOME;
     appMobile;
 
     constructor(
@@ -22,6 +24,7 @@ export class RecargaSuccessModalComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
     }
 
