@@ -64,7 +64,6 @@ export class ApuracaoConsolidadaComponent extends BaseFormComponent implements O
             result => {
                 this.relatorio = result;
                 this.showLoadingIndicator = false;
-                console.log(result);
             }
         );
     }

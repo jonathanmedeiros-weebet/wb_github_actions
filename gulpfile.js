@@ -21,6 +21,10 @@ function tasks(done, config) {
             .pipe(replace('[CUSTOM]', config.styles))
             .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
             .pipe(gulp.dest('src/'));
+
+        remoteSrc(['logo_banca.png'], {
+            base: 'http://' + config.host + '/tema/'})
+            .pipe(gulp.dest('src/assets/images/'));
     }
     else{
         console.log("novo");
