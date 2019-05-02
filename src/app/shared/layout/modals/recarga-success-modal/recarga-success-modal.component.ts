@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, PrintService, HelperService } from '../../../../services';
+import * as html2canvas from 'html2canvas';
 
 @Component({
     selector: 'app-recarga-success-modal',
@@ -9,6 +10,7 @@ import { AuthService, PrintService, HelperService } from '../../../../services';
     styleUrls: ['./recarga-success-modal.component.css']
 })
 export class RecargaSuccessModalComponent implements OnInit {
+    @ViewChild('cupom') cupom: ElementRef;
     @Input() recarga;
     appMobile;
 
@@ -28,6 +30,10 @@ export class RecargaSuccessModalComponent implements OnInit {
     }
 
     shareTicket() {
-        this.helper.sharedRecargaCartao(this.recarga);
+        const options = { logging: false };
+
+        html2canvas(this.cupom.nativeElement, options).then((canvas) => {
+            this.helper.sharedRecargaCartao(this.recarga, canvas.toDataURL());
+        });
     }
 }
