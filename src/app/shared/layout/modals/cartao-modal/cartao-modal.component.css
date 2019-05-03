@@ -1,0 +1,12 @@
+.cartao-aposta h3{
+    margin-bottom: 15px;
+}
+
+.cartao-aposta > div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.table{
+    cursor: pointer;
+}

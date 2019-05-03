@@ -1,15 +1,13 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ApostaSuccessModalComponent } from '../../shared/layout/modals';
+import { ApostaSuccessModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService,
-    MessageService, BilheteEsportivoService, HelperService,
-    ApostaEsportivaService, AuthService,
-    PreApostaEsportivaService
+    ParametrosLocaisService, MessageService, BilheteEsportivoService,
+    HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +19,7 @@ import * as clone from 'clone';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('apostaDeslogadoModal') apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
     opcoes = this.paramsService.getOpcoes();
@@ -28,6 +27,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     displayPreTicker = false;
     disabled = false;
     isLoggedIn;
+    btnText = 'Pré-Aposta';
+    tipoApostaDeslogado = 'preaposta';
+    cartaoApostaForm: FormGroup;
     unsub$ = new Subject();
 
     constructor(
@@ -48,7 +50,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     ngOnInit() {
         this.createForm();
-
+        this.definirAltura();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.apostaMinima = this.opcoes.valor_min_aposta;
 
@@ -69,8 +71,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(valor => {
                 this.calcularPossibilidadeGanho(valor);
             });
+    }
 
-
+    definirAltura() {
         const altura = window.innerHeight - 69;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
@@ -86,6 +89,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             apostador: ['', [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
+        });
+
+        this.cartaoApostaForm = this.fb.group({
+            chave: [null, Validators.required],
+            pin: [null, Validators.compose([
+                Validators.required,
+                Validators.minLength(3),
+            ])]
         });
     }
 
@@ -135,24 +146,28 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.disabledSubmit();
 
         if (this.itens.length) {
-            const values = clone(this.form.value);
-            values.itens.map(item => {
-                delete item.jogo;
-            });
-
             if (this.isLoggedIn) {
-                this.apostaEsportivaService.create(values)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        result => this.apostaSuccess(result),
-                        error => this.handleError(error)
-                    );
+                const values = clone(this.form.value);
+                values.itens.map(item => {
+                    delete item.jogo;
+                });
+
+                this.salvarAposta(values);
             } else {
-                this.preApostaService.create(values)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        result => this.preApostaSuccess(result.id),
-                        error => this.handleError(error)
+                this.enableSubmit();
+
+                this.modalRef = this.modalService.open(
+                    this.apostaDeslogadoModal,
+                    {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    }
+                );
+
+                this.modalRef.result
+                    .then(
+                        result => { },
+                        reason => { }
                     );
             }
         } else {
@@ -162,21 +177,27 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     apostaSuccess(aposta) {
+        if (this.modalRef) {
+            this.modalRef.close();
+        }
         this.enableSubmit();
+        this.trocarTipoApostaDeslogado('preaposta');
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
 
-        this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
         this.modalRef.componentInstance.aposta = aposta;
-        this.modalRef.componentInstance.codigo = aposta.id;
     }
 
     preApostaSuccess(id) {
+        if (this.modalRef) {
+            this.modalRef.close();
+        }
         this.enableSubmit();
 
         this.bilheteService.atualizarItens([]);
@@ -210,5 +231,46 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    salvarAposta(dados) {
+        this.apostaEsportivaService.create(dados)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                result => this.apostaSuccess(result),
+                error => this.handleError(error)
+            );
+    }
+
+    trocarTipoApostaDeslogado(tipo) {
+        this.tipoApostaDeslogado = tipo;
+        if (tipo === 'preaposta') {
+            this.btnText = 'Pré-Aposta';
+        } else {
+            this.btnText = 'Aposta';
+        }
+    }
+
+    finalizarApostaDeslogado() {
+        const values = clone(this.form.value);
+        values.itens.map(item => {
+            delete item.jogo;
+        });
+
+        if (this.tipoApostaDeslogado === 'preaposta') {
+            this.preApostaService.create(values)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.preApostaSuccess(result.id),
+                    error => this.handleError(error)
+                );
+        } else {
+            if (this.cartaoApostaForm.valid) {
+                const valuesCard = { cartao: this.cartaoApostaForm.value };
+                const finalValues = Object.assign(values, valuesCard);
+
+                this.salvarAposta(finalValues);
+            }
+        }
     }
 }

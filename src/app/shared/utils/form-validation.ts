@@ -55,18 +55,21 @@ export class FormValidations {
     }
 
     static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any) {
+        if (!fieldName) {
+            fieldName = 'Campo';
+        }
         const config = {
-            'required': fieldName ? `${fieldName} é obrigatório.` : 'Campo obrigatório.',
+            'required': `${fieldName} obrigatório.`,
             'min': `${fieldName} mínimo requerido é ${validatorValue.min}.`,
             'max': `${fieldName} máximo requerido é ${validatorValue.max}.`,
             'minlength': `${fieldName} precisa ter no mínimo ${validatorValue.requiredLength} caracteres.`,
-            'maxlength': `${fieldName} precisa ter no máximo ${validatorValue.requiredLength} caracteres.`,
+            'maxlength': `${fieldName} pode ter no máximo ${validatorValue.requiredLength} caracteres.`,
             'cepInvalido': 'CEP inválido.',
             'emailInvalido': 'Email já cadastrado!',
             'equalsTo': 'Campos não são iguais',
-            'pattern': 'Campo inválido'
+            'pattern': 'Campo inválido',
+            'matchPin': 'Confirmação diferente do PIN.',
         };
-
         return config[validatorName];
     }
 }

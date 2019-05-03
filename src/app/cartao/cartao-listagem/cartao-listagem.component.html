@@ -1,0 +1,66 @@
+<div id="default-content" appPerfectScroll>
+    <div class="content-header">
+        <h2>Cartões de Aposta</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div appPerfectScroll>
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Chave</th>
+                            <th>Data</th>
+                            <th>Apostador</th>
+                            <th class="text-right">Recargas</th>
+                            <th class="text-right">Bônus</th>
+                            <th class="text-right">Saques</th>
+                            <th class="text-right">Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let cartao of cartoes; trackBy:trackById">
+                            <tr>
+                                <td>
+                                    {{cartao.chave}}
+                                    <!-- <button type="button" class="btn btn-warning btn-sm chave-cartao">
+                                        {{cartao.chave}}
+                                    </button> -->
+                                </td>
+                                <td>{{cartao.data_registro | moment:'DD/MM/YYYY HH:mm'}}</td>
+                                <td>{{cartao.apostador}}</td>
+                                <td class="text-right">{{cartao.total_creditos | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{cartao.total_saques | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

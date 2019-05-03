@@ -230,6 +230,18 @@ export class HelperService {
         );
     }
 
+    sharedRecargaCartao(recarga, file) {
+        parent.postMessage(
+            {
+                message: `Comprovante de Recarga`,
+                file: file,
+                data: `Comprovante de Recarga`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
     dateFormat(date: string, format?: string) {
         return format ? moment(date).format(format) : moment(date).format();
     }

@@ -1,4 +1,3 @@
-import { ApostaModalComponent } from './../../shared/layout/modals/aposta-modal/aposta-modal.component';
 import {
     Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy
 } from '@angular/core';
@@ -9,12 +8,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { CancelApostaModalComponent } from '../../shared/layout/modals';
-import {
-    ApostaEsportivaService, MessageService,
-    PrintService, AuthService,
-    HelperService
-} from './../../services';
+import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { ApostaEsportivaService, MessageService, AuthService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -106,11 +101,13 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                 apostas => {
                     this.apostas = apostas;
                     apostas.forEach(aposta => {
-                        this.totais.valor += aposta.valor;
-                        this.totais.comissao += aposta.comissao;
-                        if (aposta.resultado === 'ganhou') {
-                            this.totais.premio += aposta.premio;
+                        if (!aposta.cartao_aposta) {
+                            this.totais.valor += aposta.valor;
+                            if (aposta.resultado === 'ganhou') {
+                                this.totais.premio += aposta.premio;
+                            }
                         }
+                        this.totais.comissao += aposta.comissao;
                     });
                     this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
                     this.showLoadingIndicator = false;
@@ -173,7 +170,10 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     cancel(aposta) {
-        this.modalRef = this.modalService.open(CancelApostaModalComponent, { centered: true });
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+        this.modalRef.componentInstance.title = 'Cancelar Aposta';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
+
         this.modalRef.result.then(
             (result) => {
                 this.apostaService.cancel(aposta.id)

@@ -1,0 +1,72 @@
+<div id="default-content" appPerfectScroll>
+    <div class="content-header">
+        <h2>Apuração Consolidada</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div appPerfectScroll>
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+                <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="">Apostas Esportivas</th>
+                            <td>{{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th class="">Apostas Loterias</th>
+                            <td>{{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th class="">Total Apostado</th>
+                            <td>{{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Recargas de Cartão</th>
+                            <td>{{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Comissões</th>
+                            <td>{{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Prêmios</th>
+                            <td>{{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Saques</th>
+                            <td>{{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Saldo</th>
+                            <td>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

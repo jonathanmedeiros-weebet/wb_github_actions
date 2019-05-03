@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Consultar Cartão</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="pesquisarForm" (ngSubmit)="pesquisarCartao()">
+        <div class="form-group">
+            <input style="text-transform:uppercase;" type="text" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false" class="form-control"
+                formControlName="input" placeholder="Chave do cartão">
+        </div>
+        <button type="submit" class="btn btn-custom">Consultar</button>
+    </form>
+</div>

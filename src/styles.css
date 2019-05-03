@@ -407,7 +407,7 @@ button {
 
 /* Override JS Toast*/
 .jq-toast-wrap {
-    z-index: 9001 !important;
+    z-index: 90001 !important;
 }
 
 
@@ -491,6 +491,22 @@ button {
     font-size: 15px;
     background: #333;
     margin: 0;
+}
+
+.action-buttons  {
+    margin: -1rem -1rem -1rem auto;
+}
+
+.action-buttons button  {
+    background-color: transparent;
+    border: 0;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
 }
 
 /* Large devices (desktops, 992px and up) */

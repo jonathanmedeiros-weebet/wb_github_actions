@@ -1,0 +1,35 @@
+<div class="modal-body">
+    <div class="alert alert-success" role="alert">
+        Sua recarga foi realizada com sucesso!
+    </div>
+    <div class="informacoes" #cupom>
+        <h3>Comprovante de Recarga</h3>
+        <h4 class="banca-nome">{{BANCA_NOME}}</h4>
+        <div>
+            <b> Cartão:</b> {{recarga.cartao_aposta}}
+        </div>
+        <div>
+            <b>Cambista:</b> {{recarga.passador}}
+        </div>
+        <div>
+            <b>Valor:</b> {{recarga.valor| currency: 'BRL':'symbol':'1.2'}}
+        </div>
+        <div>
+            <b>Data/Hora:</b> {{recarga.data | moment:'DD/MM/YYYY HH:mm'}}
+        </div>
+        <div class="autenticacao">
+            {{recarga.autenticacao}}
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+        Fechar
+    </button>
+    <button type="button" class="btn btn-custom" (click)="printTicket()">
+        Imprimir
+    </button>
+    <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">
+        Compartilhar
+    </button>
+</div>

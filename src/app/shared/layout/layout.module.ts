@@ -14,14 +14,19 @@ import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibi
 import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
-import { ApostaEsportivaService } from '../../services';
+import { ApostaEsportivaService, CartaoService } from '../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent, ApostaModalComponent,
-    ApostaSuccessModalComponent, CancelApostaModalComponent, PesquisarApostaModalComponent,
-    LoteriaSuccessModalComponent
+    PesquisaModalComponent, TabelaModalComponent,
+    ApostaModalComponent, ApostaSuccessModalComponent,
+    ConfirmModalComponent, PesquisarApostaModalComponent,
+    LoteriaSuccessModalComponent, CartaoCadastroModalComponent,
+    CartaoModalComponent, PesquisarCartaoModalComponent,
+    SolicitarSaqueModalComponent, RecargaCartaoModalComponent,
+    RecargaSuccessModalComponent
 } from './modals';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { NgxMaskModule } from 'ngx-mask';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -29,8 +34,10 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+
         UtilsModule,
         AngularSvgIconModule,
+        NgxMaskModule.forRoot(),
         NgbModalModule
     ],
     declarations: [
@@ -48,9 +55,15 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         TabelaModalComponent,
         ApostaModalComponent,
         ApostaSuccessModalComponent,
-        CancelApostaModalComponent,
+        ConfirmModalComponent,
         PesquisarApostaModalComponent,
         LoteriaSuccessModalComponent,
+        CartaoCadastroModalComponent,
+        CartaoModalComponent,
+        PesquisarCartaoModalComponent,
+        SolicitarSaqueModalComponent,
+        RecargaCartaoModalComponent,
+        RecargaSuccessModalComponent,
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -58,8 +71,14 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         TabelaModalComponent,
         ApostaModalComponent,
         ApostaSuccessModalComponent,
-        CancelApostaModalComponent,
-        LoteriaSuccessModalComponent
+        ConfirmModalComponent,
+        LoteriaSuccessModalComponent,
+        CartaoCadastroModalComponent,
+        CartaoModalComponent,
+        PesquisarCartaoModalComponent,
+        SolicitarSaqueModalComponent,
+        RecargaCartaoModalComponent,
+        RecargaSuccessModalComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -72,6 +91,9 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
         ExibirBilheteLoteriaComponent,
         SpinnerComponent
     ],
-    providers: [ApostaEsportivaService]
+    providers: [
+        ApostaEsportivaService,
+        CartaoService
+    ]
 })
 export class LayoutModule { }

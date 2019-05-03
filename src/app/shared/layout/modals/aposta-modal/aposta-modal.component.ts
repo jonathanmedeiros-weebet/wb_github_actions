@@ -15,7 +15,6 @@ export class ApostaModalComponent implements OnInit {
     @Input() showCancel = false;
     appMobile;
     isLoggedIn;
-    modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -49,6 +48,6 @@ export class ApostaModalComponent implements OnInit {
     }
 
     pagamentoPermitido() {
-        return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago;
+        return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago && !this.aposta.cartao_aposta;
     }
 }

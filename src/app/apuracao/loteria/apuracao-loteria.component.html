@@ -40,10 +40,41 @@
         <div class="content">
             <div appPerfectScroll>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
                 <div *ngIf="!showLoadingIndicator">
-                    <p class="text-center" *ngIf="!apostas.length">
+                    <div *ngIf="!apostas.length" class="alert alert-warning text-center" role="alert">
                         Nenhuma aposta realizada no período.
-                    </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <table class="table table-hover table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th class="">Qtd. Apostas</th>
+                                        <td>{{apostas.length}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="">Total Apostado</th>
+                                        <td>{{totais.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="">Total Comissão</th>
+                                        <td>{{totais.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="">Total Prêmio</th>
+                                        <td>{{totais.premio | currency: 'BRL':'symbol':'1.2'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="">Resultado</th>
+                                        <td>{{totais.resultado | currency: 'BRL':'symbol':'1.2'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <div *ngFor="let aposta of apostas" class="aposta">
                         <div class="aposta-header">
                             <div>
@@ -71,7 +102,6 @@
                                 <label>Horário:</label>
                                 <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
                             </div>
-
                         </div>
                         <div class="itens">
                             <div class="aposta-itens">
@@ -120,20 +150,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="resumo" *ngIf="apostas.length > 0">
-                        <div class="">
-                            <b>Valor:</b> {{totais.valor | currency: 'BRL':'symbol':'1.2'}}
-                        </div>
-                        <div class="">
-                            <b>Comissão:</b> {{totais.comissao | currency: 'BRL':'symbol':'1.2'}}
-                        </div>
-                        <div class="">
-                            <b>Prêmio:</b> {{totais.premio | currency: 'BRL':'symbol':'1.2'}}
-                        </div>
-                        <div class="">
-                            <b>Resultado</b>: {{totais.resultado | currency: 'BRL':'symbol':'1.2'}}
                         </div>
                     </div>
                 </div>

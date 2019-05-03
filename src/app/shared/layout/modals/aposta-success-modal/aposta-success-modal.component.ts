@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { AuthService, PrintService, HelperService } from './../../../../services';
+import { AuthService, HelperService } from './../../../../services';
 
 @Component({
     selector: 'app-aposta-success-modal',
@@ -13,7 +13,7 @@ export class ApostaSuccessModalComponent implements OnInit {
     @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
     @Input() codigo;
-    title = '';
+    title;
     appMobile;
     isLoggedIn;
 

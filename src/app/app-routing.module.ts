@@ -23,6 +23,11 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'cartoes',
+                loadChildren: 'app/cartao/cartao.module#CartaoModule',
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'esportes',
                 loadChildren: 'app/esportes/esportes.module#EsportesModule'
             },

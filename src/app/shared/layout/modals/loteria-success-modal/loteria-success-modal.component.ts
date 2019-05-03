@@ -5,8 +5,7 @@ import { AuthService, PrintService, HelperService } from './../../../../services
 
 @Component({
     selector: 'app-loteria-success-modal',
-    templateUrl: './loteria-success-modal.component.html',
-    styleUrls: ['./loteria-success-modal.component.css']
+    templateUrl: './loteria-success-modal.component.html'
 })
 export class LoteriaSuccessModalComponent implements OnInit {
     @Input() mensagem;

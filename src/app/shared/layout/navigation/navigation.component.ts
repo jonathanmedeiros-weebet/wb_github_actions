@@ -17,7 +17,12 @@ import {
     SidebarService, AuthService, PrintService,
     ParametrosLocaisService, SupresinhaService
 } from './../../../services';
-import { PesquisaModalComponent, TabelaModalComponent, PesquisarApostaModalComponent } from '../modals';
+import {
+    PesquisaModalComponent, TabelaModalComponent,
+    PesquisarApostaModalComponent, CartaoCadastroModalComponent,
+    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
+    RecargaCartaoModalComponent
+} from '../modals';
 import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -57,9 +62,7 @@ export class NavigationComponent implements OnInit {
     isOpen = true;
     itens: any[];
     contexto;
-    modalRefPesquisa;
-    modalRefTabela;
-    modalRefAposta;
+    modalRef;
     opcoes;
     primeiraPagina;
     dataLimiteTabela;
@@ -132,8 +135,44 @@ export class NavigationComponent implements OnInit {
         this.printService.listPrinters();
     }
 
+    abrirModalCadastroCartao() {
+        this.modalRef = this.modalService.open(
+            CartaoCadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
+                reason => { }
+            );
+    }
+
+    abrirModalCartao() {
+        this.modalRef = this.modalService.open(
+            PesquisarCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
+                reason => { }
+            );
+    }
+
     abrirModalPesquisa() {
-        this.modalRefPesquisa = this.modalService.open(
+        this.modalRef = this.modalService.open(
             PesquisaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -141,7 +180,7 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        this.modalRefPesquisa.result
+        this.modalRef.result
             .then(
                 result => {
                     if (result.input) {
@@ -154,7 +193,7 @@ export class NavigationComponent implements OnInit {
     }
 
     abrirModalTabela() {
-        this.modalRefTabela = this.modalService.open(
+        this.modalRef = this.modalService.open(
             TabelaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -162,14 +201,14 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        this.modalRefTabela.result
+        this.modalRef.result
             .then(result => {
                 this.closeMenu();
             }, reason => { });
     }
 
     abrirModalAposta() {
-        this.modalRefAposta = this.modalService.open(
+        this.modalRef = this.modalService.open(
             PesquisarApostaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -177,9 +216,43 @@ export class NavigationComponent implements OnInit {
             }
         );
 
-        this.modalRefAposta.result
+        this.modalRef.result
             .then(
                 result => { },
+                reason => { }
+            );
+    }
+
+    abrirModalSolicitarSaque() {
+        this.modalRef = this.modalService.open(
+            SolicitarSaqueModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => { },
+                reason => { }
+            );
+    }
+
+    abrirModalRecargaCartao() {
+        this.modalRef = this.modalService.open(
+            RecargaCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
                 reason => { }
             );
     }
@@ -240,7 +313,12 @@ export class NavigationComponent implements OnInit {
         const dtInicial = moment().add(2, 'day');
         const dataLimiteTabela = moment(this.dataLimiteTabela);
 
-        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) {
+        let temDomingo = false;
+        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day') && !temDomingo) {
+            if (dtInicial.day() === 0) {
+                temDomingo = true;
+            }
+
             this.dias.push({
                 'descricao': dtInicial.format('dddd'),
                 'format': dtInicial.format('YYYY-MM-DD')

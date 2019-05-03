@@ -1,7 +1,13 @@
 export { ApostaModalComponent } from './aposta-modal/aposta-modal.component';
+export { ApostaSuccessModalComponent } from './aposta-success-modal/aposta-success-modal.component';
+export { CartaoCadastroModalComponent } from './cartao-cadastro-modal/cartao-cadastro-modal.component';
+export { CartaoModalComponent } from './cartao-modal/cartao-modal.component';
+export { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+export { LoteriaSuccessModalComponent } from './loteria-success-modal/loteria-success-modal.component';
 export { PesquisaModalComponent } from './pesquisa-modal/pesquisa-modal.component';
 export { PesquisarApostaModalComponent } from './pesquisar-aposta-modal/pesquisar-aposta-modal.component';
+export { PesquisarCartaoModalComponent } from './pesquisar-cartao-modal/pesquisar-cartao-modal.component';
+export { RecargaCartaoModalComponent } from './recarga-cartao-modal/recarga-cartao-modal.component';
+export { RecargaSuccessModalComponent } from './recarga-success-modal/recarga-success-modal.component';
+export { SolicitarSaqueModalComponent } from './solicitar-saque-modal/solicitar-saque-modal.component';
 export { TabelaModalComponent } from './tabela-modal/tabela-modal.component';
-export { ApostaSuccessModalComponent } from './aposta-success-modal/aposta-success-modal.component';
-export { LoteriaSuccessModalComponent } from './loteria-success-modal/loteria-success-modal.component';
-export { CancelApostaModalComponent } from './cancel-aposta-modal/cancel-aposta-modal.component';

@@ -1,4 +1,4 @@
-.pre-bilhete{
+.pre-bilhete {
     width: 270px;
     text-align: center;
     padding: 20px 15px 0 15px;
@@ -6,8 +6,8 @@
     background-color: var(--sidebar-right)
 }
 
-.pre-bilhete h4{
-    color:var(--foreground-highlight);
+.pre-bilhete h4 {
+    color: var(--foreground-highlight);
 }
 
 .pre-bilhete h4::before {
@@ -31,64 +31,65 @@
     margin-left: -81px;
 }
 
-.value-informations{
+.value-informations {
     text-transform: uppercase;
     color: var(--foreground-sidebar-right);
     margin: 20px 0;
 }
 
-.value-informations p{
+.value-informations p {
     margin-bottom: 0.5rem;
 }
 
-.value-informations .valores{
+.value-informations .valores {
     margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.value-informations .valores button{
+.value-informations .valores button {
     padding: 0;
     width: 55px;
     background-color: var(--odds);
     color: var(--foreground-odds);
 }
 
-.div-inputs{
+.div-inputs {
     background-color: var(--odds);
     padding: 20px 15px 8px 15px;
     border-radius: 0.25rem;
     margin-bottom: 15px;
 }
 
-.live-odd{
+.live-odd {
     display: inline-block;
     background-color: red;
     color: white;
     padding: 5px;
 }
 
-.valor, .possivel-ganho{
+.pre-bilhete .valor,
+.pre-bilhete .possivel-ganho {
     color: var(--foreground-highlight);
     font-weight: bolder;
 }
 
-.div-jogos-selecionados h3{
+.div-jogos-selecionados h3 {
     color: var(--foreground-highlight);
 }
 
-.div-jogos-selecionados .jogo-selecionado-inner{
+.div-jogos-selecionados .jogo-selecionado-inner {
     margin: 0px 30px;
 }
 
-.div-jogos-selecionados h3{
+.div-jogos-selecionados h3 {
     margin: 30px 0;
     text-transform: uppercase;
     font-size: 16px;
 }
 
-.div-jogos-selecionados h3::before{
+.div-jogos-selecionados h3::before {
     content: '';
     display: block;
     height: 2px;
@@ -99,34 +100,80 @@
     position: relative;
 }
 
-.jogo-selecionado{
+.jogo-selecionado {
     padding: 15px 0;
     border-top: 1px dashed #aec3d8;
     text-align: left;
     position: relative;
 }
 
-.jogo-selecionado:first-of-type{
+.jogo-selecionado:first-of-type {
     border-top: none;
     padding-top: 0;
 }
 
-.jogo-selecionado > div:not(.remover-item){
+.jogo-selecionado>div:not(.remover-item) {
     color: var(--foreground-sidebar-right);
 }
 
-.jogo-selecionado .horario,.jogo-selecionado .cotacao .valor{
+.jogo-selecionado .horario,
+.jogo-selecionado .cotacao .valor {
     color: var(--foreground-highlight);
     font-weight: bold;
 }
 
-.remover-item{
+.div-jogos-selecionados .remover-item {
     position: absolute;
     top: 0;
     right: 0;
     color: red;
     font-size: 25px;
     cursor: pointer;
+}
+
+.success-msg {
+    font-size: 1.3rem;
+}
+
+.success-msg .codigo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#aposta-deslogado .active {
+    background: var(--odds);
+    color: var(--foreground-odds);
+}
+
+#aposta-deslogado .aposta-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    border: 1px dashed black;
+    padding: 5px;
+}
+
+#aposta-deslogado .btn {
+    width: 50%;
+    border: 0px;
+    border-radius: 3px 3px 0 0;
+}
+
+#aposta-deslogado .remover {
+    color: red;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#aposta-deslogado .valor,
+#aposta-deslogado .horario {
+    font-weight: bolder;
+}
+
+.cartao-form .form-row select,
+.cartao-form .form-row input {
+    font-size: 1rem;
 }
 
 @media only screen and (max-width: 668px) {

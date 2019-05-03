@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Criar Cartão</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="apostador" placeholder="Apostador"
+                    [ngClass]="applyCssInputError('apostador')">
+                <app-error-msg [control]="form.get('apostador')"></app-error-msg>
+            </div>
+            <div class="form-group">
+                <input type="text" mask="dot_separator.2" class="form-control" formControlName="valor"
+                    placeholder="Valor" [ngClass]="applyCssInputError('valor')">
+                <app-error-msg [control]="form.get('valor')"></app-error-msg>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="pin" placeholder="PIN"
+                    [ngClass]="applyCssInputError('pin')">
+                <app-error-msg [control]="form.get('pin')"></app-error-msg>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" formControlName="pin_confirmacao"
+                    placeholder="Confirmar PIN" [ngClass]="applyCssInputError('pin_confirmacao')">
+                <app-error-msg [control]="form.get('pin_confirmacao')"></app-error-msg>
+            </div>
+            <button type="submit" class="btn btn-custom">Confirmar</button>
+        </form>
+    </div>
+</div>

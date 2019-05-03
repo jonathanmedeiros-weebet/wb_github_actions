@@ -22,4 +22,5 @@ export class ApostaEsportiva {
     status_pagamento: string;
     versao_app = '1.0';
     chave: string;
+    cartao_aposta: string;
 }

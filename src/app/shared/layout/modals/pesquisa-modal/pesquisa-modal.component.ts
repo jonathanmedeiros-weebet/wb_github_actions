@@ -5,8 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-pesquisa-modal',
-    templateUrl: './pesquisa-modal.component.html',
-    styleUrls: ['./pesquisa-modal.component.css']
+    templateUrl: './pesquisa-modal.component.html'
 })
 export class PesquisaModalComponent implements OnInit {
     pesquisarForm: FormGroup = this.fb.group({
