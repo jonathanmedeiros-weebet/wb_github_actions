@@ -22,7 +22,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     @ViewChild('apostaDeslogadoModal') apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
-    opcoes = this.paramsService.getOpcoes();
+    opcoes;
     apostaMinima;
     displayPreTicker = false;
     disabled = false;
@@ -52,6 +52,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.createForm();
         this.definirAltura();
         this.isLoggedIn = this.auth.isLoggedIn();
+        this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
 
         const itens = this.bilheteService.getItens();

@@ -102,6 +102,7 @@ export class NavigationComponent implements OnInit {
         this.isAppMobile = this.auth.isAppMobile();
         this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
+        this.opcoes = this.paramsService.getOpcoes();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.preencherDias();
 

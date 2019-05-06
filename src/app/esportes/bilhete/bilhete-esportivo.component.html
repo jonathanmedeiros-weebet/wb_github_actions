@@ -102,7 +102,7 @@
 
 <ng-template #apostaDeslogadoModal let-modal>
     <div class="modal-body" id="aposta-deslogado">
-        <div style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
+        <div *ngIf="opcoes.cartao_aposta" style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
             <button class="btn" (click)="trocarTipoApostaDeslogado('preaposta')"
                 [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
                 Pré-Aposta
