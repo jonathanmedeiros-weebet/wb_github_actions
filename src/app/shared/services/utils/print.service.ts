@@ -292,7 +292,18 @@ ${horario} ${jogo.nome}
                 </div>
                 `;
 
+        const seninhaNome = this.paramsService.getSeninhaNome();
+        const quininhaNome = this.paramsService.getQuininhaNome();
+
         aposta.itens.forEach((item, index, array) => {
+            let tipo = '';
+
+            if (item.tipo === 'SENINHA') {
+                tipo = seninhaNome;
+            } else {
+                tipo = quininhaNome;
+            }
+
             let content = `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -307,7 +318,7 @@ ${horario} ${jogo.nome}
                         Tipo
                     </div>
                     <div style="float: right;">
-                        ${item.tipo}
+                        ${tipo}
                     </div>
                 </div>
                 <div class="clearfix margin-bottom-5">

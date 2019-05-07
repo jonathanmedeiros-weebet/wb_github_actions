@@ -39,4 +39,6 @@ export * from './shared/services/guards/basquete.guard';
 export * from './shared/services/guards/combate.guard';
 export * from './shared/services/guards/expires.guard';
 export * from './shared/services/guards/loteria.guard';
+export * from './shared/services/guards/quininha.guard';
 export * from './shared/services/guards/parametros.resolver';
+export * from './shared/services/guards/seninha.guard';

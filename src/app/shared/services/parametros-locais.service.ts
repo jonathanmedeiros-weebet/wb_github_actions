@@ -87,6 +87,23 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.informativo_rodape : null;
     }
 
+    getSeninhaNome() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.seninha_nome : null;
+    }
+
+    getQuininhaNome() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.quininha_nome : null;
+    }
+
+
+    seninhaAtiva() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.seninha_ativa : null;
+    }
+
+    quininhaAtiva() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.quininha_ativa : null;
+    }
+
     getBancaNome() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.banca_nome : null;
     }
