@@ -63,7 +63,7 @@ export class NavigationComponent implements OnInit {
     itens: any[];
     contexto;
     modalRef;
-    opcoes;
+    cartaoApostaHabilitado;
     primeiraPagina;
     dataLimiteTabela;
     unsub$ = new Subject();
@@ -102,7 +102,7 @@ export class NavigationComponent implements OnInit {
         this.isAppMobile = this.auth.isAppMobile();
         this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
-        this.opcoes = this.paramsService.getOpcoes();
+        this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
         this.isLoggedIn = this.auth.isLoggedIn();
         this.preencherDias();
 
