@@ -109,6 +109,7 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
                 'data-inicial': params.dataInicial,
                 'data-final': params.dataFinal,
                 'status': params.status,
+                'apostador': params.apostador,
                 'sort': '-horario'
             };
         }
@@ -144,7 +145,8 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         this.form = this.fb.group({
             dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
             dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
-            status: ['']
+            status: [''],
+            apostador: ['']
         });
     }
 

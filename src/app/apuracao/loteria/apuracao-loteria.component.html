@@ -7,6 +7,10 @@
                     <form (ngSubmit)="onSubmit()" [formGroup]="form">
                         <div class="row">
                             <div class="col-xs-6 col-lg-3">
+                                <label>Apostador</label>
+                                <input type="text" class="form-control" formControlName="apostador">
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
                                 <label>Periodo Inicial</label>
                                 <input type="date" class="form-control" formControlName="dataInicial"
                                     [ngClass]="applyCssInputError('dataInicial')">
