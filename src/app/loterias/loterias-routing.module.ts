@@ -3,15 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SeninhaComponent } from './seninha/seninha.component';
 import { QuininhaComponent } from './quininha/quininha.component';
+import { QuininhaGuard, SeninhaGuard } from './../services';
 
 export const routes: Routes = [
     {
         path: 'seninha',
-        component: SeninhaComponent
+        component: SeninhaComponent,
+        canActivate: [SeninhaGuard]
     },
     {
         path: 'quininha',
-        component: QuininhaComponent
+        component: QuininhaComponent,
+        canActivate: [QuininhaGuard]
     }
 ];
 

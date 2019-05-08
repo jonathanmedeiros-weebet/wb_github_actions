@@ -5,7 +5,7 @@
             <div class="col nopadding content-loteria" appPerfectScroll>
                 <div class="wrap-sticky">
                     <div class="content-header">
-                        Quininha
+                        {{title}}
                     </div>
                     <div class="card">
                         <div>
@@ -16,7 +16,8 @@
                                             <label>Quantidade de dezenas da aposta</label>
                                             <select class="form-control" name="qtdNumeros" [(ngModel)]="qtdNumeros">
                                                 <option [value]="null" disabled>Selecione</option>
-                                                <option [value]="numero" [disabled]="disabledNumber(numero)" *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
+                                                <option [value]="numero" [disabled]="disabledNumber(numero)"
+                                                    *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -27,7 +28,8 @@
                             Escolha as suas dezenas:
                         </p>
                         <div class="square-group">
-                            <div class="square" *ngFor="let number of numbers" (click)="checkNumber(number)" [ngClass]="{'active': isChecked(number)}">
+                            <div class="square" *ngFor="let number of numbers" (click)="checkNumber(number)"
+                                [ngClass]="{'active': isChecked(number)}">
                                 {{number | number:'2.0'}}
                             </div>
                         </div>
@@ -43,23 +45,27 @@
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Sorteio</label>
-                                            <select class="form-control" formControlName="sorteio" [compareWith]="compararSorteio"
+                                            <select class="form-control" formControlName="sorteio"
+                                                [compareWith]="compararSorteio"
                                                 [ngClass]="applyCssInputError('sorteio')">
                                                 <option [value]="null">Selecione</option>
                                                 <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
                                                     {{sorteio.nome}}
                                                 </option>
                                             </select>
-                                            <app-error-msg [control]="form.get('sorteio')" label="Sorteio"></app-error-msg>
+                                            <app-error-msg [control]="form.get('sorteio')" label="Sorteio">
+                                            </app-error-msg>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
                                             <label for="">Valor do Palpite (R$)</label>
-                                            <input type="number" class="form-control" min="{{opcoes.valor_min_aposta_loterias}}" formControlName="valor"
+                                            <input type="number" class="form-control"
+                                                min="{{opcoes.valor_min_aposta_loterias}}" formControlName="valor"
                                                 [ngClass]="applyCssInputError('valor')">
                                             <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
-                                            <button type="submit" class="btn btn-custom btn-line">Incluir Palpite</button>
+                                            <button type="submit" class="btn btn-custom btn-line">Incluir
+                                                Palpite</button>
                                         </div>
                                     </div>
                                 </form>
@@ -111,9 +117,9 @@
                     <form #apostaForm="ngForm">
                         <div class="form-row inputs">
                             <div class="form-group col-xs-12 col-lg-12">
-                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador" name="apostador"
-                                    [ngClass]="{'is-invalid': controlInvalid(apostador)}" #apostador="ngModel"
-                                    placeholder="Apostador">
+                                <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
+                                    name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
+                                    #apostador="ngModel" placeholder="Apostador">
                                 <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
                             </div>
                             <!-- <div class="form-group col-xs-12 col-lg-12">
@@ -123,8 +129,8 @@
                         </div>
                         <div class="form-row botoes">
                             <div class="col">
-                                <button type="button" [disabled]="!apostaForm.form.valid || disabled" class="btn btn-custom col-12"
-                                    (click)="create()">
+                                <button type="button" [disabled]="!apostaForm.form.valid || disabled"
+                                    class="btn btn-custom col-12" (click)="create()">
                                     Finalizar
                                 </button>
                             </div>

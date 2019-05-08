@@ -45,6 +45,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     aoVivoHabilitado = false;
     appMobile;
     isOpen = false;
+    seninhaNome = 'Seninha';
+    quininhaNome = 'Quininha';
+    seninhaAtiva;
+    quininhaAtiva;
     unsub$ = new Subject();
 
     constructor(
@@ -73,6 +77,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.combateHabilitado = this.paramsService.getOpcoes().combate;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
+        this.seninhaNome = this.paramsService.getSeninhaNome();
+        this.quininhaNome = this.paramsService.getQuininhaNome();
+        this.seninhaAtiva = this.paramsService.seninhaAtiva();
+        this.quininhaAtiva = this.paramsService.quininhaAtiva();
 
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen

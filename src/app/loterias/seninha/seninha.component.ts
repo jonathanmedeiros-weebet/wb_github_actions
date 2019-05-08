@@ -34,6 +34,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     disabled = false;
     isLoggedIn = false;
     modalRef;
+    title = 'Seninha';
     unsub$ = new Subject();
 
     constructor(
@@ -59,6 +60,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
+        this.title = this.paramsService.getSeninhaNome();
         this.createForm();
         this.definirAltura();
 

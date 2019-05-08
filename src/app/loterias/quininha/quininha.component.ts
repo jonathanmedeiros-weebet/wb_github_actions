@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -9,7 +9,6 @@ import { LoteriaSuccessModalComponent } from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
-    PrintService, HelperService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService,
     ParametrosLocaisService
@@ -35,6 +34,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     disabled = false;
     isLoggedIn = false;
     modalRef;
+    title = 'Quininha';
     unsub$ = new Subject();
 
     constructor(
@@ -45,14 +45,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private tipoApostaService: TipoApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private printService: PrintService,
         private fb: FormBuilder,
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
-        private paramsService: ParametrosLocaisService,
-        private helperService: HelperService
+        private paramsService: ParametrosLocaisService
     ) {
         super();
     }
@@ -62,6 +60,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
+        this.title = this.paramsService.getQuininhaNome();
         this.createForm();
         this.definirAltura();
 
