@@ -34,7 +34,7 @@
                         <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
                             <tbody>
                                 <tr *ngIf="controlarCreditoCambista">
-                                    <td class="">Saldo anterior</td>
+                                    <th class="">Saldo anterior</th>
                                     <td>
                                         <div class="value">
                                             <i class="fa fa-minus-circle"></i>
@@ -43,7 +43,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="">Total Apostado</td>
+                                    <th class="">Total Apostado</th>
                                     <td>
                                         <div class="value">
                                             <i class="fa fa-plus-circle"></i>
@@ -52,19 +52,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="">L Apostas Esportivas</td>
+                                    <td class="">L Esportivas</td>
                                     <td class="text-right">
                                         {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="">L Apostas Loterias</td>
+                                    <td class="">L Loterias</td>
                                     <td class="text-right">
                                         {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Recargas de Cartão</td>
+                                    <th>Recargas de Cartão</th>
                                     <td>
                                         <div class="value">
                                             <i class="fa fa-plus-circle"></i>
@@ -73,7 +73,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Comissões</td>
+                                    <th>Comissões</th>
                                     <td>
                                         <div class="value">
                                             <i class="fa fa-minus-circle"></i>
@@ -82,7 +82,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Prêmios</td>
+                                    <th>Prêmios</th>
                                     <td>
                                         <div class="value">
                                             <i class="fa fa-minus-circle"></i>
@@ -91,7 +91,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Saques</td>
+                                    <th>Saques</th>
                                     <td>
                                         <div class="value">
                                             <i class="fa fa-minus-circle"></i>
@@ -101,7 +101,7 @@
                                 </tr>
                                 <ng-container *ngIf="controlarCreditoCambista">
                                     <tr>
-                                        <td class="">Créditos</td>
+                                        <th class="">Créditos</th>
                                         <td>
                                             <div class="value">
                                                 <i class="fa fa-plus-circle"></i>
@@ -110,7 +110,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="">Débitos</td>
+                                        <th class="">Débitos</th>
                                         <td>
                                             <div class="value">
                                                 <i class="fa fa-minus-circle"></i>
