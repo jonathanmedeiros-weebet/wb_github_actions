@@ -523,3 +523,11 @@ gulp.task('bets45.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportchampions.bet', function (done) {
+    tasks(done, {
+        host: "sportchampions.bet",
+        banca: "Sport Champions",
+        styles: "--header: #00465C; --foreground-header: #b1c5e0; --sidebar-right:#00465C; --foreground-sidebar-right: #fff; --sidebar-left: #00465C; --foreground-sidebar-left: #fff; --highlight: #1690b8; --foreground-highlight: #aec3d8; --odds: #FF9200; --foreground-odds: #fff;",
+    });
+});

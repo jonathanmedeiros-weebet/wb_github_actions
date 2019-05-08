@@ -61,7 +61,9 @@
     "megapremium.wee.bet": "gulp megapremium.wee.bet",
     "redblue.wee.bet": "gulp redblue.wee.bet",
     "lancenet.wee.bet": "gulp lancenet.wee.bet",
-    "bets45.wee.bet": "gulp bets45.wee.bet"
+    "bets45.wee.bet": "gulp bets45.wee.bet",
+    "sportchampions.bet": "gulp sportchampions.bet"
+
   },
   "private": true,
   "dependencies": {
