@@ -62,7 +62,8 @@
     "redblue.wee.bet": "gulp redblue.wee.bet",
     "lancenet.wee.bet": "gulp lancenet.wee.bet",
     "bets45.wee.bet": "gulp bets45.wee.bet",
-    "sportchampions.bet": "gulp sportchampions.bet"
+    "sportchampions.bet": "gulp sportchampions.bet",
+    "snookerbets.bet": "gulp snookerbets.bet"
 
   },
   "private": true,
