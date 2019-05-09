@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { RelatorioService, MessageService, AuthService } from './../../services';
+import { RelatorioService, MessageService, ParametrosLocaisService } from './../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -15,18 +15,18 @@ export class ApuracaoConsolidadaComponent extends BaseFormComponent implements O
     showLoadingIndicator = true;
     dataInicial;
     dataFinal;
+    controlarCreditoCambista;
 
     constructor(
         private relatorioService: RelatorioService,
         private messageService: MessageService,
-        private auth: AuthService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private params: ParametrosLocaisService
     ) {
         super();
     }
 
     ngOnInit() {
-
         if (moment().day() === 0 || moment().day() === 1) {
             const startWeek = moment().startOf('week');
             this.dataInicial = startWeek.subtract(6, 'days');
@@ -40,6 +40,8 @@ export class ApuracaoConsolidadaComponent extends BaseFormComponent implements O
             this.dataInicial = moment().startOf('week').add('1', 'day');
             this.dataFinal = moment();
         }
+
+        this.controlarCreditoCambista = this.params.controlarCreditoCambista();
 
         this.getResultado();
         this.createForm();

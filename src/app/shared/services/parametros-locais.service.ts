@@ -129,5 +129,9 @@ export class ParametrosLocaisService {
     getPrimeiraPagina() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.primeira_pagina : null;
     }
+
+    controlarCreditoCambista() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.controlar_credito_cambista : null;
+    }
 }
 

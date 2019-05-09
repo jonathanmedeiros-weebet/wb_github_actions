@@ -29,43 +29,106 @@
         <div class="content">
             <div appPerfectScroll>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-
-                <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
-                    <tbody>
-                        <tr>
-                            <th class="">Apostas Esportivas</th>
-                            <td>{{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th class="">Apostas Loterias</th>
-                            <td>{{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th class="">Total Apostado</th>
-                            <td>{{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th>Recargas de Cartão</th>
-                            <td>{{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th>Comissões</th>
-                            <td>{{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th>Prêmios</th>
-                            <td>{{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th>Saques</th>
-                            <td>{{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                        <tr>
-                            <th>Saldo</th>
-                            <td>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
+                            <tbody>
+                                <tr *ngIf="controlarCreditoCambista">
+                                    <th class="">Saldo anterior</th>
+                                    <td>
+                                        <div class="value">
+                                            <i class="fa fa-minus-circle"></i>
+                                            {{relatorio['saldo_anterior'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="">Total Apostado</th>
+                                    <td>
+                                        <div class="value">
+                                            <i class="fa fa-plus-circle"></i>
+                                            {{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">L Esportivas</td>
+                                    <td class="text-right">
+                                        {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">L Loterias</td>
+                                    <td class="text-right">
+                                        {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Recargas de Cartão</th>
+                                    <td>
+                                        <div class="value">
+                                            <i class="fa fa-plus-circle"></i>
+                                            {{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Comissões</th>
+                                    <td>
+                                        <div class="value">
+                                            <i class="fa fa-minus-circle"></i>
+                                            {{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Prêmios</th>
+                                    <td>
+                                        <div class="value">
+                                            <i class="fa fa-minus-circle"></i>
+                                            {{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Saques</th>
+                                    <td>
+                                        <div class="value">
+                                            <i class="fa fa-minus-circle"></i>
+                                            {{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <ng-container *ngIf="controlarCreditoCambista">
+                                    <tr>
+                                        <th class="">Créditos</th>
+                                        <td>
+                                            <div class="value">
+                                                <i class="fa fa-plus-circle"></i>
+                                                {{relatorio['creditos'] | currency: 'BRL':'symbol':'1.2'}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="">Débitos</th>
+                                        <td>
+                                            <div class="value">
+                                                <i class="fa fa-minus-circle"></i>
+                                                {{relatorio['debitos'] | currency: 'BRL':'symbol':'1.2'}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <tr>
+                                    <th>Saldo</th>
+                                    <td class="text-right resultado">
+                                        <b>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

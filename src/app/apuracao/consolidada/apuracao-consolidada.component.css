@@ -1,0 +1,13 @@
+.fa-minus-circle{
+    color: red;
+}
+
+.fa-plus-circle{
+    color: green;
+}
+
+.value{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
