@@ -435,7 +435,8 @@ ${horario} ${jogo.nome}
     }
 
     private lotteryTicketAppMobile(aposta) {
-        let ticket = `${config.BANCA_NOME}
+        let ticket = `
+${config.BANCA_NOME}
 
 #${aposta.id}
 Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
@@ -448,21 +449,27 @@ Valor Total: ${this.helperService.moneyFormat(aposta.valor)}`;
 -------------------------------
 ${item.sorteio_nome} (${item.tipo})
 Dezenas: ${item.numeros.join('-')}
-Valor: ${this.helperService.moneyFormat(item.valor)}
-`;
+Valor: ${this.helperService.moneyFormat(item.valor)}`;
             if (item.cotacao3 > 0) {
-                ticket += `Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}`;
+                ticket += `
+Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}`;
             }
             if (item.cotacao4 > 0) {
-                ticket += `Retorno 4: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}`;
+                ticket += `
+Retorno 4: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}`;
             }
             if (item.cotacao5 > 0) {
-                ticket += `Retorno 5: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}`;
+                ticket += `
+Retorno 5: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}`;
             }
             if (item.tipo === 'seninha' && item.cotacao6 > 0) {
-                ticket += `Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)}`;
+                ticket += `
+Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)}`;
             }
         });
+
+        ticket += `
+        `;
         // console.log(ticket);
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
