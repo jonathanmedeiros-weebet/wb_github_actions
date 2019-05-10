@@ -140,5 +140,9 @@ export class ParametrosLocaisService {
     quantidadeMaxEventosBilhete() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.quantidade_max_jogos_bilhete : null;
     }
+
+    minutoEncerramentoAoVivo() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.minuto_encerramento_aovivo : null;
+    }
 }
 
