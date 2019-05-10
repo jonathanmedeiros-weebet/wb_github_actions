@@ -95,7 +95,6 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.quininha_nome : null;
     }
 
-
     seninhaAtiva() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.seninha_ativa : null;
     }
@@ -132,6 +131,14 @@ export class ParametrosLocaisService {
 
     controlarCreditoCambista() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.controlar_credito_cambista : null;
+    }
+
+    quantidadeMinEventosBilhete() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.quantidade_min_jogos_bilhete : null;
+    }
+
+    quantidadeMaxEventosBilhete() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.quantidade_max_jogos_bilhete : null;
     }
 }
 

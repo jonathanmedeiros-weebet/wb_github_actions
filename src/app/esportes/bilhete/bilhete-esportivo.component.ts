@@ -147,7 +147,25 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     submit() {
         this.disabledSubmit();
 
-        if (this.itens.length) {
+        let valido = true;
+        let msg = '';
+
+        if (!this.itens.length) {
+            valido = false;
+            msg = 'Por favor, inclua um evento.';
+        }
+
+        if (this.itens.length < this.paramsService.quantidadeMinEventosBilhete()) {
+            valido = false;
+            msg = `Por favor, inclua no MÍNIMO ${this.paramsService.quantidadeMinEventosBilhete()} evento(s).`;
+        }
+
+        if (this.itens.length > this.paramsService.quantidadeMaxEventosBilhete()) {
+            valido = false;
+            msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
+        }
+
+        if (valido) {
             if (this.isLoggedIn) {
                 const values = clone(this.form.value);
                 values.itens.map(item => {
@@ -182,7 +200,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             }
         } else {
             this.enableSubmit();
-            this.messageService.warning('Por favor, inclua um jogo.');
+            this.messageService.warning(msg);
         }
     }
 
