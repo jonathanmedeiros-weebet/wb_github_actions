@@ -52,8 +52,6 @@ export class CombateDefaultWrapperComponent implements OnInit, OnDestroy {
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         campeonatos => {
-                            sessionStorage.setItem('camp_url', this.router.url);
-
                             this.campeonatos = campeonatos;
                             this.showLoadingIndicator = false;
                         },

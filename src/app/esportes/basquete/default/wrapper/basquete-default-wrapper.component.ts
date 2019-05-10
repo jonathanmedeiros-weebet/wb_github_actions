@@ -65,8 +65,6 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
                             campeonato => {
                                 this.campeonatos = [campeonato];
 
-                                sessionStorage.setItem('camp_url', this.router.url);
-
                                 this.showLoadingIndicator = false;
                                 this.eventoId = this.extrairEventoId(this.campeonatos);
                             },
@@ -94,8 +92,6 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                sessionStorage.setItem('camp_url', this.router.url);
-
                                 this.campeonatos = campeonatos;
                                 this.showLoadingIndicator = false;
                                 this.eventoId = this.extrairEventoId(this.campeonatos);

@@ -97,7 +97,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             pin: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(3),
-            ])]
+            ])],
+            manter_cartao: [null]
         });
     }
 
@@ -157,6 +158,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             } else {
                 this.enableSubmit();
 
+                const cartaoChave = localStorage.getItem('cartao_chave');
+                if (cartaoChave) {
+                    this.cartaoApostaForm.patchValue({
+                        chave: cartaoChave,
+                        manter_cartao: true
+                    });
+                }
+
                 this.modalRef = this.modalService.open(
                     this.apostaDeslogadoModal,
                     {
@@ -186,6 +195,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
+        this.cartaoApostaForm.reset();
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -203,6 +213,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
+        this.cartaoApostaForm.reset();
 
         this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -267,10 +278,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 );
         } else {
             if (this.cartaoApostaForm.valid) {
-                const valuesCard = { cartao: this.cartaoApostaForm.value };
-                const finalValues = Object.assign(values, valuesCard);
+                const cartaoValues = this.cartaoApostaForm.value;
 
-                this.salvarAposta(finalValues);
+                if (cartaoValues.manter_cartao) {
+                    localStorage.setItem('cartao_chave', cartaoValues.chave);
+                } else {
+                    localStorage.removeItem('cartao_chave');
+                }
+
+                delete cartaoValues.manter_cartao;
+
+                const dados = Object.assign(values, { cartao: cartaoValues });
+                this.salvarAposta(dados);
             }
         }
     }

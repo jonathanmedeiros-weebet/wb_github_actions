@@ -147,13 +147,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Chave</label>
-                        <input type="text" class="form-control" formControlName="chave"
+                        <input type="text" class="form-control" formControlName="chave" autocomplete="off"
                             style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
                     </div>
                     <div class="form-group col-md-6">
                         <label>PIN</label>
-                        <input type="password" class="form-control" formControlName="pin">
+                        <input type="password" class="form-control" formControlName="pin" autocomplete="off">
                     </div>
+                </div>
+                <div class="form-check col-md-6">
+                    <input type="checkbox" class="form-check-input" id="manter-cartao" formControlName="manter_cartao">
+                    <label class="form-check-label" for="manter-cartao">Manter Cartão</label>
                 </div>
             </form>
         </div>

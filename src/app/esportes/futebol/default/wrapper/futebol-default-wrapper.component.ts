@@ -73,9 +73,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             campeonato => {
                                 this.campeonatos = [campeonato];
 
-                                sessionStorage.setItem('campeonatos', JSON.stringify(this.campeonatos));
-                                sessionStorage.setItem('camp_url', this.router.url);
-
                                 this.showLoadingIndicator = false;
                                 this.jogoId = this.extrairJogoId(this.campeonatos);
                             },
@@ -117,9 +114,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                sessionStorage.setItem('campeonatos', JSON.stringify(campeonatos));
-                                sessionStorage.setItem('camp_url', this.router.url);
-
                                 this.campeonatos = campeonatos;
                                 this.showLoadingIndicator = false;
                                 this.jogoId = this.extrairJogoId(this.campeonatos);
