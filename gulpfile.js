@@ -547,8 +547,8 @@ gulp.task('showdoesporte.net', function (done) {
     tasks(done, {
         host: "showdoesporte.net",
         banca: "Show do Esporte",
-        styles: "--header: #012459; --foreground-header: #fff; --sidebar-right:#012459; --foreground-sidebar-right: #fff; --sidebar-left: #012459; --foreground-sidebar-left: #fff; --highlight: #ec0205; --foreground-highlight: #fff; --odds: #ec0205; --foreground-odds: #fff;",
-        aditional_styles: ".odds .selecionado, .odds .inner-odd:hover{ background: #000!important; } .odds .selecionado span, .odds .inner-odd:hover span{ color: #fff!important; }"
+        styles: "--header: #012459; --foreground-header: #fff; --sidebar-right:#012459; --foreground-sidebar-right: #fff; --sidebar-left: #012459; --foreground-sidebar-left: #fff; --highlight: #ec0205; --foreground-highlight: #fff;",
+        aditional_styles: ".odds .selecionado span, .odds .inner-odd:hover span{ color: #fff!important; }"
     });
 });
 
