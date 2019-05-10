@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { AuthService, ApostaEsportivaService, HelperService, MessageService } from './../../../../services';
+import { AuthService, ApostaEsportivaService, HelperService, MessageService, PrintService } from './../../../../services';
 
 @Component({
     selector: 'app-pesquisar-aposta-modal',
@@ -28,6 +28,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
         private helperService: HelperService,
+        private printService: PrintService,
         private auth: AuthService
     ) { }
 
@@ -46,9 +47,9 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         this.apostaEsportivaService.getAposta(input)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                apostaEsportiva => {
+                aposta => {
                     this.pesquisarForm.reset();
-                    this.aposta = apostaEsportiva;
+                    this.aposta = aposta;
                     this.exibirBilhete = true;
                 },
                 error => this.messageService.error(error)
@@ -56,7 +57,11 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     }
 
     printTicket() {
-        this.bilheteEsportivoComponent.print();
+        if (this.aposta.tipo === 'esportes') {
+            this.bilheteEsportivoComponent.print();
+        } else {
+            this.printService.lotteryTicket(this.aposta);
+        }
     }
 
     shareTicket() {
