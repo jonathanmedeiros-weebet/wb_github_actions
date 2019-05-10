@@ -439,7 +439,7 @@ ${horario} ${jogo.nome}
 
 #${aposta.id}
 Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
-Cambista: ${aposta.passador.nome}
+Cambista: ${aposta.cambista.nome}
 Apostador: ${aposta.apostador}
 Valor Total: ${this.helperService.moneyFormat(aposta.valor)}`;
 
