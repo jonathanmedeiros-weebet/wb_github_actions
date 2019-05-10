@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2, DoCheck } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,13 +12,14 @@ import { ParametrosLocaisService, MessageService, JogoService, LiveService, Bilh
     templateUrl: 'live-jogo.component.html',
     styleUrls: ['live-jogo.component.css']
 })
-export class LiveJogoComponent implements OnInit, OnDestroy {
+export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     jogo;
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
     objectKeys = Object.keys;
     showLoadingIndicator = true;
+    minutoEncerramentoAoVivo = 0;
     unsub$ = new Subject();
 
     constructor(
@@ -29,12 +30,14 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private renderer: Renderer2,
         private route: ActivatedRoute,
+        private router: Router,
         private location: Location,
         private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
         this.tiposAposta = this.paramsService.getTiposAposta();
+        this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
 
         this.route.params
             .pipe(takeUntil(this.unsub$))
@@ -58,6 +61,14 @@ export class LiveJogoComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    ngDoCheck() {
+        if (this.minutoEncerramentoAoVivo > 0 && this.jogo) {
+            if (this.jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                this.router.navigate(['/esportes/futebol/live/jogos']);
+            }
+        }
     }
 
     getJogo(id) {
