@@ -133,5 +133,9 @@ export class ParametrosLocaisService {
     controlarCreditoCambista() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.controlar_credito_cambista : null;
     }
+
+    minutoEncerramentoAoVivo() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.minuto_encerramento_aovivo : null;
+    }
 }
 

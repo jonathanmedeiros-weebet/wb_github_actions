@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef, DoCheck } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { takeUntil, delay, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ParametrosLocaisService, MessageService, JogoService, LiveService } from '../../../../services';
 import { Jogo } from '../../../../models';
 
@@ -18,6 +18,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     awaiting = true;
     showLoadingIndicator = true;
     contentSportsEl;
+    minutoEncerramentoAoVivo = 0;
     unsub$ = new Subject();
 
     constructor(
@@ -32,20 +33,36 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     ngOnInit() {
         this.definindoAlturas();
 
+        this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
+
         this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
                     campeonatos.forEach(campeonato => {
                         const jogos = new Map();
+                        let temJogoValido = false;
 
                         campeonato.jogos.forEach(jogo => {
-                            jogos.set(jogo._id, jogo);
+                            let valido = true;
+
+                            if (this.minutoEncerramentoAoVivo > 0) {
+                                if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                    valido = false;
+                                }
+                            }
+
+                            if (valido) {
+                                jogos.set(jogo._id, jogo);
+                                temJogoValido = true;
+                            }
                         });
 
                         campeonato.jogos = jogos;
 
-                        this.campeonatos.set(campeonato._id, campeonato);
+                        if (temJogoValido) {
+                            this.campeonatos.set(campeonato._id, campeonato);
+                        }
                     });
 
 
@@ -86,6 +103,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: Jogo) => {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
+                let inserirCampeonato = false;
 
                 if (!campeonato) {
                     campeonato = {
@@ -94,16 +112,32 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         regiao_sigla: jogo.campeonato.regiao_sigla,
                         jogos: new Map()
                     };
-                    this.campeonatos.set(jogo.campeonato._id, campeonato);
+
+                    inserirCampeonato = true;
                 }
 
-                if (!jogo.finalizado && jogo.cotacoes.length > 0) {
-                    campeonato.jogos.set(jogo._id, jogo);
-                } else {
-                    campeonato.jogos.delete(jogo._id);
+                let valido = true;
+                if (this.minutoEncerramentoAoVivo > 0) {
+                    if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                        valido = false;
+                    }
+                }
 
-                    if (!campeonato.jogos.size) {
-                        this.campeonatos.delete(campeonato._id);
+                if (valido && !jogo.finalizado && jogo.cotacoes.length > 0) {
+                    campeonato.jogos.set(jogo._id, jogo);
+
+                    if (inserirCampeonato) {
+                        this.campeonatos.set(jogo.campeonato._id, campeonato);
+                    }
+                } else {
+                    const eventoEncontrado = campeonato.jogos.get(jogo._id);
+
+                    if (eventoEncontrado) {
+                        campeonato.jogos.delete(jogo._id);
+
+                        if (!campeonato.jogos.size) {
+                            this.campeonatos.delete(campeonato._id);
+                        }
                     }
                 }
             });
