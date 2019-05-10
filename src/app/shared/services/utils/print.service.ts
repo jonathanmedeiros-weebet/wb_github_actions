@@ -290,6 +290,14 @@ ${horario} ${jogo.nome}
                         ${aposta.apostador}
                     </div>
                 </div>
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
+                        Cambista
+                    </div>
+                    <div style="float: right;">
+                        ${aposta.passador.nome}
+                    </div>
+                </div>
                 `;
 
         const seninhaNome = this.paramsService.getSeninhaNome();
@@ -440,7 +448,7 @@ ${config.BANCA_NOME}
 
 #${aposta.id}
 Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
-Cambista: ${aposta.cambista.nome}
+Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
 Valor Total: ${this.helperService.moneyFormat(aposta.valor)}`;
 
@@ -611,7 +619,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
                 <hr>
                 <div class="informacoes">
                     <p>
-                        <b>CAMBISTA:</b> ${aposta.cambista.nome}
+                        <b>CAMBISTA:</b> ${aposta.passador.nome}
                     </p>
                     <p>
                         <b>APOSTADOR:</b> ${aposta.apostador}
@@ -708,7 +716,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
     private sportsTicketAppMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
 #${aposta.id}
-CAMBISTA: ${aposta.cambista.nome}
+CAMBISTA: ${aposta.passador.nome}
 APOSTADOR: ${aposta.apostador}
 HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 -------------------------------`;
@@ -760,7 +768,7 @@ ${this.opcoes.informativo_rodape}
         const print = `${config.BANCA_NOME}
 Cartão ${card.chave}
 Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
-Cambista: ${card.cambista.nome}
+Cambista: ${card.passador.nome}
 Apostador: ${card.apostador}
 Valor inicial: ${this.helperService.moneyFormat(card.valor)}
 Bônus: ${this.helperService.moneyFormat(card.bonus)}
@@ -857,7 +865,7 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
                         <b>Apostador: </b>${card.apostador}
                     </div>
                     <div class="margin-bottom-5">
-                        <b>Cambista: </b>${card.cambista.nome}
+                        <b>Cambista: </b>${card.passador.nome}
                     </div>
                     <div class="margin-bottom-5">
                         <b>Valor inicial: </b>${this.helperService.moneyFormat(card.valor)}

@@ -5,7 +5,7 @@ export class CartaoAposta {
     valor: Number;
     bonus: Number;
     saldo: Number;
-    cambista: any;
+    passador: any;
     data_registro: string;
     apostas: any[];
     total_creditos: number;
