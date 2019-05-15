@@ -1,0 +1,12 @@
+npm run sumobet365.wee.bet
+npm run foxsport.wee.bet
+npm run redblue.wee.bet
+npm run ergol31.wee.bet
+npm run betsw2.com
+npm run esportbets.wee.bet
+npm run jvsports.bet
+npm run betpalmas.wee.bet
+npm run esportivatop.wee.bet
+npm run betvegas365.wee.bet
+npm run sportchampions.bet
+npm run showdoesporte.net
