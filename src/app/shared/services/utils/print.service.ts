@@ -600,7 +600,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
         @media print {
             html, body {
                 width: 75mm;
-                padding: 4mm;
+                padding: 0mm;
             }
         }
         `;
