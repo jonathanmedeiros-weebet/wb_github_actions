@@ -566,6 +566,6 @@ gulp.task('copaesporte.com', function (done) {
     tasks(done, {
         host: "copaesporte.com",
         banca: "Copa Esporte",
-        styles: "",
+        styles: "--header: #007df0; --foreground-header: #ffffff;--sidebar-right: #007df0; --foreground-sidebar-right: #fff; --sidebar-left: #007df0; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #045199; --foreground-odds: #fff; --foreground-selected-odds: #fff; --foreground-league: #045199;",
     });
 });
