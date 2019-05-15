@@ -66,7 +66,8 @@
     "snookerbets.bet": "gulp snookerbets.bet",
       "showdoesporte.net": "gulp showdoesporte.net",
       "onbets.club": "gulp onbets.club",
-      "copaesporte.com": "gulp copaesporte.com"
+      "copaesporte.com": "gulp copaesporte.com",
+      "apostapremiada.bet": "gulp apostapremiada.bet"
 
   },
   "private": true,

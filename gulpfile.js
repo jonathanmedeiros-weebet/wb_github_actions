@@ -569,3 +569,11 @@ gulp.task('copaesporte.com', function (done) {
         styles: "--header: #000; --foreground-header: #ffffff;--sidebar-right: #000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #045199; --foreground-highlight: #ffffff; --odds: red; --foreground-odds: #fff; --foreground-selected-odds: #fff; --foreground-league: #000;",
     });
 });
+
+gulp.task('apostapremiada.bet', function (done) {
+    tasks(done, {
+        host: "apostapremiada.bet",
+        banca: "Aposta Premiada",
+        styles: "",
+    });
+});
