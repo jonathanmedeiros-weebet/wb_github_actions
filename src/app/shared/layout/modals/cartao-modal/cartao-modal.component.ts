@@ -32,10 +32,6 @@ export class CartaoModalComponent implements OnInit {
         this.printService.card(this.cartao);
     }
 
-    shared() {
-        alert('AINDA NÃO FOI FEITO!');
-    }
-
     abrirBilhete(id) {
         this.apostaService.getAposta(id)
             .subscribe(

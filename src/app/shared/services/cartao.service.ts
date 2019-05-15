@@ -46,10 +46,11 @@ export class CartaoService {
             );
     }
 
-    getCartao(chave: string): Observable<CartaoAposta> {
-        const url = `${this.CartaoUrl}/${chave}`;
+    getCartao(dados): Observable<CartaoAposta> {
+        const url = `${this.CartaoUrl}/${dados.chave}`;
+        const requestOptions = this.header.getRequestOptions(false, { pin: dados.pin });
 
-        return this.http.get(url, this.header.getRequestOptions(true))
+        return this.http.get(url, requestOptions)
             .pipe(
                 take(1),
                 map((res: any) => res.results),

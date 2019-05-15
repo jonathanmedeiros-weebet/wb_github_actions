@@ -235,7 +235,7 @@ export class NavigationComponent implements OnInit {
 
         this.modalRef.result
             .then(
-                result => { },
+                result => this.closeMenu(),
                 reason => { }
             );
     }

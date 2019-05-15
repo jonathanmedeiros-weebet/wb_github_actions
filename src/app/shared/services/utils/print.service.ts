@@ -504,9 +504,9 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
 
         #comprovante{
             width: 19.27em;
-            padding: 1em;
+            padding: 0;
             background: #fff;
-            margin: 2em auto;
+            margin: 0 auto;
         }
 
         .margin-top-30 {
@@ -609,7 +609,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
         <div id="comprovante">
             <div class="conteudo">
                 <div style="text-align: center;">
-                    <img style="max-height: 80px; max-width: 190;"
+                    <img style="max-height: 80px; max-width: 190px;"
                     alt="${config.BANCA_NOME}" src="${config.LOGO}" />
                 </div>
                 <h1 class="numero">

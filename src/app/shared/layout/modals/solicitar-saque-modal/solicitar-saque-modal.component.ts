@@ -11,7 +11,6 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
     styleUrls: ['./solicitar-saque-modal.component.css']
 })
 export class SolicitarSaqueModalComponent extends BaseFormComponent implements OnInit {
-    form: FormGroup;
     modalRef;
 
     constructor(
