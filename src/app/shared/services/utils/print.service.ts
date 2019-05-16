@@ -503,7 +503,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
         }
 
         #comprovante{
-            width: 16.27em;
+            width: 100%;
             padding: 0;
             background: #fff;
             margin: 0 auto;
@@ -599,8 +599,8 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
 
         @media print {
             html, body {
-                width: 73mm;
-                padding: 2mm;
+                width: 76mm;
+                padding: 1mm;
             }
         }
         `;

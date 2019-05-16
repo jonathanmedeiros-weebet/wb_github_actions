@@ -1,9 +1,9 @@
 
-const _host = 'http://weebet.local';
-const _center = 'http://localhost:3002';
+const _host = 'http://casadinha.wee.bet';
+const _center = 'http://api-center2.wee.bet';
 
 export const config: any = {
-    BANCA_NOME: 'Esport Bets',
+    BANCA_NOME: 'Casadinha.com',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
