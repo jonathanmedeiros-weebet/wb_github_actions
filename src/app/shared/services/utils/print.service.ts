@@ -497,14 +497,16 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
         styles = `
         body{
             font-family: "Lucida Console", Monaco, monospace;
-            font-size: 15px;
+            font-size: 10px;
             background: #333;
             margin: 0;
         }
 
         #comprovante{
             width: 100%;
+            box-sizing: border-box;
             padding: 0;
+            padding-right: 6px;
             background: #fff;
             margin: 0 auto;
         }
@@ -552,44 +554,44 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
 
         .informacoes p{
             margin: 1px;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .item .campeonato{
             text-align: center;
             margin: 1px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .item .horario{
             margin: 1px;
-            font-size: 12px;
+            font-size: 10px;
             text-transform: uppercase;
         }
 
         .item .jogo{
             margin: 1px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .item .cotacao{
             margin: 1px;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .valores .total-jogos, .valores .aposta, .valores .ganho, .valores .cambista-paga{
             text-align: left;
-            margin: 3px 1px 1px 1px;
+            margin: 3px 3px 1px 1px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .rodape{
             margin: 5px 1px 1px 1px;
             font-weight: normal;
-            font-size: 12px;
+            font-size: 10px;
             text-align: center;
         }
 
@@ -599,8 +601,9 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
 
         @media print {
             html, body {
-                width: 76mm;
-                padding: 1mm;
+                width: 100%;
+                max-width: 78mm;
+                padding: 0mm;
             }
         }
         `;
