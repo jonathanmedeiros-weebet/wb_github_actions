@@ -506,7 +506,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
             width: 100%;
             box-sizing: border-box;
             padding: 0;
-            padding-right: 6px;
+            padding-right: 11px;
             background: #fff;
             margin: 0 auto;
         }
