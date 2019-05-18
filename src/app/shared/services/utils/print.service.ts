@@ -773,7 +773,6 @@ Cartão ${card.chave}
 Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
 Cambista: ${card.passador.nome}
 Apostador: ${card.apostador}
-Valor inicial: ${this.helperService.moneyFormat(card.valor)}
 Bônus: ${this.helperService.moneyFormat(card.bonus)}
 Saldo: ${this.helperService.moneyFormat(card.saldo)}
 `;
@@ -869,9 +868,6 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
                     </div>
                     <div class="margin-bottom-5">
                         <b>Cambista: </b>${card.passador.nome}
-                    </div>
-                    <div class="margin-bottom-5">
-                        <b>Valor inicial: </b>${this.helperService.moneyFormat(card.valor)}
                     </div>
                     <div class="margin-bottom-5">
                         <b>Bônus: </b>${this.helperService.moneyFormat(card.bonus)}
