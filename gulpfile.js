@@ -270,8 +270,7 @@ gulp.task('maissports.net', function (done) {
     tasks(done, {
         host: "maissports.net",
         banca: "MaisSports",
-        styles: "",
-        old: true
+        styles: ""
     });
 });
 
@@ -386,8 +385,7 @@ gulp.task('wasports.wee.bet', function (done) {
     tasks(done, {
         host: "wasports.wee.bet",
         banca: "WASPORTS",
-        styles: "",
-        old: true
+        styles: ""
     });
 });
 
