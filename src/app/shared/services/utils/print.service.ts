@@ -303,7 +303,7 @@ ${horario} ${jogo.nome}
         aposta.itens.forEach((item, index, array) => {
             let tipo = '';
 
-            if (item.tipo === 'SENINHA') {
+            if (item.tipo === 'seninha') {
                 tipo = seninhaNome;
             } else {
                 tipo = quininhaNome;
@@ -475,7 +475,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
 
         ticket += `
         `;
-        // console.log(ticket);
+
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
 
@@ -898,7 +898,7 @@ ${recarga.autenticacao}
             background: #fff;
             margin: 0 auto;
         }
-        
+
         .margin-bottom-5 {
             margin-bottom: 5px;
         }
