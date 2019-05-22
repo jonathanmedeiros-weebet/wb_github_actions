@@ -45,4 +45,28 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         const sorteio = this.sorteios.find(s => s.id === sorteioId);
         return sorteio ? sorteio.nome : '';
     }
+
+    verificarStatus(apostaItem, tipo) {
+        let result = false;
+        if (apostaItem.status === 'ganhou') {
+            const tipoPremio = apostaItem.tipo_premio;
+            if (tipo === 6 && tipoPremio === 'sena') {
+                result = true;
+            }
+
+            if (tipo === 5 && tipoPremio === 'quina') {
+                result = true;
+            }
+
+            if (tipo === 4 && tipoPremio === 'quadra') {
+                result = true;
+            }
+
+            if (tipo === 3 && tipoPremio === 'terno') {
+                result = true;
+            }
+        }
+
+        return { 'ganhou': result };
+    }
 }
