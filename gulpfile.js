@@ -577,3 +577,27 @@ gulp.task('apostapremiada.bet', function (done) {
         " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #777; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
+
+gulp.task('bet3.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet3.wee.bet",
+        banca: "Bet3",
+        styles: ""
+    });
+});
+
+gulp.task('bet4.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet4.wee.bet",
+        banca: "Bet4",
+        styles: ""
+    });
+});
+
+gulp.task('bet6.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet6.wee.bet",
+        banca: "Bet6",
+        styles: ""
+    });
+});
