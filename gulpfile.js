@@ -594,10 +594,34 @@ gulp.task('bet4.wee.bet', function (done) {
     });
 });
 
+gulp.task('bet5.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet5.wee.bet",
+        banca: "Total Sorte",
+        styles: ""
+    });
+});
+
 gulp.task('bet6.wee.bet', function (done) {
     tasks(done, {
         host: "bet6.wee.bet",
         banca: "Bet6",
+        styles: ""
+    });
+});
+
+gulp.task('bet6.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet6.wee.bet",
+        banca: "Bet6",
+        styles: ""
+    });
+});
+
+gulp.task('copasports.wee.bet', function (done) {
+    tasks(done, {
+        host: "copasports.wee.bet",
+        banca: "Copa Sports",
         styles: ""
     });
 });

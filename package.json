@@ -70,7 +70,9 @@
       "apostapremiada.bet": "gulp apostapremiada.bet",
       "bet3.wee.bet": "gulp bet3.wee.bet",
       "bet4.wee.bet": "gulp bet4.wee.bet",
-      "bet6.wee.bet": "gulp bet6.wee.bet"
+      "bet5.wee.bet": "gulp bet5.wee.bet",
+      "bet6.wee.bet": "gulp bet6.wee.bet",
+      "copasports.wee.bet": "gulp copasports.wee.bet"
 
   },
   "private": true,
