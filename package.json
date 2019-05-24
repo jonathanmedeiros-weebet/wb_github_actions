@@ -72,7 +72,8 @@
       "bet4.wee.bet": "gulp bet4.wee.bet",
       "bet5.wee.bet": "gulp bet5.wee.bet",
       "bet6.wee.bet": "gulp bet6.wee.bet",
-      "copasports.wee.bet": "gulp copasports.wee.bet"
+      "copasports.wee.bet": "gulp copasports.wee.bet",
+      "topbets.wee.bet": "gulp topbets.wee.bet"
 
   },
   "private": true,

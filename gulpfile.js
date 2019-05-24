@@ -625,3 +625,11 @@ gulp.task('copasports.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('topbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "topbets.wee.bet",
+        banca: "Top Bets",
+        styles: ""
+    });
+});
