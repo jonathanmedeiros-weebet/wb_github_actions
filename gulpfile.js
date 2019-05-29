@@ -633,3 +633,19 @@ gulp.task('topbets.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('topbets.me', function (done) {
+    tasks(done, {
+        host: "topbets.me",
+        banca: "Top Bets",
+        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+    });
+});
+
+gulp.task('esportmania.net', function (done) {
+    tasks(done, {
+        host: "esportmania.net",
+        banca: "Esport Mania",
+        styles: ""
+    });
+});
