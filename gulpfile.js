@@ -652,3 +652,11 @@ gulp.task('esportmania.net', function (done) {
         " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #777; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
+
+gulp.task('xbetsports.net', function (done) {
+    tasks(done, {
+        host: "xbetsports.net",
+        banca: "Xbet Sports",
+        styles: ""
+    });
+});
