@@ -657,6 +657,6 @@ gulp.task('xbetsports.net', function (done) {
     tasks(done, {
         host: "xbetsports.net",
         banca: "XBET SPORTS",
-        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #aec3d8; --odds: #ffb701; --foreground-odds: #455a64; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #aec3d8; --odds: #ffb701; --foreground-odds: #fff; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
     });
 });
