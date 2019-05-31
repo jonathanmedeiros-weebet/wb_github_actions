@@ -76,7 +76,8 @@
       "topbets.wee.bet": "gulp topbets.wee.bet",
       "topbets.me": "gulp topbets.me",
       "esportmania.net": "gulp esportmania.net",
-      "xbetsports.net": "gulp xbetsports.net"
+      "xbetsports.net": "gulp xbetsports.net",
+      "caicobets.wee.bet": "gulp caicobets.wee.bet"
 
   },
   "private": true,
