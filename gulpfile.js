@@ -648,7 +648,6 @@ gulp.task('esportmania.net', function (done) {
         host: "esportmania.net",
         banca: "Esport Mania",
         styles: "--header: #2c5b86; --foreground-header: #fff; --sidebar-right:#052c50; --foreground-sidebar-right: #fff; --sidebar-left: #052c50; --foreground-sidebar-left: #fff; --highlight:#de2c37; --foreground-highlight: #dba000; --odds: #2c5b86; --foreground-odds: #dba000; --league: #dba00f; --foreground-league: #000;",
-        aditional_styles: " .campeonato .jogo .indentificacao .nome, .campeonato .jogo .indentificacao .nome-mobile{font-size:10px!important} "
     });
 });
 
@@ -656,7 +655,7 @@ gulp.task('xbetsports.net', function (done) {
     tasks(done, {
         host: "xbetsports.net",
         banca: "XBET SPORTS",
-        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #fff; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
+        styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #000; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
         scripts: "<!-- BEGIN JIVOSITE CODE {literal} --> <script type='text/javascript'> (function(){ var widget_id = 'hgYPIaNKWi';var d=document;var w=window;function l(){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);} if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);} else{w.addEventListener('load',l,false);}}})(); </script> <!-- {/literal} END JIVOSITE CODE -->"
     });
 });
