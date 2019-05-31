@@ -648,7 +648,7 @@ gulp.task('esportmania.net', function (done) {
         host: "esportmania.net",
         banca: "Esport Mania",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #fc6402; --foreground-highlight: #fc6402; --odds: #777; --foreground-odds: #fff; --event-time: #777; --league: #777; --foreground-league: #f8aa1a;",
-        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #222!important } .jogos, .eventos{ background: #222!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #000!important; } .footer{ background-color:#000!important; }" +
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #222!important } .jogos, .eventos{ background: #222!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #222!important; } .footer{ background-color:#000!important; }" +
         " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #777; color: white; } .inside-event .tipo-apostas{ background-color: #222!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .campeonato .jogo .indentificacao .nome, .campeonato .jogo .indentificacao .nome-mobile{font-size:10px!important} "
     });
 });
