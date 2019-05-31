@@ -648,6 +648,7 @@ gulp.task('esportmania.net', function (done) {
         host: "esportmania.net",
         banca: "Esport Mania",
         styles: "--header: #2c5b86; --foreground-header: #fff; --sidebar-right:#052c50; --foreground-sidebar-right: #fff; --sidebar-left: #052c50; --foreground-sidebar-left: #fff; --highlight:#de2c37; --foreground-highlight: #dba000; --odds: #2c5b86; --foreground-odds: #dba000; --league: #dba00f; --foreground-league: #000;",
+        aditional_styles: ".odds .inner-odd span { font-weight: bold!important; } "
     });
 });
 
