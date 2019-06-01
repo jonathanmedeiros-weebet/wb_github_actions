@@ -31,8 +31,8 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
 
         this.opcoes = this.paramsService.getOpcoes();
 
-        if (this.opcoes.percentual_premio_cambista > 0) {
-            this.cambistaPaga = this.aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+        if (this.aposta.passador.percentualPremio > 0) {
+            this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
         }
     }
 

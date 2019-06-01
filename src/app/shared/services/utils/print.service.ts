@@ -651,8 +651,8 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
                         POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio)}</span>
                     </p>`;
 
-        if (this.opcoes.percentual_premio_cambista > 0) {
-            const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+        if (aposta.passador.percentualPremio > 0) {
+            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
             printContents += `   <p class="cambista-paga">
                             CAMBISTA PAGA: <span style="float:right">${this.helperService.moneyFormat(cambistaPaga)}</span>
                         </p>`;
@@ -718,8 +718,8 @@ VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
 POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.premio)}
 `;
 
-        if (this.opcoes.percentual_premio_cambista > 0) {
-            const cambistaPaga = aposta.premio * ((100 - this.opcoes.percentual_premio_cambista) / 100);
+        if (aposta.passador.percentualPremio > 0) {
+            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
             ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
         }
 
