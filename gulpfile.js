@@ -658,7 +658,7 @@ gulp.task('xbetsports.net', function (done) {
         host: "xbetsports.net",
         banca: "XBET SPORTS",
         styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #000; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
-        scripts: "<!-- Smartsupp Live Chat script --> <script type='text/javascript'> var _smartsupp = _smartsupp || {}; _smartsupp.key = '14ab782f3bcd99b4250fb836673674d7ed93b1ad'; window.smartsupp||(function(d) { var s,c,o=smartsupp=function(){ o..push(arguments)};o.=[]; s=d.getElementsByTagName('script')[0];c=d.createElement('script'); c.type='text/javascript';c.charset='utf-8';c.async=true; c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s); })(document); </script>"
+        scripts: "<script> var _smartsupp = _smartsupp || {}; _smartsupp.key = '14ab782f3bcd99b4250fb836673674d7ed93b1ad'; window.smartsupp||(function(d) { var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[]; s=d.getElementsByTagName('script')[0];c=d.createElement('script'); c.type='text/javascript';c.charset='utf-8';c.async=true; c.src='//www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s); })(document); </script>"
     });
 });
 
