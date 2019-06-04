@@ -671,3 +671,11 @@ gulp.task('caicobets.wee.bet', function (done) {
         " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
+
+gulp.task('foxbet.me', function (done) {
+    tasks(done, {
+        host: "foxbet.me",
+        banca: "Fox Bet",
+        styles: "",
+    });
+});
