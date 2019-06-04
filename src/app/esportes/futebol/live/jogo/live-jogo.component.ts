@@ -91,7 +91,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (jogo: Jogo) => {
-                    console.log(jogo.time_a_nome);
                     this.jogo.info = jogo.info;
                     this.mapearCotacoes(jogo.cotacoes);
                 }
