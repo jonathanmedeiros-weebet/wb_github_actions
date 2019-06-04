@@ -3,13 +3,17 @@
         <div class="wrap-sticky">
             <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-            <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
-                <div class="campeonato-header">
-                    Nenhum jogo encontrado!
-                </div>
-            </div>
-
             <div *ngIf="!showLoadingIndicator">
+                <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
+                    <div class="sem-evento">
+                        Nenhum evento encontrado!
+                        <button *ngIf="exibirBtnProximaData()" type="button" (click)="proximaData()"
+                            class="btn btn-custom btn-sm">
+                            Próxima Data
+                        </button>
+                    </div>
+                </div>
+
                 <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                     <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                         <span class="column-left">
@@ -47,7 +51,8 @@
                                 <div class="odds">
                                     <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
                                         (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                        <div
+                                            class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{cotacao.chave | tipoAposta: 'sigla'}}
                                             </span>

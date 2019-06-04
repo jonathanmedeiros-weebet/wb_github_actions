@@ -3,12 +3,14 @@ import {
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
     ChangeDetectorRef, Input, OnChanges, SimpleChange
 } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -21,6 +23,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() deixarCampeonatosAbertos;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
+    @Input() data;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
@@ -44,7 +47,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -282,5 +286,26 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
 
         this.loadingScroll = false;
         this.cd.markForCheck();
+    }
+
+    exibirBtnProximaData() {
+        let result = false;
+
+        if (this.data) {
+            const proximaData = moment(this.data);
+            if (proximaData.day() !== 0) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
+    proximaData() {
+        const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
+        const navigationExtras: NavigationExtras = {
+            queryParams: { 'data': proximaData }
+        };
+        this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
     }
 }

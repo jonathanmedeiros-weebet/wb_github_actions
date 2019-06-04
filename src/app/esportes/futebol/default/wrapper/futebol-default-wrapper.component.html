@@ -5,7 +5,8 @@
                 (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
                 [showLoadingIndicator]="showLoadingIndicator"
                 [deixarCampeonatosAbertos]="deixarCampeonatosAbertos"
-                [camps]="campeonatos"></app-futebol-listagem>
+                [camps]="campeonatos"
+                [data]="data"></app-futebol-listagem>
         </div>
         <div class="jogo" [hidden]="mobileScreen && !exibirMaisCotacoes">
             <app-futebol-jogo [jogoId]="jogoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">

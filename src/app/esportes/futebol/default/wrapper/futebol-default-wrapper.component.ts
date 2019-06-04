@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../../services';
 import * as moment from 'moment';
-import * as isEmpty from 'lodash.isempty';
 
 @Component({
     selector: 'app-futebol-default-wrapper',
@@ -20,6 +19,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     campeonatos;
     deixarCampeonatosAbertos;
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
+    data;
     unsub$ = new Subject();
 
     constructor(
@@ -27,10 +27,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private el: ElementRef,
-        private renderer: Renderer2,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
@@ -58,6 +55,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
                 this.deixarCampeonatosAbertos = this.paramsService.getExibirCampeonatosExpandido();
+                this.data = null;
 
                 if (params['campeonato']) {
                     this.deixarCampeonatosAbertos = true;
@@ -108,6 +106,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 queryParams.data_final = dataLimiteTabela;
                             }
                         }
+                    }
+
+                    if (queryParams.data) {
+                        this.data = queryParams.data;
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
