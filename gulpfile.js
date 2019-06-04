@@ -677,6 +677,6 @@ gulp.task('foxbet.me', function (done) {
     tasks(done, {
         host: "foxbet.me",
         banca: "Fox Bet",
-        styles: "",
+        styles: "--header: #000000; --foreground-header: #ffffff; --sidebar-right: #000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff; --highlight: #f28123; --foreground-highlight: #ffffff; --odds: #0c9fa0; --foreground-odds: #fff; --event-time: #f58021;",
     });
 });
