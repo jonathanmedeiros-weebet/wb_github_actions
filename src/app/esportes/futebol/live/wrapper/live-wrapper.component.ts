@@ -10,6 +10,8 @@ import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageServ
     styleUrls: ['live-wrapper.component.css']
 })
 export class LiveWrapperComponent implements OnInit, OnDestroy {
+    exibirMaisCotacoes = false;
+    jogoId;
     unsub$ = new Subject();
 
     constructor(
@@ -51,5 +53,13 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
                 campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
                 error => this.messageService.error(error)
             );
+    }
+
+    receptorJogoSelecionadoId(jogoId) {
+        this.jogoId = jogoId;
+    }
+
+    changeExibirMaisCotacoes(exibirMaisCotacoes) {
+        this.exibirMaisCotacoes = exibirMaisCotacoes;
     }
 }

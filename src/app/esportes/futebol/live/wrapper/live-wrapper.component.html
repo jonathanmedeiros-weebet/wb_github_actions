@@ -1,5 +1,13 @@
 <div id="futebol-live-wrapper">
     <div id="futebol-live-content">
-        <router-outlet></router-outlet>
+        <div class="lista" [hidden]="exibirMaisCotacoes">
+            <app-live-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            </app-live-listagem>
+        </div>
+        <div class="jogo" *ngIf="exibirMaisCotacoes">
+            <app-live-jogo [jogoId]="jogoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            </app-live-jogo>
+        </div>
     </div>
 </div>

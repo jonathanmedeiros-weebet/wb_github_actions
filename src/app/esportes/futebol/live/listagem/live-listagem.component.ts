@@ -1,4 +1,7 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, DoCheck } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, Renderer2,
+    ElementRef, DoCheck, Output, EventEmitter
+} from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,6 +14,8 @@ import { Jogo } from '../../../../models';
     styleUrls: ['live-listagem.component.css']
 })
 export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
+    @Output() jogoSelecionadoId = new EventEmitter();
+    @Output() exibirMaisCotacoes = new EventEmitter();
     jogos = {};
     campeonatos = new Map();
     idsCampeonatosLiberados = this.paramsService.getCampeonatosAoVivo();
@@ -157,5 +162,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     trackById(index: number, campeonato: any): string {
         return campeonato._id;
+    }
+
+    // Exibindo todas as cotações daquele jogo selecionado
+    maisCotacoes(jogoId) {
+        this.jogoSelecionadoId.emit(jogoId);
+        this.exibirMaisCotacoes.emit(true);
     }
 }
