@@ -82,12 +82,8 @@
                     <div *ngFor="let aposta of apostas" class="aposta">
                         <div class="aposta-header">
                             <div>
-                                <button type="button" (click)="printTicket(aposta)" class="btn btn-sm btn-custom">
-                                    <i class="fa fa-print"></i>
-                                </button>
-                                <button *ngIf="appMobile" type="button" (click)="sharedTicket(aposta)"
-                                    class="btn btn-sm btn-info">
-                                    <i class="fa fa-share-alt"></i>
+                                <button type="button" (click)="abrirBilhete(aposta)" class="btn btn-sm btn-custom">
+                                    <i class="fa fa-eye"></i>
                                 </button>
                             </div>
                             <div>

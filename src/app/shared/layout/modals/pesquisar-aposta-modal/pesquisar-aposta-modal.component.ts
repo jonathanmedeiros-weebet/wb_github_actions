@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { AuthService, ApostaEsportivaService, HelperService, MessageService, PrintService } from './../../../../services';
+import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import { AuthService, ApostaEsportivaService, MessageService } from './../../../../services';
 
 @Component({
     selector: 'app-pesquisar-aposta-modal',
@@ -14,6 +15,7 @@ import { AuthService, ApostaEsportivaService, HelperService, MessageService, Pri
 })
 export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
+    @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
     exibirBilhete = false;
     aposta;
     appMobile;
@@ -27,8 +29,6 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private helperService: HelperService,
-        private printService: PrintService,
         private auth: AuthService
     ) { }
 
@@ -60,7 +60,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         if (this.aposta.tipo === 'esportes') {
             this.bilheteEsportivoComponent.print();
         } else {
-            this.printService.lotteryTicket(this.aposta);
+            this.bilheteLoteriaComponent.print();
         }
     }
 
@@ -68,7 +68,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         if (this.aposta.tipo === 'esportes') {
             this.bilheteEsportivoComponent.shared();
         } else {
-            this.helperService.sharedLotteryTicket(this.aposta);
+            this.bilheteLoteriaComponent.shared();
         }
     }
 }

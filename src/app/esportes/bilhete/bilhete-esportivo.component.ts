@@ -4,7 +4,7 @@ import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ApostaSuccessModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, BilheteEsportivoService,
     HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService
@@ -233,13 +233,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.form.reset();
         this.cartaoApostaForm.reset();
 
-        this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
+        this.modalRef = this.modalService.open(PreApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
         this.modalRef.componentInstance.codigo = id;
-        this.modalRef.componentInstance.aposta = null;
     }
 
     handleError(msg) {

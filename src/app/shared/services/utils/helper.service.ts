@@ -208,9 +208,21 @@ export class HelperService {
             s4() + '-' + s4() + s4() + s4();
     }
 
-    sharedLotteryTicket(aposta) {
+    compartilharPreAposta(codigo) {
         parent.postMessage(
             {
+                data: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
+    sharedLotteryTicket(aposta, file) {
+        parent.postMessage(
+            {
+                message: `${config.BANCA_NOME}: ${config.HOST}/aposta/${aposta.chave}`,
+                file: file,
                 data: `${config.HOST}/aposta/${aposta.chave}`,
                 action: 'shareURL'
             },

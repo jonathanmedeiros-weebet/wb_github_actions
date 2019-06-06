@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { LoteriaSuccessModalComponent } from '../../shared/layout/modals';
+import { ApostaLoteriaModalComponent, PreApostaModalComponent } from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
@@ -198,13 +198,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     apostaSuccess(aposta) {
-        this.modalRef = this.modalService.open(LoteriaSuccessModalComponent, {
+        this.modalRef = this.modalService.open(ApostaLoteriaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
         this.modalRef.componentInstance.aposta = aposta;
-        this.modalRef.componentInstance.mensagem = 'Aposta realizada com <strong>SUCESSO</strong>!';
 
         this.aposta = new Aposta();
         this.enableSubmit();
@@ -212,13 +211,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     preApostaSucess(id) {
-        this.modalRef = this.modalService.open(LoteriaSuccessModalComponent, {
+        this.modalRef = this.modalService.open(PreApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalRef.componentInstance.mensagem = `Para validar sua aposta, procure um cambista de sua
-        preferência e informe o código: <b>#${id}</b>`;
+        this.modalRef.componentInstance.codigo = id;
 
         this.aposta = new Aposta();
         this.enableSubmit();

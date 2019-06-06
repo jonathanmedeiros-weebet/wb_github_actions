@@ -32,11 +32,7 @@ export class ApostaModalComponent implements OnInit {
     }
 
     shareTicket() {
-        if (this.aposta.tipo === 'esportes') {
-            this.bilheteEsportivoComponent.shared();
-        } else {
-            this.helperService.sharedLotteryTicket(this.aposta);
-        }
+        this.bilheteEsportivoComponent.shared();
     }
 
     cancel() {

@@ -4,13 +4,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import {
-    ApostaLoteriaService, MessageService,
-    PrintService, SorteioService,
-    AuthService, HelperService
-} from './../../services';
+import { ApostaLoteriaModalComponent } from '../../shared/layout/modals';
+import { ApostaLoteriaService, MessageService, SorteioService } from './../../services';
 import { Aposta, Sorteio } from './../../models';
 import * as moment from 'moment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-apuracao-loteria',
@@ -19,9 +17,9 @@ import * as moment from 'moment';
     styleUrls: ['apuracao-loteria.component.css']
 })
 export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    modalRef;
     apostas: Aposta[];
     sorteios: Sorteio[] = [];
-    appMobile;
     showLoadingIndicator = true;
     dataInicial;
     dataFinal;
@@ -37,18 +35,14 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         private apostaService: ApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private printService: PrintService,
-        private auth: AuthService,
         private fb: FormBuilder,
-        private helperService: HelperService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private modalService: NgbModal
     ) {
         super();
     }
 
     ngOnInit() {
-        this.appMobile = this.auth.isAppMobile();
-
         if (moment().day() === 0 || moment().day() === 1) {
             const startWeek = moment().startOf('week');
             this.dataInicial = startWeek.subtract(6, 'days');
@@ -160,12 +154,17 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
         this.messageService.error(msg);
     }
 
-    printTicket(aposta: Aposta) {
-        this.printService.lotteryTicket(aposta);
-    }
+    abrirBilhete(aposta) {
+        this.modalRef = this.modalService.open(ApostaLoteriaModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
 
-    sharedTicket(aposta) {
-        this.helperService.sharedLotteryTicket(aposta);
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.result.then(
+            (result) => { },
+            (reason) => { }
+        );
     }
 
     checkResult(numero, sorteioResultado) {

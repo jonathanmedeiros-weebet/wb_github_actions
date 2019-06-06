@@ -9,7 +9,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 import {
     AuthService,
     MessageService,
@@ -20,7 +19,7 @@ import {
 } from '../services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
-import { ApostaSuccessModalComponent } from '../shared/layout/modals';
+import { ApostaModalComponent, ApostaLoteriaModalComponent } from '../shared/layout/modals';
 
 @Component({
     selector: 'app-validar-aposta',
@@ -162,13 +161,19 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     success(aposta) {
         this.reboot();
 
-        this.modalRef = this.modalService.open(ApostaSuccessModalComponent, {
+        let modalComponent;
+        if (aposta.tipo === 'esportes') {
+            modalComponent = ApostaModalComponent;
+        } else {
+            modalComponent = ApostaLoteriaModalComponent;
+        }
+
+        this.modalRef = this.modalService.open(modalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
         this.modalRef.componentInstance.aposta = aposta;
-        this.modalRef.componentInstance.codigo = aposta.id;
     }
 
     handleError(msg) {

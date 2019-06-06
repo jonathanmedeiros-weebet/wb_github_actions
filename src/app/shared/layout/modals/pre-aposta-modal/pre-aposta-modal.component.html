@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Atenção</h4>
+    <div class="action-buttons">
+        <button *ngIf="appMobile" type="button" class="" (click)="compartilhar()">
+            <i class="fa fa-share-alt"></i>
+        </button>
+        <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="preApostaMsg">
+        Para validar sua aposta, procure um cambista de sua
+        preferência e informe o código: <span class="codigo">{{codigo}}</span>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+        Fechar
+    </button>
+</div>
