@@ -1,11 +1,9 @@
 <section class="content-sports inside-event" appPerfectScroll>
     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-    <div class="jogo"  *ngIf="!showLoadingIndicator">
+    <div class="jogo" *ngIf="!showLoadingIndicator">
         <div class="indentificacao">
-            <div class="div-btn-back">
-                <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
-                    <i class="fa fa-arrow-left"></i> Voltar
-                </button>
+            <div class="div-back" (click)="back()">
+                <i class="fa fa-times"></i>
             </div>
             <div class="nome">
                 <div class="time-a">
@@ -25,9 +23,9 @@
 
         <div class="indentificacao-mobile">
             <div class="first-line">
-                <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
-                    <i class="fa fa-arrow-left"></i> Voltar
-                </button>
+                <div class="div-back" (click)="back()">
+                    <i class="fa fa-times"></i>
+                </div>
                 <div class="aovivo-tempo">
                     <div class="tempo">{{jogo.info?.minutos}}'</div>
                     <div class="aovivo-label">Ao Vivo</div>
@@ -52,7 +50,8 @@
             <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds); trackBy">
                 <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
-                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes; trackBy: trackByKey" (click)="addCotacao(jogo, cotacao)">
+                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes; trackBy: trackByKey"
+                        (click)="addCotacao(jogo, cotacao)">
                         <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
                             <span class="nome">
                                 {{cotacao.chave | tipoAposta}}

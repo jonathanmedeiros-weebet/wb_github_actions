@@ -1,6 +1,9 @@
-import { Component, OnInit, OnDestroy, ElementRef, Renderer2, DoCheck } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    Component, OnInit, OnDestroy, ElementRef,
+    Renderer2, DoCheck, EventEmitter, Input,
+    Output
+} from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,6 +16,8 @@ import { ParametrosLocaisService, MessageService, JogoService, LiveService, Bilh
     styleUrls: ['live-jogo.component.css']
 })
 export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
+    @Input() jogoId;
+    @Output() exibirMaisCotacoes = new EventEmitter();
     jogo;
     odds: any = {};
     itens: ItemBilheteEsportivo[] = [];
@@ -20,6 +25,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     minutoEncerramentoAoVivo = 0;
+    contentSportsEl;
     unsub$ = new Subject();
 
     constructor(
@@ -29,33 +35,23 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         private bilheteService: BilheteEsportivoService,
         private el: ElementRef,
         private renderer: Renderer2,
-        private route: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
+        this.definirAltura();
+
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
-
-        this.route.params
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                params => {
-                    if (params.id) {
-                        this.getJogo(params.id);
-                    }
-                }
-            );
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
 
-        const altura = window.innerHeight - 69;
-        const contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(contentSportsEl, 'height', `${altura}px`);
+        if (this.jogoId) {
+            this.getJogo(this.jogoId);
+        }
     }
 
     ngOnDestroy() {
@@ -69,6 +65,12 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 this.router.navigate(['/esportes/futebol/live/jogos']);
             }
         }
+    }
+
+    definirAltura() {
+        const altura = window.innerHeight - 69;
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     getJogo(id) {
@@ -87,10 +89,12 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     live() {
         this.liveService.getJogo(this.jogo._id)
             .pipe(takeUntil(this.unsub$))
-            .subscribe((jogo: Jogo) => {
-                this.jogo.info = jogo.info;
-                this.mapearCotacoes(jogo.cotacoes);
-            });
+            .subscribe(
+                (jogo: Jogo) => {
+                    this.jogo.info = jogo.info;
+                    this.mapearCotacoes(jogo.cotacoes);
+                }
+            );
     }
 
     oddSelecionada(jogoId, chave) {
@@ -172,7 +176,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     back() {
-        this.location.back();
+        this.exibirMaisCotacoes.emit(false);
     }
 
     trackByKey(index: number, cotacao: any): string {

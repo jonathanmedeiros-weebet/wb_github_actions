@@ -15,7 +15,13 @@
     display: flex;
 }
 
-.indentificacao .div-btn-back{
+.div-back{
+    color: red;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.indentificacao .div-back{
     position: absolute;
     left: 15px;
     top: 22px;

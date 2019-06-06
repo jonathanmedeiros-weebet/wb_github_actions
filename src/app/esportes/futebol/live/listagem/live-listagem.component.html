@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="mais-opcoes">
-                                    <a routerLink="/esportes/futebol/live/jogos/{{jogo.value._id}}">
+                                    <a (click)="maisCotacoes(jogo.value._id)" href="javascript:void(0)">
                                         <i class="fa fa-plus"></i>{{jogo.value.total_cotacoes}}
                                         <span>Cotações</span>
                                     </a>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="right-side">
                                         <div class="mais-opcoes">
-                                            <a routerLink="/esportes/futebol/live/jogos/{{jogo.value._id}}">
+                                            <a (click)="maisCotacoes(jogo.value._id)" href="javascript:void(0)">
                                                 <i class="fa fa-plus"></i>{{jogo.value.total_cotacoes}}
                                                 <span>Cotações</span>
                                             </a>
