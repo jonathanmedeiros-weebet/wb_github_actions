@@ -21,10 +21,15 @@
                 <h4>{{odds[chave].nome}}</h4>
                 <div class="odds">
                     <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
-                        <div class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
-                            <span class="nome">
-                                {{cotacao.chave | tipoAposta}}
+                        <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
+                            <span class="nome" *ngIf="cotacao.nome; else chave">
+                                {{cotacao.nome}}
                             </span>
+                            <ng-template #chave>
+                                <span class="nome">
+                                    {{cotacao.chave | tipoAposta}}
+                                </span>
+                            </ng-template>
                             <span class="valor">
                                 {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
                             </span>

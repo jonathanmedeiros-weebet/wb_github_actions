@@ -55,7 +55,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 this.itensSelecionados = {};
                 for (let i = 0; i < itens.length; i++) {
                     const item = itens[i];
-                    this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
+                    if (item.cotacao.nome) {
+                        const modificado = item.cotacao.nome.replace(' ', '_');
+                        this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}_${modificado}`] = true;
+                    } else {
+                        this.itensSelecionados[`${item.jogo_id}_${item.cotacao.chave}`] = true;
+                    }
                 }
 
                 this.cd.markForCheck();
@@ -188,7 +193,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     addCotacao(jogo: Jogo, cotacao) {
         let modificado = false;
         const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
-        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
+        const indexOdd = this.itens.findIndex(i => {
+            let result = false;
+            if (cotacao.nome) {
+                if ((i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave) && (i.cotacao.nome === cotacao.nome)) {
+                    result = true;
+                }
+            } else if ((i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave)) {
+                result = true;
+            }
+            return result;
+        });
 
         const item = {
             aoVivo: jogo.ao_vivo,
@@ -219,5 +234,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     showOdd(odd) {
         return this.tiposAposta[odd] ? true : false;
+    }
+
+    itemSelecionado(jogo, cotacao) {
+        let result = false;
+        if (cotacao.nome) {
+            const modificado = cotacao.nome.replace(' ', '_');
+            if (this.itensSelecionados[`${jogo._id}_${cotacao.chave}_${modificado}`]) {
+                result = true;
+            }
+        } else if (this.itensSelecionados[`${jogo._id}_${cotacao.chave}`]) {
+            result = true;
+        }
+        return result;
     }
 }
