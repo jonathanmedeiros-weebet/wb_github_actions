@@ -621,7 +621,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
                         ${item.jogo.nome}
                     </p>
                     <p class="cotacao">
-                        ${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
+                        ${item.categoria_nome}: ${item.odd_nome} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
             if (item.ao_vivo) {
                 printContents += ` | <b>AO VIVO</b>`;
             }
@@ -703,7 +703,7 @@ HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 ${item.campeonato.nome}
 ${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm')}
 ${item.jogo.nome}
-${this.getApostaTipoNome(item.aposta_tipo, item.jogo)} ( ${item.cotacao.toFixed(2)} )`;
+${item.categoria_nome}: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
                 ticket += ` | AO VIVO`;
             }

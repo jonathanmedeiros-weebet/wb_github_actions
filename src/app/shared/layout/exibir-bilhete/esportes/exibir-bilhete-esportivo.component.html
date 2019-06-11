@@ -33,12 +33,8 @@
                     {{item.jogo.nome}}
                 </p>
                 <p class="cotacao" [ngClass]="resultadoClass(item)">
-                    <span *ngIf="item.jogo.sport != 9; else nomeOddCombate">
-                        {{item.aposta_tipo.nome}}
-                    </span>
-                    <ng-template #nomeOddCombate>
-                        {{item.aposta_tipo.chave | tipoApostaCombate: item.jogo.time_a_nome:item.jogo.time_b_nome}}
-                    </ng-template>
+                    {{item.categoria_nome}}:
+                    {{item.odd_nome}}
                     ( {{item.cotacao}} )
                     <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                 </p>
