@@ -30,6 +30,11 @@
     top: 21px;
 }
 
+.div-vazio{
+    padding: 10px;
+    text-align: center;
+}
+
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;

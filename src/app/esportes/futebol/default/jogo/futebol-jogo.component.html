@@ -93,6 +93,35 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
+                <ngb-tab title="Jogadores">
+                    <ng-template ngbTabContent>
+                        <div class="div-vazio" *ngIf="!objectKeys(oddsJogadores).length">
+                            Sem Cotações
+                        </div>
+
+                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(oddsJogadores)">
+                            <h4>{{oddsJogadores[chave].nome}}</h4>
+                            <div class="odds">
+                                <div class="odd" *ngFor="let cotacao of oddsJogadores[chave].cotacoes"
+                                    (click)="addCotacao(jogo, cotacao)">
+                                    <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
+                                        <span class="nome" *ngIf="cotacao.nome; else chave">
+                                            {{cotacao.nome}}
+                                        </span>
+                                        <ng-template #chave>
+                                            <span class="nome">
+                                                {{cotacao.chave | tipoAposta}}
+                                            </span>
+                                        </ng-template>
+                                        <span class="valor">
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
             </ngb-tabset>
         </div>
     </div>

@@ -23,6 +23,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     odds: any = {};
     odds1T: any = {};
     odds2T: any = {};
+    oddsJogadores: any = {};
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
     tiposAposta;
@@ -133,6 +134,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.odds = {};
         this.odds1T = {};
         this.odds2T = {};
+        this.oddsJogadores = {};
 
         for (let index = 0; index < cotacoes.length; index++) {
             const cotacao = cotacoes[index];
@@ -146,6 +148,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     odds = this.odds1T;
                 } else if (tipoAposta.tempo === '2T') {
                     odds = this.odds2T;
+                } else if (tipoAposta.tempo === 'JOGADORES') {
+                    odds = this.oddsJogadores;
                 } else {
                     continue;
                 }
