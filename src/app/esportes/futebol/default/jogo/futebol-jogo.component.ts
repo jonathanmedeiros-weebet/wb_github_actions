@@ -21,6 +21,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
     odds: any = {};
+    odds1T: any = {};
+    odds2T: any = {};
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
     tiposAposta;
@@ -129,13 +131,27 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     mapearCotacoes(cotacoes) {
         this.odds = {};
+        this.odds1T = {};
+        this.odds2T = {};
 
         for (let index = 0; index < cotacoes.length; index++) {
             const cotacao = cotacoes[index];
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
             if (tipoAposta) {
-                let odd = this.odds[tipoAposta.cat_chave];
+                let odds;
+                if (tipoAposta.tempo === '90') {
+                    odds = this.odds;
+                } else if (tipoAposta.tempo === '1T') {
+                    odds = this.odds1T;
+                } else if (tipoAposta.tempo === '2T') {
+                    odds = this.odds2T;
+                } else {
+                    continue;
+                }
+
+                let odd = odds[tipoAposta.cat_chave];
+
                 if (!odd) {
                     odd = {
                         'nome': tipoAposta.cat_nome,
@@ -143,7 +159,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         'principal': tipoAposta.p,
                         'cotacoes': []
                     };
-                    this.odds[tipoAposta.cat_chave] = odd;
+                    odds[tipoAposta.cat_chave] = odd;
                 }
 
                 odd.cotacoes.push(cotacao);
@@ -164,7 +180,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         const tipoAposta = this.tiposAposta[chave];
 
                         if (tipoAposta) {
-                            let odd = this.odds[tipoAposta.cat_chave];
+                            let odds;
+                            if (tipoAposta.tempo === '90') {
+                                odds = this.odds;
+                            } else if (tipoAposta.tempo === '1T') {
+                                odds = this.odds1T;
+                            } else if (tipoAposta.tempo === '2T') {
+                                odds = this.odds2T;
+                            } else {
+                                continue;
+                            }
+
+                            let odd = odds[tipoAposta.cat_chave];
                             if (!odd) {
                                 odd = {
                                     'nome': tipoAposta.cat_nome,
@@ -172,7 +199,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                     'principal': tipoAposta.p,
                                     'cotacoes': []
                                 };
-                                this.odds[tipoAposta.cat_chave] = odd;
+                                odds[tipoAposta.cat_chave] = odd;
                             }
 
                             const cotacao = new Cotacao();

@@ -217,15 +217,15 @@ ${horario} ${jogo.nome}
         let printContents, popupWin, html, styles;
 
         styles = `
+        
         #comprovante {
             text-align: justify;
             text-transform: uppercase;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0;
-            padding-right: 11px;
+            padding: 15px;
+            /*padding-right: 11px;*/
             background: #fff;
             margin: 0 auto;
+            color: #000;
         }
 
         .bilhete-numeros{
@@ -500,12 +500,11 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
         }
 
         #comprovante{
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0;
-            padding-right: 11px;
+            padding: 15px;
+            /*padding-right: 11px;*/
             background: #fff;
-            margin: 0 auto;
+            margin: 0 auto;            
+            color: #000;
         }
 
         .margin-bottom-5 {
@@ -765,12 +764,11 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
         }
 
         #comprovante{
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0;
-            padding-right: 11px;
+            padding: 15px;
+            /*padding-right: 11px;*/
             background: #fff;
             margin: 0 auto;
+            color: #000;
         }
 
         .margin-bottom-15 {
@@ -891,12 +889,11 @@ ${recarga.autenticacao}
         }
 
         #comprovante{
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0;
-            padding-right: 11px;
+            padding: 15px;
+            /*padding-right: 11px;*/
             background: #fff;
             margin: 0 auto;
+            color: #000;
         }
 
         .margin-bottom-5 {

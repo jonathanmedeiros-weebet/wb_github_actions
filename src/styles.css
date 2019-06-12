@@ -24,7 +24,7 @@
 
     --event-time: #011e46;
     --fg-event-time: #fff;
-    
+
 }
 
 html {
@@ -507,6 +507,16 @@ button {
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
+}
+
+.tipo-apostas .nav{
+    padding: 10px!important;
+}
+
+.tipo-apostas .nav-pills .nav-link.active,
+.tipo-apostas .nav-pills .show > .nav-link{
+    color: var(--foreground-odds);
+    background-color:var(--odds);;
 }
 
 /* Large devices (desktops, 992px and up) */
