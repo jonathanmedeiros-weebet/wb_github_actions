@@ -24,7 +24,7 @@
 
     --event-time: #011e46;
     --fg-event-time: #fff;
-
+    
 }
 
 html {
@@ -511,6 +511,11 @@ button {
 
 .tipo-apostas .nav{
     padding: 10px!important;
+    justify-content: center!important;
+}
+
+.tipo-apostas .nav-pills .nav-item{
+    max-width: 25%;
 }
 
 .tipo-apostas .nav-pills .nav-link.active,
