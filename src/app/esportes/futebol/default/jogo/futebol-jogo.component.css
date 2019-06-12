@@ -18,8 +18,24 @@
     text-transform: uppercase;
 }
 
+.div-back{
+    color: red;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.indentificacao .div-back{
+    position: absolute;
+    right: 20px;
+    top: 21px;
+}
+
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;
+    }
+
+    .indentificacao .div-back{
+        top: 0;
     }
 }

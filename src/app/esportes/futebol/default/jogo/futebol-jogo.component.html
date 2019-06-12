@@ -3,9 +3,9 @@
 
     <div class="jogo" [hidden]="!jogo || showLoadingIndicator">
         <div class="indentificacao">
-            <button type="button" (click)="back()" class="btn btn-sm btn-warning btn-back">
-                <i class="fa fa-arrow-left"></i> Voltar
-            </button>
+            <div class="div-back" (click)="back()">
+                <i class="fa fa-times"></i>
+            </div>
             <div class="text-center">
                 <div class="nome">
                     <small>{{jogo?.campeonato?.nome}}</small>
@@ -17,21 +17,71 @@
             </div>
         </div>
         <div class="tipo-apostas">
-            <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
-                <h4>{{odds[chave].nome}}</h4>
-                <div class="odds">
-                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes" (click)="addCotacao(jogo, cotacao)">
-                        <div class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
-                            <span class="nome">
-                                {{cotacao.chave | tipoAposta}}
-                            </span>
-                            <span class="valor">
-                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
-                            </span>
+            <ngb-tabset type="pills">
+                <ngb-tab title="Tempo Completo">
+                    <ng-template ngbTabContent>
+                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
+                            <h4>{{odds[chave].nome}}</h4>
+                            <div class="odds">
+                                <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes"
+                                    (click)="addCotacao(jogo, cotacao)">
+                                    <div
+                                        class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                        <span class="nome">
+                                            {{cotacao.chave | tipoAposta}}
+                                        </span>
+                                        <span class="valor">
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Primeiro Tempo">
+                    <ng-template ngbTabContent>
+                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds1T)">
+                            <h4>{{odds1T[chave].nome}}</h4>
+                            <div class="odds">
+                                <div class="odd" *ngFor="let cotacao of odds1T[chave].cotacoes"
+                                    (click)="addCotacao(jogo, cotacao)">
+                                    <div
+                                        class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                        <span class="nome">
+                                            {{cotacao.chave | tipoAposta}}
+                                        </span>
+                                        <span class="valor">
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Segundo Tempo">
+                    <ng-template ngbTabContent>
+                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds2T)">
+                            <h4>{{odds2T[chave].nome}}</h4>
+                            <div class="odds">
+                                <div class="odd" *ngFor="let cotacao of odds2T[chave].cotacoes"
+                                    (click)="addCotacao(jogo, cotacao)">
+                                    <div
+                                        class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                        <span class="nome">
+                                            {{cotacao.chave | tipoAposta}}
+                                        </span>
+                                        <span class="valor">
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
         </div>
     </div>
 </section>

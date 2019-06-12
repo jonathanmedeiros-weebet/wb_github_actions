@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [],
@@ -17,8 +16,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         RouterModule,
 
         LayoutModule,
-        UtilsModule,
-        NgbModalModule
+        UtilsModule
     ]
 })
 export class SharedModule { }

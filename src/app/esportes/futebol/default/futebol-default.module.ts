@@ -6,12 +6,14 @@ import { FutebolDefaultRoutingModule } from './futebol-default-routing.module';
 import { FutebolDefaultWrapperComponent } from './wrapper/futebol-default-wrapper.component';
 import { FutebolListagemComponent } from './listagem/futebol-listagem.component';
 import { FutebolJogoComponent } from './jogo/futebol-jogo.component';
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
         SharedModule,
         EsportesModule,
-        FutebolDefaultRoutingModule
+        FutebolDefaultRoutingModule,
+        NgbTabsetModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,

@@ -509,6 +509,16 @@ button {
     opacity: .5;
 }
 
+.tipo-apostas .nav{
+    padding: 10px!important;
+}
+
+.tipo-apostas .nav-pills .nav-link.active,
+.tipo-apostas .nav-pills .show > .nav-link{
+    color: var(--foreground-odds);
+    background-color:var(--odds);;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     #fixed-bar-bilhete {
