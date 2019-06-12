@@ -680,3 +680,27 @@ gulp.task('foxbet.me', function (done) {
         styles: "--header: #000000; --foreground-header: #ffffff; --sidebar-right: #000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff; --highlight: #f28123; --foreground-highlight: #ffffff; --odds: #0c9fa0; --foreground-odds: #fff; --event-time: #f58021;",
     });
 });
+
+gulp.task('club7bets.wee.bet', function (done) {
+    tasks(done, {
+        host: "club7bets.wee.bet",
+        banca: "Club 7 Bets",
+        styles: ""
+    });
+});
+
+gulp.task('bet7.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet7.wee.bet",
+        banca: "Bet7",
+        styles: ""
+    });
+});
+
+gulp.task('bet8.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet8.wee.bet",
+        banca: "Bet8",
+        styles: ""
+    });
+});

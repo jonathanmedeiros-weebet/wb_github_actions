@@ -48,7 +48,7 @@
                         Nenhuma aposta realizada no período.
                     </div>
 
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-xs-12 col-md-4">
                             <table class="table table-hover table-bordered">
                                 <tbody>
@@ -75,7 +75,10 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>-->
+                    <p *ngIf="apostas.length">
+                        {{apostas.length}} aposta(s)
+                    </p>
 
                     <table *ngIf="apostas.length > 0" class="table table-hover table-bordered">
                         <thead>
