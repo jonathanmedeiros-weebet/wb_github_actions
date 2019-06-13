@@ -1,4 +1,5 @@
 // Directives
+export { PerfectScrollDirective } from './perfect-scroll.directive';
 
 // Pipes
 export { MomentPipe } from './moment.pipe';
