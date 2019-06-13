@@ -694,3 +694,11 @@ gulp.task('bet8.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('apostagyn.bet', function (done) {
+    tasks(done, {
+        host: "apostagyn.bet",
+        banca: "Aposta Gyn",
+        styles: ""
+    });
+});
