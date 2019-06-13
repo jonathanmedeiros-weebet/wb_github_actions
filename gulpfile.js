@@ -210,17 +210,7 @@ gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
         host: "demo.wee.bet",
         banca: "DEMO",
-        styles: "",
-        scripts: "<!-- BEGIN JIVOSITE CODE {literal} -->\n" +
-        "<script type='text/javascript'>\n" +
-        "(function(){ var widget_id = '3zYgei0Snz';var d=document;var w=window;function l(){\n" +
-        "  var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;\n" +
-        "  s.src = '//code.jivosite.com/script/widget/'+widget_id\n" +
-        "    ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}\n" +
-        "  if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}\n" +
-        "  else{w.addEventListener('load',l,false);}}})();\n" +
-        "</script>\n" +
-        "<!-- {/literal} END JIVOSITE CODE -->"
+        styles: ""
     });
 });
 
