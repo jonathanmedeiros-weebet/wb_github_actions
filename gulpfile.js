@@ -699,6 +699,6 @@ gulp.task('apostagyn.bet', function (done) {
     tasks(done, {
         host: "apostagyn.bet",
         banca: "Aposta Gyn",
-        styles: ""
+        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: red; --foreground-highlight: #002458; --odds: #0c9fa0; --foreground-odds: #fff; --event-time: red;"
     });
 });
