@@ -16,6 +16,7 @@ export class ApuracaoConsolidadaComponent extends BaseFormComponent implements O
     dataInicial;
     dataFinal;
     controlarCreditoCambista;
+    loteriasHabilitada;
 
     constructor(
         private relatorioService: RelatorioService,
@@ -42,6 +43,7 @@ export class ApuracaoConsolidadaComponent extends BaseFormComponent implements O
         }
 
         this.controlarCreditoCambista = this.params.controlarCreditoCambista();
+        this.loteriasHabilitada = this.params.getOpcoes().loterias;
 
         this.getResultado();
         this.createForm();

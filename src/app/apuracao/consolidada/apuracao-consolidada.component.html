@@ -51,18 +51,20 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="">L Esportivas</td>
-                                    <td class="text-right">
-                                        {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="">L Loterias</td>
-                                    <td class="text-right">
-                                        {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                    </td>
-                                </tr>
+                                <ng-container *ngIf="loteriasHabilitada">
+                                    <tr>
+                                        <td class="">L Esportivas</td>
+                                        <td class="text-right">
+                                            {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">L Loterias</td>
+                                        <td class="text-right">
+                                            {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </td>
+                                    </tr>
+                                </ng-container>
                                 <tr>
                                     <th>Recargas de Cartão</th>
                                     <td>

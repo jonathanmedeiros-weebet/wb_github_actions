@@ -1,0 +1,65 @@
+<div id="default-content" data-simplebar>
+    <div class="content-header">
+        <h2>Resultados Loterias</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="data-inicial"
+                                    [ngClass]="applyCssInputError('data-inicial')">
+                                <app-error-msg [control]="form.get('data-inicial')" label="Data inicial">
+                                </app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="data-final"
+                                    [ngClass]="applyCssInputError('data-final')">
+                                <app-error-msg [control]="form.get('data-final')" label="Data final"></app-error-msg>
+                            </div>
+                            <div class="col-xs-6 col-lg-3">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+            <div *ngIf="!showLoadingIndicator">
+                <div *ngFor="let sorteio of sorteios">
+                    <div class="sorteio">
+                        <div class="informacoes">
+                            <div class="tipo">
+                                ({{sorteio.tipo | sorteioTipo}})
+                            </div>
+                            <div class="nome">
+                                {{sorteio.nome}}
+                            </div>
+                        </div>
+                        <div class="circle-group" *ngIf="sorteio.resultado;else semResultado">
+                            <div class="circle" *ngFor="let numero of sorteio.resultado">
+                                <div class="content">
+                                    {{numero | number:'2.0'}}
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #semResultado>
+                            <div class="circle-group sem-resultado">
+                                <div class="circle" *ngFor="let item of qtdNumeros(sorteio.tipo)">
+                                    <div class="content">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

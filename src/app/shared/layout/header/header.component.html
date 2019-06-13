@@ -93,13 +93,13 @@
         <div *ngIf="loteriasHabilitado && seninhaAtiva" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/seninha']">
                 <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>{{seninhaNome}}</span>
+                <span>{{'seninha' | sorteioTipo}}</span>
             </a>
         </div>
         <div *ngIf="loteriasHabilitado && quininhaAtiva" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/quininha']">
                 <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>{{quininhaNome}}</span>
+                <span>{{'quininha' | sorteioTipo}}</span>
             </a>
         </div>
 
