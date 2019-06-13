@@ -60,7 +60,7 @@
     padding: 0;
 }
 
-.sidebar-nav > li:last-of-type{
+.sidebar-nav .regioes:last-of-type{
     margin-bottom: 15px;
 }
 

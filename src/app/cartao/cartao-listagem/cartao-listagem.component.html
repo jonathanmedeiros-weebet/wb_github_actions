@@ -1,4 +1,4 @@
-<div id="default-content" appPerfectScroll>
+<div id="default-content" data-simplebar>
     <div class="content-header">
         <h2>Cartões de Aposta</h2>
         <div class="filters">
@@ -27,7 +27,7 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div appPerfectScroll>
+            <div>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
                     <thead>

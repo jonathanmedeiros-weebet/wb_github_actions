@@ -1,7 +1,7 @@
 <div class="loteria-content">
     <div class="content-body">
         <div class="content">
-            <div class="col nopadding content-loteria" appPerfectScroll>
+            <div class="col nopadding content-loteria" data-simplebar>
                 <div class="wrap-sticky">
                     <div class="content-header">
                         {{title}}
@@ -74,7 +74,7 @@
                 </div>
                 <app-footer></app-footer>
             </div>
-            <div class="pre-bilhete" appPerfectScroll [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
+            <div class="pre-bilhete" data-simplebar [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
                 <div>
                     <h4>PRÉ-BILHETE</h4>
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
