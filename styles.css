@@ -27,6 +27,18 @@
     [CUSTOM]
 }
 
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(153,153,153,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(153,153,153,153.5);
+}
+
 html {
     position: relative;
     font-size: 12px;
@@ -73,6 +85,11 @@ header {
 #default-content {
     padding: 20px 15px 20px 270px;
     height: calc(100vh - 67px);
+    overflow: auto;
+}
+
+.content-sports{
+    overflow: auto;
 }
 
 .footer {
@@ -202,6 +219,7 @@ header {
 }
 
 .pre-bilhete {
+    overflow: auto;
     display: none;
     background-color: var(--sidebar-right);
     /* position: relative; */
@@ -435,7 +453,7 @@ button {
     margin-right: 15px;
 }
 
-.content-sports-scroll .indentificacao .horario{
+.content-sports-list .indentificacao .horario{
     background-color: var(--event-time);
     color: var(--fg-event-time);
 }
@@ -573,6 +591,7 @@ button {
     }
 
     .content-loteria {
+        overflow: auto;
         padding-bottom: 90px !important;
     }
 

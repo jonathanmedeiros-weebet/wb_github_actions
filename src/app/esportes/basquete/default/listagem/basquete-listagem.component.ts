@@ -30,10 +30,6 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
     cotacoesLocais;
     eventosBloqueados;
     contentSportsEl;
-    start;
-    offset = 10;
-    total;
-    loadingScroll = false;
     unsub$ = new Subject();
 
     constructor(
@@ -72,10 +68,7 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['camps'] && this.camps) {
-            this.start = 0;
-            this.total = Math.ceil(this.camps.length / this.offset);
-            this.campeonatos = [];
-            this.exibirMais();
+            this.campeonatos = this.camps;
         }
     }
 
@@ -92,12 +85,8 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
         const altura = window.innerHeight - 69;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
-        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
-
-        this.contentSportsEl.addEventListener('ps-y-reach-end', () => {
-            this.exibirMais();
-        });
     }
 
     oddSelecionada(eventoId, chave) {
@@ -238,18 +227,5 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.eventoSelecionadoId.emit(eventoId);
         }
         this.exibirMaisCotacoes.emit(true);
-    }
-
-    exibirMais() {
-        this.loadingScroll = true;
-
-        if (this.start < this.total) {
-            const splice = this.camps.splice(0, this.offset);
-            this.campeonatos = this.campeonatos.concat(splice);
-            this.start++;
-        }
-
-        this.loadingScroll = false;
-        this.cd.markForCheck();
     }
 }

@@ -79,10 +79,6 @@
     color: var(--foreground-highlight);
 }
 
-.div-jogos-selecionados .jogo-selecionado-inner {
-    margin: 0px 30px;
-}
-
 .div-jogos-selecionados h3 {
     margin: 30px 0;
     text-transform: uppercase;
