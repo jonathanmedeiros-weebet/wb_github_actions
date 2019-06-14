@@ -280,7 +280,7 @@ button {
     left: 0;
     display: flex;
     flex-direction: row;
-    color: white;
+    color: var(--foreground-sidebar-right);
     display: flex;
     align-items: center;
 }
