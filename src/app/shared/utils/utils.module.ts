@@ -6,8 +6,9 @@ import {
     TipoApostaPipe,
     TipoApostaCombatePipe,
     CalcularCotacaoPipe,
-    PerfectScrollDirective,
     OddCategoriaPipe
+    SorteioTipoPipe,
+    InfiniteScrollDirective,
 } from './index';
 
 @NgModule({
@@ -18,7 +19,8 @@ import {
         TipoApostaCombatePipe,
         CalcularCotacaoPipe,
         OddCategoriaPipe,
-        PerfectScrollDirective
+        SorteioTipoPipe,
+        InfiniteScrollDirective
     ],
     exports: [
         MomentPipe,
@@ -27,7 +29,8 @@ import {
         TipoApostaCombatePipe,
         CalcularCotacaoPipe,
         OddCategoriaPipe,
-        PerfectScrollDirective
+        SorteioTipoPipe,
+        InfiniteScrollDirective
     ]
 })
 export class UtilsModule { }

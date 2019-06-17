@@ -1,4 +1,4 @@
-<div id="default-content" appPerfectScroll>
+<div id="default-content">
     <div class="content-header">
         <h2>Apuração Futebol</h2>
         <div class="filters">
@@ -40,15 +40,14 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div appPerfectScroll>
+            <div>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
                 <ng-container *ngIf="!showLoadingIndicator">
                     <div *ngIf="!apostas.length" class="alert alert-warning text-center" role="alert">
                         Nenhuma aposta realizada no período.
                     </div>
-
-                    <!--<div class="row">
+                    <!--  <div class="row">
                         <div class="col-xs-12 col-md-4">
                             <table class="table table-hover table-bordered">
                                 <tbody>
@@ -75,7 +74,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>-->
+                    </div> -->
                     <p *ngIf="apostas.length">
                         {{apostas.length}} aposta(s)
                     </p>

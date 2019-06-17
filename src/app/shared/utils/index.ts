@@ -1,5 +1,5 @@
 // Directives
-export { PerfectScrollDirective } from './perfect-scroll.directive';
+export { InfiniteScrollDirective } from './inifinite-scroll.directive';
 
 // Pipes
 export { MomentPipe } from './moment.pipe';
@@ -8,6 +8,7 @@ export { TipoApostaPipe } from './tipo-aposta.pipe';
 export { TipoApostaCombatePipe } from './tipo-aposta-combate.pipe';
 export { CalcularCotacaoPipe } from './calcular-cotacao.pipe';
 export { OddCategoriaPipe } from './odd-categoria.pipe';
+export { SorteioTipoPipe } from './sorteio-tipo.pipe';
 
 //
 export { CustomEncoder } from './custom-encoder';

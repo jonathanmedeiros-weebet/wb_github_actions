@@ -60,7 +60,9 @@
     padding: 0;
 }
 
-.sidebar-nav > li:last-of-type{
+.sidebar-nav .regiao:last-of-type,
+.sidebar-nav .campeonato:last-of-type,
+.sidebar-nav .supresinha:last-of-type{
     margin-bottom: 15px;
 }
 
@@ -121,17 +123,17 @@
     cursor: pointer;
 }
 
-.regioes .flag-icon{
+.regiao .flag-icon{
     float: left;
     margin-top: 0px;
     margin-right: 2px;
     width: 17px;
     height: 17px;
 }
-.regioes > a{
+.regiao > a{
     position: relative;
 }
-.regioes > a:after{
+.regiao > a:after{
     content: '';
     width: 0;
     height: 0;
@@ -143,7 +145,7 @@
     right: 10px;
     top: 13px
 }
-.regioes > a.selected:after{
+.regiao > a.selected:after{
     content: '';
     width: 0;
     height: 0;
@@ -153,7 +155,7 @@
     border-top: 5px solid var(--highlight);
 }
 
-.regioes ul{
+.regiao ul{
     padding-left: 19px;
 }
 

@@ -1,0 +1,29 @@
+.sorteio{
+    margin-bottom: 30px;
+}
+
+.informacoes{
+    display: flex;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.informacoes .tipo{
+    margin-right: 10px;
+}
+
+.informacoes .nome{
+    font-weight: bolder;
+}
+
+.circle{
+    height: 40px;
+    width: 40px;
+    background-color: var(--odds);
+    color: var(--foreground-odds);
+    font-weight: bolder;
+}
+
+.sem-resultado{
+    opacity: 0.5;
+}

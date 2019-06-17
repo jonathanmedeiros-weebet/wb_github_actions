@@ -26,7 +26,6 @@
               "node_modules/jquery-toast-plugin/dist/jquery.toast.min.css",
               "node_modules/jstree/dist/themes/default/style.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/flag-icon-css/css/flag-icon.min.css",
               "src/styles.css"
             ],

@@ -115,14 +115,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     definirAltura() {
         const altura = window.innerHeight - 69;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
-        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-scroll');
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
-
-        this.contentSportsEl.addEventListener('ps-y-reach-end', () => {
-            this.exibirMais();
-        });
     }
 
     oddSelecionada(jogoId, chave) {

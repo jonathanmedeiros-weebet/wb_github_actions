@@ -28,6 +28,7 @@ import { ApostaModalComponent, ApostaLoteriaModalComponent } from '../shared/lay
 })
 export class ValidarApostaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     codigo;
+    showLoadingIndicator = false;
     exibirPreAposta = false;
     preAposta: any;
     preApostaItens = [];
@@ -88,6 +89,9 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
     }
 
     consultarAposta() {
+        this.showLoadingIndicator = true;
+        this.exibirPreAposta = false;
+
         this.preApostaService
             .getPreAposta(this.codigo)
             .pipe(takeUntil(this.unsub$))
@@ -97,6 +101,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
                     this.preAposta = preAposta;
                     this.preApostaItens = preAposta.itens;
                     this.form.patchValue(preAposta);
+                    this.showLoadingIndicator = false;
                 },
                 error => this.handleError(error)
             );
@@ -178,6 +183,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
 
     handleError(msg) {
         this.enableSubmit();
+        this.showLoadingIndicator = false;
         this.messageService.error(msg);
     }
 

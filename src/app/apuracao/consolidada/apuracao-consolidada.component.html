@@ -1,4 +1,4 @@
-<div id="default-content" appPerfectScroll>
+<div id="default-content">
     <div class="content-header">
         <h2>Apuração Consolidada</h2>
         <div class="filters">
@@ -27,7 +27,7 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div appPerfectScroll>
+            <div>
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <div class="row">
                     <div class="col-xs-12 col-md-4">
@@ -51,18 +51,20 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="">L Esportivas</td>
-                                    <td class="text-right">
-                                        {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="">L Loterias</td>
-                                    <td class="text-right">
-                                        {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                    </td>
-                                </tr>
+                                <ng-container *ngIf="loteriasHabilitada">
+                                    <tr>
+                                        <td class="">L Esportivas</td>
+                                        <td class="text-right">
+                                            {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">L Loterias</td>
+                                        <td class="text-right">
+                                            {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                                        </td>
+                                    </tr>
+                                </ng-container>
                                 <tr>
                                     <th>Recargas de Cartão</th>
                                     <td>

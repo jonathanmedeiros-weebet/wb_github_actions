@@ -34,7 +34,6 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     disabled = false;
     isLoggedIn = false;
     modalRef;
-    title = 'Quininha';
     unsub$ = new Subject();
 
     constructor(
@@ -60,7 +59,6 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
-        this.title = this.paramsService.getQuininhaNome();
         this.createForm();
         this.definirAltura();
 

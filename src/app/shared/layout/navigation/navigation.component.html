@@ -37,13 +37,30 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" [routerLink]="['/apuracao/consolidada']">Consolidada</a>
                             <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
-                            <a class="dropdown-item" [routerLink]="['/apuracao/loteria']">Loteria</a>
+                            <a *ngIf="loteriasHabilitada" class="dropdown-item" [routerLink]="['/apuracao/loteria']">
+                                Loteria
+                            </a>
                         </div>
                     </li>
                     <li>
-                        <a [routerLink]="['/resultados/esportes']">
-                            <i class="fa fa-list"></i> Resultados
-                        </a>
+                        <ng-container *ngIf="loteriasHabilitada; else resultadosEsporte">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-list"></i> Resultados
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" [routerLink]="['/resultados/esportes']">Esportes</a>
+                                <a *ngIf="loteriasHabilitada" class="dropdown-item"
+                                    [routerLink]="['/resultados/loterias']">
+                                    Loteria
+                                </a>
+                            </div>
+                        </ng-container>
+                        <ng-template #resultadosEsporte>
+                            <a [routerLink]="['/resultados/esportes']">
+                                <i class="fa fa-list"></i> Resultados
+                            </a>
+                        </ng-template>
                     </li>
                 </ng-container>
                 <li *ngIf="isAppMobile" (click)="listPrinters()">
@@ -87,7 +104,7 @@
                 </li>
             </ul>
         </div>
-        <ul id="menu-side-left" class="sidebar-nav" appPerfectScroll>
+        <ul id="menu-side-left" class="sidebar-nav overflow-auto">
             <ng-container *ngIf="contexto == 'futebol'">
                 <span class="group">Destaques</span>
                 <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
@@ -121,7 +138,7 @@
                     </a>
                 </li>
                 <span class="group">Campeonatos</span>
-                <li class="regioes" *ngFor="let regiao of itens">
+                <li class="regiao" *ngFor="let regiao of itens">
                     <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
                         <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
                     </a>
@@ -150,7 +167,7 @@
                     </a>
                 </li>
                 <span class="group">Campeonatos</span>
-                <li *ngFor="let campeonato of itens"
+                <li class="campeonato" *ngFor="let campeonato of itens"
                     (click)="goTo('/esportes/basquete/eventos', { campeonato: campeonato._id })">
                     <a>
                         <i class="fa fa-certificate"></i> {{campeonato.nome}}
@@ -159,7 +176,7 @@
             </ng-container>
             <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
                 <span class="group">Surpresinha</span>
-                <li *ngFor="let tipoAposta of itens" class="supresinha"
+                <li class="supresinha" *ngFor="let tipoAposta of itens"
                     (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
                     <a *ngIf="contexto == 'seninha'">
                         <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números

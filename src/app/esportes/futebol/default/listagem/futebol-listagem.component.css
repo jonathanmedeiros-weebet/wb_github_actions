@@ -17,6 +17,7 @@
 
 .campeonato-header .column-left{
     flex-grow: 1;
+    position: relative;
 }
 
 .campeonato-header .flag-icon{
@@ -96,7 +97,7 @@
 }
 
 @media only screen and (max-width: 668px) {
-    .content-sports-scroll {
+    .content-sports {
         padding-bottom: 90px;
     }
 

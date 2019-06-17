@@ -64,6 +64,7 @@ export class NavigationComponent implements OnInit {
     contexto;
     modalRef;
     cartaoApostaHabilitado;
+    loteriasHabilitada;
     primeiraPagina;
     dataLimiteTabela;
     unsub$ = new Subject();
@@ -103,6 +104,7 @@ export class NavigationComponent implements OnInit {
         this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
+        this.loteriasHabilitada = this.paramsService.getOpcoes().loterias;
         this.isLoggedIn = this.auth.isLoggedIn();
         this.preencherDias();
 

@@ -210,17 +210,7 @@ gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
         host: "demo.wee.bet",
         banca: "DEMO",
-        styles: "",
-        scripts: "<!-- BEGIN JIVOSITE CODE {literal} -->\n" +
-        "<script type='text/javascript'>\n" +
-        "(function(){ var widget_id = '3zYgei0Snz';var d=document;var w=window;function l(){\n" +
-        "  var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;\n" +
-        "  s.src = '//code.jivosite.com/script/widget/'+widget_id\n" +
-        "    ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}\n" +
-        "  if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}\n" +
-        "  else{w.addEventListener('load',l,false);}}})();\n" +
-        "</script>\n" +
-        "<!-- {/literal} END JIVOSITE CODE -->"
+        styles: ""
     });
 });
 
@@ -702,5 +692,14 @@ gulp.task('bet8.wee.bet', function (done) {
         host: "bet8.wee.bet",
         banca: "Bet8",
         styles: ""
+    });
+});
+
+gulp.task('apostagyn.bet', function (done) {
+    tasks(done, {
+        host: "apostagyn.bet",
+        banca: "Aposta Gyn",
+        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: red; --foreground-highlight: #003f7f; --odds: #003f7f; --foreground-odds: #fff; --event-time: red;",
+        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;}"
     });
 });
