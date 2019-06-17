@@ -6,7 +6,7 @@ import {
     TipoApostaPipe,
     TipoApostaCombatePipe,
     CalcularCotacaoPipe,
-    OddCategoriaPipe
+    OddCategoriaPipe,
     SorteioTipoPipe,
     InfiniteScrollDirective,
 } from './index';
