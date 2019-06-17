@@ -675,7 +675,8 @@ gulp.task('club7bets.wee.bet', function (done) {
     tasks(done, {
         host: "club7bets.wee.bet",
         banca: "Club 7 Bets",
-        styles: ""
+        styles: "--header: #2c5b86; --foreground-header: #fff; --sidebar-right:#052c50; --foreground-sidebar-right: #fff; --sidebar-left: #052c50; --foreground-sidebar-left: #fff; --highlight:#de2c37; --foreground-highlight: #dba000; --odds: #2c5b86; --foreground-odds: #dba000; --league: #dba00f; --foreground-league: #000;",
+        aditional_styles: ".odds .inner-odd span { font-weight: bold!important; } "
     });
 });
 
@@ -700,6 +701,15 @@ gulp.task('apostagyn.bet', function (done) {
         host: "apostagyn.bet",
         banca: "Aposta Gyn",
         styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: red; --foreground-highlight: #003f7f; --odds: #003f7f; --foreground-odds: #fff; --event-time: red;",
-        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;}"
+        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
+        scripts: "<!-- BEGIN JIVOSITE CODE {literal} --> <script type='text/javascript'> (function(){ var widget_id = 'EgFLiIk885'; var d=document;var w=window;function l(){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);} if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);} else{w.addEventListener('load',l,false);}}})(); </script> <!-- {/literal} END JIVOSITE CODE -->"
+    });
+});
+
+gulp.task('sportsbets.fun', function (done) {
+    tasks(done, {
+        host: "sportsbets.fun",
+        banca: "Sports Bets",
+        styles: ""
     });
 });

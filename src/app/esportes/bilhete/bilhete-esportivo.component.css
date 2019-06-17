@@ -173,6 +173,10 @@
     font-size: 1rem;
 }
 
+.jogo-selecionado-inner{
+    padding-right: 20px;
+}
+
 @media only screen and (max-width: 668px) {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
