@@ -714,3 +714,11 @@ gulp.task('sportsbets.fun', function (done) {
         styles: ""
     });
 });
+
+gulp.task('trimaniabet.wee.bet', function (done) {
+    tasks(done, {
+        host: "trimaniabet.wee.bet",
+        banca: "TriMania Bet",
+        styles: ""
+    });
+});
