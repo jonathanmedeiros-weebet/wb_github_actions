@@ -719,6 +719,6 @@ gulp.task('trimaniabet.wee.bet', function (done) {
     tasks(done, {
         host: "trimaniabet.wee.bet",
         banca: "TriMania Bet",
-        styles: ""
+        styles: "--header: #32285f; --foreground-header: #fff; --sidebar-right:#32285f; --foreground-sidebar-right: #fff; --sidebar-left: #32285f; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #fa1919; --foreground-odds: #fff;"
     });
 });
