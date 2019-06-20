@@ -19,6 +19,7 @@
 
 .campeonato-header .column-left{
     flex-grow: 1;
+    position: relative;
 }
 
 .campeonato-header .flag-icon{

@@ -83,7 +83,8 @@
     "bet7.wee.bet": "gulp bet7.wee.bet",
     "bet8.wee.bet": "gulp bet8.wee.bet",
     "apostagyn.bet": "gulp apostagyn.bet",
-      "sportsbets.fun": "gulp sportsbets.fun"
+      "sportsbets.fun": "gulp sportsbets.fun",
+      "trimaniabet.wee.bet": "gulp trimaniabet.wee.bet"
   },
   "private": true,
   "dependencies": {

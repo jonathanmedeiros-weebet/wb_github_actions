@@ -97,7 +97,7 @@
                         <tbody>
                             <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
                                 <tr (click)="openModal(aposta)"
-                                    class="{{ aposta.resultado == 'ganhou' ? 'ganhador' : '' }} {{ aposta.resultado == 'perdeu' ? 'perdedor' : ''}}">
+                                    class="{{ aposta.resultado == 'ganhou' ? 'bg-success' : '' }} {{ aposta.resultado == 'perdeu' ? 'bg-danger' : ''}}">
                                     <td class="text-right">
                                         <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
                                         #{{aposta.id}}
