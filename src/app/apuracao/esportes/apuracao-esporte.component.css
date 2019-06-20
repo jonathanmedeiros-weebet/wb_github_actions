@@ -9,6 +9,10 @@
     border: none;
 }
 
+.bg-success td, .bg-danger td{
+    color: #fff;
+}
+
 .table tr td{
     cursor: pointer;
     /* padding: 1px 3px;
