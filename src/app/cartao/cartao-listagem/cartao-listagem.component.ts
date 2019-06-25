@@ -50,6 +50,7 @@ export class CartaoListagemComponent extends BaseFormComponent implements OnInit
 
     createForm() {
         this.form = this.fb.group({
+            apostador: [''],
             dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
             dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required]
         });
@@ -69,7 +70,8 @@ export class CartaoListagemComponent extends BaseFormComponent implements OnInit
         if (params) {
             queryParams = {
                 'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal
+                'data-final': params.dataFinal,
+                'apostador': params.apostador
             };
         }
 
