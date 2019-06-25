@@ -64,14 +64,16 @@ export class CartaoListagemComponent extends BaseFormComponent implements OnInit
     getCartoes(params?) {
         let queryParams: any = {
             'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
-            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59')
+            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
+            'sort': '-id'
         };
 
         if (params) {
             queryParams = {
                 'data-inicial': params.dataInicial,
                 'data-final': params.dataFinal,
-                'apostador': params.apostador
+                'apostador': params.apostador,
+                'sort': '-id'
             };
         }
 
