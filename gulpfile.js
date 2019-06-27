@@ -738,3 +738,11 @@ gulp.task('betsport.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('akiapostas.wee.bet', function (done) {
+    tasks(done, {
+        host: "akiapostas.wee.bet",
+        banca: "AKI Apostas",
+        styles: ""
+    });
+});
