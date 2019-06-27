@@ -730,3 +730,11 @@ gulp.task('paraibabets.com', function (done) {
         styles: "--header: #3f3f3f; --foreground-header: #fff; --sidebar-right:#3f3f3f; --foreground-sidebar-right: #fff; --sidebar-left: #3f3f3f; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #0d87d2; --foreground-odds: #fff;"
     });
 });
+
+gulp.task('betsport.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsport.wee.bet",
+        banca: "Bet Sport",
+        styles: ""
+    });
+});
