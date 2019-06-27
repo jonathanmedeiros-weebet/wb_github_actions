@@ -87,7 +87,9 @@
       "trimaniabet.wee.bet": "gulp trimaniabet.wee.bet",
       "paraibabets.com": "gulp paraibabets.com",
       "betsport.wee.bet": "gulp betsport.wee.bet",
-      "akiapostas.wee.bet": "gulp akiapostas.wee.bet"
+      "akiapostas.wee.bet": "gulp akiapostas.wee.bet",
+      "arenabet199.wee.bet": "gulp arenabet199.wee.bet",
+      "camaleaobet.com": "gulp camaleaobet.com"
   },
   "private": true,
   "dependencies": {

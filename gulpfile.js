@@ -746,3 +746,19 @@ gulp.task('akiapostas.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #008000; --foreground-odds: #fff;"
     });
 });
+
+gulp.task('arenabet199.wee.bet', function (done) {
+    tasks(done, {
+        host: "arenabet199.wee.bet",
+        banca: "Arenabet 99",
+        styles: ""
+    });
+});
+
+gulp.task('camaleaobet.com', function (done) {
+    tasks(done, {
+        host: "camaleaobet.com",
+        banca: "Camaleão Bet",
+        styles: ""
+    });
+});
