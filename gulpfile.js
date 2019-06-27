@@ -743,6 +743,6 @@ gulp.task('akiapostas.wee.bet', function (done) {
     tasks(done, {
         host: "akiapostas.wee.bet",
         banca: "AKI Apostas",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #008000; --foreground-odds: #fff;"
     });
 });
