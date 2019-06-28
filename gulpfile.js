@@ -750,8 +750,10 @@ gulp.task('akiapostas.wee.bet', function (done) {
 gulp.task('arenabet199.wee.bet', function (done) {
     tasks(done, {
         host: "arenabet199.wee.bet",
-        banca: "Arenabet 99",
-        styles: ""
+        banca: "Arenabet 199",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #fff; --odds: #fe7800; --foreground-odds: #333; --event-time: #000; --league: #313131; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
+        " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
 
