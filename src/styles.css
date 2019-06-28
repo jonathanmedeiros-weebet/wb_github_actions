@@ -24,7 +24,7 @@
 
     --event-time: #011e46;
     --fg-event-time: #fff;
-    
+
 }
 
 
@@ -541,6 +541,10 @@ button {
     background-color:var(--odds);;
 }
 
+.content-loteria {
+    overflow: auto;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     #fixed-bar-bilhete {
@@ -591,7 +595,6 @@ button {
     }
 
     .content-loteria {
-        overflow: auto;
         padding-bottom: 90px !important;
     }
 
