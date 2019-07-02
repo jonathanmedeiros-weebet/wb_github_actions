@@ -234,8 +234,7 @@ gulp.task('gol.vlog.br', function (done) {
     tasks(done, {
         host: "gol.vlog.br",
         banca: "BRASIL GOL",
-        styles: "",
-        old: true
+        styles: "--header: #4caf50; --foreground-header: #fff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #4caf50; --foreground-odds: #fff;",
     });
 });
 
