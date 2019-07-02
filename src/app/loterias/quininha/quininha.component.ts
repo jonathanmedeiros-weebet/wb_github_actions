@@ -212,8 +212,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             centered: true
         });
 
-        this.modalRef.componentInstance.mensagem = `Para validar sua aposta, procure um cambista de sua
-        preferência e informe o código: <b>#${id}</b>`;
+        this.modalRef.componentInstance.codigo = id;
 
         this.aposta = new Aposta();
         this.enableSubmit();
