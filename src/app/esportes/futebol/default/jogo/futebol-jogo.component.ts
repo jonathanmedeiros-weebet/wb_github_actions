@@ -131,39 +131,40 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     mapearCotacoes(cotacoes) {
-        this.odds = {};
-        this.odds1T = {};
-        this.odds2T = {};
-        this.oddsJogadores = {};
+        const odds = {};
+        const odds1T = {};
+        const odds2T = {};
+        const oddsJogadores = {};
 
         for (let index = 0; index < cotacoes.length; index++) {
             const cotacao = cotacoes[index];
             const tipoAposta = this.tiposAposta[cotacao.chave];
 
             if (tipoAposta) {
-                let odds;
+                let obj;
                 if (tipoAposta.tempo === '90') {
-                    odds = this.odds;
+                    obj = odds;
                 } else if (tipoAposta.tempo === '1T') {
-                    odds = this.odds1T;
+                    obj = odds1T;
                 } else if (tipoAposta.tempo === '2T') {
-                    odds = this.odds2T;
+                    obj = odds2T;
                 } else if (tipoAposta.tempo === 'JOGADORES') {
-                    odds = this.oddsJogadores;
+                    obj = oddsJogadores;
                 } else {
                     continue;
                 }
 
-                let odd = odds[tipoAposta.cat_chave];
+                let odd = obj[tipoAposta.cat_chave];
 
                 if (!odd) {
                     odd = {
                         'nome': tipoAposta.cat_nome,
                         'tempo': tipoAposta.tempo,
                         'principal': tipoAposta.p,
+                        'posicao': tipoAposta.cat_posicao,
                         'cotacoes': []
                     };
-                    odds[tipoAposta.cat_chave] = odd;
+                    obj[tipoAposta.cat_chave] = odd;
                 }
 
                 odd.cotacoes.push(cotacao);
@@ -184,18 +185,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         const tipoAposta = this.tiposAposta[chave];
 
                         if (tipoAposta) {
-                            let odds;
+                            let obj;
                             if (tipoAposta.tempo === '90') {
-                                odds = this.odds;
+                                obj = odds;
                             } else if (tipoAposta.tempo === '1T') {
-                                odds = this.odds1T;
+                                obj = odds1T;
                             } else if (tipoAposta.tempo === '2T') {
-                                odds = this.odds2T;
+                                obj = odds2T;
                             } else {
                                 continue;
                             }
 
-                            let odd = odds[tipoAposta.cat_chave];
+                            let odd = obj[tipoAposta.cat_chave];
                             if (!odd) {
                                 odd = {
                                     'nome': tipoAposta.cat_nome,
@@ -203,7 +204,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                     'principal': tipoAposta.p,
                                     'cotacoes': []
                                 };
-                                odds[tipoAposta.cat_chave] = odd;
+                                obj[tipoAposta.cat_chave] = odd;
                             }
 
                             const cotacao = new Cotacao();
@@ -216,6 +217,46 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 }
             }
         }
+
+        this.odds = {};
+        const sortableOdds = [];
+        for (const odd in odds) {
+            if (odds[odd]) {
+                sortableOdds.push([odds[odd].posicao, odd, odds[odd]]);
+            }
+        }
+        sortableOdds.sort((a, b) => a[0] - b[0]);
+        sortableOdds.forEach(s => this.odds[s[1]] = s[2]);
+
+        this.odds1T = {};
+        const sortableOdds1T = [];
+        for (const odd in odds1T) {
+            if (odds1T[odd]) {
+                sortableOdds1T.push([odds1T[odd].posicao, odd, odds1T[odd]]);
+            }
+        }
+        sortableOdds1T.sort((a, b) => a[0] - b[0]);
+        sortableOdds1T.forEach(s => this.odds1T[s[1]] = s[2]);
+
+        this.odds2T = {};
+        const sortableOdds2T = [];
+        for (const odd in odds2T) {
+            if (odds2T[odd]) {
+                sortableOdds2T.push([odds2T[odd].posicao, odd, odds2T[odd]]);
+            }
+        }
+        sortableOdds2T.sort((a, b) => a[0] - b[0]);
+        sortableOdds2T.forEach(s => this.odds2T[s[1]] = s[2]);
+
+        this.oddsJogadores = {};
+        const sortableJogadores = [];
+        for (const odd in oddsJogadores) {
+            if (oddsJogadores[odd]) {
+                sortableJogadores.push([oddsJogadores[odd].posicao, odd, oddsJogadores[odd]]);
+            }
+        }
+        sortableJogadores.sort((a, b) => a[0] - b[0]);
+        sortableJogadores.forEach(s => this.oddsJogadores[s[1]] = s[2]);
 
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
