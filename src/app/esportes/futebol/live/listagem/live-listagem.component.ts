@@ -24,6 +24,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     showLoadingIndicator = true;
     contentSportsEl;
     minutoEncerramentoAoVivo = 0;
+    jogosBloqueados;
     unsub$ = new Subject();
 
     constructor(
@@ -39,6 +40,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         this.definindoAlturas();
 
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
+        this.jogosBloqueados = this.paramsService.getJogosBloqueados();
 
         this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
@@ -55,6 +57,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
                                 }
+                            }
+
+                            if (this.jogoBloqueado(jogo._id)) {
+                                valido = false;
                             }
 
                             if (valido) {
@@ -128,6 +134,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     }
                 }
 
+                if (this.jogoBloqueado(jogo._id)) {
+                    valido = false;
+                }
+
                 if (valido && !jogo.finalizado && jogo.cotacoes.length > 0) {
                     campeonato.jogos.set(jogo._id, jogo);
 
@@ -168,5 +178,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     maisCotacoes(jogoId) {
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);
+    }
+
+    jogoBloqueado(id) {
+        return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
     }
 }
