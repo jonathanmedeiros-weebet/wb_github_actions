@@ -15,13 +15,15 @@ function tasks(done, config) {
             .pipe(replace('[HOST]', config.host))
             .pipe(replace('[BANCA]', config.banca))
             .pipe(replace('[SCRIPTS]', config.scripts))
-            .pipe(gulp.dest('src/'));
-
-        gulp.src(['styles.css'])
             .pipe(replace('[CUSTOM]', config.styles))
             .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
             .pipe(gulp.dest('src/'));
 
+        /*gulp.src(['styles.css'])
+            .pipe(replace('[CUSTOM]', config.styles))
+            .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
+            .pipe(gulp.dest('src/'));
+*/
         remoteSrc(['logo_banca.png'], {
             base: 'http://' + config.host + '/tema/'})
             .pipe(gulp.dest('src/assets/images/'));
@@ -37,13 +39,15 @@ function tasks(done, config) {
             .pipe(replace('[HOST]', 'central.' + config.host))
             .pipe(replace('[BANCA]', config.banca))
             .pipe(replace('[SCRIPTS]', typeof config.scripts == "undefined"? "" : config.scripts))
-            .pipe(gulp.dest('src/'));
-
-        gulp.src(['styles.css'])
             .pipe(replace('[CUSTOM]', config.styles))
             .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
             .pipe(gulp.dest('src/'));
 
+        /*gulp.src(['styles.css'])
+            .pipe(replace('[CUSTOM]', config.styles))
+            .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
+            .pipe(gulp.dest('src/'));
+*/
         remoteSrc(['logo_banca.png'], {
             base: 'http://central.' + config.host + '/tema/'})
             .pipe(gulp.dest('src/assets/images/'));
