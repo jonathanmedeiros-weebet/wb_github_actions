@@ -8,11 +8,54 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="//[HOST]/tema/favicon.ico">
+    <style>
+        :root {
+            --header: #002458;
+            --foreground-header: #b1c5e0;
+
+            --sidebar-right:#011e46;
+            --foreground-sidebar-right: #fff;
+
+            --sidebar-left: #011e46;
+            --foreground-sidebar-left: #fff;
+
+            --highlight: yellow;
+            --foreground-highlight: #aec3d8;
+
+            --odds: #046eef;
+            --foreground-odds: #fff;
+            --foreground-selected-odds: #000;
+
+            --league: #e1e2e4;
+            --foreground-league: #455a64;
+
+            --selected-event: #002458;
+            --foreground-selected-event: #fff;
+
+            --event-time: #011e46;
+            --fg-event-time: #fff;
+
+            [CUSTOM]
+        }
+    </style>
 </head>
 
-<body>
-    <app-root></app-root>
-    [SCRIPTS]
+<body style="background-color:var(--header);">
+<app-root>
+    <div style="position: fixed;left: 50%;top: 50%;margin-left: -50px;margin-top: -50px;color: #fff;">
+        <img style="width: 100px;" src="assets/images/logo_banca.png" alt="">
+        <br>
+        <div style="text-align: center;">
+            Carregando...
+        </div>
+    </div>
+</app-root>
+[SCRIPTS]
+
+<style>
+    [ADITIONAL_STYLE]
+</style>
+
 </body>
 
 </html>
