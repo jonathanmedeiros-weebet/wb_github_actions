@@ -783,3 +783,19 @@ gulp.task('futebolbetsworld.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('megasports.bet', function (done) {
+    tasks(done, {
+        host: "megasports.bet",
+        banca: "Mega Sports",
+        styles: ""
+    });
+});
+
+gulp.task('fanaticsports.bet', function (done) {
+    tasks(done, {
+        host: "fanaticsports.bet",
+        banca: "Fanatic Sports",
+        styles: ""
+    });
+});

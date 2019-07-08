@@ -91,7 +91,9 @@
       "arenabet199.wee.bet": "gulp arenabet199.wee.bet",
       "camaleaobet.com": "gulp camaleaobet.com",
       "localbets.club": "gulp localbets.club",
-      "futebolbetsworld.com": "gulp futebolbetsworld.com"
+      "futebolbetsworld.com": "gulp futebolbetsworld.com",
+      "megasports.bet": "gulp megasports.bet",
+      "fanaticsports.bet": "gulp fanaticsports.bet"
   },
   "private": true,
   "dependencies": {
