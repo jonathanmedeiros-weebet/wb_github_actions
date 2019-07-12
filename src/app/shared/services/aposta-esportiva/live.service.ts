@@ -43,4 +43,20 @@ export class LiveService {
         return observable;
     }
 
+    getJogoStats(jogoId): Observable<any> {
+        const observable = new Observable(observer => {
+            this.socket = io(this.url);
+
+            console.log(`stats-${jogoId}`);
+            this.socket.on(`stats-${jogoId}`, (data) => {
+                observer.next(data);
+            });
+
+            return () => {
+                this.socket.disconnect();
+            };
+        });
+
+        return observable;
+    }
 }

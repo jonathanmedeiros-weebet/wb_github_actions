@@ -1,4 +1,13 @@
-.cupom-ativo{
+#bilhete-reativo{
+    background-color: #fff;
+    height: 600px;
     overflow: auto;
-    height: 100%;
+    padding: 15px;
+
+}
+
+#cupom{
+    margin: 0 auto;
+    max-width: 400px;
+    /* border: 1px solid black; */
 }

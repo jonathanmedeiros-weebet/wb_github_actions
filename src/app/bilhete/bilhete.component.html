@@ -1,7 +1,77 @@
 <app-spinner *ngIf="!aposta"></app-spinner>
-<div class="cupom-ativo">
-    <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="aposta && aposta.tipo == 'esportes'">
-    </app-exibir-bilhete-esportivo>
-    <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="aposta && aposta.tipo == 'loteria'">
-    </app-exibir-bilhete-loteria>
+<div id="bilhete-reativo">
+    <div *ngIf="aposta && aposta.tipo == 'esportes'">
+        <div id="cupom" #cupom>
+            <div class="conteudo" style="text-align: center;">
+                <div>
+                    <img style="height: 80px;" src="assets/images/logo_banca.png">
+                    <h1 class="numero">
+                        #{{aposta.id}}
+                    </h1>
+                </div>
+                <div style="background: var(--header); color:var(--foreground-header); padding: 5px 0;">
+                    <h2>Seus Palpites</h2>
+                    <span>Configura abaixo o resultado dos seus palpites</span>
+                </div>
+                <div *ngFor="let item of aposta.itens" style="padding:15px; margin: 15px 0; background-color:#ebeaea">
+                    <div>
+                        {{item.jogo.horario | moment:'DD/MM/YYYY HH:mm'}}
+                    </div>
+                    <div *ngIf="stats[item.jogo.fi].minutos">
+                        <div>
+                            <span style="color:red">Ao Vivo</span>
+                        </div>
+                        <div>
+                            {{stats[item.jogo.fi].minutos}} <span style="color:red">'</span>
+                        </div>
+                    </div>
+                    <div style="display: flex;margin:10px 0">
+                        <div style="width: 40%;font-size: 1.2rem;font-weight: bold;">{{item.jogo.time_a_nome}}</div>
+                        <div style="width: 20%;font-size: 1.5rem;font-weight: bold;">
+                            <span>{{stats[item.jogo.fi].time_a_resultado}}</span> -
+                            <span>{{stats[item.jogo.fi].time_b_resultado}}</span>
+                        </div>
+                        <div style="width: 40%;font-size: 1.2rem;font-weight: bold;">{{item.jogo.time_b_nome}}</div>
+                    </div>
+                    <div *ngIf="stats[item.jogo.fi]">
+                        <div style="display:flex;margin-bottom:5px">
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_a_resultado_1_tempo}}</div>
+                            <div style="width: 60%">Gols 1º Tempo</div>
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_b_resultado_1_tempo}}</div>
+                        </div>
+                        <div style="display:flex;margin-bottom:5px">
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_a_resultado_2_tempo}}</div>
+                            <div style="width: 60%">Gols 2º Tempo</div>
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_b_resultado_2_tempo}}</div>
+                        </div>
+                        <div style="display:flex;margin-bottom:5px">
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_a_escanteios_1_tempo}}</div>
+                            <div style="width: 60%">Escanteios 1º Tempo</div>
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_b_escanteios_1_tempo}}</div>
+                        </div>
+                        <div style="display:flex;margin-bottom:5px">
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_a_escanteios_2_tempo}}</div>
+                            <div style="width: 60%">Escanteios 2º Tempo</div>
+                            <div style="width: 20%">{{stats[item.jogo.fi].time_b_escanteios_2_tempo}}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <span>{{item.categoria_nome}}:</span><span>{{item.odd_nome}}</span>
+                        <span style="font-weight: bolder;"> ({{item.cotacao}})</span>
+                        <span style="color: green;"> {{item.resultado}}</span>
+                    </div>
+                </div>
+                <div>
+                    <!-- <h4 *ngIf="aposta.resultado">Resultado: <span style="color: red;">{{aposta.resultado}}</span></h4> -->
+                    <h4>Resultado: <span style="color: red;">Perdeu</span></h4>
+                    <div>
+                        <b>Apostador:</b> {{aposta.apostador}}
+                    </div>
+                    <div>
+                        <b>Cambista:</b> {{aposta.passador.nome}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

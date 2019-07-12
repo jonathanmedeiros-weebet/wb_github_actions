@@ -1,3 +1,4 @@
+import { Estatistica } from './estatistica';
 import { JogoInfo } from './jogo-info';
 import { Campeonato } from './campeonato';
 import { Cotacao } from './cotacao';
@@ -17,4 +18,5 @@ export class Jogo {
     cotacoes_principais: Cotacao[];
     info: JogoInfo;
     favorito: string;
+    estatisticas: Estatistica;
 }
