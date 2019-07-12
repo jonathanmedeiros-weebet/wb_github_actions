@@ -30,7 +30,9 @@
                     {{item.jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
                 </p>
                 <p class="nome" [ngClass]="resultadoClass(item)">
-                    {{item.jogo.nome}}
+                    {{item.jogo.time_a_nome}}
+                    {{item.jogo.time_a_resultado}} x {{item.jogo.time_b_resultado}}
+                    {{item.jogo.time_b_nome}}
                 </p>
                 <p class="cotacao" [ngClass]="resultadoClass(item)">
                     {{item.categoria_nome}}:
