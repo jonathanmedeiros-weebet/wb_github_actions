@@ -576,6 +576,14 @@ gulp.task('apostapremiada.bet', function (done) {
     });
 });
 
+gulp.task('bet2.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet2.wee.bet",
+        banca: "BetSports",
+        styles: ""
+    });
+});
+
 gulp.task('bet3.wee.bet', function (done) {
     tasks(done, {
         host: "bet3.wee.bet",
