@@ -94,7 +94,8 @@
       "localbets.club": "gulp localbets.club",
       "futebolbetsworld.com": "gulp futebolbetsworld.com",
       "megasports.bet": "gulp megasports.bet",
-      "fanaticsports.bet": "gulp fanaticsports.bet"
+      "fanaticsports.bet": "gulp fanaticsports.bet",
+      "geraisesportenet.wee.bet": "gulp geraisesportenet.wee.bet"
   },
   "private": true,
   "dependencies": {
