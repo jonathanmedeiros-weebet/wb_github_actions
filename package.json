@@ -68,6 +68,7 @@
     "onbets.club": "gulp onbets.club",
     "copaesporte.com": "gulp copaesporte.com",
     "apostapremiada.bet": "gulp apostapremiada.bet",
+    "bet2.wee.bet": "gulp bet2.wee.bet",
     "bet3.wee.bet": "gulp bet3.wee.bet",
     "bet4.wee.bet": "gulp bet4.wee.bet",
     "bet5.wee.bet": "gulp bet5.wee.bet",
@@ -93,7 +94,8 @@
       "localbets.club": "gulp localbets.club",
       "futebolbetsworld.com": "gulp futebolbetsworld.com",
       "megasports.bet": "gulp megasports.bet",
-      "fanaticsports.bet": "gulp fanaticsports.bet"
+      "fanaticsports.bet": "gulp fanaticsports.bet",
+      "geraisesportenet.wee.bet": "gulp geraisesportenet.wee.bet"
   },
   "private": true,
   "dependencies": {

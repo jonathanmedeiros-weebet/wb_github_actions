@@ -88,8 +88,7 @@ gulp.task('bet1.wee.bet', function (done) {
     tasks(done, {
         host: "bet1.wee.bet",
         banca: "SPORT BOM BET",
-        styles: "",
-        old: true
+        styles: ""
     });
 });
 
@@ -576,6 +575,14 @@ gulp.task('apostapremiada.bet', function (done) {
     });
 });
 
+gulp.task('bet2.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet2.wee.bet",
+        banca: "BetSports",
+        styles: ""
+    });
+});
+
 gulp.task('bet3.wee.bet', function (done) {
     tasks(done, {
         host: "bet3.wee.bet",
@@ -807,5 +814,13 @@ gulp.task('fanaticsports.bet', function (done) {
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #cb151c; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
         aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
         " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+    });
+});
+
+gulp.task('geraisesportenet.wee.bet', function (done) {
+    tasks(done, {
+        host: "geraisesportenet.wee.bet",
+        banca: "GERAIS ESPORTE NET",
+        styles: ""
     });
 });
