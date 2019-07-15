@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import * as moment from 'moment';
     styleUrls: ['bilhete.component.css']
 })
 export class BilheteComponent implements OnInit, OnDestroy {
+    @ViewChild('bilheteContent') bilheteContent;
     aposta;
     stats = {};
     unsub$ = new Subject();
@@ -20,10 +21,14 @@ export class BilheteComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private apostaEsportivaService: ApostaEsportivaService,
-        private liveService: LiveService
+        private liveService: LiveService,
+        private renderer: Renderer2,
+        private el: ElementRef
     ) { }
 
     ngOnInit() {
+        this.definirAltura();
+
         this.route.params
             .subscribe((params: any) => {
                 if (params['id']) {
@@ -48,15 +53,20 @@ export class BilheteComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
+    definirAltura() {
+        const content = this.el.nativeElement.querySelector('#bilhete-reativo');
+        this.renderer.setStyle(content, 'height', `${window.innerHeight}px`);
+    }
+
     ativarAoVivo() {
         this.aposta.itens.forEach(item => {
+            this.stats[item.jogo.fi] = new Estatistica();
+            const horarioLimite = moment(item.jogo.horario).add('2', 'hours');
 
             if (item.resultado) {
                 this.stats[item.jogo.fi] = item.jogo.estatisticas;
-            } else if (moment().isSameOrAfter(item.jogo.horario)) {
+            } else if (moment().isSameOrAfter(item.jogo.horario) && moment().isBefore(horarioLimite)) {
                 this.liveStats(item.jogo.fi);
-            } else {
-                this.stats[item.jogo.fi] = new Estatistica();
             }
         });
 
@@ -67,7 +77,7 @@ export class BilheteComponent implements OnInit, OnDestroy {
         this.liveService.getJogoStats(jogoId)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                (stats: any) => {
+                stats => {
                     console.log(stats);
                     this.stats[jogoId] = stats;
                     // console.log(this.stats);

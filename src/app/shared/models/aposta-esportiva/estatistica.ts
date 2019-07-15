@@ -22,4 +22,7 @@ export class Estatistica {
     ultimo_gol_tempo: number;
     tempo: string;
     minutos: any;
+    acrescimos: number;
+    finalizado = false;
+    // ultima_atualizacao: any;
 }

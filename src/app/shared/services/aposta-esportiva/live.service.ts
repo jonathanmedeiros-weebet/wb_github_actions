@@ -47,7 +47,6 @@ export class LiveService {
         const observable = new Observable(observer => {
             this.socket = io(this.url);
 
-            console.log(`stats-${jogoId}`);
             this.socket.on(`stats-${jogoId}`, (data) => {
                 observer.next(data);
             });
