@@ -17,12 +17,13 @@
                     <div>
                         {{item.jogo.horario | moment:'DD/MM/YYYY HH:mm'}}
                     </div>
-                    <div *ngIf="stats[item.jogo.fi].minutos && !stats[item.jogo.fi].finalizado">
+                    <div *ngIf="stats[item.jogo.fi].minutos >= 0 && !stats[item.jogo.fi].finalizado">
                         <div>
                             <span style="color:red">Ao Vivo</span>
                         </div>
                         <div>
-                            {{stats[item.jogo.fi].minutos}} <span *ngIf="stats[item.jogo.fi].acrescimos">+ {{stats[item.jogo.fi].acrescimos}}</span> <span style="color:red">'</span>
+                            {{stats[item.jogo.fi].minutos}} <span *ngIf="stats[item.jogo.fi].acrescimos">+
+                                {{stats[item.jogo.fi].acrescimos}}</span> <span style="color:red">'</span>
                         </div>
                     </div>
                     <div style="display: flex;margin:5px 0">
@@ -35,37 +36,36 @@
                     </div>
                     <div *ngIf="stats[item.jogo.fi]">
                         <div style="display:flex;margin-bottom:5px">
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_resultado_1_tempo}}</div>
+                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_resultado_1t}}</div>
                             <div style="width: 20%">Gols 1º Tempo</div>
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_resultado_1_tempo}}</div>
+                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_resultado_1t}}</div>
                         </div>
                         <div style="display:flex;margin-bottom:5px">
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_resultado_2_tempo}}</div>
+                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_resultado_2t}}</div>
                             <div style="width: 20%">Gols 2º Tempo</div>
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_resultado_2_tempo}}</div>
+                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_resultado_2t}}</div>
                         </div>
                         <div style="display:flex;margin-bottom:5px">
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_escanteios_1_tempo}}</div>
-                            <div style="width: 20%">Escanteios 1º Tempo</div>
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_escanteios_1_tempo}}</div>
-                        </div>
-                        <div style="display:flex;margin-bottom:5px">
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_escanteios_2_tempo}}</div>
-                            <div style="width: 20%">Escanteios 2º Tempo</div>
-                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_escanteios_2_tempo}}</div>
+                            <div style="width: 40%">{{stats[item.jogo.fi].time_a_escanteios}}</div>
+                            <div style="width: 20%">Escanteios</div>
+                            <div style="width: 40%">{{stats[item.jogo.fi].time_b_escanteios}}</div>
                         </div>
                     </div>
-                    <div style="font-size: 1.2rem;">
+                    <div [ngClass]="{'dashed': stats[item.jogo.fi].resultado == 'cancelado'}"
+                        style="font-size: 1.2rem;">
                         <span>{{item.categoria_nome}}: </span><span>{{item.odd_nome}}</span>
                         <span style="font-weight: bolder;"> ({{item.cotacao}})</span>
                     </div>
-                    <div *ngIf="item.resultado">
-                        <span style="color: green;font-size: 1.2rem;"> {{item.resultado}}</span>
+                    <div *ngIf="stats[item.jogo.fi].resultado">
+                        <span [ngClass]="resultadoClass(stats[item.jogo.fi].resultado)" style="font-size: 1.2rem;">
+                            {{stats[item.jogo.fi].resultado}}
+                        </span>
                     </div>
                 </div>
                 <div>
-                    <!-- <h4 *ngIf="aposta.resultado">Resultado: <span style="color: red;">{{aposta.resultado}}</span></h4> -->
-                    <h4>Resultado: <span style="color: red;">Perdeu</span></h4>
+                    <h4 *ngIf="aposta.resultado">
+                        Resultado: <span [ngClass]="resultadoClass(aposta.resultado)">{{aposta.resultado}}</span>
+                    </h4>
                     <div>
                         <b>Apostador:</b> {{aposta.apostador}}
                     </div>
@@ -77,6 +77,21 @@
                     </div>
                     <div>
                         <b>Nº Jogos:</b> {{aposta.itens.length}}
+                    </div>
+                    <div>
+                        <b>Cotação:</b> {{aposta.premio / aposta.valor | number:'1.0-3' }}
+                    </div>
+                    <div>
+                        <b>Valor Apostado:</b> {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+                    </div>
+                    <div>
+                        <b>Possível Retorno:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+                    </div>
+                    <div *ngIf="aposta.passador.percentualPremio > 0">
+                        <b>Cambista Paga:</b> {{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}
+                    </div>
+                    <div>
+                        <b>Status do Bilhete:</b> {{aposta.cancelado ? 'CANCELADO' : 'ATIVO'}}
                     </div>
                 </div>
             </div>
