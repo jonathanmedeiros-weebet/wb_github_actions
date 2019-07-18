@@ -33,10 +33,8 @@ export class BilheteComponent implements OnInit, OnDestroy {
 
         this.route.params
             .subscribe((params: any) => {
-                if (params['id']) {
-                    const id = +params['id'];
-
-                    this.apostaEsportivaService.getAposta(id)
+                if (params['chave']) {
+                    this.apostaEsportivaService.getAposta(params['chave'])
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             apostaEsportiva => {
