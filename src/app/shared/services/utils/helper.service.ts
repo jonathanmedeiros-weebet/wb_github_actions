@@ -233,9 +233,9 @@ export class HelperService {
     sharedSportsTicket(aposta, file) {
         parent.postMessage(
             {
-                message: `${config.BANCA_NOME}: ${config.HOST}/aposta/${aposta.chave}`,
+                message: `${config.BANCA_NOME}: ${location.origin}/bilhete/${aposta.chave}`,
                 file: file,
-                data: `${config.HOST}/aposta/${aposta.chave}`,
+                data: `${location.origin}/bilhete/${aposta.chave}`,
                 action: 'shareURL'
             },
             'file://'
