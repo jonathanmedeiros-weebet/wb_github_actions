@@ -63,7 +63,7 @@ const appRoutes: Routes = [
         loadChildren: 'app/auth/auth.module#AuthModule'
     },
     {
-        path: 'bilhete/:id',
+        path: 'bilhete/:chave',
         component: BilheteComponent
     }
 ];

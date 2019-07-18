@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { BilheteComponent } from './bilhete.component';
-import { LayoutModule } from '../shared/layout/layout.module';
+import { SharedModule } from '../shared/shared.module';
+import { LiveService } from '../services';
 
 @NgModule({
     imports: [
-        CommonModule,
-        RouterModule,
-
-        LayoutModule
+        SharedModule
     ],
     declarations: [
         BilheteComponent
-    ]
+    ],
+    providers: [LiveService]
 })
 export class BilheteModule { }
