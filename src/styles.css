@@ -514,6 +514,7 @@ button {
 
 .content-loteria {
     overflow: auto;
+    background-color: #fff;
 }
 
 /* Large devices (desktops, 992px and up) */
