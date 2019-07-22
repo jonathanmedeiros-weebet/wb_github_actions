@@ -33,7 +33,10 @@ export const APP_TOKENS = [
         deps: [ParametrosLocaisService],
         multi: true
     },
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    {
+        provide: LOCALE_ID,
+        useValue: 'pt-BR'
+    }
 ];
 
 @NgModule({
