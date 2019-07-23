@@ -262,7 +262,7 @@ gulp.task('maissports.net', function (done) {
     tasks(done, {
         host: "maissports.net",
         banca: "MaisSports",
-        styles: ""
+        styles: "--header: #9a0003; --foreground-header: #fff; --sidebar-right:#9a0003; --foreground-sidebar-right: #fff; --sidebar-left: #f4f4f4; --foreground-sidebar-left: #000; --highlight:#ffc107; --foreground-highlight: #000; --odds: #c10d0d; --foreground-odds: #fff;"
     });
 });
 
@@ -819,6 +819,14 @@ gulp.task('geraisesportenet.wee.bet', function (done) {
     tasks(done, {
         host: "geraisesportenet.wee.bet",
         banca: "GERAIS ESPORTE NET",
+        styles: ""
+    });
+});
+
+gulp.task('jsportbet.com', function (done) {
+    tasks(done, {
+        host: "jsportbet.com",
+        banca: "JSport Bet",
         styles: ""
     });
 });
