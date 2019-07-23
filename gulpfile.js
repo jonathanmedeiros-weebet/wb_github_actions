@@ -822,3 +822,11 @@ gulp.task('geraisesportenet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('jsportbet.com', function (done) {
+    tasks(done, {
+        host: "jsportbet.com",
+        banca: "JSport Bet",
+        styles: ""
+    });
+});
