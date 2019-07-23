@@ -208,6 +208,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (this.modalRef) {
             this.modalRef.close();
         }
+        this.closeCupom();
         this.enableSubmit();
         this.trocarTipoApostaDeslogado('preaposta');
 
@@ -227,6 +228,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (this.modalRef) {
             this.modalRef.close();
         }
+        this.closeCupom();
         this.enableSubmit();
 
         this.bilheteService.atualizarItens([]);

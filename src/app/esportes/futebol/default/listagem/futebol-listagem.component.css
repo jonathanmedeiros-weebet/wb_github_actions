@@ -1,7 +1,7 @@
 .campeonato-header{
     text-transform: uppercase;
     padding: 0px 10px;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: bold;
     border-bottom: 4px solid white;
     cursor: pointer;
@@ -12,7 +12,7 @@
 }
 
 .campeonato-header > span{
-    line-height: 41px;
+    line-height: 29px;
 }
 
 .campeonato-header .column-left{
@@ -21,8 +21,8 @@
 }
 
 .campeonato-header .flag-icon{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     position: absolute;
 }
 
@@ -31,9 +31,9 @@
 }
 
 .campeonato-header .fa{
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     float: right;
-    line-height: 41px;
+    line-height: 30px;
     margin-right: 10px;
 }
 

@@ -189,11 +189,11 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
 
     reboot() {
         this.enableSubmit();
-        this.exibirPreAposta = false;
-        this.form.reset();
-        this.codigo = '';
-        this.preAposta = null;
-        this.preApostaItens = [];
+        // this.exibirPreAposta = false;
+        // this.form.reset();
+        // this.codigo = '';
+        // this.preAposta = null;
+        // this.preApostaItens = [];
 
         this.goToTop('#default-content');
     }
