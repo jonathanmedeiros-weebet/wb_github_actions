@@ -104,8 +104,8 @@ export class BilheteComponent implements OnInit, OnDestroy {
 
     resultadoClass(resultado) {
         return {
-            'ganhou': resultado === 'ganhou',
-            'perdeu': resultado === 'perdeu'
+            'ganhou': resultado === 'ganhou' || resultado === 'ganhando',
+            'perdeu': resultado === 'perdeu' || resultado === 'perdendo'
         };
     }
 
@@ -114,6 +114,7 @@ export class BilheteComponent implements OnInit, OnDestroy {
             let aoMenosUmPerdeu = false;
             let todosComResultados = true;
             let acertouTodos = true;
+            let qtdResults = 0;
 
             for (const id in this.stats) {
                 if (this.stats.hasOwnProperty(id)) {
@@ -125,13 +126,17 @@ export class BilheteComponent implements OnInit, OnDestroy {
                     if (!estatistica.resultado) {
                         todosComResultados = false;
                     }
-                    if (estatistica.resultado !== 'ganhou') {
-                        acertouTodos = false;
+                    if (estatistica.resultado === 'ganhou' || estatistica.resultado === 'ganhando') {
+                        qtdResults++;
                     }
-                    if (estatistica.resultado === 'perdeu') {
+                    if (estatistica.resultado === 'perdeu' || estatistica.resultado === 'perdendo') {
                         aoMenosUmPerdeu = true;
                     }
                 }
+            }
+
+            if (qtdResults < Object.keys(this.stats).length) {
+                acertouTodos = false;
             }
 
             if (todosComResultados) {
@@ -154,173 +159,180 @@ export class BilheteComponent implements OnInit, OnDestroy {
         const stats: Estatistica = this.stats[jogoId];
         const chave = this.chaves[jogoId];
 
+        let vitoria = 'ganhou';
+        let derrota = 'perdeu';
+        if (stats.minutos) {
+            vitoria = 'ganhando';
+            derrota = 'perdendo';
+        }
+
         switch (chave) {
             case 'casa_90':
                 if (stats.time_a_resultado > stats.time_b_resultado) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'empate_90':
                 if (stats.time_a_resultado === stats.time_b_resultado) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'fora_90':
                 if (stats.time_a_resultado < stats.time_b_resultado) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'casa_empate_90':
                 if ((stats.time_a_resultado > stats.time_b_resultado) || (stats.time_a_resultado === stats.time_b_resultado)) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'fora_empate_90':
                 if ((stats.time_a_resultado < stats.time_b_resultado) || (stats.time_a_resultado === stats.time_b_resultado)) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'casa_fora_90':
                 if (stats.time_a_resultado != stats.time_b_resultado) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'ambos_marcam_sim_90':
                 if ((stats.time_a_resultado > 0) && (stats.time_b_resultado > 0)) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'ambos_marcam_nao_90':
                 if ((stats.time_a_resultado === 0) && (stats.time_b_resultado === 0)) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+2.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 2.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-2.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 2.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+0.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 0.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-0.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 0.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+1.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 1.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-1.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 1.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+2.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 2.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-2.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 2.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+3.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 3.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-3.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 3.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+4.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 4.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-4.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 4.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+5.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 5.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-5.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 5.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_+6.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 6.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             case 'gols_-6.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 6.5) {
-                    stats.resultado = 'ganhou';
+                    stats.resultado = vitoria;
                 } else {
-                    stats.resultado = 'perdeu';
+                    stats.resultado = derrota;
                 }
                 break;
             default:
