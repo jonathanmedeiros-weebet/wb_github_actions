@@ -835,6 +835,6 @@ gulp.task('acaisports.bet', function (done) {
     tasks(done, {
         host: "acaisports.bet",
         banca: "Açaí Sports",
-        styles: ""
+        styles: "--header: #4e237f; --foreground-header: #fff; --sidebar-right:#4e237f; --foreground-sidebar-right: #fff; --sidebar-left: #4e237f; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #3ba437; --foreground-odds: #fff;"
     });
 });
