@@ -830,3 +830,11 @@ gulp.task('jsportbet.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('acaisports.bet', function (done) {
+    tasks(done, {
+        host: "acaisports.bet",
+        banca: "Açaí Sports",
+        styles: ""
+    });
+});
