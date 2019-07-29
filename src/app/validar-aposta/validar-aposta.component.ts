@@ -121,6 +121,7 @@ export class ValidarApostaComponent extends BaseFormComponent implements OnInit,
                     aoVivo: item.ao_vivo,
                     cotacao: {
                         chave: item.aposta_tipo.chave,
+                        nome: item.odd_nome,
                         valor: item.cotacao
                     }
                 };

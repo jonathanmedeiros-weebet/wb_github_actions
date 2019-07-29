@@ -34,9 +34,20 @@
                                             {{item.jogo.campeonato.nome}}
                                         </div>
                                         <div class="cotacao">
-                                            {{item.aposta_tipo.nome}}:
+                                            {{item.categoria_nome}}:
+                                            <span *ngIf="item.odd_nome; else chave">
+                                                {{item.odd_nome}}
+                                            </span>
+                                            <ng-template #chave>
+                                                <span *ngIf="item.jogo.sport_id != 9; else nomeOddCombate">
+                                                    {{item.aposta_tipo.chave | tipoAposta}}
+                                                </span>
+                                                <ng-template #nomeOddCombate>
+                                                    {{item.aposta_tipo.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
+                                                </ng-template>
+                                            </ng-template>
                                             <span class="valor">
-                                                {{item.cotacao | number: '1.0-2'}}
+                                                ( {{item.cotacao | number: '1.0-2'}} )
                                             </span>
                                         </div>
                                     </div>
