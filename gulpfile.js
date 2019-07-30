@@ -838,3 +838,11 @@ gulp.task('acaisports.bet', function (done) {
         styles: "--header: #4e237f; --foreground-header: #fff; --sidebar-right:#4e237f; --foreground-sidebar-right: #fff; --sidebar-left: #4e237f; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #3ba437; --foreground-odds: #fff;"
     });
 });
+
+gulp.task('lance.bet', function (done) {
+    tasks(done, {
+        host: "lance.bet",
+        banca: "Lance Bet",
+        styles: ""
+    });
+});

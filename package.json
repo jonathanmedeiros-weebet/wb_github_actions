@@ -97,7 +97,8 @@
       "fanaticsports.bet": "gulp fanaticsports.bet",
       "geraisesportenet.wee.bet": "gulp geraisesportenet.wee.bet",
       "jsportbet.com": "gulp jsportbet.com",
-      "acaisports.bet": "gulp acaisports.bet"
+      "acaisports.bet": "gulp acaisports.bet",
+      "lance.bet": "gulp lance.bet"
   },
   "private": true,
   "dependencies": {
