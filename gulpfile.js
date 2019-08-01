@@ -846,3 +846,11 @@ gulp.task('lance.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('masterbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "masterbet.wee.bet",
+        banca: "MasterBet",
+        styles: ""
+    });
+});

@@ -98,7 +98,8 @@
       "geraisesportenet.wee.bet": "gulp geraisesportenet.wee.bet",
       "jsportbet.com": "gulp jsportbet.com",
       "acaisports.bet": "gulp acaisports.bet",
-      "lance.bet": "gulp lance.bet"
+      "lance.bet": "gulp lance.bet",
+      "masterbet.wee.bet": "gulp masterbet.wee.bet"
   },
   "private": true,
   "dependencies": {
