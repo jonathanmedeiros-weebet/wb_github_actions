@@ -857,9 +857,9 @@ gulp.task('masterbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('betzeta.com', function (done) {
+gulp.task('web.betzeta.com', function (done) {
     tasks(done, {
-        host: "betzeta.com",
+        host: "web.betzeta.com",
         banca: "Bet Zeta",
         styles: ""
     });
