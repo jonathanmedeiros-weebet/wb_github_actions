@@ -480,7 +480,7 @@ gulp.task('falcaosport.wee.bet', function (done) {
     tasks(done, {
         host: "falcaosport.wee.bet",
         banca: "Falcão Sport",
-        styles: "--header: #4caf50; --foreground-header: #fff; --sidebar-right:#4caf50; --foreground-sidebar-right: #fff; --sidebar-left: #4caf50; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #4caf50; --foreground-odds: #fff;"
+        styles: "--header: #FF0000; --foreground-header: #fff; --sidebar-right:#8B0000; --foreground-sidebar-right: #fff; --sidebar-left: #8B0000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #FF0000; --foreground-odds: #fff;"
     });
 });
 
