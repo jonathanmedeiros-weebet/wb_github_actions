@@ -853,7 +853,7 @@ gulp.task('masterbet.wee.bet', function (done) {
     tasks(done, {
         host: "masterbet.wee.bet",
         banca: "MasterBet",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #cb151c; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
     });
 });
 
