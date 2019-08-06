@@ -10,7 +10,7 @@ import { HelperService, AuthService } from '../../../../services';
     styleUrls: ['./aposta-modal.component.css']
 })
 export class ApostaModalComponent implements OnInit {
-    @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
+    @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
     @Input() showCancel = false;
     appMobile;

@@ -10,7 +10,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'eventos',
-                loadChildren: 'app/esportes/combate/default/combate-default.module#CombateDefaultModule'
+                loadChildren: () => import('app/esportes/combate/default/combate-default.module').then(m => m.CombateDefaultModule)
             }
         ]
     }

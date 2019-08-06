@@ -13,7 +13,7 @@ import * as moment from 'moment';
     styleUrls: ['bilhete.component.css']
 })
 export class BilheteComponent implements OnInit, OnDestroy {
-    @ViewChild('bilheteContent') bilheteContent;
+    @ViewChild('bilheteContent', { static: false }) bilheteContent;
     aposta;
     stats = {};
     chaves = {};

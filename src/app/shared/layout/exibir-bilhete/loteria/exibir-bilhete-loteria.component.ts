@@ -13,7 +13,7 @@ import * as html2canvas from 'html2canvas';
 })
 
 export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
-    @ViewChild('cupom') cupom: ElementRef;
+    @ViewChild('cupom', { static: true }) cupom: ElementRef;
     @Input() aposta: any;
     LOGO;
     informativoRodape;

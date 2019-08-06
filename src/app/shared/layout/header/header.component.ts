@@ -37,7 +37,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     };
     usuario = new Usuario();
     isLoggedIn;
-    LOGO;
     BANCA_NOME;
     basqueteHabilitado = false;
     combateHabilitado = false;
@@ -61,7 +60,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
-        this.LOGO = config.LOGO;
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
 

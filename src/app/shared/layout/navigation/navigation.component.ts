@@ -23,7 +23,6 @@ import {
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent
 } from '../modals';
-import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
@@ -53,7 +52,6 @@ import * as moment from 'moment';
     ]
 })
 export class NavigationComponent implements OnInit {
-    LOGO;
     hoje = moment();
     amanha = moment().add(1, 'd');
     dias = [];
@@ -99,7 +97,6 @@ export class NavigationComponent implements OnInit {
                 });
         }
 
-        this.LOGO = config.LOGO;
         this.isAppMobile = this.auth.isAppMobile();
         this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();

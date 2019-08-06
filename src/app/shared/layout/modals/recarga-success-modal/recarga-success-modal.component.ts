@@ -11,7 +11,7 @@ import { config } from '../../../config';
     styleUrls: ['./recarga-success-modal.component.css']
 })
 export class RecargaSuccessModalComponent implements OnInit {
-    @ViewChild('cupom') cupom: ElementRef;
+    @ViewChild('cupom', { static: true }) cupom: ElementRef;
     @Input() recarga;
     BANCA_NOME;
     appMobile;

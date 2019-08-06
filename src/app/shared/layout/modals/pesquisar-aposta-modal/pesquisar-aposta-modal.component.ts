@@ -14,8 +14,8 @@ import { AuthService, ApostaEsportivaService, MessageService } from './../../../
     styleUrls: ['./pesquisar-aposta-modal.component.css']
 })
 export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
-    @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
-    @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
+    @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
     exibirBilhete = false;
     aposta;
     appMobile;
