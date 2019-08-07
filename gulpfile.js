@@ -866,3 +866,26 @@ gulp.task('web.betzeta.com', function (done) {
     });
 });
 
+gulp.task('premierbets.club', function (done) {
+    tasks(done, {
+        host: "premierbets.club",
+        banca: "Premier Bets",
+        styles: ""
+    });
+});
+
+gulp.task('fortunasports.bet', function (done) {
+    tasks(done, {
+        host: "fortunasports.bet",
+        banca: "Fortuna Sports",
+        styles: ""
+    });
+});
+
+gulp.task('betsports.club', function (done) {
+    tasks(done, {
+        host: "betsports.club",
+        banca: "Bet Sports",
+        styles: ""
+    });
+});

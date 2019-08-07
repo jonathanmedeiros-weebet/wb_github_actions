@@ -100,7 +100,10 @@
       "acaisports.bet": "gulp acaisports.bet",
       "lance.bet": "gulp lance.bet",
       "masterbet.wee.bet": "gulp masterbet.wee.bet",
-      "web.betzeta.com": "gulp web.betzeta.com"
+      "web.betzeta.com": "gulp web.betzeta.com",
+      "betsports.club": "gulp betsports.club",
+      "fortunasports.bet": "gulp fortunasports.bet",
+      "premierbets.club": "gulp premierbets.club"
   },
   "private": true,
   "dependencies": {
