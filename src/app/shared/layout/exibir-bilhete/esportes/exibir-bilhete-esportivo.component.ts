@@ -16,7 +16,7 @@ newNavigator = window.navigator;
 })
 
 export class ExibirBilheteEsportivoComponent implements OnInit {
-    @ViewChild('cupom') cupom: ElementRef;
+    @ViewChild('cupom', { static: true }) cupom: ElementRef;
     @Input() aposta: any;
     modalRef;
     LOGO;

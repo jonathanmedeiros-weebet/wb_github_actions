@@ -5,16 +5,16 @@ import { BasqueteGuard, CombateGuard } from '../services';
 export const routes: Routes = [
     {
         path: 'futebol',
-        loadChildren: 'app/esportes/futebol/futebol.module#FutebolModule'
+        loadChildren: () => import('app/esportes/futebol/futebol.module').then(m => m.FutebolModule)
     },
     {
         path: 'basquete',
-        loadChildren: 'app/esportes/basquete/basquete.module#BasqueteModule',
+        loadChildren: () => import('app/esportes/basquete/basquete.module').then(m => m.BasqueteModule),
         canActivate: [BasqueteGuard]
     },
     {
         path: 'combate',
-        loadChildren: 'app/esportes/combate/combate.module#CombateModule',
+        loadChildren: () => import('app/esportes/combate/combate.module').then(m => m.CombateModule),
         canActivate: [CombateGuard]
     }
 ];

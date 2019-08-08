@@ -19,7 +19,7 @@ import * as clone from 'clone';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('apostaDeslogadoModal') apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', { static: true }) apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
     opcoes;

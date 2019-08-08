@@ -19,7 +19,6 @@ export * from './shared/services/aposta-esportiva/live.service';
 export * from './shared/services/aposta-esportiva/preaposta-esportiva.service';
 
 /* Utils Services */
-export * from './shared/services/utils/cep.service';
 export * from './shared/services/utils/error.service';
 export * from './shared/services/utils/headers.service';
 export * from './shared/services/utils/helper.service';

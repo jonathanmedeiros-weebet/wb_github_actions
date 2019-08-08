@@ -11,11 +11,11 @@ export const routes: Routes = [
         children: [
             {
                 path: 'jogos',
-                loadChildren: 'app/esportes/futebol/default/futebol-default.module#FutebolDefaultModule'
+                loadChildren: () => import('app/esportes/futebol/default/futebol-default.module').then(m => m.FutebolDefaultModule)
             },
             {
                 path: 'live',
-                loadChildren: 'app/esportes/futebol/live/live.module#LiveModule',
+                loadChildren: () => import('app/esportes/futebol/live/live.module').then(m => m.LiveModule),
                 canActivate: [AoVivoGuard]
             }
         ]

@@ -10,7 +10,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'eventos',
-                loadChildren: 'app/esportes/basquete/default/basquete-default.module#BasqueteDefaultModule'
+                loadChildren: () => import('app/esportes/basquete/default/basquete-default.module').then(m => m.BasqueteDefaultModule)
             }
         ]
     }

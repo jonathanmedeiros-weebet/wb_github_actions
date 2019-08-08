@@ -19,40 +19,40 @@ const appRoutes: Routes = [
             },
             {
                 path: 'apuracao',
-                loadChildren: 'app/apuracao/apuracao.module#ApuracaoModule',
+                loadChildren: () => import('app/apuracao/apuracao.module').then(m => m.ApuracaoModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'cartoes',
-                loadChildren: 'app/cartao/cartao.module#CartaoModule',
+                loadChildren: () => import('app/cartao/cartao.module').then(m => m.CartaoModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'esportes',
-                loadChildren: 'app/esportes/esportes.module#EsportesModule'
+                loadChildren: () => import('app/esportes/esportes.module').then(m => m.EsportesModule)
             },
             {
                 path: 'loterias',
-                loadChildren: 'app/loterias/loterias.module#LoteriasModule',
+                loadChildren: () => import('app/loterias/loterias.module').then(m => m.LoteriasModule),
                 canActivate: [LoteriaGuard]
             },
             {
                 path: 'resultados',
-                loadChildren: 'app/resultados/resultados.module#ResultadosModule',
+                loadChildren: () => import('app/resultados/resultados.module').then(m => m.ResultadosModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'meu-perfil',
-                loadChildren: 'app/meu-perfil/meu-perfil.module#MeuPerfilModule',
+                loadChildren: () => import('app/meu-perfil/meu-perfil.module').then(m => m.MeuPerfilModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'regras',
-                loadChildren: 'app/regras/regras.module#RegrasModule',
+                loadChildren: () => import('app/regras/regras.module').then(m => m.RegrasModule),
             },
             {
                 path: 'validar-aposta',
-                loadChildren: 'app/validar-aposta/validar-aposta.module#ValidarApostaModule',
+                loadChildren: () => import('app/validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard]
             }
         ]
@@ -60,7 +60,7 @@ const appRoutes: Routes = [
     {
         path: 'auth',
         component: AuthLayoutComponent,
-        loadChildren: 'app/auth/auth.module#AuthModule'
+        loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
     },
     {
         path: 'bilhete/:chave',

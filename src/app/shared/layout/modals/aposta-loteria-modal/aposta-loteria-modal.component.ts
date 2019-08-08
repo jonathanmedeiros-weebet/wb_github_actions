@@ -9,7 +9,7 @@ import { AuthService } from './../../../../services';
     templateUrl: './aposta-loteria-modal.component.html'
 })
 export class ApostaLoteriaModalComponent implements OnInit {
-    @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
     @Input() aposta;
     @Input() showCancel = false;
     appMobile;
