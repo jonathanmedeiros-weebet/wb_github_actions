@@ -853,7 +853,7 @@ gulp.task('masterbet.wee.bet', function (done) {
     tasks(done, {
         host: "masterbet.wee.bet",
         banca: "MasterBet",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #cb151c; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
     });
 });
 
@@ -861,7 +861,31 @@ gulp.task('web.betzeta.com', function (done) {
     tasks(done, {
         host: "web.betzeta.com",
         banca: "Bet Zeta",
+        styles: "",
+        scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/5d4852bf7d27204601c964d6/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"
+    });
+});
+
+gulp.task('premierbets.club', function (done) {
+    tasks(done, {
+        host: "premierbets.club",
+        banca: "Premier Bets",
         styles: ""
     });
 });
 
+gulp.task('fortunasports.bet', function (done) {
+    tasks(done, {
+        host: "fortunasports.bet",
+        banca: "Fortuna Sports",
+        styles: ""
+    });
+});
+
+gulp.task('betsports.club', function (done) {
+    tasks(done, {
+        host: "betsports.club",
+        banca: "Bet Sports",
+        styles: ""
+    });
+});
