@@ -889,3 +889,19 @@ gulp.task('betsports.club', function (done) {
         styles: ""
     });
 });
+
+gulp.task('trevo.wee.bet', function (done) {
+    tasks(done, {
+        host: "trevo.wee.bet",
+        banca: "Trevo Bet",
+        styles: ""
+    });
+});
+
+gulp.task('gooldeplaca.com.br', function (done) {
+    tasks(done, {
+        host: "gooldeplaca.com.br",
+        banca: "Gool de Placa",
+        styles: ""
+    });
+});
