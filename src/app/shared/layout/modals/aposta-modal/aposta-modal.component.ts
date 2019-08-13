@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { ExibirBilheteEsportivoComponent } from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelperService, AuthService } from '../../../../services';
+import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -19,6 +19,7 @@ export class ApostaModalComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private helperService: HelperService,
+        private paramsLocais: ParametrosLocaisService,
         private auth: AuthService
     ) { }
 
@@ -45,5 +46,29 @@ export class ApostaModalComponent implements OnInit {
 
     pagamentoPermitido() {
         return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago && !this.aposta.cartao_aposta;
+    }
+
+    cancelamentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (opcoes.habilitar_cancelar_aposta) {
+            if (this.isLoggedIn && this.showCancel && !this.aposta.cartao_aposta) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
+    compartilhamentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (this.appMobile && opcoes.habilitar_compartilhamento_comprovante) {
+            result = true;
+        }
+
+        return result;
     }
 }

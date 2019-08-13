@@ -2,7 +2,7 @@ import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/ex
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from './../../../../services';
+import { AuthService, ParametrosLocaisService } from './../../../../services';
 
 @Component({
     selector: 'app-aposta-loteria-modal',
@@ -17,7 +17,8 @@ export class ApostaLoteriaModalComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
-        private auth: AuthService
+        private auth: AuthService,
+        private paramsLocais: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
@@ -31,5 +32,16 @@ export class ApostaLoteriaModalComponent implements OnInit {
 
     shareTicket() {
         this.bilheteLoteriaComponent.shared();
+    }
+
+    compartilhamentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (this.appMobile && opcoes.habilitar_compartilhamento_comprovante) {
+            result = true;
+        }
+
+        return result;
     }
 }
