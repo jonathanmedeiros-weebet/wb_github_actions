@@ -14,7 +14,7 @@ import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibi
 import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
-import { ApostaEsportivaService, CartaoService } from '../../services';
+import { ApostaService, ApostaEsportivaService, CartaoService } from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent,
     ApostaModalComponent, PreApostaModalComponent,
@@ -93,6 +93,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     ],
     providers: [
         ApostaEsportivaService,
+        ApostaService,
         CartaoService
     ]
 })

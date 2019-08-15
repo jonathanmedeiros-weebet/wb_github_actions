@@ -11,7 +11,7 @@ import { config } from '../../config';
 
 @Injectable()
 export class ApostaEsportivaService {
-    private ApostaUrl = `${config.BASE_URL}/apostas`;
+    // private ApostaUrl = `${config.BASE_URL}/apostas`;
     private ApostaEsportivaUrl = `${config.SPORTS_URL}/apostas`;
 
     constructor(
@@ -36,10 +36,17 @@ export class ApostaEsportivaService {
             );
     }
 
-    getAposta(id: number): Observable<ApostaEsportiva> {
-        const url = `${this.ApostaUrl}/${id}`;
+    getAposta(id: number, queryParams?): Observable<ApostaEsportiva> {
+        const url = `${this.ApostaEsportivaUrl}/${id}`;
+        let requestOptions;
 
-        return this.http.get(url, this.header.getRequestOptions(true))
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
