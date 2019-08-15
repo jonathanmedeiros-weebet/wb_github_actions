@@ -905,3 +905,11 @@ gulp.task('gooldeplaca.com.br', function (done) {
         styles: ""
     });
 });
+
+gulp.task('futbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "futbets.wee.bet",
+        banca: "Fut Bets",
+        styles: ""
+    });
+});

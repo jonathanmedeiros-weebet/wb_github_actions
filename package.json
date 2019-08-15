@@ -105,7 +105,8 @@
         "fortunasports.bet": "gulp fortunasports.bet",
         "premierbets.club": "gulp premierbets.club",
         "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
-        "trevo.wee.bet": "gulp trevo.wee.bet"
+        "trevo.wee.bet": "gulp trevo.wee.bet",
+        "futbets.wee.bet": "gulp futbets.wee.bet"
     },
     "private": true,
     "dependencies": {
