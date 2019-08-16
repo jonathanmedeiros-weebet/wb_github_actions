@@ -222,6 +222,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         });
 
         this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
     }
 
     preApostaSuccess(id) {

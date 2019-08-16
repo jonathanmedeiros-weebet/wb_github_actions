@@ -13,6 +13,8 @@ export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @Input() aposta;
     @Input() showCancel = false;
+    @Input() primeiraImpressao = false;
+    @Input() ultimaAposta = false;
     appMobile;
     isLoggedIn;
 
@@ -67,6 +69,25 @@ export class ApostaModalComponent implements OnInit {
 
         if (this.appMobile && opcoes.habilitar_compartilhamento_comprovante) {
             result = true;
+        }
+
+        return result;
+    }
+
+    impressaoPermitida() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (this.primeiraImpressao) {
+            result = true;
+        } else {
+            if (opcoes.permitir_reimprimir_aposta) {
+                result = true;
+            }
+
+            if (opcoes.permitir_reimprimir_ultima_aposta && this.ultimaAposta) {
+                result = true;
+            }
         }
 
         return result;

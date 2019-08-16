@@ -139,7 +139,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     openModal(aposta) {
         this.showLoadingIndicator = true;
 
-        this.apostaService.getAposta(aposta.id)
+        this.apostaService.getAposta(aposta.id, { 'verificar-ultima-aposta': 1 })
             .subscribe(
                 aposta_localizada => {
                     this.modalRef = this.modalService.open(ApostaModalComponent, {
@@ -148,6 +148,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     });
                     this.modalRef.componentInstance.aposta = aposta_localizada;
                     this.modalRef.componentInstance.showCancel = true;
+                    this.modalRef.componentInstance.ultimaAposta = aposta_localizada.ultima_aposta;
+
                     this.modalRef.result.then(
                         (result) => {
                             switch (result) {

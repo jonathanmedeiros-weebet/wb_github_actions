@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import { AuthService, ApostaEsportivaService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
 
 @Component({
     selector: 'app-pesquisar-aposta-modal',
@@ -27,7 +27,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     constructor(
         public activeModal: NgbActiveModal,
         private fb: FormBuilder,
-        private apostaEsportivaService: ApostaEsportivaService,
+        private apostaService: ApostaService,
         private messageService: MessageService,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService
@@ -45,7 +45,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     pesquisarAposta() {
         const input = this.pesquisarForm.value.input;
 
-        this.apostaEsportivaService.getAposta(input)
+        this.apostaService.getAposta(input)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 aposta => {
@@ -78,6 +78,18 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         let result = false;
 
         if (this.appMobile && opcoes.habilitar_compartilhamento_comprovante) {
+            result = true;
+        }
+
+        return result;
+    }
+
+
+    impressaoPermitida() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (opcoes.permitir_reimprimir_aposta) {
             result = true;
         }
 

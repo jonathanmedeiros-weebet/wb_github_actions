@@ -123,7 +123,8 @@
                                 </ng-container>
                                 <tr>
                                     <th>Saldo</th>
-                                    <td class="text-right resultado">
+                                    <td class="text-right resultado"
+                                        [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
                                         <b>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</b>
                                     </td>
                                 </tr>

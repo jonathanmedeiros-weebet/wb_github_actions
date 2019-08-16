@@ -11,3 +11,11 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.saldo-positivo{
+    color:green;
+}
+
+.saldo-negativo{
+    color:red;
+}
