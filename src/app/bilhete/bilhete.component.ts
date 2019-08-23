@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ApostaEsportivaService, LiveService } from './../services';
+import { ApostaService, LiveService } from './../services';
 import { Estatistica } from './../models';
 import * as moment from 'moment';
 
@@ -22,7 +22,7 @@ export class BilheteComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private apostaEsportivaService: ApostaEsportivaService,
+        private apostaService: ApostaService,
         private liveService: LiveService,
         private renderer: Renderer2,
         private el: ElementRef
@@ -34,7 +34,7 @@ export class BilheteComponent implements OnInit, OnDestroy {
         this.route.params
             .subscribe((params: any) => {
                 if (params['chave']) {
-                    this.apostaEsportivaService.getAposta(params['chave'])
+                    this.apostaService.getAposta(params['chave'])
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             apostaEsportiva => {
