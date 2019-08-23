@@ -1,0 +1,223 @@
+.content{
+    display: flex;
+}
+
+#acumuladao-form{
+    background-color: #e1e2e4;
+    min-height: 800px;
+    flex-grow: 1;
+}
+
+#acumuladao-form .indentificacao{
+    padding: 10px;
+    position: relative;
+}
+
+#acumuladao-form  .indentificacao .nome{
+    font-size: 1.2rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+#acumuladao-form .div-back{
+    color: red;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#acumuladao-form .indentificacao .div-back{
+    position: absolute;
+    right: 20px;
+    top: 21px;
+}
+
+#acumuladao-form .eventos{
+    padding: 10px;
+    background-color:#fff;
+}
+
+#acumuladao-form .evento{
+    margin-bottom: 10px;
+}
+
+#acumuladao-form .evento .dados{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+#acumuladao-form .nome-placar{
+    padding: 10px 0;
+    display: flex;
+    background-color:var(--odds);
+    color: var(--foreground-odds);
+    align-items: center;
+}
+
+#acumuladao-form .time-b-nome{
+    width: 42.5%;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#acumuladao-form .time-a-nome{
+    width: 42.5%;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+#acumuladao-form .placar{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    width: 140px;
+}
+
+#acumuladao-form .time-a-placar input, #acumuladao-form .time-b-placar input{
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#acumuladao-form .time-a-placar > div, #acumuladao-form .time-b-placar > div{
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+/* Bilhete */
+
+.pre-bilhete {
+    width: 270px;
+    text-align: center;
+    padding: 20px 15px 0 15px;
+    height: 100%;
+    background-color: var(--sidebar-right)
+}
+
+.pre-bilhete h4 {
+    color: var(--foreground-highlight);
+}
+
+.pre-bilhete h4::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 166px;
+    position: relative;
+    margin-left: -37px;
+}
+
+.value-informations {
+    text-transform: uppercase;
+    color: var(--foreground-sidebar-right);
+    margin: 20px 0;
+}
+
+.value-informations p {
+    margin-bottom: 0.5rem;
+}
+
+.div-inputs {
+    background-color: var(--odds);
+    padding: 20px 15px 8px 15px;
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+}
+
+.pre-bilhete .valor {
+    color: var(--foreground-highlight);
+    font-weight: bolder;
+}
+
+.acumuladao h3 {
+    color: var(--foreground-highlight);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.acumuladao h3::before {
+    margin-left: -81px;
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 166px;
+    position: relative;
+}
+
+.acumuladao .informacoes{
+    text-align: left;
+    color: var(--foreground-sidebar-right);
+    margin-bottom: 15px;
+}
+
+.acumuladao .informacoes .nome{
+    font-size: 1.2rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: var(--foreground-highlight);
+}
+
+.evento {
+    padding: 15px 0;
+    border-top: 1px dashed #aec3d8;
+    text-align: left;
+    position: relative;
+}
+
+.evento:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.evento > div {
+    color: var(--foreground-sidebar-right);
+}
+
+.evento .horario {
+    color: var(--foreground-highlight);
+    font-weight: bold;
+}
+
+.evento-inner{
+    padding-right: 20px;
+}
+
+.evento .resultado{
+    color: var(--foreground-highlight);
+    font-weight: 700;
+}
+
+.success-msg {
+    font-size: 1.3rem;
+}
+
+.success-msg .codigo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 668px) {
+    #acumuladao-form  .indentificacao .div-back{
+        top: 0;
+    }
+
+    .acumuladao h3:before{
+        left: 216px;
+    }
+
+    section.pre-bilhete.pre-bilhete-mobile {
+        height: 100% !important;
+        position: fixed !important;
+    }
+}

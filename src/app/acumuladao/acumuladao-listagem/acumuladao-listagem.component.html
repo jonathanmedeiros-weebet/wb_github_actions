@@ -1,0 +1,23 @@
+<div id="acumuladao-listagem">
+    <div class="">
+        <div class="acumuladao" (click)="gotTo(acumuladao.id)" *ngFor="let acumuladao of acumuladoes">
+            <div class="line-1">
+                <div class="nome">{{acumuladao.nome}}</div>
+                <div class="premios">
+                    <div class="premio" *ngFor="let premio of acumuladao.premios">
+                        <span *ngIf="acumuladao.premios.length > 1">{{premio.quantidade_acertos}}:</span>
+                        {{premio.valor | currency: 'BRL':'symbol': '1.2'}}
+                    </div>
+                </div>
+            </div>
+            <div class="line-2">
+                <div class="data">
+                    Encerra em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
+                </div>
+                <div class="qtd-evenos">
+                    {{acumuladao.jogos.length}} partidas
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

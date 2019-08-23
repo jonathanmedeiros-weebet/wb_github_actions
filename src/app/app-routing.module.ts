@@ -18,6 +18,10 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
             },
             {
+                path: 'acumuladao',
+                loadChildren: () => import('app/acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
+            },
+            {
                 path: 'apuracao',
                 loadChildren: () => import('app/apuracao/apuracao.module').then(m => m.ApuracaoModule),
                 canActivate: [AuthGuard]

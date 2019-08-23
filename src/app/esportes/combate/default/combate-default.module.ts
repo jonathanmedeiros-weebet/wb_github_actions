@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../shared/shared.module';
-import { EsportesModule } from './../../esportes.module';
 import { CombateDefaultRoutingModule } from './combate-default-routing.module';
 import { CombateDefaultWrapperComponent } from './wrapper/combate-default-wrapper.component';
 import { CombateListagemComponent } from './listagem/combate-listagem.component';
@@ -9,7 +8,6 @@ import { CombateListagemComponent } from './listagem/combate-listagem.component'
 @NgModule({
     imports: [
         SharedModule,
-        EsportesModule,
         CombateDefaultRoutingModule
     ],
     declarations: [
