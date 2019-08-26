@@ -17,6 +17,11 @@
     font-size: 1.2rem;
     font-weight: bolder;
     text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+#acumuladao-form  .indentificacao .premio{
+   margin-bottom: 5px;
 }
 
 #acumuladao-form .div-back{
@@ -44,6 +49,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    /* color: var(--fg-event-time); */
 }
 
 #acumuladao-form .nome-placar{
@@ -108,7 +114,7 @@
     width: 20px;
     background: var(--highlight);
     top: 23px;
-    left: 166px;
+    left: 120px;
     position: relative;
     margin-left: -37px;
 }
@@ -168,32 +174,32 @@
     color: var(--foreground-highlight);
 }
 
-.evento {
+.pre-bilhete .evento {
     padding: 15px 0;
     border-top: 1px dashed #aec3d8;
     text-align: left;
     position: relative;
 }
 
-.evento:first-of-type {
+.pre-bilhete  .evento:first-of-type {
     border-top: none;
     padding-top: 0;
 }
 
-.evento > div {
+.pre-bilhete .evento > div {
     color: var(--foreground-sidebar-right);
 }
 
-.evento .horario {
+.pre-bilhete .evento .horario {
     color: var(--foreground-highlight);
     font-weight: bold;
 }
 
-.evento-inner{
+.pre-bilhete .evento-inner{
     padding-right: 20px;
 }
 
-.evento .resultado{
+.pre-bilhete .evento .resultado{
     color: var(--foreground-highlight);
     font-weight: 700;
 }
@@ -210,6 +216,10 @@
 @media only screen and (max-width: 668px) {
     #acumuladao-form  .indentificacao .div-back{
         top: 0;
+    }
+
+    .pre-bilhete h4::before {
+        left: 166px;
     }
 
     .acumuladao h3:before{

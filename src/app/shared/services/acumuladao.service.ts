@@ -45,8 +45,25 @@ export class AcumuladaoService {
             );
     }
 
-    getApostas(id: number, queryParams?): Observable<ApostaEsportiva> {
+    getApostas(queryParams?): Observable<ApostaEsportiva> {
         const url = `${this.AcumuladaoUrl}/apostas`;
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getAposta(id: number, queryParams?): Observable<ApostaEsportiva> {
+        const url = `${this.AcumuladaoUrl}/apostas/${id}`;
         let requestOptions;
 
         if (queryParams) {

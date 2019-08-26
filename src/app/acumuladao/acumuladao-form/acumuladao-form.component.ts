@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AcumuladaoService, MessageService } from './../../services';
 import { Acumuladao } from './../../models';
-
+import { ApostaAcumuladaoModalComponent } from './../../shared/layout/modals/aposta-acumuladao-modal/aposta-acumuladao-modal.component';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 @Component({
@@ -11,18 +14,23 @@ import * as moment from 'moment';
     templateUrl: './acumuladao-form.component.html',
     styleUrls: ['./acumuladao-form.component.css']
 })
-export class AcumuladaoFormComponent implements OnInit {
-    encerrado = false;
+export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit {
+    encerrado = true;
     acumuladao = new Acumuladao();
     disabled = false;
     displayPreTicker = false;
+    modalRef;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private acumuladaoService: AcumuladaoService,
-        private messageService: MessageService
-    ) { }
+        private messageService: MessageService,
+        public modalService: NgbModal,
+        private fb: FormBuilder
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.route.params.subscribe(
@@ -36,6 +44,8 @@ export class AcumuladaoFormComponent implements OnInit {
 
                                 if (moment().isAfter(acumuladao.data_encerramento)) {
                                     this.encerrado = true;
+                                } else {
+                                    this.encerrado = false;
                                 }
                             },
                             error => this.handleError(error)
@@ -43,44 +53,43 @@ export class AcumuladaoFormComponent implements OnInit {
                 }
             }
         );
+
+        this.createForm();
     }
 
-    handleError(msg) {
-        this.messageService.error(msg);
+    createForm() {
+        this.form = this.fb.group({
+            apostador: ['', Validators.required]
+        });
     }
 
-    finalizar() {
-        const msg = '';
-        const valid = true;
-        const aposta = {
-            apostador: 'thiago',
+    submit() {
+        let msg = '';
+        let valid = true;
+        const dados = {
+            apostador: this.form.value.apostador,
             acumuladao_id: this.acumuladao.id,
             valor: this.acumuladao.valor,
             jogos: [],
         };
 
         this.acumuladao.jogos.forEach(j => {
-            // if ((j.time_a_resultado != null) && (j.time_b_resultado != null)) {
-            aposta.jogos.push({
-                id: j.id,
-                // time_a_resultado: j.time_a_resultado,
-                // time_b_resultado: j.time_b_resultado
-                time_a_resultado: Math.floor(Math.random() * 3),
-                time_b_resultado: Math.floor(Math.random() * 6)
-            });
-            // } else {
-            //     valid = false;
-            //     msg = 'Por favor, preencha todos os placares';
-            // }
+            if ((j.time_a_resultado != null) && (j.time_b_resultado != null)) {
+                dados.jogos.push({
+                    id: j.id,
+                    time_a_resultado: j.time_a_resultado,
+                    time_b_resultado: j.time_b_resultado
+                });
+            } else {
+                valid = false;
+                msg = 'Por favor, preencha todos os placares';
+            }
         });
 
         if (valid) {
-            console.log(aposta);
-            this.acumuladaoService.createAposta(aposta)
+            this.acumuladaoService.createAposta(dados)
                 .subscribe(
-                    () => {
-                        this.messageService.success('Aposta Realizada com sucesso!');
-                    },
+                    aposta => this.success(aposta),
                     error => this.handleError(error)
                 );
 
@@ -100,4 +109,28 @@ export class AcumuladaoFormComponent implements OnInit {
     closeCupom() {
         this.displayPreTicker = false;
     }
+
+    success(aposta) {
+        this.modalRef = this.modalService.open(ApostaAcumuladaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.showCancel = true;
+        this.modalRef.result.then(
+            (result) => { },
+            (reason) => { }
+        );
+
+        this.form.reset();
+        this.acumuladao.jogos.forEach(j => {
+            j.time_a_resultado = null;
+            j.time_b_resultado = null;
+        });
+    }
+
+    handleError(msg: string) {
+        this.messageService.error(msg);
+    }
+
 }
