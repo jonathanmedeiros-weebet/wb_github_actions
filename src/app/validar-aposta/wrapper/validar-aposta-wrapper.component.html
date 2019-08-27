@@ -1,0 +1,39 @@
+<div id="default-content">
+    <div class="content-header">
+        <h2>Validar Aposta</h2>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div class="">
+                <form (ngSubmit)="consultarAposta()" #consultaForm="ngForm" class="consulta-form form-inline">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="codigo" name="codigo" autocomplete="off" class="form-control"
+                            placeholder="Código" required>
+                    </div>
+                    <button type="submit" [disabled]="!consultaForm.valid" class="btn btn-custom">Consultar</button>
+                </form>
+            </div>
+
+            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+            <div *ngIf="exibirPreAposta">
+                <div id="pre-aposta">
+                    <h1>#{{preAposta.id}}</h1>
+                    <ng-container [ngSwitch]="preAposta.tipo">
+                        <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
+                            (success)="success($event)">
+                        </app-validar-aposta-esportes>
+
+                        <app-validar-aposta-loterias *ngSwitchCase="'loteria'" [preAposta]="preAposta"
+                            (success)="success($event)">
+                        </app-validar-aposta-loterias>
+
+                        <app-validar-aposta-acumuladao *ngSwitchCase="'acumuladao'" [preAposta]="preAposta"
+                            (success)="success($event)">
+                        </app-validar-aposta-acumuladao>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

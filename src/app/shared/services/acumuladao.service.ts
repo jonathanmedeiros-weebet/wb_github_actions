@@ -88,4 +88,14 @@ export class AcumuladaoService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    createPreAposta(dados): Observable<any> {
+        const url = `${this.AcumuladaoUrl}/preapostas`;
+
+        return this.http.post(url, dados, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

@@ -1,0 +1,19 @@
+.content-body{
+    margin-bottom: 15px;
+}
+.consulta-form{
+    margin-bottom: 30px;
+}
+
+.consulta-form input{
+    margin-right: 1rem;
+}
+
+#pre-aposta{
+    padding: 10px 14px;
+    border: 1px dashed #aec3d8;
+}
+
+#pre-aposta h1{
+    margin-bottom: 15px;
+}
