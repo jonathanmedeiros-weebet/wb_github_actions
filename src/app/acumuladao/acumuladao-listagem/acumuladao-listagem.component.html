@@ -1,5 +1,14 @@
 <div id="acumuladao-listagem">
     <div class="">
+        <div class="" *ngIf="acumuladoes ? acumuladoes.length == 0 : false">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <div class="alert alert-danger" role="alert">
+                        Nenhum acumuladão cadastrado.
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="acumuladao" (click)="gotTo(acumuladao.id)" *ngFor="let acumuladao of acumuladoes">
             <div class="line-1">
                 <div class="nome">{{acumuladao.nome}}</div>
