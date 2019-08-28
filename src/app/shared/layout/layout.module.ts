@@ -23,7 +23,7 @@ import {
     ApostaLoteriaModalComponent, CartaoCadastroModalComponent,
     CartaoModalComponent, PesquisarCartaoModalComponent,
     SolicitarSaqueModalComponent, RecargaCartaoModalComponent,
-    RecargaSuccessModalComponent
+    RecargaSuccessModalComponent, ApostaAcumuladaoModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -66,6 +66,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
+        ApostaAcumuladaoModalComponent
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -80,7 +81,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         PesquisarCartaoModalComponent,
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
-        RecargaSuccessModalComponent
+        RecargaSuccessModalComponent,
+        ApostaAcumuladaoModalComponent
     ],
     exports: [
         MainLayoutComponent,

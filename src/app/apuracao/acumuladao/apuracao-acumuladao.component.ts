@@ -3,41 +3,37 @@ import {
 } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
-
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
-import { ApostaEsportiva } from './../../models';
+import { ApostaAcumuladaoModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { AcumuladaoService, ApostaService, MessageService, AuthService } from './../../services';
+import { AcumuladaoAposta } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-apuracao-esporte',
+    selector: 'app-apuracao-acumuladao',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: 'apuracao-esporte.component.html',
-    styleUrls: ['apuracao-esporte.component.css']
+    templateUrl: 'apuracao-acumuladao.component.html',
+    styleUrls: ['apuracao-acumuladao.component.css']
 })
-export class ApuracaoEsporteComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    apostas: ApostaEsportiva[] = [];
+export class ApuracaoAcumuladaoComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    apostas: AcumuladaoAposta[] = [];
     appMobile;
     modalRef;
     showLoadingIndicator = true;
     totais = {
         'valor': 0,
-        'comissao': 0,
-        'premio': 0,
-        'resultado': 0
     };
     dataInicial;
     dataFinal;
     unsub$ = new Subject();
 
     constructor(
-        private apostaService: ApostaService,
-        private apostaEsportivaService: ApostaEsportivaService,
+        private acumuladaoService: AcumuladaoService,
+        private apostaServive: ApostaService,
         private messageService: MessageService,
         private auth: AuthService,
         private fb: FormBuilder,
@@ -74,16 +70,12 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     getApostas(params?) {
-        this.totais.comissao = 0;
-        this.totais.premio = 0;
-        this.totais.resultado = 0;
         this.totais.valor = 0;
 
         let queryParams: any = {
             'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
             'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
-            'sort': '-horario',
-            'otimizado': true
+            'sort': '-horario'
         };
 
         if (params) {
@@ -92,12 +84,11 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                 'data-final': params.dataFinal,
                 'status': params.status,
                 'apostador': params.apostador,
-                'sort': '-horario',
-                'otimizado': true
+                'sort': '-horario'
             };
         }
 
-        this.apostaEsportivaService.getApostas(queryParams)
+        this.acumuladaoService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 apostas => {
@@ -105,13 +96,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                     apostas.forEach(aposta => {
                         if (!aposta.cartao_aposta) {
                             this.totais.valor += aposta.valor;
-                            if (aposta.resultado === 'ganhou') {
-                                this.totais.premio += aposta.premio;
-                            }
                         }
-                        this.totais.comissao += aposta.comissao;
                     });
-                    this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
                     this.showLoadingIndicator = false;
                     this.cd.detectChanges();
                 },
@@ -140,38 +126,32 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     openModal(aposta) {
         this.showLoadingIndicator = true;
 
-        this.apostaService.getAposta(aposta.id, { 'verificar-ultima-aposta': 1 })
-            .subscribe(
-                aposta_localizada => {
-                    this.modalRef = this.modalService.open(ApostaModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true
-                    });
-                    this.modalRef.componentInstance.aposta = aposta_localizada;
-                    this.modalRef.componentInstance.showCancel = true;
-                    this.modalRef.componentInstance.ultimaAposta = aposta_localizada.ultima_aposta;
+        this.modalRef = this.modalService.open(ApostaAcumuladaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.showCancel = true;
+        // this.modalRef.componentInstance.ultimaAposta = aposta_localizada.ultima_aposta;
 
-                    this.modalRef.result.then(
-                        (result) => {
-                            switch (result) {
-                                case 'cancel':
-                                    this.cancelar(aposta);
-                                    break;
-                                case 'pagamento':
-                                    this.pagarAposta(aposta);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        },
-                        (reason) => { }
-                    );
+        this.modalRef.result.then(
+            (result) => {
+                switch (result) {
+                    case 'cancel':
+                        this.cancelar(aposta);
+                        break;
+                    case 'pagamento':
+                        this.pagarAposta(aposta);
+                        break;
+                    default:
+                        break;
+                }
+            },
+            (reason) => { }
+        );
 
-                    this.showLoadingIndicator = false;
-                    this.cd.detectChanges();
-                },
-                error => this.handleError(error)
-            );
+        this.showLoadingIndicator = false;
+        this.cd.detectChanges();
     }
 
     cancelar(aposta) {
@@ -181,7 +161,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
 
         this.modalRef.result.then(
             (result) => {
-                this.apostaService.cancelar(aposta.id)
+                this.apostaServive.cancelar(aposta.id)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         () => this.getApostas(this.form.value),
@@ -193,7 +173,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     }
 
     pagarAposta(aposta) {
-        this.apostaService.pagar(aposta.id)
+        this.apostaServive.pagar(aposta.id)
             .subscribe(
                 result => {
                     aposta.pago = result.pago;

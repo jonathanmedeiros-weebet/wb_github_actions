@@ -63,6 +63,7 @@ export class NavigationComponent implements OnInit {
     modalRef;
     cartaoApostaHabilitado;
     loteriasHabilitada;
+    acumuladaoHabilitado;
     primeiraPagina;
     dataLimiteTabela;
     unsub$ = new Subject();
@@ -102,6 +103,7 @@ export class NavigationComponent implements OnInit {
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
         this.loteriasHabilitada = this.paramsService.getOpcoes().loterias;
+        this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.isLoggedIn = this.auth.isLoggedIn();
         this.preencherDias();
 

@@ -78,7 +78,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         const options = { logging: false };
 
         html2canvas(this.cupom.nativeElement, options).then((canvas) => {
-            this.helperService.sharedSportsTicket(this.aposta, canvas.toDataURL());
+            this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
         });
     }
 

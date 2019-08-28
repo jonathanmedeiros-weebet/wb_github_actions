@@ -37,11 +37,11 @@ export class ApostaAcumuladaoModalComponent implements OnInit {
         this.bilheteComponent.shared();
     }
 
-    cancel() {
+    cancelar() {
         this.activeModal.close('cancel');
     }
 
-    setPagamento() {
+    pagarAposta() {
         this.activeModal.close('pagamento');
     }
 

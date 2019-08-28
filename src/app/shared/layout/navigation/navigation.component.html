@@ -37,6 +37,9 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" [routerLink]="['/apuracao/consolidada']">Consolidada</a>
                             <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
+                            <a *ngIf="acumuladaoHabilitado" class="dropdown-item" [routerLink]="['/apuracao/acumuladao']">
+                                Acumuladão
+                            </a>
                             <a *ngIf="loteriasHabilitada" class="dropdown-item" [routerLink]="['/apuracao/loteria']">
                                 Loteria
                             </a>
