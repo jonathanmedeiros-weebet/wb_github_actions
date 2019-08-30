@@ -660,7 +660,7 @@ gulp.task('xbetsports.net', function (done) {
         host: "xbetsports.net",
         banca: "XBET SPORTS",
         styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #000; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
-        scripts: '<!-- Start of  Zendesk Widget script --><script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=21084b53-15d4-4c41-9dd0-04614847016a"> </script><!-- End of  Zendesk Widget script -->'
+        scripts: '<script async data-id="12237" src="https://cdn.widgetwhats.com/script.min.js"></script>'
     });
 });
 
