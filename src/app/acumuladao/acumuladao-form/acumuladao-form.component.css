@@ -94,7 +94,6 @@
 }
 
 /* Bilhete */
-
 .pre-bilhete {
     width: 270px;
     text-align: center;
@@ -213,6 +212,44 @@
     font-weight: bold;
 }
 
+/* Cartão aposta */
+#aposta-deslogado .active {
+    background: var(--odds);
+    color: var(--foreground-odds);
+}
+
+#aposta-deslogado .btn {
+    width: 50%;
+    border: 0px;
+    border-radius: 3px 3px 0 0;
+}
+
+
+#aposta-deslogado .evento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    border: 1px dashed black;
+    padding: 5px;
+}
+
+#aposta-deslogado .placar,
+#aposta-deslogado .horario {
+    font-weight: bolder;
+}
+
+#aposta-deslogado .time-nome{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.cartao-form .form-row select,
+.cartao-form .form-row input {
+    font-size: 1rem;
+}
+
+/* Media */
 @media only screen and (max-width: 668px) {
     #acumuladao-form .eventos{
        margin-bottom: 44px;

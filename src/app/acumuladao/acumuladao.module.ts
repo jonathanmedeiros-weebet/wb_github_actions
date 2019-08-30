@@ -6,11 +6,13 @@ import { AcumuladaoWrapperComponent } from './acumuladao-wrapper/acumuladao-wrap
 import { AcumuladaoListagemComponent } from './acumuladao-listagem/acumuladao-listagem.component';
 import { AcumuladaoFormComponent } from './acumuladao-form/acumuladao-form.component';
 import { AcumuladaoService } from '../services';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     imports: [
         SharedModule,
-        AcumuladaoRoutingModule
+        AcumuladaoRoutingModule,
+        NgxMaskModule.forRoot()
     ],
     declarations: [
         AcumuladaoWrapperComponent,

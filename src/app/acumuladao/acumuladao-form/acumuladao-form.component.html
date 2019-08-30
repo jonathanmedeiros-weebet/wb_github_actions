@@ -61,6 +61,67 @@
         </div>
     </section>
 
+
+    <ng-template #apostaDeslogadoModal let-modal>
+        <div class="modal-body" id="aposta-deslogado">
+            <div *ngIf="opcoes.cartao_aposta" style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
+                <button class="btn" (click)="trocarTipoApostaDeslogado('preaposta')"
+                    [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                    Pré-Aposta
+                </button>
+                <button class="btn" (click)="trocarTipoApostaDeslogado('cartao')"
+                    [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                    Cartão de Aposta
+                </button>
+            </div>
+            <div *ngIf="acumuladao.jogos.length > 0">
+                <div *ngFor="let jogo of acumuladao.jogos; let i=index" class="evento">
+                    <div class="">
+                        <div class="horario">
+                            {{jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                        </div>
+                        <div class="">
+                            <div class="time-nome">
+                                {{jogo.time_a_nome}} x {{jogo.time_b_nome}}
+                            </div>
+                            <div class="placar">
+                                Placar:
+                                {{jogo.time_a_resultado}} x
+                                {{jogo.time_b_resultado}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cartao-form" *ngIf="tipoApostaDeslogado == 'cartao'">
+                <form style="font-size: 1rem;" [formGroup]="cartaoApostaForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Chave</label>
+                            <input type="text" class="form-control" formControlName="chave" autocomplete="off"
+                                style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PIN</label>
+                            <input type="password" class="form-control" formControlName="pin" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-check col-md-6">
+                        <input type="checkbox" class="form-check-input" id="manter-cartao"
+                            formControlName="manter_cartao">
+                        <label class="form-check-label" for="manter-cartao">Manter Cartão</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" style="background: #e2e2e2;" class="btn" (click)="modalRef.dismiss()">Fechar</button>
+            <button type="button" class="btn btn-custom" (click)="finalizarApostaDeslogado()">
+                Finalizar {{btnText}}
+            </button>
+        </div>
+    </ng-template>
+
     <ng-container *ngIf="!encerrado;">
         <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
             <div class="pre-bilhete-acumuladao">
