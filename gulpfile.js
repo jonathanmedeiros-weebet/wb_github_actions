@@ -913,3 +913,27 @@ gulp.task('futbets.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #1e941c; --foreground-odds: #fff; --event-time: #1e941c; --league: #333; --foreground-league: #fff;",
     });
 });
+
+gulp.task('megabets.wee.bet', function (done) {
+    tasks(done, {
+        host: "megabets.wee.bet",
+        banca: "Mega Bets",
+        styles: ""
+    });
+});
+
+gulp.task('esportebet10.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportebet10.wee.bet",
+        banca: "Esporte Bet 10",
+        styles: ""
+    });
+});
+
+gulp.task('sorteline.com', function (done) {
+    tasks(done, {
+        host: "sorteline.com",
+        banca: "Sorte Line",
+        styles: ""
+    });
+});
