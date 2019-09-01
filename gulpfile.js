@@ -937,3 +937,11 @@ gulp.task('sorteline.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('placardarodada.wee.bet', function (done) {
+    tasks(done, {
+        host: "placardarodada.wee.bet",
+        banca: "Placar da Rodada",
+        styles: ""
+    });
+});
