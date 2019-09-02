@@ -48,19 +48,19 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <th>#</th>
+                    <th>Mod.</th>
                     <th>Horário</th>
                     <th>Valor</th>
                     <th>Possível Retorno</th>
-                    <th>Valor Ganho</th>
                     <th>Resultado</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let aposta of cartao.apostas" (click)="abrirBilhete(aposta.id)">
                         <td>{{aposta.id}}</td>
+                        <td>{{aposta.tipo}}</td>
                         <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                         <td>{{aposta.valor| currency: 'BRL':'symbol':'1.2'}}</td>
                         <td>{{aposta.premio| currency: 'BRL':'symbol':'1.2'}}</td>
-                        <td>{{aposta.possibilidade_ganho| currency: 'BRL':'symbol':'1.2'}}</td>
                         <td>{{aposta.resultado}}</td>
                     </tr>
                 </tbody>
