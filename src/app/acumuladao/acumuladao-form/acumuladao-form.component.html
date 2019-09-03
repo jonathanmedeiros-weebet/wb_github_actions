@@ -35,12 +35,12 @@
                         <ng-container *ngIf="encerrado; else inputPlacar">
                             <div class="time-a-placar">
                                 <div>
-                                    {{jogo.time_a_resultado ? jogo.time_a_resultado : '-'}}
+                                    {{jogo.time_a_resultado >= 0 ? jogo.time_a_resultado : '-'}}
                                 </div>
                             </div>
                             <div class="time-b-placar">
                                 <div>
-                                    {{jogo.time_b_resultado ? jogo.time_b_resultado : '-'}}
+                                    {{jogo.time_b_resultado >= 0 ? jogo.time_b_resultado : '-'}}
                                 </div>
                             </div>
                         </ng-container>
