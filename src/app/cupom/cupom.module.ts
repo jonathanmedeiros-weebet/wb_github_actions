@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 
-import { BilheteComponent } from './bilhete.component';
+import { CupomComponent } from './cupom.component';
 import { SharedModule } from '../shared/shared.module';
 import { LiveService } from '../services';
+import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
 
 @NgModule({
     imports: [
         SharedModule
     ],
     declarations: [
-        BilheteComponent
+        CupomComponent,
+        CupomEsportesComponent
     ],
     providers: [LiveService]
 })
-export class BilheteModule { }
+export class CupomModule { }

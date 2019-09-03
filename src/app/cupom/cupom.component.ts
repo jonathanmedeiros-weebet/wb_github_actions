@@ -8,12 +8,12 @@ import { Estatistica } from './../models';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-bilhete',
-    templateUrl: 'bilhete.component.html',
-    styleUrls: ['bilhete.component.css']
+    selector: 'app-cupom',
+    templateUrl: 'cupom.component.html',
+    styleUrls: ['cupom.component.css']
 })
-export class BilheteComponent implements OnInit, OnDestroy {
-    @ViewChild('bilheteContent', { static: false }) bilheteContent;
+export class CupomComponent implements OnInit, OnDestroy {
+    @ViewChild('cupomContent', { static: false }) cupomContent;
     aposta;
     stats = {};
     chaves = {};
@@ -37,11 +37,15 @@ export class BilheteComponent implements OnInit, OnDestroy {
                     this.apostaService.getAposta(params['chave'])
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
-                            apostaEsportiva => {
-                                this.aposta = apostaEsportiva;
-                                this.ativarAoVivo();
-                                if (this.aposta.passador.percentualPremio > 0) {
-                                    this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
+                            aposta => {
+                                this.aposta = aposta;
+
+                                if (aposta.tipo === 'esportes') {
+                                    this.ambienteEsportivo();
+                                }
+
+                                if (aposta.tipo === 'acumuladao') {
+                                    this.ambienteAcumuladao();
                                 }
                             },
                             error => console.log(error)
@@ -58,6 +62,16 @@ export class BilheteComponent implements OnInit, OnDestroy {
     definirAltura() {
         const content = this.el.nativeElement.querySelector('#bilhete-reativo');
         this.renderer.setStyle(content, 'height', `${window.innerHeight}px`);
+    }
+
+    ambienteEsportivo() {
+        this.ativarAoVivo();
+        if (this.aposta.passador.percentualPremio > 0) {
+            this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
+        }
+    }
+
+    ambienteAcumuladao() {
     }
 
     ativarAoVivo() {

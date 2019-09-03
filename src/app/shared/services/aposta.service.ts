@@ -20,7 +20,7 @@ export class ApostaService {
     ) { }
 
 
-    getAposta(id: number, queryParams?): Observable<ApostaEsportiva> {
+    getAposta(id: number, queryParams?): Observable<any> {
         const url = `${this.ApostaUrl}/${id}`;
         let requestOptions;
 
