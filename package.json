@@ -106,7 +106,11 @@
         "premierbets.club": "gulp premierbets.club",
         "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
         "trevo.wee.bet": "gulp trevo.wee.bet",
-        "futbets.wee.bet": "gulp futbets.wee.bet"
+        "futbets.wee.bet": "gulp futbets.wee.bet",
+        "megabets.wee.bet": "gulp megabets.wee.bet",
+        "esportebet10.wee.bet": "gulp esportebet10.wee.bet",
+        "sorteline.com": "gulp sorteline.com",
+        "placardarodada.wee.bet": "gulp placardarodada.wee.bet"
     },
     "private": true,
     "dependencies": {

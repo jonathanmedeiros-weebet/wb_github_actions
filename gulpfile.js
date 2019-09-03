@@ -452,7 +452,7 @@ gulp.task('foxsport.wee.bet', function (done) {
     tasks(done, {
         host: "foxsport.wee.bet",
         banca: "Fox Sport",
-        styles: "--header: #fff; --foreground-header: #000; --sidebar-right:#fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e;  --foreground-league: #000;",
+        styles: "            --header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e;  --foreground-league: #000;",
         aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
     });
 });
@@ -660,7 +660,7 @@ gulp.task('xbetsports.net', function (done) {
         host: "xbetsports.net",
         banca: "XBET SPORTS",
         styles: "--header: #002458; --foreground-header: #b1c5e0; --sidebar-right: #011e46; --foreground-sidebar-right: #b1c5e0; --sidebar-left: #011e46; --foreground-sidebar-left: #fff; --highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #000; --selected-event: #000;--league: #e1e2e4;--foreground-league: #455a64;--selected-event: #002458;--foreground-selected-event: #fff;--event-time: #011e46;--fg-event-time: #fff;--foreground-selected-odds:#fff",
-        scripts: '<!-- Start of  Zendesk Widget script --><script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=21084b53-15d4-4c41-9dd0-04614847016a"> </script><!-- End of  Zendesk Widget script -->'
+        scripts: '<script async data-id="12237" src="https://cdn.widgetwhats.com/script.min.js"></script>'
     });
 });
 
@@ -911,5 +911,37 @@ gulp.task('futbets.wee.bet', function (done) {
         host: "futbets.wee.bet",
         banca: "Fut Bets",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #1e941c; --foreground-odds: #fff; --event-time: #1e941c; --league: #333; --foreground-league: #fff;",
+    });
+});
+
+gulp.task('megabets.wee.bet', function (done) {
+    tasks(done, {
+        host: "megabets.wee.bet",
+        banca: "Mega Bets",
+        styles: ""
+    });
+});
+
+gulp.task('esportebet10.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportebet10.wee.bet",
+        banca: "Esporte Bet 10",
+        styles: ""
+    });
+});
+
+gulp.task('sorteline.com', function (done) {
+    tasks(done, {
+        host: "sorteline.com",
+        banca: "Sorte Line",
+        styles: ""
+    });
+});
+
+gulp.task('placardarodada.wee.bet', function (done) {
+    tasks(done, {
+        host: "placardarodada.wee.bet",
+        banca: "Placar da Rodada",
+        styles: ""
     });
 });
