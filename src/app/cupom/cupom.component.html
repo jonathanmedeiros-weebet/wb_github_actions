@@ -1,10 +1,9 @@
 <app-spinner *ngIf="!aposta"></app-spinner>
 <div id="bilhete-reativo">
-    <div *ngIf="aposta && aposta.tipo == 'esportes'">
+    <app-cupom-esportes *ngIf="aposta && aposta.tipo == 'esportes'" [aposta]="aposta"></app-cupom-esportes>
+    <app-cupom-acumuladao *ngIf="aposta && aposta.tipo == 'acumuladao'" [aposta]="aposta"></app-cupom-acumuladao>
 
-    </div>
-
-    <div *ngIf="aposta && aposta.tipo == 'esportes'">
+    <!-- <div *ngIf="aposta && aposta.tipo == 'esportes'">
         <div id="cupom" #cupom>
             <div class="conteudo">
                 <div>
@@ -100,5 +99,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

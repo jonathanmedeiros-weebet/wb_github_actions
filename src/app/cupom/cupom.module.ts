@@ -4,6 +4,7 @@ import { CupomComponent } from './cupom.component';
 import { SharedModule } from '../shared/shared.module';
 import { LiveService } from '../services';
 import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
+import { CupomAcumuladaoComponent } from './acumuladao/cupom-acumuladao.component';
 
 @NgModule({
     imports: [
@@ -11,7 +12,8 @@ import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
     ],
     declarations: [
         CupomComponent,
-        CupomEsportesComponent
+        CupomEsportesComponent,
+        CupomAcumuladaoComponent
     ],
     providers: [LiveService]
 })

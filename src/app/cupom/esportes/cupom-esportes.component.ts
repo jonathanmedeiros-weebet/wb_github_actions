@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ApostaService, LiveService } from './../../services';
+import { LiveService } from './../../services';
 import { Estatistica } from './../../models';
 import * as moment from 'moment';
 
@@ -13,7 +12,6 @@ import * as moment from 'moment';
     styleUrls: ['cupom-esportes.component.css']
 })
 export class CupomEsportesComponent implements OnInit, OnDestroy {
-    @ViewChild('cupomContent', { static: false }) cupomContent;
     @Input() aposta;
     stats = {};
     chaves = {};
@@ -21,11 +19,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
-        private route: ActivatedRoute,
-        private apostaService: ApostaService,
-        private liveService: LiveService,
-        private renderer: Renderer2,
-        private el: ElementRef
+        private liveService: LiveService
     ) { }
 
     ngOnInit() {
@@ -39,7 +33,6 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
         this.unsub$.next();
         this.unsub$.complete();
     }
-
 
     ativarAoVivo() {
         this.aposta.itens.forEach(item => {
