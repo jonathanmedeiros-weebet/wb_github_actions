@@ -68,7 +68,7 @@ export class ValidarApostaAcumuladaoComponent extends BaseFormComponent implemen
             return {
                 id: item.jogo.id,
                 time_a_resultado: item.time_a_resultado,
-                time_b_resultado: item.time_a_resultado
+                time_b_resultado: item.time_b_resultado
             };
         });
 
