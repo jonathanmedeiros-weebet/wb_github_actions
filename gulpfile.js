@@ -861,7 +861,7 @@ gulp.task('web.betzeta.com', function (done) {
     tasks(done, {
         host: "web.betzeta.com",
         banca: "Bet Zeta",
-        styles: "",
+        styles: "--header: #ffb80c; --foreground-header: #000; --sidebar-right:#ffb80c; --foreground-sidebar-right: #000; --sidebar-left: #ffb80c; --foreground-sidebar-left: #000; --highlight:red; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff;",
         scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/5d4852bf7d27204601c964d6/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"
     });
 });
@@ -934,7 +934,7 @@ gulp.task('sorteline.com', function (done) {
     tasks(done, {
         host: "sorteline.com",
         banca: "Sorte Line",
-        styles: ""
+        styles: "--header: #57b449; --foreground-header: #fff; --sidebar-right:#086211; --foreground-sidebar-right: #fff; --sidebar-left: #086211; --foreground-sidebar-left: #fff; --highlight:red; --foreground-highlight: #fff; --odds: #57b449; --foreground-odds: #fff;"
     });
 });
 
@@ -942,6 +942,7 @@ gulp.task('placardarodada.wee.bet', function (done) {
     tasks(done, {
         host: "placardarodada.wee.bet",
         banca: "Placar da Rodada",
-        styles: ""
+        styles: "",
+        aditional_styles: ".sidebar-brand{ margin-top: 0!important; } .sidebar-brand img{ max-width: 100%!important; max-height: none!important; }"
     });
 });
