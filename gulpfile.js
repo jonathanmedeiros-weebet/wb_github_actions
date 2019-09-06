@@ -950,3 +950,11 @@ gulp.task('placardarodada.wee.bet', function (done) {
         aditional_styles: ".sidebar-brand{ margin-top: 0!important; } .sidebar-brand img{ max-width: 100%!important; max-height: none!important; }"
     });
 });
+
+gulp.task('kfmbets.com', function (done) {
+    tasks(done, {
+        host: "kfmbets.com",
+        banca: "KFM BETS",
+        styles: ""
+    });
+});
