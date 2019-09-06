@@ -111,7 +111,8 @@
         "esportebet10.wee.bet": "gulp esportebet10.wee.bet",
         "sorteline.com": "gulp sorteline.com",
         "placardarodada.wee.bet": "gulp placardarodada.wee.bet",
-        "kfmbets.com": "gulp kfmbets.com"
+        "kfmbets.com": "gulp kfmbets.com",
+        "tuntumesportes.wee.bet": "gulp tuntumesportes.wee.bet"
     },
     "private": true,
     "dependencies": {

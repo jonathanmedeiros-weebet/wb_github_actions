@@ -958,3 +958,11 @@ gulp.task('kfmbets.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('tuntumesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "tuntumesportes.wee.bet",
+        banca: "Tuntum Esportes",
+        styles: ""
+    });
+});
