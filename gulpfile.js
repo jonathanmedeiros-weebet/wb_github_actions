@@ -963,6 +963,6 @@ gulp.task('tuntumesportes.wee.bet', function (done) {
     tasks(done, {
         host: "tuntumesportes.wee.bet",
         banca: "Tuntum Esportes",
-        styles: ""
+        styles: "--header: #5abb39; --foreground-header: #fff; --sidebar-right:#5abb39; --foreground-sidebar-right: #fff; --sidebar-left: #5abb39; --foreground-sidebar-left: #fff; --highlight:red; --foreground-highlight: #fff; --odds: #2c600e; --foreground-odds: #fff;"
     });
 });
