@@ -966,3 +966,11 @@ gulp.task('tuntumesportes.wee.bet', function (done) {
         styles: "--header: #5abb39; --foreground-header: #fff; --sidebar-right:#5abb39; --foreground-sidebar-right: #fff; --sidebar-left: #5abb39; --foreground-sidebar-left: #fff; --highlight:red; --foreground-highlight: #fff; --odds: #2c600e; --foreground-odds: #fff;"
     });
 });
+
+gulp.task('wmredesports.net', function (done) {
+    tasks(done, {
+        host: "wmredesports.net",
+        banca: "WM Rede Sports",
+        styles: ""
+    });
+});
