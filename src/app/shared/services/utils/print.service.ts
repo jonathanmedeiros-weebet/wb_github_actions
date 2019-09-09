@@ -217,7 +217,7 @@ ${horario} ${jogo.nome}
         let printContents, popupWin, html, styles;
 
         styles = `
-        
+
         #comprovante {
             text-align: justify;
             text-transform: uppercase;
@@ -503,7 +503,7 @@ Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)
             padding: 15px;
             /*padding-right: 11px;*/
             background: #fff;
-            margin: 0 auto;            
+            margin: 0 auto;
             color: #000;
         }
 
@@ -731,6 +731,245 @@ ${this.opcoes.informativo_rodape}
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
     }
 
+    // Bilhete Acumuladão
+    bilheteAcumuladao(aposta) {
+        if (this.auth.isAppMobile()) {
+            this.bilheteAcumuladaoMobile(aposta);
+        } else {
+            this.bilheteAcumuladaoDesktop(aposta);
+        }
+    }
+
+    private bilheteAcumuladaoMobile(aposta) {
+        let ticket = `${config.BANCA_NOME}
+#${aposta.id}
+CAMBISTA: ${aposta.passador.nome}
+APOSTADOR: ${aposta.apostador}
+HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+-------------------------------
+-------------------------------
+${aposta.acumuladao.nome}`;
+
+        if (aposta.resultado) {
+            ticket += `
+TOTA DE ACERTOS: ${aposta.quantidade_acertos}
+PREMIO RECEBIDO: ${this.helperService.moneyFormat(aposta.premio)}`;
+        } else {
+            aposta.acumuladao.premios.forEach(premio => {
+                ticket += `
+POSSÍVEL PREMIO ${premio.quantidade_acertos} ACERTOS: ${this.helperService.moneyFormat(premio.valor)}`;
+            });
+        }
+
+        ticket += `
+-------------------------------`;
+
+        aposta.itens.forEach(item => {
+            ticket += `
+${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm')}
+${item.jogo.time_a_nome} x ${item.jogo.time_b_nome}
+PALPITE: ${item.time_a_resultado} x ${item.time_b_resultado}
+-------------------------------`;
+        });
+
+        ticket += `
+-------------------------------
+Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes iguais entre todos os vencedores.
+
+`;
+
+        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+
+    }
+
+    private bilheteAcumuladaoDesktop(aposta) {
+        let printContents, popupWin, html, styles;
+
+        styles = `
+        body{
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 10px;
+            background: #333;
+            margin: 0;
+        }
+
+        #comprovante{
+            padding: 15px;
+            /*padding-right: 11px;*/
+            background: #fff;
+            margin: 0 auto;
+            color: #000;
+        }
+
+        .margin-bottom-5 {
+            margin-bottom: 5px;
+        }
+
+        hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px dashed black;
+        }
+
+        .numero{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            margin-top:15px;
+        }
+
+        .informacoes p{
+            margin: 1px;
+            font-size: 10px;
+        }
+        .item .horario{
+            margin:0;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+        .item .nome{
+            margin:0;
+            font-size: 10px;
+        }
+
+        .item .palpite{
+            margin: 0;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .rodape{
+            margin: 5px 1px 1px 1px;
+            font-weight: normal;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        @page {
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 100%;
+                max-width: 78mm;
+                padding: 0mm;
+            }
+        }
+        `;
+
+        printContents = `
+        <div id="comprovante">
+            <div class="conteudo">
+                <div style="text-align: center;">
+                    <img style="max-height: 80px; max-width: 190px;"
+                    alt="${config.BANCA_NOME}" src="${config.LOGO}" />
+                </div>
+                <h1 class="numero">
+                    #${aposta.id}
+                </h1>
+                <hr>
+                <hr>
+                <div class="informacoes">
+                    <p>
+                        <b>CAMBISTA:</b> ${aposta.passador.nome}
+                    </p>
+                    <p>
+                        <b>APOSTADOR:</b> ${aposta.apostador}
+                    </p>
+                    <p>
+                        <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
+                    </p>
+                </div>
+                <hr>
+                <hr>
+                <div class="acumuladao">
+                    <div class="nome">
+                       <b>${aposta.acumuladao.nome}</b>
+                    </div>
+                `;
+
+        if (aposta.resultado) {
+            printContents += `
+                    <div>
+                        <b>TOTA DE ACERTOS:</b> ${aposta.quantidade_acertos}
+                    </div>
+                    <div>
+                        <b>PRÊMIO RECEBIDO:</b> ${this.helperService.moneyFormat(aposta.premio)}
+                    </div>
+                `;
+        } else {
+            aposta.acumuladao.premios.forEach(premio => {
+                printContents += `
+                <div class="premio">
+                    <b>POSSÍVEL PRÊMIO: ${premio.quantidade_acertos} acertos:</b>
+                    ${this.helperService.moneyFormat(premio.valor)}
+                </div>`;
+            });
+        }
+
+        printContents += `
+            </div>
+            <hr>
+        `;
+
+        aposta.itens.forEach((item, index, array) => {
+            printContents += `
+                <div class="item">
+                    <p class="horario">
+                        ${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
+                    </p>
+                    <p class="nome">
+                        ${item.jogo.time_a_nome} x ${item.jogo.time_b_nome}
+                    </p>
+                    <p class="palpite">
+                        PALPITE: ${item.time_a_resultado} x ${item.time_b_resultado}
+                    </p>`;
+
+            if (item.resultado) {
+                printContents += `
+                <p class="jogo-resultado">
+                ${item.resultado}
+                </p>
+                `;
+            }
+            printContents += `
+                </div>
+                <hr>
+            `;
+        });
+
+        printContents += `
+                <hr>
+                <p class="rodape">
+                    Caso o ACUMULADÃO tenha mais de um ganhador, o prêmio será dividido em partes iguais entre todos os
+                    vencedores.
+                </p>
+            </div>
+        </div>`;
+
+        html = `
+        <html>
+          <head>
+            <title>Print tab</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <style>
+            ${styles}
+            </style>
+          </head>
+          <body onload="window.print();window.close()">${printContents}</body>
+        </html>`;
+
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(html);
+        popupWin.document.close();
+    }
+
+    // Cartão
     card(card) {
         if (this.auth.isAppMobile()) {
             this.cardMobile(card);
@@ -982,7 +1221,7 @@ ${recarga.autenticacao}
         popupWin.document.close();
     }
 
-
+    // Utils
     listPrinters() {
         const message = {
             data: '',
@@ -993,7 +1232,6 @@ ${recarga.autenticacao}
         console.log('listPrinters');
     }
 
-    // Utils
     getValor(chave, cotacoes) {
         const cotacao = cotacoes.find(c => c.chave == chave);
         if (cotacao) {

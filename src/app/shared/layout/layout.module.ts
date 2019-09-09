@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaService, ApostaEsportivaService, CartaoService } from '../../services';
@@ -22,7 +23,7 @@ import {
     ApostaLoteriaModalComponent, CartaoCadastroModalComponent,
     CartaoModalComponent, PesquisarCartaoModalComponent,
     SolicitarSaqueModalComponent, RecargaCartaoModalComponent,
-    RecargaSuccessModalComponent
+    RecargaSuccessModalComponent, ApostaAcumuladaoModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -50,6 +51,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         ErrorMsgComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        BilheteAcumuladaoComponent,
         SpinnerComponent,
         PesquisaModalComponent,
         TabelaModalComponent,
@@ -64,6 +66,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
+        ApostaAcumuladaoModalComponent
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -78,7 +81,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         PesquisarCartaoModalComponent,
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
-        RecargaSuccessModalComponent
+        RecargaSuccessModalComponent,
+        ApostaAcumuladaoModalComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -89,6 +93,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         ErrorMsgComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        BilheteAcumuladaoComponent,
         SpinnerComponent
     ],
     providers: [

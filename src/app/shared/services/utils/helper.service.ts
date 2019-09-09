@@ -218,19 +218,7 @@ export class HelperService {
         );
     }
 
-    sharedLotteryTicket(aposta, file) {
-        parent.postMessage(
-            {
-                message: `${config.BANCA_NOME}: ${config.HOST}/aposta/${aposta.chave}`,
-                file: file,
-                data: `${config.HOST}/aposta/${aposta.chave}`,
-                action: 'shareURL'
-            },
-            'file://'
-        );
-    }
-
-    sharedSportsTicket(aposta, file) {
+    sharedTicket(aposta, file) {
         parent.postMessage(
             {
                 message: `${config.BANCA_NOME}: ${location.origin}/bilhete/${aposta.chave}`,

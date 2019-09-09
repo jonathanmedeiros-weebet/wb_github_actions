@@ -90,6 +90,11 @@
                 <span>Combate</span>
             </a>
         </div>
+        <div *ngIf="acumuladaoHabilitado" class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/acumuladao/listagem']">
+                <i class="fa fa-money"></i> Acumuladão
+            </a>
+        </div>
         <div *ngIf="loteriasHabilitado && seninhaAtiva" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/loterias/seninha']">
                 <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>

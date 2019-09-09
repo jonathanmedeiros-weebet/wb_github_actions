@@ -1,5 +1,6 @@
 /* General Services */
 export * from './shared/services/aposta.service';
+export * from './shared/services/acumuladao.service';
 export * from './shared/services/cartao.service';
 export * from './shared/services/regra.service';
 export * from './shared/services/parametros.service';

@@ -1,0 +1,60 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="loteria">
+        <div class="palpites">
+            <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
+                <div>
+                    <div>
+                        <label>{{sorteioNome(item.sorteio_id)}}</label>
+                    </div>
+                    <div>
+                        <label>Valor:</label>
+                        <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                    </div>
+                    <div class="circle-group">
+                        <div class="circle" *ngFor="let numero of item.numeros">
+                            <div class="content">
+                                {{numero | number:'2.0'}}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Retorno 6: </label>
+                        <span>{{(item.cotacao6 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                    </div>
+                    <div>
+                        <label>Retorno 5: </label>
+                        <span>{{(item.cotacao5 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                    </div>
+                    <div>
+                        <label>Retorno 4: </label>
+                        <span>{{(item.cotacao4 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                    </div>
+                    <div>
+                        <label>Retorno 3: </label>
+                        <span>{{(item.cotacao3 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                    </div>
+                </div>
+                <div class="remover-item" (click)="removerItem(i)">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+        </div>
+        <div class="informacoes">
+            <p>
+                Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+            </p>
+            <p>
+                Total de palpites: {{preAposta.itens.length}}
+            </p>
+            <div class="form-group">
+                <label for="">Apostador</label>
+                <input type="text" class="form-control" formControlName="apostador"
+                    [ngClass]="applyCssInputError('apostador')">
+                <app-error-msg [control]="form.get('apostador')" label="Apostador">
+                </app-error-msg>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="disabled" class="btn btn-custom">Validar</button>
+</form>

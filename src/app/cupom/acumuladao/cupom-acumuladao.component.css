@@ -1,9 +1,3 @@
-#bilhete-reativo{
-    background-color: #fff;
-    overflow: auto;
-    padding: 15px;
-}
-
 #cupom{
     margin: 0 auto;
     max-width: 600px;
@@ -46,11 +40,6 @@
     font-weight: bold;
 }
 
-.div-2 .line{
-    display:flex;
-    margin-bottom:5px;
-}
-
 .width-40{
     width: 40%;
 }
@@ -59,16 +48,12 @@
     width: 20%;
 }
 
-.div-3, .div-4 span{
+.div-2, .div-3 span{
     font-size: 1.2rem;
 }
 
 .ganhou{
     color: green;
-}
-
-.aovivo .label,.aovivo .icon,.perdeu{
-    color: red;
 }
 
 .dashed{

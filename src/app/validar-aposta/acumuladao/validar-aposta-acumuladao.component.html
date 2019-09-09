@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="acumuladao">
+        <div class="jogos">
+            <div *ngFor="let item of preAposta.itens; let i=index" class="item-selecionado">
+                <div class="item-selecionado-inner">
+                    <div class="horario">
+                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                    </div>
+                    <div class="jogo-nome">
+                        {{item.jogo.time_a_nome}} x {{item.jogo.time_b_nome}}
+                    </div>
+                    <div class="palpite">
+                        Palpite: {{item.time_a_resultado}} x {{item.time_b_resultado}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="informacoes">
+            <p>
+                <b>{{acumuladao.nome}}</b>
+            </p>
+            <p *ngFor="let premio of acumuladao.premios">
+                Prêmio {{premio.quantidade_acertos}} jogos: {{premio.valor | currency: 'BRL':'symbol': '1.2'}}
+            </p>
+            <p>
+                Data de Encerramento: {{acumuladao.data_encerramento | moment: 'DD/MM/YYYY HH:mm'}}
+            </p>
+            <p>
+                Total de jogos: {{preAposta.itens.length}}
+            </p>
+            <p>
+                Valor da Aposta: {{acumuladao.valor | currency: 'BRL':'symbol': '1.2'}}
+            </p>
+            <p>
+                Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+            </p>
+            <div class="form-group">
+                <label for="">Apostador</label>
+                <input type="text" class="form-control" formControlName="apostador"
+                    [ngClass]="applyCssInputError('apostador')">
+                <app-error-msg [control]="form.get('apostador')" label="Apostador">
+                </app-error-msg>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="disabled" class="btn btn-custom">Validar</button>
+</form>

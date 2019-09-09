@@ -1,0 +1,12 @@
+#acumuladao-wrapper {
+    overflow: auto;
+    padding: 0 0 0 255px;
+    height: calc(100vh - 69px);
+}
+
+@media only screen and (max-width: 668px) {
+    #acumuladao-wrapper{
+        padding: 0;
+        height: calc(100vh - 113px);
+    }
+}
