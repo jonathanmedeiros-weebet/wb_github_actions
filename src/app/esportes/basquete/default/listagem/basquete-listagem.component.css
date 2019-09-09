@@ -24,19 +24,6 @@
     font-weight: bold;
 }
 
-.mais-opcoes{
-    color: var(--odds);
-    padding: 8px 4px 8px 8px;
-    min-width: 50px;
-    text-align: right;
-    cursor: pointer;
-}
-
-.mais-opcoes i{
-    font-weight: bold;
-    margin-right: 2px;
-}
-
 .exibir-mais{
     text-align: center;
     margin-top: 15px;
@@ -62,16 +49,8 @@
         padding-bottom: 90px;
     }
 
-    .mais-opcoes{
-        margin-right: 10px;
-    }
-
     .indentificacao .nome-mobile{
         display: block;
-    }
-
-    .indentificacao .nome, .mais-opcoes span{
-        display: none;
     }
 
     .odds .odd {
