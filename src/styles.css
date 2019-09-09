@@ -430,6 +430,29 @@ button {
     color: var(--fg-event-time);
 }
 
+.campeonato-header{
+    text-transform: uppercase;
+    padding: 0px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-bottom: 4px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: var(--league);
+    color: var(--foreground-league);
+}
+
+.campeonato-header > span{
+    line-height: 29px;
+}
+
+.campeonato-header .flag-icon{
+    width: 25px;
+    height: 19px;
+    position: absolute;
+}
+
 /* ODDS FUTEBOL */
 .odds {
     width: 100%;

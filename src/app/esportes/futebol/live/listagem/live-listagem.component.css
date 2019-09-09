@@ -3,29 +3,13 @@
 }
 
 .campeonato-header{
-    text-transform: uppercase;
-    padding: 0px 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    background-color: var(--league);
-    color: var(--foreground-league);
-}
-
-.campeonato-header > span{
-    line-height: 41px;
+    border: none;
+    cursor: initial;
 }
 
 .campeonato-header .column-left{
     flex-grow: 1;
     position: relative;
-}
-
-.campeonato-header .flag-icon{
-    width: 25px;
-    height: 25px;
-    position: absolute;
 }
 
 .campeonato-header .campeonato-nome{

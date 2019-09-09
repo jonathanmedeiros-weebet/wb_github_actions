@@ -22,7 +22,6 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Output() eventoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     campeonatos: Campeonato[];
-    campeonatosPrincipais: any[];
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
     eventosBloqueados;
@@ -64,7 +63,6 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['camps'] && this.camps) {
-            this.campeonatosPrincipais = this.camps.map(camp => camp._id);
             this.campeonatos = this.camps;
         }
     }
@@ -133,25 +131,5 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     eventoBloqueado(id) {
         return this.eventosBloqueados ? (this.eventosBloqueados.includes(id) ? true : false) : false;
-    }
-
-    setPrincipal(campeonatoId) {
-        if (this.campeonatosPrincipais) {
-            const index = this.campeonatosPrincipais.findIndex(id => id === campeonatoId);
-
-            if (index >= 0) {
-                this.campeonatosPrincipais.splice(index, 1);
-            } else {
-                this.campeonatosPrincipais.push(campeonatoId);
-            }
-        }
-    }
-
-    campeonatoPrincipal(campeonatoId) {
-        let result = null;
-        if (this.campeonatosPrincipais) {
-            result = this.campeonatosPrincipais.includes(campeonatoId);
-        }
-        return result;
     }
 }

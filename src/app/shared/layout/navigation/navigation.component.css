@@ -128,9 +128,9 @@
 .regiao .flag-icon{
     float: left;
     margin-top: 0px;
-    margin-right: 2px;
+    margin-right: 4px;
     width: 17px;
-    height: 17px;
+    height: 13px;
 }
 .regiao > a{
     position: relative;

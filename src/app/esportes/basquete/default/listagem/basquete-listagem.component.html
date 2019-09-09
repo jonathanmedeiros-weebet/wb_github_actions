@@ -28,10 +28,6 @@
                                     <div>{{evento.time_a_nome}}</div>
                                     <div>{{evento.time_b_nome}}</div>
                                 </div>
-                                <div class="mais-opcoes" (click)="maisCotacoes(evento._id)">
-                                    <i class="fa fa-plus"></i>{{evento.total_cotacoes}}
-                                    <span>Cotações</span>
-                                </div>
                             </div>
                             <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of evento.cotacoes"
