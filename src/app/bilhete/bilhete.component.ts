@@ -223,20 +223,6 @@ export class BilheteComponent implements OnInit, OnDestroy {
                     stats.resultado = derrota;
                 }
                 break;
-            case 'gols_+2.5_90':
-                if ((stats.time_a_resultado + stats.time_b_resultado) > 2.5) {
-                    stats.resultado = vitoria;
-                } else {
-                    stats.resultado = derrota;
-                }
-                break;
-            case 'gols_-2.5_90':
-                if ((stats.time_a_resultado + stats.time_b_resultado) < 2.5) {
-                    stats.resultado = vitoria;
-                } else {
-                    stats.resultado = derrota;
-                }
-                break;
             case 'gols_+0.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 0.5) {
                     stats.resultado = vitoria;
@@ -330,6 +316,20 @@ export class BilheteComponent implements OnInit, OnDestroy {
                 break;
             case 'gols_-6.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 6.5) {
+                    stats.resultado = vitoria;
+                } else {
+                    stats.resultado = derrota;
+                }
+                break;
+            case 'gols_+7.5_90':
+                if ((stats.time_a_resultado + stats.time_b_resultado) > 7.5) {
+                    stats.resultado = vitoria;
+                } else {
+                    stats.resultado = derrota;
+                }
+                break;
+            case 'gols_-7.5_90':
+                if ((stats.time_a_resultado + stats.time_b_resultado) < 7.5) {
                     stats.resultado = vitoria;
                 } else {
                     stats.resultado = derrota;
