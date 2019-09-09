@@ -39,7 +39,8 @@
                 </button>
                 <ng-template #btnProcessando>
                     <button disabled class="btn btn-custom btn-block">
-                        Processando... <i class="fa fa-spinner fa-spin"></i>
+                        Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                        <i class="fa fa-spinner fa-spin"></i>
                     </button>
                 </ng-template>
             </div>

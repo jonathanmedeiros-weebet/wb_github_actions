@@ -30,6 +30,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     btnText = 'Pré-Aposta';
     tipoApostaDeslogado = 'preaposta';
     cartaoApostaForm: FormGroup;
+    apostaAoVivo = false;
+    delay = 20;
+    refreshIntervalId;
     unsub$ = new Subject();
 
     constructor(
@@ -54,6 +57,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
+        this.setDelay();
 
         const itens = this.bilheteService.getItens();
         if (itens) {
@@ -123,8 +127,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     calcularPossibilidadeGanho(valor) {
         let cotacao = 1;
+        let aovivo = false;
+
 
         this.itens.value.forEach(item => {
+            if (item.aovivo) {
+                aovivo = true;
+            }
+
             cotacao = cotacao * this.helperService.calcularCotacao(
                 item.cotacao.valor,
                 item.cotacao.chave,
@@ -133,6 +143,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 item.aoVivo
             );
         });
+
+        this.apostaAoVivo = aovivo;
 
         // Fator Máximo
         if (cotacao > this.opcoes.fator_max) {
@@ -215,6 +227,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.bilheteService.atualizarItens([]);
         this.form.reset();
         this.cartaoApostaForm.reset();
+        this.stopDelayInterval();
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -247,6 +260,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     handleError(msg) {
         this.enableSubmit();
         this.messageService.error(msg);
+        this.stopDelayInterval();
     }
 
     openCupom() {
@@ -266,6 +280,16 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     salvarAposta(dados) {
+        if (this.apostaAoVivo) {
+            this.setDelay();
+
+            this.refreshIntervalId = setInterval(() => {
+                if (this.delay > 0) {
+                    this.delay--;
+                }
+            }, 1000);
+        }
+
         this.apostaEsportivaService.create(dados)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -312,5 +336,15 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.salvarAposta(dados);
             }
         }
+    }
+
+    stopDelayInterval() {
+        if (this.apostaAoVivo) {
+            clearInterval(this.refreshIntervalId);
+        }
+    }
+
+    setDelay() {
+        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
     }
 }
