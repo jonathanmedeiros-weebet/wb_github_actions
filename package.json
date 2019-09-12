@@ -113,7 +113,8 @@
         "placardarodada.wee.bet": "gulp placardarodada.wee.bet",
         "kfmbets.com": "gulp kfmbets.com",
         "tuntumesportes.wee.bet": "gulp tuntumesportes.wee.bet",
-        "wmredesports.net": "gulp wmredesports.net"
+        "wmredesports.net": "gulp wmredesports.net",
+        "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -974,3 +974,11 @@ gulp.task('wmredesports.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sportbrasil.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportbrasil.wee.bet",
+        banca: "Sport Brasil",
+        styles: ""
+    });
+});
