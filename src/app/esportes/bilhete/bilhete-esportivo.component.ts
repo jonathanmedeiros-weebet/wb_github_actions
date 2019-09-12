@@ -131,7 +131,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
 
         this.itens.value.forEach(item => {
-            if (item.aovivo) {
+            if (item.aoVivo) {
                 aovivo = true;
             }
 
