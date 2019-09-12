@@ -8,6 +8,10 @@ export * from './shared/models/loteria/item';
 export * from './shared/models/loteria/sorteio';
 export * from './shared/models/loteria/tipo-aposta';
 
+// Acumuladao
+export * from './shared/models/acumuladao/acumuladao-aposta';
+export * from './shared/models/acumuladao/acumuladao';
+
 // Aposta Esportiva
 export * from './shared/models/aposta-esportiva/aposta-esportiva';
 export * from './shared/models/aposta-esportiva/aposta-esportiva-tipo';

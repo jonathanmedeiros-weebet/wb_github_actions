@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.com
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
 import { AuthGuard, LoteriaGuard } from './services';
-import { BilheteComponent } from './bilhete/bilhete.component';
+import { CupomComponent } from './cupom/cupom.component';
 
 const appRoutes: Routes = [
     {
@@ -16,6 +16,10 @@ const appRoutes: Routes = [
                 path: '',
                 redirectTo: 'esportes/futebol/jogos',
                 pathMatch: 'full'
+            },
+            {
+                path: 'acumuladao',
+                loadChildren: () => import('app/acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
             },
             {
                 path: 'apuracao',
@@ -64,7 +68,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'bilhete/:chave',
-        component: BilheteComponent
+        component: CupomComponent
     }
 ];
 

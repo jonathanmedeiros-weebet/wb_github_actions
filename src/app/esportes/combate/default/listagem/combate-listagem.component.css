@@ -1,20 +1,3 @@
-.campeonato-header{
-    text-transform: uppercase;
-    padding: 0px 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-bottom: 4px solid white;
-    display: flex;
-    align-items: center;
-    background-color: var(--league);
-    color: var(--foreground-league);
-    cursor: pointer;
-}
-
-.campeonato-header .column-left{
-    flex-grow: 1;
-}
-
 .campeonato-header .fa{
     font-size: 1.5rem;
     float: right;
@@ -40,16 +23,12 @@
 .indentificacao{
     display: flex;
     align-items: center;
-    padding: 8px 0;
+    padding: 5px 0;
 }
 
 .indentificacao .nome, .indentificacao .nome-mobile{
     flex-grow: 1;
     font-weight: bold;
-}
-
-.odd-combate{
-    width: 50%!important;
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -60,6 +39,10 @@
 
     .indentificacao .nome-mobile{
          display: none;
+    }
+
+    .odds .odd{
+        width: 50%;
     }
 }
 
@@ -74,5 +57,9 @@
 
     .indentificacao .nome-mobile{
          display: block;
+    }
+
+    .odds .odd{
+        width: 100%;
     }
 }

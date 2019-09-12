@@ -60,24 +60,4 @@ export class ApostaEsportivaService {
                 catchError(this.errorService.handleError)
             );
     }
-
-    cancel(id): Observable<any> {
-        const url = `${this.ApostaEsportivaUrl}/${id}`;
-
-        return this.http.delete(url, this.header.getRequestOptions(true))
-            .pipe(
-                take(1),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    setPagamento(id) {
-        const url = `${this.ApostaEsportivaUrl}/${id}/pagamento`;
-
-        return this.http.post(url, '', this.header.getRequestOptions(true))
-            .pipe(
-                map((res: any) => res.results),
-                catchError(this.errorService.handleError)
-            );
-    }
 }

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ValidarApostaComponent } from './validar-aposta.component';
+import { ValidarApostaWrapperComponent } from './wrapper/validar-aposta-wrapper.component';
 
 export const routes: Routes = [
-    { path: '', component: ValidarApostaComponent }
+    { path: '', component: ValidarApostaWrapperComponent }
 ];
 
 @NgModule({

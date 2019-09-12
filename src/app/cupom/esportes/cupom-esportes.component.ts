@@ -1,63 +1,37 @@
-import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ApostaService, LiveService } from './../services';
-import { Estatistica } from './../models';
+import { LiveService } from './../../services';
+import { Estatistica } from './../../models';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-bilhete',
-    templateUrl: 'bilhete.component.html',
-    styleUrls: ['bilhete.component.css']
+    selector: 'app-cupom-esportes',
+    templateUrl: 'cupom-esportes.component.html',
+    styleUrls: ['cupom-esportes.component.css']
 })
-export class BilheteComponent implements OnInit, OnDestroy {
-    @ViewChild('bilheteContent', { static: false }) bilheteContent;
-    aposta;
+export class CupomEsportesComponent implements OnInit, OnDestroy {
+    @Input() aposta;
     stats = {};
     chaves = {};
     cambistaPaga;
     unsub$ = new Subject();
 
     constructor(
-        private route: ActivatedRoute,
-        private apostaService: ApostaService,
-        private liveService: LiveService,
-        private renderer: Renderer2,
-        private el: ElementRef
+        private liveService: LiveService
     ) { }
 
     ngOnInit() {
-        this.definirAltura();
-
-        this.route.params
-            .subscribe((params: any) => {
-                if (params['chave']) {
-                    this.apostaService.getAposta(params['chave'])
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            apostaEsportiva => {
-                                this.aposta = apostaEsportiva;
-                                this.ativarAoVivo();
-                                if (this.aposta.passador.percentualPremio > 0) {
-                                    this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
-                                }
-                            },
-                            error => console.log(error)
-                        );
-                }
-            });
+        this.ativarAoVivo();
+        if (this.aposta.passador.percentualPremio > 0) {
+            this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
+        }
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
-    }
-
-    definirAltura() {
-        const content = this.el.nativeElement.querySelector('#bilhete-reativo');
-        this.renderer.setStyle(content, 'height', `${window.innerHeight}px`);
     }
 
     ativarAoVivo() {
@@ -223,20 +197,6 @@ export class BilheteComponent implements OnInit, OnDestroy {
                     stats.resultado = derrota;
                 }
                 break;
-            case 'gols_+2.5_90':
-                if ((stats.time_a_resultado + stats.time_b_resultado) > 2.5) {
-                    stats.resultado = vitoria;
-                } else {
-                    stats.resultado = derrota;
-                }
-                break;
-            case 'gols_-2.5_90':
-                if ((stats.time_a_resultado + stats.time_b_resultado) < 2.5) {
-                    stats.resultado = vitoria;
-                } else {
-                    stats.resultado = derrota;
-                }
-                break;
             case 'gols_+0.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) > 0.5) {
                     stats.resultado = vitoria;
@@ -330,6 +290,20 @@ export class BilheteComponent implements OnInit, OnDestroy {
                 break;
             case 'gols_-6.5_90':
                 if ((stats.time_a_resultado + stats.time_b_resultado) < 6.5) {
+                    stats.resultado = vitoria;
+                } else {
+                    stats.resultado = derrota;
+                }
+                break;
+            case 'gols_+7.5_90':
+                if ((stats.time_a_resultado + stats.time_b_resultado) > 7.5) {
+                    stats.resultado = vitoria;
+                } else {
+                    stats.resultado = derrota;
+                }
+                break;
+            case 'gols_-7.5_90':
+                if ((stats.time_a_resultado + stats.time_b_resultado) < 7.5) {
                     stats.resultado = vitoria;
                 } else {
                     stats.resultado = derrota;

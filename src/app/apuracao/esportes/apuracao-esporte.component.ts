@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, MessageService, AuthService } from './../../services';
+import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -36,7 +36,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
     unsub$ = new Subject();
 
     constructor(
-        private apostaService: ApostaEsportivaService,
+        private apostaService: ApostaService,
+        private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
         private auth: AuthService,
         private fb: FormBuilder,
@@ -96,7 +97,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
             };
         }
 
-        this.apostaService.getApostas(queryParams)
+        this.apostaEsportivaService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 apostas => {
@@ -154,10 +155,10 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                         (result) => {
                             switch (result) {
                                 case 'cancel':
-                                    this.cancel(aposta);
+                                    this.cancelar(aposta);
                                     break;
                                 case 'pagamento':
-                                    this.setPagamento(aposta);
+                                    this.pagarAposta(aposta);
                                     break;
                                 default:
                                     break;
@@ -173,14 +174,14 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    cancel(aposta) {
+    cancelar(aposta) {
         this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Cancelar Aposta';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
 
         this.modalRef.result.then(
             (result) => {
-                this.apostaService.cancel(aposta.id)
+                this.apostaService.cancelar(aposta.id)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         () => this.getApostas(this.form.value),
@@ -191,8 +192,8 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         );
     }
 
-    setPagamento(aposta) {
-        this.apostaService.setPagamento(aposta.id)
+    pagarAposta(aposta) {
+        this.apostaService.pagar(aposta.id)
             .subscribe(
                 result => {
                     aposta.pago = result.pago;

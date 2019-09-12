@@ -17,7 +17,7 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
     mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;
-    odds = ['bkt_casa', 'bkt_fora'];
+    odds = ['bkt_casa', 'bkt_fora', 'bkt_total_pontos_par', 'bkt_total_pontos_impar'];
     aux = [];
     unsub$ = new Subject();
 

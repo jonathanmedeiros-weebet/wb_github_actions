@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
 
 @Component({
@@ -16,6 +17,7 @@ import { AuthService, ApostaService, MessageService, ParametrosLocaisService } f
 export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(BilheteAcumuladaoComponent, { static: false }) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     exibirBilhete = false;
     aposta;
     appMobile;
@@ -60,16 +62,24 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     printTicket() {
         if (this.aposta.tipo === 'esportes') {
             this.bilheteEsportivoComponent.print();
-        } else {
+        }
+        if (this.aposta.tipo === 'loteria') {
             this.bilheteLoteriaComponent.print();
+        }
+        if (this.aposta.tipo === 'acumuladao') {
+            this.bilheteAcumuladaoComponent.print();
         }
     }
 
     shareTicket() {
         if (this.aposta.tipo === 'esportes') {
             this.bilheteEsportivoComponent.shared();
-        } else {
+        }
+        if (this.aposta.tipo === 'loteria') {
             this.bilheteLoteriaComponent.shared();
+        }
+        if (this.aposta.tipo === 'acumuladao') {
+            this.bilheteAcumuladaoComponent.shared();
         }
     }
 

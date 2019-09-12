@@ -5,7 +5,14 @@ import { ApuracaoRoutingModule } from './apuracao-routing.module';
 import { ApuracaoLoteriaComponent } from './loteria/apuracao-loteria.component';
 import { ApuracaoEsporteComponent } from './esportes/apuracao-esporte.component';
 import { ApuracaoConsolidadaComponent } from './consolidada/apuracao-consolidada.component';
-import { SorteioService, ApostaLoteriaService, ApostaEsportivaService, RelatorioService } from '../services';
+import { ApuracaoAcumuladaoComponent } from './acumuladao/apuracao-acumuladao.component';
+import {
+    SorteioService,
+    ApostaLoteriaService,
+    ApostaEsportivaService,
+    RelatorioService,
+    AcumuladaoService
+} from '../services';
 
 @NgModule({
     imports: [
@@ -16,13 +23,15 @@ import { SorteioService, ApostaLoteriaService, ApostaEsportivaService, Relatorio
     declarations: [
         ApuracaoEsporteComponent,
         ApuracaoLoteriaComponent,
-        ApuracaoConsolidadaComponent
+        ApuracaoConsolidadaComponent,
+        ApuracaoAcumuladaoComponent
     ],
     providers: [
         SorteioService,
         ApostaLoteriaService,
         ApostaEsportivaService,
-        RelatorioService
+        RelatorioService,
+        AcumuladaoService
     ],
 })
 export class ApuracaoModule { }

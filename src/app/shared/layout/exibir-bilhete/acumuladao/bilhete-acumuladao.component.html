@@ -1,0 +1,72 @@
+<div id="cupom" #cupom>
+    <div class="conteudo">
+        <div style="text-align: center;">
+            <img src="assets/images/logo_banca.png">
+        </div>
+        <h1 class="numero">
+            #{{aposta.id}}
+        </h1>
+        <hr>
+        <hr>
+        <div class="informacoes">
+            <p>
+                <b>CAMBISTA:</b> {{aposta.passador.nome}}
+            </p>
+            <p>
+                <b>APOSTADOR:</b> {{aposta.apostador}}
+            </p>
+            <p>
+                <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+            </p>
+        </div>
+        <hr>
+        <hr>
+        <div class="acumuladao">
+            <div class="nome">
+                <b>{{aposta.acumuladao.nome}}</b>
+            </div>
+            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
+                <div>
+                    <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
+                </div>
+                <div>
+                    <b> Prêmio Recebido:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+                </div>
+            </ng-container>
+            <ng-template #resultadoPendente>
+                <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
+                    <b>Possível Prêmio {{premio.quantidade_acertos}} acertos:</b>
+                    {{premio.valor | currency: 'BRL':'symbol': '1.2'}}
+                </div>
+            </ng-template>
+        </div>
+        <hr>
+        <ng-container *ngFor="let item of aposta.itens; let i=index;">
+            <div class="item">
+                <p class="">
+                    PARTIDA {{i+1}}
+                </p>
+                <p class="horario">
+                    {{item.jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                </p>
+                <p class="nome" [ngClass]="resultadoClass(item)">
+                    {{item.jogo.time_a_nome}}
+                    {{item.jogo.time_a_resultado}} x {{item.jogo.time_b_resultado}}
+                    {{item.jogo.time_b_nome}}
+                </p>
+                <p class="palpite" [ngClass]="resultadoClass(item)">
+                    PALPITE: {{item.time_a_resultado}} x {{item.time_b_resultado}}
+                </p>
+                <p class="jogo-resultado">
+                    {{item.resultado}}
+                </p>
+            </div>
+            <hr>
+        </ng-container>
+        <hr>
+        <p class="rodape">
+            Caso o ACUMULADÃO tenha mais de um ganhador, o prêmio será dividido em partes iguais entre todos os
+            vencedores.
+        </p>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../shared/shared.module';
-import { EsportesModule } from './../../esportes.module';
 import { FutebolDefaultRoutingModule } from './futebol-default-routing.module';
 import { FutebolDefaultWrapperComponent } from './wrapper/futebol-default-wrapper.component';
 import { FutebolListagemComponent } from './listagem/futebol-listagem.component';
@@ -11,7 +10,6 @@ import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     imports: [
         SharedModule,
-        EsportesModule,
         FutebolDefaultRoutingModule,
         NgbTabsetModule
     ],
