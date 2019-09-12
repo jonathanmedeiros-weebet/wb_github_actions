@@ -20,6 +20,7 @@ import * as moment from 'moment';
 })
 export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit {
     @ViewChild('apostaDeslogadoModal', { static: true }) apostaDeslogadoModal;
+    showLoadingIndicator = true;
     encerrado = true;
     acumuladao = new Acumuladao();
     disabled = false;
@@ -61,6 +62,8 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                                 } else {
                                     this.encerrado = false;
                                 }
+
+                                this.showLoadingIndicator = false;
                             },
                             error => this.handleError(error)
                         );

@@ -1,5 +1,7 @@
 <div class="content">
-    <section id="acumuladao-form">
+    <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+    <section id="acumuladao-form" *ngIf="!showLoadingIndicator">
         <div class="indentificacao">
             <div class="div-back" (click)="back()">
                 <i class="fa fa-times"></i>
