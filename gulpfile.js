@@ -982,3 +982,11 @@ gulp.task('sportbrasil.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('maniasports.bet', function (done) {
+    tasks(done, {
+        host: "maniasports.bet",
+        banca: "Mania Sports",
+        styles: ""
+    });
+});
