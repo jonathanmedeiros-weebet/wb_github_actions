@@ -1,0 +1,73 @@
+<div id="default-content">
+    <div class="content-header">
+        <h2>Apuração</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="form-row">
+                            <div class="col-12 col-md-3" *ngIf="tipo != 'consolidado'">
+                                <label>Apostador</label>
+                                <input type="text" class="form-control" formControlName="apostador">
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-6 col-md-2" *ngIf="tipo != 'consolidado'">
+                                <label>Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="ganhou">Ganhou</option>
+                                    <option value="perdeu">Perdeu</option>
+                                    <option value="pendente">Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-1">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <ngb-tabset [activeId]="'esporte'" type="pills">
+                            <ngb-tab title="Esporte" id="esporte">
+                                <ng-template ngbTabContent>
+                                    <app-apuracao-esporte [queryParams]="queryParams"></app-apuracao-esporte>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab title="Consolidado" id="consolidado">
+                                <ng-template ngbTabContent>
+                                    <app-apuracao-consolidada [queryParams]="queryParams"></app-apuracao-consolidada>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab title="Acumuladão" id="acumuladao" *ngIf="acumuladaoHabilitado">
+                                <ng-template ngbTabContent>
+                                    <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab title="Loteria" id="loteria" *ngIf="loteriasHabilitada">
+                                <ng-template ngbTabContent>
+                                    <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>
+                                </ng-template>
+                            </ngb-tab>
+                        </ngb-tabset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

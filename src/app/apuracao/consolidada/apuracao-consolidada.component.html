@@ -1,144 +1,111 @@
-<div id="default-content">
-    <div class="content-header">
-        <h2>Apuração Consolidada</h2>
-        <div class="filters">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                        <div class="row">
-                            <div class="col-xs-6 col-lg-3">
-                                <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial">
-                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal">
-                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
-                            </div>
+<app-spinner *ngIf="showLoading"></app-spinner>
+
+<div *ngIf="!showLoading" class="row margin-top-15">
+    <div class="col-12 col-md-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+                <tr *ngIf="controlarCreditoCambista">
+                    <th class="">Saldo anterior</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-plus-circle"></i>
+                            {{relatorio['saldo_anterior'] | currency: 'BRL':'symbol':'1.2'}}
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content-body">
-        <div class="content">
-            <div>
-                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-                <div class="row">
-                    <div class="col-xs-12 col-md-4">
-                        <table *ngIf="!showLoadingIndicator" class="table table-hover table-bordered">
-                            <tbody>
-                                <tr *ngIf="controlarCreditoCambista">
-                                    <th class="">Saldo anterior</th>
-                                    <td>
-                                        <div class="value">
-                                            <i class="fa fa-plus-circle"></i>
-                                            {{relatorio['saldo_anterior'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="">Total Apostado</th>
-                                    <td>
-                                        <div class="value">
-                                            <i class="fa fa-plus-circle"></i>
-                                            {{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <ng-container *ngIf="loteriasHabilitada">
-                                    <tr>
-                                        <td class="">L Esportivas</td>
-                                        <td class="text-right">
-                                            {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="">L Loterias</td>
-                                        <td class="text-right">
-                                            {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="">L Acumuladão</td>
-                                        <td class="text-right">
-                                            {{relatorio['acumuladao']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </td>
-                                    </tr>
-                                </ng-container>
-                                <tr>
-                                    <th>Recargas de Cartão</th>
-                                    <td>
-                                        <div class="value">
-                                            <i class="fa fa-plus-circle"></i>
-                                            {{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Comissões</th>
-                                    <td>
-                                        <div class="value">
-                                            <i class="fa fa-minus-circle"></i>
-                                            {{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Prêmios</th>
-                                    <td>
-                                        <div class="value">
-                                            <i class="fa fa-minus-circle"></i>
-                                            {{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Saques</th>
-                                    <td>
-                                        <div class="value">
-                                            <i class="fa fa-minus-circle"></i>
-                                            {{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}
-                                        </div>
-                                    </td>
-                                </tr>
-                                <ng-container *ngIf="controlarCreditoCambista">
-                                    <tr>
-                                        <th class="">Créditos</th>
-                                        <td>
-                                            <div class="value">
-                                                <i class="fa fa-plus-circle"></i>
-                                                {{relatorio['creditos'] | currency: 'BRL':'symbol':'1.2'}}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="">Débitos</th>
-                                        <td>
-                                            <div class="value">
-                                                <i class="fa fa-minus-circle"></i>
-                                                {{relatorio['debitos'] | currency: 'BRL':'symbol':'1.2'}}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ng-container>
-                                <tr>
-                                    <th>Saldo</th>
-                                    <td class="text-right resultado"
-                                        [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
-                                        <b>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</b>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="">Total Apostado</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-plus-circle"></i>
+                            {{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                    </td>
+                </tr>
+                <ng-container *ngIf="loteriasHabilitada">
+                    <tr>
+                        <td class="">L Esportivas</td>
+                        <td class="text-right">
+                            {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">L Loterias</td>
+                        <td class="text-right">
+                            {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">L Acumuladão</td>
+                        <td class="text-right">
+                            {{relatorio['acumuladao']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                        </td>
+                    </tr>
+                </ng-container>
+                <tr>
+                    <th>Recargas de Cartão</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-plus-circle"></i>
+                            {{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Comissões</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-minus-circle"></i>
+                            {{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Prêmios</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-minus-circle"></i>
+                            {{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Saques</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-minus-circle"></i>
+                            {{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                    </td>
+                </tr>
+                <ng-container *ngIf="controlarCreditoCambista">
+                    <tr>
+                        <th class="">Créditos</th>
+                        <td>
+                            <div class="value">
+                                <i class="fa fa-plus-circle"></i>
+                                {{relatorio['creditos'] | currency: 'BRL':'symbol':'1.2'}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="">Débitos</th>
+                        <td>
+                            <div class="value">
+                                <i class="fa fa-minus-circle"></i>
+                                {{relatorio['debitos'] | currency: 'BRL':'symbol':'1.2'}}
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <tr>
+                    <th>Saldo</th>
+                    <td class="text-right resultado"
+                        [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
+                        <b>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

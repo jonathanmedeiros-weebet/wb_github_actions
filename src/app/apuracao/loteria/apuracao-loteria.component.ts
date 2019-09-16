@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import {
+    Component, OnInit, OnDestroy, ChangeDetectionStrategy,
+    ChangeDetectorRef, Input, OnChanges
+} from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { ApostaLoteriaModalComponent } from '../../shared/layout/modals';
 import { ApostaLoteriaService, MessageService, SorteioService } from './../../services';
 import { Aposta, Sorteio } from './../../models';
-import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -16,72 +16,42 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: 'apuracao-loteria.component.html',
     styleUrls: ['apuracao-loteria.component.css']
 })
-export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
+    @Input() queryParams;
     modalRef;
     apostas: Aposta[];
     sorteios: Sorteio[] = [];
-    showLoadingIndicator = true;
-    dataInicial;
-    dataFinal;
-    totais = {
-        'valor': 0,
-        'comissao': 0,
-        'premio': 0,
-        'resultado': 0
-    };
+    showLoading;
     unsub$ = new Subject();
 
     constructor(
         private apostaService: ApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private fb: FormBuilder,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal
-    ) {
-        super();
-    }
+    ) { }
 
-    ngOnInit() {
-        if (moment().day() === 0 || moment().day() === 1) {
-            const startWeek = moment().startOf('week');
-            this.dataInicial = startWeek.subtract(6, 'days');
-
-            if (moment().day() === 0) {
-                this.dataFinal = moment();
-            } else {
-                this.dataFinal = moment().subtract(1, 'days');
-            }
-        } else {
-            this.dataInicial = moment().startOf('week').add('1', 'day');
-            this.dataFinal = moment();
-        }
-
-        this.getApostas();
-        this.getSorteios();
-        this.createForm();
-    }
+    ngOnInit() { }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
     }
 
-    getSorteios(params?) {
-        let queryParams: any = {
-            'data-inicial': moment().subtract('7', 'd').format('YYYY-MM-DD'),
-            'data-final': moment().format('YYYY-MM-DD 23:59:59'),
+    ngOnChanges() {
+        this.showLoading = true;
+        this.getApostas();
+        this.getSorteios();
+    }
+
+    getSorteios() {
+        const queryParams: any = {
+            'data-inicial': this.queryParams.dataInicial,
+            'data-final': this.queryParams.dataFinal,
+            'status': this.queryParams.status,
             'sort': '-data'
         };
-
-        if (params) {
-            queryParams = {
-                'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal,
-                'status': params.status,
-                'sort': '-data'
-            };
-        }
 
         this.sorteioService.getSorteios(queryParams)
             .pipe(takeUntil(this.unsub$))
@@ -91,63 +61,25 @@ export class ApuracaoLoteriaComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    getApostas(params?) {
-        let queryParams: any = {
-            'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
-            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
+    getApostas() {
+        const queryParams: any = {
+            'data-inicial': this.queryParams.dataInicial,
+            'data-final': this.queryParams.dataFinal,
+            'status': this.queryParams.status,
+            'apostador': this.queryParams.apostador,
             'sort': '-horario'
         };
-
-        if (params) {
-            queryParams = {
-                'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal,
-                'status': params.status,
-                'apostador': params.apostador,
-                'sort': '-horario'
-            };
-        }
 
         this.apostaService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 apostas => {
-                    this.totais.comissao = 0;
-                    this.totais.premio = 0;
-                    this.totais.resultado = 0;
-                    this.totais.valor = 0;
-
-                    this.showLoadingIndicator = !this.showLoadingIndicator;
                     this.apostas = apostas;
-                    apostas.forEach(aposta => {
-                        this.totais.valor += aposta.valor;
-                        this.totais.comissao += aposta.comissao;
-                        aposta.itens.forEach(item => {
-                            if (item.status === 'ganhou') {
-                                this.totais.premio += item.premio;
-                            }
-                        });
-                    });
-                    this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
+                    this.showLoading = false;
                     this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
-    }
-
-    createForm() {
-        this.form = this.fb.group({
-            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
-            status: [''],
-            apostador: ['']
-        });
-    }
-
-    submit() {
-        this.showLoadingIndicator = !this.showLoadingIndicator;
-        this.getApostas(this.form.value);
-        this.getSorteios(this.form.value);
     }
 
     handleError(msg) {

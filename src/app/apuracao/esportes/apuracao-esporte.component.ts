@@ -1,18 +1,14 @@
 import {
-    Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy
+    Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy,
+    Input, OnChanges
 } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
 import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-apuracao-esporte',
@@ -20,19 +16,11 @@ import * as moment from 'moment';
     templateUrl: 'apuracao-esporte.component.html',
     styleUrls: ['apuracao-esporte.component.css']
 })
-export class ApuracaoEsporteComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
+    @Input() queryParams;
     apostas: ApostaEsportiva[] = [];
-    appMobile;
     modalRef;
-    showLoadingIndicator = true;
-    totais = {
-        'valor': 0,
-        'comissao': 0,
-        'premio': 0,
-        'resultado': 0
-    };
-    dataInicial;
-    dataFinal;
+    showLoading = true;
     unsub$ = new Subject();
 
     constructor(
@@ -40,32 +28,15 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
         private auth: AuthService,
-        private fb: FormBuilder,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal
-    ) {
-        super();
-    }
+    ) { }
 
-    ngOnInit() {
-        this.appMobile = this.auth.isAppMobile();
+    ngOnInit() { }
 
-        if (moment().day() === 0 || moment().day() === 1) {
-            const startWeek = moment().startOf('week');
-            this.dataInicial = startWeek.subtract(6, 'days');
-
-            if (moment().day() === 0) {
-                this.dataFinal = moment();
-            } else {
-                this.dataFinal = moment().subtract(1, 'days');
-            }
-        } else {
-            this.dataInicial = moment().startOf('week').add('1', 'day');
-            this.dataFinal = moment();
-        }
-
+    ngOnChanges() {
+        this.showLoading = true;
         this.getApostas();
-        this.createForm();
     }
 
     ngOnDestroy() {
@@ -73,72 +44,35 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
         this.unsub$.complete();
     }
 
-    getApostas(params?) {
-        this.totais.comissao = 0;
-        this.totais.premio = 0;
-        this.totais.resultado = 0;
-        this.totais.valor = 0;
-
-        let queryParams: any = {
-            'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
-            'data-final': this.dataFinal.format('YYYY-MM-DD 23:59:59'),
+    getApostas() {
+        const queryParams: any = {
+            'data-inicial': this.queryParams.dataInicial,
+            'data-final': this.queryParams.dataFinal,
+            'status': this.queryParams.status,
+            'apostador': this.queryParams.apostador,
             'sort': '-horario',
             'otimizado': true
         };
-
-        if (params) {
-            queryParams = {
-                'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal,
-                'status': params.status,
-                'apostador': params.apostador,
-                'sort': '-horario',
-                'otimizado': true
-            };
-        }
 
         this.apostaEsportivaService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 apostas => {
                     this.apostas = apostas;
-                    apostas.forEach(aposta => {
-                        if (!aposta.cartao_aposta) {
-                            this.totais.valor += aposta.valor;
-                            if (aposta.resultado === 'ganhou') {
-                                this.totais.premio += aposta.premio;
-                            }
-                        }
-                        this.totais.comissao += aposta.comissao;
-                    });
-                    this.totais.resultado = this.totais.valor - this.totais.comissao - this.totais.premio;
-                    this.showLoadingIndicator = false;
+                    this.showLoading = false;
                     this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
     }
 
-    createForm() {
-        this.form = this.fb.group({
-            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
-            status: [''],
-            apostador: ['']
-        });
-    }
-
-    submit() {
-        this.showLoadingIndicator = !this.showLoadingIndicator;
-        this.getApostas(this.form.value);
-    }
 
     handleError(msg) {
         this.messageService.error(msg);
     }
 
     openModal(aposta) {
-        this.showLoadingIndicator = true;
+        this.showLoading = true;
 
         this.apostaService.getAposta(aposta.id, { 'verificar-ultima-aposta': 1 })
             .subscribe(
@@ -167,7 +101,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                         (reason) => { }
                     );
 
-                    this.showLoadingIndicator = false;
+                    this.showLoading = false;
                     this.cd.detectChanges();
                 },
                 error => this.handleError(error)
@@ -184,7 +118,7 @@ export class ApuracaoEsporteComponent extends BaseFormComponent implements OnIni
                 this.apostaService.cancelar(aposta.id)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        () => this.getApostas(this.form.value),
+                        () => this.getApostas(),
                         error => this.handleError(error)
                     );
             },

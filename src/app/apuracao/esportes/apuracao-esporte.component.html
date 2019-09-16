@@ -1,130 +1,46 @@
-<div id="default-content">
-    <div class="content-header">
-        <h2>Apuração Futebol</h2>
-        <div class="filters">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                        <div class="row">
-                            <div class="col-xs-6 col-lg-3">
-                                <label>Apostador</label>
-                                <input type="text" class="form-control" formControlName="apostador">
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial">
-                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal">
-                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <label>Status</label>
-                                <select class="form-control" formControlName="status">
-                                    <option value="">Todos</option>
-                                    <option value="ganhou">Ganhou</option>
-                                    <option value="perdeu">Perdeu</option>
-                                    <option value="pendente">Pendente</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-6 col-lg-3">
-                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content-body">
-        <div class="content">
-            <div>
-                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+<app-spinner *ngIf="showLoading"></app-spinner>
 
-                <ng-container *ngIf="!showLoadingIndicator">
-                    <div *ngIf="!apostas.length" class="alert alert-warning text-center" role="alert">
-                        Nenhuma aposta realizada no período.
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-4">
-                            <table class="table table-hover table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <th class="">Qtd. Apostas</th>
-                                        <td>{{apostas.length}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="">Total Apostado</th>
-                                        <td>{{totais.valor | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="">Total Comissão</th>
-                                        <td>{{totais.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="">Total Prêmio</th>
-                                        <td>{{totais.premio | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="">Resultado</th>
-                                        <td>{{totais.resultado | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!--  <p *ngIf="apostas.length">
-                        {{apostas.length}} aposta(s)
-                    </p>-->
-
-                    <table *ngIf="apostas.length > 0" class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="text-right">Número</th>
-                                <th>Horário</th>
-                                <th>Apostador</th>
-                                <th class="text-right">Jogos</th>
-                                <th class="text-right">Valor</th>
-                                <th class="text-right">Comissão</th>
-                                <th class="text-right">Prêmio</th>
-                                <th>Resultado</th>
-                                <th>Pagamento</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
-                                <tr (click)="openModal(aposta)"
-                                    class="{{ aposta.resultado == 'ganhou' ? 'bg-success' : '' }} {{ aposta.resultado == 'perdeu' ? 'bg-danger' : ''}}">
-                                    <td class="text-right">
-                                        <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
-                                        #{{aposta.id}}
-                                    </td>
-                                    <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                                    <td>{{aposta.apostador}}</td>
-                                    <td class="text-right">{{aposta.num_jogos? aposta.num_jogos : aposta.itens.length}}
-                                    </td>
-                                    <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
-                                    <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
-                                    <td>{{aposta.pago ? 'PAGO' : ''}}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info" title="VISUALIZAR"
-                                                (click)="openModal(aposta)">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-container>
-                        </tbody>
-                    </table>
-                </ng-container>
-            </div>
-        </div>
+<div *ngIf="!showLoading" class="margin-top-15">
+    <div *ngIf="!apostas.length" class="alert alert-warning text-center" role="alert">
+        Nenhuma aposta realizada no período.
     </div>
+
+    <table *ngIf="apostas.length > 0" class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th class="text-right">Número</th>
+                <th>Horário</th>
+                <th>Apostador</th>
+                <th class="text-right">Valor</th>
+                <th class="text-right">Comissão</th>
+                <th class="text-right">Prêmio</th>
+                <th>Pagamento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
+                <tr (click)="openModal(aposta)"
+                    class="{{ aposta.resultado == 'ganhou' ? 'bg-success' : '' }} {{ aposta.resultado == 'perdeu' ? 'bg-danger' : ''}}">
+                    <td class="text-right">
+                        <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
+                        #{{aposta.id}}
+                    </td>
+                    <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                    <td>{{aposta.apostador}}</td>
+                    <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                    <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                    <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
+                    <td>{{aposta.pago ? 'PAGO' : ''}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
 </div>

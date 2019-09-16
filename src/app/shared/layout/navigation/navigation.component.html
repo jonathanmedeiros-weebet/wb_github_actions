@@ -30,20 +30,10 @@
                             <i class="fa fa-check"></i> Validação
                         </a>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li>
+                        <a [routerLink]="['/apuracao']">
                             <i class="fa fa-asterisk"></i> Apuração
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" [routerLink]="['/apuracao/consolidada']">Consolidada</a>
-                            <a class="dropdown-item" [routerLink]="['/apuracao/esportes']">Esportes</a>
-                            <a *ngIf="acumuladaoHabilitado" class="dropdown-item" [routerLink]="['/apuracao/acumuladao']">
-                                Acumuladão
-                            </a>
-                            <a *ngIf="loteriasHabilitada" class="dropdown-item" [routerLink]="['/apuracao/loteria']">
-                                Loteria
-                            </a>
-                        </div>
                     </li>
                     <li>
                         <ng-container *ngIf="loteriasHabilitada; else resultadosEsporte">
