@@ -440,7 +440,7 @@ gulp.task('sportebets.com.br', function (done) {
         banca: "Sporte Bets",
         styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; --league: #21bb3f; --foreground-league: #fff;" +
             "--foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #21bb3f;",
-        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome-mobile, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #000!important; } "
+        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome-mobile, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #fff!important; } "
     });
 });
 
