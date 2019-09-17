@@ -146,8 +146,9 @@ gulp.task('betsports99.net', function (done) {
     tasks(done, {
         host: "betsports99.net",
         banca: "BET SPORTS 99",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000; --foreground-highlight: #fff; --odds: #046eef;--foreground-odds: #fff; --event-time: #000;",
-        aditional_styles: "body{ font-weight:bold; }"
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
 
@@ -922,7 +923,7 @@ gulp.task('megabets.wee.bet', function (done) {
     tasks(done, {
         host: "megabets.wee.bet",
         banca: "Mega Bets",
-        styles: ""
+        styles: "--header: #14312d; --foreground-header: #fff; --sidebar-right:#14312d; --foreground-sidebar-right: #fff; --sidebar-left: #14312d; --foreground-sidebar-left: #fff; --highlight: #ffb11a; --foreground-highlight: #fff; --odds: #2d887f; --foreground-odds: #fff; --event-time: #14312d; --league: #fade9f; --foreground-league: #000;"
     });
 });
 
@@ -971,7 +972,9 @@ gulp.task('wmredesports.net', function (done) {
     tasks(done, {
         host: "wmredesports.net",
         banca: "WM Rede Sports",
-        styles: ""
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #da403e; --foreground-odds: #fff; --event-time: #da403e; --league: #333; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
 
@@ -979,6 +982,24 @@ gulp.task('sportbrasil.wee.bet', function (done) {
     tasks(done, {
         host: "sportbrasil.wee.bet",
         banca: "Sport Brasil",
+        styles: "--header: #6ba763; --foreground-header: #fff; --sidebar-right:#6ba763; --foreground-sidebar-right: #fff; --sidebar-left: #6ba763; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #19afef; --foreground-odds: #fff;"
+    });
+});
+
+gulp.task('maniasports.bet', function (done) {
+    tasks(done, {
+        host: "maniasports.bet",
+        banca: "Mania Sports",
         styles: ""
+    });
+});
+
+gulp.task('vitoriasports.bet', function (done) {
+    tasks(done, {
+        host: "vitoriasports.bet",
+        banca: "Vitória Sports",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: yellow; --odds: red; --foreground-odds: #fff; --event-time: red; --league: #333; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });

@@ -63,7 +63,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
                 newNavigator.share({
                     title: config.BANCA_NOME,
                     text: `${config.BANCA_NOME}: #${this.aposta.id}`,
-                    url: `${config.HOST}/aposta/${this.aposta.chave}`,
+                    url: `${location.origin}/bilhete/${this.aposta.chave}`,
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
