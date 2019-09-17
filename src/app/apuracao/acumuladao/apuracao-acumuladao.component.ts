@@ -138,4 +138,12 @@ export class ApuracaoAcumuladaoComponent implements OnInit, OnDestroy, OnChanges
     trackById(index: number, aposta: any): string {
         return aposta.id;
     }
+
+    cssResultado(resultado) {
+        return {
+            'td-ganhou': resultado === 'ganhou',
+            'td-perdeu': resultado === 'perdeu',
+            'td-pendente': !resultado
+        };
+    }
 }

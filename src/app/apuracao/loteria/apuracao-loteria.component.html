@@ -12,7 +12,7 @@
     <div *ngFor="let aposta of apostas" class="aposta">
         <div class="aposta-header">
             <div>
-                <button type="button" (click)="abrirBilhete(aposta)" class="btn btn-sm btn-custom">
+                <button type="button" (click)="abrirBilhete(aposta)" class="btn btn-xs btn-custom">
                     <i class="fa fa-eye"></i>
                 </button>
             </div>
@@ -23,10 +23,6 @@
             <div>
                 <label>Apostador:</label>
                 <em>{{aposta.apostador}}</em>
-            </div>
-            <div>
-                <label>Telefone:</label>
-                <em>{{aposta.telefone}}</em>
             </div>
             <div>
                 <label>Horário:</label>

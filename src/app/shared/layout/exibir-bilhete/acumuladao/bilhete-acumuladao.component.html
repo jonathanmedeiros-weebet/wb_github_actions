@@ -10,13 +10,18 @@
         <hr>
         <div class="informacoes">
             <p>
-                <b>CAMBISTA:</b> {{aposta.passador.nome}}
+                <b>CAMBISTA: </b><span>{{aposta.passador.nome}}</span>
             </p>
             <p>
-                <b>APOSTADOR:</b> {{aposta.apostador}}
+                <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
             </p>
             <p>
-                <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                <b>HORÁRIO: </b><span>{{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
+            </p>
+            <p class="resultado">
+                <b>RESULTADO: </b>
+                <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
+                <span *ngIf="!aposta.resultado">aguardando</span>
             </p>
         </div>
         <hr>

@@ -632,13 +632,6 @@ button {
     .odds .odd:nth-of-type(3) {
         width: 33.33%;
     }
-
-    /* .btn-back{
-        position: absolute;
-        left: 15px;
-        top: 28px;
-        margin: 0;
-    } */
 }
 
 /* Spinner */

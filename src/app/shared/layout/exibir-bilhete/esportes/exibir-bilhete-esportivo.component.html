@@ -18,6 +18,11 @@
             <p>
                 <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
             </p>
+            <p>
+                <b>RESULTADO: </b>
+                <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
+                <span *ngIf="!aposta.resultado">aguardando</span>
+            </p>
         </div>
         <hr>
         <hr>

@@ -5,44 +5,45 @@
         Nenhuma aposta realizada no período.
     </div>
 
-    <table *ngIf="apostas.length > 0" class="table table-hover table-bordered">
+    <table *ngIf="apostas.length > 0" class="table">
         <thead>
             <tr>
-                <th class="text-right">Número</th>
-                <th>Horário</th>
-                <th>Apostador</th>
-                <th>Acumuladão</th>
+                <th class="resultado"></th>
+                <th>Cód.</th>
                 <th>Valor</th>
                 <th>Comissão</th>
-                <th>Acertos</th>
                 <th>Prêmio</th>
-                <th>Resultado</th>
-                <th>Pagamento</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
-                <tr (click)="openModal(aposta)"
-                    class="{{ aposta.resultado == 'ganhou' ? 'bg-success' : '' }} {{ aposta.resultado == 'perdeu' ? 'bg-danger' : ''}}">
-                    <td class="text-right">
+                <tr (click)="openModal(aposta)" class="tr-1">
+                    <td rowspan="2" class="resultado" [ngClass]="cssResultado(aposta.resultado)"></td>
+                    <td>
                         <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
                         #{{aposta.id}}
                     </td>
-                    <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                    <td>{{aposta.apostador}}</td>
-                    <td>{{aposta.acumuladao.nome}}</td>
-                    <td class="text-right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
-                    <td class="text-right">{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
-                    <td class="text-right">{{aposta.quantidade_acertos}}</td>
-                    <td class="text-right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</td>
-                    <td>{{aposta.resultado ? aposta.resultado : 'Pendente'}}</td>
-                    <td>{{aposta.pago ? 'PAGO' : ''}}</td>
+                    <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                    <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
                     <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-info" title="VISUALIZAR" (click)="openModal(aposta)">
-                                <i class="fa fa-eye"></i>
-                            </button>
+                        <span
+                            *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+                        <span *ngIf="aposta.resultado == 'perdeu'">R$ 0,00</span>
+                        <span *ngIf="!aposta.resultado">Aguardando</span>
+                    </td>
+                </tr>
+                <tr (click)="openModal(aposta)" class="tr-2">
+                    <td class="" colspan="4">
+                        <div>
+                            <b>{{aposta.acumuladao.nome}}</b>
+                            <span *ngIf="aposta.quantidade_acertos">
+                                - {{aposta.quantidade_acertos}} acertos
+                            </span>
+                        </div>
+                        <div>
+                            <small *ngIf="aposta.pago">(PAGO)</small>
+                            {{aposta.apostador | uppercase}} apostou em
+                            {{aposta.horario | moment:'DD/MM/YYYY [às] HH:mm'}}
                         </div>
                     </td>
                 </tr>

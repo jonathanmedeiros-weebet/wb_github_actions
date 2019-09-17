@@ -1,20 +1,29 @@
-.ganhador{
-    background: #CFFCCF;
-}
-.perdedor{
-    background: #FFDDDF;
-}
-
-.tr-footer th{
-    border: none;
-}
-
-.bg-success td, .bg-danger td{
-    color: #fff;
-}
-
 .table tr td{
     cursor: pointer;
-    /* padding: 1px 3px;
-    vertical-align: middle; */
+}
+
+thead .resultado{
+    padding: 0;
+}
+
+.tr-1 .resultado{
+    padding: 4px;
+    width: 8px;
+}
+
+.tr-2 td{
+    border-top: none!important;
+    padding-top: 0;
+}
+
+.td-ganhou{
+    background: green;
+}
+
+.td-perdeu{
+    background: red;
+}
+
+.td-pendente{
+    background: gray;
 }

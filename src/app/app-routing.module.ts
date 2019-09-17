@@ -14,7 +14,7 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'apuracao',
+                redirectTo: 'esportes/futebol/jogos',
                 pathMatch: 'full'
             },
             {

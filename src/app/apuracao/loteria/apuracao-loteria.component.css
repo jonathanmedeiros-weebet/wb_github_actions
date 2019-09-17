@@ -7,9 +7,13 @@
 .aposta-header{
     margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.aposta-header > div{
+    margin-right: 10px;
 }
 
 .aposta-header label{
