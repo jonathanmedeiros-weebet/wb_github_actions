@@ -979,7 +979,7 @@ gulp.task('sportbrasil.wee.bet', function (done) {
     tasks(done, {
         host: "sportbrasil.wee.bet",
         banca: "Sport Brasil",
-        styles: ""
+        styles: "--header: #6ba763; --foreground-header: #fff; --sidebar-right:#6ba763; --foreground-sidebar-right: #fff; --sidebar-left: #6ba763; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #19afef; --foreground-odds: #fff;"
     });
 });
 
@@ -995,6 +995,8 @@ gulp.task('vitoriasports.bet', function (done) {
     tasks(done, {
         host: "vitoriasports.bet",
         banca: "Vitória Sports",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: red; --odds: #000; --foreground-odds: #fff; --event-time: red; --league: #333; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
