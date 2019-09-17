@@ -990,3 +990,11 @@ gulp.task('maniasports.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('vitoriasports.bet', function (done) {
+    tasks(done, {
+        host: "vitoriasports.bet",
+        banca: "Vitória Sports",
+        styles: ""
+    });
+});
