@@ -33,7 +33,7 @@
             <table *ngIf="!showLoadingIndicator" class="table">
                 <tbody>
                     <ng-container *ngFor="let campeonato of campeonatos">
-                        <tr class="campeonato-header">
+                        <tr class="campeonato">
                             <td colspan="4">{{campeonato.nome}}</td>
                         </tr>
                         <tr *ngFor="let jogo of campeonato.jogos">
