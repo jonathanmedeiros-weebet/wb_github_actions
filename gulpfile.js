@@ -438,8 +438,9 @@ gulp.task('sportebets.com.br', function (done) {
     tasks(done, {
         host: "sportebets.com.br",
         banca: "Sporte Bets",
-        styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; " +
-            "--foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #fd7e14;"
+        styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; --league: #21bb3f; --foreground-league: #fff;" +
+            "--foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #21bb3f;",
+        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome-mobile, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #000!important; } "
     });
 });
 
@@ -905,7 +906,7 @@ gulp.task('gooldeplaca.com.br', function (done) {
     tasks(done, {
         host: "gooldeplaca.com.br",
         banca: "Gool de Placa",
-        styles: "",
+        styles: "--header: #09d261; --foreground-header: #fff; --sidebar-right:#09d261; --foreground-sidebar-right: #fff; --sidebar-left: #09d261; --foreground-sidebar-left: #fff; --event-time: #09d261; ",
         aditional_styles: "#futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #a2b7d2!important } .jogos, .eventos{ background: #a2b7d2!important; color: #000!important; } .campeonato-header{ border-bottom-color: #a2b7d2!important; } .footer{ background-color:#a2b7d2!important; }" +
             " .inside-event .tipo-apostas{ background-color: #a2b7d2!important; color: #000!important; } #esportes-footer{ color:#000; } "
     });
