@@ -438,8 +438,9 @@ gulp.task('sportebets.com.br', function (done) {
     tasks(done, {
         host: "sportebets.com.br",
         banca: "Sporte Bets",
-        styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; " +
-            "--foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #fd7e14;"
+        styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; --league: #21bb3f; --foreground-league: #fff;" +
+            "--foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #21bb3f;",
+        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #fff!important; } "
     });
 });
 
@@ -595,7 +596,7 @@ gulp.task('bet3.wee.bet', function (done) {
 gulp.task('bet4.wee.bet', function (done) {
     tasks(done, {
         host: "bet4.wee.bet",
-        banca: "Bet4",
+        banca: "Fut Sport",
         styles: "",
         scripts: "<!-- BEGIN JIVOSITE CODE {literal} --> <script type='text/javascript'> (function(){ var widget_id = 'uC0MDVRaka';var d=document;var w=window;function l(){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);} if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);} else{w.addEventListener('load',l,false);}}})(); </script> <!-- {/literal} END JIVOSITE CODE -->"
     });
@@ -905,7 +906,7 @@ gulp.task('gooldeplaca.com.br', function (done) {
     tasks(done, {
         host: "gooldeplaca.com.br",
         banca: "Gool de Placa",
-        styles: "",
+        styles: "--header: #09d261; --foreground-header: #fff; --sidebar-right:#09d261; --foreground-sidebar-right: #fff; --sidebar-left: #09d261; --foreground-sidebar-left: #fff; --event-time: #09d261; --foreground-highlight: #fff",
         aditional_styles: "#futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #a2b7d2!important } .jogos, .eventos{ background: #a2b7d2!important; color: #000!important; } .campeonato-header{ border-bottom-color: #a2b7d2!important; } .footer{ background-color:#a2b7d2!important; }" +
             " .inside-event .tipo-apostas{ background-color: #a2b7d2!important; color: #000!important; } #esportes-footer{ color:#000; } "
     });
@@ -990,7 +991,7 @@ gulp.task('maniasports.bet', function (done) {
     tasks(done, {
         host: "maniasports.bet",
         banca: "Mania Sports",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: red; --foreground-odds: #fff;"
     });
 });
 
@@ -1001,5 +1002,13 @@ gulp.task('vitoriasports.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: yellow; --odds: red; --foreground-odds: #fff; --event-time: red; --league: #333; --foreground-league: #fff;",
         aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
             " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+    });
+});
+
+gulp.task('bilhetedasorte.wee.bet', function (done) {
+    tasks(done, {
+        host: "bilhetedasorte.wee.bet",
+        banca: "Bilhete da Sorte",
+        styles: ""
     });
 });
