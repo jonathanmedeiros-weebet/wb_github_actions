@@ -339,9 +339,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     stopDelayInterval() {
-        if (this.apostaAoVivo) {
-            clearInterval(this.refreshIntervalId);
-        }
+        clearInterval(this.refreshIntervalId);
     }
 
     setDelay() {

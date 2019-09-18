@@ -219,11 +219,18 @@ export class HelperService {
     }
 
     sharedTicket(aposta, file) {
+        let data;
+        if (aposta.tipo === 'loteria') {
+            data = `${config.HOST}/aposta/${aposta.chave}`;
+        } else {
+            data = `${location.origin}/bilhete/${aposta.chave}`;
+        }
+
         parent.postMessage(
             {
-                message: `${config.BANCA_NOME}: ${location.origin}/bilhete/${aposta.chave}`,
+                message: `${config.BANCA_NOME}: ${data}`,
                 file: file,
-                data: `${location.origin}/bilhete/${aposta.chave}`,
+                data: data,
                 action: 'shareURL'
             },
             'file://'
