@@ -116,7 +116,8 @@
         "wmredesports.net": "gulp wmredesports.net",
         "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet",
         "maniasports.bet": "gulp maniasports.bet",
-        "vitoriasports.bet": "gulp vitoriasports.bet"
+        "vitoriasports.bet": "gulp vitoriasports.bet",
+        "bilhetedasorte.wee.bet": "gulp bilhetedasorte.wee.bet"
     },
     "private": true,
     "dependencies": {
