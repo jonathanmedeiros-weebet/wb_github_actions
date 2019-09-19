@@ -84,6 +84,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     }
 
     verificarResultadoAposta() {
+        /*
         if (!this.aposta.resultado) {
             let aoMenosUmPerdeu = false;
             let todosComResultados = true;
@@ -115,18 +116,18 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
 
             if (todosComResultados) {
                 if (acertouTodos) {
-                    this.aposta.resultado = 'ganhou';
+                    this.aposta.resultado = 'ganhando';
                 } else {
                     if (aoMenosUmPerdeu) {
-                        this.aposta.resultado = 'perdeu';
+                        this.aposta.resultado = 'perdendo';
                     }
                 }
             } else {
                 if (aoMenosUmPerdeu) {
-                    this.aposta.resultado = 'perdeu';
+                    this.aposta.resultado = 'perdendo';
                 }
             }
-        }
+        }*/
     }
 
     vericarResultadoItem(jogoId) {
