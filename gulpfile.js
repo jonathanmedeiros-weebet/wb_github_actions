@@ -906,9 +906,8 @@ gulp.task('gooldeplaca.com.br', function (done) {
     tasks(done, {
         host: "gooldeplaca.com.br",
         banca: "Gool de Placa",
-        styles: "--header: #09d261; --foreground-header: #fff; --sidebar-right:#09d261; --foreground-sidebar-right: #fff; --sidebar-left: #09d261; --foreground-sidebar-left: #fff; --event-time: #09d261; --foreground-highlight: #fff",
-        aditional_styles: "#futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #a2b7d2!important } .jogos, .eventos{ background: #a2b7d2!important; color: #000!important; } .campeonato-header{ border-bottom-color: #a2b7d2!important; } .footer{ background-color:#a2b7d2!important; }" +
-            " .inside-event .tipo-apostas{ background-color: #a2b7d2!important; color: #000!important; } #esportes-footer{ color:#000; } "
+        styles: "--header: #258aa7; --foreground-header: #fff; --sidebar-right:#258aa7; --foreground-sidebar-right: #fff; --sidebar-left: #258aa7; --foreground-sidebar-left: #fff; --odds: #000; --event-time: #e84233; --highlight: #fbef3c; --foreground-highlight: #fff;  --league: #e84233; --foreground-league: #fff;n",
+        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #e84233!important; } .mais-opcoes{ color: #e84233!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #e84233!important; } "
     });
 });
 
@@ -1009,6 +1008,7 @@ gulp.task('bilhetedasorte.wee.bet', function (done) {
     tasks(done, {
         host: "bilhetedasorte.wee.bet",
         banca: "Bilhete da Sorte",
-        styles: ""
+        styles: "--header: #999999; --foreground-header: #fff; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #67ad5a; --foreground-highlight: #24415f; --odds: #67ad5a; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
+        aditional_styles: ".odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #67ad5a!important; }"
     });
 });
