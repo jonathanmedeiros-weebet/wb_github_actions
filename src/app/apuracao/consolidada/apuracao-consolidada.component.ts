@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 
 import { RelatorioService, MessageService, ParametrosLocaisService } from './../../services';
 
@@ -8,7 +7,7 @@ import { RelatorioService, MessageService, ParametrosLocaisService } from './../
     templateUrl: './apuracao-consolidada.component.html',
     styleUrls: ['./apuracao-consolidada.component.css']
 })
-export class ApuracaoConsolidadaComponent implements OnInit, OnDestroy {
+export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     @Input() queryParams;
     relatorio;
     showLoading = true;
@@ -24,11 +23,12 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.controlarCreditoCambista = this.params.controlarCreditoCambista();
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
-
-        this.getResultado();
     }
 
-    ngOnDestroy() { }
+    ngOnChanges() {
+        this.showLoading = true;
+        this.getResultado();
+    }
 
     getResultado(params?) {
         let queryParams: any = {

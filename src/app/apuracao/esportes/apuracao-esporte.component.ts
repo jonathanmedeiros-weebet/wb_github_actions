@@ -21,6 +21,10 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     apostas: ApostaEsportiva[] = [];
     modalRef;
     showLoading = true;
+    totais = {
+        'valor': 0,
+        'premio': 0,
+    };
     unsub$ = new Subject();
 
     constructor(
@@ -36,6 +40,8 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnChanges() {
         this.showLoading = true;
+        this.totais.valor = 0;
+        this.totais.premio = 0;
         this.getApostas();
     }
 
@@ -59,6 +65,14 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
             .subscribe(
                 apostas => {
                     this.apostas = apostas;
+                    apostas.forEach(aposta => {
+                        if (!aposta.cartao_aposta) {
+                            this.totais.valor += aposta.valor;
+                            if (aposta.resultado === 'ganhou') {
+                                this.totais.premio += aposta.premio;
+                            }
+                        }
+                    });
                     this.showLoading = false;
                     this.cd.detectChanges();
                 },
