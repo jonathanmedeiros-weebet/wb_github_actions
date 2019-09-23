@@ -46,6 +46,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         this.showLoading = true;
         this.totais.valor = 0;
         this.totais.premio = 0;
+        this.totais.comissao = 0;
         this.getApostas();
     }
 
