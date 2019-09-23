@@ -6,7 +6,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
+import { ApostaEsportivaService, ApostaService, MessageService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,16 +22,17 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     modalRef;
     showLoading = true;
     totais = {
+        'comissao': 0,
         'valor': 0,
         'premio': 0,
     };
+    mjrSports = false;
     unsub$ = new Subject();
 
     constructor(
         private apostaService: ApostaService,
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private auth: AuthService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal
     ) { }
@@ -39,6 +40,9 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     ngOnInit() { }
 
     ngOnChanges() {
+        if (location.host.search(/mjrsports/) >= 0) {
+            this.mjrSports = true;
+        }
         this.showLoading = true;
         this.totais.valor = 0;
         this.totais.premio = 0;
@@ -71,6 +75,10 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
                             if (aposta.resultado === 'ganhou') {
                                 this.totais.premio += aposta.premio;
                             }
+                        }
+
+                        if (this.mjrSports) {
+                            this.totais.comissao += aposta.comissao;
                         }
                     });
                     this.showLoading = false;
