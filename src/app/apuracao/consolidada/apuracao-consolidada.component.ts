@@ -28,6 +28,7 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         this.showLoading = true;
+        this.resultado = 0;
         this.getResultado();
     }
 
