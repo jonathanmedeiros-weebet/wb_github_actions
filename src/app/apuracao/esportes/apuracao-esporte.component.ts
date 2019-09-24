@@ -6,7 +6,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, ApostaService, MessageService } from './../../services';
+import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -18,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     @Input() queryParams;
+    smallScreen = true;
     apostas: ApostaEsportiva[] = [];
     modalRef;
     showLoading = true;
@@ -34,10 +35,17 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
+        private authService: AuthService,
         private modalService: NgbModal
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        if (window.innerWidth < 669) {
+            this.smallScreen = true;
+        } else {
+            this.smallScreen = false;
+        }
+    }
 
     ngOnChanges() {
         if (location.host.search(/mjrsports/) >= 0) {

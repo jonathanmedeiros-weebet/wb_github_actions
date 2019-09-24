@@ -6,9 +6,8 @@ thead .resultado{
     padding: 0;
 }
 
-.tr-1 .resultado{
+tbody .resultado{
     padding: 4px;
-    width: 8px;
 }
 
 .tr-2 td{

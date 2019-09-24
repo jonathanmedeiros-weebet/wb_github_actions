@@ -4,15 +4,6 @@
     <div class="col-12 col-md-4">
         <table class="table table-hover table-bordered">
             <tbody>
-                <tr *ngIf="controlarCreditoCambista">
-                    <th class="">Saldo anterior</th>
-                    <td>
-                        <div class="value">
-                            <i class="fa fa-plus-circle"></i>
-                            {{relatorio['saldo_anterior'] | currency: 'BRL':'symbol':'1.2'}}
-                        </div>
-                    </td>
-                </tr>
                 <tr>
                     <th class="">Total Apostado</th>
                     <td>
@@ -75,6 +66,22 @@
                         <div class="value">
                             <i class="fa fa-minus-circle"></i>
                             {{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Resultado no Período</th>
+                    <td class="text-right resultado"
+                        [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
+                        <b>{{resultado | currency: 'BRL':'symbol':'1.2'}}</b>
+                    </td>
+                </tr>
+                <tr *ngIf="controlarCreditoCambista">
+                    <th class="">Saldo Anterior</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-plus-circle"></i>
+                            {{relatorio['saldo_anterior'] | currency: 'BRL':'symbol':'1.2'}}
                         </div>
                     </td>
                 </tr>
