@@ -1028,3 +1028,11 @@ gulp.task('bets211.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('amigosdabola.wee.bet', function (done) {
+    tasks(done, {
+        host: "amigosdabola.wee.bet",
+        banca: "Amigos da Bola",
+        styles: "",
+    });
+});
