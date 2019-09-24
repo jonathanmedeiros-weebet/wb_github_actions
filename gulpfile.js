@@ -1012,3 +1012,11 @@ gulp.task('bilhetedasorte.wee.bet', function (done) {
         aditional_styles: ".odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #67ad5a!important; }"
     });
 });
+
+gulp.task('top10sports.wee.bet', function (done) {
+    tasks(done, {
+        host: "top10sports.wee.bet",
+        banca: "Top 10 Sports",
+        styles: "",
+    });
+});
