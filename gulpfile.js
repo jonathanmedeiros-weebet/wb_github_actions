@@ -439,8 +439,8 @@ gulp.task('sportebets.com.br', function (done) {
         host: "sportebets.com.br",
         banca: "Sporte Bets",
         styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; --league: #21bb3f; --foreground-league: #fff;" +
-            "--foreground-sidebar-left: #fff; --highlight: #ff6600; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #21bb3f;",
-        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #fff!important; } "
+            "--foreground-sidebar-left: #fff; --highlight: #d7d079; --foreground-highlight: #000; --odds: #000; --foreground-odds: #fff; --event-time: #21bb3f;",
+        aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #000!important; } "
     });
 });
 
