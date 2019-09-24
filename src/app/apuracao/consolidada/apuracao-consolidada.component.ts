@@ -10,6 +10,7 @@ import { RelatorioService, MessageService, ParametrosLocaisService } from './../
 export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     @Input() queryParams;
     relatorio;
+    resultado = 0;
     showLoading = true;
     controlarCreditoCambista;
     loteriasHabilitada;
@@ -46,6 +47,7 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
         this.relatorioService.getResultado(queryParams).subscribe(
             result => {
                 this.relatorio = result;
+                this.resultado = result['total_apostado'] + result['cartao'] - result['saque'] - result['total_comissao'] - result['total_premios'];
                 this.showLoading = false;
             }
         );
