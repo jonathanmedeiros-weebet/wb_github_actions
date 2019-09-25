@@ -120,7 +120,8 @@
         "bilhetedasorte.wee.bet": "gulp bilhetedasorte.wee.bet",
         "top10sports.wee.bet": "gulp top10sports.wee.bet",
         "bets211.com.br": "gulp bets211.com.br",
-        "amigosdabola.wee.bet": "gulp amigosdabola.wee.bet"
+        "amigosdabola.wee.bet": "gulp amigosdabola.wee.bet",
+        "onllinesports.com": "gulp onllinesports.com"
     },
     "private": true,
     "dependencies": {

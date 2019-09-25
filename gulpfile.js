@@ -1036,3 +1036,11 @@ gulp.task('amigosdabola.wee.bet', function (done) {
         styles: "--header: red; --foreground-header: #fff; --sidebar-right:red; --foreground-sidebar-right: #fff; --sidebar-left: #373435; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #373435; --foreground-odds: #fff; --event-time: red;",
     });
 });
+
+gulp.task('onllinesports.com', function (done) {
+    tasks(done, {
+        host: "onllinesports.com",
+        banca: "Onlline Sports",
+        styles: "",
+    });
+});
