@@ -1,6 +1,6 @@
 
 const _host = '//[HOST]';
-const _center = 'https://api-center2.wee.bet';
+const _center = 'https://api-center3.wee.bet';
 
 export const config: any = {
     BANCA_NOME: '[BANCA]',
