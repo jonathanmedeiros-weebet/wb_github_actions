@@ -1017,7 +1017,7 @@ gulp.task('top10sports.wee.bet', function (done) {
     tasks(done, {
         host: "top10sports.wee.bet",
         banca: "Top 10 Sports",
-        styles: "",
+        styles: "--header: #ed4438; --foreground-header: #fff; --sidebar-right:#ed4438; --foreground-sidebar-right: #fff; --sidebar-left: #373435; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #373435; --foreground-odds: #fff;",
     });
 });
 
@@ -1033,6 +1033,6 @@ gulp.task('amigosdabola.wee.bet', function (done) {
     tasks(done, {
         host: "amigosdabola.wee.bet",
         banca: "Amigos da Bola",
-        styles: "",
+        styles: "--header: red; --foreground-header: #fff; --sidebar-right:red; --foreground-sidebar-right: #fff; --sidebar-left: #373435; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #373435; --foreground-odds: #fff;",
     });
 });
