@@ -1017,7 +1017,7 @@ gulp.task('top10sports.wee.bet', function (done) {
     tasks(done, {
         host: "top10sports.wee.bet",
         banca: "Top 10 Sports",
-        styles: "--header: #ed4438; --foreground-header: #fff; --sidebar-right:#ed4438; --foreground-sidebar-right: #fff; --sidebar-left: #373435; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #373435; --foreground-odds: #fff; --event-time:#ed4438;",
+        styles: "--header: #373435; --foreground-header: #fff; --sidebar-right:#373435; --foreground-sidebar-right: #fff; --sidebar-left: #373435; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #ed4438; --foreground-odds: #fff; --event-time:#ed4438;",
     });
 });
 
