@@ -48,7 +48,8 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
         this.relatorioService.getResultado(queryParams).subscribe(
             result => {
                 this.relatorio = result;
-                this.resultado = result['total_apostado'] + result['cartao'] - result['saque'] - result['total_comissao'] - result['total_premios'];
+                this.resultado = parseFloat(result['total_apostado']) + parseFloat(result['cartao']) - parseFloat(result['saque'])
+                    - parseFloat(result['total_comissao']) - parseFloat(result['total_premios']);
                 this.showLoading = false;
             }
         );
