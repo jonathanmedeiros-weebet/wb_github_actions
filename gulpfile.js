@@ -1044,3 +1044,11 @@ gulp.task('onllinesports.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('liderancaesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "liderancaesportes.wee.bet",
+        banca: "Liderança Esportes",
+        styles: "",
+    });
+});
