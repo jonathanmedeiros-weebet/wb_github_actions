@@ -929,8 +929,8 @@ gulp.task('megabets.wee.bet', function (done) {
 
 gulp.task('esportebet10.wee.bet', function (done) {
     tasks(done, {
-        host: "esportebet10.wee.bet",
-        banca: "Esporte Bet 10",
+        host: "megabets.online",
+        banca: "Mega Bets",
         styles: ""
     });
 });
