@@ -626,10 +626,10 @@ gulp.task('bet6.wee.bet', function (done) {
     });
 });
 
-gulp.task('copasports.wee.bet', function (done) {
+gulp.task('sportingool.com', function (done) {
     tasks(done, {
-        host: "copasports.wee.bet",
-        banca: "Copa Sports",
+        host: "sportingool.com",
+        banca: "Sporting Gool",
         styles: ""
     });
 });
@@ -927,7 +927,7 @@ gulp.task('megabets.wee.bet', function (done) {
     });
 });
 
-gulp.task('esportebet10.wee.bet', function (done) {
+gulp.task('megabets.online', function (done) {
     tasks(done, {
         host: "megabets.online",
         banca: "Mega Bets",
