@@ -1005,10 +1005,10 @@ gulp.task('vitoriasports.bet', function (done) {
     });
 });
 
-gulp.task('bilhetedasorte.wee.bet', function (done) {
+gulp.task('rico.wee.bet', function (done) {
     tasks(done, {
-        host: "bilhetedasorte.wee.bet",
-        banca: "Bilhete da Sorte",
+        host: "rico.wee.bet",
+        banca: "Rico",
         styles: "--header: #999999; --foreground-header: #fff; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #67ad5a; --foreground-highlight: #24415f; --odds: #67ad5a; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
         aditional_styles: ".odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #67ad5a!important; }"
     });
