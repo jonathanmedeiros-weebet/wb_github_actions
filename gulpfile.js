@@ -1009,8 +1009,7 @@ gulp.task('rico.wee.bet', function (done) {
     tasks(done, {
         host: "rico.wee.bet",
         banca: "Rico",
-        styles: "--header: #999999; --foreground-header: #fff; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #67ad5a; --foreground-highlight: #24415f; --odds: #67ad5a; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
-        aditional_styles: ".odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #67ad5a!important; }"
+        styles: "--header: #043052; --foreground-header: #fff; --sidebar-right:#043052; --foreground-sidebar-right: #fff; --sidebar-left: #043052; --foreground-sidebar-left: #fff; --highlight: #a1ebfe; --foreground-highlight: #fff; --odds: #017eb4; --foreground-odds: #fff; --event-time: #000",
     });
 });
 
