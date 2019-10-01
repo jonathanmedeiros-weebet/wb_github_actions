@@ -1060,3 +1060,11 @@ gulp.task('cokinhodabanca.wee.bet', function (done) {
         styles: "--header: #043052; --foreground-header: #fff; --sidebar-right:#043052; --foreground-sidebar-right: #fff; --sidebar-left: #043052; --foreground-sidebar-left: #fff; --highlight: #a1ebfe; --foreground-highlight: #fff; --odds: #017eb4; --foreground-odds: #fff; --event-time: #000",
     });
 });
+
+gulp.task('clubbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "clubbets.wee.bet",
+        banca: "Club Bets",
+        styles: "",
+    });
+});

@@ -123,7 +123,8 @@
         "amigosdabola.wee.bet": "gulp amigosdabola.wee.bet",
         "onllinesports.com": "gulp onllinesports.com",
         "liderancaesportes.wee.bet": "gulp liderancaesportes.wee.bet",
-        "cokinhodabanca.wee.bet": "gulp cokinhodabanca.wee.bet"
+        "cokinhodabanca.wee.bet": "gulp cokinhodabanca.wee.bet",
+        "clubbets.wee.bet": "gulp clubbets.wee.bet"
     },
     "private": true,
     "dependencies": {
