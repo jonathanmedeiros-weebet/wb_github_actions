@@ -932,7 +932,7 @@ gulp.task('megabets.online', function (done) {
         host: "megabets.online",
         banca: "Mega Bets",
         styles: "--header: #ff3c00; --foreground-header: #fff; --sidebar-right:#ff3c00; --foreground-sidebar-right: #fff; --sidebar-left: #ff3c00; --foreground-sidebar-left: #fff; --highlight:#000; --foreground-highlight: #fff; --odds: #4f4f4f; --foreground-odds: #fff; --foreground-selected-odds: #fff; --selected-odds: #ff3c00; --event-time: #000; ",
-        aditional_styles: ".remover-item .fa-times{ color: #4f4f4f!important; } .odds .selecionado{ background-color: #ff3c00!important; } "
+        aditional_styles: ".remover-item .fa-times{ color: #4f4f4f!important; } .pre-bilhete-esportes .fa-times{ color: #4f4f4f!important; } .odds .selecionado{ background-color: #ff3c00!important; } "
     });
 });
 
