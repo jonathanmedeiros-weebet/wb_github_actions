@@ -112,7 +112,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     live() {
         this.liveService.getJogos()
             .pipe(takeUntil(this.unsub$))
-            .subscribe((jogo: Jogo) => {
+            .subscribe((jogo: any) => {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
 
@@ -138,7 +138,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     valido = false;
                 }
 
-                if (valido && !jogo.finalizado && jogo.cotacoes.length > 0) {
+                if (valido && !jogo.finalizado && jogo.total_cotacoes > 0) {
                     campeonato.jogos.set(jogo._id, jogo);
 
                     if (inserirCampeonato) {
