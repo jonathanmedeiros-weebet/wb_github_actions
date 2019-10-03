@@ -1068,3 +1068,11 @@ gulp.task('clubbets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet24h.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet24h.wee.bet",
+        banca: "Bet 24h",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ed3237; --foreground-highlight: #fff; --odds: #941f22; --foreground-odds: #fff; --event-time: #941f22",
+    });
+});
