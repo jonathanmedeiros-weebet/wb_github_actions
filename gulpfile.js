@@ -1076,3 +1076,11 @@ gulp.task('bet24h.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ed3237; --foreground-highlight: #fff; --odds: #941f22; --foreground-odds: #fff; --event-time: #941f22",
     });
 });
+
+gulp.task('tm5sports.wee.bet', function (done) {
+    tasks(done, {
+        host: "tm5sports.wee.bet",
+        banca: "TM5 Sports",
+        styles: "--header: #d7d7d8; --foreground-header: #292929; --sidebar-right:#d7d7d8; --foreground-sidebar-right: #292929; --sidebar-left: #d7d7d8; --foreground-sidebar-left: #292929; --highlight: #21a9d8; --foreground-highlight: #a47b41; --odds: #292929; --foreground-odds: #d7d7d8; --event-time: #a47b41",
+    });
+});

@@ -125,7 +125,8 @@
         "liderancaesportes.wee.bet": "gulp liderancaesportes.wee.bet",
         "cokinhodabanca.wee.bet": "gulp cokinhodabanca.wee.bet",
         "clubbets.wee.bet": "gulp clubbets.wee.bet",
-        "bet24h.wee.bet": "gulp bet24h.wee.bet"
+        "bet24h.wee.bet": "gulp bet24h.wee.bet",
+        "tm5sports.wee.bet": "gulp tm5sports.wee.bet"
     },
     "private": true,
     "dependencies": {
