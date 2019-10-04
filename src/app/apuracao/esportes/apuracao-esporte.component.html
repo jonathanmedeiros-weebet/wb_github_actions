@@ -6,7 +6,8 @@
     </div>
     <div *ngIf="apostas.length > 0">
         <div>
-            <p><b>Tot. Apostas:</b> {{totais.valor| currency: 'BRL':'symbol':'1.2'}}</p>
+            <p><b>Qtd. Apostas:</b> {{apostas.length}}</p>
+            <p><b>Tot. Apostado:</b> {{totais.valor| currency: 'BRL':'symbol':'1.2'}}</p>
             <p *ngIf="mjrSports"><b>Tot. Comissões :</b> {{totais.comissao| currency: 'BRL':'symbol':'1.2'}}</p>
             <p><b>Tot. Prêmios :</b> {{totais.premio| currency: 'BRL':'symbol':'1.2'}}</p>
         </div>
