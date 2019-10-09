@@ -1021,9 +1021,9 @@ gulp.task('top10sports.wee.bet', function (done) {
     });
 });
 
-gulp.task('bets211.com.br', function (done) {
+gulp.task('bets211.wee.bet', function (done) {
     tasks(done, {
-        host: "bets211.com.br",
+        host: "bets211.wee.bet",
         banca: "Bets 211",
         styles: "--header: #37328c; --foreground-header: #fff; --sidebar-right:#37328c; --foreground-sidebar-right: #fff; --sidebar-left: #37328c; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #f4b52a; --foreground-odds: #fff;",
     });
