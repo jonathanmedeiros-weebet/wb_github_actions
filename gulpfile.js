@@ -1084,3 +1084,11 @@ gulp.task('tm5sports.wee.bet', function (done) {
         styles: "--header: #d7d7d8; --foreground-header: #292929; --sidebar-right:#d7d7d8; --foreground-sidebar-right: #292929; --sidebar-left: #d7d7d8; --foreground-sidebar-left: #292929; --highlight: #21a9d8; --foreground-highlight: #a47b41; --odds: #292929; --foreground-odds: #d7d7d8; --event-time: #a47b41",
     });
 });
+
+gulp.task('bancadofrade.com', function (done) {
+    tasks(done, {
+        host: "bancadofrade.com",
+        banca: "Banca do Frade",
+        styles: ""
+    });
+});
