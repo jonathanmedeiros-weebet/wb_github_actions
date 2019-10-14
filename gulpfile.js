@@ -1092,3 +1092,11 @@ gulp.task('bancadofrade.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('pitbull.bet', function (done) {
+    tasks(done, {
+        host: "pitbull.bet",
+        banca: "PITBULL",
+        styles: "--header: #060606; --foreground-header: #fff; --sidebar-right:#060606; --foreground-sidebar-right: #fff; --sidebar-left: #060606; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #ff8100; --foreground-odds: #fff; --event-time: #ff8100"
+    });
+});

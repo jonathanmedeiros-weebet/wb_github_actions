@@ -127,7 +127,8 @@
         "clubbets.wee.bet": "gulp clubbets.wee.bet",
         "bet24h.wee.bet": "gulp bet24h.wee.bet",
         "tm5sports.wee.bet": "gulp tm5sports.wee.bet",
-        "bancadofrade.com": "gulp bancadofrade.com"
+        "bancadofrade.com": "gulp bancadofrade.com",
+        "pitbull.bet": "gulp pitbull.bet"
     },
     "private": true,
     "dependencies": {

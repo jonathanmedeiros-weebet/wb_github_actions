@@ -27,15 +27,11 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
-        if (moment().day() === 0 || moment().day() === 1) {
+        if (moment().day() === 0) {
             const startWeek = moment().startOf('week');
             this.dataInicial = startWeek.subtract(6, 'days');
+            this.dataFinal = moment();
 
-            if (moment().day() === 0) {
-                this.dataFinal = moment();
-            } else {
-                this.dataFinal = moment().subtract(1, 'days');
-            }
         } else {
             this.dataInicial = moment().startOf('week').add('1', 'day');
             this.dataFinal = moment();
