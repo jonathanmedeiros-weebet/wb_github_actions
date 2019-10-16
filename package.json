@@ -128,7 +128,8 @@
         "bet24h.wee.bet": "gulp bet24h.wee.bet",
         "tm5sports.wee.bet": "gulp tm5sports.wee.bet",
         "bancadofrade.com": "gulp bancadofrade.com",
-        "pitbull.bet": "gulp pitbull.bet"
+        "pitbull.bet": "gulp pitbull.bet",
+        "amazonsports.bet": "gulp amazonsports.bet"
     },
     "private": true,
     "dependencies": {

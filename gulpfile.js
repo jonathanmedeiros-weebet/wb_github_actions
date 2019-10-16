@@ -1100,3 +1100,11 @@ gulp.task('pitbull.bet', function (done) {
         styles: "--header: #060606; --foreground-header: #fff; --sidebar-right:#060606; --foreground-sidebar-right: #fff; --sidebar-left: #060606; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #ff8100; --foreground-odds: #fff; --event-time: #ff8100"
     });
 });
+
+gulp.task('amazonsports.bet', function (done) {
+    tasks(done, {
+        host: "amazonsports.bet",
+        banca: "Amazon Sports",
+        styles: "--header: #019934; --foreground-header: #fff; --sidebar-right:#019934; --foreground-sidebar-right: #fff; --sidebar-left: #019934; --foreground-sidebar-left: #fff; --highlight: #c93334; --foreground-highlight: #fff; --odds: #006634; --foreground-odds: #fff; --event-time: #c93334"
+    });
+});
