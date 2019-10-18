@@ -1,9 +1,9 @@
 
-const _host = '//central.bets188.bet';
+const _host = '//central.demo.wee.bet';
 const _center = 'https://api-center2.wee.bet';
 
 export const config: any = {
-    BANCA_NOME: 'Bets 188',
+    BANCA_NOME: 'DEMO',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
