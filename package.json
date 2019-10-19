@@ -130,7 +130,8 @@
         "bancadofrade.com": "gulp bancadofrade.com",
         "pitbull.bet": "gulp pitbull.bet",
         "amazonsports.bet": "gulp amazonsports.bet",
-        "bets188.bet": "gulp bets188.bet"
+        "bets188.bet": "gulp bets188.bet",
+        "esportegol.com": "gulp esportegol.com"
     },
     "private": true,
     "dependencies": {
