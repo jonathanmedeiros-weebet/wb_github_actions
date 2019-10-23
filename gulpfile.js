@@ -1142,3 +1142,11 @@ gulp.task('pointbets.net', function (done) {
         styles: "--header: #e20145; --foreground-header: #fff; --sidebar-right:#e20145; --foreground-sidebar-right: #fff; --sidebar-left: #e20145; --foreground-sidebar-left: #fff; --highlight: #ffdd00; --foreground-highlight: #fff; --odds: #033d58; --foreground-odds: #fff; --event-time: #e20145"
     });
 });
+
+gulp.task('arena365.wee.bet', function (done) {
+    tasks(done, {
+        host: "arena365.wee.bet",
+        banca: "Arena 365",
+        styles: ""
+    });
+});
