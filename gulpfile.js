@@ -1126,3 +1126,19 @@ gulp.task('esportegol.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('futebolmania.wee.bet', function (done) {
+    tasks(done, {
+        host: "futebolmania.wee.bet",
+        banca: "Futebol Mania",
+        styles: "",
+    });
+});
+
+gulp.task('pointbets.net', function (done) {
+    tasks(done, {
+        host: "pointbets.net",
+        banca: "Point Bets",
+        styles: "--header: #e20145; --foreground-header: #fff; --sidebar-right:#e20145; --foreground-sidebar-right: #fff; --sidebar-left: #e20145; --foreground-sidebar-left: #fff; --highlight: #ffdd00; --foreground-highlight: #fff; --odds: #033d58; --foreground-odds: #fff; --event-time: #e20145"
+    });
+});
