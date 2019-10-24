@@ -1148,7 +1148,7 @@ gulp.task('arena365.wee.bet', function (done) {
         host: "arena365.wee.bet",
         banca: "Arena 365",
         styles: "--header: #040327; --foreground-header: #fff; --sidebar-right:#ff0000; --foreground-sidebar-right: #fff; --sidebar-left: #ff0000; --foreground-sidebar-left: #fff; --highlight: #040327; --foreground-highlight: #fff; --odds: #d83418; --foreground-odds: #fff; --event-time: #040327",
-        aditional_styles: ".odds .selecionado span, .odds .inner-odd:hover span{ color: #fff!important; } #fixed-bar-bilhete{ background: #040327!important; }"
+        aditional_styles: ".odds .selecionado span, .odds .inner-odd:hover span{ color: #fff!important; } #fixed-bar-bilhete{ background: #040327!important; } .remover-item .fa-times, .fechar-pre-bilhete{ color: #fff!important; } .sidebar-brand img{ max-height: 150px!important; max-width: 250px!important; padding-right: 25px!important; }"
     });
 });
 
