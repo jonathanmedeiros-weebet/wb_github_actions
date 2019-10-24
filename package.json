@@ -134,7 +134,8 @@
         "esportegol.com": "gulp esportegol.com",
         "futebolmania.wee.bet": "gulp futebolmania.wee.bet",
         "pointbets.net": "gulp pointbets.net",
-        "arena365.wee.bet": "gulp arena365.wee.bet"
+        "arena365.wee.bet": "gulp arena365.wee.bet",
+        "clickaposte.wee.bet": "gulp clickaposte.wee.bet"
     },
     "private": true,
     "dependencies": {
