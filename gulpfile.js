@@ -1159,3 +1159,11 @@ gulp.task('clickaposte.wee.bet', function (done) {
         styles: "--header: #9bb301; --foreground-header: #fff; --sidebar-right:#9bb301; --foreground-sidebar-right: #fff; --sidebar-left: #9bb301; --foreground-sidebar-left: #fff; --highlight: #03b1f6; --foreground-highlight: #fff; --odds: #154a6b; --foreground-odds: #fff; --event-time: #154a6b",
     });
 });
+
+gulp.task('esportbets10.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportbets10.wee.bet",
+        banca: "Esport Bets 10",
+        styles: "",
+    });
+});
