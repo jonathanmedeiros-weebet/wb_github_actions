@@ -1164,6 +1164,6 @@ gulp.task('esportbets10.wee.bet', function (done) {
     tasks(done, {
         host: "esportbets10.wee.bet",
         banca: "Esport Bets 10",
-        styles: "",
+        styles: "--header: #263238; --sidebar-right:#424242; --sidebar-left: #424242; --odds: #212121;",
     });
 });
