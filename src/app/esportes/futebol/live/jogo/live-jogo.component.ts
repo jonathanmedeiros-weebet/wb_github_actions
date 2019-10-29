@@ -50,11 +50,13 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe(itens => this.itens = itens);
 
         if (this.jogoId) {
+            this.liveService.entrarSalaEvento(this.jogoId);
             this.getJogo(this.jogoId);
         }
     }
 
     ngOnDestroy() {
+        this.liveService.sairSalaEvento(this.jogoId);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -80,14 +82,14 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 jogo => {
                     this.jogo = jogo;
                     this.mapearCotacoes(jogo.cotacoes);
-                    this.live();
+                    this.live(id);
                 },
                 error => this.handleError(error)
             );
     }
 
-    live() {
-        this.liveService.getJogo(this.jogo._id)
+    live(eventoId) {
+        this.liveService.getEventoCompleto(eventoId)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (jogo: Jogo) => {
