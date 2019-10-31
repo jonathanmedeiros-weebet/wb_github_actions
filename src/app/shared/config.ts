@@ -2,6 +2,7 @@
 const _host = 'http://weebet.local';
 const _center = 'http://localhost:3002';
 const _live = 'http://localhost:3003';
+const _stats = 'http://localhost:3004';
 
 export const config: any = {
     BANCA_NOME: 'DEMO',
@@ -9,6 +10,7 @@ export const config: any = {
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
     LIVE_HOST: _live,
+    STATS_HOST: _stats,
     CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,

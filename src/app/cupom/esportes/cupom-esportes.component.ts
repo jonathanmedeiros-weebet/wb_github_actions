@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { LiveService } from './../../services';
+import { StatsService } from './../../services';
 import { Estatistica } from './../../models';
 import * as moment from 'moment';
 
@@ -19,22 +19,26 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
-        private liveService: LiveService
+        private statsService: StatsService
     ) { }
 
     ngOnInit() {
         this.ativarAoVivo();
+
         if (this.aposta.passador.percentualPremio > 0) {
             this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
         }
     }
 
     ngOnDestroy() {
+        this.statsService.disconnect();
         this.unsub$.next();
         this.unsub$.complete();
     }
 
     ativarAoVivo() {
+        const eventosId = [];
+
         this.aposta.itens.forEach(item => {
             const horarioInicio = moment(item.jogo.horario).subtract('10', 'm');
             const horarioFim = moment(item.jogo.horario).add('2', 'hours');
@@ -55,7 +59,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
                 estatistica.time_b_escanteios = jogo.time_b_escanteios;
                 estatistica.resultado = item.resultado;
             } else if (!item.removido && moment().isSameOrAfter(horarioInicio) && moment().isBefore(horarioFim)) {
-                this.liveStats(item.jogo.fi);
+                eventosId.push(item.jogo.fi);
             }
 
             if (item.removido) {
@@ -63,17 +67,26 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
                 estatistica.resultado = 'cancelado';
             }
         });
+
+        if (eventosId.length > 0) {
+            this.statsService.connect();
+
+            eventosId.forEach(id => {
+                this.statsService.entrarSalaStats(id);
+                this.liveStats(id);
+            });
+        }
     }
 
     liveStats(jogoId) {
-        // this.liveService.getEventosStats(jogoId)
-        //     .pipe(takeUntil(this.unsub$))
-        //     .subscribe(
-        //         stats => {
-        //             this.stats[jogoId] = stats;
-        //             this.vericarResultadoItem(jogoId);
-        //         }
-        //     );
+        this.statsService.getEventoStats(jogoId)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                stats => {
+                    this.stats[jogoId] = stats;
+                    this.vericarResultadoItem(jogoId);
+                }
+            );
     }
 
     resultadoClass(resultado) {

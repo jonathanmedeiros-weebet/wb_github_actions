@@ -54,14 +54,4 @@ export class LiveService {
 
         return observable;
     }
-
-    // getEventosStats(jogoId): Observable<any> {
-    //     const observable = new Observable(observer => {
-    //         this.socket.on(`stats-${jogoId}`, (data) => {
-    //             observer.next(data);
-    //         });
-    //     });
-
-    //     return observable;
-    // }
 }
