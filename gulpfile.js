@@ -1167,3 +1167,11 @@ gulp.task('esportbets10.wee.bet', function (done) {
         styles: "--header: #263238; --sidebar-right:#424242; --sidebar-left: #424242; --odds: #212121;",
     });
 });
+
+gulp.task('betslobo.wee.bet', function (done) {
+    tasks(done, {
+        host: "betslobo.wee.bet",
+        banca: "Bets Lobo",
+        styles: ""
+    });
+});
