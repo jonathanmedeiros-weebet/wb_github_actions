@@ -9,9 +9,7 @@ export class LiveService {
     private url = config.LIVE_HOST;
     private socket;
 
-    constructor() {
-        this.connect();
-     }
+    constructor() { }
 
     connect() {
         this.socket = io(this.url);
@@ -52,26 +50,18 @@ export class LiveService {
             this.socket.on(`evento-${eventoId}`, (data) => {
                 observer.next(data);
             });
-
-            // return () => {
-            //     this.socket.disconnect();
-            // };
         });
 
         return observable;
     }
 
-    getEventosStats(jogoId): Observable<any> {
-        const observable = new Observable(observer => {
-            this.socket.on(`stats-${jogoId}`, (data) => {
-                observer.next(data);
-            });
+    // getEventosStats(jogoId): Observable<any> {
+    //     const observable = new Observable(observer => {
+    //         this.socket.on(`stats-${jogoId}`, (data) => {
+    //             observer.next(data);
+    //         });
+    //     });
 
-            // return () => {
-            //     this.socket.disconnect();
-            // };
-        });
-
-        return observable;
-    }
+    //     return observable;
+    // }
 }
