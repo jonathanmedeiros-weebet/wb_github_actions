@@ -1,7 +1,7 @@
 
 const _host = '//[HOST]';
 const _center = 'https://center.wee.bet';
-const _live = 'https://streaming.wee.bet';
+const _live = 'http://3.229.100.29:3003';
 
 export const config: any = {
     BANCA_NOME: '[BANCA]',
