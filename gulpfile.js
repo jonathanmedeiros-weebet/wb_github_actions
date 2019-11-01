@@ -1180,6 +1180,6 @@ gulp.task('betsluck.wee.bet', function (done) {
     tasks(done, {
         host: "betsluck.wee.bet",
         banca: "Bets Luck",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:red; --foreground-odds: #fff; --event-time: red",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#292b74; --foreground-odds: #fff; --event-time: #292b74",
     });
 });
