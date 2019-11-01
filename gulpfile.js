@@ -1175,3 +1175,11 @@ gulp.task('betslobo.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsluck.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsluck.wee.bet",
+        banca: "Bets Luck",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:red; --foreground-odds: #fff; --event-time: red",
+    });
+});

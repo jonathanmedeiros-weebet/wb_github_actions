@@ -68,14 +68,14 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             }
         });
 
-        if (eventosId.length > 0) {
+        /*if (eventosId.length > 0) {
             this.statsService.connect();
 
             eventosId.forEach(id => {
                 this.statsService.entrarSalaStats(id);
                 this.liveStats(id);
             });
-        }
+        }*/
     }
 
     liveStats(jogoId) {

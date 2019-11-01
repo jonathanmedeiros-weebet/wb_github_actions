@@ -137,6 +137,7 @@
         "arena365.wee.bet": "gulp arena365.wee.bet",
         "clickaposte.wee.bet": "gulp clickaposte.wee.bet",
         "esportbets10.wee.bet": "gulp esportbets10.wee.bet",
+        "betsluck.wee.bet": "gulp betsluck.wee.bet",
         "betslobo.wee.bet": "gulp betslobo.wee.bet"
     },
     "private": true,
