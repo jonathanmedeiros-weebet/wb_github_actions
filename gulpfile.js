@@ -589,9 +589,9 @@ gulp.task('bet2.wee.bet', function (done) {
 
 gulp.task('bet3.wee.bet', function (done) {
     tasks(done, {
-        host: "bet3.wee.bet",
-        banca: "Bet3",
-        styles: ""
+        host: "esportbets10.wee.bet",
+        banca: "Esport Bets 10",
+        styles: "--header: #263238; --sidebar-right:#424242; --sidebar-left: #424242; --odds: #212121;",
     });
 });
 
