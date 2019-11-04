@@ -138,7 +138,8 @@
         "clickaposte.wee.bet": "gulp clickaposte.wee.bet",
         "esportbets10.wee.bet": "gulp esportbets10.wee.bet",
         "betsluck.wee.bet": "gulp betsluck.wee.bet",
-        "betslobo.wee.bet": "gulp betslobo.wee.bet"
+        "betslobo.wee.bet": "gulp betslobo.wee.bet",
+        "footbets.wee.bet": "gulp footbets.wee.bet"
     },
     "private": true,
     "dependencies": {
