@@ -6,7 +6,7 @@ const _live = 'http://localhost:3002';
 const _stats = 'http://localhost:3004';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'SUPER BET SPORT',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
