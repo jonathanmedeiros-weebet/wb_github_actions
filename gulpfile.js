@@ -1191,5 +1191,6 @@ gulp.task('footbets.wee.bet', function (done) {
         host: "footbets.wee.bet",
         banca: "footbets",
         styles: "--header: #002d92; --foreground-header: #fff; --sidebar-right:#002d92; --foreground-sidebar-right: #fff; --sidebar-left: #002d92; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#1142ff; --foreground-odds: #fff; --event-time: #1142ff",
+        adad: "{ \"id\":83857183, \"campeonatoId\":\"97cef26eb2557427d4ebfd2e1417eb6a\", \"campeonatoNome\":\"ESTADOS UNIDOS: UPSL\", \"eventId\":2037670, \"sportId\":1, \"timeANome\":\"FURY FC\", \"timeANomeOriginal\":\"FURY FC\", \"timeBNome\":\"TOROS NEZA USA\", \"timeBNomeOriginal\":\"TOROS NEZA USA\", \"nome\":\"FURY FC x TOROS NEZA USA\", \"horario\":\"2019-11-04T00:00:00.000Z\", \"cancelado\":false, \"finalizado\":false, \"aoVivo\":true }"
     });
 });
