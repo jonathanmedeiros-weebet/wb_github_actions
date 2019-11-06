@@ -1174,7 +1174,7 @@ gulp.task('betslobo.wee.bet', function (done) {
     tasks(done, {
         host: "betslobo.wee.bet",
         banca: "Bets Lobo",
-        styles: ""
+        styles: "--header: #14312d; --foreground-header: #fff; --sidebar-right:#14312d; --foreground-sidebar-right: #fff; --sidebar-left: #14312d; --foreground-sidebar-left: #fff; --highlight: #ffb11a; --foreground-highlight: #fff; --odds: #2d887f; --foreground-odds: #fff; --event-time: #14312d; --league: #fade9f; --foreground-league: #000;"
     });
 });
 
