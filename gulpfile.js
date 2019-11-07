@@ -1193,3 +1193,11 @@ gulp.task('footbets.wee.bet', function (done) {
         styles: "--header: #002d92; --foreground-header: #fff; --sidebar-right:#002d92; --foreground-sidebar-right: #fff; --sidebar-left: #002d92; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#1142ff; --foreground-odds: #fff; --event-time: #1142ff",
     });
 });
+
+gulp.task('imperiosportve.com', function (done) {
+    tasks(done, {
+        host: "imperiosportve.com",
+        banca: "imperio sportve",
+        styles: "--header: #42050a; --foreground-header: #fff; --sidebar-right:#42050a; --foreground-sidebar-right: #fff; --sidebar-left: #42050a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#d91c16; --foreground-odds: #fff; --event-time: #d91c16",
+    });
+});
