@@ -136,7 +136,11 @@
         "pointbets.net": "gulp pointbets.net",
         "arena365.wee.bet": "gulp arena365.wee.bet",
         "clickaposte.wee.bet": "gulp clickaposte.wee.bet",
-        "esportbets10.wee.bet": "gulp esportbets10.wee.bet"
+        "esportbets10.wee.bet": "gulp esportbets10.wee.bet",
+        "betsluck.wee.bet": "gulp betsluck.wee.bet",
+        "betslobo.wee.bet": "gulp betslobo.wee.bet",
+        "footbets.wee.bet": "gulp footbets.wee.bet",
+        "imperiosportve.com": "gulp imperiosportve.com"
     },
     "private": true,
     "dependencies": {

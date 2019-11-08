@@ -6,54 +6,50 @@ import { config } from './../../config';
 
 @Injectable()
 export class LiveService {
-    private url = config.CENTER_HOST;
+    private url = config.LIVE_HOST;
     private socket;
 
     constructor() { }
 
-    getJogos(): Observable<any> {
-        const observable = new Observable(observer => {
-            this.socket = io(this.url);
+    connect() {
+        this.socket = io(this.url);
+    }
 
-            this.socket.on('jogo-ao-vivo', (data) => {
+    disconnect() {
+        this.socket.disconnect();
+    }
+
+    entrarSalaEventos() {
+        this.socket.emit('sala-eventos-entrar');
+    }
+
+    sairSalaEventos() {
+        this.socket.emit('sala-eventos-sair');
+    }
+
+    entrarSalaEvento(eventId) {
+        this.socket.emit('sala-evento-entrar', eventId);
+    }
+
+    sairSalaEvento(eventId) {
+        this.socket.emit('sala-evento-sair', eventId);
+    }
+
+    getEventos(): Observable<any> {
+        const observable = new Observable(observer => {
+            this.socket.on('eventos', (data) => {
                 observer.next(data);
             });
-
-            return () => {
-                this.socket.disconnect();
-            };
         });
 
         return observable;
     }
 
-    getJogo(jogoId): Observable<any> {
+    getEventoCompleto(eventoId): Observable<any> {
         const observable = new Observable(observer => {
-            this.socket = io(this.url);
-
-            this.socket.on(`live-${jogoId}`, (data) => {
+            this.socket.on(`evento-${eventoId}`, (data) => {
                 observer.next(data);
             });
-
-            return () => {
-                this.socket.disconnect();
-            };
-        });
-
-        return observable;
-    }
-
-    getJogoStats(jogoId): Observable<any> {
-        const observable = new Observable(observer => {
-            this.socket = io(this.url);
-
-            this.socket.on(`stats-${jogoId}`, (data) => {
-                observer.next(data);
-            });
-
-            return () => {
-                this.socket.disconnect();
-            };
         });
 
         return observable;

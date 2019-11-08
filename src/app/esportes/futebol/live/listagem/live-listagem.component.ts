@@ -37,6 +37,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
+        this.liveService.entrarSalaEventos();
         this.definindoAlturas();
 
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
@@ -97,6 +98,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     ngOnDestroy() {
+        this.liveService.sairSalaEventos();
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -110,7 +112,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     live() {
-        this.liveService.getJogos()
+        this.liveService.getEventos()
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: any) => {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);

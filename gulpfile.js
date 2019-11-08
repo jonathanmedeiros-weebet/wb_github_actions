@@ -589,9 +589,9 @@ gulp.task('bet2.wee.bet', function (done) {
 
 gulp.task('bet3.wee.bet', function (done) {
     tasks(done, {
-        host: "bet3.wee.bet",
-        banca: "Bet3",
-        styles: ""
+        host: "esportbets10.wee.bet",
+        banca: "Esport Bets 10",
+        styles: "--header: #263238; --sidebar-right:#424242; --sidebar-left: #424242; --odds: #212121;",
     });
 });
 
@@ -1167,5 +1167,37 @@ gulp.task('esportbets10.wee.bet', function (done) {
         host: "esportbets10.wee.bet",
         banca: "Esport Bets 10",
         styles: "--header: #263238; --sidebar-right:#424242; --sidebar-left: #424242; --odds: #212121;",
+    });
+});
+
+gulp.task('betslobo.wee.bet', function (done) {
+    tasks(done, {
+        host: "betslobo.wee.bet",
+        banca: "Bets Lobo",
+        styles: "--header: #14312d; --foreground-header: #fff; --sidebar-right:#14312d; --foreground-sidebar-right: #fff; --sidebar-left: #14312d; --foreground-sidebar-left: #fff; --highlight: #ffb11a; --foreground-highlight: #fff; --odds: #2d887f; --foreground-odds: #fff; --event-time: #14312d; --league: #fade9f; --foreground-league: #000;"
+    });
+});
+
+gulp.task('betsluck.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsluck.wee.bet",
+        banca: "Bets Luck",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#292b74; --foreground-odds: #fff; --event-time: #292b74",
+    });
+});
+
+gulp.task('footbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "footbets.wee.bet",
+        banca: "footbets",
+        styles: "--header: #002d92; --foreground-header: #fff; --sidebar-right:#002d92; --foreground-sidebar-right: #fff; --sidebar-left: #002d92; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#1142ff; --foreground-odds: #fff; --event-time: #1142ff",
+    });
+});
+
+gulp.task('imperiosportve.com', function (done) {
+    tasks(done, {
+        host: "imperiosportve.com",
+        banca: "imperio sportve",
+        styles: "--header: #42050a; --foreground-header: #fff; --sidebar-right:#42050a; --foreground-sidebar-right: #fff; --sidebar-left: #42050a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#d91c16; --foreground-odds: #fff; --event-time: #d91c16",
     });
 });
