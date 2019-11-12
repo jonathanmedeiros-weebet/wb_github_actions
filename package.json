@@ -140,7 +140,8 @@
         "betsluck.wee.bet": "gulp betsluck.wee.bet",
         "betslobo.wee.bet": "gulp betslobo.wee.bet",
         "footbets.wee.bet": "gulp footbets.wee.bet",
-        "imperiosportve.com": "gulp imperiosportve.com"
+        "imperiosportve.com": "gulp imperiosportve.com",
+        "cpsports.wee.bet": "gulp cpsports.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -1201,3 +1201,11 @@ gulp.task('imperiosportve.com', function (done) {
         styles: "--header: #42050a; --foreground-header: #fff; --sidebar-right:#42050a; --foreground-sidebar-right: #fff; --sidebar-left: #42050a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#d91c16; --foreground-odds: #fff; --event-time: #d91c16",
     });
 });
+
+gulp.task('cpsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "cpsports.wee.bet",
+        banca: "CP Sports",
+        styles: ""
+    });
+});
