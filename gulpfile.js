@@ -1209,3 +1209,19 @@ gulp.task('cpsports.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsports81.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsports81.wee.bet",
+        banca: "Bet Sports 81",
+        styles: ""
+    });
+});
+
+gulp.task('jcapostas.wee.bet', function (done) {
+    tasks(done, {
+        host: "jcapostas.wee.bet",
+        banca: "JC Apostas",
+        styles: "--header: #292729;--sidebar-right:#292729;--sidebar-left: #292729;--highlight: #e4e4e4;--odds: #15814f;"
+    });
+});
