@@ -1214,7 +1214,7 @@ gulp.task('betsports81.wee.bet', function (done) {
     tasks(done, {
         host: "betsports81.wee.bet",
         banca: "Bet Sports 81",
-        styles: ""
+        styles: "--header: #000;--sidebar-right:#000;--sidebar-left: #000;--highlight: #e4e4e4;--odds: #0fc100;"
     });
 });
 
