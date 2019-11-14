@@ -1225,3 +1225,11 @@ gulp.task('jcapostas.wee.bet', function (done) {
         styles: "--header: #292729;--sidebar-right:#292729;--sidebar-left: #292729;--highlight: #e4e4e4;--odds: #15814f;"
     });
 });
+
+gulp.task('sportmais.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportmais.wee.bet",
+        banca: "Sport Mais",
+        styles: ""
+    });
+});
