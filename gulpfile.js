@@ -1233,3 +1233,11 @@ gulp.task('sportmais.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('boodog.wee.bet', function (done) {
+    tasks(done, {
+        host: "boodog.wee.bet",
+        banca: "Boodog",
+        styles: ""
+    });
+});

@@ -144,7 +144,8 @@
         "cpsports.wee.bet": "gulp cpsports.wee.bet",
         "jcapostas.wee.bet": "gulp jcapostas.wee.bet",
         "betsports81.wee.bet": "gulp betsports81.wee.bet",
-        "sportmais.wee.bet": "gulp sportmais.wee.bet"
+        "sportmais.wee.bet": "gulp sportmais.wee.bet",
+        "boodog.wee.bet": "gulp boodog.wee.bet"
     },
     "private": true,
     "dependencies": {
