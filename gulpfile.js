@@ -1246,6 +1246,6 @@ gulp.task('betsgo.wee.bet', function (done) {
     tasks(done, {
         host: "betsgo.wee.bet",
         banca: "Bets Go",
-        styles: ""
+        styles: "--header: #404040;--sidebar-right:#404040;--sidebar-left: #404040;--highlight: #ff5900;--odds: #000;"
     });
 });
