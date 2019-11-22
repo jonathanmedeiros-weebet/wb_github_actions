@@ -1241,3 +1241,11 @@ gulp.task('boodog.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsgo.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsgo.wee.bet",
+        banca: "Bets Go",
+        styles: ""
+    });
+});
