@@ -1238,7 +1238,7 @@ gulp.task('boodog.wee.bet', function (done) {
     tasks(done, {
         host: "boodog.wee.bet",
         banca: "Boodog",
-        styles: ""
+        styles: "--header: #0138a5;--highlight: #c60b31;--odds: #0138a5;"
     });
 });
 
