@@ -1249,3 +1249,11 @@ gulp.task('betsgo.wee.bet', function (done) {
         " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff}"
     });
 });
+
+gulp.task('rubinhosports.wee.bet', function (done) {
+    tasks(done, {
+        host: "rubinhosports.wee.bet",
+        banca: "Rubinho Sports",
+        styles: "",
+    });
+});
