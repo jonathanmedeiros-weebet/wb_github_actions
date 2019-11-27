@@ -1273,3 +1273,11 @@ gulp.task('goobet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('kingesporte.wee.bet', function (done) {
+    tasks(done, {
+        host: "kingesporte.wee.bet",
+        banca: "King Esporte",
+        styles: "",
+    });
+});
