@@ -1257,3 +1257,11 @@ gulp.task('rubinhosports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betspremio.net', function (done) {
+    tasks(done, {
+        host: "betspremio.net",
+        banca: "Bets Prêmio",
+        styles: "",
+    });
+});
