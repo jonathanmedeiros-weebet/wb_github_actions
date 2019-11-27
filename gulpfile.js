@@ -1265,3 +1265,11 @@ gulp.task('betspremio.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('goobet.wee.bet', function (done) {
+    tasks(done, {
+        host: "goobet.wee.bet",
+        banca: "Goo Bet",
+        styles: "",
+    });
+});

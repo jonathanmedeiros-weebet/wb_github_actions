@@ -148,7 +148,8 @@
         "boodog.wee.bet": "gulp boodog.wee.bet",
         "betsgo.wee.bet": "gulp betsgo.wee.bet",
         "rubinhosports.wee.bet": "gulp rubinhosports.wee.bet",
-        "betspremio.net": "gulp betspremio.net"
+        "betspremio.net": "gulp betspremio.net",
+        "goobet.wee.bet": "gulp goobet.wee.bet"
     },
     "private": true,
     "dependencies": {
