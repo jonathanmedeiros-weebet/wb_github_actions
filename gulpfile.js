@@ -1281,3 +1281,11 @@ gulp.task('kingesporte.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('centraldosesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "centraldosesportes.wee.bet",
+        banca: "Central dos Esportes",
+        styles: "",
+    });
+});
