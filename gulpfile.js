@@ -1246,7 +1246,7 @@ gulp.task('betsgo.wee.bet', function (done) {
         banca: "Bets Go",
         styles: "--header: #404040;--foreground-header:#fff;--sidebar-right:#404040;--sidebar-left: #404040;--highlight: #ff5900;--foreground-highlight:#fff;--odds: #999999;--event-time: #999999; --league: #ff5900;",
         aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ color:#000;border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-        " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff}"
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff}"
     });
 });
 
@@ -1294,6 +1294,7 @@ gulp.task('betdez.com', function (done) {
     tasks(done, {
         host: "betdez.com",
         banca: "BetDez",
-        styles: "",
+        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: red; --foreground-highlight: #003f7f; --odds: #d9a535; --foreground-odds: #fff; --event-time: red;",
+        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
     });
 });
