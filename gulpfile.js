@@ -1289,3 +1289,11 @@ gulp.task('centraldosesportes.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betdez.com', function (done) {
+    tasks(done, {
+        host: "betdez.com",
+        banca: "BetDez",
+        styles: "",
+    });
+});
