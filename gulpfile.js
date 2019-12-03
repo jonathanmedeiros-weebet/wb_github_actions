@@ -1298,3 +1298,11 @@ gulp.task('betdez.com', function (done) {
         aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
     });
 });
+
+gulp.task('ibiapababets.wee.bet', function (done) {
+    tasks(done, {
+        host: "ibiapababets.wee.bet",
+        banca: "Ibiapaba Bets",
+        styles: ""
+    });
+});
