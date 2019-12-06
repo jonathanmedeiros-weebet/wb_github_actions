@@ -253,11 +253,12 @@ gulp.task('maisporte.com', function (done) {
     });
 });
 
-gulp.task('maisportes.com', function (done) {
+gulp.task('bdcbets.com', function (done) {
     tasks(done, {
-        host: "maisportes.com",
-        banca: "Maisportes",
-        styles: "--header: #011e46; --foreground-header: #b1c5e0; --sidebar-right:#ce0000; --foreground-sidebar-right: #fff; --sidebar-left: #ce0000; --foreground-sidebar-left: #fff; --highlight:#4CAF50; --foreground-highlight: #aec3d8; --odds: #011e46; --foreground-odds: #fff;",
+        host: "bdcbets.com",
+        banca: "BDC Bets",
+        styles: "--header: #ff6600; --foreground-header: #fff; --sidebar-right:#ff6600; --foreground-sidebar-right: #fff; --sidebar-left: #ff6600; --foreground-sidebar-left: #fff; --highlight: #fa231b; --foreground-highlight: #fff; --odds: #000; --foreground-odds: #fff; --event-time: #fa231b;",
+        //aditional_styles: ".pre-bilhete .div-inputs{ background-color: #21bb3f!important; } .mais-opcoes{ color: #21bb3f!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #000!important; } "
     });
 });
 
