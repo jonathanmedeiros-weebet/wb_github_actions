@@ -1306,3 +1306,11 @@ gulp.task('ibiapababets.wee.bet', function (done) {
         styles: "--header:#fdcc29;--foreground-header:#000;--sidebar-right:#88918c;--foreground-sidebar-right:#fff;--sidebar-left:#88918c;--foreground-sidebar-left:#fff;--odds:#fdcc29;--foreground-odds: #000;--highlight:#faa954;--foreground-highlight:#000;"
     });
 });
+
+gulp.task('petrolinabets.wee.bet', function (done) {
+    tasks(done, {
+        host: "petrolinabets.wee.bet",
+        banca: "Petrolina Bets",
+        styles: ""
+    });
+});

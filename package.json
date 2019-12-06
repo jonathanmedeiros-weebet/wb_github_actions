@@ -153,7 +153,8 @@
         "kingesporte.wee.bet": "gulp kingesporte.wee.bet",
         "centraldosesportes.wee.bet": "gulp centraldosesportes.wee.bet",
         "betdez.com": "gulp betdez.com",
-        "ibiapababets.wee.bet": "gulp ibiapababets.wee.bet"
+        "ibiapababets.wee.bet": "gulp ibiapababets.wee.bet",
+        "petrolinabets.wee.bet": "gulp petrolinabets.wee.bet"
     },
     "private": true,
     "dependencies": {
