@@ -1315,3 +1315,12 @@ gulp.task('petrolinabets.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sportenetmania365.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportenetmania365.wee.bet",
+        banca: "Sporte Net Mania 365",
+        styles: ""
+    });
+});
+
