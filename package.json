@@ -155,7 +155,8 @@
         "betdez.com": "gulp betdez.com",
         "ibiapababets.wee.bet": "gulp ibiapababets.wee.bet",
         "petrolinabets.wee.bet": "gulp petrolinabets.wee.bet",
-        "sportenetmania365.wee.bet": "gulp sportenetmania365.wee.bet"
+        "sportenetmania365.wee.bet": "gulp sportenetmania365.wee.bet",
+        "mhbets.wee.bet": "gulp mhbets.wee.bet"
     },
     "private": true,
     "dependencies": {

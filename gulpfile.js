@@ -1324,3 +1324,11 @@ gulp.task('sportenetmania365.wee.bet', function (done) {
     });
 });
 
+gulp.task('mhbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "mhbets.wee.bet",
+        banca: "MH Bets",
+        styles: "--header:#6a0f0a;--foreground-header:#fff;--sidebar-right:#6a0f0a;--foreground-sidebar-right:#fff;--sidebar-left:#6a0f0a;--foreground-sidebar-left:#fff;--odds:#0c204a;--foreground-odds: #fff; --foreground-highlight:#000;"
+    });
+});
+
