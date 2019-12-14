@@ -1332,3 +1332,12 @@ gulp.task('mhbets.wee.bet', function (done) {
     });
 });
 
+gulp.task('caciquesports.com', function (done) {
+    tasks(done, {
+        host: "caciquesports.com",
+        banca: "Cacique Sports",
+        styles: ""
+    });
+});
+
+
