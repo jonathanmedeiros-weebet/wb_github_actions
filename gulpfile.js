@@ -1340,4 +1340,11 @@ gulp.task('caciquesports.com', function (done) {
     });
 });
 
+gulp.task('rexpasports.wee.bet', function (done) {
+    tasks(done, {
+        host: "rexpasports.wee.bet",
+        banca: "REXPA Sports",
+        styles: ""
+    });
+});
 

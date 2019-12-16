@@ -157,7 +157,8 @@
         "petrolinabets.wee.bet": "gulp petrolinabets.wee.bet",
         "sportenetmania365.wee.bet": "gulp sportenetmania365.wee.bet",
         "mhbets.wee.bet": "gulp mhbets.wee.bet",
-        "caciquesports.com": "gulp caciquesports.com"
+        "caciquesports.com": "gulp caciquesports.com",
+        "rexpasports.wee.bet": "gulp rexpasports.wee.bet"
     },
     "private": true,
     "dependencies": {
