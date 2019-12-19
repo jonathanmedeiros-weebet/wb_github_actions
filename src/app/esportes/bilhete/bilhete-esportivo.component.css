@@ -193,11 +193,15 @@
 
 @keyframes flash{
     0% {
-        border: none;
+        /* border: none; */
+        background: var(--odds);
+        color: var(--foreground-odds);
     }
 
     100% {
-        border: 2px solid var(--highlight);
+        /* border: 2px solid var(--highlight); */
+        background: var(--highlight);
+        color: var(--foreground-highlight);
     }
 }
 
