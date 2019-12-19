@@ -177,6 +177,30 @@
     padding-right: 20px;
 }
 
+.mensagem-mudanca{
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding:15px;
+}
+
+#aceitar-mudancas{
+    animation-name: flash;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flash{
+    0% {
+        border: none;
+    }
+
+    100% {
+        border: 2px solid var(--highlight);
+    }
+}
+
 @media only screen and (max-width: 668px) {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;

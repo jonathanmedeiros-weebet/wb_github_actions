@@ -34,14 +34,24 @@
                 </div>
             </div>
             <div class="form-group">
-                <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
-                    Apostar <b>({{itens.length}})</b>
-                </button>
-                <ng-template #btnProcessando>
-                    <button disabled class="btn btn-custom btn-block">
-                        Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
-                        <i class="fa fa-spinner fa-spin"></i>
+                <ng-container *ngIf="mudancas;else btnApostar">
+                    <div class="mensagem-mudanca">
+                        As cotações selecionadas sofreram alterações.
+                    </div>
+                    <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas" class="btn btn-custom btn-block">
+                        Aceitar Alterações
                     </button>
+                </ng-container>
+                <ng-template #btnApostar>
+                    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
+                        Apostar <b>({{itens.length}})</b>
+                    </button>
+                    <ng-template #btnProcessando>
+                        <button disabled class="btn btn-custom btn-block">
+                            Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </ng-template>
                 </ng-template>
             </div>
         </form>

@@ -26,8 +26,15 @@ export class ErrorService {
                 message = 'Ocorreu um problema inesperado, entre em contato com a banca.';
             }
         }
+
+        let result;
+        if (error.error.errors.code) {
+            result = error.error.errors;
+        } else {
+            result = message;
+        }
         // return an observable with a user-facing error message
-        return throwError(message);
+        return throwError(result);
     }
 
 }

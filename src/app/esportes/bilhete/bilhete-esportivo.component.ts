@@ -20,6 +20,7 @@ import * as clone from 'clone';
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', { static: true }) apostaDeslogadoModal;
+    mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
     opcoes;
@@ -58,6 +59,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
         this.setDelay();
+
+        this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
         const itens = this.bilheteService.getItens();
         if (itens) {
@@ -257,10 +260,28 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.modalRef.componentInstance.codigo = id;
     }
 
-    handleError(msg) {
+    handleError(error) {
         this.enableSubmit();
-        this.messageService.error(msg);
         this.stopDelayInterval();
+
+        if (typeof error === 'string') {
+            this.messageService.error(error);
+        } else {
+            if (error.code === 17) {
+                error.data.forEach(item => {
+                    this.itens.value.forEach(i => {
+                        if (item.jogoId === i.jogo_id) {
+                            i.cotacao.valor = item.valor;
+                        }
+                    });
+                });
+
+                localStorage.setItem('mudancas', 'true');
+                this.bilheteService.atualizarItens(this.itens.value);
+                this.calcularPossibilidadeGanho(this.form.value.valor);
+                this.mudancas = true;
+            }
+        }
     }
 
     openCupom() {
@@ -344,5 +365,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     setDelay() {
         this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
+    }
+
+    aceitarMudancas() {
+        localStorage.setItem('mudancas', 'false');
+        this.mudancas = false;
     }
 }
