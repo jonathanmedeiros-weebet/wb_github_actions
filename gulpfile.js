@@ -1348,3 +1348,19 @@ gulp.task('rexpasports.wee.bet', function (done) {
     });
 });
 
+gulp.task('betsporte.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsporte.wee.bet",
+        banca: "Bet Sporte",
+        styles: "--header:#030248;--foreground-header:#fff;--sidebar-right:#030248;--foreground-sidebar-right:#fff;--sidebar-left:#030248;--foreground-sidebar-left:#fff;--odds:#008701;--foreground-odds: #fff; --highlight:#000; --foreground-highlight:#fff; --foreground-selected-odds:#fff ;"
+    });
+});
+
+gulp.task('quininhadasorte.wee.bet', function (done) {
+    tasks(done, {
+        host: "quininhadasorte.wee.bet",
+        banca: "Quininha da Sorte",
+        styles: ""
+    });
+});
+
