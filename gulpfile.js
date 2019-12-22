@@ -1336,7 +1336,9 @@ gulp.task('caciquesports.com', function (done) {
     tasks(done, {
         host: "caciquesports.com",
         banca: "Cacique Sports",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffb74c; --foreground-highlight: #ffb74c; --odds: #ef4539; --foreground-odds: #333; --event-time: #324c78; --league: #324c78; --foreground-league: #fff;",
+        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #2d2d2d!important } .jogos, .eventos{ background: #2d2d2d!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #2d2d2d!important; } .footer{ background-color:#2d2d2d!important; }" +
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #324c78; color: white; } .inside-event .tipo-apostas{ background-color: #2d2d2d!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .sidebar-brand img { max-width: 242px!important; } "
     });
 });
 
