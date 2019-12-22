@@ -1346,7 +1346,7 @@ gulp.task('rexpasports.wee.bet', function (done) {
     tasks(done, {
         host: "rexpasports.wee.bet",
         banca: "REXPA Sports",
-        styles: ""
+        styles: "--header:#5b86da;--foreground-header:#fff;--sidebar-right:#5b86da;--foreground-sidebar-right:#fff;--sidebar-left:#072550;--foreground-sidebar-left:#fff;--odds:#08254f;--foreground-odds: #fff; --foreground-highlight:#fff; --highlight:#2e82b8;"
     });
 });
 
