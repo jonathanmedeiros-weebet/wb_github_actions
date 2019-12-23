@@ -160,7 +160,8 @@
         "caciquesports.com": "gulp caciquesports.com",
         "rexpasports.wee.bet": "gulp rexpasports.wee.bet",
         "betsporte.wee.bet": "gulp betsporte.wee.bet",
-        "quininhadasorte.wee.bet": "gulp quininhadasorte.wee.bet"
+        "quininhadasorte.wee.bet": "gulp quininhadasorte.wee.bet",
+        "brsports365.com": "gulp brsports365.com"
     },
     "private": true,
     "dependencies": {

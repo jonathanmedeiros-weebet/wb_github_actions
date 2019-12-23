@@ -1366,3 +1366,10 @@ gulp.task('quininhadasorte.wee.bet', function (done) {
     });
 });
 
+gulp.task('brsports365.com', function (done) {
+    tasks(done, {
+        host: "brsports365.com",
+        banca: "BR Sports 365",
+        styles: ""
+    });
+});
