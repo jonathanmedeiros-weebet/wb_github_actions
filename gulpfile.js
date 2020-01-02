@@ -1372,3 +1372,11 @@ gulp.task('brsports365.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('esportebetvip.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportebetvip.wee.bet",
+        banca: "Esporte Bet Vip",
+        styles: ""
+    });
+});
