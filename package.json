@@ -162,7 +162,8 @@
         "betsporte.wee.bet": "gulp betsporte.wee.bet",
         "quininhadasorte.wee.bet": "gulp quininhadasorte.wee.bet",
         "brsports365.com": "gulp brsports365.com",
-        "esportebetvip.wee.bet": "gulp esportebetvip.wee.bet"
+        "esportebetvip.wee.bet": "gulp esportebetvip.wee.bet",
+        "sportingnet.bet": "gulp sportingnet.bet"
     },
     "private": true,
     "dependencies": {

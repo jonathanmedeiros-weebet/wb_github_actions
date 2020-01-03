@@ -1380,3 +1380,11 @@ gulp.task('esportebetvip.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sportingnet.bet', function (done) {
+    tasks(done, {
+        host: "sportingnet.bet",
+        banca: "Sporting Net",
+        styles: ""
+    });
+});
