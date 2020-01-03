@@ -1385,6 +1385,6 @@ gulp.task('sportingnet.bet', function (done) {
     tasks(done, {
         host: "sportingnet.bet",
         banca: "Sporting Net",
-        styles: ""
+        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;"
     });
 });
