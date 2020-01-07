@@ -1388,3 +1388,11 @@ gulp.task('sportingnet.bet', function (done) {
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;"
     });
 });
+
+gulp.task('tribetsports.com', function (done) {
+    tasks(done, {
+        host: "tribetsports.com",
+        banca: "TriBet Sports",
+        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--foreground-sidebar-right:#fff;--sidebar-left:#000;--foreground-sidebar-left:#fff;--highlight:#a31312;--foreground-highlight:#fff;--odds:#ff0100;--foreground-odds:#fff;--foreground-selected-odds:#fff;"
+    });
+});
