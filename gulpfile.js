@@ -1397,3 +1397,11 @@ gulp.task('tribetsports.com', function (done) {
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--foreground-sidebar-right:#fff;--sidebar-left:#000;--foreground-sidebar-left:#fff;--highlight:#a31312;--foreground-highlight:#fff;--odds:#ff0100;--foreground-odds:#fff;--foreground-selected-odds:#fff;"
     });
 });
+
+gulp.task('sportshow.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportshow.wee.bet",
+        banca: "Sport Show",
+        styles: ""
+    });
+});

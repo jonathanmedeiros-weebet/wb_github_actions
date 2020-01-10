@@ -164,7 +164,8 @@
         "brsports365.com": "gulp brsports365.com",
         "esportebetvip.wee.bet": "gulp esportebetvip.wee.bet",
         "sportingnet.bet": "gulp sportingnet.bet",
-        "tribetsports.com": "gulp tribetsports.com"
+        "tribetsports.com": "gulp tribetsports.com",
+        "sportshow.wee.bet": "gulp sportshow.wee.bet"
     },
     "private": true,
     "dependencies": {
