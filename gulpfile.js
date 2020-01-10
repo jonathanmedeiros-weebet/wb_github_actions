@@ -430,7 +430,8 @@ gulp.task('sumobet365.wee.bet', function (done) {
     tasks(done, {
         host: "sumobet365.wee.bet",
         banca: "Sumo Bet 365",
-        styles: "--header: #00ab4f; --foreground-header: #b1c5e0; --sidebar-right:#00ab4f; --foreground-sidebar-right: #fff; --sidebar-left: #00ab4f; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #73c48c; --foreground-odds: #fff;"
+        styles: "--header: #00ab4f; --foreground-header: #b1c5e0; --sidebar-right:#00ab4f; --foreground-sidebar-right: #fff; --sidebar-left: #00ab4f; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #000; --odds: #73c48c; --foreground-odds: #fff;",
+        aditional_styles: ".campeonato-header{ background-color: red!important;color:#fff!important; }"
     });
 });
 
