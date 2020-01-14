@@ -274,7 +274,7 @@ gulp.task('major.wee.bet', function (done) {
     tasks(done, {
         host: "major.wee.bet",
         banca: "Major",
-        styles: " --league: yellow;"
+        styles: "--header:#046eef;--sidebar-right:#046eef;--sidebar-left:#046eef;--odds:#011e46;"
     });
 });
 
