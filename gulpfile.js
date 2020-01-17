@@ -1405,3 +1405,11 @@ gulp.task('sportshow.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsplacar.club', function (done) {
+    tasks(done, {
+        host: "betsplacar.club",
+        banca: "Bets Placar",
+        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;"
+    });
+});
