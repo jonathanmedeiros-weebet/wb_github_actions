@@ -17,7 +17,7 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
     mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;
-    odds = ['bkt_casa', 'bkt_fora', 'bkt_total_pontos_par', 'bkt_total_pontos_impar'];
+    odds = [];
     aux = [];
     unsub$ = new Subject();
 
@@ -27,7 +27,6 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private router: Router
     ) { }
 
     ngOnInit() {
@@ -44,13 +43,13 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
             );
 
         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+        this.odds = this.paramsService.getOddsBasqueteAtivas();
 
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
                 this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
-
 
                 if (params['campeonato']) {
                     const campeonatoId = params['campeonato'];

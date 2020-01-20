@@ -144,5 +144,23 @@ export class ParametrosLocaisService {
     minutoEncerramentoAoVivo() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.minuto_encerramento_aovivo : null;
     }
+
+    getOddsBasqueteAtivas() {
+        const tiposAposta = this.getTiposAposta();
+        const oddsBasquete = ['bkt_casa', 'bkt_fora', 'bkt_total_pontos_par', 'bkt_total_pontos_impar'];
+        const oddsBasqueteAtivas = [];
+
+        for (const j in tiposAposta) {
+            if (tiposAposta.hasOwnProperty(j)) {
+                for (const k of oddsBasquete) {
+                    if (k === j) {
+                        oddsBasqueteAtivas.push(k);
+                    }
+                }
+            }
+        }
+
+        return oddsBasqueteAtivas;
+    }
 }
 
