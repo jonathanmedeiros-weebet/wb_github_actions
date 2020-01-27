@@ -166,7 +166,8 @@
         "sportingnet.bet": "gulp sportingnet.bet",
         "tribetsports.com": "gulp tribetsports.com",
         "sportshow.wee.bet": "gulp sportshow.wee.bet",
-        "betsplacar.club": "gulp betsplacar.club"
+        "betsplacar.club": "gulp betsplacar.club",
+        "futebolbet.wee.bet": "gulp futebolbet.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -1413,3 +1413,11 @@ gulp.task('betsplacar.club', function (done) {
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;"
     });
 });
+
+gulp.task('futebolbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "futebolbet.wee.bet",
+        banca: "Futebol Bet",
+        styles: ""
+    });
+});
