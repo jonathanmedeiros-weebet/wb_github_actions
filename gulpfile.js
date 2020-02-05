@@ -1190,7 +1190,7 @@ gulp.task('footbets.wee.bet', function (done) {
     tasks(done, {
         host: "footbets.wee.bet",
         banca: "footbets",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:red; --foreground-odds: #fff; --event-time: #1142ff",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:red; --foreground-odds: #fff; --event-time: #312782",
         aditional_styles: ".mais-opcoes{ color: var(--event-time)!important; }",
     });
 });
