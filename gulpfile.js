@@ -1314,7 +1314,7 @@ gulp.task('petrolinabets.wee.bet', function (done) {
     tasks(done, {
         host: "petrolinabets.wee.bet",
         banca: "Petrolina Bets",
-        styles: "--header:#fdcc29;--foreground-header:#000;--sidebar-right:#88918c;--foreground-sidebar-right:#fff;--sidebar-left:#88918c;--foreground-sidebar-left:#fff;--odds:#fdcc29;--foreground-odds: #000;--highlight:#faa954;--foreground-highlight:#000;"
+        styles: "--header:#e20145;--foreground-header:#fff;--sidebar-right:#e20145;--foreground-sidebar-right:#fff;--sidebar-left:#e20145;--foreground-sidebar-left:#fff;--odds:#043d57;--foreground-odds: #fff;--highlight:#faa954;--foreground-highlight:#fff;--event-time:#e00144"
     });
 });
 
