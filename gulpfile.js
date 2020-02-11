@@ -1422,3 +1422,11 @@ gulp.task('futebolbet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('bet358.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet358.wee.bet",
+        banca: "Bet 358",
+        styles: ""
+    });
+});
