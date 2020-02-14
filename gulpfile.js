@@ -908,7 +908,7 @@ gulp.task('gooldeplaca.com.br', function (done) {
     tasks(done, {
         host: "gooldeplaca.com.br",
         banca: "Gool de Placa",
-        styles: "--header: #258aa7; --foreground-header: #fff; --sidebar-right:#258aa7; --foreground-sidebar-right: #fff; --sidebar-left: #258aa7; --foreground-sidebar-left: #fff; --odds: #000; --event-time: #e84233; --highlight: #fbef3c; --foreground-highlight: #fff;  --league: #e84233; --foreground-league: #fff;n",
+        styles: "--header: #258aa7; --foreground-header: #fff; --sidebar-right:#258aa7; --foreground-sidebar-right: #fff; --sidebar-left: #258aa7; --foreground-sidebar-left: #fff; --odds: #258aa7; --event-time: #e84233; --highlight: #fbef3c; --foreground-highlight: #fff;  --league: #e84233; --foreground-league: #fff;n",
         aditional_styles: ".pre-bilhete .div-inputs{ background-color: #e84233!important; } .mais-opcoes{ color: #e84233!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; } .remover-item .fa-times{ color: #e84233!important; } "
     });
 });
