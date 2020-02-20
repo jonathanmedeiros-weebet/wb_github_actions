@@ -1429,6 +1429,6 @@ gulp.task('bet358.wee.bet', function (done) {
     tasks(done, {
         host: "bet358.wee.bet",
         banca: "Bet 358",
-        styles: "--header:#4cba61;--foreground-header:#fff;--sidebar-right:#4cba61;--foreground-sidebar-right:#fff;--sidebar-left:#4cba61;--foreground-sidebar-left:#fff;--foreground-highlight:#fff;--odds:#000;--foreground-odds:#fff;--foreground-selected-odds:#000;"
+        styles: "--header:#016534;--foreground-header:#fff;--sidebar-right:#016534;--foreground-sidebar-right:#fff;--sidebar-left:#016534;--foreground-sidebar-left:#fff;--foreground-highlight:#fff;--odds:#000;--foreground-odds:#fff;--foreground-selected-odds:#000;"
     });
 });
