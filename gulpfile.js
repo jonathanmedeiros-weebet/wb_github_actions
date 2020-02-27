@@ -1432,3 +1432,11 @@ gulp.task('bet358.wee.bet', function (done) {
         styles: "--header:#016534;--foreground-header:#fff;--sidebar-right:#016534;--foreground-sidebar-right:#fff;--sidebar-left:#016534;--foreground-sidebar-left:#fff;--foreground-highlight:#fff;--odds:#000;--foreground-odds:#fff;--foreground-selected-odds:#000;"
     });
 });
+
+gulp.task('esportebetsvip.com', function (done) {
+    tasks(done, {
+        host: "esportebetsvip.com",
+        banca: "Esporte Bets Vip",
+        styles: ""
+    });
+});
