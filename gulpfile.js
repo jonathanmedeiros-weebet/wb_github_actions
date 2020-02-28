@@ -1445,6 +1445,6 @@ gulp.task('betsma.club', function (done) {
     tasks(done, {
         host: "betsma.club",
         banca: "betsma",
-        styles: ""
+        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
     });
 });
