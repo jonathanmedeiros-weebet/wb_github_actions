@@ -186,23 +186,8 @@
 }
 
 #aceitar-mudancas{
-    animation-name: flash;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes flash{
-    0% {
-        /* border: none; */
-        background: var(--odds);
-        color: var(--foreground-odds);
-    }
-
-    100% {
-        /* border: 2px solid var(--highlight); */
-        background: var(--highlight);
-        color: var(--foreground-highlight);
-    }
+    background-color: var(--highlight);
+    color: #000;
 }
 
 @media only screen and (max-width: 668px) {

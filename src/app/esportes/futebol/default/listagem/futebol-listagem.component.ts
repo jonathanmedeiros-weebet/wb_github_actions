@@ -131,6 +131,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     addCotacao(jogo: Jogo, cotacao) {
+        console.log('cotacao', cotacao);
         let modificado = false;
         const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
         const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));

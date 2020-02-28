@@ -36,9 +36,10 @@
             <div class="form-group">
                 <ng-container *ngIf="mudancas;else btnApostar">
                     <div class="mensagem-mudanca">
-                        As cotações selecionadas sofreram alterações.
+                        Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta
                     </div>
-                    <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas" class="btn btn-custom btn-block">
+                    <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas"
+                        class="btn btn-custom btn-block">
                         Aceitar Alterações
                     </button>
                 </ng-container>

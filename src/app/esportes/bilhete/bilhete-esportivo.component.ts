@@ -33,6 +33,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     cartaoApostaForm: FormGroup;
     apostaAoVivo = false;
     delay = 20;
+    cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
 
