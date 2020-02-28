@@ -1437,7 +1437,8 @@ gulp.task('esportebetsvip.com', function (done) {
     tasks(done, {
         host: "esportebetsvip.com",
         banca: "Esporte Bets Vip",
-        styles: "--header:#f44236; --foreground-header:#fff; --sidebar-left: #f44236; --sidebar-right: #f44236; --odds: #003ae6; --foreground-highlight: #fff;"
+        styles: "--header:#f44236; --foreground-header:#fff; --sidebar-left: #f44236; --sidebar-right: #f44236; --odds: #003ae6; --foreground-highlight: #fff;",
+        aditional_styles: ".jogo-selecionado .fa-times{color:#000;}"
     });
 });
 
