@@ -126,6 +126,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     removerItem(index) {
         this.itens.removeAt(index);
+
+        if (this.itens.length === 0) {
+            this.aceitarMudancas();
+        }
+
         this.bilheteService.atualizarItens(this.itens.value);
     }
 
@@ -135,7 +140,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
 
         this.itens.value.forEach(item => {
-            if (item.aoVivo) {
+            if (item.ao_vivo) {
                 aovivo = true;
             }
 
@@ -144,7 +149,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 item.cotacao.chave,
                 item.jogo._id,
                 item.jogo.favorito,
-                item.aoVivo
+                item.ao_vivo
             );
         });
 
@@ -272,7 +277,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 error.data.forEach(item => {
                     this.itens.value.forEach(i => {
                         if (item.jogoId === i.jogo_id) {
+                            i.cotacao_antiga_valor = i.cotacao.valor;
                             i.cotacao.valor = item.valor;
+                            i.mudanca = true;
                         }
                     });
                 });

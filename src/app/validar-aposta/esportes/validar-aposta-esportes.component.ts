@@ -73,7 +73,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
             return {
                 jogo_id: item.jogo.id,
                 jogo_nome: item.jogo.nome,
-                aoVivo: item.ao_vivo,
+                ao_vivo: item.ao_vivo,
                 cotacao: {
                     chave: item.aposta_tipo.chave,
                     nome: item.odd_nome,

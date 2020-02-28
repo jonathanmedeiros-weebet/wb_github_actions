@@ -72,7 +72,7 @@
                     <div class="campeonato-nome">
                         {{item.jogo.campeonato.nome}}
                     </div>
-                    <div class="cotacao">
+                    <div class="cotacao" [ngClass]="{'mudou': item.mudanca}">
                         {{item.cotacao.chave | oddCategoria}}:
                         <span *ngIf="item.cotacao.nome; else chave">
                             {{item.cotacao.nome}}
@@ -88,6 +88,10 @@
                         <span class="valor">
                             ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
                                 item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo }})
+                            <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
+                                ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
+                                    item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo}})
+                            </del>
                         </span>
                     </div>
                 </div>

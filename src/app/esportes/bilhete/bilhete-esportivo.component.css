@@ -190,6 +190,10 @@
     color: #000;
 }
 
+.mudou{
+    border: 1px solid var(--highlight);
+}
+
 @media only screen and (max-width: 668px) {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
