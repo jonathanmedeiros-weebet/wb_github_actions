@@ -1440,3 +1440,11 @@ gulp.task('esportebetsvip.com', function (done) {
         styles: "--header:#f44236; --foreground-header:#fff; --sidebar-left: #f44236; --sidebar-right: #f44236; --odds: #003ae6; --foreground-highlight: #fff;"
     });
 });
+
+gulp.task('betsma.club', function (done) {
+    tasks(done, {
+        host: "betsma.club",
+        banca: "betsma",
+        styles: ""
+    });
+});
