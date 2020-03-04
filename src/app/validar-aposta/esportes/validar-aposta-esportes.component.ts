@@ -12,7 +12,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
     MessageService,
-    ApostaEsportivaService
+    ApostaEsportivaService,
+    HelperService
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 
@@ -33,7 +34,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private helper: HelperService
     ) {
         super();
     }
@@ -119,7 +121,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                     this.preApostaItens.forEach(i => {
                         if (item.jogoId == i.jogo.id) {
                             i.cotacao_antiga = i.cotacao_atual;
-                            i.cotacao_atual = item.valor;
+                            i.cotacao_atual = this.helper.calcularCotacao(item.valor, i.aposta_tipo.chave, i.jogo.id, i.jogo.favorito, i.ao_vivo);
                             i.cotacao_base = item.valor;
 
                             this.cotacoesMudaram = true;

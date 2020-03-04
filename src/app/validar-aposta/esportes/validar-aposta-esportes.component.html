@@ -25,7 +25,7 @@
                                 {{item.aposta_tipo.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
                             </ng-template>
                         </ng-template>
-                        <span class="valor" *ngIf="item.cotacao == item.cotacao_atual; else cotacoesMudaram">
+                        <span class="valor" *ngIf="item.cotacao_antiga == item.cotacao_atual; else cotacoesMudaram">
                             ({{item.cotacao_atual | number: '1.0-2'}})
                         </span>
                         <ng-template #cotacoesMudaram>
@@ -73,7 +73,7 @@
         <b>Atenção <i class="fa fa-warning"></i></b>
         <br>
         <br>
-        Algumas cotações mudaram, verifique com atenção antes de validar a pré-aposta.
+        Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.
     </div>
 
     <div class="alert alert-warning" *ngIf="cotacoesMudaram">
