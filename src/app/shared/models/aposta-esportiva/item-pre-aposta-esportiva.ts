@@ -8,5 +8,5 @@ export class ItemPreApostaEsportiva {
     aposta_tipo_id: number;
     aposta_tipo: ApostaEsportivaTipo;
     cotacao: number;
-    aoVivo: boolean;
+    ao_vivo: boolean;
 }
