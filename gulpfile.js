@@ -1251,7 +1251,7 @@ gulp.task('betsgo.wee.bet', function (done) {
         banca: "Bets Go",
         styles: "--header: #404040;--foreground-header:#fff;--sidebar-right:#404040;--sidebar-left: #404040;--highlight: #ff5900;--foreground-highlight:#fff;--odds: #999999;--event-time: #999999; --league: #ff5900;",
         aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ color:#000;border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff} .div-back .fa-times{ color: #fff!important; } .nav-pills a {color: #fff!important;}"
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff} .div-back .fa-times{ color: #fff!important; }"
     });
 });
 
@@ -1437,6 +1437,23 @@ gulp.task('esportebetsvip.com', function (done) {
     tasks(done, {
         host: "esportebetsvip.com",
         banca: "Esporte Bets Vip",
-        styles: "--header:#f44236; --foreground-header:#fff; --sidebar-left: #f44236; --sidebar-right: #f44236; --odds: #003ae6; --foreground-highlight: #fff;"
+        styles: "--header:#f44236; --foreground-header:#fff; --sidebar-left: #f44236; --sidebar-right: #f44236; --odds: #003ae6; --foreground-highlight: #fff;",
+        aditional_styles: ".jogo-selecionado .fa-times{color:#000;} .fechar-pre-bilhete .fa-times{color:#000;}"
+    });
+});
+
+gulp.task('betsma.club', function (done) {
+    tasks(done, {
+        host: "betsma.club",
+        banca: "betsma",
+        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
+    });
+});
+
+gulp.task('eurobet333.wee.bet', function (done) {
+    tasks(done, {
+        host: "eurobet333.wee.bet",
+        banca: "EUROBET 333",
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #d70101; --highlight: #f8c803; --foreground-highlight: #fff;"
     });
 });
