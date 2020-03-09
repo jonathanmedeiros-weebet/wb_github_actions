@@ -170,7 +170,8 @@
         "futebolbet.wee.bet": "gulp futebolbet.wee.bet",
         "bet358.wee.bet": "gulp bet358.wee.bet",
         "esportebetsvip.com": "gulp esportebetsvip.com",
-        "betsma.club": "gulp betsma.club"
+        "betsma.club": "gulp betsma.club",
+        "eurobet333.wee.bet": "gulp eurobet333.wee.bet"
     },
     "private": true,
     "dependencies": {

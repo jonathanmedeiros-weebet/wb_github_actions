@@ -1449,3 +1449,11 @@ gulp.task('betsma.club', function (done) {
         styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
     });
 });
+
+gulp.task('eurobet333.wee.bet', function (done) {
+    tasks(done, {
+        host: "eurobet333.wee.bet",
+        banca: "EUROBET 333",
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #d70101; --highlight: #f8c803; --foreground-highlight: #fff;"
+    });
+});
