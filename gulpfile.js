@@ -1349,7 +1349,8 @@ gulp.task('rexpasports.wee.bet', function (done) {
     tasks(done, {
         host: "rexpasports.wee.bet",
         banca: "REXPA Sports",
-        styles: "--header:#5b86da;--foreground-header:#fff;--sidebar-right:#5b86da;--foreground-sidebar-right:#fff;--sidebar-left:#072550;--foreground-sidebar-left:#fff;--odds:#08254f;--foreground-odds: #fff; --foreground-highlight:#fff; --highlight:#2e82b8;"
+        styles: "--header:#00342a;--foreground-header:#fff;--sidebar-right:#00342a;--foreground-sidebar-right:#fff;--sidebar-left:#00342a;--foreground-sidebar-left:#fff;--odds:#ffca40;--foreground-odds: #000; --foreground-highlight:#fff; --highlight:#648ee2;--league: #367fa8;--foreground-league: #fff;"
+        // styles: "--header:#5b86da;--foreground-header:#fff;--sidebar-right:#5b86da;--foreground-sidebar-right:#fff;--sidebar-left:#072550;--foreground-sidebar-left:#fff;--odds:#08254f;--foreground-odds: #fff; --foreground-highlight:#fff; --highlight:#2e82b8;"
     });
 });
 
@@ -1454,6 +1455,7 @@ gulp.task('eurobet333.wee.bet', function (done) {
     tasks(done, {
         host: "eurobet333.wee.bet",
         banca: "EUROBET 333",
-        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #d70101; --highlight: #f8c803; --foreground-highlight: #fff;"
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #d70101; --highlight: #f8c803; --foreground-highlight: #fff;",
+        aditional_styles: ".navbar-mobile{background-color:#fff!important;} @media only screen and (max-width: 600px) {.menu-conta #navbarDropdown{color:#000;}}"
     });
 });
