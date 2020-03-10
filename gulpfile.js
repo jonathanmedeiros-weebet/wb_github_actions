@@ -1459,3 +1459,11 @@ gulp.task('eurobet333.wee.bet', function (done) {
         aditional_styles: ".navbar-mobile{background-color:#fff!important;} @media only screen and (max-width: 600px) {.menu-conta #navbarDropdown{color:#000;}}"
     });
 });
+
+gulp.task('elitebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "elitebet.wee.bet",
+        banca: "ELITEBET",
+        styles: ""
+    });
+});
