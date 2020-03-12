@@ -1349,7 +1349,8 @@ gulp.task('rexpasports.wee.bet', function (done) {
     tasks(done, {
         host: "rexpasports.wee.bet",
         banca: "REXPA Sports",
-        styles: "--header:#00342a;--foreground-header:#fff;--sidebar-right:#00342a;--foreground-sidebar-right:#fff;--sidebar-left:#00342a;--foreground-sidebar-left:#fff;--odds:#ffca40;--foreground-odds: #000; --foreground-highlight:#fff; --highlight:#648ee2;--league: #367fa8;--foreground-league: #fff;"
+        styles: "--header:#00342a;--foreground-header:#fff;--sidebar-right:#00342a;--foreground-sidebar-right:#fff;--sidebar-left:#00342a;--foreground-sidebar-left:#fff;--odds:#ffca40;--foreground-odds: #000; --foreground-highlight:#fff; --highlight:#648ee2;--league: #367fa8;--foreground-league: #fff;",
+        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);} .tipo-apostas .tipo-aposta h4 {background: #247451;color: #fff;padding: 5px;}",
         // styles: "--header:#5b86da;--foreground-header:#fff;--sidebar-right:#5b86da;--foreground-sidebar-right:#fff;--sidebar-left:#072550;--foreground-sidebar-left:#fff;--odds:#08254f;--foreground-odds: #fff; --foreground-highlight:#fff; --highlight:#2e82b8;"
     });
 });

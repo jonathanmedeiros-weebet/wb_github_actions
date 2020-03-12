@@ -35,6 +35,14 @@
     text-align: center;
 }
 
+.odds .odd{
+    width: 50%;
+}
+
+.principal .odd{
+    width: 33%;
+}
+
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;
@@ -42,5 +50,9 @@
 
     .indentificacao .div-back{
         top: 0;
+    }
+
+    .odds .odd{
+        width: 100%;
     }
 }
