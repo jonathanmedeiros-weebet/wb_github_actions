@@ -8,12 +8,12 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
     MessageService,
-    ApostaEsportivaService
+    ApostaEsportivaService,
+    HelperService
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 
@@ -26,13 +26,16 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     @Output() success = new EventEmitter();
     @Input() preAposta: any;
     preApostaItens = [];
+    cotacoesVinheramDifentes = false;
+    cotacoesMudaram = false;
     disabled = false;
     unsub$ = new Subject();
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private helper: HelperService
     ) {
         super();
     }
@@ -40,10 +43,17 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     ngOnInit() {
         this.createForm();
         this.preApostaItens = this.preAposta.itens;
+
+        this.preApostaItens.forEach(item => {
+            if (item.cotacao_antiga != item.cotacao_atual) {
+                this.cotacoesVinheramDifentes = true;
+            }
+        });
         this.form.patchValue(this.preAposta);
     }
 
     ngOnDestroy() {
+        this.cotacoesVinheramDifentes = false;
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -65,6 +75,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
     submit() {
         this.disabledSubmit();
+        this.cotacoesVinheramDifentes = false;
+        this.cotacoesMudaram = false;
 
         const values = this.form.value;
         values.preaposta_id = this.preAposta.id;
@@ -73,11 +85,11 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
             return {
                 jogo_id: item.jogo.id,
                 jogo_nome: item.jogo.nome,
-                aoVivo: item.ao_vivo,
+                ao_vivo: item.ao_vivo,
                 cotacao: {
                     chave: item.aposta_tipo.chave,
                     nome: item.odd_nome,
-                    valor: item.cotacao
+                    valor: item.cotacao_base
                 }
             };
         });
@@ -98,9 +110,26 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         }
     }
 
-    handleError(msg) {
+    handleError(error) {
         this.enableSubmit();
-        this.messageService.error(msg);
+
+        if (typeof error === 'string') {
+            this.messageService.error(error);
+        } else {
+            if (error.code === 17) {
+                error.data.forEach(item => {
+                    this.preApostaItens.forEach(i => {
+                        if (item.jogoId == i.jogo.id) {
+                            i.cotacao_antiga = i.cotacao_atual;
+                            i.cotacao_atual = this.helper.calcularCotacao(item.valor, i.aposta_tipo.chave, i.jogo.id, i.jogo.favorito, i.ao_vivo);
+                            i.cotacao_base = item.valor;
+
+                            this.cotacoesMudaram = true;
+                        }
+                    });
+                });
+            }
+        }
     }
 
     disabledSubmit() {

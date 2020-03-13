@@ -25,9 +25,17 @@
                                 {{item.aposta_tipo.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
                             </ng-template>
                         </ng-template>
-                        <span class="valor">
-                            ( {{item.cotacao | number: '1.0-2'}} )
+                        <span class="valor" *ngIf="item.cotacao_antiga == item.cotacao_atual; else cotacoesMudaram">
+                            ({{item.cotacao_atual | number: '1.0-2'}})
                         </span>
+                        <ng-template #cotacoesMudaram>
+                            <span class="valor">
+                                ({{item.cotacao_atual | number: '1.0-2'}})
+                            </span>
+                            <del style="color: red;">
+                                ({{item.cotacao_antiga | number: '1.0-2'}})
+                            </del>
+                        </ng-template>
                     </div>
                 </div>
                 <div class="remover-item" (click)="removerItem(i)">
@@ -43,8 +51,7 @@
                 Total de jogos: {{preAposta.itens.length}}
             </p>
             <p>
-                Estimativa de ganho: {{form.value.valor * preAposta.cotacao | currency:
-                            'BRL':'symbol':'1.2'}}
+                Estimativa de ganho: {{form.value.valor * preAposta.cotacao | currency: 'BRL':'symbol':'1.2'}}
             </p>
             <div class="form-group">
                 <label for="">Apostador</label>
@@ -62,5 +69,27 @@
         </div>
     </div>
 
-    <button type="submit" [disabled]="disabled" class="btn btn-custom">Validar</button>
+    <div class="alert alert-warning" *ngIf="cotacoesVinheramDifentes">
+        <b>Atenção <i class="fa fa-warning"></i></b>
+        <br>
+        <br>
+        Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.
+    </div>
+
+    <div class="alert alert-warning" *ngIf="cotacoesMudaram">
+        <b>Atenção <i class="fa fa-warning"></i></b>
+        <br>
+        <br>
+        <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a pré-aposta.
+    </div>
+
+    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom">
+        Validar
+    </button>
+    <ng-template #btnProcessando>
+        <button disabled class="btn btn-custom">
+            Processando...
+            <i class="fa fa-spinner fa-spin"></i>
+        </button>
+    </ng-template>
 </form>

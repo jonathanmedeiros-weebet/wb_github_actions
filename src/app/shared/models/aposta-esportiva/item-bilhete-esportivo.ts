@@ -4,7 +4,7 @@ import { Cotacao } from './cotacao';
 export class ItemBilheteEsportivo {
     constructor() { }
 
-    aoVivo: boolean;
+    ao_vivo: boolean;
     jogo_id: any;
     cotacao: Cotacao;
     jogo: Jogo;

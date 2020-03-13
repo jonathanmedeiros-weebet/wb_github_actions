@@ -101,11 +101,13 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         const indexOdd = this.itens.findIndex(i => (i.jogo._id === evento._id) && (i.cotacao.chave === cotacao.chave));
 
         const item = {
-            aoVivo: evento.ao_vivo,
+            ao_vivo: evento.ao_vivo,
             jogo_id: evento._id,
             jogo_nome: evento.nome,
             cotacao: cotacao,
-            jogo: evento
+            jogo: evento,
+            mudanca: false,
+            cotacao_antiga_valor: null
         };
 
         if (indexGame >= 0) {

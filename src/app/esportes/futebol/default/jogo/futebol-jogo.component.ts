@@ -278,11 +278,13 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         });
 
         const item = {
-            aoVivo: jogo.ao_vivo,
+            ao_vivo: jogo.ao_vivo,
             jogo_id: jogo._id,
             jogo_nome: jogo.nome,
             cotacao: cotacao,
-            jogo: jogo
+            jogo: jogo,
+            modificado: false,
+            cotacao_antiga: null
         };
 
         if (indexGame >= 0) {

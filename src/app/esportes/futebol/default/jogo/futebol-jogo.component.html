@@ -20,7 +20,7 @@
             <ngb-tabset type="pills">
                 <ngb-tab title="Tempo Completo">
                     <ng-template ngbTabContent>
-                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds)">
+                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds)">
                             <h4>{{odds[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes"

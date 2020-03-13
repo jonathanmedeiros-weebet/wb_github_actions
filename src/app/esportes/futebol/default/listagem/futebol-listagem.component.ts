@@ -136,11 +136,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
 
         const item = {
-            aoVivo: jogo.ao_vivo,
+            ao_vivo: jogo.ao_vivo,
             jogo_id: jogo._id,
             jogo_nome: jogo.nome,
             cotacao: cotacao,
-            jogo: jogo
+            jogo: jogo,
+            mudanca: false,
+            cotacao_antiga_valor: null
         };
 
         if (indexGame >= 0) {
