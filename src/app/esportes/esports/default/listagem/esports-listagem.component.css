@@ -1,0 +1,63 @@
+.eventos{
+    background-color: #fff;
+    padding-bottom: 4px;
+}
+
+.evento{
+    padding: 0px 10px;
+}
+
+.evento-selecionado{
+    background: var(--selected-event);
+    color: var(--foreground-selected-event)!important;
+    cursor: auto;
+}
+
+.indentificacao{
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.indentificacao .nome, .indentificacao .nome-mobile{
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.exibir-mais{
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .indentificacao .nome{
+        display: block;
+    }
+
+    .indentificacao .nome-mobile{
+         display: none;
+    }
+
+    .odds .odd {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .content-sports {
+        padding-bottom: 90px;
+    }
+
+    .indentificacao .nome{
+        display: none;
+    }
+
+    .indentificacao .nome-mobile{
+        display: block;
+    }
+
+    .odds .odd {
+        width: 100%;
+    }
+}

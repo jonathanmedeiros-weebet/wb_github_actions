@@ -1,0 +1,66 @@
+<div class="content-sports content-sports-list">
+    <div class="wrap-sticky">
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+        <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
+            <div class="campeonato-header">
+                Nenhum evento encontrado!
+            </div>
+        </div>
+
+        <div *ngIf="!showLoadingIndicator">
+            <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
+                <div class="campeonato-header">
+                    <span class="campeonato-nome">{{campeonato.nome}}</span>
+                </div>
+                <div class="eventos">
+                    <ng-container *ngFor="let evento of campeonato.jogos">
+                        <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento._id)"
+                            (click)="selecionarJogo(evento._id)">
+                            <div class="indentificacao">
+                                <div class="horario">
+                                    {{evento.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                                </div>
+                                <div class="nome">
+                                    {{evento.nome}}
+                                </div>
+                                <div class="nome-mobile">
+                                    <div>{{evento.time_a_nome}}</div>
+                                    <div>{{evento.time_b_nome}}</div>
+                                </div>
+                            </div>
+                            <div class="odds">
+                                <div class="odd" *ngFor="let cotacao of evento.cotacoes"
+                                    (click)="addCotacao(evento, cotacao)">
+                                    <div
+                                        class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                        <span class="nome">
+                                            {{cotacao.chave | tipoApostaEsports:evento.time_a_nome:evento.time_b_nome}}
+                                        </span>
+                                        <span class="valor">
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:evento.favorito}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="cotacaoManualFaltando(evento._id, evento.cotacoes)">
+                                    <div class="odd" *ngFor="let cotacao of cotacoesFaltando[evento._id]"
+                                        (click)="addCotacao(evento, cotacao)">
+                                        <div
+                                            class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                            <span class="nome">
+                                                {{cotacao.chave | tipoApostaEsports:evento.time_a_nome:evento.time_b_nome}}
+                                            </span>
+                                            <span class="valor">
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:evento.favorito}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

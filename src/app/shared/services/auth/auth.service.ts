@@ -125,6 +125,18 @@ export class AuthService {
         return result;
     }
 
+    hasEsports() {
+        let result = false;
+
+        const opcoes = this.paramsService.getOpcoes();
+        if (opcoes) {
+            result = opcoes.esports;
+        }
+
+        return result;
+    }
+
+
     hasLoterias() {
         let result = false;
 
