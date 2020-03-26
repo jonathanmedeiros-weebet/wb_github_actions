@@ -22,8 +22,8 @@
                                 </div>
                             </div>
                             <div class="odds">
-                                <div class="odd" *ngFor="let odd of desafio.odds">
-                                    <div class="inner-odd">
+                                <div class="odd" *ngFor="let odd of desafio.odds" (click)="addCotacao(desafio, odd)">
+                                    <div class="inner-odd {{itensSelecionados[odd.id] ? 'selecionado' : ''}}">
                                         <span class="nome">
                                             {{odd.nome}}
                                         </span>

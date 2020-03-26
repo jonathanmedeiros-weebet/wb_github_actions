@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 
 import { catchError, map, take } from 'rxjs/operators';
 
-import { HeadersService } from './utils/headers.service';
-import { ErrorService } from './utils/error.service';
-import { DesafioCategoria } from '../../models';
-import { config } from '../config';
+import { HeadersService } from '../utils/headers.service';
+import { ErrorService } from '../utils/error.service';
+import { DesafioCategoria } from '../../../models';
+import { config } from '../../config';
 
 @Injectable()
 export class DesafioCategoriaService {

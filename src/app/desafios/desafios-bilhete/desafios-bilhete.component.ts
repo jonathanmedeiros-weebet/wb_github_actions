@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {
-    ParametrosLocaisService, MessageService, AuthService
+    ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 
@@ -39,6 +39,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private renderer: Renderer2,
         private el: ElementRef,
         private fb: FormBuilder,
+        private bilheteService: DesafioBilheteService,
         private paramsService: ParametrosLocaisService,
     ) {
         super();
@@ -47,6 +48,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     ngOnInit() {
         this.createForm();
         this.definirAltura();
+        this.subcribeItens();
     }
 
     definirAltura() {
@@ -72,6 +74,15 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         });
     }
 
+    subcribeItens() {
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(result => {
+                this.setItens(result);
+                // this.calcularPossibilidadeGanho(this.form.value.valor);
+            });
+    }
+
     definirValor(valor) {
         this.form.patchValue({ 'valor': valor });
     }
@@ -80,7 +91,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         return this.form.get('itens') as FormArray;
     }
 
-    setItens(itens: ItemBilheteEsportivo[]) {
+    setItens(itens: any[]) {
+        const controls = itens.map(item => this.fb.control(item));
+        const formArray = this.fb.array(controls);
+        this.form.setControl('itens', formArray);
     }
 
     removerItem(index) {
