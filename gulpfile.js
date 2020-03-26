@@ -1468,3 +1468,11 @@ gulp.task('elitebet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('maxxbets.club', function (done) {
+    tasks(done, {
+        host: "maxxbets.club",
+        banca: "MAXX BETS",
+        styles: "--header:#f14c1c; --foreground-header:#fff; --sidebar-left: #f14c1c; --sidebar-right: #f14c1c; --odds: #172462; --highlight: #f8c803;",
+    });
+});
