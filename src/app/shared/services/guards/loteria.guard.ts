@@ -12,7 +12,7 @@ export class LoteriaGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         // If user is not logged in we'll send them to the homepage
-        if (!this.auth.hasLoterias()) {
+        if (!this.auth.modalidadeHabilitada('loterias')) {
             this.router.navigate(['/']);
             return false;
         }

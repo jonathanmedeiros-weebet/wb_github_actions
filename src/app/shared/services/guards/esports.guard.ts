@@ -11,7 +11,7 @@ export class EsportsGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.auth.hasEsports()) {
+        if (!this.auth.modalidadeHabilitada('esports')) {
             this.router.navigate(['/']);
             return false;
         }

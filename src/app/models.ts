@@ -12,6 +12,11 @@ export * from './shared/models/loteria/tipo-aposta';
 export * from './shared/models/acumuladao/acumuladao-aposta';
 export * from './shared/models/acumuladao/acumuladao';
 
+// Desafio
+export * from './shared/models/desafio/desafio';
+export * from './shared/models/desafio/desafio-categoria';
+export * from './shared/models/desafio/desafio-odd';
+
 // Aposta Esportiva
 export * from './shared/models/aposta-esportiva/aposta-esportiva';
 export * from './shared/models/aposta-esportiva/aposta-esportiva-tipo';

@@ -2,6 +2,8 @@
 export * from './shared/services/aposta.service';
 export * from './shared/services/acumuladao.service';
 export * from './shared/services/cartao.service';
+export * from './shared/services/desafio.service';
+export * from './shared/services/desafio-categoria.service';
 export * from './shared/services/regra.service';
 export * from './shared/services/parametros.service';
 export * from './shared/services/parametros-locais.service';
@@ -38,6 +40,7 @@ export * from './shared/services/guards/aovivo.guard';
 export * from './shared/services/guards/auth.guard';
 export * from './shared/services/guards/basquete.guard';
 export * from './shared/services/guards/combate.guard';
+export * from './shared/services/guards/desafio.guard';
 export * from './shared/services/guards/esports.guard';
 export * from './shared/services/guards/expires.guard';
 export * from './shared/services/guards/loteria.guard';

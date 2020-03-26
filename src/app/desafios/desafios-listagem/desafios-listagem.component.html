@@ -1,0 +1,42 @@
+<div class="content-list">
+    <div class="wrap-sticky">
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+        <div class="categoria" *ngIf="categorias && !categorias.length">
+            <div class="categoria-header">
+                Nenhum evento encontrado!
+            </div>
+        </div>
+
+        <div *ngIf="!showLoadingIndicator">
+            <div class="categoria" *ngFor="let categoria of categorias; trackBy: trackById">
+                <div class="categoria-header">
+                    <span class="categoria-nome">{{categoria.nome}}</span>
+                </div>
+                <div class="desafios">
+                    <ng-container *ngFor="let desafio of categoria.desafios">
+                        <div class="desafio" *ngIf="desafio.odds.length">
+                            <div class="indentificacao">
+                                <div class="nome">
+                                    {{desafio.nome}}
+                                </div>
+                            </div>
+                            <div class="odds">
+                                <div class="odd" *ngFor="let odd of desafio.odds">
+                                    <div class="inner-odd">
+                                        <span class="nome">
+                                            {{odd.nome}}
+                                        </span>
+                                        <span class="valor">
+                                            {{odd.cotacao}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

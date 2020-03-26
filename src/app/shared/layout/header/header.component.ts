@@ -44,6 +44,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     loteriasHabilitado = false;
     aoVivoHabilitado = false;
     acumuladaoHabilitado = false;
+    desafioHabilitado = false;
     appMobile;
     isOpen = false;
     seninhaAtiva;
@@ -77,6 +78,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
+        this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
 
