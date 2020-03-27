@@ -1476,3 +1476,11 @@ gulp.task('maxxbets.club', function (done) {
         styles: "--header:#f14c1c; --foreground-header:#fff; --sidebar-left: #f14c1c; --sidebar-right: #f14c1c; --odds: #172462; --highlight: #f8c803;",
     });
 });
+
+gulp.task('betsgol.net', function (done) {
+    tasks(done, {
+        host: "betsgol.net",
+        banca: "BETS GOL",
+        styles: "--header:#ff0000; --foreground-header:#000; --sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;",
+    });
+});

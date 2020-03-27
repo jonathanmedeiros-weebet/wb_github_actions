@@ -173,7 +173,8 @@
         "betsma.club": "gulp betsma.club",
         "eurobet333.wee.bet": "gulp eurobet333.wee.bet",
         "elitebet.wee.bet": "gulp elitebet.wee.bet",
-        "maxxbets.club": "gulp maxxbets.club"
+        "maxxbets.club": "gulp maxxbets.club",
+        "betsgol.net": "gulp betsgol.net"
     },
     "private": true,
     "dependencies": {
