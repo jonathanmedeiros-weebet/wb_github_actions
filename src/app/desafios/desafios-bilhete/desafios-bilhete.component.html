@@ -1,5 +1,5 @@
 <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
-    <div class="pre-bilhete-esportes">
+    <div class="pre-bilhete-desafio">
         <h4>BILHETE</h4>
         <a (click)="closeCupom()" class="fechar-pre-bilhete">
             <i class="fa fa-times fa-lg"></i>
@@ -34,34 +34,33 @@
                 </div>
             </div>
             <div class="form-group">
-                <ng-template #btnApostar>
-                    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
-                        Apostar <b>({{itens.length}})</b>
+                <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
+                    Apostar <b>({{itens.length}})</b>
+                </button>
+                <ng-template #btnProcessando>
+                    <button disabled class="btn btn-custom btn-block">
+                        Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                        <i class="fa fa-spinner fa-spin"></i>
                     </button>
-                    <ng-template #btnProcessando>
-                        <button disabled class="btn btn-custom btn-block">
-                            Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
-                            <i class="fa fa-spinner fa-spin"></i>
-                        </button>
-                    </ng-template>
                 </ng-template>
             </div>
         </form>
 
-        <div *ngIf="itens.length > 0" class="div-jogos-selecionados">
+        <div *ngIf="itens.length > 0" class="div-desafios-selecionados">
             <h3>
                 Eventos Selecionados
             </h3>
-            <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
-                <div class="jogo-selecionado-inner">
-                    <div class="jogo-nome">
-                        {{item.desafio.nome}}
-                    </div>
-                    <div class="campeonato-nome">
+            <div *ngFor="let item of itens.value; let i=index" class="desafio-selecionado">
+                <div class="desafio-selecionado-inner">
+                    <div class="categoria-nome">
                         {{item.desafio.categoria.nome}}
                     </div>
-                    <div class="cotacao">
-                        Resposta: {{item.odd.cotacao}}
+                    <div class="desafio-nome">
+                        {{item.desafio.nome}}
+                    </div>
+                    <div class="odd">
+                        Resposta: <span class="odd-nome">{{item.odd.nome}} </span><span
+                            class="odd-valor">({{item.odd.cotacao}})</span>
                     </div>
                 </div>
                 <div class="remover-item" (click)="removerItem(i)">
@@ -78,7 +77,7 @@
         <span>{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
     </div>
     <div>
-        <label>Jogo(s)</label>
+        <label>desafio(s)</label>
         <span>{{form.value.itens.length}}</span>
     </div>
     <div>
@@ -108,13 +107,13 @@
             <div *ngFor="let item of itens.value; let i=index" class="aposta-item">
                 <div class="">
                     <div class="horario">
-                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                        {{item.desafio.horario | moment: 'DD.MM.YYYY HH:mm'}}
                     </div>
-                    <div class="jogo-nome">
-                        {{item.jogo.nome}}
+                    <div class="desafio-nome">
+                        {{item.desafio.nome}}
                     </div>
                     <div class="campeonato-nome">
-                        {{item.jogo.campeonato.nome}}
+                        {{item.desafio.campeonato.nome}}
                     </div>
                     <div class="cotacao">
                         {{item.cotacao.chave | oddCategoria}}:
@@ -122,16 +121,16 @@
                             {{item.cotacao.nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id != 9; else nomeOddCombate">
+                            <span *ngIf="item.desafio.sport_id != 9; else nomeOddCombate">
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
                             <ng-template #nomeOddCombate>
-                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
+                                {{item.cotacao.chave | tipoApostaCombate: item.desafio.time_a_nome : item.desafio.time_b_nome}}
                             </ng-template>
                         </ng-template>
                         <span class="valor">
                             {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                            item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo }}
+                            item.desafio._id: item.desafio.favorito : item.desafio.ao_vivo }}
                         </span>
                     </div>
                 </div>

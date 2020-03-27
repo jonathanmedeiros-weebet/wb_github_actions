@@ -62,31 +62,24 @@
     margin-bottom: 15px;
 }
 
-.live-odd {
-    display: inline-block;
-    background-color: red;
-    color: white;
-    padding: 5px;
-}
-
 .pre-bilhete .valor,
 .pre-bilhete .possivel-ganho {
     color: var(--foreground-highlight);
     font-weight: bolder;
 }
 
-.div-jogos-selecionados h3 {
+.div-desafios-selecionados h3 {
     color: var(--foreground-highlight);
 }
 
-.div-jogos-selecionados h3 {
+.div-desafios-selecionados h3 {
     margin-top: 30px;
     margin-bottom: 15px;
     text-transform: uppercase;
     font-size: 16px;
 }
 
-.div-jogos-selecionados h3::before {
+.div-desafios-selecionados h3::before {
     content: '';
     display: block;
     height: 2px;
@@ -97,29 +90,37 @@
     position: relative;
 }
 
-.jogo-selecionado {
+.desafio-selecionado {
     padding: 15px 0;
     border-top: 1px dashed #aec3d8;
     text-align: left;
     position: relative;
 }
 
-.jogo-selecionado:first-of-type {
+.desafio-selecionado:first-of-type {
     border-top: none;
     padding-top: 0;
 }
 
-.jogo-selecionado>div:not(.remover-item) {
+.desafio-selecionado-inner>div {
     color: var(--foreground-sidebar-right);
 }
 
-.jogo-selecionado .horario,
-.jogo-selecionado .cotacao .valor {
-    color: var(--foreground-highlight);
-    font-weight: bold;
+.desafio-selecionado .desafio-nome,
+.desafio-selecionado .odd-nome,
+.desafio-selecionado .odd-valor {
+    font-weight: bolder;
 }
 
-.div-jogos-selecionados .remover-item {
+.desafio-selecionado .odd-valor {
+    color: var(--foreground-highlight);
+}
+
+.desafio-selecionado .categoria-nome{
+    font-size: 10px;
+}
+
+.div-desafios-selecionados .remover-item {
     position: absolute;
     top: 0;
     right: 0;
@@ -173,7 +174,7 @@
     font-size: 1rem;
 }
 
-.jogo-selecionado-inner{
+.desafio-selecionado-inner{
     padding-right: 20px;
 }
 

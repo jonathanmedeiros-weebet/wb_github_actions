@@ -4,10 +4,14 @@ import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService
+    ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService,
+    DesafioApostaService, DesafioPreApostaService
 } from '../../services';
-import { ItemBilheteEsportivo } from '../../models';
+import { } from '../../models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as clone from 'clone';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -16,7 +20,6 @@ import { ItemBilheteEsportivo } from '../../models';
 })
 export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit {
     @ViewChild('apostaDeslogadoModal', { static: true }) apostaDeslogadoModal;
-    mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
     opcoes;
@@ -34,6 +37,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     unsub$ = new Subject();
 
     constructor(
+        private apostaService: DesafioApostaService,
+        private preApostaService: DesafioPreApostaService,
         private auth: AuthService,
         private messageService: MessageService,
         private renderer: Renderer2,
@@ -41,11 +46,16 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private fb: FormBuilder,
         private bilheteService: DesafioBilheteService,
         private paramsService: ParametrosLocaisService,
+        private modalService: NgbModal
     ) {
         super();
     }
 
     ngOnInit() {
+        this.isLoggedIn = this.auth.isLoggedIn();
+        this.opcoes = this.paramsService.getOpcoes();
+        this.apostaMinima = this.opcoes.valor_min_aposta;
+
         this.createForm();
         this.definirAltura();
         this.subcribeItens();
@@ -79,7 +89,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
             .pipe(takeUntil(this.unsub$))
             .subscribe(result => {
                 this.setItens(result);
-                // this.calcularPossibilidadeGanho(this.form.value.valor);
+                this.calcularPossibilidadeGanho(this.form.value.valor);
             });
     }
 
@@ -98,18 +108,120 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     removerItem(index) {
+        this.itens.removeAt(index);
+        this.bilheteService.atualizarItens(this.itens.value);
     }
 
     calcularPossibilidadeGanho(valor) {
+        let cotacao = 1;
+
+        this.itens.value.forEach(item => {
+            cotacao *= item.odd.cotacao;
+        });
+
+        const premio = valor * cotacao;
+        this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
     }
 
     submit() {
+        this.disabledSubmit();
+
+        let valido = true;
+        let msg = '';
+
+        if (!this.itens.length) {
+            valido = false;
+            msg = 'Por favor, inclua um evento.';
+        }
+
+        if (this.itens.length < this.paramsService.quantidadeMinEventosBilhete()) {
+            valido = false;
+            msg = `Por favor, inclua no MÍNIMO ${this.paramsService.quantidadeMinEventosBilhete()} evento(s).`;
+        }
+
+        if (this.itens.length > this.paramsService.quantidadeMaxEventosBilhete()) {
+            valido = false;
+            msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
+        }
+
+        if (valido) {
+            if (this.isLoggedIn) {
+                const values = clone(this.form.value);
+                values.itens.map(item => {
+                    delete item.desafio;
+                    delete item.odd;
+                });
+
+                this.salvarAposta(values);
+            } else {
+                this.enableSubmit();
+
+                const cartaoChave = localStorage.getItem('cartao_chave');
+                if (cartaoChave) {
+                    this.cartaoApostaForm.patchValue({
+                        chave: cartaoChave,
+                        manter_cartao: true
+                    });
+                }
+
+                this.modalRef = this.modalService.open(
+                    this.apostaDeslogadoModal,
+                    {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    }
+                );
+
+                this.modalRef.result
+                    .then(
+                        result => { },
+                        reason => { }
+                    );
+            }
+        } else {
+            this.enableSubmit();
+            this.messageService.warning(msg);
+        }
     }
 
     apostaSuccess(aposta) {
+        if (this.modalRef) {
+            this.modalRef.close();
+        }
+        this.closeCupom();
+        this.enableSubmit();
+        this.trocarTipoApostaDeslogado('preaposta');
+
+        this.bilheteService.atualizarItens([]);
+        this.form.reset();
+        this.cartaoApostaForm.reset();
+
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+
+        this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
     }
 
     preApostaSuccess(id) {
+        if (this.modalRef) {
+            this.modalRef.close();
+        }
+        this.closeCupom();
+        this.enableSubmit();
+
+        this.bilheteService.atualizarItens([]);
+        this.form.reset();
+        this.cartaoApostaForm.reset();
+
+        this.modalRef = this.modalService.open(PreApostaModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+
+        this.modalRef.componentInstance.codigo = id;
     }
 
     handleError(error) {
@@ -134,7 +246,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     salvarAposta(dados) {
-
+        this.apostaService.create(dados)
+            .subscribe(
+                result => this.apostaSuccess(result),
+                error => this.handleError(error)
+            );
     }
 
     trocarTipoApostaDeslogado(tipo) {
@@ -147,5 +263,34 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     finalizarApostaDeslogado() {
+        const values = clone(this.form.value);
+        values.itens.map(item => {
+            delete item.desafio;
+            delete item.odd;
+        });
+
+        if (this.tipoApostaDeslogado === 'preaposta') {
+            this.preApostaService.create(values)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.preApostaSuccess(result.id),
+                    error => this.handleError(error)
+                );
+        } else {
+            if (this.cartaoApostaForm.valid) {
+                const cartaoValues = this.cartaoApostaForm.value;
+
+                if (cartaoValues.manter_cartao) {
+                    localStorage.setItem('cartao_chave', cartaoValues.chave);
+                } else {
+                    localStorage.removeItem('cartao_chave');
+                }
+
+                delete cartaoValues.manter_cartao;
+
+                const dados = Object.assign(values, { cartao: cartaoValues });
+                this.salvarAposta(dados);
+            }
+        }
     }
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { ItemBilheteEsportivo } from '../../../models';
+import { DesafioItemBilhete } from '../../../models';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DesafioBilheteService {
-    private itensSource = new BehaviorSubject<ItemBilheteEsportivo[]>([]);
+    private itensSource = new BehaviorSubject<DesafioItemBilhete[]>([]);
     itensAtuais = this.itensSource.asObservable();
 
     constructor() { }

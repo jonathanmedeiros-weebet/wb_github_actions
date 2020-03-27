@@ -15,7 +15,12 @@ export * from './shared/models/acumuladao/acumuladao';
 // Desafio
 export * from './shared/models/desafio/desafio';
 export * from './shared/models/desafio/desafio-categoria';
+export * from './shared/models/desafio/desafio-item-bilhete';
 export * from './shared/models/desafio/desafio-odd';
+export * from './shared/models/desafio/desafio-aposta';
+export * from './shared/models/desafio/desafio-aposta-item';
+export * from './shared/models/desafio/desafio-preaposta';
+export * from './shared/models/desafio/desafio-preaposta-item';
 
 // Aposta Esportiva
 export * from './shared/models/aposta-esportiva/aposta-esportiva';

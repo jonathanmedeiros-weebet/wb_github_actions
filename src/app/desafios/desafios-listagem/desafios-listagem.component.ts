@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ElementRef, Renderer2, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { Desafio, DesafioCategoria } from './../../models';
 import { DesafioCategoriaService, MessageService, DesafioBilheteService } from './../../services';
@@ -31,26 +32,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.definirAltura();
-
-        // Recebendo os itens atuais do bilhete
-        this.bilheteService.itensAtuais
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(itens => {
-                this.itens = itens;
-
-                console.log('\n XX');
-                console.log(itens);
-
-                this.itensSelecionados = {};
-                for (let i = 0; i < itens.length; i++) {
-                    const item = itens[i];
-                    this.itensSelecionados[item.odd.id] = true;
-                }
-
-                console.log(this.itensSelecionados);
-
-                this.cd.markForCheck();
-            });
+        this.subscribeItens();
 
         this.route.queryParams
             .pipe(take(1))
@@ -64,6 +46,23 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    subscribeItens() {
+        // Recebendo os itens atuais do bilhete
+        this.bilheteService.itensAtuais
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(itens => {
+                this.itens = itens;
+
+                this.itensSelecionados = {};
+                for (let i = 0; i < itens.length; i++) {
+                    const item = itens[i];
+                    this.itensSelecionados[item.odd.id] = true;
+                }
+
+                this.cd.markForCheck();
+            });
     }
 
     definirAltura() {
