@@ -1484,3 +1484,11 @@ gulp.task('betsgol.net', function (done) {
         styles: "--header:#ff0000; --foreground-header:#000; --sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;",
     });
 });
+
+gulp.task('mastersports.wee.bet', function (done) {
+    tasks(done, {
+        host: "mastersports.wee.bet",
+        banca: "MASTER SPORTS",
+        styles: "",
+    });
+});
