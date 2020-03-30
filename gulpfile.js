@@ -1489,6 +1489,6 @@ gulp.task('mastersports.wee.bet', function (done) {
     tasks(done, {
         host: "mastersports.wee.bet",
         banca: "MASTER SPORTS",
-        styles: "",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #cb151c; --foreground-odds: #fff;",
     });
 });
