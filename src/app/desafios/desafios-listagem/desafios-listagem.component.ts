@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { Desafio, DesafioCategoria } from './../../models';
-import { DesafioCategoriaService, MessageService, DesafioBilheteService } from './../../services';
+import { DesafioService, MessageService, DesafioBilheteService } from './../../services';
 
 @Component({
     selector: 'app-desafios-listagem',
@@ -25,7 +25,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
-        private categoriaService: DesafioCategoriaService,
+        private desafioService: DesafioService,
         private bilheteService: DesafioBilheteService,
         private messageService: MessageService,
     ) { }
@@ -39,7 +39,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
             .subscribe((params: any) => {
                 this.showLoadingIndicator = true;
 
-                this.getCategorias();
+                this.getDesafios();
             });
     }
 
@@ -73,15 +73,10 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
         this.renderer.setStyle(this.contentEl, 'height', `${altura}px`);
     }
 
-    getCategorias() {
-        this.categoriaService.getCategorias()
+    getDesafios() {
+        this.desafioService.getDesafios()
             .subscribe(
-                categorias => {
-                    this.showLoadingIndicator = false;
-                    this.categorias = categorias;
-
-                    this.cd.markForCheck();
-                },
+                desafios => this.agruparPorCategoria(desafios),
                 error => this.handleError(error)
             );
     }
@@ -118,9 +113,49 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
         }
     }
 
+    agruparPorCategoria(desafios) {
+        const categorias = {};
+        this.categorias = [];
+
+        desafios.forEach(desafio => {
+            if (!desafio.odd_correta) {
+                let categoria = categorias[desafio.categoria.id];
+                if (!categoria) {
+                    categoria = {
+                        desafios: [],
+                        categoria: desafio.categoria
+                    };
+
+                    categorias[desafio.categoria.id] = categoria;
+                }
+
+                categoria.desafios.push(desafio);
+            }
+        });
+
+        for (const id in categorias) {
+            if (categorias.hasOwnProperty(id)) {
+                const element = categorias[id];
+
+                const categoria = new DesafioCategoria();
+                categoria.id = element.categoria.id;
+                categoria.nome = element.categoria.nome;
+                categoria.desafios = element.desafios;
+
+                this.categorias.push(categoria);
+            }
+        }
+
+        this.showLoadingIndicator = false;
+        this.cd.markForCheck();
+    }
+
     handleError(error) {
         this.showLoadingIndicator = false;
         this.messageService.error(error);
     }
 
+    trackById(index: number, categoria: any): string {
+        return categoria.id;
+    }
 }
