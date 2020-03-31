@@ -5,8 +5,8 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApostaLoteriaModalComponent } from '../../shared/layout/modals';
-import { ApostaLoteriaService, MessageService, SorteioService } from './../../services';
+import { ApostaLoteriaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { ApostaService, ApostaLoteriaService, MessageService, SorteioService } from './../../services';
 import { Aposta, Sorteio } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -25,7 +25,8 @@ export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
     unsub$ = new Subject();
 
     constructor(
-        private apostaService: ApostaLoteriaService,
+        private apostaLoteriaService: ApostaLoteriaService,
+        private apostaService: ApostaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
@@ -70,7 +71,7 @@ export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
             'sort': '-horario'
         };
 
-        this.apostaService.getApostas(queryParams)
+        this.apostaLoteriaService.getApostas(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 apostas => {
@@ -92,9 +93,36 @@ export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
             centered: true
         });
 
+        this.modalRef.componentInstance.showCancel = true;
         this.modalRef.componentInstance.aposta = aposta;
         this.modalRef.result.then(
-            (result) => { },
+            (result) => {
+                switch (result) {
+                    case 'cancel':
+                        this.cancelar(aposta);
+                        break;
+                    default:
+                        break;
+                }
+            },
+            (reason) => { }
+        );
+    }
+
+    cancelar(aposta) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+        this.modalRef.componentInstance.title = 'Cancelar Aposta';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
+
+        this.modalRef.result.then(
+            (result) => {
+                this.apostaService.cancelar(aposta.id)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        () => this.getApostas(),
+                        error => this.handleError(error)
+                    );
+            },
             (reason) => { }
         );
     }
