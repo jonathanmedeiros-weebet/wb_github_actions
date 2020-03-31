@@ -106,31 +106,16 @@
         <div *ngIf="itens.length > 0">
             <div *ngFor="let item of itens.value; let i=index" class="aposta-item">
                 <div class="">
-                    <div class="horario">
-                        {{item.desafio.horario | moment: 'DD.MM.YYYY HH:mm'}}
-                    </div>
                     <div class="desafio-nome">
                         {{item.desafio.nome}}
                     </div>
                     <div class="campeonato-nome">
-                        {{item.desafio.campeonato.nome}}
+                        {{item.desafio.categoria.nome}}
                     </div>
                     <div class="cotacao">
-                        {{item.cotacao.chave | oddCategoria}}:
-                        <span *ngIf="item.cotacao.nome; else chave">
-                            {{item.cotacao.nome}}
-                        </span>
-                        <ng-template #chave>
-                            <span *ngIf="item.desafio.sport_id != 9; else nomeOddCombate">
-                                {{item.cotacao.chave | tipoAposta}}
-                            </span>
-                            <ng-template #nomeOddCombate>
-                                {{item.cotacao.chave | tipoApostaCombate: item.desafio.time_a_nome : item.desafio.time_b_nome}}
-                            </ng-template>
-                        </ng-template>
+                        Resposta: <span>{{item.odd.nome}}</span>
                         <span class="valor">
-                            {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                            item.desafio._id: item.desafio.favorito : item.desafio.ao_vivo }}
+                            {{item.odd.cotacao}}
                         </span>
                     </div>
                 </div>

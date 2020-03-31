@@ -1,0 +1,73 @@
+<div id="cupom" #cupom>
+    <div class="conteudo">
+        <div style="text-align: center;">
+            <img src="assets/images/logo_banca.png">
+        </div>
+        <h1 class="numero">
+            #{{aposta.id}}
+        </h1>
+        <hr>
+        <hr>
+        <div class="informacoes">
+            <p>
+                <b>CAMBISTA:</b> {{aposta.passador.nome}}
+            </p>
+            <p>
+                <b>APOSTADOR:</b> {{aposta.apostador}}
+            </p>
+            <p>
+                <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+            </p>
+            <p id="resultado-final">
+                <b>RESULTADO: </b>
+                <span *ngIf="aposta.resultado" class="{{aposta.resultado}}">{{aposta.resultado}}</span>
+                <span *ngIf="!aposta.resultado">aguardando</span>
+            </p>
+        </div>
+        <hr>
+        <hr>
+        <ng-container *ngFor="let item of aposta.itens">
+            <div class="item">
+                <p class="campeonato">
+                    {{item.odd.desafio.categoria.nome}}
+                </p>
+                <p class="nome" [ngClass]="resultadoClass(item)">
+                    {{item.odd.desafio.nome}}
+                </p>
+                <p class="cotacao" [ngClass]="resultadoClass(item)">
+                    Resposta:
+                    {{item.odd_nome}}
+                    ({{item.cotacao}})
+                </p>
+                <p class="jogo-resultado">
+                    <span *ngIf="item.removido; else resultado">cancelado</span>
+                    <ng-template #resultado>{{item.resultado}}</ng-template>
+                </p>
+            </div>
+            <hr>
+        </ng-container>
+        <hr>
+        <div class="valores">
+            <p class="total-jogos">
+                QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
+            </p>
+            <p class="aposta">
+                COTAÇÃO: <span style="float:right">{{aposta.premio / aposta.valor | number:'1.0-3' }}</span>
+            </p>
+            <p class="aposta">
+                VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+            <p class="ganho">
+                POSSÍVEL RETORNO: <span style="float:right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+            <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+                CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}</span>
+            </p>
+            <hr>
+            <hr>
+        </div>
+        <p class="rodape">
+            {{opcoes.informativo_rodape}}
+        </p>
+    </div>
+</div>

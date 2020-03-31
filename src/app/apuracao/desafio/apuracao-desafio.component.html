@@ -1,0 +1,91 @@
+<app-spinner *ngIf="showLoading"></app-spinner>
+
+<div *ngIf="!showLoading" class="margin-top-15">
+    <div *ngIf="!apostas.length" class="alert alert-warning text-center" role="alert">
+        Nenhuma aposta realizada no período.
+    </div>
+    <div *ngIf="apostas.length > 0">
+        <div>
+            <p><b>Qtd. Apostas:</b> {{apostas.length}}</p>
+            <p><b>Tot. Apostado:</b> {{totais.valor| currency: 'BRL':'symbol':'1.2'}}</p>
+            <p><b>Tot. Prêmios :</b> {{totais.premio| currency: 'BRL':'symbol':'1.2'}}</p>
+        </div>
+        <ng-container *ngIf="smallScreen; else desktopTable">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="resultado"></th>
+                        <th>Cód.</th>
+                        <th>Valor</th>
+                        <th>Comissão</th>
+                        <th>Prêmio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
+                        <tr (click)="openModal(aposta)" class="tr-1">
+                            <td rowspan="2" class="resultado" [ngClass]="cssResultado(aposta.resultado)"></td>
+                            <td>
+                                <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
+                                #{{aposta.id}}
+                            </td>
+                            <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>
+                                <span
+                                    *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span *ngIf="aposta.resultado == 'perdeu'">R$ 0,00</span>
+                                <span *ngIf="!aposta.resultado">Aguardando</span>
+                            </td>
+                        </tr>
+                        <tr (click)="openModal(aposta)" class="tr-2">
+                            <td class="" colspan="4">
+                                <small *ngIf="aposta.pago">(PAGO)</small>
+                                {{aposta.apostador | uppercase}} apostou em
+                                {{aposta.horario | moment:'DD/MM/YYYY [às] HH:mm'}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+        <ng-template #desktopTable>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="resultado"></th>
+                        <th>Código</th>
+                        <th>Horário</th>
+                        <th>Apostador</th>
+                        <th>Valor</th>
+                        <th>Comissão</th>
+                        <th>Prêmio</th>
+                        <th>Pagamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let aposta of apostas; trackBy:trackById">
+                        <tr (click)="openModal(aposta)">
+                            <td class="resultado" [ngClass]="cssResultado(aposta.resultado)"></td>
+                            <td>
+                                <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
+                                #{{aposta.id}}
+                            </td>
+                            <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{aposta.apostador}}</td>
+                            <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                            <td>
+                                <span
+                                    *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span *ngIf="aposta.resultado == 'perdeu'">R$ 0,00</span>
+                                <span *ngIf="!aposta.resultado">Aguardando</span>
+                            </td>
+                            <td>{{aposta.pago ? 'PAGO' : ''}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-template>
+    </div>
+</div>

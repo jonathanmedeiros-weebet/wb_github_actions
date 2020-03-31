@@ -19,10 +19,34 @@ export class DesafioApostaService {
         private errorService: ErrorService
     ) { }
 
-    getPreAposta(id: number): Observable<DesafioAposta> {
-        const url = `${this.ApostaUrl}/${id}`;
+    getApostas(queryParams?: any): Observable<DesafioAposta[]> {
+        let requestOptions;
 
-        return this.http.get(url, this.header.getRequestOptions(true))
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(this.ApostaUrl, requestOptions)
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getAposta(id: number, queryParams?): Observable<DesafioAposta> {
+        const url = `${this.ApostaUrl}/${id}`;
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
             .pipe(
                 take(1),
                 map((res: any) => res.results),

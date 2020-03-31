@@ -59,6 +59,11 @@
                                     <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>
                                 </ng-template>
                             </ngb-tab>
+                            <ngb-tab title="Desafio" id="desafio" *ngIf="desafioHabilitado">
+                                <ng-template ngbTabContent>
+                                    <app-apuracao-desafio [queryParams]="queryParams"></app-apuracao-desafio>
+                                </ng-template>
+                            </ngb-tab>
                             <ngb-tab title="Loteria" id="loteria" *ngIf="loteriasHabilitada">
                                 <ng-template ngbTabContent>
                                     <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>

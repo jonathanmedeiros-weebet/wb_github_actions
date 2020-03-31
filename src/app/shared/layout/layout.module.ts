@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { ExibirBilheteDesafioComponent } from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
@@ -23,7 +24,8 @@ import {
     ApostaLoteriaModalComponent, CartaoCadastroModalComponent,
     CartaoModalComponent, PesquisarCartaoModalComponent,
     SolicitarSaqueModalComponent, RecargaCartaoModalComponent,
-    RecargaSuccessModalComponent, ApostaAcumuladaoModalComponent
+    RecargaSuccessModalComponent, ApostaAcumuladaoModalComponent,
+    ApostaDesafioModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -49,6 +51,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         FooterComponent,
         NavigationComponent,
         ErrorMsgComponent,
+        ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
         BilheteAcumuladaoComponent,
@@ -66,7 +69,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
-        ApostaAcumuladaoModalComponent
+        ApostaAcumuladaoModalComponent,
+        ApostaDesafioModalComponent
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -82,7 +86,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
-        ApostaAcumuladaoModalComponent
+        ApostaAcumuladaoModalComponent,
+        ApostaDesafioModalComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -91,6 +96,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         FooterComponent,
         NavigationComponent,
         ErrorMsgComponent,
+        ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
         BilheteAcumuladaoComponent,

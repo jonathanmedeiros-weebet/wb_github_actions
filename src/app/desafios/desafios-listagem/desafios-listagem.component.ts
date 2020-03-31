@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ElementRef, Renderer2, ChangeDete
 import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Desafio, DesafioCategoria } from './../../models';
 import { DesafioService, MessageService, DesafioBilheteService } from './../../services';
 
@@ -35,11 +35,19 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
         this.subscribeItens();
 
         this.route.queryParams
-            .pipe(take(1))
+            .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
                 this.showLoadingIndicator = true;
 
-                this.getDesafios();
+                if (params['categoria']) {
+                    const queryParams = {
+                        categoria: +params['categoria']
+                    };
+
+                    this.getDesafios(queryParams);
+                } else {
+                    this.getDesafios();
+                }
             });
     }
 
@@ -73,8 +81,8 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
         this.renderer.setStyle(this.contentEl, 'height', `${altura}px`);
     }
 
-    getDesafios() {
-        this.desafioService.getDesafios()
+    getDesafios(queryParams?) {
+        this.desafioService.getDesafios(queryParams)
             .subscribe(
                 desafios => this.agruparPorCategoria(desafios),
                 error => this.handleError(error)

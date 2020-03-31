@@ -1,0 +1,74 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="esportes">
+        <div class="desafios">
+            <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
+                <div class="item-selecionado-inner">
+                    <small class="categoria-nome">
+                        {{item.odd.desafio.categoria.nome}}
+                    </small>
+                    <div class="desafio-nome">
+                        {{item.odd.desafio.nome}}
+                    </div>
+                    <div class="cotacao">
+                        Resposta: {{item.odd_nome}}
+                        <span class="valor">
+                            ({{item.odd.cotacao | number: '1.0-2'}})
+                        </span>
+                    </div>
+                </div>
+                <div class="remover-item" (click)="removerItem(i)">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+        </div>
+        <div class="informacoes">
+            <p>
+                Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+            </p>
+            <p>
+                Total de desafios: {{preAposta.itens.length}}
+            </p>
+            <p>
+                Estimativa de ganho: {{form.value.valor * preAposta.cotacao | currency: 'BRL':'symbol':'1.2'}}
+            </p>
+            <div class="form-group">
+                <label for="">Apostador</label>
+                <input type="text" class="form-control" formControlName="apostador"
+                    [ngClass]="applyCssInputError('apostador')">
+                <app-error-msg [control]="form.get('apostador')" label="Apostador">
+                </app-error-msg>
+            </div>
+
+            <div class="form-group">
+                <label for="">Valor da Aposta</label>
+                <input type="text" class="form-control" formControlName="valor" [ngClass]="applyCssInputError('valor')">
+                <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="cotacoesVinheramDifentes">
+        <b>Atenção <i class="fa fa-warning"></i></b>
+        <br>
+        <br>
+        Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.
+    </div>
+
+    <div class="alert alert-warning" *ngIf="cotacoesMudaram">
+        <b>Atenção <i class="fa fa-warning"></i></b>
+        <br>
+        <br>
+        <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a
+        pré-aposta.
+    </div>
+
+    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom">
+        Validar
+    </button>
+    <ng-template #btnProcessando>
+        <button disabled class="btn btn-custom">
+            Processando...
+            <i class="fa fa-spinner fa-spin"></i>
+        </button>
+    </ng-template>
+</form>

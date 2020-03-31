@@ -1,5 +1,6 @@
 export { ApostaModalComponent } from './aposta-modal/aposta-modal.component';
 export { ApostaAcumuladaoModalComponent } from './aposta-acumuladao-modal/aposta-acumuladao-modal.component';
+export { ApostaDesafioModalComponent } from './aposta-desafio-modal/aposta-desafio-modal.component';
 export { PreApostaModalComponent } from './pre-aposta-modal/pre-aposta-modal.component';
 export { CartaoCadastroModalComponent } from './cartao-cadastro-modal/cartao-cadastro-modal.component';
 export { CartaoModalComponent } from './cartao-modal/cartao-modal.component';

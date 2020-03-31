@@ -4,6 +4,7 @@ import { ValidarApostaWrapperComponent } from './wrapper/validar-aposta-wrapper.
 import { ValidarApostaEsportesComponent } from './esportes/validar-aposta-esportes.component';
 import { ValidarApostaLoteriasComponent } from './loterias/validar-aposta-loterias.component';
 import { ValidarApostaAcumuladaoComponent } from './acumuladao/validar-aposta-acumuladao.component';
+import { ValidarApostaDesafiosComponent } from './desafios/validar-aposta-desafios.component';
 import { SharedModule } from '../shared/shared.module';
 import { ValidarApostaRoutingModule } from './validar-aposta-routing.module';
 import {
@@ -11,7 +12,8 @@ import {
     ApostaEsportivaService,
     ApostaLoteriaService,
     SorteioService,
-    AcumuladaoService
+    AcumuladaoService,
+    DesafioApostaService
 } from '../services';
 
 @NgModule({
@@ -21,14 +23,16 @@ import {
         ValidarApostaWrapperComponent,
         ValidarApostaEsportesComponent,
         ValidarApostaLoteriasComponent,
-        ValidarApostaAcumuladaoComponent
+        ValidarApostaAcumuladaoComponent,
+        ValidarApostaDesafiosComponent
     ],
     providers: [
         PreApostaEsportivaService,
         ApostaEsportivaService,
         ApostaLoteriaService,
         SorteioService,
-        AcumuladaoService
+        AcumuladaoService,
+        DesafioApostaService
     ]
 })
 export class ValidarApostaModule { }

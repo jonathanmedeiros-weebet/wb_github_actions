@@ -4,7 +4,7 @@ import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import { PreApostaModalComponent, ApostaDesafioModalComponent } from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService,
     DesafioApostaService, DesafioPreApostaService
@@ -196,7 +196,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.form.reset();
         this.cartaoApostaForm.reset();
 
-        this.modalRef = this.modalService.open(ApostaModalComponent, {
+        this.modalRef = this.modalService.open(ApostaDesafioModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });

@@ -11,7 +11,7 @@ import { config } from '../../config';
 
 @Injectable()
 export class DesafioPreApostaService {
-    private PreApostaUrl = `${config.BASE_URL}/desafios/preapostas`; // URL to web api
+    private PreApostaUrl = `${config.BASE_URL}/preapostas`; // URL to web api
 
     constructor(
         private http: HttpClient,
@@ -31,7 +31,9 @@ export class DesafioPreApostaService {
     }
 
     create(preaposta): Observable<any> {
-        return this.http.post(this.PreApostaUrl, JSON.stringify(preaposta), this.header.getRequestOptions(true))
+        const url = `${this.PreApostaUrl}/desafios`;
+
+        return this.http.post(url, JSON.stringify(preaposta), this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),

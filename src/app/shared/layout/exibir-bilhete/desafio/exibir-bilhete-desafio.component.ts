@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-import { config } from './../../../config';
+import { config } from '../../../config';
 import {
     ParametrosLocaisService, HelperService, PrintService,
     AuthService, MessageService
@@ -10,12 +10,12 @@ let newNavigator: any;
 newNavigator = window.navigator;
 
 @Component({
-    selector: 'app-exibir-bilhete-esportivo',
-    templateUrl: 'exibir-bilhete-esportivo.component.html',
-    styleUrls: ['exibir-bilhete-esportivo.component.css']
+    selector: 'app-exibir-bilhete-desafio',
+    templateUrl: 'exibir-bilhete-desafio.component.html',
+    styleUrls: ['exibir-bilhete-desafio.component.css']
 })
 
-export class ExibirBilheteEsportivoComponent implements OnInit {
+export class ExibirBilheteDesafioComponent implements OnInit {
     @ViewChild('cupom', { static: true }) cupom: ElementRef;
     @Input() aposta: any;
     modalRef;
@@ -72,6 +72,6 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     }
 
     print() {
-        this.printService.sportsTicket(this.aposta);
+        this.printService.desafioTicket(this.aposta);
     }
 }

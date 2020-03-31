@@ -6,13 +6,15 @@ import { ApuracaoLoteriaComponent } from './loteria/apuracao-loteria.component';
 import { ApuracaoEsporteComponent } from './esportes/apuracao-esporte.component';
 import { ApuracaoConsolidadaComponent } from './consolidada/apuracao-consolidada.component';
 import { ApuracaoAcumuladaoComponent } from './acumuladao/apuracao-acumuladao.component';
+import { ApuracaoDesafioComponent } from './desafio/apuracao-desafio.component';
 import { ApuracaoListagemComponent } from './apuracao-listagem/apuracao-listagem.component';
 import {
     SorteioService,
     ApostaLoteriaService,
     ApostaEsportivaService,
     RelatorioService,
-    AcumuladaoService
+    AcumuladaoService,
+    DesafioApostaService
 } from '../services';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -28,10 +30,12 @@ import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
         ApuracaoLoteriaComponent,
         ApuracaoConsolidadaComponent,
         ApuracaoAcumuladaoComponent,
+        ApuracaoDesafioComponent,
         ApuracaoListagemComponent
     ],
     providers: [
         SorteioService,
+        DesafioApostaService,
         ApostaLoteriaService,
         ApostaEsportivaService,
         RelatorioService,

@@ -7,6 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExibirBilheteEsportivoComponent } from './../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { ExibirBilheteDesafioComponent } from './../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
 
 @Component({
@@ -17,6 +18,7 @@ import { AuthService, ApostaService, MessageService, ParametrosLocaisService } f
 export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(ExibirBilheteDesafioComponent, { static: false }) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
     @ViewChild(BilheteAcumuladaoComponent, { static: false }) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     exibirBilhete = false;
     aposta;
@@ -69,6 +71,9 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         if (this.aposta.tipo === 'acumuladao') {
             this.bilheteAcumuladaoComponent.print();
         }
+        if (this.aposta.tipo === 'desafio') {
+            this.bilheteDesafioComponent.print();
+        }
     }
 
     shareTicket() {
@@ -80,6 +85,9 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         }
         if (this.aposta.tipo === 'acumuladao') {
             this.bilheteAcumuladaoComponent.shared();
+        }
+        if (this.aposta.tipo === 'desafio') {
+            this.bilheteDesafioComponent.shared();
         }
     }
 

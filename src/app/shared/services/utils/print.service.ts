@@ -969,6 +969,242 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
         popupWin.document.close();
     }
 
+    // Bilhete Desafio
+    desafioTicket(aposta) {
+        if (this.auth.isAppMobile()) {
+            this.desafioTicketAppMobile(aposta);
+        } else {
+            this.desafioTicketDestkop(aposta);
+        }
+    }
+
+    private desafioTicketDestkop(aposta) {
+        let printContents, popupWin, html, styles;
+
+        styles = `
+        body{
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 10px;
+            background: #333;
+            margin: 0;
+        }
+
+        #comprovante{
+            padding: 15px;
+            /*padding-right: 11px;*/
+            background: #fff;
+            margin: 0 auto;
+            color: #000;
+        }
+
+        .margin-bottom-5 {
+            margin-bottom: 5px;
+        }
+
+        hr {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px dashed black;
+        }
+
+        .numero{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            margin-top:15px;
+        }
+
+        .informacoes p{
+            margin: 1px;
+            font-size: 10px;
+        }
+
+        .item .categoria{
+            text-align: center;
+            margin: 1px;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .item .desafio{
+            margin: 1px;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .item .cotacao{
+            margin: 1px;
+            font-size: 10px;
+        }
+
+        .valores .total-desafios, .valores .aposta, .valores .ganho, .valores .cambista-paga{
+            text-align: left;
+            margin: 3px 3px 1px 1px;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .rodape{
+            margin: 5px 1px 1px 1px;
+            font-weight: normal;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        @page {
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 100%;
+                max-width: 78mm;
+                padding: 0mm;
+            }
+        }
+        `;
+
+        printContents = `
+        <div id="comprovante">
+            <div class="conteudo">
+                <div style="text-align: center;">
+                    <img style="max-height: 80px; max-width: 190px;"
+                    alt="${config.BANCA_NOME}" src="${config.LOGO}" />
+                </div>
+                <h1 class="numero">
+                    #${aposta.id}
+                </h1>
+                <hr>
+                <hr>
+                <div class="informacoes">
+                    <p>
+                        <b>CAMBISTA:</b> ${aposta.passador.nome}
+                    </p>
+                    <p>
+                        <b>APOSTADOR:</b> ${aposta.apostador}
+                    </p>
+                    <p>
+                        <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
+                    </p>
+                </div>
+                <hr>
+                <hr>
+                `;
+
+        aposta.itens.forEach((item, index, array) => {
+            printContents += `
+                <div class="item">
+                    <p class="categoria">
+                        ${item.odd.desafio.categoria.nome}
+                    </p>
+                    <p class="desafio">
+                        ${item.odd.desafio.nome}
+                    </p>
+                    <p class="cotacao">
+                        RESPOSTA: ${item.odd_nome} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
+            if (item.status != null) {
+                printContents += ` | <b>${item.status.toUpperCase()}</b>`;
+            }
+            printContents += `
+                    </p>
+                </div>
+                <hr>
+            `;
+        });
+
+        printContents += `
+                <hr>
+                <div class="valores">
+                    <p class="total-desafios">
+                        QUANTIDADE DE JOGOS: <span style="float:right">${aposta.itens.length}</span>
+                    </p>
+                    <p class="aposta">
+                        COTAÇÃO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}</span>
+                    </p>
+                    <p class="aposta">
+                        VALOR APOSTADO: <span style="float:right">${this.helperService.moneyFormat(aposta.valor)}</span>
+                    </p>
+                    <p class="ganho">
+                        POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio)}</span>
+                    </p>`;
+
+        if (aposta.passador.percentualPremio > 0) {
+            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            printContents += `   <p class="cambista-paga">
+                            CAMBISTA PAGA: <span style="float:right">${this.helperService.moneyFormat(cambistaPaga)}</span>
+                        </p>`;
+        }
+
+        printContents += `
+                    <hr>
+                    <hr>
+                    </div>
+                <p class="rodape">
+                    ${this.opcoes.informativo_rodape}
+                </p>
+            </div>
+        </div>`;
+
+        html = `
+        <html>
+          <head>
+            <title>Print tab</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <style>
+            ${styles}
+            </style>
+          </head>
+          <body onload="window.print();window.close()">${printContents}</body>
+        </html>`;
+
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(html);
+        popupWin.document.close();
+    }
+
+    private desafioTicketAppMobile(aposta) {
+        let ticket = `${config.BANCA_NOME}
+#${aposta.id}
+CAMBISTA: ${aposta.passador.nome}
+APOSTADOR: ${aposta.apostador}
+HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
+-------------------------------`;
+
+        aposta.itens.forEach(item => {
+            ticket += `
+-------------------------------
+${item.odd.desafio.categoria.nome}
+${item.odd.nome}
+RESPOSTA: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
+        });
+
+        ticket += `
+-------------------------------
+-------------------------------
+QUANTIDADE DE JOGOS: ${aposta.itens.length}
+COTAÇÃO: ${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}
+VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
+POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.premio)}
+`;
+
+        if (aposta.passador.percentualPremio > 0) {
+            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
+        }
+
+        ticket += `
+-------------------------------
+-------------------------------
+${this.opcoes.informativo_rodape}
+        `;
+
+        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+    }
+
     // Cartão
     card(card) {
         if (this.auth.isAppMobile()) {

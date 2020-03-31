@@ -12,9 +12,10 @@ import {
     MessageService,
     PreApostaEsportivaService
 } from '../../services';
-import { ApostaModalComponent } from './../../shared/layout/modals/aposta-modal/aposta-modal.component';
-import { ApostaLoteriaModalComponent } from './../../shared/layout/modals/aposta-loteria-modal/aposta-loteria-modal.component';
-import { ApostaAcumuladaoModalComponent } from './../../shared/layout/modals/aposta-acumuladao-modal/aposta-acumuladao-modal.component';
+import {
+    ApostaModalComponent, ApostaLoteriaModalComponent,
+    ApostaDesafioModalComponent, ApostaAcumuladaoModalComponent
+} from './../../shared/layout/modals';
 
 @Component({
     selector: 'app-validar-aposta-wrapper',
@@ -36,8 +37,7 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
         private modalService: NgbModal
     ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     ngOnDestroy() {
         this.unsub$.next();
@@ -78,6 +78,9 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
         }
         if (aposta.tipo === 'acumuladao') {
             modalComponent = ApostaAcumuladaoModalComponent;
+        }
+        if (aposta.tipo === 'desafio') {
+            modalComponent = ApostaDesafioModalComponent;
         }
 
         this.modalRef = this.modalService.open(modalComponent, {
