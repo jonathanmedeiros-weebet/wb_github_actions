@@ -59,6 +59,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.createForm();
         this.definirAltura();
         this.subcribeItens();
+        this.subscribeValor();
     }
 
     definirAltura() {
@@ -90,6 +91,14 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
             .subscribe(result => {
                 this.setItens(result);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
+            });
+    }
+
+    subscribeValor() {
+        this.form.get('valor').valueChanges
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(valor => {
+                this.calcularPossibilidadeGanho(valor);
             });
     }
 
