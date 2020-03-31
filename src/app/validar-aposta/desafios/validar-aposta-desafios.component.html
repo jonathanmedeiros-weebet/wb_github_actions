@@ -47,21 +47,6 @@
         </div>
     </div>
 
-    <div class="alert alert-warning" *ngIf="cotacoesVinheramDifentes">
-        <b>Atenção <i class="fa fa-warning"></i></b>
-        <br>
-        <br>
-        Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.
-    </div>
-
-    <div class="alert alert-warning" *ngIf="cotacoesMudaram">
-        <b>Atenção <i class="fa fa-warning"></i></b>
-        <br>
-        <br>
-        <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a
-        pré-aposta.
-    </div>
-
     <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom">
         Validar
     </button>
