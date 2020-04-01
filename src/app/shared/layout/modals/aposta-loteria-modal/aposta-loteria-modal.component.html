@@ -4,6 +4,9 @@
         <button type="button" (click)="printTicket()">
             <i class="fa fa-print"></i>
         </button>
+        <button type="button" *ngIf="cancelamentoPermitido()" (click)="cancel()" title="CANCELAR APOSTA">
+            <i class="fa fa-trash-o"></i>
+        </button>
         <button *ngIf="compartilhamentoPermitido()" type="button" (click)="shareTicket()">
             <i class="fa fa-share-alt"></i>
         </button>

@@ -10,6 +10,7 @@ import { ApuracaoDesafioComponent } from './desafio/apuracao-desafio.component';
 import { ApuracaoListagemComponent } from './apuracao-listagem/apuracao-listagem.component';
 import {
     SorteioService,
+    ApostaService,
     ApostaLoteriaService,
     ApostaEsportivaService,
     RelatorioService,
@@ -36,6 +37,7 @@ import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
     providers: [
         SorteioService,
         DesafioApostaService,
+        ApostaService,
         ApostaLoteriaService,
         ApostaEsportivaService,
         RelatorioService,

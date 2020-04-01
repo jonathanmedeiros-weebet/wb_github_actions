@@ -34,6 +34,23 @@ export class ApostaLoteriaModalComponent implements OnInit {
         this.bilheteLoteriaComponent.shared();
     }
 
+    cancel() {
+        this.activeModal.close('cancel');
+    }
+
+    cancelamentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (opcoes.habilitar_cancelar_aposta) {
+            if (this.isLoggedIn && this.showCancel && !this.aposta.cartao_aposta) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
     compartilhamentoPermitido() {
         const opcoes = this.paramsLocais.getOpcoes();
         let result = false;

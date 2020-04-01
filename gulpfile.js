@@ -1468,3 +1468,27 @@ gulp.task('elitebet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('maxxbets.club', function (done) {
+    tasks(done, {
+        host: "maxxbets.club",
+        banca: "MAXX BETS",
+        styles: "--header:#f14c1c; --foreground-header:#fff; --sidebar-left: #f14c1c; --sidebar-right: #f14c1c; --odds: #172462; --highlight: #f8c803;",
+    });
+});
+
+gulp.task('betsgol.net', function (done) {
+    tasks(done, {
+        host: "betsgol.net",
+        banca: "BETS GOL",
+        styles: "--header:#ff0000; --foreground-header:#000; --sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;",
+    });
+});
+
+gulp.task('mastersports.wee.bet', function (done) {
+    tasks(done, {
+        host: "mastersports.wee.bet",
+        banca: "MASTER SPORTS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #9b001d; --foreground-odds: #fff;",
+    });
+});
