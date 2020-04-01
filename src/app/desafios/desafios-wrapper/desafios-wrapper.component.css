@@ -2,21 +2,18 @@
     background-color: #e1e2e4;
     display: flex;
     flex-direction: row;
-    min-height: 800px;
 }
 
 .desafios-content{
     flex-grow: 1;
     padding: 0 0 0 255px;
+    overflow: auto;
+    height: calc(100vh - 69px);
 }
 
 @media only screen and (max-width: 668px) {
-    #desafios-wrapper{
-        padding: 0;
-        height: calc(100vh - 113px);
-    }
-
     .desafios-content{
         padding: 0;
+        height: calc(100vh - 113px);
     }
 }
