@@ -5,7 +5,7 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApostaDesafioModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
 import { DesafioApostaService, ApostaService, MessageService, AuthService } from '../../services';
 import { DesafioAposta } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -99,7 +99,7 @@ export class ApuracaoDesafioComponent implements OnInit, OnDestroy, OnChanges {
         this.apostaService.getAposta(aposta.id, { 'verificar-ultima-aposta': 1 })
             .subscribe(
                 aposta_localizada => {
-                    this.modalRef = this.modalService.open(ApostaDesafioModalComponent, {
+                    this.modalRef = this.modalService.open(ApostaModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
                     });

@@ -12,10 +12,7 @@ import {
     MessageService,
     PreApostaEsportivaService
 } from '../../services';
-import {
-    ApostaModalComponent, ApostaLoteriaModalComponent,
-    ApostaDesafioModalComponent, ApostaAcumuladaoModalComponent
-} from './../../shared/layout/modals';
+import { ApostaModalComponent } from './../../shared/layout/modals';
 
 @Component({
     selector: 'app-validar-aposta-wrapper',
@@ -69,21 +66,7 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
     success(aposta) {
         this.goToTop('#default-content');
 
-        let modalComponent;
-        if (aposta.tipo === 'esportes') {
-            modalComponent = ApostaModalComponent;
-        }
-        if (aposta.tipo === 'loteria') {
-            modalComponent = ApostaLoteriaModalComponent;
-        }
-        if (aposta.tipo === 'acumuladao') {
-            modalComponent = ApostaAcumuladaoModalComponent;
-        }
-        if (aposta.tipo === 'desafio') {
-            modalComponent = ApostaDesafioModalComponent;
-        }
-
-        this.modalRef = this.modalService.open(modalComponent, {
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });

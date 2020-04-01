@@ -5,7 +5,7 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApostaLoteriaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
 import { ApostaService, ApostaLoteriaService, MessageService, SorteioService } from './../../services';
 import { Aposta, Sorteio } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -88,7 +88,7 @@ export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     abrirBilhete(aposta) {
-        this.modalRef = this.modalService.open(ApostaLoteriaModalComponent, {
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });

@@ -1,11 +1,8 @@
 export { ApostaModalComponent } from './aposta-modal/aposta-modal.component';
-export { ApostaAcumuladaoModalComponent } from './aposta-acumuladao-modal/aposta-acumuladao-modal.component';
-export { ApostaDesafioModalComponent } from './aposta-desafio-modal/aposta-desafio-modal.component';
 export { PreApostaModalComponent } from './pre-aposta-modal/pre-aposta-modal.component';
 export { CartaoCadastroModalComponent } from './cartao-cadastro-modal/cartao-cadastro-modal.component';
 export { CartaoModalComponent } from './cartao-modal/cartao-modal.component';
 export { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
-export { ApostaLoteriaModalComponent } from './aposta-loteria-modal/aposta-loteria-modal.component';
 export { PesquisaModalComponent } from './pesquisa-modal/pesquisa-modal.component';
 export { PesquisarApostaModalComponent } from './pesquisar-aposta-modal/pesquisar-aposta-modal.component';
 export { PesquisarCartaoModalComponent } from './pesquisar-cartao-modal/pesquisar-cartao-modal.component';

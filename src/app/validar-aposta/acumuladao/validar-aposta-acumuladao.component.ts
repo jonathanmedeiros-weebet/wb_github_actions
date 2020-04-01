@@ -1,10 +1,6 @@
 import {
-    Component,
-    OnInit,
-    OnDestroy,
-    Input,
-    Output,
-    EventEmitter
+    Component, OnInit, OnDestroy,
+    Input, Output, EventEmitter
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 

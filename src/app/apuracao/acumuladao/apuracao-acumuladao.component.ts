@@ -1,12 +1,11 @@
 import {
     Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, Input, OnChanges
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApostaAcumuladaoModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { AcumuladaoService, ApostaService, MessageService, AuthService } from './../../services';
+import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { AcumuladaoService, ApostaService, MessageService } from './../../services';
 import { AcumuladaoAposta } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -72,7 +71,7 @@ export class ApuracaoAcumuladaoComponent implements OnInit, OnDestroy, OnChanges
     openModal(aposta) {
         this.showLoading = true;
 
-        this.modalRef = this.modalService.open(ApostaAcumuladaoModalComponent, {
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });

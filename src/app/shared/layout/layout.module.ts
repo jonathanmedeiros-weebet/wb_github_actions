@@ -21,11 +21,10 @@ import {
     PesquisaModalComponent, TabelaModalComponent,
     ApostaModalComponent, PreApostaModalComponent,
     ConfirmModalComponent, PesquisarApostaModalComponent,
-    ApostaLoteriaModalComponent, CartaoCadastroModalComponent,
-    CartaoModalComponent, PesquisarCartaoModalComponent,
-    SolicitarSaqueModalComponent, RecargaCartaoModalComponent,
-    RecargaSuccessModalComponent, ApostaAcumuladaoModalComponent,
-    ApostaDesafioModalComponent
+    CartaoCadastroModalComponent, CartaoModalComponent,
+    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
+    RecargaCartaoModalComponent, RecargaSuccessModalComponent
+
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -62,15 +61,12 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         PreApostaModalComponent,
         ConfirmModalComponent,
         PesquisarApostaModalComponent,
-        ApostaLoteriaModalComponent,
         CartaoCadastroModalComponent,
         CartaoModalComponent,
         PesquisarCartaoModalComponent,
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
-        RecargaSuccessModalComponent,
-        ApostaAcumuladaoModalComponent,
-        ApostaDesafioModalComponent
+        RecargaSuccessModalComponent
     ],
     entryComponents: [
         PesquisaModalComponent,
@@ -79,15 +75,12 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         ApostaModalComponent,
         PreApostaModalComponent,
         ConfirmModalComponent,
-        ApostaLoteriaModalComponent,
         CartaoCadastroModalComponent,
         CartaoModalComponent,
         PesquisarCartaoModalComponent,
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
-        RecargaSuccessModalComponent,
-        ApostaAcumuladaoModalComponent,
-        ApostaDesafioModalComponent
+        RecargaSuccessModalComponent
     ],
     exports: [
         MainLayoutComponent,
