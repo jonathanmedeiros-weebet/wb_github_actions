@@ -281,7 +281,15 @@ ${horario} ${jogo.nome}
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
-                        Cliente
+                        Cambista
+                    </div>
+                    <div style="float: right;">
+                        ${aposta.passador.nome}
+                    </div>
+                </div>
+                <div class="clearfix margin-bottom-5">
+                    <div style="float: left;">
+                        Apostador
                     </div>
                     <div style="float: right;">
                         ${aposta.apostador}
@@ -289,26 +297,15 @@ ${horario} ${jogo.nome}
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
-                        Cambista
+                        Modalidade
                     </div>
                     <div style="float: right;">
-                        ${aposta.passador.nome}
+                        ${this.getNomeModalidadeLoteria(aposta.modalidade)}
                     </div>
                 </div>
                 `;
 
-        const seninhaNome = this.paramsService.getSeninhaNome();
-        const quininhaNome = this.paramsService.getQuininhaNome();
-
         aposta.itens.forEach((item, index, array) => {
-            let tipo = '';
-
-            if (item.tipo === 'seninha') {
-                tipo = seninhaNome;
-            } else {
-                tipo = quininhaNome;
-            }
-
             let content = `
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -317,14 +314,6 @@ ${horario} ${jogo.nome}
                 </div>
                 <div class="text-center bilhete-numeros">
                     ${item.numeros.join('-')}
-                </div>
-                <div class="clearfix margin-bottom-5">
-                    <div style="float: left;">
-                        Tipo
-                    </div>
-                    <div style="float: right;">
-                        ${tipo}
-                    </div>
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -447,12 +436,13 @@ ${config.BANCA_NOME}
 Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
+Modalidade: ${this.getNomeModalidadeLoteria(aposta.modalidade)}
 Valor Total: ${this.helperService.moneyFormat(aposta.valor)}`;
 
         aposta.itens.forEach(item => {
             ticket += `
 -------------------------------
-${item.sorteio_nome} (${item.tipo})
+${item.sorteio_nome}
 Dezenas: ${item.numeros.join('-')}
 Valor: ${this.helperService.moneyFormat(item.valor)}`;
             if (item.cotacao3 > 0) {
@@ -1178,7 +1168,7 @@ HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
             ticket += `
 -------------------------------
 ${item.odd.desafio.categoria.nome}
-${item.odd.nome}
+${item.odd.desafio.nome}
 RESPOSTA: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
         });
 
@@ -1487,6 +1477,14 @@ ${recarga.autenticacao}
             return sigla.substr(0, 5);
         }
         return '    ';
+    }
+
+    getNomeModalidadeLoteria(modalidade) {
+        if (modalidade === 'seninha') {
+            return this.paramsService.getSeninhaNome();
+        } else {
+            return this.paramsService.getQuininhaNome();
+        }
     }
 
     getApostaTipoNome(apostaTipo, jogo) {
