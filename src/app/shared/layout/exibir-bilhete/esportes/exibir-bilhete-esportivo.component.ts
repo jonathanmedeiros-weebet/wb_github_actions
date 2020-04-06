@@ -72,10 +72,6 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     }
 
     print() {
-        if (this.aposta.tipo === 'esportes') {
-            this.printService.sportsTicket(this.aposta);
-        } else {
-            this.printService.lotteryTicket(this.aposta);
-        }
+        this.printService.sportsTicket(this.aposta);
     }
 }

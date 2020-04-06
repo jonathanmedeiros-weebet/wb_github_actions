@@ -7,6 +7,7 @@
         <p class="informacoes-gerais">CAMBISTA: {{aposta.passador.nome}}</p>
         <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
         <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+        <p class="informacoes-gerais">MODALIDADE: {{aposta.modalidade | sorteioTipo}}</p>
         ----------------------------<br>
         <ng-container *ngFor="let item of aposta.itens">
             <p class="informacoes-item">
@@ -15,7 +16,7 @@
             <p class="informacoes-item">
                 VALOR: {{item.valor | currency: 'BRL':'symbol':'1.2'}}
             </p>
-            <p class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
+            <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
                 Retorno 6: {{item.cotacao6 * item.valor | currency: 'BRL':'symbol':'1.2'}}
             </p>
             <p class="informacoes-item" [ngClass]="verificarStatus(item, 5)">

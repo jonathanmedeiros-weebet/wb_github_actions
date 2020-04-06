@@ -8,7 +8,7 @@ const _live = 'https://streaming.wee.bet';
 const _stats = 'http://localhost:3004';
 
 export const config: any = {
-    BANCA_NOME: 'SUPER BET SPORT',
+    BANCA_NOME: 'DEMO',
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,

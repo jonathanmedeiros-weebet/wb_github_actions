@@ -31,6 +31,10 @@
                         <app-validar-aposta-acumuladao *ngSwitchCase="'acumuladao'" [preAposta]="preAposta"
                             (success)="success($event)">
                         </app-validar-aposta-acumuladao>
+
+                        <app-validar-aposta-desafios *ngSwitchCase="'desafio'" [preAposta]="preAposta"
+                        (success)="success($event)">
+                    </app-validar-aposta-desafios>
                     </ng-container>
                 </div>
             </div>

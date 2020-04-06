@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ApostaLoteriaModalComponent, PreApostaModalComponent } from '../../shared/layout/modals';
+import { ApostaModalComponent, PreApostaModalComponent } from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
@@ -196,7 +196,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     apostaSuccess(aposta) {
-        this.modalRef = this.modalService.open(ApostaLoteriaModalComponent, {
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });

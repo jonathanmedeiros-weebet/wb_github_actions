@@ -95,6 +95,11 @@
                 <span>Combate</span>
             </a>
         </div>
+        <div *ngIf="desafioHabilitado" class="category" routerLinkActive="active">
+            <a class="" [routerLink]="['/desafios']">
+                <i class="fa fa-trophy"></i> Desafio
+            </a>
+        </div>
         <div *ngIf="acumuladaoHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/acumuladao/listagem']">
                 <i class="fa fa-money"></i> Acumuladão

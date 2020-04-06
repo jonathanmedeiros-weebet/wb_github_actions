@@ -25,4 +25,6 @@
     </app-exibir-bilhete-loteria>
     <app-bilhete-acumuladao [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'acumuladao'">
     </app-bilhete-acumuladao>
+    <app-exibir-bilhete-desafio [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'desafio'">
+    </app-exibir-bilhete-desafio>
 </div>

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
 import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard, LoteriaGuard } from './services';
+import { AuthGuard, LoteriaGuard, DesafioGuard } from './services';
 import { CupomComponent } from './cupom/cupom.component';
 
 const appRoutes: Routes = [
@@ -30,6 +30,11 @@ const appRoutes: Routes = [
                 path: 'cartoes',
                 loadChildren: () => import('app/cartao/cartao.module').then(m => m.CartaoModule),
                 canActivate: [AuthGuard]
+            },
+            {
+                path: 'desafios',
+                loadChildren: () => import('app/desafios/desafios.module').then(m => m.DesafiosModule),
+                canActivate: [DesafioGuard]
             },
             {
                 path: 'esportes',

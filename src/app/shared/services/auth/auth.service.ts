@@ -103,57 +103,12 @@ export class AuthService {
         return result;
     }
 
-    hasBasquete() {
+    modalidadeHabilitada(modalidade) {
         let result = false;
 
         const opcoes = this.paramsService.getOpcoes();
         if (opcoes) {
-            result = opcoes.basquete;
-        }
-
-        return result;
-    }
-
-    hasCombate() {
-        let result = false;
-
-        const opcoes = this.paramsService.getOpcoes();
-        if (opcoes) {
-            result = opcoes.combate;
-        }
-
-        return result;
-    }
-
-    hasEsports() {
-        let result = false;
-
-        const opcoes = this.paramsService.getOpcoes();
-        if (opcoes) {
-            result = opcoes.esports;
-        }
-
-        return result;
-    }
-
-
-    hasLoterias() {
-        let result = false;
-
-        const opcoes = this.paramsService.getOpcoes();
-        if (opcoes) {
-            result = opcoes.loterias;
-        }
-
-        return result;
-    }
-
-    hasAoVivo() {
-        let result = false;
-
-        const opcoes = this.paramsService.getOpcoes();
-        if (opcoes) {
-            result = opcoes.aovivo;
+            result = opcoes[modalidade];
         }
 
         return result;

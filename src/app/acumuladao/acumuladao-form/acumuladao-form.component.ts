@@ -7,7 +7,7 @@ import {
     AuthService, ParametrosLocaisService
 } from './../../services';
 import { Acumuladao } from './../../models';
-import { ApostaAcumuladaoModalComponent } from './../../shared/layout/modals/aposta-acumuladao-modal/aposta-acumuladao-modal.component';
+import { ApostaModalComponent } from './../../shared/layout/modals';
 import { PreApostaModalComponent } from './../../shared/layout/modals/pre-aposta-modal/pre-aposta-modal.component';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -205,7 +205,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         if (preAposta) {
             modal = PreApostaModalComponent;
         } else {
-            modal = ApostaAcumuladaoModalComponent;
+            modal = ApostaModalComponent;
         }
 
         this.modalRef = this.modalService.open(modal, {

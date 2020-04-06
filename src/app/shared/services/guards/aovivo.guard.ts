@@ -12,7 +12,7 @@ export class AoVivoGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         // If user is not logged in we'll send them to the homepage
-        if (!this.auth.hasAoVivo()) {
+        if (!this.auth.modalidadeHabilitada('aovivo')) {
             this.router.navigate(['/']);
             return false;
         }

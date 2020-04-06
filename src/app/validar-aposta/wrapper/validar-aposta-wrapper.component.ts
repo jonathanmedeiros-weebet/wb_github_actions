@@ -12,9 +12,7 @@ import {
     MessageService,
     PreApostaEsportivaService
 } from '../../services';
-import { ApostaModalComponent } from './../../shared/layout/modals/aposta-modal/aposta-modal.component';
-import { ApostaLoteriaModalComponent } from './../../shared/layout/modals/aposta-loteria-modal/aposta-loteria-modal.component';
-import { ApostaAcumuladaoModalComponent } from './../../shared/layout/modals/aposta-acumuladao-modal/aposta-acumuladao-modal.component';
+import { ApostaModalComponent } from './../../shared/layout/modals';
 
 @Component({
     selector: 'app-validar-aposta-wrapper',
@@ -36,8 +34,7 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
         private modalService: NgbModal
     ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     ngOnDestroy() {
         this.unsub$.next();
@@ -69,18 +66,7 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
     success(aposta) {
         this.goToTop('#default-content');
 
-        let modalComponent;
-        if (aposta.tipo === 'esportes') {
-            modalComponent = ApostaModalComponent;
-        }
-        if (aposta.tipo === 'loteria') {
-            modalComponent = ApostaLoteriaModalComponent;
-        }
-        if (aposta.tipo === 'acumuladao') {
-            modalComponent = ApostaAcumuladaoModalComponent;
-        }
-
-        this.modalRef = this.modalService.open(modalComponent, {
+        this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });

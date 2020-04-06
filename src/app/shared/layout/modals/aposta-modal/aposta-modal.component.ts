@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { ExibirBilheteEsportivoComponent } from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import { BilheteAcumuladaoComponent } from './../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { ExibirBilheteDesafioComponent } from './../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
 
@@ -11,6 +14,9 @@ import { HelperService, AuthService, ParametrosLocaisService } from '../../../..
 })
 export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
+    @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(ExibirBilheteDesafioComponent, { static: false }) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
+    @ViewChild(BilheteAcumuladaoComponent, { static: false }) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     @Input() aposta;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;
@@ -31,11 +37,33 @@ export class ApostaModalComponent implements OnInit {
     }
 
     printTicket() {
-        this.bilheteEsportivoComponent.print();
+        if (this.aposta.tipo === 'esportes') {
+            this.bilheteEsportivoComponent.print();
+        }
+        if (this.aposta.tipo === 'loteria') {
+            this.bilheteLoteriaComponent.print();
+        }
+        if (this.aposta.tipo === 'acumuladao') {
+            this.bilheteAcumuladaoComponent.print();
+        }
+        if (this.aposta.tipo === 'desafio') {
+            this.bilheteDesafioComponent.print();
+        }
     }
 
     shareTicket() {
-        this.bilheteEsportivoComponent.shared();
+        if (this.aposta.tipo === 'esportes') {
+            this.bilheteEsportivoComponent.shared();
+        }
+        if (this.aposta.tipo === 'loteria') {
+            this.bilheteLoteriaComponent.shared();
+        }
+        if (this.aposta.tipo === 'acumuladao') {
+            this.bilheteAcumuladaoComponent.shared();
+        }
+        if (this.aposta.tipo === 'desafio') {
+            this.bilheteDesafioComponent.shared();
+        }
     }
 
     cancel() {

@@ -14,6 +14,8 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     showLoading = true;
     controlarCreditoCambista;
     loteriasHabilitada;
+    acumuladaoHabilitado;
+    desafioHabilitado;
 
     constructor(
         private relatorioService: RelatorioService,
@@ -24,6 +26,8 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.controlarCreditoCambista = this.params.controlarCreditoCambista();
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
+        this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
+        this.desafioHabilitado = this.params.getOpcoes().desafio;
     }
 
     ngOnChanges() {

@@ -16,6 +16,7 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
     dataFinal;
     loteriasHabilitada;
     acumuladaoHabilitado;
+    desafioHabilitado;
     tipo = 'esporte';
 
     constructor(
@@ -39,6 +40,7 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
 
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
+        this.desafioHabilitado = this.params.getOpcoes().desafio;
 
         this.createForm();
     }

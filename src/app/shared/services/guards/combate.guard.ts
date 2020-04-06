@@ -11,7 +11,7 @@ export class CombateGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.auth.hasCombate()) {
+        if (!this.auth.modalidadeHabilitada('combate')) {
             this.router.navigate(['/']);
             return false;
         }

@@ -11,7 +11,7 @@ export class BasqueteGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.auth.hasBasquete()) {
+        if (!this.auth.modalidadeHabilitada('basquete')) {
             this.router.navigate(['/']);
             return false;
         }
