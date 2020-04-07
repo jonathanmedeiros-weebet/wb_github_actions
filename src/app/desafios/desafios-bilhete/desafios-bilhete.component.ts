@@ -272,6 +272,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     finalizarApostaDeslogado() {
+        this.disabledSubmit();
+
         const values = clone(this.form.value);
         values.itens.map(item => {
             delete item.desafio;
@@ -299,6 +301,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
                 const dados = Object.assign(values, { cartao: cartaoValues });
                 this.salvarAposta(dados);
+            } else {
+                this.enableSubmit();
             }
         }
     }
