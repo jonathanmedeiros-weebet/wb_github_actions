@@ -28,13 +28,17 @@
                 <label>Horário:</label>
                 <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
             </div>
+            <div>
+                <label>Modalidade:</label>
+                <em>{{aposta.modalidade | sorteioTipo}}</em>
+            </div>
         </div>
         <div class="itens">
             <div class="aposta-itens">
                 <div class="aposta-item" *ngFor="let item of aposta.itens">
                     <div class="first-line">
                         <div>
-                            <label>sorteio ({{item.tipo | sorteioTipo}})</label>
+                            <label>sorteio</label>
                             <span>{{item.sorteio_nome}}</span>
                         </div>
                         <div>
