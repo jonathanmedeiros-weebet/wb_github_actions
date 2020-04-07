@@ -55,14 +55,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     ngOnInit() {
-        const queryParams = { tipo: 'seninha' };
-
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.createForm();
         this.definirAltura();
 
-        this.tipoApostaService.getTiposAposta(queryParams).subscribe(
+        this.tipoApostaService.getTiposAposta({ tipo: 'seninha' }).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
                 this.tiposAposta.forEach(tipoAposta => {
@@ -76,7 +74,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             error => this.messageService.error(error)
         );
 
-        this.sorteioService.getSorteios(queryParams).subscribe(
+        this.sorteioService.getSorteios({ tipo: 'seninha', sort: 'data' }).subscribe(
             sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );

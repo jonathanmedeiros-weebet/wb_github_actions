@@ -55,14 +55,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     ngOnInit() {
-        const queryParams = { tipo: 'quininha' };
-
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.createForm();
         this.definirAltura();
 
-        this.tipoApostaService.getTiposAposta(queryParams).subscribe(
+        this.tipoApostaService.getTiposAposta({ tipo: 'quininha' }).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
                 this.tiposAposta.forEach(tipoAposta => {
@@ -76,7 +74,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             error => this.messageService.error(error)
         );
 
-        this.sorteioService.getSorteios(queryParams)
+        this.sorteioService.getSorteios({ tipo: 'quininha', sort: 'data' })
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 sorteios => this.sorteios = sorteios,
