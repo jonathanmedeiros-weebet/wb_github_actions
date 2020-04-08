@@ -28,6 +28,10 @@
                 <label>Horário:</label>
                 <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
             </div>
+            <div>
+                <label>Modalidade:</label>
+                <em>{{aposta.modalidade | sorteioTipo}}</em>
+            </div>
         </div>
         <div class="itens">
             <div class="aposta-itens">
@@ -60,6 +64,10 @@
                         <div>
                             <label>prêmio</label>
                             <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+                        </div>
+                        <div>
+                            <label>qtd. números</label>
+                            <span>{{item.numeros.length}}</span>
                         </div>
                         <div>
                             <label>status</label>

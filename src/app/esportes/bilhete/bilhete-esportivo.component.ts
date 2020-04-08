@@ -337,6 +337,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     finalizarApostaDeslogado() {
+        this.disabledSubmit();
+
         const values = clone(this.form.value);
         values.itens.map(item => {
             delete item.jogo;
@@ -363,6 +365,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
                 const dados = Object.assign(values, { cartao: cartaoValues });
                 this.salvarAposta(dados);
+            } else {
+                this.enableSubmit();
             }
         }
     }
