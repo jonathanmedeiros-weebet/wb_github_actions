@@ -176,7 +176,8 @@
         "maxxbets.club": "gulp maxxbets.club",
         "betsgol.net": "gulp betsgol.net",
         "mastersports.wee.bet": "gulp mastersports.wee.bet",
-        "centralbets.club": "gulp centralbets.club"
+        "centralbets.club": "gulp centralbets.club",
+        "betsbs.net": "gulp betsbs.net"
     },
     "private": true,
     "dependencies": {

@@ -1500,3 +1500,11 @@ gulp.task('centralbets.club', function (done) {
         styles: "--header: #0b2947; --foreground-header: #fff; --sidebar-right:#0e1e31; --foreground-sidebar-right: #fff; --sidebar-left: #0e1e31; --foreground-sidebar-left: #fff; --highlight: #8bc53f; --odds: #ffab03; --foreground-odds: #fff;",
     });
 });
+
+gulp.task('betsbs.net', function (done) {
+    tasks(done, {
+        host: "betsbs.net",
+        banca: "BETS BS",
+        styles: ""
+     });
+});
