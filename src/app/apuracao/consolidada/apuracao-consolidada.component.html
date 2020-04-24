@@ -78,7 +78,7 @@
                 <tr>
                     <th>Resultado no Período</th>
                     <td class="text-right resultado"
-                        [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
+                        [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
                         <b>{{resultado | currency: 'BRL':'symbol':'1.2'}}</b>
                     </td>
                 </tr>
