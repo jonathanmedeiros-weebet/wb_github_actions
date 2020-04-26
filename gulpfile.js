@@ -1508,3 +1508,11 @@ gulp.task('betsbs.net', function (done) {
         styles: ""
      });
 });
+
+gulp.task('firebet.fun', function (done) {
+    tasks(done, {
+        host: "firebet.fun",
+        banca: "FIREBET",
+        styles: ""
+     });
+});
