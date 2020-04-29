@@ -1520,7 +1520,7 @@ gulp.task('firebet.fun', function (done) {
 gulp.task('redelsports.com', function (done) {
     tasks(done, {
         host: "redelsports.com",
-        banca: "REDEL SPORTS",
+        banca: "REDE LSPORTS",
         styles: ""
      });
 });
