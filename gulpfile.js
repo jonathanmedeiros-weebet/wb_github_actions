@@ -1516,3 +1516,11 @@ gulp.task('firebet.fun', function (done) {
         styles: ""
      });
 });
+
+gulp.task('redelsports.com', function (done) {
+    tasks(done, {
+        host: "redelsports.com",
+        banca: "REDEL SPORTS",
+        styles: ""
+     });
+});

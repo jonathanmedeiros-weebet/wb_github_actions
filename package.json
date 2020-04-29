@@ -178,7 +178,8 @@
         "mastersports.wee.bet": "gulp mastersports.wee.bet",
         "centralbets.club": "gulp centralbets.club",
         "betsbs.net": "gulp betsbs.net",
-        "firebet.fun": "gulp firebet.fun"
+        "firebet.fun": "gulp firebet.fun",
+        "redelsports.com": "gulp redelsports.com"
     },
     "private": true,
     "dependencies": {
