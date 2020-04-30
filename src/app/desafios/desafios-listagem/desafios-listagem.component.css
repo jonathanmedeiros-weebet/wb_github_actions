@@ -30,6 +30,11 @@
     padding: 5px 0;
 }
 
+.indentificacao .horario{
+    background-color: var(--event-time);
+    color: var(--fg-event-time);
+}
+
 .indentificacao .nome{
     flex-grow: 1;
     font-weight: bold;

@@ -18,6 +18,9 @@
                         <ng-container *ngFor="let desafio of categoria.desafios">
                             <div class="desafio" *ngIf="desafio.odds.length">
                                 <div class="indentificacao">
+                                    <div class="horario">
+                                        {{desafio.data_hora_encerramento | moment: 'DD/MM/YYYY HH:mm'}}
+                                    </div>
                                     <div class="nome">
                                         {{desafio.nome}}
                                     </div>
