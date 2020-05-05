@@ -1513,7 +1513,7 @@ gulp.task('firebet.fun', function (done) {
     tasks(done, {
         host: "firebet.fun",
         banca: "FIREBET",
-        styles: "--header: #000; --foreground-header: #66625b; --sidebar-right:#000; --foreground-sidebar-right: #66625b; --sidebar-left: #000; --foreground-sidebar-left: #66625b; --highlight: red;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--odds: red; --foreground-odds: #fff;--foreground-highlight: #fff;",
      });
 });
 
