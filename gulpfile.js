@@ -1513,7 +1513,7 @@ gulp.task('firebet.fun', function (done) {
     tasks(done, {
         host: "firebet.fun",
         banca: "FIREBET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--odds: red; --foreground-odds: #fff;--foreground-highlight: #fff;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--odds: red; --foreground-odds: #fff;--foreground-highlight: #fff;--event-time:#777777",
      });
 });
 
@@ -1522,5 +1522,13 @@ gulp.task('redelsports.com', function (done) {
         host: "redelsports.com",
         banca: "REDE LSPORTS",
         styles: ""
+     });
+});
+
+gulp.task('megasports.club', function (done) {
+    tasks(done, {
+        host: "megasports.club",
+        banca: "MEGA SPORTS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: red; --foreground-odds: #fff;"
      });
 });

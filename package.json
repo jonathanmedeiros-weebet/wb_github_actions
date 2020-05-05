@@ -179,7 +179,8 @@
         "centralbets.club": "gulp centralbets.club",
         "betsbs.net": "gulp betsbs.net",
         "firebet.fun": "gulp firebet.fun",
-        "redelsports.com": "gulp redelsports.com"
+        "redelsports.com": "gulp redelsports.com",
+        "megasports.club": "gulp megasports.club"
     },
     "private": true,
     "dependencies": {
