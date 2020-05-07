@@ -221,7 +221,7 @@ export class HelperService {
     sharedTicket(aposta, file) {
         let data;
         if (aposta.tipo === 'loteria') {
-            data = `${config.HOST}/aposta/${aposta.chave}`;
+            data = `http:${config.HOST}/aposta/${aposta.chave}`;
         } else {
             data = `${location.origin}/bilhete/${aposta.chave}`;
         }
