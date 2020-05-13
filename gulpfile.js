@@ -1532,3 +1532,11 @@ gulp.task('megasports.club', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #008000; --foreground-odds: #fff;--highlight:red;"
      });
 });
+
+gulp.task('alfasports.net', function (done) {
+    tasks(done, {
+        host: "alfasports.net",
+        banca: "ALFA SPORTS",
+        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--highlight:red;"
+     });
+});

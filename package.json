@@ -180,7 +180,8 @@
         "betsbs.net": "gulp betsbs.net",
         "firebet.fun": "gulp firebet.fun",
         "redelsports.com": "gulp redelsports.com",
-        "megasports.club": "gulp megasports.club"
+        "megasports.club": "gulp megasports.club",
+        "alfasports.net": "gulp alfasports.net"
     },
     "private": true,
     "dependencies": {
