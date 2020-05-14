@@ -1540,3 +1540,11 @@ gulp.task('alfasports.net', function (done) {
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--highlight:red;"
      });
 });
+
+gulp.task('novo.maisporte.com', function (done) {
+    tasks(done, {
+        host: "novo.maisporte.com",
+        banca: "MAISPORTE",
+        styles: ""
+     });
+});
