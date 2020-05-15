@@ -1548,3 +1548,11 @@ gulp.task('novo.maisporte.com', function (done) {
         styles: ""
      });
 });
+
+gulp.task('ebsloteriasonline.fun', function (done) {
+    tasks(done, {
+        host: "ebsloteriasonline.fun",
+        banca: "EBS LOTERIAS",
+        styles: ""
+     });
+});
