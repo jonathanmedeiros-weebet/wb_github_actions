@@ -1556,3 +1556,11 @@ gulp.task('ebsloteriasonline.fun', function (done) {
         styles: "--header:#373435;--foreground-header:#fff;--sidebar-right:#373435;--sidebar-left:#373435;--odds:#66bc50;--highlight:#36f909;"
      });
 });
+
+gulp.task('betturbinado.com', function (done) {
+    tasks(done, {
+        host: "betturbinado.com",
+        banca: "BET TURBINADO",
+        styles: ""
+     });
+});

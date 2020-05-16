@@ -183,7 +183,8 @@
         "megasports.club": "gulp megasports.club",
         "alfasports.net": "gulp alfasports.net",
         "novo.maisporte.com": "gulp novo.maisporte.com",
-        "ebsloteriasonline.fun": "gulp ebsloteriasonline.fun"
+        "ebsloteriasonline.fun": "gulp ebsloteriasonline.fun",
+        "betturbinado.com": "gulp betturbinado.com"
     },
     "private": true,
     "dependencies": {
