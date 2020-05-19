@@ -1569,7 +1569,7 @@ gulp.task('recifeesportes.wee.bet', function (done) {
     tasks(done, {
         host: "recifeesportes.wee.bet",
         banca: "RECIFE ESPORTES",
-        styles: ""
+        styles: "--header:#f26225;--foreground-header:#fff;--sidebar-right:#e46f23;--sidebar-left:#e46f23;--odds:#073995;--highlight:#f3e92b;--foreground-highlight: #fff;"
      });
 });
 
