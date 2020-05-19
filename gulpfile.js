@@ -1561,6 +1561,14 @@ gulp.task('betturbinado.com', function (done) {
     tasks(done, {
         host: "betturbinado.com",
         banca: "BET TURBINADO",
+        styles: "--header:#dd3c30;--foreground-header:#fff;--sidebar-right:#691709;--sidebar-left:#691709;--odds:#f4bf29;--highlight:yellow;--foreground-highlight: #fff;"
+     });
+});
+
+gulp.task('recifeesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "recifeesportes.wee.bet",
+        banca: "RECIFE ESPORTES",
         styles: ""
      });
 });

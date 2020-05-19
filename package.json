@@ -184,7 +184,8 @@
         "alfasports.net": "gulp alfasports.net",
         "novo.maisporte.com": "gulp novo.maisporte.com",
         "ebsloteriasonline.fun": "gulp ebsloteriasonline.fun",
-        "betturbinado.com": "gulp betturbinado.com"
+        "betturbinado.com": "gulp betturbinado.com",
+        "recifeesportes.wee.bet": "gulp recifeesportes.wee.bet"
     },
     "private": true,
     "dependencies": {
