@@ -78,10 +78,10 @@ function tasks(done, config) {
 
 };
 
-gulp.task('baraosports.wee.bet', function (done) {
+gulp.task('vipsports.wee.bet', function (done) {
     tasks(done, {
-        host: "baraosports.wee.bet",
-        banca: "Barão Sports",
+        host: "vipsports.wee.bet",
+        banca: "Vip Sports",
         styles: "",
     });
 });
@@ -1569,6 +1569,14 @@ gulp.task('recifeesportes.wee.bet', function (done) {
     tasks(done, {
         host: "recifeesportes.wee.bet",
         banca: "RECIFE ESPORTES",
+        styles: ""
+     });
+});
+
+gulp.task('sportbet7.net', function (done) {
+    tasks(done, {
+        host: "sportbet7.net",
+        banca: "SPORT BET 7",
         styles: ""
      });
 });

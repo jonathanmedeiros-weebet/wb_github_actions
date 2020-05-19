@@ -9,7 +9,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "baraosports.wee.bet": "gulp baraosports.wee.bet",
+        "vipsports.wee.bet": "gulp vipsports.wee.bet",
         "betsgol.wee.bet": "gulp betsgol.wee.bet",
         "bet1.wee.bet": "gulp bet1.wee.bet",
         "betcash.club": "gulp betcash.club",
@@ -185,7 +185,8 @@
         "novo.maisporte.com": "gulp novo.maisporte.com",
         "ebsloteriasonline.fun": "gulp ebsloteriasonline.fun",
         "betturbinado.com": "gulp betturbinado.com",
-        "recifeesportes.wee.bet": "gulp recifeesportes.wee.bet"
+        "recifeesportes.wee.bet": "gulp recifeesportes.wee.bet",
+        "sportbet7.net": "gulp sportbet7.net"
     },
     "private": true,
     "dependencies": {
