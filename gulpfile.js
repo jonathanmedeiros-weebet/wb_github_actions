@@ -1570,7 +1570,7 @@ gulp.task('recifeesportes.wee.bet', function (done) {
         host: "recifeesportes.wee.bet",
         banca: "RECIFE ESPORTES",
         styles: "--header:#f26225;--foreground-header:#fff;--sidebar-right:#f26225;--sidebar-left:#f26225;--odds:#828282;--highlight:#1f2038;--foreground-highlight: #fff;--foreground-selected-odds: #fff;--selected-odds: #f26225; --event-time:#1f2038; --league: #1f2038; --foreground-league: #fff;",
-        aditional_styles: "body{ background-color: #1f2038!important;  } .mais-opcoes{ color: #1f2038!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #1f2038!important; } .sidebar-brand{ margin-top: 0!important; padding-top: 15px; background-color: #1f2038; } .sidebar-menu{ background-color: #1f2038; margin-top: 0!important; } .navbar-mobile{ background-color: #1f2038; } "
+        aditional_styles: "body{ background-color: #1f2038!important;  } .mais-opcoes{ color: #1f2038!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #1f2038!important; } .sidebar-brand{ margin-top: 0!important; padding-top: 15px; padding-bottom: 20px; background-color: #1f2038; } .sidebar-menu{ background-color: #1f2038; margin-top: 0!important; } .navbar-mobile{ background-color: #1f2038; } .pre-bilhete .div-inputs, .pre-bilhete .valores button, .pre-bilhete .form-group button { background-color: #1f2038!important; } .pre-bilhete .form-group button:hover { color:#fff!important; } "
      });
 });
 
