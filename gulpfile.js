@@ -1580,3 +1580,11 @@ gulp.task('sportbet7.net', function (done) {
         styles: ""
      });
 });
+
+gulp.task('masterjogos.club', function (done) {
+    tasks(done, {
+        host: "masterjogos.club",
+        banca: "MASTER JOGOS",
+        styles: ""
+     });
+});
