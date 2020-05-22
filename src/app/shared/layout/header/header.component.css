@@ -39,11 +39,21 @@ header a{
     justify-content: center;
     padding: 15px 15px 0 15px;
     overflow-x: auto!important;
+    /* Hide scrollbar for IE and Edge */
+    -ms-overflow-style: none;
+}
+
+.menu-categories::-webkit-scrollbar {
+    display: none;
 }
 
 .menu-categories .category{
     margin: 0px 10px;
     padding-bottom: 5px;
+}
+
+.menu-categories .category:last-child{
+    padding-right: 25px;
 }
 
 .menu-categories .category a{
@@ -102,6 +112,7 @@ header a{
 @media only screen and (max-width: 667px) {
     .menu-categories{
         font-size: 0.5rem;
+        justify-content: normal;
     }
 
     .menu-categories .menu-conta{
