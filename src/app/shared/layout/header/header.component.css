@@ -52,7 +52,7 @@ header a{
     padding-bottom: 5px;
 }
 
-.menu-categories .category:last-child{
+.menu-categories div:nth-last-child(2){
     padding-right: 25px;
 }
 
