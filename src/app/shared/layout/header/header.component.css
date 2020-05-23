@@ -52,8 +52,14 @@ header a{
     padding-bottom: 5px;
 }
 
+.menu-categories div:first-child{
+    padding-left: 25px;
+    margin-left: auto!important;
+}
+
 .menu-categories div:nth-last-child(2){
     padding-right: 25px;
+    margin-right: auto!important;
 }
 
 .menu-categories .category a{
