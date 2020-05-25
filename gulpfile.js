@@ -1594,6 +1594,6 @@ gulp.task('jrsports.bet', function (done) {
     tasks(done, {
         host: "jrsports.bet",
         banca: "JR SPORTS",
-        styles: "--header:#631508;--foreground-header:#fff;--sidebar-right:#631508;--sidebar-left:#631508;--odds:#a07417;"
+        styles: "--header:#631508;--foreground-header:#fff;--sidebar-right:#631508;--sidebar-left:#631508;--odds:#a07417; --foreground-highlight: #fff;"
     });
 });
