@@ -187,7 +187,8 @@
         "betturbinado.com": "gulp betturbinado.com",
         "recifeesportes.wee.bet": "gulp recifeesportes.wee.bet",
         "sportbet7.net": "gulp sportbet7.net",
-        "masterjogos.club": "gulp masterjogos.club"
+        "masterjogos.club": "gulp masterjogos.club",
+        "jrsports.bet": "gulp jrsports.bet"
     },
     "private": true,
     "dependencies": {

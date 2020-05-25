@@ -1506,7 +1506,7 @@ gulp.task('betsbs.net', function (done) {
         host: "betsbs.net",
         banca: "BETS BS",
         styles: ""
-     });
+    });
 });
 
 gulp.task('firebet.fun', function (done) {
@@ -1514,7 +1514,7 @@ gulp.task('firebet.fun', function (done) {
         host: "firebet.fun",
         banca: "FIREBET",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--odds: red; --foreground-odds: #fff;--foreground-highlight: #fff;--event-time:#777777",
-     });
+    });
 });
 
 gulp.task('redelsports.com', function (done) {
@@ -1522,7 +1522,7 @@ gulp.task('redelsports.com', function (done) {
         host: "redelsports.com",
         banca: "REDE LSPORTS",
         styles: ""
-     });
+    });
 });
 
 gulp.task('megasports.club', function (done) {
@@ -1530,7 +1530,7 @@ gulp.task('megasports.club', function (done) {
         host: "megasports.club",
         banca: "MEGA SPORTS",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #008000; --foreground-odds: #fff;--highlight:red;"
-     });
+    });
 });
 
 gulp.task('alfasports.net', function (done) {
@@ -1538,7 +1538,7 @@ gulp.task('alfasports.net', function (done) {
         host: "alfasports.net",
         banca: "ALFA SPORTS",
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--highlight:red;"
-     });
+    });
 });
 
 gulp.task('novo.maisporte.com', function (done) {
@@ -1546,7 +1546,7 @@ gulp.task('novo.maisporte.com', function (done) {
         host: "novo.maisporte.com",
         banca: "MAISPORTE",
         styles: ""
-     });
+    });
 });
 
 gulp.task('ebsloteriasonline.fun', function (done) {
@@ -1554,7 +1554,7 @@ gulp.task('ebsloteriasonline.fun', function (done) {
         host: "ebsloteriasonline.fun",
         banca: "EBS LOTERIAS",
         styles: "--header:#373435;--foreground-header:#fff;--sidebar-right:#373435;--sidebar-left:#373435;--odds:#66bc50;--highlight:#36f909;"
-     });
+    });
 });
 
 gulp.task('betturbinado.com', function (done) {
@@ -1562,7 +1562,7 @@ gulp.task('betturbinado.com', function (done) {
         host: "betturbinado.com",
         banca: "BET TURBINADO",
         styles: "--header:#dd3c30;--foreground-header:#fff;--sidebar-right:#691709;--sidebar-left:#691709;--odds:#f4bf29;--highlight:yellow;--foreground-highlight: #fff;"
-     });
+    });
 });
 
 gulp.task('recifeesportes.wee.bet', function (done) {
@@ -1571,7 +1571,7 @@ gulp.task('recifeesportes.wee.bet', function (done) {
         banca: "RECIFE ESPORTES",
         styles: "--header:#f26225;--foreground-header:#fff;--sidebar-right:#f26225;--sidebar-left:#f26225;--odds:#828282;--highlight:#390051;--foreground-highlight: #fff;--foreground-selected-odds: #fff;--selected-odds: #f26225; --event-time:#390051; --league: #390051; --foreground-league: #fff;",
         aditional_styles: "body{ background-color: #390051!important;  } .mais-opcoes{ color: #390051!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #390051!important; } .sidebar-brand{ margin-top: 0!important; padding-top: 15px; padding-bottom: 20px; background-color: #390051; } .sidebar-menu{ background-color: #390051; margin-top: 0!important; } .navbar-mobile{ background-color: #390051; } .pre-bilhete .div-inputs, .pre-bilhete .valores button, .pre-bilhete .form-group button { background-color: #390051!important; } .pre-bilhete .form-group button:hover { color:#fff!important; } .odds .selecionado{ background-color: #f26225!important; } .jogo-selecionado .fa-times{color:#390051!important;} .fechar-pre-bilhete .fa-times{color:#390051!important;}"
-     });
+    });
 });
 
 gulp.task('sportbet7.net', function (done) {
@@ -1579,7 +1579,7 @@ gulp.task('sportbet7.net', function (done) {
         host: "sportbet7.net",
         banca: "SPORT BET 7",
         styles: ""
-     });
+    });
 });
 
 gulp.task('masterjogos.club', function (done) {
@@ -1587,5 +1587,13 @@ gulp.task('masterjogos.club', function (done) {
         host: "masterjogos.club",
         banca: "MASTER JOGOS",
         styles: ""
-     });
+    });
+});
+
+gulp.task('jrsports.bet', function (done) {
+    tasks(done, {
+        host: "jrsports.bet",
+        banca: "JR SPORTS",
+        styles: "--header:#631508;--foreground-header:#fff;--sidebar-right:#631508;--sidebar-left:#631508;--odds:#a07417;"
+    });
 });
