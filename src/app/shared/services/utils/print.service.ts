@@ -632,13 +632,13 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
                         QUANTIDADE DE JOGOS: <span style="float:right">${aposta.itens.length}</span>
                     </p>
                     <p class="aposta">
-                        COTAÇÃO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}</span>
+                        COTAÇÃO: <span style="float:right">${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor).replace('R$ ', '')}</span>
                     </p>
                     <p class="aposta">
                         VALOR APOSTADO: <span style="float:right">${this.helperService.moneyFormat(aposta.valor)}</span>
                     </p>
                     <p class="ganho">
-                        POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio)}</span>
+                        POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.possibilidade_ganho)}</span>
                     </p>`;
 
         if (aposta.passador.percentualPremio > 0) {
@@ -703,9 +703,9 @@ ${item.categoria_nome}: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
 -------------------------------
 -------------------------------
 QUANTIDADE DE JOGOS: ${aposta.itens.length}
-COTAÇÃO: ${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}
+COTAÇÃO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor).replace('R$ ', '')}
 VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
-POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.premio)}
+POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
 `;
 
         if (aposta.passador.percentualPremio > 0) {
@@ -1107,16 +1107,16 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
                 <hr>
                 <div class="valores">
                     <p class="total-desafios">
-                        QUANTIDADE DE JOGOS: <span style="float:right">${aposta.itens.length}</span>
+                        QUANTIDADE DE DESAFIOS: <span style="float:right">${aposta.itens.length}</span>
                     </p>
                     <p class="aposta">
-                        COTAÇÃO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}</span>
+                        COTAÇÃO: <span style="float:right">${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor).replace('R$ ', '')}</span>
                     </p>
                     <p class="aposta">
                         VALOR APOSTADO: <span style="float:right">${this.helperService.moneyFormat(aposta.valor)}</span>
                     </p>
                     <p class="ganho">
-                        POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio)}</span>
+                        POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.possibilidade_ganho)}</span>
                     </p>`;
 
         if (aposta.passador.percentualPremio > 0) {
@@ -1176,10 +1176,10 @@ RESPOSTA: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
         ticket += `
 -------------------------------
 -------------------------------
-QUANTIDADE DE JOGOS: ${aposta.itens.length}
-COTAÇÃO: ${this.helperService.moneyFormat(aposta.premio / aposta.valor).replace('R$ ', '')}
+QUANTIDADE DE DESAFIOS: ${aposta.itens.length}
+COTAÇÃO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor).replace('R$ ', '')}
 VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
-POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.premio)}
+POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
 `;
 
         if (aposta.passador.percentualPremio > 0) {
