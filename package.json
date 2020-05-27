@@ -113,7 +113,6 @@
         "placardarodada.wee.bet": "gulp placardarodada.wee.bet",
         "kfmbets.com": "gulp kfmbets.com",
         "tuntumesportes.wee.bet": "gulp tuntumesportes.wee.bet",
-        "wmredesports.net": "gulp wmredesports.net",
         "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet",
         "maniasports.bet": "gulp maniasports.bet",
         "vitoriasports.bet": "gulp vitoriasports.bet",
@@ -123,10 +122,8 @@
         "amigosdabola.wee.bet": "gulp amigosdabola.wee.bet",
         "onllinesports.com": "gulp onllinesports.com",
         "liderancaesportes.wee.bet": "gulp liderancaesportes.wee.bet",
-        "cokinhodabanca.wee.bet": "gulp cokinhodabanca.wee.bet",
         "clubbets.wee.bet": "gulp clubbets.wee.bet",
         "bet24h.wee.bet": "gulp bet24h.wee.bet",
-        "tm5sports.wee.bet": "gulp tm5sports.wee.bet",
         "bancadofrade.com": "gulp bancadofrade.com",
         "pitbull.bet": "gulp pitbull.bet",
         "amazonsports.bet": "gulp amazonsports.bet",
@@ -154,7 +151,6 @@
         "centraldosesportes.wee.bet": "gulp centraldosesportes.wee.bet",
         "betdez.com": "gulp betdez.com",
         "ibiapababets.wee.bet": "gulp ibiapababets.wee.bet",
-        "petrolinabets.wee.bet": "gulp petrolinabets.wee.bet",
         "sportenetmania365.wee.bet": "gulp sportenetmania365.wee.bet",
         "mhbets.wee.bet": "gulp mhbets.wee.bet",
         "caciquesports.com": "gulp caciquesports.com",
@@ -188,7 +184,8 @@
         "recifeesportes.wee.bet": "gulp recifeesportes.wee.bet",
         "sportbet7.net": "gulp sportbet7.net",
         "masterjogos.club": "gulp masterjogos.club",
-        "jrsports.bet": "gulp jrsports.bet"
+        "jrsports.bet": "gulp jrsports.bet",
+        "jardimbets.com": "gulp jardimbets.com"
     },
     "private": true,
     "dependencies": {

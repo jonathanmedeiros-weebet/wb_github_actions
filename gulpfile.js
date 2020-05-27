@@ -1597,3 +1597,11 @@ gulp.task('jrsports.bet', function (done) {
         styles: "--header:#631508;--foreground-header:#fff;--sidebar-right:#631508;--sidebar-left:#631508;--odds:#a07417; --foreground-highlight: #fff;"
     });
 });
+
+gulp.task('jardimbets.com', function (done) {
+    tasks(done, {
+        host: "jardimbets.com",
+        banca: "JARDIM BETS",
+        styles: ""
+    });
+});
