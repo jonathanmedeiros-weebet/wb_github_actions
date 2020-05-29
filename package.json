@@ -185,7 +185,8 @@
         "sportbet7.net": "gulp sportbet7.net",
         "masterjogos.club": "gulp masterjogos.club",
         "jrsports.bet": "gulp jrsports.bet",
-        "jardimbets.com": "gulp jardimbets.com"
+        "jardimbets.com": "gulp jardimbets.com",
+        "apremiada.bet": "gulp apremiada.bet"
     },
     "private": true,
     "dependencies": {
