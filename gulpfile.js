@@ -1109,7 +1109,7 @@ gulp.task('amazonsports.bet', function (done) {
     tasks(done, {
         host: "amazonsports.bet",
         banca: "Amazon Sports",
-        styles: ""
+        styles: "--highlight: red;--odds: #006634; --foreground-odds: #fff;"
         // styles: "--header: #019934; --foreground-header: #fff; --sidebar-right:#019934; --foreground-sidebar-right: #fff; --sidebar-left: #019934; --foreground-sidebar-left: #fff; --highlight: #c93334; --foreground-highlight: #fff; --odds: #006634; --foreground-odds: #fff; --event-time: #c93334"
     });
 });
