@@ -65,6 +65,7 @@ export class NavigationComponent implements OnInit {
     loteriasHabilitada;
     acumuladaoHabilitado;
     primeiraPagina;
+    exibirPaginaDeposito;
     dataLimiteTabela;
     unsub$ = new Subject();
     regiaoOpen = null;
@@ -104,6 +105,7 @@ export class NavigationComponent implements OnInit {
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
         this.loteriasHabilitada = this.paramsService.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
+        this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
         this.isLoggedIn = this.auth.isLoggedIn();
         this.preencherDias();
 
