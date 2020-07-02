@@ -1616,3 +1616,19 @@ gulp.task('apremiada.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #fc6402; --foreground-highlight: #fff; --odds: #9a9a9a; --foreground-odds: #fff; --event-time: #777; --league: #fc6402; --foreground-league: #fff;"
     });
 });
+
+gulp.task('superpremio.club', function (done) {
+    tasks(done, {
+        host: "superpremio.club",
+        banca: "SUPER PRÊMIO",
+        styles: ""
+    });
+});
+
+gulp.task('x2bet.wee.bet', function (done) {
+    tasks(done, {
+        host: "x2bet.wee.bet",
+        banca: "X2 BET",
+        styles: ""
+    });
+});
