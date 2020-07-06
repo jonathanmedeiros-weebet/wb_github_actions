@@ -1629,6 +1629,6 @@ gulp.task('x2bet.wee.bet', function (done) {
     tasks(done, {
         host: "x2bet.wee.bet",
         banca: "X2 BET",
-        styles: ""
+        styles: "--header: #333; --foreground-header: #fff;--sidebar-right:#333;--sidebar-left:#333;--odds:#3c8dbc;--foreground-highlight:#fff;"
     });
 });
