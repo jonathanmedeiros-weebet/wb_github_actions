@@ -188,7 +188,8 @@
         "jardimbets.com": "gulp jardimbets.com",
         "apremiada.bet": "gulp apremiada.bet",
         "superpremio.club": "gulp superpremio.club",
-        "x2bet.wee.bet": "gulp x2bet.wee.bet"
+        "x2bet.wee.bet": "gulp x2bet.wee.bet",
+        "fenixesportes.wee.bet": "gulp fenixesportes.wee.bet"
     },
     "private": true,
     "dependencies": {
