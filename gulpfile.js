@@ -1638,3 +1638,11 @@ gulp.task('fenixesportes.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('ricoesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "ricoesportes.wee.bet",
+        banca: "RICO ESPORTES",
+        styles: ""
+    });
+});
