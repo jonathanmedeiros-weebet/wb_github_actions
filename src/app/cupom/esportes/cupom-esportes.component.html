@@ -76,14 +76,19 @@
                 <b>Nº Jogos:</b> {{aposta.itens.length}}
             </div>
             <div>
-                <b>Cotação:</b> {{aposta.premio / aposta.valor | number:'1.0-3' }}
+                <b>Cotação:</b> {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}
             </div>
             <div>
                 <b>Valor Apostado:</b> {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
             </div>
-            <div>
-                <b>Possível Retorno:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+            <div *ngIf="aposta.resultado; else possibilidadeGanho">
+                <b>Prêmio:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
             </div>
+            <ng-template #possibilidadeGanho>
+                <div>
+                    <b>Possível Retorno:</b> {{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}
+                </div>
+            </ng-template>
             <div *ngIf="aposta.passador.percentualPremio > 0">
                 <b>Cambista Paga:</b> {{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}
             </div>
