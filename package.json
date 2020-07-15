@@ -190,7 +190,8 @@
         "superpremio.club": "gulp superpremio.club",
         "x2bet.wee.bet": "gulp x2bet.wee.bet",
         "fenixesportes.wee.bet": "gulp fenixesportes.wee.bet",
-        "ricoesportes.wee.bet": "gulp ricoesportes.wee.bet"
+        "ricoesportes.wee.bet": "gulp ricoesportes.wee.bet",
+        "betsplay.club": "gulp betsplay.club"
     },
     "private": true,
     "dependencies": {

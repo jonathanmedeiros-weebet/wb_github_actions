@@ -1646,3 +1646,11 @@ gulp.task('ricoesportes.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsplay.club', function (done) {
+    tasks(done, {
+        host: "betsplay.club",
+        banca: "BETSPLAY",
+        styles: ""
+    });
+});
