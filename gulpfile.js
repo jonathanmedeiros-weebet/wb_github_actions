@@ -1651,7 +1651,7 @@ gulp.task('betsplay.club', function (done) {
     tasks(done, {
         host: "betsplay.club",
         banca: "BETSPLAY",
-        styles: ""
+        styles: "--header: #999999; --foreground-header: #fff;--sidebar-right:#e1e1e1;--foreground-sidebar-right:#000;--sidebar-left:#e1e1e1;--foreground-sidebar-left:#000;--odds:#f58534;--foreground-highlight:#24415f;"
     });
 });
 
