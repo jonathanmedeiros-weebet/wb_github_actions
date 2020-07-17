@@ -1654,3 +1654,11 @@ gulp.task('betsplay.club', function (done) {
         styles: ""
     });
 });
+
+gulp.task('camisa13.wee.bet', function (done) {
+    tasks(done, {
+        host: "camisa13.wee.bet",
+        banca: "CAMISA 13",
+        styles: ""
+    });
+});

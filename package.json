@@ -191,7 +191,8 @@
         "x2bet.wee.bet": "gulp x2bet.wee.bet",
         "fenixesportes.wee.bet": "gulp fenixesportes.wee.bet",
         "ricoesportes.wee.bet": "gulp ricoesportes.wee.bet",
-        "betsplay.club": "gulp betsplay.club"
+        "betsplay.club": "gulp betsplay.club",
+        "camisa13.wee.bet": "gulp camisa13.wee.bet"
     },
     "private": true,
     "dependencies": {
