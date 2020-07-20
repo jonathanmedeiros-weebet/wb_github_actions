@@ -1659,6 +1659,14 @@ gulp.task('camisa13.wee.bet', function (done) {
     tasks(done, {
         host: "camisa13.wee.bet",
         banca: "CAMISA 13",
+        styles: "--header:#999999; --foreground-header: #fff; --sidebar-left: #999999; --sidebar-right: #999999; --odds:#4d4d4d;"
+    });
+});
+
+gulp.task('championsbet.club', function (done) {
+    tasks(done, {
+        host: "championsbet.club",
+        banca: "CHAMPIONS BET",
         styles: ""
     });
 });
