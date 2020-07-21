@@ -68,8 +68,8 @@ function tasks(done, config) {
     };
 
     gulp.src(['/'])
-        .pipe(exec('ng build --prod --aot --buildOptimizer=true', options))
-        // .pipe(exec('ng build --prod --aot --outputHashing=none --buildOptimizer=true', options))
+        // .pipe(exec('ng build --prod --aot --buildOptimizer=true', options))
+        .pipe(exec('ng build --prod --aot --outputHashing=none --buildOptimizer=true', options))
         //.pipe(exec('scp -r -i ~/.keystore/weebet.pem dist/* ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/app/', options))
         //.pipe(exec('tar -cf dist/* | ssh -i ~/.keystore/weebet.pem ubuntu@' + config.host + ' "cat >  dist/* ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/app/', options))
         .pipe(exec('cd dist && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.host + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
@@ -189,8 +189,8 @@ gulp.task('casadinha.com', function (done) {
     tasks(done, {
         host: "casadinha.com",
         banca: "Casadinha.com",
-        styles: "--header: #24415f; --foreground-header: #fff; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #67ad5a; --foreground-highlight: #24415f; --odds: #67ad5a; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
-        aditional_styles: ".navbar-mobile{ background-color: #999999; } .odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #24415f!important;color:#fff; }"
+        styles: "--header: #e1e1e1; --foreground-header: #fff; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #67ad5a; --foreground-highlight: #24415f; --odds: #67ad5a; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
+        aditional_styles: ".menu-categories{background-color: #24415f;} .navbar-mobile{ background-color: #999999; } .odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #24415f!important;color:#fff; }"
     });
 });
 

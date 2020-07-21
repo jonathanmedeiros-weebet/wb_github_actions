@@ -135,4 +135,8 @@
     .indentificacao-mobile{
         display: block;
     }
+
+    .odds .odd{
+        width: 100%;
+    }
 }
