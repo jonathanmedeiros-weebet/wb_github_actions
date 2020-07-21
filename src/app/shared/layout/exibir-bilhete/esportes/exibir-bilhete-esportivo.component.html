@@ -19,6 +19,10 @@
                 <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
             </p>
             <p>
+                <b>STATUS: </b>
+                <span>{{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}</span>
+            </p>
+            <p>
                 <b>RESULTADO: </b>
                 <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
                 <span *ngIf="!aposta.resultado">aguardando</span>
@@ -58,17 +62,19 @@
                 QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
             </p>
             <p class="aposta">
-                COTAÇÃO: <span style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
+                COTAÇÃO: <span
+                    style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
             </p>
             <p class="aposta">
                 VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
             </p>
-            <p class="ganho" *ngIf="aposta.resultado; else possibilidadeGanho">
-                PRÊMIO: <span style="float:right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+            <p class="ganho" *ngIf="!aposta.resultado || aposta.resultado == 'a confirmar'; else premio">
+                POSSÍVEL RETORNO: <span
+                    style="float:right">{{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}</span>
             </p>
-            <ng-template #possibilidadeGanho>
+            <ng-template #premio>
                 <p class="ganho">
-                    POSSÍVEL RETORNO: <span style="float:right">{{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}</span>
+                    PRÊMIO: <span style="float:right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
                 </p>
             </ng-template>
             <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
