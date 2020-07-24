@@ -19,13 +19,13 @@
             <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
                 Retorno 6: {{item.cotacao6 * item.valor | currency: 'BRL':'symbol':'1.2'}}
             </p>
-            <p class="informacoes-item" [ngClass]="verificarStatus(item, 5)">
+            <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
                 Retorno 5: {{item.cotacao5 * item.valor | currency: 'BRL':'symbol':'1.2'}}
             </p>
-            <p class="informacoes-item" [ngClass]="verificarStatus(item, 4)">
+            <p class="informacoes-item" *ngIf="item.cotacao4 > 0" [ngClass]="verificarStatus(item, 4)">
                 Retorno 4: {{item.cotacao4 * item.valor | currency: 'BRL':'symbol':'1.2'}}
             </p>
-            <p class="informacoes-item" [ngClass]="verificarStatus(item, 3)">
+            <p class="informacoes-item" *ngIf="item.cotacao3 > 0" [ngClass]="verificarStatus(item, 3)">
                 Retorno 3: {{item.cotacao3 * item.valor | currency: 'BRL':'symbol':'1.2'}}
             </p>
             <p class="informacoes-item">
