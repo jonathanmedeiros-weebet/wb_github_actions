@@ -1497,7 +1497,7 @@ gulp.task('centralbets.club', function (done) {
     tasks(done, {
         host: "centralbets.club",
         banca: "CENTRAL BETS",
-        styles: "--header: #0b2947; --foreground-header: #fff; --sidebar-right:#0e1e31; --foreground-sidebar-right: #fff; --sidebar-left: #0e1e31; --foreground-sidebar-left: #fff; --highlight: #8bc53f; --odds: #ffab03; --foreground-odds: #fff;",
+        styles: "--header: #0b2947; --foreground-header: #fff; --sidebar-right:#0e1e31; --foreground-sidebar-right: #fff; --sidebar-left: #0e1e31; --foreground-sidebar-left: #fff; --highlight: #8bc53f; --odds: #ffab03; --foreground-odds: #000;",
     });
 });
 
