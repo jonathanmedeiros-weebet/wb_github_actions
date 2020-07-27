@@ -228,9 +228,9 @@
     "rxjs": "^6.6.0",
     "rxjs-compat": "^6.2.2",
     "socket.io-client": "^2.1.1",
-    "tslib": "^1.13.0",
+    "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
@@ -244,8 +244,8 @@
     "@types/lodash": "^4.14.106",
     "@types/moment": "^2.13.0",
     "@types/moment-timezone": "^0.2.34",
-    "@types/node": "~6.0.60",
-    "codelyzer": "^5.0.1",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.1.2",
     "gulp": "^4.0.0",
     "gulp-exec": "^3.0.2",
     "gulp-replace": "^1.0.0",
