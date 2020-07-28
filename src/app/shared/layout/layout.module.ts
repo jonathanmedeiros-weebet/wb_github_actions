@@ -68,20 +68,6 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent
     ],
-    entryComponents: [
-        PesquisaModalComponent,
-        PesquisarApostaModalComponent,
-        TabelaModalComponent,
-        ApostaModalComponent,
-        PreApostaModalComponent,
-        ConfirmModalComponent,
-        CartaoCadastroModalComponent,
-        CartaoModalComponent,
-        PesquisarCartaoModalComponent,
-        SolicitarSaqueModalComponent,
-        RecargaCartaoModalComponent,
-        RecargaSuccessModalComponent
-    ],
     exports: [
         MainLayoutComponent,
         AuthLayoutComponent,
