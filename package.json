@@ -193,7 +193,8 @@
     "ricoesportes.wee.bet": "gulp ricoesportes.wee.bet",
     "betsplay.club": "gulp betsplay.club",
     "camisa13.wee.bet": "gulp camisa13.wee.bet",
-    "championsbet.club": "gulp championsbet.club"
+    "championsbet.club": "gulp championsbet.club",
+    "monteirobets.com": "gulp monteirobets.com"
   },
   "private": true,
   "dependencies": {
