@@ -1680,3 +1680,19 @@ gulp.task('monteirobets.com', function (done) {
         styles: "--header:#12369e; --foreground-header: #fff; --odds:#d8262d;--foreground-highlight:#fff;"
     });
 });
+
+gulp.task('sportpremium.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportpremium.wee.bet",
+        banca: "SPORT PREMIUM",
+        styles: ""
+    });
+});
+
+gulp.task('r6sport.com', function (done) {
+    tasks(done, {
+        host: "r6sport.com",
+        banca: "R6 SPORT",
+        styles: ""
+    });
+});
