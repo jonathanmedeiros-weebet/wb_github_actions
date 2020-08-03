@@ -16,10 +16,10 @@ import { AuthService, ApostaService, MessageService, ParametrosLocaisService } f
     styleUrls: ['./pesquisar-aposta-modal.component.css']
 })
 export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
-    @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
-    @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
-    @ViewChild(ExibirBilheteDesafioComponent, { static: false }) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
-    @ViewChild(BilheteAcumuladaoComponent, { static: false }) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
+    @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
+    @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
+    @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     exibirBilhete = false;
     aposta;
     appMobile;

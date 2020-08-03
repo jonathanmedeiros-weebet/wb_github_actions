@@ -13,10 +13,10 @@ import { HelperService, AuthService, ParametrosLocaisService } from '../../../..
     styleUrls: ['./aposta-modal.component.css']
 })
 export class ApostaModalComponent implements OnInit {
-    @ViewChild(ExibirBilheteEsportivoComponent, { static: false }) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
-    @ViewChild(ExibirBilheteLoteriaComponent, { static: false }) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
-    @ViewChild(ExibirBilheteDesafioComponent, { static: false }) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
-    @ViewChild(BilheteAcumuladaoComponent, { static: false }) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
+    @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
+    @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
+    @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
+    @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     @Input() aposta;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;

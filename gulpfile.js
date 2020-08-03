@@ -69,7 +69,8 @@ function tasks(done, config) {
 
     gulp.src(['/'])
         // .pipe(exec('ng build --prod --aot --buildOptimizer=true', options))
-        .pipe(exec('ng build --prod --aot --outputHashing=none --buildOptimizer=true', options))
+        // .pipe(exec('ng build --prod', options))
+        .pipe(exec('ng build --prod --outputHashing=none', options))
         //.pipe(exec('scp -r -i ~/.keystore/weebet.pem dist/* ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/app/', options))
         //.pipe(exec('tar -cf dist/* | ssh -i ~/.keystore/weebet.pem ubuntu@' + config.host + ' "cat >  dist/* ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/app/', options))
         .pipe(exec('cd dist && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.host + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
@@ -1668,6 +1669,30 @@ gulp.task('championsbet.club', function (done) {
     tasks(done, {
         host: "championsbet.club",
         banca: "CHAMPIONS BET",
+        styles: ""
+    });
+});
+
+gulp.task('monteirobets.com', function (done) {
+    tasks(done, {
+        host: "monteirobets.com",
+        banca: "MONTEIRO BETS",
+        styles: "--header:#12369e; --foreground-header: #fff; --odds:#d8262d;--foreground-highlight:#fff;"
+    });
+});
+
+gulp.task('sportpremium.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportpremium.wee.bet",
+        banca: "SPORT PREMIUM",
+        styles: ""
+    });
+});
+
+gulp.task('r6sport.com', function (done) {
+    tasks(done, {
+        host: "r6sport.com",
+        banca: "R6 SPORT",
         styles: ""
     });
 });
