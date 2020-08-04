@@ -343,7 +343,7 @@ gulp.task('superbets.bet', function (done) {
     tasks(done, {
         host: "superbets.bet",
         banca: "SUPERBETS",
-        styles: "",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000;",
     });
 });
 
