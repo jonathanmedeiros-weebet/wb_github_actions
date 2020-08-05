@@ -1685,7 +1685,7 @@ gulp.task('sportpremium.wee.bet', function (done) {
     tasks(done, {
         host: "sportpremium.wee.bet",
         banca: "SPORT PREMIUM",
-        styles: "--header:#000; --foreground-header: #fff;--sidebar-left: #000; --sidebar-right: #000; --odds:#fe5c5a;"
+        styles: "--header:#000; --foreground-header: #fff;--sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;"
     });
 });
 
