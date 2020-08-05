@@ -642,7 +642,14 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
                     </p>`;
 
         if (aposta.passador.percentualPremio > 0) {
-            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            let cambistaPaga = 0;
+
+            if (aposta.resultado) {
+                cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            } else {
+                cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
+            }
+
             printContents += `   <p class="cambista-paga">
                             CAMBISTA PAGA: <span style="float:right">${this.helperService.moneyFormat(cambistaPaga)}</span>
                         </p>`;
@@ -709,7 +716,14 @@ POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
 `;
 
         if (aposta.passador.percentualPremio > 0) {
-            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            let cambistaPaga = 0;
+
+            if (aposta.resultado) {
+                cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            } else {
+                cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
+            }
+
             ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
         }
 
@@ -1120,7 +1134,14 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
                     </p>`;
 
         if (aposta.passador.percentualPremio > 0) {
-            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            let cambistaPaga = 0;
+
+            if (aposta.resultado) {
+                cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            } else {
+                cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
+            }
+
             printContents += `   <p class="cambista-paga">
                             CAMBISTA PAGA: <span style="float:right">${this.helperService.moneyFormat(cambistaPaga)}</span>
                         </p>`;
@@ -1183,7 +1204,14 @@ POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
 `;
 
         if (aposta.passador.percentualPremio > 0) {
-            const cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            let cambistaPaga = 0;
+
+            if (aposta.resultado) {
+                cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            } else {
+                cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
+            }
+
             ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
         }
 
