@@ -1696,3 +1696,11 @@ gulp.task('r6sport.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsports.wee.bet",
+        banca: "BET SPORTS",
+        styles: ""
+    });
+});
