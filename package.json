@@ -197,7 +197,8 @@
     "monteirobets.com": "gulp monteirobets.com",
     "sportpremium.wee.bet": "gulp sportpremium.wee.bet",
     "r6sport.com": "gulp r6sport.com",
-    "betsports.wee.bet": "gulp betsports.wee.bet"
+    "betsports.wee.bet": "gulp betsports.wee.bet",
+    "milagressports.wee.bet": "gulp milagressports.wee.bet"
   },
   "private": true,
   "dependencies": {

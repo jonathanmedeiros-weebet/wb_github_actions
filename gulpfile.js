@@ -1704,3 +1704,11 @@ gulp.task('betsports.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('milagressports.wee.bet', function (done) {
+    tasks(done, {
+        host: "milagressports.wee.bet",
+        banca: "MILAGRES SPORTS",
+        styles: ""
+    });
+});
