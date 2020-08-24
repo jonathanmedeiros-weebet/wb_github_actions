@@ -1722,3 +1722,11 @@ gulp.task('citybets.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('esportsmt.net', function (done) {
+    tasks(done, {
+        host: "esportsmt.net",
+        banca: "ESPORTESMT.NET",
+        styles: ""
+    });
+});

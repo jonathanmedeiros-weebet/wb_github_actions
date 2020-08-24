@@ -199,7 +199,8 @@
     "r6sport.com": "gulp r6sport.com",
     "betsports.wee.bet": "gulp betsports.wee.bet",
     "milagressports.wee.bet": "gulp milagressports.wee.bet",
-    "citybets.wee.bet": "gulp citybets.wee.bet"
+    "citybets.wee.bet": "gulp citybets.wee.bet",
+    "esportsmt.net": "gulp esportsmt.net"
   },
   "private": true,
   "dependencies": {
