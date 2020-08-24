@@ -198,7 +198,8 @@
     "sportpremium.wee.bet": "gulp sportpremium.wee.bet",
     "r6sport.com": "gulp r6sport.com",
     "betsports.wee.bet": "gulp betsports.wee.bet",
-    "milagressports.wee.bet": "gulp milagressports.wee.bet"
+    "milagressports.wee.bet": "gulp milagressports.wee.bet",
+    "citybets.wee.bet": "gulp citybets.wee.bet"
   },
   "private": true,
   "dependencies": {

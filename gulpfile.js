@@ -1714,3 +1714,11 @@ gulp.task('milagressports.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('citybets.wee.bet', function (done) {
+    tasks(done, {
+        host: "citybets.wee.bet",
+        banca: "CITY BETS",
+        styles: ""
+    });
+});
