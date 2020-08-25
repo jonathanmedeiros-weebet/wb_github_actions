@@ -639,6 +639,9 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
                     </p>
                     <p class="ganho">
                         POSSÍVEL RETORNO: <span style="float:right">${this.helperService.moneyFormat(aposta.possibilidade_ganho)}</span>
+                    </p>
+                    <p class="ganho">
+                        PRÊMIO: <span style="float:right">${this.helperService.moneyFormat(aposta.premio)}</span>
                     </p>`;
 
         if (aposta.passador.percentualPremio > 0) {
@@ -713,6 +716,7 @@ QUANTIDADE DE JOGOS: ${aposta.itens.length}
 COTAÇÃO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor).replace('R$ ', '')}
 VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
 POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
+PREMIO: ${this.helperService.moneyFormat(aposta.premio)}
 `;
 
         if (aposta.passador.percentualPremio > 0) {
