@@ -1738,3 +1738,11 @@ gulp.task('lancebet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsgol.bet', function (done) {
+    tasks(done, {
+        host: "betsgol.bet",
+        banca: "BETS GOL",
+        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
+    });
+});
