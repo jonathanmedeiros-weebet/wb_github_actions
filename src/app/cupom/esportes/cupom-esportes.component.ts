@@ -26,7 +26,11 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
         this.ativarAoVivo();
 
         if (this.aposta.passador.percentualPremio > 0) {
-            this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
+            if (this.aposta.resultado) {
+                this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
+            } else {
+                this.cambistaPaga = this.aposta.possibilidade_ganho * ((100 - this.aposta.passador.percentualPremio) / 100);
+            }
         }
     }
 
