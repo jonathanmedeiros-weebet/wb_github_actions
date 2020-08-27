@@ -1730,3 +1730,11 @@ gulp.task('esportsmt.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('lancebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "lancebet.wee.bet",
+        banca: "LANCE BET",
+        styles: ""
+    });
+});
