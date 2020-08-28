@@ -1746,3 +1746,11 @@ gulp.task('betsgol.bet', function (done) {
         styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
     });
 });
+
+gulp.task('playbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "playbets.wee.bet",
+        banca: "PLAY BETS",
+        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#f39200;"
+    });
+});

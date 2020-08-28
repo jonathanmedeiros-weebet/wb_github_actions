@@ -202,7 +202,8 @@
     "citybets.wee.bet": "gulp citybets.wee.bet",
     "esportsmt.net": "gulp esportsmt.net",
     "lancebet.wee.bet": "gulp lancebet.wee.bet",
-    "betsgol.bet": "gulp betsgol.bet"
+    "betsgol.bet": "gulp betsgol.bet",
+    "playbets.wee.bet": "gulp playbets.wee.bet"
 },
 "private": true,
 "dependencies": {
