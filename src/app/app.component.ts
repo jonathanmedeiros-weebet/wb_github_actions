@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AuthService, ParametroService } from './services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
+    @ViewChild('demoModal', { static: true }) demoModal;
+
     constructor(
         private auth: AuthService,
-        private parametroService: ParametroService
+        private parametroService: ParametroService,
+        public modalService: NgbModal,
     ) { }
 
     ngOnInit() {
@@ -27,6 +31,16 @@ export class AppComponent implements OnInit {
                         this.auth.logout();
                     }
                 );
+        }
+
+        if (location.host === 'demo.wee.bet') {
+            this.modalService.open(
+                this.demoModal,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    centered: true
+                }
+            );
         }
     }
 }
