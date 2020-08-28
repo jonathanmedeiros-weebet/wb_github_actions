@@ -134,14 +134,17 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             if (todosComResultados) {
                 if (acertouTodos) {
                     this.aposta.resultado = 'ganhando';
+                    this.aposta.premio = this.aposta.possibilidade_ganho;
                 } else {
                     if (aoMenosUmPerdeu) {
                         this.aposta.resultado = 'perdendo';
+                        this.aposta.premio = 0;
                     }
                 }
             } else {
                 if (aoMenosUmPerdeu) {
                     this.aposta.resultado = 'perdendo';
+                    this.aposta.premio = 0;
                 }
             }
         }*/

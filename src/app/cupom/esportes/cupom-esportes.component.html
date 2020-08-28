@@ -81,14 +81,12 @@
             <div>
                 <b>Valor Apostado:</b> {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
             </div>
-            <div *ngIf="!aposta.resultado || aposta.resultado == 'a confirmar'; else premio">
+            <div>
                 <b>Possível Retorno:</b> {{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}
             </div>
-            <ng-template #premio>
-                <div>
-                    <b>Prêmio:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
-                </div>
-            </ng-template>
+            <div *ngIf="aposta.resultado && aposta.resultado != 'a confirmar'">
+                <b>Prêmio:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+            </div>
             <div *ngIf="aposta.passador.percentualPremio > 0">
                 <b>Cambista Paga:</b> {{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}
             </div>
