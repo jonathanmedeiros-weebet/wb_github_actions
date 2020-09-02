@@ -1394,7 +1394,7 @@ gulp.task('sportingnet.bet', function (done) {
         banca: "Sporting Net",
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--league: #333; --foreground-league: #fff;",
         aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-        " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #dab600; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #dab600; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
 
@@ -1752,5 +1752,21 @@ gulp.task('playbets.wee.bet', function (done) {
         host: "playbets.wee.bet",
         banca: "PLAY BETS",
         styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#f39200;"
+    });
+});
+
+gulp.task('starbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "starbets.wee.bet",
+        banca: "STAR BETS",
+        styles: ""
+    });
+});
+
+gulp.task('betspremium.wee.bet', function (done) {
+    tasks(done, {
+        host: "betspremium.wee.bet",
+        banca: "BETS PREMIUM",
+        styles: "--header:#17619a; --foreground-header: #fff; --sidebar-left: #17619a; --sidebar-right: #17619a; --foreground-odds:#fff;"
     });
 });
