@@ -205,7 +205,8 @@
     "betsgol.bet": "gulp betsgol.bet",
     "playbets.wee.bet": "gulp playbets.wee.bet",
     "starbets.wee.bet": "gulp starbets.wee.bet",
-    "betspremium.wee.bet": "gulp betspremium.wee.bet"
+    "betspremium.wee.bet": "gulp betspremium.wee.bet",
+    "skycassino.wee.bet": "gulp skycassino.wee.bet"
 },
 "private": true,
 "dependencies": {

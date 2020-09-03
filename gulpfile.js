@@ -1770,3 +1770,11 @@ gulp.task('betspremium.wee.bet', function (done) {
         styles: "--header:#17619a; --foreground-header: #fff; --sidebar-left: #17619a; --sidebar-right: #17619a; --foreground-odds:#fff;"
     });
 });
+
+gulp.task('skycassino.wee.bet', function (done) {
+    tasks(done, {
+        host: "skycassino.wee.bet",
+        banca: "SKY CASSINO",
+        styles: ""
+    });
+});
