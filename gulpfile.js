@@ -1778,3 +1778,19 @@ gulp.task('skycassino.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('tapabets380.wee.bet', function (done) {
+    tasks(done, {
+        host: "tapabets380.wee.bet",
+        banca: "TAPA BETS 380",
+        styles: ""
+    });
+});
+
+gulp.task('marechalsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "marechalsports.wee.bet",
+        banca: "MARECHAL SPORTS",
+        styles: "--header:#e46d22; --foreground-header: #fff; --sidebar-left: #e46d22; --sidebar-right: #e46d22; --foreground-odds:#fff;"
+    });
+});

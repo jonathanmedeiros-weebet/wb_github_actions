@@ -206,10 +206,12 @@
     "playbets.wee.bet": "gulp playbets.wee.bet",
     "starbets.wee.bet": "gulp starbets.wee.bet",
     "betspremium.wee.bet": "gulp betspremium.wee.bet",
-    "skycassino.wee.bet": "gulp skycassino.wee.bet"
-},
-"private": true,
-"dependencies": {
+    "skycassino.wee.bet": "gulp skycassino.wee.bet",
+    "tapabets380.wee.bet": "gulp tapabets380.wee.bet",
+    "marechalsports.wee.bet": "gulp marechalsports.wee.bet"
+  },
+  "private": true,
+  "dependencies": {
     "@angular/animations": "^9.1.12",
     "@angular/common": "^9.1.12",
     "@angular/compiler": "^9.1.12",
