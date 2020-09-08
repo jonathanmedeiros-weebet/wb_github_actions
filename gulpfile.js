@@ -1794,3 +1794,11 @@ gulp.task('marechalsports.wee.bet', function (done) {
         styles: "--header:#e46d22; --foreground-header: #fff; --sidebar-left: #e46d22; --sidebar-right: #e46d22; --foreground-odds:#fff;"
     });
 });
+
+gulp.task('betspremio.bet', function (done) {
+    tasks(done, {
+        host: "betspremio.bet",
+        banca: "BETS PRÊMIO",
+        styles: "--header:#e11830; --foreground-header: #fff; --sidebar-left: #e11830; --sidebar-right: #e11830;--odds:#011e46; --foreground-odds:#fff;"
+    });
+});

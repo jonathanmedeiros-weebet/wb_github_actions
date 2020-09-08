@@ -208,7 +208,8 @@
     "betspremium.wee.bet": "gulp betspremium.wee.bet",
     "skycassino.wee.bet": "gulp skycassino.wee.bet",
     "tapabets380.wee.bet": "gulp tapabets380.wee.bet",
-    "marechalsports.wee.bet": "gulp marechalsports.wee.bet"
+    "marechalsports.wee.bet": "gulp marechalsports.wee.bet",
+    "betspremio.bet": "gulp betspremio.bet"
   },
   "private": true,
   "dependencies": {
