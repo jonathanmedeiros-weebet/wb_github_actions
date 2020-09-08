@@ -1799,6 +1799,6 @@ gulp.task('betspremio.bet', function (done) {
     tasks(done, {
         host: "betspremio.bet",
         banca: "BETS PRÊMIO",
-        styles: "--header:#e11830; --foreground-header: #fff; --sidebar-left: #e11830; --sidebar-right: #e11830;--odds:#011e46; --foreground-odds:#fff;"
+        styles: "--header:#bf3545; --foreground-header: #fff; --sidebar-left: #bf3545; --sidebar-right: #bf3545;--odds:#011e46;--foreground-highlight: #fff;"
     });
 });
