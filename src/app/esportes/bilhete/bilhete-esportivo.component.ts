@@ -188,11 +188,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         if (valido) {
             if (this.isLoggedIn) {
-                const values = clone(this.form.value);
-                values.itens.map(item => {
-                    delete item.jogo;
-                });
-
+                const values = this.ajustarDadosParaEnvio();
                 this.salvarAposta(values);
             } else {
                 this.enableSubmit();
@@ -339,10 +335,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     finalizarApostaDeslogado() {
         this.disabledSubmit();
 
-        const values = clone(this.form.value);
-        values.itens.map(item => {
-            delete item.jogo;
-        });
+        const values = this.ajustarDadosParaEnvio();
 
         if (this.tipoApostaDeslogado === 'preaposta') {
             this.preApostaService.create(values)
@@ -382,5 +375,20 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     aceitarMudancas() {
         localStorage.setItem('mudancas', 'false');
         this.mudancas = false;
+    }
+
+    ajustarDadosParaEnvio() {
+        const cotacoesLocais = this.paramsService.getCotacoesLocais();
+        const values = clone(this.form.value);
+        values.itens.map(item => {
+            // Cotacação Local
+            if (cotacoesLocais[item.jogo_id] && cotacoesLocais[item.jogo_id][item.cotacao.chave]) {
+                item.cotacao.valor = parseFloat(cotacoesLocais[item.jogo_id][item.cotacao.chave].valor);
+            }
+
+            delete item.jogo;
+        });
+
+        return values;
     }
 }
