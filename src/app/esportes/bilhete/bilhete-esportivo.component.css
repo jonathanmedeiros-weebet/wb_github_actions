@@ -187,7 +187,7 @@
 
 #aceitar-mudancas{
     background-color: var(--highlight);
-    background-color: var(--foreground-selected-odds);
+    color: var(--foreground-selected-odds);
 }
 
 .mudou{
