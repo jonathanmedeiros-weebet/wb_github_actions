@@ -5,7 +5,8 @@ import { FormValidations } from './../../utils/form-validation';
 
 @Component({
     selector: 'app-error-msg',
-    templateUrl: './error-msg.component.html'
+    templateUrl: 'error-msg.component.html',
+    styleUrls: ['error-msg.component.css'],
 })
 export class ErrorMsgComponent implements OnInit {
     @Input() control: FormControl;

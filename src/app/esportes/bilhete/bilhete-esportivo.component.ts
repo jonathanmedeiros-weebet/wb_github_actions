@@ -25,6 +25,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     possibilidadeGanho = 0;
     opcoes;
     apostaMinima;
+    apostaMaximo;
     displayPreTicker = false;
     disabled = false;
     isLoggedIn;
@@ -54,12 +55,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
-        this.createForm();
         this.definirAltura();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
+        this.apostaMaximo = this.opcoes.valor_max_aposta;
         this.setDelay();
+        this.createForm();
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
@@ -96,7 +98,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     createForm() {
         this.form = this.fb.group({
             apostador: ['', [Validators.required]],
-            valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
+            valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([])
         });
 
