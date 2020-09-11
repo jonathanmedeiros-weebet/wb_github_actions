@@ -1802,3 +1802,19 @@ gulp.task('betspremio.bet', function (done) {
         styles: "--header:#bf3545; --foreground-header: #fff; --sidebar-left: #bf3545; --sidebar-right: #bf3545;--odds:#011e46;--foreground-highlight: #fff;"
     });
 });
+
+gulp.task('centralbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "centralbet.wee.bet",
+        banca: "CENTRAL BET",
+        styles: ""
+    });
+});
+
+gulp.task('centralmixdeesportes.com', function (done) {
+    tasks(done, {
+        host: "centralmixdeesportes.com",
+        banca: "CENTRAL MIX DE ESPORTES",
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;",
+    });
+});
