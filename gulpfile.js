@@ -1818,3 +1818,11 @@ gulp.task('centralmixdeesportes.com', function (done) {
         styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;",
     });
 });
+
+gulp.task('dolarbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "dolarbets.wee.bet",
+        banca: "DOLAR BETS",
+        styles: ""
+    });
+});

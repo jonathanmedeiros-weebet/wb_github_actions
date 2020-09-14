@@ -211,7 +211,8 @@
     "marechalsports.wee.bet": "gulp marechalsports.wee.bet",
     "betspremio.bet": "gulp betspremio.bet",
     "centralbet.wee.bet": "gulp centralbet.wee.bet",
-    "centralmixdeesportes.com": "gulp centralmixdeesportes.com"
+    "centralmixdeesportes.com": "gulp centralmixdeesportes.com",
+    "dolarbets.wee.bet": "gulp dolarbets.wee.bet"
   },
   "private": true,
   "dependencies": {
