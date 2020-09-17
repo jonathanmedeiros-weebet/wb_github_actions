@@ -1834,6 +1834,7 @@ gulp.task('palmasbetsonline.wee.bet', function (done) {
     tasks(done, {
         host: "palmasbetsonline.wee.bet",
         banca: "PALMAS BETS",
-        styles: "",
+        styles: "--header:#e61919; --foreground-header:#fff; --sidebar-left: #ff0000; --sidebar-right: #ff0000;--foreground-highlight:#fff;",
+        aditional_styles: ".jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;}"
     });
 });
