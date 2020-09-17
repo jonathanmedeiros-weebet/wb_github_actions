@@ -212,7 +212,8 @@
     "betspremio.bet": "gulp betspremio.bet",
     "centralbet.wee.bet": "gulp centralbet.wee.bet",
     "centralmixdeesportes.com": "gulp centralmixdeesportes.com",
-    "dolarbets.wee.bet": "gulp dolarbets.wee.bet"
+    "dolarbets.wee.bet": "gulp dolarbets.wee.bet",
+    "palmasbetsonline.wee.bet": "gulp palmasbetsonline.wee.bet"
   },
   "private": true,
   "dependencies": {

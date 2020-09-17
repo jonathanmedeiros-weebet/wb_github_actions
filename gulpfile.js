@@ -1829,3 +1829,11 @@ gulp.task('dolarbets.wee.bet', function (done) {
         styles: "--header:#005801; --foreground-header:#fff; --sidebar-left: #005801; --sidebar-right: #005801;--odds:#000;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('palmasbetsonline.wee.bet', function (done) {
+    tasks(done, {
+        host: "palmasbetsonline.wee.bet",
+        banca: "PALMAS BETS",
+        styles: "",
+    });
+});
