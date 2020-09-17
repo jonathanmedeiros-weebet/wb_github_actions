@@ -1712,7 +1712,8 @@ gulp.task('milagressports.wee.bet', function (done) {
     tasks(done, {
         host: "milagressports.wee.bet",
         banca: "MILAGRES SPORTS",
-        styles: ""
+        styles: "--header:#e61919; --foreground-header: #fff;--sidebar-left: #e61919; --sidebar-right: #e61919; --odds:#000;--highlight:#ff0000;--foreground-highlight:#fff;",
+        aditional_styles: ".jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;}"
     });
 });
 
