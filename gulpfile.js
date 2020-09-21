@@ -1839,3 +1839,11 @@ gulp.task('palmasbetsonline.wee.bet', function (done) {
         aditional_styles: ".jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;}"
     });
 });
+
+gulp.task('mssportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "mssportes.wee.bet",
+        banca: "MS Sportes",
+        styles: "--highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #011e46; --foreground-selected-odds:#fff",
+    });
+});
