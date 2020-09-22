@@ -1847,3 +1847,11 @@ gulp.task('mssportes.wee.bet', function (done) {
         styles: "--highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #011e46; --foreground-selected-odds:#fff",
     });
 });
+
+gulp.task('aliancabets.net', function (done) {
+    tasks(done, {
+        host: "aliancabets.net",
+        banca: "ALIANÇA BETS",
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;--foreground-highlight:#fff; --odds: #002458;",
+    });
+});
