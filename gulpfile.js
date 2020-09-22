@@ -1852,6 +1852,6 @@ gulp.task('aliancabets.net', function (done) {
     tasks(done, {
         host: "aliancabets.net",
         banca: "ALIANÇA BETS",
-        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;--foreground-highlight:#fff; --odds: #002458;",
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;--highlight:#feb701;--foreground-highlight:#fff; --odds: #002458;",
     });
 });
