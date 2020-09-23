@@ -215,7 +215,8 @@
     "dolarbets.wee.bet": "gulp dolarbets.wee.bet",
     "palmasbetsonline.wee.bet": "gulp palmasbetsonline.wee.bet",
     "mssportes.wee.bet": "gulp mssportes.wee.bet",
-    "aliancabets.net": "gulp aliancabets.net"
+    "aliancabets.net": "gulp aliancabets.net",
+    "xesportes.wee.bet": "gulp xesportes.wee.bet"
   },
   "private": true,
   "dependencies": {

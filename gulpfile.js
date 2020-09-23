@@ -1856,3 +1856,11 @@ gulp.task('aliancabets.net', function (done) {
         styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;--highlight:#feb701;--foreground-highlight:#fff; --odds: #002458;",
     });
 });
+
+gulp.task('xesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "xesportes.wee.bet",
+        banca: "XESPORTES",
+        styles: "",
+    });
+});
