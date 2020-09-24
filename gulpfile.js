@@ -1864,3 +1864,11 @@ gulp.task('xesportes.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betspiaui.bet', function (done) {
+    tasks(done, {
+        host: "betspiaui.bet",
+        banca: "BETS PIAUÍ",
+        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;--highlight:#ffb701;--foreground-highlight:#fff; --odds: #112f61;",
+    });
+});
