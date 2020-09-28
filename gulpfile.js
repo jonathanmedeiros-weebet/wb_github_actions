@@ -1872,3 +1872,12 @@ gulp.task('betspiaui.bet', function (done) {
         styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000;--highlight:#ffb701;--foreground-highlight:#fff; --odds: #112f61;",
     });
 });
+
+gulp.task('esportegol.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportegol.wee.bet",
+        banca: "ESPORTE GOL",
+        styles: "",
+    });
+});
+
