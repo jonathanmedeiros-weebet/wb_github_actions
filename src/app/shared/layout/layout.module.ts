@@ -14,6 +14,7 @@ import { ExibirBilheteDesafioComponent } from './exibir-bilhete/desafio/exibir-b
 import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
 import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { BilheteCompartilhamentoComponent } from './bilhete-compartilhamento/bilhete-compartilhamento.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
 import { ApostaService, ApostaEsportivaService, CartaoService } from '../../services';
@@ -66,7 +67,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         PesquisarCartaoModalComponent,
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
-        RecargaSuccessModalComponent
+        RecargaSuccessModalComponent,
+        BilheteCompartilhamentoComponent
     ],
     exports: [
         MainLayoutComponent,

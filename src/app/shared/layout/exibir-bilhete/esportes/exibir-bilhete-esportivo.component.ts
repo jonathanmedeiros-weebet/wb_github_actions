@@ -1,11 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { config } from './../../../config';
-import {
-    ParametrosLocaisService, HelperService, PrintService,
-    AuthService, MessageService
-} from '../../../../services';
-import * as html2canvas from 'html2canvas';
+import { ParametrosLocaisService, PrintService, AuthService } from '../../../../services';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -16,9 +12,8 @@ newNavigator = window.navigator;
 })
 
 export class ExibirBilheteEsportivoComponent implements OnInit {
-    @ViewChild('cupom', { static: true }) cupom: ElementRef;
+    @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
     @Input() aposta: any;
-    modalRef;
     LOGO;
     opcoes;
     cambistaPaga;
@@ -26,10 +21,8 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
 
     constructor(
         private paramsService: ParametrosLocaisService,
-        private helperService: HelperService,
         private printService: PrintService,
         private auth: AuthService,
-        private messageService: MessageService
     ) { }
 
     ngOnInit() {
@@ -56,23 +49,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     }
 
     shared() {
-        if (this.appMobile) {
-            const options = { logging: false };
-
-            html2canvas(this.cupom.nativeElement, options).then((canvas) => {
-                this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
-            });
-        } else {
-            if (newNavigator.share) {
-                newNavigator.share({
-                    title: config.BANCA_NOME,
-                    text: `${config.BANCA_NOME}: #${this.aposta.id}`,
-                    url: `${location.origin}/bilhete/${this.aposta.chave}`,
-                });
-            } else {
-                this.messageService.error('Compartilhamento não suportado pelo seu navegador');
-            }
-        }
+        this.bilheteCompartilhamento.shared();
     }
 
     print() {

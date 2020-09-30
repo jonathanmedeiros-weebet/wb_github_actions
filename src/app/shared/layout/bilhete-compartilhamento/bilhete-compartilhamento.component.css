@@ -1,8 +1,7 @@
-#cupom{
-    /* width: 19.27em; */
+#bilhete{
+    width: 800px;
     padding: 1em;
     background: #f3f5d3;
-    /* margin: 2em auto; */
     font-size: 12px;
 }
 
@@ -42,9 +41,38 @@ hr {
     margin-top:15px;
 }
 
+.informacoes{
+    display: flex;
+    margin: 10px 0;
+}
+
+.informacoes > div{
+    width: 50%;
+}
+
 .informacoes p{
     margin: 1px;
     font-size: 12px;
+}
+.itens{
+    display: flex;
+    flex-wrap:wrap;
+}
+
+.item{
+    /* width: 400px; */
+    margin-top: 5px;
+    width: 50%;
+    margin-bottom: 5px;
+}
+
+.item-odd{
+    padding-right:10px;
+}
+
+.item-even{
+    padding-left:10px;
+    border-left: 1px dashed black;
 }
 
 .item .campeonato{

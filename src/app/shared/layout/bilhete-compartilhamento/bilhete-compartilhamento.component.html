@@ -1,0 +1,94 @@
+<div style="position: absolute; top: -9999px; left: -9999px;">
+    <div id="bilhete" #bilhete>
+        <div class="conteudo">
+            <div style="text-align: center;">
+                <img src="assets/images/logo_banca.png">
+            </div>
+            <h1 class="numero">
+                #{{aposta.id}}
+            </h1>
+            <hr>
+            <hr>
+            <div class="informacoes">
+                <div class="item-odd">
+                    <p>
+                        <b>CAMBISTA:</b> {{aposta.passador.nome}}
+                    </p>
+                    <p>
+                        <b>APOSTADOR:</b> {{aposta.apostador}}
+                    </p>
+                    <p>
+                        <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                    </p>
+                </div>
+                <div class="item-even">
+                    <p>
+                        <b>STATUS: </b>
+                        <span>{{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}</span>
+                    </p>
+                    <p>
+                        <b>RESULTADO: </b>
+                        <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
+                        <span *ngIf="!aposta.resultado">aguardando</span>
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <hr>
+            <div class="itens">
+                <ng-container *ngFor="let item of aposta.itens;let i = index">
+                    <div class="item" [ngClass]="getItemClass(i)">
+                        <p class="campeonato">
+                            {{item.campeonato.nome}}
+                        </p>
+                        <p class="horario">
+                            {{item.jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                        </p>
+                        <p class="nome" [ngClass]="resultadoClass(item)">
+                            {{item.jogo.time_a_nome}}
+                            {{item.jogo.time_a_resultado}} x {{item.jogo.time_b_resultado}}
+                            {{item.jogo.time_b_nome}}
+                        </p>
+                        <p class="cotacao" [ngClass]="resultadoClass(item)">
+                            {{item.categoria_nome}}:
+                            {{item.odd_nome}}
+                            ( {{item.cotacao}} )
+                            <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                        </p>
+                        <p class="jogo-resultado">
+                            <span *ngIf="item.removido; else resultado">cancelado</span>
+                            <ng-template #resultado>{{item.resultado}}</ng-template>
+                        </p>
+                    </div>
+                </ng-container>
+            </div>
+            <hr>
+            <div class="valores">
+                <p class="total-jogos">
+                    QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
+                </p>
+                <p class="aposta">
+                    COTAÇÃO: <span
+                        style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
+                </p>
+                <p class="aposta">
+                    VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                </p>
+                <p class="ganho">
+                    POSSÍVEL RETORNO: <span
+                        style="float:right">{{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}</span>
+                </p>
+                <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+                    PRÊMIO: <span style="float:right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+                </p>
+                <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+                    CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}</span>
+                </p>
+                <hr>
+                <hr>
+            </div>
+            <p class="rodape">
+                {{opcoes.informativo_rodape}}
+            </p>
+        </div>
+    </div>
