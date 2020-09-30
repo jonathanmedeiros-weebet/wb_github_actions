@@ -16,7 +16,7 @@ newNavigator = window.navigator;
 })
 
 export class BilheteCompartilhamentoComponent implements OnInit {
-    @ViewChild('bilhete', { static: true }) bilhete: ElementRef;
+    @ViewChild('bilhete', { static: false }) bilhete: ElementRef;
     @Input() aposta: any;
     LOGO;
     opcoes;

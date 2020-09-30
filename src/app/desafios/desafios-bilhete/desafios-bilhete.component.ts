@@ -19,7 +19,7 @@ import * as clone from 'clone';
     styleUrls: ['./desafios-bilhete.component.css']
 })
 export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit {
-    @ViewChild('apostaDeslogadoModal', { static: true }) apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
     opcoes;

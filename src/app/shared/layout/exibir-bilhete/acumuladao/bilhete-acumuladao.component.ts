@@ -16,7 +16,7 @@ newNavigator = window.navigator;
 })
 
 export class BilheteAcumuladaoComponent implements OnInit {
-    @ViewChild('cupom', { static: true }) cupom: ElementRef;
+    @ViewChild('cupom', { static: false }) cupom: ElementRef;
     @Input() aposta: any;
     modalRef;
     LOGO;

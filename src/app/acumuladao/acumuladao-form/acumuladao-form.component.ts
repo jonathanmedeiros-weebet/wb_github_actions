@@ -19,7 +19,7 @@ import * as moment from 'moment';
     styleUrls: ['./acumuladao-form.component.css']
 })
 export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit {
-    @ViewChild('apostaDeslogadoModal', { static: true }) apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
     showLoadingIndicator = true;
     encerrado = true;
     acumuladao = new Acumuladao();
