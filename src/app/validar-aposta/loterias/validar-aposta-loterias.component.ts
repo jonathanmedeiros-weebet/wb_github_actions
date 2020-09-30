@@ -13,7 +13,8 @@ import { takeUntil } from 'rxjs/operators';
 import {
     MessageService,
     SorteioService,
-    ApostaLoteriaService
+    ApostaLoteriaService,
+    ParametrosLocaisService
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 
@@ -28,18 +29,22 @@ export class ValidarApostaLoteriasComponent extends BaseFormComponent implements
     preApostaItens = [];
     disabled = false;
     sorteios = [];
+    opcoes;
     unsub$ = new Subject();
 
     constructor(
         private sorteioService: SorteioService,
         private apostaLoteriaService: ApostaLoteriaService,
         private messageService: MessageService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private paramsService: ParametrosLocaisService
     ) {
         super();
     }
 
     ngOnInit() {
+        this.opcoes = this.paramsService.getOpcoes();
+
         this.sorteioService
             .getSorteios()
             .subscribe(sorteios => (this.sorteios = sorteios));
@@ -118,5 +123,13 @@ export class ValidarApostaLoteriasComponent extends BaseFormComponent implements
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    calcularEstimativaGanho(cotacao, valor) {
+        let estimativaGanho = valor * cotacao;
+        if (estimativaGanho > this.opcoes.valor_max_premio_loterias) {
+            estimativaGanho = this.opcoes.valor_max_premio_loterias;
+        }
+        return estimativaGanho;
     }
 }

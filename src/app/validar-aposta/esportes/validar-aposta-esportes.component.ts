@@ -13,7 +13,8 @@ import { takeUntil } from 'rxjs/operators';
 import {
     MessageService,
     ApostaEsportivaService,
-    HelperService
+    HelperService,
+    ParametrosLocaisService
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 
@@ -29,18 +30,23 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     cotacoesVinheramDifentes = false;
     cotacoesMudaram = false;
     disabled = false;
+    estimativaGanho;
+    opcoes;
     unsub$ = new Subject();
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
         private fb: FormBuilder,
-        private helper: HelperService
+        private helper: HelperService,
+        private paramsService: ParametrosLocaisService
     ) {
         super();
     }
 
     ngOnInit() {
+        this.opcoes = this.paramsService.getOpcoes();
+
         this.createForm();
         this.preApostaItens = this.preAposta.itens;
 
@@ -50,6 +56,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
             }
         });
         this.form.patchValue(this.preAposta);
+        this.calcularEstimativaGanho();
     }
 
     ngOnDestroy() {
@@ -71,6 +78,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         this.preAposta.cotacao = this.preAposta.itens
             .map(item => item.cotacao)
             .reduce((acumulador, valorAtual) => acumulador * valorAtual);
+
+        this.calcularEstimativaGanho();
     }
 
     submit() {
@@ -138,5 +147,14 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    calcularEstimativaGanho() {
+        const estimativaGanho = this.form.value.valor * this.preAposta.cotacao;
+        if (estimativaGanho < this.opcoes.valor_max_premio) {
+            this.estimativaGanho = estimativaGanho;
+        } else {
+            this.estimativaGanho = this.opcoes.valor_max_premio;
+        }
     }
 }
