@@ -17,7 +17,7 @@ import { NgxMaskModule } from 'ngx-mask';
     declarations: [
         BilheteEsportivoComponent,
         EsportesFooterComponent,
-        EsportesWrapperComponent
+        EsportesWrapperComponent,
     ],
     exports: [
         BilheteEsportivoComponent,
