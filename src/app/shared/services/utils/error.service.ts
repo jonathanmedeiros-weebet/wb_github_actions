@@ -28,7 +28,7 @@ export class ErrorService {
         }
 
         let result;
-        if (error.error.errors.code) {
+        if (error.error.errors && error.error.errors.code) {
             result = error.error.errors;
         } else {
             result = message;
