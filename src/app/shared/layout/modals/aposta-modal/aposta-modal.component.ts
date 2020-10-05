@@ -22,6 +22,7 @@ export class ApostaModalComponent implements OnInit {
     @Input() primeiraImpressao = false;
     @Input() ultimaAposta = false;
     appMobile;
+    casaDasApostasId;
     isLoggedIn;
 
     constructor(
@@ -34,6 +35,7 @@ export class ApostaModalComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
+        this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
     }
 
     printTicket() {
@@ -119,5 +121,20 @@ export class ApostaModalComponent implements OnInit {
         }
 
         return result;
+    }
+
+    linkCasaDasApostasPermitido() {
+        if (this.appMobile) {
+            return this.casaDasApostasId;
+        } else {
+            return false;
+        }
+    }
+
+    openCasaDasApostas() {
+        if (this.casaDasApostasId) {
+            const url = `http://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${this.aposta.id}`;
+            this.helperService.sharedCasaDasApostaUrl(url);
+        }
     }
 }
