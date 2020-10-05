@@ -1881,3 +1881,11 @@ gulp.task('esportegol.wee.bet', function (done) {
     });
 });
 
+gulp.task('bet1000aguia.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet1000aguia.wee.bet",
+        banca: "BET 1000 ÁGUIA",
+        styles: "",
+    });
+});
+

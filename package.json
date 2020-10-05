@@ -218,7 +218,8 @@
     "aliancabets.net": "gulp aliancabets.net",
     "xesportes.wee.bet": "gulp xesportes.wee.bet",
     "betspiaui.bet": "gulp betspiaui.bet",
-    "esportegol.wee.bet": "gulp esportegol.wee.bet"
+    "esportegol.wee.bet": "gulp esportegol.wee.bet",
+    "bet1000aguia.wee.bet": "gulp bet1000aguia.wee.bet"
   },
   "private": true,
   "dependencies": {
