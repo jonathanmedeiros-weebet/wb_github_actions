@@ -1893,7 +1893,7 @@ gulp.task('bet1000aguia.wee.bet', function (done) {
 gulp.task('betsportsbr.net', function (done) {
     tasks(done, {
         host: "betsportsbr.net",
-        banca: "BET SPORTS BR",
+        banca: "BETSPORTSBR",
         styles: "",
     });
 });
