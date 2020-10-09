@@ -7,7 +7,6 @@ export * from './shared/services/desafio/desafio-bilhete.service';
 export * from './shared/services/desafio/desafio-categoria.service';
 export * from './shared/services/desafio/desafio-aposta.service';
 export * from './shared/services/desafio/desafio-preaposta.service';
-export * from './shared/services/regra.service';
 export * from './shared/services/pagina.service';
 export * from './shared/services/parametros.service';
 export * from './shared/services/parametros-locais.service';
