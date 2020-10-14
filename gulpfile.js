@@ -1889,11 +1889,18 @@ gulp.task('bet1000aguia.wee.bet', function (done) {
     });
 });
 
-
 gulp.task('betsportsbr.net', function (done) {
     tasks(done, {
         host: "betsportsbr.net",
         banca: "BETSPORTSBR",
+        styles: "",
+    });
+});
+
+gulp.task('sports7bets.com', function (done) {
+    tasks(done, {
+        host: "sports7bets.com",
+        banca: "SPORTS7BETS",
         styles: "",
     });
 });
