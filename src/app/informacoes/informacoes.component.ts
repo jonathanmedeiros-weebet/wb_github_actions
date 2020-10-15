@@ -10,6 +10,7 @@ import { Pagina } from './../models';
     templateUrl: './informacoes.component.html'
 })
 export class InformacoesComponent implements OnInit, OnDestroy {
+    showLoadingIndicator = true;
     pagina = new Pagina();
     conteudo;
     unsub$ = new Subject();
@@ -24,7 +25,10 @@ export class InformacoesComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(data => {
                 this.paginaService.getPaginaPorChave(data.pagina)
-                    .subscribe(pagina => this.pagina = pagina);
+                    .subscribe(pagina => {
+                        this.pagina = pagina;
+                        this.showLoadingIndicator = false;
+                    });
             });
     }
 
