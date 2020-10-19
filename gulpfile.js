@@ -1905,3 +1905,11 @@ gulp.task('sports7bets.com', function (done) {
         aditional_styles: ".indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; }"
     });
 });
+
+gulp.task('sulbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "sulbet.wee.bet",
+        banca: "SULBET",
+        styles: "",
+    });
+});
