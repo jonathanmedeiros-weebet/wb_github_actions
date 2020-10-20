@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ativação do Cartão</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+        <div class="form-group">
+            <input style="text-transform:uppercase;" type="text" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false"
+                class="form-control" formControlName="chave" placeholder="Chave do cartão"
+                [ngClass]="applyCssInputError('chave')">
+            <app-error-msg [control]="form.get('chave')"></app-error-msg>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="apostador"
+                placeholder="Apostador" [ngClass]="applyCssInputError('apostador')">
+            <app-error-msg [control]="form.get('apostador')"></app-error-msg>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" formControlName="pin" placeholder="PIN"
+                [ngClass]="applyCssInputError('pin')">
+            <app-error-msg [control]="form.get('pin')"></app-error-msg>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" formControlName="pin_confirmacao" placeholder="Confirmar PIN"
+                [ngClass]="applyCssInputError('pin_confirmacao')">
+            <app-error-msg [control]="form.get('pin_confirmacao')"></app-error-msg>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-custom">Ativar</button>
+    </div>
+</form>

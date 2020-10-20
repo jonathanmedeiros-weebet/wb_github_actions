@@ -1,4 +1,5 @@
 export { ApostaModalComponent } from './aposta-modal/aposta-modal.component';
+export { AtivarCartaoModalComponent } from './ativar-cartao-modal/ativar-cartao-modal.component';
 export { PreApostaModalComponent } from './pre-aposta-modal/pre-aposta-modal.component';
 export { CartaoCadastroModalComponent } from './cartao-cadastro-modal/cartao-cadastro-modal.component';
 export { CartaoModalComponent } from './cartao-modal/cartao-modal.component';

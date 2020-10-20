@@ -105,4 +105,15 @@ export class CartaoService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    ativar(chave, values) {
+        const url = `${this.CartaoUrl}/${chave}/ativar`;
+
+        return this.http.post(url, values, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

@@ -21,7 +21,7 @@ import {
     PesquisaModalComponent, TabelaModalComponent,
     PesquisarApostaModalComponent, CartaoCadastroModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
-    RecargaCartaoModalComponent
+    RecargaCartaoModalComponent, AtivarCartaoModalComponent
 } from '../modals';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -261,6 +261,24 @@ export class NavigationComponent implements OnInit {
             );
     }
 
+    abrirModalAtivarCartao() {
+        this.modalRef = this.modalService.open(
+            AtivarCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
+                reason => { }
+            );
+    }
+
     /* Geração dos números aleatórios para loteria */
     gerarSupresinha(length, context) {
         const numbers = [];
@@ -333,5 +351,10 @@ export class NavigationComponent implements OnInit {
 
     refresh() {
         window.location.reload();
+    }
+
+    permitirAtivacaoCartao() {
+        console.log(location.origin);
+        return location.origin == 'mjsports.com';
     }
 }
