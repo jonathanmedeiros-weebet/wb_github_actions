@@ -1913,3 +1913,11 @@ gulp.task('sulbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('eurobets.wee.bet', function (done) {
+    tasks(done, {
+        host: "eurobets.wee.bet",
+        banca: "EURO BETS",
+        styles: "",
+    });
+});

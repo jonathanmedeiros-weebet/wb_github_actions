@@ -222,7 +222,8 @@
     "bet1000aguia.wee.bet": "gulp bet1000aguia.wee.bet",
     "betsportsbr.net": "gulp betsportsbr.net",
     "sports7bets.com": "gulp sports7bets.com",
-    "sulbet.wee.bet": "gulp sulbet.wee.bet"
+    "sulbet.wee.bet": "gulp sulbet.wee.bet",
+    "eurobets.wee.bet": "gulp eurobets.wee.bet"
   },
   "private": true,
   "dependencies": {
