@@ -1901,7 +1901,7 @@ gulp.task('sports7bets.com', function (done) {
     tasks(done, {
         host: "sports7bets.com",
         banca: "SPORTS7BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #f64225; --foreground-highlight: #fff; --odds: #9a9a9a; --foreground-odds: #fff; --event-time: #fff; --league: #ff1616; --foreground-league: #fff;--fg-event-time: #007bff;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #912311; --foreground-highlight: #fff; --odds: #9a9a9a; --foreground-odds: #000; --event-time: #fff; --league: #912311; --foreground-league: #fff;--fg-event-time: #007bff;",
         aditional_styles: ".indentificacao .nome, .indentificacao .nome-mobile{ color: #000!important; }"
     });
 });
