@@ -2,10 +2,8 @@
     <div class="wrap-sticky">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-        <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
-            <div class="campeonato-header">
-                Nenhum evento encontrado!
-            </div>
+        <div class="sem-evento" *ngIf="campeonatos && !campeonatos.length">
+            Nenhum evento disponível!
         </div>
 
         <div *ngIf="!showLoadingIndicator">

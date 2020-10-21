@@ -3,14 +3,12 @@
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
         <div *ngIf="!showLoadingIndicator">
-            <div class="campeonato" *ngIf="campeonatos && !campeonatos.length">
-                <div class="sem-evento">
-                    Nenhum evento encontrado!
-                    <button *ngIf="exibirBtnProximaData()" type="button" (click)="proximaData()"
-                        class="btn btn-custom btn-sm">
-                        Próxima Data
-                    </button>
-                </div>
+            <div class="sem-evento" *ngIf="campeonatos && !campeonatos.length">
+                Nenhum evento disponível!
+                <button *ngIf="exibirBtnProximaData()" type="button" (click)="proximaData()"
+                    class="btn btn-custom btn-sm">
+                    Próxima Data
+                </button>
             </div>
 
             <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">

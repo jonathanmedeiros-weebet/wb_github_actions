@@ -19,4 +19,5 @@ export class Jogo {
     info: JogoInfo;
     favorito: string;
     estatisticas: Estatistica;
+    total_cotacoes: number;
 }

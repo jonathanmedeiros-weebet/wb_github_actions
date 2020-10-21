@@ -354,7 +354,6 @@ export class NavigationComponent implements OnInit {
     }
 
     permitirAtivacaoCartao() {
-        console.log(location.origin);
         return location.origin == 'mjsports.com';
     }
 }
