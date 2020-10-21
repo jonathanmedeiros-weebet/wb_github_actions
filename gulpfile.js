@@ -1921,3 +1921,11 @@ gulp.task('eurobets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betslife.wee.bet', function (done) {
+    tasks(done, {
+        host: "betslife.wee.bet",
+        banca: "BETS LIFE",
+        styles: "",
+    });
+});

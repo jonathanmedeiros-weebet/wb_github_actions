@@ -223,7 +223,8 @@
     "betsportsbr.net": "gulp betsportsbr.net",
     "sports7bets.com": "gulp sports7bets.com",
     "sulbet.wee.bet": "gulp sulbet.wee.bet",
-    "eurobets.wee.bet": "gulp eurobets.wee.bet"
+    "eurobets.wee.bet": "gulp eurobets.wee.bet",
+    "betslife.wee.bet": "gulp betslife.wee.bet"
   },
   "private": true,
   "dependencies": {
