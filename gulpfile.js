@@ -1929,3 +1929,11 @@ gulp.task('betslife.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('alsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "alsports.wee.bet",
+        banca: "AL SPORTS",
+        styles: "",
+    });
+});
