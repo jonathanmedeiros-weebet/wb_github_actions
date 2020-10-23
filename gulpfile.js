@@ -1937,3 +1937,11 @@ gulp.task('alsports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sortebets.wee.bet', function (done) {
+    tasks(done, {
+        host: "sortebets.wee.bet",
+        banca: "SORTE BETS",
+        styles: "",
+    });
+});
