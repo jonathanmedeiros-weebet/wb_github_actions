@@ -226,7 +226,8 @@
     "eurobets.wee.bet": "gulp eurobets.wee.bet",
     "betslife.wee.bet": "gulp betslife.wee.bet",
     "alsports.wee.bet": "gulp alsports.wee.bet",
-    "sortebets.wee.bet": "gulp sortebets.wee.bet"
+    "sortebets.wee.bet": "gulp sortebets.wee.bet",
+    "diretoriasport.bet": "gulp diretoriasport.bet"
   },
   "private": true,
   "dependencies": {
