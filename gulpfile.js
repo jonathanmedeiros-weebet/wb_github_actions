@@ -1949,7 +1949,7 @@ gulp.task('sortebets.wee.bet', function (done) {
 gulp.task('diretoriasport.bet', function (done) {
     tasks(done, {
         host: "diretoriasport.bet",
-        banca: "DIRETORIA BET",
+        banca: "DIRETORIA SPORT",
         styles: "",
     });
 });
