@@ -1942,7 +1942,7 @@ gulp.task('sortebets.wee.bet', function (done) {
     tasks(done, {
         host: "sortebets.wee.bet",
         banca: "SORTE BETS",
-        styles: "",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #A9A9A9; --foreground-highlight: #fff; --odds: #8e0f08;",
     });
 });
 
