@@ -1953,3 +1953,11 @@ gulp.task('diretoriasport.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brasilsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "brasilsports.wee.bet",
+        banca: "BRASIL SPORTS",
+        styles: "",
+    });
+});
