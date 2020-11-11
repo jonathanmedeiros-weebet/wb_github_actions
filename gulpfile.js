@@ -1961,3 +1961,11 @@ gulp.task('brasilsports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('slsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "slsports.wee.bet",
+        banca: "SL SPORTS",
+        styles: "",
+    });
+});
