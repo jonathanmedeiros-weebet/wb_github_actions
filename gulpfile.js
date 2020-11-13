@@ -1966,6 +1966,6 @@ gulp.task('slsports.wee.bet', function (done) {
     tasks(done, {
         host: "slsports.wee.bet",
         banca: "SL SPORTS",
-        styles: "",
+        styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --league: yellow; --foreground-league: #000;",
     });
 });
