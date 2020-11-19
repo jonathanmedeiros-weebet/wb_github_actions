@@ -149,7 +149,6 @@
     "goobet.wee.bet": "gulp goobet.wee.bet",
     "kingesporte.wee.bet": "gulp kingesporte.wee.bet",
     "centraldosesportes.wee.bet": "gulp centraldosesportes.wee.bet",
-    "betdez.com": "gulp betdez.com",
     "ibiapababets.wee.bet": "gulp ibiapababets.wee.bet",
     "sportenetmania365.wee.bet": "gulp sportenetmania365.wee.bet",
     "mhbets.wee.bet": "gulp mhbets.wee.bet",
@@ -229,7 +228,8 @@
     "sortebets.wee.bet": "gulp sortebets.wee.bet",
     "diretoriasport.bet": "gulp diretoriasport.bet",
     "brasilsports.wee.bet": "gulp brasilsports.wee.bet",
-    "slsports.wee.bet": "gulp slsports.wee.bet"
+    "slsports.wee.bet": "gulp slsports.wee.bet",
+    "betdez.net": "gulp betdez.net"
   },
   "private": true,
   "dependencies": {

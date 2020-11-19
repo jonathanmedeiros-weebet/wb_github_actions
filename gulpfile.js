@@ -1297,15 +1297,6 @@ gulp.task('centraldosesportes.wee.bet', function (done) {
     });
 });
 
-gulp.task('betdez.com', function (done) {
-    tasks(done, {
-        host: "betdez.com",
-        banca: "BetDez",
-        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: red; --foreground-highlight: #003f7f; --odds: #d9a535; --foreground-odds: #fff; --event-time: red;",
-        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
-    });
-});
-
 gulp.task('ibiapababets.wee.bet', function (done) {
     tasks(done, {
         host: "ibiapababets.wee.bet",
@@ -1967,5 +1958,15 @@ gulp.task('slsports.wee.bet', function (done) {
         host: "slsports.wee.bet",
         banca: "SL SPORTS",
         styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --event-time: yellow; --fg-event-time: #000;",
+    });
+});
+
+
+gulp.task('betdez.net', function (done) {
+    tasks(done, {
+        host: "betdez.net",
+        banca: "BetDez",
+        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: #232d40; --foreground-highlight: #fff; --odds: #71b04c; --foreground-odds: #fff; --event-time: #232d40;--foreground-selected-odds:#fff;",
+        aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
     });
 });
