@@ -1961,12 +1961,27 @@ gulp.task('slsports.wee.bet', function (done) {
     });
 });
 
-
 gulp.task('betdez.net', function (done) {
     tasks(done, {
         host: "betdez.net",
         banca: "BetDez",
         styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: #232d40; --foreground-highlight: #232d40; --odds: #71b04c; --foreground-odds: #fff; --event-time: #232d40;--foreground-selected-odds:#fff;",
         aditional_styles: ".menu-categories .active a {color: #003f7f!important;} .odds .selecionado span{color:#fff!important;} .content-header h2{color:#003f7f!important;}",
+    });
+});
+
+gulp.task('betshouse.wee.bet', function (done) {
+    tasks(done, {
+        host: "betshouse.wee.bet",
+        banca: "BETS HOUSE",
+        styles: ""
+    });
+});
+
+gulp.task('betsgol.live', function (done) {
+    tasks(done, {
+        host: "betsgol.live",
+        banca: "BETS GOL",
+        styles: ""
     });
 });
