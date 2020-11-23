@@ -1985,3 +1985,11 @@ gulp.task('betsgol.live', function (done) {
         styles: ""
     });
 });
+
+gulp.task('fenixesporte.wee.bet', function (done) {
+    tasks(done, {
+        host: "fenixesporte.wee.bet",
+        banca: "FÊNIX ESPORTE",
+        styles: ""
+    });
+});
