@@ -232,7 +232,8 @@
     "betdez.net": "gulp betdez.net",
     "betshouse.wee.bet": "gulp betshouse.wee.bet",
     "betsgol.live": "gulp betsgol.live",
-    "fenixesporte.wee.bet": "gulp fenixesporte.wee.bet"
+    "fenixesporte.wee.bet": "gulp fenixesporte.wee.bet",
+    "maiorsporte.wee.bet": "gulp maiorsporte.wee.bet"
   },
   "private": true,
   "dependencies": {

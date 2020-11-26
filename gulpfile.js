@@ -1993,3 +1993,11 @@ gulp.task('fenixesporte.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('maiorsporte.wee.bet', function (done) {
+    tasks(done, {
+        host: "maiorsporte.wee.bet",
+        banca: "MAIORSPORTE",
+        styles: ""
+    });
+});
