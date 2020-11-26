@@ -1986,10 +1986,10 @@ gulp.task('betsgol.live', function (done) {
     });
 });
 
-gulp.task('fenixesporte.wee.bet', function (done) {
+gulp.task('minibets.wee.bet', function (done) {
     tasks(done, {
-        host: "fenixesporte.wee.bet",
-        banca: "FÊNIX ESPORTE",
+        host: "minibets.wee.bet",
+        banca: "MINI BETS",
         styles: ""
     });
 });
