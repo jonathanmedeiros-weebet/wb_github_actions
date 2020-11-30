@@ -2001,3 +2001,11 @@ gulp.task('maiorsporte.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('palpitesbets.com', function (done) {
+    tasks(done, {
+        host: "palpitesbets.com",
+        banca: "PALPITES BETS",
+        styles: "--header: #f1af09; --foreground-header :#fff; --sidebar-right: #daa520; --sidebar-left: #daa520; --odds: #006400; --foreground-highlight: #fff;"
+    });
+});

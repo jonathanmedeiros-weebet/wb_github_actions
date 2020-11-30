@@ -233,7 +233,8 @@
     "betshouse.wee.bet": "gulp betshouse.wee.bet",
     "betsgol.live": "gulp betsgol.live",
     "minibets.wee.bet": "gulp minibets.wee.bet",
-    "maiorsporte.wee.bet": "gulp maiorsporte.wee.bet"
+    "maiorsporte.wee.bet": "gulp maiorsporte.wee.bet",
+    "palpitesbets.com": "gulp palpitesbets.com"
   },
   "private": true,
   "dependencies": {
