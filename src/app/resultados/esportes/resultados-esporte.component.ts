@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { CampeonatoService, MessageService } from './../../services';
+import { ResultadoService, MessageService } from './../../services';
 import { Campeonato } from './../../models';
 
 import { Subject } from 'rxjs';
@@ -21,7 +21,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
 
     constructor(
         private messageService: MessageService,
-        private campeonatoService: CampeonatoService,
+        private resultadoService: ResultadoService,
         private fb: FormBuilder
     ) {
         super();
@@ -63,12 +63,13 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
             queryParams = params;
         }
 
-        this.campeonatoService.getResultados(queryParams)
+        this.resultadoService.getResultados(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
                     this.showLoadingIndicator = false;
                     this.campeonatos = campeonatos;
+                    console.log(this.campeonatos);
                 },
                 error => this.handleError(error)
             );
