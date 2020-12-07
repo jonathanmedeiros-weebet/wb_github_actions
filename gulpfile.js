@@ -953,8 +953,8 @@ gulp.task('placardarodada.wee.bet', function (done) {
     tasks(done, {
         host: "placardarodada.wee.bet",
         banca: "Placar da Rodada",
-        styles: "",
-        aditional_styles: ".sidebar-brand{ margin-top: 0!important; } .sidebar-brand img{ max-width: 100%!important; max-height: none!important; }"
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#019934; --foreground-sidebar-right: #fff; --sidebar-left: #019934; --foreground-sidebar-left: #fff; --highlight:#019934; --foreground-highlight: #fff; --odds: #000; --foreground-odds: #fff; --foreground-selected-odds:#fff;",
+        // aditional_styles: ".sidebar-brand{ margin-top: 0!important; } .sidebar-brand img{ max-width: 100%!important; max-height: none!important; }"
     });
 });
 
