@@ -69,7 +69,6 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
                 campeonatos => {
                     this.showLoadingIndicator = false;
                     this.campeonatos = campeonatos;
-                    console.log(this.campeonatos);
                 },
                 error => this.handleError(error)
             );
