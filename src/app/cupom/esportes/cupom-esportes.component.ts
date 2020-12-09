@@ -16,6 +16,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     stats = {};
     chaves = {};
     cambistaPaga;
+    clientesBilheteAoVivo = ['gooldeplaca.com.br', 'amigosdabola.wee.bet'];
     unsub$ = new Subject();
 
     constructor(
@@ -72,14 +73,16 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             }
         });
 
-        /*if (eventosId.length > 0) {
-            this.statsService.connect();
+        if (this.clientesBilheteAoVivo.includes(location.host)) {
+            if (eventosId.length > 0) {
+                this.statsService.connect();
 
-            eventosId.forEach(id => {
-                this.statsService.entrarSalaStats(id);
-                this.liveStats(id);
-            });
-        }*/
+                eventosId.forEach(id => {
+                    this.statsService.entrarSalaStats(id);
+                    this.liveStats(id);
+                });
+            }
+        }
     }
 
     liveStats(jogoId) {
@@ -101,53 +104,54 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     }
 
     verificarResultadoAposta() {
-        /*
-        if (!this.aposta.resultado) {
-            let aoMenosUmPerdeu = false;
-            let todosComResultados = true;
-            let acertouTodos = true;
-            let qtdResults = 0;
+        if (this.clientesBilheteAoVivo.includes(location.host)) {
+            if (!this.aposta.resultado) {
+                let aoMenosUmPerdeu = false;
+                let todosComResultados = true;
+                let acertouTodos = true;
+                let qtdResults = 0;
 
-            for (const id in this.stats) {
-                if (this.stats.hasOwnProperty(id)) {
-                    const estatistica = this.stats[id];
+                for (const id in this.stats) {
+                    if (this.stats.hasOwnProperty(id)) {
+                        const estatistica = this.stats[id];
 
-                    if (estatistica.removido) {
-                        continue;
-                    }
-                    if (!estatistica.resultado) {
-                        todosComResultados = false;
-                    }
-                    if (estatistica.resultado === 'ganhou' || estatistica.resultado === 'ganhando') {
-                        qtdResults++;
-                    }
-                    if (estatistica.resultado === 'perdeu' || estatistica.resultado === 'perdendo') {
-                        aoMenosUmPerdeu = true;
+                        if (estatistica.removido) {
+                            continue;
+                        }
+                        if (!estatistica.resultado) {
+                            todosComResultados = false;
+                        }
+                        if (estatistica.resultado === 'ganhou' || estatistica.resultado === 'ganhando') {
+                            qtdResults++;
+                        }
+                        if (estatistica.resultado === 'perdeu' || estatistica.resultado === 'perdendo') {
+                            aoMenosUmPerdeu = true;
+                        }
                     }
                 }
-            }
 
-            if (qtdResults < Object.keys(this.stats).length) {
-                acertouTodos = false;
-            }
+                if (qtdResults < Object.keys(this.stats).length) {
+                    acertouTodos = false;
+                }
 
-            if (todosComResultados) {
-                if (acertouTodos) {
-                    this.aposta.resultado = 'ganhando';
-                    this.aposta.premio = this.aposta.possibilidade_ganho;
+                if (todosComResultados) {
+                    if (acertouTodos) {
+                        this.aposta.resultado = 'ganhando';
+                        this.aposta.premio = this.aposta.possibilidade_ganho;
+                    } else {
+                        if (aoMenosUmPerdeu) {
+                            this.aposta.resultado = 'perdendo';
+                            this.aposta.premio = 0;
+                        }
+                    }
                 } else {
                     if (aoMenosUmPerdeu) {
                         this.aposta.resultado = 'perdendo';
                         this.aposta.premio = 0;
                     }
                 }
-            } else {
-                if (aoMenosUmPerdeu) {
-                    this.aposta.resultado = 'perdendo';
-                    this.aposta.premio = 0;
-                }
             }
-        }*/
+        }
     }
 
     vericarResultadoItem(jogoId) {
