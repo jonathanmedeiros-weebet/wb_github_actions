@@ -96,7 +96,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         const match = location.protocol.match(/https/);
         let result = false;
 
-        if (match && opcoes.habilitar_compartilhamento_comprovante) {
+        if ((match || this.appMobile) && opcoes.habilitar_compartilhamento_comprovante) {
             result = true;
         }
 
