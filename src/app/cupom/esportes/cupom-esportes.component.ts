@@ -16,7 +16,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     stats = {};
     chaves = {};
     cambistaPaga;
-    clientesBilheteAoVivo = ['gooldeplaca.com.br', 'amigosdabola.wee.bet'];
+    clientesBilheteAoVivo = ['foxbet.me', 'gooldeplaca.com.br', 'amigosdabola.wee.bet'];
     unsub$ = new Subject();
 
     constructor(
@@ -45,8 +45,8 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
         const eventosId = [];
 
         this.aposta.itens.forEach(item => {
-            const horarioInicio = moment(item.jogo.horario).subtract('10', 'm');
-            const horarioFim = moment(item.jogo.horario).add('2', 'hours');
+            const horarioInicio = moment(item.jogo_horario).subtract('10', 'm');
+            const horarioFim = moment(item.jogo_horario).add('2', 'hours');
 
             this.chaves[item.jogo.fi] = item.aposta_tipo.chave;
             const estatistica = new Estatistica();
@@ -54,14 +54,14 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
 
             if (item.resultado) {
                 const jogo = item.jogo;
-                estatistica.time_a_resultado = jogo.time_a_resultado;
-                estatistica.time_b_resultado = jogo.time_b_resultado;
-                estatistica.time_a_resultado_1t = jogo.time_a_resultado_1t;
-                estatistica.time_b_resultado_1t = jogo.time_b_resultado_1t;
-                estatistica.time_a_resultado_2t = jogo.time_a_resultado_2t;
-                estatistica.time_b_resultado_2t = jogo.time_b_resultado_2t;
-                estatistica.time_a_escanteios = jogo.time_a_escanteios;
-                estatistica.time_b_escanteios = jogo.time_b_escanteios;
+                estatistica.time_a_resultado = item.time_a_resultado;
+                estatistica.time_b_resultado = item.time_b_resultado;
+                // estatistica.time_a_resultado_1t = jogo.time_a_resultado_1t;
+                // estatistica.time_b_resultado_1t = jogo.time_b_resultado_1t;
+                // estatistica.time_a_resultado_2t = jogo.time_a_resultado_2t;
+                // estatistica.time_b_resultado_2t = jogo.time_b_resultado_2t;
+                // estatistica.time_a_escanteios = jogo.time_a_escanteios;
+                // estatistica.time_b_escanteios = jogo.time_b_escanteios;
                 estatistica.resultado = item.resultado;
             } else if (!item.removido && moment().isSameOrAfter(horarioInicio) && moment().isBefore(horarioFim)) {
                 eventosId.push(item.jogo.fi);

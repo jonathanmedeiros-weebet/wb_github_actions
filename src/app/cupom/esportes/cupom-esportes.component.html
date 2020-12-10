@@ -12,7 +12,7 @@
         </div>
         <div *ngFor="let item of aposta.itens" class="aposta-item">
             <div>
-                {{item.jogo.horario | moment:'DD/MM/YYYY HH:mm'}}
+                {{item.jogo_horario | moment:'DD/MM/YYYY HH:mm'}}
             </div>
             <div class="aovivo" *ngIf="stats[item.jogo.fi].minutos >= 0 && !stats[item.jogo.fi].finalizado">
                 <div>
@@ -24,14 +24,14 @@
                 </div>
             </div>
             <div class="div-1">
-                <div class="column-1">{{item.jogo.time_a_nome}}</div>
+                <div class="column-1">{{item.time_a_nome}}</div>
                 <div class="column-2">
                     <span>{{stats[item.jogo.fi].time_a_resultado}}</span> -
                     <span>{{stats[item.jogo.fi].time_b_resultado}}</span>
                 </div>
-                <div class="column-3">{{item.jogo.time_b_nome}}</div>
+                <div class="column-3">{{item.time_b_nome}}</div>
             </div>
-            <div class="div-2" *ngIf="stats[item.jogo.fi]">
+            <!-- <div class="div-2" *ngIf="stats[item.jogo.fi]">
                 <div class="line line-1">
                     <div class="width-40">{{stats[item.jogo.fi].time_a_resultado_1t}}</div>
                     <div class="width-20">Gols 1º Tempo</div>
@@ -47,7 +47,7 @@
                     <div class="width-20">Escanteios</div>
                     <div class="width-40">{{stats[item.jogo.fi].time_b_escanteios}}</div>
                 </div>
-            </div>
+            </div> -->
             <div class="div-3" [ngClass]="{'dashed': stats[item.jogo.fi].resultado == 'cancelado'}">
                 <span>{{item.categoria_nome}}: </span>
                 <span>{{item.odd_nome}}</span>
