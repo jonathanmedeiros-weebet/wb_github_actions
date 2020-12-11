@@ -19,8 +19,13 @@ export class ResultadoService {
         private errorService: ErrorService
     ) { }
 
-    getResultados(queryParams?: any): Observable<Campeonato[]> {
+    getResultados(queryParams?: any, puro?: boolean): Observable<any[]> {
         let requestOptions;
+        let url = this.ResultadoUrl;
+
+        if (puro) {
+            url += '/puro';
+        }
 
         if (queryParams) {
             requestOptions = this.header.getRequestOptions(true, queryParams);
@@ -28,11 +33,10 @@ export class ResultadoService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(this.ResultadoUrl, requestOptions)
+        return this.http.get(url, requestOptions)
             .pipe(
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
     }
-
 }
