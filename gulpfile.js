@@ -2009,3 +2009,11 @@ gulp.task('palpitesbets.com', function (done) {
         styles: "--header: #f1af09; --foreground-header :#fff; --sidebar-right: #daa520; --sidebar-left: #daa520; --odds: #006400; --foreground-highlight: #fff;"
     });
 });
+
+gulp.task('betfut.wee.bet', function (done) {
+    tasks(done, {
+        host: "betfut.wee.bet",
+        banca: "BETFUT",
+        styles: "--header: #000; --foreground-header :#fff; --sidebar-right: #000; --sidebar-left: #000; --odds: #181a4b;"
+    });
+});
