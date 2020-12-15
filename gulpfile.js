@@ -910,7 +910,7 @@ gulp.task('gooldeplaca.com.br', function (done) {
     tasks(done, {
         host: "gooldeplaca.com.br",
         banca: "Gool de Placa",
-        styles: "--header: #012549; --foreground-header: #fff; --sidebar-right:#012549; --foreground-sidebar-right: #fff; --sidebar-left: #012549; --foreground-sidebar-left: #fff; --odds: #4c4c4e; --event-time: #e84233; --highlight: #fbef3c; --foreground-highlight: #fff;  --league: #494e4a; --foreground-league: #fff;",
+        styles: "--header: #012549; --foreground-header: #fff; --sidebar-right:#012549; --foreground-sidebar-right: #fff; --sidebar-left: #012549; --foreground-sidebar-left: #fff; --odds: #4c4c4e; --event-time: #e84233; --highlight: #fbef3c; --foreground-highlight: #fff;  --league: #e84233; --foreground-league: #fff;",
         aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #7f7d7e!important } .jogos, .eventos{ background: #7f7d7e!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #7f7d7e!important; } .footer{ background-color:#7f7d7e!important; }" +
             " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #4c4c4e; color: white; } .inside-event .tipo-apostas{ background-color: #7f7d7e!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .tipo-apostas .nav-link{ color:#fff!important; }.mais-opcoes{ color: #fff!important; }"
     });
