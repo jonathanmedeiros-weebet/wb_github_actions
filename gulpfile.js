@@ -928,7 +928,7 @@ gulp.task('megabets.wee.bet', function (done) {
     tasks(done, {
         host: "megabets.wee.bet",
         banca: "Mega Bets",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #E9967A; --foreground-highlight: #fff; --odds: #ff0100; --foreground-odds: #fff; --event-time: #14312d;--foreground-league: #000;"
+        styles: ""
     });
 });
 
