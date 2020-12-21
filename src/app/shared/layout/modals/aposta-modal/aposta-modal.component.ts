@@ -84,10 +84,8 @@ export class ApostaModalComponent implements OnInit {
         const opcoes = this.paramsLocais.getOpcoes();
         let result = false;
 
-        if (opcoes.habilitar_cancelar_aposta) {
-            if (this.isLoggedIn && this.showCancel && !this.aposta.cartao_aposta) {
-                result = true;
-            }
+        if (opcoes.habilitar_cancelar_aposta && this.isLoggedIn && this.showCancel) {
+            result = true;
         }
 
         return result;
