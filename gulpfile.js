@@ -2018,3 +2018,11 @@ gulp.task('betfut.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header :#fff; --sidebar-right: #000; --sidebar-left: #000; --odds: #181a4b;"
     });
 });
+
+gulp.task('brasilbets.online', function (done) {
+    tasks(done, {
+        host: "brasilbets.online",
+        banca: "BRASIL BETS",
+        styles: ""
+    });
+});
