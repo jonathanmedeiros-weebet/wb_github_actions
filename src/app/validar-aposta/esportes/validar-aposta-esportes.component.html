@@ -4,13 +4,13 @@
             <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
                 <div class="item-selecionado-inner">
                     <div class="horario">
-                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                        {{item.jogo_horario | moment: 'DD.MM.YYYY HH:mm'}}
                     </div>
                     <div class="jogo-nome">
-                        {{item.jogo.nome}}
+                        {{item.time_a_nome}} x {{item.time_b_nome}}
                     </div>
                     <div class="campeonato-nome">
-                        {{item.jogo.campeonato.nome}}
+                        {{item.campeonato_nome}}
                     </div>
                     <div class="cotacao">
                         {{item.categoria_nome}}:
@@ -18,11 +18,11 @@
                             {{item.odd_nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id != 9; else nomeOddCombate">
+                            <span *ngIf="item.sport != 9; else nomeOddCombate">
                                 {{item.aposta_tipo.chave | tipoAposta}}
                             </span>
                             <ng-template #nomeOddCombate>
-                                {{item.aposta_tipo.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
+                                {{item.aposta_tipo.chave | tipoApostaCombate: item.time_a_nome : item.time_b_nome}}
                             </ng-template>
                         </ng-template>
                         <span class="valor" *ngIf="item.cotacao_antiga == item.cotacao_atual; else cotacoesMudaram">

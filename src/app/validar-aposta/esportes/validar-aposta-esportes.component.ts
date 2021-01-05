@@ -9,6 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
+import { isNumeric } from 'rxjs/internal-compatibility';
 import { takeUntil } from 'rxjs/operators';
 import {
     MessageService,
@@ -56,6 +57,15 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
             }
         });
         this.form.patchValue(this.preAposta);
+        this.form.get('valor').valueChanges
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(valor => {
+                if (isNumeric(valor)) {
+                    this.calcularEstimativaGanho(valor);
+                } else {
+                    this.calcularEstimativaGanho(0);
+                }
+            });
         this.calcularEstimativaGanho();
     }
 
@@ -78,7 +88,6 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         this.preAposta.cotacao = this.preAposta.itens
             .map(item => item.cotacao)
             .reduce((acumulador, valorAtual) => acumulador * valorAtual);
-
         this.calcularEstimativaGanho();
     }
 
@@ -92,8 +101,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
         values.itens = this.preApostaItens.map(item => {
             return {
-                jogo_id: item.jogo.id,
-                jogo_nome: item.jogo.nome,
+                jogo_id: item.jogo_api_id,
+                jogo_nome: item.jogo_nome,
                 ao_vivo: item.ao_vivo,
                 cotacao: {
                     chave: item.aposta_tipo.chave,
@@ -102,6 +111,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                 }
             };
         });
+
 
         if (values.itens.length) {
             this.apostaEsportivaService
@@ -149,8 +159,13 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         this.disabled = false;
     }
 
-    calcularEstimativaGanho() {
-        const estimativaGanho = this.form.value.valor * this.preAposta.cotacao;
+    calcularEstimativaGanho(valor?) {
+        if (valor === undefined) {
+            valor = this.form.value.valor;
+        }
+
+        const estimativaGanho = valor * this.preAposta.cotacao;
+
         if (estimativaGanho < this.opcoes.valor_max_premio) {
             this.estimativaGanho = estimativaGanho;
         } else {
