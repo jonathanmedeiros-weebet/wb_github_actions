@@ -140,7 +140,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                     this.preApostaItens.forEach(i => {
                         if (item.jogoId == i.jogo.id) {
                             i.cotacao_antiga = i.cotacao_atual;
-                            i.cotacao_atual = this.helper.calcularCotacao(item.valor, i.aposta_tipo.chave, i.jogo.id, i.jogo.favorito, i.ao_vivo);
+                            i.cotacao_atual = this.helper.calcularCotacao(item.valor, i.aposta_tipo.chave, i.jogo.event_id, i.jogo.favorito, i.ao_vivo);
                             i.cotacao_base = item.valor;
 
                             this.cotacoesMudaram = true;

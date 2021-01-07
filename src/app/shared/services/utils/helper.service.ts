@@ -12,7 +12,7 @@ export class HelperService {
 
     constructor(private paramsService: ParametrosLocaisService) { }
 
-    calcularCotacao(value: number, chave: string, jogoId: number, favorito: string, aoVivo?: boolean): number {
+    calcularCotacao(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
         const tiposAposta = this.paramsService.getTiposAposta();
@@ -21,8 +21,8 @@ export class HelperService {
         const tipoAposta = tiposAposta[chave];
 
         // Cotacação Local
-        if (cotacoesLocais[jogoId] && cotacoesLocais[jogoId][chave]) {
-            result = parseFloat(cotacoesLocais[jogoId][chave].valor);
+        if (cotacoesLocais[jogoEventId] && cotacoesLocais[jogoEventId][chave]) {
+            result = parseFloat(cotacoesLocais[jogoEventId][chave].valor);
         }
 
         if (tipoAposta) {

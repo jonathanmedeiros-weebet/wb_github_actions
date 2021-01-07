@@ -280,6 +280,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         const item = {
             ao_vivo: jogo.ao_vivo,
             jogo_id: jogo._id,
+            jogo_event_id: jogo.event_id,
             jogo_nome: jogo.nome,
             cotacao: cotacao,
             jogo: jogo,

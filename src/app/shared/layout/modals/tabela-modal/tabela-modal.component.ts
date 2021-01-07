@@ -57,7 +57,7 @@ export class TabelaModalComponent implements OnInit {
                             cotacao.valor = this.helperService.calcularCotacao(
                                 cotacao.valor,
                                 cotacao.chave,
-                                jogo._id,
+                                jogo.event_id,
                                 jogo.favorito
                             );
                         });

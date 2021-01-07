@@ -60,7 +60,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 }
                             }
 
-                            if (this.jogoBloqueado(jogo._id)) {
+                            if (this.jogoBloqueado(jogo.event_id)) {
                                 valido = false;
                             }
 
@@ -136,7 +136,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     }
                 }
 
-                if (this.jogoBloqueado(jogo._id)) {
+                if (this.jogoBloqueado(jogo.event_id)) {
                     valido = false;
                 }
 
@@ -182,7 +182,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         this.exibirMaisCotacoes.emit(true);
     }
 
-    jogoBloqueado(id) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
+    jogoBloqueado(eventId) {
+        return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 }
