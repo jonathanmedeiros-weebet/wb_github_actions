@@ -148,8 +148,8 @@ gulp.task('betsports99.net', function (done) {
     tasks(done, {
         host: "betsports99.net",
         banca: "BET SPORTS 99",
-        styles: "--header:#00ff00;--foreground-header:#000;--sidebar-right:#00ff00;--foreground-sidebar-right:#000;--sidebar-left:#00ff00;--foreground-sidebar-left:#000;--odds:#ffca40;--foreground-odds: #000; --foreground-highlight:#000; --highlight:#648ee2;--league: #191970;--foreground-league: #fff;",
-        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);} .tipo-apostas .tipo-aposta h4 {background: #247451;color: #fff;padding: 5px;}",
+        styles: "--header:#056162;--foreground-header:#fff;--sidebar-right:#056162;--foreground-sidebar-right:#fff;--sidebar-left:#056162;--foreground-sidebar-left:#fff;--odds:#648ee2;--foreground-odds: #000; --foreground-highlight:#000; --highlight:#ffca40;--league: #191970;--foreground-league: #fff;",
+        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);}",
     });
 });
 
