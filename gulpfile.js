@@ -2043,3 +2043,11 @@ gulp.task('txbet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('moneybet.wee.bet', function (done) {
+    tasks(done, {
+        host: "moneybet.wee.bet",
+        banca: "MONEY BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #d88b04; --foreground-highlight: #fff",
+    });
+});
