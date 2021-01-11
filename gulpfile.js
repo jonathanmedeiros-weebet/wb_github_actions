@@ -2051,3 +2051,19 @@ gulp.task('moneybet.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #d88b04; --foreground-highlight: #fff",
     });
 });
+
+gulp.task('resenhaesportiva.site', function (done) {
+    tasks(done, {
+        host: "resenhaesportiva.site",
+        banca: "RESENHA ESPORTIVA",
+        styles: "",
+    });
+});
+
+gulp.task('betsbrasil.net', function (done) {
+    tasks(done, {
+        host: "betsbrasil.net",
+        banca: "BETS BRASIL",
+        styles: "",
+    });
+});
