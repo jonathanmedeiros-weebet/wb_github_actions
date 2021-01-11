@@ -2048,7 +2048,7 @@ gulp.task('moneybet.wee.bet', function (done) {
     tasks(done, {
         host: "moneybet.wee.bet",
         banca: "MONEY BET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #d88b04; --foreground-highlight: #fff",
+        styles: "--header: #4033ff; --foreground-header: #fff; --sidebar-right:#4033ff; --foreground-sidebar-right: #fff; --sidebar-left: #4033ff; --foreground-sidebar-left: #fff; --odds: yellow; --foreground-odds:#000; --highlight: #c9302b; --foreground-highlight: #fff; --league: #EC1A28;--foreground-league:#fff;",
     });
 });
 
