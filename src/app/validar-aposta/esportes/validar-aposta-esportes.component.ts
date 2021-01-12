@@ -101,7 +101,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
         values.itens = this.preApostaItens.map(item => {
             return {
-                jogo_id: item.jogo_api_id,
+                jogo_event_id: item.jogo_api_id,
+                jogo_id: item.jogo_fi,
                 jogo_nome: item.jogo_nome,
                 ao_vivo: item.ao_vivo,
                 cotacao: {

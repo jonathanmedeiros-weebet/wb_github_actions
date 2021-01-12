@@ -633,6 +633,21 @@ button {
     .odds .odd:nth-of-type(3) {
         width: 33.33%;
     }
+
+    .square-group{
+        justify-content: center;
+    }
+
+    .add-palpite{
+        display: block;
+        width: 100%
+    }
+}
+
+@media only screen and (min-width: 668px) {
+    .loteria-content .add-palpite{
+        margin-top: 24px;
+    }
 }
 
 /* Spinner */
