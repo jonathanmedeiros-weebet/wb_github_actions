@@ -86,8 +86,9 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         this.preAposta.itens.splice(i, 1);
 
         this.preAposta.cotacao = this.preAposta.itens
-            .map(item => item.cotacao)
+            .map(item => item.cotacao_atual)
             .reduce((acumulador, valorAtual) => acumulador * valorAtual);
+
         this.calcularEstimativaGanho();
     }
 
