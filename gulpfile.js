@@ -2067,3 +2067,11 @@ gulp.task('betsbrasil.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('showdebola.wee.bet', function (done) {
+    tasks(done, {
+        host: "showdebola.wee.bet",
+        banca: "SHOW DE BOLA",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #008000;",
+    });
+});

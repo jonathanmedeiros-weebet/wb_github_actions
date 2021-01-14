@@ -237,7 +237,8 @@
     "txbet.wee.bet": "gulp txbet.wee.bet",
     "moneybet.wee.bet": "gulp moneybet.wee.bet",
     "resenhaesportiva.site": "gulp resenhaesportiva.site",
-    "betsbrasil.net": "gulp betsbrasil.net"
+    "betsbrasil.net": "gulp betsbrasil.net",
+    "showdebola.wee.bet": "gulp showdebola.wee.bet"
   },
   "private": true,
   "dependencies": {
