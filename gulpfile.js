@@ -148,8 +148,8 @@ gulp.task('betsports99.net', function (done) {
     tasks(done, {
         host: "betsports99.net",
         banca: "BET SPORTS 99",
-        styles: "--header:#00342a;--foreground-header:#fff;--sidebar-right:#00342a;--foreground-sidebar-right:#fff;--sidebar-left:#00342a;--foreground-sidebar-left:#fff;--odds:#ffca40;--foreground-odds: #000; --foreground-highlight:#fff; --highlight:#648ee2;--league: #367fa8;--foreground-league: #fff;",
-        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);} .tipo-apostas .tipo-aposta h4 {background: #247451;color: #fff;padding: 5px;}",
+        styles: "--header:#056162;--foreground-header:#fff;--sidebar-right:#056162;--foreground-sidebar-right:#fff;--sidebar-left:#056162;--foreground-sidebar-left:#fff;--odds:#648ee2;--foreground-odds: #000; --foreground-highlight:#000; --highlight:#ffca40;--league: #191970;--foreground-league: #fff;",
+        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);}",
     });
 });
 
@@ -2041,5 +2041,37 @@ gulp.task('txbet.wee.bet', function (done) {
         host: "txbet.wee.bet",
         banca: "TXBET",
         styles: ""
+    });
+});
+
+gulp.task('moneybet.wee.bet', function (done) {
+    tasks(done, {
+        host: "moneybet.wee.bet",
+        banca: "MONEY BET",
+        styles: "--header: #4033ff; --foreground-header: #fff; --sidebar-right:#4033ff; --foreground-sidebar-right: #fff; --sidebar-left: #4033ff; --foreground-sidebar-left: #fff; --odds: yellow; --foreground-odds:#000; --highlight: #c9302b; --foreground-highlight: #fff; --league: #EC1A28;--foreground-league:#fff;",
+    });
+});
+
+gulp.task('resenhaesportiva.site', function (done) {
+    tasks(done, {
+        host: "resenhaesportiva.site",
+        banca: "RESENHA ESPORTIVA",
+        styles: "",
+    });
+});
+
+gulp.task('betsbrasil.net', function (done) {
+    tasks(done, {
+        host: "betsbrasil.net",
+        banca: "BETS BRASIL",
+        styles: "",
+    });
+});
+
+gulp.task('showdebola.wee.bet', function (done) {
+    tasks(done, {
+        host: "showdebola.wee.bet",
+        banca: "SHOW DE BOLA",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #008000;",
     });
 });

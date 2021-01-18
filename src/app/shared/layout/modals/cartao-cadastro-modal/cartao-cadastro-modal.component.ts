@@ -13,6 +13,7 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 })
 export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
+    disabled = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -49,9 +50,12 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
     }
 
     submit() {
+        this.disabled = true;
+
         this.cartaoService.create(this.form.value)
             .subscribe(
                 result => {
+                    this.disabled = false;
                     this.modalRef = this.modalService.open(CartaoModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
@@ -66,5 +70,6 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     handleError(error) {
         this.message.error(error);
+        this.disabled = false;
     }
 }

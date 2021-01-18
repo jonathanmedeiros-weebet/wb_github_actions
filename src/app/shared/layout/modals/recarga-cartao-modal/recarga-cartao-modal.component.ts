@@ -13,6 +13,7 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 })
 export class RecargaCartaoModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
+    disabled = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -39,10 +40,13 @@ export class RecargaCartaoModalComponent extends BaseFormComponent implements On
     }
 
     submit() {
+        this.disabled = true;
         const values = this.form.value;
+
         this.cartaoService.recarga(values.chave, values.valor)
             .subscribe(
                 result => {
+                    this.disabled = false;
                     this.modalRef = this.modalService.open(RecargaSuccessModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
@@ -56,5 +60,6 @@ export class RecargaCartaoModalComponent extends BaseFormComponent implements On
 
     handleError(error) {
         this.message.error(error);
+        this.disabled = false;
     }
 }

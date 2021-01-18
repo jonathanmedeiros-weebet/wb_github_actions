@@ -27,7 +27,13 @@
                     placeholder="Confirmar PIN" [ngClass]="applyCssInputError('pin_confirmacao')">
                 <app-error-msg [control]="form.get('pin_confirmacao')"></app-error-msg>
             </div>
-            <button type="submit" class="btn btn-custom">Confirmar</button>
+            <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">Confirmar</button>
+            <ng-template #btnProcessando>
+                <button disabled class="btn btn-custom">
+                    Processando...
+                    <i class="fa fa-spinner fa-spin"></i>
+                </button>
+            </ng-template>
         </form>
     </div>
 </div>
