@@ -1,6 +1,6 @@
 
 const _host = '//[HOST]';
-const _center = 'https://center.wee.bet';
+const _center = 'https://center2.wee.bet';
 const _live = 'https://streaming.wee.bet';
 const _stats = 'https://stats.wee.bet';
 
