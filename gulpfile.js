@@ -2075,3 +2075,20 @@ gulp.task('showdebola.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #008000;",
     });
 });
+
+gulp.task('bet170.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet170.wee.bet",
+        banca: "BET 170",
+        // styles: "--header: #fd904d; --foreground-header: #fff; --sidebar-right:#fd904d; --foreground-sidebar-right: #fff; --sidebar-left: #fd904d; --foreground-sidebar-left: #fff; --odds: #008000;--highlight: #912311; --foreground-highlight: #fff;",
+        styles: "",
+    });
+});
+
+gulp.task('topbets.website', function (done) {
+    tasks(done, {
+        host: "topbets.website",
+        banca: "TOP BETS",
+        styles: "",
+    });
+});
