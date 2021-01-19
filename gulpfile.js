@@ -2080,8 +2080,8 @@ gulp.task('bet170.wee.bet', function (done) {
     tasks(done, {
         host: "bet170.wee.bet",
         banca: "BET 170",
-        // styles: "--header: #fd904d; --foreground-header: #fff; --sidebar-right:#fd904d; --foreground-sidebar-right: #fff; --sidebar-left: #fd904d; --foreground-sidebar-left: #fff; --odds: #008000;--highlight: #912311; --foreground-highlight: #fff;",
-        styles: "",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #9a9a9a;--highlight: #ff5500; --foreground-highlight: #fff;--league: #ff5500;--foreground-league: #fff;",
+        // styles: "",
     });
 });
 
