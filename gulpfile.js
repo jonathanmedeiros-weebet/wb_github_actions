@@ -2092,3 +2092,19 @@ gulp.task('topbets.website', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betscariri.net', function (done) {
+    tasks(done, {
+        host: "betscariri.net",
+        banca: "BETS CARIRI",
+        styles: "--header: #f7b03e; --foreground-header: #000; --sidebar-right:#f7b03e; --foreground-sidebar-right: #000; --sidebar-left: #f7b03e; --foreground-sidebar-left: #000; --odds: #067700;--foreground-highlight: #000;",
+    });
+});
+
+gulp.task('futmax.wee.bet', function (done) {
+    tasks(done, {
+        host: "futmax.wee.bet",
+        banca: "FUT MAX",
+        styles: "",
+    });
+});
