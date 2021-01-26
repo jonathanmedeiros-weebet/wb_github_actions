@@ -2105,6 +2105,6 @@ gulp.task('futmax.wee.bet', function (done) {
     tasks(done, {
         host: "futmax.wee.bet",
         banca: "FUT MAX",
-        styles: "",
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --odds: #14805e;",
     });
 });
