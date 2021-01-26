@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ApostaService } from './../services';
+import { ApostaService, ResultadoService } from './../services';
 
 @Component({
     selector: 'app-cupom',
@@ -12,13 +12,16 @@ import { ApostaService } from './../services';
 })
 export class CupomComponent implements OnInit, OnDestroy {
     aposta;
+    resultados = new Map();
+    show = false;
     unsub$ = new Subject();
 
     constructor(
         private route: ActivatedRoute,
         private apostaService: ApostaService,
         private renderer: Renderer2,
-        private el: ElementRef
+        private el: ElementRef,
+        private resultadoService: ResultadoService
     ) { }
 
     ngOnInit() {
@@ -28,9 +31,28 @@ export class CupomComponent implements OnInit, OnDestroy {
             .subscribe((params: any) => {
                 if (params['chave']) {
                     this.apostaService.getAposta(params['chave'])
-                        .pipe(takeUntil(this.unsub$))
+                        .pipe(
+                            switchMap(aposta => {
+                                this.aposta = aposta;
+                                const jogosApiIds = aposta.itens.map(item => item.jogo_api_id);
+                                const params = {
+                                    ids: jogosApiIds
+                                };
+
+                                return this.resultadoService.getResultados(params, true)
+                            }),
+                            takeUntil(this.unsub$)
+                        )
                         .subscribe(
-                            aposta => this.aposta = aposta,
+                            resultados => {
+                                this.resultados.clear();
+
+                                resultados.forEach(resultado => {
+                                    this.resultados.set(resultado.event_id, resultado.resultado);
+                                });
+
+                                this.show = true;
+                            },
                             error => console.log(error)
                         );
                 }

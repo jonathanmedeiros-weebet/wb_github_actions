@@ -24,8 +24,8 @@ import {
     ConfirmModalComponent, PesquisarApostaModalComponent,
     CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
-    RecargaCartaoModalComponent, RecargaSuccessModalComponent
-
+    RecargaCartaoModalComponent, RecargaSuccessModalComponent,
+    AtivarCartaoModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -68,7 +68,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
-        BilheteCompartilhamentoComponent
+        BilheteCompartilhamentoComponent,
+        AtivarCartaoModalComponent
     ],
     exports: [
         MainLayoutComponent,

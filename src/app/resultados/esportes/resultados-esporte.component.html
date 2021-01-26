@@ -41,9 +41,9 @@
                             <td style="text-align: right;">{{jogo.time_a_nome}}</td>
                             <td style="text-align: center;">
                                 <span
-                                    *ngIf="jogo.time_a_resultado != null && jogo.time_b_resultado != null; else semResultado">
-                                    <b>{{jogo.time_a_resultado}} - {{jogo.time_b_resultado}}</b>
-                                    ({{jogo.time_a_resultado_1t}} - {{jogo.time_b_resultado_1t}})
+                                    *ngIf="jogo.resultado; else semResultado">
+                                    <b>{{jogo.resultado.casa}} - {{jogo.resultado.fora}}</b>
+                                    ({{jogo.resultado.casa_1t}} - {{jogo.resultado.fora_1t}})
                                 </span>
                                 <ng-template #semResultado>
                                     <b>Sem Resultado</b>

@@ -60,10 +60,6 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'regras',
-                loadChildren: () => import('app/regras/regras.module').then(m => m.RegrasModule),
-            },
-            {
                 path: 'validar-aposta',
                 loadChildren: () => import('app/validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard]

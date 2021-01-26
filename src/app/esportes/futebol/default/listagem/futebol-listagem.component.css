@@ -57,11 +57,6 @@
     margin-top: 15px;
 }
 
-.sem-evento{
-    padding: 10px;
-    font-size: 1.5rem;
-}
-
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .indentificacao .nome{

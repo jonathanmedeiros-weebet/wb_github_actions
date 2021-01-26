@@ -8,7 +8,6 @@ export * from './shared/services/desafio/desafio-bilhete.service';
 export * from './shared/services/desafio/desafio-categoria.service';
 export * from './shared/services/desafio/desafio-aposta.service';
 export * from './shared/services/desafio/desafio-preaposta.service';
-export * from './shared/services/regra.service';
 export * from './shared/services/pagina.service';
 export * from './shared/services/parametros.service';
 export * from './shared/services/parametros-locais.service';
@@ -26,6 +25,7 @@ export * from './shared/services/aposta-esportiva/cotacao.service';
 export * from './shared/services/aposta-esportiva/jogo.service';
 export * from './shared/services/aposta-esportiva/live.service';
 export * from './shared/services/aposta-esportiva/preaposta-esportiva.service';
+export * from './shared/services/aposta-esportiva/resultado.service';
 export * from './shared/services/aposta-esportiva/stats.service';
 
 /* Utils Services */

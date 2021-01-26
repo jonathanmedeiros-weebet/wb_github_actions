@@ -39,15 +39,15 @@
                 <ng-container *ngFor="let item of aposta.itens;let i = index">
                     <div class="item" [ngClass]="getItemClass(i)">
                         <p class="campeonato">
-                            {{item.campeonato.nome}}
+                            {{item.campeonato_nome}}
                         </p>
                         <p class="horario">
-                            {{item.jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                            {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                         </p>
                         <p class="nome" [ngClass]="resultadoClass(item)">
-                            {{item.jogo.time_a_nome}}
-                            {{item.jogo.time_a_resultado}} x {{item.jogo.time_b_resultado}}
-                            {{item.jogo.time_b_nome}}
+                            {{item.time_a_nome}}
+                            {{item.time_a_resultado}} x {{item.time_b_resultado}}
+                            {{item.time_b_nome}}
                         </p>
                         <p class="cotacao" [ngClass]="resultadoClass(item)">
                             {{item.categoria_nome}}:

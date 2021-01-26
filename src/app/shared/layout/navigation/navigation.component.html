@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a [routerLink]="['/regras']">
+                    <a [routerLink]="['/informacoes/regras']">
                         <i class="fa fa-book"></i> Regras
                     </a>
                 </li>
@@ -88,6 +88,7 @@
                             <a class="dropdown-item" [routerLink]="['/cartoes/solicitacoes-saque']">
                                 Solicitações Saque
                             </a>
+                            <a class="dropdown-item" *ngIf="permitirAtivacaoCartao()" (click)="abrirModalAtivarCartao()">Ativar</a>
                             <a class="dropdown-item" (click)="abrirModalRecargaCartao()">Recarga</a>
                         </ng-container>
                         <ng-template #notLoggedIn>
