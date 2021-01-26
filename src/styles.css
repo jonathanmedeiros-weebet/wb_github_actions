@@ -672,6 +672,11 @@ button {
     animation-delay: -0.15s;
 }
 
+.sem-evento{
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
 @keyframes lds-ring {
     0% {
         transform: rotate(0deg);

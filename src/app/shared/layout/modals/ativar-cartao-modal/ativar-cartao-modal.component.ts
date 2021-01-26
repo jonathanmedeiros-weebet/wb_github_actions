@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartaoService, MessageService } from './../../../../services';
-import { PinValidation } from '../../../utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
+import { PinValidation } from '../../../utils';
+import * as clone from 'clone';
 
 @Component({
-    selector: 'app-cartao-cadastro-modal',
-    templateUrl: './cartao-cadastro-modal.component.html'
+    selector: 'app-ativar-cartao-modal',
+    templateUrl: './ativar-cartao-modal.component.html'
 })
-export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
+export class AtivarCartaoModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
-    disabled = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -31,11 +31,11 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     createForm() {
         this.form = this.fb.group({
+            chave: [null, Validators.required],
             apostador: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(3)
             ])],
-            valor: [null, Validators.required],
             pin: [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(3),
@@ -50,18 +50,19 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
     }
 
     submit() {
-        this.disabled = true;
+        const values = clone(this.form.value);
+        const chave = values.chave;
+        delete values.chave;
 
-        this.cartaoService.create(this.form.value)
+        this.cartaoService.ativar(chave, values)
             .subscribe(
                 result => {
-                    this.disabled = false;
                     this.modalRef = this.modalService.open(CartaoModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
                     });
                     this.modalRef.componentInstance.cartao = result;
-                    this.message.success('Cartão de Aposta cadastrado com sucesso.');
+                    this.message.success('Cartão de Aposta <b>ativado</b> com sucesso.');
                     this.activeModal.close();
                 },
                 error => this.handleError(error)
@@ -70,6 +71,5 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
 
     handleError(error) {
         this.message.error(error);
-        this.disabled = false;
     }
 }

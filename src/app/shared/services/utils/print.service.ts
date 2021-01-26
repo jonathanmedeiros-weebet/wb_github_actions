@@ -602,13 +602,13 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
             printContents += `
                 <div class="item">
                     <p class="campeonato">
-                        ${item.campeonato.nome}
+                        ${item.campeonato_nome}
                     </p>
                     <p class="horario">
-                        ${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
+                        ${this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY [ÀS] HH:mm')}
                     </p>
                     <p class="jogo">
-                        ${item.jogo.nome}
+                        ${item.time_a_nome} x ${item.time_b_nome}
                     </p>
                     <p class="cotacao">
                         ${item.categoria_nome}: ${item.odd_nome} ( ${parseFloat(item.cotacao).toFixed(2)} )`;
@@ -700,9 +700,9 @@ HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
         aposta.itens.forEach(item => {
             ticket += `
 -------------------------------
-${item.campeonato.nome}
-${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm')}
-${item.jogo.nome}
+${item.campeonato_nome}
+${this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm')}
+${item.time_a_nome} x ${item.time_b_nome}
 ${item.categoria_nome}: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
             if (item.ao_vivo) {
                 ticket += ` | AO VIVO`;

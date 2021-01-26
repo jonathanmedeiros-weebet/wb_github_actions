@@ -3,7 +3,6 @@ import { AbstractControl } from '@angular/forms';
 export class PasswordValidation {
 
     static MatchPassword(AC: AbstractControl) {
-        console.log(AC);
         let valid = false;
         const passwordControl = AC.get('password') || AC.get('new_password');
         const confirmControl = AC.get('confirm') || AC.get('confirmation_password');

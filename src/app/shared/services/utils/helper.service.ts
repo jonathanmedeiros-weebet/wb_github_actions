@@ -249,6 +249,18 @@ export class HelperService {
         );
     }
 
+    sharedCasaDasApostaUrl(url) {
+        parent.postMessage(
+            {
+                message: `Casa das Apostas`,
+                data: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
+                action: 'shareURL'
+            },
+            'file://'
+        );
+    }
+
+
     dateFormat(date: string, format?: string) {
         return format ? moment(date).format(format) : moment(date).format();
     }

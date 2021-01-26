@@ -10,6 +10,7 @@ import {
     OddCategoriaPipe,
     SorteioTipoPipe,
     InfiniteScrollDirective,
+    SafeHTMLPipe
 } from './index';
 
 @NgModule({
@@ -21,6 +22,7 @@ import {
         TipoApostaEsportsPipe,
         CalcularCotacaoPipe,
         OddCategoriaPipe,
+        SafeHTMLPipe,
         SorteioTipoPipe,
         InfiniteScrollDirective
     ],
@@ -32,6 +34,7 @@ import {
         TipoApostaEsportsPipe,
         CalcularCotacaoPipe,
         OddCategoriaPipe,
+        SafeHTMLPipe,
         SorteioTipoPipe,
         InfiniteScrollDirective
     ]
