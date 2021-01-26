@@ -2108,3 +2108,19 @@ gulp.task('futmax.wee.bet', function (done) {
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --odds: #14805e;",
     });
 });
+
+gulp.task('dgbets.club', function (done) {
+    tasks(done, {
+        host: "dgbets.club",
+        banca: "DG BETS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #daa54a;--highlight: #bb0000;",
+    });
+});
+
+gulp.task('winbet.store', function (done) {
+    tasks(done, {
+        host: "winbet.store",
+        banca: "WIN BET",
+        styles: "--odds: #bb0000;",
+    });
+});
