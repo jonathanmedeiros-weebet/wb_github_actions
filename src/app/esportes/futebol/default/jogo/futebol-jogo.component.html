@@ -15,16 +15,17 @@
                     <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
                 </div>
             </div>
-        </div>
+        </div>  
         <div class="tipo-apostas">
-            <ngb-tabset type="pills">
-                <ngb-tab title="Tempo Completo">
-                    <ng-template ngbTabContent>
+            <ul ngbNav #nav="ngbNav" class="nav-pills">
+                <li ngbNavItem>
+                  <a ngbNavLink>Tempo Completo</a>
+                    <ng-template ngbNavContent>
                         <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds)">
                             <h4>{{odds[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes"
-                                    (click)="addCotacao(jogo, cotacao)">
+                                (click)="addCotacao(jogo, cotacao)">
                                     <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
                                         <span class="nome" *ngIf="cotacao.nome; else chave">
                                             {{cotacao.nome}}
@@ -42,34 +43,36 @@
                             </div>
                         </div>
                     </ng-template>
-                </ngb-tab>
-                <ngb-tab title="Primeiro Tempo">
-                    <ng-template ngbTabContent>
-                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds1T)">
-                            <h4>{{odds1T[chave].nome}}</h4>
-                            <div class="odds">
-                                <div class="odd" *ngFor="let cotacao of odds1T[chave].cotacoes"
-                                    (click)="addCotacao(jogo, cotacao)">
-                                    <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
-                                        <span class="nome" *ngIf="cotacao.nome; else chave">
-                                            {{cotacao.nome}}
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>Primeiro Tempo</a>
+                  <ng-template ngbNavContent>
+                    <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds1T)">
+                        <h4>{{odds1T[chave].nome}}</h4>
+                        <div class="odds">
+                            <div class="odd" *ngFor="let cotacao of odds1T[chave].cotacoes"
+                                (click)="addCotacao(jogo, cotacao)">
+                                <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
+                                    <span class="nome" *ngIf="cotacao.nome; else chave">
+                                        {{cotacao.nome}}
+                                    </span>
+                                    <ng-template #chave>
+                                        <span class="nome">
+                                            {{cotacao.chave | tipoAposta}}
                                         </span>
-                                        <ng-template #chave>
-                                            <span class="nome">
-                                                {{cotacao.chave | tipoAposta}}
-                                            </span>
-                                        </ng-template>
-                                        <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
-                                        </span>
-                                    </div>
+                                    </ng-template>
+                                    <span class="valor">
+                                        {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id: jogo.favorito}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    </ng-template>
-                </ngb-tab>
-                <ngb-tab title="Segundo Tempo">
-                    <ng-template ngbTabContent>
+                    </div>
+                </ng-template>
+                </li>
+                <li ngbNavItem>
+                    <a ngbNavLink>Segundo Tempo</a>
+                    <ng-template ngbNavContent>
                         <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds2T)">
                             <h4>{{odds2T[chave].nome}}</h4>
                             <div class="odds">
@@ -92,9 +95,10 @@
                             </div>
                         </div>
                     </ng-template>
-                </ngb-tab>
-                <ngb-tab title="Jogadores">
-                    <ng-template ngbTabContent>
+                </li>
+                <li ngbNavItem>
+                    <a ngbNavLink>Jogadores</a>
+                    <ng-template ngbNavContent>
                         <div class="div-vazio" *ngIf="!objectKeys(oddsJogadores).length">
                             Sem Cotações
                         </div>
@@ -121,8 +125,9 @@
                             </div>
                         </div>
                     </ng-template>
-                </ngb-tab>
-            </ngb-tabset>
+                  </li>
+              </ul>
+              <div [ngbNavOutlet]="nav"></div>
         </div>
     </div>
 </section>

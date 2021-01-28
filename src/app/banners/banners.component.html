@@ -1,8 +1,9 @@
-<div class="banners">
-    <ngb-carousel>
+<div *ngIf="banners" class="banners" > 
+    <ngb-carousel [showNavigationArrows]="showNavigationArrows" >
         <ng-template *ngFor="let banner of banners" ngbSlide>
             <div class="picsum-img-wrapper">
-            <img [src]="banner.src" [alt]="banner.titulo">
+             <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
+             <img *ngIf="isMobileView"  [src]="banner.src_mobile" [alt]="banner.titulo">
           </div>
         </ng-template>
       </ngb-carousel>

@@ -18,7 +18,7 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
     acumuladaoHabilitado;
     desafioHabilitado;
     tipo = 'esporte';
-
+    active= 'Esporte';
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,

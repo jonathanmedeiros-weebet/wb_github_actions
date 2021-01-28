@@ -43,33 +43,39 @@
             <div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <ngb-tabset [activeId]="'esporte'" type="pills">
-                            <ngb-tab title="Esporte" id="esporte">
-                                <ng-template ngbTabContent>
+                        <ul ngbNav #nav="ngbNav"  class="nav-pills">
+                            <li ngbNavItem id="esporte">
+                                <a ngbNavLink>Esporte</a>
+                                <ng-template ngbNavContent>
                                     <app-apuracao-esporte [queryParams]="queryParams"></app-apuracao-esporte>
                                 </ng-template>
-                            </ngb-tab>
-                            <ngb-tab title="Consolidado" id="consolidado">
-                                <ng-template ngbTabContent>
+                            </li>
+                            <li ngbNavItem id="consolidado">
+                                <a ngbNavLink>Consolidado</a>
+                                <ng-template ngbNavContent>
                                     <app-apuracao-consolidada [queryParams]="queryParams"></app-apuracao-consolidada>
                                 </ng-template>
-                            </ngb-tab>
-                            <ngb-tab title="Acumuladão" id="acumuladao" *ngIf="acumuladaoHabilitado">
-                                <ng-template ngbTabContent>
+                            </li>
+                            <li ngbNavItem id="acumuladao" *ngIf="acumuladaoHabilitado">
+                                <a ngbNavLink>Acumuladão</a>
+                                <ng-template ngbNavContent>
                                     <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>
                                 </ng-template>
-                            </ngb-tab>
-                            <ngb-tab title="Desafio" id="desafio" *ngIf="desafioHabilitado">
-                                <ng-template ngbTabContent>
+                            </li>
+                            <li ngbNavItem id="desafio" *ngIf="desafioHabilitado">
+                                <a ngbNavLink>Desafio</a>
+                                <ng-template ngbNavContent>
                                     <app-apuracao-desafio [queryParams]="queryParams"></app-apuracao-desafio>
                                 </ng-template>
-                            </ngb-tab>
-                            <ngb-tab title="Loteria" id="loteria" *ngIf="loteriasHabilitada">
-                                <ng-template ngbTabContent>
+                            </li>
+                            <li ngbNavItem id="loteria" *ngIf="loteriasHabilitada">
+                                <a ngbNavLink>Loteria</a>
+                                <ng-template ngbNavContent>
                                     <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>
                                 </ng-template>
-                            </ngb-tab>
-                        </ngb-tabset>
+                            </li>
+                        </ul>
+                    <div [ngbNavOutlet]="nav"></div>
                     </div>
                 </div>
             </div>

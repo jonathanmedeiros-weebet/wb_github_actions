@@ -32,7 +32,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     showLoadingIndicator = true;
     contentSportsEl;
     unsub$ = new Subject();
-
+    active = 'Tempo_Completo'
     constructor(
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
