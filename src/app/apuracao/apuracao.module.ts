@@ -17,13 +17,13 @@ import {
     AcumuladaoService,
     DesafioApostaService
 } from '../services';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
         SharedModule,
         ApuracaoRoutingModule,
-        NgbTabsetModule
+        NgbModule
     ],
     exports: [],
     declarations: [

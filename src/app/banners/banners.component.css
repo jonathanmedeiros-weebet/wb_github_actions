@@ -1,11 +1,11 @@
 .banners{
-    padding: 5px 3px;
+    padding-bottom:3px;
     background: #fff;
-    min-height: 80px;
+    /* min-height: 80px; */
 }
 
 .banners img{
     width: 100%;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     max-height: 374px;
 }
