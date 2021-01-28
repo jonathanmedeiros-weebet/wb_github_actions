@@ -1,5 +1,5 @@
 <div class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-<app-banners></app-banners>
+    <app-banners></app-banners>
 
     <div class="wrap-sticky">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
@@ -57,7 +57,7 @@
                                         </span>
                                         <span class="valor">
                                             {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
-                                                jogo.favorito}}
+                                            jogo.favorito}}
                                         </span>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                             </span>
                                             <span class="valor">
                                                 {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
-                                                    jogo.favorito}}
+                                                jogo.favorito}}
                                             </span>
                                         </div>
                                     </div>

@@ -12,45 +12,33 @@ export class BannersComponent implements OnInit {
     banners = [];
     isMobileView = false;
     showNavigationArrows = false;
+
     constructor(
         private bannerService: BannerService,
         private messageService: MessageService,
         private config: NgbCarouselConfig
     ) {
-        config.interval = 10000;
+        config.interval = 7000;
         config.showNavigationIndicators = false;
-        config.showNavigationArrows = true
-        // config.wrap = true;
         config.keyboard = false;
         config.pauseOnHover = false;
     }
 
     ngOnInit(): void {
         this.bannerService.getBanners().subscribe(
-            (banners) => {
-                let bannersArray = [];
+            banners => {
+                this.banners = [];
+                let source = 'src';
 
                 if (window.innerWidth <= 667) {
+                    source = 'src_mobile';
                     this.isMobileView = true;
-                    for (let banner of banners) {
-
-                        if (banner.src_mobile) {
-
-                            bannersArray.push(banner)
-                        }
-
-                    }
-                    this.isMobileView = true;
-                } else {
-                    for (let banner of banners) {
-                        if (banner.src) {
-                            bannersArray.push(banner)
-                        }
-                    }
                 }
 
-                if (bannersArray.length > 0) {
-                    this.banners = bannersArray;
+                for (let banner of banners) {
+                    if (banner[source]) {
+                        this.banners.push(banner)
+                    }
                 }
 
                 if (this.banners.length > 1) {

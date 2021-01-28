@@ -43,39 +43,39 @@
             <div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <ul ngbNav #nav="ngbNav"  class="nav-pills">
-                            <li ngbNavItem id="esporte">
+                        <ul ngbNav #nav="ngbNav" [activeId]="activeId" class="nav-pills">
+                            <li [ngbNavItem]="'esporte'">
                                 <a ngbNavLink>Esporte</a>
                                 <ng-template ngbNavContent>
                                     <app-apuracao-esporte [queryParams]="queryParams"></app-apuracao-esporte>
                                 </ng-template>
                             </li>
-                            <li ngbNavItem id="consolidado">
+                            <li [ngbNavItem]="'consolidado'">
                                 <a ngbNavLink>Consolidado</a>
                                 <ng-template ngbNavContent>
                                     <app-apuracao-consolidada [queryParams]="queryParams"></app-apuracao-consolidada>
                                 </ng-template>
                             </li>
-                            <li ngbNavItem id="acumuladao" *ngIf="acumuladaoHabilitado">
+                            <li [ngbNavItem]="'acumuladao'" *ngIf="acumuladaoHabilitado">
                                 <a ngbNavLink>Acumuladão</a>
                                 <ng-template ngbNavContent>
                                     <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>
                                 </ng-template>
                             </li>
-                            <li ngbNavItem id="desafio" *ngIf="desafioHabilitado">
+                            <li [ngbNavItem]="'desafio'" *ngIf="desafioHabilitado">
                                 <a ngbNavLink>Desafio</a>
                                 <ng-template ngbNavContent>
                                     <app-apuracao-desafio [queryParams]="queryParams"></app-apuracao-desafio>
                                 </ng-template>
                             </li>
-                            <li ngbNavItem id="loteria" *ngIf="loteriasHabilitada">
+                            <li [ngbNavItem]="'loteria'" *ngIf="loteriasHabilitada">
                                 <a ngbNavLink>Loteria</a>
                                 <ng-template ngbNavContent>
                                     <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>
                                 </ng-template>
                             </li>
                         </ul>
-                    <div [ngbNavOutlet]="nav"></div>
+                        <div [ngbNavOutlet]="nav"></div>
                     </div>
                 </div>
             </div>

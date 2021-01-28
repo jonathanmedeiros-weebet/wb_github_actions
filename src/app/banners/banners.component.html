@@ -1,13 +1,12 @@
 <div *ngIf="banners" class="banners">
-  <ngb-carousel [showNavigationArrows]="showNavigationArrows">
-    <ng-template *ngFor="let banner of banners" ngbSlide>
-      <div class="picsum-img-wrapper">
-        <a [href]="banner.link" [target]="banner.link_blank ? '_blank' : ''">
-          <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
-          <img *ngIf="isMobileView" [src]="banner.src_mobile" [alt]="banner.titulo">
-        </a>
-
-      </div>
-    </ng-template>
-  </ngb-carousel>
+    <ngb-carousel [showNavigationArrows]="showNavigationArrows">
+        <ng-template *ngFor="let banner of banners" ngbSlide>
+            <div class="picsum-img-wrapper">
+                <a [href]="banner.link" [target]="banner.link_blank ? '_blank' : ''">
+                    <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
+                    <img *ngIf="isMobileView" [src]="banner.src_mobile" [alt]="banner.titulo">
+                </a>
+            </div>
+        </ng-template>
+    </ngb-carousel>
 </div>
