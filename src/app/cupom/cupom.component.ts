@@ -33,6 +33,8 @@ export class CupomComponent implements OnInit, OnDestroy {
                     this.apostaService.getAposta(params['chave'])
                         .pipe(
                             switchMap(aposta => {
+                                console.log(aposta);
+
                                 this.aposta = aposta;
                                 const jogosApiIds = aposta.itens.map(item => item.jogo_api_id);
                                 const params = {
