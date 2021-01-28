@@ -238,7 +238,13 @@
     "moneybet.wee.bet": "gulp moneybet.wee.bet",
     "resenhaesportiva.site": "gulp resenhaesportiva.site",
     "betsbrasil.net": "gulp betsbrasil.net",
-    "showdebola.wee.bet": "gulp showdebola.wee.bet"
+    "showdebola.wee.bet": "gulp showdebola.wee.bet",
+    "bet170.wee.bet": "gulp bet170.wee.bet",
+    "topbets.website": "gulp topbets.website",
+    "betscariri.net": "gulp betscariri.net",
+    "futmax.wee.bet": "gulp futmax.wee.bet",
+    "dgbets.club": "gulp dgbets.club",
+    "winbet.store": "gulp winbet.store"
   },
   "private": true,
   "dependencies": {
@@ -251,7 +257,7 @@
     "@angular/platform-browser": "^9.1.12",
     "@angular/platform-browser-dynamic": "^9.1.12",
     "@angular/router": "^9.1.12",
-    "@ng-bootstrap/ng-bootstrap": "^5.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^8.0.4",
     "angular-svg-icon": "^7.2.0",
     "bootstrap": "^4.1.0",
     "clone": "^2.1.1",

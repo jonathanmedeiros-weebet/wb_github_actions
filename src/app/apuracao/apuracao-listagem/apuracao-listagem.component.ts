@@ -17,7 +17,7 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
-    tipo = 'esporte';
+    activeId = 'esporte';
 
     constructor(
         private messageService: MessageService,

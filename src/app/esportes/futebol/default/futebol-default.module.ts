@@ -5,18 +5,22 @@ import { FutebolDefaultRoutingModule } from './futebol-default-routing.module';
 import { FutebolDefaultWrapperComponent } from './wrapper/futebol-default-wrapper.component';
 import { FutebolListagemComponent } from './listagem/futebol-listagem.component';
 import { FutebolJogoComponent } from './jogo/futebol-jogo.component';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { BannersComponent } from '../../../banners/banners.component';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
         SharedModule,
         FutebolDefaultRoutingModule,
-        NgbTabsetModule
+        NgbNavModule,
+        NgbCarouselModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,
         FutebolListagemComponent,
-        FutebolJogoComponent
+        FutebolJogoComponent,
+        BannersComponent
     ],
     providers: []
 })

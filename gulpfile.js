@@ -2075,3 +2075,52 @@ gulp.task('showdebola.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #008000;",
     });
 });
+
+gulp.task('bet170.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet170.wee.bet",
+        banca: "BET 170",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #9a9a9a;--highlight: #ff5500; --foreground-highlight: #fff;--league: #ff5500;--foreground-league: #fff;",
+        // styles: "",
+    });
+});
+
+gulp.task('topbets.website', function (done) {
+    tasks(done, {
+        host: "topbets.website",
+        banca: "TOP BETS",
+        styles: "",
+    });
+});
+
+gulp.task('betscariri.net', function (done) {
+    tasks(done, {
+        host: "betscariri.net",
+        banca: "BETS CARIRI",
+        styles: "--header: #f7b03e; --foreground-header: #000; --sidebar-right:#f7b03e; --foreground-sidebar-right: #000; --sidebar-left: #f7b03e; --foreground-sidebar-left: #000; --odds: #067700;--foreground-highlight: #000;",
+    });
+});
+
+gulp.task('futmax.wee.bet', function (done) {
+    tasks(done, {
+        host: "futmax.wee.bet",
+        banca: "FUT MAX",
+        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --odds: #14805e;",
+    });
+});
+
+gulp.task('dgbets.club', function (done) {
+    tasks(done, {
+        host: "dgbets.club",
+        banca: "DG BETS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #daa54a;--highlight: #bb0000;",
+    });
+});
+
+gulp.task('winbet.store', function (done) {
+    tasks(done, {
+        host: "winbet.store",
+        banca: "WIN BET",
+        styles: "--odds: #bb0000;",
+    });
+});
