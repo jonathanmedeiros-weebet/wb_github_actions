@@ -244,7 +244,9 @@
     "betscariri.net": "gulp betscariri.net",
     "futmax.wee.bet": "gulp futmax.wee.bet",
     "dgbets.club": "gulp dgbets.club",
-    "winbet.store": "gulp winbet.store"
+    "winbet.store": "gulp winbet.store",
+    "bet316.wee.bet": "gulp bet316.wee.bet",
+    "pazbet.com": "gulp pazbet.com"
   },
   "private": true,
   "dependencies": {
