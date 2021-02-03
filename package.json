@@ -246,7 +246,10 @@
     "dgbets.club": "gulp dgbets.club",
     "winbet.store": "gulp winbet.store",
     "bet316.wee.bet": "gulp bet316.wee.bet",
-    "pazbet.com": "gulp pazbet.com"
+    "pazbet.com": "gulp pazbet.com",
+    "foxesbet.net": "gulp foxesbet.net",
+    "rjsports.wee.bet": "gulp rjsports.wee.bet",
+    "vilasport.wee.bet": "gulp vilasport.wee.bet"
   },
   "private": true,
   "dependencies": {

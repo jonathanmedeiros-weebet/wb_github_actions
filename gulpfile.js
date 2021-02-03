@@ -2140,3 +2140,27 @@ gulp.task('pazbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('foxesbet.net', function (done) {
+    tasks(done, {
+        host: "foxesbet.net",
+        banca: "FOXES BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #a51b0b; --foreground-odds: #fff;"
+    });
+});
+
+gulp.task('rjsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "rjsports.wee.bet",
+        banca: "RJ SPORTS",
+        styles: "--header: #858585; --foreground-header: #fff; --sidebar-right:#626262; --foreground-sidebar-right: #fff; --sidebar-left: #626262; --foreground-sidebar-left: #fff; --odds: #eead2d; --foreground-odds: #000;"
+    });
+});
+
+gulp.task('vilasport.wee.bet', function (done) {
+    tasks(done, {
+        host: "vilasport.wee.bet",
+        banca: "VILA SPORT",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #00008B; --foreground-odds: #fff;--highlight: #70f263;"
+    });
+});
