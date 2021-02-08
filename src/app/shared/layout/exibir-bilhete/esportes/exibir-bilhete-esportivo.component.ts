@@ -57,8 +57,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     print() {
         this.utilsService.getDateTime().subscribe(
             results => {
-                console.log(results);
-                const date = results.brazilianFormatDateTime;
+                const date = results;
                 this.printService.sportsTicket(this.aposta, date);
             },
             error => {
