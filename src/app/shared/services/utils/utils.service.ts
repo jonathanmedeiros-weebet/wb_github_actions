@@ -19,7 +19,7 @@ export class UtilsService {
 
 
     getDateTime() {
-        return this.http.get(`${this.utilsUrl}/getCurrentDate`, this.headers.getRequestOptions(true))
+        return this.http.get(`${this.utilsUrl}/get-date-time`, this.headers.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
