@@ -66,7 +66,6 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
         );
     }
 
-
     handleError(msg) {
         this.messageService.error(msg);
     }

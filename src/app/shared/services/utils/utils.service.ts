@@ -17,7 +17,6 @@ export class UtilsService {
         private errorService: ErrorService
     ) { }
 
-
     getDateTime() {
         return this.http.get(`${this.utilsUrl}/current-datetime`, this.headers.getRequestOptions(true))
             .pipe(
