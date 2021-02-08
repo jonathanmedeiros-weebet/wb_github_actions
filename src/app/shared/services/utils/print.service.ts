@@ -471,15 +471,15 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
     }
 
     // Bilhete Esportivo
-    sportsTicket(aposta) {
+    sportsTicket(aposta, date?) {
         if (this.auth.isAppMobile()) {
-            this.sportsTicketAppMobile(aposta);
+            this.sportsTicketAppMobile(aposta,date);
         } else {
-            this.sportsTicketDestkop(aposta);
+            this.sportsTicketDestkop(aposta,date);
         }
     }
 
-    private sportsTicketDestkop(aposta) {
+    private sportsTicketDestkop(aposta, date?) {
         let printContents, popupWin, html, styles;
 
         styles = `
@@ -665,6 +665,8 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
                 <p class="rodape">
                     ${this.opcoes.informativo_rodape}
                 </p>
+                <br>
+                <small style="font-size: 6px">impresso em  ${date.brazilianFormatDate} às ${date.currentTime}</small>
             </div>
         </div>`;
 
@@ -689,7 +691,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
         popupWin.document.close();
     }
 
-    private sportsTicketAppMobile(aposta) {
+    private sportsTicketAppMobile(aposta, date?) {
         let ticket = `${config.BANCA_NOME}
 #${aposta.id}
 CAMBISTA: ${aposta.passador.nome}
@@ -735,6 +737,8 @@ PREMIO: ${this.helperService.moneyFormat(aposta.premio)}
 -------------------------------
 -------------------------------
 ${this.opcoes.informativo_rodape}
+
+impresso em ${date.brazilianFormatDate} às ${date.currentTime}
         `;
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
