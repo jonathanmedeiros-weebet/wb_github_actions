@@ -90,10 +90,10 @@
                         </ng-template>
                         <span class="valor">
                             ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                                item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo }})
+                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
                             <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
                                 ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
-                                    item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo}})
+                                    item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
                             </del>
                         </span>
                     </div>
@@ -164,7 +164,7 @@
                         </ng-template>
                         <span class="valor">
                             {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                            item.jogo._id: item.jogo.favorito : item.jogo.ao_vivo }}
+                            item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }}
                         </span>
                     </div>
                 </div>

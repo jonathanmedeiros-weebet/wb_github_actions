@@ -2124,3 +2124,43 @@ gulp.task('winbet.store', function (done) {
         styles: "--odds: #bb0000;",
     });
 });
+
+gulp.task('bet316.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet316.wee.bet",
+        banca: "BET 316",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #fc6402; --foreground-highlight: #fff; --odds: #9a9a9a; --foreground-odds: #fff; --event-time: #777; --league: #fc6402; --foreground-league: #fff;"
+    });
+});
+
+gulp.task('pazbet.com', function (done) {
+    tasks(done, {
+        host: "pazbet.com",
+        banca: "PAZ BET",
+        styles: "",
+    });
+});
+
+gulp.task('foxesbet.net', function (done) {
+    tasks(done, {
+        host: "foxesbet.net",
+        banca: "FOXES BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #a51b0b; --foreground-odds: #fff;"
+    });
+});
+
+gulp.task('rjsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "rjsports.wee.bet",
+        banca: "RJ SPORTS",
+        styles: "--header: #858585; --foreground-header: #fff; --sidebar-right:#626262; --foreground-sidebar-right: #fff; --sidebar-left: #626262; --foreground-sidebar-left: #fff; --odds: #eead2d; --foreground-odds: #000;"
+    });
+});
+
+gulp.task('vilasport.wee.bet', function (done) {
+    tasks(done, {
+        host: "vilasport.wee.bet",
+        banca: "VILA SPORT",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #00008B; --foreground-odds: #fff;--highlight: #70f263;"
+    });
+});

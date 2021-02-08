@@ -35,9 +35,9 @@ export class BannersComponent implements OnInit {
                     this.isMobileView = true;
                 }
 
-                for (let banner of banners) {
+                for (const banner of banners) {
                     if (banner[source]) {
-                        this.banners.push(banner)
+                        this.banners.push(banner);
                     }
                 }
 

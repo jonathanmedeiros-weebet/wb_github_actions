@@ -13,7 +13,7 @@
                 </div>
                 <div class="eventos">
                     <ng-container *ngFor="let evento of campeonato.jogos">
-                        <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento._id)"
+                        <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento.event_id)"
                             (click)="selecionarJogo(evento._id)">
                             <div class="indentificacao">
                                 <div class="horario">
@@ -36,7 +36,7 @@
                                             {{cotacao.chave | tipoAposta: 'sigla'}}
                                         </span>
                                         <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: evento.event_id:
                                                 evento.favorito}}
                                         </span>
                                     </div>
@@ -50,7 +50,7 @@
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave: evento._id:
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: evento.event_id:
                                                     evento.favorito}}
                                             </span>
                                         </div>

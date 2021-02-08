@@ -142,6 +142,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         const item = {
             ao_vivo: jogo.ao_vivo,
             jogo_id: jogo._id,
+            jogo_event_id: jogo.event_id,
             jogo_nome: jogo.nome,
             tempo: jogo.info.minutos,
             time_a_placar: jogo.info.time_a_resultado,

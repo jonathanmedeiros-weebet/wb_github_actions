@@ -134,17 +134,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.usuario = this.auth.getUser();
     }
 
-    // atualizarTiposAposta() {
-    //     this.parametroService.getParametros()
-    //         .pipe(takeUntil(this.unsub$))
-    //         .subscribe(
-    //             parametros => {
-    //                 localStorage.setItem('tipos_aposta', JSON.stringify(parametros['tipos_aposta']));
-    //             },
-    //             error => this.messageService.error(error)
-    //         );
-    // }
-
     listPrinters() {
         this.printService.listPrinters();
     }

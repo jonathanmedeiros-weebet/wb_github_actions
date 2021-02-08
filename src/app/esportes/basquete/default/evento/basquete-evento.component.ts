@@ -195,6 +195,7 @@ export class BasqueteEventoComponent implements OnInit, OnDestroy, OnChanges {
         const item = {
             ao_vivo: evento.ao_vivo,
             jogo_id: evento._id,
+            jogo_event_id: evento.event_id,
             jogo_nome: evento.nome,
             cotacao: cotacao,
             jogo: evento,

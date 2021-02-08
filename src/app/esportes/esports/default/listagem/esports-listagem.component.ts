@@ -108,6 +108,7 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
         const item = {
             ao_vivo: evento.ao_vivo,
             jogo_id: evento._id,
+            jogo_event_id: evento.event_id,
             jogo_nome: evento.nome,
             cotacao: cotacao,
             jogo: evento,
@@ -176,8 +177,8 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
         return result;
     }
 
-    eventoBloqueado(id) {
-        return this.eventosBloqueados ? (this.eventosBloqueados.includes(id) ? true : false) : false;
+    eventoBloqueado(eventId) {
+        return this.eventosBloqueados ? (this.eventosBloqueados.includes(eventId) ? true : false) : false;
     }
 
     // Extrai id do primeiro evento do primeiro campeonato

@@ -1,5 +1,5 @@
 <div class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-    <!-- <app-banners></app-banners> -->
+    <app-banners></app-banners>
 
     <div class="wrap-sticky">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos">
-                        <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo._id)">
+                        <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
                             <div class="indentificacao">
                                 <div class="horario">
                                     {{jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -56,7 +56,7 @@
                                             {{cotacao.chave | tipoAposta: 'sigla'}}
                                         </span>
                                         <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
                                             jogo.favorito}}
                                         </span>
                                     </div>
@@ -70,7 +70,7 @@
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo._id:
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
                                                 jogo.favorito}}
                                             </span>
                                         </div>

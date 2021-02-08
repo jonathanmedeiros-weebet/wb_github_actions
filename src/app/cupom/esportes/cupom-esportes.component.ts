@@ -49,9 +49,9 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             const horarioInicio = moment(item.jogo_horario).subtract('10', 'm');
             const horarioFim = moment(item.jogo_horario).add('2', 'hours');
 
-            this.chaves[item.jogo.fi] = item.aposta_tipo.chave;
+            this.chaves[item.jogo_api_id] = item.aposta_tipo.chave;
             const estatistica = new Estatistica();
-            this.stats[item.jogo.fi] = estatistica;
+            this.stats[item.jogo_api_id] = estatistica;
 
             if (item.resultado) {
                 const resultado = this.resultados.get(item.jogo_api_id);
@@ -66,7 +66,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
                 estatistica.time_b_escanteios = resultado.fora_escanteios;
                 estatistica.resultado = item.resultado;
             } else if (!item.removido && moment().isSameOrAfter(horarioInicio) && moment().isBefore(horarioFim)) {
-                eventosId.push(item.jogo.fi);
+                eventosId.push(item.jogo_api_id);
             }
 
             if (item.removido) {

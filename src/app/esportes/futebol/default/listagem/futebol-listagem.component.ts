@@ -138,6 +138,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         const item = {
             ao_vivo: jogo.ao_vivo,
             jogo_id: jogo._id,
+            jogo_event_id: jogo.event_id,
             jogo_nome: jogo.nome,
             cotacao: cotacao,
             jogo: jogo,
@@ -206,8 +207,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return result;
     }
 
-    jogoBloqueado(id) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(id) ? true : false) : false;
+    jogoBloqueado(eventId) {
+        return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
     toggleCampeonato(campeonatoId) {

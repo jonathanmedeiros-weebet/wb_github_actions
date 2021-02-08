@@ -149,7 +149,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             cotacao = cotacao * this.helperService.calcularCotacao(
                 item.cotacao.valor,
                 item.cotacao.chave,
-                item.jogo._id,
+                item.jogo.event_id,
                 item.jogo.favorito,
                 item.ao_vivo
             );
@@ -384,8 +384,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const values = clone(this.form.value);
         values.itens.map(item => {
             // Cotacação Local
-            if (cotacoesLocais[item.jogo_id] && cotacoesLocais[item.jogo_id][item.cotacao.chave]) {
-                item.cotacao.valor = parseFloat(cotacoesLocais[item.jogo_id][item.cotacao.chave].valor);
+            if (cotacoesLocais[item.jogo_event_id] && cotacoesLocais[item.jogo_event_id][item.cotacao.chave]) {
+                item.cotacao.valor = parseFloat(cotacoesLocais[item.jogo_event_id][item.cotacao.chave].valor);
             }
 
             delete item.jogo;
