@@ -471,7 +471,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
     }
 
     // Bilhete Esportivo
-    sportsTicket(aposta) {
+    sportsTicket(aposta, date?) {
         if (this.auth.isAppMobile()) {
             this.sportsTicketAppMobile(aposta);
         } else {
@@ -689,7 +689,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
         popupWin.document.close();
     }
 
-    private sportsTicketAppMobile(aposta) {
+    private sportsTicketAppMobile(aposta, date?) {
         let ticket = `${config.BANCA_NOME}
 #${aposta.id}
 CAMBISTA: ${aposta.passador.nome}
@@ -735,6 +735,8 @@ PREMIO: ${this.helperService.moneyFormat(aposta.premio)}
 -------------------------------
 -------------------------------
 ${this.opcoes.informativo_rodape}
+
+impresso em ${date}
         `;
 
         parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
