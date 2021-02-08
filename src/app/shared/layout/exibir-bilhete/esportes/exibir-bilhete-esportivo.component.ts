@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { config } from './../../../config';
-import { ParametrosLocaisService, PrintService, AuthService } from '../../../../services';
+import { ParametrosLocaisService, PrintService, AuthService, UtilsService, MessageService } from '../../../../services';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -22,6 +22,8 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     constructor(
         private paramsService: ParametrosLocaisService,
         private printService: PrintService,
+        private utilsService: UtilsService,
+        private messageService: MessageService,
         private auth: AuthService,
     ) { }
 
@@ -53,6 +55,18 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     }
 
     print() {
-        this.printService.sportsTicket(this.aposta);
+        this.utilsService.getDateTime().subscribe(
+            results => {
+                const date = results;
+                this.printService.sportsTicket(this.aposta, date);
+            },
+            error => {
+                this.handleError(error);
+            }
+        );
+    }
+
+    handleError(msg) {
+        this.messageService.error(msg);
     }
 }
