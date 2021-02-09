@@ -138,9 +138,9 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     // Coloca as cotações faltando nos eventos
-    cotacaoManualFaltando(eventoId, cotacoes) {
+    cotacaoManualFaltando(eventId, cotacoes) {
         let result = false;
-        const cotacoesLocais = this.cotacoesLocais[eventoId];
+        const cotacoesLocais = this.cotacoesLocais[eventId];
 
         if (cotacoesLocais) {
             for (let index = 0; index < cotacoes.length; index++) {
@@ -157,12 +157,12 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
                     const cotacaoLocal = cotacoesLocais[chave];
 
                     if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
-                        if (!this.cotacoesFaltando[eventoId]) {
-                            this.cotacoesFaltando[eventoId] = [];
+                        if (!this.cotacoesFaltando[eventId]) {
+                            this.cotacoesFaltando[eventId] = [];
                         }
 
-                        if (!this.cotacoesFaltando[eventoId].filter(cotacao => cotacao.chave === chave).length) {
-                            this.cotacoesFaltando[eventoId].push({
+                        if (!this.cotacoesFaltando[eventId].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[eventId].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor
                             });

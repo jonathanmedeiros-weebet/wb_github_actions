@@ -168,9 +168,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     // Coloca as cotações faltando nos jogos
-    cotacaoManualFaltando(jogoId, cotacoes) {
+    cotacaoManualFaltando(jogoEventId, cotacoes) {
         let result = false;
-        const cotacoesLocais = this.cotacoesLocais[jogoId];
+        const cotacoesLocais = this.cotacoesLocais[jogoEventId];
 
         if (cotacoesLocais) {
             for (let index = 0; index < cotacoes.length; index++) {
@@ -187,12 +187,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                     const cotacaoLocal = cotacoesLocais[chave];
 
                     if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
-                        if (!this.cotacoesFaltando[jogoId]) {
-                            this.cotacoesFaltando[jogoId] = [];
+                        if (!this.cotacoesFaltando[jogoEventId]) {
+                            this.cotacoesFaltando[jogoEventId] = [];
                         }
 
-                        if (!this.cotacoesFaltando[jogoId].filter(cotacao => cotacao.chave === chave).length) {
-                            this.cotacoesFaltando[jogoId].push({
+                        if (!this.cotacoesFaltando[jogoEventId].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[jogoEventId].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor
                             });

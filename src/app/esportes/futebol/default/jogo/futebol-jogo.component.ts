@@ -169,17 +169,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                 odd.cotacoes.push(cotacao);
 
-                if (this.cotacoesLocais[this.jogo._id] && this.cotacoesLocais[this.jogo._id][cotacao.chave]) {
-                    this.cotacoesLocais[this.jogo._id][cotacao.chave].usou = true;
+                if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][cotacao.chave]) {
+                    this.cotacoesLocais[this.jogo.event_id][cotacao.chave].usou = true;
                 }
             }
         }
 
         // Exibir odds locais que não vinheram no center
-        if (this.cotacoesLocais[this.jogo._id]) {
-            for (const chave in this.cotacoesLocais[this.jogo._id]) {
-                if (this.cotacoesLocais[this.jogo._id].hasOwnProperty(chave)) {
-                    const cotacaoLocal = this.cotacoesLocais[this.jogo._id][chave];
+        if (this.cotacoesLocais[this.jogo.event_id]) {
+            for (const chave in this.cotacoesLocais[this.jogo.event_id]) {
+                if (this.cotacoesLocais[this.jogo.event_id].hasOwnProperty(chave)) {
+                    const cotacaoLocal = this.cotacoesLocais[this.jogo.event_id][chave];
 
                     if (!cotacaoLocal.usou) {
                         const tipoAposta = this.tiposAposta[chave];

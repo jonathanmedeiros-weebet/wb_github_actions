@@ -61,8 +61,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <ng-container *ngIf="cotacaoManualFaltando(jogo._id, jogo.cotacoes)">
-                                    <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo._id]"
+                                <ng-container *ngIf="cotacaoManualFaltando(jogo.event_id, jogo.cotacoes)">
+                                    <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"
                                         (click)="addCotacao(jogo, cotacao)">
                                         <div
                                             class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">

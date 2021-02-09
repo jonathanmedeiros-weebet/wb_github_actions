@@ -145,17 +145,17 @@ export class BasqueteEventoComponent implements OnInit, OnDestroy, OnChanges {
 
                 odd.cotacoes.push(cotacao);
 
-                if (this.cotacoesLocais[this.evento._id] && this.cotacoesLocais[this.evento._id][cotacao.chave]) {
-                    this.cotacoesLocais[this.evento._id][cotacao.chave].usou = true;
+                if (this.cotacoesLocais[this.evento.event_id] && this.cotacoesLocais[this.evento.event_id][cotacao.chave]) {
+                    this.cotacoesLocais[this.evento.event_id][cotacao.chave].usou = true;
                 }
             }
         }
 
         // Exibir odds locais que não vinheram no center
-        if (this.cotacoesLocais[this.evento._id]) {
-            for (const chave in this.cotacoesLocais[this.evento._id]) {
-                if (this.cotacoesLocais[this.evento._id].hasOwnProperty(chave)) {
-                    const cotacaoLocal = this.cotacoesLocais[this.evento._id][chave];
+        if (this.cotacoesLocais[this.evento.event_id]) {
+            for (const chave in this.cotacoesLocais[this.evento.event_id]) {
+                if (this.cotacoesLocais[this.evento.event_id].hasOwnProperty(chave)) {
+                    const cotacaoLocal = this.cotacoesLocais[this.evento.event_id][chave];
 
                     if (!cotacaoLocal.usou) {
                         const tipoAposta = this.tiposAposta[chave];
