@@ -28,9 +28,9 @@ function tasks(done, config) {
             base: 'http://' + config.host + '/tema/'
         })
             .pipe(gulp.dest('src/assets/images/'));
-    }
-    else {
+    } else {
         console.log("novo");
+
         gulp.src(['config.ts'])
             .pipe(replace('[HOST]', 'central.' + config.host))
             .pipe(replace('[BANCA]', config.banca))
@@ -54,6 +54,10 @@ function tasks(done, config) {
         })
             .pipe(gulp.dest('src/assets/images/'));
 
+        remoteSrc(['favicon.ico'], {
+            base: 'http://central.' + config.host + '/tema/'
+        })
+            .pipe(gulp.dest('src/'));
     }
 
     var options = {
