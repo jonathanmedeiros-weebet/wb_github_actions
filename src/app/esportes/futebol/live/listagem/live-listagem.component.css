@@ -44,7 +44,7 @@
 .indentificacao .nome{
     display: flex;
     flex-grow: 1;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .indentificacao .time-a{
@@ -74,7 +74,6 @@
 
 .indentificacao .tempo{
     margin-right: 15px;
-    font-weight: bolder;
     color: #000;
 }
 
@@ -89,10 +88,13 @@
     align-items: center;
 }
 
+.indentificacao-mobile .nome{
+    font-weight: 700;
+}
+
 .indentificacao-mobile .time-a, .indentificacao-mobile .time-b{
     display: flex;
     align-items: center;
-    font-weight: bold;
 }
 .indentificacao-mobile .time-a{
     margin-bottom: 5px;

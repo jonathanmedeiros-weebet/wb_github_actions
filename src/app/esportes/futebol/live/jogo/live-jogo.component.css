@@ -7,7 +7,6 @@
     align-items: center;
     flex-grow: 1;
     justify-content: center;
-    font-weight: bolder;
 }
 
 .indentificacao{
@@ -29,7 +28,6 @@
 
 .indentificacao .nome, h4{
     font-size: 1.2rem;
-    font-weight: bolder;
 }
 
 .indentificacao-mobile .first-line{
@@ -93,7 +91,6 @@
 
 .tempo{
     font-size: 1.2rem;
-    font-weight: bolder;
     color: #000;
 }
 

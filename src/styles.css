@@ -17,7 +17,7 @@ html {
 
 html,
 body {
-    color: #455a64;
+    color: #1e282c;
     overflow: hidden;
 }
 
@@ -75,6 +75,15 @@ header {
 .btn-custom {
     background-color: var(--odds);
     color: var(--foreground-odds);
+}
+
+.btn-custom:hover{
+    color: var(--highlight);
+    border: 1px solid var(--highlight);
+}
+
+.btn-custom:focus{
+    box-shadow: 0 0 0 0.5px var(--highlight);
 }
 
 .card {
@@ -435,7 +444,6 @@ button {
     text-transform: uppercase;
     padding: 0px 10px;
     font-size: 0.9rem;
-    font-weight: bold;
     border-bottom: 4px solid white;
     cursor: pointer;
     display: flex;
@@ -690,6 +698,39 @@ button {
 .sem-evento{
     padding: 10px;
     font-size: 1.5rem;
+}
+
+.value-informations {
+    text-transform: uppercase;
+    color: var(--foreground-sidebar-right);
+    margin: 20px 0;
+}
+
+.value-informations p {
+    margin-bottom: 0.5rem;
+}
+
+.value-informations .valores {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.value-informations .valores button {
+    padding: 0;
+    width: 55px;
+    background-color: var(--odds);
+    color: var(--foreground-odds);
+}
+
+.value-informations .valores button:hover {
+        color: var(--highlight);
+        border: 1px solid var(--highlight);
+}
+
+.value-informations .valores button:focus {
+    box-shadow: 0 0 0 0.5px var(--highlight);
 }
 
 @keyframes lds-ring {

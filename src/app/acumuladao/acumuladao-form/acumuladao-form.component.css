@@ -118,16 +118,6 @@
     margin-left: -37px;
 }
 
-.value-informations {
-    text-transform: uppercase;
-    color: var(--foreground-sidebar-right);
-    margin: 20px 0;
-}
-
-.value-informations p {
-    margin-bottom: 0.5rem;
-}
-
 .div-inputs {
     background-color: var(--odds);
     padding: 20px 15px 8px 15px;

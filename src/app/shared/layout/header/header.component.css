@@ -70,16 +70,8 @@ header a{
     white-space: nowrap;
 }
 
-.menu-categories .category a:hover{
-    color: var(--highlight);
-}
-
 .menu-categories .active{
     border-bottom: 2px solid var(--highlight);
-}
-
-.menu-categories .active a{
-    color: #fff;
 }
 
 .menu-categories img{

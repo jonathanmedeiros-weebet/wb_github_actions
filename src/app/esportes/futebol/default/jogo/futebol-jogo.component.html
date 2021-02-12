@@ -47,7 +47,7 @@
                 <li ngbNavItem>
                     <a ngbNavLink>Primeiro Tempo</a>
                     <ng-template ngbNavContent>
-                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds1T)">
+                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds1T)">
                             <h4>{{odds1T[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of odds1T[chave].cotacoes"
@@ -73,7 +73,7 @@
                 <li ngbNavItem>
                     <a ngbNavLink>Segundo Tempo</a>
                     <ng-template ngbNavContent>
-                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds2T)">
+                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds2T)">
                             <h4>{{odds2T[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of odds2T[chave].cotacoes"

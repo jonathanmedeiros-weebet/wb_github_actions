@@ -11,7 +11,7 @@
 }
 
 .evento{
-    padding: 0px 10px;
+    padding: 0 10px 4px 10px;
 }
 
 .evento-selecionado{
@@ -23,24 +23,14 @@
 .indentificacao{
     display: flex;
     align-items: center;
-    padding: 5px 0;
 }
 
-.indentificacao .nome, .indentificacao .nome-mobile{
+.indentificacao .nome{
     flex-grow: 1;
-    font-weight: bold;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    .indentificacao .nome{
-        display: block;
-    }
-
-    .indentificacao .nome-mobile{
-         display: none;
-    }
-
     .odds .odd{
         width: 50%;
     }
@@ -49,14 +39,6 @@
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;
-    }
-
-    .indentificacao .nome{
-        display: none;
-    }
-
-    .indentificacao .nome-mobile{
-         display: block;
     }
 
     .odds .odd{
