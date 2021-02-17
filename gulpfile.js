@@ -2173,6 +2173,6 @@ gulp.task('ligasportsbet.com', function (done) {
     tasks(done, {
         host: "ligasportsbet.com",
         banca: "LIGA SPORTS BET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #176d6e; --foreground-odds: #fff;--highlight: #3cc8b8;"
+        styles: "--header: #1C1C1C; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #176d6e; --foreground-odds: #fff;--highlight: #3cc8b8;"
     });
 });
