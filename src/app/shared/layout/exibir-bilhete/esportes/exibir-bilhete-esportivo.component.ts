@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { config } from './../../../config';
 import { ParametrosLocaisService, PrintService, AuthService, UtilsService, MessageService } from '../../../../services';
+import * as moment from 'moment';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -57,8 +58,9 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     print() {
         this.utilsService.getDateTime().subscribe(
             results => {
-                const date = results;
-                this.printService.sportsTicket(this.aposta, date);
+                const { currentDateTime } = results;
+                const dateTime = moment(currentDateTime).format('DD/MM/YYYY [as] HH:mm');
+                this.printService.sportsTicket(this.aposta, dateTime);
             },
             error => {
                 this.handleError(error);
