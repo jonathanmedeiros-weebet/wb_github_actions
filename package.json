@@ -250,7 +250,8 @@
     "foxesbet.net": "gulp foxesbet.net",
     "rjsports.wee.bet": "gulp rjsports.wee.bet",
     "vilasport.wee.bet": "gulp vilasport.wee.bet",
-    "ligasportsbet.com": "gulp ligasportsbet.com"
+    "ligasportsbet.com": "gulp ligasportsbet.com",
+    "goldsports.wee.bet": "gulp goldsports.wee.bet"
   },
   "private": true,
   "dependencies": {
