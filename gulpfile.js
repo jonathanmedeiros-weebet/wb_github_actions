@@ -2184,3 +2184,19 @@ gulp.task('goldsports.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('ourobet.wee.bet', function (done) {
+    tasks(done, {
+        host: "ourobet.wee.bet",
+        banca: "OURO BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #cb962e;"
+    });
+});
+
+gulp.task('bigbets.website', function (done) {
+    tasks(done, {
+        host: "bigbets.website",
+        banca: "BIG BETS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #62af26;"
+    });
+});
