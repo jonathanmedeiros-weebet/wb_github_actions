@@ -2181,7 +2181,7 @@ gulp.task('goldsports.wee.bet', function (done) {
     tasks(done, {
         host: "goldsports.wee.bet",
         banca: "GOLD SPORTS",
-        styles: ""
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #dd9c24;--highlight: yellow;--foreground-selected-odds: #000;"
     });
 });
 
