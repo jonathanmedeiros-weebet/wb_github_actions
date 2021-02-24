@@ -20,7 +20,7 @@ export class ApostaModalComponent implements OnInit {
     @Input() aposta;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;
-    @Input() ultimaAposta = false;
+    @Input() isUltimaAposta = false;
     appMobile;
     casaDasApostasId;
     isLoggedIn;
@@ -84,9 +84,14 @@ export class ApostaModalComponent implements OnInit {
         const opcoes = this.paramsLocais.getOpcoes();
         let result = false;
 
-        if (opcoes.habilitar_cancelar_aposta && this.isLoggedIn && this.showCancel) {
-            result = true;
+        if (this.showCancel && this.isLoggedIn) {
+            if (opcoes.habilitar_cancelar_aposta) {
+                result = true;
+            } else if (opcoes.habilitar_cancelar_ultima_aposta && this.isUltimaAposta) {
+                result = true;
+            }
         }
+
 
         return result;
     }
@@ -113,7 +118,7 @@ export class ApostaModalComponent implements OnInit {
                 result = true;
             }
 
-            if (opcoes.permitir_reimprimir_ultima_aposta && this.ultimaAposta) {
+            if (opcoes.permitir_reimprimir_ultima_aposta && this.isUltimaAposta) {
                 result = true;
             }
         }

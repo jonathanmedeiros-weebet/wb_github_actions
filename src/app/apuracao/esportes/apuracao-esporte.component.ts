@@ -107,14 +107,14 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
 
         this.apostaService.getAposta(aposta.id, { 'verificar-ultima-aposta': 1 })
             .subscribe(
-                aposta_localizada => {
+                result => {
                     this.modalRef = this.modalService.open(ApostaModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true
                     });
-                    this.modalRef.componentInstance.aposta = aposta_localizada;
+                    this.modalRef.componentInstance.aposta = result;
                     this.modalRef.componentInstance.showCancel = true;
-                    this.modalRef.componentInstance.ultimaAposta = aposta_localizada.ultima_aposta;
+                    this.modalRef.componentInstance.isUltimaAposta = result.is_ultima_aposta;
 
                     this.modalRef.result.then(
                         (result) => {
