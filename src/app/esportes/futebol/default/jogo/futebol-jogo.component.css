@@ -37,7 +37,7 @@
     width: 50%;
 }
 
-.principal .odd, .resultado_final .odd{
+.principal .odd, .resultado_final .odd, .resultado_1t .odd, .resultado_2t .odd{
     width: 33%;
 }
 
