@@ -92,7 +92,6 @@ export class ApostaModalComponent implements OnInit {
             }
         }
 
-
         return result;
     }
 

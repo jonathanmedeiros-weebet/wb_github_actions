@@ -95,6 +95,9 @@ export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
 
         this.modalRef.componentInstance.showCancel = true;
         this.modalRef.componentInstance.aposta = aposta;
+        if (aposta.id === this.apostas[0].id) {
+            this.modalRef.componentInstance.ultimaAposta = true;
+        }
         this.modalRef.result.then(
             (result) => {
                 switch (result) {
