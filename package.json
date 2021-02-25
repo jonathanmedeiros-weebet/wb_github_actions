@@ -254,7 +254,8 @@
     "goldsports.wee.bet": "gulp goldsports.wee.bet",
     "ourobet.wee.bet": "gulp ourobet.wee.bet",
     "bigbets.website": "gulp bigbets.website",
-    "interior.wee.bet": "gulp interior.wee.bet"
+    "interior.wee.bet": "gulp interior.wee.bet",
+    "federalsport.wee.bet": "gulp federalsport.wee.bet"
   },
   "private": true,
   "dependencies": {
