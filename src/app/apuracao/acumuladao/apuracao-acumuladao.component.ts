@@ -77,7 +77,9 @@ export class ApuracaoAcumuladaoComponent implements OnInit, OnDestroy, OnChanges
         });
         this.modalRef.componentInstance.aposta = aposta;
         this.modalRef.componentInstance.showCancel = true;
-        // this.modalRef.componentInstance.ultimaAposta = aposta_localizada.ultima_aposta;
+        if (aposta.id === this.apostas[0].id) {
+            this.modalRef.componentInstance.ultimaAposta = true;
+        }
 
         this.modalRef.result.then(
             (result) => {
