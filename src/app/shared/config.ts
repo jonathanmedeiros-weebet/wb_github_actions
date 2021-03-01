@@ -5,9 +5,11 @@ const _live = 'http://localhost:3002';
 // const _live = 'https://streaming.wee.bet';
 // const _stats = 'https://stats.wee.bet';
 const _stats = 'http://localhost:3004';
+const _timestamp = '1614614845597';
 
 export const config: any = {
     BANCA_NOME: 'DEMO',
+    TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
@@ -17,6 +19,6 @@ export const config: any = {
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
-    LOGO: '/assets/images/logo_banca.png',
+    LOGO: '/assets/images/logo_banca.png?' + _timestamp,
     BG: `${_host}/tema/bk.jpg`
 };

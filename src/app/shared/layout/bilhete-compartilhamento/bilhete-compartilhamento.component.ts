@@ -18,10 +18,10 @@ newNavigator = window.navigator;
 export class BilheteCompartilhamentoComponent implements OnInit {
     @ViewChild('bilhete', { static: false }) bilhete: ElementRef;
     @Input() aposta: any;
-    LOGO;
     opcoes;
     cambistaPaga;
     appMobile;
+    LOGO = config.LOGO;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -31,7 +31,6 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.LOGO = config.LOGO;
         this.appMobile = this.auth.isAppMobile();
 
         this.opcoes = this.paramsService.getOpcoes();

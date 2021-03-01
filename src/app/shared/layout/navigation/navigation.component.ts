@@ -23,6 +23,7 @@ import {
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent, AtivarCartaoModalComponent
 } from '../modals';
+import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
@@ -69,6 +70,7 @@ export class NavigationComponent implements OnInit {
     dataLimiteTabela;
     unsub$ = new Subject();
     regiaoOpen = null;
+    LOGO = config.LOGO;
 
     constructor(
         private auth: AuthService,

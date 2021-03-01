@@ -19,7 +19,7 @@ export class BilheteAcumuladaoComponent implements OnInit {
     @ViewChild('cupom', { static: false }) cupom: ElementRef;
     @Input() aposta: any;
     modalRef;
-    LOGO;
+    LOGO = config.LOGO;
     opcoes;
     cambistaPaga;
     appMobile;
@@ -33,7 +33,6 @@ export class BilheteAcumuladaoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.LOGO = config.LOGO;
         this.appMobile = this.auth.isAppMobile();
 
         this.opcoes = this.paramsService.getOpcoes();

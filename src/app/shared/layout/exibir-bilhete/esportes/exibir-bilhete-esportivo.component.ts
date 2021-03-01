@@ -15,7 +15,7 @@ newNavigator = window.navigator;
 export class ExibirBilheteEsportivoComponent implements OnInit {
     @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
     @Input() aposta: any;
-    LOGO;
+    LOGO = config.LOGO;
     opcoes;
     cambistaPaga;
     appMobile;
@@ -29,7 +29,6 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.LOGO = config.LOGO;
         this.appMobile = this.auth.isAppMobile();
 
         this.opcoes = this.paramsService.getOpcoes();

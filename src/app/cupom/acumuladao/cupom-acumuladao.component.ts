@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { AcumuladaoAposta } from './../../models';
+import { config } from './../../shared/config';
 
 @Component({
     selector: 'app-cupom-acumuladao',
@@ -9,6 +10,7 @@ import { AcumuladaoAposta } from './../../models';
 })
 export class CupomAcumuladaoComponent implements OnInit {
     @Input() aposta: AcumuladaoAposta;
+    LOGO = config.LOGO;
 
     constructor() { }
 

@@ -49,6 +49,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
+    LOGO = config.LOGO;
     unsub$ = new Subject();
 
     constructor(

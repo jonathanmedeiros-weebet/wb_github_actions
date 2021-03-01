@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { StatsService } from './../../services';
 import { Estatistica } from './../../models';
+import { config } from './../../shared/config';
 import * as moment from 'moment';
 
 @Component({
@@ -18,6 +19,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     chaves = {};
     cambistaPaga;
     clientesBilheteAoVivo = ['foxbet.me', 'gooldeplaca.com.br', 'amigosdabola.wee.bet'];
+    LOGO = config.LOGO;
     unsub$ = new Subject();
 
     constructor(
