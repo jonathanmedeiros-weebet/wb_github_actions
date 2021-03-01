@@ -2220,3 +2220,11 @@ gulp.task('federalsport.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #213372; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
+
+gulp.task('betsgol.me', function (done) {
+    tasks(done, {
+        host: "betsgol.me",
+        banca: "BETS GOL",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ec2300;--odds: #ffcb00;",
+    });
+});
