@@ -274,7 +274,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             if (error.code === 17) {
                 error.data.forEach(item => {
                     this.itens.value.forEach(i => {
-                        if (item.jogoId === i.jogo_id) {
+                        if (item.jogo_event_id == i.jogo_event_id) {
                             i.cotacao_antiga_valor = i.cotacao.valor;
                             i.cotacao.valor = item.valor;
                             i.mudanca = true;
