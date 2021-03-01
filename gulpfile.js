@@ -2225,6 +2225,6 @@ gulp.task('betsgol.me', function (done) {
     tasks(done, {
         host: "betsgol.me",
         banca: "BETS GOL",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ec2300;--odds: #ffcb00;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ec2300;--odds: #ffcb00; --foreground-odds: #000;",
     });
 });
