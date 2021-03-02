@@ -54,9 +54,8 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             this.chaves[item.jogo_fi] = item.aposta_tipo.chave;
             const estatistica = new Estatistica();
             this.stats[this.getIndex(item)] = estatistica;
-
             if (item.resultado) {
-                const resultado = this.resultados.get(this.getIndex(item));
+                const resultado = this.resultados.get(item.jogo_api_id);
 
                 estatistica.time_a_resultado = resultado.casa;
                 estatistica.time_b_resultado = resultado.fora;
