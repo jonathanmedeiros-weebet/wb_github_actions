@@ -51,12 +51,12 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             const horarioInicio = moment(item.jogo_horario).subtract('10', 'm');
             const horarioFim = moment(item.jogo_horario).add('2', 'hours');
 
-            this.chaves[item.jogo_api_id] = item.aposta_tipo.chave;
+            this.chaves[item.jogo_fi] = item.aposta_tipo.chave;
             const estatistica = new Estatistica();
-            this.stats[item.jogo_api_id] = estatistica;
+            this.stats[this.getIndex(item)] = estatistica;
 
             if (item.resultado) {
-                const resultado = this.resultados.get(item.jogo_api_id);
+                const resultado = this.resultados.get(this.getIndex(item));
 
                 estatistica.time_a_resultado = resultado.casa;
                 estatistica.time_b_resultado = resultado.fora;
@@ -67,8 +67,8 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
                 estatistica.time_a_escanteios = resultado.casa_escanteios;
                 estatistica.time_b_escanteios = resultado.fora_escanteios;
                 estatistica.resultado = item.resultado;
-            } else if (!item.removido && moment().isSameOrAfter(horarioInicio) && moment().isBefore(horarioFim)) {
-                eventosId.push(item.jogo_api_id);
+            } else if (!item.removido && moment().isSameOrAfter(horarioInicio) && moment().isBefore(horarioFim) && item.jogo_fi) {
+                eventosId.push(item.jogo_fi);
             }
 
             if (item.removido) {
@@ -105,6 +105,14 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             'ganhou': resultado === 'ganhou' || resultado === 'ganhando',
             'perdeu': resultado === 'perdeu' || resultado === 'perdendo'
         };
+    }
+
+    getIndex(apostaItem) {
+        let index = apostaItem.jogo_api_id;
+        if (apostaItem.jogo_fi) {
+            index = apostaItem.jogo_fi;
+        }
+        return index;
     }
 
     verificarResultadoAposta() {

@@ -437,7 +437,6 @@ button {
 .content-sports-list .indentificacao .horario{
     background-color: var(--event-time);
     color: var(--fg-event-time);
-    min-width: 105px;
 }
 
 .campeonato-header{

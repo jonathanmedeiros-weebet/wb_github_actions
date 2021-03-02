@@ -14,48 +14,48 @@
             <div>
                 {{item.jogo_horario | moment:'DD/MM/YYYY HH:mm'}}
             </div>
-            <div class="aovivo" *ngIf="stats[item.jogo_api_id].minutos >= 0 && !stats[item.jogo_api_id].finalizado">
+            <div class="aovivo" *ngIf="stats[getIndex(item)].minutos >= 0 && !stats[getIndex(item)].finalizado">
                 <div>
                     <span class="label">Ao Vivo</span>
                 </div>
                 <div>
-                    {{stats[item.jogo_api_id].minutos}} <span *ngIf="stats[item.jogo_api_id].acrescimos">+
-                        {{stats[item.jogo_api_id].acrescimos}}</span> <span class="icon">'</span>
+                    {{stats[getIndex(item)].minutos}} <span *ngIf="stats[getIndex(item)].acrescimos">+
+                        {{stats[getIndex(item)].acrescimos}}</span> <span class="icon">'</span>
                 </div>
             </div>
             <div class="div-1">
                 <div class="column-1">{{item.time_a_nome}}</div>
                 <div class="column-2">
-                    <span>{{stats[item.jogo_api_id].time_a_resultado}}</span> -
-                    <span>{{stats[item.jogo_api_id].time_b_resultado}}</span>
+                    <span>{{stats[getIndex(item)].time_a_resultado}}</span> -
+                    <span>{{stats[getIndex(item)].time_b_resultado}}</span>
                 </div>
                 <div class="column-3">{{item.time_b_nome}}</div>
             </div>
-            <div class="div-2" *ngIf="stats[item.jogo_api_id]">
+            <div class="div-2" *ngIf="stats[getIndex(item)]">
                 <div class="line line-1">
-                    <div class="width-40">{{stats[item.jogo_api_id].time_a_resultado_1t}}</div>
+                    <div class="width-40">{{stats[getIndex(item)].time_a_resultado_1t}}</div>
                     <div class="width-20">Gols 1º Tempo</div>
-                    <div class="width-40">{{stats[item.jogo_api_id].time_b_resultado_1t}}</div>
+                    <div class="width-40">{{stats[getIndex(item)].time_b_resultado_1t}}</div>
                 </div>
                 <div class="line line-2">
-                    <div class="width-40">{{stats[item.jogo_api_id].time_a_resultado_2t}}</div>
+                    <div class="width-40">{{stats[getIndex(item)].time_a_resultado_2t}}</div>
                     <div class="width-20">Gols 2º Tempo</div>
-                    <div class="width-40">{{stats[item.jogo_api_id].time_b_resultado_2t}}</div>
+                    <div class="width-40">{{stats[getIndex(item)].time_b_resultado_2t}}</div>
                 </div>
                 <div class="line line-3">
-                    <div class="width-40">{{stats[item.jogo_api_id].time_a_escanteios}}</div>
+                    <div class="width-40">{{stats[getIndex(item)].time_a_escanteios}}</div>
                     <div class="width-20">Escanteios</div>
-                    <div class="width-40">{{stats[item.jogo_api_id].time_b_escanteios}}</div>
+                    <div class="width-40">{{stats[getIndex(item)].time_b_escanteios}}</div>
                 </div>
             </div>
-            <div class="div-3" [ngClass]="{'dashed': stats[item.jogo_api_id].resultado == 'cancelado'}">
+            <div class="div-3" [ngClass]="{'dashed': stats[getIndex(item)].resultado == 'cancelado'}">
                 <span>{{item.categoria_nome}}: </span>
                 <span>{{item.odd_nome}}</span>
                 <b> ({{item.cotacao}})</b>
             </div>
-            <div class="div-4" *ngIf="stats[item.jogo_api_id].resultado">
-                <span [ngClass]="resultadoClass(stats[item.jogo_api_id].resultado)">
-                    {{stats[item.jogo_api_id].resultado}}
+            <div class="div-4" *ngIf="stats[getIndex(item)].resultado">
+                <span [ngClass]="resultadoClass(stats[getIndex(item)].resultado)">
+                    {{stats[getIndex(item)].resultado}}
                 </span>
             </div>
         </div>
