@@ -2292,6 +2292,22 @@ gulp.task('soccer787.site', function (done) {
     tasks(done, {
         host: "soccer787.site",
         banca: "SOCCER 787",
-        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+        styles: "--header: #33546f; --foreground-header: #fff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+    });
+});
+
+gulp.task('sportshow.site', function (done) {
+    tasks(done, {
+        host: "sportshow.site",
+        banca: "SPORT SHOW",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right: #000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: blue;--foreground-selected-odds: #000;"
+    });
+});
+
+gulp.task('soesportes.net', function (done) {
+    tasks(done, {
+        host: "soesportes.net",
+        banca: "SOESPORTES",
+        styles: "--header: #222d32; --foreground-header: #c49a3e; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });

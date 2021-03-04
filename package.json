@@ -264,7 +264,9 @@
     "eurodasorte.wee.bet": "gulp eurodasorte.wee.bet",
     "mabets.wee.bet": "gulp mabets.wee.bet",
     "minasbet.wee.bet": "gulp minasbet.wee.bet",
-    "soccer787.site": "gulp soccer787.site"
+    "soccer787.site": "gulp soccer787.site",
+    "sportshow.site": "gulp sportshow.site",
+    "soesportes.net": "gulp soesportes.net"
   },
   "private": true,
   "dependencies": {
