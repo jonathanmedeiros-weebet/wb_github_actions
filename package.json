@@ -256,7 +256,15 @@
     "bigbets.website": "gulp bigbets.website",
     "interior.wee.bet": "gulp interior.wee.bet",
     "federalsport.wee.bet": "gulp federalsport.wee.bet",
-    "betsgol.me": "gulp betsgol.me"
+    "betsgol.me": "gulp betsgol.me",
+    "bets085.wee.bet": "gulp bets085.wee.bet",
+    "belarosasports.wee.bet": "gulp belarosasports.wee.bet",
+    "betsgool.wee.bet": "gulp betsgool.wee.bet",
+    "esportetotal.site": "gulp esportetotal.site",
+    "eurodasorte.wee.bet": "gulp eurodasorte.wee.bet",
+    "mabets.wee.bet": "gulp mabets.wee.bet",
+    "minasbet.wee.bet": "gulp minasbet.wee.bet",
+    "soccer787.site": "gulp soccer787.site"
   },
   "private": true,
   "dependencies": {
