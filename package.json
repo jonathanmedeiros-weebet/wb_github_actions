@@ -266,7 +266,8 @@
     "minasbet.wee.bet": "gulp minasbet.wee.bet",
     "soccer787.site": "gulp soccer787.site",
     "sportshow.site": "gulp sportshow.site",
-    "soesportes.net": "gulp soesportes.net"
+    "soesportes.net": "gulp soesportes.net",
+    "a-posta.wee.bet": "gulp a-posta.wee.bet"
   },
   "private": true,
   "dependencies": {
