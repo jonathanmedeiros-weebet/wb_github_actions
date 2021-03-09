@@ -305,14 +305,6 @@ gulp.task('oliverbet.com', function (done) {
     });
 });
 
-gulp.task('pagacerto.com', function (done) {
-    tasks(done, {
-        host: "pagacerto.com",
-        banca: "Paga Certo",
-        styles: "",
-    });
-});
-
 gulp.task('sertaobets.com', function (done) {
     tasks(done, {
         host: "sertaobets.com",
