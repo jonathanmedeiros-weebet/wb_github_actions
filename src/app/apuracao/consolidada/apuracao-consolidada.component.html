@@ -9,7 +9,7 @@
                     <td>
                         <div class="value">
                             <i class="fa fa-plus-circle"></i>
-                            {{relatorio['total_apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['total_apostado'] | currency}}
                         </div>
                     </td>
                 </tr>
@@ -17,25 +17,25 @@
                     <tr>
                         <td class="">L Esportivas</td>
                         <td class="text-right">
-                            {{relatorio['esporte']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['esporte']['apostado'] | currency}}
                         </td>
                     </tr>
                     <tr *ngIf="loteriasHabilitada">
                         <td class="">L Loterias</td>
                         <td class="text-right">
-                            {{relatorio['loteria']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['loteria']['apostado'] | currency}}
                         </td>
                     </tr>
                     <tr *ngIf="acumuladaoHabilitado">
                         <td class="">L Acumuladão</td>
                         <td class="text-right">
-                            {{relatorio['acumuladao']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['acumuladao']['apostado'] | currency}}
                         </td>
                     </tr>
                     <tr *ngIf="desafioHabilitado">
                         <td class="">L Desafio</td>
                         <td class="text-right">
-                            {{relatorio['desafio']['apostado'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['desafio']['apostado'] | currency}}
                         </td>
                     </tr>
                 </ng-container>
@@ -44,7 +44,7 @@
                     <td>
                         <div class="value">
                             <i class="fa fa-plus-circle"></i>
-                            {{relatorio['cartao'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['cartao'] | currency}}
                         </div>
                     </td>
                 </tr>
@@ -53,7 +53,7 @@
                     <td>
                         <div class="value">
                             <i class="fa fa-minus-circle"></i>
-                            {{relatorio['total_comissao'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['total_comissao'] | currency}}
                         </div>
                     </td>
                 </tr>
@@ -62,7 +62,7 @@
                     <td>
                         <div class="value">
                             <i class="fa fa-minus-circle"></i>
-                            {{relatorio['total_premios'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['total_premios'] | currency}}
                         </div>
                     </td>
                 </tr>
@@ -71,7 +71,7 @@
                     <td>
                         <div class="value">
                             <i class="fa fa-minus-circle"></i>
-                            {{relatorio['saque'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['saque'] | currency}}
                         </div>
                     </td>
                 </tr>
@@ -79,7 +79,7 @@
                     <th>Resultado no Período</th>
                     <td class="text-right resultado"
                         [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
-                        <b>{{resultado | currency: 'BRL':'symbol':'1.2'}}</b>
+                        <b>{{resultado | currency}}</b>
                     </td>
                 </tr>
                 <tr *ngIf="controlarCreditoCambista">
@@ -87,7 +87,7 @@
                     <td>
                         <div class="value">
                             <i class="fa fa-plus-circle"></i>
-                            {{relatorio['saldo_anterior'] | currency: 'BRL':'symbol':'1.2'}}
+                            {{relatorio['saldo_anterior'] | currency}}
                         </div>
                     </td>
                 </tr>
@@ -97,7 +97,7 @@
                         <td>
                             <div class="value">
                                 <i class="fa fa-plus-circle"></i>
-                                {{relatorio['creditos'] | currency: 'BRL':'symbol':'1.2'}}
+                                {{relatorio['creditos'] | currency}}
                             </div>
                         </td>
                     </tr>
@@ -106,7 +106,7 @@
                         <td>
                             <div class="value">
                                 <i class="fa fa-minus-circle"></i>
-                                {{relatorio['debitos'] | currency: 'BRL':'symbol':'1.2'}}
+                                {{relatorio['debitos'] | currency}}
                             </div>
                         </td>
                     </tr>
@@ -115,7 +115,7 @@
                     <th>Saldo</th>
                     <td class="text-right resultado"
                         [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
-                        <b>{{relatorio['saldo'] | currency: 'BRL':'symbol':'1.2'}}</b>
+                        <b>{{relatorio['saldo'] | currency}}</b>
                     </td>
                 </tr>
             </tbody>

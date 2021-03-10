@@ -56,7 +56,7 @@
                                             </app-error-msg>
                                         </div>
                                         <div class="form-group col-xs-12 col-lg-4">
-                                            <label for="">Valor do Palpite (R$)</label>
+                                            <label for="">Valor do Palpite ({{CURRENCY_SYMBOL}})</label>
                                             <input type="number" class="form-control"
                                                 min="{{opcoes.valor_min_aposta_loterias}}" formControlName="valor"
                                                 [ngClass]="applyCssInputError('valor')">
@@ -91,23 +91,23 @@
                             </div>
                             <div>
                                 <label>valor: </label>
-                                <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span>{{item.valor | currency}}</span>
                             </div>
                             <div *ngIf="item.premio6">
                                 <label>Retorno 6: </label>
-                                <span>{{(item.premio6) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span>{{(item.premio6) | currency}}</span>
                             </div>
                             <div *ngIf="item.premio5">
                                 <label>Retorno 5: </label>
-                                <span>{{(item.premio5) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span>{{(item.premio5) | currency}}</span>
                             </div>
                             <div *ngIf="item.premio4">
                                 <label>Retorno 4: </label>
-                                <span>{{(item.premio4) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span>{{(item.premio4) | currency}}</span>
                             </div>
                             <div *ngIf="item.premio3">
                                 <label>Retorno 3: </label>
-                                <span>{{(item.premio3) | currency: 'BRL':'symbol':'1.2'}}</span>
+                                <span>{{(item.premio3) | currency}}</span>
                             </div>
                         </div>
                         <div class="circle-group">
@@ -148,7 +148,7 @@
     <div id="fixed-bar-bilhete" (click)="openCupom()" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
         <div>
             <label>Valor</label>
-            <span>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+            <span>{{aposta.valor | currency}}</span>
         </div>
         <div>
             <label>Palpite(s)</label>
@@ -156,7 +156,7 @@
         </div>
         <div>
             <label>P. de Prêmio</label>
-            <span>{{(aposta.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+            <span>{{(aposta.premio) | currency}}</span>
         </div>
         <div class="open-bilhete">
             <a>

@@ -52,13 +52,13 @@
                 <b>Nº Jogos:</b> {{aposta.itens.length}}
             </div>
             <div>
-                <b>Valor Apostado:</b> {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+                <b>Valor Apostado:</b> {{aposta.valor | currency}}
             </div>
             <div *ngIf="aposta.quantidade_acertos >= 0">
                 <b>Quantidade de acertos:</b> {{aposta.quantidade_acertos}}
             </div>
             <div *ngIf="aposta.premio">
-                <b>Prêmio Recebido:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+                <b>Prêmio Recebido:</b> {{aposta.premio | currency}}
             </div>
             <div>
                 <b>Status do Bilhete:</b> {{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}

@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  locale: 'en-US',
-  currencyCode: 'USD',
+  locale: 'en-GB',
+  currencyCode: 'GBP',
 //   locale: 'pt-BR',
 //   currencyCode: 'BRL'
 };

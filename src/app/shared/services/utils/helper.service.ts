@@ -189,15 +189,19 @@ export class HelperService {
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
 
-    moneyFormat(value) {
-        const money = new Intl.NumberFormat('pt-BR', {
+    moneyFormat(value, symbol = true) {
+        const money = new Intl.NumberFormat(environment.locale, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }).format(value);
 
-        console.log(this.CURRENCY_SYMBOL);
-        // precisa ser assim para não quebrar na impressora termica. Não usar o currency do number format
-        return `${this.CURRENCY_SYMBOL} ${money}`;
+        if (symbol) {
+            // precisa ser assim para não quebrar na impressora termica. Não usar o currency do number format
+            return `${this.CURRENCY_SYMBOL}${money}`;
+        }
+
+        return `${money}`;
+
     }
 
     guidGenerate() {

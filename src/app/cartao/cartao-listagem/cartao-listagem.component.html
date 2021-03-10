@@ -57,10 +57,10 @@
                                 </td>
                                 <td>{{cartao.data_registro | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td>{{cartao.apostador}}</td>
-                                <td class="text-right">{{cartao.total_creditos | currency: 'BRL':'symbol':'1.2'}}</td>
-                                <td class="text-right">{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</td>
-                                <td class="text-right">{{cartao.total_saques | currency: 'BRL':'symbol':'1.2'}}</td>
-                                <td class="text-right">{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</td>
+                                <td class="text-right">{{cartao.total_creditos | currency}}</td>
+                                <td class="text-right">{{cartao.bonus | currency}}</td>
+                                <td class="text-right">{{cartao.total_saques | currency}}</td>
+                                <td class="text-right">{{cartao.saldo | currency}}</td>
                             </tr>
                         </ng-container>
                     </tbody>

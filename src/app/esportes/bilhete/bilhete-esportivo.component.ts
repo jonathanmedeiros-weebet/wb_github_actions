@@ -13,9 +13,6 @@ import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
-import { getCurrencySymbol } from '@angular/common';
-import { environment } from './../../../environments/environment';
-
 @Component({
     selector: 'app-bilhete-esportivo',
     templateUrl: 'bilhete-esportivo.component.html',
@@ -41,8 +38,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     refreshIntervalId;
     unsub$ = new Subject();
 
-    CURRENCY_SYMBOL = getCurrencySymbol('USD', 'wide');
-
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private preApostaService: PreApostaEsportivaService,
@@ -60,7 +55,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
-        console.log(this.CURRENCY_SYMBOL);
         this.definirAltura();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();

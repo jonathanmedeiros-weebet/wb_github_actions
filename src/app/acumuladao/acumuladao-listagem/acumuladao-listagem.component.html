@@ -9,7 +9,7 @@
                 <div class="premios">
                     <div class="premio" *ngFor="let premio of acumuladao.premios">
                         <span *ngIf="acumuladao.premios.length > 1">{{premio.quantidade_acertos}}:</span>
-                        {{premio.valor | currency: 'BRL':'symbol': '1.2'}}
+                        {{premio.valor | currency}}
                     </div>
                 </div>
             </div>

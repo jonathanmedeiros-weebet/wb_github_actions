@@ -43,27 +43,27 @@
                         </div>
                         <div>
                             <label>aposta</label>
-                            <span>{{item.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                            <span>{{item.valor | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao6 > 0">
                             <label>retorno 6</label>
-                            <span>{{(item.cotacao6 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            <span>{{(item.cotacao6 * item.valor) | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao5 > 0">
                             <label>retorno 5</label>
-                            <span>{{(item.cotacao5 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            <span>{{(item.cotacao5 * item.valor) | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao4 > 0">
                             <label>retorno 4</label>
-                            <span>{{(item.cotacao4 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            <span>{{(item.cotacao4 * item.valor) | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao3 > 0">
                             <label>retorno 3</label>
-                            <span>{{(item.cotacao3 * item.valor) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            <span>{{(item.cotacao3 * item.valor) | currency}}</span>
                         </div>
                         <div>
                             <label>prêmio</label>
-                            <span>{{(item.premio) | currency: 'BRL':'symbol':'1.2'}}</span>
+                            <span>{{(item.premio) | currency}}</span>
                         </div>
                         <div>
                             <label>qtd. números</label>

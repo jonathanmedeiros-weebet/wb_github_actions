@@ -15,11 +15,11 @@
                 </div>
                 <div>
                     <b>Recargas: </b>
-                    <span>{{cartao.total_creditos | currency: 'BRL':'symbol':'1.2'}}</span>
+                    <span>{{cartao.total_creditos | currency}}</span>
                 </div>
                 <div>
                     <b>Bônus: </b>
-                    <span>{{cartao.bonus | currency: 'BRL':'symbol':'1.2'}}</span>
+                    <span>{{cartao.bonus | currency}}</span>
                 </div>
                 <div>
                     <b>Criação: </b>
@@ -33,11 +33,11 @@
                 </div>
                 <div>
                     <b>Saques: </b>
-                    <span>{{cartao.total_saques | currency: 'BRL':'symbol':'1.2'}}</span>
+                    <span>{{cartao.total_saques | currency}}</span>
                 </div>
                 <div>
                     <b>Saldo atual: </b>
-                    <span>{{cartao.saldo | currency: 'BRL':'symbol':'1.2'}}</span>
+                    <span>{{cartao.saldo | currency}}</span>
                 </div>
             </div>
         </div>
@@ -59,13 +59,13 @@
                         <td>{{aposta.id}}</td>
                         <td>{{aposta.tipo}}</td>
                         <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                        <td>{{aposta.valor| currency: 'BRL':'symbol':'1.2'}}</td>
+                        <td>{{aposta.valor| currency}}</td>
                         <td>
                             <ng-container *ngIf="aposta.resultado; else possibilidadeGanho">
-                                {{aposta.premio| currency: 'BRL':'symbol':'1.2'}}
+                                {{aposta.premio| currency}}
                             </ng-container>
                             <ng-template #possibilidadeGanho>
-                                {{aposta.possibilidade_ganho| currency: 'BRL':'symbol':'1.2'}}
+                                {{aposta.possibilidade_ganho| currency}}
                             </ng-template>
                         </td>
                         <td>{{aposta.resultado}}</td>
