@@ -5,8 +5,6 @@
 
 export const environment = {
   production: false,
-  locale: 'en-GB',
-  currencyCode: 'GBP',
-//   locale: 'pt-BR',
-//   currencyCode: 'BRL'
+  locale: 'pt-BR',
+  currencyCode: 'BRL'
 };
