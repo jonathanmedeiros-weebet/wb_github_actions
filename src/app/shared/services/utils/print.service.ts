@@ -472,11 +472,11 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
 
     // Bilhete Esportivo
     sportsTicket(aposta, dateTime?) {
-        // if (this.auth.isAppMobile()) {
+        if (this.auth.isAppMobile()) {
             this.sportsTicketAppMobile(aposta, dateTime);
-        // } else {
-        //     this.sportsTicketDestkop(aposta, dateTime);
-        // }
+        } else {
+            this.sportsTicketDestkop(aposta, dateTime);
+        }
     }
 
     private sportsTicketDestkop(aposta, dateTime?) {
