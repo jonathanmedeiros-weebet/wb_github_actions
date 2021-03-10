@@ -1,8 +1,9 @@
-import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from './../environments/environment';
 
 import 'hammerjs';
 
@@ -35,7 +36,11 @@ export const APP_TOKENS = [
     },
     {
         provide: LOCALE_ID,
-        useValue: 'pt-BR'
+        useValue: environment.locale
+    },
+    {
+        provide: DEFAULT_CURRENCY_CODE,
+        useValue: environment.currencyCode
     }
 ];
 

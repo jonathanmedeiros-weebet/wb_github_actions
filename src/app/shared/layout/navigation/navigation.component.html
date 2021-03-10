@@ -214,11 +214,11 @@
                     (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
                     <a *ngIf="contexto == 'seninha'">
                         <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                        ( {{tipoAposta.cotacao6 | currency: 'BRL':'symbol':'1.2'}} )
+                        ( {{tipoAposta.cotacao6 | currency}} )
                     </a>
                     <a *ngIf="contexto == 'quininha'">
                         <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                        ( {{tipoAposta.cotacao5 | currency: 'BRL':'symbol':'1.2'}} )
+                        ( {{tipoAposta.cotacao5 | currency}} )
                     </a>
                 </li>
             </ng-container>

@@ -7,17 +7,17 @@
         <div class="value-informations">
             <p>
                 Valor da aposta:
-                <span class="valor">{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                <span class="valor">{{form.value.valor | currency}}</span>
             </p>
             <p>
                 Possível Ganho:
-                <span class="possivel-ganho">{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
+                <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
             </p>
             <p class="valores">
-                <button type="button" (click)="definirValor(5)" class="btn btn-sm">R$ 5,00</button>
-                <button type="button" (click)="definirValor(10)" class="btn btn-sm">R$ 10,00</button>
-                <button type="button" (click)="definirValor(20)" class="btn btn-sm">R$ 20,00</button>
-                <button type="button" (click)="definirValor(50)" class="btn btn-sm">R$ 50,00</button>
+                <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
+                <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
+                <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
+                <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
             </p>
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -82,18 +82,20 @@
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
                             <span *ngIf="item.jogo.sport_id == 9;">
-                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
+                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome :
+                                item.jogo.time_b_nome}}
                             </span>
                             <span *ngIf="item.jogo.sport_id == 151">
-                                {{item.cotacao.chave | tipoApostaEsports: item.jogo.time_a_nome : item.jogo.time_b_nome}}
+                                {{item.cotacao.chave | tipoApostaEsports: item.jogo.time_a_nome :
+                                item.jogo.time_b_nome}}
                             </span>
                         </ng-template>
                         <span class="valor">
                             ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
+                            item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
                             <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
                                 ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
-                                    item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
+                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
                             </del>
                         </span>
                     </div>
@@ -108,7 +110,7 @@
 <div id="fixed-bar-bilhete" (click)="openCupom()" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
     <div>
         <label>Valor</label>
-        <span>{{form.value.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+        <span>{{form.value.valor | currency}}</span>
     </div>
     <div>
         <label>Jogo(s)</label>
@@ -116,7 +118,7 @@
     </div>
     <div>
         <label>P. de Prêmio</label>
-        <span>{{possibilidadeGanho | currency: 'BRL':'symbol':'1.2'}}</span>
+        <span>{{possibilidadeGanho | currency}}</span>
     </div>
     <div class="open-bilhete">
         <a>
@@ -159,7 +161,8 @@
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
                             <ng-template #nomeOddCombate>
-                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome : item.jogo.time_b_nome}}
+                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome :
+                                item.jogo.time_b_nome}}
                             </ng-template>
                         </ng-template>
                         <span class="valor">

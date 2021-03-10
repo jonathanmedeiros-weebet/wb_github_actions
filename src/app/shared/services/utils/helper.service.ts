@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { getCurrencySymbol } from '@angular/common';
 
+import { environment } from './../../../../environments/environment';
 import { config } from './../../config';
 import * as moment from 'moment';
 
@@ -9,6 +11,7 @@ import { ParametrosLocaisService } from '../parametros-locais.service';
     providedIn: 'root',
 })
 export class HelperService {
+    CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
 
     constructor(private paramsService: ParametrosLocaisService) { }
 
@@ -186,15 +189,19 @@ export class HelperService {
         return Math.floor(d.asHours()) + moment.utc(ms).format(':mm');
     }
 
-    moneyFormat(value) {
-        const money = new Intl.NumberFormat('pt-BR', {
+    moneyFormat(value, symbol = true) {
+        const money = new Intl.NumberFormat(environment.locale, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }).format(value);
 
+        if (symbol) {
+            // precisa ser assim para não quebrar na impressora termica. Não usar o currency do number format
+            return `${this.CURRENCY_SYMBOL}${money}`;
+        }
 
-        // precisa ser assim para não quebrar na improssa termica. Não usar o currency do number format
-        return `R$ ${money}`;
+        return `${money}`;
+
     }
 
     guidGenerate() {

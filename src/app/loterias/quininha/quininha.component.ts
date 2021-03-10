@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
+import { getCurrencySymbol } from '@angular/common';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
+import { environment } from './../../../environments/environment';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { ApostaModalComponent, PreApostaModalComponent } from '../../shared/layout/modals';
 import {
@@ -22,6 +23,7 @@ import * as range from 'lodash.range';
     templateUrl: 'quininha.component.html'
 })
 export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
     numbers = range(1, 81);
     qtdNumerosLista = [];
     qtdNumeros = 100;

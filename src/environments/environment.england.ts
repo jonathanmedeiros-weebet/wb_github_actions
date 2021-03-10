@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    locale: 'pt-BR',
-    currencyCode: 'BRL'
+    locale: 'en-GB',
+    currencyCode: 'GBP'
 };

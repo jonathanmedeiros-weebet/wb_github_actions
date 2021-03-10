@@ -76,11 +76,9 @@ function tasks(done, config) {
     };
 
     gulp.src(['/'])
-        // .pipe(exec('ng build --prod --aot --buildOptimizer=true', options))
         .pipe(exec('ng build --prod', options))
+        // .pipe(exec('ng build --configuration=england', options))
         // .pipe(exec('ng build --prod --outputHashing=none', options))
-        //.pipe(exec('scp -r -i ~/.keystore/weebet.pem dist/* ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/app/', options))
-        //.pipe(exec('tar -cf dist/* | ssh -i ~/.keystore/weebet.pem ubuntu@' + config.host + ' "cat >  dist/* ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/app/', options))
         .pipe(exec('cd dist && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.host + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.host + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
         .pipe(exec.reporter(reportOptions));
 

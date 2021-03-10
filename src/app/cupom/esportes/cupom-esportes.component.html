@@ -79,16 +79,16 @@
                 <b>Cotação:</b> {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}
             </div>
             <div>
-                <b>Valor Apostado:</b> {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+                <b>Valor Apostado:</b> {{aposta.valor | currency}}
             </div>
             <div>
-                <b>Possível Retorno:</b> {{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}
+                <b>Possível Retorno:</b> {{aposta.possibilidade_ganho | currency}}
             </div>
             <div *ngIf="aposta.resultado && aposta.resultado != 'a confirmar'">
-                <b>Prêmio:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+                <b>Prêmio:</b> {{aposta.premio | currency}}
             </div>
             <div *ngIf="aposta.passador.percentualPremio > 0">
-                <b>Cambista Paga:</b> {{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}
+                <b>Cambista Paga:</b> {{cambistaPaga | currency}}
             </div>
             <div>
                 <b>Status do Bilhete:</b> {{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}

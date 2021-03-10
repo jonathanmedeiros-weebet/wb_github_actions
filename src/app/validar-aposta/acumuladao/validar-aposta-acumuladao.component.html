@@ -20,7 +20,7 @@
                 <b>{{acumuladao.nome}}</b>
             </p>
             <p *ngFor="let premio of acumuladao.premios">
-                Prêmio {{premio.quantidade_acertos}} jogos: {{premio.valor | currency: 'BRL':'symbol': '1.2'}}
+                Prêmio {{premio.quantidade_acertos}} jogos: {{premio.valor | currency}}
             </p>
             <p>
                 Data de Encerramento: {{acumuladao.data_encerramento | moment: 'DD/MM/YYYY HH:mm'}}
@@ -29,7 +29,7 @@
                 Total de jogos: {{preAposta.itens.length}}
             </p>
             <p>
-                Valor da Aposta: {{acumuladao.valor | currency: 'BRL':'symbol': '1.2'}}
+                Valor da Aposta: {{acumuladao.valor | currency}}
             </p>
             <p>
                 Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}

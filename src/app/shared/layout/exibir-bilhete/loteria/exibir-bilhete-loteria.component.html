@@ -14,19 +14,19 @@
                 {{sorteioNome(item.sorteio_id)}}
             </p>
             <p class="informacoes-item">
-                VALOR: {{item.valor | currency: 'BRL':'symbol':'1.2'}}
+                VALOR: {{item.valor | currency}}
             </p>
             <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
-                Retorno 6: {{item.cotacao6 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+                Retorno 6: {{item.cotacao6 * item.valor | currency}}
             </p>
             <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
-                Retorno 5: {{item.cotacao5 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+                Retorno 5: {{item.cotacao5 * item.valor | currency}}
             </p>
             <p class="informacoes-item" *ngIf="item.cotacao4 > 0" [ngClass]="verificarStatus(item, 4)">
-                Retorno 4: {{item.cotacao4 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+                Retorno 4: {{item.cotacao4 * item.valor | currency}}
             </p>
             <p class="informacoes-item" *ngIf="item.cotacao3 > 0" [ngClass]="verificarStatus(item, 3)">
-                Retorno 3: {{item.cotacao3 * item.valor | currency: 'BRL':'symbol':'1.2'}}
+                Retorno 3: {{item.cotacao3 * item.valor | currency}}
             </p>
             <p class="informacoes-item">
                 DEZENAS: {{item.numeros}}
@@ -40,7 +40,7 @@
             ----------------------------<br>
         </ng-container>
         <p class="valor-aposta">
-            VALOR TOTAL: {{aposta.valor | currency: 'BRL':'symbol':'1.2'}}
+            VALOR TOTAL: {{aposta.valor | currency}}
         </p>
         <p class="mensagem-rodape">
             {{informativoRodape}}

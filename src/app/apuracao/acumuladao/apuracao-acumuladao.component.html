@@ -23,12 +23,12 @@
                         <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
                         #{{aposta.id}}
                     </td>
-                    <td>{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</td>
-                    <td>{{aposta.comissao | currency: 'BRL':'symbol':'1.2'}}</td>
+                    <td>{{aposta.valor | currency}}</td>
+                    <td>{{aposta.comissao | currency}}</td>
                     <td>
                         <span
-                            *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
-                        <span *ngIf="aposta.resultado == 'perdeu'">R$ 0,00</span>
+                            *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency}}</span>
+                        <span *ngIf="aposta.resultado == 'perdeu'">{{0 | currency}}</span>
                         <span *ngIf="!aposta.resultado">Aguardando</span>
                     </td>
                 </tr>

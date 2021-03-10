@@ -35,13 +35,13 @@
                     <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
                 </div>
                 <div>
-                    <b> Prêmio Recebido:</b> {{aposta.premio | currency: 'BRL':'symbol':'1.2'}}
+                    <b> Prêmio Recebido:</b> {{aposta.premio | currency}}
                 </div>
             </ng-container>
             <ng-template #resultadoPendente>
                 <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
                     <b>Possível Prêmio {{premio.quantidade_acertos}} acertos:</b>
-                    {{premio.valor | currency: 'BRL':'symbol': '1.2'}}
+                    {{premio.valor | currency}}
                 </div>
             </ng-template>
         </div>

@@ -55,18 +55,18 @@
                 COTAÇÃO: <span style="float:right">{{aposta.premio / aposta.valor | number:'1.0-3' }}</span>
             </p>
             <p class="aposta">
-                VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency: 'BRL':'symbol':'1.2'}}</span>
+                VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency}}</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado; else possibilidadeGanho">
-                PRÊMIO: <span style="float:right">{{aposta.premio | currency: 'BRL':'symbol':'1.2'}}</span>
+                PRÊMIO: <span style="float:right">{{aposta.premio | currency}}</span>
             </p>
             <ng-template #possibilidadeGanho>
                 <p class="ganho">
-                    POSSÍVEL RETORNO: <span style="float:right">{{aposta.possibilidade_ganho | currency: 'BRL':'symbol':'1.2'}}</span>
+                    POSSÍVEL RETORNO: <span style="float:right">{{aposta.possibilidade_ganho | currency}}</span>
                 </p>
             </ng-template>
             <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-                CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency: 'BRL':'symbol':'1.2'}}</span>
+                CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
             <hr>
             <hr>
