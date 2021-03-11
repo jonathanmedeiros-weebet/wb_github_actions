@@ -5,8 +5,6 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from './../environments/environment';
 
-import 'hammerjs';
-
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 
