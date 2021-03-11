@@ -2325,3 +2325,11 @@ gulp.task('superbet365.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sampabet.wee.bet', function (done) {
+    tasks(done, {
+        host: "sampabet.wee.bet",
+        banca: "SAMPA BET",
+        styles: "",
+    });
+});
