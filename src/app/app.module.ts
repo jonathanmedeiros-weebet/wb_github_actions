@@ -22,6 +22,8 @@ import { LayoutModule } from './shared/layout/layout.module';
 import { CupomModule } from './cupom/cupom.module';
 import { ParametrosLocaisService } from './services';
 
+import { ToastrModule } from 'ngx-toastr';
+
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
 }
@@ -51,7 +53,10 @@ export const APP_TOKENS = [
         AppRoutingModule,
 
         LayoutModule,
-        CupomModule
+        CupomModule,
+        ToastrModule.forRoot({
+            timeOut: 7000
+        }),
     ],
     providers: [APP_TOKENS],
     bootstrap: [AppComponent]

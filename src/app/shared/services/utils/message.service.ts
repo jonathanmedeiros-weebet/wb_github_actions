@@ -1,48 +1,21 @@
 import { Injectable } from '@angular/core';
-
-declare var $: any;
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root',
 })
 export class MessageService {
-    constructor() { }
+    constructor(private toastr: ToastrService) { }
 
     success(msg: string, title?: string) {
-        // console.log(msg);
-        // alert(msg);
-        $.toast({
-            heading: title ? title : 'Sucesso',
-            text: msg,
-            position: 'top-right',
-            icon: 'success',
-            hideAfter: 7000,
-            stack: 6
-        });
+        this.toastr.success(msg, title ? title : 'Sucesso');
     }
 
     error(msg: string, title?) {
-        // console.log(msg);
-        // alert(msg);
-
-        $.toast({
-            heading: title ? title : 'Atenção',
-            text: msg,
-            position: 'top-right',
-            loaderBg: '#ff6849',
-            icon: 'error',
-            hideAfter: 7000
-        });
+        this.toastr.error(msg, title ? title : 'Atenção');
     }
 
     warning(msg: string) {
-        $.toast({
-            heading: 'Atenção',
-            text: msg,
-            position: 'top-right',
-            showHideTransition: 'plain',
-            icon: 'warning',
-            hideAfter: 7000
-        });
+        this.toastr.warning(msg, 'Atenção');
     }
 }
