@@ -2333,3 +2333,11 @@ gulp.task('sampabet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futebolonline.site', function (done) {
+    tasks(done, {
+        host: "futebolonline.site",
+        banca: "FUTEBOL ONLINE",
+        styles: ""
+    });
+});
