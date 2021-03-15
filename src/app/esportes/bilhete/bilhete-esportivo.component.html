@@ -78,16 +78,11 @@
                             {{item.cotacao.nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id == 1 || item.jogo.sport_id == 18">
+                            <span *ngIf="item.jogo.sport_id == 1">
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
-                            <span *ngIf="item.jogo.sport_id == 9;">
-                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome :
-                                item.jogo.time_b_nome}}
-                            </span>
-                            <span *ngIf="item.jogo.sport_id == 151">
-                                {{item.cotacao.chave | tipoApostaEsports: item.jogo.time_a_nome :
-                                item.jogo.time_b_nome}}
+                            <span *ngIf="item.jogo.sport_id != 1;">
+                                {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
                             </span>
                         </ng-template>
                         <span class="valor">
@@ -157,11 +152,11 @@
                             {{item.cotacao.nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id != 9; else nomeOddCombate">
+                            <span *ngIf="item.jogo.sport_id == 1; else nomeOddCustom">
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
-                            <ng-template #nomeOddCombate>
-                                {{item.cotacao.chave | tipoApostaCombate: item.jogo.time_a_nome :
+                            <ng-template #nomeOddCustom>
+                                {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :
                                 item.jogo.time_b_nome}}
                             </ng-template>
                         </ng-template>

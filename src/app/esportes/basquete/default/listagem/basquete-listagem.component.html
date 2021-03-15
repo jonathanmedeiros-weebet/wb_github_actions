@@ -30,7 +30,7 @@
                                     <div
                                         class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                         <span class="nome">
-                                            {{cotacao.chave | tipoAposta: 'sigla'}}
+                                            {{cotacao.chave | tipoApostaCustom: evento.time_a_nome:evento.time_b_nome}}
                                         </span>
                                         <span class="valor">
                                             {{cotacao.valor | calcularCotacao: cotacao.chave: evento.event_id:
@@ -44,7 +44,7 @@
                                         <div
                                             class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
-                                                {{cotacao.chave | tipoAposta}}
+                                                {{cotacao.chave | tipoApostaCustom: evento.time_a_nome:evento.time_b_nome}}
                                             </span>
                                             <span class="valor">
                                                 {{cotacao.valor | calcularCotacao: cotacao.chave: evento.event_id:

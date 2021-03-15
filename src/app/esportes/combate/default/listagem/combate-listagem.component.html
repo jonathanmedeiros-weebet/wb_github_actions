@@ -31,11 +31,10 @@
                                     <div
                                         class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                         <span class="nome">
-                                            {{cotacao.chave | tipoApostaCombate: evento.time_a_nome:evento.time_b_nome}}
+                                            {{cotacao.chave | tipoApostaCustom: evento.time_a_nome:evento.time_b_nome}}
                                         </span>
                                         <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: evento.event_id:
-                                                evento.favorito}}
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: evento.event_id:evento.favorito}}
                                         </span>
                                     </div>
                                 </div>
