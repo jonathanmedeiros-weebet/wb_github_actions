@@ -2341,3 +2341,27 @@ gulp.task('futebolonline.site', function (done) {
         styles: "--header: #fff; --foreground-header: #ba0000; --sidebar-right:#fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight:#ffd700; --foreground-highlight: #000; --odds: #ba0000;",
     });
 });
+
+gulp.task('sportbig.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportbig.wee.bet",
+        banca: "SPORT BIG",
+        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+    });
+});
+
+gulp.task('betteive.com', function (done) {
+    tasks(done, {
+        host: "betteive.com",
+        banca: "BETTEIVE",
+        styles: "",
+    });
+});
+
+gulp.task('betsporting.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsporting.wee.bet",
+        banca: "BET SPORTING",
+        styles: "",
+    });
+});

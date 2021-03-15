@@ -270,7 +270,10 @@
     "superbetsvip.com": "gulp superbetsvip.com",
     "superbet365.bet": "gulp superbet365.bet",
     "sampabet.wee.bet": "gulp sampabet.wee.bet",
-    "futebolonline.site": "gulp futebolonline.site"
+    "futebolonline.site": "gulp futebolonline.site",
+    "sportbig.wee.bet": "gulp sportbig.wee.bet",
+    "betteive.com": "gulp betteive.com",
+    "betsporting.wee.bet": "gulp betsporting.wee.bet"
   },
   "private": true,
   "dependencies": {
