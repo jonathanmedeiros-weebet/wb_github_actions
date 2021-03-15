@@ -2338,6 +2338,6 @@ gulp.task('futebolonline.site', function (done) {
     tasks(done, {
         host: "futebolonline.site",
         banca: "FUTEBOL ONLINE",
-        styles: ""
+        styles: "--header: #fff; --foreground-header: #ba0000; --sidebar-right:#fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight:#ffd700; --foreground-highlight: #000; --odds: #ba0000;",
     });
 });
