@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BannerService, MessageService } from './../services';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,6 +14,7 @@ export class BannersComponent implements OnInit {
     showNavigationArrows = false;
 
     constructor(
+        private cd: ChangeDetectorRef,
         private bannerService: BannerService,
         private messageService: MessageService,
         private config: NgbCarouselConfig
@@ -44,6 +45,8 @@ export class BannersComponent implements OnInit {
                 if (this.banners.length > 1) {
                     this.showNavigationArrows = true;
                 }
+
+                this.cd.markForCheck();
             },
             error => this.handleError(error)
         );
