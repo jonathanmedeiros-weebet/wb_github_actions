@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ParametrosLocaisService } from './../services/parametros-locais.service';
+import { ParametrosLocaisService } from '../services/parametros-locais.service';
 
 @Pipe({
-    name: 'tipoApostaCombate'
+    name: 'tipoApostaCustom'
 })
-export class TipoApostaCombatePipe implements PipeTransform {
+export class TipoApostaCustomPipe implements PipeTransform {
 
     constructor(private paramsService: ParametrosLocaisService) { }
 
-    transform(value: any, atletaA: string, atletaB: string): any {
+    transform(value: any, timeA: string, timeB: string): any {
         let result = '';
         const tiposAposta = this.paramsService.getTiposAposta();
 
@@ -18,10 +18,10 @@ export class TipoApostaCombatePipe implements PipeTransform {
             result = nome;
 
             if (nome.search(/casa/ig) >= 0) {
-                result = nome.replace(/casa/ig, atletaA);
+                result = nome.replace(/casa/ig, timeA);
             }
             if (nome.search(/fora/ig) >= 0) {
-                result = nome.replace(/fora/ig, atletaB);
+                result = nome.replace(/fora/ig, timeB);
             }
         }
 

@@ -11,6 +11,9 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "allowedCommonJsDependencies": [
+                            "socket.io-client"
+                        ],
                         "aot": true,
                         "outputPath": "dist",
                         "index": "src/index.html",
@@ -24,17 +27,15 @@
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",
-                            "node_modules/jquery-toast-plugin/dist/jquery.toast.min.css",
                             "node_modules/jstree/dist/themes/default/style.min.css",
                             "node_modules/font-awesome/css/font-awesome.css",
                             "node_modules/flag-icon-css/css/flag-icon.min.css",
-                            "src/styles.css"
+                            "src/styles.css",
+                            "node_modules/ngx-toastr/toastr.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/popper.js/dist/umd/popper.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.js",
-                            "node_modules/jquery-toast-plugin/dist/jquery.toast.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                             "node_modules/jstree/dist/jstree.min.js"
                         ]
                     },
@@ -49,7 +50,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "aot": true,
                             "extractLicenses": true,
@@ -72,7 +72,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "aot": true,
                             "extractLicenses": true,
@@ -113,15 +112,11 @@
                         "tsConfig": "src/tsconfig.spec.json",
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/popper.js/dist/umd/popper.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.js",
-                            "node_modules/jquery-toast-plugin/dist/jquery.toast.min.js"
+                            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",
-                            "node_modules/jquery-toast-plugin/dist/jquery.toast.min.css",
                             "node_modules/font-awesome/css/font-awesome.css",
-                            "src/assets/css/seninha-quininha.css",
                             "src/styles.css"
                         ],
                         "assets": [

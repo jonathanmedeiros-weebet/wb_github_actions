@@ -2208,7 +2208,7 @@ gulp.task('federalsport.wee.bet', function (done) {
     tasks(done, {
         host: "federalsport.wee.bet",
         banca: "FEDERAL SPORT",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #213372; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        styles: "--header: #CCE7D4; --foreground-header: #000; --sidebar-right:#CCE7D4; --foreground-sidebar-right: #000; --sidebar-left: #CCE7D4; --foreground-sidebar-left: #000; --highlight: #c49a3e; --foreground-highlight: #000; --odds: #213372; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
@@ -2306,7 +2306,7 @@ gulp.task('a-posta.wee.bet', function (done) {
     tasks(done, {
         host: "a-posta.wee.bet",
         banca: "A-POSTA",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        styles: "--header: #000; --foreground-header: #35cc96; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
@@ -2331,5 +2331,45 @@ gulp.task('sampabet.wee.bet', function (done) {
         host: "sampabet.wee.bet",
         banca: "SAMPA BET",
         styles: "",
+    });
+});
+
+gulp.task('futebolonline.site', function (done) {
+    tasks(done, {
+        host: "futebolonline.site",
+        banca: "FUTEBOL ONLINE",
+        styles: "--header: #fff; --foreground-header: #ba0000; --sidebar-right:#fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight:#ffd700; --foreground-highlight: #000; --odds: #ba0000;",
+    });
+});
+
+gulp.task('sportbig.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportbig.wee.bet",
+        banca: "SPORT BIG",
+        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+    });
+});
+
+gulp.task('betteive.com', function (done) {
+    tasks(done, {
+        host: "betteive.com",
+        banca: "BETTEIVE",
+        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000;--highlight:#ffd700;--odds:#50237e;",
+    });
+});
+
+gulp.task('betsporting.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsporting.wee.bet",
+        banca: "BET SPORTING",
+        styles: "",
+    });
+});
+
+gulp.task('apostasminas.site', function (done) {
+    tasks(done, {
+        host: "apostasminas.site",
+        banca: "APOSTAS MINAS",
+        styles: "--highlight: #ffd700; --odds: #ffa500; --foreground-odds: #fff;",
     });
 });

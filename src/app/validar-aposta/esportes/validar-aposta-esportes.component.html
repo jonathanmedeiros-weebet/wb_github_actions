@@ -18,11 +18,11 @@
                             {{item.odd_nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.sport != 9; else nomeOddCombate">
+                            <span *ngIf="item.sport == 1; else nomeOddCustom">
                                 {{item.aposta_tipo.chave | tipoAposta}}
                             </span>
-                            <ng-template #nomeOddCombate>
-                                {{item.aposta_tipo.chave | tipoApostaCombate: item.time_a_nome : item.time_b_nome}}
+                            <ng-template #nomeOddCustom>
+                                {{item.aposta_tipo.chave | tipoApostaCustom: item.time_a_nome : item.time_b_nome}}
                             </ng-template>
                         </ng-template>
                         <span class="valor" *ngIf="item.cotacao_antiga == item.cotacao_atual; else cotacoesMudaram">
