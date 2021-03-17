@@ -12,14 +12,20 @@ header a{
     color: var(--foreground-header);
 }
 
+.logo-mobile{
+    max-width: calc(100% - 140px);
+}
+
 .logo-mobile img{
-    height: 40px;
-    max-width: 140px;
+    height: auto;
+    max-width: 100%;
+    max-height: 40px;
 }
 
 .navbar-mobile{
     border-bottom:1px solid rgba(255,255,255,0.25);
     justify-content: center;
+    min-height: 50px;
 }
 
 .navbar-mobile .navbar-toggler{
