@@ -2373,3 +2373,11 @@ gulp.task('apostasminas.site', function (done) {
         styles: "--highlight: #ffd700; --odds: #ffa500; --foreground-odds: #fff;",
     });
 });
+
+gulp.task('moralbets.com', function (done) {
+    tasks(done, {
+        host: "moralbets.com",
+        banca: "MORAL BETS",
+        styles: "--header: #a9a9a9; --foreground-header: #000; --sidebar-right: #a9a9a9; --foreground-sidebar-right: #000; --sidebar-left: #a9a9a9; --foreground-sidebar-left: #000;--highlight:#68eb5a;--foreground-highlight: #000;--odds:#000;",
+    });
+});

@@ -274,7 +274,8 @@
     "sportbig.wee.bet": "gulp sportbig.wee.bet",
     "betteive.com": "gulp betteive.com",
     "betsporting.wee.bet": "gulp betsporting.wee.bet",
-    "apostasminas.site": "gulp apostasminas.site"
+    "apostasminas.site": "gulp apostasminas.site",
+    "moralbets.com": "gulp moralbets.com"
   },
   "private": true,
   "dependencies": {
