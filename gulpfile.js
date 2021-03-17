@@ -2365,3 +2365,11 @@ gulp.task('betsporting.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostasminas.site', function (done) {
+    tasks(done, {
+        host: "apostasminas.site",
+        banca: "APOSTAS MINAS",
+        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+    });
+});
