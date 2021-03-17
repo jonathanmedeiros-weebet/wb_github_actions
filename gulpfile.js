@@ -2354,7 +2354,7 @@ gulp.task('betteive.com', function (done) {
     tasks(done, {
         host: "betteive.com",
         banca: "BETTEIVE",
-        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000;--highlight:#ffa500;--odds:#50237e;",
+        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000;--highlight:#ffd700;--odds:#50237e;",
     });
 });
 
