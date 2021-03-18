@@ -823,22 +823,6 @@ gulp.task('fanaticsports.bet', function (done) {
     });
 });
 
-gulp.task('geraisesportenet.wee.bet', function (done) {
-    tasks(done, {
-        host: "geraisesportenet.wee.bet",
-        banca: "GERAIS ESPORTE NET",
-        styles: ""
-    });
-});
-
-gulp.task('jsportbet.com', function (done) {
-    tasks(done, {
-        host: "jsportbet.com",
-        banca: "JSport Bet",
-        styles: ""
-    });
-});
-
 gulp.task('acaisports.bet', function (done) {
     tasks(done, {
         host: "acaisports.bet",
