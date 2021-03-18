@@ -1727,7 +1727,7 @@ gulp.task('playbets.wee.bet', function (done) {
     tasks(done, {
         host: "playbets.wee.bet",
         banca: "PLAY BETS",
-        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#f39200;"
+        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#f39200;--event-time: #000;--league: #000;--foreground-league: #fff;"
     });
 });
 
@@ -2224,7 +2224,7 @@ gulp.task('betsgool.wee.bet', function (done) {
     tasks(done, {
         host: "betsgool.wee.bet",
         banca: "BETS GOOL",
-        styles: "--header: #20ff00; --foreground-header: #000; --sidebar-right:#20ff00; --foreground-sidebar-right: #000; --sidebar-left: #20ff00; --foreground-sidebar-left: #000; --highlight: #35cc96; --foreground-highlight: #000; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        styles: "--header: #20ff00; --foreground-header: #000; --sidebar-right:#20ff00; --foreground-sidebar-right: #000; --sidebar-left: #20ff00; --foreground-sidebar-left: #000; --highlight: #35cc96; --foreground-highlight: #000; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;--league: #20ff00;--foreground-league: #fff;",
     });
 });
 
