@@ -2365,3 +2365,11 @@ gulp.task('moralbets.com', function (done) {
         styles: "--header: #a9a9a9; --foreground-header: #000; --sidebar-right: #a9a9a9; --foreground-sidebar-right: #000; --sidebar-left: #a9a9a9; --foreground-sidebar-left: #000;--highlight:#68eb5a;--foreground-highlight: #000;--odds:#000;",
     });
 });
+
+gulp.task('capitalsports.site', function (done) {
+    tasks(done, {
+        host: "capitalsports.site",
+        banca: "CAPITAL SPORTS",
+        styles: "--odds: #014610;",
+    });
+});
