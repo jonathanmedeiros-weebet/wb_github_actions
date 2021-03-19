@@ -2373,3 +2373,19 @@ gulp.task('capitalsports.site', function (done) {
         styles: "--odds: #014610;",
     });
 });
+
+gulp.task('mundodasapostas.site', function (done) {
+    tasks(done, {
+        host: "mundodasapostas.site",
+        banca: "MUNDO DAS APOSTAS",
+        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+    });
+});
+
+gulp.task('nonobet.site', function (done) {
+    tasks(done, {
+        host: "nonobet.site",
+        banca: "NONOBET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #daa54a;--highlight: #bb0000;",
+    });
+});
