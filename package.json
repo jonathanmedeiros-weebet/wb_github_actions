@@ -274,7 +274,8 @@
     "apostasminas.site": "gulp apostasminas.site",
     "moralbets.com": "gulp moralbets.com",
     "mundodasapostas.site": "gulp mundodasapostas.site",
-    "nonobet.site": "gulp nonobet.site"
+    "nonobet.site": "gulp nonobet.site",
+    "futgol.wee.bet": "gulp futgol.wee.bet"
   },
   "private": true,
   "dependencies": {

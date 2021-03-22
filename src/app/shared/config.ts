@@ -1,14 +1,12 @@
-const _host = 'http://weebet.local';
-const _center = 'http://localhost:3002';
-// const _center = 'https://center.wee.bet';
-const _live = 'http://localhost:3002';
-// const _live = 'https://streaming.wee.bet';
-// const _stats = 'https://stats.wee.bet';
-const _stats = 'http://localhost:3004';
-const _timestamp = '1614614845597';
+
+const _host = '//central.futgol.wee.bet';
+const _center = 'https://center2.wee.bet';
+const _live = 'https://streaming.wee.bet';
+const _stats = 'https://stats.wee.bet';
+const _timestamp = '1616448689391';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'FUUTGOOLL',
     TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
