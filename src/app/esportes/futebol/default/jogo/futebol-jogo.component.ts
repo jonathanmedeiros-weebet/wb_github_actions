@@ -246,7 +246,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         sortableOdds1T.sort((a, b) => a[0] - b[0]);
         sortableOdds1T.forEach(s => this.odds1T[s[1]] = s[2]);
-        
+        this.organizarOddsColunas(sortableOdds1T, '1T');
         this.odds2T = {};
         const sortableOdds2T = [];
         for (const odd in odds2T) {
@@ -372,7 +372,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 for (const odd in this.odds1T) {
                     for (const coluna in colunas) {
                         if (odd == coluna) {  
-                         this.odds[odd].colunas = colunas[coluna]
+                         this.odds1T[odd].colunas = colunas[coluna]
                             
                         }
                     }
@@ -382,7 +382,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 for (const odd in this.odds2T) {
                     for (const coluna in colunas) {
                         if (odd == coluna) {  
-                         this.odds[odd].colunas = colunas[coluna]
+                         this.odds2T[odd].colunas = colunas[coluna]
                         
                         }
                     }
