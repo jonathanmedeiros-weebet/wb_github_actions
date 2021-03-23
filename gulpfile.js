@@ -2391,3 +2391,11 @@ gulp.task('futgol.wee.bet', function (done) {
             " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
     });
 });
+
+gulp.task('foxbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "foxbets.wee.bet",
+        banca: "FOX BETS",
+        styles: "",
+    });
+});
