@@ -151,7 +151,8 @@
     "mundodasapostas.site": "gulp mundodasapostas.site",
     "nonobet.site": "gulp nonobet.site",
     "futgol.wee.bet": "gulp futgol.wee.bet",
-    "foxbets.wee.bet": "gulp foxbets.wee.bet"
+    "foxbets.wee.bet": "gulp foxbets.wee.bet",
+    "arena10.site": "gulp arena10.site"
   },
   "private": true,
   "dependencies": {
