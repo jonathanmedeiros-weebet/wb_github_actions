@@ -1276,10 +1276,9 @@ gulp.task('foxbets.wee.bet', function (done) {
     tasks(done, {
         host: "foxbets.wee.bet",
         banca: "FOX BETS",
-        styles: "",
+        styles: "--header: #000; --foreground-header: #dcdcdc; --sidebar-right:#000; --foreground-sidebar-right: #ff0000; --sidebar-left: #000; --foreground-sidebar-left: #ffa; --highlight: #ff0000; --foreground-highlight: #ffff00; --odds: #e8cc32; --foreground-odds: #ff0000;--foreground-selected-odds: #dcdcdc;--league:#fff;--foreground-league:#455a64;--selected-event: #002458;--foreground-selected-event: #ff0000;--event-time: #ff0000;--fg-event-time:#dcdcdc;",
     });
 });
-
 
 gulp.task('arena10.site', function (done) {
     tasks(done, {
