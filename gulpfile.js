@@ -1084,6 +1084,7 @@ gulp.task('federalsport.wee.bet', function (done) {
         host: "federalsport.wee.bet",
         banca: "FEDERAL SPORT",
         styles: "--header: #CCE7D4; --foreground-header: #000; --sidebar-right:#CCE7D4; --foreground-sidebar-right: #000; --sidebar-left: #CCE7D4; --foreground-sidebar-left: #000; --highlight: #c49a3e; --foreground-highlight: #000; --odds: #213372; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        aditional_styles: ".lds-ring div{border-color:#213372 transparent transparent transparent!important;}"
     });
 });
 
