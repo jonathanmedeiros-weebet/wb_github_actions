@@ -563,7 +563,7 @@ gulp.task('eurobet333.wee.bet', function (done) {
 
 gulp.task('betsgol.net', function (done) {
     tasks(done, {
-        host: "betsgol.net",
+        host: "betsgol.wee.bet",
         banca: "BETS GOL",
         styles: "--header:#ff0000; --foreground-header:#000; --sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;",
     });
