@@ -1,0 +1,49 @@
+#cupom{
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.conteudo{
+    text-align: center;
+}
+
+.conteudo img{
+    height: 80px;
+}
+
+.header{
+    background: var(--header);
+    color:var(--foreground-header);
+    padding: 5px 0;
+}
+
+.aposta-item{
+    padding:15px 0;
+    margin: 15px 0;
+    background-color:#ebeaea
+}
+
+.div-1{
+    margin-top:5px;
+}
+
+.div-2{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.div-3, .div-4 span{
+    padding: 0 5px;
+}
+
+.ganhou{
+    color: green;
+}
+
+.perdeu{
+    color: red;
+}
+
+.dashed{
+    text-decoration: line-through;
+}

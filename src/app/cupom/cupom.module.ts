@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { CupomComponent } from './cupom.component';
 import { SharedModule } from '../shared/shared.module';
 import { StatsService, ResultadoService } from '../services';
-import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
 import { CupomAcumuladaoComponent } from './acumuladao/cupom-acumuladao.component';
+import { CupomDesafioComponent } from './desafio/cupom-desafio.component';
+import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
 
 @NgModule({
     imports: [
@@ -12,8 +13,9 @@ import { CupomAcumuladaoComponent } from './acumuladao/cupom-acumuladao.componen
     ],
     declarations: [
         CupomComponent,
-        CupomEsportesComponent,
-        CupomAcumuladaoComponent
+        CupomAcumuladaoComponent,
+        CupomDesafioComponent,
+        CupomEsportesComponent
     ],
     providers: [StatsService, ResultadoService]
 })

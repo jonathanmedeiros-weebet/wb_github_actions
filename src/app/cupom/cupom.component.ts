@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/co
 import { ActivatedRoute } from '@angular/router';
 
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { ApostaService, ResultadoService } from './../services';
 
 @Component({
@@ -14,6 +14,7 @@ export class CupomComponent implements OnInit, OnDestroy {
     aposta;
     resultados = new Map();
     show = false;
+    isExpired = false;
     unsub$ = new Subject();
 
     constructor(
@@ -34,24 +35,43 @@ export class CupomComponent implements OnInit, OnDestroy {
                         .pipe(
                             switchMap(aposta => {
                                 this.aposta = aposta;
-                                const jogosApiIds = aposta.itens.map(item => item.jogo_api_id);
-                                const params = {
-                                    ids: jogosApiIds
-                                };
+                                if (aposta.tipo == 'esportes') {
+                                    const jogosApiIds = aposta.itens.map(item => item.jogo_api_id);
+                                    const params = {
+                                        ids: jogosApiIds
+                                    };
 
-                                return this.resultadoService.getResultados(params, true)
+                                    return this.resultadoService.getResultados(params, true);
+                                }
+
+                                const observable = new Observable(subscriber => {
+                                    subscriber.next([]);
+                                    subscriber.complete();
+                                });
+
+                                return observable;
                             }),
                             takeUntil(this.unsub$)
                         )
                         .subscribe(
-                            resultados => {
-                                this.resultados.clear();
+                            (resultados: any[]) => {
+                                this.isExpired = false;
 
-                                resultados.forEach(resultado => {
-                                    this.resultados.set(resultado.event_id, resultado.resultado);
-                                });
+                                if (this.aposta.tipo == 'esportes') {
+                                    if (this.aposta.resultado && (resultados.length == 0)) {
+                                        this.isExpired = true;
+                                    }
+                                }
 
-                                this.show = true;
+                                if (!this.isExpired) {
+                                    this.resultados.clear();
+
+                                    resultados.forEach(resultado => {
+                                        this.resultados.set(resultado.event_id, resultado.resultado);
+                                    });
+
+                                    this.show = true;
+                                }
                             },
                             error => console.log(error)
                         );
