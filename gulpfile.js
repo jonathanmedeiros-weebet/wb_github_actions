@@ -502,14 +502,6 @@ gulp.task('rexpasports.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsporte.wee.bet', function (done) {
-    tasks(done, {
-        host: "betsporte.wee.bet",
-        banca: "Bet Sporte",
-        styles: "--header:#030248;--foreground-header:#fff;--sidebar-right:#030248;--foreground-sidebar-right:#fff;--sidebar-left:#030248;--foreground-sidebar-left:#fff;--odds:#008701;--foreground-odds: #fff; --highlight:#000; --foreground-highlight:#fff; --foreground-selected-odds:#fff ;"
-    });
-});
-
 gulp.task('sportingnet.bet', function (done) {
     tasks(done, {
         host: "sportingnet.bet",
@@ -993,14 +985,6 @@ gulp.task('topbets.website', function (done) {
         host: "topbets.website",
         banca: "TOP BETS",
         styles: "",
-    });
-});
-
-gulp.task('betscariri.net', function (done) {
-    tasks(done, {
-        host: "betscariri.net",
-        banca: "BETS CARIRI",
-        styles: "--header: #f7b03e; --foreground-header: #000; --sidebar-right:#f7b03e; --foreground-sidebar-right: #000; --sidebar-left: #f7b03e; --foreground-sidebar-left: #000; --odds: #067700;--foreground-highlight: #000;",
     });
 });
 
