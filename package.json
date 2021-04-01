@@ -152,7 +152,8 @@
         "futgol.wee.bet": "gulp futgol.wee.bet",
         "foxbets.wee.bet": "gulp foxbets.wee.bet",
         "arena10.site": "gulp arena10.site",
-        "osascosportsbet.wee.bet": "gulp osascosportsbet.wee.bet"
+        "osascosportsbet.wee.bet": "gulp osascosportsbet.wee.bet",
+        "goldbets.app": "gulp goldbets.app"
     },
     "private": true,
     "dependencies": {

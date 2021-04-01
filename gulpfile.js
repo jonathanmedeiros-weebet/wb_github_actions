@@ -1288,3 +1288,11 @@ gulp.task('osascosportsbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('goldbets.app', function (done) {
+    tasks(done, {
+        host: "goldbets.app",
+        banca: "GOLD BETS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #ffa; --foreground-highlight: yellow; --odds: #ffc107; --foreground-odds: #000;",
+    });
+});
