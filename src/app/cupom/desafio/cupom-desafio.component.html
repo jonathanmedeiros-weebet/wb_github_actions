@@ -1,0 +1,68 @@
+<div id="cupom" #cupom>
+    <div class="conteudo">
+        <div>
+            <img [src]="LOGO">
+            <h1 class="numero">
+                #{{aposta.id}}
+            </h1>
+        </div>
+        <div class="header">
+            <h2>Seus Palpites</h2>
+            <span>Confira abaixo o resultado dos seus palpites</span>
+        </div>
+        <div *ngFor="let item of aposta.itens" class="aposta-item">
+            <div>
+                {{item.desafio_datahora_encerramento | moment:'DD/MM/YYYY HH:mm'}}
+            </div>
+            <div class="div-1">
+                {{item.desafio_categoria_nome}}
+            </div>
+            <div class="div-2">
+                {{item.desafio_nome}}
+            </div>
+            <div class="div-3" [ngClass]="{'dashed': item.resultado == 'cancelado'}">
+                Resposta: {{item.odd_nome}} ({{item.cotacao}})
+            </div>
+            <div class="div-4" *ngIf="item.resultado">
+                <span [ngClass]="resultadoClass(item.resultado)">
+                    {{item.resultado}}
+                </span>
+            </div>
+        </div>
+        <div class="informacoes-aposta">
+            <h4 *ngIf="aposta.resultado">
+                Resultado: <span [ngClass]="resultadoClass(aposta.resultado)">{{aposta.resultado}}</span>
+            </h4>
+            <div>
+                <b>Apostador:</b> {{aposta.apostador}}
+            </div>
+            <div>
+                <b>Cambista:</b> {{aposta.passador.nome}}
+            </div>
+            <div>
+                <b>Data:</b> {{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}
+            </div>
+            <div>
+                <b>Nº Desafios:</b> {{aposta.itens.length}}
+            </div>
+            <div>
+                <b>Cotação:</b> {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}
+            </div>
+            <div>
+                <b>Valor Apostado:</b> {{aposta.valor | currency}}
+            </div>
+            <div>
+                <b>Possível Retorno:</b> {{aposta.possibilidade_ganho | currency}}
+            </div>
+            <div *ngIf="aposta.resultado && aposta.resultado != 'a confirmar'">
+                <b>Prêmio:</b> {{aposta.premio | currency}}
+            </div>
+            <div *ngIf="aposta.passador.percentualPremio > 0">
+                <b>Cambista Paga:</b> {{cambistaPaga | currency}}
+            </div>
+            <div>
+                <b>Status do Bilhete:</b> {{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}
+            </div>
+        </div>
+    </div>
+</div>
