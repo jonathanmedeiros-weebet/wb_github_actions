@@ -773,16 +773,6 @@ gulp.task('playbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('marechalsports.wee.bet', function (done) {
-    tasks(done, {
-        host: "marechalsports.wee.bet",
-        banca: "MARECHAL SPORTS",
-        styles: "--header: #012549; --foreground-header: #fff; --sidebar-right:#012549; --foreground-sidebar-right: #fff; --sidebar-left: #012549; --foreground-sidebar-left: #fff; --odds: #4c4c4e; --event-time: #e84233; --highlight: #fbef3c; --foreground-highlight: #fff;  --league: #494e4a; --foreground-league: #fff;",
-        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #7f7d7e!important } .jogos, .eventos{ background: #7f7d7e!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #7f7d7e!important; } .footer{ background-color:#7f7d7e!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #4c4c4e; color: white; } .inside-event .tipo-apostas{ background-color: #7f7d7e!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .tipo-apostas .nav-link{ color:#fff!important; }.mais-opcoes{ color: #fff!important; }"
-    });
-});
-
 gulp.task('betspremio.bet', function (done) {
     tasks(done, {
         host: "betspremio.bet",
@@ -1294,5 +1284,13 @@ gulp.task('goldbets.app', function (done) {
         host: "goldbets.app",
         banca: "GOLD BETS",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #ffa; --foreground-highlight: yellow; --odds: #ffc107; --foreground-odds: #000;",
+    });
+});
+
+gulp.task('serra99.wee.bet', function (done) {
+    tasks(done, {
+        host: "serra99.wee.bet",
+        banca: "SERRA 99",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffbf00; --odds: #00338e;",
     });
 });
