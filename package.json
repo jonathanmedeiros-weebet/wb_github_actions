@@ -153,7 +153,8 @@
         "arena10.site": "gulp arena10.site",
         "osascosportsbet.wee.bet": "gulp osascosportsbet.wee.bet",
         "goldbets.app": "gulp goldbets.app",
-        "serra99.wee.bet": "gulp serra99.wee.bet"
+        "serra99.wee.bet": "gulp serra99.wee.bet",
+        "jogadacerta.wee.bet": "gulp jogadacerta.wee.bet"
     },
     "private": true,
     "dependencies": {

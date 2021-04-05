@@ -1294,3 +1294,11 @@ gulp.task('serra99.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffbf00; --odds: #00338e;",
     });
 });
+
+gulp.task('jogadacerta.wee.bet', function (done) {
+    tasks(done, {
+        host: "jogadacerta.wee.bet",
+        banca: "JOGADA CERTA",
+        styles: "",
+    });
+});
