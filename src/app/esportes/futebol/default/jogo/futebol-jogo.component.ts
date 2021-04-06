@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { createSolutionBuilderWithWatchHost } from 'typescript';
 
 @Component({
@@ -158,7 +158,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                 let odd = obj[tipoAposta.cat_chave];
 
-               
+
                 if (!odd) {
                     //categoria
                     odd = {
@@ -166,16 +166,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         'tempo': tipoAposta.tempo,
                         'principal': tipoAposta.p,
                         'posicao': tipoAposta.cat_posicao,
+                        'posicaoVertical': tipoAposta.posicao_vertical,
                         'colunas': tipoAposta.cat_colunas,
                         'cotacoes': []
                     };
                     obj[tipoAposta.cat_chave] = odd;
                 }
 
-                cotacao.posicao  = tipoAposta.posicao; 
+                cotacao.posicao = tipoAposta.posicao;
+                cotacao.posicao_vertical = tipoAposta.posicao_vertical
                 odd.cotacoes.push(cotacao);
-                
-                
+
+
                 if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][cotacao.chave]) {
                     this.cotacoesLocais[this.jogo.event_id][cotacao.chave].usou = true;
                 }
@@ -234,9 +236,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         sortableOdds.sort((a, b) => a[0] - b[0]);
         sortableOdds.forEach(s => this.odds[s[1]] = s[2]);
         this.organizarOddsColunas(sortableOdds, 'odd')
-       
-        console.log(this.odds)
-        
+
+
         this.odds1T = {};
         const sortableOdds1T = [];
         for (const odd in odds1T) {
@@ -256,6 +257,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         sortableOdds2T.sort((a, b) => a[0] - b[0]);
         sortableOdds2T.forEach(s => this.odds2T[s[1]] = s[2]);
+        this.organizarOddsColunas(sortableOdds2T, '2T')
 
         this.oddsJogadores = {};
         const sortableJogadores = [];
@@ -266,7 +268,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         sortableJogadores.sort((a, b) => a[0] - b[0]);
         sortableJogadores.forEach(s => this.oddsJogadores[s[1]] = s[2]);
-
+        
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
     }
@@ -333,75 +335,85 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return result;
     }
 
-    private organizarOddsColunas(odds, tipo: string){
-         //cria a estrutura para oganizar os odds
-         const colunas = []; 
-         for (const sortableOdd  of odds ) {
-             colunas[sortableOdd[1]] = []
-             for (let colunaIdx  =  0; colunaIdx <= sortableOdd[2].colunas;  colunaIdx++) {
-                 colunas[sortableOdd[1]].push([])
-             }
-         }
-         //popula as columas com as cotacaoes
-         for (const sortableOdd  of odds ) {
-             for( const col in colunas ){
-                if(sortableOdd[1] === col ) {
+    private organizarOddsColunas(odds, tipo: string) {
+        //cria a estrutura para oganizar os odds
+        const colunas = [];
+        for (const sortableOdd of odds) {
+            colunas[sortableOdd[1]] = []
+            for (let colunaIdx = 0; colunaIdx <= sortableOdd[2].colunas; colunaIdx++) {
+                colunas[sortableOdd[1]].push([])
+            }
+        }
+
+        //popula as colunas com as cotacaoes
+        for (const sortableOdd of odds) {
+            for (const col in colunas) {
+                if (sortableOdd[1] === col) {
                     for (let coluna = 0; coluna < colunas[col].length; coluna++) {
-                       for(const cotacao of sortableOdd[2].cotacoes){
-                           if(cotacao.posicao == coluna){
-                               colunas[col][coluna].push(cotacao)
-                           }
-                       } 
-                    } 
+                        for (const cotacao of sortableOdd[2].cotacoes) {
+                            if (cotacao.posicao == coluna) {
+                                colunas[col][coluna].push(cotacao)
+                            }
+                        }
+                    }
                 }
             }
-         }
-         //adiciona as colnas ja processadas ao respetivo odd
-         switch (tipo){
+        }
+
+        //Ordena os odds de cada coluna com base na posicao vertical de cada um
+        //Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
+        for (const coluna in colunas) {
+            for (const colunaIdx in colunas[coluna]) {
+                colunas[coluna][colunaIdx].sort((a, b) => {
+                    return a.posicao_vertical - b.posicao_vertical;
+                });
+            }
+        }
+        //adiciona as colnas ja processadas ao respetivo odd
+        switch (tipo) {
             case 'odd':
                 for (const odd in this.odds) {
                     for (const coluna in colunas) {
-                        if (odd == coluna) {  
-                         this.odds[odd].colunas = colunas[coluna]
-                            
+                        if (odd == coluna) {
+                            this.odds[odd].colunas = colunas[coluna]
                         }
                     }
-                 }   
+                }
                 break;
             case '1T':
                 for (const odd in this.odds1T) {
                     for (const coluna in colunas) {
-                        if (odd == coluna) {  
-                         this.odds1T[odd].colunas = colunas[coluna]
-                            
+                        if (odd == coluna) {
+                            this.odds1T[odd].colunas = colunas[coluna]
+
                         }
                     }
                 }
                 break;
-            case '2T':    
+            case '2T':
                 for (const odd in this.odds2T) {
                     for (const coluna in colunas) {
-                        if (odd == coluna) {  
-                         this.odds2T[odd].colunas = colunas[coluna]
-                        
+                        if (odd == coluna) {
+                            this.odds2T[odd].colunas = colunas[coluna]
+
                         }
                     }
                 }
                 break;
-                case 'jogadores':    
+            case 'jogadores':
                 for (const odd in this.oddsJogadores) {
                     for (const coluna in colunas) {
-                        if (odd == coluna) {  
-                         this.odds[odd].colunas = colunas[coluna]
-                        
+                        if (odd == coluna) {
+                            this.odds[odd].colunas = colunas[coluna]
+
                         }
                     }
                 }
                 break;
-            }
         }
+    }
+
     calcularTamanhoColuna(numColunas) {
-        console.log(numColunas)
         const tamanho = 100 / numColunas;
         return `${tamanho}%`
     }
