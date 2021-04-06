@@ -1302,3 +1302,11 @@ gulp.task('jogadacerta.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsertao.wee.bet', function (done) {
+    tasks(done, {
+        host: "betsertao.wee.bet",
+        banca: "BET SERTÃO",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #228B22;",
+    });
+});
