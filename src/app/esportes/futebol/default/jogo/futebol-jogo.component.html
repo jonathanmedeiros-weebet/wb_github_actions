@@ -21,23 +21,24 @@
                 <li ngbNavItem>
                     <a ngbNavLink>Tempo Completo</a>
                     <ng-template ngbNavContent>
-                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds)">
-                            <h4>{{odds[chave].nome}}</h4>
+                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds90)">
+                            <h4>{{odds90[chave].nome}}</h4>
                             <div class="odds">
-                                <div class="odd" *ngFor="let odd of odds[chave].colunas" [style.width]="calcularTamanhoColuna(odds[chave].colunas.length )">
+                                <div class="odd" *ngFor="let odd of odds90[chave].colunas" [style.width]="calcularTamanhoColuna(odds90[chave].colunas.length )">
                                     <div *ngFor="let cotacao of odd" (click)="addCotacao(jogo, cotacao)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
                                             <span class="nome" *ngIf="cotacao.nome; else chave">
-                                            {{cotacao.chave | tipoAposta}}
-                                        </span>
-                                            <ng-template #chave>
-                                                <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
+                                            <ng-template #chave>
+                                                <span class="nome">
+                                                    {{cotacao.chave | tipoAposta}}
+                                                </span>
                                             </ng-template>
                                             <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id: jogo.favorito}}
-                                        </span>
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
+                                                jogo.favorito}}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -55,16 +56,17 @@
                                     <div *ngFor="let cotacao of odd1T " (click)="addCotacao(jogo, cotacao)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
                                             <span class="nome" *ngIf="cotacao.nome; else chave">
-                                            {{cotacao.chave | tipoAposta}}
-                                        </span>
-                                            <ng-template #chave>
-                                                <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
+                                            <ng-template #chave>
+                                                <span class="nome">
+                                                    {{cotacao.chave | tipoAposta}}
+                                                </span>
                                             </ng-template>
                                             <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id: jogo.favorito}}
-                                        </span>
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
+                                                jogo.favorito}}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -82,16 +84,17 @@
                                     <div *ngFor="let cotacao of odd2T" (click)="addCotacao(jogo, cotacao)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
                                             <span class="nome" *ngIf="cotacao.nome; else chave">
-                                            {{cotacao.chave | tipoAposta}}
-                                        </span>
-                                            <ng-template #chave>
-                                                <span class="nome">
                                                 {{cotacao.chave | tipoAposta}}
                                             </span>
+                                            <ng-template #chave>
+                                                <span class="nome">
+                                                    {{cotacao.chave | tipoAposta}}
+                                                </span>
                                             </ng-template>
                                             <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id: jogo.favorito}}
-                                        </span>
+                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
+                                                jogo.favorito}}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +122,8 @@
                                             </span>
                                         </ng-template>
                                         <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id: jogo.favorito}}
+                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
+                                            jogo.favorito}}
                                         </span>
                                     </div>
                                 </div>

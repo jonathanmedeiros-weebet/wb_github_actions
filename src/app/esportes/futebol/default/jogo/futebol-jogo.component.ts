@@ -21,7 +21,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
-    odds: any = {};
+    odds90: any = {};
     odds1T: any = {};
     odds2T: any = {};
     oddsJogadores: any = {};
@@ -132,7 +132,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     mapearCotacoes(cotacoes) {
-        const odds = {};
+        const odds90 = {};
         const odds1T = {};
         const odds2T = {};
         const oddsJogadores = {};
@@ -144,7 +144,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             if (tipoAposta) {
                 let obj;
                 if (tipoAposta.tempo === '90') {
-                    obj = odds;
+                    obj = odds90;
                 } else if (tipoAposta.tempo === '1T') {
                     obj = odds1T;
                 } else if (tipoAposta.tempo === '2T') {
@@ -196,7 +196,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         if (tipoAposta) {
                             let obj;
                             if (tipoAposta.tempo === '90') {
-                                obj = odds;
+                                obj = odds90;
                             } else if (tipoAposta.tempo === '1T') {
                                 obj = odds1T;
                             } else if (tipoAposta.tempo === '2T') {
@@ -226,16 +226,16 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 }
             }
         }
-        this.odds = {};
+        this.odds90 = {};
         const sortableOdds = [];
-        for (const odd in odds) {
-            if (odds[odd]) {
-                sortableOdds.push([odds[odd].posicao, odd, odds[odd]]);
+        for (const odd in odds90) {
+            if (odds90[odd]) {
+                sortableOdds.push([odds90[odd].posicao, odd, odds90[odd]]);
             }
         }
         sortableOdds.sort((a, b) => a[0] - b[0]);
-        sortableOdds.forEach(s => this.odds[s[1]] = s[2]);
-        this.organizarOddsColunas(sortableOdds, 'odd')
+        sortableOdds.forEach(s => this.odds90[s[1]] = s[2]);
+        this.organizarOddsColunas(sortableOdds, '90')
 
 
         this.odds1T = {};
@@ -268,7 +268,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         sortableJogadores.sort((a, b) => a[0] - b[0]);
         sortableJogadores.forEach(s => this.oddsJogadores[s[1]] = s[2]);
-        
+
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
     }
@@ -371,11 +371,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         //adiciona as colnas ja processadas ao respetivo odd
         switch (tipo) {
-            case 'odd':
-                for (const odd in this.odds) {
+            case '90':
+                for (const odd in this.odds90) {
                     for (const coluna in colunas) {
                         if (odd == coluna) {
-                            this.odds[odd].colunas = colunas[coluna]
+                            this.odds90[odd].colunas = colunas[coluna]
                         }
                     }
                 }
@@ -395,16 +395,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     for (const coluna in colunas) {
                         if (odd == coluna) {
                             this.odds2T[odd].colunas = colunas[coluna]
-
-                        }
-                    }
-                }
-                break;
-            case 'jogadores':
-                for (const odd in this.oddsJogadores) {
-                    for (const coluna in colunas) {
-                        if (odd == coluna) {
-                            this.odds[odd].colunas = colunas[coluna]
 
                         }
                     }
