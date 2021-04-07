@@ -8,8 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
 import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
 import { Subject } from 'rxjs';
-import { takeUntil, map } from 'rxjs/operators';
-import { createSolutionBuilderWithWatchHost } from 'typescript';
+import { takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -174,7 +173,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 }
 
                 cotacao.posicao = tipoAposta.posicao;
-                cotacao.posicao_vertical = tipoAposta.posicao_vertical
+                cotacao.posicao_vertical = tipoAposta.posicao_vertical;
                 odd.cotacoes.push(cotacao);
 
 
@@ -235,8 +234,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         sortableOdds.sort((a, b) => a[0] - b[0]);
         sortableOdds.forEach(s => this.odds90[s[1]] = s[2]);
-        this.organizarOddsColunas(sortableOdds, '90')
-
+        this.organizarOddsColunas(sortableOdds, '90');
 
         this.odds1T = {};
         const sortableOdds1T = [];
@@ -257,7 +255,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
         sortableOdds2T.sort((a, b) => a[0] - b[0]);
         sortableOdds2T.forEach(s => this.odds2T[s[1]] = s[2]);
-        this.organizarOddsColunas(sortableOdds2T, '2T')
+        this.organizarOddsColunas(sortableOdds2T, '2T');
 
         this.oddsJogadores = {};
         const sortableJogadores = [];
@@ -339,9 +337,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         //cria a estrutura para oganizar os odds
         const colunas = [];
         for (const sortableOdd of odds) {
-            colunas[sortableOdd[1]] = []
+            colunas[sortableOdd[1]] = [];
             for (let colunaIdx = 0; colunaIdx <= sortableOdd[2].colunas; colunaIdx++) {
-                colunas[sortableOdd[1]].push([])
+                colunas[sortableOdd[1]].push([]);
             }
         }
 
@@ -352,7 +350,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     for (let coluna = 0; coluna < colunas[col].length; coluna++) {
                         for (const cotacao of sortableOdd[2].cotacoes) {
                             if (cotacao.posicao == coluna) {
-                                colunas[col][coluna].push(cotacao)
+                                colunas[col][coluna].push(cotacao);
                             }
                         }
                     }
@@ -375,7 +373,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 for (const odd in this.odds90) {
                     for (const coluna in colunas) {
                         if (odd == coluna) {
-                            this.odds90[odd].colunas = colunas[coluna]
+                            this.odds90[odd].colunas = colunas[coluna];
                         }
                     }
                 }
@@ -394,8 +392,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 for (const odd in this.odds2T) {
                     for (const coluna in colunas) {
                         if (odd == coluna) {
-                            this.odds2T[odd].colunas = colunas[coluna]
-
+                            this.odds2T[odd].colunas = colunas[coluna];
                         }
                     }
                 }
@@ -405,6 +402,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     calcularTamanhoColuna(numColunas) {
         const tamanho = 100 / numColunas;
-        return `${tamanho}%`
+        return `${tamanho}%`;
     }
 }

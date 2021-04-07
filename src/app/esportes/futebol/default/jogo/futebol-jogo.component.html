@@ -53,7 +53,7 @@
                             <h4>{{odds1T[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odd" *ngFor="let odd1T of odds1T[chave].colunas" [style.width]="calcularTamanhoColuna(odds1T[chave].colunas.length)">
-                                    <div *ngFor="let cotacao of odd1T " (click)="addCotacao(jogo, cotacao)">
+                                    <div *ngFor="let cotacao of odd1T" (click)="addCotacao(jogo, cotacao)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
                                             <span class="nome" *ngIf="cotacao.nome; else chave">
                                                 {{cotacao.chave | tipoAposta}}
