@@ -1310,3 +1310,11 @@ gulp.task('betsertao.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #228B22;",
     });
 });
+
+gulp.task('globoesporte.bet', function (done) {
+    tasks(done, {
+        host: "globoesporte.bet",
+        banca: "GLOBO ESPORTE",
+        styles: "--header: #505050; --foreground-header: #fff; --sidebar-right:#505050; --foreground-sidebar-right: #fff; --sidebar-left: #505050; --foreground-sidebar-left: #fff; --odds: #e32636;",
+    });
+});
