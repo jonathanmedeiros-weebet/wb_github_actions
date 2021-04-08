@@ -36,12 +36,19 @@
     padding: 10px;
     text-align: center;
 }
+
 .odds .odd{
-    width: 50%;
+    width: 100%;
 }
 
-.principal .odd, .resultado_final .odd, .resultado_1t .odd, .resultado_2t .odd{
-    width: 33%;
+.odds-column{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.odd-jogador{
+    width: 50%!important;
 }
 
 @media only screen and (max-width: 668px) {
