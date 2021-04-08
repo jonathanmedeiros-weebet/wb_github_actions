@@ -79,24 +79,23 @@
                 <li ngbNavItem>
                     <a ngbNavLink>Segundo Tempo</a>
                     <ng-template ngbNavContent>
-                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(odds2T)">
-                            <h4>{{odds2T[chave].nome}}</h4>
+                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados2T)">
+                            <h4>{{mercados2T[chave].nome}}</h4>
                             <div class="odds">
-                                <div class="odd" *ngFor="let odd2T of odds2T[chave].colunas"
-                                    [style.width]="calcularTamanhoColuna(odds2T[chave].colunas.length)">
-                                    <div *ngFor="let cotacao of odd2T" (click)="addCotacao(jogo, cotacao)">
-                                        <div class="inner-odd"
-                                            [ngClass]="{'selecionado': itemSelecionado(jogo, cotacao)}">
-                                            <span class="nome" *ngIf="cotacao.nome; else chave">
-                                                {{cotacao.chave | tipoAposta}}
+                                <div class="odds-coluna" *ngFor="let odds of mercados2T[chave].odds"
+                                    [style.width]="calcularTamanhoColuna(mercados2T[chave].colunas)">
+                                    <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
+                                        <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
+                                            <span class="nome" *ngIf="odd.nome; else chave">
+                                                {{cotacao.nome}}
                                             </span>
                                             <ng-template #chave>
                                                 <span class="nome">
-                                                    {{cotacao.chave | tipoAposta}}
+                                                    {{odd.chave | tipoAposta}}
                                                 </span>
                                             </ng-template>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
+                                                {{odd.valor | calcularCotacao: odd.chave: jogo.event_id:
                                                 jogo.favorito}}
                                             </span>
                                         </div>
@@ -116,7 +115,8 @@
                             <h4>{{mercadosJogadores[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odds-jogador-coluna" *ngFor="let odds of mercadosJogadores[chave].odds">
-                                    <div class="odd odd-jogador" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
+                                    <div class="odd odd-jogador" *ngFor="let odd of odds"
+                                        (click)="addCotacao(jogo, odd)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
                                             <span class="nome" *ngIf="odd.nome; else chave">
                                                 {{odd.nome}}

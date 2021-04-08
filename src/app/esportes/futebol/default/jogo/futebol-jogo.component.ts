@@ -22,7 +22,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     @Output() exibirMaisCotacoes = new EventEmitter();
     mercados90: any = {};
     mercados1T: any = {};
-    odds2T: any = {};
+    mercados2T: any = {};
     mercadosJogadores: any = {};
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
@@ -133,7 +133,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     mapearOdds(odds) {
         const mercados90 = {};
         const mercados1T = {};
-        const odds2T = {};
+        const mercados2T = {};
         const mercadosJogadores = {};
 
         for (let index = 0; index < odds.length; index++) {
@@ -147,7 +147,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 } else if (tipoAposta.tempo === '1T') {
                     obj = mercados1T;
                 } else if (tipoAposta.tempo === '2T') {
-                    obj = odds2T;
+                    obj = mercados2T;
                 } else if (tipoAposta.tempo === 'JOGADORES') {
                     obj = mercadosJogadores;
                 } else {
@@ -196,7 +196,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             } else if (tipoAposta.tempo === '1T') {
                                 obj = mercados1T;
                             } else if (tipoAposta.tempo === '2T') {
-                                obj = odds2T;
+                                obj = mercados2T;
                             } else {
                                 continue;
                             }
@@ -225,7 +225,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
         this.mercados90 = this.organizarMercados(mercados90);
         this.mercados1T = this.organizarMercados(mercados1T);
-        this.odds2T = this.organizarMercados(odds2T);
+        this.mercados2T = this.organizarMercados(mercados2T);
         this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
 
         this.showLoadingIndicator = false;
