@@ -21,7 +21,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
     mercados90: any = {};
-    odds1T: any = {};
+    mercados1T: any = {};
     odds2T: any = {};
     mercadosJogadores: any = {};
     itens: ItemBilheteEsportivo[] = [];
@@ -132,7 +132,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     mapearOdds(odds) {
         const mercados90 = {};
-        const odds1T = {};
+        const mercados1T = {};
         const odds2T = {};
         const mercadosJogadores = {};
 
@@ -145,7 +145,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 if (tipoAposta.tempo === '90') {
                     obj = mercados90;
                 } else if (tipoAposta.tempo === '1T') {
-                    obj = odds1T;
+                    obj = mercados1T;
                 } else if (tipoAposta.tempo === '2T') {
                     obj = odds2T;
                 } else if (tipoAposta.tempo === 'JOGADORES') {
@@ -194,7 +194,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             if (tipoAposta.tempo === '90') {
                                 obj = mercados90;
                             } else if (tipoAposta.tempo === '1T') {
-                                obj = odds1T;
+                                obj = mercados1T;
                             } else if (tipoAposta.tempo === '2T') {
                                 obj = odds2T;
                             } else {
@@ -224,7 +224,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         this.mercados90 = this.organizarMercados(mercados90);
-        this.odds1T = this.organizarMercados(odds1T);
+        this.mercados1T = this.organizarMercados(mercados1T);
         this.odds2T = this.organizarMercados(odds2T);
         this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
 

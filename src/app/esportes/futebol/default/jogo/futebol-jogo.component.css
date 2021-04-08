@@ -41,7 +41,11 @@
     width: 100%;
 }
 
-.odds-column{
+.odds-coluna{
+    width: 100%;
+}
+
+.odds-coluna-jogador{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
