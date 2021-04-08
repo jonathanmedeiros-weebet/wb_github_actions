@@ -45,7 +45,7 @@
     width: 100%;
 }
 
-.odds-coluna-jogador{
+.odds-jogador-coluna{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
