@@ -24,8 +24,8 @@
                         <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados90)">
                             <h4>{{mercados90[chave].nome}}</h4>
                             <div class="odds">
-                                <div class="odds-coluna" *ngFor="let odds of mercados90[chave].odds"
-                                    [style.width]="calcularTamanhoColuna(mercados90[chave].colunas)">
+                                <div class="odds-coluna width-{{calcularTamanhoColuna(mercados90[chave].colunas)}}"
+                                    *ngFor="let odds of mercados90[chave].odds">
                                     <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
                                             <span class="nome" *ngIf="odd.nome; else chave">
@@ -53,8 +53,7 @@
                         <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados1T)">
                             <h4>{{mercados1T[chave].nome}}</h4>
                             <div class="odds">
-                                <div class="odds-coluna" *ngFor="let odds of mercados1T[chave].odds"
-                                    [style.width]="calcularTamanhoColuna(mercados1T[chave].colunas)">
+                                <div class="odds-coluna width-{{calcularTamanhoColuna(mercados1T[chave].colunas)}}" *ngFor="let odds of mercados1T[chave].odds">
                                     <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
                                             <span class="nome" *ngIf="odd.nome; else chave">
@@ -82,8 +81,7 @@
                         <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados2T)">
                             <h4>{{mercados2T[chave].nome}}</h4>
                             <div class="odds">
-                                <div class="odds-coluna" *ngFor="let odds of mercados2T[chave].odds"
-                                    [style.width]="calcularTamanhoColuna(mercados2T[chave].colunas)">
+                                <div class="odds-coluna width-{{calcularTamanhoColuna(mercados2T[chave].colunas)}}" *ngFor="let odds of mercados2T[chave].odds">
                                     <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
                                             <span class="nome" *ngIf="odd.nome; else chave">
@@ -115,8 +113,7 @@
                             <h4>{{mercadosJogadores[chave].nome}}</h4>
                             <div class="odds">
                                 <div class="odds-jogador-coluna" *ngFor="let odds of mercadosJogadores[chave].odds">
-                                    <div class="odd odd-jogador" *ngFor="let odd of odds"
-                                        (click)="addCotacao(jogo, odd)">
+                                    <div class="odd odd-jogador" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
                                             <span class="nome" *ngIf="odd.nome; else chave">
                                                 {{odd.nome}}

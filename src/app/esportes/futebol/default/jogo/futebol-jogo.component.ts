@@ -339,6 +339,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     calcularTamanhoColuna(numColunas) {
         const tamanho = 100 / numColunas;
-        return `${tamanho}%`;
+        return Math.round(tamanho);
     }
 }

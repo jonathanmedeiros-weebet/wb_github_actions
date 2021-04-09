@@ -55,6 +55,22 @@
     width: 50%!important;
 }
 
+.width-25{
+    width: 25%;
+}
+
+.width-33{
+    width: 33.33%;
+}
+
+.width-50{
+    width: 50%;
+}
+
+.width-100{
+    width: 100%;
+}
+
 @media only screen and (max-width: 668px) {
     .content-sports {
         padding-bottom: 90px;
