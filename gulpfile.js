@@ -1331,7 +1331,7 @@ gulp.task('superbetplus.club', function (done) {
     tasks(done, {
         host: "superbetplus.club",
         banca: "SUPER BET PLUS",
-        styles: "--highlight:#ff0a0b;--league: yellow;",
+        styles: "--league: yellow;",
     });
 });
 
