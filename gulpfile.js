@@ -1318,3 +1318,11 @@ gulp.task('globoesporte.bet', function (done) {
         styles: "--header: #505050; --foreground-header: #fff; --sidebar-right:#505050; --foreground-sidebar-right: #fff; --sidebar-left: #505050; --foreground-sidebar-left: #fff; --odds: #e32636;",
     });
 });
+
+gulp.task('chutecerto.club', function (done) {
+    tasks(done, {
+        host: "chutecerto.club",
+        banca: "CHUTE CERTO",
+        styles: "",
+    });
+});
