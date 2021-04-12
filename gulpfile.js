@@ -1322,7 +1322,7 @@ gulp.task('globoesporte.bet', function (done) {
 gulp.task('chutecerto.club', function (done) {
     tasks(done, {
         host: "chutecerto.club",
-        banca: "CHUTE CERTO",
+        banca: "CHUTE BETS",
         styles: "",
     });
 });
