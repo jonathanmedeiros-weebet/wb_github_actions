@@ -1319,9 +1319,9 @@ gulp.task('globoesporte.bet', function (done) {
     });
 });
 
-gulp.task('chutecerto.club', function (done) {
+gulp.task('chutebets.wee.bet', function (done) {
     tasks(done, {
-        host: "chutecerto.club",
+        host: "chutebets.wee.bet",
         banca: "CHUTE BETS",
         styles: "",
     });
