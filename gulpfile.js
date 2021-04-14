@@ -1345,4 +1345,10 @@ gulp.task('i9bets.wee.bet', function (done) {
     });
 });
 
-
+gulp.task('portugabet.site', function (done) {
+    tasks(done, {
+        host: "portugabet.site",
+        banca: "PORTUGA BET",
+        styles: "",
+    });
+});

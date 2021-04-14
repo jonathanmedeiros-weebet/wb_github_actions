@@ -159,7 +159,8 @@
         "globoesporte.bet": "gulp globoesporte.bet",
         "chutebets.wee.bet": "gulp chutebets.wee.bet",
         "superbetplus.club": "gulp superbetplus.club",
-        "i9bets.wee.bet": "gulp i9bets.wee.bet"
+        "i9bets.wee.bet": "gulp i9bets.wee.bet",
+        "portugabet.site": "gulp portugabet.site"
     },
     "private": true,
     "dependencies": {
