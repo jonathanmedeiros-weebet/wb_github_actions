@@ -1337,3 +1337,12 @@ gulp.task('superbetplus.club', function (done) {
     });
 });
 
+gulp.task('i9bets.wee.bet', function (done) {
+    tasks(done, {
+        host: "i9bets.wee.bet",
+        banca: "I9 BETS",
+        styles: "",
+    });
+});
+
+
