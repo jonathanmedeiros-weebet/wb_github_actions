@@ -4,7 +4,7 @@ const _host = '//weebet.local';
 const _center = '//localhost:3002';
 // const _center = 'https://center2.wee.bet';
 // const _live = 'https://streaming.wee.bet';
-const _live = 'https://localhost:3003';
+const _live = '//localhost:3003';
 const _stats = 'https://stats.wee.bet';
 const _timestamp = '1617025700544';
 
