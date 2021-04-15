@@ -20,6 +20,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
+    isMobile = false;
     mercados90: any = {};
     mercados1T: any = {};
     mercados2T: any = {};
@@ -45,6 +46,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     ) { }
 
     ngOnInit() {
+        if (window.innerWidth <= 667) {
+            this.isMobile = true;
+        }
+
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
@@ -163,15 +168,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         'tempo': tipoAposta.tempo,
                         'principal': tipoAposta.p,
                         'posicao': tipoAposta.cat_posicao,
-                        'posicaoVertical': tipoAposta.posicao_vertical,
                         'colunas': tipoAposta.cat_colunas,
+                        'colunasMobile': tipoAposta.cat_colunas_mobile,
                         'odds': []
                     };
                     obj[tipoAposta.cat_chave] = mercado;
                 }
 
-                odd.posicao = tipoAposta.posicao;
-                odd.posicao_vertical = tipoAposta.posicao_vertical;
+                odd.posicaoX = tipoAposta.posicao_x;
+                odd.posicaoY = tipoAposta.posicao_y;
+                odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
+                odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
                 mercado.odds.push(odd);
 
                 if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][odd.chave]) {
@@ -294,6 +301,20 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return result;
     }
 
+    cssTamanhoColuna(mercado) {
+        let width = 'width-';
+
+        if (this.isMobile) {
+            width += this.calcularTamanhoColuna(mercado.colunasMobile);
+        } else {
+            width += this.calcularTamanhoColuna(mercado.colunas);
+        }
+
+        return {
+            width: true
+        };
+    }
+
     private organizarMercados(mercados) {
         const mercadosOrganizados = {};
 
@@ -311,7 +332,14 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             //cria a estrutura para organizar os odds
             const colunas = [];
 
-            for (let i = 0; i < mercado.colunas; i++) {
+            let numeroColunas;
+            if (this.isMobile) {
+                numeroColunas = mercado.colunas;
+            } else {
+                numeroColunas = mercado.colunasMobile;
+            }
+
+            for (let i = 0; i < numeroColunas; i++) {
                 colunas.push([]);
             }
 
@@ -319,7 +347,17 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             for (const index in colunas) {
                 const odds = colunas[index];
                 for (const odd of mercado.odds) {
-                    if (odd.posicao == index) {
+                    let posicao;
+                    if (this.isMobile) {
+                        posicao = odd.posicaoXMobile
+                        console.log('MOBILE', posicao);
+                    } else {
+                        posicao = odd.posicaoX;
+                        console.log('DESKTOP', posicao);
+                    }
+
+
+                    if (posicao == index) {
                         odds.push(odd);
                     }
                 }
@@ -327,8 +365,15 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
             //Ordena os odds de cada coluna com base na posicao vertical de cada um
             //Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
+
             for (const coluna of colunas) {
-                coluna.sort((a, b) => a.posicao_vertical - b.posicao_vertical);
+                coluna.sort((a, b) => {
+                    if (this.isMobile) {
+                        return a.posicaoYMobile - b.posicaoYMobile;
+                    } else {
+                        return a.posicaoY - b.posicaoY;
+                    }
+                });
             }
 
             mercado.odds = colunas;
