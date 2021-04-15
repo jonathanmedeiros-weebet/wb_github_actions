@@ -1349,6 +1349,6 @@ gulp.task('portugabet.site', function (done) {
     tasks(done, {
         host: "portugabet.site",
         banca: "PORTUGA BET",
-        styles: "",
+        styles: "--header: #008000; --foreground-header: #fff; --sidebar-right:#e50200; --foreground-sidebar-right: #fff; --sidebar-left: #e50200; --foreground-sidebar-left: #fff; --odds: #008000;--league: #ffd700;--highlight: #ffd700;--foreground-highlight:#fff;",
     });
 });
