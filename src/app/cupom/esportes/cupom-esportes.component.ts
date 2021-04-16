@@ -18,7 +18,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     stats = {};
     chaves = {};
     cambistaPaga;
-    clientesBilheteAoVivo = ['foxbet.me', 'gooldeplaca.com.br', 'amigosdabola.wee.bet'];
+    clientesBilheteAoVivo = ['foxbet.me', 'amigosdabola.wee.bet'];
     LOGO = config.LOGO;
     unsub$ = new Subject();
 
