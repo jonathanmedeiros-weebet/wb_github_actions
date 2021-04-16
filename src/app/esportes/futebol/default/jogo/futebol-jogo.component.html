@@ -82,7 +82,7 @@
                         <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados2T)">
                             <h4>{{mercados2T[chave].nome}}</h4>
                             <div class="odds">
-                                <div class="odds-coluna width-{{calcularTamanhoColuna(mercados2T[chave].colunas)}}"
+                                <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados2T[chave])"
                                     *ngFor="let odds of mercados2T[chave].odds">
                                     <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
                                         <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">

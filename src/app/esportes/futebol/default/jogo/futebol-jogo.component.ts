@@ -301,20 +301,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return result;
     }
 
-    cssTamanhoColuna(mercado) {
-        let width = 'width-';
-
-        if (this.isMobile) {
-            width += this.calcularTamanhoColuna(mercado.colunasMobile);
-        } else {
-            width += this.calcularTamanhoColuna(mercado.colunas);
-        }
-
-        return {
-            width: true
-        };
-    }
-
     private organizarMercados(mercados) {
         const mercadosOrganizados = {};
 
@@ -334,9 +320,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
             let numeroColunas;
             if (this.isMobile) {
-                numeroColunas = mercado.colunas;
-            } else {
                 numeroColunas = mercado.colunasMobile;
+            } else {
+                numeroColunas = mercado.colunas;
             }
 
             for (let i = 0; i < numeroColunas; i++) {
@@ -344,23 +330,16 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             }
 
             //popula as colunas com as cotacaoes
-            for (const index in colunas) {
-                const odds = colunas[index];
-                for (const odd of mercado.odds) {
-                    let posicao;
-                    if (this.isMobile) {
-                        posicao = odd.posicaoXMobile
-                        console.log('MOBILE', posicao);
-                    } else {
-                        posicao = odd.posicaoX;
-                        console.log('DESKTOP', posicao);
-                    }
-
-
-                    if (posicao == index) {
-                        odds.push(odd);
-                    }
+            for (const odd of mercado.odds) {
+                let posicaoX;
+                if (this.isMobile) {
+                    posicaoX = odd.posicaoXMobile
+                } else {
+                    posicaoX = odd.posicaoX;
                 }
+
+                const odds = colunas[posicaoX];
+                odds.push(odd);
             }
 
             //Ordena os odds de cada coluna com base na posicao vertical de cada um
@@ -380,6 +359,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         return mercadosOrganizados;
+    }
+
+    cssTamanhoColuna(mercado) {
+        let width = 'width-';
+
+        if (this.isMobile) {
+            width += this.calcularTamanhoColuna(mercado.colunasMobile);
+        } else {
+            width += this.calcularTamanhoColuna(mercado.colunas);
+        }
+
+        return width;
     }
 
     calcularTamanhoColuna(numColunas) {

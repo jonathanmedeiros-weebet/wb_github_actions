@@ -109,6 +109,40 @@
     text-transform: uppercase;
 }
 
+.odds .odd{
+    width: 100%;
+}
+
+.odds-coluna{
+    width: 100%;
+}
+
+.odds-jogador-coluna{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.odd-jogador{
+    width: 50%!important;
+}
+
+.width-25{
+    width: 25%;
+}
+
+.width-33{
+    width: 33.33%;
+}
+
+.width-50{
+    width: 50%;
+}
+
+.width-100{
+    width: 100%;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .indentificacao{
@@ -131,9 +165,5 @@
 
     .indentificacao-mobile{
         display: block;
-    }
-
-    .odds .odd{
-        width: 100%;
     }
 }
