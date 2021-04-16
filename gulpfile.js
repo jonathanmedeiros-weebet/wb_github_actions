@@ -1341,3 +1341,11 @@ gulp.task('portugabet.site', function (done) {
         styles: "--header: #008000; --foreground-header: #fff; --sidebar-right:#e50200; --foreground-sidebar-right: #fff; --sidebar-left: #e50200; --foreground-sidebar-left: #fff; --odds: #008000;--league: #ffd700;--highlight: #ffd700;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('betsgol.website', function (done) {
+    tasks(done, {
+        host: "betsgol.website",
+        banca: "BETS GOL",
+        styles: "--header: #FF4500; --foreground-header: #fff; --sidebar-right:#FF4500; --foreground-sidebar-right: #fff; --sidebar-left: #FF4500; --foreground-sidebar-left: #fff; --odds: #00008B;--highlight: #00FF00;--foreground-highlight:#fff;",
+    });
+});
