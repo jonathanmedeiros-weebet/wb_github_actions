@@ -1349,3 +1349,19 @@ gulp.task('betsgol.website', function (done) {
         styles: "--header: #FF4500; --foreground-header: #fff; --sidebar-right:#FF4500; --foreground-sidebar-right: #fff; --sidebar-left: #FF4500; --foreground-sidebar-left: #fff; --odds: #00008B;--highlight: #00FF00;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('sportingbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportingbet.wee.bet",
+        banca: "SPORTING BET",
+        styles: "",
+    });
+});
+
+gulp.task('sertaobets.pro', function (done) {
+    tasks(done, {
+        host: "sertaobets.pro",
+        banca: "SERTÃO BETS",
+        styles: "--header: #f8c301; --foreground-header: #000; --sidebar-right:#f8c301; --foreground-sidebar-right: #000; --sidebar-left: #f8c301; --foreground-sidebar-left: #000; --odds: #3a384e;--foreground-highlight:#000;--highlight:#ef800f;",
+    });
+});

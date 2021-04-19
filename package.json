@@ -160,7 +160,9 @@
         "superbetplus.club": "gulp superbetplus.club",
         "i9bets.wee.bet": "gulp i9bets.wee.bet",
         "portugabet.site": "gulp portugabet.site",
-        "betsgol.website": "gulp betsgol.website"
+        "betsgol.website": "gulp betsgol.website",
+        "sportingbet.wee.bet": "gulp sportingbet.wee.bet",
+        "sertaobets.pro": "gulp sertaobets.pro"
     },
     "private": true,
     "dependencies": {
