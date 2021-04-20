@@ -104,7 +104,6 @@
         "betshouse.wee.bet": "gulp betshouse.wee.bet",
         "betsgol.live": "gulp betsgol.live",
         "minibets.wee.bet": "gulp minibets.wee.bet",
-        "maiorsporte.wee.bet": "gulp maiorsporte.wee.bet",
         "palpitesbets.com": "gulp palpitesbets.com",
         "betfut.wee.bet": "gulp betfut.wee.bet",
         "brasilbets.online": "gulp brasilbets.online",
@@ -162,7 +161,8 @@
         "portugabet.site": "gulp portugabet.site",
         "betsgol.website": "gulp betsgol.website",
         "sportingbet.wee.bet": "gulp sportingbet.wee.bet",
-        "sertaobets.pro": "gulp sertaobets.pro"
+        "sertaobets.pro": "gulp sertaobets.pro",
+        "betsjogadadasorte.site": "gulp betsjogadadasorte.site"
     },
     "private": true,
     "dependencies": {

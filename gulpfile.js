@@ -878,14 +878,6 @@ gulp.task('minibets.wee.bet', function (done) {
     });
 });
 
-gulp.task('maiorsporte.wee.bet', function (done) {
-    tasks(done, {
-        host: "maiorsporte.wee.bet",
-        banca: "MAIORSPORTE",
-        styles: ""
-    });
-});
-
 gulp.task('palpitesbets.com', function (done) {
     tasks(done, {
         host: "palpitesbets.com",
@@ -1363,5 +1355,13 @@ gulp.task('sertaobets.pro', function (done) {
         host: "sertaobets.pro",
         banca: "SERTÃO BETS",
         styles: "--header: #f8c301; --foreground-header: #000; --sidebar-right:#f8c301; --foreground-sidebar-right: #000; --sidebar-left: #f8c301; --foreground-sidebar-left: #000; --odds: #3a384e;--foreground-highlight:#000;--highlight:#ef800f;",
+    });
+});
+
+gulp.task('betsjogadadasorte.site', function (done) {
+    tasks(done, {
+        host: "betsjogadadasorte.site",
+        banca: "JOGADA DA SORTE",
+        styles: "--header: #f8c301; --foreground-header: #000; --sidebar-right:#f8c301; --foreground-sidebar-right: #000; --sidebar-left: #f8c301; --foreground-sidebar-left: #000; --odds: #cb151b;--foreground-highlight:#000;",
     });
 });
