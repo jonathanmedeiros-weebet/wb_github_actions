@@ -1282,7 +1282,7 @@ gulp.task('jogadacerta.wee.bet', function (done) {
     tasks(done, {
         host: "jogadacerta.wee.bet",
         banca: "JOGADA CERTA",
-        styles: "",
+        styles: "--header: #c5c5c5; --foreground-header: #000; --sidebar-right:#c5c5c5; --foreground-sidebar-right: #000; --sidebar-left: #c5c5c5; --foreground-sidebar-left: #000; --foreground-highlight:#000; --highlight:#ff3232;",
     });
 });
 
@@ -1346,7 +1346,7 @@ gulp.task('sportingbet.wee.bet', function (done) {
     tasks(done, {
         host: "sportingbet.wee.bet",
         banca: "SPORTING BET",
-        styles: "",
+        styles: "--header: #000; --foreground-header: #f9f0f9; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #debc06;--highlight: #ff0000;--foreground-highlight:#debc06;--league:#1e961e;--foreground-league:#f9fefe;--selected-event:#000;--foreground-selected-event:#fff;--event-time:#000;--foreground-event-time:#fff;",
     });
 });
 
