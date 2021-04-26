@@ -1365,3 +1365,11 @@ gulp.task('betsjogadadasorte.site', function (done) {
         styles: "--header: #f8c301; --foreground-header: #000; --sidebar-right:#f8c301; --foreground-sidebar-right: #000; --sidebar-left: #f8c301; --foreground-sidebar-left: #000; --odds: #cb151b;--foreground-highlight:#000;",
     });
 });
+
+gulp.task('ingamesports.wee.bet', function (done) {
+    tasks(done, {
+        host: "ingamesports.wee.bet",
+        banca: "INGAMES SPORTS",
+        styles: "",
+    });
+});
