@@ -1369,7 +1369,7 @@ gulp.task('betsjogadadasorte.site', function (done) {
 gulp.task('ingamesports.wee.bet', function (done) {
     tasks(done, {
         host: "ingamesports.wee.bet",
-        banca: "INGAMES SPORTS",
-        styles: "",
+        banca: "INGAME SPORTS",
+        styles: "--header: #116D51; --foreground-header: #fff; --sidebar-right:#116D51; --foreground-sidebar-right: #fff; --sidebar-left: #116D51; --foreground-sidebar-left: #fff; --odds: #000;--highlight:red;--foreground-highlight:#fff;",
     });
 });
