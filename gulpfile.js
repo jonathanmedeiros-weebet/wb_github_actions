@@ -1341,3 +1341,11 @@ gulp.task('ingamesports.wee.bet', function (done) {
         styles: "--header: #116D51; --foreground-header: #fff; --sidebar-right:#116D51; --foreground-sidebar-right: #fff; --sidebar-left: #116D51; --foreground-sidebar-left: #fff; --odds: #000;--highlight:red;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('gobets.wee.bet', function (done) {
+    tasks(done, {
+        host: "gobets.wee.bet",
+        banca: "GO BETS",
+        styles: "",
+    });
+});

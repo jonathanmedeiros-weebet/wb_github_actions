@@ -159,7 +159,8 @@
         "sportingbet.wee.bet": "gulp sportingbet.wee.bet",
         "sertaobets.pro": "gulp sertaobets.pro",
         "betsjogadadasorte.site": "gulp betsjogadadasorte.site",
-        "ingamesports.wee.bet": "gulp ingamesports.wee.bet"
+        "ingamesports.wee.bet": "gulp ingamesports.wee.bet",
+        "gobets.wee.bet": "gulp gobets.wee.bet"
     },
     "private": true,
     "dependencies": {
