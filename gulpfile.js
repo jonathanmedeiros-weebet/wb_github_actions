@@ -1001,14 +1001,6 @@ gulp.task('ligasportsbet.com', function (done) {
     });
 });
 
-gulp.task('goldsports.wee.bet', function (done) {
-    tasks(done, {
-        host: "goldsports.wee.bet",
-        banca: "GOLD SPORTS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #dd9c24;--highlight: yellow;--foreground-selected-odds: #000;"
-    });
-});
-
 gulp.task('ourobet.wee.bet', function (done) {
     tasks(done, {
         host: "ourobet.wee.bet",
@@ -1055,30 +1047,6 @@ gulp.task('bets085.wee.bet', function (done) {
         host: "bets085.wee.bet",
         banca: "BETS 085",
         styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
-gulp.task('belarosasports.wee.bet', function (done) {
-    tasks(done, {
-        host: "belarosasports.wee.bet",
-        banca: "BELA ROSA SPORTS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #cf9f26; --foreground-highlight: #fff; --odds: #dc0f12; --foreground-odds: #fff;--foreground-selected-odds: #fff;",
-    });
-});
-
-gulp.task('betsgool.wee.bet', function (done) {
-    tasks(done, {
-        host: "betsgool.wee.bet",
-        banca: "BETS GOOL",
-        styles: "--header: #20ff00; --foreground-header: #000; --sidebar-right:#20ff00; --foreground-sidebar-right: #000; --sidebar-left: #20ff00; --foreground-sidebar-left: #000; --highlight: #35cc96; --foreground-highlight: #000; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;--league: #20ff00;--foreground-league: #fff;",
-    });
-});
-
-gulp.task('esportetotal.site', function (done) {
-    tasks(done, {
-        host: "esportetotal.site",
-        banca: "ESPORTE TOTAL",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #d2d6de; --odds: #025704; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
