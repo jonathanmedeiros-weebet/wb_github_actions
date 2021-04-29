@@ -47,18 +47,20 @@
             <small>{{jogo.campeonato?.nome}}</small>
         </div>
         <div class="tipo-apostas">
-            <div class="tipo-aposta" *ngFor="let chave of objectKeys(odds); trackBy">
-                <h4>{{odds[chave].nome}}</h4>
+            <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercados); trackBy">
+                <h4>{{mercados[chave].nome}}</h4>
                 <div class="odds">
-                    <div class="odd" *ngFor="let cotacao of odds[chave].cotacoes; trackBy: trackByKey"
-                        (click)="addCotacao(jogo, cotacao)">
-                        <div class="inner-odd" [ngClass]="{selecionado: oddSelecionada(jogo._id, cotacao.chave)}">
-                            <span class="nome">
-                                {{cotacao.chave | tipoAposta}}
-                            </span>
-                            <span class="valor">
-                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id: null: true}}
-                            </span>
+                    <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados[chave])"
+                        *ngFor="let odds of mercados[chave].odds">
+                        <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
+                            <div class="inner-odd" [ngClass]="{'selecionado': oddSelecionada(jogo._id, odd.chave)}">
+                                <span class="nome">
+                                    {{odd.chave | tipoAposta}}
+                                </span>
+                                <span class="valor">
+                                    {{odd.valor | calcularCotacao: odd.chave: jogo.event_id: null: true}}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

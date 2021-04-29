@@ -19,10 +19,11 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
     jogo;
-    odds: any = {};
+    mercados: any = {};
     itens: ItemBilheteEsportivo[] = [];
     tiposAposta;
     objectKeys = Object.keys;
+    isMobile = false;
     showLoadingIndicator = true;
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
@@ -40,6 +41,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
+        if (window.innerWidth <= 667) {
+            this.isMobile = true;
+        }
         this.definirAltura();
 
         this.tiposAposta = this.paramsService.getTiposAposta();
@@ -109,27 +113,38 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         return result;
     }
 
-    mapearCotacoes(cotacoes) {
-        this.odds = {};
+    mapearCotacoes(odds) {
+        const mercados = {};
 
-        cotacoes.forEach(cotacao => {
-            const tipoAposta = this.tiposAposta[cotacao.chave];
+        for (let index = 0; index < odds.length; index++) {
+            const odd = odds[index];
+            const tipoAposta = this.tiposAposta[odd.chave];
 
             if (tipoAposta && parseInt(tipoAposta.ao_vivo, 10)) {
-                let odd = this.odds[tipoAposta.cat_chave];
-                if (!odd) {
-                    odd = {
+                let mercado = mercados[tipoAposta.cat_chave];
+
+                if (!mercado) {
+                    mercado = {
                         'nome': tipoAposta.cat_nome,
                         'tempo': tipoAposta.tempo,
                         'principal': tipoAposta.p,
-                        'cotacoes': []
+                        'posicao': tipoAposta.cat_posicao,
+                        'colunas': tipoAposta.cat_colunas,
+                        'colunasMobile': tipoAposta.cat_colunas_mobile,
+                        'odds': []
                     };
-                    this.odds[tipoAposta.cat_chave] = odd;
+                    mercados[tipoAposta.cat_chave] = mercado;
                 }
 
-                odd.cotacoes.push(cotacao);
+                odd.posicaoX = tipoAposta.posicao_x;
+                odd.posicaoY = tipoAposta.posicao_y;
+                odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
+                odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                mercado.odds.push(odd);
             }
-        });
+        }
+
+        this.mercados = this.organizarMercados(mercados);
 
         this.showLoadingIndicator = false;
     }
@@ -186,5 +201,82 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     trackByKey(index: number, cotacao: any): string {
         return cotacao.chave;
+    }
+
+    private organizarMercados(mercados) {
+        const mercadosOrganizados = {};
+
+        const aux = [];
+        for (const chave in mercados) {
+            aux.push([mercados[chave].posicao, chave, mercados[chave]]);
+        }
+        aux.sort((a, b) => a[0] - b[0]);
+        aux.forEach(element => {
+            mercadosOrganizados[element[1]] = element[2];
+        });
+
+        for (const chave in mercadosOrganizados) {
+            const mercado = mercadosOrganizados[chave];
+            //cria a estrutura para organizar os odds
+            const colunas = [];
+
+            let numeroColunas;
+            if (this.isMobile) {
+                numeroColunas = mercado.colunasMobile;
+            } else {
+                numeroColunas = mercado.colunas;
+            }
+
+            for (let i = 0; i < numeroColunas; i++) {
+                colunas.push([]);
+            }
+
+            //popula as colunas com as cotacaoes
+            for (const odd of mercado.odds) {
+                let posicaoX;
+                if (this.isMobile) {
+                    posicaoX = odd.posicaoXMobile
+                } else {
+                    posicaoX = odd.posicaoX;
+                }
+
+                const odds = colunas[posicaoX];
+                odds.push(odd);
+            }
+
+            //Ordena os odds de cada coluna com base na posicao vertical de cada um
+            //Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
+
+            for (const coluna of colunas) {
+                coluna.sort((a, b) => {
+                    if (this.isMobile) {
+                        return a.posicaoYMobile - b.posicaoYMobile;
+                    } else {
+                        return a.posicaoY - b.posicaoY;
+                    }
+                });
+            }
+
+            mercado.odds = colunas;
+        }
+
+        return mercadosOrganizados;
+    }
+
+    cssTamanhoColuna(mercado) {
+        let width = 'width-';
+
+        if (this.isMobile) {
+            width += this.calcularTamanhoColuna(mercado.colunasMobile);
+        } else {
+            width += this.calcularTamanhoColuna(mercado.colunas);
+        }
+
+        return width;
+    }
+
+    calcularTamanhoColuna(numColunas) {
+        const tamanho = 100 / numColunas;
+        return Math.round(tamanho);
     }
 }
