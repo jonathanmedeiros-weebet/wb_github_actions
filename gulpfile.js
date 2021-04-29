@@ -1346,6 +1346,6 @@ gulp.task('gobets.wee.bet', function (done) {
     tasks(done, {
         host: "gobets.wee.bet",
         banca: "GO BETS",
-        styles: "",
+        styles: "--odds: #fbb03b;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:gray;--foreground-highlight:#fff;",
     });
 });
