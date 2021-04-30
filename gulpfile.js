@@ -1349,3 +1349,27 @@ gulp.task('gobets.wee.bet', function (done) {
         styles: "--odds: #fbb03b;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:gray;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('aguiasports.bet', function (done) {
+    tasks(done, {
+        host: "aguiasports.bet",
+        banca: "ÁGUIA SPORTS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #fbb03b;--highlight:red;--foreground-highlight:#fff;",
+    });
+});
+
+gulp.task('imperiobonitobet.site', function (done) {
+    tasks(done, {
+        host: "imperiobonitobet.site",
+        banca: "IMPÉRIO BONITO",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #ffd700;--highlight:red;--foreground-highlight:#fff;",
+    });
+});
+
+gulp.task('showbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "showbet.wee.bet",
+        banca: "SHOW BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #006400;--foreground-highlight:#fff;",
+    });
+});

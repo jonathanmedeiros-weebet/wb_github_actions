@@ -160,7 +160,10 @@
         "sertaobets.pro": "gulp sertaobets.pro",
         "betsjogadadasorte.site": "gulp betsjogadadasorte.site",
         "ingamesports.wee.bet": "gulp ingamesports.wee.bet",
-        "gobets.wee.bet": "gulp gobets.wee.bet"
+        "gobets.wee.bet": "gulp gobets.wee.bet",
+        "aguiasports.bet": "gulp aguiasports.bet",
+        "showbet.wee.bet": "gulp showbet.wee.bet",
+        "imperiobonitobet.site": "gulp imperiobonitobet.site"
     },
     "private": true,
     "dependencies": {
