@@ -1373,3 +1373,30 @@ gulp.task('showbet.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #006400;--foreground-highlight:#fff;",
     });
 });
+
+
+gulp.task('topbets.store', function (done) {
+    tasks(done, {
+        host: "topbets.store",
+        banca: "TOP BETS",
+        styles: "",
+    });
+});
+
+
+gulp.task('betssoccer.wee.bet', function (done) {
+    tasks(done, {
+        host: "betssoccer.wee.bet",
+        banca: "BETS SOCCER",
+        styles: "--header: #ffa500; --foreground-header: #000; --sidebar-right:#ffa500; --foreground-sidebar-right: #000; --sidebar-left: #ffa500; --foreground-sidebar-left: #000; --odds: #000;--foreground-highlight:#000;",
+    });
+});
+
+
+gulp.task('dssportsbets.site', function (done) {
+    tasks(done, {
+        host: "dssportsbets.site",
+        banca: "DS SPORTS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #cc0000;--foreground-highlight:#fff;",
+    });
+});

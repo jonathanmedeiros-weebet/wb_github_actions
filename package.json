@@ -162,8 +162,11 @@
         "ingamesports.wee.bet": "gulp ingamesports.wee.bet",
         "gobets.wee.bet": "gulp gobets.wee.bet",
         "aguiasports.bet": "gulp aguiasports.bet",
+        "imperiobonitobet.site": "gulp imperiobonitobet.site",
         "showbet.wee.bet": "gulp showbet.wee.bet",
-        "imperiobonitobet.site": "gulp imperiobonitobet.site"
+        "topbets.store": "gulp topbets.store",
+        "betssoccer.wee.bet": "gulp betssoccer.wee.bet",
+        "dssportsbets.site": "gulp dssportsbets.site"
     },
     "private": true,
     "dependencies": {
