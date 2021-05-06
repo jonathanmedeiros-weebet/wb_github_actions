@@ -208,22 +208,31 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                 continue;
                             }
 
-                            let odd = obj[tipoAposta.cat_chave];
-                            if (!odd) {
-                                odd = {
+                            let mercado = obj[tipoAposta.cat_chave];
+
+                            if (!mercado) {
+                                mercado = {
                                     'nome': tipoAposta.cat_nome,
                                     'tempo': tipoAposta.tempo,
                                     'principal': tipoAposta.p,
-                                    'cotacoes': []
+                                    'posicao': tipoAposta.cat_posicao,
+                                    'colunas': tipoAposta.cat_colunas,
+                                    'colunasMobile': tipoAposta.cat_colunas_mobile,
+                                    'odds': []
                                 };
-                                obj[tipoAposta.cat_chave] = odd;
+                                obj[tipoAposta.cat_chave] = mercado;
                             }
 
-                            const cotacao = new Cotacao();
-                            cotacao.chave = chave;
-                            cotacao.valor = cotacaoLocal.valor;
+                            const cotacao = {
+                                chave: chave,
+                                valor: cotacaoLocal.valor,
+                                posicaoX: tipoAposta.posicao_x_mobile,
+                                posicaoY: tipoAposta.posicao_x_mobile,
+                                posicaoXMobile: tipoAposta.posicao_x_mobile,
+                                posicaoYMobile: tipoAposta.posicao_x_mobile
+                            }
 
-                            odd.cotacoes.push(cotacao);
+                            mercado.odds.push(cotacao);
                         }
                     }
                 }
