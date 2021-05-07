@@ -507,7 +507,7 @@ gulp.task('betsplacar.club', function (done) {
     tasks(done, {
         host: "betsplacar.club",
         banca: "Bets Placar",
-        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;"
+        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--league: #fc6402; --foreground-league: #fff;"
     });
 });
 
@@ -1383,7 +1383,6 @@ gulp.task('topbets.store', function (done) {
     });
 });
 
-
 gulp.task('betssoccer.wee.bet', function (done) {
     tasks(done, {
         host: "betssoccer.wee.bet",
@@ -1398,5 +1397,29 @@ gulp.task('dssportsbets.site', function (done) {
         host: "dssportsbets.site",
         banca: "DS SPORTS",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #cc0000;--foreground-highlight:#fff;",
+    });
+});
+
+gulp.task('bet316top.wee.bet', function (done) {
+    tasks(done, {
+        host: "bet316top.wee.bet",
+        banca: "BET 316 TOP",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#bf151f; --foreground-sidebar-right: #fff; --sidebar-left: #bf151f; --foreground-sidebar-left: #fff; --odds: #b7b7b7;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:#5a5a5a;--foreground-highlight:#fff;",
+    });
+});
+
+gulp.task('brazilsportsrodon.wee.bet', function (done) {
+    tasks(done, {
+        host: "brazilsportsrodon.wee.bet",
+        banca: "BRAZIL SPORTS RODON",
+        styles: "",
+    });
+});
+
+gulp.task('eisports.club', function (done) {
+    tasks(done, {
+        host: "eisports.club",
+        banca: "EI SPORTS",
+        styles: "--header: #60a443; --foreground-header: #fff; --sidebar-right:#60a443; --foreground-sidebar-right: #fff; --sidebar-left: #60a443; --foreground-sidebar-left: #fff; --odds: #000;--foreground-odds:#fff;--highlight:#7dd856;--foreground-highlight:#fff;",
     });
 });
