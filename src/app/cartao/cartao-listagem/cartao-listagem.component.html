@@ -41,7 +41,7 @@
                             <th>Data</th>
                             <th>Apostador</th>
                             <th class="text-right">Recargas</th>
-                            <th class="text-right">Bônus</th>
+                            <th class="text-right">Prêmios</th>
                             <th class="text-right">Saques</th>
                             <th class="text-right">Saldo</th>
                         </tr>
@@ -58,7 +58,7 @@
                                 <td>{{cartao.data_registro | moment:'DD/MM/YYYY HH:mm'}}</td>
                                 <td>{{cartao.apostador}}</td>
                                 <td class="text-right">{{cartao.total_creditos | currency}}</td>
-                                <td class="text-right">{{cartao.bonus | currency}}</td>
+                                <td class="text-right">{{cartao.premios | currency}}</td>
                                 <td class="text-right">{{cartao.total_saques | currency}}</td>
                                 <td class="text-right">{{cartao.saldo | currency}}</td>
                             </tr>

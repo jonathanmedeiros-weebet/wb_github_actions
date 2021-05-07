@@ -3,7 +3,7 @@ export class CartaoAposta {
     chave: string;
     apostador: string;
     valor: Number;
-    bonus: Number;
+    premios: Number;
     saldo: Number;
     passador: any;
     data_registro: string;
