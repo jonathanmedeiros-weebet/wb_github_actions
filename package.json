@@ -10,7 +10,6 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "vipsports.wee.bet": "gulp vipsports.wee.bet",
-        "betsgol.wee.bet": "gulp betsgol.wee.bet",
         "betgyn.com": "gulp betgyn.com",
         "betsbr.club": "gulp betsbr.club",
         "betsplay.bet": "gulp betsplay.bet",

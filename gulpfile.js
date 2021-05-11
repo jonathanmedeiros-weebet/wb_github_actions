@@ -106,14 +106,6 @@ gulp.task('betsports99.net', function (done) {
     });
 });
 
-gulp.task('betsgol.wee.bet', function (done) {
-    tasks(done, {
-        host: "betsgol.wee.bet",
-        banca: "Bets Gol",
-        styles: "--header: #14805e; --foreground-header: #b1c5e0; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #14805e; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #046eef; --foreground-odds: #fff;"
-    });
-});
-
 gulp.task('casadinha.com', function (done) {
     tasks(done, {
         host: "casadinha.com",
@@ -736,7 +728,7 @@ gulp.task('esportsmt.net', function (done) {
     tasks(done, {
         host: "esportsmt.net",
         banca: "ESPORTESMT.NET",
-        styles: ""
+        styles: "--header: #2e2e2e; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: red;",
     });
 });
 
@@ -1192,7 +1184,7 @@ gulp.task('nonobet.site', function (done) {
     tasks(done, {
         host: "nonobet.site",
         banca: "NONOBET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #daa54a;--highlight: #bb0000;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #000000;--highlight: #FFFF00;",
     });
 });
 
