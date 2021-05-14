@@ -54,17 +54,24 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             this.chaves[item.jogo_fi] = item.aposta_tipo.chave;
             const estatistica = new Estatistica();
             this.stats[this.getIndex(item)] = estatistica;
+
             if (item.resultado) {
                 const resultado = this.resultados.get(item.jogo_api_id);
 
-                estatistica.time_a_resultado = resultado.casa;
-                estatistica.time_b_resultado = resultado.fora;
-                estatistica.time_a_resultado_1t = resultado.casa_1t;
-                estatistica.time_b_resultado_1t = resultado.fora_1t;
-                estatistica.time_a_resultado_2t = resultado.casa_2t;
-                estatistica.time_b_resultado_2t = resultado.fora_2t;
-                estatistica.time_a_escanteios = resultado.casa_escanteios;
-                estatistica.time_b_escanteios = resultado.fora_escanteios;
+                if (resultado) {
+                    estatistica.time_a_resultado = resultado.casa;
+                    estatistica.time_b_resultado = resultado.fora;
+                    estatistica.time_a_resultado_1t = resultado.casa_1t;
+                    estatistica.time_b_resultado_1t = resultado.fora_1t;
+                    estatistica.time_a_resultado_2t = resultado.casa_2t;
+                    estatistica.time_b_resultado_2t = resultado.fora_2t;
+                    estatistica.time_a_escanteios = resultado.casa_escanteios;
+                    estatistica.time_b_escanteios = resultado.fora_escanteios;
+                } else {
+                    estatistica.time_a_resultado = item.time_a_resultado;
+                    estatistica.time_b_resultado = item.time_b_resultado;
+                }
+
                 estatistica.resultado = item.resultado;
             } else if (!item.removido && moment().isSameOrAfter(horarioInicio) && moment().isBefore(horarioFim) && item.jogo_fi) {
                 eventosId.push(item.jogo_fi);
