@@ -1416,3 +1416,11 @@ gulp.task('eisports.club', function (done) {
         styles: "--header: #60a443; --foreground-header: #fff; --sidebar-right:#60a443; --foreground-sidebar-right: #fff; --sidebar-left: #60a443; --foreground-sidebar-left: #fff; --odds: #000;--foreground-odds:#fff;--highlight:#7dd856;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('clubedabola.wee.bet', function (done) {
+    tasks(done, {
+        host: "clubedabola.wee.bet",
+        banca: "CLUBE DA BOLA",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#bf151f; --foreground-sidebar-right: #fff; --sidebar-left: #bf151f; --foreground-sidebar-left: #fff; --odds: #11192e;--foreground-selected-odds: #fff;--highlight:#d49011;--foreground-highlight:#fff;",
+    });
+});
