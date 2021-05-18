@@ -1421,6 +1421,6 @@ gulp.task('clubedabola.wee.bet', function (done) {
     tasks(done, {
         host: "clubedabola.wee.bet",
         banca: "CLUBE DA BOLA",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#bf151f; --foreground-sidebar-right: #fff; --sidebar-left: #bf151f; --foreground-sidebar-left: #fff; --odds: #11192e;--foreground-selected-odds: #fff;--highlight:#d49011;--foreground-highlight:#fff;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #11192e;--foreground-selected-odds: #fff;--highlight:#d49011;--foreground-highlight:#fff;",
     });
 });
