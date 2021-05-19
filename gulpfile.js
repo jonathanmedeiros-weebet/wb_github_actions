@@ -1424,3 +1424,11 @@ gulp.task('clubedabola.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #11192e;--foreground-selected-odds: #fff;--highlight:#d49011;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('lbbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "lbbet.wee.bet",
+        banca: "LBBET",
+        styles: "--header: #3aaa35; --foreground-header: #fff; --sidebar-right:#3aaa35; --foreground-sidebar-right: #fff; --sidebar-left: #3aaa35; --foreground-sidebar-left: #fff; --odds: #5e5e5e;--foreground-highlight:#fff;",
+    });
+});

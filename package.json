@@ -169,7 +169,8 @@
         "bet316top.wee.bet": "gulp bet316top.wee.bet",
         "brazilsportsrodon.wee.bet": "gulp brazilsportsrodon.wee.bet",
         "eisports.club": "gulp eisports.club",
-        "clubedabola.wee.bet": "gulp clubedabola.wee.bet"
+        "clubedabola.wee.bet": "gulp clubedabola.wee.bet",
+        "lbbet.wee.bet": "gulp lbbet.wee.bet"
     },
     "private": true,
     "dependencies": {
