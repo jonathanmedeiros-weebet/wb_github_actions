@@ -797,14 +797,6 @@ gulp.task('betspiaui.bet', function (done) {
     });
 });
 
-gulp.task('bet1000aguia.wee.bet', function (done) {
-    tasks(done, {
-        host: "bet1000aguia.wee.bet",
-        banca: "BET 1000 ÁGUIA",
-        styles: "",
-    });
-});
-
 gulp.task('betsportsbr.net', function (done) {
     tasks(done, {
         host: "betsportsbr.net",
@@ -1430,5 +1422,13 @@ gulp.task('lbbet.wee.bet', function (done) {
         host: "lbbet.wee.bet",
         banca: "LBBET",
         styles: "--header: #3aaa35; --foreground-header: #fff; --sidebar-right:#3aaa35; --foreground-sidebar-right: #fff; --sidebar-left: #3aaa35; --foreground-sidebar-left: #fff; --odds: #5e5e5e;--foreground-highlight:#fff;",
+    });
+});
+
+gulp.task('top10sportsvip.com', function (done) {
+    tasks(done, {
+        host: "top10sportsvip.com",
+        banca: "TOP 10 SPORTS VIP",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #06640b;--foreground-highlight:#fff;",
     });
 });
