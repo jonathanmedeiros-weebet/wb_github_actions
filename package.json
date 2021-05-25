@@ -171,7 +171,10 @@
         "clubedabola.wee.bet": "gulp clubedabola.wee.bet",
         "lbbet.wee.bet": "gulp lbbet.wee.bet",
         "top10sportsvip.com": "gulp top10sportsvip.com",
-        "brasilgolbets.com": "gulp brasilgolbets.com"
+        "brasilgolbets.com": "gulp brasilgolbets.com",
+        "shopbet.wee.bet": "gulp shopbet.wee.bet",
+        "esportepremium.wee.bet": "gulp esportepremium.wee.bet",
+        "brazilbet.club": "gulp brazilbet.club"
     },
     "private": true,
     "dependencies": {

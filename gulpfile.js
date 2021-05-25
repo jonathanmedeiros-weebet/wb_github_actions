@@ -1440,3 +1440,27 @@ gulp.task('brasilgolbets.com', function (done) {
         styles: "--header: #222d32; --foreground-header: #009c39; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;--league: #009c39; --foreground-league: #fff;",
     });
 });
+
+gulp.task('shopbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "shopbet.wee.bet",
+        banca: "SHOP BET",
+        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+    });
+});
+
+gulp.task('esportepremium.wee.bet', function (done) {
+    tasks(done, {
+        host: "esportepremium.wee.bet",
+        banca: "ESPORTE PREMIUM",
+        styles: "",
+    });
+});
+
+gulp.task('brazilbet.club', function (done) {
+    tasks(done, {
+        host: "brazilbet.club",
+        banca: "BRAZIL BET",
+        styles: "--header: #000; --foreground-header: #006d10; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #006d10;--highlight:#f29d00;--foreground-highlight:#fff;",
+    });
+});
