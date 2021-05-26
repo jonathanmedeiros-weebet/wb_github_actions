@@ -768,7 +768,7 @@ gulp.task('dolarbets.wee.bet', function (done) {
     tasks(done, {
         host: "dolarbets.wee.bet",
         banca: "DOLAR BETS",
-        styles: "--header:#005801; --foreground-header:#fff; --sidebar-left: #005801; --sidebar-right: #005801;--odds:#000;--foreground-highlight:#fff;",
+        styles: "--header:#005801; --foreground-header:#fff; --sidebar-left: #005801; --sidebar-right: #005801;--odds:#000;--foreground-highlight:#fff;--league: #ffcc28;",
     });
 });
 
