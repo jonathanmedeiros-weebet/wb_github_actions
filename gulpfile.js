@@ -985,14 +985,6 @@ gulp.task('ligasportsbet.com', function (done) {
     });
 });
 
-gulp.task('ourobet.wee.bet', function (done) {
-    tasks(done, {
-        host: "ourobet.wee.bet",
-        banca: "OURO BET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #cb962e;"
-    });
-});
-
 gulp.task('bigbets.website', function (done) {
     tasks(done, {
         host: "bigbets.website",
@@ -1081,14 +1073,6 @@ gulp.task('soesportes.net', function (done) {
         host: "soesportes.net",
         banca: "SOESPORTES",
         styles: "--header: #222d32; --foreground-header: #c49a3e; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
-gulp.task('a-posta.wee.bet', function (done) {
-    tasks(done, {
-        host: "a-posta.wee.bet",
-        banca: "A-POSTA",
-        styles: "--header: #000; --foreground-header: #35cc96; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
