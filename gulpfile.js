@@ -1448,3 +1448,11 @@ gulp.task('brazilbet.club', function (done) {
         styles: "--header: #000; --foreground-header: #006d10; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #006d10;--highlight:#f29d00;--foreground-highlight:#fff;",
     });
 });
+
+gulp.task('betlucro.site', function (done) {
+    tasks(done, {
+        host: "betlucro.site",
+        banca: "BET LUCRO",
+        styles: "--header: #e32646; --foreground-header: #262d5b; --sidebar-right:#e32646; --foreground-sidebar-right: #fff; --sidebar-left: #e32646; --foreground-sidebar-left: #fff; --odds: #262d5b;--foreground-highlight:#fff;",
+    });
+});
