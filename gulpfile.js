@@ -1001,15 +1001,6 @@ gulp.task('interior.wee.bet', function (done) {
     });
 });
 
-gulp.task('federalsport.wee.bet', function (done) {
-    tasks(done, {
-        host: "federalsport.wee.bet",
-        banca: "FEDERAL SPORT",
-        styles: "--header: #CCE7D4; --foreground-header: #000; --sidebar-right:#CCE7D4; --foreground-sidebar-right: #000; --sidebar-left: #CCE7D4; --foreground-sidebar-left: #000; --highlight: #c49a3e; --foreground-highlight: #000; --odds: #213372; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-        aditional_styles: ".lds-ring div{border-color:#213372 transparent transparent transparent!important;}"
-    });
-});
-
 gulp.task('betsgol.me', function (done) {
     tasks(done, {
         host: "betsgol.me",
@@ -1065,14 +1056,6 @@ gulp.task('sportshow.site', function (done) {
         host: "sportshow.site",
         banca: "SPORT SHOW",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right: #000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: blue;--foreground-selected-odds: #000;"
-    });
-});
-
-gulp.task('soesportes.net', function (done) {
-    tasks(done, {
-        host: "soesportes.net",
-        banca: "SOESPORTES",
-        styles: "--header: #222d32; --foreground-header: #c49a3e; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
