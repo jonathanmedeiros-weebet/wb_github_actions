@@ -1039,7 +1039,7 @@ gulp.task('minasbet.wee.bet', function (done) {
     tasks(done, {
         host: "minasbet.wee.bet",
         banca: "MINAS BET",
-        styles: "--header: #ffd700; --foreground-header: #000; --sidebar-right:#ffd700; --foreground-sidebar-right: #000; --sidebar-left: #ffd700; --foreground-sidebar-left: #000; --highlight: #ef0401; --foreground-highlight: #000; --odds: #008000; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ef0401; --foreground-highlight: #fff; --odds: #f5bf20; --foreground-odds: #fff;--foreground-selected-odds: #fff;",
     });
 });
 
