@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./favicon.ico?1619647055682">
     <style>
-        :root {
+        /*:root {
             --header: #002458;
             --foreground-header: #b1c5e0;
 
@@ -36,9 +36,28 @@
             --fg-event-time: #fff;
 
             --header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;
-        }
+        }*/
     </style>
 </head>
+<script>
+    fetch("param/colors.json")
+        .then(res => res.json())
+        .then(data => {
+            document.body.style.setProperty('--header', data.color_header);
+            document.body.style.setProperty('--foreground-header', data.color_foreground_header);
+            document.body.style.setProperty('--sidebar-right', data.color_sidebar_right);
+            document.body.style.setProperty('--foreground-sidebar-right', data.color_foreground_sidebar_right);
+            document.body.style.setProperty('--sidebar-left', data.color_sidebar_left);
+            document.body.style.setProperty('--foreground-sidebar-left', data.color_foreground_sidebar_left);
+            document.body.style.setProperty('--highlight', data.color_highlight);
+            document.body.style.setProperty('--foreground-highlight', data.color_foreground_highlight);
+            document.body.style.setProperty('--odds', data.color_odds);
+            document.body.style.setProperty('--foreground-odds', data.color_foreground_odds);
+            document.body.style.setProperty('--foreground-selected-odds', data.color_foreground_selected_odds);
+            document.body.style.setProperty('--selected-event', data.color_selected_event);
+            document.body.style.setProperty('--event-time', data.color_event_time);
+        })
+</script>
 
 <body style="background-color:var(--header);">
 <app-root>
@@ -53,7 +72,7 @@
 
 
 <style>
-    
+
 </style>
 
 </body>
