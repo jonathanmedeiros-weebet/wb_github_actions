@@ -172,7 +172,9 @@
         "esportepremium.wee.bet": "gulp esportepremium.wee.bet",
         "brazilbet.club": "gulp brazilbet.club",
         "betlucro.site": "gulp betlucro.site",
-        "betgol.site": "gulp betgol.site"
+        "betgol.site": "gulp betgol.site",
+        "acsportsbets.site": "gulp acsportsbets.site",
+        "kinoesporte.wee.bet": "gulp kinoesporte.wee.bet"
     },
     "private": true,
     "dependencies": {
