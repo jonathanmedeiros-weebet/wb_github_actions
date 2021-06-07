@@ -61,7 +61,7 @@ gulp.task('vipsports.wee.bet', function (done) {
     tasks(done, {
         host: "vipsports.wee.bet",
         banca: "Vip Sports",
-        styles: "",
+        styles: "--header: #222d32; --foreground-header: #e50d1b; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #e50d1b; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
@@ -1356,7 +1356,8 @@ gulp.task('bet316top.wee.bet', function (done) {
     tasks(done, {
         host: "bet316top.wee.bet",
         banca: "BET 316 TOP",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#bf151f; --foreground-sidebar-right: #fff; --sidebar-left: #bf151f; --foreground-sidebar-left: #fff; --odds: #b7b7b7;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:#5a5a5a;--foreground-highlight:#fff;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#e50d1b; --foreground-sidebar-right: #fff; --sidebar-left: #e50d1b; --foreground-sidebar-left: #fff; --odds: #d5d7d6;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:#444444;--foreground-highlight:#fff;--league: #868686; --foreground-league: #fff;",
+        aditional_styles: ".indentificacao .mais-opcoes{color: #e50d1b;} .jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;} .jogos, .eventos{ color: #e50d1b!important; }",
     });
 });
 
