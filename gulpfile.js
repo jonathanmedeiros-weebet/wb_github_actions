@@ -1465,3 +1465,21 @@ gulp.task('kinoesporte.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#1C1C1C; --foreground-sidebar-right: #fff; --sidebar-left: #1C1C1C; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #ffd700; --foreground-odds: #000;",
     });
 });
+
+
+gulp.task('7bet.wee.bet', function (done) {
+    tasks(done, {
+        host: "7bet.wee.bet",
+        banca: "7 BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #008000;",
+    });
+});
+
+
+gulp.task('maranhaobets.club', function (done) {
+    tasks(done, {
+        host: "maranhaobets.club",
+        banca: "MARANHÃO BETS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #00008B;",
+    });
+});
