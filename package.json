@@ -176,7 +176,9 @@
         "acsportsbets.site": "gulp acsportsbets.site",
         "kinoesporte.wee.bet": "gulp kinoesporte.wee.bet",
         "7bet.wee.bet": "gulp 7bet.wee.bet",
-        "maranhaobets.club": "gulp maranhaobets.club"
+        "maranhaobets.club": "gulp maranhaobets.club",
+        "bet99.site": "gulp bet99.site",
+        "garanhunsbet.site": "gulp garanhunsbet.site"
     },
     "private": true,
     "dependencies": {

@@ -1414,6 +1414,7 @@ gulp.task('shopbet.wee.bet', function (done) {
         host: "shopbet.wee.bet",
         banca: "SHOP BET",
         styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        scripts: "<!-- Global site tag (gtag.js) - Google Analytics --><script async src='https://www.googletagmanager.com/gtag/js?id=G-8X8TV3CM9T'></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-8X8TV3CM9T');</script>"
     });
 });
 
@@ -1457,7 +1458,6 @@ gulp.task('acsportsbets.site', function (done) {
     });
 });
 
-
 gulp.task('kinoesporte.wee.bet', function (done) {
     tasks(done, {
         host: "kinoesporte.wee.bet",
@@ -1465,7 +1465,6 @@ gulp.task('kinoesporte.wee.bet', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#1C1C1C; --foreground-sidebar-right: #fff; --sidebar-left: #1C1C1C; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #ffd700; --foreground-odds: #000;",
     });
 });
-
 
 gulp.task('7bet.wee.bet', function (done) {
     tasks(done, {
@@ -1475,11 +1474,26 @@ gulp.task('7bet.wee.bet', function (done) {
     });
 });
 
-
 gulp.task('maranhaobets.club', function (done) {
     tasks(done, {
         host: "maranhaobets.club",
         banca: "MARANHÃO BETS",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #00008B;",
+    });
+});
+
+gulp.task('bet99.site', function (done) {
+    tasks(done, {
+        host: "bet99.site",
+        banca: "BET99",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #00008B;",
+    });
+});
+
+gulp.task('garanhunsbet.site', function (done) {
+    tasks(done, {
+        host: "garanhunsbet.site",
+        banca: "GARANHUNS BET",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #00008B;",
     });
 });
