@@ -17,11 +17,11 @@
                 </button>
             </div>
             <div>
-                <label>Número: </label>
+                <label>Código: </label>
                 <em>{{aposta.codigo | splitCodigo}}</em>
             </div>
             <div>
-                <label>Apostador:</label>
+                <label>Apostador: </label>
                 <em>{{aposta.apostador}}</em>
             </div>
             <div>
@@ -38,39 +38,39 @@
                 <div class="aposta-item" *ngFor="let item of aposta.itens">
                     <div class="first-line">
                         <div>
-                            <label>sorteio</label>
+                            <label>Sorteio</label>
                             <span>{{item.sorteio_nome}}</span>
                         </div>
                         <div>
-                            <label>aposta</label>
+                            <label>Aposta</label>
                             <span>{{item.valor | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao6 > 0">
-                            <label>retorno 6</label>
+                            <label>Retorno 6</label>
                             <span>{{(item.cotacao6 * item.valor) | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao5 > 0">
-                            <label>retorno 5</label>
+                            <label>Retorno 5</label>
                             <span>{{(item.cotacao5 * item.valor) | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao4 > 0">
-                            <label>retorno 4</label>
+                            <label>Retorno 4</label>
                             <span>{{(item.cotacao4 * item.valor) | currency}}</span>
                         </div>
                         <div *ngIf="item.cotacao3 > 0">
-                            <label>retorno 3</label>
+                            <label>Retorno 3</label>
                             <span>{{(item.cotacao3 * item.valor) | currency}}</span>
                         </div>
                         <div>
-                            <label>prêmio</label>
+                            <label>Prêmio</label>
                             <span>{{(item.premio) | currency}}</span>
                         </div>
                         <div>
-                            <label>qtd. números</label>
+                            <label>Qtd. Números</label>
                             <span>{{item.numeros.length}}</span>
                         </div>
                         <div>
-                            <label>status</label>
+                            <label>Status</label>
                             <span>{{item.status | uppercase}}</span>
                         </div>
                     </div>
