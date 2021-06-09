@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,13 +9,14 @@ import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/ex
 import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
 import { ExibirBilheteDesafioComponent } from './../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
+import {BaseFormComponent} from '../../base-form/base-form.component';
 
 @Component({
     selector: 'app-pesquisar-aposta-modal',
     templateUrl: './pesquisar-aposta-modal.component.html',
     styleUrls: ['./pesquisar-aposta-modal.component.css']
 })
-export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
+export class PesquisarApostaModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
     @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
@@ -23,9 +24,6 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     exibirBilhete = false;
     aposta;
     appMobile;
-    pesquisarForm: FormGroup = this.fb.group({
-        input: ['']
-    });
     unsub$ = new Subject();
 
     constructor(
@@ -35,10 +33,22 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService
-    ) { }
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.createForm();
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            codigo: ['', Validators.compose([
+                Validators.required,
+                Validators.minLength(8)
+            ])]
+        });
     }
 
     ngOnDestroy() {
@@ -46,14 +56,14 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    pesquisarAposta() {
-        const input = this.pesquisarForm.value.input;
+    submit() {
+        const codigo = this.form.value.codigo;
 
-        this.apostaService.getApostaByCodigo(input)
+        this.apostaService.getApostaByCodigo(codigo)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 aposta => {
-                    this.pesquisarForm.reset();
+                    this.form.reset();
                     this.aposta = aposta;
                     this.exibirBilhete = true;
                 },
@@ -113,5 +123,9 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
         }
 
         return result;
+    }
+
+    handleError(error: string) {
+        this.messageService.error(error);
     }
 }

@@ -13,9 +13,12 @@
     </div>
 </div>
 <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
-    <form *ngIf="!exibirBilhete" [formGroup]="pesquisarForm" (ngSubmit)="pesquisarAposta()">
+    <form *ngIf="!exibirBilhete" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <input type="text" placeholder="Código da aposta" class="form-control" formControlName="input">
+            <input type="text" style="text-transform:uppercase;" placeholder="Código da aposta" class="form-control"
+                   formControlName="codigo"
+                   autocomplete="off" mask="AAAA-AAAA" [ngClass]="applyCssInputError('codigo')">
+            <app-error-msg [control]="form.get('codigo')"></app-error-msg>
         </div>
         <button type="submit" class="btn btn-custom">Consultar</button>
     </form>
