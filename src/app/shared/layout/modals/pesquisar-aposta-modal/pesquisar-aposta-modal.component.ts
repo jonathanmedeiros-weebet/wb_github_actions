@@ -49,7 +49,7 @@ export class PesquisarApostaModalComponent implements OnInit, OnDestroy {
     pesquisarAposta() {
         const input = this.pesquisarForm.value.input;
 
-        this.apostaService.getAposta(input)
+        this.apostaService.getApostaByCodigo(input)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 aposta => {

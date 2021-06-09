@@ -37,6 +37,23 @@ export class ApostaService {
             );
     }
 
+    getApostaByCodigo(codigo: string, queryParams?): Observable<any> {
+        const url = `${this.ApostaUrl}/buscar/${codigo}`;
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     cancelar(id): Observable<any> {
         const url = `${this.ApostaUrl}/${id}`;
 
