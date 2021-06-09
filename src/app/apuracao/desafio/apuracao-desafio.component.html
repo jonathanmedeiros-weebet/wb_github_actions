@@ -27,7 +27,7 @@
                             <td rowspan="2" class="resultado" [ngClass]="cssResultado(aposta.resultado)"></td>
                             <td>
                                 <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
-                                #{{aposta.id}}
+                                {{aposta.codigo | splitCodigo}}
                             </td>
                             <td>{{aposta.valor | currency}}</td>
                             <td>{{aposta.comissao | currency}}</td>
@@ -69,7 +69,7 @@
                             <td class="resultado" [ngClass]="cssResultado(aposta.resultado)"></td>
                             <td>
                                 <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
-                                #{{aposta.id}}
+                                {{aposta.codigo | splitCodigo}}
                             </td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>{{aposta.apostador}}</td>
