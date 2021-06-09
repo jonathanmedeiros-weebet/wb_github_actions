@@ -17,19 +17,19 @@
                 </button>
             </div>
             <div>
-                <label>Número:</label>
-                <em>#{{aposta.id}}</em>
+                <label>Número: </label>
+                <em>{{aposta.codigo | splitCodigo}}</em>
             </div>
             <div>
                 <label>Apostador:</label>
                 <em>{{aposta.apostador}}</em>
             </div>
             <div>
-                <label>Horário:</label>
+                <label>Horário: </label>
                 <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
             </div>
             <div>
-                <label>Modalidade:</label>
+                <label>Modalidade: </label>
                 <em>{{aposta.modalidade | sorteioTipo}}</em>
             </div>
         </div>
