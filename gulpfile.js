@@ -1505,3 +1505,19 @@ gulp.task('lucrei.wee.bet', function (done) {
         styles: "--header: #263d27; --foreground-header: #feffb9; --sidebar-right:#192b1a; --foreground-sidebar-right: #fff; --sidebar-left: #192b1a; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #263d27; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
+
+gulp.task('cearabetsplacardarodada.wee.bet', function (done) {
+    tasks(done, {
+        host: "cearabetsplacardarodada.wee.bet",
+        banca: "CEARÁ BETS",
+        styles: "",
+    });
+});
+
+gulp.task('betcoinsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "betcoinsports.wee.bet",
+        banca: "BET COIN SPORTS",
+        styles: "",
+    });
+});

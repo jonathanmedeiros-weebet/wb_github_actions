@@ -179,7 +179,9 @@
         "maranhaobets.club": "gulp maranhaobets.club",
         "bet99.site": "gulp bet99.site",
         "garanhunsbet.site": "gulp garanhunsbet.site",
-        "lucrei.wee.bet": "gulp lucrei.wee.bet"
+        "lucrei.wee.bet": "gulp lucrei.wee.bet",
+        "betcoinsports.wee.bet": "gulp betcoinsports.wee.bet",
+        "cearabetsplacardarodada.wee.bet": "gulp cearabetsplacardarodada.wee.bet"
     },
     "private": true,
     "dependencies": {
