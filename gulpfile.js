@@ -1454,7 +1454,7 @@ gulp.task('acsportsbets.site', function (done) {
     tasks(done, {
         host: "acsportsbets.site",
         banca: "AC SPORTS BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#1C1C1C; --foreground-sidebar-right: #fff; --sidebar-left: #1C1C1C; --foreground-sidebar-left: #fff; --highlight: #0000ff; --foreground-highlight: #fff; --odds: #191970; --foreground-odds: #fff;--foreground-selected-odds: #fff;",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #0000ff; --foreground-highlight: #fff; --odds: #191970; --foreground-odds: #fff;--foreground-selected-odds: #fff;",
     });
 });
 
@@ -1495,5 +1495,13 @@ gulp.task('garanhunsbet.site', function (done) {
         host: "garanhunsbet.site",
         banca: "GARANHUNS BET",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #00008B;",
+    });
+});
+
+gulp.task('lucrei.wee.bet', function (done) {
+    tasks(done, {
+        host: "lucrei.wee.bet",
+        banca: "LUCREI",
+        styles: "--header: #263d27; --foreground-header: #feffb9; --sidebar-right:#192b1a; --foreground-sidebar-right: #fff; --sidebar-left: #192b1a; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #263d27; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });

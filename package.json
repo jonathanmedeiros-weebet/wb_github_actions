@@ -178,7 +178,8 @@
         "7bet.wee.bet": "gulp 7bet.wee.bet",
         "maranhaobets.club": "gulp maranhaobets.club",
         "bet99.site": "gulp bet99.site",
-        "garanhunsbet.site": "gulp garanhunsbet.site"
+        "garanhunsbet.site": "gulp garanhunsbet.site",
+        "lucrei.wee.bet": "gulp lucrei.wee.bet"
     },
     "private": true,
     "dependencies": {
