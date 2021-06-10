@@ -78,7 +78,7 @@ export class ValidarApostaLoteriasComponent extends BaseFormComponent implements
         this.disabledSubmit();
 
         const values = this.form.value;
-        values.preaposta_id = this.preAposta.id;
+        values.preaposta_codigo = this.preAposta.codigo;
 
         values.telefone = this.preAposta.telefone;
         values.versao_app = 'angular';

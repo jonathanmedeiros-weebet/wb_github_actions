@@ -55,7 +55,7 @@ export class ValidarApostaAcumuladaoComponent extends BaseFormComponent implemen
 
         const values = {
             apostador: this.form.value.apostador,
-            preaposta_id: this.preAposta.id,
+            preaposta_codigo: this.preAposta.codigo,
             acumuladao_id: this.acumuladao.id,
             jogos: []
         };
