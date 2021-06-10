@@ -343,7 +343,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             this.preApostaService.create(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
-                    result => this.preApostaSuccess(result.id),
+                    result => this.preApostaSuccess(result.codigo),
                     error => this.handleError(error)
                 );
         } else {
