@@ -5,12 +5,16 @@
     <div class="content-body">
         <div class="content">
             <div class="">
-                <form (ngSubmit)="consultarAposta()" #consultaForm="ngForm" class="consulta-form form-inline">
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="codigo" name="codigo" autocomplete="off" class="form-control"
-                            placeholder="Código" required>
+                        <input type="text" style="text-transform:uppercase;" placeholder="Código da aposta"
+                               class="form-control"
+                               formControlName="codigo"
+                               autocomplete="off" mask="AAAA-AAAA" [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                     </div>
-                    <button type="submit" [disabled]="!consultaForm.valid" class="btn btn-custom">Consultar</button>
+                    <button type="submit" class="btn btn-custom">Consultar</button>
+                    <app-error-msg style="margin-left: 5px;" [control]="form.get('codigo')"></app-error-msg>
                 </form>
             </div>
 
