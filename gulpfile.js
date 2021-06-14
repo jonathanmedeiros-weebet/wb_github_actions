@@ -1521,3 +1521,11 @@ gulp.task('betcoinsports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('carecasbet.site', function (done) {
+    tasks(done, {
+        host: "carecasbet.site",
+        banca: "CARECAS BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--highlight: #ff3f00; --foreground-highlight: #fff; --odds: #00008B;",
+    });
+});
