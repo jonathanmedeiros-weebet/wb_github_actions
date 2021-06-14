@@ -1355,7 +1355,7 @@ gulp.task('dssportsbets.site', function (done) {
 gulp.task('bet316top.wee.bet', function (done) {
     tasks(done, {
         host: "bet316top.wee.bet",
-        banca: "BET 316 TOP",
+        banca: "BETS 316 TOP",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#e50d1b; --foreground-sidebar-right: #fff; --sidebar-left: #e50d1b; --foreground-sidebar-left: #fff; --odds: #d5d7d6;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:#444444;--foreground-highlight:#fff;--league: #868686; --foreground-league: #fff;",
         aditional_styles: ".indentificacao .mais-opcoes{color: #e50d1b;} .jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;} .jogos, .eventos{ color: #e50d1b!important; }",
     });
@@ -1519,5 +1519,13 @@ gulp.task('betcoinsports.wee.bet', function (done) {
         host: "betcoinsports.wee.bet",
         banca: "BET COIN SPORTS",
         styles: "",
+    });
+});
+
+gulp.task('carecasbet.site', function (done) {
+    tasks(done, {
+        host: "carecasbet.site",
+        banca: "CARECAS BET",
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--highlight: #ff3f00; --foreground-highlight: #fff; --odds: #00008B;",
     });
 });
