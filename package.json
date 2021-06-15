@@ -182,7 +182,8 @@
         "lucrei.wee.bet": "gulp lucrei.wee.bet",
         "betcoinsports.wee.bet": "gulp betcoinsports.wee.bet",
         "cearabetsplacardarodada.wee.bet": "gulp cearabetsplacardarodada.wee.bet",
-        "carecasbet.site": "gulp carecasbet.site"
+        "carecasbet.site": "gulp carecasbet.site",
+        "apostatop.wee.bet": "gulp apostatop.wee.bet"
     },
     "private": true,
     "dependencies": {

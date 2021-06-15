@@ -1087,7 +1087,7 @@ gulp.task('sportbig.wee.bet', function (done) {
     tasks(done, {
         host: "sportbig.wee.bet",
         banca: "SPORT BIG",
-        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
+        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314; --league: #90EE90; --foreground-league: #000"
     });
 });
 
@@ -1527,5 +1527,13 @@ gulp.task('carecasbet.site', function (done) {
         host: "carecasbet.site",
         banca: "CARECAS BET",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--highlight: #ff3f00; --foreground-highlight: #fff; --odds: #00008B;",
+    });
+});
+
+gulp.task('apostatop.wee.bet', function (done) {
+    tasks(done, {
+        host: "apostatop.wee.bet",
+        banca: "APOSTA TOP",
+        styles: "",
     });
 });
