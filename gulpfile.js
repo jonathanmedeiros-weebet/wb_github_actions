@@ -346,14 +346,6 @@ gulp.task('foxbet.me', function (done) {
     });
 });
 
-gulp.task('paraibabets.com', function (done) {
-    tasks(done, {
-        host: "paraibabets.com",
-        banca: "Paraíba Bets",
-        styles: "--header: #3f3f3f; --foreground-header: #fff; --sidebar-right:#3f3f3f; --foreground-sidebar-right: #fff; --sidebar-left: #3f3f3f; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #0d87d2; --foreground-odds: #fff;"
-    });
-});
-
 gulp.task('akiapostas.wee.bet', function (done) {
     tasks(done, {
         host: "akiapostas.wee.bet",
@@ -805,14 +797,6 @@ gulp.task('betsportsbr.net', function (done) {
     });
 });
 
-gulp.task('sulbet.wee.bet', function (done) {
-    tasks(done, {
-        host: "sulbet.wee.bet",
-        banca: "SULBET",
-        styles: "",
-    });
-});
-
 gulp.task('alsports.wee.bet', function (done) {
     tasks(done, {
         host: "alsports.wee.bet",
@@ -886,16 +870,6 @@ gulp.task('brasilbets.online', function (done) {
     });
 });
 
-gulp.task('betplus.me', function (done) {
-    tasks(done, {
-        host: "betplus.me",
-        banca: "BET PLUS",
-        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
-        aditional_styles: ".sem-evento{color: #fff;}  #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #14805e; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
-    });
-});
-
 gulp.task('moneybet.wee.bet', function (done) {
     tasks(done, {
         host: "moneybet.wee.bet",
@@ -925,15 +899,6 @@ gulp.task('showdebola.wee.bet', function (done) {
         host: "showdebola.wee.bet",
         banca: "SHOW DE BOLA",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #008000;",
-    });
-});
-
-gulp.task('bet170.wee.bet', function (done) {
-    tasks(done, {
-        host: "bet170.wee.bet",
-        banca: "BET 170",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #9a9a9a;--highlight: #ff5500; --foreground-highlight: #fff;--league: #ff5500;--foreground-league: #fff;",
-        // styles: "",
     });
 });
 
@@ -1017,24 +982,6 @@ gulp.task('bets085.wee.bet', function (done) {
     });
 });
 
-gulp.task('eurodasorte.wee.bet', function (done) {
-    tasks(done, {
-        host: "eurodasorte.wee.bet",
-        banca: "EURO DA SORTE",
-        styles: "--header: #30306e; --foreground-header: #fff; --sidebar-right:#30306e; --foreground-sidebar-right: #fff; --sidebar-left: #30306e; --foreground-sidebar-left: #fff; --highlight: #be2429; --foreground-highlight: #fff; --odds: #ebd235; --foreground-odds: #000;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
-gulp.task('mabets.wee.bet', function (done) {
-    tasks(done, {
-        host: "mabets.wee.bet",
-        banca: "MA BETS",
-        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #cb151c; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
-        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
-    });
-});
-
 gulp.task('minasbet.wee.bet', function (done) {
     tasks(done, {
         host: "minasbet.wee.bet",
@@ -1088,14 +1035,6 @@ gulp.task('sportbig.wee.bet', function (done) {
         host: "sportbig.wee.bet",
         banca: "SPORT BIG",
         styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314; --league: #90EE90; --foreground-league: #000"
-    });
-});
-
-gulp.task('betteive.com', function (done) {
-    tasks(done, {
-        host: "betteive.com",
-        banca: "BETTEIVE",
-        styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000;--highlight:#ffd700;--odds:#50237e;",
     });
 });
 
@@ -1267,14 +1206,6 @@ gulp.task('sportingbet.wee.bet', function (done) {
         host: "sportingbet.wee.bet",
         banca: "SPORTING BET",
         styles: "--header: #000; --foreground-header: #f9f0f9; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #debc06;--highlight: #ff0000;--foreground-highlight:#debc06;--league:#1e961e;--foreground-league:#f9fefe;--selected-event:#000;--foreground-selected-event:#fff;--event-time:#000;--foreground-event-time:#fff;",
-    });
-});
-
-gulp.task('sertaobets.pro', function (done) {
-    tasks(done, {
-        host: "sertaobets.pro",
-        banca: "SERTÃO BETS",
-        styles: "--header: #f8c301; --foreground-header: #000; --sidebar-right:#f8c301; --foreground-sidebar-right: #000; --sidebar-left: #f8c301; --foreground-sidebar-left: #000; --odds: #3a384e;--foreground-highlight:#000;--highlight:#ef800f;",
     });
 });
 
