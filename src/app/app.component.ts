@@ -9,14 +9,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AppComponent implements OnInit {
     @ViewChild('demoModal', { static: true }) demoModal;
-    myVar: string;
 
     constructor(
         private auth: AuthService,
         private parametroService: ParametroService,
         public modalService: NgbModal,
     ) {
-        this.myVar = 'black';
     }
 
     ngOnInit() {
