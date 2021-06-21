@@ -1,8 +1,8 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {AuthService, HelperService, MessageService} from './../../../../services';
-import {config} from '../../../config';
+import { AuthService, HelperService, MessageService } from './../../../../services';
+import { config } from '../../../config';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -13,6 +13,7 @@ newNavigator = window.navigator;
 })
 export class PreApostaModalComponent implements OnInit {
     @Input() codigo;
+    permitirCompartilhamento = false;
     appMobile;
 
     constructor(
@@ -24,6 +25,12 @@ export class PreApostaModalComponent implements OnInit {
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+
+        if (this.appMobile) {
+            this.permitirCompartilhamento = true;
+        } else if (location.protocol == 'https:') {
+            this.permitirCompartilhamento = true;
+        }
     }
 
     compartilhar() {
