@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico?1619647055682">
 </head>
 <script>
-    fetch("param/cores.json")
+    fetch("https://weebet.s3.amazonaws.com/[S3_FOLDER]/param/cores.json")
         .then(res => res.json())
         .then(data => {
             document.body.style.setProperty('--header', data.header);

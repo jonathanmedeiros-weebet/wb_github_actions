@@ -14,6 +14,7 @@ function tasks(done, config) {
 
     gulp.src(['index.html'])
         .pipe(replace('[HOST]', 'central.' + config.host))
+        .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
         .pipe(replace('[SCRIPTS]', typeof config.scripts == "undefined" ? "" : config.scripts))
         .pipe(replace('[CUSTOM]', config.styles))
