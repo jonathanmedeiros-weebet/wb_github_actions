@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Atenção</h4>
     <div class="action-buttons">
-        <button *ngIf="appMobile" type="button" class="" (click)="compartilhar()">
+        <button type="button" class="" (click)="compartilhar()">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -9,7 +9,7 @@
         </button>
     </div>
 </div>
-<div class="modal-body">
+<div class="modal-body" #preAposta>
     <div class="preApostaMsg">
         Para validar sua aposta, procure um cambista de sua
         preferência e informe o código: <span class="codigo">{{codigo}}</span>
