@@ -40,7 +40,7 @@ export class PreApostaModalComponent implements OnInit {
             if (newNavigator.share) {
                 newNavigator.share({
                     title: config.BANCA_NOME,
-                    text: `${config.BANCA_NOME} PRÉ APOSTA: ${this.codigo.id}`
+                    text: `${config.BANCA_NOME} PRÉ APOSTA: ${this.codigo}`
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
