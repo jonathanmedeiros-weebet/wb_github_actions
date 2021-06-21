@@ -12,7 +12,6 @@ newNavigator = window.navigator;
     styleUrls: ['./pre-aposta-modal.component.css']
 })
 export class PreApostaModalComponent implements OnInit {
-    @ViewChild('preAposta', {static: false}) preAposta: ElementRef;
     @Input() codigo;
     appMobile;
 
