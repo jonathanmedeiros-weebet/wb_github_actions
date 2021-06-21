@@ -1468,3 +1468,11 @@ gulp.task('apostatop.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('parabets2ufcord.wee.bet', function (done) {
+    tasks(done, {
+        host: "parabets2ufcord.wee.bet",
+        banca: "PARÁ BETS",
+        styles: "",
+    });
+});

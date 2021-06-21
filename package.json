@@ -175,7 +175,8 @@
         "betcoinsports.wee.bet": "gulp betcoinsports.wee.bet",
         "cearabetsplacardarodada.wee.bet": "gulp cearabetsplacardarodada.wee.bet",
         "carecasbet.site": "gulp carecasbet.site",
-        "apostatop.wee.bet": "gulp apostatop.wee.bet"
+        "apostatop.wee.bet": "gulp apostatop.wee.bet",
+        "parabets2ufcord.wee.bet": "gulp parabets2ufcord.wee.bet"
     },
     "private": true,
     "dependencies": {
