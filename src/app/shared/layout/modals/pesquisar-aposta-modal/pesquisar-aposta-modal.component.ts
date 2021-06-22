@@ -45,8 +45,7 @@ export class PesquisarApostaModalComponent extends BaseFormComponent implements 
     createForm() {
         this.form = this.fb.group({
             codigo: ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(8)
+                Validators.required
             ])]
         });
     }
