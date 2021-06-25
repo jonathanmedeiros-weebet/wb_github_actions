@@ -1485,3 +1485,27 @@ gulp.task('tubaraobet.wee.bet', function (done) {
         styles: "--header: #111111; --foreground-header: #fff; --sidebar-right:#000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff;--highlight: #f5d328; --foreground-highlight: #fff; --odds: #191970;",
     });
 });
+
+gulp.task('maissports.wee.bet', function (done) {
+    tasks(done, {
+        host: "maissports.wee.bet",
+        banca: "MAIS SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('allbet.pro', function (done) {
+    tasks(done, {
+        host: "allbet.pro",
+        banca: "ALL BET",
+        styles: "",
+    });
+});
+
+gulp.task('esportesbet.site', function (done) {
+    tasks(done, {
+        host: "esportesbet.site",
+        banca: "ESPORTES BET",
+        styles: "",
+    });
+});

@@ -177,7 +177,10 @@
         "carecasbet.site": "gulp carecasbet.site",
         "apostatop.wee.bet": "gulp apostatop.wee.bet",
         "parabets2ufcord.wee.bet": "gulp parabets2ufcord.wee.bet",
-        "tubaraobet.wee.bet": "gulp tubaraobet.wee.bet"
+        "tubaraobet.wee.bet": "gulp tubaraobet.wee.bet",
+        "maissports.wee.bet": "gulp maissports.wee.bet",
+        "allbet.pro": "gulp allbet.pro",
+        "esportesbet.site": "gulp esportesbet.site"
     },
     "private": true,
     "dependencies": {
