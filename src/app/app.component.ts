@@ -14,7 +14,8 @@ export class AppComponent implements OnInit {
         private auth: AuthService,
         private parametroService: ParametroService,
         public modalService: NgbModal,
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         if (location.search.indexOf('app') >= 0) {
