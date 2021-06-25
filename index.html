@@ -8,58 +8,37 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./favicon.ico?[TIMESTAMP]">
+
+    <style>
+        :root {
+            --header: #002458;
+            --foreground-header: #b1c5e0;
+
+            --sidebar-right:#011e46;
+            --foreground-sidebar-right: #fff;
+
+            --sidebar-left: #011e46;
+            --foreground-sidebar-left: #fff;
+
+            --highlight: yellow;
+            --foreground-highlight: #aec3d8;
+
+            --odds: #046eef;
+            --foreground-odds: #fff;
+            --foreground-selected-odds: #000;
+
+            --league: #e1e2e4;
+            --foreground-league: #455a64;
+
+            --selected-event: #002458;
+            --foreground-selected-event: #fff;
+
+            --event-time: #011e46;
+            --fg-event-time: #fff;
+        }
+    </style>
+    <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/[S3_FOLDER]/param/cores.css">
 </head>
-<style>
-    :root {
-        --header: #002458;
-        --foreground-header: #b1c5e0;
-
-        --sidebar-right:#011e46;
-        --foreground-sidebar-right: #fff;
-
-        --sidebar-left: #011e46;
-        --foreground-sidebar-left: #fff;
-
-        --highlight: yellow;
-        --foreground-highlight: #aec3d8;
-
-        --odds: #046eef;
-        --foreground-odds: #fff;
-        --foreground-selected-odds: #000;
-
-        --league: #e1e2e4;
-        --foreground-league: #455a64;
-
-        --selected-event: #002458;
-        --foreground-selected-event: #fff;
-
-        --event-time: #011e46;
-        --fg-event-time: #fff;
-    }
-</style>
-<script>
-    fetch("https://weebet.s3.amazonaws.com/[S3_FOLDER]/param/cores.json")
-        .then(res => res.json())
-        .then(data => {
-            document.body.style.setProperty('--header', data.header);
-            document.body.style.setProperty('--foreground-header', data.foreground_header);
-            document.body.style.setProperty('--sidebar-right', data.sidebar_right);
-            document.body.style.setProperty('--foreground-sidebar-right', data.foreground_sidebar_right);
-            document.body.style.setProperty('--sidebar-left', data.sidebar_left);
-            document.body.style.setProperty('--foreground-sidebar-left', data.foreground_sidebar_left);
-            document.body.style.setProperty('--highlight', data.highlight);
-            document.body.style.setProperty('--foreground-highlight', data.foreground_highlight);
-            document.body.style.setProperty('--odds', data.odds);
-            document.body.style.setProperty('--foreground-odds', data.foreground_odds);
-            document.body.style.setProperty('--foreground-selected-odds', data.foreground_selected_odds);
-            document.body.style.setProperty('--league', data.league);
-            document.body.style.setProperty('--foreground-league', data.foreground_league);
-            document.body.style.setProperty('--selected-event', data.selected_event);
-            document.body.style.setProperty('--foreground-selected-event', data.foreground_selected_event);
-            document.body.style.setProperty('--event-time', data.event_time);
-            document.body.style.setProperty('--fg-event-time', data.foreground_event_time);
-        })
-</script>
 
 <body style="background-color:var(--header);">
 <app-root>
