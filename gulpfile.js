@@ -1476,3 +1476,11 @@ gulp.task('parabets2ufcord.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('tubaraobet.wee.bet', function (done) {
+    tasks(done, {
+        host: "tubaraobet.wee.bet",
+        banca: "TUBARÃO BET",
+        styles: "--header: #111111; --foreground-header: #fff; --sidebar-right:#000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff;--highlight: #f5d328; --foreground-highlight: #fff; --odds: #191970;",
+    });
+});
