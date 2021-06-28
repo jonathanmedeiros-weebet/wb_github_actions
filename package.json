@@ -179,7 +179,9 @@
         "tubaraobet.wee.bet": "gulp tubaraobet.wee.bet",
         "maissports.wee.bet": "gulp maissports.wee.bet",
         "allbet.pro": "gulp allbet.pro",
-        "esportesbet.site": "gulp esportesbet.site"
+        "esportesbet.site": "gulp esportesbet.site",
+        "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
+        "primesoccer.app": "gulp primesoccer.app"
     },
     "private": true,
     "dependencies": {

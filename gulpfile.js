@@ -1501,3 +1501,19 @@ gulp.task('esportesbet.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gooldeplaca.com.br', function (done) {
+    tasks(done, {
+        host: "gooldeplaca.com.br",
+        banca: "GOOL DE PLACA",
+        styles: "",
+    });
+});
+
+gulp.task('primesoccer.app', function (done) {
+    tasks(done, {
+        host: "primesoccer.app",
+        banca: "PRIME SOCCER",
+        styles: "",
+    });
+});
