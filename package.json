@@ -182,7 +182,8 @@
         "allbet.pro": "gulp allbet.pro",
         "esportesbet.site": "gulp esportesbet.site",
         "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
-        "primesoccer.app": "gulp primesoccer.app"
+        "primesoccer.app": "gulp primesoccer.app",
+        "sportbetclub7.wee.bet": "gulp sportbetclub7.wee.bet"
     },
     "private": true,
     "dependencies": {

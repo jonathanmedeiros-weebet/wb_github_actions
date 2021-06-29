@@ -1517,3 +1517,11 @@ gulp.task('primesoccer.app', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportbetclub7.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportbetclub7.wee.bet",
+        banca: "SPORT BET CLUB7",
+        styles: "",
+    });
+});
