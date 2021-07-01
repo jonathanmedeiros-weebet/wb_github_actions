@@ -1525,3 +1525,11 @@ gulp.task('sportbetclub7.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsandalo.site', function (done) {
+    tasks(done, {
+        host: "betsandalo.site",
+        banca: "BET SANDALO",
+        styles: "",
+    });
+});

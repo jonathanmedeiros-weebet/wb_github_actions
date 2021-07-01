@@ -183,7 +183,8 @@
         "esportesbet.site": "gulp esportesbet.site",
         "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
         "primesoccer.app": "gulp primesoccer.app",
-        "sportbetclub7.wee.bet": "gulp sportbetclub7.wee.bet"
+        "sportbetclub7.wee.bet": "gulp sportbetclub7.wee.bet",
+        "betsandalo.site": "gulp betsandalo.site"
     },
     "private": true,
     "dependencies": {
