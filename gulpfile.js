@@ -1533,3 +1533,19 @@ gulp.task('betsandalo.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('canedobet.site', function (done) {
+    tasks(done, {
+        host: "canedobet.site",
+        banca: "CANEDO BET",
+        styles: "",
+    });
+});
+
+gulp.task('betsfe.bet', function (done) {
+    tasks(done, {
+        host: "betsfe.bet",
+        banca: "BETS FÉ",
+        styles: "",
+    });
+});
