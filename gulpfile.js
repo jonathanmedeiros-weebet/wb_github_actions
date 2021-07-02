@@ -1549,3 +1549,19 @@ gulp.task('betsfe.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('superbetpremium.wee.bet', function (done) {
+    tasks(done, {
+        host: "superbetpremium.wee.bet",
+        banca: "SUPER BET PREMIUM",
+        styles: "",
+    });
+});
+
+gulp.task('betshow.wee.bet', function (done) {
+    tasks(done, {
+        host: "betshow.wee.bet",
+        banca: "BET SHOW",
+        styles: "",
+    });
+});

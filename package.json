@@ -186,7 +186,9 @@
         "sportbetclub7.wee.bet": "gulp sportbetclub7.wee.bet",
         "betsandalo.site": "gulp betsandalo.site",
         "canedobet.site": "gulp canedobet.site",
-        "betsfe.bet": "gulp betsfe.bet"
+        "betsfe.bet": "gulp betsfe.bet",
+        "superbetpremium.wee.bet": "gulp superbetpremium.wee.bet",
+        "betshow.wee.bet": "gulp betshow.wee.bet"
 
     },
     "private": true,
