@@ -1565,3 +1565,43 @@ gulp.task('betshow.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "futbets.wee.bet",
+        banca: "FUT BETS",
+        styles: "",
+    });
+});
+
+gulp.task('pontalbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "pontalbet.wee.bet",
+        banca: "PONTAL BET",
+        styles: "",
+    });
+});
+
+gulp.task('primesports.wee.bet', function (done) {
+    tasks(done, {
+        host: "primesports.wee.bet",
+        banca: "PRIME SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('primosbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "primosbet.wee.bet",
+        banca: "PRIMO BET",
+        styles: "",
+    });
+});
+
+gulp.task('betvipmais.wee.bet', function (done) {
+    tasks(done, {
+        host: "betvipmais.wee.bet",
+        banca: "BET VIP MAIS",
+        styles: "",
+    });
+});
