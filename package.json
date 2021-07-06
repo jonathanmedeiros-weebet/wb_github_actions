@@ -193,7 +193,10 @@
         "pontalbet.wee.bet": "gulp pontalbet.wee.bet",
         "primesports.wee.bet": "gulp primesports.wee.bet",
         "primosbet.wee.bet": "gulp primosbet.wee.bet",
-        "betvipmais.wee.bet": "gulp betvipmais.wee.bet"
+        "betvipmais.wee.bet": "gulp betvipmais.wee.bet",
+        "primussports.net": "gulp primussports.net",
+        "sports10.net": "gulp sports10.net",
+        "jogabet.wee.bet": "gulp jogabet.wee.bet"
 
     },
     "private": true,

@@ -1605,3 +1605,27 @@ gulp.task('betvipmais.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('primussports.net', function (done) {
+    tasks(done, {
+        host: "primussports.net",
+        banca: "PRIMUS SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('sports10.net', function (done) {
+    tasks(done, {
+        host: "sports10.net",
+        banca: "SPORTS 10",
+        styles: "",
+    });
+});
+
+gulp.task('jogabet.wee.bet', function (done) {
+    tasks(done, {
+        host: "jogabet.wee.bet",
+        banca: "JOGA BET",
+        styles: "",
+    });
+});
