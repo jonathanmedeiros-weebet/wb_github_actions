@@ -1629,3 +1629,11 @@ gulp.task('jogabet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('maisporte.wee.bet', function (done) {
+    tasks(done, {
+        host: "maisporte.wee.bet",
+        banca: "MAISPORTE",
+        styles: "",
+    });
+});

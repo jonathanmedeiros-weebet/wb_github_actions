@@ -196,7 +196,8 @@
         "betvipmais.wee.bet": "gulp betvipmais.wee.bet",
         "primussports.net": "gulp primussports.net",
         "sports10.net": "gulp sports10.net",
-        "jogabet.wee.bet": "gulp jogabet.wee.bet"
+        "jogabet.wee.bet": "gulp jogabet.wee.bet",
+        "maisporte.wee.bet": "gulp maisporte.wee.bet"
 
     },
     "private": true,
