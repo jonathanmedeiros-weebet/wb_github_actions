@@ -72,6 +72,7 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
         });
 
         this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
     }
 
     goToTop(selector) {
