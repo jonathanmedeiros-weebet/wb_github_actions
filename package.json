@@ -149,7 +149,6 @@
         "imperiobonitobet.site": "gulp imperiobonitobet.site",
         "showbet.wee.bet": "gulp showbet.wee.bet",
         "bet316top.wee.bet": "gulp bet316top.wee.bet",
-
         "brazilsportsrodon.wee.bet": "gulp brazilsportsrodon.wee.bet",
         "eisports.club": "gulp eisports.club",
         "clubedabola.wee.bet": "gulp clubedabola.wee.bet",
@@ -193,7 +192,10 @@
         "primussports.net": "gulp primussports.net",
         "sports10.net": "gulp sports10.net",
         "jogabet.wee.bet": "gulp jogabet.wee.bet",
-        "maisporte.wee.bet": "gulp maisporte.wee.bet"
+        "maisporte.wee.bet": "gulp maisporte.wee.bet",
+        "sportbrasilbet.wee.bet": "gulp sportbrasilbet.wee.bet",
+        "detonabet.wee.bet": "gulp detonabet.wee.bet",
+        "onllinesports.com": "gulp onllinesports.com"
 
     },
     "private": true,

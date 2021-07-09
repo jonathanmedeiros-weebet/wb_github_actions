@@ -1596,3 +1596,27 @@ gulp.task('maisporte.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportbrasilbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportbrasilbet.wee.bet",
+        banca: "SPORT BRASIL BET",
+        styles: "",
+    });
+});
+
+gulp.task('detonabet.wee.bet', function (done) {
+    tasks(done, {
+        host: "detonabet.wee.bet",
+        banca: "DETONA BET",
+        styles: "",
+    });
+});
+
+gulp.task('onllinesports.com', function (done) {
+    tasks(done, {
+        host: "onllinesports.com",
+        banca: "ONLLINE SPORTS",
+        styles: "",
+    });
+});
