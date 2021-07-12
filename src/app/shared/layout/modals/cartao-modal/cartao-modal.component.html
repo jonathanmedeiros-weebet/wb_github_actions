@@ -47,7 +47,7 @@
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
-                    <th>#</th>
+                    <th>Código</th>
                     <th>Mod.</th>
                     <th>Horário</th>
                     <th>Valor</th>
@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let aposta of cartao.apostas" (click)="abrirBilhete(aposta.id)">
-                        <td>{{aposta.codigo}}</td>
+                        <td class="codigo">{{aposta.codigo}}</td>
                         <td>{{aposta.tipo}}</td>
                         <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                         <td>{{aposta.valor| currency}}</td>
