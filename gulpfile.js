@@ -1530,3 +1530,11 @@ gulp.task('onllinesports.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportourodomexico.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportourodomexico.wee.bet",
+        banca: "SPORT OURO DO MÉXICO",
+        styles: "",
+    });
+});
