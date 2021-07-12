@@ -579,7 +579,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
                     alt="${config.BANCA_NOME}" src="${config.LOGO}" />
                 </div>
                 <h1 class="numero">
-                    #${aposta.id}
+                    ${aposta.codigo}
                 </h1>
                 <hr>
                 <hr>

@@ -8,10 +8,10 @@
 
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                     <div class="form-group">
-                        <input type="text" style="text-transform:uppercase;" placeholder="Código da aposta"
+                        <input type="text" style="text-transform:uppercase;" placeholder="Código da pré-aposta"
                                class="form-control"
                                formControlName="codigo"
-                               autocomplete="off" mask="AAAA-AAAA" [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
+                               autocomplete="off" [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                     </div>
                     <button type="submit" class="btn btn-custom">Consultar</button>
                     <app-error-msg style="margin-left: 5px;" [control]="form.get('codigo')"></app-error-msg>
@@ -22,7 +22,7 @@
 
             <div *ngIf="exibirPreAposta">
                 <div id="pre-aposta">
-                    <h1>{{preAposta.codigo | splitCodigo}}</h1>
+                    <h1>{{preAposta.codigo}}</h1>
                     <ng-container [ngSwitch]="preAposta.tipo">
                         <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
                                                      (success)="success($event)">
