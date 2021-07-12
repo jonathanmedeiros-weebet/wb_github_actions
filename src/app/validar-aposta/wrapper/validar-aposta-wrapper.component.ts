@@ -79,6 +79,7 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
         });
 
         this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
     }
 
     goToTop(selector) {

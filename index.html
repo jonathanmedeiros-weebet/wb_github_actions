@@ -2,59 +2,76 @@
 <html lang="pt-BR">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W6CF4C5');
+    </script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="utf-8">
     <title>[BANCA]</title>
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./favicon.ico?[TIMESTAMP]">
+
     <style>
         :root {
             --header: #002458;
             --foreground-header: #b1c5e0;
 
-            --sidebar-right:#011e46;
-            --foreground-sidebar-right: #fff;
+            --sidebar-right: #011e46;
+            --foreground-sidebar-right: #ffffff;
 
             --sidebar-left: #011e46;
-            --foreground-sidebar-left: #fff;
+            --foreground-sidebar-left: #ffffff;
 
-            --highlight: yellow;
+            --highlight: #FFFF00;
             --foreground-highlight: #aec3d8;
 
             --odds: #046eef;
-            --foreground-odds: #fff;
-            --foreground-selected-odds: #000;
+            --foreground-odds: #ffffff;
+            --foreground-selected-odds: #000000;
 
             --league: #e1e2e4;
             --foreground-league: #455a64;
 
-            --selected-event: #002458;
-            --foreground-selected-event: #fff;
-
             --event-time: #011e46;
-            --fg-event-time: #fff;
-
-            [CUSTOM]
+            --fg-event-time: #ffffff;
         }
     </style>
+    <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/[S3_FOLDER]/param/cores.css">
 </head>
 
 <body style="background-color:var(--header);">
-<app-root>
-    <div style="position: fixed;left: 50%;top: 50%;margin-left: -50px;margin-top: -50px;color: #fff;">
-        <img style="width: 100px;" src="assets/images/logo_banca.png?[TIMESTAMP]" alt="">
-        <br>
-        <div class="loading-app" style="text-align: center;">
-            Carregando...
-        </div>
-    </div>
-</app-root>
-[SCRIPTS]
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6CF4C5" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+        </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-<style>
-    [ADITIONAL_STYLE]
-</style>
+    <app-root>
+        <div style="position: fixed;left: 50%;top: 50%;margin-left: -50px;margin-top: -50px;color: #fff;">
+            <img style="width: 100px;" src="assets/images/logo_banca.png?[TIMESTAMP]" alt="">
+            <br>
+            <div class="loading-app" style="text-align: center;">
+                Carregando...
+            </div>
+        </div>
+    </app-root>
+    [SCRIPTS]
+
+    <style>
+        [ADITIONAL_STYLE]
+    </style>
 
 </body>
 

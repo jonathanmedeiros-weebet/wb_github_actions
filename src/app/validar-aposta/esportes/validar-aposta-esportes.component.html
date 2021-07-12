@@ -37,6 +37,9 @@
                             </del>
                         </ng-template>
                     </div>
+                    <div class="item-mensagem" *ngIf="item.mensagem">
+                        {{item.mensagem}}
+                    </div>
                 </div>
                 <div class="remover-item" (click)="removerItem(i)">
                     <i class="fa fa-times"></i>
@@ -80,10 +83,11 @@
         <b>Atenção <i class="fa fa-warning"></i></b>
         <br>
         <br>
-        <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a pré-aposta.
+        <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a
+        pré-aposta.
     </div>
 
-    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom">
+    <button [disabled]="disabled" *ngIf="!process; else btnProcessando" class="btn btn-custom">
         Validar
     </button>
     <ng-template #btnProcessando>

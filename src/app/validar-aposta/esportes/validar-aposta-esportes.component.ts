@@ -31,6 +31,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     cotacoesVinheramDifentes = false;
     cotacoesMudaram = false;
     disabled = false;
+    process = false;
     estimativaGanho;
     opcoes;
     unsub$ = new Subject();
@@ -52,11 +53,17 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         this.preApostaItens = this.preAposta.itens;
 
         this.preApostaItens.forEach(item => {
+            if (item.mensagem) {
+                this.disabled = true;
+            }
+
             if (item.cotacao_antiga != item.cotacao_atual) {
                 this.cotacoesVinheramDifentes = true;
             }
         });
+
         this.form.patchValue(this.preAposta);
+
         this.form.get('valor').valueChanges
             .pipe(takeUntil(this.unsub$))
             .subscribe(valor => {
@@ -66,6 +73,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                     this.calcularEstimativaGanho(0);
                 }
             });
+
         this.calcularEstimativaGanho();
     }
 
@@ -83,17 +91,26 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     }
 
     removerItem(i) {
+        let disabled = false;
         this.preAposta.itens.splice(i, 1);
 
         this.preAposta.cotacao = this.preAposta.itens
-            .map(item => item.cotacao_atual)
+            .map(item => {
+                if (item.mensagem) {
+                    disabled = true;
+                }
+
+                return item.cotacao_atual;
+            })
             .reduce((acumulador, valorAtual) => acumulador * valorAtual);
+
+        this.disabled = disabled;
 
         this.calcularEstimativaGanho();
     }
 
     submit() {
-        this.disabledSubmit();
+        this.triggerProcess();
         this.cotacoesVinheramDifentes = false;
         this.cotacoesMudaram = false;
 
@@ -121,7 +138,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     result => {
-                        this.enableSubmit();
+                        this.deactivateProcess();
                         this.success.emit(result);
                     },
                     error => this.handleError(error)
@@ -132,7 +149,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     }
 
     handleError(error) {
-        this.enableSubmit();
+        this.deactivateProcess();
 
         if (typeof error === 'string') {
             this.messageService.error(error);
@@ -155,12 +172,12 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         }
     }
 
-    disabledSubmit() {
-        this.disabled = true;
+    deactivateProcess() {
+        this.process = false;
     }
 
-    enableSubmit() {
-        this.disabled = false;
+    triggerProcess() {
+        this.process = true;
     }
 
     calcularEstimativaGanho(valor?) {
