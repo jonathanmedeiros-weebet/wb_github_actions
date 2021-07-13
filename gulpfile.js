@@ -293,7 +293,7 @@ gulp.task('apostapremiada.bet', function (done) {
 gulp.task('bet1.wee.bet', function (done) {
     tasks(done, {
         host: "bet1.wee.bet",
-        banca: "SPORT BOM BET",
+        banca: "WEEBET",
         styles: ""
     });
 });
