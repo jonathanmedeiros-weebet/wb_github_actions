@@ -1538,3 +1538,27 @@ gulp.task('sportourodomexico.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('paracorreabets.wee.bet', function (done) {
+    tasks(done, {
+        host: "paracorreabets.wee.bet",
+        banca: "PARÁ CORRÊA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('supersports.wee.bet', function (done) {
+    tasks(done, {
+        host: "supersports.wee.bet",
+        banca: "SUPER SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('rrbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "rrbets.wee.bet",
+        banca: "RR BETS",
+        styles: "",
+    });
+});

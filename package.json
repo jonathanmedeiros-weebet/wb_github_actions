@@ -185,7 +185,10 @@
         "sportbrasilbet.wee.bet": "gulp sportbrasilbet.wee.bet",
         "detonabet.wee.bet": "gulp detonabet.wee.bet",
         "onllinesports.com": "gulp onllinesports.com",
-        "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet"
+        "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
+        "paracorreabets.wee.bet": "gulp paracorreabets.wee.bet",
+        "supersports.wee.bet": "gulp supersports.wee.bet",
+        "rrbets.wee.bet": "gulp rrbets.wee.bet"
 
     },
     "private": true,
