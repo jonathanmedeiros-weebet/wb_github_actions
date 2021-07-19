@@ -189,7 +189,6 @@
         "paracorreabets.wee.bet": "gulp paracorreabets.wee.bet",
         "supersports.wee.bet": "gulp supersports.wee.bet",
         "rrbets.wee.bet": "gulp rrbets.wee.bet"
-
     },
     "private": true,
     "dependencies": {
