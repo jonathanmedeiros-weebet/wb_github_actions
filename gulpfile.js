@@ -1562,3 +1562,19 @@ gulp.task('rrbets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megasortebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "megasortebet.wee.bet",
+        banca: "MEGA DA SORTE BET",
+        styles: "",
+    });
+});
+
+gulp.task('sportingnetvip.bet', function (done) {
+    tasks(done, {
+        host: "sportingnetvip.bet",
+        banca: "SPORTING NET VIP",
+        styles: "",
+    });
+});

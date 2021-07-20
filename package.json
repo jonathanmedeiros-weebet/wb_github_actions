@@ -188,7 +188,9 @@
         "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
         "paracorreabets.wee.bet": "gulp paracorreabets.wee.bet",
         "supersports.wee.bet": "gulp supersports.wee.bet",
-        "rrbets.wee.bet": "gulp rrbets.wee.bet"
+        "rrbets.wee.bet": "gulp rrbets.wee.bet",
+        "megasortebet.wee.bet": "gulp megasortebet.wee.bet",
+        "sportingnetvip.bet": "gulp sportingnetvip.bet"
     },
     "private": true,
     "dependencies": {
