@@ -8,6 +8,7 @@ function tasks(done, config) {
 
     gulp.src(['config.ts'])
         .pipe(replace('[HOST]', 'central.' + config.host))
+        .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
         .pipe(replace('[TIMESTAMP]', timestamp))
         .pipe(gulp.dest('src/app/shared/'));

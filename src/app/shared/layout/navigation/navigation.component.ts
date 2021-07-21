@@ -71,6 +71,7 @@ export class NavigationComponent implements OnInit {
     unsub$ = new Subject();
     regiaoOpen = null;
     LOGO = config.LOGO;
+    appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk';
 
     constructor(
         private auth: AuthService,

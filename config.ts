@@ -16,7 +16,9 @@ export const config: any = {
     CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
+    SLUG: '[S3_FOLDER]',
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
-    LOGO: '/assets/images/logo_banca.png?' + _timestamp,
+    LOGO: 'https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/logo_banca.png',
+
     BG: `${_host}/tema/bk.jpg`
 };
