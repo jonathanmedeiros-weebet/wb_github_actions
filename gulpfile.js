@@ -1579,3 +1579,27 @@ gulp.task('sportingnetvip.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('techbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "techbet.wee.bet",
+        banca: "TECH BET",
+        styles: "",
+    });
+});
+
+gulp.task('megasports.wee.bet', function (done) {
+    tasks(done, {
+        host: "megasports.wee.bet",
+        banca: "MEGA SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('footclub.wee.bet', function (done) {
+    tasks(done, {
+        host: "footclub.wee.bet",
+        banca: "FOOTCLUB",
+        styles: "",
+    });
+});
