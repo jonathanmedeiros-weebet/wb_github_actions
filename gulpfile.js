@@ -1603,3 +1603,11 @@ gulp.task('footclub.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('galobets.com', function (done) {
+    tasks(done, {
+        host: "galobets.com",
+        banca: "GALO BETS",
+        styles: "",
+    });
+});
