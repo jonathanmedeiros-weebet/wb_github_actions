@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { config } from './../../../config';
 import {
     ParametrosLocaisService, HelperService, PrintService,
-    AuthService, MessageService
+    AuthService, MessageService, ImagensService
 } from '../../../../services';
 import * as html2canvas from 'html2canvas';
 let newNavigator: any;
@@ -19,7 +19,7 @@ export class BilheteAcumuladaoComponent implements OnInit {
     @ViewChild('cupom', { static: false }) cupom: ElementRef;
     @Input() aposta: any;
     modalRef;
-    LOGO = config.LOGO;
+    LOGO;
     opcoes;
     cambistaPaga;
     appMobile;
@@ -29,10 +29,17 @@ export class BilheteAcumuladaoComponent implements OnInit {
         private helperService: HelperService,
         private printService: PrintService,
         private auth: AuthService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private imagemService: ImagensService
     ) { }
 
     ngOnInit() {
+        this.imagemService.buscarLogo().subscribe(
+            imagem => {
+                const logoFromServer = imagem;
+                this.LOGO = `data:image/png;base64,${logoFromServer}`;  
+            } 
+        );
         this.appMobile = this.auth.isAppMobile();
 
         this.opcoes = this.paramsService.getOpcoes();

@@ -36,8 +36,8 @@ export * from './shared/services/utils/message.service';
 export * from './shared/services/utils/print.service';
 export * from './shared/services/utils/sidebar.service';
 export * from './shared/services/utils/surpresinha.service';
-export * from './shared/services/utils/utils.service'
-
+export * from './shared/services/utils/utils.service';
+export * from './shared/services/utils/imagens.service';
 /* Authentication Services */
 export * from './shared/services/auth/auth.service';
 

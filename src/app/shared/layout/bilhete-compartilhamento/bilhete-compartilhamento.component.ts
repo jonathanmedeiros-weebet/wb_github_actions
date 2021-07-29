@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { config } from './../../config';
 import {
     ParametrosLocaisService, HelperService,
-    AuthService, MessageService
+    AuthService, MessageService, ImagensService
 } from '../../../services';
 import * as html2canvas from 'html2canvas';
 let newNavigator: any;
@@ -21,16 +21,25 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
-    LOGO = config.LOGO;
+    LOGO;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private auth: AuthService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private imagemService: ImagensService
     ) { }
 
     ngOnInit() {
+
+        this.imagemService.buscarLogo().subscribe(
+            imagem => {
+                const logoFromServer = imagem;
+                this.LOGO = `data:image/png;base64,${logoFromServer}`;  
+            } 
+        );
+
         this.appMobile = this.auth.isAppMobile();
 
         this.opcoes = this.paramsService.getOpcoes();
@@ -53,6 +62,10 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     }
 
     shared() {
+        const options = {
+            logging: false
+        };
+
         if (this.appMobile) {
             const options = {
                 logging: false
