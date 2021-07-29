@@ -29,6 +29,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     itensSelecionados = {};
     tiposAposta;
     cotacoesLocais;
+    bloquearCotacaoMenorQue;
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     contentSportsEl;
@@ -54,6 +55,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        this.bloquearCotacaoMenorQue = this.paramsService.bloquearCotacaoMenorQue();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais

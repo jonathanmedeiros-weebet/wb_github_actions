@@ -27,7 +27,7 @@
                                 <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados90[chave])"
                                     *ngFor="let odds of mercados90[chave].odds">
                                     <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
-                                        <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}">
+                                        <div class="inner-odd" [ngClass]="{'selecionado': itemSelecionado(jogo, odd), 'odd-disabled': (odd.valor < bloquearCotacaoMenorQue)}">
                                             <span class="nome" *ngIf="odd.nome; else chave">
                                                 {{cotacao.nome}}
                                             </span>
@@ -36,7 +36,7 @@
                                                     {{odd.label}}
                                                 </span>
                                             </ng-template>
-                                            <span class="valor" *ngIf="odd.valor > 2; else lockOdd">
+                                            <span class="valor" *ngIf="odd.valor > bloquearCotacaoMenorQue; else lockOdd">
                                                 {{odd.valor}}
                                             </span>
                                             <ng-template #lockOdd>

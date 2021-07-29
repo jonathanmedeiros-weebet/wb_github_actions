@@ -145,6 +145,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.minuto_encerramento_aovivo : null;
     }
 
+    bloquearCotacaoMenorQue() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.bloquear_cotacao_menor_que : null;
+    }
+
     getOddsBasqueteAtivas() {
         const tiposAposta = this.getTiposAposta();
         const oddsBasquete = ['bkt_casa', 'bkt_fora', 'bkt_total_pontos_par', 'bkt_total_pontos_impar'];
