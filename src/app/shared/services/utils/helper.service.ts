@@ -15,6 +15,12 @@ export class HelperService {
 
     constructor(private paramsService: ParametrosLocaisService) { }
 
+    apostaTipoLabel(chave: string, field = 'nome'): number {
+        const tiposAposta = this.paramsService.getTiposAposta();
+        const tipoAposta = tiposAposta[chave];
+        return tipoAposta ? tipoAposta[field] : '';
+    }
+
     calcularCotacao(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
         const cotacoesLocais = this.paramsService.getCotacoesLocais();

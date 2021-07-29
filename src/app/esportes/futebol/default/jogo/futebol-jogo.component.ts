@@ -6,7 +6,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService, HelperService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -37,6 +37,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
+        private helperService: HelperService,
         private messageService: MessageService,
         private el: ElementRef,
         private renderer: Renderer2,
@@ -179,6 +180,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.valor = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
+                odd.label = this.helperService.apostaTipoLabel(odd.chave);
+
                 mercado.odds.push(odd);
 
                 if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][odd.chave]) {
@@ -225,11 +229,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                             const cotacao = {
                                 chave: chave,
-                                valor: cotacaoLocal.valor,
+                                label: this.helperService.apostaTipoLabel(chave),
+                                valor: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, this.jogo.event_id, this.jogo.favorito, false),
                                 posicaoX: tipoAposta.posicao_x_mobile,
                                 posicaoY: tipoAposta.posicao_x_mobile,
                                 posicaoXMobile: tipoAposta.posicao_x_mobile,
-                                posicaoYMobile: tipoAposta.posicao_x_mobile
+                                posicaoYMobile: tipoAposta.posicao_x_mobile,
                             }
 
                             mercado.odds.push(cotacao);

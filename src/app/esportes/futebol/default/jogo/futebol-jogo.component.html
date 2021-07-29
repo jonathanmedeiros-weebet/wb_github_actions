@@ -33,13 +33,17 @@
                                             </span>
                                             <ng-template #chave>
                                                 <span class="nome">
-                                                    {{odd.chave | tipoAposta}}
+                                                    {{odd.label}}
                                                 </span>
                                             </ng-template>
-                                            <span class="valor">
-                                                {{odd.valor | calcularCotacao: odd.chave: jogo.event_id:
-                                                jogo.favorito}}
+                                            <span class="valor" *ngIf="odd.valor > 2; else lockOdd">
+                                                {{odd.valor}}
                                             </span>
+                                            <ng-template #lockOdd>
+                                                <span class="valor">
+                                                    <i class="fa fa-lock"></i>
+                                                </span>
+                                            </ng-template>
                                         </div>
                                     </div>
                                 </div>
@@ -62,12 +66,11 @@
                                             </span>
                                             <ng-template #chave>
                                                 <span class="nome">
-                                                    {{odd.chave | tipoAposta}}
+                                                    {{odd.label}}
                                                 </span>
                                             </ng-template>
                                             <span class="valor">
-                                                {{odd.valor | calcularCotacao: odd.chave: jogo.event_id:
-                                                jogo.favorito}}
+                                                {{odd.valor}}
                                             </span>
                                         </div>
                                     </div>
@@ -91,12 +94,11 @@
                                             </span>
                                             <ng-template #chave>
                                                 <span class="nome">
-                                                    {{odd.chave | tipoAposta}}
+                                                    {{odd.label}}
                                                 </span>
                                             </ng-template>
                                             <span class="valor">
-                                                {{odd.valor | calcularCotacao: odd.chave: jogo.event_id:
-                                                jogo.favorito}}
+                                                {{odd.valor}}
                                             </span>
                                         </div>
                                     </div>
@@ -123,12 +125,11 @@
                                             </span>
                                             <ng-template #chave>
                                                 <span class="nome">
-                                                    {{odd.chave | tipoAposta}}
+                                                    {{odd.label}}
                                                 </span>
                                             </ng-template>
                                             <span class="valor">
-                                                {{odd.valor | calcularCotacao: odd.chave: jogo.event_id:
-                                                jogo.favorito}}
+                                                {{odd.valor}}
                                             </span>
                                         </div>
                                     </div>
