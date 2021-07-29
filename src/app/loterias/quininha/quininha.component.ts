@@ -200,6 +200,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         });
 
         this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
 
         this.aposta = new Aposta();
         this.enableSubmit();

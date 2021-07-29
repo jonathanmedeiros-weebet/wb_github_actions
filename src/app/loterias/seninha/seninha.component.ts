@@ -202,6 +202,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         });
 
         this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
 
         this.aposta = new Aposta();
         this.enableSubmit();

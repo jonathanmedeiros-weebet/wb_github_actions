@@ -217,6 +217,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
             this.modalRef.componentInstance.codigo = aposta.id;
         } else {
             this.modalRef.componentInstance.aposta = aposta;
+            this.modalRef.componentInstance.primeiraImpressao = true;
             this.modalRef.componentInstance.showCancel = true;
         }
 
