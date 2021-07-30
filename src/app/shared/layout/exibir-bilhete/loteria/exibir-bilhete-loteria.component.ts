@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 
-import { config } from './../../../config';
-import { SorteioService, ParametrosLocaisService, PrintService, HelperService } from '../../../../services';
+import {
+    SorteioService, ParametrosLocaisService, PrintService,
+    HelperService, ImagensService
+} from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as html2canvas from 'html2canvas';
@@ -24,12 +26,14 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private sorteioService: SorteioService,
         private printService: PrintService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private imagensService: ImagensService
     ) { }
 
     ngOnInit() {
-        this.LOGO = config.LOGO;
-
+        this.imagensService.buscarLogo().subscribe(
+            logo => this.LOGO = `data:image/png;base64,${logo}`
+        );
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
 
