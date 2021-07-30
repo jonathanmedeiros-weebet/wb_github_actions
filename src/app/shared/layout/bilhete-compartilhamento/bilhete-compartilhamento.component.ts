@@ -28,20 +28,14 @@ export class BilheteCompartilhamentoComponent implements OnInit {
         private helperService: HelperService,
         private auth: AuthService,
         private messageService: MessageService,
-        private imagemService: ImagensService
+        private imagensService: ImagensService
     ) { }
 
     ngOnInit() {
-
-        this.imagemService.buscarLogo().subscribe(
-            imagem => {
-                const logoFromServer = imagem;
-                this.LOGO = `data:image/png;base64,${logoFromServer}`;  
-            } 
+        this.imagensService.buscarLogo().subscribe(
+            logo => this.LOGO = `data:image/png;base64,${logo}`
         );
-
         this.appMobile = this.auth.isAppMobile();
-
         this.opcoes = this.paramsService.getOpcoes();
 
         if (this.aposta.passador.percentualPremio > 0) {
@@ -62,10 +56,6 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     }
 
     shared() {
-        const options = {
-            logging: false
-        };
-
         if (this.appMobile) {
             const options = {
                 logging: false

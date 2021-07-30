@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { config } from './../../../config';
-import { ParametrosLocaisService, PrintService, 
-    AuthService, UtilsService, 
-    MessageService, ImagensService } from '../../../../services';
+import {
+    ParametrosLocaisService, PrintService,
+    AuthService, UtilsService, MessageService,
+    ImagensService
+} from '../../../../services';
 import * as moment from 'moment';
 let newNavigator: any;
 newNavigator = window.navigator;
@@ -28,18 +30,11 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
         private utilsService: UtilsService,
         private messageService: MessageService,
         private auth: AuthService,
-        private imagemService: ImagensService
+        private imagensService: ImagensService
     ) { }
 
     ngOnInit() {
-        this.imagemService.buscarLogo().subscribe(
-            imagem => {
-                const logoFromServer = imagem;
-                this.LOGO = `data:image/png;base64,${logoFromServer}`;  
-            } 
-        );
         this.appMobile = this.auth.isAppMobile();
-
         this.opcoes = this.paramsService.getOpcoes();
 
         if (this.aposta.passador.percentualPremio > 0) {
