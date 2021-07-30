@@ -1612,3 +1612,19 @@ gulp.task('galobets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sortebet.site', function (done) {
+    tasks(done, {
+        host: "sortebet.site",
+        banca: "SORTE BET",
+        styles: "",
+    });
+});
+
+gulp.task('reallbet.site', function (done) {
+    tasks(done, {
+        host: "reallbet.site",
+        banca: "REALLBET",
+        styles: "",
+    });
+});
