@@ -57,4 +57,36 @@ export class ApostaService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    simularEncerramento(itens): Observable<any> {
+        const url = `${this.ApostaUrl}/simular-encerramento?itens=` + JSON.stringify(itens);
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    encerrarItens(itens): Observable<any> {
+        const url = `${this.ApostaUrl}/encerrar-itens`;
+
+        return this.http.post(url, JSON.stringify(itens), this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    verificarCotacao(itemId): Observable<any> {
+        const url = `${this.ApostaUrl}/verificar-cotacao?item=` + JSON.stringify(itemId);
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

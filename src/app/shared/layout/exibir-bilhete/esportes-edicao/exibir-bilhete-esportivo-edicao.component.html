@@ -40,12 +40,12 @@
                 <p class="horario">
                     {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                 </p>
-                <p class="nome {{item.encerrado ? 'encerrado' : ''}}" [ngClass]="resultadoClass(item)">
+                <p class="nome {{itensSelecionados[itensSelecionados.indexOf(item.id)] || item.encerrado ? 'encerrado' : ''}}" [ngClass]="resultadoClass(item)">
                     {{item.time_a_nome}}
                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                     {{item.time_b_nome}}
                 </p>
-                <p class="cotacao {{item.encerrado ? 'encerrado' : ''}}" [ngClass]="resultadoClass(item)">
+                <p class="cotacao {{itensSelecionados[itensSelecionados.indexOf(item.id)] || item.encerrado ? 'encerrado' : ''}}" [ngClass]="resultadoClass(item)">
                     {{item.categoria_nome}}:
                     {{item.odd_nome}}
                     ( {{item.cotacao}} )
@@ -53,9 +53,17 @@
                 </p>
                 <p class="jogo-resultado">
                     <span *ngIf="item.removido; else resultado">cancelado</span>
-                    <span *ngIf="item.encerrado; else resultado">encerrado</span>
                     <ng-template #resultado>{{item.resultado}}</ng-template>
                 </p>
+                <div class="odds" (click)="addEncerramento(item)">
+                    <div class="odd">
+                        <div class="inner-odd {{itensSelecionados[itensSelecionados.indexOf(item.id)] ? 'selecionado' : ''}}" *ngIf="!item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && !jogoComecou(item)">
+                        <span class="nome">
+                        Encerrar Item
+                        </span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <hr>
         </ng-container>
@@ -65,15 +73,20 @@
                 QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
             </p>
             <p class="aposta">
-                COTAÇÃO: <span
-                    style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
+                COTAÇÃO: <span style="float: right">
+                <span class="{{!novaCotacao ? '' : 'cancelado'}}">
+                {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}</span> <span>  {{novaCotacao | number:'1.0-3' }}</span>
+            </span>
             </p>
             <p class="aposta">
                 VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency}}</span>
             </p>
             <p class="ganho">
-                POSSÍVEL RETORNO: <span
-                    style="float:right">{{aposta.possibilidade_ganho | currency}}</span>
+                POSSÍVEL RETORNO:
+                <span style="float: right">
+                    <span class="{{!novaPossibilidadeGanho ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho | currency}}</span>
+                    <span> {{novaPossibilidadeGanho | currency}}</span>
+                </span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                 PRÊMIO: <span style="float:right">{{aposta.premio | currency}}</span>
@@ -85,7 +98,9 @@
             <hr>
         </div>
         <p class="rodape">
-            {{opcoes.informativo_rodape}}
+            <a class="btn btn-secondary" *ngIf="itensSelecionados.length > 0" (click)="confirmarEncerramentos()">
+                Confirmar Cancelamento{{itensSelecionados.length > 1 ? 's' : ''}}
+            </a>
         </p>
     </div>
 </div>

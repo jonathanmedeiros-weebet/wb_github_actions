@@ -1,0 +1,122 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Encerrar Itens da Aposta</h4>
+    <div class="action-buttons">
+        <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<div class="cupom-header">
+    <h1 class="numero">
+        #{{aposta.id}}
+    </h1>
+    <div class="valores">
+        <p class="total-jogos">
+            QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
+        </p>
+        <p class="aposta">
+            COTAÇÃO: <span style="float: right">
+                <span class="{{!novaCotacao ? '' : 'cancelado'}}">
+                {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}</span>
+            <span class="dados-simulacao">  {{novaCotacao | number:'1.0-3' }}</span>
+            </span>
+        </p>
+        <p class="aposta">
+            VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency}}</span>
+        </p>
+        <p class="ganho">
+            POSSÍVEL RETORNO:
+            <span style="float: right">
+                    <span
+                        class="{{!novaPossibilidadeGanho ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho | currency}}</span>
+                    <span class="dados-simulacao"> {{novaPossibilidadeGanho | currency}}</span>
+                </span>
+        </p>
+        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+            PRÊMIO: <span style="float:right">{{aposta.premio | currency}}</span>
+        </p>
+        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+            CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
+        </p>
+    </div>
+    <div class="rodape dados-simulacao" *ngIf="novaCotacao && novaPossibilidadeGanho">
+        Atenção: Confira como ficarão os novos valores
+    </div>
+    <hr>
+    <hr>
+    <div class="informacoes">
+        <p>
+            <b>CAMBISTA:</b> {{aposta.passador.nome}}
+        </p>
+        <p>
+            <b>APOSTADOR:</b> {{aposta.apostador}}
+        </p>
+        <p>
+            <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+        </p>
+        <p>
+            <b>STATUS: </b>
+            <span>{{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}</span>
+        </p>
+        <p>
+            <b>RESULTADO: </b>
+            <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
+            <span *ngIf="!aposta.resultado">aguardando</span>
+        </p>
+    </div>
+    <hr>
+    <hr>
+</div>
+<div class="modal-body cupom-ativo">
+    <div id="cupom">
+        <div class="conteudo">
+            <ng-container *ngFor="let item of aposta.itens">
+                <div class="item">
+                    <p class="campeonato">
+                        {{item.campeonato_nome}}
+                    </p>
+                    <p class="horario">
+                        {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
+                    </p>
+                    <p class="nome {{itensSelecionados[itensSelecionados.indexOf(item.id)] || item.encerrado ? 'encerrado' : ''}}"
+                       [ngClass]="resultadoClass(item)">
+                        {{item.time_a_nome}}
+                        {{item.time_a_resultado}} x {{item.time_b_resultado}}
+                        {{item.time_b_nome}}
+                    </p>
+                    <p class="cotacao {{itensSelecionados[itensSelecionados.indexOf(item.id)] || item.encerrado ? 'encerrado' : ''}}"
+                       [ngClass]="resultadoClass(item)">
+                        {{item.categoria_nome}}:
+                        {{item.odd_nome}}
+                        ( {{item.cotacao}} )
+                        <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                    </p>
+                    <p class="jogo-resultado">
+                        <span *ngIf="item.removido; else resultado">cancelado</span>
+                        <ng-template #resultado>{{item.resultado}}</ng-template>
+                    </p>
+                    <div class="odds" (click)="addEncerramento(item)">
+                        <div class="odd">
+                            <div
+                                class="inner-odd {{itensSelecionados[itensSelecionados.indexOf(item.id)] ? 'selecionado' : ''}}"
+                                *ngIf="!item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && !jogoComecou(item)">
+                        <span class="nome">
+                        Encerrar
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<div class="rodape" *ngIf="itensSelecionados.length > 0">
+    <button class="btn btn-secondary w-50" style="color: white;" *ngIf="itensSelecionados.length > 0" (click)="descartar()">
+        Descartar
+    </button>
+    <button class="btn btn-danger w-50" style="color: white;" *ngIf="itensSelecionados.length > 0" (click)="confirmarEncerramentos()">
+        Confirmar{{itensSelecionados.length > 1 ? 's' : ''}}
+    </button>
+</div>

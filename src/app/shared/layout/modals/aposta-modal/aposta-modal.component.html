@@ -24,6 +24,13 @@
     </div>
 </div>
 <div class="modal-body cupom-ativo">
+    <div style="text-align: center; margin-bottom: 5px;">
+        <button style="margin: 0 auto; color: white" class="btn btn-dark"
+                *ngIf="encerramentoPermitido() && apuracao && aposta.tipo == 'esportes'"
+        (click)="openModalEncerramento(aposta)">
+            Encerrar Itens
+        </button>
+    </div>
     <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="aposta.tipo == 'esportes'">
     </app-exibir-bilhete-esportivo>
     <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="aposta.tipo == 'loteria'">

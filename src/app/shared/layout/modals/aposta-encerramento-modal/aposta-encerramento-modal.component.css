@@ -6,6 +6,17 @@
     font-size: 12px;
 }
 
+.cupom-header {
+    padding: 1em;
+    background: #f3f5d3;
+    /* margin: 2em auto; */
+    font-size: 12px;
+}
+
+.cupom-ativo{
+    background: #f3f5d3;
+}
+
 img{
     max-height: 90px;
     max-width: 150px;
@@ -91,4 +102,8 @@ hr {
 
 .encerrado {
     text-decoration-line: line-through;
+}
+
+.dados-simulacao {
+    color: red;
 }
