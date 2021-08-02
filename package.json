@@ -196,7 +196,8 @@
         "footclub.wee.bet": "gulp footclub.wee.bet",
         "galobets.com": "gulp galobets.com",
         "sortebet.site": "gulp sortebet.site",
-        "reallbet.site": "gulp reallbet.site"
+        "reallbet.site": "gulp reallbet.site",
+        "king-bets.wee.bet": "gulp king-bets.wee.bet"
     },
     "private": true,
     "dependencies": {

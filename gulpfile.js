@@ -1628,3 +1628,11 @@ gulp.task('reallbet.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('king-bets.wee.bet', function (done) {
+    tasks(done, {
+        host: "king-bets.wee.bet",
+        banca: "KING BETS",
+        styles: "",
+    });
+});
