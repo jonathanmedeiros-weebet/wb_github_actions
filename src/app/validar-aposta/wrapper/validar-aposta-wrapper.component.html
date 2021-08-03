@@ -9,9 +9,8 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                     <div class="form-group">
                         <input type="text" style="text-transform:uppercase;" placeholder="Código da pré-aposta"
-                               class="form-control"
-                               formControlName="codigo"
-                               autocomplete="off" [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
+                            class="form-control" formControlName="codigo" autocomplete="off"
+                            [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                     </div>
                     <button type="submit" class="btn btn-custom">Consultar</button>
                     <app-error-msg style="margin-left: 5px;" [control]="form.get('codigo')"></app-error-msg>
@@ -25,19 +24,19 @@
                     <h1>{{preAposta.codigo}}</h1>
                     <ng-container [ngSwitch]="preAposta.tipo">
                         <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
-                                                     (success)="success($event)">
+                            (success)="success($event)">
                         </app-validar-aposta-esportes>
 
                         <app-validar-aposta-loterias *ngSwitchCase="'loteria'" [preAposta]="preAposta"
-                                                     (success)="success($event)">
+                            (success)="success($event)">
                         </app-validar-aposta-loterias>
 
                         <app-validar-aposta-acumuladao *ngSwitchCase="'acumuladao'" [preAposta]="preAposta"
-                                                       (success)="success($event)">
+                            (success)="success($event)">
                         </app-validar-aposta-acumuladao>
 
                         <app-validar-aposta-desafios *ngSwitchCase="'desafio'" [preAposta]="preAposta"
-                                                     (success)="success($event)">
+                            (success)="success($event)">
                         </app-validar-aposta-desafios>
                     </ng-container>
                 </div>

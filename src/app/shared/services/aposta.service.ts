@@ -38,7 +38,7 @@ export class ApostaService {
     }
 
     getApostaByCodigo(codigo: string, queryParams?): Observable<any> {
-        const url = `${this.ApostaUrl}/buscar/${codigo}`;
+        const url = `${config.BASE_URL}/apostas-por-codigo/${codigo}`;
         let requestOptions;
 
         if (queryParams) {

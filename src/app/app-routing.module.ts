@@ -72,7 +72,7 @@ const appRoutes: Routes = [
         loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
     },
     {
-        path: 'bilhete/:chave',
+        path: 'bilhete/:codigo',
         component: CupomComponent
     }
 ];
