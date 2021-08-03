@@ -74,7 +74,7 @@ export class ValidarApostaDesafiosComponent extends BaseFormComponent implements
         this.disabledSubmit();
 
         const values = this.form.value;
-        values.preaposta_id = this.preAposta.id;
+        values.preaposta_codigo = this.preAposta.codigo;
 
         values.itens = this.preApostaItens.map(item => {
             return {

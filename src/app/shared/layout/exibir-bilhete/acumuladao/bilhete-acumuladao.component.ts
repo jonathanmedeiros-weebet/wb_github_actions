@@ -64,8 +64,8 @@ export class BilheteAcumuladaoComponent implements OnInit {
             if (newNavigator.share) {
                 newNavigator.share({
                     title: config.BANCA_NOME,
-                    text: `${config.BANCA_NOME}: #${this.aposta.id}`,
-                    url: `${location.origin}/bilhete/${this.aposta.chave}`,
+                    text: `${config.BANCA_NOME}: ${this.aposta.codigo}`,
+                    url: `${location.origin}/bilhete/${this.aposta.codigo}`,
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');

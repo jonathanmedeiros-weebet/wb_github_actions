@@ -5,12 +5,15 @@
     <div class="content-body">
         <div class="content">
             <div class="">
-                <form (ngSubmit)="consultarAposta()" #consultaForm="ngForm" class="consulta-form form-inline">
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="codigo" name="codigo" autocomplete="off" class="form-control"
-                            placeholder="Código" required>
+                        <input type="text" style="text-transform:uppercase;" placeholder="Código da pré-aposta"
+                            class="form-control" formControlName="codigo" autocomplete="off"
+                            [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                     </div>
-                    <button type="submit" [disabled]="!consultaForm.valid" class="btn btn-custom">Consultar</button>
+                    <button type="submit" class="btn btn-custom">Consultar</button>
+                    <app-error-msg style="margin-left: 5px;" [control]="form.get('codigo')"></app-error-msg>
                 </form>
             </div>
 
@@ -18,7 +21,7 @@
 
             <div *ngIf="exibirPreAposta">
                 <div id="pre-aposta">
-                    <h1>#{{preAposta.id}}</h1>
+                    <h1>{{preAposta.codigo}}</h1>
                     <ng-container [ngSwitch]="preAposta.tipo">
                         <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
                             (success)="success($event)">
@@ -33,8 +36,8 @@
                         </app-validar-aposta-acumuladao>
 
                         <app-validar-aposta-desafios *ngSwitchCase="'desafio'" [preAposta]="preAposta"
-                        (success)="success($event)">
-                    </app-validar-aposta-desafios>
+                            (success)="success($event)">
+                        </app-validar-aposta-desafios>
                     </ng-container>
                 </div>
             </div>

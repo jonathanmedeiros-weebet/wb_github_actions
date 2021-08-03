@@ -146,7 +146,7 @@ export class PrintService {
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -269,7 +269,7 @@ ${horario} ${jogo.nome}
                 <div class="text-center">${config.BANCA_NOME}</div>
                 <hr class="margin-bottom-5">
                 <div class="clearfix text-center margin-bottom-5">
-                    #${aposta.id}
+                    ${aposta.codigo}
                 </div>
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
@@ -420,7 +420,7 @@ ${horario} ${jogo.nome}
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -433,7 +433,7 @@ ${horario} ${jogo.nome}
         let ticket = `
 ${config.BANCA_NOME}
 
-#${aposta.id}
+${aposta.codigo}
 Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
 Cambista: ${aposta.passador.nome}
 Apostador: ${aposta.apostador}
@@ -579,7 +579,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
                     alt="${config.BANCA_NOME}" src="${config.LOGO}" />
                 </div>
                 <h1 class="numero">
-                    #${aposta.id}
+                    ${aposta.codigo}
                 </h1>
                 <hr>
                 <hr>
@@ -682,7 +682,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -693,7 +693,7 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
 
     private sportsTicketAppMobile(aposta, dateTime?) {
         let ticket = `${config.BANCA_NOME}
-#${aposta.id}
+${aposta.codigo}
 CAMBISTA: ${aposta.passador.nome}
 APOSTADOR: ${aposta.apostador}
 HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
@@ -755,7 +755,7 @@ impresso em ${dateTime}
 
     private bilheteAcumuladaoMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
-#${aposta.id}
+${aposta.codigo}
 CAMBISTA: ${aposta.passador.nome}
 APOSTADOR: ${aposta.apostador}
 HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
@@ -879,7 +879,7 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
                     alt="${config.BANCA_NOME}" src="${config.LOGO}" />
                 </div>
                 <h1 class="numero">
-                    #${aposta.id}
+                    ${aposta.codigo}
                 </h1>
                 <hr>
                 <hr>
@@ -973,7 +973,7 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -1085,7 +1085,7 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
                     alt="${config.BANCA_NOME}" src="${config.LOGO}" />
                 </div>
                 <h1 class="numero">
-                    #${aposta.id}
+                    ${aposta.codigo}
                 </h1>
                 <hr>
                 <hr>
@@ -1177,7 +1177,7 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -1188,7 +1188,7 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
 
     private desafioTicketAppMobile(aposta) {
         let ticket = `${config.BANCA_NOME}
-#${aposta.id}
+${aposta.codigo}
 CAMBISTA: ${aposta.passador.nome}
 APOSTADOR: ${aposta.apostador}
 HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
@@ -1350,7 +1350,7 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -1475,7 +1475,7 @@ ${recarga.autenticacao}
             ${styles}
             </style>
           </head>
-          <body onload="window.print();window.close()">${printContents}</body>
+          <body onload="window.print();">${printContents}</body>
         </html>`;
 
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');

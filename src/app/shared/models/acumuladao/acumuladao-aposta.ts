@@ -16,4 +16,5 @@ export class AcumuladaoAposta {
     passador: any;
     itens: any[];
     acumuladao: Acumuladao;
+    codigo: string;
 }

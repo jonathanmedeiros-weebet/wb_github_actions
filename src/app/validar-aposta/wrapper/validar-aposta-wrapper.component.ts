@@ -13,13 +13,15 @@ import {
     PreApostaEsportivaService
 } from '../../services';
 import { ApostaModalComponent } from './../../shared/layout/modals';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-validar-aposta-wrapper',
     templateUrl: 'validar-aposta-wrapper.component.html',
     styleUrls: ['./validar-aposta-wrapper.component.css']
 })
-export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
+export class ValidarApostaWrapperComponent extends BaseFormComponent implements OnInit, OnDestroy {
     codigo: any;
     showLoadingIndicator = false;
     exibirPreAposta = false;
@@ -31,17 +33,22 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
         private preApostaService: PreApostaEsportivaService,
         private messageService: MessageService,
         private elRef: ElementRef,
-        private modalService: NgbModal
-    ) { }
+        private modalService: NgbModal,
+        private fb: FormBuilder,
+    ) {
+        super();
+    }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.createForm();
+    }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
     }
 
-    consultarAposta() {
+    submit() {
         this.showLoadingIndicator = true;
         this.exibirPreAposta = false;
 
@@ -78,5 +85,13 @@ export class ValidarApostaWrapperComponent implements OnInit, OnDestroy {
     goToTop(selector) {
         const content = this.elRef.nativeElement.querySelector(selector);
         content.scrollTop = 0;
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            codigo: ['', Validators.compose([
+                Validators.required
+            ])]
+        });
     }
 }
