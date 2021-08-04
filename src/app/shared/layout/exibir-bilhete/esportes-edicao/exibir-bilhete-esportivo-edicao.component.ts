@@ -111,7 +111,7 @@ export class ExibirBilheteEsportivoEdicaoComponent implements OnInit {
 
     confirmarEncerramentos() {
         if (this.itensSelecionados != null) {
-            this.apostaService.encerrarItens(this.itensSelecionados)
+            this.apostaService.encerrarItem(this.itensSelecionados)
                 .subscribe(
                     result => {
                         this.messageService.success(result, 'Sucesso');

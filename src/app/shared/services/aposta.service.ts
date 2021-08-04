@@ -58,8 +58,8 @@ export class ApostaService {
             );
     }
 
-    simularEncerramento(itens): Observable<any> {
-        const url = `${this.ApostaUrl}/simular-encerramento?itens=` + JSON.stringify(itens);
+    simularEncerramento(item): Observable<any> {
+        const url = `${this.ApostaUrl}/simular-encerramento?item=` + JSON.stringify(item);
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
@@ -68,21 +68,10 @@ export class ApostaService {
             );
     }
 
-    encerrarItens(itens): Observable<any> {
-        const url = `${this.ApostaUrl}/encerrar-itens`;
+    encerrarItem(itens): Observable<any> {
+        const url = `${this.ApostaUrl}/encerrar-item`;
 
         return this.http.post(url, JSON.stringify(itens), this.header.getRequestOptions(true))
-            .pipe(
-                take(1),
-                map((res: any) => res.results),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    verificarCotacao(itemId): Observable<any> {
-        const url = `${this.ApostaUrl}/verificar-cotacao?item=` + JSON.stringify(itemId);
-
-        return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),

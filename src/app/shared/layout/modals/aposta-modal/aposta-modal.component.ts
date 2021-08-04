@@ -169,31 +169,8 @@ export class ApostaModalComponent implements OnInit {
                         scrollable: true
                     });
                     this.modalRef.componentInstance.aposta = apostaLocalizada;
-
-                    this.modalRef.result.then(
-                        (result) => {
-                            switch (result) {
-                                case 'atualizar':
-                                    this.atualizarAposta(aposta);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        },
-                        (reason) => { }
-                    );
                     this.showLoading = false;
                 }
-            );
-    }
-
-    atualizarAposta(aposta) {
-        this.apostaService.getAposta(aposta.id)
-            .subscribe(
-                apostaAtualizada => {
-                    this.aposta = apostaAtualizada;
-                },
-                error => {}
             );
     }
 }

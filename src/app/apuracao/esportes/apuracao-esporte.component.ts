@@ -5,8 +5,8 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
+import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from '../../shared/layout/modals';
+import {ApostaEsportivaService, ApostaService, MessageService, AuthService, ParametrosLocaisService} from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -36,6 +36,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
         private authService: AuthService,
+        private paramsLocais: ParametrosLocaisService,
         private modalService: NgbModal
     ) { }
 
@@ -110,42 +111,47 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
             params['verificar-ultima-aposta'] = 1;
         }
 
-        this.apostaService.getAposta(aposta.id, params)
-            .subscribe(
-                apostaLocalizada => {
-                    this.modalRef = this.modalService.open(ApostaModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true,
-                        scrollable: true
-                    });
-                    this.modalRef.componentInstance.aposta = apostaLocalizada;
-                    this.modalRef.componentInstance.apuracao = true;
-                    this.modalRef.componentInstance.showCancel = true;
-                    if (params['verificar-ultima-aposta']) {
-                        this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
-                    }
+        if (aposta.tipo === 'esportes' && this.encerramentoPermitido()) {
+            this.openModalEncerramento(aposta);
+        } else {
+            this.apostaService.getAposta(aposta.id, params)
+                .subscribe(
+                    apostaLocalizada => {
+                        this.modalRef = this.modalService.open(ApostaModalComponent, {
+                            ariaLabelledBy: 'modal-basic-title',
+                            centered: true,
+                            scrollable: true
+                        });
+                        this.modalRef.componentInstance.aposta = apostaLocalizada;
+                        this.modalRef.componentInstance.apuracao = true;
+                        this.modalRef.componentInstance.showCancel = true;
+                        if (params['verificar-ultima-aposta']) {
+                            this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
+                        }
 
-                    this.modalRef.result.then(
-                        (result) => {
-                            switch (result) {
-                                case 'cancel':
-                                    this.cancelar(aposta);
-                                    break;
-                                case 'pagamento':
-                                    this.pagarAposta(aposta);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        },
-                        (reason) => { }
-                    );
+                        this.modalRef.result.then(
+                            (result) => {
+                                switch (result) {
+                                    case 'cancel':
+                                        this.cancelar(aposta);
+                                        break;
+                                    case 'pagamento':
+                                        this.pagarAposta(aposta);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            },
+                            (reason) => { }
+                        );
 
-                    this.showLoading = false;
-                    this.cd.detectChanges();
-                },
-                error => this.handleError(error)
-            );
+                        this.showLoading = false;
+                        this.cd.detectChanges();
+                    },
+                    error => this.handleError(error)
+                );
+        }
+        this.showLoading = false;
     }
 
     cancelar(aposta) {
@@ -193,5 +199,34 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
             'td-perdeu': resultado === 'perdeu',
             'td-pendente': !resultado
         };
+    }
+
+    openModalEncerramento(aposta) {
+        this.showLoading = true;
+
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                apostaLocalizada => {
+                    this.modalRef = this.modalService.open(ApostaEncerramentoModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        scrollable: true
+                    });
+                    this.modalRef.componentInstance.aposta = apostaLocalizada;
+
+                    this.showLoading = false;
+                }
+            );
+    }
+
+    encerramentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (opcoes.permitir_encerrar_aposta) {
+            result = true;
+        }
+
+        return result;
     }
 }

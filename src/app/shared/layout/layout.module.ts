@@ -29,7 +29,7 @@ import {
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -41,7 +41,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         UtilsModule,
         AngularSvgIconModule,
         NgxMaskModule.forRoot(),
-        NgbModalModule
+        NgbModalModule,
+        NgbAlertModule
     ],
     declarations: [
         MainLayoutComponent,

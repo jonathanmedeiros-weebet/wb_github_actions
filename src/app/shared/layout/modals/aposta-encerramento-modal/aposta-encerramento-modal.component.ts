@@ -18,8 +18,8 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     opcoes;
     novaCotacao;
     novaPossibilidadeGanho;
-    itensEncerramento = [];
-    itensSelecionados = [];
+    itemSelecionado;
+    falhaSimulacao;
     cambistaPaga;
     showLoading = false;
 
@@ -69,16 +69,10 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     }
 
     addEncerramento(item) {
-        const indexItem = this.itensSelecionados.indexOf(item.id);
-        if (this.itensSelecionados[indexItem]) {
-            this.itensSelecionados.splice(indexItem, 1);
-        } else {
-            if (!this.jogoComecou(item)) {
-                this.itensSelecionados.push(item.id);
-            }
+        if (!this.jogoComecou(item)) {
+            this.itemSelecionado = item.id;
+            this.simularEncerramento(this.itemSelecionado);
         }
-
-        this.simularEncerramento(this.itensSelecionados);
     }
 
     jogoComecou(item) {
@@ -99,8 +93,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
                 simulacao => {
                     this.novaCotacao = simulacao.nova_cotacao;
                     this.novaPossibilidadeGanho = simulacao.nova_possibilidade_ganho;
-                    this.itensEncerramento = simulacao.itens_encerramento;
-                    console.log(simulacao);
+                    this.falhaSimulacao = simulacao.falha_simulacao;
                 },
                 error => {
                     this.handleError(error);
@@ -109,13 +102,14 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         this.showLoading = false;
     }
 
-    confirmarEncerramentos() {
-        if (this.itensSelecionados != null) {
-            this.apostaService.encerrarItens(this.itensEncerramento)
+    confirmarEncerramento() {
+        if (this.itemSelecionado != null) {
+            this.apostaService.encerrarItem(this.itemSelecionado)
                 .subscribe(
                     result => {
                         this.messageService.success(result, 'Sucesso');
-                        this.activeModal.close('atualizar');
+                        this.atualizarAposta(this.aposta);
+                        this.descartar();
                     },
                     error => {
                         this.handleError(error);
@@ -123,13 +117,22 @@ export class ApostaEncerramentoModalComponent implements OnInit {
                 );
         }
 
-        this.itensSelecionados = [];
-        this.itensEncerramento = [];
+        this.itemSelecionado = null;
+    }
+
+    atualizarAposta(aposta) {
+        this.apostaService.getAposta(aposta.id)
+            .subscribe(
+                apostaAtualizada => {
+                    this.aposta = apostaAtualizada;
+                },
+                error => {}
+            );
     }
 
     descartar() {
-        this.itensSelecionados = [];
-        this.itensEncerramento = [];
+        this.itemSelecionado = null;
+        this.falhaSimulacao = null;
         this.novaCotacao = null;
         this.novaPossibilidadeGanho = null;
     }
