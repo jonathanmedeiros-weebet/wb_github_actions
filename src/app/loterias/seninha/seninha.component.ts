@@ -185,7 +185,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
                 this.preApostaService.create(this.aposta)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
-                        preAposta => this.preApostaSucess(preAposta.id),
+                        preAposta => this.preApostaSucess(preAposta.codigo),
                         error => this.handleError(error)
                     );
             }
@@ -202,19 +202,20 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         });
 
         this.modalRef.componentInstance.aposta = aposta;
+        this.modalRef.componentInstance.primeiraImpressao = true;
 
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
     }
 
-    preApostaSucess(id) {
+    preApostaSucess(codigo) {
         this.modalRef = this.modalService.open(PreApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
 
-        this.modalRef.componentInstance.codigo = id;
+        this.modalRef.componentInstance.codigo = codigo;
 
         this.aposta = new Aposta();
         this.enableSubmit();

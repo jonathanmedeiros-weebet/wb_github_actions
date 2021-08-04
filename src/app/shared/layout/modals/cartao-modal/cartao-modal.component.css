@@ -10,3 +10,7 @@
 .table{
     cursor: pointer;
 }
+
+.codigo{
+    white-space: nowrap;
+}

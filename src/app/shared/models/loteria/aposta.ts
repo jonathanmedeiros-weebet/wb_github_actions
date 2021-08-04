@@ -20,6 +20,7 @@ export class Aposta {
     horario: string;
     resultado: string;
     tipo: string;
+    codigo: string;
 
     guidGenerate() {
         function s4() {
