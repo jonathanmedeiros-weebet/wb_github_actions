@@ -196,7 +196,8 @@
         "galobets.com": "gulp galobets.com",
         "sortebet.site": "gulp sortebet.site",
         "reallbet.site": "gulp reallbet.site",
-        "king-bets.wee.bet": "gulp king-bets.wee.bet"
+        "king-bets.wee.bet": "gulp king-bets.wee.bet",
+        "apostasms.wee.bet": "gulp apostasms.wee.bet"
     },
     "private": true,
     "dependencies": {

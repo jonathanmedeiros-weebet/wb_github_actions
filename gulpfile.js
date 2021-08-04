@@ -1628,3 +1628,11 @@ gulp.task('king-bets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostasms.wee.bet', function (done) {
+    tasks(done, {
+        host: "apostasms.wee.bet",
+        banca: "APOSTAS MS",
+        styles: "",
+    });
+});
