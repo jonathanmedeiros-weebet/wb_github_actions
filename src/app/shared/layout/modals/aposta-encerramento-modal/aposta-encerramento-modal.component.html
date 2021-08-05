@@ -1,6 +1,20 @@
+<app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
     <div class="action-buttons">
+        <button type="button" *ngIf="impressaoPermitida()" (click)="print()">
+            <i class="fa fa-print"></i>
+        </button>
+        <button type="button" *ngIf="cancelamentoPermitido()" (click)="cancel()" title="CANCELAR APOSTA">
+            <i class="fa fa-trash-o"></i>
+        </button>
+        <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
+            <i class="fa fa-money"></i>
+        </button>
+        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shared()" class="shared-ticket">
+            <i class="fa fa-share-alt"></i>
+        </button>
+
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -8,8 +22,36 @@
 </div>
 <div class="cupom-header">
     <h1 class="numero">
-        #{{aposta.id}}
+        {{aposta.codigo}}
     </h1>
+    <div class="informacoes">
+        <p>
+            <b>CAMBISTA:</b> {{aposta.passador.nome}}
+        </p>
+        <p>
+            <b>APOSTADOR:</b> {{aposta.apostador}}
+        </p>
+        <p>
+            <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+        </p>
+        <p>
+            <b>STATUS: </b>
+            <span>{{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}</span>
+        </p>
+        <p>
+            <b>RESULTADO: </b>
+            <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
+            <span *ngIf="!aposta.resultado">aguardando</span>
+        </p>
+    </div>
+    <p *ngIf="falhaSimulacao">
+        <ngb-alert [dismissible]="false"
+                   type='danger'>
+            <strong>O Item {{falhaSimulacao}} não pode ser encerrado, Remova-o da lista de encerramento.</strong>
+        </ngb-alert>
+    </p>
+    <hr>
+    <hr>
     <div class="valores">
         <p class="total-jogos">
             QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
@@ -40,36 +82,9 @@
         </p>
     </div>
     <div class="rodape dados-simulacao" *ngIf="novaCotacao && novaPossibilidadeGanho">
-        Atenção: Confira como ficarão os novos valores
+        Atenção: Confira como ficarão os novos valores <br>
+        Essa operação não poderá ser desfeita
     </div>
-    <hr>
-    <hr>
-    <div class="informacoes">
-        <p>
-            <b>CAMBISTA:</b> {{aposta.passador.nome}}
-        </p>
-        <p>
-            <b>APOSTADOR:</b> {{aposta.apostador}}
-        </p>
-        <p>
-            <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
-        </p>
-        <p>
-            <b>STATUS: </b>
-            <span>{{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}</span>
-        </p>
-        <p>
-            <b>RESULTADO: </b>
-            <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
-            <span *ngIf="!aposta.resultado">aguardando</span>
-        </p>
-    </div>
-    <p *ngIf="falhaSimulacao">
-        <ngb-alert [dismissible]="false"
-                   type='danger'>
-            <strong>O Item {{falhaSimulacao}} não pode ser encerrado, Remova-o da lista de encerramento.</strong>
-        </ngb-alert>
-    </p>
     <hr>
     <hr>
 </div>
@@ -81,7 +96,7 @@
                     <p class="campeonato">
                         {{item.campeonato_nome}}
                     </p>
-                    <div class="row col-12">
+                    <div class="row">
                         <div class="col-9">
                             <p class="horario">
                                 {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -105,7 +120,7 @@
                             </p>
                         </div>
                         <div class="col-3 mt-auto">
-                            <button class="btn btn-dark" *ngIf="!item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && !jogoComecou(item)" (click)="addEncerramento(item)">Encerrar
+                            <button class="btn btn-dark" *ngIf="!item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && !jogoComecou(item) && quantidadeMinimaBilhete()" (click)="addEncerramento(item)">Encerrar
                             </button>
                             <span *ngIf="item.encerrado">encerrado</span>
                         </div>
@@ -117,10 +132,10 @@
     </div>
 </div>
 <div class="rodape" *ngIf="itemSelecionado">
-    <button class="btn btn-secondary w-50" style="color: white;" *ngIf="itemSelecionado" (click)="descartar()">
+    <button class="btn btn-outline-dark w-50" style="border-radius: 0" *ngIf="itemSelecionado" (click)="descartar()">
         Descartar
     </button>
-    <button class="btn btn-danger w-50" style="color: white;" *ngIf="!falhaSimulacao" (click)="confirmarEncerramento()">
+    <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="!falhaSimulacao" (click)="confirmarEncerramento()">
         Confirmar
     </button>
 </div>

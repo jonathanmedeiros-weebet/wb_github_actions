@@ -1,8 +1,21 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {HelperService, AuthService, ParametrosLocaisService, MessageService, ApostaService} from '../../../../services';
+import {
+    HelperService,
+    AuthService,
+    ParametrosLocaisService,
+    MessageService,
+    ApostaService,
+    UtilsService,
+    PrintService
+} from '../../../../services';
 import {config} from '../../../config';
+import {ExibirBilheteEsportivoComponent} from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import {ExibirBilheteLoteriaComponent} from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import {ExibirBilheteDesafioComponent} from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import {BilheteAcumuladaoComponent} from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -11,7 +24,11 @@ import {config} from '../../../config';
 })
 export class ApostaEncerramentoModalComponent implements OnInit {
     LOGO = config.LOGO;
-    aposta;
+    @Input() primeiraImpressao = false;
+    @Input() isUltimaAposta = false;
+    @Input() showCancel = false;
+    @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
+    @Input() aposta;
     appMobile;
     casaDasApostasId;
     isLoggedIn;
@@ -29,6 +46,8 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private messageService: MessageService,
         private apostaService: ApostaService,
+        private utilsService: UtilsService,
+        private printService: PrintService,
         private auth: AuthService
     ) {
     }
@@ -135,6 +154,89 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         this.falhaSimulacao = null;
         this.novaCotacao = null;
         this.novaPossibilidadeGanho = null;
+    }
+
+    quantidadeMinimaBilhete() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+        if (this.aposta.itens_ativos > opcoes.quantidade_min_jogos_bilhete) {
+            result = true;
+        }
+        return result;
+    }
+
+    impressaoPermitida() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (this.primeiraImpressao) {
+            result = true;
+        } else {
+            if (opcoes.permitir_reimprimir_aposta) {
+                result = true;
+            }
+
+            if (opcoes.permitir_reimprimir_ultima_aposta && this.isUltimaAposta) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+
+    print() {
+        this.utilsService.getDateTime().subscribe(
+            results => {
+                const { currentDateTime } = results;
+                const dateTime = moment(currentDateTime).format('DD/MM/YYYY [as] HH:mm');
+                this.printService.sportsTicket(this.aposta, dateTime);
+            },
+            error => {
+                this.handleError(error);
+            }
+        );
+    }
+
+    shared() {
+        this.bilheteCompartilhamento.shared();
+    }
+
+    cancel() {
+        this.activeModal.close('cancel');
+    }
+
+    setPagamento() {
+        this.activeModal.close('pagamento');
+    }
+
+    pagamentoPermitido() {
+        return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago && !this.aposta.cartao_aposta;
+    }
+
+    compartilhamentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (opcoes.habilitar_compartilhamento_comprovante) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    cancelamentoPermitido() {
+        const opcoes = this.paramsLocais.getOpcoes();
+        let result = false;
+
+        if (this.showCancel && this.isLoggedIn) {
+            if (opcoes.habilitar_cancelar_aposta) {
+                result = true;
+            } else if (opcoes.habilitar_cancelar_ultima_aposta && this.isUltimaAposta) {
+                result = true;
+            }
+        }
+
+        return result;
     }
 
     handleError(msg) {

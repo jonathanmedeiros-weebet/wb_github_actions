@@ -48,11 +48,12 @@
                     <div class="width-40">{{stats[getIndex(item)].time_b_escanteios}}</div>
                 </div>
             </div>
-            <div class="div-3" [ngClass]="{'dashed': stats[getIndex(item)].resultado == 'cancelado'}">
+            <div class="div-3 {{item.encerrado ? 'encerrado' : ''}}" [ngClass]="{'dashed': stats[getIndex(item)].resultado == 'cancelado'}">
                 <span>{{item.categoria_nome}}: </span>
                 <span>{{item.odd_nome}}</span>
                 <b> ({{item.cotacao}})</b>
             </div>
+            <span>{{item.encerrado ? 'encerrado' : ''}}</span>
             <div class="div-4" *ngIf="stats[getIndex(item)].resultado">
                 <span [ngClass]="resultadoClass(stats[getIndex(item)].resultado)">
                     {{stats[getIndex(item)].resultado}}

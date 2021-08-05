@@ -21,6 +21,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     smallScreen = true;
     apostas: ApostaEsportiva[] = [];
     modalRef;
+    modalRefEncerramento;
     showLoading = true;
     totais = {
         'comissao': 0,
@@ -123,7 +124,6 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
                             scrollable: true
                         });
                         this.modalRef.componentInstance.aposta = apostaLocalizada;
-                        this.modalRef.componentInstance.apuracao = true;
                         this.modalRef.componentInstance.showCancel = true;
                         if (params['verificar-ultima-aposta']) {
                             this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
@@ -203,8 +203,13 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
 
     openModalEncerramento(aposta) {
         this.showLoading = true;
+        const params = {};
 
-        this.apostaService.getAposta(aposta.id)
+        if (aposta.id === this.apostas[0].id) {
+            params['verificar-ultima-aposta'] = 1;
+        }
+
+        this.apostaService.getAposta(aposta.id, params)
             .subscribe(
                 apostaLocalizada => {
                     this.modalRef = this.modalService.open(ApostaEncerramentoModalComponent, {
@@ -213,9 +218,31 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
                         scrollable: true
                     });
                     this.modalRef.componentInstance.aposta = apostaLocalizada;
+                    this.modalRef.componentInstance.showCancel = true;
+                    if (params['verificar-ultima-aposta']) {
+                        this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
+                    }
+
+                    this.modalRef.result.then(
+                        (result) => {
+                            switch (result) {
+                                case 'cancel':
+                                    this.cancelar(aposta);
+                                    break;
+                                case 'pagamento':
+                                    this.pagarAposta(aposta);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        },
+                        (reason) => { }
+                    );
 
                     this.showLoading = false;
-                }
+                    this.cd.detectChanges();
+                },
+                error => this.handleError(error)
             );
     }
 
