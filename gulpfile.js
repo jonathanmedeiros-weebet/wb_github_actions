@@ -142,14 +142,6 @@ gulp.task('eurosportbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('gol.wee.bet', function (done) {
-    tasks(done, {
-        host: "gol.wee.bet",
-        banca: "SPORT GOL",
-        styles: "--header: #4caf50; --foreground-header: #fff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds: #4caf50; --foreground-odds: #fff;",
-    });
-});
-
 gulp.task('maissports.net', function (done) {
     tasks(done, {
         host: "maissports.net",
@@ -1633,6 +1625,14 @@ gulp.task('apostasms.wee.bet', function (done) {
     tasks(done, {
         host: "apostasms.wee.bet",
         banca: "APOSTAS MS",
+        styles: "",
+    });
+});
+
+gulp.task('olimpobetsvip.wee.bet', function (done) {
+    tasks(done, {
+        host: "olimpobetsvip.wee.bet",
+        banca: "OLIMPO BETS VIP",
         styles: "",
     });
 });
