@@ -74,4 +74,25 @@ export class ApostaService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    simularEncerramento(item): Observable<any> {
+        const url = `${this.ApostaUrl}/simular-encerramento?item=` + JSON.stringify(item);
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    encerrarItem(itens): Observable<any> {
+        const url = `${this.ApostaUrl}/encerrar-item`;
+
+        return this.http.post(url, JSON.stringify(itens), this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

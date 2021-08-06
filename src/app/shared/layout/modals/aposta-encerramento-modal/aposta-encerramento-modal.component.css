@@ -1,9 +1,20 @@
 #cupom{
     /* width: 19.27em; */
-    padding: 1em;
+    padding: 0 1em;
     background: #f3f5d3;
     /* margin: 2em auto; */
     font-size: 12px;
+}
+
+.cupom-header {
+    padding: 0 2em;
+    background: #f3f5d3;
+    /* margin: 2em auto; */
+    font-size: 12px;
+}
+
+.cupom-ativo{
+    background: #f3f5d3;
 }
 
 img{
@@ -91,4 +102,8 @@ hr {
 
 .encerrado {
     text-decoration-line: line-through;
+}
+
+.dados-simulacao {
+    color: red;
 }

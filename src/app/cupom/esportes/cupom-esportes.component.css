@@ -68,3 +68,7 @@
 .dashed{
     text-decoration: line-through;
 }
+
+.encerrado{
+    text-decoration-line: line-through;
+}

@@ -51,6 +51,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
             'ganhou': !item.removido ? item.resultado === 'ganhou' : false,
             'perdeu': !item.removido ? item.resultado === 'perdeu' : false,
             'cancelado': item.removido,
+            'encerrado': item.encerrado
         };
     }
 
