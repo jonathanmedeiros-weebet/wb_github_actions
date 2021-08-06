@@ -40,12 +40,12 @@
                 <p class="horario">
                     {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                 </p>
-                <p class="nome {{item.encerrado ? 'encerrado' : ''}}" [ngClass]="resultadoClass(item)">
+                <p class="nome" [ngClass]="resultadoClass(item)">
                     {{item.time_a_nome}}
                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                     {{item.time_b_nome}}
                 </p>
-                <p class="cotacao {{item.encerrado ? 'encerrado' : ''}}" [ngClass]="resultadoClass(item)">
+                <p class="cotacao" [ngClass]="resultadoClass(item)">
                     {{item.categoria_nome}}:
                     {{item.odd_nome}}
                     ( {{item.cotacao}} )

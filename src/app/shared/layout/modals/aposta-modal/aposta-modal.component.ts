@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { ExibirBilheteEsportivoComponent } from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { BilheteAcumuladaoComponent } from './../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
-import { ExibirBilheteDesafioComponent } from './../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
-import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {HelperService, AuthService, ParametrosLocaisService, ApostaService} from '../../../../services';
-import {ApostaEncerramentoModalComponent} from '../aposta-encerramento-modal/aposta-encerramento-modal.component';
+import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { ExibirBilheteDesafioComponent } from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import { ExibirBilheteLoteriaComponent } from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {HelperService, AuthService, ParametrosLocaisService} from '../../../../services';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -19,23 +18,18 @@ export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
     @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     @Input() aposta;
-    @Input() apuracao;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;
     @Input() isUltimaAposta = false;
     appMobile;
     casaDasApostasId;
     isLoggedIn;
-    modalRef;
-    showLoading = true;
 
     constructor(
         public activeModal: NgbActiveModal,
         private helperService: HelperService,
         private paramsLocais: ParametrosLocaisService,
-        private auth: AuthService,
-        private modalService: NgbModal,
-        private apostaService: ApostaService
+        private auth: AuthService
     ) { }
 
     ngOnInit() {
@@ -144,33 +138,5 @@ export class ApostaModalComponent implements OnInit {
             const url = `http://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${this.aposta.id}`;
             this.helperService.sharedCasaDasApostaUrl(url);
         }
-    }
-
-    encerramentoPermitido() {
-        const opcoes = this.paramsLocais.getOpcoes();
-        let result = false;
-
-        if (opcoes.permitir_encerrar_aposta) {
-            result = true;
-        }
-
-        return result;
-    }
-
-    openModalEncerramento(aposta) {
-        this.showLoading = true;
-
-        this.apostaService.getAposta(aposta.id)
-            .subscribe(
-                apostaLocalizada => {
-                    this.modalRef = this.modalService.open(ApostaEncerramentoModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true,
-                        scrollable: true
-                    });
-                    this.modalRef.componentInstance.aposta = apostaLocalizada;
-                    this.showLoading = false;
-                }
-            );
     }
 }

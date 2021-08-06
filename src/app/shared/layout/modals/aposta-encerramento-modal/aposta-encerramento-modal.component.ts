@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     HelperService,
     AuthService,
@@ -10,11 +10,7 @@ import {
     UtilsService,
     PrintService
 } from '../../../../services';
-import {config} from '../../../config';
-import {ExibirBilheteEsportivoComponent} from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import {ExibirBilheteLoteriaComponent} from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import {ExibirBilheteDesafioComponent} from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
-import {BilheteAcumuladaoComponent} from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { config } from '../../../config';
 import * as moment from 'moment';
 
 @Component({
@@ -131,6 +127,8 @@ export class ApostaEncerramentoModalComponent implements OnInit {
                         this.descartar();
                     },
                     error => {
+                        this.novaCotacao = null;
+                        this.novaPossibilidadeGanho = null;
                         this.handleError(error);
                     }
                 );
@@ -145,7 +143,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
                 apostaAtualizada => {
                     this.aposta = apostaAtualizada;
                 },
-                error => {}
+                error => { }
             );
     }
 
