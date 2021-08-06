@@ -21,7 +21,6 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     smallScreen = true;
     apostas: ApostaEsportiva[] = [];
     modalRef;
-    modalRefEncerramento;
     showLoading = true;
     totais = {
         'comissao': 0,
@@ -115,16 +114,17 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
             params['verificar-ultima-aposta'] = 1;
         }
 
+        let modalAposta;
         if (this.encerramentoPermitido) {
-            this.modalAposta = ApostaEncerramentoModalComponent;
+            modalAposta = ApostaEncerramentoModalComponent;
         } else {
-            this.modalAposta = ApostaModalComponent;
+            modalAposta = ApostaModalComponent;
         }
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(
                 apostaLocalizada => {
-                    this.modalRef = this.modalService.open(this.modalAposta, {
+                    this.modalRef = this.modalService.open(modalAposta, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true,
                         scrollable: true
