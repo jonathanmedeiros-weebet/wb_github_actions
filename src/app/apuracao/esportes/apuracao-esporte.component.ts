@@ -115,7 +115,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
             params['verificar-ultima-aposta'] = 1;
         }
 
-        if (aposta.tipo === 'esportes' && this.encerramentoPermitido) {
+        if (this.encerramentoPermitido) {
             this.modalAposta = ApostaEncerramentoModalComponent;
         } else {
             this.modalAposta = ApostaModalComponent;
