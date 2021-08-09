@@ -197,7 +197,9 @@
         "reallbet.site": "gulp reallbet.site",
         "king-bets.wee.bet": "gulp king-bets.wee.bet",
         "apostasms.wee.bet": "gulp apostasms.wee.bet",
-        "olimpobetsvip.wee.bet": "gulp olimpobetsvip.wee.bet"
+        "olimpobetsvip.wee.bet": "gulp olimpobetsvip.wee.bet",
+        "scorpionsbet.wee.bet": "gulp scorpionsbet.wee.bet",
+        "betsnet.me": "gulp betsnet.me"
     },
     "private": true,
     "dependencies": {

@@ -1636,3 +1636,19 @@ gulp.task('olimpobetsvip.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('scorpionsbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "scorpionsbet.wee.bet",
+        banca: "SCORPIONS BET",
+        styles: "",
+    });
+});
+
+gulp.task('betsnet.me', function (done) {
+    tasks(done, {
+        host: "betsnet.me",
+        banca: "BETS NET",
+        styles: "",
+    });
+});
