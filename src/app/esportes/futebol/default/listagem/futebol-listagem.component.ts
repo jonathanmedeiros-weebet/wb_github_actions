@@ -39,6 +39,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     offset;
     total;
     exibirCampeonatosExpandido;
+    bloquearCotacaoMenorQue;
     loadingScroll = false;
     unsub$ = new Subject();
 
@@ -57,6 +58,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
+        this.bloquearCotacaoMenorQue = this.paramsService.bloquearCotacaoMenorQue();
         this.offset = this.exibirCampeonatosExpandido ? 5 : 15;
 
         // Recebendo os itens atuais do bilhete
@@ -304,5 +306,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             queryParams: { 'data': proximaData }
         };
         this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
+    }
+
+    cotacaoPermitida(cotacao) {
+        return cotacao >= this.bloquearCotacaoMenorQue;
     }
 }

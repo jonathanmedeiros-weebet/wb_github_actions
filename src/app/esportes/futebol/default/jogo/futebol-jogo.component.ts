@@ -34,6 +34,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     showLoadingIndicator = true;
     contentSportsEl;
     unsub$ = new Subject();
+    antes;
 
     constructor(
         private jogoService: JogoService,
@@ -97,6 +98,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
+        this.antes = Date.now();
         if (this.jogoId) {
             this.showLoadingIndicator = true;
 
@@ -253,6 +255,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
+        const duracao = Date.now() - this.antes;
+        console.log("levou " + duracao + "ms");
     }
 
     addCotacao(jogo: Jogo, cotacao) {
@@ -395,10 +399,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     cotacaoPermitida(cotacao) {
-        if(cotacao < this.bloquearCotacaoMenorQue){
-            console.log(cotacao);
-        }
-
         return cotacao >= this.bloquearCotacaoMenorQue;
     }
 }

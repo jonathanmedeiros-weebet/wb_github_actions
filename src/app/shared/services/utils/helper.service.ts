@@ -11,27 +11,29 @@ import { ParametrosLocaisService } from '../parametros-locais.service';
     providedIn: 'root',
 })
 export class HelperService {
+    tiposAposta;
+    cotacoesLocais;
+    opcoes;
     CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
 
-    constructor(private paramsService: ParametrosLocaisService) { }
+    constructor(private paramsService: ParametrosLocaisService) {
+        this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        this.tiposAposta = this.paramsService.getTiposAposta();
+        this.opcoes = this.paramsService.getOpcoes();
+    }
 
     apostaTipoLabel(chave: string, field = 'nome'): number {
-        const tiposAposta = this.paramsService.getTiposAposta();
-        const tipoAposta = tiposAposta[chave];
+        const tipoAposta = this.tiposAposta[chave];
         return tipoAposta ? tipoAposta[field] : '';
     }
 
     calcularCotacao(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
-        const cotacoesLocais = this.paramsService.getCotacoesLocais();
-        const tiposAposta = this.paramsService.getTiposAposta();
-        const opcoes = this.paramsService.getOpcoes();
-
-        const tipoAposta = tiposAposta[chave];
+        const tipoAposta = this.tiposAposta[chave];
 
         // Cotacação Local
-        if (cotacoesLocais[jogoEventId] && cotacoesLocais[jogoEventId][chave]) {
-            result = parseFloat(cotacoesLocais[jogoEventId][chave].valor);
+        if (this.cotacoesLocais[jogoEventId] && this.cotacoesLocais[jogoEventId][chave]) {
+            result = parseFloat(this.cotacoesLocais[jogoEventId][chave].valor);
         }
 
         if (tipoAposta) {
@@ -61,9 +63,9 @@ export class HelperService {
 
                     if (cotacoesFavoritoZebra.includes(chave)) {
                         if (/casa/.test(chave)) {
-                            result *= favorito === 'casa' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                            result *= favorito === 'casa' ? this.opcoes.fator_favorito : this.opcoes.fator_zebra;
                         } else {
-                            result *= favorito === 'fora' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                            result *= favorito === 'fora' ? this.opcoes.fator_favorito : this.opcoes.fator_zebra;
                         }
                     }
                 }
@@ -279,11 +281,10 @@ export class HelperService {
     }
 
     calcularPremioLoteria(valor, cotacao) {
-        const opcoes = this.paramsService.getOpcoes();
         let result = valor * cotacao;
 
-        if (result > opcoes.valor_max_premio_loterias) {
-            result = opcoes.valor_max_premio_loterias;
+        if (result > this.opcoes.valor_max_premio_loterias) {
+            result = this.opcoes.valor_max_premio_loterias;
         }
 
         return this.moneyFormat(result);
