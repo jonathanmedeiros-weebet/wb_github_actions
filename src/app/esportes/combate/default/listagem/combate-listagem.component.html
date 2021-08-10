@@ -29,7 +29,7 @@
                                 <div class="odd odd-combate" *ngFor="let cotacao of evento.cotacoes"
                                     (click)="addCotacao(evento, cotacao)">
                                     <div
-                                        class="inner-odd {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                        class="inner-odd odd-enabled {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                         <span class="nome">
                                             {{cotacao.chave | tipoApostaCustom: evento.time_a_nome:evento.time_b_nome}}
                                         </span>

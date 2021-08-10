@@ -53,7 +53,7 @@
                     <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados[chave])"
                         *ngFor="let odds of mercados[chave].odds">
                         <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
-                            <div class="inner-odd" [ngClass]="{'selecionado': oddSelecionada(jogo._id, odd.chave)}">
+                            <div class="inner-odd odd-enabled" [ngClass]="{'selecionado': oddSelecionada(jogo._id, odd.chave)}">
                                 <span class="nome">
                                     {{odd.chave | tipoAposta}}
                                 </span>

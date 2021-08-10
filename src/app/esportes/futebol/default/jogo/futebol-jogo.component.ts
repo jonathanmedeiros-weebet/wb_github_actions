@@ -393,4 +393,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         const tamanho = 100 / numColunas;
         return Math.round(tamanho);
     }
+
+    cotacaoPermitida(cotacao) {
+        if(cotacao < this.bloquearCotacaoMenorQue){
+            console.log(cotacao);
+        }
+
+        return cotacao >= this.bloquearCotacaoMenorQue;
+    }
 }

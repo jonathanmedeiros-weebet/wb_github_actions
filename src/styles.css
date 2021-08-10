@@ -599,11 +599,11 @@ button {
         width: 33.33%;
     }
 
-    .odds .inner-odd:hover {
+    .odds .odd-enabled:hover {
         background-color: var(--highlight);
     }
 
-    .odds .inner-odd:hover span {
+    .odds .odd-enabled:hover span {
         color: var(--foreground-selected-odds) !important;
     }
 }
@@ -738,6 +738,7 @@ button {
 
 .odd-disabled{
     cursor: not-allowed!important;
+    opacity: .7;
 }
 
 @keyframes lds-ring {
