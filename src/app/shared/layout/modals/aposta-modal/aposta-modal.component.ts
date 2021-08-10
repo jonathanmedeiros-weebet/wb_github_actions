@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { ExibirBilheteEsportivoComponent } from '../../exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { BilheteAcumuladaoComponent } from './../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
-import { ExibirBilheteDesafioComponent } from './../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
-import { ExibirBilheteLoteriaComponent } from './../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
+import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { ExibirBilheteDesafioComponent } from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import { ExibirBilheteLoteriaComponent } from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {HelperService, AuthService, ParametrosLocaisService} from '../../../../services';
 
 @Component({
     selector: 'app-aposta-modal',

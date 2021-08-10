@@ -23,6 +23,7 @@ export class DesafioAposta {
     versao_app = '1.0';
     chave: string;
     cartao_aposta: string;
+    codigo: string;
 
     ultima_aposta: string;
 }

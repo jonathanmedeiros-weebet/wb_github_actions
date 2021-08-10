@@ -11,6 +11,7 @@ import {
     InfiniteScrollDirective,
     SafeHTMLPipe
 } from './index';
+import { SplitCodigoPipe } from './split-codigo.pipe';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import {
         OddCategoriaPipe,
         SafeHTMLPipe,
         SorteioTipoPipe,
-        InfiniteScrollDirective
+        InfiniteScrollDirective,
+        SplitCodigoPipe
     ],
     exports: [
         MomentPipe,
@@ -33,7 +35,8 @@ import {
         OddCategoriaPipe,
         SafeHTMLPipe,
         SorteioTipoPipe,
-        InfiniteScrollDirective
+        InfiniteScrollDirective,
+        SplitCodigoPipe
     ]
 })
 export class UtilsModule { }

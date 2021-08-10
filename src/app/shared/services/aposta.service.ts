@@ -37,6 +37,23 @@ export class ApostaService {
             );
     }
 
+    getApostaByCodigo(codigo: string, queryParams?): Observable<any> {
+        const url = `${config.BASE_URL}/apostas-por-codigo/${codigo}`;
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     cancelar(id): Observable<any> {
         const url = `${this.ApostaUrl}/${id}`;
 
@@ -51,6 +68,27 @@ export class ApostaService {
         const url = `${this.ApostaUrl}/${id}/pagamento`;
 
         return this.http.post(url, '', this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    simularEncerramento(item): Observable<any> {
+        const url = `${this.ApostaUrl}/simular-encerramento?item=` + JSON.stringify(item);
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    encerrarItem(itens): Observable<any> {
+        const url = `${this.ApostaUrl}/encerrar-item`;
+
+        return this.http.post(url, JSON.stringify(itens), this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),

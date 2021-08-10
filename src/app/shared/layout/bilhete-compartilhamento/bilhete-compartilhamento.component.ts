@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { config } from './../../config';
 import {
     ParametrosLocaisService, HelperService,
-    AuthService, MessageService
+    AuthService, MessageService, ImagensService
 } from '../../../services';
 import * as html2canvas from 'html2canvas';
 let newNavigator: any;
@@ -21,18 +21,21 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
-    LOGO = config.LOGO;
+    LOGO;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private auth: AuthService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private imagensService: ImagensService
     ) { }
 
     ngOnInit() {
+        this.imagensService.buscarLogo().subscribe(
+            logo => this.LOGO = `data:image/png;base64,${logo}`
+        );
         this.appMobile = this.auth.isAppMobile();
-
         this.opcoes = this.paramsService.getOpcoes();
 
         if (this.aposta.passador.percentualPremio > 0) {
@@ -65,8 +68,8 @@ export class BilheteCompartilhamentoComponent implements OnInit {
             if (newNavigator.share) {
                 newNavigator.share({
                     title: config.BANCA_NOME,
-                    text: `${config.BANCA_NOME}: #${this.aposta.id}`,
-                    url: `${location.origin}/bilhete/${this.aposta.chave}`,
+                    text: `${config.BANCA_NOME}: ${this.aposta.codigo}`,
+                    url: `${location.origin}/bilhete/${this.aposta.codigo}`,
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');

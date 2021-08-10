@@ -15,9 +15,10 @@ import {
     AcumuladaoService,
     DesafioApostaService
 } from '../services';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
-    imports: [SharedModule, ValidarApostaRoutingModule],
+    imports: [SharedModule, ValidarApostaRoutingModule, NgxMaskModule],
     exports: [],
     declarations: [
         ValidarApostaWrapperComponent,

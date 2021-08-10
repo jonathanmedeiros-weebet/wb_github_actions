@@ -30,8 +30,8 @@ export class CupomComponent implements OnInit, OnDestroy {
 
         this.route.params
             .subscribe((params: any) => {
-                if (params['chave']) {
-                    this.apostaService.getAposta(params['chave'])
+                if (params['codigo']) {
+                    this.apostaService.getApostaByCodigo(params['codigo'])
                         .pipe(
                             switchMap(aposta => {
                                 this.aposta = aposta;

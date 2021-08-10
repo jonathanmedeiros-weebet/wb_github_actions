@@ -5,8 +5,8 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, ApostaService, MessageService, AuthService } from './../../services';
+import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from '../../shared/layout/modals';
+import {ApostaEsportivaService, ApostaService, MessageService, AuthService, ParametrosLocaisService} from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -28,6 +28,8 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         'premio': 0,
     };
     mjrSports = false;
+    encerramentoPermitido;
+    modalAposta;
     unsub$ = new Subject();
 
     constructor(
@@ -36,6 +38,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
         private authService: AuthService,
+        private paramsLocais: ParametrosLocaisService,
         private modalService: NgbModal
     ) { }
 
@@ -45,6 +48,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         } else {
             this.smallScreen = false;
         }
+        this.encerramentoPermitido = this.paramsLocais.getOpcoes().permitir_encerrar_aposta;
     }
 
     ngOnChanges() {
@@ -110,12 +114,20 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
             params['verificar-ultima-aposta'] = 1;
         }
 
+        let modalAposta;
+        if (this.encerramentoPermitido) {
+            modalAposta = ApostaEncerramentoModalComponent;
+        } else {
+            modalAposta = ApostaModalComponent;
+        }
+
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(
                 apostaLocalizada => {
-                    this.modalRef = this.modalService.open(ApostaModalComponent, {
+                    this.modalRef = this.modalService.open(modalAposta, {
                         ariaLabelledBy: 'modal-basic-title',
-                        centered: true
+                        centered: true,
+                        scrollable: true
                     });
                     this.modalRef.componentInstance.aposta = apostaLocalizada;
                     this.modalRef.componentInstance.showCancel = true;

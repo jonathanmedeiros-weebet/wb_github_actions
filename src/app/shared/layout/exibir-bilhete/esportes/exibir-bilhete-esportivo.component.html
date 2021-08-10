@@ -6,7 +6,7 @@
             <img [src]="LOGO">
         </div>
         <h1 class="numero">
-            #{{aposta.id}}
+            {{aposta.codigo}}
         </h1>
         <hr>
         <hr>
@@ -53,6 +53,7 @@
                 </p>
                 <p class="jogo-resultado">
                     <span *ngIf="item.removido; else resultado">cancelado</span>
+                    <span *ngIf="item.encerrado; else resultado">encerrado</span>
                     <ng-template #resultado>{{item.resultado}}</ng-template>
                 </p>
             </div>

@@ -19,8 +19,8 @@ export class PreApostaEsportivaService {
         private errorService: ErrorService
     ) { }
 
-    getPreAposta(id: number): Observable<PreApostaEsportiva> {
-        const url = `${this.PreApostaUrl}/${id}`;
+    getPreAposta(codigo: string): Observable<PreApostaEsportiva> {
+        const url = `${this.PreApostaUrl}/${codigo}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
