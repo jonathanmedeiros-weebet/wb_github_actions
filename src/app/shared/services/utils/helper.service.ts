@@ -22,9 +22,31 @@ export class HelperService {
         this.opcoes = this.paramsService.getOpcoes();
     }
 
-    apostaTipoLabel(chave: string, field = 'nome'): number {
+    apostaTipoLabel(chave: string, field = 'nome'): string {
         const tipoAposta = this.tiposAposta[chave];
         return tipoAposta ? tipoAposta[field] : '';
+    }
+
+    apostaTipoLabelCustom(value: any, timeA: string, timeB: string): string {
+        let result = '';
+
+        if (this.tiposAposta[value]) {
+            const nome = this.tiposAposta[value].nome;
+            result = nome;
+
+            if (nome.search(/casa/ig) >= 0) {
+                result = nome.replace(/casa/ig, timeA);
+            }
+            if (nome.search(/fora/ig) >= 0) {
+                result = nome.replace(/fora/ig, timeB);
+            }
+        }
+
+        return result;
+    }
+
+    cotacaoPermitida(cotacao) {
+        return cotacao >= (this.opcoes.bloquearCotacaoMenorQue || 1.05);
     }
 
     calcularCotacao(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): number {

@@ -146,8 +146,7 @@ export class ParametrosLocaisService {
     }
 
     bloquearCotacaoMenorQue() {
-        // return this.parametrosLocais ? this.parametrosLocais.opcoes.bloquear_cotacao_menor_que : 1.05;
-        return 1.05;
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.bloquear_cotacao_menor_que : 1.05;
     }
 
     getOddsBasqueteAtivas() {

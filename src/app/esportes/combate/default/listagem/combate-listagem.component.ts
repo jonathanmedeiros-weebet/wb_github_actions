@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -33,6 +33,7 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
+        private helperService: HelperService,
         private cd: ChangeDetectorRef
     ) { }
 
@@ -63,7 +64,16 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['camps'] && this.camps) {
-            this.campeonatos = this.camps;
+            this.campeonatos = this.camps.map(campeonato => {
+                campeonato.jogos.forEach(jogo => {
+                    jogo.cotacoes.forEach(cotacao => {
+                        cotacao.valorFinal = this.helperService.calcularCotacao(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
+                    });
+                });
+
+                return campeonato;
+            });
         }
     }
 
@@ -134,5 +144,9 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     eventoBloqueado(eventId) {
         return this.eventosBloqueados ? (this.eventosBloqueados.includes(eventId) ? true : false) : false;
+    }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }

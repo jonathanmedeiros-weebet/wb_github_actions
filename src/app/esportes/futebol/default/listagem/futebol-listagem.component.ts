@@ -6,7 +6,7 @@ import {
 import { Router, NavigationExtras } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -39,7 +39,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     offset;
     total;
     exibirCampeonatosExpandido;
-    bloquearCotacaoMenorQue;
     loadingScroll = false;
     unsub$ = new Subject();
 
@@ -48,6 +47,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
+        private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private router: Router
     ) { }
@@ -58,7 +58,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
-        this.bloquearCotacaoMenorQue = this.paramsService.bloquearCotacaoMenorQue();
         this.offset = this.exibirCampeonatosExpandido ? 5 : 15;
 
         // Recebendo os itens atuais do bilhete
@@ -170,9 +169,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     // Coloca as cotações faltando nos jogos
-    cotacaoManualFaltando(jogoEventId, cotacoes) {
+    cotacaoManualFaltando(jogo, cotacoes) {
         let result = false;
-        const cotacoesLocais = this.cotacoesLocais[jogoEventId];
+        const cotacoesLocais = this.cotacoesLocais[jogo.event_id];
 
         if (cotacoesLocais) {
             for (let index = 0; index < cotacoes.length; index++) {
@@ -189,14 +188,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                     const cotacaoLocal = cotacoesLocais[chave];
 
                     if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
-                        if (!this.cotacoesFaltando[jogoEventId]) {
-                            this.cotacoesFaltando[jogoEventId] = [];
+                        if (!this.cotacoesFaltando[jogo.event_id]) {
+                            this.cotacoesFaltando[jogo.event_id] = [];
                         }
 
-                        if (!this.cotacoesFaltando[jogoEventId].filter(cotacao => cotacao.chave === chave).length) {
-                            this.cotacoesFaltando[jogoEventId].push({
+                        if (!this.cotacoesFaltando[jogo.event_id].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[jogo.event_id].push({
                                 chave: chave,
-                                valor: cotacaoLocal.valor
+                                valor: cotacaoLocal.valor,
+                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, cotacaoLocal.chave, jogo.event_id, jogo.favorito, false),
+                                label: this.helperService.apostaTipoLabel(cotacaoLocal.chave, 'sigla')
                             });
                         }
                     }
@@ -272,7 +273,18 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.loadingScroll = true;
 
         if (this.start < this.total) {
-            const splice = this.camps.splice(0, this.offset);
+            let splice = this.camps.splice(0, this.offset);
+            splice = splice.map(campeonato => {
+                campeonato.jogos.forEach(jogo => {
+                    jogo.cotacoes.forEach(cotacao => {
+                        cotacao.valorFinal = this.helperService.calcularCotacao(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    });
+                });
+
+                return campeonato;
+            });
+
             this.campeonatos = this.campeonatos.concat(splice);
 
             if (this.exibirCampeonatosExpandido || this.deixarCampeonatosAbertos) {
@@ -309,6 +321,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     cotacaoPermitida(cotacao) {
-        return cotacao >= this.bloquearCotacaoMenorQue;
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }

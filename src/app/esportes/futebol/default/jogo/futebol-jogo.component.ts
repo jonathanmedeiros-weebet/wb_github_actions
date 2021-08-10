@@ -29,7 +29,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     itensSelecionados = {};
     tiposAposta;
     cotacoesLocais;
-    bloquearCotacaoMenorQue;
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     contentSportsEl;
@@ -56,7 +55,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
-        this.bloquearCotacaoMenorQue = this.paramsService.bloquearCotacaoMenorQue();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -184,7 +182,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
-                odd.valor = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
+                odd.valorFinal = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
                 odd.label = this.helperService.apostaTipoLabel(odd.chave);
 
                 mercado.odds.push(odd);
@@ -399,6 +397,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     cotacaoPermitida(cotacao) {
-        return cotacao >= this.bloquearCotacaoMenorQue;
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }
