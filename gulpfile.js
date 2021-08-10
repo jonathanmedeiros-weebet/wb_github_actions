@@ -1652,3 +1652,11 @@ gulp.task('betsnet.me', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lobobet.net', function (done) {
+    tasks(done, {
+        host: "lobobet.net",
+        banca: "LOBO BET",
+        styles: "",
+    });
+});
