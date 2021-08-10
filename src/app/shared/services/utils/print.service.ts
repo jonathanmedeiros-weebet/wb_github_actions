@@ -1491,7 +1491,7 @@ ${recarga.autenticacao}
             action: 'listPrinters',
         };
 
-        parent.postMessage(message, 'file://'); // file://
+        parent.postMessage(message, '*'); // file://
         console.log('listPrinters');
     }
 

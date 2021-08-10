@@ -97,7 +97,7 @@
                         {{item.campeonato_nome}}
                     </p>
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-8">
                             <p class="horario">
                                 {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                             </p>
@@ -119,7 +119,7 @@
                                 <ng-template #resultado>{{item.resultado}}</ng-template>
                             </p>
                         </div>
-                        <div class="col-3 mt-auto">
+                        <div class="col-4 mt-auto">
                             <button class="btn btn-dark" *ngIf="!item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && !jogoComecou(item) && quantidadeMinimaBilhete()" (click)="addEncerramento(item)">Encerrar
                             </button>
                             <span *ngIf="item.encerrado">encerrado</span>

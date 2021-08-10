@@ -221,7 +221,7 @@ export class HelperService {
                 data: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
                 action: 'shareURL'
             },
-            'file://'
+            '*'
         );
     }
 
@@ -240,7 +240,7 @@ export class HelperService {
                 data: data,
                 action: 'shareURL'
             },
-            'file://'
+            '*'
         );
     }
 
@@ -252,7 +252,7 @@ export class HelperService {
                 data: `Comprovante de Recarga`,
                 action: 'shareURL'
             },
-            'file://'
+            '*'
         );
     }
 
@@ -263,7 +263,7 @@ export class HelperService {
                 data: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
                 action: 'shareURL'
             },
-            'file://'
+            '*'
         );
     }
 
