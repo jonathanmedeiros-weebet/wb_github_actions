@@ -1660,3 +1660,11 @@ gulp.task('lobobet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nicebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "nicebet.wee.bet",
+        banca: "NICE BET",
+        styles: "",
+    });
+});
