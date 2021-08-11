@@ -182,8 +182,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.label = tipoAposta.nome;
                 odd.valorFinal = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
-                odd.label = this.helperService.apostaTipoLabel(odd.chave);
 
                 mercado.odds.push(odd);
 
@@ -231,8 +231,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                             const cotacao = {
                                 chave: chave,
-                                label: this.helperService.apostaTipoLabel(chave),
-                                valor: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, this.jogo.event_id, this.jogo.favorito, false),
+                                label: tipoAposta.nome,
+                                valor: cotacaoLocal.valor,
+                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, this.jogo.event_id, this.jogo.favorito, false),
                                 posicaoX: tipoAposta.posicao_x_mobile,
                                 posicaoY: tipoAposta.posicao_x_mobile,
                                 posicaoXMobile: tipoAposta.posicao_x_mobile,

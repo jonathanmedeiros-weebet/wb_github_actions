@@ -144,8 +144,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.label = tipoAposta.nome;
                 odd.valorFinal = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, null, true);
-                odd.label = this.helperService.apostaTipoLabel(odd.chave);
 
                 mercado.odds.push(odd);
             }
