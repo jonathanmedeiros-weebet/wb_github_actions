@@ -31,7 +31,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
     unsub$ = new Subject();
-    antes;
 
     constructor(
         private messageService: MessageService,
@@ -89,7 +88,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 jogo => {
-                    this.antes = Date.now();
                     this.jogo = jogo;
                     this.mapearCotacoes(jogo.cotacoes);
                     this.live(id);
@@ -103,7 +101,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (jogo: Jogo) => {
-                    this.antes = Date.now();
                     this.jogo.info = jogo.info;
                     this.mapearCotacoes(jogo.cotacoes);
                 }
@@ -157,8 +154,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         this.mercados = this.organizarMercados(mercados);
 
         this.showLoadingIndicator = false;
-        const duracao = Date.now() - this.antes;
-        console.log("levou " + duracao + "ms");
     }
 
     addCotacao(jogo: Jogo, cotacao) {
