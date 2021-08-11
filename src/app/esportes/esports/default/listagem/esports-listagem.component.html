@@ -13,8 +13,7 @@
                 </div>
                 <div class="eventos">
                     <ng-container *ngFor="let evento of campeonato.jogos">
-                        <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento.event_id)"
-                            (click)="selecionarJogo(evento._id)">
+                        <div class="evento" *ngIf="evento.cotacoes.length && !eventoBloqueado(evento.event_id)">
                             <div class="indentificacao">
                                 <div class="horario">
                                     {{evento.horario | moment: 'DD/MM HH:mm'}}
@@ -28,7 +27,7 @@
                                 <div class="odd" *ngFor="let cotacao of evento.cotacoes">
                                     <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                         <div class="inner-odd odd-enabled {{itensSelecionados[evento._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
-                                            (click)="addCotacao(jogo, cotacao)">
+                                            (click)="addCotacao(evento, cotacao)">
                                             <span class="nome">
                                                 {{cotacao.label}}
                                             </span>

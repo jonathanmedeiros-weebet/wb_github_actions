@@ -8,7 +8,10 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
+import {
+    ParametrosLocaisService, MessageService, JogoService,
+    LiveService, BilheteEsportivoService, HelperService
+} from '../../../../services';
 
 @Component({
     selector: 'app-live-jogo',
@@ -28,12 +31,14 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
     unsub$ = new Subject();
+    antes;
 
     constructor(
         private messageService: MessageService,
         private jogoService: JogoService,
         private liveService: LiveService,
         private bilheteService: BilheteEsportivoService,
+        private helperService: HelperService,
         private el: ElementRef,
         private renderer: Renderer2,
         private router: Router,
@@ -84,6 +89,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 jogo => {
+                    this.antes = Date.now();
                     this.jogo = jogo;
                     this.mapearCotacoes(jogo.cotacoes);
                     this.live(id);
@@ -97,6 +103,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (jogo: Jogo) => {
+                    this.antes = Date.now();
                     this.jogo.info = jogo.info;
                     this.mapearCotacoes(jogo.cotacoes);
                 }
@@ -140,6 +147,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.valorFinal = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, null, true);
+                odd.label = this.helperService.apostaTipoLabel(odd.chave);
+
                 mercado.odds.push(odd);
             }
         }
@@ -147,6 +157,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         this.mercados = this.organizarMercados(mercados);
 
         this.showLoadingIndicator = false;
+        const duracao = Date.now() - this.antes;
+        console.log("levou " + duracao + "ms");
     }
 
     addCotacao(jogo: Jogo, cotacao) {
@@ -278,5 +290,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     calcularTamanhoColuna(numColunas) {
         const tamanho = 100 / numColunas;
         return Math.round(tamanho);
+    }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }
