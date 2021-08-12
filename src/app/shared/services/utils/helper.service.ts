@@ -46,7 +46,7 @@ export class HelperService {
     }
 
     cotacaoPermitida(cotacao) {
-        return cotacao >= (this.opcoes.bloquearCotacaoMenorQue || 1.05);
+        return cotacao >= (this.opcoes.bloquear_cotacao_menor_que || 1.05);
     }
 
     calcularCotacao(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): number {
