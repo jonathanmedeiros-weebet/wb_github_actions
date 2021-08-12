@@ -201,7 +201,8 @@
         "scorpionsbet.wee.bet": "gulp scorpionsbet.wee.bet",
         "betsnet.me": "gulp betsnet.me",
         "lobobet.net": "gulp lobobet.net",
-        "nicebet.wee.bet": "gulp nicebet.wee.bet"
+        "nicebet.wee.bet": "gulp nicebet.wee.bet",
+        "firebet.wee.bet": "gulp firebet.wee.bet"
     },
     "private": true,
     "dependencies": {

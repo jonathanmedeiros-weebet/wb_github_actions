@@ -1668,3 +1668,11 @@ gulp.task('nicebet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('firebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "firebet.wee.bet",
+        banca: "FIRE BET",
+        styles: "",
+    });
+});
