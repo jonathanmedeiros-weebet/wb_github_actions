@@ -12,7 +12,6 @@ import * as moment from 'moment';
     styleUrls: ['basquete-default-wrapper.component.css']
 })
 export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
-    eventoId;
     mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;

@@ -125,17 +125,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.exibirMaisCotacoes.emit(false);
     }
 
-    oddSelecionada(jogoId, chave) {
-        let result = false;
-        for (let index = 0; index < this.itens.length; index++) {
-            const item = this.itens[index];
-            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
-                result = true;
-            }
-        }
-        return result;
-    }
-
     mapearOdds(odds) {
         const mercados90 = {};
         const mercados1T = {};

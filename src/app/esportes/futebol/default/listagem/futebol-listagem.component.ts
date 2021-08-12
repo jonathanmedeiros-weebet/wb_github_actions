@@ -120,17 +120,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
-    oddSelecionada(jogoId, chave) {
-        let result = false;
-        for (let index = 0; index < this.itens.length; index++) {
-            const item = this.itens[index];
-            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
-                result = true;
-            }
-        }
-        return result;
-    }
-
     addCotacao(jogo: Jogo, cotacao) {
         let modificado = false;
         const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
@@ -154,12 +143,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.itens.splice(indexGame, 1, item);
             }
 
-            delete this.itensSelecionados[`${cotacao._id}`];
             modificado = true;
         } else {
             this.itens.push(item);
-
-            this.itensSelecionados[`${cotacao._id}`] = true;
             modificado = true;
         }
 
