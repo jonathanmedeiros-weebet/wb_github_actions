@@ -282,4 +282,8 @@ export class HelperService {
 
         return this.moneyFormat(result);
     }
+
+    removerAcentos(stringToSanitize) {
+        return stringToSanitize.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
 }

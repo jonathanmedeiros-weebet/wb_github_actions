@@ -7,11 +7,15 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 import { config } from './../../config';
 import * as moment from 'moment';
 
+import EscPosEncoder from 'esc-pos-encoder';
+import {ImagensService} from './imagens.service';
+
 @Injectable({
     providedIn: 'root'
 })
 export class PrintService {
     private opcoes = this.paramsService.getOpcoes();
+    private separatorLine = '================================';
 
     constructor(
         private auth: AuthService,
@@ -160,28 +164,39 @@ export class PrintService {
         const odds = this.paramsService.getOddsImpressao();
         const linhas = Math.ceil(odds.length / cols);
 
-        let text = `${config.BANCA_NOME}
-
-        Tabela de Jogos`;
+        const encoder = new EscPosEncoder();
+        const jogosEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .raw([0x1B, 0x21, 0x03])
+            .size('normal')
+            .text('Tabela de Jogos')
+            .newline()
+            .line(this.separatorLine)
+            .size('small');
 
         dias.forEach(dia => {
-            text += `
-
-==== ${dia.data_grupo} ====`;
+            jogosEscPos
+                .align('center')
+                .bold(true)
+                .text(dia.data_grupo);
 
             dia.camps.forEach(camp => {
-                text += `
-
-${camp.nome}
-`;
-
+                jogosEscPos
+                    .newline()
+                    .bold(true)
+                    .text(this.helperService.removerAcentos(camp.nome));
 
                 camp.jogos.forEach(jogo => {
-                    // "2018-11-23T18:00:00.000Z"
                     const horario = moment(jogo.horario).format('HH:mm');
-                    text += `
-${horario} ${jogo.nome}
-`;
+                    jogosEscPos
+                        .newline()
+                        .bold(false)
+                        .text(horario + ' ' + this.helperService.removerAcentos(jogo.nome));
+
                     for (let i = 0; i < linhas; i++) {
                         let start = i * cols;
 
@@ -191,17 +206,25 @@ ${horario} ${jogo.nome}
                         const oddPos4 = odds[++start];
                         const oddPos5 = odds[++start];
 
-                        text += `${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)}
-`;
-                        text += `${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)}
-`;
+                        jogosEscPos
+                            .newline()
+                            .bold(true)
+                            .text(this.helperService.removerAcentos(`${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)}`))
+                            .newline()
+                            .bold(false)
+                            .text(`${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)}`)
+                            .newline();
                     }
                 });
             });
-
         });
+        jogosEscPos
+            .newline()
+            .newline()
+            .newline()
+            .newline();
 
-        parent.postMessage({ data: text, action: 'printLottery' }, 'file://'); // file://
+        parent.postMessage({ data: jogosEscPos.encode(), action: 'printLottery' }, '*');
     }
 
     // Bilhete Loteria
@@ -430,44 +453,97 @@ ${horario} ${jogo.nome}
     }
 
     private lotteryTicketAppMobile(aposta) {
-        let ticket = `
-${config.BANCA_NOME}
+        const encoder = new EscPosEncoder();
 
-${aposta.codigo}
-Data: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
-Cambista: ${aposta.passador.nome}
-Apostador: ${aposta.apostador}
-Modalidade: ${this.getNomeModalidadeLoteria(aposta.modalidade)}
-Valor Total: ${this.helperService.moneyFormat(aposta.valor)}`;
+        const ticketEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .line(aposta.codigo)
+            .raw([0x1B, 0x21, 0x03])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('Data: ')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .bold(true)
+            .text('CAMBISTA: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.passador.nome))
+            .newline()
+            .bold(true)
+            .text('APOSTADOR: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.apostador))
+            .newline()
+            .bold(true)
+            .text('MODALIDADE: ')
+            .bold(false)
+            .text(this.getNomeModalidadeLoteria(aposta.modalidade))
+            .newline()
+            .bold(true)
+            .text('VALOR TOTAL: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.valor))
+            .newline();
 
         aposta.itens.forEach(item => {
-            ticket += `
--------------------------------
-${item.sorteio_nome}
-Dezenas: ${item.numeros.join('-')}
-Valor: ${this.helperService.moneyFormat(item.valor)}`;
+            ticketEscPos
+                .newline()
+                .line(this.separatorLine)
+                .align('center')
+                .bold(true)
+                .line(this.helperService.removerAcentos(item.sorteio_nome))
+                .align('left')
+                .line('DEZENAS: ')
+                .bold(false)
+                .line(item.numeros.join('-'))
+                .bold(true)
+                .newline()
+                .text('VALOR: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(item.valor));
+
             if (item.tipo === 'seninha' && item.cotacao6 > 0) {
-                ticket += `
-Retorno 6: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao6)}`;
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO 6: ')
+                    .bold(false)
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao6));
             }
             if (item.cotacao5 > 0) {
-                ticket += `
-Retorno 5: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}`;
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO 5: ')
+                    .bold(false)
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao5));
             }
             if (item.cotacao4 > 0) {
-                ticket += `
-Retorno 4: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}`;
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO 4: ')
+                    .bold(false)
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao4));
             }
             if (item.cotacao3 > 0) {
-                ticket += `
-Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}`;
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO 3: ')
+                    .bold(false)
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao3));
             }
         });
 
-        ticket += `
-        `;
-
-        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+        parent.postMessage({ data: ticketEscPos.encode(), action: 'printLottery' }, '*'); // file://
     }
 
     // Bilhete Esportivo
@@ -692,34 +768,81 @@ Retorno 3: ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)
     }
 
     private sportsTicketAppMobile(aposta, dateTime?) {
-        let ticket = `${config.BANCA_NOME}
-${aposta.codigo}
-CAMBISTA: ${aposta.passador.nome}
-APOSTADOR: ${aposta.apostador}
-HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
--------------------------------`;
+        const encoder = new EscPosEncoder();
+
+        const ticketEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .line(aposta.codigo)
+            .raw([0x1B, 0x21, 0x03])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('CAMBISTA:')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.passador.nome))
+            .newline()
+            .bold(true)
+            .text('APOSTADOR:')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.apostador))
+            .newline()
+            .bold(true)
+            .text('HORARIO:')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
+            .newline();
 
         aposta.itens.forEach(item => {
-            ticket += `
--------------------------------
-${item.campeonato_nome}
-${this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm')}
-${item.time_a_nome} x ${item.time_b_nome}
-${item.categoria_nome}: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
+            ticketEscPos
+                .line(this.separatorLine)
+                .align('center')
+                .bold(true)
+                .line(this.helperService.removerAcentos(item.campeonato_nome))
+                .bold(false)
+                .align('left')
+                .line(this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm'))
+                .line(this.helperService.removerAcentos(item.time_a_nome + ' x ' + item.time_b_nome))
+                .line(this.helperService.removerAcentos(item.categoria_nome) + ': ' + this.helperService.removerAcentos(item.odd_nome) + '(' + item.cotacao.toFixed(2) + ')');
+
             if (item.ao_vivo) {
-                ticket += ` | AO VIVO`;
+                ticketEscPos
+                    .text(' | AO VIVO');
             }
         });
 
-        ticket += `
--------------------------------
--------------------------------
-QUANTIDADE DE JOGOS: ${aposta.itens.length}
-COTAÇÃO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false)}
-VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
-POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
-PREMIO: ${this.helperService.moneyFormat(aposta.premio)}
-`;
+        ticketEscPos
+            .align('left')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('QUANTIDADE DE JOGOS: ')
+            .bold(false)
+            .text(aposta.itens.length)
+            .newline()
+            .bold(true)
+            .text('COTACAOO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false))
+            .newline()
+            .bold(true)
+            .text('VALOR APOSTADO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.valor))
+            .newline()
+            .bold(true)
+            .text('POSSIVEL RETORNO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho))
+            .newline()
+            .bold(true)
+            .text('PREMIO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.premio))
+            .newline();
 
         if (aposta.passador.percentualPremio > 0) {
             let cambistaPaga = 0;
@@ -730,18 +853,28 @@ PREMIO: ${this.helperService.moneyFormat(aposta.premio)}
                 cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
             }
 
-            ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
+            ticketEscPos
+                .newline()
+                .bold(true)
+                .text('CAMBISTA PAGA: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(cambistaPaga));
         }
 
-        ticket += `
--------------------------------
--------------------------------
-${this.opcoes.informativo_rodape}
+        ticketEscPos
+            .newline()
+            .align('center')
+            .line(this.helperService.removerAcentos(this.opcoes.informativo_rodape))
+            .newline()
+            .align('left')
+            .size('small')
+            .line('impresso em ' + dateTime)
+            .newline()
+            .newline()
+            .newline()
+            .newline();
 
-impresso em ${dateTime}
-        `;
-
-        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+        parent.postMessage({ data: ticketEscPos.encode(), action: 'printLottery' }, '*'); // file://
     }
 
     // Bilhete Acumuladão
@@ -754,45 +887,84 @@ impresso em ${dateTime}
     }
 
     private bilheteAcumuladaoMobile(aposta) {
-        let ticket = `${config.BANCA_NOME}
-${aposta.codigo}
-CAMBISTA: ${aposta.passador.nome}
-APOSTADOR: ${aposta.apostador}
-HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
--------------------------------
--------------------------------
-${aposta.acumuladao.nome}`;
+        const encoder = new EscPosEncoder();
+
+        const ticketEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .line(aposta.codigo)
+            .raw([0x1B, 0x21, 0x03])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('CAMBISTA:')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.passador.nome))
+            .newline()
+            .bold(true)
+            .text('APOSTADOR:')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.apostador))
+            .newline()
+            .bold(true)
+            .text('HORARIO:')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .text(this.separatorLine)
+            .newline()
+            .bold(true)
+            .text(this.helperService.removerAcentos(aposta.acumuladao.nome))
+            .bold(false)
+            .newline()
+            .text(this.separatorLine);
 
         if (aposta.resultado) {
-            ticket += `
-TOTA DE ACERTOS: ${aposta.quantidade_acertos}
-PREMIO RECEBIDO: ${this.helperService.moneyFormat(aposta.premio)}`;
+            ticketEscPos
+                .newline()
+                .bold(true)
+                .text('TOTAL DE ACERTOS: ')
+                .bold(false)
+                .text(aposta.quantidade_acertos)
+                .newline()
+                .bold(true)
+                .text('PREMIO RECEBIDO: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(aposta.premio));
         } else {
             aposta.acumuladao.premios.forEach(premio => {
-                ticket += `
-POSSÍVEL PREMIO ${premio.quantidade_acertos} ACERTOS: ${this.helperService.moneyFormat(premio.valor)}`;
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('POSSIVEL PREMIO ' + premio.quantidade_acertos)
+                    .text(' ACERTOS: ' + this.helperService.moneyFormat(premio.valor))
+                    .bold(false);
             });
         }
 
-        ticket += `
--------------------------------`;
-
         aposta.itens.forEach(item => {
-            ticket += `
-${this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm')}
-${item.jogo.time_a_nome} x ${item.jogo.time_b_nome}
-PALPITE: ${item.time_a_resultado} x ${item.time_b_resultado}
--------------------------------`;
+            ticketEscPos
+                .newline()
+                .line(this.separatorLine)
+                .line(this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm'))
+                .line(this.helperService.removerAcentos(item.jogo.time_a_nome + ' x ' + item.jogo.time_b_nome))
+                .bold(true)
+                .text('PALPITE: ')
+                .bold(false)
+                .text(item.time_a_resultado + ' x ' + item.time_b_resultado);
         });
 
-        ticket += `
--------------------------------
-Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes iguais entre todos os vencedores.
+        ticketEscPos
+            .newline()
+            .line(this.separatorLine)
+            .align('center')
+            .text('Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes iguais entre todos os vencedores.');
 
-`;
-
-        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
-
+        parent.postMessage({ data: ticketEscPos.encode(), action: 'printLottery' }, '*'); // file://
     }
 
     private bilheteAcumuladaoDesktop(aposta) {
@@ -1187,29 +1359,73 @@ Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes ig
     }
 
     private desafioTicketAppMobile(aposta) {
-        let ticket = `${config.BANCA_NOME}
-${aposta.codigo}
-CAMBISTA: ${aposta.passador.nome}
-APOSTADOR: ${aposta.apostador}
-HORARIO: ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm')}
--------------------------------`;
+        const encoder = new EscPosEncoder();
+
+        const ticketEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .line(aposta.codigo)
+            .raw([0x1B, 0x21, 0x03])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('CAMBISTA:')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.passador.nome))
+            .newline()
+            .bold(true)
+            .text('APOSTADOR:')
+            .bold(false)
+            .text(this.helperService.removerAcentos(aposta.apostador))
+            .newline()
+            .bold(true)
+            .text('HORARIO:')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
+            .newline();
 
         aposta.itens.forEach(item => {
-            ticket += `
--------------------------------
-${item.odd.desafio.categoria.nome}
-${item.odd.desafio.nome}
-RESPOSTA: ${item.odd_nome} ( ${item.cotacao.toFixed(2)} )`;
+            ticketEscPos
+                .line(this.separatorLine)
+                .bold(true)
+                .align('center')
+                .line(this.helperService.removerAcentos(item.odd.desafio.categoria.nome))
+                .bold(false)
+                .align('left')
+                .text(item.odd.desafio.nome)
+                .bold(true)
+                .newline()
+                .text('RESPOSTA: ')
+                .bold(false)
+                .text(this.helperService.removerAcentos(item.odd_nome) + ' (' + item.cotacao.toFixed(2) + ')');
         });
 
-        ticket += `
--------------------------------
--------------------------------
-QUANTIDADE DE DESAFIOS: ${aposta.itens.length}
-COTAÇÃO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false)}
-VALOR APOSTADO: ${this.helperService.moneyFormat(aposta.valor)}
-POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
-`;
+        ticketEscPos
+            .newline()
+            .line(this.separatorLine)
+            .bold(true)
+            .text('QUANTIDADE DE DESAFIOS: ')
+            .bold(false)
+            .text(aposta.itens.length)
+            .newline()
+            .bold(true)
+            .text('COTACAO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false))
+            .newline()
+            .bold(true)
+            .text('VALOR APOSTADO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.valor))
+            .newline()
+            .bold(true)
+            .text('POSSIVEL RETORNO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho));
 
         if (aposta.passador.percentualPremio > 0) {
             let cambistaPaga = 0;
@@ -1219,17 +1435,20 @@ POSSIVEL RETORNO: ${this.helperService.moneyFormat(aposta.possibilidade_ganho)}
             } else {
                 cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
             }
-
-            ticket += `CAMBISTA PAGA: ${this.helperService.moneyFormat(cambistaPaga)}`;
+            ticketEscPos
+                .newline()
+                .bold(true)
+                .text('CAMBISTA PAGA: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(cambistaPaga));
         }
 
-        ticket += `
--------------------------------
--------------------------------
-${this.opcoes.informativo_rodape}
-        `;
+        ticketEscPos
+            .newline()
+            .line(this.separatorLine)
+            .text(this.helperService.removerAcentos(this.opcoes.informativo_rodape));
 
-        parent.postMessage({ data: ticket, action: 'printLottery' }, 'file://'); // file://
+        parent.postMessage({ data: ticketEscPos.encode(), action: 'printLottery' }, '*'); // file://
     }
 
     // Cartão
@@ -1242,16 +1461,50 @@ ${this.opcoes.informativo_rodape}
     }
 
     private cardMobile(card) {
-        const print = `${config.BANCA_NOME}
-Cartão ${card.chave}
-Criação: ${this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm')}
-Cambista: ${card.passador.nome}
-Apostador: ${card.apostador}
-Bônus: ${this.helperService.moneyFormat(card.bonus)}
-Saldo: ${this.helperService.moneyFormat(card.saldo)}
-`;
+        const encoder = new EscPosEncoder();
 
-        parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
+        const cardPrintEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .raw([0x1B, 0x21, 0x03])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('Cartao: ')
+            .bold(false)
+            .text(card.chave)
+            .newline()
+            .bold(true)
+            .text('Criacao: ')
+            .bold(false)
+            .text(this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .bold(true)
+            .text('Cambista: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(card.passador.nome))
+            .newline()
+            .bold(true)
+            .text('Apostador: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(card.apostador))
+            .newline()
+            .bold(true)
+            .text('Premios: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(card.premios))
+            .newline()
+            .bold(true)
+            .text('Saldo: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(card.saldo))
+            .newline();
+
+        parent.postMessage({ data: cardPrintEscPos.encode(), action: 'printCard' }, '*'); // file://
     }
 
     private cardDesktop(card) {
@@ -1368,15 +1621,45 @@ Saldo: ${this.helperService.moneyFormat(card.saldo)}
     }
 
     private comprovanteRecargaMobile(recarga) {
-        const print = `${config.BANCA_NOME}
-Cartão ${recarga.cartao_aposta}
-Cambista: ${recarga.passador}
-Valor: ${this.helperService.moneyFormat(recarga.valor)}
-Data/Hora: ${this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm')}
-${recarga.autenticacao}
-`;
+        const encoder = new EscPosEncoder();
 
-        parent.postMessage({ data: print, action: 'printCard' }, 'file://'); // file://
+        const cardRecargaEscPos = encoder
+            .initialize()
+            .bold(true)
+            .align('center')
+            .raw([0x1B, 0x21, 0x10]) // Large Font Size
+            .line(config.BANCA_NOME)
+            .raw([0x1B, 0x21, 0x03])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('Cartao: ')
+            .bold(false)
+            .text(recarga.cartao_aposta)
+            .newline()
+            .bold(true)
+            .text('Cambista: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(recarga.passador))
+            .newline()
+            .bold(true)
+            .text('Valor: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(recarga.valor))
+            .newline()
+            .bold(true)
+            .text('Data/Hora: ')
+            .bold(false)
+            .text(this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .align('center')
+            .size('small')
+            .bold(true)
+            .text(recarga.autenticacao)
+            .newline();
+
+        parent.postMessage({ data: cardRecargaEscPos.encode(), action: 'printCard' }, '*'); // file://
     }
 
     private comprovanteRecargaDesktop(recarga) {
