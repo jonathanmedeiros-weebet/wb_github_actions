@@ -199,7 +199,10 @@
         "apostasms.wee.bet": "gulp apostasms.wee.bet",
         "olimpobetsvip.wee.bet": "gulp olimpobetsvip.wee.bet",
         "scorpionsbet.wee.bet": "gulp scorpionsbet.wee.bet",
-        "betsnet.me": "gulp betsnet.me"
+        "betsnet.me": "gulp betsnet.me",
+        "lobobet.net": "gulp lobobet.net",
+        "nicebet.wee.bet": "gulp nicebet.wee.bet",
+        "firebet.wee.bet": "gulp firebet.wee.bet"
     },
     "private": true,
     "dependencies": {

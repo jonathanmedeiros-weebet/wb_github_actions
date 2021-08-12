@@ -1652,3 +1652,27 @@ gulp.task('betsnet.me', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lobobet.net', function (done) {
+    tasks(done, {
+        host: "lobobet.net",
+        banca: "LOBO BET",
+        styles: "",
+    });
+});
+
+gulp.task('nicebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "nicebet.wee.bet",
+        banca: "NICE BET",
+        styles: "",
+    });
+});
+
+gulp.task('firebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "firebet.wee.bet",
+        banca: "FIRE BET",
+        styles: "",
+    });
+});
