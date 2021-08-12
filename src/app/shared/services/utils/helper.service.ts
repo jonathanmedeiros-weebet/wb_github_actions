@@ -11,21 +11,51 @@ import { ParametrosLocaisService } from '../parametros-locais.service';
     providedIn: 'root',
 })
 export class HelperService {
+    tiposAposta;
+    cotacoesLocais;
+    opcoes;
     CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
 
-    constructor(private paramsService: ParametrosLocaisService) { }
+    constructor(private paramsService: ParametrosLocaisService) {
+        this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        this.tiposAposta = this.paramsService.getTiposAposta();
+        this.opcoes = this.paramsService.getOpcoes();
+    }
+
+    apostaTipoLabel(chave: string, field = 'nome'): string {
+        const tipoAposta = this.tiposAposta[chave];
+        return tipoAposta ? tipoAposta[field] : '';
+    }
+
+    apostaTipoLabelCustom(value: any, timeA: string, timeB: string): string {
+        let result = '';
+
+        if (this.tiposAposta[value]) {
+            const nome = this.tiposAposta[value].nome;
+            result = nome;
+
+            if (nome.search(/casa/ig) >= 0) {
+                result = nome.replace(/casa/ig, timeA);
+            }
+            if (nome.search(/fora/ig) >= 0) {
+                result = nome.replace(/fora/ig, timeB);
+            }
+        }
+
+        return result;
+    }
+
+    cotacaoPermitida(cotacao) {
+        return cotacao >= (this.opcoes.bloquear_cotacao_menor_que || 1.05);
+    }
 
     calcularCotacao(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): number {
         let result = value;
-        const cotacoesLocais = this.paramsService.getCotacoesLocais();
-        const tiposAposta = this.paramsService.getTiposAposta();
-        const opcoes = this.paramsService.getOpcoes();
-
-        const tipoAposta = tiposAposta[chave];
+        const tipoAposta = this.tiposAposta[chave];
 
         // Cotacação Local
-        if (cotacoesLocais[jogoEventId] && cotacoesLocais[jogoEventId][chave]) {
-            result = parseFloat(cotacoesLocais[jogoEventId][chave].valor);
+        if (this.cotacoesLocais[jogoEventId] && this.cotacoesLocais[jogoEventId][chave]) {
+            result = parseFloat(this.cotacoesLocais[jogoEventId][chave].valor);
         }
 
         if (tipoAposta) {
@@ -55,9 +85,9 @@ export class HelperService {
 
                     if (cotacoesFavoritoZebra.includes(chave)) {
                         if (/casa/.test(chave)) {
-                            result *= favorito === 'casa' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                            result *= favorito === 'casa' ? this.opcoes.fator_favorito : this.opcoes.fator_zebra;
                         } else {
-                            result *= favorito === 'fora' ? opcoes.fator_favorito : opcoes.fator_zebra;
+                            result *= favorito === 'fora' ? this.opcoes.fator_favorito : this.opcoes.fator_zebra;
                         }
                     }
                 }
@@ -273,11 +303,10 @@ export class HelperService {
     }
 
     calcularPremioLoteria(valor, cotacao) {
-        const opcoes = this.paramsService.getOpcoes();
         let result = valor * cotacao;
 
-        if (result > opcoes.valor_max_premio_loterias) {
-            result = opcoes.valor_max_premio_loterias;
+        if (result > this.opcoes.valor_max_premio_loterias) {
+            result = this.opcoes.valor_max_premio_loterias;
         }
 
         return this.moneyFormat(result);

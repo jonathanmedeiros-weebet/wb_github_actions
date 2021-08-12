@@ -6,7 +6,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService, HelperService } from './../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -37,6 +37,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
+        private helperService: HelperService,
         private messageService: MessageService,
         private el: ElementRef,
         private renderer: Renderer2,
@@ -124,17 +125,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.exibirMaisCotacoes.emit(false);
     }
 
-    oddSelecionada(jogoId, chave) {
-        let result = false;
-        for (let index = 0; index < this.itens.length; index++) {
-            const item = this.itens[index];
-            if (item.jogo_id === jogoId && item.cotacao.chave === chave) {
-                result = true;
-            }
-        }
-        return result;
-    }
-
     mapearOdds(odds) {
         const mercados90 = {};
         const mercados1T = {};
@@ -179,6 +169,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.label = tipoAposta.nome;
+                odd.valorFinal = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
+
                 mercado.odds.push(odd);
 
                 if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][odd.chave]) {
@@ -225,11 +218,13 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                             const cotacao = {
                                 chave: chave,
+                                label: tipoAposta.nome,
                                 valor: cotacaoLocal.valor,
+                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, this.jogo.event_id, this.jogo.favorito, false),
                                 posicaoX: tipoAposta.posicao_x_mobile,
                                 posicaoY: tipoAposta.posicao_x_mobile,
                                 posicaoXMobile: tipoAposta.posicao_x_mobile,
-                                posicaoYMobile: tipoAposta.posicao_x_mobile
+                                posicaoYMobile: tipoAposta.posicao_x_mobile,
                             }
 
                             mercado.odds.push(cotacao);
@@ -385,5 +380,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     calcularTamanhoColuna(numColunas) {
         const tamanho = 100 / numColunas;
         return Math.round(tamanho);
+    }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }

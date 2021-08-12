@@ -4,7 +4,6 @@ import { SharedModule } from './../../../shared/shared.module';
 import { BasqueteDefaultRoutingModule } from './basquete-default-routing.module';
 import { BasqueteDefaultWrapperComponent } from './wrapper/basquete-default-wrapper.component';
 import { BasqueteListagemComponent } from './listagem/basquete-listagem.component';
-import { BasqueteEventoComponent } from './evento/basquete-evento.component';
 
 @NgModule({
     imports: [
@@ -13,8 +12,7 @@ import { BasqueteEventoComponent } from './evento/basquete-evento.component';
     ],
     declarations: [
         BasqueteDefaultWrapperComponent,
-        BasqueteListagemComponent,
-        BasqueteEventoComponent
+        BasqueteListagemComponent
     ],
     providers: []
 })

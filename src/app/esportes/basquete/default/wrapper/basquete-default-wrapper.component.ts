@@ -12,8 +12,6 @@ import * as moment from 'moment';
     styleUrls: ['basquete-default-wrapper.component.css']
 })
 export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
-    eventoId;
-    exibirMaisCotacoes = false;
     mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;
@@ -48,7 +46,6 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
-                this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
 
                 if (params['campeonato']) {
@@ -65,7 +62,6 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
                                 this.campeonatos = [campeonato];
 
                                 this.showLoadingIndicator = false;
-                                this.eventoId = this.extrairEventoId(this.campeonatos);
                             },
                             error => this.messageService.error(error)
                         );
@@ -93,7 +89,6 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
                             campeonatos => {
                                 this.campeonatos = campeonatos;
                                 this.showLoadingIndicator = false;
-                                this.eventoId = this.extrairEventoId(this.campeonatos);
                             },
                             error => this.messageService.error(error)
                         );
@@ -121,48 +116,5 @@ export class BasqueteDefaultWrapperComponent implements OnInit, OnDestroy {
                 campeonatos => this.sidebarService.changeItens(campeonatos, 'basquete'),
                 error => this.messageService.error(error)
             );
-    }
-
-    receptorEventoSelecionadoId(eventoId) {
-        this.eventoId = eventoId;
-    }
-
-    changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.exibirMaisCotacoes = exibirMaisCotacoes;
-    }
-
-    // Extrai id do primeiro evento do primeiro campeonato
-    extrairEventoId(campeonatos) {
-        let eventoId = null;
-
-        if (campeonatos.length > 1) {
-            const jogos = campeonatos[0].jogos;
-
-            let start = 0;
-            let stop = false;
-
-            while (!stop) {
-                if (jogos.length > 1) {
-                    eventoId = jogos[start]._id;
-                    stop = true;
-                } else if (jogos.length === 1) {
-                    eventoId = jogos[start]._id;
-                    stop = true;
-                }
-
-                start++;
-            }
-        } else if (campeonatos.length === 1) {
-            const jogos = campeonatos[0].jogos;
-
-            if (jogos.length > 1) {
-                eventoId = jogos[0]._id;
-            } else if (jogos.length === 1) {
-                eventoId = jogos[0]._id;
-            }
-        }
-
-        this.eventoId = eventoId;
-        return eventoId;
     }
 }

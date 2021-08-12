@@ -8,7 +8,10 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, MessageService, JogoService, LiveService, BilheteEsportivoService } from '../../../../services';
+import {
+    ParametrosLocaisService, MessageService, JogoService,
+    LiveService, BilheteEsportivoService, HelperService
+} from '../../../../services';
 
 @Component({
     selector: 'app-live-jogo',
@@ -34,6 +37,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         private jogoService: JogoService,
         private liveService: LiveService,
         private bilheteService: BilheteEsportivoService,
+        private helperService: HelperService,
         private el: ElementRef,
         private renderer: Renderer2,
         private router: Router,
@@ -140,6 +144,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.label = tipoAposta.nome;
+                odd.valorFinal = this.helperService.calcularCotacao(odd.valor, odd.chave, this.jogo.event_id, null, true);
+
                 mercado.odds.push(odd);
             }
         }
@@ -278,5 +285,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     calcularTamanhoColuna(numColunas) {
         const tamanho = 100 / numColunas;
         return Math.round(tamanho);
+    }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }

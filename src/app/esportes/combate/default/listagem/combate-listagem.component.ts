@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService } from './../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -19,8 +19,6 @@ import { takeUntil } from 'rxjs/operators';
 export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
     @Input() camps: Campeonato[];
-    @Output() eventoSelecionadoId = new EventEmitter();
-    @Output() exibirMaisCotacoes = new EventEmitter();
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
@@ -33,6 +31,7 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
+        private helperService: HelperService,
         private cd: ChangeDetectorRef
     ) { }
 
@@ -63,7 +62,16 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['camps'] && this.camps) {
-            this.campeonatos = this.camps;
+            this.campeonatos = this.camps.map(campeonato => {
+                campeonato.jogos.forEach(jogo => {
+                    jogo.cotacoes.forEach(cotacao => {
+                        cotacao.valorFinal = this.helperService.calcularCotacao(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
+                    });
+                });
+
+                return campeonato;
+            });
         }
     }
 
@@ -82,17 +90,6 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
-    }
-
-    oddSelecionada(eventoId, chave) {
-        let result = false;
-        for (let index = 0; index < this.itens.length; index++) {
-            const item = this.itens[index];
-            if (item.jogo_id === eventoId && item.cotacao.chave === chave) {
-                result = true;
-            }
-        }
-        return result;
     }
 
     addCotacao(evento: Jogo, cotacao) {
@@ -118,12 +115,9 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.itens.splice(indexGame, 1, item);
             }
 
-            delete this.itensSelecionados[`${cotacao._id}`];
             modificado = true;
         } else {
             this.itens.push(item);
-
-            this.itensSelecionados[`${cotacao._id}`] = true;
             modificado = true;
         }
 
@@ -134,5 +128,9 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     eventoBloqueado(eventId) {
         return this.eventosBloqueados ? (this.eventosBloqueados.includes(eventId) ? true : false) : false;
+    }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }
