@@ -19,8 +19,6 @@ import { takeUntil } from 'rxjs/operators';
 export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
     @Input() camps: Campeonato[];
-    @Output() eventoSelecionadoId = new EventEmitter();
-    @Output() exibirMaisCotacoes = new EventEmitter();
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};

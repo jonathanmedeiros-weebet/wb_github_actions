@@ -18,9 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
-    @Input() eventoIdAtual;
     @Input() camps: Campeonato[];
-    @Output() eventoSelecionadoId = new EventEmitter();
     mobileScreen = true;
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
