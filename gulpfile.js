@@ -1676,3 +1676,11 @@ gulp.task('firebet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('texas93.bet', function (done) {
+    tasks(done, {
+        host: "texas93.bet",
+        banca: "TEXAS 93",
+        styles: "",
+    });
+});
