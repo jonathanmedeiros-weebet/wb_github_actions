@@ -203,7 +203,8 @@
         "lobobet.net": "gulp lobobet.net",
         "nicebet.wee.bet": "gulp nicebet.wee.bet",
         "firebet.wee.bet": "gulp firebet.wee.bet",
-        "texas93.bet": "gulp texas93.bet"
+        "texas93.bet": "gulp texas93.bet",
+        "mybets.club": "gulp mybets.club"
     },
     "private": true,
     "dependencies": {

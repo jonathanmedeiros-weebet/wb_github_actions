@@ -1684,3 +1684,11 @@ gulp.task('texas93.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mybets.club', function (done) {
+    tasks(done, {
+        host: "mybets.club",
+        banca: "MY BETS",
+        styles: "",
+    });
+});
