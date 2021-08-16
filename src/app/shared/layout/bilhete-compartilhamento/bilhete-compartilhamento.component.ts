@@ -21,20 +21,16 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
-    LOGO;
+    LOGO = config.LOGO;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private auth: AuthService,
-        private messageService: MessageService,
-        private imagensService: ImagensService
+        private messageService: MessageService
     ) { }
 
     ngOnInit() {
-        this.imagensService.buscarLogo().subscribe(
-            logo => this.LOGO = `data:image/png;base64,${logo}`
-        );
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
 
@@ -58,7 +54,9 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     shared() {
         if (this.appMobile) {
             const options = {
-                logging: false
+                logging: true,
+                useCORS: true,
+                allowTaint: false
             };
 
             html2canvas(this.bilhete.nativeElement, options).then((canvas) => {

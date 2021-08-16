@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { config } from '../../../config';
 import {
     ParametrosLocaisService, HelperService, PrintService,
-    AuthService, MessageService, ImagensService
+    AuthService, MessageService
 } from '../../../../services';
 import * as html2canvas from 'html2canvas';
 let newNavigator: any;
@@ -29,14 +29,10 @@ export class ExibirBilheteDesafioComponent implements OnInit {
         private helperService: HelperService,
         private printService: PrintService,
         private auth: AuthService,
-        private messageService: MessageService,
-        private imagensService: ImagensService
+        private messageService: MessageService
     ) { }
 
     ngOnInit() {
-        this.imagensService.buscarLogo().subscribe(
-            logo => this.LOGO = `data:image/png;base64,${logo}`
-        );
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
 
@@ -55,7 +51,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
 
     shared() {
         if (this.appMobile) {
-            const options = { logging: false };
+            const options = { logging: false, useCORS: true };
 
             html2canvas(this.cupom.nativeElement, options).then((canvas) => {
                 this.helperService.sharedTicket(this.aposta, canvas.toDataURL());

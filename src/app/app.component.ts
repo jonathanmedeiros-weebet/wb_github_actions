@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
 import { AuthService, ParametroService } from './services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,18 @@ export class AppComponent implements OnInit {
         private parametroService: ParametroService,
         public modalService: NgbModal,
     ) {
+    }
+
+    @HostListener('window:message', ['$event']) onPostMessage(event) {
+        console.log('recebido  do app');
+        switch (event.data.action) {
+            case 'printerWidth':
+                localStorage.setItem('printer_width', event.data.width);
+                console.log('Tamanho Recebido: ' + event.data.width);
+                break;
+            default:
+                console.log('none');
+        }
     }
 
     ngOnInit() {

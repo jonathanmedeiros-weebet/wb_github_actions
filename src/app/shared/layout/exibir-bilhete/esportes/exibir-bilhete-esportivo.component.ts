@@ -3,8 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { config } from './../../../config';
 import {
     ParametrosLocaisService, PrintService,
-    AuthService, UtilsService, MessageService,
-    ImagensService
+    AuthService, UtilsService, MessageService
 } from '../../../../services';
 import * as moment from 'moment';
 let newNavigator: any;
@@ -29,8 +28,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
         private printService: PrintService,
         private utilsService: UtilsService,
         private messageService: MessageService,
-        private auth: AuthService,
-        private imagensService: ImagensService
+        private auth: AuthService
     ) { }
 
     ngOnInit() {

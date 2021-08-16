@@ -15,7 +15,7 @@ export class ImagensService {
               private headers: HeadersService,
               private errorService: ErrorService) { }
 
-  readonly endpoint = `${config.BASE_URL}/logo`
+  readonly endpoint = `${config.BASE_URL}/logo`;
 
   buscarLogo() {
       return this.http.get( this.endpoint, this.headers.getRequestOptions()).
@@ -24,4 +24,12 @@ export class ImagensService {
       }),
       catchError(this.errorService.handleError));
   }
+
+    buscarLogoBilhete() {
+        return this.http.get( `${config.BASE_URL}/logobilhete`, this.headers.getRequestOptions()).
+        pipe(map((result: any) => {
+                return result.results;
+            }),
+            catchError(this.errorService.handleError));
+    }
 }

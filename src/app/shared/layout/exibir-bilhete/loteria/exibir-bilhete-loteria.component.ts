@@ -2,11 +2,12 @@ import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild } from '@ang
 
 import {
     SorteioService, ParametrosLocaisService, PrintService,
-    HelperService, ImagensService
+    HelperService
 } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as html2canvas from 'html2canvas';
+import { config } from './../../../config';
 
 @Component({
     selector: 'app-exibir-bilhete-loteria',
@@ -17,7 +18,7 @@ import * as html2canvas from 'html2canvas';
 export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     @ViewChild('cupom', { static: false }) cupom: ElementRef;
     @Input() aposta: any;
-    LOGO;
+    LOGO = config.LOGO;
     informativoRodape;
     sorteios = [];
     unsub$ = new Subject();
@@ -26,14 +27,10 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private sorteioService: SorteioService,
         private printService: PrintService,
-        private helperService: HelperService,
-        private imagensService: ImagensService
+        private helperService: HelperService
     ) { }
 
     ngOnInit() {
-        this.imagensService.buscarLogo().subscribe(
-            logo => this.LOGO = `data:image/png;base64,${logo}`
-        );
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
 
@@ -79,7 +76,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     }
 
     shared() {
-        const options = { logging: false };
+        const options = { logging: false, useCORS: true };
 
         html2canvas(this.cupom.nativeElement, options).then((canvas) => {
             this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
