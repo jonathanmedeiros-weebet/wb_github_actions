@@ -182,8 +182,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                             this.cotacoesFaltando[jogo.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, cotacaoLocal.chave, jogo.event_id, jogo.favorito, false),
-                                label: this.helperService.apostaTipoLabel(cotacaoLocal.chave, 'sigla')
+                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, jogo.event_id, jogo.favorito, false),
+                                label: this.helperService.apostaTipoLabel(chave, 'sigla')
                             });
                         }
                     }

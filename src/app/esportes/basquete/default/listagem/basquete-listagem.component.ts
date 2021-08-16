@@ -158,8 +158,8 @@ export class BasqueteListagemComponent implements OnInit, OnDestroy, OnChanges {
                             this.cotacoesFaltando[evento.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, cotacaoLocal.chave, evento.event_id, evento.favorito),
-                                label: this.helperService.apostaTipoLabelCustom(cotacaoLocal.chave, evento.time_a_nome, evento.time_b_nome)
+                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, evento.event_id, evento.favorito),
+                                label: this.helperService.apostaTipoLabelCustom(chave, evento.time_a_nome, evento.time_b_nome)
                             });
                         }
                     }
