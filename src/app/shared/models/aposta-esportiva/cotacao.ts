@@ -6,7 +6,7 @@ export class Cotacao {
     nome: string;
     label: any;
     valor: number;
-    valorFinal: number;
+    valorFinal: any;
     jogoId: number;
     jogo: Jogo;
 }

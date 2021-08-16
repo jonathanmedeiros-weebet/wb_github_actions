@@ -69,7 +69,7 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.campeonatos = this.camps.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
                         cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
                     });
                 });
@@ -158,7 +158,7 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
                             this.cotacoesFaltando[evento.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao(cotacaoLocal.valor, chave, evento.event_id, evento.favorito),
+                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, evento.event_id, evento.favorito),
                                 label: this.helperService.apostaTipoLabelCustom(chave, evento.time_a_nome, evento.time_b_nome)
                             });
                         }

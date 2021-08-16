@@ -65,7 +65,7 @@ export class CombateListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.campeonatos = this.camps.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
                         cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
                     });
                 });

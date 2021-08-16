@@ -102,6 +102,10 @@ export class HelperService {
         return parseFloat(result.toFixed(2));
     }
 
+    calcularCotacao2String(value: number, chave: string, jogoEventId: number, favorito: string, aoVivo?: boolean): string {
+        return this.calcularCotacao(value, chave, jogoEventId, favorito, aoVivo).toFixed(2);
+    }
+
     timeSubtraction(timeOne, timeTwo) {
         const hourOneArray: any = timeOne.split(':');
         const hourTwoArray: any = timeTwo.split(':');
