@@ -16,7 +16,7 @@ export class PrintService {
     private opcoes = this.paramsService.getOpcoes();
     private separatorLine;
     private printerWidth = '58';
-    LOGO_IMPRESSAO = config.LOGO_IMPRESSAO;
+    LOGO_IMPRESSAO = localStorage.getItem('logo_bilhete');
 
     constructor(
         private auth: AuthService,

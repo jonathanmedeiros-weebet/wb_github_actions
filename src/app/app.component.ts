@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import { AuthService, ParametroService } from './services';
+import {AuthService, ImagensService, ParametroService} from './services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
         private auth: AuthService,
         private parametroService: ParametroService,
         public modalService: NgbModal,
+        private imagensService: ImagensService
     ) {
     }
 
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
                 console.log('Tamanho Recebido: ' + event.data.width);
                 break;
             default:
-                console.log('none');
+                //
         }
     }
 
@@ -55,5 +56,15 @@ export class AppComponent implements OnInit {
                 }
             );
         }
+
+        this.imagensService.buscarLogo()
+            .subscribe(
+                logo => localStorage.setItem('logo', `data:image/png;base64,${logo}`)
+            );
+
+        this.imagensService.buscarLogoBilhete()
+            .subscribe(
+                logoBilhete => localStorage.setItem('logo_bilhete', `data:image/png;base64,${logoBilhete}`)
+            );
     }
 }

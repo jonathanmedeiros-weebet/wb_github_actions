@@ -21,7 +21,7 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
-    LOGO = config.LOGO;
+    LOGO = localStorage.getItem('logo');
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -55,7 +55,7 @@ export class BilheteCompartilhamentoComponent implements OnInit {
         if (this.appMobile) {
             const options = {
                 logging: true,
-                useCORS: false
+                useCORS: true
             };
 
             html2canvas(this.bilhete.nativeElement, options).then((canvas) => {
