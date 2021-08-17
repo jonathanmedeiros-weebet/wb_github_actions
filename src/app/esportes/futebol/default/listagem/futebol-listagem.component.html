@@ -47,30 +47,39 @@
                                 </div>
                             </div>
                             <div class="odds">
-                                <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
-                                    (click)="addCotacao(jogo, cotacao)">
-                                    <div
-                                        class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
-                                        <span class="nome">
-                                            {{cotacao.chave | tipoAposta: 'sigla'}}
-                                        </span>
-                                        <span class="valor">
-                                            {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
-                                            jogo.favorito}}
-                                        </span>
-                                    </div>
+                                <div class="odd"  *ngFor="let cotacao of jogo.cotacoes">
+                                    <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
+                                        <div class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                                            (click)="addCotacao(jogo, cotacao)">
+                                            <span class="nome">
+                                                {{cotacao.label}}
+                                            </span>
+                                            <span class="valor">
+                                                {{cotacao.valorFinal}}
+                                            </span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #cotacaoBloqueada>
+                                        <div class="inner-odd odd-disabled">
+                                            <span class="nome">
+                                                {{cotacao.label}}
+                                            </span>
+                                            <span class="valor">
+                                                <i class="fa fa-lock"></i>
+                                            </span>
+                                        </div>
+                                    </ng-template>
                                 </div>
-                                <ng-container *ngIf="cotacaoManualFaltando(jogo.event_id, jogo.cotacoes)">
+                                <ng-container *ngIf="cotacaoManualFaltando(jogo, jogo.cotacoes)">
                                     <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"
                                         (click)="addCotacao(jogo, cotacao)">
                                         <div
-                                            class="inner-odd {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                            class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">
-                                                {{cotacao.chave | tipoAposta: 'sigla'}}
+                                                {{cotacao.label}}
                                             </span>
                                             <span class="valor">
-                                                {{cotacao.valor | calcularCotacao: cotacao.chave: jogo.event_id:
-                                                jogo.favorito}}
+                                                {{cotacao.valorFinal}}
                                             </span>
                                         </div>
                                     </div>

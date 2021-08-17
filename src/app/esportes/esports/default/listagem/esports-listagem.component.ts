@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from '../../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService } from '../../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from '../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -18,10 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
-    @Input() eventoIdAtual;
     @Input() camps: Campeonato[];
-    @Output() eventoSelecionadoId = new EventEmitter();
-    @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
@@ -37,6 +34,7 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
+        private helperService: HelperService,
         private cd: ChangeDetectorRef
     ) { }
 
@@ -68,7 +66,16 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['camps'] && this.camps) {
-            this.campeonatos = this.camps;
+            this.campeonatos = this.camps.map(campeonato => {
+                campeonato.jogos.forEach(jogo => {
+                    jogo.cotacoes.forEach(cotacao => {
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
+                    });
+                });
+
+                return campeonato;
+            });
         }
     }
 
@@ -87,17 +94,6 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
-    }
-
-    oddSelecionada(eventoId, chave) {
-        let result = false;
-        for (let index = 0; index < this.itens.length; index++) {
-            const item = this.itens[index];
-            if (item.jogo_id === eventoId && item.cotacao.chave === chave) {
-                result = true;
-            }
-        }
-        return result;
     }
 
     addCotacao(evento: Jogo, cotacao) {
@@ -123,12 +119,9 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.itens.splice(indexGame, 1, item);
             }
 
-            delete this.itensSelecionados[`${cotacao._id}`];
             modificado = true;
         } else {
             this.itens.push(item);
-
-            this.itensSelecionados[`${cotacao._id}`] = true;
             modificado = true;
         }
 
@@ -138,9 +131,9 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     // Coloca as cotações faltando nos eventos
-    cotacaoManualFaltando(eventId, cotacoes) {
+    cotacaoManualFaltando(evento, cotacoes) {
         let result = false;
-        const cotacoesLocais = this.cotacoesLocais[eventId];
+        const cotacoesLocais = this.cotacoesLocais[evento.event_id];
 
         if (cotacoesLocais) {
             for (let index = 0; index < cotacoes.length; index++) {
@@ -157,14 +150,16 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
                     const cotacaoLocal = cotacoesLocais[chave];
 
                     if (!cotacaoLocal.usou && parseInt(cotacaoLocal.principal, 10)) {
-                        if (!this.cotacoesFaltando[eventId]) {
-                            this.cotacoesFaltando[eventId] = [];
+                        if (!this.cotacoesFaltando[evento.event_id]) {
+                            this.cotacoesFaltando[evento.event_id] = [];
                         }
 
-                        if (!this.cotacoesFaltando[eventId].filter(cotacao => cotacao.chave === chave).length) {
-                            this.cotacoesFaltando[eventId].push({
+                        if (!this.cotacoesFaltando[evento.event_id].filter(cotacao => cotacao.chave === chave).length) {
+                            this.cotacoesFaltando[evento.event_id].push({
                                 chave: chave,
-                                valor: cotacaoLocal.valor
+                                valor: cotacaoLocal.valor,
+                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, evento.event_id, evento.favorito),
+                                label: this.helperService.apostaTipoLabelCustom(chave, evento.time_a_nome, evento.time_b_nome)
                             });
                         }
                     }
@@ -181,54 +176,7 @@ export class EsportsListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.eventosBloqueados ? (this.eventosBloqueados.includes(eventId) ? true : false) : false;
     }
 
-    // Extrai id do primeiro evento do primeiro campeonato
-    extrairJogoId(campeonatos) {
-        let eventoId = null;
-
-        if (campeonatos.length > 1) {
-            const eventos = campeonatos[0].eventos;
-
-            let start = 0;
-            let stop = false;
-
-            while (!stop) {
-                if (eventos.length > 1) {
-                    eventoId = eventos[start]._id;
-                    stop = true;
-                } else if (eventos.length === 1) {
-                    eventoId = eventos[start]._id;
-                    stop = true;
-                }
-
-                start++;
-            }
-        } else if (campeonatos.length === 1) {
-            const eventos = campeonatos[0].eventos;
-
-            if (eventos.length > 1) {
-                eventoId = eventos[0]._id;
-            } else if (eventos.length === 1) {
-                eventoId = eventos[0]._id;
-            }
-        }
-
-        this.eventoIdAtual = eventoId;
-        return eventoId;
-    }
-
-    selecionarJogo(eventoId) {
-        this.eventoIdAtual = eventoId;
-        if (!this.mobileScreen) {
-            this.eventoSelecionadoId.emit(eventoId);
-        }
-    }
-
-    // Exibindo todas as cotações daquele evento selecionado
-    maisCotacoes(eventoId) {
-        if (this.mobileScreen) {
-            this.eventoIdAtual = eventoId;
-            this.eventoSelecionadoId.emit(eventoId);
-        }
-        this.exibirMaisCotacoes.emit(true);
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 }

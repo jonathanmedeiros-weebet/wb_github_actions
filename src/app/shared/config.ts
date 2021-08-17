@@ -1,14 +1,12 @@
-const _host = '//weebet.local';
-// const _host = '//central.demo.wee.bet';
-const _center = '//localhost:3002';
-// const _center = 'https://center2.wee.bet';
-// const _live = 'https://streaming.wee.bet';
-const _live = '//localhost:3003';
+
+const _host = '//central.mjrsports.com';
+const _center = 'https://center6.wee.bet';
+const _live = 'https://streaming.wee.bet';
 const _stats = 'https://stats.wee.bet';
-const _timestamp = '1617025700544';
+const _timestamp = '1629126442449';
 
 export const config: any = {
-    BANCA_NOME: 'DEMO',
+    BANCA_NOME: 'MJR SPORTS',
     TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
@@ -18,7 +16,9 @@ export const config: any = {
     CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
+    SLUG: 'mjrsports.com',
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
-    LOGO: '/assets/images/logo_banca.png?' + _timestamp,
+    LOGO: 'https://weebet.s3.amazonaws.com/mjrsports.com/logos/logo_banca.png',
+
     BG: `${_host}/tema/bk.jpg`
 };

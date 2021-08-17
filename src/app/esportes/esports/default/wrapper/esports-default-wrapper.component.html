@@ -1,10 +1,8 @@
 <div id="esports-default-wrapper">
     <div id="esports-default-content">
-        <div class="lista" [hidden]="exibirMaisCotacoes">
-            <app-esports-listagem (eventoSelecionadoId)="receptorEventoSelecionadoId($event)"
-                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
-                [showLoadingIndicator]="showLoadingIndicator"
-                [camps]="campeonatos"></app-esports-listagem>
+        <div class="lista">
+            <app-esports-listagem [showLoadingIndicator]="showLoadingIndicator" [camps]="campeonatos">
+            </app-esports-listagem>
         </div>
     </div>
 </div>

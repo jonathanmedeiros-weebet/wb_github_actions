@@ -565,6 +565,10 @@ button {
     margin-bottom: 30px;
 }
 
+.margin-bottom-80 {
+    margin-bottom: 80px;
+}
+
 .margin-bottom-15 {
     margin-bottom: 15px;
 }
@@ -595,11 +599,11 @@ button {
         width: 33.33%;
     }
 
-    .odds .inner-odd:hover {
+    .odds .odd-enabled:hover {
         background-color: var(--highlight);
     }
 
-    .odds .inner-odd:hover span {
+    .odds .odd-enabled:hover span {
         color: var(--foreground-selected-odds) !important;
     }
 }
@@ -730,6 +734,11 @@ button {
 
 .value-informations .valores button:focus {
     box-shadow: 0 0 0 0.5px var(--highlight);
+}
+
+.odd-disabled{
+    cursor: not-allowed!important;
+    opacity: .7;
 }
 
 @keyframes lds-ring {

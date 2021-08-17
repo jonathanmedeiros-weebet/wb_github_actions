@@ -52,15 +52,29 @@
                 <div class="odds">
                     <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados[chave])"
                         *ngFor="let odds of mercados[chave].odds">
-                        <div class="odd" *ngFor="let odd of odds" (click)="addCotacao(jogo, odd)">
-                            <div class="inner-odd" [ngClass]="{'selecionado': oddSelecionada(jogo._id, odd.chave)}">
-                                <span class="nome">
-                                    {{odd.chave | tipoAposta}}
-                                </span>
-                                <span class="valor">
-                                    {{odd.valor | calcularCotacao: odd.chave: jogo.event_id: null: true}}
-                                </span>
-                            </div>
+                        <div class="odd" *ngFor="let odd of odds">
+                            <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
+                                <div class="inner-odd odd-enabled"
+                                    [ngClass]="{'selecionado': oddSelecionada(jogo._id, odd.chave)}"
+                                    (click)="addCotacao(jogo, odd)">
+                                    <span class="nome">
+                                        {{odd.label}}
+                                    </span>
+                                    <span class="valor">
+                                        {{odd.valorFinal}}
+                                    </span>
+                                </div>
+                            </ng-container>
+                            <ng-template #cotacaoBloqueada>
+                                <div class="inner-odd odd-disabled">
+                                    <span class="nome">
+                                        {{odd.label}}
+                                    </span>
+                                    <span class="valor">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
                 </div>

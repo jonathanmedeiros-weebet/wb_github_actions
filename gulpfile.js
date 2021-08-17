@@ -1636,3 +1636,59 @@ gulp.task('olimpobetsvip.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('scorpionsbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "scorpionsbet.wee.bet",
+        banca: "SCORPIONS BET",
+        styles: "",
+    });
+});
+
+gulp.task('betsnet.me', function (done) {
+    tasks(done, {
+        host: "betsnet.me",
+        banca: "BETS NET",
+        styles: "",
+    });
+});
+
+gulp.task('lobobet.net', function (done) {
+    tasks(done, {
+        host: "lobobet.net",
+        banca: "LOBO BET",
+        styles: "",
+    });
+});
+
+gulp.task('nicebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "nicebet.wee.bet",
+        banca: "NICE BET",
+        styles: "",
+    });
+});
+
+gulp.task('firebet.wee.bet', function (done) {
+    tasks(done, {
+        host: "firebet.wee.bet",
+        banca: "FIRE BET",
+        styles: "",
+    });
+});
+
+gulp.task('texas93.bet', function (done) {
+    tasks(done, {
+        host: "texas93.bet",
+        banca: "TEXAS 93",
+        styles: "",
+    });
+});
+
+gulp.task('mybets.club', function (done) {
+    tasks(done, {
+        host: "mybets.club",
+        banca: "MY BETS",
+        styles: "",
+    });
+});
