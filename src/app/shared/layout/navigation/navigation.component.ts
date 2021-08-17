@@ -42,13 +42,7 @@ import * as moment from 'moment';
             state('closed', style({
                 'margin-left': '-255px',
                 visibility: 'hidden'
-            })),
-            transition('open => closed', [
-                animate('400ms ease-in')
-            ]),
-            transition('closed => open', [
-                animate('400ms ease-out')
-            ])
+            }))
         ])
     ]
 })
