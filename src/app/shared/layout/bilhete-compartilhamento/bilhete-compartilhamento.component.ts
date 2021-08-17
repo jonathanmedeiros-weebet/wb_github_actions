@@ -55,8 +55,7 @@ export class BilheteCompartilhamentoComponent implements OnInit {
         if (this.appMobile) {
             const options = {
                 logging: true,
-                useCORS: true,
-                allowTaint: false
+                useCORS: false
             };
 
             html2canvas(this.bilhete.nativeElement, options).then((canvas) => {
