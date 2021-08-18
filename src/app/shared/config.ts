@@ -1,5 +1,5 @@
 
-const _host = '//central.mjrsports.com';
+const _host = '//192.168.0.147';
 const _center = 'https://center6.wee.bet';
 const _live = 'https://streaming.wee.bet';
 const _stats = 'https://stats.wee.bet';

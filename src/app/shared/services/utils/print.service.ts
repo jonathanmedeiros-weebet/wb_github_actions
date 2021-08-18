@@ -28,7 +28,6 @@ export class PrintService {
 
     getPrinterSettings() {
         const savedPrinterWidth = localStorage.getItem('printer_width');
-        console.log(savedPrinterWidth);
         if (savedPrinterWidth && savedPrinterWidth === '58') {
             this.printerWidth = savedPrinterWidth;
             this.separatorLine = '================================';
