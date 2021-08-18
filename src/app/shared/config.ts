@@ -20,7 +20,7 @@ export const config: any = {
     LOTTERIES_URL: `${_host}/api/loteria`,
     SLUG: 'demo.wee.bet',
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
-    LOGO: 'https://weebet.s3.amazonaws.com/demo.wee.betlogos/logo_banca.png',
+    LOGO: 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png',
 
     BG: `${_host}/tema/bk.jpg`
 };
