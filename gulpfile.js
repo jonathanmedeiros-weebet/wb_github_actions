@@ -4,13 +4,10 @@ var exec = require('gulp-exec');
 var remoteSrc = require('gulp-remote-src');
 
 function tasks(done, config) {
-    var timestamp = Date.now();
-
     gulp.src(['config.ts'])
         .pipe(replace('[HOST]', 'central.' + config.host))
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
-        .pipe(replace('[TIMESTAMP]', timestamp))
         .pipe(gulp.dest('src/app/shared/'));
 
     gulp.src(['index.html'])
@@ -20,7 +17,6 @@ function tasks(done, config) {
         .pipe(replace('[SCRIPTS]', typeof config.scripts == "undefined" ? "" : config.scripts))
         .pipe(replace('[CUSTOM]', config.styles))
         .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined" ? "" : config.aditional_styles))
-        .pipe(replace('[TIMESTAMP]', timestamp))
         .pipe(gulp.dest('src/'));
 
     /*gulp.src(['styles.css'])
