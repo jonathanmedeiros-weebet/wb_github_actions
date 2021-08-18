@@ -21,14 +21,17 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
-    LOGO = localStorage.getItem('logo');
+    LOGO;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private auth: AuthService,
-        private messageService: MessageService
-    ) { }
+        private messageService: MessageService,
+        private imagensService: ImagensService
+    ) {
+        this.LOGO = this.imagensService.logo;
+    }
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();

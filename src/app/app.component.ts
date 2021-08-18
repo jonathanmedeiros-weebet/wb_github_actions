@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
                 console.log('Tamanho Recebido: ' + event.data.width);
                 break;
             default:
-                //
+                console.log('Loaded');
         }
     }
 
@@ -71,15 +71,5 @@ export class AppComponent implements OnInit {
                 }
             );
         }
-
-        this.imagensService.buscarLogo()
-            .subscribe(
-                logo => localStorage.setItem('logo', `data:image/png;base64,${logo}`)
-            );
-
-        this.imagensService.buscarLogoBilhete()
-            .subscribe(
-                logoBilhete => localStorage.setItem('logo_bilhete', `data:image/png;base64,${logoBilhete}`)
-            );
     }
 }

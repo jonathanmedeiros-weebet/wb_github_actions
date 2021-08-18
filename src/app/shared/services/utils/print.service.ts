@@ -1,13 +1,14 @@
 import {HostListener, Injectable} from '@angular/core';
 
-import { AuthService } from './../auth/auth.service';
-import { HelperService } from './helper.service';
-import { ParametrosLocaisService } from './../parametros-locais.service';
+import {AuthService} from './../auth/auth.service';
+import {HelperService} from './helper.service';
+import {ParametrosLocaisService} from './../parametros-locais.service';
 
-import { config } from './../../config';
+import {config} from './../../config';
 import * as moment from 'moment';
 
 import EscPosEncoder from 'esc-pos-encoder';
+import {ImagensService} from './imagens.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,14 +17,19 @@ export class PrintService {
     private opcoes = this.paramsService.getOpcoes();
     private separatorLine;
     private printerWidth = '58';
-    LOGO_IMPRESSAO = localStorage.getItem('logo_bilhete');
+    LOGO_IMPRESSAO;
 
     constructor(
         private auth: AuthService,
         private paramsService: ParametrosLocaisService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private imagensService: ImagensService
     ) {
         this.getPrinterSettings();
+        this.imagensService.buscarLogoImpressao()
+            .subscribe(
+                logoImpressao => this.LOGO_IMPRESSAO = `data:image/png;base64,${logoImpressao}`
+            );
     }
 
     getPrinterSettings() {
@@ -246,6 +252,8 @@ export class PrintService {
                 .newline()
                 .newline()
                 .newline()
+                .newline()
+                .newline()
                 .newline();
 
             parent.postMessage({data: jogosEscPos.encode(), action: 'printLottery'}, '*');
@@ -371,7 +379,6 @@ export class PrintService {
                         ${this.helperService.moneyFormat(item.valor)}
                     </div>
                 </div>`;
-
 
 
             if (item.tipo === 'seninha' && item.cotacao6 > 0) {
@@ -574,6 +581,8 @@ export class PrintService {
             });
 
             ticketEscPos
+                .newline()
+                .newline()
                 .newline()
                 .newline()
                 .newline()
@@ -917,9 +926,11 @@ export class PrintService {
                 .newline()
                 .newline()
                 .newline()
+                .newline()
+                .newline()
                 .newline();
 
-            parent.postMessage({ data: ticketEscPos.encode(), action: 'printLottery' }, '*'); // file://
+            parent.postMessage({data: ticketEscPos.encode(), action: 'printLottery'}, '*'); // file://
         };
     }
 
@@ -1015,6 +1026,8 @@ export class PrintService {
                 .line(this.separatorLine)
                 .align('center')
                 .text('Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes iguais entre todos os vencedores.')
+                .newline()
+                .newline()
                 .newline()
                 .newline()
                 .newline()
@@ -1512,6 +1525,8 @@ export class PrintService {
                 .newline()
                 .newline()
                 .newline()
+                .newline()
+                .newline()
                 .newline();
 
             parent.postMessage({data: ticketEscPos.encode(), action: 'printLottery'}, '*');
@@ -1572,6 +1587,8 @@ export class PrintService {
                 .text('Saldo: ')
                 .bold(false)
                 .text(this.helperService.moneyFormat(card.saldo))
+                .newline()
+                .newline()
                 .newline()
                 .newline()
                 .newline()
@@ -1733,6 +1750,8 @@ export class PrintService {
                 .size('small')
                 .bold(true)
                 .text(recarga.autenticacao)
+                .newline()
+                .newline()
                 .newline()
                 .newline()
                 .newline()

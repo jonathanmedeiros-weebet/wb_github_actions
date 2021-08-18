@@ -10,10 +10,15 @@ import {ErrorService} from './error.service';
     providedIn: 'root'
 })
 export class ImagensService {
+    logo;
+    logoImpressao;
 
-    constructor(private http: HttpClient,
-                private headers: HeadersService,
-                private errorService: ErrorService) {
+    constructor(
+        private http: HttpClient,
+        private headers: HeadersService,
+        private errorService: ErrorService
+    ) {
+        this.getLogo();
     }
 
     readonly endpoint = `${config.BASE_URL}/img`;
@@ -25,10 +30,20 @@ export class ImagensService {
             catchError(this.errorService.handleError));
     }
 
-    buscarLogoBilhete() {
+    buscarLogoImpressao() {
         return this.http.get(`${this.endpoint}/logobilhete`, this.headers.getRequestOptions()).pipe(map((result: any) => {
                 return result.results;
             }),
             catchError(this.errorService.handleError));
+    }
+
+    getLogo() {
+        console.log('Getting logo');
+        this.buscarLogo()
+            .subscribe(
+                logo => {
+                    this.logo = `data:image/png;base64,${logo}`;
+                }
+            );
     }
 }
