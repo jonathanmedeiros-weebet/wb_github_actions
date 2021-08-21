@@ -237,6 +237,14 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         return result;
     }
 
+    linkCasaDasApostasPermitido() {
+        if (this.appMobile) {
+            return this.casaDasApostasId;
+        } else {
+            return false;
+        }
+    }
+
     handleError(msg) {
         this.messageService.error(msg);
     }
