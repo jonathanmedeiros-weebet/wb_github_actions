@@ -1696,3 +1696,11 @@ gulp.task('divisabet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('topsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "topsports.wee.bet",
+        banca: "TOP SPORTS",
+        styles: "",
+    });
+});
