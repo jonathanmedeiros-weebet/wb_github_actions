@@ -204,8 +204,11 @@ export class PrintService {
                 .raw([0x1B, 0x21, 0x03])
                 .size('normal')
                 .text('Tabela de Jogos')
+                .raw([0x1b, 0x32, 0x01])
+                .line('teste')
                 .newline()
-                .line(this.separatorLine)
+                .raw([0x1b, 0x32, 0x00])
+                .newline()
                 .size('small');
 
             dias.forEach(dia => {

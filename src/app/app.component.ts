@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
             const params = new URLSearchParams(location.search);
-            const appVersion = params.get('app-version') ? parseInt(params.get('app-version'), 10) : null;
+            const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             if (appVersion < 2) {
                 this.modalService.open(
                     this.wrongVersionModal,

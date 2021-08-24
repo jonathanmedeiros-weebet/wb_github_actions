@@ -13,4 +13,7 @@
     .sport-content{
         padding: 0;
     }
+    #sport-wrapper{
+        min-height: initial;
+    }
 }
