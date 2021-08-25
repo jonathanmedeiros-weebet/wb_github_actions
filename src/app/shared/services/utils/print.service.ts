@@ -204,10 +204,6 @@ export class PrintService {
                 .raw([0x1B, 0x21, 0x03])
                 .size('normal')
                 .text('Tabela de Jogos')
-                .raw([0x1b, 0x32, 0x01])
-                .line('teste')
-                .newline()
-                .raw([0x1b, 0x32, 0x00])
                 .newline()
                 .size('small');
 
@@ -259,7 +255,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: jogosEscPos.encode(), action: 'printLottery'}, '*');
+            parent.postMessage({data: Array.from(jogosEscPos.encode()), action: 'printLottery'}, '*');
         };
     }
 
@@ -591,7 +587,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: ticketEscPos.encode(), action: 'printLottery'}, '*');
+            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*');
         };
     }
 
@@ -933,7 +929,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: ticketEscPos.encode(), action: 'printLottery'}, '*'); // file://
+            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*'); // file://
         };
     }
 
@@ -1036,7 +1032,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: ticketEscPos.encode(), action: 'printLottery'}, '*');
+            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*');
         };
     }
 
@@ -1532,7 +1528,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: ticketEscPos.encode(), action: 'printLottery'}, '*');
+            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*');
         };
     }
 
@@ -1597,7 +1593,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: cardPrintEscPos.encode(), action: 'printCard'}, '*');
+            parent.postMessage({data: Array.from(cardPrintEscPos.encode()), action: 'printCard'}, '*');
         };
     }
 
@@ -1760,7 +1756,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: cardRecargaEscPos.encode(), action: 'printCard'}, '*');
+            parent.postMessage({data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'}, '*');
         };
     }
 
