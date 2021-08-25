@@ -1,20 +1,22 @@
-import 'dart:async';
+import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
-import 'dart:io';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import 'DiscoveryPage.dart';
+//Page imports
+import 'package:weebet/pages/BluetoothSettings.dart';
+
+//Layout Imports
+import 'layout/EmptyBar.dart';
 
 void main() {
   runApp(MyApp());
 }
-
-BluetoothDevice? defaultDevice;
 
 class MyApp extends StatelessWidget {
   @override
@@ -32,15 +34,83 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
-
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   WebViewController? controller;
+  String? printerName;
+  String? printerMAC;
+  String? isConnected;
+
+  @override
+  void initState() {
+    super.initState();
+    this._getPrinter();
+  }
+
+  _getPrinter() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    this.printerName = prefs.getString('printer_name') ?? null;
+    this.printerMAC = prefs.getString('printer_mac') ?? null;
+
+    print('Dados da Impressora - Main Method');
+    print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
+  }
+
+  _executePostMessageAction(postMessage) {
+    switch (postMessage['action']) {
+      case 'listPrinters':
+        {
+          print('Listar Impressoras');
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => BluetoothSettings()),
+          );
+        }
+        break;
+      case 'shareURL':
+        {
+          print('Compartilhamento');
+          this._shareTicket(postMessage);
+        }
+        break;
+      case 'externalURL':
+        {
+          print('externalURL');
+        }
+        break;
+      default:
+        {
+          List<int> bytesToPrint = List<int>.from(postMessage['data']);
+
+          this._printByte(bytesToPrint);
+          print('default switch');
+        }
+        break;
+    }
+  }
+
+  _printByte(bytes) async {
+    if (this.printerMAC != null) {
+      this.isConnected = await BluetoothThermalPrinter.connectionStatus;
+
+      if (this.isConnected == "true") {
+        await BluetoothThermalPrinter.writeBytes(bytes);
+      } else {
+        String? connected =
+            await BluetoothThermalPrinter.connect(this.printerMAC!);
+
+        if (connected == "true") {
+          await BluetoothThermalPrinter.writeBytes(bytes);
+        } else {
+          print('Algo deu errado');
+        }
+      }
+    }
+  }
 
   _shareTicket(var ticket) async {
     ticket['file'] = ticket['file'].replaceAll('data:image/png;base64,', '');
@@ -67,8 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPageFinished: (String _) async {
           controller?.evaluateJavascript("""
           window.addEventListener('message', (event) => {
-            console.log(JSON.stringify(event.data));
-            WeebetMessage.postMessage(JSON.stringify(event.data));
+              WeebetMessage.postMessage(JSON.stringify(event.data));
           });
           """);
         },
@@ -76,149 +145,10 @@ class _MyHomePageState extends State<MyHomePage> {
           JavascriptChannel(
               name: 'WeebetMessage',
               onMessageReceived: (JavascriptMessage message) {
-                print(message);
-                var weebetMessage = json.decode(message.message);
-
-                switch (weebetMessage['action']) {
-                  case 'listPrinters':
-                    print('Listar Impressoras');
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => BluetoothSettings()),
-                    );
-                    break;
-                  case 'shareURL':
-                    print('Compartilhamento');
-                    _shareTicket(weebetMessage);
-                    break;
-                  case 'externalURL':
-                    print('externalURL');
-                    break;
-                  default:
-                    print('default');
-                }
+                var weebetMessage = jsonDecode(message.message);
+                this._executePostMessageAction(weebetMessage);
               })
         },
-      ),
-    );
-  }
-}
-
-class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-    );
-  }
-
-  @override
-  Size get preferredSize => Size(0.0, 0.0);
-}
-
-class BluetoothSettings extends StatefulWidget {
-  @override
-  _BluetoothSettingsState createState() => _BluetoothSettingsState();
-}
-
-class _BluetoothSettingsState extends State<BluetoothSettings> {
-  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-
-  String _address = "...";
-  String _name = "...";
-
-  Timer? _discoverableTimeoutTimer;
-  int _discoverableTimeoutSecondsLeft = 0;
-  bool _autoAcceptPairingRequests = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Get current state
-    FlutterBluetoothSerial.instance.state.then((state) {
-      setState(() {
-        _bluetoothState = state;
-      });
-    });
-
-    Future.doWhile(() async {
-      // Wait if adapter not enabled
-      if ((await FlutterBluetoothSerial.instance.isEnabled) ?? false) {
-        return false;
-      }
-      await Future.delayed(Duration(milliseconds: 0xDD));
-      return true;
-    }).then((_) {
-      // Update the address field
-      FlutterBluetoothSerial.instance.address.then((address) {
-        setState(() {
-          _address = address!;
-        });
-      });
-    });
-
-    FlutterBluetoothSerial.instance.name.then((name) {
-      setState(() {
-        _name = name!;
-      });
-    });
-
-    // Listen for futher state changes
-    FlutterBluetoothSerial.instance
-        .onStateChanged()
-        .listen((BluetoothState state) {
-      setState(() {
-        _bluetoothState = state;
-
-        // Discoverable mode is disabled when Bluetooth gets disabled
-        _discoverableTimeoutTimer = null;
-        _discoverableTimeoutSecondsLeft = 0;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Configurações de Impressora'),
-      ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            Divider(),
-            ListTile(
-              title: Text('Dispositivo Selecionado'),
-              subtitle: Text(defaultDevice != null
-                  ? defaultDevice!.name.toString()
-                  : 'Nenhum Dispositivo selecionado'),
-            ),
-            ListTile(
-              title: ElevatedButton(
-                  child: const Text('Selecionar Dispositivo Blueetooth'),
-                  onPressed: () async {
-                    final BluetoothDevice? selectedDevice =
-                        await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DiscoveryPage();
-                        },
-                      ),
-                    );
-
-                    if (selectedDevice != null) {
-                      setState(() {
-                        defaultDevice = selectedDevice;
-                      });
-                      print('Discovery -> selected ' + selectedDevice.address);
-                    } else {
-                      print('Discovery -> no device selected');
-                    }
-                  }),
-            ),
-          ],
-        ),
       ),
     );
   }
