@@ -1704,3 +1704,11 @@ gulp.task('topsports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('maranhaobets.net', function (done) {
+    tasks(done, {
+        host: "maranhaobets.net",
+        banca: "MARANHÃO BETS",
+        styles: "",
+    });
+});

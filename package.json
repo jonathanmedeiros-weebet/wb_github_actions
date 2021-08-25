@@ -206,7 +206,8 @@
         "texas93.bet": "gulp texas93.bet",
         "mybets.club": "gulp mybets.club",
         "divisabet.wee.bet": "gulp divisabet.wee.bet",
-        "topsports.wee.bet": "gulp topsports.wee.bet"
+        "topsports.wee.bet": "gulp topsports.wee.bet",
+        "maranhaobets.net": "gulp maranhaobets.net"
     },
     "private": true,
     "dependencies": {
