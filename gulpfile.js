@@ -1444,7 +1444,7 @@ gulp.task('primesports.wee.bet', function (done) {
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         host: "primosbet.wee.bet",
-        banca: "PRIMO BET",
+        banca: "PRIMOS BET",
         styles: "",
     });
 });
