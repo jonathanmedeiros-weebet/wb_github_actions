@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
+      darkTheme: ThemeData.dark(),
       home: MyHomePage(title: 'Weebet Demo'),
     );
   }
@@ -66,9 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 'listPrinters':
         {
           print('Listar Impressoras');
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => BluetoothSettings()),
-          );
+          this._listPrinters();
         }
         break;
       case 'shareURL':
@@ -85,12 +84,17 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-
           this._printByte(bytesToPrint);
           print('default switch');
         }
         break;
     }
+  }
+
+  _listPrinters() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => BluetoothSettings()),
+    );
   }
 
   _printByte(bytes) async {

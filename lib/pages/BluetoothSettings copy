@@ -1,20 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
-import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weebet/pages/DiscoveryPage.dart';
-
-class BluetoothSettings extends StatefulWidget {
-  @override
+class BluetoothSfdfdfettings extends StatefulWidget {
+  @overridedfd
   _BluetoothSettingsState createState() => _BluetoothSettingsState();
 }
 
-class _BluetoothSettingsState extends State<BluetoothSettings> {
+class _BluetoothSettingsStateddddd extends State<BluetoothSettings> {
   String? printerName;
   String? printerMAC;
-  int? rollWidth = 0;
-  List availableBluetoothDevices = [];
-  static const List<int> availableRollWidths = [58, 80];
 
   @override
   void initState() {
@@ -22,25 +13,25 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
     this._getPrinter();
   }
 
+  bool connected = false;
+  List availableBluetoothDevices = [];
+
   Future<void> getBluetooth() async {
-    final List? bluetooths = await BluetoothThermalPrinter.getBluetooths;
+    final List? bluetooths = await sPrinter.getBluetooths;
     print("Print $bluetooths");
     setState(() {
       availableBluetoothDevices = bluetooths!;
     });
   }
 
-  _getPrinter() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      this.printerName = prefs.getString('printer_name') ?? null;
-      this.printerMAC = prefs.getString('printer_mac') ?? null;
-      this.rollWidth = prefs.getInt('printer_rollwidth') ?? null;
-    });
-
-    print('Dados da Impressora');
-    print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
+  Future<void> setConnect(String mac) async {
+    final String? result = await BluetoothThermalPrinter.connect(mac);
+    print("state connected $result");
+    if (result == "true") {
+      setState(() {
+        connected = true;
+      });
+    }
   }
 
   _setPrinter(String name, String mac) async {
@@ -49,9 +40,14 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
     prefs.setString('printer_mac', mac);
   }
 
-  _setPrinterRollWidth(int? rollWidth) async {
+  _getPrinter() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('printer_rollwidth', rollWidth!);
+
+    this.printerName = prefs.getString('printer_name') ?? null;
+    this.printerMAC = prefs.getString('printer_mac') ?? null;
+
+    print('Dados da Impressora');
+    print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
   }
 
   Future<void> printTicket() async {
@@ -224,104 +220,51 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
         title: Text('Configurações de Impressora'),
       ),
       body: Container(
-        child: ListView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              title: Text('Impressora Padrão'),
-              subtitle: Text(this.printerName ?? 'Clique para selecionar'),
-              onTap: () {
-                setState(() {
-                  this._setPrinterRollWidth(0);
-                  this.rollWidth = 0;
-                });
+            Text("Search Paired Bluetooth"),
+            TextButton(
+              onPressed: () {
                 this.getBluetooth();
               },
+              child: Text("Search"),
             ),
-            if (this.printerMAC != null && this.printerName != null)
-              ListTile(
-                title: Text('Tamanho do Rolo'),
-                subtitle: Column(
-                  children: [
-                    RadioListTile(
-                      title: Text('${availableRollWidths[0]} mm'),
-                      value: availableRollWidths[0],
-                      groupValue: this.rollWidth,
-                      selected: this.rollWidth != null
-                          ? (this.rollWidth == availableRollWidths[0]
-                              ? true
-                              : false)
-                          : false,
-                      onChanged: (int? value) {
-                        setState(() {
-                          this._setPrinterRollWidth(value);
-                          this.rollWidth = value;
-                        });
-                      },
-                    ),
-                    RadioListTile(
-                      title: Text('${availableRollWidths[1]} mm'),
-                      value: availableRollWidths[1],
-                      groupValue: this.rollWidth,
-                      selected: this.rollWidth != null
-                          ? (this.rollWidth == availableRollWidths[1]
-                              ? true
-                              : false)
-                          : false,
-                      onChanged: (int? value) {
-                        setState(() {
-                          this._setPrinterRollWidth(value);
-                          this.rollWidth = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ),
-            Divider(),
-            if (availableBluetoothDevices.length > 0)
-              ListTile(
-                title: Text("Dispositivos Disponíveis"),
-              ),
-            if (availableBluetoothDevices.length > 0)
-              Container(
-                height: 250,
-                child: ListView.builder(
-                  itemCount: availableBluetoothDevices.length > 0
-                      ? availableBluetoothDevices.length
-                      : 0,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        String select = availableBluetoothDevices[index];
-                        List list = select.split("#");
-                        String name = list[0];
-                        String mac = list[1];
-                        //this.setConnect(mac);
-                        this._setPrinter(name, mac);
-                        this._setPrinterRollWidth(0);
-                        this._getPrinter();
-
-                        setState(() {
-                          this.availableBluetoothDevices = [];
-                        });
-                      },
-                      title: Text(
-                          '${availableBluetoothDevices[index].split('#')[0]}'),
-                      subtitle: Text("Clique para selecionar"),
-                    );
-                  },
-                ),
-              ),
-            ListTile(
-              title: ElevatedButton(
-                child: Text('Selecionar Impressora'),
-                onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.clear();
-                  this._getPrinter();
+            Container(
+              height: 200,
+              child: ListView.builder(
+                itemCount: availableBluetoothDevices.length > 0
+                    ? availableBluetoothDevices.length
+                    : 0,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () {
+                      String select = availableBluetoothDevices[index];
+                      List list = select.split("#");
+                      String name = list[0];
+                      String mac = list[1];
+                      this.setConnect(mac);
+                      this._setPrinter(name, mac);
+                    },
+                    title: Text('${availableBluetoothDevices[index]}'),
+                    subtitle: Text("Click to connect"),
+                  );
                 },
               ),
             ),
+            SizedBox(
+              height: 30,
+            ),
+            TextButton(
+              onPressed: connected ? this.printTicket : null,
+              child: Text("Print Ticket"),
+            ),
+            MaterialButton(
+              onPressed: this._getPrinter,
+              color: Colors.amber,
+              child: Text('Ver IMpressora'),
+            )
           ],
         ),
       ),
