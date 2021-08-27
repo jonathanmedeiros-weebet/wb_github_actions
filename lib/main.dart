@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -15,6 +16,9 @@ import 'package:weebet/pages/BluetoothSettings.dart';
 import 'layout/EmptyBar.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
 }
 
@@ -24,9 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
+      theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
       home: MyHomePage(title: 'Weebet Demo'),
     );
@@ -41,15 +43,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  WebViewController? controller;
+  WebViewController? _webViewController;
   String? printerName;
   String? printerMAC;
+  int? printerRollWidth = 58;
   String? isConnected;
 
   @override
   void initState() {
     super.initState();
     this._getPrinter();
+    this._sendRollWidth(this.printerRollWidth);
   }
 
   _getPrinter() async {
@@ -91,10 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  _listPrinters() {
-    Navigator.of(context).push(
+  _listPrinters() async {
+    int? rollWidthReceived = await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => BluetoothSettings()),
     );
+    this._sendRollWidth(rollWidthReceived);
   }
 
   _printByte(bytes) async {
@@ -110,9 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
         if (connected == "true") {
           await BluetoothThermalPrinter.writeBytes(bytes);
         } else {
-          print('Algo deu errado');
+          AlertDialog(
+            title: Text('Algo deu errado'),
+          );
         }
       }
+    } else {
+      AlertDialog(
+        title: Text('Nenhuma Impressora configurada'),
+      );
     }
   }
 
@@ -128,18 +139,25 @@ class _MyHomePageState extends State<MyHomePage> {
         text: ticket['message'], subject: 'Compartilhamento de Bilhete');
   }
 
+  _sendRollWidth(int? rollWidth) async {
+    _webViewController?.evaluateJavascript("""
+    console.log('a ação foi executada');
+    parent.postMessage({action: 'printerWidth', width: $rollWidth}, '*');
+    """);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'http://192.168.0.147:8080?app=TRUE&app_version=2',
+        initialUrl: 'http://192.168.5.5:8080?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
-          controller = webviewController;
+          _webViewController = webviewController;
         },
         onPageFinished: (String _) async {
-          controller?.evaluateJavascript("""
+          _webViewController?.evaluateJavascript("""
           window.addEventListener('message', (event) => {
               WeebetMessage.postMessage(JSON.stringify(event.data));
           });

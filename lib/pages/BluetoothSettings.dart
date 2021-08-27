@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weebet/pages/DiscoveryPage.dart';
 
 class BluetoothSettings extends StatefulWidget {
   @override
@@ -12,8 +11,9 @@ class BluetoothSettings extends StatefulWidget {
 class _BluetoothSettingsState extends State<BluetoothSettings> {
   String? printerName;
   String? printerMAC;
-  int? rollWidth = 0;
+  int? rollWidth = 58;
   List availableBluetoothDevices = [];
+  bool connected = false;
   static const List<int> availableRollWidths = [58, 80];
 
   @override
@@ -36,22 +36,60 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
     setState(() {
       this.printerName = prefs.getString('printer_name') ?? null;
       this.printerMAC = prefs.getString('printer_mac') ?? null;
-      this.rollWidth = prefs.getInt('printer_rollwidth') ?? null;
+      this.rollWidth = prefs.getInt('printer_rollwidth') ?? 0;
     });
 
     print('Dados da Impressora');
-    print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
+    print(
+        'Nome: ${this.printerName} / MAC: ${this.printerMAC} / RollWidth: ${this.rollWidth}');
   }
 
-  _setPrinter(String name, String mac) async {
+  _setPrinter(String? name, String? mac) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('printer_name', name);
-    prefs.setString('printer_mac', mac);
+    prefs.setString('printer_name', name!);
+    prefs.setString('printer_mac', mac!);
   }
 
   _setPrinterRollWidth(int? rollWidth) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('printer_rollwidth', rollWidth!);
+  }
+
+  Future<void> setConnect(String mac) async {
+    final String? result = await BluetoothThermalPrinter.connect(mac);
+    print("state connected $result");
+    if (result == "true") {
+      setState(() {
+        connected = true;
+      });
+    }
+  }
+
+  Future<List<int>> getTicket() async {
+    List<int> bytes = [];
+    CapabilityProfile profile = await CapabilityProfile.load();
+    var paperSize = this.rollWidth == 58 || this.rollWidth == 0
+        ? PaperSize.mm58
+        : PaperSize.mm80;
+    final generator = Generator(paperSize, profile);
+
+    bytes += generator.text("Weebet",
+        styles: PosStyles(
+          align: PosAlign.center,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ),
+        linesAfter: 1);
+
+    bytes += generator.text("Teste de configuração de impressora",
+        styles: PosStyles(align: PosAlign.center));
+
+    bytes += generator.hr();
+
+    bytes += generator.text(
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada turpis eget turpis fermentum, ac.',
+        styles: PosStyles(align: PosAlign.center, bold: false));
+    return bytes;
   }
 
   Future<void> printTicket() async {
@@ -65,265 +103,147 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
     }
   }
 
-  Future<List<int>> getTicket() async {
-    List<int> bytes = [];
-    CapabilityProfile profile = await CapabilityProfile.load();
-    final generator = Generator(PaperSize.mm58, profile);
-
-    bytes += generator.text("Demo Shop",
-        styles: PosStyles(
-          align: PosAlign.center,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-        ),
-        linesAfter: 1);
-
-    bytes += generator.text(
-        "18th Main Road, 2nd Phase, J. P. Nagar, Bengaluru, Karnataka 560078",
-        styles: PosStyles(align: PosAlign.center));
-    bytes += generator.text('Tel: +919591708470',
-        styles: PosStyles(align: PosAlign.center));
-
-    bytes += generator.hr();
-    bytes += generator.row([
-      PosColumn(
-          text: 'No',
-          width: 1,
-          styles: PosStyles(align: PosAlign.left, bold: true)),
-      PosColumn(
-          text: 'Item',
-          width: 5,
-          styles: PosStyles(align: PosAlign.left, bold: true)),
-      PosColumn(
-          text: 'Price',
-          width: 2,
-          styles: PosStyles(align: PosAlign.center, bold: true)),
-      PosColumn(
-          text: 'Qty',
-          width: 2,
-          styles: PosStyles(align: PosAlign.center, bold: true)),
-      PosColumn(
-          text: 'Total',
-          width: 2,
-          styles: PosStyles(align: PosAlign.right, bold: true)),
-    ]);
-
-    bytes += generator.row([
-      PosColumn(text: "1", width: 1),
-      PosColumn(
-          text: "Tea",
-          width: 5,
-          styles: PosStyles(
-            align: PosAlign.left,
-          )),
-      PosColumn(
-          text: "10",
-          width: 2,
-          styles: PosStyles(
-            align: PosAlign.center,
-          )),
-      PosColumn(text: "1", width: 2, styles: PosStyles(align: PosAlign.center)),
-      PosColumn(text: "10", width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-
-    bytes += generator.row([
-      PosColumn(text: "2", width: 1),
-      PosColumn(
-          text: "Sada Dosa",
-          width: 5,
-          styles: PosStyles(
-            align: PosAlign.left,
-          )),
-      PosColumn(
-          text: "30",
-          width: 2,
-          styles: PosStyles(
-            align: PosAlign.center,
-          )),
-      PosColumn(text: "1", width: 2, styles: PosStyles(align: PosAlign.center)),
-      PosColumn(text: "30", width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-
-    bytes += generator.row([
-      PosColumn(text: "3", width: 1),
-      PosColumn(
-          text: "Masala Dosa",
-          width: 5,
-          styles: PosStyles(
-            align: PosAlign.left,
-          )),
-      PosColumn(
-          text: "50",
-          width: 2,
-          styles: PosStyles(
-            align: PosAlign.center,
-          )),
-      PosColumn(text: "1", width: 2, styles: PosStyles(align: PosAlign.center)),
-      PosColumn(text: "50", width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-
-    bytes += generator.row([
-      PosColumn(text: "4", width: 1),
-      PosColumn(
-          text: "Rova Dosa",
-          width: 5,
-          styles: PosStyles(
-            align: PosAlign.left,
-          )),
-      PosColumn(
-          text: "70",
-          width: 2,
-          styles: PosStyles(
-            align: PosAlign.center,
-          )),
-      PosColumn(text: "1", width: 2, styles: PosStyles(align: PosAlign.center)),
-      PosColumn(text: "70", width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-
-    bytes += generator.hr();
-
-    bytes += generator.row([
-      PosColumn(
-          text: 'TOTAL',
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.left,
-            height: PosTextSize.size4,
-            width: PosTextSize.size4,
-          )),
-      PosColumn(
-          text: "160",
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size4,
-            width: PosTextSize.size4,
-          )),
-    ]);
-
-    bytes += generator.hr(ch: '=', linesAfter: 1);
-
-    // ticket.feed(2);
-    bytes += generator.text('Thank you!',
-        styles: PosStyles(align: PosAlign.center, bold: true));
-
-    bytes += generator.text("26-11-2020 15:22:45",
-        styles: PosStyles(align: PosAlign.center), linesAfter: 1);
-
-    bytes += generator.text(
-        'Note: Goods once sold will not be taken back or exchanged.',
-        styles: PosStyles(align: PosAlign.center, bold: false));
-    bytes += generator.cut();
-    return bytes;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Configurações de Impressora'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop(this.rollWidth);
+          },
+        ),
       ),
-      body: Container(
-        child: ListView(
-          children: [
+      body: Column(
+        children: [
+          ListTile(
+            title: Text('Impressora Padrão'),
+            subtitle: Text(this.printerName ?? 'Clique para selecionar'),
+            onTap: () {
+              setState(() {
+                this.printerName = 'Selecione um dispositivo abaixo';
+                this.printerMAC = null;
+                this.rollWidth = 0;
+              });
+              this.getBluetooth();
+            },
+            onLongPress: () {},
+          ),
+          if (this.printerMAC != null && this.printerName != null) Divider(),
+          if (this.printerMAC != null && this.printerName != null)
             ListTile(
-              title: Text('Impressora Padrão'),
-              subtitle: Text(this.printerName ?? 'Clique para selecionar'),
-              onTap: () {
-                setState(() {
-                  this._setPrinterRollWidth(0);
-                  this.rollWidth = 0;
-                });
-                this.getBluetooth();
-              },
-            ),
-            if (this.printerMAC != null && this.printerName != null)
-              ListTile(
-                title: Text('Tamanho do Rolo'),
-                subtitle: Column(
-                  children: [
-                    RadioListTile(
-                      title: Text('${availableRollWidths[0]} mm'),
-                      value: availableRollWidths[0],
-                      groupValue: this.rollWidth,
-                      selected: this.rollWidth != null
-                          ? (this.rollWidth == availableRollWidths[0]
-                              ? true
-                              : false)
-                          : false,
-                      onChanged: (int? value) {
-                        setState(() {
-                          this._setPrinterRollWidth(value);
-                          this.rollWidth = value;
-                        });
-                      },
+              title: Text('Tamanho do Rolo'),
+              subtitle: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: RadioListTile(
+                                      title:
+                                          Text('${availableRollWidths[0]} mm'),
+                                      value: availableRollWidths[0],
+                                      groupValue: this.rollWidth,
+                                      selected: this.rollWidth != null
+                                          ? (this.rollWidth ==
+                                                  availableRollWidths[0]
+                                              ? true
+                                              : false)
+                                          : false,
+                                      onChanged: (int? value) {
+                                        setState(() {
+                                          this._setPrinterRollWidth(value);
+                                          this.rollWidth = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: RadioListTile(
+                                        title: Text(
+                                            '${availableRollWidths[1]} mm'),
+                                        value: availableRollWidths[1],
+                                        groupValue: this.rollWidth,
+                                        selected: this.rollWidth != null
+                                            ? (this.rollWidth ==
+                                                    availableRollWidths[1]
+                                                ? true
+                                                : false)
+                                            : false,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            this._setPrinterRollWidth(value);
+                                            this.rollWidth = value;
+                                          });
+                                        },
+                                      ))
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    RadioListTile(
-                      title: Text('${availableRollWidths[1]} mm'),
-                      value: availableRollWidths[1],
-                      groupValue: this.rollWidth,
-                      selected: this.rollWidth != null
-                          ? (this.rollWidth == availableRollWidths[1]
-                              ? true
-                              : false)
-                          : false,
-                      onChanged: (int? value) {
-                        setState(() {
-                          this._setPrinterRollWidth(value);
-                          this.rollWidth = value;
-                        });
-                      },
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
-            Divider(),
-            if (availableBluetoothDevices.length > 0)
-              ListTile(
-                title: Text("Dispositivos Disponíveis"),
-              ),
-            if (availableBluetoothDevices.length > 0)
-              Container(
-                height: 250,
-                child: ListView.builder(
-                  itemCount: availableBluetoothDevices.length > 0
-                      ? availableBluetoothDevices.length
-                      : 0,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        String select = availableBluetoothDevices[index];
-                        List list = select.split("#");
-                        String name = list[0];
-                        String mac = list[1];
-                        //this.setConnect(mac);
-                        this._setPrinter(name, mac);
-                        this._setPrinterRollWidth(0);
-                        this._getPrinter();
-
-                        setState(() {
-                          this.availableBluetoothDevices = [];
-                        });
-                      },
-                      title: Text(
-                          '${availableBluetoothDevices[index].split('#')[0]}'),
-                      subtitle: Text("Clique para selecionar"),
-                    );
-                  },
-                ),
-              ),
+            ),
+          Divider(),
+          if (this.printerMAC != null &&
+              this.printerName != null &&
+              this.rollWidth != 0)
             ListTile(
               title: ElevatedButton(
-                child: Text('Selecionar Impressora'),
+                child: Text('Testar Impressão'),
                 onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.clear();
-                  this._getPrinter();
+                  this.printTicket();
                 },
               ),
             ),
-          ],
-        ),
+          if (availableBluetoothDevices.length > 0)
+            ListTile(
+              leading: Icon(Icons.print),
+              title: Text("Dispositivos Disponíveis"),
+            ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: availableBluetoothDevices.length > 0
+                  ? availableBluetoothDevices.length
+                  : 0,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    String select = availableBluetoothDevices[index];
+                    List list = select.split("#");
+                    String name = list[0];
+                    String mac = list[1];
+                    this.setConnect(mac);
+                    this._setPrinter(name, mac);
+                    this._setPrinterRollWidth(0);
+                    this._getPrinter();
+
+                    setState(() {
+                      this.availableBluetoothDevices = [];
+                    });
+                  },
+                  title:
+                      Text('${availableBluetoothDevices[index].split('#')[0]}'),
+                  subtitle: Text("Clique para selecionar"),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
