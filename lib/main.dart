@@ -85,10 +85,15 @@ class _MyHomePageState extends State<MyHomePage> {
           print('externalURL');
         }
         break;
-      default:
+      case 'printLottery':
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
           _printByte(bytesToPrint);
+          print('Print action');
+        }
+        break;
+      default:
+        {
           print('default switch');
         }
         break;
@@ -106,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  _printByte(bytes) async {
+  Future<void> _printByte(bytes) async {
     if (this.printerMAC != null) {
       this.isConnected = await BluetoothThermalPrinter.connectionStatus;
 
@@ -141,8 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: const Text('Cancelar'),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              Navigator.pop(context, 'ok');
               this._listPrinters();
             },
             child: const Text('Configurar Impressora'),
@@ -182,8 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _sendRollWidth(int? rollWidth) async {
     _webViewController?.evaluateJavascript("""
-    console.log('a ação foi executada');
-    parent.postMessage({action: 'printerWidth', width: $rollWidth}, '*');
+    window.postMessage({action: 'printerWidth', width: $rollWidth}, '*');
     """);
   }
 
@@ -200,6 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPageFinished: (String _) async {
           _webViewController?.evaluateJavascript("""
           window.addEventListener('message', (event) => {
+            console.log(event.data.action);
               WeebetMessage.postMessage(JSON.stringify(event.data));
           });
           """);

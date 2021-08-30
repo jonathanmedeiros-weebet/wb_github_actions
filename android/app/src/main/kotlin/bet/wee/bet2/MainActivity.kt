@@ -1,4 +1,4 @@
-package com.example.weebet
+package bet.wee.bet2
 
 import io.flutter.embedding.android.FlutterActivity
 

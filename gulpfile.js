@@ -26,13 +26,6 @@ function tasks(done, config) {
         .pipe(replace('[PKG_NAME]', config.apk_pkg))
         .pipe(gulp.dest('android/app/'));
 
-    //delete package folder
-    gulp.task()
-
-    gulp.src(['gulp/MainActivity.kt'])
-        .pipe(replace('[PKG_NAME]', config.apk_pkg))
-        .pipe(gulp.dest('android/app/src/main/kotlin/' + config.apk_pkg + '/'));
-
     remoteSrc(['logo_banca.png'], {
         base: 'https://weebet.s3.amazonaws.com/' + config.host + '/logos/'
     })
@@ -55,6 +48,15 @@ function tasks(done, config) {
         stdout: true // default = true, false means don't write stdout
     };
 
+    gulp.src('/')
+        .pipe(exec('rm -Rvf android/app/src/main/kotlin/', options))
+        .pipe(exec.reporter(reportOptions));
+
+    gulp.src(['gulp/MainActivity.kt'])
+        .pipe(replace('[PKG_NAME]', config.apk_pkg))
+        .pipe(gulp.dest('android/app/src/main/kotlin/' + config.pkg_folder + '/'));
+
+    // Flutter Build commands
     gulp.src(['/'])
         .pipe(exec('flutter pub get', options))
         .pipe(exec('flutter pub run flutter_launcher_icons:main', options))
@@ -70,7 +72,8 @@ gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
         host: 'demo.wee.bet',
         banca: 'Weebet Demo',
-        apk_pkg: ('demo.wee.bet').split('.').reverse().join('.')
+        apk_pkg: ('demo.wee.bet').split('.').reverse().join('.'),
+        pkg_folder: ('demo.wee.bet').split('.').reverse().join('/')
     });
 });
 
@@ -78,6 +81,7 @@ gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
         host: 'bet2.wee.bet',
         banca: 'BetSports',
-        apk_pkg: ('bet2.wee.bet').split('.').reverse().join('.')
+        apk_pkg: ('bet2.wee.bet').split('.').reverse().join('.'),
+        pkg_folder: ('bet2.wee.bet').split('.').reverse().join('/')
     });
 });
