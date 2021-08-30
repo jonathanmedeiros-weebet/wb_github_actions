@@ -111,7 +111,12 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop(this.rollWidth);
+            Map printerSettings = {
+              'printerMac': this.printerMAC,
+              'printerName': this.printerName,
+              'rollWidth': this.rollWidth
+            };
+            Navigator.of(context).pop(printerSettings);
           },
         ),
       ),

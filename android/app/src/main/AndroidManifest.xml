@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.weebet">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="weebet"
-        android:icon="@mipmap/ic_launcher"
+        android:label="Bet2 Weebet"
+        android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

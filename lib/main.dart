@@ -9,7 +9,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
 
-//Page imports
+//Page and my imports
 import 'package:weebet/pages/BluetoothSettings.dart';
 
 //Layout Imports
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-          this._printByte(bytesToPrint);
+          _printByte(bytesToPrint);
           print('default switch');
         }
         break;
@@ -96,10 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _listPrinters() async {
-    int? rollWidthReceived = await Navigator.of(context).push(
+    Map printerSettings = await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => BluetoothSettings()),
     );
-    this._sendRollWidth(rollWidthReceived);
+    this._sendRollWidth(printerSettings['rollWidth']);
+    setState(() {
+      print('Getting printer settings');
+      this._getPrinter();
+    });
   }
 
   _printByte(bytes) async {
@@ -115,16 +119,53 @@ class _MyHomePageState extends State<MyHomePage> {
         if (connected == "true") {
           await BluetoothThermalPrinter.writeBytes(bytes);
         } else {
-          AlertDialog(
-            title: Text('Algo deu errado'),
-          );
+          print('Falha na impressão!');
+          this._printFailedDialog();
         }
       }
     } else {
-      AlertDialog(
-        title: Text('Nenhuma Impressora configurada'),
-      );
+      print('Não existe impressora configurada!');
+      this._noPrinterConfiguredDialog();
     }
+  }
+
+  _noPrinterConfiguredDialog() {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Falha na Impressão'),
+        content: const Text('Você não possui impressora configurada'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              this._listPrinters();
+            },
+            child: const Text('Configurar Impressora'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _printFailedDialog() {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Falha na Impressão'),
+        content: Text('Não foi possível imprimir. Tente novamente mais tarde.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Ok'),
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
   }
 
   _shareTicket(var ticket) async {
@@ -151,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'http://192.168.5.5:8080?app=TRUE&app_version=2',
+        initialUrl: 'https://bet2.wee.bet?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
