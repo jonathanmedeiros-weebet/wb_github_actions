@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService, ImagensService, ParametroService} from './services';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {AuthService, ParametroService} from './services';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 
 @Component({
@@ -10,14 +10,13 @@ import {config} from './shared/config';
 })
 export class AppComponent implements OnInit {
     @ViewChild('demoModal', { static: true }) demoModal;
-    @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
+    @ViewChild('wrongVersionModal', { static: true }) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk';
 
     constructor(
         private auth: AuthService,
         private parametroService: ParametroService,
         public modalService: NgbModal,
-        private imagensService: ImagensService
     ) {
     }
 
