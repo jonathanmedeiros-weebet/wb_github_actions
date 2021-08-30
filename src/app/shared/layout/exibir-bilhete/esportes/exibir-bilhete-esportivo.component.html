@@ -52,9 +52,9 @@
                     <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                 </p>
                 <p class="jogo-resultado">
-                    <span *ngIf="item.removido; else resultado">cancelado</span>
-                    <span *ngIf="item.encerrado; else resultado">encerrado</span>
-                    <ng-template #resultado>{{item.resultado}}</ng-template>
+                    <span *ngIf="item.removido">cancelado</span>
+                    <span *ngIf="item.encerrado">encerrado</span>
+                    <span *ngIf="item.resultado && !item.encerrado && !item.removido">{{item.resultado}}</span>
                 </p>
             </div>
             <hr>

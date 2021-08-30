@@ -3,11 +3,9 @@ const _host = '//[HOST]';
 const _center = 'https://center6.wee.bet';
 const _live = 'https://streaming.wee.bet';
 const _stats = 'https://stats.wee.bet';
-const _timestamp = '[TIMESTAMP]';
 
 export const config: any = {
     BANCA_NOME: '[BANCA]',
-    TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
     CENTER_HOST: _center,
