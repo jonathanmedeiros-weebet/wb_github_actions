@@ -81,7 +81,7 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
         ),
         linesAfter: 1);
 
-    bytes += generator.text("Teste de configuração de impressora",
+    bytes += generator.text("Teste de configuracao de impressora",
         styles: PosStyles(align: PosAlign.center));
 
     bytes += generator.hr();
@@ -92,15 +92,40 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
     return bytes;
   }
 
-  Future<void> printTicket() async {
-    String? isConnected = await BluetoothThermalPrinter.connectionStatus;
-    if (isConnected == "true") {
+  Future<void> _printTest() async {
+    if (this.printerMAC != null) {
       List<int> bytes = await getTicket();
-      final result = await BluetoothThermalPrinter.writeBytes(bytes);
-      print('Print $result');
-    } else {
-      print("Não foi possível imprimir o ticket. Tente novamente mais tarde!");
+      String? isConnected = await BluetoothThermalPrinter.connectionStatus;
+
+      if (isConnected == "true") {
+        await BluetoothThermalPrinter.writeBytes(bytes);
+      } else {
+        String? connected =
+            await BluetoothThermalPrinter.connect(this.printerMAC!);
+        if (connected == "true") {
+          await BluetoothThermalPrinter.writeBytes(bytes);
+        } else {
+          print('Falha na impressão!');
+          this._printFailedDialog();
+        }
+      }
     }
+  }
+
+  _printFailedDialog() {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Falha na Impressão'),
+        content: Text('Não foi possível imprimir. Tente novamente mais tarde.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Ok'),
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -211,7 +236,7 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
               title: ElevatedButton(
                 child: Text('Testar Impressão'),
                 onPressed: () async {
-                  this.printTicket();
+                  this._printTest();
                 },
               ),
             ),
