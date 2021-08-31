@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerMAC;
   int? printerRollWidth = 58;
   String? isConnected;
+  bool? pageReload = false;
 
   @override
   void initState() {
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
   }
 
-  _executePostMessageAction(postMessage) async {
+  _executePostMessageAction(postMessage) {
     switch (postMessage['action']) {
       case 'listPrinters':
         {
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 'printLottery':
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-          await this._printByte(bytesToPrint);
+          this._printByte(bytesToPrint);
           print('Print action');
         }
         break;
@@ -201,11 +202,13 @@ class _MyHomePageState extends State<MyHomePage> {
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
         },
-        onPageFinished: (String _) async {
+        onPageFinished: (url) {
           _webViewController?.evaluateJavascript("""
-          window.addEventListener('message', (event) => {
+            window.removeEventListener('message', handlerFlutter);
+            var handlerFlutter = function (event){
               WeebetMessage.postMessage(JSON.stringify(event.data));
-          });
+            }
+            window.addEventListener('message', handlerFlutter,  true);
           """);
         },
         javascriptChannels: <JavascriptChannel>{

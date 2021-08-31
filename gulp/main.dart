@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '[NOME_BANCA]',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerMAC;
   int? printerRollWidth = 58;
   String? isConnected;
+  bool? pageReload = false;
 
   @override
   void initState() {
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 'printLottery':
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-          _printByte(bytesToPrint);
+          this._printByte(bytesToPrint);
           print('Print action');
         }
         break;
@@ -201,23 +202,24 @@ class _MyHomePageState extends State<MyHomePage> {
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
         },
-        onPageFinished: (String _) async {
+        onPageStarted: (url) {
           _webViewController?.evaluateJavascript("""
-          window.addEventListener('message', (event) => {
-            console.log(event.data.action);
+            var handlerFlutter = function (event){
               WeebetMessage.postMessage(JSON.stringify(event.data));
-          });
+            }
+            window.addEventListener('message', handlerFlutter,  true);
           """);
         },
+        onPageFinished: (url) {},
         javascriptChannels: <JavascriptChannel>{
           JavascriptChannel(
               name: 'WeebetMessage',
               onMessageReceived: (JavascriptMessage message) {
-                var weebetMessage = jsonDecode(message.message);
-                this._executePostMessageAction(weebetMessage);
+                this._executePostMessageAction(jsonDecode(message.message));
               })
         },
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }

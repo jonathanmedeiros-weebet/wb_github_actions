@@ -88,7 +88,8 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
 
     bytes += generator.text(
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada turpis eget turpis fermentum, ac.',
-        styles: PosStyles(align: PosAlign.center, bold: false));
+        styles: PosStyles(align: PosAlign.center, bold: false),
+        linesAfter: 5);
     return bytes;
   }
 
