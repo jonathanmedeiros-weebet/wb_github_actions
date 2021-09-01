@@ -1736,3 +1736,11 @@ gulp.task('3xbets.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ligavip.wee.bet', function (done) {
+    tasks(done, {
+        host: "ligavip.wee.bet",
+        banca: "LIGA VIP",
+        styles: "",
+    });
+});

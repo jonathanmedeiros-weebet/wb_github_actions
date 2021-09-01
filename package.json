@@ -210,7 +210,8 @@
         "maranhaobets.net": "gulp maranhaobets.net",
         "pagadorabet.com": "gulp pagadorabet.com",
         "sportbetapostas.wee.bet": "gulp sportbetapostas.wee.bet",
-        "3xbets.site": "gulp 3xbets.site"
+        "3xbets.site": "gulp 3xbets.site",
+        "ligavip.wee.bet": "gulp ligavip.wee.bet"
     },
     "private": true,
     "dependencies": {
