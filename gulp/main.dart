@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -26,11 +27,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BetSports',
+      title: '[NOME_BANCA]',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
-      home: MyHomePage(title: 'BetSports'),
+      home: MyHomePage(title: '[NOME_BANCA]'),
     );
   }
 }
@@ -83,6 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 'externalURL':
         {
+          await canLaunch(postMessage['data'])
+              ? await launch(postMessage['data'])
+              : this._shareTicket(postMessage);
           print('externalURL');
         }
         break;
@@ -96,6 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         {
           print('default switch');
+          List<int> bytesToPrint = List<int>.from(postMessage['data']);
+          await this._printByte(bytesToPrint);
         }
         break;
     }
@@ -197,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'http://192.168.0.211:8080?app=TRUE&app_version=2',
+        initialUrl: 'https://[HOST]?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;

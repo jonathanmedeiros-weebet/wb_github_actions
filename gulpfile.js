@@ -5,34 +5,34 @@ var remoteSrc = require('gulp-remote-src');
 
 function tasks(done, config) {
     gulp.src(['gulp/main.dart'])
-        .pipe(replace('[HOST]', config.host))
-        .pipe(replace('[NOME_BANCA]', config.banca))
+        .pipe(replace('[HOST]', config.url))
+        .pipe(replace('[NOME_BANCA]', config.nome))
         .pipe(gulp.dest('lib/'));
 
     gulp.src(['gulp/androidManifest/main/AndroidManifest.xml'])
-        .pipe(replace('[PKG_NAME]', config.apk_pkg))
-        .pipe(replace('[NOME_BANCA]', config.banca))
+        .pipe(replace('[PKG_NAME]', config.app_id))
+        .pipe(replace('[NOME_BANCA]', config.nome))
         .pipe(gulp.dest('android/app/src/main/'));
 
     gulp.src(['gulp/androidManifest/profile/AndroidManifest.xml'])
-        .pipe(replace('[PKG_NAME]', config.apk_pkg))
+        .pipe(replace('[PKG_NAME]', config.app_id))
         .pipe(gulp.dest('android/app/src/profile/'));
 
     gulp.src(['gulp/androidManifest/debug/AndroidManifest.xml'])
-        .pipe(replace('[PKG_NAME]', config.apk_pkg))
+        .pipe(replace('[PKG_NAME]', config.app_id))
         .pipe(gulp.dest('android/app/src/debug/'));
 
     gulp.src(['gulp/build.gradle'])
-        .pipe(replace('[PKG_NAME]', config.apk_pkg))
+        .pipe(replace('[PKG_NAME]', config.app_id))
         .pipe(gulp.dest('android/app/'));
 
     remoteSrc(['logo_banca.png'], {
-        base: 'https://weebet.s3.amazonaws.com/' + config.host + '/logos/'
+        base: 'https://weebet.s3.amazonaws.com/' + config.url + '/logos/'
     })
         .pipe(gulp.dest('assets/'));
 
     remoteSrc(['icone_app.png'], {
-        base: 'https://weebet.s3.amazonaws.com/' + config.host + '/logos/'
+        base: 'https://weebet.s3.amazonaws.com/' + config.url + '/logos/'
     })
         .pipe(gulp.dest('assets/'));
 
@@ -53,7 +53,7 @@ function tasks(done, config) {
         .pipe(exec.reporter(reportOptions));
 
     gulp.src(['gulp/MainActivity.kt'])
-        .pipe(replace('[PKG_NAME]', config.apk_pkg))
+        .pipe(replace('[PKG_NAME]', config.app_id))
         .pipe(gulp.dest('android/app/src/main/kotlin/' + config.pkg_folder + '/'));
 
     // Flutter Build commands
@@ -70,18 +70,18 @@ function tasks(done, config) {
 
 gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
-        host: 'demo.wee.bet',
-        banca: 'Weebet Demo',
-        apk_pkg: ('demo.wee.bet').split('.').reverse().join('.'),
+        url: 'demo.wee.bet',
+        nome: 'Weebet Demo',
+        app_id: ('demo.wee.bet').split('.').reverse().join('.'),
         pkg_folder: ('demo.wee.bet').split('.').reverse().join('/')
     });
 });
 
 gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
-        host: 'bet2.wee.bet',
-        banca: 'BetSports',
-        apk_pkg: ('bet2.wee.bet').split('.').reverse().join('.'),
+        url: 'bet2.wee.bet',
+        nome: 'BetSports',
+        app_id: ('bet2.wee.bet').split('.').reverse().join('.'),
         pkg_folder: ('bet2.wee.bet').split('.').reverse().join('/')
     });
 });
