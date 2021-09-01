@@ -1720,3 +1720,19 @@ gulp.task('pagadorabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportbetapostas.wee.bet', function (done) {
+    tasks(done, {
+        host: "sportbetapostas.wee.bet",
+        banca: "SPORT BET APOSTAS",
+        styles: "",
+    });
+});
+
+gulp.task('3xbets.site', function (done) {
+    tasks(done, {
+        host: "3xbets.site",
+        banca: "3X BETS",
+        styles: "",
+    });
+});
