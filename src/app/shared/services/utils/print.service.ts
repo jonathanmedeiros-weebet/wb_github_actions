@@ -1,4 +1,4 @@
-import {HostListener, Injectable, Output, EventEmitter} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import {AuthService} from './../auth/auth.service';
 import {HelperService} from './helper.service';
@@ -10,6 +10,8 @@ import * as moment from 'moment';
 import EscPosEncoder from 'esc-pos-encoder';
 import {ImagensService} from './imagens.service';
 
+declare var WeebetMessage: any;
+
 @Injectable({
     providedIn: 'root'
 })
@@ -18,7 +20,6 @@ export class PrintService {
     private separatorLine;
     private printerWidth = '58';
     LOGO_IMPRESSAO;
-    @Output() WeebetMessage = new EventEmitter();
 
     constructor(
         private auth: AuthService,
@@ -256,7 +257,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(jogosEscPos.encode()), action: 'printLottery'}, '*');
+            let dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -588,7 +590,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*');
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -930,7 +933,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*'); // file://
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -1033,7 +1037,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*');
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -1529,7 +1534,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(ticketEscPos.encode()), action: 'printLottery'}, '*');
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -1594,7 +1600,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(cardPrintEscPos.encode()), action: 'printCard'}, '*');
+            let dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -1757,7 +1764,8 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            parent.postMessage({data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'}, '*');
+            let dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
 
@@ -1868,13 +1876,12 @@ export class PrintService {
 
     // Utils
     listPrinters() {
-        const message = {
+        const dataToSend = {
             data: '',
             action: 'listPrinters',
         };
 
-        //parent.postMessage(message, '*'); // file://
-        // Worker.postMessage
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
         console.log('listPrinters');
     }
 
