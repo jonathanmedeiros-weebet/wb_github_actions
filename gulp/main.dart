@@ -180,15 +180,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _shareTicket(var ticket) async {
-    ticket['file'] = ticket['file'].replaceAll('data:image/png;base64,', '');
-    Uint8List imageBytes = base64.decode(ticket['file']);
-    final appDir = await syspaths.getTemporaryDirectory();
-    File file = File('${appDir.path}/ticket.png');
+    if (ticket['file'] != null) {
+      ticket['file'] = ticket['file'].replaceAll('data:image/png;base64,', '');
+      Uint8List imageBytes = base64.decode(ticket['file']);
+      final appDir = await syspaths.getTemporaryDirectory();
+      File file = File('${appDir.path}/ticket.png');
 
-    await file.writeAsBytes(imageBytes);
+      await file.writeAsBytes(imageBytes);
 
-    await Share.shareFiles(['${appDir.path}/ticket.png'],
-        text: ticket['message'], subject: 'Compartilhamento de Bilhete');
+      await Share.shareFiles(['${appDir.path}/ticket.png'],
+          text: ticket['message'], subject: 'Compartilhamento');
+    } else {
+      await Share.share(ticket['message'], subject: 'Compartilhamento');
+    }
   }
 
   _sendRollWidth(int? rollWidth) async {
