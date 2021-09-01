@@ -1,4 +1,4 @@
-import {HostListener, Injectable} from '@angular/core';
+import {HostListener, Injectable, Output, EventEmitter} from '@angular/core';
 
 import {AuthService} from './../auth/auth.service';
 import {HelperService} from './helper.service';
@@ -18,6 +18,7 @@ export class PrintService {
     private separatorLine;
     private printerWidth = '58';
     LOGO_IMPRESSAO;
+    @Output() WeebetMessage = new EventEmitter();
 
     constructor(
         private auth: AuthService,
@@ -1872,7 +1873,8 @@ export class PrintService {
             action: 'listPrinters',
         };
 
-        parent.postMessage(message, '*'); // file://
+        //parent.postMessage(message, '*'); // file://
+        // Worker.postMessage
         console.log('listPrinters');
     }
 
