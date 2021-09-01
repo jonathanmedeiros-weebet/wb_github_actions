@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BetSports',
+      title: '[NOME_BANCA]',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
-      home: MyHomePage(title: 'BetSports'),
+      home: MyHomePage(title: '[NOME_BANCA]'),
     );
   }
 }
@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerMAC;
   int? printerRollWidth = 58;
   String? isConnected;
+  int? interactions = 0;
 
   @override
   void initState() {
@@ -196,17 +197,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'https://bet2.wee.bet?app=TRUE&app_version=2',
+        initialUrl: 'https://[HOST]?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
-        },
-        onPageFinished: (String _) async {
-          _webViewController?.evaluateJavascript("""
-          window.addEventListener('message', (event) => {
-              WeebetMessage.postMessage(JSON.stringify(event.data));
-          });
-          """);
         },
         javascriptChannels: <JavascriptChannel>{
           JavascriptChannel(

@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BetSports',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
-      home: MyHomePage(title: '[NOME_BANCA]'),
+      home: MyHomePage(title: 'BetSports'),
     );
   }
 }
@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerMAC;
   int? printerRollWidth = 58;
   String? isConnected;
+  int? interactions = 0;
 
   @override
   void initState() {
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
   }
 
-  _executePostMessageAction(postMessage) {
+  _executePostMessageAction(postMessage) async {
     switch (postMessage['action']) {
       case 'listPrinters':
         {
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 'printLottery':
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-          _printByte(bytesToPrint);
+          await this._printByte(bytesToPrint);
           print('Print action');
         }
         break;
@@ -196,28 +197,20 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'https://[HOST]?app=TRUE&app_version=2',
+        initialUrl: 'http://192.168.0.211:8080?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
-        },
-        onPageFinished: (String _) async {
-          _webViewController?.evaluateJavascript("""
-          window.addEventListener('message', (event) => {
-            console.log(event.data.action);
-              WeebetMessage.postMessage(JSON.stringify(event.data));
-          });
-          """);
         },
         javascriptChannels: <JavascriptChannel>{
           JavascriptChannel(
               name: 'WeebetMessage',
               onMessageReceived: (JavascriptMessage message) {
-                var weebetMessage = jsonDecode(message.message);
-                this._executePostMessageAction(weebetMessage);
+                this._executePostMessageAction(jsonDecode(message.message));
               })
         },
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }
