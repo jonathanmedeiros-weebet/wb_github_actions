@@ -38,7 +38,6 @@ export class ImagensService {
     }
 
     getLogo() {
-        console.log('Getting logo');
         this.buscarLogo()
             .subscribe(
                 logo => {

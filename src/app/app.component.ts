@@ -21,11 +21,9 @@ export class AppComponent implements OnInit {
     }
 
     @HostListener('window:message', ['$event']) onPostMessage(event) {
-        console.log('recebido  do app');
         switch (event.data.action) {
             case 'printerWidth':
                 localStorage.setItem('printer_width', event.data.width);
-                console.log('Tamanho Recebido: ' + event.data.width);
                 break;
             default:
                 console.log('Loaded');

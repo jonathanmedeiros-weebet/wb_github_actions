@@ -1882,7 +1882,6 @@ export class PrintService {
         };
 
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        console.log('listPrinters');
     }
 
     getValor(chave, cotacoes) {
