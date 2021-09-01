@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -48,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerMAC;
   int? printerRollWidth = 58;
   String? isConnected;
-  bool? pageReload = false;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
   }
 
-  _executePostMessageAction(postMessage) {
+  _executePostMessageAction(postMessage) async {
     switch (postMessage['action']) {
       case 'listPrinters':
         {
@@ -83,19 +83,24 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 'externalURL':
         {
+          await canLaunch(postMessage['data'])
+              ? await launch(postMessage['data'])
+              : this._shareTicket(postMessage);
           print('externalURL');
         }
         break;
       case 'printLottery':
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-          this._printByte(bytesToPrint);
+          await this._printByte(bytesToPrint);
           print('Print action');
         }
         break;
       default:
         {
           print('default switch');
+          List<int> bytesToPrint = List<int>.from(postMessage['data']);
+          await this._printByte(bytesToPrint);
         }
         break;
     }
@@ -202,15 +207,6 @@ class _MyHomePageState extends State<MyHomePage> {
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
         },
-        onPageStarted: (url) {
-          _webViewController?.evaluateJavascript("""
-            var handlerFlutter = function (event){
-              WeebetMessage.postMessage(JSON.stringify(event.data));
-            }
-            window.addEventListener('message', handlerFlutter,  true);
-          """);
-        },
-        onPageFinished: (url) {},
         javascriptChannels: <JavascriptChannel>{
           JavascriptChannel(
               name: 'WeebetMessage',

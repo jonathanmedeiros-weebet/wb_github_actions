@@ -5,6 +5,7 @@ import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
@@ -48,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerMAC;
   int? printerRollWidth = 58;
   String? isConnected;
-  bool? pageReload = false;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
   }
 
-  _executePostMessageAction(postMessage) {
+  _executePostMessageAction(postMessage) async {
     switch (postMessage['action']) {
       case 'listPrinters':
         {
@@ -83,6 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 'externalURL':
         {
+          await canLaunch(postMessage['data'])
+              ? await launch(postMessage['data'])
+              : this._shareTicket(postMessage);
           print('externalURL');
         }
         break;
@@ -96,6 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         {
           print('default switch');
+          List<int> bytesToPrint = List<int>.from(postMessage['data']);
+          await this._printByte(bytesToPrint);
         }
         break;
     }
@@ -175,15 +180,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _shareTicket(var ticket) async {
-    ticket['file'] = ticket['file'].replaceAll('data:image/png;base64,', '');
-    Uint8List imageBytes = base64.decode(ticket['file']);
-    final appDir = await syspaths.getTemporaryDirectory();
-    File file = File('${appDir.path}/ticket.png');
+    if (ticket['file'] != null) {
+      ticket['file'] = ticket['file'].replaceAll('data:image/png;base64,', '');
+      Uint8List imageBytes = base64.decode(ticket['file']);
+      final appDir = await syspaths.getTemporaryDirectory();
+      File file = File('${appDir.path}/ticket.png');
 
-    await file.writeAsBytes(imageBytes);
+      await file.writeAsBytes(imageBytes);
 
-    await Share.shareFiles(['${appDir.path}/ticket.png'],
-        text: ticket['message'], subject: 'Compartilhamento de Bilhete');
+      await Share.shareFiles(['${appDir.path}/ticket.png'],
+          text: ticket['message'], subject: 'Compartilhamento');
+    } else {
+      await Share.share(ticket['data']);
+    }
   }
 
   _sendRollWidth(int? rollWidth) async {
@@ -197,19 +206,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'https://bet2.wee.bet?app=TRUE&app_version=2',
+        initialUrl: 'http://192.168.0.211:8080?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
-        },
-        onPageFinished: (url) {
-          _webViewController?.evaluateJavascript("""
-            window.removeEventListener('message', handlerFlutter);
-            var handlerFlutter = function (event){
-              WeebetMessage.postMessage(JSON.stringify(event.data));
-            }
-            window.addEventListener('message', handlerFlutter,  true);
-          """);
         },
         javascriptChannels: <JavascriptChannel>{
           JavascriptChannel(

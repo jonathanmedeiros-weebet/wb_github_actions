@@ -259,12 +259,12 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
                     String name = list[0];
                     String mac = list[1];
                     this.setConnect(mac);
-                    this._setPrinter(name, mac);
-                    this._setPrinterRollWidth(0);
-                    this._getPrinter();
 
                     setState(() {
                       this.availableBluetoothDevices = [];
+                      this._setPrinter(name, mac);
+                      this._setPrinterRollWidth(0);
+                      this._getPrinter();
                     });
                   },
                   title:
