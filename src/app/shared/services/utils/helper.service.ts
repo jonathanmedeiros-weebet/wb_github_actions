@@ -253,6 +253,7 @@ export class HelperService {
 
     compartilharPreAposta(codigo) {
         let dataToSend =  {
+                message: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
                 data: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
                 action: 'shareURL'
             };
