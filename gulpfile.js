@@ -1712,3 +1712,11 @@ gulp.task('maranhaobets.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pagadorabet.com', function (done) {
+    tasks(done, {
+        host: "pagadorabet.com",
+        banca: "PAGADORA BET",
+        styles: "",
+    });
+});
