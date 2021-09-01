@@ -146,7 +146,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         };
 
         parent.postMessage(message, 'file://'); // file://
-        console.log('app version');
     }
 
     getPosicaoFinanceira(event) {

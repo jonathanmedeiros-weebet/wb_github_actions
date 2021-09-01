@@ -7,6 +7,8 @@ import * as moment from 'moment';
 
 import { ParametrosLocaisService } from '../parametros-locais.service';
 
+declare var WeebetMessage: any;
+
 @Injectable({
     providedIn: 'root',
 })
@@ -250,13 +252,12 @@ export class HelperService {
     }
 
     compartilharPreAposta(codigo) {
-        parent.postMessage(
-            {
+        let dataToSend =  {
+                message: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
                 data: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
                 action: 'shareURL'
-            },
-            'file://'
-        );
+            };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     sharedTicket(aposta, file) {
@@ -267,38 +268,32 @@ export class HelperService {
             data = `${location.origin}/bilhete/${aposta.codigo}`;
         }
 
-        parent.postMessage(
-            {
+        let dataToSend = {
                 message: `${config.BANCA_NOME}: ${data}`,
                 file: file,
                 data: data,
                 action: 'shareURL'
-            },
-            'file://'
-        );
+            };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     sharedRecargaCartao(recarga, file) {
-        parent.postMessage(
-            {
+        let dataToSend = {
                 message: `Comprovante de Recarga`,
                 file: file,
                 data: `Comprovante de Recarga`,
                 action: 'shareURL'
-            },
-            'file://'
-        );
+            };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     sharedCasaDasApostaUrl(url) {
-        parent.postMessage(
-            {
+        let dataToSend = {
                 message: `Casa das Apostas`,
                 data: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
                 action: 'shareURL'
-            },
-            'file://'
-        );
+            };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
 
@@ -314,5 +309,9 @@ export class HelperService {
         }
 
         return this.moneyFormat(result);
+    }
+
+    removerAcentos(stringToSanitize) {
+        return stringToSanitize.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 }

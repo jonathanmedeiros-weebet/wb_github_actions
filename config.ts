@@ -17,6 +17,7 @@ export const config: any = {
     SLUG: '[S3_FOLDER]',
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
     LOGO: 'https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/logo_banca.png',
+    LOGO_IMPRESSAO: 'https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/logo_impressao.png',
 
     BG: `${_host}/tema/bk.jpg`
 };
