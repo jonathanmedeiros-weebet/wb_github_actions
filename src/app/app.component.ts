@@ -11,7 +11,7 @@ import {config} from './shared/config';
 export class AppComponent implements OnInit {
     @ViewChild('demoModal', { static: true }) demoModal;
     @ViewChild('wrongVersionModal', { static: true }) wrongVersionModal;
-    appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk' + (new Date()).getTime();
+    appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
 
     constructor(
         private auth: AuthService,
