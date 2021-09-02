@@ -1744,3 +1744,11 @@ gulp.task('ligavip.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('diretoriasport.bet', function (done) {
+    tasks(done, {
+        host: "diretoriasport.bet",
+        banca: "DIRETORIA SPORT",
+        styles: "",
+    });
+});

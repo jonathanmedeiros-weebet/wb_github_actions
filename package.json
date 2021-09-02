@@ -211,7 +211,8 @@
         "pagadorabet.com": "gulp pagadorabet.com",
         "sportbetapostas.wee.bet": "gulp sportbetapostas.wee.bet",
         "3xbets.site": "gulp 3xbets.site",
-        "ligavip.wee.bet": "gulp ligavip.wee.bet"
+        "ligavip.wee.bet": "gulp ligavip.wee.bet",
+        "diretoriasport.bet": "gulp diretoriasport.bet"
     },
     "private": true,
     "dependencies": {
