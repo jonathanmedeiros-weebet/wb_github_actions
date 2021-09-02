@@ -1,4 +1,4 @@
-package bet.wee.bet2
+package bet.wee.demo.app
 
 import io.flutter.embedding.android.FlutterActivity
 

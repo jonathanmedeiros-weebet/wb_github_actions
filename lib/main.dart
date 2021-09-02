@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BetSports',
+      title: 'Demo Weebet',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
-      home: MyHomePage(title: 'BetSports'),
+      home: MyHomePage(title: 'Demo Weebet'),
     );
   }
 }
@@ -53,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     this._getPrinter();
     this._sendRollWidth(this.printerRollWidth);
   }
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 'printLottery':
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
-          this._printByte(bytesToPrint);
+          await this._printByte(bytesToPrint);
           print('Print action');
         }
         break;
@@ -191,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await Share.shareFiles(['${appDir.path}/ticket.png'],
           text: ticket['message'], subject: 'Compartilhamento');
     } else {
-      await Share.share(ticket['data']);
+      await Share.share(ticket['message'], subject: 'Compartilhamento');
     }
   }
 
@@ -206,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'http://192.168.0.211:8080?app=TRUE&app_version=2',
+        initialUrl: 'https://demo.wee.bet?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;

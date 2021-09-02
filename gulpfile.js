@@ -26,13 +26,17 @@ function tasks(done, config) {
         .pipe(replace('[PKG_NAME]', config.app_id))
         .pipe(gulp.dest('android/app/'));
 
+    gulp.src(['gulp/flutter_native_splash.yaml'])
+        .pipe(replace('[SPLASH_COLOR]', config.splash_color))
+        .pipe(gulp.dest('./'));
+
     remoteSrc(['logo_banca.png'], {
-        base: 'https://weebet.s3.amazonaws.com/' + config.url + '/logos/'
+        base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
     })
         .pipe(gulp.dest('assets/'));
 
     remoteSrc(['icone_app.png'], {
-        base: 'https://weebet.s3.amazonaws.com/' + config.url + '/logos/'
+        base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
     })
         .pipe(gulp.dest('assets/'));
 
@@ -70,18 +74,45 @@ function tasks(done, config) {
 
 gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
-        url: 'demo.wee.bet',
-        nome: 'Weebet Demo',
-        app_id: ('demo.wee.bet').split('.').reverse().join('.'),
-        pkg_folder: ('demo.wee.bet').split('.').reverse().join('/')
+        url: "https://demo.wee.bet",
+        nome: "Demo Weebet",
+        slug: "demo.wee.bet",
+        splash_color: "#222d32",
+        app_id: "bet.wee.demo.app",
+        pkg_folder: ("bet.wee.demo.app").split('.').join('/')
     });
 });
+
+gulp.task('esportbets.wee.bet', function (done) {
+    tasks(done, {
+        url: "https://esportbets.wee.bet",
+        nome: "Esport Bets",
+        slug: "esportbets.wee.bet",
+        splash_color: "#004d59",
+        app_id: "bet.wee.esportbets.app",
+        pkg_folder: ("bet.wee.esportbets.app").split('.').join('/')
+    });
+});
+
+
+gulp.task('scorpionsbet.wee.bet', function (done) {
+    tasks(done,{
+        url: "https://scorpionsbet.wee.bet",
+        nome: "Scorpions Bet",
+        slug: "scorpionsbet.wee.bet",
+        splash_color: "#004211",
+        app_id: "bet.wee.scorpionsbet.app",
+        pkg_folder: ("bet.wee.scorpionsbet.app").split('.').join('/')
+    });
+});
+
 
 gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
         url: 'bet2.wee.bet',
         nome: 'BetSports',
-        app_id: ('bet2.wee.bet').split('.').reverse().join('.'),
-        pkg_folder: ('bet2.wee.bet').split('.').reverse().join('/')
+        slug: 'bet2.wee.bet',
+        app_id: ('bet.wee.bet2.app'),
+        pkg_folder: ('bet2.wee.bet.app').split('.').reverse().join('/')
     });
 });
