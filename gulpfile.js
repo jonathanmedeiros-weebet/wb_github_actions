@@ -272,6 +272,18 @@ gulp.task('3xbets.site', function (done) {
 });
 
 
+gulp.task('diretoriasport.bet', function (done) {
+    tasks(done, {
+        url: "https://diretoriasport.bet",
+        nome: "3X BETS",
+        app_id: "bet.diretoriasport.app",
+        pkg_folder: ("bet.diretoriasport.app").split('.').join('/'),
+        slug: "diretoriasport.bet",
+        splash_color: "#002458",
+    });
+});
+
+
 
 
 
