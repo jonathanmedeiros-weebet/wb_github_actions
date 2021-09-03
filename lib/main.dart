@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '3X BETS',
+      title: 'Demo Weebet',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
-      home: MyHomePage(title: '3X BETS'),
+      home: MyHomePage(title: 'Demo Weebet'),
     );
   }
 }
@@ -207,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'https://3xbets.site?app=TRUE&app_version=2',
+        initialUrl: 'https://demo.wee.bet?app=TRUE&app_version=2',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;

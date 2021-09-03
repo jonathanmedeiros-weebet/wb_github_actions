@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="site.tresxbets.app">
+    package="bet.wee.demo.app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="3X BETS"
+        android:label="Demo Weebet"
         android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true">
         <activity

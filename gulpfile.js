@@ -156,7 +156,7 @@ gulp.task('betgyn.com', function () {
         app_id: "com.betgyn.app",
         pkg_folder: ("com.betgyn.app").split('.').join('/'),
         slug: "betgyn.com",
-        splash_color: "#002458"        
+        splash_color: "#002458"
     });
 });
 
@@ -283,6 +283,18 @@ gulp.task('diretoriasport.bet', function (done) {
     });
 });
 
+/* Gulp Build */
+
+gulp.task('custom-build', function (done) {
+    tasks(done, {
+        url: process.env.CLIENT_URL,
+        nome: process.env.CLIENT_NAME,
+        app_id: process.env.APP_ID,
+        pkg_folder: (process.env.APP_ID).split('.').join('/'),
+        slug: process.env.APP_SLUG,
+        splash_color: process.env.APP_SPLASH_COLOR
+    });
+});
 
 
 
@@ -322,7 +334,7 @@ gulp.task('esportbets.wee.bet', function (done) {
 
 
 gulp.task('scorpionsbet.wee.bet', function (done) {
-    tasks(done,{
+    tasks(done, {
         url: "https://scorpionsbet.wee.bet",
         nome: "Scorpions Bet",
         slug: "scorpionsbet.wee.bet",
