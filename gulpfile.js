@@ -4,42 +4,6 @@ var exec = require('gulp-exec');
 var remoteSrc = require('gulp-remote-src');
 
 function tasks(done, config) {
-    gulp.src(['gulp/main.dart'])
-        .pipe(replace('[HOST]', config.url))
-        .pipe(replace('[NOME_BANCA]', config.nome))
-        .pipe(gulp.dest('lib/'));
-
-    gulp.src(['gulp/androidManifest/main/AndroidManifest.xml'])
-        .pipe(replace('[PKG_NAME]', config.app_id))
-        .pipe(replace('[NOME_BANCA]', config.nome))
-        .pipe(gulp.dest('android/app/src/main/'));
-
-    gulp.src(['gulp/androidManifest/profile/AndroidManifest.xml'])
-        .pipe(replace('[PKG_NAME]', config.app_id))
-        .pipe(gulp.dest('android/app/src/profile/'));
-
-    gulp.src(['gulp/androidManifest/debug/AndroidManifest.xml'])
-        .pipe(replace('[PKG_NAME]', config.app_id))
-        .pipe(gulp.dest('android/app/src/debug/'));
-
-    gulp.src(['gulp/build.gradle'])
-        .pipe(replace('[PKG_NAME]', config.app_id))
-        .pipe(gulp.dest('android/app/'));
-
-    gulp.src(['gulp/flutter_native_splash.yaml'])
-        .pipe(replace('[SPLASH_COLOR]', config.splash_color))
-        .pipe(gulp.dest('.'));
-
-    remoteSrc(['logo_banca.png'], {
-        base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
-    })
-        .pipe(gulp.dest('assets/'));
-
-    remoteSrc(['icone_app.png'], {
-        base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
-    })
-        .pipe(gulp.dest('assets/'));
-
 
     var options = {
         continueOnError: false, // default = false, true means don't emit error event
@@ -73,6 +37,73 @@ function tasks(done, config) {
 
     done();
 }
+
+async function prepare(config) {
+    try {
+        gulp.src(['gulp/main.dart'])
+            .pipe(replace('[HOST]', config.url))
+            .pipe(replace('[NOME_BANCA]', config.nome))
+            .pipe(gulp.dest('lib/'));
+
+        gulp.src(['gulp/androidManifest/main/AndroidManifest.xml'])
+            .pipe(replace('[PKG_NAME]', config.app_id))
+            .pipe(replace('[NOME_BANCA]', config.nome))
+            .pipe(gulp.dest('android/app/src/main/'));
+
+        gulp.src(['gulp/androidManifest/profile/AndroidManifest.xml'])
+            .pipe(replace('[PKG_NAME]', config.app_id))
+            .pipe(gulp.dest('android/app/src/profile/'));
+
+        gulp.src(['gulp/androidManifest/debug/AndroidManifest.xml'])
+            .pipe(replace('[PKG_NAME]', config.app_id))
+            .pipe(gulp.dest('android/app/src/debug/'));
+
+        gulp.src(['gulp/build.gradle'])
+            .pipe(replace('[PKG_NAME]', config.app_id))
+            .pipe(gulp.dest('android/app/'));
+
+        gulp.src(['gulp/flutter_native_splash.yaml'])
+            .pipe(replace('[SPLASH_COLOR]', config.splash_color))
+            .pipe(gulp.dest('.'));
+
+        remoteSrc(['logo_banca.png'], {
+            base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
+        })
+            .pipe(gulp.dest('assets/'));
+
+        remoteSrc(['icone_app.png'], {
+            base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
+        })
+            .pipe(gulp.dest('assets/'));
+
+        var options = {
+            continueOnError: false, // default = false, true means don't emit error event
+            pipeStdout: false, // default = false, true means stdout is written to file.contents
+            customTemplatingThing: "test" // content passed to lodash.template()
+        };
+        var reportOptions = {
+            err: true, // default = true, false means don't write err
+            stderr: true, // default = true, false means don't write stderr
+            stdout: true // default = true, false means don't write stdout
+        };
+
+        gulp.src('/')
+            .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
+            .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
+            .pipe(exec.reporter(reportOptions));
+
+        gulp.src(['gulp/MainActivity.kt'])
+            .pipe(replace('[PKG_NAME]', config.app_id))
+            .pipe(gulp.dest('android/app/src/main/kotlin/' + config.pkg_folder + '/'));
+
+
+    } catch (err) {
+        console.error(err)
+        process.exit(1)
+    }
+
+
+}
 // -------------------------------------------------------------------------------------//
 gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
@@ -96,6 +127,16 @@ gulp.task('bet2.wee.bet', function (done) {
 });
 
 /* Gulp Build */
+gulp.task('prepare-build', function(){
+    return prepare({
+        app_id: process.env.APP_ID,
+        url: process.env.CLIENT_URL,
+        nome: process.env.CLIENT_NAME,
+        slug: process.env.APP_SLUG,
+        splash_color: process.env.APP_SPLASH_COLOR,
+        pkg_folder: (process.env.APP_ID).split('.').join('/')
+    });
+});
 
 gulp.task('custom-build', function (done) {
     tasks(done, {
