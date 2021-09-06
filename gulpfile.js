@@ -104,6 +104,6 @@ gulp.task('custom-build', function (done) {
         nome: process.env.CLIENT_NAME,
         slug: process.env.APP_SLUG,
         splash_color: process.env.APP_SPLASH_COLOR,
-        pkg_folder: (process.env.APP_ID).split('.'), //Gerado no Gulp
+        pkg_folder: (process.env.APP_ID).split('.').join('/'), //Gerado no Gulp
     });
 });
