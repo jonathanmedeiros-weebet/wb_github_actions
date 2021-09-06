@@ -1,4 +1,4 @@
-image: dolalti/flutter-build-android:latest
+image: atlassian/default-image:2
 
 pipelines:
   custom:
@@ -15,8 +15,7 @@ pipelines:
       - step:
           # size: 2x
           script:
-            # - docker run --rm -v "$(pwd)":/app/ -e APP_ID="${APP_ID}" -e CLIENT_URL="${CLIENT_URL}" -e CLIENT_NAME="${CLIENT_NAME}" -e APP_SLUG="${APP_SLUG}" -e APP_SPLASH_COLOR="${APP_SPLASH_COLOR}" -e APP_FILE="${APP_FILE}" -e S3_BUCKET="${S3_BUCKET}" -e APP_OUT="${APP_OUT}" dolalti/flutter-build-android:latest ./build.sh
-            - ./build.sh
+            - docker run --rm -v "$(pwd)":/app/ -e APP_ID="${APP_ID}" -e CLIENT_URL="${CLIENT_URL}" -e CLIENT_NAME="${CLIENT_NAME}" -e APP_SLUG="${APP_SLUG}" -e APP_SPLASH_COLOR="${APP_SPLASH_COLOR}" -e APP_FILE="${APP_FILE}" -e S3_BUCKET="${S3_BUCKET}" -e APP_OUT="${APP_OUT}" dolalti/flutter-build-android:latest ./build.sh
             - aws s3 cp $APP_FILE $S3_BUCKET$APP_OUT --acl public-read
           services:
             - docker
