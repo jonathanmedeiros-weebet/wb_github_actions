@@ -101,30 +101,7 @@ async function prepare(config) {
         console.error(err)
         process.exit(1)
     }
-
-
 }
-// -------------------------------------------------------------------------------------//
-gulp.task('demo.wee.bet', function (done) {
-    tasks(done, {
-        url: "https://demo.wee.bet",
-        nome: "Demo Weebet",
-        slug: "demo.wee.bet",
-        splash_color: "#222d32",
-        app_id: "bet.wee.demo.app",
-        pkg_folder: ("bet.wee.demo.app").split('.').join('/')
-    });
-});
-
-gulp.task('bet2.wee.bet', function (done) {
-    tasks(done, {
-        url: 'bet2.wee.bet',
-        nome: 'BetSports',
-        slug: 'bet2.wee.bet',
-        app_id: ('bet.wee.bet2.app'),
-        pkg_folder: ('bet2.wee.bet.app').split('.').reverse().join('/')
-    });
-});
 
 /* Gulp Build */
 gulp.task('prepare-build', function(){
