@@ -52,10 +52,10 @@ function tasks(done, config) {
         stdout: true // default = true, false means don't write stdout
     };
 
-    gulp.src('/')
-        // .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
-        .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
-        .pipe(exec.reporter(reportOptions));
+    // gulp.src('/')
+    //     // .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
+    //     .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
+    //     .pipe(exec.reporter(reportOptions));
 
     gulp.src(['gulp/MainActivity.kt'])
         .pipe(replace('[PKG_NAME]', config.app_id))
