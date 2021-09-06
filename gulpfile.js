@@ -28,7 +28,7 @@ function tasks(done, config) {
 
     gulp.src(['gulp/flutter_native_splash.yaml'])
         .pipe(replace('[SPLASH_COLOR]', config.splash_color))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('.'));
 
     remoteSrc(['logo_banca.png'], {
         base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
@@ -52,10 +52,10 @@ function tasks(done, config) {
         stdout: true // default = true, false means don't write stdout
     };
 
-    // gulp.src('/')
-    //     // .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
-    //     .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
-    //     .pipe(exec.reporter(reportOptions));
+    gulp.src('/')
+        .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
+        .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
+        .pipe(exec.reporter(reportOptions));
 
     gulp.src(['gulp/MainActivity.kt'])
         .pipe(replace('[PKG_NAME]', config.app_id))
@@ -104,6 +104,6 @@ gulp.task('custom-build', function (done) {
         nome: process.env.CLIENT_NAME,
         slug: process.env.APP_SLUG,
         splash_color: process.env.APP_SPLASH_COLOR,
-        pkg_folder: (process.env.APP_ID).split('.').join('/'), //Gerado no Gulp
+        pkg_folder: (process.env.APP_ID).split('.').join('/')
     });
 });
