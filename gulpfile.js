@@ -54,6 +54,7 @@ function tasks(done, config) {
 
     gulp.src('/')
         .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
+        .pipe('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder, options)
         .pipe(exec.reporter(reportOptions));
 
     gulp.src(['gulp/MainActivity.kt'])
@@ -103,6 +104,6 @@ gulp.task('custom-build', function (done) {
         nome: process.env.CLIENT_NAME,
         slug: process.env.APP_SLUG,
         splash_color: process.env.APP_SPLASH_COLOR,
-        pkg_folder: (process.env.APP_ID).split('.').join('/'), //Gerado no Gulp
+        pkg_folder: (process.env.APP_ID).split('.'), //Gerado no Gulp
     });
 });
