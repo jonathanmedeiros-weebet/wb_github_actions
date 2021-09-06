@@ -1,6 +1,6 @@
 #!/bin/bash
 npm install
-gulp prepare
+gulp prepare-build
 # gulp custom-build
 flutter pub get
 flutter pub run flutter_launcher_icons:main
