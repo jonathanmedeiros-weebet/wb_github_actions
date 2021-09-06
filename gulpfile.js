@@ -53,8 +53,8 @@ function tasks(done, config) {
     };
 
     gulp.src('/')
-        .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
-        .pipe('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder, options)
+        // .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
+        .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
         .pipe(exec.reporter(reportOptions));
 
     gulp.src(['gulp/MainActivity.kt'])
