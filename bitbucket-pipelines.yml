@@ -13,6 +13,7 @@ pipelines:
           - name: S3_BUCKET
           - name: APP_OUT
       - step:
+          size: 2x
           script:
             - npm install
             - gulp prepare-build
