@@ -296,6 +296,14 @@ export class HelperService {
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
+    sendExternalUrl(url) {
+        let dataToSend = {
+            message: `URL Externa`,
+            data: url,
+            action: 'externalURL'
+        };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
+    }
 
     dateFormat(date: string, format?: string) {
         return format ? moment(date).format(format) : moment(date).format();
