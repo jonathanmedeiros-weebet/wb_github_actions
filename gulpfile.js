@@ -1609,14 +1609,6 @@ gulp.task('reallbet.site', function (done) {
     });
 });
 
-gulp.task('king-bets.wee.bet', function (done) {
-    tasks(done, {
-        host: "king-bets.wee.bet",
-        banca: "KING BETS",
-        styles: "",
-    });
-});
-
 gulp.task('apostasms.wee.bet', function (done) {
     tasks(done, {
         host: "apostasms.wee.bet",
