@@ -207,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: '[HOST]?app=TRUE&app_version=2',
+        initialUrl: '[HOST]?app=TRUE&app_version=3',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;
