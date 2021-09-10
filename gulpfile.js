@@ -1744,3 +1744,27 @@ gulp.task('diretoriasport.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('aeapostas.wee.bet', function (done) {
+    tasks(done, {
+        host: "aeapostas.wee.bet",
+        banca: "AE APOSTAS",
+        styles: "",
+    });
+});
+
+gulp.task('kabumbet.site', function (done) {
+    tasks(done, {
+        host: "kabumbet.site",
+        banca: "KABUM BET",
+        styles: "",
+    });
+});
+
+gulp.task('betsgames.net', function (done) {
+    tasks(done, {
+        host: "betsgames.net",
+        banca: "BETS GAMES",
+        styles: "",
+    });
+});

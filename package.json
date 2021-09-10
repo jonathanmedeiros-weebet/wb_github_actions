@@ -211,7 +211,10 @@
         "sportbetapostas.wee.bet": "gulp sportbetapostas.wee.bet",
         "3xbets.site": "gulp 3xbets.site",
         "ligavip.wee.bet": "gulp ligavip.wee.bet",
-        "diretoriasport.bet": "gulp diretoriasport.bet"
+        "diretoriasport.bet": "gulp diretoriasport.bet",
+        "aeapostas.wee.bet": "gulp aeapostas.wee.bet",
+        "kabumbet.site": "gulp kabumbet.site",
+        "betsgames.net": "gulp betsgames.net"
     },
     "private": true,
     "dependencies": {
