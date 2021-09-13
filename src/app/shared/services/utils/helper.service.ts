@@ -289,7 +289,7 @@ export class HelperService {
 
     sharedCasaDasApostaUrl(url) {
         let dataToSend = {
-                message: `Casa das Apostas`,
+                message: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
                 data: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
                 action: 'shareURL'
             };
