@@ -205,9 +205,8 @@ export class PrintService {
                 .raw([0x1B, 0x21, 0x10]) // Large Font Size
                 .raw([0x1B, 0x21, 0x03])
                 .size('normal')
-                .text('Tabela de Jogos')
                 .newline()
-                .size('small');
+                .newline();
 
             dias.forEach(dia => {
                 jogosEscPos
