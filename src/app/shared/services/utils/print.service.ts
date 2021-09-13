@@ -207,7 +207,7 @@ export class PrintService {
                 .size('normal')
                 .text('Tabela de Jogos')
                 .newline()
-                .size('small');
+                .size('normal');
 
             dias.forEach(dia => {
                 jogosEscPos
