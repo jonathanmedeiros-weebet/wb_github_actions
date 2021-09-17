@@ -836,14 +836,6 @@ gulp.task('resenhaesportiva.site', function (done) {
     });
 });
 
-gulp.task('betsbrasil.net', function (done) {
-    tasks(done, {
-        host: "betsbrasil.net",
-        banca: "BETS BRASIL",
-        styles: "",
-    });
-});
-
 gulp.task('showdebola.wee.bet', function (done) {
     tasks(done, {
         host: "showdebola.wee.bet",
@@ -897,14 +889,6 @@ gulp.task('interior.wee.bet', function (done) {
         host: "interior.wee.bet",
         banca: "INTERIOR BET",
         styles: "--header: #222d32; --foreground-header: #c49a3e; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
-gulp.task('betsgol.me', function (done) {
-    tasks(done, {
-        host: "betsgol.me",
-        banca: "BETS GOL",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ec2300;--odds: #ffcb00; --foreground-odds: #000;",
     });
 });
 
@@ -1031,14 +1015,6 @@ gulp.task('osascosportsbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('goldbets.app', function (done) {
-    tasks(done, {
-        host: "goldbets.app",
-        banca: "GOLD BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #ffa; --foreground-highlight: yellow; --odds: #ffc107; --foreground-odds: #000;",
-    });
-});
-
 gulp.task('serra99.wee.bet', function (done) {
     tasks(done, {
         host: "serra99.wee.bet",
@@ -1119,14 +1095,6 @@ gulp.task('gobets.wee.bet', function (done) {
     });
 });
 
-gulp.task('aguiasports.bet', function (done) {
-    tasks(done, {
-        host: "aguiasports.bet",
-        banca: "ÁGUIA SPORTS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #fbb03b;--highlight:red;--foreground-highlight:#fff;",
-    });
-});
-
 gulp.task('imperiobonitobet.site', function (done) {
     tasks(done, {
         host: "imperiobonitobet.site",
@@ -1134,15 +1102,6 @@ gulp.task('imperiobonitobet.site', function (done) {
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #ffd700;--foreground-odds: #000;--highlight:red;--foreground-highlight:#fff;",
     });
 });
-
-gulp.task('showbet.wee.bet', function (done) {
-    tasks(done, {
-        host: "showbet.wee.bet",
-        banca: "SHOW BET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #006400;--foreground-highlight:#fff;",
-    });
-});
-
 
 gulp.task('bet316top.wee.bet', function (done) {
     tasks(done, {
@@ -1557,14 +1516,6 @@ gulp.task('techbet.wee.bet', function (done) {
     tasks(done, {
         host: "techbet.wee.bet",
         banca: "TECH BET",
-        styles: "",
-    });
-});
-
-gulp.task('megasports.wee.bet', function (done) {
-    tasks(done, {
-        host: "megasports.wee.bet",
-        banca: "MEGA SPORTS",
         styles: "",
     });
 });
