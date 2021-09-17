@@ -206,7 +206,8 @@
         "diretoriasport.bet": "gulp diretoriasport.bet",
         "aeapostas.wee.bet": "gulp aeapostas.wee.bet",
         "kabumbet.site": "gulp kabumbet.site",
-        "betsgames.net": "gulp betsgames.net"
+        "betsgames.net": "gulp betsgames.net",
+        "quina.bet": "gulp quina.bet"
     },
     "private": true,
     "dependencies": {

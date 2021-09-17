@@ -1701,3 +1701,11 @@ gulp.task('megasports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('quina.bet', function (done) {
+    tasks(done, {
+        host: "quina.bet",
+        banca: "QUINA BET",
+        styles: "",
+    });
+});
