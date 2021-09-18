@@ -1709,3 +1709,11 @@ gulp.task('quina.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('jbrbets.net', function (done) {
+    tasks(done, {
+        host: "jbrbets.net",
+        banca: "JBR BETS",
+        styles: "",
+    });
+});
