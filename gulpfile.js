@@ -1717,3 +1717,19 @@ gulp.task('jbrbets.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lucrei.wee.bet', function (done) {
+    tasks(done, {
+        host: "lucrei.wee.bet",
+        banca: "LUCREI BET",
+        styles: "",
+    });
+});
+
+gulp.task('pixsports.wee.bet', function (done) {
+    tasks(done, {
+        host: "pixsports.wee.bet",
+        banca: "PIX SPORTS",
+        styles: "",
+    });
+});
