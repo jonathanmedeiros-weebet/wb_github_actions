@@ -79,22 +79,6 @@ gulp.task('betsbr.club', function (done) {
     });
 });
 
-gulp.task('betsgame.wee.bet', function (done) {
-    tasks(done, {
-        host: "betsgame.wee.bet",
-        banca: "Bet$game",
-        styles: ""
-    });
-});
-
-gulp.task('betsplay.bet', function (done) {
-    tasks(done, {
-        host: "betsplay.bet",
-        banca: "BETS PLAY",
-        styles: "",
-    });
-});
-
 gulp.task('betsports99.net', function (done) {
     tasks(done, {
         host: "betsports99.net",
@@ -345,14 +329,6 @@ gulp.task('masterbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsports.club', function (done) {
-    tasks(done, {
-        host: "betsports.club",
-        banca: "Bet Sports",
-        styles: ""
-    });
-});
-
 gulp.task('placardarodada.wee.bet', function (done) {
     tasks(done, {
         host: "placardarodada.wee.bet",
@@ -599,14 +575,6 @@ gulp.task('x2bet.wee.bet', function (done) {
     });
 });
 
-gulp.task('fenixesportes.wee.bet', function (done) {
-    tasks(done, {
-        host: "fenixesportes.wee.bet",
-        banca: "FÊNIX ESPORTES",
-        styles: ""
-    });
-});
-
 gulp.task('ricoesportes.wee.bet', function (done) {
     tasks(done, {
         host: "ricoesportes.wee.bet",
@@ -620,14 +588,6 @@ gulp.task('betsplay.club', function (done) {
         host: "betsplay.club",
         banca: "BETSPLAY",
         styles: "--header: #000; --foreground-header: #fff;--sidebar-right:#000;--foreground-sidebar-right:#fff;--sidebar-left:#000;--foreground-sidebar-left:#fff;--odds:#ff8730;--foreground-highlight:#fff;"
-    });
-});
-
-gulp.task('championsbet.club', function (done) {
-    tasks(done, {
-        host: "championsbet.club",
-        banca: "CHAMPIONS BET",
-        styles: ""
     });
 });
 
@@ -737,14 +697,6 @@ gulp.task('betspiaui.bet', function (done) {
     });
 });
 
-gulp.task('betsportsbr.net', function (done) {
-    tasks(done, {
-        host: "betsportsbr.net",
-        banca: "BETSPORTSBR",
-        styles: "--header: #333; --foreground-header: #fff;--sidebar-right:#333;--sidebar-left:#333;--odds:#3c8dbc;--foreground-highlight:#fff;"
-    });
-});
-
 gulp.task('alsports.wee.bet', function (done) {
     tasks(done, {
         host: "alsports.wee.bet",
@@ -810,14 +762,6 @@ gulp.task('betfut.wee.bet', function (done) {
     });
 });
 
-gulp.task('brasilbets.online', function (done) {
-    tasks(done, {
-        host: "brasilbets.online",
-        banca: "BRASIL BETS",
-        styles: ""
-    });
-});
-
 gulp.task('resenhaesportiva.site', function (done) {
     tasks(done, {
         host: "resenhaesportiva.site",
@@ -842,14 +786,6 @@ gulp.task('topbets.website', function (done) {
     });
 });
 
-gulp.task('dgbets.club', function (done) {
-    tasks(done, {
-        host: "dgbets.club",
-        banca: "DG BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #daa54a;--highlight: #bb0000;",
-    });
-});
-
 gulp.task('winbet.store', function (done) {
     tasks(done, {
         host: "winbet.store",
@@ -870,7 +806,7 @@ gulp.task('bigbets.website', function (done) {
     tasks(done, {
         host: "bigbets.website",
         banca: "BIG BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #62af26;"
+        styles: "--header: #000000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #62af26;"
     });
 });
 
@@ -963,32 +899,6 @@ gulp.task('mundodasapostas.site', function (done) {
     });
 });
 
-gulp.task('nonobet.site', function (done) {
-    tasks(done, {
-        host: "nonobet.site",
-        banca: "NONOBET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #000000;--highlight: #FFFF00;",
-    });
-});
-
-gulp.task('futgol.wee.bet', function (done) {
-    tasks(done, {
-        host: "futgol.wee.bet",
-        banca: "FUUTGOOLL",
-        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#333; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #cb151c; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
-        aditional_styles: " #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
-    });
-});
-
-gulp.task('foxbets.wee.bet', function (done) {
-    tasks(done, {
-        host: "foxbets.wee.bet",
-        banca: "FOX BETS",
-        styles: "--header: #000; --foreground-header: #dcdcdc; --sidebar-right:#000; --foreground-sidebar-right: #ff0000; --sidebar-left: #000; --foreground-sidebar-left: #ffa; --highlight: #ff0000; --foreground-highlight: #ffff00; --odds: #e8cc32; --foreground-odds: #ff0000;--foreground-selected-odds: #dcdcdc;--league:#fff;--foreground-league:#455a64;--selected-event: #002458;--foreground-selected-event: #ff0000;--event-time: #ff0000;--fg-event-time:#dcdcdc;",
-    });
-});
-
 gulp.task('arena10.site', function (done) {
     tasks(done, {
         host: "arena10.site",
@@ -1018,14 +928,6 @@ gulp.task('jogadacerta.wee.bet', function (done) {
         host: "jogadacerta.wee.bet",
         banca: "JOGADA CERTA",
         styles: "--header: #c5c5c5; --foreground-header: #000; --sidebar-right:#c5c5c5; --foreground-sidebar-right: #000; --sidebar-left: #c5c5c5; --foreground-sidebar-left: #000; --foreground-highlight:#000; --highlight:#ff3232;",
-    });
-});
-
-gulp.task('betsertao.wee.bet', function (done) {
-    tasks(done, {
-        host: "betsertao.wee.bet",
-        banca: "BET SERTÃO",
-        styles: "--header: #404040; --foreground-header: #fff; --sidebar-right:#505050; --foreground-sidebar-right: #fff; --sidebar-left: #505050; --foreground-sidebar-left: #fff; --odds: #228B22;",
     });
 });
 
@@ -1270,14 +1172,6 @@ gulp.task('tubaraobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('maissports.wee.bet', function (done) {
-    tasks(done, {
-        host: "maissports.wee.bet",
-        banca: "MAIS SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('allbet.pro', function (done) {
     tasks(done, {
         host: "allbet.pro",
@@ -1285,15 +1179,6 @@ gulp.task('allbet.pro', function (done) {
         styles: "",
     });
 });
-
-gulp.task('esportesbet.site', function (done) {
-    tasks(done, {
-        host: "esportesbet.site",
-        banca: "ESPORTES BET",
-        styles: "",
-    });
-});
-
 gulp.task('gooldeplaca.com.br', function (done) {
     tasks(done, {
         host: "gooldeplaca.com.br",
@@ -1330,14 +1215,6 @@ gulp.task('canedobet.site', function (done) {
     tasks(done, {
         host: "canedobet.site",
         banca: "CANEDO BET",
-        styles: "",
-    });
-});
-
-gulp.task('betsfe.bet', function (done) {
-    tasks(done, {
-        host: "betsfe.bet",
-        banca: "BETS FÉ",
         styles: "",
     });
 });
@@ -1426,14 +1303,6 @@ gulp.task('maisporte.wee.bet', function (done) {
     tasks(done, {
         host: "maisporte.wee.bet",
         banca: "MAISPORTE",
-        styles: "",
-    });
-});
-
-gulp.task('sportbrasilbet.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportbrasilbet.wee.bet",
-        banca: "SPORT BRASIL BET",
         styles: "",
     });
 });
