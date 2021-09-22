@@ -1251,14 +1251,6 @@ gulp.task('pontalbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('primesports.wee.bet', function (done) {
-    tasks(done, {
-        host: "primesports.wee.bet",
-        banca: "PRIME SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         host: "primosbet.wee.bet",
