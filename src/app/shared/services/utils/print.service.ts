@@ -41,7 +41,7 @@ export class PrintService {
             this.separatorLine = '================================';
         } else if (savedPrinterWidth && savedPrinterWidth === '80') {
             this.printerWidth = savedPrinterWidth;
-            this.separatorLine = '============================================';
+            this.separatorLine = '================================================';
         } else {
             this.printerWidth = '58';
             this.separatorLine = '================================';
@@ -197,15 +197,19 @@ export class PrintService {
 
         logoImg.onload = () => {
             const jogosEscPos = encoder
-                .initialize()
-                .image(logoImg, 376, 136, 'atkinson')
+                .initialize();
+            if (this.printerWidth === '58') {
+                jogosEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            jogosEscPos
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x00])
                 .size('normal')
                 .newline()
+                .line(this.separatorLine)
                 .newline();
 
             dias.forEach(dia => {
@@ -493,14 +497,17 @@ export class PrintService {
 
         logoImg.onload = () => {
             const ticketEscPos = encoder
-                .initialize()
-                .image(logoImg, 376, 136, 'atkinson')
+                .initialize();
+            if (this.printerWidth === '58') {
+                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            ticketEscPos
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
@@ -824,14 +831,17 @@ export class PrintService {
 
         logoImg.onload = () => {
             const ticketEscPos = encoder
-                .initialize()
-                .image(logoImg, 376, 136, 'atkinson')
+                .initialize();
+            if (this.printerWidth === '58') {
+                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            ticketEscPos
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10])
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
@@ -955,14 +965,17 @@ export class PrintService {
 
         logoImg.onload = () => {
             const ticketEscPos = encoder
-                .initialize()
-                .image(logoImg, 376, 136, 'atkinson')
+                .initialize();
+            if (this.printerWidth === '58') {
+                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            ticketEscPos
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
@@ -1440,14 +1453,17 @@ export class PrintService {
 
         logoImg.onload = () => {
             const ticketEscPos = encoder
-                .initialize()
-                .image(logoImg, 376, 136, 'atkinson')
+                .initialize();
+            if (this.printerWidth === '58') {
+                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            ticketEscPos
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
@@ -1556,8 +1572,11 @@ export class PrintService {
         logoImg.onload = () => {
             const cardPrintEscPos = encoder
                 .initialize()
-                .bold(true)
-                .image(logoImg, 376, 136, 'atkinson')
+                .bold(true);
+            if (this.printerWidth === '58') {
+                cardPrintEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            cardPrintEscPos
                 .newline()
                 .align('center')
                 .align('left')
@@ -1725,8 +1744,11 @@ export class PrintService {
 
         logoImg.onload = () => {
             const cardRecargaEscPos = encoder
-                .initialize()
-                .image(logoImg, 376, 136, 'atkinson')
+                .initialize();
+            if (this.printerWidth === '58') {
+                cardRecargaEscPos.image(logoImg, 376, 136, 'atkinson');
+            }
+            cardRecargaEscPos
                 .newline()
                 .bold(true)
                 .align('left')
