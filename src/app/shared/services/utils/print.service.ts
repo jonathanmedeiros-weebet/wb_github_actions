@@ -205,8 +205,8 @@ export class PrintService {
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x00])
                 .size('normal')
                 .newline()
                 .line(this.separatorLine)
@@ -505,9 +505,9 @@ export class PrintService {
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x4D, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
@@ -973,9 +973,9 @@ export class PrintService {
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
@@ -1461,9 +1461,9 @@ export class PrintService {
                 .newline()
                 .bold(true)
                 .align('center')
-                .raw([0x1B, 0x21, 0x10]) // Large Font Size
+                .raw([0x1d, 0x21, 0x10]) // Large Font Size
                 .line(aposta.codigo)
-                .raw([0x1B, 0x21, 0x03])
+                .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
