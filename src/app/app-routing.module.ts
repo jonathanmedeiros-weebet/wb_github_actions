@@ -69,6 +69,11 @@ const appRoutes: Routes = [
                 component: AuthLayoutComponent,
                 loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
             },
+            {
+                path: 'clientes',
+                canActivate: [AuthGuard],
+                loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
+            }
         ]
     },
     {

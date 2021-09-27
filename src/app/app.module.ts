@@ -23,7 +23,6 @@ import { CupomModule } from './cupom/cupom.module';
 import { ParametrosLocaisService } from './services';
 
 import { ToastrModule } from 'ngx-toastr';
-import { ClientesComponent } from './clientes/clientes.component';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -46,7 +45,7 @@ export const APP_TOKENS = [
 ];
 
 @NgModule({
-    declarations: [AppComponent, ClientesComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
