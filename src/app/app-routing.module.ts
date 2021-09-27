@@ -63,17 +63,22 @@ const appRoutes: Routes = [
                 path: 'validar-aposta',
                 loadChildren: () => import('app/validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard]
-            }
+            },
+            {
+                path: 'auth',
+                component: AuthLayoutComponent,
+                loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
+            },
         ]
-    },
-    {
-        path: 'auth',
-        component: AuthLayoutComponent,
-        loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
     },
     {
         path: 'bilhete/:codigo',
         component: CupomComponent
+    },
+    {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
     }
 ];
 

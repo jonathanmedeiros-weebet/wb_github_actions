@@ -9,6 +9,7 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 import { config } from './../../config';
 
 import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -17,29 +18,36 @@ export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
     logadoSource;
     logado;
+    rotaPerfil;
+    routeSource;
 
     constructor(
         private http: HttpClient,
         private header: HeadersService,
         private errorService: ErrorService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private router: Router
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
+        this.routeSource = new BehaviorSubject<string>(this.getRotaUsuarioLogado());
+        this.rotaPerfil = this.routeSource.asObservable();
     }
 
     login(data: any): Observable<any> {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
+                    console.log(res);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
-                    localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
-
+                    if (res.user.tipo_usuario === 'passador') {
+                        localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
+                    }
                     this.logadoSource.next(true);
-                    window.location.reload();
+                    this.router.navigate(['esportes/futebol/jogos']);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -53,7 +61,7 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
-        return localStorage.getItem('token') ? true : false;
+        return !!localStorage.getItem('token');
     }
 
     forgot(data: any): Observable<any> {
@@ -140,5 +148,21 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
+    }
+
+    isCambista(): boolean {
+        const user = JSON.parse(localStorage.getItem('user'));
+        return user.tipo_usuario === 'passador';
+    }
+
+    getRotaUsuarioLogado() {
+        if (this.isLoggedIn()) {
+            const user = this.getUser();
+            if (user.tipo_usuario === 'passador') {
+                return 'meu-perfil';
+            } else {
+                return 'clientes';
+            }
+        }
     }
 }

@@ -25,14 +25,29 @@
                     </a>
                 </li>
                 <ng-container *ngIf="isLoggedIn">
-                    <li>
+                    <li *ngIf="isPassador">
                         <a [routerLink]="['/validar-aposta']">
                             <i class="fa fa-check"></i> Validação
                         </a>
                     </li>
-                    <li>
+                    <li *ngIf="isPassador">
                         <a [routerLink]="['/apuracao']">
                             <i class="fa fa-asterisk"></i> Apuração
+                        </a>
+                    </li>
+                    <li *ngIf="!isPassador">
+                        <a [routerLink]="['/clientes/apostas']">
+                            <i class="fa fa-asterisk"></i> Apostas
+                        </a>
+                    </li>
+                    <li *ngIf="!isPassador">
+                        <a [routerLink]="['/clientes/financeiro']">
+                            <i class="fa fa-dollar"></i> Financeiro
+                        </a>
+                    </li>
+                    <li *ngIf="!isPassador">
+                        <a [routerLink]="['/clientes']">
+                            <i class="fa fa-user"></i> Minha Conta
                         </a>
                     </li>
                     <li>

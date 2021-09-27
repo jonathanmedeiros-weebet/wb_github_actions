@@ -108,7 +108,21 @@ header a{
 
     .menu-conta{
         right: 15px;
+        top: 25%;
         position: absolute;
+        display: flex;
+        bottom: 20px;
+    }
+    .menu-conta a > i {
+        top: 5px;
+        position: relative;
+    }
+    #saldos > #creditos {
+        color: #fff;
+    }
+
+    #saldos > #saldos {
+        color: var(--foreground-header);
     }
 }
 
