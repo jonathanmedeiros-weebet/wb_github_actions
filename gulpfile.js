@@ -1420,14 +1420,6 @@ gulp.task('mybets.club', function (done) {
     });
 });
 
-gulp.task('divisabet.wee.bet', function (done) {
-    tasks(done, {
-        host: "divisabet.wee.bet",
-        banca: "DIVISA BET",
-        styles: "",
-    });
-});
-
 gulp.task('topsports.wee.bet', function (done) {
     tasks(done, {
         host: "topsports.wee.bet",
