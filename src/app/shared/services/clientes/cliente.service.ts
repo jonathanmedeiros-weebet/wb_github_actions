@@ -63,7 +63,7 @@ export class ClienteService {
     }
 
     atualizarEndereco(dadosContato) {
-        return this.http.post(`${this.clienteUrl}/atualizarDadosContato`, JSON.stringify(dadosContato),
+        return this.http.post(`${this.clienteUrl}/atualizarEndereco`, JSON.stringify(dadosContato),
             this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
