@@ -49,4 +49,16 @@ export class ClienteService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    atualizarDadosContato(dadosContato) {
+        return this.http.post(`${this.clienteUrl}/atualizarDadosContato`, JSON.stringify(dadosContato),
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                        return response.results.result;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

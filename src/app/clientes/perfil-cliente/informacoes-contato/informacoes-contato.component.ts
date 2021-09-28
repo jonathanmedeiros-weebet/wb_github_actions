@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ClienteService} from '../../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {formatDate} from '@angular/common';
+import {result} from 'lodash';
 
 @Component({
     selector: 'app-informacoes-contato',
@@ -30,7 +31,7 @@ export class InformacoesContatoComponent extends BaseFormComponent implements On
                     this.form.patchValue(
                         {
                             telefone: cliente.telefone,
-                            cpf: cliente.email
+                            email: cliente.email
                         }
                     );
                 },
@@ -42,16 +43,27 @@ export class InformacoesContatoComponent extends BaseFormComponent implements On
 
     createForm() {
         this.form = this.fb.group({
-            telefone:    [null, Validators.required],
-            email:       [null, Validators.required],
-            senha_atual: [null, Validators.required]
+            telefone:    ['', Validators.required],
+            email:       ['', Validators.required],
+            senha_atual: ['', Validators.required]
         });
     }
 
-    handleError(error: string) {
+    handleError(msg: string) {
+        this.messageService.error(msg);
     }
 
     submit() {
+        const informacoesContato = this.form.value;
+        this.clienteService.atualizarDadosContato(informacoesContato)
+            .subscribe(
+                () => {
+                    this.messageService.success('Dados atualizados com sucesso');
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
     }
 
 }
