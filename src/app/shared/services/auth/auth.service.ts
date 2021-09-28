@@ -152,7 +152,10 @@ export class AuthService {
 
     isCambista(): boolean {
         const user = JSON.parse(localStorage.getItem('user'));
-        return user.tipo_usuario === 'passador';
+        if (user) {
+            return user.tipo_usuario === 'passador';
+        }
+        return false;
     }
 
     getRotaUsuarioLogado() {

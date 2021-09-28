@@ -3,14 +3,15 @@ import {CommonModule} from '@angular/common';
 import {ClientesComponent} from './clientes.component';
 import {SharedModule} from '../shared/shared.module';
 import {ClientesRoutingModule} from './clientes-routing.module';
-import { PerfilClienteComponent } from './perfil-cliente/perfil-cliente.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    declarations: [ClientesComponent, PerfilClienteComponent],
+    declarations: [ClientesComponent],
     imports: [
         CommonModule,
         SharedModule,
-        ClientesRoutingModule
+        ClientesRoutingModule,
+        NgbModule
     ]
 })
 export class ClientesModule {

@@ -11,6 +11,10 @@ const routes: Routes = [{
             redirectTo: 'perfil',
             pathMatch: 'full'
         },
+        {
+            path: 'perfil',
+            loadChildren: () => import('./perfil-cliente/perfil-cliente.module').then(p => p.PerfilClienteModule)
+        }
     ]
 }];
 

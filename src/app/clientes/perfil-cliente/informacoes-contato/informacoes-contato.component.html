@@ -1,1 +1,32 @@
-<p>informacoes-contato works!</p>
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row mt-3">
+            <div class="col col-md-12">
+                <label class="label">Telefone</label>
+                <input type="text" formControlName="telefone" placeholder="(00) 0 0000-0000" mask="(00) 0 0000-0000" class="form-control">
+                <app-error-msg [control]="form.get('telefone')"></app-error-msg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-12">
+                <label class="label">Email</label>
+                <input type="text" formControlName="email" class="form-control" placeholder="exemplo@email.com">
+                <app-error-msg [control]="form.get('email')"></app-error-msg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-12">
+                <label class="label">Senha</label>
+                <input type="password" formControlName="senha_atual" class="form-control">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col col-md-12">
+                <button class="btn btn-custom" type="submit">
+                    <i class="fa fa-save"></i>
+                    Atualizar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

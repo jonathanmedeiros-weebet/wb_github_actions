@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {FormValidations} from '../../../shared/utils';
-import {ClientesService} from '../../../shared/services/clientes/clientes.service';
+import {ClienteService} from '../../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {Pagina} from '../../../shared/models/pagina';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +22,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private clientesService: ClientesService,
+        private clientesService: ClienteService,
         private messageService: MessageService,
         private modalService: NgbModal,
         private auth: AuthService,

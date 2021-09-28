@@ -8,7 +8,7 @@ import {catchError, map} from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class ClientesService {
+export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
 
     constructor(
@@ -31,7 +31,19 @@ export class ClientesService {
         return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values))
             .pipe(
                 map((response: any) => {
-                        return response.results.result;
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getCliente(id) {
+        return this.http.get(`${this.clienteUrl}/getCliente/${id}`, this.headers.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
                     }
                 ),
                 catchError(this.errorService.handleError)

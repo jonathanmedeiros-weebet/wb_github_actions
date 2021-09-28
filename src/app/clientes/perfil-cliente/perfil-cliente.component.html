@@ -1,1 +1,30 @@
-<p>perfil-cliente works!</p>
+<div id="default-content">
+    <div class="content-header">
+        <h2>Meu Perfil</h2>
+    </div>
+    <div class="filters">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <ul ngbNav #nav class="nav-tabs" id="nav-perfil" >
+                    <li ngbNavItem="meus-dados" >
+                        <a ngbNavLink routerLinkActive="active" routerLink="meus-dados">Informações Pessoais</a>
+                    </li>
+                    <li ngbNavItem="contato"  >
+                        <a ngbNavLink routerLink="contato" routerLinkActive="active">Dados de Contato</a>
+                    </li>
+                    <li ngbNavItem="endereco">
+                        <a ngbNavLink routerLink="endereco" routerLinkActive="active">Endereço</a>
+                    </li>
+                    <li ngbNavItem="acesso">
+                        <a ngbNavLink routerLink="acesso" routerLinkActive="active">Redefinir Senha</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content-body mb-0">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

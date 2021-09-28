@@ -1,0 +1,5 @@
+.nav-tabs {
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid var(--highlight);
+}
