@@ -131,11 +131,12 @@ export class InformacoesEnderecoComponent extends BaseFormComponent implements O
 
     submit() {
         const values = this.form.value;
-        this.clienteService.atualizarEndereco(values).subscribe(
-            result => {
-                this.messageService.success('Endereço atualizado com sucesso');
-            },
-            error => this.handleError(error));
+        this.clienteService.atualizarEndereco(values)
+            .subscribe(
+                result => {
+                    this.messageService.success('Endereço atualizado com sucesso');
+                },
+                error => this.handleError(error));
     }
 
 }

@@ -1,1 +1,33 @@
-<p>informacoes-acesso works!</p>
+<div class="content">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row mt-3">
+            <div class="col col-md-12">
+                <label class="label">Senha Atual</label>
+                <input type="password" formControlName="senha_atual" class="form-control">
+                <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-12">
+                <label class="label">Nova Senha</label>
+                <input type="password" formControlName="nova_senha" class="form-control">
+                <app-error-msg [control]="form.get('nova_senha')"></app-error-msg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-12">
+                <label class="label">Confirmar Senha</label>
+                <input type="password" formControlName="senha_confirmacao" class="form-control">
+                <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col col-md-12">
+                <button class="btn btn-custom" type="submit">
+                    <i class="fa fa-save"></i>
+                    Atualizar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

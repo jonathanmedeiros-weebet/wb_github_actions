@@ -14,6 +14,14 @@ const routes: Routes = [{
         {
             path: 'perfil',
             loadChildren: () => import('./perfil-cliente/perfil-cliente.module').then(p => p.PerfilClienteModule)
+        },
+        {
+            path: 'financeiro',
+            loadChildren: () => import('./financeiro/financeiro.module').then(f => f.FinanceiroModule)
+        },
+        {
+            path: 'apostas',
+            loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
         }
     ]
 }];

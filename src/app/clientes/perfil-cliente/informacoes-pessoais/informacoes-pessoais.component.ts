@@ -29,9 +29,9 @@ export class InformacoesPessoaisComponent extends BaseFormComponent implements O
                     console.log(cliente);
                     this.form.patchValue(
                         {
-                            nome: cliente.nome.toUpperCase(),
+                            nome: cliente?.nome.toUpperCase(),
                             nascimento: formatDate(cliente.dataNascimento.date, 'dd/MM/YYYY', 'pt-BR'),
-                            sexo: cliente.genero.toUpperCase(),
+                            sexo: cliente?.genero.toUpperCase(),
                             cpf: cliente.cpf
                         }
                     );
