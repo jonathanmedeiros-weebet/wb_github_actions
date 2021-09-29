@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService, ParametroService} from './services';
+import {AuthService, HelperService, ParametroService} from './services';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 
@@ -9,14 +9,15 @@ import {config} from './shared/config';
     templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
-    @ViewChild('demoModal', { static: true }) demoModal;
-    @ViewChild('wrongVersionModal', { static: true }) wrongVersionModal;
+    @ViewChild('demoModal', {static: true}) demoModal;
+    @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
 
     constructor(
         private auth: AuthService,
         private parametroService: ParametroService,
         public modalService: NgbModal,
+        private helperService: HelperService
     ) {
     }
 
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
             this.auth.setAppMobile();
             const params = new URLSearchParams(location.search);
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
-            if (appVersion < 2) {
+            if (appVersion < 3) {
                 this.modalService.open(
                     this.wrongVersionModal,
                     {
@@ -68,5 +69,9 @@ export class AppComponent implements OnInit {
                 }
             );
         }
+    }
+
+    downloadApp() {
+        this.helperService.sendExternalUrl(this.appUrl);
     }
 }

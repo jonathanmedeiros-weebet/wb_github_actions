@@ -63,14 +63,6 @@ gulp.task('vipsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('betgyn.com', function (done) {
-    tasks(done, {
-        host: "betgyn.com",
-        banca: "BetGyn",
-        styles: ""
-    });
-});
-
 gulp.task('betsbr.club', function (done) {
     tasks(done, {
         host: "betsbr.club",
@@ -810,14 +802,6 @@ gulp.task('bigbets.website', function (done) {
     });
 });
 
-gulp.task('interior.wee.bet', function (done) {
-    tasks(done, {
-        host: "interior.wee.bet",
-        banca: "INTERIOR BET",
-        styles: "--header: #222d32; --foreground-header: #c49a3e; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #c49a3e; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
 gulp.task('bets085.wee.bet', function (done) {
     tasks(done, {
         host: "bets085.wee.bet",
@@ -1179,13 +1163,6 @@ gulp.task('allbet.pro', function (done) {
         styles: "",
     });
 });
-gulp.task('gooldeplaca.com.br', function (done) {
-    tasks(done, {
-        host: "gooldeplaca.com.br",
-        banca: "GOOL DE PLACA",
-        styles: "",
-    });
-});
 
 gulp.task('primesoccer.app', function (done) {
     tasks(done, {
@@ -1207,22 +1184,6 @@ gulp.task('betsandalo.site', function (done) {
     tasks(done, {
         host: "betsandalo.site",
         banca: "BET SANDALO",
-        styles: "",
-    });
-});
-
-gulp.task('canedobet.site', function (done) {
-    tasks(done, {
-        host: "canedobet.site",
-        banca: "CANEDO BET",
-        styles: "",
-    });
-});
-
-gulp.task('superbetpremium.wee.bet', function (done) {
-    tasks(done, {
-        host: "superbetpremium.wee.bet",
-        banca: "SUPER BET PREMIUM",
         styles: "",
     });
 });
@@ -1299,14 +1260,6 @@ gulp.task('maisporte.wee.bet', function (done) {
     });
 });
 
-gulp.task('detonabet.wee.bet', function (done) {
-    tasks(done, {
-        host: "detonabet.wee.bet",
-        banca: "DETONA BET",
-        styles: "",
-    });
-});
-
 gulp.task('onllinesports.com', function (done) {
     tasks(done, {
         host: "onllinesports.com",
@@ -1343,14 +1296,6 @@ gulp.task('rrbets.wee.bet', function (done) {
     tasks(done, {
         host: "rrbets.wee.bet",
         banca: "RR BETS",
-        styles: "",
-    });
-});
-
-gulp.task('megasortebet.wee.bet', function (done) {
-    tasks(done, {
-        host: "megasortebet.wee.bet",
-        banca: "MEGA DA SORTE BET",
         styles: "",
     });
 });
@@ -1463,14 +1408,6 @@ gulp.task('mybets.club', function (done) {
     tasks(done, {
         host: "mybets.club",
         banca: "MY BETS",
-        styles: "",
-    });
-});
-
-gulp.task('divisabet.wee.bet', function (done) {
-    tasks(done, {
-        host: "divisabet.wee.bet",
-        banca: "DIVISA BET",
         styles: "",
     });
 });
