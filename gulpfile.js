@@ -1268,14 +1268,6 @@ gulp.task('onllinesports.com', function (done) {
     });
 });
 
-gulp.task('sportourodomexico.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportourodomexico.wee.bet",
-        banca: "SPORT OURO DO MÉXICO",
-        styles: "",
-    });
-});
-
 gulp.task('paracorreabets.wee.bet', function (done) {
     tasks(done, {
         host: "paracorreabets.wee.bet",
@@ -1312,14 +1304,6 @@ gulp.task('techbet.wee.bet', function (done) {
     tasks(done, {
         host: "techbet.wee.bet",
         banca: "TECH BET",
-        styles: "",
-    });
-});
-
-gulp.task('footclub.wee.bet', function (done) {
-    tasks(done, {
-        host: "footclub.wee.bet",
-        banca: "FOOTCLUB",
         styles: "",
     });
 });
