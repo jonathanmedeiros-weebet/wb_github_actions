@@ -439,8 +439,8 @@ gulp.task('bet358.wee.bet', function (done) {
 
 gulp.task('esportebetsvip.com', function (done) {
     tasks(done, {
-        host: "esportebetsvip.com",
-        banca: "Esporte Bets Vip",
+        host: "esportebets.io",
+        banca: "Esporte Bets",
         styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #003ae6; --foreground-highlight: #fff;"
     });
 });
@@ -1512,6 +1512,14 @@ gulp.task('pixsports.wee.bet', function (done) {
     tasks(done, {
         host: "pixsports.wee.bet",
         banca: "PIX SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('cariocavip.wee.bet', function (done) {
+    tasks(done, {
+        host: "cariocavip.wee.bet",
+        banca: "CARIOCA VIP",
         styles: "",
     });
 });
