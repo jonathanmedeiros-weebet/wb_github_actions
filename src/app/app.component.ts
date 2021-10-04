@@ -25,6 +25,11 @@ export class AppComponent implements OnInit {
         switch (event.data.action) {
             case 'printerWidth':
                 localStorage.setItem('printer_width', event.data.width);
+                console.log('Printer Width set to ' + event.data.width);
+                break;
+            case 'printGraphics':
+                localStorage.setItem('print_graphics', event.data.print_graphics);
+                console.log(`Print Graphics set to ${event.data.print_graphics == '1'}`);
                 break;
             default:
                 console.log('Loaded');

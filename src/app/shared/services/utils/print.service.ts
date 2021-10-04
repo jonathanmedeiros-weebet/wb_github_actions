@@ -19,6 +19,7 @@ export class PrintService {
     private opcoes = this.paramsService.getOpcoes();
     private separatorLine;
     private printerWidth = '58';
+    private printGraphics = false;
     LOGO_IMPRESSAO;
 
     constructor(
@@ -36,6 +37,10 @@ export class PrintService {
 
     getPrinterSettings() {
         const savedPrinterWidth = localStorage.getItem('printer_width');
+        const savedPrintGraphics = localStorage.getItem('print_graphics');
+
+        this.printGraphics = savedPrintGraphics == '1';
+
         if (savedPrinterWidth && savedPrinterWidth === '58') {
             this.printerWidth = savedPrinterWidth;
             this.separatorLine = '================================';
@@ -198,7 +203,7 @@ export class PrintService {
         logoImg.onload = () => {
             const jogosEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 jogosEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             jogosEscPos
@@ -260,7 +265,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
+            const dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -498,7 +503,7 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             ticketEscPos
@@ -596,7 +601,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -832,7 +837,7 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             ticketEscPos
@@ -942,7 +947,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
+            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -966,7 +971,7 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             ticketEscPos
@@ -1049,7 +1054,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1454,7 +1459,7 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             ticketEscPos
@@ -1549,7 +1554,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1573,7 +1578,7 @@ export class PrintService {
             const cardPrintEscPos = encoder
                 .initialize()
                 .bold(true);
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 cardPrintEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             cardPrintEscPos
@@ -1618,7 +1623,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
+            const dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1745,7 +1750,7 @@ export class PrintService {
         logoImg.onload = () => {
             const cardRecargaEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 cardRecargaEscPos.image(logoImg, 376, 136, 'atkinson');
             }
             cardRecargaEscPos
@@ -1785,7 +1790,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            let dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
+            const dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
