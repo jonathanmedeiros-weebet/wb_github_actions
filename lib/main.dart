@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? printerName;
   String? printerMAC;
   int? printerRollWidth = 58;
+  int? printGraphics = 1;
   String? isConnected;
 
   @override
@@ -56,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     this._getPrinter();
     this._sendRollWidth(this.printerRollWidth);
+    this._sendPrintGraphics(this.printGraphics);
   }
 
   _getPrinter() async {
@@ -63,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     this.printerName = prefs.getString('printer_name') ?? null;
     this.printerMAC = prefs.getString('printer_mac') ?? null;
+    this.printGraphics = prefs.getInt('print_graphics') ?? null;
 
     print('Dados da Impressora - Main Method');
     print('Nome: ${this.printerName} / MAC: ${this.printerMAC}');
@@ -112,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
       MaterialPageRoute(builder: (context) => BluetoothSettings()),
     );
     this._sendRollWidth(printerSettings['rollWidth']);
+    this._sendPrintGraphics(printerSettings['printGraphics']);
     setState(() {
       print('Getting printer settings');
       this._getPrinter();
@@ -202,12 +206,18 @@ class _MyHomePageState extends State<MyHomePage> {
     """);
   }
 
+  _sendPrintGraphics(int? printGraphics) async {
+    _webViewController?.evaluateJavascript("""
+    window.postMessage({action: 'printGraphics', print_graphics: $printGraphics}, '*');
+    """);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EmptyAppBar(),
       body: WebView(
-        initialUrl: 'https://demo.wee.bet?app=TRUE&app_version=3',
+        initialUrl: 'http://192.168.0.147:4200?app=TRUE&app_version=4',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webviewController) async {
           _webViewController = webviewController;

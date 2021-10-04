@@ -1,7 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image/image.dart' as img;
+import 'dart:io';
 
 class BluetoothSettings extends StatefulWidget {
   @override
@@ -12,6 +17,7 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
   String? printerName;
   String? printerMAC;
   int? rollWidth = 58;
+  int? printGraphics = 1;
   List availableBluetoothDevices = [];
   bool connected = false;
   static const List<int> availableRollWidths = [58, 80];
@@ -37,6 +43,7 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
       this.printerName = prefs.getString('printer_name') ?? null;
       this.printerMAC = prefs.getString('printer_mac') ?? null;
       this.rollWidth = prefs.getInt('printer_rollwidth') ?? 0;
+      this.printGraphics = prefs.getInt('print_graphics') ?? 1;
     });
 
     print('Dados da Impressora');
@@ -53,6 +60,11 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
   _setPrinterRollWidth(int? rollWidth) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('printer_rollwidth', rollWidth!);
+  }
+
+  _setPrintGraphics(int? printGraphics) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('print_graphics', printGraphics!);
   }
 
   Future<void> setConnect(String mac) async {
@@ -73,15 +85,22 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
         : PaperSize.mm80;
     final generator = Generator(paperSize, profile);
 
-    bytes += generator.text("Weebet",
+    if (this.printGraphics == 0) {
+      bytes += generator.text("Weebet",
         styles: PosStyles(
           align: PosAlign.center,
           height: PosTextSize.size2,
           width: PosTextSize.size2,
         ),
         linesAfter: 1);
+    } else {
+      final ByteData data = await rootBundle.load('assets/logo_banca.png');
+      final Uint8List imgBytes = data.buffer.asUint8List();
+      final img.Image imageToPrint = img.decodeImage(imgBytes)!;
+      bytes += generator.image(imageToPrint);      
+    }
 
-    bytes += generator.text("Teste de configuracao de impressora",
+    bytes += generator.text("Weebet - Sistema de Aposta",
         styles: PosStyles(align: PosAlign.center));
 
     bytes += generator.hr();
@@ -140,7 +159,8 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
             Map printerSettings = {
               'printerMac': this.printerMAC,
               'printerName': this.printerName,
-              'rollWidth': this.rollWidth
+              'rollWidth': this.rollWidth,
+              'printGraphics': this.printGraphics
             };
             Navigator.of(context).pop(printerSettings);
           },
@@ -222,7 +242,73 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
                               )
                             ],
                           ),
-                        )
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text('Imprimir Elementos Gráficos'),
+              subtitle: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: RadioListTile(
+                                      title:
+                                          Text('Sim'),
+                                      value: 1,
+                                      groupValue: this.printGraphics,
+                                      selected: this.printGraphics != null
+                                            ? (this.printGraphics ==
+                                                    1
+                                                ? true
+                                                : false)
+                                            : false,
+                                      onChanged: (int? value) {
+                                        setState(() {
+                                          this._setPrintGraphics(value);
+                                          this.printGraphics = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: RadioListTile(
+                                        title: Text(
+                                            'Não'),
+                                        value: 0,
+                                        groupValue: this.printGraphics,
+                                        selected: this.printGraphics != null
+                                            ? (this.printGraphics ==
+                                                    0
+                                                ? true
+                                                : false)
+                                            : false,
+                                        onChanged: (int? value) {
+                                          setState(() {
+                                            this._setPrintGraphics(value);
+                                            this.printGraphics = value;
+                                          });
+                                        },
+                                      ))
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   )
