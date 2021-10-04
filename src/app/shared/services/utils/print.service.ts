@@ -36,8 +36,8 @@ export class PrintService {
     }
 
     getPrinterSettings() {
-        const savedPrinterWidth = localStorage.getItem('printer_width');
-        const savedPrintGraphics = localStorage.getItem('print_graphics');
+        let savedPrinterWidth = localStorage.getItem('printer_width');
+        let savedPrintGraphics = localStorage.getItem('print_graphics');
 
         this.printGraphics = savedPrintGraphics == '1';
 
