@@ -51,6 +51,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     quininhaAtiva;
     LOGO = config.LOGO;
     unsub$ = new Subject();
+    appVersion;
 
     constructor(
         private fb: FormBuilder,
@@ -66,6 +67,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     ngOnInit() {
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
+        this.appVersion = localStorage.getItem('app_version');
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -137,15 +139,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     listPrinters() {
         this.printService.listPrinters();
-    }
-
-    appVersion() {
-        const message = {
-            data: '',
-            action: 'showVersion',
-        };
-
-        parent.postMessage(message, 'file://'); // file://
     }
 
     getPosicaoFinanceira(event) {
