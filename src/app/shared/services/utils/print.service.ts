@@ -265,7 +265,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
+            let dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -601,7 +601,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -947,7 +947,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1054,7 +1054,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1554,7 +1554,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1623,7 +1623,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
+            let dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1790,7 +1790,7 @@ export class PrintService {
                 .newline()
                 .newline();
 
-            const dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
+            let dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         };
     }
@@ -1902,7 +1902,7 @@ export class PrintService {
 
     // Utils
     listPrinters() {
-        const dataToSend = {
+        let dataToSend = {
             data: '',
             action: 'listPrinters',
         };
