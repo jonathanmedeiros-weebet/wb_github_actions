@@ -205,7 +205,13 @@ export class PrintService {
                 .initialize();
             if (this.printGraphics) {
                 jogosEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                jogosEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             jogosEscPos
                 .newline()
                 .bold(true)
@@ -505,7 +511,13 @@ export class PrintService {
                 .initialize();
             if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -839,7 +851,13 @@ export class PrintService {
                 .initialize();
             if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -973,7 +991,13 @@ export class PrintService {
                 .initialize();
             if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -1461,7 +1485,13 @@ export class PrintService {
                 .initialize();
             if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -1580,7 +1610,13 @@ export class PrintService {
                 .bold(true);
             if (this.printGraphics) {
                 cardPrintEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                cardPrintEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             cardPrintEscPos
                 .newline()
                 .align('center')
@@ -1752,7 +1788,13 @@ export class PrintService {
                 .initialize();
             if (this.printGraphics) {
                 cardRecargaEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                cardRecargaEscPos
+                    .raw([0x1d, 0x21, 0x10]) // Large Font Size
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             cardRecargaEscPos
                 .newline()
                 .bold(true)

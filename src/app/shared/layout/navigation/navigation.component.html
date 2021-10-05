@@ -141,7 +141,7 @@
                     <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
                         <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
                     </a>
-                    <ul *ngIf="regiao._id == regiaoOpen">
+                    <ul *ngIf="regiao._id == regiaoOpen">con
                         <li *ngFor="let campeonato of regiao.campeonatos"
                             (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
                             <a>
