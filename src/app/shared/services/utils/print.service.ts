@@ -901,8 +901,8 @@ export class PrintService {
                     .align('left')
                     .line(this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm'))
                     .line(this.helperService.removerAcentos(item.time_a_nome + ' x ' + item.time_b_nome))
-                    .line(this.helperService.removerAcentos(item.categoria_nome) + ': ')
-                    .text(this.helperService.removerAcentos(item.odd_nome) + '(' + item.cotacao.toFixed(2) + ')');
+                    .line(this.helperService.removerAcentos(item.categoria_nome) + ': ' + this.helperService.removerAcentos(item.odd_nome) + '(' + item.cotacao.toFixed(2) + ')')
+                    .text();
 
                 if (item.ao_vivo) {
                     ticketEscPos
