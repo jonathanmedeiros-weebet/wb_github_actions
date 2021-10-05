@@ -439,8 +439,8 @@ gulp.task('bet358.wee.bet', function (done) {
 
 gulp.task('esportebetsvip.com', function (done) {
     tasks(done, {
-        host: "esportebetsvip.com",
-        banca: "Esporte Bets Vip",
+        host: "esportebets.io",
+        banca: "Esporte Bets",
         styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #003ae6; --foreground-highlight: #fff;"
     });
 });
@@ -1268,14 +1268,6 @@ gulp.task('onllinesports.com', function (done) {
     });
 });
 
-gulp.task('sportourodomexico.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportourodomexico.wee.bet",
-        banca: "SPORT OURO DO MÉXICO",
-        styles: "",
-    });
-});
-
 gulp.task('paracorreabets.wee.bet', function (done) {
     tasks(done, {
         host: "paracorreabets.wee.bet",
@@ -1312,14 +1304,6 @@ gulp.task('techbet.wee.bet', function (done) {
     tasks(done, {
         host: "techbet.wee.bet",
         banca: "TECH BET",
-        styles: "",
-    });
-});
-
-gulp.task('footclub.wee.bet', function (done) {
-    tasks(done, {
-        host: "footclub.wee.bet",
-        banca: "FOOTCLUB",
         styles: "",
     });
 });
@@ -1528,6 +1512,14 @@ gulp.task('pixsports.wee.bet', function (done) {
     tasks(done, {
         host: "pixsports.wee.bet",
         banca: "PIX SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('cariocavip.wee.bet', function (done) {
+    tasks(done, {
+        host: "cariocavip.wee.bet",
+        banca: "CARIOCA VIP",
         styles: "",
     });
 });

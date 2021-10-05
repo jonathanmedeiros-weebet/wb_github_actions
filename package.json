@@ -157,13 +157,11 @@
         "jogabet.wee.bet": "gulp jogabet.wee.bet",
         "maisporte.wee.bet": "gulp maisporte.wee.bet",
         "onllinesports.com": "gulp onllinesports.com",
-        "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
         "paracorreabets.wee.bet": "gulp paracorreabets.wee.bet",
         "supersports.wee.bet": "gulp supersports.wee.bet",
         "rrbets.wee.bet": "gulp rrbets.wee.bet",
         "sportingnetvip.bet": "gulp sportingnetvip.bet",
         "techbet.wee.bet": "gulp techbet.wee.bet",
-        "footclub.wee.bet": "gulp footclub.wee.bet",
         "galobets.com": "gulp galobets.com",
         "sortebet.site": "gulp sortebet.site",
         "reallbet.site": "gulp reallbet.site",
@@ -188,7 +186,8 @@
         "quina.bet": "gulp quina.bet",
         "jbrbets.net": "gulp jbrbets.net",
         "lucrei.wee.bet": "gulp lucrei.wee.bet",
-        "pixsports.wee.bet": "gulp pixsports.wee.bet"
+        "pixsports.wee.bet": "gulp pixsports.wee.bet",
+        "cariocavip.wee.bet": "gulp cariocavip.wee.bet"
     },
     "private": true,
     "dependencies": {

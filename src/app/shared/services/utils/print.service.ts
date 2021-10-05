@@ -19,6 +19,7 @@ export class PrintService {
     private opcoes = this.paramsService.getOpcoes();
     private separatorLine;
     private printerWidth = '58';
+    private printGraphics = true;
     LOGO_IMPRESSAO;
 
     constructor(
@@ -35,7 +36,15 @@ export class PrintService {
     }
 
     getPrinterSettings() {
-        const savedPrinterWidth = localStorage.getItem('printer_width');
+        let savedPrinterWidth = localStorage.getItem('printer_width');
+        let savedPrintGraphics = localStorage.getItem('print_graphics');
+
+        if (savedPrintGraphics == null) {
+            this.printGraphics = true;
+        } else {
+            this.printGraphics = savedPrintGraphics === '1';
+        }
+
         if (savedPrinterWidth && savedPrinterWidth === '58') {
             this.printerWidth = savedPrinterWidth;
             this.separatorLine = '================================';
@@ -198,9 +207,16 @@ export class PrintService {
         logoImg.onload = () => {
             const jogosEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 jogosEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                jogosEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             jogosEscPos
                 .newline()
                 .bold(true)
@@ -498,9 +514,16 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -832,9 +855,16 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -871,8 +901,7 @@ export class PrintService {
                     .align('left')
                     .line(this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm'))
                     .line(this.helperService.removerAcentos(item.time_a_nome + ' x ' + item.time_b_nome))
-                    .line(this.helperService.removerAcentos(item.categoria_nome) + ': ')
-                    .text(this.helperService.removerAcentos(item.odd_nome) + '(' + item.cotacao.toFixed(2) + ')');
+                    .line(this.helperService.removerAcentos(item.categoria_nome) + ': ' + this.helperService.removerAcentos(item.odd_nome) + '(' + item.cotacao.toFixed(2) + ')');
 
                 if (item.ao_vivo) {
                     ticketEscPos
@@ -966,9 +995,16 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -1454,9 +1490,16 @@ export class PrintService {
         logoImg.onload = () => {
             const ticketEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 ticketEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                ticketEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             ticketEscPos
                 .newline()
                 .bold(true)
@@ -1573,9 +1616,16 @@ export class PrintService {
             const cardPrintEscPos = encoder
                 .initialize()
                 .bold(true);
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 cardPrintEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                cardPrintEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             cardPrintEscPos
                 .newline()
                 .align('center')
@@ -1745,9 +1795,16 @@ export class PrintService {
         logoImg.onload = () => {
             const cardRecargaEscPos = encoder
                 .initialize();
-            if (this.printerWidth === '58') {
+            if (this.printGraphics) {
                 cardRecargaEscPos.image(logoImg, 376, 136, 'atkinson');
+            } else {
+                cardRecargaEscPos
+                    .align('center')
+                    .raw([0x1d, 0x21, 0x10])
+                    .line(config.BANCA_NOME)
+                    .raw([0x1d, 0x21, 0x00]);
             }
+
             cardRecargaEscPos
                 .newline()
                 .bold(true)
@@ -1897,7 +1954,7 @@ export class PrintService {
 
     // Utils
     listPrinters() {
-        const dataToSend = {
+        let dataToSend = {
             data: '',
             action: 'listPrinters',
         };
