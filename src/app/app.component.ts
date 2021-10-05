@@ -25,6 +25,11 @@ export class AppComponent implements OnInit {
         switch (event.data.action) {
             case 'printerWidth':
                 localStorage.setItem('printer_width', event.data.width);
+                console.log('Printer Width set to ' + event.data.width);
+                break;
+            case 'printGraphics':
+                localStorage.setItem('print_graphics', event.data.print_graphics);
+                console.log(`Print Graphics set to ${event.data.print_graphics == '1'}`);
                 break;
             default:
                 console.log('Loaded');
@@ -36,6 +41,7 @@ export class AppComponent implements OnInit {
             this.auth.setAppMobile();
             const params = new URLSearchParams(location.search);
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
+            localStorage.setItem('app_version', String(appVersion));
             if (appVersion < 3) {
                 this.modalService.open(
                     this.wrongVersionModal,
