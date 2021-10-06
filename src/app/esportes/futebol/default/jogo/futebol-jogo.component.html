@@ -1,174 +1,187 @@
+<section [hidden]="!jogo || showLoadingIndicator">
+    <div class="indentificacao">
+        <div class="div-back" (click)="back()">
+            <i class="fa fa-times"></i>
+        </div>
+        <div class="text-center">
+            <div class="nome">
+                <small>{{jogo?.campeonato?.nome}}</small>
+                <div>{{jogo?.nome}}</div>
+            </div>
+            <div class="horario">
+                <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="tipo-apostas">
+        <ul ngbNav #nav="ngbNav" class="nav-pills">
+            <li ngbNavItem>
+                <a ngbNavLink>
+                    <span class="large_screen">Tempo Completo</span>
+                    <span class="small_screen">90</span>
+                </a>
+                <ng-template ngbNavContent>
+                    <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados90)">
+                        <h4>{{mercados90[chave].nome}}</h4>
+                        <div class="odds">
+                            <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados90[chave])"
+                                 *ngFor="let odds of mercados90[chave].odds">
+                                <div class="odd" *ngFor="let odd of odds">
+                                    <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
+                                        <div class="inner-odd odd-enabled"
+                                             [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
+                                             (click)="addCotacao(jogo, odd)">
+                                                <span class="nome">
+                                                    {{odd.label}}
+                                                </span>
+                                            <span class="valor">
+                                                    {{odd.valorFinal}}
+                                                </span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #cotacaoBloqueada>
+                                        <div class="inner-odd odd-disabled">
+                                                <span class="nome">
+                                                    {{odd.label}}
+                                                </span>
+                                            <span class="valor">
+                                                    <i class="fa fa-lock"></i>
+                                                </span>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink>
+                    <span class="large_screen">Primeiro Tempo</span>
+                    <span class="small_screen">1T</span>
+                </a>
+                <ng-template ngbNavContent>
+                    <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados1T)">
+                        <h4>{{mercados1T[chave].nome}}</h4>
+                        <div class="odds">
+                            <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados1T[chave])"
+                                 *ngFor="let odds of mercados1T[chave].odds">
+                                <div class="odd" *ngFor="let odd of odds">
+                                    <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
+                                        <div class="inner-odd odd-enabled"
+                                             [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
+                                             (click)="addCotacao(jogo, odd)">
+                                                <span class="nome">
+                                                    {{odd.label}}
+                                                </span>
+                                            <span class="valor">
+                                                    {{odd.valorFinal}}
+                                                </span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #cotacaoBloqueada>
+                                        <div class="inner-odd odd-disabled">
+                                                <span class="nome">
+                                                    {{odd.label}}
+                                                </span>
+                                            <span class="valor">
+                                                    <i class="fa fa-lock"></i>
+                                                </span>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink>
+                    <span class="large_screen">Segundo Tempo</span>
+                    <span class="small_screen">2T</span>
+                </a>
+                <ng-template ngbNavContent>
+                    <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados2T)">
+                        <h4>{{mercados2T[chave].nome}}</h4>
+                        <div class="odds">
+                            <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados2T[chave])"
+                                 *ngFor="let odds of mercados2T[chave].odds">
+                                <div class="odd" *ngFor="let odd of odds">
+                                    <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
+                                        <div class="inner-odd odd-enabled"
+                                             [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
+                                             (click)="addCotacao(jogo, odd)">
+                                                <span class="nome">
+                                                    {{odd.label}}
+                                                </span>
+                                            <span class="valor">
+                                                    {{odd.valorFinal}}
+                                                </span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #cotacaoBloqueada>
+                                        <div class="inner-odd odd-disabled">
+                                                <span class="nome">
+                                                    {{odd.label}}
+                                                </span>
+                                            <span class="valor">
+                                                    <i class="fa fa-lock"></i>
+                                                </span>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem>
+                <a ngbNavLink>Jogadores</a>
+                <ng-template ngbNavContent>
+                    <div class="div-vazio" *ngIf="!objectKeys(mercadosJogadores).length">
+                        Sem Cotações
+                    </div>
+                    <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercadosJogadores)">
+                        <h4>{{mercadosJogadores[chave].nome}}</h4>
+                        <div class="odds">
+                            <div class="odds-jogador-coluna" *ngFor="let odds of mercadosJogadores[chave].odds">
+                                <div class="odd odd-jogador" *ngFor="let odd of odds">
+                                    <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
+                                        <div class="inner-odd odd-enabled"
+                                             [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
+                                             (click)="addCotacao(jogo, odd)">
+                                                <span class="nome">
+                                                    {{odd.nome}}
+                                                </span>
+                                            <span class="valor">
+                                                    {{odd.valorFinal}}
+                                                </span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #cotacaoBloqueada>
+                                        <div class="inner-odd odd-disabled">
+                                                <span class="nome">
+                                                    {{odd.nome}}
+                                                </span>
+                                            <span class="valor">
+                                                    <i class="fa fa-lock"></i>
+                                                </span>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</section>
 <section class="content-sports inside-event">
     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
     <div class="jogo" [hidden]="!jogo || showLoadingIndicator">
-        <div class="indentificacao">
-            <div class="div-back" (click)="back()">
-                <i class="fa fa-times"></i>
-            </div>
-            <div class="text-center">
-                <div class="nome">
-                    <small>{{jogo?.campeonato?.nome}}</small>
-                    <div>{{jogo?.nome}}</div>
-                </div>
-                <div class="horario">
-                    <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
-                </div>
-            </div>
-        </div>
         <div class="tipo-apostas">
-            <ul ngbNav #nav="ngbNav" class="nav-pills">
-                <li ngbNavItem>
-                    <a ngbNavLink>Tempo Completo</a>
-                    <ng-template ngbNavContent>
-                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados90)">
-                            <h4>{{mercados90[chave].nome}}</h4>
-                            <div class="odds">
-                                <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados90[chave])"
-                                    *ngFor="let odds of mercados90[chave].odds">
-                                    <div class="odd" *ngFor="let odd of odds">
-                                        <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
-                                            <div class="inner-odd odd-enabled"
-                                                [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
-                                                (click)="addCotacao(jogo, odd)">
-                                                <span class="nome">
-                                                    {{odd.label}}
-                                                </span>
-                                                <span class="valor">
-                                                    {{odd.valorFinal}}
-                                                </span>
-                                            </div>
-                                        </ng-container>
-                                        <ng-template #cotacaoBloqueada>
-                                            <div class="inner-odd odd-disabled">
-                                                <span class="nome">
-                                                    {{odd.label}}
-                                                </span>
-                                                <span class="valor">
-                                                    <i class="fa fa-lock"></i>
-                                                </span>
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                    <a ngbNavLink>Primeiro Tempo</a>
-                    <ng-template ngbNavContent>
-                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados1T)">
-                            <h4>{{mercados1T[chave].nome}}</h4>
-                            <div class="odds">
-                                <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados1T[chave])"
-                                    *ngFor="let odds of mercados1T[chave].odds">
-                                    <div class="odd" *ngFor="let odd of odds">
-                                        <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
-                                            <div class="inner-odd odd-enabled"
-                                                [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
-                                                (click)="addCotacao(jogo, odd)">
-                                                <span class="nome">
-                                                    {{odd.label}}
-                                                </span>
-                                                <span class="valor">
-                                                    {{odd.valorFinal}}
-                                                </span>
-                                            </div>
-                                        </ng-container>
-                                        <ng-template #cotacaoBloqueada>
-                                            <div class="inner-odd odd-disabled">
-                                                <span class="nome">
-                                                    {{odd.label}}
-                                                </span>
-                                                <span class="valor">
-                                                    <i class="fa fa-lock"></i>
-                                                </span>
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                    <a ngbNavLink>Segundo Tempo</a>
-                    <ng-template ngbNavContent>
-                        <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados2T)">
-                            <h4>{{mercados2T[chave].nome}}</h4>
-                            <div class="odds">
-                                <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados2T[chave])"
-                                    *ngFor="let odds of mercados2T[chave].odds">
-                                    <div class="odd" *ngFor="let odd of odds">
-                                        <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
-                                            <div class="inner-odd odd-enabled"
-                                                [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
-                                                (click)="addCotacao(jogo, odd)">
-                                                <span class="nome">
-                                                    {{odd.label}}
-                                                </span>
-                                                <span class="valor">
-                                                    {{odd.valorFinal}}
-                                                </span>
-                                            </div>
-                                        </ng-container>
-                                        <ng-template #cotacaoBloqueada>
-                                            <div class="inner-odd odd-disabled">
-                                                <span class="nome">
-                                                    {{odd.label}}
-                                                </span>
-                                                <span class="valor">
-                                                    <i class="fa fa-lock"></i>
-                                                </span>
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </li>
-                <li ngbNavItem>
-                    <a ngbNavLink>Jogadores</a>
-                    <ng-template ngbNavContent>
-                        <div class="div-vazio" *ngIf="!objectKeys(mercadosJogadores).length">
-                            Sem Cotações
-                        </div>
-                        <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercadosJogadores)">
-                            <h4>{{mercadosJogadores[chave].nome}}</h4>
-                            <div class="odds">
-                                <div class="odds-jogador-coluna" *ngFor="let odds of mercadosJogadores[chave].odds">
-                                    <div class="odd odd-jogador" *ngFor="let odd of odds">
-                                        <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
-                                            <div class="inner-odd odd-enabled"
-                                                [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
-                                                (click)="addCotacao(jogo, odd)">
-                                                <span class="nome">
-                                                    {{odd.nome}}
-                                                </span>
-                                                <span class="valor">
-                                                    {{odd.valorFinal}}
-                                                </span>
-                                            </div>
-                                        </ng-container>
-                                        <ng-template #cotacaoBloqueada>
-                                            <div class="inner-odd odd-disabled">
-                                                <span class="nome">
-                                                    {{odd.nome}}
-                                                </span>
-                                                <span class="valor">
-                                                    <i class="fa fa-lock"></i>
-                                                </span>
-                                            </div>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </li>
-            </ul>
             <div [ngbNavOutlet]="nav"></div>
         </div>
     </div>
