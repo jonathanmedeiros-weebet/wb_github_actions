@@ -96,6 +96,18 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 .subscribe(isOpen => this.isOpen = isOpen);
         }
 
+        if (this.isLoggedIn) {
+            const user = JSON.parse(window.localStorage.getItem('user'));
+            if (user.tipo_usuario !== 'cliente') {
+                this.auth.getPosicaoFinanceira()
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                        error => this.handleError(error)
+                    );
+            }
+        }
+
         this.getUsuario();
         this.createForm();
     }
@@ -149,18 +161,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.printService.listPrinters();
     }
 
-    getPosicaoFinanceira(event) {
-        if (this.isLoggedIn) {
-            const user = JSON.parse(window.localStorage.getItem('user'));
-            if (user.tipo_usuario !== 'cliente') {
-                this.auth.getPosicaoFinanceira()
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
-                        error => this.handleError(error)
-                    );
-            }
-        }
+    getPosicaoFinanceira() {
+
     }
 
     svgCss() {
