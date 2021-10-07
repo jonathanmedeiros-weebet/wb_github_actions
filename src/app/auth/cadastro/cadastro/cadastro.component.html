@@ -35,7 +35,7 @@
                     <div class="col col-sm-12 required">
                         <label class="label">CPF</label>
                         <input class="form-control" type="text" mask="000.000.000-00" placeholder="000.000.000-00"
-                               formControlName="cpf">
+                               formControlName="cpf" [dropSpecialCharacters]="false">
                         <app-error-msg [control]="form.get('cpf')"></app-error-msg>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="col col-sm-12 required">
                         <label class="label">Telefone</label>
                         <input class="form-control" type="text" mask="(00) 0 0000-0000" formControlName="telefone"
-                               placeholder="(00) 0 0000-0000">
+                               placeholder="(00)00000-0000" [dropSpecialCharacters]="false">
                         <app-error-msg [control]="form.get('telefone')"></app-error-msg>
                     </div>
                 </div>

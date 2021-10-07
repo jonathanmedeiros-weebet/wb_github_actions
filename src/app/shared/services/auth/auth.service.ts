@@ -43,7 +43,7 @@ export class AuthService {
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
-                    if (res.user.tipo_usuario === 'passador') {
+                    if (res.user.tipo_usuario === 'cambista') {
                         localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
                     }
                     this.logadoSource.next(true);
@@ -153,7 +153,7 @@ export class AuthService {
     isCambista(): boolean {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
-            return user.tipo_usuario === 'passador';
+            return user.tipo_usuario === 'cambista';
         }
         return false;
     }
@@ -161,7 +161,7 @@ export class AuthService {
     getRotaUsuarioLogado() {
         if (this.isLoggedIn()) {
             const user = this.getUser();
-            if (user.tipo_usuario === 'passador') {
+            if (user.tipo_usuario === 'cambista') {
                 return 'meu-perfil';
             } else {
                 return 'clientes';
