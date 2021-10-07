@@ -1499,3 +1499,11 @@ gulp.task('zaplances.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportvegas.com.br', function (done) {
+    tasks(done, {
+        host: "sportvegas.com.br",
+        banca: "SPORT VEGAS",
+        styles: "",
+    });
+});

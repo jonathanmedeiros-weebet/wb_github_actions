@@ -184,7 +184,8 @@
         "lucrei.wee.bet": "gulp lucrei.wee.bet",
         "pixsports.wee.bet": "gulp pixsports.wee.bet",
         "cariocavip.wee.bet": "gulp cariocavip.wee.bet",
-        "zaplances.bet": "gulp zaplances.bet"
+        "zaplances.bet": "gulp zaplances.bet",
+        "sportvegas.com.br": "gulp sportvegas.com.br"
     },
     "private": true,
     "dependencies": {
