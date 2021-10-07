@@ -1491,3 +1491,11 @@ gulp.task('cariocavip.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('zaplances.bet', function (done) {
+    tasks(done, {
+        host: "zaplances.bet",
+        banca: "ZAP LANCES",
+        styles: "",
+    });
+});

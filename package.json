@@ -183,7 +183,8 @@
         "jbrbets.net": "gulp jbrbets.net",
         "lucrei.wee.bet": "gulp lucrei.wee.bet",
         "pixsports.wee.bet": "gulp pixsports.wee.bet",
-        "cariocavip.wee.bet": "gulp cariocavip.wee.bet"
+        "cariocavip.wee.bet": "gulp cariocavip.wee.bet",
+        "zaplances.bet": "gulp zaplances.bet"
     },
     "private": true,
     "dependencies": {
