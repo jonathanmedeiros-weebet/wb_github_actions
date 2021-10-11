@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/core';
 import {MovimentacaoFinanceira} from '../../shared/models/clientes/movimentacao-financeira';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -20,11 +20,14 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     showLoading = true;
     smallScreen = false;
     page = 1;
+    movimentacoesContent;
 
     constructor(
         private clienteService: ClienteService,
         private fb: FormBuilder,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private el: ElementRef,
+        private renderer: Renderer2
     ) {
         super();
     }
@@ -46,6 +49,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
             this.smallScreen = false;
         }
 
+        this.definirAltura();
+
         this.createForm();
     }
 
@@ -62,6 +67,13 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
                 },
                 error => this.handleError(error)
             );
+    }
+
+    definirAltura() {
+        console.log(window.innerHeight);
+        const altura = window.innerHeight - 69;
+        this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
+        this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
     }
 
     createForm() {
