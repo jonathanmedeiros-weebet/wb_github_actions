@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {ErrorService} from '../utils/error.service';
 import {HeadersService} from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {MovimentacaoFinanceira} from '../../models/clientes/movimentacao-financeira';
 
 @Injectable({
     providedIn: 'root'
@@ -82,6 +84,22 @@ export class ClienteService {
                         return response.results;
                     }
                 ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getMovimentacaoFinanceira(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.headers.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.headers.getRequestOptions(true);
+        }
+
+        return this.http.get(`${this.clienteUrl}/getMovimentacao`, requestOptions)
+            .pipe(
+                map((res: any) => res),
                 catchError(this.errorService.handleError)
             );
     }

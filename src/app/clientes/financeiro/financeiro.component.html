@@ -1,9 +1,76 @@
 <div id="default-content">
     <div class="content-header">
         <h2>Financeiro</h2>
+        <div class="filters">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="form-row">
+                            <div class="col-6 col-md-3">
+                                <label>Periodo Inicial</label>
+                                <input type="date" class="form-control" formControlName="dataInicial">
+                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label>Periodo Final</label>
+                                <input type="date" class="form-control" formControlName="dataFinal">
+                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <label>Tipo</label>
+                                <select class="form-control" formControlName="tipo">
+                                    <option value="">Todos</option>
+                                    <option value="C">Crédito</option>
+                                    <option value="D">Débito</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-1">
+                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-body">
         <div class="content">
+            <app-spinner *ngIf="showLoading"></app-spinner>
+
+            <div *ngIf="!showLoading" class="margin-top-15">
+                <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
+                    Nenhuma movimentação realizada no período.
+                </div>
+                <div *ngIf="movimentacoesFinanceiras.length > 0">
+                    <div>
+                        <p><b>Qtd. Movimentações:</b> {{totalMovimentacoes}}</p>
+                    </div>
+                    <ng-container>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Saldo Antes</th>
+                                <th>Saldo Depois</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
+                                <tr>
+                                    <td>{{movimentacao.data}}</td>
+                                    <td>{{movimentacao.tipo === "C" ? 'Crédito' : 'Débito'}}</td>
+                                    <td>{{movimentacao.valor | currency}}</td>
+                                    <td>{{movimentacao.saldoAntes | currency}}</td>
+                                    <td>{{movimentacao.saldoDepois | currency}}</td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                </div>
+            </div>
         </div>
     </div>
 </div>
