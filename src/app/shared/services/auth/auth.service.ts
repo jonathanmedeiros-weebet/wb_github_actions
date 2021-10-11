@@ -161,10 +161,10 @@ export class AuthService {
     getRotaUsuarioLogado() {
         if (this.isLoggedIn()) {
             const user = this.getUser();
-            if (user.tipo_usuario === 'cambista') {
-                return 'meu-perfil';
-            } else {
+            if (user.tipo_usuario === 'clientes') {
                 return 'clientes';
+            } else {
+                return 'meu-perfil';
             }
         }
     }

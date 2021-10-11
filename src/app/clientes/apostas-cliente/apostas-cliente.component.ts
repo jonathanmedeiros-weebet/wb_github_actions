@@ -3,6 +3,7 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {FormBuilder, Validators} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
 import * as moment from 'moment';
+import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -20,7 +21,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     constructor(
         private messageService: MessageService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private params: ParametrosLocaisService
     ) {
         super();
     }
@@ -36,6 +38,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             this.dataFinal = moment();
         }
 
+        this.loteriasHabilitada = this.params.getOpcoes().loterias;
+        this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
+        this.desafioHabilitado = this.params.getOpcoes().desafio;
 
         this.createForm();
     }

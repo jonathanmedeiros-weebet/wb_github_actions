@@ -43,31 +43,25 @@
                             <li [ngbNavItem]="'esporte'">
                                 <a ngbNavLink>Esporte</a>
                                 <ng-template ngbNavContent>
-<!--                                    <app-apuracao-esporte [queryParams]="queryParams"></app-apuracao-esporte>-->
-                                </ng-template>
-                            </li>
-                            <li [ngbNavItem]="'consolidado'">
-                                <a ngbNavLink>Consolidado</a>
-                                <ng-template ngbNavContent>
-<!--                                    <app-apuracao-consolidada [queryParams]="queryParams"></app-apuracao-consolidada>-->
+                                    <app-apostas-cliente-esporte [queryParams]="queryParams"></app-apostas-cliente-esporte>
                                 </ng-template>
                             </li>
                             <li [ngbNavItem]="'acumuladao'" *ngIf="acumuladaoHabilitado">
                                 <a ngbNavLink>Acumuladão</a>
                                 <ng-template ngbNavContent>
-<!--                                    <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>-->
+                                    <app-apostas-cliente-acumuladao [queryParams]="queryParams"></app-apostas-cliente-acumuladao>
                                 </ng-template>
                             </li>
                             <li [ngbNavItem]="'desafio'" *ngIf="desafioHabilitado">
                                 <a ngbNavLink>Desafio</a>
                                 <ng-template ngbNavContent>
-<!--                                    <app-apuracao-desafio [queryParams]="queryParams"></app-apuracao-desafio>-->
+                                    <app-apostas-cliente-desafio [queryParams]="queryParams"></app-apostas-cliente-desafio>
                                 </ng-template>
                             </li>
                             <li [ngbNavItem]="'loteria'" *ngIf="loteriasHabilitada">
                                 <a ngbNavLink>Loteria</a>
                                 <ng-template ngbNavContent>
-<!--                                    <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>-->
+                                    <app-apostas-cliente-loteria [queryParams]="queryParams"></app-apostas-cliente-loteria>
                                 </ng-template>
                             </li>
                         </ul>

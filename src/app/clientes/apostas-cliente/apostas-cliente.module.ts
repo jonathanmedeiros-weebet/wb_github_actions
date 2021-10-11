@@ -5,15 +5,33 @@ import {ApostasClienteRoutingModule} from './apostas-cliente-routing.module';
 import {ApostasClienteComponent} from './apostas-cliente.component';
 import {SharedModule} from '../../shared/shared.module';
 import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import {ApostasClienteEsporteComponent} from './apostas-cliente-esportes/apostas-cliente-esporte.component';
+import {ApostasClienteAcumuladaoComponent} from './apostas-cliente-acumuladao/apostas-cliente-acumuladao.component';
+import {AcumuladaoService} from '../../shared/services/acumuladao.service';
+import {ApostasClienteDesafioComponent} from './apostas-cliente-desafio/apostas-cliente-desafio.component';
+import {DesafioApostaService} from '../../shared/services/desafio/desafio-aposta.service';
+import {ApostasClienteLoteriaComponent} from './apostas-cliente-loteria/apostas-cliente-loteria.component';
+import {ApostaLoteriaService} from '../../shared/services/loteria/aposta-loteria.service';
 
 
 @NgModule({
-    declarations: [ApostasClienteComponent],
+    declarations: [
+        ApostasClienteComponent,
+        ApostasClienteEsporteComponent,
+        ApostasClienteAcumuladaoComponent,
+        ApostasClienteDesafioComponent,
+        ApostasClienteLoteriaComponent
+    ],
     imports: [
         SharedModule,
         CommonModule,
         ApostasClienteRoutingModule,
         NgbNavModule
+    ],
+    providers: [
+        AcumuladaoService,
+        DesafioApostaService,
+        ApostaLoteriaService
     ]
 })
 export class ApostasClienteModule {
