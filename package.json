@@ -185,7 +185,8 @@
         "pixsports.wee.bet": "gulp pixsports.wee.bet",
         "cariocavip.wee.bet": "gulp cariocavip.wee.bet",
         "zaplances.bet": "gulp zaplances.bet",
-        "sportvegas.com.br": "gulp sportvegas.com.br"
+        "sportvegas.com.br": "gulp sportvegas.com.br",
+        "mais1bet.com": "gulp mais1bet.com"
     },
     "private": true,
     "dependencies": {
