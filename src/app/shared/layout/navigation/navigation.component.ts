@@ -51,7 +51,7 @@ export class NavigationComponent implements OnInit {
     amanha = moment().add(1, 'd');
     dias = [];
     isLoggedIn;
-    isPassador;
+    isCambista;
     isAppMobile;
     isOpen = true;
     itens: any[];
@@ -105,7 +105,7 @@ export class NavigationComponent implements OnInit {
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
         this.isLoggedIn = this.auth.isLoggedIn();
-        this.isPassador = this.auth.isCambista();
+        this.isCambista = this.auth.isCambista();
         this.preencherDias();
 
         this.sidebarService.itens

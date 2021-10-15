@@ -32,6 +32,17 @@
                 </div>
             </div>
         </div>
+        <div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 mt-3">
+                    <h4>Saldo: {{saldo | currency}}</h4>
+                    <a class="btn btn-info" target="_blank"
+                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}&text=Boa%20Tarde">
+                        Solicitar Saque
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-body">
         <div class="content content-movimentacoes">

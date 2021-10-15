@@ -5,6 +5,7 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import * as moment from 'moment';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
+import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 
 @Component({
     selector: 'app-financeiro',
@@ -21,18 +22,22 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     smallScreen = false;
     page = 1;
     movimentacoesContent;
+    saldo;
+    contatoSolicitacaoSaque;
 
     constructor(
         private clienteService: ClienteService,
         private fb: FormBuilder,
         private messageService: MessageService,
         private el: ElementRef,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private paramsLocais: ParametrosLocaisService
     ) {
         super();
     }
 
     ngOnInit(): void {
+        this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
         if (moment().day() === 0) {
             const startWeek = moment().startOf('week');
             this.dataInicial = startWeek.subtract(6, 'days');
@@ -61,8 +66,9 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 response => {
                     console.log(response);
-                    this.movimentacoesFinanceiras = response.results;
+                    this.movimentacoesFinanceiras = response.results.movimentacoes;
                     this.totalMovimentacoes = response.pagination.total;
+                    this.saldo = response.results.saldo;
                     this.showLoading = false;
                 },
                 error => this.handleError(error)
@@ -70,7 +76,6 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     }
 
     definirAltura() {
-        console.log(window.innerHeight);
         const altura = window.innerHeight - 69;
         this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
         this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
