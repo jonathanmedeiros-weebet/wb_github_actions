@@ -67,7 +67,6 @@ export class ApostasClienteLoteriaComponent implements OnInit, OnChanges, OnDest
             'data-inicial': this.queryParams.dataInicial,
             'data-final': this.queryParams.dataFinal,
             'status': this.queryParams.status,
-            'apostador': this.queryParams.apostador,
             'sort': '-horario'
         };
 

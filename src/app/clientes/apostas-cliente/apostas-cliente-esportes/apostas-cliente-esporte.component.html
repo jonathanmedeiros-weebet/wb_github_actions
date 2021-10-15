@@ -39,7 +39,6 @@
                         </tr>
                         <tr (click)="openModal(aposta)" class="tr-2">
                             <td class="" colspan="4">
-                                <small *ngIf="aposta.pago">(PAGO)</small>
                                 {{aposta.apostador | uppercase}} apostou em
                                 {{aposta.horario | moment:'DD/MM/YYYY [às] HH:mm'}}
                             </td>
@@ -57,7 +56,6 @@
                         <th>Horário</th>
                         <th>Valor</th>
                         <th>Prêmio</th>
-                        <th>Pagamento</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,7 +74,6 @@
                                 <span *ngIf="aposta.resultado == 'perdeu'">{{0 | currency}}</span>
                                 <span *ngIf="!aposta.resultado">Aguardando</span>
                             </td>
-                            <td>{{aposta.pago ? 'PAGO' : ''}}</td>
                         </tr>
                     </ng-container>
                 </tbody>
