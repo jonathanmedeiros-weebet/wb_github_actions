@@ -5,7 +5,7 @@
         <button type="button" *ngIf="impressaoPermitida()" (click)="print()">
             <i class="fa fa-print"></i>
         </button>
-        <button type="button" *ngIf="cancelamentoPermitido()" (click)="cancel()" title="CANCELAR APOSTA">
+        <button type="button" *ngIf="cancelamentoPermitido() && isCambista" (click)="cancel()" title="CANCELAR APOSTA">
             <i class="fa fa-trash-o"></i>
         </button>
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
@@ -28,7 +28,7 @@
         {{aposta.codigo}}
     </h1>
     <div class="informacoes">
-        <p>
+        <p *ngIf="isCambista">
             <b>CAMBISTA:</b> {{aposta.passador.nome}}
         </p>
         <p>

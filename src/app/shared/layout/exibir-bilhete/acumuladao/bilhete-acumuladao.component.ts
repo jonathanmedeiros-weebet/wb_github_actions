@@ -23,6 +23,7 @@ export class BilheteAcumuladaoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
+    isCambista;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -34,6 +35,7 @@ export class BilheteAcumuladaoComponent implements OnInit {
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.isCambista = this.auth.isCambista();
         this.opcoes = this.paramsService.getOpcoes();
 
         if (this.aposta.passador.percentualPremio > 0) {

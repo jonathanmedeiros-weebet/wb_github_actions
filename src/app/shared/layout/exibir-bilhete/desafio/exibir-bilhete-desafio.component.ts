@@ -23,6 +23,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
+    isCambista;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -35,6 +36,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
+        this.isCambista = this.auth.isCambista();
 
         if (this.aposta.passador.percentualPremio > 0) {
             this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);

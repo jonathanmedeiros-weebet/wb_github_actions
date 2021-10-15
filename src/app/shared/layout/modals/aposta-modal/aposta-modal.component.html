@@ -4,7 +4,7 @@
         <button type="button" *ngIf="impressaoPermitida()" (click)="printTicket()">
             <i class="fa fa-print"></i>
         </button>
-        <button type="button" *ngIf="cancelamentoPermitido()" (click)="cancel()" title="CANCELAR APOSTA">
+        <button type="button" *ngIf="cancelamentoPermitido() && isCambista" (click)="cancel()" title="CANCELAR APOSTA">
             <i class="fa fa-trash-o"></i>
         </button>
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">

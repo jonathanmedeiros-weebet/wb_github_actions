@@ -63,7 +63,6 @@ export class ApostasClienteDesafioComponent implements OnInit, OnDestroy, OnChan
             'data-inicial': this.queryParams.dataInicial,
             'data-final': this.queryParams.dataFinal,
             'status': this.queryParams.status,
-            'apostador': this.queryParams.apostador,
             'sort': '-horario',
             'otimizado': true
         };

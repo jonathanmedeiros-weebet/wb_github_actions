@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild } from '@ang
 
 import {
     SorteioService, ParametrosLocaisService, PrintService,
-    HelperService
+    HelperService, AuthService
 } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,17 +22,20 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     informativoRodape;
     sorteios = [];
     unsub$ = new Subject();
+    isCambista;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private sorteioService: SorteioService,
         private printService: PrintService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
+        this.isCambista = this.authService.isCambista();
 
         this.sorteioService.getSorteios()
             .pipe(takeUntil(this.unsub$))

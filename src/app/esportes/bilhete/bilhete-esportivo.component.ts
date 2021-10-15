@@ -37,6 +37,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
+    isCambista;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -57,6 +58,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnInit() {
         this.definirAltura();
         this.isLoggedIn = this.auth.isLoggedIn();
+        this.isCambista = this.auth.isCambista();
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
         this.apostaMaximo = this.opcoes.valor_max_aposta;
@@ -97,7 +99,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', [Validators.required]],
+            apostador: ['', (this.isCambista || !this.isLoggedIn) ? [Validators.required] : ''],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([])
         });
