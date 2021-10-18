@@ -24,15 +24,15 @@ function tasks(done, config) {
         .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
         .pipe(gulp.dest('src/'));
 */
-    remoteSrc(['logo_banca.png'], {
-        base: 'http://central.' + config.host + '/tema/'
-    })
-        .pipe(gulp.dest('src/assets/images/'));
+    // remoteSrc(['logo_banca.png'], {
+    //     base: 'http://central.' + config.host + '/tema/'
+    // })
+    //     .pipe(gulp.dest('src/assets/images/'));
 
-    remoteSrc(['favicon.ico'], {
-        base: 'http://central.' + config.host + '/tema/'
-    })
-        .pipe(gulp.dest('src/'));
+    // remoteSrc(['favicon.ico'], {
+    //     base: 'http://central.' + config.host + '/tema/'
+    // })
+    //     .pipe(gulp.dest('src/'));
 
     var options = {
         continueOnError: false, // default = false, true means don't emit error event
@@ -1504,6 +1504,22 @@ gulp.task('mais1bet.com', function (done) {
     tasks(done, {
         host: "mais1bet.com",
         banca: "MAIS1BET",
+        styles: "",
+    });
+});
+
+gulp.task('kaiosport.wee.bet', function (done) {
+    tasks(done, {
+        host: "kaiosport.wee.bet",
+        banca: "KAIO SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('imperiobet.wee.bet', function (done) {
+    tasks(done, {
+        host: "imperiobet.wee.bet",
+        banca: "IMPÉRIO BET",
         styles: "",
     });
 });
