@@ -1180,14 +1180,6 @@ gulp.task('sportbetclub7.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsandalo.site', function (done) {
-    tasks(done, {
-        host: "betsandalo.site",
-        banca: "BET SANDALO",
-        styles: "",
-    });
-});
-
 gulp.task('betshow.wee.bet', function (done) {
     tasks(done, {
         host: "betshow.wee.bet",
@@ -1316,14 +1308,6 @@ gulp.task('galobets.com', function (done) {
     });
 });
 
-gulp.task('sortebet.site', function (done) {
-    tasks(done, {
-        host: "sortebet.site",
-        banca: "SORTE BET",
-        styles: "",
-    });
-});
-
 gulp.task('reallbet.site', function (done) {
     tasks(done, {
         host: "reallbet.site",
@@ -1348,14 +1332,6 @@ gulp.task('olimpobetsvip.wee.bet', function (done) {
     });
 });
 
-gulp.task('scorpionsbet.wee.bet', function (done) {
-    tasks(done, {
-        host: "scorpionsbet.wee.bet",
-        banca: "SCORPIONS BET",
-        styles: "",
-    });
-});
-
 gulp.task('betsnet.me', function (done) {
     tasks(done, {
         host: "betsnet.me",
@@ -1368,14 +1344,6 @@ gulp.task('lobobet.net', function (done) {
     tasks(done, {
         host: "lobobet.net",
         banca: "LOBO BET",
-        styles: "",
-    });
-});
-
-gulp.task('nicebet.wee.bet', function (done) {
-    tasks(done, {
-        host: "nicebet.wee.bet",
-        banca: "NICE BET",
         styles: "",
     });
 });
@@ -1520,6 +1488,22 @@ gulp.task('cariocavip.wee.bet', function (done) {
     tasks(done, {
         host: "cariocavip.wee.bet",
         banca: "CARIOCA VIP",
+        styles: "",
+    });
+});
+
+gulp.task('zaplances.bet', function (done) {
+    tasks(done, {
+        host: "zaplances.bet",
+        banca: "ZAP LANCES",
+        styles: "",
+    });
+});
+
+gulp.task('mais1bet.com', function (done) {
+    tasks(done, {
+        host: "mais1bet.com",
+        banca: "MAIS1BET",
         styles: "",
     });
 });

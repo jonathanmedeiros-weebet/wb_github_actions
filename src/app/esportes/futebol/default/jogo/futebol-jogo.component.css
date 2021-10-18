@@ -71,9 +71,13 @@
     width: 100%;
 }
 
+.content-sports {
+    padding-bottom: 150px;
+}
+
 @media only screen and (max-width: 668px) {
     .content-sports {
-        padding-bottom: 90px;
+        padding-bottom: 250px;
     }
 
     .indentificacao .div-back{
