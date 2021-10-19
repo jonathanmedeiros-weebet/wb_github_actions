@@ -1441,6 +1441,7 @@ gulp.task('betsgames.net', function (done) {
         host: "betsgames.net",
         banca: "BETS GAMES",
         styles: "",
+        scripts: "<script src='https://wbot.chat/index.js' token='4c4ed83670466f42930fd063e5c5d6fb'></script>",
     });
 });
 
