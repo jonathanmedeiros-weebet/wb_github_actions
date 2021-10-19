@@ -9,12 +9,19 @@
         <hr>
         <hr>
         <div class="informacoes">
-            <p *ngIf="isCambista">
-                <b>CAMBISTA: </b><span>{{aposta.passador.nome}}</span>
-            </p>
-            <p>
-                <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
-            </p>
+            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                <p>
+                    <b>CLIENTE: </b><span>{{aposta.apostador}}</span>
+                </p>
+            </div>
+            <ng-template #exibicaoPadrao>
+                <p>
+                    <b>CAMBISTA:</b> {{aposta.passador.nome}}
+                </p>
+                <p>
+                    <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
+                </p>
+            </ng-template>
             <p>
                 <b>HORÁRIO: </b><span>{{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
             </p>

@@ -24,6 +24,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
     cambistaPaga;
     appMobile;
     isCambista;
+    isLoggedIn;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -37,6 +38,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
         this.isCambista = this.auth.isCambista();
+        this.isLoggedIn = this.auth.isLoggedIn();
 
         if (this.aposta.passador.percentualPremio > 0) {
             this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);

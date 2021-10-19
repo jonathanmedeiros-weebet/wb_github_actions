@@ -4,8 +4,13 @@
             <img src="{{LOGO}}" alt="ZEBRINHA.BET">
         </div>
         <h1>{{aposta.codigo}}</h1>
-        <p class="informacoes-gerais" *ngIf="isCambista">CAMBISTA: {{aposta.passador.nome}}</p>
-        <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
+        <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+            <p class="informacoes-gerais">CLIENTE: {{aposta.apostador}}</p>
+        </div>
+        <ng-template #exibicaoPadrao>
+            <p class="informacoes-gerais">CAMBISTA: {{aposta.passador.nome}}</p>
+            <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
+        </ng-template>
         <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
         <p class="informacoes-gerais">MODALIDADE: {{aposta.modalidade | sorteioTipo}}</p>
         ----------------------------<br>

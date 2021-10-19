@@ -23,6 +23,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     sorteios = [];
     unsub$ = new Subject();
     isCambista;
+    isLoggedIn;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -36,6 +37,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
         this.isCambista = this.authService.isCambista();
+        this.isLoggedIn = this.authService.isLoggedIn();
 
         this.sorteioService.getSorteios()
             .pipe(takeUntil(this.unsub$))
