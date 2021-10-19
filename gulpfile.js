@@ -1524,3 +1524,11 @@ gulp.task('imperiobet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('florianobets.wee.bet', function (done) {
+    tasks(done, {
+        host: "florianobets.wee.bet",
+        banca: "FLORIANO BETS",
+        styles: "",
+    });
+});

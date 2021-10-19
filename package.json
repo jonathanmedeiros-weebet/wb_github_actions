@@ -188,7 +188,8 @@
         "sportvegas.com.br": "gulp sportvegas.com.br",
         "mais1bet.com": "gulp mais1bet.com",
         "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
-        "imperiobet.wee.bet": "gulp imperiobet.wee.bet"
+        "imperiobet.wee.bet": "gulp imperiobet.wee.bet",
+        "florianobets.wee.bet": "gulp florianobets.wee.bet"
     },
     "private": true,
     "dependencies": {
