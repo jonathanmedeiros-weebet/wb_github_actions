@@ -1,0 +1,119 @@
+/* @import url('https://weebet.s3.amazonaws.com/casadinha.com/param/cores.css'); */
+
+* {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+body {
+    justify-content: center;
+    flex-direction: row;
+    display: flex !important;
+    margin: 0 0 0 0;
+}
+
+.container {
+    /* background: var(--header); */
+    padding: 10%;
+    padding-top: 2%;
+    width: 600px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo-frame {
+    height: 100px;
+}
+
+#logo-frame>img {
+    height: 80px;
+    position: relative;
+}
+
+#header {
+    text-align: center;
+    background: var(--header);
+    width: 100%;
+    padding: 10px;
+    color: var(--foreground-header);
+}
+
+#header>h3,
+#header>p {
+    margin: 0;
+}
+
+#ticket-itens {
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    background: var(--sidebar-left);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    flex-direction: column;
+}
+
+.ticket-item>div {
+    width: 100%;
+    color: var(--foreground-sidebar-right);
+    margin: 5px;
+}
+
+.ticket-item>.players {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-item .players>.player {
+    font-size: 1.2rem;
+    width: 40%;
+}
+
+.ticket-item .players>.separators {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.ticket-item .players .separators>div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.ticket-item .players>.player-a-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-item .players>.player-b-data {
+    display: flex;
+    flex-direction: column;
+}
+
+#ticket-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    text-align: center;
+    align-items: center;
+}
+
+#ticket-details>div {
+    width: 100%;
+}
+
+#item-template {
+    /* display: none; */
+}

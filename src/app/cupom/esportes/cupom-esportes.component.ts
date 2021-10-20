@@ -6,6 +6,7 @@ import { StatsService } from './../../services';
 import { Estatistica } from './../../models';
 import { config } from './../../shared/config';
 import * as moment from 'moment';
+import { ApostaEsportiva, ItemApostaEsportiva } from '../../models';
 
 @Component({
     selector: 'app-cupom-esportes',
@@ -46,6 +47,8 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
 
     ativarAoVivo() {
         const eventosId = [];
+        const itensOrdenados = this.ordenarApostaItensPorData(this.aposta);
+        this.aposta.itens = itensOrdenados;
 
         this.aposta.itens.forEach(item => {
             const horarioInicio = moment(item.jogo_horario).subtract('10', 'm');
@@ -94,6 +97,8 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             }
         }
     }
+
+
 
     liveStats(jogoId) {
         this.statsService.getEventoStats(jogoId)
@@ -357,5 +362,10 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
         }
 
         this.verificarResultadoAposta();
+    }
+    private ordenarApostaItensPorData(aposta: ApostaEsportiva): Array<ItemApostaEsportiva> {
+        let itensOrdenados;
+        itensOrdenados = aposta.itens.sort((a,b) => moment(a.jogo_horario).toDate().getTime() - moment(b.jogo_horario).toDate().getTime());
+        return itensOrdenados;
     }
 }
