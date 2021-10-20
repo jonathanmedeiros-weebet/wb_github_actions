@@ -69,6 +69,7 @@ export class FormValidations {
             'equalsTo': 'Campos não são iguais',
             'pattern': 'Campo inválido',
             'matchPin': 'Confirmação diferente do PIN.',
+            'loginEmUso': 'Nome de usuário em uso. Por favor escolha outro'
         };
         return config[validatorName];
     }

@@ -6,12 +6,14 @@ import {HeadersService} from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {MovimentacaoFinanceira} from '../../models/clientes/movimentacao-financeira';
+import {AbstractControl} from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
+    debouncer: any;
 
     constructor(
         private http: HttpClient,
@@ -102,5 +104,25 @@ export class ClienteService {
                 map((res: any) => res),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    validarLogin(control: AbstractControl) {
+        clearTimeout(this.debouncer);
+
+        return new Promise(resolve => {
+            this.debouncer = setTimeout(() => {
+                this.checarLoginUnico(control.value).subscribe((res) => {
+                    if (res) {
+                        resolve(null);
+                    }
+                }, (err) => {
+                    resolve({'loginEmUso': true});
+                });
+            }, 1000);
+        });
+    }
+
+    checarLoginUnico(login) {
+        return this.http.get(`${this.clienteUrl}/validarLogin/` + login).pipe(map(res => res));
     }
 }

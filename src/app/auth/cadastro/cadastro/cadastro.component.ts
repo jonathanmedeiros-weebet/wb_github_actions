@@ -44,7 +44,11 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            usuario: [null, [Validators.required]],
+            usuario: [null, [
+                    Validators.minLength(3),
+                    Validators.pattern('[a-zA-Z]*'),
+                    Validators.required
+                ], this.clientesService.validarLogin.bind(this.clientesService)],
             nascimento: [null, [Validators.required]],
             senha: [null, [Validators.required]],
             senha_confirmacao: [null, [Validators.required, FormValidations.equalsTo('senha')]],
