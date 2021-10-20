@@ -35,7 +35,6 @@
         <div>
             <div class="row">
                 <div class="col-xs-12 col-md-12 mt-3">
-                    <h4>Saldo: {{saldo | currency}}</h4>
                     <a class="btn btn-info" target="_blank"
                        href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}&text=Boa%20Tarde">
                         Solicitar Saque
@@ -54,7 +53,7 @@
                 </div>
                 <div *ngIf="movimentacoesFinanceiras.length > 0">
                     <div>
-                        <p><b>Qtd. Movimentações:</b> {{totalMovimentacoes}}</p>
+                        <p><b>Qtd. Movimentações no Período:</b> {{totalMovimentacoes}}</p>
                     </div>
                     <ng-container>
                         <table class="table table-hover">
@@ -71,7 +70,13 @@
                             <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
                                 <tr>
                                     <td>{{movimentacao.data}}</td>
-                                    <td>{{movimentacao.tipo === "C" ? 'Crédito' : 'Débito'}}</td>
+                                    <td>
+                                        <i style="color:green; margin-right: 5px;" class="fa fa-sort-up" *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
+                                        <ng-template #iconeDebito>
+                                            <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
+                                        </ng-template>
+                                        {{movimentacao.tipo === "C" ? 'Crédito' : 'Débito'}}
+                                    </td>
                                     <td>{{movimentacao.valor | currency}}</td>
                                     <td>{{movimentacao.saldoAntes | currency}}</td>
                                     <td>{{movimentacao.saldoDepois | currency}}</td>

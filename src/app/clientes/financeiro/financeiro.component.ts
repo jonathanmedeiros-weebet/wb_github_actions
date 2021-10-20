@@ -71,7 +71,11 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
                     this.saldo = response.results.saldo;
                     this.showLoading = false;
                 },
-                error => this.handleError(error)
+                error => {
+                    this.handleError(error);
+                    this.movimentacoesFinanceiras = [];
+                    this.showLoading = false;
+                }
             );
     }
 

@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../base-form/base-form.component';
-import { ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService } from './../../../services';
-import { Usuario } from './../../../models';
-import { config } from './../../config';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../base-form/base-form.component';
+import {ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService} from './../../../services';
+import {Usuario} from './../../../models';
+import {config} from './../../config';
 
 @Component({
     selector: 'app-header',
@@ -53,6 +53,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     unsub$ = new Subject();
     rotaPerfil: string;
     appVersion;
+    isCambista;
 
     constructor(
         private fb: FormBuilder,
@@ -97,15 +98,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
 
         if (this.isLoggedIn) {
-            const user = JSON.parse(window.localStorage.getItem('user'));
-            if (user.tipo_usuario !== 'cliente') {
-                this.auth.getPosicaoFinanceira()
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
-                        error => this.handleError(error)
-                    );
-            }
+            this.isCambista = this.auth.isCambista();
         }
 
         this.getUsuario();
@@ -162,7 +155,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     getPosicaoFinanceira() {
-
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                error => this.handleError(error)
+            );
     }
 
     svgCss() {

@@ -13,7 +13,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                <a class="nav-link dropdown-toggle" (click)="getPosicaoFinanceira()" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
@@ -127,23 +127,23 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a class="nav-link" id="saldos">
+                <!--<a class="nav-link" id="saldos">
                     <span id="creditos">Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}</span><br>
                     <span id="saldos">Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}</span>
-                </a>
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                </a>-->
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" (click)="getPosicaoFinanceira()"
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                    <!--<button class="dropdown-item text-center" disabled type="button">
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCambista">
                         Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
                         Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}
                     </button>
-                    <div class="dropdown-divider"></div>-->
+                    <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" [routerLink]="rotaPerfil" routerLinkActive="router-link-active">
                         <i class="fa fa-user"></i> Minha Conta
