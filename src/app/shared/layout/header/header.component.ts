@@ -54,6 +54,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     rotaPerfil: string;
     appVersion;
     isCambista;
+    modoClienteAtivo;
 
     constructor(
         private fb: FormBuilder,
@@ -90,6 +91,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
 
         if (window.innerWidth <= 667) {
             this.sidebarService.isOpen

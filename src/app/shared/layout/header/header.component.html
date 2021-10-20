@@ -43,7 +43,7 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link" routerLink="auth/cadastro">
+                <a class="nav-link" routerLink="auth/cadastro" *ngIf="modoClienteAtivo">
                     Registrar-se
                 </a>
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
