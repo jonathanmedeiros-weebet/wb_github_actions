@@ -1,7 +1,7 @@
-const _host = '//weebet.local';
+const _host = '//local.wee.bet';
 // const _host = '//central.demo.wee.bet';
-const _center = '//localhost:3002';
-// const _center = 'https://center2.wee.bet';
+// const _center = '//localhost:3002';
+const _center = 'https://center2.wee.bet';
 // const _live = 'https://streaming.wee.bet';
 const _live = '//localhost:3003';
 const _stats = 'https://stats.wee.bet';
