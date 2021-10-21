@@ -1,4 +1,4 @@
-/* @import url('https://weebet.s3.amazonaws.com/casadinha.com/param/cores.css'); */
+/* @import url('https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css'); */
 
 * {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
@@ -35,7 +35,8 @@ body {
     text-align: center;
     background: var(--header);
     width: 100%;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     color: var(--foreground-header);
 }
 
@@ -45,26 +46,31 @@ body {
 }
 
 #ticket-itens {
-    width: 100%;
     display: flex;
-    /* flex-direction: column; */
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ticket-itens>div {
+    width: 100%;
 }
 
 .ticket-item {
     display: flex;
     justify-content: space-between;
-    background: var(--sidebar-left);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    background: #ebeaea;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 100%;
-    padding: 10px 10px 10px 10px;
+    padding: none;
     text-align: center;
     flex-direction: column;
 }
 
 .ticket-item>div {
     width: 100%;
-    color: var(--foreground-sidebar-right);
+    color: #000;
     margin: 5px;
 }
 
@@ -75,7 +81,7 @@ body {
 }
 
 .ticket-item .players>.player {
-    font-size: 1.2rem;
+    font-size: 15px;
     width: 40%;
 }
 
@@ -112,8 +118,4 @@ body {
 
 #ticket-details>div {
     width: 100%;
-}
-
-#item-template {
-    /* display: none; */
 }

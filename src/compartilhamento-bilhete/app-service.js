@@ -24,3 +24,11 @@ async function orderTicketItens(tickeItens = []) {
     });
     return orderedItens;
 }
+
+function getFormatedDate(date) {
+    var formatedDate = date.getDate().toString();
+    var formatdMonth = date.getMonth() + 1;
+    var formatedYear = date.getFullYear().toString();
+    var dateArray = [formatedDate, formatdMonth, formatedYear];
+    return dateArray.join('/');
+}
