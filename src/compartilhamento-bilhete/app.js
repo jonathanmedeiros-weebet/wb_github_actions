@@ -2,15 +2,15 @@ document.onreadystatechange = async function() {
     if (this.readyState === 'complete') {
         const params = await getParams();
         if (params) {
-            const appCssLink = document.getElementById('app-css');
-            const linkTag = document.createElement('link');
+            const appCssLink = this.getElementById('app-css');
+            const linkTag = this.createElement('link');
             linkTag.href = `https://weebet.s3.amazonaws.com/${params.slug}/param/cores.css`
             linkTag.rel = 'stylesheet';
             appCssLink.parentElement.insertBefore(linkTag, appCssLink);
 
-            const image = document.createElement('img');
+            const image = this.createElement('img');
             image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`
-            const logoDiv = document.getElementById('logo-frame');
+            const logoDiv = this.getElementById('logo-frame');
             logoDiv.appendChild(image);
 
             var ticketData = await getTicketData({
@@ -35,7 +35,12 @@ document.onreadystatechange = async function() {
                 this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toFixed(2));
                 this.getElementById('award').append(ticketData.premio);
                 this.getElementById('status').append(ticketData.ativo ? 'ATIVO' : 'CANCELADO')
-
+                if (!ticketData.resultado && ticketData.resultado == 'a confirmar') {
+                    this.getElementById('has-result').style.display = 'none';
+                } else {
+                    this.getElementById('result').append(ticketData.resultado);
+                    ticketData.resultado != 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : '';
+                }
                 const mapEsportes = new Map()
                 if (ticketData.tipo === 'esportes') {
                     const ids = [];
@@ -99,11 +104,12 @@ document.onreadystatechange = async function() {
                                 <div class="player-corner-kick">  ${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.fora_escanteios || '' : ticketItem.time_b_resultado_escanteios || ''}</div>
                             </div>
                         </div>
-                        <div id="final-resulst">Resultado Final:
+                        <div id="final-resulst">Resultado Final: 
                             <span></span>
                         </div>
+                        <div class="${ticketItem.resultado || ''}">${ticketItem.resultado || ''}</div>
                     </div>`;
-                    document.getElementById('ticket-itens').appendChild(div);
+                    this.getElementById('ticket-itens').appendChild(div);
                 }
             }
         } else {

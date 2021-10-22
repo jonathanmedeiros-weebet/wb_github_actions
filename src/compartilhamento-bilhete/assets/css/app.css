@@ -125,3 +125,11 @@ body {
 #ticket-details>div {
     width: 100%;
 }
+
+.ganhou {
+    color: #5f892c !important;
+}
+
+.perdeu {
+    color: #fa3425 !important
+}
