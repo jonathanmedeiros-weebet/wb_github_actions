@@ -24,7 +24,7 @@ document.onreadystatechange = async function() {
                 ticketData = ticketData.results
                 const ticketItens = await orderTicketItens(ticketData.itens);
                 ticketData.itens = ticketItens;
-                console.log(ticketData);
+
                 this.getElementById('ticket-id').append(ticketData.codigo);
                 this.getElementById('panter').append(ticketData.apostador.toUpperCase());
                 this.getElementById('money-changer').append(ticketData.passador.nome.toUpperCase());
@@ -36,9 +36,33 @@ document.onreadystatechange = async function() {
                 this.getElementById('award').append(ticketData.premio);
                 this.getElementById('status').append(ticketData.ativo ? 'ATIVO' : 'CANCELADO')
 
+                const mapEsportes = new Map()
+                if (ticketData.tipo === 'esportes') {
+                    const ids = [];
+
+                    for (const item of ticketData.itens) {
+                        ids.push(item.jogo_api_id);
+                    }
+                    var isExpired = false;;
+                    var results = await getResuts(ids);
+                    results = results.result;
+
+                    if (mapEsportes.resultado && (ticketData.resultado.length == 0)) {
+                        isExpired = true;
+                    }
+                    if (!isExpired) {
+                        mapEsportes.clear();
+                        results.forEach(result => {
+                            mapEsportes.set(result.event_id, result.resultado);
+                        });
+                    }
+
+                }
 
                 for (var ticketItem of ticketData.itens) {
                     var div = this.createElement('div');
+                    var mappedResults = mapEsportes.get(ticketItem.jogo_api_id);
+
                     div.innerHTML = `
                         <div class="ticket-item">
                             <div>
@@ -50,14 +74,16 @@ document.onreadystatechange = async function() {
                                 <div class="player-name">
                                     <strong>${ticketItem.time_a_nome.toUpperCase()}</strong>
                                 </div>
-                                <div class="player-1half-result">${ticketItem.time_a_resultado_1t        || ''}</div>
-                                <div class="player-2half-result">${ticketItem.time_a_resultado_2t        || ''}</div>
-                                <div class="player-corner-kick">${ticketItem.time_a_resultado_escanteios || ''}</div>
+                                <div class="player-1half-result">${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.casa_1t || '' : ticketItem.time_a_resultado_1t || ''}</div>
+                                <div class="player-2half-result">${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.casa_2t || '' : ticketItem.time_a_resultado_2t || ''}</div>
+                                <div class="player-corner-kick"> ${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.casa_escanteios || '' : ticketItem.time_a_resultado_escanteios || ''}</div>
                             </div>
                             <div class="separators">
                                 <div>
                                     <strong>
-                                        ${ticketItem.time_a_resultado || ''} - ${ticketItem.time_a_resultado || ''}
+                                        ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.casa || '' : ticketItem.time_a_resultado || ''} 
+                                        - 
+                                        ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.fora || '' : ticketItem.time_a_resultado || ''}
                                     </strong>    
                                 </div>
                                 <div>Gols 1º Tempo</div>
@@ -68,9 +94,9 @@ document.onreadystatechange = async function() {
                                 <div class="player-name">
                                     <strong>${ticketItem.time_b_nome.toUpperCase()}</strong>
                                 </div>
-                                <div class="player-1half-result">${ticketItem.time_a_resultado_1t        || ''}</div>
-                                <div class="player-2half-result">${ticketItem.time_a_resultado_2t        || ''}</div>
-                                <div class="player-corner-kick">${ticketItem.time_a_resultado_escanteios || ''}</div>
+                                <div class="player-1half-result"> ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.fora_1t || '' : ticketItem.time_b_resultado_1t || ''}</div>
+                                <div class="player-2half-result"> ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.fora_2t || '' : ticketItem.time_b_resultado_2t || ''}</div>
+                                <div class="player-corner-kick">  ${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.fora_escanteios || '' : ticketItem.time_b_resultado_escanteios || ''}</div>
                             </div>
                         </div>
                         <div id="final-resulst">Resultado Final:

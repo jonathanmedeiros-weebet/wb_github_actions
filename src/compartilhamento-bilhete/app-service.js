@@ -32,3 +32,10 @@ function getFormatedDate(date) {
     var dateArray = [formatedDate, formatdMonth, formatedYear];
     return dateArray.join('/');
 }
+
+async function getResuts(ids) {
+    paramIds = ids.join(',');
+    return await fetch(`https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
+        .then(response => { return response.json() })
+        .catch(error => console.error(error));
+}

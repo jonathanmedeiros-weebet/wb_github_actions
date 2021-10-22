@@ -108,6 +108,12 @@ body {
     flex-direction: column;
 }
 
+.ticket-item .players .player>div {
+    font-size: 15px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
 #ticket-details {
     display: flex;
     flex-direction: column;
