@@ -57,9 +57,13 @@ document.onreadystatechange = async function() {
                     }
                     if (!isExpired) {
                         mapEsportes.clear();
+
+
                         results.forEach(result => {
                             mapEsportes.set(result.event_id, result.resultado);
                         });
+                        console.log(mapEsportes);
+
                     }
 
                 }
@@ -73,7 +77,7 @@ document.onreadystatechange = async function() {
                             <div>
                                 <strong>${ticketItem.campeonato_nome}</strong>
                             </div>
-                            <div id="event-time">${new Date(ticketItem.jogo_horario).toLocaleString()}</div>
+                            <div class="event-time">${new Date(ticketItem.jogo_horario).toLocaleString()}</div>
                             <div class="players">
                                 <div class="player player-a-data" id="player-a-data">
                                 <div class="player-name">
