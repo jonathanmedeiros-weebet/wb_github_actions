@@ -9,13 +9,23 @@ export const routes: Routes = [
     },
     {
         path: 'basquete',
-        loadChildren: () => import('app/esportes/basquete/basquete.module').then(m => m.BasqueteModule),
+        loadChildren: () => import('app/esportes/modalidades/modalidades.module').then(m => m.ModalidadesModule),
         canActivate: [BasqueteGuard]
     },
     {
         path: 'combate',
         loadChildren: () => import('app/esportes/combate/combate.module').then(m => m.CombateModule),
         canActivate: [CombateGuard]
+    },
+    {
+        path: 'futebol-americano',
+        data: { sportId: '12' },
+        loadChildren: () => import('app/esportes/modalidades/modalidades.module').then(m => m.ModalidadesModule),
+    },
+    {
+        path: 'tenis',
+        data: { sportId: '13' },
+        loadChildren: () => import('app/esportes/modalidades/modalidades.module').then(m => m.ModalidadesModule),
     },
     {
         path: 'esports',

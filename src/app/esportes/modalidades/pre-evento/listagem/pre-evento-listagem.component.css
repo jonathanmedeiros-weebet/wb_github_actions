@@ -1,0 +1,45 @@
+.eventos{
+    background-color: #fff;
+    padding-bottom: 4px;
+}
+
+.evento{
+    padding: 0 10px 4px 10px;
+}
+
+.evento-selecionado{
+    background: var(--selected-event);
+    color: var(--foreground-selected-event)!important;
+    cursor: auto;
+}
+
+.indentificacao{
+    display: flex;
+    align-items: center;
+}
+
+.indentificacao .nome{
+    flex-grow: 1;
+}
+
+.exibir-mais{
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .odds .odd {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .content-sports {
+        padding-bottom: 90px;
+    }
+
+    .odds .odd {
+        width: 100%;
+    }
+}
