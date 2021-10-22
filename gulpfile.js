@@ -1316,14 +1316,6 @@ gulp.task('reallbet.site', function (done) {
     });
 });
 
-gulp.task('apostasms.wee.bet', function (done) {
-    tasks(done, {
-        host: "apostasms.wee.bet",
-        banca: "APOSTAS MS",
-        styles: "",
-    });
-});
-
 gulp.task('olimpobetsvip.wee.bet', function (done) {
     tasks(done, {
         host: "olimpobetsvip.wee.bet",
