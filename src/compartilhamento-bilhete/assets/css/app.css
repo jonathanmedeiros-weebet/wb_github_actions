@@ -78,6 +78,8 @@ body {
     text-align: center;
     flex-direction: column;
     box-sizing: border-box;
+    font-size: 12px !important;
+    padding: 15px 0;
 }
 
 .ticket-item>.event-time {
@@ -110,8 +112,7 @@ body {
 }
 
 .ticket-item .players .separators>div {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 3px 0;
 }
 
 .ticket-item .players>.player-a-data {
@@ -142,8 +143,12 @@ body {
     width: 100%;
 }
 
+.player-name {
+    font-size: 14px !important;
+}
+
 .ganhou {
-    color: #5f892c !important;
+    color: #008000 !important;
 }
 
 .perdeu {

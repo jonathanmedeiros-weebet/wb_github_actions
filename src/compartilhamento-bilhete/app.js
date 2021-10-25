@@ -39,7 +39,7 @@ document.onreadystatechange = async function() {
                     this.getElementById('has-result').style.display = 'none';
                 } else {
                     this.getElementById('result').append(ticketData.resultado);
-                    ticketData.resultado != 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : '';
+                    ticketData.resultado != 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
                 }
                 const mapEsportes = new Map()
                 if (ticketData.tipo === 'esportes') {
@@ -62,15 +62,47 @@ document.onreadystatechange = async function() {
                         results.forEach(result => {
                             mapEsportes.set(result.event_id, result.resultado);
                         });
-                        console.log(mapEsportes);
 
                     }
 
                 }
-
                 for (var ticketItem of ticketData.itens) {
+                    console.log(ticketItem);
                     var div = this.createElement('div');
                     var mappedResults = mapEsportes.get(ticketItem.jogo_api_id);
+
+                    const templateData = {
+                        player_a_result: null,
+                        player_b_result: null,
+                        player_a_1half_result: null,
+                        player_b_1half_result: null,
+                        player_a_2half_result: null,
+                        player_b_2half_result: null,
+                        player_a_corner_kicks: null,
+                        player_b_corner_kicks: null,
+                    };
+
+                    if (ticketData.tipo === 'esportes' && mappedResults) {
+                        templateData.player_a_result = mappedResults.casa || mappedResults.casa === 0 || '';
+                        templateData.player_a_1half_result = mappedResults.casa_1t || mappedResults.casa_1t === 0 ? 0 : '';
+                        templateData.player_a_2half_result = mappedResults.casa_2t || mappedResults.casa_2t === 0 ? 0 : '';
+                        templateData.player_a_corner_kicks = mappedResults.casa_escanteios || mappedResults.casa_escanteios === 0 ? 0 : '';
+
+                        templateData.player_b_result = mappedResults.fora || mappedResults.fora === 0 || '';
+                        templateData.player_b_1half_result = mappedResults.fora_1t || mappedResults.fora_1t === 0 ? 0 : '';
+                        templateData.player_b_2half_result = mappedResults.fora_2t || mappedResults.fora_2t === 0 ? 0 : '';
+                        templateData.player_b_corner_kicks = mappedResults.fora_escanteios || mappedResults.fora_escanteios === 0 ? 0 : '';
+                    } else {
+                        templateData.player_a_result = ticketItem.time_a_resultado || mappedResults.casa === 0 || '';
+                        templateData.player_a_1half_result = ticketItem.time_a_resultado_1t || mappedResults.casa_1t === 0 ? 0 : '';
+                        templateData.player_a_2half_result = ticketItem.time_a_resultado_2t || mappedResults.casa_2t === 0 ? 0 : '';
+                        templateData.player_a_corner_kicks = ticketItem.time_a_resultado_escanteios || ticketItem.time_a_resultado_escanteios === 0 ? 0 : '';
+
+                        templateData.player_b_result = ticketItem.time_b_resultado || ticketItem.time_b_resultado === 0 ? 0 : '';
+                        templateData.player_b_1half_result = ticketItem.time_b_resultado_1t || ticketItem.time_b_resultado_1t === 0 ? 0 : '';
+                        templateData.player_b_2half_result = ticketItem.time_b_resultado_2t || ticketItem.time_b_resultado_2t === 0 ? 0 : '';
+                        templateData.player_b_corner_kicks = ticketItem.time_b_resultado_escanteios || ticketItem.time_b_resultado_escanteios === 0 ? 0 : '';
+                    }
 
                     div.innerHTML = `
                         <div class="ticket-item">
@@ -83,16 +115,14 @@ document.onreadystatechange = async function() {
                                 <div class="player-name">
                                     <strong>${ticketItem.time_a_nome.toUpperCase()}</strong>
                                 </div>
-                                <div class="player-1half-result">${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.casa_1t || '' : ticketItem.time_a_resultado_1t || ''}</div>
-                                <div class="player-2half-result">${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.casa_2t || '' : ticketItem.time_a_resultado_2t || ''}</div>
-                                <div class="player-corner-kick"> ${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.casa_escanteios || '' : ticketItem.time_a_resultado_escanteios || ''}</div>
+                                <div class="player-1half-result">${templateData.player_a_1half_result}</div>
+                                <div class="player-2half-result">${templateData.player_a_2half_result }</div>
+                                <div class="player-corner-kick"> ${templateData.player_a_corner_kicks}</div>
                             </div>
                             <div class="separators">
                                 <div>
                                     <strong>
-                                        ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.casa || '' : ticketItem.time_a_resultado || ''} 
-                                        - 
-                                        ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.fora || '' : ticketItem.time_a_resultado || ''}
+                                        ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </strong>    
                                 </div>
                                 <div>Gols 1º Tempo</div>
@@ -103,15 +133,15 @@ document.onreadystatechange = async function() {
                                 <div class="player-name">
                                     <strong>${ticketItem.time_b_nome.toUpperCase()}</strong>
                                 </div>
-                                <div class="player-1half-result"> ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.fora_1t || '' : ticketItem.time_b_resultado_1t || ''}</div>
-                                <div class="player-2half-result"> ${ ticketData.tipo === 'esportes' ? mappedResults && mappedResults.fora_2t || '' : ticketItem.time_b_resultado_2t || ''}</div>
-                                <div class="player-corner-kick">  ${ ticketData.tipo == 'esportes' ? mappedResults  && mappedResults.fora_escanteios || '' : ticketItem.time_b_resultado_escanteios || ''}</div>
+                                <div class="player-1half-result"> ${templateData.player_b_1half_result}</div>
+                                <div class="player-2half-result"> ${templateData.player_b_2half_result}</div>
+                                <div class="player-corner-kick">  ${templateData.player_b_corner_kicks}</div>
                             </div>
                         </div>
                         <div id="final-resulst">Resultado Final: 
                             <span></span>
                         </div>
-                        <div class="${ticketItem.resultado || ''}">${ticketItem.resultado || ''}</div>
+                        <div class="${ticketItem.resultado || 0}">${ticketItem.resultado || 0}</div>
                     </div>`;
                     this.getElementById('ticket-itens').appendChild(div);
                 }
