@@ -2,6 +2,7 @@
 
 * {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    /* font-size: 12px; */
 }
 
 body {
@@ -19,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 #logo-frame {
@@ -35,6 +37,7 @@ body {
     background: var(--header);
     width: 100%;
     padding-top: 5px;
+    margin-bottom: 15px;
     padding-bottom: 5px;
     color: var(--foreground-header);
     font-weight: normal;
@@ -55,6 +58,7 @@ body {
     margin-top: 0;
     margin-bottom: 6px;
     font-weight: normal;
+    font-size: 30px;
 }
 
 #ticket-itens {
@@ -72,7 +76,7 @@ body {
     display: flex;
     justify-content: space-between;
     background: #ebeaea;
-    margin: 15px 0;
+    margin-bottom: 15px;
     width: 100%;
     padding: none;
     text-align: center;
@@ -99,7 +103,7 @@ body {
 }
 
 .ticket-item .players>.player {
-    font-size: 15px;
+    font-size: 15px !important;
     width: 40%;
 }
 
@@ -139,10 +143,6 @@ body {
     align-items: center;
 }
 
-#ticket-details>div {
-    width: 100%;
-}
-
 .player-name {
     font-size: 14px !important;
 }
@@ -153,4 +153,18 @@ body {
 
 .perdeu {
     color: #fa3425 !important
+}
+
+#has-result {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+#has-result>* {
+    font-size: 18px;
+}
+
+.player-name,
+#scores {
+    font-size: 15px !important;
 }

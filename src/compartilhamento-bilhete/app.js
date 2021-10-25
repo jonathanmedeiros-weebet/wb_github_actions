@@ -83,12 +83,12 @@ document.onreadystatechange = async function() {
                     };
 
                     if (ticketData.tipo === 'esportes' && mappedResults) {
-                        templateData.player_a_result = mappedResults.casa || mappedResults.casa === 0 || '';
+                        templateData.player_a_result = mappedResults.casa || mappedResults.casa === 0 ? 0 : '';
                         templateData.player_a_1half_result = mappedResults.casa_1t || mappedResults.casa_1t === 0 ? 0 : '';
                         templateData.player_a_2half_result = mappedResults.casa_2t || mappedResults.casa_2t === 0 ? 0 : '';
                         templateData.player_a_corner_kicks = mappedResults.casa_escanteios || mappedResults.casa_escanteios === 0 ? 0 : '';
 
-                        templateData.player_b_result = mappedResults.fora || mappedResults.fora === 0 || '';
+                        templateData.player_b_result = mappedResults.fora || mappedResults.fora === 0 ? 0 : '';
                         templateData.player_b_1half_result = mappedResults.fora_1t || mappedResults.fora_1t === 0 ? 0 : '';
                         templateData.player_b_2half_result = mappedResults.fora_2t || mappedResults.fora_2t === 0 ? 0 : '';
                         templateData.player_b_corner_kicks = mappedResults.fora_escanteios || mappedResults.fora_escanteios === 0 ? 0 : '';
@@ -120,7 +120,7 @@ document.onreadystatechange = async function() {
                                 <div class="player-corner-kick"> ${templateData.player_a_corner_kicks}</div>
                             </div>
                             <div class="separators">
-                                <div>
+                                <div id="scores">
                                     <strong>
                                         ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </strong>    
@@ -138,9 +138,7 @@ document.onreadystatechange = async function() {
                                 <div class="player-corner-kick">  ${templateData.player_b_corner_kicks}</div>
                             </div>
                         </div>
-                        <div id="final-resulst">Resultado Final: 
-                            <span></span>
-                        </div>
+                        <div id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
                         <div class="${ticketItem.resultado || 0}">${ticketItem.resultado || 0}</div>
                     </div>`;
                     this.getElementById('ticket-itens').appendChild(div);
