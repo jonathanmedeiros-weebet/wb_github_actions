@@ -14,8 +14,8 @@ import {config} from '../../shared/config';
 export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     clienteId;
     tokenRecuperacao;
-    tokenValido = false;
     LOGO = config.LOGO;
+    tokenValido = false;
 
     constructor(
         private route: ActivatedRoute,
