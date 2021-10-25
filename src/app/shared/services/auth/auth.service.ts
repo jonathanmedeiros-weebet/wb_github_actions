@@ -168,4 +168,15 @@ export class AuthService {
             }
         }
     }
+
+    validateRecoveryToken(id, token) {
+        const url = `${this.AuthUrl}/validateToken/`;
+
+        return this.http
+            .get(url + '?id=' + id + '&token=' + token, this.header.getRequestOptions(false))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

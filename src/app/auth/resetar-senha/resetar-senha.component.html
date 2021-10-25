@@ -5,15 +5,18 @@
         </a>
     </div>
 </div>
-<div class="resetar-senha d-flex justify-content-center align-items-center">
+<div class="resetar-senha">
     <div class="content">
-        <div class="row">
-            <div class="col col-md-12">
+        <div class="row pt-5 justify-content-center">
+            <div class="col-4">
                 <h2>Redefinição de Senha</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
+        <div class="row justify-content-center">
+            <div class="alert alert-danger col-10" role="alert" *ngIf="!validToken">
+                {{errorMessage}}
+            </div>
+            <div class="col-4" *ngIf="validToken;">
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col col-md-12">
