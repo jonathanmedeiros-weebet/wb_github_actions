@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
-import {FormValidations} from '../../../shared/utils';
-import {ClienteService} from '../../../shared/services/clientes/cliente.service';
-import {MessageService} from '../../../shared/services/utils/message.service';
-import {Pagina} from '../../../shared/models/pagina';
+import {FormValidations} from '../../shared/utils';
+import {ClienteService} from '../../shared/services/clientes/cliente.service';
+import {MessageService} from '../../shared/services/utils/message.service';
+import {Pagina} from '../../shared/models/pagina';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {AuthService} from '../../../shared/services/auth/auth.service';
+import {AuthService} from '../../shared/services/auth/auth.service';
 import {delay} from 'lodash';
 
 @Component({
@@ -48,7 +48,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
                     Validators.minLength(3),
                     Validators.pattern('[a-zA-Z]*'),
                     Validators.required
-                ], this.clientesService.validarLogin.bind(this.clientesService)],
+                ], this.clientesService.validarLoginUnico.bind(this.clientesService)],
             nascimento: [null, [Validators.required]],
             senha: [null, [Validators.required]],
             senha_confirmacao: [null, [Validators.required, FormValidations.equalsTo('senha')]],

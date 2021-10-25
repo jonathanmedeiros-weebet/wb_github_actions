@@ -106,7 +106,7 @@ export class ClienteService {
             );
     }
 
-    validarLogin(control: AbstractControl) {
+    validarLoginUnico(control: AbstractControl) {
         clearTimeout(this.debouncer);
 
         return new Promise(resolve => {

@@ -1,0 +1,29 @@
+<div id="default-content">
+    <div class="content-body">
+        <div class="content">
+            <div class="row">
+                <div class="col col-md-12">
+                    <h2>Recuperar Senha</h2>
+                </div>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col col-sm-4 required">
+                        <label class="label">Email</label>
+                        <input class="form-control" type="text" placeholder="exemplo@email.com" formControlName="email">
+                        <app-error-msg [control]="form.get('email')"></app-error-msg>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12 mt-4 required">
+                        <button type="submit" class="btn btn-custom">
+                            <i class="fa fa-undo"></i>
+                            Solicitar Recuperação
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

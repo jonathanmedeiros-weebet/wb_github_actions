@@ -6,6 +6,7 @@ import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.com
 
 import { AuthGuard, LoteriaGuard, DesafioGuard } from './services';
 import { CupomComponent } from './cupom/cupom.component';
+import {ResetarSenhaComponent} from './auth/resetar-senha/resetar-senha.component';
 
 const appRoutes: Routes = [
     {
@@ -79,6 +80,10 @@ const appRoutes: Routes = [
     {
         path: 'bilhete/:codigo',
         component: CupomComponent
+    },
+    {
+        path: 'resetar-senha/:id/:token',
+        component: ResetarSenhaComponent
     },
     {
         path: '**',

@@ -1,0 +1,19 @@
+body {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.resetar-senha-header {
+    padding: 10px;
+    background-color: #fff;
+    height: 15vh;
+}
+
+.resetar-senha {
+    background-color: #fff;
+    height: 85vh;
+}
+
+.logo-mobile{
+    max-width: calc(100% - 140px);
+}
