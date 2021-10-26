@@ -56,30 +56,33 @@
                         <p><b>Qtd. Movimentações no Período:</b> {{totalMovimentacoes}}</p>
                     </div>
                     <ng-container>
-                        <table class="table table-hover">
+                        <table class="table" style="text-align: left">
                             <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Tipo</th>
-                                <th>Valor</th>
-                                <th>Saldo Antes</th>
-                                <th>Saldo Depois</th>
+                                <th style="width: 80%">Natureza</th>
+                                <th style="width: 10%">Valor</th>
+                                <th style="width: 10%">Saldo</th>
                             </tr>
                             </thead>
                             <tbody>
                             <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
                                 <tr>
-                                    <td>{{movimentacao.data}}</td>
                                     <td>
-                                        <i style="color:green; margin-right: 5px;" class="fa fa-sort-up" *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
+                                        <i style="color:green; margin-right: 5px;" class="fa fa-sort-up"
+                                           *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
                                         <ng-template #iconeDebito>
                                             <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
                                         </ng-template>
-                                        {{movimentacao.tipo === "C" ? 'Crédito' : 'Débito'}}
+                                        {{movimentacao.natureza | formatarNatureza}}
                                     </td>
                                     <td>{{movimentacao.valor | currency}}</td>
-                                    <td>{{movimentacao.saldoAntes | currency}}</td>
-                                    <td>{{movimentacao.saldoDepois | currency}}</td>
+                                    <td>{{movimentacao.saldo | currency}}</td>
+                                </tr>
+                                <tr class="tr-2">
+                                    <td colspan="3">
+                                        Movimentação fincanceira realizada em
+                                        {{movimentacao.data}}
+                                    </td>
                                 </tr>
                             </ng-container>
                             </tbody>

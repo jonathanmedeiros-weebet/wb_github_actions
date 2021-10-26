@@ -1,7 +1,7 @@
 export class MovimentacaoFinanceira {
     data: string;
     tipo: string;
+    natureza: string;
     valor = 0;
-    saldoAntes: string;
-    saldoDepois: string;
+    saldo: string;
 }
