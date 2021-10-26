@@ -583,14 +583,6 @@ gulp.task('betsplay.club', function (done) {
     });
 });
 
-gulp.task('sportpremium.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportpremium.wee.bet",
-        banca: "SPORT PREMIUM",
-        styles: "--header:#000; --foreground-header: #fff;--sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;"
-    });
-});
-
 gulp.task('betsports.wee.bet', function (done) {
     tasks(done, {
         host: "betsports.wee.bet",
@@ -1521,6 +1513,14 @@ gulp.task('florianobets.wee.bet', function (done) {
     tasks(done, {
         host: "florianobets.wee.bet",
         banca: "FLORIANO BETS",
+        styles: "",
+    });
+});
+
+gulp.task('amgbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "amgbet.wee.bet",
+        banca: "AMG BET",
         styles: "",
     });
 });
