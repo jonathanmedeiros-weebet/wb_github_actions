@@ -38,13 +38,18 @@ function getFormatedDate(date) {
     var formatedDate = date.getDate().toString();
     var formatdMonth = date.getMonth() + 1;
     var formatedYear = date.getFullYear().toString();
+    var hour = date.getHours();
+    var minutes = date.getMinutes();
+
     var dateArray = [formatedDate, formatdMonth, formatedYear];
-    return dateArray.join('/');
+    var timeArray = [hour, minutes];
+    return `${dateArray.join('/')} ${timeArray.join(':')}`;
 }
 
 async function getResuts(ids) {
     paramIds = ids.join(',');
-    return await fetch(`https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
+    return await fetch(`
+    https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
         .then(response => { return response.json() })
         .catch(error => console.error(error));
 }

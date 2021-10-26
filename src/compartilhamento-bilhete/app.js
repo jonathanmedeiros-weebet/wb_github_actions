@@ -27,7 +27,7 @@ document.onreadystatechange = async function() {
 
                 if (ticketData.tipo === 'esportes') {
                     this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
-                    this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))
+                    this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)));
                 } else {
                     this.getElementById('cash-back').parentNode.hidden = true;
                     this.getElementById('quotation').parentNode.hidden = true;
@@ -45,7 +45,7 @@ document.onreadystatechange = async function() {
                     this.getElementById('has-result').hidden = false;
                     ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
                 }
-                if (ticketData.premio) {
+                if (ticketData.premio || ticketData.premio == 0) {
                     this.getElementById('award').append(ticketData.premio.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                 } else {
                     this.getElementById('award').parentNode.hidden = true;
@@ -55,6 +55,7 @@ document.onreadystatechange = async function() {
                     this.getElementById('chalanges').hidden = false;
                     this.getElementById('games').hidden = true;
                 }
+                console.log(ticketData.horario)
 
                 this.getElementById('ticket-id').append(ticketData.codigo);
                 this.getElementById('panter').append(ticketData.apostador.toUpperCase());
@@ -191,9 +192,6 @@ document.onreadystatechange = async function() {
                 </div>
                 `;
                     } else {
-
-                        console.log(ticketData)
-
                         div.innerHTML =
                             `<div class="ticket-item">
                         <div class="event-time">${new Date(ticketItem.desafio_datahora_encerramento).toLocaleString()}</div>
