@@ -1,3 +1,8 @@
 .btn-line{
     margin-top: 24px;
 }
+
+.nav-pills .nav-link.active {
+    background-color: var(--odds);
+}
+
