@@ -25,7 +25,7 @@ document.onreadystatechange = async function() {
                 const ticketItens = await orderTicketItens(ticketData.itens, ticketData.tipo);
                 ticketData.itens = ticketItens;
 
-                if (ticketData.tipo === 'esportes') {
+                if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                     this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                     this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)));
                 } else {
@@ -35,6 +35,8 @@ document.onreadystatechange = async function() {
                     if (ticketData.tipo === 'acumuladao') {
                         this.getElementById('number-hits').parentNode.hidden = false;
                         this.getElementById('number-hits').append(ticketData.quantidade_acertos || '')
+                        this.getElementById('grouped-bets').parentNode.hidden = false;
+                        this.getElementById('grouped-bets').append(ticketData.acumuladao.nome)
                     }
 
                 }
@@ -118,8 +120,8 @@ document.onreadystatechange = async function() {
                         templateData.player_b_2half_result = mappedResults.fora_2t;
                         templateData.player_b_corner_kicks = mappedResults.fora_escanteios;
                     } else if (ticketData.tipo === 'acumuladao') {
-                        templateData.player_a_result = ticketItem.jogo.time_a_resultado;
-                        templateData.player_b_result = ticketItem.jogo.time_b_resultado;
+                        templateData.player_a_result = ticketItem.jogo.time_a_resultado || '';
+                        templateData.player_b_result = ticketItem.jogo.time_b_resultado || '';
                     }
 
 
@@ -181,7 +183,7 @@ document.onreadystatechange = async function() {
                                     </strong>    
                                 </div>
                                 <div>Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
-                                <div>${ticketItem.resultado}</div>
+                                <div>${ticketItem.resultado || ''}</div>
                                 </div>
                             <div class="player player-b-data">
                                 <div class="player-name">
@@ -204,7 +206,7 @@ document.onreadystatechange = async function() {
                         <div>
                             Resposta: ${ticketItem.odd_nome} (${ticketItem.cotacao})
                         </div>
-                        <div class="${ticketItem.resultado}" >${ticketItem.resultado}</div>
+                        <div class="${ticketItem.resultado}" >${ticketItem.resultado || ''}</div>
                     </div>
             </div>`;
                     }
