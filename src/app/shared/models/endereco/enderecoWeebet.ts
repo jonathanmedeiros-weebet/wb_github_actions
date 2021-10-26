@@ -6,5 +6,4 @@ export class EnderecoWeebet extends Endereco {
     numero: number;
     cidade:  Cidade;
     estado: Estado;
-
 }

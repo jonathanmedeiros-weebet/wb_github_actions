@@ -54,20 +54,8 @@ export class ClienteService {
             );
     }
 
-    atualizarDadosContato(dadosContato) {
-        return this.http.post(`${this.clienteUrl}/atualizarDadosContato`, JSON.stringify(dadosContato),
-            this.headers.getRequestOptions(true))
-            .pipe(
-                map((response: any) => {
-                        return response.results.result;
-                    }
-                ),
-                catchError(this.errorService.handleError)
-            );
-    }
-
-    atualizarEndereco(dadosContato) {
-        return this.http.post(`${this.clienteUrl}/atualizarEndereco`, JSON.stringify(dadosContato),
+    atualizarDadosCadastrais(dadosCadastrais) {
+        return this.http.post(`${this.clienteUrl}/atualizarDadosCadastrais`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
