@@ -12,7 +12,7 @@ async function getParams() {
 }
 
 async function getTicketData({ apiUrl, ticketId }) {
-    return await fetch(`https://${apiUrl}/api/apostas-por-codigo/${ticketId}`).then(
+    return await fetch(`http://${apiUrl}/api/apostas-por-codigo/${ticketId}`).then(
         response => {
             return response.json();
         }).catch(error => console.error(error));
