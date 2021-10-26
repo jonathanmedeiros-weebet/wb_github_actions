@@ -18,9 +18,18 @@ async function getTicketData({ apiUrl, ticketId }) {
         }).catch(error => console.error(error));
 }
 
-async function orderTicketItens(tickeItens = []) {
+async function orderTicketItens(tickeItens = [], ticketType = undefined) {
     const orderedItens = tickeItens.sort((a, b) => {
-        new Date(a.jogo_horario).getTime() - new Date(b.jogo_horario).getTime()
+        switch (ticketType) {
+            case 'acumuldao':
+                new Date(a.jogo.horario).getTime() - new Date(b.jogo.horario).getTime()
+                break;
+            case 'desafio':
+                new Date(a.desafio_datahora_encerramento).getTime() - new Date(b.desafio_datahora_encerramento).getTime()
+                break;
+            default:
+                new Date(a.jogo_horario).getTime() - new Date(b.jogo_horario).getTime()
+        }
     });
     return orderedItens;
 }

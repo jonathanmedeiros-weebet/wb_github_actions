@@ -22,7 +22,7 @@ document.onreadystatechange = async function() {
             } else {
 
                 ticketData = ticketData.results
-                const ticketItens = await orderTicketItens(ticketData.itens);
+                const ticketItens = await orderTicketItens(ticketData.itens, ticketData.tipo);
                 ticketData.itens = ticketItens;
 
                 if (ticketData.tipo === 'esportes') {
