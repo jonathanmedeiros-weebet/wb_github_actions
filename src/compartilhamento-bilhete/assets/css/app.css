@@ -1,8 +1,5 @@
-/* @import url('https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css'); */
-
 * {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    /* font-size: 12px; */
 }
 
 body {
@@ -20,7 +17,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 5px;
+    font-size: 12px !important;
+}
+
+.container>div {
+    margin-bottom: 4px !important;
 }
 
 #logo-frame {
@@ -37,7 +38,7 @@ body {
     background: var(--header);
     width: 100%;
     padding-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 15px !important;
     padding-bottom: 5px;
     color: var(--foreground-header);
     font-weight: normal;

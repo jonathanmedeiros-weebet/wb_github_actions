@@ -26,8 +26,8 @@ document.onreadystatechange = async function() {
                 ticketData.itens = ticketItens;
 
                 if (ticketData.tipo === 'esportes') {
-                    this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toFixed(2));
-                    this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toFixed(2))
+                    this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
+                    this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))
                 } else {
                     this.getElementById('cash-back').parentNode.hidden = true;
                     this.getElementById('quotation').parentNode.hidden = true;
@@ -38,7 +38,7 @@ document.onreadystatechange = async function() {
                     }
 
                 }
-                if (!ticketData.resultado && ticketData.resultado == 'a confirmar') {
+                if (!ticketData.resultado || ticketData.resultado == 'a confirmar') {
                     this.getElementById('has-result').style.display = 'none';
                 } else {
                     this.getElementById('result').append(ticketData.resultado);
@@ -46,7 +46,7 @@ document.onreadystatechange = async function() {
                     ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
                 }
                 if (ticketData.premio) {
-                    this.getElementById('award').append(ticketData.premio);
+                    this.getElementById('award').append(ticketData.premio.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                 } else {
                     this.getElementById('award').parentNode.hidden = true;
                 }
@@ -60,8 +60,9 @@ document.onreadystatechange = async function() {
                 this.getElementById('panter').append(ticketData.apostador.toUpperCase());
                 this.getElementById('money-changer').append(ticketData.passador.nome.toUpperCase());
                 this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario)));
-                this.getElementsByClassName('itens-number')[0 || 1].append(ticketData.itens_ativos || ticketData.itens.length);
-                this.getElementById('bet-amount').append(ticketData.valor);
+                this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
+                this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
+                this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                 this.getElementById('status').append(ticketData.ativo ? 'ATIVO' : 'CANCELADO')
 
                 const mapEsportes = new Map()
@@ -94,28 +95,28 @@ document.onreadystatechange = async function() {
                     var mappedResults = mapEsportes.get(ticketItem.jogo_api_id);
 
                     const templateData = {
-                        player_a_result: null,
-                        player_b_result: null,
-                        player_a_1half_result: null,
-                        player_b_1half_result: null,
-                        player_a_2half_result: null,
-                        player_b_2half_result: null,
-                        player_a_corner_kicks: null,
-                        player_b_corner_kicks: null,
+                        player_a_result: '',
+                        player_b_result: '',
+                        player_a_1half_result: '',
+                        player_b_1half_result: '',
+                        player_a_2half_result: '',
+                        player_b_2half_result: '',
+                        player_a_corner_kicks: '',
+                        player_b_corner_kicks: '',
                     };
+                    console.log(mappedResults);
 
                     if (ticketData.tipo === 'esportes' && mappedResults) {
-                        templateData.player_a_result = mappedResults.casa || mappedResults.casa === 0 ? 0 : '';
-                        templateData.player_a_1half_result = mappedResults.casa_1t || mappedResults.casa_1t === 0 ? 0 : '';
-                        templateData.player_a_2half_result = mappedResults.casa_2t || mappedResults.casa_2t === 0 ? 0 : '';
-                        templateData.player_a_corner_kicks = mappedResults.casa_escanteios || mappedResults.casa_escanteios === 0 ? 0 : '';
+                        templateData.player_a_result = mappedResults.casa;
+                        templateData.player_a_1half_result = mappedResults.casa_1t;
+                        templateData.player_a_2half_result = mappedResults.casa_2t;
+                        templateData.player_a_corner_kicks = mappedResults.casa_escanteios;
 
-                        templateData.player_b_result = mappedResults.fora || mappedResults.fora === 0 ? 0 : '';
-                        templateData.player_b_1half_result = mappedResults.fora_1t || mappedResults.fora_1t === 0 ? 0 : '';
-                        templateData.player_b_2half_result = mappedResults.fora_2t || mappedResults.fora_2t === 0 ? 0 : '';
-                        templateData.player_b_corner_kicks = mappedResults.fora_escanteios || mappedResults.fora_escanteios === 0 ? 0 : '';
+                        templateData.player_b_result = mappedResults.fora;
+                        templateData.player_b_1half_result = mappedResults.fora_1t;
+                        templateData.player_b_2half_result = mappedResults.fora_2t;
+                        templateData.player_b_corner_kicks = mappedResults.fora_escanteios;
                     } else if (ticketData.tipo === 'acumuladao') {
-
                         templateData.player_a_result = ticketItem.jogo.time_a_resultado;
                         templateData.player_b_result = ticketItem.jogo.time_b_resultado;
                     }
@@ -135,7 +136,7 @@ document.onreadystatechange = async function() {
                                     <strong>${ticketItem.time_a_nome? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()  }</strong>
                                 </div>
                                 <div class="player-1half-result">${templateData.player_a_1half_result}</div>
-                                <div class="player-2half-result">${templateData.player_a_2half_result }</div>
+                                <div class="player-2half-result">${templateData.player_a_2half_result}</div>
                                 <div class="player-corner-kick"> ${templateData.player_a_corner_kicks}</div>
                             </div>
                             <div class="separators">
@@ -158,7 +159,7 @@ document.onreadystatechange = async function() {
                             </div>
                         </div>
                         <div id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
-                        <div class="${ticketItem.resultado || 0}">${ticketItem.resultado || 0}</div>
+                        <div class="${ticketItem.resultado || ''}">${ticketItem.resultado ||''}</div>
                     </div>`;
 
 
@@ -215,5 +216,7 @@ document.onreadystatechange = async function() {
         } else {
             console.error('page params are unavaliable');
         }
+
+        console.log(this.getElementById('result'))
     }
 }
