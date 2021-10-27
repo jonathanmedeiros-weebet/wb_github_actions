@@ -15,7 +15,13 @@ async function getTicketData({ apiUrl, ticketId }) {
     return await fetch(`https://${apiUrl}/api/apostas-por-codigo/${ticketId}`).then(
         response => {
             return response.json();
-        }).catch(error => console.error(error));
+        }).catch(error => {
+        if (error.status == 404) {
+            this.displayError(error.message);
+        }
+        this.displayError(error);
+        console.error(error);
+    });
 }
 
 async function orderTicketItens(tickeItens = [], ticketType = undefined) {
@@ -52,4 +58,10 @@ async function getResuts(ids) {
     https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
         .then(response => { return response.json() })
         .catch(error => console.error(error));
+}
+
+function displayError(message) {
+    document.getElementById('error').hidden = false;
+    document.getElementById('ticket').style.display = 'none';
+    document.getElementById('error-message').append(message);
 }

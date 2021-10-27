@@ -18,6 +18,7 @@ document.onreadystatechange = async function() {
                 ticketId: params.ticketId
             });
             if (!ticketData.success) {
+                displayError(ticketData.errors.message);
                 console.error(ticketData.errors)
             } else {
 
@@ -214,9 +215,9 @@ document.onreadystatechange = async function() {
                 }
             }
         } else {
+
+            displayError('Page params are unavaliable');
             console.error('page params are unavaliable');
         }
-
-        console.log(this.getElementById('result'))
     }
 }
