@@ -76,21 +76,24 @@ document.onreadystatechange = async function() {
                     for (const item of ticketData.itens) {
                         ids.push(item.jogo_api_id);
                     }
-                    var isExpired = false;;
+                    var isExpired = false;
                     var results = await getResuts(ids);
                     results = results.result;
+                    console.log(results)
 
-                    if (mapEsportes.resultado && (ticketData.resultado.length == 0)) {
+                    if (ticketData.resultado && (results.length == 0)) {
+                        console.log('teste')
                         isExpired = true;
                     }
                     if (!isExpired) {
                         mapEsportes.clear();
 
-
                         results.forEach(result => {
                             mapEsportes.set(result.event_id, result.resultado);
                         });
 
+                    } else {
+                        displayError('Bilhete Expirado!')
                     }
 
                 }
