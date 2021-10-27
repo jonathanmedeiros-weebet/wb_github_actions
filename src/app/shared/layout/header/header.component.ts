@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
 import {ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService} from './../../../services';
@@ -52,7 +52,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     LOGO = config.LOGO;
     unsub$ = new Subject();
     appVersion;
-    isCambista;
+    isCambista$;
     modoClienteAtivo;
 
     constructor(
@@ -95,7 +95,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
 
         if (this.isLoggedIn) {
-            this.isCambista = this.auth.isCambista();
+            this.isCambista$ = this.auth.isCambista;
         }
 
         this.getUsuario();
@@ -123,7 +123,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             .subscribe(
                 () => {
                     this.getUsuario();
-                    location.reload();
+                    if (this.usuario.tipo_usuario === 'cambista') {
+                        location.reload();
+                    }
                 },
                 error => this.handleError(error)
             );

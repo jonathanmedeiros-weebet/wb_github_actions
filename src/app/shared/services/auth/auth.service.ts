@@ -18,8 +18,7 @@ export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
     logadoSource;
     logado;
-    rotaPerfil;
-    routeSource;
+    private cambista = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
@@ -30,21 +29,21 @@ export class AuthService {
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
-        this.routeSource = new BehaviorSubject<string>(this.getRotaUsuarioLogado());
-        this.rotaPerfil = this.routeSource.asObservable();
     }
 
     login(data: any): Observable<any> {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    console.log(res);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
                     if (res.user.tipo_usuario === 'cambista') {
                         localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
+                        this.cambista.next(true);
+                    } else {
+                        this.cambista.next(false);
                     }
                     this.logadoSource.next(true);
                     this.router.navigate(['esportes/futebol/jogos']);
@@ -150,23 +149,8 @@ export class AuthService {
         localStorage.removeItem('tipos_aposta');
     }
 
-    isCambista(): boolean {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            return user.tipo_usuario === 'cambista';
-        }
-        return false;
-    }
-
-    getRotaUsuarioLogado() {
-        if (this.isLoggedIn()) {
-            const user = this.getUser();
-            if (user.tipo_usuario === 'clientes') {
-                return 'clientes';
-            } else {
-                return 'meu-perfil';
-            }
-        }
+    get isCambista() {
+        return this.cambista.asObservable();
     }
 
     validateRecoveryToken(id, token) {

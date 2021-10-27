@@ -31,7 +31,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     cartaoApostaForm: FormGroup;
     opcoes;
     dados;
-    isCambista;
+    isCambista$;
     isLoggedIn;
 
     constructor(
