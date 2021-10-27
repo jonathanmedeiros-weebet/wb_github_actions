@@ -31,7 +31,8 @@
                         <i class="fa fa-key"></i> Alterar senha
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active" *ngIf="!isCambista">
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="!isCambista">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -46,7 +47,7 @@
             </div>
         </ng-container>
         <ng-template #loggedOut>
-            <div class="menu-conta dropdown">
+            <div class="dropdown menu-conta">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Entrar
@@ -65,17 +66,11 @@
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/recuperar-senha']"
-                           data-toggle="dropdown">
-                            <small>
-                                Esqueci minha senha?
-                            </small>
+                        <a class="dropdown-item" [routerLink]="['auth/recuperar-senha']">
+                            Esqueci minha senha?
                         </a>
-                        <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/cadastro']"
-                           data-toggle="dropdown">
-                            <small>
-                                Novo aqui? Cadastre-se
-                            </small>
+                        <a class="dropdown-item" [routerLink]="['auth/cadastro']">
+                            Novo aqui? Cadastre-se
                         </a>
                         <button style="margin-top: 10px" type="submit" class="btn btn-primary">Entrar</button>
                     </form>
@@ -156,7 +151,8 @@
                         <i class="fa fa-key"></i> Alterar senha
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active" *ngIf="!isCambista">
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="!isCambista">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -191,17 +187,13 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/recuperar-senha']"
+                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']"
                        data-toggle="dropdown">
-                        <small>
-                            Esqueci minha senha?
-                        </small>
+                        Esqueci minha senha?
                     </a>
-                    <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/cadastro']"
+                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
                        data-toggle="dropdown">
-                        <small>
-                            Novo aqui? Cadastre-se
-                        </small>
+                        Novo aqui? Cadastre-se
                     </a>
                 </ul>
             </div>

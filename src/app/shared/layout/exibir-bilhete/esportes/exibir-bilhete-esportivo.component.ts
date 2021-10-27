@@ -36,8 +36,19 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
-        this.isCambista = this.auth.isCambista();
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                }
+            );
 
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {

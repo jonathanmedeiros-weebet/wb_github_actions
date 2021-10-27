@@ -31,7 +31,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     cartaoApostaForm: FormGroup;
     opcoes;
     dados;
-    isCambista$;
+    isCambista;
     isLoggedIn;
 
     constructor(
@@ -49,8 +49,19 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
     ngOnInit() {
         this.opcoes = this.paramsService.getOpcoes();
-        this.isCambista = this.auth.isCambista();
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                }
+            );
 
         this.route.params.subscribe(
             params => {

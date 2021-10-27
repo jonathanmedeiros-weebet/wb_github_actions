@@ -36,8 +36,19 @@ export class BilheteAcumuladaoComponent implements OnInit {
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
-        this.isCambista = this.auth.isCambista();
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                }
+            );
         this.opcoes = this.paramsService.getOpcoes();
 
         if (this.aposta.passador.percentualPremio > 0) {

@@ -52,7 +52,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     LOGO = config.LOGO;
     unsub$ = new Subject();
     appVersion;
-    isCambista$;
+    isCambista;
     modoClienteAtivo;
 
     constructor(
@@ -77,6 +77,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
 
+        this.auth.cambista
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isCambista => this.isCambista = isCambista
+            );
+
         this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
         this.combateHabilitado = this.paramsService.getOpcoes().combate;
         this.esportsHabilitado = this.paramsService.getOpcoes().esports;
@@ -92,10 +98,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(isOpen => this.isOpen = isOpen);
-        }
-
-        if (this.isLoggedIn) {
-            this.isCambista$ = this.auth.isCambista;
         }
 
         this.getUsuario();

@@ -18,7 +18,8 @@ export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
     logadoSource;
     logado;
-    private cambista = new BehaviorSubject<boolean>(false);
+    cambistaSource;
+    cambista;
 
     constructor(
         private http: HttpClient,
@@ -29,6 +30,8 @@ export class AuthService {
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
+        this.cambistaSource = new BehaviorSubject<boolean>(this.isCambista());
+        this.cambista = this.cambistaSource.asObservable();
     }
 
     login(data: any): Observable<any> {
@@ -41,9 +44,9 @@ export class AuthService {
                     localStorage.setItem('user', JSON.stringify(res.user));
                     if (res.user.tipo_usuario === 'cambista') {
                         localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
-                        this.cambista.next(true);
+                        this.setIsCambista(true);
                     } else {
-                        this.cambista.next(false);
+                        this.setIsCambista(false);
                     }
                     this.logadoSource.next(true);
                     this.router.navigate(['esportes/futebol/jogos']);
@@ -149,8 +152,16 @@ export class AuthService {
         localStorage.removeItem('tipos_aposta');
     }
 
-    get isCambista() {
-        return this.cambista.asObservable();
+    isCambista(): boolean {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            return user.tipo_usuario === 'cambista';
+        }
+        return false;
+    }
+
+    setIsCambista(value: boolean) {
+        this.cambistaSource.next(value);
     }
 
     validateRecoveryToken(id, token) {

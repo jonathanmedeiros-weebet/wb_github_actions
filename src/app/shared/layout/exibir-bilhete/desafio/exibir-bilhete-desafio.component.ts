@@ -37,8 +37,19 @@ export class ExibirBilheteDesafioComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
-        this.isCambista = this.auth.isCambista();
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                }
+            );
 
         if (this.aposta.passador.percentualPremio > 0) {
             this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);

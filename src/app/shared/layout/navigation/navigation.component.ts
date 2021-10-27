@@ -97,6 +97,24 @@ export class NavigationComponent implements OnInit {
                 });
         }
 
+        this.auth.logado
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                    this.cd.detectChanges();
+                }
+            );
+
+        this.auth.cambista
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                    this.cd.detectChanges();
+                }
+            );
+
         this.isAppMobile = this.auth.isAppMobile();
         this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
@@ -104,8 +122,6 @@ export class NavigationComponent implements OnInit {
         this.loteriasHabilitada = this.paramsService.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
-        this.isLoggedIn = this.auth.isLoggedIn();
-        this.isCambista = this.auth.isCambista();
         this.preencherDias();
 
         this.sidebarService.itens

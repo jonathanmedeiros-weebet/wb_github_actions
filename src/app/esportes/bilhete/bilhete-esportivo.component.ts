@@ -56,14 +56,28 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        this.createForm();
         this.definirAltura();
-        this.isLoggedIn = this.auth.isLoggedIn();
-        this.isCambista = this.auth.isCambista();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                    if (!isCambista) {
+                        this.form.patchValue({apostador: 'cliente'});
+                    }
+                }
+            );
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
         this.apostaMaximo = this.opcoes.valor_max_aposta;
         this.setDelay();
-        this.createForm();
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
