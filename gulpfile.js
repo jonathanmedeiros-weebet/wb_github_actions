@@ -1485,6 +1485,14 @@ gulp.task('zaplances.bet', function (done) {
     });
 });
 
+gulp.task('sportvegas.com.br', function (done) {
+    tasks(done, {
+        host: "sportvegas.com.br",
+        banca: "SPORT VEGAS",
+        styles: "",
+    });
+});
+
 gulp.task('mais1bet.com', function (done) {
     tasks(done, {
         host: "mais1bet.com",
