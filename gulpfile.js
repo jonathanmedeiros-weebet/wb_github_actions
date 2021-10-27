@@ -169,9 +169,7 @@ gulp.task('superbets.bet', function (done) {
     tasks(done, {
         host: "superbets.bet",
         banca: "SUPERBETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000;",
-        aditional_styles: ".sem-evento{color: #fff;}  .jogos, .eventos{ background: #363636!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #363636!important; } .footer{ background-color:#363636!important; }" +
-            " .inside-event .tipo-apostas{ background-color: #363636!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000;"
     });
 });
 
