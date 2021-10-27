@@ -59,7 +59,6 @@ document.onreadystatechange = async function() {
                     this.getElementById('chalanges').hidden = false;
                     this.getElementById('games').hidden = true;
                 }
-                console.log(ticketData.horario)
 
                 this.getElementById('ticket-id').append(ticketData.codigo);
                 this.getElementById('panter').append(ticketData.apostador.toUpperCase());
@@ -116,14 +115,14 @@ document.onreadystatechange = async function() {
 
                     if (ticketData.tipo === 'esportes' && mappedResults) {
                         templateData.player_a_result = mappedResults.casa;
-                        templateData.player_a_1half_result = (mappedResults.casa_1t <= 0) ? mappedResults.fora_escanteios : ''
-                        templateData.player_a_2half_result = (mappedResults.casa_2t <= 0) ? mappedResults.fora_escanteios : ''
-                        templateData.player_a_corner_kicks = (mappedResults.casa_escanteios <= 0) ? mappedResults.fora_escanteios : '';
+                        templateData.player_a_1half_result = (mappedResults.casa_1t >= 0) ? mappedResults.casa_1t : '';
+                        templateData.player_a_2half_result = (mappedResults.casa_2t >= 0) ? mappedResults.casa_2t : '';
+                        templateData.player_a_corner_kicks = (mappedResults.casa_escanteios >= 0) ? mappedResults.casa_escanteios : '';
 
                         templateData.player_b_result = mappedResults.fora;
-                        templateData.player_b_1half_result = mappedResults.fora_1t;
-                        templateData.player_b_2half_result = mappedResults.fora_2t;
-                        templateData.player_b_corner_kicks = (mappedResults.fora_escanteios && (mappedResults.fora_escanteios <= 0)) ? mappedResults.fora_escanteios : '';
+                        templateData.player_b_1half_result = (mappedResults.fora_1t >= 0) ? mappedResults.fora_1t : '';
+                        templateData.player_b_2half_result = (mappedResults.fora_2t >= 0) ? mappedResults.fora_2t : '';
+                        templateData.player_b_corner_kicks = (mappedResults.fora_escanteios >= 0) ? mappedResults.fora_escanteios : '';
                     } else if (ticketData.tipo === 'acumuladao') {
                         const result_a = ticketItem.jogo.time_a_resultado;
                         const result_b = ticketItem.jogo.time_b_resultado;
@@ -140,36 +139,56 @@ document.onreadystatechange = async function() {
                                 <strong>${ticketItem.campeonato_nome}</strong>
                             </div>
                             <div class="event-time">${new Date(ticketItem.jogo_horario).toLocaleString()}</div>
-                            <div class="players">
-                                <div class="player player-a-data" id="player-a-data">
-                                <div class="player-name">
-                                    <strong>${ticketItem.time_a_nome? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()  }</strong>
+                            <div id="match">
+                                <div id="match-result">
+                                    ${ticketItem.time_a_nome? ticketItem.time_a_nome.toUpperCase() 
+                                    : ticketItem.odd_nome.toUpperCase()}
+        
                                 </div>
-                                <div class="player-1half-result">${templateData.player_a_1half_result}</div>
-                                <div class="player-2half-result">${templateData.player_a_2half_result}</div>
-                                <div class="player-corner-kick"> ${templateData.player_a_corner_kicks}</div>
-                            </div>
-                            <div class="separators">
-                                <div id="scores">
-                                    <strong>
-                                        ${templateData.player_a_result} - ${templateData.player_b_result}
-                                    </strong>    
+                                <div>
+                                    ${templateData.player_a_result} - ${templateData.player_b_result}                  
                                 </div>
-                                <div>Gols 1º Tempo</div>
-                                <div>Gols 2º Tempo</div>
-                                <div>Escanteios</div>
-                            </div>
-                            <div class="player player-b-data">
-                                <div class="player-name">
-                                    <strong>${ticketItem.time_b_nome? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}</strong>
+                                <div>
+                                    ${ticketItem.time_b_nome? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
                                 </div>
-                                <div class="player-1half-result"> ${templateData.player_b_1half_result}</div>
-                                <div class="player-2half-result"> ${templateData.player_b_2half_result}</div>
-                                <div class="player-corner-kick">  ${templateData.player_b_corner_kicks}</div>
                             </div>
+                            <div id="first-half">
+                                <div>
+                                    ${templateData.player_a_1half_result}
+                                </div>
+                                <div>
+                                    Gols 1º Tempo  
+                                </div>
+                                <div>
+                                    ${templateData.player_b_1half_result}
+                                </div>
+                            </div>
+                            <div id="second-half">
+                                <div>
+                                    ${templateData.player_a_2half_result}
+                                </div>
+                                <div>
+                                    Gols 2º Tempo  
+                                </div>
+                                <div>
+                                    ${templateData.player_b_2half_result}
+                                </div>
+                            </div>
+
+                            <div id="corner-kicks">
+                                <div>
+                                    ${templateData.player_a_corner_kicks}
+                                </div>
+                                <div>
+                                    Escanteios 
+                                </div>
+                                <div>
+                                    ${templateData.player_b_corner_kicks}
+                                </div>
+                            </div>
+                            <div id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
+                            <div class="${ticketItem.resultado || ''}">${ticketItem.resultado ||''}</div>
                         </div>
-                        <div id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
-                        <div class="${ticketItem.resultado || ''}">${ticketItem.resultado ||''}</div>
                     </div>`;
                     } else if (ticketData.tipo === 'acumuladao') {
                         div.innerHTML =
@@ -190,7 +209,7 @@ document.onreadystatechange = async function() {
                                         ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </strong>    
                                 </div>
-                                <div>Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
+                                <div id="palpite">Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
                                 <div >${ticketItem.resultado || ''}</div>
                                 </div>
                             <div class="player player-b-data">
@@ -208,7 +227,7 @@ document.onreadystatechange = async function() {
                         <div>
                             ${ticketItem.desafio_categoria_nome}
                          </div>
-                         <div>
+                         <div >
                             <strong>${ticketItem.desafio_nome}</strong>
                         </div>
                         <div>
