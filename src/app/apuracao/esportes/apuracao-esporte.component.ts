@@ -5,8 +5,8 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from '../../shared/layout/modals';
-import {ApostaEsportivaService, ApostaService, MessageService, AuthService, ParametrosLocaisService} from './../../services';
+import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
+import { ApostaEsportivaService, ApostaService, MessageService, AuthService, ParametrosLocaisService } from './../../services';
 import { ApostaEsportiva } from './../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -139,10 +139,10 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
                         (result) => {
                             switch (result) {
                                 case 'cancel':
-                                    this.cancelar(aposta);
+                                    this.cancelar(apostaLocalizada);
                                     break;
                                 case 'pagamento':
-                                    this.pagarAposta(aposta);
+                                    this.pagarAposta(apostaLocalizada);
                                     break;
                                 default:
                                     break;
@@ -162,10 +162,10 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Cancelar Aposta';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
+        console.log(aposta);
         this.modalRef.result.then(
             (result) => {
-                this.apostaService.cancelar(aposta.id)
+                this.apostaService.cancelar({ id: aposta.id, version: aposta.version })
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         () => this.getApostas(),

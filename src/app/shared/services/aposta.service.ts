@@ -54,10 +54,10 @@ export class ApostaService {
             );
     }
 
-    cancelar(id): Observable<any> {
-        const url = `${this.ApostaUrl}/${id}`;
+    cancelar(dados): Observable<any> {
+        const url = `${this.ApostaUrl}/${dados.id}/cancelar`;
 
-        return this.http.delete(url, this.header.getRequestOptions(true))
+        return this.http.post(url, { version: dados.version }, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 catchError(this.errorService.handleError)
@@ -85,10 +85,10 @@ export class ApostaService {
             );
     }
 
-    encerrarItem(itens): Observable<any> {
+    encerrarItem(dados): Observable<any> {
         const url = `${this.ApostaUrl}/encerrar-item`;
 
-        return this.http.post(url, JSON.stringify(itens), this.header.getRequestOptions(true))
+        return this.http.post(url, dados, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),
