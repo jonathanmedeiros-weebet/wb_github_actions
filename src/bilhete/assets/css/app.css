@@ -10,7 +10,6 @@ body {
 }
 
 .container {
-    padding: 10%;
     padding-top: 15px;
     width: 600px;
     min-height: 100vh;
@@ -148,11 +147,13 @@ body {
     font-size: 14px !important;
 }
 
-.ganhou {
+.ganhou,
+.acertou {
     color: #008000 !important;
 }
 
-.perdeu {
+.perdeu,
+.errou {
     color: #fa3425 !important
 }
 
@@ -179,4 +180,8 @@ body {
     border-color: #ffeeba;
     top: 10px;
     border-radius: 20px;
+}
+
+[hidden] {
+    display: none;
 }
