@@ -38,15 +38,6 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
-        if (moment().day() === 0) {
-            const startWeek = moment().startOf('week');
-            this.dataInicial = startWeek.subtract(6, 'days');
-            this.dataFinal = moment();
-
-        } else {
-            this.dataInicial = moment().startOf('week').add('1', 'day');
-            this.dataFinal = moment();
-        }
 
         if (window.innerWidth < 669) {
             this.smallScreen = true;
@@ -65,10 +56,10 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
             .pipe()
             .subscribe(
                 response => {
-                    console.log(response);
                     this.movimentacoesFinanceiras = response.results.movimentacoes;
                     this.totalMovimentacoes = response.pagination.total;
-                    this.saldo = response.results.saldo;
+                    this.dataInicial = response.results.data_inicial;
+                    this.dataFinal = response.results.data_final;
                     this.showLoading = false;
                 },
                 error => {
@@ -87,8 +78,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
 
     createForm() {
         this.form = this.fb.group({
-            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
+            periodo: ['semana_atual'],
             tipo: [''],
         });
 
@@ -102,8 +92,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     submit() {
         this.queryParams = this.form.value;
         const queryParams: any = {
-            'dataInicial': this.queryParams.dataInicial,
-            'dataFinal': this.queryParams.dataFinal,
+            'periodo': this.queryParams.periodo,
             'tipo': this.queryParams.tipo,
             'page': this.page
         };
