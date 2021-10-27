@@ -120,8 +120,8 @@ document.onreadystatechange = async function() {
                         templateData.player_b_2half_result = mappedResults.fora_2t;
                         templateData.player_b_corner_kicks = mappedResults.fora_escanteios;
                     } else if (ticketData.tipo === 'acumuladao') {
-                        templateData.player_a_result = ticketItem.jogo.time_a_resultado || '';
-                        templateData.player_b_result = ticketItem.jogo.time_b_resultado || '';
+                        templateData.player_a_result = ticketItem.jogo.time_a_resultado && ticketItem.jogo.time_a_resultado != null ? ticketItem.jogo.time_a_resultado : '';
+                        templateData.player_b_result = ticketItem.jogo.time_b_resultado && ticketItem.jogo.time_b_resultado != null ? ticketItem.jogo.time_b_resultado : '';
                     }
 
 
