@@ -162,7 +162,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Cancelar Aposta';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-        console.log(aposta);
+
         this.modalRef.result.then(
             (result) => {
                 this.apostaService.cancelar({ id: aposta.id, version: aposta.version })
