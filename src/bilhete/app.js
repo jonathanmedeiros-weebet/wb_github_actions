@@ -42,7 +42,7 @@ document.onreadystatechange = async function() {
                     }
                 }
 
-                if (!ticketData.resultado || ticketData.resultado == 'a confirmar') {
+                if (!ticketData.resultado) {
                     this.getElementById('has-result').style.display = 'none';
                 } else {
                     this.getElementById('result').append(ticketData.resultado);
@@ -193,10 +193,7 @@ document.onreadystatechange = async function() {
                     } else if (ticketData.tipo === 'acumuladao') {
                         div.innerHTML =
                             `<div class="ticket-item">
-                            <div class="event-time">${new Date(ticketItem.jogo.horario).toLocaleString()}</div>
-                            <div>
-                                <p>teste</p>
-                            </div>
+                            <div class="event-time">${new Date(ticketItem.jogo.horario).toLocaleString()}</div> 
                             <div class="players">
                                 <div class="player player-a-data" id="player-a-data">
                                 <div class="player-name">
@@ -210,7 +207,7 @@ document.onreadystatechange = async function() {
                                     </strong>    
                                 </div>
                                 <div id="palpite">Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
-                                <div >${ticketItem.resultado || ''}</div>
+                                <div class="${ticketItem.resultado}">${ticketItem.resultado || ''}</div>
                                 </div>
                             <div class="player player-b-data">
                                 <div class="player-name">

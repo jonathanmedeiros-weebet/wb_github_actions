@@ -96,12 +96,55 @@ body {
     margin: 5px;
 }
 
+.ticket-item>.players {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-item .players>.player {
+    font-size: 15px !important;
+    width: 40%;
+}
+
+.ticket-item .players>.separators {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.ticket-item .players .separators>div {
+    margin: 3px 0;
+}
+
+.ticket-item .players>.player-a-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-item .players>.player-b-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-item .players .player>div {
+    font-size: 12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
 #ticket-details {
     display: flex;
     flex-direction: column;
     font-size: 12px;
     text-align: center;
     align-items: center;
+}
+
+.player-name {
+    font-size: 14px !important;
 }
 
 .ganhou,
@@ -121,6 +164,11 @@ body {
 
 #has-result>* {
     font-size: 18px;
+}
+
+.player-name,
+#scores {
+    font-size: 15px !important;
 }
 
 #error {
