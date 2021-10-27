@@ -51,7 +51,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     quininhaAtiva;
     LOGO = config.LOGO;
     unsub$ = new Subject();
-    rotaPerfil: string;
     appVersion;
     isCambista;
     modoClienteAtivo;
@@ -77,10 +76,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             .subscribe(
                 isLoggedIn => this.isLoggedIn = isLoggedIn
             );
-
-        this.auth.rotaPerfil.pipe(takeUntil(this.unsub$)).subscribe(
-            rotaPerfil => this.rotaPerfil = rotaPerfil
-        );
 
         this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
         this.combateHabilitado = this.paramsService.getOpcoes().combate;

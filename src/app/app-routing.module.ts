@@ -56,8 +56,8 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'meu-perfil',
-                loadChildren: () => import('app/meu-perfil/meu-perfil.module').then(m => m.MeuPerfilModule),
+                path: 'alterar-senha',
+                loadChildren: () => import('app/meu-perfil/alterar-senha.module').then(m => m.AlterarSenhaModule),
                 canActivate: [AuthGuard]
             },
             {

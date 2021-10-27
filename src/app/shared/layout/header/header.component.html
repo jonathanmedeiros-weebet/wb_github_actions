@@ -13,13 +13,13 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a class="nav-link dropdown-toggle" (click)="getPosicaoFinanceira()" href="#" id="navbarDropdown"
-                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" (click)="getPosicaoFinanceira()" href="#"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                    <button class="dropdown-item text-center" disabled type="button">
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCambista">
                         Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
@@ -27,7 +27,11 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="rotaPerfil" routerLinkActive="router-link-active">
+                    <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
+                        <i class="fa fa-key"></i> Alterar senha
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active" *ngIf="!isCambista">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -43,27 +47,36 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link" routerLink="auth/cadastro" *ngIf="modoClienteAtivo">
-                    Registrar-se
-                </a>
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="username"
-                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                                   [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
                         <div class="form-group" [ngClass]="applyCssDivError('password')">
                             <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                formControlName="password" placeholder="Senha">
+                                   formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
-                        <a class="recovery-password-link" [routerLink]="['/auth/recuperar-senha']"><small>Esqueci minha senha?</small></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/recuperar-senha']"
+                           data-toggle="dropdown">
+                            <small>
+                                Esqueci minha senha?
+                            </small>
+                        </a>
+                        <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/cadastro']"
+                           data-toggle="dropdown">
+                            <small>
+                                Novo aqui? Cadastre-se
+                            </small>
+                        </a>
                         <button style="margin-top: 10px" type="submit" class="btn btn-primary">Entrar</button>
                     </form>
                 </ul>
@@ -125,12 +138,8 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <!--<a class="nav-link" id="saldos">
-                    <span id="creditos">Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}</span><br>
-                    <span id="saldos">Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}</span>
-                </a>-->
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" (click)="getPosicaoFinanceira()"
-                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" (click)="getPosicaoFinanceira()"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -143,7 +152,11 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="rotaPerfil" routerLinkActive="router-link-active">
+                    <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
+                        <i class="fa fa-key"></i> Alterar senha
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active" *ngIf="!isCambista">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -152,35 +165,44 @@
                     </a>
 
                     <div *ngIf="appMobile" class="app-version-info">
-                       App Versão 2.0.{{appVersion}}
+                        App Versão 2.0.{{appVersion}}
                     </div>
                 </ul>
             </div>
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="username"
-                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                                   [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
                         <div class="form-group" [ngClass]="applyCssDivError('password')">
                             <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                formControlName="password" placeholder="Senha">
+                                   formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Novo aqui? Cadastre-se</a>
-                    <a class="dropdown-item" href="#">Esqueceu sua senha?</a> -->
+                    <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/recuperar-senha']"
+                       data-toggle="dropdown">
+                        <small>
+                            Esqueci minha senha?
+                        </small>
+                    </a>
+                    <a class="dropdown-item-text no-padding-link" [routerLink]="['/auth/cadastro']"
+                       data-toggle="dropdown">
+                        <small>
+                            Novo aqui? Cadastre-se
+                        </small>
+                    </a>
                 </ul>
             </div>
         </ng-template>
