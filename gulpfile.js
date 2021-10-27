@@ -824,14 +824,6 @@ gulp.task('sampabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportbig.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportbig.wee.bet",
-        banca: "SPORT BIG",
-        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314; --league: #90EE90; --foreground-league: #000"
-    });
-});
-
 gulp.task('betsporting.wee.bet', function (done) {
     tasks(done, {
         host: "betsporting.wee.bet",
@@ -862,14 +854,6 @@ gulp.task('capitalsports.site', function (done) {
         host: "capitalsports.site",
         banca: "CAPITAL SPORTS",
         styles: "--odds: #014610;",
-    });
-});
-
-gulp.task('mundodasapostas.site', function (done) {
-    tasks(done, {
-        host: "mundodasapostas.site",
-        banca: "MUNDO DAS APOSTAS",
-        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
     });
 });
 
@@ -1066,14 +1050,6 @@ gulp.task('acsportsbets.site', function (done) {
     });
 });
 
-gulp.task('kinoesporte.wee.bet', function (done) {
-    tasks(done, {
-        host: "kinoesporte.wee.bet",
-        banca: "KINO ESPORTE",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#1C1C1C; --foreground-sidebar-right: #fff; --sidebar-left: #1C1C1C; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #ffd700; --foreground-odds: #000;",
-    });
-});
-
 gulp.task('7bet.wee.bet', function (done) {
     tasks(done, {
         host: "7bet.wee.bet",
@@ -1246,14 +1222,6 @@ gulp.task('onllinesports.com', function (done) {
     tasks(done, {
         host: "onllinesports.com",
         banca: "ONLLINE SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('paracorreabets.wee.bet', function (done) {
-    tasks(done, {
-        host: "paracorreabets.wee.bet",
-        banca: "PARÁ CORRÊA BETS",
         styles: "",
     });
 });
