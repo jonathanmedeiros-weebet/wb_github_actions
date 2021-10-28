@@ -69,7 +69,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 isCambista => {
                     this.isCambista = isCambista;
-                    if (!isCambista) {
+                    if (!isCambista && this.isLoggedIn) {
                         this.form.patchValue({apostador: 'cliente'});
                     }
                 }
