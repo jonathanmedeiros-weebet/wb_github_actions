@@ -119,7 +119,7 @@ export class ApuracaoLoteriaComponent implements OnInit, OnChanges, OnDestroy {
 
         this.modalRef.result.then(
             (result) => {
-                this.apostaService.cancelar(aposta.id)
+                this.apostaService.cancelar({ id: aposta.id, version: aposta.version })
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         () => this.getApostas(),

@@ -169,9 +169,7 @@ gulp.task('superbets.bet', function (done) {
     tasks(done, {
         host: "superbets.bet",
         banca: "SUPERBETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000;",
-        aditional_styles: ".sem-evento{color: #fff;}  .jogos, .eventos{ background: #363636!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #363636!important; } .footer{ background-color:#363636!important; }" +
-            " .inside-event .tipo-apostas{ background-color: #363636!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
+        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000;"
     });
 });
 
@@ -583,14 +581,6 @@ gulp.task('betsplay.club', function (done) {
     });
 });
 
-gulp.task('sportpremium.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportpremium.wee.bet",
-        banca: "SPORT PREMIUM",
-        styles: "--header:#000; --foreground-header: #fff;--sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;"
-    });
-});
-
 gulp.task('betsports.wee.bet', function (done) {
     tasks(done, {
         host: "betsports.wee.bet",
@@ -834,14 +824,6 @@ gulp.task('sampabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportbig.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportbig.wee.bet",
-        banca: "SPORT BIG",
-        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314; --league: #90EE90; --foreground-league: #000"
-    });
-});
-
 gulp.task('betsporting.wee.bet', function (done) {
     tasks(done, {
         host: "betsporting.wee.bet",
@@ -872,14 +854,6 @@ gulp.task('capitalsports.site', function (done) {
         host: "capitalsports.site",
         banca: "CAPITAL SPORTS",
         styles: "--odds: #014610;",
-    });
-});
-
-gulp.task('mundodasapostas.site', function (done) {
-    tasks(done, {
-        host: "mundodasapostas.site",
-        banca: "MUNDO DAS APOSTAS",
-        styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;"
     });
 });
 
@@ -1076,14 +1050,6 @@ gulp.task('acsportsbets.site', function (done) {
     });
 });
 
-gulp.task('kinoesporte.wee.bet', function (done) {
-    tasks(done, {
-        host: "kinoesporte.wee.bet",
-        banca: "KINO ESPORTE",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#1C1C1C; --foreground-sidebar-right: #fff; --sidebar-left: #1C1C1C; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #ffd700; --foreground-odds: #000;",
-    });
-});
-
 gulp.task('7bet.wee.bet', function (done) {
     tasks(done, {
         host: "7bet.wee.bet",
@@ -1260,14 +1226,6 @@ gulp.task('onllinesports.com', function (done) {
     });
 });
 
-gulp.task('paracorreabets.wee.bet', function (done) {
-    tasks(done, {
-        host: "paracorreabets.wee.bet",
-        banca: "PARÁ CORRÊA BETS",
-        styles: "",
-    });
-});
-
 gulp.task('supersports.wee.bet', function (done) {
     tasks(done, {
         host: "supersports.wee.bet",
@@ -1312,14 +1270,6 @@ gulp.task('reallbet.site', function (done) {
     tasks(done, {
         host: "reallbet.site",
         banca: "REALLBET",
-        styles: "",
-    });
-});
-
-gulp.task('apostasms.wee.bet', function (done) {
-    tasks(done, {
-        host: "apostasms.wee.bet",
-        banca: "APOSTAS MS",
         styles: "",
     });
 });
@@ -1501,6 +1451,14 @@ gulp.task('zaplances.bet', function (done) {
     });
 });
 
+gulp.task('sportvegas.com.br', function (done) {
+    tasks(done, {
+        host: "sportvegas.com.br",
+        banca: "SPORT VEGAS",
+        styles: "",
+    });
+});
+
 gulp.task('mais1bet.com', function (done) {
     tasks(done, {
         host: "mais1bet.com",
@@ -1529,6 +1487,14 @@ gulp.task('florianobets.wee.bet', function (done) {
     tasks(done, {
         host: "florianobets.wee.bet",
         banca: "FLORIANO BETS",
+        styles: "",
+    });
+});
+
+gulp.task('amgbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "amgbet.wee.bet",
+        banca: "AMG BET",
         styles: "",
     });
 });

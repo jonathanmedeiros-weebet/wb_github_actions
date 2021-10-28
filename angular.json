@@ -24,7 +24,9 @@
                         "assets": [
                             "src/assets",
                             "src/favicon.ico",
-                            "src/param"
+                            "src/param",
+                            "src/apple-touch-icon.png",
+                            "src/apple-touch-icon-precomposed.png"
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",

@@ -34,6 +34,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     itemSelecionado;
     falhaSimulacao;
     cambistaPaga;
+    apostaVersion;
     showLoading = false;
 
     constructor(
@@ -83,9 +84,10 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         return result;
     }
 
-    addEncerramento(item) {
+    addEncerramento(item, apostaVersion) {
         if (!this.jogoComecou(item)) {
             this.itemSelecionado = item.id;
+            this.apostaVersion = apostaVersion;
             this.simularEncerramento(this.itemSelecionado);
         }
     }
@@ -119,7 +121,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
 
     confirmarEncerramento() {
         if (this.itemSelecionado != null) {
-            this.apostaService.encerrarItem(this.itemSelecionado)
+            this.apostaService.encerrarItem({ itemId: this.itemSelecionado, version: this.apostaVersion })
                 .subscribe(
                     result => {
                         this.messageService.success(result, 'Sucesso');
@@ -135,6 +137,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         }
 
         this.itemSelecionado = null;
+        this.apostaVersion = null;
     }
 
     atualizarAposta(aposta) {
