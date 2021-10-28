@@ -1,5 +1,6 @@
 import { ItemApostaEsportiva } from './item-aposta-esportiva';
 import { Passador } from '../passador'
+
 export class ApostaEsportiva {
     passador : Passador;
     id: number;

@@ -98,8 +98,6 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
         }
     }
 
-
-
     liveStats(jogoId) {
         this.statsService.getEventoStats(jogoId)
             .pipe(takeUntil(this.unsub$))

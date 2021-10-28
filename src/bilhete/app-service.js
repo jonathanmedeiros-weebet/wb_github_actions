@@ -24,7 +24,7 @@ async function getTicketData({ apiUrl, ticketId }) {
     }
 }
 
-async function orderTicketItens(tickeItens = [], ticketType = undefined) {
+async function orderTicketItens(tickeItens = [], ticketType) {
     const orderedItens = tickeItens.sort((a, b) => {
         switch (ticketType) {
             case 'acumuldao':
