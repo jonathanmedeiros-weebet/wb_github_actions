@@ -1,19 +1,28 @@
 async function getParams() {
-    var paramsSearch = new URLSearchParams(window.location.search);
-    var clientSlug = paramsSearch.get('client-slug');
-    var centerUrl = paramsSearch.get('center');
-    var ticketId = paramsSearch.get('ticket-id');
-    const isAllPresent = (ticketId && centerUrl && clientSlug) ? true : false;
-    return isAllPresent ? {
-        slug: clientSlug,
-        center: centerUrl,
-        ticketId: ticketId
-    } : false;
+    var url = window.location.pathname;
+
+    // var slug = window.location.host;
+    // var centerUrl = 'central.' + slug;
+    var slug = 'demo.wee.bet';
+    var centerUrl = 'weebet.local';
+    var ticketId = url.substring(url.lastIndexOf('/') + 1);
+
+    if (ticketId && centerUrl && slug) {
+        var params = {
+            slug: slug,
+            center: centerUrl,
+            ticketId: ticketId
+        };
+
+        return params;
+    } else {
+        return false;
+    }
 }
 
-async function getTicketData({ apiUrl, ticketId }) {
+async function getTicketData({apiUrl, ticketId}) {
     try {
-        const request = await fetch(`https://${apiUrl}/api/apostas-por-codigo/${ticketId}`);
+        const request = await fetch(`//${apiUrl}/api/apostas-por-codigo/${ticketId}`);
         const bet = await request.json();
         if (request.status == 404 || request.status == 500) {
             throw bet.errors;
