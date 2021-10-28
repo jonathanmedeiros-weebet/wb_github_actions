@@ -1,47 +1,51 @@
-<div class="resetar-senha-header d-flex justify-content-center align-items-center" style="background-color:var(--header);">
-    <div class="logo-mobile">
-        <a class="" [routerLink]="['/esportes/futebol/jogos']">
-            <img [src]="LOGO">
-        </a>
-    </div>
-</div>
-<div class="resetar-senha">
-    <div class="content">
-        <div class="row pt-5 justify-content-center">
-            <div class="col-4">
-                <h2>Redefinição de Senha</h2>
+<div id="default-content">
+    <div class="content-body">
+        <div class="content">
+            <div class="row">
+                <div class="col col-md-12">
+                    <h2>Redefinir Senha</h2>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="alert alert-danger col-10" role="alert" *ngIf="!validToken">
-                {{errorMessage}}
-            </div>
-            <div class="col-4" *ngIf="validToken;">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div class="row">
-                        <div class="col col-md-12">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <app-spinner *ngIf="submitting"></app-spinner>
+                <div class="row">
+                    <div class="col col-sm-2">
+                        <div class="form-group required">
+                            <label class="label">Código de Verificação</label>
+                            <input type="text" formControlName="verificacao" class="form-control" maxlength="5">
+                            <app-error-msg [control]="form.get('verificacao')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-4">
+                        <div class="form-group required">
                             <label class="label">Nova Senha</label>
                             <input type="password" formControlName="nova_senha" class="form-control">
                             <app-error-msg [control]="form.get('nova_senha')"></app-error-msg>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col col-md-12">
+                </div>
+                <div class="row">
+                    <div class="col col-sm-4">
+                        <div class="form-group required">
                             <label class="label">Confirmar Senha</label>
                             <input type="password" formControlName="senha_confirmacao" class="form-control">
                             <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col col-md-12">
-                            <button class="btn btn-custom" type="submit">
+                </div>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-custom" type="submit" [disabled]="submitting">
                                 <i class="fa fa-save"></i>
-                                Atualizar
+                                Alterar Senha
                             </button>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

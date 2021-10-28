@@ -82,10 +82,6 @@ const appRoutes: Routes = [
         component: CupomComponent
     },
     {
-        path: 'resetar-senha/:id/:token',
-        component: ResetarSenhaComponent
-    },
-    {
         path: '**',
         redirectTo: '',
         pathMatch: 'full'

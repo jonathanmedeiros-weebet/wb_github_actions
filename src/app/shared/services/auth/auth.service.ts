@@ -69,9 +69,11 @@ export class AuthService {
     forgot(data: any): Observable<any> {
         const url = `${this.AuthUrl}/forgotPassword`;
 
-        return this.http
-            .post(url, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post(url, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
                 catchError(this.errorService.handleError)
             );
     }

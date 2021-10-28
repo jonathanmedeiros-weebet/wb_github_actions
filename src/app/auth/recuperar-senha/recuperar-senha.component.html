@@ -3,27 +3,31 @@
         <div class="content">
             <div class="row">
                 <div class="col col-md-12">
-                    <h2>Recuperar Senha</h2>
+                    <h2>Redefinir Senha</h2>
                 </div>
             </div>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <app-spinner *ngIf="submitting"></app-spinner>
                 <div class="row">
-                    <div class="col col-sm-4 required">
-                        <label class="label">Email</label>
-                        <input class="form-control" type="text" placeholder="exemplo@email.com" formControlName="email">
-                        <app-error-msg [control]="form.get('email')"></app-error-msg>
+                    <div class="col col-sm-4">
+                        <div class="form-group required">
+                            <label class="label">Email</label>
+                            <input class="form-control" type="text" placeholder="exemplo@email.com"
+                                   formControlName="email">
+                            <app-error-msg [control]="form.get('email')"></app-error-msg>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-md-12 mt-4 required">
-                        <button type="submit" class="btn btn-custom">
-                            <i class="fa fa-undo"></i>
-                            Solicitar Recuperação
-                        </button>
+                    <div class="col col-md-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-custom" [disabled]="submitting">
+                                Solicitar código de redefinição
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

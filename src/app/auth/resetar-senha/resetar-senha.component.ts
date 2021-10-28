@@ -14,11 +14,9 @@ import {MessageService} from '../../shared/services/utils/message.service';
     styleUrls: ['./resetar-senha.component.css']
 })
 export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
-    clienteId;
     recoveryToken;
     LOGO = config.LOGO;
-    validToken = false;
-    errorMessage = '';
+    submitting = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -32,40 +30,31 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.createForm();
         this.route.params.subscribe((params) => {
-            if (params.id && params.token) {
-                this.validarToken(params.id, params.token);
+            if (params.token) {
+                this.recoveryToken = params.token;
+                if (params.codigo) {
+                    this.form.get('verificacao').patchValue(params.codigo);
+                }
+            } else {
+                this.router.navigate(['esportes/futebol/jogos']);
             }
         });
-        this.createForm();
-    }
-
-    validarToken(clienteId, token) {
-        this.authService.validateRecoveryToken(clienteId, token)
-            .subscribe(
-                () => {
-                    this.clienteId = clienteId;
-                    this.recoveryToken = token;
-                    this.validToken = true;
-                },
-                error => {
-                    this.errorMessage = error.message;
-                    this.validToken = false;
-                }
-            );
     }
 
     createForm() {
         this.form = this.fb.group({
+            verificacao: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             nova_senha: [null, [Validators.required]],
             senha_confirmacao: [null, [Validators.required, FormValidations.equalsTo('nova_senha')]]
         });
     }
 
     submit() {
-        let values = this.form.value;
-        values.cliente_id = this.clienteId;
+        const values = this.form.value;
         values.token = this.recoveryToken;
+        this.submitting = true;
 
         this.authService.resetPassword(values)
             .subscribe(
@@ -75,6 +64,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
                 },
                 error => {
                     this.handleError(error);
+                    this.submitting = false;
                 }
             );
     }

@@ -18,6 +18,14 @@ export const routes: Routes = [
     {
         path: 'recuperar-senha',
         component: RecuperarSenhaComponent
+    },
+    {
+        path: 'resetar-senha/:token',
+        component: ResetarSenhaComponent
+    },
+    {
+        path: 'resetar-senha/:token/:codigo',
+        component: ResetarSenhaComponent
     }
 ];
 

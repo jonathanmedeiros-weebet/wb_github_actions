@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./recuperar-senha.component.css']
 })
 export class RecuperarSenhaComponent extends BaseFormComponent implements OnInit {
+    submitting = false;
 
     constructor(
         private fb: FormBuilder,
@@ -34,17 +35,22 @@ export class RecuperarSenhaComponent extends BaseFormComponent implements OnInit
     }
 
     handleError(error: string) {
+        this.messageService.error(error);
     }
 
     submit() {
+        this.submitting = true;
         const values = this.form.value;
         this.authService.forgot(values)
             .subscribe(
                 () => {
                     this.router.navigate(['esportes/futebol/jogos']);
-                    this.messageService.success('Um e-mail com as instruções de recuperação foi enviado para e-mail informado!');
+                    this.messageService.success('O código de verificação foi enviado para o e-mail informado.');
                 },
-                error => this.messageService.error(error)
+                error => {
+                    this.handleError(error);
+                    this.submitting = false;
+                }
             );
     }
 

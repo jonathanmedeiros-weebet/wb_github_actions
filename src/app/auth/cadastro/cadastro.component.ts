@@ -90,13 +90,10 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
         const values = this.form.value;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
-                (result: any) => {
+                () => {
                     this.auth.login({username: values.usuario, password: values.senha}).subscribe(
                         () => {
                             this.messageService.success('Cadastro realizado com sucesso!');
-                            delay(() => {
-                                location.reload();
-                            }, 300);
                         },
                         error => this.messageService.error(error)
                     );
