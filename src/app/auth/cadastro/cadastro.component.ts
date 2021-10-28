@@ -19,6 +19,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
     type: string = 'password';
     icon: string = 'fa fa-eye';
     termosDeUso: Pagina;
+    submitting = false;
 
     constructor(
         private fb: FormBuilder,
@@ -88,6 +89,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
 
     submit() {
         const values = this.form.value;
+        this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 () => {
@@ -98,7 +100,10 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
                         error => this.messageService.error(error)
                     );
                 },
-                error => this.messageService.error(error)
+                error => {
+                    this.messageService.error(error);
+                    this.submitting = false;
+                }
             );
     }
 
