@@ -12,16 +12,16 @@ async function getParams() {
 }
 
 async function getTicketData({ apiUrl, ticketId }) {
-    return await fetch(`https://${apiUrl}/api/apostas-por-codigo/${ticketId}`).then(
-        response => {
-            return response.json();
-        }).catch(error => {
-        if (error.status == 404) {
-            this.displayError(error.message);
+    try {
+        const request = await fetch(`https://${apiUrl}/api/apostas-por-codigo/${ticketId}`);
+        const bet = await request.json();
+        if (request.status == 404 || request.status == 500) {
+            throw bet.errors;
         }
-        this.displayError(error);
-        console.error(error);
-    });
+        return bet;
+    } catch (error) {
+        return error;
+    }
 }
 
 async function orderTicketItens(tickeItens = [], ticketType = undefined) {
@@ -53,12 +53,20 @@ function getFormatedDate(date) {
 }
 
 async function getResuts(ids) {
-    paramIds = ids.join(',');
-    return await fetch(`
-    https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
-        .then(response => { return response.json() })
-        .catch(error => console.error(error));
+    try {
+        paramIds = ids.join(',');
+        const request = await fetch(`https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
+        const results = await request.json();
+
+        if (request.status == 404 || request.status == 500) {
+            throw results.errors;
+        }
+        return results;
+    } catch (error) {
+        return error;
+    }
 }
+
 
 function displayError(message) {
     document.getElementById('error').hidden = false;
