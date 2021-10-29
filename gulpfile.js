@@ -1473,3 +1473,11 @@ gulp.task('amgbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('casadasorte.wee.bet', function (done) {
+    tasks(done, {
+        host: "casadasorte.wee.bet",
+        banca: "CASA DA SORTE",
+        styles: "",
+    });
+});

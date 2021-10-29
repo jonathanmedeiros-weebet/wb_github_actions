@@ -181,7 +181,8 @@
         "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
         "imperiobet.wee.bet": "gulp imperiobet.wee.bet",
         "florianobets.wee.bet": "gulp florianobets.wee.bet",
-        "amgbet.wee.bet": "gulp amgbet.wee.bet"
+        "amgbet.wee.bet": "gulp amgbet.wee.bet",
+        "casadasorte.wee.bet": "gulp casadasorte.wee.bet"
     },
     "private": true,
     "dependencies": {
