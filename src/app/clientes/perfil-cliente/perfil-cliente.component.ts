@@ -58,7 +58,7 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                     );
                     if (cliente.endereco) {
                         const endereco: EnderecoWeebet = cliente.endereco;
-                        if (endereco) {
+                        if (endereco.estado && endereco.cidade) {
                             this.estadoSelecionado = endereco.estado.id;
                             this.cidadeSelecionada = endereco.cidade.id;
                             this.utilsService.getCidades(endereco.estado.id).subscribe(
@@ -133,6 +133,7 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                                 for (let cidade of this.cidades) {
                                     if (cidade.nome == endereco.localidade.toUpperCase()) {
                                         this.cidadeSelecionada = cidade.id;
+                                        this.form.get('cidade').patchValue(this.cidadeSelecionada);
                                     }
                                 }
                             },
@@ -146,7 +147,6 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                     }
                 },
             );
-            this.form.get('cidade').patchValue(this.cidadeSelecionada);
         }
     }
 
