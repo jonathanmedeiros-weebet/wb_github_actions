@@ -32,7 +32,7 @@ document.onreadystatechange = async function() {
 
                     if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                         this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
-                        this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)));
+                        this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toFixed(2));
 
 
                     } else {
@@ -195,7 +195,8 @@ document.onreadystatechange = async function() {
                                     </div>
                                 </div>
                                 <div class="dashed" id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
-                                <div class="${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }">${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
+                                <div class="${ (ticketItem.encerrado || ticketItem.removido) ?  'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }">
+                                ${ (ticketItem.encerrado || ticketItem.removido)  ? ticketItem.encerrado ? 'encerrado' : 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
                             </div>
                         </div>`;
 
@@ -241,7 +242,8 @@ document.onreadystatechange = async function() {
                                     <div  class="dashed"> 
                                         Resposta: ${ticketItem.odd_nome} (${ticketItem.cotacao})
                                     </div>
-                                    <div class="${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }" >${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
+                                    <div class="${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }" >
+                                    ${ (ticketItem.encerrado || ticketItem.removido) ? ticketItem.encerrado ? 'encerrado' : 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
                                     </div>
                                 </div>`;
                         }
