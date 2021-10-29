@@ -245,10 +245,8 @@ document.onreadystatechange = async function() {
                                     </div>
                                 </div>`;
                         }
-                        console.log(ticketItem);
                         if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                             if (ticketItem.encerrado || ticketItem.removido) {
-                                console.log(ticketItem.resultado);
                                 div.getElementsByClassName('dashed')[0].style.textDecoration = 'line-through'
                             }
                         }
