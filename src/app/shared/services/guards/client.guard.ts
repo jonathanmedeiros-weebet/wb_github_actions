@@ -11,7 +11,6 @@ export class ClientGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        // If user is not logged in we'll send them to the homepage
         if (this.auth.isCambista()) {
             this.router.navigate(['/esportes/futebol/jogos']);
             return false;

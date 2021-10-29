@@ -54,6 +54,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     appVersion;
     isCambista;
     modoClienteAtivo;
+    contatoSolicitacaoSaque;
 
     constructor(
         private fb: FormBuilder,
@@ -70,6 +71,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
+        this.contatoSolicitacaoSaque = this.paramsService.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))

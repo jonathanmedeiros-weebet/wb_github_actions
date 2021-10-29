@@ -27,6 +27,12 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
+                    <a class="dropdown-item" target="_blank"
+                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
+                       *ngIf="!isCambista">
+                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    </a>
+
                     <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
                         <i class="fa fa-key"></i> Alterar senha
                     </a>
@@ -146,6 +152,12 @@
                         Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" target="_blank"
+                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
+                       *ngIf="!isCambista">
+                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    </a>
 
                     <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
                         <i class="fa fa-key"></i> Alterar senha
