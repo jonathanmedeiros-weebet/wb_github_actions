@@ -33,6 +33,8 @@ document.onreadystatechange = async function() {
                     if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                         this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                         this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)));
+
+
                     } else {
                         this.getElementById('cash-back').parentNode.hidden = true;
                         this.getElementById('quotation').parentNode.hidden = true;
@@ -192,8 +194,8 @@ document.onreadystatechange = async function() {
                                         ${templateData.player_b_corner_kicks}
                                     </div>
                                 </div>
-                                <div id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
-                                <div class="${ticketItem.resultado || ''}">${ticketItem.resultado ||''}</div>
+                                <div class="dashed" id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
+                                <div class="${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }">${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
                             </div>
                         </div>`;
 
@@ -236,12 +238,19 @@ document.onreadystatechange = async function() {
                                     <div >
                                         <strong>${ticketItem.desafio_nome}</strong>
                                     </div>
-                                    <div>
+                                    <div  class="dashed"> 
                                         Resposta: ${ticketItem.odd_nome} (${ticketItem.cotacao})
                                     </div>
-                                    <div class="${ticketItem.resultado}" >${ticketItem.resultado || ''}</div>
+                                    <div class="${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }" >${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
                                     </div>
                                 </div>`;
+                        }
+                        console.log(ticketItem);
+                        if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
+                            if (ticketItem.encerrado || ticketItem.removido) {
+                                console.log(ticketItem.resultado);
+                                div.getElementsByClassName('dashed')[0].style.textDecoration = 'line-through'
+                            }
                         }
                         this.getElementById('ticket-itens').appendChild(div);
                     }
