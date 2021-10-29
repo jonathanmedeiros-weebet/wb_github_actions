@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
-import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
+import {AuthLayoutComponent} from './shared/layout/app-layouts/auth-layout.component';
+import {MainLayoutComponent} from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard, LoteriaGuard, DesafioGuard } from './services';
-import { CupomComponent } from './cupom/cupom.component';
-import {ResetarSenhaComponent} from './auth/resetar-senha/resetar-senha.component';
+import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
+import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
 
 const appRoutes: Routes = [
@@ -91,9 +90,10 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes, {
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy'
-})],
+        scrollPositionRestoration: 'enabled',
+        relativeLinkResolution: 'legacy'
+    })],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
