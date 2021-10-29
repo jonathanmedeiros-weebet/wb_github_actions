@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {trigger, state, style, animate, transition} from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
-import {BehaviorSubject, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from './../../config';
 

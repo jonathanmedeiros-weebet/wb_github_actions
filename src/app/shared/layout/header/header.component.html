@@ -65,15 +65,15 @@
                                    formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item pl-0" [routerLink]="['auth/recuperar-senha']">
-                            Esqueci minha senha?
-                        </a>
-                        <a class="dropdown-item pl-0" [routerLink]="['auth/cadastro']">
-                            Novo aqui? Cadastre-se
-                        </a>
                         <button style="margin-top: 10px" type="submit" class="btn btn-primary">Entrar</button>
                     </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" [routerLink]="['auth/recuperar-senha']">
+                        Esqueci minha senha?
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['auth/cadastro']" *ngIf="modoClienteAtivo">
+                        Novo aqui? Cadastre-se
+                    </a>
                 </ul>
             </div>
         </ng-template>
@@ -187,12 +187,11 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']"
-                       data-toggle="dropdown">
+                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
                         Esqueci minha senha?
                     </a>
                     <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
-                       data-toggle="dropdown">
+                       data-toggle="dropdown" *ngIf="modoClienteAtivo">
                         Novo aqui? Cadastre-se
                     </a>
                 </ul>

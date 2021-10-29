@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 <label class="label">Estado</label>
                                 <select formControlName="estado" type="text" class="form-control"
-                                        (change)="getCidades(estadoSelecionado)" [(ngModel)]="estadoSelecionado">
+                                        (click)="getCidades($event)">
                                     <option value="0">Selecione</option>
                                     <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}</option>
                                 </select>
@@ -114,9 +114,9 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="label">Cidade</label>
-                                <select formControlName="cidade" class="form-control" [(ngModel)]="cidadeSelecionada">
+                                <select formControlName="cidade" class="form-control">
                                     <option value="0">Selecione a cidade</option>
-                                    <option *ngFor="let cidade of cidades" [value]="cidade.id">{{cidade.nome}}</option>
+                                    <option *ngFor="let cidade of cidades" [value]="cidade.id" [selected]="cidade.id === cidadeSelecionada" >{{cidade.nome}}</option>
                                 </select>
                                 <app-error-msg [control]="form.get('cidade')"></app-error-msg>
                             </div>

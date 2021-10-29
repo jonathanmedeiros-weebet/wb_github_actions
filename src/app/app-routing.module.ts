@@ -7,6 +7,7 @@ import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.com
 import { AuthGuard, LoteriaGuard, DesafioGuard } from './services';
 import { CupomComponent } from './cupom/cupom.component';
 import {ResetarSenhaComponent} from './auth/resetar-senha/resetar-senha.component';
+import {ClientGuard} from './shared/services/guards/client.guard';
 
 const appRoutes: Routes = [
     {
@@ -72,7 +73,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'clientes',
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard, ClientGuard],
                 loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
             }
         ]

@@ -74,6 +74,8 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                                     cep: endereco.cep
                                 }
                             );
+                            this.form.get('estado').patchValue(this.estadoSelecionado);
+                            this.form.get('cidade').patchValue(this.cidadeSelecionada);
                         }
                     }
                 },
@@ -102,8 +104,9 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
         });
     }
 
-    getCidades(estado_id: any) {
-        this.utilsService.getCidades(estado_id).subscribe(
+    getCidades(event: any) {
+        console.log(event.target.value);
+        this.utilsService.getCidades(event.target.value).subscribe(
             cidades => {
                 this.cidades = cidades;
             },
@@ -123,6 +126,7 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                             }
                         }
                         this.estadoSelecionado = estadoLocal.id;
+                        this.form.get('estado').patchValue(this.estadoSelecionado);
                         this.utilsService.getCidades(estadoLocal.id).subscribe(
                             cidades => {
                                 this.cidades = cidades;
@@ -131,7 +135,6 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                                         this.cidadeSelecionada = cidade.id;
                                     }
                                 }
-
                             },
                             error => this.handleError(error));
                         this.form.patchValue({
@@ -143,6 +146,7 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                     }
                 },
             );
+            this.form.get('cidade').patchValue(this.cidadeSelecionada);
         }
     }
 

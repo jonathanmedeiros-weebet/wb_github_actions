@@ -9,24 +9,31 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <app-spinner *ngIf="submitting"></app-spinner>
                 <div class="row">
-                    <div class="col col-sm-12 required">
-                        <div class="form-group">
-                            <label class="label">Nome Completo</label>
+                    <div class="col col-sm-6">
+                        <div class="form-group required">
+                            <label class="label">Nome</label>
                             <input class="form-control" type="text" formControlName="nome">
                             <app-error-msg [control]="form.get('nome')"></app-error-msg>
                         </div>
                     </div>
+                    <div class="col col-sm-6">
+                        <div class="form-group required">
+                            <label class="label">Sobrenome</label>
+                            <input class="form-control" type="text" formControlName="sobrenome">
+                            <app-error-msg [control]="form.get('sobrenome')"></app-error-msg>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col col-md-6 required">
-                        <div class="form-group">
+                    <div class="col col-md-6">
+                        <div class="form-group required">
                             <label class="label">Data de Nascimento</label>
                             <input class="form-control" type="date" formControlName="nascimento">
                             <app-error-msg [control]="form.get('nascimento')"></app-error-msg>
                         </div>
                     </div>
-                    <div class="col col-md-6 required">
-                        <div class="form-group">
+                    <div class="col col-md-6">
+                        <div class="form-group required">
                             <label class="label">Sexo</label>
                             <select formControlName="genero" class="form-control">
                                 <option value="">Selecione</option>
@@ -38,8 +45,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-sm-12 required">
-                        <div class="form-group">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
                             <label class="label">CPF</label>
                             <input class="form-control" type="text" mask="000.000.000-00" placeholder="000.000.000-00"
                                    formControlName="cpf" [dropSpecialCharacters]="false">
@@ -48,8 +55,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-sm-12 required">
-                        <div class="form-group">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
                             <label class="label">Telefone</label>
                             <input class="form-control" type="text" mask="(00)00000-0000" formControlName="telefone"
                                    placeholder="(00)00000-0000" [dropSpecialCharacters]="false">
@@ -58,8 +65,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-sm-12 required">
-                        <div class="form-group">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
                             <label class="label">Email</label>
                             <input class="form-control" type="text" placeholder="exemplo@email.com"
                                    formControlName="email">
@@ -68,8 +75,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-sm-12 required">
-                        <div class="form-group">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
                             <label class="label">Nome de Usuário</label>
                             <input class="form-control" type="text" formControlName="usuario">
                             <app-error-msg [control]="form.get('usuario')"></app-error-msg>
@@ -77,8 +84,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-sm-6 required">
-                        <div class="form-group">
+                    <div class="col col-sm-6">
+                        <div class="form-group required">
                             <label class="label">Senha</label>
                             <div class="input-group">
                                 <input [type]="type" class="form-control" id="pass" formControlName="senha">
@@ -91,8 +98,8 @@
                             <app-error-msg [control]="form.get('senha')"></app-error-msg>
                         </div>
                     </div>
-                    <div class="col col-md-6 required">
-                        <div class="form-group">
+                    <div class="col col-md-6">
+                        <div class="form-group required">
                             <label class="label">Confirmar Senha</label>
                             <input class="form-control" type="password" formControlName="senha_confirmacao">
                             <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
