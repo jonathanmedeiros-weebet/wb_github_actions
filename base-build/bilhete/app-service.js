@@ -1,7 +1,7 @@
 async function getParams() {
     var url = window.location.pathname;
 
-    var slug = 'bet2.wee.bet';
+    var slug = '[HOST]';
     var centerUrl = 'central.' + slug;
     // var slug = 'demo.wee.bet';
     // var centerUrl = 'weebet.local';
