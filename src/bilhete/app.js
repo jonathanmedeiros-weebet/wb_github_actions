@@ -30,9 +30,10 @@ document.onreadystatechange = async function() {
 
                     ticketData.itens = ticketItens;
 
+                    console.log(ticketData.valor);
                     if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                         this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
-                        this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toFixed(3));
+                        this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toFixed(3).replace(/\.000$/, "").replace('.', ','));
 
 
                     } else {
@@ -256,9 +257,12 @@ document.onreadystatechange = async function() {
                     }
                 }
                 this.getElementById('ticket').hidden = false;
+                this.getElementById('loader').hidden = true;
             }
         } catch (error) {
             displayError(error);
         }
+    } else {
+        this.getElementById('loader').hidden = false;
     }
 }
