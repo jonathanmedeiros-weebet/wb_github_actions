@@ -22,6 +22,10 @@ const routes: Routes = [{
         {
             path: 'apostas',
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
+        },
+        {
+            path: 'recarga',
+            loadChildren: () => import('./solicitacao-recarga/solicitacao-recarga.module').then(a => a.SolicitacaoRecargaModule)
         }
     ]
 }];
