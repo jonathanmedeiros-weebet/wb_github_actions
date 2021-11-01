@@ -97,7 +97,7 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
 
         this.modalRef.result.then(
             (result) => {
-                this.cartaoService.setPagamento({ id: solicitacao.id, version: solicitacao.id })
+                this.cartaoService.setPagamento({ id: solicitacao.id, version: solicitacao.version })
                     .subscribe(
                         () => {
                             this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
