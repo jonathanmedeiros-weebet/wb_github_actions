@@ -1185,14 +1185,6 @@ gulp.task('maisporte.wee.bet', function (done) {
     });
 });
 
-gulp.task('supersports.wee.bet', function (done) {
-    tasks(done, {
-        host: "supersports.wee.bet",
-        banca: "SUPER SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('rrbets.wee.bet', function (done) {
     tasks(done, {
         host: "rrbets.wee.bet",
@@ -1261,14 +1253,6 @@ gulp.task('texas93.bet', function (done) {
     tasks(done, {
         host: "texas93.bet",
         banca: "TEXAS 93",
-        styles: "",
-    });
-});
-
-gulp.task('mybets.club', function (done) {
-    tasks(done, {
-        host: "mybets.club",
-        banca: "MY BETS",
         styles: "",
     });
 });
