@@ -936,14 +936,6 @@ gulp.task('gobets.wee.bet', function (done) {
     });
 });
 
-gulp.task('imperiobonitobet.site', function (done) {
-    tasks(done, {
-        host: "imperiobonitobet.site",
-        banca: "IMPÉRIO BONITO",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #ffd700;--foreground-odds: #000;--highlight:red;--foreground-highlight:#fff;",
-    });
-});
-
 gulp.task('bet316top.wee.bet', function (done) {
     tasks(done, {
         host: "bet316top.wee.bet",
