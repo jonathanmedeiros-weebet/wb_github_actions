@@ -1185,14 +1185,6 @@ gulp.task('maisporte.wee.bet', function (done) {
     });
 });
 
-gulp.task('onllinesports.com', function (done) {
-    tasks(done, {
-        host: "onllinesports.com",
-        banca: "ONLLINE SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('supersports.wee.bet', function (done) {
     tasks(done, {
         host: "supersports.wee.bet",
@@ -1470,6 +1462,14 @@ gulp.task('casadasorte.wee.bet', function (done) {
     tasks(done, {
         host: "casadasorte.wee.bet",
         banca: "CASA DA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('egolbet.com', function (done) {
+    tasks(done, {
+        host: "egolbet.com",
+        banca: "É GOL BET",
         styles: "",
     });
 });

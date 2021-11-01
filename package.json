@@ -6,6 +6,8 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build --prod",
+        "build:stats": "ng build --stats-json",
+        "analyze": "webpack-bundle-analyzer dist/stats.json",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
@@ -147,7 +149,6 @@
         "sports10.net": "gulp sports10.net",
         "jogabet.wee.bet": "gulp jogabet.wee.bet",
         "maisporte.wee.bet": "gulp maisporte.wee.bet",
-        "onllinesports.com": "gulp onllinesports.com",
         "supersports.wee.bet": "gulp supersports.wee.bet",
         "rrbets.wee.bet": "gulp rrbets.wee.bet",
         "sportingnetvip.bet": "gulp sportingnetvip.bet",
@@ -181,7 +182,8 @@
         "imperiobet.wee.bet": "gulp imperiobet.wee.bet",
         "florianobets.wee.bet": "gulp florianobets.wee.bet",
         "amgbet.wee.bet": "gulp amgbet.wee.bet",
-        "casadasorte.wee.bet": "gulp casadasorte.wee.bet"
+        "casadasorte.wee.bet": "gulp casadasorte.wee.bet",
+        "egolbet.com": "gulp egolbet.com"
     },
     "private": true,
     "dependencies": {
@@ -244,6 +246,7 @@
         "protractor": "~7.0.0",
         "ts-node": "~4.1.0",
         "tslint": "~6.1.0",
-        "typescript": "~4.0.7"
+        "typescript": "~4.0.7",
+        "webpack-bundle-analyzer": "^4.4.2"
     }
 }
