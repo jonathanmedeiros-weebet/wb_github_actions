@@ -140,6 +140,27 @@ document.onreadystatechange = async function() {
                             templateData.player_b_result = (result_b >= 0) ? result_b : '';
                         }
 
+                        const hasResult = '';
+                        const isCanceledOrFinished = {
+                            status: false,
+                            sitation: ''
+                        };
+
+                        if (ticketItem.encerrado || ticketItem.removido) {
+                            isCanceledOrFinished.status = true
+                            if (ticketItem.encerrado) {
+                                isCanceledOrFinished.sitation = 'encerrado';
+                            } else {
+                                isCanceledOrFinished.sitation = 'cancelado';
+                            }
+                        }
+
+                        if (ticketItem.resultado) {
+                            hasResult = ticketItem.resultado;
+                        }
+
+
+
 
                         if (ticketData.tipo == 'esportes') {
 
@@ -196,8 +217,8 @@ document.onreadystatechange = async function() {
                                     </div>
                                 </div>
                                 <div class="dashed" id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
-                                <div class="${ (ticketItem.encerrado || ticketItem.removido) ?  'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }">
-                                ${ (ticketItem.encerrado || ticketItem.removido)  ? ticketItem.encerrado ? 'encerrado' : 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
+                                <div class="${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult}">
+                                ${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult  }</div>
                             </div>
                         </div>`;
 
@@ -243,8 +264,8 @@ document.onreadystatechange = async function() {
                                     <div  class="dashed"> 
                                         Resposta: ${ticketItem.odd_nome} (${ticketItem.cotacao})
                                     </div>
-                                    <div class="${ (ticketItem.encerrado || ticketItem.removido) ? 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }" >
-                                    ${ (ticketItem.encerrado || ticketItem.removido) ? ticketItem.encerrado ? 'encerrado' : 'cancelado' : ticketItem.resultado ? ticketItem.resultado : ''  }</div>
+                                    <div class="${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult}" >
+                                    ${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult }</div>
                                     </div>
                                 </div>`;
                         }
