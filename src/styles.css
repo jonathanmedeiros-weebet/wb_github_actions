@@ -502,7 +502,6 @@ button {
 }
 
 .flag-icon {
-    background-image: url(assets/images/ww.svg);
     background-color: var(--highlight);
 }
 
