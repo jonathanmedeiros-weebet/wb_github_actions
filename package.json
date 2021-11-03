@@ -6,6 +6,8 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build --prod",
+        "build:stats": "ng build --stats-json",
+        "analyze": "webpack-bundle-analyzer dist/stats.json",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
@@ -54,7 +56,6 @@
         "betsplacar.club": "gulp betsplacar.club",
         "bet358.wee.bet": "gulp bet358.wee.bet",
         "esportebetsvip.com": "gulp esportebetsvip.com",
-        "eurobet333.wee.bet": "gulp eurobet333.wee.bet",
         "betsgol.net": "gulp betsgol.net",
         "mastersports.wee.bet": "gulp mastersports.wee.bet",
         "centralbets.club": "gulp centralbets.club",
@@ -117,9 +118,7 @@
         "portugabet.site": "gulp portugabet.site",
         "ingamesports.wee.bet": "gulp ingamesports.wee.bet",
         "gobets.wee.bet": "gulp gobets.wee.bet",
-        "imperiobonitobet.site": "gulp imperiobonitobet.site",
         "bet316top.wee.bet": "gulp bet316top.wee.bet",
-        "brazilsportsrodon.wee.bet": "gulp brazilsportsrodon.wee.bet",
         "eisports.club": "gulp eisports.club",
         "clubedabola.wee.bet": "gulp clubedabola.wee.bet",
         "lbbet.wee.bet": "gulp lbbet.wee.bet",
@@ -133,7 +132,6 @@
         "7bet.wee.bet": "gulp 7bet.wee.bet",
         "bet99.site": "gulp bet99.site",
         "garanhunsbet.site": "gulp garanhunsbet.site",
-        "betcoinsports.wee.bet": "gulp betcoinsports.wee.bet",
         "cearabetsplacardarodada.wee.bet": "gulp cearabetsplacardarodada.wee.bet",
         "carecasbet.site": "gulp carecasbet.site",
         "apostatop.wee.bet": "gulp apostatop.wee.bet",
@@ -151,8 +149,6 @@
         "sports10.net": "gulp sports10.net",
         "jogabet.wee.bet": "gulp jogabet.wee.bet",
         "maisporte.wee.bet": "gulp maisporte.wee.bet",
-        "onllinesports.com": "gulp onllinesports.com",
-        "supersports.wee.bet": "gulp supersports.wee.bet",
         "rrbets.wee.bet": "gulp rrbets.wee.bet",
         "sportingnetvip.bet": "gulp sportingnetvip.bet",
         "techbet.wee.bet": "gulp techbet.wee.bet",
@@ -162,7 +158,6 @@
         "betsnet.me": "gulp betsnet.me",
         "lobobet.net": "gulp lobobet.net",
         "texas93.bet": "gulp texas93.bet",
-        "mybets.club": "gulp mybets.club",
         "topsports.wee.bet": "gulp topsports.wee.bet",
         "maranhaobets.net": "gulp maranhaobets.net",
         "pagadorabet.com": "gulp pagadorabet.com",
@@ -184,7 +179,9 @@
         "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
         "imperiobet.wee.bet": "gulp imperiobet.wee.bet",
         "florianobets.wee.bet": "gulp florianobets.wee.bet",
-        "amgbet.wee.bet": "gulp amgbet.wee.bet"
+        "amgbet.wee.bet": "gulp amgbet.wee.bet",
+        "casadasorte.wee.bet": "gulp casadasorte.wee.bet",
+        "egolbet.com": "gulp egolbet.com"
     },
     "private": true,
     "dependencies": {
@@ -247,6 +244,7 @@
         "protractor": "~7.0.0",
         "ts-node": "~4.1.0",
         "tslint": "~6.1.0",
-        "typescript": "~4.0.7"
+        "typescript": "~4.0.7",
+        "webpack-bundle-analyzer": "^4.4.2"
     }
 }

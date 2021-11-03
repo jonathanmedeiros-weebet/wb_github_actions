@@ -451,15 +451,6 @@ gulp.task('esportebetsvip.com', function (done) {
     });
 });
 
-gulp.task('eurobet333.wee.bet', function (done) {
-    tasks(done, {
-        host: "eurobet333.wee.bet",
-        banca: "EUROBET 333",
-        styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #d70101; --highlight: #f8c803; --foreground-highlight: #fff;--event-time:#000",
-        aditional_styles: ".navbar-mobile{background-color:#fff!important;} @media only screen and (max-width: 600px) {.menu-conta #navbarDropdown{color:#000;}}"
-    });
-});
-
 gulp.task('betsgol.net', function (done) {
     tasks(done, {
         host: "betsgol.wee.bet",
@@ -953,28 +944,12 @@ gulp.task('gobets.wee.bet', function (done) {
     });
 });
 
-gulp.task('imperiobonitobet.site', function (done) {
-    tasks(done, {
-        host: "imperiobonitobet.site",
-        banca: "IMPÉRIO BONITO",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #ffd700;--foreground-odds: #000;--highlight:red;--foreground-highlight:#fff;",
-    });
-});
-
 gulp.task('bet316top.wee.bet', function (done) {
     tasks(done, {
         host: "bet316top.wee.bet",
         banca: "BETS 316 TOP",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#e50d1b; --foreground-sidebar-right: #fff; --sidebar-left: #e50d1b; --foreground-sidebar-left: #fff; --odds: #d5d7d6;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:#444444;--foreground-highlight:#fff;--league: #868686; --foreground-league: #fff;",
         aditional_styles: ".indentificacao .mais-opcoes{color: #e50d1b;} .jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;} .jogos, .eventos{ color: #e50d1b!important; }",
-    });
-});
-
-gulp.task('brazilsportsrodon.wee.bet', function (done) {
-    tasks(done, {
-        host: "brazilsportsrodon.wee.bet",
-        banca: "BRAZIL SPORTS RODON",
-        styles: "",
     });
 });
 
@@ -1086,14 +1061,6 @@ gulp.task('cearabetsplacardarodada.wee.bet', function (done) {
     tasks(done, {
         host: "cearabetsplacardarodada.wee.bet",
         banca: "CEARÁ BETS",
-        styles: "",
-    });
-});
-
-gulp.task('betcoinsports.wee.bet', function (done) {
-    tasks(done, {
-        host: "betcoinsports.wee.bet",
-        banca: "BET COIN SPORTS",
         styles: "",
     });
 });
@@ -1226,22 +1193,6 @@ gulp.task('maisporte.wee.bet', function (done) {
     });
 });
 
-gulp.task('onllinesports.com', function (done) {
-    tasks(done, {
-        host: "onllinesports.com",
-        banca: "ONLLINE SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('supersports.wee.bet', function (done) {
-    tasks(done, {
-        host: "supersports.wee.bet",
-        banca: "SUPER SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('rrbets.wee.bet', function (done) {
     tasks(done, {
         host: "rrbets.wee.bet",
@@ -1310,14 +1261,6 @@ gulp.task('texas93.bet', function (done) {
     tasks(done, {
         host: "texas93.bet",
         banca: "TEXAS 93",
-        styles: "",
-    });
-});
-
-gulp.task('mybets.club', function (done) {
-    tasks(done, {
-        host: "mybets.club",
-        banca: "MY BETS",
         styles: "",
     });
 });
@@ -1503,6 +1446,22 @@ gulp.task('amgbet.wee.bet', function (done) {
     tasks(done, {
         host: "amgbet.wee.bet",
         banca: "AMG BET",
+        styles: "",
+    });
+});
+
+gulp.task('casadasorte.wee.bet', function (done) {
+    tasks(done, {
+        host: "casadasorte.wee.bet",
+        banca: "CASA DA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('egolbet.com', function (done) {
+    tasks(done, {
+        host: "egolbet.com",
+        banca: "É GOL BET",
         styles: "",
     });
 });
