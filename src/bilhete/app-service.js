@@ -76,9 +76,14 @@ async function getResuts(ids) {
     }
 }
 
-
 function displayError(message) {
     document.getElementById('error').hidden = false;
     document.getElementById('ticket').style.display = 'none';
-    document.getElementById('error-message').append(message);
+
+    if (message.toLowerCase() === 'failed to fetch') {
+        document.getElementById('error-message').append('Imposível conectar ao servidor');
+    } else {
+        document.getElementById('error-message').append(message);
+    }
+    document.getElementById('loader').hidden = true;
 }
