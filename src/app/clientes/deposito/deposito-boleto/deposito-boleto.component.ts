@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 
 @Component({
-  selector: 'app-deposito-boleto',
-  templateUrl: './deposito-boleto.component.html',
-  styleUrls: ['./deposito-boleto.component.css']
+    selector: 'app-deposito-boleto',
+    templateUrl: './deposito-boleto.component.html',
+    styleUrls: ['./deposito-boleto.component.css']
 })
-export class DepositoBoletoComponent implements OnInit {
+export class DepositoBoletoComponent extends BaseFormComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+        super();
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit() {
+    }
+
+    createForm() {
+    }
+
+    handleError(error: string) {
+    }
+
+    submit() {
+    }
 
 }
