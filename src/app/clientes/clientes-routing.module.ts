@@ -24,8 +24,8 @@ const routes: Routes = [{
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
         },
         {
-            path: 'recarga',
-            loadChildren: () => import('./solicitacao-recarga/solicitacao-recarga.module').then(a => a.SolicitacaoRecargaModule)
+            path: 'deposito',
+            loadChildren: () => import('./deposito/deposito.module').then(a => a.DepositoModule)
         }
     ]
 }];
