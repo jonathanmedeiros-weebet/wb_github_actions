@@ -89,7 +89,7 @@
             </a>
         </div>
         <div *ngIf="combateHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/combate/eventos']">
+            <a class="" [routerLink]="['/esportes/combate']">
                 <svg-icon src="assets/images/boxing.svg" [svgStyle]="svgCss()"></svg-icon>
                 <span>Combate</span>
             </a>
@@ -100,7 +100,7 @@
                 <span>Futebol Americano</span>
             </a>
         </div>
-        <div class="category" routerLinkActive="active">
+        <!-- <div class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/tenis']">
                 <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
                 <span>Tênis</span>
@@ -135,7 +135,7 @@
                 <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
                 <span>Handebol</span>
             </a>
-        </div>
+        </div> -->
         <div *ngIf="esportsHabilitado" class="category" routerLinkActive="active">
             <a class="" [routerLink]="['/esportes/esports/eventos']">
                 <i class="fa fa-gamepad"></i> E-Sports

@@ -14,7 +14,8 @@ export const routes: Routes = [
     },
     {
         path: 'combate',
-        loadChildren: () => import('app/esportes/combate/combate.module').then(m => m.CombateModule),
+        data: { sportId: '9' },
+        loadChildren: () => import('app/esportes/modalidades/modalidades.module').then(m => m.ModalidadesModule),
         canActivate: [CombateGuard]
     },
     {
