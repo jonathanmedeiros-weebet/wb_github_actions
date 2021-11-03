@@ -8,8 +8,6 @@ import {Estado} from '../../shared/models/endereco/estado';
 import {Cidade} from '../../shared/models/endereco/cidade';
 import {EnderecoWeebet} from '../../shared/models/endereco/enderecoWeebet';
 import {UtilsService} from '../../shared/services/utils/utils.service';
-import {result} from 'lodash';
-import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-perfil-cliente',

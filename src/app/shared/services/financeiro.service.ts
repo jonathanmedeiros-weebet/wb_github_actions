@@ -1,0 +1,31 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+
+import {Observable} from 'rxjs';
+import {catchError, map, take} from 'rxjs/operators';
+
+import {HeadersService} from './utils/headers.service';
+import {ErrorService} from './utils/error.service';
+import {config} from '../config';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class FinanceiroService {
+    private financeiroUrl = `${config.BASE_URL}/financeiro`;
+
+    constructor(
+        private http: HttpClient,
+        private header: HeadersService,
+        private errorService: ErrorService
+    ) { }
+
+    gerarPix(valor): Observable<any> {
+        return this.http.post(this.financeiroUrl + '/gerarPix', JSON.stringify({valor: valor}), this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+}

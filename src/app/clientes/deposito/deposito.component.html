@@ -8,34 +8,25 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <div style="width: 100%;
-                         display: flex; justify-content: space-evenly" ngbNav #nav="ngbNav" [activeId]="activeId">
-                            <a class="opcao-pagamento" [ngbNavItem]="'pix'" ngbNavLink>
+                         display: flex; justify-content: space-evenly">
+                            <a class="opcao-pagamento" [routerLink]="['pix']" routerLinkActive="active">
                                 <img src="https://logospng.org/download/pix/logo-pix-icone-1024.png" width="20">
                                 <span style="margin-left: 5px">PIX</span>
-                                <ng-template ngbNavContent>
-                                    <app-deposito-pix></app-deposito-pix>
-                                </ng-template>
                             </a>
-                            <a class="opcao-pagamento" [ngbNavItem]="'boleto'" ngbNavLink>
+                            <a class="opcao-pagamento" [routerLink]="['boleto']" routerLinkActive="active">
                                 <img
                                     src="https://blog.negociei.com.vc/wp-content/uploads/2017/05/29032017100819000000_atualizarboleto-1024x855.png"
                                     width="20">
                                 <span style="margin-left: 5px">Boleto</span>
-                                <ng-template ngbNavContent>
-                                    <app-deposito-boleto></app-deposito-boleto>
-                                </ng-template>
                             </a>
-                            <a class="opcao-pagamento" [ngbNavItem]="'cartao'" ngbNavLink>
+                            <a class="opcao-pagamento" [routerLink]="['cartao']" routerLinkActive="active">
                                 <img
                                     src="https://w7.pngwing.com/pngs/584/302/png-transparent-computer-icons-credit-card-pict-kohut-angle-text-payment-thumbnail.png"
                                     width="20">
                                 <span style="margin-left: 5px">Cartão</span>
-                                <ng-template ngbNavContent>
-                                    <app-deposito-cartao></app-deposito-cartao>
-                                </ng-template>
                             </a>
                         </div>
-                        <div [ngbNavOutlet]="nav"></div>
+                        <router-outlet></router-outlet>
                     </div>
                 </div>
             </div>

@@ -5,8 +5,27 @@ import {DepositoComponent} from './deposito.component';
 const routes: Routes = [
     {
         path: '',
-        component: DepositoComponent
-    }
+        component: DepositoComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'pix',
+                pathMatch: 'full'
+            },
+            {
+                path: 'pix',
+                loadChildren: () => import('./deposito-pix/deposito-pix.module').then(m => m.DepositoPixModule)
+            },
+            {
+                path: 'boleto',
+                loadChildren: () => import('./deposito-boleto/deposito-boleto.module').then(m => m.DepositoBoletoModule)
+            },
+            {
+                path: 'cartao',
+                loadChildren: () => import('./deposito-cartao/deposito-cartao.module').then(m => m.DepositoCartaoModule)
+            }
+        ]
+    },
 ];
 
 @NgModule({

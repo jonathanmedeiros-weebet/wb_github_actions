@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-spinner *ngIf="submitting"></app-spinner>
+    <div class="row">
+        <div class="col col-sm-4">
+            <div class="form-group required">
+                <label class="label">Valor da Recarga:</label>
+                <input class="form-control" type="number" placeholder="R$"
+                       formControlName="valor">
+                <app-error-msg [control]="form.get('valor')"></app-error-msg>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-custom" [disabled]="submitting">
+                    Gerar Pix
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
