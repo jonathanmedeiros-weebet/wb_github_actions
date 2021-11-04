@@ -1,10 +1,10 @@
 async function getParams() {
     var url = window.location.pathname;
 
-    var slug = 'bet2.wee.bet';
-    // var centerUrl = 'central.' + slug;
+    var slug = 'demo.wee.bet';
+    var centerUrl = 'central.' + slug;
     // var slug = 'demo.wee.bet';
-    var centerUrl = 'local.wee.bet';
+    // var centerUrl = 'local.wee.bet';
     var ticketId = url.substring(url.lastIndexOf('/') + 1);
 
     if (ticketId && centerUrl && slug) {
@@ -22,7 +22,7 @@ async function getParams() {
 
 async function getTicketData({ apiUrl, ticketId }) {
     try {
-        const request = await fetch(`http://${apiUrl}/api/apostas-por-codigo/${ticketId}`);
+        const request = await fetch(`https://${apiUrl}/api/apostas-por-codigo/${ticketId}`);
         const bet = await request.json();
         if (request.status == 404 || request.status == 500) {
             throw bet.errors;
