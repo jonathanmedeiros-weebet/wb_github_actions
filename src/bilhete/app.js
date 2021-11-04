@@ -135,8 +135,8 @@ document.onreadystatechange = async function() {
                         } else if (ticketData.tipo === 'acumuladao') {
                             const result_a = ticketItem.jogo.time_a_resultado;
                             const result_b = ticketItem.jogo.time_b_resultado;
-                            templateData.player_a_result = (result_a >= 0 && !null) ? result_a : '';
-                            templateData.player_b_result = (result_b >= 0 && !null) ? result_b : '';
+                            templateData.player_a_result = (result_a >= 0 && result_a != null) ? result_a : '';
+                            templateData.player_b_result = (result_b >= 0 && result_a != null) ? result_b : '';
                         }
 
                         let hasResult = '';
@@ -171,11 +171,11 @@ document.onreadystatechange = async function() {
                                 <div class="event-time">${new Date(ticketItem.jogo_horario).toLocaleString()}</div>
                                 <div id="match">
                                     <div id="match-result">
-                                        ${ticketItem.time_a_nome? ticketItem.time_a_nome.toUpperCase() 
+                                        ${ticketItem.time_a_nome? ticketItem.time_a_nome.toUpperCase()
                                         : ticketItem.odd_nome.toUpperCase()}
                                     </div>
                                     <div>
-                                        ${templateData.player_a_result} - ${templateData.player_b_result}                  
+                                        ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </div>
                                     <div>
                                         ${ticketItem.time_b_nome? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -186,7 +186,7 @@ document.onreadystatechange = async function() {
                                         ${templateData.player_a_1half_result}
                                     </div>
                                     <div>
-                                        Gols 1º Tempo  
+                                        Gols 1º Tempo
                                     </div>
                                     <div>
                                         ${templateData.player_b_1half_result}
@@ -197,7 +197,7 @@ document.onreadystatechange = async function() {
                                         ${templateData.player_a_2half_result}
                                     </div>
                                     <div>
-                                        Gols 2º Tempo  
+                                        Gols 2º Tempo
                                     </div>
                                     <div>
                                         ${templateData.player_b_2half_result}
@@ -209,7 +209,7 @@ document.onreadystatechange = async function() {
                                         ${templateData.player_a_corner_kicks}
                                     </div>
                                     <div>
-                                        Escanteios 
+                                        Escanteios
                                     </div>
                                     <div>
                                         ${templateData.player_b_corner_kicks}
@@ -225,7 +225,7 @@ document.onreadystatechange = async function() {
 
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                <div class="event-time">${new Date(ticketItem.jogo.horario).toLocaleString()}</div> 
+                                <div class="event-time">${new Date(ticketItem.jogo.horario).toLocaleString()}</div>
                                 <div class="players">
                                     <div class="player player-a-data" id="player-a-data">
                                     <div class="player-name">
@@ -236,7 +236,7 @@ document.onreadystatechange = async function() {
                                     <div id="scores">
                                         <strong>
                                             ${templateData.player_a_result } - ${templateData.player_b_result }
-                                        </strong>    
+                                        </strong>
                                     </div>
                                     <div id="palpite">Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
                                     <div class="${ticketItem.resultado}">${ticketItem.resultado || ''}</div>
@@ -260,7 +260,7 @@ document.onreadystatechange = async function() {
                                     <div >
                                         <strong>${ticketItem.desafio_nome}</strong>
                                     </div>
-                                    <div  class="dashed"> 
+                                    <div  class="dashed">
                                         Resposta: ${ticketItem.odd_nome} (${ticketItem.cotacao})
                                     </div>
                                     <div class="${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult}" >
