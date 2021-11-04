@@ -135,8 +135,8 @@ document.onreadystatechange = async function() {
                         } else if (ticketData.tipo === 'acumuladao') {
                             const result_a = ticketItem.jogo.time_a_resultado;
                             const result_b = ticketItem.jogo.time_b_resultado;
-                            templateData.player_a_result = (result_a >= 0) ? result_a : '';
-                            templateData.player_b_result = (result_b >= 0) ? result_b : '';
+                            templateData.player_a_result = (result_a >= 0 && !null) ? result_a : '';
+                            templateData.player_b_result = (result_b >= 0 && !null) ? result_b : '';
                         }
 
                         let hasResult = '';
