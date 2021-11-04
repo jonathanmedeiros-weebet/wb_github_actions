@@ -47,7 +47,7 @@ document.onreadystatechange = async function() {
                         }
                     }
 
-                    if (!ticketData.resultado) {
+                    if (!ticketData.resultado || !ticketData.ativo) {
                         this.getElementById('has-result').style.display = 'none';
                     } else {
                         this.getElementById('result').append(ticketData.resultado);
