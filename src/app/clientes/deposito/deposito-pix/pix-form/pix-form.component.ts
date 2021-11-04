@@ -11,6 +11,7 @@ import {MessageService} from '../../../../shared/services/utils/message.service'
 })
 export class PixFormComponent extends BaseFormComponent implements OnInit {
     submitting = false;
+    pix;
 
     constructor(
         private fb: FormBuilder,
@@ -36,18 +37,23 @@ export class PixFormComponent extends BaseFormComponent implements OnInit {
 
     submit() {
         this.submitting = true;
-        const valor = this.form.value.valor;
-
-        this.financeiroService.gerarPix(valor)
+        const detalhesPagamento = this.form.value;
+        detalhesPagamento.metodo = 'pix';
+        this.financeiroService.processarPagamento(detalhesPagamento)
             .subscribe(
                 res => {
+                    this.pix = res;
                     console.log(res);
                 },
                 error => {
                     this.handleError(error);
+                    this.submitting = false;
                 }
             );
-        this.submitting = false;
+    }
+
+    finalize(values: any) {
+        this.pix = null;
     }
 
 }

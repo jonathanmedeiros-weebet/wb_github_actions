@@ -18,10 +18,12 @@ export class FinanceiroService {
         private http: HttpClient,
         private header: HeadersService,
         private errorService: ErrorService
-    ) { }
+    ) {
+    }
 
-    gerarPix(valor): Observable<any> {
-        return this.http.post(this.financeiroUrl + '/gerarPix', JSON.stringify({valor: valor}), this.header.getRequestOptions(true))
+    processarPagamento(detalhesPagamento): Observable<any> {
+        return this.http.post(this.financeiroUrl + '/processarPagamento',
+            JSON.stringify(detalhesPagamento), this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),
