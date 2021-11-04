@@ -30,7 +30,6 @@ document.onreadystatechange = async function() {
 
                     ticketData.itens = ticketItens;
 
-                    console.log(ticketData.valor);
                     if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                         this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                         this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toFixed(3).replace(/\.000$/, "").replace('.', ','));
@@ -140,7 +139,7 @@ document.onreadystatechange = async function() {
                             templateData.player_b_result = (result_b >= 0) ? result_b : '';
                         }
 
-                        const hasResult = '';
+                        let hasResult = '';
                         const isCanceledOrFinished = {
                             status: false,
                             sitation: ''
@@ -236,7 +235,7 @@ document.onreadystatechange = async function() {
                                 <div class="separators">
                                     <div id="scores">
                                         <strong>
-                                            ${templateData.player_a_result || '' } - ${templateData.player_b_result || ''}
+                                            ${templateData.player_a_result } - ${templateData.player_b_result }
                                         </strong>    
                                     </div>
                                     <div id="palpite">Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
