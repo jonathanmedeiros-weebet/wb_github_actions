@@ -1,4 +1,4 @@
-document.onreadystatechange = async function() {
+document.onreadystatechange = async function () {
     if (this.readyState === 'complete') {
 
         try {
@@ -158,9 +158,6 @@ document.onreadystatechange = async function() {
                             hasResult = ticketItem.resultado;
                         }
 
-
-
-
                         if (ticketData.tipo == 'esportes') {
 
                             div.innerHTML = `
@@ -171,14 +168,14 @@ document.onreadystatechange = async function() {
                                 <div class="event-time">${new Date(ticketItem.jogo_horario).toLocaleString()}</div>
                                 <div id="match">
                                     <div id="match-result">
-                                        ${ticketItem.time_a_nome? ticketItem.time_a_nome.toUpperCase()
-                                        : ticketItem.odd_nome.toUpperCase()}
+                                        ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase()
+                                    : ticketItem.odd_nome.toUpperCase()}
                                     </div>
                                     <div>
                                         ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </div>
                                     <div>
-                                        ${ticketItem.time_b_nome? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
+                                        ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
                                     </div>
                                 </div>
                                 <div id="first-half">
@@ -216,8 +213,8 @@ document.onreadystatechange = async function() {
                                     </div>
                                 </div>
                                 <div class="dashed" id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
-                                <div class="${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult}">
-                                ${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult  }</div>
+                                <div class="${isCanceledOrFinished.status == true ? isCanceledOrFinished.sitation : hasResult}">
+                                ${isCanceledOrFinished.status == true ? isCanceledOrFinished.sitation : hasResult}</div>
                             </div>
                         </div>`;
 
@@ -229,13 +226,13 @@ document.onreadystatechange = async function() {
                                 <div class="players">
                                     <div class="player player-a-data" id="player-a-data">
                                     <div class="player-name">
-                                        <strong>${ticketItem.jogo.time_a_nome.toUpperCase()  }</strong>
+                                        <strong>${ticketItem.jogo.time_a_nome.toUpperCase()}</strong>
                                     </div>
                                 </div>
                                 <div class="separators">
                                     <div id="scores">
                                         <strong>
-                                            ${templateData.player_a_result } - ${templateData.player_b_result }
+                                            ${templateData.player_a_result} - ${templateData.player_b_result}
                                         </strong>
                                     </div>
                                     <div id="palpite">Palpite: <span> ${ticketItem.time_a_resultado} x ${ticketItem.time_b_resultado}</span></div>
@@ -263,8 +260,8 @@ document.onreadystatechange = async function() {
                                     <div  class="dashed">
                                         Resposta: ${ticketItem.odd_nome} (${ticketItem.cotacao})
                                     </div>
-                                    <div class="${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult}" >
-                                    ${ isCanceledOrFinished.status == true ?  isCanceledOrFinished.sitation : hasResult }</div>
+                                    <div class="${isCanceledOrFinished.status == true ? isCanceledOrFinished.sitation : hasResult}" >
+                                    ${isCanceledOrFinished.status == true ? isCanceledOrFinished.sitation : hasResult}</div>
                                     </div>
                                 </div>`;
                         }
