@@ -9,7 +9,7 @@
     padding: 0 0 0 255px;
 }
 
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 1024px) {
     .sport-content{
         padding: 0;
     }

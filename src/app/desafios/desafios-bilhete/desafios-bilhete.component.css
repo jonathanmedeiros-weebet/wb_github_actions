@@ -154,7 +154,7 @@
     padding-right: 20px;
 }
 
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 1024px) {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
         position: fixed !important;

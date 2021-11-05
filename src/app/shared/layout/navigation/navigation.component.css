@@ -1,5 +1,5 @@
-#sidebar-wrapper{
-    width:255px;
+#sidebar-wrapper {
+    width: 255px;
     position: absolute;
     top: 0;
     left: 0;
@@ -8,21 +8,21 @@
     z-index: 1000;
 }
 
-#sidebar-wrapper a{
+#sidebar-wrapper a {
     color: var(--foreground-sidebar-left);
     text-decoration: none;
     cursor: pointer;
 }
 
-#sidebar-wrapper .dropdown-item{
+#sidebar-wrapper .dropdown-item {
     color: inherit;
 }
 
-#sidebar-wrapper .dropdown-item:hover{
+#sidebar-wrapper .dropdown-item:hover {
     color: inherit;
 }
 
-.sidebar-menu{
+.sidebar-menu {
     position: relative;
     position: relative;
     display: flex;
@@ -31,32 +31,32 @@
     flex-wrap: wrap;
 }
 
-.sidebar-menu li{
+.sidebar-menu li {
     width: 75px;
     margin-bottom: 10px;
 }
 
-.sidebar-menu .fa{
+.sidebar-menu .fa {
     font-size: 1.5rem;
 }
 
-.sidebar-menu a{
+.sidebar-menu a {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.sidebar-brand{
+.sidebar-brand {
     text-align: center;
     margin-top: 15px;
- }
+}
 
- .sidebar-brand img{
+.sidebar-brand img {
     max-height: 120px;
     max-width: 200px;
- }
+}
 
-.sidebar-nav{
+.sidebar-nav {
     background-color: var(--sidebar-left);
     padding: 0;
     overflow: auto;
@@ -64,25 +64,25 @@
 
 .sidebar-nav .regiao:last-of-type,
 .sidebar-nav .campeonato:last-of-type,
-.sidebar-nav .supresinha:last-of-type{
+.sidebar-nav .supresinha:last-of-type {
     margin-bottom: 15px;
 }
 
-.sidebar-nav a{
+.sidebar-nav a {
     text-transform: uppercase;
 }
 
-.sidebar-nav .group{
-  display: inline-block;
-  padding-left: 15px;
-  margin-bottom: 10px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--foreground-highlight);
-  text-transform: uppercase;
+.sidebar-nav .group {
+    display: inline-block;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--foreground-highlight);
+    text-transform: uppercase;
 }
 
-.group::before{
+.group::before {
     content: '';
     display: block;
     height: 2px;
@@ -92,54 +92,55 @@
     position: relative;
 }
 
-.sidebar-nav li{
+.sidebar-nav li {
     padding: 0;
     cursor: pointer;
 }
 
-.sidebar-nav li a{
+.sidebar-nav li a {
     padding: 10px 15px;
     display: block;
 }
 
-.sidebar-nav li a:hover{
+.sidebar-nav li a:hover {
     color: var(--highlight)!important;
 }
 
-.sidebar-nav li:not(:last-child){
-    border-bottom: 1px solid rgba(255,255,255,0.25);
+.sidebar-nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-#sidebar-wrapper ul li{
+#sidebar-wrapper ul li {
     list-style: none;
 }
 
-.btn-danger{
+.btn-danger {
     position: absolute;
     top: 110px;
     left: 260px;
     z-index: 2000;
 }
 
-.supresinha{
+.supresinha {
     cursor: pointer;
 }
 
-.regiao .flag-icon{
+.regiao .flag-icon {
     float: left;
     margin-top: 0px;
     margin-right: 4px;
     width: 15px;
     height: 15px;
 }
-.regiao > a{
+
+.regiao>a {
     position: relative;
 }
-.regiao > a:after{
+
+.regiao>a:after {
     content: '';
     width: 0;
     height: 0;
-
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-right: 5px solid var(--foreground-sidebar-left);
@@ -147,26 +148,27 @@
     right: 10px;
     top: 13px
 }
-.regiao > a.selected:after{
+
+.regiao>a.selected:after {
     content: '';
     width: 0;
     height: 0;
-
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid var(--highlight);
 }
 
-.regiao ul{
+.regiao ul {
     padding-left: 19px;
 }
 
-@media only screen and (max-width: 667px) {
+@media only screen and (max-width: 1024px) {
     .black-screen {
         width: 100%;
         height: 100%;
         position: fixed;
         background: rgba(0, 0, 0, 0.7);
-        z-index: 1000; top: 0;
+        z-index: 1000;
+        top: 0;
     }
 }
