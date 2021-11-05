@@ -1,0 +1,265 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+body {
+    justify-content: center;
+    flex-direction: row;
+    display: flex !important;
+    margin: 0 0 0 0;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.container {
+    padding: 15px;
+    width: 600px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px !important;
+}
+
+.container>div {
+    margin-bottom: 4px !important;
+}
+
+#logo-frame {
+    height: 80px;
+}
+
+#logo-frame>img {
+    height: 80px;
+    position: relative;
+}
+
+#header {
+    text-align: center;
+    background: var(--header);
+    width: 100%;
+    padding-top: 5px;
+    margin-bottom: 15px !important;
+    padding-bottom: 5px;
+    color: var(--foreground-header);
+    font-weight: normal;
+}
+
+#header>span {
+    font-size: 12px !important;
+}
+
+#header>h2 {
+    font-weight: normal;
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji
+}
+
+#ticket-id {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-weight: normal;
+    font-size: 30px;
+}
+
+#ticket-itens {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ticket-itens>div {
+    width: 100%;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    background: #ebeaea;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 15px;
+    text-align: center !important;
+    flex-direction: column;
+    box-sizing: border-box;
+    font-size: 12px !important;
+}
+
+.ticket-item>.event-time {
+    font-size: 12px;
+}
+
+.ticket-item>div {
+    width: 100%;
+    color: #000;
+    margin: 5px;
+}
+
+.ticket-item>.players {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ticket-item .players>.player {
+    font-size: 15px !important;
+    width: 40%;
+}
+
+.ticket-item .players>.separators {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.ticket-item .players .separators>div {
+    margin: 3px 0;
+}
+
+.ticket-item .players>.player-a-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-item .players>.player-b-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-item .players .player>div {
+    font-size: 12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#ticket-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    text-align: center;
+    align-items: center;
+}
+
+.player-name {
+    font-size: 14px !important;
+}
+
+.ganhou,
+.acertou {
+    color: #008000 !important;
+}
+
+.perdeu,
+.errou {
+    color: #fa3425 !important
+}
+
+#has-result {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+#has-result>* {
+    font-size: 18px;
+}
+
+.player-name,
+#scores {
+    font-size: 15px !important;
+}
+
+#error {
+    position: absolute;
+    width: 80%;
+    padding: 5px 25px;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    top: 10px;
+    border-radius: 20px;
+}
+
+#match {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#match>div {
+    width: 40%;
+    font-size: 14px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+#first-half {
+    display: flex;
+    justify-content: space-between;
+}
+
+#first-half>div {
+    width: 33%;
+    font-size: 12px;
+    text-align: center;
+}
+
+#second-half {
+    display: flex;
+    justify-content: space-between;
+}
+
+#second-half>div {
+    width: 33%;
+    font-size: 12px;
+    text-align: center;
+}
+
+#corner-kicks {
+    display: flex;
+    justify-content: space-between;
+}
+
+#corner-kicks>div {
+    width: 33%;
+    font-size: 12px;
+    text-align: center;
+}
+
+#match-result {
+    width: 20%;
+}
+
+#palpite {
+    font-size: 14px !important;
+}
+
+[hidden] {
+    display: none;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid var(--header);
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+
+/* Safari */
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}

@@ -6,6 +6,7 @@ import {
     AuthService, UtilsService, MessageService
 } from '../../../../services';
 import * as moment from 'moment';
+import { ApostaEsportiva, ItemApostaEsportiva} from '../../../../models';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -34,7 +35,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
-
+        
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {
                 this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
@@ -42,6 +43,9 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
                 this.cambistaPaga = this.aposta.possibilidade_ganho * ((100 - this.aposta.passador.percentualPremio) / 100);
             }
         }
+
+        const itensOrdenados = this.ordenarApostaItensPorData(this.aposta);
+        this.aposta.itens = itensOrdenados;
     }
 
     resultadoClass(item) {
@@ -72,5 +76,11 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+    
+    private ordenarApostaItensPorData(aposta: ApostaEsportiva): Array<ItemApostaEsportiva> {
+        let itensOrdenados;
+        itensOrdenados = aposta.itens.sort((a,b) => moment(a.jogo_horario).toDate().getTime() - moment(b.jogo_horario).toDate().getTime());
+        return itensOrdenados;
     }
 }
