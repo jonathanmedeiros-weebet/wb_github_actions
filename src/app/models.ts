@@ -36,3 +36,6 @@ export * from './shared/models/aposta-esportiva/item-pre-aposta-esportiva';
 export * from './shared/models/aposta-esportiva/jogo';
 export * from './shared/models/aposta-esportiva/jogo-info';
 export * from './shared/models/aposta-esportiva/pre-aposta-esportiva';
+
+// Deposito
+export * from './shared/models/deposito/pix';

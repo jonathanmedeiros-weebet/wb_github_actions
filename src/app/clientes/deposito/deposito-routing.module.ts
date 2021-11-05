@@ -17,6 +17,10 @@ const routes: Routes = [
                 loadChildren: () => import('./deposito-pix/deposito-pix.module').then(m => m.DepositoPixModule)
             },
             {
+                path: 'whatsapp',
+                loadChildren: () => import('./deposito-whatsapp/deposito-whatsapp.module').then(m => m.DepositoWhatsappModule)
+            },
+            {
                 path: 'boleto',
                 loadChildren: () => import('./deposito-boleto/deposito-boleto.module').then(m => m.DepositoBoletoModule)
             },

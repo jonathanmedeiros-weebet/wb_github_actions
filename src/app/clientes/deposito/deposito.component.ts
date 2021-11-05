@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 
 @Component({
     selector: 'app-deposito',
@@ -6,12 +7,17 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./deposito.component.css']
 })
 export class DepositoComponent implements OnInit {
-    activeId = 'pix';
+    contatoSolicitacaoSaque;
 
-    constructor() {
+    constructor(
+        private paramsLocais: ParametrosLocaisService
+    ) {
     }
 
     ngOnInit() {
+        if (this.paramsLocais.getOpcoes().contato_solicitacao_saque) {
+            this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
+        }
     }
 
 }

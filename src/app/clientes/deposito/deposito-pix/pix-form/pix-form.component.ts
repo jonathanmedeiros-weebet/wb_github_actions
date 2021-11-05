@@ -3,6 +3,7 @@ import {BaseFormComponent} from '../../../../shared/layout/base-form/base-form.c
 import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../../shared/services/financeiro.service';
 import {MessageService} from '../../../../shared/services/utils/message.service';
+import {Pix} from '../../../../models';
 
 @Component({
     selector: 'app-pix-form',
@@ -11,7 +12,7 @@ import {MessageService} from '../../../../shared/services/utils/message.service'
 })
 export class PixFormComponent extends BaseFormComponent implements OnInit {
     submitting = false;
-    pix;
+    pix: Pix;
 
     constructor(
         private fb: FormBuilder,
@@ -43,7 +44,6 @@ export class PixFormComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.pix = res;
-                    console.log(res);
                 },
                 error => {
                     this.handleError(error);
@@ -55,5 +55,4 @@ export class PixFormComponent extends BaseFormComponent implements OnInit {
     finalize(values: any) {
         this.pix = null;
     }
-
 }

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {timeout} from 'rxjs/operators';
+import {MessageService} from '../../../../shared/services/utils/message.service';
+import {Pix} from '../../../../models';
 
 @Component({
     selector: 'app-pix-result',
@@ -7,13 +8,21 @@ import {timeout} from 'rxjs/operators';
     styleUrls: ['./pix-result.component.css']
 })
 export class PixResultComponent implements OnInit {
-    @Input() pix;
+    @Input() pix: Pix;
     @Output() onFinish = new EventEmitter();
 
-    constructor() {
+    constructor(
+        private messageService: MessageService
+    ) {
     }
 
     ngOnInit() {
     }
 
+    copyInputMessage(inputElement) {
+        inputElement.select();
+        document.execCommand('copy');
+        inputElement.setSelectionRange(0, 0);
+        this.messageService.success('QRCode copiado para área de transferência');
+    }
 }

@@ -37,7 +37,9 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
+        if (this.paramsLocais.getOpcoes().contato_solicitacao_saque) {
+            this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
+        }
 
         if (window.innerWidth < 669) {
             this.smallScreen = true;
