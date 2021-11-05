@@ -71,6 +71,10 @@ const appRoutes: Routes = [
         component: AuthLayoutComponent,
         loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
     },
+    {
+        path: 'bilhete/:codigo',
+        component: CupomComponent
+    }
 ];
 
 @NgModule({
