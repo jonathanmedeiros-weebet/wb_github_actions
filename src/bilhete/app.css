@@ -186,6 +186,7 @@ body {
 #match {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #match>div {

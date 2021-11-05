@@ -3,8 +3,6 @@ async function getParams() {
 
     var slug = '[HOST]';
     var centerUrl = 'central.' + slug;
-    // var slug = 'demo.wee.bet';
-    // var centerUrl = 'weebet.local';
     var ticketId = url.substring(url.lastIndexOf('/') + 1);
 
     if (ticketId && centerUrl && slug) {
