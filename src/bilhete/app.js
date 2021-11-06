@@ -106,19 +106,19 @@ document.onreadystatechange = async function () {
                         }
                     }
 
-                    const templateData = {
-                        player_a_result: '',
-                        player_b_result: '',
-                        player_a_1half_result: '',
-                        player_b_1half_result: '',
-                        player_a_2half_result: '',
-                        player_b_2half_result: '',
-                        player_a_corner_kicks: '',
-                        player_b_corner_kicks: '',
-                    };
-
                     for (var ticketItem of ticketData.itens) {
+                        const templateData = {
+                            player_a_result: '',
+                            player_b_result: '',
+                            player_a_1half_result: '',
+                            player_b_1half_result: '',
+                            player_a_2half_result: '',
+                            player_b_2half_result: '',
+                            player_a_corner_kicks: '',
+                            player_b_corner_kicks: '',
+                        };    
                         var div = this.createElement('div');
+
                         if (ticketData.tipo === 'esportes') {
                             var mappedResults = mapEsportes.get(ticketItem.jogo_api_id);
                             if (mappedResults) {
@@ -159,7 +159,6 @@ document.onreadystatechange = async function () {
                         }
 
                         if (ticketData.tipo == 'esportes') {
-
                             div.innerHTML = `
                             <div class="ticket-item">
                                 <div>
@@ -219,7 +218,6 @@ document.onreadystatechange = async function () {
                         </div>`;
 
                         } else if (ticketData.tipo === 'acumuladao') {
-
                             div.innerHTML =
                                 `<div class="ticket-item">
                                 <div class="event-time">${new Date(ticketItem.jogo.horario).toLocaleString()}</div>
@@ -247,7 +245,6 @@ document.onreadystatechange = async function () {
                     </div>
                     `;
                         } else {
-
                             div.innerHTML =
                                 `<div class="ticket-item">
                                     <div class="event-time">${new Date(ticketItem.desafio_datahora_encerramento).toLocaleString()}</div>
@@ -265,11 +262,13 @@ document.onreadystatechange = async function () {
                                     </div>
                                 </div>`;
                         }
+
                         if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                             if (ticketItem.encerrado || ticketItem.removido) {
                                 div.getElementsByClassName('dashed')[0].style.textDecoration = 'line-through'
                             }
                         }
+
                         this.getElementById('ticket-itens').appendChild(div);
                     }
                 }
