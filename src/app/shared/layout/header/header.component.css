@@ -1,10 +1,7 @@
 header {
     width: 100%;
     position: fixed;
-    /* left: auto;
-    right: 0;
-    top: 0; */
-    /* z-index: 999; */
+    z-index: 999;
 }
 
 header a {
