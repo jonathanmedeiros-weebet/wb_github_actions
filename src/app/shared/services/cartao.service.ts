@@ -83,10 +83,10 @@ export class CartaoService {
             );
     }
 
-    setPagamento(id) {
-        const url = `${this.SolicitacoesSaqueUrl}/${id}/pagamento`;
+    setPagamento(solicitacaoSaque) {
+        const url = `${this.SolicitacoesSaqueUrl}/${solicitacaoSaque.id}/pagamento`;
 
-        return this.http.post(url, {}, this.header.getRequestOptions(true))
+        return this.http.post(url, { version: solicitacaoSaque.version }, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),

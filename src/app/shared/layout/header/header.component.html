@@ -1,6 +1,6 @@
 <header [@openClose]="isOpen ? 'open' : 'closed'">
     <!-- Fixed navbar -->
-    <nav class="navbar-mobile navbar navbar-expand-md navbar-dark">
+    <nav class="navbar-mobile navbar navbar-expand-custom navbar-dark">
         <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,8 +13,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -43,21 +42,18 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username"
-                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
                         <div class="form-group" [ngClass]="applyCssDivError('password')">
-                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                formControlName="password" placeholder="Senha">
+                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')" formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
@@ -166,8 +162,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -196,21 +191,18 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username"
-                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
                         <div class="form-group" [ngClass]="applyCssDivError('password')">
-                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                formControlName="password" placeholder="Senha">
+                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')" formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>

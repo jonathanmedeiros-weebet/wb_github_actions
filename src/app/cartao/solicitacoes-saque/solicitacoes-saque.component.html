@@ -64,7 +64,7 @@
                                 <td>{{solicitacao.pago ? 'PAGO' : ''}}</td>
                                 <td>
                                     <button *ngIf="solicitacao.aprovado && !solicitacao.pago" type="button"
-                                        class="btn btn-primary" (click)="setPagamento(solicitacao.id)">
+                                        class="btn btn-primary" (click)="setPagamento(solicitacao)">
                                         <i class="fa fa-money"></i>
                                     </button>
                                 </td>

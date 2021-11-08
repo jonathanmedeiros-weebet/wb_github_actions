@@ -6,8 +6,8 @@
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(153,153,153,0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(153,153,153,153.5);
+    background: rgba(153, 153, 153, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153, 153.5);
 }
 
 html {
@@ -60,7 +60,7 @@ header {
     background: #fff;
 }
 
-.content-sports{
+.content-sports {
     overflow: auto;
 }
 
@@ -77,12 +77,12 @@ header {
     color: var(--foreground-odds);
 }
 
-.btn-custom:hover{
+.btn-custom:hover {
     color: var(--highlight);
     border: 1px solid var(--highlight);
 }
 
-.btn-custom:focus{
+.btn-custom:focus {
     box-shadow: 0 0 0 0.5px var(--highlight);
 }
 
@@ -211,10 +211,6 @@ header {
     margin-top: 12px;
 }
 
-/* .pre-bilhete button{
-    width: 100%;
-} */
-
 .form-row select,
 .form-row input {
     font-size: 1.5rem;
@@ -264,7 +260,6 @@ button {
 .pre-bilhete .item-header>div label {
     margin-right: 3px;
 }
-
 
 .pre-bilhete .item-header>div span {
     font-weight: bold;
@@ -328,7 +323,7 @@ button {
     color: red !important;
 }
 
-.fechar-pre-bilhete i{
+.fechar-pre-bilhete i {
     font-size: 2rem;
 }
 
@@ -403,11 +398,12 @@ button {
     margin: 0 !important;
 }
 
+
 /* Override JS Toast*/
+
 .jq-toast-wrap {
     z-index: 90001 !important;
 }
-
 
 .form-control {
     font-size: 1.5rem;
@@ -428,18 +424,18 @@ button {
     z-index: 9002;
 }
 
-.indentificacao .horario{
+.indentificacao .horario {
     border-radius: 5px;
     padding: 0 5px;
     margin-right: 15px;
 }
 
-.content-sports-list .indentificacao .horario{
+.content-sports-list .indentificacao .horario {
     background-color: var(--event-time);
     color: var(--fg-event-time);
 }
 
-.campeonato-header{
+.campeonato-header {
     text-transform: uppercase;
     padding: 0px 10px;
     font-size: 0.9rem;
@@ -451,17 +447,19 @@ button {
     color: var(--foreground-league);
 }
 
-.campeonato-header > span{
+.campeonato-header>span {
     line-height: 29px;
 }
 
-.campeonato-header .flag-icon{
+.campeonato-header .flag-icon {
     width: 19px;
     height: 19px;
     position: absolute;
 }
 
+
 /* ODDS FUTEBOL */
+
 .odds {
     width: 100%;
     display: flex;
@@ -484,14 +482,6 @@ button {
     color: var(--foreground-selected-odds) !important;
 }
 
-/*
-.odd .nome {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-*/
-
 .odd .nome,
 .odd .valor {
     color: var(--foreground-odds);
@@ -505,18 +495,18 @@ button {
     background-color: var(--highlight);
 }
 
-.cupom-ativo{
+.cupom-ativo {
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 15px;
     background: #333;
     margin: 0;
 }
 
-.action-buttons  {
+.action-buttons {
     margin: -1rem -1rem -1rem auto;
 }
 
-.action-buttons button  {
+.action-buttons button {
     background-color: transparent;
     border: 0;
     padding: 1rem 1rem;
@@ -528,19 +518,20 @@ button {
     opacity: .5;
 }
 
-.tipo-apostas .nav{
+.tipo-apostas .nav {
     padding: 10px!important;
     justify-content: center!important;
 }
 
-.tipo-apostas .nav-pills .nav-item{
+.tipo-apostas .nav-pills .nav-item {
     max-width: 25%;
 }
 
 .tipo-apostas .nav-pills .nav-link.active,
-.tipo-apostas .nav-pills .show > .nav-link{
+.tipo-apostas .nav-pills .show>.nav-link {
     color: var(--foreground-odds);
-    background-color:var(--odds);;
+    background-color: var(--odds);
+    ;
 }
 
 .content-loteria {
@@ -552,7 +543,7 @@ button {
     margin-top: 30px;
 }
 
-.margin-top-15{
+.margin-top-15 {
     margin-top: 15px;
 }
 
@@ -580,47 +571,44 @@ button {
     margin-bottom: 5px;
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+
+/* Large devices (desktops, 1025px and up) */
+
+@media (min-width: 1025px) {
     #fixed-bar-bilhete {
         display: none
     }
-
     .fechar-pre-bilhete {
         display: none;
     }
-
     .pre-bilhete {
         display: block;
     }
-
     .odds .odd {
         width: 33.33%;
     }
-
     .odds .odd-enabled:hover {
         background-color: var(--highlight);
     }
-
     .odds .odd-enabled:hover span {
         color: var(--foreground-selected-odds) !important;
     }
+    .loteria-content .add-palpite {
+        margin-top: 24px;
+    }
 }
 
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 1024px) {
     #page-wrapper {
         margin-top: 113px;
     }
-
     #default-content {
         padding: 10px 15px;
         height: calc(100vh - 111px);
     }
-
     .loteria-content {
         padding: 0;
     }
-
     .loteria-content .pre-bilhete {
         padding: 40px 15px 0;
         position: absolute !important;
@@ -628,39 +616,30 @@ button {
         height: 100% !important;
         width: 100% !important;
     }
-
     .content-loteria {
         padding-bottom: 90px !important;
     }
-
     .odds .odd {
         margin-bottom: 5px;
         width: 50%;
     }
-
     .odds .odd:nth-of-type(1),
     .odds .odd:nth-of-type(2),
     .odds .odd:nth-of-type(3) {
         width: 33.33%;
     }
-
-    .square-group{
+    .square-group {
         justify-content: center;
     }
-
-    .add-palpite{
+    .add-palpite {
         display: block;
         width: 100%
     }
 }
 
-@media only screen and (min-width: 668px) {
-    .loteria-content .add-palpite{
-        margin-top: 24px;
-    }
-}
 
 /* Spinner */
+
 .lds-ring {
     display: inline-block;
     position: fixed;
@@ -697,7 +676,7 @@ button {
     animation-delay: -0.15s;
 }
 
-.sem-evento{
+.sem-evento {
     padding: 10px;
     font-size: 1.5rem;
 }
@@ -727,15 +706,15 @@ button {
 }
 
 .value-informations .valores button:hover {
-        color: var(--highlight);
-        border: 1px solid var(--highlight);
+    color: var(--highlight);
+    border: 1px solid var(--highlight);
 }
 
 .value-informations .valores button:focus {
     box-shadow: 0 0 0 0.5px var(--highlight);
 }
 
-.odd-disabled{
+.odd-disabled {
     cursor: not-allowed!important;
     opacity: .7;
 }
@@ -744,7 +723,6 @@ button {
     0% {
         transform: rotate(0deg);
     }
-
     100% {
         transform: rotate(360deg);
     }

@@ -53,7 +53,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 668 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();

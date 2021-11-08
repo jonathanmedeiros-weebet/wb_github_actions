@@ -185,7 +185,9 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
             valor = this.form.value.valor;
         }
 
-        const estimativaGanho = valor * this.preAposta.cotacao;
+        let cotacao = this.preAposta.cotacao > this.opcoes.fator_max ? this.opcoes.fator_max : this.preAposta.cotacao;
+
+        const estimativaGanho = valor * cotacao;
 
         if (estimativaGanho < this.opcoes.valor_max_premio) {
             this.estimativaGanho = estimativaGanho;

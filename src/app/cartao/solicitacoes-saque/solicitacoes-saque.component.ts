@@ -90,14 +90,14 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
             );
     }
 
-    setPagamento(id) {
+    setPagamento(solicitacao) {
         this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Pagamento';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirma o pagamento?';
 
         this.modalRef.result.then(
             (result) => {
-                this.cartaoService.setPagamento(id)
+                this.cartaoService.setPagamento({ id: solicitacao.id, version: solicitacao.version })
                     .subscribe(
                         () => {
                             this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');

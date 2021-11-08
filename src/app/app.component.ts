@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
                 console.log(`Print Graphics set to ${event.data.print_graphics == '1'}`);
                 break;
             default:
-                // console.log('Loaded');
+                console.log('Loaded');
         }
     }
 
