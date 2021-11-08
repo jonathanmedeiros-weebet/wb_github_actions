@@ -10,4 +10,5 @@ export class Cliente {
     cpf: number;
     telefone: string;
     newsletter: boolean;
+    chave_pix: string;
 }

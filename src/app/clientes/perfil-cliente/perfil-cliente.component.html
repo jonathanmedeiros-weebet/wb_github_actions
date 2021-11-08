@@ -124,6 +124,19 @@
                     </div>
                 </fieldset>
                 <fieldset>
+                    <h5><b>PIX</b></h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="label">Chave PIX</label>
+                                <input type="text" formControlName="pix" class="form-control" placeholder="CPF, E-mail, Telefone ou Aleatória">
+                                <app-error-msg [control]="form.get('pix')"></app-error-msg>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">

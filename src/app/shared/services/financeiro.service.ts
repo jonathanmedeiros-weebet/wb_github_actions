@@ -30,4 +30,14 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    solicitarSaque(detalhesSaque): Observable<any> {
+        return this.http.post(this.financeiroUrl + '/solicitarSaque',
+            JSON.stringify(detalhesSaque), this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }
