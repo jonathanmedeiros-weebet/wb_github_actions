@@ -27,8 +27,8 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/deposito']">
-                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="!isCambista">
+                        <i class="fa fa-dollar"></i> Solicitar Depósito
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
@@ -72,7 +72,7 @@
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" [routerLink]="['auth/recuperar-senha']">
+                    <a class="dropdown-item" [routerLink]="['auth/recuperar-senha']" *ngIf="modoClienteAtivo">
                         Esqueci minha senha?
                     </a>
                     <a class="dropdown-item" [routerLink]="['auth/cadastro']" *ngIf="modoClienteAtivo">
@@ -151,8 +151,8 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/deposito']">
-                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="!isCambista">
+                        <i class="fa fa-dollar"></i> Solicitar Depósito
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
@@ -195,7 +195,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
+                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
                         Esqueci minha senha?
                     </a>
                     <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
