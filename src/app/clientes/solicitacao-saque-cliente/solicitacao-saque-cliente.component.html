@@ -4,7 +4,7 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div class="col-12" *ngIf="cadastroCompleto && !respostaSolicitacao">
+            <div *ngIf="cadastroCompleto && !respostaSolicitacao">
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <app-spinner *ngIf="submitting"></app-spinner>
                     <div class="row">
@@ -29,15 +29,11 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12" *ngIf="!cadastroCompleto">
-                <div class="alert alert-danger">
-                    {{errorMessage}} <a [routerLink]="['/clientes/perfil']">Clique aqui para continuar.</a>
-                </div>
+            <div class="alert alert-danger" *ngIf="!cadastroCompleto">
+                {{errorMessage}} <a [routerLink]="['/clientes/perfil']">Clique aqui para continuar.</a>
             </div>
-            <div class="col-12" *ngIf="respostaSolicitacao">
-                <div class="alert alert-info">
-                    {{respostaSolicitacao}}
-                </div>
+            <div class="alert alert-info" *ngIf="respostaSolicitacao">
+                {{respostaSolicitacao}}
             </div>
         </div>
     </div>
