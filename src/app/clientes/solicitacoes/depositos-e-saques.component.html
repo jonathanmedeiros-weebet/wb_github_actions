@@ -1,6 +1,6 @@
 <div id="default-content">
     <div class="content-header">
-        <h2>Financeiro</h2>
+        <h2>Depósitos e Saques</h2>
         <div class="filters">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
@@ -33,9 +33,13 @@
         <div>
             <div class="row">
                 <div class="col-xs-12 col-md-12 mt-3">
-                    <a class="btn btn-info" [routerLink]="['/clientes/depositos-e-saques']">
+                    <a class="btn btn-outline-info mr-2" [routerLink]="['/clientes/deposito']">
                         <i class="fa fa-dollar"></i>
-                        Depósitos e Saques
+                        Realizar Depósito
+                    </a>
+                    <a class="btn btn-outline-info" [routerLink]="['/clientes/saque']">
+                        <i class="fa fa-dollar"></i>
+                        Solicitar Saque
                     </a>
                 </div>
             </div>
@@ -46,12 +50,12 @@
             <app-spinner *ngIf="showLoading"></app-spinner>
 
             <div *ngIf="!showLoading" class="margin-top-15">
-                <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
-                    Nenhuma movimentação realizada no período.
+                <div *ngIf="!depositosESaques.length" class="alert alert-warning text-center" role="alert">
+                    Nenhuma solicitação realizada no período.
                 </div>
-                <div *ngIf="movimentacoesFinanceiras.length > 0">
+                <div *ngIf="depositosESaques.length > 0">
                     <div>
-                        <p><b>Qtd. Movimentações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalMovimentacoes}}</p>
+                        <p><b>Qtd. Solicitações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalSolicitacoes}}</p>
                     </div>
                     <ng-container>
                         <table class="table" style="text-align: left">
@@ -63,7 +67,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
+                            <ng-container>
                                 <tr>
                                     <td>
                                         <i style="color:green; margin-right: 5px;" class="fa fa-sort-up"

@@ -29,7 +29,12 @@ const routes: Routes = [{
         },
         {
             path: 'saque',
-            loadChildren: () => import('./solicitacao-saque-cliente/solicitacao-saque-cliente.module').then(s => s.SolicitacaoSaqueClienteModule)
+            loadChildren: () => import('./solicitacao-saque-cliente/solicitacao-saque-cliente.module')
+                .then(s => s.SolicitacaoSaqueClienteModule)
+        },
+        {
+            path: 'depositos-e-saques',
+            loadChildren: () => import('./solicitacoes/depositos-e-saques.module').then(m => m.DepositosESaquesModule)
         }
     ]
 }];
