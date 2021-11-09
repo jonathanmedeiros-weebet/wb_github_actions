@@ -5,7 +5,7 @@ import { EsportesRoutingModule } from './esportes-routing.module';
 import { BilheteEsportivoComponent } from './bilhete/bilhete-esportivo.component';
 import { EsportesFooterComponent } from './footer/esportes-footer.component';
 import { EsportesWrapperComponent } from './wrapper/esportes-wrapper.component';
-import { ApostaEsportivaService, PreApostaEsportivaService } from '../services';
+import { ApostaEsportivaService, BilheteEsportivoService, PreApostaEsportivaService } from '../services';
 import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
@@ -26,6 +26,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ],
     providers: [
         ApostaEsportivaService,
+        BilheteEsportivoService,
         PreApostaEsportivaService
     ]
 })

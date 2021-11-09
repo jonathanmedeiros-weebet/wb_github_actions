@@ -1,0 +1,108 @@
+.inner-odd {
+    margin-bottom: 2px;
+}
+.indentificacao{
+    padding: 10px;
+    position: relative;
+}
+
+.indentificacao .nome, h4{
+    font-size: 1.2rem;
+}
+
+.tipo-apostas{
+    background-color: #fff;
+}
+
+.tipo-aposta{
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+.div-back{
+    color: red;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.indentificacao .div-back{
+    position: absolute;
+    right: 20px;
+    top: 21px;
+}
+
+.div-vazio{
+    padding: 10px;
+    text-align: center;
+}
+
+.odds .odd{
+    width: 100%;
+}
+
+.odds-coluna{
+    width: 100%;
+}
+
+.odds-jogador-coluna{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.odd-jogador{
+    width: 50%!important;
+}
+
+.width-25{
+    width: 25%;
+}
+
+.width-33{
+    width: 33.33%;
+}
+
+.width-50{
+    width: 50%;
+}
+
+.width-100{
+    width: 100%;
+}
+
+.content-sports {
+    padding-bottom: 150px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .content-sports {
+        padding-bottom: 250px;
+    }
+
+    .indentificacao .div-back{
+        top: 0;
+    }
+
+    .odds .odd{
+        width: 100%;
+    }
+
+    .large_screen{
+        display: none;
+    }
+
+    .small_screen{
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .large_screen{
+        display: block;
+    }
+
+    .small_screen{
+        display: none;
+    }
+}

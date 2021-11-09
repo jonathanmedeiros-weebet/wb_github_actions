@@ -1,0 +1,68 @@
+.campeonato-header .column-left {
+    flex-grow: 1;
+    position: relative;
+}
+
+.campeonato-header .campeonato-nome {
+    margin-left: 28px;
+}
+
+.campeonato-header .fa {
+    /* font-size: 1.5rem; */
+    float: right;
+    line-height: 30px;
+    margin-right: 10px;
+}
+
+.jogos {
+    background-color: #fff;
+    padding-bottom: 4px;
+}
+
+.jogo {
+    padding: 0 10px 4px 10px;
+    /* cursor: pointer; */
+}
+
+.jogo-selecionado {
+    background: var(--selected-event);
+    color: var(--foreground-selected-event)!important;
+    cursor: auto;
+}
+
+.indentificacao {
+    display: flex;
+    align-items: center;
+}
+
+.indentificacao .nome {
+    flex-grow: 1;
+}
+
+.mais-opcoes {
+    color: var(--odds);
+    padding: 6px 4px 6px 6px;
+    min-width: 50px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.exibir-mais {
+    text-align: center;
+    margin-top: 15px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .content-sports {
+        padding-bottom: 90px;
+    }
+    .mais-opcoes {
+        margin-right: 10px;
+    }
+    .mais-opcoes span {
+        display: none;
+    }
+    .mais-opcoes {
+        margin: 0;
+    }
+}

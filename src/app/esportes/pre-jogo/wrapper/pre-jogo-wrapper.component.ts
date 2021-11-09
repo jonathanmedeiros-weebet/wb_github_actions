@@ -3,15 +3,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil, switchMap, mergeMap, tap } from 'rxjs/operators';
-import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../../services';
+import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from '../../../services';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-pre-evento-wrapper',
-    templateUrl: 'pre-evento-wrapper.component.html',
-    styleUrls: ['pre-evento-wrapper.component.css']
+    selector: 'app-pre-jogo-wrapper',
+    templateUrl: 'pre-jogo-wrapper.component.html',
+    styleUrls: ['pre-jogo-wrapper.component.css']
 })
-export class PreEventoWrapperComponent implements OnInit, OnDestroy {
+export class PreJogoWrapperComponent implements OnInit, OnDestroy {
+    campeonatosBloqueados = [];
     contexto = null;
     sportId;
     mobileScreen = true;
@@ -19,6 +20,10 @@ export class PreEventoWrapperComponent implements OnInit, OnDestroy {
     campeonatos;
     odds = [];
     aux = [];
+    data;
+    jogoId;
+    exibirMaisCotacoes = false;
+    deixarCampeonatosAbertos;
     unsub$ = new Subject();
 
     constructor(
@@ -32,6 +37,7 @@ export class PreEventoWrapperComponent implements OnInit, OnDestroy {
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+        this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
 
         this.route.data
             .pipe(
@@ -58,15 +64,15 @@ export class PreEventoWrapperComponent implements OnInit, OnDestroy {
                         .subscribe(
                             campeonato => {
                                 this.campeonatos = [campeonato];
-
                                 this.showLoadingIndicator = false;
+                                this.jogoId = this.extrairJogoId(this.campeonatos);
                             },
                             error => this.messageService.error(error)
                         );
                 } else {
                     const queryParams: any = {
                         'sport_id': this.sportId,
-                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
+                        'campeonatos_bloqueados': this.campeonatosBloqueados,
                         'odds': this.odds
                     };
 
@@ -78,17 +84,28 @@ export class PreEventoWrapperComponent implements OnInit, OnDestroy {
                             queryParams.data = dataLimiteTabela;
                         }
                     } else {
-                        queryParams.data = moment().format('YYYY-MM-DD');
+                        if (!params['nome']) {
+                            queryParams.data = moment().format('YYYY-MM-DD');
+
+                            const primeiraPagina = this.paramsService.getPrimeiraPagina();
+                            if (primeiraPagina === 'principais') {
+                                queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
+                            }
+                        }
+                    }
+
+                    if (queryParams.data) {
+                        this.data = queryParams.data;
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
                             campeonatos => {
-                                console.log('campeonatos');
-                                console.log(campeonatos);
                                 this.campeonatos = campeonatos;
                                 this.showLoadingIndicator = false;
+
+                                this.jogoId = this.extrairJogoId(this.campeonatos);
                             },
                             error => this.messageService.error(error)
                         );
@@ -102,18 +119,17 @@ export class PreEventoWrapperComponent implements OnInit, OnDestroy {
     }
 
     getCampeonatos2Sidebar() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
         const opcoes = this.paramsService.getOpcoes();
         const params = {
             'sport_id': this.sportId,
-            'campeonatos_bloqueados': campeonatosBloqueados,
+            'campeonatos_bloqueados': this.campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };
 
         this.campeonatoService.getCampeonatos(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(this.campeonatos, this.contexto),
+                campeonatos => this.sidebarService.changeItens(campeonatos, this.contexto),
                 error => this.messageService.error(error)
             );
     }
@@ -135,8 +151,56 @@ export class PreEventoWrapperComponent implements OnInit, OnDestroy {
                 this.contexto = 'futebol-americano';
                 this.odds = ['futebol_americano_casa', 'futebol_americano_fora'];
                 break;
+            case '13':
+                this.contexto = 'tenis';
+                this.odds = ['tenis_casa', 'tenis_fora'];
+                break;
             default:
                 break;
         }
+    }
+
+    receptorJogoSelecionadoId(jogoId) {
+        this.jogoId = jogoId;
+    }
+
+    changeExibirMaisCotacoes(exibirMaisCotacoes) {
+        this.exibirMaisCotacoes = exibirMaisCotacoes;
+    }
+
+    // Extrai id do primeiro jogo do primeiro campeonato
+    extrairJogoId(campeonatos) {
+        let jogoId = null;
+
+        if (campeonatos.length > 1) {
+            const jogos = campeonatos[0].jogos;
+
+            let start = 0;
+            let stop = false;
+
+            while (!stop) {
+                if (jogos.length > 1) {
+                    jogoId = jogos[start]._id;
+                    stop = true;
+                } else if (jogos.length === 1) {
+                    jogoId = jogos[start]._id;
+                    stop = true;
+                }
+
+                start++;
+            }
+        } else if (campeonatos.length === 1) {
+            const jogos = campeonatos[0].jogos;
+
+            if (jogos.length > 1) {
+                jogoId = jogos[0]._id;
+            } else if (jogos.length === 1) {
+                jogoId = jogos[0]._id;
+            }
+        }
+
+        this.jogoId = jogoId;
+
+        return jogoId;
     }
 }
