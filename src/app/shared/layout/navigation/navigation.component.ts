@@ -88,7 +88,7 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (window.innerWidth <= 667) {
+        if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(isOpen => {

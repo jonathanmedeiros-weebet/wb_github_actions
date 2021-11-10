@@ -6,6 +6,7 @@ import {
     AuthService, UtilsService, MessageService
 } from '../../../../services';
 import * as moment from 'moment';
+import { ApostaEsportiva, ItemApostaEsportiva} from '../../../../models';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -57,6 +58,9 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
                 this.cambistaPaga = this.aposta.possibilidade_ganho * ((100 - this.aposta.passador.percentualPremio) / 100);
             }
         }
+
+        const itensOrdenados = this.ordenarApostaItensPorData(this.aposta);
+        this.aposta.itens = itensOrdenados;
     }
 
     resultadoClass(item) {
@@ -87,5 +91,11 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    private ordenarApostaItensPorData(aposta: ApostaEsportiva): Array<ItemApostaEsportiva> {
+        let itensOrdenados;
+        itensOrdenados = aposta.itens.sort((a,b) => moment(a.jogo_horario).toDate().getTime() - moment(b.jogo_horario).toDate().getTime());
+        return itensOrdenados;
     }
 }

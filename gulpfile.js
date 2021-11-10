@@ -4,13 +4,13 @@ var exec = require('gulp-exec');
 var remoteSrc = require('gulp-remote-src');
 
 function tasks(done, config) {
-    gulp.src(['config.ts'])
+    gulp.src(['base-build/config.ts'])
         .pipe(replace('[HOST]', 'central.' + config.host))
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
         .pipe(gulp.dest('src/app/shared/'));
 
-    gulp.src(['index.html'])
+    gulp.src(['base-build/index.html'])
         .pipe(replace('[HOST]', 'central.' + config.host))
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
@@ -18,6 +18,14 @@ function tasks(done, config) {
         .pipe(replace('[CUSTOM]', config.styles))
         .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined" ? "" : config.aditional_styles))
         .pipe(gulp.dest('src/'));
+
+    gulp.src(['base-build/bilhete/index.html'])
+        .pipe(replace('[S3_FOLDER]', config.host))
+        .pipe(gulp.dest('src/bilhete/'));
+
+    gulp.src(['base-build/bilhete/app-service.js'])
+        .pipe(replace('[HOST]', config.host))
+        .pipe(gulp.dest('src/bilhete/'));
 
     /*gulp.src(['styles.css'])
         .pipe(replace('[CUSTOM]', config.styles))
