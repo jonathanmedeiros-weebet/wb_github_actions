@@ -1,16 +1,16 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import {Component, OnInit, Renderer2, ElementRef, ViewChild} from '@angular/core';
+import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService,
     DesafioApostaService, DesafioPreApostaService
 } from '../../services';
-import { } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {} from '../../models';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
 @Component({
@@ -19,7 +19,7 @@ import * as clone from 'clone';
     styleUrls: ['./desafios-bilhete.component.css']
 })
 export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit {
-    @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
     opcoes;
@@ -53,12 +53,19 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.createForm();
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                    if (!isCambista && this.isLoggedIn) {
+                        this.form.patchValue({apostador: 'cliente'});
+                    }
+                }
+            );
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
-        this.isCambista = this.auth.isCambista();
 
-        this.createForm();
         this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
@@ -105,7 +112,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     definirValor(valor) {
-        this.form.patchValue({ 'valor': valor });
+        this.form.patchValue({'valor': valor});
     }
 
     get itens() {
@@ -185,8 +192,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
                 this.modalRef.result
                     .then(
-                        result => { },
-                        reason => { }
+                        result => {
+                        },
+                        reason => {
+                        }
                     );
             }
         } else {
@@ -301,7 +310,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
                 delete cartaoValues.manter_cartao;
 
-                const dados = Object.assign(values, { cartao: cartaoValues });
+                const dados = Object.assign(values, {cartao: cartaoValues});
                 this.salvarAposta(dados);
             } else {
                 this.enableSubmit();

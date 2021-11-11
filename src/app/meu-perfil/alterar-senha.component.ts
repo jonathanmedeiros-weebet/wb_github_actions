@@ -50,12 +50,17 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             senha_nova: [
                 null,
                 Validators.compose([
-                    Validators.required
+                    Validators.required,
+                    Validators.minLength(3)
                 ])
             ],
             senha_confirmacao: [
                 null,
-                [Validators.required, FormValidations.equalsTo('senha_nova')]
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(3),
+                    FormValidations.equalsTo('senha_nova')]
+                )
             ]
         });
     }
