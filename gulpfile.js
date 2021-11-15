@@ -1441,3 +1441,11 @@ gulp.task('egolbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsportse.com', function (done) {
+    tasks(done, {
+        host: "betsportse.com",
+        banca: "BETSPORTSE",
+        styles: "",
+    });
+});
