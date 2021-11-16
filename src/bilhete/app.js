@@ -54,6 +54,21 @@ document.onreadystatechange = async function () {
                         this.getElementById('has-result').hidden = false;
                         ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
                     }
+
+                    if (ticketData.passador.percentualPremio > 0) {
+                        var cambistaPaga = 0;
+
+                        if (ticketData.resultado) {
+                            cambistaPaga = ticketData.premio * ((100 - ticketData.passador.percentualPremio) / 100);
+                        } else {
+                            cambistaPaga = ticketData.possibilidade_ganho * ((100 - ticketData.passador.percentualPremio) / 100);
+                        }
+
+                        this.getElementById('agent-pays').append(cambistaPaga.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
+                    } else {
+                        this.getElementById('agent-pays').parentNode.hidden = true;
+                    }
+
                     if (ticketData.resultado && (ticketData.premio || ticketData.premio == 0)) {
                         this.getElementById('award').append(ticketData.premio.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                     } else {
@@ -116,7 +131,7 @@ document.onreadystatechange = async function () {
                             player_b_2half_result: '',
                             player_a_corner_kicks: '',
                             player_b_corner_kicks: '',
-                        };    
+                        };
                         var div = this.createElement('div');
 
                         if (ticketData.tipo === 'esportes') {
