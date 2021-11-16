@@ -179,7 +179,11 @@
         "amgbet.wee.bet": "gulp amgbet.wee.bet",
         "casadasorte.wee.bet": "gulp casadasorte.wee.bet",
         "egolbet.com": "gulp egolbet.com",
-        "betsportse.com": "gulp betsportse.com"
+        "betsportse.com": "gulp betsportse.com",
+        "boleirosbet.wee.bet": "gulp boleirosbet.wee.bet",
+        "ligabet.wee.bet": "gulp ligabet.wee.bet",
+        "pernambucoesportes.wee.bet": "gulp pernambucoesportes.wee.bet",
+        "flux.bet": "gulp flux.bet"
     },
     "private": true,
     "dependencies": {

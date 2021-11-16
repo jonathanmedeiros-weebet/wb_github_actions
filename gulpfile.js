@@ -1449,3 +1449,35 @@ gulp.task('betsportse.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('boleirosbet.wee.bet', function (done) {
+    tasks(done, {
+        host: "boleirosbet.wee.bet",
+        banca: "BOLEIROS BET",
+        styles: "",
+    });
+});
+
+gulp.task('ligabet.wee.bet', function (done) {
+    tasks(done, {
+        host: "ligabet.wee.bet",
+        banca: "LIGA BET",
+        styles: "",
+    });
+});
+
+gulp.task('pernambucoesportes.wee.bet', function (done) {
+    tasks(done, {
+        host: "pernambucoesportes.wee.bet",
+        banca: "PE ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('flux.bet', function (done) {
+    tasks(done, {
+        host: "flux.bet",
+        banca: "FLUX BET",
+        styles: "",
+    });
+});
