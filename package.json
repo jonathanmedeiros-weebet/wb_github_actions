@@ -183,7 +183,8 @@
         "boleirosbet.wee.bet": "gulp boleirosbet.wee.bet",
         "ligabet.wee.bet": "gulp ligabet.wee.bet",
         "pernambucoesportes.wee.bet": "gulp pernambucoesportes.wee.bet",
-        "flux.bet": "gulp flux.bet"
+        "flux.bet": "gulp flux.bet",
+        "futsport.net": "gulp futsport.net"
     },
     "private": true,
     "dependencies": {

@@ -1481,3 +1481,11 @@ gulp.task('flux.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futsport.net', function (done) {
+    tasks(done, {
+        host: "futsport.net",
+        banca: "FUT SPORT",
+        styles: "",
+    });
+});
