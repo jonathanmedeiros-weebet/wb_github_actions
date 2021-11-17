@@ -83,7 +83,7 @@ document.onreadystatechange = async function () {
                     this.getElementById('ticket-id').append(ticketData.codigo);
                     this.getElementById('panter').append(ticketData.apostador.toUpperCase());
                     this.getElementById('money-changer').append(ticketData.passador.nome.toUpperCase());
-                    this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario.replaceAll('-', '/'))));
+                    this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario.replace(/-/g, '/'))));
                     this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
@@ -179,7 +179,7 @@ document.onreadystatechange = async function () {
                                 <div>
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
-                                <div class="event-time">${new Date(ticketItem.jogo_horario.replaceAll('-', '/')).toLocaleString()}</div>
+                                <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo_horario.replace(/-/g, '/')))}</div>
                                 <div id="match">
                                     <div id="match-result">
                                         ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase()
@@ -235,7 +235,7 @@ document.onreadystatechange = async function () {
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                <div class="event-time">${new Date(ticketItem.jogo.horario.replaceAll('-', '/')).toLocaleString()}</div>
+                                <div class="event-time">${getFormatedDate((ticketItem.jogo.horario.replace(/-/g, '/')))}</div>
                                 <div class="players">
                                     <div class="player player-a-data" id="player-a-data">
                                     <div class="player-name">
@@ -262,7 +262,7 @@ document.onreadystatechange = async function () {
                         } else {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                    <div class="event-time">${new Date(ticketItem.desafio_datahora_encerramento.replaceAll('-', '/')).toLocaleString()}</div>
+                                    <div class="event-time">${getFormatedDate(ticketItem.desafio_datahora_encerramento.replace(/-/g, '/'))}</div>
                                     <div>
                                         ${ticketItem.desafio_categoria_nome}
                                     </div>
