@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
             const params = new URLSearchParams(location.search);
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
-            if (appVersion < 3) {
+            if (appVersion < 2) {
                 this.modalService.open(
                     this.wrongVersionModal,
                     {
