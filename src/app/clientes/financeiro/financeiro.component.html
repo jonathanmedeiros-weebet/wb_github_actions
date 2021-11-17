@@ -44,15 +44,16 @@
     <div class="content-body">
         <div class="content content-movimentacoes">
             <app-spinner *ngIf="showLoading"></app-spinner>
-
             <div *ngIf="!showLoading" class="margin-top-15">
+                <div>
+                    <p>
+                        <b>Qtd. Movimentações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalMovimentacoes}}
+                    </p>
+                </div>
                 <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
                     Nenhuma movimentação realizada no período.
                 </div>
                 <div *ngIf="movimentacoesFinanceiras.length > 0">
-                    <div>
-                        <p><b>Qtd. Movimentações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalMovimentacoes}}</p>
-                    </div>
                     <ng-container>
                         <table class="table" style="text-align: left">
                             <thead>
