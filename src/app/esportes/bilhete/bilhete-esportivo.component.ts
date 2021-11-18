@@ -255,6 +255,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.cartaoApostaForm.reset();
         this.stopDelayInterval();
 
+        if (!this.isCambista && this.isLoggedIn) {
+            this.form.patchValue({'apostador': 'cliente'});
+        }
+
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
