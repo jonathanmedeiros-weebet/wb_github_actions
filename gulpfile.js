@@ -1489,3 +1489,11 @@ gulp.task('futsport.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mundobet.site', function (done) {
+    tasks(done, {
+        host: "mundobet.site",
+        banca: "MUNDO BET",
+        styles: "",
+    });
+});
