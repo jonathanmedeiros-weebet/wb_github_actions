@@ -185,7 +185,8 @@
         "pernambucoesportes.wee.bet": "gulp pernambucoesportes.wee.bet",
         "flux.bet": "gulp flux.bet",
         "futsport.net": "gulp futsport.net",
-        "mundobet.site": "gulp mundobet.site"
+        "mundobet.site": "gulp mundobet.site",
+        "novobetsamericabr.com": "gulp novobetsamericabr.com"
     },
     "private": true,
     "dependencies": {

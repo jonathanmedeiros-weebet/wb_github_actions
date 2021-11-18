@@ -1497,3 +1497,11 @@ gulp.task('mundobet.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('novobetsamericabr.com', function (done) {
+    tasks(done, {
+        host: "novobetsamericabr.com",
+        banca: "BETS AMERICA",
+        styles: "",
+    });
+});
