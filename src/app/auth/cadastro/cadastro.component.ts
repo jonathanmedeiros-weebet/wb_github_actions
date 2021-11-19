@@ -48,7 +48,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
             sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             usuario: [null, [
                     Validators.minLength(3),
-                    Validators.pattern('[a-zA-Z]*'),
+                    Validators.pattern('^[a-zA-Z0-9_]+$'),
                     Validators.required
                 ], this.clientesService.validarLoginUnico.bind(this.clientesService)],
             nascimento: [null, [Validators.required]],
