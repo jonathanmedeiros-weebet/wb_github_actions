@@ -235,7 +235,7 @@ document.onreadystatechange = async function () {
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                <div class="event-time">${getFormatedDate((ticketItem.jogo.horario.replace(/-/g, '/')))}</div>
+                                <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo.horario.replace(/-/g, '/')))}</div>
                                 <div class="players">
                                     <div class="player player-a-data" id="player-a-data">
                                     <div class="player-name">
@@ -262,7 +262,7 @@ document.onreadystatechange = async function () {
                         } else {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                    <div class="event-time">${getFormatedDate(ticketItem.desafio_datahora_encerramento.replace(/-/g, '/'))}</div>
+                                    <div class="event-time">${getFormatedDate(new Date(ticketItem.desafio_datahora_encerramento.replace(/-/g, '/')))}</div>
                                     <div>
                                         ${ticketItem.desafio_categoria_nome}
                                     </div>
