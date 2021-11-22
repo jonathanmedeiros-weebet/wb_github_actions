@@ -186,7 +186,8 @@
         "flux.bet": "gulp flux.bet",
         "futsport.net": "gulp futsport.net",
         "mundobet.site": "gulp mundobet.site",
-        "novobetsamericabr.com": "gulp novobetsamericabr.com"
+        "novobetsamericabr.com": "gulp novobetsamericabr.com",
+        "seridobets.com": "gulp seridobets.com"
     },
     "private": true,
     "dependencies": {
