@@ -1,16 +1,19 @@
-import {Component, OnInit, Renderer2, ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
+import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService,
-    DesafioApostaService, DesafioPreApostaService
+    AuthService,
+    DesafioApostaService,
+    DesafioBilheteService,
+    DesafioPreApostaService,
+    MessageService,
+    ParametrosLocaisService
 } from '../../services';
-import {} from '../../models';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
 @Component({

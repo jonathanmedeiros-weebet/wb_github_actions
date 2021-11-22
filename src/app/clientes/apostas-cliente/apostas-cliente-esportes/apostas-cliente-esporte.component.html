@@ -8,7 +8,6 @@
         <div>
             <p><b>Qtd. Apostas:</b> {{apostas.length}}</p>
             <p><b>Tot. Apostado:</b> {{totais.valor| currency}}</p>
-            <p *ngIf="mjrSports"><b>Tot. Comissões :</b> {{totais.comissao| currency}}</p>
             <p><b>Tot. Prêmios :</b> {{totais.premio| currency}}</p>
         </div>
         <ng-container *ngIf="smallScreen; else desktopTable">

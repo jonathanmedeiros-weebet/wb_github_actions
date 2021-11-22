@@ -23,11 +23,9 @@ export class ApostasClienteEsporteComponent implements OnInit, OnDestroy, OnChan
     modalRef;
     showLoading = true;
     totais = {
-        'comissao': 0,
         'valor': 0,
         'premio': 0,
     };
-    mjrSports = false;
     encerramentoPermitido;
     modalAposta;
     unsub$ = new Subject();
@@ -52,13 +50,9 @@ export class ApostasClienteEsporteComponent implements OnInit, OnDestroy, OnChan
     }
 
     ngOnChanges() {
-        if (location.host.search(/mjrsports/) >= 0) {
-            this.mjrSports = true;
-        }
         this.showLoading = true;
         this.totais.valor = 0;
         this.totais.premio = 0;
-        this.totais.comissao = 0;
         this.getApostas();
     }
 
@@ -87,10 +81,6 @@ export class ApostasClienteEsporteComponent implements OnInit, OnDestroy, OnChan
                             if (aposta.resultado === 'ganhou') {
                                 this.totais.premio += aposta.premio;
                             }
-                        }
-
-                        if (this.mjrSports) {
-                            this.totais.comissao += aposta.comissao;
                         }
                     });
                     this.showLoading = false;
@@ -134,59 +124,8 @@ export class ApostasClienteEsporteComponent implements OnInit, OnDestroy, OnChan
                         this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
                     }
 
-                    this.modalRef.result.then(
-                        (result) => {
-                            switch (result) {
-                                case 'cancel':
-                                    this.cancelar(aposta);
-                                    break;
-                                case 'pagamento':
-                                    this.pagarAposta(aposta);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        },
-                        (reason) => { }
-                    );
-
                     this.showLoading = false;
                     this.cd.detectChanges();
-                },
-                error => this.handleError(error)
-            );
-    }
-
-    cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
-        this.modalRef.componentInstance.title = 'Cancelar Aposta';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
-        this.modalRef.result.then(
-            (result) => {
-                this.apostaService.cancelar(aposta.id)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        () => this.getApostas(),
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => { }
-        );
-    }
-
-    pagarAposta(aposta) {
-        this.apostaService.pagar(aposta.id)
-            .subscribe(
-                result => {
-                    aposta.pago = result.pago;
-                    this.cd.detectChanges();
-
-                    if (result.pago) {
-                        this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
-                    } else {
-                        this.messageService.success('PAGAMENTO CANCELADO!');
-                    }
                 },
                 error => this.handleError(error)
             );

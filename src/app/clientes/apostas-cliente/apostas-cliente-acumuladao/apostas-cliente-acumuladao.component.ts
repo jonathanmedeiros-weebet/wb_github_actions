@@ -75,64 +75,12 @@ export class ApostasClienteAcumuladaoComponent implements OnInit, OnDestroy, OnC
             centered: true
         });
         this.modalRef.componentInstance.aposta = aposta;
-        this.modalRef.componentInstance.showCancel = true;
         if (aposta.id === this.apostas[0].id) {
             this.modalRef.componentInstance.isUltimaAposta = true;
         }
 
-        this.modalRef.result.then(
-            (result) => {
-                switch (result) {
-                    case 'cancel':
-                        this.cancelar(aposta);
-                        break;
-                    case 'pagamento':
-                        this.pagarAposta(aposta);
-                        break;
-                    default:
-                        break;
-                }
-            },
-            (reason) => { }
-        );
-
         this.showLoading = false;
         this.cd.detectChanges();
-    }
-
-    cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
-        this.modalRef.componentInstance.title = 'Cancelar Aposta';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
-        this.modalRef.result.then(
-            (result) => {
-                this.apostaServive.cancelar(aposta.id)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        () => this.getApostas(),
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => { }
-        );
-    }
-
-    pagarAposta(aposta) {
-        this.apostaServive.pagar(aposta.id)
-            .subscribe(
-                result => {
-                    aposta.pago = result.pago;
-                    this.cd.detectChanges();
-
-                    if (result.pago) {
-                        this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
-                    } else {
-                        this.messageService.success('PAGAMENTO CANCELADO!');
-                    }
-                },
-                error => this.handleError(error)
-            );
     }
 
     trackById(index: number, aposta: any): string {

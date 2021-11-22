@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {config} from '../../config';
+import {AbstractControl} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+
+import {config} from '../../config';
 import {ErrorService} from '../utils/error.service';
 import {HeadersService} from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MovimentacaoFinanceira} from '../../models/clientes/movimentacao-financeira';
-import {AbstractControl} from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'

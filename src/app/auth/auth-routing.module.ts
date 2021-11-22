@@ -20,10 +20,6 @@ export const routes: Routes = [
         component: RecuperarSenhaComponent
     },
     {
-        path: 'resetar-senha/:token',
-        component: ResetarSenhaComponent
-    },
-    {
         path: 'resetar-senha/:token/:codigo',
         component: ResetarSenhaComponent
     }

@@ -97,36 +97,6 @@ export class ApostasClienteLoteriaComponent implements OnInit, OnChanges, OnDest
         if (aposta.id === this.apostas[0].id) {
             this.modalRef.componentInstance.isUltimaAposta = true;
         }
-        this.modalRef.result.then(
-            (result) => {
-                switch (result) {
-                    case 'cancel':
-                        this.cancelar(aposta);
-                        break;
-                    default:
-                        break;
-                }
-            },
-            (reason) => { }
-        );
-    }
-
-    cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
-        this.modalRef.componentInstance.title = 'Cancelar Aposta';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
-        this.modalRef.result.then(
-            (result) => {
-                this.apostaService.cancelar(aposta.id)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        () => this.getApostas(),
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => { }
-        );
     }
 
     checkResult(numero, sorteioResultado) {

@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
-import {FormValidations} from '../../shared/utils';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {FormValidations, PasswordValidation} from '../../shared/utils';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {Pagina} from '../../shared/models/pagina';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
 import {AuthService} from '../../shared/services/auth/auth.service';
-import {delay} from 'lodash';
 
 @Component({
     selector: 'app-cadastro',
@@ -36,7 +35,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
         this.createForm();
         this.clientesService.getTermosDeUso().subscribe(
             (termos: Pagina) => {
-                (termos) ? this.termosDeUso = termos : this.handleError('Termos de uso Indisponível.', 'warning');
+                this.termosDeUso = termos ? termos : new Pagina();
             },
             error => this.handleError(error)
         );
@@ -52,14 +51,14 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
                     Validators.required
                 ], this.clientesService.validarLoginUnico.bind(this.clientesService)],
             nascimento: [null, [Validators.required]],
-            senha: [null, [Validators.required]],
-            senha_confirmacao: [null, [Validators.required, FormValidations.equalsTo('senha')]],
+            senha: [null, [Validators.required, Validators.minLength(3)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]],
             cpf: [null, [Validators.required]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
             genero: ['', [Validators.required]],
             aceitar_termos: [null, [Validators.required]]
-        });
+        }, {validator: PasswordValidation.MatchPassword});
     }
 
     showPassword(type: string) {

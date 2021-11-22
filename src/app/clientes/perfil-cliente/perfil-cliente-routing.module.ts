@@ -4,14 +4,7 @@ import {PerfilClienteComponent} from './perfil-cliente.component';
 
 const routes: Routes = [{
     path: '',
-    component: PerfilClienteComponent,
-    children: [
-        {
-            path: '',
-            redirectTo: 'meus-dados',
-            pathMatch: 'full'
-        },
-    ]
+    component: PerfilClienteComponent
 }];
 
 @NgModule({

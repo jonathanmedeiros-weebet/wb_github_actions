@@ -1,9 +1,8 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {MovimentacaoFinanceira} from '../../shared/models/clientes/movimentacao-financeira';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import * as moment from 'moment';
-import {FormBuilder, Validators} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 
