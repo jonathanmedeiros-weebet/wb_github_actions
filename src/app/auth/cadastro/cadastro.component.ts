@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormValidations, PasswordValidation} from '../../shared/utils';
+import {PasswordValidation} from '../../shared/utils';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {Pagina} from '../../shared/models/pagina';
