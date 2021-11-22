@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormValidations, PasswordValidation} from '../../shared/utils';
@@ -19,6 +19,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
     icon: string = 'fa fa-eye';
     termosDeUso: Pagina;
     submitting = false;
+    debouncer: any;
 
     constructor(
         private fb: FormBuilder,
@@ -49,7 +50,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
                     Validators.minLength(3),
                     Validators.pattern('^[a-zA-Z0-9_]+$'),
                     Validators.required
-                ], this.clientesService.validarLoginUnico.bind(this.clientesService)],
+                ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(3)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]],
@@ -85,6 +86,21 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
         } else {
             this.messageService.error(message);
         }
+    }
+
+    validarLoginUnico(control: AbstractControl) {
+        clearTimeout(this.debouncer);
+        return new Promise(resolve => {
+            this.debouncer = setTimeout(() => {
+                this.clientesService.verificarLogin(control.value).subscribe((res) => {
+                    if (res) {
+                        resolve(null);
+                    }
+                }, () => {
+                    resolve({'loginEmUso': true});
+                });
+            }, 1000);
+        });
     }
 
     submit() {

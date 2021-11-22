@@ -13,7 +13,6 @@ import {Observable} from 'rxjs';
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
-    debouncer: any;
 
     constructor(
         private http: HttpClient,
@@ -94,23 +93,7 @@ export class ClienteService {
             );
     }
 
-    validarLoginUnico(control: AbstractControl) {
-        clearTimeout(this.debouncer);
-
-        return new Promise(resolve => {
-            this.debouncer = setTimeout(() => {
-                this.checarLoginUnico(control.value).subscribe((res) => {
-                    if (res) {
-                        resolve(null);
-                    }
-                }, (err) => {
-                    resolve({'loginEmUso': true});
-                });
-            }, 1000);
-        });
-    }
-
-    checarLoginUnico(login) {
+    verificarLogin(login) {
         return this.http.get(`${this.clienteUrl}/validarLogin/` + login).pipe(map(res => res));
     }
 }
