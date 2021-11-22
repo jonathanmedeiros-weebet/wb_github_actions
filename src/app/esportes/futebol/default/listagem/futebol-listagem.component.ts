@@ -58,7 +58,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
-        this.offset = this.exibirCampeonatosExpandido ? 5 : 15;
+        this.offset = this.exibirCampeonatosExpandido ? 5 : 5;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais

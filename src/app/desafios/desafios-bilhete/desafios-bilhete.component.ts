@@ -1,16 +1,19 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService, MessageService, AuthService, DesafioBilheteService,
-    DesafioApostaService, DesafioPreApostaService
+    AuthService,
+    DesafioApostaService,
+    DesafioBilheteService,
+    DesafioPreApostaService,
+    MessageService,
+    ParametrosLocaisService
 } from '../../services';
-import { } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
 @Component({
@@ -19,7 +22,7 @@ import * as clone from 'clone';
     styleUrls: ['./desafios-bilhete.component.css']
 })
 export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit {
-    @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
     opcoes;
@@ -35,6 +38,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
+    isCambista;
 
     constructor(
         private apostaService: DesafioApostaService,
@@ -52,11 +56,19 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.createForm();
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                    if (!isCambista && this.isLoggedIn) {
+                        this.form.patchValue({apostador: 'cliente'});
+                    }
+                }
+            );
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
 
-        this.createForm();
         this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
@@ -70,7 +82,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', [Validators.required]],
+            apostador: ['', (this.isCambista || !this.isLoggedIn) ? [Validators.required] : ''],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
         });
@@ -103,7 +115,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     definirValor(valor) {
-        this.form.patchValue({ 'valor': valor });
+        this.form.patchValue({'valor': valor});
     }
 
     get itens() {
@@ -183,8 +195,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
                 this.modalRef.result
                     .then(
-                        result => { },
-                        reason => { }
+                        result => {
+                        },
+                        reason => {
+                        }
                     );
             }
         } else {
@@ -299,7 +313,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
                 delete cartaoValues.manter_cartao;
 
-                const dados = Object.assign(values, { cartao: cartaoValues });
+                const dados = Object.assign(values, {cartao: cartaoValues});
                 this.salvarAposta(dados);
             } else {
                 this.enableSubmit();

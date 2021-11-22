@@ -31,6 +31,8 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     cartaoApostaForm: FormGroup;
     opcoes;
     dados;
+    isCambista;
+    isLoggedIn;
 
     constructor(
         private router: Router,
@@ -47,6 +49,19 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
     ngOnInit() {
         this.opcoes = this.paramsService.getOpcoes();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                }
+            );
 
         this.route.params.subscribe(
             params => {
@@ -76,7 +91,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', Validators.required]
+            apostador: ['', (this.isCambista || !this.isLoggedIn) ? Validators.required : '']
         });
 
         this.cartaoApostaForm = this.fb.group({

@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { AuthLayoutComponent } from './shared/layout/app-layouts/auth-layout.component';
-import { MainLayoutComponent } from './shared/layout/app-layouts/main-layout.component';
+import {AuthLayoutComponent} from './shared/layout/app-layouts/auth-layout.component';
+import {MainLayoutComponent} from './shared/layout/app-layouts/main-layout.component';
 
-import { AuthGuard, LoteriaGuard, DesafioGuard } from './services';
-import { CupomComponent } from './cupom/cupom.component';
+import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
+import {CupomComponent} from './cupom/cupom.component';
+import {ClientGuard} from './shared/services/guards/client.guard';
 
 const appRoutes: Routes = [
     {
@@ -55,33 +56,44 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'meu-perfil',
-                loadChildren: () => import('app/meu-perfil/meu-perfil.module').then(m => m.MeuPerfilModule),
+                path: 'alterar-senha',
+                loadChildren: () => import('app/meu-perfil/alterar-senha.module').then(m => m.AlterarSenhaModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'validar-aposta',
                 loadChildren: () => import('app/validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard]
+            },
+            {
+                path: 'auth',
+                component: AuthLayoutComponent,
+                loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
+            },
+            {
+                path: 'clientes',
+                canActivate: [AuthGuard, ClientGuard],
+                loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
             }
         ]
     },
     {
-        path: 'auth',
-        component: AuthLayoutComponent,
-        loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
-    },
-    {
         path: 'bilhete/:codigo',
         component: CupomComponent
+    },
+    {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
     }
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes, {
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy'
-})],
+        scrollPositionRestoration: 'enabled',
+        relativeLinkResolution: 'legacy'
+    })],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

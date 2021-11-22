@@ -18,7 +18,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                    <button class="dropdown-item text-center" disabled type="button">
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCambista">
                         Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
@@ -26,8 +26,19 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user"></i> Meu Perfil
+                    <a class="dropdown-item" target="_blank"
+                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
+                       *ngIf="!isCambista">
+                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
+                        <i class="fa fa-key"></i> Alterar senha
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="!isCambista">
+                        <i class="fa fa-user"></i> Minha Conta
                     </a>
 
                     <a (click)="logout()" href="#" class="dropdown-item">
@@ -58,9 +69,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <!-- <div class="dropdown-divider"></div> -->
-                    <!-- <a class="dropdown-item" href="#">Novo aqui? Cadastre-se</a>
-                    <a class="dropdown-item" href="#">Esqueceu sua senha?</a> -->
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
+                        Esqueci minha senha?
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
+                       data-toggle="dropdown" *ngIf="modoClienteAtivo">
+                        Novo aqui? Cadastre-se
+                    </a>
                 </ul>
             </div>
         </ng-template>
@@ -125,7 +141,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                    <button class="dropdown-item text-center" disabled type="button">
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCambista">
                         Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
@@ -133,8 +149,19 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="['/meu-perfil']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user"></i> Meu Perfil
+                    <a class="dropdown-item" target="_blank"
+                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
+                       *ngIf="!isCambista">
+                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
+                        <i class="fa fa-key"></i> Alterar senha
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="!isCambista">
+                        <i class="fa fa-user"></i> Minha Conta
                     </a>
 
                     <a (click)="logout()" href="#" class="dropdown-item">
@@ -165,9 +192,13 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Novo aqui? Cadastre-se</a>
-                    <a class="dropdown-item" href="#">Esqueceu sua senha?</a> -->
+                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
+                        Esqueci minha senha?
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
+                       data-toggle="dropdown" *ngIf="modoClienteAtivo">
+                        Novo aqui? Cadastre-se
+                    </a>
                 </ul>
             </div>
         </ng-template>

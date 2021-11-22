@@ -22,7 +22,7 @@
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="div-inputs">
-                <div class="form-group">
+                <div class="form-group" *ngIf="isCambista || !isLoggedIn">
                     <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
                         class="form-control" placeholder="Nome do apostador...">
                     <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>

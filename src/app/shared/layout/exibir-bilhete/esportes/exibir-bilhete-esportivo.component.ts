@@ -23,6 +23,8 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
+    isCambista;
+    isLoggedIn;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -35,7 +37,20 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
-        
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cambista
+            .subscribe(
+                isCambista => {
+                    this.isCambista = isCambista;
+                }
+            );
+
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {
                 this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
@@ -77,7 +92,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     handleError(msg) {
         this.messageService.error(msg);
     }
-    
+
     private ordenarApostaItensPorData(aposta: ApostaEsportiva): Array<ItemApostaEsportiva> {
         let itensOrdenados;
         itensOrdenados = aposta.itens.sort((a,b) => moment(a.jogo_horario).toDate().getTime() - moment(b.jogo_horario).toDate().getTime());

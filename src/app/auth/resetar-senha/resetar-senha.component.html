@@ -1,0 +1,51 @@
+<div id="default-content">
+    <div class="content-body">
+        <div class="content">
+            <div class="row">
+                <div class="col col-md-12">
+                    <h2>Redefinir Senha</h2>
+                </div>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <app-spinner *ngIf="submitting"></app-spinner>
+                <div class="row">
+                    <div class="col col-sm-2">
+                        <div class="form-group required">
+                            <label class="label">Código de Verificação</label>
+                            <input type="text" formControlName="verificacao" class="form-control" maxlength="5">
+                            <app-error-msg [control]="form.get('verificacao')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-4">
+                        <div class="form-group required">
+                            <label class="label">Nova Senha</label>
+                            <input type="password" formControlName="nova_senha" class="form-control">
+                            <app-error-msg [control]="form.get('nova_senha')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-4">
+                        <div class="form-group required">
+                            <label class="label">Confirmar Senha</label>
+                            <input type="password" formControlName="senha_confirmacao" class="form-control">
+                            <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-custom" type="submit" [disabled]="submitting">
+                                <i class="fa fa-save"></i>
+                                Alterar Senha
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

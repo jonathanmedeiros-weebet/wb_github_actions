@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild} from '@angular/core';
+import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, BilheteEsportivoService,
     HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService
 } from '../../services';
-import { ItemBilheteEsportivo } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ItemBilheteEsportivo} from '../../models';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
 @Component({
@@ -19,7 +19,7 @@ import * as clone from 'clone';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
@@ -37,6 +37,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
+    isCambista;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -55,13 +56,29 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        this.createForm();
         this.definirAltura();
-        this.isLoggedIn = this.auth.isLoggedIn();
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                    if (isLoggedIn) {
+                        this.auth.cambista
+                            .subscribe(
+                                isCambista => {
+                                    this.isCambista = isCambista;
+                                    if (!isCambista && this.isLoggedIn) {
+                                        this.form.patchValue({apostador: 'cliente'});
+                                    }
+                                }
+                            );
+                    }
+                }
+            );
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
         this.apostaMaximo = this.opcoes.valor_max_aposta;
         this.setDelay();
-        this.createForm();
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
@@ -97,7 +114,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', [Validators.required]],
+            apostador: ['', (this.isCambista || !this.isLoggedIn) ? [Validators.required] : ''],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([])
         });
@@ -113,7 +130,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     definirValor(valor) {
-        this.form.patchValue({ 'valor': valor });
+        this.form.patchValue({'valor': valor});
     }
 
     get itens() {
@@ -213,8 +230,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
                 this.modalRef.result
                     .then(
-                        result => { },
-                        reason => { }
+                        result => {
+                        },
+                        reason => {
+                        }
                     );
             }
         } else {
@@ -235,6 +254,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.form.reset();
         this.cartaoApostaForm.reset();
         this.stopDelayInterval();
+
+        if (!this.isCambista && this.isLoggedIn) {
+            this.form.patchValue({'apostador': 'cliente'});
+        }
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -358,7 +381,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
                 delete cartaoValues.manter_cartao;
 
-                const dados = Object.assign(values, { cartao: cartaoValues });
+                const dados = Object.assign(values, {cartao: cartaoValues});
                 this.salvarAposta(dados);
             } else {
                 this.enableSubmit();

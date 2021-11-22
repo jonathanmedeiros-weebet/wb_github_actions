@@ -1,0 +1,149 @@
+<app-spinner *ngIf="submitting"></app-spinner>
+<div id="default-content">
+    <div class="content-body">
+        <div class="content">
+            <div class="row">
+                <div class="col col-md-12">
+                    <h2>Cadastro</h2>
+                </div>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group required">
+                            <label class="label">Nome</label>
+                            <input class="form-control" type="text" formControlName="nome">
+                            <app-error-msg [control]="form.get('nome')"></app-error-msg>
+                        </div>
+                    </div>
+                    <div class="col col-sm-6">
+                        <div class="form-group required">
+                            <label class="label">Sobrenome</label>
+                            <input class="form-control" type="text" formControlName="sobrenome">
+                            <app-error-msg [control]="form.get('sobrenome')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-6">
+                        <div class="form-group required">
+                            <label class="label">Data de Nascimento</label>
+                            <input class="form-control" type="date" formControlName="nascimento">
+                            <app-error-msg [control]="form.get('nascimento')"></app-error-msg>
+                        </div>
+                    </div>
+                    <div class="col col-md-6">
+                        <div class="form-group required">
+                            <label class="label">Sexo</label>
+                            <select formControlName="genero" class="form-control">
+                                <option value="">Selecione</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                            </select>
+                            <app-error-msg [control]="form.get('genero')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
+                            <label class="label">CPF</label>
+                            <input class="form-control" type="text" mask="000.000.000-00" placeholder="000.000.000-00"
+                                   formControlName="cpf" [dropSpecialCharacters]="false">
+                            <app-error-msg [control]="form.get('cpf')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
+                            <label class="label">Telefone</label>
+                            <input class="form-control" type="text" mask="(00)00000-0000" formControlName="telefone"
+                                   placeholder="(00)00000-0000" [dropSpecialCharacters]="false">
+                            <app-error-msg [control]="form.get('telefone')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
+                            <label class="label">Email</label>
+                            <input class="form-control" type="text" placeholder="exemplo@email.com"
+                                   formControlName="email">
+                            <app-error-msg [control]="form.get('email')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="form-group required">
+                            <label class="label">Nome de Usuário</label>
+                            <input class="form-control" type="text" formControlName="usuario">
+                            <app-error-msg [control]="form.get('usuario')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group required">
+                            <label class="label">Senha</label>
+                            <div class="input-group">
+                                <input [type]="type" class="form-control" id="pass" formControlName="senha">
+                                <div class="input-group-append">
+                                <span class="input-group-text" id="showPassword" (click)="showPassword(type)">
+                                    <i [class]="icon"></i>
+                                </span>
+                                </div>
+                            </div>
+                            <app-error-msg [control]="form.get('senha')"></app-error-msg>
+                        </div>
+                    </div>
+                    <div class="col col-md-6">
+                        <div class="form-group required">
+                            <label class="label">Confirmar Senha</label>
+                            <input class="form-control" type="password" formControlName="senha_confirmacao">
+                            <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12 mt-3">
+                        <label>
+                            <input type="checkbox" formControlName="aceitar_termos">
+                            Declaro que li e concordo com os
+                        </label>
+                        <a (click)="abrirModalTermosUso(termosUsoModal)"> termos de uso do sistema.</a>
+                        <app-error-msg [control]="form.get('aceitar_termos')"></app-error-msg>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12 required">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-custom" [disabled]="submitting">
+                                <i class="fa fa-save"></i>
+                                Cadastrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ng-template #termosUsoModal let-modal id="modal">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">{{termosDeUso.titulo}}</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col col-md-12" [innerHTML]="termosDeUso.conteudo"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

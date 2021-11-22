@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <form #apostaForm="ngForm">
-                        <div class="form-row inputs">
+                        <div class="form-row inputs" *ngIf="isCambista || !isLoggedIn">
                             <div class="form-group col-xs-12 col-lg-12">
                                 <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
                                     name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"

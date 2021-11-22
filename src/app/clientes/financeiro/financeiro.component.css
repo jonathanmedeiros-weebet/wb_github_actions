@@ -1,0 +1,18 @@
+.btn-line {
+    margin-top: 24px;
+}
+
+.tr-1 td {
+    padding: 5px 0;
+}
+
+.tr-2 td {
+    border-top: none !important;
+    padding: 0 0 5px 15px;
+}
+
+.custom-td {
+    min-width: 15%;
+    white-space: nowrap;
+    text-align: right;
+}
