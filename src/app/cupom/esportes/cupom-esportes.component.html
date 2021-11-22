@@ -10,7 +10,13 @@
             <h2>Seus Palpites</h2>
             <span>Confira abaixo o resultado dos seus palpites</span>
         </div>
+
         <div *ngFor="let item of aposta.itens" class="aposta-item">
+            <div>
+                <strong>
+                    {{item.campeonato_nome}}
+                </strong>
+            </div>
             <div>
                 {{item.jogo_horario | moment:'DD/MM/YYYY HH:mm'}}
             </div>

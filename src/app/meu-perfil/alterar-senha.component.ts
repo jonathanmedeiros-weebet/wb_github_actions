@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {
@@ -10,6 +10,7 @@ import { FormValidations } from './../shared/utils/form-validation';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import {PasswordValidation} from "../shared/utils";
 
 @Component({
     selector: 'app-meu-perfil',
@@ -41,23 +42,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     createForm() {
         this.form = this.fb.group({
-            senha_atual: [
-                null,
-                Validators.compose([
-                    Validators.required
-                ])
-            ],
-            senha_nova: [
-                null,
-                Validators.compose([
-                    Validators.required
-                ])
-            ],
-            senha_confirmacao: [
-                null,
-                [Validators.required, FormValidations.equalsTo('senha_nova')]
-            ]
-        });
+            senha_atual: ['', Validators.required],
+            senha_nova: ['', [Validators.required, Validators.minLength(3)]],
+            senha_confirmacao: ['', [Validators.required, Validators.minLength(3)]]
+        }, {validator: PasswordValidation.MatchPassword});
     }
 
     submit() {

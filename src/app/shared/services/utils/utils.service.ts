@@ -42,7 +42,7 @@ export class UtilsService {
             );
     }
 
-    pesquisarEnderecoPorCep(cep: string | number) {
+    getEnderecoPorCep(cep: string | number) {
         return this.http.get(`https://viacep.com.br/ws/${cep}/json`);
     }
 }

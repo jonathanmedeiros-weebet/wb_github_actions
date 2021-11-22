@@ -9,6 +9,7 @@ import * as moment from 'moment';
 
 import EscPosEncoder from 'esc-pos-encoder';
 import {ImagensService} from './imagens.service';
+import {tick} from "@angular/core/testing";
 
 declare var WeebetMessage: any;
 
@@ -340,6 +341,39 @@ export class PrintService {
         }
         `;
 
+        let informacoesPessoa;
+        if (aposta.is_cliente) {
+            informacoesPessoa = `
+            <div class="clearfix margin-bottom-5">
+                <div style="float: left;">
+                    Cliente
+                </div>
+                <div style="float: right;">
+                    ${aposta.passador.nome}
+                </div>
+            </div>
+            `;
+        } else {
+            informacoesPessoa = `
+            <div class="clearfix margin-bottom-5">
+                <div style="float: left;">
+                    Cambista
+                </div>
+                <div style="float: right;">
+                    ${aposta.passador.nome}
+                </div>
+            </div>
+            <div class="clearfix margin-bottom-5">
+                <div style="float: left;">
+                    Apostador
+                </div>
+                <div style="float: right;">
+                    ${aposta.apostador}
+                </div>
+            </div>
+            `;
+        }
+
         printContents = `
             <div id="comprovante">
                 <hr>
@@ -356,22 +390,7 @@ export class PrintService {
                         ${moment().format('HH:mm')}
                     </div>
                 </div>
-                <div class="clearfix margin-bottom-5">
-                    <div style="float: left;">
-                        Cambista
-                    </div>
-                    <div style="float: right;">
-                        ${aposta.passador.nome}
-                    </div>
-                </div>
-                <div class="clearfix margin-bottom-5">
-                    <div style="float: left;">
-                        Apostador
-                    </div>
-                    <div style="float: right;">
-                        ${aposta.apostador}
-                    </div>
-                </div>
+                ${informacoesPessoa}
                 <div class="clearfix margin-bottom-5">
                     <div style="float: left;">
                         Modalidade
@@ -537,18 +556,32 @@ export class PrintService {
                 .bold(true)
                 .text('Data: ')
                 .bold(false)
-                .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
-                .newline()
-                .bold(true)
-                .text('CAMBISTA: ')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.passador.nome))
-                .newline()
-                .bold(true)
-                .text('APOSTADOR: ')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.apostador))
-                .newline()
+                .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'));
+
+            if (aposta.is_cliente) {
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('CLIENTE: ')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline()
+            } else {
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('CAMBISTA: ')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline()
+                    .bold(true)
+                    .text('APOSTADOR: ')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.apostador))
+                    .newline()
+            }
+
+            ticketEscPos
                 .bold(true)
                 .text('MODALIDADE: ')
                 .bold(false)
@@ -725,6 +758,25 @@ export class PrintService {
         }
         `;
 
+        let informacoesPessoa;
+
+        if (aposta.is_cliente) {
+            informacoesPessoa = `
+            <p>
+                <b>CLIENTE:</b> ${aposta.passador.nome}
+            </p>
+            `;
+        } else {
+            informacoesPessoa = `
+            <p>
+                <b>CAMBISTA:</b> ${aposta.passador.nome}
+            </p>
+            <p>
+                <b>APOSTADOR:</b> ${aposta.apostador}
+            </p>
+            `;
+        }
+
         printContents = `
         <div id="comprovante">
             <div class="conteudo">
@@ -738,12 +790,7 @@ export class PrintService {
                 <hr>
                 <hr>
                 <div class="informacoes">
-                    <p>
-                        <b>CAMBISTA:</b> ${aposta.passador.nome}
-                    </p>
-                    <p>
-                        <b>APOSTADOR:</b> ${aposta.apostador}
-                    </p>
+                    ${informacoesPessoa}
                     <p>
                         <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
                     </p>
@@ -875,15 +922,26 @@ export class PrintService {
                 .align('left')
                 .size('normal')
                 .line(this.separatorLine)
-                .bold(true)
-                .text('CAMBISTA:')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.passador.nome))
-                .newline()
-                .bold(true)
-                .text('APOSTADOR:')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.apostador))
+                .bold(true);
+
+            if (aposta.is_cliente) {
+                ticketEscPos
+                    .text('CLIENTE:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome));
+            } else {
+                ticketEscPos
+                    .text('CAMBISTA:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline()
+                    .bold(true)
+                    .text('APOSTADOR:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.apostador));
+            }
+
+            ticketEscPos
                 .newline()
                 .bold(true)
                 .text('HORARIO:')
@@ -1014,17 +1072,30 @@ export class PrintService {
                 .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
-                .line(this.separatorLine)
-                .bold(true)
-                .text('CAMBISTA:')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.passador.nome))
-                .newline()
-                .bold(true)
-                .text('APOSTADOR:')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.apostador))
-                .newline()
+                .line(this.separatorLine);
+
+            if (aposta.is_cliente) {
+                ticketEscPos
+                    .bold(true)
+                    .text('CLIENTE:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline()
+            } else {
+                ticketEscPos
+                    .bold(true)
+                    .text('CAMBISTA:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline()
+                    .bold(true)
+                    .text('APOSTADOR:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.apostador))
+                    .newline();
+            }
+
+            ticketEscPos
                 .bold(true)
                 .text('HORARIO:')
                 .bold(false)
@@ -1166,6 +1237,24 @@ export class PrintService {
         }
         `;
 
+        let informacoesPessoa;
+        if (aposta.is_cliente) {
+            informacoesPessoa = `
+            <p>
+                <b>CLIENTE:</b> ${aposta.passador.nome}
+            </p>
+            `;
+        } else {
+            informacoesPessoa = `
+            <p>
+                <b>CAMBISTA:</b> ${aposta.passador.nome}
+            </p>
+            <p>
+                <b>APOSTADOR:</b> ${aposta.apostador}
+            </p>
+            `;
+        }
+
         printContents = `
         <div id="comprovante">
             <div class="conteudo">
@@ -1179,12 +1268,7 @@ export class PrintService {
                 <hr>
                 <hr>
                 <div class="informacoes">
-                    <p>
-                        <b>CAMBISTA:</b> ${aposta.passador.nome}
-                    </p>
-                    <p>
-                        <b>APOSTADOR:</b> ${aposta.apostador}
-                    </p>
+                    ${informacoesPessoa}
                     <p>
                         <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
                     </p>
@@ -1372,6 +1456,24 @@ export class PrintService {
         }
         `;
 
+        let informacoesPessoa;
+        if (aposta.is_cliente) {
+            informacoesPessoa = `
+            <p>
+                <b>CLIENTE:</b> ${aposta.passador.nome}
+            </p>
+            `;
+        } else {
+            informacoesPessoa = `
+            <p>
+                <b>CAMBISTA:</b> ${aposta.passador.nome}
+            </p>
+            <p>
+                <b>APOSTADOR:</b> ${aposta.apostador}
+            </p>
+            `;
+        }
+
         printContents = `
         <div id="comprovante">
             <div class="conteudo">
@@ -1385,12 +1487,7 @@ export class PrintService {
                 <hr>
                 <hr>
                 <div class="informacoes">
-                    <p>
-                        <b>CAMBISTA:</b> ${aposta.passador.nome}
-                    </p>
-                    <p>
-                        <b>APOSTADOR:</b> ${aposta.apostador}
-                    </p>
+                    ${informacoesPessoa}
                     <p>
                         <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
                     </p>
@@ -1509,17 +1606,30 @@ export class PrintService {
                 .raw([0x1d, 0x21, 0x00])
                 .align('left')
                 .size('normal')
-                .line(this.separatorLine)
-                .bold(true)
-                .text('CAMBISTA:')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.passador.nome))
-                .newline()
-                .bold(true)
-                .text('APOSTADOR:')
-                .bold(false)
-                .text(this.helperService.removerAcentos(aposta.apostador))
-                .newline()
+                .line(this.separatorLine);
+
+            if (aposta.is_cliente) {
+                ticketEscPos
+                    .bold(true)
+                    .text('CLIENTE:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline();
+            } else {
+                ticketEscPos
+                    .bold(true)
+                    .text('CAMBISTA:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.passador.nome))
+                    .newline()
+                    .bold(true)
+                    .text('APOSTADOR:')
+                    .bold(false)
+                    .text(this.helperService.removerAcentos(aposta.apostador))
+                    .newline();
+            }
+
+            ticketEscPos
                 .bold(true)
                 .text('HORARIO:')
                 .bold(false)

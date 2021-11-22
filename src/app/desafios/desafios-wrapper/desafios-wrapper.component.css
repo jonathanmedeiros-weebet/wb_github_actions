@@ -11,7 +11,7 @@
     height: calc(100vh - 69px);
 }
 
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 1024px) {
     .desafios-content{
         padding: 0;
         height: calc(100vh - 113px);

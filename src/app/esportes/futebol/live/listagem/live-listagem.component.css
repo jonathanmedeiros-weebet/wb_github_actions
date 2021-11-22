@@ -118,8 +118,8 @@
     padding: 5px 10px;
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+/* Large devices (desktops, 1025 and up) */
+@media (min-width: 1025px) {
     .mais-opcoes .fa{
         margin-right: 3px;
     }
@@ -133,8 +133,8 @@
     }
 }
 
-/* Small devices (668px and down) */
-@media only screen and (max-width: 668px) {
+/* Small devices (1024 and down) */
+@media only screen and (max-width: 1024px) {
     .content-sports {
         padding-bottom: 90px;
     }

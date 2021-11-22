@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {AuthService} from '../../shared/services/auth/auth.service';
-import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-recuperar-senha',

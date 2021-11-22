@@ -1,19 +1,18 @@
 import {Injectable} from '@angular/core';
-import {config} from '../../config';
+import {AbstractControl} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+
+import {config} from '../../config';
 import {ErrorService} from '../utils/error.service';
 import {HeadersService} from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MovimentacaoFinanceira} from '../../models/clientes/movimentacao-financeira';
-import {AbstractControl} from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
-    debouncer: any;
 
     constructor(
         private http: HttpClient,
@@ -94,23 +93,7 @@ export class ClienteService {
             );
     }
 
-    validarLoginUnico(control: AbstractControl) {
-        clearTimeout(this.debouncer);
-
-        return new Promise(resolve => {
-            this.debouncer = setTimeout(() => {
-                this.checarLoginUnico(control.value).subscribe((res) => {
-                    if (res) {
-                        resolve(null);
-                    }
-                }, (err) => {
-                    resolve({'loginEmUso': true});
-                });
-            }, 1000);
-        });
-    }
-
-    checarLoginUnico(login) {
+    verificarLogin(login) {
         return this.http.get(`${this.clienteUrl}/validarLogin/` + login).pipe(map(res => res));
     }
 }

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
-import {FormValidations} from '../../shared/utils';
+import {FormValidations, PasswordValidation} from '../../shared/utils';
 import {config} from '../../shared/config';
 import {AuthService} from '../../shared/services/auth/auth.service';
 import {MessageService} from '../../shared/services/utils/message.service';
@@ -46,9 +46,9 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     createForm() {
         this.form = this.fb.group({
             verificacao: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            nova_senha: [null, [Validators.required]],
-            senha_confirmacao: [null, [Validators.required, FormValidations.equalsTo('nova_senha')]]
-        });
+            nova_senha: [null, [Validators.required, Validators.minLength(3)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]]
+        }, {validator: PasswordValidation.MatchPassword});
     }
 
     submit() {

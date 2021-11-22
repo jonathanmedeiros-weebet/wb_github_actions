@@ -96,7 +96,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
 
-        if (window.innerWidth <= 667) {
+        if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(isOpen => this.isOpen = isOpen);

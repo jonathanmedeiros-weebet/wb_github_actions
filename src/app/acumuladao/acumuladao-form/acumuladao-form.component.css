@@ -240,7 +240,7 @@
 }
 
 /* Media */
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 1024px) {
     #acumuladao-form .eventos{
        margin-bottom: 44px;
     }
