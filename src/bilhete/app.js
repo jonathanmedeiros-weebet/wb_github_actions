@@ -54,6 +54,21 @@ document.onreadystatechange = async function () {
                         this.getElementById('has-result').hidden = false;
                         ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
                     }
+
+                    if (ticketData.passador.percentualPremio > 0) {
+                        var cambistaPaga = 0;
+
+                        if (ticketData.resultado) {
+                            cambistaPaga = ticketData.premio * ((100 - ticketData.passador.percentualPremio) / 100);
+                        } else {
+                            cambistaPaga = ticketData.possibilidade_ganho * ((100 - ticketData.passador.percentualPremio) / 100);
+                        }
+
+                        this.getElementById('agent-pays').append(cambistaPaga.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
+                    } else {
+                        this.getElementById('agent-pays').parentNode.hidden = true;
+                    }
+
                     if (ticketData.resultado && (ticketData.premio || ticketData.premio == 0)) {
                         this.getElementById('award').append(ticketData.premio.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
                     } else {
@@ -68,7 +83,7 @@ document.onreadystatechange = async function () {
                     this.getElementById('ticket-id').append(ticketData.codigo);
                     this.getElementById('panter').append(ticketData.apostador.toUpperCase());
                     this.getElementById('money-changer').append(ticketData.passador.nome.toUpperCase());
-                    this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario)));
+                    this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario.replace(/-/g, '/'))));
                     this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }));
@@ -116,7 +131,7 @@ document.onreadystatechange = async function () {
                             player_b_2half_result: '',
                             player_a_corner_kicks: '',
                             player_b_corner_kicks: '',
-                        };    
+                        };
                         var div = this.createElement('div');
 
                         if (ticketData.tipo === 'esportes') {
@@ -164,7 +179,7 @@ document.onreadystatechange = async function () {
                                 <div>
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
-                                <div class="event-time">${new Date(ticketItem.jogo_horario).toLocaleString()}</div>
+                                <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo_horario.replace(/-/g, '/')))}</div>
                                 <div id="match">
                                     <div id="match-result">
                                         ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase()
@@ -220,7 +235,7 @@ document.onreadystatechange = async function () {
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                <div class="event-time">${new Date(ticketItem.jogo.horario).toLocaleString()}</div>
+                                <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo.horario.replace(/-/g, '/')))}</div>
                                 <div class="players">
                                     <div class="player player-a-data" id="player-a-data">
                                     <div class="player-name">
@@ -247,7 +262,7 @@ document.onreadystatechange = async function () {
                         } else {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                    <div class="event-time">${new Date(ticketItem.desafio_datahora_encerramento).toLocaleString()}</div>
+                                    <div class="event-time">${getFormatedDate(new Date(ticketItem.desafio_datahora_encerramento.replace(/-/g, '/')))}</div>
                                     <div>
                                         ${ticketItem.desafio_categoria_nome}
                                     </div>
