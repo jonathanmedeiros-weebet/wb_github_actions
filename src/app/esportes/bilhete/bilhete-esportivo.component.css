@@ -170,7 +170,7 @@
     border: 1px solid var(--highlight);
 }
 
-@media only screen and (max-width: 668px) {
+@media only screen and (max-width: 1024px) {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
         position: fixed !important;

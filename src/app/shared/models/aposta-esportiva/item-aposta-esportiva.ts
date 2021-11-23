@@ -11,6 +11,7 @@ export class ItemApostaEsportiva {
     jogo: Jogo;
     cotacao: number;
     status: string;
+    jogo_horario: string;
     resultado: string;
     removido: boolean;
     campeonato;

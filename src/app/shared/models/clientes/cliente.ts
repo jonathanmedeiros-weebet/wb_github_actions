@@ -1,8 +1,8 @@
-import {EnderecoWeebet} from '../endereco/enderecoWeebet';
 import {EnderecoViaCep} from '../endereco/endercoViaCep';
+import {Endereco} from "../endereco/endereco";
 
 export class Cliente {
-    endereco?: EnderecoWeebet | EnderecoViaCep;
+    endereco?: Endereco | EnderecoViaCep;
     genero: string;
     email: string;
     dataNascimento: Date;

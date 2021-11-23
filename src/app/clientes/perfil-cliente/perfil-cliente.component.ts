@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {formatDate} from '@angular/common';
 import {FormBuilder, Validators} from '@angular/forms';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
-import {formatDate} from '@angular/common';
 import {Estado} from '../../shared/models/endereco/estado';
 import {Cidade} from '../../shared/models/endereco/cidade';
-import {EnderecoWeebet} from '../../shared/models/endereco/enderecoWeebet';
 import {UtilsService} from '../../shared/services/utils/utils.service';
+import {Endereco} from "../../shared/models/endereco/endereco";
 
 @Component({
     selector: 'app-perfil-cliente',
@@ -40,23 +40,23 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                 estados => {
                     this.estados = estados;
                 });
-        this.clienteService.getCliente(user.id)
+        this.clienteService
+            .getCliente(user.id)
             .subscribe(
                 cliente => {
                     this.form.patchValue(
                         {
-                            nome: cliente?.nome?.toUpperCase(),
-                            sobrenome: cliente?.sobrenome?.toUpperCase(),
-                            nascimento: formatDate(cliente?.dataNascimento?.date, 'dd/MM/YYYY', 'pt-BR'),
-                            sexo: cliente?.genero?.toUpperCase(),
-                            cpf: cliente?.cpf,
-                            telefone: cliente?.telefone,
-                            email: cliente?.email,
-                            pix: cliente?.chave_pix
+                            nome: cliente.nome.toUpperCase(),
+                            sobrenome: cliente.sobrenome.toUpperCase(),
+                            nascimento: formatDate(cliente.dataNascimento.date, 'dd/MM/YYYY', 'pt-BR'),
+                            sexo: cliente.genero.toUpperCase(),
+                            cpf: cliente.cpf,
+                            telefone: cliente.telefone,
+                            email: cliente.email
                         }
                     );
                     if (cliente.endereco) {
-                        const endereco: EnderecoWeebet = cliente.endereco;
+                        const endereco: Endereco = cliente.endereco;
                         if (endereco.estado && endereco.cidade) {
                             this.estadoSelecionado = endereco.estado.id;
                             this.cidadeSelecionada = endereco.cidade.id;
@@ -116,7 +116,7 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
     buscarPorCep(event: any) {
         const cepValue = event.target.value;
         if (cepValue.length == 9) {
-            this.utilsService.pesquisarEnderecoPorCep(cepValue).subscribe(
+            this.utilsService.getEnderecoPorCep(cepValue).subscribe(
                 (endereco: any) => {
                     if (!endereco.erro) {
                         let estadoLocal: Estado;

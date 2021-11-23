@@ -23,7 +23,6 @@ export class ApostasClienteDesafioComponent implements OnInit, OnDestroy, OnChan
     modalRef;
     showLoading = true;
     totais = {
-        'comissao': 0,
         'valor': 0,
         'premio': 0,
     };
@@ -49,7 +48,6 @@ export class ApostasClienteDesafioComponent implements OnInit, OnDestroy, OnChan
         this.showLoading = true;
         this.totais.valor = 0;
         this.totais.premio = 0;
-        this.totais.comissao = 0;
         this.getApostas();
     }
 
@@ -113,42 +111,11 @@ export class ApostasClienteDesafioComponent implements OnInit, OnDestroy, OnChan
                         this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
                     }
 
-                    this.modalRef.result.then(
-                        (result) => {
-                            switch (result) {
-                                case 'cancel':
-                                    this.cancelar(aposta);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        },
-                        (reason) => { }
-                    );
-
                     this.showLoading = false;
                     this.cd.detectChanges();
                 },
                 error => this.handleError(error)
             );
-    }
-
-    cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
-        this.modalRef.componentInstance.title = 'Cancelar Aposta';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
-        this.modalRef.result.then(
-            (result) => {
-                this.apostaService.cancelar(aposta.id)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        () => this.getApostas(),
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => { }
-        );
     }
 
     trackById(index: number, aposta: any): string {

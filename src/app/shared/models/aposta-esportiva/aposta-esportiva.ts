@@ -1,6 +1,8 @@
 import { ItemApostaEsportiva } from './item-aposta-esportiva';
+import { Passador } from '../passador'
 
 export class ApostaEsportiva {
+    passador : Passador;
     id: number;
     itens: ItemApostaEsportiva[] = [];
     cambistaId: number;
@@ -14,6 +16,7 @@ export class ApostaEsportiva {
     premio = 0;
     comissao = 0;
     comissao_gerente = 0;
+    possibilidade_ganho: number;
     pago: boolean;
     resultado: string;
     combinacao: string;

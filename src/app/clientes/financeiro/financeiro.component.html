@@ -10,8 +10,7 @@
                                 <label>Período</label>
                                 <select class="form-control" formControlName="periodo">
                                     <option value="semana_atual">Semana Atual</option>
-                                    <option value="mes_atual">Mês Atual</option>
-                                    <option value="mes_anterior">Mês Anterior</option>
+                                    <option value="semana_anterior">Semana Anterior</option>
                                 </select>
                             </div>
                             <div class="col-6 col-md-2">
@@ -44,27 +43,28 @@
     <div class="content-body">
         <div class="content content-movimentacoes">
             <app-spinner *ngIf="showLoading"></app-spinner>
-
             <div *ngIf="!showLoading" class="margin-top-15">
+                <div>
+                    <p>
+                        <b>Qtd. Movimentações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalMovimentacoes}}
+                    </p>
+                </div>
                 <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
                     Nenhuma movimentação realizada no período.
                 </div>
                 <div *ngIf="movimentacoesFinanceiras.length > 0">
-                    <div>
-                        <p><b>Qtd. Movimentações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalMovimentacoes}}</p>
-                    </div>
                     <ng-container>
                         <table class="table" style="text-align: left">
                             <thead>
                             <tr>
-                                <th style="width: 80%">Natureza</th>
-                                <th style="width: 10%">Valor</th>
-                                <th style="width: 10%">Saldo</th>
+                                <th style="width: 70%">Natureza</th>
+                                <th class="custom-td" style="padding-right: 10px;">Valor</th>
+                                <th class="custom-td">Saldo</th>
                             </tr>
                             </thead>
                             <tbody>
                             <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
-                                <tr>
+                                <tr class="tr-1">
                                     <td>
                                         <i style="color:green; margin-right: 5px;" class="fa fa-sort-up"
                                            *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
@@ -73,13 +73,12 @@
                                         </ng-template>
                                         {{movimentacao.natureza | formatarNatureza}}
                                     </td>
-                                    <td>{{movimentacao.valor | currency}}</td>
-                                    <td>{{movimentacao.saldo | currency}}</td>
+                                    <td class="custom-td" style="padding-right: 10px;">{{movimentacao.valor | currency}}</td>
+                                    <td class="custom-td">{{movimentacao.saldo | currency}}</td>
                                 </tr>
                                 <tr class="tr-2">
                                     <td colspan="3">
-                                        Movimentação fincanceira realizada em
-                                        {{movimentacao.data}}
+                                        Realizado em {{movimentacao.data}}
                                     </td>
                                 </tr>
                             </ng-container>
