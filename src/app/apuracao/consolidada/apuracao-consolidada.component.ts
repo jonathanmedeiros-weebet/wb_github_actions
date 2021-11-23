@@ -13,7 +13,7 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     relatorio;
     resultado = 0;
     showLoading = true;
-    controlarCreditoCambista;
+    modoContaCorrente;
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
@@ -29,7 +29,7 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.controlarCreditoCambista = this.params.controlarCreditoCambista();
+        this.modoContaCorrente = this.params.modoContaCorrente();
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;

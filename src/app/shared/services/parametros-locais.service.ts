@@ -133,6 +133,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.controlar_credito_cambista : null;
     }
 
+    modoContaCorrente() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.modo_conta_corrente : null;
+    }
+
     quantidadeMinEventosBilhete() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.quantidade_min_jogos_bilhete : null;
     }
