@@ -1513,3 +1513,11 @@ gulp.task('seridobets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('trandbets.com', function (done) {
+    tasks(done, {
+        host: "trandbets.com",
+        banca: "TRAND BETS",
+        styles: "",
+    });
+});
