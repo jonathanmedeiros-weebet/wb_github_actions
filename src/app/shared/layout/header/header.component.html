@@ -72,11 +72,10 @@
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
                      <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
+                     <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
                         Esqueci minha senha?
                     </a>
-                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
-                       data-toggle="dropdown" *ngIf="modoClienteAtivo">
+                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']" *ngIf="modoClienteAtivo">
                         Novo aqui? Cadastre-se
                     </a>
                 </ul>
@@ -138,7 +137,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -199,8 +198,7 @@
                     <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
                         Esqueci minha senha?
                     </a>
-                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']"
-                       data-toggle="dropdown" *ngIf="modoClienteAtivo">
+                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']" *ngIf="modoClienteAtivo">
                         Novo aqui? Cadastre-se
                     </a>
                 </ul>

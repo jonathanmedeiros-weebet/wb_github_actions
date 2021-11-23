@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 
 import { RelatorioService, MessageService, ParametrosLocaisService } from './../../services';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-apuracao-consolidada',
@@ -16,6 +17,10 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
+    dataSaldoAnterior;
+    showEntradas = false;
+    showSaidas = false;
+    showTotalApostadoDetalhado = false;
 
     constructor(
         private relatorioService: RelatorioService,
@@ -34,6 +39,7 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
         this.showLoading = true;
         this.resultado = 0;
         this.getResultado();
+        this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
     }
 
     getResultado(params?) {
@@ -61,5 +67,11 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
 
     handleError(error: string) {
         this.messageService.error(error);
+    }
+
+    setShowTotalApostadoDetalhado() {
+        if (this.loteriasHabilitada || this.acumuladaoHabilitado || this.desafioHabilitado) {
+            this.showTotalApostadoDetalhado = !this.showTotalApostadoDetalhado;
+        }
     }
 }

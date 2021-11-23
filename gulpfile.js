@@ -1505,3 +1505,11 @@ gulp.task('novobetsamericabr.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('seridobets.com', function (done) {
+    tasks(done, {
+        host: "seridobets.com",
+        banca: "SERIDÓ BETS",
+        styles: "",
+    });
+});

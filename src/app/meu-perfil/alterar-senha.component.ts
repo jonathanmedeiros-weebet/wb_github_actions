@@ -1,16 +1,12 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
 
-import {
-    MessageService,
-    AuthService, ClienteService
-} from './../services';
-import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
-import { FormValidations } from './../shared/utils/form-validation';
+import {AuthService, ClienteService, MessageService} from './../services';
+import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import {PasswordValidation} from "../shared/utils";
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {PasswordValidation} from '../shared/utils';
 
 @Component({
     selector: 'app-meu-perfil',
