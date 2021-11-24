@@ -19,12 +19,12 @@
                         <i class="fa fa-ticket"></i> Bilhete
                     </a>
                 </li>
-                <li *ngIf="!isCliente && isLoggedIn">
-                    <a (click)="abrirModalTabela()">
-                        <i class="fa fa-print"></i> Tabela
-                    </a>
-                </li>
                 <ng-container *ngIf="isLoggedIn">
+                    <li *ngIf="!isCliente">
+                        <a (click)="abrirModalTabela()">
+                            <i class="fa fa-print"></i> Tabela
+                        </a>
+                    </li>
                     <li *ngIf="!isCliente">
                         <a [routerLink]="['/validar-aposta']">
                             <i class="fa fa-check"></i> Validação
