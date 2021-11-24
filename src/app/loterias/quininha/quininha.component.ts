@@ -37,7 +37,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     isLoggedIn = false;
     modalRef;
     unsub$ = new Subject();
-    isCambista;
+    isCliente;
 
     constructor(
         private sidebarService: SidebarService,
@@ -60,7 +60,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     ngOnInit() {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
-        this.isCambista = this.auth.isCambista();
+        this.isCliente = this.auth.isCliente();
         this.createForm();
         this.definirAltura();
 

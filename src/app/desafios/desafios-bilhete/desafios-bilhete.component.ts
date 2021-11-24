@@ -38,7 +38,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
-    isCambista;
+    isCliente;
 
     constructor(
         private apostaService: DesafioApostaService,
@@ -57,11 +57,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
     ngOnInit() {
         this.createForm();
-        this.auth.cambista
+        this.auth.cliente
             .subscribe(
-                isCambista => {
-                    this.isCambista = isCambista;
-                    if (!isCambista && this.isLoggedIn) {
+                isCliente => {
+                    this.isCliente = isCliente;
+                    if (isCliente && this.isLoggedIn) {
                         this.form.patchValue({apostador: 'cliente'});
                     }
                 }
@@ -82,7 +82,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', (this.isCambista || !this.isLoggedIn) ? [Validators.required] : ''],
+            apostador: ['', (this.isCliente) ? '' : [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
         });

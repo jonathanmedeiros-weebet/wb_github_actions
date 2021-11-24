@@ -11,7 +11,7 @@ export class ClientGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.auth.isCambista()) {
+        if (!this.auth.isCliente()) {
             this.router.navigate(['/esportes/futebol/jogos']);
             return false;
         }

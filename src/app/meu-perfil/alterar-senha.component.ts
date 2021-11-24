@@ -6,7 +6,7 @@ import {BaseFormComponent} from '../shared/layout/base-form/base-form.component'
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {PasswordValidation} from '../shared/utils';
+import {PasswordValidation} from "../shared/utils";
 
 @Component({
     selector: 'app-meu-perfil',
@@ -15,7 +15,7 @@ import {PasswordValidation} from '../shared/utils';
 export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     public isCollapsed = false;
     unsub$ = new Subject();
-    isCambista;
+    isCliente;
 
     constructor(
         private messageService: MessageService,
@@ -28,7 +28,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     ngOnInit() {
         this.createForm();
-        this.isCambista = this.auth.isCambista();
+        this.isCliente = this.auth.isCliente();
     }
 
     ngOnDestroy() {
@@ -46,9 +46,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     submit() {
         const values = this.form.value;
-
-        if (this.isCambista) {
-            this.auth.changePassword(values)
+        if (this.isCliente) {
+            this.clienteService.alterarSenha(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     res => {
@@ -58,7 +57,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                     error => this.handleError(error)
                 );
         } else {
-            this.clienteService.alterarSenha(values)
+            this.auth.changePassword(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     res => {

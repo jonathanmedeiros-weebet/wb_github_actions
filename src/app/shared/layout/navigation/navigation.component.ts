@@ -51,7 +51,7 @@ export class NavigationComponent implements OnInit {
     amanha = moment().add(1, 'd');
     dias = [];
     isLoggedIn;
-    isCambista;
+    isCliente;
     isAppMobile;
     isOpen = true;
     itens: any[];
@@ -106,11 +106,11 @@ export class NavigationComponent implements OnInit {
                 }
             );
 
-        this.auth.cambista
+        this.auth.cliente
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                isCambista => {
-                    this.isCambista = isCambista;
+                isCliente => {
+                    this.isCliente = isCliente;
                     this.cd.detectChanges();
                 }
             );

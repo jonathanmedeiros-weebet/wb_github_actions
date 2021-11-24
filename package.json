@@ -187,7 +187,8 @@
         "futsport.net": "gulp futsport.net",
         "mundobet.site": "gulp mundobet.site",
         "novobetsamericabr.com": "gulp novobetsamericabr.com",
-        "seridobets.com": "gulp seridobets.com"
+        "seridobets.com": "gulp seridobets.com",
+        "trandbets.com": "gulp trandbets.com"
     },
     "private": true,
     "dependencies": {
