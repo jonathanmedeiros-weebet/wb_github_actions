@@ -52,7 +52,9 @@ function getFormatedDate(date) {
     var formatdMonth = date.getMonth() + 1;
     var formatedYear = date.getFullYear().toString();
     var hour = date.getHours();
-    var minutes = date.getMinutes();
+    hour = ("0" + hour).slice(-2);
+    var minutes = date.getTime();
+    minutes = ("0" + minutes).slice(-2);
 
     var dateArray = [formatedDate, formatdMonth, formatedYear];
     var timeArray = [hour, minutes];

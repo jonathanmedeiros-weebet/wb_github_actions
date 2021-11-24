@@ -9,6 +9,7 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 import { config } from './../../config';
 
 import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -17,15 +18,20 @@ export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
     logadoSource;
     logado;
+    cambistaSource;
+    cambista;
 
     constructor(
         private http: HttpClient,
         private header: HeadersService,
         private errorService: ErrorService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private router: Router
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
+        this.cambistaSource = new BehaviorSubject<boolean>(this.isCambista());
+        this.cambista = this.cambistaSource.asObservable();
     }
 
     login(data: any): Observable<any> {
@@ -36,10 +42,14 @@ export class AuthService {
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('user', JSON.stringify(res.user));
-                    localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
-
+                    if (res.user.tipo_usuario === 'cambista') {
+                        localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
+                        this.setIsCambista(true);
+                    } else {
+                        this.setIsCambista(false);
+                    }
                     this.logadoSource.next(true);
-                    window.location.reload();
+                    this.router.navigate(['esportes/futebol/jogos']);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -53,15 +63,17 @@ export class AuthService {
     }
 
     isLoggedIn(): boolean {
-        return localStorage.getItem('token') ? true : false;
+        return !!localStorage.getItem('token');
     }
 
     forgot(data: any): Observable<any> {
         const url = `${this.AuthUrl}/forgotPassword`;
 
-        return this.http
-            .post(url, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post(url, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
                 catchError(this.errorService.handleError)
             );
     }
@@ -140,5 +152,28 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
+    }
+
+    isCambista(): boolean {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            return user.tipo_usuario === 'cambista';
+        }
+        return false;
+    }
+
+    setIsCambista(value: boolean) {
+        this.cambistaSource.next(value);
+    }
+
+    validateRecoveryToken(id, token) {
+        const url = `${this.AuthUrl}/validateToken/`;
+
+        return this.http
+            .get(url + '?id=' + id + '&token=' + token, this.header.getRequestOptions(false))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
     }
 }

@@ -12,6 +12,7 @@ import {
     SafeHTMLPipe
 } from './index';
 import { SplitCodigoPipe } from './split-codigo.pipe';
+import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { SplitCodigoPipe } from './split-codigo.pipe';
         SafeHTMLPipe,
         SorteioTipoPipe,
         InfiniteScrollDirective,
-        SplitCodigoPipe
+        SplitCodigoPipe,
+        FormatarNaturezaPipe
     ],
     exports: [
         MomentPipe,
@@ -36,7 +38,8 @@ import { SplitCodigoPipe } from './split-codigo.pipe';
         SafeHTMLPipe,
         SorteioTipoPipe,
         InfiniteScrollDirective,
-        SplitCodigoPipe
+        SplitCodigoPipe,
+        FormatarNaturezaPipe
     ]
 })
 export class UtilsModule { }

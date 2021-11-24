@@ -28,6 +28,8 @@ export * from './shared/services/aposta-esportiva/preaposta-esportiva.service';
 export * from './shared/services/aposta-esportiva/resultado.service';
 export * from './shared/services/aposta-esportiva/stats.service';
 
+export * from './shared/services/clientes/cliente.service';
+
 /* Utils Services */
 export * from './shared/services/utils/error.service';
 export * from './shared/services/utils/headers.service';

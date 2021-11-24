@@ -1,0 +1,89 @@
+<app-spinner *ngIf="showLoading"></app-spinner>
+
+<div *ngIf="!showLoading" class="margin-top-15">
+    <div *ngIf="!apostas.length" class="alert alert-warning text-center" role="alert">
+        Nenhuma aposta realizada no período.
+    </div>
+
+    <p *ngIf="apostas.length">
+        {{apostas.length}} aposta(s)
+    </p>
+
+    <div *ngFor="let aposta of apostas" class="aposta">
+        <div class="aposta-header">
+            <div>
+                <button type="button" (click)="abrirBilhete(aposta)" class="btn btn-xs btn-custom">
+                    <i class="fa fa-eye"></i>
+                </button>
+            </div>
+            <div>
+                <label>Código: </label>
+                <em>{{aposta.codigo}}</em>
+            </div>
+            <div>
+                <label>Apostador: </label>
+                <em>{{aposta.apostador}}</em>
+            </div>
+            <div>
+                <label>Horário: </label>
+                <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
+            </div>
+            <div>
+                <label>Modalidade: </label>
+                <em>{{aposta.modalidade | sorteioTipo}}</em>
+            </div>
+        </div>
+        <div class="itens">
+            <div class="aposta-itens">
+                <div class="aposta-item" *ngFor="let item of aposta.itens">
+                    <div class="first-line">
+                        <div>
+                            <label>Sorteio</label>
+                            <span>{{item.sorteio_nome}}</span>
+                        </div>
+                        <div>
+                            <label>Aposta</label>
+                            <span>{{item.valor | currency}}</span>
+                        </div>
+                        <div *ngIf="item.cotacao6 > 0">
+                            <label>Retorno 6</label>
+                            <span>{{(item.cotacao6 * item.valor) | currency}}</span>
+                        </div>
+                        <div *ngIf="item.cotacao5 > 0">
+                            <label>Retorno 5</label>
+                            <span>{{(item.cotacao5 * item.valor) | currency}}</span>
+                        </div>
+                        <div *ngIf="item.cotacao4 > 0">
+                            <label>Retorno 4</label>
+                            <span>{{(item.cotacao4 * item.valor) | currency}}</span>
+                        </div>
+                        <div *ngIf="item.cotacao3 > 0">
+                            <label>Retorno 3</label>
+                            <span>{{(item.cotacao3 * item.valor) | currency}}</span>
+                        </div>
+                        <div>
+                            <label>Prêmio</label>
+                            <span>{{(item.premio) | currency}}</span>
+                        </div>
+                        <div>
+                            <label>Qtd. Números</label>
+                            <span>{{item.numeros.length}}</span>
+                        </div>
+                        <div>
+                            <label>Status</label>
+                            <span>{{item.status | uppercase}}</span>
+                        </div>
+                    </div>
+                    <div class="circle-group">
+                        <div class="circle" *ngFor="let numero of item.numeros"
+                            [ngClass]="checkResult(numero, item.sorteio_numeros)">
+                            <div class="content">
+                                {{numero | number:'2.0'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

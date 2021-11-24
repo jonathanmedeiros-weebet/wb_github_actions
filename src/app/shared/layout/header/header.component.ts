@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../base-form/base-form.component';
-import { ParametrosLocaisService, AuthService, MessageService, SidebarService, PrintService } from './../../../services';
-import { Usuario } from './../../../models';
-import { config } from './../../config';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../base-form/base-form.component';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
+import {Usuario} from './../../../models';
+import {config} from './../../config';
 
 @Component({
     selector: 'app-header',
@@ -52,6 +52,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     LOGO = config.LOGO;
     unsub$ = new Subject();
     appVersion;
+    isCambista;
+    modoClienteAtivo;
+    contatoSolicitacaoSaque;
 
     constructor(
         private fb: FormBuilder,
@@ -68,11 +71,18 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
+        this.contatoSolicitacaoSaque = this.paramsService.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 isLoggedIn => this.isLoggedIn = isLoggedIn
+            );
+
+        this.auth.cambista
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isCambista => this.isCambista = isCambista
             );
 
         this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
@@ -84,6 +94,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
@@ -114,7 +125,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.auth.login(this.form.value)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                () => this.getUsuario(),
+                () => {
+                    this.getUsuario();
+                    if (this.usuario.tipo_usuario === 'cambista') {
+                        location.reload();
+                    }
+                },
                 error => this.handleError(error)
             );
     }
@@ -141,15 +157,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.printService.listPrinters();
     }
 
-    getPosicaoFinanceira(event) {
-        if (this.isLoggedIn) {
-            this.auth.getPosicaoFinanceira()
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
-                    error => this.handleError(error)
-                );
-        }
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                error => this.handleError(error)
+            );
     }
 
     svgCss() {

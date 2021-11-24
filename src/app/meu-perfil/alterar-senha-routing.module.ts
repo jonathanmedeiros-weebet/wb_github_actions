@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MeuPerfilComponent } from './meu-perfil.component';
+import { AlterarSenhaComponent } from './alterar-senha.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: MeuPerfilComponent
+    component: AlterarSenhaComponent
   }
 ];
 
@@ -14,4 +14,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MeuPerfilRoutingModule {}
+export class AlterarSenhaRoutingModule {}

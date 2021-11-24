@@ -1,0 +1,126 @@
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {PasswordValidation} from '../../shared/utils';
+import {ClienteService} from '../../shared/services/clientes/cliente.service';
+import {MessageService} from '../../shared/services/utils/message.service';
+import {Pagina} from '../../shared/models/pagina';
+import {AuthService} from '../../shared/services/auth/auth.service';
+
+@Component({
+    selector: 'app-cadastro',
+    templateUrl: './cadastro.component.html',
+    styleUrls: ['./cadastro.component.css']
+})
+export class CadastroComponent extends BaseFormComponent implements OnInit {
+    type: string = 'password';
+    icon: string = 'fa fa-eye';
+    termosDeUso: Pagina;
+    submitting = false;
+    debouncer: any;
+
+    constructor(
+        private fb: FormBuilder,
+        private clientesService: ClienteService,
+        private messageService: MessageService,
+        private modalService: NgbModal,
+        private auth: AuthService,
+        private route: Router,
+    ) {
+        super();
+    }
+
+    ngOnInit(): void {
+        this.createForm();
+        this.clientesService.getTermosDeUso().subscribe(
+            (termos: Pagina) => {
+                this.termosDeUso = termos ? termos : new Pagina();
+            },
+            error => this.handleError(error)
+        );
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+            sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+            usuario: [null, [
+                    Validators.minLength(3),
+                    Validators.pattern('^[a-zA-Z0-9_]+$'),
+                    Validators.required
+                ], this.validarLoginUnico.bind(this)],
+            nascimento: [null, [Validators.required]],
+            senha: [null, [Validators.required, Validators.minLength(3)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]],
+            cpf: [null, [Validators.required]],
+            telefone: [null, [Validators.required]],
+            email: [null, [Validators.required]],
+            genero: ['', [Validators.required]],
+            aceitar_termos: [null, [Validators.required]]
+        }, {validator: PasswordValidation.MatchPassword});
+    }
+
+    showPassword(type: string) {
+        if (type === 'password') {
+            this.type = 'text';
+            this.icon = 'fa fa-eye-slash';
+        } else {
+            this.type = 'password';
+            this.icon = 'fa fa-eye';
+        }
+    }
+
+    abrirModalTermosUso(modal: any) {
+        if (this.termosDeUso) {
+            this.modalService.open(modal);
+        }
+    }
+
+    handleError(message: string, type?: string) {
+        if (type) {
+            if (type === 'warning') {
+                this.messageService.warning(message);
+            }
+        } else {
+            this.messageService.error(message);
+        }
+    }
+
+    validarLoginUnico(control: AbstractControl) {
+        clearTimeout(this.debouncer);
+        return new Promise(resolve => {
+            this.debouncer = setTimeout(() => {
+                this.clientesService.verificarLogin(control.value).subscribe((res) => {
+                    if (res) {
+                        resolve(null);
+                    }
+                }, () => {
+                    resolve({'loginEmUso': true});
+                });
+            }, 1000);
+        });
+    }
+
+    submit() {
+        const values = this.form.value;
+        this.submitting = true;
+        this.clientesService.cadastrarCliente(values)
+            .subscribe(
+                () => {
+                    this.auth.login({username: values.usuario, password: values.senha}).subscribe(
+                        () => {
+                            this.messageService.success('Cadastro realizado com sucesso!');
+                        },
+                        error => this.messageService.error(error)
+                    );
+                },
+                error => {
+                    this.messageService.error(error);
+                    this.submitting = false;
+                }
+            );
+    }
+
+}

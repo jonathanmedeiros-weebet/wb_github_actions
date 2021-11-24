@@ -1,0 +1,34 @@
+a {
+    color: var(--highlight) !important;
+    cursor: pointer;
+}
+
+.required > .label::after {
+    content: "*";
+    color: #ff0000;
+    font-size: 15px;
+}
+@media only screen and (max-width: 667px) {
+    #content {
+        margin-left: 0px;
+    }
+}
+.container{
+    overflow: auto;
+}
+#showPassword {
+    background: #fff;
+    cursor: pointer;
+    border-left: 0px;
+}
+#pass {
+    border-right: 0px;
+}
+.btn {
+    float: right;
+}
+.modal-body {
+    max-height: 500px !important;
+    overflow: auto;
+    overflow-x: hidden;
+}

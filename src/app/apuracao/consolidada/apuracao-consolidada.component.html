@@ -4,86 +4,8 @@
     <div class="col-12 col-md-4">
         <table class="table table-hover table-bordered">
             <tbody>
-                <tr>
-                    <th class="">Total Apostado</th>
-                    <td>
-                        <div class="value">
-                            <i class="fa fa-plus-circle"></i>
-                            {{relatorio['total_apostado'] | currency}}
-                        </div>
-                    </td>
-                </tr>
-                <ng-container *ngIf="loteriasHabilitada || acumuladaoHabilitado || desafioHabilitado">
-                    <tr>
-                        <td class="">L Esportivas</td>
-                        <td class="text-right">
-                            {{relatorio['esporte']['apostado'] | currency}}
-                        </td>
-                    </tr>
-                    <tr *ngIf="loteriasHabilitada">
-                        <td class="">L Loterias</td>
-                        <td class="text-right">
-                            {{relatorio['loteria']['apostado'] | currency}}
-                        </td>
-                    </tr>
-                    <tr *ngIf="acumuladaoHabilitado">
-                        <td class="">L Acumuladão</td>
-                        <td class="text-right">
-                            {{relatorio['acumuladao']['apostado'] | currency}}
-                        </td>
-                    </tr>
-                    <tr *ngIf="desafioHabilitado">
-                        <td class="">L Desafio</td>
-                        <td class="text-right">
-                            {{relatorio['desafio']['apostado'] | currency}}
-                        </td>
-                    </tr>
-                </ng-container>
-                <tr>
-                    <th>Recargas de Cartão</th>
-                    <td>
-                        <div class="value">
-                            <i class="fa fa-plus-circle"></i>
-                            {{relatorio['cartao'] | currency}}
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Comissões</th>
-                    <td>
-                        <div class="value">
-                            <i class="fa fa-minus-circle"></i>
-                            {{relatorio['total_comissao'] | currency}}
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Prêmios</th>
-                    <td>
-                        <div class="value">
-                            <i class="fa fa-minus-circle"></i>
-                            {{relatorio['total_premios'] | currency}}
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Saques</th>
-                    <td>
-                        <div class="value">
-                            <i class="fa fa-minus-circle"></i>
-                            {{relatorio['saque'] | currency}}
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Resultado no Período</th>
-                    <td class="text-right resultado"
-                        [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
-                        <b>{{resultado | currency}}</b>
-                    </td>
-                </tr>
-                <tr *ngIf="controlarCreditoCambista">
-                    <th class="">Saldo Anterior</th>
+                <tr *ngIf="modoContaCorrente">
+                    <th class="">Saldo em {{dataSaldoAnterior}}</th>
                     <td>
                         <div class="value">
                             <i class="fa fa-plus-circle"></i>
@@ -91,7 +13,98 @@
                         </div>
                     </td>
                 </tr>
-                <ng-container *ngIf="controlarCreditoCambista">
+
+                <tr (click)="showEntradas = !showEntradas">
+                    <th class="">Entradas</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-plus-circle"></i>
+                            {{relatorio['total_entradas'] | currency}}
+                        </div>
+                    </td>
+                </tr>
+                <ng-container *ngIf="showEntradas">
+                    <tr (click)="setShowTotalApostadoDetalhado()">
+                        <td class="">Total Apostado</td>
+                        <td class="text-right">
+                            {{relatorio['total_apostado'] | currency}}
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="showTotalApostadoDetalhado">
+                        <tr>
+                            <td class=""> L Esportivas</td>
+                            <td class="text-right">
+                                {{relatorio['esporte']['apostado'] | currency}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="loteriasHabilitada">
+                            <td class=""> L Loterias</td>
+                            <td class="text-right">
+                                {{relatorio['loteria']['apostado'] | currency}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="acumuladaoHabilitado">
+                            <td class=""> L Acumuladão</td>
+                            <td class="text-right">
+                                {{relatorio['acumuladao']['apostado'] | currency}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="desafioHabilitado">
+                            <td class=""> L Desafio</td>
+                            <td class="text-right">
+                                {{relatorio['desafio']['apostado'] | currency}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr>
+                        <td>Recargas de Cartão</td>
+                        <td class="text-right">
+                            {{relatorio['cartao'] | currency}}
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <tr (click)="showSaidas = !showSaidas">
+                    <th class="">Saídas</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa fa-minus-circle"></i>
+                            {{relatorio['total_saidas'] | currency}}
+                        </div>
+                    </td>
+                </tr>
+                <ng-container *ngIf="showSaidas">
+                    <tr>
+                        <td>Comissões</td>
+                        <td class="text-right">
+                            {{relatorio['total_comissao'] | currency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prêmios</td>
+                        <td class="text-right">
+                            {{relatorio['total_premios'] | currency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Saques</td>
+                        <td class="text-right">
+                            {{relatorio['saque'] | currency}}
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <tr>
+                    <th>
+                        Resultado {{queryParams.dataInicial | moment:'DD/MM'}} à
+                        {{queryParams.dataFinal | moment:'DD/MM'}}
+                    </th>
+                    <td class="text-right resultado"
+                        [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
+                        <b>{{resultado | currency}}</b>
+                    </td>
+                </tr>
+                <ng-container>
                     <tr>
                         <th class="">Créditos</th>
                         <td>
@@ -110,14 +123,14 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <th>Saldo</th>
+                        <td class="text-right resultado"
+                            [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
+                            <b>{{relatorio['saldo'] | currency}}</b>
+                        </td>
+                    </tr>
                 </ng-container>
-                <tr>
-                    <th>Saldo</th>
-                    <td class="text-right resultado"
-                        [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
-                        <b>{{relatorio['saldo'] | currency}}</b>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
