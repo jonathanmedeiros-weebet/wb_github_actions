@@ -24,7 +24,7 @@ export class ApostaModalComponent implements OnInit {
     appMobile;
     casaDasApostasId;
     isLoggedIn;
-    isCambista;
+    isCliente;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -37,7 +37,7 @@ export class ApostaModalComponent implements OnInit {
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
-        this.isCambista = this.auth.isCambista();
+        this.isCliente = this.auth.isCliente();
     }
 
     printTicket() {
@@ -79,14 +79,14 @@ export class ApostaModalComponent implements OnInit {
     }
 
     pagamentoPermitido() {
-        return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago && !this.aposta.cartao_aposta;
+        return this.aposta.resultado && this.aposta.resultado === 'ganhou' && !this.aposta.pago && !this.aposta.cartao_aposta && !this.isCliente && this.isLoggedIn;
     }
 
     cancelamentoPermitido() {
         const opcoes = this.paramsLocais.getOpcoes();
         let result = false;
 
-        if (this.showCancel && this.isLoggedIn) {
+        if (this.showCancel && this.isLoggedIn && !this.isCliente) {
             if (opcoes.habilitar_cancelar_aposta) {
                 result = true;
             } else if (opcoes.habilitar_cancelar_ultima_aposta && this.isUltimaAposta) {

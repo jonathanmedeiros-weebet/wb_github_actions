@@ -23,7 +23,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
-    isCambista;
+    isCliente;
     isLoggedIn;
 
     constructor(
@@ -44,10 +44,10 @@ export class ExibirBilheteDesafioComponent implements OnInit {
                 }
             );
 
-        this.auth.cambista
+        this.auth.cliente
             .subscribe(
-                isCambista => {
-                    this.isCambista = isCambista;
+                isCliente => {
+                    this.isCliente = isCliente;
                 }
             );
 
