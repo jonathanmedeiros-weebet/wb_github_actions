@@ -36,7 +36,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     cambistaPaga;
     apostaVersion;
     showLoading = false;
-    isCambista;
+    isCliente;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -54,7 +54,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
-        this.isCambista = this.auth.isCambista();
+        this.isCliente = this.auth.isCliente();
 
         this.opcoes = this.paramsLocais.getOpcoes();
 

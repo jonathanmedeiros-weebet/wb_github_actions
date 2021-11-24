@@ -43,7 +43,7 @@ export class ParametroService {
         const token = localStorage.getItem('token');
         let requestOptions;
 
-        if (token && this.auth.isCambista()) {
+        if (token && !this.auth.isCliente()) {
             requestOptions = this.header.getRequestOptions(true);
         } else {
             requestOptions = this.header.getRequestOptions();

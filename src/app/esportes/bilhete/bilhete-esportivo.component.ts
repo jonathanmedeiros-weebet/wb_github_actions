@@ -37,7 +37,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
-    isCambista;
+    isCliente;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -63,11 +63,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 isLoggedIn => {
                     this.isLoggedIn = isLoggedIn;
                     if (isLoggedIn) {
-                        this.auth.cambista
+                        this.auth.cliente
                             .subscribe(
-                                isCambista => {
-                                    this.isCambista = isCambista;
-                                    if (!isCambista && this.isLoggedIn) {
+                                isCliente => {
+                                    this.isCliente = isCliente;
+                                    if (isCliente && this.isLoggedIn) {
                                         this.form.patchValue({apostador: 'cliente'});
                                     }
                                 }
@@ -114,7 +114,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', (this.isCambista || !this.isLoggedIn) ? [Validators.required] : ''],
+            apostador: ['', (this.isCliente) ? '' : [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([])
         });
@@ -255,7 +255,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.cartaoApostaForm.reset();
         this.stopDelayInterval();
 
-        if (!this.isCambista && this.isLoggedIn) {
+        if (this.isCliente) {
             this.form.patchValue({'apostador': 'cliente'});
         }
 

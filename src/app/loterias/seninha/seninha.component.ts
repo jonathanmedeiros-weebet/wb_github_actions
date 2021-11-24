@@ -37,7 +37,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     isLoggedIn = false;
     modalRef;
     unsub$ = new Subject();
-    isCambista;
+    isCliente;
 
     constructor(
         private sidebarService: SidebarService,
@@ -60,7 +60,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     ngOnInit() {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
-        this.isCambista = this.auth.isCambista();
+        this.isCliente = this.auth.isCliente();
         this.createForm();
         this.definirAltura();
 

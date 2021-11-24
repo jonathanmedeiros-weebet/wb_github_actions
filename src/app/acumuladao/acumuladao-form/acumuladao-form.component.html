@@ -138,7 +138,7 @@
                     </p>
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div class="div-inputs" *ngIf="isCambista || !isLoggedIn">
+                    <div class="div-inputs" *ngIf="!isCliente || !isLoggedIn">
                         <div class="form-group">
                             <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
                                 class="form-control" placeholder="Nome do apostador...">
