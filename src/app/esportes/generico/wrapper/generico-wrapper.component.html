@@ -4,9 +4,5 @@
             <app-pre-jogo-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [showLoadingIndicator]="showLoadingIndicator" [deixarCampeonatosAbertos]="deixarCampeonatosAbertos" [camps]="campeonatos"
                 [data]="data"></app-pre-jogo-listagem>
         </div>
-        <div class="jogo" [hidden]="mobileScreen && !exibirMaisCotacoes">
-            <app-pre-jogo-visualizacao [jogoId]="jogoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
-            </app-pre-jogo-visualizacao>
-        </div>
     </div>
 </div>

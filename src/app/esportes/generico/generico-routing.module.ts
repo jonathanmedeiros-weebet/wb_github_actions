@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PreJogoWrapperComponent } from './wrapper/pre-jogo-wrapper.component';
+import { GenericoWrapperComponent } from './wrapper/generico-wrapper.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: PreJogoWrapperComponent
+        component: GenericoWrapperComponent
     }
 ];
 
@@ -14,4 +14,4 @@ export const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class PreJogoRoutingModule { }
+export class GenericoRoutingModule { }

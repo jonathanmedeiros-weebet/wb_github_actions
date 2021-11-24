@@ -7,11 +7,11 @@ import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageServ
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-pre-jogo-wrapper',
-    templateUrl: 'pre-jogo-wrapper.component.html',
-    styleUrls: ['pre-jogo-wrapper.component.css']
+    selector: 'app-generico-wrapper',
+    templateUrl: 'generico-wrapper.component.html',
+    styleUrls: ['generico-wrapper.component.css']
 })
-export class PreJogoWrapperComponent implements OnInit, OnDestroy {
+export class GenericoWrapperComponent implements OnInit, OnDestroy {
     campeonatosBloqueados = [];
     contexto = null;
     sportId;
@@ -85,7 +85,8 @@ export class PreJogoWrapperComponent implements OnInit, OnDestroy {
                         }
                     } else {
                         if (!params['nome']) {
-                            queryParams.data = moment().format('YYYY-MM-DD');
+                            // queryParams.data = moment().format('YYYY-MM-DD');
+                            queryParams.data_final = dataLimiteTabela;
 
                             const primeiraPagina = this.paramsService.getPrimeiraPagina();
                             if (primeiraPagina === 'principais') {

@@ -13,12 +13,12 @@ import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-pre-jogo-listagem',
+    selector: 'app-generico-listagem',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: 'pre-jogo-listagem.component.html',
-    styleUrls: ['pre-jogo-listagem.component.css']
+    templateUrl: 'generico-listagem.component.html',
+    styleUrls: ['generico-listagem.component.css']
 })
-export class PreJogoListagemComponent implements OnInit, OnDestroy, OnChanges {
+export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
     @Input() deixarCampeonatosAbertos;
     @Input() camps: Campeonato[];
