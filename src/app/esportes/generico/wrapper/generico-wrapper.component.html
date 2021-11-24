@@ -1,8 +1,8 @@
 <div id="jogo-default-wrapper">
     <div id="jogo-default-content">
-        <div class="lista" [hidden]="mobileScreen && exibirMaisCotacoes">
-            <app-pre-jogo-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [showLoadingIndicator]="showLoadingIndicator" [deixarCampeonatosAbertos]="deixarCampeonatosAbertos" [camps]="campeonatos"
-                [data]="data"></app-pre-jogo-listagem>
+        <div class="lista">
+            <app-generico-listagem [showLoadingIndicator]="showLoadingIndicator" [camps]="campeonatos" [data]="data">
+            </app-generico-listagem>
         </div>
     </div>
 </div>

@@ -20,11 +20,8 @@ import * as moment from 'moment';
 })
 export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
-    @Input() deixarCampeonatosAbertos;
     @Input() camps: Campeonato[];
     @Input() data;
-    @Output() jogoSelecionadoId = new EventEmitter();
-    @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
     campeonatos: Campeonato[];
     campeonatosAbertos = [];
@@ -35,9 +32,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     jogosBloqueados;
     contentSportsEl;
     start;
-    offset;
+    offset = 5;
     total;
-    exibirCampeonatosExpandido;
     loadingScroll = false;
     unsub$ = new Subject();
 
@@ -56,8 +52,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
-        this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
-        this.offset = this.exibirCampeonatosExpandido ? 5 : 15;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -208,49 +202,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    campeonatoAberto(campeonatoId) {
-        return this.campeonatosAbertos.includes(campeonatoId);
-    }
-
-    // Extrai id do primeiro jogo do primeiro campeonato
-    extrairJogoId(campeonatos) {
-        let jogoId = null;
-
-        if (campeonatos.length > 1) {
-            const jogos = campeonatos[0].jogos;
-
-            let start = 0;
-            let stop = false;
-
-            while (!stop) {
-                if (jogos.length > 1) {
-                    jogoId = jogos[start]._id;
-                    stop = true;
-                } else if (jogos.length === 1) {
-                    jogoId = jogos[start]._id;
-                    stop = true;
-                }
-
-                start++;
-            }
-        } else if (campeonatos.length === 1) {
-            const jogos = campeonatos[0].jogos;
-
-            if (jogos.length > 1) {
-                jogoId = jogos[0]._id;
-            } else if (jogos.length === 1) {
-                jogoId = jogos[0]._id;
-            }
-        }
-
-        return jogoId;
-    }
-
-    // Exibindo todas as cotações daquele jogo selecionado
-    maisCotacoes(jogoId) {
-        this.jogoSelecionadoId.emit(jogoId);
-        this.exibirMaisCotacoes.emit(true);
-    }
 
     exibirMais() {
         this.loadingScroll = true;
@@ -269,11 +220,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             });
 
             this.campeonatos = this.campeonatos.concat(splice);
-
-            if (this.exibirCampeonatosExpandido || this.deixarCampeonatosAbertos) {
-                const spliceIds = splice.map(campeonato => campeonato._id);
-                this.campeonatosAbertos = this.campeonatosAbertos.concat(spliceIds);
-            }
 
             this.start++;
         }

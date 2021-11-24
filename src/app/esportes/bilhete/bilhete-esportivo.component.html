@@ -66,14 +66,10 @@
                     <div class="horario">
                         {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
                     </div>
-                    <div class="jogo-nome">
-                        {{item.jogo.nome}}
-                    </div>
-                    <div class="campeonato-nome">
+                    <!-- <div class="campeonato-nome">
                         {{item.jogo.campeonato.nome}}
-                    </div>
-                    <div class="cotacao" [ngClass]="{'mudou': item.mudanca}">
-                        {{item.cotacao.chave | oddCategoria}}:
+                    </div> -->
+                    <div class="odd" [ngClass]="{'mudou': item.mudanca}">
                         <span *ngIf="item.cotacao.nome; else chave">
                             {{item.cotacao.nome}}
                         </span>
@@ -93,6 +89,12 @@
                                 item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
                             </del>
                         </span>
+                    </div>
+                    <div class="mercado">
+                        {{item.cotacao.chave | oddCategoria}}
+                    </div>
+                    <div class="jogo-nome">
+                        {{item.jogo.nome}}
                     </div>
                 </div>
                 <div class="remover-item" (click)="removerItem(i)">
@@ -140,14 +142,10 @@
                     <div class="horario">
                         {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
                     </div>
-                    <div class="jogo-nome">
-                        {{item.jogo.nome}}
-                    </div>
-                    <div class="campeonato-nome">
+                    <!-- <div class="campeonato-nome">
                         {{item.jogo.campeonato.nome}}
-                    </div>
+                    </div> -->
                     <div class="cotacao">
-                        {{item.cotacao.chave | oddCategoria}}:
                         <span *ngIf="item.cotacao.nome; else chave">
                             {{item.cotacao.nome}}
                         </span>
@@ -164,6 +162,12 @@
                             {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
                             item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }}
                         </span>
+                        <span>
+                            {{item.cotacao.chave | oddCategoria}}
+                        </span>
+                    </div>
+                    <div class="jogo-nome">
+                        {{item.jogo.nome}}
                     </div>
                 </div>
                 <div class="remover" (click)="removerItem(i)">

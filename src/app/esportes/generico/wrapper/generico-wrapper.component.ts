@@ -15,15 +15,10 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     campeonatosBloqueados = [];
     contexto = null;
     sportId;
-    mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;
     odds = [];
-    aux = [];
     data;
-    jogoId;
-    exibirMaisCotacoes = false;
-    deixarCampeonatosAbertos;
     unsub$ = new Subject();
 
     constructor(
@@ -65,7 +60,6 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             campeonato => {
                                 this.campeonatos = [campeonato];
                                 this.showLoadingIndicator = false;
-                                this.jogoId = this.extrairJogoId(this.campeonatos);
                             },
                             error => this.messageService.error(error)
                         );
@@ -83,16 +77,6 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         } else {
                             queryParams.data = dataLimiteTabela;
                         }
-                    } else {
-                        if (!params['nome']) {
-                            // queryParams.data = moment().format('YYYY-MM-DD');
-                            queryParams.data_final = dataLimiteTabela;
-
-                            const primeiraPagina = this.paramsService.getPrimeiraPagina();
-                            if (primeiraPagina === 'principais') {
-                                queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
-                            }
-                        }
                     }
 
                     if (queryParams.data) {
@@ -105,8 +89,6 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             campeonatos => {
                                 this.campeonatos = campeonatos;
                                 this.showLoadingIndicator = false;
-
-                                this.jogoId = this.extrairJogoId(this.campeonatos);
                             },
                             error => this.messageService.error(error)
                         );
@@ -159,49 +141,5 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
             default:
                 break;
         }
-    }
-
-    receptorJogoSelecionadoId(jogoId) {
-        this.jogoId = jogoId;
-    }
-
-    changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.exibirMaisCotacoes = exibirMaisCotacoes;
-    }
-
-    // Extrai id do primeiro jogo do primeiro campeonato
-    extrairJogoId(campeonatos) {
-        let jogoId = null;
-
-        if (campeonatos.length > 1) {
-            const jogos = campeonatos[0].jogos;
-
-            let start = 0;
-            let stop = false;
-
-            while (!stop) {
-                if (jogos.length > 1) {
-                    jogoId = jogos[start]._id;
-                    stop = true;
-                } else if (jogos.length === 1) {
-                    jogoId = jogos[start]._id;
-                    stop = true;
-                }
-
-                start++;
-            }
-        } else if (campeonatos.length === 1) {
-            const jogos = campeonatos[0].jogos;
-
-            if (jogos.length > 1) {
-                jogoId = jogos[0]._id;
-            } else if (jogos.length === 1) {
-                jogoId = jogos[0]._id;
-            }
-        }
-
-        this.jogoId = jogoId;
-
-        return jogoId;
     }
 }
