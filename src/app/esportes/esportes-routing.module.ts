@@ -11,13 +11,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'futebol',
-                data: { sportId: '1' },
                 loadChildren: () => import('app/esportes/futebol/futebol.module').then(m => m.FutebolModule),
-            },
-            {
-                path: 'basquete',
-                loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [BasqueteGuard]
             },
             {
                 path: 'combate',
@@ -34,6 +28,35 @@ export const routes: Routes = [
                 path: 'tenis',
                 data: { sportId: '13' },
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+            },
+            {
+                path: 'hoquei-gelo',
+                data: { sportId: '17' },
+                loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+            },
+            {
+                path: 'basquete',
+                data: { sportId: '18' },
+                loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [BasqueteGuard]
+            },
+            {
+                path: 'futsal',
+                data: { sportId: '83' },
+                loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [BasqueteGuard]
+            },
+            {
+                path: 'volei',
+                data: { sportId: '91' },
+                loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [BasqueteGuard]
+            },
+            {
+                path: 'tenis-mesa',
+                data: { sportId: '92' },
+                loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [BasqueteGuard]
             },
             {
                 path: 'esports',

@@ -1,8 +1,8 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { takeUntil, switchMap, mergeMap, tap } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from '../../../services';
 import * as moment from 'moment';
 
@@ -77,6 +77,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         } else {
                             queryParams.data = dataLimiteTabela;
                         }
+                    } else {
+                        queryParams.data_final = dataLimiteTabela;
                     }
 
                     if (queryParams.data) {
@@ -119,13 +121,6 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
 
     setContextoPorEsporte(sportId) {
         switch (sportId) {
-            case '1':
-                this.contexto = 'futebol';
-                this.odds = ['casa_90', 'empate_90', 'fora_90'];;
-                if (this.paramsService.getOddsPrincipais()) {
-                    this.odds = this.paramsService.getOddsPrincipais();
-                }
-                break;
             case '9':
                 this.contexto = 'combate';
                 this.odds = ['cmbt_casa', 'cmbt_fora'];
@@ -137,6 +132,30 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
             case '13':
                 this.contexto = 'tenis';
                 this.odds = ['tenis_casa', 'tenis_fora'];
+                break;
+            case '17':
+                this.contexto = 'hoquei-gelo';
+                this.odds = ['hoquei_gelo_casa', 'hoquei_gelo_fora'];
+                break;
+            case '18':
+                this.contexto = 'basquete';
+                this.odds = ['bkt_casa', 'bkt_fora'];
+                break;
+            case '83':
+                this.contexto = 'futsal';
+                this.odds = ['futsal_casa', 'futsal_empate', 'futsal_fora'];
+                break;
+            case '91':
+                this.contexto = 'volei';
+                this.odds = ['volei_casa', 'volei_fora'];
+                break;
+            case '92':
+                this.contexto = 'tenis-mesa';
+                this.odds = ['tenis_mesa_casa', 'tenis_mesa_fora'];
+                break;
+            case '151':
+                this.contexto = 'esports';
+                this.odds = ['esports_casa', 'esports_fora'];
                 break;
             default:
                 break;

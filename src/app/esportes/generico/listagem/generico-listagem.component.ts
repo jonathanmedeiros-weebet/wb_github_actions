@@ -24,7 +24,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() data;
     mobileScreen = true;
     campeonatos: Campeonato[];
-    campeonatosAbertos = [];
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
@@ -44,7 +43,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
-        private router: Router
     ) { }
 
     ngOnInit() {
@@ -78,7 +76,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.start = 0;
             this.total = Math.ceil(this.camps.length / this.offset);
             this.campeonatos = [];
-            this.campeonatosAbertos = [];
             this.exibirMais();
 
             setTimeout(() => {
@@ -193,16 +190,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
-    toggleCampeonato(campeonatoId) {
-        const index = this.campeonatosAbertos.findIndex(id => id === campeonatoId);
-        if (index >= 0) {
-            this.campeonatosAbertos.splice(index, 1);
-        } else {
-            this.campeonatosAbertos.push(campeonatoId);
-        }
-    }
-
-
     exibirMais() {
         this.loadingScroll = true;
 
@@ -212,7 +199,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
                         cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
-                        cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
                     });
                 });
 
