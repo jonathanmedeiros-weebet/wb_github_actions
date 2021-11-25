@@ -174,7 +174,6 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         }
 
         if (valido) {
-            console.log(this.isLoggedIn);
             if (this.isLoggedIn) {
                 const values = clone(this.form.value);
                 values.itens.map(item => {
