@@ -407,16 +407,6 @@ gulp.task('rubinhosports.wee.bet', function (done) {
     });
 });
 
-gulp.task('rexpasports.wee.bet', function (done) {
-    tasks(done, {
-        host: "rexpasports.wee.bet",
-        banca: "REXPA Sports",
-        styles: "--header:#00342a;--foreground-header:#fff;--sidebar-right:#00342a;--foreground-sidebar-right:#fff;--sidebar-left:#00342a;--foreground-sidebar-left:#fff;--odds:#ffca40;--foreground-odds: #000; --foreground-highlight:#fff; --highlight:#648ee2;--league: #367fa8;--foreground-league: #fff;",
-        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);} .tipo-apostas .tipo-aposta h4 {background: #247451;color: #fff;padding: 5px;}",
-        // styles: "--header:#5b86da;--foreground-header:#fff;--sidebar-right:#5b86da;--foreground-sidebar-right:#fff;--sidebar-left:#072550;--foreground-sidebar-left:#fff;--odds:#08254f;--foreground-odds: #fff; --foreground-highlight:#fff; --highlight:#2e82b8;"
-    });
-});
-
 gulp.task('sportingnet.bet', function (done) {
     tasks(done, {
         host: "sportingnet.bet",
@@ -618,14 +608,6 @@ gulp.task('betsgol.bet', function (done) {
         host: "betsgol.bet",
         banca: "BETS GOL",
         styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
-    });
-});
-
-gulp.task('playbets.wee.bet', function (done) {
-    tasks(done, {
-        host: "playbets.wee.bet",
-        banca: "PLAY BETS",
-        styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#f39200;--event-time: #000;--league: #000;--foreground-league: #fff;"
     });
 });
 
@@ -1081,14 +1063,6 @@ gulp.task('tubaraobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('allbet.pro', function (done) {
-    tasks(done, {
-        host: "allbet.pro",
-        banca: "ALL BET",
-        styles: "",
-    });
-});
-
 gulp.task('primesoccer.app', function (done) {
     tasks(done, {
         host: "primesoccer.app",
@@ -1394,14 +1368,6 @@ gulp.task('mais1bet.com', function (done) {
     });
 });
 
-gulp.task('kaiosport.wee.bet', function (done) {
-    tasks(done, {
-        host: "kaiosport.wee.bet",
-        banca: "KAIO SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('imperiobet.wee.bet', function (done) {
     tasks(done, {
         host: "imperiobet.wee.bet",
@@ -1518,6 +1484,14 @@ gulp.task('trandbets.com', function (done) {
     tasks(done, {
         host: "trandbets.com",
         banca: "TRAND BETS",
+        styles: "",
+    });
+});
+
+gulp.task('maiorsportprime.wee.bet', function (done) {
+    tasks(done, {
+        host: "maiorsportprime.wee.bet",
+        banca: "MAIOR SPORT PRIME",
         styles: "",
     });
 });
