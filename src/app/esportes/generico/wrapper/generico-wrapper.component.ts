@@ -19,6 +19,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     campeonatos;
     odds = [];
     data;
+    esporte = '';
     unsub$ = new Subject();
 
     constructor(
@@ -37,8 +38,9 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         this.route.data
             .pipe(
                 switchMap((data: any) => {
-                    this.sportId = data.sportId;
                     this.setContextoPorEsporte(data.sportId);
+                    this.sportId = data.sportId;
+                    this.getCampeonatos2Sidebar();
 
                     return this.route.queryParams;
                 }),
@@ -78,7 +80,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             queryParams.data = dataLimiteTabela;
                         }
                     } else {
-                        queryParams.data_final = dataLimiteTabela;
+                        queryParams.data = moment().format('YYYY-MM-DD');
                     }
 
                     if (queryParams.data) {
@@ -114,47 +116,56 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         this.campeonatoService.getCampeonatos(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(campeonatos, this.contexto),
+                campeonatos => {
+                    const dados = {
+                        itens: campeonatos,
+                        contexto: this.contexto,
+                        esporte: this.esporte
+                    };
+                    this.sidebarService.changeItens(dados);
+                },
                 error => this.messageService.error(error)
             );
     }
 
     setContextoPorEsporte(sportId) {
+        this.contexto = 'esportes';
+
         switch (sportId) {
             case '9':
-                this.contexto = 'combate';
+                this.esporte = 'combate';
                 this.odds = ['cmbt_casa', 'cmbt_fora'];
                 break;
             case '12':
-                this.contexto = 'futebol-americano';
+                this.esporte = 'futebol-americano';
                 this.odds = ['futebol_americano_casa', 'futebol_americano_fora'];
                 break;
             case '13':
-                this.contexto = 'tenis';
+                this.esporte = 'tenis';
                 this.odds = ['tenis_casa', 'tenis_fora'];
                 break;
             case '17':
-                this.contexto = 'hoquei-gelo';
+                this.esporte = 'hoquei-gelo';
                 this.odds = ['hoquei_gelo_casa', 'hoquei_gelo_fora'];
                 break;
             case '18':
-                this.contexto = 'basquete';
+                this.esporte = 'basquete';
                 this.odds = ['bkt_casa', 'bkt_fora'];
                 break;
             case '83':
-                this.contexto = 'futsal';
+                this.esporte = 'futsal';
                 this.odds = ['futsal_casa', 'futsal_empate', 'futsal_fora'];
                 break;
             case '91':
-                this.contexto = 'volei';
+                this.esporte = 'volei';
                 this.odds = ['volei_casa', 'volei_fora'];
                 break;
             case '92':
-                this.contexto = 'tenis-mesa';
+                this.esporte = 'tenis-mesa';
                 this.odds = ['tenis_mesa_casa', 'tenis_mesa_fora'];
                 break;
             case '151':
-                this.contexto = 'esports';
+                this.esporte = 'esports';
                 this.odds = ['esports_casa', 'esports_fora'];
                 break;
             default:

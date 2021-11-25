@@ -6,9 +6,7 @@ import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router
 import {
     trigger,
     state,
-    style,
-    animate,
-    transition
+    style
 } from '@angular/animations';
 
 import { Subject } from 'rxjs';
@@ -56,6 +54,7 @@ export class NavigationComponent implements OnInit {
     isOpen = true;
     itens: any[];
     contexto;
+    esporte = '';
     modalRef;
     cartaoApostaHabilitado;
     loteriasHabilitada;
@@ -129,6 +128,10 @@ export class NavigationComponent implements OnInit {
             .subscribe(dados => {
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
+
+                if (dados.esporte) {
+                    this.esporte = dados.esporte;
+                }
 
                 setTimeout(e => {
                     const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;

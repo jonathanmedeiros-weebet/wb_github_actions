@@ -142,7 +142,15 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
+                campeonatos => {
+                    const dados = {
+                        itens: campeonatos,
+                        contexto: 'esportes',
+                        esporte: 'futebol'
+                    };
+
+                    this.sidebarService.changeItens(dados);
+                },
                 error => this.messageService.error(error)
             );
     }
