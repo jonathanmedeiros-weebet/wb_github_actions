@@ -57,12 +57,20 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
     ngOnInit() {
         this.createForm();
-        this.auth.cliente
+        this.auth.logado
             .subscribe(
-                isCliente => {
-                    this.isCliente = isCliente;
-                    if (isCliente && this.isLoggedIn) {
-                        this.form.patchValue({apostador: 'cliente'});
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                    if (isLoggedIn) {
+                        this.auth.cliente
+                            .subscribe(
+                                isCliente => {
+                                    this.isCliente = isCliente;
+                                    if (isCliente && this.isLoggedIn) {
+                                        this.form.patchValue({apostador: 'cliente'});
+                                    }
+                                }
+                            );
                     }
                 }
             );
@@ -166,6 +174,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         }
 
         if (valido) {
+            console.log(this.isLoggedIn);
             if (this.isLoggedIn) {
                 const values = clone(this.form.value);
                 values.itens.map(item => {
@@ -218,6 +227,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.bilheteService.atualizarItens([]);
         this.form.reset();
         this.cartaoApostaForm.reset();
+
+        if (this.isCliente) {
+            this.form.patchValue({'apostador': 'cliente'});
+        }
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
