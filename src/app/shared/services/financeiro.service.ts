@@ -40,4 +40,20 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    getDepositosESaques(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${this.financeiroUrl}/getDepositosESaques`, requestOptions)
+            .pipe(
+                map((res: any) => res),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

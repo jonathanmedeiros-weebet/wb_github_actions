@@ -10,16 +10,15 @@
                                 <label>Período</label>
                                 <select class="form-control" formControlName="periodo">
                                     <option value="semana_atual">Semana Atual</option>
-                                    <option value="mes_atual">Mês Atual</option>
-                                    <option value="mes_anterior">Mês Anterior</option>
+                                    <option value="semana_anterior">Semana Anterior</option>
                                 </select>
                             </div>
                             <div class="col-6 col-md-2">
                                 <label>Tipo</label>
                                 <select class="form-control" formControlName="tipo">
                                     <option value="">Todos</option>
-                                    <option value="C">Crédito</option>
-                                    <option value="D">Débito</option>
+                                    <option value="depositos">Depósitos</option>
+                                    <option value="saques">Saques</option>
                                 </select>
                             </div>
                             <div class="col-6 col-md-1">
@@ -61,7 +60,7 @@
                         <table class="table" style="text-align: left">
                             <thead>
                             <tr>
-                                <th style="width: 80%">Natureza</th>
+                                <th>Data</th>
                                 <th style="width: 10%">Valor</th>
                                 <th style="width: 10%">Saldo</th>
                             </tr>

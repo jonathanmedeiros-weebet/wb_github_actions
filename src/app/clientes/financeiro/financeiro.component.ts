@@ -54,7 +54,6 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     getMovimentacoes(queryParams?: any) {
         this.showLoading = true;
         this.clienteService.getMovimentacaoFinanceira(queryParams)
-            .pipe()
             .subscribe(
                 response => {
                     this.movimentacoesFinanceiras = response.results.movimentacoes;

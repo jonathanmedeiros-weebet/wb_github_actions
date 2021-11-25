@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder} from '@angular/forms';
 import {DepositosESaques} from '../../models';
+import {ClienteService} from "../../shared/services/clientes/cliente.service";
+import {FinanceiroService} from "../../shared/services/financeiro.service";
 
 @Component({
     selector: 'app-solicitacoes',
@@ -14,9 +16,12 @@ export class DepositosESaquesComponent extends BaseFormComponent implements OnIn
     totalSolicitacoes;
     dataInicial;
     dataFinal;
+    queryParams;
 
     constructor(
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private clienteService: ClienteService,
+        private financeiroService: FinanceiroService
     ) {
         super();
     }
@@ -38,6 +43,21 @@ export class DepositosESaquesComponent extends BaseFormComponent implements OnIn
     }
 
     submit() {
+        this.queryParams = this.form.value;
+        const queryParams: any = {
+            'periodo': this.queryParams.periodo,
+            'tipo': this.queryParams.tipo,
+        };
+        this.financeiroService.getDepositosESaques(queryParams)
+            .subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => {
+                    this.handleError(error);
+                    this.showLoading = false;
+                }
+            );
     }
 
 }
