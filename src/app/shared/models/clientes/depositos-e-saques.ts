@@ -1,7 +1,6 @@
 export class DepositosESaques {
     data: string;
     tipo: string;
-    natureza: string;
+    status: string;
     valor = 0;
-    saldo: string;
 }

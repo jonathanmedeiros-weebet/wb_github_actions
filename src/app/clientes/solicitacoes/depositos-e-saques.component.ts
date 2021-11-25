@@ -51,13 +51,17 @@ export class DepositosESaquesComponent extends BaseFormComponent implements OnIn
         this.financeiroService.getDepositosESaques(queryParams)
             .subscribe(
                 response => {
-                    console.log(response);
+                    this.depositosESaques = response;
                 },
                 error => {
                     this.handleError(error);
                     this.showLoading = false;
                 }
             );
+    }
+
+    testLen() {
+        console.log(this.depositosESaques.length);
     }
 
 }

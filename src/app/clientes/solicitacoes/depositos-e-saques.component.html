@@ -54,35 +54,36 @@
                 </div>
                 <div *ngIf="depositosESaques.length > 0">
                     <div>
-                        <p><b>Qtd. Solicitações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalSolicitacoes}}</p>
+                        <p><b>Qtd. Solicitações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalSolicitacoes}}
+                        </p>
                     </div>
                     <ng-container>
                         <table class="table" style="text-align: left">
                             <thead>
                             <tr>
-                                <th>Data</th>
-                                <th style="width: 10%">Valor</th>
-                                <th style="width: 10%">Saldo</th>
+                                <th>Detalhes</th>
+                                <th>Status</th>
+                                <th>Valor</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <ng-container>
+                            <ng-container *ngFor="let depositoSaque of depositosESaques">
                                 <tr>
                                     <td>
-                                        <i style="color:green; margin-right: 5px;" class="fa fa-sort-up"
-                                           *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
-                                        <ng-template #iconeDebito>
-                                            <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
+                                        <i style="color:green; margin-right: 5px;" class="fa fa-sort-down"
+                                           *ngIf="depositoSaque.tipo === 'deposito'; else tipoSaque"></i>
+                                        <span *ngIf="depositoSaque.tipo === 'deposito'">Depósito</span>
+                                        <ng-template #tipoSaque>
+                                            <i style="color:red; margin-right: 5px;" class="fa fa-sort-up"></i>
+                                            <span>Saque</span>
                                         </ng-template>
-                                        {{movimentacao.natureza | formatarNatureza}}
                                     </td>
-                                    <td>{{movimentacao.valor | currency}}</td>
-                                    <td>{{movimentacao.saldo | currency}}</td>
+                                    <td>{{depositoSaque.status | formatarStatus}}</td>
+                                    <td>{{depositoSaque.valor | currency}}</td>
                                 </tr>
                                 <tr class="tr-2">
                                     <td colspan="3">
-                                        Movimentação fincanceira realizada em
-                                        {{movimentacao.data}}
+                                        Realizado em {{depositoSaque.data}}
                                     </td>
                                 </tr>
                             </ng-container>

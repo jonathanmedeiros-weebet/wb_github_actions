@@ -13,6 +13,7 @@ import {
 } from './index';
 import { SplitCodigoPipe } from './split-codigo.pipe';
 import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
+import {FormatarStatusPipe} from "./formatar-status.pipe";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
         SorteioTipoPipe,
         InfiniteScrollDirective,
         SplitCodigoPipe,
-        FormatarNaturezaPipe
+        FormatarNaturezaPipe,
+        FormatarStatusPipe
     ],
     exports: [
         MomentPipe,
@@ -39,7 +41,8 @@ import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
         SorteioTipoPipe,
         InfiniteScrollDirective,
         SplitCodigoPipe,
-        FormatarNaturezaPipe
+        FormatarNaturezaPipe,
+        FormatarStatusPipe
     ]
 })
 export class UtilsModule { }

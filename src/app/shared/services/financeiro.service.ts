@@ -52,7 +52,7 @@ export class FinanceiroService {
 
         return this.http.get(`${this.financeiroUrl}/getDepositosESaques`, requestOptions)
             .pipe(
-                map((res: any) => res),
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
