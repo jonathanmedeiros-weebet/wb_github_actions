@@ -17,6 +17,18 @@ export class FormatarStatusPipe implements PipeTransform {
             case 'PAGO':
                 statusFormatado = 'Pago';
                 break;
+            case 'REPROVADO':
+                statusFormatado = 'Reprovado';
+                break;
+            case 'approved':
+                statusFormatado = 'Aprovado';
+                break;
+            case 'in_process':
+                statusFormatado = 'Em Processo';
+                break;
+            case 'rejected':
+                statusFormatado = 'Recusado';
+                break;
             default:
                 statusFormatado = 'Movimentação';
                 break;
