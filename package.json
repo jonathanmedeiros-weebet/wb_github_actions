@@ -185,7 +185,9 @@
         "novobetsamericabr.com": "gulp novobetsamericabr.com",
         "seridobets.com": "gulp seridobets.com",
         "trandbets.com": "gulp trandbets.com",
-        "maiorsportprime.wee.bet": "gulp maiorsportprime.wee.bet"
+        "maiorsportprime.wee.bet": "gulp maiorsportprime.wee.bet",
+        "betmed.wee.bet": "gulp betmed.wee.bet",
+        "mundialbets.wee.bet": "gulp mundialbets.wee.bet"
     },
     "private": true,
     "dependencies": {
