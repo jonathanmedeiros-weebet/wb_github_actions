@@ -1,5 +1,5 @@
 a {
-    color: var(--highlight) !important;
+    color: var(--header) !important;
     cursor: pointer;
 }
 
