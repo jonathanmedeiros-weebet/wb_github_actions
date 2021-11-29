@@ -1,0 +1,46 @@
+#footer-bar {
+    /*padding: 5px;*/
+    background: var(--sidebar-right);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 5px;
+}
+
+.navbar-toggler {
+    color: var(--foreground-header);
+}
+
+.foot-button {
+    min-height: 50px;
+}
+
+.foot-button a {
+    min-height: 50px;
+    justify-content: center;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--foreground-header);
+}
+
+.foot-button .fa {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+}
+
+.foot-button .cupom {
+    position: relative;
+}
+
+.foot-button .cupom-badge {
+    position: absolute;
+
+}
