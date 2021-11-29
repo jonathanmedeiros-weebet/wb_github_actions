@@ -18,7 +18,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCambista">
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
                         Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
@@ -28,7 +28,7 @@
 
                     <a class="dropdown-item" target="_blank"
                        href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
-                       *ngIf="!isCambista">
+                       *ngIf="!isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>
 
@@ -37,7 +37,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="!isCambista">
+                       *ngIf="!isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -177,7 +177,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCambista">
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
                         Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
@@ -187,7 +187,7 @@
 
                     <a class="dropdown-item" target="_blank"
                        href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
-                       *ngIf="!isCambista">
+                       *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>
 
@@ -196,7 +196,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="!isCambista">
+                       *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 

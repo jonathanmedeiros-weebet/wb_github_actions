@@ -31,7 +31,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     cartaoApostaForm: FormGroup;
     opcoes;
     dados;
-    isCambista;
+    isCliente;
     isLoggedIn;
 
     constructor(
@@ -56,10 +56,10 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 }
             );
 
-        this.auth.cambista
+        this.auth.cliente
             .subscribe(
-                isCambista => {
-                    this.isCambista = isCambista;
+                isCliente => {
+                    this.isCliente = isCliente;
                 }
             );
 
@@ -91,7 +91,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', (this.isCambista || !this.isLoggedIn) ? Validators.required : '']
+            apostador: ['', (this.isCliente) ? '' : Validators.required]
         });
 
         this.cartaoApostaForm = this.fb.group({

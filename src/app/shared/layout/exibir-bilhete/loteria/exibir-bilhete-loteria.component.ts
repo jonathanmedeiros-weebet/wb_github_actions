@@ -22,7 +22,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     informativoRodape;
     sorteios = [];
     unsub$ = new Subject();
-    isCambista;
+    isCliente;
     isLoggedIn;
 
     constructor(
@@ -36,7 +36,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     ngOnInit() {
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
-        this.isCambista = this.authService.isCambista();
+        this.isCliente = this.authService.isCliente();
         this.isLoggedIn = this.authService.isLoggedIn();
 
         this.sorteioService.getSorteios()
