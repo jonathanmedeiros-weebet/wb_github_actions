@@ -79,15 +79,6 @@ gulp.task('betsbr.club', function (done) {
     });
 });
 
-gulp.task('betsports99.net', function (done) {
-    tasks(done, {
-        host: "betsports99.net",
-        banca: "BET SPORTS 99",
-        styles: "--header:#056162;--foreground-header:#fff;--sidebar-right:#056162;--foreground-sidebar-right:#fff;--sidebar-left:#056162;--foreground-sidebar-left:#fff;--odds:#648ee2;--foreground-odds: #000; --foreground-highlight:#000; --highlight:#ffca40;--league: #191970;--foreground-league: #fff;",
-        aditional_styles: ".indentificacao .mais-opcoes{color: var(--event-time);}",
-    });
-});
-
 gulp.task('casadinha.com', function (done) {
     tasks(done, {
         host: "casadinha.com",
