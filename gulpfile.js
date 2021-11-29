@@ -1495,3 +1495,19 @@ gulp.task('maiorsportprime.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betmed.wee.bet', function (done) {
+    tasks(done, {
+        host: "betmed.wee.bet",
+        banca: "Bet Med",
+        styles: "",
+    });
+});
+
+gulp.task('mundialbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "mundialbets.wee.bet",
+        banca: "Mundial Bets",
+        styles: "",
+    });
+});
