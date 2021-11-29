@@ -1511,3 +1511,11 @@ gulp.task('mundialbets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('starbets.wee.bet', function (done) {
+    tasks(done, {
+        host: "starbets.wee.bet",
+        banca: "STAR BETS",
+        styles: "",
+    });
+});

@@ -187,7 +187,8 @@
         "trandbets.com": "gulp trandbets.com",
         "maiorsportprime.wee.bet": "gulp maiorsportprime.wee.bet",
         "betmed.wee.bet": "gulp betmed.wee.bet",
-        "mundialbets.wee.bet": "gulp mundialbets.wee.bet"
+        "mundialbets.wee.bet": "gulp mundialbets.wee.bet",
+        "starbets.wee.bet": "gulp starbets.wee.bet"
     },
     "private": true,
     "dependencies": {
