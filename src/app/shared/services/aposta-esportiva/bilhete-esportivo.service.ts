@@ -3,10 +3,15 @@ import { Injectable } from '@angular/core';
 import { ItemBilheteEsportivo } from '../../../models';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class BilheteEsportivoService {
     private itensSource = new BehaviorSubject<ItemBilheteEsportivo[]>([]);
     itensAtuais = this.itensSource.asObservable();
+    bilheteIsOpen = false;
+    private openBilheteSource = new BehaviorSubject<boolean>(false);
+    openBilhete = this.openBilheteSource.asObservable();
 
     constructor() {
         const itens = this.getItens();
@@ -25,5 +30,10 @@ export class BilheteEsportivoService {
 
     getItens() {
         return JSON.parse(localStorage.getItem('itens-bilhete-esportivo'));
+    }
+
+    toggleBilhete() {
+        this.bilheteIsOpen = !this.bilheteIsOpen;
+        this.openBilheteSource.next(this.bilheteIsOpen);
     }
 }

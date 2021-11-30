@@ -36,11 +36,24 @@
     margin-bottom: 4px;
 }
 
-.foot-button .cupom {
+.foot-button .badge-container {
     position: relative;
+    width: 100%;
 }
 
 .foot-button .cupom-badge {
+    font-size: 10px;
+    padding: 2px;
+    clip-path: circle();
+    background-color: var(--foreground-header);
+    color: var(--header);
     position: absolute;
+    top: -5px;
+    right: -4px;
+}
 
+@media (min-width: 1025px) {
+    #footer-bar {
+        display: none;
+    }
 }

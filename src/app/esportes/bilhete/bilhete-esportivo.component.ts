@@ -12,6 +12,7 @@ import {
 import {ItemBilheteEsportivo} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
+import {result} from 'lodash';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -99,6 +100,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(valor => {
                 this.calcularPossibilidadeGanho(valor);
             });
+
+        this.bilheteService.openBilhete
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
     }
 
     definirAltura() {
@@ -314,11 +321,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        // this.displayPreTicker = true;
+        this.bilheteService.toggleBilhete();
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        // this.displayPreTicker = false;
+        this.bilheteService.toggleBilhete();
     }
 
     disabledSubmit() {
