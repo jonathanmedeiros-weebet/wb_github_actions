@@ -12,7 +12,7 @@ import {
     SorteioService, ApostaLoteriaService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService,
-    ParametrosLocaisService
+    ParametrosLocaisService, MenuFooterService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -52,7 +52,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -162,6 +163,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         } else {
             this.messageService.warning('Quantidade de dezenas insuficiente.');
         }
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Remover palpite */

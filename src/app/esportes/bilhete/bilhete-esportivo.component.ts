@@ -7,7 +7,7 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, BilheteEsportivoService,
-    HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService
+    HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService, MenuFooterService
 } from '../../services';
 import {ItemBilheteEsportivo} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -51,7 +51,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private fb: FormBuilder,
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }

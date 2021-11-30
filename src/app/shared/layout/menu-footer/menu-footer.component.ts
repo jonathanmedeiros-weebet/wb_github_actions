@@ -1,3 +1,4 @@
+import {Router} from '@angular/router';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SidebarService} from '../../services/utils/sidebar.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
@@ -5,6 +6,7 @@ import {BilheteEsportivoService} from '../../services/aposta-esportiva/bilhete-e
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
+import {MenuFooterService} from '../../services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-menu-footer',
@@ -15,15 +17,15 @@ export class MenuFooterComponent implements OnInit {
     aoVivoHabilitado = false;
     isCliente;
     isLoggedIn;
-    itens;
+    quantidadeItens = 0;
     unsub$ = new Subject();
 
     constructor(
         private auth: AuthService,
         private sidebarService: SidebarService,
         private paramsService: ParametrosLocaisService,
-        private bilheteEsportivoService: BilheteEsportivoService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private menuFooterService: MenuFooterService
     ) {
     }
 
@@ -48,10 +50,10 @@ export class MenuFooterComponent implements OnInit {
                 }
             );
 
-        this.bilheteEsportivoService.itensAtuais
+        this.menuFooterService.quantidadeItens
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                res => this.itens = res.length
+                res => this.quantidadeItens = res
             );
     }
 
@@ -60,7 +62,7 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        this.bilheteEsportivoService.toggleBilhete();
+        console.log('toggle');
     }
 
     svgCss() {

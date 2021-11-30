@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {
-    AcumuladaoService, MessageService,
-    AuthService, ParametrosLocaisService
-} from './../../services';
-import { Acumuladao } from './../../models';
-import { ApostaModalComponent } from './../../shared/layout/modals';
-import { PreApostaModalComponent } from './../../shared/layout/modals/pre-aposta-modal/pre-aposta-modal.component';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {AcumuladaoService, AuthService, MessageService, ParametrosLocaisService} from './../../services';
+import {Acumuladao} from './../../models';
+import {ApostaModalComponent} from './../../shared/layout/modals';
+import {PreApostaModalComponent} from './../../shared/layout/modals/pre-aposta-modal/pre-aposta-modal.component';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 @Component({

@@ -29,6 +29,7 @@
     white-space: nowrap;
     text-decoration: none;
     color: var(--foreground-header);
+    cursor: pointer;
 }
 
 .foot-button .fa {
@@ -43,12 +44,12 @@
 
 .foot-button .cupom-badge {
     font-size: 10px;
-    padding: 2px;
+    padding: 4px;
     clip-path: circle();
     background-color: var(--foreground-header);
     color: var(--header);
     position: absolute;
-    top: -5px;
+    top: -8px;
     right: -4px;
 }
 

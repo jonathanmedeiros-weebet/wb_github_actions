@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ItemBilheteEsportivo } from '../../../models';
 import { BehaviorSubject } from 'rxjs';
+import {MenuFooterService} from '../utils/menu-footer.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,9 @@ export class BilheteEsportivoService {
     private openBilheteSource = new BehaviorSubject<boolean>(false);
     openBilhete = this.openBilheteSource.asObservable();
 
-    constructor() {
+    constructor(
+        private menuFooterService: MenuFooterService
+    ) {
         const itens = this.getItens();
 
         if (itens) {
@@ -24,6 +27,8 @@ export class BilheteEsportivoService {
     atualizarItens(itens): void {
         const itensSerializado = JSON.stringify(itens);
         localStorage.setItem('itens-bilhete-esportivo', itensSerializado);
+
+        this.menuFooterService.atualizarQuantidade(itens.length);
 
         this.itensSource.next(itens);
     }
