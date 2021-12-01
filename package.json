@@ -118,7 +118,6 @@
         "clubedabola.wee.bet": "gulp clubedabola.wee.bet",
         "lbbet.wee.bet": "gulp lbbet.wee.bet",
         "top10sportsvip.com": "gulp top10sportsvip.com",
-        "brasilgolbets.com": "gulp brasilgolbets.com",
         "shopbet.wee.bet": "gulp shopbet.wee.bet",
         "esportepremium.wee.bet": "gulp esportepremium.wee.bet",
         "brazilbet.club": "gulp brazilbet.club",
@@ -187,7 +186,10 @@
         "maiorsportprime.wee.bet": "gulp maiorsportprime.wee.bet",
         "betmed.wee.bet": "gulp betmed.wee.bet",
         "mundialbets.wee.bet": "gulp mundialbets.wee.bet",
-        "starbets.wee.bet": "gulp starbets.wee.bet"
+        "starbets.wee.bet": "gulp starbets.wee.bet",
+        "mitosport.wee.bet": "gulp mitosport.wee.bet",
+        "valebets.wee.bet": "gulp valebets.wee.bet",
+        "sportingbetsbr.com": "gulp sportingbetsbr.com"
     },
     "private": true,
     "dependencies": {
