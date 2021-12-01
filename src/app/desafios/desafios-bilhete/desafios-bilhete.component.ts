@@ -10,7 +10,7 @@ import {
     AuthService,
     DesafioApostaService,
     DesafioBilheteService,
-    DesafioPreApostaService,
+    DesafioPreApostaService, MenuFooterService,
     MessageService,
     ParametrosLocaisService
 } from '../../services';
@@ -50,7 +50,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private fb: FormBuilder,
         private bilheteService: DesafioBilheteService,
         private paramsService: ParametrosLocaisService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -80,6 +81,13 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
+        this.menuFooterService.setModalidade('desafio');
+
+        this.menuFooterService.toggleBilheteDesafio
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
     }
 
     definirAltura() {
@@ -238,6 +246,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
         this.modalRef.componentInstance.aposta = aposta;
         this.modalRef.componentInstance.primeiraImpressao = true;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSuccess(id) {
@@ -257,6 +266,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         });
 
         this.modalRef.componentInstance.codigo = id;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(error) {
@@ -265,11 +275,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete();
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete();
     }
 
     disabledSubmit() {

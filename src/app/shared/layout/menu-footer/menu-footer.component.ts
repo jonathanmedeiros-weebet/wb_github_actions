@@ -62,7 +62,7 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        console.log('toggle');
+        this.menuFooterService.toggleBilhete();
     }
 
     svgCss() {

@@ -102,11 +102,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(valor);
             });
 
-        this.bilheteService.openBilhete
+        this.menuFooterService.toggleBilheteEsportivo
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res
             );
+
+        this.menuFooterService.setModalidade('esporte');
     }
 
     definirAltura() {
@@ -274,6 +276,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.modalRef.componentInstance.aposta = aposta;
         this.modalRef.componentInstance.primeiraImpressao = true;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSuccess(id) {
@@ -293,6 +296,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         });
 
         this.modalRef.componentInstance.codigo = id;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(error) {
@@ -322,13 +326,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     openCupom() {
-        // this.displayPreTicker = true;
-        this.bilheteService.toggleBilhete();
+        this.menuFooterService.toggleBilhete();
     }
 
     closeCupom() {
-        // this.displayPreTicker = false;
-        this.bilheteService.toggleBilhete();
+        this.menuFooterService.toggleBilhete();
     }
 
     disabledSubmit() {

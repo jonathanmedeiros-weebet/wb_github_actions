@@ -102,6 +102,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
             this.setNumeros(numeros);
         });
+        this.menuFooterService.setModalidade('quininha');
+        this.menuFooterService.toggleBilheteQuininha
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
     }
 
     ngOnDestroy() {
@@ -209,6 +215,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSucess(codigo) {
@@ -222,6 +229,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(msg) {
@@ -283,11 +291,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete();
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete();
     }
 
     disabledSubmit() {

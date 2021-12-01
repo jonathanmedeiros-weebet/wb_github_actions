@@ -100,6 +100,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
             this.setNumeros(numeros);
         });
+        this.menuFooterService.setModalidade('seninha');
+        this.menuFooterService.toggleBilheteSeninha
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
     }
 
     ngOnDestroy() {
@@ -212,6 +218,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSucess(codigo) {
@@ -225,6 +232,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(msg) {
@@ -286,11 +294,11 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete();
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete();
     }
 
     disabledSubmit() {
