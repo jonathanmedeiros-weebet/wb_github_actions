@@ -87,11 +87,12 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         );
 
         this.createForm();
-        this.menuFooterService.toggleBilheteEsportivo
+        this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res
             );
+        this.menuFooterService.atualizarQuantidade(1);
     }
 
     createForm() {
@@ -163,6 +164,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     back() {
+        this.menuFooterService.atualizarQuantidade(0);
         this.router.navigate(['/acumuladao/listagem']);
     }
 

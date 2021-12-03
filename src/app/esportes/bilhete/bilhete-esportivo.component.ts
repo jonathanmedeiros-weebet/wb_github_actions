@@ -102,7 +102,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(valor);
             });
 
-        this.menuFooterService.toggleBilheteEsportivo
+        this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res

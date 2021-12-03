@@ -101,7 +101,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             this.setNumeros(numeros);
         });
         this.menuFooterService.setModalidade('seninha');
-        this.menuFooterService.toggleBilheteSeninha
+        this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res

@@ -14,6 +14,7 @@ export class AcumuladaoWrapperComponent implements OnInit {
 
   ngOnInit() {
       this.menuFooterService.atualizarQuantidade(0);
+      this.menuFooterService.setModalidade('acumuladao');
   }
 
 }

@@ -103,7 +103,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             this.setNumeros(numeros);
         });
         this.menuFooterService.setModalidade('quininha');
-        this.menuFooterService.toggleBilheteQuininha
+        this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res

@@ -83,7 +83,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.subscribeValor();
         this.menuFooterService.setModalidade('desafio');
 
-        this.menuFooterService.toggleBilheteDesafio
+        this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res

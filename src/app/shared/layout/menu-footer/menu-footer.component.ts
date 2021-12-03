@@ -7,6 +7,7 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
 import {MenuFooterService} from '../../services/utils/menu-footer.service';
+import {MessageService} from '../../services/utils/message.service';
 
 @Component({
     selector: 'app-menu-footer',
@@ -25,7 +26,8 @@ export class MenuFooterComponent implements OnInit {
         private sidebarService: SidebarService,
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private messageService: MessageService
     ) {
     }
 
@@ -62,7 +64,12 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        this.menuFooterService.toggleBilhete();
+        console.log(this.menuFooterService.getModalidade());
+        if (this.menuFooterService.getModalidade() === 'acumuladao' && this.quantidadeItens === 0) {
+            this.messageService.warning('Selecione um acumuladão para abrir o Bilhete');
+        } else {
+            this.menuFooterService.toggleBilhete();
+        }
     }
 
     svgCss() {
