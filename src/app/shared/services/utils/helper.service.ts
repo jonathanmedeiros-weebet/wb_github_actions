@@ -270,9 +270,9 @@ export class HelperService {
             url = `${location.origin}/bilhete/${aposta.codigo}`;
         }
 
-        let message = `${config.BANCA_NOME} \n Seu Bilhete: ${url} \n`;
-        if (this.casaDasApostasId){
-            message += `Casa das Apostas: http://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${aposta.codigo}`;
+        let message = `\r ${config.BANCA_NOME} \n\n Seu Bilhete: \n ${url} \n`;
+        if (this.casaDasApostasId) {
+            message += `\n Casa das Apostas: \n http://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${aposta.codigo}`;
         }
 
         let dataToSend = {
