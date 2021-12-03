@@ -64,7 +64,6 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        console.log(this.menuFooterService.getModalidade());
         if (this.menuFooterService.getModalidade() === 'acumuladao' && this.quantidadeItens === 0) {
             this.messageService.warning('Selecione um acumuladão para abrir o Bilhete');
         } else {
