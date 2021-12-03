@@ -102,25 +102,6 @@
         </div>
     </div>
 </section>
-<div id="fixed-bar-bilhete" (click)="openCupom()" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
-    <div>
-        <label>Valor</label>
-        <span>{{form.value.valor | currency}}</span>
-    </div>
-    <div>
-        <label>Jogo(s)</label>
-        <span>{{form.value.itens.length}}</span>
-    </div>
-    <div>
-        <label>P. de Prêmio</label>
-        <span>{{possibilidadeGanho | currency}}</span>
-    </div>
-    <div class="open-bilhete">
-        <a>
-            <i class="fa fa-lg fa-chevron-circle-up"></i>
-        </a>
-    </div>
-</div>
 
 <ng-template #apostaDeslogadoModal let-modal>
     <div class="modal-body" id="aposta-deslogado">

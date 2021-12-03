@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
   selector: 'app-acumuladao-wrapper',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcumuladaoWrapperComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private menuFooterService: MenuFooterService
+  ) { }
 
   ngOnInit() {
+      this.menuFooterService.atualizarQuantidade(0);
+      this.menuFooterService.setModalidade('acumuladao');
   }
 
 }
