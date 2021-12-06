@@ -109,7 +109,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.menuWidth = window.innerWidth - 500;
+        this.menuWidth = window.innerWidth - (255 + 270);
     }
 
     ngOnDestroy() {
@@ -135,7 +135,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.scrollMenu.nativeElement.scrollLeft == 0 ? this.leftDisabled = true : this.leftDisabled = false;
 
         let newScrollLeft = this.scrollMenu.nativeElement.scrollLeft;
-        let width = this.scrollMenu.nativeElement.clientWidth;
+        let width = this.scrollMenu.nativeElement.clientWidth - (255 + 270);
         let scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
         scrollWidth - (newScrollLeft + width) == 0 ? this.rightDisabled = true : this.rightDisabled = false;
     }
