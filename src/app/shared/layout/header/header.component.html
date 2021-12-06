@@ -80,13 +80,13 @@
             </div>
         </ng-template>
     </nav>
-    <div class="menu-categories margin-categories"  [ngStyle]="{'width.px': menuWidth}">
-        <div class="pull-container">
-            <div class="pull mt-sm" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
-                <i class="fa fa-angle-left"></i>
-            </div>
+    <div class="menu-categories margin-categories">
+        <div class="pull-container" [ngClass]="this.leftDisabled ? '':'visibility'">
         </div>
-        <div class="menu-categories scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth - 55}" #scrollMenu>
+        <div class="pull mt-sm" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
+            <i class="fa fa-angle-left"></i>
+        </div>
+        <div class="menu-categories scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/futebol/live']">
                     <i class="fa fa-play"></i> Ao Vivo
@@ -175,10 +175,8 @@
                 </a>
             </div>
         </div>
-        <div class="pull-container">
-            <div class="pull" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
-                <i class="fa fa-angle-right"></i>
-            </div>
+        <div class="pull" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
+            <i class="fa fa-angle-right"></i>
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">

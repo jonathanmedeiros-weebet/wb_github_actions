@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -30,7 +30,7 @@ import {config} from './../../config';
         ]),
     ]
 })
-export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     posicaoFinanceira = {
         saldo: 0,
         credito: 0
@@ -59,6 +59,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     rightDisabled: boolean = false;
     leftDisabled: boolean = true;
+    scrollPosition = 0;
 
     constructor(
         private fb: FormBuilder,
@@ -66,7 +67,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private auth: AuthService,
         private sidebarService: SidebarService,
         private printService: PrintService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -109,7 +111,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.menuWidth = window.innerWidth - (255 + 270);
+        this.menuWidth = window.innerWidth - (250 + 315);
     }
 
     ngOnDestroy() {
@@ -117,13 +119,23 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.unsub$.complete();
     }
 
+    ngAfterViewInit() {
+        if (this.menuWidth > this.scrollMenu.nativeElement.scrollWidth) {
+            this.rightDisabled = true;
+            this.leftDisabled = true;
+            this.cd.detectChanges();
+        }
+    }
+
     scrollLeft() {
-        this.scrollMenu.nativeElement.scrollLeft -= 150;
+        this.scrollMenu.nativeElement.scrollLeft -= 200;
+        this.scrollPosition -= 200;
         this.checkScroll();
     }
 
     scrollRight() {
-        this.scrollMenu.nativeElement.scrollLeft += 150;
+        this.scrollMenu.nativeElement.scrollLeft += 200;
+        this.scrollPosition += 200;
         this.checkScroll();
     }
 
@@ -132,12 +144,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     checkScroll() {
-        this.scrollMenu.nativeElement.scrollLeft == 0 ? this.leftDisabled = true : this.leftDisabled = false;
+        this.scrollPosition == 0 ? this.leftDisabled = true : this.leftDisabled = false;
 
         let newScrollLeft = this.scrollMenu.nativeElement.scrollLeft;
-        let width = this.scrollMenu.nativeElement.clientWidth - (255 + 270);
+        let width = this.scrollMenu.nativeElement.clientWidth;
         let scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
-        scrollWidth - (newScrollLeft + width) == 0 ? this.rightDisabled = true : this.rightDisabled = false;
+        console.log(scrollWidth - (this.scrollPosition + width));
+
+        scrollWidth - (this.scrollPosition + width) <= 0 ? this.rightDisabled = true : this.rightDisabled = false;
     }
 
     createForm() {
