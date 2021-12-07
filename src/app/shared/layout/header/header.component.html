@@ -81,8 +81,8 @@
         </ng-template>
     </nav>
     <div class="menu-categories margin-categories">
-        <div class="pull mt-sm" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
-            <i class="fa fa-angle-left"></i>
+        <div class="pull" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
+            <i class="fa fa-angle-left fa-left"></i>
         </div>
         <div class="menu-categories scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
@@ -174,7 +174,7 @@
             </div>
         </div>
         <div class="pull pull-right" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
-            <i class="fa fa-angle-right"></i>
+            <i class="fa fa-angle-right fa-right"></i>
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
