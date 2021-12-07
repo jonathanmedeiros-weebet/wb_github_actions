@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -61,6 +61,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     leftDisabled: boolean = true;
     scrollPosition = 0;
 
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.menuWidth = window.innerWidth - (250 + 280);
+        this.checkScrollButtons();
+    }
+
     constructor(
         private fb: FormBuilder,
         private messageService: MessageService,
@@ -111,7 +117,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.menuWidth = window.innerWidth - (250 + 315);
+        this.menuWidth = window.innerWidth - (250 + 280);
     }
 
     ngOnDestroy() {
@@ -120,10 +126,16 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngAfterViewInit() {
+        this.checkScrollButtons();
+        this.cd.detectChanges();
+    }
+
+    checkScrollButtons() {
         if (this.menuWidth > this.scrollMenu.nativeElement.scrollWidth) {
             this.rightDisabled = true;
             this.leftDisabled = true;
-            this.cd.detectChanges();
+        } else {
+            this.rightDisabled = false;
         }
     }
 
@@ -149,7 +161,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         let newScrollLeft = this.scrollMenu.nativeElement.scrollLeft;
         let width = this.scrollMenu.nativeElement.clientWidth;
         let scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
-        console.log(scrollWidth - (this.scrollPosition + width));
 
         scrollWidth - (this.scrollPosition + width) <= 0 ? this.rightDisabled = true : this.rightDisabled = false;
     }

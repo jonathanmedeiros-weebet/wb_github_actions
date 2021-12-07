@@ -131,7 +131,7 @@ header a {
 
 @media (min-width: 1025px) {
     .margin-categories {
-        margin-left: 255px;
+        margin-left: 260px;
     }
 
     .navbar-expand-custom {
@@ -188,10 +188,20 @@ header a {
         display: flex;
         align-items: center;
         width: 20px;
-        height: 80px;
+        height: 20px;
+        border-radius: 5px;
         text-align: center;
         justify-content: center;
         cursor: pointer;
+        position: absolute;
+    }
+
+    .pull-right {
+        right: 270px;
+    }
+
+    .pull-left {
+
     }
 
     .visibility {

@@ -81,8 +81,6 @@
         </ng-template>
     </nav>
     <div class="menu-categories margin-categories">
-        <div class="pull-container" [ngClass]="this.leftDisabled ? '':'visibility'">
-        </div>
         <div class="pull mt-sm" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
             <i class="fa fa-angle-left"></i>
         </div>
@@ -175,7 +173,7 @@
                 </a>
             </div>
         </div>
-        <div class="pull" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
+        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
             <i class="fa fa-angle-right"></i>
         </div>
 
