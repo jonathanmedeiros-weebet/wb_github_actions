@@ -1101,15 +1101,6 @@ gulp.task('betvipmais.wee.bet', function (done) {
         styles: "",
     });
 });
-
-gulp.task('primussports.net', function (done) {
-    tasks(done, {
-        host: "primussports.net",
-        banca: "PRIMUS SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('sports10.net', function (done) {
     tasks(done, {
         host: "sports10.net",
@@ -1299,14 +1290,6 @@ gulp.task('jbrbets.net', function (done) {
     tasks(done, {
         host: "jbrbets.net",
         banca: "JBR BETS",
-        styles: "",
-    });
-});
-
-gulp.task('lucrei.wee.bet', function (done) {
-    tasks(done, {
-        host: "lucrei.wee.bet",
-        banca: "LUCREI BET",
         styles: "",
     });
 });
