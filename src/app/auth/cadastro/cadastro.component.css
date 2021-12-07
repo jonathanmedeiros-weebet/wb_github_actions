@@ -32,3 +32,7 @@ a {
     overflow: auto;
     overflow-x: hidden;
 }
+
+#default-content{
+    padding-bottom: 50px;
+}

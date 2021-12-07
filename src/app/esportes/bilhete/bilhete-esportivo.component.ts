@@ -326,11 +326,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     openCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {

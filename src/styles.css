@@ -603,7 +603,7 @@ button {
         margin-top: 113px;
     }
     #default-content {
-        padding: 10px 15px;
+        padding: 10px 15px 65px;
         height: calc(100vh - 111px);
     }
     .loteria-content {

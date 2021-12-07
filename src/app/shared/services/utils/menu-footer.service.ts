@@ -30,8 +30,12 @@ export class MenuFooterService {
         this.quantidadeItensSource.next(quantidade);
     }
 
-    toggleBilhete() {
-        this.toggleStatus = !this.toggleStatus;
+    toggleBilhete(status?) {
+        if (status != null) {
+            this.toggleStatus = status;
+        } else {
+            this.toggleStatus = !this.toggleStatus;
+        }
         this.toggleBilheteStatusSource.next(this.toggleStatus);
     }
 }

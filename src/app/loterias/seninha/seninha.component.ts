@@ -294,11 +294,11 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     openCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {

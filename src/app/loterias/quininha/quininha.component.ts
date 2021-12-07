@@ -291,11 +291,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     openCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {
