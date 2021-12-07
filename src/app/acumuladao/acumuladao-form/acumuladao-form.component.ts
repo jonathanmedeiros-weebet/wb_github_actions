@@ -169,11 +169,11 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     openCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.menuFooterService.toggleBilhete();
+        this.menuFooterService.toggleBilhete(false);
     }
 
     trocarTipoApostaDeslogado(tipo) {

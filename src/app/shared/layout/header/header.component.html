@@ -24,7 +24,7 @@
 
                     <a class="dropdown-item" target="_blank"
                        href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                       *ngIf="!isCliente">
+                       *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>
 
@@ -33,7 +33,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="!isCliente">
+                       *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
