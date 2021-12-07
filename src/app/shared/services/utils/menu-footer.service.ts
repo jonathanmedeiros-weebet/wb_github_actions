@@ -5,13 +5,14 @@ import {BehaviorSubject} from 'rxjs';
     providedIn: 'root'
 })
 export class MenuFooterService {
-    private modalidade = 'esporte';
+    private modalidadeSource = new BehaviorSubject<string>('esporte');
     private quantidadeItensSource = new BehaviorSubject<number>(0);
     private toggleBilheteStatusSource = new BehaviorSubject<boolean>(false);
 
     toggleStatus = false;
     quantidadeItens = this.quantidadeItensSource.asObservable();
     toggleBilheteStatus = this.toggleBilheteStatusSource.asObservable();
+    modalidade = this.modalidadeSource.asObservable();
 
     constructor() {
     }
@@ -19,11 +20,7 @@ export class MenuFooterService {
     setModalidade(modalidade) {
         this.toggleBilheteStatusSource.next(false);
         this.toggleStatus = false;
-        this.modalidade = modalidade;
-    }
-
-    getModalidade() {
-        return this.modalidade;
+        this.modalidadeSource.next(modalidade);
     }
 
     atualizarQuantidade(quantidade) {

@@ -20,6 +20,8 @@ export class MenuFooterComponent implements OnInit {
     isLoggedIn;
     quantidadeItens = 0;
     unsub$ = new Subject();
+    open = false;
+    modalidade;
 
     constructor(
         private auth: AuthService,
@@ -57,6 +59,12 @@ export class MenuFooterComponent implements OnInit {
             .subscribe(
                 res => this.quantidadeItens = res
             );
+
+        this.menuFooterService.modalidade
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.modalidade = res
+            );
     }
 
     toggleSidebar() {
@@ -64,7 +72,9 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        if (this.menuFooterService.getModalidade() === 'acumuladao' && this.quantidadeItens === 0) {
+        this.open = true;
+
+        if (this.modalidade === 'acumuladao' && this.quantidadeItens === 0) {
             this.messageService.warning('Selecione um acumuladão para abrir o Bilhete');
         } else {
             this.menuFooterService.toggleBilhete();

@@ -58,6 +58,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        console.log('inittt');
+
         this.createForm();
         this.definirAltura();
         this.auth.logado

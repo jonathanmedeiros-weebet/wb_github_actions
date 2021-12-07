@@ -15,12 +15,12 @@ import {NgxMaskModule} from 'ngx-mask';
         NgxMaskModule.forRoot(),
     ],
     declarations: [
-        BilheteEsportivoComponent,
+        // BilheteEsportivoComponent,
         EsportesFooterComponent,
         EsportesWrapperComponent,
     ],
     exports: [
-        BilheteEsportivoComponent,
+        // BilheteEsportivoComponent,
         EsportesFooterComponent,
         EsportesWrapperComponent
     ],
