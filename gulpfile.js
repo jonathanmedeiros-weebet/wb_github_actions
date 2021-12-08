@@ -724,14 +724,6 @@ gulp.task('topbets.website', function (done) {
     });
 });
 
-gulp.task('winbet.store', function (done) {
-    tasks(done, {
-        host: "winbet.store",
-        banca: "WIN BET",
-        styles: "--odds: #bb0000;",
-    });
-});
-
 gulp.task('pazbet.com', function (done) {
     tasks(done, {
         host: "pazbet.com",
@@ -1213,14 +1205,6 @@ gulp.task('pagadorabet.com', function (done) {
     });
 });
 
-gulp.task('sportbetapostas.wee.bet', function (done) {
-    tasks(done, {
-        host: "sportbetapostas.wee.bet",
-        banca: "SPORT BET APOSTAS",
-        styles: "",
-    });
-});
-
 gulp.task('3xbets.site', function (done) {
     tasks(done, {
         host: "3xbets.site",
@@ -1233,14 +1217,6 @@ gulp.task('ligavip.wee.bet', function (done) {
     tasks(done, {
         host: "ligavip.wee.bet",
         banca: "LIGA VIP",
-        styles: "",
-    });
-});
-
-gulp.task('diretoriasport.bet', function (done) {
-    tasks(done, {
-        host: "diretoriasport.bet",
-        banca: "DIRETORIA SPORT",
         styles: "",
     });
 });
