@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Jogo, ItemBilheteEsportivo } from './../../../../models';
+import { Jogo, ItemBilheteEsportivo } from '../../../models';
 import {
     ParametrosLocaisService, MessageService, JogoService,
     LiveService, BilheteEsportivoService, HelperService
-} from '../../../../services';
+} from '../../../services';
 
 @Component({
     selector: 'app-live-jogo',

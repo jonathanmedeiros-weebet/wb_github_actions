@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService, LiveService } from './../../../../services';
+import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService, LiveService } from '../../../services';
 
 @Component({
     selector: 'app-live-wrapper',

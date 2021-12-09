@@ -5,8 +5,8 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, MessageService, JogoService, LiveService } from '../../../../services';
-import { Jogo } from '../../../../models';
+import { ParametrosLocaisService, MessageService, JogoService, LiveService } from '../../../services';
+import { Jogo } from '../../../models';
 
 @Component({
     selector: 'app-live-listagem',
