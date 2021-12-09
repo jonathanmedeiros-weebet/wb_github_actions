@@ -9,7 +9,9 @@ import { ErrorService } from './../utils/error.service';
 import { PreApostaEsportiva } from './../../../models';
 import { config } from '../../config';
 
-@Injectable()
+@Injectable({
+    providedIn:'root'
+})
 export class PreApostaEsportivaService {
     private PreApostaUrl = `${config.BASE_URL}/preapostas`; // URL to web api
 

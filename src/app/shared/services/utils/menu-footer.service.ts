@@ -5,25 +5,49 @@ import {BehaviorSubject} from 'rxjs';
     providedIn: 'root'
 })
 export class MenuFooterService {
-    private modalidade = 'esporte';
+    private isEsporteSource = new BehaviorSubject<boolean>(true);
     private quantidadeItensSource = new BehaviorSubject<number>(0);
     private toggleBilheteStatusSource = new BehaviorSubject<boolean>(false);
 
-    toggleStatus = false;
+    isEsporte = this.isEsporteSource.asObservable();
     quantidadeItens = this.quantidadeItensSource.asObservable();
     toggleBilheteStatus = this.toggleBilheteStatusSource.asObservable();
 
+    toggleStatus = false;
+    acumuladao = false;
+    esporte = true;
+    outraModalidade = false;
+
     constructor() {
+        this.checkIsEsporte();
     }
 
-    setModalidade(modalidade) {
-        this.toggleBilheteStatusSource.next(false);
-        this.toggleStatus = false;
-        this.modalidade = modalidade;
+    checkIsEsporte() {
+        if (this.outraModalidade || this.acumuladao) {
+            this.esporte = false;
+            this.setIsEsporte(false);
+        } else {
+            this.esporte = true;
+            this.setIsEsporte(true);
+        }
     }
 
-    getModalidade() {
-        return this.modalidade;
+    setIsEsporte(bool: boolean) {
+        this.isEsporteSource.next(bool);
+    }
+
+    setIsAcumuladao(bool: boolean) {
+        this.acumuladao = bool;
+        this.checkIsEsporte();
+    }
+
+    getIsAcumuladao() {
+        return this.acumuladao;
+    }
+
+    setOutraModalidade(bool: boolean) {
+        this.outraModalidade = bool;
+        this.checkIsEsporte();
     }
 
     atualizarQuantidade(quantidade) {

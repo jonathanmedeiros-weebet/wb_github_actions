@@ -102,15 +102,17 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
             this.setNumeros(numeros);
         });
-        this.menuFooterService.setModalidade('quininha');
         this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res
             );
+        this.menuFooterService.setOutraModalidade(true);
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setOutraModalidade(false);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -175,6 +177,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Remover palpite */
     removeGuess(index) {
         this.aposta.itens.splice(index, 1);
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Finalizar aposta */

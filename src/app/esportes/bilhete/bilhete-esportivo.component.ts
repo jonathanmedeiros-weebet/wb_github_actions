@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -39,6 +39,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     refreshIntervalId;
     unsub$ = new Subject();
     isCliente;
+    isEsporte: boolean;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -84,10 +85,19 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
-        const itens = this.bilheteService.getItens();
-        if (itens) {
-            this.bilheteService.atualizarItens(itens);
-        }
+        this.menuFooterService.isEsporte
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => {
+                    this.isEsporte = res;
+                    if (this.isEsporte) {
+                        const itens = this.bilheteService.getItens();
+                        if (itens) {
+                            this.bilheteService.atualizarItens(itens);
+                        }
+                    }
+                }
+            );
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
@@ -107,8 +117,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 res => this.displayPreTicker = res
             );
-
-        this.menuFooterService.setModalidade('esporte');
     }
 
     definirAltura() {

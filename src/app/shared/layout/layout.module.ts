@@ -31,6 +31,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
 import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import { MenuFooterComponent } from './menu-footer/menu-footer.component';
+import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 
 @NgModule({
     imports: [
@@ -73,7 +74,8 @@ import { MenuFooterComponent } from './menu-footer/menu-footer.component';
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,
-        MenuFooterComponent
+        MenuFooterComponent,
+        BilheteEsportivoComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -86,7 +88,8 @@ import { MenuFooterComponent } from './menu-footer/menu-footer.component';
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
         BilheteAcumuladaoComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        BilheteEsportivoComponent
     ],
     providers: [
         ApostaEsportivaService,
