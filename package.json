@@ -110,7 +110,7 @@
         "superbetplus.club": "gulp superbetplus.club",
         "i9bets.wee.bet": "gulp i9bets.wee.bet",
         "portugabet.site": "gulp portugabet.site",
-        "ingamesports.wee.bet": "gulp ingamesports.wee.bet",
+        "ingamesport.com": "gulp ingamesport.com",
         "gobets.wee.bet": "gulp gobets.wee.bet",
         "bet316top.wee.bet": "gulp bet316top.wee.bet",
         "eisports.club": "gulp eisports.club",
@@ -184,7 +184,8 @@
         "starbets.wee.bet": "gulp starbets.wee.bet",
         "mitosport.wee.bet": "gulp mitosport.wee.bet",
         "valebets.wee.bet": "gulp valebets.wee.bet",
-        "sportingbetsbr.com": "gulp sportingbetsbr.com"
+        "sportingbetsbr.com": "gulp sportingbetsbr.com",
+        "betcompany.wee.bet": "gulp betcompany.wee.bet"
     },
     "private": true,
     "dependencies": {

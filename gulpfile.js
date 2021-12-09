@@ -877,11 +877,11 @@ gulp.task('portugabet.site', function (done) {
     });
 });
 
-gulp.task('ingamesports.wee.bet', function (done) {
+gulp.task('ingamesport.com', function (done) {
     tasks(done, {
-        host: "ingamesports.wee.bet",
-        banca: "INGAME SPORTS",
-        styles: "--header: #116D51; --foreground-header: #fff; --sidebar-right:#116D51; --foreground-sidebar-right: #fff; --sidebar-left: #116D51; --foreground-sidebar-left: #fff; --odds: #000;--highlight:red;--foreground-highlight:#fff;",
+        host: "ingamesport.com",
+        banca: "INGAME SPORT",
+        styles: ""
     });
 });
 
@@ -1485,3 +1485,13 @@ gulp.task('sportingbetsbr.com', function (done) {
         styles: "",
     });
 });
+
+
+gulp.task('betcompany.wee.bet', function (done) {
+    tasks(done, {
+        host: "betcompany.wee.bet",
+        banca: "BET COMPANY",
+        styles: "",
+    });
+});
+
