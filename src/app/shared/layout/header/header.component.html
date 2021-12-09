@@ -1,10 +1,6 @@
 <header [@openClose]="isOpen ? 'open' : 'closed'">
     <!-- Fixed navbar -->
     <nav class="navbar-mobile navbar navbar-expand-custom navbar-dark">
-        <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="logo-mobile">
             <a class="" [routerLink]="['/esportes/futebol/jogos']">
                 <img [src]="LOGO">
@@ -27,8 +23,8 @@
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" target="_blank"
-                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
-                       *ngIf="!isCliente">
+                       href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
+                       *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>
 
@@ -37,7 +33,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="!isCliente">
+                       *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -193,7 +189,7 @@
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" target="_blank"
-                       href="https://api.whatsapp.com/send?phone=55{{contatoSolicitacaoSaque}}"
+                       href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
                        *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>

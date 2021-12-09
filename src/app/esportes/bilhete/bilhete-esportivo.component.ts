@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -7,11 +7,12 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, BilheteEsportivoService,
-    HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService
+    HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService, MenuFooterService
 } from '../../services';
 import {ItemBilheteEsportivo} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
+import {result} from 'lodash';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -38,6 +39,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     refreshIntervalId;
     unsub$ = new Subject();
     isCliente;
+    isEsporte: boolean;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -50,7 +52,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private fb: FormBuilder,
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -82,10 +85,19 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
-        const itens = this.bilheteService.getItens();
-        if (itens) {
-            this.bilheteService.atualizarItens(itens);
-        }
+        this.menuFooterService.isEsporte
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => {
+                    this.isEsporte = res;
+                    if (this.isEsporte) {
+                        const itens = this.bilheteService.getItens();
+                        if (itens) {
+                            this.bilheteService.atualizarItens(itens);
+                        }
+                    }
+                }
+            );
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
@@ -99,6 +111,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(valor => {
                 this.calcularPossibilidadeGanho(valor);
             });
+
+        this.menuFooterService.toggleBilheteStatus
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
     }
 
     definirAltura() {
@@ -266,6 +284,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.modalRef.componentInstance.aposta = aposta;
         this.modalRef.componentInstance.primeiraImpressao = true;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSuccess(id) {
@@ -285,6 +304,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         });
 
         this.modalRef.componentInstance.codigo = id;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(error) {
@@ -314,11 +334,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {

@@ -71,6 +71,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
 
                 this.cd.markForCheck();
             });
+        this.bilheteService.atualizarItens(this.itens);
     }
 
     definirAltura() {

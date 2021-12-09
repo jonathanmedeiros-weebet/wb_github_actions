@@ -141,23 +141,4 @@
             </div>
         </div>
     </div>
-    <div id="fixed-bar-bilhete" (click)="openCupom()" [ngStyle]="{'display': displayPreTicker? 'none' : ''}">
-        <div>
-            <label>Valor</label>
-            <span>{{aposta.valor | currency}}</span>
-        </div>
-        <div>
-            <label>Palpite(s)</label>
-            <span>{{aposta.itens.length}}</span>
-        </div>
-        <div>
-            <label>P. de Prêmio</label>
-            <span>{{(aposta.premio) | currency}}</span>
-        </div>
-        <div class="open-bilhete">
-            <a>
-                <i class="fa fa-lg fa-chevron-circle-up"></i>
-            </a>
-        </div>
-    </div>
 </div>

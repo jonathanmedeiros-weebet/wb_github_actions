@@ -17,11 +17,13 @@ export class HelperService {
     cotacoesLocais;
     opcoes;
     CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
+    casaDasApostasId;
 
     constructor(private paramsService: ParametrosLocaisService) {
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.opcoes = this.paramsService.getOpcoes();
+        this.casaDasApostasId = this.paramsService.getOpcoes().casa_das_apostas_id;
     }
 
     apostaTipoLabel(chave: string, field = 'nome'): string {
@@ -261,17 +263,22 @@ export class HelperService {
     }
 
     sharedTicket(aposta, file) {
-        let data;
+        let url;
         if (aposta.tipo === 'loteria') {
-            data = `http:${config.HOST}/aposta/${aposta.codigo}`;
+            url = `http:${config.HOST}/aposta/${aposta.codigo}`;
         } else {
-            data = `${location.origin}/bilhete/${aposta.codigo}`;
+            url = `${location.origin}/bilhete/${aposta.codigo}`;
+        }
+
+        let message = `\r${config.BANCA_NOME} \n\nSeu Bilhete: \n${url} \n`;
+        if (this.casaDasApostasId) {
+            message += `\nCasa das Apostas: \nhttp://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${aposta.codigo}`;
         }
 
         let dataToSend = {
-                message: `${config.BANCA_NOME}: ${data}`,
+                message: message,
                 file: file,
-                data: data,
+                data: url,
                 action: 'shareURL'
             };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
@@ -282,15 +289,6 @@ export class HelperService {
                 message: `Comprovante de Recarga`,
                 file: file,
                 data: `Comprovante de Recarga`,
-                action: 'shareURL'
-            };
-        WeebetMessage.postMessage(JSON.stringify(dataToSend));
-    }
-
-    sharedCasaDasApostaUrl(url) {
-        let dataToSend = {
-                message: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
-                data: `[${config.BANCA_NOME}] Casa das Apostas: ${url}`,
                 action: 'shareURL'
             };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));

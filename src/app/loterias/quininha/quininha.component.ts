@@ -12,7 +12,7 @@ import {
     SorteioService, ApostaLoteriaService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService,
-    ParametrosLocaisService
+    ParametrosLocaisService, MenuFooterService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -52,7 +52,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -107,9 +108,17 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
             this.setNumeros(numeros);
         });
+        this.menuFooterService.toggleBilheteStatus
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
+        this.menuFooterService.setOutraModalidade(true);
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setOutraModalidade(false);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -168,11 +177,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         } else {
             this.messageService.warning('Quantidade de dezenas insuficiente.');
         }
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Remover palpite */
     removeGuess(index) {
         this.aposta.itens.splice(index, 1);
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Finalizar aposta */
@@ -213,6 +224,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSucess(codigo) {
@@ -226,6 +238,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(msg) {
@@ -287,11 +300,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {

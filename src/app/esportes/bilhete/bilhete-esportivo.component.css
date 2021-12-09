@@ -184,5 +184,16 @@
         height: 100% !important;
         position: fixed !important;
     }
+}
 
+@media (min-width: 1025px) {
+    section.pre-bilhete {
+        position: absolute;
+        top: 68px;
+        right: 0;
+    }
+}
+
+.hide {
+    display: none;
 }

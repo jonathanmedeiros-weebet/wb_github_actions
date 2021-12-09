@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +10,7 @@ import {
     AuthService,
     DesafioApostaService,
     DesafioBilheteService,
-    DesafioPreApostaService,
+    DesafioPreApostaService, MenuFooterService,
     MessageService,
     ParametrosLocaisService
 } from '../../services';
@@ -21,7 +21,7 @@ import * as clone from 'clone';
     templateUrl: './desafios-bilhete.component.html',
     styleUrls: ['./desafios-bilhete.component.css']
 })
-export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit {
+export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
@@ -50,7 +50,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private fb: FormBuilder,
         private bilheteService: DesafioBilheteService,
         private paramsService: ParametrosLocaisService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -80,6 +81,17 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
+        this.menuFooterService.setOutraModalidade(true);
+
+        this.menuFooterService.toggleBilheteStatus
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setOutraModalidade(false);
     }
 
     definirAltura() {
@@ -238,6 +250,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
         this.modalRef.componentInstance.aposta = aposta;
         this.modalRef.componentInstance.primeiraImpressao = true;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSuccess(id) {
@@ -257,6 +270,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         });
 
         this.modalRef.componentInstance.codigo = id;
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(error) {
@@ -265,11 +279,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {

@@ -126,19 +126,4 @@ export class ApostaModalComponent implements OnInit {
 
         return result;
     }
-
-    linkCasaDasApostasPermitido() {
-        if (this.appMobile) {
-            return this.casaDasApostasId;
-        } else {
-            return false;
-        }
-    }
-
-    openCasaDasApostas() {
-        if (this.casaDasApostasId) {
-            const url = `http://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${this.aposta.codigo}`;
-            this.helperService.sharedCasaDasApostaUrl(url);
-        }
-    }
 }

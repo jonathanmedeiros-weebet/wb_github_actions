@@ -22,7 +22,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     page = 1;
     movimentacoesContent;
     saldo;
-    contatoSolicitacaoSaque;
+    whatsapp;
 
     constructor(
         private clienteService: ClienteService,
@@ -36,7 +36,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
+        this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
 
         if (window.innerWidth < 669) {
             this.smallScreen = true;

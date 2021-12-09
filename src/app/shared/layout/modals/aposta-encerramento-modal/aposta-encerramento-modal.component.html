@@ -15,10 +15,6 @@
         <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shared()" class="shared-ticket">
             <i class="fa fa-share-alt"></i>
         </button>
-        <button type="button" *ngIf="linkCasaDasApostasPermitido()" (click)="openCasaDasApostas()"
-                title="CASA DAS APOSTAS">
-            <i class="fa fa-external-link"></i>
-        </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
