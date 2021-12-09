@@ -100,15 +100,17 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
             this.setNumeros(numeros);
         });
-        this.menuFooterService.setModalidade('seninha');
         this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res
             );
+        this.menuFooterService.setIsLoteria(true);
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setIsLoteria(false);
         this.unsub$.next();
         this.unsub$.complete();
     }

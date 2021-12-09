@@ -102,15 +102,17 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
             this.setNumeros(numeros);
         });
-        this.menuFooterService.setModalidade('quininha');
         this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res
             );
+        this.menuFooterService.setIsLoteria(true);
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setIsLoteria(false);
         this.unsub$.next();
         this.unsub$.complete();
     }

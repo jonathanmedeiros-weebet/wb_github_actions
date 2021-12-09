@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,7 @@ import * as clone from 'clone';
     templateUrl: './desafios-bilhete.component.html',
     styleUrls: ['./desafios-bilhete.component.css']
 })
-export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit {
+export class DesafiosBilheteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     modalRef;
     possibilidadeGanho = 0;
@@ -81,13 +81,17 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
-        this.menuFooterService.setModalidade('desafio');
+        this.menuFooterService.setIsDesafio(true);
 
         this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.displayPreTicker = res
             );
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsDesafio(false);
     }
 
     definirAltura() {

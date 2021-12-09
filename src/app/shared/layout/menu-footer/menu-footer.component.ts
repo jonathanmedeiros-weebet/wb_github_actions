@@ -1,8 +1,6 @@
-import {Router} from '@angular/router';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SidebarService} from '../../services/utils/sidebar.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
-import {BilheteEsportivoService} from '../../services/aposta-esportiva/bilhete-esportivo.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
@@ -20,8 +18,7 @@ export class MenuFooterComponent implements OnInit {
     isLoggedIn;
     quantidadeItens = 0;
     unsub$ = new Subject();
-    open = false;
-    modalidade;
+    isAcumuladao;
 
     constructor(
         private auth: AuthService,
@@ -60,10 +57,10 @@ export class MenuFooterComponent implements OnInit {
                 res => this.quantidadeItens = res
             );
 
-        this.menuFooterService.modalidade
+        this.menuFooterService.isAcumuladao
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                res => this.modalidade = res
+                res => this.isAcumuladao = res
             );
     }
 
@@ -72,9 +69,7 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        this.open = true;
-
-        if (this.modalidade === 'acumuladao' && this.quantidadeItens === 0) {
+        if (this.isAcumuladao && this.quantidadeItens === 0) {
             this.messageService.warning('Selecione um acumuladão para abrir o Bilhete');
         } else {
             this.menuFooterService.toggleBilhete();

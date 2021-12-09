@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -19,7 +19,7 @@ import {result} from 'lodash';
     templateUrl: 'bilhete-esportivo.component.html',
     styleUrls: ['bilhete-esportivo.component.css'],
 })
-export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
     @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     mudancas = false;
     modalRef;
@@ -39,6 +39,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     refreshIntervalId;
     unsub$ = new Subject();
     isCliente;
+    isEsporte: boolean;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -58,8 +59,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
-        console.log('inittt');
-
         this.createForm();
         this.definirAltura();
         this.auth.logado
@@ -86,10 +85,19 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
-        const itens = this.bilheteService.getItens();
-        if (itens) {
-            this.bilheteService.atualizarItens(itens);
-        }
+        this.menuFooterService.isEsporte
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => {
+                    this.isEsporte = res;
+                    if (this.isEsporte) {
+                        const itens = this.bilheteService.getItens();
+                        if (itens) {
+                            this.bilheteService.atualizarItens(itens);
+                        }
+                    }
+                }
+            );
 
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
@@ -109,8 +117,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 res => this.displayPreTicker = res
             );
-
-        this.menuFooterService.setModalidade('esporte');
     }
 
     definirAltura() {
@@ -122,6 +128,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log(changes);
     }
 
     createForm() {
