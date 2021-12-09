@@ -18,7 +18,6 @@ export class MenuFooterComponent implements OnInit {
     isLoggedIn;
     quantidadeItens = 0;
     unsub$ = new Subject();
-    isAcumuladao;
 
     constructor(
         private auth: AuthService,
@@ -56,12 +55,6 @@ export class MenuFooterComponent implements OnInit {
             .subscribe(
                 res => this.quantidadeItens = res
             );
-
-        // this.menuFooterService.isAcumuladao
-        //     .pipe(takeUntil(this.unsub$))
-        //     .subscribe(
-        //         res => this.isAcumuladao = res
-        //     );
     }
 
     toggleSidebar() {
