@@ -104,7 +104,6 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
     }
 
     getCidades(event: any) {
-        console.log(event.target.value);
         this.utilsService.getCidades(event.target.value).subscribe(
             cidades => {
                 this.cidades = cidades;

@@ -25,10 +25,10 @@ export class MenuFooterService {
     checkIsEsporte() {
         if (this.outraModalidade || this.acumuladao) {
             this.esporte = false;
-            this.isEsporteSource.next(false);
+            this.setIsEsporte(false);
         } else {
             this.esporte = true;
-            this.isEsporteSource.next(true);
+            this.setIsEsporte(true);
         }
     }
 

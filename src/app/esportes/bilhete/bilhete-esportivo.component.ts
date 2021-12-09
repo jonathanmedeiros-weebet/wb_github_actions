@@ -19,7 +19,7 @@ import {result} from 'lodash';
     templateUrl: 'bilhete-esportivo.component.html',
     styleUrls: ['bilhete-esportivo.component.css'],
 })
-export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
+export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     mudancas = false;
     modalRef;
@@ -128,10 +128,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        console.log(changes);
     }
 
     createForm() {
