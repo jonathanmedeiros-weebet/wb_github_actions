@@ -81,7 +81,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
-        this.menuFooterService.setIsDesafio(true);
+        this.menuFooterService.setOutraModalidade(true);
 
         this.menuFooterService.toggleBilheteStatus
             .pipe(takeUntil(this.unsub$))
@@ -91,7 +91,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnDestroy() {
-        this.menuFooterService.setIsDesafio(false);
+        this.menuFooterService.setOutraModalidade(false);
     }
 
     definirAltura() {

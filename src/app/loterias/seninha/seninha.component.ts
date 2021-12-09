@@ -105,12 +105,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             .subscribe(
                 res => this.displayPreTicker = res
             );
-        this.menuFooterService.setIsLoteria(true);
+        this.menuFooterService.setOutraModalidade(true);
         this.menuFooterService.atualizarQuantidade(0);
     }
 
     ngOnDestroy() {
-        this.menuFooterService.setIsLoteria(false);
+        this.menuFooterService.setOutraModalidade(false);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -180,6 +180,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     /* Remover palpite */
     removeGuess(index) {
         this.aposta.itens.splice(index, 1);
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Finalizar aposta */

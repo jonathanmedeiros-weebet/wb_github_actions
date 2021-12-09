@@ -57,11 +57,11 @@ export class MenuFooterComponent implements OnInit {
                 res => this.quantidadeItens = res
             );
 
-        this.menuFooterService.isAcumuladao
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                res => this.isAcumuladao = res
-            );
+        // this.menuFooterService.isAcumuladao
+        //     .pipe(takeUntil(this.unsub$))
+        //     .subscribe(
+        //         res => this.isAcumuladao = res
+        //     );
     }
 
     toggleSidebar() {
@@ -69,7 +69,7 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleBilhete() {
-        if (this.isAcumuladao && this.quantidadeItens === 0) {
+        if (this.menuFooterService.getIsAcumuladao() && this.quantidadeItens === 0) {
             this.messageService.warning('Selecione um acumuladão para abrir o Bilhete');
         } else {
             this.menuFooterService.toggleBilhete();
