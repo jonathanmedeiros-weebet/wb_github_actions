@@ -131,7 +131,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     checkScrollButtons() {
-        if (this.menuWidth > this.scrollMenu.nativeElement.scrollWidth) {
+        if (this.menuWidth >= this.scrollMenu.nativeElement.scrollWidth) {
             this.rightDisabled = true;
             this.leftDisabled = true;
         } else {
