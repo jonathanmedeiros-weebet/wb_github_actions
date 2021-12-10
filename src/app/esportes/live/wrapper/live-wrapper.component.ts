@@ -29,7 +29,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 dados => {
-                    if (dados.contexto !== 'futebol') {
+                    if (dados.esporte !== 'futebol') {
                         this.getJogos();
                     }
                 }

@@ -1,7 +1,16 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {AoVivoGuard, BasqueteGuard, CombateGuard, EsportsGuard} from '../services';
+import {
+    AoVivoGuard,
+    BasqueteGuard,
+    CombateGuard,
+    EsportsGuard,
+    FutebolAmericanoGuard,
+    FutsalGuard,
+    HoqueiGeloGuard,
+    TenisGuard, TenisMesaGuard, VoleiGuard
+} from '../services';
 import {EsportesWrapperComponent} from './wrapper/esportes-wrapper.component';
 
 export const routes: Routes = [
@@ -28,16 +37,19 @@ export const routes: Routes = [
                 path: 'futebol-americano',
                 data: {sportId: '12'},
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [FutebolAmericanoGuard]
             },
             {
                 path: 'tenis',
                 data: {sportId: '13'},
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [TenisGuard]
             },
             {
                 path: 'hoquei-gelo',
                 data: {sportId: '17'},
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
+                canActivate: [HoqueiGeloGuard]
             },
             {
                 path: 'basquete',
@@ -49,19 +61,19 @@ export const routes: Routes = [
                 path: 'futsal',
                 data: {sportId: '83'},
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [BasqueteGuard]
+                canActivate: [FutsalGuard]
             },
             {
                 path: 'volei',
                 data: {sportId: '91'},
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [BasqueteGuard]
+                canActivate: [VoleiGuard]
             },
             {
                 path: 'tenis-mesa',
                 data: {sportId: '92'},
                 loadChildren: () => import('app/esportes/generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [BasqueteGuard]
+                canActivate: [TenisMesaGuard]
             },
             {
                 path: 'esports',

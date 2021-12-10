@@ -99,13 +99,13 @@
                 </a>
             </div>
 
-            <div class="category" routerLinkActive="active">
+            <div *ngIf="futsalHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/futsal']">
                     <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
                     <span>Futsal</span>
                 </a>
             </div>
-            <div class="category" routerLinkActive="active">
+            <div *ngIf="voleiHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/volei']">
                     <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
                     <span>Vôlei</span>
@@ -117,25 +117,25 @@
                     <span>Combate</span>
                 </a>
             </div>
-            <div class="category" routerLinkActive="active">
+            <div *ngIf="tenisHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/tenis']">
                     <img src="assets/images/tenis.png" />
                     <span>Tênis</span>
                 </a>
             </div>
-            <div class="category" routerLinkActive="active">
+            <div *ngIf="futebolAmericanoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/futebol-americano']">
                     <img src="assets/images/futebol-americano.png" />
                     <span>Futebol Americano</span>
                 </a>
             </div>
-            <div class="category" routerLinkActive="active">
+            <div *ngIf="hoqueiGeloHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/hoquei-gelo']">
                     <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
                     <span>Hóquei no Gelo</span>
                 </a>
             </div>
-            <div class="category" routerLinkActive="active">
+            <div *ngIf="tenisMesaHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/tenis-mesa']">
                     <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
                     <span>Tênis de Mesa</span>

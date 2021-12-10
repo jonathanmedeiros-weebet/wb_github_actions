@@ -37,8 +37,9 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 dados => {
-                    if (dados.contexto !== 'futebol') {
+                    if (dados.esporte !== 'futebol') {
                         this.getCampeonatos2Sidebar();
+                        console.log('executed');
                     }
                 }
             );

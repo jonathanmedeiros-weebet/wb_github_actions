@@ -45,6 +45,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     aoVivoHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    futsalHabilitado = false;
+    voleiHabilitado = false;
+    tenisHabilitado = false;
+    tenisMesaHabilitado = false;
+    futebolAmericanoHabilitado = false;
+    hoqueiGeloHabilitado = false;
     appMobile;
     isOpen = false;
     seninhaAtiva;
@@ -105,6 +111,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
+        this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
+        this.voleiHabilitado = this.paramsService.getOpcoes().volei;
+        this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
+        this.tenisMesaHabilitado = this.paramsService.getOpcoes().tenis_mesa;
+        this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
+        this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
