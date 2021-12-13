@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="odds">
-                                <div class="odd"  *ngFor="let cotacao of jogo.cotacoes">
+                                <div class="odd"  *ngFor="let cotacao of jogo.cotacoes" [ngClass]="esporte !== 'futsal' ? 'generico' : ''">
                                     <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                         <div class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                                             (click)="addCotacao(jogo, cotacao)">

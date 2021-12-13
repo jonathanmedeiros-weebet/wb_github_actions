@@ -39,7 +39,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 dados => {
                     if (dados.esporte !== 'futebol') {
                         this.getCampeonatos2Sidebar();
-                        console.log('executed');
                     }
                 }
             );

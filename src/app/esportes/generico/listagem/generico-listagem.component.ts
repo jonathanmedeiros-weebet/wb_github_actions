@@ -22,6 +22,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
     @Input() camps: Campeonato[];
     @Input() data;
+    @Input() esporte;
     mobileScreen = true;
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
