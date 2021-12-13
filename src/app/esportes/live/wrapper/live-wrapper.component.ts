@@ -43,7 +43,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(1);
         const opcoes = this.paramsService.getOpcoes();
         const params = {
             'sport_id': 1,

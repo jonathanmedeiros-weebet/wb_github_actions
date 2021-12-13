@@ -1,9 +1,9 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil, switchMap } from 'rxjs/operators';
-import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from '../../../services';
+import {Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {CampeonatoService, MessageService, ParametrosLocaisService, SidebarService} from '../../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -33,13 +33,13 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
-        this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
 
         this.route.data
             .pipe(
                 switchMap((data: any) => {
                     this.setContextoPorEsporte(data.sportId);
                     this.sportId = data.sportId;
+                    this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportId);
                     this.getCampeonatos2Sidebar();
 
                     return this.route.queryParams;
