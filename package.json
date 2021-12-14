@@ -184,7 +184,9 @@
         "mitosport.wee.bet": "gulp mitosport.wee.bet",
         "valebets.wee.bet": "gulp valebets.wee.bet",
         "sportingbetsbr.com": "gulp sportingbetsbr.com",
-        "betcompany.wee.bet": "gulp betcompany.wee.bet"
+        "betcompany.wee.bet": "gulp betcompany.wee.bet",
+        "tabocasbet.wee.bet": "gulp tabocasbet.wee.bet",
+        "wbets.com.br": "gulp wbets.com.br"
     },
     "private": true,
     "dependencies": {

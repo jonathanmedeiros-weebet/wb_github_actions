@@ -1650,12 +1650,29 @@ gulp.task('sportingbetsbr.com', function (done) {
     });
 });
 
-
 gulp.task('betcompany.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "betcompany.wee.bet",
         banca: "BET COMPANY",
+        styles: "",
+    });
+});
+
+gulp.task('tabocasbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "tabocasbet.wee.bet",
+        banca: "TABOCAS BET",
+        styles: "",
+    });
+});
+
+gulp.task('wbets.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "wbets.com.br",
+        banca: "WBETS",
         styles: "",
     });
 });
