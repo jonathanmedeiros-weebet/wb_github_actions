@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ResultadoService, MessageService } from './../../services';
+import {ResultadoService, MessageService, MenuFooterService} from './../../services';
 import { Campeonato } from './../../models';
 
 import { Subject } from 'rxjs';
@@ -22,7 +22,8 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     constructor(
         private messageService: MessageService,
         private resultadoService: ResultadoService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -30,11 +31,13 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     ngOnInit() {
         this.createForm();
         this.getResultados();
+        this.menuFooterService.setIsPagina(true);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {

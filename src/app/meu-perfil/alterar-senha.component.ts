@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 
-import {AuthService, ClienteService, MessageService} from './../services';
+import {AuthService, ClienteService, MenuFooterService, MessageService} from './../services';
 import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
 
 import {Subject} from 'rxjs';
@@ -21,7 +21,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private messageService: MessageService,
         private auth: AuthService,
         private fb: FormBuilder,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -29,11 +30,13 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnInit() {
         this.createForm();
         this.isCliente = this.auth.isCliente();
+        this.menuFooterService.setIsPagina(true);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {
