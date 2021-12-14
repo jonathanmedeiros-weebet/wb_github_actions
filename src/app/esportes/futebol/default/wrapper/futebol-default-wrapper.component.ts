@@ -1,9 +1,9 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Renderer2, ElementRef } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, OnDestroy, ChangeDetectorRef, Renderer2, ElementRef} from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../../services';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ParametrosLocaisService, CampeonatoService, SidebarService, MessageService} from './../../../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -20,6 +20,9 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     deixarCampeonatosAbertos;
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     data;
+    campeonato;
+    exibirCampeonatoDestaque = false;
+    campeonatosDestaques;
     unsub$ = new Subject();
 
     constructor(
@@ -28,7 +31,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
@@ -122,12 +126,32 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 }
+                this.getCampeonatosDestaques();
             });
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    getCampeonatosDestaques() {
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const opcoes = this.paramsService.getOpcoes();
+        const params = {
+            'sport_id': 1,
+            'campeonatos_bloqueados': campeonatosBloqueados,
+            'campeonatos': this.paramsService.getCampeonatosPrincipais(),
+            'data_final': opcoes.data_limite_tabela,
+        };
+
+        this.campeonatoService.getCampeonatos(params)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                campeonatosDestaque => {
+                    this.campeonatosDestaques = campeonatosDestaque;
+                }
+            );
     }
 
     getCampeonatos2Sidebar() {
@@ -151,8 +175,17 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         this.jogoId = jogoId;
     }
 
+    receptorCampeonatoSelecionado(campeonatoSelecionado) {
+        this.campeonato = campeonatoSelecionado;
+        console.log(campeonatoSelecionado);
+    }
+
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
         this.exibirMaisCotacoes = exibirMaisCotacoes;
+    }
+
+    changeExibirCampeonatoDestaque(exibirCampeonatoDestaque) {
+        this.exibirCampeonatoDestaque = exibirCampeonatoDestaque;
     }
 
     // Extrai id do primeiro jogo do primeiro campeonato

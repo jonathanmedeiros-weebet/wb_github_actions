@@ -6,7 +6,7 @@ import {
 import { Router, NavigationExtras } from '@angular/router';
 
 import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from './../../../../services';
+import {ParametrosLocaisService, BilheteEsportivoService, HelperService, CampeonatoService} from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -40,6 +40,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     total;
     exibirCampeonatosExpandido;
     loadingScroll = false;
+    campeonatosDestaques;
     unsub$ = new Subject();
 
     constructor(
@@ -48,6 +49,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
+        private campeonatoService: CampeonatoService,
         private cd: ChangeDetectorRef,
         private router: Router
     ) { }

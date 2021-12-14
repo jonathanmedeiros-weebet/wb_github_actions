@@ -1,16 +1,21 @@
 <div id="futebol-default-wrapper">
     <div id="futebol-default-content">
         <div class="lista" [hidden]="mobileScreen && exibirMaisCotacoes">
+            <app-destaques [campeonatosDestaques]="campeonatosDestaques" (campeonatoSelecionado)="receptorCampeonatoSelecionado($event)"></app-destaques>
             <app-futebol-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
                 (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
                 [showLoadingIndicator]="showLoadingIndicator"
                 [deixarCampeonatosAbertos]="deixarCampeonatosAbertos"
                 [camps]="campeonatos"
-                [data]="data"></app-futebol-listagem>
+                [data]="data">
+            </app-futebol-listagem>
         </div>
         <div class="jogo" [hidden]="mobileScreen && !exibirMaisCotacoes">
             <app-futebol-jogo [jogoId]="jogoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
             </app-futebol-jogo>
+        </div>
+        <div class="campeonato-destaque">
+            <app-campeonato-destaque [campeonato]="campeonato" (exibirCampeonatoDestaque)="changeExibirCampeonatoDestaque($event)"></app-campeonato-destaque>
         </div>
     </div>
 </div>
