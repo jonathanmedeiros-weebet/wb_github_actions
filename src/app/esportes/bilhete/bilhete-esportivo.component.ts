@@ -40,6 +40,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     unsub$ = new Subject();
     isCliente;
     isEsporte: boolean;
+    isPagina: boolean;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -96,6 +97,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                             this.bilheteService.atualizarItens(itens);
                         }
                     }
+                }
+            );
+
+        this.menuFooterService.isPagina
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => {
+                    this.isPagina = res;
                 }
             );
 

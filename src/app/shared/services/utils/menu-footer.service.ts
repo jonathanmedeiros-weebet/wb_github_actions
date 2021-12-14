@@ -6,10 +6,12 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class MenuFooterService {
     private isEsporteSource = new BehaviorSubject<boolean>(true);
+    private isPaginaSource = new BehaviorSubject<boolean>(false);
     private quantidadeItensSource = new BehaviorSubject<number>(0);
     private toggleBilheteStatusSource = new BehaviorSubject<boolean>(false);
 
     isEsporte = this.isEsporteSource.asObservable();
+    isPagina = this.isPaginaSource.asObservable();
     quantidadeItens = this.quantidadeItensSource.asObservable();
     toggleBilheteStatus = this.toggleBilheteStatusSource.asObservable();
 
@@ -34,6 +36,10 @@ export class MenuFooterService {
 
     setIsEsporte(bool: boolean) {
         this.isEsporteSource.next(bool);
+    }
+
+    setIsPagina(bool: boolean) {
+        this.isPaginaSource.next(bool);
     }
 
     setIsAcumuladao(bool: boolean) {

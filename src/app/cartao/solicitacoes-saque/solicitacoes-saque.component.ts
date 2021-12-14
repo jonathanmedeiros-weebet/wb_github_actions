@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { ConfirmModalComponent } from '../../shared/layout/modals';
-import { MessageService, CartaoService } from './../../services';
+import {MessageService, CartaoService, MenuFooterService} from './../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -25,7 +25,8 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
         private messageService: MessageService,
-        private cartaoService: CartaoService
+        private cartaoService: CartaoService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -47,9 +48,12 @@ export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnI
 
         this.createForm();
         this.getSolicitacoesSaque();
+        this.menuFooterService.setIsPagina(true);
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
+    }
 
     createForm() {
         this.form = this.fb.group({

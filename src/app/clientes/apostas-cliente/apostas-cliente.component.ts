@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-apostas-cliente',
     templateUrl: './apostas-cliente.component.html',
     styleUrls: ['./apostas-cliente.component.css']
 })
-export class ApostasClienteComponent extends BaseFormComponent implements OnInit {
+export class ApostasClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     queryParams;
     dataInicial;
     dataFinal;
@@ -22,7 +23,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,
-        private params: ParametrosLocaisService
+        private params: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -43,6 +45,11 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.desafioHabilitado = this.params.getOpcoes().desafio;
 
         this.createForm();
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {

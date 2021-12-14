@@ -1,8 +1,8 @@
-import { Component, OnInit, } from '@angular/core';
+import {Component, OnDestroy, OnInit,} from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { MessageService, ParametrosLocaisService } from './../../services';
+import {MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -10,7 +10,7 @@ import * as moment from 'moment';
     templateUrl: './apuracao-listagem.component.html',
     styleUrls: ['./apuracao-listagem.component.css']
 })
-export class ApuracaoListagemComponent extends BaseFormComponent implements OnInit {
+export class ApuracaoListagemComponent extends BaseFormComponent implements OnInit, OnDestroy {
     queryParams;
     dataInicial;
     dataFinal;
@@ -22,7 +22,8 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,
-        private params: ParametrosLocaisService
+        private params: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -43,6 +44,11 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
         this.desafioHabilitado = this.params.getOpcoes().desafio;
 
         this.createForm();
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {
