@@ -1,6 +1,6 @@
 import {
     Component, OnInit, OnDestroy, Renderer2, ElementRef,
-    EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy, Output,
+    Input, ChangeDetectorRef, ChangeDetectionStrategy,
     SimpleChange, OnChanges
 } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
@@ -23,6 +23,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() camps: Campeonato[];
     @Input() data;
     @Input() sportId;
+    @Input() esporte;
     mobileScreen = true;
     campeonatos: Campeonato[];
     itens: ItemBilheteEsportivo[] = [];
@@ -30,9 +31,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     cotacoesFaltando = {};
     cotacoesLocais;
     jogosBloqueados;
+    dataLimiteTabela;
     contentSportsEl;
     start;
-    offset = 5;
+    offset = 20;
     total;
     loadingScroll = false;
     unsub$ = new Subject();
@@ -44,6 +46,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -51,6 +54,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -220,8 +224,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         let result = false;
 
         if (this.data) {
-            const proximaData = moment(this.data);
-            if (proximaData.day() !== 0) {
+            const proximaData = moment(this.data).add(1, 'd');
+            if (proximaData.day() !== 0 && proximaData.isSameOrBefore(this.dataLimiteTabela)) {
                 result = true;
             }
         }
@@ -230,11 +234,14 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     proximaData() {
-        const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
-        const navigationExtras: NavigationExtras = {
-            queryParams: { 'data': proximaData }
-        };
-        // this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
+        const proximaData = moment(this.data).add(1, 'd');
+
+        if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
+            const navigationExtras: NavigationExtras = {
+                queryParams: { 'data': proximaData.format('YYYY-MM-DD') }
+            };
+            this.router.navigate([`/esportes/${this.esporte}`], navigationExtras);
+        }
     }
 
     cotacaoPermitida(cotacao) {

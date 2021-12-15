@@ -61,7 +61,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     whatsapp;
     isCliente;
     modoClienteAtivo;
-    contatoSolicitacaoSaque;
     menuWidth;
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     rightDisabled: boolean = false;
