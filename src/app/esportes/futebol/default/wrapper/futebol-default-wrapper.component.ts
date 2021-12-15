@@ -21,8 +21,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     data;
     campeonato;
-    exibirCampeonatoDestaque = false;
-    campeonatosDestaques;
     unsub$ = new Subject();
 
     constructor(
@@ -126,32 +124,12 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 }
-                this.getCampeonatosDestaques();
             });
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
-    }
-
-    getCampeonatosDestaques() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
-        const opcoes = this.paramsService.getOpcoes();
-        const params = {
-            'sport_id': 1,
-            'campeonatos_bloqueados': campeonatosBloqueados,
-            'campeonatos': this.paramsService.getCampeonatosPrincipais(),
-            'data_final': opcoes.data_limite_tabela,
-        };
-
-        this.campeonatoService.getCampeonatos(params)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                campeonatosDestaque => {
-                    this.campeonatosDestaques = campeonatosDestaque;
-                }
-            );
     }
 
     getCampeonatos2Sidebar() {
@@ -175,17 +153,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         this.jogoId = jogoId;
     }
 
-    receptorCampeonatoSelecionado(campeonatoSelecionado) {
-        this.campeonato = campeonatoSelecionado;
-        console.log(campeonatoSelecionado);
-    }
-
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
         this.exibirMaisCotacoes = exibirMaisCotacoes;
-    }
-
-    changeExibirCampeonatoDestaque(exibirCampeonatoDestaque) {
-        this.exibirCampeonatoDestaque = exibirCampeonatoDestaque;
     }
 
     // Extrai id do primeiro jogo do primeiro campeonato
