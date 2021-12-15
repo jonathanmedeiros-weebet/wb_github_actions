@@ -84,6 +84,11 @@ header a {
     margin-bottom: 5px;
 }
 
+.menu-categories .wbicon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
 .category a {
     text-transform: uppercase;
 }
