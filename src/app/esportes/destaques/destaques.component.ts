@@ -23,10 +23,6 @@ export class DestaquesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getCampeonatosDestaques();
-    }
-
-    getCampeonatosDestaques() {
         const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
         const opcoes = this.paramsService.getOpcoes();
         const params = {

@@ -1,45 +1,25 @@
-.campeonatos-destaques {
+.destaques-container {
     width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 15px 0 0 0;
-    overflow-x: auto!important;
-    /* Hide scrollbar for IE and Edge */
-    -ms-overflow-style: none;
+    /*position: fixed;*/
+    overflow-x: auto !important;
 }
 
-.campeonatos-destaques a i {
-    font-size: 56px;
-}
-
-a {
-    margin: 0 5px 0 5px;
+.back {
+    font-size: 18px;
+    margin: 10px;
     cursor: pointer;
 }
 
-.destaque-header {
-    text-transform: uppercase;
-    padding: 0px 10px;
-    font-size: 0.9rem;
-    border-bottom: 4px solid white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: var(--league);
-    color: var(--foreground-league);
-}
-
-.destaque-header>span {
-    line-height: 29px;
-}
-
-.destaques{
+.destaques {
     display: flex;
     justify-content: space-around;
-    background-color: #fff;
     padding-bottom: 4px;
     height: 100px;
+    background-color: #FFFFFF;
+    align-items: center;
+    overflow-x: auto !important;
+    /* Hide scrollbar for IE and Edge */
+    -ms-overflow-style: none;
 }
 
 .campeonato {

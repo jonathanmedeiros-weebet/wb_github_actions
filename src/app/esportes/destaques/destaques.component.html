@@ -1,4 +1,4 @@
-<div [hidden]="campeonatoSelecionado">
+<div class="destaques-container" [hidden]="campeonatoSelecionado">
     <div class="destaque-header">
         <span class="column-left">Destaques</span>
     </div>
@@ -14,8 +14,8 @@
 
 
 <div class="back-button" [hidden]="!campeonatoSelecionado">
-    <a (click)="back()">
-        <i class="fa fa-step-backward"></i>
+    <a class="back" (click)="back()">
+        <i class="fa fa-arrow-left"></i>
         Voltar
     </a>
 </div>
