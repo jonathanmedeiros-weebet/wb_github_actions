@@ -6,8 +6,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
     styleUrls: ['./destaques.component.css']
 })
 export class DestaquesComponent implements OnInit {
-    @Input() campeonatosDestaques;
-    @Output() campeonatoSelecionado = new EventEmitter();
 
     constructor() {
     }
@@ -16,7 +14,7 @@ export class DestaquesComponent implements OnInit {
     }
 
     selecionarCampeonato(camp) {
-        this.campeonatoSelecionado.emit(camp);
+        console.log('');
     }
 
 }
