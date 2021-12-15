@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
+    MenuFooterService,
     MessageService,
     PreApostaEsportivaService
 } from '../../services';
@@ -35,17 +36,20 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
         private elRef: ElementRef,
         private modalService: NgbModal,
         private fb: FormBuilder,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
 
     ngOnInit() {
         this.createForm();
+        this.menuFooterService.setIsPagina(true);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+        this.menuFooterService.setIsPagina(false);
     }
 
     submit() {

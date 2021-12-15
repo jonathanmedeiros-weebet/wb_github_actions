@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -8,13 +7,14 @@ import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {Pagina} from '../../shared/models/pagina';
 import {AuthService} from '../../shared/services/auth/auth.service';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-cadastro',
     templateUrl: './cadastro.component.html',
     styleUrls: ['./cadastro.component.css']
 })
-export class CadastroComponent extends BaseFormComponent implements OnInit {
+export class CadastroComponent extends BaseFormComponent implements OnInit, OnDestroy {
     type: string = 'password';
     icon: string = 'fa fa-eye';
     termosDeUso: Pagina;
@@ -27,7 +27,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
         private messageService: MessageService,
         private modalService: NgbModal,
         private auth: AuthService,
-        private route: Router,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -40,6 +40,11 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
             },
             error => this.handleError(error)
         );
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {

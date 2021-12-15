@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { PaginaService } from './../services';
-import { Pagina } from './../models';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {MenuFooterService, PaginaService} from './../services';
+import {Pagina} from './../models';
 
 @Component({
     templateUrl: './informacoes.component.html'
@@ -17,8 +17,10 @@ export class InformacoesComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private paginaService: PaginaService
-    ) { }
+        private paginaService: PaginaService,
+        private menuFooterService: MenuFooterService
+    ) {
+    }
 
     ngOnInit() {
         this.route.data
@@ -30,10 +32,12 @@ export class InformacoesComponent implements OnInit, OnDestroy {
                         this.showLoadingIndicator = false;
                     });
             });
+        this.menuFooterService.setIsPagina(true);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+        this.menuFooterService.setIsPagina(false);
     }
 }

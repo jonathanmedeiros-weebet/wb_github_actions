@@ -183,6 +183,9 @@
         top: 68px;
         right: 0;
     }
+    .hide-desktop {
+        display: none;
+    }
 }
 
 .hide {
