@@ -1,4 +1,4 @@
-<app-spinner *ngIf="submitting"></app-spinner>
+<app-spinner *ngIf="submitting" class="spinner"></app-spinner>
 <div id="default-content">
     <div class="content-body">
         <div class="content">
@@ -112,7 +112,7 @@
                             <input type="checkbox" formControlName="aceitar_termos">
                             Declaro que li e concordo com os
                         </label>
-                        <a (click)="abrirModalTermosUso(termosUsoModal)" id="linkTermos"><b> termos de uso do sistema.</b></a>
+                        <a (click)="abrirModalTermosUso(termosUsoModal)" id="linkTermos"><b> termos de uso</b>.</a>
                         <app-error-msg [control]="form.get('aceitar_termos')"></app-error-msg>
                     </div>
                 </div>

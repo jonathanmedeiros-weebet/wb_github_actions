@@ -1,4 +1,4 @@
-<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker, 'hide': !isEsporte}">
+<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker, 'hide': !isEsporte, 'hide-desktop': isPagina}">
     <div class="pre-bilhete-esportes">
         <h4>BILHETE</h4>
         <a (click)="closeCupom()" class="fechar-pre-bilhete">

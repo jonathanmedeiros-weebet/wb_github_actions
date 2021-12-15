@@ -60,7 +60,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
-        this.offset = this.exibirCampeonatosExpandido ? 5 : 5;
+        this.offset = this.exibirCampeonatosExpandido ? 5 : 20;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -291,8 +291,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         let result = false;
 
         if (this.data) {
-            const proximaData = moment(this.data).add(1, 'd');
-            if (proximaData.day() !== 0 && proximaData.isSameOrBefore(this.dataLimiteTabela)) {
+            const proximaData = moment(this.data);
+            if (proximaData.day() !== 0) {
                 result = true;
             }
         }
@@ -301,14 +301,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     proximaData() {
-        const proximaData = moment(this.data).add(1, 'd');
-
-        if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
-            const navigationExtras: NavigationExtras = {
-                queryParams: { 'data': proximaData.format('YYYY-MM-DD') }
-            };
-            this.router.navigate(['/esportes/futebol'], navigationExtras);
-        }
+        const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
+        const navigationExtras: NavigationExtras = {
+            queryParams: { 'data': proximaData }
+        };
+        this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
     }
 
     cotacaoPermitida(cotacao) {
