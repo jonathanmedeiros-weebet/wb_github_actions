@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -30,7 +30,7 @@ import {config} from './../../config';
         ]),
     ]
 })
-export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     posicaoFinanceira = {
         saldo: 0,
         credito: 0
@@ -45,6 +45,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     aoVivoHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    futsalHabilitado = false;
+    voleiHabilitado = false;
+    tenisHabilitado = false;
+    tenisMesaHabilitado = false;
+    futebolAmericanoHabilitado = false;
+    hoqueiGeloHabilitado = false;
     appMobile;
     isOpen = false;
     seninhaAtiva;
@@ -52,9 +58,20 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     LOGO = config.LOGO;
     unsub$ = new Subject();
     appVersion;
+    whatsapp;
     isCliente;
     modoClienteAtivo;
-    whatsapp;
+    menuWidth;
+    @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    rightDisabled: boolean = false;
+    leftDisabled: boolean = true;
+    scrollPosition = 0;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.menuWidth = window.innerWidth - (250 + 280);
+        this.checkScrollButtons();
+    }
 
     constructor(
         private fb: FormBuilder,
@@ -62,7 +79,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private auth: AuthService,
         private sidebarService: SidebarService,
         private printService: PrintService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -92,6 +110,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
+        this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
+        this.voleiHabilitado = this.paramsService.getOpcoes().volei;
+        this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
+        this.tenisMesaHabilitado = this.paramsService.getOpcoes().tenis_mesa;
+        this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
+        this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
@@ -104,11 +128,53 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.getUsuario();
         this.createForm();
+
+        this.menuWidth = window.innerWidth - (250 + 280);
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    ngAfterViewInit() {
+        this.checkScrollButtons();
+        this.cd.detectChanges();
+    }
+
+    checkScrollButtons() {
+        if (this.menuWidth >= this.scrollMenu.nativeElement.scrollWidth) {
+            this.rightDisabled = true;
+            this.leftDisabled = true;
+        } else {
+            this.rightDisabled = false;
+        }
+    }
+
+    scrollLeft() {
+        this.scrollMenu.nativeElement.scrollLeft -= 200;
+        this.scrollPosition -= 200;
+        this.checkScroll();
+    }
+
+    scrollRight() {
+        this.scrollMenu.nativeElement.scrollLeft += 200;
+        this.scrollPosition += 200;
+        this.checkScroll();
+    }
+
+    onScroll(e) {
+        this.checkScroll();
+    }
+
+    checkScroll() {
+        this.scrollPosition == 0 ? this.leftDisabled = true : this.leftDisabled = false;
+
+        let newScrollLeft = this.scrollMenu.nativeElement.scrollLeft;
+        let width = this.scrollMenu.nativeElement.clientWidth;
+        let scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+
+        scrollWidth - (this.scrollPosition + width) <= 0 ? this.rightDisabled = true : this.rightDisabled = false;
     }
 
     createForm() {

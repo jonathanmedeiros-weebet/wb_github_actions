@@ -76,57 +76,92 @@
             </div>
         </ng-template>
     </nav>
+    <div class="menu-categories margin-categories">
+        <div class="pull" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
+            <i class="fa fa-angle-left fa-left"></i>
+        </div>
+        <div class="menu-categories scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
+            <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/live']">
+                    <i class="wbicon icon-ao-vivo"></i> Ao Vivo
+                </a>
+            </div>
+            <div class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/futebol']">
+                    <i class="wbicon icon-futebol"></i> Futebol
+                </a>
+            </div>
+            <div *ngIf="basqueteHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/basquete']">
+                    <i class="wbicon icon-basquete"></i> Basquete
+                </a>
+            </div>
 
-    <div class="menu-categories">
-        <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/futebol/live']">
-                <i class="fa fa-play"></i> Ao Vivo
-            </a>
+            <div *ngIf="futsalHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/futsal']">
+                    <i class="wbicon icon-futsal"></i> Futsal
+                </a>
+            </div>
+            <div *ngIf="voleiHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/volei']">
+                    <i class="wbicon icon-volei"></i> Vôlei
+                </a>
+            </div>
+            <div *ngIf="combateHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/combate']">
+                    <i class="wbicon icon-luta"></i> Combate
+                </a>
+            </div>
+            <div *ngIf="tenisHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/tenis']">
+                    <i class="wbicon icon-tenis"></i> Tênis
+                </a>
+            </div>
+            <div *ngIf="futebolAmericanoHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/futebol-americano']">
+                    <i class="wbicon icon-futebol-americano"></i> Futebol Americano
+                </a>
+            </div>
+            <div *ngIf="hoqueiGeloHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/hoquei-gelo']">
+                    <i class="wbicon icon-hoquei-no-gelo"></i> Hóquei no Gelo
+                </a>
+            </div>
+            <div *ngIf="tenisMesaHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/tenis-mesa']">
+                    <i class="wbicon icon-tenis-de-mesa"></i> Tênis de Mesa
+                </a>
+            </div>
+            <div *ngIf="esportsHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/esports']">
+                    <i class="wbicon icon-e-sports"></i> E-Sports
+                </a>
+            </div>
+            <div *ngIf="desafioHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/desafios']">
+                    <i class="fa fa-trophy"></i> Desafio
+                </a>
+            </div>
+            <div *ngIf="acumuladaoHabilitado" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/acumuladao/listagem']">
+                    <i class="fa fa-money"></i> Acumuladão
+                </a>
+            </div>
+            <div *ngIf="loteriasHabilitado && seninhaAtiva" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/loterias/seninha']">
+                    <svg-icon src="https://cdn.wee.bet/img/clover.svg" [svgStyle]="svgCss()"></svg-icon>
+                    <span>{{'seninha' | sorteioTipo}}</span>
+                </a>
+            </div>
+            <div *ngIf="loteriasHabilitado && quininhaAtiva" class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/loterias/quininha']">
+                    <svg-icon src="https://cdn.wee.bet/img/clover.svg" [svgStyle]="svgCss()"></svg-icon>
+                    <span>{{'quininha' | sorteioTipo}}</span>
+                </a>
+            </div>
         </div>
-        <div class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/futebol/jogos']">
-                <svg-icon src="assets/images/soccer.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>Futebol</span>
-            </a>
-        </div>
-        <div *ngIf="basqueteHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/basquete/eventos']">
-                <svg-icon src="assets/images/basketball.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>Basquete</span>
-            </a>
-        </div>
-        <div *ngIf="combateHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/combate/eventos']">
-                <svg-icon src="assets/images/boxing.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>Combate</span>
-            </a>
-        </div>
-        <div *ngIf="esportsHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/esportes/esports/eventos']">
-                <i class="fa fa-gamepad"></i> E-Sports
-            </a>
-        </div>
-        <div *ngIf="desafioHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/desafios']">
-                <i class="fa fa-trophy"></i> Desafio
-            </a>
-        </div>
-        <div *ngIf="acumuladaoHabilitado" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/acumuladao/listagem']">
-                <i class="fa fa-money"></i> Acumuladão
-            </a>
-        </div>
-        <div *ngIf="loteriasHabilitado && seninhaAtiva" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/loterias/seninha']">
-                <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>{{'seninha' | sorteioTipo}}</span>
-            </a>
-        </div>
-        <div *ngIf="loteriasHabilitado && quininhaAtiva" class="category" routerLinkActive="active">
-            <a class="" [routerLink]="['/loterias/quininha']">
-                <svg-icon src="assets/images/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                <span>{{'quininha' | sorteioTipo}}</span>
-            </a>
+        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
+            <i class="fa fa-angle-right fa-right"></i>
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">

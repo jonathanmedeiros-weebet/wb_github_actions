@@ -8,7 +8,6 @@ import {ApostaEsportivaService, JogoService} from './../../services';
 @NgModule({
     imports: [
         SharedModule,
-        EsportesModule,
         FutebolRoutingModule
     ],
     declarations: [],

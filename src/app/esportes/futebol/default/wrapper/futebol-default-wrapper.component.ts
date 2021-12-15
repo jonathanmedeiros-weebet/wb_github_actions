@@ -37,7 +37,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 dados => {
-                    if (dados.contexto !== 'futebol') {
+                    if (dados.esporte !== 'futebol') {
                         this.getCampeonatos2Sidebar();
                     }
                 }
@@ -79,7 +79,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 } else {
                     const queryParams: any = {
                         'sport_id': 1,
-                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(),
+                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
                         'odds': this.oddsPrincipais
                     };
 
@@ -131,7 +131,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     getCampeonatos2Sidebar() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(1);
         const opcoes = this.paramsService.getOpcoes();
         const params = {
             'sport_id': 1,
@@ -142,7 +142,15 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                campeonatos => this.sidebarService.changeItens(campeonatos, 'futebol'),
+                campeonatos => {
+                    const dados = {
+                        itens: campeonatos,
+                        contexto: 'esportes',
+                        esporte: 'futebol'
+                    };
+
+                    this.sidebarService.changeItens(dados);
+                },
                 error => this.messageService.error(error)
             );
     }

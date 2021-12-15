@@ -39,7 +39,14 @@ export class DesafiosWrapperComponent implements OnInit, OnDestroy {
         this.desafioCategoriaService.getCategorias()
             .pipe(take(1))
             .subscribe(
-                categorias => this.sidebarService.changeItens(categorias, 'desafio'),
+                categorias => {
+                    const dados = {
+                        itens: categorias,
+                        contexto: 'desafio'
+                    };
+
+                    this.sidebarService.changeItens(dados);
+                },
                 error => this.messageService.error(error)
             );
     }

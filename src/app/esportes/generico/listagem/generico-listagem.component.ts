@@ -1,34 +1,31 @@
 import {
-    Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
-    ChangeDetectorRef, Input, OnChanges, SimpleChange
+    Component, OnInit, OnDestroy, Renderer2, ElementRef,
+    Input, ChangeDetectorRef, ChangeDetectionStrategy,
+    SimpleChange, OnChanges
 } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from './../../../../services';
+import { Campeonato, Jogo, ItemBilheteEsportivo } from '../../../models';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from '../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-futebol-listagem',
+    selector: 'app-generico-listagem',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: 'futebol-listagem.component.html',
-    styleUrls: ['futebol-listagem.component.css']
+    templateUrl: 'generico-listagem.component.html',
+    styleUrls: ['generico-listagem.component.css']
 })
-export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
+export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
-    @Input() deixarCampeonatosAbertos;
-    @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
     @Input() data;
-    @Output() jogoSelecionadoId = new EventEmitter();
-    @Output() exibirMaisCotacoes = new EventEmitter();
+    @Input() sportId;
+    @Input() esporte;
     mobileScreen = true;
     campeonatos: Campeonato[];
-    campeonatosAbertos = [];
     itens: ItemBilheteEsportivo[] = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
@@ -37,9 +34,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     dataLimiteTabela;
     contentSportsEl;
     start;
-    offset;
+    offset = 20;
     total;
-    exibirCampeonatosExpandido;
     loadingScroll = false;
     unsub$ = new Subject();
 
@@ -58,9 +54,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
-        this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
-        this.offset = this.exibirCampeonatosExpandido ? 5 : 20;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -87,7 +81,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.start = 0;
             this.total = Math.ceil(this.camps.length / this.offset);
             this.campeonatos = [];
-            this.campeonatosAbertos = [];
             this.exibirMais();
 
             setTimeout(() => {
@@ -202,61 +195,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
-    toggleCampeonato(campeonatoId) {
-        const index = this.campeonatosAbertos.findIndex(id => id === campeonatoId);
-        if (index >= 0) {
-            this.campeonatosAbertos.splice(index, 1);
-        } else {
-            this.campeonatosAbertos.push(campeonatoId);
-        }
-    }
-
-    campeonatoAberto(campeonatoId) {
-        return this.campeonatosAbertos.includes(campeonatoId);
-    }
-
-    // Extrai id do primeiro jogo do primeiro campeonato
-    extrairJogoId(campeonatos) {
-        let jogoId = null;
-
-        if (campeonatos.length > 1) {
-            const jogos = campeonatos[0].jogos;
-
-            let start = 0;
-            let stop = false;
-
-            while (!stop) {
-                if (jogos.length > 1) {
-                    jogoId = jogos[start]._id;
-                    stop = true;
-                } else if (jogos.length === 1) {
-                    jogoId = jogos[start]._id;
-                    stop = true;
-                }
-
-                start++;
-            }
-        } else if (campeonatos.length === 1) {
-            const jogos = campeonatos[0].jogos;
-
-            if (jogos.length > 1) {
-                jogoId = jogos[0]._id;
-            } else if (jogos.length === 1) {
-                jogoId = jogos[0]._id;
-            }
-        }
-
-        this.jogoIdAtual = jogoId;
-        return jogoId;
-    }
-
-    // Exibindo todas as cotações daquele jogo selecionado
-    maisCotacoes(jogoId) {
-        this.jogoIdAtual = jogoId;
-        this.jogoSelecionadoId.emit(jogoId);
-        this.exibirMaisCotacoes.emit(true);
-    }
-
     exibirMais() {
         this.loadingScroll = true;
 
@@ -266,7 +204,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
                         cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
-                        cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
                     });
                 });
 
@@ -274,11 +212,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             });
 
             this.campeonatos = this.campeonatos.concat(splice);
-
-            if (this.exibirCampeonatosExpandido || this.deixarCampeonatosAbertos) {
-                const spliceIds = splice.map(campeonato => campeonato._id);
-                this.campeonatosAbertos = this.campeonatosAbertos.concat(spliceIds);
-            }
 
             this.start++;
         }
@@ -291,8 +224,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         let result = false;
 
         if (this.data) {
-            const proximaData = moment(this.data);
-            if (proximaData.day() !== 0) {
+            const proximaData = moment(this.data).add(1, 'd');
+            if (proximaData.day() !== 0 && proximaData.isSameOrBefore(this.dataLimiteTabela)) {
                 result = true;
             }
         }
@@ -301,11 +234,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     proximaData() {
-        const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
-        const navigationExtras: NavigationExtras = {
-            queryParams: { 'data': proximaData }
-        };
-        this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
+        const proximaData = moment(this.data).add(1, 'd');
+
+        if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
+            const navigationExtras: NavigationExtras = {
+                queryParams: { 'data': proximaData.format('YYYY-MM-DD') }
+            };
+            this.router.navigate([`/esportes/${this.esporte}`], navigationExtras);
+        }
     }
 
     cotacaoPermitida(cotacao) {

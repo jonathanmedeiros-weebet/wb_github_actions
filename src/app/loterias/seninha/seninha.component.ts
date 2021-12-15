@@ -74,7 +74,13 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
                     }
                     this.qtdNumerosLista.push(tipoAposta.qtdNumeros);
                 });
-                this.sidebarService.changeItens(tiposAposta, 'seninha');
+
+                const dados = {
+                    itens: tiposAposta,
+                    contexto: 'seninha'
+                };
+
+                this.sidebarService.changeItens(dados);
             },
             error => this.messageService.error(error)
         );
