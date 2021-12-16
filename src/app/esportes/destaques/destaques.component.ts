@@ -10,7 +10,7 @@ import {CampeonatoService} from '../../shared/services/aposta-esportiva/campeona
     templateUrl: './destaques.component.html',
     styleUrls: ['./destaques.component.css']
 })
-export class DestaquesComponent implements OnInit, AfterViewInit {
+export class DestaquesComponent implements OnInit {
     @Input() campeonatosDestaques = null;
     campeonatoSelecionado = false;
     unsub$ = new Subject();
@@ -26,7 +26,7 @@ export class DestaquesComponent implements OnInit, AfterViewInit {
         if (window.innerWidth > 1025) {
             this.menuWidth = window.innerWidth - (250 + 280);
         } else {
-            this.menuWidth = window.innerWidth;
+            this.menuWidth = window.innerWidth - 10;
         }
 
         this.cd.detectChanges();
@@ -47,9 +47,9 @@ export class DestaquesComponent implements OnInit, AfterViewInit {
         const opcoes = this.paramsService.getOpcoes();
         const params = {
             'sport_id': 1,
-            'campeonatos_bloqueados': campeonatosBloqueados,
+            // 'campeonatos_bloqueados': campeonatosBloqueados,
             'campeonatos': this.paramsService.getCampeonatosPrincipais(),
-            'data_final': opcoes.data_limite_tabela,
+            // 'data_final': null,
         };
 
         console.log(this.paramsService.getCampeonatosPrincipais());
@@ -70,12 +70,8 @@ export class DestaquesComponent implements OnInit, AfterViewInit {
         if (window.innerWidth > 1025) {
             this.menuWidth = window.innerWidth - (250 + 280);
         } else {
-            this.menuWidth = window.innerWidth;
+            this.menuWidth = window.innerWidth - 10;
         }
-    }
-
-    ngAfterViewInit() {
-        //
     }
 
     checkScrollButtons() {

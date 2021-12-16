@@ -11,6 +11,11 @@
     padding-top: 5px;
 }
 
+.wbicon {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
 .navbar-toggler {
     color: var(--foreground-header);
 }
