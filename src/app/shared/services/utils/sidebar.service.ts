@@ -32,10 +32,7 @@ export class SidebarService {
         this.isOpenSource.next(this.open);
     }
 
-    changeItens(itens, contexto) {
-        this.itensSource.next({
-            itens: itens,
-            contexto: contexto
-        });
+    changeItens(dados) {
+        this.itensSource.next(dados);
     }
 }

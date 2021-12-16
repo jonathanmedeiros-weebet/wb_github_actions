@@ -74,7 +74,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
                     }
                     this.qtdNumerosLista.push(tipoAposta.qtdNumeros);
                 });
-                this.sidebarService.changeItens(tiposAposta, 'quininha');
+
+                const dados = {
+                    itens: tiposAposta,
+                    contexto: 'quininha'
+                };
+
+                this.sidebarService.changeItens(dados);
             },
             error => this.messageService.error(error)
         );

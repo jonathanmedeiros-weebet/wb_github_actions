@@ -5,12 +5,12 @@
         </a>
     </div>
     <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active">
-        <a class="" [routerLink]="['/esportes/futebol/live']">
+        <a class="" [routerLink]="['/esportes/live']">
             <i class="fa fa-play"></i> Ao Vivo
         </a>
     </div>
     <div *ngIf="!aoVivoHabilitado" class="foot-button" routerLinkActive="active">
-        <a class="" [routerLink]="['/esportes/futebol/jogos']">
+        <a class="" [routerLink]="['/esportes/futebol']">
             <svg-icon src="assets/images/soccer.svg" [svgStyle]="svgCss()"></svg-icon>
             <span>Futebol</span>
         </a>

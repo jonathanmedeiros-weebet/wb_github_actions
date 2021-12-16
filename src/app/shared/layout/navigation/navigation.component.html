@@ -103,7 +103,8 @@
                             <a class="dropdown-item" [routerLink]="['/cartoes/solicitacoes-saque']">
                                 Solicitações Saque
                             </a>
-                            <a class="dropdown-item" *ngIf="permitirAtivacaoCartao()" (click)="abrirModalAtivarCartao()">Ativar</a>
+                            <a class="dropdown-item" *ngIf="permitirAtivacaoCartao()"
+                                (click)="abrirModalAtivarCartao()">Ativar</a>
                             <a class="dropdown-item" (click)="abrirModalRecargaCartao()">Recarga</a>
                         </ng-container>
                         <ng-template #notLoggedIn>
@@ -119,96 +120,65 @@
             </ul>
         </div>
         <ul id="menu-side-left" class="sidebar-nav">
-            <ng-container *ngIf="contexto == 'futebol'">
+            <ng-container *ngIf="contexto == 'esportes'">
                 <span class="group">Destaques</span>
                 <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
-                    <li (click)="goTo('/esportes/futebol/jogos')">
+                    <li (click)="goTo('/esportes/' + esporte)">
                         <a>
                             Jogos de Hoje
                         </a>
                     </li>
                 </ng-container>
                 <ng-template #principais>
-                    <li (click)="goTo('/esportes/futebol/jogos')">
+                    <li (click)="goTo('/esportes/' + esporte)">
                         <a>
                             Campeonatos Principais
                         </a>
                     </li>
-                    <li (click)="goTo('/esportes/futebol/jogos', { data: hoje.format('YYYY-MM-DD') })">
+                    <li (click)="goTo('/esportes/' + esporte, { data: hoje.format('YYYY-MM-DD') })">
                         <a>
                             Jogos de Hoje
                         </a>
                     </li>
                 </ng-template>
                 <li *ngIf="exibirJogosAmanha()"
-                    (click)="goTo('/esportes/futebol/jogos', { data: amanha.format('YYYY-MM-DD') })">
+                    (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">
                     <a>
                         Jogos de Amanhã
                     </a>
                 </li>
-                <li *ngFor="let dia of dias" (click)="goTo('/esportes/futebol/jogos', { data: dia.format })">
+                <li *ngFor="let dia of dias" (click)="goTo('/esportes/' + esporte, { data: dia.format })">
                     <a>
                         Jogos de {{dia.descricao}}
                     </a>
                 </li>
-                <span class="group">Campeonatos</span>
-                <li class="regiao" *ngFor="let regiao of itens">
-                    <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
-                        <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
-                    </a>
-                    <ul *ngIf="regiao._id == regiaoOpen">
-                        <li *ngFor="let campeonato of regiao.campeonatos"
-                            (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
-                            <a>
-                                {{campeonato.nome.replace(regiao._id+': ', '')}}
-                            </a>
-                        </li>
+                <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
+                    <span class="group">Campeonatos</span>
+                    <li class="regiao" *ngFor="let regiao of itens">
+                        <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
+                            <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao._id}}
+                        </a>
+                        <ul *ngIf="regiao._id == regiaoOpen">
+                            <li *ngFor="let campeonato of regiao.campeonatos"
+                                (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
+                                <a>
+                                    {{campeonato.nome.replace(regiao._id+': ', '')}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ng-container>
+                <ng-template #esporteGenerico>
+                    <span class="group">Campeonatos</span>
+                    <li class="campeonato" *ngFor="let campeonato of itens"
+                        (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
+                        <a>
+                            <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                        </a>
+                    </li>
+                </ng-template>
+            </ng-container>
 
-                    </ul>
-                </li>
-            </ng-container>
-            <ng-container *ngIf="contexto == 'basquete'">
-                <span class="group">Destaques</span>
-                <li (click)="goTo('/esportes/basquete/eventos', { data: hoje.format('YYYY-MM-DD') })">
-                    <a>
-                        Jogos de Hoje
-                    </a>
-                </li>
-                <li *ngIf="exibirJogosAmanha()"
-                    (click)="goTo('/esportes/basquete/eventos', { data: amanha.format('YYYY-MM-DD') })">
-                    <a>
-                        Jogos de Amanhã
-                    </a>
-                </li>
-                <span class="group">Campeonatos</span>
-                <li class="campeonato" *ngFor="let campeonato of itens"
-                    (click)="goTo('/esportes/basquete/eventos', { campeonato: campeonato._id })">
-                    <a>
-                        <i class="fa fa-certificate"></i> {{campeonato.nome}}
-                    </a>
-                </li>
-            </ng-container>
-            <ng-container *ngIf="contexto == 'esports'">
-                <span class="group">Destaques</span>
-                <li (click)="goTo('/esportes/esports/eventos', { data: hoje.format('YYYY-MM-DD') })">
-                    <a>
-                        Jogos de Hoje
-                    </a>
-                </li>
-                <li *ngIf="exibirJogosAmanha()"
-                    (click)="goTo('/esportes/esports/eventos', { data: amanha.format('YYYY-MM-DD') })">
-                    <a>
-                        Jogos de Amanhã
-                    </a>
-                </li>
-                <span class="group">Campeonatos</span>
-                <li class="campeonato" *ngFor="let campeonato of itens"
-                    (click)="goTo('/esportes/esports/eventos', { campeonato: campeonato._id })">
-                    <a>
-                        <i class="fa fa-gamepad"></i> {{campeonato.nome}}
-                    </a>
-                </li>
-            </ng-container>
             <ng-container *ngIf="contexto == 'desafio'">
                 <span class="group">Desafios</span>
                 <li class="categoria" (click)="goTo('/desafios')">
@@ -223,6 +193,7 @@
                     </a>
                 </li>
             </ng-container>
+
             <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
                 <span class="group">Surpresinha</span>
                 <li class="supresinha" *ngFor="let tipoAposta of itens"
