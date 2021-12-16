@@ -17,7 +17,7 @@ export class ExpiresGuard implements CanActivateChild {
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.auth.isExpired()) {
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/']);
             return false;
         }
         return true;
