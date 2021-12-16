@@ -10,6 +10,7 @@ export { CalcularCotacaoPipe } from './calcular-cotacao.pipe';
 export { OddCategoriaPipe } from './odd-categoria.pipe';
 export { SafeHTMLPipe } from './safe-html.pipe';
 export { SorteioTipoPipe } from './sorteio-tipo.pipe';
+export { SanitizeCampNamePipe } from './sanitize-camp-name.pipe';
 
 //
 export { CustomEncoder } from './custom-encoder';

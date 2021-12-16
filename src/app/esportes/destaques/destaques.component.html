@@ -1,21 +1,33 @@
-<div class="destaques-container" [hidden]="campeonatoSelecionado">
-    <div class="destaque-header">
-        <span class="column-left">Destaques</span>
+<div class="campeonato-header" [hidden]="campeonatoSelecionado || campeonatosDestaques === null">
+    Destaques
+</div>
+<div class="menu-camp-destaques" [hidden]="campeonatoSelecionado || campeonatosDestaques == null">
+    <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
+        <i class="fa fa-angle-left fa-left"></i>
     </div>
-    <div class="destaques">
+    <div class="menu-camp-destaques scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
+         [ngStyle]="{'width.px': menuWidth}" #scrollDestaques>
         <div class="campeonato" *ngFor="let campeonato of campeonatosDestaques">
             <a (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
                 <i class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></i>
-                <span class="campeonato-nome">{{campeonato.nome}}</span>
+                <span class="campeonato-nome">{{campeonato.nome | sanitizeCampName}}</span>
             </a>
         </div>
+    </div>
+    <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
+        <i class="fa fa-angle-right fa-right"></i>
     </div>
 </div>
 
 
 <div class="back-button" [hidden]="!campeonatoSelecionado">
-    <a class="back" (click)="back()">
-        <i class="fa fa-arrow-left"></i>
-        Voltar
-    </a>
+    <div class="campeonato-header">
+        Destaque
+    </div>
+    <div class="menu-camp-destaques" >
+        <a class="back" (click)="back()">
+            <i class="fa fa-arrow-left"></i>
+            Voltar
+        </a>
+    </div>
 </div>

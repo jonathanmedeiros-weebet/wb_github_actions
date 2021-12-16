@@ -9,7 +9,8 @@ import {
     OddCategoriaPipe,
     SorteioTipoPipe,
     InfiniteScrollDirective,
-    SafeHTMLPipe
+    SafeHTMLPipe,
+    SanitizeCampNamePipe
 } from './index';
 import { SplitCodigoPipe } from './split-codigo.pipe';
 import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
@@ -26,7 +27,8 @@ import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
         SorteioTipoPipe,
         InfiniteScrollDirective,
         SplitCodigoPipe,
-        FormatarNaturezaPipe
+        FormatarNaturezaPipe,
+        SanitizeCampNamePipe
     ],
     exports: [
         MomentPipe,
@@ -39,7 +41,8 @@ import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
         SorteioTipoPipe,
         InfiniteScrollDirective,
         SplitCodigoPipe,
-        FormatarNaturezaPipe
+        FormatarNaturezaPipe,
+        SanitizeCampNamePipe
     ]
 })
 export class UtilsModule { }
