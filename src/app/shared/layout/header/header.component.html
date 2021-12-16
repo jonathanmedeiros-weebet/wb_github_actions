@@ -84,9 +84,7 @@
             <i class="fa fa-angle-left fa-left"></i>
         </div>
         <div class="menu-categories scroll" scrollX="true"
-             [ngClass]="{
-             'justify-center': leftDisabled && rightDisabled && menuWidth <= screenWidth,
-             'justify-normal': screenWidth <= 1025 && menuWidth > screenWidth}"
+             [ngClass]="menuCategoriesClasses()"
             [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/live']">

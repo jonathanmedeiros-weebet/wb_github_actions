@@ -66,7 +66,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     rightDisabled: boolean = false;
     leftDisabled: boolean = true;
     scrollPosition = 0;
-    screenWidth;
     scrollWidth;
 
     @HostListener('window:resize', ['$event'])
@@ -76,7 +75,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         } else {
             this.menuWidth = window.innerWidth;
         }
-        this.screenWidth = window.innerWidth;
+
+        this.cd.detectChanges();
+
         this.checkScrollButtons();
     }
 
@@ -141,7 +142,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         } else {
             this.menuWidth = window.innerWidth;
         }
-        this.screenWidth = window.innerWidth;
     }
 
     ngOnDestroy() {
@@ -154,7 +154,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     checkScrollButtons() {
-        this.cd.detectChanges();
         this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
         if (this.menuWidth >= this.scrollWidth) {
             this.rightDisabled = true;
@@ -251,6 +250,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             'width.rem': 2,
             'fill': 'var(--foreground-header)',
             'margin-bottom.px': '5'
+        };
+    }
+
+    menuCategoriesClasses() {
+        return {
+            'justify-center': this.leftDisabled && this.rightDisabled && this.menuWidth <= window.innerWidth,
+            'justify-normal': window.innerWidth <= 1025 && this.menuWidth > window.innerWidth
         };
     }
 }
