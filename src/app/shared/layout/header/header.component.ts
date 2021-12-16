@@ -66,10 +66,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     rightDisabled: boolean = false;
     leftDisabled: boolean = true;
     scrollPosition = 0;
+    screenWidth;
+    scrollWidth;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
-        this.menuWidth = window.innerWidth - (250 + 280);
+        if (window.innerWidth > 1025) {
+            this.menuWidth = window.innerWidth - (250 + 280);
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
+        this.screenWidth = window.innerWidth;
         this.checkScrollButtons();
     }
 
@@ -129,7 +136,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.menuWidth = window.innerWidth - (250 + 280);
+        if (window.innerWidth > 1025) {
+            this.menuWidth = window.innerWidth - (250 + 280);
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
+        this.screenWidth = window.innerWidth;
     }
 
     ngOnDestroy() {
@@ -139,16 +151,18 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     ngAfterViewInit() {
         this.checkScrollButtons();
-        this.cd.detectChanges();
     }
 
     checkScrollButtons() {
-        if (this.menuWidth >= this.scrollMenu.nativeElement.scrollWidth) {
+        this.cd.detectChanges();
+        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+        if (this.menuWidth >= this.scrollWidth) {
             this.rightDisabled = true;
             this.leftDisabled = true;
         } else {
             this.rightDisabled = false;
         }
+        this.cd.detectChanges();
     }
 
     scrollLeft() {
