@@ -66,10 +66,18 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     rightDisabled: boolean = false;
     leftDisabled: boolean = true;
     scrollPosition = 0;
+    scrollWidth;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
-        this.menuWidth = window.innerWidth - (250 + 280);
+        if (window.innerWidth > 1025) {
+            this.menuWidth = window.innerWidth - (250 + 280);
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
+
+        this.cd.detectChanges();
+
         this.checkScrollButtons();
     }
 
@@ -129,7 +137,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.getUsuario();
         this.createForm();
 
-        this.menuWidth = window.innerWidth - (250 + 280);
+        if (window.innerWidth > 1025) {
+            this.menuWidth = window.innerWidth - (250 + 280);
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
     }
 
     ngOnDestroy() {
@@ -139,16 +151,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     ngAfterViewInit() {
         this.checkScrollButtons();
-        this.cd.detectChanges();
     }
 
     checkScrollButtons() {
-        if (this.menuWidth >= this.scrollMenu.nativeElement.scrollWidth) {
+        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+        if (this.menuWidth >= this.scrollWidth) {
             this.rightDisabled = true;
             this.leftDisabled = true;
         } else {
             this.rightDisabled = false;
         }
+        this.cd.detectChanges();
     }
 
     scrollLeft() {
@@ -237,6 +250,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             'width.rem': 2,
             'fill': 'var(--foreground-header)',
             'margin-bottom.px': '5'
+        };
+    }
+
+    menuCategoriesClasses() {
+        return {
+            'justify-center': this.leftDisabled && this.rightDisabled && this.menuWidth <= window.innerWidth,
+            'justify-normal': window.innerWidth <= 1025 && this.menuWidth > window.innerWidth
         };
     }
 }
