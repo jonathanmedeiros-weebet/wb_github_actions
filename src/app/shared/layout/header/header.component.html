@@ -9,7 +9,8 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -22,9 +23,8 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" target="_blank"
-                       href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                       *ngIf="isCliente">
+                    <a class="dropdown-item" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
+                        *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>
 
@@ -33,7 +33,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="isCliente">
+                        *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -49,24 +49,27 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
                         <div class="form-group" [ngClass]="applyCssDivError('password')">
-                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')" formControlName="password" placeholder="Senha">
+                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
+                                formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
                         Esqueci minha senha?
                     </a>
                     <a class="dropdown-item" [routerLink]="['/auth/cadastro']" *ngIf="modoClienteAtivo">
@@ -77,10 +80,11 @@
         </ng-template>
     </nav>
     <div class="menu-categories margin-categories">
-        <div class="pull" (click)="scrollLeft()" [ngClass]="this.leftDisabled ? 'visibility':''">
+        <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
             <i class="fa fa-angle-left fa-left"></i>
         </div>
-        <div class="menu-categories scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
+        <div class="menu-categories scroll" scrollX="true" [ngClass]="{'justify-center': leftDisabled && rightDisabled}"
+            [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/live']">
                     <i class="wbicon icon-ao-vivo"></i> Ao Vivo
@@ -160,13 +164,14 @@
                 </a>
             </div>
         </div>
-        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="this.rightDisabled ? 'visibility':''">
+        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
             <i class="fa fa-angle-right fa-right"></i>
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
@@ -179,9 +184,8 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" target="_blank"
-                       href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                       *ngIf="isCliente">
+                    <a class="dropdown-item" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
+                        *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
                     </a>
 
@@ -190,7 +194,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="isCliente">
+                        *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
@@ -206,18 +210,21 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username" [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                            <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
 
                         </div>
                         <div class="form-group" [ngClass]="applyCssDivError('password')">
-                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')" formControlName="password" placeholder="Senha">
+                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
+                                formControlName="password" placeholder="Senha">
                             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
