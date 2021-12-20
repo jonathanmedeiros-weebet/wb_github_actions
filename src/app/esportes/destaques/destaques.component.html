@@ -8,7 +8,7 @@
     <div class="menu-camp-destaques scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
          [ngStyle]="{'width.px': menuWidth}" #scrollDestaques>
         <div class="campeonato" *ngFor="let campeonato of campeonatosDestaques">
-            <a (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato._id })">
+            <a (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato.id })">
                 <i class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></i>
                 <span class="campeonato-nome">{{campeonato.nome | sanitizeCampName}}</span>
             </a>

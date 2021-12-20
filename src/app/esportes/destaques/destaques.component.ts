@@ -1,4 +1,13 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import {Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
@@ -28,9 +37,7 @@ export class DestaquesComponent implements OnInit {
         } else {
             this.menuWidth = window.innerWidth - 10;
         }
-
         this.cd.detectChanges();
-
         this.checkScrollButtons();
     }
 
@@ -43,30 +50,7 @@ export class DestaquesComponent implements OnInit {
     }
 
     ngOnInit() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
-        const opcoes = this.paramsService.getOpcoes();
-        const params = {
-            'sport_id': 1,
-            // 'campeonatos_bloqueados': campeonatosBloqueados,
-            'campeonatos': this.paramsService.getCampeonatosPrincipais(),
-            // 'data_final': null,
-        };
-
-        console.log(this.paramsService.getCampeonatosPrincipais());
-
-        if (params['campeonatos'].length) {
-            this.campeonatoService.getCampeonatos(params)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    campeonatosDestaque => {
-                        console.log(campeonatosDestaque);
-                        this.campeonatosDestaques = campeonatosDestaque;
-                        this.cd.detectChanges();
-                        this.checkScrollButtons();
-                    }
-                );
-        }
-
+        this.campeonatosDestaques = this.paramsService.getCampeonatosPrincipais()
         if (window.innerWidth > 1025) {
             this.menuWidth = window.innerWidth - (250 + 280);
         } else {
