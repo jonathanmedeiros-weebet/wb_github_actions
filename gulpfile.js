@@ -1675,3 +1675,12 @@ gulp.task('wbets.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bets89.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bets89.wee.bet",
+        banca: "BETS 89",
+        styles: "",
+    });
+});
