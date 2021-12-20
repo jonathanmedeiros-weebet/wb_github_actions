@@ -820,15 +820,6 @@ gulp.task('bigbets.website', function (done) {
     });
 });
 
-gulp.task('bets085.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bets085.wee.bet",
-        banca: "BETS 085",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
 gulp.task('soccer787.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1415,15 +1406,6 @@ gulp.task('pixsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('cariocavip.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "cariocavip.wee.bet",
-        banca: "CARIOCA VIP",
-        styles: "",
-    });
-});
-
 gulp.task('zaplances.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1681,6 +1663,15 @@ gulp.task('bets89.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "bets89.wee.bet",
         banca: "BETS 89",
+        styles: "",
+    });
+});
+
+gulp.task('sportebets.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sportebets.com.br",
+        banca: "SPORTE BETS",
         styles: "",
     });
 });
