@@ -1,16 +1,16 @@
-<div class="campeonato-header" [hidden]="campeonatoSelecionado || campeonatosDestaques === null">
+<div class="campeonato-header" [hidden]="!regioesDestaque">
     Destaques
 </div>
-<div class="menu-camp-destaques" [hidden]="campeonatoSelecionado || campeonatosDestaques == null">
+<div class="menu-camp-destaques" [hidden]="!regioesDestaque">
     <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
         <i class="fa fa-angle-left fa-left"></i>
     </div>
     <div class="menu-camp-destaques scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
          [ngStyle]="{'width.px': menuWidth}" #scrollDestaques>
-        <div class="campeonato" *ngFor="let campeonato of campeonatosDestaques">
-            <a (click)="goTo('/esportes/futebol/jogos', { campeonato: campeonato.id })">
-                <i class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></i>
-                <span class="campeonato-nome">{{campeonato.nome | sanitizeCampName}}</span>
+        <div class="campeonato" *ngFor="let regiao of regioesDestaque">
+            <a (click)="selecionarRegiao(regiao.sigla)">
+                <i class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></i>
+                <span class="campeonato-nome">{{regiao.nome}}</span>
             </a>
         </div>
     </div>
@@ -20,7 +20,7 @@
 </div>
 
 
-<div class="back-button" [hidden]="!campeonatoSelecionado">
+<div class="back-button" [hidden]="true">
     <div class="campeonato-header">
         Destaque
     </div>

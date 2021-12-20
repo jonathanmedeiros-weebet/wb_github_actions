@@ -1,6 +1,6 @@
 <div class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
     <app-banners></app-banners>
-    <app-destaques></app-destaques>
+    <app-destaques (regiaoSelecionada)="receptorRegiaoSelecionada($event)"></app-destaques>
     <div class="wrap-sticky">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 

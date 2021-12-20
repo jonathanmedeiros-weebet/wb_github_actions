@@ -3,13 +3,18 @@ import {
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
     ChangeDetectorRef, Input, OnChanges, SimpleChange
 } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import {Router, NavigationExtras} from '@angular/router';
 
-import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import {ParametrosLocaisService, BilheteEsportivoService, HelperService, CampeonatoService} from './../../../../services';
+import {Campeonato, Jogo, ItemBilheteEsportivo} from './../../../../models';
+import {
+    ParametrosLocaisService,
+    BilheteEsportivoService,
+    HelperService,
+    CampeonatoService
+} from './../../../../services';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -23,6 +28,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() deixarCampeonatosAbertos;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
+    todosCampeonatos: Campeonato[];
     @Input() data;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
@@ -42,6 +48,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     exibirCampeonatosExpandido;
     loadingScroll = false;
     campeonatosDestaques;
+    regiaoSelecionada;
     unsub$ = new Subject();
 
     constructor(
@@ -53,7 +60,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         private campeonatoService: CampeonatoService,
         private cd: ChangeDetectorRef,
         private router: Router
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
@@ -260,6 +268,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirMais() {
+        console.log(this.camps);
         this.loadingScroll = true;
 
         if (this.start < this.total) {
@@ -305,12 +314,23 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     proximaData() {
         const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
         const navigationExtras: NavigationExtras = {
-            queryParams: { 'data': proximaData }
+            queryParams: {'data': proximaData}
         };
         this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
     }
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    receptorRegiaoSelecionada(regiaoSelecionada) {
+        console.log('Regiao selecionado:', regiaoSelecionada);
+        this.regiaoSelecionada = regiaoSelecionada;
+
+        // let filteredCamps = this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada);
+
+        // console.log(filteredCamps);
+        console.log(this.todosCampeonatos);
+        // console.log(this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada));
     }
 }

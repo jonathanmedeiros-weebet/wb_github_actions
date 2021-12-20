@@ -3,26 +3,24 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     HostListener,
-    Input,
     OnInit,
+    Output,
     ViewChild
 } from '@angular/core';
 import {Router} from '@angular/router';
-import {takeUntil} from 'rxjs/operators';
-import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {Subject} from 'rxjs';
-import {CampeonatoService} from '../../shared/services/aposta-esportiva/campeonato.service';
+import {UtilsService} from "../../shared/services/utils/utils.service";
 
 @Component({
     selector: 'app-destaques',
     templateUrl: './destaques.component.html',
     styleUrls: ['./destaques.component.css']
 })
-export class DestaquesComponent implements OnInit {
-    @Input() campeonatosDestaques = null;
-    campeonatoSelecionado = false;
-    unsub$ = new Subject();
+export class DestaquesComponent implements OnInit, AfterViewInit {
+    @Output() regiaoSelecionada = new EventEmitter();
+    regioesDestaque = null;
+
     menuWidth;
     @ViewChild('scrollDestaques') scrollDestaques: ElementRef;
     rightDisabled = false;
@@ -43,19 +41,28 @@ export class DestaquesComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private paramsService: ParametrosLocaisService,
-        private campeonatoService: CampeonatoService,
+        private utilsService: UtilsService,
         private cd: ChangeDetectorRef
     ) {
     }
 
     ngOnInit() {
-        this.campeonatosDestaques = this.paramsService.getCampeonatosPrincipais()
+        this.utilsService.getRegioesDestaque()
+            .subscribe(
+                res => {
+                    this.regioesDestaque = res;
+                }
+            );
+
         if (window.innerWidth > 1025) {
             this.menuWidth = window.innerWidth - (250 + 280);
         } else {
             this.menuWidth = window.innerWidth - 10;
         }
+    }
+
+    ngAfterViewInit() {
+        this.checkScrollButtons();
     }
 
     checkScrollButtons() {
@@ -97,18 +104,16 @@ export class DestaquesComponent implements OnInit {
 
     menuCategoriesClasses() {
         return {
-            'justify-center': this.leftDisabled && this.rightDisabled && this.menuWidth <= window.innerWidth,
-            'justify-normal': window.innerWidth <= 1025 && this.menuWidth > window.innerWidth
+            'justify-center': this.leftDisabled && this.rightDisabled && this.menuWidth <= (window.innerWidth - 10),
+            'justify-normal': window.innerWidth <= 1025 && this.menuWidth > (window.innerWidth - 10)
         };
     }
 
-    goTo(url, queryParams) {
-        this.campeonatoSelecionado = true;
-        this.router.navigate([url], {queryParams});
+    selecionarRegiao(siglaRegiao) {
+        this.regiaoSelecionada.emit(siglaRegiao);
     }
 
     back() {
-        this.campeonatoSelecionado = false;
-        this.router.navigate(['/esportes/futebol/jogos']);
+        console.log('back');
     }
 }
