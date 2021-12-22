@@ -121,7 +121,15 @@
         </div>
         <ul id="menu-side-left" class="sidebar-nav">
             <ng-container *ngIf="contexto == 'esportes'">
-                <span class="group">Destaques</span>
+                <ng-container *ngIf="regioesDestaque">
+                    <span class="group">Destaques</span>
+                    <li *ngFor="let regiao of regioesDestaque">
+                        <a>
+                            {{regiao.nome}}
+                        </a>
+                    </li>
+                </ng-container>
+                <span class="group">Datas</span>
                 <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
                     <li (click)="goTo('/esportes/' + esporte)">
                         <a>

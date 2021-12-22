@@ -1,12 +1,8 @@
-<div class="campeonato-header" [hidden]="!regioesDestaque">
+<div class="campeonato-header" [hidden]="!regioesDestaque || exibindoRegiao">
     Destaques
 </div>
-<div class="menu-camp-destaques" [hidden]="!regioesDestaque">
-    <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
-        <i class="fa fa-angle-left fa-left"></i>
-    </div>
-    <div class="menu-camp-destaques scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
-         [ngStyle]="{'width.px': menuWidth}" #scrollDestaques>
+<div class="menu-camp-destaques" [hidden]="!regioesDestaque|| exibindoRegiao">
+    <div class="menu-camp-destaques"[ngStyle]="{'width.px': menuWidth}">
         <div class="campeonato" *ngFor="let regiao of regioesDestaque">
             <a (click)="selecionarRegiao(regiao.sigla)">
                 <i class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></i>
@@ -14,18 +10,10 @@
             </a>
         </div>
     </div>
-    <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
-        <i class="fa fa-angle-right fa-right"></i>
-    </div>
 </div>
-
-
-<div class="back-button" [hidden]="true">
-    <div class="campeonato-header">
-        Destaque
-    </div>
+<div class="back-button" [hidden]="!exibindoRegiao">
     <div class="menu-camp-destaques" >
-        <a class="back" (click)="back()">
+        <a class="back" (click)="selecionarRegiao()">
             <i class="fa fa-arrow-left"></i>
             Voltar
         </a>

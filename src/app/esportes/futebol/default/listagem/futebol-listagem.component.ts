@@ -28,7 +28,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() deixarCampeonatosAbertos;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
-    todosCampeonatos: Campeonato[];
     @Input() data;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
@@ -43,12 +42,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     dataLimiteTabela;
     contentSportsEl;
     start;
+    page = 1;
     offset;
     total;
     exibirCampeonatosExpandido;
     loadingScroll = false;
-    campeonatosDestaques;
     regiaoSelecionada;
+    campeonatosTemp;
     unsub$ = new Subject();
 
     constructor(
@@ -268,11 +268,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirMais() {
-        console.log(this.camps);
-        this.loadingScroll = true;
+        if (!this.regiaoSelecionada) {
+            this.loadingScroll = true;
+            let splice = this.camps.slice(this.start, (this.page * this.offset));
 
-        if (this.start < this.total) {
-            let splice = this.camps.splice(0, this.offset);
             splice = splice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
@@ -291,17 +290,18 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.campeonatosAbertos = this.campeonatosAbertos.concat(spliceIds);
             }
 
-            this.start++;
-        }
+            this.start = (this.page * this.offset);
+            this.page++;
 
-        this.loadingScroll = false;
-        this.cd.markForCheck();
+            this.loadingScroll = false;
+            this.cd.markForCheck();
+        }
     }
 
     exibirBtnProximaData() {
         let result = false;
 
-        if (this.data) {
+        if (this.data && !this.regiaoSelecionada) {
             const proximaData = moment(this.data);
             if (proximaData.day() !== 0) {
                 result = true;
@@ -324,13 +324,37 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     receptorRegiaoSelecionada(regiaoSelecionada) {
-        console.log('Regiao selecionado:', regiaoSelecionada);
-        this.regiaoSelecionada = regiaoSelecionada;
+        if (regiaoSelecionada) {
+            this.regiaoSelecionada = regiaoSelecionada;
+            this.campeonatosTemp = this.campeonatos;
 
-        // let filteredCamps = this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada);
+            let filteredCamps = this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada);
 
-        // console.log(filteredCamps);
-        console.log(this.todosCampeonatos);
-        // console.log(this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada));
+            filteredCamps.map(campeonato => {
+                campeonato.jogos.forEach(jogo => {
+                    jogo.cotacoes.forEach(cotacao => {
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    });
+                });
+
+                return campeonato;
+            });
+
+            if (this.exibirCampeonatosExpandido || this.deixarCampeonatosAbertos) {
+                const spliceIds = filteredCamps.map(campeonato => campeonato._id);
+                this.campeonatosAbertos = this.campeonatosAbertos.concat(spliceIds);
+            }
+
+            this.campeonatos = filteredCamps;
+        } else  {
+            this.page = 1;
+            this.start = 0;
+            this.campeonatos = this.campeonatosTemp;
+            this.campeonatosTemp = [];
+            this.regiaoSelecionada = null;
+            this.exibirMais();
+        }
+
     }
 }

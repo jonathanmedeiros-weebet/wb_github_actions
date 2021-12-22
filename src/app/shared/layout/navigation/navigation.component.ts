@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
     SidebarService, AuthService, PrintService,
-    ParametrosLocaisService, SupresinhaService
+    ParametrosLocaisService, SupresinhaService, UtilsService
 } from './../../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent,
@@ -64,6 +64,7 @@ export class NavigationComponent implements OnInit {
     dataLimiteTabela;
     unsub$ = new Subject();
     regiaoOpen = null;
+    regioesDestaque;
     LOGO = config.LOGO;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
 
@@ -77,7 +78,8 @@ export class NavigationComponent implements OnInit {
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private utilsService: UtilsService
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -94,6 +96,14 @@ export class NavigationComponent implements OnInit {
                     this.isOpen = isOpen;
                     this.cd.detectChanges();
                 });
+
+            this.utilsService.getRegioesDestaque()
+                .subscribe(
+                    res => {
+                        this.regioesDestaque = res;
+                        this.cd.detectChanges();
+                    }
+                );
         }
 
         this.auth.logado
