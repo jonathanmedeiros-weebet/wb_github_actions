@@ -52,7 +52,7 @@ document.onreadystatechange = async function () {
                     } else {
                         this.getElementById('result').append(ticketData.resultado);
                         this.getElementById('has-result').hidden = false;
-                        ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
+                        ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado.replace(' ', '-')) : 0;
                     }
 
                     if (ticketData.passador.percentualPremio > 0) {
