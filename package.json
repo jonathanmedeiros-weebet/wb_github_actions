@@ -96,7 +96,6 @@
         "soccer787.site": "gulp soccer787.site",
         "superbet365.bet": "gulp superbet365.bet",
         "sampabet.wee.bet": "gulp sampabet.wee.bet",
-        "betsporting.wee.bet": "gulp betsporting.wee.bet",
         "apostasminas.site": "gulp apostasminas.site",
         "moralbets.com": "gulp moralbets.com",
         "capitalsports.site": "gulp capitalsports.site",
@@ -186,7 +185,8 @@
         "tabocasbet.wee.bet": "gulp tabocasbet.wee.bet",
         "wbets.com.br": "gulp wbets.com.br",
         "bets89.wee.bet": "gulp bets89.wee.bet",
-        "sportebets.com.br": "gulp sportebets.com.br"
+        "sportebets.com.br": "gulp sportebets.com.br",
+        "fut14.wee.bet": "gulp fut14.wee.bet"
     },
     "private": true,
     "dependencies": {

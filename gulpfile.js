@@ -847,15 +847,6 @@ gulp.task('sampabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsporting.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betsporting.wee.bet",
-        banca: "BET SPORTING",
-        styles: "",
-    });
-});
-
 gulp.task('apostasminas.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1672,6 +1663,15 @@ gulp.task('sportebets.com.br', function (done) {
         server: "front2.wee.bet",
         host: "sportebets.com.br",
         banca: "SPORTE BETS",
+        styles: "",
+    });
+});
+
+gulp.task('fut14.wee.bet', function (done) {
+    tasks(done, {
+        server: "fut14.wee.bet",
+        host: "fut14.wee.bet",
+        banca: "FUT 14",
         styles: "",
     });
 });
