@@ -1669,7 +1669,7 @@ gulp.task('sportebets.com.br', function (done) {
 
 gulp.task('fut14.wee.bet', function (done) {
     tasks(done, {
-        server: "fut14.wee.bet",
+        server: "front2.wee.bet",
         host: "fut14.wee.bet",
         banca: "FUT 14",
         styles: "",
