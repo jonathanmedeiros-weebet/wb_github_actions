@@ -1675,3 +1675,12 @@ gulp.task('fut14.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('imperio.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "imperio.wee.bet",
+        banca: "IMPÉRIO BET",
+        styles: "",
+    });
+});

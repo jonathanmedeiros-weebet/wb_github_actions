@@ -186,7 +186,8 @@
         "wbets.com.br": "gulp wbets.com.br",
         "bets89.wee.bet": "gulp bets89.wee.bet",
         "sportebets.com.br": "gulp sportebets.com.br",
-        "fut14.wee.bet": "gulp fut14.wee.bet"
+        "fut14.wee.bet": "gulp fut14.wee.bet",
+        "imperio.wee.bet": "gulp imperio.wee.bet"
     },
     "private": true,
     "dependencies": {
