@@ -123,32 +123,19 @@
             <ng-container *ngIf="contexto == 'esportes'">
                 <ng-container *ngIf="regioesDestaque && !mobileScreen">
                     <span class="group">Destaques</span>
-                    <li *ngFor="let regiao of regioesDestaque" (click)="goTo('/esportes/futebol', { regiao_sigla: regiao.sigla })">
+                    <li *ngFor="let regiao of regioesDestaque"
+                        (click)="goTo('/esportes/futebol', { regiao_sigla: regiao.sigla })">
                         <a>
                             <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao.nome}}
                         </a>
                     </li>
                 </ng-container>
                 <span class="group">Datas</span>
-                <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
-                    <li (click)="goTo('/esportes/' + esporte)">
-                        <a>
-                            Jogos de Hoje
-                        </a>
-                    </li>
-                </ng-container>
-                <ng-template #principais>
-                    <li (click)="goTo('/esportes/' + esporte)">
-                        <a>
-                            Campeonatos Principais
-                        </a>
-                    </li>
-                    <li (click)="goTo('/esportes/' + esporte, { data: hoje.format('YYYY-MM-DD') })">
-                        <a>
-                            Jogos de Hoje
-                        </a>
-                    </li>
-                </ng-template>
+                <li (click)="goTo('/esportes/' + esporte)">
+                    <a>
+                        Jogos de Hoje
+                    </a>
+                </li>
                 <li *ngIf="exibirJogosAmanha()"
                     (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">
                     <a>
