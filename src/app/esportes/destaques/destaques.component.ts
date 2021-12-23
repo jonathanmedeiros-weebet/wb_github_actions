@@ -21,17 +21,19 @@ export class DestaquesComponent implements OnInit {
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
 
-        this.utilsService.getRegioesDestaque()
-            .subscribe(
-                res => {
-                    if (res.length > 0) {
-                        this.regioesDestaque = res;
-                        this.cd.detectChanges();
+        if (this.mobileScreen) {
+            this.utilsService.getRegioesDestaque()
+                .subscribe(
+                    res => {
+                        if (res.length > 0) {
+                            this.regioesDestaque = res;
+                            this.cd.detectChanges();
+                        }
                     }
-                }
-            );
+                );
 
-        this.menuWidth = window.innerWidth - 10;
+            this.menuWidth = window.innerWidth - 10;
+        }
     }
 
     selecionarRegiao(siglaRegiao?) {
