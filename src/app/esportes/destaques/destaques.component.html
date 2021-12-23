@@ -1,18 +1,21 @@
-<div class="campeonato-header" [hidden]="!regioesDestaque || exibindoRegiao">
-    Destaques
-</div>
-<div class="menu-camp-destaques" [hidden]="!regioesDestaque|| exibindoRegiao">
-    <div class="menu-camp-destaques"[ngStyle]="{'width.px': menuWidth}">
-        <div class="campeonato" *ngFor="let regiao of regioesDestaque">
-            <a (click)="selecionarRegiao(regiao.sigla)">
-                <i class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></i>
-                <span class="campeonato-nome">{{regiao.nome}}</span>
-            </a>
+<ng-container *ngIf="exibirDestaques()">
+    <div class="campeonato-header">
+        Destaques
+    </div>
+    <div class="menu-camp-destaques">
+        <div class="menu-camp-destaques" [ngStyle]="{'width.px': menuWidth}">
+            <div class="campeonato" *ngFor="let regiao of regioesDestaque">
+                <a (click)="selecionarRegiao(regiao.sigla)">
+                    <i class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></i>
+                    <span class="campeonato-nome">{{regiao.nome}}</span>
+                </a>
+            </div>
         </div>
     </div>
-</div>
+</ng-container>
+
 <div class="back-button" [hidden]="!exibindoRegiao">
-    <div class="menu-camp-destaques" >
+    <div class="menu-camp-destaques">
         <a class="back" (click)="selecionarRegiao()">
             <i class="fa fa-arrow-left"></i>
             Voltar
