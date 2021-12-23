@@ -56,8 +56,20 @@
     margin-bottom: 5px;
 }
 
+.campeonato {
+    width: 75px;
+}
+
 .campeonato a {
     text-transform: uppercase;
+}
+
+.campeonato span {
+    width: 75px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .justify-center {

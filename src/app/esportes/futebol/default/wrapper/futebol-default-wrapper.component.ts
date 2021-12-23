@@ -78,6 +78,24 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             },
                             error => this.messageService.error(error)
                         );
+                } else if (params['regiao_sigla']) {
+                    this.deixarCampeonatosAbertos = true;
+                    const queryParams: any = {
+                        odds: this.oddsPrincipais,
+                        data_final: dataLimiteTabela,
+                        regiao_sigla: params['regiao_sigla']
+                    };
+
+                    this.campeonatoService.getCampeonatos(queryParams)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            campeonatos => {
+                                this.campeonatos = campeonatos;
+                                this.showLoadingIndicator = false;
+                                this.jogoId = this.extrairJogoId(this.campeonatos);
+                            },
+                            error => this.messageService.error(error)
+                        );
                 } else {
                     const queryParams: any = {
                         'sport_id': 1,

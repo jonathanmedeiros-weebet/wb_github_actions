@@ -121,11 +121,11 @@
         </div>
         <ul id="menu-side-left" class="sidebar-nav">
             <ng-container *ngIf="contexto == 'esportes'">
-                <ng-container *ngIf="regioesDestaque">
+                <ng-container *ngIf="regioesDestaque && !mobileScreen">
                     <span class="group">Destaques</span>
-                    <li *ngFor="let regiao of regioesDestaque">
+                    <li *ngFor="let regiao of regioesDestaque" (click)="goTo('/esportes/' + esporte, { regiao_sigla: regiao.sigla })">
                         <a>
-                            {{regiao.nome}}
+                            <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao.nome}}
                         </a>
                     </li>
                 </ng-container>

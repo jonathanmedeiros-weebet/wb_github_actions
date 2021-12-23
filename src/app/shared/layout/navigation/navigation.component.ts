@@ -2,15 +2,15 @@ import {
     Component, OnInit, ElementRef,
     Renderer2, ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
-import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
+import {Router, NavigationEnd, Event as NavigationEvent} from '@angular/router';
 import {
     trigger,
     state,
     style
 } from '@angular/animations';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import {
     SidebarService, AuthService, PrintService,
     ParametrosLocaisService, SupresinhaService, UtilsService
@@ -21,9 +21,9 @@ import {
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent, AtivarCartaoModalComponent
 } from '../modals';
-import { config } from './../../config';
+import {config} from './../../config';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
 
@@ -51,6 +51,7 @@ export class NavigationComponent implements OnInit {
     isLoggedIn;
     isCliente;
     isAppMobile;
+    mobileScreen;
     isOpen = true;
     itens: any[];
     contexto;
@@ -89,6 +90,7 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1024;
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
@@ -96,15 +98,16 @@ export class NavigationComponent implements OnInit {
                     this.isOpen = isOpen;
                     this.cd.detectChanges();
                 });
-
-            this.utilsService.getRegioesDestaque()
-                .subscribe(
-                    res => {
-                        this.regioesDestaque = res;
-                        this.cd.detectChanges();
-                    }
-                );
         }
+
+        this.utilsService.getRegioesDestaque()
+            .subscribe(
+                res => {
+                    console.log('teste');
+                    this.regioesDestaque = res;
+                    this.cd.detectChanges();
+                }
+            );
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -181,7 +184,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -199,7 +203,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -217,10 +222,11 @@ export class NavigationComponent implements OnInit {
                 result => {
                     if (result.input) {
                         this.closeMenu();
-                        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: result.input } });
+                        this.router.navigate(['/esportes/futebol/jogos'], {queryParams: {nome: result.input}});
                     }
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -236,7 +242,8 @@ export class NavigationComponent implements OnInit {
         this.modalRef.result
             .then(result => {
                 this.closeMenu();
-            }, reason => { });
+            }, reason => {
+            });
     }
 
     abrirModalAposta() {
@@ -250,8 +257,10 @@ export class NavigationComponent implements OnInit {
 
         this.modalRef.result
             .then(
-                result => { },
-                reason => { }
+                result => {
+                },
+                reason => {
+                }
             );
     }
 
@@ -267,7 +276,8 @@ export class NavigationComponent implements OnInit {
         this.modalRef.result
             .then(
                 result => this.closeMenu(),
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -285,7 +295,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -303,7 +314,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -340,7 +352,7 @@ export class NavigationComponent implements OnInit {
     }
 
     goTo(url, queryParams) {
-        this.router.navigate([url], { queryParams });
+        this.router.navigate([url], {queryParams});
     }
 
     exibirJogosAmanha() {
