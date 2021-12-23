@@ -123,7 +123,7 @@
             <ng-container *ngIf="contexto == 'esportes'">
                 <ng-container *ngIf="regioesDestaque && !mobileScreen">
                     <span class="group">Destaques</span>
-                    <li *ngFor="let regiao of regioesDestaque" (click)="goTo('/esportes/' + esporte, { regiao_sigla: regiao.sigla })">
+                    <li *ngFor="let regiao of regioesDestaque" (click)="goTo('/esportes/futebol', { regiao_sigla: regiao.sigla })">
                         <a>
                             <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao.nome}}
                         </a>

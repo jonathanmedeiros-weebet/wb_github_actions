@@ -103,9 +103,10 @@ export class NavigationComponent implements OnInit {
         this.utilsService.getRegioesDestaque()
             .subscribe(
                 res => {
-                    console.log('teste');
-                    this.regioesDestaque = res;
-                    this.cd.detectChanges();
+                    if (res.length > 0) {
+                        this.regioesDestaque = res;
+                        this.cd.detectChanges();
+                    }
                 }
             );
 

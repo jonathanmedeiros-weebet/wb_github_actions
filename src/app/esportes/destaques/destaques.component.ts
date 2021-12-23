@@ -23,7 +23,9 @@ export class DestaquesComponent implements OnInit {
         this.utilsService.getRegioesDestaque()
             .subscribe(
                 res => {
-                    this.regioesDestaque = res;
+                    if (res.length > 0){
+                        this.regioesDestaque = res;
+                    }
                 }
             );
         this.menuWidth = window.innerWidth - 10;
