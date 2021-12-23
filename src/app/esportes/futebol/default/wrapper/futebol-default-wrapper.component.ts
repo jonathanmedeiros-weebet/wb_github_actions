@@ -1,9 +1,9 @@
-import {ActivatedRoute, Router} from '@angular/router';
-import {Component, OnInit, OnDestroy, ChangeDetectorRef, Renderer2, ElementRef} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {ParametrosLocaisService, CampeonatoService, SidebarService, MessageService} from './../../../../services';
+import {CampeonatoService, MessageService, ParametrosLocaisService, SidebarService} from './../../../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -116,15 +116,13 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                         } else {
                             queryParams.data = dataLimiteTabela;
                         }
-                    } else {
-                        if (!params['nome']) {
+                    } else if (!params['nome']) {
                             queryParams.data = moment().format('YYYY-MM-DD');
 
-                            const primeiraPagina = this.paramsService.getPrimeiraPagina();
+                            /*const primeiraPagina = this.paramsService.getPrimeiraPagina();
                             if (primeiraPagina === 'principais') {
                                 queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
-                            }
-                        }
+                            }*/
                     }
 
                     if (queryParams.data) {

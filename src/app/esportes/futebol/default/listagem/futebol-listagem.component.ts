@@ -48,7 +48,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     exibirCampeonatosExpandido;
     loadingScroll = false;
     regiaoSelecionada;
-    campeonatosTemp;
     unsub$ = new Subject();
 
     constructor(
@@ -270,9 +269,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     exibirMais() {
         if (!this.regiaoSelecionada) {
             this.loadingScroll = true;
-            let splice = this.camps.slice(this.start, (this.page * this.offset));
+            let slice = this.camps.slice(this.start, (this.page * this.offset));
 
-            splice = splice.map(campeonato => {
+            slice = slice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
                         cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
@@ -283,11 +282,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 return campeonato;
             });
 
-            this.campeonatos = this.campeonatos.concat(splice);
+            this.campeonatos = this.campeonatos.concat(slice);
 
             if (this.exibirCampeonatosExpandido || this.deixarCampeonatosAbertos) {
-                const spliceIds = splice.map(campeonato => campeonato._id);
-                this.campeonatosAbertos = this.campeonatosAbertos.concat(spliceIds);
+                const sliceIds = slice.map(campeonato => campeonato._id);
+                this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
             }
 
             this.start = (this.page * this.offset);
@@ -326,7 +325,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     receptorRegiaoSelecionada(regiaoSelecionada) {
         if (regiaoSelecionada) {
             this.regiaoSelecionada = regiaoSelecionada;
-            this.campeonatosTemp = this.campeonatos;
 
             let filteredCamps = this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada);
 
@@ -350,8 +348,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         } else  {
             this.page = 1;
             this.start = 0;
-            this.campeonatos = this.campeonatosTemp;
-            this.campeonatosTemp = [];
+            this.campeonatos = [];
             this.regiaoSelecionada = null;
             this.exibirMais();
         }

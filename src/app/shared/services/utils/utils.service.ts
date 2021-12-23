@@ -47,7 +47,7 @@ export class UtilsService {
     }
 
     getRegioesDestaque() {
-        return this.http.get(`${this.utilsUrl}/getRegioesDestaque`, this.headers.getRequestOptions())
+        return this.http.get(`${this.utilsUrl}/regioes-destaque`, this.headers.getRequestOptions())
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
