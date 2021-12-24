@@ -267,7 +267,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirMais() {
-        if (!this.regiaoSelecionada) {
+        if (!this.regiaoSelecionada && this.camps) {
             this.loadingScroll = true;
             let slice = this.camps.slice(this.start, (this.page * this.offset));
 

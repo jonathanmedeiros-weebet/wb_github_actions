@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, ChangeDetectorRef } from '@angular/core';
-import { UtilsService } from "../../shared/services/utils/utils.service";
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {RegioesDestaqueService} from "../../shared/services/regioes-destaque.service";
 
 @Component({
     selector: 'app-destaques',
@@ -12,9 +12,10 @@ export class DestaquesComponent implements OnInit {
     exibindoRegiao = false;
     menuWidth;
     mobileScreen;
+    permitirDestaques = true;
 
     constructor(
-        private utilsService: UtilsService,
+        private regioesDestaqueService: RegioesDestaqueService,
         private cd: ChangeDetectorRef
     ) { }
 
@@ -22,7 +23,7 @@ export class DestaquesComponent implements OnInit {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
 
         if (this.mobileScreen) {
-            this.utilsService.getRegioesDestaque()
+            this.regioesDestaqueService.getRegioesDestaque()
                 .subscribe(
                     res => {
                         if (res.length > 0) {
@@ -34,6 +35,17 @@ export class DestaquesComponent implements OnInit {
 
             this.menuWidth = window.innerWidth - 10;
         }
+
+        this.regioesDestaqueService.permitirDestaques
+            .subscribe(
+                res  => {
+                    this.permitirDestaques = res;
+                    if (!res) {
+                        this.selecionarRegiao();
+                        this.exibindoRegiao = false;
+                    }
+                }
+            );
     }
 
     selecionarRegiao(siglaRegiao?) {

@@ -1,4 +1,4 @@
-<ng-container *ngIf="exibirDestaques()">
+<ng-container *ngIf="exibirDestaques() && permitirDestaques">
     <div class="campeonato-header">
         Destaques
     </div>
@@ -14,11 +14,13 @@
     </div>
 </ng-container>
 
-<div class="back-button" [hidden]="!exibindoRegiao">
-    <div class="menu-camp-destaques">
-        <a class="back" (click)="selecionarRegiao()">
-            <i class="fa fa-arrow-left"></i>
-            Voltar
-        </a>
+<ng-container *ngIf="permitirDestaques">
+    <div class="back-button" [hidden]="!exibindoRegiao">
+        <div class="menu-camp-destaques">
+            <a class="back" (click)="selecionarRegiao()">
+                <i class="fa fa-arrow-left"></i>
+                Voltar
+            </a>
+        </div>
     </div>
-</div>
+</ng-container>

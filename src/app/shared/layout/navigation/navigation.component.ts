@@ -1,31 +1,32 @@
-import {
-    Component, OnInit, ElementRef,
-    Renderer2, ChangeDetectionStrategy, ChangeDetectorRef
-} from '@angular/core';
-import {Router, NavigationEnd, Event as NavigationEvent} from '@angular/router';
-import {
-    trigger,
-    state,
-    style
-} from '@angular/animations';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
+import {state, style, trigger} from '@angular/animations';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {
-    SidebarService, AuthService, PrintService,
-    ParametrosLocaisService, SupresinhaService, UtilsService
+    AuthService,
+    ParametrosLocaisService,
+    PrintService,
+    SidebarService,
+    SupresinhaService
 } from './../../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent,
-    PesquisarApostaModalComponent, CartaoCadastroModalComponent,
-    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
-    RecargaCartaoModalComponent, AtivarCartaoModalComponent
+    AtivarCartaoModalComponent,
+    CartaoCadastroModalComponent,
+    PesquisaModalComponent,
+    PesquisarApostaModalComponent,
+    PesquisarCartaoModalComponent,
+    RecargaCartaoModalComponent,
+    SolicitarSaqueModalComponent,
+    TabelaModalComponent
 } from '../modals';
 import {config} from './../../config';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
+import {RegioesDestaqueService} from '../../services/regioes-destaque.service';
 
 @Component({
     selector: 'app-navigation',
@@ -80,7 +81,7 @@ export class NavigationComponent implements OnInit {
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private utilsService: UtilsService
+        private regioesDestaqueService: RegioesDestaqueService,
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -90,6 +91,7 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.regioesDestaqueService.setPermitirDestaques(false);
         this.mobileScreen = window.innerWidth <= 1024;
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
@@ -100,7 +102,7 @@ export class NavigationComponent implements OnInit {
                 });
         }
 
-        this.utilsService.getRegioesDestaque()
+        this.regioesDestaqueService.getRegioesDestaque()
             .subscribe(
                 res => {
                     if (res.length > 0) {
