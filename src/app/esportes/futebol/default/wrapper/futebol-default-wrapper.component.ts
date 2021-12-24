@@ -1,8 +1,8 @@
-import {ActivatedRoute} from '@angular/router';
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
     CampeonatoService,
     MessageService,
@@ -67,7 +67,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 this.data = null;
 
                 if (params['campeonato']) {
-                    this.regioesDestaqueService.setPermitirDestaques(false);
+                    this.regioesDestaqueService.setExibirDestaques(false);
                     this.deixarCampeonatosAbertos = true;
                     const campeonatoId = params['campeonato'];
                     const queryParams: any = {
@@ -87,7 +87,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else if (params['regiao_sigla']) {
-                    this.regioesDestaqueService.setPermitirDestaques(false);
+                    this.regioesDestaqueService.setExibirDestaques(false);
                     this.deixarCampeonatosAbertos = true;
                     const queryParams: any = {
                         odds: this.oddsPrincipais,
@@ -106,7 +106,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    this.regioesDestaqueService.setPermitirDestaques(true);
+                    this.regioesDestaqueService.setExibirDestaques(true);
                     const queryParams: any = {
                         'sport_id': 1,
                         'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
@@ -114,27 +114,23 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     };
 
                     if (params['nome']) {
-                        this.regioesDestaqueService.setPermitirDestaques(false);
+                        this.regioesDestaqueService.setExibirDestaques(false);
                         this.deixarCampeonatosAbertos = true;
                         queryParams.nome = params['nome'];
                         queryParams.data_final = dataLimiteTabela;
                     }
 
                     if (params['data']) {
-                        this.regioesDestaqueService.setPermitirDestaques(false);
+                        this.regioesDestaqueService.setExibirDestaques(false);
                         const dt = moment(params['data']);
+
                         if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
                             queryParams.data = dt.format('YYYY-MM-DD');
                         } else {
                             queryParams.data = dataLimiteTabela;
                         }
                     } else if (!params['nome']) {
-                            queryParams.data = moment().format('YYYY-MM-DD');
-
-                            /*const primeiraPagina = this.paramsService.getPrimeiraPagina();
-                            if (primeiraPagina === 'principais') {
-                                queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
-                            }*/
+                        queryParams.data = moment().format('YYYY-MM-DD');
                     }
 
                     if (queryParams.data) {

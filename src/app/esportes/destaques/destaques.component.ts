@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RegioesDestaqueService} from "../../shared/services/regioes-destaque.service";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RegioesDestaqueService } from "../../shared/services/regioes-destaque.service";
 
 @Component({
     selector: 'app-destaques',
@@ -10,9 +10,9 @@ export class DestaquesComponent implements OnInit {
     @Output() regiaoSelecionada = new EventEmitter();
     regioesDestaque = null;
     exibindoRegiao = false;
+    exibirDestaques = true;
     menuWidth;
     mobileScreen;
-    permitirDestaques = true;
 
     constructor(
         private regioesDestaqueService: RegioesDestaqueService,
@@ -25,9 +25,9 @@ export class DestaquesComponent implements OnInit {
         if (this.mobileScreen) {
             this.regioesDestaqueService.getRegioesDestaque()
                 .subscribe(
-                    res => {
-                        if (res.length > 0) {
-                            this.regioesDestaque = res;
+                    regioesDestaque => {
+                        if (regioesDestaque.length > 0) {
+                            this.regioesDestaque = regioesDestaque;
                             this.cd.detectChanges();
                         }
                     }
@@ -36,15 +36,9 @@ export class DestaquesComponent implements OnInit {
             this.menuWidth = window.innerWidth - 10;
         }
 
-        this.regioesDestaqueService.permitirDestaques
+        this.regioesDestaqueService.exibirDestaques
             .subscribe(
-                res  => {
-                    this.permitirDestaques = res;
-                    if (!res) {
-                        this.selecionarRegiao();
-                        this.exibindoRegiao = false;
-                    }
-                }
+                exibirDestaques => this.exibirDestaques = exibirDestaques
             );
     }
 
@@ -58,7 +52,7 @@ export class DestaquesComponent implements OnInit {
         }
     }
 
-    exibirDestaques() {
+    exibirRegioes() {
         let result = false
 
         if (this.mobileScreen && this.regioesDestaque && !this.exibindoRegiao) {

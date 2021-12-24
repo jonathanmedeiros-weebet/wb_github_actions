@@ -1,18 +1,16 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {config} from '../config';
-import {HeadersService} from './utils/headers.service';
-import {catchError, map} from 'rxjs/operators';
-import {ErrorService} from './utils/error.service';
-import {BehaviorSubject} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { config } from '../config';
+import { HeadersService } from './utils/headers.service';
+import { catchError, map } from 'rxjs/operators';
+import { ErrorService } from './utils/error.service';
+import { BehaviorSubject } from "rxjs";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class RegioesDestaqueService {
     regiaoDestaqueUrl = `${config.BASE_URL}/regioes-destaque`;
-    private permitirDestaquesSource = new BehaviorSubject<boolean>(true);
-    permitirDestaques = this.permitirDestaquesSource.asObservable();
+    private exibirDestaquesSource = new BehaviorSubject<boolean>(true);
+    exibirDestaques = this.exibirDestaquesSource.asObservable();
 
     constructor(
         private http: HttpClient,
@@ -21,8 +19,8 @@ export class RegioesDestaqueService {
     ) {
     }
 
-    setPermitirDestaques(bool){
-        this.permitirDestaquesSource.next(bool);
+    setExibirDestaques(bool) {
+        this.exibirDestaquesSource.next(bool);
     }
 
     getRegioesDestaque() {

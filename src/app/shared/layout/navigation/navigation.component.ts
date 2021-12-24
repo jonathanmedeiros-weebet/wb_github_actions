@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2} from '@angular/core';
-import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
-import {state, style, trigger} from '@angular/animations';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Event as NavigationEvent, NavigationEnd, Router } from '@angular/router';
+import { state, style, trigger } from '@angular/animations';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
     AuthService,
     ParametrosLocaisService,
@@ -21,12 +21,12 @@ import {
     SolicitarSaqueModalComponent,
     TabelaModalComponent
 } from '../modals';
-import {config} from './../../config';
+import { config } from './../../config';
 
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
-import {RegioesDestaqueService} from '../../services/regioes-destaque.service';
+import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
 
 @Component({
     selector: 'app-navigation',
@@ -61,7 +61,6 @@ export class NavigationComponent implements OnInit {
     cartaoApostaHabilitado;
     loteriasHabilitada;
     acumuladaoHabilitado;
-    primeiraPagina;
     exibirPaginaDeposito;
     dataLimiteTabela;
     unsub$ = new Subject();
@@ -91,8 +90,9 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.regioesDestaqueService.setPermitirDestaques(false);
+        this.regioesDestaqueService.setExibirDestaques(false);
         this.mobileScreen = window.innerWidth <= 1024;
+
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
@@ -131,7 +131,6 @@ export class NavigationComponent implements OnInit {
             );
 
         this.isAppMobile = this.auth.isAppMobile();
-        this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
         this.loteriasHabilitada = this.paramsService.getOpcoes().loterias;
@@ -225,7 +224,7 @@ export class NavigationComponent implements OnInit {
                 result => {
                     if (result.input) {
                         this.closeMenu();
-                        this.router.navigate(['/esportes/futebol/jogos'], {queryParams: {nome: result.input}});
+                        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: result.input } });
                     }
                 },
                 reason => {
@@ -355,7 +354,7 @@ export class NavigationComponent implements OnInit {
     }
 
     goTo(url, queryParams) {
-        this.router.navigate([url], {queryParams});
+        this.router.navigate([url], { queryParams });
     }
 
     exibirJogosAmanha() {
