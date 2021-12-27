@@ -50,7 +50,7 @@ header {
 }
 
 #page-wrapper {
-    margin-top: 69px;
+    margin-top: 48px;
 }
 
 #default-content {
@@ -600,7 +600,7 @@ button {
 
 @media only screen and (max-width: 1024px) {
     #page-wrapper {
-        margin-top: 113px;
+        margin-top: 90px;
     }
     #default-content {
         padding: 10px 15px 65px;

@@ -189,7 +189,7 @@
 @media (min-width: 1025px) {
     section.pre-bilhete {
         position: absolute;
-        top: 68px;
+        top: 48px;
         right: 0;
     }
     .hide-desktop {
