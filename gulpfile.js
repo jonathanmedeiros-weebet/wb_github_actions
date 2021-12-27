@@ -974,16 +974,6 @@ gulp.task('gobets.wee.bet', function (done) {
     });
 });
 
-gulp.task('bet316top.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bet316top.wee.bet",
-        banca: "BETS 316 TOP",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#e50d1b; --foreground-sidebar-right: #fff; --sidebar-left: #e50d1b; --foreground-sidebar-left: #fff; --odds: #d5d7d6;--foreground-odds:#000;--foreground-selected-odds: #fff;--highlight:#444444;--foreground-highlight:#fff;--league: #868686; --foreground-league: #fff;",
-        aditional_styles: ".indentificacao .mais-opcoes{color: #e50d1b;} .jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;} .jogos, .eventos{ color: #e50d1b!important; }",
-    });
-});
-
 gulp.task('eisports.club', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1397,15 +1387,6 @@ gulp.task('pixsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('zaplances.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "zaplances.bet",
-        banca: "ZAP LANCES",
-        styles: "",
-    });
-});
-
 gulp.task('sportvegas.com.br', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1681,6 +1662,15 @@ gulp.task('imperio.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "imperio.wee.bet",
         banca: "IMPÉRIO BET",
+        styles: "",
+    });
+});
+
+gulp.task('ilhabet.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ilhabet.net",
+        banca: "ILHA BET",
         styles: "",
     });
 });
