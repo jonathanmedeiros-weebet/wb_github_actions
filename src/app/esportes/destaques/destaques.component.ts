@@ -38,7 +38,10 @@ export class DestaquesComponent implements OnInit {
 
         this.regioesDestaqueService.exibirDestaques
             .subscribe(
-                exibirDestaques => this.exibirDestaques = exibirDestaques
+                exibirDestaques => {
+                    this.exibindoRegiao = false;
+                    this.exibirDestaques = exibirDestaques;
+                }
             );
     }
 
