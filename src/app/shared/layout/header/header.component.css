@@ -70,17 +70,14 @@ header a {
 
 .menu-categories img {
     height: 24px;
-    /* margin-bottom: 5px; */
 }
 
 .menu-categories .fa {
     font-size: 2rem;
-    /* margin-bottom: 5px; */
 }
 
 .menu-categories .wbicon {
     font-size: 2rem;
-    /* margin-bottom: 5px; */
 }
 
 .category a {
@@ -122,17 +119,23 @@ header a {
     }
 
     .menu-categories .category {
-        margin: 0px 5px 2px 5px;
+        margin: 0px 5px 0 5px;
         padding: 5px 0 0;
     }
 
     .category a{
         flex-direction: column;
         align-items: center;
+        width: 35px;
     }
 
     .category a span{
         margin: 5px 0 0 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-align: center;
     }
 
     .menu-categories .menu-conta , .pull{

@@ -77,7 +77,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
         this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
     }

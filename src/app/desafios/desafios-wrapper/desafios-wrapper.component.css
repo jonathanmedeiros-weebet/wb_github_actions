@@ -8,12 +8,12 @@
     flex-grow: 1;
     padding: 0 0 0 255px;
     overflow: auto;
-    height: calc(100vh - 69px);
+    height: calc(100vh - 45px);
 }
 
 @media only screen and (max-width: 1024px) {
     .desafios-content{
         padding: 0;
-        height: calc(100vh - 113px);
+        height: calc(100vh - 98px);
     }
 }

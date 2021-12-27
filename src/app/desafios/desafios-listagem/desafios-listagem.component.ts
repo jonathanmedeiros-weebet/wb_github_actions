@@ -75,7 +75,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentEl = this.el.nativeElement.querySelector('.content-list');

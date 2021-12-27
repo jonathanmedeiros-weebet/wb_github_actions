@@ -248,8 +248,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     svgCss() {
         return {
             'width.rem': 2,
-            'fill': 'var(--foreground-header)',
-            'margin-bottom.px': '5'
+            'fill': 'var(--foreground-header)'
         };
     }
 
