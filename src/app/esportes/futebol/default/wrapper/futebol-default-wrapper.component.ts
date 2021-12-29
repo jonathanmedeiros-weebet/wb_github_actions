@@ -88,6 +88,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     if (params['regiao_sigla']) {
                         queryParams = {
                             odds: this.oddsPrincipais,
+                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(1),
                             data_final: dataLimiteTabela,
                             regiao_sigla: params['regiao_sigla']
                         };
