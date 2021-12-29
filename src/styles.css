@@ -50,12 +50,12 @@ header {
 }
 
 #page-wrapper {
-    margin-top: 69px;
+    margin-top: 46px;
 }
 
 #default-content {
     padding: 20px 15px 20px 270px;
-    height: calc(100vh - 67px);
+    height: calc(100vh - 45px);
     overflow: auto;
     background: #fff;
 }
@@ -600,11 +600,11 @@ button {
 
 @media only screen and (max-width: 1024px) {
     #page-wrapper {
-        margin-top: 113px;
+        margin-top: 97px;
     }
     #default-content {
-        padding: 10px 15px 65px;
-        height: calc(100vh - 111px);
+        padding: 10px 15px 54px;
+        height: calc(100vh - 98px);
     }
     .loteria-content {
         padding: 0;
@@ -617,7 +617,7 @@ button {
         width: 100% !important;
     }
     .content-loteria {
-        padding-bottom: 90px !important;
+        padding-bottom: 106px !important;
     }
     .odds .odd {
         margin-bottom: 5px;

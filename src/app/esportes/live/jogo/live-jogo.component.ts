@@ -78,7 +78,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }

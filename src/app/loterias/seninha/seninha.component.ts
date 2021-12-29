@@ -122,7 +122,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');

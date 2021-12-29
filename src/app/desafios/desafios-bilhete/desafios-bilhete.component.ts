@@ -95,7 +95,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
