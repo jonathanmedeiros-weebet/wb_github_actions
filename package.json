@@ -110,7 +110,6 @@
         "portugabet.site": "gulp portugabet.site",
         "ingamesport.com": "gulp ingamesport.com",
         "gobets.wee.bet": "gulp gobets.wee.bet",
-        "bet316top.wee.bet": "gulp bet316top.wee.bet",
         "eisports.club": "gulp eisports.club",
         "clubedabola.wee.bet": "gulp clubedabola.wee.bet",
         "lbbet.wee.bet": "gulp lbbet.wee.bet",
@@ -156,7 +155,6 @@
         "quina.bet": "gulp quina.bet",
         "jbrbets.net": "gulp jbrbets.net",
         "pixsports.wee.bet": "gulp pixsports.wee.bet",
-        "zaplances.bet": "gulp zaplances.bet",
         "sportvegas.com.br": "gulp sportvegas.com.br",
         "mais1bet.com": "gulp mais1bet.com",
         "imperiobet.wee.bet": "gulp imperiobet.wee.bet",
@@ -187,7 +185,8 @@
         "bets89.wee.bet": "gulp bets89.wee.bet",
         "sportebets.com.br": "gulp sportebets.com.br",
         "fut14.wee.bet": "gulp fut14.wee.bet",
-        "imperio.wee.bet": "gulp imperio.wee.bet"
+        "imperio.wee.bet": "gulp imperio.wee.bet",
+        "ilhabet.net": "gulp ilhabet.net"
     },
     "private": true,
     "dependencies": {
