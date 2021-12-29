@@ -1674,3 +1674,12 @@ gulp.task('ilhabet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megabetsport.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "megabetsport.com",
+        banca: "MEGA BET SPORT",
+        styles: "",
+    });
+});
