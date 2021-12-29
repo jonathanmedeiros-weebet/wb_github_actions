@@ -1387,15 +1387,6 @@ gulp.task('pixsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportvegas.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sportvegas.com.br",
-        banca: "SPORT VEGAS",
-        styles: "",
-    });
-});
-
 gulp.task('mais1bet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1482,15 +1473,6 @@ gulp.task('pernambucoesportes.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "pernambucoesportes.wee.bet",
         banca: "PE ESPORTES",
-        styles: "",
-    });
-});
-
-gulp.task('flux.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "flux.bet",
-        banca: "FLUX BET",
         styles: "",
     });
 });
