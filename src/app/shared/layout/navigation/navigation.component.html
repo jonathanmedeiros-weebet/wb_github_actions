@@ -86,7 +86,7 @@
                         <i class="fa fa-book"></i> Regras
                     </a>
                 </li>
-                <li>
+                <li *ngIf="isAppMobile">
                     <a (click)="refresh()">
                         <i class="fa fa-refresh"></i> Atualizar
                     </a>
@@ -121,26 +121,21 @@
         </div>
         <ul id="menu-side-left" class="sidebar-nav">
             <ng-container *ngIf="contexto == 'esportes'">
-                <span class="group">Destaques</span>
-                <ng-container *ngIf="primeiraPagina == 'hoje'; else principais">
-                    <li (click)="goTo('/esportes/' + esporte)">
+                <ng-container *ngIf="regioesDestaque && !mobileScreen">
+                    <span class="group">Destaques</span>
+                    <li *ngFor="let regiao of regioesDestaque"
+                        (click)="goTo('/esportes/futebol', { regiao_sigla: regiao.sigla })">
                         <a>
-                            Jogos de Hoje
+                            <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao.nome}}
                         </a>
                     </li>
                 </ng-container>
-                <ng-template #principais>
-                    <li (click)="goTo('/esportes/' + esporte)">
-                        <a>
-                            Campeonatos Principais
-                        </a>
-                    </li>
-                    <li (click)="goTo('/esportes/' + esporte, { data: hoje.format('YYYY-MM-DD') })">
-                        <a>
-                            Jogos de Hoje
-                        </a>
-                    </li>
-                </ng-template>
+                <span class="group">Datas</span>
+                <li (click)="goTo('/esportes/' + esporte)">
+                    <a>
+                        Jogos de Hoje
+                    </a>
+                </li>
                 <li *ngIf="exibirJogosAmanha()"
                     (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">
                     <a>

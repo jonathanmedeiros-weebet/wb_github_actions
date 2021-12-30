@@ -45,4 +45,12 @@ export class UtilsService {
     getEnderecoPorCep(cep: string | number) {
         return this.http.get(`https://viacep.com.br/ws/${cep}/json`);
     }
+
+    getRegioesDestaque() {
+        return this.http.get(`${this.utilsUrl}/regioes-destaque`, this.headers.getRequestOptions())
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

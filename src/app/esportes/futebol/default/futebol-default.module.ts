@@ -8,13 +8,16 @@ import { FutebolJogoComponent } from './jogo/futebol-jogo.component';
 import { BannersComponent } from '../../../banners/banners.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { EsportesModule } from '../../esportes.module';
+import { RegioesDestaqueService } from '../../../services';
 
 @NgModule({
     imports: [
         SharedModule,
         FutebolDefaultRoutingModule,
         NgbNavModule,
-        NgbCarouselModule
+        NgbCarouselModule,
+        EsportesModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,
@@ -22,6 +25,6 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
         FutebolJogoComponent,
         BannersComponent
     ],
-    providers: []
+    providers: [RegioesDestaqueService]
 })
 export class FutebolDefaultModule { }

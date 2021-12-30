@@ -6,6 +6,7 @@ import {EsportesFooterComponent} from './footer/esportes-footer.component';
 import {EsportesWrapperComponent} from './wrapper/esportes-wrapper.component';
 import {PreApostaEsportivaService} from '../services';
 import {NgxMaskModule} from 'ngx-mask';
+import { DestaquesComponent } from './destaques/destaques.component';
 
 @NgModule({
     imports: [
@@ -16,10 +17,12 @@ import {NgxMaskModule} from 'ngx-mask';
     declarations: [
         EsportesFooterComponent,
         EsportesWrapperComponent,
+        DestaquesComponent,
     ],
     exports: [
         EsportesFooterComponent,
-        EsportesWrapperComponent
+        EsportesWrapperComponent,
+        DestaquesComponent,
     ],
     providers: [
         PreApostaEsportivaService

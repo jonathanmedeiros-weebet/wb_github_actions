@@ -1,9 +1,15 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Renderer2, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService } from './../../../../services';
+import {
+    CampeonatoService,
+    MessageService,
+    ParametrosLocaisService,
+    RegioesDestaqueService,
+    SidebarService
+} from './../../../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -17,9 +23,9 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     mobileScreen = true;
     showLoadingIndicator = true;
     campeonatos;
-    deixarCampeonatosAbertos;
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     data;
+    campeonato;
     unsub$ = new Subject();
 
     constructor(
@@ -27,8 +33,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
+        private regioesDestaqueService: RegioesDestaqueService,
         private route: ActivatedRoute
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
@@ -52,15 +60,15 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
+                let exibirDestaques = false;
+                let queryParams: any;
                 this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
-                this.deixarCampeonatosAbertos = this.paramsService.getExibirCampeonatosExpandido();
                 this.data = null;
 
                 if (params['campeonato']) {
-                    this.deixarCampeonatosAbertos = true;
                     const campeonatoId = params['campeonato'];
-                    const queryParams: any = {
+                    queryParams = {
                         odds: this.oddsPrincipais,
                         data_final: dataLimiteTabela
                     };
@@ -77,38 +85,41 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    const queryParams: any = {
-                        'sport_id': 1,
-                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
-                        'odds': this.oddsPrincipais
-                    };
-
-                    if (params['nome']) {
-                        this.deixarCampeonatosAbertos = true;
-                        queryParams.nome = params['nome'];
-                        queryParams.data_final = dataLimiteTabela;
-                    }
-
-                    if (params['data']) {
-                        const dt = moment(params['data']);
-                        if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
-                            queryParams.data = dt.format('YYYY-MM-DD');
-                        } else {
-                            queryParams.data = dataLimiteTabela;
-                        }
+                    if (params['regiao_sigla']) {
+                        queryParams = {
+                            odds: this.oddsPrincipais,
+                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(1),
+                            data_final: dataLimiteTabela,
+                            regiao_sigla: params['regiao_sigla']
+                        };
                     } else {
-                        if (!params['nome']) {
-                            queryParams.data = moment().format('YYYY-MM-DD');
+                        queryParams = {
+                            'sport_id': 1,
+                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
+                            'odds': this.oddsPrincipais
+                        };
 
-                            const primeiraPagina = this.paramsService.getPrimeiraPagina();
-                            if (primeiraPagina === 'principais') {
-                                queryParams.campeonatos = this.paramsService.getCampeonatosPrincipais();
-                            }
+                        if (params['nome']) {
+                            queryParams.nome = params['nome'];
+                            queryParams.data_final = dataLimiteTabela;
                         }
-                    }
 
-                    if (queryParams.data) {
-                        this.data = queryParams.data;
+                        if (params['data']) {
+                            const dt = moment(params['data']);
+
+                            if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
+                                queryParams.data = dt.format('YYYY-MM-DD');
+                            } else {
+                                queryParams.data = dataLimiteTabela;
+                            }
+                        } else if (!params['nome']) {
+                            exibirDestaques = true;
+                            queryParams.data = moment().format('YYYY-MM-DD');
+                        }
+
+                        if (queryParams.data) {
+                            this.data = queryParams.data;
+                        }
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
@@ -122,6 +133,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 }
+
+                this.regioesDestaqueService.setExibirDestaques(exibirDestaques);
             });
     }
 
