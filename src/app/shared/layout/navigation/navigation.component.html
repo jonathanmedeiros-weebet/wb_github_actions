@@ -86,7 +86,7 @@
                         <i class="fa fa-book"></i> Regras
                     </a>
                 </li>
-                <li>
+                <li *ngIf="isAppMobile">
                     <a (click)="refresh()">
                         <i class="fa fa-refresh"></i> Atualizar
                     </a>
