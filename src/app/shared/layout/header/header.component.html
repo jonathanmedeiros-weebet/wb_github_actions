@@ -84,7 +84,7 @@
             <i class="fa fa-angle-left fa-left"></i>
         </div>
         <div class="menu-categories scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
-            [ngStyle]="{'width.px': menuWidth}" #scrollMenu>
+            [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/live']">
                     <i class="wbicon icon-ao-vivo"></i>

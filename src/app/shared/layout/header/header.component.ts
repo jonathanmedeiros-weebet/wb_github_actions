@@ -1,13 +1,13 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
-import {Usuario} from './../../../models';
-import {config} from './../../config';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BaseFormComponent } from '../base-form/base-form.component';
+import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService } from './../../../services';
+import { Usuario } from './../../../models';
+import { config } from './../../config';
 
 @Component({
     selector: 'app-header',
@@ -31,13 +31,7 @@ import {config} from './../../config';
     ]
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
-    posicaoFinanceira = {
-        saldo: 0,
-        credito: 0
-    };
-    usuario = new Usuario();
-    isLoggedIn;
-    BANCA_NOME;
+    @ViewChild('scrollMenu') scrollMenu: ElementRef;
     basqueteHabilitado = false;
     combateHabilitado = false;
     esportsHabilitado = false;
@@ -51,22 +45,28 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     tenisMesaHabilitado = false;
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
+    posicaoFinanceira = {
+        saldo: 0,
+        credito: 0
+    };
+    usuario = new Usuario();
+    isLoggedIn;
+    BANCA_NOME;
     appMobile;
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
     LOGO = config.LOGO;
-    unsub$ = new Subject();
     appVersion;
     whatsapp;
     isCliente;
     modoClienteAtivo;
     menuWidth;
-    @ViewChild('scrollMenu') scrollMenu: ElementRef;
-    rightDisabled: boolean = false;
-    leftDisabled: boolean = true;
-    scrollPosition = 0;
+    clienteWidth;
     scrollWidth;
+    rightDisabled = false;
+    leftDisabled = true;
+    unsub$ = new Subject();
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -150,44 +150,45 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngAfterViewInit() {
+        this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
+        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+
         this.checkScrollButtons();
     }
 
     checkScrollButtons() {
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
         if (this.menuWidth >= this.scrollWidth) {
             this.rightDisabled = true;
             this.leftDisabled = true;
         } else {
             this.rightDisabled = false;
         }
+
         this.cd.detectChanges();
     }
 
     scrollLeft() {
         this.scrollMenu.nativeElement.scrollLeft -= 200;
-        this.scrollPosition -= 200;
-        this.checkScroll();
     }
 
     scrollRight() {
         this.scrollMenu.nativeElement.scrollLeft += 200;
-        this.scrollPosition += 200;
-        this.checkScroll();
     }
 
-    onScroll(e) {
-        this.checkScroll();
-    }
+    onScroll(event) {
+        let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
 
-    checkScroll() {
-        this.scrollPosition == 0 ? this.leftDisabled = true : this.leftDisabled = false;
+        if (scrollLeft <= 0) {
+            this.leftDisabled = true;
+        } else {
+            this.leftDisabled = false;
+        }
 
-        let newScrollLeft = this.scrollMenu.nativeElement.scrollLeft;
-        let width = this.scrollMenu.nativeElement.clientWidth;
-        let scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
-
-        scrollWidth - (this.scrollPosition + width) <= 0 ? this.rightDisabled = true : this.rightDisabled = false;
+        if ((this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0) {
+            this.rightDisabled = true;
+        } else {
+            this.rightDisabled = false;
+        }
     }
 
     createForm() {
