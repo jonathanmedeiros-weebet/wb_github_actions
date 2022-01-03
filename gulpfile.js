@@ -1665,3 +1665,21 @@ gulp.task('megabetsport.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('prime.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "prime.wee.bet",
+        banca: "PRIME",
+        styles: "",
+    });
+});
+
+gulp.task('betsmaranhao.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betsmaranhao.wee.bet",
+        banca: "BETS MARANHÃO",
+        styles: "",
+    });
+});
