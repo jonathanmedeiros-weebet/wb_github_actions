@@ -1683,3 +1683,12 @@ gulp.task('betsmaranhao.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('premiersport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "premiersport.wee.bet",
+        banca: "PREMIER SPORT",
+        styles: "",
+    });
+});
