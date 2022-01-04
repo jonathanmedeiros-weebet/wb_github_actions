@@ -86,6 +86,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         queryParams.data = moment().format('YYYY-MM-DD');
                     }
 
+                    const isDomingo = moment().day() === 0;
+
                     if (queryParams.data) {
                         this.data = queryParams.data;
                     }
@@ -93,7 +95,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(
                             switchMap(campeonatos => {
-                                if (campeonatos.length === 0 && isHoje) {
+                                if (campeonatos.length === 0 && isHoje && !isDomingo) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
                                     return this.campeonatoService.getCampeonatos(queryParams);
                                 } else {
