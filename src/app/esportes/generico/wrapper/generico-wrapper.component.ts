@@ -1,8 +1,8 @@
 import {ActivatedRoute} from '@angular/router';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import {Subject} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import {Observable, Observer, Subject} from 'rxjs';
+import {switchMap, takeUntil, tap} from 'rxjs/operators';
 import {CampeonatoService, MessageService, ParametrosLocaisService, SidebarService} from '../../../services';
 import * as moment from 'moment';
 
@@ -28,7 +28,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
@@ -71,6 +72,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         'campeonatos_bloqueados': this.campeonatosBloqueados,
                         'odds': this.odds
                     };
+                    let isHoje = false;
 
                     if (params['data']) {
                         const dt = moment(params['data']);
@@ -80,6 +82,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             queryParams.data = dataLimiteTabela;
                         }
                     } else {
+                        isHoje = true;
                         queryParams.data = moment().format('YYYY-MM-DD');
                     }
 
@@ -88,7 +91,21 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
-                        .pipe(takeUntil(this.unsub$))
+                        .pipe(
+                            switchMap(campeonatos => {
+                                if (campeonatos.length === 0 && isHoje) {
+                                    queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
+                                    return this.campeonatoService.getCampeonatos(queryParams);
+                                } else {
+                                    const observable = new Observable(subscriber => {
+                                        subscriber.next(campeonatos);
+                                        subscriber.complete();
+                                    });
+                                    return observable;
+                                }
+                            }),
+                            takeUntil(this.unsub$)
+                        )
                         .subscribe(
                             campeonatos => {
                                 this.campeonatos = campeonatos;
