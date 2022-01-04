@@ -72,6 +72,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         'campeonatos_bloqueados': this.campeonatosBloqueados,
                         'odds': this.odds
                     };
+
                     let isHoje = false;
 
                     if (params['data']) {
