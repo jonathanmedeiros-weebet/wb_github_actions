@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import {
     CampeonatoService,
     MessageService,
@@ -65,6 +65,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
                 this.data = null;
+                let isHoje = false;
 
                 if (params['campeonato']) {
                     const campeonatoId = params['campeonato'];
@@ -115,6 +116,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                         } else if (!params['nome']) {
                             exibirDestaques = true;
                             queryParams.data = moment().format('YYYY-MM-DD');
+
+                            if (moment().day() !== 0) {
+                                isHoje = true;
+                            }
                         }
 
                         if (queryParams.data) {
@@ -123,7 +128,21 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
-                        .pipe(takeUntil(this.unsub$))
+                        .pipe(
+                            switchMap(campeonatos => {
+                                if (campeonatos.length === 0 && isHoje) {
+                                    queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
+                                    return this.campeonatoService.getCampeonatos(queryParams);
+                                } else {
+                                    const observable = new Observable(subscriber => {
+                                        subscriber.next(campeonatos);
+                                        subscriber.complete();
+                                    });
+                                    return observable;
+                                }
+                            }),
+                            takeUntil(this.unsub$)
+                        )
                         .subscribe(
                             campeonatos => {
                                 this.campeonatos = campeonatos;
