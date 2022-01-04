@@ -1,9 +1,9 @@
-import {ActivatedRoute} from '@angular/router';
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import {Observable, Observer, Subject} from 'rxjs';
-import {switchMap, takeUntil, tap} from 'rxjs/operators';
-import {CampeonatoService, MessageService, ParametrosLocaisService, SidebarService} from '../../../services';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { CampeonatoService, MessageService, ParametrosLocaisService, SidebarService } from '../../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -72,7 +72,6 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         'campeonatos_bloqueados': this.campeonatosBloqueados,
                         'odds': this.odds
                     };
-
                     let isHoje = false;
 
                     if (params['data']) {
@@ -83,11 +82,12 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             queryParams.data = dataLimiteTabela;
                         }
                     } else {
-                        isHoje = true;
                         queryParams.data = moment().format('YYYY-MM-DD');
-                    }
 
-                    const isDomingo = moment().day() === 0;
+                        if (moment().day() !== 0) {
+                            isHoje = true;
+                        }
+                    }
 
                     if (queryParams.data) {
                         this.data = queryParams.data;
@@ -96,7 +96,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(
                             switchMap(campeonatos => {
-                                if (campeonatos.length === 0 && isHoje && !isDomingo) {
+                                if (campeonatos.length === 0 && isHoje) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
                                     return this.campeonatoService.getCampeonatos(queryParams);
                                 } else {

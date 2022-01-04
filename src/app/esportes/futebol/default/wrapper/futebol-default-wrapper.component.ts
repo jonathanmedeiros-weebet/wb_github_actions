@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import {Observable, Subject} from 'rxjs';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import {
     CampeonatoService,
     MessageService,
@@ -66,7 +66,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 this.showLoadingIndicator = true;
                 this.data = null;
                 let isHoje = false;
-                const isDomingo = moment().day() === 0;
 
                 if (params['campeonato']) {
                     const campeonatoId = params['campeonato'];
@@ -115,9 +114,12 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 queryParams.data = dataLimiteTabela;
                             }
                         } else if (!params['nome']) {
-                            isHoje = true;
                             exibirDestaques = true;
                             queryParams.data = moment().format('YYYY-MM-DD');
+
+                            if (moment().day() !== 0) {
+                                isHoje = true;
+                            }
                         }
 
                         if (queryParams.data) {
@@ -128,7 +130,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(
                             switchMap(campeonatos => {
-                                if (campeonatos.length === 0 && isHoje && !isDomingo) {
+                                if (campeonatos.length === 0 && isHoje) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
                                     return this.campeonatoService.getCampeonatos(queryParams);
                                 } else {
