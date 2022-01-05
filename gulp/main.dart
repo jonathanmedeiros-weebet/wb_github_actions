@@ -229,9 +229,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 this._executePostMessageAction(jsonDecode(message.message));
               })
         },
+        navigationDelegate: (NavigationRequest request) {
+          if (request.url.startsWith("https://api.whatsapp.com")) {
+            _launchURL(request.url);
+            return NavigationDecision.prevent;
+          } else {
+            return NavigationDecision.navigate;
+          }
+        },
       ),
       resizeToAvoidBottomInset: false,
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
+    }
   }
 }
 
