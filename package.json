@@ -188,7 +188,8 @@
     "megabetsport.com": "gulp megabetsport.com",
     "prime.wee.bet": "gulp prime.wee.bet",
     "betsmaranhao.wee.bet": "gulp betsmaranhao.wee.bet",
-    "premiersport.wee.bet": "gulp premiersport.wee.bet"
+    "premiersport.wee.bet": "gulp premiersport.wee.bet",
+    "oixbet.wee.bet": "gulp oixbet.wee.bet"
   },
   "private": true,
   "dependencies": {

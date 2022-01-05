@@ -1692,3 +1692,12 @@ gulp.task('premiersport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('oixbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "oixbet.wee.bet",
+        banca: "OIXBET",
+        styles: "",
+    });
+});
