@@ -2,12 +2,16 @@ import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild } from '@ang
 
 import {
     SorteioService, ParametrosLocaisService, PrintService,
-    HelperService, AuthService
+    HelperService, AuthService, ImagensService,
+    MessageService
 } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as html2canvas from 'html2canvas';
 import { config } from './../../../config';
+
+let newNavigator: any;
+newNavigator = window.navigator;
 
 @Component({
     selector: 'app-exibir-bilhete-loteria',
@@ -18,26 +22,31 @@ import { config } from './../../../config';
 export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     @ViewChild('cupom', { static: false }) cupom: ElementRef;
     @Input() aposta: any;
-    LOGO = config.LOGO;
+    LOGO;
     informativoRodape;
     sorteios = [];
     unsub$ = new Subject();
     isCliente;
     isLoggedIn;
+    appMobile;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private sorteioService: SorteioService,
         private printService: PrintService,
         private helperService: HelperService,
-        private authService: AuthService
+        private authService: AuthService,
+        private imagensService: ImagensService,
+        private messageService: MessageService
     ) { }
 
     ngOnInit() {
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
+        this.appMobile = this.authService.isAppMobile();
         this.isCliente = this.authService.isCliente();
         this.isLoggedIn = this.authService.isLoggedIn();
+        this.LOGO = this.imagensService.logo;
 
         this.sorteioService.getSorteios()
             .pipe(takeUntil(this.unsub$))
@@ -81,11 +90,24 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     }
 
     shared() {
-        const options = { logging: false, useCORS: true };
+        if (this.appMobile) {
+            const options = { logging: false, useCORS: true };
 
-        html2canvas(this.cupom.nativeElement, options).then((canvas) => {
-            this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
-        });
+            html2canvas(this.cupom.nativeElement, options).then((canvas) => {
+                this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
+            });
+        } else {
+            if (newNavigator.share) {
+                newNavigator.share({
+                    title: config.BANCA_NOME,
+                    text: `${config.BANCA_NOME}: ${this.aposta.codigo}`,
+                    url: `http://${config.HOST}/aposta/${this.aposta.codigo}`,
+                });
+            } else {
+                this.messageService.error('Compartilhamento não suportado pelo seu navegador');
+            }
+        }
+
     }
 
     print() {
