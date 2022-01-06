@@ -1701,3 +1701,21 @@ gulp.task('oixbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('playplaybet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "playplaybet.net",
+        banca: "PLAY PLAY BET",
+        styles: "",
+    });
+});
+
+gulp.task('megabetrn.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "megabetrn.wee.bet",
+        banca: "MEGA BET RN",
+        styles: "",
+    });
+});
