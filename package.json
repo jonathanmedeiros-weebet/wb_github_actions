@@ -191,7 +191,8 @@
     "premiersport.wee.bet": "gulp premiersport.wee.bet",
     "oixbet.wee.bet": "gulp oixbet.wee.bet",
     "playplaybet.net": "gulp playplaybet.net",
-    "megabetrn.wee.bet": "gulp megabetrn.wee.bet"
+    "megabetrn.wee.bet": "gulp megabetrn.wee.bet",
+    "sportsbest.com.br": "gulp sportsbest.com.br"
   },
   "private": true,
   "dependencies": {

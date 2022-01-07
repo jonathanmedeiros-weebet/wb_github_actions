@@ -1719,3 +1719,12 @@ gulp.task('megabetrn.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportsbest.com.br', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "sportsbest.com.br",
+        banca: "SPORTS BEST",
+        styles: "",
+    });
+});
