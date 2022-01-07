@@ -192,7 +192,8 @@
     "oixbet.wee.bet": "gulp oixbet.wee.bet",
     "playplaybet.net": "gulp playplaybet.net",
     "megabetrn.wee.bet": "gulp megabetrn.wee.bet",
-    "sportsbest.com.br": "gulp sportsbest.com.br"
+    "sportsbest.com.br": "gulp sportsbest.com.br",
+    "placard365.bet": "gulp placard365.bet"
   },
   "private": true,
   "dependencies": {

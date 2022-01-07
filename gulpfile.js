@@ -1728,3 +1728,12 @@ gulp.task('sportsbest.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('placard365.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "placard365.bet",
+        banca: "PLACAR D365",
+        styles: "",
+    });
+});
