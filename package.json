@@ -193,7 +193,8 @@
     "playplaybet.net": "gulp playplaybet.net",
     "megabetrn.wee.bet": "gulp megabetrn.wee.bet",
     "sportsbest.com.br": "gulp sportsbest.com.br",
-    "placard365.bet": "gulp placard365.bet"
+    "placard365.bet": "gulp placard365.bet",
+    "probets.wee.bet": "gulp probets.wee.bet"
   },
   "private": true,
   "dependencies": {

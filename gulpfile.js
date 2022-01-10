@@ -1737,3 +1737,12 @@ gulp.task('placard365.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('probets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "probets.wee.bet",
+        banca: "PRO BETS",
+        styles: "",
+    });
+});
