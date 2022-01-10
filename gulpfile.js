@@ -1269,15 +1269,6 @@ gulp.task('lobobet.net', function (done) {
     });
 });
 
-gulp.task('texas93.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "texas93.bet",
-        banca: "TEXAS 93",
-        styles: "",
-    });
-});
-
 gulp.task('topsports.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
