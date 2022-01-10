@@ -809,15 +809,6 @@ gulp.task('topbets.website', function (done) {
     });
 });
 
-gulp.task('pazbet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "pazbet.com",
-        banca: "PAZ BET",
-        styles: "",
-    });
-});
-
 gulp.task('bigbets.website', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1403,14 +1394,6 @@ gulp.task('imperiobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('florianobets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "florianobets.wee.bet",
-        banca: "FLORIANO BETS",
-        styles: "",
-    });
-});
 
 gulp.task('amgbet.wee.bet', function (done) {
     tasks(done, {
