@@ -45,12 +45,12 @@ export class DestaquesComponent implements OnInit {
             );
     }
 
-    selecionarRegiao(siglaRegiao?) {
+    selecionarRegiao(regiao?) {
         if (this.exibindoRegiao) {
             this.regiaoSelecionada.emit();
             this.exibindoRegiao = false;
         } else {
-            this.regiaoSelecionada.emit(siglaRegiao);
+            this.regiaoSelecionada.emit(regiao);
             this.exibindoRegiao = true;
         }
     }
