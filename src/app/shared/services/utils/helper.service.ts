@@ -265,9 +265,9 @@ export class HelperService {
     sharedTicket(aposta, file) {
         let url;
         if (aposta.tipo === 'loteria') {
-            url = `http://${config.HOST}/aposta/${aposta.codigo}`;
+            url = `https://${config.HOST}/aposta/${aposta.codigo}`;
         } else {
-            url = `${location.origin}/bilhete/${aposta.codigo}`;
+            url = `https://${config.SHARED_URL}/bilhete/${aposta.codigo}`;
         }
 
         let message = `\r${config.BANCA_NOME} \n\nSeu Bilhete: \n${url} \n`;

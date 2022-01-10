@@ -4,9 +4,16 @@ var exec = require('gulp-exec');
 var remoteSrc = require('gulp-remote-src');
 
 function tasks(done, config) {
+    let sharedUrl = config.host;
+
+    if (config.shared_url) {
+        sharedUrl = config.shared_url;
+    }
+
     gulp.src(['base-build/config.ts'])
         .pipe(replace('[HOST]', 'central.' + config.host))
         .pipe(replace('[S3_FOLDER]', config.host))
+        .pipe(replace('[SHARED_URL]', sharedUrl))
         .pipe(replace('[BANCA]', config.banca))
         .pipe(gulp.dest('src/app/shared/'));
 
@@ -1670,6 +1677,7 @@ gulp.task('betsmaranhao.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "betsmaranhao.wee.bet",
+        shared_url: "betsmaranhao.com",
         banca: "BETS MARANHÃO",
         styles: "",
     });
@@ -1688,6 +1696,7 @@ gulp.task('oixbet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "oixbet.wee.bet",
+        shared_url: "oixbet.net",
         banca: "OIXBET",
         styles: "",
     });
