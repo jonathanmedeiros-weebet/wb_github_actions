@@ -218,6 +218,7 @@
     "lodash.range": "^3.2.0",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.13",
+    "ngx-currency": "^2.5.3",
     "ngx-mask": "^7.7.0",
     "ngx-toastr": "^13.2.0",
     "rxjs": "^6.6.0",
