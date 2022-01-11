@@ -56,8 +56,9 @@ header {
 #default-content {
     padding: 20px 15px 20px 270px;
     height: calc(100vh - 45px);
-    overflow: auto;
+    overflow: scroll;
     background: #fff;
+    -webkit-overflow-scrolling: touch;
 }
 
 .content-sports {
