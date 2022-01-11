@@ -86,12 +86,12 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    if (params['regiao_sigla']) {
+                    if (params['regiao_nome']) {
                         queryParams = {
                             odds: this.oddsPrincipais,
                             campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(1),
                             data_final: dataLimiteTabela,
-                            regiao_sigla: params['regiao_sigla']
+                            regiao_nome: params['regiao_nome']
                         };
                     } else {
                         queryParams = {
