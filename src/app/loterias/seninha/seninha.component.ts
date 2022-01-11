@@ -12,7 +12,7 @@ import {
     SorteioService, ApostaLoteriaService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService,
-    ParametrosLocaisService
+    ParametrosLocaisService, MenuFooterService
 } from '../../services';
 import { TipoAposta, Aposta, Sorteio } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -52,7 +52,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private renderer: Renderer2,
         private el: ElementRef,
         private modalService: NgbModal,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -73,7 +74,13 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
                     }
                     this.qtdNumerosLista.push(tipoAposta.qtdNumeros);
                 });
-                this.sidebarService.changeItens(tiposAposta, 'seninha');
+
+                const dados = {
+                    itens: tiposAposta,
+                    contexto: 'seninha'
+                };
+
+                this.sidebarService.changeItens(dados);
             },
             error => this.messageService.error(error)
         );
@@ -99,15 +106,23 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
             this.setNumeros(numeros);
         });
+        this.menuFooterService.toggleBilheteStatus
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
+        this.menuFooterService.setOutraModalidade(true);
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setOutraModalidade(false);
         this.unsub$.next();
         this.unsub$.complete();
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
@@ -164,11 +179,14 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         } else {
             this.messageService.warning('Quantidade de dezenas insuficiente.');
         }
+
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Remover palpite */
     removeGuess(index) {
         this.aposta.itens.splice(index, 1);
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     /* Finalizar aposta */
@@ -209,6 +227,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     preApostaSucess(codigo) {
@@ -222,6 +241,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.aposta = new Aposta();
         this.enableSubmit();
         this.closeCupom();
+        this.menuFooterService.atualizarQuantidade(0);
     }
 
     handleError(msg) {
@@ -283,11 +303,11 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete(false);
     }
 
     disabledSubmit() {

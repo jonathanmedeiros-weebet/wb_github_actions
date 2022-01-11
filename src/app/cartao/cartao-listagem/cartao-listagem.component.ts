@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRe
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { MessageService, CartaoService } from './../../services';
+import {MessageService, CartaoService, MenuFooterService} from './../../services';
 import { CartaoAposta } from './../../models';
 import * as moment from 'moment';
 
@@ -22,7 +22,8 @@ export class CartaoListagemComponent extends BaseFormComponent implements OnInit
         private fb: FormBuilder,
         private cd: ChangeDetectorRef,
         private messageService: MessageService,
-        private cartaoService: CartaoService
+        private cartaoService: CartaoService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -44,9 +45,12 @@ export class CartaoListagemComponent extends BaseFormComponent implements OnInit
 
         this.createForm();
         this.getCartoes();
+        this.menuFooterService.setIsPagina(true);
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
+    }
 
     createForm() {
         this.form = this.fb.group({

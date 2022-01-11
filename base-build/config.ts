@@ -8,6 +8,7 @@ export const config: any = {
     BANCA_NOME: '[BANCA]',
     HOST: _host,
     BASE_URL: `${_host}/api`,
+    SHARED_URL: '[SHARED_URL]',
     CENTER_HOST: _center,
     LIVE_HOST: _live,
     STATS_HOST: _stats,

@@ -1,0 +1,32 @@
+<div id="footer-bar">
+    <div class="foot-button" routerLinkActive="active">
+        <a class="" (click)="toggleSidebar()">
+            <i class="fa fa-bars"></i> Menu
+        </a>
+    </div>
+    <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active">
+        <a class="" [routerLink]="['/esportes/live']">
+            <i class="wbicon icon-ao-vivo"></i> Ao Vivo
+        </a>
+    </div>
+    <div *ngIf="!aoVivoHabilitado" class="foot-button" routerLinkActive="active">
+        <a class="" [routerLink]="['/esportes/futebol']">
+            <i class="wbicon icon-futebol"></i> Futebol
+        </a>
+    </div>
+    <div class="foot-button cupom">
+        <a class="" (click)="toggleBilhete()">
+            <div class="badge-container" *ngIf="quantidadeItens > 0">
+                <span class="cupom-badge">{{quantidadeItens}}</span>
+            </div>
+            <i class="fa fa-ticket"></i> Cupom
+        </a>
+    </div>
+    <div class="foot-button" *ngIf="isLoggedIn && !isCliente">
+        <a class="" [routerLink]="['/validar-aposta']" routerLinkActive="active">
+            <i class="fa fa-check"></i> Validação
+        </a>
+    </div>
+</div>
+
+<app-bilhete-esportivo></app-bilhete-esportivo>

@@ -34,8 +34,9 @@ export class ParametrosLocaisService {
             );
     }
 
-    getCampeonatosBloqueados() {
-        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados) : null;
+    getCampeonatosBloqueados(sportId= 1) {
+        const sport = 'sport_' + sportId;
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados[sport]) : null;
     }
 
     getCampeonatosAoVivo() {
@@ -123,10 +124,6 @@ export class ParametrosLocaisService {
 
     getExibirCampeonatosExpandido() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.exibir_campeonatos_expandido : null;
-    }
-
-    getPrimeiraPagina() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes.primeira_pagina : null;
     }
 
     controlarCreditoCambista() {

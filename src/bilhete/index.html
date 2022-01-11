@@ -4,19 +4,13 @@
 <head>
     <!-- Google Tag Manager -->
     <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-W6CF4C5');
     </script>
     <!-- End Google Tag Manager -->
@@ -25,8 +19,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilhete </title>
-    <link rel="stylesheet" id="app-css" href="./app.css?v=1">
-    <link rel="icon" type="image/x-icon" href="https://weebet.s3.amazonaws.com/bet2.wee.bet/logos/favicon.ico">
+    <link rel="stylesheet" id="app-css" href="./app.css?v=3">
+    <link rel="shortcut icon" type="image/x-icon" href="https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/favicon.ico">
 </head>
 
 <body>
@@ -99,13 +93,17 @@
             <span id="number-hits"></span>
         </div>
         <div>
+            <strong>Cambista Paga:</strong>
+            <span id="agent-pays"></span>
+        </div>
+        <div>
             <strong>Status do Bilhete:</strong>
             <span id="status"></span>
         </div>
     </div>
     </div>
-    <script src="./app-service.js?v=11"></script>
-    <script src="./app.js?v=11"></script>
+    <script src="./app-service.js?v=9"></script>
+    <script src="./app.js?v=9"></script>
 </body>
 
 </html>

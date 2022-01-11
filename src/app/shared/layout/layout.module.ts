@@ -17,7 +17,7 @@ import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-
 import { BilheteCompartilhamentoComponent } from './bilhete-compartilhamento/bilhete-compartilhamento.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from './../utils/utils.module';
-import { ApostaService, ApostaEsportivaService, CartaoService } from '../../services';
+import { ApostaService, ApostaEsportivaService, CartaoService, RegioesDestaqueService } from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent,
     ApostaModalComponent, PreApostaModalComponent,
@@ -29,7 +29,9 @@ import {
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
-import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { MenuFooterComponent } from './menu-footer/menu-footer.component';
+import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esportivo.component';
 
 @NgModule({
     imports: [
@@ -71,7 +73,9 @@ import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
         RecargaSuccessModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
-        ApostaEncerramentoModalComponent
+        ApostaEncerramentoModalComponent,
+        MenuFooterComponent,
+        BilheteEsportivoComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -84,12 +88,14 @@ import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
         BilheteAcumuladaoComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        BilheteEsportivoComponent
     ],
     providers: [
         ApostaEsportivaService,
         ApostaService,
-        CartaoService
+        CartaoService,
+        RegioesDestaqueService
     ]
 })
 export class LayoutModule { }

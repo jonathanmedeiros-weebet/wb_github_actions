@@ -1,33 +1,32 @@
-import {
-    Component, OnInit, ElementRef,
-    Renderer2, ChangeDetectionStrategy, ChangeDetectorRef
-} from '@angular/core';
-import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from '@angular/animations';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Event as NavigationEvent, NavigationEnd, Router } from '@angular/router';
+import { state, style, trigger } from '@angular/animations';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
-    SidebarService, AuthService, PrintService,
-    ParametrosLocaisService, SupresinhaService
+    AuthService,
+    ParametrosLocaisService,
+    PrintService,
+    SidebarService,
+    SupresinhaService
 } from './../../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent,
-    PesquisarApostaModalComponent, CartaoCadastroModalComponent,
-    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
-    RecargaCartaoModalComponent, AtivarCartaoModalComponent
+    AtivarCartaoModalComponent,
+    CartaoCadastroModalComponent,
+    PesquisaModalComponent,
+    PesquisarApostaModalComponent,
+    PesquisarCartaoModalComponent,
+    RecargaCartaoModalComponent,
+    SolicitarSaqueModalComponent,
+    TabelaModalComponent
 } from '../modals';
 import { config } from './../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
+import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
 
 @Component({
     selector: 'app-navigation',
@@ -53,18 +52,20 @@ export class NavigationComponent implements OnInit {
     isLoggedIn;
     isCliente;
     isAppMobile;
+    mobileScreen;
     isOpen = true;
     itens: any[];
     contexto;
+    esporte = '';
     modalRef;
     cartaoApostaHabilitado;
     loteriasHabilitada;
     acumuladaoHabilitado;
-    primeiraPagina;
     exibirPaginaDeposito;
     dataLimiteTabela;
     unsub$ = new Subject();
     regiaoOpen = null;
+    regioesDestaque;
     LOGO = config.LOGO;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
 
@@ -78,7 +79,8 @@ export class NavigationComponent implements OnInit {
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private regioesDestaqueService: RegioesDestaqueService,
     ) {
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
@@ -88,6 +90,9 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.regioesDestaqueService.setExibirDestaques(false);
+        this.mobileScreen = window.innerWidth <= 1024;
+
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
                 .pipe(takeUntil(this.unsub$))
@@ -96,6 +101,16 @@ export class NavigationComponent implements OnInit {
                     this.cd.detectChanges();
                 });
         }
+
+        this.regioesDestaqueService.getRegioesDestaque()
+            .subscribe(
+                res => {
+                    if (res.length > 0) {
+                        this.regioesDestaque = res;
+                        this.cd.detectChanges();
+                    }
+                }
+            );
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -116,7 +131,6 @@ export class NavigationComponent implements OnInit {
             );
 
         this.isAppMobile = this.auth.isAppMobile();
-        this.primeiraPagina = this.paramsService.getPrimeiraPagina();
         this.dataLimiteTabela = this.paramsService.getDataLimiteTabela();
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
         this.loteriasHabilitada = this.paramsService.getOpcoes().loterias;
@@ -129,6 +143,10 @@ export class NavigationComponent implements OnInit {
             .subscribe(dados => {
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
+
+                if (dados.esporte) {
+                    this.esporte = dados.esporte;
+                }
 
                 setTimeout(e => {
                     const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
@@ -168,7 +186,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -186,7 +205,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -207,7 +227,8 @@ export class NavigationComponent implements OnInit {
                         this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: result.input } });
                     }
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -223,7 +244,8 @@ export class NavigationComponent implements OnInit {
         this.modalRef.result
             .then(result => {
                 this.closeMenu();
-            }, reason => { });
+            }, reason => {
+            });
     }
 
     abrirModalAposta() {
@@ -237,8 +259,10 @@ export class NavigationComponent implements OnInit {
 
         this.modalRef.result
             .then(
-                result => { },
-                reason => { }
+                result => {
+                },
+                reason => {
+                }
             );
     }
 
@@ -254,7 +278,8 @@ export class NavigationComponent implements OnInit {
         this.modalRef.result
             .then(
                 result => this.closeMenu(),
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -272,7 +297,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 
@@ -290,7 +316,8 @@ export class NavigationComponent implements OnInit {
                 result => {
                     this.closeMenu();
                 },
-                reason => { }
+                reason => {
+                }
             );
     }
 

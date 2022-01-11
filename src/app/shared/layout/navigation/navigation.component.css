@@ -75,7 +75,6 @@
 .sidebar-nav .group {
     display: inline-block;
     padding-left: 15px;
-    margin-bottom: 10px;
     font-size: 1.25rem;
     font-weight: bold;
     color: var(--foreground-highlight);

@@ -1,17 +1,18 @@
-import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MovimentacaoFinanceira} from '../../shared/models/clientes/movimentacao-financeira';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-financeiro',
     templateUrl: './financeiro.component.html',
     styleUrls: ['./financeiro.component.css']
 })
-export class FinanceiroComponent extends BaseFormComponent implements OnInit {
+export class FinanceiroComponent extends BaseFormComponent implements OnInit, OnDestroy {
     movimentacoesFinanceiras: MovimentacaoFinanceira[] = [];
     totalMovimentacoes;
     queryParams;
@@ -22,7 +23,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     page = 1;
     movimentacoesContent;
     saldo;
-    contatoSolicitacaoSaque;
+    whatsapp;
 
     constructor(
         private clienteService: ClienteService,
@@ -30,15 +31,14 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
         private messageService: MessageService,
         private el: ElementRef,
         private renderer: Renderer2,
-        private paramsLocais: ParametrosLocaisService
+        private paramsLocais: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
 
     ngOnInit(): void {
-        if (this.paramsLocais.getOpcoes().contato_solicitacao_saque) {
-            this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
-        }
+        this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
 
         if (window.innerWidth < 669) {
             this.smallScreen = true;
@@ -49,11 +49,17 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
         this.definirAltura();
 
         this.createForm();
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     getMovimentacoes(queryParams?: any) {
         this.showLoading = true;
         this.clienteService.getMovimentacaoFinanceira(queryParams)
+            .pipe()
             .subscribe(
                 response => {
                     this.movimentacoesFinanceiras = response.results.movimentacoes;
@@ -71,7 +77,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 69;
+        const altura = window.innerHeight - 46;
         this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
         this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
     }

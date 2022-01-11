@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
-import {Usuario} from './../../../models';
-import {config} from './../../config';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BaseFormComponent } from '../base-form/base-form.component';
+import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService } from './../../../services';
+import { Usuario } from './../../../models';
+import { config } from './../../config';
 
 @Component({
     selector: 'app-header',
@@ -30,14 +30,8 @@ import {config} from './../../config';
         ]),
     ]
 })
-export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    posicaoFinanceira = {
-        saldo: 0,
-        credito: 0
-    };
-    usuario = new Usuario();
-    isLoggedIn;
-    BANCA_NOME;
+export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
+    @ViewChild('scrollMenu') scrollMenu: ElementRef;
     basqueteHabilitado = false;
     combateHabilitado = false;
     esportsHabilitado = false;
@@ -45,16 +39,47 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     aoVivoHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    futsalHabilitado = false;
+    voleiHabilitado = false;
+    tenisHabilitado = false;
+    tenisMesaHabilitado = false;
+    futebolAmericanoHabilitado = false;
+    hoqueiGeloHabilitado = false;
+    posicaoFinanceira = {
+        saldo: 0,
+        credito: 0
+    };
+    usuario = new Usuario();
+    isLoggedIn;
+    BANCA_NOME;
     appMobile;
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
     LOGO = config.LOGO;
-    unsub$ = new Subject();
     appVersion;
+    whatsapp;
     isCliente;
     modoClienteAtivo;
-    contatoSolicitacaoSaque;
+    menuWidth;
+    clienteWidth;
+    scrollWidth;
+    rightDisabled = false;
+    leftDisabled = true;
+    unsub$ = new Subject();
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        if (window.innerWidth > 1025) {
+            this.menuWidth = window.innerWidth - (250 + 280);
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
+
+        this.cd.detectChanges();
+
+        this.checkScrollButtons();
+    }
 
     constructor(
         private fb: FormBuilder,
@@ -62,7 +87,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private auth: AuthService,
         private sidebarService: SidebarService,
         private printService: PrintService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -71,7 +97,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
-        this.contatoSolicitacaoSaque = this.paramsService.getOpcoes().contato_solicitacao_saque.replace(/\D/g, '');
+        this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -92,6 +118,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
+        this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
+        this.voleiHabilitado = this.paramsService.getOpcoes().volei;
+        this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
+        this.tenisMesaHabilitado = this.paramsService.getOpcoes().tenis_mesa;
+        this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
+        this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
@@ -104,11 +136,59 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.getUsuario();
         this.createForm();
+
+        if (window.innerWidth > 1025) {
+            this.menuWidth = window.innerWidth - (250 + 280);
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    ngAfterViewInit() {
+        this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
+        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+
+        this.checkScrollButtons();
+    }
+
+    checkScrollButtons() {
+        if (this.menuWidth >= this.scrollWidth) {
+            this.rightDisabled = true;
+            this.leftDisabled = true;
+        } else {
+            this.rightDisabled = false;
+        }
+
+        this.cd.detectChanges();
+    }
+
+    scrollLeft() {
+        this.scrollMenu.nativeElement.scrollLeft -= 200;
+    }
+
+    scrollRight() {
+        this.scrollMenu.nativeElement.scrollLeft += 200;
+    }
+
+    onScroll(event) {
+        let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
+
+        if (scrollLeft <= 0) {
+            this.leftDisabled = true;
+        } else {
+            this.leftDisabled = false;
+        }
+
+        if ((this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0) {
+            this.rightDisabled = true;
+        } else {
+            this.rightDisabled = false;
+        }
     }
 
     createForm() {
@@ -169,8 +249,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     svgCss() {
         return {
             'width.rem': 2,
-            'fill': 'var(--foreground-header)',
-            'margin-bottom.px': '5'
+            'fill': 'var(--foreground-header)'
+        };
+    }
+
+    menuCategoriesClasses() {
+        return {
+            'justify-center': this.leftDisabled && this.rightDisabled && this.menuWidth <= window.innerWidth,
+            'justify-normal': window.innerWidth <= 1025 && this.menuWidth > window.innerWidth
         };
     }
 }

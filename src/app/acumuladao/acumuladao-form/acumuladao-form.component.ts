@@ -1,17 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {
-    AcumuladaoService, MessageService,
-    AuthService, ParametrosLocaisService
-} from './../../services';
-import { Acumuladao } from './../../models';
-import { ApostaModalComponent } from './../../shared/layout/modals';
-import { PreApostaModalComponent } from './../../shared/layout/modals/pre-aposta-modal/pre-aposta-modal.component';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {AcumuladaoService, AuthService, MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
+import {Acumuladao} from './../../models';
+import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -33,6 +31,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     dados;
     isCliente;
     isLoggedIn;
+    unsub$ = new Subject();
 
     constructor(
         private router: Router,
@@ -42,7 +41,8 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private messageService: MessageService,
         public modalService: NgbModal,
         private fb: FormBuilder,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
@@ -87,6 +87,12 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         );
 
         this.createForm();
+        this.menuFooterService.toggleBilheteStatus
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.displayPreTicker = res
+            );
+        this.menuFooterService.atualizarQuantidade(1);
     }
 
     createForm() {
@@ -158,15 +164,16 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     back() {
+        this.menuFooterService.atualizarQuantidade(0);
         this.router.navigate(['/acumuladao/listagem']);
     }
 
     openCupom() {
-        this.displayPreTicker = true;
+        this.menuFooterService.toggleBilhete(true);
     }
 
     closeCupom() {
-        this.displayPreTicker = false;
+        this.menuFooterService.toggleBilhete(false);
     }
 
     trocarTipoApostaDeslogado(tipo) {

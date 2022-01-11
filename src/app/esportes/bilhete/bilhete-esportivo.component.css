@@ -90,9 +90,18 @@
 }
 
 .jogo-selecionado .horario,
-.jogo-selecionado .cotacao .valor {
+.jogo-selecionado .odd .valor {
     color: var(--foreground-highlight);
+}
+
+.jogo-selecionado .odd{
     font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
+}
+
+.jogo-nome, .mercado, .horario{
+    font-size: 0.9rem;
 }
 
 .div-jogos-selecionados .remover-item {
@@ -175,5 +184,19 @@
         height: 100% !important;
         position: fixed !important;
     }
+}
 
+@media (min-width: 1025px) {
+    section.pre-bilhete {
+        position: absolute;
+        top: 46px;
+        right: 0;
+    }
+    .hide-desktop {
+        display: none;
+    }
+}
+
+.hide {
+    display: none;
 }

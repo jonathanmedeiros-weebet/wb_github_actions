@@ -28,6 +28,9 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     @Output() success = new EventEmitter();
     @Input() preAposta: any;
     preApostaItens = [];
+    delay = 20;
+    refreshIntervalId;
+    apostaAoVivo = false;
     cotacoesVinheramDifentes = false;
     cotacoesMudaram = false;
     disabled = false;
@@ -48,11 +51,17 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
     ngOnInit() {
         this.opcoes = this.paramsService.getOpcoes();
-
+        this.setDelay();
         this.createForm();
+
         this.preApostaItens = this.preAposta.itens;
+        let aovivo = false;
 
         this.preApostaItens.forEach(item => {
+            if (item.ao_vivo) {
+                aovivo = true;
+            }
+
             if (item.mensagem) {
                 this.disabled = true;
             }
@@ -61,6 +70,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                 this.cotacoesVinheramDifentes = true;
             }
         });
+
+        this.apostaAoVivo = aovivo;
 
         this.form.patchValue(this.preAposta);
 
@@ -174,10 +185,29 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
     deactivateProcess() {
         this.process = false;
+        this.stopDelayInterval();
     }
 
     triggerProcess() {
         this.process = true;
+
+        if (this.apostaAoVivo) {
+            this.setDelay();
+
+            this.refreshIntervalId = setInterval(() => {
+                if (this.delay > 0) {
+                    this.delay--;
+                }
+            }, 1000);
+        }
+    }
+
+    setDelay() {
+        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
+    }
+
+    stopDelayInterval() {
+        clearInterval(this.refreshIntervalId);
     }
 
     calcularEstimativaGanho(valor?) {

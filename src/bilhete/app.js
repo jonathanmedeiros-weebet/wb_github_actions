@@ -52,7 +52,7 @@ document.onreadystatechange = async function () {
                     } else {
                         this.getElementById('result').append(ticketData.resultado);
                         this.getElementById('has-result').hidden = false;
-                        ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado) : 0;
+                        ticketData.resultado !== 'a confirmar' ? this.getElementById('result').classList.add(ticketData.resultado.replace(' ', '-')) : 0;
                     }
 
                     if (ticketData.passador.percentualPremio > 0) {
@@ -146,6 +146,9 @@ document.onreadystatechange = async function () {
                                 templateData.player_b_1half_result = (mappedResults.fora_1t >= 0) ? mappedResults.fora_1t : '';
                                 templateData.player_b_2half_result = (mappedResults.fora_2t >= 0) ? mappedResults.fora_2t : '';
                                 templateData.player_b_corner_kicks = (mappedResults.fora_escanteios >= 0) ? mappedResults.fora_escanteios : '';
+                            } else if (ticketItem.resultado) {
+                                templateData.player_a_result = ticketItem.time_a_resultado;
+                                templateData.player_b_result = ticketItem.time_b_resultado;
                             }
                         } else if (ticketData.tipo === 'acumuladao') {
                             const result_a = ticketItem.jogo.time_a_resultado;

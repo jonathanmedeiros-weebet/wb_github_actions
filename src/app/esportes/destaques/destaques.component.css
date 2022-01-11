@@ -1,0 +1,136 @@
+.campeonato-header {
+    height: 34px;
+    margin: 0;
+}
+
+.back {
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+}
+
+.menu-camp-destaques {
+    display: flex;
+    align-items: center;
+    overflow-x: auto !important;
+    /* Hide scrollbar for IE and Edge */
+    -ms-overflow-style: none;
+    /* justify-content: center; */
+    background-color: #ffffff;
+    margin: 0;
+}
+
+.menu-camp-destaques::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-camp-destaques .campeonato {
+    margin: 0 5px;
+    padding: 15px 0 5px 0;
+    cursor: pointer;;
+}
+
+.menu-camp-destaques .campeonato a {
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-camp-destaques .campeonato .campeonato-nome {
+    margin-top: 5px;
+}
+
+.menu-camp-destaques .campeonato .flag-icon {
+    background-color: #ffffff;
+    font-size: 5rem;
+    border-color: #e1e2e4;
+    border-style: solid;
+    border-width: 0.01rem;
+    border-radius: 10px;
+}
+
+.menu-camp-destaques .wbicon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.campeonato {
+    width: 75px;
+}
+
+.campeonato a {
+    text-transform: uppercase;
+}
+
+.campeonato span {
+    width: 75px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-normal {
+    justify-content: normal;
+}
+
+@media only screen and (max-width: 1024px) {
+    .menu-camp-destaques {
+        font-size: 0.8rem;
+        padding: 0 5px;
+        margin: 0 auto;
+    }
+
+    .pull {
+        display: none;
+    }
+}
+
+@media (min-width: 1025px) {
+    .scroll {
+        overflow: auto;
+        scroll-behavior: smooth;
+        width: 80%;
+    }
+
+    .visibility {
+        display: none !important;
+
+    }
+
+    .pull {
+        background: var(--foreground-header);
+        color: var(--header);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 50;
+    }
+
+    .pull .fa {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .fa-right {
+        padding-left: 4px;
+    }
+
+    .fa-left {
+        padding-right: 4px;
+    }
+
+    .pull-right {
+        right: 270px;
+    }
+}

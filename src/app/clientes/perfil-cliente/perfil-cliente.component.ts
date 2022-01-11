@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {formatDate} from '@angular/common';
 import {FormBuilder, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -7,14 +7,15 @@ import {MessageService} from '../../shared/services/utils/message.service';
 import {Estado} from '../../shared/models/endereco/estado';
 import {Cidade} from '../../shared/models/endereco/cidade';
 import {UtilsService} from '../../shared/services/utils/utils.service';
-import {Endereco} from "../../shared/models/endereco/endereco";
+import {Endereco} from '../../shared/models/endereco/endereco';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-perfil-cliente',
     templateUrl: './perfil-cliente.component.html',
     styleUrls: ['./perfil-cliente.component.css']
 })
-export class PerfilClienteComponent extends BaseFormComponent implements OnInit {
+export class PerfilClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     estados: Array<Estado>;
     cidades: Array<Cidade>;
     estadoSelecionado: number;
@@ -24,7 +25,8 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
         private fb: FormBuilder,
         private clienteService: ClienteService,
         private utilsService: UtilsService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
         this.cidades = [];
@@ -83,6 +85,11 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
                     this.handleError('Algo inesperado aconteceu. Tente novamente mais tarde.');
                 }
             );
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {
@@ -106,7 +113,6 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit 
     }
 
     getCidades(event: any) {
-        console.log(event.target.value);
         this.utilsService.getCidades(event.target.value).subscribe(
             cidades => {
                 this.cidades = cidades;

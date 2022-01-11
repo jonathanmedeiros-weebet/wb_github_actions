@@ -50,12 +50,12 @@ header {
 }
 
 #page-wrapper {
-    margin-top: 69px;
+    margin-top: 46px;
 }
 
 #default-content {
     padding: 20px 15px 20px 270px;
-    height: calc(100vh - 67px);
+    height: calc(100vh - 45px);
     overflow: auto;
     background: #fff;
 }
@@ -600,11 +600,11 @@ button {
 
 @media only screen and (max-width: 1024px) {
     #page-wrapper {
-        margin-top: 113px;
+        margin-top: 97px;
     }
     #default-content {
-        padding: 10px 15px;
-        height: calc(100vh - 111px);
+        padding: 10px 15px 54px;
+        height: calc(100vh - 98px);
     }
     .loteria-content {
         padding: 0;
@@ -617,7 +617,7 @@ button {
         width: 100% !important;
     }
     .content-loteria {
-        padding-bottom: 90px !important;
+        padding-bottom: 106px !important;
     }
     .odds .odd {
         margin-bottom: 5px;
@@ -726,4 +726,65 @@ button {
     100% {
         transform: rotate(360deg);
     }
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc');
+    src:  url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc#iefix') format('embedded-opentype'),
+    url('https://cdn.wee.bet/fonts/icomoon.ttf?aeroyc') format('truetype'),
+    url('https://cdn.wee.bet/fonts/icomoon.woff?aeroyc') format('woff'),
+    url('https://cdn.wee.bet/fonts/icomoon.svg?aeroyc#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ao-vivo:before {
+    content: "\e901";
+}
+.icon-basquete:before {
+    content: "\e902";
+}
+.icon-e-sports:before {
+    content: "\e903";
+}
+.icon-futebol:before {
+    content: "\e904";
+}
+.icon-futebol-americano:before {
+    content: "\e905";
+}
+.icon-futsal:before {
+    content: "\e906";
+}
+.icon-hoquei-no-gelo:before {
+    content: "\e907";
+}
+.icon-luta:before {
+    content: "\e908";
+}
+.icon-tenis:before {
+    content: "\e909";
+}
+.icon-tenis-de-mesa:before {
+    content: "\e90a";
+}
+.icon-volei:before {
+    content: "\e90b";
 }

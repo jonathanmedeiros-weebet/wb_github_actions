@@ -13,6 +13,7 @@ export * from './shared/services/parametros.service';
 export * from './shared/services/parametros-locais.service';
 export * from './shared/services/relatorio.service';
 export * from './shared/services/financeiro.service';
+export * from './shared/services/regioes-destaque.service';
 
 export * from './shared/services/loteria/aposta-loteria.service';
 export * from './shared/services/loteria/preaposta-loteria.service';
@@ -41,6 +42,7 @@ export * from './shared/services/utils/print.service';
 export * from './shared/services/utils/sidebar.service';
 export * from './shared/services/utils/surpresinha.service';
 export * from './shared/services/utils/utils.service';
+export * from './shared/services/utils/menu-footer.service';
 
 /* Authentication Services */
 export * from './shared/services/auth/auth.service';
@@ -57,3 +59,9 @@ export * from './shared/services/guards/loteria.guard';
 export * from './shared/services/guards/quininha.guard';
 export * from './shared/services/guards/parametros.resolver';
 export * from './shared/services/guards/seninha.guard';
+export * from './shared/services/guards/futsal.guard';
+export * from './shared/services/guards/volei.guard';
+export * from './shared/services/guards/tenis.guard';
+export * from './shared/services/guards/tenis-mesa.guard';
+export * from './shared/services/guards/futebol-americano.guard';
+export * from './shared/services/guards/hoquei-gelo.guard';
