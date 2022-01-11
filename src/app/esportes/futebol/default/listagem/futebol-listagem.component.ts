@@ -328,8 +328,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         if (regiaoSelecionada) {
             this.regiaoSelecionada = regiaoSelecionada;
 
-            let filteredCamps = this.camps.filter(camp => camp.regiao_sigla === regiaoSelecionada);
-
+            let filteredCamps = this.camps.filter(camp => camp.nome.substring(0, camp.nome.indexOf(':')) === regiaoSelecionada);
             filteredCamps.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {

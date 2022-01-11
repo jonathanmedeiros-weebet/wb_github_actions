@@ -124,14 +124,14 @@
                 <ng-container *ngIf="regioesDestaque && !mobileScreen">
                     <span class="group">Destaques</span>
                     <li *ngFor="let regiao of regioesDestaque"
-                        (click)="goTo('/esportes/futebol', { regiao_sigla: regiao.sigla })">
+                        (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
                         <a>
                             <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span> {{regiao.nome}}
                         </a>
                     </li>
                 </ng-container>
                 <span class="group">Datas</span>
-                <li (click)="goTo('/esportes/' + esporte)">
+                <li (click)="goTo('/esportes/' + esporte, {})">
                     <a>
                         Jogos de Hoje
                     </a>
@@ -176,7 +176,7 @@
 
             <ng-container *ngIf="contexto == 'desafio'">
                 <span class="group">Desafios</span>
-                <li class="categoria" (click)="goTo('/desafios')">
+                <li class="categoria" (click)="goTo('/desafios', {})">
                     <a>
                         <i class="fa fa-trophy"></i> TODOS
                     </a>
