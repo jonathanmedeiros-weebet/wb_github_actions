@@ -86,36 +86,45 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
-                    queryParams = {
-                        'sport_id': 1,
-                        'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
-                        'odds': this.oddsPrincipais
-                    };
+                    if (params['regiao_nome']) {
+                        queryParams = {
+                            odds: this.oddsPrincipais,
+                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(1),
+                            data_final: dataLimiteTabela,
+                            regiao_nome: params['regiao_nome']
+                        };
+                    } else {
+                        queryParams = {
+                            'sport_id': 1,
+                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
+                            'odds': this.oddsPrincipais
+                        };
 
-                    if (params['nome']) {
-                        queryParams.nome = params['nome'];
-                        queryParams.data_final = dataLimiteTabela;
-                    }
-
-                    if (params['data']) {
-                        const dt = moment(params['data']);
-
-                        if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
-                            queryParams.data = dt.format('YYYY-MM-DD');
-                        } else {
-                            queryParams.data = dataLimiteTabela;
+                        if (params['nome']) {
+                            queryParams.nome = params['nome'];
+                            queryParams.data_final = dataLimiteTabela;
                         }
-                    } else if (!params['nome']) {
-                        exibirDestaques = true;
-                        queryParams.data = moment().format('YYYY-MM-DD');
 
-                        if (moment().day() !== 0) {
-                            isHoje = true;
+                        if (params['data']) {
+                            const dt = moment(params['data']);
+
+                            if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
+                                queryParams.data = dt.format('YYYY-MM-DD');
+                            } else {
+                                queryParams.data = dataLimiteTabela;
+                            }
+                        } else if (!params['nome']) {
+                            exibirDestaques = true;
+                            queryParams.data = moment().format('YYYY-MM-DD');
+
+                            if (moment().day() !== 0) {
+                                isHoje = true;
+                            }
                         }
-                    }
 
-                    if (queryParams.data) {
-                        this.data = queryParams.data;
+                        if (queryParams.data) {
+                            this.data = queryParams.data;
+                        }
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
