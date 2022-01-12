@@ -187,7 +187,8 @@
     "megabetrn.wee.bet": "gulp megabetrn.wee.bet",
     "sportsbest.com.br": "gulp sportsbest.com.br",
     "placard365.bet": "gulp placard365.bet",
-    "probets.wee.bet": "gulp probets.wee.bet"
+    "probets.wee.bet": "gulp probets.wee.bet",
+    "nortaobet.com": "gulp nortaobet.com"
   },
   "private": true,
   "dependencies": {

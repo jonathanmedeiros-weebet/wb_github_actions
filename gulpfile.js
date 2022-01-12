@@ -1693,3 +1693,12 @@ gulp.task('probets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nortaobet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "nortaobet.com",
+        banca: "NORTÃO BET",
+        styles: "",
+    });
+});
