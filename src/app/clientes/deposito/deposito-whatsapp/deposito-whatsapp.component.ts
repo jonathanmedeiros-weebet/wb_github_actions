@@ -7,7 +7,7 @@ import {ParametrosLocaisService} from '../../../shared/services/parametros-locai
     styleUrls: ['./deposito-whatsapp.component.css']
 })
 export class DepositoWhatsappComponent implements OnInit {
-    contatoSolicitacaoSaque;
+    whatsapp;
 
     constructor(
         private paramsLocais: ParametrosLocaisService
@@ -15,8 +15,8 @@ export class DepositoWhatsappComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.paramsLocais.getOpcoes().contato_solicitacao_saque) {
-            this.contatoSolicitacaoSaque = this.paramsLocais.getOpcoes().contato_solicitacao_saque;
+        if (this.paramsLocais.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramsLocais.getOpcoes().whatsapp;
         }
     }
 
