@@ -56,8 +56,8 @@ header {
 #default-content {
     padding: 20px 15px 20px 270px;
     height: calc(100vh - 45px);
-    overflow: scroll;
     background: #fff;
+    overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
