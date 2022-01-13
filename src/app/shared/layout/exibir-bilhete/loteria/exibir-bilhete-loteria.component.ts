@@ -7,7 +7,7 @@ import {
 } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { config } from './../../../config';
 
 let newNavigator: any;

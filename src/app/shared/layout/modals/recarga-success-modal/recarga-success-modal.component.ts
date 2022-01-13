@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, PrintService, HelperService } from '../../../../services';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { config } from '../../../config';
 
 @Component({

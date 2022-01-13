@@ -1079,15 +1079,6 @@ gulp.task('cearabetsplacardarodada.wee.bet', function (done) {
     });
 });
 
-gulp.task('carecasbet.site', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "carecasbet.site",
-        banca: "CARECAS BET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff;--highlight: #ff3f00; --foreground-highlight: #fff; --odds: #00008B;",
-    });
-});
-
 gulp.task('apostatop.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1385,15 +1376,6 @@ gulp.task('mais1bet.com', function (done) {
     });
 });
 
-gulp.task('imperiobet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "imperiobet.wee.bet",
-        banca: "IMPÉRIO BET",
-        styles: "",
-    });
-});
-
 
 gulp.task('amgbet.wee.bet', function (done) {
     tasks(done, {
@@ -1467,15 +1449,6 @@ gulp.task('futsport.net', function (done) {
     });
 });
 
-gulp.task('mundobet.site', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "mundobet.site",
-        banca: "MUNDO BET",
-        styles: "",
-    });
-});
-
 gulp.task('novobetsamericabr.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1499,15 +1472,6 @@ gulp.task('trandbets.com', function (done) {
         server: "front1.wee.bet",
         host: "trandbets.com",
         banca: "TRAND BETS",
-        styles: "",
-    });
-});
-
-gulp.task('maiorsportprime.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "maiorsportprime.wee.bet",
-        banca: "MAIOR SPORT PRIME",
         styles: "",
     });
 });
@@ -1726,6 +1690,15 @@ gulp.task('probets.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "probets.wee.bet",
         banca: "PRO BETS",
+        styles: "",
+    });
+});
+
+gulp.task('nortaobet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "nortaobet.com",
+        banca: "NORTÃO BET",
         styles: "",
     });
 });

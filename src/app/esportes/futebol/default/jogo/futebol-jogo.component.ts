@@ -116,7 +116,16 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        let altura = window.innerHeight;
+
+        if (this.isMobile) {
+            altura -= 223;
+        } else {
+            altura -= 177;
+        }
+
+        console.log(altura);
+
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
