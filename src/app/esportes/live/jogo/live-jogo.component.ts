@@ -45,7 +45,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
-        if (window.innerWidth <= 667) {
+        if (window.innerWidth <= 1024) {
             this.isMobile = true;
         }
         this.definirAltura();
@@ -78,7 +78,14 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        let altura = window.innerHeight;
+
+        if (this.isMobile) {
+            altura -= 132;
+        } else {
+            altura -= 236;
+        }
+
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
