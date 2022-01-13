@@ -5,7 +5,8 @@ import {
     ParametrosLocaisService, HelperService, PrintService,
     AuthService, MessageService
 } from '../../../../services';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
+
 let newNavigator: any;
 newNavigator = window.navigator;
 
