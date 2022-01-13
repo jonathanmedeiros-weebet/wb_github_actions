@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder} from '@angular/forms';
 import {DepositosESaques} from '../../models';
 import {ClienteService} from "../../shared/services/clientes/cliente.service";
 import {FinanceiroService} from "../../shared/services/financeiro.service";
+import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
 
 @Component({
     selector: 'app-solicitacoes',
     templateUrl: './depositos-e-saques.component.html',
     styleUrls: ['./depositos-e-saques.component.css']
 })
-export class DepositosESaquesComponent extends BaseFormComponent implements OnInit {
+export class DepositosESaquesComponent extends BaseFormComponent implements OnInit, OnDestroy {
     showLoading;
     depositosESaques: DepositosESaques[] = [];
     totalSolicitacoes;
@@ -21,13 +22,19 @@ export class DepositosESaquesComponent extends BaseFormComponent implements OnIn
     constructor(
         private fb: FormBuilder,
         private clienteService: ClienteService,
-        private financeiroService: FinanceiroService
+        private financeiroService: FinanceiroService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
 
     ngOnInit() {
         this.createForm();
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {

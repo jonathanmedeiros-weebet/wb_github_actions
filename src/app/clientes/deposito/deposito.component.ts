@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
 
@@ -13,7 +14,8 @@ export class DepositoComponent implements OnInit, OnDestroy {
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private router: Router
     ) {
     }
 
@@ -21,6 +23,12 @@ export class DepositoComponent implements OnInit, OnDestroy {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+        this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
+
+        if (!this.hasMpToken && this.whatsapp) {
+            this.router.navigate(['clientes/deposito/whatsapp'])
+        }
+
         this.menuFooterService.setIsPagina(true);
     }
 

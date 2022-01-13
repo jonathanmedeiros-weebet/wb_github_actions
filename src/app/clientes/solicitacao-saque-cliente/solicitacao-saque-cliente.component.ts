@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {Cliente} from '../../shared/models/clientes/cliente';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {FinanceiroService} from '../../shared/services/financeiro.service';
+import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
     templateUrl: './solicitacao-saque-cliente.component.html',
     styleUrls: ['./solicitacao-saque-cliente.component.css']
 })
-export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit {
+export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     submitting;
     cadastroCompleto = true;
     respostaSolicitacao;
@@ -22,14 +23,19 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private fb: FormBuilder,
         private messageService: MessageService,
         private clienteService: ClienteService,
-        private financeiroService: FinanceiroService
+        private financeiroService: FinanceiroService,
+        private menuFooterService: MenuFooterService
     ) {
         super();
     }
 
     ngOnInit() {
         this.createForm();
+        this.menuFooterService.setIsPagina(true);
+    }
 
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
     }
 
     createForm() {
