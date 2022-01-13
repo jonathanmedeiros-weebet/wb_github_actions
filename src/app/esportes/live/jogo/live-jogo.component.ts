@@ -81,9 +81,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         let altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 132;
-        } else {
             altura -= 236;
+        } else {
+            altura -= 121;
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
