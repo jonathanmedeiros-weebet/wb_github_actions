@@ -4,9 +4,15 @@
     "newProjectRoot": "projects",
     "projects": {
         "weebet-client": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:application": {
+                    "strict": true
+                }
+            },
             "root": "",
             "sourceRoot": "src",
-            "projectType": "application",
+            "prefix": "app",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
@@ -18,7 +24,7 @@
                         "outputPath": "dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
-                        "tsConfig": "src/tsconfig.app.json",
+                        "tsConfig": "tsconfig.app.json",
                         "polyfills": "src/polyfills.ts",
                         "assets": [
                             "src/assets",
@@ -40,49 +46,47 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                             "node_modules/jstree/dist/jstree.min.js"
-                        ],
-                        "vendorChunk": true,
-                        "extractLicenses": false,
-                        "buildOptimizer": false,
-                        "sourceMap": true,
-                        "optimization": false,
-                        "namedChunks": true
+                        ]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "4kb"
                                 }
                             ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
                                     "with": "src/environments/environment.prod.ts"
                                 }
-                            ]
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
                         }
                     },
-                    "defaultConfiguration": ""
+                    "defaultConfiguration": "production"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "browserTarget": "weebet-client:build"
-                    },
                     "configurations": {
                         "production": {
                             "browserTarget": "weebet-client:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "weebet-client:build:development"
                         }
-                    }
+                    },
+                    "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -94,75 +98,21 @@
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
                         "main": "src/test.ts",
-                        "karmaConfig": "./karma.conf.js",
                         "polyfills": "src/polyfills.ts",
-                        "tsConfig": "src/tsconfig.spec.json",
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+                        "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets"
                         ],
                         "styles": [
-                            "node_modules/bootstrap/dist/css/bootstrap.css",
-                            "node_modules/font-awesome/css/font-awesome.css",
                             "src/styles.css"
                         ],
-                        "assets": [
-                            "src/assets",
-                            "src/favicon.ico"
-                        ]
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "src/tsconfig.app.json",
-                            "src/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
-                    }
-                }
-            }
-        },
-        "weebet-client-e2e": {
-            "root": "e2e",
-            "sourceRoot": "e2e",
-            "projectType": "application",
-            "architect": {
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "./protractor.conf.js",
-                        "devServerTarget": "weebet-client:serve"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "e2e/tsconfig.e2e.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
+                        "scripts": []
                     }
                 }
             }
         }
     },
-    "defaultProject": "weebet-client",
-    "schematics": {
-        "@schematics/angular:component": {
-            "prefix": "app",
-            "style": "css"
-        },
-        "@schematics/angular:directive": {
-            "prefix": "app"
-        }
-    },
-    "cli": {
-        "analytics": false
-    }
+    "defaultProject": "weebet-client"
 }

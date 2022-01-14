@@ -7,7 +7,7 @@ import {
 } from '../../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 import { config } from './../../../config';
 
 let newNavigator: any;
@@ -91,10 +91,8 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
 
     shared() {
         if (this.appMobile) {
-            const options = { logging: false, useCORS: true };
-
-            html2canvas(this.cupom.nativeElement, options).then((canvas) => {
-                this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
+            toPng(this.cupom.nativeElement).then((dataUrl) => {
+                this.helperService.sharedTicket(this.aposta, dataUrl);
             });
         } else {
             if (newNavigator.share) {

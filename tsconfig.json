@@ -18,5 +18,8 @@
     ],
     "module": "es2020",
     "baseUrl": "./"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false
   }
 }
