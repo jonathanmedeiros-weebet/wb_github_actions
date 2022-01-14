@@ -61,9 +61,7 @@ function tasks(done, config) {
     };
 
     gulp.src(['/'])
-        .pipe(exec('ng build --prod', options))
-        // .pipe(exec('ng build --configuration=england', options))
-        // .pipe(exec('ng build --prod --outputHashing=none', options))
+        .pipe(exec('ng build --configuration production', options))
         .pipe(exec('cd dist && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.server + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.server + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
         .pipe(exec.reporter(reportOptions));
 

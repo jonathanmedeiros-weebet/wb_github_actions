@@ -6,7 +6,7 @@ import {
     AuthService, MessageService, ImagensService
 } from '../../../services';
 
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 
 let newNavigator: any;
 newNavigator = window.navigator;
@@ -18,7 +18,7 @@ newNavigator = window.navigator;
 })
 
 export class BilheteCompartilhamentoComponent implements OnInit {
-    @ViewChild('bilhete', { static: false }) bilhete: ElementRef;
+    @ViewChild('bilhete', { static: true }) bilhete: ElementRef;
     @Input() aposta: any;
     opcoes;
     cambistaPaga;
@@ -58,13 +58,8 @@ export class BilheteCompartilhamentoComponent implements OnInit {
 
     shared() {
         if (this.appMobile) {
-            const options = {
-                logging: true,
-                useCORS: true
-            };
-
-            html2canvas(this.bilhete.nativeElement, options).then((canvas) => {
-                this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
+            toPng(this.bilhete.nativeElement).then((dataUrl) => {
+                this.helperService.sharedTicket(this.aposta, dataUrl);
             });
         } else {
             if (newNavigator.share) {

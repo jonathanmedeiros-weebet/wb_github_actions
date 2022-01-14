@@ -5,7 +5,7 @@ import {
     ParametrosLocaisService, HelperService, PrintService,
     AuthService, MessageService
 } from '../../../../services';
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -66,10 +66,8 @@ export class ExibirBilheteDesafioComponent implements OnInit {
 
     shared() {
         if (this.appMobile) {
-            const options = { logging: false, useCORS: true };
-
-            html2canvas(this.cupom.nativeElement, options).then((canvas) => {
-                this.helperService.sharedTicket(this.aposta, canvas.toDataURL());
+            toPng(this.cupom.nativeElement).then((dataUrl) => {
+                this.helperService.sharedTicket(this.aposta, dataUrl);
             });
         } else {
             if (newNavigator.share) {

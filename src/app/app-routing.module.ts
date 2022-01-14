@@ -20,26 +20,26 @@ const appRoutes: Routes = [
             },
             {
                 path: 'acumuladao',
-                loadChildren: () => import('app/acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
+                loadChildren: () => import('./acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
             },
             {
                 path: 'apuracao',
-                loadChildren: () => import('app/apuracao/apuracao.module').then(m => m.ApuracaoModule),
+                loadChildren: () => import('./apuracao/apuracao.module').then(m => m.ApuracaoModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'cartoes',
-                loadChildren: () => import('app/cartao/cartao.module').then(m => m.CartaoModule),
+                loadChildren: () => import('./cartao/cartao.module').then(m => m.CartaoModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'desafios',
-                loadChildren: () => import('app/desafios/desafios.module').then(m => m.DesafiosModule),
+                loadChildren: () => import('./desafios/desafios.module').then(m => m.DesafiosModule),
                 canActivate: [DesafioGuard]
             },
             {
                 path: 'esportes',
-                loadChildren: () => import('app/esportes/esportes.module').then(m => m.EsportesModule)
+                loadChildren: () => import('./esportes/esportes.module').then(m => m.EsportesModule)
             },
             {
                 path: 'informacoes',
@@ -47,28 +47,28 @@ const appRoutes: Routes = [
             },
             {
                 path: 'loterias',
-                loadChildren: () => import('app/loterias/loterias.module').then(m => m.LoteriasModule),
+                loadChildren: () => import('./loterias/loterias.module').then(m => m.LoteriasModule),
                 canActivate: [LoteriaGuard]
             },
             {
                 path: 'resultados',
-                loadChildren: () => import('app/resultados/resultados.module').then(m => m.ResultadosModule),
+                loadChildren: () => import('./resultados/resultados.module').then(m => m.ResultadosModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'alterar-senha',
-                loadChildren: () => import('app/meu-perfil/alterar-senha.module').then(m => m.AlterarSenhaModule),
+                loadChildren: () => import('./meu-perfil/alterar-senha.module').then(m => m.AlterarSenhaModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'validar-aposta',
-                loadChildren: () => import('app/validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
+                loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard]
             },
             {
                 path: 'auth',
                 component: AuthLayoutComponent,
-                loadChildren: () => import('app/auth/auth.module').then(m => m.AuthModule)
+                loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
             },
             {
                 path: 'clientes',

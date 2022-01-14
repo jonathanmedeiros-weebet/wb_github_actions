@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, PrintService, HelperService } from '../../../../services';
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 import { config } from '../../../config';
 
 @Component({
@@ -33,10 +33,8 @@ export class RecargaSuccessModalComponent implements OnInit {
     }
 
     shareTicket() {
-        const options = { logging: false };
-
-        html2canvas(this.cupom.nativeElement, options).then((canvas) => {
-            this.helper.sharedRecargaCartao(this.recarga, canvas.toDataURL());
+        toPng(this.cupom.nativeElement).then((dataUrl) => {
+            this.helper.sharedRecargaCartao(this.recarga, dataUrl);
         });
     }
 }
