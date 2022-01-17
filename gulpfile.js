@@ -1700,3 +1700,30 @@ gulp.task('nortaobet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gbbets.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "gbbets.net",
+        banca: "GB BETS",
+        styles: "",
+    });
+});
+
+gulp.task('spprimesporte.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "spprimesporte.com",
+        banca: "SP PRIME SPORTE",
+        styles: "",
+    });
+});
+
+gulp.task('matrizbets.com.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "matrizbets.com.br",
+        banca: "MATRIZ BETS",
+        styles: "",
+    });
+});

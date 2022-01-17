@@ -187,7 +187,10 @@
         "sportsbest.com.br": "gulp sportsbest.com.br",
         "placard365.bet": "gulp placard365.bet",
         "probets.wee.bet": "gulp probets.wee.bet",
-        "nortaobet.com": "gulp nortaobet.com"
+        "nortaobet.com": "gulp nortaobet.com",
+        "gbbets.net": "gulp gbbets.net",
+        "spprimesporte.com": "gulp spprimesporte.com",
+        "matrizbets.com.br": "gulp matrizbets.com.br"
     },
     "private": true,
     "dependencies": {
