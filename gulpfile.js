@@ -843,15 +843,6 @@ gulp.task('sampabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('apostasminas.site', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "apostasminas.site",
-        banca: "APOSTAS MINAS",
-        styles: "--highlight: #ffd700; --odds: #ffa500; --foreground-odds: #fff;",
-    });
-});
-
 gulp.task('moralbets.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -940,15 +931,6 @@ gulp.task('i9bets.wee.bet', function (done) {
         host: "i9bets.wee.bet",
         banca: "I9 BETS",
         styles: "",
-    });
-});
-
-gulp.task('portugabet.site', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "portugabet.site",
-        banca: "PORTUGA BET",
-        styles: "--header: #008000; --foreground-header: #fff; --sidebar-right:#e50200; --foreground-sidebar-right: #fff; --sidebar-left: #e50200; --foreground-sidebar-left: #fff; --odds: #008000;--league: #ffd700;--highlight: #ffd700;--foreground-highlight:#fff;",
     });
 });
 
