@@ -188,7 +188,8 @@
         "nortaobet.com": "gulp nortaobet.com",
         "gbbets.net": "gulp gbbets.net",
         "spprimesporte.com": "gulp spprimesporte.com",
-        "matrizbets.com.br": "gulp matrizbets.com.br"
+        "matrizbets.com.br": "gulp matrizbets.com.br",
+        "rodadabets.wee.bet": "gulp rodadabets.wee.bet"
     },
     "private": true,
     "dependencies": {

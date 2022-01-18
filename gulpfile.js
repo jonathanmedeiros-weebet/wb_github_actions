@@ -1709,3 +1709,12 @@ gulp.task('matrizbets.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('rodadabets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "rodadabets.wee.bet",
+        banca: "RODADA BETS",
+        styles: "",
+    });
+});
