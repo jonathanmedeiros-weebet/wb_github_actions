@@ -1393,15 +1393,6 @@ gulp.task('betsportse.com', function (done) {
     });
 });
 
-gulp.task('boleirosbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "boleirosbet.wee.bet",
-        banca: "BOLEIROS BET",
-        styles: "",
-    });
-});
-
 gulp.task('ligabet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
