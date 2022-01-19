@@ -25,4 +25,8 @@ export class PixResultComponent implements OnInit {
         inputElement.setSelectionRange(0, 0);
         this.messageService.success('QRCode copiado para área de transferência');
     }
+
+    resetarPix() {
+        this.onFinish.emit();
+    }
 }

@@ -54,5 +54,7 @@ export class PixFormComponent extends BaseFormComponent implements OnInit {
 
     finalize(values: any) {
         this.pix = null;
+        this.form.patchValue({'valor': null});
+        this.submitting = false;
     }
 }
