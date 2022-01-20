@@ -8,7 +8,7 @@ import {MessageService, CartaoService, MenuFooterService} from './../../services
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-solicitacoes-saque',
+    selector: 'app-depositos-e-saques-saque',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './solicitacoes-saque.component.html',
     styleUrls: ['./solicitacoes-saque.component.css']

@@ -86,7 +86,7 @@ export class ClienteService {
             requestOptions = this.headers.getRequestOptions(true);
         }
 
-        return this.http.get(`${this.clienteUrl}/getMovimentacao`, requestOptions)
+        return this.http.get(`${this.clienteUrl}/movimentacoes`, requestOptions)
             .pipe(
                 map((res: any) => res),
                 catchError(this.errorService.handleError)

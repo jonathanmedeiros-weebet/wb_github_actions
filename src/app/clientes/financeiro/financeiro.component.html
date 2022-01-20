@@ -71,9 +71,11 @@
                                         <ng-template #iconeDebito>
                                             <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
                                         </ng-template>
-                                        {{movimentacao.natureza | formatarNatureza}}
+                                        {{movimentacao.natureza | formatarNatureza}} <span
+                                        *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
                                     </td>
-                                    <td class="custom-td" style="padding-right: 10px;">{{movimentacao.valor | currency}}</td>
+                                    <td class="custom-td"
+                                        style="padding-right: 10px;">{{movimentacao.valor | currency}}</td>
                                     <td class="custom-td">{{movimentacao.saldo | currency}}</td>
                                 </tr>
                                 <tr class="tr-2">

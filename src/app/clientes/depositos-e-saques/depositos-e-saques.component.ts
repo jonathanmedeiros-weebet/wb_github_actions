@@ -7,7 +7,7 @@ import {FinanceiroService} from "../../shared/services/financeiro.service";
 import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
 
 @Component({
-    selector: 'app-solicitacoes',
+    selector: 'app-depositos-e-saques',
     templateUrl: './depositos-e-saques.component.html',
     styleUrls: ['./depositos-e-saques.component.css']
 })

@@ -83,7 +83,8 @@
                                 </tr>
                                 <tr class="tr-2">
                                     <td colspan="3">
-                                        Realizado em {{depositoSaque.data}}
+                                        Registrado em {{depositoSaque.data_registro}} <span
+                                        *ngIf="depositoSaque.data_pagamento"> - Pago em {{depositoSaque.data_pagamento}}</span>
                                     </td>
                                 </tr>
                             </ng-container>

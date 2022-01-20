@@ -32,7 +32,7 @@ const routes: Routes = [{
         },
         {
             path: 'depositos-e-saques',
-            loadChildren: () => import('./solicitacoes/depositos-e-saques.module').then(m => m.DepositosESaquesModule)
+            loadChildren: () => import('./depositos-e-saques/depositos-e-saques.module').then(m => m.DepositosESaquesModule)
         }
     ]
 }];

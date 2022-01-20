@@ -100,7 +100,7 @@
                         <ng-container *ngIf="isLoggedIn; else notLoggedIn">
                             <a class="dropdown-item" (click)="abrirModalCadastroCartao()">Criar</a>
                             <a class="dropdown-item" [routerLink]="['/cartoes']">Listagem</a>
-                            <a class="dropdown-item" [routerLink]="['/cartoes/solicitacoes-saque']">
+                            <a class="dropdown-item" [routerLink]="['/cartoes/depositos-e-saques-saque']">
                                 Solicitações Saque
                             </a>
                             <a class="dropdown-item" *ngIf="permitirAtivacaoCartao()"

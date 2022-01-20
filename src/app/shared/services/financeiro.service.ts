@@ -50,7 +50,7 @@ export class FinanceiroService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(`${this.financeiroUrl}/getDepositosESaques`, requestOptions)
+        return this.http.get(`${this.financeiroUrl}/depositos-e-saques`, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
