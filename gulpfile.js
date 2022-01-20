@@ -1559,6 +1559,7 @@ gulp.task('imperio.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "imperio.wee.bet",
+        shared_url: "imperiobet.vip",
         banca: "IMPÉRIO BET",
         styles: "",
     });
