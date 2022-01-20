@@ -87,6 +87,14 @@
         pré-aposta.
     </div>
 
+    <div class="form-group form-check-custom alteracoes-odds">
+        <input type="checkbox" class="form-check-input-custom" id="aceito-alteracoes-odds"
+            formControlName="aceitar_alteracoes_odds">
+        <label for="aceito-alteracoes-odds">
+            Aceitar alterações de odds
+        </label>
+    </div>
+
     <button [disabled]="disabled" *ngIf="!process; else btnProcessando" class="btn btn-custom">
         Validar
     </button>

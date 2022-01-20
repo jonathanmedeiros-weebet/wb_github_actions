@@ -94,13 +94,13 @@
     color: var(--foreground-highlight);
 }
 
-.jogo-selecionado .odd{
+.jogo-selecionado .odd {
     font-weight: bold;
     font-size: 1.1rem;
     padding: 2px 0;
 }
 
-.jogo-nome, .mercado, .horario{
+.jogo-nome, .mercado, .horario {
     font-size: 0.9rem;
 }
 
@@ -158,25 +158,29 @@
     font-size: 1rem;
 }
 
-.jogo-selecionado-inner{
+.jogo-selecionado-inner {
     padding-right: 20px;
 }
 
-.mensagem-mudanca{
+.mensagem-mudanca {
     box-sizing: border-box;
     border-radius: 0.25rem;
     background-color: #fff;
     margin-bottom: 15px;
-    padding:15px;
+    padding: 15px;
 }
 
-#aceitar-mudancas{
+#aceitar-mudancas {
     background-color: var(--highlight);
     color: var(--foreground-selected-odds);
 }
 
-.mudou{
+.mudou {
     border: 1px solid var(--highlight);
+}
+
+.alteracoes-odds {
+    text-align: left;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -192,6 +196,7 @@
         top: 46px;
         right: 0;
     }
+
     .hide-desktop {
         display: none;
     }
