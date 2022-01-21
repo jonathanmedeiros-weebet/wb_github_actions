@@ -23,11 +23,11 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="!isCambista">
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Depósito
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="!isCambista">
+                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Saque
                     </a>
 
@@ -199,11 +199,11 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="!isCambista">
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Depósito
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="!isCambista">
+                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
                         <i class="fa fa-dollar"></i> Solicitar Saque
                     </a>
 

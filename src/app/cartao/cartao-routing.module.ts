@@ -6,7 +6,7 @@ import { CartaoListagemComponent } from './cartao-listagem/cartao-listagem.compo
 
 export const routes: Routes = [
     { path: '', component: CartaoListagemComponent },
-    { path: 'depositos-e-saques-saque', component: SolicitacoesSaqueComponent },
+    { path: 'solicitacoes-saque-cartao', component: SolicitacoesSaqueComponent },
 ];
 
 @NgModule({
