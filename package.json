@@ -34,6 +34,7 @@
         "apostapremiada.bet": "gulp apostapremiada.bet",
         "bet1.wee.bet": "gulp bet1.wee.bet",
         "bet2.wee.bet": "gulp bet2.wee.bet",
+        "bet4.wee.bet": "gulp bet4.wee.bet",
         "bet5.wee.bet": "gulp bet5.wee.bet",
         "topbets.me": "gulp topbets.me",
         "esportmania.net": "gulp esportmania.net",
@@ -188,7 +189,8 @@
         "gbbets.net": "gulp gbbets.net",
         "spprimesporte.com": "gulp spprimesporte.com",
         "matrizbets.com.br": "gulp matrizbets.com.br",
-        "rodadabets.wee.bet": "gulp rodadabets.wee.bet"
+        "rodadabets.wee.bet": "gulp rodadabets.wee.bet",
+        "cruzeirosports.wee.bet": "gulp cruzeirosports.wee.bet"
     },
     "private": true,
     "dependencies": {

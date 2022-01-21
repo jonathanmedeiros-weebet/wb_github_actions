@@ -292,7 +292,16 @@ gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "bet2.wee.bet",
-        banca: "BetSports",
+        banca: "WEEBET",
+        styles: ""
+    });
+});
+
+gulp.task('bet4.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bet4.wee.bet",
+        banca: "BET",
         styles: ""
     });
 });
@@ -1707,6 +1716,15 @@ gulp.task('rodadabets.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "rodadabets.wee.bet",
         banca: "RODADA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('cruzeirosports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "cruzeirosports.wee.bet",
+        banca: "CRUZEIRO SPORTS",
         styles: "",
     });
 });
