@@ -22,7 +22,7 @@ export class FinanceiroService {
     }
 
     processarPagamento(detalhesPagamento): Observable<any> {
-        return this.http.post(this.financeiroUrl + '/processarPagamento',
+        return this.http.post(this.financeiroUrl + '/processar-pagamento',
             JSON.stringify(detalhesPagamento), this.header.getRequestOptions(true))
             .pipe(
                 take(1),
@@ -32,7 +32,7 @@ export class FinanceiroService {
     }
 
     solicitarSaque(detalhesSaque): Observable<any> {
-        return this.http.post(this.financeiroUrl + '/solicitarSaque',
+        return this.http.post(this.financeiroUrl + '/solicitar-saque',
             JSON.stringify(detalhesSaque), this.header.getRequestOptions(true))
             .pipe(
                 take(1),
@@ -41,7 +41,7 @@ export class FinanceiroService {
             );
     }
 
-    getDepositosESaques(queryParams?: any): Observable<any> {
+    getDepositosSaques(queryParams?: any): Observable<any> {
         let requestOptions;
 
         if (queryParams) {
@@ -50,7 +50,7 @@ export class FinanceiroService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(`${this.financeiroUrl}/depositos-e-saques`, requestOptions)
+        return this.http.get(`${this.financeiroUrl}/depositos-saques`, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

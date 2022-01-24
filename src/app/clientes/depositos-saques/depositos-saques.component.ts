@@ -55,7 +55,7 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
             'periodo': this.queryParams.periodo,
             'tipo': this.queryParams.tipo,
         };
-        this.financeiroService.getDepositosESaques(queryParams)
+        this.financeiroService.getDepositosSaques(queryParams)
             .subscribe(
                 response => {
                     this.depositosESaques = response;
