@@ -11,7 +11,7 @@ const routes: Routes = [{
         },
         {
             path: 'perfil',
-            loadChildren: () => import('./perfil-cliente/perfil-cliente.module').then(p => p.PerfilClienteModule)
+            loadChildren: () => import('./perfil/cliente-perfil.module').then(p => p.ClientePerfilModule)
         },
         {
             path: 'financeiro',
@@ -31,8 +31,8 @@ const routes: Routes = [{
                 .then(s => s.SolicitacaoSaqueClienteModule)
         },
         {
-            path: 'depositos-e-saques',
-            loadChildren: () => import('./depositos-e-saques/depositos-e-saques.module').then(m => m.DepositosESaquesModule)
+            path: 'depositos-saques',
+            loadChildren: () => import('./depositos-saques/depositos-saques.module').then(m => m.DepositosSaquesModule)
         }
     ]
 }];

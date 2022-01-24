@@ -7,11 +7,11 @@ import {FinanceiroService} from "../../shared/services/financeiro.service";
 import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
 
 @Component({
-    selector: 'app-depositos-e-saques',
-    templateUrl: './depositos-e-saques.component.html',
-    styleUrls: ['./depositos-e-saques.component.css']
+    selector: 'app-depositos-saques',
+    templateUrl: './depositos-saques.component.html',
+    styleUrls: ['./depositos-saques.component.css']
 })
-export class DepositosESaquesComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class DepositosSaquesComponent extends BaseFormComponent implements OnInit, OnDestroy {
     showLoading;
     depositosESaques: DepositosESaques[] = [];
     totalSolicitacoes;

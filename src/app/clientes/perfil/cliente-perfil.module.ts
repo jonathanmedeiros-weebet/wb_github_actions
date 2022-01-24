@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {PerfilClienteRoutingModule} from './perfil-cliente-routing.module';
-import {PerfilClienteComponent} from './perfil-cliente.component';
+import {ClientePerfilRoutingModule} from './cliente-perfil-routing.module';
+import {ClientePerfilComponent} from './cliente-perfil.component';
 import {SharedModule} from '../../shared/shared.module';
 import {NgxMaskModule} from 'ngx-mask';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -10,15 +10,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
-        PerfilClienteComponent,
+        ClientePerfilComponent,
     ],
     imports: [
         CommonModule,
-        PerfilClienteRoutingModule,
+        ClientePerfilRoutingModule,
         SharedModule,
         NgxMaskModule,
         NgbModule
     ]
 })
-export class PerfilClienteModule {
+export class ClientePerfilModule {
 }

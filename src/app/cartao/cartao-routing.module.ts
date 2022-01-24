@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SolicitacoesSaqueComponent } from './solicitacoes-saque/solicitacoes-saque.component';
+import { CartaoSolicitacoesSaqueComponent } from './solicitacoes-saque/cartao-solicitacoes-saque.component';
 import { CartaoListagemComponent } from './cartao-listagem/cartao-listagem.component';
 
 export const routes: Routes = [
     { path: '', component: CartaoListagemComponent },
-    { path: 'solicitacoes-saque-cartao', component: SolicitacoesSaqueComponent },
+    { path: 'solicitacoes-saque', component: CartaoSolicitacoesSaqueComponent },
 ];
 
 @NgModule({

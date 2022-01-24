@@ -8,12 +8,12 @@ import {MessageService, CartaoService, MenuFooterService} from './../../services
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-depositos-e-saques-saque',
+    selector: 'app-cartao-solicitacoes-saque',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './solicitacoes-saque.component.html',
-    styleUrls: ['./solicitacoes-saque.component.css']
+    templateUrl: './cartao-solicitacoes-saque.component.html',
+    styleUrls: ['./cartao-solicitacoes-saque.component.css']
 })
-export class SolicitacoesSaqueComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class CartaoSolicitacoesSaqueComponent extends BaseFormComponent implements OnInit, OnDestroy {
     dataInicial;
     dataFinal;
     showLoadingIndicator = true;

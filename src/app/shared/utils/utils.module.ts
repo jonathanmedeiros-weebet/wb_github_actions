@@ -14,7 +14,7 @@ import {
 } from './index';
 import { SplitCodigoPipe } from './split-codigo.pipe';
 import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
-import {FormatarStatusPipe} from "./formatar-status.pipe";
+import {DepositosStatusPixPipe} from "./depositos-status-pix.pipe";
 
 @NgModule({
     declarations: [
@@ -30,7 +30,7 @@ import {FormatarStatusPipe} from "./formatar-status.pipe";
         SplitCodigoPipe,
         FormatarNaturezaPipe,
         SanitizeCampNamePipe,
-        FormatarStatusPipe
+        DepositosStatusPixPipe
     ],
     exports: [
         MomentPipe,
@@ -44,7 +44,7 @@ import {FormatarStatusPipe} from "./formatar-status.pipe";
         InfiniteScrollDirective,
         SplitCodigoPipe,
         FormatarNaturezaPipe,
-        FormatarStatusPipe,
+        DepositosStatusPixPipe,
         SanitizeCampNamePipe
     ]
 })

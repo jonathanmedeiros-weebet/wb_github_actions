@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PixFormComponent} from './pix-form/pix-form.component';
+import {DepositoPixFormComponent} from './form/deposito-pix-form.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: PixFormComponent
+        component: DepositoPixFormComponent
     },
 ];
 

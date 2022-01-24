@@ -3,11 +3,11 @@ import {MessageService} from '../../../../shared/services/utils/message.service'
 import {Pix} from '../../../../models';
 
 @Component({
-    selector: 'app-pix-result',
-    templateUrl: './pix-result.component.html',
-    styleUrls: ['./pix-result.component.css']
+    selector: 'app-deposito-pix-result',
+    templateUrl: './deposito-pix-result.component.html',
+    styleUrls: ['./deposito-pix-result.component.css']
 })
-export class PixResultComponent implements OnInit {
+export class DepositoPixResultComponent implements OnInit {
     @Input() pix: Pix;
     @Output() onFinish = new EventEmitter();
 

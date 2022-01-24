@@ -6,11 +6,11 @@ import {MessageService} from '../../../../shared/services/utils/message.service'
 import {Pix} from '../../../../models';
 
 @Component({
-    selector: 'app-pix-form',
-    templateUrl: './pix-form.component.html',
-    styleUrls: ['./pix-form.component.css']
+    selector: 'app-deposito-pix-form',
+    templateUrl: './deposito-pix-form.component.html',
+    styleUrls: ['./deposito-pix-form.component.css']
 })
-export class PixFormComponent extends BaseFormComponent implements OnInit {
+export class DepositoPixFormComponent extends BaseFormComponent implements OnInit {
     submitting = false;
     pix: Pix;
 

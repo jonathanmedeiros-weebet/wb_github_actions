@@ -14,11 +14,11 @@ const routes: Routes = [
             },
             {
                 path: 'pix',
-                loadChildren: () => import('./deposito-pix/deposito-pix.module').then(m => m.DepositoPixModule)
+                loadChildren: () => import('./pix/deposito-pix.module').then(m => m.DepositoPixModule)
             },
             {
                 path: 'whatsapp',
-                loadChildren: () => import('./deposito-whatsapp/deposito-whatsapp.module').then(m => m.DepositoWhatsappModule)
+                loadChildren: () => import('./whatsapp/deposito-whatsapp.module').then(m => m.DepositoWhatsappModule)
             }
         ]
     },
