@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../../../shared/layout/base-form/base-form.component';
+import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
-import {FinanceiroService} from '../../../../shared/services/financeiro.service';
-import {MessageService} from '../../../../shared/services/utils/message.service';
-import {Pix} from '../../../../models';
+import {FinanceiroService} from '../../../shared/services/financeiro.service';
+import {MessageService} from '../../../shared/services/utils/message.service';
+import {Pix} from '../../../models';
 
 @Component({
-    selector: 'app-deposito-pix-form',
-    templateUrl: './deposito-pix-form.component.html',
-    styleUrls: ['./deposito-pix-form.component.css']
+    selector: 'app-deposito-pix',
+    templateUrl: './deposito-pix.component.html',
+    styleUrls: ['./deposito-pix.component.css']
 })
-export class DepositoPixFormComponent extends BaseFormComponent implements OnInit {
+export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     submitting = false;
     pix: Pix;
 
@@ -52,7 +52,14 @@ export class DepositoPixFormComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    finalize(values: any) {
+    copyInputMessage(inputElement) {
+        inputElement.select();
+        document.execCommand('copy');
+        inputElement.setSelectionRange(0, 0);
+        this.messageService.success('QRCode copiado para área de transferência');
+    }
+
+    novoPix(values: any) {
         this.pix = null;
         this.form.patchValue({'valor': null});
         this.submitting = false;

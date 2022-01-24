@@ -14,6 +14,7 @@
     border: 0.1pt solid #000000;
     border-radius: 8px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .active {

@@ -11,6 +11,7 @@ import {MenuFooterService} from "../../shared/services/utils/menu-footer.service
 export class DepositoComponent implements OnInit, OnDestroy {
     whatsapp;
     hasMpToken;
+    modalidade;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -26,14 +27,19 @@ export class DepositoComponent implements OnInit, OnDestroy {
         this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
 
         if (!this.hasMpToken && this.whatsapp) {
-            this.router.navigate(['clientes/deposito/whatsapp'])
+            this.modalidade = "whatsapp";
+        } else {
+            this.modalidade = "pix";
         }
 
         this.menuFooterService.setIsPagina(true);
     }
 
+    selecionarModalide(modalide){
+        this.modalidade = modalide;
+    }
+
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
     }
-
 }

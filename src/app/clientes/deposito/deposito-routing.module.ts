@@ -5,22 +5,7 @@ import {DepositoComponent} from './deposito.component';
 const routes: Routes = [
     {
         path: '',
-        component: DepositoComponent,
-        children: [
-            {
-                path: '',
-                redirectTo: 'pix',
-                pathMatch: 'full'
-            },
-            {
-                path: 'pix',
-                loadChildren: () => import('./pix/deposito-pix.module').then(m => m.DepositoPixModule)
-            },
-            {
-                path: 'whatsapp',
-                loadChildren: () => import('./whatsapp/deposito-whatsapp.module').then(m => m.DepositoWhatsappModule)
-            }
-        ]
+        component: DepositoComponent
     },
 ];
 
