@@ -1598,6 +1598,7 @@ gulp.task('prime.wee.bet', function (done) {
         host: "prime.wee.bet",
         banca: "PRIME",
         styles: "",
+        scripts: "<!-- Global site tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-D6VVE3T0SP'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-D6VVE3T0SP'); </script>",
     });
 });
 
