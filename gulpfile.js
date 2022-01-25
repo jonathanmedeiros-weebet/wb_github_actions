@@ -1728,3 +1728,21 @@ gulp.task('cruzeirosports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gamez.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gamez.bet",
+        banca: "GAMEZ",
+        styles: ""
+    });
+});
+
+gulp.task('lucksport.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "lucksport.bet",
+        banca: "LUCK SPORT",
+        styles: ""
+    });
+});
