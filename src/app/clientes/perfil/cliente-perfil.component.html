@@ -116,7 +116,8 @@
                                 <label class="label">Cidade</label>
                                 <select formControlName="cidade" class="form-control">
                                     <option value="0">Selecione a cidade</option>
-                                    <option *ngFor="let cidade of cidades" [value]="cidade.id" [selected]="cidade.id === cidadeSelecionada" >{{cidade.nome}}</option>
+                                    <option *ngFor="let cidade of cidades" [value]="cidade.id"
+                                            [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
                                 </select>
                                 <app-error-msg [control]="form.get('cidade')"></app-error-msg>
                             </div>
@@ -130,8 +131,10 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <label class="label">Chave PIX</label>
-                                <input type="text" formControlName="chave_pix" class="form-control" placeholder="CPF, E-mail, Telefone ou Aleatória">
+                                <input type="text" formControlName="chave_pix" class="form-control"
+                                       placeholder="CPF, E-mail, Telefone ou Aleatória">
                                 <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
+                                <small>Obs. Só será realizado saques em chaves pix pertencentes ao titular da conta.</small>
                             </div>
                         </div>
                     </div>
