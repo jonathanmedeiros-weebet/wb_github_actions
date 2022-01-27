@@ -1772,3 +1772,12 @@ gulp.task('clicbet.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sportourodomexico.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sportourodomexico.wee.bet",
+        banca: "SPORT OURO DO MX",
+        styles: "",
+    });
+});
