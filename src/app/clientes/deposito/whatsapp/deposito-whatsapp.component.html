@@ -1,0 +1,11 @@
+<div class="col-12" *ngIf="whatsapp">
+    <div class="row">
+        Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}
+    </div>
+    <div class="row">
+        <a class="btn btn-info" target="_blank"
+           href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+            Solicitar Depósito
+        </a>
+    </div>
+</div>

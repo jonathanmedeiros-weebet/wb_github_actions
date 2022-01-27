@@ -11,7 +11,7 @@ const routes: Routes = [{
         },
         {
             path: 'perfil',
-            loadChildren: () => import('./perfil-cliente/perfil-cliente.module').then(p => p.PerfilClienteModule)
+            loadChildren: () => import('./perfil/cliente-perfil.module').then(p => p.ClientePerfilModule)
         },
         {
             path: 'financeiro',
@@ -20,6 +20,19 @@ const routes: Routes = [{
         {
             path: 'apostas',
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
+        },
+        {
+            path: 'deposito',
+            loadChildren: () => import('./deposito/deposito.module').then(a => a.DepositoModule)
+        },
+        {
+            path: 'saque',
+            loadChildren: () => import('./solicitacao-saque-cliente/solicitacao-saque-cliente.module')
+                .then(s => s.SolicitacaoSaqueClienteModule)
+        },
+        {
+            path: 'depositos-saques',
+            loadChildren: () => import('./depositos-saques/depositos-saques.module').then(m => m.DepositosSaquesModule)
         }
     ]
 }];

@@ -1,0 +1,23 @@
+.buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--foreground-header);
+    margin-bottom: 15px;
+}
+
+.opcao-pagamento {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1pt solid #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.active {
+    background-color: var(--header);
+    color: var(--foreground-header);
+}

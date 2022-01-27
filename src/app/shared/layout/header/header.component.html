@@ -23,9 +23,12 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                        *ngIf="isCliente">
-                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                        <i class="fa fa-dollar"></i> Solicitar Depósito
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                        <i class="fa fa-dollar"></i> Solicitar Saque
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
@@ -196,9 +199,12 @@
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                        *ngIf="isCliente">
-                        <i class="fa fa-dollar"></i> Solicitar Recarga/Saque
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                        <i class="fa fa-dollar"></i> Solicitar Depósito
+                    </a>
+
+                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                        <i class="fa fa-dollar"></i> Solicitar Saque
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">

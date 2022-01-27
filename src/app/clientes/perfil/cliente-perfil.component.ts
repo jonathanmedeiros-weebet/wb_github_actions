@@ -11,11 +11,11 @@ import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
-    selector: 'app-perfil-cliente',
-    templateUrl: './perfil-cliente.component.html',
-    styleUrls: ['./perfil-cliente.component.css']
+    selector: 'app-cliente-perfil',
+    templateUrl: './cliente-perfil.component.html',
+    styleUrls: ['./cliente-perfil.component.css']
 })
-export class PerfilClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class ClientePerfilComponent extends BaseFormComponent implements OnInit, OnDestroy {
     estados: Array<Estado>;
     cidades: Array<Cidade>;
     estadoSelecionado: number;
@@ -54,7 +54,8 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit,
                             sexo: cliente.genero.toUpperCase(),
                             cpf: cliente.cpf,
                             telefone: cliente.telefone,
-                            email: cliente.email
+                            email: cliente.email,
+                            chave_pix: cliente.chave_pix
                         }
                     );
                     if (cliente.endereco) {
@@ -106,6 +107,7 @@ export class PerfilClienteComponent extends BaseFormComponent implements OnInit,
             cidade: ['', Validators.required],
             estado: ['', Validators.required],
             cep: ['', Validators.required],
+            chave_pix: [''],
             senha_atual: [null, Validators.required]
         });
     }
