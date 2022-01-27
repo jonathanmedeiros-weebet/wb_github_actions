@@ -34,6 +34,15 @@ function tasks(done, config) {
         .pipe(replace('[HOST]', config.host))
         .pipe(gulp.dest('src/bilhete/'));
 
+    let currency = 'BRL';
+    if (config.currency) {
+        currency = config.currency;
+    }
+
+    gulp.src(['base-build/bilhete/app.js'])
+        .pipe(replace('[CURRENCY]', currency))
+        .pipe(gulp.dest('src/bilhete/'));
+
     /*gulp.src(['styles.css'])
         .pipe(replace('[CUSTOM]', config.styles))
         .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
@@ -60,8 +69,13 @@ function tasks(done, config) {
         stdout: true // default = true, false means don't write stdout
     };
 
+    let environment = 'production';
+    if (config.environment) {
+        environment = config.environment;
+    }
+
     gulp.src(['/'])
-        .pipe(exec('ng build --configuration production', options))
+        .pipe(exec(`ng build --configuration ${environment}`, options))
         .pipe(exec('cd dist && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.server + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.server + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
         .pipe(exec.reporter(reportOptions));
 
@@ -292,7 +306,16 @@ gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "bet2.wee.bet",
-        banca: "BetSports",
+        banca: "WEEBET",
+        styles: ""
+    });
+});
+
+gulp.task('bet4.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bet4.wee.bet",
+        banca: "BET",
         styles: ""
     });
 });
@@ -843,15 +866,6 @@ gulp.task('sampabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('apostasminas.site', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "apostasminas.site",
-        banca: "APOSTAS MINAS",
-        styles: "--highlight: #ffd700; --odds: #ffa500; --foreground-odds: #fff;",
-    });
-});
-
 gulp.task('moralbets.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -940,15 +954,6 @@ gulp.task('i9bets.wee.bet', function (done) {
         host: "i9bets.wee.bet",
         banca: "I9 BETS",
         styles: "",
-    });
-});
-
-gulp.task('portugabet.site', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "portugabet.site",
-        banca: "PORTUGA BET",
-        styles: "--header: #008000; --foreground-header: #fff; --sidebar-right:#e50200; --foreground-sidebar-right: #fff; --sidebar-left: #e50200; --foreground-sidebar-left: #fff; --odds: #008000;--league: #ffd700;--highlight: #ffd700;--foreground-highlight:#fff;",
     });
 });
 
@@ -1411,15 +1416,6 @@ gulp.task('betsportse.com', function (done) {
     });
 });
 
-gulp.task('boleirosbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "boleirosbet.wee.bet",
-        banca: "BOLEIROS BET",
-        styles: "",
-    });
-});
-
 gulp.task('ligabet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1586,6 +1582,7 @@ gulp.task('imperio.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "imperio.wee.bet",
+        shared_url: "imperiobet.vip",
         banca: "IMPÉRIO BET",
         styles: "",
     });
@@ -1615,6 +1612,7 @@ gulp.task('prime.wee.bet', function (done) {
         host: "prime.wee.bet",
         banca: "PRIME",
         styles: "",
+        scripts: "<!-- Global site tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-D6VVE3T0SP'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-D6VVE3T0SP'); </script>",
     });
 });
 
@@ -1698,5 +1696,79 @@ gulp.task('nortaobet.com', function (done) {
         host: "nortaobet.com",
         banca: "NORTÃO BET",
         styles: "",
+    });
+});
+
+gulp.task('gbbets.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "gbbets.net",
+        banca: "GB BETS",
+        styles: "",
+    });
+});
+
+gulp.task('spprimesporte.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "spprimesporte.com",
+        banca: "SP PRIME SPORTE",
+        styles: "",
+    });
+});
+
+gulp.task('matrizbets.com.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "matrizbets.com.br",
+        banca: "MATRIZ BETS",
+        styles: "",
+    });
+});
+
+gulp.task('rodadabets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "rodadabets.wee.bet",
+        banca: "RODADA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('cruzeirosports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "cruzeirosports.wee.bet",
+        banca: "CRUZEIRO SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('gamez.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gamez.bet",
+        banca: "GAMEZ",
+        styles: ""
+    });
+});
+
+gulp.task('lucksport.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "lucksport.bet",
+        banca: "LUCK SPORT",
+        styles: ""
+    });
+});
+
+gulp.task('clicbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "clicbet.wee.bet",
+        banca: "CLICBET",
+        currency: "EUR",
+        environment: "portugal",
+        styles: ""
     });
 });

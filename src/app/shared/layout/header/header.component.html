@@ -16,10 +16,10 @@
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
                     <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
-                        Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
+                        Crédito: {{posicaoFinanceira.credito | currency}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
-                        Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}
+                        Saldo: {{posicaoFinanceira.saldo | currency}}
                     </button>
                     <div class="dropdown-divider"></div>
 
@@ -192,10 +192,10 @@
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
                     <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
-                        Crédito: {{posicaoFinanceira.credito | currency:'BRL':'symbol':'1.2'}}
+                        Crédito: {{posicaoFinanceira.credito | currency}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
-                        Saldo: {{posicaoFinanceira.saldo | currency:'BRL':'symbol':'1.2'}}
+                        Saldo: {{posicaoFinanceira.saldo | currency}}
                     </button>
                     <div class="dropdown-divider"></div>
 

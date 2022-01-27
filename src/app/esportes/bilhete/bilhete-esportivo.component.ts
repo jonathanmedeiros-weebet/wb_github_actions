@@ -1,18 +1,18 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
     ParametrosLocaisService, MessageService, BilheteEsportivoService,
-    HelperService, ApostaEsportivaService, AuthService, PreApostaEsportivaService, MenuFooterService
+    HelperService, ApostaEsportivaService, AuthService,
+    PreApostaEsportivaService, MenuFooterService
 } from '../../services';
-import {ItemBilheteEsportivo} from '../../models';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ItemBilheteEsportivo } from '../../models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
-import {result} from 'lodash';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -20,7 +20,7 @@ import {result} from 'lodash';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
+    @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
     mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
@@ -72,7 +72,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                 isCliente => {
                                     this.isCliente = isCliente;
                                     if (isCliente && this.isLoggedIn) {
-                                        this.form.patchValue({apostador: 'cliente'});
+                                        this.form.patchValue({ apostador: 'cliente' });
                                     }
                                 }
                             );
@@ -143,7 +143,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.form = this.fb.group({
             apostador: ['', (this.isCliente) ? '' : [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
-            itens: this.fb.array([])
+            itens: this.fb.array([]),
+            aceitar_alteracoes_odds: [false]
         });
 
         this.cartaoApostaForm = this.fb.group({
@@ -157,7 +158,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     definirValor(valor) {
-        this.form.patchValue({'valor': valor});
+        this.form.patchValue({ 'valor': valor });
     }
 
     get itens() {
@@ -283,7 +284,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.stopDelayInterval();
 
         if (this.isCliente) {
-            this.form.patchValue({'apostador': 'cliente'});
+            this.form.patchValue({ 'apostador': 'cliente' });
         }
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
@@ -410,7 +411,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
                 delete cartaoValues.manter_cartao;
 
-                const dados = Object.assign(values, {cartao: cartaoValues});
+                const dados = Object.assign(values, { cartao: cartaoValues });
                 this.salvarAposta(dados);
             } else {
                 this.enableSubmit();
