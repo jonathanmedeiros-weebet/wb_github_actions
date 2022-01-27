@@ -3,7 +3,7 @@ import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.comp
 import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
-import {Pix} from '../../../models';
+import {DepositoPix} from '../../../models';
 
 @Component({
     selector: 'app-deposito-pix',
@@ -12,7 +12,7 @@ import {Pix} from '../../../models';
 })
 export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     submitting = false;
-    pix: Pix;
+    pix: DepositoPix;
     exibirMensagemPagamento = false;
     novoSaldo;
     clearSetInterval;

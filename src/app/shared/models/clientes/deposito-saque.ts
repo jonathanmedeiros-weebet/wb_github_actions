@@ -1,4 +1,4 @@
-export class DepositosESaques {
+export class DepositoSaque {
     data_registro: string;
     data_pagamento: string;
     tipo: string;

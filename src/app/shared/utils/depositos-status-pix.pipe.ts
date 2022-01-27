@@ -1,9 +1,9 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-    name: 'DepositosStatusPix'
+    name: 'depositoStatusPixPipe'
 })
-export class DepositosStatusPixPipe implements PipeTransform {
+export class DepositoStatusPixPipePipe implements PipeTransform {
 
     transform(status: any): string {
         let statusFormatado = '';

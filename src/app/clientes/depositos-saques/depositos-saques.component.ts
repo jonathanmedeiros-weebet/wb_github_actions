@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder} from '@angular/forms';
-import {DepositosESaques} from '../../models';
+import {DepositoSaque} from '../../models';
 import {ClienteService} from "../../shared/services/clientes/cliente.service";
 import {FinanceiroService} from "../../shared/services/financeiro.service";
 import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
+import {MessageService} from "../../shared/services/utils/message.service";
 
 @Component({
     selector: 'app-depositos-saques',
@@ -13,7 +14,7 @@ import {MenuFooterService} from "../../shared/services/utils/menu-footer.service
 })
 export class DepositosSaquesComponent extends BaseFormComponent implements OnInit, OnDestroy {
     showLoading;
-    depositosESaques: DepositosESaques[] = [];
+    depositosESaques: DepositoSaque[] = [];
     totalSolicitacoes;
     dataInicial;
     dataFinal;
@@ -23,7 +24,8 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
         private fb: FormBuilder,
         private clienteService: ClienteService,
         private financeiroService: FinanceiroService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private messageService: MessageService
     ) {
         super();
     }
@@ -47,6 +49,7 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
     }
 
     handleError(error: string) {
+        this.messageService.error(error)
     }
 
     submit() {
@@ -66,9 +69,4 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
                 }
             );
     }
-
-    testLen() {
-        console.log(this.depositosESaques.length);
-    }
-
 }

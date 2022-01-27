@@ -38,5 +38,5 @@ export * from './shared/models/aposta-esportiva/jogo-info';
 export * from './shared/models/aposta-esportiva/pre-aposta-esportiva';
 
 // Deposito
-export * from './shared/models/deposito/pix';
-export * from './shared/models/clientes/depositos-e-saques';
+export * from './shared/models/deposito/depositoPix';
+export * from './shared/models/clientes/deposito-saque';

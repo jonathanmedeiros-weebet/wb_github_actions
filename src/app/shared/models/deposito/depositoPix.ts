@@ -1,4 +1,4 @@
-export class Pix {
+export class DepositoPix {
     metodo: string;
     pagamento_id: string;
     titular: string;
