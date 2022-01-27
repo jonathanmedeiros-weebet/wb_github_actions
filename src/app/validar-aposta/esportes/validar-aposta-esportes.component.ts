@@ -97,7 +97,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     createForm() {
         this.form = this.fb.group({
             apostador: ['', Validators.required],
-            valor: ['', Validators.required]
+            valor: ['', Validators.required],
+            aceitar_alteracoes_odds: [false]
         });
     }
 

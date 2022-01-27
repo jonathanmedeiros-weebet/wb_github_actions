@@ -520,8 +520,8 @@ button {
 }
 
 .tipo-apostas .nav {
-    padding: 10px!important;
-    justify-content: center!important;
+    padding: 10px !important;
+    justify-content: center !important;
 }
 
 .tipo-apostas .nav-pills .nav-item {
@@ -579,21 +579,27 @@ button {
     #fixed-bar-bilhete {
         display: none
     }
+
     .fechar-pre-bilhete {
         display: none;
     }
+
     .pre-bilhete {
         display: block;
     }
+
     .odds .odd {
         width: 33.33%;
     }
+
     .odds .odd-enabled:hover {
         background-color: var(--highlight);
     }
+
     .odds .odd-enabled:hover span {
         color: var(--foreground-selected-odds) !important;
     }
+
     .loteria-content .add-palpite {
         margin-top: 24px;
     }
@@ -603,13 +609,16 @@ button {
     #page-wrapper {
         margin-top: 97px;
     }
+
     #default-content {
         padding: 10px 15px 54px;
         height: calc(100vh - 98px);
     }
+
     .loteria-content {
         padding: 0;
     }
+
     .loteria-content .pre-bilhete {
         padding: 40px 15px 0;
         position: absolute !important;
@@ -617,21 +626,26 @@ button {
         height: 100% !important;
         width: 100% !important;
     }
+
     .content-loteria {
         padding-bottom: 106px !important;
     }
+
     .odds .odd {
         margin-bottom: 5px;
         width: 50%;
     }
+
     .odds .odd:nth-of-type(1),
     .odds .odd:nth-of-type(2),
     .odds .odd:nth-of-type(3) {
         width: 33.33%;
     }
+
     .square-group {
         justify-content: center;
     }
+
     .add-palpite {
         display: block;
         width: 100%
@@ -716,7 +730,7 @@ button {
 }
 
 .odd-disabled {
-    cursor: not-allowed!important;
+    cursor: not-allowed !important;
     opacity: .7;
 }
 
@@ -724,6 +738,7 @@ button {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -731,11 +746,11 @@ button {
 
 @font-face {
     font-family: 'icomoon';
-    src:  url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc');
-    src:  url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc#iefix') format('embedded-opentype'),
-    url('https://cdn.wee.bet/fonts/icomoon.ttf?aeroyc') format('truetype'),
-    url('https://cdn.wee.bet/fonts/icomoon.woff?aeroyc') format('woff'),
-    url('https://cdn.wee.bet/fonts/icomoon.svg?aeroyc#icomoon') format('svg');
+    src: url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc');
+    src: url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc#iefix') format('embedded-opentype'),
+        url('https://cdn.wee.bet/fonts/icomoon.ttf?aeroyc') format('truetype'),
+        url('https://cdn.wee.bet/fonts/icomoon.woff?aeroyc') format('woff'),
+        url('https://cdn.wee.bet/fonts/icomoon.svg?aeroyc#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -759,33 +774,130 @@ button {
 .icon-ao-vivo:before {
     content: "\e901";
 }
+
 .icon-basquete:before {
     content: "\e902";
 }
+
 .icon-e-sports:before {
     content: "\e903";
 }
+
 .icon-futebol:before {
     content: "\e904";
 }
+
 .icon-futebol-americano:before {
     content: "\e905";
 }
+
 .icon-futsal:before {
     content: "\e906";
 }
+
 .icon-hoquei-no-gelo:before {
     content: "\e907";
 }
+
 .icon-luta:before {
     content: "\e908";
 }
+
 .icon-tenis:before {
     content: "\e909";
 }
+
 .icon-tenis-de-mesa:before {
     content: "\e90a";
 }
+
 .icon-volei:before {
     content: "\e90b";
 }
+
+/* Custom Checkbox */
+.form-check-custom {
+    font-size: 1.1rem;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    color: #1e282c;
+
+}
+
+.form-check-custom+.form-check-custom {
+    margin-top: 1em;
+}
+
+.form-check-custom--disabled {
+    color: #cacaca;
+    cursor: not-allowed;
+}
+
+.form-check-input-custom {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    /* background-color: #1e282c; */
+    /* Not removed via appearance */
+    margin: 0;
+
+    font: inherit;
+    color: #1e282c;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid #1e282c;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+.form-check-input-custom::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--odds);
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+}
+
+.form-check-input-custom:checked::before {
+    transform: scale(1);
+}
+
+.form-check-input-custom:focus {
+    outline: max(2px, 0.15em) solid #1e282c;
+    outline-offset: max(2px, 0.15em);
+}
+
+.form-check-input-custom:disabled {
+    --form-control-color: #cacaca;
+    color: #cacaca;
+    cursor: not-allowed;
+}
+
+.form-check-style-1 {
+    color: var(--foreground-odds);
+}
+.form-check-input-style-1{
+    color: var(--foreground-odds);
+    border-color: var(--foreground-odds);
+    background-color: var(--foreground-odds);
+}
+.form-check-input-style-1::before{
+    box-shadow: inset 1em 1em var(--odds);
+}
+.form-check-input-style-1:focus{
+    outline: max(2px, 0.15em) solid var(--foreground-odds);
+}
+
+/* Custom Checkbox */
