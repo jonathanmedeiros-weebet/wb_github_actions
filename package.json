@@ -192,7 +192,8 @@
         "rodadabets.wee.bet": "gulp rodadabets.wee.bet",
         "cruzeirosports.wee.bet": "gulp cruzeirosports.wee.bet",
         "gamez.bet": "gulp gamez.bet",
-        "lucksport.bet": "gulp lucksport.bet"
+        "lucksport.bet": "gulp lucksport.bet",
+        "clicbet.wee.bet": "gulp clicbet.wee.bet"
     },
     "private": true,
     "dependencies": {

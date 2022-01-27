@@ -34,6 +34,15 @@ function tasks(done, config) {
         .pipe(replace('[HOST]', config.host))
         .pipe(gulp.dest('src/bilhete/'));
 
+    let currency = 'BRL';
+    if (config.currency) {
+        currency = config.currency;
+    }
+
+    gulp.src(['base-build/bilhete/app.js'])
+        .pipe(replace('[CURRENCY]', currency))
+        .pipe(gulp.dest('src/bilhete/'));
+
     /*gulp.src(['styles.css'])
         .pipe(replace('[CUSTOM]', config.styles))
         .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined"? "" : config.aditional_styles))
@@ -60,8 +69,13 @@ function tasks(done, config) {
         stdout: true // default = true, false means don't write stdout
     };
 
+    let environment = 'production';
+    if (config.environment) {
+        environment = config.environment;
+    }
+
     gulp.src(['/'])
-        .pipe(exec('ng build --configuration production', options))
+        .pipe(exec(`ng build --configuration ${environment}`, options))
         .pipe(exec('cd dist && tar -czf tosend.tar * && scp -r -i ~/.keystore/weebet.pem tosend.tar ubuntu@' + config.server + ':/var/www/prod/bets/' + config.host + '/ && ssh -i ~/.keystore/weebet.pem ubuntu@' + config.server + ' sh /var/www/prod/bets/update_frontend.sh ' + config.host, options))
         .pipe(exec.reporter(reportOptions));
 
@@ -1744,6 +1758,17 @@ gulp.task('lucksport.bet', function (done) {
         server: "front3.wee.bet",
         host: "lucksport.bet",
         banca: "LUCK SPORT",
+        styles: ""
+    });
+});
+
+gulp.task('clicbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "clicbet.wee.bet",
+        banca: "CLICBET",
+        currency: "EUR",
+        environment: "portugal",
         styles: ""
     });
 });
