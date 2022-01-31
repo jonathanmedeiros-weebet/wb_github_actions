@@ -767,15 +767,6 @@ gulp.task('betshouse.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsgol.live', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betsgol.live",
-        banca: "BETS GOL",
-        styles: ""
-    });
-});
-
 gulp.task('minibets.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1361,15 +1352,6 @@ gulp.task('jbrbets.net', function (done) {
     });
 });
 
-gulp.task('pixsports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "pixsports.wee.bet",
-        banca: "PIX SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('mais1bet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1778,6 +1760,24 @@ gulp.task('sportourodomexico.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "sportourodomexico.wee.bet",
         banca: "SPORT OURO DO MX",
+        styles: "",
+    });
+});
+
+gulp.task('betwins.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betwins.wee.bet",
+        banca: "BET WINS",
+        styles: "",
+    });
+});
+
+gulp.task('esportegol77.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "esportegol77.wee.bet",
+        banca: "ESPORTE GOL 77",
         styles: "",
     });
 });
