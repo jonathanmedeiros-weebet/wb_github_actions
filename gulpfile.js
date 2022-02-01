@@ -1434,15 +1434,6 @@ gulp.task('novobetsamericabr.com', function (done) {
     });
 });
 
-gulp.task('seridobets.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "seridobets.com",
-        banca: "SERIDÓ BETS",
-        styles: "",
-    });
-});
-
 gulp.task('trandbets.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1778,6 +1769,15 @@ gulp.task('esportegol77.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "esportegol77.wee.bet",
         banca: "ESPORTE GOL 77",
+        styles: "",
+    });
+});
+
+gulp.task('betfut.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betfut.net",
+        banca: "BETFUT",
         styles: "",
     });
 });

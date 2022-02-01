@@ -157,7 +157,6 @@
         "pernambucoesportes.wee.bet": "gulp pernambucoesportes.wee.bet",
         "futsport.net": "gulp futsport.net",
         "novobetsamericabr.com": "gulp novobetsamericabr.com",
-        "seridobets.com": "gulp seridobets.com",
         "trandbets.com": "gulp trandbets.com",
         "betmed.wee.bet": "gulp betmed.wee.bet",
         "mundialbets.wee.bet": "gulp mundialbets.wee.bet",
@@ -194,7 +193,8 @@
         "clicbet.wee.bet": "gulp clicbet.wee.bet",
         "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
         "betwins.wee.bet": "gulp betwins.wee.bet",
-        "esportegol77.wee.bet": "gulp esportegol77.wee.bet"
+        "esportegol77.wee.bet": "gulp esportegol77.wee.bet",
+        "betfut.net": "gulp betfut.net"
     },
     "private": true,
     "dependencies": {
