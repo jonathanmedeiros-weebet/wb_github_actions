@@ -38,8 +38,18 @@
                                     </div>
                                 </div>
                                 <div class="nome">
-                                    <div>{{jogo.time_a_nome}}</div>
-                                    <div>{{jogo.time_b_nome}}</div>
+                                    <div>
+                                        <span *ngIf="jogo.time_a_img">
+                                            <img src="https://assets.b365api.com/images/team/s/{{jogo.time_a_img}}.png">
+                                        </span>
+                                        {{jogo.time_a_nome}}
+                                    </div>
+                                    <div>
+                                        <span *ngIf="jogo.time_b_img">
+                                            <img src="https://assets.b365api.com/images/team/s/{{jogo.time_b_img}}.png">
+                                        </span>
+                                        {{jogo.time_b_nome}}
+                                    </div>
                                 </div>
                                 <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
                                     <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}

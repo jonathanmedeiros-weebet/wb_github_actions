@@ -6,7 +6,15 @@
         <div class="text-center">
             <div class="nome">
                 <small>{{jogo?.campeonato?.nome}}</small>
-                <div>{{jogo?.nome}}</div>
+                <div>
+                     <span *ngIf="jogo?.time_a_img">
+                         <img src="https://assets.b365api.com/images/team/m/{{jogo?.time_a_img}}.png">
+                     </span>
+                    {{jogo?.nome}}
+                    <span *ngIf="jogo?.time_b_img">
+                         <img src="https://assets.b365api.com/images/team/m/{{jogo?.time_b_img}}.png">
+                     </span>
+                </div>
             </div>
             <div class="horario">
                 <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
