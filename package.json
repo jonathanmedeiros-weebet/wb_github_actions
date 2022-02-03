@@ -192,7 +192,8 @@
         "esportegol77.wee.bet": "gulp esportegol77.wee.bet",
         "betfut.net": "gulp betfut.net",
         "jmxbet.com": "gulp jmxbet.com",
-        "betclub.wee.bet": "gulp betclub.wee.bet"
+        "betclub.wee.bet": "gulp betclub.wee.bet",
+        "uzzebet.com": "gulp uzzebet.com"
     },
     "private": true,
     "dependencies": {

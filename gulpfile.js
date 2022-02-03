@@ -1746,6 +1746,23 @@ gulp.task('betfut.net', function (done) {
     });
 });
 
+gulp.task('jmxbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jmxbet.com",
+        banca: "JMX BET",
+        styles: "",
+    });
+});
+
+gulp.task('betclub.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betclub.wee.bet",
+        banca: "BET CLUB",
+        styles: "",
+    });
+});
 
 gulp.task('jmxbet.com', function (done) {
     tasks(done, {
@@ -1756,12 +1773,11 @@ gulp.task('jmxbet.com', function (done) {
     });
 });
 
-
-gulp.task('betclub.wee.bet', function (done) {
+gulp.task('uzzebet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "betclub.wee.bet",
-        banca: "BET CLUB",
+        server: "front3.wee.bet",
+        host: "uzzebet.com",
+        banca: "UZZE BET",
         styles: "",
     });
 });
