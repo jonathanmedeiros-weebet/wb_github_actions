@@ -6,6 +6,7 @@ import {Cliente} from '../../shared/models/clientes/cliente';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {FinanceiroService} from '../../shared/services/financeiro.service';
 import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
+import {ParametrosLocaisService} from "../../shared/services/parametros-locais.service";
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -18,18 +19,21 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     respostaSolicitacao;
     errorMessage;
     cliente: Cliente;
+    valorMinSaque;
 
     constructor(
         private fb: FormBuilder,
         private messageService: MessageService,
         private clienteService: ClienteService,
         private financeiroService: FinanceiroService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private paramsLocais: ParametrosLocaisService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
         this.createForm();
         this.menuFooterService.setIsPagina(true);
     }
@@ -40,7 +44,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [null, Validators.required]
+                valor: [0, [Validators.required, Validators.min(this.valorMinSaque)]]
             }
         );
         const user = JSON.parse(localStorage.getItem('user'));

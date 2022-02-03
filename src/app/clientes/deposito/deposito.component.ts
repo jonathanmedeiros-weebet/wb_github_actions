@@ -16,7 +16,6 @@ export class DepositoComponent implements OnInit, OnDestroy {
     constructor(
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
-        private router: Router
     ) {
     }
 
