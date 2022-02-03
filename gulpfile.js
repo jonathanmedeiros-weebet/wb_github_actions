@@ -894,15 +894,6 @@ gulp.task('osascosportsbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('serra99.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "serra99.wee.bet",
-        banca: "SERRA 99",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffbf00; --odds: #00338e;",
-    });
-});
-
 gulp.task('jogadacerta.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1380,15 +1371,6 @@ gulp.task('casadasorte.wee.bet', function (done) {
     });
 });
 
-gulp.task('egolbet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "egolbet.com",
-        banca: "É GOL BET",
-        styles: "",
-    });
-});
-
 gulp.task('betsportse.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1484,24 +1466,6 @@ gulp.task('mitosport.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "mitosport.wee.bet",
         banca: "MITO SPORT",
-        styles: "",
-    });
-});
-
-gulp.task('sportingbetsbr.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "sportingbetsbr.com",
-        banca: "SPORTING BETS BR",
-        styles: "",
-    });
-});
-
-gulp.task('betcompany.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betcompany.wee.bet",
-        banca: "BET COMPANY",
         styles: "",
     });
 });
@@ -1778,6 +1742,26 @@ gulp.task('betfut.net', function (done) {
         server: "front1.wee.bet",
         host: "betfut.net",
         banca: "BETFUT",
+        styles: "",
+    });
+});
+
+
+gulp.task('jmxbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jmxbet.com",
+        banca: "JMX BET",
+        styles: "",
+    });
+});
+
+
+gulp.task('betclub.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betclub.wee.bet",
+        banca: "BET CLUB",
         styles: "",
     });
 });
