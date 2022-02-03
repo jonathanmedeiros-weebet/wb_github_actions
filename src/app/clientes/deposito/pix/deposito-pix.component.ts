@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
+import {ParametrosLocaisService} from "../../../shared/services/parametros-locais.service";
 
 @Component({
     selector: 'app-deposito-pix',
@@ -17,22 +18,25 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     novoSaldo;
     clearSetInterval;
     verificacoes = 0;
+    valorMinDeposito;
 
     constructor(
         private fb: FormBuilder,
         private financeiroService: FinanceiroService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private paramsLocais: ParametrosLocaisService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
         this.createForm();
     }
 
     createForm() {
         this.form = this.fb.group({
-            valor: [null, Validators.required]
+            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito)]]
         });
     }
 
@@ -70,7 +74,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     novoPix() {
         this.pix = null;
-        this.form.patchValue({'valor': null});
+        this.form.patchValue({'valor': 0});
         this.submitting = false;
         clearInterval(this.clearSetInterval);
         this.verificacoes = 0;
