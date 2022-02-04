@@ -1343,16 +1343,6 @@ gulp.task('jbrbets.net', function (done) {
     });
 });
 
-gulp.task('mais1bet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "mais1bet.com",
-        banca: "MAIS1BET",
-        styles: "",
-    });
-});
-
-
 gulp.task('amgbet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1778,6 +1768,15 @@ gulp.task('uzzebet.com', function (done) {
         server: "front3.wee.bet",
         host: "uzzebet.com",
         banca: "UZZE BET",
+        styles: "",
+    });
+});
+
+gulp.task('wsesportes.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "wsesportes.com",
+        banca: "WS ESPORTES",
         styles: "",
     });
 });
