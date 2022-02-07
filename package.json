@@ -193,7 +193,9 @@
         "jmxbet.com": "gulp jmxbet.com",
         "betclub.wee.bet": "gulp betclub.wee.bet",
         "uzzebet.com": "gulp uzzebet.com",
-        "wsesportes.com": "gulp wsesportes.com"
+        "wsesportes.com": "gulp wsesportes.com",
+        "bet27.tv": "gulp bet27.tv",
+        "paratodosbet.com": "gulp paratodosbet.com"
     },
     "private": true,
     "dependencies": {

@@ -1780,3 +1780,21 @@ gulp.task('wsesportes.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet27.tv', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet27.tv",
+        banca: "BET 27",
+        styles: "",
+    });
+});
+
+gulp.task('paratodosbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "paratodosbet.com",
+        banca: "PARA TODOS",
+        styles: "",
+    });
+});
