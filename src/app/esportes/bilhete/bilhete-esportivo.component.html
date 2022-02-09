@@ -16,7 +16,7 @@
             </p>
             <p>
                 Cotação:
-                <span class="cotacao">{{cotacao | number:'1.0-2':'en_us'}}</span>
+                <span class="cotacao">{{cotacao | cotacao}}</span>
             </p>
             <p class="valores">
                 <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
