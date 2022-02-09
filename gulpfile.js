@@ -1794,7 +1794,34 @@ gulp.task('paratodosbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "paratodosbet.com",
-        banca: "PARA TODOS",
+        banca: "PARATODOS.BET",
+        styles: "",
+    });
+});
+
+gulp.task('boto-fe.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "boto-fe.com",
+        banca: "BOTO FÉ",
+        styles: "",
+    });
+});
+
+gulp.task('ipabets.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "ipabets.com",
+        banca: "IPA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('chutescerto.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "chutescerto.com",
+        banca: "CHUTES CERTO",
         styles: "",
     });
 });
