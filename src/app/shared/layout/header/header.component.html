@@ -21,8 +21,8 @@
                     <button class="dropdown-item text-center" disabled type="button">
                         Saldo: {{posicaoFinanceira.saldo | currency}}
                     </button>
-                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente">
-                        Bônus: {{'0' | currency}}
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                        Bônus: {{posicaoFinanceira.bonus | currency}}
                     </button>
                     <div class="dropdown-divider"></div>
 
@@ -200,8 +200,8 @@
                     <button class="dropdown-item text-center" disabled type="button">
                         Saldo: {{posicaoFinanceira.saldo | currency}}
                     </button>
-                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente">
-                        Bônus: {{'0' | currency}}
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                        Bônus: {{posicaoFinanceira.bonus | currency}}
                     </button>
                     <div class="dropdown-divider"></div>
 
