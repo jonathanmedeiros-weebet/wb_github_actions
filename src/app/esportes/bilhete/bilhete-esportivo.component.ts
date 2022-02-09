@@ -24,6 +24,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
+    cotacao = 0;
     opcoes;
     apostaMinima;
     apostaMaximo;
@@ -210,6 +211,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         // Valor Máximo de Prêmio
         const premio = valor * cotacao;
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
+
+        if (this.itens.value.length == 0){
+            this.cotacao = 0;
+        } else {
+            this.cotacao = cotacao;
+        }
     }
 
     submit() {
