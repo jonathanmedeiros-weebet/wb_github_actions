@@ -21,6 +21,9 @@
                     <button class="dropdown-item text-center" disabled type="button">
                         Saldo: {{posicaoFinanceira.saldo | currency}}
                     </button>
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente">
+                        Bônus: {{'0' | currency}}
+                    </button>
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
@@ -196,6 +199,9 @@
                     </button>
                     <button class="dropdown-item text-center" disabled type="button">
                         Saldo: {{posicaoFinanceira.saldo | currency}}
+                    </button>
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente">
+                        Bônus: {{'0' | currency}}
                     </button>
                     <div class="dropdown-divider"></div>
 
