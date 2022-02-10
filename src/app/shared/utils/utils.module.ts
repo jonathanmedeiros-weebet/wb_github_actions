@@ -10,7 +10,8 @@ import {
     SorteioTipoPipe,
     InfiniteScrollDirective,
     SafeHTMLPipe,
-    SanitizeCampNamePipe
+    SanitizeCampNamePipe,
+    CotacaoPipe
 } from './index';
 import { SplitCodigoPipe } from './split-codigo.pipe';
 import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
@@ -30,7 +31,8 @@ import {DepositoStatusPixPipePipe} from "./depositos-status-pix.pipe";
         SplitCodigoPipe,
         FormatarNaturezaPipe,
         SanitizeCampNamePipe,
-        DepositoStatusPixPipePipe
+        DepositoStatusPixPipePipe,
+        CotacaoPipe
     ],
     exports: [
         MomentPipe,
@@ -45,7 +47,8 @@ import {DepositoStatusPixPipePipe} from "./depositos-status-pix.pipe";
         SplitCodigoPipe,
         FormatarNaturezaPipe,
         DepositoStatusPixPipePipe,
-        SanitizeCampNamePipe
+        SanitizeCampNamePipe,
+        CotacaoPipe
     ]
 })
 export class UtilsModule { }

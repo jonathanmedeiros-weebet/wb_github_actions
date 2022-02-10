@@ -147,7 +147,6 @@
         "betsgames.net": "gulp betsgames.net",
         "quina.bet": "gulp quina.bet",
         "jbrbets.net": "gulp jbrbets.net",
-        "mais1bet.com": "gulp mais1bet.com",
         "amgbet.wee.bet": "gulp amgbet.wee.bet",
         "casadasorte.wee.bet": "gulp casadasorte.wee.bet",
         "betsportse.com": "gulp betsportse.com",
@@ -192,7 +191,14 @@
         "esportegol77.wee.bet": "gulp esportegol77.wee.bet",
         "betfut.net": "gulp betfut.net",
         "jmxbet.com": "gulp jmxbet.com",
-        "betclub.wee.bet": "gulp betclub.wee.bet"
+        "betclub.wee.bet": "gulp betclub.wee.bet",
+        "uzzebet.com": "gulp uzzebet.com",
+        "wsesportes.com": "gulp wsesportes.com",
+        "bet27.tv": "gulp bet27.tv",
+        "paratodosbet.com": "gulp paratodosbet.com",
+        "boto-fe.com": "gulp boto-fe.com",
+        "ipabets.com": "gulp ipabets.com",
+        "chutescerto.com": "gulp chutescerto.com"
     },
     "private": true,
     "dependencies": {

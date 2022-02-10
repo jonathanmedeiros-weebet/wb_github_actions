@@ -1343,16 +1343,6 @@ gulp.task('jbrbets.net', function (done) {
     });
 });
 
-gulp.task('mais1bet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "mais1bet.com",
-        banca: "MAIS1BET",
-        styles: "",
-    });
-});
-
-
 gulp.task('amgbet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1746,6 +1736,23 @@ gulp.task('betfut.net', function (done) {
     });
 });
 
+gulp.task('jmxbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jmxbet.com",
+        banca: "JMX BET",
+        styles: "",
+    });
+});
+
+gulp.task('betclub.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betclub.wee.bet",
+        banca: "BET CLUB",
+        styles: "",
+    });
+});
 
 gulp.task('jmxbet.com', function (done) {
     tasks(done, {
@@ -1756,12 +1763,65 @@ gulp.task('jmxbet.com', function (done) {
     });
 });
 
-
-gulp.task('betclub.wee.bet', function (done) {
+gulp.task('uzzebet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "betclub.wee.bet",
-        banca: "BET CLUB",
+        server: "front3.wee.bet",
+        host: "uzzebet.com",
+        banca: "UZZE BET",
+        styles: "",
+    });
+});
+
+gulp.task('wsesportes.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "wsesportes.com",
+        banca: "WS ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('bet27.tv', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet27.tv",
+        banca: "BET 27",
+        styles: "",
+    });
+});
+
+gulp.task('paratodosbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "paratodosbet.com",
+        banca: "PARATODOS.BET",
+        styles: "",
+    });
+});
+
+gulp.task('boto-fe.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "boto-fe.com",
+        banca: "BOTO FÉ",
+        styles: "",
+    });
+});
+
+gulp.task('ipabets.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "ipabets.com",
+        banca: "IPA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('chutescerto.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "chutescerto.com",
+        banca: "CHUTES CERTO",
         styles: "",
     });
 });

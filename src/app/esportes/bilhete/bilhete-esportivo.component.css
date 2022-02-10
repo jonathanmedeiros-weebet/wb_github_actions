@@ -46,7 +46,9 @@
 }
 
 .pre-bilhete .valor,
-.pre-bilhete .possivel-ganho {
+.pre-bilhete .possivel-ganho,
+.pre-bilhete .cotacao
+{
     color: var(--foreground-highlight);
     font-weight: bolder;
 }
