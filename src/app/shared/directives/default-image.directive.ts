@@ -1,7 +1,7 @@
 import {Directive, Input} from '@angular/core';
 
 @Directive({
-    selector: 'img[default]',
+    selector: 'img[size]',
     host: {
         '(error)': 'updateUrl()',
         '[src]': 'src'
@@ -9,9 +9,10 @@ import {Directive, Input} from '@angular/core';
 })
 export class DefaultImageDirective {
     @Input() src: string;
-    @Input() default: string;
+    @Input() size: string;
+
 
     updateUrl() {
-        this.src = this.default;
+        this.src = `https://cdn.wee.bet/img/times/${this.size}/default.png`;
     }
 }
