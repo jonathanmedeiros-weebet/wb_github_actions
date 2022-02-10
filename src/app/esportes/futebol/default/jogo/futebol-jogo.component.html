@@ -8,11 +8,13 @@
                 <small>{{jogo?.campeonato?.nome}}</small>
                 <div>
                      <span *ngIf="jogo?.time_a_img">
-                         <img src="https://assets.b365api.com/images/team/m/{{jogo?.time_a_img}}.png">
+                         <img src="https://cdn.wee.bet/img/times/m/{{jogo?.time_a_img}}.png"
+                         default="https://cdn.wee.bet/img/times/m/default.png">
                      </span>
                     {{jogo?.nome}}
                     <span *ngIf="jogo?.time_b_img">
-                         <img src="https://assets.b365api.com/images/team/m/{{jogo?.time_b_img}}.png">
+                         <img src="https://cdn.wee.bet/img/times/m/{{jogo?.time_b_img}}.png"
+                         default="https://cdn.wee.bet/img/times/m/default.png">
                      </span>
                 </div>
             </div>
