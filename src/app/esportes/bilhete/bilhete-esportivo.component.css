@@ -181,7 +181,7 @@
     border: 1px solid var(--highlight);
 }
 
-.alteracoes-odds {
+.alteracoes-odds, .utilizar-bonus {
     text-align: left;
 }
 
