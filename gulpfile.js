@@ -1153,23 +1153,6 @@ gulp.task('betvipmais.wee.bet', function (done) {
         styles: "",
     });
 });
-gulp.task('sports10.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sports10.net",
-        banca: "SPORTS 10",
-        styles: "",
-    });
-});
-
-gulp.task('jogabet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jogabet.wee.bet",
-        banca: "JOGA BET",
-        styles: "",
-    });
-});
 
 gulp.task('maisporte.wee.bet', function (done) {
     tasks(done, {
@@ -1822,6 +1805,15 @@ gulp.task('chutescerto.com', function (done) {
         server: "front1.wee.bet",
         host: "chutescerto.com",
         banca: "CHUTES CERTO",
+        styles: "",
+    });
+});
+
+gulp.task('golaco.io', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "golaco.io",
+        banca: "GOLAÇO",
         styles: "",
     });
 });
