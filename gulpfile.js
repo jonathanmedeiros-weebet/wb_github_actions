@@ -1817,3 +1817,21 @@ gulp.task('golaco.io', function (done) {
         styles: "",
     });
 });
+
+gulp.task('boaesportes.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "boaesportes.com",
+        banca: "BOA ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('cryptobrasil.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "cryptobrasil.bet",
+        banca: "CRYPTO BRASIL",
+        styles: "",
+    });
+});
