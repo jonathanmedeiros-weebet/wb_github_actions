@@ -197,7 +197,9 @@
         "boto-fe.com": "gulp boto-fe.com",
         "ipabets.com": "gulp ipabets.com",
         "chutescerto.com": "gulp chutescerto.com",
-        "golaco.io": "gulp golaco.io"
+        "golaco.io": "gulp golaco.io",
+        "boaesportes.com": "gulp boaesportes.com",
+        "cryptobrasil.bet": "gulp cryptobrasil.bet"
     },
     "private": true,
     "dependencies": {
