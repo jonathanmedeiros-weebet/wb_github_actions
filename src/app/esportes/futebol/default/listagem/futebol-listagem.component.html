@@ -8,7 +8,7 @@
             <div class="sem-evento" *ngIf="campeonatos && !campeonatos.length">
                 Nenhum evento disponível!
                 <button *ngIf="exibirBtnProximaData()" type="button" (click)="proximaData()"
-                        class="btn btn-custom btn-sm">
+                    class="btn btn-custom btn-sm">
                     Próxima Data
                 </button>
             </div>
@@ -41,22 +41,22 @@
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
-                                                 class="escudo-img">
+                                                class="escudo-img">
                                         </span>
                                         <ng-template #defaulImage class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
-                                                 class="escudo-img">
+                                                class="escudo-img">
                                         </ng-template>
                                         {{jogo.time_a_nome}}
                                     </div>
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_b_img" class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png" size="s"
-                                                 class="escudo-img">
+                                                class="escudo-img">
                                         </span>
                                         <ng-template #defaulImage class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
-                                                 class="escudo-img">
+                                                class="escudo-img">
                                         </ng-template>
                                         {{jogo.time_b_nome}}
                                     </div>
@@ -69,8 +69,7 @@
                             <div class="odds">
                                 <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
                                     <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
-                                        <div
-                                            class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                                        <div class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                                             (click)="addCotacao(jogo, cotacao)">
                                             <span class="nome">
                                                 {{cotacao.label}}
@@ -93,7 +92,7 @@
                                 </div>
                                 <ng-container *ngIf="cotacaoManualFaltando(jogo, jogo.cotacoes)">
                                     <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"
-                                         (click)="addCotacao(jogo, cotacao)">
+                                        (click)="addCotacao(jogo, cotacao)">
                                         <div
                                             class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome">

@@ -11,7 +11,6 @@ export class DefaultImageDirective {
     @Input() src: string;
     @Input() size: string;
 
-
     updateUrl() {
         this.src = `https://cdn.wee.bet/img/times/${this.size}/default.png`;
     }

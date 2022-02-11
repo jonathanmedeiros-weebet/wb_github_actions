@@ -5,12 +5,9 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
-import { DefaultImageDirective } from './directives/default-image.directive';
 
 @NgModule({
-    declarations: [
-    DefaultImageDirective
-  ],
+    declarations: [],
     imports: [],
     exports: [
         CommonModule,
@@ -19,8 +16,7 @@ import { DefaultImageDirective } from './directives/default-image.directive';
         RouterModule,
 
         LayoutModule,
-        UtilsModule,
-        DefaultImageDirective
+        UtilsModule
     ]
 })
 export class SharedModule { }
