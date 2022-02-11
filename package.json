@@ -127,8 +127,6 @@
         "pontalbet.wee.bet": "gulp pontalbet.wee.bet",
         "primosbet.wee.bet": "gulp primosbet.wee.bet",
         "betvipmais.wee.bet": "gulp betvipmais.wee.bet",
-        "sports10.net": "gulp sports10.net",
-        "jogabet.wee.bet": "gulp jogabet.wee.bet",
         "maisporte.wee.bet": "gulp maisporte.wee.bet",
         "rrbets.wee.bet": "gulp rrbets.wee.bet",
         "techbet.wee.bet": "gulp techbet.wee.bet",
@@ -198,7 +196,8 @@
         "paratodosbet.com": "gulp paratodosbet.com",
         "boto-fe.com": "gulp boto-fe.com",
         "ipabets.com": "gulp ipabets.com",
-        "chutescerto.com": "gulp chutescerto.com"
+        "chutescerto.com": "gulp chutescerto.com",
+        "golaco.io": "gulp golaco.io"
     },
     "private": true,
     "dependencies": {
