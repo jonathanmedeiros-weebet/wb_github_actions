@@ -7,15 +7,23 @@
             <div class="nome">
                 <small>{{jogo?.campeonato?.nome}}</small>
                 <div>
-                     <span *ngIf="jogo?.time_a_img">
+                     <span *ngIf="jogo?.time_a_img; else defaulImageA">
                          <img src="https://cdn.wee.bet/img/times/m/{{jogo?.time_a_img}}.png"
                          size="m">
                      </span>
+                    <ng-template #defaulImageA class="escudo">
+                        <img src="https://cdn.wee.bet/img/times/m/default.png" size="m"
+                             class="escudo-img">
+                    </ng-template>
                     {{jogo?.nome}}
-                    <span *ngIf="jogo?.time_b_img">
+                    <span *ngIf="jogo?.time_b_img; else defaulImageB">
                          <img src="https://cdn.wee.bet/img/times/m/{{jogo?.time_b_img}}.png"
                          size="m">
                      </span>
+                    <ng-template #defaulImageB class="escudo">
+                        <img src="https://cdn.wee.bet/img/times/m/default.png" size="m"
+                             class="escudo-img">
+                    </ng-template>
                 </div>
             </div>
             <div class="horario">

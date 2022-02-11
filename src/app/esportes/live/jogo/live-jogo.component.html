@@ -5,12 +5,32 @@
         </div>
         <div class="nome">
             <div class="time-a">
-                <div class="time-a-nome">{{jogo.time_a_nome}}</div>
+                <div class="time-a-nome">
+                    <span *ngIf="jogo.time_a_img; else defaulImageA">
+                         <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_a_img}}.png"
+                              size="m">
+                     </span>
+                    <ng-template #defaulImageA class="escudo">
+                        <img src="https://cdn.wee.bet/img/times/m/default.png" size="m"
+                             class="escudo-img">
+                    </ng-template>
+                    {{jogo.time_a_nome}}
+                </div>
                 <div class="placar time-a-placar">{{jogo.info?.time_a_resultado}}</div>
             </div>
             <div class="time-b">
                 <div class="placar time-b-placar">{{jogo.info?.time_b_resultado}}</div>
-                <div class="time-b-nome">{{jogo.time_b_nome}}</div>
+                <div class="time-b-nome">
+                    {{jogo.time_b_nome}}
+                    <span *ngIf="jogo.time_b_img; else defaulImageB">
+                         <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_b_img}}.png"
+                              size="m">
+                     </span>
+                    <ng-template #defaulImageB class="escudo">
+                        <img src="https://cdn.wee.bet/img/times/m/default.png" size="m"
+                             class="escudo-img">
+                    </ng-template>
+                </div>
             </div>
         </div>
         <div class="aovivo-tempo">
