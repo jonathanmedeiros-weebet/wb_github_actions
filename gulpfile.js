@@ -1844,3 +1844,12 @@ gulp.task('startbets.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('starbets.online', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "starbets.online",
+        banca: "STAR BETS",
+        styles: "",
+    });
+});
