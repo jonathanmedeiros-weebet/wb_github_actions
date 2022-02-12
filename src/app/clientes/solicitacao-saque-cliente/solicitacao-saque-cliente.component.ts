@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ClienteService} from '../../shared/services/clientes/cliente.service';
-import {Cliente} from '../../shared/models/clientes/cliente';
-import {MessageService} from '../../shared/services/utils/message.service';
-import {FinanceiroService} from '../../shared/services/financeiro.service';
-import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
-import {ParametrosLocaisService} from "../../shared/services/parametros-locais.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ClienteService } from '../../shared/services/clientes/cliente.service';
+import { Cliente } from '../../shared/models/clientes/cliente';
+import { MessageService } from '../../shared/services/utils/message.service';
+import { FinanceiroService } from '../../shared/services/financeiro.service';
+import { MenuFooterService } from "../../shared/services/utils/menu-footer.service";
+import { ParametrosLocaisService } from "../../shared/services/parametros-locais.service";
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -15,6 +15,7 @@ import {ParametrosLocaisService} from "../../shared/services/parametros-locais.s
 })
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     submitting;
+    showLoading = true;
     cadastroCompleto = true;
     respostaSolicitacao;
     errorMessage;
@@ -36,18 +37,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
         this.createForm();
         this.menuFooterService.setIsPagina(true);
-    }
-
-    ngOnDestroy() {
-        this.menuFooterService.setIsPagina(false);
-    }
-
-    createForm() {
-        this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque)]]
-            }
-        );
         const user = JSON.parse(localStorage.getItem('user'));
+
         this.clienteService.getCliente(user.id)
             .subscribe(
                 res => {
@@ -60,6 +51,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.cadastroCompleto = false;
                         this.errorMessage = 'Para prosseguir, atualize seu cadastro com a sua chave PIX';
                     }
+
+                    this.showLoading = false;
                 },
                 error => {
                     this.handleError(error);
@@ -67,8 +60,20 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             );
     }
 
+    ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            valor: [0, [Validators.required, Validators.min(this.valorMinSaque)]]
+        }
+        );
+    }
+
     handleError(error: string) {
         this.messageService.error(error);
+        this.showLoading = false;
     }
 
     submit() {
