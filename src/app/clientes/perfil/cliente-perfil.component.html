@@ -1,168 +1,174 @@
 <div id="default-content">
-    <div class="content-header">
-        <h2>Minha Conta</h2>
-    </div>
-    <div class="content-body">
-        <div class="content">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <fieldset>
-                    <h5><b>Informações Pessoais</b></h5>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="label">Nome</label>
-                                <input type="text" formControlName="nome" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="label">Sobrenome</label>
-                                <input type="text" formControlName="sobrenome" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">CPF</label>
-                                <input type="text" formControlName="cpf" mask="000.000.000-00" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Data de Nascimento</label>
-                                <input type="text" class="form-control" formControlName="nascimento">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Sexo</label>
-                                <input type="text" class="form-control" formControlName="sexo">
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <h5><b>Informações de Contato</b></h5>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Telefone</label>
-                                <input type="text" formControlName="telefone" placeholder="(00)00000-0000"
-                                       mask="(00)00000-0000" class="form-control" [dropSpecialCharacters]="false">
-                                <app-error-msg [control]="form.get('telefone')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="col col-md-8">
-                            <div class="form-group">
-                                <label class="label">Email</label>
-                                <input type="text" formControlName="email" class="form-control"
-                                       placeholder="exemplo@email.com">
-                                <app-error-msg [control]="form.get('email')"></app-error-msg>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <h5><b>Endereço</b></h5>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="label">CEP</label>
-                                <input type="text" formControlName="cep" placeholder="00000-000" mask="00000-000"
-                                       class="form-control" (focusout)="buscarPorCep($event)">
-                                <app-error-msg [control]="form.get('cep')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label class="label">Logradouro</label>
-                                <input type="text" formControlName="logradouro" class="form-control">
-                                <app-error-msg [control]="form.get('logradouro')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label class="label">Nº</label>
-                                <input type="text" formControlName="numero" class="form-control">
-                                <app-error-msg [control]="form.get('numero')"></app-error-msg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Bairro</label>
-                                <input type="text" formControlName="bairro" class="form-control">
-                                <app-error-msg [control]="form.get('bairro')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Estado</label>
-                                <select formControlName="estado" type="text" class="form-control"
-                                        (click)="getCidades($event)">
-                                    <option value="0">Selecione</option>
-                                    <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}</option>
-                                </select>
-                                <app-error-msg [control]="form.get('estado')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Cidade</label>
-                                <select formControlName="cidade" class="form-control">
-                                    <option value="0">Selecione a cidade</option>
-                                    <option *ngFor="let cidade of cidades" [value]="cidade.id"
-                                            [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
-                                </select>
-                                <app-error-msg [control]="form.get('cidade')"></app-error-msg>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <h5><b>PIX</b></h5>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <label class="label">Chave PIX</label>
-                                <input type="text" formControlName="chave_pix" class="form-control"
-                                       placeholder="CPF, E-mail, Telefone ou Aleatória">
-                                <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
-                                <small>Obs. Só será realizado saques em chaves pix pertencentes ao titular da conta.</small>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label">Senha Atual</label>
-                                <input type="password" formControlName="senha_atual" class="form-control">
-                                <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div class="row">
-                        <div class="col col-md-12">
-                            <div class="form-group">
-                                <button class="btn btn-custom" type="submit">
-                                    <i class="fa fa-save"></i>
-                                    Atualizar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+    <app-spinner *ngIf="showLoading"></app-spinner>
+
+    <ng-container *ngIf="!showLoading">
+        <div class="content-header">
+            <h2>Minha Conta</h2>
         </div>
-    </div>
+        <div class="content-body">
+            <div class="content">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <fieldset>
+                        <h5><b>Informações Pessoais</b></h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="label">Nome</label>
+                                    <input type="text" formControlName="nome" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="label">Sobrenome</label>
+                                    <input type="text" formControlName="sobrenome" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">CPF</label>
+                                    <input type="text" formControlName="cpf" mask="000.000.000-00" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Data de Nascimento</label>
+                                    <input type="text" class="form-control" formControlName="nascimento">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Sexo</label>
+                                    <input type="text" class="form-control" formControlName="sexo">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <h5><b>Informações de Contato</b></h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Telefone</label>
+                                    <input type="text" formControlName="telefone" placeholder="(00)00000-0000"
+                                        mask="(00)00000-0000" class="form-control" [dropSpecialCharacters]="false">
+                                    <app-error-msg [control]="form.get('telefone')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="col col-md-8">
+                                <div class="form-group">
+                                    <label class="label">Email</label>
+                                    <input type="text" formControlName="email" class="form-control"
+                                        placeholder="exemplo@email.com">
+                                    <app-error-msg [control]="form.get('email')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <h5><b>Endereço</b></h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="label">CEP</label>
+                                    <input type="text" formControlName="cep" placeholder="00000-000" mask="00000-000"
+                                        class="form-control" (focusout)="buscarPorCep($event)">
+                                    <app-error-msg [control]="form.get('cep')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="label">Logradouro</label>
+                                    <input type="text" formControlName="logradouro" class="form-control">
+                                    <app-error-msg [control]="form.get('logradouro')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="label">Nº</label>
+                                    <input type="text" formControlName="numero" class="form-control">
+                                    <app-error-msg [control]="form.get('numero')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Bairro</label>
+                                    <input type="text" formControlName="bairro" class="form-control">
+                                    <app-error-msg [control]="form.get('bairro')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Estado</label>
+                                    <select formControlName="estado" type="text" class="form-control"
+                                        (click)="getCidades($event)">
+                                        <option value="0">Selecione</option>
+                                        <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
+                                        </option>
+                                    </select>
+                                    <app-error-msg [control]="form.get('estado')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Cidade</label>
+                                    <select formControlName="cidade" class="form-control">
+                                        <option value="0">Selecione a cidade</option>
+                                        <option *ngFor="let cidade of cidades" [value]="cidade.id"
+                                            [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
+                                    </select>
+                                    <app-error-msg [control]="form.get('cidade')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <h5><b>PIX</b></h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label class="label">Chave PIX</label>
+                                    <input type="text" formControlName="chave_pix" class="form-control"
+                                        placeholder="CPF, E-mail, Telefone ou Aleatória">
+                                    <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
+                                    <small>Obs. Só será realizado saques em chaves pix pertencentes ao titular da
+                                        conta.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Senha Atual</label>
+                                    <input type="password" formControlName="senha_atual" class="form-control">
+                                    <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col col-md-12">
+                                <div class="form-group">
+                                    <button class="btn btn-custom" type="submit">
+                                        <i class="fa fa-save"></i>
+                                        Atualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </ng-container>
 </div>

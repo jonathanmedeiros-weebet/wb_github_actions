@@ -1835,3 +1835,21 @@ gulp.task('cryptobrasil.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('startbets.site', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "startbets.site",
+        banca: "START BETS",
+        styles: "",
+    });
+});
+
+gulp.task('starbets.online', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "starbets.online",
+        banca: "STAR BETS",
+        styles: "",
+    });
+});

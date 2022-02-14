@@ -199,7 +199,9 @@
         "chutescerto.com": "gulp chutescerto.com",
         "golaco.io": "gulp golaco.io",
         "boaesportes.com": "gulp boaesportes.com",
-        "cryptobrasil.bet": "gulp cryptobrasil.bet"
+        "cryptobrasil.bet": "gulp cryptobrasil.bet",
+        "startbets.site": "gulp startbets.site",
+        "starbets.online": "gulp starbets.online"
     },
     "private": true,
     "dependencies": {
