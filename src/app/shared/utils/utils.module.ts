@@ -8,14 +8,15 @@ import {
     CalcularCotacaoPipe,
     OddCategoriaPipe,
     SorteioTipoPipe,
+    DefaultImageDirective,
     InfiniteScrollDirective,
     SafeHTMLPipe,
     SanitizeCampNamePipe,
-    CotacaoPipe
+    CotacaoPipe,
+    SplitCodigoPipe,
+    FormatarNaturezaPipe,
+    DepositoStatusPixPipePipe
 } from './index';
-import { SplitCodigoPipe } from './split-codigo.pipe';
-import { FormatarNaturezaPipe } from './formatar-natureza.pipe';
-import {DepositoStatusPixPipePipe} from "./depositos-status-pix.pipe";
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import {DepositoStatusPixPipePipe} from "./depositos-status-pix.pipe";
         OddCategoriaPipe,
         SafeHTMLPipe,
         SorteioTipoPipe,
+        DefaultImageDirective,
         InfiniteScrollDirective,
         SplitCodigoPipe,
         FormatarNaturezaPipe,
@@ -43,6 +45,7 @@ import {DepositoStatusPixPipePipe} from "./depositos-status-pix.pipe";
         OddCategoriaPipe,
         SafeHTMLPipe,
         SorteioTipoPipe,
+        DefaultImageDirective,
         InfiniteScrollDirective,
         SplitCodigoPipe,
         FormatarNaturezaPipe,

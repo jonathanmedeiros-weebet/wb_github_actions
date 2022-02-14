@@ -10,6 +10,8 @@ export class Jogo {
     nome: string;
     time_a_nome: string;
     time_b_nome: string;
+    time_a_img: string;
+    time_b_img: string;
     horario: string;
     cancelado: boolean;
     finalizado: boolean;
