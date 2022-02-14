@@ -42,6 +42,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     isCliente;
     isEsporte: boolean;
     isPagina: boolean;
+    mobileScreen = false;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -61,8 +62,15 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+
         this.createForm();
         this.definirAltura();
+        this.opcoes = this.paramsService.getOpcoes();
+        this.apostaMinima = this.opcoes.valor_min_aposta;
+        this.apostaMaximo = this.opcoes.valor_max_aposta;
+        this.setDelay();
+
         this.auth.logado
             .subscribe(
                 isLoggedIn => {
@@ -80,12 +88,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     }
                 }
             );
-        this.opcoes = this.paramsService.getOpcoes();
-        this.apostaMinima = this.opcoes.valor_min_aposta;
-        this.apostaMaximo = this.opcoes.valor_max_aposta;
-        this.setDelay();
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
+
+        if (this.mobileScreen) {
+            this.menuFooterService.isPagina
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    res => {
+                        this.isPagina = res;
+                    }
+                );
+        }
 
         this.menuFooterService.isEsporte
             .pipe(takeUntil(this.unsub$))
@@ -98,14 +112,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                             this.bilheteService.atualizarItens(itens);
                         }
                     }
-                }
-            );
-
-        this.menuFooterService.isPagina
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                res => {
-                    this.isPagina = res;
                 }
             );
 
@@ -212,7 +218,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const premio = valor * cotacao;
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
 
-        if (this.itens.value.length == 0){
+        if (this.itens.value.length == 0) {
             this.cotacao = 0;
         } else {
             this.cotacao = cotacao;

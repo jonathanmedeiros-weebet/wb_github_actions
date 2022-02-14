@@ -19,6 +19,7 @@ export class MenuFooterComponent implements OnInit {
     quantidadeItens = 0;
     unsub$ = new Subject();
     hidden = false;
+    mobileScreen = false;
 
     constructor(
         private auth: AuthService,
@@ -31,37 +32,41 @@ export class MenuFooterComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
+        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
 
-        this.auth.logado
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                isLoggedIn => {
-                    this.isLoggedIn = isLoggedIn;
-                    this.cd.detectChanges();
-                }
-            );
+        if (this.mobileScreen) {
+            this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
 
-        this.auth.cliente
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                isCliente => {
-                    this.isCliente = isCliente;
-                    this.cd.detectChanges();
-                }
-            );
+            this.auth.logado
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    isLoggedIn => {
+                        this.isLoggedIn = isLoggedIn;
+                        this.cd.detectChanges();
+                    }
+                );
 
-        this.menuFooterService.quantidadeItens
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                res => this.quantidadeItens = res
-            );
+            this.auth.cliente
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    isCliente => {
+                        this.isCliente = isCliente;
+                        this.cd.detectChanges();
+                    }
+                );
 
-        this.menuFooterService.isPagina
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                res => this.hidden = res
-            );
+            this.menuFooterService.quantidadeItens
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    res => this.quantidadeItens = res
+                );
+
+            this.menuFooterService.isPagina
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    res => this.hidden = res
+                );
+        }
     }
 
     toggleSidebar() {
