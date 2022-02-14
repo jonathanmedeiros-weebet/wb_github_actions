@@ -169,7 +169,6 @@
         "prime.wee.bet": "gulp prime.wee.bet",
         "betsmaranhao.wee.bet": "gulp betsmaranhao.wee.bet",
         "premiersport.wee.bet": "gulp premiersport.wee.bet",
-        "oixbet.wee.bet": "gulp oixbet.wee.bet",
         "playplaybet.net": "gulp playplaybet.net",
         "megabetrn.wee.bet": "gulp megabetrn.wee.bet",
         "sportsbest.com.br": "gulp sportsbest.com.br",
@@ -201,7 +200,12 @@
         "boaesportes.com": "gulp boaesportes.com",
         "cryptobrasil.bet": "gulp cryptobrasil.bet",
         "startbets.site": "gulp startbets.site",
-        "starbets.online": "gulp starbets.online"
+        "starbets.online": "gulp starbets.online",
+        "betcompany.wee.bet": "gulp betcompany.wee.bet",
+        "futbet7.com": "gulp futbet7.com",
+        "mundialbet.wee.bet": "gulp mundialbet.wee.bet",
+        "trevoone.bet": "gulp trevoone.bet",
+        "valesport.bet": "gulp valesport.bet"
     },
     "private": true,
     "dependencies": {

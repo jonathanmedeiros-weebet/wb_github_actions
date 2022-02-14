@@ -717,7 +717,7 @@ gulp.task('mssportes.wee.bet', function (done) {
         host: "mssportes.wee.bet",
         banca: "MS Sportes",
         styles: "--highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #011e46; --foreground-selected-odds:#fff",
-        scripts: "<script src='https://wbot.chat/index.js' token='5da557681f66c482cc8e36c57419f260'></script>"
+        scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/5f6b3ee6f0e7167d001303f3/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"
     });
 });
 
@@ -1545,16 +1545,6 @@ gulp.task('premiersport.wee.bet', function (done) {
     });
 });
 
-gulp.task('oixbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "oixbet.wee.bet",
-        shared_url: "oixbet.net",
-        banca: "OIXBET",
-        styles: "",
-    });
-});
-
 gulp.task('playplaybet.net', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1851,5 +1841,49 @@ gulp.task('starbets.online', function (done) {
         host: "starbets.online",
         banca: "STAR BETS",
         styles: "",
+    });
+});
+
+gulp.task('betcompany.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betcompany.wee.bet",
+        banca: "BET COMPANY",
+        styles: "",
+    });
+});
+
+gulp.task('futbet7.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "futbet7.com",
+        banca: "FUTBET7",
+        styles: "",
+    });
+});
+
+gulp.task('mundialbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "mundialbet.wee.bet",
+        banca: "MUNDIAL BET",
+        styles: "",
+    });
+});
+
+gulp.task('trevoone.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "trevoone.bet",
+        banca: "TREVO ONE",
+        styles: "",
+    });
+});
+
+gulp.task('valesport.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "valesport.bet",
+        banca: "VALE SPORT",
     });
 });
