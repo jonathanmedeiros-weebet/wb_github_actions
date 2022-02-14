@@ -97,7 +97,6 @@
 }
 
 .campeonato-nome{
-    padding-top: 15px;
     padding-bottom: 0;
     margin-bottom: 0;
     text-align: center;
@@ -105,9 +104,6 @@
 
 .time-nome {
     margin-top: 5px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
 .tipo-apostas{

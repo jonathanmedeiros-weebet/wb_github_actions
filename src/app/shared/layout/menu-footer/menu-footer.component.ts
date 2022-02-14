@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {SidebarService} from '../../services/utils/sidebar.service';
-import {ParametrosLocaisService} from '../../services/parametros-locais.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {AuthService} from '../../services/auth/auth.service';
-import {MenuFooterService} from '../../services/utils/menu-footer.service';
-import {MessageService} from '../../services/utils/message.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { SidebarService } from '../../services/utils/sidebar.service';
+import { ParametrosLocaisService } from '../../services/parametros-locais.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { AuthService } from '../../services/auth/auth.service';
+import { MenuFooterService } from '../../services/utils/menu-footer.service';
+import { MessageService } from '../../services/utils/message.service';
 
 @Component({
     selector: 'app-menu-footer',
@@ -18,6 +18,7 @@ export class MenuFooterComponent implements OnInit {
     isLoggedIn;
     quantidadeItens = 0;
     unsub$ = new Subject();
+    hidden = false;
 
     constructor(
         private auth: AuthService,
@@ -54,6 +55,12 @@ export class MenuFooterComponent implements OnInit {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 res => this.quantidadeItens = res
+            );
+
+        this.menuFooterService.isPagina
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => this.hidden = res
             );
     }
 
