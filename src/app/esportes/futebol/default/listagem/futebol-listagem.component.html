@@ -33,22 +33,13 @@
                         <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
                             <div class="indentificacao">
                                 <div>
-                                    <div class="horario">
-                                        {{jogo.horario | moment: 'DD/MM HH:mm'}}
+                                    <div class="horario-listagem">
+                                        {{jogo.horario | moment: 'DD/MM'}}
+                                        <br>
+                                        {{jogo.horario | moment: 'HH:mm'}}
                                     </div>
                                 </div>
                                 <div class="nome">
-                                    <div class="escudo-container">
-                                        <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
-                                                 class="escudo-img">
-                                        </span>
-                                        <ng-template #defaulImage class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
-                                                 class="escudo-img">
-                                        </ng-template>
-                                        {{jogo.time_a_nome}}
-                                    </div>
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_b_img" class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png" size="s"
@@ -58,7 +49,22 @@
                                             <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
                                                  class="escudo-img">
                                         </ng-template>
-                                        {{jogo.time_b_nome}}
+                                        <div class="nome-time">
+                                            {{jogo.time_b_nome}}
+                                        </div>
+                                    </div>
+                                    <div class="escudo-container">
+                                        <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
+                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
+                                                 class="escudo-img">
+                                        </span>
+                                        <ng-template #defaulImage class="escudo">
+                                            <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
+                                                 class="escudo-img">
+                                        </ng-template>
+                                        <div class="nome-time">
+                                            {{jogo.time_a_nome}}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
