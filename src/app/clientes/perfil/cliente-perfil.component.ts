@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {formatDate} from '@angular/common';
-import {FormBuilder, Validators} from '@angular/forms';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {ClienteService} from '../../shared/services/clientes/cliente.service';
-import {MessageService} from '../../shared/services/utils/message.service';
-import {Estado} from '../../shared/models/endereco/estado';
-import {Cidade} from '../../shared/models/endereco/cidade';
-import {UtilsService} from '../../shared/services/utils/utils.service';
-import {Endereco} from '../../shared/models/endereco/endereco';
-import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/forms';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { ClienteService } from '../../shared/services/clientes/cliente.service';
+import { MessageService } from '../../shared/services/utils/message.service';
+import { Estado } from '../../shared/models/endereco/estado';
+import { Cidade } from '../../shared/models/endereco/cidade';
+import { UtilsService } from '../../shared/services/utils/utils.service';
+import { Endereco } from '../../shared/models/endereco/endereco';
+import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -20,6 +20,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     cidades: Array<Cidade>;
     estadoSelecionado: number;
     cidadeSelecionada: number;
+    showLoading = true;
 
     constructor(
         private fb: FormBuilder,
@@ -42,6 +43,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 estados => {
                     this.estados = estados;
                 });
+
         this.clienteService
             .getCliente(user.id)
             .subscribe(
@@ -80,6 +82,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             this.form.get('cidade').patchValue(this.cidadeSelecionada);
                         }
                     }
+
+                    this.showLoading = false;
                 },
                 error => {
                     this.handleError('Algo inesperado aconteceu. Tente novamente mais tarde.');
@@ -94,11 +98,11 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
 
     createForm() {
         this.form = this.fb.group({
-            nome: [{value: '', disabled: true}],
-            sobrenome: [{value: '', disabled: true}],
-            nascimento: [{value: '', disabled: true}],
-            sexo: [{value: '', disabled: true}],
-            cpf: [{value: '', disabled: true}],
+            nome: [{ value: '', disabled: true }],
+            sobrenome: [{ value: '', disabled: true }],
+            nascimento: [{ value: '', disabled: true }],
+            sexo: [{ value: '', disabled: true }],
+            cpf: [{ value: '', disabled: true }],
             telefone: ['', Validators.required],
             email: ['', Validators.required],
             logradouro: ['', Validators.required],
@@ -113,11 +117,14 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     }
 
     getCidades(event: any) {
-        this.utilsService.getCidades(event.target.value).subscribe(
-            cidades => {
-                this.cidades = cidades;
-            },
-            error => this.handleError(error));
+        let estadoId = event.target.value;
+
+        if (estadoId > 0) {
+            this.utilsService.getCidades(event.target.value).subscribe(
+                cidades => this.cidades = cidades,
+                error => this.handleError(error)
+            );
+        }
     }
 
     buscarPorCep(event: any) {
