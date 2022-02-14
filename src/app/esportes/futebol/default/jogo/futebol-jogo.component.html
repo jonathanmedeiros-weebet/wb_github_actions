@@ -6,9 +6,9 @@
         <div class="text-center">
             <div class="nome">
                 <small>{{jogo?.campeonato?.nome}}</small>
-                <div class="row">
-                    <div class="col-5">
-                        <div style="float: right">
+                <div class="row justify-content-center">
+                    <div class="col-xl-2 col-4">
+                        <div>
                             <div class="row">
                                 <div class="col-12 text-center">
                                 <span *ngIf="jogo?.time_a_img; else defaulImageA"><img
@@ -27,13 +27,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2" style="font-size: 50px">
+                    <div class="col-xl-1 col-2" style="font-size: 45px">
                         x
                     </div>
-                    <div class="col-5">
-                        <div style="float: left;">
+                    <div class="col-xl-2 col-4">
+                        <div>
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 text-center">
                                 <span *ngIf="jogo?.time_b_img; else defaulImageB"><img
                                     src="https://cdn.wee.bet/img/times/m/{{jogo?.time_b_img}}.png" size="m">
                                 </span>
