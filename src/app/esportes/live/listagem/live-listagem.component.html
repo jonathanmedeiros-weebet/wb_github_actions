@@ -31,12 +31,12 @@
                                             <div class="escudo-container">
                                                 {{jogo.value.time_a_nome}}
                                                 <span *ngIf="jogo.value.time_a_img; else defaulImageA" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_a_img}}.png"
-                                                 class="escudo-img" size="s">
-                                        </span>
+                                                    <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_a_img}}.png"
+                                                        class="escudo-img" size="s">
+                                                </span>
                                                 <ng-template #defaulImageA class="escudo">
                                                     <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                         class="escudo-img">
+                                                        class="escudo-img">
                                                 </ng-template>
                                             </div>
                                         </div>
@@ -47,12 +47,12 @@
                                         <div class="time-b-nome">
                                             <div class="escudo-container">
                                                 <span *ngIf="jogo.value.time_b_img; else defaulImageB" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_b_img}}.png"
-                                                 class="escudo-img" size="s">
-                                        </span>
+                                                    <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_b_img}}.png"
+                                                        class="escudo-img" size="s">
+                                                </span>
                                                 <ng-template #defaulImageB class="escudo">
                                                     <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                         class="escudo-img">
+                                                        class="escudo-img">
                                                 </ng-template>
                                                 {{jogo.value.time_b_nome}}
                                             </div>

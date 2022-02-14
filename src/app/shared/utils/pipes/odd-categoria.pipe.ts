@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ParametrosLocaisService } from './../services/parametros-locais.service';
+import { ParametrosLocaisService } from './../../services/parametros-locais.service';
 
 @Pipe({
     name: 'oddCategoria'
