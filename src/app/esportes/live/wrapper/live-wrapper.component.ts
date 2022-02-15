@@ -15,6 +15,7 @@ import {
 export class LiveWrapperComponent implements OnInit, OnDestroy {
     exibirMaisCotacoes = false;
     jogoId;
+    mobileScreen = false;
     unsub$ = new Subject();
 
     constructor(
@@ -27,6 +28,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
         this.liveService.connect();
 
         this.sidebarService.itens
@@ -41,7 +43,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.menuFooterService.setIsPagina(false);
+        this.setIsPagina(false);
         this.liveService.disconnect();
         this.unsub$.next();
         this.unsub$.complete();
@@ -77,7 +79,13 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.menuFooterService.setIsPagina(exibirMaisCotacoes);
+        this.setIsPagina(exibirMaisCotacoes);
         this.exibirMaisCotacoes = exibirMaisCotacoes;
+    }
+
+    setIsPagina(isPage) {
+        if (this.mobileScreen) {
+            this.menuFooterService.setIsPagina(isPage);
+        }
     }
 }

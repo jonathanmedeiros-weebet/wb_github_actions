@@ -13,11 +13,17 @@
     align-items: center;
 }
 
-
 .indentificacao .info {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.indentificacao .campeonato-nome {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
 }
 
 .indentificacao .nome {
@@ -27,12 +33,21 @@
     justify-content: center;
 }
 
+.indentificacao .nome {
+    margin-top: 5px;
+}
+
 .nome .time-a,
 .nome .time-b {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 150px;
+}
+
+.times-separador {
+    font-size: 35px;
+    margin: 10px 20px;
 }
 
 .tipo-apostas {
@@ -54,7 +69,11 @@
 .indentificacao .div-back {
     position: absolute;
     right: 20px;
-    top: 21px;
+    top: 10px;
+}
+
+.indentificacao .nome, h4 {
+    font-size: 1.2rem;
 }
 
 .div-vazio {
@@ -105,9 +124,21 @@
         top: 0;
     }
 
+    .indentificacao .campeonato-nome {
+        max-width: 240px;
+    }
+
     .nome .time-a,
     .nome .time-b {
         width: 100px;
+    }
+
+    .nome img {
+        width: 30px;
+    }
+
+    .times-separador {
+        font-size: 20px;
     }
 
     .odds .odd {
@@ -130,5 +161,9 @@
 
     .small_screen {
         display: none;
+    }
+
+    .nome img {
+        width: 40px;
     }
 }
