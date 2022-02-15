@@ -1777,7 +1777,7 @@ gulp.task('boto-fe.com', function (done) {
         server: "front1.wee.bet",
         host: "boto-fe.com",
         banca: "BOTO FÉ",
-        styles: "",
+        styles: "<script src='//code-sa1.jivosite.com/widget/qXJV3cn8tQ' async></script>",
     });
 });
 
