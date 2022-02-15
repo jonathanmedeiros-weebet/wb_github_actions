@@ -1896,3 +1896,12 @@ gulp.task('dfsportsbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('kaiosport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "kaiosport.wee.bet",
+        banca: "KAIO SPORT",
+        styles: "",
+    });
+});
