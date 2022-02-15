@@ -1887,3 +1887,12 @@ gulp.task('valesport.bet', function (done) {
         banca: "VALE SPORT",
     });
 });
+
+gulp.task('dfsportsbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dfsportsbet.wee.bet",
+        banca: "DF SPORTS BET",
+        styles: "",
+    });
+});

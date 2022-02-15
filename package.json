@@ -205,7 +205,8 @@
         "futbet7.com": "gulp futbet7.com",
         "mundialbet.wee.bet": "gulp mundialbet.wee.bet",
         "trevoone.bet": "gulp trevoone.bet",
-        "valesport.bet": "gulp valesport.bet"
+        "valesport.bet": "gulp valesport.bet",
+        "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet"
     },
     "private": true,
     "dependencies": {
