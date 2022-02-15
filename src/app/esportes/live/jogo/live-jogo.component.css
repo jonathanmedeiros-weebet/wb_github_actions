@@ -42,15 +42,17 @@
 .time-a{
     display: flex;
     align-items: center;
-    width: 50%;
-    justify-content: flex-end
+    text-align: center;
+    width: 30%;
+    justify-content: center
 }
 
 .time-b{
     display: flex;
     align-items: center;
-    width: 50%;
-    justify-content: flex-start;
+    text-align: center;
+    width: 30%;
+    justify-content: center;
 }
 
 .placar{
@@ -95,8 +97,13 @@
 }
 
 .campeonato-nome{
-    padding-bottom: 15px;
+    padding-bottom: 0;
+    margin-bottom: 0;
     text-align: center;
+}
+
+.time-nome {
+    margin-top: 5px;
 }
 
 .tipo-apostas{
@@ -165,5 +172,13 @@
 
     .indentificacao-mobile{
         display: block;
+    }
+
+    .time-a-nome {
+        width: 100%;
+    }
+
+    .time-b-nome {
+        width: 100%;
     }
 }

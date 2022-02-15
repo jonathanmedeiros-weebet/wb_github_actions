@@ -42,7 +42,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     futsalHabilitado = false;
     voleiHabilitado = false;
     tenisHabilitado = false;
-    tenisMesaHabilitado = false;
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
     posicaoFinanceira = {
@@ -122,7 +121,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
         this.voleiHabilitado = this.paramsService.getOpcoes().volei;
         this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
-        this.tenisMesaHabilitado = this.paramsService.getOpcoes().tenis_mesa;
         this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
         this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();

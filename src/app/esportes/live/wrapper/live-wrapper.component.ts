@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, CampeonatoService, SidebarService, MessageService, LiveService } from '../../../services';
+import {
+    ParametrosLocaisService, CampeonatoService, SidebarService,
+    MessageService, LiveService, MenuFooterService
+} from '../../../services';
 
 @Component({
     selector: 'app-live-wrapper',
@@ -19,6 +22,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService,
         private liveService: LiveService,
     ) { }
 
@@ -37,6 +41,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
         this.liveService.disconnect();
         this.unsub$.next();
         this.unsub$.complete();
@@ -72,6 +77,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
+        this.menuFooterService.setIsPagina(exibirMaisCotacoes);
         this.exibirMaisCotacoes = exibirMaisCotacoes;
     }
 }

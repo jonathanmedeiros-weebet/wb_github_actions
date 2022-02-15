@@ -1,73 +1,98 @@
 .inner-odd {
     margin-bottom: 2px;
 }
-.indentificacao{
+
+.indentificacao {
     padding: 10px;
     position: relative;
 }
 
-.indentificacao .nome, h4{
-    font-size: 1.2rem;
+.indentificacao .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.tipo-apostas{
+
+.indentificacao .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.indentificacao .nome {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.nome .time-a,
+.nome .time-b {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+}
+
+.tipo-apostas {
     background-color: #fff;
 }
 
-.tipo-aposta{
+.tipo-aposta {
     padding: 10px;
     border-top: 1px solid #ddd;
     text-transform: uppercase;
 }
 
-.div-back{
+.div-back {
     color: red;
     font-size: 2rem;
     cursor: pointer;
 }
 
-.indentificacao .div-back{
+.indentificacao .div-back {
     position: absolute;
     right: 20px;
     top: 21px;
 }
 
-.div-vazio{
+.div-vazio {
     padding: 10px;
     text-align: center;
 }
 
-.odds .odd{
+.odds .odd {
     width: 100%;
 }
 
-.odds-coluna{
+.odds-coluna {
     width: 100%;
 }
 
-.odds-jogador-coluna{
+.odds-jogador-coluna {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
-.odd-jogador{
-    width: 50%!important;
+.odd-jogador {
+    width: 50% !important;
 }
 
-.width-25{
+.width-25 {
     width: 25%;
 }
 
-.width-33{
+.width-33 {
     width: 33.33%;
 }
 
-.width-50{
+.width-50 {
     width: 50%;
 }
 
-.width-100{
+.width-100 {
     width: 100%;
 }
 
@@ -76,29 +101,34 @@
         padding-bottom: 57px;
     }
 
-    .indentificacao .div-back{
+    .indentificacao .div-back {
         top: 0;
     }
 
-    .odds .odd{
+    .nome .time-a,
+    .nome .time-b {
+        width: 100px;
+    }
+
+    .odds .odd {
         width: 100%;
     }
 
-    .large_screen{
+    .large_screen {
         display: none;
     }
 
-    .small_screen{
+    .small_screen {
         display: block;
     }
 }
 
 @media only screen and (min-width: 1025px) {
-    .large_screen{
+    .large_screen {
         display: block;
     }
 
-    .small_screen{
+    .small_screen {
         display: none;
     }
 }

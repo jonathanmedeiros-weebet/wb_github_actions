@@ -34,12 +34,38 @@
                             <div class="indentificacao">
                                 <div>
                                     <div class="horario">
-                                        {{jogo.horario | moment: 'DD/MM HH:mm'}}
+                                        {{jogo.horario | moment: 'DD/MM'}}
+                                        <br>
+                                        {{jogo.horario | moment: 'HH:mm'}}
                                     </div>
                                 </div>
                                 <div class="nome">
-                                    <div>{{jogo.time_a_nome}}</div>
-                                    <div>{{jogo.time_b_nome}}</div>
+                                    <div class="escudo-container">
+                                        <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
+                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
+                                                class="escudo-img">
+                                        </span>
+                                        <ng-template #defaulImage class="escudo">
+                                            <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
+                                                class="escudo-img">
+                                        </ng-template>
+                                        <div class="nome-time">
+                                            {{jogo.time_a_nome}}
+                                        </div>
+                                    </div>
+                                    <div class="escudo-container">
+                                        <span *ngIf="jogo.time_b_img" class="escudo">
+                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png" size="s"
+                                                class="escudo-img">
+                                        </span>
+                                        <ng-template #defaulImage class="escudo">
+                                            <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
+                                                class="escudo-img">
+                                        </ng-template>
+                                        <div class="nome-time">
+                                            {{jogo.time_b_nome}}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mais-opcoes" (click)="maisCotacoes(jogo._id)">
                                     <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}
@@ -47,7 +73,7 @@
                                 </div>
                             </div>
                             <div class="odds">
-                                <div class="odd"  *ngFor="let cotacao of jogo.cotacoes">
+                                <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
                                     <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                         <div class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                                             (click)="addCotacao(jogo, cotacao)">

@@ -45,3 +45,19 @@
         width: 100%;
     }
 }
+
+.escudo-container {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.escudo {
+    margin-right: 5px;
+}
+
+.escudo-img {
+    max-width: 20px;
+    max-height: 20px;
+}

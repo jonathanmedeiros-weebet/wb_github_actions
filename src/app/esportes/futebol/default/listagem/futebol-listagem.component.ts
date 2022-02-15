@@ -355,4 +355,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
     }
+
+    imageError(event: Event) {
+        (event.target as HTMLImageElement).src = "";
+    }
 }

@@ -8,7 +8,8 @@ import {
     MessageService,
     ParametrosLocaisService,
     RegioesDestaqueService,
-    SidebarService
+    SidebarService,
+    MenuFooterService
 } from './../../../../services';
 import * as moment from 'moment';
 
@@ -34,6 +35,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
         private regioesDestaqueService: RegioesDestaqueService,
+        private menuFooterService: MenuFooterService,
         private route: ActivatedRoute
     ) {
     }
@@ -158,6 +160,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.menuFooterService.setIsPagina(false);
+
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -192,6 +196,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
+        this.menuFooterService.setIsPagina(exibirMaisCotacoes);
         this.exibirMaisCotacoes = exibirMaisCotacoes;
     }
 
