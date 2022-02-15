@@ -91,15 +91,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.mudancas = (localStorage.getItem('mudancas') === 'true');
 
-        if (this.mobileScreen) {
-            this.menuFooterService.isPagina
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    res => {
-                        this.isPagina = res;
-                    }
-                );
-        }
+        this.menuFooterService.isPagina
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                res => {
+                    this.isPagina = res;
+                }
+            );
 
         this.menuFooterService.isEsporte
             .pipe(takeUntil(this.unsub$))
