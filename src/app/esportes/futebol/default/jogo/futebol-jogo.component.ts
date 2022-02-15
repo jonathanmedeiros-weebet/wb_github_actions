@@ -121,7 +121,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         if (this.isMobile) {
             altura -= 223;
         } else {
-            altura -= 177;
+            altura -= 46;
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
