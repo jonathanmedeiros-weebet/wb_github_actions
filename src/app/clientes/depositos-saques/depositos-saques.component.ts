@@ -6,6 +6,9 @@ import {ClienteService} from "../../shared/services/clientes/cliente.service";
 import {FinanceiroService} from "../../shared/services/financeiro.service";
 import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
 import {MessageService} from "../../shared/services/utils/message.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { ConfirmModalComponent } from '../../shared/layout/modals';
+import {result} from "lodash";
 
 @Component({
     selector: 'app-depositos-saques',
@@ -19,13 +22,15 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
     dataInicial;
     dataFinal;
     queryParams;
+    modalRef;
 
     constructor(
         private fb: FormBuilder,
         private clienteService: ClienteService,
         private financeiroService: FinanceiroService,
         private menuFooterService: MenuFooterService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private modalService: NgbModal
     ) {
         super();
     }
@@ -68,5 +73,26 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
                     this.showLoading = false;
                 }
             );
+    }
+
+    cancelarSaque(saqueId) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = "Cancelamento";
+        this.modalRef.componentInstance.msg = "Tem certeza que deseja cancelar a solicitação de saque?";
+
+        this.modalRef.result.then(
+            () => {
+                this.financeiroService.cancelarSaque(saqueId)
+                    .subscribe(
+                        response => {
+                            this.messageService.success("Solicitação de Saque Cancelada com Sucesso");
+                            this.submit();
+                        },
+                        error => {
+                            this.handleError(error);
+                        }
+                    );
+            }
+        );
     }
 }

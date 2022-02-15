@@ -64,6 +64,7 @@
                                 <th>Detalhes</th>
                                 <th>Status</th>
                                 <th>Valor</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -80,10 +81,16 @@
                                     </td>
                                     <td>{{depositoSaque.status | depositoStatusPixPipe}}</td>
                                     <td>{{depositoSaque.valor | currency}}</td>
+                                    <td rowspan="2">
+                                        <button class="btn-cancelar"
+                                                *ngIf="!depositoSaque.data_pagamento && depositoSaque.tipo === 'saque' && depositoSaque.status !== 'CANCELADO'" (click)="cancelarSaque(depositoSaque.id)">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr class="tr-2">
                                     <td colspan="3">
-                                        Registrado em {{depositoSaque.data_registro}} <span
+                                        Registrado em {{depositoSaque.data}} <span
                                         *ngIf="depositoSaque.data_pagamento"> - Pago em {{depositoSaque.data_pagamento}}</span>
                                     </td>
                                 </tr>
