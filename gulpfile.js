@@ -1906,3 +1906,12 @@ gulp.task('kaiosport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betpixbrasil.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betpixbrasil.com",
+        banca: "BET PIX BRASIL",
+        styles: "",
+    });
+});

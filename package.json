@@ -207,7 +207,8 @@
         "trevoone.bet": "gulp trevoone.bet",
         "valesport.bet": "gulp valesport.bet",
         "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
-        "kaiosport.wee.bet": "gulp kaiosport.wee.bet"
+        "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
+        "betpixbrasil.com": "gulp betpixbrasil.com"
     },
     "private": true,
     "dependencies": {
