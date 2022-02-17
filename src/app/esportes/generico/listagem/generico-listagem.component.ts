@@ -249,6 +249,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirEscudo() {
-        return this.sportId != 13 && this.sportId != 9;
+        return (this.sportId != 13 && this.sportId != 9 && this.sportId != 151);
     }
 }
