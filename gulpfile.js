@@ -759,15 +759,6 @@ gulp.task('betdez.net', function (done) {
     });
 });
 
-gulp.task('betshouse.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betshouse.wee.bet",
-        banca: "BETS HOUSE",
-        styles: "--header: #ffcc02; --foreground-header: #000; --sidebar-right: #ffcc02; --foreground-sidebar-right: #000; --sidebar-left: #ffcc02; --foreground-sidebar-left: #000; --highlight: #d46345; --foreground-highlight: #fff; --odds: #000; --foreground-odds: #fff;",
-    });
-});
-
 gulp.task('minibets.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1205,15 +1196,6 @@ gulp.task('olimpobetsvip.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "olimpobetsvip.wee.bet",
         banca: "OLIMPO BETS VIP",
-        styles: "",
-    });
-});
-
-gulp.task('betsnet.me', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betsnet.me",
-        banca: "BETS NET",
         styles: "",
     });
 });
