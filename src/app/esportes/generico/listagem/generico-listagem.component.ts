@@ -247,4 +247,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
     }
+
+    exibirEscudo() {
+        return this.sportId != 13 && this.sportId != 9;
+    }
 }

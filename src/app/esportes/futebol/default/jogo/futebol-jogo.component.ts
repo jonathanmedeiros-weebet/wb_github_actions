@@ -46,7 +46,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     contentSportsEl;
-    exibirEscudo = false;
     unsub$ = new Subject();
 
     constructor(
@@ -116,7 +115,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     ngOnChanges() {
         if (this.jogoId) {
             this.showLoadingIndicator = true;
-            this.exibirEscudo = false;
 
             this.jogoService.getJogo(this.jogoId)
                 .pipe(takeUntil(this.unsub$))
@@ -267,7 +265,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
 
         this.showLoadingIndicator = false;
-        this.exibirEscudo = true;
         this.cd.detectChanges();
     }
 
