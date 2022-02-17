@@ -1,14 +1,28 @@
 import {
-    Component, OnInit, OnDestroy, Renderer2, ElementRef,
-    EventEmitter, Output, Input, OnChanges, ChangeDetectionStrategy,
-    ChangeDetectorRef
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
-import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService, HelperService } from './../../../../services';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {ItemBilheteEsportivo, Jogo} from './../../../../models';
+import {
+    BilheteEsportivoService,
+    HelperService,
+    JogoService,
+    MessageService,
+    ParametrosLocaisService
+} from './../../../../services';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
