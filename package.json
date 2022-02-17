@@ -208,7 +208,8 @@
         "valesport.bet": "gulp valesport.bet",
         "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
         "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
-        "betpixbrasil.com": "gulp betpixbrasil.com"
+        "betpixbrasil.com": "gulp betpixbrasil.com",
+        "betshelby.net": "gulp betshelby.net"
     },
     "private": true,
     "dependencies": {
