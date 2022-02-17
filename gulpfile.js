@@ -745,6 +745,7 @@ gulp.task('slsports.wee.bet', function (done) {
         host: "slsports.wee.bet",
         banca: "SL SPORTS",
         styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --event-time: yellow; --fg-event-time: #000;",
+        scripts: "<script src='//code-sa1.jivosite.com/widget/FXyaq806qN' async></script>"
     });
 });
 
@@ -1906,3 +1907,23 @@ gulp.task('kaiosport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betpixbrasil.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betpixbrasil.com",
+        banca: "BET PIX BRASIL",
+        styles: "",
+    });
+});
+
+gulp.task('betshelby.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betshelby.net",
+        banca: "BET SHELBY",
+        styles: "",
+    });
+});
+
+
