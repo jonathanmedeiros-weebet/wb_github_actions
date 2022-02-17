@@ -24,25 +24,29 @@
                                 </div>
                                 <div class="nome">
                                     <div class="escudo-container">
-                                         <span *ngIf="jogo.time_a_img; else defaulImageA" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png"
-                                                 class="escudo-img" size="s">
-                                        </span>
-                                        <ng-template #defaulImageA class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                 class="escudo-img">
-                                        </ng-template>
+                                        <div *ngIf="exibirEscudo()">
+                                            <span *ngIf="jogo.time_a_img; else defaulImageA" class="escudo">
+                                                <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png"
+                                                     class="escudo-img" size="s">
+                                            </span>
+                                            <ng-template #defaulImageA class="escudo">
+                                                <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                     class="escudo-img">
+                                            </ng-template>
+                                        </div>
                                         {{jogo.time_a_nome}}
                                     </div>
                                     <div class="escudo-container">
-                                        <span *ngIf="jogo.time_b_img; else defaulImageB" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png"
-                                                 class="escudo-img" size="s">
-                                        </span>
-                                        <ng-template #defaulImageB class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                 class="escudo-img">
-                                        </ng-template>
+                                        <div *ngIf="exibirEscudo()">
+                                            <span *ngIf="jogo.time_b_img; else defaulImageB" class="escudo">
+                                                <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png"
+                                                     class="escudo-img" size="s">
+                                            </span>
+                                            <ng-template #defaulImageB class="escudo">
+                                                <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                     class="escudo-img">
+                                            </ng-template>
+                                        </div>
                                         {{jogo.time_b_nome}}
                                     </div>
                                 </div>
