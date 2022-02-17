@@ -10,7 +10,7 @@
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">
                     <div class="time-a">
-                        <div class="">
+                        <div *ngIf="exibirEscudo">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA"><img
                                     src="https://cdn.wee.bet/img/times/m/{{jogo?.time_a_img}}.png" size="m">
                             </span>
@@ -26,7 +26,7 @@
                         x
                     </div>
                     <div class="time-b">
-                        <div class="">
+                        <div *ngIf="exibirEscudo">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB"><img
                                     src="https://cdn.wee.bet/img/times/m/{{jogo?.time_b_img}}.png" size="m">
                             </span>
