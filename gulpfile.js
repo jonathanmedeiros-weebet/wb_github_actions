@@ -1908,4 +1908,11 @@ gulp.task('betshelby.net', function (done) {
     });
 });
 
-
+gulp.task('esportenetreipele.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "esportenetreipele.com",
+        banca: "ESPORTE NET",
+        styles: "",
+    });
+});
