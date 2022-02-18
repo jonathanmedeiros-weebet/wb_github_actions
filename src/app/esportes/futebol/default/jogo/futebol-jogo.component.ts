@@ -1,14 +1,28 @@
 import {
-    Component, OnInit, OnDestroy, Renderer2, ElementRef,
-    EventEmitter, Output, Input, OnChanges, ChangeDetectionStrategy,
-    ChangeDetectorRef
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
-import { Jogo, Cotacao, ItemBilheteEsportivo } from './../../../../models';
-import { ParametrosLocaisService, JogoService, MessageService, BilheteEsportivoService, HelperService } from './../../../../services';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {ItemBilheteEsportivo, Jogo} from './../../../../models';
+import {
+    BilheteEsportivoService,
+    HelperService,
+    JogoService,
+    MessageService,
+    ParametrosLocaisService
+} from './../../../../services';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -47,8 +61,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     ) { }
 
     ngOnInit() {
-        if (window.innerWidth <= 667) {
+        if (window.innerWidth <= 1024) {
             this.isMobile = true;
+
+            let altura = window.innerHeight - 97;
+            const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
+            this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
 
         this.definirAltura();
@@ -119,9 +137,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         let altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 223;
+            altura -= 257;
         } else {
-            altura -= 177;
+            altura -= 46;
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');

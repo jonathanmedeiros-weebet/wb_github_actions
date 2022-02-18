@@ -83,7 +83,6 @@
         "alsports.wee.bet": "gulp alsports.wee.bet",
         "slsports.wee.bet": "gulp slsports.wee.bet",
         "betdez.net": "gulp betdez.net",
-        "betshouse.wee.bet": "gulp betshouse.wee.bet",
         "minibets.wee.bet": "gulp minibets.wee.bet",
         "palpitesbets.com": "gulp palpitesbets.com",
         "betfut.wee.bet": "gulp betfut.wee.bet",
@@ -133,7 +132,6 @@
         "galobets.com": "gulp galobets.com",
         "reallbet.site": "gulp reallbet.site",
         "olimpobetsvip.wee.bet": "gulp olimpobetsvip.wee.bet",
-        "betsnet.me": "gulp betsnet.me",
         "lobobet.net": "gulp lobobet.net",
         "topsports.wee.bet": "gulp topsports.wee.bet",
         "maranhaobets.net": "gulp maranhaobets.net",
@@ -205,7 +203,12 @@
         "futbet7.com": "gulp futbet7.com",
         "mundialbet.wee.bet": "gulp mundialbet.wee.bet",
         "trevoone.bet": "gulp trevoone.bet",
-        "valesport.bet": "gulp valesport.bet"
+        "valesport.bet": "gulp valesport.bet",
+        "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
+        "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
+        "betpixbrasil.com": "gulp betpixbrasil.com",
+        "betshelby.net": "gulp betshelby.net",
+        "esportenetreipele.com": "gulp esportenetreipele.com"
     },
     "private": true,
     "dependencies": {

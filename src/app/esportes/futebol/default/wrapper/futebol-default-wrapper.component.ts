@@ -21,7 +21,7 @@ import * as moment from 'moment';
 export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     jogoId;
     exibirMaisCotacoes = false;
-    mobileScreen = true;
+    mobileScreen = false;
     showLoadingIndicator = true;
     campeonatos;
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
@@ -41,7 +41,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // this.mobileScreen = window.innerWidth <= 668 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -160,7 +160,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.menuFooterService.setIsPagina(false);
+        this.setIsPagina(false);
 
         this.unsub$.next();
         this.unsub$.complete();
@@ -196,7 +196,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.menuFooterService.setIsPagina(exibirMaisCotacoes);
+        this.setIsPagina(exibirMaisCotacoes);
         this.exibirMaisCotacoes = exibirMaisCotacoes;
     }
 
@@ -233,5 +233,11 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
         this.jogoId = jogoId;
         return jogoId;
+    }
+
+    setIsPagina(isPage) {
+        if (this.mobileScreen) {
+            this.menuFooterService.setIsPagina(isPage);
+        }
     }
 }
