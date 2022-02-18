@@ -2,13 +2,13 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder} from '@angular/forms';
 import {DepositoSaque} from '../../models';
-import {ClienteService} from "../../shared/services/clientes/cliente.service";
-import {FinanceiroService} from "../../shared/services/financeiro.service";
-import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
-import {MessageService} from "../../shared/services/utils/message.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import { ConfirmModalComponent } from '../../shared/layout/modals';
-import {result} from "lodash";
+import {ClienteService} from '../../shared/services/clientes/cliente.service';
+import {FinanceiroService} from '../../shared/services/financeiro.service';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import {MessageService} from '../../shared/services/utils/message.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmModalComponent} from '../../shared/layout/modals';
+import {result} from 'lodash';
 
 @Component({
     selector: 'app-depositos-saques',
@@ -54,7 +54,7 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
     }
 
     handleError(error: string) {
-        this.messageService.error(error)
+        this.messageService.error(error);
     }
 
     submit() {
@@ -77,15 +77,15 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
 
     cancelarSaque(saqueId) {
         this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
-        this.modalRef.componentInstance.title = "Cancelamento";
-        this.modalRef.componentInstance.msg = "Tem certeza que deseja cancelar a solicitação de saque?";
+        this.modalRef.componentInstance.title = 'Cancelamento';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a solicitação de saque?';
 
         this.modalRef.result.then(
             () => {
                 this.financeiroService.cancelarSaque(saqueId)
                     .subscribe(
                         response => {
-                            this.messageService.success("Solicitação de Saque Cancelada com Sucesso");
+                            this.messageService.success('Solicitação de Saque Cancelada com Sucesso');
                             this.submit();
                         },
                         error => {
@@ -94,5 +94,12 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
                     );
             }
         );
+    }
+
+    exibirCancelarSaque(depositoSaque) {
+        return !depositoSaque.data_pagamento
+            && depositoSaque.tipo === 'saque'
+            && depositoSaque.status !== 'CANCELADO'
+            && depositoSaque.status !== 'REPROVADO';
     }
 }
