@@ -656,16 +656,6 @@ gulp.task('betsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('milagressports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "milagressports.wee.bet",
-        banca: "MILAGRES SPORTS",
-        styles: "--header:#e61919; --foreground-header: #fff;--sidebar-left: #e61919; --sidebar-right: #e61919; --odds:#000;--highlight:#ff0000;--foreground-highlight:#fff;",
-        aditional_styles: ".jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;}"
-    });
-});
-
 gulp.task('citybets.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1205,15 +1195,6 @@ gulp.task('lobobet.net', function (done) {
         server: "front1.wee.bet",
         host: "lobobet.net",
         banca: "LOBO BET",
-        styles: "",
-    });
-});
-
-gulp.task('topsports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "topsports.wee.bet",
-        banca: "TOP SPORTS",
         styles: "",
     });
 });
