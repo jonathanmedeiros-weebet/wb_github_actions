@@ -7,4 +7,5 @@ export class MovimentacaoFinanceira {
     valor = 0;
     saldo: string;
     deposito: Deposito;
+    is_bonus: boolean;
 }

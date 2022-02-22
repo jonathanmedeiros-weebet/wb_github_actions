@@ -75,8 +75,12 @@
                                         *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
                                     </td>
                                     <td class="custom-td"
-                                        style="padding-right: 10px;">{{movimentacao.valor | currency}}</td>
-                                    <td class="custom-td">{{movimentacao.saldo | currency}}</td>
+                                        style="padding-right: 10px;">{{movimentacao.valor | currency}}
+                                    </td>
+                                    <td class="custom-td" rowspan="2">
+                                        {{movimentacao.saldo | currency}}
+                                        <small *ngIf="movimentacao.is_bonus"><br>saldo bônus</small>
+                                    </td>
                                 </tr>
                                 <tr class="tr-2">
                                     <td colspan="3">
