@@ -1,4 +1,4 @@
-import {Deposito} from "./deposito";
+import {Deposito} from './deposito';
 
 export class MovimentacaoFinanceira {
     data: string;
