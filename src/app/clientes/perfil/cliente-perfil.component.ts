@@ -9,6 +9,7 @@ import { Cidade } from '../../shared/models/endereco/cidade';
 import { UtilsService } from '../../shared/services/utils/utils.service';
 import { Endereco } from '../../shared/models/endereco/endereco';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -52,7 +53,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         {
                             nome: cliente.nome.toUpperCase(),
                             sobrenome: cliente.sobrenome.toUpperCase(),
-                            nascimento: cliente.dataNascimento,
+                            nascimento: moment(cliente.dataNascimento.date).format('DD/MM/YYYY'),
                             sexo: cliente.genero.toUpperCase(),
                             cpf: cliente.cpf,
                             telefone: cliente.telefone,
