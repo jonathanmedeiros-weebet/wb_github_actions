@@ -20,7 +20,9 @@
                         <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
                             <div class="indentificacao">
                                 <div class="horario">
-                                    {{jogo.horario | moment: 'DD/MM HH:mm'}}
+                                    {{jogo.horario | moment: 'DD/MM'}}
+                                    <br>
+                                    {{jogo.horario | moment: 'HH:mm'}}
                                 </div>
                                 <div class="nome">
                                     <div class="escudo-container">
