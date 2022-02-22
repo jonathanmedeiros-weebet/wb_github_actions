@@ -1904,3 +1904,21 @@ gulp.task('apostatop.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('familiabetsports.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "familiabetsports.com",
+        banca: "FAMÍLIA BET SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('betfacil123.app', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betfacil123.app",
+        banca: "BET FÁCIL 123",
+        styles: "",
+    });
+});
