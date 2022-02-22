@@ -1626,17 +1626,6 @@ gulp.task('lucksport.bet', function (done) {
     });
 });
 
-gulp.task('clicbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "clicbet.wee.bet",
-        banca: "CLICBET",
-        currency: "EUR",
-        environment: "portugal",
-        styles: ""
-    });
-});
-
 gulp.task('sportourodomexico.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1903,6 +1892,15 @@ gulp.task('jogadamagica.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "jogadamagica.wee.bet",
         banca: "JOGADA MÁGICA",
+        styles: "",
+    });
+});
+
+gulp.task('apostatop.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "apostatop.net",
+        banca: "APOSTA TOP",
         styles: "",
     });
 });

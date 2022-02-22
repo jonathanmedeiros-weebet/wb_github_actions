@@ -178,7 +178,6 @@
         "cruzeirosports.wee.bet": "gulp cruzeirosports.wee.bet",
         "gamez.bet": "gulp gamez.bet",
         "lucksport.bet": "gulp lucksport.bet",
-        "clicbet.wee.bet": "gulp clicbet.wee.bet",
         "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
         "betwins.wee.bet": "gulp betwins.wee.bet",
         "esportegol77.wee.bet": "gulp esportegol77.wee.bet",
@@ -207,7 +206,8 @@
         "betpixbrasil.com": "gulp betpixbrasil.com",
         "betshelby.net": "gulp betshelby.net",
         "esportenetreipele.com": "gulp esportenetreipele.com",
-        "jogadamagica.wee.bet": "gulp jogadamagica.wee.bet"
+        "jogadamagica.wee.bet": "gulp jogadamagica.wee.bet",
+        "apostatop.net": "gulp apostatop.net"
     },
     "private": true,
     "dependencies": {
