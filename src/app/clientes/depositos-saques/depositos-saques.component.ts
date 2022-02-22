@@ -75,17 +75,17 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    cancelarSaque(saqueId) {
+    cancelarSolicitacaoSaque(solicitacaoSaqueId) {
         this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
         this.modalRef.componentInstance.title = 'Cancelamento';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a solicitação de saque?';
 
         this.modalRef.result.then(
             () => {
-                this.financeiroService.cancelarSaque(saqueId)
+                this.financeiroService.cancelarSolicitacaoSaque(solicitacaoSaqueId)
                     .subscribe(
                         response => {
-                            this.messageService.success('Solicitação de Saque Cancelada com Sucesso');
+                            this.messageService.success('Solicitação de Saque Cancelada');
                             this.submit();
                         },
                         error => {
@@ -96,7 +96,7 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
         );
     }
 
-    exibirCancelarSaque(depositoSaque) {
+    exibirCancelarSolicitacaoSaque(depositoSaque) {
         return !depositoSaque.data_pagamento
             && depositoSaque.tipo === 'saque'
             && depositoSaque.status !== 'CANCELADO'

@@ -83,7 +83,7 @@
                                     <td>{{depositoSaque.valor | currency}}</td>
                                     <td rowspan="2">
                                         <button class="btn-cancelar"
-                                                *ngIf="exibirCancelarSaque(depositoSaque)" (click)="cancelarSaque(depositoSaque.id)">
+                                                *ngIf="exibirCancelarSolicitacaoSaque(depositoSaque)" (click)="cancelarSolicitacaoSaque(depositoSaque.id)">
                                             <i class="fa fa-trash-o"></i>
                                         </button>
                                     </td>

@@ -73,8 +73,9 @@ export class FinanceiroService {
             );
     }
 
-    cancelarSaque(saqueId): Observable<any> {
-        return this.http.post(`${this.financeiroUrl}/cancelar-saque`, {id: saqueId}, this.header.getRequestOptions(true))
+    cancelarSolicitacaoSaque(solicitacaoSaqueId): Observable<any> {
+        return this.http.post(`${this.financeiroUrl}/cancelar-solicitacao-saque`,
+            {id: solicitacaoSaqueId}, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 catchError(this.errorService.handleError)
