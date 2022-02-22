@@ -72,7 +72,6 @@
         "ricoesportes.wee.bet": "gulp ricoesportes.wee.bet",
         "betsplay.club": "gulp betsplay.club",
         "betsports.wee.bet": "gulp betsports.wee.bet",
-        "milagressports.wee.bet": "gulp milagressports.wee.bet",
         "citybets.wee.bet": "gulp citybets.wee.bet",
         "lancebet.wee.bet": "gulp lancebet.wee.bet",
         "betsgol.bet": "gulp betsgol.bet",
@@ -133,7 +132,6 @@
         "reallbet.site": "gulp reallbet.site",
         "olimpobetsvip.wee.bet": "gulp olimpobetsvip.wee.bet",
         "lobobet.net": "gulp lobobet.net",
-        "topsports.wee.bet": "gulp topsports.wee.bet",
         "maranhaobets.net": "gulp maranhaobets.net",
         "pagadorabet.com": "gulp pagadorabet.com",
         "3xbets.site": "gulp 3xbets.site",
@@ -180,7 +178,6 @@
         "cruzeirosports.wee.bet": "gulp cruzeirosports.wee.bet",
         "gamez.bet": "gulp gamez.bet",
         "lucksport.bet": "gulp lucksport.bet",
-        "clicbet.wee.bet": "gulp clicbet.wee.bet",
         "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
         "betwins.wee.bet": "gulp betwins.wee.bet",
         "esportegol77.wee.bet": "gulp esportegol77.wee.bet",
@@ -208,7 +205,9 @@
         "kaiosport.wee.bet": "gulp kaiosport.wee.bet",
         "betpixbrasil.com": "gulp betpixbrasil.com",
         "betshelby.net": "gulp betshelby.net",
-        "esportenetreipele.com": "gulp esportenetreipele.com"
+        "esportenetreipele.com": "gulp esportenetreipele.com",
+        "jogadamagica.wee.bet": "gulp jogadamagica.wee.bet",
+        "apostatop.net": "gulp apostatop.net"
     },
     "private": true,
     "dependencies": {

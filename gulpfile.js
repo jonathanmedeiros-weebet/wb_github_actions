@@ -656,16 +656,6 @@ gulp.task('betsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('milagressports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "milagressports.wee.bet",
-        banca: "MILAGRES SPORTS",
-        styles: "--header:#e61919; --foreground-header: #fff;--sidebar-left: #e61919; --sidebar-right: #e61919; --odds:#000;--highlight:#ff0000;--foreground-highlight:#fff;",
-        aditional_styles: ".jogo-selecionado .fa-times{color:#fff;} .fechar-pre-bilhete .fa-times{color:#fff;}"
-    });
-});
-
 gulp.task('citybets.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1209,15 +1199,6 @@ gulp.task('lobobet.net', function (done) {
     });
 });
 
-gulp.task('topsports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "topsports.wee.bet",
-        banca: "TOP SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('maranhaobets.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1645,17 +1626,6 @@ gulp.task('lucksport.bet', function (done) {
     });
 });
 
-gulp.task('clicbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "clicbet.wee.bet",
-        banca: "CLICBET",
-        currency: "EUR",
-        environment: "portugal",
-        styles: ""
-    });
-});
-
 gulp.task('sportourodomexico.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1913,6 +1883,24 @@ gulp.task('esportenetreipele.com', function (done) {
         server: "front3.wee.bet",
         host: "esportenetreipele.com",
         banca: "ESPORTE NET",
+        styles: "",
+    });
+});
+
+gulp.task('jogadamagica.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jogadamagica.wee.bet",
+        banca: "JOGADA MÁGICA",
+        styles: "",
+    });
+});
+
+gulp.task('apostatop.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "apostatop.net",
+        banca: "APOSTA TOP",
         styles: "",
     });
 });

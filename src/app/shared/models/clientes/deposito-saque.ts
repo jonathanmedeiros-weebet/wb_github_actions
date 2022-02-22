@@ -1,5 +1,6 @@
 export class DepositoSaque {
-    data_registro: string;
+    id: number;
+    data: string;
     data_pagamento: string;
     tipo: string;
     status: string;

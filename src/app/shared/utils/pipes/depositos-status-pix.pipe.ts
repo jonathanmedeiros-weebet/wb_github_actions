@@ -29,6 +29,9 @@ export class DepositoStatusPixPipePipe implements PipeTransform {
             case 'rejected':
                 statusFormatado = 'Recusado';
                 break;
+            case 'CANCELADO':
+                statusFormatado = 'Cancelado';
+                break;
             default:
                 statusFormatado = 'Movimentação';
                 break;

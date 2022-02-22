@@ -72,4 +72,13 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    cancelarSolicitacaoSaque(solicitacaoSaqueId): Observable<any> {
+        return this.http.post(`${this.financeiroUrl}/cancelar-solicitacao-saque`,
+            {id: solicitacaoSaqueId}, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                catchError(this.errorService.handleError)
+            );
+    }
 }
