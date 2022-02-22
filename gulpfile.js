@@ -735,7 +735,7 @@ gulp.task('slsports.wee.bet', function (done) {
         host: "slsports.wee.bet",
         banca: "SL SPORTS",
         styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --event-time: yellow; --fg-event-time: #000;",
-        scripts: "<script src='//code-sa1.jivosite.com/widget/FXyaq806qN' async></script>"
+        scripts: "<script> (function (o, c, t, a, d, e, s, k) { o.octadesk = o.octadesk || {}; s = c.getElementsByTagName('body')[0]; k = c.createElement('script'); k.async = 1; k.src = t + '/' + a + '?showButton=' + d + '&openOnMessage=' + e; s.appendChild(k); })(window, document, 'https://chat.octadesk.services/api/widget', 'o95230-e3e', false, true); </script>"
     });
 });
 

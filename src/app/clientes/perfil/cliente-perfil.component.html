@@ -107,7 +107,7 @@
                                 <div class="form-group">
                                     <label class="label">Estado</label>
                                     <select formControlName="estado" type="text" class="form-control"
-                                        (click)="getCidades($event)">
+                                        (change)="getCidades($event)">
                                         <option value="0">Selecione</option>
                                         <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
                                         </option>
