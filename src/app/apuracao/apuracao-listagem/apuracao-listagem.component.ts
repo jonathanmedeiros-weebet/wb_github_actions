@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit,} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';

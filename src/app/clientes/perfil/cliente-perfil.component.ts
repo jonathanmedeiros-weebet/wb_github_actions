@@ -1,14 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { formatDate } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ClienteService } from '../../shared/services/clientes/cliente.service';
-import { MessageService } from '../../shared/services/utils/message.service';
-import { Estado } from '../../shared/models/endereco/estado';
-import { Cidade } from '../../shared/models/endereco/cidade';
-import { UtilsService } from '../../shared/services/utils/utils.service';
-import { Endereco } from '../../shared/models/endereco/endereco';
-import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {ClienteService} from '../../shared/services/clientes/cliente.service';
+import {MessageService} from '../../shared/services/utils/message.service';
+import {Estado} from '../../shared/models/endereco/estado';
+import {Cidade} from '../../shared/models/endereco/cidade';
+import {UtilsService} from '../../shared/services/utils/utils.service';
+import {Endereco} from '../../shared/models/endereco/endereco';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
 
 @Component({
