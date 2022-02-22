@@ -52,7 +52,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         {
                             nome: cliente.nome.toUpperCase(),
                             sobrenome: cliente.sobrenome.toUpperCase(),
-                            nascimento: formatDate(cliente.dataNascimento.date, 'dd/MM/YYYY', 'pt-BR'),
+                            nascimento: cliente.dataNascimento,
                             sexo: cliente.genero.toUpperCase(),
                             cpf: cliente.cpf,
                             telefone: cliente.telefone,
