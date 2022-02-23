@@ -47,6 +47,9 @@ export class FormatarNaturezaPipe implements PipeTransform {
             case 'SAQUE_CLIENTE':
                 naturezaFormatada = 'Saque';
                 break;
+            case 'CREDITO_BONUS':
+                naturezaFormatada = 'Bônus Depósito';
+                break;
             default:
                 naturezaFormatada = 'Movimentação';
                 break;
