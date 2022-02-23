@@ -1922,3 +1922,21 @@ gulp.task('betfacil123.app', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportstar.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sportstar.bet",
+        banca: "SPORT STAR",
+        styles: "",
+    });
+});
+
+gulp.task('starsbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "starsbet.wee.bet",
+        banca: "STARS BET",
+        styles: "",
+    });
+});

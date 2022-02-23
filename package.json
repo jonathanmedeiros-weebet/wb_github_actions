@@ -209,7 +209,9 @@
         "jogadamagica.wee.bet": "gulp jogadamagica.wee.bet",
         "apostatop.net": "gulp apostatop.net",
         "familiabetsports.com": "gulp familiabetsports.com",
-        "betfacil123.app": "gulp betfacil123.app"
+        "betfacil123.app": "gulp betfacil123.app",
+        "sportstar.bet": "gulp sportstar.bet",
+        "starsbet.wee.bet": "gulp starsbet.wee.bet"
     },
     "private": true,
     "dependencies": {
