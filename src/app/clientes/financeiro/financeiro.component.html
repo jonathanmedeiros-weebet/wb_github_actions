@@ -74,8 +74,9 @@
                                         {{movimentacao.natureza | formatarNatureza}} <span
                                         *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
                                     </td>
-                                    <td class="custom-td"
+                                    <td class="custom-td" rowspan="2"
                                         style="padding-right: 10px;">{{movimentacao.valor | currency}}
+                                        <small *ngIf="movimentacao.is_bonus"><br>bônus</small>
                                     </td>
                                     <td class="custom-td" rowspan="2">
                                         {{movimentacao.saldo | currency}}
