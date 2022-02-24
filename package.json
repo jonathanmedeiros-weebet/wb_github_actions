@@ -210,7 +210,9 @@
         "apostatop.net": "gulp apostatop.net",
         "familiabetsports.com": "gulp familiabetsports.com",
         "betfacil123.app": "gulp betfacil123.app",
-        "newbet.wee.bet": "gulp newbet.wee.bet"
+        "newbet.wee.bet": "gulp newbet.wee.bet",
+        "sportstar.bet": "gulp sportstar.bet",
+        "starsbet.wee.bet": "gulp starsbet.wee.bet"
     },
     "private": true,
     "dependencies": {
