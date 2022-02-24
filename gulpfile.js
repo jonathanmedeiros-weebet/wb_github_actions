@@ -1922,3 +1922,12 @@ gulp.task('betfacil123.app', function (done) {
         styles: "",
     });
 });
+
+gulp.task('newbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "newbet.wee.bet",
+        banca: "NEW BET",
+        styles: "",
+    });
+});
