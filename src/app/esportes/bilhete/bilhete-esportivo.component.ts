@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -42,6 +42,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     isCliente;
     isEsporte: boolean;
     isPagina: boolean;
+    posicaoFinanceira = {
+        saldo: 0,
+        credito: 0,
+        bonus: 0
+    };
     mobileScreen = false;
 
     constructor(
@@ -82,6 +87,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                     this.isCliente = isCliente;
                                     if (isCliente && this.isLoggedIn) {
                                         this.form.patchValue({ apostador: 'cliente' });
+                                        this.getPosicaoFinanceira();
                                     }
                                 }
                             );
@@ -297,6 +303,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         if (this.isCliente) {
             this.form.patchValue({ 'apostador': 'cliente' });
+            this.getPosicaoFinanceira();
         }
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
@@ -457,5 +464,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         });
 
         return values;
+    }
+
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                error => this.handleError(error)
+            );
     }
 }

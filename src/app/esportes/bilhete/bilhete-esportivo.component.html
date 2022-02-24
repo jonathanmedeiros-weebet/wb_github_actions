@@ -44,7 +44,7 @@
                         Aceitar alterações de odds
                     </label>
                 </div>
-                <div *ngIf="isLoggedIn && isCliente" class="form-group form-check-custom form-check-style-1 utilizar-bonus">
+                <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn" class="form-group form-check-custom form-check-style-1 utilizar-bonus">
                     <input type="checkbox" class="form-check-input-custom form-check-input-style-1" id="utilizar-bonus"
                            formControlName="utilizar_bonus">
                     <label for="utilizar-bonus">
