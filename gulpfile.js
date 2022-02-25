@@ -1957,3 +1957,12 @@ gulp.task('megabet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bolanarede.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bolanarede.wee.bet",
+        banca: "BOLA NA REDE",
+        styles: "",
+    });
+});

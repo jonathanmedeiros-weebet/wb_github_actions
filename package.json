@@ -213,7 +213,8 @@
         "newbet.wee.bet": "gulp newbet.wee.bet",
         "sportstar.bet": "gulp sportstar.bet",
         "starsbet.wee.bet": "gulp starsbet.wee.bet",
-        "megabet.wee.bet": "gulp megabet.wee.bet"
+        "megabet.wee.bet": "gulp megabet.wee.bet",
+        "bolanarede.wee.bet": "gulp bolanarede.wee.bet"
     },
     "private": true,
     "dependencies": {
