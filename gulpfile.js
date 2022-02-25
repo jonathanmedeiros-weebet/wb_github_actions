@@ -1948,3 +1948,12 @@ gulp.task('starsbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megabet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "megabet.wee.bet",
+        banca: "MEGA BET",
+        styles: "",
+    });
+});

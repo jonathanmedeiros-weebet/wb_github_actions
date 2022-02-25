@@ -212,7 +212,8 @@
         "betfacil123.app": "gulp betfacil123.app",
         "newbet.wee.bet": "gulp newbet.wee.bet",
         "sportstar.bet": "gulp sportstar.bet",
-        "starsbet.wee.bet": "gulp starsbet.wee.bet"
+        "starsbet.wee.bet": "gulp starsbet.wee.bet",
+        "megabet.wee.bet": "gulp megabet.wee.bet"
     },
     "private": true,
     "dependencies": {
