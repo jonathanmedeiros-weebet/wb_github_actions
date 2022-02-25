@@ -104,7 +104,7 @@ export class ApostasClienteEsporteComponent implements OnInit, OnDestroy, OnChan
         }
 
         let modalAposta;
-        if (this.encerramentoPermitido) {
+        if (this.encerramentoPermitido && !aposta.is_bonus) {
             modalAposta = ApostaEncerramentoModalComponent;
         } else {
             modalAposta = ApostaModalComponent;

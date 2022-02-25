@@ -66,7 +66,9 @@
                                 {{aposta.codigo}}
                             </td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
-                            <td>{{aposta.valor | currency}}</td>
+                            <td>
+                                {{aposta.valor | currency}} <small *ngIf="aposta.is_bonus">bônus</small>
+                            </td>
                             <td>
                                 <span
                                     *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency}}</span>

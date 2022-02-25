@@ -1,8 +1,8 @@
 import { ItemApostaEsportiva } from './item-aposta-esportiva';
-import { Passador } from '../passador'
+import { Passador } from '../passador';
 
 export class ApostaEsportiva {
-    passador : Passador;
+    passador: Passador;
     id: number;
     itens: ItemApostaEsportiva[] = [];
     cambistaId: number;
@@ -27,6 +27,7 @@ export class ApostaEsportiva {
     chave: string;
     cartao_aposta: string;
     codigo: string;
+    is_bonus: boolean;
 
     ultima_aposta: string;
 }
