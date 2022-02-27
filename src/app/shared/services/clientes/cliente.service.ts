@@ -94,6 +94,6 @@ export class ClienteService {
     }
 
     verificarLogin(login) {
-        return this.http.get(`${this.clienteUrl}/validarLogin/` + login).pipe(map(res => res));
+        return this.http.get(`${this.clienteUrl}/validarLogin/` + login.toLowerCase()).pipe(map(res => res));
     }
 }
