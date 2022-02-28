@@ -1966,3 +1966,21 @@ gulp.task('bolanarede.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostaai.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "apostaai.com",
+        banca: "APOSTA AÍ",
+        styles: "",
+    });
+});
+
+gulp.task('cityesportes.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "cityesportes.bet",
+        banca: "CITY ESPORTES",
+        styles: "",
+    });
+});

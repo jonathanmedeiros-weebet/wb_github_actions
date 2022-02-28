@@ -214,7 +214,9 @@
         "sportstar.bet": "gulp sportstar.bet",
         "starsbet.wee.bet": "gulp starsbet.wee.bet",
         "megabet.wee.bet": "gulp megabet.wee.bet",
-        "bolanarede.wee.bet": "gulp bolanarede.wee.bet"
+        "bolanarede.wee.bet": "gulp bolanarede.wee.bet",
+        "apostaai.com": "gulp apostaai.com",
+        "cityesportes.bet": "gulp cityesportes.bet"
     },
     "private": true,
     "dependencies": {
