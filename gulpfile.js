@@ -1984,3 +1984,12 @@ gulp.task('cityesportes.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('chuteiradeouro.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "chuteiradeouro.wee.bet",
+        banca: "CHUTEIRA DE OURO",
+        styles: "",
+    });
+});
