@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 
-import { EMPTY, Subject, timer } from 'rxjs';
-import { takeUntil, switchMap, delay } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
@@ -13,7 +13,6 @@ import {
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
-import { debounce, tap } from 'lodash';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -376,20 +375,17 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (this.apostaAoVivo) {
             this.apostaEsportivaService.tokenAoVivo(dados)
                 .pipe(
-                    tap(token => console.log(token)),
-                    // tap(token => {
-                    //     this.setDelay();
+                    tap(token => {
+                        this.setDelay();
 
-                    //     this.refreshIntervalId = setInterval(() => {
-                    //         if (this.delay > 0) {
-                    //             this.delay--;
-                    //         }
-                    //     }, 1000);
+                        this.refreshIntervalId = setInterval(() => {
+                            if (this.delay > 0) {
+                                this.delay--;
+                            }
+                        }, 1000);
 
-                    //     dados.token_aovivo = token;
-
-                    //     console.log(this.delayReal * 1000);
-                    // }),
+                        dados.token_aovivo = token;
+                    }),
                     delay(this.delayReal * 1000),
                     switchMap(() => {
                         return this.apostaEsportivaService.create(dados);
