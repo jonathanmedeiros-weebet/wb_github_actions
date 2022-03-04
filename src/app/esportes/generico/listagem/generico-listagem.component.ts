@@ -26,7 +26,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() esporte;
     mobileScreen = true;
     campeonatos: Campeonato[];
-    itens: ItemBilheteEsportivo[] = [];
+    itens = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
     cotacoesLocais;
@@ -125,7 +125,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             jogo_id: jogo._id,
             jogo_event_id: jogo.event_id,
             jogo_nome: jogo.nome,
-            cotacao: cotacao,
+            cotacao: {
+                chave: cotacao.chave,
+                valor: cotacao.valor,
+                nome: cotacao.nome
+            },
             jogo: jogo,
             mudanca: false,
             cotacao_antiga_valor: null

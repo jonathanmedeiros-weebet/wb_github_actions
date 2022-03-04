@@ -39,7 +39,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     mercados1T: any = {};
     mercados2T: any = {};
     mercadosJogadores: any = {};
-    itens: ItemBilheteEsportivo[] = [];
+    itens = [];
     itensSelecionados = {};
     tiposAposta;
     cotacoesLocais;
@@ -288,7 +288,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             jogo_id: jogo._id,
             jogo_event_id: jogo.event_id,
             jogo_nome: jogo.nome,
-            cotacao: cotacao,
+            cotacao: {
+                chave: cotacao.chave,
+                valor: cotacao.valor,
+                nome: cotacao.nome
+            },
             jogo: jogo,
             modificado: false,
             cotacao_antiga: null
