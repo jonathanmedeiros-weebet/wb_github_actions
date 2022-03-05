@@ -66,7 +66,7 @@ export class ApostaEsportivaService {
 
         return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
-                map((res: any) => res.results.token),
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
