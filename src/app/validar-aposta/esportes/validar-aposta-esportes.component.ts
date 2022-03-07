@@ -11,7 +11,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { isNumeric } from 'rxjs/internal-compatibility';
-import { isNumber } from 'lodash';
 import {
     MessageService,
     ApostaEsportivaService,
