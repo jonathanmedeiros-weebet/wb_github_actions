@@ -217,7 +217,8 @@
         "bolanarede.wee.bet": "gulp bolanarede.wee.bet",
         "apostaai.com": "gulp apostaai.com",
         "cityesportes.bet": "gulp cityesportes.bet",
-        "chuteiradeouro.wee.bet": "gulp chuteiradeouro.wee.bet"
+        "chuteiradeouro.wee.bet": "gulp chuteiradeouro.wee.bet",
+        "startbetbrasil.com": "gulp startbetbrasil.com"
     },
     "private": true,
     "dependencies": {

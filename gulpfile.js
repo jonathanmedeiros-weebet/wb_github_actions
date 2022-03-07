@@ -1994,3 +1994,12 @@ gulp.task('chuteiradeouro.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('startbetbrasil.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "startbetbrasil.com",
+        banca: "START BET BRASIL",
+        styles: "",
+    });
+});
