@@ -1389,15 +1389,6 @@ gulp.task('starbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('valebets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "valebets.wee.bet",
-        banca: "VALE BETS",
-        styles: "",
-    });
-});
-
 gulp.task('mitosport.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
