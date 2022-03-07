@@ -32,7 +32,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     mobileScreen = true;
     campeonatos: Campeonato[];
     campeonatosAbertos = [];
-    itens: ItemBilheteEsportivo[] = [];
+    itens = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
     cotacoesLocais;
@@ -174,7 +174,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             jogo_id: jogo._id,
             jogo_event_id: jogo.event_id,
             jogo_nome: jogo.nome,
-            cotacao: cotacao,
+            cotacao: {
+                chave: cotacao.chave,
+                valor: cotacao.valor,
+                nome: cotacao.nome
+            },
             jogo: jogo,
             mudanca: false,
             cotacao_antiga_valor: null

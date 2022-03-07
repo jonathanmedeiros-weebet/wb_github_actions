@@ -9,8 +9,8 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
+import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { isNumeric } from 'rxjs/internal-compatibility';
-import { takeUntil } from 'rxjs/operators';
 import {
     MessageService,
     ApostaEsportivaService,
@@ -29,6 +29,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     @Input() preAposta: any;
     preApostaItens = [];
     delay = 20;
+    delayReal = 20;
     refreshIntervalId;
     apostaAoVivo = false;
     cotacoesVinheramDifentes = false;
@@ -104,6 +105,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
 
     removerItem(i) {
         let disabled = false;
+        let aovivo = false;
         this.preAposta.itens.splice(i, 1);
 
         this.preAposta.cotacao = this.preAposta.itens
@@ -112,17 +114,22 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
                     disabled = true;
                 }
 
+                if (item.ao_vivo) {
+                    aovivo = true;
+                }
+
                 return item.cotacao_atual;
             })
             .reduce((acumulador, valorAtual) => acumulador * valorAtual);
 
         this.disabled = disabled;
+        this.apostaAoVivo = aovivo;
 
         this.calcularEstimativaGanho();
     }
 
     submit() {
-        this.triggerProcess();
+        this.process = true;
         this.cotacoesVinheramDifentes = false;
         this.cotacoesMudaram = false;
 
@@ -143,18 +150,45 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
             };
         });
 
-
         if (values.itens.length) {
-            this.apostaEsportivaService
-                .create(values)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    result => {
-                        this.deactivateProcess();
-                        this.success.emit(result);
-                    },
-                    error => this.handleError(error)
-                );
+            if (this.apostaAoVivo) {
+                this.setDelay();
+
+                this.apostaEsportivaService.tokenAoVivo(values)
+                    .pipe(
+                        tap(token => {
+                            this.refreshIntervalId = setInterval(() => {
+                                if (this.delay > 0) {
+                                    this.delay--;
+                                }
+                            }, 1000);
+
+                            values.token_aovivo = token;
+                        }),
+                        delay(this.delayReal * 1000),
+                        switchMap(() => {
+                            return this.apostaEsportivaService.create(values);
+                        }),
+                        takeUntil(this.unsub$)
+                    )
+                    .subscribe(
+                        result => {
+                            this.deactivateProcess();
+                            this.success.emit(result);
+                        },
+                        error => this.handleError(error)
+                    );
+            } else {
+                this.apostaEsportivaService.create(values)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        result => {
+                            this.deactivateProcess();
+                            this.success.emit(result);
+                        },
+                        error => this.handleError(error)
+                    );
+            }
         } else {
             this.handleError('Nenhum jogo na aposta!');
         }
@@ -189,22 +223,14 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
         this.stopDelayInterval();
     }
 
-    triggerProcess() {
-        this.process = true;
-
-        if (this.apostaAoVivo) {
-            this.setDelay();
-
-            this.refreshIntervalId = setInterval(() => {
-                if (this.delay > 0) {
-                    this.delay--;
-                }
-            }, 1000);
-        }
-    }
-
     setDelay() {
         this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
+
+        if (this.delay < 20) {
+            this.delayReal = 20;
+        } else {
+            this.delayReal = this.delay;
+        }
     }
 
     stopDelayInterval() {

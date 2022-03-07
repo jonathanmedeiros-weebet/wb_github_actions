@@ -60,4 +60,14 @@ export class ApostaEsportivaService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    tokenAoVivo(aposta): Observable<Number> {
+        let url = this.ApostaEsportivaUrl + '/token-aovivo';
+
+        return this.http.post(url, JSON.stringify(aposta), this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }
