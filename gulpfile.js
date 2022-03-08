@@ -1967,3 +1967,12 @@ gulp.task('startbetbrasil.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('goldeplaca.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "goldeplaca.wee.bet",
+        banca: "GOL DE PLACA",
+        styles: "",
+    });
+});
