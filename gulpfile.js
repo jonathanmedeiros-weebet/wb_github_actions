@@ -1500,15 +1500,6 @@ gulp.task('premiersport.wee.bet', function (done) {
     });
 });
 
-gulp.task('playplaybet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "playplaybet.net",
-        banca: "PLAY PLAY BET",
-        styles: "",
-    });
-});
-
 gulp.task('megabetrn.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1518,29 +1509,11 @@ gulp.task('megabetrn.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportsbest.com.br', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "sportsbest.com.br",
-        banca: "SPORTS BEST",
-        styles: "",
-    });
-});
-
 gulp.task('placard365.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "placard365.bet",
         banca: "PLACAR D365",
-        styles: "",
-    });
-});
-
-gulp.task('probets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "probets.wee.bet",
-        banca: "PRO BETS",
         styles: "",
     });
 });
