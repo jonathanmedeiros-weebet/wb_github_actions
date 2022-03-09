@@ -1,17 +1,22 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, ChangeDetectorRef} from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService, MessageService, BilheteEsportivoService,
-    HelperService, ApostaEsportivaService, AuthService,
-    PreApostaEsportivaService, MenuFooterService
+    ApostaEsportivaService,
+    AuthService,
+    BilheteEsportivoService,
+    HelperService,
+    MenuFooterService,
+    MessageService,
+    ParametrosLocaisService,
+    PreApostaEsportivaService
 } from '../../services';
-import { ItemBilheteEsportivo } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ItemBilheteEsportivo} from '../../models';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
 @Component({
