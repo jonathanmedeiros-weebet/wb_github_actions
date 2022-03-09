@@ -1976,3 +1976,12 @@ gulp.task('goldeplaca.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('boladeouro.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "boladeouro.wee.bet",
+        banca: "BOLA DE OURO",
+        styles: "",
+    });
+});
