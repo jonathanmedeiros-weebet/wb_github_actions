@@ -735,7 +735,7 @@ gulp.task('slsports.wee.bet', function (done) {
         host: "slsports.wee.bet",
         banca: "SL SPORTS",
         styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --event-time: yellow; --fg-event-time: #000;",
-        scripts: "<script> (function (o, c, t, a, d, e, s, k) { o.octadesk = o.octadesk || {}; s = c.getElementsByTagName('body')[0]; k = c.createElement('script'); k.async = 1; k.src = t + '/' + a + '?showButton=' + d + '&openOnMessage=' + e; s.appendChild(k); })(window, document, 'https://chat.octadesk.services/api/widget', 'o95230-e3e', false, true); </script>"
+        scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/5efb694c9e5f69442291993e/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"
     });
 });
 
