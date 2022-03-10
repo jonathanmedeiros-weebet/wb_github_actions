@@ -216,7 +216,10 @@
         "chuteiradeouro.wee.bet": "gulp chuteiradeouro.wee.bet",
         "startbetbrasil.com": "gulp startbetbrasil.com",
         "goldeplaca.wee.bet": "gulp goldeplaca.wee.bet",
-        "boladeouro.wee.bet": "gulp boladeouro.wee.bet"
+        "boladeouro.wee.bet": "gulp boladeouro.wee.bet",
+        "xbetsports.net": "gulp xbetsports.net",
+        "goldenbet.wee.bet": "gulp goldenbet.wee.bet",
+        "realbets.wee.bet": "gulp realbets.wee.bet"
     },
     "private": true,
     "dependencies": {

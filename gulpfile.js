@@ -1985,3 +1985,30 @@ gulp.task('boladeouro.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('xbetsports.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "xbetsports.net",
+        banca: "XBETSPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('goldenbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "goldenbet.wee.bet",
+        banca: "GOLDEN BET",
+        styles: "",
+    });
+});
+
+gulp.task('realbets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "realbets.wee.bet",
+        banca: "REAL BETS",
+        styles: "",
+    });
+});
