@@ -2012,3 +2012,12 @@ gulp.task('realbets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('17bet.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "17bet.com.br",
+        banca: "17 BET",
+        styles: "",
+    });
+});

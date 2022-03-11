@@ -219,7 +219,8 @@
         "boladeouro.wee.bet": "gulp boladeouro.wee.bet",
         "xbetsports.net": "gulp xbetsports.net",
         "goldenbet.wee.bet": "gulp goldenbet.wee.bet",
-        "realbets.wee.bet": "gulp realbets.wee.bet"
+        "realbets.wee.bet": "gulp realbets.wee.bet",
+        "17bet.com.br": "gulp 17bet.com.br"
     },
     "private": true,
     "dependencies": {
