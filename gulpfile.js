@@ -2021,3 +2021,30 @@ gulp.task('17bet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('esportcampeao.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "esportcampeao.wee.bet",
+        banca: "ESPORT CAMPEÃO",
+        styles: "",
+    });
+});
+
+gulp.task('betsnordeste.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsnordeste.wee.bet",
+        banca: "BETS NORDESTE",
+        styles: "",
+    });
+});
+
+gulp.task('championsbets.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "championsbets.net",
+        banca: "CHAMPIONS BETS",
+        styles: "",
+    });
+});
