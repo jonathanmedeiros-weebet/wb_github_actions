@@ -223,7 +223,9 @@
         "17bet.com.br": "gulp 17bet.com.br",
         "esportcampeao.wee.bet": "gulp esportcampeao.wee.bet",
         "betsnordeste.wee.bet": "gulp betsnordeste.wee.bet",
-        "championsbets.net": "gulp championsbets.net"
+        "championsbets.net": "gulp championsbets.net",
+        "vippsports.wee.bet": "gulp vippsports.wee.bet",
+        "sportbrasilvip.com": "gulp sportbrasilvip.com"
     },
     "private": true,
     "dependencies": {

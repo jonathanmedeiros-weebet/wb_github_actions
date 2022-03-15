@@ -2048,3 +2048,21 @@ gulp.task('championsbets.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vippsports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "vippsports.wee.bet",
+        banca: "VIPP SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('sportbrasilvip.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "sportbrasilvip.com",
+        banca: "SPORT BRASIL VIP",
+        styles: "",
+    });
+});
