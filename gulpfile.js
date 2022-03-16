@@ -2057,3 +2057,12 @@ gulp.task('sportbrasilvip.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('newsport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "newsport.wee.bet",
+        banca: "NEW SPORT",
+        styles: "",
+    });
+});

@@ -224,7 +224,8 @@
         "betsnordeste.wee.bet": "gulp betsnordeste.wee.bet",
         "championsbets.net": "gulp championsbets.net",
         "vippsports.wee.bet": "gulp vippsports.wee.bet",
-        "sportbrasilvip.com": "gulp sportbrasilvip.com"
+        "sportbrasilvip.com": "gulp sportbrasilvip.com",
+        "newsport.wee.bet": "gulp newsport.wee.bet"
     },
     "private": true,
     "dependencies": {
