@@ -87,7 +87,7 @@ document.onreadystatechange = async function () {
                     this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', { style: 'currency', currency: '[CURRENCY]' }));
-                    this.getElementById('bet-amount').append(ticketData.is_bonus ? ' bônus' : '');
+                    this.getElementById('bet-amount').append(ticketData.is_bonus ? ' (bônus)' : '');
                     this.getElementById('status').append(ticketData.ativo ? 'ATIVO' : 'CANCELADO')
 
                     const mapEsportes = new Map()

@@ -76,7 +76,7 @@
                     style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
             </p>
             <p class="aposta">
-                VALOR APOSTADO: <span style="float:right"> <span *ngIf="aposta.is_bonus">bônus</span> {{aposta.valor | currency}}</span>
+                VALOR APOSTADO: <span style="float:right"> <span *ngIf="aposta.is_bonus">(bônus)</span> {{aposta.valor | currency}}</span>
             </p>
             <p class="ganho">
                 POSSÍVEL RETORNO: <span
