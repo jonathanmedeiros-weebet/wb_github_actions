@@ -1717,15 +1717,6 @@ gulp.task('chutescerto.com', function (done) {
     });
 });
 
-gulp.task('golaco.io', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "golaco.io",
-        banca: "GOLAÇO",
-        styles: "",
-    });
-});
-
 gulp.task('boaesportes.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
