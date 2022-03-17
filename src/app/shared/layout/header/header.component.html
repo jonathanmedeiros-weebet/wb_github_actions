@@ -17,10 +17,10 @@
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
                        *ngIf="isCliente">
-                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.name | titlecase}}</h4>
                     </a>
                     <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
-                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.name | titlecase}}</h4>
                     </button>
                     <div class="dropdown-divider"></div>
 
@@ -195,10 +195,10 @@
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
                        *ngIf="isCliente">
-                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.name | titlecase}}</h4>
                     </a>
                     <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
-                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.name | titlecase}}</h4>
                     </button>
                     <div class="dropdown-divider"></div>
 
