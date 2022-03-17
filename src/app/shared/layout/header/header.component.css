@@ -111,6 +111,13 @@ header a {
     justify-content: normal;
 }
 
+.menu-conta-header{
+    width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 @media only screen and (max-width: 1024px) {
     .menu-categories {
         font-size: 0.5rem;
