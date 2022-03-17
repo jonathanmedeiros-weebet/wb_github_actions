@@ -1,14 +1,19 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, ChangeDetectorRef} from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService, MessageService, BilheteEsportivoService,
-    HelperService, ApostaEsportivaService, AuthService,
-    PreApostaEsportivaService, MenuFooterService
+    ApostaEsportivaService,
+    AuthService,
+    BilheteEsportivoService,
+    HelperService,
+    MenuFooterService,
+    MessageService,
+    ParametrosLocaisService,
+    PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -49,6 +54,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         bonus: 0
     };
     mobileScreen = false;
+    utilizarBonus = false;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -224,11 +230,20 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const premio = valor * cotacao;
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
 
+        if (this.utilizarBonus && this.possibilidadeGanho > 0) {
+            this.possibilidadeGanho -= valor;
+        }
+
         if (this.itens.value.length == 0) {
             this.cotacao = 0;
         } else {
             this.cotacao = cotacao;
         }
+    }
+
+    toggleUtilizarBonus() {
+        this.utilizarBonus = !this.utilizarBonus;
+        this.calcularPossibilidadeGanho(this.form.value.valor);
     }
 
     submit() {
@@ -299,6 +314,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
+        this.utilizarBonus = false;
         this.cartaoApostaForm.reset();
         this.stopDelayInterval();
 
