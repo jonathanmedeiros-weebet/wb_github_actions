@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild, ChangeDe
 import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
@@ -36,6 +36,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     cartaoApostaForm: FormGroup;
     apostaAoVivo = false;
     delay = 20;
+    delayReal = 20;
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
@@ -382,19 +383,35 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (this.apostaAoVivo) {
             this.setDelay();
 
-            this.refreshIntervalId = setInterval(() => {
-                if (this.delay > 0) {
-                    this.delay--;
-                }
-            }, 1000);
-        }
+            this.apostaEsportivaService.tokenAoVivo(dados)
+                .pipe(
+                    tap(token => {
+                        this.refreshIntervalId = setInterval(() => {
+                            if (this.delay > 0) {
+                                this.delay--;
+                            }
+                        }, 1000);
 
-        this.apostaEsportivaService.create(dados)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                result => this.apostaSuccess(result),
-                error => this.handleError(error)
-            );
+                        dados.token_aovivo = token;
+                    }),
+                    delay(this.delayReal * 1000),
+                    switchMap(() => {
+                        return this.apostaEsportivaService.create(dados);
+                    }),
+                    takeUntil(this.unsub$)
+                )
+                .subscribe(
+                    result => this.apostaSuccess(result),
+                    error => this.handleError(error)
+                );
+        } else {
+            this.apostaEsportivaService.create(dados)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    result => this.apostaSuccess(result),
+                    error => this.handleError(error)
+                );
+        }
     }
 
     trocarTipoApostaDeslogado(tipo) {
@@ -444,6 +461,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     setDelay() {
         this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
+
+        if (this.delay < 20) {
+            this.delayReal = 20;
+        } else {
+            this.delayReal = this.delay;
+        }
     }
 
     aceitarMudancas() {

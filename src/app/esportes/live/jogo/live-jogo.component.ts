@@ -23,7 +23,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     @Output() exibirMaisCotacoes = new EventEmitter();
     jogo;
     mercados: any = {};
-    itens: ItemBilheteEsportivo[] = [];
+    itens = [];
     tiposAposta;
     objectKeys = Object.keys;
     isMobile = false;
@@ -181,7 +181,11 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             time_a_placar: jogo.info.time_a_resultado,
             time_b_placar: jogo.info.time_b_resultado,
             jogo: jogo,
-            cotacao: cotacao,
+            cotacao: {
+                chave: cotacao.chave,
+                valor: cotacao.valor,
+                nome: cotacao.nome
+            },
             mudanca: false,
             cotacao_antiga_valor: null
         };
