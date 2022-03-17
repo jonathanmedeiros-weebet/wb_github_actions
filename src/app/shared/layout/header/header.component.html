@@ -15,6 +15,15 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="isCliente">
+                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                    </a>
+                    <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
+                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                    </button>
+                    <div class="dropdown-divider"></div>
+
                     <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
                         Crédito: {{posicaoFinanceira.credito | currency}}
                     </button>
@@ -183,6 +192,15 @@
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="isCliente">
+                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                    </a>
+                    <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
+                        <h2><i class="fa fa-user-circle-o"></i>  {{usuario.name}}</h2>
+                    </button>
+                    <div class="dropdown-divider"></div>
 
                     <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
                         Crédito: {{posicaoFinanceira.credito | currency}}
