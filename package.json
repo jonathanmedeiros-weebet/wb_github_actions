@@ -225,7 +225,10 @@
         "championsbets.net": "gulp championsbets.net",
         "vippsports.wee.bet": "gulp vippsports.wee.bet",
         "sportbrasilvip.com": "gulp sportbrasilvip.com",
-        "newsport.wee.bet": "gulp newsport.wee.bet"
+        "newsport.wee.bet": "gulp newsport.wee.bet",
+        "betsesporte.com": "gulp betsesporte.com",
+        "flsesportes.wee.bet": "gulp flsesportes.wee.bet",
+        "betcoin.wee.bet": "gulp betcoin.wee.bet"
     },
     "private": true,
     "dependencies": {
