@@ -46,7 +46,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     hoqueiGeloHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
-        credito: 0
+        credito: 0,
+        bonus: 0
     };
     usuario = new Usuario();
     isLoggedIn;

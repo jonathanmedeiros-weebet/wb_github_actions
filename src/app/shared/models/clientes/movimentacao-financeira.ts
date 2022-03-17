@@ -1,4 +1,4 @@
-import {Deposito} from "./deposito";
+import {Deposito} from './deposito';
 
 export class MovimentacaoFinanceira {
     data: string;
@@ -7,4 +7,5 @@ export class MovimentacaoFinanceira {
     valor = 0;
     saldo: string;
     deposito: Deposito;
+    is_bonus: boolean;
 }

@@ -1,14 +1,19 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
 import {
-    ParametrosLocaisService, MessageService, BilheteEsportivoService,
-    HelperService, ApostaEsportivaService, AuthService,
-    PreApostaEsportivaService, MenuFooterService
+    ApostaEsportivaService,
+    AuthService,
+    BilheteEsportivoService,
+    HelperService,
+    MenuFooterService,
+    MessageService,
+    ParametrosLocaisService,
+    PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -43,7 +48,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     isCliente;
     isEsporte: boolean;
     isPagina: boolean;
+    posicaoFinanceira = {
+        saldo: 0,
+        credito: 0,
+        bonus: 0
+    };
     mobileScreen = false;
+    utilizarBonus = false;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
@@ -83,6 +94,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                     this.isCliente = isCliente;
                                     if (isCliente && this.isLoggedIn) {
                                         this.form.patchValue({ apostador: 'cliente' });
+                                        this.getPosicaoFinanceira();
                                     }
                                 }
                             );
@@ -150,7 +162,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             apostador: ['', (this.isCliente) ? '' : [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([]),
-            aceitar_alteracoes_odds: [false]
+            aceitar_alteracoes_odds: [false],
+            utilizar_bonus: [false]
         });
 
         this.cartaoApostaForm = this.fb.group({
@@ -217,11 +230,20 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const premio = valor * cotacao;
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
 
+        if (this.utilizarBonus && this.possibilidadeGanho > 0) {
+            this.possibilidadeGanho -= valor;
+        }
+
         if (this.itens.value.length == 0) {
             this.cotacao = 0;
         } else {
             this.cotacao = cotacao;
         }
+    }
+
+    toggleUtilizarBonus() {
+        this.utilizarBonus = !this.utilizarBonus;
+        this.calcularPossibilidadeGanho(this.form.value.valor);
     }
 
     submit() {
@@ -292,11 +314,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.bilheteService.atualizarItens([]);
         this.form.reset();
+        this.utilizarBonus = false;
         this.cartaoApostaForm.reset();
         this.stopDelayInterval();
 
         if (this.isCliente) {
             this.form.patchValue({ 'apostador': 'cliente' });
+            this.getPosicaoFinanceira();
         }
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
@@ -479,5 +503,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         });
 
         return values;
+    }
+
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                error => this.handleError(error)
+            );
     }
 }
