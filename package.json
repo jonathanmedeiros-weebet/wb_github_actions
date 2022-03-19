@@ -228,7 +228,8 @@
         "newsport.wee.bet": "gulp newsport.wee.bet",
         "betsesporte.com": "gulp betsesporte.com",
         "flsesportes.wee.bet": "gulp flsesportes.wee.bet",
-        "betcoin.wee.bet": "gulp betcoin.wee.bet"
+        "betcoin.wee.bet": "gulp betcoin.wee.bet",
+        "betsespopixoubetrte.com": "gulp pixoubet.com"
     },
     "private": true,
     "dependencies": {

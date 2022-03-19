@@ -1840,6 +1840,7 @@ gulp.task('esportenetreipele.com', function (done) {
         host: "esportenetreipele.com",
         banca: "ESPORTE NET",
         styles: "",
+        scripts: "<!--Start of Tawk.to Script--><script type='text/javascript'>var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0];s1.async=true;s1.src='https://embed.tawk.to/623500f51ffac05b1d7f4f2c/1fufgnh2n';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->"
     });
 });
 
@@ -2090,6 +2091,15 @@ gulp.task('betcoin.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "betcoin.wee.bet",
         banca: "BET COIN",
+        styles: "",
+    });
+});
+
+gulp.task('pixoubet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "pixoubet.com",
+        banca: "PIXOU BET",
         styles: "",
     });
 });
