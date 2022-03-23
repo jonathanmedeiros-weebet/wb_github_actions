@@ -2090,10 +2090,10 @@ gulp.task('bets084.com', function (done) {
     });
 });
 
-gulp.task('betmatch.wee.bet', function (done) {
+gulp.task('betmatch.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "betmatch.wee.bet",
+        host: "betmatch.bet",
         banca: "BETMATCH",
         styles: "",
     });
