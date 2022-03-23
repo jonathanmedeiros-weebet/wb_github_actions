@@ -858,15 +858,6 @@ gulp.task('capitalsports.site', function (done) {
     });
 });
 
-gulp.task('arena10.site', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "arena10.site",
-        banca: "ARENA 10",
-        styles: "--header: #222d32; --foreground-header: #daa520; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #daa520; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
 gulp.task('osascosportsbet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1545,29 +1536,11 @@ gulp.task('spprimesporte.com', function (done) {
     });
 });
 
-gulp.task('matrizbets.com.br', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "matrizbets.com.br",
-        banca: "MATRIZ BETS",
-        styles: "",
-    });
-});
-
 gulp.task('rodadabets.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "rodadabets.wee.bet",
         banca: "RODADA BETS",
-        styles: "",
-    });
-});
-
-gulp.task('cruzeirosports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "cruzeirosports.wee.bet",
-        banca: "CRUZEIRO SPORTS",
         styles: "",
     });
 });
@@ -1767,15 +1740,6 @@ gulp.task('futbet7.com', function (done) {
         server: "front2.wee.bet",
         host: "futbet7.com",
         banca: "FUTBET7",
-        styles: "",
-    });
-});
-
-gulp.task('mundialbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "mundialbet.wee.bet",
-        banca: "MUNDIAL BET",
         styles: "",
     });
 });
@@ -2101,6 +2065,24 @@ gulp.task('pixoubet.com', function (done) {
         server: "front2.wee.bet",
         host: "pixoubet.com",
         banca: "PIXOU BET",
+        styles: "",
+    });
+});
+
+gulp.task('dobowxbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dobowxbet.wee.bet",
+        banca: "DOBOW XBET",
+        styles: "",
+    });
+});
+
+gulp.task('bets084.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bets084.com",
+        banca: "BETS 084",
         styles: "",
     });
 });
