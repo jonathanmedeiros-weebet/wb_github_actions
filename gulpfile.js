@@ -2069,7 +2069,7 @@ gulp.task('pixoubet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "pixoubet.com",
-        banca: "PIXOU BET",
+        banca: "PiXOUbet",
         styles: "",
     });
 });
