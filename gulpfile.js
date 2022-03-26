@@ -980,14 +980,6 @@ gulp.task('esportepremium.wee.bet', function (done) {
     });
 });
 
-gulp.task('brazilbet.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "brazilbet.club",
-        banca: "BRAZIL BET",
-        styles: "--header: #000; --foreground-header: #006d10; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #006d10;--highlight:#f29d00;--foreground-highlight:#fff;",
-    });
-});
 gulp.task('betgol.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1236,15 +1228,6 @@ gulp.task('aeapostas.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "aeapostas.wee.bet",
         banca: "AE APOSTAS",
-        styles: "",
-    });
-});
-
-gulp.task('kabumbet.site', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "kabumbet.site",
-        banca: "KABUM BET",
         styles: "",
     });
 });
