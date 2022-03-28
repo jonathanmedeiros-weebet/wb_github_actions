@@ -227,7 +227,8 @@
         "dobowxbet.wee.bet": "gulp dobowxbet.wee.bet",
         "bets084.com": "gulp bets084.com",
         "betmatch.bet": "gulp betmatch.bet",
-        "betson.wee.bet": "gulp betson.wee.bet"
+        "betson.wee.bet": "gulp betson.wee.bet",
+        "betwin.wee.bet": "gulp betwin.wee.bet"
     },
     "private": true,
     "dependencies": {

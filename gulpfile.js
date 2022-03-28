@@ -2092,3 +2092,12 @@ gulp.task('betson.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betwin.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betwin.wee.bet",
+        banca: "BETWIN",
+        styles: "",
+    });
+});
