@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
+
+
+@Component({
+  selector: 'app-gameview',
+  templateUrl: './gameview.component.html',
+  styleUrls: ['./gameview.component.css']
+})
+export class GameviewComponent implements OnInit {
+  gameUrl: SafeUrl;
+  gameId: String = ''
+  gameMode: String = ''
+  params:any = []
+
+  constructor(
+    private casinoApi: CasinoApiService,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
+  ) { }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      console.log(params)
+      this.params = params;
+      this.gameId = params['game_id'];
+      this.gameMode = params['game_mode'];
+      this.loadGame()
+    });
+
+  }
+
+  loadGame(){
+    console.log(this.params)
+    console.log(this.gameId)
+    console.log(this.gameMode)
+    this.casinoApi.getGameUrl(this.gameId,this.gameMode).subscribe(response =>{
+      console.log(response)
+
+      this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+    })
+  }
+
+}

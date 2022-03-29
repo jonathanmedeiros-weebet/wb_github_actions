@@ -1,0 +1,11 @@
+<div class="casino-content">
+    <div class="row">
+        <div *ngFor="let game of gameList" class="col col-xs-3">
+            <div class="game-tile">
+                <img title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                <a [routerLink]="['/casino/play/DEMO',game.gameID]" class="btn btn-xs game-button demo">Demo</a>
+                <a [routerLink]="['/casino/play/REAL',game.gameID]" class="btn btn-xs game-button">Jogar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -183,6 +183,12 @@
                     <span>{{'quininha' | sorteioTipo}}</span>
                 </a>
             </div>
+            <div *ngIf="casinoHabilitado">
+                <a class="" [routerLink]="['/casino/wall']">
+                    <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon>
+                    <span>CASINO</span>
+                </a>
+            </div>
         </div>
         <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
             <i class="fa fa-angle-right fa-right"></i>
