@@ -2101,3 +2101,12 @@ gulp.task('betwin.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportbrasil.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "sportbrasil.wee.bet",
+        banca: "SPORT BRASIL",
+        styles: "",
+    });
+});

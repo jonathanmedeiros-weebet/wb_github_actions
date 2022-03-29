@@ -228,7 +228,8 @@
         "bets084.com": "gulp bets084.com",
         "betmatch.bet": "gulp betmatch.bet",
         "betson.wee.bet": "gulp betson.wee.bet",
-        "betwin.wee.bet": "gulp betwin.wee.bet"
+        "betwin.wee.bet": "gulp betwin.wee.bet",
+        "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet"
     },
     "private": true,
     "dependencies": {
