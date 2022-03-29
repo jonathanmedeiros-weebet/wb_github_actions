@@ -102,7 +102,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                isLoggedIn => this.isLoggedIn = isLoggedIn
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                    if (isLoggedIn) {
+                        this.getUsuario();
+                    }
+                }
             );
 
         this.auth.cliente
