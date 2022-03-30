@@ -230,7 +230,8 @@
         "betson.wee.bet": "gulp betson.wee.bet",
         "betwin.wee.bet": "gulp betwin.wee.bet",
         "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet",
-        "123gol.bet": "gulp 123gol.bet"
+        "123gol.bet": "gulp 123gol.bet",
+        "megaesports.wee.bet": "gulp megaesports.wee.bet"
     },
     "private": true,
     "dependencies": {

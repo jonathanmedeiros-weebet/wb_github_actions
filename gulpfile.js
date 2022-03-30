@@ -2119,3 +2119,12 @@ gulp.task('123gol.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megaesports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "megaesports.wee.bet",
+        banca: "MEGA ESPORTS",
+        styles: "",
+    });
+});
