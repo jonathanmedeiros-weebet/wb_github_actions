@@ -2110,3 +2110,12 @@ gulp.task('sportbrasil.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('123gol.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "123gol.bet",
+        banca: "123GOL",
+        styles: "",
+    });
+});
