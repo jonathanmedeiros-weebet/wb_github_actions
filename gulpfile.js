@@ -2127,3 +2127,12 @@ gulp.task('megaesports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futbets.me', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "futbets.me",
+        banca: "FUTBETS",
+        styles: "",
+    });
+});

@@ -231,7 +231,8 @@
         "betwin.wee.bet": "gulp betwin.wee.bet",
         "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet",
         "123gol.bet": "gulp 123gol.bet",
-        "megaesports.wee.bet": "gulp megaesports.wee.bet"
+        "megaesports.wee.bet": "gulp megaesports.wee.bet",
+        "futbets.me": "gulp futbets.me"
     },
     "private": true,
     "dependencies": {
