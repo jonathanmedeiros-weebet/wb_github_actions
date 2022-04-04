@@ -98,14 +98,14 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" (click)="abrirModalCartao()">Consultar</a>
                         <ng-container *ngIf="isLoggedIn; else notLoggedIn">
-                            <!-- <a class="dropdown-item" (click)="abrirModalCadastroCartao()">Criar</a> -->
+                            <a class="dropdown-item" (click)="abrirModalCadastroCartao()">Criar</a>
                             <a class="dropdown-item" [routerLink]="['/cartoes']">Listagem</a>
                             <a class="dropdown-item" [routerLink]="['/cartoes/solicitacoes-saque']">
                                 Solicitações Saque
                             </a>
-                            <!-- <a class="dropdown-item" *ngIf="permitirAtivacaoCartao()"
+                            <a class="dropdown-item" *ngIf="permitirAtivacaoCartao()"
                                 (click)="abrirModalAtivarCartao()">Ativar</a>
-                            <a class="dropdown-item" (click)="abrirModalRecargaCartao()">Recarga</a> -->
+                            <a class="dropdown-item" (click)="abrirModalRecargaCartao()">Recarga</a>
                         </ng-container>
                         <ng-template #notLoggedIn>
                             <a class="dropdown-item" (click)="abrirModalSolicitarSaque()">Solicitar Saque</a>
