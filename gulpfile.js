@@ -2146,12 +2146,20 @@ gulp.task('i2bets.com', function (done) {
     });
 });
 
-
 gulp.task('planetbet.biz', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "planetbet.biz",
         banca: "PLANET BET",
+        styles: "",
+    });
+});
+
+gulp.task('betgol88.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betgol88.wee.bet",
+        banca: "BET GOL 88",
         styles: "",
     });
 });
