@@ -232,7 +232,9 @@
         "sportbrasil.wee.bet": "gulp sportbrasil.wee.bet",
         "123gol.bet": "gulp 123gol.bet",
         "megaesports.wee.bet": "gulp megaesports.wee.bet",
-        "futbets.me": "gulp futbets.me"
+        "futbets.me": "gulp futbets.me",
+        "i2bets.com": "gulp i2bets.com",
+        "planetbet.biz": "gulp planetbet.biz"
     },
     "private": true,
     "dependencies": {

@@ -2136,3 +2136,22 @@ gulp.task('futbets.me', function (done) {
         styles: "",
     });
 });
+
+gulp.task('i2bets.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "i2bets.com",
+        banca: "I2 BETS",
+        styles: "",
+    });
+});
+
+
+gulp.task('planetbet.biz', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "planetbet.biz",
+        banca: "PLANET BET",
+        styles: "",
+    });
+});
