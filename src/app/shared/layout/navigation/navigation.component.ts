@@ -172,24 +172,24 @@ export class NavigationComponent implements OnInit {
         this.printService.listPrinters();
     }
 
-    // abrirModalCadastroCartao() {
-    //     this.modalRef = this.modalService.open(
-    //         CartaoCadastroModalComponent,
-    //         {
-    //             ariaLabelledBy: 'modal-basic-title',
-    //             centered: true
-    //         }
-    //     );
+    abrirModalCadastroCartao() {
+        this.modalRef = this.modalService.open(
+            CartaoCadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
 
-    //     this.modalRef.result
-    //         .then(
-    //             result => {
-    //                 this.closeMenu();
-    //             },
-    //             reason => {
-    //             }
-    //         );
-    // }
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
+                reason => {
+                }
+            );
+    }
 
     abrirModalCartao() {
         this.modalRef = this.modalService.open(
@@ -283,43 +283,43 @@ export class NavigationComponent implements OnInit {
             );
     }
 
-    // abrirModalRecargaCartao() {
-    //     this.modalRef = this.modalService.open(
-    //         RecargaCartaoModalComponent,
-    //         {
-    //             ariaLabelledBy: 'modal-basic-title',
-    //             centered: true
-    //         }
-    //     );
+    abrirModalRecargaCartao() {
+        this.modalRef = this.modalService.open(
+            RecargaCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
 
-    //     this.modalRef.result
-    //         .then(
-    //             result => {
-    //                 this.closeMenu();
-    //             },
-    //             reason => {
-    //             }
-    //         );
-    // }
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
+                reason => {
+                }
+            );
+    }
 
-    // abrirModalAtivarCartao() {
-    //     this.modalRef = this.modalService.open(
-    //         AtivarCartaoModalComponent,
-    //         {
-    //             ariaLabelledBy: 'modal-basic-title',
-    //             centered: true
-    //         }
-    //     );
+    abrirModalAtivarCartao() {
+        this.modalRef = this.modalService.open(
+            AtivarCartaoModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
 
-    //     this.modalRef.result
-    //         .then(
-    //             result => {
-    //                 this.closeMenu();
-    //             },
-    //             reason => {
-    //             }
-    //         );
-    // }
+        this.modalRef.result
+            .then(
+                result => {
+                    this.closeMenu();
+                },
+                reason => {
+                }
+            );
+    }
 
     /* Geração dos números aleatórios para loteria */
     gerarSupresinha(length, context) {
