@@ -2163,3 +2163,21 @@ gulp.task('betgol88.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('xbet92.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "xbet92.wee.bet",
+        banca: "XBET92",
+        styles: "",
+    });
+});
+
+gulp.task('ltbeats.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ltbeats.wee.bet",
+        banca: "LT BEATS",
+        styles: "",
+    });
+});

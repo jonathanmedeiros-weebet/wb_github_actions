@@ -235,7 +235,9 @@
         "futbets.me": "gulp futbets.me",
         "i2bets.com": "gulp i2bets.com",
         "planetbet.biz": "gulp planetbet.biz",
-        "betgol88.wee.bet": "gulp betgol88.wee.bet"
+        "betgol88.wee.bet": "gulp betgol88.wee.bet",
+        "xbet92.wee.bet": "gulp xbet92.wee.bet",
+        "ltbeats.wee.bet": "gulp ltbeats.wee.bet"
     },
     "private": true,
     "dependencies": {
