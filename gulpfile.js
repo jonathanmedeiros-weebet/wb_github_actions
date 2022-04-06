@@ -806,15 +806,6 @@ gulp.task('topbets.website', function (done) {
     });
 });
 
-gulp.task('bigbets.website', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "bigbets.website",
-        banca: "BIG BETS",
-        styles: "--header: #000000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #62af26;"
-    });
-});
-
 gulp.task('soccer787.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1277,15 +1268,6 @@ gulp.task('amgbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('casadasorte.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "casadasorte.wee.bet",
-        banca: "CASA DA SORTE",
-        styles: "",
-    });
-});
-
 gulp.task('betsportse.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1408,15 +1390,6 @@ gulp.task('sportebets.com.br', function (done) {
         server: "front2.wee.bet",
         host: "sportebets.com.br",
         banca: "SPORTE BETS",
-        styles: "",
-    });
-});
-
-gulp.task('fut14.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "fut14.wee.bet",
-        banca: "FUT 14",
         styles: "",
     });
 });
@@ -2178,6 +2151,15 @@ gulp.task('ltbeats.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "ltbeats.wee.bet",
         banca: "LT BEATS",
+        styles: "",
+    });
+});
+
+gulp.task('jocabets.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jocabets.bet",
+        banca: "JOCA BETS",
         styles: "",
     });
 });

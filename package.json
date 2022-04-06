@@ -88,7 +88,6 @@
         "resenhaesportiva.site": "gulp resenhaesportiva.site",
         "showdebola.wee.bet": "gulp showdebola.wee.bet",
         "topbets.website": "gulp topbets.website",
-        "bigbets.website": "gulp bigbets.website",
         "soccer787.site": "gulp soccer787.site",
         "superbet365.bet": "gulp superbet365.bet",
         "sampabet.wee.bet": "gulp sampabet.wee.bet",
@@ -139,7 +138,6 @@
         "quina.bet": "gulp quina.bet",
         "jbrbets.net": "gulp jbrbets.net",
         "amgbet.wee.bet": "gulp amgbet.wee.bet",
-        "casadasorte.wee.bet": "gulp casadasorte.wee.bet",
         "betsportse.com": "gulp betsportse.com",
         "ligabet.wee.bet": "gulp ligabet.wee.bet",
         "pernambucoesportes.wee.bet": "gulp pernambucoesportes.wee.bet",
@@ -154,7 +152,6 @@
         "wbets.com.br": "gulp wbets.com.br",
         "bets89.wee.bet": "gulp bets89.wee.bet",
         "sportebets.com.br": "gulp sportebets.com.br",
-        "fut14.wee.bet": "gulp fut14.wee.bet",
         "imperio.wee.bet": "gulp imperio.wee.bet",
         "ilhabet.net": "gulp ilhabet.net",
         "megabetsport.com": "gulp megabetsport.com",
@@ -237,7 +234,8 @@
         "planetbet.biz": "gulp planetbet.biz",
         "betgol88.wee.bet": "gulp betgol88.wee.bet",
         "xbet92.wee.bet": "gulp xbet92.wee.bet",
-        "ltbeats.wee.bet": "gulp ltbeats.wee.bet"
+        "ltbeats.wee.bet": "gulp ltbeats.wee.bet",
+        "jocabets.bet": "gulp jocabets.bet"
     },
     "private": true,
     "dependencies": {
