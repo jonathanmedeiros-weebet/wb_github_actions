@@ -2146,11 +2146,11 @@ gulp.task('xbet92.wee.bet', function (done) {
     });
 });
 
-gulp.task('ltbeats.wee.bet', function (done) {
+gulp.task('ltbets.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "ltbeats.wee.bet",
-        banca: "LT BEATS",
+        host: "ltbets.wee.bet",
+        banca: "LT BETS",
         styles: "",
     });
 });
