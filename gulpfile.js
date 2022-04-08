@@ -2154,3 +2154,12 @@ gulp.task('futbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('palpitesportbet.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "palpitesportbet.net",
+        banca: "PALPITE SPORT BET",
+        styles: "",
+    });
+});
