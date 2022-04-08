@@ -1195,15 +1195,6 @@ gulp.task('pagadorabet.com', function (done) {
     });
 });
 
-gulp.task('3xbets.site', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "3xbets.site",
-        banca: "3X BETS",
-        styles: "",
-    });
-});
-
 gulp.task('ligavip.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1327,15 +1318,6 @@ gulp.task('betmed.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "betmed.wee.bet",
         banca: "Bet Med",
-        styles: "",
-    });
-});
-
-gulp.task('mundialbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "mundialbets.wee.bet",
-        banca: "Mundial Bets",
         styles: "",
     });
 });
@@ -2160,6 +2142,15 @@ gulp.task('jocabets.bet', function (done) {
         server: "front2.wee.bet",
         host: "jocabets.bet",
         banca: "JOCA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('futbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "futbet.wee.bet",
+        banca: "FUT BET",
         styles: "",
     });
 });

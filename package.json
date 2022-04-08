@@ -131,7 +131,6 @@
         "lobobet.net": "gulp lobobet.net",
         "maranhaobets.net": "gulp maranhaobets.net",
         "pagadorabet.com": "gulp pagadorabet.com",
-        "3xbets.site": "gulp 3xbets.site",
         "ligavip.wee.bet": "gulp ligavip.wee.bet",
         "aeapostas.wee.bet": "gulp aeapostas.wee.bet",
         "betsgames.net": "gulp betsgames.net",
@@ -145,7 +144,6 @@
         "novobetsamericabr.com": "gulp novobetsamericabr.com",
         "trandbets.com": "gulp trandbets.com",
         "betmed.wee.bet": "gulp betmed.wee.bet",
-        "mundialbets.wee.bet": "gulp mundialbets.wee.bet",
         "starbets.wee.bet": "gulp starbets.wee.bet",
         "mitosport.wee.bet": "gulp mitosport.wee.bet",
         "tabocasbet.wee.bet": "gulp tabocasbet.wee.bet",
@@ -235,7 +233,8 @@
         "betgol88.wee.bet": "gulp betgol88.wee.bet",
         "xbet92.wee.bet": "gulp xbet92.wee.bet",
         "ltbets.wee.bet": "gulp ltbets.wee.bet",
-        "jocabets.bet": "gulp jocabets.bet"
+        "jocabets.bet": "gulp jocabets.bet",
+        "futbet.wee.bet": "gulp futbet.wee.bet"
     },
     "private": true,
     "dependencies": {
