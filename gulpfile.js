@@ -1619,6 +1619,7 @@ gulp.task('paratodosbet.com', function (done) {
         host: "paratodosbet.com",
         banca: "PARATODOS.BET",
         styles: "",
+        scripts: "<!-- Global site tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=UA-225184552-1'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-225184552-1'); </script>"
     });
 });
 
