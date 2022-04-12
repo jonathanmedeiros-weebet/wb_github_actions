@@ -34,29 +34,19 @@ async function getTicketData({ apiUrl, ticketId }) {
 async function orderTicketItens(tickeItens = [], ticketType) {
     const orderedItens = tickeItens.sort((a, b) => {
         switch (ticketType) {
-            case 'acumuldao':
-                new Date(a.jogo.horario).getTime() - new Date(b.jogo.horario).getTime()
-                break;
+            case 'acumuladao':
+                return new Date(a.jogo.horario).getTime() - new Date(b.jogo.horario).getTime();
             case 'desafio':
-                new Date(a.desafio_datahora_encerramento).getTime() - new Date(b.desafio_datahora_encerramento).getTime()
-                break;
+                return new Date(a.desafio_datahora_encerramento).getTime() - new Date(b.desafio_datahora_encerramento).getTime();
             default:
-                new Date(a.jogo_horario).getTime() - new Date(b.jogo_horario).getTime()
+                return new Date(a.jogo_horario).getTime() - new Date(b.jogo_horario).getTime()
         }
     });
     return orderedItens;
 }
 
 function getFormatedDate(date) {
-    var formatedDate = date.getDate().toString();
-    var formatdMonth = date.getMonth() + 1;
-    var formatedYear = date.getFullYear().toString();
-    var hour = date.getHours();
-    var minutes = date.getMinutes();
-
-    var dateArray = [formatedDate, formatdMonth, formatedYear];
-    var timeArray = [hour, minutes];
-    return `${dateArray.join('/')} ${timeArray.join(':')}`;
+    return moment(date).format("DD/MM/YYYY HH:mm");
 }
 
 async function getResuts(ids) {
