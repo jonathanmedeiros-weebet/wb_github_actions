@@ -235,7 +235,8 @@
         "ltbets.wee.bet": "gulp ltbets.wee.bet",
         "jocabets.bet": "gulp jocabets.bet",
         "futbet.wee.bet": "gulp futbet.wee.bet",
-        "palpitesportbet.net": "gulp palpitesportbet.net"
+        "palpitesportbet.net": "gulp palpitesportbet.net",
+        "sportbec.net": "gulp sportbec.net"
     },
     "private": true,
     "dependencies": {
