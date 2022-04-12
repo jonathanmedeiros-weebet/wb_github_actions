@@ -5,12 +5,17 @@
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
+            w[l] = w[l] || [];
+            w[l].push({
                 'gtm.start':
                     new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-W6CF4C5');
     </script>
     <!-- End Google Tag Manager -->
@@ -24,86 +29,88 @@
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6CF4C5" height="0" width="0"
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6CF4C5" height="0" width="0"
             style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-    <div id="loader" class="loader" hidden></div>
+<div id="loader" class="loader" hidden></div>
 
-    <div id="error" hidden>
-        <p id="error-message"></p>
+<div id="error" hidden>
+    <p id="error-message"></p>
+</div>
+<div id="ticket" class="container" hidden>
+    <div id="logo-frame"></div>
+    <h1 id="ticket-id"></h1>
+    <div id="header">
+        <h2>Seus Palpites</h2>
+        <span>Confira abaixo o resultado dos seus palpites</span>
     </div>
-    <div id="ticket" class="container" hidden>
-        <div id="logo-frame"></div>
-        <h1 id="ticket-id"></h1>
-        <div id="header">
-            <h2>Seus Palpites</h2>
-            <span>Confira abaixo o resultado dos seus palpites</span>
-        </div>
-        <div id="ticket-itens"></div>
-        <div hidden>
-            <strong id="grouped-bets">
-            </strong>
-        </div>
-        <div id="has-result">
-            Resultado:
-            <span id="result"></span>
-        </div>
-        <div>
-            <strong>Apostador:</strong>
-            <span id="panter"></span>
-        </div>
-        <div>
-            <strong>Cambista:</strong>
-            <span id="money-changer"></span>
-        </div>
-        <div>
-            <strong>Data:</strong>
-            <span id="date"></span>
-        </div>
-        <div id="games">
-            <strong>Nº Jogos:</strong>
-            <span class="itens-number"></span>
-        </div>
-        <div id="chalanges" hidden>
-            <strong>Nº de desafios: </strong>
-            <span class="itens-number"></span>
-        </div>
-        <div>
-            <strong>Cotação:</strong>
-            <span id="quotation"></span>
-        </div>
-        <div>
-            <strong>Valor Apostado:</strong>
-            <span id="bet-amount"></span>
-        </div>
-        <div>
-            <strong>Possível Retorno:</strong>
-            <span id="cash-back"></span>
-        </div>
-        <div>
-            <strong>Prêmio:</strong>
-            <span id="award"></span>
-        </div>
-        <div hidden>
-            <strong>Quantidade de acertos:</strong>
-            <span id="number-hits"></span>
-        </div>
-        <div>
-            <strong>Cambista Paga:</strong>
-            <span id="agent-pays"></span>
-        </div>
-        <div>
-            <strong>Status do Bilhete:</strong>
-            <span id="status"></span>
-        </div>
+    <div id="ticket-itens"></div>
+    <div hidden>
+        <strong id="grouped-bets">
+        </strong>
     </div>
+    <div id="has-result">
+        Resultado:
+        <span id="result"></span>
     </div>
-    <script src="./app-service.js?v=9"></script>
-    <script src="./app.js?v=9"></script>
+    <div>
+        <strong>Apostador:</strong>
+        <span id="panter"></span>
+    </div>
+    <div>
+        <strong>Cambista:</strong>
+        <span id="money-changer"></span>
+    </div>
+    <div>
+        <strong>Data:</strong>
+        <span id="date"></span>
+    </div>
+    <div id="games">
+        <strong>Nº Jogos:</strong>
+        <span class="itens-number"></span>
+    </div>
+    <div id="chalanges" hidden>
+        <strong>Nº de desafios: </strong>
+        <span class="itens-number"></span>
+    </div>
+    <div>
+        <strong>Cotação:</strong>
+        <span id="quotation"></span>
+    </div>
+    <div>
+        <strong>Valor Apostado:</strong>
+        <span id="bet-amount"></span>
+    </div>
+    <div>
+        <strong>Possível Retorno:</strong>
+        <span id="cash-back"></span>
+    </div>
+    <div>
+        <strong>Prêmio:</strong>
+        <span id="award"></span>
+    </div>
+    <div hidden>
+        <strong>Quantidade de acertos:</strong>
+        <span id="number-hits"></span>
+    </div>
+    <div>
+        <strong>Cambista Paga:</strong>
+        <span id="agent-pays"></span>
+    </div>
+    <div>
+        <strong>Status do Bilhete:</strong>
+        <span id="status"></span>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.js"
+        integrity="sha512-3hZVhR3sY0kWODNQDsPtq4J0/onmTN57pZcNV2SWsn2VylVZ/g5DVWyrPdFsgcH3aMdyTABZIuOakNw8Y0RTRw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./app-service.js?v=10"></script>
+<script src="./app.js?v=10"></script>
 </body>
 
 </html>
