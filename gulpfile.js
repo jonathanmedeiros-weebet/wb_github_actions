@@ -349,15 +349,6 @@ gulp.task('esportmania.net', function (done) {
     });
 });
 
-gulp.task('foxbet.me', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "foxbet.me",
-        banca: "Fox Bet",
-        styles: "--header: #000000; --foreground-header: #ffffff; --sidebar-right: #000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff; --highlight: #f28123; --foreground-highlight: #ffffff; --odds: #0c9fa0; --foreground-odds: #fff; --event-time: #f58021;",
-    });
-});
-
 gulp.task('akiapostas.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
