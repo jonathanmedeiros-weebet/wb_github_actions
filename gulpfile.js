@@ -2174,3 +2174,12 @@ gulp.task('sportbec.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pocofundobet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "pocofundobet.wee.bet",
+        banca: "POÇO FUNDO BET",
+        styles: "",
+    });
+});
