@@ -2157,10 +2157,10 @@ gulp.task('palpitesportbet.net', function (done) {
     });
 });
 
-gulp.task('sportbec.net', function (done) {
+gulp.task('sportbec.online', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "sportbec.net",
+        host: "sportbec.online",
         banca: "SPORT BEC",
         styles: "",
     });
