@@ -2174,3 +2174,30 @@ gulp.task('pocofundobet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('likesports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "likesports.wee.bet",
+        banca: "LIKE SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('gestorbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "gestorbet.wee.bet",
+        banca: "GESTOR BET",
+        styles: "",
+    });
+});
+
+gulp.task('grupolightsport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "grupolightsport.wee.bet",
+        banca: "GRUPO LIGHT SPORT",
+        styles: "",
+    });
+});
