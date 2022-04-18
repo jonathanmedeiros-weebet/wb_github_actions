@@ -1492,7 +1492,8 @@ gulp.task('lucksport.bet', function (done) {
         server: "front3.wee.bet",
         host: "lucksport.bet",
         banca: "LUCK SPORT",
-        styles: ""
+        styles: "",
+        scripts: "<script src='//code.jivosite.com/widget/CzzL1XQ5aZ' async></script>"
     });
 });
 
