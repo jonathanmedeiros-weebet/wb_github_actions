@@ -2201,3 +2201,13 @@ gulp.task('grupolightsport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fanaticosbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "fanaticosbet.wee.bet",
+        banca: "FANÁTICOS BET",
+        styles: "",
+    });
+});
+
