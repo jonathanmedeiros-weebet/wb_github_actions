@@ -1721,7 +1721,7 @@ gulp.task('betpixbrasil.com', function (done) {
         host: "betpixbrasil.com",
         banca: "BET PIX BRASIL",
         styles: "",
-        scripts: ""
+        scripts: "<script src='//code.jivosite.com/widget/EVUivhQSxN' async></script>"
     });
 });
 
