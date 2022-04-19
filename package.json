@@ -237,10 +237,11 @@
         "palpitesportbet.net": "gulp palpitesportbet.net",
         "sportbec.online": "gulp sportbec.online",
         "pocofundobet.wee.bet": "gulp pocofundobet.wee.bet",
-        "likesports.wee.bet": "gulp likesports.wee.bet",
+        "lancesports.wee.bet": "gulp lancesports.wee.bet",
         "gestorbet.wee.bet": "gulp gestorbet.wee.bet",
         "grupolightsport.wee.bet": "gulp grupolightsport.wee.bet",
-        "fanaticosbet.wee.bet": "gulp fanaticosbet.wee.bet"
+        "fanaticosbet.wee.bet": "gulp fanaticosbet.wee.bet",
+        "apostamais.bet": "gulp apostamais.bet"
     },
     "private": true,
     "dependencies": {

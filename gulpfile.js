@@ -2176,11 +2176,11 @@ gulp.task('pocofundobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('likesports.wee.bet', function (done) {
+gulp.task('lancesports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "likesports.wee.bet",
-        banca: "LIKE SPORTS",
+        host: "lancesports.wee.bet",
+        banca: "LANCE SPORTS",
         styles: "",
     });
 });
@@ -2212,3 +2212,11 @@ gulp.task('fanaticosbet.wee.bet', function (done) {
     });
 });
 
+gulp.task('apostamais.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "apostamais.bet",
+        banca: "APOSTA MAIS",
+        styles: "",
+    });
+});
