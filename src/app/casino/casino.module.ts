@@ -7,13 +7,15 @@ import { GameviewComponent } from './gameview/gameview.component';
 import { CasinoWrapperComponent } from './wrapper/wrapper.component';
 import { SafeIframePipe } from '../shared/utils/pipes/safe-iframe.pipe';
 import { SharedModule } from '../shared/shared.module';
+import { LiveComponent } from './live/live.component';
 
 
 @NgModule({
   declarations: [
     WallComponent,
     GameviewComponent,
-    CasinoWrapperComponent
+    CasinoWrapperComponent,
+    LiveComponent
   ],
   imports: [
     SharedModule,

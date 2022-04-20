@@ -1,0 +1,20 @@
+<p>live works!</p>
+{{rooms}}
+<div class="casino-content">
+    <div class="row">
+        <div *ngFor="let room of rooms" class="col col-4">
+            <div *ngIf="room.tableOpen == true" class="game-tile">
+                <span class="info" title="Limites" style="left: 25px; top:5px">R$ {{room.tableLimits.minBet}} - R$ {{room.tableLimits.maxBet}}</span>
+                <span class="info" title="Usuário Online: {{room.totalSeatedPlayers}}" style="right: 25px; top:5px">
+                    <i class="fa fa-user"></i>
+                    <span style="padding: 0px 3px;">{{room.totalSeatedPlayers}}</span>
+                </span>
+                <div>
+                <img title="{{room.tableName}}" src="{{room.tableImage}}">
+                <div class="title">{{room.tableName}}<span style=" position: absolute; right: 12px;">Dealer: {{room.dealer.name}}</span></div>
+                </div>
+                <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button">Jogar</a>
+            </div>
+        </div>
+    </div>
+</div>

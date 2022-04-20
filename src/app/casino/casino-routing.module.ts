@@ -4,6 +4,7 @@ import { GameviewComponent } from './gameview/gameview.component';
 import { WallComponent } from './wall/wall.component';
 import { CasinoWrapperComponent } from './wrapper/wrapper.component';
 import {CasinoGuard} from '../shared/services/guards/casino.guard';
+import { LiveComponent } from './live/live.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,11 @@ const routes: Routes = [
             {
                 path: 'wall',
                 component: WallComponent,
+                canActivate: [CasinoGuard]
+            },
+            {
+                path: 'live',
+                component: LiveComponent,
                 canActivate: [CasinoGuard]
             },
             {
