@@ -241,7 +241,8 @@
         "gestorbet.wee.bet": "gulp gestorbet.wee.bet",
         "grupolightsport.wee.bet": "gulp grupolightsport.wee.bet",
         "fanaticosbet.wee.bet": "gulp fanaticosbet.wee.bet",
-        "apostamais.bet": "gulp apostamais.bet"
+        "apostamais.bet": "gulp apostamais.bet",
+        "betceara.net": "gulp betceara.net"
     },
     "private": true,
     "dependencies": {

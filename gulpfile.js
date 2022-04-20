@@ -2221,3 +2221,12 @@ gulp.task('apostamais.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betceara.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betceara.net",
+        banca: "BET CEARÁ",
+        styles: "",
+    });
+});
