@@ -1451,15 +1451,6 @@ gulp.task('nortaobet.com', function (done) {
     });
 });
 
-gulp.task('gbbets.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "gbbets.net",
-        banca: "GB BETS",
-        styles: "",
-    });
-});
-
 gulp.task('spprimesporte.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1707,15 +1698,6 @@ gulp.task('dfsportsbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('kaiosport.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "kaiosport.wee.bet",
-        banca: "KAIO SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('betpixbrasil.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1930,15 +1912,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "betsnordeste.wee.bet",
         banca: "BETS NORDESTE",
-        styles: "",
-    });
-});
-
-gulp.task('championsbets.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "championsbets.net",
-        banca: "CHAMPIONS BETS",
         styles: "",
     });
 });
