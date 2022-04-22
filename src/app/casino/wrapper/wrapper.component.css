@@ -1,21 +1,19 @@
 #casino-wrapper{
     display: flex;
     flex-direction: row;
-    min-height: 640px;
-    max-height: 800px;
 }
 
 .casino-content{
     flex-grow: 1;
     padding: 0 0 0 255px;
+    overflow: auto;
+    height: calc(100vh - 45px);
 }
 
 @media only screen and (max-width: 1024px) {
     .casino-content{
         padding: 0;
-    }
-    #casino-wrapper{
-        min-height: initial;
+        height: calc(100vh - 98px);
     }
 }
 

@@ -1,7 +1,7 @@
-.casino-content .game-tile {border: 1px solid #d2d454; margin-bottom: 20px; overflow: hidden}
-.casino-content .game-tile .info {color: white;padding: 0px 5px;position: absolute;background-color: #5a5a4c;border-radius: 15px; font-weight: bolder;}
-.casino-content .game-tile .title {color: white;position:relative; padding: 5px 10px;background-color: #5a5a4c; font-weight: bolder;width: 100%; bottom: 0px;}
-.casino-content .game-tile img{width: 100%;min-width: 217px;margin-bottom: -30px; }
-.casino-content .game-tile .game-button{position: relative; background-color: #a0a13d; color: white; width: 100%; font-weight: bolder;}
-.casino-content .game-tile .game-button:hover{background-color: #d2d454;}
-.casino-content .game-tile .game-button.demo{ left: 0px; bottom: 0px;}
+.game-tile {border: 1px solid #d2d454; margin-bottom: 20px; overflow: hidden}
+.game-tile .info {color: white;padding: 0px 5px;position: absolute;background-color: #5a5a4c;border-radius: 15px; font-weight: bolder;}
+.game-tile .title {color: white;position:relative; padding: 5px 10px;background-color: #5a5a4c; font-weight: bolder;width: 100%; bottom: 0px;}
+.game-tile img{width: 100%;min-width: 217px;margin-bottom: -30px; }
+.game-tile .game-button{position: relative; background-color: #a0a13d; color: white; width: 100%; font-weight: bolder;}
+.game-tile .game-button:hover{background-color: #d2d454;}
+.game-tile .game-button.demo{ left: 0px; bottom: 0px;}
