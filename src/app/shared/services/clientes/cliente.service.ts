@@ -13,6 +13,7 @@ import {Observable} from 'rxjs';
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
+    private marketingUrl = `${config.BASE_URL}/marketing`;
 
     constructor(
         private http: HttpClient,
@@ -95,5 +96,17 @@ export class ClienteService {
 
     verificarLogin(login) {
         return this.http.get(`${this.clienteUrl}/validarLogin/` + login.toLowerCase()).pipe(map(res => res));
+    }
+
+    resgatarCupom(values: any) {
+        return this.http.post(`${this.marketingUrl}/cupons`, JSON.stringify(values),
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
     }
 }

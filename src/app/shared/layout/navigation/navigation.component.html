@@ -19,6 +19,11 @@
                         <i class="fa fa-ticket"></i> Bilhete
                     </a>
                 </li>
+                <li *ngIf="isCliente">
+                    <a (click)="abrirModalCupom()">
+                        <i class="fa fa-tag"></i> Cupom
+                    </a>
+                </li>
                 <ng-container *ngIf="isLoggedIn">
                     <li *ngIf="!isCliente">
                         <a (click)="abrirModalTabela()">

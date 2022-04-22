@@ -25,7 +25,8 @@ import {
     CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent, RecargaSuccessModalComponent,
-    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent
+    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent,
+    ResgatarCupomModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxMaskModule } from 'ngx-mask';
@@ -65,6 +66,7 @@ import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esport
         PreApostaModalComponent,
         ConfirmModalComponent,
         PesquisarApostaModalComponent,
+        ResgatarCupomModalComponent,
         CartaoCadastroModalComponent,
         CartaoModalComponent,
         PesquisarCartaoModalComponent,
