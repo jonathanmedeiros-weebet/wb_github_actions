@@ -2205,3 +2205,12 @@ gulp.task('betceara.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betes98.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betes98.wee.bet",
+        banca: "BETES98",
+        styles: "",
+    });
+});
