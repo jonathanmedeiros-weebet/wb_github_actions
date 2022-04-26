@@ -2049,6 +2049,7 @@ gulp.task('megaesports.wee.bet', function (done) {
         host: "megaesports.wee.bet",
         banca: "MEGA ESPORTS",
         styles: "",
+        scripts: "<script defer src='https://livechat.hibot.us/hibot-chat.min.js' data-channel='f0d13060c25611ec92f2d7e47f424e3b' id='livechat'></script>"
     });
 });
 
