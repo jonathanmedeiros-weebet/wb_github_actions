@@ -1,69 +1,68 @@
 <header [@openClose]="isOpen ? 'open' : 'closed'">
     <!-- Fixed navbar -->
     <nav class="navbar-mobile navbar navbar-expand-custom navbar-dark">
-        <div class="logo-mobile">
+        <div class="logo-mobile" style="width:50%">
             <a class="" [routerLink]="['/esportes/futebol/jogos']">
                 <img [src]="LOGO">
             </a>
         </div>
-
-        <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <div class="dropdown menu-conta">
-            <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-lg fa-user"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-
-                <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                   *ngIf="isCliente">
-                    <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
+        <div class="botoes" style="width: 50%; margin-top: -45px">
+            <ng-container *ngIf="isLoggedIn; else loggedOut">
+                <div class="dropdown menu-conta">
+                <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-lg fa-user"></i>
                 </a>
-                <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
-                    <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
-                </button>
-                <div class="dropdown-divider"></div>
+                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
-                <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
-                    Crédito: {{posicaoFinanceira.credito | currency}}
-                </button>
-                <button class="dropdown-item text-center" disabled type="button">
-                    Saldo: {{posicaoFinanceira.saldo | currency}}
-                </button>
-                <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente && posicaoFinanceira.bonus != 0">
-                    Bônus: {{posicaoFinanceira.bonus | currency}}
-                </button>
-                <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="isCliente">
+                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
+                    </a>
+                    <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
+                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
+                    </button>
+                    <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
-                    <i class="fa fa-dollar"></i> Solicitar Depósito
-                </a>
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
+                        Crédito: {{posicaoFinanceira.credito | currency}}
+                    </button>
+                    <button class="dropdown-item text-center" disabled type="button">
+                        Saldo: {{posicaoFinanceira.saldo | currency}}
+                    </button>
+                    <button class="dropdown-item text-center" disabled type="button" *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                        Bônus: {{posicaoFinanceira.bonus | currency}}
+                    </button>
+                    <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
-                    <i class="fa fa-dollar"></i> Solicitar Saque
-                </a>
+                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                        <i class="fa fa-dollar"></i> Solicitar Depósito
+                    </a>
 
-                <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
-                    <i class="fa fa-key"></i> Alterar senha
-                </a>
+                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                        <i class="fa fa-dollar"></i> Solicitar Saque
+                    </a>
 
-                <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                   *ngIf="isCliente">
-                    <i class="fa fa-user"></i> Minha Conta
-                </a>
+                    <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
+                        <i class="fa fa-key"></i> Alterar senha
+                    </a>
 
-                <a (click)="logout()" href="#" class="dropdown-item">
-                    <i class="fa fa-sign-out"></i> Sair
-                </a>
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                       *ngIf="isCliente">
+                        <i class="fa fa-user"></i> Minha Conta
+                    </a>
 
-                <div *ngIf="appMobile" class="app-version-info">
-                    App Versão 2.0.{{appVersion}}
-                </div>
-            </ul>
-        </div>
-         </ng-container>
-        <ng-template #loggedOut>
-            <div class="botoes" style="width: 50%; margin-top: -45px">
+                    <a (click)="logout()" href="#" class="dropdown-item">
+                        <i class="fa fa-sign-out"></i> Sair
+                    </a>
+
+                    <div *ngIf="appMobile" class="app-version-info">
+                        App Versão 2.0.{{appVersion}}
+                    </div>
+                </ul>
+            </div>
+             </ng-container>
+            <ng-template #loggedOut>
                 <div class="menu-conta dropdown">
                     <button class="botao-cadastro nav-link btn btn-success" [routerLink]="['/auth/cadastro']" *ngIf="modoClienteAtivo">
                         Cadastre-se
@@ -93,8 +92,8 @@
                         </a>
                     </ul>
                 </div>
-                </div>
             </ng-template>
+        </div>
     </nav>
     <div class="menu-categories margin-categories">
         <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
