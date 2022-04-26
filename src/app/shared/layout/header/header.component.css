@@ -118,6 +118,23 @@ header a {
     overflow: hidden;
 }
 
+.botao-entrar{
+    float: right;
+    height: 30px;
+    width: 80px;
+    padding: 0;
+    margin: 5px;
+    border-color: var(--foreground-header);
+}
+.botao-cadastro {
+    float: left;
+    height: 30px;
+    width: 80px;
+    padding: 0;
+    margin: 5px;
+    background-color: var(--highlight);
+    color: var(--header);
+}
 @media only screen and (max-width: 1024px) {
     .menu-categories {
         font-size: 0.5rem;
