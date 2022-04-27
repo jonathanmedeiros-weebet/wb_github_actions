@@ -2215,3 +2215,23 @@ gulp.task('betes98.wee.bet', function (done) {
         styles: "",
     });
 });
+
+
+gulp.task('arena365.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "arena365.bet",
+        banca: "ARENA 365",
+        styles: "",
+    });
+});
+
+
+gulp.task('betadr.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betadr.wee.bet",
+        banca: "BETADR",
+        styles: "",
+    });
+});
