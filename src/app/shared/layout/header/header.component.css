@@ -11,6 +11,7 @@ header a {
 
 .logo-mobile {
     max-width: calc(100% - 140px);
+    width: 50%;
 }
 
 .logo-mobile img {
@@ -31,8 +32,7 @@ header a {
 }
 
 .navbar-mobile .menu-conta {
-    position: absolute;
-    right: 15px;
+    display: flex;
 }
 
 .menu-categories {
@@ -119,7 +119,6 @@ header a {
 }
 
 .botao-entrar{
-    float: right;
     height: 30px;
     width: 80px;
     padding: 0;
@@ -127,13 +126,16 @@ header a {
     border-color: var(--foreground-header);
 }
 .botao-cadastro {
-    float: left;
     height: 30px;
     width: 80px;
     padding: 0;
     margin: 5px;
     background-color: var(--highlight);
     color: var(--header);
+}
+.botoes-menu{
+    text-align: right;
+    width: 50%;
 }
 @media only screen and (max-width: 1024px) {
     .menu-categories {
