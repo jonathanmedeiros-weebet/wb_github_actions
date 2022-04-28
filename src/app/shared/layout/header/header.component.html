@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="botoes-menu">
-        <ng-container *ngIf="isLoggedIn; else loggedOut">
+            <ng-container *ngIf="isLoggedIn; else loggedOut">
                 <div class="dropdown menu-conta">
                     <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,8 +65,8 @@
                         </div>
                     </ul>
                 </div>
-        </ng-container>
-        <ng-template #loggedOut>
+            </ng-container>
+            <ng-template #loggedOut>
                 <div class="menu-conta dropdown">
                     <button class="botao-cadastro nav-link btn" [routerLink]="['/auth/cadastro']"
                             *ngIf="modoClienteAtivo">
@@ -98,8 +98,7 @@
                         </a>
                     </ul>
                 </div>
-
-        </ng-template>
+            </ng-template>
         </div>
     </nav>
     <div class="menu-categories margin-categories">
@@ -107,7 +106,7 @@
             <i class="fa fa-angle-left fa-left"></i>
         </div>
         <div class="menu-categories scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
-            [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
+             [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/live']">
                     <i class="wbicon icon-ao-vivo"></i>

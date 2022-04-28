@@ -33,6 +33,7 @@ header a {
 
 .navbar-mobile .menu-conta {
     display: flex;
+    justify-content: right;
 }
 
 .menu-categories {
@@ -134,7 +135,6 @@ header a {
     color: var(--header);
 }
 .botoes-menu{
-    text-align: right;
     width: 50%;
 }
 @media only screen and (max-width: 1024px) {
@@ -177,6 +177,7 @@ header a {
     .menu-conta {
         right: 15px;
         position: absolute;
+        display: flex;
     }
 
     .margin-categories {
