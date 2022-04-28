@@ -68,6 +68,7 @@ export class NavigationComponent implements OnInit {
     regioesDestaque;
     LOGO = config.LOGO;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
+    trevoOne = false;
 
     constructor(
         private auth: AuthService,
@@ -156,6 +157,10 @@ export class NavigationComponent implements OnInit {
                     this.cd.detectChanges();
                 }, 500);
             });
+
+        if (location.host.search(/trevoone/) >= 0) {
+            this.trevoOne = true;
+        }
     }
 
     closeMenu() {
