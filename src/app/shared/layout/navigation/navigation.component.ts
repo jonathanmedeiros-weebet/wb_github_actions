@@ -17,7 +17,7 @@ import {
     PesquisaModalComponent,
     PesquisarApostaModalComponent,
     PesquisarCartaoModalComponent,
-    RecargaCartaoModalComponent, ResgatarCupomModalComponent,
+    RecargaCartaoModalComponent,
     SolicitarSaqueModalComponent,
     TabelaModalComponent
 } from '../modals';
@@ -251,23 +251,6 @@ export class NavigationComponent implements OnInit {
     abrirModalAposta() {
         this.modalRef = this.modalService.open(
             PesquisarApostaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-
-        this.modalRef.result
-            .then(
-                result => {
-                },
-                reason => {
-                }
-            );
-    }
-    abrirModalCupom() {
-        this.modalRef = this.modalService.open(
-            ResgatarCupomModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true
