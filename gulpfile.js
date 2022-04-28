@@ -1024,15 +1024,6 @@ gulp.task('apostatop.wee.bet', function (done) {
     });
 });
 
-gulp.task('parabets2ufcord.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "parabets2ufcord.wee.bet",
-        banca: "PARÁ BETS",
-        styles: "",
-    });
-});
-
 gulp.task('tubaraobet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
