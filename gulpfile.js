@@ -1205,11 +1205,11 @@ gulp.task('betsgames.net', function (done) {
     });
 });
 
-gulp.task('megasports.wee.bet', function (done) {
+gulp.task('mdsports.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "megasports.wee.bet",
-        banca: "MEGA SPORTS",
+        host: "mdsports.wee.bet",
+        banca: "MD SPORTS",
         styles: "",
     });
 });
