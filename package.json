@@ -197,7 +197,6 @@
         "bolanarede.wee.bet": "gulp bolanarede.wee.bet",
         "apostaai.com": "gulp apostaai.com",
         "cityesportes.bet": "gulp cityesportes.bet",
-        "chuteiradeouro.wee.bet": "gulp chuteiradeouro.wee.bet",
         "startbetbrasil.com": "gulp startbetbrasil.com",
         "goldeplaca.wee.bet": "gulp goldeplaca.wee.bet",
         "boladeouro.wee.bet": "gulp boladeouro.wee.bet",
@@ -241,7 +240,8 @@
         "betceara.net": "gulp betceara.net",
         "betes98.wee.bet": "gulp betes98.wee.bet",
         "arena365.bet": "gulp arena365.bet",
-        "betadr.wee.bet": "gulp betadr.wee.bet"
+        "betadr.wee.bet": "gulp betadr.wee.bet",
+        "appgigabet.com": "gulp appgigabet.com"
     },
     "private": true,
     "dependencies": {

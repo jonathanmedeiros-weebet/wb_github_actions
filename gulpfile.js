@@ -1818,15 +1818,6 @@ gulp.task('cityesportes.bet', function (done) {
     });
 });
 
-gulp.task('chuteiradeouro.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "chuteiradeouro.wee.bet",
-        banca: "CHUTEIRA DE OURO",
-        styles: "",
-    });
-});
-
 gulp.task('startbetbrasil.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2217,12 +2208,21 @@ gulp.task('arena365.bet', function (done) {
     });
 });
 
-
 gulp.task('betadr.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "betadr.wee.bet",
         banca: "BETADR",
+        styles: "",
+    });
+});
+
+
+gulp.task('appgigabet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "appgigabet.com",
+        banca: "GIGA BET",
         styles: "",
     });
 });
