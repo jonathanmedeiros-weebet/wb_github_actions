@@ -242,7 +242,8 @@
         "arena365.bet": "gulp arena365.bet",
         "betadr.wee.bet": "gulp betadr.wee.bet",
         "appgigabet.com": "gulp appgigabet.com",
-        "betimperativo.wee.bet": "gulp betimperativo.wee.bet"
+        "betimperativo.wee.bet": "gulp betimperativo.wee.bet",
+        "kbet.wee.bet": "gulp kbet.wee.bet"
     },
     "private": true,
     "dependencies": {
