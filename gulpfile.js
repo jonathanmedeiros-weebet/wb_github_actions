@@ -2238,7 +2238,7 @@ gulp.task('betimperativo.wee.bet', function (done) {
 
 gulp.task('kbet.wee.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front1.wee.bet",
         host: "kbet.wee.bet",
         banca: "KBet",
         styles: "",
