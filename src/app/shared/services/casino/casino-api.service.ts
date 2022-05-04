@@ -49,6 +49,7 @@ export class CasinoApiService {
         queryParams['symbol'] = gameId;
         queryParams['language'] = 'pt';
         queryParams['playMode'] = gameMode;
+        queryParams['cashierUr'] = `https://${config.SHARED_URL}/clientes/deposito`;
         queryParams['lobbyUrl'] = `https://${config.SHARED_URL}/casino/wall`;
 
         if (queryParams) {
