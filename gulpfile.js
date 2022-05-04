@@ -2240,7 +2240,7 @@ gulp.task('kbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "kbet.wee.bet",
-        banca: "KBet",
+        banca: "Kbet - Jogos Online",
         styles: "",
     });
 });
