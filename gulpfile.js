@@ -2222,7 +2222,7 @@ gulp.task('appgigabet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "appgigabet.com",
-        banca: "GIGA BET",
+        banca: "GIGABET",
         styles: "",
     });
 });
