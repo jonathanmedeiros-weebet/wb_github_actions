@@ -1737,15 +1737,6 @@ gulp.task('apostatop.net', function (done) {
     });
 });
 
-gulp.task('familiabetsports.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "familiabetsports.com",
-        banca: "FAMÍLIA BET SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('betfacil123.app', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1895,15 +1886,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "betsnordeste.wee.bet",
         banca: "BETS NORDESTE",
-        styles: "",
-    });
-});
-
-gulp.task('vippsports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "vippsports.wee.bet",
-        banca: "VIPP SPORTS",
         styles: "",
     });
 });
