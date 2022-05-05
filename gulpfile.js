@@ -2226,3 +2226,21 @@ gulp.task('appgigabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betimperativo.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betimperativo.wee.bet",
+        banca: "Bet Imperativo",
+        styles: "",
+    });
+});
+
+gulp.task('kbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "kbet.wee.bet",
+        banca: "Kbet - Jogos Online",
+        styles: "",
+    });
+});
