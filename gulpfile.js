@@ -1745,15 +1745,6 @@ gulp.task('betfacil123.app', function (done) {
     });
 });
 
-gulp.task('newbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "newbet.wee.bet",
-        shared_url: "newb10.net",
-        banca: "NEW BET",
-        styles: "",
-    });
-});
 gulp.task('sportstar.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2221,6 +2212,7 @@ gulp.task('kbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "kbet.wee.bet",
+        shared_url: "kbet.com.br",
         banca: "Kbet - Jogos Online",
         styles: "",
     });
