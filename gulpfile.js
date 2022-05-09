@@ -1095,15 +1095,6 @@ gulp.task('betvipmais.wee.bet', function (done) {
     });
 });
 
-gulp.task('maisporte.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "maisporte.wee.bet",
-        banca: "MAISPORTE",
-        styles: "",
-    });
-});
-
 gulp.task('rrbets.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
