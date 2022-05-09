@@ -2194,6 +2194,7 @@ gulp.task('betimperativo.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "betimperativo.wee.bet",
+        shared_url: "betimperativo.com.br",
         banca: "Bet Imperativo",
         styles: "",
     });
