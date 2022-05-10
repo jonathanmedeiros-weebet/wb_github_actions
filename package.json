@@ -174,7 +174,6 @@
         "ipabets.com": "gulp ipabets.com",
         "chutescerto.com": "gulp chutescerto.com",
         "boaesportes.com": "gulp boaesportes.com",
-        "cryptobrasil.bet": "gulp cryptobrasil.bet",
         "startbets.site": "gulp startbets.site",
         "starbets.online": "gulp starbets.online",
         "betcompany.wee.bet": "gulp betcompany.wee.bet",
@@ -239,7 +238,8 @@
         "betadr.wee.bet": "gulp betadr.wee.bet",
         "appgigabet.com": "gulp appgigabet.com",
         "betimperativo.wee.bet": "gulp betimperativo.wee.bet",
-        "kbet.wee.bet": "gulp kbet.wee.bet"
+        "kbet.wee.bet": "gulp kbet.wee.bet",
+        "vencedorbet.bet": "gulp vencedorbet.bet"
     },
     "private": true,
     "dependencies": {

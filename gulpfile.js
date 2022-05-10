@@ -1608,15 +1608,6 @@ gulp.task('boaesportes.com', function (done) {
     });
 });
 
-gulp.task('cryptobrasil.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "cryptobrasil.bet",
-        banca: "CRYPTO BRASIL",
-        styles: "",
-    });
-});
-
 gulp.task('startbets.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2206,6 +2197,15 @@ gulp.task('kbet.wee.bet', function (done) {
         host: "kbet.wee.bet",
         shared_url: "kbet.com.br",
         banca: "Kbet - Jogos Online",
+        styles: "",
+    });
+});
+
+gulp.task('vencedorbet.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "vencedorbet.bet",
+        banca: "VENCEDOR BET",
         styles: "",
     });
 });
