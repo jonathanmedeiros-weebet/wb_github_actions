@@ -3,7 +3,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { CampeonatoService, MessageService, ParametrosLocaisService, SidebarService } from '../../../services';
+import {
+    CampeonatoService,
+    MessageService,
+    ParametrosLocaisService,
+    SidebarService,
+    MenuFooterService
+} from '../../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -15,6 +21,9 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     campeonatosBloqueados = [];
     contexto = null;
     sportId;
+    jogoId;
+    exibirMaisCotacoes = false;
+    mobileScreen = false;
     showLoadingIndicator = true;
     campeonatos;
     odds = [];
@@ -27,6 +36,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
+        private menuFooterService: MenuFooterService,
         private route: ActivatedRoute,
     ) {
     }
@@ -146,6 +156,21 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 },
                 error => this.messageService.error(error)
             );
+    }
+
+    receptorJogoSelecionadoId(jogoId) {
+        this.jogoId = jogoId;
+    }
+
+    changeExibirMaisCotacoes(exibirMaisCotacoes) {
+        this.setIsPagina(exibirMaisCotacoes);
+        this.exibirMaisCotacoes = exibirMaisCotacoes;
+    }
+
+    setIsPagina(isPage) {
+        if (this.mobileScreen) {
+            this.menuFooterService.setIsPagina(isPage);
+        }
     }
 
     setContextoPorEsporte(sportId) {

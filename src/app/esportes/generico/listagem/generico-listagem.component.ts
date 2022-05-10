@@ -1,7 +1,7 @@
 import {
     Component, OnInit, OnDestroy, Renderer2, ElementRef,
     Input, ChangeDetectorRef, ChangeDetectionStrategy,
-    SimpleChange, OnChanges
+    SimpleChange, OnChanges, Output, EventEmitter
 } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
@@ -20,10 +20,13 @@ import * as moment from 'moment';
 })
 export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showLoadingIndicator;
+    @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
     @Input() data;
     @Input() sportId;
     @Input() esporte;
+    @Output() jogoSelecionadoId = new EventEmitter();
+    @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
     campeonatos: Campeonato[];
     itens = [];
@@ -224,6 +227,13 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.cd.markForCheck();
     }
 
+    // Exibindo todas as cotações daquele jogo selecionado
+    maisCotacoes(jogoId) {
+        this.jogoIdAtual = jogoId;
+        this.jogoSelecionadoId.emit(jogoId);
+        this.exibirMaisCotacoes.emit(true);
+    }
+
     exibirBtnProximaData() {
         let result = false;
 
@@ -254,5 +264,9 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     exibirEscudo() {
         return (this.sportId != 13 && this.sportId != 9 && this.sportId != 151);
+    }
+
+    exibirTotalOdds() {
+        return this.sportId == 18;
     }
 }
