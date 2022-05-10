@@ -132,6 +132,7 @@ header a {
     padding: 0;
     margin: 5px;
     background-color: var(--foreground-header);
+    color: var(--header);
 }
 .botoes-menu{
     width: 50%;
