@@ -240,7 +240,8 @@
         "betimperativo.wee.bet": "gulp betimperativo.wee.bet",
         "kbet.wee.bet": "gulp kbet.wee.bet",
         "vencedorbet.bet": "gulp vencedorbet.bet",
-        "futmoney.net.br": "gulp futmoney.net.br"
+        "futmoney.net.br": "gulp futmoney.net.br",
+        "apostafut.com": "gulp apostafut.com"
     },
     "private": true,
     "dependencies": {

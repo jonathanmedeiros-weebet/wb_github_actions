@@ -2216,3 +2216,12 @@ gulp.task('futmoney.net.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostafut.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "apostafut.com",
+        banca: "APOSTA FUT",
+        styles: "",
+    });
+});
