@@ -116,9 +116,9 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .content-sports {
+    /* .content-sports {
         padding-bottom: 57px;
-    }
+    } */
 
     .indentificacao .div-back {
         top: 0;

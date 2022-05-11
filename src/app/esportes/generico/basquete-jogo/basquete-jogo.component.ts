@@ -134,9 +134,9 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         let altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 206;
+            altura -= 252;
         } else {
-            altura -= 176;
+            altura -= 46;
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
