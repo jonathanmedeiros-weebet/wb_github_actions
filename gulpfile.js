@@ -2207,3 +2207,12 @@ gulp.task('vencedorbet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futmoney.net.br', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "futmoney.net.br",
+        banca: "FUT MONEY",
+        styles: "",
+    });
+});

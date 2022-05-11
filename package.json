@@ -239,7 +239,8 @@
         "appgigabet.com": "gulp appgigabet.com",
         "betimperativo.wee.bet": "gulp betimperativo.wee.bet",
         "kbet.wee.bet": "gulp kbet.wee.bet",
-        "vencedorbet.bet": "gulp vencedorbet.bet"
+        "vencedorbet.bet": "gulp vencedorbet.bet",
+        "futmoney.net.br": "gulp futmoney.net.br"
     },
     "private": true,
     "dependencies": {
