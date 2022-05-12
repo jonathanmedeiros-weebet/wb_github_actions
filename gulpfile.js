@@ -1833,15 +1833,6 @@ gulp.task('realbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('17bet.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "17bet.com.br",
-        banca: "17 BET",
-        styles: "",
-    });
-});
-
 gulp.task('esportcampeao.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2222,6 +2213,15 @@ gulp.task('apostafut.com', function (done) {
         server: "front2.wee.bet",
         host: "apostafut.com",
         banca: "APOSTA FUT",
+        styles: "",
+    });
+});
+
+gulp.task('idealbets.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "idealbets.com.br",
+        banca: "IDEAL BETS",
         styles: "",
     });
 });

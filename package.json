@@ -199,7 +199,6 @@
         "xbetsports.net": "gulp xbetsports.net",
         "goldenbet.wee.bet": "gulp goldenbet.wee.bet",
         "realbets.wee.bet": "gulp realbets.wee.bet",
-        "17bet.com.br": "gulp 17bet.com.br",
         "esportcampeao.wee.bet": "gulp esportcampeao.wee.bet",
         "betsnordeste.wee.bet": "gulp betsnordeste.wee.bet",
         "sportbrasilvip.com": "gulp sportbrasilvip.com",
@@ -241,7 +240,8 @@
         "kbet.wee.bet": "gulp kbet.wee.bet",
         "vencedorbet.bet": "gulp vencedorbet.bet",
         "futmoney.net.br": "gulp futmoney.net.br",
-        "apostafut.com": "gulp apostafut.com"
+        "apostafut.com": "gulp apostafut.com",
+        "idealbets.com.br": "gulp idealbets.com.br"
     },
     "private": true,
     "dependencies": {
