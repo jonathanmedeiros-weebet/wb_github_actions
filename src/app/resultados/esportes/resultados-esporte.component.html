@@ -14,8 +14,14 @@
                                 <label>Esporte</label>
                                 <select class="form-control" formControlName="sport_id">
                                     <option value="1">Futebol</option>
-                                    <option value="18">Basquete</option>
-                                    <option value="9">Combate</option>
+                                    <option *ngIf="basqueteHabilitado" value="18">Basquete</option>
+                                    <option *ngIf="tenisHabilitado" value="13">Tênis</option>
+                                    <option *ngIf="combateHabilitado" value="9">Combate</option>
+                                    <option *ngIf="voleiHabilitado" value="91">Vôlei</option>
+                                    <option *ngIf="futebolAmericanoHabilitado" value="12">Futebol Americano</option>
+                                    <option *ngIf="futsalHabilitado" value="83">Futsal</option>
+                                    <option *ngIf="hoqueiGeloHabilitado" value="17">Hóquei no Gelo</option>
+                                    <option *ngIf="esportsHabilitado" value="151">E-Sports</option>
                                 </select>
                             </div>
                             <div class="col-xs-6 col-lg-3">
@@ -43,7 +49,9 @@
                                 <span
                                     *ngIf="jogo.resultado; else semResultado">
                                     <b>{{jogo.resultado.casa}} - {{jogo.resultado.fora}}</b>
-                                    ({{jogo.resultado.casa_1t}} - {{jogo.resultado.fora_1t}})
+                                    <ng-container *ngIf="sport == 1">
+                                         ({{jogo.resultado.casa_1t}} - {{jogo.resultado.fora_1t}})
+                                    </ng-container>
                                 </span>
                                 <ng-template #semResultado>
                                     <b>Sem Resultado</b>
