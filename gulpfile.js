@@ -2244,3 +2244,12 @@ gulp.task('shopbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('realbetsport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "realbetsport.wee.bet",
+        banca: "REAL BET SPORT",
+        styles: "",
+    });
+});

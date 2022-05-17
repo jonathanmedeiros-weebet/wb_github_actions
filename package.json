@@ -243,7 +243,8 @@
         "apostafut.com": "gulp apostafut.com",
         "idealbets.com.br": "gulp idealbets.com.br",
         "11bet.com.br": "gulp 11bet.com.br",
-        "shopbet.wee.bet": "gulp shopbet.wee.bet"
+        "shopbet.wee.bet": "gulp shopbet.wee.bet",
+        "realbetsport.wee.bet": "gulp realbetsport.wee.bet"
     },
     "private": true,
     "dependencies": {
