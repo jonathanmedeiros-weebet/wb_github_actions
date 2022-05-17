@@ -241,7 +241,9 @@
         "vencedorbet.bet": "gulp vencedorbet.bet",
         "futmoney.net.br": "gulp futmoney.net.br",
         "apostafut.com": "gulp apostafut.com",
-        "idealbets.com.br": "gulp idealbets.com.br"
+        "idealbets.com.br": "gulp idealbets.com.br",
+        "11bet.com.br": "gulp 11bet.com.br",
+        "shopbet.wee.bet": "gulp shopbet.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -1722,6 +1722,7 @@ gulp.task('betfacil123.app', function (done) {
         host: "betfacil123.app",
         banca: "BET FÁCIL 123",
         styles: "",
+        pixel: "<meta name='facebook-domain-verification' content='91h9n5i6r0qfg3w8tupmcobu4p3k9x' /> <!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '4910465152363836'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=4910465152363836&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->"
     });
 });
 
@@ -1974,7 +1975,7 @@ gulp.task('megaesports.wee.bet', function (done) {
         host: "megaesports.wee.bet",
         banca: "MEGA ESPORTS",
         styles: "",
-        scripts: "<script defer src='https://livechat.hibot.us/hibot-chat.min.js' data-channel='f0d13060c25611ec92f2d7e47f424e3b' id='livechat'></script>"
+        scripts: ""
     });
 });
 
@@ -2222,6 +2223,24 @@ gulp.task('idealbets.com.br', function (done) {
         server: "front2.wee.bet",
         host: "idealbets.com.br",
         banca: "IDEAL BETS",
+        styles: "",
+    });
+});
+
+gulp.task('11bet.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "11bet.com.br",
+        banca: "11 BET",
+        styles: "",
+    });
+});
+
+gulp.task('shopbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "shopbet.wee.bet",
+        banca: "SHOP BET",
         styles: "",
     });
 });
