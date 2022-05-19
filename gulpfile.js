@@ -2253,3 +2253,12 @@ gulp.task('realbetsport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('membet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "membet.wee.bet",
+        banca: "MEM BET",
+        styles: "",
+    });
+});

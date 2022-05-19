@@ -244,7 +244,8 @@
         "idealbets.com.br": "gulp idealbets.com.br",
         "11bet.com.br": "gulp 11bet.com.br",
         "shopbet.wee.bet": "gulp shopbet.wee.bet",
-        "realbetsport.wee.bet": "gulp realbetsport.wee.bet"
+        "realbetsport.wee.bet": "gulp realbetsport.wee.bet",
+        "membet.wee.bet": "gulp membet.wee.bet"
     },
     "private": true,
     "dependencies": {
