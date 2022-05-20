@@ -1,9 +1,16 @@
 <div id="jogo-default-wrapper">
     <div id="jogo-default-content">
-        <div class="lista">
-            <app-generico-listagem [showLoadingIndicator]="showLoadingIndicator" [camps]="campeonatos" [data]="data"
+        <div class="lista" [hidden]="exibirMaisCotacoes">
+            <app-generico-listagem [showLoadingIndicator]="showLoadingIndicator"
+                (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [camps]="campeonatos" [data]="data"
                 [sportId]="sportId" [esporte]="esporte">
             </app-generico-listagem>
+        </div>
+        <div class="jogo" [hidden]="!exibirMaisCotacoes">
+            <app-basquete-jogo *ngIf="sportId == '18'" [jogoId]="jogoId"
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            </app-basquete-jogo>
         </div>
     </div>
 </div>

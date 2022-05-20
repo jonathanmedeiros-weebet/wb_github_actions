@@ -77,10 +77,14 @@
                     </a>
                 </li>
                 <li *ngIf="!isAppMobile">
-                    <a target="_blank" download="app.apk" [href]="appUrl">
+                    <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!trevoOne">
+                        <i class="fa fa-download"></i> App
+                    </a>
+                    <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la" *ngIf="trevoOne">
                         <i class="fa fa-download"></i> App
                     </a>
                 </li>
+
                 <li>
                     <a [routerLink]="['/informacoes/regras']">
                         <i class="fa fa-book"></i> Regras

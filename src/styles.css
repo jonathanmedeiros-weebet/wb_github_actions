@@ -25,6 +25,14 @@ header {
     background-color: var(--header);
 }
 
+.overlay-container{
+    display: contents;
+}
+
+#wbot-chat-container{
+    display: contents;
+}
+
 #auth-layout {
     height: 100%;
 }

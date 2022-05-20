@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import {ResultadoService, MessageService, MenuFooterService} from './../../services';
+import {ResultadoService, MessageService, MenuFooterService, ParametrosLocaisService} from './../../services';
 import { Campeonato } from './../../models';
 
 import { Subject } from 'rxjs';
@@ -18,12 +18,22 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     campeonatos: Campeonato[] = [];
     showLoadingIndicator = true;
     unsub$ = new Subject();
+    sport;
+    basqueteHabilitado = false;
+    combateHabilitado = false;
+    esportsHabilitado = false;
+    futsalHabilitado = false;
+    voleiHabilitado = false;
+    tenisHabilitado = false;
+    futebolAmericanoHabilitado = false;
+    hoqueiGeloHabilitado = false;
 
     constructor(
         private messageService: MessageService,
         private resultadoService: ResultadoService,
         private fb: FormBuilder,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private paramsService: ParametrosLocaisService,
     ) {
         super();
     }
@@ -32,6 +42,15 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
         this.createForm();
         this.getResultados();
         this.menuFooterService.setIsPagina(true);
+
+        this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
+        this.combateHabilitado = this.paramsService.getOpcoes().combate;
+        this.esportsHabilitado = this.paramsService.getOpcoes().esports;
+        this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
+        this.voleiHabilitado = this.paramsService.getOpcoes().volei;
+        this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
+        this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
+        this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
     }
 
     ngOnDestroy() {
@@ -72,6 +91,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
                 campeonatos => {
                     this.showLoadingIndicator = false;
                     this.campeonatos = campeonatos;
+                    this.sport = this.form.get('sport_id').value;
                 },
                 error => this.handleError(error)
             );

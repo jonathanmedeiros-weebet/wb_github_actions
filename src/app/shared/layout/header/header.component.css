@@ -11,6 +11,7 @@ header a {
 
 .logo-mobile {
     max-width: calc(100% - 140px);
+    width: 50%;
 }
 
 .logo-mobile img {
@@ -31,8 +32,8 @@ header a {
 }
 
 .navbar-mobile .menu-conta {
-    position: absolute;
-    right: 15px;
+    display: flex;
+    justify-content: right;
 }
 
 .menu-categories {
@@ -118,6 +119,24 @@ header a {
     overflow: hidden;
 }
 
+.botao-entrar{
+    height: 30px;
+    width: 80px;
+    padding: 0;
+    margin: 5px;
+    border-color: var(--foreground-header);
+}
+.botao-cadastro {
+    height: 30px;
+    width: 80px;
+    padding: 0;
+    margin: 5px;
+    background-color: var(--foreground-header);
+    color: var(--header);
+}
+.botoes-menu{
+    width: 50%;
+}
 @media only screen and (max-width: 1024px) {
     .menu-categories {
         font-size: 0.5rem;
@@ -158,6 +177,7 @@ header a {
     .menu-conta {
         right: 15px;
         position: absolute;
+        display: flex;
     }
 
     .margin-categories {
