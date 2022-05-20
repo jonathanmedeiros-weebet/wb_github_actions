@@ -758,15 +758,6 @@ gulp.task('palpitesbets.com', function (done) {
     });
 });
 
-gulp.task('betfut.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betfut.wee.bet",
-        banca: "BETFUT",
-        styles: "--header: #000; --foreground-header :#fff; --sidebar-right: #000; --sidebar-left: #000; --odds: #181a4b;"
-    });
-});
-
 gulp.task('resenhaesportiva.site', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1111,15 +1102,6 @@ gulp.task('techbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('galobets.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "galobets.com",
-        banca: "GALO BETS",
-        styles: "",
-    });
-});
-
 gulp.task('reallbet.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1371,16 +1353,6 @@ gulp.task('megabetsport.com', function (done) {
         host: "megabetsport.com",
         banca: "MEGA BET SPORT",
         styles: "",
-    });
-});
-
-gulp.task('prime.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "prime.wee.bet",
-        banca: "PRIME",
-        styles: "",
-        scripts: "<!-- Global site tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-D6VVE3T0SP'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-D6VVE3T0SP'); </script>",
     });
 });
 
@@ -1723,15 +1695,6 @@ gulp.task('betfacil123.app', function (done) {
         banca: "BET FÁCIL 123",
         styles: "",
         pixel: "<meta name='facebook-domain-verification' content='91h9n5i6r0qfg3w8tupmcobu4p3k9x' /> <!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '4910465152363836'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=4910465152363836&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->"
-    });
-});
-
-gulp.task('sportstar.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sportstar.bet",
-        banca: "SPORT STAR",
-        styles: "",
     });
 });
 
