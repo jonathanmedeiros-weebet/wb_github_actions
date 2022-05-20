@@ -24,8 +24,24 @@ export class CasinoApiService {
     ) { }
 
     private queryString(data) {
-        console.log(this.serializer.serialize(data))
-        return this.serializer.serialize(data)
+        console.log(this.serializer.serialize(data));
+        return this.serializer.serialize(data);
+    }
+
+    getApostas(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${config.BASE_URL}/casino/apostas/`, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
     }
 
     getGamesList(){
