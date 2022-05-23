@@ -2198,3 +2198,12 @@ gulp.task('clubedasapostas.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futebets.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "futebets.net",
+        banca: "FUTEBETS",
+        styles: "",
+    });
+});
