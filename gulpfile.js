@@ -2225,3 +2225,12 @@ gulp.task('membet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('clubedasapostas.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "clubedasapostas.wee.bet",
+        banca: "CLUBE DAS APOSTAS",
+        styles: "",
+    });
+});
