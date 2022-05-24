@@ -164,8 +164,7 @@ gulp.task('mjrsports.com', function (done) {
         host: "mjrsports.com",
         banca: "MJR SPORTS",
         styles: "--header: #3F6826; --foreground-header: #b1c5e0; --sidebar-right: #3B5323; --foreground-sidebar-right: #fff; --sidebar-left: #3B5323; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: #dab600; --foreground-odds: #fff; --selected-event: #000;",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/KdhFJXa74y' async></script>"
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>"
     });
 });
 
@@ -1651,15 +1650,6 @@ gulp.task('esportenetreipele.com', function (done) {
         banca: "ESPORTE NET",
         styles: "",
         scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/623500f51ffac05b1d7f4f2c/1fufgnh2n'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"
-    });
-});
-
-gulp.task('jogadamagica.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jogadamagica.wee.bet",
-        banca: "JOGADA MÁGICA",
-        styles: "",
     });
 });
 
