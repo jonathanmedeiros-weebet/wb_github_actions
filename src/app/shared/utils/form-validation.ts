@@ -1,4 +1,5 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 export class FormValidations {
 
@@ -54,6 +55,23 @@ export class FormValidations {
         return validator;
     }
 
+    static birthdayValidator(control: FormControl) {
+        const rawBirthday = control.value;
+        const actualDate = moment();
+
+        const birthday = moment(rawBirthday, 'DDMMYYYY', true);
+
+        if (birthday.isValid()) {
+            if (actualDate.diff(birthday, 'years') < 18) {
+                return { menorDeIdade: true };
+            }
+        } else {
+            return { dataNascimentoInvalida: true };
+        }
+
+        return null;
+    }
+
     static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any) {
         if (!fieldName) {
             fieldName = 'Campo';
@@ -70,7 +88,9 @@ export class FormValidations {
             'pattern': 'Campo inválido',
             'matchPin': 'Confirmação diferente do PIN.',
             'loginEmUso': 'Nome de usuário indisponível. Por favor escolha outro',
-            'MatchPassword': 'Senhas diferentes. Digite a mesma senha em ambos os campos de senha.'
+            'MatchPassword': 'Senhas diferentes. Digite a mesma senha em ambos os campos de senha.',
+            'dataNascimentoInvalida': 'Data de Nascimento Inválida.',
+            'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.'
         };
         return config[validatorName];
     }
