@@ -1788,11 +1788,11 @@ gulp.task('sportbrasilvip.com', function (done) {
     });
 });
 
-gulp.task('newsport.wee.bet', function (done) {
+gulp.task('amigos.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "newsport.wee.bet",
-        banca: "NEW SPORT",
+        host: "amigos.wee.bet",
+        banca: "AMIGOS",
         styles: "",
     });
 });
