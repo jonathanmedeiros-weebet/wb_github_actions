@@ -18,7 +18,7 @@ async function getParams() {
     }
 }
 
-async function getTicketData({ apiUrl, ticketId }) {
+async function getTicketData({apiUrl, ticketId}) {
     try {
         const request = await fetch(`//${apiUrl}/api/apostas-por-codigo/${ticketId}`);
         const bet = await request.json();
@@ -49,7 +49,7 @@ function getFormatedDate(date) {
     return moment(date).format("DD/MM/YYYY HH:mm");
 }
 
-async function getResuts(ids) {
+async function getResults(ids) {
     try {
         paramIds = ids.join(',');
         const request = await fetch(`https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
@@ -76,4 +76,115 @@ function displayError(message) {
         }
     }
     document.getElementById('loader').hidden = true;
+}
+
+async function getLiveItems(items) {
+    try {
+        const request = await fetch(`http://localhost:3002/v1/resultados/live`, {
+            method: "POST",
+            body: JSON.stringify(items),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+        });
+
+        const results = await request.json();
+
+        if (request.status == 404 || request.status == 500) {
+            throw results.errors;
+        }
+        return results;
+    } catch (error) {
+        return error;
+    }
+}
+
+function followLive(liveItems) {
+    this.getLiveItems(liveItems).then(async (liveResults) => {
+        if (liveResults && liveResults.result.length) {
+            liveResults.result.forEach((game) => {
+                let live = game.live_results;
+                if (live) {
+                    this.updateLiveItem(game.jogo_api_id, live);
+                }
+            });
+        }
+    });
+
+    var liveInterval = setInterval(async () => {
+            liveItems = checkLiveItemsPeriod(liveItems);
+            this.getLiveItems(liveItems).then(async (liveResults) => {
+                var hasLiveItem = false;
+                if (liveResults && liveResults.result.length) {
+                    liveResults.result.forEach((game) => {
+                        let live = game.live_results;
+                        if (live) {
+                            if (!hasLiveItem) {
+                                hasLiveItem = true;
+                            }
+                            this.updateLiveItem(game.jogo_api_id, live);
+                        }
+                    });
+                }
+
+                if (!hasLiveItem) {
+                    clearInterval(liveInterval);
+                }
+            });
+        }, 60000
+    );
+
+}
+
+function filterLiveItems(ticketItems, itemsWithResults) {
+    let liveItems = [];
+    ticketItems.forEach((item) => {
+        var itemTimestamp = new Date(item.jogo_horario).getTime();
+
+        if (this.checkMatchPeriod(itemTimestamp)) {
+            if (!itemsWithResults.includes(item.jogo_api_id)) {
+                liveItems.push({
+                    jogo_api_id: item.jogo_api_id,
+                    chave: item.aposta_tipo.chave,
+                    start_match: itemTimestamp
+                });
+            }
+        }
+    });
+
+    return liveItems;
+}
+
+function checkMatchPeriod(startMatchTimestamp, matchTime = 120) {
+    var currentTime = moment().format();
+    var itemStartTime = moment(startMatchTimestamp).format();
+    var itemEndTime = moment(startMatchTimestamp).add(matchTime, 'minutes').format();
+
+    return (itemStartTime <= currentTime) && (currentTime <= itemEndTime);
+}
+
+function checkLiveItemsPeriod(liveItems) {
+    return liveItems.filter((item) => {
+        if (checkMatchPeriod(item.start_match)) {
+            return true;
+        }
+        return false;
+    });
+}
+
+function updateLiveItem(jogo_api_id, live) {
+    document.getElementById(jogo_api_id + '_scores').innerHTML = live.stats.casa + ' - ' + live.stats.fora;
+
+    document.getElementById(jogo_api_id + '_1half_time_a').innerHTML = live.stats.casa_1t;
+    document.getElementById(jogo_api_id + '_2half_time_a').innerHTML = live.stats.casa_2t;
+
+    document.getElementById(jogo_api_id + '_1half_time_b').innerHTML = live.stats.fora_1t;
+    document.getElementById(jogo_api_id + '_2half_time_b').innerHTML = live.stats.fora_2t;
+
+    document.getElementById(jogo_api_id + '_corner_time_a').innerHTML = live.stats.casa_escanteios;
+    document.getElementById(jogo_api_id + '_corner_time_b').innerHTML = live.stats.fora_escanteios;
+
+    document.getElementById(jogo_api_id + '_identification').hidden = false;
+    document.getElementById(jogo_api_id + '_time').innerHTML = live.time + "'";
+
+    document.getElementById(jogo_api_id + '_live_status').innerHTML = `<b>${live.status.toUpperCase()}</b>`;
+    document.getElementById(jogo_api_id + '_live_status').style.color = live.status === 'perdendo' ? 'red' : 'green';
 }

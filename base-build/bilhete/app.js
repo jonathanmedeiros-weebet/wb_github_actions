@@ -31,7 +31,10 @@ document.onreadystatechange = async function () {
                     ticketData.itens = ticketItens;
 
                     if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
-                        this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', { style: 'currency', currency: '[CURRENCY]' }));
+                        this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }));
                         this.getElementById('quotation').append((ticketData.possibilidade_ganho.toFixed(2) / ticketData.valor.toFixed(2)).toFixed(3).replace(/\.000$/, "").replace('.', ','));
 
 
@@ -64,13 +67,19 @@ document.onreadystatechange = async function () {
                             cambistaPaga = ticketData.possibilidade_ganho * ((100 - ticketData.passador.percentualPremio) / 100);
                         }
 
-                        this.getElementById('agent-pays').append(cambistaPaga.toLocaleString('pt-br', { style: 'currency', currency: '[CURRENCY]' }));
+                        this.getElementById('agent-pays').append(cambistaPaga.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }));
                     } else {
                         this.getElementById('agent-pays').parentNode.hidden = true;
                     }
 
                     if (ticketData.resultado && (ticketData.premio || ticketData.premio == 0)) {
-                        this.getElementById('award').append(ticketData.premio.toLocaleString('pt-br', { style: 'currency', currency: '[CURRENCY]' }));
+                        this.getElementById('award').append(ticketData.premio.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }));
                     } else {
                         this.getElementById('award').parentNode.hidden = true;
                     }
@@ -86,7 +95,10 @@ document.onreadystatechange = async function () {
                     this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario.replace(/-/g, '/'))));
                     this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
-                    this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', { style: 'currency', currency: '[CURRENCY]' }));
+                    this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }));
                     this.getElementById('bet-amount').append(ticketData.is_bonus ? ' (bônus)' : '');
                     this.getElementById('status').append(ticketData.ativo ? 'ATIVO' : 'CANCELADO')
 
@@ -100,10 +112,15 @@ document.onreadystatechange = async function () {
                             ids.push(item.jogo_api_id);
                         }
 
-                        var results = await getResuts(ids);
+                        var results = await getResults(ids);
+                        var itemsWithResults = [];
 
                         if (results) {
                             results = results.result;
+
+                            results.forEach(item => {
+                                itemsWithResults.push(item.event_id);
+                            });
                         } else {
                             throw results;
                         }
@@ -180,16 +197,20 @@ document.onreadystatechange = async function () {
                         if (ticketData.tipo == 'esportes') {
                             div.innerHTML = `
                             <div class="ticket-item">
-                                <div>
+                                <div class="identification" id="${ticketItem.jogo_api_id}_identification" hidden>
+                                    <div class="aovivo-time">
+                                        <div class="aovivo-label blink">Ao Vivo</div>
+                                        <div id="${ticketItem.jogo_api_id}_time" class="time"></div>
+                                    </div>
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
                                 <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo_horario.replace(/-/g, '/')))}</div>
                                 <div id="match">
                                     <div id="match-result">
                                         ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase()
-                                    : ticketItem.odd_nome.toUpperCase()}
+                                : ticketItem.odd_nome.toUpperCase()}
                                     </div>
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_scores">
                                         ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </div>
                                     <div>
@@ -197,42 +218,45 @@ document.onreadystatechange = async function () {
                                     </div>
                                 </div>
                                 <div id="first-half">
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_1half_time_a">
                                         ${templateData.player_a_1half_result}
                                     </div>
                                     <div>
                                         Gols 1º Tempo
                                     </div>
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_1half_time_b">
                                         ${templateData.player_b_1half_result}
                                     </div>
                                 </div>
                                 <div id="second-half">
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_2half_time_a">
                                         ${templateData.player_a_2half_result}
                                     </div>
                                     <div>
                                         Gols 2º Tempo
                                     </div>
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_2half_time_b">
                                         ${templateData.player_b_2half_result}
                                     </div>
                                 </div>
 
                                 <div id="corner-kicks">
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_corner_time_a">
                                         ${templateData.player_a_corner_kicks}
                                     </div>
                                     <div>
                                         Escanteios
                                     </div>
-                                    <div>
+                                    <div id="${ticketItem.jogo_api_id}_corner_time_b">
                                         ${templateData.player_b_corner_kicks}
                                     </div>
                                 </div>
                                 <div class="dashed" id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>
                                 <div class="${isCanceledOrFinished.status == true ? isCanceledOrFinished.sitation : hasResult}">
                                 ${isCanceledOrFinished.status == true ? isCanceledOrFinished.sitation : hasResult}</div>
+
+                                <div id="${ticketItem.jogo_api_id}_live_status" class="live_status">
+                                </div>
                             </div>
                         </div>`;
 
@@ -289,6 +313,16 @@ document.onreadystatechange = async function () {
                         }
 
                         this.getElementById('ticket-itens').appendChild(div);
+                    }
+
+                    var liveItems = filterLiveItems(ticketItens, itemsWithResults);
+
+                    if (!ticketData.resultado && liveItems.length > 0) {
+                        this.getElementById('follow-live').hidden = false;
+                        this.getElementById('follow-live').addEventListener('click', function () {
+                            document.getElementById('follow-live').hidden = true;
+                            followLive(liveItems);
+                        });
                     }
                 }
                 this.getElementById('ticket').hidden = false;
