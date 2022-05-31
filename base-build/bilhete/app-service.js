@@ -81,7 +81,7 @@ function displayError(message) {
 
 async function getLiveItems(items) {
     try {
-        const request = await fetch(`http://localhost:3002/v1/resultados/live`, {
+        const request = await fetch(`https://center6.wee.bet/v1/resultados/live`, {
             method: "POST",
             body: JSON.stringify(items),
             headers: {"Content-type": "application/json; charset=UTF-8"}
