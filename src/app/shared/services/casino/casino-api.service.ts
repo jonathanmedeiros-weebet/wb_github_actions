@@ -5,7 +5,6 @@ import { ErrorService } from '../utils/error.service';
 import { HeadersService } from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import { Md5 } from 'ts-md5';
 import { config } from '../../config';
 import { UrlSerializer } from '@angular/router';
 
