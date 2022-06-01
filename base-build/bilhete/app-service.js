@@ -99,29 +99,38 @@ async function getLiveItems(items) {
 }
 
 function followLive(liveItems) {
+    let hasLiveItem = false;
     this.getLiveItems(liveItems).then(async (liveResults) => {
         if (liveResults && liveResults.result.length) {
             liveResults.result.forEach((game) => {
                 let live = game.live_results;
-                if (live) {
+                if (live && live.stats.casa !== undefined) {
                     this.updateLiveItem(game.jogo_api_id, live);
+                    if (!hasLiveItem) {
+                        hasLiveItem = true;
+                    }
                 }
             });
         }
+        if (!hasLiveItem) {
+            this.showAlert();
+        }
     });
 
-    var liveInterval = setInterval(async () => {
+    let liveInterval = setInterval(async () => {
             liveItems = checkLiveItemsPeriod(liveItems);
             this.getLiveItems(liveItems).then(async (liveResults) => {
                 var hasLiveItem = false;
                 if (liveResults && liveResults.result.length) {
                     liveResults.result.forEach((game) => {
                         let live = game.live_results;
-                        if (live) {
+                        if (live && live.stats.casa !== undefined) {
                             if (!hasLiveItem) {
                                 hasLiveItem = true;
                             }
                             this.updateLiveItem(game.jogo_api_id, live);
+                        } else {
+                            this.hideLiveFlag(game.jogo_api_id);
                         }
                     });
                 }
@@ -130,7 +139,7 @@ function followLive(liveItems) {
                     clearInterval(liveInterval);
                 }
             });
-        }, 60000
+        }, 2000
     );
 
 }
@@ -166,6 +175,8 @@ function checkLiveItemsPeriod(liveItems) {
     return liveItems.filter((item) => {
         if (checkMatchPeriod(item.start_match)) {
             return true;
+        } else {
+            this.hideLiveFlag(item.jogo_api_id);
         }
         return false;
     });
@@ -183,9 +194,25 @@ function updateLiveItem(jogo_api_id, live) {
     document.getElementById(jogo_api_id + '_corner_time_a').innerHTML = live.stats.casa_escanteios;
     document.getElementById(jogo_api_id + '_corner_time_b').innerHTML = live.stats.fora_escanteios;
 
-    document.getElementById(jogo_api_id + '_identification').hidden = false;
+    document.getElementById(jogo_api_id + '_live_flag').hidden = false;
+    document.getElementById(jogo_api_id + '_time').hidden = false;
     document.getElementById(jogo_api_id + '_time').innerHTML = live.time + "'";
 
     document.getElementById(jogo_api_id + '_live_status').innerHTML = `<b>${live.status.toUpperCase()}</b>`;
     document.getElementById(jogo_api_id + '_live_status').style.color = live.status === 'perdendo' ? 'red' : 'green';
+}
+
+function hideLiveFlag(jogo_api_id) {
+    if (document.getElementById(jogo_api_id + '_live_flag').hidden === false) {
+        document.getElementById(jogo_api_id + '_live_flag').hidden = true;
+        document.getElementById(jogo_api_id + '_time').hidden = true;
+    }
+}
+
+function closeAlert() {
+    document.getElementById('alert-no-live').hidden = true;
+}
+
+function showAlert() {
+    document.getElementById('alert-no-live').hidden = false;
 }

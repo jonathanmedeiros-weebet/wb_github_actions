@@ -197,10 +197,10 @@ document.onreadystatechange = async function () {
                         if (ticketData.tipo == 'esportes') {
                             div.innerHTML = `
                             <div class="ticket-item">
-                                <div class="identification" id="${ticketItem.jogo_api_id}_identification" hidden>
+                                <div class="identification">
                                     <div class="aovivo-time">
-                                        <div class="aovivo-label blink">Ao Vivo</div>
-                                        <div id="${ticketItem.jogo_api_id}_time" class="time"></div>
+                                        <div class="aovivo-label blink" id="${ticketItem.jogo_api_id}_live_flag" hidden>Ao Vivo</div>
+                                        <div id="${ticketItem.jogo_api_id}_time" hidden class="time"></div>
                                     </div>
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
