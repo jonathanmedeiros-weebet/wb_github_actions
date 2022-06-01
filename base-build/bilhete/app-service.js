@@ -139,7 +139,7 @@ function followLive(liveItems) {
                     clearInterval(liveInterval);
                 }
             });
-        }, 2000
+        }, 60000
     );
 
 }
