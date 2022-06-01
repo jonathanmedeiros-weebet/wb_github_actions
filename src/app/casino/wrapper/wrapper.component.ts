@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange} from '@angular/core';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {SidebarService} from '../../shared/services/utils/sidebar.service';
 import {MenuFooterService} from '../../services';
@@ -10,6 +10,8 @@ import {MenuFooterService} from '../../services';
 })
 export class CasinoWrapperComponent implements OnInit, OnDestroy {
 
+    @Input() showLoadingIndicator;
+
     constructor(
         private sideBarService: SidebarService,
         private menuFooterService: MenuFooterService,
@@ -20,6 +22,7 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy {
             dados: {}
         });
         this.menuFooterService.setIsPagina(true);
+
     }
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);

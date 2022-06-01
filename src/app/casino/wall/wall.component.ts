@@ -8,6 +8,8 @@ import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.serv
 })
 export class WallComponent implements OnInit {
 
+    showLoadingIndicator = true;
+
     public gameList:[];
     public gameAllList:[];
     public gameVsList:[];
@@ -21,22 +23,23 @@ export class WallComponent implements OnInit {
     ngOnInit(): void {
         let t = this;
         this.casinoApi.getGamesList().subscribe(response => {
-            console.log('load games')
-            t.gameList = response.gameList
-            this.filterGame(response.gameList)
+            console.log('load games');
+            t.gameList = response.gameList;
+            this.filterGame(response.gameList);
+            this.showLoadingIndicator = false;
 
-        },erro =>{})
+        }, erro => {});
     }
 
     filterGame(games){
         this.gameVsList = games.filter(function(game){
-            return game.gameTypeID == 'vs'
+            return game.gameTypeID == 'vs';
         })
         this.gameRlList = games.filter(function(game){
-            return game.gameTypeID == 'rl'
+            return game.gameTypeID == 'rl';
         })
         this.gameVpList = games.filter(function(game){
-            return game.gameTypeID == 'vp'
+            return game.gameTypeID == 'vp';
         })
         this.gameAllList = games
 

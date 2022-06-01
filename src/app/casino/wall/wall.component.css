@@ -44,19 +44,16 @@
     border-radius: 5px;
 }
 
+/* HOVER */
 .game-tile:hover img{
     filter: blur(3px);
 }
-
 .game-tile:hover .game-button-play{
     display: block;
 }
 .game-tile:hover .game-button-demo{
     display: block;
 }
-
-
-
 
 @media only screen and (max-width: 1024px) {
 
