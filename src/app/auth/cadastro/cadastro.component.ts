@@ -2,12 +2,13 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {PasswordValidation} from '../../shared/utils';
+import {FormValidations, PasswordValidation} from '../../shared/utils';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {Pagina} from '../../shared/models/pagina';
 import {AuthService} from '../../shared/services/auth/auth.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-cadastro',
@@ -15,8 +16,8 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
     styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    type: string = 'password';
-    icon: string = 'fa fa-eye';
+    type = 'password';
+    icon = 'fa fa-eye';
     termosDeUso: Pagina;
     submitting = false;
     debouncer: any;
@@ -56,7 +57,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                     Validators.pattern('^[a-zA-Z0-9_]+$'),
                     Validators.required
                 ], this.validarLoginUnico.bind(this)],
-            nascimento: [null, [Validators.required]],
+            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(3)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]],
             cpf: [null, [Validators.required]],
@@ -110,6 +111,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
 
     submit() {
         const values = this.form.value;
+        values.nascimento = moment(values.nascimento, 'MMDDYYYY', true).format('YYYY-MM-DD');
+
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
