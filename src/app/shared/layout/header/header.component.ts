@@ -246,7 +246,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
-                error => this.handleError(error)
+                error => this.auth.logout()
             );
     }
 
