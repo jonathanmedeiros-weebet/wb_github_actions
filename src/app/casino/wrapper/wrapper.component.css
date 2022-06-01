@@ -1,24 +1,21 @@
-#casino-wrapper{
-    display: flex;
-    flex-direction: row;
-}
-
 .casino-content{
     flex-grow: 1;
-    padding: 0 0 0 255px;
     overflow: auto;
     height: calc(100vh - 45px);
+    padding: 10px 0px 0px 10px;
 }
 
 @media only screen and (max-width: 1024px) {
     .casino-content{
+        background-color: white;
         padding: 0;
         height: calc(100vh - 98px);
     }
 }
 
 @media (min-width: 1025px) {
-    #casino-wrapper {
-        padding-right: 270px;
+    .casino-content {
+        background-color: white;
+        margin-left: 255px;
     }
 }
