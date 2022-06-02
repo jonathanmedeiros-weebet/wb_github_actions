@@ -10,23 +10,23 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+
 }
 
 .game-tile .game-tile-buttons {
-    padding-top: 25%;
-    padding-left: 20%;
-    padding-right: 20%;
     display: none;
     width: 100%;
     height: 100%;
     position: absolute;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 .game-tile .game-button-play {
     color: var(--header);
     background-color: var(--highlight);
-    width: 100%;
+    width: 60%;
     height: 35px;
 }
 
@@ -34,13 +34,13 @@
     background-color: var(--header);
     border-color: var(--highlight);
     color: var(--highlight);
-    width: 100%;
+    width: 60%;
     height: 35px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .game-tile:hover .game-tile-buttons{
-    display: unset;
+    display: flex;
     border-radius: 5px;
 }
 
@@ -60,9 +60,9 @@
     .game-tile {
         width: 100%;
         height:300px;
-        margin-top: 20px;
-        margin-left: 20px;
-        margin-right: 20px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .game-tile a{
@@ -77,9 +77,11 @@
 
 @media (min-width: 1025px) {
     .game-tile {
-        width: 19%;
-        height: 200px;
+        width: calc((100% / 5) - 10px);
         margin-right: 10px;
         margin-bottom: 10px;
+        --heightA: calc(10vw);
+        --heightB: calc(var(--heightA) + 50px);
+        height: var(--heightB);
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class GameviewComponent implements OnInit {
   constructor(
     private casinoApi: CasinoApiService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -36,5 +38,9 @@ export class GameviewComponent implements OnInit {
       this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
     });
   }
+
+    back(): void {
+        this.location.back();
+    }
 
 }

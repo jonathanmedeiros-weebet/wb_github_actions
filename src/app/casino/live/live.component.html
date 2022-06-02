@@ -1,17 +1,35 @@
-<div class="row">
-    <div *ngFor="let room of rooms" class="col col-xs-3">
-        <div *ngIf="room.tableOpen == true" class="game-tile">
-            <span class="info" title="Limites" style="left: 25px; top:5px">R$ {{room.tableLimits.minBet}} - R$ {{room.tableLimits.maxBet}}</span>
-            <span class="info" title="Usuário Online: {{room.totalSeatedPlayers}}" style="right: 25px; top:5px">
-                    <i class="fa fa-user"></i>
-                    <span style="padding: 0px 3px;">{{room.totalSeatedPlayers}}</span>
+<div class="game-list">
+    <div class="game-rooms" *ngFor="let room of rooms">
+        <div class="game-tile" *ngIf="room.tableOpen == true">
+            <div class="game-tile-header">
+                <span class="info-valor" title="Limites">
+                R$ {{room.tableLimits.minBet}} - R$ {{room.tableLimits.maxBet}}
                 </span>
-            <div>
-                <img title="{{room.tableName}}" src="{{room.tableImage}}">
-                <div class="title">{{room.tableName}}<span style=" position: absolute; right: 12px;">Dealer: {{room.dealer.name}}</span></div>
+                <span class="info-users" title="Usuário Online: {{room.totalSeatedPlayers}}">
+                <i class="fa fa-user"></i>
+                <span>
+                    {{room.totalSeatedPlayers}}
+                </span>
+            </span>
             </div>
-            <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button">Jogar</a>
+            <div class="game-tile-buttons">
+                <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button-play">Jogar</a>
+            </div>
+            <div class="game-tile-img">
+                <img title="{{room.tableName}}" src="{{room.tableImage}}">
+            </div>
+            <div class="game-tile-footer">
+                   <span class="info-table-name">
+                          {{room.tableName}}
+                    </span>
+                    <span class="info-dealer-name">
+                        Dealer: {{room.dealer.name}}
+                    </span>
+
+            </div>
+
         </div>
     </div>
 </div>
+
 
