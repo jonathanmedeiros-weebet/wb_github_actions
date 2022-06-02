@@ -46,7 +46,11 @@ async function orderTicketItens(tickeItens = [], ticketType) {
 }
 
 function getFormatedDate(date) {
-    return moment(date).format("DD/MM/YYYY HH:mm");
+    const options = {
+        dateStyle: 'short',
+        timeStyle: 'short'
+    }
+    return new Date(date).toLocaleString('pt-BR', options);
 }
 
 async function getResults(ids) {
@@ -146,7 +150,7 @@ function followLive(liveItems) {
 function filterLiveItems(ticketItems, itemsWithResults) {
     let liveItems = [];
     ticketItems.forEach((item) => {
-        var itemTimestamp = new Date(item.jogo_horario).getTime();
+        var itemTimestamp = new Date(item.jogo_horario.replace(/-/g, "/")).getTime();
 
         if (this.checkMatchPeriod(itemTimestamp)) {
             if (!itemsWithResults.includes(item.jogo_api_id)) {
@@ -163,11 +167,10 @@ function filterLiveItems(ticketItems, itemsWithResults) {
 }
 
 function checkMatchPeriod(startMatchTimestamp, matchTime = 120) {
-    var currentTime = moment().format();
-    var itemStartTime = moment(startMatchTimestamp).format();
-    var itemEndTime = moment(startMatchTimestamp).add(matchTime, 'minutes').format();
+    var currentTime = new Date().getTime();
+    var itemEndTime = startMatchTimestamp + (matchTime * 60000);
 
-    return (itemStartTime <= currentTime) && (currentTime <= itemEndTime);
+    return (startMatchTimestamp <= currentTime) && (currentTime <= itemEndTime);
 }
 
 function checkLiveItemsPeriod(liveItems) {
