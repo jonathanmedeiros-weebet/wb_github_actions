@@ -11,17 +11,23 @@ import {MenuFooterService} from '../../services';
 export class CasinoWrapperComponent implements OnInit, OnDestroy {
 
     @Input() showLoadingIndicator;
+    mobileScreen = false;
 
     constructor(
         private sideBarService: SidebarService,
         private menuFooterService: MenuFooterService,
     ) {}
     ngOnInit(): void {
+        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
         this.sideBarService.changeItens({
             contexto: 'casino',
             dados: {}
         });
-        this.menuFooterService.setIsPagina(true);
+        if (this.mobileScreen) {
+            this.menuFooterService.setIsPagina(false);
+        } else {
+            this.menuFooterService.setIsPagina(true);
+        }
 
     }
     ngOnDestroy() {

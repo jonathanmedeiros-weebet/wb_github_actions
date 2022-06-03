@@ -25,15 +25,15 @@
 
 .game-tile .game-button-play {
     color: var(--header);
-    background-color: var(--highlight);
+    background-color: var(--foreground-header);
     width: 60%;
     height: 35px;
 }
 
 .game-tile .game-button-demo {
     background-color: var(--header);
-    border-color: var(--highlight);
-    color: var(--highlight);
+    border-color: var(--foreground-header);
+    color: var(--foreground-header);
     width: 60%;
     height: 35px;
     margin-bottom: 20px;

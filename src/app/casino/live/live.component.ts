@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {CasinoApiService} from '../../shared/services/casino/casino-api.service';
+import {AuthService} from './../../services';
+import { interval } from 'rxjs';
 
 @Component({
     selector: 'app-live',
@@ -14,36 +16,57 @@ export class LiveComponent implements OnInit,OnDestroy {
     casinoId = null;
     tryToConnect = true;
     rooms = [];
+    isCliente;
+    isLoggedIn;
+    showLoadingIndicator = true;
 
     constructor(
-        private casinoApi: CasinoApiService
+        private casinoApi: CasinoApiService,
+        private auth: AuthService,
     ) { }
 
     ngOnInit(): void {
         let self = this;
-        this.casinoApi.getCasinoLiveKey().subscribe(response =>{
-            self.connect(response.socket,response.live_token);
-        })
+        this.casinoApi.getCasinoLiveKey().subscribe(response => {
+            self.connect(response.socket, response.live_token);
+            interval(2000)
+                .subscribe(() => {
+                    this.showLoadingIndicator = false;
+                });
+        });
 
+        this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cliente
+            .subscribe(
+                isCliente => {
+                    this.isCliente = isCliente;
+                }
+            );
 
     }
 
     ngOnDestroy(): void {
-        this.disconnect()
+        this.disconnect();
     }
 
     updateRoom(data){
-        let room = this.rooms.find((obj)=>{
-            return obj.tableId === data.tableId
+        let room = this.rooms.find((obj)=> {
+            return obj.tableId === data.tableId;
         })
-        if(room === undefined){
-            this.rooms.push(data)
-            console.log(data)
-        }else{
+        if(room === undefined) {
+            this.rooms.push(data);
+            console.log(data);
+        } else {
 
-            console.log('update room')
+            console.log('update room');
 
-            room = data
+            room = data;
         }
     }
 
@@ -59,16 +82,16 @@ export class LiveComponent implements OnInit,OnDestroy {
         }
         self.websocket = new WebSocket('wss://' + wsUri + '/ws');
         self.websocket.onopen = function(evt) {
-            self.onWsOpen(evt)
+            self.onWsOpen(evt);
         };
         self.websocket.onclose = function(evt) {
-            self.onWsClose(evt)
+            self.onWsClose(evt);
         };
         self.websocket.onmessage = function(evt) {
-            self.onWsMessage(evt)
+            self.onWsMessage(evt);
         };
         self.websocket.onerror = function(evt) {
-            self.onWsError(evt)
+            self.onWsError(evt);
         };
         if (tableId) {
             self.tableId = tableId;
@@ -79,21 +102,21 @@ export class LiveComponent implements OnInit,OnDestroy {
     onMessage(data) {
         let self = this;
         // console.log(data)
-        if(data['tableKey']){
-            for(let i=0;i<data.tableKey.length;i++){
-                self.subscribe(self.casinoId,data['tableKey'][i],'BRL');
+        if(data['tableKey']) {
+            for(let i = 0; i < data.tableKey.length;i++){
+                self.subscribe(self.casinoId, data['tableKey'][i], 'BRL');
             }
         }
-        if(data['tableId']){
+        if (data['tableId']) {
             // console.log(data)
-            this.updateRoom(data)
+            this.updateRoom(data);
 
         }
     }
     // public
     onConnect() {
-        console.log('onConnect')
-        this.available()
+        console.log('onConnect');
+        this.available();
     }
     // public
     disconnect() {
@@ -103,13 +126,13 @@ export class LiveComponent implements OnInit,OnDestroy {
         console.log('Disconnected');
     }
     // public
-    subscribe(casinoId,tableId, currency) {
+    subscribe(casinoId, tableId, currency) {
         var subscribeMessage = {
             type : 'subscribe',
             key : tableId,
             casinoId : casinoId,
             currency : currency
-        }
+        };
         console.log('subscribing' + tableId);
 
         var self = this;
@@ -123,8 +146,7 @@ export class LiveComponent implements OnInit,OnDestroy {
         var availableMessage = {
             type : 'available',
             casinoId : this.casinoId
-        }
-        console.log('checking availability');
+        };
 
         var self = this;
         // console.log('Subscribing ' + tableId);
@@ -135,14 +157,12 @@ export class LiveComponent implements OnInit,OnDestroy {
     onWsOpen(evt) {
         var self = this;
 
-        console.log(evt.data);
         if (self.onConnect != null) {
             self.onConnect();
         }
 
-        console.log('Connected to wss server');
         if (self.tableId) {
-            self.subscribe(this.casinoId, this.tableId,"BRL")
+            self.subscribe(this.casinoId, this.tableId, "BRL");
         }
     }
 

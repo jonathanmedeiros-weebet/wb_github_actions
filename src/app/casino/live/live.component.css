@@ -86,7 +86,7 @@ height: calc(100% - 20px);
 
 .game-tile .game-button-play {
     color: var(--header);
-    background-color: var(--highlight);
+    background-color: var(--foreground-header);
     width: 60%;
     height: 35px;
 }
