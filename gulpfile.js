@@ -250,16 +250,6 @@ gulp.task('redblue.wee.bet', function (done) {
     });
 });
 
-gulp.task('showdoesporte.net', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "showdoesporte.net",
-        banca: "Show do Esporte",
-        styles: "--header: #012459; --foreground-header: #fff; --sidebar-right:#012459; --foreground-sidebar-right: #fff; --sidebar-left: #012459; --foreground-sidebar-left: #fff; --highlight: #ec0205; --foreground-highlight: #fff;",
-        aditional_styles: ".odds .selecionado span, .odds .inner-odd:hover span{ color: #fff!important; }"
-    });
-});
-
 gulp.task('onbets.club', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -493,15 +483,6 @@ gulp.task('mastersports.wee.bet', function (done) {
         host: "mastersports.wee.bet",
         banca: "MASTER SPORTS",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #9b001d; --foreground-odds: #fff;",
-    });
-});
-
-gulp.task('centralbets.club', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "centralbets.club",
-        banca: "CENTRAL BETS",
-        styles: "--header: #0b2947; --foreground-header: #fff; --sidebar-right:#0e1e31; --foreground-sidebar-right: #fff; --sidebar-left: #0e1e31; --foreground-sidebar-left: #fff; --highlight: #8bc53f; --odds: #ffab03; --foreground-odds: #000;",
     });
 });
 
