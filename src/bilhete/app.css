@@ -21,7 +21,7 @@ body {
     font-size: 12px !important;
 }
 
-.container>div {
+.container > div {
     margin-bottom: 4px !important;
 }
 
@@ -29,7 +29,7 @@ body {
     height: 80px;
 }
 
-#logo-frame>img {
+#logo-frame > img {
     height: 80px;
     position: relative;
 }
@@ -45,11 +45,11 @@ body {
     font-weight: normal;
 }
 
-#header>span {
+#header > span {
     font-size: 12px !important;
 }
 
-#header>h2 {
+#header > h2 {
     font-weight: normal;
     margin: 0 0 6px 0;
     font-size: 24px;
@@ -70,7 +70,7 @@ body {
     align-items: center;
 }
 
-#ticket-itens>div {
+#ticket-itens > div {
     width: 100%;
 }
 
@@ -87,28 +87,28 @@ body {
     font-size: 12px !important;
 }
 
-.ticket-item>.event-time {
+.ticket-item > .event-time {
     font-size: 12px;
 }
 
-.ticket-item>div {
+.ticket-item > div {
     width: 100%;
     color: #000;
     margin: 5px;
 }
 
-.ticket-item>.players {
+.ticket-item > .players {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.ticket-item .players>.player {
+.ticket-item .players > .player {
     font-size: 15px !important;
     width: 40%;
 }
 
-.ticket-item .players>.separators {
+.ticket-item .players > .separators {
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -116,21 +116,21 @@ body {
     font-size: 12px;
 }
 
-.ticket-item .players .separators>div {
+.ticket-item .players .separators > div {
     margin: 3px 0;
 }
 
-.ticket-item .players>.player-a-data {
+.ticket-item .players > .player-a-data {
     display: flex;
     flex-direction: column;
 }
 
-.ticket-item .players>.player-b-data {
+.ticket-item .players > .player-b-data {
     display: flex;
     flex-direction: column;
 }
 
-.ticket-item .players .player>div {
+.ticket-item .players .player > div {
     font-size: 12px;
     margin-top: 3px;
     margin-bottom: 3px;
@@ -163,7 +163,7 @@ body {
     margin-bottom: 6px;
 }
 
-#has-result>* {
+#has-result > * {
     font-size: 18px;
 }
 
@@ -189,7 +189,7 @@ body {
     align-items: center;
 }
 
-#match>div {
+#match > div {
     width: 40%;
     font-size: 14px;
     font-weight: bolder;
@@ -201,7 +201,7 @@ body {
     justify-content: space-between;
 }
 
-#first-half>div {
+#first-half > div {
     width: 33%;
     font-size: 12px;
     text-align: center;
@@ -212,7 +212,7 @@ body {
     justify-content: space-between;
 }
 
-#second-half>div {
+#second-half > div {
     width: 33%;
     font-size: 12px;
     text-align: center;
@@ -223,7 +223,7 @@ body {
     justify-content: space-between;
 }
 
-#corner-kicks>div {
+#corner-kicks > div {
     width: 33%;
     font-size: 12px;
     text-align: center;
@@ -252,6 +252,118 @@ body {
     animation: spin 2s linear infinite;
 }
 
+#follow-live {
+    margin: 5px;
+}
+
+.identification {
+    position: relative;
+}
+
+.aovivo-time {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aovivo-label {
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+    padding: 3px 6px;
+    margin-right: 7px;
+}
+
+.time {
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+.alert {
+    width: 100%;
+    min-height: 50px;
+    max-height: 50px;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+    color: #8a6d3b;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 0;
+    position: relative;
+}
+
+.container > div.alert {
+    margin-bottom: 15px !important;
+}
+
+.alert div {
+    text-align: center;
+    margin: 15px auto;
+}
+
+.alert a {
+    position: absolute;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    top: 15px;
+    right: 15px;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.alert a:hover {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn {
+    background-color: var(--foreground-header);
+    color: var(--header);
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    line-height: 20px;
+    display: block;
+    font-weight: normal;
+    white-space: nowrap;
+    padding: 8px 12px;
+    width: 220px;
+    margin: 5px auto 5px auto;
+    cursor: pointer;
+}
+
+.btn:hover {
+    animation: darken 0.2s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes darken {
+    0% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(0.85);
+    }
+}
+
+@keyframes blinker {
+    50% {
+        transform: scale(1.1);
+    }
+}
 
 /* Safari */
 

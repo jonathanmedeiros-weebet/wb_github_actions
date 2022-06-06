@@ -24,7 +24,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilhete </title>
-    <link rel="stylesheet" id="app-css" href="./app.css?v=3">
+    <link rel="stylesheet" id="app-css" href="./app.css?v=17">
     <link rel="shortcut icon" type="image/x-icon" href="https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/favicon.ico">
 </head>
 
@@ -47,7 +47,22 @@
     <div id="header">
         <h2>Seus Palpites</h2>
         <span>Confira abaixo o resultado dos seus palpites</span>
+        <div id="follow-live" hidden>
+            <a class="btn">
+                Acompanhar Bilhete Ao Vivo
+            </a>
+        </div>
     </div>
+
+    <div id="alert-no-live" class="alert" role="alert" hidden>
+        <div>
+            Nenhum Jogo Ao Vivo no Momento!
+        </div>
+        <a id="close-btn" data-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+        </a>
+    </div>
+
     <div id="ticket-itens"></div>
     <div hidden>
         <strong id="grouped-bets">
@@ -106,11 +121,9 @@
         <span id="status"></span>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.js"
-        integrity="sha512-3hZVhR3sY0kWODNQDsPtq4J0/onmTN57pZcNV2SWsn2VylVZ/g5DVWyrPdFsgcH3aMdyTABZIuOakNw8Y0RTRw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="./app-service.js?v=10"></script>
-<script src="./app.js?v=10"></script>
+
+<script src="./app-service.js?v=17"></script>
+<script src="./app.js?v=17"></script>
 </body>
 
 </html>
