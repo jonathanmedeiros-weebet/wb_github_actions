@@ -56,7 +56,7 @@ function getFormatedDate(date) {
 async function getResults(ids) {
     try {
         paramIds = ids.join(',');
-        const request = await fetch(`https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
+        const request = await fetch(`https://center6.wee.bet/v1/resultados/detalhado?ids=${paramIds}`)
         const results = await request.json();
 
         if (request.status == 404 || request.status == 500) {

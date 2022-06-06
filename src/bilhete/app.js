@@ -119,7 +119,16 @@ document.onreadystatechange = async function () {
                             results = results.result;
 
                             results.forEach(item => {
-                                itemsWithResults.push(item.event_id);
+                                ticketData.itens.map((game) => {
+                                    if (game.jogo_api_id === item.event_id) {
+                                        game.time_a_img = item.time_a_img;
+                                        game.time_b_img = item.time_b_img;
+                                    }
+                                });
+
+                                if (item.resultado){
+                                    itemsWithResults.push(item.event_id);
+                                }
                             });
                         } else {
                             throw results;
@@ -206,15 +215,26 @@ document.onreadystatechange = async function () {
                                 </div>
                                 <div class="event-time">${getFormatedDate(ticketItem.jogo_horario.replace(/-/g, "/"))}</div>
                                 <div id="match">
-                                    <div id="match-result">
-                                        ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase()
-                                : ticketItem.odd_nome.toUpperCase()}
+                                    <div>
+                                        <div>
+                                            <img src="https://cdn.wee.bet/img/times/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/times/m/default.png'">
+                                        </div>
+                                        <div>
+                                            ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
+                                        </div>
                                     </div>
+
                                     <div id="${ticketItem.jogo_api_id}_scores">
                                         ${templateData.player_a_result} - ${templateData.player_b_result}
                                     </div>
+
                                     <div>
-                                        ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
+                                        <div>
+                                            <img src="https://cdn.wee.bet/img/times/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/times/m/default.png'">
+                                        </div>
+                                        <div>
+                                            ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="first-half">

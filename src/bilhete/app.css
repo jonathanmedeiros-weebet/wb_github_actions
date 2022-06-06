@@ -262,7 +262,8 @@ body {
 
 .aovivo-time {
     position: absolute;
-    top: 20px;
+    top: -5px;
+    left: -5px;
     display: flex;
     align-items: center;
     justify-content: center;

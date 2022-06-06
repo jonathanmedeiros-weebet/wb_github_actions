@@ -56,7 +56,7 @@ function getFormatedDate(date) {
 async function getResults(ids) {
     try {
         paramIds = ids.join(',');
-        const request = await fetch(`https://center6.wee.bet/v1/resultados/puro?ids=${paramIds}`)
+        const request = await fetch(`https://center6.wee.bet/v1/resultados/detalhado?ids=${paramIds}`)
         const results = await request.json();
 
         if (request.status == 404 || request.status == 500) {
@@ -72,7 +72,6 @@ function displayError(message) {
     document.getElementById('error').hidden = false;
     document.getElementById('ticket').style.display = 'none';
     if (message) {
-        console.error(message)
         if (message === 'Failed to Fetch') {
             document.getElementById('error-message').append('Imposível conectar ao servidor');
         } else {
