@@ -16,6 +16,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
   gameId: String = '';
   gameMode: String = '';
   params: any = [];
+  mobileScreen;
 
 constructor(
     private casinoApi: CasinoApiService,
@@ -27,6 +28,7 @@ constructor(
 }
 
 ngOnInit(): void {
+    this.mobileScreen = window.innerWidth <= 1024 ? true : false;
     this.menuFooterService.setIsPagina(true);
     this.route.params.subscribe(params => {
     this.params = params;
@@ -48,7 +50,11 @@ ngOnInit(): void {
     }
 
     ngOnDestroy() {
-        this.menuFooterService.setIsPagina(false);
+        if (this.mobileScreen) {
+            this.menuFooterService.setIsPagina(false);
+        } else {
+            this.menuFooterService.setIsPagina(true);
+        }
     }
 
 }

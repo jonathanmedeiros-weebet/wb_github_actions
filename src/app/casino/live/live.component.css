@@ -5,7 +5,6 @@
 .game-list{
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 20px;
 }
 .game-tile {
     position: relative;
@@ -111,6 +110,10 @@ height: calc(100% - 20px);
 
 @media only screen and (max-width: 1024px) {
 
+    .game-list{
+        padding-bottom: 120px;
+    }
+
     .game-rooms{
         width: 100%;
         height: 300px;
@@ -153,5 +156,9 @@ height: calc(100% - 20px);
         height: var(--heightB);
         margin-right: 10px;
         margin-bottom: 10px;
+    }
+
+    .game-list{
+        padding-bottom: 20px;
     }
 }

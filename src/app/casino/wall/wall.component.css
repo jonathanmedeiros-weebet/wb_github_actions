@@ -1,7 +1,7 @@
 .game-list{
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 20px;
+    padding-bottom: 120px;
 }
 .game-tile {
     position: relative;
@@ -65,6 +65,10 @@
         margin-right: 10px;
     }
 
+    .game-list{
+        padding-bottom: 120px;
+    }
+
     .game-tile a{
         pointer-events: none;
     }
@@ -84,4 +88,9 @@
         --heightB: calc(var(--heightA) + 50px);
         height: var(--heightB);
     }
+
+    .game-list{
+        padding-bottom: 10px;
+    }
+
 }
