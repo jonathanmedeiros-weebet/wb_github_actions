@@ -1,54 +1,56 @@
-<div id="cupom" #cupom>
-    <div class="conteudo">
-        <div class="text-center">
-            <img src="{{LOGO}}" alt="LOGO">
-        </div>
-        <h1>{{aposta.codigo}}</h1>
-        <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-            <p class="informacoes-gerais">CLIENTE: {{aposta.apostador}}</p>
-        </div>
-        <ng-template #exibicaoPadrao>
-            <p class="informacoes-gerais">CAMBISTA: {{aposta.passador.nome}}</p>
-            <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
-        </ng-template>
-        <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
-        <p class="informacoes-gerais">MODALIDADE: {{aposta.modalidade | sorteioTipo}}</p>
-        ----------------------------<br>
-        <ng-container *ngFor="let item of aposta.itens">
-            <p class="informacoes-item">
-                {{sorteioNome(item.sorteio_id)}}
-            </p>
-            <p class="informacoes-item">
-                VALOR: {{item.valor | currency}}
-            </p>
-            <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
-                Retorno 6: {{item.cotacao6 * item.valor | currency}}
-            </p>
-            <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
-                Retorno 5: {{item.cotacao5 * item.valor | currency}}
-            </p>
-            <p class="informacoes-item" *ngIf="item.cotacao4 > 0" [ngClass]="verificarStatus(item, 4)">
-                Retorno 4: {{item.cotacao4 * item.valor | currency}}
-            </p>
-            <p class="informacoes-item" *ngIf="item.cotacao3 > 0" [ngClass]="verificarStatus(item, 3)">
-                Retorno 3: {{item.cotacao3 * item.valor | currency}}
-            </p>
-            <p class="informacoes-item">
-                DEZENAS: {{item.numeros}}
-            </p>
-            <p class="informacoes-item">
-                <strong *ngIf="item.status != 'ganhou'; else ganhou">{{item.status}}</strong>
-                <ng-template #ganhou>
-                    <strong>{{item.status}} {{item.tipo_premio}}</strong>
-                </ng-template>
-            </p>
+<div id="cupom-center">
+    <div id="cupom" #cupom>
+        <div class="conteudo">
+            <div class="text-center">
+                <img src="{{LOGO}}" alt="LOGO">
+            </div>
+            <h1>{{aposta.codigo}}</h1>
+            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                <p class="informacoes-gerais">CLIENTE: {{aposta.apostador}}</p>
+            </div>
+            <ng-template #exibicaoPadrao>
+                <p class="informacoes-gerais">CAMBISTA: {{aposta.passador.nome}}</p>
+                <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
+            </ng-template>
+            <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+            <p class="informacoes-gerais">MODALIDADE: {{aposta.modalidade | sorteioTipo}}</p>
             ----------------------------<br>
-        </ng-container>
-        <p class="valor-aposta">
-            VALOR TOTAL: {{aposta.valor | currency}}
-        </p>
-        <p class="mensagem-rodape">
-            {{informativoRodape}}
-        </p>
+            <ng-container *ngFor="let item of aposta.itens">
+                <p class="informacoes-item">
+                    {{sorteioNome(item.sorteio_id)}}
+                </p>
+                <p class="informacoes-item">
+                    VALOR: {{item.valor | currency}}
+                </p>
+                <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
+                    Retorno 6: {{item.cotacao6 * item.valor | currency}}
+                </p>
+                <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
+                    Retorno 5: {{item.cotacao5 * item.valor | currency}}
+                </p>
+                <p class="informacoes-item" *ngIf="item.cotacao4 > 0" [ngClass]="verificarStatus(item, 4)">
+                    Retorno 4: {{item.cotacao4 * item.valor | currency}}
+                </p>
+                <p class="informacoes-item" *ngIf="item.cotacao3 > 0" [ngClass]="verificarStatus(item, 3)">
+                    Retorno 3: {{item.cotacao3 * item.valor | currency}}
+                </p>
+                <p class="informacoes-item">
+                    DEZENAS: {{item.numeros}}
+                </p>
+                <p class="informacoes-item">
+                    <strong *ngIf="item.status != 'ganhou'; else ganhou">{{item.status}}</strong>
+                    <ng-template #ganhou>
+                        <strong>{{item.status}} {{item.tipo_premio}}</strong>
+                    </ng-template>
+                </p>
+                ----------------------------<br>
+            </ng-container>
+            <p class="valor-aposta">
+                VALOR TOTAL: {{aposta.valor | currency}}
+            </p>
+            <p class="mensagem-rodape">
+                {{informativoRodape}}
+            </p>
+        </div>
     </div>
 </div>
