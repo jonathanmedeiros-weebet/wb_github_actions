@@ -1567,14 +1567,6 @@ gulp.task('trevoone.bet', function (done) {
     });
 });
 
-gulp.task('valesport.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "valesport.bet",
-        banca: "VALE SPORT",
-    });
-});
-
 gulp.task('dfsportsbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1656,15 +1648,6 @@ gulp.task('bolanarede.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "bolanarede.wee.bet",
         banca: "BOLA NA REDE",
-        styles: "",
-    });
-});
-
-gulp.task('apostaai.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "apostaai.com",
-        banca: "APOSTA AÍ",
         styles: "",
     });
 });
@@ -2169,6 +2152,24 @@ gulp.task('rondobet.com', function (done) {
         server: "front2.wee.bet",
         host: "rondobet.com",
         banca: "RONDO BET",
+        styles: "",
+    });
+});
+
+gulp.task('golbets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "golbets.wee.bet",
+        banca: "GOL BETS",
+        styles: "",
+    });
+});
+
+gulp.task('goldavirada.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "goldavirada.bet",
+        banca: "GOL DA VIRADA",
         styles: "",
     });
 });

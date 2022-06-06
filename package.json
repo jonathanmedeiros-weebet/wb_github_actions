@@ -170,7 +170,6 @@
         "betcompany.wee.bet": "gulp betcompany.wee.bet",
         "futbet7.com": "gulp futbet7.com",
         "trevoone.bet": "gulp trevoone.bet",
-        "valesport.bet": "gulp valesport.bet",
         "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
         "betpixbrasil.com": "gulp betpixbrasil.com",
         "betshelby.net": "gulp betshelby.net",
@@ -180,7 +179,6 @@
         "starsbet.wee.bet": "gulp starsbet.wee.bet",
         "megabet.wee.bet": "gulp megabet.wee.bet",
         "bolanarede.wee.bet": "gulp bolanarede.wee.bet",
-        "apostaai.com": "gulp apostaai.com",
         "cityesportes.bet": "gulp cityesportes.bet",
         "startbetbrasil.com": "gulp startbetbrasil.com",
         "goldeplaca.wee.bet": "gulp goldeplaca.wee.bet",
@@ -235,7 +233,9 @@
         "membet.wee.bet": "gulp membet.wee.bet",
         "clubedasapostas.wee.bet": "gulp clubedasapostas.wee.bet",
         "futebets.net": "gulp futebets.net",
-        "rondobet.com": "gulp rondobet.com"
+        "rondobet.com": "gulp rondobet.com",
+        "golbets.wee.bet": "gulp golbets.wee.bet",
+        "goldavirada.bet": "gulp goldavirada.bet"
     },
     "private": true,
     "dependencies": {
