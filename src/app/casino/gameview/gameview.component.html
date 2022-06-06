@@ -1,12 +1,11 @@
 
-
-<div class="buttons-game-view">
-    <a (click)="back()" class="btn game-close"><i class="fa fa-times"></i></a>
-</div>
-<div class="game-frame">
-    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" > </iframe>
-<!--    allowfullscreen webkitallowfullscreen mozallowfullscreen-->
-
+<div class="game-view">
+    <div class="buttons-game-view">
+        <a (click)="back()" class="btn game-close"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="game-frame">
+        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+    </div>
 </div>
 
 
