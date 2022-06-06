@@ -72,7 +72,6 @@ function displayError(message) {
     document.getElementById('error').hidden = false;
     document.getElementById('ticket').style.display = 'none';
     if (message) {
-        console.error(message)
         if (message === 'Failed to Fetch') {
             document.getElementById('error-message').append('Imposível conectar ao servidor');
         } else {
