@@ -19,7 +19,7 @@ iframe{
     align-items: center;
     justify-content: right;
     padding-right: 5px;
-    height: 35px;
+    height: 30px;
     width: 100%;
 }
 
@@ -36,15 +36,15 @@ iframe{
     /*}*/
 
     .buttons-game-view{
-        background-color: white;
+        background-color: black;
     }
 
     .game-frame{
-        height: calc(100vh - 132px);
+        height: calc(100vh - 127px);
     }
 
     iframe{
-        height: calc(100vh - 132px);
+        height: 100%;
     }
 }
 
