@@ -31,6 +31,7 @@ iframe{
 
 @media only screen and (max-width: 1024px) {
     .game-view{
+        position: absolute;
         background-color: white;
         height: calc(100vh - 127px);
     }
@@ -44,7 +45,20 @@ iframe{
     }
 
     iframe{
-        height: calc(100vh - 127px) !important;
+        position: relative !important;
+        height: calc(100vh - 83px) !important;
+    }
+
+    .menu-categories{
+        display: none !important;
+    }
+
+    #page-wrapper{
+        margin-top: 53px !important;
+    }
+
+    body{
+        height: 100vh !important;
     }
 }
 
