@@ -207,10 +207,6 @@ document.onreadystatechange = async function () {
                             div.innerHTML = `
                             <div class="ticket-item">
                                 <div class="identification">
-                                    <div class="aovivo-time">
-                                        <div class="aovivo-label blink" id="${ticketItem.jogo_api_id}_live_flag" hidden>Ao Vivo</div>
-                                        <div id="${ticketItem.jogo_api_id}_time" hidden class="time"></div>
-                                    </div>
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
                                 <div class="event-time">${getFormatedDate(ticketItem.jogo_horario.replace(/-/g, "/"))}</div>
@@ -224,8 +220,14 @@ document.onreadystatechange = async function () {
                                         </div>
                                     </div>
 
-                                    <div id="${ticketItem.jogo_api_id}_scores">
-                                        ${templateData.player_a_result} - ${templateData.player_b_result}
+                                    <div class="time-live-score">
+                                        <div class="aovivo-label blink" id="${ticketItem.jogo_api_id}_live_flag" hidden>Ao Vivo</div>
+
+                                        <div id="${ticketItem.jogo_api_id}_scores" class="score">
+                                            ${templateData.player_a_result} - ${templateData.player_b_result}
+                                        </div>
+
+                                        <div id="${ticketItem.jogo_api_id}_time" hidden class="time"></div>
                                     </div>
 
                                     <div>

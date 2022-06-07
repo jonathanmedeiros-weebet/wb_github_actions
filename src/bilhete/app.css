@@ -256,29 +256,29 @@ body {
     margin: 5px;
 }
 
-.identification {
-    position: relative;
+.time-live-score {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
-.aovivo-time {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.score {
+    font-size: 20px;
 }
 
 .aovivo-label {
     background-color: red;
     border-radius: 5px;
     color: #fff;
-    padding: 3px 6px;
-    margin-right: 7px;
+    padding: 2px;
+    width: 60px;
+    margin-bottom: 4px;
+    font-size: 14px;
 }
 
 .time {
-    font-size: 1.1rem;
+    font-size: 14px;
     color: #000;
 }
 
@@ -361,7 +361,7 @@ body {
 
 @keyframes blinker {
     50% {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
