@@ -1010,15 +1010,6 @@ gulp.task('futbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('pontalbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "pontalbet.wee.bet",
-        banca: "PONTAL BET",
-        styles: "",
-    });
-});
-
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
