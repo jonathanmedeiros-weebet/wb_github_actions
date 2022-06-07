@@ -1852,15 +1852,6 @@ gulp.task('i2bets.com', function (done) {
     });
 });
 
-gulp.task('planetbet.biz', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "planetbet.biz",
-        banca: "PLANET BET",
-        styles: "",
-    });
-});
-
 gulp.task('betgol88.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2151,6 +2142,15 @@ gulp.task('goldavirada.bet', function (done) {
         server: "front2.wee.bet",
         host: "goldavirada.bet",
         banca: "GOL DA VIRADA",
+        styles: "",
+    });
+});
+
+gulp.task('megabetmg.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "megabetmg.wee.bet",
+        banca: "MEGA BET MG",
         styles: "",
     });
 });

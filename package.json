@@ -201,7 +201,6 @@
         "megaesports.wee.bet": "gulp megaesports.wee.bet",
         "futbets.me": "gulp futbets.me",
         "i2bets.com": "gulp i2bets.com",
-        "planetbet.biz": "gulp planetbet.biz",
         "betgol88.wee.bet": "gulp betgol88.wee.bet",
         "xbet92.wee.bet": "gulp xbet92.wee.bet",
         "ltbets.wee.bet": "gulp ltbets.wee.bet",
@@ -233,7 +232,8 @@
         "futebets.net": "gulp futebets.net",
         "rondobet.com": "gulp rondobet.com",
         "golbets.wee.bet": "gulp golbets.wee.bet",
-        "goldavirada.bet": "gulp goldavirada.bet"
+        "goldavirada.bet": "gulp goldavirada.bet",
+        "megabetmg.wee.bet": "gulp megabetmg.wee.bet"
     },
     "private": true,
     "dependencies": {
