@@ -4,8 +4,9 @@
         <a (click)="back()" class="btn game-close"><i class="fa fa-times"></i></a>
     </div>
     <div class="game-frame">
-        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
     </div>
 </div>
+
 
 
