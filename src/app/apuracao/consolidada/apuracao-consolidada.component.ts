@@ -61,6 +61,13 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
                 this.resultado = parseFloat(result['total_apostado']) + parseFloat(result['cartao']) - parseFloat(result['saque'])
                     - parseFloat(result['total_comissao']) - parseFloat(result['total_premios']);
                 this.showLoading = false;
+            },
+            error => {
+                this.relatorio = [];
+                this.resultado = 0;
+                this.showLoading = false;
+                this.handleError(error);
+                console.log(error);
             }
         );
     }

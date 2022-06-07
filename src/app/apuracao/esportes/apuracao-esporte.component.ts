@@ -101,7 +101,6 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
                     this.apostas = [];
                     this.showLoading = false;
                     this.cd.detectChanges();
-                    console.log('chego aqui');
                     this.handleError(error);
                 }
             );

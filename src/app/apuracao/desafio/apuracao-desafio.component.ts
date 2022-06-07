@@ -84,7 +84,12 @@ export class ApuracaoDesafioComponent implements OnInit, OnDestroy, OnChanges {
                     this.showLoading = false;
                     this.cd.detectChanges();
                 },
-                error => this.handleError(error)
+                error => {
+                    this.showLoading = false;
+                    this.apostas = [];
+                    this.cd.detectChanges();
+                    this.handleError(error);
+                }
             );
     }
 
