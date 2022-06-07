@@ -31,12 +31,9 @@ iframe{
 
 @media only screen and (max-width: 1024px) {
     .game-view{
-        overflow: hidden !important;
         position: absolute;
-        z-index: 99999;
         background-color: white;
-        height: calc(100vh);
-        margin-top: -97px;
+        height: calc(100vh - 127px);
     }
 
     .buttons-game-view{
@@ -44,12 +41,12 @@ iframe{
     }
 
     .game-frame{
-        height: 100%;
+        height: calc(100vh - 127px);
     }
 
-    iframe{
-        position: relative !important;
-        height: 100%;
+    .game-frame iframe{
+        position: relative;
+        height: calc(100vh - 127px);
     }
 }
 
