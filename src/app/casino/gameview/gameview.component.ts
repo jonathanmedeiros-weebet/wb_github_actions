@@ -19,6 +19,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
   gameMode: String = '';
   params: any = [];
   mobileScreen;
+  fullscreen;
   elem: any;
   showLoadingIndicator = true;
 
@@ -35,6 +36,7 @@ constructor(
 ngOnInit(): void {
     this.elem = document.documentElement;
     this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+    this.fullscreen = false;
     this.menuFooterService.setIsPagina(true);
     this.route.params.subscribe(params => {
     this.params = params;
@@ -81,6 +83,7 @@ ngOnInit(): void {
             /* IE/Edge */
             this.elem.msRequestFullscreen();
         }
+        this.fullscreen = true;
     }
 
     closeFullscreen() {
@@ -96,6 +99,16 @@ ngOnInit(): void {
             /* IE/Edge */
             this.document.msExitFullscreen();
         }
+        this.fullscreen = false;
+    }
+
+    isAppMobile() {
+        let result = false;
+        const appMobile = JSON.parse(localStorage.getItem('app-mobile'));
+        if (appMobile) {
+            result = appMobile;
+        }
+        return result;
     }
 
 

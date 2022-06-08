@@ -27,6 +27,11 @@ iframe{
     color: red;
     font-size: 30px;
 }
+.screen-adjust{
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
+}
 
 
 @media only screen and (max-width: 1024px) {
