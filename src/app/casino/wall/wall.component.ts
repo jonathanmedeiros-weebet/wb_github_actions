@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import {AuthService} from './../../services';
 import { interval } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,24 +15,36 @@ export class WallComponent implements OnInit {
     showLoadingIndicator = true;
     isCliente;
     isLoggedIn;
+    gameType: string;
+    private sub: any;
 
-    public gameList:[];
-    public gameAllList:[];
-    public gameVsList:[];
-    public gameRlList:[];
-    public gameVpList:[];
+    public gameList: [];
+    public gameAllList: [];
+    public gameSlotList: [];
+    public gameRoletaList: [];
+    public gameMesaList: [];
 
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
-        let t = this;
         this.casinoApi.getGamesList().subscribe(response => {
-            console.log('load games');
-            t.gameList = response.gameList;
             this.filterGame(response.gameList);
+            this.sub = this.route.params.subscribe(params => {
+                this.gameType = params['game_type'];
+                if (this.gameType === 'slot') {
+                    this.showSlot();
+                } else if (this.gameType === 'roleta') {
+                    this.showRoulette();
+                } else if (this.gameType === 'mesa') {
+                    this.showMesa();
+                } else {
+                   this.showAll();
+                }
+            });
             interval(2000)
                 .subscribe(() => {
                     this.showLoadingIndicator = false;
@@ -52,21 +65,18 @@ export class WallComponent implements OnInit {
             );
     }
 
-    filterGame(games){
-        this.gameVsList = games.filter(function(game){
-            return game.gameTypeID == 'vs';
+    filterGame(games) {
+        this.gameSlotList = games.filter(function(game) {
+            return game.gameTypeID === 'vs' || game.gameTypeID === 'sc';
         });
-        this.gameRlList = games.filter(function(game){
-            return game.gameTypeID == 'rl';
+        this.gameRoletaList = games.filter(function(game) {
+            return game.gameTypeID === 'rl'; //Roleta
         });
-        this.gameVpList = games.filter(function(game){
-            return game.gameTypeID == 'vp';
+        this.gameMesaList = games.filter(function(game) {
+            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
         });
         this.gameAllList = games;
-
     }
-
-
 
     getGamesList() {
         return this.gameList;
@@ -77,15 +87,18 @@ export class WallComponent implements OnInit {
     }
 
     showSlot() {
-        this.gameList = this.gameVsList;
+        this.gameList = this.gameSlotList;
     }
 
     showRoulette() {
-        this.gameList = this.gameRlList;
+        this.gameList = this.gameRoletaList;
     }
 
-    showPoker() {
-        this.gameList = this.gameVpList;
+    showMesa() {
+        this.gameList = this.gameMesaList;
     }
 
+    // showLiveGames() {
+    //     this.gameList = this.gameLgList;
+    // }
 }
