@@ -93,3 +93,13 @@
     }
 
 }
+
+@media only screen and (orientation: landscape) {
+
+    .game-tile {
+        width: 30%;
+        height:200px;
+
+    }
+
+}

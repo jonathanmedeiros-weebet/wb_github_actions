@@ -13,12 +13,13 @@
 html {
     position: relative;
     font-size: 12px;
+    overflow: hidden !important;
 }
 
 html,
 body {
     color: #1e282c;
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 header {

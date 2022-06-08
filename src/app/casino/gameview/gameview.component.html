@@ -1,10 +1,12 @@
 
 <div class="game-view">
     <div class="buttons-game-view">
+<!--        <a class="screen" (click)="openFullscreen()">Tela Cheia</a>-->
+<!--        <a class="screen" (click)="closeFullscreen()">Fechar Tela Cheia</a>-->
         <a (click)="back()" class="btn game-close"><i class="fa fa-times"></i></a>
     </div>
     <div class="game-frame">
-        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
     </div>
 </div>
 

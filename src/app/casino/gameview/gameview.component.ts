@@ -1,4 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
@@ -17,17 +18,20 @@ export class GameviewComponent implements OnInit, OnDestroy {
   gameMode: String = '';
   params: any = [];
   mobileScreen;
+    elem: any;
 
 constructor(
     private casinoApi: CasinoApiService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private location: Location,
-    private menuFooterService: MenuFooterService
+    private menuFooterService: MenuFooterService,
+    @Inject(DOCUMENT) private document: any
 ) {
 }
 
 ngOnInit(): void {
+    this.elem = document.documentElement;
     this.mobileScreen = window.innerWidth <= 1024 ? true : false;
     this.menuFooterService.setIsPagina(true);
     this.route.params.subscribe(params => {
@@ -47,6 +51,7 @@ ngOnInit(): void {
 
     back(): void {
         this.location.back();
+        this.closeFullscreen();
     }
 
     ngOnDestroy() {
@@ -56,5 +61,36 @@ ngOnInit(): void {
             this.menuFooterService.setIsPagina(true);
         }
     }
+
+    openFullscreen() {
+        if (this.elem.requestFullscreen) {
+            this.elem.requestFullscreen();
+        } else if (this.elem.mozRequestFullScreen) {
+            /* Firefox */
+            this.elem.mozRequestFullScreen();
+        } else if (this.elem.webkitRequestFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.elem.webkitRequestFullscreen();
+        } else if (this.elem.msRequestFullscreen) {
+            /* IE/Edge */
+            this.elem.msRequestFullscreen();
+        }
+    }
+
+    closeFullscreen() {
+        if (this.document.exitFullscreen) {
+            this.document.exitFullscreen();
+        } else if (this.document.mozCancelFullScreen) {
+            /* Firefox */
+            this.document.mozCancelFullScreen();
+        } else if (this.document.webkitExitFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.document.webkitExitFullscreen();
+        } else if (this.document.msExitFullscreen) {
+            /* IE/Edge */
+            this.document.msExitFullscreen();
+        }
+    }
+
 
 }

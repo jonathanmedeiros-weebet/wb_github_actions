@@ -1,5 +1,6 @@
 .game-rooms{
     position: relative;
+    padding: 10px;
 }
 
 .game-list{
@@ -18,7 +19,6 @@
     z-index: 1;
     height: 30px;
 }
-
 .game-tile-header .info-valor,.info-users{
     margin-top: 10px;
     background-color: var(--header);
@@ -33,20 +33,20 @@
     margin-right: 50px;
 }
 
-
 .game-tile-img img{
     position: absolute;
     width: 100%;
     height: 100%;
 }
 .game-tile-img{
-height: calc(100% - 20px);
+    width: 100%;
+    height: 100%;
 }
 
 .game-tile-footer{
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 20px;
     background-color: var(--header);
@@ -117,16 +117,12 @@ height: calc(100% - 20px);
     .game-rooms{
         width: 100%;
         height: 300px;
-        margin-right: 20px;
         margin-bottom: 10px;
     }
 
     .game-tile {
         width: 100%;
-        height:300px;
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
+        height:100%;
     }
 
     .game-tile a{
@@ -162,3 +158,13 @@ height: calc(100% - 20px);
         padding-bottom: 20px;
     }
 }
+
+@media only screen and (orientation: landscape) {
+
+    .game-rooms{
+        width: 33%;
+        height:250px;
+    }
+
+}
+

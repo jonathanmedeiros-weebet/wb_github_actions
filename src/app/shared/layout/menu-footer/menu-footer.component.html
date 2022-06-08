@@ -35,6 +35,17 @@
             <i class="fa fa-bars"></i> Menu
         </a>
     </div>
+    <div class="foot-button" routerLinkActive="active">
+        <a class="" [routerLink]="['/casino/wall']">
+            <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon> Todos
+        </a>
+    </div>
+    <div class="foot-button" routerLinkActive="active">
+        <a class="" [routerLink]="['/casino/live']">
+            <i class="wbicon icon-ao-vivo"></i> Ao Vivo
+        </a>
+    </div>
+
 </div>
 
 <app-bilhete-esportivo></app-bilhete-esportivo>

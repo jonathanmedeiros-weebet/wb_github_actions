@@ -11,6 +11,10 @@
     padding-top: 5px;
 }
 
+#footer-bar-casino{
+    z-index: 999;
+}
+
 .wbicon {
     font-size: 1.8rem;
     margin-bottom: 5px;

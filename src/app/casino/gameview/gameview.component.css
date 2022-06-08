@@ -19,21 +19,23 @@ iframe{
     align-items: center;
     justify-content: right;
     padding-right: 5px;
-    height: 30px;
+    height: 40px;
     width: 100%;
 }
 
 .game-close{
     color: red;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 
 @media only screen and (max-width: 1024px) {
     .game-view{
-        position: absolute;
+        position: fixed;
         background-color: white;
-        height: calc(100vh - 127px);
+        height: calc(100% - 40px);
+        z-index: 9999;
+        margin-top: -97px;
     }
 
     .buttons-game-view{
@@ -41,12 +43,12 @@ iframe{
     }
 
     .game-frame{
-        height: calc(100vh - 127px);
+        height: calc(100%);
     }
 
     .game-frame iframe{
-        position: relative;
-        height: calc(100vh - 127px);
+        position: relative !important;
+        height: 100%;
     }
 }
 
