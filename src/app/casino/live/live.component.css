@@ -1,6 +1,5 @@
 .game-rooms{
     position: relative;
-    padding: 10px;
 }
 
 .game-list{
@@ -40,7 +39,7 @@
 }
 .game-tile-img{
     width: 100%;
-    height: 100%;
+    height: calc(100% - 20px);
 }
 
 .game-tile-footer{
@@ -111,7 +110,7 @@
 @media only screen and (max-width: 1024px) {
 
     .game-list{
-        padding-bottom: 120px;
+        padding: 10px 10px 80px 10px;
     }
 
     .game-rooms{
@@ -159,11 +158,12 @@
     }
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
 
     .game-rooms{
-        width: 33%;
+        width: 32%;
         height:250px;
+        margin-right:  10px;
     }
 
 }

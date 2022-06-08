@@ -65,7 +65,7 @@
     }
 
     .game-list{
-        padding-bottom: 60px;
+        padding-bottom: 80px;
     }
 
     .game-tile a{
@@ -94,7 +94,7 @@
 
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
 
     .game-tile {
         width: 30%;
