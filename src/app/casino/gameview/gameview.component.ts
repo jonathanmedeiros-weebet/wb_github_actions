@@ -5,6 +5,7 @@ import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.servic
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {MenuFooterService} from '../../services';
+import {interval} from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
   gameMode: String = '';
   params: any = [];
   mobileScreen;
-    elem: any;
+  elem: any;
+  showLoadingIndicator = true;
 
 constructor(
     private casinoApi: CasinoApiService,
@@ -39,6 +41,10 @@ ngOnInit(): void {
     this.gameId = params['game_id'];
     this.gameMode = params['game_mode'];
     this.loadGame();
+        interval(3000)
+            .subscribe(() => {
+                this.showLoadingIndicator = false;
+            });
     });
 
   }
