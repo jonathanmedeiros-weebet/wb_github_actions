@@ -23,6 +23,7 @@ export class WallComponent implements OnInit {
     public gameSlotList: [];
     public gameRoletaList: [];
     public gameMesaList: [];
+    public gameDestaquesList: [];
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -41,6 +42,8 @@ export class WallComponent implements OnInit {
                     this.showRoulette();
                 } else if (this.gameType === 'mesa') {
                     this.showMesa();
+                } else if (this.gameType === 'destaques') {
+                    this.showDestaques();
                 } else {
                    this.showAll();
                 }
@@ -70,10 +73,15 @@ export class WallComponent implements OnInit {
             return game.gameTypeID === 'vs' || game.gameTypeID === 'sc';
         });
         this.gameRoletaList = games.filter(function(game) {
-            return game.gameTypeID === 'rl'; //Roleta
+            return game.gameTypeID === 'rl';
         });
         this.gameMesaList = games.filter(function(game) {
             return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+        });
+        this.gameDestaquesList = games.filter(function(game) {
+            return game.gameID === '1301' || game.gameID === 'vs20doghouse' || game.gameID === 'vswayshammthor' || game.gameID === 'vs20olympgate' || game.gameID === 'vs20olympgate'
+                // tslint:disable-next-line:max-line-length
+                || game.gameID === '422' || game.gameID === 'rla' || game.gameID === 'vs243dancingpar' || game.gameID === 'vpa' || game.gameID === '1101' || game.gameID === 'vs1dragon8' ;
         });
         this.gameAllList = games;
     }
@@ -96,6 +104,10 @@ export class WallComponent implements OnInit {
 
     showMesa() {
         this.gameList = this.gameMesaList;
+    }
+
+    showDestaques() {
+        this.gameList = this.gameDestaquesList;
     }
 
     // showLiveGames() {
