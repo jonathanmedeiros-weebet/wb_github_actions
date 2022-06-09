@@ -1,10 +1,10 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {MenuFooterService} from '../../services';
+import {AuthService, MenuFooterService} from '../../services';
 import {interval} from 'rxjs';
 
 
@@ -22,12 +22,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
   fullscreen;
   elem: any;
   showLoadingIndicator = true;
+  isCliente;
 
 constructor(
     private casinoApi: CasinoApiService,
     private route: ActivatedRoute,
+    private router: Router,
     private sanitizer: DomSanitizer,
     private location: Location,
+    private auth: AuthService,
     private menuFooterService: MenuFooterService,
     @Inject(DOCUMENT) private document: any
 ) {
@@ -42,7 +45,17 @@ ngOnInit(): void {
     this.params = params;
     this.gameId = params['game_id'];
     this.gameMode = params['game_mode'];
-    this.loadGame();
+        this.auth.cliente
+            .subscribe(
+                isCliente => {
+                    this.isCliente = isCliente;
+                }
+            );
+        if (this.gameMode === 'REAL' && !this.isCliente) {
+          this.router.navigate(['casino/wall']);
+        } else {
+            this.loadGame();
+        }
         interval(3000)
             .subscribe(() => {
                 this.showLoadingIndicator = false;
