@@ -2145,3 +2145,12 @@ gulp.task('megabetmg.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('topbet365.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "topbet365.wee.bet",
+        banca: "TOP BET 365",
+        styles: "",
+    });
+});

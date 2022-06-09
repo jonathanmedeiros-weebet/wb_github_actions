@@ -232,7 +232,8 @@
         "rondobet.com": "gulp rondobet.com",
         "golbets.wee.bet": "gulp golbets.wee.bet",
         "goldavirada.bet": "gulp goldavirada.bet",
-        "megabetmg.wee.bet": "gulp megabetmg.wee.bet"
+        "megabetmg.wee.bet": "gulp megabetmg.wee.bet",
+        "topbet365.wee.bet": "gulp topbet365.wee.bet"
     },
     "private": true,
     "dependencies": {
