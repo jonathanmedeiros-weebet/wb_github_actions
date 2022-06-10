@@ -2155,12 +2155,20 @@ gulp.task('topbet365.wee.bet', function (done) {
     });
 });
 
-
 gulp.task('jmbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "jmbet.wee.bet",
         banca: "JM BET",
+        styles: "",
+    });
+});
+
+gulp.task('bebet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bebet.bet",
+        banca: "BEBET",
         styles: "",
     });
 });
