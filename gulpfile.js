@@ -2160,7 +2160,7 @@ gulp.task('jogadamagica.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "jogadamagica.wee.bet",
-        banca: "JOGADA MÁGICA",
+        banca: "JM BET",
         styles: "",
     });
 });

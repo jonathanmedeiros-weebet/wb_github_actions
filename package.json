@@ -234,7 +234,7 @@
         "goldavirada.bet": "gulp goldavirada.bet",
         "megabetmg.wee.bet": "gulp megabetmg.wee.bet",
         "topbet365.wee.bet": "gulp topbet365.wee.bet",
-        "jogadamagica.wee.bet": "gulp jogadamagica.wee.bet"
+        "jmbet.wee.bet": "gulp jmbet.wee.bet"
     },
     "private": true,
     "dependencies": {
