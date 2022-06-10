@@ -2154,3 +2154,13 @@ gulp.task('topbet365.wee.bet', function (done) {
         styles: "",
     });
 });
+
+
+gulp.task('jogadamagica.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jogadamagica.wee.bet",
+        banca: "JOGADA MÁGICA",
+        styles: "",
+    });
+});
