@@ -2156,10 +2156,10 @@ gulp.task('topbet365.wee.bet', function (done) {
 });
 
 
-gulp.task('jogadamagica.wee.bet', function (done) {
+gulp.task('jmbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "jogadamagica.wee.bet",
+        host: "jmbet.wee.bet",
         banca: "JM BET",
         styles: "",
     });
