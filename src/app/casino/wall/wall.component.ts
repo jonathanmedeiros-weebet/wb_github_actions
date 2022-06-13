@@ -115,6 +115,5 @@ export class WallComponent implements OnInit {
     showDestaques() {
         // @ts-ignore
         this.gameList = this.gameSpaceMan.concat(this.gameDestaquesList);
-        console.log(this.gameList);
     }
 }
