@@ -247,7 +247,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             .subscribe(
                 posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
                 error => {
-                    if (error === 'Não autorizado.') {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();
                     } else {
                         this.handleError(error);
