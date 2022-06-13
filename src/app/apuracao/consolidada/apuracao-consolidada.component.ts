@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, OnChanges} from '@angular/core';
 
-import { RelatorioService, MessageService, ParametrosLocaisService } from './../../services';
+import {RelatorioService, MessageService, ParametrosLocaisService} from './../../services';
 import * as moment from 'moment';
 
 @Component({
@@ -26,7 +26,8 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
         private relatorioService: RelatorioService,
         private messageService: MessageService,
         private params: ParametrosLocaisService
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.modoContaCorrente = this.params.modoContaCorrente();
@@ -61,6 +62,12 @@ export class ApuracaoConsolidadaComponent implements OnInit, OnChanges {
                 this.resultado = parseFloat(result['total_apostado']) + parseFloat(result['cartao']) - parseFloat(result['saque'])
                     - parseFloat(result['total_comissao']) - parseFloat(result['total_premios']);
                 this.showLoading = false;
+            },
+            error => {
+                this.relatorio = [];
+                this.resultado = 0;
+                this.showLoading = false;
+                this.handleError(error);
             }
         );
     }

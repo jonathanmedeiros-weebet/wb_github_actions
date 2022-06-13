@@ -111,7 +111,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
 
     submit() {
         const values = this.form.value;
-        values.nascimento = moment(values.nascimento, 'MMDDYYYY', true).format('YYYY-MM-DD');
+        values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
 
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
