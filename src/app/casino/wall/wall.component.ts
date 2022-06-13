@@ -80,7 +80,7 @@ export class WallComponent implements OnInit {
             return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
         });
         this.gameDestaquesList = games.filter(function(game) {
-            return game.gameID === '1301' || game.gameID === 'vs20doghouse' || game.gameID === 'vswayshammthor' || game.gameID === 'vs20olympgate' || game.gameID === 'vs20olympgate'
+            return game.gameID === 'vs20doghouse' || game.gameID === 'vswayshammthor' || game.gameID === 'vs20olympgate' || game.gameID === 'vs20olympgate'
                 // tslint:disable-next-line:max-line-length
                 || game.gameID === '422' || game.gameID === 'rla' || game.gameID === 'vs243dancingpar' || game.gameID === 'vpa' || game.gameID === '1101' || game.gameID === 'vs1dragon8'
                 // tslint:disable-next-line:max-line-length
