@@ -511,7 +511,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
                 error => {
-                    if (error === 'Não autorizado.') {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();
                     } else {
                         this.handleError(error);
