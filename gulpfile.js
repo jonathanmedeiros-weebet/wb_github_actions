@@ -2172,3 +2172,12 @@ gulp.task('bebet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('equipebet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "equipebet.wee.bet",
+        banca: "EQUIPE BET",
+        styles: "",
+    });
+});

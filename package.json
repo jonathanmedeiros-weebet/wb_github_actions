@@ -235,7 +235,8 @@
         "megabetmg.wee.bet": "gulp megabetmg.wee.bet",
         "topbet365.wee.bet": "gulp topbet365.wee.bet",
         "jmbet.wee.bet": "gulp jmbet.wee.bet",
-        "bebet.bet": "gulp bebet.bet"
+        "bebet.bet": "gulp bebet.bet",
+        "equipebet.wee.bet": "gulp equipebet.wee.bet"
     },
     "private": true,
     "dependencies": {
