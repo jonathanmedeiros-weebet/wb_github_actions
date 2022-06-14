@@ -49,7 +49,7 @@ export class AuthService {
                         this.setIsCliente(true);
                     }
                     this.logadoSource.next(true);
-                    this.router.navigate(['esportes/futebol/jogos']);
+                    // this.router.navigate(['esportes/futebol/jogos']);
                 }),
                 catchError(this.errorService.handleError)
             );

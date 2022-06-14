@@ -3,6 +3,8 @@ import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.serv
 import {AuthService} from './../../services';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import {LoginModalComponent} from '../../shared/layout/modals';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class WallComponent implements OnInit {
     isLoggedIn;
     gameType: string;
     private sub: any;
+    modalRef;
 
     public gameList: [];
     public gameAllList: [];
@@ -29,7 +32,8 @@ export class WallComponent implements OnInit {
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private modalService: NgbModal,
     ) { }
 
     ngOnInit(): void {
@@ -115,5 +119,23 @@ export class WallComponent implements OnInit {
     showDestaques() {
         // @ts-ignore
         this.gameList = this.gameSpaceMan.concat(this.gameDestaquesList);
+    }
+
+    abrirModalLogin() {
+        this.modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                },
+                reason => {
+                }
+            );
     }
 }
