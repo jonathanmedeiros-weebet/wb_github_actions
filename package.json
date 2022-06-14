@@ -235,7 +235,10 @@
         "topbet365.wee.bet": "gulp topbet365.wee.bet",
         "jmbet.wee.bet": "gulp jmbet.wee.bet",
         "bebet.bet": "gulp bebet.bet",
-        "equipebet.wee.bet": "gulp equipebet.wee.bet"
+        "equipebet.wee.bet": "gulp equipebet.wee.bet",
+        "bets60.wee.bet": "gulp bets60.wee.bet",
+        "globbet.com.br": "gulp globbet.com.br",
+        "betworld.wee.bet": "gulp betworld.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -2172,3 +2172,30 @@ gulp.task('equipebet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bets60.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bets60.wee.bet",
+        banca: "BETS 60",
+        styles: "",
+    });
+});
+
+gulp.task('globbet.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "globbet.com.br",
+        banca: "GLOB BET",
+        styles: "",
+    });
+});
+
+gulp.task('betworld.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betworld.wee.bet",
+        banca: "BET WORLD",
+        styles: "",
+    });
+});
