@@ -58,6 +58,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
     createForm() {
         this.form = this.fb.group({
+            casino: [true],
             username: ['', Validators.compose([Validators.required])],
             password: [
                 '',
