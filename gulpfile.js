@@ -1925,15 +1925,6 @@ gulp.task('gestorbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('grupolightsport.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "grupolightsport.wee.bet",
-        banca: "GRUPO LIGHT SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('fanaticosbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
