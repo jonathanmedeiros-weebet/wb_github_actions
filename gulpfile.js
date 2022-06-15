@@ -2199,3 +2199,12 @@ gulp.task('betworld.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('premiosbet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "premiosbet.net",
+        banca: "PRÊMIOS BET",
+        styles: "",
+    });
+});
