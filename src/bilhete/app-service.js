@@ -18,7 +18,7 @@ async function getParams() {
     }
 }
 
-async function getTicketData({apiUrl, ticketId}) {
+async function getTicketData({ apiUrl, ticketId }) {
     try {
         const request = await fetch(`//${apiUrl}/api/apostas-por-codigo/${ticketId}`);
         const bet = await request.json();
@@ -86,7 +86,7 @@ async function getLiveItems(items) {
         const request = await fetch(`https://center6.wee.bet/v1/resultados/live`, {
             method: "POST",
             body: JSON.stringify(items),
-            headers: {"Content-type": "application/json; charset=UTF-8"}
+            headers: { "Content-type": "application/json; charset=UTF-8" }
         });
 
         const results = await request.json();
@@ -120,28 +120,28 @@ function followLive(liveItems) {
     });
 
     let liveInterval = setInterval(async () => {
-            liveItems = checkLiveItemsPeriod(liveItems);
-            this.getLiveItems(liveItems).then(async (liveResults) => {
-                var hasLiveItem = false;
-                if (liveResults && liveResults.result.length) {
-                    liveResults.result.forEach((game) => {
-                        let live = game.live_results;
-                        if (live && live.stats.casa !== undefined) {
-                            if (!hasLiveItem) {
-                                hasLiveItem = true;
-                            }
-                            this.updateLiveItem(game.jogo_api_id, live);
-                        } else {
-                            this.hideLiveFlag(game.jogo_api_id);
+        liveItems = checkLiveItemsPeriod(liveItems);
+        this.getLiveItems(liveItems).then(async (liveResults) => {
+            var hasLiveItem = false;
+            if (liveResults && liveResults.result.length) {
+                liveResults.result.forEach((game) => {
+                    let live = game.live_results;
+                    if (live && live.stats.casa !== undefined) {
+                        if (!hasLiveItem) {
+                            hasLiveItem = true;
                         }
-                    });
-                }
+                        this.updateLiveItem(game.jogo_api_id, live);
+                    } else {
+                        this.hideLiveFlag(game.jogo_api_id);
+                    }
+                });
+            }
 
-                if (!hasLiveItem) {
-                    clearInterval(liveInterval);
-                }
-            });
-        }, 60000
+            if (!hasLiveItem) {
+                clearInterval(liveInterval);
+            }
+        });
+    }, 60000
     );
 
 }
