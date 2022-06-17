@@ -166,8 +166,12 @@ function filterLiveItems(ticketItems, itemsWithResults) {
 }
 
 function checkMatchPeriod(startMatchTimestamp, matchTime = 120) {
-    var currentTime = new Date().getTime();
+    var today = new Date();
     var itemEndTime = startMatchTimestamp + (matchTime * 60000);
+
+    var currentTime = new Date(today.toLocaleString('en-US', {
+        timeZone: 'America/Recife',
+    })).getTime();
 
     return (startMatchTimestamp <= currentTime) && (currentTime <= itemEndTime);
 }
