@@ -4,10 +4,13 @@
     min-height: 40px;
     background-color: #181818;
     box-shadow: 0px -4px 0px var(--highlight) inset;
+    justify-content: center;
 }
 
 .submenu {
-
+    display: flex;
+    max-width: calc(100% - 480px);
+    overflow-x: hidden;
 }
 
 .submenu a {
