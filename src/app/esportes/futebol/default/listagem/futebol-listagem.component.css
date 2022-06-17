@@ -93,6 +93,10 @@
     max-height: 20px;
 }
 
+.flag-icon {
+    margin-top: 5px;
+}
+
 .horario-listagem {
     border-radius: 5px;
     padding: 0 5px;

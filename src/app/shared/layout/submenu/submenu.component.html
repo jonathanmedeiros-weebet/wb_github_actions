@@ -1,0 +1,8 @@
+<nav class="submenu" *ngIf="active">
+    <div class="subcategory" *ngFor="let item of submenuItems">
+        <a routerLink="{{item.link}}" routerLinkActive="active">
+            <i class="{{item.icon_class}}"></i>
+            <span>{{item.name}}</span>
+        </a>
+    </div>
+</nav>

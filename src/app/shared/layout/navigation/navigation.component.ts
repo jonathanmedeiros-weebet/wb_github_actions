@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { Event as NavigationEvent, NavigationEnd, Router } from '@angular/router';
 import { state, style, trigger } from '@angular/animations';
 
@@ -46,6 +46,7 @@ import { RegioesDestaqueService } from '../../services/regioes-destaque.service'
     ]
 })
 export class NavigationComponent implements OnInit {
+    @Input() headerHeight = 92;
     hoje = moment();
     amanha = moment().add(1, 'd');
     dias = [];
@@ -151,7 +152,7 @@ export class NavigationComponent implements OnInit {
 
                 setTimeout(e => {
                     const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
-                    const altura = window.innerHeight - (alturaMenuFixo + 15);
+                    const altura = window.innerHeight - (alturaMenuFixo + this.headerHeight);
                     const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
                     this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
                     this.cd.detectChanges();

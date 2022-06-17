@@ -1,5 +1,40 @@
 <header [@openClose]="isOpen ? 'open' : 'closed'">
-    <!-- Fixed navbar -->
+    <div class="side">
+        <a class="" [routerLink]="['/esportes/futebol/jogos']">
+            <img [src]="LOGO">
+        </a>
+    </div>
+    <nav>
+        <div class="category" >
+            <a [routerLink]="['/esportes']" routerLinkActive="active">
+                <span>ESPORTES</span>
+            </a>
+        </div>
+        <div class="category" >
+            <a [routerLink]="['/casino']" routerLinkActive="active">
+                <span>CASSINO</span>
+            </a>
+        </div>
+        <div class="category" >
+            <a [routerLink]="['/desafios']" routerLinkActive="active">
+                <span>DESAFIO</span>
+            </a>
+        </div>
+        <div class="category" >
+            <a [routerLink]="['/acumuladao']" routerLinkActive="active">
+                <span>ACUMULADÃO</span>
+            </a>
+        </div>
+        <div class="category" >
+            <a [routerLink]="['/loterias']" routerLinkActive="active">
+                <span>LOTERIA</span>
+            </a>
+        </div>
+    </nav>
+    <div class="side">
+        casa
+    </div>
+    <!-- Fixed navbar
     <nav class="navbar-mobile navbar navbar-expand-custom navbar-dark">
         <div class="logo-mobile">
             <a class="" [routerLink]="['/esportes/futebol/jogos']">
@@ -285,5 +320,5 @@
                 </ul>
             </div>
         </ng-template>
-    </div>
+    </div> -->
 </header>

@@ -93,7 +93,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                     altura = window.innerHeight - 98;
                     scrollHeight = this.contentSportsEl.scrollHeight - 90;
                 } else {
-                    altura = window.innerHeight - 46;
+                    altura = window.innerHeight - 132;
                     scrollHeight = this.contentSportsEl.scrollHeight;
                 }
                 if (scrollHeight <= altura) {
@@ -113,7 +113,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const altura = window.innerHeight - 132;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }

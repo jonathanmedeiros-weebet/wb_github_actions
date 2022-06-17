@@ -1,5 +1,6 @@
 #futebol-default-wrapper{
     background-color: #e1e2e4;
+    max-height: calc(100vh - 132);
 }
 
 .exibir-mais{

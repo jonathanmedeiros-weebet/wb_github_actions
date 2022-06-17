@@ -124,7 +124,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const altura = window.innerHeight - 132;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');

@@ -32,6 +32,10 @@ import { NgxMaskModule } from 'ngx-mask';
 import { NgbAlertModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuFooterComponent } from './menu-footer/menu-footer.component';
 import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esportivo.component';
+import { SportLayoutComponent } from './app-layouts/sport-layout.component';
+import { PagesLayoutComponent } from './app-layouts/pages-layout.component';
+import { SubmenuComponent } from './submenu/submenu.component';
+import { LoteriaLayoutComponent } from './app-layouts/loteria-layout.component';
 
 @NgModule({
     imports: [
@@ -75,7 +79,11 @@ import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esport
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,
         MenuFooterComponent,
-        BilheteEsportivoComponent
+        BilheteEsportivoComponent,
+        SportLayoutComponent,
+        PagesLayoutComponent,
+        SubmenuComponent,
+        LoteriaLayoutComponent
     ],
     exports: [
         MainLayoutComponent,

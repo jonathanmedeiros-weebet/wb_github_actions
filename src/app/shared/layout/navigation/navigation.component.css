@@ -1,11 +1,11 @@
 #sidebar-wrapper {
-    width: 255px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    width: 270px;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
     background: var(--sidebar-left);
-    z-index: 1000;
+    /*z-index: 1000;*/
 }
 
 #sidebar-wrapper a {
@@ -24,11 +24,10 @@
 
 .sidebar-menu {
     position: relative;
-    position: relative;
     display: flex;
-    padding: 0 15px;
-    margin: 15px 0px 15px 0px;
+    padding: 15px;
     flex-wrap: wrap;
+    margin: 0;
 }
 
 .sidebar-menu li {
@@ -46,20 +45,21 @@
     align-items: center;
 }
 
-.sidebar-brand {
-    text-align: center;
-    margin-top: 15px;
-}
+/*.sidebar-brand {*/
+/*    text-align: center;*/
+/*    margin-top: 15px;*/
+/*}*/
 
-.sidebar-brand img {
-    max-height: 120px;
-    max-width: 200px;
-}
+/*.sidebar-brand img {*/
+/*    max-height: 120px;*/
+/*    max-width: 200px;*/
+/*}*/
 
 .sidebar-nav {
     background-color: var(--sidebar-left);
     padding: 0;
-    overflow: auto;
+    margin: 0;
+    overflow: scroll;
 }
 
 .sidebar-nav .regiao:last-of-type,

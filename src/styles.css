@@ -18,8 +18,22 @@ html {
 html,
 body {
     color: #1e282c;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
+
+.base-container {
+    display: flex;
+}
+
+.base-container main {
+    width: 100%;
+    /*max-height: calc(100vh - 132px);*/
+}
+
+/*.base-container main .sport {*/
+/*    width: 100%;*/
+/*    max-height: calc(100vh - 132px);*/
+/*}*/
 
 header {
     background-color: var(--header);
@@ -62,15 +76,16 @@ header {
 }
 
 #default-content {
-    padding: 20px 15px 20px 270px;
-    height: calc(100vh - 45px);
+    padding: 20px 15px 20px 15px;
+    height: calc(100vh - 92px);
     background: #fff;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
 .content-sports {
-    overflow: auto;
+    overflow: scroll;
+    padding-bottom: 10px;
 }
 
 .footer {
@@ -342,7 +357,7 @@ button {
 }
 
 .loteria-content {
-    padding: 0 0 0 255px;
+    padding: 0;
 }
 
 .loteria-content .card {

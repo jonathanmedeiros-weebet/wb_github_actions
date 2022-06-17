@@ -1,13 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService } from './../../../services';
-import { Usuario } from './../../../models';
-import { config } from './../../config';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../base-form/base-form.component';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
+import {Usuario} from './../../../models';
+import {config} from './../../config';
 
 @Component({
     selector: 'app-header',
@@ -31,7 +31,7 @@ import { config } from './../../config';
     ]
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
-    @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    // @ViewChild('scrollMenu') scrollMenu: ElementRef;
     basqueteHabilitado = false;
     combateHabilitado = false;
     esportsHabilitado = false;
@@ -68,18 +68,18 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     leftDisabled = true;
     unsub$ = new Subject();
 
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        if (window.innerWidth > 1025) {
-            this.menuWidth = window.innerWidth - (250 + 280);
-        } else {
-            this.menuWidth = window.innerWidth;
-        }
+    // @HostListener('window:resize', ['$event'])
+    // onResize(event) {
+    //     if (window.innerWidth > 1025) {
+    //         this.menuWidth = window.innerWidth - (250 + 280);
+    //     } else {
+    //         this.menuWidth = window.innerWidth;
+    //     }
 
-        this.cd.detectChanges();
+    //     this.cd.detectChanges();
 
-        this.checkScrollButtons();
-    }
+    //     this.checkScrollButtons();
+    // }
 
     constructor(
         private fb: FormBuilder,
@@ -154,46 +154,46 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngAfterViewInit() {
-        this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+        // this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
+        // this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
 
-        this.checkScrollButtons();
+        // this.checkScrollButtons();
     }
 
-    checkScrollButtons() {
-        if (this.menuWidth >= this.scrollWidth) {
-            this.rightDisabled = true;
-            this.leftDisabled = true;
-        } else {
-            this.rightDisabled = false;
-        }
+    // checkScrollButtons() {
+    //     if (this.menuWidth >= this.scrollWidth) {
+    //         this.rightDisabled = true;
+    //         this.leftDisabled = true;
+    //     } else {
+    //         this.rightDisabled = false;
+    //     }
 
-        this.cd.detectChanges();
-    }
+    //     this.cd.detectChanges();
+    // }
 
-    scrollLeft() {
-        this.scrollMenu.nativeElement.scrollLeft -= 200;
-    }
+    // scrollLeft() {
+    //     this.scrollMenu.nativeElement.scrollLeft -= 200;
+    // }
 
-    scrollRight() {
-        this.scrollMenu.nativeElement.scrollLeft += 200;
-    }
+    // scrollRight() {
+    //     this.scrollMenu.nativeElement.scrollLeft += 200;
+    // }
 
-    onScroll(event) {
-        let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
+    // onScroll(event) {
+    //     let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
 
-        if (scrollLeft <= 0) {
-            this.leftDisabled = true;
-        } else {
-            this.leftDisabled = false;
-        }
+    //     if (scrollLeft <= 0) {
+    //         this.leftDisabled = true;
+    //     } else {
+    //         this.leftDisabled = false;
+    //     }
 
-        if ((this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0) {
-            this.rightDisabled = true;
-        } else {
-            this.rightDisabled = false;
-        }
-    }
+    //     if ((this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0) {
+    //         this.rightDisabled = true;
+    //     } else {
+    //         this.rightDisabled = false;
+    //     }
+    // }
 
     createForm() {
         this.form = this.fb.group({

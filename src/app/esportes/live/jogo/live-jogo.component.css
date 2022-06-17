@@ -175,10 +175,6 @@
     .nome img {
         width: 40px;
     }
-
-    .content-sports {
-        padding-bottom: 100px;
-    }
 }
 
 @media only screen and (max-width: 1024px) {

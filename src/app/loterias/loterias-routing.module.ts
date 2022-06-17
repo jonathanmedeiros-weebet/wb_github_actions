@@ -4,17 +4,29 @@ import { Routes, RouterModule } from '@angular/router';
 import { SeninhaComponent } from './seninha/seninha.component';
 import { QuininhaComponent } from './quininha/quininha.component';
 import { QuininhaGuard, SeninhaGuard } from './../services';
+import { LoteriaLayoutComponent } from '../shared/layout/app-layouts/loteria-layout.component';
 
 export const routes: Routes = [
     {
-        path: 'seninha',
-        component: SeninhaComponent,
-        canActivate: [SeninhaGuard]
-    },
-    {
-        path: 'quininha',
-        component: QuininhaComponent,
-        canActivate: [QuininhaGuard]
+        path: '',
+        component: LoteriaLayoutComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'seninha',
+                pathMatch: 'full'
+            },
+            {
+                path: 'seninha',
+                component: SeninhaComponent,
+                canActivate: [SeninhaGuard]
+            },
+            {
+                path: 'quininha',
+                component: QuininhaComponent,
+                canActivate: [QuininhaGuard]
+            }
+        ]
     }
 ];
 
