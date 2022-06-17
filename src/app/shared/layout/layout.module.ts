@@ -36,6 +36,8 @@ import { SportLayoutComponent } from './app-layouts/sport-layout.component';
 import { PagesLayoutComponent } from './app-layouts/pages-layout.component';
 import { SubmenuComponent } from './submenu/submenu.component';
 import { LoteriaLayoutComponent } from './app-layouts/loteria-layout.component';
+import { DesafioLayoutComponent } from './app-layouts/desafio-layout.component';
+import { AcumuladaoLayoutComponent } from './app-layouts/acumuladao-layout.component';
 
 @NgModule({
     imports: [
@@ -83,7 +85,9 @@ import { LoteriaLayoutComponent } from './app-layouts/loteria-layout.component';
         SportLayoutComponent,
         PagesLayoutComponent,
         SubmenuComponent,
-        LoteriaLayoutComponent
+        LoteriaLayoutComponent,
+        DesafioLayoutComponent,
+        AcumuladaoLayoutComponent
     ],
     exports: [
         MainLayoutComponent,

@@ -116,20 +116,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
-        this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
-        this.combateHabilitado = this.paramsService.getOpcoes().combate;
-        this.esportsHabilitado = this.paramsService.getOpcoes().esports;
-        this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
-        this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
-        this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
-        this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
-        this.voleiHabilitado = this.paramsService.getOpcoes().volei;
-        this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
-        this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
-        this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
+        this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
+        this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
 
         if (window.innerWidth <= 1024) {
