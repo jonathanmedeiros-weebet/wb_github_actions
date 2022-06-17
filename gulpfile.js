@@ -1671,15 +1671,6 @@ gulp.task('xbetsports.net', function (done) {
     });
 });
 
-gulp.task('goldenbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "goldenbet.wee.bet",
-        banca: "GOLDEN BET",
-        styles: "",
-    });
-});
-
 gulp.task('realbets.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1739,15 +1730,6 @@ gulp.task('flsesportes.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "flsesportes.wee.bet",
         banca: "FLS ESPORTES",
-        styles: "",
-    });
-});
-
-gulp.task('betcoin.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betcoin.wee.bet",
-        banca: "BET COIN",
         styles: "",
     });
 });
