@@ -2176,7 +2176,7 @@ gulp.task('premiosbet.net', function (done) {
 gulp.task('lincesports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "lincesports.net",
+        host: "lincesports.wee.bet",
         banca: "LINCE SPORTS",
         styles: "",
     });
