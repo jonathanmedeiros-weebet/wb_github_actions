@@ -1880,29 +1880,11 @@ gulp.task('sportbec.online', function (done) {
     });
 });
 
-gulp.task('pocofundobet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "pocofundobet.wee.bet",
-        banca: "POÇO FUNDO BET",
-        styles: "",
-    });
-});
-
 gulp.task('lancesports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "lancesports.wee.bet",
         banca: "LANCE SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('gestorbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "gestorbet.wee.bet",
-        banca: "GESTOR BET",
         styles: "",
     });
 });
@@ -2187,6 +2169,15 @@ gulp.task('premiosbet.net', function (done) {
         server: "front2.wee.bet",
         host: "premiosbet.net",
         banca: "PRÊMIOS BET",
+        styles: "",
+    });
+});
+
+gulp.task('lincesports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "lincesports.net",
+        banca: "LINCE SPORTS",
         styles: "",
     });
 });

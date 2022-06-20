@@ -204,9 +204,7 @@
         "jocabets.bet": "gulp jocabets.bet",
         "palpitesportbet.net": "gulp palpitesportbet.net",
         "sportbec.online": "gulp sportbec.online",
-        "pocofundobet.wee.bet": "gulp pocofundobet.wee.bet",
         "lancesports.wee.bet": "gulp lancesports.wee.bet",
-        "gestorbet.wee.bet": "gulp gestorbet.wee.bet",
         "fanaticosbet.wee.bet": "gulp fanaticosbet.wee.bet",
         "apostamais.bet": "gulp apostamais.bet",
         "betceara.net": "gulp betceara.net",
@@ -237,7 +235,8 @@
         "bets60.wee.bet": "gulp bets60.wee.bet",
         "globbet.com.br": "gulp globbet.com.br",
         "betworld.wee.bet": "gulp betworld.wee.bet",
-        "premiosbet.net": "gulp premiosbet.net"
+        "premiosbet.net": "gulp premiosbet.net",
+        "lincesports.wee.bet": "gulp betworld.wee.bet"
     },
     "private": true,
     "dependencies": {
