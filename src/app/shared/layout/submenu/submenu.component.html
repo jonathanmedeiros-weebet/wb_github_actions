@@ -1,10 +1,18 @@
 <div class="submenu-container">
-    <nav class="submenu" *ngIf="active">
+    <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
+         [ngClass]="{'centered': centered}"
+         (scroll)="onScroll($event)" #scrollMenu>
+        <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
+            <i class="fa fa-angle-left fa-left"></i>
+        </div>
         <div class="subcategory" *ngFor="let item of submenuItems">
             <a routerLink="{{item.link}}" routerLinkActive="active">
                 <i class="{{item.icon_class}}"></i>
                 <span>{{item.name}}</span>
             </a>
+        </div>
+        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
+            <i class="fa fa-angle-right fa-right"></i>
         </div>
     </nav>
 </div>

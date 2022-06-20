@@ -32,18 +32,9 @@ import {config} from './../../config';
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     // @ViewChild('scrollMenu') scrollMenu: ElementRef;
-    basqueteHabilitado = false;
-    combateHabilitado = false;
-    esportsHabilitado = false;
     loteriasHabilitado = false;
-    aoVivoHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
-    futsalHabilitado = false;
-    voleiHabilitado = false;
-    tenisHabilitado = false;
-    futebolAmericanoHabilitado = false;
-    hoqueiGeloHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,

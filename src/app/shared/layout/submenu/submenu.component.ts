@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
 @Component({
@@ -6,14 +6,36 @@ import {ParametrosLocaisService} from '../../services/parametros-locais.service'
     templateUrl: './submenu.component.html',
     styleUrls: ['./submenu.component.css'],
 })
-export class SubmenuComponent implements OnInit {
+export class SubmenuComponent implements OnInit, AfterViewInit {
     @Input() active = true;
     @Input() category = 'esporte';
+    @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    menuWidth;
+    clienteWidth;
+    scrollWidth;
+    rightDisabled = false;
+    leftDisabled = true;
+    centered = false;
 
     submenuItems = [];
     submenu = [];
 
-    constructor(private paramsService: ParametrosLocaisService) {
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.cd.detectChanges();
+        if (window.innerWidth > 1024) {
+            this.menuWidth = window.innerWidth - 480;
+        } else {
+            this.menuWidth = window.innerWidth;
+
+        }
+        this.checkScrollButtons();
+    }
+
+    constructor(
+        private paramsService: ParametrosLocaisService,
+        private cd: ChangeDetectorRef
+    ) {
     }
 
     ngOnInit() {
@@ -38,6 +60,20 @@ export class SubmenuComponent implements OnInit {
                 icon_class: 'wbicon icon-futsal',
                 category: 'esporte',
                 active: this.paramsService.getOpcoes().futsal
+            },
+            {
+                name: 'Vôlei',
+                link: '/esportes/volei',
+                icon_class: 'wbicon icon-volei',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().volei
+            },
+            {
+                name: 'Basquete',
+                link: '/esportes/basquete',
+                icon_class: 'wbicon icon-basquete',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().basquete
             },
             {
                 name: 'Combate',
@@ -75,20 +111,6 @@ export class SubmenuComponent implements OnInit {
                 active: this.paramsService.getOpcoes().tenis
             },
             {
-                name: 'Vôlei',
-                link: '/esportes/volei',
-                icon_class: 'wbicon icon-volei',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().volei
-            },
-            {
-                name: 'Basquete',
-                link: '/esportes/basquete',
-                icon_class: 'wbicon icon-basquete',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().basquete
-            },
-            {
                 name: 'Seninha',
                 link: '/loterias/seninha',
                 icon_class: 'wbicon icon-basquete',
@@ -107,5 +129,46 @@ export class SubmenuComponent implements OnInit {
         this.submenuItems = this.submenu.filter((item) => {
             return item.category === this.category && item.active;
         });
+
+        if (window.innerWidth > 1024) {
+            this.menuWidth = window.innerWidth - 480;
+        } else {
+            this.menuWidth = window.innerWidth;
+        }
+    }
+
+    ngAfterViewInit() {
+        this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
+        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+
+        this.checkScrollButtons();
+    }
+
+    checkScrollButtons() {
+        this.cd.detectChanges();
+        if (this.menuWidth >= this.scrollWidth) {
+            this.rightDisabled = true;
+            this.leftDisabled = true;
+        } else {
+            this.rightDisabled = false;
+        }
+
+        this.centered = this.rightDisabled && this.leftDisabled;
+    }
+
+    scrollLeft() {
+        this.scrollMenu.nativeElement.scrollLeft -= 200;
+    }
+
+    scrollRight() {
+        this.scrollMenu.nativeElement.scrollLeft += 200;
+    }
+
+    onScroll(event) {
+        let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
+
+        this.leftDisabled = scrollLeft <= 0;
+
+        this.rightDisabled = (this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0;
     }
 }
