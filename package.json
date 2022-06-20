@@ -236,7 +236,7 @@
         "globbet.com.br": "gulp globbet.com.br",
         "betworld.wee.bet": "gulp betworld.wee.bet",
         "premiosbet.net": "gulp premiosbet.net",
-        "lincesports.wee.bet": "gulp betworld.wee.bet"
+        "lincesports.wee.bet": "gulp lincesports.wee.bet"
     },
     "private": true,
     "dependencies": {
