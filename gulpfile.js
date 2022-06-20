@@ -1346,17 +1346,6 @@ gulp.task('gamez.bet', function (done) {
     });
 });
 
-gulp.task('lucksport.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "lucksport.bet",
-        banca: "LUCK SPORT",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/CzzL1XQ5aZ' async></script>"
-    });
-});
-
 gulp.task('sportourodomexico.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
