@@ -129,6 +129,26 @@
                         </div>
                     </fieldset>
                     <fieldset>
+                        <h5><b>Informações de Afiliado</b></h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label">Nome</label>
+                                    <input type="text" formControlName="afiliado_nome" class="form-control">
+                                    <app-error-msg [control]="form.get('afiliado_nome')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="col col-md-8">
+                                <div class="form-group">
+                                    <label class="label">Código</label>
+                                    <input type="text" formControlName="afiliado_codigo" class="form-control">
+                                    <app-error-msg [control]="form.get('afiliado_codigo')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
                         <h5><b>PIX</b></h5>
                         <hr>
                         <div class="row">

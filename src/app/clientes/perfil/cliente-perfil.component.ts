@@ -60,6 +60,14 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             chave_pix: cliente.chave_pix
                         }
                     );
+                    if (cliente.afiliado !== null) {
+                        this.form.patchValue(
+                            {
+                                afiliado_nome: cliente.afiliado.nome,
+                                afiliado_codigo: cliente.afiliado.codigo
+                            }
+                        );
+                    }
                     if (cliente.endereco) {
                         const endereco: Endereco = cliente.endereco;
                         if (endereco.estado && endereco.cidade) {
@@ -111,6 +119,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             cidade: ['0', Validators.required],
             estado: ['0', Validators.required],
             cep: ['', Validators.required],
+            afiliado_nome: [{value: '', disabled: true}],
+            afiliado_codigo: [''],
             chave_pix: [''],
             senha_atual: [null, Validators.required]
         });

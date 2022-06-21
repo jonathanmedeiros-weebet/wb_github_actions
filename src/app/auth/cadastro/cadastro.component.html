@@ -107,6 +107,15 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="form-group">
+                            <label class="label">Código de Afiliado</label>
+                            <input class="form-control" type="text" formControlName="afiliado">
+                            <app-error-msg [control]="form.get('afiliado')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col col-md-12 mt-3">
                         <label>
                             <input type="checkbox" formControlName="aceitar_termos">
