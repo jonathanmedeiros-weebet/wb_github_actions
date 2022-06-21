@@ -48,7 +48,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
-            let altura = window.innerHeight - 97;
+            let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
@@ -85,7 +85,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         let altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 235;
+            altura -= 284;
         } else {
             altura -= 227;
         }

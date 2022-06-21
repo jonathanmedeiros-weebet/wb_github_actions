@@ -58,6 +58,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     rightDisabled = false;
     leftDisabled = true;
     unsub$ = new Subject();
+    isMobile = false;
 
     // @HostListener('window:resize', ['$event'])
     // onResize(event) {
@@ -126,8 +127,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         if (window.innerWidth > 1025) {
             this.menuWidth = window.innerWidth - (250 + 280);
+            this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
+            this.isMobile = true;
         }
     }
 

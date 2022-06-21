@@ -11,11 +11,11 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     @Input() category = 'esporte';
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     menuWidth;
-    clienteWidth;
     scrollWidth;
     rightDisabled = false;
     leftDisabled = true;
     centered = false;
+    isMobile = true;
 
     submenuItems = [];
     submenu = [];
@@ -25,8 +25,10 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         this.cd.detectChanges();
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 480;
+            this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
+            this.isMobile = true;
 
         }
         this.checkScrollButtons();
@@ -132,20 +134,20 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 480;
+            this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
+            this.isMobile = true;
         }
     }
 
     ngAfterViewInit() {
-        this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
         this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
 
         this.checkScrollButtons();
     }
 
     checkScrollButtons() {
-        this.cd.detectChanges();
         if (this.menuWidth >= this.scrollWidth) {
             this.rightDisabled = true;
             this.leftDisabled = true;
@@ -154,6 +156,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         }
 
         this.centered = this.rightDisabled && this.leftDisabled;
+        this.cd.detectChanges();
     }
 
     scrollLeft() {
@@ -169,6 +172,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
         this.leftDisabled = scrollLeft <= 0;
 
-        this.rightDisabled = (this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0;
+        this.rightDisabled = (this.scrollWidth - (scrollLeft + this.menuWidth)) <= 0;
     }
 }

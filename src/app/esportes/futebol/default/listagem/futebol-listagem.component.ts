@@ -159,7 +159,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 132;
+        const headerHeight = this.mobileScreen ? 145 : 132;
+        const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }

@@ -21,6 +21,9 @@ import { NgxMaskModule } from 'ngx-mask';
         SharedModule,
         NgxMaskModule.forRoot()
     ],
+    exports: [
+        DesafiosBilheteComponent
+    ],
     providers: [
         DesafioService,
         DesafioCategoriaService,

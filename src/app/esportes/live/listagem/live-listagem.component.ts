@@ -26,6 +26,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     minutoEncerramentoAoVivo = 0;
     jogosBloqueados;
     unsub$ = new Subject();
+    mobileScreen = false;
 
     constructor(
         private messageService: MessageService,
@@ -38,6 +39,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     ngOnInit() {
         this.liveService.entrarSalaEventos();
+        this.mobileScreen = window.innerWidth <= 1024;
+
         this.definindoAlturas();
 
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
@@ -104,7 +107,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     definindoAlturas() {
-        const altura = window.innerHeight - 132;
+        const headerHeight = this.mobileScreen ? 145 : 132;
+        const altura = window.innerHeight - headerHeight;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');

@@ -4,32 +4,8 @@
             <img [src]="LOGO" class="logo">
         </a>
     </div>
-    <nav>
-        <div class="category">
-            <a [routerLink]="['/esportes']" routerLinkActive="active">
-                <span>ESPORTES</span>
-            </a>
-        </div>
-<!--        <div class="category">-->
-<!--            <a [routerLink]="['/casino']" routerLinkActive="active">-->
-<!--                <span>CASSINO</span>-->
-<!--            </a>-->
-<!--        </div>-->
-        <div class="category" *ngIf="desafioHabilitado">
-            <a [routerLink]="['/desafios']" routerLinkActive="active">
-                <span>DESAFIO</span>
-            </a>
-        </div>
-        <div class="category" *ngIf="acumuladaoHabilitado">
-            <a [routerLink]="['/acumuladao']" routerLinkActive="active">
-                <span>ACUMULADÃO</span>
-            </a>
-        </div>
-        <div class="category" *ngIf="loteriasHabilitado && (seninhaAtiva || quininhaAtiva)">
-            <a [routerLink]="['/loterias']" routerLinkActive="active">
-                <span>LOTERIA</span>
-            </a>
-        </div>
+    <nav class="desktop" *ngIf="!isMobile">
+        <ng-container *ngTemplateOutlet="menu"></ng-container>
     </nav>
     <div class="side">
         casa
@@ -322,3 +298,34 @@
         </ng-template>
     </div> -->
 </header>
+<nav class="mobile" *ngIf="isMobile">
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+</nav>
+
+<ng-template #menu>
+    <div class="category">
+        <a [routerLink]="['/esportes']" routerLinkActive="active">
+            <span>ESPORTES</span>
+        </a>
+    </div>
+    <!--        <div class="category">-->
+    <!--            <a [routerLink]="['/casino']" routerLinkActive="active">-->
+    <!--                <span>CASSINO</span>-->
+    <!--            </a>-->
+    <!--        </div>-->
+    <div class="category" *ngIf="desafioHabilitado">
+        <a [routerLink]="['/desafios']" routerLinkActive="active">
+            <span>DESAFIO</span>
+        </a>
+    </div>
+    <div class="category" *ngIf="acumuladaoHabilitado">
+        <a [routerLink]="['/acumuladao']" routerLinkActive="active">
+            <span>ACUMULADÃO</span>
+        </a>
+    </div>
+    <div class="category" *ngIf="loteriasHabilitado && (seninhaAtiva || quininhaAtiva)">
+        <a [routerLink]="['/loterias']" routerLinkActive="active">
+            <span>LOTERIA</span>
+        </a>
+    </div>
+</ng-template>

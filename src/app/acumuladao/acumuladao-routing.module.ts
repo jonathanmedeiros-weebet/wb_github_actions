@@ -4,12 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { AcumuladaoWrapperComponent } from './acumuladao-wrapper/acumuladao-wrapper.component';
 import { AcumuladaoListagemComponent } from './acumuladao-listagem/acumuladao-listagem.component';
 import { AcumuladaoFormComponent } from './acumuladao-form/acumuladao-form.component';
+import {AcumuladaoLayoutComponent} from '../shared/layout/app-layouts/acumuladao-layout.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: AcumuladaoWrapperComponent,
+        component: AcumuladaoLayoutComponent,
         children: [
+            {
+                path: '',
+                redirectTo: 'listagem',
+                pathMatch: 'full'
+            },
             {
                 path: 'listagem',
                 component: AcumuladaoListagemComponent

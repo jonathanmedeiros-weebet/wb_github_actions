@@ -53,7 +53,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
@@ -113,7 +113,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 132;
+        const headerHeight = this.mobileScreen ? 145 : 132;
+        const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
