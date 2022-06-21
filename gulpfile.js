@@ -1705,15 +1705,6 @@ gulp.task('amigos.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsesporte.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betsesporte.com",
-        banca: "BETS ESPORTE",
-        styles: "",
-    });
-});
-
 gulp.task('flsesportes.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2167,6 +2158,15 @@ gulp.task('lincesports.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "lincesports.wee.bet",
         banca: "LINCE SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('pixsportbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pixsportbet.com",
+        banca: "PIX SPORT BET",
         styles: "",
     });
 });

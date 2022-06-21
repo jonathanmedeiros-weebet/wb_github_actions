@@ -185,7 +185,6 @@
         "betsnordeste.wee.bet": "gulp betsnordeste.wee.bet",
         "sportbrasilvip.com": "gulp sportbrasilvip.com",
         "amigos.wee.bet": "gulp amigos.wee.bet",
-        "betsesporte.com": "gulp betsesporte.com",
         "flsesportes.wee.bet": "gulp flsesportes.wee.bet",
         "pixoubet.com": "gulp pixoubet.com",
         "dobowxbet.wee.bet": "gulp dobowxbet.wee.bet",
@@ -235,7 +234,8 @@
         "globbet.com.br": "gulp globbet.com.br",
         "betworld.wee.bet": "gulp betworld.wee.bet",
         "premiosbet.net": "gulp premiosbet.net",
-        "lincesports.wee.bet": "gulp lincesports.wee.bet"
+        "lincesports.wee.bet": "gulp lincesports.wee.bet",
+        "pixsportbet.com": "gulp pixsportbet.com"
     },
     "private": true,
     "dependencies": {
