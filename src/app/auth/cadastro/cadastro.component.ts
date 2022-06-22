@@ -64,7 +64,6 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
             genero: ['', [Validators.required]],
-            afiliado: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]]
         }, {validator: PasswordValidation.MatchPassword});
     }
