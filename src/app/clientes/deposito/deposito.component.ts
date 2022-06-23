@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-deposito',
@@ -26,15 +26,15 @@ export class DepositoComponent implements OnInit, OnDestroy {
         this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
 
         if (!this.hasMpToken && this.whatsapp) {
-            this.modalidade = "whatsapp";
+            this.modalidade = 'whatsapp';
         } else {
-            this.modalidade = "pix";
+            this.modalidade = 'pix';
         }
 
         this.menuFooterService.setIsPagina(true);
     }
 
-    selecionarModalide(modalide){
+    selecionarModalidade(modalide) {
         this.modalidade = modalide;
     }
 

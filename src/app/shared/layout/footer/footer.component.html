@@ -1,5 +1,64 @@
-<footer class="footer">
+<footer>
     <div class="container">
-        <span class="text-muted">{{BANCA_NOME}} ©</span>
+        <div class="logo">
+            <p>
+                <a class="" [routerLink]="['/esportes/futebol/jogos']">
+                    <img [src]="LOGO">
+                </a>
+            </p>
+        </div>
+
+        <div>
+            <p>
+                O Weebet é um sistema de entretenimento online que oferece a seus usuários uma experiência única em
+                Apostas Esportivas.
+            </p>
+
+            <p>
+                Ao acessar, continuar a utilizar ou navegar no website Weebet, você aceita que utilizemos certos cookies
+                de navegador com o objetivo de melhorar a sua experiência enquanto utiliza nosso site. Weebet apenas usa
+                cookies para melhorar a sua experiência e não interferem com sua privacidade.
+            </p>
+
+            <p>
+                Jogue com responsabilidade. Proibido para menores de 18 anos.
+            </p>
+        </div>
+
+        <div class="info" *ngIf="hasMpToken">
+            <h4 class="title">Metódos de pagamento</h4>
+            <p>
+                <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png" class="image">
+            </p>
+        </div>
+
+        <div class="info">
+            <h4 class="title">Patrocinador oficial</h4>
+            <p>
+                <img src="http://www.santacruzpe.com.br/wp-content/themes/santacruzpe/img/logo_header.png" class="image">
+            </p>
+        </div>
+
+        <div class="links">
+            <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!trevoOne && !isAppMobile">
+                Download app
+            </a>
+            <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la" *ngIf="!isAppMobile && trevoOne">
+                Download app
+            </a>
+            <a [routerLink]="['/informacoes/regras']">
+                Regras
+            </a>
+            <a href="#">
+                Depósitos
+            </a>
+            <a href="#">
+                Política de privacidade
+            </a>
+        </div>
+
+        <div class="info">
+            <small>2022 © {{BANCA_NOME}}. Todos os direitos reservados.</small>
+        </div>
     </div>
 </footer>

@@ -38,6 +38,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     modalRef;
     unsub$ = new Subject();
     isCliente;
+    mobileScreen = false;
 
     constructor(
         private sidebarService: SidebarService,
@@ -62,6 +63,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.isCliente = this.auth.isCliente();
+        this.mobileScreen = window.innerWidth <= 1024;
         this.createForm();
         this.definirAltura();
 
@@ -124,7 +126,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 132;
+        const headerHeight = this.mobileScreen ? 145 : 132;
+        const altura = window.innerHeight - headerHeight;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');

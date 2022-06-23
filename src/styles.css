@@ -27,6 +27,8 @@ body {
 
 .base-container main {
     width: 100%;
+    padding: 0;
+    margin: 0;
     /*max-height: calc(100vh - 132px);*/
 }
 
@@ -84,8 +86,8 @@ header {
 }
 
 .content-sports {
+    background-color: #181818;
     overflow: scroll;
-    padding-bottom: 10px;
 }
 
 .footer {
@@ -369,7 +371,7 @@ button {
 
 .loteria-content .pre-bilhete {
     padding: 20px 15px 0 15px;
-    width: 270px;
+    width: 250px;
 }
 
 .loteria-content .pre-bilhete .form-row.inputs {
@@ -643,11 +645,7 @@ button {
 
     #default-content {
         padding: 10px 15px 54px;
-        height: calc(100vh - 98px);
-    }
-
-    .loteria-content {
-        padding: 0;
+        /*height: calc(100vh - 98px);*/
     }
 
     .loteria-content .pre-bilhete {
@@ -656,10 +654,6 @@ button {
         top: 0;
         height: 100% !important;
         width: 100% !important;
-    }
-
-    .content-loteria {
-        padding-bottom: 106px !important;
     }
 
     .odds .odd {

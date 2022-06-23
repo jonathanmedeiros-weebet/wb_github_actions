@@ -45,7 +45,6 @@
     padding: 0 15px;
     align-items: center;
     font-style: normal;
-    font-weight: 600;
     font-size: 14px;
     transition: 0.5s;
 }
@@ -104,4 +103,10 @@
 
 .centered {
     justify-content: center;
+}
+
+@media only screen and (max-width: 1024px) {
+    .subcategory a {
+        font-size: 12px;
+    }
 }

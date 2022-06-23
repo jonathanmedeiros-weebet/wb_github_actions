@@ -1,6 +1,6 @@
 <div class="submenu-container">
     <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
-         [ngClass]="{'centered': centered && !isMobile}"
+         [ngClass]="{'centered': centered}"
          (scroll)="onScroll($event)" #scrollMenu>
         <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''" *ngIf="!isMobile">
             <i class="fa fa-angle-left fa-left"></i>

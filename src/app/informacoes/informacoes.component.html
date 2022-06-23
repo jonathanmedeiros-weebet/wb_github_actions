@@ -1,12 +1,15 @@
 <div id="default-content">
-    <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-    <div *ngIf="!showLoadingIndicator">
-        <div class="content-header">
-            <h2>{{pagina.titulo}}</h2>
-        </div>
-        <div class="content-body">
-            <div class="content" [innerHTML]="pagina.conteudo | safeHTML">
+    <div class="wrap-stick">
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+        <div *ngIf="!showLoadingIndicator">
+            <div class="content-header">
+                <h2>{{pagina.titulo}}</h2>
+            </div>
+            <div class="content-body">
+                <div class="content" [innerHTML]="pagina.conteudo | safeHTML">
+                </div>
             </div>
         </div>
     </div>
+    <app-footer></app-footer>
 </div>

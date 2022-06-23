@@ -60,7 +60,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
@@ -161,6 +161,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     definirAltura() {
         const headerHeight = this.mobileScreen ? 145 : 132;
         const altura = window.innerHeight - headerHeight;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }

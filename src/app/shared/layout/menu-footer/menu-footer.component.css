@@ -9,6 +9,9 @@
     flex-direction: row;
     justify-content: space-around;
     padding-top: 5px;
+    border-radius:  1em 1em 0 0;
+    /*border-top-left-radius: 1em 1em;*/
+    /*border-top-right-radius: 1em 1em;*/
 }
 
 .wbicon {
