@@ -20,7 +20,8 @@
 }
 
 .jogos{
-    background-color: #fff;
+    /*background-color: #fff;*/
+    color: var(--foreground-header);
 }
 
 .jogo{
@@ -74,7 +75,7 @@
 
 .indentificacao .tempo{
     margin-right: 15px;
-    color: #000;
+    color: var(--foreground-header);
 }
 
 .indentificacao-mobile .header{

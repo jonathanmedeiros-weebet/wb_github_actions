@@ -64,8 +64,8 @@
 }
 
 .pull {
-    background: var(--foreground-header);
-    color: var(--header);
+    color: var(--foreground-header);
+    /*color: var(--header);*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,6 +76,7 @@
 }
 
 .pull .fa {
+    /*font-weight: 600;*/
     font-size: 18px;
     margin: 0;
 }

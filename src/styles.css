@@ -17,7 +17,8 @@ html {
 
 html,
 body {
-    color: #1e282c;
+    color: var(--foreground-header);
+    background-color: #0A0A09;
     /* overflow: hidden; */
 }
 
@@ -87,6 +88,7 @@ header {
 
 .content-sports {
     background-color: #181818;
+    color: var(--foreground-header);
     overflow: scroll;
 }
 
@@ -465,12 +467,12 @@ button {
     text-transform: uppercase;
     padding: 0px 10px;
     font-size: 0.9rem;
-    border-bottom: 4px solid white;
+    border-bottom: 4px solid #0A0A09;;
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--league);
-    color: var(--foreground-league);
+    background-color: #0A0A09;
+    color: var(--foreground-header);
 }
 
 .campeonato-header>span {
@@ -493,7 +495,8 @@ button {
 }
 
 .odds .inner-odd {
-    background-color: var(--odds);
+    /*background-color: var(--odds);*/
+    background-color: #181818;
     padding: 5px 8px;
     display: flex;
     justify-content: space-between;
