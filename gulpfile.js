@@ -1245,15 +1245,6 @@ gulp.task('wbets.com.br', function (done) {
     });
 });
 
-gulp.task('sportebets.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sportebets.com.br",
-        banca: "SPORTE BETS",
-        styles: "",
-    });
-});
-
 gulp.task('imperio.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1674,6 +1665,7 @@ gulp.task('esportcampeao.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "esportcampeao.wee.bet",
         banca: "ESPORT CAMPEÃO",
+        shared_url: "esportcampeao.com",
         styles: "",
     });
 });
@@ -2167,6 +2159,15 @@ gulp.task('pixsportbet.com', function (done) {
         server: "front3.wee.bet",
         host: "pixsportbet.com",
         banca: "PIX SPORT BET",
+        styles: "",
+    });
+});
+
+gulp.task('finasport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "finasport.wee.bet",
+        banca: "FINA SPORT",
         styles: "",
     });
 });
