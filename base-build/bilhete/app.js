@@ -337,7 +337,7 @@ document.onreadystatechange = async function () {
                         this.getElementById('ticket-itens').appendChild(div);
                     }
 
-                    var liveItems = filterLiveItems(ticketItens, itemsWithResults);
+                    var liveItems = ticketData.tipo === 'esportes' ? filterLiveItems(ticketItens, itemsWithResults) : [];
 
                     if (!ticketData.resultado && liveItems.length > 0) {
                         this.getElementById('follow-live').hidden = false;
