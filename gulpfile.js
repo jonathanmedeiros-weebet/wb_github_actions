@@ -2171,3 +2171,12 @@ gulp.task('finasport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('aposta99.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "aposta99.wee.bet",
+        banca: "APOSTA 99",
+        styles: "",
+    });
+});
