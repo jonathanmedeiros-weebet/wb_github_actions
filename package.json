@@ -235,7 +235,8 @@
         "premiosbet.net": "gulp premiosbet.net",
         "lincesports.wee.bet": "gulp lincesports.wee.bet",
         "pixsportbet.com": "gulp pixsportbet.com",
-        "finasport.wee.bet": "gulp finasport.wee.bet"
+        "finasport.wee.bet": "gulp finasport.wee.bet",
+        "aposta99.wee.bet": "gulp aposta99.wee.bet"
     },
     "private": true,
     "dependencies": {
