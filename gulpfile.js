@@ -410,17 +410,6 @@ gulp.task('jcapostas.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsgo.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betsgo.wee.bet",
-        banca: "Bets Go",
-        styles: "--header: #404040;--foreground-header:#fff;--sidebar-right:#404040;--sidebar-left: #404040;--highlight: #ff5900;--foreground-highlight:#fff;--odds: #999999;--event-time: #999999; --league: #ff5900;",
-        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ color:#000;border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff} .div-back .fa-times{ color: #fff!important; }"
-    });
-});
-
 gulp.task('rubinhosports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -899,15 +888,6 @@ gulp.task('esportepremium.wee.bet', function (done) {
         host: "esportepremium.wee.bet",
         banca: "ESPORTE PREMIUM",
         styles: "",
-    });
-});
-
-gulp.task('betgol.site', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betgol.site",
-        banca: "BET GOL",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
 });
 
@@ -1729,15 +1709,6 @@ gulp.task('bets084.com', function (done) {
         server: "front2.wee.bet",
         host: "bets084.com",
         banca: "BETS 084",
-        styles: "",
-    });
-});
-
-gulp.task('betmatch.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betmatch.bet",
-        banca: "BETMATCH",
         styles: "",
     });
 });
