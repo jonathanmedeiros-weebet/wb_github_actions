@@ -233,7 +233,10 @@
         "lincesports.wee.bet": "gulp lincesports.wee.bet",
         "pixsportbet.com": "gulp pixsportbet.com",
         "finasport.wee.bet": "gulp finasport.wee.bet",
-        "aposta99.wee.bet": "gulp aposta99.wee.bet"
+        "aposta99.wee.bet": "gulp aposta99.wee.bet",
+        "ourobetsvip.wee.bet": "gulp ourobetsvip.wee.bet",
+        "volpsport.com": "gulp volpsport.com",
+        "uai.bet": "gulp uai.bet"
     },
     "private": true,
     "dependencies": {

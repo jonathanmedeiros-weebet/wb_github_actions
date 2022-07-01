@@ -2151,3 +2151,30 @@ gulp.task('aposta99.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('volpsport.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "volpsport.com",
+        banca: "VOLP SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('ourobetsvip.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ourobetsvip.wee.bet",
+        banca: "OURO BETS VIP",
+        styles: "",
+    });
+});
+
+gulp.task('uai.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "uai.bet",
+        banca: "UAI BET",
+        styles: "",
+    });
+});
