@@ -405,8 +405,8 @@ button {
 }
 
 .loteria-content .content-header {
-    background: #E1E2E4;
-    color: #455a64;
+    background: var(--header);
+    color: var(--foreground-header);
     text-transform: uppercase;
     padding: 15px 10px;
     font-size: 1.2rem;

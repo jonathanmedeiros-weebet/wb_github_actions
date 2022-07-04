@@ -7,7 +7,7 @@ import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
 import {Usuario} from './../../../models';
-import {config} from './../../config';
+import {config} from '../../config';
 
 @Component({
     selector: 'app-header',
@@ -63,8 +63,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     onResize(event) {
         if (window.innerWidth > 1025) {
             this.menuWidth = window.innerWidth - 500;
+            this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
+            this.isMobile = true;
         }
         this.cd.detectChanges();
 

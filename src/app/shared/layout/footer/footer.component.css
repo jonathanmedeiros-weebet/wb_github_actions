@@ -60,5 +60,6 @@ footer {
 
     .links {
         width: 100%;
+        flex-direction: column;
     }
 }

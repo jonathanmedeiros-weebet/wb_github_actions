@@ -1,5 +1,5 @@
-<div class="black-screen" *ngIf="isOpen" (click)="closeMenu()" (pan)="onSwipeLeft($event)"></div>
-<aside>
+<!--<div class="black-screen" *ngIf="isOpen" (click)="closeMenu()" (pan)="onSwipeLeft($event)"></div>-->
+<aside id="sidebar-container">
     <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
         <div id="side-fixed-menu">
             <ul class="sidebar-menu">
