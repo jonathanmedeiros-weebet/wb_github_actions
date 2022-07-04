@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {PagesLayoutComponent} from '../shared/layout/app-layouts/pages-layout.component';
 
 const routes: Routes = [{
     path: '',
+    component: PagesLayoutComponent,
     children: [
         {
             path: '',

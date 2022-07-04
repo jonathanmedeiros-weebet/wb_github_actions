@@ -7,7 +7,7 @@ import {
     HoqueiGeloGuard, TenisGuard, TenisMesaGuard,
     VoleiGuard
 } from '../services';
-import {SportLayoutComponent} from '../shared/layout/app-layouts/sport-layout.component';
+import {SportLayoutComponent} from '../shared/layout/app-layouts';
 
 export const routes: Routes = [
     {

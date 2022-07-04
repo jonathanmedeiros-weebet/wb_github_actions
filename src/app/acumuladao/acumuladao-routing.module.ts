@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AcumuladaoWrapperComponent } from './acumuladao-wrapper/acumuladao-wrapper.component';
-import { AcumuladaoListagemComponent } from './acumuladao-listagem/acumuladao-listagem.component';
-import { AcumuladaoFormComponent } from './acumuladao-form/acumuladao-form.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AcumuladaoListagemComponent} from './acumuladao-listagem/acumuladao-listagem.component';
+import {AcumuladaoFormComponent} from './acumuladao-form/acumuladao-form.component';
 import {AcumuladaoLayoutComponent} from '../shared/layout/app-layouts/acumuladao-layout.component';
 
 const routes: Routes = [

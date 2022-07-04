@@ -1,23 +1,30 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
-import { MainLayoutComponent } from './app-layouts/main-layout.component';
-import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
-import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
-import { HeaderComponent } from './header/header.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { FooterComponent } from './footer/footer.component';
-import { ErrorMsgComponent } from './error-msg/error-msg.component';
-import { ExibirBilheteDesafioComponent } from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
-import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
-import { BilheteCompartilhamentoComponent } from './bilhete-compartilhamento/bilhete-compartilhamento.component';
-import { SpinnerComponent } from './spinner/spinner.component';
-import { UtilsModule } from './../utils/utils.module';
-import { ApostaService, ApostaEsportivaService, CartaoService, RegioesDestaqueService } from '../../services';
+import {
+    MainLayoutComponent,
+    EmptyLayoutComponent,
+    AuthLayoutComponent,
+    SportLayoutComponent,
+    PagesLayoutComponent,
+    LoteriaLayoutComponent,
+    DesafioLayoutComponent,
+    AcumuladaoLayoutComponent
+} from './app-layouts';
+import {HeaderComponent} from './header/header.component';
+import {NavigationComponent} from './navigation/navigation.component';
+import {FooterComponent} from './footer/footer.component';
+import {ErrorMsgComponent} from './error-msg/error-msg.component';
+import {ExibirBilheteDesafioComponent} from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import {ExibirBilheteEsportivoComponent} from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import {ExibirBilheteLoteriaComponent} from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import {BilheteAcumuladaoComponent} from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import {BilheteCompartilhamentoComponent} from './bilhete-compartilhamento/bilhete-compartilhamento.component';
+import {SpinnerComponent} from './spinner/spinner.component';
+import {UtilsModule} from '../utils/utils.module';
+import {ApostaService, ApostaEsportivaService, CartaoService, RegioesDestaqueService} from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent,
     ApostaModalComponent, PreApostaModalComponent,
@@ -27,17 +34,12 @@ import {
     RecargaCartaoModalComponent, RecargaSuccessModalComponent,
     AtivarCartaoModalComponent, ApostaEncerramentoModalComponent
 } from './modals';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { NgxMaskModule } from 'ngx-mask';
-import { NgbAlertModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { MenuFooterComponent } from './menu-footer/menu-footer.component';
-import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esportivo.component';
-import { SportLayoutComponent } from './app-layouts/sport-layout.component';
-import { PagesLayoutComponent } from './app-layouts/pages-layout.component';
-import { SubmenuComponent } from './submenu/submenu.component';
-import { LoteriaLayoutComponent } from './app-layouts/loteria-layout.component';
-import { DesafioLayoutComponent } from './app-layouts/desafio-layout.component';
-import { AcumuladaoLayoutComponent } from './app-layouts/acumuladao-layout.component';
+import {AngularSvgIconModule} from 'angular-svg-icon';
+import {NgxMaskModule} from 'ngx-mask';
+import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {MenuFooterComponent} from './menu-footer/menu-footer.component';
+import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
+import {SubmenuComponent} from './submenu/submenu.component';
 
 @NgModule({
     imports: [
@@ -110,4 +112,5 @@ import { AcumuladaoLayoutComponent } from './app-layouts/acumuladao-layout.compo
         RegioesDestaqueService
     ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}

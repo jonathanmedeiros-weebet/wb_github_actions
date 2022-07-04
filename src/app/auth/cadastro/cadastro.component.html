@@ -7,7 +7,8 @@
                     <h2>Cadastro</h2>
                 </div>
             </div>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
                 <div class="row">
                     <div class="col col-sm-6">
                         <div class="form-group required">
@@ -28,7 +29,8 @@
                     <div class="col col-md-6">
                         <div class="form-group required">
                             <label class="label">Data de Nascimento</label>
-                            <input class="form-control" type="text" mask="d0/M0/0000" formControlName="nascimento" inputmode="numeric">
+                            <input class="form-control" type="text" mask="d0/M0/0000" formControlName="nascimento"
+                                   inputmode="numeric">
                             <app-error-msg [control]="form.get('nascimento')"></app-error-msg>
                         </div>
                     </div>
@@ -78,7 +80,8 @@
                     <div class="col col-sm-12">
                         <div class="form-group required">
                             <label class="label">Nome de Usuário</label>
-                            <input class="form-control" type="text" formControlName="usuario" pattern="[^\s]*">
+                            <input class="form-control" type="text" formControlName="usuario" pattern="[^\s]*"
+                                   autocomplete="no">
                             <app-error-msg [control]="form.get('usuario')"></app-error-msg>
                         </div>
                     </div>

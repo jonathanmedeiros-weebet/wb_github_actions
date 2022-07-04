@@ -19,6 +19,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     itensSelecionados = {};
     contentEl;
     unsub$ = new Subject();
+    mobileScreen = true;
 
     constructor(
         private renderer: Renderer2,
@@ -31,6 +32,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.subscribeItens();
 
@@ -75,11 +77,12 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const headerHeight = this.mobileScreen ? 145 : 92;
+        const altura = window.innerHeight - headerHeight;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.contentEl = this.el.nativeElement.querySelector('.content-list');
-        this.renderer.setStyle(this.contentEl, 'height', `${altura}px`);
+        this.renderer.setStyle(this.contentEl, 'min-height', `${altura}px`);
     }
 
     getDesafios(queryParams?) {

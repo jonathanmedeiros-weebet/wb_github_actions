@@ -49,6 +49,11 @@ nav a {
     align-items: center;
 }
 
+.side-right {
+    justify-content: right;
+    padding-right: 20px;
+}
+
 .logo {
     max-height: 80px;
 }
@@ -59,6 +64,29 @@ nav::-webkit-scrollbar {
 
 .centered {
     justify-content: center;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 12px;
+    height: 26px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.btn-cadastro {
+    background-color: var(--highlight);
+    color: var(--foreground-header);
+}
+
+.btn-entrar {
+    margin-left: 5px;
+    color: var(--highlight);
+    border: 1px solid var(--highlight);
 }
 
 @media only screen and (max-width: 1024px) {

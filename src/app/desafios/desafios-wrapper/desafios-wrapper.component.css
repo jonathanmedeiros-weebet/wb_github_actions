@@ -1,6 +1,7 @@
 #desafios-wrapper {
-    background-color: #e1e2e4;
     display: flex;
+    color: var(--foreground-header);
+    background-color: #181818;
     flex-direction: row;
 }
 

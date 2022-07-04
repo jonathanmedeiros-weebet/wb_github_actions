@@ -7,8 +7,16 @@
     <nav class="desktop" *ngIf="!isMobile" #scrollMenu>
         <ng-container *ngTemplateOutlet="menu"></ng-container>
     </nav>
-    <div class="side">
-        casa
+    <div class="side side-right">
+        <a class="btn btn-cadastro nav-link " [routerLink]="['/auth/cadastro']"
+                *ngIf="modoClienteAtivo">
+            Cadastre-se
+        </a>
+        <a class="btn btn-entrar nav-link " href="#" id="navbarDropdown" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            Entrar
+        </a>
     </div>
     <!-- Fixed navbar
     <nav class="navbar-mobile navbar navbar-expand-custom navbar-dark">

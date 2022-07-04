@@ -1,3 +1,7 @@
+#default-content {
+    background-color: var(--header);
+}
+
 a {
     color: var(--header) !important;
     cursor: pointer;
@@ -11,7 +15,7 @@ a {
 
 @media only screen and (max-width: 667px) {
     #content {
-        margin-left: 0px;
+        margin-left: 0;
     }
 }
 
@@ -20,13 +24,14 @@ a {
 }
 
 #showPassword {
-    background: #fff;
+    background: #181818;
+    color: var(--foreground-header);
     cursor: pointer;
-    border-left: 0px;
+    border: 0;
 }
 
 #pass {
-    border-right: 0px;
+    border-right: 0;
 }
 
 .btn {
@@ -37,10 +42,6 @@ a {
     max-height: 500px !important;
     overflow: auto;
     overflow-x: hidden;
-}
-
-#default-content {
-    padding-bottom: 200px;
 }
 
 .spinner {
