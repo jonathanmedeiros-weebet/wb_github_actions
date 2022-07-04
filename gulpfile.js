@@ -410,17 +410,6 @@ gulp.task('jcapostas.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsgo.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betsgo.wee.bet",
-        banca: "Bets Go",
-        styles: "--header: #404040;--foreground-header:#fff;--sidebar-right:#404040;--sidebar-left: #404040;--highlight: #ff5900;--foreground-highlight:#fff;--odds: #999999;--event-time: #999999; --league: #ff5900;",
-        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ color:#000;border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #ff5900; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } .pre-bilhete h4{color:#fff} .div-back .fa-times{ color: #fff!important; }"
-    });
-});
-
 gulp.task('rubinhosports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -902,15 +891,6 @@ gulp.task('esportepremium.wee.bet', function (done) {
     });
 });
 
-gulp.task('betgol.site', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betgol.site",
-        banca: "BET GOL",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
 gulp.task('acsportsbets.site', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1245,15 +1225,6 @@ gulp.task('wbets.com.br', function (done) {
     });
 });
 
-gulp.task('sportebets.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sportebets.com.br",
-        banca: "SPORTE BETS",
-        styles: "",
-    });
-});
-
 gulp.task('imperio.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1343,17 +1314,6 @@ gulp.task('gamez.bet', function (done) {
         host: "gamez.bet",
         banca: "GAMEZ",
         styles: ""
-    });
-});
-
-gulp.task('lucksport.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "lucksport.bet",
-        banca: "LUCK SPORT",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/CzzL1XQ5aZ' async></script>"
     });
 });
 
@@ -1671,15 +1631,6 @@ gulp.task('xbetsports.net', function (done) {
     });
 });
 
-gulp.task('goldenbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "goldenbet.wee.bet",
-        banca: "GOLDEN BET",
-        styles: "",
-    });
-});
-
 gulp.task('realbets.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1694,6 +1645,7 @@ gulp.task('esportcampeao.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "esportcampeao.wee.bet",
         banca: "ESPORT CAMPEÃO",
+        shared_url: "esportcampeao.com",
         styles: "",
     });
 });
@@ -1725,29 +1677,11 @@ gulp.task('amigos.wee.bet', function (done) {
     });
 });
 
-gulp.task('betsesporte.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betsesporte.com",
-        banca: "BETS ESPORTE",
-        styles: "",
-    });
-});
-
 gulp.task('flsesportes.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "flsesportes.wee.bet",
         banca: "FLS ESPORTES",
-        styles: "",
-    });
-});
-
-gulp.task('betcoin.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betcoin.wee.bet",
-        banca: "BET COIN",
         styles: "",
     });
 });
@@ -1775,15 +1709,6 @@ gulp.task('bets084.com', function (done) {
         server: "front2.wee.bet",
         host: "bets084.com",
         banca: "BETS 084",
-        styles: "",
-    });
-});
-
-gulp.task('betmatch.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betmatch.bet",
-        banca: "BETMATCH",
         styles: "",
     });
 });
@@ -1898,38 +1823,11 @@ gulp.task('sportbec.online', function (done) {
     });
 });
 
-gulp.task('pocofundobet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "pocofundobet.wee.bet",
-        banca: "POÇO FUNDO BET",
-        styles: "",
-    });
-});
-
 gulp.task('lancesports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "lancesports.wee.bet",
         banca: "LANCE SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('gestorbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "gestorbet.wee.bet",
-        banca: "GESTOR BET",
-        styles: "",
-    });
-});
-
-gulp.task('grupolightsport.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "grupolightsport.wee.bet",
-        banca: "GRUPO LIGHT SPORT",
         styles: "",
     });
 });
@@ -2169,6 +2067,114 @@ gulp.task('bebet.bet', function (done) {
         server: "front2.wee.bet",
         host: "bebet.bet",
         banca: "BEBET",
+        styles: "",
+    });
+});
+
+gulp.task('equipebet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "equipebet.wee.bet",
+        banca: "EQUIPE BET",
+        styles: "",
+    });
+});
+
+gulp.task('bets60.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bets60.wee.bet",
+        banca: "BETS 60",
+        styles: "",
+    });
+});
+
+gulp.task('globbet.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "globbet.com.br",
+        banca: "GLOB BET",
+        styles: "",
+    });
+});
+
+gulp.task('betworld.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betworld.wee.bet",
+        banca: "BET WORLD",
+        styles: "",
+    });
+});
+
+gulp.task('premiosbet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "premiosbet.net",
+        banca: "PRÊMIOS BET",
+        styles: "",
+    });
+});
+
+gulp.task('lincesports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "lincesports.wee.bet",
+        banca: "LINCE SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('pixsportbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pixsportbet.com",
+        banca: "PIX SPORT BET",
+        styles: "",
+    });
+});
+
+gulp.task('finasport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "finasport.wee.bet",
+        banca: "FINA SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('aposta99.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "aposta99.wee.bet",
+        banca: "APOSTA 99",
+        styles: "",
+    });
+});
+
+gulp.task('volpsport.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "volpsport.com",
+        banca: "VOLP SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('ourobetsvip.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ourobetsvip.wee.bet",
+        banca: "OURO BETS VIP",
+        styles: "",
+    });
+});
+
+gulp.task('uai.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "uai.bet",
+        banca: "UAI BET",
         styles: "",
     });
 });
