@@ -111,13 +111,13 @@ header {
 }
 
 .btn-custom:focus {
-    box-shadow: 0 0 0 0.5px var(--highlight);
+    box-shadow: 0 0 0 1px var(--highlight);
 }
 
 .card {
     border: 1px solid #d7dfe3;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    background: #181818;
     border-radius: 4px;
     padding: 20px;
 }
@@ -303,7 +303,6 @@ button {
     display: flex;
     flex-direction: row;
     color: var(--foreground-sidebar-right);
-    display: flex;
     align-items: center;
 }
 
@@ -380,10 +379,7 @@ button {
     background-color: var(--odds);
     padding: 20px 15px 8px 15px;
     border-radius: 0.25rem;
-    margin-bottom: 15px;
-    margin-top: 25px;
-    margin-right: 0px;
-    margin-left: 0px;
+    margin: 25px 0 15px;
 }
 
 .loteria-content .pre-bilhete h4 {
@@ -398,7 +394,6 @@ button {
     width: 20px;
     background: var(--highlight);
     top: 23px;
-    left: 108px;
     position: relative;
     left: 50%;
     margin-left: -58px;
@@ -418,7 +413,7 @@ button {
 }
 
 .loteria-content .content-body .content .col-lg-9 {
-    padding: 0px;
+    padding: 0;
 }
 
 .nopadding {
@@ -465,7 +460,7 @@ button {
 
 .campeonato-header {
     text-transform: uppercase;
-    padding: 0px 10px;
+    padding: 0 10px;
     font-size: 0.9rem;
     border-bottom: 4px solid #0A0A09;;
     cursor: pointer;
@@ -565,7 +560,7 @@ button {
 
 .content-loteria {
     overflow: auto;
-    background-color: #fff;
+    background-color: #181818;
 }
 
 .margin-top-30 {
@@ -648,7 +643,7 @@ button {
 
     #default-content {
         padding: 10px 15px 54px;
-        /*height: calc(100vh - 98px);*/
+        height: calc(100vh - 105px);
     }
 
     .loteria-content .pre-bilhete {
@@ -754,7 +749,7 @@ button {
 }
 
 .value-informations .valores button:focus {
-    box-shadow: 0 0 0 0.5px var(--highlight);
+    box-shadow: 0 0 0 1px var(--highlight);
 }
 
 .odd-disabled {
@@ -786,7 +781,7 @@ button {
 
 [class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
+    font-family: 'icomoon', serif !important;
     speak: never;
     font-style: normal;
     font-weight: normal;
