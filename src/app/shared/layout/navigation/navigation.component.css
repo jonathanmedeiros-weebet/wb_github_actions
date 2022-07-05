@@ -45,16 +45,6 @@
     align-items: center;
 }
 
-/*.sidebar-brand {*/
-/*    text-align: center;*/
-/*    margin-top: 15px;*/
-/*}*/
-
-/*.sidebar-brand img {*/
-/*    max-height: 120px;*/
-/*    max-width: 200px;*/
-/*}*/
-
 .sidebar-nav {
     background-color: var(--sidebar-left);
     padding: 0;
@@ -110,10 +100,6 @@
     color: var(--highlight)!important;
 }
 
-.sidebar-nav li:not(:last-child) {
-    /*border-bottom: 1px solid rgba(255, 255, 255, 0.25);*/
-}
-
 #sidebar-wrapper ul li {
     list-style: none;
 }
@@ -131,10 +117,17 @@
 
 .regiao .flag-icon {
     float: left;
-    margin-top: 0px;
+    margin-top: 0;
     margin-right: 4px;
     width: 22px;
     height: 22px;
+    clip-path: circle();
+}
+
+.flag-icon {
+    align-self: center;
+    width: 13px;
+    height: 13px;
     clip-path: circle();
 }
 
