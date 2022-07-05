@@ -2,7 +2,17 @@
 <aside id="sidebar-container">
     <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
         <div id="side-fixed-menu">
-            <ul class="sidebar-menu">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pesquisar por time ou campeonato">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="showPassword">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- <ul class="sidebar-menu">
                 <li>
                     <a (click)="abrirModalPesquisa()">
                         <i class="fa fa-search"></i> Pesquisa
@@ -74,7 +84,8 @@
                     <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!trevoOne">
                         <i class="fa fa-download"></i> App
                     </a>
-                    <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la" *ngIf="trevoOne">
+                    <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la"
+                        *ngIf="trevoOne">
                         <i class="fa fa-download"></i> App
                     </a>
                 </li>
@@ -115,7 +126,7 @@
                         <i class="fa fa-bank"></i> Depósito
                     </a>
                 </li>
-            </ul>
+            </ul> -->
         </div>
         <ul id="menu-side-left" class="sidebar-nav">
             <ng-container *ngIf="contexto == 'esportes'">
@@ -129,23 +140,23 @@
                         </a>
                     </li>
                 </div>
-<!--                <span class="group">Datas</span>-->
-<!--                <li (click)="goTo('/esportes/' + esporte, {})">-->
-<!--                    <a>-->
-<!--                        Jogos de Hoje-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li *ngIf="exibirJogosAmanha()"-->
-<!--                    (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">-->
-<!--                    <a>-->
-<!--                        Jogos de Amanhã-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li *ngFor="let dia of dias" (click)="goTo('/esportes/' + esporte, { data: dia.format })">-->
-<!--                    <a>-->
-<!--                        Jogos de {{dia.descricao}}-->
-<!--                    </a>-->
-<!--                </li>-->
+                <!--                <span class="group">Datas</span>-->
+                <!--                <li (click)="goTo('/esportes/' + esporte, {})">-->
+                <!--                    <a>-->
+                <!--                        Jogos de Hoje-->
+                <!--                    </a>-->
+                <!--                </li>-->
+                <!--                <li *ngIf="exibirJogosAmanha()"-->
+                <!--                    (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">-->
+                <!--                    <a>-->
+                <!--                        Jogos de Amanhã-->
+                <!--                    </a>-->
+                <!--                </li>-->
+                <!--                <li *ngFor="let dia of dias" (click)="goTo('/esportes/' + esporte, { data: dia.format })">-->
+                <!--                    <a>-->
+                <!--                        Jogos de {{dia.descricao}}-->
+                <!--                    </a>-->
+                <!--                </li>-->
                 <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
                     <span class="group">Campeonatos</span>
                     <li class="regiao" *ngFor="let regiao of itens">
@@ -157,7 +168,7 @@
                             <li *ngFor="let campeonato of regiao.campeonatos"
                                 (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
                                 <a>
-                                    {{campeonato.nome.replace(regiao._id+': ', '')}}
+                                    {{campeonato.nome.replace(regiao._id + ': ', '')}}
                                 </a>
                             </li>
                         </ul>
@@ -168,7 +179,8 @@
                     <li class="campeonato" *ngFor="let campeonato of itens"
                         (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                         <a>
-                            <i class="fa fa-certificate"></i> {{campeonato.nome}}
+                            <i class="fa fa-certificate icone-generico"></i>
+                            <span class="regiao-nome">{{campeonato.nome}}</span>
                         </a>
                     </li>
                 </ng-template>
@@ -178,13 +190,15 @@
                 <span class="group">Desafios</span>
                 <li class="categoria" (click)="goTo('/desafios', {})">
                     <a>
-                        <i class="fa fa-trophy"></i> TODOS
+                        <i class="fa fa-trophy icone-generico"></i>
+                        <span class="regiao-nome">TODOS</span>
                     </a>
                 </li>
                 <li class="categoria" *ngFor="let categoria of itens"
                     (click)="goTo('/desafios', { categoria: categoria.id })">
                     <a>
-                        <i class="fa fa-trophy"></i> {{categoria.nome}}
+                        <i class="fa fa-trophy icone-generico"></i>
+                        <span class="regiao-nome">{{categoria.nome}}</span>
                     </a>
                 </li>
             </ng-container>
@@ -194,12 +208,14 @@
                 <li class="supresinha" *ngFor="let tipoAposta of itens"
                     (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
                     <a *ngIf="contexto == 'seninha'">
-                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                        ( {{tipoAposta.cotacao6 | currency}} )
+                        <i class="fa fa-certificate icone-generico"></i>
+                        <span class="regiao-nome">{{tipoAposta.qtdNumeros}} Números
+                            ( {{tipoAposta.cotacao6 | currency}} )</span>
                     </a>
                     <a *ngIf="contexto == 'quininha'">
-                        <i class="fa fa-certificate"></i> {{tipoAposta.qtdNumeros}} Números
-                        ( {{tipoAposta.cotacao5 | currency}} )
+                        <i class="fa fa-certificate icone-generico"></i>
+                        <span class="regiao-nome">{{tipoAposta.qtdNumeros}} Números
+                            ( {{tipoAposta.cotacao5 | currency}} )</span>
                     </a>
                 </li>
             </ng-container>

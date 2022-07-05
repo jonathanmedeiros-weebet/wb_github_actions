@@ -126,7 +126,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.createForm();
 
         if (window.innerWidth > 1025) {
-            this.menuWidth = window.innerWidth - (250 + 250);
+            this.menuWidth = window.innerWidth - (350 + 350);
             this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;

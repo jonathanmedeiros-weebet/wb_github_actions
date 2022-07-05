@@ -6,11 +6,12 @@ import {BaseFormComponent} from '../shared/layout/base-form/base-form.component'
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {PasswordValidation} from "../shared/utils";
+import {PasswordValidation} from '../shared/utils';
 
 @Component({
     selector: 'app-meu-perfil',
-    templateUrl: 'alterar-senha.component.html'
+    templateUrl: 'alterar-senha.component.html',
+    styleUrls: ['alterar-senha.component.css']
 })
 export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     public isCollapsed = false;
