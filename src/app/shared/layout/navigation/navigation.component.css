@@ -98,7 +98,12 @@
 
 .sidebar-nav li a {
     padding: 10px 15px;
-    display: block;
+    display: flex;
+}
+
+.regiao-nome {
+    align-self: center;
+    margin-left: 5px;
 }
 
 .sidebar-nav li a:hover {
@@ -106,7 +111,7 @@
 }
 
 .sidebar-nav li:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    /*border-bottom: 1px solid rgba(255, 255, 255, 0.25);*/
 }
 
 #sidebar-wrapper ul li {
@@ -128,12 +133,15 @@
     float: left;
     margin-top: 0px;
     margin-right: 4px;
-    width: 15px;
-    height: 15px;
+    width: 22px;
+    height: 22px;
+    clip-path: circle();
 }
 
 .regiao>a {
     position: relative;
+    display: flex;
+    vertical-align: center;
 }
 
 .regiao>a:after {
