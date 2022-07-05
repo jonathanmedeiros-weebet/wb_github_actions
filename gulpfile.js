@@ -2178,3 +2178,12 @@ gulp.task('uai.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('topbetgames.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "topbetgames.wee.bet",
+        banca: "TOP BET GAMES",
+        styles: "",
+    });
+});

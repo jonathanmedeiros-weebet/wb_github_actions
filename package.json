@@ -236,7 +236,8 @@
         "aposta99.wee.bet": "gulp aposta99.wee.bet",
         "ourobetsvip.wee.bet": "gulp ourobetsvip.wee.bet",
         "volpsport.com": "gulp volpsport.com",
-        "uai.bet": "gulp uai.bet"
+        "uai.bet": "gulp uai.bet",
+        "topbetgames.wee.bet": "gulp topbetgames.wee.bet"
     },
     "private": true,
     "dependencies": {
