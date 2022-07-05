@@ -8,243 +8,35 @@
         <ng-container *ngTemplateOutlet="menu"></ng-container>
     </nav>
     <div class="side side-right">
-        <a class="btn btn-cadastro nav-link " [routerLink]="['/auth/cadastro']"
-                *ngIf="modoClienteAtivo">
-            Cadastre-se
-        </a>
-        <a class="btn btn-entrar nav-link " href="#" id="navbarDropdown" role="button"
-           data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-            Entrar
-        </a>
-    </div>
-    <!-- Fixed navbar
-    <nav class="navbar-mobile navbar navbar-expand-custom navbar-dark">
-        <div class="logo-mobile">
-            <a class="" [routerLink]="['/esportes/futebol/jogos']">
-                <img [src]="LOGO">
-            </a>
-        </div>
-        <div class="botoes-menu">
-            <ng-container *ngIf="isLoggedIn; else loggedOut">
-                <div class="dropdown menu-conta">
-                    <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-lg fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" [routerLink]="['clientes/perfil']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
-                            <h4 class="menu-conta-header"><i
-                                class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
-                        </a>
-                        <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
-                            <h4 class="menu-conta-header"><i
-                                class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
-                        </button>
-                        <div class="dropdown-divider"></div>
-
-                        <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
-                            Crédito: {{posicaoFinanceira.credito | currency}}
-                        </button>
-                        <button class="dropdown-item text-center" disabled type="button">
-                            Saldo: {{posicaoFinanceira.saldo | currency}}
-                        </button>
-                        <button class="dropdown-item text-center" disabled type="button"
-                                *ngIf="isCliente && posicaoFinanceira.bonus != 0">
-                            Bônus: {{posicaoFinanceira.bonus | currency}}
-                        </button>
-                        <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
-                            <i class="fa fa-dollar"></i> Solicitar Depósito
-                        </a>
-
-                        <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
-                            <i class="fa fa-dollar"></i> Solicitar Saque
-                        </a>
-
-                        <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
-                            <i class="fa fa-key"></i> Alterar senha
-                        </a>
-
-                        <a class="dropdown-item" [routerLink]="['clientes/perfil']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
-                            <i class="fa fa-user"></i> Minha Conta
-                        </a>
-
-                        <a (click)="logout()" href="#" class="dropdown-item">
-                            <i class="fa fa-sign-out"></i> Sair
-                        </a>
-                        <div *ngIf="appMobile" class="app-version-info">
-                            App Versão 2.0.{{appVersion}}
-                        </div>
-                    </ul>
-                </div>
-            </ng-container>
-            <ng-template #loggedOut>
-                <div class="menu-conta dropdown">
-                    <button class="botao-cadastro nav-link btn" [routerLink]="['/auth/cadastro']"
-                            *ngIf="modoClienteAtivo">
-                        Cadastre-se
-                    </button>
-                    <a class="botao-entrar nav-link dropdown-toggle btn" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Entrar
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-                        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-                            <div class="form-group">
-                                <input type="text" class="form-control" formControlName="username"
-                                       [ngClass]="applyCssInputError('username')" placeholder="Usuário">
-                                <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
-
-                            </div>
-                            <div class="form-group" [ngClass]="applyCssDivError('password')">
-                                <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                       formControlName="password" placeholder="Senha">
-                                <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Entrar</button>
-                        </form>
-                        <ng-container *ngIf="modoClienteAtivo">
-                            <div class="dropdown-divider" ></div>
-                            <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
-                                Esqueci minha senha?
-                            </a>
-                        </ng-container>
-                    </ul>
-                </div>
-            </ng-template>
-        </div>
-    </nav>
-    <div class="menu-categories margin-categories">
-        <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
-            <i class="fa fa-angle-left fa-left"></i>
-        </div>
-        <div class="menu-categories scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
-             [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
-            <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/live']">
-                    <i class="wbicon icon-ao-vivo"></i>
-                    <span>Ao Vivo</span>
-                </a>
-            </div>
-            <div class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/futebol']">
-                    <i class="wbicon icon-futebol"></i>
-                    <span>Futebol</span>
-                </a>
-            </div>
-            <div *ngIf="basqueteHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/basquete']">
-                    <i class="wbicon icon-basquete"></i>
-                    <span>Basquete</span>
-                </a>
-            </div>
-            <div *ngIf="tenisHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/tenis']">
-                    <i class="wbicon icon-tenis"></i>
-                    <span>Tênis</span>
-                </a>
-            </div>
-            <div *ngIf="combateHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/combate']">
-                    <i class="wbicon icon-luta"></i>
-                    <span>Combate</span>
-                </a>
-            </div>
-            <div *ngIf="voleiHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/volei']">
-                    <i class="wbicon icon-volei"></i>
-                    <span>Vôlei</span>
-                </a>
-            </div>
-            <div *ngIf="futebolAmericanoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/futebol-americano']">
-                    <i class="wbicon icon-futebol-americano"></i>
-                    <span>Futebol Americano</span>
-                </a>
-            </div>
-            <div *ngIf="futsalHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/futsal']">
-                    <i class="wbicon icon-futsal"></i>
-                    <span>Futsal</span>
-                </a>
-            </div>
-            <div *ngIf="hoqueiGeloHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/hoquei-gelo']">
-                    <i class="wbicon icon-hoquei-no-gelo"></i><span>Hóquei no Gelo</span>
-                </a>
-            </div>
-            <div *ngIf="esportsHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/esports']">
-                    <i class="wbicon icon-e-sports"></i>
-                    <span>E-Sports</span>
-                </a>
-            </div>
-            <div *ngIf="desafioHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/desafios']">
-                    <i class="fa fa-trophy"></i>
-                    <span>Desafio</span>
-                </a>
-            </div>
-            <div *ngIf="acumuladaoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/acumuladao/listagem']">
-                    <i class="fa fa-money"></i>
-                    <span>Acumuladão</span>
-                </a>
-            </div>
-            <div *ngIf="loteriasHabilitado && seninhaAtiva" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/loterias/seninha']">
-                    <svg-icon src="https://cdn.wee.bet/img/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>{{'seninha' | sorteioTipo}}</span>
-                </a>
-            </div>
-            <div *ngIf="loteriasHabilitado && quininhaAtiva" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/loterias/quininha']">
-                    <svg-icon src="https://cdn.wee.bet/img/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>{{'quininha' | sorteioTipo}}</span>
-                </a>
-            </div>
-        </div>
-        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
-            <i class="fa fa-angle-right fa-right"></i>
-        </div>
-
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-
-                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']"
+                       routerLinkActive="router-link-active"
                        *ngIf="isCliente">
-                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}
-                        </h4>
+                        <h4 class="menu-conta-header"><i
+                            class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
                     </a>
                     <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
-                        <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}
-                        </h4>
+                        <h4 class="menu-conta-header"><i
+                            class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
                     </button>
                     <div class="dropdown-divider"></div>
 
-                    <button class="dropdown-item text-center" disabled type="button" *ngIf="!isCliente">
+                    <span class="dropdown-item text-center" *ngIf="!isCliente">
                         Crédito: {{posicaoFinanceira.credito | currency}}
-                    </button>
-                    <button class="dropdown-item text-center" disabled type="button">
+                    </span>
+                    <span class="dropdown-item text-center">
                         Saldo: {{posicaoFinanceira.saldo | currency}}
-                    </button>
-                    <button class="dropdown-item text-center" disabled type="button"
-                            *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                    </span>
+                    <span class="dropdown-item text-center"
+                          *ngIf="isCliente && posicaoFinanceira.bonus != 0">
                         Bônus: {{posicaoFinanceira.bonus | currency}}
-                    </button>
+                    </span>
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
@@ -259,7 +51,8 @@
                         <i class="fa fa-key"></i> Alterar senha
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
+                    <a class="dropdown-item" [routerLink]="['clientes/perfil']"
+                       routerLinkActive="router-link-active"
                        *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
@@ -267,7 +60,6 @@
                     <a (click)="logout()" href="#" class="dropdown-item">
                         <i class="fa fa-sign-out"></i> Sair
                     </a>
-
                     <div *ngIf="appMobile" class="app-version-info">
                         App Versão 2.0.{{appVersion}}
                     </div>
@@ -276,7 +68,12 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="btn btn-cadastro" [routerLink]="['/auth/cadastro']"
+                   *ngIf="modoClienteAtivo">
+                    Cadastre-se
+                </a>
+                <a class="btn btn-entrar" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
@@ -295,16 +92,16 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
-                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
-                        Esqueci minha senha?
-                    </a>
-                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']" *ngIf="modoClienteAtivo">
-                        Novo aqui? Cadastre-se
-                    </a>
+                    <ng-container *ngIf="modoClienteAtivo">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
+                            Esqueci minha senha?
+                        </a>
+                    </ng-container>
                 </ul>
             </div>
         </ng-template>
-    </div> -->
+    </div>
 </header>
 <nav class="mobile" *ngIf="isMobile" [ngClass]="{'centered': centered}" #scrollMenu>
     <ng-container *ngTemplateOutlet="menu"></ng-container>

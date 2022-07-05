@@ -51,6 +51,10 @@ nav a {
     padding-right: 20px;
 }
 
+.menu-conta {
+    display: flex;
+}
+
 .logo {
     max-height: 80px;
 }
@@ -68,8 +72,8 @@ nav::-webkit-scrollbar {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 4px 12px;
-    height: 26px;
+    padding: 5px 15px;
+    height: 30px;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
