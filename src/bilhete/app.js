@@ -92,7 +92,7 @@ document.onreadystatechange = async function () {
                     this.getElementById('ticket-id').append(ticketData.codigo);
                     this.getElementById('panter').append(ticketData.apostador.toUpperCase());
                     this.getElementById('money-changer').append(ticketData.passador.nome.toUpperCase());
-                    this.getElementById('date').append(getFormatedDate(ticketData.horario.replace(/-/g, "/")));
+                    this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario.replace(/-/g, '/'))));
                     this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementById('bet-amount').append(ticketData.valor.toLocaleString('pt-br', {
@@ -209,7 +209,7 @@ document.onreadystatechange = async function () {
                                 <div class="identification">
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
-                                <div class="event-time">${getFormatedDate(ticketItem.jogo_horario.replace(/-/g, "/"))}</div>
+                                <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo_horario.replace(/-/g, '/')))}</div>
                                 <div id="match">
                                     <div>
                                         <div>
@@ -285,7 +285,7 @@ document.onreadystatechange = async function () {
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                <div class="event-time">${getFormatedDate(ticketItem.jogo.horario.replace(/-/g, "/"))}</div>
+                                <div class="event-time">${getFormatedDate(new Date(ticketItem.jogo.horario.replace(/-/g, '/')))}</div>
                                 <div class="players">
                                     <div class="player player-a-data" id="player-a-data">
                                     <div class="player-name">
@@ -312,7 +312,7 @@ document.onreadystatechange = async function () {
                         } else {
                             div.innerHTML =
                                 `<div class="ticket-item">
-                                    <div class="event-time">${getFormatedDate(ticketItem.desafio_datahora_encerramento.replace(/-/g, "/"))}</div>
+                                    <div class="event-time">${getFormatedDate(new Date(ticketItem.desafio_datahora_encerramento.replace(/-/g, '/')))}</div>
                                     <div>
                                         ${ticketItem.desafio_categoria_nome}
                                     </div>
@@ -337,7 +337,7 @@ document.onreadystatechange = async function () {
                         this.getElementById('ticket-itens').appendChild(div);
                     }
 
-                    var liveItems = filterLiveItems(ticketItens, itemsWithResults);
+                    var liveItems = ticketData.tipo === 'esportes' ? filterLiveItems(ticketItens, itemsWithResults) : [];
 
                     if (!ticketData.resultado && liveItems.length > 0) {
                         this.getElementById('follow-live').hidden = false;
