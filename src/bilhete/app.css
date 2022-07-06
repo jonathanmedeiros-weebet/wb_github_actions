@@ -30,7 +30,8 @@ body {
 }
 
 #logo-frame > img {
-    height: 80px;
+    max-height: 80px;
+    max-width: 350px;
     position: relative;
 }
 
