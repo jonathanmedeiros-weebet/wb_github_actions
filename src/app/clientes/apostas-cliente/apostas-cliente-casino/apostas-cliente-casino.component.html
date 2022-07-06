@@ -52,8 +52,10 @@
                     <tr>
                         <th class="resultado"></th>
                         <th>Código</th>
+                        <th>Game</th>
                         <th>Horário</th>
                         <th>Valor</th>
+                        <th>Prêmio</th>
                         <th>Resultado</th>
                     </tr>
                 </thead>
@@ -65,14 +67,19 @@
                                 <i *ngIf="aposta.cartao_aposta" class="fa fa-credit-card"></i>
                                 {{aposta.codigo}}
                             </td>
+                            <td>
+                                {{aposta.game}}
+                            </td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>
                                 {{aposta.valor | currency}} <small *ngIf="aposta.is_bonus">bônus</small>
                             </td>
                             <td>
-                                <span
-                                    *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency}}</span>
+                                <span *ngIf="aposta.resultado == 'ganhou'">{{aposta.premio | currency}}</span>
                                 <span *ngIf="aposta.resultado == 'perdeu'">{{0 | currency}}</span>
+                                <span *ngIf="!aposta.resultado">Aguardando</span>
+                            <td>
+                                <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
                                 <span *ngIf="!aposta.resultado">Aguardando</span>
                             </td>
                         </tr>

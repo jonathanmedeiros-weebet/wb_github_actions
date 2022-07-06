@@ -18,4 +18,5 @@ export class ApostaCasino {
     cartao_aposta: string;
     codigo: string;
     is_bonus: boolean;
+    game: string;
 }
