@@ -87,9 +87,12 @@ header {
 }
 
 .content-sports {
+    max-width: 100%;
     background-color: #181818;
     color: var(--foreground-header);
     overflow: scroll;
+    overflow-x: hidden;
+    padding: 5px;
 }
 
 .footer {
@@ -672,6 +675,10 @@ button {
     .add-palpite {
         display: block;
         width: 100%
+    }
+
+    .content-sports {
+        padding: 0;
     }
 }
 

@@ -21,7 +21,7 @@ import {
     SolicitarSaqueModalComponent,
     TabelaModalComponent
 } from '../modals';
-import { config } from './../../config';
+import { config } from '../../config';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
@@ -372,7 +372,7 @@ export class NavigationComponent implements OnInit {
     }
 
     abrirRegiao(regiao) {
-        if (regiao == this.regiaoOpen) { // fechando
+        if (regiao === this.regiaoOpen) { // fechando
             this.regiaoOpen = null;
         } else { // abrindo
             this.regiaoOpen = regiao;
@@ -383,8 +383,8 @@ export class NavigationComponent implements OnInit {
         const dtInicial = moment().add(2, 'day');
         const dataLimiteTabela = moment(this.dataLimiteTabela);
 
-        //let temDomingo = false;
-        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) { //&& !temDomingo
+        // let temDomingo = false;
+        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) { // && !temDomingo
             /* if (dtInicial.day() === 0) {
                 temDomingo = true;
             }*/
@@ -402,6 +402,6 @@ export class NavigationComponent implements OnInit {
     }
 
     permitirAtivacaoCartao() {
-        return location.origin.match(/mjrsports.com/g) ? true : false;
+        return !!location.origin.match(/mjrsports.com/g);
     }
 }
