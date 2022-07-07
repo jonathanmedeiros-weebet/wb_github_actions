@@ -2178,3 +2178,21 @@ gulp.task('uai.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('topbetgames.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "topbetgames.wee.bet",
+        banca: "TOP BET GAMES",
+        styles: "",
+    });
+});
+
+gulp.task('brasilsport.online', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "brasilsport.online",
+        banca: "BRASIL SPORT",
+        styles: "",
+    });
+});
