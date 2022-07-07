@@ -3,6 +3,7 @@
     flex-wrap: wrap;
 }
 .game-tile {
+    background-color: var(--header);
     position: relative;
 }
 .game-tile img{

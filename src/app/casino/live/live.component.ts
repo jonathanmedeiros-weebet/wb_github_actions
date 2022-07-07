@@ -30,7 +30,7 @@ export class LiveComponent implements OnInit, OnDestroy {
         let self = this;
         this.casinoApi.getCasinoLiveKey().subscribe(response => {
             self.connect(response.socket, response.live_token);
-            interval(2000)
+            interval(1000)
                 .subscribe(() => {
                     this.showLoadingIndicator = false;
                 });

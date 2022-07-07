@@ -53,10 +53,7 @@ export class WallComponent implements OnInit {
                    this.showAll();
                 }
             });
-            interval(2000)
-                .subscribe(() => {
-                    this.showLoadingIndicator = false;
-                });
+            this.showLoadingIndicator = false;
         }, erro => {});
         this.auth.logado
             .subscribe(
