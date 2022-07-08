@@ -238,7 +238,8 @@
         "uai.bet": "gulp uai.bet",
         "topbetgames.wee.bet": "gulp topbetgames.wee.bet",
         "brasilsport.online": "gulp brasilsport.online",
-        "spacebets.net": "gulp spacebets.net"
+        "spacebets.net": "gulp spacebets.net",
+        "sm7.wee.bet": "gulp sm7.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -2187,11 +2187,21 @@ gulp.task('brasilsport.online', function (done) {
         styles: "",
     });
 });
+
 gulp.task('spacebets.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "spacebets.net",
         banca: "SPACE BETS",
+        styles: "",
+    });
+});
+
+gulp.task('sm7.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "sm7.wee.bet",
+        banca: "SM7",
         styles: "",
     });
 });
