@@ -237,7 +237,8 @@
         "volpsport.com": "gulp volpsport.com",
         "uai.bet": "gulp uai.bet",
         "topbetgames.wee.bet": "gulp topbetgames.wee.bet",
-        "brasilsport.online": "gulp brasilsport.online"
+        "brasilsport.online": "gulp brasilsport.online",
+        "spacebets.net": "gulp spacebets.net"
     },
     "private": true,
     "dependencies": {
