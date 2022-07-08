@@ -19,6 +19,8 @@ html,
 body {
     color: var(--foreground-header);
     background-color: #0A0A09;
+    max-height: 100vh;
+    height: 100vh;
     /* overflow: hidden; */
 }
 
@@ -30,6 +32,7 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
+    background-color: #181818;
     /*max-height: calc(100vh - 132px);*/
 }
 
@@ -79,11 +82,17 @@ header {
 }
 
 #default-content {
-    padding: 20px 15px 20px 15px;
+    /*padding: 20px 15px 20px 15px;*/
+    padding: 5px;
     height: calc(100vh - 92px);
-    background: #fff;
+    background-color: #181818;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
+}
+
+.internal-container {
+    padding: 20px 15px 20px 15px;
+    background-color: var(--header);
 }
 
 .content-sports {
@@ -645,7 +654,8 @@ button {
     }
 
     #default-content {
-        padding: 10px 15px 54px;
+        padding: 0;
+        /*padding: 10px 15px 54px;*/
         height: calc(100vh - 105px);
     }
 

@@ -1,32 +1,36 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
-import { Event as NavigationEvent, NavigationEnd, Router } from '@angular/router';
-import { state, style, trigger } from '@angular/animations';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
+import {state, style, trigger} from '@angular/animations';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import {
+    ApostaService,
     AuthService,
+    MessageService,
     ParametrosLocaisService,
     PrintService,
     SidebarService,
     SupresinhaService
 } from './../../../services';
 import {
+    ApostaModalComponent,
     AtivarCartaoModalComponent,
     CartaoCadastroModalComponent,
     PesquisaModalComponent,
-    PesquisarApostaModalComponent,
     PesquisarCartaoModalComponent,
     RecargaCartaoModalComponent,
     SolicitarSaqueModalComponent,
     TabelaModalComponent
 } from '../modals';
-import { config } from '../../config';
+import {config} from '../../config';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
-import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
+import {RegioesDestaqueService} from '../../services/regioes-destaque.service';
+import {BaseFormComponent} from '../base-form/base-form.component';
 
 @Component({
     selector: 'app-navigation',
@@ -45,7 +49,7 @@ import { RegioesDestaqueService } from '../../services/regioes-destaque.service'
         ])
     ]
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent extends BaseFormComponent implements OnInit {
     @Input() headerHeight = 92;
     hoje = moment();
     amanha = moment().add(1, 'd');
@@ -70,6 +74,8 @@ export class NavigationComponent implements OnInit {
     LOGO = config.LOGO;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     trevoOne = false;
+    showLoading = false;
+    submitting = false;
 
     constructor(
         private auth: AuthService,
@@ -83,7 +89,11 @@ export class NavigationComponent implements OnInit {
         private el: ElementRef,
         private cd: ChangeDetectorRef,
         private regioesDestaqueService: RegioesDestaqueService,
+        private apostaService: ApostaService,
+        private messageService: MessageService,
+        private fb: FormBuilder
     ) {
+        super();
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
                 this.closeMenu();
@@ -92,6 +102,7 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.createForm();
         this.regioesDestaqueService.setExibirDestaques(false);
         this.mobileScreen = window.innerWidth <= 1024;
 
@@ -164,6 +175,15 @@ export class NavigationComponent implements OnInit {
         }
     }
 
+    createForm() {
+        this.form = this.fb.group({
+            'codigo': [null, [Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(8)
+            ]]
+        });
+    }
+
     closeMenu() {
         this.sidebarService.close();
     }
@@ -230,7 +250,7 @@ export class NavigationComponent implements OnInit {
                 result => {
                     if (result.input) {
                         this.closeMenu();
-                        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: result.input } });
+                        this.router.navigate(['/esportes/futebol/jogos'], {queryParams: {nome: result.input}});
                     }
                 },
                 reason => {
@@ -254,20 +274,23 @@ export class NavigationComponent implements OnInit {
             });
     }
 
-    abrirModalAposta() {
-        this.modalRef = this.modalService.open(
-            PesquisarApostaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-
-        this.modalRef.result
-            .then(
-                result => {
+    abrirModalAposta(codigo) {
+        this.submitting = true;
+        this.apostaService.getApostaByCodigo(codigo)
+            .subscribe(
+                apostaLocalizada => {
+                    this.modalRef = this.modalService.open(ApostaModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        scrollable: true
+                    });
+                    this.modalRef.componentInstance.aposta = apostaLocalizada;
+                    this.showLoading = false;
+                    this.submitting = false;
                 },
-                reason => {
+                error => {
+                    this.handleError(error);
+                    this.submitting = false;
                 }
             );
     }
@@ -360,7 +383,7 @@ export class NavigationComponent implements OnInit {
     }
 
     goTo(url, queryParams) {
-        this.router.navigate([url], { queryParams });
+        this.router.navigate([url], {queryParams});
     }
 
     exibirJogosAmanha() {
@@ -403,5 +426,13 @@ export class NavigationComponent implements OnInit {
 
     permitirAtivacaoCartao() {
         return !!location.origin.match(/mjrsports.com/g);
+    }
+
+    handleError(error) {
+        this.messageService.error(error);
+    }
+
+    submit() {
+        this.abrirModalAposta(this.form.get('codigo').value);
     }
 }

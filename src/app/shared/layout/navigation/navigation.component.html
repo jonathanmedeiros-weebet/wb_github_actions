@@ -1,17 +1,48 @@
 <!--<div class="black-screen" *ngIf="isOpen" (click)="closeMenu()" (pan)="onSwipeLeft($event)"></div>-->
+<app-spinner *ngIf="showLoading"></app-spinner>
 <aside id="sidebar-container">
     <div id="sidebar-wrapper" [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
         <div id="side-fixed-menu">
             <div class="busca-container">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Pesquisar Bilhete" mask="AAAA-AAAA">
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="showPassword">
-                            <i class="fa fa-search"></i>
-                        </span>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" formControlName="codigo" class="form-control"
+                                   placeholder="Pesquisar Bilhete"
+                                   mask="AAAA-AAAA">
+                            <div class="input-group-append">
+                                <button type="submit" class="input-group-text" id="showPassword" [disabled]="submitting">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <app-error-msg [control]="form.get('codigo')"></app-error-msg>
                     </div>
-                </div>
+                </form>
             </div>
+            <ul class="sidebar-menu">
+                <li *ngIf="!isCliente">
+                    <a (click)="abrirModalTabela()">
+                        <i class="fa fa-print"></i>
+                        Tabela
+                    </a>
+                </li>
+                <li *ngIf="!isCliente && isLoggedIn">
+                    <a [routerLink]="['/validar-aposta']">
+                        <i class="fa fa-check"></i> Validação
+                    </a>
+                </li>
+                <li *ngIf="!isCliente && isLoggedIn">
+                    <a [routerLink]="['/apuracao']">
+                        <i class="fa fa-asterisk"></i> Apuração
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/resultados/esportes']">
+                        <i class="fa fa-list"></i> Resultado
+                    </a>
+                </li>
+            </ul>
             <!-- <ul class="sidebar-menu">
                 <li>
                     <a (click)="abrirModalPesquisa()">

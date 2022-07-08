@@ -1,3 +1,9 @@
+.internal-container {
+    /*background-color: var(--header);*/
+    min-height: 100%;
+    /*padding: 20px 15px 20px 15px;*/
+}
+
 .content-body{
     margin-bottom: 15px;
 }
@@ -16,8 +22,4 @@
 
 #pre-aposta h1{
     margin-bottom: 15px;
-}
-
-#default-content {
-    padding-bottom: 200px;
 }

@@ -9,7 +9,7 @@
 }
 
 #sidebar-wrapper a {
-    color: var(--foreground-sidebar-left);
+    /*color: var(--foreground-sidebar-left);*/
     text-decoration: none;
     cursor: pointer;
 }
@@ -24,10 +24,10 @@
 
 .busca-container {
     width: 100%;
-    height: 100px;
+    height: 90px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-top: 50px;
 }
 
 .input-group {
@@ -39,6 +39,7 @@
 .input-group input {
     font-weight: 400;
     font-size: 12px;
+    text-transform: uppercase;
 }
 
 .input-group-text {
@@ -46,30 +47,44 @@
     border-color: var(--highlight);
     color: #181818;
     font-size: 12px;
-    cursor: pointer;
 }
 
 .sidebar-menu {
     position: relative;
     display: flex;
+    justify-content: space-around;
     padding: 15px;
-    flex-wrap: wrap;
     margin: 0;
 }
 
 .sidebar-menu li {
-    width: 75px;
-    margin-bottom: 10px;
+    width: 60px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
 }
 
 .sidebar-menu .fa {
-    font-size: 1.5rem;
+    font-size: 16px;
 }
 
 .sidebar-menu a {
+    background-color: #181818;
+    color: var(--foreground-header);
+    width: 55px;
+    height: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 10px;
+    transition: 200ms;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--highlight);
+    color: var(--header);
 }
 
 .sidebar-nav {
@@ -77,6 +92,7 @@
     padding: 0;
     margin: 0;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .sidebar-nav .regiao:last-of-type,
@@ -86,7 +102,7 @@
 }
 
 .sidebar-nav a {
-    text-transform: uppercase;
+    color: var(--foreground-sidebar-left);
 }
 
 .sidebar-nav .group {
@@ -164,9 +180,9 @@
     content: "";
     width: 0;
     height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-right: 5px solid var(--foreground-sidebar-left);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--foreground-sidebar-left);
     position: absolute;
     right: 10px;
     top: 13px;
@@ -178,7 +194,8 @@
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid var(--highlight);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid var(--foreground-sidebar-left);
 }
 
 .regiao ul {
@@ -198,4 +215,20 @@
     #sidebar-container {
         display: none;
     }
+}
+
+::-webkit-input-placeholder { /* Chrome, Safari */
+    text-transform: capitalize;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-transform: capitalize;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    text-transform: capitalize;
+}
+
+:-ms-input-placeholder {  /* IE */
+    text-transform: capitalize;
 }
