@@ -2205,3 +2205,12 @@ gulp.task('sm7.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brotherr.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brotherr.bet",
+        banca: "BROTHER BET",
+        styles: "",
+    });
+});
