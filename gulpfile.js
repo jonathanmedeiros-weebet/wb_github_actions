@@ -1126,15 +1126,6 @@ gulp.task('jbrbets.net', function (done) {
     });
 });
 
-gulp.task('amgbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "amgbet.wee.bet",
-        banca: "AMG BET",
-        styles: "",
-    });
-});
-
 gulp.task('betsportse.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
