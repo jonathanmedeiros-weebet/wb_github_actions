@@ -40,6 +40,7 @@ import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 import {SubmenuComponent} from './submenu/submenu.component';
+import {SidebarNavComponent} from './sidebar-nav/sidebar-nav.component';
 
 @NgModule({
     imports: [
@@ -89,7 +90,8 @@ import {SubmenuComponent} from './submenu/submenu.component';
         SubmenuComponent,
         LoteriaLayoutComponent,
         DesafioLayoutComponent,
-        AcumuladaoLayoutComponent
+        AcumuladaoLayoutComponent,
+        SidebarNavComponent
     ],
     exports: [
         MainLayoutComponent,

@@ -64,6 +64,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
     trevoOne = false;
     showLoading = false;
     submitting = false;
+    heightSidebarNav = 500;
 
     constructor(
         private auth: AuthService,
@@ -139,24 +140,27 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
         this.preencherDias();
 
-        this.sidebarService.itens
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(dados => {
-                this.contexto = dados.contexto;
-                this.itens = dados.itens;
+        const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
+        this.heightSidebarNav = window.innerHeight - (alturaMenuFixo + this.headerHeight);
 
-                if (dados.esporte) {
-                    this.esporte = dados.esporte;
-                }
-
-                setTimeout(e => {
-                    const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
-                    const altura = window.innerHeight - (alturaMenuFixo + (this.mobileScreen ? 55 : this.headerHeight));
-                    const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
-                    this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
-                    this.cd.detectChanges();
-                }, 500);
-            });
+        // this.sidebarService.itens
+        //     .pipe(takeUntil(this.unsub$))
+        //     .subscribe(dados => {
+        //         this.contexto = dados.contexto;
+        //         this.itens = dados.itens;
+        //
+        //         if (dados.esporte) {
+        //             this.esporte = dados.esporte;
+        //         }
+        //
+        //         setTimeout(e => {
+        //             const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
+        //             this.maxHeightSidebarNav = alturaMenuFixo + this.headerHeight;
+        //             // const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
+        //             // this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
+        //             // this.cd.detectChanges();
+        //         }, 500);
+        //     });
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;

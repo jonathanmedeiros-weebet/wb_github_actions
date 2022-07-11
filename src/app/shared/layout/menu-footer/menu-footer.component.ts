@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { AuthService } from '../../services/auth/auth.service';
 import { MenuFooterService } from '../../services/utils/menu-footer.service';
 import { MessageService } from '../../services/utils/message.service';
+import {config} from '../../config';
 
 @Component({
     selector: 'app-menu-footer',
@@ -20,6 +21,10 @@ export class MenuFooterComponent implements OnInit {
     unsub$ = new Subject();
     hidden = false;
     mobileScreen = false;
+    sidebarNavHeight;
+    LOGO = config.LOGO;
+    menuIsOpen = false;
+    campeonatosIsOpen = false;
 
     constructor(
         private auth: AuthService,
@@ -36,6 +41,7 @@ export class MenuFooterComponent implements OnInit {
 
         if (this.mobileScreen) {
             this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
+            this.sidebarNavHeight = window.innerHeight - 125;
 
             this.auth.logado
                 .pipe(takeUntil(this.unsub$))
@@ -71,6 +77,16 @@ export class MenuFooterComponent implements OnInit {
 
     toggleSidebar() {
         this.sidebarService.toggle();
+    }
+
+    toggleMenu() {
+        this.campeonatosIsOpen = false;
+        this.menuIsOpen = !this.menuIsOpen;
+    }
+
+    toggleCampeonatos() {
+        this.menuIsOpen = false;
+        this.campeonatosIsOpen = !this.campeonatosIsOpen;
     }
 
     toggleBilhete() {

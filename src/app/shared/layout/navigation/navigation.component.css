@@ -87,53 +87,6 @@
     color: var(--header);
 }
 
-.sidebar-nav {
-    background-color: var(--sidebar-left);
-    padding: 0;
-    margin: 0;
-    overflow: scroll;
-    overflow-x: hidden;
-}
-
-.sidebar-nav .regiao:last-of-type,
-.sidebar-nav .campeonato:last-of-type,
-.sidebar-nav .supresinha:last-of-type {
-    margin-bottom: 15px;
-}
-
-.sidebar-nav a {
-    color: var(--foreground-sidebar-left);
-}
-
-.sidebar-nav .group {
-    display: inline-block;
-    padding-left: 15px;
-    color: var(--highlight);
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 36px;
-}
-
-.sidebar-nav li {
-    padding: 0;
-    cursor: pointer;
-}
-
-.sidebar-nav li a {
-    padding: 10px 15px;
-    display: flex;
-}
-
-.regiao-nome {
-    align-self: center;
-    margin-left: 5px;
-}
-
-.sidebar-nav li a:hover {
-    color: var(--highlight) !important;
-}
-
 #sidebar-wrapper ul li {
     list-style: none;
 }

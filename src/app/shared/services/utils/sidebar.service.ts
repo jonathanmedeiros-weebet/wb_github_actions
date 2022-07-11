@@ -17,7 +17,7 @@ export class SidebarService {
 
     constructor() {
         const width = window.innerWidth;
-        this.open = width > 667 ? true : false;
+        this.open = width > 1024;
         this.isOpenSource = new BehaviorSubject<boolean>(this.open);
         this.isOpen = this.isOpenSource.asObservable();
     }
