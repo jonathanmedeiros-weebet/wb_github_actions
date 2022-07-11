@@ -25,6 +25,7 @@ export class MenuFooterComponent implements OnInit {
     LOGO = config.LOGO;
     menuIsOpen = false;
     campeonatosIsOpen = false;
+    isOpen = false;
 
     constructor(
         private auth: AuthService,
@@ -72,6 +73,13 @@ export class MenuFooterComponent implements OnInit {
                 .subscribe(
                     res => this.hidden = res
                 );
+
+            this.sidebarService.isOpen
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(isOpen => {
+                    this.isOpen = isOpen;
+                    this.cd.detectChanges();
+                });
         }
     }
 
@@ -80,13 +88,25 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleMenu() {
-        this.campeonatosIsOpen = false;
-        this.menuIsOpen = !this.menuIsOpen;
+        if (this.menuIsOpen || !this.isOpen) {
+            this.toggleSidebar();
+            this.menuIsOpen = false;
+        } else {
+            this.campeonatosIsOpen = false;
+            this.menuIsOpen = true;
+        }
+
     }
 
     toggleCampeonatos() {
-        this.menuIsOpen = false;
-        this.campeonatosIsOpen = !this.campeonatosIsOpen;
+        if (this.campeonatosIsOpen || !this.isOpen) {
+            this.toggleSidebar();
+            this.campeonatosIsOpen = true;
+        } else {
+            this.menuIsOpen = false;
+            this.campeonatosIsOpen = true;
+        }
+
     }
 
     toggleBilhete() {

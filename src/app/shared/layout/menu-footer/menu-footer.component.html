@@ -1,4 +1,4 @@
-<div id="definir" *ngIf="campeonatosIsOpen || menuIsOpen">
+<div id="definir" [ngClass]="{'hide': !isOpen}">
     <div class="logo-container">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">

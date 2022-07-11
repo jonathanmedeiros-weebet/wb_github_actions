@@ -978,6 +978,11 @@ select.form-control:focus {
 
 /* Custom Checkbox */
 
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
 ::-webkit-input-placeholder { /* Chrome, Safari */
     text-transform: none;
 }

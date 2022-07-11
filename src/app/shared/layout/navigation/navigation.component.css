@@ -166,15 +166,15 @@
     }
 
     #sidebar-container {
-        position: fixed;
-        width: 100%;
-        height: calc(100% - 55px);
-        top: 0;
-        left: 0;
-        bottom: 0;
-        z-index: 1000;
+        /*position: fixed;*/
+        /*width: 100%;*/
+        /*height: calc(100% - 55px);*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*bottom: 0;*/
+        /*z-index: 1000;*/
         /*background-color: #32CD32;*/
-        /*display: none;*/
+        display: none;
     }
 
     #sidebar-wrapper {
@@ -187,9 +187,4 @@
         background: var(--sidebar-left);
         /*z-index: 1000;*/
     }
-}
-
-.hide {
-    visibility: hidden;
-    opacity: 0;
 }

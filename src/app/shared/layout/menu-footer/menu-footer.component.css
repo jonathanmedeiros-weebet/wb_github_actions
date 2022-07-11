@@ -63,9 +63,9 @@
 }
 
 #definir {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: calc(100vh - 124px);
+    height: calc(100% - 62px);
     top: 0;
     left: 0;
     background: var(--sidebar-left);
