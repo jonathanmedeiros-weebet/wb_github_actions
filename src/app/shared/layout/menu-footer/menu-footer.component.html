@@ -1,9 +1,7 @@
+<div id="">
+
+</div>
 <div id="footer-bar" [hidden]="hidden">
-    <div class="foot-button" routerLinkActive="active">
-        <a class="" (click)="toggleSidebar()">
-            <i class="fa fa-bars"></i> Menu
-        </a>
-    </div>
     <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active">
         <a class="" [routerLink]="['/esportes/live']">
             <i class="wbicon icon-ao-vivo"></i> Ao Vivo
@@ -27,6 +25,9 @@
             <i class="fa fa-check"></i> Validação
         </a>
     </div>
+    <div class="foot-button" routerLinkActive="active">
+        <a class="" (click)="toggleSidebar()">
+            <i class="fa fa-bars"></i> Menu
+        </a>
+    </div>
 </div>
-
-<!--<app-bilhete-esportivo></app-bilhete-esportivo>-->

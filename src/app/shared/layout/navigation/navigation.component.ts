@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
-import {state, style, trigger} from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -35,19 +35,7 @@ import {BaseFormComponent} from '../base-form/base-form.component';
 @Component({
     selector: 'app-navigation',
     templateUrl: 'navigation.component.html',
-    styleUrls: ['navigation.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('openClose', [
-            state('open', style({
-                'margin-left': '0px',
-            })),
-            state('closed', style({
-                'margin-left': '-255px',
-                visibility: 'hidden'
-            }))
-        ])
-    ]
+    styleUrls: ['navigation.component.css']
 })
 export class NavigationComponent extends BaseFormComponent implements OnInit {
     @Input() headerHeight = 92;
@@ -163,7 +151,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
 
                 setTimeout(e => {
                     const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
-                    const altura = window.innerHeight - (alturaMenuFixo + this.headerHeight);
+                    const altura = window.innerHeight - (alturaMenuFixo + (this.mobileScreen ? 55 : this.headerHeight));
                     const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
                     this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
                     this.cd.detectChanges();

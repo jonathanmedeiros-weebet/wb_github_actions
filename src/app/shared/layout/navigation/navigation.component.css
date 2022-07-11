@@ -213,22 +213,30 @@
     }
 
     #sidebar-container {
-        display: none;
+        position: fixed;
+        width: 100%;
+        height: calc(100% - 55px);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        /*background-color: #32CD32;*/
+        /*display: none;*/
+    }
+
+    #sidebar-wrapper {
+        width: 100%;
+        /*max-height: calc(100vh - 55px);*/
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*bottom: 0;*/
+        background: var(--sidebar-left);
+        /*z-index: 1000;*/
     }
 }
 
-::-webkit-input-placeholder { /* Chrome, Safari */
-    text-transform: capitalize;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-    text-transform: capitalize;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-    text-transform: capitalize;
-}
-
-:-ms-input-placeholder {  /* IE */
-    text-transform: capitalize;
+.hide {
+    visibility: hidden;
+    opacity: 0;
 }

@@ -62,4 +62,8 @@ footer {
         width: 100%;
         flex-direction: column;
     }
+
+    .info {
+        margin: 25px 0;
+    }
 }

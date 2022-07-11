@@ -32,7 +32,7 @@ export class MenuFooterComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
 
         if (this.mobileScreen) {
             this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
