@@ -49,44 +49,6 @@
     font-size: 12px;
 }
 
-.sidebar-menu {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    padding: 15px;
-    margin: 0;
-}
-
-.sidebar-menu li {
-    width: 60px;
-    height: 50px;
-    margin: 0;
-    padding: 0;
-}
-
-.sidebar-menu .fa {
-    font-size: 16px;
-}
-
-.sidebar-menu a {
-    background-color: #181818;
-    color: var(--foreground-header);
-    width: 55px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    font-size: 10px;
-    transition: 200ms;
-}
-
-.sidebar-menu a:hover {
-    background-color: var(--highlight);
-    color: var(--header);
-}
-
 #sidebar-wrapper ul li {
     list-style: none;
 }

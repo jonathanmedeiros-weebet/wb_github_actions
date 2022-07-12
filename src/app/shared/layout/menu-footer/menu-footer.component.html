@@ -5,29 +5,30 @@
         </a>
     </div>
     <app-sidebar-nav *ngIf="campeonatosIsOpen" [height]="sidebarNavHeight"></app-sidebar-nav>
+    <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>
 </div>
 <div id="footer-bar" [hidden]="hidden">
     <div class="foot-button" routerLinkActive="active">
         <a class="" (click)="toggleCampeonatos()">
-            <i class="fa fa-th-list"></i> Campeonatos
+            <i class="fa-solid fa-bars-staggered"></i> Campeonatos
         </a>
     </div>
     <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active">
         <a class="" [routerLink]="['/esportes/live']">
-            <i class="wbicon icon-ao-vivo"></i> Ao Vivo
+            <i class="fa-solid fa-play"></i> Ao Vivo
         </a>
     </div>
-<!--    <div *ngIf="!aoVivoHabilitado" class="foot-button" routerLinkActive="active">-->
-<!--        <a class="" [routerLink]="['/esportes/futebol']">-->
-<!--            <i class="wbicon icon-futebol"></i> Futebol-->
-<!--        </a>-->
-<!--    </div>-->
-    <div class="foot-button cupom">
+    <div *ngIf="!aoVivoHabilitado" class="foot-button" routerLinkActive="active">
+        <a class="" [routerLink]="['/esportes/futebol']">
+            <i class="wbicon icon-futebol"></i> Futebol
+        </a>
+    </div>
+    <div class="foot-button">
         <a class="" (click)="toggleBilhete()">
             <div class="badge-container" *ngIf="quantidadeItens > 0">
                 <span class="cupom-badge">{{quantidadeItens}}</span>
             </div>
-            <i class="fa fa-ticket"></i> Cupom
+            <i class="uil uil-ticket"></i> Bilhete
         </a>
     </div>
 <!--    <div class="foot-button" *ngIf="isLoggedIn && !isCliente">-->
@@ -37,7 +38,8 @@
 <!--    </div>-->
     <div class="foot-button" routerLinkActive="active">
         <a class="" (click)="toggleMenu()">
-            <i class="fa fa-bars"></i> Menu
+            <i class="uil uil-create-dashboard"></i> Dashboard
+<!--            <i class="fa-solid fa-toolbox"></i> -->
         </a>
     </div>
 </div>

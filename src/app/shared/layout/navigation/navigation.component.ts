@@ -250,22 +250,6 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
             );
     }
 
-    abrirModalTabela() {
-        this.modalRef = this.modalService.open(
-            TabelaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-
-        this.modalRef.result
-            .then(result => {
-                this.closeMenu();
-            }, reason => {
-            });
-    }
-
     abrirModalAposta(codigo) {
         this.submitting = true;
         this.apostaService.getApostaByCodigo(codigo)

@@ -37,10 +37,11 @@
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",
                             "node_modules/jstree/dist/themes/default/style.min.css",
-                            "node_modules/font-awesome/css/font-awesome.css",
                             "src/assets/css/flag-icon/flag-icon.min.css",
                             "src/styles.css",
-                            "node_modules/ngx-toastr/toastr.css"
+                            "node_modules/ngx-toastr/toastr.css",
+                            "node_modules/@iconscout/unicons/css/line.css",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",

@@ -1,0 +1,26 @@
+<ul class="sidebar-menu">
+    <li *ngIf="!isCliente">
+        <a (click)="abrirModalTabela()">
+            <i class="fa-solid fa-table-list"></i>
+            Tabela
+        </a>
+    </li>
+    <li *ngIf="!isCliente && isLoggedIn">
+        <a [routerLink]="['/validar-aposta']">
+            <i class="fa-solid fa-check"></i>
+            Validação
+        </a>
+    </li>
+    <li *ngIf="!isCliente && isLoggedIn">
+        <a [routerLink]="['/apuracao']">
+            <i class="fa-solid fa-chart-line"></i>
+            Apuração
+        </a>
+    </li>
+    <li>
+        <a [routerLink]="['/resultados/esportes']">
+            <i class="fa-solid fa-square-poll-vertical"></i>
+            Resultado
+        </a>
+    </li>
+</ul>
