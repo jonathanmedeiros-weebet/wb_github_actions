@@ -99,6 +99,12 @@ header {
     background-color: var(--header);
 }
 
+.internal-container-out {
+    padding: 20px 15px 20px 15px;
+    min-height: 100%;
+    background-color: #181818;
+}
+
 .content-sports {
     max-width: 100%;
     background-color: #181818;
@@ -461,6 +467,11 @@ button {
 
 .modal {
     z-index: 9002;
+}
+
+.modal-header, .modal-body{
+    background-color: #181818;
+    color: #FFFFFF;
 }
 
 .indentificacao .horario {
@@ -952,6 +963,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:foc
 input[type=text],
 input[type=number],
 input[type=password],
+input[type=date],
 select.form-control{
     background-color: #181818;
     color: var(--foreground-header);
@@ -966,6 +978,7 @@ select.form-control{
 input[type=text]:focus,
 input[type=number]:focus,
 input[type=password]:focus,
+input[type=date]:focus,
 select.form-control:focus {
     background-color: #181818;
     color: var(--foreground-header);
