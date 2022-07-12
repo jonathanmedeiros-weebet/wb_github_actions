@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { SidebarService } from '../../services/utils/sidebar.service';
-import { ParametrosLocaisService } from '../../services/parametros-locais.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { AuthService } from '../../services/auth/auth.service';
-import { MenuFooterService } from '../../services/utils/menu-footer.service';
-import { MessageService } from '../../services/utils/message.service';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {SidebarService} from '../../services/utils/sidebar.service';
+import {ParametrosLocaisService} from '../../services/parametros-locais.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {AuthService} from '../../services/auth/auth.service';
+import {MenuFooterService} from '../../services/utils/menu-footer.service';
+import {MessageService} from '../../services/utils/message.service';
 import {config} from '../../config';
 
 @Component({
@@ -88,24 +88,37 @@ export class MenuFooterComponent implements OnInit {
     }
 
     toggleMenu() {
-        if (this.menuIsOpen || !this.isOpen) {
+        if (!this.campeonatosIsOpen && this.menuIsOpen || !this.isOpen) {
             this.toggleSidebar();
-            this.menuIsOpen = false;
-        } else {
-            this.campeonatosIsOpen = false;
-            this.menuIsOpen = true;
         }
+
+        this.campeonatosIsOpen = false;
+        this.menuIsOpen = true;
+
+        // if (this.menuIsOpen || !this.isOpen) {
+        //     this.toggleSidebar();
+        //     this.menuIsOpen = false;
+        // } else {
+        //
+        // }
 
     }
 
     toggleCampeonatos() {
-        if (this.campeonatosIsOpen || !this.isOpen) {
+        if (!this.menuIsOpen && this.campeonatosIsOpen || !this.isOpen) {
             this.toggleSidebar();
-            this.campeonatosIsOpen = true;
-        } else {
-            this.menuIsOpen = false;
-            this.campeonatosIsOpen = true;
         }
+
+        this.menuIsOpen = false;
+        this.campeonatosIsOpen = true;
+
+        // if (this.campeonatosIsOpen || !this.isOpen) {
+        //     this.toggleSidebar();
+        //     this.campeonatosIsOpen = true;
+        // } else {
+        //     this.menuIsOpen = false;
+        //     this.campeonatosIsOpen = true;
+        // }
 
     }
 
