@@ -124,7 +124,6 @@
         "betsgames.net": "gulp betsgames.net",
         "quina.bet": "gulp quina.bet",
         "jbrbets.net": "gulp jbrbets.net",
-        "amgbet.wee.bet": "gulp amgbet.wee.bet",
         "betsportse.com": "gulp betsportse.com",
         "ligabet.wee.bet": "gulp ligabet.wee.bet",
         "pernambucoesportes.wee.bet": "gulp pernambucoesportes.wee.bet",
@@ -238,7 +237,10 @@
         "volpsport.com": "gulp volpsport.com",
         "uai.bet": "gulp uai.bet",
         "topbetgames.wee.bet": "gulp topbetgames.wee.bet",
-        "brasilsport.online": "gulp brasilsport.online"
+        "brasilsport.online": "gulp brasilsport.online",
+        "spacebets.net": "gulp spacebets.net",
+        "sm7.wee.bet": "gulp sm7.wee.bet",
+        "brotherr.bet": "gulp brotherr.bet"
     },
     "private": true,
     "dependencies": {

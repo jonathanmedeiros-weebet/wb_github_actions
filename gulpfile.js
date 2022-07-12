@@ -1126,15 +1126,6 @@ gulp.task('jbrbets.net', function (done) {
     });
 });
 
-gulp.task('amgbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "amgbet.wee.bet",
-        banca: "AMG BET",
-        styles: "",
-    });
-});
-
 gulp.task('betsportse.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2193,6 +2184,33 @@ gulp.task('brasilsport.online', function (done) {
         server: "front1.wee.bet",
         host: "brasilsport.online",
         banca: "BRASIL SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('spacebets.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "spacebets.net",
+        banca: "SPACE BETS",
+        styles: "",
+    });
+});
+
+gulp.task('sm7.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "sm7.wee.bet",
+        banca: "SM7",
+        styles: "",
+    });
+});
+
+gulp.task('brotherr.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brotherr.bet",
+        banca: "BROTHER BET",
         styles: "",
     });
 });
