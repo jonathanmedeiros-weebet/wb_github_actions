@@ -2214,3 +2214,21 @@ gulp.task('brotherr.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('paraibapixbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "paraibapixbet.wee.bet",
+        banca: "PB PIX BET",
+        styles: "",
+    });
+});
+
+gulp.task('visabet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "visabet.wee.bet",
+        banca: "VISA BET",
+        styles: "",
+    });
+});

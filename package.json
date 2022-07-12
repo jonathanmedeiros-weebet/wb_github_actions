@@ -240,7 +240,9 @@
         "brasilsport.online": "gulp brasilsport.online",
         "spacebets.net": "gulp spacebets.net",
         "sm7.wee.bet": "gulp sm7.wee.bet",
-        "brotherr.bet": "gulp brotherr.bet"
+        "brotherr.bet": "gulp brotherr.bet",
+        "paraibapixbet.wee.bet": "gulp paraibapixbet.wee.bet",
+        "visabet.wee.bet": "gulp visabet.wee.bet"
     },
     "private": true,
     "dependencies": {
