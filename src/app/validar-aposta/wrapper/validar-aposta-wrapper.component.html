@@ -8,7 +8,7 @@
                 <div class="">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                         <div class="form-group">
-                            <input type="text" style="text-transform:uppercase;" placeholder="Código da pré-aposta"
+                            <input type="number" placeholder="Código da pré-aposta"
                                    class="form-control" formControlName="codigo" autocomplete="off"
                                    [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                         </div>

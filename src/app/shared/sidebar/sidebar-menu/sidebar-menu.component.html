@@ -1,17 +1,17 @@
-<ul class="sidebar-menu">
+<ul class="sidebar-menu" *ngIf="isLoggedIn">
     <li *ngIf="!isCliente">
         <a (click)="abrirModalTabela()">
             <i class="fa-solid fa-table-list"></i>
             Tabela
         </a>
     </li>
-    <li *ngIf="!isCliente && isLoggedIn">
+    <li *ngIf="!isCliente">
         <a [routerLink]="['/validar-aposta']">
             <i class="fa-solid fa-check"></i>
             Validação
         </a>
     </li>
-    <li *ngIf="!isCliente && isLoggedIn">
+    <li *ngIf="!isCliente">
         <a [routerLink]="['/apuracao']">
             <i class="fa-solid fa-chart-line"></i>
             Apuração
