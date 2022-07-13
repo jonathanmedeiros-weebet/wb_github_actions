@@ -164,7 +164,6 @@
         "trevoone.bet": "gulp trevoone.bet",
         "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
         "betpixbrasil.com": "gulp betpixbrasil.com",
-        "betshelby.net": "gulp betshelby.net",
         "esportenetreipele.com": "gulp esportenetreipele.com",
         "apostatop.net": "gulp apostatop.net",
         "betfacil123.app": "gulp betfacil123.app",
@@ -242,7 +241,8 @@
         "sm7.wee.bet": "gulp sm7.wee.bet",
         "brotherr.bet": "gulp brotherr.bet",
         "paraibapixbet.wee.bet": "gulp paraibapixbet.wee.bet",
-        "visabet.wee.bet": "gulp visabet.wee.bet"
+        "visabet.wee.bet": "gulp visabet.wee.bet",
+        "infinitybet.wee.bet": "gulp infinitybet.wee.bet"
     },
     "private": true,
     "dependencies": {

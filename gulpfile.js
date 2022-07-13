@@ -1510,15 +1510,6 @@ gulp.task('betpixbrasil.com', function (done) {
     });
 });
 
-gulp.task('betshelby.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betshelby.net",
-        banca: "BET SHELBY",
-        styles: "",
-    });
-});
-
 gulp.task('esportenetreipele.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2229,6 +2220,15 @@ gulp.task('visabet.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "visabet.wee.bet",
         banca: "VISA BET",
+        styles: "",
+    });
+});
+
+gulp.task('infinitybet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "infinitybet.wee.bet",
+        banca: "INFINITY BET",
         styles: "",
     });
 });
