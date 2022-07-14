@@ -1510,15 +1510,6 @@ gulp.task('betpixbrasil.com', function (done) {
     });
 });
 
-gulp.task('betshelby.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betshelby.net",
-        banca: "BET SHELBY",
-        styles: "",
-    });
-});
-
 gulp.task('esportenetreipele.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2210,7 +2201,53 @@ gulp.task('brotherr.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "brotherr.bet",
-        banca: "BROTHER BET",
+        banca: "BROTHERS BET",
+        styles: "",
+    });
+});
+
+gulp.task('paraibapixbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "paraibapixbet.wee.bet",
+        banca: "PB PIX BET",
+        styles: "",
+    });
+});
+
+gulp.task('visabet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "visabet.wee.bet",
+        banca: "VISA BET",
+        styles: "",
+    });
+});
+
+gulp.task('infinitybet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "infinitybet.wee.bet",
+        banca: "INFINITY BET",
+        styles: "",
+    });
+});
+
+gulp.task('pixtop.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pixtop.bet",
+        banca: "PIX TOP",
+        styles: "",
+    });
+});
+
+gulp.task('xbetpix.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "xbetpix.wee.bet",
+        shared_url: "xbetpix.com.br",
+        banca: "X BETPIX",
         styles: "",
     });
 });
