@@ -1,125 +1,154 @@
 <section class="pre-bilhete"
-    [ngClass]="{'pre-bilhete-mobile': displayPreTicker, 'hide': !isEsporte, 'hide-desktop': isPagina}">
-    <div class="pre-bilhete-esportes">
-        <h4>BILHETE</h4>
+         [ngClass]="{'pre-bilhete-mobile': displayPreTicker, 'hide': !isEsporte, 'hide-desktop': isPagina}">
+    <div class="bilhete-container">
         <a (click)="closeCupom()" class="fechar-pre-bilhete">
             <i class="fa fa-times fa-lg"></i>
         </a>
-        <div class="value-informations">
-            <p>
-                Valor da aposta:
-                <span class="valor">{{form.value.valor | currency}}</span>
-            </p>
-            <p>
-                Possível Ganho:
-                <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
-            </p>
-            <p>
-                Cotação:
-                <span class="cotacao">{{cotacao | cotacao}}</span>
-            </p>
-            <p class="valores">
-                <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
-                <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
-                <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
-                <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
-            </p>
+        <div class="titulo">BILHETE</div>
+        <div class="acoes-bilhete">
+            Jogos Selecionados
+            <a [ngClass]="{'disabled': itens.length == 0}" (click)="removerItens()">
+                <i class="fa-solid fa-trash"></i> Remover todos
+            </a>
         </div>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="div-inputs">
-                <div class="form-group" *ngIf="!isCliente">
-                    <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
-                        class="form-control" placeholder="Nome do apostador...">
-                    <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
-                </div>
-                <div class="form-group">
-                    <input type="number" formControlName="valor" [min]="apostaMinima" [max]="apostaMaximo"
-                        [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
-                    <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
-                </div>
-                <div *ngIf="isLoggedIn" class="form-group form-check-custom form-check-style-1 alteracoes-odds">
-                    <input type="checkbox" class="form-check-input-custom form-check-input-style-1" id="aceito-alteracoes-odds"
-                        formControlName="aceitar_alteracoes_odds">
-                    <label for="aceito-alteracoes-odds">
-                        Aceitar alterações de odds
-                    </label>
-                </div>
-                <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn" class="form-group form-check-custom form-check-style-1 utilizar-bonus">
-                    <input type="checkbox" class="form-check-input-custom form-check-input-style-1" id="utilizar-bonus"
-                           formControlName="utilizar_bonus" (click)="toggleUtilizarBonus()">
-                    <label for="utilizar-bonus">
-                        Utilizar bônus
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <ng-container *ngIf="mudancas;else btnApostar">
-                    <div class="mensagem-mudanca">
-                        Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta
-                    </div>
-                    <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas"
-                        class="btn btn-custom btn-block">
-                        Aceitar Alterações
-                    </button>
-                </ng-container>
-                <ng-template #btnApostar>
-                    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
-                        Apostar <b>({{itens.length}})</b>
-                    </button>
-                    <ng-template #btnProcessando>
-                        <button disabled class="btn btn-custom btn-block">
-                            Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
-                            <i class="fa fa-spinner fa-spin"></i>
-                        </button>
-                    </ng-template>
-                </ng-template>
-            </div>
-        </form>
-
-        <div *ngIf="itens.length > 0" class="div-jogos-selecionados">
-            <h3>
-                Jogos Selecionados
-            </h3>
-            <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
-                <div class="jogo-selecionado-inner">
-                    <div class="horario">
-                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
-                    </div>
-                    <!-- <div class="campeonato-nome">
-                        {{item.jogo.campeonato.nome}}
-                    </div> -->
-                    <div class="odd" [ngClass]="{'mudou': item.mudanca}">
+        <div class="pre-bilhete-esportes">
+            <div *ngIf="itens.length > 0; else semJogosSelecionados" class="div-jogos-selecionados">
+                <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
+                    <div class="jogo-selecionado-inner">
+                        <div class="horario">
+                            {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                        </div>
+                        <!-- <div class="campeonato-nome">
+                            {{item.jogo.campeonato.nome}}
+                        </div> -->
+                        <div class="odd" [ngClass]="{'mudou': item.mudanca}">
                         <span *ngIf="item.cotacao.nome; else chave">
                             {{item.cotacao.nome}}
                         </span>
-                        <ng-template #chave>
+                            <ng-template #chave>
                             <span *ngIf="item.jogo.sport_id == 1">
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
-                            <span *ngIf="item.jogo.sport_id != 1;">
+                                <span *ngIf="item.jogo.sport_id != 1;">
                                 {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
                             </span>
-                        </ng-template>
-                        <span class="valor">
+                            </ng-template>
+                            <span class="valor">
                             ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                            item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
+                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
                             <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
                                 ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
                                 item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
                             </del>
                         </span>
+                        </div>
+                        <div class="mercado">
+                            {{item.cotacao.chave | oddCategoria}}
+                        </div>
+                        <div class="jogo-nome">
+                            {{item.jogo.nome}}
+                        </div>
                     </div>
-                    <div class="mercado">
-                        {{item.cotacao.chave | oddCategoria}}
+                    <div class="remover-item" (click)="removerItem(i)">
+                        <i class="fa fa-times"></i>
                     </div>
-                    <div class="jogo-nome">
-                        {{item.jogo.nome}}
-                    </div>
-                </div>
-                <div class="remover-item" (click)="removerItem(i)">
-                    <i class="fa fa-times"></i>
                 </div>
             </div>
+            <ng-template #semJogosSelecionados>
+                <div class="div-jogos-selecionados">
+                    <div id="nenhum-jogo">
+                        <p>
+                            <span><i class="fa-solid fa-circle-info"></i> Nenhuma aposta selecionada!</span>
+                        </p>
+                        <p>
+                            Selecione alguma aposta clicando nas ODDS para poder finalizar o bilhete.
+                        </p>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="footer-bilhete">
+            <!--                <div class="value-informations">-->
+            <!--                    <p>-->
+            <!--                        Valor da aposta:-->
+            <!--                        <span class="valor">{{form.value.valor | currency}}</span>-->
+            <!--                    </p>-->
+            <!--                    -->
+            <!--                    <p class="valores">-->
+            <!--                        <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>-->
+            <!--                        <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>-->
+            <!--                        <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>-->
+            <!--                        <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>-->
+            <!--                    </p>-->
+            <!--                </div>-->
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="div-inputs">
+                    <div class="form-group" *ngIf="!isCliente">
+                        <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
+                               class="form-control" placeholder="Nome do apostador...">
+                        <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                    </div>
+                    <div class="form-group">
+                        <input currencyMask [options]="{
+                        align: 'left',
+                        min: apostaMinima,
+                        max: apostaMaximo,
+                        precision: 0,
+                        prefix: 'R$ ',
+                        allowNegative: false,
+                        allowZero: false
+                        }" class="form-control" formControlName="valor"
+                               [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
+                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                    </div>
+                    <div class="informations">
+                        Cotação:
+                        <span class="cotacao">{{cotacao | cotacao}}</span>
+                        <br>
+                        Possíveis Ganhos:
+                        <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
+                    </div>
+                    <div *ngIf="isLoggedIn" class="form-group form-check-custom form-check-style-1 alteracoes-odds">
+                        <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
+                               id="aceito-alteracoes-odds"
+                               formControlName="aceitar_alteracoes_odds">
+                        <label for="aceito-alteracoes-odds">
+                            Aceitar alterações de odds
+                        </label>
+                    </div>
+                    <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn"
+                         class="form-group form-check-custom form-check-style-1 utilizar-bonus">
+                        <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
+                               id="utilizar-bonus"
+                               formControlName="utilizar_bonus" (click)="toggleUtilizarBonus()">
+                        <label for="utilizar-bonus">
+                            Utilizar bônus
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group submit-buttons">
+                    <ng-container *ngIf="mudancas;else btnApostar">
+                        <div class="mensagem-mudanca">
+                            Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta
+                        </div>
+                        <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas"
+                                class="btn btn-custom btn-block">
+                            Aceitar Alterações
+                        </button>
+                    </ng-container>
+                    <ng-template #btnApostar>
+                        <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
+                            Apostar <b>({{itens.length}})</b>
+                        </button>
+                        <ng-template #btnProcessando>
+                            <button disabled class="btn btn-custom btn-block">
+                                Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </button>
+                        </ng-template>
+                    </ng-template>
+                </div>
+            </form>
         </div>
     </div>
 </section>
@@ -128,11 +157,11 @@
     <div class="modal-body" id="aposta-deslogado">
         <div *ngIf="opcoes.cartao_aposta" style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
             <button class="btn" (click)="trocarTipoApostaDeslogado('preaposta')"
-                [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                    [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
                 Pré-Aposta
             </button>
             <button class="btn" (click)="trocarTipoApostaDeslogado('cartao')"
-                [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                    [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
                 Cartão de Aposta
             </button>
         </div>
@@ -181,7 +210,7 @@
                     <div class="form-group col-md-6">
                         <label>Chave</label>
                         <input type="text" class="form-control" formControlName="chave" autocomplete="off"
-                            style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
+                               style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
                     </div>
                     <div class="form-group col-md-6">
                         <label>PIN</label>
@@ -198,7 +227,7 @@
     <div class="modal-footer">
         <button type="button" style="background: #e2e2e2;" class="btn" (click)="modalRef.dismiss()">Fechar</button>
         <button type="button" class="btn btn-custom" *ngIf="!disabled; else processandoPreAposta"
-            (click)="finalizarApostaDeslogado()">
+                (click)="finalizarApostaDeslogado()">
             Finalizar {{btnText}}
         </button>
         <ng-template #processandoPreAposta>

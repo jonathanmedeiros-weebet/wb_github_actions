@@ -56,6 +56,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     mobileScreen = false;
     utilizarBonus = false;
 
+
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private preApostaService: PreApostaEsportivaService,
@@ -197,6 +198,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             this.aceitarMudancas();
         }
 
+        this.bilheteService.atualizarItens(this.itens.value);
+    }
+
+    removerItens() {
+        this.itens.clear();
         this.bilheteService.atualizarItens(this.itens.value);
     }
 

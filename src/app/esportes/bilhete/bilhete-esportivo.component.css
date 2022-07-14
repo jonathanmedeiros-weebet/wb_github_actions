@@ -1,41 +1,92 @@
 .pre-bilhete {
     width: 270px;
     text-align: center;
-    padding: 20px 15px 0 15px;
+    padding: 0;
     height: 100%;
-    background-color: var(--sidebar-right)
+    background-color: var(--sidebar-right);
 }
 
-.pre-bilhete h4 {
+.bilhete-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    padding: 10px 0;
     color: var(--foreground-highlight);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
 }
 
-.pre-bilhete h4::before {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 20px;
-    background: var(--highlight);
-    top: 23px;
-    left: 108px;
-    position: relative;
+.acoes-bilhete {
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: left;
+    margin: 10px 0;
 }
 
-.pre-bilhete-esportes h4::before {
-    left: 50%;
-    margin-left: -37px;
+.acoes-bilhete a {
+    color: var(--foreground-header);
+    height: 15px;
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.pre-bilhete-esportes h3::before {
-    left: 50%;
-    margin-left: -81px;
+.acoes-bilhete a.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+#nenhum-jogo {
+    background-color: #181818;
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+#nenhum-jogo span {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pre-bilhete-esportes {
+    flex-grow: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.footer-bilhete {
+    border-top: 2px solid rgba(241, 241, 241, .05);
 }
 
 .div-inputs {
-    background-color: var(--odds);
     padding: 20px 15px 8px 15px;
-    border-radius: 0.25rem;
-    margin-bottom: 15px;
+    /*border-radius: 0.25rem;*/
+    /*margin-bottom: 15px;*/
+}
+
+.informations {
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 0 0 10px;
+}
+
+.submit-buttons {
+    padding: 20px 15px 8px 15px;
 }
 
 .live-odd {
@@ -51,6 +102,13 @@
 {
     color: var(--foreground-highlight);
     font-weight: bolder;
+}
+
+.div-jogos-selecionados {
+    padding: 0 15px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .div-jogos-selecionados h3 {
@@ -77,7 +135,7 @@
 
 .jogo-selecionado {
     padding: 15px 0;
-    border-top: 1px dashed #aec3d8;
+    border-top: 1px dashed var(--highlight);
     text-align: left;
     position: relative;
 }
@@ -110,8 +168,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    color: red;
-    font-size: 25px;
+    color: var(--highlight);
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -140,7 +198,7 @@
 
 #aposta-deslogado .btn {
     width: 50%;
-    border: 0px;
+    border: 0;
     border-radius: 3px 3px 0 0;
 }
 
@@ -183,6 +241,10 @@
 
 .alteracoes-odds, .utilizar-bonus {
     text-align: left;
+}
+
+input {
+    font-size: 12px;
 }
 
 @media only screen and (max-width: 1024px) {

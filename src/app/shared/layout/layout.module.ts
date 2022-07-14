@@ -42,6 +42,8 @@ import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportiv
 import {SubmenuComponent} from './submenu/submenu.component';
 import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
 
+import {NgxCurrencyModule} from 'ngx-currency';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -52,6 +54,7 @@ import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
         UtilsModule,
         AngularSvgIconModule,
         NgxMaskModule.forRoot(),
+        NgxCurrencyModule,
         NgbModalModule,
         NgbAlertModule
     ],
