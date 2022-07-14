@@ -2246,6 +2246,7 @@ gulp.task('xbetpix.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "xbetpix.wee.bet",
+        shared_url: "xbetpix.com.br",
         banca: "X BETPIX",
         styles: "",
     });
