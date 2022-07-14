@@ -2201,7 +2201,7 @@ gulp.task('brotherr.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "brotherr.bet",
-        banca: "BROTHER BET",
+        banca: "BROTHERS BET",
         styles: "",
     });
 });
