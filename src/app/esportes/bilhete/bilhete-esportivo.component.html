@@ -74,12 +74,7 @@
             <!--                        <span class="valor">{{form.value.valor | currency}}</span>-->
             <!--                    </p>-->
             <!--                    -->
-            <!--                    <p class="valores">-->
-            <!--                        <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>-->
-            <!--                        <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>-->
-            <!--                        <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>-->
-            <!--                        <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>-->
-            <!--                    </p>-->
+
             <!--                </div>-->
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="div-inputs">
@@ -89,17 +84,16 @@
                         <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
                     </div>
                     <div class="form-group">
-                        <input currencyMask [options]="{
-                        align: 'left',
-                        min: apostaMinima,
-                        max: apostaMaximo,
-                        precision: 0,
-                        prefix: 'R$ ',
-                        allowNegative: false,
-                        allowZero: false
-                        }" class="form-control" formControlName="valor"
+                        <input type="number" formControlName="valor" [min]="apostaMinima"
+                               [max]="apostaMaximo" (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
                                [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
                         <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                        <div class="valores" [ngClass]="{'fadeIn': valorFocado, 'fadeOut': !valorFocado}">
+                            <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
+                            <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
+                            <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
+                            <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
+                        </div>
                     </div>
                     <div class="informations">
                         Cotação:

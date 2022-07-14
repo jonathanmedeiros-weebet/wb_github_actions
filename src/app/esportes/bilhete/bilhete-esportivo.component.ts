@@ -55,6 +55,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     };
     mobileScreen = false;
     utilizarBonus = false;
+    valorFocado = false;
 
 
     constructor(
@@ -75,7 +76,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
 
         this.createForm();
         this.definirAltura();
@@ -250,6 +251,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     toggleUtilizarBonus() {
         this.utilizarBonus = !this.utilizarBonus;
         this.calcularPossibilidadeGanho(this.form.value.valor);
+    }
+
+    setFocoValor(focus: boolean) {
+        this.valorFocado = focus;
     }
 
     submit() {
