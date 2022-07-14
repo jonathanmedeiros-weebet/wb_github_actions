@@ -46,6 +46,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         );
         this.menuFooterService.setIsPagina(true);
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
+
+        const params = new URLSearchParams(location.search);
+        params.get('afiliado') ? this.form.get('afiliado').patchValue(params.get('afiliado')) : this.form.get('afiliado').patchValue('');
     }
 
     ngOnDestroy() {
