@@ -65,6 +65,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
     showLoading = false;
     submitting = false;
     heightSidebarNav = 500;
+    collapsed = false;
 
     constructor(
         private auth: AuthService,
@@ -178,6 +179,10 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
 
     closeMenu() {
         this.sidebarService.close();
+    }
+
+    collapseSidebar() {
+        this.collapsed = !this.collapsed;
     }
 
     onSwipeLeft(event) {

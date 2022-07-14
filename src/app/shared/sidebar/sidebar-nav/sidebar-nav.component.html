@@ -1,4 +1,4 @@
-<ul id="menu-side-left" class="sidebar-nav"  [ngStyle]="{'width.px': 'calc(100vh - ' + height +'´x'}">
+<ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
     <ng-container *ngIf="contexto == 'esportes'">
         <!--        <div *ngIf="regioesDestaque && !mobileScreen">-->
         <!--            <span class="group">Destaques</span>-->
@@ -28,7 +28,7 @@
         <!--                    </a>-->
         <!--                </li>-->
         <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
-            <span class="group">Campeonatos</span>
+            <span class="group" *ngIf="!collapsed">Campeonatos</span>
             <li class="regiao" *ngFor="let regiao of itens">
                 <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>

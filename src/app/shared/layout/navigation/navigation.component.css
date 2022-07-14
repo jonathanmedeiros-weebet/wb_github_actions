@@ -1,4 +1,4 @@
-#sidebar-wrapper {
+.sidebar-wrapper {
     width: 270px;
     /*position: absolute;*/
     /*top: 0;*/
@@ -6,19 +6,44 @@
     /*bottom: 0;*/
     background: var(--sidebar-left);
     /*z-index: 1000;*/
+    transition: 500ms;
 }
 
-#sidebar-wrapper a {
+.btn-collapse {
+    display: flex;
+    width: 50px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--highlight);
+    color: var(--header);
+    border-radius: 0 0 0 5px;
+}
+
+.collapsed .btn-collapse {
+    border-radius: 0;
+}
+
+.collapsed {
+    width: 50px;
+}
+
+.collapse-container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.sidebar-wrapper a {
     /*color: var(--foreground-sidebar-left);*/
     text-decoration: none;
     cursor: pointer;
 }
 
-#sidebar-wrapper .dropdown-item {
+.sidebar-wrapper .dropdown-item {
     color: inherit;
 }
 
-#sidebar-wrapper .dropdown-item:hover {
+.sidebar-wrapper .dropdown-item:hover {
     color: inherit;
 }
 
@@ -49,74 +74,6 @@
     font-size: 12px;
 }
 
-#sidebar-wrapper ul li {
-    list-style: none;
-}
-
-.btn-danger {
-    position: absolute;
-    top: 110px;
-    left: 260px;
-    z-index: 2000;
-}
-
-.supresinha {
-    cursor: pointer;
-}
-
-.regiao .flag-icon {
-    float: left;
-    margin-top: 0;
-    margin-right: 4px;
-    width: 22px;
-    height: 22px;
-    clip-path: circle();
-}
-
-.flag-icon {
-    align-self: center;
-    width: 13px;
-    height: 13px;
-    clip-path: circle();
-}
-
-.icone-generico {
-    align-self: center;
-    font-size: 13px;
-}
-
-.regiao > a {
-    position: relative;
-    display: flex;
-    vertical-align: center;
-}
-
-.regiao > a:after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid var(--foreground-sidebar-left);
-    position: absolute;
-    right: 10px;
-    top: 13px;
-}
-
-.regiao > a.selected:after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid var(--foreground-sidebar-left);
-}
-
-.regiao ul {
-    padding-left: 19px;
-}
-
 @media only screen and (max-width: 1024px) {
     .black-screen {
         width: 100%;
@@ -139,7 +96,7 @@
         display: none;
     }
 
-    #sidebar-wrapper {
+    .sidebar-wrapper {
         width: 100%;
         /*max-height: calc(100vh - 55px);*/
         /*position: absolute;*/

@@ -14,6 +14,7 @@ import {Subject} from 'rxjs';
 })
 export class SidebarNavComponent implements OnInit {
     @Input() height;
+    @Input() collapsed = false;
     contexto;
     esporte = '';
     regiaoOpen;
