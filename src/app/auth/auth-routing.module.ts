@@ -11,10 +11,6 @@ export const routes: Routes = [
         component: CadastroComponent
     },
     {
-        path: 'cadastro/:afiliado',
-        component: CadastroComponent
-    },
-    {
         path: 'recuperar-senha',
         component: RecuperarSenhaComponent
     },

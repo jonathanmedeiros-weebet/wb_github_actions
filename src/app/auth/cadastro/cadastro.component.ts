@@ -10,6 +10,7 @@ import {AuthService} from '../../shared/services/auth/auth.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-cadastro',
@@ -32,6 +33,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         private auth: AuthService,
         private menuFooterService: MenuFooterService,
         private paramsService: ParametrosLocaisService,
+        private route: ActivatedRoute,
     ) {
         super();
     }
@@ -47,8 +49,12 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         this.menuFooterService.setIsPagina(true);
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
 
-        const params = new URLSearchParams(location.search);
-        params.get('afiliado') ? this.form.get('afiliado').patchValue(params.get('afiliado')) : this.form.get('afiliado').patchValue('');
+        this.route.queryParams
+            .subscribe((params) => {
+            if (params.afiliado) {
+                    this.form.get('afiliado').patchValue(params.afiliado);
+                }
+        });
     }
 
     ngOnDestroy() {
