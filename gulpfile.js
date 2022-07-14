@@ -2232,3 +2232,21 @@ gulp.task('infinitybet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pixtop.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pixtop.bet",
+        banca: "PIX TOP",
+        styles: "",
+    });
+});
+
+gulp.task('xbetpix.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "xbetpix.wee.bet",
+        banca: "X BETPIX",
+        styles: "",
+    });
+});

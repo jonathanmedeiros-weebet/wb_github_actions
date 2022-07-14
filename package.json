@@ -242,7 +242,9 @@
         "brotherr.bet": "gulp brotherr.bet",
         "paraibapixbet.wee.bet": "gulp paraibapixbet.wee.bet",
         "visabet.wee.bet": "gulp visabet.wee.bet",
-        "infinitybet.wee.bet": "gulp infinitybet.wee.bet"
+        "infinitybet.wee.bet": "gulp infinitybet.wee.bet",
+        "pixtop.bet": "gulp pixtop.bet",
+        "xbetpix.wee.bet": "gulp xbetpix.wee.bet"
     },
     "private": true,
     "dependencies": {
