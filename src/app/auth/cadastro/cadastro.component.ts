@@ -10,7 +10,7 @@ import {AuthService} from '../../shared/services/auth/auth.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 @Component({
     selector: 'app-cadastro',
@@ -34,6 +34,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         private menuFooterService: MenuFooterService,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
+        private router: Router
     ) {
         super();
     }
@@ -52,8 +53,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
-                    this.form.get('afiliado').patchValue(params.afiliado);
-                }
+                sessionStorage.setItem('afiliado', params.afiliado);
+            }
+             this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
         });
     }
 

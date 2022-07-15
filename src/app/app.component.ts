@@ -74,6 +74,7 @@ export class AppComponent implements OnInit {
                 }
             );
         }
+        sessionStorage.clear();
     }
 
     downloadApp() {
