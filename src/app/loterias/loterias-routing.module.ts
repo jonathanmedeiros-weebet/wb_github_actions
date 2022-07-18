@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SeninhaComponent } from './seninha/seninha.component';
 import { QuininhaComponent } from './quininha/quininha.component';
 import { QuininhaGuard, SeninhaGuard } from './../services';
-import { LoteriaLayoutComponent } from '../shared/layout/app-layouts/loteria-layout.component';
+import { LoteriaLayoutComponent } from '../shared/layout/app-layouts';
 
 export const routes: Routes = [
     {

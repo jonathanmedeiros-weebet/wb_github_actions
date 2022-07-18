@@ -10,7 +10,7 @@
                         <div class="buttons-container">
                             <a class="opcao-pagamento" *ngIf="whatsapp" (click)="selecionarModalidade('whatsapp')"
                                [ngClass]="{'active':modalidade === 'whatsapp'}">
-                                <i class="fa fa-whatsapp" style="font-size: 20px"></i>
+                                <i class="fa-brands fa-whatsapp" style="font-size: 20px"></i>
                                 <span style="margin-left: 5px">Whatsapp</span>
                             </a>
                             <a class="opcao-pagamento" *ngIf="hasMpToken" (click)="selecionarModalidade('pix')"

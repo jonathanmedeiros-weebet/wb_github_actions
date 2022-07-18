@@ -1,17 +1,17 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { PagesLayoutComponent } from "../shared/layout/app-layouts/pages-layout.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { PagesLayoutComponent } from '../shared/layout/app-layouts';
 
-import { ResultadosEsporteComponent } from "./esportes/resultados-esporte.component";
-import { ResultadosLoteriasComponent } from "./loterias/resultados-loterias.component";
+import { ResultadosEsporteComponent } from './esportes/resultados-esporte.component';
+import { ResultadosLoteriasComponent } from './loterias/resultados-loterias.component';
 
 export const routes: Routes = [
     {
-        path: "",
+        path: '',
         component: PagesLayoutComponent,
         children: [
-            { path: "esportes", component: ResultadosEsporteComponent },
-            { path: "loterias", component: ResultadosLoteriasComponent },
+            { path: 'esportes', component: ResultadosEsporteComponent },
+            { path: 'loterias', component: ResultadosLoteriasComponent },
         ],
     },
 ];

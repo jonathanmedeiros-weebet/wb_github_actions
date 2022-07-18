@@ -18,7 +18,7 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy {
         private menuFooterService: MenuFooterService,
     ) {}
     ngOnInit(): void {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.sideBarService.changeItens({
             contexto: 'casino',
             dados: {}

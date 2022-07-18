@@ -5,31 +5,43 @@ import { WallComponent } from './wall/wall.component';
 import { CasinoWrapperComponent } from './wrapper/wrapper.component';
 import {CasinoGuard} from '../shared/services/guards/casino.guard';
 import { LiveComponent } from './live/live.component';
+import {CassinoLayoutComponent} from '../shared/layout/app-layouts';
 
 const routes: Routes = [
     {
         path: '',
-        component: CasinoWrapperComponent,
+        component: CassinoLayoutComponent,
         children: [
             {
-                path: 'wall',
-                component: WallComponent,
-                canActivate: [CasinoGuard]
-            },
-            {
-                path: 'live',
-                component: LiveComponent,
-                canActivate: [CasinoGuard]
-            },
-            {
-                path: 'wall/:game_type',
-                component: WallComponent,
-                canActivate: [CasinoGuard]
-            },
-            {
-                path: 'play/:game_mode/:game_id',
-                component: GameviewComponent,
-                canActivate: [CasinoGuard]
+                path: '',
+                component: CasinoWrapperComponent,
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'wall/destaques',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'wall',
+                        component: WallComponent,
+                        canActivate: [CasinoGuard]
+                    },
+                    {
+                        path: 'live',
+                        component: LiveComponent,
+                        canActivate: [CasinoGuard]
+                    },
+                    {
+                        path: 'wall/:game_type',
+                        component: WallComponent,
+                        canActivate: [CasinoGuard]
+                    },
+                    {
+                        path: 'play/:game_mode/:game_id',
+                        component: GameviewComponent,
+                        canActivate: [CasinoGuard]
+                    }
+                ]
             }
         ]
     }

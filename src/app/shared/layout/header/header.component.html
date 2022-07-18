@@ -1,4 +1,4 @@
-<header [@openClose]="isOpen ? 'open' : 'closed'">
+<header>
     <div class="side">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
@@ -113,7 +113,7 @@
             <span>ESPORTES</span>
         </a>
     </div>
-    <div class="category">
+    <div class="category" *ngIf="cassinoAtivo">
         <a [routerLink]="['/casino']" routerLinkActive="active">
             <span>CASSINO</span>
         </a>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ApuracaoListagemComponent } from './apuracao-listagem/apuracao-listagem.component';
-import {PagesLayoutComponent} from '../shared/layout/app-layouts/pages-layout.component';
+import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 
 export const routes: Routes = [
     {

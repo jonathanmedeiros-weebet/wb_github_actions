@@ -55,6 +55,10 @@ nav a {
     display: flex;
 }
 
+.dropdown-menu .dropdown-item {
+    color: var(--foreground-header);
+}
+
 .logo {
     max-height: 80px;
 }

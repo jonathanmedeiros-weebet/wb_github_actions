@@ -12,23 +12,7 @@ import {config} from '../../config';
 @Component({
     selector: 'app-header',
     templateUrl: 'header.component.html',
-    styleUrls: ['header.component.css'],
-    animations: [
-        trigger('openClose', [
-            state('open', style({
-                'left': '0',
-            })),
-            state('closed', style({
-                'left': '0',
-            })),
-            transition('open => closed', [
-                animate('400ms ease-in')
-            ]),
-            transition('closed => open', [
-                animate('400ms ease-out')
-            ])
-        ]),
-    ]
+    styleUrls: ['header.component.css']
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
@@ -47,6 +31,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
+    cassinoAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -113,6 +98,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.cassinoAtivo = this.paramsService.getOpcoes().casino;
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
 

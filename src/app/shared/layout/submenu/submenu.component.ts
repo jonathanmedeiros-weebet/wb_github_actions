@@ -125,6 +125,48 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'wbicon icon-basquete',
                 category: 'loteria',
                 active: this.paramsService.quininhaAtiva()
+            },
+            {
+                name: 'Destaques',
+                link: '/casino/wall/destaques',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: 'Todos',
+                link: '/casino/wall/todos',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: 'Slot',
+                link: '/casino/wall/slot',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: 'Roleta',
+                link: '/casino/wall/roleta',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: 'Mesa',
+                link: '/casino/wall/mesa',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: 'Cassino Ao Vivo',
+                link: '/casino/live',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
             }
         ];
 

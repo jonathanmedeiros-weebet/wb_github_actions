@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AcumuladaoListagemComponent} from './acumuladao-listagem/acumuladao-listagem.component';
 import {AcumuladaoFormComponent} from './acumuladao-form/acumuladao-form.component';
-import {AcumuladaoLayoutComponent} from '../shared/layout/app-layouts/acumuladao-layout.component';
+import {AcumuladaoLayoutComponent} from '../shared/layout/app-layouts';
 
 const routes: Routes = [
     {

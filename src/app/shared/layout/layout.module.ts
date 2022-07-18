@@ -11,7 +11,8 @@ import {
     PagesLayoutComponent,
     LoteriaLayoutComponent,
     DesafioLayoutComponent,
-    AcumuladaoLayoutComponent
+    AcumuladaoLayoutComponent,
+    CassinoLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -90,6 +91,7 @@ import {NgxCurrencyModule} from 'ngx-currency';
         BilheteEsportivoComponent,
         SportLayoutComponent,
         PagesLayoutComponent,
+        CassinoLayoutComponent,
         SubmenuComponent,
         LoteriaLayoutComponent,
         DesafioLayoutComponent,

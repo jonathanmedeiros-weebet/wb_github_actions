@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { InformacoesComponent } from './informacoes.component';
-import {PagesLayoutComponent} from '../shared/layout/app-layouts/pages-layout.component';
+import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 
 const routes: Routes = [
     {

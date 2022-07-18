@@ -246,6 +246,27 @@ input {
     font-size: 12px;
 }
 
+.input-icon {
+    position: relative;
+}
+
+.input-icon > i {
+    position: absolute;
+    display: block;
+    transform: translate(0, -50%);
+    top: 50%;
+    pointer-events: none;
+    width: 25px;
+    text-align: center;
+    font-style: normal;
+    margin-left: 5px;
+}
+
+.input-icon > input {
+    padding-left: 30px;
+    padding-right: 0;
+}
+
 .hide {
     display: none;
 }
