@@ -1,4 +1,4 @@
-#footer-bar {
+#footer-bar, #footer-bar-casino {
     /*padding: 5px;*/
     background: var(--sidebar-right);
     width: 100%;
@@ -9,6 +9,10 @@
     flex-direction: row;
     justify-content: space-around;
     padding-top: 5px;
+}
+
+#footer-bar-casino{
+    z-index: 999;
 }
 
 .wbicon {

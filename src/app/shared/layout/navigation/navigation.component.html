@@ -207,6 +207,40 @@
                     </a>
                 </li>
             </ng-container>
+
+            <ng-container *ngIf="contexto =='casino'">
+                <span class="group">Modalidades</span>
+                <li>
+                    <a [routerLink]="['/casino/wall/destaques']">
+                        Destaques
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/casino/wall/todos']">
+                        Todos
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/casino/wall/slot']">
+                        Slot
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/casino/wall/roleta']">
+                        Roleta
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/casino/wall/mesa']">
+                       Mesa
+                    </a>
+                </li>
+                <li>
+                <a [routerLink]="['/casino/live']">
+                    Cassino Ao Vivo
+                </a>
+                </li>
+            </ng-container>
         </ul>
     </div>
 </aside>

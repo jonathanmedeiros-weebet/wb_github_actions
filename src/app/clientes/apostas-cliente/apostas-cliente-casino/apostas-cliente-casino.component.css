@@ -1,0 +1,28 @@
+.table tr td{
+    cursor: pointer;
+}
+
+thead .resultado{
+    padding: 0;
+}
+
+tbody .resultado{
+    padding: 4px;
+}
+
+.tr-2 td{
+    border-top: none!important;
+    padding-top: 0;
+}
+
+.td-ganhou{
+    background: green;
+}
+
+.td-perdeu{
+    background: red;
+}
+
+.td-pendente{
+    background: gray;
+}

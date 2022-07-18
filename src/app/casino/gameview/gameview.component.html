@@ -1,0 +1,23 @@
+
+<div class="game-view">
+    <div class="buttons-game-view">
+        <ng-container *ngIf="mobileScreen && !isAppMobile()">
+            <a *ngIf="!fullscreen" class="screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
+            <a *ngIf="fullscreen" class="screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
+        </ng-container>
+        <a (click)="back()" class="btn game-close"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="game-frame">
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+        <ng-container *ngIf="mobileScreen">
+            <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+        </ng-container>
+        <ng-container *ngIf="!mobileScreen">
+            <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
+        </ng-container>
+
+    </div>
+</div>
+
+
+
