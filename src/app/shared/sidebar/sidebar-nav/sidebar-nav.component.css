@@ -55,8 +55,8 @@ ul li {
     float: left;
     margin-top: 0;
     margin-right: 4px;
-    width: 22px;
-    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
     clip-path: circle();
     z-index: 1;
     border: 1px solid var(--foreground-header);
@@ -104,7 +104,36 @@ ul li {
     padding-left: 19px;
 }
 
-.collapsed .regiao-nome {
-    display: none;
+/*.collapsed .regiao-nome {*/
+/*    opacity: 0;*/
+/*}*/
+
+.hide-item {
+    animation-name: hideAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
 }
 
+.show-item {
+    animation-name: showAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+@keyframes showAnim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+@keyframes hideAnim {
+    0% {
+        opacity: 100;
+    }
+    100% {
+        opacity: 0;
+    }
+}

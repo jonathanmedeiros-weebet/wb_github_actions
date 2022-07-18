@@ -32,7 +32,7 @@
             <li class="regiao" *ngFor="let regiao of itens">
                 <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
-                    <span class="regiao-nome">{{regiao._id}}</span>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id}}</span>
                 </a>
                 <ul *ngIf="regiao._id == regiaoOpen">
                     <li *ngFor="let campeonato of regiao.campeonatos"

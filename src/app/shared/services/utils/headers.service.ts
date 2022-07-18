@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { CustomEncoder } from './../../utils';
+import { CustomEncoder } from '../../utils';
 
 @Injectable({
     providedIn: 'root',
