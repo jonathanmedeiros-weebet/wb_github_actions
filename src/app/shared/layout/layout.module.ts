@@ -32,7 +32,7 @@ import {
     CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent, RecargaSuccessModalComponent,
-    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent
+    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -95,7 +95,8 @@ import {NgxCurrencyModule} from 'ngx-currency';
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
         SidebarNavComponent,
-        SidebarMenuComponent
+        SidebarMenuComponent,
+        LoginModalComponent
     ],
     exports: [
         MainLayoutComponent,

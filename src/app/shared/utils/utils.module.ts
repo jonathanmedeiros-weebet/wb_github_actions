@@ -15,8 +15,10 @@ import {
     CotacaoPipe,
     SplitCodigoPipe,
     FormatarNaturezaPipe,
-    DepositoStatusPixPipePipe
+    DepositoStatusPixPipePipe,
+    SafeIframePipe
 } from './index';
+
 
 @NgModule({
     declarations: [
@@ -34,7 +36,8 @@ import {
         FormatarNaturezaPipe,
         SanitizeCampNamePipe,
         DepositoStatusPixPipePipe,
-        CotacaoPipe
+        CotacaoPipe,
+        SafeIframePipe
     ],
     exports: [
         MomentPipe,
@@ -51,7 +54,8 @@ import {
         FormatarNaturezaPipe,
         DepositoStatusPixPipePipe,
         SanitizeCampNamePipe,
-        CotacaoPipe
+        CotacaoPipe,
+        SafeIframePipe
     ]
 })
 export class UtilsModule { }

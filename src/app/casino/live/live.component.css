@@ -1,0 +1,171 @@
+.game-rooms{
+    position: relative;
+}
+
+.game-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.game-tile {
+    background-color: var(--header);
+    position: relative;
+}
+
+.game-tile-header{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    height: 30px;
+}
+.game-tile-header .info-valor,.info-users{
+    margin-top: 10px;
+    background-color: var(--header);
+    color: var(--foreground-header);
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.game-tile-header .info-valor{
+    margin-right: 50px;
+}
+
+.game-tile-img img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.game-tile-img{
+    width: 100%;
+    height: calc(100% - 20px);
+}
+
+.game-tile-footer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: var(--header);
+    color: var(--foreground-header);
+    font-weight: bold;
+}
+
+.game-tile-footer .info-dealer-name{
+    margin-left: 50px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.game-tile-footer .info-dealer-name{
+    margin-left: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.game-tile-footer .info-table-name{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.game-tile .game-tile-buttons {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+}
+
+.game-tile .game-button-play {
+    color: var(--header);
+    background-color: var(--foreground-header);
+    width: 60%;
+    height: 35px;
+}
+
+.game-tile:hover .game-tile-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+/* HOVER */
+.game-tile:hover img{
+    filter: blur(3px);
+}
+.game-tile:hover .game-button-play{
+    display: block;
+}
+.game-tile:hover .game-button-demo{
+    display: block;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .game-list{
+        padding: 10px 10px 80px 10px;
+    }
+
+    .game-rooms{
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+    }
+
+    .game-tile {
+        width: 100%;
+        height:100%;
+    }
+
+    .game-tile a{
+        pointer-events: none;
+    }
+
+    .game-tile-buttons:hover a{
+        pointer-events: unset;
+    }
+
+}
+
+@media (min-width: 1025px) {
+
+    .game-rooms{
+        width: calc((100% / 5) - 10px);
+        margin-right: 10px;
+        margin-bottom: 10px;
+        --heightA: calc(8vw);
+        --heightB: calc(var(--heightA) + 50px);
+        height: var(--heightB);
+    }
+    .game-tile {
+        width: 100%;
+        --heightA: calc(8vw);
+        --heightB: calc(var(--heightA) + 50px);
+        height: var(--heightB);
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .game-list{
+        padding-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+
+    .game-rooms{
+        width: 32%;
+        height:250px;
+        margin-right:  10px;
+    }
+
+}
+

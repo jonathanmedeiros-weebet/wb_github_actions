@@ -9,6 +9,8 @@ import {Pagina} from '../../shared/models/pagina';
 import {AuthService} from '../../shared/services/auth/auth.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
+import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-cadastro',
@@ -21,6 +23,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
     termosDeUso: Pagina;
     submitting = false;
     debouncer: any;
+    afiliadoHabilitado;
 
     constructor(
         private fb: FormBuilder,
@@ -28,7 +31,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         private messageService: MessageService,
         private modalService: NgbModal,
         private auth: AuthService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private paramsService: ParametrosLocaisService,
+        private route: ActivatedRoute,
     ) {
         super();
     }
@@ -42,6 +47,14 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             error => this.handleError(error)
         );
         this.menuFooterService.setIsPagina(true);
+        this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
+
+        this.route.queryParams
+            .subscribe((params) => {
+            if (params.afiliado) {
+                    this.form.get('afiliado').patchValue(params.afiliado);
+                }
+        });
     }
 
     ngOnDestroy() {
@@ -64,6 +77,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
             genero: ['', [Validators.required]],
+            afiliado: [null, [Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]]
         }, {validator: PasswordValidation.MatchPassword});
     }

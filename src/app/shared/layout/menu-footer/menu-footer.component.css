@@ -13,6 +13,10 @@
     border-radius:  1em 1em 0 0;
 }
 
+#footer-bar-casino{
+    z-index: 999;
+}
+
 .wbicon {
     font-size: 1.8rem;
     margin-bottom: 5px;

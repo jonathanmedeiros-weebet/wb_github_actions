@@ -1,0 +1,96 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { ErrorService } from '../utils/error.service';
+import { HeadersService } from '../utils/headers.service';
+import {catchError, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import { config } from '../../config';
+import { UrlSerializer } from '@angular/router';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class CasinoApiService {
+
+    private central_url = `${config.HOST}/casino`;
+
+    constructor(
+        private http: HttpClient,
+        private errorService: ErrorService,
+        private header: HeadersService,
+        private serializer: UrlSerializer
+    ) { }
+
+    private queryString(data) {
+        console.log(this.serializer.serialize(data));
+        return this.serializer.serialize(data);
+    }
+
+    getApostas(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${config.BASE_URL}/casino/apostas/`, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getGamesList(){
+
+        return this.http.post(`${this.central_url}/games/`,{},this.header.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+
+    }
+
+
+    getGameUrl(gameId, gameMode){
+        let requestOptions;
+        let queryParams = {}
+        queryParams['symbol'] = gameId;
+        queryParams['language'] = 'pt';
+        queryParams['playMode'] = gameMode;
+        queryParams['cashierUr'] = `https://${config.SHARED_URL}/clientes/deposito`;
+        queryParams['lobbyUrl'] = `https://${config.SHARED_URL}/casino/wall`;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${this.central_url}/games/url`, requestOptions).pipe(
+            map((res: any) => {
+                return res;
+            }),
+            catchError(this.errorService.handleError)
+        );
+
+    }
+
+    getCasinoLiveKey(){
+        let requestOptions;
+        requestOptions = this.header.getRequestOptions(true);
+        return this.http.get(`${this.central_url}/games/live`, requestOptions).pipe(
+            map((res: any) => {
+                return res;
+            }),
+            catchError(this.errorService.handleError)
+        );
+
+    }
+}

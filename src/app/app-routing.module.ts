@@ -38,6 +38,10 @@ const appRoutes: Routes = [
                 canActivate: [DesafioGuard]
             },
             {
+                path: 'casino',
+                loadChildren: () => import('./casino/casino.module').then(m => m.CasinoModule)
+            },
+            {
                 path: 'esportes',
                 loadChildren: () => import('./esportes/esportes.module').then(m => m.EsportesModule)
             },

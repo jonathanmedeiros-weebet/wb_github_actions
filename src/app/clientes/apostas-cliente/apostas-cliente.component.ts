@@ -18,6 +18,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
+    casinoHabilitado;
     activeId = 'esporte';
 
     constructor(
@@ -43,6 +44,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
+        this.casinoHabilitado = this.params.getOpcoes().casino;
 
         this.createForm();
         this.menuFooterService.setIsPagina(true);
