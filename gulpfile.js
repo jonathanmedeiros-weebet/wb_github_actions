@@ -2278,3 +2278,12 @@ gulp.task('globalbets.net.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fanaticosbet.net.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "fanaticosbet.net.br",
+        banca: "FANÁTICOS BET",
+        styles: "",
+    });
+});
