@@ -44,6 +44,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     tenisHabilitado = false;
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
+    casinoHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
@@ -128,6 +129,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
         this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
         this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
+        this.casinoHabilitado = this.paramsService.getOpcoes().casino;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;

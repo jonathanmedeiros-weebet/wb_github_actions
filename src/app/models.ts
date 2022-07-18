@@ -40,3 +40,6 @@ export * from './shared/models/aposta-esportiva/pre-aposta-esportiva';
 // Deposito
 export * from './shared/models/deposito/depositoPix';
 export * from './shared/models/clientes/deposito-saque';
+
+// Casino
+export * from './shared/models/casino/aposta-casino';

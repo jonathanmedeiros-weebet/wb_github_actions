@@ -12,3 +12,4 @@ export { RecargaSuccessModalComponent } from './recarga-success-modal/recarga-su
 export { SolicitarSaqueModalComponent } from './solicitar-saque-modal/solicitar-saque-modal.component';
 export { TabelaModalComponent } from './tabela-modal/tabela-modal.component';
 export { ApostaEncerramentoModalComponent } from './aposta-encerramento-modal/aposta-encerramento-modal.component';
+export { LoginModalComponent } from './login-modal/login-modal.component';

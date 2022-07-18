@@ -1,0 +1,36 @@
+<app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+<div class="game-list">
+    <div class="game-rooms" *ngFor="let room of rooms">
+        <div class="game-tile" *ngIf="room.tableOpen == true">
+            <div class="game-tile-header">
+                <span class="info-valor" title="Limites">
+                R$ {{room.tableLimits.minBet}} - R$ {{room.tableLimits.maxBet}}
+                </span>
+                <span class="info-users" title="Usuário Online: {{room.totalSeatedPlayers}}">
+                <i class="fa fa-user"></i>
+                <span>
+                    {{room.totalSeatedPlayers}}
+                </span>
+            </span>
+            </div>
+            <div *ngIf="isCliente" class="game-tile-buttons">
+                <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button-play">Jogar</a>
+            </div>
+            <div class="game-tile-img">
+                <img title="{{room.tableName}}" src="{{room.tableImage}}">
+            </div>
+            <div class="game-tile-footer">
+                   <span class="info-table-name">
+                          {{room.tableName}}
+                    </span>
+                    <span class="info-dealer-name">
+                        Dealer: {{room.dealer.name}}
+                    </span>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

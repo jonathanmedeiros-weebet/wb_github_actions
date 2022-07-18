@@ -20,6 +20,7 @@ export class MenuFooterComponent implements OnInit {
     unsub$ = new Subject();
     hidden = false;
     mobileScreen = false;
+    contexto;
 
     constructor(
         private auth: AuthService,
@@ -66,6 +67,13 @@ export class MenuFooterComponent implements OnInit {
                 .subscribe(
                     res => this.hidden = res
                 );
+
+            this.sidebarService.itens
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(dados => {
+                    this.contexto = dados.contexto;
+                });
+
         }
     }
 

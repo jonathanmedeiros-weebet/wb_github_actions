@@ -64,6 +64,12 @@
                                     <app-apostas-cliente-loteria [queryParams]="queryParams"></app-apostas-cliente-loteria>
                                 </ng-template>
                             </li>
+                            <li [ngbNavItem]="'casino'" >
+                            <a ngbNavLink>Cassino</a>
+                            <ng-template ngbNavContent>
+                                <app-apostas-cliente-casino [queryParams]="queryParams"></app-apostas-cliente-casino>
+                            </ng-template>
+                            </li>
                         </ul>
                         <div [ngbNavOutlet]="nav"></div>
                     </div>
