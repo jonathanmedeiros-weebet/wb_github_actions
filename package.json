@@ -245,7 +245,9 @@
         "visabet.wee.bet": "gulp visabet.wee.bet",
         "infinitybet.wee.bet": "gulp infinitybet.wee.bet",
         "pixtop.bet": "gulp pixtop.bet",
-        "xbetpix.wee.bet": "gulp xbetpix.wee.bet"
+        "xbetpix.wee.bet": "gulp xbetpix.wee.bet",
+        "globalbets.net.br": "gulp globalbets.net.br",
+        "fanaticosbet.net.br": "gulp fanaticosbet.net.br"
     },
     "private": true,
     "dependencies": {

@@ -3,6 +3,8 @@ import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {AuthService, HelperService, ParametroService} from './services';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
+import { filter } from 'rxjs/operators';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -17,7 +19,8 @@ export class AppComponent implements OnInit {
         private auth: AuthService,
         private parametroService: ParametroService,
         public modalService: NgbModal,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private router: Router
     ) {
     }
 
@@ -74,6 +77,20 @@ export class AppComponent implements OnInit {
                 }
             );
         }
+
+        this.router.events
+            .pipe(filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd))
+            .subscribe(event => {
+                let refresh;
+                if (event.id === 1 && event.url === event.urlAfterRedirects) {
+                    refresh = true;
+                } else {
+                    refresh = false;
+                }
+                if (event.id === 1 && refresh === false) {
+                    sessionStorage.clear();
+                }
+            });
     }
 
     downloadApp() {

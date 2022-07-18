@@ -2269,3 +2269,21 @@ gulp.task('xbetpix.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('globalbets.net.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "globalbets.net.br",
+        banca: "GLOBAL BETS",
+        styles: "",
+    });
+});
+
+gulp.task('fanaticosbet.net.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "fanaticosbet.net.br",
+        banca: "FANÁTICOS BET",
+        styles: "",
+    });
+});
