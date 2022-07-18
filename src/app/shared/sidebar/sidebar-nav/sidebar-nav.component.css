@@ -8,6 +8,12 @@ ul li {
     margin: 0;
     overflow: scroll;
     overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar-nav .regiao:last-of-type,
@@ -65,6 +71,24 @@ ul li {
 
 .regiao ul li a {
     padding-left: 30px;
+}
+
+.sub-nav-container {
+    position: absolute;
+    left: 50px;
+    width: 250px;
+    min-width: 250px;
+    height: 150px;
+}
+
+.sub-nav-out {
+    /*display: block;*/
+    /*position: absolute;*/
+    min-width: 250px;
+    height: 150px;
+    left: 50px;
+    background-color: green;
+    z-index: 2000;
 }
 
 .icone-generico {

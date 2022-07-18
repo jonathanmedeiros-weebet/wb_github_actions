@@ -1,4 +1,4 @@
-<ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
+<ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}" style="position: relative">
     <ng-container *ngIf="contexto == 'esportes'">
         <!--        <div *ngIf="regioesDestaque && !mobileScreen">-->
         <!--            <span class="group">Destaques</span>-->
@@ -34,14 +34,16 @@
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
                     <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id}}</span>
                 </a>
-                <ul *ngIf="regiao._id == regiaoOpen">
-                    <li *ngFor="let campeonato of regiao.campeonatos"
-                        (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
-                        <a>
-                            {{campeonato.nome.replace(regiao._id + ': ', '')}}
-                        </a>
-                    </li>
-                </ul>
+                <div class="sub-nav-container">
+                    <ul *ngIf="regiao._id == regiaoOpen" [ngClass]="{'sub-nav-out': collapsed}">
+                        <li *ngFor="let campeonato of regiao.campeonatos"
+                            (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
+                            <a>
+                                {{campeonato.nome.replace(regiao._id + ': ', '')}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ng-container>
         <ng-template #esporteGenerico>

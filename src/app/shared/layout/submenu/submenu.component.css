@@ -12,6 +12,8 @@
     display: flex;
     /*max-width: calc(100% - 480px);*/
     overflow-x: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .submenu::-webkit-scrollbar {
