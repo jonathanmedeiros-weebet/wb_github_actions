@@ -2287,3 +2287,12 @@ gulp.task('fanaticosbet.net.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('facbet.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "facbet.net",
+        banca: "FACBET",
+        styles: "",
+    });
+});
