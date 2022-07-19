@@ -1692,6 +1692,8 @@ gulp.task('pixoubet.com', function (done) {
         host: "pixoubet.com",
         banca: "PiXOUbet",
         styles: "",
+        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #jogo-default-wrapper{ background: #0f0f11!important } .jogos, .eventos{ background: #0f0f11!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #0f0f11!important; } .footer{ background-color:#0f0f11!important; }" +
+            ".jogo-container .indentificacao-mobile, .jogo-container .indentificacao, .jogo-container .campeonato-nome{background: #e1e2e4;} .indentificacao .tempo{color: #fff!important;} .inside-event .tipo-apostas{ background-color: #0f0f11!important; color: white!important; } #esportes-footer{ color:white; } ",
     });
 });
 
@@ -2293,6 +2295,16 @@ gulp.task('facbet.net', function (done) {
         server: "front1.wee.bet",
         host: "facbet.net",
         banca: "FACBET",
+        styles: "",
+    });
+});
+
+gulp.task('futpix.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "futpix.wee.bet",
+        shared_url: "futpix.com.br",
+        banca: "FUTPIX",
         styles: "",
     });
 });
