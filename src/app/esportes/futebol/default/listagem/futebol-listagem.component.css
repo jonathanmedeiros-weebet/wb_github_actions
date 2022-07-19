@@ -36,7 +36,7 @@
 
 .indentificacao {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     height: 60px;
 }
 
@@ -55,30 +55,46 @@
     display: flex;
     flex-direction: column;
     background-color: var(--header);
-    width: 35%;
+    min-width: 35%;
     height: 60px;
     justify-content: center;
     padding: 10px;
     font-size: 10px;
+    margin-right: 5px;
     /*align-items: center;*/
 }
 
 .odds {
     display: flex;
-    flex-grow: 1;
     flex-direction: row;
+    align-items: center;
+    max-width: 200px;
     height: 60px;
-    background-color: green;
-    margin-right: 5px;
-    overflow: scroll;
+    padding: 5px;
+    overflow-x: scroll;
     overflow-y: hidden;
+    background-color: var(--header);
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 
-    /*background-color: var(--header);*/
+.odds::-webkit-scrollbar {
+    display: none;
 }
 
 .odd {
-    width: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 80px;
     height: 45px;
+    margin: 0 5px;
+    background-color: #181818;
+}
+
+.odd:hover {
+    background-color: var(--highlight);
 }
 
 .mais-opcoes {
