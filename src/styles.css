@@ -474,27 +474,28 @@ button {
     color: #FFFFFF;
 }
 
-.indentificacao .horario {
-    border-radius: 5px;
-    padding: 0 5px;
-    margin-right: 15px;
-}
+/*.indentificacao .horario {*/
+/*    border-radius: 5px;*/
+/*    padding: 0 5px;*/
+/*    margin-right: 15px;*/
+/*}*/
 
-.content-sports-list .indentificacao .horario {
-    background-color: var(--event-time);
-    color: var(--fg-event-time);
-}
+/*.content-sports-list .indentificacao .horario {*/
+/*    background-color: var(--event-time);*/
+/*    color: var(--fg-event-time);*/
+/*}*/
 
 .campeonato-header {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     padding: 0 10px;
     font-size: 0.9rem;
-    border-bottom: 4px solid #0A0A09;;
+    /*border-bottom: 4px solid #0A0A09;*/
     cursor: pointer;
     display: flex;
     align-items: center;
     background-color: #0A0A09;
     color: var(--foreground-header);
+    height: 30px;
 }
 
 .campeonato-header>span {
@@ -510,14 +511,14 @@ button {
 
 /* ODDS FUTEBOL */
 
-.odds {
+/*.odds {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
 .odds .inner-odd {
-    /*background-color: var(--odds);*/
+    !*background-color: var(--odds);*!
     background-color: #181818;
     padding: 5px 8px;
     display: flex;
@@ -540,7 +541,7 @@ button {
 
 .odds .odd {
     padding: 1px;
-}
+}*/
 
 .flag-icon {
     background-color: var(--highlight);
@@ -646,17 +647,17 @@ button {
         display: block;
     }
 
-    .odds .odd {
-        width: 33.33%;
-    }
+    /*.odds .odd {*/
+    /*    width: 33.33%;*/
+    /*}*/
 
-    .odds .odd-enabled:hover {
-        background-color: var(--highlight);
-    }
+    /*.odds .odd-enabled:hover {*/
+    /*    background-color: var(--highlight);*/
+    /*}*/
 
-    .odds .odd-enabled:hover span {
-        color: var(--foreground-selected-odds) !important;
-    }
+    /*.odds .odd-enabled:hover span {*/
+    /*    color: var(--foreground-selected-odds) !important;*/
+    /*}*/
 
     .loteria-content .add-palpite {
         margin-top: 24px;
