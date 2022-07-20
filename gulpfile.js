@@ -2308,3 +2308,12 @@ gulp.task('futpix.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('campeoesdobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "campeoesdobet.com",
+        banca: "CAMPEÕES DO BET",
+        styles: "",
+    });
+});

@@ -249,7 +249,8 @@
         "globalbets.net.br": "gulp globalbets.net.br",
         "fanaticosbet.net.br": "gulp fanaticosbet.net.br",
         "facbet.net": "gulp facbet.net",
-        "futpix.wee.bet": "gulp futpix.wee.bet"
+        "futpix.wee.bet": "gulp futpix.wee.bet",
+        "campeoesdobet.com": "gulp campeoesdobet.com"
     },
     "private": true,
     "dependencies": {
