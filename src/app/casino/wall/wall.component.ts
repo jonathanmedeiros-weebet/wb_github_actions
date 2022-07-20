@@ -5,6 +5,7 @@ import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {forEach, includes, indexOf} from 'lodash';
 
 
 @Component({
@@ -24,21 +25,11 @@ export class WallComponent implements OnInit {
     public gameList: [];
     public gameAllList: [];
     public gameSlotList: [];
+    public gameRaspadinhaList: [];
     public gameRoletaList: [];
     public gameMesaList: [];
     public gameDestaquesList: [];
-    public gameDestaques1: [];
-    public gameDestaques2: [];
-    public gameDestaques3: [];
-    public gameDestaques4: [];
-    public gameDestaques5: [];
-    public gameDestaques6: [];
-    public gameDestaques7: [];
-    public gameDestaques8: [];
-    public gameDestaques9: [];
-    public gameDestaques10: [];
-    public gameDestaques11: [];
-    public gameDestaques12: [];
+
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -56,7 +47,9 @@ export class WallComponent implements OnInit {
                     this.showSlot();
                 } else if (this.gameType === 'roleta') {
                     this.showRoulette();
-                } else if (this.gameType === 'mesa') {
+                } else if (this.gameType === 'raspadinha') {
+                    this.showRaspadinha();
+                }else if (this.gameType === 'mesa') {
                     this.showMesa();
                 } else if (this.gameType === 'destaques') {
                     this.showDestaques();
@@ -82,60 +75,33 @@ export class WallComponent implements OnInit {
     }
 
     filterGame(games) {
+        this.gameAllList = games.filter(function (game) {
+            return game.gameID !== 'vs4096bufking' && game.gameID !== 'vswayswerewolf'
+                && game.gameID !== 'vs25davinci' && game.gameID !== 'vs243dancingpar' && game.gameID !== 'vs1600drago'
+                && game.gameID !== 'vs20eking' && game.gameID !== 'vs20ekingrr' && game.gameID !== 'vs10fruity2'
+                && game.gameID !== 'vs4096jurassic' && game.gameID !== 'vs25peking' && game.gameID !== 'vs40pirate'
+                && game.gameID !== 'vswayshive' && game.gameID !== 'vs1024dtiger' && game.gameID !== 'vs50mightra';
+        });
+        games =  this.gameAllList;
+        this.gameDestaquesList = games.filter(function (game) {
+            return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
+                || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
+                || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
+                || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
+                || game.gameID === '422' || game.gameID === 'vpa';
+        });
         this.gameSlotList = games.filter(function(game) {
-            return game.gameTypeID === 'vs' || game.gameTypeID === 'sc';
+            return game.gameTypeID === 'vs';
         });
         this.gameRoletaList = games.filter(function(game) {
             return game.gameTypeID === 'rl';
         });
+        this.gameRaspadinhaList = games.filter(function(game) {
+            return game.gameTypeID === 'sc';
+        });
         this.gameMesaList = games.filter(function(game) {
             return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
         });
-        // Aleatório
-        this.gameDestaquesList = games.filter(function (game) {
-            return game.gameID === 'vs20doghouse' || game.gameID === 'vswayshammthor'
-                || game.gameID === '422' || game.gameID === 'vpa'
-                || game.gameID === 'vs1dragon8' || game.gameID === 'vs50mightra'
-                || game.gameID === 'vs40wildwest' || game.gameID === 'vs20fruitsw' || game.gameID === 'vs4096jurassic';
-        });
-        // Ordenado
-        this.gameDestaques1 = games.filter(function (game) {
-            return game.gameID === '1301';
-        });
-        this.gameDestaques2 = games.filter(function (game) {
-            return game.gameID === 'rla';
-        });
-        this.gameDestaques3 = games.filter(function (game) {
-            return game.gameID === 'vswayszombcarn';
-        });
-        this.gameDestaques4 = games.filter(function (game) {
-            return game.gameID === '1101';
-        });
-        this.gameDestaques5 = games.filter(function (game) {
-            return game.gameID === 'vs20kraken';
-        });
-        this.gameDestaques6 = games.filter(function (game) {
-            return game.gameID === 'vs20olympgate';
-        });
-        this.gameDestaques7 = games.filter(function (game) {
-            return game.gameID === 'vs9chen';
-        });
-        this.gameDestaques8 = games.filter(function (game) {
-            return game.gameID === 'vs20goldfever';
-        });
-        this.gameDestaques9 = games.filter(function (game) {
-            return game.gameID === 'vs5joker';
-        });
-        this.gameDestaques10 = games.filter(function (game) {
-            return game.gameID === 'vs25wolfgold';
-        });
-        this.gameDestaques11 = games.filter(function (game) {
-            return game.gameID === 'vs20hburnhs';
-        });
-        this.gameDestaques12 = games.filter(function (game) {
-            return game.gameID === 'vs4096bufking';
-        });
-        this.gameAllList = games;
     }
 
     getGamesList() {
@@ -150,6 +116,10 @@ export class WallComponent implements OnInit {
         this.gameList = this.gameSlotList;
     }
 
+    showRaspadinha() {
+        this.gameList = this.gameRaspadinhaList;
+    }
+
     showRoulette() {
         this.gameList = this.gameRoletaList;
     }
@@ -159,21 +129,25 @@ export class WallComponent implements OnInit {
     }
 
     showDestaques() {
-        // @ts-ignore
-        this.gameList = this.gameDestaques1.concat(
-            this.gameDestaques2).concat(
-            this.gameDestaques3).concat(
-            this.gameDestaques4).concat(
-            this.gameDestaques6).concat(
-            this.gameDestaques7).concat(
-            this.gameDestaques8).concat(
-            this.gameDestaques9).concat(
-            this.gameDestaques10).concat(
-            this.gameDestaques11).concat(
-            this.gameDestaques12).concat(
-            this.gameDestaquesList);
-    }
+        const destaques = [
+            '1301', 'rla', 'vs20olympgate', 'vs20doghouse', 'vs25wolfgold',
+            '1101', 'vs20kraken', 'vs9chen', 'vs20goldfever', 'vs5joker',
+            'vswayszombcarn', 'vs20hburnhs', '422', 'vpa'
+        ];
 
+        this.gameList = this.gameDestaquesList;
+        for (let cont = 0; cont < destaques.length; cont++ ) {
+            // @ts-ignore
+            const posicao = this.gameList.findIndex((element) => element.gameID === destaques[cont]);
+            if (posicao >= 0) {
+                this.gameList = this.mudarPosicao(this.gameList, posicao, cont);
+            }
+        }
+    }
+    mudarPosicao(array, from, to) {
+        array.splice(to, 0, array.splice(from, 1)[0]);
+        return array;
+    }
     abrirModalLogin() {
         this.modalRef = this.modalService.open(
             LoginModalComponent,

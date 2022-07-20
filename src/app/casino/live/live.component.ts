@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CasinoApiService} from '../../shared/services/casino/casino-api.service';
 import {AuthService} from './../../services';
 import {interval} from 'rxjs';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {LoginModalComponent} from '../../shared/layout/modals';
 
 @Component({
     selector: 'app-live',
@@ -19,10 +21,12 @@ export class LiveComponent implements OnInit, OnDestroy {
     isCliente;
     isLoggedIn;
     showLoadingIndicator = true;
+    modalRef;
 
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
+        private modalService: NgbModal,
     ) {
     }
 
@@ -181,6 +185,23 @@ export class LiveComponent implements OnInit, OnDestroy {
     doWsSend(message) {
         var self = this;
         self.websocket.send(message);
+    }
+    abrirModalLogin() {
+        this.modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                },
+                reason => {
+                }
+            );
     }
 
 }
