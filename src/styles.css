@@ -31,7 +31,7 @@ body {
 }
 
 .base-container main {
-    width: 100%;
+    max-width: calc(100vw - (270px + 270px));
     padding: 0;
     margin: 0;
     background-color: #181818;
