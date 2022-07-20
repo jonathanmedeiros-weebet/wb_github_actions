@@ -24,11 +24,6 @@ export class WallComponent implements OnInit {
 
     public gameList: [];
     public gameAllList: [];
-    public gameSlotList: [];
-    public gameRaspadinhaList: [];
-    public gameRoletaList: [];
-    public gameMesaList: [];
-    public gameDestaquesList: [];
 
 
     constructor(
@@ -44,15 +39,15 @@ export class WallComponent implements OnInit {
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
                 if (this.gameType === 'slot') {
-                    this.showSlot();
+                    this.showSlot(this.gameAllList);
                 } else if (this.gameType === 'roleta') {
-                    this.showRoulette();
+                    this.showRoulette(this.gameAllList);
                 } else if (this.gameType === 'raspadinha') {
-                    this.showRaspadinha();
+                    this.showRaspadinha(this.gameAllList);
                 }else if (this.gameType === 'mesa') {
-                    this.showMesa();
+                    this.showMesa(this.gameAllList);
                 } else if (this.gameType === 'destaques') {
-                    this.showDestaques();
+                    this.showDestaques(this.gameAllList);
                 } else if (this.gameType === 'todos' || this.gameType === '') {
                    this.showAll();
                 }
@@ -73,7 +68,7 @@ export class WallComponent implements OnInit {
                 }
             );
     }
-
+    // REMOVENDO JOGOS
     filterGame(games) {
         this.gameAllList = games.filter(function (game) {
             return game.gameID !== 'vs4096bufking' && game.gameID !== 'vswayswerewolf'
@@ -81,26 +76,6 @@ export class WallComponent implements OnInit {
                 && game.gameID !== 'vs20eking' && game.gameID !== 'vs20ekingrr' && game.gameID !== 'vs10fruity2'
                 && game.gameID !== 'vs4096jurassic' && game.gameID !== 'vs25peking' && game.gameID !== 'vs40pirate'
                 && game.gameID !== 'vswayshive' && game.gameID !== 'vs1024dtiger' && game.gameID !== 'vs50mightra';
-        });
-        games =  this.gameAllList;
-        this.gameDestaquesList = games.filter(function (game) {
-            return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
-                || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
-                || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
-                || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
-                || game.gameID === '422' || game.gameID === 'vpa';
-        });
-        this.gameSlotList = games.filter(function(game) {
-            return game.gameTypeID === 'vs';
-        });
-        this.gameRoletaList = games.filter(function(game) {
-            return game.gameTypeID === 'rl';
-        });
-        this.gameRaspadinhaList = games.filter(function(game) {
-            return game.gameTypeID === 'sc';
-        });
-        this.gameMesaList = games.filter(function(game) {
-            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
         });
     }
 
@@ -112,42 +87,57 @@ export class WallComponent implements OnInit {
         this.gameList = this.gameAllList;
     }
 
-    showSlot() {
-        this.gameList = this.gameSlotList;
+    showSlot(games) {
+        this.gameList = games.filter(function(game) {
+            return game.gameTypeID === 'vs';
+        });
     }
 
-    showRaspadinha() {
-        this.gameList = this.gameRaspadinhaList;
+    showRaspadinha(games) {
+        this.gameList = games.filter(function(game) {
+            return game.gameTypeID === 'sc';
+        });
     }
 
-    showRoulette() {
-        this.gameList = this.gameRoletaList;
+    showRoulette(games) {
+        this.gameList = games.filter(function(game) {
+            return game.gameTypeID === 'rl';
+        });
     }
 
-    showMesa() {
-        this.gameList = this.gameMesaList;
+    showMesa(games) {
+        this.gameList = games.filter(function(game) {
+            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+        });
     }
 
-    showDestaques() {
+    showDestaques(games) {
         const destaques = [
             '1301', 'rla', 'vs20olympgate', 'vs20doghouse', 'vs25wolfgold',
             '1101', 'vs20kraken', 'vs9chen', 'vs20goldfever', 'vs5joker',
             'vswayszombcarn', 'vs20hburnhs', '422', 'vpa'
         ];
-
-        this.gameList = this.gameDestaquesList;
+       let destaquesFiltrados = games.filter(function (game) {
+            return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
+                || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
+                || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
+                || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
+                || game.gameID === '422' || game.gameID === 'vpa';
+        });
         for (let cont = 0; cont < destaques.length; cont++ ) {
-            // @ts-ignore
-            const posicao = this.gameList.findIndex((element) => element.gameID === destaques[cont]);
+            const posicao = destaquesFiltrados.findIndex((element) => element.gameID === destaques[cont]);
             if (posicao >= 0) {
-                this.gameList = this.mudarPosicao(this.gameList, posicao, cont);
+                destaquesFiltrados = mudarPosicao(destaquesFiltrados, posicao, cont);
             }
         }
+        this.gameList = destaquesFiltrados;
+
+        function mudarPosicao(array, from, to) {
+            array.splice(to, 0, array.splice(from, 1)[0]);
+            return array;
+        }
     }
-    mudarPosicao(array, from, to) {
-        array.splice(to, 0, array.splice(from, 1)[0]);
-        return array;
-    }
+
     abrirModalLogin() {
         this.modalRef = this.modalService.open(
             LoginModalComponent,
