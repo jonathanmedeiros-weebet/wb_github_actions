@@ -1938,15 +1938,6 @@ gulp.task('futmoney.net.br', function (done) {
     });
 });
 
-gulp.task('apostafut.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "apostafut.com",
-        banca: "APOSTA FUT",
-        styles: "",
-    });
-});
-
 gulp.task('idealbets.com.br', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2096,15 +2087,6 @@ gulp.task('globbet.com.br', function (done) {
         server: "front2.wee.bet",
         host: "globbet.com.br",
         banca: "GLOB BET",
-        styles: "",
-    });
-});
-
-gulp.task('betworld.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betworld.wee.bet",
-        banca: "BET WORLD",
         styles: "",
     });
 });
