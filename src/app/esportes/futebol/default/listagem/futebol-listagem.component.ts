@@ -3,17 +3,17 @@ import {
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
     ChangeDetectorRef, Input, OnChanges, SimpleChange
 } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import {Router, NavigationExtras} from '@angular/router';
 
-import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
+import {Campeonato, Jogo, ItemBilheteEsportivo} from './../../../../models';
 import {
     ParametrosLocaisService,
     BilheteEsportivoService,
     HelperService,
 } from './../../../../services';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -46,6 +46,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     exibirCampeonatosExpandido;
     loadingScroll = false;
     regiaoSelecionada;
+    qtdOddsPrincipais = 3;
+    oddsPrincipais;
     unsub$ = new Subject();
 
     constructor(
@@ -67,6 +69,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
+        this.oddsPrincipais = this.paramsService.getOddsPrincipais();
+        this.qtdOddsPrincipais = this.oddsPrincipais.length;
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -131,9 +135,29 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             slice = slice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            jogo.favorito,
+                            false);
                         cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     });
+                    if (jogo.cotacoes.length < this.qtdOddsPrincipais) {
+                        const diferenca = this.qtdOddsPrincipais - jogo.cotacoes.length;
+                        for (let i = 0; i < diferenca; i++) {
+                            jogo.cotacoes.push({
+                                _id: undefined,
+                                chave: '',
+                                jogo: undefined,
+                                jogoId: 0,
+                                label: undefined,
+                                nome: '',
+                                valor: 0,
+                                valorFinal: undefined
+                            });
+                        }
+                    }
                 });
 
                 return campeonato;
@@ -322,7 +346,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     proximaData() {
         const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
         const navigationExtras: NavigationExtras = {
-            queryParams: { 'data': proximaData }
+            queryParams: {'data': proximaData}
         };
         this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
     }
@@ -335,7 +359,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         if (regiaoSelecionada) {
             this.regiaoSelecionada = regiaoSelecionada;
 
-            let filteredCamps = this.camps.filter(camp => camp.nome.substring(0, camp.nome.indexOf(':')) === regiaoSelecionada);
+            const filteredCamps = this.camps.filter(camp => camp.nome.substring(0, camp.nome.indexOf(':')) === regiaoSelecionada);
             filteredCamps.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
@@ -364,6 +388,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     imageError(event: Event) {
-        (event.target as HTMLImageElement).src = "";
+        (event.target as HTMLImageElement).src = '';
     }
 }

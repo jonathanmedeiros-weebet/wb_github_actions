@@ -41,7 +41,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))

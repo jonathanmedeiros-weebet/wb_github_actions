@@ -64,7 +64,7 @@ export class ParametrosLocaisService {
 
     getTiposAposta() {
         let result = null;
-        const isLoggedIn = localStorage.getItem('token') ? true : false;
+        const isLoggedIn = !!localStorage.getItem('token');
 
         if (isLoggedIn && localStorage.getItem('tipos_aposta')) {
             const tiposAposta = JSON.parse(localStorage.getItem('tipos_aposta'));
