@@ -32,6 +32,7 @@ body {
 
 .base-container main {
     max-width: calc(100vw - (270px + 270px));
+    width: 100%;
     padding: 0;
     margin: 0;
     background-color: #181818;
@@ -490,7 +491,7 @@ button {
     padding: 0 10px;
     font-size: 0.9rem;
     /*border-bottom: 4px solid #0A0A09;*/
-    cursor: pointer;
+    /*cursor: pointer;*/
     display: flex;
     align-items: center;
     background-color: #0A0A09;
@@ -510,37 +511,37 @@ button {
 
 /* ODDS FUTEBOL */
 
-/*.odds {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
+/*.odds {*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
 
-.odds .inner-odd {
-    !*background-color: var(--odds);*!
-    background-color: #181818;
-    padding: 5px 8px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-}
+/*.odds .inner-odd {*/
+/*    !*background-color: var(--odds);*!*/
+/*    background-color: #181818;*/
+/*    padding: 5px 8px;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    cursor: pointer;*/
+/*}*/
 
-.odds .selecionado {
-    background-color: var(--highlight);
-}
+/*.odds .selecionado {*/
+/*    background-color: var(--highlight);*/
+/*}*/
 
-.odds .selecionado span {
-    color: var(--foreground-selected-odds) !important;
-}
+/*.odds .selecionado span {*/
+/*    color: var(--foreground-selected-odds) !important;*/
+/*}*/
 
-.odd .nome,
-.odd .valor {
-    color: var(--foreground-odds);
-}
+/*.odd .nome,*/
+/*.odd .valor {*/
+/*    color: var(--foreground-odds);*/
+/*}*/
 
-.odds .odd {
-    padding: 1px;
-}*/
+/*.odds .odd {*/
+/*    padding: 1px;*/
+/*}*/
 
 .flag-icon {
     background-color: var(--highlight);
@@ -672,6 +673,10 @@ button {
         padding: 0;
         /*padding: 10px 15px 54px;*/
         height: calc(100vh - 105px);
+    }
+
+    .base-container main {
+        max-width: 100%;
     }
 
     .loteria-content .pre-bilhete {
