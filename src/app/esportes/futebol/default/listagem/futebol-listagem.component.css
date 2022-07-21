@@ -78,21 +78,26 @@
 
 .odds {
     display: flex;
-    flex-direction: row;
+    /*flex-direction: row;*/
     align-items: center;
-    flex-grow: 1;
-    max-width: 100%;
+    /*flex-grow: 1;*/
+    /*width: 100%;*/
     height: 60px;
     padding: 5px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    /*overflow-x: scroll;*/
+    /*overflow-y: hidden;*/
     background-color: var(--header);
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    /*-ms-overflow-style: none;  !* IE and Edge *!*/
+    /*scrollbar-width: none;  !* Firefox *!*/
+    /*pointer-events: auto;*/
 }
 
 .odds::-webkit-scrollbar {
     display: none;
+}
+
+.align-right-end {
+    justify-content: flex-end;
 }
 
 .odd {
@@ -132,6 +137,14 @@
 }
 
 .odds .selecionado span {
+    color: var(--foreground-selected-odds) !important;
+}
+
+.odds .odd-enabled:hover {
+    background-color: var(--highlight);
+}
+
+.odds .odd-enabled:hover span {
     color: var(--foreground-selected-odds) !important;
 }
 

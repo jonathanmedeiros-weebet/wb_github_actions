@@ -48,6 +48,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     regiaoSelecionada;
     qtdOddsPrincipais = 3;
     oddsPrincipais;
+    alignOddsRight = false;
     unsub$ = new Subject();
 
     constructor(
@@ -71,6 +72,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+
+        this.alignOddsRight = (this.qtdOddsPrincipais * 90) < (window.innerWidth - (270 + 270 + 380));
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais

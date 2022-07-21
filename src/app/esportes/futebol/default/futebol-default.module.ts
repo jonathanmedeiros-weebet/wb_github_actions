@@ -10,6 +10,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { EsportesModule } from '../../esportes.module';
 import { RegioesDestaqueService } from '../../../services';
+import {DragScrollModule} from 'ngx-drag-scroll';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { RegioesDestaqueService } from '../../../services';
         FutebolDefaultRoutingModule,
         NgbNavModule,
         NgbCarouselModule,
-        EsportesModule
+        EsportesModule,
+        DragScrollModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,
