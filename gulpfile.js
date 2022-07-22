@@ -2308,3 +2308,12 @@ gulp.task('betshelby.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betminas.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betminas.wee.bet",
+        banca: "BET MINAS",
+        styles: "",
+    });
+});
