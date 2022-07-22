@@ -73,7 +73,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
 
-        this.alignOddsRight = (this.qtdOddsPrincipais * 90) < (window.innerWidth - (270 + 270 + 380));
+        this.alignOddsRight = (this.qtdOddsPrincipais * 150) < (window.innerWidth - (270 + 270 + 380));
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
