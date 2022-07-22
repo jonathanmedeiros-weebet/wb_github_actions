@@ -13,9 +13,17 @@
                 </span>
             </span>
             </div>
-            <div *ngIf="isCliente" class="game-tile-buttons">
-                <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button-play">Jogar</a>
-            </div>
+            <ng-container *ngIf="isLoggedIn && isCliente">
+                <div class="game-tile-buttons">
+                    <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button-play">Jogar</a>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!isLoggedIn">
+                <div class="game-tile-buttons">
+                    <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                </div>
+            </ng-container>
+
             <div class="game-tile-img">
                 <img title="{{room.tableName}}" src="{{room.tableImage}}">
             </div>
