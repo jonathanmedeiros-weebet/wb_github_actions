@@ -1,27 +1,21 @@
 <router-outlet></router-outlet>
 
-<ng-template #demoModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"><i class="fa fa-warning"></i> ATENÇÃO!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <h4 style="text-align: center;">
-            Bem-vindo! Você está acessando uma <b>DEMONSTRAÇÃO</b> do WEE.BET,
-            o sistema líder para casa de apostas no Brasil.
-        </h4>
-        <h4 style="text-align: center;">
-            Portanto, todas as apostas aqui realizadas <b>NÃO SÃO VÁLIDAS!</b>
-        </h4>
-        <br>
-        <h4 style="text-align: center;">
-            Acesse agora e descubra que ter sua própria banca é muito fácil.
-        </h4>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Acessar</button>
+<ng-template #demoModal let-modal style="background: none">
+    <div class="modal-inicial" style="display: flex; justify-content: end;">
+        <div *ngIf="!mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -15px;right: -15px;">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div *ngIf="mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -5px;right: -5px;">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span>&times;</span>
+            </button>
+        </div>
+        <ng-container>
+            <img style="width:100%" src="https://cdn.wee.bet/img/info/info-demo-movel.png" *ngIf="mobileScreen" class="info-image">
+            <img style="width:100%" src="https://cdn.wee.bet/img/info/info-demo-desktop.png" *ngIf="!mobileScreen" class="info-image">
+        </ng-container>
     </div>
 </ng-template>
 
@@ -38,5 +32,30 @@
         <a class="btn btn-outline-dark" (click)="downloadApp()">
             Baixar nova versão
         </a>
+    </div>
+</ng-template>
+
+<ng-template #inicialModal let-modal style="background: none">
+    <div class="modal-inicial" style="display: flex; justify-content: end;">
+        <div *ngIf="!mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -15px;right: -15px;">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div *ngIf="mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -5px;right: -5px;">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span>&times;</span>
+            </button>
+        </div>
+        <ng-container *ngIf="imagens.length > 0">
+            <ng-container *ngFor="let imagem of imagens">
+                <a *ngIf="imagem.link" [href]="imagem.link" [target]="imagem.link_blank? '_blank' : ''">
+                    <img style="width:100%" [src]="imagem.src" [alt]="imagem.titulo">
+                </a>
+                <ng-container *ngIf="!imagem.link">
+                    <img style="width:100%" [src]="imagem.src" [alt]="imagem.titulo">
+                </ng-container>
+            </ng-container>
+        </ng-container>
     </div>
 </ng-template>
