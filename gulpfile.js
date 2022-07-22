@@ -2299,3 +2299,12 @@ gulp.task('campeoesdobet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betshelby.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betshelby.net",
+        banca: "BET SHELBY",
+        styles: "",
+    });
+});
