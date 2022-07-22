@@ -81,8 +81,8 @@ export class AppComponent implements OnInit {
                     } else {
                         // @ts-ignore
                         const data1 = new Date(variavel);
-                        // const data2 = new Date();
-                        const data2 = new Date('2022-07-23T03:24:00');
+                        const data2 = new Date();
+                        // const data2 = new Date('2022-07-23T03:24:00');
                         const diffTime = dateDiffInDays(data1, data2);
                         if (diffTime > 0) {
                             this.modalService.open(
