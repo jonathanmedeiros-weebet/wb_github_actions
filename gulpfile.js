@@ -2185,6 +2185,7 @@ gulp.task('spacebets.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "spacebets.net",
+        shared_url: "spn-sports.net",
         banca: "SPACE BETS",
         styles: "",
     });
