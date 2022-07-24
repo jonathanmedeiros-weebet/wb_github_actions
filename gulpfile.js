@@ -2186,7 +2186,7 @@ gulp.task('spacebets.net', function (done) {
         server: "front4.wee.bet",
         host: "spacebets.net",
         shared_url: "spn-sports.net",
-        banca: "SPACE BETS",
+        banca: "SPN SPORTS",
         styles: "",
     });
 });
