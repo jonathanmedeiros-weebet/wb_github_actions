@@ -64,7 +64,7 @@
                                     <app-apostas-cliente-loteria [queryParams]="queryParams"></app-apostas-cliente-loteria>
                                 </ng-template>
                             </li>
-                            <li [ngbNavItem]="'casino'" >
+                            <li [ngbNavItem]="'casino'" *ngIf="casinoHabilitado">
                             <a ngbNavLink>Cassino</a>
                             <ng-template ngbNavContent>
                                 <app-apostas-cliente-casino [queryParams]="queryParams"></app-apostas-cliente-casino>
