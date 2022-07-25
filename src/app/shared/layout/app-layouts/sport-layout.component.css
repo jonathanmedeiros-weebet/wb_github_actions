@@ -1,0 +1,7 @@
+.collapsed {
+    max-width: calc(100vw - 320px);
+}
+
+.uncollapsed {
+    max-width: calc(100vw - 540px);
+}

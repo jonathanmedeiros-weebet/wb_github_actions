@@ -96,7 +96,10 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         this.regioesDestaqueService.setExibirDestaques(false);
         this.mobileScreen = window.innerWidth <= 1024;
 
-        this.collapsed = !!localStorage.getItem('navigation_callapsed');
+        this.sidebarService.collapsedSource
+            .subscribe(collapse => {
+                this.collapsed = collapse;
+            });
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
@@ -184,13 +187,15 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
     }
 
     collapseSidebar() {
-        this.collapsed = !this.collapsed;
-
-        if (this.collapsed) {
-            localStorage.setItem('navigation_callapsed', 'collapsed');
-        } else {
-            localStorage.removeItem('navigation_callapsed');
-        }
+        this.sidebarService.collapseSidebar();
+        //
+        // this.collapsed = !this.collapsed;
+        //
+        // if (this.collapsed) {
+        //     localStorage.setItem('navigation_callapsed', 'collapsed');
+        // } else {
+        //     localStorage.removeItem('navigation_callapsed');
+        // }
     }
 
     onSwipeLeft(event) {

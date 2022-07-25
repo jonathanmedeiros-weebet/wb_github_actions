@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {SidebarService} from '../../services/utils/sidebar.service';
 
 @Component({
     selector: 'app-sport-layout',
@@ -7,12 +8,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SportLayoutComponent implements OnInit {
     isMobile = false;
+    navigationIsCollapsed = false;
 
-    constructor() {
+    constructor(private sidebarService: SidebarService) {
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.isMobile = window.innerWidth <= 1025;
-    }
 
+        this.sidebarService.collapsedSource
+            .subscribe(collapsed => {
+                this.navigationIsCollapsed = collapsed;
+            });
+    }
 }

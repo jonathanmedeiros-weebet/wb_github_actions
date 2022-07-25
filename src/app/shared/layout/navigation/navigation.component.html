@@ -4,31 +4,31 @@
 <aside id="sidebar-container">
     <div class="sidebar-wrapper" [ngClass]="{'collapsed': collapsed}" id="sidebar-wrapper">
         <div id="side-fixed-menu">
-<!--            <div class="collapse-container">-->
-<!--                <a class="btn-collapse" (click)="collapseSidebar()">-->
-<!--                    <span *ngIf="!collapsed"><i class="fa-solid fa-angles-left"></i></span>-->
-<!--                    <span *ngIf="collapsed"><i class="fa-solid fa-angles-right"></i></span>-->
-<!--                </a>-->
-<!--            </div>-->
+           <div class="collapse-container">
+               <a class="btn-collapse" (click)="collapseSidebar()">
+                   <span *ngIf="!collapsed"><i class="fa-solid fa-angles-left"></i></span>
+                   <span *ngIf="collapsed"><i class="fa-solid fa-angles-right"></i></span>
+               </a>
+           </div>
 
-            <div class="busca-container">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" formControlName="codigo" class="form-control"
-                                   placeholder="Pesquisar Bilhete"
-                                   mask="AAAA-AAAA">
-                            <div class="input-group-append">
-                                <button type="submit" class="input-group-text" id="showPassword"
-                                        [disabled]="submitting">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <app-error-msg [control]="form.get('codigo')"></app-error-msg>
-                    </div>
-                </form>
-            </div>
+<!--            <div class="busca-container">-->
+<!--                <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="text" formControlName="codigo" class="form-control"-->
+<!--                                   placeholder="Pesquisar Bilhete"-->
+<!--                                   mask="AAAA-AAAA" [ngClass]="{'hide': collapsed}">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button type="submit" class="input-group-text" id="showPassword"-->
+<!--                                        [disabled]="submitting">-->
+<!--                                    <i class="fa fa-search"></i>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <app-error-msg [control]="form.get('codigo')"></app-error-msg>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
 <!--            <ul class="sidebar-menu">-->
 <!--                <li *ngIf="!isCliente">-->
 <!--                    <a (click)="abrirModalTabela()">-->
