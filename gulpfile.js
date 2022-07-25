@@ -2185,7 +2185,8 @@ gulp.task('spacebets.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "spacebets.net",
-        banca: "SPACE BETS",
+        shared_url: "spn-sports.net",
+        banca: "SPN SPORTS",
         styles: "",
     });
 });
@@ -2296,6 +2297,33 @@ gulp.task('campeoesdobet.com', function (done) {
         server: "front3.wee.bet",
         host: "campeoesdobet.com",
         banca: "CAMPEÕES DO BET",
+        styles: "",
+    });
+});
+
+gulp.task('betshelby.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betshelby.net",
+        banca: "BET SHELBY",
+        styles: "",
+    });
+});
+
+gulp.task('betminas.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betminas.wee.bet",
+        banca: "BET MINAS",
+        styles: "",
+    });
+});
+
+gulp.task('xomanobet.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "xomanobet.com.br",
+        banca: "XOMANOBET",
         styles: "",
     });
 });
