@@ -44,10 +44,12 @@ export class WallComponent implements OnInit {
                     this.showRoulette(this.gameAllList);
                 } else if (this.gameType === 'raspadinha') {
                     this.showRaspadinha(this.gameAllList);
-                }else if (this.gameType === 'mesa') {
+                } else if (this.gameType === 'mesa') {
                     this.showMesa(this.gameAllList);
                 } else if (this.gameType === 'destaques') {
                     this.showDestaques(this.gameAllList);
+                } else if (this.gameType === 'virtuais') {
+                    this.showVirtuais(this.gameAllList);
                 } else if (this.gameType === 'todos' || this.gameType === '') {
                    this.showAll();
                 }
@@ -108,6 +110,13 @@ export class WallComponent implements OnInit {
     showMesa(games) {
         this.gameList = games.filter(function(game) {
             return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+        });
+    }
+
+    showVirtuais(games) {
+        this.gameList = games.filter(function(game) {
+            return game.gameID === 'vplfl6' || game.gameID === 'vpfh3' || game.gameID === 'vpdr7'
+                || game.gameID === 'vppso4' || game.gameID === 'vpmr9' || game.gameID === 'vplobby';
         });
     }
 
