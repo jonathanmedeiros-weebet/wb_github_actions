@@ -15,9 +15,10 @@ export class AppComponent implements OnInit {
     @ViewChild('inicialModal', {static: true}) inicialModal;
     @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
-    imagens = [];
+    imagemInicial;
     mobileScreen = false;
     isEmpty = false;
+    SLUG;
 
     constructor(
         private auth: AuthService,
@@ -44,17 +45,15 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.SLUG = config.SLUG;
         this.imagemInicialService.getImagens().subscribe(
-            imagens => {
-                this.imagens = [];
-                for (const imagem of imagens) {
-                    if (imagem['src']) {
-                        this.imagens.push(imagem);
-                    }
-                    if (imagem['src'] === null) {
-                        this.isEmpty = true;
-                    }
+            imagem => {
+                if (imagem['src']) {
+                    this.imagemInicial = imagem;
+                } else {
+                    this.isEmpty = true;
                 }
+
                 this.cd.markForCheck();
 
                 if (location.host === 'demo.wee.bet') {
@@ -82,7 +81,7 @@ export class AppComponent implements OnInit {
                         // @ts-ignore
                         const data1 = new Date(variavel);
                         const data2 = new Date();
-                        // const data2 = new Date('2022-07-23T03:24:00');
+                        // const data2 = new Date('2022-07-26T03:24:00');
                         const diffTime = dateDiffInDays(data1, data2);
                         if (diffTime > 0) {
                             this.modalService.open(

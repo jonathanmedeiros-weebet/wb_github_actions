@@ -47,15 +47,13 @@
                 <span>&times;</span>
             </button>
         </div>
-        <ng-container *ngIf="imagens.length > 0">
-            <ng-container *ngFor="let imagem of imagens">
-                <a *ngIf="imagem.link" [href]="imagem.link" [target]="imagem.link_blank? '_blank' : ''">
-                    <img style="width:100%" [src]="imagem.src" [alt]="imagem.titulo">
+        <ng-container *ngIf="imagemInicial">
+                <a *ngIf="imagemInicial.link" [href]="imagemInicial.link" [target]="imagemInicial.link_blank? '_blank' : ''">
+                    <img style="width:100%" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imageminicial/imagem_inicial.jpg">
                 </a>
-                <ng-container *ngIf="!imagem.link">
-                    <img style="width:100%" [src]="imagem.src" [alt]="imagem.titulo">
+                <ng-container *ngIf="!imagemInicial.link">
+                    <img style="width:100%" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imageminicial/imagem_inicial.jpg">
                 </ng-container>
-            </ng-container>
         </ng-container>
     </div>
 </ng-template>
