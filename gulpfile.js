@@ -118,10 +118,10 @@ gulp.task('vitrine.wee.bet', function (done) {
 
 gulp.task('sandbox.wee.bet', function (done) {
     tasks(done, {
-        server: "54.174.107.144",
+        server: "front4.wee.bet",
         host: "sandbox.wee.bet",
         banca: "SANDBOX",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
+        styles: "",
     });
 });
 
@@ -2315,6 +2315,15 @@ gulp.task('betminas.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "betminas.wee.bet",
         banca: "BET MINAS",
+        styles: "",
+    });
+});
+
+gulp.task('xomanobet.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "xomanobet.com.br",
+        banca: "XOMANOBET",
         styles: "",
     });
 });
