@@ -96,10 +96,6 @@
     display: none;
 }
 
-.align-right-end {
-    justify-content: flex-end;
-}
-
 .odd {
     display: flex;
     flex-direction: row;
