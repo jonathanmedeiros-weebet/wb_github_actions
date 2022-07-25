@@ -2323,7 +2323,7 @@ gulp.task('xomanobet.com.br', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "xomanobet.com.br",
-        banca: "XÔ MANO BET",
+        banca: "XOMANOBET",
         styles: "",
     });
 });
