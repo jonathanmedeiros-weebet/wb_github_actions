@@ -2328,10 +2328,10 @@ gulp.task('xomanobet.com.br', function (done) {
     });
 });
 
-gulp.task('futbola.com.br', function (done) {
+gulp.task('futbola.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "futbola.com.br",
+        host: "futbola.wee.bet",
         banca: "FUT BOLA",
         styles: "",
     });
