@@ -250,7 +250,8 @@
         "futpix.wee.bet": "gulp futpix.wee.bet",
         "campeoesdobet.com": "gulp campeoesdobet.com",
         "betshelby.net": "gulp betshelby.net",
-        "betminas.wee.bet": "gulp betminas.wee.bet"
+        "betminas.wee.bet": "gulp betminas.wee.bet",
+        "xomanobet.com.br": "gulp xomanobet.com.br"
     },
     "private": true,
     "dependencies": {
