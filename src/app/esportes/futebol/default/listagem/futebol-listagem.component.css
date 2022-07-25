@@ -1,6 +1,4 @@
-
-
-.campeonato-header .column-left {
+/*.campeonato-header .column-left {
     flex-grow: 1;
     position: relative;
 }
@@ -150,7 +148,7 @@
     cursor: pointer;
     text-decoration: none;
     font-size: 10px;
-}
+}*/
 
 @media only screen and (max-width: 1024px) {
     .mais-opcoes {

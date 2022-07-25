@@ -1,4 +1,4 @@
-.campeonato-header .fa{
+/*.campeonato-header .fa{
     font-size: 1.5rem;
     float: right;
     line-height: 41px;
@@ -27,7 +27,7 @@
 
 .indentificacao .nome{
     flex-grow: 1;
-}
+}*/
 
 .mais-opcoes{
     color: var(--odds);
@@ -61,11 +61,36 @@
     align-items: center;
 }
 
+.nome-time {
+    max-width: 55vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .escudo {
     margin-right: 5px;
 }
 
 .escudo-img {
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 16px;
+    max-height: 16px;
+}
+
+.flag-icon {
+    font-size: 16px;
+    margin-top: 5px;
+    clip-path: circle();
+    z-index: 1;
+    border: 1px solid var(--foreground-header);
+    border-radius: 100%;
+}
+
+.horario-listagem {
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 15px;
+    border: 1px solid;
+    border-color: var(--event-time);
+    color: var(--event-time);
 }
