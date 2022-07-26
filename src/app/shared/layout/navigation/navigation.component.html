@@ -4,57 +4,57 @@
 <aside id="sidebar-container">
     <div class="sidebar-wrapper" [ngClass]="{'collapsed': collapsed}" id="sidebar-wrapper">
         <div id="side-fixed-menu">
-           <div class="collapse-container">
-               <a class="btn-collapse" (click)="collapseSidebar()">
-                   <span *ngIf="!collapsed"><i class="fa-solid fa-angles-left"></i></span>
-                   <span *ngIf="collapsed"><i class="fa-solid fa-angles-right"></i></span>
-               </a>
-           </div>
+            <div class="collapse-container">
+                <a class="btn-collapse" (click)="collapseSidebar()">
+                    <span *ngIf="!collapsed"><i class="fa-solid fa-angles-left"></i></span>
+                    <span *ngIf="collapsed"><i class="fa-solid fa-angles-right"></i></span>
+                </a>
+            </div>
 
-<!--            <div class="busca-container">-->
-<!--                <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">-->
-<!--                    <div class="form-group">-->
-<!--                        <div class="input-group">-->
-<!--                            <input type="text" formControlName="codigo" class="form-control"-->
-<!--                                   placeholder="Pesquisar Bilhete"-->
-<!--                                   mask="AAAA-AAAA" [ngClass]="{'hide': collapsed}">-->
-<!--                            <div class="input-group-append">-->
-<!--                                <button type="submit" class="input-group-text" id="showPassword"-->
-<!--                                        [disabled]="submitting">-->
-<!--                                    <i class="fa fa-search"></i>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <app-error-msg [control]="form.get('codigo')"></app-error-msg>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--            <ul class="sidebar-menu">-->
-<!--                <li *ngIf="!isCliente">-->
-<!--                    <a (click)="abrirModalTabela()">-->
-<!--                        <i class="fa-solid fa-table-list"></i>-->
-<!--                        Tabela-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li *ngIf="!isCliente && isLoggedIn">-->
-<!--                    <a [routerLink]="['/validar-aposta']">-->
-<!--                        <i class="fa-solid fa-check"></i>-->
-<!--                        Validação-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li *ngIf="!isCliente && isLoggedIn">-->
-<!--                    <a [routerLink]="['/apuracao']">-->
-<!--                        <i class="fa-solid fa-certificate"></i>-->
-<!--                        Apuração-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a [routerLink]="['/resultados/esportes']">-->
-<!--                        <i class="fa-solid fa-square-poll-vertical"></i>-->
-<!--                        Resultado-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--            </ul>-->
+            <!--            <div class="busca-container">-->
+            <!--                <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">-->
+            <!--                    <div class="form-group">-->
+            <!--                        <div class="input-group">-->
+            <!--                            <input type="text" formControlName="codigo" class="form-control"-->
+            <!--                                   placeholder="Pesquisar Bilhete"-->
+            <!--                                   mask="AAAA-AAAA" [ngClass]="{'hide': collapsed}">-->
+            <!--                            <div class="input-group-append">-->
+            <!--                                <button type="submit" class="input-group-text" id="showPassword"-->
+            <!--                                        [disabled]="submitting">-->
+            <!--                                    <i class="fa fa-search"></i>-->
+            <!--                                </button>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                        <app-error-msg [control]="form.get('codigo')"></app-error-msg>-->
+            <!--                    </div>-->
+            <!--                </form>-->
+            <!--            </div>-->
+            <!--            <ul class="sidebar-menu">-->
+            <!--                <li *ngIf="!isCliente">-->
+            <!--                    <a (click)="abrirModalTabela()">-->
+            <!--                        <i class="fa-solid fa-table-list"></i>-->
+            <!--                        Tabela-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--                <li *ngIf="!isCliente && isLoggedIn">-->
+            <!--                    <a [routerLink]="['/validar-aposta']">-->
+            <!--                        <i class="fa-solid fa-check"></i>-->
+            <!--                        Validação-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--                <li *ngIf="!isCliente && isLoggedIn">-->
+            <!--                    <a [routerLink]="['/apuracao']">-->
+            <!--                        <i class="fa-solid fa-certificate"></i>-->
+            <!--                        Apuração-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--                <li>-->
+            <!--                    <a [routerLink]="['/resultados/esportes']">-->
+            <!--                        <i class="fa-solid fa-square-poll-vertical"></i>-->
+            <!--                        Resultado-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--            </ul>-->
             <!-- <ul class="sidebar-menu">
                 <li>
                     <a (click)="abrirModalPesquisa()">
@@ -171,7 +171,7 @@
                 </li>
             </ul> -->
 
-<!--            <app-sidebar-menu></app-sidebar-menu>-->
+            <!--            <app-sidebar-menu></app-sidebar-menu>-->
         </div>
         <app-sidebar-nav [height]="heightSidebarNav" [collapsed]="collapsed"></app-sidebar-nav>
         <!--        <ul id="menu-side-left" class="sidebar-nav">-->
