@@ -1,20 +1,13 @@
 <router-outlet></router-outlet>
 
-<ng-template #demoModal let-modal style="background: none">
+<ng-template #demoModal let-modal>
     <div class="modal-inicial" style="display: flex; justify-content: end;">
-        <div *ngIf="!mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -15px;right: -15px;">
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span>&times;</span>
-            </button>
-        </div>
-        <div *ngIf="mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -5px;right: -5px;">
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span>&times;</span>
-            </button>
-        </div>
+        <a class="close-imagem-inicial-demo" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
         <ng-container>
-            <img style="width:100%" src="https://cdn.wee.bet/img/info/info-demo-movel.png" *ngIf="mobileScreen" class="info-image">
-            <img style="width:100%" src="https://cdn.wee.bet/img/info/info-demo-desktop.png" *ngIf="!mobileScreen" class="info-image">
+            <img class="imagem-inicial" src="https://cdn.wee.bet/img/info/info-demo-movel.png" *ngIf="mobileScreen" class="info-image">
+            <img class="imagem-inicial" src="https://cdn.wee.bet/img/info/info-demo-desktop.png" *ngIf="!mobileScreen" class="info-image">
         </ng-container>
     </div>
 </ng-template>
@@ -35,25 +28,18 @@
     </div>
 </ng-template>
 
-<ng-template #inicialModal let-modal style="background: none">
-    <div class="modal-inicial" style="display: flex; justify-content: end;">
-        <div *ngIf="!mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -15px;right: -15px;">
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span>&times;</span>
-            </button>
-        </div>
-        <div *ngIf="mobileScreen" style="background: var(--highlight); border-radius: 100%;position: absolute;width: 30px;height: 30px;display: flex;justify-content: center;top: -5px;right: -5px;">
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span>&times;</span>
-            </button>
-        </div>
-        <ng-container *ngIf="imagemInicial">
-                <a *ngIf="imagemInicial.link" [href]="imagemInicial.link" [target]="imagemInicial.link_blank? '_blank' : ''">
-                    <img style="width:100%" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imageminicial/imagem_inicial.jpg">
-                </a>
-                <ng-container *ngIf="!imagemInicial.link">
-                    <img style="width:100%" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imageminicial/imagem_inicial.jpg">
-                </ng-container>
+<ng-template #inicialModal let-modal>
+    <div *ngIf="imagemInicial" class="modal-inicial">
+            <a class="close-imagem-inicial" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+        <ng-container *ngIf="imagemInicial.link">
+            <a [href]="imagemInicial.link" [target]="imagemInicial.link_blank? '_blank' : ''">
+                <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/imagem_inicial.jpg">
+            </a>
+        </ng-container>
+        <ng-container *ngIf="!imagemInicial.link">
+            <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/imagem_inicial.jpg">
         </ng-container>
     </div>
 </ng-template>

@@ -8,7 +8,8 @@ import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
-    templateUrl: 'app.component.html'
+    templateUrl: 'app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
     @ViewChild('demoModal', {static: true}) demoModal;
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit {
         this.SLUG = config.SLUG;
         this.imagemInicialService.getImagens().subscribe(
             imagem => {
-                if (imagem['src']) {
+                if (imagem && imagem['src']) {
                     this.imagemInicial = imagem;
                 } else {
                     this.isEmpty = true;
