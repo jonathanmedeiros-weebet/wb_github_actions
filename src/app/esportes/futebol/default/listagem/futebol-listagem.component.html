@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <drag-scroll [scrollbar-hidden]="true" [ngStyle]="{'width.px': qtdOddsPrincipais * 160}" style="max-width: 100%; height: 60px; background-color: var(--header);">
+                                <drag-scroll [scrollbar-hidden]="true" [ngStyle]="{'width.px': widthOddsScroll}" style="max-width: 100%; height: 60px; background-color: var(--header);">
                                     <div class="odds">
                                         <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
                                             <ng-container

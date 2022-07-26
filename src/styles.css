@@ -1160,10 +1160,10 @@ select.form-control:focus {
     justify-content: center;
     width: 55px;
     height: 60px;
-    color: var(--odds);
     padding: 5px;
     text-align: right;
     background-color: var(--header);
+    color: var(--highlight);
 }
 
 .mais-opcoes a {

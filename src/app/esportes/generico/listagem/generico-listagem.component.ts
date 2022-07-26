@@ -266,10 +266,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirEscudo() {
-        return (this.sportId != 13 && this.sportId != 9 && this.sportId != 151);
+        return (this.sportId !== '13' && this.sportId !== '9' && this.sportId !== '151');
     }
 
     exibirTotalOdds() {
-        return this.sportId == 18;
+        return this.sportId === '18';
     }
 }

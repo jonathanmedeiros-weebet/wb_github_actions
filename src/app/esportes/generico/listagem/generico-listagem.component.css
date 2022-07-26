@@ -27,7 +27,7 @@
 
 .indentificacao .nome{
     flex-grow: 1;
-}*/
+}
 
 .mais-opcoes{
     color: var(--odds);
@@ -35,7 +35,7 @@
     min-width: 50px;
     text-align: right;
     cursor: pointer;
-}
+}*/
 
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
