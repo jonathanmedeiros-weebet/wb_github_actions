@@ -2336,3 +2336,21 @@ gulp.task('futbola.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fanaticossports.pro', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fanaticossports.pro",
+        banca: "FANÁTICOS SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('bet83.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet83.wee.bet",
+        banca: "BET83",
+        styles: "",
+    });
+});
