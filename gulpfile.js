@@ -2354,3 +2354,12 @@ gulp.task('bet83.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('camisa12.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "camisa12.online",
+        banca: "CAMISA12",
+        styles: "",
+    });
+});
