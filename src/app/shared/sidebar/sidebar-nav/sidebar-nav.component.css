@@ -78,27 +78,27 @@ ul li {
     vertical-align: center;
 }
 
-.regiao > a:after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid var(--foreground-sidebar-left);
-    position: absolute;
-    right: 10px;
-    top: 13px;
-}
+/*.regiao > a:after {*/
+/*    content: "";*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-left: 5px solid transparent;*/
+/*    border-right: 5px solid transparent;*/
+/*    border-top: 5px solid var(--foreground-sidebar-left);*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    top: 13px;*/
+/*}*/
 
-.regiao > a.selected:after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid var(--foreground-sidebar-left);
-}
+/*.regiao > a.selected:after {*/
+/*    content: "";*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-left: 5px solid transparent;*/
+/*    border-right: 5px solid transparent;*/
+/*    border-top: 5px solid transparent;*/
+/*    border-bottom: 5px solid var(--foreground-sidebar-left);*/
+/*}*/
 
 .regiao ul {
     padding-left: 19px;
@@ -112,6 +112,7 @@ ul li {
     animation-name: hideAnim;
     animation-duration: 500ms;
     animation-fill-mode: both;
+    width: 50px;
 }
 
 .show-item {
@@ -133,7 +134,11 @@ ul li {
     0% {
         opacity: 100;
     }
+    99%{
+        opacity: 0;
+    }
     100% {
         opacity: 0;
+        display: none;
     }
 }

@@ -1,7 +1,7 @@
 import {
     Component, OnInit, OnDestroy, Renderer2,
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
-    ChangeDetectorRef, Input, OnChanges, SimpleChange
+    ChangeDetectorRef, Input, OnChanges, SimpleChange, ViewChildren, AfterViewInit, QueryList
 } from '@angular/core';
 import {Router, NavigationExtras} from '@angular/router';
 
@@ -15,6 +15,7 @@ import {
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import * as moment from 'moment';
+import {DragScrollComponent} from 'ngx-drag-scroll';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -22,7 +23,8 @@ import * as moment from 'moment';
     templateUrl: 'futebol-listagem.component.html',
     styleUrls: ['futebol-listagem.component.css']
 })
-export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
+export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+    @ViewChildren(DragScrollComponent) private oddsNavs: QueryList<DragScrollComponent>;
     @Input() showLoadingIndicator;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
@@ -60,6 +62,25 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         private cd: ChangeDetectorRef,
         private router: Router
     ) {
+    }
+
+    ngAfterViewInit(): void {
+        this.oddsNavs.changes.subscribe((navs) => {
+            navs.forEach((nav, index) => {
+                if (index === 3) {
+                    nav.moveRight();
+                }
+            });
+        });
+    }
+    moveLeft(id) {
+        let navOdds = this.oddsNavs.find((nav, index) => index === 3);
+        navOdds.moveRight();
+    }
+
+    moveRight(id) {
+        console.log('');
+
     }
 
     ngOnInit() {

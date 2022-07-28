@@ -52,7 +52,7 @@
                 (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                 <a>
                     <i class="fa fa-certificate icone-generico"></i>
-                    <span class="regiao-nome">{{campeonato.nome}}</span>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{campeonato.nome}}</span>
                 </a>
             </li>
         </ng-template>
@@ -63,14 +63,14 @@
         <li class="categoria" (click)="goTo('/desafios', {})">
             <a>
                 <i class="fa fa-trophy icone-generico"></i>
-                <span class="regiao-nome">TODOS</span>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">TODOS</span>
             </a>
         </li>
         <li class="categoria" *ngFor="let categoria of itens"
             (click)="goTo('/desafios', { categoria: categoria.id })">
             <a>
                 <i class="fa fa-trophy icone-generico"></i>
-                <span class="regiao-nome">{{categoria.nome}}</span>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{categoria.nome}}</span>
             </a>
         </li>
     </ng-container>
@@ -81,12 +81,12 @@
             (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
             <a *ngIf="contexto == 'seninha'">
                 <i class="fa fa-certificate icone-generico"></i>
-                <span class="regiao-nome">{{tipoAposta.qtdNumeros}} Números
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
                             ( {{tipoAposta.cotacao6 | currency}} )</span>
             </a>
             <a *ngIf="contexto == 'quininha'">
                 <i class="fa fa-certificate icone-generico"></i>
-                <span class="regiao-nome">{{tipoAposta.qtdNumeros}} Números
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
                             ( {{tipoAposta.cotacao5 | currency}} )</span>
             </a>
         </li>
