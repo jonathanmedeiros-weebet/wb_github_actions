@@ -2363,3 +2363,12 @@ gulp.task('camisa12.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('greenway.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "greenway.bet",
+        banca: "GREEN WAY",
+        styles: "",
+    });
+});
