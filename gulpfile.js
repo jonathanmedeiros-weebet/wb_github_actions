@@ -2372,3 +2372,12 @@ gulp.task('greenway.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('costabets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "costabets.wee.bet",
+        banca: "COSTA BETS",
+        styles: "",
+    });
+});

@@ -257,7 +257,8 @@
         "fanaticossports.pro": "gulp fanaticossports.pro",
         "bet83.wee.bet": "gulp bet83.wee.bet",
         "camisa12.online": "gulp camisa12.online",
-        "greenway.bet": "gulp greenway.bet"
+        "greenway.bet": "gulp greenway.bet",
+        "costabets.wee.bet": "gulp costabets.wee.bet"
     },
     "private": true,
     "dependencies": {
