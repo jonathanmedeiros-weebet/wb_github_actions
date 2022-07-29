@@ -253,7 +253,12 @@
         "betminas.wee.bet": "gulp betminas.wee.bet",
         "xomanobet.com.br": "gulp xomanobet.com.br",
         "sandbox.wee.bet": "gulp sandbox.wee.bet",
-        "futbola.wee.bet": "gulp futbola.wee.bet"
+        "futbola.wee.bet": "gulp futbola.wee.bet",
+        "fanaticossports.pro": "gulp fanaticossports.pro",
+        "bet83.wee.bet": "gulp bet83.wee.bet",
+        "camisa12.online": "gulp camisa12.online",
+        "greenway.bet": "gulp greenway.bet",
+        "costabets.wee.bet": "gulp costabets.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -2336,3 +2336,48 @@ gulp.task('futbola.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fanaticossports.pro', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fanaticossports.pro",
+        banca: "FANÁTICOS SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('bet83.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet83.wee.bet",
+        banca: "BET83",
+        styles: "",
+    });
+});
+
+gulp.task('camisa12.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "camisa12.online",
+        banca: "CAMISA12",
+        styles: "",
+    });
+});
+
+gulp.task('greenway.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "greenway.bet",
+        banca: "GREEN WAY",
+        styles: "",
+    });
+});
+
+gulp.task('costabets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "costabets.wee.bet",
+        banca: "COSTA BETS",
+        styles: "",
+    });
+});
