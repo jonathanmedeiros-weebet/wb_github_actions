@@ -1974,15 +1974,6 @@ gulp.task('realbetsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('membet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "membet.wee.bet",
-        banca: "MEM BET",
-        styles: "",
-    });
-});
-
 gulp.task('clubedasapostas.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
