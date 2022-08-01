@@ -39,7 +39,7 @@
                                         {{jogo.horario | moment: 'HH:mm'}}
                                     </div>
                                 </div>
-                                <div class="nome">
+                                <div class="nome" [ngStyle]="{'width.px': nomesJogoWidth}">
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
@@ -67,51 +67,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button (click)="moveLeft(3)">Left</button>
-                                <button (click)="moveRight(3)">Right</button>
-                                <drag-scroll [scrollbar-hidden]="true" [ngStyle]="{'width.px': widthOddsScroll}" style="max-width: 100%; height: 60px; background-color: var(--header);">
-                                    <div class="odds">
-                                        <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
-                                            <ng-container
-                                                *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
-                                                <div
-                                                    class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
-                                                    (click)="addCotacao(jogo, cotacao)">
+                                <a class="scroll-button" *ngIf="enableScrollButtons" (click)="moveLeft(jogo.event_id)">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </a>
+                                <div #scrollOdds class="odds" id="{{jogo.event_id}}"
+                                     [ngStyle]="{'width.px': widthOddsScroll}">
+                                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
+                                        <ng-container
+                                            *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
+                                            <div
+                                                class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                                                (click)="addCotacao(jogo, cotacao)">
                                             <span class="nome-odd">
                                                 {{cotacao.label}}
                                             </span>
-                                                    <span class="valor">
+                                                <span class="valor">
                                                 {{cotacao.valorFinal}}
                                             </span>
-                                                </div>
-                                            </ng-container>
-                                            <ng-template #cotacaoBloqueada>
-                                                <div class="inner-odd odd-disabled">
-                                            <span class="nome-odd">
-                                                {{cotacao.label}}
-                                            </span>
-                                                    <span class="valor">
-                                                <i class="fa fa-lock"></i>
-                                            </span>
-                                                </div>
-                                            </ng-template>
-                                        </div>
-                                        <ng-container *ngIf="cotacaoManualFaltando(jogo, jogo.cotacoes)">
-                                            <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"
-                                                 (click)="addCotacao(jogo, cotacao)">
-                                                <div
-                                                    class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
-                                            <span class="nome-odd">
-                                                {{cotacao.label}}
-                                            </span>
-                                                    <span class="valor">
-                                                {{cotacao.valorFinal}}
-                                            </span>
-                                                </div>
                                             </div>
                                         </ng-container>
+                                        <ng-template #cotacaoBloqueada>
+                                            <div class="inner-odd odd-disabled">
+                                            <span class="nome-odd">
+                                                {{cotacao.label}}
+                                            </span>
+                                                <span class="valor">
+                                                <i class="fa fa-lock"></i>
+                                            </span>
+                                            </div>
+                                        </ng-template>
                                     </div>
-                                </drag-scroll>
+                                    <ng-container *ngIf="cotacaoManualFaltando(jogo, jogo.cotacoes)">
+                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"
+                                             (click)="addCotacao(jogo, cotacao)">
+                                            <div
+                                                class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
+                                            <span class="nome-odd">
+                                                {{cotacao.label}}
+                                            </span>
+                                                <span class="valor">
+                                                {{cotacao.valorFinal}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <a class="scroll-button" *ngIf="enableScrollButtons" (click)="moveRight(jogo.event_id)">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
                                 <div class="mais-opcoes">
                                     <a (click)="maisCotacoes(jogo._id)">
                                         <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}

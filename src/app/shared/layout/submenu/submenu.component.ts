@@ -22,16 +22,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     @HostListener('window:resize', ['$event'])
     onResize() {
-        this.cd.detectChanges();
-        if (window.innerWidth > 1024) {
-            this.menuWidth = window.innerWidth - 480;
-            this.isMobile = false;
-        } else {
-            this.menuWidth = window.innerWidth;
-            this.isMobile = true;
-
-        }
-        this.checkScrollButtons();
+        this.computeResizeChanges();
     }
 
     constructor(
@@ -193,6 +184,18 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
 
+        this.checkScrollButtons();
+    }
+
+    computeResizeChanges() {
+        this.cd.detectChanges();
+        if (window.innerWidth > 1024) {
+            this.menuWidth = window.innerWidth - 480;
+            this.isMobile = false;
+        } else {
+            this.menuWidth = window.innerWidth;
+            this.isMobile = true;
+        }
         this.checkScrollButtons();
     }
 

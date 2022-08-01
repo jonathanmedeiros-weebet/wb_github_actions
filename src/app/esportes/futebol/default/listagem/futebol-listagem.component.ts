@@ -1,7 +1,7 @@
 import {
     Component, OnInit, OnDestroy, Renderer2,
     ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
-    ChangeDetectorRef, Input, OnChanges, SimpleChange, ViewChildren, AfterViewInit, QueryList
+    ChangeDetectorRef, Input, OnChanges, SimpleChange, ViewChildren, AfterViewInit, QueryList, HostListener
 } from '@angular/core';
 import {Router, NavigationExtras} from '@angular/router';
 
@@ -9,7 +9,7 @@ import {Campeonato, Jogo, ItemBilheteEsportivo} from './../../../../models';
 import {
     ParametrosLocaisService,
     BilheteEsportivoService,
-    HelperService,
+    HelperService, SidebarService,
 } from './../../../../services';
 
 import {Subject} from 'rxjs';
@@ -24,7 +24,7 @@ import {DragScrollComponent} from 'ngx-drag-scroll';
     styleUrls: ['futebol-listagem.component.css']
 })
 export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
-    @ViewChildren(DragScrollComponent, {read: DragScrollComponent}) private oddsNavs: QueryList<DragScrollComponent>;
+    @ViewChildren('scrollOdds') private oddsNavs: QueryList<ElementRef>;
     @Input() showLoadingIndicator;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
@@ -51,12 +51,20 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     qtdOddsPrincipais = 3;
     oddsPrincipais;
     widthOddsScroll = 450;
+    nomesJogoWidth = 250;
+    navs: ElementRef[];
+    enableScrollButtons = false;
+    sidebarNavIsCollapsed = false;
     unsub$ = new Subject();
 
-    ds: DragScrollComponent;
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.detectScrollOddsWidth();
+    }
 
     constructor(
         private bilheteService: BilheteEsportivoService,
+        private sidebarService: SidebarService,
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
@@ -68,24 +76,18 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     ngAfterViewInit(): void {
         this.oddsNavs.changes.subscribe((navs) => {
-            // navs.forEach((nav, index) => {
-            //     if (index === 3) {
-            //         nav.moveRight();
-            //     }
-            // });
+            this.navs = navs.toArray();
         });
     }
-    moveLeft(id) {
-        this.ds = this.oddsNavs.find((nav, index) => index === 3);
-        console.log(this.oddsNavs.first);
 
-        this.ds.moveRight();
-        this.cd.detectChanges();
-        // navOdds.moveRight();
+    moveLeft(id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
+        scrollTemp.nativeElement.scrollLeft -= 250;
     }
 
     moveRight(id) {
-        console.log('');
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
+        scrollTemp.nativeElement.scrollLeft += 250;
     }
 
     ngOnInit() {
@@ -99,7 +101,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
 
-        this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 80 : this.qtdOddsPrincipais * 150;
+        this.sidebarService.collapsedSource
+            .subscribe(collapsed => {
+                this.sidebarNavIsCollapsed = collapsed;
+            });
+
+        this.detectScrollOddsWidth();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -115,6 +122,21 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
                 this.cd.markForCheck();
             });
+    }
+
+    detectScrollOddsWidth() {
+        this.cd.detectChanges();
+
+        this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 95 : this.qtdOddsPrincipais * 150;
+
+        const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
+        const maxOddsSize = window.innerWidth - (sidesSize + 250 + 65);
+
+        this.enableScrollButtons = this.widthOddsScroll > maxOddsSize;
+        if (this.enableScrollButtons) {
+            this.widthOddsScroll = maxOddsSize;
+        }
+        this.nomesJogoWidth = window.innerWidth - (sidesSize + 65 + this.widthOddsScroll);
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 
-import {SharedModule} from './../shared/shared.module';
+import {SharedModule} from '../shared/shared.module';
 import {EsportesRoutingModule} from './esportes-routing.module';
 import {EsportesFooterComponent} from './footer/esportes-footer.component';
 import {EsportesWrapperComponent} from './wrapper/esportes-wrapper.component';

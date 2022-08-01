@@ -132,8 +132,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     checkCentering() {
         this.centered = this.menuWidth >= this.scrollWidth;
-
-        console.log(this.menuWidth + ' - ' + this.scrollWidth);
         this.cd.detectChanges();
     }
 
