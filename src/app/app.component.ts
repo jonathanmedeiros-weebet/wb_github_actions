@@ -55,6 +55,8 @@ export class AppComponent implements OnInit {
                     this.isEmpty = true;
                 }
 
+                console.log(imagem);
+
                 this.cd.markForCheck();
 
                 if (location.host === 'demo.wee.bet') {
@@ -62,7 +64,6 @@ export class AppComponent implements OnInit {
                         this.demoModal,
                         {
                             ariaLabelledBy: 'modal-basic-title',
-                            size: 'lg',
                             centered: true
                         }
                     );
@@ -82,7 +83,7 @@ export class AppComponent implements OnInit {
                         // @ts-ignore
                         const data1 = new Date(variavel);
                         const data2 = new Date();
-                        // const data2 = new Date('2022-07-26T03:24:00');
+                        // const data2 = new Date('2022-07-30T03:24:00');
                         const diffTime = dateDiffInDays(data1, data2);
                         if (diffTime > 0) {
                             this.modalService.open(

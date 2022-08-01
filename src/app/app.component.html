@@ -6,8 +6,7 @@
             <i class="fa fa-times" aria-hidden="true"></i>
         </a>
         <ng-container>
-            <img class="imagem-inicial" src="https://cdn.wee.bet/img/info/info-demo-movel.png" *ngIf="mobileScreen" class="info-image">
-            <img class="imagem-inicial" src="https://cdn.wee.bet/img/info/info-demo-desktop.png" *ngIf="!mobileScreen" class="info-image">
+            <img class="imagem-inicial" src="https://cdn.wee.bet/img/info/demo.png" class="info-image">
         </ng-container>
     </div>
 </ng-template>
@@ -35,11 +34,11 @@
             </a>
         <ng-container *ngIf="imagemInicial.link">
             <a [href]="imagemInicial.link" [target]="imagemInicial.link_blank? '_blank' : ''">
-                <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/imagem_inicial.jpg">
+                <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}">
             </a>
         </ng-container>
         <ng-container *ngIf="!imagemInicial.link">
-            <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/imagem_inicial.jpg">
+            <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}">
         </ng-container>
     </div>
 </ng-template>
