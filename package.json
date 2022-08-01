@@ -257,7 +257,8 @@
         "bet83.wee.bet": "gulp bet83.wee.bet",
         "camisa12.online": "gulp camisa12.online",
         "greenway.bet": "gulp greenway.bet",
-        "costabets.wee.bet": "gulp costabets.wee.bet"
+        "costabets.wee.bet": "gulp costabets.wee.bet",
+        "betnordestesports.wee.bet": "gulp betnordestesports.wee.bet"
     },
     "private": true,
     "dependencies": {
