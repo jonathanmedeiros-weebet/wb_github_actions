@@ -61,7 +61,7 @@ export class CasinoApiService {
     getGameUrl(gameId, gameMode){
         let requestOptions;
         let queryParams = {};
-        queryParams['tokenCassino'] = localStorage.getItem('tokenCassino');
+        queryParams['token'] = localStorage.getItem('tokenCassino');
         queryParams['symbol'] = gameId;
         queryParams['language'] = 'pt';
         queryParams['playMode'] = gameMode;
