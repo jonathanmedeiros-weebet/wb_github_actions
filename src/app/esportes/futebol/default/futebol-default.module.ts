@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from './../../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { FutebolDefaultRoutingModule } from './futebol-default-routing.module';
 import { FutebolDefaultWrapperComponent } from './wrapper/futebol-default-wrapper.component';
 import { FutebolListagemComponent } from './listagem/futebol-listagem.component';
@@ -10,7 +10,6 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { EsportesModule } from '../../esportes.module';
 import { RegioesDestaqueService } from '../../../services';
-import {DragScrollModule} from 'ngx-drag-scroll';
 
 @NgModule({
     imports: [
@@ -18,8 +17,7 @@ import {DragScrollModule} from 'ngx-drag-scroll';
         FutebolDefaultRoutingModule,
         NgbNavModule,
         NgbCarouselModule,
-        EsportesModule,
-        DragScrollModule
+        EsportesModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,

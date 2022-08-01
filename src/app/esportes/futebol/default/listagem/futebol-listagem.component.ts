@@ -1,21 +1,30 @@
 import {
-    Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
-    ChangeDetectorRef, Input, OnChanges, SimpleChange, ViewChildren, AfterViewInit, QueryList, HostListener
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    QueryList,
+    Renderer2,
+    SimpleChange,
+    ViewChildren
 } from '@angular/core';
-import {Router, NavigationExtras} from '@angular/router';
 
-import {Campeonato, Jogo, ItemBilheteEsportivo} from './../../../../models';
-import {
-    ParametrosLocaisService,
-    BilheteEsportivoService,
-    HelperService, SidebarService,
-} from './../../../../services';
+import {NavigationExtras, Router} from '@angular/router';
+
+import {Campeonato, Jogo} from './../../../../models';
+import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService} from './../../../../services';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import * as moment from 'moment';
-import {DragScrollComponent} from 'ngx-drag-scroll';
 
 @Component({
     selector: 'app-futebol-listagem',
