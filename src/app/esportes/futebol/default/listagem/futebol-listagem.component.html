@@ -69,7 +69,7 @@
                                 </div>
                                 <button (click)="moveLeft(3)">Left</button>
                                 <button (click)="moveRight(3)">Right</button>
-                                <drag-scroll id="odds_{{i}}" [scrollbar-hidden]="true" [ngStyle]="{'width.px': widthOddsScroll}" style="max-width: 100%; height: 60px; background-color: var(--header);">
+                                <drag-scroll [scrollbar-hidden]="true" [ngStyle]="{'width.px': widthOddsScroll}" style="max-width: 100%; height: 60px; background-color: var(--header);">
                                     <div class="odds">
                                         <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
                                             <ng-container

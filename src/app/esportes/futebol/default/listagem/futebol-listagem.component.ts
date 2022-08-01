@@ -24,7 +24,7 @@ import {DragScrollComponent} from 'ngx-drag-scroll';
     styleUrls: ['futebol-listagem.component.css']
 })
 export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
-    @ViewChildren(DragScrollComponent) private oddsNavs: QueryList<DragScrollComponent>;
+    @ViewChildren(DragScrollComponent, {read: DragScrollComponent}) private oddsNavs: QueryList<DragScrollComponent>;
     @Input() showLoadingIndicator;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
@@ -53,6 +53,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     widthOddsScroll = 450;
     unsub$ = new Subject();
 
+    ds: DragScrollComponent;
+
     constructor(
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
@@ -66,21 +68,24 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     ngAfterViewInit(): void {
         this.oddsNavs.changes.subscribe((navs) => {
-            navs.forEach((nav, index) => {
-                if (index === 3) {
-                    nav.moveRight();
-                }
-            });
+            // navs.forEach((nav, index) => {
+            //     if (index === 3) {
+            //         nav.moveRight();
+            //     }
+            // });
         });
     }
     moveLeft(id) {
-        let navOdds = this.oddsNavs.find((nav, index) => index === 3);
-        navOdds.moveRight();
+        this.ds = this.oddsNavs.find((nav, index) => index === 3);
+        console.log(this.oddsNavs.first);
+
+        this.ds.moveRight();
+        this.cd.detectChanges();
+        // navOdds.moveRight();
     }
 
     moveRight(id) {
         console.log('');
-
     }
 
     ngOnInit() {
@@ -281,7 +286,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                             this.cotacoesFaltando[jogo.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, jogo.event_id, jogo.favorito, false),
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal.valor,
+                                    chave,
+                                    jogo.event_id,
+                                    jogo.favorito,
+                                    false
+                                ),
                                 label: this.helperService.apostaTipoLabel(chave, 'sigla')
                             });
                         }
@@ -296,7 +307,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     jogoBloqueado(eventId) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
+        return this.jogosBloqueados ? (!!this.jogosBloqueados.includes(eventId)) : false;
     }
 
     toggleCampeonato(campeonatoId) {
@@ -387,7 +398,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             filteredCamps.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            jogo.favorito,
+                            false
+                        );
                         cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     });
                 });

@@ -44,6 +44,7 @@ import {SubmenuComponent} from './submenu/submenu.component';
 import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
 
 import {NgxCurrencyModule} from 'ngx-currency';
+import { ClickScrollComponent } from './click-scroll/click-scroll.component';
 
 @NgModule({
     imports: [
@@ -98,7 +99,8 @@ import {NgxCurrencyModule} from 'ngx-currency';
         AcumuladaoLayoutComponent,
         SidebarNavComponent,
         SidebarMenuComponent,
-        LoginModalComponent
+        LoginModalComponent,
+        ClickScrollComponent
     ],
     exports: [
         MainLayoutComponent,
