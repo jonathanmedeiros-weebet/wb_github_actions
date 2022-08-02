@@ -1,3 +1,8 @@
+.jogo-container {
+    background-color: #181818;
+    padding: 5px;
+}
+
 .inner-odd {
     margin-bottom: 2px;
 }
@@ -8,14 +13,13 @@
     align-items: center;
     padding: 10px;
     position: relative;
-    /*height: 20vh;*/
-    /*height: 187px;*/
-    height: 22vh;
+    height: 20vh;
     max-height: 300px;
     background-image: url("https://cdn.wee.bet/img/stadium-background.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
+    margin-bottom: 5px;
 }
 
 .indentificacao-jogo .info-jogo {
@@ -66,13 +70,13 @@
 }
 
 .tipo-apostas {
-    background-color: #fff;
+    background-color: #181818;
 }
 
 .tipo-aposta {
+    width: 50%;
     padding: 10px;
     border-top: 1px solid #ddd;
-    text-transform: uppercase;
 }
 
 .div-back {
@@ -151,10 +155,8 @@
 .nav-tipos {
     height: 40px;
     background-color: var(--header);
-}
-
-.nav-tipos .nav {
     padding: 0 !important;
+    border-radius: 2px;
 }
 
 .nav-tipos .nav-link {
@@ -163,7 +165,7 @@
     align-items: center;
     font-size: 12px;
     font-weight: 400;
-    height: 38px;
+    height: 40px;
     color: var(--highlight);
     text-decoration: none;
 }

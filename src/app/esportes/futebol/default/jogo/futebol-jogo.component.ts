@@ -143,7 +143,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+        // this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     back() {
