@@ -1,27 +1,13 @@
 <router-outlet></router-outlet>
 
 <ng-template #demoModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"><i class="fa fa-warning"></i> ATENÇÃO!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <h4 style="text-align: center;">
-            Bem-vindo! Você está acessando uma <b>DEMONSTRAÇÃO</b> do WEE.BET,
-            o sistema líder para casa de apostas no Brasil.
-        </h4>
-        <h4 style="text-align: center;">
-            Portanto, todas as apostas aqui realizadas <b>NÃO SÃO VÁLIDAS!</b>
-        </h4>
-        <br>
-        <h4 style="text-align: center;">
-            Acesse agora e descubra que ter sua própria banca é muito fácil.
-        </h4>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Acessar</button>
+    <div class="modal-inicial" style="display: flex; justify-content: end;">
+        <a class="close-imagem-inicial-demo" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <ng-container>
+            <img class="imagem-inicial" src="https://cdn.wee.bet/img/info/demo.png" class="info-image">
+        </ng-container>
     </div>
 </ng-template>
 
@@ -38,5 +24,21 @@
         <a class="btn btn-outline-dark" (click)="downloadApp()">
             Baixar nova versão
         </a>
+    </div>
+</ng-template>
+
+<ng-template #inicialModal let-modal>
+    <div *ngIf="imagemInicial" class="modal-inicial">
+            <a class="close-imagem-inicial" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+        <ng-container *ngIf="imagemInicial.link">
+            <a [href]="imagemInicial.link" [target]="imagemInicial.link_blank? '_blank' : ''">
+                <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}">
+            </a>
+        </ng-container>
+        <ng-container *ngIf="!imagemInicial.link">
+            <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}">
+        </ng-container>
     </div>
 </ng-template>
