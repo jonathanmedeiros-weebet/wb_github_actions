@@ -592,7 +592,6 @@ button {
 .tipo-apostas .nav-pills .show>.nav-link {
     color: var(--foreground-odds);
     background-color: var(--odds);
-    ;
 }
 
 .content-loteria {
