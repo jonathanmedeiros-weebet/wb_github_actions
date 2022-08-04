@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import {AuthService} from './../../services';
+import {AuthService, SidebarService} from './../../services';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
@@ -31,6 +31,7 @@ export class WallComponent implements OnInit {
         private auth: AuthService,
         private route: ActivatedRoute,
         private modalService: NgbModal,
+        private sideBarService: SidebarService,
     ) { }
 
     ngOnInit(): void {
@@ -38,20 +39,30 @@ export class WallComponent implements OnInit {
             this.filterGame(response.gameList);
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
-                if (this.gameType === 'slot') {
-                    this.showSlot(this.gameAllList);
-                } else if (this.gameType === 'roleta') {
-                    this.showRoulette(this.gameAllList);
-                } else if (this.gameType === 'raspadinha') {
-                    this.showRaspadinha(this.gameAllList);
-                } else if (this.gameType === 'mesa') {
-                    this.showMesa(this.gameAllList);
-                } else if (this.gameType === 'destaques') {
-                    this.showDestaques(this.gameAllList);
-                } else if (this.gameType === 'virtuais') {
+                if (this.gameType === 'virtuais') {
+                    this.sideBarService.changeItens({
+                        contexto: 'virtuais',
+                        dados: {}
+                    });
                     this.showVirtuais(this.gameAllList);
-                } else if (this.gameType === 'todos' || this.gameType === '') {
-                   this.showAll();
+                } else {
+                    this.sideBarService.changeItens({
+                        contexto: 'casino',
+                        dados: {}
+                    });
+                    if (this.gameType === 'slot') {
+                        this.showSlot(this.gameAllList);
+                    } else if (this.gameType === 'roleta') {
+                        this.showRoulette(this.gameAllList);
+                    } else if (this.gameType === 'raspadinha') {
+                        this.showRaspadinha(this.gameAllList);
+                    } else if (this.gameType === 'mesa') {
+                        this.showMesa(this.gameAllList);
+                    } else if (this.gameType === 'destaques') {
+                        this.showDestaques(this.gameAllList);
+                    }else if (this.gameType === 'todos' || this.gameType === '') {
+                        this.showAll(this.gameAllList);
+                    }
                 }
             });
             this.showLoadingIndicator = false;
@@ -85,8 +96,10 @@ export class WallComponent implements OnInit {
         return this.gameList;
     }
 
-    showAll() {
-        this.gameList = this.gameAllList;
+    showAll(games) {
+        this.gameList = games.filter(function (game) {
+            return game.dataType !== 'VSB';
+        });
     }
 
     showSlot(games) {
@@ -114,9 +127,9 @@ export class WallComponent implements OnInit {
     }
 
     showVirtuais(games) {
+        console.log(games);
         this.gameList = games.filter(function(game) {
-            return game.gameID === 'vplfl6' || game.gameID === 'vpfh3' || game.gameID === 'vpdr7'
-                || game.gameID === 'vppso4' || game.gameID === 'vpmr9' || game.gameID === 'vplobby';
+            return game.dataType === 'VSB';
         });
     }
 
