@@ -213,7 +213,6 @@
         "11bet.com.br": "gulp 11bet.com.br",
         "shopbet.wee.bet": "gulp shopbet.wee.bet",
         "realbetsport.wee.bet": "gulp realbetsport.wee.bet",
-        "membet.wee.bet": "gulp membet.wee.bet",
         "clubedasapostas.wee.bet": "gulp clubedasapostas.wee.bet",
         "futebets.net": "gulp futebets.net",
         "rondobet.com": "gulp rondobet.com",
@@ -252,7 +251,15 @@
         "betshelby.net": "gulp betshelby.net",
         "betminas.wee.bet": "gulp betminas.wee.bet",
         "xomanobet.com.br": "gulp xomanobet.com.br",
-        "sandbox.wee.bet": "gulp sandbox.wee.bet"
+        "sandbox.wee.bet": "gulp sandbox.wee.bet",
+        "futbola.wee.bet": "gulp futbola.wee.bet",
+        "fanaticossports.pro": "gulp fanaticossports.pro",
+        "bet83.wee.bet": "gulp bet83.wee.bet",
+        "camisa12.online": "gulp camisa12.online",
+        "greenway.bet": "gulp greenway.bet",
+        "costabets.wee.bet": "gulp costabets.wee.bet",
+        "betnordestesports.wee.bet": "gulp betnordestesports.wee.bet",
+        "betboladavez.wee.bet": "gulp betboladavez.wee.bet"
     },
     "private": true,
     "dependencies": {

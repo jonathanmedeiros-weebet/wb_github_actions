@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from './../environments/environment';
-
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 
@@ -45,7 +44,9 @@ export const APP_TOKENS = [
 ];
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [
+        AppComponent
+    ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

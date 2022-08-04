@@ -1974,15 +1974,6 @@ gulp.task('realbetsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('membet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "membet.wee.bet",
-        banca: "MEM BET",
-        styles: "",
-    });
-});
-
 gulp.task('clubedasapostas.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2324,6 +2315,78 @@ gulp.task('xomanobet.com.br', function (done) {
         server: "front3.wee.bet",
         host: "xomanobet.com.br",
         banca: "XOMANOBET",
+        styles: "",
+    });
+});
+
+gulp.task('futbola.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "futbola.wee.bet",
+        banca: "FUT BOLA",
+        styles: "",
+    });
+});
+
+gulp.task('fanaticossports.pro', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fanaticossports.pro",
+        banca: "FANÁTICOS SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('bet83.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet83.wee.bet",
+        banca: "BET83",
+        styles: "",
+    });
+});
+
+gulp.task('camisa12.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "camisa12.online",
+        banca: "CAMISA12",
+        styles: "",
+    });
+});
+
+gulp.task('greenway.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "greenway.bet",
+        banca: "GREEN WAY",
+        styles: "",
+    });
+});
+
+gulp.task('costabets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "costabets.wee.bet",
+        banca: "COSTA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('betnordestesports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betnordestesports.wee.bet",
+        banca: "BET NORDESTE SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('betboladavez.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betboladavez.wee.bet",
+        banca: "BET BOLA DA VEZ",
         styles: "",
     });
 });

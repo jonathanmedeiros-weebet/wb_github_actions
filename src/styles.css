@@ -434,6 +434,15 @@ button {
     z-index: 9002;
 }
 
+.modal-content{
+    background-color: inherit;
+    border: none;
+}
+
+button[aria-label="Close"]:focus {
+    outline: none;
+}
+
 .indentificacao .horario {
     border-radius: 5px;
     padding: 0 5px;
