@@ -47,6 +47,24 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        if (location.search.indexOf('app') >= 0) {
+            this.auth.setAppMobile();
+            const params = new URLSearchParams(location.search);
+            const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
+            localStorage.setItem('app_version', String(appVersion));
+            if (appVersion < 2) {
+                this.modalService.open(
+                    this.wrongVersionModal,
+                    {
+                        ariaLabelledBy: 'modal-basic-title-wrong-version',
+                        centered: true,
+                        backdrop: 'static'
+                    }
+                );
+            }
+        }
+
         this.SLUG = config.SLUG;
         this.TIMESTAMP = new Date().getTime();
         this.imagemInicialService.getImagens().subscribe(
