@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
     mobileScreen = false;
     isEmpty = false;
     SLUG;
+    TIMESTAMP;
 
     constructor(
         private auth: AuthService,
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.SLUG = config.SLUG;
+        this.TIMESTAMP = new Date().getTime();
         this.imagemInicialService.getImagens().subscribe(
             imagem => {
                 if (imagem && imagem['src']) {
