@@ -75,8 +75,6 @@ export class AppComponent implements OnInit {
                     this.isEmpty = true;
                 }
 
-                console.log(imagem);
-
                 this.cd.markForCheck();
 
                 if (location.host === 'demo.wee.bet') {
