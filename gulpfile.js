@@ -2390,3 +2390,12 @@ gulp.task('betboladavez.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('aabet83.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "aabet83.wee.bet",
+        banca: "AABET83",
+        styles: "",
+    });
+});

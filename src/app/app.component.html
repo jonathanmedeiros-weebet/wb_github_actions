@@ -34,11 +34,11 @@
             </a>
         <ng-container *ngIf="imagemInicial.link">
             <a [href]="imagemInicial.link" [target]="imagemInicial.link_blank? '_blank' : ''">
-                <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}">
+                <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}?t={{TIMESTAMP}}">
             </a>
         </ng-container>
         <ng-container *ngIf="!imagemInicial.link">
-            <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}">
+            <img class="imagem-inicial" src="https://weebet.s3.amazonaws.com/{{SLUG}}/imagem-inicial/{{imagemInicial.imagem}}?t={{TIMESTAMP}}">
         </ng-container>
     </div>
 </ng-template>
