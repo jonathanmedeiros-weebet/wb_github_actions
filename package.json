@@ -260,7 +260,9 @@
         "costabets.wee.bet": "gulp costabets.wee.bet",
         "betnordestesports.wee.bet": "gulp betnordestesports.wee.bet",
         "betboladavez.wee.bet": "gulp betboladavez.wee.bet",
-        "aabet83.wee.bet": "gulp aabet83.wee.bet"
+        "aabet83.wee.bet": "gulp aabet83.wee.bet",
+        "malikbets.com": "gulp malikbets.com",
+        "blitzbet.wee.bet": "gulp blitzbet.wee.bet"
     },
     "private": true,
     "dependencies": {

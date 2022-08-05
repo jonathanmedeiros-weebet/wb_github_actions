@@ -2399,3 +2399,21 @@ gulp.task('aabet83.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('malikbets.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "malikbets.com",
+        banca: "MALIKBETS",
+        styles: "",
+    });
+});
+
+gulp.task('blitzbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "blitzbet.wee.bet",
+        banca: "BLITZ BET",
+        styles: "",
+    });
+});
