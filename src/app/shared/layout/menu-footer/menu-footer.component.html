@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div *ngIf="contexto == 'casino'" id="footer-bar-casino" [hidden]="hidden">
+<div *ngIf="contexto == 'casino' || contexto == 'virtuais'" id="footer-bar-casino" [hidden]="hidden">
     <div class="foot-button" routerLinkActive="active">
         <a class="" (click)="toggleSidebar()">
             <i class="fa fa-bars"></i> Menu
@@ -41,8 +41,13 @@
         </a>
     </div>
     <div class="foot-button" routerLinkActive="active">
+        <a class="" [routerLink]="['/casino/wall/todos']">
+            <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon> Todos
+        </a>
+    </div>
+    <div class="foot-button" routerLinkActive="active">
         <a class="" [routerLink]="['/casino/live']">
-            <i class="wbicon icon-ao-vivo"></i> Ao Vivo
+            <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon> Ao Vivo
         </a>
     </div>
 

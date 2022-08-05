@@ -3,7 +3,7 @@
     <div class="game-tile" *ngFor="let game of gameList">
         <img title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
         <div class="game-tile-buttons">
-            <a *ngIf="game.gameTypeID != 'lg'" [routerLink]="['/casino/play/DEMO',game.gameID]"
+            <a *ngIf="game.dataType == 'RNG'" [routerLink]="['/casino/play/DEMO',game.gameID]"
                class="btn btn-xs game-button-demo">Demo</a>
 
             <ng-container *ngIf="isLoggedIn && isCliente">

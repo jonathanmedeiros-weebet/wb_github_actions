@@ -14,15 +14,10 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy {
     mobileScreen = false;
 
     constructor(
-        private sideBarService: SidebarService,
         private menuFooterService: MenuFooterService,
     ) {}
     ngOnInit(): void {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
-        this.sideBarService.changeItens({
-            contexto: 'casino',
-            dados: {}
-        });
         if (this.mobileScreen) {
             this.menuFooterService.setIsPagina(false);
         } else {

@@ -69,7 +69,7 @@ iframe{
     }
 
     .game-frame{
-        height: calc(100vh - 100px);
+        height: calc(100vh - 107px);
     }
     iframe{
         height: 100%;

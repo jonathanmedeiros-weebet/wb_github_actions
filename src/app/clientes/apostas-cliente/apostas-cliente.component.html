@@ -23,6 +23,7 @@
                                     <option value="ganhou">Ganhou</option>
                                     <option value="perdeu">Perdeu</option>
                                     <option value="pendente">Pendente</option>
+                                    <option value="reembolso">Reembolso</option>
                                 </select>
                             </div>
                             <div class="col-6 col-md-1">
@@ -64,7 +65,7 @@
                                     <app-apostas-cliente-loteria [queryParams]="queryParams"></app-apostas-cliente-loteria>
                                 </ng-template>
                             </li>
-                            <li [ngbNavItem]="'casino'" >
+                            <li [ngbNavItem]="'casino'" *ngIf="casinoHabilitado">
                             <a ngbNavLink>Cassino</a>
                             <ng-template ngbNavContent>
                                 <app-apostas-cliente-casino [queryParams]="queryParams"></app-apostas-cliente-casino>
