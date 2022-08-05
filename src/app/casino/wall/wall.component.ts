@@ -127,7 +127,6 @@ export class WallComponent implements OnInit {
     }
 
     showVirtuais(games) {
-        console.log(games);
         this.gameList = games.filter(function(game) {
             return game.dataType === 'VSB';
         });
