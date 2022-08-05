@@ -999,15 +999,6 @@ gulp.task('betshow.wee.bet', function (done) {
     });
 });
 
-gulp.task('futbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "futbets.wee.bet",
-        banca: "FUT BETS",
-        styles: "",
-    });
-});
-
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
