@@ -2417,3 +2417,12 @@ gulp.task('blitzbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsports91.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsports91.net",
+        banca: "BETSPORTS91",
+        styles: "",
+    });
+});
