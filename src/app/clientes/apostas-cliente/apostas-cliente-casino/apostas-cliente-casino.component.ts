@@ -98,7 +98,7 @@ export class ApostasClienteCasinoComponent implements OnInit, OnDestroy, OnChang
         return {
             'td-ganhou': resultado === 'ganhou',
             'td-perdeu': resultado === 'perdeu',
-            'td-pendente': !resultado
+            'td-pendente': resultado === 'reembolso'
         };
     }
 }

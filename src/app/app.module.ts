@@ -10,7 +10,6 @@ import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 
 import * as moment from 'moment';
-
 moment.locale('pt-BR');
 
 // App routing

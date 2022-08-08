@@ -999,15 +999,6 @@ gulp.task('betshow.wee.bet', function (done) {
     });
 });
 
-gulp.task('futbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "futbets.wee.bet",
-        banca: "FUT BETS",
-        styles: "",
-    });
-});
-
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1974,15 +1965,6 @@ gulp.task('realbetsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('membet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "membet.wee.bet",
-        banca: "MEM BET",
-        styles: "",
-    });
-});
-
 gulp.task('clubedasapostas.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2378,6 +2360,78 @@ gulp.task('costabets.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "costabets.wee.bet",
         banca: "COSTA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('betnordestesports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betnordestesports.wee.bet",
+        banca: "BET NORDESTE SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('betboladavez.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betboladavez.wee.bet",
+        banca: "BET BOLA DA VEZ",
+        styles: "",
+    });
+});
+
+gulp.task('aabet83.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "aabet83.wee.bet",
+        banca: "AABET83",
+        styles: "",
+    });
+});
+
+gulp.task('malikbets.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "malikbets.com",
+        banca: "MALIKBETS",
+        styles: "",
+    });
+});
+
+gulp.task('blitzbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "blitzbet.wee.bet",
+        banca: "BLITZ BET",
+        styles: "",
+    });
+});
+
+gulp.task('betsports91.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsports91.net",
+        banca: "BETSPORTS91",
+        styles: "",
+    });
+});
+
+gulp.task('estilobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "estilobet.com",
+        banca: "ESTILO BET",
+        styles: "",
+    });
+});
+
+gulp.task('sportingol.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportingol.bet",
+        banca: "SPORTINGOL",
         styles: "",
     });
 });

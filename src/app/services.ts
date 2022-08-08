@@ -2,6 +2,7 @@
 export * from './shared/services/aposta.service';
 export * from './shared/services/acumuladao.service';
 export * from './shared/services/banner.service';
+export * from './shared/services/imagem-inicial.service';
 export * from './shared/services/cartao.service';
 export * from './shared/services/desafio/desafio.service';
 export * from './shared/services/desafio/desafio-bilhete.service';

@@ -1,0 +1,27 @@
+.modal-inicial{
+    background-color: inherit !important;
+    border: none !important;
+}
+a{
+    text-decoration: none;
+}
+.close-imagem-inicial,.close-imagem-inicial-demo{
+    border-radius: 100%;
+    position: absolute;
+    display: flex;
+    top: 4px;
+    right: 5px;
+    cursor: pointer;
+}
+.close-imagem-inicial i{
+    color: white;
+    font-size: 20px;
+}
+.close-imagem-inicial-demo i{
+    color: var(--header);
+    font-size: 20px;
+}
+
+img{
+    width:100%;
+}
