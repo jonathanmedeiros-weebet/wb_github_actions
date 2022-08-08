@@ -14,7 +14,7 @@ import {interval} from 'rxjs';
   styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
-  gameUrl: SafeUrl;
+  gameUrl: SafeUrl = '';
   gameId: String = '';
   gameMode: String = '';
   params: any = [];

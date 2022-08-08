@@ -119,49 +119,49 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
             },
             {
                 name: 'Destaques',
-                link: '/casino/wall/destaques',
+                link: '/casino/c/wall/destaques',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             },
             {
                 name: 'Todos',
-                link: '/casino/wall/todos',
+                link: '/casino/c/wall/todos',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             },
             {
                 name: 'Slot',
-                link: '/casino/wall/slot',
+                link: '/casino/c/wall/slot',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             },
             {
                 name: 'Raspadinha',
-                link: '/casino/wall/raspadinha',
+                link: '/casino/c/wall/raspadinha',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             },
             {
                 name: 'Roleta',
-                link: '/casino/wall/roleta',
+                link: '/casino/c/wall/roleta',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             },
             {
                 name: 'Mesa',
-                link: '/casino/wall/mesa',
+                link: '/casino/c/wall/mesa',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             },
             {
                 name: 'Cassino Ao Vivo',
-                link: '/casino/live',
+                link: '/casino/c/live',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino

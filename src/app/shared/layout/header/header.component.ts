@@ -8,6 +8,7 @@ import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
+import {IsActiveMatchOptions, Router} from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -32,6 +33,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     seninhaAtiva;
     quininhaAtiva;
     cassinoAtivo;
+    virtuaisAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -65,7 +67,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private sidebarService: SidebarService,
         private printService: PrintService,
         private paramsService: ParametrosLocaisService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private router: Router
     ) {
         super();
     }
@@ -99,6 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
+        this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
 

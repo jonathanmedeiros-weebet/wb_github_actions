@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import {AuthService, SidebarService} from './../../services';
 import { interval } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {forEach, includes, indexOf} from 'lodash';
@@ -14,7 +14,6 @@ import {forEach, includes, indexOf} from 'lodash';
     styleUrls: ['./wall.component.css']
 })
 export class WallComponent implements OnInit {
-
     showLoadingIndicator = true;
     isCliente;
     isLoggedIn;
@@ -25,16 +24,21 @@ export class WallComponent implements OnInit {
     public gameList: [];
     public gameAllList: [];
 
+    blink: string;
+
 
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
         private route: ActivatedRoute,
+        private router: Router,
         private modalService: NgbModal,
         private sideBarService: SidebarService,
     ) { }
 
     ngOnInit(): void {
+        this.blink = this.router.url.split('/')[2];
+
         this.casinoApi.getGamesList().subscribe(response => {
             this.filterGame(response.gameList);
             this.sub = this.route.params.subscribe(params => {

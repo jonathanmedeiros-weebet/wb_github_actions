@@ -114,8 +114,13 @@
         </a>
     </div>
     <div class="category" *ngIf="cassinoAtivo">
-        <a [routerLink]="['/casino']" routerLinkActive="active">
+        <a [routerLink]="['/casino/c']" routerLinkActive="active">
             <span>CASSINO</span>
+        </a>
+    </div>
+    <div class="category" *ngIf="virtuaisAtivo">
+        <a [routerLink]="['/casino/v']" routerLinkActive="active">
+            <span>VIRTUAIS</span>
         </a>
     </div>
     <div class="category" *ngIf="desafioHabilitado">
