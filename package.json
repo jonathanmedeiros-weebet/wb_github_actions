@@ -262,7 +262,9 @@
         "aabet83.wee.bet": "gulp aabet83.wee.bet",
         "malikbets.com": "gulp malikbets.com",
         "blitzbet.wee.bet": "gulp blitzbet.wee.bet",
-        "betsports91.net": "gulp betsports91.net"
+        "betsports91.net": "gulp betsports91.net",
+        "estilobet.com": "gulp estilobet.com",
+        "sportingol.bet": "gulp sportingol.bet"
     },
     "private": true,
     "dependencies": {

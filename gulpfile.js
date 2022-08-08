@@ -2417,3 +2417,21 @@ gulp.task('betsports91.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('estilobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "estilobet.com",
+        banca: "ESTILO BET",
+        styles: "",
+    });
+});
+
+gulp.task('sportingol.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportingol.bet",
+        banca: "SPORTINGOL",
+        styles: "",
+    });
+});
