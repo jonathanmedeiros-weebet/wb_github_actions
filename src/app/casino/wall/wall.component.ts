@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import {AuthService, SidebarService} from './../../services';
-import { interval } from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {forEach, includes, indexOf} from 'lodash';
+import {GameCasino} from '../../shared/models/casino/game-casino';
 
 
 @Component({
@@ -21,11 +20,10 @@ export class WallComponent implements OnInit {
     private sub: any;
     modalRef;
 
-    public gameList: [];
-    public gameAllList: [];
+    public gameList: GameCasino[];
+    public gameAllList: GameCasino[];
 
     blink: string;
-
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -64,7 +62,7 @@ export class WallComponent implements OnInit {
                         this.showMesa(this.gameAllList);
                     } else if (this.gameType === 'destaques') {
                         this.showDestaques(this.gameAllList);
-                    }else if (this.gameType === 'todos' || this.gameType === '') {
+                    } else if (this.gameType === 'todos' || this.gameType === '') {
                         this.showAll(this.gameAllList);
                     }
                 }

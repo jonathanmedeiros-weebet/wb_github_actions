@@ -18,7 +18,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'wall/destaques',
+                        redirectTo: 'wall/todos',
                         pathMatch: 'full'
                     },
                     {
