@@ -21,7 +21,7 @@
                         <!-- <div class="campeonato-nome">
                             {{item.jogo.campeonato.nome}}
                         </div> -->
-                        <div class="odd" [ngClass]="{'mudou': item.mudanca}">
+                        <div class="odd-bilhete" [ngClass]="{'mudou': item.mudanca}">
                         <span *ngIf="item.cotacao.nome; else chave">
                             {{item.cotacao.nome}}
                         </span>

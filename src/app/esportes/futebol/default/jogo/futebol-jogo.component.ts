@@ -3,7 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter,
+    EventEmitter, HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -47,6 +47,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     showLoadingIndicator = true;
     contentSportsEl;
     unsub$ = new Subject();
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.definirAltura();
+        this.cd.detectChanges();
+    }
 
     constructor(
         private jogoService: JogoService,
@@ -139,11 +145,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         if (this.isMobile) {
             altura -= 304;
         } else {
-            altura -= 312;
+            altura -= 190 + ((window.innerHeight / 100) * 20);
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        // this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
     back() {

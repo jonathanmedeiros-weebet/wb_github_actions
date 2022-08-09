@@ -149,11 +149,11 @@
 }
 
 .jogo-selecionado .horario,
-.jogo-selecionado .odd .valor {
+.jogo-selecionado .odd-bilhete .valor {
     color: var(--foreground-highlight);
 }
 
-.jogo-selecionado .odd {
+.jogo-selecionado .odd-bilhete {
     font-weight: bold;
     font-size: 1.1rem;
     padding: 2px 0;

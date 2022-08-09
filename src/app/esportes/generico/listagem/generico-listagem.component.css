@@ -37,6 +37,10 @@
     cursor: pointer;
 }*/
 
+.jogo {
+    padding-top: 5px;
+}
+
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
     .odds .odd.generico{

@@ -1046,10 +1046,6 @@ select.form-control:focus {
     margin-bottom: 10px;
 }
 
-.jogo {
-    padding-top: 5px;
-}
-
 .jogo-selecionado {
     background: var(--selected-event);
     color: var(--foreground-selected-event) !important;
