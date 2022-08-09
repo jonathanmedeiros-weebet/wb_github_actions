@@ -46,6 +46,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     contentSportsEl;
+    altura;
     unsub$ = new Subject();
 
     @HostListener('window:resize', ['$event'])
@@ -70,7 +71,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
-            let altura = window.innerHeight - 145;
+            const altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
@@ -140,16 +141,16 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     definirAltura() {
-        let altura = window.innerHeight;
+        this.altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 304;
+            this.altura -= 304;
         } else {
-            altura -= 190 + ((window.innerHeight / 100) * 20);
+            this.altura -= 190 + ((window.innerHeight / 100) * 20);
         }
 
-        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-jogo');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${this.altura}px`);
     }
 
     back() {
@@ -183,7 +184,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 let mercado = obj[tipoAposta.cat_chave];
 
                 if (!mercado) {
-                    //categoria
+                    // categoria
                     mercado = {
                         'nome': tipoAposta.cat_nome,
                         'tempo': tipoAposta.tempo,
@@ -256,7 +257,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                 posicaoY: tipoAposta.posicao_x_mobile,
                                 posicaoXMobile: tipoAposta.posicao_x_mobile,
                                 posicaoYMobile: tipoAposta.posicao_x_mobile,
-                            }
+                            };
 
                             mercado.odds.push(cotacao);
                         }
@@ -354,7 +355,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
         for (const chave in mercadosOrganizados) {
             const mercado = mercadosOrganizados[chave];
-            //cria a estrutura para organizar os odds
+            // cria a estrutura para organizar os odds
             const colunas = [];
 
             let numeroColunas;
@@ -368,11 +369,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 colunas.push([]);
             }
 
-            //popula as colunas com as cotacaoes
+            // popula as colunas com as cotacaoes
             for (const odd of mercado.odds) {
                 let posicaoX;
                 if (this.isMobile) {
-                    posicaoX = odd.posicaoXMobile
+                    posicaoX = odd.posicaoXMobile;
                 } else {
                     posicaoX = odd.posicaoX;
                 }
@@ -381,8 +382,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odds.push(odd);
             }
 
-            //Ordena os odds de cada coluna com base na posicao vertical de cada um
-            //Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
+            // Ordena os odds de cada coluna comgul base na posicao vertical de cada um
+            // Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
 
             for (const coluna of colunas) {
                 coluna.sort((a, b) => {
@@ -396,6 +397,23 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
             mercado.odds = colunas;
         }
+
+        let mercadosTemp = [];
+        mercadosTemp.push([]);
+        mercadosTemp.push([]);
+
+        let i = -1;
+        for (const mercado in mercadosOrganizados) {
+            i++;
+
+            if ((i % 2) === 0) {
+                mercadosTemp[0].push(mercado);
+            } else {
+                mercadosTemp[1].push(mercado);
+            }
+        }
+
+        console.log(mercadosTemp);
 
         return mercadosOrganizados;
     }
@@ -419,5 +437,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    calcularAlturaOdds(quantidadeOdds) {
+        return quantidadeOdds * 45;
     }
 }

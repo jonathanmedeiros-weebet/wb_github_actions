@@ -91,12 +91,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     moveLeft(id) {
         const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
-        scrollTemp.nativeElement.scrollLeft -= 250;
+        scrollTemp.nativeElement.scrollLeft -= 150;
     }
 
     moveRight(id) {
         const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
-        scrollTemp.nativeElement.scrollLeft += 250;
+        scrollTemp.nativeElement.scrollLeft += 150;
     }
 
     ngOnInit() {
