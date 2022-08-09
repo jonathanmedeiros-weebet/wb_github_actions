@@ -398,23 +398,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             mercado.odds = colunas;
         }
 
-        let mercadosTemp = [];
-        mercadosTemp.push([]);
-        mercadosTemp.push([]);
-
-        let i = -1;
-        for (const mercado in mercadosOrganizados) {
-            i++;
-
-            if ((i % 2) === 0) {
-                mercadosTemp[0].push(mercado);
-            } else {
-                mercadosTemp[1].push(mercado);
-            }
-        }
-
-        console.log(mercadosTemp);
-
         return mercadosOrganizados;
     }
 
