@@ -67,11 +67,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="scroll-button" *ngIf="enableScrollButtons" (click)="moveLeft(jogo.event_id)">
+                                <a class="scroll-button disabled-scroll-button" id="scroll-left-{{jogo.event_id}}"
+                                   *ngIf="enableScrollButtons" (click)="moveLeft(jogo.event_id)">
                                     <i class="fa-solid fa-angle-left"></i>
                                 </a>
                                 <div #scrollOdds class="odds" id="{{jogo.event_id}}"
-                                     [ngStyle]="{'width.px': widthOddsScroll}">
+                                     [ngStyle]="{'width.px': widthOddsScroll}" (scroll)="onScroll(jogo.event_id)">
                                     <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
                                         <ng-container
                                             *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
@@ -112,7 +113,8 @@
                                         </div>
                                     </ng-container>
                                 </div>
-                                <a class="scroll-button" *ngIf="enableScrollButtons" (click)="moveRight(jogo.event_id)">
+                                <a class="scroll-button enabled-scroll-button" *ngIf="enableScrollButtons" id="scroll-right-{{jogo.event_id}}"
+                                   (click)="moveRight(jogo.event_id)">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </a>
                                 <div class="mais-opcoes">

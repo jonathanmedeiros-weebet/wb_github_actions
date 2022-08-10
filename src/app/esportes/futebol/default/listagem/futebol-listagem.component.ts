@@ -64,6 +64,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     navs: ElementRef[];
     enableScrollButtons = false;
     sidebarNavIsCollapsed = false;
+    maxOddsSize;
     unsub$ = new Subject();
 
     @HostListener('window:resize', ['$event'])
@@ -89,14 +90,39 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         });
     }
 
-    moveLeft(id) {
-        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
+    moveLeft(event_id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
         scrollTemp.nativeElement.scrollLeft -= 150;
     }
 
-    moveRight(id) {
-        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
+    moveRight(event_id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
         scrollTemp.nativeElement.scrollLeft += 150;
+    }
+
+    onScroll(event_id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
+        const scrollLeft = scrollTemp.nativeElement.scrollLeft;
+        const scrollWidth = scrollTemp.nativeElement.scrollWidth;
+
+        const scrollLeftTemp = this.el.nativeElement.querySelector(`#scroll-left-${event_id}`);
+        const scrollRightTemp = this.el.nativeElement.querySelector(`#scroll-right-${event_id}`);
+
+        if (scrollLeft <= 0) {
+            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+        } else {
+            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+        }
+
+        if ((scrollWidth - (scrollLeft + this.widthOddsScroll)) <= 0) {
+            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+        } else {
+            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+        }
     }
 
     ngOnInit() {
@@ -139,11 +165,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 95 : this.qtdOddsPrincipais * 150;
 
         const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
-        const maxOddsSize = window.innerWidth - (sidesSize + 250 + 65);
+        this.maxOddsSize = window.innerWidth - (sidesSize + 250 + 65);
 
-        this.enableScrollButtons = this.widthOddsScroll > maxOddsSize;
+        this.enableScrollButtons = this.widthOddsScroll > this.maxOddsSize;
         if (this.enableScrollButtons) {
-            this.widthOddsScroll = maxOddsSize;
+            this.widthOddsScroll = this.maxOddsSize;
         }
         this.nomesJogoWidth = window.innerWidth - (sidesSize + 65 + this.widthOddsScroll);
     }

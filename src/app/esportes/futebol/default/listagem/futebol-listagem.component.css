@@ -60,6 +60,18 @@
     padding-top: 5px;
 }
 
+.enabled-scroll-button {
+    color: var(--foreground-header);
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.disabled-scroll-button {
+    color: var(--header);
+    cursor: auto;
+    transition: 500ms;
+}
+
 @media only screen and (max-width: 1024px) {
     .mais-opcoes {
         margin-right: 10px;
