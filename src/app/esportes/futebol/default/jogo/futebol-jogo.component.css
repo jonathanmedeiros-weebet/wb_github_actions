@@ -197,6 +197,12 @@
     border-bottom: 3px solid var(--highlight);
 }
 
+@media only screen and (max-width: 1279px) {
+    .coluna-apostas-tipo {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .content-sports {
         padding-bottom: 57px;

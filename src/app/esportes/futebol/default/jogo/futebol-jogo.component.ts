@@ -47,6 +47,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     showLoadingIndicator = true;
     contentSportsEl;
     altura;
+    unicaColuna = false;
     unsub$ = new Subject();
 
     @HostListener('window:resize', ['$event'])
@@ -142,6 +143,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     definirAltura() {
         this.altura = window.innerHeight;
+        this.unicaColuna = window.innerWidth <= 1279;
 
         if (this.isMobile) {
             this.altura -= 304;
@@ -424,5 +426,20 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     calcularAlturaOdds(quantidadeOdds) {
         return quantidadeOdds * 45;
+    }
+
+    calcularColunasMercados(index, right = false) {
+        let retorno = false;
+        if (window.innerWidth >= 1280) {
+            if (right) {
+                retorno = index % 2 !== 0;
+            } else {
+                retorno = index % 2 === 0;
+            }
+        } else {
+            retorno = !right;
+        }
+
+        return retorno;
     }
 }

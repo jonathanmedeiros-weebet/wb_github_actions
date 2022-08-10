@@ -55,7 +55,7 @@
                         <div class="tipo-apostas-container" [ngStyle]="{'height.px': altura}">
                             <div class="coluna-apostas-tipo">
                                 <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados90); let i = index">
-                                    <div *ngIf="i % 2 == 0">
+                                    <div *ngIf="calcularColunasMercados(i)">
                                         <div class="header-tipo-aposta">
                                             {{mercados90[chave].nome}}
                                         </div>
@@ -94,9 +94,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="coluna-apostas-tipo">
+                            <div class="coluna-apostas-tipo" *ngIf="!unicaColuna">
                                 <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados90); let i = index">
-                                    <div *ngIf="i % 2 != 0">
+                                    <div *ngIf="calcularColunasMercados(i, true)">
                                         <div class="header-tipo-aposta">
                                             {{mercados90[chave].nome}}
                                         </div>
