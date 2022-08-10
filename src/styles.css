@@ -1027,7 +1027,7 @@ select.form-control:focus {
     text-transform: none;
 }
 
-.campeonato-header .column-left {
+.campeonato-header .column-left, .column-left {
     flex-grow: 1;
     position: relative;
 }

@@ -327,7 +327,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     showOdd(odd) {
-        return this.tiposAposta[odd] ? true : false;
+        return !!this.tiposAposta[odd];
     }
 
     itemSelecionado(jogo, cotacao) {
