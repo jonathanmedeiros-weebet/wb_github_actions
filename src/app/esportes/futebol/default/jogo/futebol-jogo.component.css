@@ -143,9 +143,25 @@
 
 .odds-tipo-aposta .odds {
     height: auto;
+    overflow: hidden;
+    padding: 2px 13px;
+}
+
+.odd {
+    margin-left: 0;
+    margin-bottom: 8px;
+    max-width: 250px;
+}
+
+.odd:last-of-type {
+    margin-bottom: 0;
 }
 
 .odds-coluna {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 

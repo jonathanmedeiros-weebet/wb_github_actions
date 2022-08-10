@@ -424,12 +424,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return this.helperService.cotacaoPermitida(cotacao);
     }
 
-    calcularAlturaOdds(quantidadeOdds) {
-        return quantidadeOdds * 45;
-    }
-
-    calcularColunasMercados(index, right = false) {
-        let retorno = false;
+    verificarColunaMercado(index, right = false) {
+        let retorno: boolean;
         if (window.innerWidth >= 1280) {
             if (right) {
                 retorno = index % 2 !== 0;

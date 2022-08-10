@@ -1109,6 +1109,7 @@ select.form-control:focus {
     max-width: 150px;
     height: 45px;
     margin-left: 5px;
+    border-radius: 2px;
 }
 
 .odd:first-of-type {
@@ -1127,10 +1128,12 @@ select.form-control:focus {
     font-weight: 400;
     font-size: 10px;
     line-height: 14px;
+    border-radius: 2px;
 }
 
 .odd:hover {
     background-color: var(--highlight);
+    border-radius: 2px;
 }
 
 .odds .selecionado {
@@ -1143,6 +1146,7 @@ select.form-control:focus {
 
 .odds .odd-enabled:hover {
     background-color: var(--highlight);
+    border-radius: 2px;
 }
 
 .odds .odd-enabled:hover span {
@@ -1152,6 +1156,10 @@ select.form-control:focus {
 .odd .nome-odd,
 .odd .valor-odd {
     color: var(--foreground-odds);
+}
+
+.odds-coluna {
+    padding: 5px;
 }
 
 .mais-opcoes {
