@@ -3,7 +3,8 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter, HostListener,
+    EventEmitter,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -13,14 +14,8 @@ import {
 } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
-import {ItemBilheteEsportivo, Jogo} from './../../../../models';
-import {
-    BilheteEsportivoService,
-    HelperService,
-    JogoService,
-    MessageService,
-    ParametrosLocaisService
-} from './../../../../services';
+import {Jogo} from './../../../../models';
+import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
