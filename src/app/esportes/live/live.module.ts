@@ -6,11 +6,13 @@ import { LiveListagemComponent } from './listagem/live-listagem.component';
 import { LiveWrapperComponent } from './wrapper/live-wrapper.component';
 import { LiveJogoComponent } from './jogo/live-jogo.component';
 import { JogoService, LiveService } from '../../services';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
         SharedModule,
-        LiveRoutingModule
+        LiveRoutingModule,
+        NgbNavModule
     ],
     declarations: [
         LiveWrapperComponent,
