@@ -1,0 +1,27 @@
+<div id="default-content">
+    <div class="content-header">
+        <h2>Depósito</h2>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div *ngIf="hasMpToken">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="buttons-container">
+                            <a class="opcao-pagamento" *ngIf="hasMpToken" (click)="selecionarModalide('pix')"
+                               [ngClass]="{'active':modalidade === 'pix'}">
+                                <img
+                                    src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgdmlld0JveD0iMCAwIDMzNy45OTk5OSAzMzcuOTk5OTkiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzYwIgogICBzb2RpcG9kaTpkb2NuYW1lPSJwaXgtMTA2LnN2ZyIKICAgd2lkdGg9IjMzOCIKICAgaGVpZ2h0PSIzMzgiCiAgIGlua3NjYXBlOnZlcnNpb249IjEuMSAoYzY4ZTIyYzM4NywgMjAyMS0wNS0yMykiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnMKICAgICBpZD0iZGVmczY0IiAvPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3NjIiCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6em9vbT0iMS4xODgxMTQ2IgogICAgIGlua3NjYXBlOmN4PSIyNjEuNzU5MjUiCiAgICAgaW5rc2NhcGU6Y3k9IjE2OS41OTY0MyIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjEzNjYiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNzAzIgogICAgIGlua3NjYXBlOndpbmRvdy14PSIwIgogICAgIGlua3NjYXBlOndpbmRvdy15PSIyOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzYwIiAvPgogIDxnCiAgICAgaWQ9ImcxNDkiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTEuMjA3NTkyLC0wLjY5OTQ3MzcxKSI+CiAgICA8cGF0aAogICAgICAgZD0ibSAyNDYuMTMsMjUzLjMyMTg4IGEgNDYuMDcsNDYuMDcgMCAwIDEgLTMyLjc4LC0xMy41MyBsIC00Ny4zNSwtNDcuMzggYSA5LDkgMCAwIDAgLTEyLjQ0LDAgbCAtNDcuNTEsNDcuNTEgYSA0Ni4wOSw0Ni4wOSAwIDAgMSAtMzIuNzgsMTMuNTcgSCA2NCBsIDYwLDYwIGEgNDgsNDggMCAwIDAgNjcuODEsMCBsIDYwLjEyLC02MC4xMyB6IgogICAgICAgZmlsbD0iIzMyYmNhZCIKICAgICAgIGlkPSJwYXRoMTIiIC8+CiAgICA8cGF0aAogICAgICAgZD0ibSA3My4yOCw4NS44ODE4ODMgYSA0Ni4wOCw0Ni4wOCAwIDAgMSAzMi43OCwxMy41NyBsIDQ3LjUxLDQ3LjUxOTk5NyBhIDguODEsOC44MSAwIDAgMCAxMi40NCwwIGwgNDcuMzQsLTQ3LjMzOTk5NyBhIDQ2LDQ2IDAgMCAxIDMyLjc4LC0xMy41OCBoIDUuNyBsIC02MC4xMiwtNjAuMTIgYSA0Ny45NCw0Ny45NCAwIDAgMCAtNjcuODEsMCBsIC01OS45LDU5Ljk1IHoiCiAgICAgICBmaWxsPSIjMzJiY2FkIgogICAgICAgaWQ9InBhdGgxNCIgLz4KICAgIDxwYXRoCiAgICAgICBkPSJNIDMwMS41NiwxMzUuNzkxODggMjY1LjIzLDk5LjQ2MTg4MyBhIDcsNyAwIDAgMSAtMi41OCwwLjUyIGggLTE2LjUyIGEgMzIuNjIsMzIuNjIgMCAwIDAgLTIyLjkzLDkuNDk5OTk3IGwgLTQ3LjM0LDQ3LjMxIGEgMjIuNzQsMjIuNzQgMCAwIDEgLTMyLjEzLDAgbCAtNDcuNTIsLTQ3LjQ5IEEgMzIuNjIsMzIuNjIgMCAwIDAgNzMuMjgsOTkuNzkxODgzIEggNTMgYSA3LjEyLDcuMTIgMCAwIDEgLTIuNDQsLTAuNDkgTCAxNCwxMzUuNzkxODggYSA0OCw0OCAwIDAgMCAwLDY3LjgxIGwgMzYuNDgsMzYuNDggYSA2Ljg1LDYuODUgMCAwIDEgMi40NCwtMC40OSBoIDIwLjM2IGEgMzIuNjMsMzIuNjMgMCAwIDAgMjIuOTMsLTkuNTEgbCA0Ny41MSwtNDcuNTEgYyA4LjU5LC04LjU4IDIzLjU2LC04LjU4IDMyLjE0LDAgbCA0Ny4zNCw0Ny4zMyBhIDMyLjYyLDMyLjYyIDAgMCAwIDIyLjkzLDkuNSBoIDE2LjUyIGEgNi45LDYuOSAwIDAgMSAyLjU4LDAuNTIgbCAzNi4zMywtMzYuMzMgYSA0Ny45NCw0Ny45NCAwIDAgMCAwLC02Ny44MSIKICAgICAgIGZpbGw9IiMzMmJjYWQiCiAgICAgICBpZD0icGF0aDE2IiAvPgogIDwvZz4KPC9zdmc+Cg=="
+                                    width="20">
+                                <span style="margin-left: 5px">PIX</span>
+                            </a>
+                        </div>
+                        <div class="mt-2">
+                            <app-deposito-pix *ngIf="modalidade === 'pix'"></app-deposito-pix>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
