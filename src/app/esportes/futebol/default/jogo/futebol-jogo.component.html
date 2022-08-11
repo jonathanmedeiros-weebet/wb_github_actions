@@ -341,41 +341,46 @@
                             Sem Cotações
                         </div>
                         <div class="tipo-apostas-container" [ngStyle]="{'height.px': altura}">
-                            <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercadosJogadores)">
-                                <div class="header-tipo-aposta">
-                                    {{mercadosJogadores[chave].nome}}
+                            <div class="coluna-apostas-tipo">
+                                <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercadosJogadores)">
+                                    <div>
+                                        <div class="header-tipo-aposta">
+                                            {{mercadosJogadores[chave].nome}}
+                                        </div>
+                                        <div class="odds-tipo-aposta">
+                                            <div class="odds">
+                                                <div class="odds-jogador-coluna"
+                                                     *ngFor="let odds of mercadosJogadores[chave].odds">
+                                                    <div class="odd odd-jogador" *ngFor="let odd of odds">
+                                                        <ng-container
+                                                            *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
+                                                            <div class="inner-odd odd-enabled"
+                                                                 [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
+                                                                 (click)="addCotacao(jogo, odd)">
+                                                                                <span class="nome">
+                                                                                    {{odd.nome}}
+                                                                                </span>
+                                                                <span class="valor">
+                                                                                    {{odd.valorFinal}}
+                                                                                </span>
+                                                            </div>
+                                                        </ng-container>
+                                                        <ng-template #cotacaoBloqueada>
+                                                            <div class="inner-odd odd-disabled">
+                                                                                <span class="nome">
+                                                                                    {{odd.nome}}
+                                                                                </span>
+                                                                <span class="valor">
+                                                                                    <i class="fa fa-lock"></i>
+                                                                                </span>
+                                                            </div>
+                                                        </ng-template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="odds-tipo-aposta">
-                                    odds
-                                </div>
-                                <!--                            <div class="odds">-->
-                                <!--                                <div class="odds-jogador-coluna" *ngFor="let odds of mercadosJogadores[chave].odds">-->
-                                <!--                                    <div class="odd odd-jogador" *ngFor="let odd of odds">-->
-                                <!--                                        <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">-->
-                                <!--                                            <div class="inner-odd odd-enabled"-->
-                                <!--                                                [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"-->
-                                <!--                                                (click)="addCotacao(jogo, odd)">-->
-                                <!--                                                <span class="nome">-->
-                                <!--                                                    {{odd.nome}}-->
-                                <!--                                                </span>-->
-                                <!--                                                <span class="valor">-->
-                                <!--                                                    {{odd.valorFinal}}-->
-                                <!--                                                </span>-->
-                                <!--                                            </div>-->
-                                <!--                                        </ng-container>-->
-                                <!--                                        <ng-template #cotacaoBloqueada>-->
-                                <!--                                            <div class="inner-odd odd-disabled">-->
-                                <!--                                                <span class="nome">-->
-                                <!--                                                    {{odd.nome}}-->
-                                <!--                                                </span>-->
-                                <!--                                                <span class="valor">-->
-                                <!--                                                    <i class="fa fa-lock"></i>-->
-                                <!--                                                </span>-->
-                                <!--                                            </div>-->
-                                <!--                                        </ng-template>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                            </div>-->
                             </div>
                         </div>
                     </ng-template>

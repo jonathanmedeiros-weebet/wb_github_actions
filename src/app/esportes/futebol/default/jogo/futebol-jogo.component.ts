@@ -266,7 +266,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.mercados90 = this.organizarMercados(mercados90);
         this.mercados1T = this.organizarMercados(mercados1T);
         this.mercados2T = this.organizarMercados(mercados2T);
-        this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
+        this.mercadosJogadores = this.organizarMercados(mercadosJogadores,  true);
 
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
@@ -338,8 +338,57 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return result;
     }
 
-    private organizarMercados(mercados) {
+    private organizarMercados(mercados, mercadoJogadores = false) {
         const mercadosOrganizados = {};
+
+        if (mercadoJogadores) {
+            const auxMercado = [];
+            const jogadoresMercados = [];
+            const nomeMercadosJogadores = [];
+
+            Object.keys(mercados).forEach((nome) => {
+                nomeMercadosJogadores[nome] = [];
+            });
+
+            for (const chave in mercados) {
+                mercados[chave].odds.forEach((odd) => {
+                    let verificacaoJogador = jogadoresMercados.some((item) => {
+                        return item.nome === odd.nome;
+                    });
+
+                    // let oddsJogadores = [];
+
+                    // for (const chaveInternal in mercados) {
+                    //     mercados[chaveInternal].odds.forEach((oddInternal) => {
+                    //         if (oddInternal.nome === odd.nome) {
+                    //             oddsJogadores[chave] = odd;
+                    //         }
+                    //     });
+                    //
+                    //     console.log(oddsJogadores);
+                    // }
+
+                    if (!verificacaoJogador) {
+                        const temp = {
+                                nome: odd.nome,
+                                mercados: nomeMercadosJogadores
+                            };
+                        jogadoresMercados.push(temp);
+                    }
+                });
+            }
+
+            let oddsJogadores = [];
+
+            jogadoresMercados.forEach((jogador) => {
+                Object.keys(jogador.mercados).forEach((mercadoNome) => {
+
+                });
+            });
+
+            console.log(jogadoresMercados);
+            console.log(mercados);
+        }
 
         const aux = [];
         for (const chave in mercados) {
