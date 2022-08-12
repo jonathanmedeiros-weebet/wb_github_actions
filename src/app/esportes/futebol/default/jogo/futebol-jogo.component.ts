@@ -356,38 +356,29 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         return item.nome === odd.nome;
                     });
 
-                    // let oddsJogadores = [];
-
-                    // for (const chaveInternal in mercados) {
-                    //     mercados[chaveInternal].odds.forEach((oddInternal) => {
-                    //         if (oddInternal.nome === odd.nome) {
-                    //             oddsJogadores[chave] = odd;
-                    //         }
-                    //     });
-                    //
-                    //     console.log(oddsJogadores);
-                    // }
-
                     if (!verificacaoJogador) {
                         const temp = {
-                                nome: odd.nome,
-                                mercados: nomeMercadosJogadores
+                                nome: odd.nome
                             };
                         jogadoresMercados.push(temp);
                     }
                 });
             }
 
-            let oddsJogadores = [];
-
             jogadoresMercados.forEach((jogador) => {
-                Object.keys(jogador.mercados).forEach((mercadoNome) => {
+                let mercadosJogador = [];
+                for (const chave in mercados) {
+                    let mercadoTemp = mercados[chave].odds.filter((odd) => {
+                        return odd.nome === jogador.nome;
+                    });
 
-                });
+                    mercadosJogador[chave] = mercadoTemp;
+                }
+
+                jogador['mercados'] = mercadosJogador;
             });
 
             console.log(jogadoresMercados);
-            console.log(mercados);
         }
 
         const aux = [];
