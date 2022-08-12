@@ -34,6 +34,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     mercados1T: any = {};
     mercados2T: any = {};
     mercadosJogadores: any = {};
+    mercadosJogadoresNewLayout: any = {};
     itens = [];
     itensSelecionados = {};
     tiposAposta;
@@ -61,7 +62,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         if (window.innerWidth <= 1024) {
@@ -266,7 +268,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.mercados90 = this.organizarMercados(mercados90);
         this.mercados1T = this.organizarMercados(mercados1T);
         this.mercados2T = this.organizarMercados(mercados2T);
-        this.mercadosJogadores = this.organizarMercados(mercadosJogadores,  true);
+        // this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
+        this.mercadosJogadoresNewLayout = this.organizarMercados(mercadosJogadores, true);
+
+        console.log(this.mercadosJogadoresNewLayout);
 
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
@@ -342,7 +347,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         const mercadosOrganizados = {};
 
         if (mercadoJogadores) {
-            const auxMercado = [];
             const jogadoresMercados = [];
             const nomeMercadosJogadores = [];
 
@@ -358,81 +362,85 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                     if (!verificacaoJogador) {
                         const temp = {
-                                nome: odd.nome
-                            };
+                            nome: odd.nome,
+                            mercados: {}
+                        };
                         jogadoresMercados.push(temp);
                     }
                 });
             }
 
             jogadoresMercados.forEach((jogador) => {
-                let mercadosJogador = [];
+                let mercadosJogador = {};
                 for (const chave in mercados) {
                     let mercadoTemp = mercados[chave].odds.filter((odd) => {
                         return odd.nome === jogador.nome;
                     });
 
-                    mercadosJogador[chave] = mercadoTemp;
+                    // mercadosJogador[chave] = [];
+
+                    mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : [];
                 }
 
                 jogador['mercados'] = mercadosJogador;
             });
 
-            console.log(jogadoresMercados);
-        }
-
-        const aux = [];
-        for (const chave in mercados) {
-            aux.push([mercados[chave].posicao, chave, mercados[chave]]);
-        }
-        aux.sort((a, b) => a[0] - b[0]);
-        aux.forEach(element => {
-            mercadosOrganizados[element[1]] = element[2];
-        });
-
-        for (const chave in mercadosOrganizados) {
-            const mercado = mercadosOrganizados[chave];
-            // cria a estrutura para organizar os odds
-            const colunas = [];
-
-            let numeroColunas;
-            if (this.isMobile) {
-                numeroColunas = mercado.colunasMobile;
-            } else {
-                numeroColunas = mercado.colunas;
+            // console.log(jogadoresMercados);
+            return jogadoresMercados;
+        } else {
+            const aux = [];
+            for (const chave in mercados) {
+                aux.push([mercados[chave].posicao, chave, mercados[chave]]);
             }
+            aux.sort((a, b) => a[0] - b[0]);
+            aux.forEach(element => {
+                mercadosOrganizados[element[1]] = element[2];
+            });
 
-            for (let i = 0; i < numeroColunas; i++) {
-                colunas.push([]);
-            }
+            for (const chave in mercadosOrganizados) {
+                const mercado = mercadosOrganizados[chave];
+                // cria a estrutura para organizar os odds
+                const colunas = [];
 
-            // popula as colunas com as cotacaoes
-            for (const odd of mercado.odds) {
-                let posicaoX;
+                let numeroColunas;
                 if (this.isMobile) {
-                    posicaoX = odd.posicaoXMobile;
+                    numeroColunas = mercado.colunasMobile;
                 } else {
-                    posicaoX = odd.posicaoX;
+                    numeroColunas = mercado.colunas;
                 }
 
-                const odds = colunas[posicaoX];
-                odds.push(odd);
-            }
+                for (let i = 0; i < numeroColunas; i++) {
+                    colunas.push([]);
+                }
 
-            // Ordena os odds de cada coluna comgul base na posicao vertical de cada um
-            // Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
-
-            for (const coluna of colunas) {
-                coluna.sort((a, b) => {
+                // popula as colunas com as cotacaoes
+                for (const odd of mercado.odds) {
+                    let posicaoX;
                     if (this.isMobile) {
-                        return a.posicaoYMobile - b.posicaoYMobile;
+                        posicaoX = odd.posicaoXMobile;
                     } else {
-                        return a.posicaoY - b.posicaoY;
+                        posicaoX = odd.posicaoX;
                     }
-                });
-            }
 
-            mercado.odds = colunas;
+                    const odds = colunas[posicaoX];
+                    odds.push(odd);
+                }
+
+                // Ordena os odds de cada coluna comgul base na posicao vertical de cada um
+                // Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
+
+                for (const coluna of colunas) {
+                    coluna.sort((a, b) => {
+                        if (this.isMobile) {
+                            return a.posicaoYMobile - b.posicaoYMobile;
+                        } else {
+                            return a.posicaoY - b.posicaoY;
+                        }
+                    });
+                }
+
+                mercado.odds = colunas;
+            }
         }
 
         return mercadosOrganizados;

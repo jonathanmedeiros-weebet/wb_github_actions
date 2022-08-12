@@ -168,8 +168,13 @@
 
 .odds-jogador-coluna {
     width: 100%;
+}
+
+.odds-jogador {
     display: flex;
-    flex-wrap: wrap;
+    height: 60px;
+    padding: 5px;
+    background-color: var(--header);
 }
 
 .odd-jogador {
