@@ -348,12 +348,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
         if (mercadoJogadores) {
             const jogadoresMercados = [];
-            const nomeMercadosJogadores = [];
-
-            Object.keys(mercados).forEach((nome) => {
-                nomeMercadosJogadores[nome] = [];
-            });
-
             for (const chave in mercados) {
                 mercados[chave].odds.forEach((odd) => {
                     let verificacaoJogador = jogadoresMercados.some((item) => {
@@ -377,15 +371,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         return odd.nome === jogador.nome;
                     });
 
-                    // mercadosJogador[chave] = [];
-
                     mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : [];
                 }
 
                 jogador['mercados'] = mercadosJogador;
             });
 
-            // console.log(jogadoresMercados);
             return jogadoresMercados;
         } else {
             const aux = [];

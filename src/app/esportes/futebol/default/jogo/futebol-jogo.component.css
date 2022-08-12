@@ -170,13 +170,6 @@
     width: 100%;
 }
 
-.odds-jogador {
-    display: flex;
-    height: 60px;
-    padding: 5px;
-    background-color: var(--header);
-}
-
 .odd-jogador {
     width: 50% !important;
 }
