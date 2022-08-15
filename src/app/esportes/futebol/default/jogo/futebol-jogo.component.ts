@@ -34,7 +34,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     mercados1T: any = {};
     mercados2T: any = {};
     mercadosJogadores: any = {};
-    mercadosJogadoresNewLayout: any = {};
+    mercadosPorJogadores: any = {};
     itens = [];
     itensSelecionados = {};
     tiposAposta;
@@ -269,9 +269,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.mercados1T = this.organizarMercados(mercados1T);
         this.mercados2T = this.organizarMercados(mercados2T);
         // this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
-        this.mercadosJogadoresNewLayout = this.organizarMercados(mercadosJogadores, true);
-
-        console.log(this.mercadosJogadoresNewLayout);
+        this.mercadosPorJogadores = this.organizarMercados(mercadosJogadores, true);
 
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
@@ -368,7 +366,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 let mercadosJogador = {};
                 for (const chave in mercados) {
                     let mercadoTemp = mercados[chave].odds.filter((odd) => {
-                        return odd.nome === jogador.nome;
+                        return (odd.nome === jogador.nome && odd.nome !== 'No Bookings');
                     });
 
                     mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : [];
@@ -378,6 +376,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             });
 
             return jogadoresMercados;
+
         } else {
             const aux = [];
             for (const chave in mercados) {
