@@ -2128,11 +2128,10 @@ gulp.task('brasilsport.online', function (done) {
     });
 });
 
-gulp.task('spacebets.net', function (done) {
+gulp.task('spn-sports.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "spacebets.net",
-        shared_url: "spn-sports.net",
+        host: "spn-sports.net",
         banca: "SPN SPORTS",
         styles: "",
     });
