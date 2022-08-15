@@ -162,23 +162,6 @@ header {
     flex-wrap: wrap;
 }
 
-.circle {
-    border: 1px solid #455a64;
-    height: 42px;
-    width: 42px;
-    border-radius: 50%;
-    background-color: whitesmoke;
-    margin-right: 10px;
-}
-
-.circle .content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .square-group {
     display: flex;
     flex-wrap: wrap;
@@ -239,27 +222,194 @@ header {
     margin: 0 0 3px 0;
 }
 
-.circle {
-    border: 1px solid black;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: whitesmoke;
-    margin-bottom: 15px;
+/* Início Bilhete Redesign */
+.pre-bilhete {
+    width: 270px;
+    text-align: center;
+    padding: 0;
+    height: 100%;
+    background-color: var(--sidebar-right);
+}
+
+.bilhete-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    padding: 10px 0;
+    color: var(--foreground-highlight);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.acoes-bilhete {
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.acoes-bilhete a {
+    color: var(--foreground-header);
+    height: 15px;
+    float: right;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.pre-bilhete {
-    overflow: auto;
-    display: none;
-    background-color: var(--sidebar-right);
-    /* position: relative; */
-    width: 270px;
+.acoes-bilhete a.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
-.pre-bilhete .form-row {
-    margin-top: 12px;
+#nenhum-jogo {
+    background-color: #181818;
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
 }
+
+#nenhum-jogo span {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pre-bilhete-loteria {
+    flex-grow: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.div-jogos-selecionados {
+    padding: 0 15px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.div-jogos-selecionados h3 {
+    color: var(--foreground-highlight);
+}
+
+.div-jogos-selecionados h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.div-jogos-selecionados h3::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.jogo-selecionado {
+    padding: 15px 0;
+    border-top: 1px dashed var(--highlight);
+    text-align: left;
+    position: relative;
+}
+
+.jogo-selecionado:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.horario {
+    font-size: 0.9rem;
+}
+
+.jogo-selecionado > div:not(.remover-item) {
+    color: var(--foreground-sidebar-right);
+}
+
+.jogo-selecionado .horario,
+.jogo-selecionado .odd-bilhete .valor {
+    color: var(--foreground-highlight);
+}
+
+.jogo-selecionado .odd-bilhete {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
+}
+
+.div-jogos-selecionados .remover-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--highlight);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.jogo-selecionado-inner {
+    padding-right: 20px;
+}
+
+.submit-buttons {
+    padding: 0 15px 0 15px;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon > i {
+    position: absolute;
+    display: block;
+    transform: translate(0, -50%);
+    top: 50%;
+    pointer-events: none;
+    width: 25px;
+    text-align: center;
+    font-style: normal;
+    margin-left: 5px;
+}
+
+.input-icon > input {
+    padding-left: 30px;
+    padding-right: 0;
+}
+/* Fim Bilhete Redesign */
+
+/*.pre-bilhete {*/
+/*    width: 270px;*/
+/*    text-align: center;*/
+/*    padding: 0;*/
+/*    height: 100%;*/
+/*    background-color: var(--sidebar-right);*/
+/*}*/
+
+/*.pre-bilhete {*/
+/*    overflow: auto;*/
+/*    display: none;*/
+/*    background-color: var(--sidebar-right);*/
+/*    !* position: relative; *!*/
+/*    width: 270px;*/
+/*}*/
+
+/*.pre-bilhete .form-row {*/
+/*    margin-top: 12px;*/
+/*}*/
 
 .form-row select,
 .form-row input {
@@ -271,49 +421,49 @@ button {
     line-height: 27px;
 }
 
-.pre-bilhete .aposta-item {
-    border: 1px solid #d7dfe3;
-    background: #eef5f9;
-    border-radius: 4px;
-    padding: 10px 5px 10px 10px;
-    margin-top: 15px;
-}
+/*.pre-bilhete .aposta-item {*/
+/*    border: 1px solid #d7dfe3;*/
+/*    background: #eef5f9;*/
+/*    border-radius: 4px;*/
+/*    padding: 10px 5px 10px 10px;*/
+/*    margin-top: 15px;*/
+/*}*/
 
-.pre-bilhete .aposta-item .circle {
-    height: 25px;
-    width: 25px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-}
+/*.pre-bilhete .aposta-item .circle {*/
+/*    height: 25px;*/
+/*    width: 25px;*/
+/*    margin-bottom: 5px;*/
+/*    margin-right: 5px;*/
+/*}*/
 
-.pre-bilhete .item-header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    position: relative;
-    padding-right: 22px;
-}
+/*.pre-bilhete .item-header {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    position: relative;*/
+/*    padding-right: 22px;*/
+/*}*/
 
-.pre-bilhete .remover-palpite {
-    font-size: 18px;
-    color: red;
-    position: absolute;
-    right: 5px;
-    top: -5px;
-}
+/*.pre-bilhete .remover-palpite {*/
+/*    font-size: 18px;*/
+/*    color: red;*/
+/*    position: absolute;*/
+/*    right: 5px;*/
+/*    top: -5px;*/
+/*}*/
 
-.pre-bilhete .item-header>div {
-    flex-grow: 1;
-    text-transform: capitalize;
-}
+/*.pre-bilhete .item-header>div {*/
+/*    flex-grow: 1;*/
+/*    text-transform: capitalize;*/
+/*}*/
 
-.pre-bilhete .item-header>div label {
-    margin-right: 3px;
-}
+/*.pre-bilhete .item-header>div label {*/
+/*    margin-right: 3px;*/
+/*}*/
 
-.pre-bilhete .item-header>div span {
-    font-weight: bold;
-}
+/*.pre-bilhete .item-header>div span {*/
+/*    font-weight: bold;*/
+/*}*/
 
 #fixed-bar-bilhete {
     padding: 5px;
@@ -376,10 +526,10 @@ button {
     font-size: 2rem;
 }
 
-.pre-bilhete .botoes .col {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+/*.pre-bilhete .botoes .col {*/
+/*    margin-top: 5px;*/
+/*    margin-bottom: 5px;*/
+/*}*/
 
 .loteria-content {
     padding: 0;
@@ -392,56 +542,56 @@ button {
     padding-top: 0;
 }
 
-.loteria-content .pre-bilhete {
-    padding: 20px 15px 0 15px;
-    width: 250px;
-}
+/*.loteria-content .pre-bilhete {*/
+/*    padding: 20px 15px 0 15px;*/
+/*    width: 270px;*/
+/*}*/
 
-.loteria-content .pre-bilhete .form-row.inputs {
-    background-color: var(--odds);
-    padding: 20px 15px 8px 15px;
-    border-radius: 0.25rem;
-    margin: 25px 0 15px;
-}
+/*.loteria-content .pre-bilhete .form-row.inputs {*/
+/*    background-color: var(--odds);*/
+/*    padding: 20px 15px 8px 15px;*/
+/*    border-radius: 0.25rem;*/
+/*    margin: 25px 0 15px;*/
+/*}*/
 
-.loteria-content .pre-bilhete h4 {
-    color: #c9def5;
-    text-align: center;
-}
+/*.loteria-content .pre-bilhete h4 {*/
+/*    color: #c9def5;*/
+/*    text-align: center;*/
+/*}*/
 
-.loteria-content .pre-bilhete h4::before {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 20px;
-    background: var(--highlight);
-    top: 23px;
-    position: relative;
-    left: 50%;
-    margin-left: -58px;
-}
+/*.loteria-content .pre-bilhete h4::before {*/
+/*    content: '';*/
+/*    display: block;*/
+/*    height: 2px;*/
+/*    width: 20px;*/
+/*    background: var(--highlight);*/
+/*    top: 23px;*/
+/*    position: relative;*/
+/*    left: 50%;*/
+/*    margin-left: -58px;*/
+/*}*/
 
-.loteria-content .content-header {
-    background: var(--header);
-    color: var(--foreground-header);
-    text-transform: uppercase;
-    padding: 15px 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
+/*.loteria-content .content-header {*/
+/*    background: var(--header);*/
+/*    color: var(--foreground-header);*/
+/*    text-transform: uppercase;*/
+/*    padding: 15px 10px;*/
+/*    font-size: 1.2rem;*/
+/*    font-weight: bold;*/
+/*}*/
 
 .loteria-content .content-body .content {
     display: flex;
 }
 
-.loteria-content .content-body .content .col-lg-9 {
-    padding: 0;
-}
+/*.loteria-content .content-body .content .col-lg-9 {*/
+/*    padding: 0;*/
+/*}*/
 
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
-}
+/*.nopadding {*/
+/*    padding: 0 !important;*/
+/*    margin: 0 !important;*/
+/*}*/
 
 
 /* Override JS Toast*/
@@ -595,6 +745,7 @@ button {
 }
 
 .content-loteria {
+    padding: 5px;
     overflow: auto;
     background-color: #181818;
 }
@@ -651,9 +802,9 @@ button {
         display: none;
     }
 
-    .pre-bilhete {
-        display: block;
-    }
+    /*.pre-bilhete {*/
+    /*    display: block;*/
+    /*}*/
 
     /*.odds .odd {*/
     /*    width: 33.33%;*/
@@ -687,7 +838,7 @@ button {
         max-width: 100%;
     }
 
-    .loteria-content .pre-bilhete {
+    .loteria-content .kpre-bilhete {
         padding: 40px 15px 0;
         position: absolute !important;
         top: 0;
