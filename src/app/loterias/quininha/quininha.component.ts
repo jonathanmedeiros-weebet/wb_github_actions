@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { getCurrencySymbol } from '@angular/common';
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef} from '@angular/core';
+import {getCurrencySymbol} from '@angular/common';
+import {FormBuilder, FormArray, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { environment } from './../../../environments/environment';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ApostaModalComponent, PreApostaModalComponent } from '../../shared/layout/modals';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
@@ -14,13 +14,14 @@ import {
     AuthService, PreApostaLoteriaService,
     ParametrosLocaisService, MenuFooterService
 } from '../../services';
-import { TipoAposta, Aposta, Sorteio } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {TipoAposta, Aposta, Sorteio} from '../../models';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
 
 @Component({
     selector: 'app-quininha',
-    templateUrl: 'quininha.component.html'
+    templateUrl: 'quininha.component.html',
+    styleUrls: ['quininha.component.css']
 })
 export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
@@ -67,7 +68,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.createForm();
         this.definirAltura();
 
-        this.tipoApostaService.getTiposAposta({ tipo: 'quininha' }).subscribe(
+        this.tipoApostaService.getTiposAposta({tipo: 'quininha'}).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
                 this.tiposAposta.forEach(tipoAposta => {
@@ -87,7 +88,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             error => this.messageService.error(error)
         );
 
-        this.sorteioService.getSorteios({ tipo: 'quininha', sort: 'data' })
+        this.sorteioService.getSorteios({tipo: 'quininha', sort: 'data'})
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 sorteios => this.sorteios = sorteios,
