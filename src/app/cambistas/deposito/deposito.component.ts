@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-deposito',
@@ -12,24 +12,22 @@ export class DepositoComponent implements OnInit, OnDestroy {
     whatsapp;
     hasMpToken;
     modalidade;
+    pixCambista = false;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
+        private router: Router,
     ) {
     }
 
     ngOnInit() {
-        if (this.paramsLocais.getOpcoes().whatsapp) {
-            this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
+        this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
+        if (!this.pixCambista) {
+            this.router.navigate(['esportes/futebol']);
         }
         this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
-
-        if (!this.hasMpToken && this.whatsapp) {
-            this.modalidade = "whatsapp";
-        } else {
-            this.modalidade = "pix";
-        }
+        this.modalidade = "pix";
 
         this.menuFooterService.setIsPagina(true);
     }
