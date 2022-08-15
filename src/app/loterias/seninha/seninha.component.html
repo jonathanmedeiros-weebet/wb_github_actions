@@ -74,13 +74,12 @@
                 </div>
                 <app-footer></app-footer>
             </div>
-
             <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
                 <div class="bilhete-container">
                     <a (click)="closeCupom()" class="fechar-pre-bilhete">
                         <i class="fa fa-times fa-lg"></i>
                     </a>
-                    <div class="titulo">PRÉ-BILHETE</div>
+                    <div class="titulo">BILHETE</div>
                     <div class="acoes-bilhete">
                         Jogos Selecionados
                         <a [ngClass]="{'disabled': aposta.itens.length == 0}" (click)="removerItens()">
@@ -149,19 +148,6 @@
                                            #apostador="ngModel" placeholder="Apostador">
                                     <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
                                 </div>
-
-                                <!-- <div class="form-group col-xs-12 col-lg-12">
-                                    <input type="text" class="form-control" [(ngModel)]="aposta.telefone" name="telefone"
-                                        placeholder="Telefone">
-                                </div> -->
-                                <!--                                <div class="form-row botoes">-->
-                                <!--                                    <div class="col">-->
-                                <!--                                        <button type="button" [disabled]="!apostaForm.form.valid || disabled"-->
-                                <!--                                                class="btn btn-custom col-12" (click)="create()">-->
-                                <!--                                            Finalizar-->
-                                <!--                                        </button>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
                             </div>
                             <div class="form-group submit-buttons">
                                 <button type="button"

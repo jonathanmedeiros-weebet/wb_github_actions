@@ -196,7 +196,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     removerItens() {
         this.aposta.itens = [];
         this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
-        // this.bilheteService.atualizarItens(this.itens.value);
     }
 
     /* Finalizar aposta */

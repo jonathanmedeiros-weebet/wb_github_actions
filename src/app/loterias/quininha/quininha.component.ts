@@ -132,7 +132,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.renderer.setStyle(contentLoteriaEl, 'height', `${altura}px`);
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
@@ -185,8 +185,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     /* Remover palpite */
-    removeGuess(index) {
+    removerItem(index) {
         this.aposta.itens.splice(index, 1);
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
+    }
+
+    removerItens() {
+        this.aposta.itens = [];
         this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
