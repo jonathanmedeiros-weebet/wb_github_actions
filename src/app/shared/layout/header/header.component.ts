@@ -69,6 +69,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     rightDisabled = false;
     leftDisabled = true;
     unsub$ = new Subject();
+    pixCambista = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -135,6 +136,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
+        this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen

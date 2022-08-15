@@ -13,7 +13,7 @@
         <app-spinner *ngIf="submitting"></app-spinner>
         <div class="row">
             <div class="form-group required">
-                <label class="label">Valor a ser Devolvido:</label>
+                <label class="label">Valor a ser Depositado:</label>
                 <input currencyMask class="form-control" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        formControlName="valor">
                 <app-error-msg [control]="form.get('valor')"></app-error-msg>

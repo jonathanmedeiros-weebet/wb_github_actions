@@ -245,8 +245,8 @@
                         <i class="fa fa-dollar"></i> Solicitar Depósito
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente">
-                        <i class="fa fa-dollar"></i> Liberar Saldo
+                    <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
+                        <i class="fa fa-dollar"></i> Liberar Crédito
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
