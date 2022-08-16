@@ -141,8 +141,12 @@
                                 <div class="form-group" *ngIf="!isCliente">
                                     <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
                                            name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
-                                           #apostador="ngModel" placeholder="Apostador">
+                                           #apostador="ngModel" placeholder="Nome do apostador...">
                                     <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
+                                </div>
+                                <div class="informations">
+                                    Valor da aposta:
+                                    <span class="valor">{{250 | currency}}</span>
                                 </div>
                             </div>
                             <div class="form-group submit-buttons">

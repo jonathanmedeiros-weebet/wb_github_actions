@@ -13,18 +13,18 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'seninha',
+                redirectTo: 'quininha',
                 pathMatch: 'full'
-            },
-            {
-                path: 'seninha',
-                component: SeninhaComponent,
-                canActivate: [SeninhaGuard]
             },
             {
                 path: 'quininha',
                 component: QuininhaComponent,
                 canActivate: [QuininhaGuard]
+            },
+            {
+                path: 'seninha',
+                component: SeninhaComponent,
+                canActivate: [SeninhaGuard]
             }
         ]
     }

@@ -104,18 +104,18 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().tenis
             },
             {
-                name: 'Seninha',
-                link: '/loterias/seninha',
-                icon_class: 'wbicon icon-basquete',
-                category: 'loteria',
-                active: this.paramsService.seninhaAtiva()
-            },
-            {
                 name: 'Quininha',
                 link: '/loterias/quininha',
                 icon_class: 'wbicon icon-basquete',
                 category: 'loteria',
                 active: this.paramsService.quininhaAtiva()
+            },
+            {
+                name: 'Seninha',
+                link: '/loterias/seninha',
+                icon_class: 'wbicon icon-basquete',
+                category: 'loteria',
+                active: this.paramsService.seninhaAtiva()
             },
             {
                 name: 'Destaques',

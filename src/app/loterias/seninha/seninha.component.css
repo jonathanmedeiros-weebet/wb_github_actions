@@ -55,3 +55,22 @@
 input, select {
     font-size: 12px;
 }
+
+.div-inputs {
+    padding: 20px 15px 8px 15px;
+    /*border-radius: 0.25rem;*/
+    /*margin-bottom: 15px;*/
+}
+
+.informations {
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 0 0 10px;
+}
+
+.informations .valor {
+    color: var(--foreground-highlight);
+    font-weight: bolder;
+}
