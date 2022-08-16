@@ -348,14 +348,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             const jogadoresMercados = [];
             for (const chave in mercados) {
                 mercados[chave].odds.forEach((odd) => {
-                    let verificacaoJogador = jogadoresMercados.some((item) => {
+                    const verificacaoJogador = jogadoresMercados.some((item) => {
                         return item.nome === odd.nome;
                     });
 
                     if (!verificacaoJogador) {
                         const temp = {
                             nome: odd.nome,
-                            mercados: {}
+                            m_gols: {},
+                            m_marcadores: {},
+                            m_cartoes: {},
+                            m_gols_casa: {},
+                            m_gols_fora: {},
                         };
                         jogadoresMercados.push(temp);
                     }
@@ -363,17 +367,34 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             }
 
             jogadoresMercados.forEach((jogador) => {
-                let mercadosJogador = {};
+                const mercadosJogador = {};
                 for (const chave in mercados) {
-                    let mercadoTemp = mercados[chave].odds.filter((odd) => {
+                    const mercadoTemp = mercados[chave].odds.filter((odd) => {
                         return (odd.nome === jogador.nome && odd.nome !== 'No Bookings');
                     });
 
-                    mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : [];
+                    mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : {valorFinal: '0'};
                 }
 
-                jogador['mercados'] = mercadosJogador;
+                jogador['m_gols']['jogador_marca_primeiro'] = this.checkEmpty(mercadosJogador['jogador_marca_primeiro']);
+                jogador['m_gols']['jogador_marca_ultimo'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo']);
+                jogador['m_gols']['jogador_marca_qualquer_momento'] = this.checkEmpty(mercadosJogador['jogador_marca_qualquer_momento']);
+
+                jogador['m_marcadores']['jogador_marca_2_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_2_ou_mais_gols']);
+                jogador['m_marcadores']['jogador_marca_3_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_3_ou_mais_gols']);
+
+                jogador['m_cartoes']['jogador_recebera_primeiro_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_primeiro_cartao']);
+                jogador['m_cartoes']['jogador_recebera_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_cartao']);
+                jogador['m_cartoes']['jogador_sera_expulso'] = this.checkEmpty(mercadosJogador['jogador_sera_expulso']);
+
+                jogador['m_gols_casa']['jogador_marca_1st_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_casa']);
+                jogador['m_gols_casa']['jogador_marca_ultimo_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_casa']);
+
+                jogador['m_gols_fora']['jogador_marca_1st_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_fora']);
+                jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
             });
+
+            console.log(jogadoresMercados);
 
             return jogadoresMercados;
 
@@ -434,6 +455,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         return mercadosOrganizados;
+    }
+
+    checkEmpty(values) {
+        return values ? values : {valorFinal: '0'};
     }
 
     cssTamanhoColuna(mercado) {
