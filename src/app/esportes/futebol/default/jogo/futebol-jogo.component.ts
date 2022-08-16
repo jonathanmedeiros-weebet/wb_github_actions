@@ -373,7 +373,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         return (odd.nome === jogador.nome && odd.nome !== 'No Bookings');
                     });
 
-                    mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : {valorFinal: '0'};
+                    mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : {};
                 }
 
                 jogador['m_gols']['jogador_marca_primeiro'] = this.checkEmpty(mercadosJogador['jogador_marca_primeiro']);
@@ -458,7 +458,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     checkEmpty(values) {
-        return values ? values : {valorFinal: '0'};
+        return values ? values : {};
     }
 
     cssTamanhoColuna(mercado) {
