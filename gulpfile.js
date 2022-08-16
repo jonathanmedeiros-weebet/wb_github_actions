@@ -1586,15 +1586,6 @@ gulp.task('goldeplaca.wee.bet', function (done) {
     });
 });
 
-gulp.task('boladeouro.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "boladeouro.wee.bet",
-        banca: "BOLA DE OURO",
-        styles: "",
-    });
-});
-
 gulp.task('xbetsports.net', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2197,15 +2188,6 @@ gulp.task('xbetpix.wee.bet', function (done) {
         host: "xbetpix.wee.bet",
         shared_url: "xbetpix.com.br",
         banca: "X BETPIX",
-        styles: "",
-    });
-});
-
-gulp.task('globalbets.net.br', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "globalbets.net.br",
-        banca: "GLOBAL BETS",
         styles: "",
     });
 });
