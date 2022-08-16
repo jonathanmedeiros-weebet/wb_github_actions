@@ -260,7 +260,8 @@
         "blitzbet.wee.bet": "gulp blitzbet.wee.bet",
         "betsports91.net": "gulp betsports91.net",
         "estilobet.com": "gulp estilobet.com",
-        "sportingol.bet": "gulp sportingol.bet"
+        "sportingol.bet": "gulp sportingol.bet",
+        "betcomvoce.com.br": "gulp betcomvoce.com.br"
     },
     "private": true,
     "dependencies": {

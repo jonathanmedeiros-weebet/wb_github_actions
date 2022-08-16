@@ -2399,3 +2399,12 @@ gulp.task('sportingol.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betcomvoce.com.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betcomvoce.com.br",
+        banca: "BET COM VOCÊ",
+        styles: "",
+    });
+});
