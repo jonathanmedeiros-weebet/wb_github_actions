@@ -389,17 +389,6 @@ gulp.task('amigosdabola.wee.bet', function (done) {
     });
 });
 
-gulp.task('bets188.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "bets188.bet",
-        banca: "Bets 188",
-        styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#777; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #f0c027; --foreground-highlight: #f0c027; --odds: #000; --foreground-odds: #fff; --event-time: #777; --league: #f5a432; --foreground-league: #fff;",
-        aditional_styles: ".sem-evento{color: #fff;}  #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #777; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
-    });
-});
-
 gulp.task('footbets.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -924,15 +913,6 @@ gulp.task('7bet.wee.bet', function (done) {
         host: "7bet.wee.bet",
         banca: "7 BET",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #008000;",
-    });
-});
-
-gulp.task('bet99.site', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "bet99.site",
-        banca: "BET99",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --highlight: #3CB371; --odds: #008037;",
     });
 });
 
@@ -1740,15 +1720,6 @@ gulp.task('megaesports.wee.bet', function (done) {
         banca: "MEGA ESPORTS",
         styles: "",
         scripts: ""
-    });
-});
-
-gulp.task('futbets.me', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "futbets.me",
-        banca: "FUTBETS",
-        styles: "",
     });
 });
 
