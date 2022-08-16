@@ -106,14 +106,14 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
             {
                 name: 'Quininha',
                 link: '/loterias/quininha',
-                icon_class: 'wbicon icon-basquete',
+                icon_class: 'fa-solid fa-clover',
                 category: 'loteria',
                 active: this.paramsService.quininhaAtiva()
             },
             {
                 name: 'Seninha',
                 link: '/loterias/seninha',
-                icon_class: 'wbicon icon-basquete',
+                icon_class: 'fa-solid fa-clover',
                 category: 'loteria',
                 active: this.paramsService.seninhaAtiva()
             },

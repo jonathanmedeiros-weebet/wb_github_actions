@@ -74,3 +74,8 @@ input, select {
     color: var(--foreground-highlight);
     font-weight: bolder;
 }
+
+.detalhes {
+    font-size: 12px;
+    margin-bottom: 5px;
+}

@@ -605,7 +605,7 @@
                                         </div>
                                         <div *ngFor="let jogador of mercadosPorJogadores">
                                             <div class="odds"
-                                                 *ngIf="jogador.mercados.jogador_marca_1st_gol_fora.valorFinal || jogador.mercados.jogador_marca_ultimo_gol_fora.valorFinal">
+                                                 *ngIf="jogador && jogador.mercados.jogador_marca_1st_gol_fora.valorFinal || jogador.mercados.jogador_marca_ultimo_gol_fora.valorFinal">
                                                 <div class="col-6">{{jogador.nome}}</div>
                                                 <div class="col-3">
                                                     <div class="odd">

@@ -186,11 +186,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     /* Remover palpite */
     removerItem(index) {
+        this.aposta.valor -= this.aposta.itens[index].valor;
         this.aposta.itens.splice(index, 1);
         this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
     removerItens() {
+        this.aposta.valor = 0;
         this.aposta.itens = [];
         this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }

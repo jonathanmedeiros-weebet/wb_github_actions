@@ -95,25 +95,27 @@
                                 </div>
                                 <div class="jogo-selecionado-inner">
                                     <div class="horario">{{item.sorteio.nome}}</div>
-                                    <div>
-                                        <label>Valor: </label>
-                                        <span>{{item.valor | currency}}</span>
-                                    </div>
-                                    <div *ngIf="item.premio6">
-                                        <label>Retorno 6: </label>
-                                        <span>{{(item.premio6) | currency}}</span>
-                                    </div>
-                                    <div *ngIf="item.premio5">
-                                        <label>Retorno 5: </label>
-                                        <span>{{(item.premio5) | currency}}</span>
-                                    </div>
-                                    <div *ngIf="item.premio4">
-                                        <label>Retorno 4: </label>
-                                        <span>{{(item.premio4) | currency}}</span>
-                                    </div>
-                                    <div *ngIf="item.premio3">
-                                        <label>Retorno 3: </label>
-                                        <span>{{(item.premio3) | currency}}</span>
+                                    <div class="detalhes">
+                                        <div>
+                                            Valor:
+                                            <span>{{item.valor | currency}}</span>
+                                        </div>
+                                        <div *ngIf="item.premio6">
+                                            Retorno 6:
+                                            <span>{{(item.premio6) | currency}}</span>
+                                        </div>
+                                        <div *ngIf="item.premio5">
+                                            Retorno 5:
+                                            <span>{{(item.premio5) | currency}}</span>
+                                        </div>
+                                        <div *ngIf="item.premio4">
+                                            Retorno 4:
+                                            <span>{{(item.premio4) | currency}}</span>
+                                        </div>
+                                        <div *ngIf="item.premio3">
+                                            Retorno 3:
+                                            <span>{{(item.premio3) | currency}}</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="circle-group">
@@ -147,6 +149,10 @@
                                            name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
                                            #apostador="ngModel" placeholder="Apostador">
                                     <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
+                                </div>
+                                <div class="informations">
+                                    Valor da aposta:
+                                    <span class="valor">{{aposta.valor | currency}}</span>
                                 </div>
                             </div>
                             <div class="form-group submit-buttons">
