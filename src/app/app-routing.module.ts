@@ -78,6 +78,11 @@ const appRoutes: Routes = [
                 path: 'clientes',
                 canActivate: [AuthGuard, ClientGuard],
                 loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
+            },
+            {
+                path: 'cambistas',
+                canActivate: [AuthGuard],
+                loadChildren: () => import('./cambistas/cambistas.module').then(c => c.CambistasModule)
             }
         ]
     },
