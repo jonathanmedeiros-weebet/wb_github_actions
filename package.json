@@ -258,7 +258,7 @@
         "sportingol.bet": "gulp sportingol.bet",
         "betcomvoce.com.br": "gulp betcomvoce.com.br",
         "gaveta.bet": "gulp gaveta.bet",
-        "nmbets.wee.bet":  "gulp nmbets.wee.bet",
+        "nmbets.wee.bet": "gulp nmbets.wee.bet",
         "pagoubet.bet": "gulp pagoubet.bet"
     },
     "private": true,
