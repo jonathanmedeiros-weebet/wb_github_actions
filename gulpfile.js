@@ -2379,3 +2379,12 @@ gulp.task('nmbets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pagoubet.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pagoubet.bet",
+        banca: "PAGOU BET",
+        styles: "",
+    });
+});
