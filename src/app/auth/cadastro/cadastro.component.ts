@@ -73,8 +73,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                     Validators.required
                 ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(3)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]],
+            senha: [null, [Validators.required, Validators.minLength(6)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
             cpf: [null, [Validators.required]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
