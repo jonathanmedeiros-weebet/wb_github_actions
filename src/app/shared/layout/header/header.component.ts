@@ -45,6 +45,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     unsub$ = new Subject();
     isMobile = false;
     centered = true;
+    pixCambista = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
