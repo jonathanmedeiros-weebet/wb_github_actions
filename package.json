@@ -256,7 +256,8 @@
         "betsports91.net": "gulp betsports91.net",
         "estilobet.com": "gulp estilobet.com",
         "sportingol.bet": "gulp sportingol.bet",
-        "betcomvoce.com.br": "gulp betcomvoce.com.br"
+        "betcomvoce.com.br": "gulp betcomvoce.com.br",
+        "gaveta.bet": "gulp gaveta.bet"
     },
     "private": true,
     "dependencies": {

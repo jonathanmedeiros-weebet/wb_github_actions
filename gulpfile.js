@@ -2361,3 +2361,12 @@ gulp.task('betcomvoce.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gaveta.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "gaveta.bet",
+        banca: "GAVETA.BET",
+        styles: "",
+    });
+});
