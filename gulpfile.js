@@ -2370,3 +2370,12 @@ gulp.task('gaveta.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nmbets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "nmbets.wee.bet",
+        banca: "NMBETS",
+        styles: "",
+    });
+});
