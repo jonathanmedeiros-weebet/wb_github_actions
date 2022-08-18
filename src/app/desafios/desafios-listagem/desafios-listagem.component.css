@@ -7,10 +7,8 @@
 }
 
 .categoria-header {
-    /*text-transform: uppercase;*/
     padding: 0 10px;
     font-size: 12px;
-    /*border-bottom: 4px solid white;*/
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -44,11 +42,6 @@
     padding: 5px 0;
 }
 
-.indentificacao .horario {
-    /*background-color: var(--event-time);*/
-    /*color: var(--fg-event-time);*/
-}
-
 .indentificacao .nome {
     justify-content: center;
     flex-grow: 1;
@@ -63,9 +56,6 @@
 
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
-    /*.indentificacao .nome{*/
-    /*    display: block;*/
-    /*}*/
     .odds .odd {
         width: 50%;
     }
