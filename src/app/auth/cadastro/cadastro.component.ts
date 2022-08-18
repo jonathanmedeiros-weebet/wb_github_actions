@@ -11,6 +11,9 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {Usuario} from '../../shared/models/usuario';
 
 @Component({
     selector: 'app-cadastro',
@@ -24,6 +27,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
     submitting = false;
     debouncer: any;
     afiliadoHabilitado;
+    isLoggedIn;
+    unsub$ = new Subject();
+    usuario = new Usuario();
 
     constructor(
         private fb: FormBuilder,
@@ -40,6 +46,13 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     ngOnInit(): void {
+        this.auth.logado.pipe(takeUntil(this.unsub$)).subscribe(
+                isLoggedIn => {
+                    if (isLoggedIn) {
+                        this.router.navigate(['esportes/futebol']);
+                    }
+                }
+            );
         this.createForm();
         this.clientesService.getTermosDeUso().subscribe(
             (termos: Pagina) => {
@@ -145,6 +158,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                     this.submitting = false;
                 }
             );
+    }
+    getUsuario() {
+        this.usuario = this.auth.getUser();
     }
 
 }
