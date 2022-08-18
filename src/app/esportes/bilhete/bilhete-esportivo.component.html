@@ -68,14 +68,6 @@
             </ng-template>
         </div>
         <div class="footer-bilhete">
-            <!--                <div class="value-informations">-->
-            <!--                    <p>-->
-            <!--                        Valor da aposta:-->
-            <!--                        <span class="valor">{{form.value.valor | currency}}</span>-->
-            <!--                    </p>-->
-            <!--                    -->
-
-            <!--                </div>-->
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="div-inputs">
                     <div class="form-group" *ngIf="!isCliente">

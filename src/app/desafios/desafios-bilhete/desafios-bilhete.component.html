@@ -1,72 +1,91 @@
 <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
-    <div class="pre-bilhete-desafio">
-        <h4>BILHETE</h4>
+    <div class="bilhete-container">
         <a (click)="closeCupom()" class="fechar-pre-bilhete">
             <i class="fa fa-times fa-lg"></i>
         </a>
-        <div class="value-informations">
-            <p>
-                Valor da aposta:
-                <span class="valor">{{form.value.valor | currency}}</span>
-            </p>
-            <p>
-                Possível Ganho:
-                <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
-            </p>
-            <p class="valores">
-                <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
-                <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
-                <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
-                <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
-            </p>
+        <div class="titulo">BILHETE</div>
+        <div class="acoes-bilhete">
+            Eventos Selecionados
+            <a [ngClass]="{'disabled': itens.length == 0}" (click)="removerItens()">
+                <i class="fa-solid fa-trash"></i> Remover todos
+            </a>
         </div>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="div-inputs">
-                <div class="form-group" *ngIf="!isCliente">
-                    <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
-                        class="form-control" placeholder="Nome do apostador...">
-                    <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
-                </div>
-                <div class="form-group">
-                    <input type="number" formControlName="valor" [min]="apostaMinima"
-                        [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
-                    <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+        <div class="pre-bilhete-desafio">
+            <div *ngIf="itens.length > 0; else semJogosSelecionados" class="div-desafios-selecionados">
+                <div *ngFor="let item of itens.value; let i=index" class="desafio-selecionado">
+                    <div class="desafio-selecionado-inner">
+                        <div class="categoria-nome">
+                            {{item.desafio.categoria.nome}}
+                        </div>
+                        <div class="desafio-nome">
+                            {{item.desafio.nome}}
+                        </div>
+                        <div class="odd-bilhete">
+                            Resposta: <span class="odd-nome">{{item.odd.nome}} </span><span
+                            class="valor">({{item.odd.cotacao}})</span>
+                        </div>
+                    </div>
+                    <div class="remover-item" (click)="removerItem(i)">
+                        <i class="fa fa-times"></i>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
-                    Apostar <b>({{itens.length}})</b>
-                </button>
-                <ng-template #btnProcessando>
-                    <button disabled class="btn btn-custom btn-block">
-                        Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
-                        <i class="fa fa-spinner fa-spin"></i>
+            <ng-template #semJogosSelecionados>
+                <div class="div-jogos-selecionados">
+                    <div id="nenhum-jogo">
+                        <p>
+                            <span><i class="fa-solid fa-circle-info"></i> Nenhuma aposta selecionada!</span>
+                        </p>
+                        <p>
+                            Selecione alguma aposta clicando nas ODDS para poder finalizar o bilhete.
+                        </p>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="footer-bilhete">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="div-inputs">
+                    <div class="form-group" *ngIf="!isCliente">
+                        <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
+                               class="form-control" placeholder="Nome do apostador...">
+                        <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i>R$</i>
+                            <input type="number" formControlName="valor" [min]="apostaMinima"
+                                   (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
+                                   [ngClass]="applyCssInputError('valor')" class="form-control" placeholder="Valor">
+                        </div>
+                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                    </div>
+                    <div class="valores" [ngClass]="{'fadeIn': valorFocado, 'fadeOut': !valorFocado}">
+                        <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
+                        <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
+                        <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
+                        <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
+                    </div>
+                    <div class="informations">
+                        Valor da Aposta:
+                        <span class="valor">{{form.value.valor | currency}}</span>
+                        <br>
+                        Possíveis Ganhos:
+                        <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
+                    </div>
+                </div>
+                <div class="form-group submit-buttons">
+                    <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
+                        Apostar <b>({{itens.length}})</b>
                     </button>
-                </ng-template>
-            </div>
-        </form>
-
-        <div *ngIf="itens.length > 0" class="div-desafios-selecionados">
-            <h3>
-                Eventos Selecionados
-            </h3>
-            <div *ngFor="let item of itens.value; let i=index" class="desafio-selecionado">
-                <div class="desafio-selecionado-inner">
-                    <div class="categoria-nome">
-                        {{item.desafio.categoria.nome}}
-                    </div>
-                    <div class="desafio-nome">
-                        {{item.desafio.nome}}
-                    </div>
-                    <div class="odd">
-                        Resposta: <span class="odd-nome">{{item.odd.nome}} </span><span
-                            class="odd-valor">({{item.odd.cotacao}})</span>
-                    </div>
+                    <ng-template #btnProcessando>
+                        <button disabled class="btn btn-custom btn-block">
+                            Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </ng-template>
                 </div>
-                <div class="remover-item" (click)="removerItem(i)">
-                    <i class="fa fa-times"></i>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>
@@ -75,11 +94,11 @@
     <div class="modal-body" id="aposta-deslogado">
         <div *ngIf="opcoes.cartao_aposta" style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
             <button class="btn" (click)="trocarTipoApostaDeslogado('preaposta')"
-                [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                    [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
                 Pré-Aposta
             </button>
             <button class="btn" (click)="trocarTipoApostaDeslogado('cartao')"
-                [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                    [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
                 Cartão de Aposta
             </button>
         </div>
@@ -110,7 +129,7 @@
                     <div class="form-group col-md-6">
                         <label>Chave</label>
                         <input type="text" class="form-control" formControlName="chave" autocomplete="off"
-                            style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
+                               style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
                     </div>
                     <div class="form-group col-md-6">
                         <label>PIN</label>
@@ -127,7 +146,7 @@
     <div class="modal-footer">
         <button type="button" style="background: #e2e2e2;" class="btn" (click)="modalRef.dismiss()">Fechar</button>
         <button type="button" class="btn btn-custom" *ngIf="!disabled; else processandoPreAposta"
-            (click)="finalizarApostaDeslogado()">
+                (click)="finalizarApostaDeslogado()">
             Finalizar {{btnText}}
         </button>
         <ng-template #processandoPreAposta>
