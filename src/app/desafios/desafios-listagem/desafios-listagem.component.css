@@ -1,62 +1,78 @@
-.categoria-header{
-    text-transform: uppercase;
-    padding: 0px 10px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-bottom: 4px solid white;
+.content-list {
+    padding: 5px;
+}
+
+.categoria {
+    background-color: #181818;
+}
+
+.categoria-header {
+    /*text-transform: uppercase;*/
+    padding: 0 10px;
+    font-size: 12px;
+    /*border-bottom: 4px solid white;*/
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--league);
-    color: var(--foreground-league);
+    background-color: var(--header);
+    color: var(--foreground-header);
+    margin-bottom: 3px;
 }
 
-.categoria-header > span{
+.categoria-header > span {
     line-height: 29px;
 }
 
-.desafios{
-    background-color: #fff;
+.desafios {
+    background-color: #181818;
     padding-bottom: 4px;
 }
 
-.desafio{
-    padding: 0px 10px;
+.desafio {
+    padding: 0 10px;
+    background-color: var(--header);
+    margin-top: 3px;
 }
 
-.indentificacao{
+.desafio:first-of-type {
+    margin-top: 0;
+}
+
+.indentificacao {
     display: flex;
     align-items: center;
     padding: 5px 0;
 }
 
-.indentificacao .horario{
-    background-color: var(--event-time);
-    color: var(--fg-event-time);
+.indentificacao .horario {
+    /*background-color: var(--event-time);*/
+    /*color: var(--fg-event-time);*/
 }
 
-.indentificacao .nome{
+.indentificacao .nome {
+    justify-content: center;
     flex-grow: 1;
+    font-size: 12px;
+    padding-left: 20px;
 }
 
-.css-hack{
+.css-hack {
     display: none;
     padding: 0;
 }
 
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
-    .indentificacao .nome{
-        display: block;
-    }
-
+    /*.indentificacao .nome{*/
+    /*    display: block;*/
+    /*}*/
     .odds .odd {
         width: 50%;
     }
 }
 
 @media only screen and (max-width: 1024px) {
-    .css-hack{
+    .css-hack {
         display: block;
         padding-bottom: 44px;
     }
