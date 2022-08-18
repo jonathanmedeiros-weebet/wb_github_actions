@@ -2388,3 +2388,12 @@ gulp.task('pagoubet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('jaesporte.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "jaesporte.com",
+        banca: "JA ESPORTE",
+        styles: "",
+    });
+});
