@@ -54,6 +54,14 @@
     padding: 0;
 }
 
+.odds {
+    justify-content: space-around;
+}
+
+.odd {
+    max-width: 200px;
+}
+
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
     .odds .odd {
