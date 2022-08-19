@@ -55,18 +55,19 @@
 }
 
 .odds {
-    justify-content: space-around;
+    justify-content: start;
 }
 
 .odd {
-    max-width: 200px;
+    flex-grow: 1;
+    max-width: 350px;
 }
 
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
-    .odds .odd {
-        width: 50%;
-    }
+    /*.odds .odd {*/
+    /*    width: 50%;*/
+    /*}*/
 }
 
 @media only screen and (max-width: 1024px) {
