@@ -1205,16 +1205,6 @@ gulp.task('wbets.com.br', function (done) {
     });
 });
 
-gulp.task('imperio.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "imperio.wee.bet",
-        shared_url: "imperiobet.vip",
-        banca: "IMPÉRIO BET",
-        styles: "",
-    });
-});
-
 gulp.task('ilhabet.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1302,15 +1292,6 @@ gulp.task('betwins.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "betwins.wee.bet",
         banca: "BET WINS",
-        styles: "",
-    });
-});
-
-gulp.task('esportegol77.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "esportegol77.wee.bet",
-        banca: "ESPORTE GOL 77",
         styles: "",
     });
 });
@@ -1668,11 +1649,11 @@ gulp.task('betson.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportbrasil.wee.bet', function (done) {
+gulp.task('esportebet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "sportbrasil.wee.bet",
-        banca: "SPORT BRASIL",
+        host: "esportebet.wee.bet",
+        banca: "ESPORTE BET",
         styles: "",
     });
 });
@@ -2367,6 +2348,51 @@ gulp.task('gaveta.bet', function (done) {
         server: "front4.wee.bet",
         host: "gaveta.bet",
         banca: "GAVETA.BET",
+        styles: "",
+    });
+});
+
+gulp.task('nmbets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "nmbets.wee.bet",
+        banca: "NMBETS",
+        styles: "",
+    });
+});
+
+gulp.task('pagoubet.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pagoubet.bet",
+        banca: "PAGOU BET",
+        styles: "",
+    });
+});
+
+gulp.task('jaesporte.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "jaesporte.com",
+        banca: "JA ESPORTE",
+        styles: "",
+    });
+});
+
+gulp.task('deugreen.me', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "deugreen.me",
+        banca: "DEU GREEN",
+        styles: "",
+    });
+});
+
+gulp.task('betsmaniavip.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betsmaniavip.com",
+        banca: "BETS MANIA VIP",
         styles: "",
     });
 });
