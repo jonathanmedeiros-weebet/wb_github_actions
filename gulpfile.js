@@ -2406,3 +2406,12 @@ gulp.task('deugreen.me', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsmaniavip.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betsmaniavip.com",
+        banca: "BETS MANIA VIP",
+        styles: "",
+    });
+});
