@@ -24,6 +24,7 @@ export class PesquisarApostaModalComponent extends BaseFormComponent implements 
     exibirBilhete = false;
     aposta;
     appMobile;
+    isMobile = false;
     unsub$ = new Subject();
 
     constructor(
@@ -38,6 +39,9 @@ export class PesquisarApostaModalComponent extends BaseFormComponent implements 
     }
 
     ngOnInit() {
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
     }
