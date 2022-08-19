@@ -1,44 +1,9 @@
-/*.campeonato-header .fa{
-    font-size: 1.5rem;
-    float: right;
-    line-height: 41px;
-    margin-right: 10px;
-}
-
-.jogos{
-    background-color: #0A0A09;
-    padding-bottom: 4px;
-}
-
-.jogo{
-    padding: 0 10px 4px 10px;
-}
-
-.jogo-selecionado{
-    background: var(--selected-event);
-    color: var(--foreground-selected-event)!important;
-    cursor: auto;
-}
-
-.indentificacao{
-    display: flex;
-    align-items: center;
-}
-
-.indentificacao .nome{
-    flex-grow: 1;
-}
-
-.mais-opcoes{
-    color: var(--odds);
-    padding: 6px 4px 6px 6px;
-    min-width: 50px;
-    text-align: right;
-    cursor: pointer;
-}*/
-
 .jogo {
     padding-top: 5px;
+}
+
+.odds {
+    justify-content: center;
 }
 
 /* Large devices (desktops, 1025px and up) */

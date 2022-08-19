@@ -60,7 +60,7 @@
 
 .odd {
     flex-grow: 1;
-    max-width: 350px;
+    max-width: 300px;
 }
 
 /* Large devices (desktops, 1025px and up) */
