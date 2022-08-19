@@ -1,25 +1,24 @@
 <div id="acumuladao-listagem">
+    <h2 class="ml-3 mb-3">Acumuladão</h2>
     <div>
         <div class="sem-evento" *ngIf="acumuladoes ? acumuladoes.length == 0 : false">
             Nenhum acumuladão disponível!
         </div>
         <div class="acumuladao" (click)="gotTo(acumuladao.id)" *ngFor="let acumuladao of acumuladoes">
-            <div class="line-1">
-                <div class="nome">{{acumuladao.nome}}</div>
-                <div class="premios">
-                    <div class="premio" *ngFor="let premio of acumuladao.premios">
-                        <span *ngIf="acumuladao.premios.length > 1">{{premio.quantidade_acertos}}:</span>
-                        {{premio.valor | currency}}
-                    </div>
-                </div>
-            </div>
-            <div class="line-2">
+            <div class="nome">
+                {{acumuladao.nome}}
                 <div class="data">
                     Encerra em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
                 </div>
-                <div class="qtd-evenos">
-                    {{acumuladao.jogos.length}} partidas
+            </div>
+            <div class="premios">
+                <div class="premio" *ngFor="let premio of acumuladao.premios">
+                    <span *ngIf="acumuladao.premios.length > 1"> Prêmio {{premio.quantidade_acertos}} acertos:</span>
+                    {{premio.valor | currency}}
                 </div>
+            </div>
+            <div class="qtd-eventos">
+                {{acumuladao.jogos.length}} partidas
             </div>
         </div>
     </div>
