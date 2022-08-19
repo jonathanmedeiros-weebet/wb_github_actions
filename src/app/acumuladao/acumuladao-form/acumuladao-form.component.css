@@ -93,104 +93,143 @@
     font-weight: bolder;
 }
 
-/* Bilhete */
 .pre-bilhete {
     width: 270px;
     text-align: center;
-    padding: 20px 15px 0 15px;
+    padding: 0;
     height: 100%;
-    background-color: var(--sidebar-right)
+    background-color: var(--sidebar-right);
 }
 
-.pre-bilhete h4 {
+.bilhete-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    padding: 10px 0;
     color: var(--foreground-highlight);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
 }
 
-.pre-bilhete h4::before {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 20px;
-    background: var(--highlight);
-    top: 23px;
-    left: 120px;
-    position: relative;
-    margin-left: -37px;
+.acoes-bilhete {
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.acoes-bilhete a {
+    color: var(--foreground-header);
+    height: 15px;
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.acoes-bilhete a.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+#nenhum-jogo {
+    background-color: #181818;
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+#nenhum-jogo span {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pre-bilhete-desafio {
+    flex-grow: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.footer-bilhete {
+    border-top: 2px solid rgba(241, 241, 241, .05);
 }
 
 .div-inputs {
-    background-color: var(--odds);
     padding: 20px 15px 8px 15px;
-    border-radius: 0.25rem;
-    margin-bottom: 15px;
 }
 
-.pre-bilhete .valor {
-    color: var(--foreground-highlight);
-    font-weight: bolder;
-}
-
-.acumuladao h3 {
-    color: var(--foreground-highlight);
-    margin-top: 30px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    font-size: 16px;
-}
-
-.acumuladao h3::before {
-    margin-left: -81px;
-    content: '';
-    display: block;
-    height: 2px;
-    width: 20px;
-    background: var(--highlight);
-    top: 23px;
-    left: 166px;
-    position: relative;
-}
-
-.acumuladao .informacoes{
+.informations {
     text-align: left;
-    color: var(--foreground-sidebar-right);
-    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 0 0 10px;
 }
 
-.acumuladao .informacoes .nome{
-    font-size: 1.2rem;
-    font-weight: bolder;
-    text-transform: uppercase;
+.pre-bilhete .valor,
+.pre-bilhete .possivel-ganho,
+.pre-bilhete .cotacao {
     color: var(--foreground-highlight);
+    font-weight: bolder;
 }
 
-.pre-bilhete .evento {
+.div-desafios-selecionados {
+    padding: 0 15px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.desafio-selecionado {
     padding: 15px 0;
-    border-top: 1px dashed #aec3d8;
+    border-top: 1px dashed var(--highlight);
     text-align: left;
     position: relative;
 }
 
-.pre-bilhete  .evento:first-of-type {
+.desafio-selecionado:first-of-type {
     border-top: none;
     padding-top: 0;
 }
 
-.pre-bilhete .evento > div {
+.desafio-selecionado > div:not(.remover-item) {
     color: var(--foreground-sidebar-right);
 }
 
-.pre-bilhete .evento .horario {
+.desafio-selecionado .horario,
+.desafio-selecionado .odd-bilhete .valor {
     color: var(--foreground-highlight);
+}
+
+.desafio-selecionado .odd-bilhete {
     font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
 }
 
-.pre-bilhete .evento-inner{
-    padding-right: 20px;
+.jogo-nome, .mercado, .horario {
+    font-size: 0.9rem;
 }
 
-.pre-bilhete .evento .resultado{
-    color: var(--foreground-highlight);
-    font-weight: 700;
+.div-desafios-selecionados .remover-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--highlight);
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .success-msg {
@@ -201,6 +240,115 @@
     font-size: 2rem;
     font-weight: bold;
 }
+
+/* Bilhete */
+/*.pre-bilhete {*/
+/*    width: 270px;*/
+/*    text-align: center;*/
+/*    padding: 20px 15px 0 15px;*/
+/*    height: 100%;*/
+/*    background-color: var(--sidebar-right)*/
+/*}*/
+
+/*.pre-bilhete h4 {*/
+/*    color: var(--foreground-highlight);*/
+/*}*/
+
+/*.pre-bilhete h4::before {*/
+/*    content: '';*/
+/*    display: block;*/
+/*    height: 2px;*/
+/*    width: 20px;*/
+/*    background: var(--highlight);*/
+/*    top: 23px;*/
+/*    left: 120px;*/
+/*    position: relative;*/
+/*    margin-left: -37px;*/
+/*}*/
+
+/*.div-inputs {*/
+/*    background-color: var(--odds);*/
+/*    padding: 20px 15px 8px 15px;*/
+/*    border-radius: 0.25rem;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.pre-bilhete .valor {*/
+/*    color: var(--foreground-highlight);*/
+/*    font-weight: bolder;*/
+/*}*/
+
+/*.acumuladao h3 {*/
+/*    color: var(--foreground-highlight);*/
+/*    margin-top: 30px;*/
+/*    margin-bottom: 15px;*/
+/*    text-transform: uppercase;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*.acumuladao h3::before {*/
+/*    margin-left: -81px;*/
+/*    content: '';*/
+/*    display: block;*/
+/*    height: 2px;*/
+/*    width: 20px;*/
+/*    background: var(--highlight);*/
+/*    top: 23px;*/
+/*    left: 166px;*/
+/*    position: relative;*/
+/*}*/
+
+/*.acumuladao .informacoes{*/
+/*    text-align: left;*/
+/*    color: var(--foreground-sidebar-right);*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.acumuladao .informacoes .nome{*/
+/*    font-size: 1.2rem;*/
+/*    font-weight: bolder;*/
+/*    text-transform: uppercase;*/
+/*    color: var(--foreground-highlight);*/
+/*}*/
+
+/*.pre-bilhete .evento {*/
+/*    padding: 15px 0;*/
+/*    border-top: 1px dashed #aec3d8;*/
+/*    text-align: left;*/
+/*    position: relative;*/
+/*}*/
+
+/*.pre-bilhete  .evento:first-of-type {*/
+/*    border-top: none;*/
+/*    padding-top: 0;*/
+/*}*/
+
+/*.pre-bilhete .evento > div {*/
+/*    color: var(--foreground-sidebar-right);*/
+/*}*/
+
+/*.pre-bilhete .evento .horario {*/
+/*    color: var(--foreground-highlight);*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.pre-bilhete .evento-inner{*/
+/*    padding-right: 20px;*/
+/*}*/
+
+/*.pre-bilhete .evento .resultado{*/
+/*    color: var(--foreground-highlight);*/
+/*    font-weight: 700;*/
+/*}*/
+
+/*.success-msg {*/
+/*    font-size: 1.3rem;*/
+/*}*/
+
+/*.success-msg .codigo {*/
+/*    font-size: 2rem;*/
+/*    font-weight: bold;*/
+/*}*/
 
 /* Cartão aposta */
 #aposta-deslogado .active {

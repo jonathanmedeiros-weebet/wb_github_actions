@@ -1,6 +1,6 @@
 <div id="acumuladao-listagem">
-    <h2 class="ml-3 mb-3">Acumuladão</h2>
-    <div>
+    <h2 class="m-3 mt-4">Acumuladão</h2>
+    <div class="wrap-acumuladao">
         <div class="sem-evento" *ngIf="acumuladoes ? acumuladoes.length == 0 : false">
             Nenhum acumuladão disponível!
         </div>
@@ -22,4 +22,5 @@
             </div>
         </div>
     </div>
+    <app-footer></app-footer>
 </div>
