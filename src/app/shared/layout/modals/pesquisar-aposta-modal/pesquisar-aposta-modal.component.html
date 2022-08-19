@@ -4,7 +4,7 @@
         <button type="button" *ngIf="impressaoPermitida()" (click)="printTicket()">
             <i class="fa fa-print"></i>
         </button>
-        <button *ngIf="isMobile && compartilhamentoPermitido()" type="button" class="" (click)="shareTicket()">
+        <button *ngIf="compartilhamentoPermitido()" type="button" class="" (click)="shareTicket()">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
