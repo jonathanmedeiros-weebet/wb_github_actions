@@ -109,7 +109,7 @@ export class PesquisarApostaModalComponent extends BaseFormComponent implements 
         const match = location.protocol.match(/https/);
         let result = false;
 
-        if ((match || this.appMobile) && opcoes.habilitar_compartilhamento_comprovante) {
+        if ((match || this.appMobile) && opcoes.habilitar_compartilhamento_comprovante && this.isMobile) {
             result = true;
         }
 

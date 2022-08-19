@@ -105,7 +105,7 @@ export class ApostaModalComponent implements OnInit {
         const opcoes = this.paramsLocais.getOpcoes();
         let result = false;
 
-        if (opcoes.habilitar_compartilhamento_comprovante) {
+        if (opcoes.habilitar_compartilhamento_comprovante && this.isMobile) {
             result = true;
         }
 
