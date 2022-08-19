@@ -260,7 +260,8 @@
         "gaveta.bet": "gulp gaveta.bet",
         "nmbets.wee.bet": "gulp nmbets.wee.bet",
         "pagoubet.bet": "gulp pagoubet.bet",
-        "jaesporte.com": "gulp jaesporte.com"
+        "jaesporte.com": "gulp jaesporte.com",
+        "deugreen.me": "gulp deugreen.me"
     },
     "private": true,
     "dependencies": {

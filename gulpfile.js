@@ -2397,3 +2397,12 @@ gulp.task('jaesporte.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('deugreen.me', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "deugreen.me",
+        banca: "DEU GREEN",
+        styles: "",
+    });
+});
