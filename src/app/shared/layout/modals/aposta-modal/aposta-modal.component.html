@@ -10,7 +10,7 @@
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket">
+        <button type="button" *ngIf="isMobile && compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">

@@ -25,6 +25,7 @@ export class ApostaModalComponent implements OnInit {
     casaDasApostasId;
     isLoggedIn;
     isCliente;
+    isMobile = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -34,6 +35,9 @@ export class ApostaModalComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
