@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
 import { BannerService, MessageService } from './../services';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,6 +12,7 @@ export class BannersComponent implements OnInit {
     banners = [];
     isMobileView = false;
     showNavigationArrows = false;
+    @Input() pagina = 'futebol';
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -26,7 +27,7 @@ export class BannersComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.bannerService.getBanners().subscribe(
+        this.bannerService.getBanners(this.pagina).subscribe(
             banners => {
                 this.banners = [];
                 let source = 'src';
