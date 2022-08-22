@@ -55,14 +55,14 @@
 
 #acumuladao-form .indentificacao .div-back {
     position: absolute;
-    right: 20px;
+    right: 0;
     top: 10px;
 }
 
 #acumuladao-form .eventos {
     align-self: center;
     background-color: var(--header);
-    width: 95%;
+    width: 100%;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 12px;

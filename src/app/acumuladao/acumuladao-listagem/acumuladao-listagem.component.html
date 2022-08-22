@@ -13,7 +13,9 @@
             </div>
             <div class="premios">
                 <div class="premio" *ngFor="let premio of acumuladao.premios; let i = index">
-                    <span *ngIf="acumuladao.premios.length > 1 && i < 3"> Prêmio {{premio.quantidade_acertos}} acertos:</span>
+                    <span *ngIf="acumuladao.premios.length > 1 && i < 3">
+                        Prêmio {{premio.quantidade_acertos}} {{premio.quantidade_acertos > 1 ? 'acertos' : 'acerto'}}:
+                    </span>
                     <span *ngIf="i < 3"> {{premio.valor | currency}}</span>
                     <span *ngIf="i === 4">e mais...</span>
                 </div>
