@@ -12,9 +12,10 @@
                 </div>
             </div>
             <div class="premios">
-                <div class="premio" *ngFor="let premio of acumuladao.premios">
-                    <span *ngIf="acumuladao.premios.length > 1"> Prêmio {{premio.quantidade_acertos}} acertos:</span>
-                    {{premio.valor | currency}}
+                <div class="premio" *ngFor="let premio of acumuladao.premios; let i = index">
+                    <span *ngIf="acumuladao.premios.length > 1 && i < 3"> Prêmio {{premio.quantidade_acertos}} acertos:</span>
+                    <span *ngIf="i < 3"> {{premio.valor | currency}}</span>
+                    <span *ngIf="i === 4">e mais...</span>
                 </div>
             </div>
             <div class="qtd-eventos">
