@@ -7,8 +7,13 @@
                 <i class="fa fa-times"></i>
             </div>
             <div class="nome">
-                {{acumuladao.nome}}
+                {{acumuladao.nome}} - {{acumuladao.data_encerramento | moment:'DD/MM/YYYY'}}
+                <span>
+                    Encerra em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
+                </span>
             </div>
+        </div>
+        <div class="premios">
             <div class="premio" *ngFor="let premio of acumuladao.premios">
                 <div>
                     Prêmio {{premio.quantidade_acertos}} partidas: {{premio.valor | currency}}
@@ -19,15 +24,12 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="encerramento">
-                Encerra em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
-            </div>
         </div>
         <div class="eventos">
             <div class="evento" *ngFor="let jogo of acumuladao.jogos; let i=index;">
                 <div class="dados">
-                    <div>PARTIDA {{i+1}}</div>
-                    <div>{{jogo.horario | moment:'DD/MM/YYYY HH:mm'}}</div>
+                    <div>{{jogo.horario | moment:'': true}}</div>
+                    <div>{{jogo.horario | moment:'HH:mm'}}</div>
                 </div>
                 <div class="nome-placar">
                     <div class="time-a-nome">
@@ -68,11 +70,11 @@
         <div class="modal-body" id="aposta-deslogado">
             <div *ngIf="opcoes.cartao_aposta" style="background: #e2e2e2; border-bottom: 1px solid;" class="tabs">
                 <button class="btn" (click)="trocarTipoApostaDeslogado('preaposta')"
-                    [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                        [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
                     Pré-Aposta
                 </button>
                 <button class="btn" (click)="trocarTipoApostaDeslogado('cartao')"
-                    [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                        [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
                     Cartão de Aposta
                 </button>
             </div>
@@ -101,7 +103,7 @@
                         <div class="form-group col-md-6">
                             <label>Chave</label>
                             <input type="text" class="form-control" formControlName="chave" autocomplete="off"
-                                style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
+                                   style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
                         </div>
                         <div class="form-group col-md-6">
                             <label>PIN</label>
@@ -110,7 +112,7 @@
                     </div>
                     <div class="form-check col-md-6">
                         <input type="checkbox" class="form-check-input" id="manter-cartao"
-                            formControlName="manter_cartao">
+                               formControlName="manter_cartao">
                         <label class="form-check-label" for="manter-cartao">Manter Cartão</label>
                     </div>
                 </form>
@@ -126,67 +128,67 @@
 
     <ng-container *ngIf="!encerrado;">
         <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
-            <div class="pre-bilhete-acumuladao">
-                <h4>BILHETE</h4>
+            <div class="bilhete-container">
                 <a (click)="closeCupom()" class="fechar-pre-bilhete">
                     <i class="fa fa-times fa-lg"></i>
                 </a>
-                <div class="value-informations">
-                    <p>
-                        Valor da aposta:
-                        <span class="valor">{{acumuladao.valor | currency}}</span>
-                    </p>
+                <div class="titulo">BILHETE</div>
+                <div class="pre-bilhete-acumuladao">
+                    <div class="acumuladao">
+                        <h3>
+                            Resumo
+                        </h3>
+                        <div class="informacoes">
+                            <div class="data-encerramento bold">
+                                {{acumuladao.data_encerramento | moment: 'DD/MM/YYYY HH:mm'}}
+                            </div>
+                            <div class="nome bold mb-1">
+                                {{acumuladao.nome}}
+                            </div>
+                            <div class="premio" *ngFor="let premio of acumuladao.premios">
+                                Prêmio {{premio.quantidade_acertos}} partidas:
+                                {{premio.valor | currency}}
+                            </div>
+                        </div>
+                        <div *ngFor="let jogo of acumuladao.jogos; let i=index" class="evento">
+                            <div class="evento-inner">
+                                <div class="horario">
+                                    {{jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                                </div>
+                                <div class="jogo-nome">
+                                    <div>{{jogo.time_a_nome}} - ({{jogo.time_a_resultado}})</div>
+                                    <div>{{jogo.time_b_nome}} - ({{jogo.time_b_resultado}})</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div class="div-inputs" *ngIf="!isCliente">
-                        <div class="form-group">
-                            <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
-                                class="form-control" placeholder="Nome do apostador...">
-                            <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                <div class="footer-bilhete">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="div-inputs" *ngIf="!isCliente">
+                            <div class="form-group">
+                                <input type="text" formControlName="apostador"
+                                       [ngClass]="applyCssInputError('apostador')"
+                                       class="form-control" placeholder="Nome do apostador...">
+                                <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
+                            </div>
+                            <div class="informations">
+                                Valor da aposta:
+                                <span class="valor">{{acumuladao.valor | currency}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
-                            Apostar
-                        </button>
-                        <ng-template #btnProcessando>
-                            <button disabled class="btn btn-custom btn-block">
-                                Processando... <i class="fa fa-spinner fa-spin"></i>
+                        <div class="form-group submit-buttons">
+                            <button type="submit" *ngIf="!disabled; else btnProcessando"
+                                    class="btn btn-custom btn-block">
+                                Apostar
                             </button>
-                        </ng-template>
-                    </div>
-                </form>
-                <div class="acumuladao">
-                    <h3>
-                        Resumo
-                    </h3>
-                    <div class="informacoes">
-                        <div class="data-encerramento">
-                            {{acumuladao.data_encerramento | moment: 'DD/MM/YYYY HH:mm'}}
+                            <ng-template #btnProcessando>
+                                <button disabled class="btn btn-custom btn-block">
+                                    Processando... <i class="fa fa-spinner fa-spin"></i>
+                                </button>
+                            </ng-template>
                         </div>
-                        <div class="nome">
-                            {{acumuladao.nome}}
-                        </div>
-                        <div class="premio" *ngFor="let premio of acumuladao.premios">
-                            Prêmio {{premio.quantidade_acertos}} partidas:
-                            {{premio.valor | currency}}
-                        </div>
-                    </div>
-                    <div *ngFor="let jogo of acumuladao.jogos; let i=index" class="evento">
-                        <div class="evento-inner">
-                            <div class="horario">
-                                {{jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
-                            </div>
-                            <div class="jogo-nome">
-                                <div>
-                                    {{jogo.time_a_resultado}} - {{jogo.time_a_nome}}
-                                </div>
-                                <div>
-                                    {{jogo.time_b_resultado}} - {{jogo.time_b_nome}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </section>

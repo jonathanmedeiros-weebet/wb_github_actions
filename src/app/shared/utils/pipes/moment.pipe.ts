@@ -20,9 +20,9 @@ export class MomentPipe implements PipeTransform {
 
         if (value && calendar) {
             result = moment(value).calendar({
-                sameDay: '[Hoje] / HH:mm',
-                nextDay: '[Amanhã] / HH:mm',
-                nextWeek: 'dddd  / HH:mm',
+                sameDay: '[Hoje]',
+                nextDay: '[Amanhã]',
+                nextWeek: 'dddd',
                 lastDay: '[Ontem]',
                 lastWeek: '[Last] dddd',
                 sameElse: 'DD/MM/YYYY'

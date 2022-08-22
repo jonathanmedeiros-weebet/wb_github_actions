@@ -1,92 +1,137 @@
-.content{
+.content {
     display: flex;
-    height: 100%;;
+    height: calc(100vh - 92px);
 }
 
-#acumuladao-form{
-    background-color: #e1e2e4;
+#acumuladao-form {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
-#acumuladao-form .indentificacao{
-    padding: 10px;
+#acumuladao-form .indentificacao {
+    width: 100%;
+    font-size: 12px;
     position: relative;
 }
 
-#acumuladao-form  .indentificacao .nome{
-    font-size: 1.2rem;
-    font-weight: bolder;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+#acumuladao-form .indentificacao .nome {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    background-color: #181818;
 }
 
-#acumuladao-form  .indentificacao .premio{
-   margin-bottom: 5px;
+#acumuladao-form .indentificacao .nome span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 19px;
 }
 
-#acumuladao-form .div-back{
-    color: red;
-    font-size: 2rem;
+.premios {
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.premios .premio {
+    margin-right: 20px;
+}
+
+#acumuladao-form .div-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--highlight);
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
     cursor: pointer;
+    border-radius: 25px;
+    background-color: #181818;
 }
 
-#acumuladao-form .indentificacao .div-back{
+#acumuladao-form .indentificacao .div-back {
     position: absolute;
     right: 20px;
-    top: 21px;
+    top: 10px;
 }
 
-#acumuladao-form .eventos{
-    padding: 10px;
-    background-color:#fff;
+#acumuladao-form .eventos {
+    align-self: center;
+    background-color: var(--header);
+    width: 95%;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 12px;
 }
 
-#acumuladao-form .evento{
-    margin-bottom: 10px;
-}
-
-#acumuladao-form .evento .dados{
+#acumuladao-form .evento {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    /* color: var(--fg-event-time); */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#acumuladao-form .nome-placar{
+#acumuladao-form .evento:first-of-type {
+    border-top: none;
+}
+
+#acumuladao-form .evento .dados {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    white-space: nowrap;
+    justify-content: center;
+}
+
+.informacoes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    font-size: 10px;
+}
+
+.informacoes .bold {
+    font-weight: 600;
+}
+
+#acumuladao-form .nome-placar {
+    width: 100%;
     padding: 10px 0;
     display: flex;
-    background-color:var(--odds);
-    color: var(--foreground-odds);
     align-items: center;
 }
 
-#acumuladao-form .time-b-nome{
+#acumuladao-form .time-b-nome {
     width: 42.5%;
     text-align: left;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
-#acumuladao-form .time-a-nome{
+#acumuladao-form .time-a-nome {
     width: 42.5%;
     text-align: right;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
-#acumuladao-form .placar{
+#acumuladao-form .placar {
     display: flex;
     justify-content: space-around;
     padding: 5px;
     width: 140px;
 }
 
-#acumuladao-form .time-a-placar input, #acumuladao-form .time-b-placar input{
-    width: 40px;
+#acumuladao-form .time-a-placar input, #acumuladao-form .time-b-placar input {
+    width: 50px;
     height: 40px;
     font-size: 1.2rem;
     text-align: center;
 }
 
-#acumuladao-form .time-a-placar > div, #acumuladao-form .time-b-placar > div{
+#acumuladao-form .time-a-placar > div, #acumuladao-form .time-b-placar > div {
     border: 1px solid #fff;
     padding: 5px 10px;
     font-size: 1.2rem;
@@ -94,7 +139,8 @@
 }
 
 .pre-bilhete {
-    width: 270px;
+    max-width: 270px;
+    min-width: 270px;
     text-align: center;
     padding: 0;
     height: 100%;
@@ -117,29 +163,6 @@
     text-align: center;
 }
 
-.acoes-bilhete {
-    padding: 0 15px;
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 14px;
-    text-align: left;
-    margin: 10px 0;
-}
-
-.acoes-bilhete a {
-    color: var(--foreground-header);
-    height: 15px;
-    float: right;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.acoes-bilhete a.disabled {
-    color: rgba(255, 255, 255, 0.5);
-    pointer-events: none;
-    cursor: not-allowed;
-}
-
 #nenhum-jogo {
     background-color: #181818;
     text-align: left;
@@ -156,7 +179,7 @@
     line-height: 14px;
 }
 
-.pre-bilhete-desafio {
+.pre-bilhete-acumuladao {
     flex-grow: 1;
     overflow: scroll;
     overflow-x: hidden;
@@ -185,52 +208,75 @@
     font-weight: bolder;
 }
 
-.div-desafios-selecionados {
-    padding: 0 15px;
-    margin: 0;
-    overflow: scroll;
-    overflow-x: hidden;
+.pre-bilhete .evento {
+    display: flex;
+    justify-content: flex-start;
+    padding: 8px;
 }
 
-.desafio-selecionado {
-    padding: 15px 0;
-    border-top: 1px dashed var(--highlight);
+.evento-inner .horario {
+    font-weight: 550;
+    font-size: 11px;
+}
+
+.evento-inner .jogo-nome {
     text-align: left;
-    position: relative;
+    font-size: 10px;
 }
 
-.desafio-selecionado:first-of-type {
-    border-top: none;
-    padding-top: 0;
-}
+/*.pre-bilhete .evento .evento-inner .jogo-nome {*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    flex-direction: column;*/
+/*    padding: 10px;*/
+/*}*/
 
-.desafio-selecionado > div:not(.remover-item) {
-    color: var(--foreground-sidebar-right);
-}
+/*.div-desafios-selecionados {*/
+/*    padding: 0 15px;*/
+/*    margin: 0;*/
+/*    overflow: scroll;*/
+/*    overflow-x: hidden;*/
+/*}*/
 
-.desafio-selecionado .horario,
-.desafio-selecionado .odd-bilhete .valor {
-    color: var(--foreground-highlight);
-}
+/*.desafio-selecionado {*/
+/*    padding: 15px 0;*/
+/*    border-top: 1px dashed var(--highlight);*/
+/*    text-align: left;*/
+/*    position: relative;*/
+/*}*/
 
-.desafio-selecionado .odd-bilhete {
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: 2px 0;
-}
+/*.desafio-selecionado:first-of-type {*/
+/*    border-top: none;*/
+/*    padding-top: 0;*/
+/*}*/
 
-.jogo-nome, .mercado, .horario {
-    font-size: 0.9rem;
-}
+/*.desafio-selecionado > div:not(.remover-item) {*/
+/*    color: var(--foreground-sidebar-right);*/
+/*}*/
 
-.div-desafios-selecionados .remover-item {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: var(--highlight);
-    font-size: 18px;
-    cursor: pointer;
-}
+/*.desafio-selecionado .horario,*/
+/*.desafio-selecionado .odd-bilhete .valor {*/
+/*    color: var(--foreground-highlight);*/
+/*}*/
+
+/*.desafio-selecionado .odd-bilhete {*/
+/*    font-weight: bold;*/
+/*    font-size: 1.1rem;*/
+/*    padding: 2px 0;*/
+/*}*/
+
+/*.jogo-nome, .mercado, .horario {*/
+/*    font-size: 0.9rem;*/
+/*}*/
+
+/*.div-desafios-selecionados .remover-item {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    color: var(--highlight);*/
+/*    font-size: 18px;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .success-msg {
     font-size: 1.3rem;
@@ -240,115 +286,6 @@
     font-size: 2rem;
     font-weight: bold;
 }
-
-/* Bilhete */
-/*.pre-bilhete {*/
-/*    width: 270px;*/
-/*    text-align: center;*/
-/*    padding: 20px 15px 0 15px;*/
-/*    height: 100%;*/
-/*    background-color: var(--sidebar-right)*/
-/*}*/
-
-/*.pre-bilhete h4 {*/
-/*    color: var(--foreground-highlight);*/
-/*}*/
-
-/*.pre-bilhete h4::before {*/
-/*    content: '';*/
-/*    display: block;*/
-/*    height: 2px;*/
-/*    width: 20px;*/
-/*    background: var(--highlight);*/
-/*    top: 23px;*/
-/*    left: 120px;*/
-/*    position: relative;*/
-/*    margin-left: -37px;*/
-/*}*/
-
-/*.div-inputs {*/
-/*    background-color: var(--odds);*/
-/*    padding: 20px 15px 8px 15px;*/
-/*    border-radius: 0.25rem;*/
-/*    margin-bottom: 15px;*/
-/*}*/
-
-/*.pre-bilhete .valor {*/
-/*    color: var(--foreground-highlight);*/
-/*    font-weight: bolder;*/
-/*}*/
-
-/*.acumuladao h3 {*/
-/*    color: var(--foreground-highlight);*/
-/*    margin-top: 30px;*/
-/*    margin-bottom: 15px;*/
-/*    text-transform: uppercase;*/
-/*    font-size: 16px;*/
-/*}*/
-
-/*.acumuladao h3::before {*/
-/*    margin-left: -81px;*/
-/*    content: '';*/
-/*    display: block;*/
-/*    height: 2px;*/
-/*    width: 20px;*/
-/*    background: var(--highlight);*/
-/*    top: 23px;*/
-/*    left: 166px;*/
-/*    position: relative;*/
-/*}*/
-
-/*.acumuladao .informacoes{*/
-/*    text-align: left;*/
-/*    color: var(--foreground-sidebar-right);*/
-/*    margin-bottom: 15px;*/
-/*}*/
-
-/*.acumuladao .informacoes .nome{*/
-/*    font-size: 1.2rem;*/
-/*    font-weight: bolder;*/
-/*    text-transform: uppercase;*/
-/*    color: var(--foreground-highlight);*/
-/*}*/
-
-/*.pre-bilhete .evento {*/
-/*    padding: 15px 0;*/
-/*    border-top: 1px dashed #aec3d8;*/
-/*    text-align: left;*/
-/*    position: relative;*/
-/*}*/
-
-/*.pre-bilhete  .evento:first-of-type {*/
-/*    border-top: none;*/
-/*    padding-top: 0;*/
-/*}*/
-
-/*.pre-bilhete .evento > div {*/
-/*    color: var(--foreground-sidebar-right);*/
-/*}*/
-
-/*.pre-bilhete .evento .horario {*/
-/*    color: var(--foreground-highlight);*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.pre-bilhete .evento-inner{*/
-/*    padding-right: 20px;*/
-/*}*/
-
-/*.pre-bilhete .evento .resultado{*/
-/*    color: var(--foreground-highlight);*/
-/*    font-weight: 700;*/
-/*}*/
-
-/*.success-msg {*/
-/*    font-size: 1.3rem;*/
-/*}*/
-
-/*.success-msg .codigo {*/
-/*    font-size: 2rem;*/
-/*    font-weight: bold;*/
-/*}*/
 
 /* Cartão aposta */
 #aposta-deslogado .active {
@@ -377,9 +314,9 @@
     font-weight: bolder;
 }
 
-#aposta-deslogado .time-nome{
+#aposta-deslogado .time-nome {
     font-size: 1.2rem;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 .cartao-form .form-row select,
@@ -389,11 +326,11 @@
 
 /* Media */
 @media only screen and (max-width: 1024px) {
-    #acumuladao-form .eventos{
+    #acumuladao-form .eventos {
         padding-bottom: 50px;
     }
 
-    #acumuladao-form  .indentificacao .div-back{
+    #acumuladao-form .indentificacao .div-back {
         top: 0;
     }
 
@@ -401,7 +338,7 @@
         left: 166px;
     }
 
-    .acumuladao h3:before{
+    .acumuladao h3:before {
         left: 216px;
     }
 
