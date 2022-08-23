@@ -259,7 +259,8 @@
         "pagoubet.bet": "gulp pagoubet.bet",
         "jaesporte.com": "gulp jaesporte.com",
         "deugreen.me": "gulp deugreen.me",
-        "betsmaniavip.com": "gulp betsmaniavip.com"
+        "betsmaniavip.com": "gulp betsmaniavip.com",
+        "manyville.wee.bet": "gulp manyville.wee.bet"
     },
     "private": true,
     "dependencies": {
