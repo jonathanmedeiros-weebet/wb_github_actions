@@ -1269,15 +1269,6 @@ gulp.task('rodadabets.wee.bet', function (done) {
     });
 });
 
-gulp.task('gamez.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "gamez.bet",
-        banca: "GAMEZ",
-        styles: ""
-    });
-});
-
 gulp.task('sportourodomexico.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
