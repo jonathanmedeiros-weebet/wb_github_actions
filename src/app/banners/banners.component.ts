@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
-import { BannerService, MessageService } from './../services';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import {BannerService, MessageService} from './../services';
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-banners',
@@ -20,7 +20,7 @@ export class BannersComponent implements OnInit {
         private messageService: MessageService,
         private config: NgbCarouselConfig
     ) {
-        config.interval = 7000;
+        config.interval = 5000;
         config.showNavigationIndicators = false;
         config.keyboard = false;
         config.pauseOnHover = false;

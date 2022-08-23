@@ -1,9 +1,15 @@
 .banners{
-    background: #fff;
-    /* min-height: 80px; */
+    background-color: #181818;
+    margin-bottom: 5px;
 }
 
 .banners img{
     width: 100%;
     max-height: 374px;
+    background-color: #181818;
+}
+
+.carousel {
+    border-radius: 12px;
+    overflow: hidden;
 }
