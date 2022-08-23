@@ -1,20 +1,22 @@
 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-<div class="game-list">
-    <div class="game-tile" *ngFor="let game of gameList">
-        <img title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-        <div class="game-tile-buttons">
-            <a *ngIf="game.dataType == 'RNG'" [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-               class="btn btn-xs game-button-demo">Demo</a>
+<div class="wall-container">
 
-            <ng-container *ngIf="isLoggedIn && isCliente">
-                <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                   class="btn btn-xs game-button-play">Jogar</a>
-            </ng-container>
-            <ng-container *ngIf="!isLoggedIn">
-                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
-            </ng-container>
-
-        </div>
-    </div>
 </div>
+<!--<div class="game-list">-->
+<!--    <div class="game-tile" *ngFor="let game of gameList">-->
+<!--        <img title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">-->
+<!--        <div class="game-tile-buttons">-->
+<!--            <a *ngIf="game.dataType == 'RNG'" [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"-->
+<!--               class="btn btn-xs game-button-demo">Demo</a>-->
+
+<!--            <ng-container *ngIf="isLoggedIn && isCliente">-->
+<!--                <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"-->
+<!--                   class="btn btn-xs game-button-play">Jogar</a>-->
+<!--            </ng-container>-->
+<!--            <ng-container *ngIf="!isLoggedIn">-->
+<!--                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>-->
+<!--            </ng-container>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
