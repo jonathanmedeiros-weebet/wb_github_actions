@@ -2387,3 +2387,12 @@ gulp.task('betsmaniavip.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('manyville.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "manyville.wee.bet",
+        banca: "MANYVILLE",
+        styles: "",
+    });
+});
