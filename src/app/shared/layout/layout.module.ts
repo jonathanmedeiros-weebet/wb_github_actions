@@ -38,13 +38,14 @@ import {
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
-import {NgbAlertModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbCarouselModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 import {SubmenuComponent} from './submenu/submenu.component';
 import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
 
 import {NgxCurrencyModule} from 'ngx-currency';
+import {BannersComponent} from './banners/banners.component';
 
 @NgModule({
     imports: [
@@ -58,7 +59,8 @@ import {NgxCurrencyModule} from 'ngx-currency';
         NgxMaskModule.forRoot(),
         NgxCurrencyModule,
         NgbModalModule,
-        NgbAlertModule
+        NgbAlertModule,
+        NgbCarouselModule,
     ],
     declarations: [
         MainLayoutComponent,
@@ -100,7 +102,8 @@ import {NgxCurrencyModule} from 'ngx-currency';
         AcumuladaoLayoutComponent,
         SidebarNavComponent,
         SidebarMenuComponent,
-        LoginModalComponent
+        LoginModalComponent,
+        BannersComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -114,7 +117,8 @@ import {NgxCurrencyModule} from 'ngx-currency';
         ExibirBilheteLoteriaComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
-        BilheteEsportivoComponent
+        BilheteEsportivoComponent,
+        BannersComponent
     ],
     providers: [
         ApostaEsportivaService,

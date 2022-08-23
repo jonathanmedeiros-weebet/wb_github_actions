@@ -20,8 +20,10 @@ export class WallComponent implements OnInit {
     private sub: any;
     modalRef;
 
+    isHomeCassino = true;
     public gameList: GameCasino[];
     public gameAllList: GameCasino[];
+    public gameDestaques: GameCasino[];
 
     blink: string;
 
@@ -48,6 +50,9 @@ export class WallComponent implements OnInit {
                     });
                     this.showVirtuais(this.gameAllList);
                 } else {
+                    this.isHomeCassino = this.gameType === 'todos' || this.gameType === '';
+                    this.gameDestaques = this.filterDestaques(this.gameAllList);
+
                     this.sideBarService.changeItens({
                         contexto: 'casino',
                         dados: {}
@@ -62,7 +67,7 @@ export class WallComponent implements OnInit {
                         this.showMesa(this.gameAllList);
                     } else if (this.gameType === 'destaques') {
                         this.showDestaques(this.gameAllList);
-                    } else if (this.gameType === 'todos' || this.gameType === '') {
+                    } else if (this.isHomeCassino) {
                         this.showAll(this.gameAllList);
                     }
                 }
@@ -135,12 +140,40 @@ export class WallComponent implements OnInit {
     }
 
     showDestaques(games) {
+       //  const destaques = [
+       //      '1301', 'rla', 'vs20olympgate', 'vs20doghouse', 'vs25wolfgold',
+       //      '1101', 'vs20kraken', 'vs9chen', 'vs20goldfever', 'vs5joker',
+       //      'vswayszombcarn', 'vs20hburnhs', '422', 'vpa'
+       //  ];
+       // let destaquesFiltrados = games.filter(function (game) {
+       //      return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
+       //          || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
+       //          || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
+       //          || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
+       //          || game.gameID === '422' || game.gameID === 'vpa';
+       //  });
+       //  for (let cont = 0; cont < destaques.length; cont++ ) {
+       //      const posicao = destaquesFiltrados.findIndex((element) => element.gameID === destaques[cont]);
+       //      if (posicao >= 0) {
+       //          destaquesFiltrados = mudarPosicao(destaquesFiltrados, posicao, cont);
+       //      }
+       //  }
+       //  this.gameList = destaquesFiltrados;
+       //
+       //  function mudarPosicao(array, from, to) {
+       //      array.splice(to, 0, array.splice(from, 1)[0]);
+       //      return array;
+       //  }
+        this.gameList = this.filterDestaques(games);
+    }
+
+    filterDestaques(games) {
         const destaques = [
             '1301', 'rla', 'vs20olympgate', 'vs20doghouse', 'vs25wolfgold',
             '1101', 'vs20kraken', 'vs9chen', 'vs20goldfever', 'vs5joker',
             'vswayszombcarn', 'vs20hburnhs', '422', 'vpa'
         ];
-       let destaquesFiltrados = games.filter(function (game) {
+        let destaquesFiltrados = games.filter(function (game) {
             return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
                 || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
                 || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
@@ -153,7 +186,8 @@ export class WallComponent implements OnInit {
                 destaquesFiltrados = mudarPosicao(destaquesFiltrados, posicao, cont);
             }
         }
-        this.gameList = destaquesFiltrados;
+
+        return destaquesFiltrados;
 
         function mudarPosicao(array, from, to) {
             array.splice(to, 0, array.splice(from, 1)[0]);

@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
-import {BannerService, MessageService} from './../services';
+import {BannerService, MessageService} from '../../../services';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

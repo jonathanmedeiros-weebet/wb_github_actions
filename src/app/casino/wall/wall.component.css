@@ -1,11 +1,29 @@
+.wall-container {
+    width: 100%;
+    min-height: 100%;
+    padding: 5px;
+}
+
+.bloco {
+    position: relative;
+    padding: 5px 80px;
+}
+
+.bloco .titulo {
+    text-align: left;
+    color: var(--foreground-header);
+}
+
 .game-list{
     display: flex;
     flex-wrap: wrap;
 }
+
 .game-tile {
     background-color: var(--header);
     position: relative;
 }
+
 .game-tile img{
     position: absolute;
     width: 100%;
@@ -56,7 +74,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-
     .game-tile {
         width: 100%;
         height:300px;
@@ -65,9 +82,9 @@
         margin-right: 10px;
     }
 
-    .game-list{
-        padding-bottom: 120px;
-    }
+    /*.game-list{*/
+    /*    padding-bottom: 120px;*/
+    /*}*/
 
     .game-tile a{
         pointer-events: none;
@@ -81,8 +98,8 @@
 
 @media (min-width: 1025px) {
     .game-tile {
-        width: calc((100% / 5) - 10px);
-        margin-right: 10px;
+        width: calc((100% / 5) - 20px);
+        margin-right: 20px;
         margin-bottom: 10px;
         --heightA: calc(10vw);
         --heightB: calc(var(--heightA) + 50px);
@@ -96,7 +113,6 @@
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
-
     .game-tile {
         width: 30%;
         height:200px;
