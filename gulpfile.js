@@ -582,15 +582,6 @@ gulp.task('x2bet.wee.bet', function (done) {
     });
 });
 
-gulp.task('ricoesportes.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "ricoesportes.wee.bet",
-        banca: "RICO ESPORTES",
-        styles: ""
-    });
-});
-
 gulp.task('betsplay.club', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1741,15 +1732,6 @@ gulp.task('lancesports.wee.bet', function (done) {
     });
 });
 
-gulp.task('fanaticosbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "fanaticosbet.wee.bet",
-        banca: "FANÁTICOS BET",
-        styles: "",
-    });
-});
-
 gulp.task('apostamais.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2307,11 +2289,11 @@ gulp.task('betsports91.net', function (done) {
     });
 });
 
-gulp.task('estilobet.com', function (done) {
+gulp.task('meupix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "estilobet.com",
-        banca: "ESTILO BET",
+        host: "meupix.bet",
+        banca: "MEU PIX",
         styles: "",
     });
 });
