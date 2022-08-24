@@ -6,29 +6,42 @@
 
 .bloco {
     position: relative;
-    padding: 5px 80px;
+    padding: 5px 60px;
 }
 
 .bloco .titulo {
     text-align: left;
+    font-size: 18px;
     color: var(--foreground-header);
 }
 
-.game-list{
+.game-list {
     display: flex;
     flex-wrap: wrap;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.game-list::-webkit-scrollbar {
+    display: none;
+}
+
+.list-inline {
+    flex-wrap: nowrap;
+    overflow: scroll;
 }
 
 .game-tile {
     background-color: var(--header);
     position: relative;
+    border-radius: 5px;
 }
 
-.game-tile img{
+.game-tile img {
     position: absolute;
     width: 100%;
     height: 100%;
-
+    border-radius: 5px;
 }
 
 .game-tile .game-tile-buttons {
@@ -57,66 +70,102 @@
     margin-bottom: 20px;
 }
 
-.game-tile:hover .game-tile-buttons{
+.game-tile:hover .game-tile-buttons {
     display: flex;
     border-radius: 5px;
 }
 
 /* HOVER */
-.game-tile:hover img{
-    filter: blur(3px);
+.game-tile:hover img {
+    filter: brightness(10%);
+    transition: 300ms;
 }
-.game-tile:hover .game-button-play{
+
+.game-tile:hover .game-button-play {
     display: block;
 }
-.game-tile:hover .game-button-demo{
+
+.game-tile:hover .game-button-demo {
     display: block;
+}
+
+.hide {
+    opacity: 0;
+}
+
+.no-display {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.surgir {
+    animation-name: surgirAnim;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes surgirAnim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
     .game-tile {
         width: 100%;
-        height:300px;
+        height: 300px;
         margin-top: 10px;
         margin-left: 10px;
         margin-right: 10px;
     }
 
-    /*.game-list{*/
-    /*    padding-bottom: 120px;*/
-    /*}*/
-
-    .game-tile a{
+    .game-tile a {
         pointer-events: none;
     }
 
-    .game-tile-buttons:hover a{
+    .game-tile-buttons:hover a {
         pointer-events: unset;
     }
 
 }
 
-@media (min-width: 1025px) {
+@media only screen and (min-width: 1025px) {
     .game-tile {
-        width: calc((100% / 5) - 20px);
-        margin-right: 20px;
-        margin-bottom: 10px;
+        --gameTileWidth: calc((100% / 5) - 16px);
+        width: var(--gameTileWidth);
+        margin-left: 20px;
+        margin-bottom: 20px;
         --heightA: calc(10vw);
         --heightB: calc(var(--heightA) + 50px);
         height: var(--heightB);
     }
 
-    .game-list{
-        padding-bottom: 20px;
+    .game-tile:nth-child(5n+1) {
+        margin-left: 0;
     }
 
+    .game-tile:first-child {
+        margin-left: 0;
+    }
+
+    .game-tile-inline {
+        min-width: var(--gameTileWidth);
+        margin-bottom: 0;
+        margin-left: 20px !important;
+    }
+
+    .game-tile-inline:first-of-type {
+        margin-left: 0 !important;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
     .game-tile {
         width: 30%;
-        height:200px;
-
+        height: 200px;
     }
-
 }

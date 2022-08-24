@@ -21,9 +21,15 @@ export class WallComponent implements OnInit {
     modalRef;
 
     isHomeCassino = true;
-    public gameList: GameCasino[];
-    public gameAllList: GameCasino[];
-    public gameDestaques: GameCasino[];
+    gameList: GameCasino[];
+    gameAllList: GameCasino[];
+
+    gamesCassino: GameCasino[];
+    gamesDestaque: GameCasino[];
+    gamesSlot: GameCasino[];
+    gamesRaspadinha: GameCasino[];
+    gamesRoleta: GameCasino[];
+    gamesMesa: GameCasino[];
 
     blink: string;
 
@@ -41,8 +47,19 @@ export class WallComponent implements OnInit {
 
         this.casinoApi.getGamesList().subscribe(response => {
             this.filterGame(response.gameList);
+
+            this.gamesCassino = this.filterAll(this.gameAllList);
+            this.gamesDestaque = this.filterDestaques(this.gameAllList);
+            this.gamesSlot = this.filterSlot(this.gameAllList);
+            this.gamesRaspadinha = this.filterRaspadinha(this.gameAllList);
+            this.gamesRoleta = this.filterRoleta(this.gameAllList);
+            this.gamesMesa = this.filterMesa(this.gameAllList);
+
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
+
+                this.isHomeCassino = this.gameType === 'todos' || this.gameType === '';
+
                 if (this.gameType === 'virtuais') {
                     this.sideBarService.changeItens({
                         contexto: 'virtuais',
@@ -50,25 +67,22 @@ export class WallComponent implements OnInit {
                     });
                     this.showVirtuais(this.gameAllList);
                 } else {
-                    this.isHomeCassino = this.gameType === 'todos' || this.gameType === '';
-                    this.gameDestaques = this.filterDestaques(this.gameAllList);
-
                     this.sideBarService.changeItens({
                         contexto: 'casino',
                         dados: {}
                     });
                     if (this.gameType === 'slot') {
-                        this.showSlot(this.gameAllList);
+                        this.showSlot();
                     } else if (this.gameType === 'roleta') {
-                        this.showRoulette(this.gameAllList);
+                        this.showRoulette();
                     } else if (this.gameType === 'raspadinha') {
-                        this.showRaspadinha(this.gameAllList);
+                        this.showRaspadinha();
                     } else if (this.gameType === 'mesa') {
-                        this.showMesa(this.gameAllList);
+                        this.showMesa();
                     } else if (this.gameType === 'destaques') {
-                        this.showDestaques(this.gameAllList);
+                        this.showDestaques();
                     } else if (this.isHomeCassino) {
-                        this.showAll(this.gameAllList);
+                        this.showAll();
                     }
                 }
             });
@@ -88,6 +102,7 @@ export class WallComponent implements OnInit {
                 }
             );
     }
+
     // REMOVENDO JOGOS
     filterGame(games) {
         this.gameAllList = games.filter(function (game) {
@@ -103,34 +118,24 @@ export class WallComponent implements OnInit {
         return this.gameList;
     }
 
-    showAll(games) {
-        this.gameList = games.filter(function (game) {
-            return game.dataType !== 'VSB';
-        });
+    showAll() {
+        this.gameList = this.gameAllList;
     }
 
-    showSlot(games) {
-        this.gameList = games.filter(function(game) {
-            return game.gameTypeID === 'vs';
-        });
+    showSlot() {
+        this.gameList = this.gamesSlot;
     }
 
-    showRaspadinha(games) {
-        this.gameList = games.filter(function(game) {
-            return game.gameTypeID === 'sc';
-        });
+    showRaspadinha() {
+        this.gameList = this.gamesRaspadinha;
     }
 
-    showRoulette(games) {
-        this.gameList = games.filter(function(game) {
-            return game.gameTypeID === 'rl';
-        });
+    showRoulette() {
+        this.gameList = this.gamesRoleta;
     }
 
-    showMesa(games) {
-        this.gameList = games.filter(function(game) {
-            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
-        });
+    showMesa() {
+        this.gameList = this.gamesMesa;
     }
 
     showVirtuais(games) {
@@ -139,32 +144,38 @@ export class WallComponent implements OnInit {
         });
     }
 
-    showDestaques(games) {
-       //  const destaques = [
-       //      '1301', 'rla', 'vs20olympgate', 'vs20doghouse', 'vs25wolfgold',
-       //      '1101', 'vs20kraken', 'vs9chen', 'vs20goldfever', 'vs5joker',
-       //      'vswayszombcarn', 'vs20hburnhs', '422', 'vpa'
-       //  ];
-       // let destaquesFiltrados = games.filter(function (game) {
-       //      return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
-       //          || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
-       //          || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
-       //          || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
-       //          || game.gameID === '422' || game.gameID === 'vpa';
-       //  });
-       //  for (let cont = 0; cont < destaques.length; cont++ ) {
-       //      const posicao = destaquesFiltrados.findIndex((element) => element.gameID === destaques[cont]);
-       //      if (posicao >= 0) {
-       //          destaquesFiltrados = mudarPosicao(destaquesFiltrados, posicao, cont);
-       //      }
-       //  }
-       //  this.gameList = destaquesFiltrados;
-       //
-       //  function mudarPosicao(array, from, to) {
-       //      array.splice(to, 0, array.splice(from, 1)[0]);
-       //      return array;
-       //  }
-        this.gameList = this.filterDestaques(games);
+    showDestaques() {
+        this.gameList = this.gamesDestaque;
+    }
+
+    filterAll(games) {
+        return games.filter(function (game) {
+            return game.dataType !== 'VSB';
+        });
+    }
+
+    filterSlot(games) {
+        return games.filter(function(game) {
+            return game.gameTypeID === 'vs';
+        });
+    }
+
+    filterRaspadinha(games) {
+        return games.filter(function(game) {
+            return game.gameTypeID === 'sc';
+        });
+    }
+
+    filterRoleta(games) {
+        return games.filter(function(game) {
+            return game.gameTypeID === 'rl';
+        });
+    }
+
+    filterMesa(games) {
+        return games.filter(function(game) {
+            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+        });
     }
 
     filterDestaques(games) {
@@ -193,6 +204,10 @@ export class WallComponent implements OnInit {
             array.splice(to, 0, array.splice(from, 1)[0]);
             return array;
         }
+    }
+
+    getSpliced(data, start) {
+        return data.slice(start);
     }
 
     abrirModalLogin() {
