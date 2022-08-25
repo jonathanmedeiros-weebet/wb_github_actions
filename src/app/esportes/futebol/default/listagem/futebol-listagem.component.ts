@@ -85,6 +85,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     ngAfterViewInit(): void {
+
         this.oddsNavs.changes.subscribe((navs) => {
             this.navs = navs.toArray();
         });

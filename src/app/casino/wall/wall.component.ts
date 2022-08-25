@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import {AuthService, SidebarService} from './../../services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GameCasino} from '../../shared/models/casino/game-casino';
+import {ViewportScroller} from '@angular/common';
 
 
 @Component({
@@ -204,10 +205,6 @@ export class WallComponent implements OnInit {
             array.splice(to, 0, array.splice(from, 1)[0]);
             return array;
         }
-    }
-
-    getSpliced(data, start) {
-        return data.slice(start);
     }
 
     abrirModalLogin() {

@@ -1,11 +1,13 @@
 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-<div class="wall-container">
+<div class="wall-container" #wallContainer>
     <app-banners pagina="cassino"
                  [ngClass]="{'surgir': !showLoadingIndicator, 'hide': showLoadingIndicator}">
     </app-banners>
     <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
         <div class="bloco">
-            <div class="titulo">Mais Populares</div>
+            <div class="bloco-header">
+                <div class="titulo">Mais Populares</div>
+            </div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gamesDestaque">
                     <img title="{{game.gameName}}"
@@ -124,6 +126,7 @@
 
 <ng-template #cassinoGameList>
     <div class="bloco">
+        <div class="titulo">{{gameType | titlecase}}</div>
         <div class="game-list">
             <div class="game-tile" *ngFor="let game of gameList">
                 <img title="{{game.gameName}}"
