@@ -2378,3 +2378,21 @@ gulp.task('manyville.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('i7esportes.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "i7esportes.bet",
+        banca: "I7 ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('arenasbets.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "arenasbets.com",
+        banca: "ARENAS BETS",
+        styles: "",
+    });
+});

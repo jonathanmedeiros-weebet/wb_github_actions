@@ -258,7 +258,9 @@
         "jaesporte.com": "gulp jaesporte.com",
         "deugreen.me": "gulp deugreen.me",
         "betsmaniavip.com": "gulp betsmaniavip.com",
-        "manyville.wee.bet": "gulp manyville.wee.bet"
+        "manyville.wee.bet": "gulp manyville.wee.bet",
+        "i7esportes.bet": "gulp i7esportes.bet",
+        "arenasbets.com": "gulp arenasbets.com"
     },
     "private": true,
     "dependencies": {
