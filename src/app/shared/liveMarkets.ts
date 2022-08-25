@@ -300,26 +300,6 @@ export default {
             'escanteios_menos_de_16': { chave: 'escanteios_menos_de_16', nome: 'Menos de 16', sigla: '-16 ESCT', posicaoX: 2, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
         }
     },
-    'escanteios_2_opcoes': {
-        chave: 'escanteios_2_opcoes',
-        nome: 'Escanteios - 2 Opções',
-        sportId: 1,
-        tempo: '90',
-        colunas: 2,
-        colunasMobile: 2,
-        odds: {
-            'escanteios_2_opcoes_+7.5': { chave: 'escanteios_2_opcoes_+7.5', nome: 'Mais de 7.5', sigla: 'Mais de 7.5', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_-7.5': { chave: 'escanteios_2_opcoes_-7.5', nome: 'Menos de 7.5', sigla: 'Menos de 7.5', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_+8.5': { chave: 'escanteios_2_opcoes_+8.5', nome: 'Mais de 8.5', sigla: 'Mais de 8.5', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_-8.5': { chave: 'escanteios_2_opcoes_-8.5', nome: 'Menos de 8.5', sigla: 'Menos de 8.5', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_+9.5': { chave: 'escanteios_2_opcoes_+9.5', nome: 'Mais de 9.5', sigla: 'Mais de 9.5', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_-9.5': { chave: 'escanteios_2_opcoes_-9.5', nome: 'Menos de 9.5', sigla: 'Menos de 9.5', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_+10.5': { chave: 'escanteios_2_opcoes_+10.5', nome: 'Mais de 10.5', sigla: 'Mais de 10.5', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_-10.5': { chave: 'escanteios_2_opcoes_-10.5', nome: 'Menos de 10.5', sigla: 'Menos de 10.5', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_+11.5': { chave: 'escanteios_2_opcoes_+11.5', nome: 'Mais de 11.5', sigla: 'Mais de 11.5', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'escanteios_2_opcoes_-11.5': { chave: 'escanteios_2_opcoes_-11.5', nome: 'Menos de 11.5', sigla: 'Menos de 11.5', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-        }
-    },
     'placar_exato': {
         chave: 'placar_exato',
         nome: 'Placar Exato',
