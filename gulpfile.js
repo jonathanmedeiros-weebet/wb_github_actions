@@ -1287,15 +1287,6 @@ gulp.task('betfut.net', function (done) {
     });
 });
 
-gulp.task('jmxbet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jmxbet.com",
-        banca: "JMX BET",
-        styles: "",
-    });
-});
-
 gulp.task('betclub.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1945,15 +1936,6 @@ gulp.task('bets60.wee.bet', function (done) {
     });
 });
 
-gulp.task('globbet.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "globbet.com.br",
-        banca: "GLOB BET",
-        styles: "",
-    });
-});
-
 gulp.task('premiosbet.net', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2388,10 +2370,10 @@ gulp.task('i7esportes.bet', function (done) {
     });
 });
 
-gulp.task('arenasbets.com', function (done) {
+gulp.task('arenasbest.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "arenasbets.com",
+        host: "arenasbest.com",
         banca: "ARENAS BETS",
         styles: "",
     });

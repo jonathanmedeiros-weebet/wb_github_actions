@@ -140,7 +140,6 @@
         "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
         "betwins.wee.bet": "gulp betwins.wee.bet",
         "betfut.net": "gulp betfut.net",
-        "jmxbet.com": "gulp jmxbet.com",
         "betclub.wee.bet": "gulp betclub.wee.bet",
         "uzzebet.com": "gulp uzzebet.com",
         "wsesportes.com": "gulp wsesportes.com",
@@ -210,7 +209,6 @@
         "jmbet.wee.bet": "gulp jmbet.wee.bet",
         "bebet.bet": "gulp bebet.bet",
         "bets60.wee.bet": "gulp bets60.wee.bet",
-        "globbet.com.br": "gulp globbet.com.br",
         "premiosbet.net": "gulp premiosbet.net",
         "lincesports.wee.bet": "gulp lincesports.wee.bet",
         "pixsportbet.com": "gulp pixsportbet.com",
@@ -260,7 +258,7 @@
         "betsmaniavip.com": "gulp betsmaniavip.com",
         "manyville.wee.bet": "gulp manyville.wee.bet",
         "i7esportes.bet": "gulp i7esportes.bet",
-        "arenasbets.com": "gulp arenasbets.com"
+        "arenasbest.com": "gulp arenasbest.com"
     },
     "private": true,
     "dependencies": {
