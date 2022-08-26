@@ -151,30 +151,16 @@ export default {
             'total_gols_+7_90': { chave: 'total_gols_+7_90', nome: '+7 Gols', sigla: '+7G', posicaoX: 1, posicaoY: 3, posicaoXMobile: 1, posicaoYMobile: 3 },
         }
     },
-    'primeiro_marcar_gol': {
-        chave: 'primeiro_marcar_gol',
-        nome: 'Primeira Equipe a Marcar',
-        sportId: 1,
-        tempo: '90',
-        colunas: 3,
-        colunasMobile: 3,
-        odds: {
-            'casa_marca_primeiro': { chave: 'casa_marca_primeiro', nome: 'Casa', sigla: 'CM 1º', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'fora_marca_primeiro': { chave: 'fora_marca_primeiro', nome: 'Fora', sigla: 'FM 1º', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-            'sem_gols_marca_primeiro': { chave: 'sem_gols_marca_primeiro', nome: 'Sem Gols', sigla: 'S/G', posicaoX: 2, posicaoY: 0, posicaoXMobile: 2, posicaoYMobile: 0 },
-        }
-    },
     'ultimo_marcar_gol': {
         chave: 'ultimo_marcar_gol',
         nome: 'Última Equipe a Marcar',
         sportId: 1,
         tempo: '90',
-        colunas: 3,
-        colunasMobile: 3,
+        colunas: 2,
+        colunasMobile: 2,
         odds: {
             'casa_marca_ultimo': { chave: 'casa_marca_ultimo', nome: 'Casa', sigla: 'CM Último', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
-            'fora_marca_ultimo': { chave: 'fora_marca_ultimo', nome: 'Fora', sigla: 'FM Último', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
-            'sem_gols_marca_ultimo': { chave: 'sem_gols_marca_ultimo', nome: 'Sem Gols', sigla: 'S/G', posicaoX: 2, posicaoY: 0, posicaoXMobile: 2, posicaoYMobile: 0 },
+            'fora_marca_ultimo': { chave: 'fora_marca_ultimo', nome: 'Fora', sigla: 'FM Último', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 }
         }
     },
     'total_gols_casa': {
@@ -430,6 +416,18 @@ export default {
             'gols_-2.5_1t': { chave: 'gols_-2.5_1t', nome: '-2.5', sigla: '-2.5G(1T)', posicaoX: 1, posicaoY: 2, posicaoXMobile: 1, posicaoYMobile: 2 },
         }
     },
+    'par_impar_1t': {
+        chave: 'par_impar_1t',
+        nome: '1º Tempo - Gols Ímpar/Par',
+        sportId: 1,
+        tempo: '1T',
+        colunas: 2,
+        colunasMobile: 2,
+        odds: {
+            'total_gols_impar_1t': { chave: 'total_gols_impar_1t', nome: 'Impar', sigla: 'Ímpar(1T)', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
+            'total_gols_par_1t': { chave: 'total_gols_par_1t', nome: 'Par', sigla: 'Par(1T)', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
+        }
+    },
     'placar_exato_1t': {
         chave: 'placar_exato_1t',
         nome: '1º Tempo - Placar Exato',
@@ -491,6 +489,18 @@ export default {
         odds: {
             'ambos_marcam_sim_2t': { chave: 'ambos_marcam_sim_2t', nome: 'Sim', sigla: 'Amb(2T)', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
             'ambos_marcam_nao_2t': { chave: 'ambos_marcam_nao_2t', nome: 'Não', sigla: 'nAmb(2T)', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
+        }
+    },
+    'par_impar_2t': {
+        chave: 'par_impar_2t',
+        nome: '2º Tempo - Gols Ímpar/Par',
+        sportId: 1,
+        tempo: '2T',
+        colunas: 2,
+        colunasMobile: 2,
+        odds: {
+            'total_gols_impar_2t': { chave: 'total_gols_impar_2t', nome: 'Impar', sigla: 'Ímpar(2T)', posicaoX: 0, posicaoY: 0, posicaoXMobile: 0, posicaoYMobile: 0 },
+            'total_gols_par_2t': { chave: 'total_gols_par_2t', nome: 'Par', sigla: 'Par(2T)', posicaoX: 1, posicaoY: 0, posicaoXMobile: 1, posicaoYMobile: 0 },
         }
     },
 };
