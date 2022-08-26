@@ -2271,11 +2271,11 @@ gulp.task('betsports91.net', function (done) {
     });
 });
 
-gulp.task('meupix.bet', function (done) {
+gulp.task('superpix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "meupix.bet",
-        banca: "MEU PIX",
+        host: "superpix.bet",
+        banca: "SUPER PIX",
         styles: "",
     });
 });
