@@ -582,15 +582,6 @@ gulp.task('x2bet.wee.bet', function (done) {
     });
 });
 
-gulp.task('ricoesportes.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "ricoesportes.wee.bet",
-        banca: "RICO ESPORTES",
-        styles: ""
-    });
-});
-
 gulp.task('betsplay.club', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1296,15 +1287,6 @@ gulp.task('betfut.net', function (done) {
     });
 });
 
-gulp.task('jmxbet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jmxbet.com",
-        banca: "JMX BET",
-        styles: "",
-    });
-});
-
 gulp.task('betclub.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1741,15 +1723,6 @@ gulp.task('lancesports.wee.bet', function (done) {
     });
 });
 
-gulp.task('fanaticosbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "fanaticosbet.wee.bet",
-        banca: "FANÁTICOS BET",
-        styles: "",
-    });
-});
-
 gulp.task('apostamais.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1959,15 +1932,6 @@ gulp.task('bets60.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "bets60.wee.bet",
         banca: "BETS 60",
-        styles: "",
-    });
-});
-
-gulp.task('globbet.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "globbet.com.br",
-        banca: "GLOB BET",
         styles: "",
     });
 });
@@ -2307,11 +2271,11 @@ gulp.task('betsports91.net', function (done) {
     });
 });
 
-gulp.task('estilobet.com', function (done) {
+gulp.task('meupix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "estilobet.com",
-        banca: "ESTILO BET",
+        host: "meupix.bet",
+        banca: "MEU PIX",
         styles: "",
     });
 });
@@ -2393,6 +2357,24 @@ gulp.task('manyville.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "manyville.wee.bet",
         banca: "MANYVILLE",
+        styles: "",
+    });
+});
+
+gulp.task('i7esportes.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "i7esportes.bet",
+        banca: "I7 ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('arenasbest.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "arenasbest.com",
+        banca: "ARENAS BETS",
         styles: "",
     });
 });
