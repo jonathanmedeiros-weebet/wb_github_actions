@@ -258,7 +258,8 @@
         "betsmaniavip.com": "gulp betsmaniavip.com",
         "manyville.wee.bet": "gulp manyville.wee.bet",
         "i7esportes.bet": "gulp i7esportes.bet",
-        "arenasbest.com": "gulp arenasbest.com"
+        "arenasbest.com": "gulp arenasbest.com",
+        "pixfacil.bet": "gulp pixfacil.bet"
     },
     "private": true,
     "dependencies": {

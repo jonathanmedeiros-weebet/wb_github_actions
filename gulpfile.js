@@ -2378,3 +2378,12 @@ gulp.task('arenasbest.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pixfacil.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pixfacil.bet",
+        banca: "PIX FÁCIL",
+        styles: "",
+    });
+});
