@@ -2374,7 +2374,7 @@ gulp.task('arenasbest.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "arenasbest.com",
-        banca: "ARENAS BETS",
+        banca: "ARENAS BEST",
         styles: "",
     });
 });
