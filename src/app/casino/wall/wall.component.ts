@@ -1,11 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren} from '@angular/core';
+import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {AuthService, SidebarService} from './../../services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GameCasino} from '../../shared/models/casino/game-casino';
-import {ViewportScroller} from '@angular/common';
 
 
 @Component({
@@ -13,7 +12,9 @@ import {ViewportScroller} from '@angular/common';
     templateUrl: './wall.component.html',
     styleUrls: ['./wall.component.css']
 })
-export class WallComponent implements OnInit {
+export class WallComponent implements OnInit, AfterViewInit {
+    @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
+    scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
     isLoggedIn;
@@ -41,7 +42,11 @@ export class WallComponent implements OnInit {
         private router: Router,
         private modalService: NgbModal,
         private sideBarService: SidebarService,
-    ) { }
+        private renderer: Renderer2,
+        private el: ElementRef,
+        private cd: ChangeDetectorRef
+    ) {
+    }
 
     ngOnInit(): void {
         this.blink = this.router.url.split('/')[2];
@@ -88,7 +93,8 @@ export class WallComponent implements OnInit {
                 }
             });
             this.showLoadingIndicator = false;
-        }, erro => {});
+        }, erro => {
+        });
         this.auth.logado
             .subscribe(
                 isLoggedIn => {
@@ -102,6 +108,50 @@ export class WallComponent implements OnInit {
                     this.isCliente = isCliente;
                 }
             );
+    }
+
+    ngAfterViewInit() {
+        this.gamesScrolls.changes.subscribe((scrolls) => {
+            this.scrolls = scrolls.toArray();
+        });
+    }
+
+    scrollLeft(scrollId) {
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        scrollTemp.nativeElement.scrollLeft -= 700;
+    }
+
+    scrollRight(scrollId) {
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        scrollTemp.nativeElement.scrollLeft += 700;
+    }
+
+    onScroll(scrollId) {
+        this.cd.detectChanges();
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        const scrollLeft = scrollTemp.nativeElement.scrollLeft;
+        const scrollWidth = scrollTemp.nativeElement.scrollWidth;
+
+        const scrollLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-left`);
+        const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
+
+        const maxScrollSize = window.innerWidth - 240;
+
+        if (scrollLeft <= 0) {
+            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+        } else {
+            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+        }
+
+        if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 0) {
+            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+        } else {
+            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+        }
     }
 
     // REMOVENDO JOGOS
@@ -140,7 +190,7 @@ export class WallComponent implements OnInit {
     }
 
     showVirtuais(games) {
-        this.gameList = games.filter(function(game) {
+        this.gameList = games.filter(function (game) {
             return game.dataType === 'VSB';
         });
     }
@@ -156,25 +206,25 @@ export class WallComponent implements OnInit {
     }
 
     filterSlot(games) {
-        return games.filter(function(game) {
+        return games.filter(function (game) {
             return game.gameTypeID === 'vs';
         });
     }
 
     filterRaspadinha(games) {
-        return games.filter(function(game) {
+        return games.filter(function (game) {
             return game.gameTypeID === 'sc';
         });
     }
 
     filterRoleta(games) {
-        return games.filter(function(game) {
+        return games.filter(function (game) {
             return game.gameTypeID === 'rl';
         });
     }
 
     filterMesa(games) {
-        return games.filter(function(game) {
+        return games.filter(function (game) {
             return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
         });
     }
@@ -188,11 +238,11 @@ export class WallComponent implements OnInit {
         let destaquesFiltrados = games.filter(function (game) {
             return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
                 || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
-                || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen'  || game.gameID === 'vs20goldfever'
+                || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen' || game.gameID === 'vs20goldfever'
                 || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
                 || game.gameID === '422' || game.gameID === 'vpa';
         });
-        for (let cont = 0; cont < destaques.length; cont++ ) {
+        for (let cont = 0; cont < destaques.length; cont++) {
             const posicao = destaquesFiltrados.findIndex((element) => element.gameID === destaques[cont]);
             if (posicao >= 0) {
                 destaquesFiltrados = mudarPosicao(destaquesFiltrados, posicao, cont);

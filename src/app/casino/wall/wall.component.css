@@ -14,18 +14,24 @@
 }
 
 .bloco .titulo {
-    /*position: relative;*/
     text-align: left;
     font-size: 18px;
     color: var(--foreground-header);
+    flex-grow: 1;
 }
 
-.bloco .titulo .ver-todos {
-    position: absolute;
-    width: 100px;
-    right: 0;
+.ver-todos a {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: var(--highlight);
+    text-decoration: none;
+    width: 100%;
     height: 100%;
-    background-color: green;
+}
+
+.games-container {
+    position: relative;
 }
 
 .game-list {
@@ -39,9 +45,50 @@
     display: none;
 }
 
-.list-inline {
+.game-list-inline {
     flex-wrap: nowrap;
     overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.scroll-button {
+    position: absolute;
+    width: 40px;
+    height: 50px;
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.scroll-left {
+    top: calc(50% - 25px);
+    left: -50px;
+}
+
+.scroll-right {
+    top: calc(50% - 25px);
+    right: -50px;
+}
+
+.enabled-scroll-button {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.disabled-scroll-button {
+    background-color: #181818;
+    color: #181818;
+    cursor: auto;
+    transition: 500ms;
 }
 
 .game-tile {
@@ -90,7 +137,7 @@
 
 /* HOVER */
 .game-tile:hover img {
-    filter: brightness(10%);
+    filter: brightness(20%);
     transition: 300ms;
 }
 
