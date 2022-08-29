@@ -2271,11 +2271,11 @@ gulp.task('betsports91.net', function (done) {
     });
 });
 
-gulp.task('meupix.bet', function (done) {
+gulp.task('superpix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "meupix.bet",
-        banca: "MEU PIX",
+        host: "superpix.bet",
+        banca: "SUPER PIX",
         styles: "",
     });
 });
@@ -2375,6 +2375,15 @@ gulp.task('arenasbest.com', function (done) {
         server: "front4.wee.bet",
         host: "arenasbest.com",
         banca: "ARENAS BEST",
+        styles: "",
+    });
+});
+
+gulp.task('pixfacil.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pixfacil.bet",
+        banca: "PIX FÁCIL",
         styles: "",
     });
 });

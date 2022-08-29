@@ -247,7 +247,7 @@
         "malikbets.com": "gulp malikbets.com",
         "blitzbet.wee.bet": "gulp blitzbet.wee.bet",
         "betsports91.net": "gulp betsports91.net",
-        "meupix.bet": "gulp meupix.bet",
+        "superpix.bet": "gulp superpix.bet",
         "sportingol.bet": "gulp sportingol.bet",
         "betcomvoce.com.br": "gulp betcomvoce.com.br",
         "gaveta.bet": "gulp gaveta.bet",
@@ -258,7 +258,8 @@
         "betsmaniavip.com": "gulp betsmaniavip.com",
         "manyville.wee.bet": "gulp manyville.wee.bet",
         "i7esportes.bet": "gulp i7esportes.bet",
-        "arenasbest.com": "gulp arenasbest.com"
+        "arenasbest.com": "gulp arenasbest.com",
+        "pixfacil.bet": "gulp pixfacil.bet"
     },
     "private": true,
     "dependencies": {
