@@ -1828,15 +1828,6 @@ gulp.task('idealbets.com.br', function (done) {
     });
 });
 
-gulp.task('11bet.com.br', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "11bet.com.br",
-        banca: "11 BET",
-        styles: "",
-    });
-});
-
 gulp.task('shopbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2159,15 +2150,6 @@ gulp.task('xomanobet.com.br', function (done) {
         server: "front3.wee.bet",
         host: "xomanobet.com.br",
         banca: "XOMANOBET",
-        styles: "",
-    });
-});
-
-gulp.task('futbola.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "futbola.wee.bet",
-        banca: "FUT BOLA",
         styles: "",
     });
 });
