@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {AuthLayoutComponent} from './shared/layout/app-layouts/auth-layout.component';
-import {MainLayoutComponent} from './shared/layout/app-layouts/main-layout.component';
+import {MainLayoutComponent, AuthLayoutComponent} from './shared/layout/app-layouts';
 
 import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
 import {CupomComponent} from './cupom/cupom.component';
