@@ -59,10 +59,6 @@ nav a {
     display: flex;
 }
 
-.dropdown-menu .dropdown-item {
-    color: var(--foreground-header);
-}
-
 .logo {
     max-height: 80px;
 }
@@ -98,11 +94,18 @@ nav::-webkit-scrollbar {
     border: 1px solid var(--highlight);
 }
 
+.btn-sair {
+    margin: 40px 20px 20px;
+    border-radius: 8px;
+}
+
 .dropdown-menu {
-    min-width: 300px;
+    min-width: 320px;
+    border-radius: 8px;
     background-color: var(--header);
     color: #FFFFFF;
-    box-shadow: -1px -2px 4px rgba(51, 47, 47, 0.25);
+    box-shadow: -1px -2px 4px 2px rgba(51, 47, 47, 0.25);
+    padding: 0;
 }
 
 .dropdown-btn {
@@ -125,13 +128,17 @@ nav::-webkit-scrollbar {
     transition: 300ms;
 }
 
+.container-menu {
+    padding: 20px 20px 0;
+}
+
 .dropdown-btn-filled {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 15px;
-    width: calc((100% / 3) - 10px);
+    width: calc((100% / 3) - 8px);
     height: 65px;
     text-decoration: none;
     font-size: 12px;
@@ -144,7 +151,7 @@ nav::-webkit-scrollbar {
 }
 
 .dropdown-btn-filled:first-of-type, .dropdown-btn-filled:nth-child(3n + 1) {
-    margin-left: 5px;
+    margin-left: 0;
 }
 
 .dropdown-btn-filled .fa {
@@ -171,6 +178,7 @@ nav::-webkit-scrollbar {
 
 .saldos-container {
     display: flex;
+    padding: 0 20px;
 }
 
 .saldos-item {
@@ -178,7 +186,6 @@ nav::-webkit-scrollbar {
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    padding: 15px;
     width: 50%;
     height: 75px;
     color: #FFFFFF;

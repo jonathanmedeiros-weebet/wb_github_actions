@@ -14,7 +14,7 @@
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a [routerLink]="['clientes/perfil']"
                        routerLinkActive="router-link-active"
                        *ngIf="isCliente">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="saldos-item"
                               *ngIf="isCliente && posicaoFinanceira.bonus != 0">
-                            <span class="">Bônus</span>
+                            <span class="fs-16px fw-400">Bônus</span>
                             <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
                         </div>
                     </div>
@@ -57,48 +57,37 @@
                         <i class="fa fa-dollar"></i> Liberar Crédito
                     </a>
 
-                    <div class="d-flex flex-wrap p-2">
+                    <div class="d-flex flex-wrap container-menu">
                         <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
                             <i class="fa fa-key mb-2"></i> Alterar senha
                         </a>
-
                         <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
                            routerLinkActive="router-link-active"
                            *ngIf="isCliente">
                             <i class="fa fa-dashboard mb-2"></i>
                             Dashboard
                         </a>
-
                         <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
                            routerLinkActive="router-link-active"
                            *ngIf="isCliente">
                             <i class="fa fa-solid fa-check mb-2"></i>
                             Validação
                         </a>
-
                         <a class="dropdown-btn-filled" [routerLink]="['/apuracao']"
                            routerLinkActive="router-link-active"
                            *ngIf="isCliente">
                             <i class="fa fa-solid fa-table-columns mb-2"></i>
                             Apuração
                         </a>
-
                         <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
                            routerLinkActive="router-link-active"
                            *ngIf="isCliente">
                             <i class="fa fa-user mb-2"></i>
                             Minha Conta
                         </a>
-
-                        <!--                    <a [routerLink]="['/apuracao']">-->
-                        <!--                        <i class="fa-solid fa-certificate"></i>-->
-                        <!--                        Apuração-->
-                        <!--                    </a>-->
                     </div>
 
-                    <div class="menu-divider"></div>
-
-                    <a (click)="logout()" href="#" class="dropdown-btn ml-1 mr-1">
+                    <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
                         <i class="fa fa-sign-out mr-2"></i>
                         <span class="dados">Sair</span>
                     </a>
