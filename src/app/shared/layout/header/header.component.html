@@ -108,7 +108,7 @@
                    aria-haspopup="true" aria-expanded="false">
                     Entrar
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="username"
@@ -129,7 +129,7 @@
                             Esqueci minha senha?
                         </a>
                     </ng-container>
-                </ul>
+                </div>
             </div>
         </ng-template>
     </div>

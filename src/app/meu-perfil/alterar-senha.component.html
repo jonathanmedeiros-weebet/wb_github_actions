@@ -6,33 +6,40 @@
         <div class="content-body">
             <div class="content">
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Senha Atual</label>
-                                    <input type="password" class="form-control" formControlName="senha_atual">
-                                    <app-error-msg [control]="form.get('senha_atual')" label="Senha Atual"></app-error-msg>
-                                </div>
+                    <div class="row">
+                        <div class="col-2">
+                            Senha Atual
+                        </div>
+                        <div class="col-4 align-items-center">
+                            <div class="form-group">
+                                <input type="password" class="form-control" formControlName="senha_atual">
+                                <app-error-msg [control]="form.get('senha_atual')" label="Senha Atual"></app-error-msg>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Nova Senha</label>
-                                    <input type="password" class="form-control" formControlName="senha_nova">
-                                    <app-error-msg [control]="form.get('senha_nova')" label="Senha"></app-error-msg>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4">
-                                <div class="form-group">
-                                    <label>Confirmar nova senha</label>
-                                    <input type="password" class="form-control" formControlName="senha_confirmacao">
-                                    <app-error-msg [control]="form.get('senha_confirmacao')" label="Confirmar senha"></app-error-msg>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            Nova Senha
+                        </div>
+                        <div class="col-4 align-items-center">
+                            <div class="form-group">
+                                <input type="password" class="form-control" formControlName="senha_nova">
+                                <app-error-msg [control]="form.get('senha_nova')" label="Senha"></app-error-msg>
                             </div>
                         </div>
-                    </fieldset>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            Confirmar nova senha
+                        </div>
+                        <div class="col-4 align-items-center">
+                            <div class="form-group">
+                                <input type="password" class="form-control" formControlName="senha_confirmacao">
+                                <app-error-msg [control]="form.get('senha_confirmacao')"
+                                               label="Confirmar senha"></app-error-msg>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group m-b-0">
