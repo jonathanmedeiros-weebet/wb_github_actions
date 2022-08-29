@@ -1,3 +1,11 @@
+.internal-container {
+    background-color: #181818;
+}
+
+.content-body {
+    display: flex;
+}
+
 .btn-line {
     margin-top: 24px;
 }
@@ -15,4 +23,21 @@
     min-width: 15%;
     white-space: nowrap;
     text-align: right;
+}
+
+.fin-card {
+    background-color: var(--header);
+    border-radius: 12px;
+    padding: 8px;
+    margin-right: 8px;
+}
+
+.fin-card .fin-card-header {
+    display: flex;
+    padding: 20px 30px;
+}
+
+.fin-card .fin-card-header .titulo-subtitulo {
+    display: flex;
+    flex-direction: column;
 }
