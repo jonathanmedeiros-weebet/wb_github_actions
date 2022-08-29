@@ -1,12 +1,13 @@
-.game-view{
+.game-view {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 
 }
 
-.game-frame{
-    width: 100%;
+.game-frame {
+    width: 94%;
+    margin: 0 auto;
 }
 
 iframe{
@@ -14,64 +15,75 @@ iframe{
     border:none;
 }
 
-.buttons-game-view{
+.buttons-game-view {
     display: flex;
     align-items: center;
-    justify-content: right;
-    padding-right: 5px;
-    height: 40px;
-    width: 100%;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    /*padding-right: 5px;*/
+    /*height: 80px;*/
+    width: 45px;
 }
 
-.game-close{
-    color: red;
-    font-size: 30px;
+.btn-cassino {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 1px;
+    text-decoration: none;
+    cursor: pointer;
 }
-.screen-adjust{
-    color: white;
+
+.btn-cassino:last-of-type {
+    margin-bottom: 0;
+}
+
+.game-close {
+    color: var(--highlight);
+    font-size: 26px;
+}
+
+.screen-adjust {
+    color: var(--highlight);
     font-size: 20px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
 }
 
 
 @media only screen and (max-width: 1024px) {
-    .game-view{
+    .game-view {
         position: fixed;
         background-color: white;
-        height: calc(100% - 40px);
+        height: calc(100% - 142px);
         z-index: 9999;
         margin-top: -97px;
     }
 
-    .buttons-game-view{
-        background-color: black;
-    }
-
-    .game-frame{
+    .game-frame {
         height: calc(100%);
     }
 
-    .game-frame iframe{
+    .game-frame iframe {
         position: relative !important;
         height: 100%;
     }
 }
 
 @media (min-width: 1025px) {
-
-    .game-view{
+    .game-view {
         background-color: var(--header);
         height: 100%;
     }
 
-    .buttons-game-view{
-        background-color: var(--header);
+    .game-frame {
+        height: calc(100vh - 180px);
     }
 
-    .game-frame{
-        height: calc(100vh - 107px);
-    }
-    iframe{
+    iframe {
         height: 100%;
     }
 }

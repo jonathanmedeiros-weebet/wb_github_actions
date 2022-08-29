@@ -199,9 +199,7 @@
         width: var(--gameTileWidth);
         margin-left: 20px;
         margin-bottom: 20px;
-        --heightA: calc(10vw);
-        --heightB: calc(var(--heightA) + 50px);
-        height: var(--heightB);
+        height: calc(10vw + 30px);
     }
 
     .game-tile:nth-child(5n+1) {
