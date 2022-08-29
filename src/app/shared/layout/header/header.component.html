@@ -14,60 +14,98 @@
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['clientes/perfil']"
+                <div class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
+                    <a [routerLink]="['clientes/perfil']"
                        routerLinkActive="router-link-active"
                        *ngIf="isCliente">
                         <h4 class="menu-conta-header"><i
                             class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
                     </a>
-                    <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
+                    <div type="button" *ngIf="!isCliente">
                         <h4 class="menu-conta-header"><i
                             class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
-                    </button>
-                    <div class="dropdown-divider"></div>
+                    </div>
 
-                    <span class="dropdown-item text-center" *ngIf="!isCliente">
-                        Crédito: {{posicaoFinanceira.credito | currency}}
-                    </span>
-                    <span class="dropdown-item text-center">
-                        Saldo: {{posicaoFinanceira.saldo | currency}}
-                    </span>
-                    <span class="dropdown-item text-center"
-                          *ngIf="isCliente && posicaoFinanceira.bonus != 0">
-                        Bônus: {{posicaoFinanceira.bonus | currency}}
-                    </span>
-                    <div class="dropdown-divider"></div>
+                    <div class="d-flex justify-content-around">
+                        <a class="dropdown-btn" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                            Solicitar Depósito
+                        </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
-                        <i class="fa fa-dollar"></i> Solicitar Depósito
-                    </a>
+                        <a class="dropdown-btn" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                            Solicitar Saque
+                        </a>
+                    </div>
 
+                    <div class="saldos-container">
+                        <div class="saldos-item" *ngIf="!isCliente">
+                            <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
+                            <span class="">Crédito</span>
+                        </div>
+                        <div class="saldos-item">
+                            <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                            <span class="">Saldo</span>
+                        </div>
+                        <div class="saldos-item"
+                              *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                            <span class="">Bônus</span>
+                            <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-divider"></div>
                     <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
                         <i class="fa fa-dollar"></i> Liberar Crédito
                     </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/saque']" *ngIf="isCliente">
-                        <i class="fa fa-dollar"></i> Solicitar Saque
-                    </a>
+                    <div class="d-flex flex-wrap p-2">
+                        <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
+                            <i class="fa fa-key mb-2"></i> Alterar senha
+                        </a>
 
-                    <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
-                        <i class="fa fa-key"></i> Alterar senha
-                    </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="isCliente">
+                            <i class="fa fa-dashboard mb-2"></i>
+                            Dashboard
+                        </a>
 
-                    <a class="dropdown-item" [routerLink]="['clientes/perfil']"
-                       routerLinkActive="router-link-active"
-                       *ngIf="isCliente">
-                        <i class="fa fa-user"></i> Minha Conta
-                    </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="isCliente">
+                            <i class="fa fa-solid fa-check mb-2"></i>
+                            Validação
+                        </a>
 
-                    <a (click)="logout()" href="#" class="dropdown-item">
-                        <i class="fa fa-sign-out"></i> Sair
+                        <a class="dropdown-btn-filled" [routerLink]="['/apuracao']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="isCliente">
+                            <i class="fa fa-solid fa-table-columns mb-2"></i>
+                            Apuração
+                        </a>
+
+                        <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="isCliente">
+                            <i class="fa fa-user mb-2"></i>
+                            Minha Conta
+                        </a>
+
+                        <!--                    <a [routerLink]="['/apuracao']">-->
+                        <!--                        <i class="fa-solid fa-certificate"></i>-->
+                        <!--                        Apuração-->
+                        <!--                    </a>-->
+                    </div>
+
+                    <div class="menu-divider"></div>
+
+                    <a (click)="logout()" href="#" class="dropdown-btn ml-1 mr-1">
+                        <i class="fa fa-sign-out mr-2"></i>
+                        <span class="dados">Sair</span>
                     </a>
                     <div *ngIf="appMobile" class="app-version-info">
                         App Versão 2.0.{{appVersion}}
                     </div>
-                </ul>
+                </div>
             </div>
         </ng-container>
         <ng-template #loggedOut>
@@ -97,7 +135,7 @@
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
                     <ng-container *ngIf="modoClienteAtivo">
-                        <div class="dropdown-divider"></div>
+                        <div class="menu-divider"></div>
                         <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
                             Esqueci minha senha?
                         </a>

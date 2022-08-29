@@ -1,6 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -8,7 +7,7 @@ import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
-import {IsActiveMatchOptions, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-header',

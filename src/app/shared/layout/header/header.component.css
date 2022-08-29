@@ -15,6 +15,10 @@ nav a {
     color: var(--foreground-header);
 }
 
+.fa, .dropdown-toggle {
+    color: var(--highlight);
+}
+
 .category {
     margin: 0 2px;
     display: flex;
@@ -95,9 +99,96 @@ nav::-webkit-scrollbar {
 }
 
 .dropdown-menu {
-    min-width: 200px;
+    min-width: 300px;
     background-color: var(--header);
-    color: var(--foreground-header);
+    color: #FFFFFF;
+    box-shadow: -1px -2px 4px rgba(51, 47, 47, 0.25);
+}
+
+.dropdown-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    height: 40px;
+    text-decoration: none;
+    border: 1px solid var(--highlight);
+    font-size: 12px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+
+.dropdown-btn:hover, .dropdown-btn:hover .fa, .dropdown-btn:hover .dados {
+    background-color: var(--highlight);
+    color: var(--header);
+    transition: 300ms;
+}
+
+.dropdown-btn-filled {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: calc((100% / 3) - 10px);
+    height: 65px;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 5px;
+    color: #C0C0C0;
+    white-space: nowrap;
+    background-color: #181818;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.dropdown-btn-filled:first-of-type, .dropdown-btn-filled:nth-child(3n + 1) {
+    margin-left: 5px;
+}
+
+.dropdown-btn-filled .fa {
+    color: #C0C0C0;
+}
+
+.dropdown-btn-filled:hover {
+    border: 1px solid var(--highlight);
+    color: #FFFFFF;
+    transition: 300ms;
+}
+
+.dropdown-btn-filled:hover .fa {
+    color: #FFFFFF;
+    transition: 300ms;
+}
+
+.menu-divider {
+    width: 95%;
+    margin: 0 auto;
+    height: 0;
+    border-top: 1px solid #181818;
+}
+
+.saldos-container {
+    display: flex;
+}
+
+.saldos-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 15px;
+    width: 50%;
+    height: 75px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.dados {
+    font-weight: 600;
+    color: var(--highlight);
 }
 
 @media only screen and (max-width: 1024px) {
