@@ -6,6 +6,7 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import {curveBumpX} from 'd3-shape';
 
 @Component({
     selector: 'app-financeiro',
@@ -13,6 +14,8 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
     styleUrls: ['./financeiro.component.css']
 })
 export class FinanceiroComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    curveFunction = curveBumpX;
+
     movimentacoesFinanceiras: MovimentacaoFinanceira[] = [];
     totalMovimentacoes;
     queryParams;
@@ -27,7 +30,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
     multi = [
         {
-        'name': 'Depósitos',
+        'name': 'Depósito',
         'series': [
             {
                 'name': 'Seg',
@@ -43,7 +46,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
             }
         ]},
         {
-            'name': 'Saques',
+            'name': 'Saque',
             'series': [
                 {
                     'name': 'Seg',

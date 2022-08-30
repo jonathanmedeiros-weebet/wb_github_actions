@@ -51,4 +51,6 @@
     height: 100%;
 }
 
-.ngx-charts text, ngx-charts-area-chart { fill: #FFFFFF !important;}
+.ngx-charts text, ngx-charts-area-chart {
+    fill: #FFFFFF !important;
+}
