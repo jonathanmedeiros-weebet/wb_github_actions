@@ -1282,11 +1282,6 @@ select.form-control:focus {
     border-radius: 2px;
 }
 
-.odd:hover {
-    background-color: var(--highlight);
-    border-radius: 2px;
-}
-
 .odds .selecionado {
     background-color: var(--highlight);
 }

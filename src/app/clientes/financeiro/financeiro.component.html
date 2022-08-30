@@ -2,44 +2,44 @@
     <div class="internal-container">
         <div class="content-header">
             <h2>Financeiro</h2>
-            <div class="filters">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                            <div class="form-row">
-                                <div class="col-6 col-md-2">
-                                    <label>Período</label>
-                                    <select class="form-control" formControlName="periodo">
-                                        <option value="semana_atual">Semana Atual</option>
-                                        <option value="semana_anterior">Semana Anterior</option>
-                                    </select>
-                                </div>
-                                <div class="col-6 col-md-2">
-                                    <label>Tipo</label>
-                                    <select class="form-control" formControlName="tipo">
-                                        <option value="">Todos</option>
-                                        <option value="C">Crédito</option>
-                                        <option value="D">Débito</option>
-                                    </select>
-                                </div>
-                                <div class="col-6 col-md-1">
-                                    <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 mt-3">
-                        <a class="btn btn-info" [routerLink]="['/clientes/depositos-saques']">
-                            <i class="fa fa-dollar"></i>
-                            Depósitos e Saques
-                        </a>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="filters">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12 col-md-12">-->
+<!--                        <form (ngSubmit)="onSubmit()" [formGroup]="form">-->
+<!--                            <div class="form-row">-->
+<!--                                <div class="col-6 col-md-2">-->
+<!--                                    <label>Período</label>-->
+<!--                                    <select class="form-control" formControlName="periodo">-->
+<!--                                        <option value="semana_atual">Semana Atual</option>-->
+<!--                                        <option value="semana_anterior">Semana Anterior</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="col-6 col-md-2">-->
+<!--                                    <label>Tipo</label>-->
+<!--                                    <select class="form-control" formControlName="tipo">-->
+<!--                                        <option value="">Todos</option>-->
+<!--                                        <option value="C">Crédito</option>-->
+<!--                                        <option value="D">Débito</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="col-6 col-md-1">-->
+<!--                                    <button class="btn btn-custom btn-line" type="submit">Filtrar</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12 col-md-12 mt-3">-->
+<!--                        <a class="btn btn-info" [routerLink]="['/clientes/depositos-saques']">-->
+<!--                            <i class="fa fa-dollar"></i>-->
+<!--                            Depósitos e Saques-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="content-body">
             <div class="fin-card col-8">
@@ -51,7 +51,6 @@
                 </div>
                 <div class="fin-card-body">
                     <ngx-charts-area-chart
-                        [view]="view"
                         [scheme]="colorScheme"
                         [legend]="legend"
                         [showXAxisLabel]="showXAxisLabel"
@@ -61,10 +60,10 @@
                         [xAxisLabel]="xAxisLabel"
                         [yAxisLabel]="yAxisLabel"
                         [timeline]="timeline"
-                        [results]="multi"
+                        [results]="graphData"
                         [autoScale]="true"
-                        legendTitle="Legenda"
                         [curve]="curveFunction"
+                        [legendPosition]="'below'"
                         (select)="onSelect($event)">
                     </ngx-charts-area-chart>
                 </div>
