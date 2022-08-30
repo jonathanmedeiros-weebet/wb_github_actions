@@ -2369,3 +2369,12 @@ gulp.task('pixfacil.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('kinggame.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "kinggame.wee.bet",
+        banca: "KING GAME",
+        styles: "",
+    });
+});

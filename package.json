@@ -257,7 +257,8 @@
         "manyville.wee.bet": "gulp manyville.wee.bet",
         "i7esportes.bet": "gulp i7esportes.bet",
         "arenasbest.com": "gulp arenasbest.com",
-        "pixfacil.bet": "gulp pixfacil.bet"
+        "pixfacil.bet": "gulp pixfacil.bet",
+        "kinggame.wee.bet": "gulp kinggame.wee.bet"
     },
     "private": true,
     "dependencies": {
