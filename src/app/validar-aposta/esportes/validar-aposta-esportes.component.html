@@ -56,18 +56,44 @@
             <p>
                 Estimativa de ganho: {{estimativaGanho | currency}}
             </p>
-            <div class="form-group">
-                <label for="">Apostador</label>
-                <input type="text" class="form-control" formControlName="apostador"
-                    [ngClass]="applyCssInputError('apostador')">
-                <app-error-msg [control]="form.get('apostador')" label="Apostador">
-                </app-error-msg>
+            <div class="row">
+                <div class="col-2">
+                    Apostador
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <input type="text" class="inverted form-control" formControlName="apostador"
+                               [ngClass]="applyCssInputError('apostador')">
+                        <app-error-msg [control]="form.get('apostador')" label="Apostador">
+                        </app-error-msg>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="">Valor da Aposta</label>
-                <input type="text" class="form-control" formControlName="valor" [ngClass]="applyCssInputError('valor')">
-                <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+            <div class="row">
+                <div class="col-2">
+                    Valor da Aposta
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <input type="text" class="inverted form-control" formControlName="valor"
+                               [ngClass]="applyCssInputError('valor')">
+                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <div class="form-group form-check-custom alteracoes-odds">
+                        <input type="checkbox" class="form-check-input-custom" id="aceito-alteracoes-odds"
+                               formControlName="aceitar_alteracoes_odds">
+                        <label for="aceito-alteracoes-odds">
+                            Aceitar alterações de odds
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,14 +111,6 @@
         <br>
         <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a
         pré-aposta.
-    </div>
-
-    <div class="form-group form-check-custom alteracoes-odds">
-        <input type="checkbox" class="form-check-input-custom" id="aceito-alteracoes-odds"
-            formControlName="aceitar_alteracoes_odds">
-        <label for="aceito-alteracoes-odds">
-            Aceitar alterações de odds
-        </label>
     </div>
 
     <button [disabled]="disabled" *ngIf="!process; else btnProcessando" class="btn btn-custom">

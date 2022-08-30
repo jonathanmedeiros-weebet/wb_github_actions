@@ -1,3 +1,7 @@
+.internal-container {
+    background-color: #181818;
+}
+
 .content-body{
     margin-bottom: 15px;
 }
@@ -11,9 +15,10 @@
 
 #pre-aposta{
     padding: 10px 14px;
-    border: 1px dashed #aec3d8;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
 }
 
-#pre-aposta h1{
+#pre-aposta h2{
     margin-bottom: 15px;
 }

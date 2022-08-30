@@ -9,7 +9,7 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                         <div class="form-group">
                             <input type="number" placeholder="Código da pré-aposta"
-                                   class="form-control" formControlName="codigo" autocomplete="off"
+                                   class="inverted form-control" formControlName="codigo" autocomplete="off"
                                    [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                         </div>
                         <button type="submit" class="btn btn-custom">Consultar</button>
@@ -21,7 +21,7 @@
 
                 <div *ngIf="exibirPreAposta">
                     <div id="pre-aposta">
-                        <h1>{{preAposta.codigo}}</h1>
+                        <h2>Código Pré-Aposta: {{preAposta.codigo}}</h2>
                         <ng-container [ngSwitch]="preAposta.tipo">
                             <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
                                                          (success)="success($event)">

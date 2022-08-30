@@ -69,13 +69,13 @@
                         </a>
                         <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
                            routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
+                           *ngIf="!isCliente">
                             <i class="fa fa-solid fa-check mb-2"></i>
                             Validação
                         </a>
                         <a class="dropdown-btn-filled" [routerLink]="['/apuracao']"
                            routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
+                           *ngIf="!isCliente">
                             <i class="fa fa-solid fa-table-columns mb-2"></i>
                             Apuração
                         </a>

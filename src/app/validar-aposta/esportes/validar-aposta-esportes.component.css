@@ -25,7 +25,7 @@
 
 .item-selecionado{
     padding: 15px 0;
-    border-bottom: 1px dashed #aec3d8;
+    border-bottom: 1px dashed #FFFFFF;
     text-align: left;
     position: relative;
 }
@@ -50,9 +50,9 @@
 .remover-item{
     position: absolute;
     top: 0;
-    right: 0;
-    color: red;
-    font-size: 15px;
+    right: 15px;
+    color: var(--highlight);
+    font-size: 22px;
     cursor: pointer;
 }
 

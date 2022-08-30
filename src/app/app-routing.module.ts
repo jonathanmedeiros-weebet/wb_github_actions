@@ -6,6 +6,7 @@ import {MainLayoutComponent, AuthLayoutComponent} from './shared/layout/app-layo
 import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
 import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
+import {CambistaGuard} from './shared/services/guards/cambista.guard';
 
 const appRoutes: Routes = [
     {
@@ -66,7 +67,7 @@ const appRoutes: Routes = [
             {
                 path: 'validar-aposta',
                 loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, CambistaGuard]
             },
             {
                 path: 'auth',
