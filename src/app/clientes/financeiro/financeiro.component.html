@@ -46,11 +46,26 @@
                 <div class="fin-card-header fs-20px fw-600">
                     <div class="titulo-subtitulo">
                         Dashboard
-                        <span class="fs-12px fw-400">Saques e Depósitos</span>
+                        <span class="subtitulo fs-12px fw-400">Saques e Depósitos</span>
                     </div>
                 </div>
                 <div class="fin-card-body">
-
+                    <ngx-charts-area-chart
+                        [view]="view"
+                        [scheme]="colorScheme"
+                        [legend]="legend"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxis]="xAxis"
+                        [yAxis]="yAxis"
+                        [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel"
+                        [timeline]="timeline"
+                        [results]="multi"
+                        [autoScale]="true"
+                        legendTitle="Legenda"
+                        (select)="onSelect($event)">
+                    </ngx-charts-area-chart>
                 </div>
             </div>
             <div class="fin-card col-4">

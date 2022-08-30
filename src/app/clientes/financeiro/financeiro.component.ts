@@ -25,6 +25,59 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     saldo;
     whatsapp;
 
+    multi = [
+        {
+        'name': 'Depósitos',
+        'series': [
+            {
+                'name': 'Seg',
+                'value': 25
+            },
+            {
+                'name': 'Ter',
+                'value': 100
+            },
+            {
+                'name': 'Quar',
+                'value': 80
+            }
+        ]},
+        {
+            'name': 'Saques',
+            'series': [
+                {
+                    'name': 'Seg',
+                    'value': 60
+                },
+                {
+                    'name': 'Ter',
+                    'value': 33
+                },
+                {
+                    'name': 'Quar',
+                    'value': 50
+                }
+            ]}
+    ];
+
+    view: any[] = [666];
+
+    // options
+    legend = true;
+    showLabels = true;
+    animations = true;
+    xAxis = true;
+    yAxis = true;
+    showYAxisLabel = true;
+    showXAxisLabel = true;
+    xAxisLabel = 'Dias';
+    yAxisLabel = 'Valor';
+    timeline = true;
+
+    colorScheme = {
+        domain: ['#ED4C5C', '#43AA8B']
+    };
+
     constructor(
         private clienteService: ClienteService,
         private fb: FormBuilder,
@@ -40,11 +93,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     ngOnInit(): void {
         this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
 
-        if (window.innerWidth < 669) {
-            this.smallScreen = true;
-        } else {
-            this.smallScreen = false;
-        }
+        this.smallScreen = window.innerWidth < 669;
 
         this.definirAltura();
 
@@ -54,6 +103,10 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+    }
+
+    onSelect(event) {
+        console.log(event);
     }
 
     getMovimentacoes(queryParams?: any) {
@@ -78,8 +131,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
     definirAltura() {
         const altura = window.innerHeight - 46;
-        this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
-        this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
+        // this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
+        // this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
     }
 
     createForm() {

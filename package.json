@@ -264,6 +264,7 @@
     "private": true,
     "dependencies": {
         "@angular/animations": "^12.2.15",
+        "@angular/cdk": "^12.2.13",
         "@angular/common": "^12.2.15",
         "@angular/compiler": "^12.2.15",
         "@angular/core": "^12.2.15",
@@ -275,6 +276,7 @@
         "@fortawesome/fontawesome-free": "^6.1.1",
         "@iconscout/unicons": "^4.0.1",
         "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+        "@swimlane/ngx-charts": "^20.1.0",
         "angular-svg-icon": "^7.2.0",
         "bootstrap": "^4.5.0",
         "clone": "^2.1.1",

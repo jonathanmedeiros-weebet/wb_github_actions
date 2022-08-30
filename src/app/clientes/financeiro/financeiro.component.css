@@ -41,3 +41,14 @@
     display: flex;
     flex-direction: column;
 }
+
+.fin-card .fin-card-header .titulo-subtitulo .subtitulo{
+    color: #BDBDBD;
+}
+
+.fin-card .fin-card-body {
+    /*background-color: #FFFFFF;*/
+    height: 100%;
+}
+
+.ngx-charts text, ngx-charts-area-chart { fill: #FFFFFF !important;}
