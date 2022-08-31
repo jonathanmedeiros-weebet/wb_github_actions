@@ -53,3 +53,7 @@
 .bg-red {
     background-color: rgba(237, 76, 92, 0.22);
 }
+
+.w-80 {
+    width: 80%;
+}

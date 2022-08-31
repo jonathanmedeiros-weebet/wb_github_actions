@@ -7,11 +7,11 @@
             <app-spinner *ngIf="showLoading"></app-spinner>
 
             <div *ngIf="!showLoading" class="row margin-top-15 margin-bottom-80">
-                <div class="col-12 col-md-8">
-                    <table class="table-apuracao">
+                <div class="col-12 col-md-10">
+                    <table class="table-apuracao w-75">
                         <tbody>
                         <tr *ngIf="modoContaCorrente">
-                            <th class="">Saldo em {{dataSaldoAnterior}}</th>
+                            <th>Saldo em {{dataSaldoAnterior}}</th>
                             <td>
                                 <div class="value">
                                     <i class="fa-solid fa-plus"></i>
@@ -20,8 +20,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="">Entradas</th>
-                            <td class="border-left-apuracao text-right">
+                            <th>Entradas</th>
+                            <td class="border-left-apuracao text-right w-50">
                                 <div class="value d-flex justify-content-end">
                                     <div class="symbol-container bg-green">
                                         <i class="fa-solid fa-plus"></i>
