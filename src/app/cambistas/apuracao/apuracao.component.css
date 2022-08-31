@@ -57,3 +57,11 @@
 .w-80 {
     width: 80%;
 }
+
+.p-sub {
+    padding-left: 50px !important;
+}
+
+.p-sub-2 {
+    padding-left: 80px !important;
+}

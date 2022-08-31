@@ -3,13 +3,15 @@ import {RelatorioService} from '../../shared/services/relatorio.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import * as moment from 'moment';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-apuracao',
     templateUrl: './apuracao.component.html',
     styleUrls: ['./apuracao.component.css']
 })
-export class ApuracaoComponent implements OnInit {
+export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     queryParams;
     relatorio;
     resultado = 0;
@@ -29,8 +31,10 @@ export class ApuracaoComponent implements OnInit {
     constructor(
         private relatorioService: RelatorioService,
         private messageService: MessageService,
-        private params: ParametrosLocaisService
+        private params: ParametrosLocaisService,
+        private fb: FormBuilder
     ) {
+        super();
     }
 
     ngOnInit() {
@@ -56,15 +60,26 @@ export class ApuracaoComponent implements OnInit {
             dataFinal: this.dataFinal.format('YYYY-MM-DD')
         };
 
-        this.dataSaldoAnterior = moment(this.dataInicial.format('YYYY-MM-DD')).subtract(1, 'day').format('DD/MM');
+        this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
 
+        this.createForm();
         this.getResultado();
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
+            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required]
+        });
+    }
+
+    submit() {
     }
 
     getResultado(params?) {
         const queryParams = {
-            'data-inicial': this.dataInicial.format('YYYY-MM-DD'),
-            'data-final': this.dataFinal.format('YYYY-MM-DD')
+            'data-inicial': this.queryParams.dataInicial,
+            'data-final': this.queryParams.dataFinal
         };
 
         this.relatorioService.getResultado(queryParams).subscribe(

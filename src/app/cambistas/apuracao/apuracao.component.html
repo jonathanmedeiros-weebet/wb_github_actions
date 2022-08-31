@@ -2,13 +2,38 @@
     <div class="internal-container-out">
         <div class="content-header">
             <h2>Apuração</h2>
+            <div class="filters">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="form-row">
+                                <div class="col-6 col-md-3">
+                                    <label>Periodo Inicial</label>
+                                    <input type="date" class="inverted-out form-control" formControlName="dataInicial">
+                                    <app-error-msg [control]="form.get('dataInicial')"
+                                                   label="Data inicial"></app-error-msg>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label>Periodo Final</label>
+                                    <input type="date" class="inverted-out form-control" formControlName="dataFinal">
+                                    <app-error-msg [control]="form.get('dataFinal')"
+                                                   label="Data inicial"></app-error-msg>
+                                </div>
+                                <div class="col-6 col-md-1">
+                                    <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="content-body">
             <app-spinner *ngIf="showLoading"></app-spinner>
 
             <div *ngIf="!showLoading" class="row margin-top-15 margin-bottom-80">
-                <div class="col-12 col-md-10">
-                    <table class="table-apuracao w-75">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <table class="table-apuracao col-12 col-lg-10 col-xl-8">
                         <tbody>
                         <tr *ngIf="modoContaCorrente">
                             <th>Saldo em {{dataSaldoAnterior}}</th>
@@ -21,7 +46,7 @@
                         </tr>
                         <tr>
                             <th>Entradas</th>
-                            <td class="border-left-apuracao text-right w-50">
+                            <td style="width: 120px" class="border-left-apuracao text-right">
                                 <div class="value d-flex justify-content-end">
                                     <div class="symbol-container bg-green">
                                         <i class="fa-solid fa-plus"></i>
@@ -32,44 +57,43 @@
                         </tr>
                         <tr (click)="setShowTotalApostadoDetalhado()"
                             [ngClass]="{'mouse-pointer': detalhamentoHabilitado}">
-                            <td class="pl-5">Total Apostado</td>
+                            <td class="p-sub">Total Apostado</td>
                             <td class="border-left-apuracao text-right">
                                 {{relatorio['total_apostado'] | currency}}
                             </td>
                         </tr>
                         <ng-container *ngIf="showTotalApostadoDetalhado">
                             <tr>
-                                <td class="pl-5"> L Esportivas</td>
+                                <td class="p-sub-2"> L Esportivas</td>
                                 <td class="border-left-apuracao text-right">
-                                    {{relatorio['esporte']['apostado'] | currency}}
+                                    <small>{{relatorio['esporte']['apostado'] | currency}}</small>
                                 </td>
                             </tr>
                             <tr *ngIf="loteriasHabilitada">
-                                <td class="pl-5"> L Loterias</td>
+                                <td class="p-sub-2"> L Loterias</td>
                                 <td class="border-left-apuracao text-right">
-                                    {{relatorio['loteria']['apostado'] | currency}}
+                                    <small>{{relatorio['loteria']['apostado'] | currency}}</small>
                                 </td>
                             </tr>
                             <tr *ngIf="acumuladaoHabilitado">
-                                <td class="pl-5"> L Acumuladão</td>
+                                <td class="p-sub-2"> L Acumuladão</td>
                                 <td class="border-left-apuracao text-right">
-                                    {{relatorio['acumuladao']['apostado'] | currency}}
+                                    <small>{{relatorio['acumuladao']['apostado'] | currency}}</small>
                                 </td>
                             </tr>
                             <tr *ngIf="desafioHabilitado">
-                                <td class="pl-5"> L Desafio</td>
+                                <td class="p-sub-2"> L Desafio</td>
                                 <td class="border-left-apuracao text-right">
-                                    {{relatorio['desafio']['apostado'] | currency}}
+                                    <small>{{relatorio['desafio']['apostado'] | currency}}</small>
                                 </td>
                             </tr>
                         </ng-container>
                         <tr class="border-bottom-apuracao">
-                            <td class="pl-5">Recargas de Cartão</td>
+                            <td class="p-sub">Recargas de Cartão</td>
                             <td class="border-left-apuracao text-right">
                                 {{relatorio['cartao'] | currency}}
                             </td>
                         </tr>
-
                         <tr>
                             <th class="">Saídas</th>
                             <td class="border-left-apuracao text-right">
@@ -82,19 +106,19 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="pl-5">Comissões</td>
+                            <td class="p-sub">Comissões</td>
                             <td class="border-left-apuracao text-right">
                                 {{relatorio['total_comissao'] | currency}}
                             </td>
                         </tr>
                         <tr>
-                            <td class="pl-5">Prêmios</td>
+                            <td class="p-sub">Prêmios</td>
                             <td class="border-left-apuracao text-right">
                                 {{relatorio['total_premios'] | currency}}
                             </td>
                         </tr>
                         <tr class="border-bottom-apuracao">
-                            <td class="pl-5">Saques</td>
+                            <td class="p-sub">Saques</td>
                             <td class="border-left-apuracao text-right">
                                 {{relatorio['saque'] | currency}}
                             </td>
