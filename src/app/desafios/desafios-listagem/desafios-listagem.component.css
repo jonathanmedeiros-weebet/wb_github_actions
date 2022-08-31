@@ -64,4 +64,8 @@
     .odds .odd {
         width: 100%;
     }
+
+    .wrap-sticky {
+        padding-bottom: 50px;
+    }
 }
