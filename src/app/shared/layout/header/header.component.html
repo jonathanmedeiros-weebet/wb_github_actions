@@ -47,6 +47,10 @@
                             <i class="fa fa-dollar"></i> Solicitar Saque
                         </a>
 
+                        <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
+                            <i class="fa fa-dollar"></i> Liberar Crédito
+                        </a>
+
                         <a class="dropdown-item" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
                             <i class="fa fa-key"></i> Alterar senha
                         </a>
