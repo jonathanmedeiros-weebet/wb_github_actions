@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Autenticação de dois fatores</h4>
+    <div class="action-buttons">
+        <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
+        <input type="hidden" formControlName="casino" value="true">
+        <div class="form-group">
+            <input type="text" class="form-control form-control-lg" formControlName="codigo"
+                   [ngClass]="applyCssInputError('codigo')" placeholder="Código de autenticação">
+            <app-error-msg [control]="form.get('codigo')" label="Usuário"></app-error-msg>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    <div class="dropdown-divider"></div>
+    <a (click)="reenviarEmail()" style="cursor: pointer" class="dropdown-item">
+       Reenviar código
+    </a>
+</div>
+

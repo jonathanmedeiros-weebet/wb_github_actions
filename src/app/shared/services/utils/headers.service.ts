@@ -13,7 +13,7 @@ export class HeadersService {
         const token = localStorage.getItem('token');
 
         let headers = new HttpHeaders({
-            'Content-Type': 'application/jsond',
+            'Content-Type': 'application/json',
         });
 
         if (sendToken) {

@@ -72,33 +72,10 @@
                             *ngIf="modoClienteAtivo">
                         Cadastre-se
                     </button>
-                    <a class="botao-entrar nav-link dropdown-toggle btn" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
+                    <a (click)="abrirLogin()" class="botao-entrar nav-link btn" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown">
                         Entrar
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-                        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-                            <div class="form-group">
-                                <input type="text" class="form-control" formControlName="username"
-                                       [ngClass]="applyCssInputError('username')" placeholder="Usuário">
-                                <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
-
-                            </div>
-                            <div class="form-group" [ngClass]="applyCssDivError('password')">
-                                <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                       formControlName="password" placeholder="Senha">
-                                <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Entrar</button>
-                        </form>
-                        <ng-container *ngIf="modoClienteAtivo">
-                            <div class="dropdown-divider" ></div>
-                            <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']">
-                                Esqueci minha senha?
-                            </a>
-                        </ng-container>
-                    </ul>
                 </div>
             </ng-template>
         </div>
@@ -272,35 +249,5 @@
                 </ul>
             </div>
         </ng-container>
-        <ng-template #loggedOut>
-            <div class="menu-conta dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Entrar
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-                        <div class="form-group">
-                            <input type="text" class="form-control" formControlName="username"
-                                   [ngClass]="applyCssInputError('username')" placeholder="Usuário">
-                            <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
-
-                        </div>
-                        <div class="form-group" [ngClass]="applyCssDivError('password')">
-                            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                                   formControlName="password" placeholder="Senha">
-                            <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Entrar</button>
-                    </form>
-                    <a class="dropdown-item" [routerLink]="['/auth/recuperar-senha']" *ngIf="modoClienteAtivo">
-                        Esqueci minha senha?
-                    </a>
-                    <a class="dropdown-item" [routerLink]="['/auth/cadastro']" *ngIf="modoClienteAtivo">
-                        Novo aqui? Cadastre-se
-                    </a>
-                </ul>
-            </div>
-        </ng-template>
     </div>
 </header>

@@ -34,6 +34,26 @@ export class AuthService {
         this.cliente = this.clienteSource.asObservable();
     }
 
+    verificaCliente(data: any): Observable<any> {
+        return this.http.post<any>(`${this.AuthUrl}/signinCliente`, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    enviarCodigoEmail(data: any): Observable<any> {
+        return this.http.post<any>(`${this.AuthUrl}/enviarCodigoEmail`, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     login(data: any): Observable<any> {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
@@ -41,12 +61,12 @@ export class AuthService {
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
-                    localStorage.setItem('tokenCassino', res.tokenCassino);
                     localStorage.setItem('user', JSON.stringify(res.user));
                     if (res.user.tipo_usuario === 'cambista') {
                         localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
                         this.setIsCliente(false);
                     } else {
+                        localStorage.setItem('tokenCassino', res.tokenCassino);
                         this.setIsCliente(true);
                     }
                     this.logadoSource.next(true);
