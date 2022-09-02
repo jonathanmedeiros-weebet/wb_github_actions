@@ -119,7 +119,6 @@
         "ligavip.wee.bet": "gulp ligavip.wee.bet",
         "aeapostas.wee.bet": "gulp aeapostas.wee.bet",
         "betsgames.net": "gulp betsgames.net",
-        "quina.bet": "gulp quina.bet",
         "jbrbets.net": "gulp jbrbets.net",
         "betsportse.com": "gulp betsportse.com",
         "ligabet.wee.bet": "gulp ligabet.wee.bet",
@@ -171,7 +170,6 @@
         "sportbrasilvip.com": "gulp sportbrasilvip.com",
         "amigos.wee.bet": "gulp amigos.wee.bet",
         "flsesportes.wee.bet": "gulp flsesportes.wee.bet",
-        "pixoubet.com": "gulp pixoubet.com",
         "dobowxbet.wee.bet": "gulp dobowxbet.wee.bet",
         "bets084.com": "gulp bets084.com",
         "betson.wee.bet": "gulp betson.wee.bet",
@@ -204,8 +202,6 @@
         "golbets.wee.bet": "gulp golbets.wee.bet",
         "goldavirada.bet": "gulp goldavirada.bet",
         "megabetmg.wee.bet": "gulp megabetmg.wee.bet",
-        "topbet365.wee.bet": "gulp topbet365.wee.bet",
-        "jmbet.wee.bet": "gulp jmbet.wee.bet",
         "bebet.bet": "gulp bebet.bet",
         "bets60.wee.bet": "gulp bets60.wee.bet",
         "premiosbet.net": "gulp premiosbet.net",
@@ -258,7 +254,9 @@
         "i7esportes.bet": "gulp i7esportes.bet",
         "arenasbest.com": "gulp arenasbest.com",
         "pixfacil.bet": "gulp pixfacil.bet",
-        "kinggame.wee.bet": "gulp kinggame.wee.bet"
+        "kinggame.wee.bet": "gulp kinggame.wee.bet",
+        "betsesporte.com": "gulp betsesporte.com",
+        "bolacerta.wee.bet": "gulp bolacerta.wee.bet"
     },
     "private": true,
     "dependencies": {

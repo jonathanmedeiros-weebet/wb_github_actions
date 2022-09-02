@@ -1088,15 +1088,6 @@ gulp.task('mdsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('quina.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "quina.bet",
-        banca: "QUINA BET",
-        styles: "",
-    });
-});
-
 gulp.task('jbrbets.net', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1584,17 +1575,6 @@ gulp.task('flsesportes.wee.bet', function (done) {
     });
 });
 
-gulp.task('pixoubet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "pixoubet.com",
-        banca: "PiXOUbet",
-        styles: "",
-        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #jogo-default-wrapper{ background: #0f0f11!important } .jogos, .eventos{ background: #0f0f11!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #0f0f11!important; } .footer{ background-color:#0f0f11!important; }" +
-            ".jogo-container .indentificacao-mobile, .jogo-container .indentificacao, .jogo-container .campeonato-nome{background: #e1e2e4;} .indentificacao .tempo{color: #fff!important;} .inside-event .tipo-apostas{ background-color: #0f0f11!important; color: white!important; } #esportes-footer{ color:white; } ",
-    });
-});
-
 gulp.task('dobowxbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1887,24 +1867,6 @@ gulp.task('megabetmg.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "megabetmg.wee.bet",
         banca: "MEGA BET MG",
-        styles: "",
-    });
-});
-
-gulp.task('topbet365.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "topbet365.wee.bet",
-        banca: "TOP BET 365",
-        styles: "",
-    });
-});
-
-gulp.task('jmbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jmbet.wee.bet",
-        banca: "JM BET",
         styles: "",
     });
 });
@@ -2377,6 +2339,24 @@ gulp.task('kinggame.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "kinggame.wee.bet",
         banca: "KING GAME",
+        styles: "",
+    });
+});
+
+gulp.task('betsesporte.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betsesporte.com",
+        banca: "BETS ESPORTE",
+        styles: "",
+    });
+});
+
+gulp.task('bolacerta.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bolacerta.wee.bet",
+        banca: "BOLA CERTA",
         styles: "",
     });
 });
