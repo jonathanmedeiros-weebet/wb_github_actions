@@ -18,6 +18,9 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     usuario = new Usuario();
     isCliente;
     isLoggedIn;
+    submitting = false;
+    scope = 5;
+    botaoReenviar = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -32,7 +35,8 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
-        this.reenviarEmail();
+        this.enviarEmail();
+        this.contagem();
     }
     createForm() {
         this.form = this.fb.group({
@@ -53,13 +57,34 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     handleError(error: string) {
         this.messageService.error(error);
     }
+    enviarEmail() {
+        this.auth.enviarCodigoEmail(JSON.parse(localStorage.getItem('user')))
+            .subscribe(
+                () => {},
+                error => this.handleError(error)
+            );
+    }
     reenviarEmail() {
+        this.scope = 5;
+        this.submitting = true;
         this.auth.enviarCodigoEmail(JSON.parse(localStorage.getItem('user')))
             .subscribe(
                 () => {
                     this.messageService.success('E-mail Enviado.');
+                    this.submitting = false;
+                    this.contagem();
                 },
                 error => this.handleError(error)
             );
+    }
+    contagem() {
+        this.botaoReenviar = false;
+        const time = setInterval(() => {
+            this.scope = this.scope - 1;
+            if (this.scope === 0) {
+                clearInterval(time);
+                this.botaoReenviar = true;
+            }
+        }, 1000);
     }
 }

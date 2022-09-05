@@ -1,12 +1,12 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import {Injectable, EventEmitter, Output} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, BehaviorSubject} from 'rxjs';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
-import { HeadersService } from './../utils/headers.service';
-import { ErrorService } from './../utils/error.service';
-import { ParametrosLocaisService } from './../parametros-locais.service';
-import { config } from './../../config';
+import {HeadersService} from './../utils/headers.service';
+import {ErrorService} from './../utils/error.service';
+import {ParametrosLocaisService} from './../parametros-locais.service';
+import {config} from './../../config';
 
 import * as moment from 'moment';
 import {Router} from '@angular/router';
@@ -58,6 +58,7 @@ export class AuthService {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
+                    this.setCookie(res.user.ck_id);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
@@ -70,9 +71,9 @@ export class AuthService {
                         this.setIsCliente(true);
                     }
                     this.logadoSource.next(true);
-                   if (data.casino === undefined) {
-                       this.router.navigate(['esportes/futebol/jogos']);
-                   }
+                    if (data.casino === undefined) {
+                        this.router.navigate(['esportes/futebol/jogos']);
+                    }
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -80,7 +81,6 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
-
         this.logadoSource.next(false);
         window.location.reload();
     }
@@ -204,4 +204,28 @@ export class AuthService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    setCookie(valor) {
+        const d = new Date();
+        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+        const expires = 'expires=' + d.toUTCString();
+        document.cookie = valor + '=' + valor + ';' + expires + ';';
+    }
+
+    getCookie(cname) {
+        const name = cname + '=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookies_array = decodedCookie.split(';');
+        for (let i = 0; i < cookies_array.length; i++) {
+            let cookies = cookies_array[i];
+            while (cookies.charAt(0) === ' ') {
+                cookies = cookies.substring(1);
+            }
+            if (cookies.indexOf(name) === 0) {
+                return cookies.substring(name.length, cookies.length);
+            }
+        }
+        return '';
+    }
+
 }

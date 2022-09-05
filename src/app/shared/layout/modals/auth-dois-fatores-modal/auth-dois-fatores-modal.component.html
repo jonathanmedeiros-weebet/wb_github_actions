@@ -7,18 +7,28 @@
     </div>
 </div>
 <div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-        <input type="hidden" formControlName="casino" value="true">
-        <div class="form-group">
-            <input type="text" class="form-control form-control-lg" formControlName="codigo"
-                   [ngClass]="applyCssInputError('codigo')" placeholder="Código de autenticação">
-            <app-error-msg [control]="form.get('codigo')" label="Usuário"></app-error-msg>
+    <ng-container *ngIf="submitting">
+        <div style="height: 149px">
+            <app-spinner class="spinner"></app-spinner>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-    <div class="dropdown-divider"></div>
-    <a (click)="reenviarEmail()" style="cursor: pointer" class="dropdown-item">
-       Reenviar código
-    </a>
+
+    </ng-container>
+    <ng-container *ngIf="!submitting">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
+            <input type="hidden" formControlName="casino" value="true">
+            <div class="form-group">
+                <label class="label">Digite o código enviado para seu email:</label>
+                <input type="text" class="form-control form-control-lg" formControlName="codigo"
+                       [ngClass]="applyCssInputError('codigo')">
+                <app-error-msg [control]="form.get('codigo')" label="Usuário"></app-error-msg>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <label *ngIf="!botaoReenviar" class="dropdown-item" >Reenvio disponível em {{scope}} segundos</label>
+        <a type="submit" class="dropdown-item" *ngIf="botaoReenviar" (click)="reenviarEmail()" style="cursor: pointer">
+           <i class="fa fa-share"></i> Reenviar código
+        </a>
+    </ng-container>
 </div>
 

@@ -61,7 +61,10 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             etapa: [1],
             casino: [true],
             username: ['', Validators.compose([Validators.required])],
-            password: ['', Validators.compose([Validators.required, Validators.minLength(2)])]
+            password: [
+                '',
+                Validators.compose([Validators.required, Validators.minLength(2)])
+            ]
         });
     }
 
@@ -75,14 +78,18 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 () => {
                     this.getUsuario();
-                    if (this.usuario.tipo_usuario === 'cliente') {
+                    if (this.usuario.tipo_usuario === 'cliente' && this.auth.getCookie(this.usuario.ck_id) === '') {
                         this.abrirModalAuthDoisFatores();
                     } else {
                         this.auth.login(this.form.value)
                             .pipe(takeUntil(this.unsub$))
                             .subscribe(
                                 () => {
-                                    location.reload();
+                                    this.getUsuario();
+                                    if (this.usuario.tipo_usuario === 'cambista') {
+                                        location.reload();
+                                    }
+                                    this.activeModal.dismiss();
                                 },
                                 error => this.handleError(error)
                             );
