@@ -91,4 +91,71 @@
             </a>
         </li>
     </ng-container>
+
+    <ng-container *ngIf="contexto == 'cambista'">
+        <li class="cambista-menu">
+            <ul>
+                <li class="cambista-item">
+                    <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                        <i class="fa fa-key icone-generico"></i>
+                        <span class="regiao-nome">Alterar senha</span>
+                    </a>
+                </li>
+
+                <li class="cambista-item">
+                    <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
+                        <i class="fa fa-dashboard icone-generico"></i>
+                        <span class="regiao-nome">Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu-middle">
+                <li class="cambista-item">
+                    <a [routerLink]="['/validar-aposta']" routerLinkActive="router-link-active">
+                        <i class="fa fa-calendar-check icone-generico"></i>
+                        <span class="regiao-nome">Validacão</span>
+                    </a>
+                </li>
+
+                <li class="cambista-item">
+                    <a [routerLink]="['/cambistas/apuracao']" routerLinkActive="router-link-active">
+                        <i class="fa fa-calendar-check icone-generico"></i>
+                        <span class="regiao-nome">Apuracao</span>
+                    </a>
+                </li>
+
+                <li class="cambista-item">
+                    <a [routerLink]="['/cambistas/apostas']" routerLinkActive="router-link-active">
+                        <i class="fa fa-check-square icone-generico"></i>
+                        <span class="regiao-nome">Apostas</span>
+                    </a>
+                </li>
+
+                <li class="cambista-item">
+                    <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
+                        <i class="fa fa-print icone-generico"></i>
+                        <span class="regiao-nome">Tabela</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu-bottom">
+                <li class="cambista-item">
+                    <a>
+                        <i class="fa fa-comments icone-generico"></i>
+                        <span class="regiao-nome">Ajuda</span>
+                    </a>
+                </li>
+
+                <li class="cambista-item">
+                    <a>
+                        <i class="fa fa-sign-out icone-generico"></i>
+                        <span class="regiao-nome">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ng-container>
 </ul>
+
+
+

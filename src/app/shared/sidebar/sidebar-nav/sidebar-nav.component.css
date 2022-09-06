@@ -142,3 +142,31 @@ ul li {
         display: none;
     }
 }
+
+.cambista-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.cambista-menu ul {
+    padding-left: 32px;
+    font-size: 14px;
+}
+
+.cambista-menu ul.menu-middle {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+}
+
+.cambista-menu ul.menu-bottom {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+}
+
+.cambista-menu ul li i{
+    width: 20px;
+    font-size: 16px;
+    margin-right: 10px;
+}

@@ -1,0 +1,90 @@
+.filtros {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filtros input, .filtros select {
+    margin-right: 20px;
+}
+
+.info-resultado {
+    margin: 20px 0 32px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 400;
+}
+
+
+.table {
+   color: #fff;
+}
+
+.table thead th {
+    background-color: #0A0A0A;
+    border-top: 0;
+    border-bottom: 1px solid #5d5d5d;
+    padding: 10px 10px 16px;
+}
+
+.table thead th:first-child {
+    border-left: 10px solid #0A0A0A;
+}
+
+.table .right {
+    text-align: right;
+}
+
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid #5d5d5d;
+}
+
+.table tbody td:first-child {
+    border-left: 10px solid #808080;
+}
+
+.table tbody tr.green td:first-child {
+    border-left: 10px solid #309E3A;
+}
+
+.table tbody tr.red td:first-child {
+    border-left: 10px solid #ED4C5C;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 8px;
+    left: 10px;
+    font-size: 20px;
+}
+
+.datepicker-group input {
+    padding-left: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}

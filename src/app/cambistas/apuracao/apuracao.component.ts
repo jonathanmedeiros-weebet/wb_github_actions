@@ -5,6 +5,7 @@ import {ParametrosLocaisService} from '../../shared/services/parametros-locais.s
 import * as moment from 'moment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
+import { SidebarService } from 'src/app/services';
 
 @Component({
     selector: 'app-apuracao',
@@ -32,12 +33,15 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
         private relatorioService: RelatorioService,
         private messageService: MessageService,
         private params: ParametrosLocaisService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private sidebarService: SidebarService
     ) {
         super();
     }
 
     ngOnInit() {
+        this.sidebarService.changeItens({contexto: 'cambista'});
+
         this.modoContaCorrente = this.params.modoContaCorrente();
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;

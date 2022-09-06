@@ -1171,6 +1171,7 @@ input.inverted {
     -webkit-box-shadow: none
 }
 
+select.inverted-out,
 input.inverted-out {
     border: 0.5px solid rgba(255, 255, 255, 0.5);
     color: var(--foreground-header);

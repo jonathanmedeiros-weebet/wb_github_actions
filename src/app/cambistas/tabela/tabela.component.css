@@ -1,0 +1,110 @@
+.internal-container-out {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.campeonatos {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 100px;
+}
+
+.search-input {
+    position: relative;
+}
+
+.search-input i {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+}
+
+.search-input input {
+    padding-left: 30px;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    color: black;
+    border: 2px solid white;
+    border-radius: 4px;
+    appearance: none;
+    outline: 0;
+    cursor: pointer;
+    transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+}
+
+input[type="checkbox"]:before {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    left: 4px;
+    width: 8px;
+    height: 14px;
+    border-style: solid;
+    border-color: white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked {
+    color: white;
+}
+
+input[type="checkbox"]:checked:before {
+    opacity: 1;
+}
+
+ul li label {
+    display: flex;
+    align-items: center;
+
+    margin: 0;
+}
+
+ul li label input {
+    margin-right: 10px;
+}
+
+ul {
+    list-style: none;
+    position: relative;
+}
+
+ul i {
+    display: block;
+    bottom: 0;
+    top: 0;
+    left: 8px;
+    position: absolute;
+    height: calc(100% - 10px);
+    content: "";
+    border: 0.5px dashed #fff;
+}
+
+ul li ul li {
+    margin: 10px 0;
+}
+
+ul li ul li:before {
+    position: absolute;
+    height: 0;
+    left: 8px;
+    width: 22px;
+    content: "";
+    display: block;
+    margin-top: 10px;
+    border-top: 0.5px dashed #fff;
+}

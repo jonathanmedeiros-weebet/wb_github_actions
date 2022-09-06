@@ -1,0 +1,144 @@
+<div id="default-content">
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="content-body">
+            <div class="row margin-top-15 margin-bottom-30">
+                <div class="col-12">
+                    <div class="counts">
+                        <div class="count">
+                            <div class="count-value">
+                                <div class="value">R$ 450,70</div>
+                                <label for="">Saldo atual</label>
+                            </div>
+
+                            <i>
+                                <img src="/assets/images/cifrao.svg" alt="image">
+                            </i>
+                        </div>
+                        <div class="count">
+                            <div class="count-value">
+                                <div class="value">R$ 450,70</div>
+                                <label for="">Saldo atual</label>
+                            </div>
+
+                            <i>
+                                <img src="/assets/images/cifrao.svg" alt="image">
+                            </i>
+                        </div>
+
+                        <div class="count">
+                            <div class="count-value">
+                                <div class="value">R$ 450,70</div>
+                                <label>Saldo atual</label>
+                            </div>
+
+                            <i>
+                                <img src="/assets/images/cifrao.svg" alt="image">
+                            </i>
+                        </div>
+
+                        <div class="count">
+                            <div class="count-value">
+                                <div class="value">R$ 450,70</div>
+                                <label>Saldo atual</label>
+                            </div>
+
+                            <i>
+                                <img src="/assets/images/cifrao.svg" alt="image">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="card-dashboard" style="padding-bottom: 65px;">
+                        <h3>Fluxo de Caixa</h3>
+                        <canvas baseChart
+                            [data]="barChartData"
+                            [options]="barChartOptions"
+                            [plugins]="barChartPlugins"
+                            [type]="barChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card-dashboard apostas-realizadas">
+                        <h3>Quantidade de apostas realizadas</h3>
+
+                        <select class="form-control inverted">
+                            <option value="last-week">Semana passada</option>
+                        </select>
+
+                        <ul class="apostas">
+                            <li>
+                                 <div class="info">
+                                    <i>
+                                        <img src="/assets/images/bola.svg" alt="image">
+                                    </i>
+                                    <div class="info-texto">
+                                        <label>Esportes</label>
+                                        <span class="bets">300 apostas</span>
+                                    </div>
+                                 </div>
+                                 <span>
+                                    R$ 300,00
+                                 </span>
+                            </li>
+                            <li>
+                                 <div class="info">
+                                    <i>
+                                        <img src="/assets/images/dinheiro.svg" alt="image">
+                                    </i>
+                                    <div class="info-texto">
+                                        <label>Acumuladão</label>
+                                        <span class="bets">300 apostas</span>
+                                    </div>
+                                 </div>
+                                 <span>
+                                    R$ 300,00
+                                 </span>
+                            </li>
+                            <li>
+                                 <div class="info">
+                                    <i>
+                                        <img src="/assets/images/trofeu.svg" alt="image">
+                                    </i>
+                                    <div class="info-texto">
+                                        <label>Desafio</label>
+                                        <span class="bets">300 apostas</span>
+                                    </div>
+                                 </div>
+                                 <span>
+                                    R$ 300,00
+                                 </span>
+                            </li>
+                            <li>
+                                 <div class="info">
+                                    <i>
+                                        <img src="/assets/images/diamante.svg" alt="image">
+                                    </i>
+                                    <div class="info-texto">
+                                        <label>Cassino</label>
+                                        <span class="bets">300 apostas</span>
+                                    </div>
+                                 </div>
+                                 <span>
+                                    R$ 300,00
+                                 </span>
+                            </li>
+                        </ul>
+
+                        <a href="">Mais Informacões</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
