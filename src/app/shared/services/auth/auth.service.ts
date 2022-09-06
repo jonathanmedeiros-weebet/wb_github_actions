@@ -35,7 +35,7 @@ export class AuthService {
     }
 
     verificaCliente(data: any): Observable<any> {
-        return this.http.post<any>(`${this.AuthUrl}/signinCliente`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/verificarLogin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     localStorage.setItem('user', JSON.stringify(res.user));
@@ -58,7 +58,7 @@ export class AuthService {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    this.setCookie(res.user.ck_id);
+                    this.setCookie(res.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.token);
