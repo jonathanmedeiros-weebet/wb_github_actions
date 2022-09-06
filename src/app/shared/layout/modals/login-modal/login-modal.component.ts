@@ -122,6 +122,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true,
+                backdrop: 'static',
             }
         );
 
