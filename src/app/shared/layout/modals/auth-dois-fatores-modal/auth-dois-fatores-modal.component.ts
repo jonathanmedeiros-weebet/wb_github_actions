@@ -19,7 +19,7 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     isCliente;
     isLoggedIn;
     submitting = false;
-    scope = 5;
+    cronometro = 60;
     botaoReenviar = false;
 
     constructor(
@@ -65,7 +65,7 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
             );
     }
     reenviarEmail() {
-        this.scope = 5;
+        this.cronometro = 60;
         this.submitting = true;
         this.auth.enviarCodigoEmail(JSON.parse(localStorage.getItem('user')))
             .subscribe(
@@ -80,8 +80,8 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     contagem() {
         this.botaoReenviar = false;
         const time = setInterval(() => {
-            this.scope = this.scope - 1;
-            if (this.scope === 0) {
+            this.cronometro = this.cronometro - 1;
+            if (this.cronometro === 0) {
                 clearInterval(time);
                 this.botaoReenviar = true;
             }
