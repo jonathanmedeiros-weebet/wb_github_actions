@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Jogo } from '../../../models';
-import liveMarkets from '../../../shared/liveMarkets';
+import { Jogo, ItemBilheteEsportivo } from '../../../models';
 import {
     ParametrosLocaisService, MessageService, JogoService,
     LiveService, BilheteEsportivoService, HelperService
 } from '../../../services';
-import { clone } from 'lodash';
 
 @Component({
     selector: 'app-live-jogo',
@@ -24,6 +22,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
     jogo;
+    mercados: any = {};
     itens = [];
     tiposAposta;
     objectKeys = Object.keys;
@@ -31,9 +30,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     showLoadingIndicator = true;
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
-    mercados90 = {};
-    mercados1T = {};
-    mercados2T = {};
     unsub$ = new Subject();
 
     constructor(
@@ -66,39 +62,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe(itens => this.itens = itens);
 
         if (this.jogoId) {
-            let mercados90 = {};
-            let mercados1T = {};
-            let mercados2T = {};
-
-            for (const chave in liveMarkets) {
-                const mkt = liveMarkets[chave];
-
-                let oddsMapped = [];
-
-                for (const chave in mkt.odds) {
-                    oddsMapped.push(mkt.odds[chave]);
-                }
-
-                mkt.odds = oddsMapped;
-
-                if (mkt.tempo == '90') {
-                    mercados90[chave] = clone(mkt);
-                }
-
-                if (mkt.tempo == '1T') {
-                    mercados1T[chave] = clone(mkt);
-                }
-
-                if (mkt.tempo == '2T') {
-                    mercados2T[chave] = clone(mkt);
-                }
-            }
-
-            this.mercados90 = this.organizarMercados(mercados90);
-            this.mercados1T = this.organizarMercados(mercados1T);
-            this.mercados2T = this.organizarMercados(mercados2T);
-
-
             this.liveService.entrarSalaEvento(this.jogoId);
             this.getJogo(this.jogoId);
         }
@@ -166,40 +129,41 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     mapearCotacoes(odds) {
+        console.log(odds);
+        const mercados = {};
+
         for (let index = 0; index < odds.length; index++) {
             const odd = odds[index];
             const tipoAposta = this.tiposAposta[odd.chave];
 
             if (tipoAposta && parseInt(tipoAposta.ao_vivo, 10)) {
-                let mkt = liveMarkets[tipoAposta.cat_chave];
-                if (mkt) {
-                    let mercado = null;
+                let mercado = mercados[tipoAposta.cat_chave];
 
-                    if (mkt.tempo == '90') {
-                        mercado = this.mercados90[tipoAposta.cat_chave];
-                    }
-                    if (mkt.tempo == '1T') {
-                        mercado = this.mercados1T[tipoAposta.cat_chave];
-                    }
-                    if (mkt.tempo == '2T') {
-                        mercado = this.mercados2T[tipoAposta.cat_chave];
-                    }
-
-                    if (mercado) {
-                        // console.log(mercado);
-                        for (const oddsColuna of mercado.odds) {
-                            for (const oddColuna of oddsColuna) {
-                                if (oddColuna.chave == odd.chave) {
-                                    oddColuna.valor = odd.valor;
-                                    oddColuna.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, null, true);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                if (!mercado) {
+                    mercado = {
+                        'nome': tipoAposta.cat_nome,
+                        'tempo': tipoAposta.tempo,
+                        'principal': tipoAposta.p,
+                        'posicao': tipoAposta.cat_posicao,
+                        'colunas': tipoAposta.cat_colunas,
+                        'colunasMobile': tipoAposta.cat_colunas_mobile,
+                        'odds': []
+                    };
+                    mercados[tipoAposta.cat_chave] = mercado;
                 }
+
+                odd.posicaoX = tipoAposta.posicao_x;
+                odd.posicaoY = tipoAposta.posicao_y;
+                odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
+                odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
+                odd.label = tipoAposta.nome;
+                odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, null, true);
+
+                mercado.odds.push(odd);
             }
         }
+
+        this.mercados = this.organizarMercados(mercados);
 
         this.showLoadingIndicator = false;
     }
@@ -273,8 +237,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         aux.forEach(element => {
             mercadosOrganizados[element[1]] = element[2];
         });
-
-        // console.log(mercadosOrganizados);
 
         for (const chave in mercadosOrganizados) {
             const mercado = mercadosOrganizados[chave];
