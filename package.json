@@ -256,7 +256,8 @@
         "pixfacil.bet": "gulp pixfacil.bet",
         "kinggame.wee.bet": "gulp kinggame.wee.bet",
         "betsesporte.com": "gulp betsesporte.com",
-        "bolacerta.wee.bet": "gulp bolacerta.wee.bet"
+        "bolacerta.wee.bet": "gulp bolacerta.wee.bet",
+        "primesport.bet": "gulp primesport.bet"
     },
     "private": true,
     "dependencies": {
