@@ -143,13 +143,27 @@ ul li {
     }
 }
 
+.collapsed .cambista-menu a {
+    padding-left: 15px !important;
+}
+
+.cambista-menu a {
+    transition: 0.15s all ease;
+    white-space: nowrap;
+    height: 45px;
+}
+
+.collapsed .cambista-menu a span {
+    display: none;
+}
+
 .cambista-menu {
     display: flex;
     flex-direction: column;
 }
 
 .cambista-menu ul {
-    padding-left: 32px;
+    padding-left: 0;
     font-size: 14px;
 }
 
@@ -157,6 +171,16 @@ ul li {
     margin-top: 30px;
     padding-top: 10px;
     border-top: 1px solid #333;
+}
+
+.cambista-menu a {
+    border-left: 3px solid transparent;
+    padding-left: 30px !important;
+}
+
+.cambista-menu a.router-link-active {
+    color: #35cc95;
+    border-left: 3px solid #35cc95;
 }
 
 .cambista-menu ul.menu-bottom {

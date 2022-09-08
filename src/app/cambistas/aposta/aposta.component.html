@@ -4,9 +4,16 @@
             <h2>Apostas</h2>
         </div>
 
+        <div class="tabs">
+            <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">Esporte</a>
+            <a [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''" (click)="changeTab('acumuladao')">Acumuladão</a>
+            <a [ngClass]="tabSelected == 'desafio' ? 'active' : ''" (click)="changeTab('desafio')">Desafio</a>
+            <a [ngClass]="tabSelected == 'cassino' ? 'active' : ''" (click)="changeTab('cassino')">Cassino</a>
+        </div>
+
         <div class="content-body">
             <div class="filtros">
-                <input class="inverted-out form-control" type="text" placeholder="Apostador">
+                <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="Apostador">
 
                 <input
                     name="datepicker"
@@ -42,10 +49,13 @@
                     >
                 </div>
 
-                <select class="inverted-out form-control" name="" id="">
+                <select class="inverted-out form-control" [(ngModel)]="status" name="" id="">
                     <option value="">Todos</option>
+                    <option value="ganhou">Ganhou</option>
+                    <option value="perdeu">Perdeu</option>
+                    <option value="pendente">Pendente</option>
                 </select>
-                <button class="btn btn-custom">Filtrar</button>
+                <button class="btn btn-custom" (click)="handleFiltrar()">Filtrar</button>
             </div>
 
             <div class="info-resultado">
@@ -65,25 +75,28 @@
                     <thead>
                         <tr>
                             <th width="30"></th>
-                            <th>Código</th>
-                            <th>Horário</th>
+                            <th width="100">Código</th>
+                            <th width="200">Horário</th>
                             <th>Apostador</th>
-                            <th class="right">Valor</th>
-                            <th class="right">Comissão</th>
+                            <th>Valor</th>
+                            <th>Comissão</th>
                             <th>Prêmio</th>
-                            <th>Pagamento</th>
+                            <th width="10">Pagamento</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let aposta of apostas" class="{{ aposta.status }}">
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                    </tr>
+                    <tbody *ngIf="!loading">
+                        <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta.resultado) }}">
                             <td></td>
                             <td>{{ aposta.codigo }}</td>
                             <td>{{ aposta.horario }}</td>
-                            <td>{{ aposta.apostador }}</td>
-                            <td class="right">{{ aposta.valor }}</td>
-                            <td class="right">{{ aposta.comissao }}</td>
-                            <td>{{ aposta.premio }}</td>
-                            <td>{{ aposta.pagamento }}</td>
+                            <td>{{ aposta.apostador | uppercase }}</td>
+                            <td>{{ aposta.valor | currency}}</td>
+                            <td>{{ aposta.comissao | currency }}</td>
+                            <td>{{ aposta.premio | currency }}</td>
+                            <td>{{ aposta.pago ? 'Pago' : '' }}</td>
                         </tr>
                     </tbody>
                 </table>

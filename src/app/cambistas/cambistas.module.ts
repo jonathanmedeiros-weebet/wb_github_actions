@@ -9,6 +9,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApostaComponent } from './aposta/aposta.component';
 import { TabelaComponent } from './tabela/tabela.component';
+import { DesafioApostaService, AcumuladaoService } from '../services';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
     declarations: [
@@ -21,11 +23,14 @@ import { TabelaComponent } from './tabela/tabela.component';
         SharedModule,
         CambistasRoutingModule,
         NgChartsModule,
-        NgbModule
+        NgbModule,
+        Ng2SearchPipeModule
     ],
     providers: [
         RelatorioService,
-        MessageService
+        MessageService,
+        DesafioApostaService,
+        AcumuladaoService
     ]
 })
 export class CambistasModule {
