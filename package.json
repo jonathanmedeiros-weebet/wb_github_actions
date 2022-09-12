@@ -257,7 +257,8 @@
         "kinggame.wee.bet": "gulp kinggame.wee.bet",
         "betsesporte.com": "gulp betsesporte.com",
         "bolacerta.wee.bet": "gulp bolacerta.wee.bet",
-        "primesport.bet": "gulp primesport.bet"
+        "primesport.bet": "gulp primesport.bet",
+        "eshowdebola.bet": "gulp eshowdebola.bet"
     },
     "private": true,
     "dependencies": {

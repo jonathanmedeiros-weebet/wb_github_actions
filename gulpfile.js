@@ -2369,3 +2369,12 @@ gulp.task('primesport.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('eshowdebola.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "eshowdebola.bet",
+        banca: "É SHOW DE BOLA",
+        styles: "",
+    });
+});
