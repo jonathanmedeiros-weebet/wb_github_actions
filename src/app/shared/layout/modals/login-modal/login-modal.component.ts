@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthDoisFatoresModalComponent} from '../../modals';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthDoisFatoresModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
-import {BaseFormComponent} from '../../base-form/base-form.component';
-import {Router} from '@angular/router';
-import {Usuario} from '../../../models/usuario';
+import { BaseFormComponent } from '../../base-form/base-form.component';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
     selector: 'app-login-modal',
@@ -75,9 +76,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     submit() {
         this.auth.verificaCliente(this.form.value)
+            .pipe(takeUntil(this.unsub$))
             .subscribe(
                 () => {
                     this.getUsuario();
+
                     if (this.usuario.tipo_usuario === 'cliente' && this.auth.getCookie(this.usuario.cookie) === '') {
                         this.abrirModalAuthDoisFatores();
                     } else {
@@ -98,9 +101,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 error => this.handleError(error)
             );
     }
+
     getUsuario() {
         this.usuario = this.auth.getUser();
     }
+
     handleError(error: string) {
         this.messageService.error(error);
     }

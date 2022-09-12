@@ -18,16 +18,15 @@
             <div class="form-group">
                 <label class="label">Digite o código enviado para seu email:</label>
                 <input type="text" class="form-control form-control-lg" formControlName="codigo"
-                       [ngClass]="applyCssInputError('codigo')">
+                    [ngClass]="applyCssInputError('codigo')">
                 <app-error-msg [control]="form.get('codigo')" label="Usuário"></app-error-msg>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
         <div class="dropdown-divider"></div>
-        <label *ngIf="!botaoReenviar" class="dropdown-item" >Reenvio disponível em {{cronometro}} segundos</label>
+        <label *ngIf="!botaoReenviar" class="dropdown-item">Reenvio disponível em {{cronometro}} segundos</label>
         <a type="submit" class="dropdown-item" *ngIf="botaoReenviar" (click)="reenviarEmail()" style="cursor: pointer">
-           <i class="fa fa-share"></i> Reenviar código
+            <i class="fa fa-share"></i> Reenviar código
         </a>
     </ng-container>
 </div>
-
