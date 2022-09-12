@@ -781,15 +781,6 @@ gulp.task('osascosportsbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('jogadacerta.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jogadacerta.wee.bet",
-        banca: "JOGADA CERTA",
-        styles: "--header: #c5c5c5; --foreground-header: #000; --sidebar-right:#c5c5c5; --foreground-sidebar-right: #000; --sidebar-left: #c5c5c5; --foreground-sidebar-left: #000; --foreground-highlight:#000; --highlight:#ff3232;",
-    });
-});
-
 gulp.task('globoesporte.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1740,16 +1731,6 @@ gulp.task('arena365.bet', function (done) {
     });
 });
 
-gulp.task('betadr.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betadr.wee.bet",
-        banca: "BETADR",
-        styles: "",
-    });
-});
-
-
 gulp.task('appgigabet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1939,15 +1920,6 @@ gulp.task('volpsport.com', function (done) {
         server: "front3.wee.bet",
         host: "volpsport.com",
         banca: "VOLP SPORT",
-        styles: "",
-    });
-});
-
-gulp.task('ourobetsvip.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "ourobetsvip.wee.bet",
-        banca: "OURO BETS VIP",
         styles: "",
     });
 });
