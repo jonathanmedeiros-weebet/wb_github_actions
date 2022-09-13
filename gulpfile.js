@@ -2327,6 +2327,7 @@ gulp.task('betsesporte.com', function (done) {
 gulp.task('bolacerta.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
+        shared_url: "bolacerta.net",
         host: "bolacerta.wee.bet",
         banca: "BOLA CERTA",
         styles: "",
