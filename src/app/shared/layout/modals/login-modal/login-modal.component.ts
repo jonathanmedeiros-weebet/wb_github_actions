@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { AuthDoisFatoresModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
-import {BaseFormComponent} from '../../base-form/base-form.component';
-import {Router} from '@angular/router';
-import {Usuario} from '../../../models/usuario';
-
-
+import { BaseFormComponent } from '../../base-form/base-form.component';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
     selector: 'app-login-modal',
@@ -22,6 +21,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     usuario = new Usuario();
     isCliente;
     isLoggedIn;
+    modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -31,6 +31,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
         private router: Router,
+        private modalService: NgbModal,
     ) {
         super();
     }
@@ -58,6 +59,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
     createForm() {
         this.form = this.fb.group({
+            etapa: [1],
             casino: [true],
             username: ['', Validators.compose([Validators.required])],
             password: [
@@ -73,22 +75,37 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     submit() {
-        this.auth.login(this.form.value)
+        this.auth.verificaCliente(this.form.value)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 () => {
                     this.getUsuario();
-                    if (this.usuario.tipo_usuario === 'cambista') {
-                        location.reload();
+
+                    if (this.usuario.tipo_usuario === 'cliente' && this.auth.getCookie(this.usuario.cookie) === '') {
+                        this.abrirModalAuthDoisFatores();
+                    } else {
+                        this.auth.login(this.form.value)
+                            .pipe(takeUntil(this.unsub$))
+                            .subscribe(
+                                () => {
+                                    this.getUsuario();
+                                    if (this.usuario.tipo_usuario === 'cambista') {
+                                        location.reload();
+                                    }
+                                    this.activeModal.dismiss();
+                                },
+                                error => this.handleError(error)
+                            );
                     }
-                    this.activeModal.dismiss();
                 },
                 error => this.handleError(error)
             );
     }
+
     getUsuario() {
         this.usuario = this.auth.getUser();
     }
+
     handleError(error: string) {
         this.messageService.error(error);
     }
@@ -101,5 +118,25 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     abrirRecuperarSenha() {
         this.activeModal.dismiss();
         this.router.navigate(['auth/recuperar-senha']);
+    }
+
+    abrirModalAuthDoisFatores() {
+        this.activeModal.dismiss();
+        this.modalRef = this.modalService.open(
+            AuthDoisFatoresModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                },
+                reason => {
+                }
+            );
     }
 }

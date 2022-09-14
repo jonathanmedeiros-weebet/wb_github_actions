@@ -24,6 +24,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
     submitting = false;
     debouncer: any;
     afiliadoHabilitado;
+    isLoggedIn;
 
     constructor(
         private fb: FormBuilder,
@@ -40,6 +41,13 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     ngOnInit(): void {
+        this.auth.logado.pipe().subscribe(
+                isLoggedIn => {
+                    if (isLoggedIn) {
+                        this.router.navigate(['esportes/futebol']);
+                    }
+                }
+            );
         this.createForm();
         this.clientesService.getTermosDeUso().subscribe(
             (termos: Pagina) => {
@@ -73,8 +81,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                     Validators.required
                 ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(3)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(3)]],
+            senha: [null, [Validators.required, Validators.minLength(6)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
             cpf: [null, [Validators.required]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],

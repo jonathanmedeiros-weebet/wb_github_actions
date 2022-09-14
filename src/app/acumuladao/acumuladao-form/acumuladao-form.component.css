@@ -242,7 +242,7 @@
 /* Media */
 @media only screen and (max-width: 1024px) {
     #acumuladao-form .eventos{
-       margin-bottom: 44px;
+        padding-bottom: 75px;
     }
 
     #acumuladao-form  .indentificacao .div-back{
