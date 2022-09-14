@@ -2352,10 +2352,10 @@ gulp.task('eshowdebola.bet', function (done) {
     });
 });
 
-gulp.task('bets536.bet', function (done) {
+gulp.task('bets536.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "bets536.bet",
+        host: "bets536.wee.bet",
         banca: "BETS 536",
         styles: "",
     });
