@@ -113,10 +113,10 @@ export class ValidarApostaDesafiosComponent extends BaseFormComponent implements
 
     calcularEstimativaGanho() {
         const estimativaGanho = this.form.value.valor * this.preAposta.cotacao;
-        if (estimativaGanho < this.opcoes.valor_max_premio) {
+        if (estimativaGanho < this.opcoes.valor_max_premio_desafio) {
             this.estimativaGanho = estimativaGanho;
         } else {
-            this.estimativaGanho = this.opcoes.valor_max_premio;
+            this.estimativaGanho = this.opcoes.valor_max_premio_desafio;
         }
     }
 }
