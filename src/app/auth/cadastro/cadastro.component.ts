@@ -141,7 +141,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 () => {
-                    this.auth.login({username: values.usuario, password: values.senha}).subscribe(
+                    this.auth.login({username: values.usuario, password: values.senha, etapa: 1}).subscribe(
                         () => {
                             this.messageService.success('Cadastro realizado com sucesso!');
                         },
