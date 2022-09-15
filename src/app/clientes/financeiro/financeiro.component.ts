@@ -8,6 +8,7 @@ import {ParametrosLocaisService} from '../../shared/services/parametros-locais.s
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import {curveBumpX} from 'd3-shape';
 import {FinanceiroService} from '../../shared/services/financeiro.service';
+import { SidebarService } from 'src/app/services';
 
 @Component({
     selector: 'app-financeiro',
@@ -92,12 +93,15 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
         private renderer: Renderer2,
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
-        private finairoService: FinanceiroService
+        private finairoService: FinanceiroService,
+        private sidebarService: SidebarService,
     ) {
         super();
     }
 
     ngOnInit(): void {
+        this.sidebarService.changeItens({contexto: 'cliente'});
+
         this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
 
         this.smallScreen = window.innerWidth < 669;

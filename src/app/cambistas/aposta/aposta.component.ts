@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService } from 'src/app/services';
+import { SidebarService, MessageService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ParametrosLocaisService } from 'src/app/services';
+import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 
 @Component({
   selector: 'app-aposta',
@@ -18,6 +19,11 @@ export class ApostaComponent implements OnInit {
     apostador = "";
     status = "";
 
+    loteriasHabilitada;
+    acumuladaoHabilitado;
+    desafioHabilitado;
+    cassinoHabilitado;
+
     tabSelected = 'esporte';
 
     hoveredDate: NgbDate | null = null;
@@ -26,15 +32,23 @@ export class ApostaComponent implements OnInit {
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
 
+    totais = {
+        valor: 0,
+        premio: 0,
+    }
+
     unsub$ = new Subject();
 
     constructor(
         private sidebarService: SidebarService,
         private calendar: NgbCalendar,
+        private params: ParametrosLocaisService,
         private apostaEsportivaService: ApostaEsportivaService,
         private acumuladaoService: AcumuladaoService,
+        private cassinoService: CasinoApiService,
         public desafioApostaService: DesafioApostaService,
         public formatter: NgbDateParserFormatter,
+        public messageService: MessageService,
     ) {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
         this.toDate = calendar.getToday();
@@ -50,12 +64,16 @@ export class ApostaComponent implements OnInit {
     ngOnInit(): void {
         this.sidebarService.changeItens({contexto: 'cambista'});
 
+        this.loteriasHabilitada = this.params.getOpcoes().loterias;
+        this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
+        this.desafioHabilitado = this.params.getOpcoes().desafio;
+        this.cassinoHabilitado = this.params.getOpcoes().casino;
+
         this.getApostas();
     }
 
     getApostas() {
         this.loading = true;
-        console.log('pegar apostas');
         const queryParams: any = {
             'data-inicial': this.queryParams.dataInicial,
             'data-final': this.queryParams.dataFinal,
@@ -69,46 +87,53 @@ export class ApostaComponent implements OnInit {
             case 'esporte':
                 this.apostaEsportivaService.getApostas(queryParams)
                 .subscribe(
-                    apostas => {
-                        this.apostas = apostas;
-                        this.loading = false;
-                    },
-                    error => {
-                        console.log(error);
-                    }
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
                 );
                 break;
             case 'acumuladao':
                 this.acumuladaoService.getApostas(queryParams)
                 .subscribe(
-                    apostas => {
-                        this.apostas = apostas;
-                        this.loading = false;
-                    },
-                    error => {
-                        console.log(error);
-                    }
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
                 );
                 break;
             case 'desafio':
                 this.desafioApostaService.getApostas(queryParams)
                 .subscribe(
-                    apostas => {
-                        this.apostas = apostas;
-                        this.loading = false;
-                    },
-                    error => {
-                        console.log(error);
-                    }
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
                 );
                 break;
             case 'cassino':
+                this.cassinoService.getApostas(queryParams)
+                .subscribe(
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
+                );
                 break;
             default:
-                this.apostas = [];
-                this.loading = false;
+                this.handleResponse([]);
                 break;
         }
+    }
+
+    handleResponse(response) {
+        this.apostas = response;
+
+        this.totais.valor = 0;
+        this.totais.premio = 0;
+
+        response.forEach(aposta => {
+            if (!aposta.cartao_aposta) {
+                this.totais.valor += aposta.valor;
+                if (aposta.resultado === 'ganhou') {
+                    this.totais.premio += aposta.premio;
+                }
+            }
+        });
+
+        this.loading = false;
     }
 
     onDateSelection(date: NgbDate, datepicker: any) {
@@ -169,7 +194,11 @@ export class ApostaComponent implements OnInit {
 
     changeTab(tab) {
         this.tabSelected = tab;
-
         this.getApostas();
+    }
+
+    handleError(error: string) {
+        this.loading = false;
+        this.messageService.error(error);
     }
 }

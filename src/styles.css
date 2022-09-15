@@ -136,6 +136,21 @@ header {
     box-shadow: 0 0 0 1px var(--highlight);
 }
 
+
+.btn-custom2 {
+    border: 1px solid var(--highlight);
+    color: var(--highlight);
+}
+
+.btn-custom2:hover {
+    background: var(--highlight);
+    color: var(--header);
+}
+
+.btn-custom2:focus {
+    box-shadow: 0 0 0 1px var(--highlight);
+}
+
 .card {
     border: 1px solid #d7dfe3;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -1179,7 +1194,10 @@ input.inverted-out {
     border-radius: 5px;
     box-shadow: none;
     -moz-box-shadow: none;
-    -webkit-box-shadow: none
+    -webkit-box-shadow: none;
+
+    padding: 10px 15px;
+    font-size: 12px
 }
 
 input.inverted-out:focus {
@@ -1189,6 +1207,12 @@ input.inverted-out:focus {
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none
+}
+
+input.inverted-out:disabled {
+    border-color: #0A0A0A;
+    background: #212121;
+    color: #646464;
 }
 
 /* Custom Checkbox */
@@ -1447,4 +1471,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .fw-600 {
     font-weight: 600;
+}
+
+.w-130 {
+    width: 130px;
+}
+
+.w-150 {
+    width: 150px;
 }

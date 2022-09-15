@@ -1,0 +1,36 @@
+#default-content {
+    padding: 25px 38px;
+}
+
+.table-responsive {
+    margin-top: 50px;
+}
+
+.table {
+    color: #fff;
+ }
+
+ .table thead th {
+     background-color: #0A0A0A;
+     border-top: 0;
+     border-bottom: 1px solid #0A0A0A;
+     padding: 10px 10px 16px;
+ }
+
+ .table thead th:first-child {
+     border-left: 10px solid #0A0A0A;
+ }
+
+ .table .right {
+     text-align: right;
+ }
+
+ .table tbody td {
+     border-top: 0;
+     border-bottom: 1px solid #0A0A0A;
+     vertical-align: middle;
+ }
+
+ .table td.no-border{
+     border-left: 0 !important;
+ }

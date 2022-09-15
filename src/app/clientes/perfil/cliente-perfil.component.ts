@@ -9,6 +9,7 @@ import {UtilsService} from '../../shared/services/utils/utils.service';
 import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
+import { SidebarService } from 'src/app/services';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -27,7 +28,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         private clienteService: ClienteService,
         private utilsService: UtilsService,
         private messageService: MessageService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private sidebarService: SidebarService,
     ) {
         super();
         this.cidades = [];
@@ -36,14 +38,22 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
+        this.sidebarService.changeItens({contexto: 'cliente'});
+
         this.createForm();
-        const user = JSON.parse(localStorage.getItem('user'));
         this.utilsService.getEstados()
             .subscribe(
                 estados => {
                     this.estados = estados;
                 });
 
+        this.loadCliente();
+
+        this.menuFooterService.setIsPagina(true);
+    }
+
+    loadCliente() {
+        const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService
             .getCliente(user.id)
             .subscribe(
@@ -56,8 +66,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             sexo: cliente.genero.toUpperCase(),
                             cpf: cliente.cpf,
                             telefone: cliente.telefone,
-                            email: cliente.email,
-                            chave_pix: cliente.chave_pix
+                            email: cliente.email
                         }
                     );
                     if (cliente.endereco) {
@@ -89,7 +98,6 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                     this.handleError('Algo inesperado aconteceu. Tente novamente mais tarde.');
                 }
             );
-        this.menuFooterService.setIsPagina(true);
     }
 
     ngOnDestroy() {
@@ -111,9 +119,18 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             cidade: ['0', Validators.required],
             estado: ['0', Validators.required],
             cep: ['', Validators.required],
-            chave_pix: [''],
             senha_atual: [null, Validators.required]
         });
+    }
+
+    resetarForm() {
+        this.showLoading = true;
+
+        this.cidades = [];
+        this.estadoSelecionado = 0;
+        this.cidadeSelecionada = 0;
+
+        this.loadCliente();
     }
 
     getCidades(event: any) {

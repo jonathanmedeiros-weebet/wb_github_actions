@@ -1,0 +1,39 @@
+.modal-header {
+    border-bottom-color: #3b3b3b;
+    padding: 20px 35px;
+}
+
+.modal-body {
+    text-align: center;
+    padding-top: 40px;
+}
+
+
+input {
+    border: 1px solid #3b3b3b;
+    color: #fff;
+    padding: 15px 25px;
+    font-size: 14px;
+    height: auto !important;
+}
+
+button {
+    margin-top: 30px;
+}
+
+.esqueceu-senha {
+    color: #35CC95;
+    font-size: 12px;
+    display: block;
+    margin: 20px 0 30px;
+    text-decoration: none;
+}
+
+.registrar {
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.registrar a {
+    color: #35CC95;
+}

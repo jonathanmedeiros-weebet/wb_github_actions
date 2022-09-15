@@ -7,7 +7,7 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {FormBuilder, Validators} from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import { SidebarService } from 'src/app/services';
+import { SidebarService, AuthService, CambistaService } from 'src/app/services';
 
 @Component({
     selector: 'app-dashboard',
@@ -17,14 +17,20 @@ import { SidebarService } from 'src/app/services';
 export class DashboardComponent extends BaseFormComponent implements OnInit {
     @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
+    public saldo;
+    public credito;
+
+    public dataEntrada = [];
+    public dataSaida = [];
+
     public showLoading = true;
     public barChartType: ChartType = 'bar';
     public barChartPlugins = [];
     public barChartData: ChartData<'bar'> = {
         labels: [ 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom' ],
         datasets: [
-            { data: [ 170, 730, 540, 201, 402, 632, 580 ], label: 'Entrada', backgroundColor: '#35CC95', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  },
-            { data: [ 128, 320, 300, 104, 398, 410, 490 ], label: 'Saída', backgroundColor: '#ED4C5C', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  }
+            { data: this.dataEntrada, label: 'Entrada', backgroundColor: '#35CC95', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  },
+            { data: this.dataSaida, label: 'Saída', backgroundColor: '#ED4C5C', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  }
         ]
     };
     public barChartOptions: ChartConfiguration['options'] = {
@@ -65,12 +71,19 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         }
     };
 
+    public apostasRealizadasEsporte = {'quantidade': 0, 'valor_apostas': 0};
+    public apostasRealizadasAcumuladao = {'quantidade': 0, 'valor_apostas': 0};
+    public apostasRealizadasDesafio = {'quantidade': 0, 'valor_apostas': 0};
+    public apostasRealizadasCassino = {'quantidade': 0, 'valor_apostas': 0};
+
     constructor(
         private relatorioService: RelatorioService,
         private messageService: MessageService,
         private params: ParametrosLocaisService,
         private fb: FormBuilder,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private auth: AuthService,
+        private cambistaService: CambistaService
     ) {
         super();
     }
@@ -78,6 +91,66 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
     ngOnInit() {
         this.sidebarService.changeItens({contexto: 'cambista'});
         this.showLoading = false;
+
+        this.loadChart('semana-atual');
+        this.loadQuantidadeApostas('semana-atual');
+
+        this.auth.getPosicaoFinanceira()
+            .subscribe(
+                posicaoFinanceira => {
+                    this.saldo = posicaoFinanceira.saldo
+                    this.credito = posicaoFinanceira.credito
+                },
+                error => {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
+                        this.auth.logout();
+                    } else {
+                        this.handleError(error);
+                    }
+                }
+            );
+    }
+
+    loadQuantidadeApostas(periodo) {
+        const params = { periodo }
+
+        this.cambistaService.quantidadeApostas(params).subscribe(
+            data => {
+                this.apostasRealizadasEsporte = data?.esporte;
+                this.apostasRealizadasAcumuladao = data?.acumuladao;
+                this.apostasRealizadasDesafio = data?.desafio;
+                this.apostasRealizadasCassino = data?.cassino;
+            },
+            error => {
+                console.error(error);
+            }
+        )
+    }
+
+    loadChart(periodo) {
+        const params = { periodo }
+
+        this.cambistaService.fluxoCaixa(params).subscribe(
+            data => {
+                this.barChartData.datasets[0].data = data.entrada;
+                this.barChartData.datasets[1].data = data.saida;
+
+                this.chart?.update();
+            },
+            error => {
+                console.error(error);
+            }
+        )
+    }
+
+    handleFiltroApostasRealizadas(event) {
+        let value = event.target.options[event.target.options.selectedIndex].value;
+        this.loadQuantidadeApostas(value);
+    }
+
+    handleFiltroFluxoCaixa(event) {
+        let value = event.target.options[event.target.options.selectedIndex].value;
+        this.loadChart(value);
     }
 
     createForm() {

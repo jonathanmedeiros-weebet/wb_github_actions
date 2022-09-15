@@ -6,67 +6,70 @@
 
         <div class="tabs">
             <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">Esporte</a>
-            <a [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''" (click)="changeTab('acumuladao')">Acumuladão</a>
-            <a [ngClass]="tabSelected == 'desafio' ? 'active' : ''" (click)="changeTab('desafio')">Desafio</a>
-            <a [ngClass]="tabSelected == 'cassino' ? 'active' : ''" (click)="changeTab('cassino')">Cassino</a>
+            <a *ngIf="acumuladaoHabilitado" [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''" (click)="changeTab('acumuladao')">Acumuladão</a>
+            <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''" (click)="changeTab('desafio')">Desafio</a>
+            <a *ngIf="cassinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''" (click)="changeTab('cassino')">Cassino</a>
         </div>
 
         <div class="content-body">
-            <div class="filtros">
-                <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="Apostador">
+            <form (submit)="handleFiltrar()">
+                <div class="filtros">
+                    <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="Apostador" [ngModelOptions]="{standalone: true}">
 
-                <input
-                    name="datepicker"
-                    class="dp-hidden"
-                    ngbDatepicker
-                    #datepicker="ngbDatepicker"
-                    [autoClose]="'outside'"
-                    (dateSelect)="onDateSelection($event, datepicker)"
-                    [displayMonths]="2"
-                    [dayTemplate]="t"
-                    outsideDays="hidden"
-                    [startDate]="fromDate!"
-                    tabindex="-1"
-                    value="uga"
-                >
-                <ng-template #t let-date let-focused="focused">
-                    <span class="custom-day"
-                            [class.focused]="focused"
-                            [class.range]="isRange(date)"
-                            [class.faded]="isHovered(date) || isInside(date)"
-                            (mouseenter)="hoveredDate = date"
-                            (mouseleave)="hoveredDate = null">
-                        {{ date.day }}
-                    </span>
-                </ng-template>
-                <div class="input-group datepicker-group">
-                    <i class="fa fa-calendar"></i>
                     <input
-                        type="text"
-                        class="form-control inverted-out"
-                        [(ngModel)]="selectedDate"
-                        (click)="datepicker.toggle()"
+                        name="datepicker"
+                        class="dp-hidden"
+                        ngbDatepicker
+                        #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event, datepicker)"
+                        [displayMonths]="2"
+                        [dayTemplate]="t"
+                        outsideDays="hidden"
+                        [startDate]="fromDate!"
+                        tabindex="-1"
+                        value=""
                     >
-                </div>
+                    <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day"
+                                [class.focused]="focused"
+                                [class.range]="isRange(date)"
+                                [class.faded]="isHovered(date) || isInside(date)"
+                                (mouseenter)="hoveredDate = date"
+                                (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                        </span>
+                    </ng-template>
+                    <div class="input-group datepicker-group">
+                        <i class="fa fa-calendar"></i>
+                        <input
+                            type="text"
+                            class="form-control inverted-out"
+                            [(ngModel)]="selectedDate"
+                            (click)="datepicker.toggle()"
+                            [ngModelOptions]="{standalone: true}"
+                        >
+                    </div>
 
-                <select class="inverted-out form-control" [(ngModel)]="status" name="" id="">
-                    <option value="">Todos</option>
-                    <option value="ganhou">Ganhou</option>
-                    <option value="perdeu">Perdeu</option>
-                    <option value="pendente">Pendente</option>
-                </select>
-                <button class="btn btn-custom" (click)="handleFiltrar()">Filtrar</button>
-            </div>
+                    <select class="inverted-out form-control" [(ngModel)]="status" name="" id="" [ngModelOptions]="{standalone: true}">
+                        <option value="">Todos</option>
+                        <option value="ganhou">Ganhou</option>
+                        <option value="perdeu">Perdeu</option>
+                        <option value="pendente">Pendente</option>
+                    </select>
+                    <button class="btn btn-custom" type="submit">Filtrar</button>
+                </div>
+            </form>
 
             <div class="info-resultado">
                 <div class="item">
-                        <label>Qtd. apostas:</label> 4
+                        <label>Qtd. apostas:</label> {{ apostas.length  }}
                 </div>
                 <div class="item">
-                        <label>Total apostado:</label> R$ 8,00
+                        <label>Total apostado:</label> {{ totais.valor | currency }}
                 </div>
                 <div class="item">
-                        <label>Total prêmios:</label> R$ 7,50
+                        <label>Total prêmios:</label> {{ totais.premio | currency }}
                 </div>
             </div>
 

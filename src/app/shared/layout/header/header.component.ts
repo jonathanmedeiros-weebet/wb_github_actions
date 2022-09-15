@@ -8,6 +8,8 @@ import {AuthService, MessageService, ParametrosLocaisService, PrintService, Side
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {Router} from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../modals';
 
 @Component({
     selector: 'app-header',
@@ -45,6 +47,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isMobile = false;
     centered = true;
     pixCambista = false;
+    modalRef;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -68,6 +71,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private printService: PrintService,
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
+        private modalService: NgbModal,
         private router: Router
     ) {
         super();
@@ -86,6 +90,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     this.isLoggedIn = isLoggedIn;
                     if (isLoggedIn) {
                         this.getUsuario();
+                        this.getPosicaoFinanceira();
                     }
                 }
             );
@@ -205,5 +210,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             'width.rem': 2,
             'fill': 'var(--foreground-header)'
         };
+    }
+
+    abrirLogin() {
+        this.modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+            }
+        );
     }
 }

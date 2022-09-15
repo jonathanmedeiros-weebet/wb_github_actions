@@ -42,10 +42,10 @@ export class TabelaComponent implements OnInit {
 
         this.campeonatoService.getCampeonatos(queryParams).subscribe(
             campeonatos => {
-                const date = moment().format('YYYYMMDD');
-                const dataTree = [];
-
-                console.log(campeonatos);
+                campeonatos.map(campeonato => {
+                    campeonato.isSelected = false;
+                    return campeonato;
+                });
 
                 this.campeonatosImpressao = campeonatos;
             },
@@ -55,10 +55,22 @@ export class TabelaComponent implements OnInit {
         );
     }
 
-    imprimirTabela() {
-        const campsSelecionados = this.campeonatosImpressao;
-        const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: campsSelecionados }];
+    selecionarTodos(event: any) {
+        const isChecked = event.target.checked;
 
+        this.campeonatosImpressao.forEach(campeonato => {
+            campeonato.isSelected = isChecked;
+        });
+    }
+
+    getCampeonatosSelecionados() {
+        return this.campeonatosImpressao.filter(campeonato => {
+            return campeonato.isSelected;
+        });
+    }
+
+    imprimirTabela() {
+        const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: this.getCampeonatosSelecionados() }];
         this.printService.games(jogos);
     }
 }

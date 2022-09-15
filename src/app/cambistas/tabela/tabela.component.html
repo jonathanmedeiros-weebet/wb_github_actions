@@ -15,17 +15,21 @@
             <div class="campeonatos">
                 <ul>
                     <li>
-                        <label for=""><input type="checkbox"> Selecionar todos de {{ dataCampeonatos }}</label>
+                        <label><input type="checkbox" (change)="selecionarTodos($event)"> Selecionar todos de {{ dataCampeonatos }}</label>
                         <ul>
                             <i></i>
-                            <li *ngFor="let campeonato of campeonatosImpressao | filter:term"><label><input type="checkbox" value="{{ campeonato._id }}"> {{campeonato.nome  }}</label></li>
+                            <li *ngFor="let campeonato of campeonatosImpressao | filter:term">
+                                <label>
+                                    <input type="checkbox" [(ngModel)]="campeonato.isSelected"> {{campeonato.nome  }}
+                                </label>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
 
             <div class="actions">
-                <button class="btn btn-custom" (click)="imprimirTabela()">Imprimir</button>
+                <button class="btn btn-custom w-150" (click)="imprimirTabela()">Imprimir</button>
             </div>
         </div>
     </div>

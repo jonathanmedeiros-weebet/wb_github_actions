@@ -1,0 +1,68 @@
+.btn-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.info {
+    margin: 15px 25px 30px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons button {
+    width: 230px;
+}
+
+.buttons button i {
+    margin-right: 10px;
+}
+
+label.label-tempo {
+    display: block;
+    text-align: center;
+    margin: 0;
+}
+
+.tempo {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+
+.valor {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0 70px;
+}
+
+.qr-code {
+    display: inline-block;
+    padding: 15px;
+    margin: 20px 0 10px;
+    border: 1px solid #35CC95;
+    border-radius: 5px;
+}
+
+.qr-code img {
+    width: 170px;
+}
+
+.modal-header, .modal-body {
+    border-radius: 5px;
+    background-color: #0A0A0A;
+    text-align: center;
+}
+
+.modal-dialog .modal-content {
+    border-radius: 10px;
+    color: #fff;
+}

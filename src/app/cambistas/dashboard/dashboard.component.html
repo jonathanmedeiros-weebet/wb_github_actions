@@ -9,7 +9,7 @@
                     <div class="counts">
                         <div class="count">
                             <div class="count-value">
-                                <div class="value">R$ 450,70</div>
+                                <div class="value">{{ saldo | currency }}</div>
                                 <label for="">Saldo atual</label>
                             </div>
 
@@ -19,8 +19,8 @@
                         </div>
                         <div class="count">
                             <div class="count-value">
-                                <div class="value">R$ 450,70</div>
-                                <label for="">Saldo atual</label>
+                                <div class="value">{{ credito | currency }}</div>
+                                <label for="">Crédito atual</label>
                             </div>
 
                             <i>
@@ -30,8 +30,8 @@
 
                         <div class="count">
                             <div class="count-value">
-                                <div class="value">R$ 450,70</div>
-                                <label>Saldo atual</label>
+                                <div class="value">R$ 0,00</div>
+                                <label>Comissão</label>
                             </div>
 
                             <i>
@@ -41,8 +41,8 @@
 
                         <div class="count">
                             <div class="count-value">
-                                <div class="value">R$ 450,70</div>
-                                <label>Saldo atual</label>
+                                <div class="value">R$ 0,00</div>
+                                <label>Saída</label>
                             </div>
 
                             <i>
@@ -56,8 +56,14 @@
 
             <div class="row">
                 <div class="col-12 col-md-8">
-                    <div class="card-dashboard" style="padding-bottom: 65px;">
-                        <h3>Fluxo de Caixa</h3>
+                    <div class="card-dashboard" style="padding-bottom: 85px;">
+                        <h3 class="right-options">
+                            Fluxo de Caixa
+                            <select class="form-control inverted-out" (change)="handleFiltroFluxoCaixa($event)">
+                                <option value="semana-atual">Semana atual</option>
+                                <option value="semana-anterior">Semana passada</option>
+                            </select>
+                        </h3>
                         <canvas baseChart
                             [data]="barChartData"
                             [options]="barChartOptions"
@@ -72,8 +78,9 @@
                     <div class="card-dashboard apostas-realizadas">
                         <h3>Quantidade de apostas realizadas</h3>
 
-                        <select class="form-control inverted">
-                            <option value="last-week">Semana passada</option>
+                        <select class="form-control inverted-out" (change)="handleFiltroApostasRealizadas($event)">
+                            <option value="semana-atual">Semana atual</option>
+                            <option value="semana-anterior">Semana passada</option>
                         </select>
 
                         <ul class="apostas">
@@ -84,11 +91,11 @@
                                     </i>
                                     <div class="info-texto">
                                         <label>Esportes</label>
-                                        <span class="bets">300 apostas</span>
+                                        <span class="bets">{{ apostasRealizadasEsporte.quantidade }} apostas</span>
                                     </div>
                                  </div>
-                                 <span>
-                                    R$ 300,00
+                                 <span class="valor-apostas">
+                                    {{ apostasRealizadasEsporte.valor_apostas | currency }}
                                  </span>
                             </li>
                             <li>
@@ -98,11 +105,11 @@
                                     </i>
                                     <div class="info-texto">
                                         <label>Acumuladão</label>
-                                        <span class="bets">300 apostas</span>
+                                        <span class="bets">{{ apostasRealizadasAcumuladao.quantidade }} apostas</span>
                                     </div>
                                  </div>
-                                 <span>
-                                    R$ 300,00
+                                 <span class="valor-apostas">
+                                    {{ apostasRealizadasAcumuladao.valor_apostas | currency }}
                                  </span>
                             </li>
                             <li>
@@ -112,11 +119,11 @@
                                     </i>
                                     <div class="info-texto">
                                         <label>Desafio</label>
-                                        <span class="bets">300 apostas</span>
+                                        <span class="bets">{{ apostasRealizadasDesafio.quantidade }} apostas</span>
                                     </div>
                                  </div>
-                                 <span>
-                                    R$ 300,00
+                                 <span class="valor-apostas">
+                                    {{ apostasRealizadasDesafio.valor_apostas | currency }}
                                  </span>
                             </li>
                             <li>
@@ -126,16 +133,17 @@
                                     </i>
                                     <div class="info-texto">
                                         <label>Cassino</label>
-                                        <span class="bets">300 apostas</span>
+                                        <span class="bets">{{ apostasRealizadasCassino.quantidade }} apostas</span>
                                     </div>
                                  </div>
-                                 <span>
-                                    R$ 300,00
+                                 <span class="valor-apostas">
+                                    {{ apostasRealizadasCassino.valor_apostas | currency }}
                                  </span>
                             </li>
                         </ul>
 
-                        <a href="">Mais Informacões</a>
+
+                        <a [routerLink]="['/cambistas/apostas']">Mais Informacões</a>
                     </div>
                 </div>
             </div>

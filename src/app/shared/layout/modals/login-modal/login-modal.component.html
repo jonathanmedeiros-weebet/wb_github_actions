@@ -1,15 +1,13 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Login</h4>
-    <div class="action-buttons">
-        <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <img src="/assets/images/logo-weebet.svg" alt="">
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="/assets/images/close.svg" alt="fechar" width="15">
+    </a>
 </div>
 <div class="modal-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
         <input type="hidden" formControlName="casino" value="true">
-        <div class="form-group">
+        <div class="form-group mb-4">
             <input type="text" class="form-control" formControlName="username"
                    [ngClass]="applyCssInputError('username')" placeholder="Usuário">
             <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
@@ -19,15 +17,16 @@
                    formControlName="password" placeholder="Senha">
             <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
+        <button type="submit" class="btn btn-custom btn-block">Entrar</button>
     </form>
-    <div class="dropdown-divider"></div>
-    <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="dropdown-item">
-        Esqueci minha senha
+
+    <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha">
+        Esqueceu a senha?
     </a>
-    <div class="dropdown-divider"></div>
-    <a (click)="abrirCadastro()" style="cursor: pointer" class="dropdown-item">
-        Não é nosso Cliente? Cadastre-se
-    </a>
+
+    <div class="registrar">
+        Não possui uma conta?
+        <a (click)="abrirCadastro()" style="cursor: pointer" class="">Registre-se</a>
+    </div>
 </div>
 

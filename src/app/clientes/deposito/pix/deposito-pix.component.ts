@@ -1,10 +1,50 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
 import {ParametrosLocaisService} from "../../../shared/services/parametros-locais.service";
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HelperService } from 'src/app/services';
+
+@Component({
+    selector: 'ngbd-modal-content',
+    styleUrls: ['./deposito-pix.component.css'],
+    template: `
+    <div class="modal-body">
+        <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Depósito  PIX</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img src="/assets/images/close.svg" alt="fechar">
+        </a>
+
+        <p class="info text-center">Aponte a câmera do seu celular para realizar o depósito ou copie e compartilhe o QR Code</p>
+
+        <label class="label-tempo">Tempo restante para pagar</label>
+        <span class="tempo">2:59</span>
+
+        <div class="qr-code">
+            <img src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+        </div>
+        <span class="valor">Valor: <b>{{ valorPix }}</b></span>
+
+        <div class="buttons">
+            <button class="btn btn-custom2"><i class="fa fa-share"></i> Compartilhar QR Code</button>
+            <button class="btn btn-custom2" (click)="copyCode(qrCode)"><i class="fa fa-copy"></i> Copiar código</button>
+        </div>
+    </div>
+    `
+})
+export class NgbdModalContent {
+    valorPix;
+    qrCodeBase64;
+    qrCode;
+    constructor(public modal: NgbActiveModal) {}
+
+    copyCode(code) {
+        console.log('Copiado: ', code)
+    }
+}
 
 @Component({
     selector: 'app-deposito-pix',
@@ -19,12 +59,15 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     clearSetInterval;
     verificacoes = 0;
     valorMinDeposito;
+    valorPix = 0;
 
     constructor(
         private fb: FormBuilder,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
         private paramsLocais: ParametrosLocaisService,
+        private modalService: NgbModal,
+        private helperService: HelperService,
     ) {
         super();
     }
@@ -53,10 +96,16 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.financeiroService.processarPagamento(detalhesPagamento)
             .subscribe(
                 res => {
-                    this.pix = res;
+                    const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
+                    modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
+                    modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
+                    modalRef.componentInstance.qrCode = res.qr_code;
+
                     this.clearSetInterval = setInterval(() => {
                         this.verificarPagamento(res);
                     }, 10000);
+
+                    this.submitting = false;
                 },
                 error => {
                     this.handleError(error);

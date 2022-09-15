@@ -1,9 +1,9 @@
 <div id="default-content">
     <app-spinner *ngIf="showLoading"></app-spinner>
-    
+
     <ng-containe *ngIf="!showLoading">
         <div class="content-header">
-            <h2>Solicitar Saque</h2>
+            <h2>Saques</h2>
         </div>
         <div class="content-body">
             <div class="content">
@@ -11,17 +11,18 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div class="row">
-                            <div class="col col-sm-4">
+                            <div class="col col-sm-3">
                                 <div class="form-group required">
-                                    <label class="label">Valor do Saque:</label>
-                                    <input currencyMask class="form-control"
+                                    <label class="label">Informe o valor desejado para saque</label>
+                                    <input currencyMask class="form-control inverted-out text-left mt-3"
                                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                         formControlName="valor">
                                     <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                                    <span class="mt-3 d-block">Saldo disponivel para saque: {{ saldo | currency }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col col-md-12">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-custom" [disabled]="submitting">
@@ -39,6 +40,27 @@
                     {{respostaSolicitacao}}
                 </div>
             </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="10"></th>
+                        <th>Detalhes</th>
+                        <th width="200">Status</th>
+                        <th width="200">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let saque of saques">
+                        <td><img src="/assets/images/debito.svg" alt="image"></td>
+                        <td>Saque - Registrado {{ saque.data }}</td>
+                        <td>{{ saque.status }}</td>
+                        <td>{{ saque.valor | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </ng-containe>
 </div>

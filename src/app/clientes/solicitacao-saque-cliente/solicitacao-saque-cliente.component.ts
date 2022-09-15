@@ -7,6 +7,7 @@ import { MessageService } from '../../shared/services/utils/message.service';
 import { FinanceiroService } from '../../shared/services/financeiro.service';
 import { MenuFooterService } from "../../shared/services/utils/menu-footer.service";
 import { ParametrosLocaisService } from "../../shared/services/parametros-locais.service";
+import { SidebarService, AuthService } from 'src/app/services';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -22,6 +23,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     valorMinSaque;
 
+    saldo = 0;
+    saques = [];
+
     constructor(
         private fb: FormBuilder,
         private messageService: MessageService,
@@ -29,15 +33,46 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private financeiroService: FinanceiroService,
         private menuFooterService: MenuFooterService,
         private paramsLocais: ParametrosLocaisService,
+        private sidebarService: SidebarService,
+        private auth: AuthService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.sidebarService.changeItens({contexto: 'cliente'});
+
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
         this.createForm();
         this.menuFooterService.setIsPagina(true);
         const user = JSON.parse(localStorage.getItem('user'));
+
+        const queryParams: any = {
+            'periodo': '',
+            'tipo':  'saques',
+        };
+        this.financeiroService.getDepositosSaques(queryParams)
+            .subscribe(
+                response => {
+                    this.saques = response;
+                },
+                error => {
+                    this.handleError(error);
+                    this.showLoading = false;
+                }
+            );
+
+        this.auth.getPosicaoFinanceira()
+            .subscribe(
+                posicaoFinanceira => this.saldo = posicaoFinanceira.saldo,
+                error => {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
+                        this.auth.logout();
+                    } else {
+                        this.handleError(error);
+                    }
+                }
+            );
 
         this.clienteService.getCliente(user.id)
             .subscribe(

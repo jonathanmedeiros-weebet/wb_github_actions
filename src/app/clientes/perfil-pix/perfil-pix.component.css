@@ -1,14 +1,6 @@
-.nav-tabs {
-    justify-content: center;
-    width: 100%;
-    border-bottom: 2px solid var(--highlight);
-}
-
-
 #default-content {
     padding: 25px 38px;
 }
-
 
 h2 {
     margin-bottom: 35px;

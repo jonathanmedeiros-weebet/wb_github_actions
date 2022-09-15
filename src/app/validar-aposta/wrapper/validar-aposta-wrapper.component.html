@@ -9,7 +9,7 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
                         <div class="form-group">
                             <input type="number" placeholder="Código da pré-aposta"
-                                   class="inverted form-control" formControlName="codigo" autocomplete="off"
+                                   class="inverted-out form-control" formControlName="codigo" autocomplete="off"
                                    [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                         </div>
                         <button type="submit" class="btn btn-custom">Consultar</button>

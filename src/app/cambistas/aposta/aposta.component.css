@@ -23,7 +23,7 @@
 .table thead th {
     background-color: #0A0A0A;
     border-top: 0;
-    border-bottom: 1px solid #5d5d5d;
+    border-bottom: 1px solid #0A0A0A;
     padding: 10px 10px 16px;
 }
 
@@ -37,7 +37,7 @@
 
 .table tbody td {
     border-top: 0;
-    border-bottom: 1px solid #5d5d5d;
+    border-bottom: 1px solid #0A0A0A;
 }
 
 .table td.no-border{

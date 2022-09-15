@@ -179,6 +179,19 @@ nav::-webkit-scrollbar {
 .saldos-container {
     display: flex;
     padding: 0 20px;
+
+    align-items: center;
+}
+
+.saldos-container .separador {
+    display: block;
+    border-right: 2px solid #181818;
+    height: 35px;
+    margin: 0 30px;
+}
+
+.saldos-container div {
+    flex: 1;
 }
 
 .saldos-item {
@@ -482,3 +495,50 @@ nav::-webkit-scrollbar {
         display: none !important;
     }
 } */
+
+.menu-perfil {
+    display: flex;
+    align-items: center;
+}
+
+.menu-perfil::after {
+    display: none;
+}
+
+
+.menu-perfil img {
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    margin-left: 8px;
+}
+
+.menu-perfil div {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.menu-perfil .nome-usuario {
+    font-size: 12px;
+    color: #fff;
+}
+
+.menu-perfil .saldo-usuario {
+    font-size: 14px;
+}
+
+
+.menu-conta .info-profile {
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #fff;
+}
+
+
+.menu-conta .info-profile img {
+    margin-right: 10px;
+    border-radius: 50%;
+}

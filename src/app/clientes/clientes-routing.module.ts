@@ -16,6 +16,10 @@ const routes: Routes = [{
             loadChildren: () => import('./perfil/cliente-perfil.module').then(p => p.ClientePerfilModule)
         },
         {
+            path: 'perfil-pix',
+            loadChildren: () => import('./perfil-pix/perfil-pix.module').then(p => p.PerfilPixModule)
+        },
+        {
             path: 'financeiro',
             loadChildren: () => import('./financeiro/financeiro.module').then(f => f.FinanceiroModule)
         },
