@@ -2327,7 +2327,6 @@ gulp.task('betsesporte.com', function (done) {
 gulp.task('bolacerta.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        shared_url: "bolacerta.net",
         host: "bolacerta.wee.bet",
         banca: "BOLA CERTA",
         styles: "",
@@ -2357,6 +2356,15 @@ gulp.task('bets536.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "bets536.wee.bet",
         banca: "BETS 536",
+        styles: "",
+    });
+});
+
+gulp.task('brlesportiva.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "brlesportiva.bet",
+        banca: "BRL ESPORTIVA",
         styles: "",
     });
 });

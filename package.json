@@ -256,7 +256,8 @@
         "bolacerta.wee.bet": "gulp bolacerta.wee.bet",
         "primesport.bet": "gulp primesport.bet",
         "eshowdebola.bet": "gulp eshowdebola.bet",
-        "bets536.wee.bet": "gulp bets536.wee.bet"
+        "bets536.wee.bet": "gulp bets536.wee.bet",
+        "brlesportiva.bet": "gulp brlesportiva.bet"
     },
     "private": true,
     "dependencies": {
