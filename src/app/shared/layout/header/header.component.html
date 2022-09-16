@@ -106,12 +106,12 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="btn btn-cadastro" [routerLink]="['/auth/cadastro']"
+                <a class="btn btn-custom w-130 mr-4" [routerLink]="['/auth/cadastro']"
                    *ngIf="modoClienteAtivo">
-                    Cadastre-se
+                    REGISTRE-SE
                 </a>
-                <a (click)="abrirLogin()" class="botao-entrar nav-link btn" id="navbarDropdown" role="button">
-                    Entrar
+                <a (click)="abrirLogin()" class="botao-entrar nav-link btn btn-custom2 w-130" id="navbarDropdown" role="button">
+                    ENTRAR
                 </a>
                 <div class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
