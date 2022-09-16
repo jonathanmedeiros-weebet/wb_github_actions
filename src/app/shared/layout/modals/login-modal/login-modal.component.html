@@ -5,17 +5,17 @@
     </a>
 </div>
 <div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <input type="hidden" formControlName="casino" value="true">
         <div class="form-group mb-4">
             <input type="text" class="form-control" formControlName="username"
                    [ngClass]="applyCssInputError('username')" placeholder="Usuário">
-            <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
+            <app-error-msg [control]="form.get('username')" label="Usuário" class="text-left"></app-error-msg>
         </div>
         <div class="form-group" [ngClass]="applyCssDivError('password')">
             <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
                    formControlName="password" placeholder="Senha">
-            <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
+            <app-error-msg [control]="form.get('password')" label="Senha" class="text-left"></app-error-msg>
         </div>
         <button type="submit" class="btn btn-custom btn-block">Entrar</button>
     </form>

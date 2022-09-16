@@ -81,6 +81,82 @@
     justify-content: normal;
 }
 
+.jogos-destaque {
+    margin-top: 15px;
+    display: flex;
+    overflow-x: scroll;
+}
+
+.jogo-destaque {
+    background: #0A0A0A;
+    border: 1px solid #35cc95;
+    width: 240px;
+    height: 120px;
+    border-radius: 5px;
+    padding: 10px 10px;
+
+    flex-basis: 240px;
+	flex-grow: 0;
+	flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.jogo-destaque:first-child {
+    margin-left: 0;
+}
+
+.jogos-destaque .header {
+    display: flex;
+    font-size: 9px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.jogos-destaque .jogo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+}
+
+.jogos-destaque .jogo .time1 img {
+    margin-left: 10px;
+}
+
+.jogos-destaque .jogo .time2 img {
+    margin-right: 10px;
+}
+
+.separador-times {
+    font-size: 20px;
+}
+
+.jogos-destaque .jogo-destaque-odds {
+    display: flex;
+}
+
+.jogos-destaque .jogo-destaque-odds .jogo-destaque-odd {
+    background-color: #181818;
+    border-radius: 2px;
+    flex: 1;
+    font-size: 8px;
+    padding: 4.5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-left: 5px;
+}
+
+.jogos-destaque .jogo-destaque-odds .jogo-destaque-odd:first-child {
+    margin-left: 0;
+}
+
 @media only screen and (max-width: 1024px) {
     .menu-camp-destaques {
         font-size: 0.8rem;

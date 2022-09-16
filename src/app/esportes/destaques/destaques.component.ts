@@ -13,6 +13,7 @@ export class DestaquesComponent implements OnInit {
     exibirDestaques = true;
     menuWidth;
     mobileScreen;
+    jogosDestaque = [];
 
     constructor(
         private regioesDestaqueService: RegioesDestaqueService,
@@ -43,6 +44,45 @@ export class DestaquesComponent implements OnInit {
                     this.exibirDestaques = exibirDestaques;
                 }
             );
+
+        this.jogosDestaque = [
+            {
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },{
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },{
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },{
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },{
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },{
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },{
+                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
+                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
+                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
+                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
+            },
+        ];
     }
 
     selecionarRegiao(regiao?) {

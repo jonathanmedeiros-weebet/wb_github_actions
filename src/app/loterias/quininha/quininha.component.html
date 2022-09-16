@@ -8,7 +8,7 @@
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-lg-4">
                                     <label>Quantidade de dezenas da aposta</label>
-                                    <select class="form-control" name="qtdNumeros" [(ngModel)]="qtdNumeros"
+                                    <select class="form-control inverted-out" name="qtdNumeros" [(ngModel)]="qtdNumeros"
                                             style="background-color: var(--header)">
                                         <option [value]="null" disabled>Selecione a quantidade</option>
                                         <option [value]="numero" [disabled]="disabledNumber(numero)"
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-lg-4">
                                         <label>Sorteio</label>
-                                        <select class="form-control" formControlName="sorteio"
+                                        <select class="form-control inverted-out" formControlName="sorteio"
                                                 [compareWith]="compararSorteio"
                                                 [ngClass]="applyCssInputError('sorteio')">
                                             <option [value]="null">Selecione</option>
@@ -56,7 +56,7 @@
                                         <label>Valor do Palpite ({{CURRENCY_SYMBOL}})</label>
                                         <div class="input-icon">
                                             <i>R$</i>
-                                            <input type="number" class="form-control" placeholder="Valor"
+                                            <input type="number" class="form-control inverted-out" placeholder="Valor"
                                                    min="{{opcoes.valor_min_aposta_loterias}}" formControlName="valor"
                                                    [ngClass]="applyCssInputError('valor')">
                                         </div>

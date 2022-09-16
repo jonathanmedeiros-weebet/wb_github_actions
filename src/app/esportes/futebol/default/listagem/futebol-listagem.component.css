@@ -72,6 +72,39 @@
     transition: 500ms;
 }
 
+.filter {
+    display: flex;
+    margin: 10px 0;
+
+    align-items: center;
+}
+
+.filter .tabs {
+    background: #0A0A0A;
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+}
+
+.filter .tabs .tab {
+    color: #fff;
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+
+    border-bottom: 3px solid transparent;
+}
+
+.filter .tabs .tab.active {
+    border-color: #35cc95;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 1024px) {
     .mais-opcoes {
         margin-right: 10px;

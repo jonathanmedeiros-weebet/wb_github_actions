@@ -79,3 +79,7 @@ input, select {
     font-size: 12px;
     margin-bottom: 5px;
 }
+
+.input-icon input {
+    padding-left: 30px;
+}

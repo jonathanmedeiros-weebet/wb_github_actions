@@ -16,6 +16,49 @@
         </div>
     </ng-container>
 
+    <ng-container>
+        <div class="jogos-destaque">
+            <div class="jogo-destaque" *ngFor="let jogoDestaque of jogosDestaque">
+                <div class="header">
+                    <span>
+                        <i class="fa fa-flag"></i>
+                        {{ jogoDestaque.campeonato }}
+                    </span>
+                    <span>
+                        {{ jogoDestaque.horario }}
+                    </span>
+                </div>
+
+                <div class="jogo">
+                    <div class="time1">
+                        <span>{{ jogoDestaque.time1.nome }}</span>
+                        <img src="{{ jogoDestaque.time1.escudo }}" width="25">
+                    </div>
+                    <span class="separador-times">-</span>
+                    <div class="time2">
+                        <img src="{{ jogoDestaque.time2.escudo }}" width="25">
+                        <span>{{ jogoDestaque.time2.nome }}</span>
+                    </div>
+                </div>
+
+                <div class="jogo-destaque-odds">
+                    <div class="jogo-destaque-odd">
+                        Casa
+                        <span class="cotacao">2.00</span>
+                    </div>
+                    <div class="jogo-destaque-odd">
+                        Empate
+                        <span class="cotacao">2.00</span>
+                    </div>
+                    <div class="jogo-destaque-odd">
+                        Fora
+                        <span class="cotacao">2.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
     <div class="back-button" [hidden]="!exibindoRegiao">
         <div class="menu-camp-destaques">
             <a class="back" (click)="selecionarRegiao()">

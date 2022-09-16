@@ -21,7 +21,7 @@ import { HelperService } from 'src/app/services';
         <p class="info text-center">Aponte a câmera do seu celular para realizar o depósito ou copie e compartilhe o QR Code</p>
 
         <label class="label-tempo">Tempo restante para pagar</label>
-        <span class="tempo">2:59</span>
+        <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code">
             <img src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
@@ -39,10 +39,31 @@ export class NgbdModalContent {
     valorPix;
     qrCodeBase64;
     qrCode;
+
+    minute = 1;
+    second = 0;
+    secondShow = '00';
     constructor(public modal: NgbActiveModal) {}
 
+    ngOnInit() {
+        let timer = setInterval(() => {
+            if (this.second == 0) {
+                this.minute -= 1;
+                this.second = 59;
+            } else {
+                this.second -= 1;
+            }
+
+            this.secondShow = this.second < 10 ? '0' + this.second : String(this.second);
+
+            if (this.minute <= 0 && this.second <= 0) {
+                clearInterval(timer)
+            }
+        }, 1000);
+    }
+
     copyCode(code) {
-        console.log('Copiado: ', code)
+        console.log('Copiado: ', code);
     }
 }
 

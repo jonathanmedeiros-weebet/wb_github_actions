@@ -1,11 +1,17 @@
+.modal-dialog {
+    max-width: 600px;
+  }
+
 .modal-header {
     border-bottom-color: #3b3b3b;
     padding: 20px 35px;
+    background: #0A0A0A;
 }
 
 .modal-body {
     text-align: center;
-    padding-top: 40px;
+    padding: 40px 130px 15px;
+    background: #0A0A0A;
 }
 
 
