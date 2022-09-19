@@ -2377,3 +2377,12 @@ gulp.task('ggdasorte.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bets2you.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bets2you.com",
+        banca: "BETS2YOU",
+        styles: "",
+    });
+});
