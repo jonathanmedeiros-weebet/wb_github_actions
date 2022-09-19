@@ -1251,15 +1251,6 @@ gulp.task('sportourodomexico.wee.bet', function (done) {
     });
 });
 
-gulp.task('betwins.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betwins.wee.bet",
-        banca: "BET WINS",
-        styles: "",
-    });
-});
-
 gulp.task('betfut.net', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2365,6 +2356,24 @@ gulp.task('brlesportiva.bet', function (done) {
         server: "front1.wee.bet",
         host: "brlesportiva.bet",
         banca: "BRL ESPORTIVA",
+        styles: "",
+    });
+});
+
+gulp.task('betsmania.live', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsmania.live",
+        banca: "BETS MANIA",
+        styles: "",
+    });
+});
+
+gulp.task('ggdasorte.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ggdasorte.bet",
+        banca: "GG DA SORTE",
         styles: "",
     });
 });

@@ -136,7 +136,6 @@
         "nortaobet.com": "gulp nortaobet.com",
         "rodadabets.wee.bet": "gulp rodadabets.wee.bet",
         "sportourodomexico.wee.bet": "gulp sportourodomexico.wee.bet",
-        "betwins.wee.bet": "gulp betwins.wee.bet",
         "betfut.net": "gulp betfut.net",
         "betclub.wee.bet": "gulp betclub.wee.bet",
         "uzzebet.com": "gulp uzzebet.com",
@@ -257,7 +256,9 @@
         "primesport.bet": "gulp primesport.bet",
         "eshowdebola.bet": "gulp eshowdebola.bet",
         "bets536.wee.bet": "gulp bets536.wee.bet",
-        "brlesportiva.bet": "gulp brlesportiva.bet"
+        "brlesportiva.bet": "gulp brlesportiva.bet",
+        "betsmania.live": "gulp betsmania.live",
+        "ggdasorte.bet": "gulp ggdasorte.bet"
     },
     "private": true,
     "dependencies": {
