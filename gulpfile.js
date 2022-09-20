@@ -2386,3 +2386,12 @@ gulp.task('bets2you.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('tigrebet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "tigrebet.wee.bet",
+        banca: "TIGRE BET",
+        styles: "",
+    });
+});

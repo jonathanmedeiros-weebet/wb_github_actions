@@ -259,7 +259,8 @@
         "brlesportiva.bet": "gulp brlesportiva.bet",
         "betsmania.live": "gulp betsmania.live",
         "ggdasorte.bet": "gulp ggdasorte.bet",
-        "bets2you.com": "gulp bets2you.com"
+        "bets2you.com": "gulp bets2you.com",
+        "tigrebet.wee.bet": "gulp tigrebet.wee.bet"
     },
     "private": true,
     "dependencies": {
