@@ -40,7 +40,7 @@ export class NgbdModalContent {
     qrCodeBase64;
     qrCode;
 
-    minute = 1;
+    minute = 20;
     second = 0;
     secondShow = '00';
     constructor(public modal: NgbActiveModal) {}

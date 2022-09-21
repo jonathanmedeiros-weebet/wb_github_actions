@@ -21,6 +21,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     campeonatosBloqueados = [];
     contexto = null;
     sportId;
+    pagina;
     jogoId;
     exibirMaisCotacoes = false;
     mobileScreen = false;

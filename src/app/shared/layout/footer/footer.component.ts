@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../../config';
 import {AuthService} from '../../services/auth/auth.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
+import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-modal.component';
 
 @Component({
     selector: 'app-footer',
@@ -18,7 +20,8 @@ export class FooterComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private paramsLocais: ParametrosLocaisService
+        private paramsLocais: ParametrosLocaisService,
+        private modalService: NgbModal,
     ) { }
 
     ngOnInit() {
@@ -29,5 +32,12 @@ export class FooterComponent implements OnInit {
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
         }
+    }
+
+    abrirResultados() {
+        this.modalService.open(ResultadosModalComponent, {
+            centered: true,
+            size: 'xl',
+        });
     }
 }

@@ -13,3 +13,5 @@ export { SolicitarSaqueModalComponent } from './solicitar-saque-modal/solicitar-
 export { TabelaModalComponent } from './tabela-modal/tabela-modal.component';
 export { ApostaEncerramentoModalComponent } from './aposta-encerramento-modal/aposta-encerramento-modal.component';
 export { LoginModalComponent } from './login-modal/login-modal.component';
+export { CadastroModalComponent } from './cadastro-modal/cadastro-modal.component';
+export { EsqueceuSenhaModalComponent } from './esqueceu-senha-modal/esqueceu-senha-modal.component';

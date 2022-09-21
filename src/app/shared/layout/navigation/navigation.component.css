@@ -2,6 +2,18 @@
     width: 270px;
     background: var(--sidebar-left);
     transition: 500ms;
+
+    display: flex;
+    flex-direction: column;
+}
+
+app-sidebar-nav {
+    flex: 1 1 auto;
+    height: 0px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .btn-collapse {

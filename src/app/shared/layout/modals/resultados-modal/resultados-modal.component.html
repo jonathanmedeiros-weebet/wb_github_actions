@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <img src="/assets/images/logo-weebet.svg" alt="">
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="/assets/images/close.svg" alt="fechar" width="15">
+    </a>
+</div>
+<div class="modal-body">
+    <h3>Resultados</h3>
+
+    <div class="filters">
+        <form novalidate>
+            <input type="text" class="form-control inverted-out">
+            <select class="form-control inverted-out">
+                <option value="futebol">Futebol</option>
+                <option value="18">Basquete</option>
+                <option value="13">Tênis</option>
+                <option value="9">Combate</option>
+                <option value="91">Vôlei</option>
+                <option value="12">Futebol Americano</option>
+                <option value="83">Futsal</option>
+                <option value="17">Hóquei no Gelo</option>
+                <option value="151">E-Sports</option>
+            </select>
+            <button class="btn btn-custom">Filtrar</button>
+        </form>
+    </div>
+
+    <div class="content">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <ng-container *ngFor="let campeonato of campeonatos">
+                        <tr class="campeonato">
+                            <th colspan="4">{{campeonato.nome}}</th>
+                        </tr>
+                        <tr *ngFor="let jogo of campeonato.jogos">
+                            <td>{{jogo.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td style="text-align: right;">{{jogo.time_a_nome}}</td>
+                            <td style="text-align: center;">
+                                <span
+                                    *ngIf="jogo.resultado; else semResultado">
+                                    <b>{{jogo.resultado.casa}} - {{jogo.resultado.fora}}</b>
+                                    <ng-container *ngIf="sport == 1">
+                                        ({{jogo.resultado.casa_1t}} - {{jogo.resultado.fora_1t}})
+                                    </ng-container>
+                                </span>
+                                <ng-template #semResultado>
+                                    <b>Sem Resultado</b>
+                                </ng-template>
+                            </td>
+                            <td style="text-align: left;">{{jogo.time_b_nome}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -4,13 +4,13 @@
     <div class="wrap-sticky">
 
         <div class="filter">
-            <input type="text" class="form-control inverted-out" placeholder="Pesquisar">
+            <input type="text" [(ngModel)]="term" class="form-control inverted-out" placeholder="Pesquisar">
 
             <div class="tabs">
-                <a class="tab active">Hoje</a>
-                <a class="tab">Amanhã</a>
-                <a class="tab">Sábado</a>
-                <a class="tab">Domingo</a>
+                <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>
+                <a class="tab" [ngClass]="{'active': tabSelected == 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
+                <a class="tab" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('dddd') | titlecase }}</a>
+                <a class="tab" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('dddd') | titlecase  }}</a>
             </div>
         </div>
 
@@ -25,20 +25,20 @@
                 </button>
             </div>
 
-            <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
-                <div class="campeonato-header">
+            <div class="campeonato" *ngFor="let campeonato of campeonatos | filter:term; trackBy: trackById">
+                <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span class="column-left">
                         <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
                         <span class="campeonato-nome">{{campeonato.nome}}</span>
                     </span>
-                    <!--                    <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">-->
-                    <!--                        <i class="fa fa-angle-up"></i>-->
-                    <!--                    </span>-->
-                    <!--                    <ng-template #downIcon>-->
-                    <!--                        <span>-->
-                    <!--                            <i class="fa fa-angle-down"></i>-->
-                    <!--                        </span>-->
-                    <!--                    </ng-template>-->
+                    <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
+                        <i class="fa fa-angle-up"></i>
+                    </span>
+                    <ng-template #downIcon>
+                        <span>
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </ng-template>
                 </div>
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos; let i = index">
@@ -57,22 +57,26 @@
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
                                                  class="escudo-img">
                                         </span>
-                                        <ng-template #defaulImage class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
-                                                 class="escudo-img">
+                                        <ng-template #defaulImage>
+                                            <span class="escudo">
+                                                <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
+                                                    class="escudo-img">
+                                            </span>
                                         </ng-template>
                                         <div class="nome-time">
                                             {{jogo.time_a_nome}}
                                         </div>
                                     </div>
                                     <div class="escudo-container">
-                                        <span *ngIf="jogo.time_b_img" class="escudo">
+                                        <span *ngIf="jogo.time_b_img; else defaulImageB" class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png" size="s"
                                                  class="escudo-img">
                                         </span>
-                                        <ng-template #defaulImage class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
-                                                 class="escudo-img">
+                                        <ng-template #defaulImageB>
+                                            <span class="escudo">
+                                                <img src="https://cdn.wee.bet/img/times/s/default.png" size="s"
+                                                    class="escudo-img">
+                                            </span>
                                         </ng-template>
                                         <div class="nome-time">
                                             {{jogo.time_b_nome}}

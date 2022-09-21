@@ -392,7 +392,7 @@ header {
     position: absolute;
     display: block;
     transform: translate(0, -50%);
-    top: 53%;
+    top: 50%;
     pointer-events: none;
     width: 25px;
     text-align: center;
@@ -655,12 +655,12 @@ button {
     padding: 0 10px;
     font-size: 0.9rem;
     /*border-bottom: 4px solid #0A0A09;*/
-    /*cursor: pointer;*/
+    cursor: pointer;
     display: flex;
     align-items: center;
     background-color: #0A0A09;
     color: var(--foreground-header);
-    height: 30px;
+    padding: 5px 15px;
 }
 
 .campeonato-header>span {
@@ -1250,10 +1250,9 @@ input.inverted-out:disabled {
 .campeonato-header .fa {
     float: right;
     line-height: 30px;
-    margin-right: 10px;
 }
 
-.jogos {
+.campeonato {
     margin-bottom: 10px;
 }
 
@@ -1362,6 +1361,7 @@ input.inverted-out:disabled {
 .odd .nome-odd,
 .odd .valor-odd {
     color: var(--foreground-odds);
+    text-align: center;
 }
 
 .odds-coluna {
@@ -1399,6 +1399,10 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .fs-8px {

@@ -27,6 +27,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     jogosBloqueados;
     unsub$ = new Subject();
     mobileScreen = false;
+    term = "";
 
     constructor(
         private messageService: MessageService,
@@ -50,6 +51,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
+                    console.log('JOGOS', campeonatos);
+
+
                     campeonatos.forEach(campeonato => {
                         const jogos = new Map();
                         let temJogoValido = false;

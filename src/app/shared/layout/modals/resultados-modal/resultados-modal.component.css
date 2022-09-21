@@ -1,0 +1,54 @@
+h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.modal-dialog {
+    max-width: 600px;
+  }
+
+.modal-header {
+    border-bottom-color: #3b3b3b;
+    padding: 20px 35px;
+    background: #181818;
+}
+
+.modal-body {
+    padding: 40px 60px;
+    background: #181818;
+}
+
+
+table {
+    color: #fff;
+}
+
+th {
+    background-color: #0A0A0A;
+    font-size: 14px;
+    border: 0;
+    padding: 10px 20px;
+}
+
+td {
+    border-bottom: 1px solid;
+    border-color: #0A0A0A;
+    padding: 10px 20px;
+}
+
+.filters form {
+    display: flex;
+    margin-bottom: 35px;
+}
+
+.filters form input {
+    max-width: 200px;
+    margin-right: 25px;
+}
+
+.filters form select {
+    max-width: 200px;
+    margin-right: 25px;
+}
+

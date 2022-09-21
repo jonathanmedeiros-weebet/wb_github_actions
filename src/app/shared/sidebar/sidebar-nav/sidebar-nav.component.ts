@@ -6,13 +6,19 @@ import * as random from 'lodash.random';
 import {SupresinhaService} from '../../services/utils/surpresinha.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import { BaseFormComponent } from '../../layout/base-form/base-form.component';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApostaService } from '../../services/aposta.service';
+import { MessageService } from '../../services/utils/message.service';
+import { ApostaModalComponent } from '../../layout/modals';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-sidebar-nav',
     templateUrl: './sidebar-nav.component.html',
     styleUrls: ['./sidebar-nav.component.css']
 })
-export class SidebarNavComponent implements OnInit {
+export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     @Input() height;
     @Input() collapsed = false;
     contexto;
@@ -23,18 +29,28 @@ export class SidebarNavComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private fb: FormBuilder,
+        private apostaService: ApostaService,
         private sidebarService: SidebarService,
         private supresinhaService: SupresinhaService,
+        private messageService: MessageService,
+        private modalService: NgbModal,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
         private renderer: Renderer2
     ) {
+        super();
     }
 
     ngOnInit() {
+        this.createForm();
+
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
             .subscribe(dados => {
+                console.log('ITEMS:', dados)
+
+
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
 
@@ -42,9 +58,10 @@ export class SidebarNavComponent implements OnInit {
                     this.esporte = dados.esporte;
                 }
 
-                const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
-                this.renderer.setStyle(menuSideLeftEl, 'height', `${this.height}px`);
-                this.cd.detectChanges();
+                // const menuSideLeftEl = this.el.nativeElement.querySelector('.input-consulta');
+
+                // this.renderer.setStyle(menuSideLeftEl, 'height', `${ this.height }px`);
+                // this.cd.detectChanges();
 
                 // setTimeout(e => {
                 //     const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
@@ -52,6 +69,46 @@ export class SidebarNavComponent implements OnInit {
                 //     this.cd.detectChanges();
                 // }, 250);
             });
+    }
+
+    ngAfterViewInit() {
+        console.log(this.el);
+    }
+
+    createForm() {
+        this.form = this.fb.group({
+            codigo: ['', Validators.compose([
+                Validators.required
+            ])]
+        });
+    }
+
+    submit() {
+        const codigo = this.form.value.codigo;
+
+        this.apostaService.getApostaByCodigo(codigo)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                aposta => {
+                    this.form.reset();
+
+                    const modalRef = this.modalService.open(ApostaModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    });
+
+                    modalRef.componentInstance.aposta = aposta;
+                    modalRef.componentInstance.primeiraImpressao = true;
+                    modalRef.componentInstance.showCancel = true;
+
+                    console.log(aposta);
+                },
+                error => this.messageService.error(error)
+            );
+    }
+
+    handleError(error: string) {
+        this.messageService.error(error)
     }
 
     abrirRegiao(regiao) {

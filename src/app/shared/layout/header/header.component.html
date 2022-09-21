@@ -71,12 +71,25 @@
                             <i class="fa fa-user mb-2"></i>
                             Minha Conta
                         </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active">
-                            <i class="fa fa-key mb-2"></i> Alterar senha
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['/dashboard']"
+                        <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
                            routerLinkActive="router-link-active"
                            *ngIf="isCliente">
+                            <i class="fa fa-solid fa-dollar mb-2"></i>
+                            Financeiro
+                        </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="isCliente">
+                            <i class="fa fa-solid fa-table-columns mb-2"></i>
+                            Apostas
+                        </a>
+
+                        <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
+                            <i class="fa fa-key mb-2"></i> Alterar senha
+                        </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="!isCliente">
                             <i class="fa fa-dashboard mb-2"></i>
                             Dashboard
                         </a>
@@ -92,6 +105,18 @@
                             <i class="fa fa-solid fa-table-columns mb-2"></i>
                             Apuração
                         </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="!isCliente">
+                            <i class="fa fa-solid fa-table-columns mb-2"></i>
+                            Apostas
+                        </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="!isCliente">
+                            <i class="fa fa-solid fa-print mb-2"></i>
+                            Tabela
+                        </a>
                     </div>
 
                     <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
@@ -106,8 +131,7 @@
         </ng-container>
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="btn btn-custom w-130 mr-4" [routerLink]="['/auth/cadastro']"
-                   *ngIf="modoClienteAtivo">
+                <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
                     REGISTRE-SE
                 </a>
                 <a (click)="abrirLogin()" class="botao-entrar nav-link btn btn-custom2 w-130" id="navbarDropdown" role="button">

@@ -5,3 +5,17 @@
 .row {
     margin-bottom: 30px;
 }
+
+label {
+    font-size: 12px;
+    line-height: 38px;
+}
+
+
+.form-group i {
+    position: absolute;
+    top: 13px;
+    right: 30px;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}

@@ -1,232 +1,255 @@
-<ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}" style="position: relative">
-    <ng-container *ngIf="contexto == 'esportes'">
-        <!--        <div *ngIf="regioesDestaque && !mobileScreen">-->
-        <!--            <span class="group">Destaques</span>-->
-        <!--            <li *ngFor="let regiao of regioesDestaque"-->
-        <!--                (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">-->
-        <!--                <a>-->
-        <!--                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>-->
-        <!--                    <span class="regiao-nome">{{regiao.nome}}</span>-->
-        <!--                </a>-->
-        <!--            </li>-->
-        <!--        </div>-->
-        <!--                <span class="group">Datas</span>-->
-        <!--                <li (click)="goTo('/esportes/' + esporte, {})">-->
-        <!--                    <a>-->
-        <!--                        Jogos de Hoje-->
-        <!--                    </a>-->
-        <!--                </li>-->
-        <!--                <li *ngIf="exibirJogosAmanha()"-->
-        <!--                    (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">-->
-        <!--                    <a>-->
-        <!--                        Jogos de Amanhã-->
-        <!--                    </a>-->
-        <!--                </li>-->
-        <!--                <li *ngFor="let dia of dias" (click)="goTo('/esportes/' + esporte, { data: dia.format })">-->
-        <!--                    <a>-->
-        <!--                        Jogos de {{dia.descricao}}-->
-        <!--                    </a>-->
-        <!--                </li>-->
-        <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
-            <span class="group" *ngIf="!collapsed">Campeonatos</span>
-            <li class="regiao" *ngFor="let regiao of itens">
-                <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
-                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
-                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id}}</span>
+<ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' ">
+<div class="consulta-bilhete" *ngIf="!collapsed">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input-consulta">
+            <input type="text" placeholder="Consultar bilhete" formControlName="codigo">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+</div>
+</ng-container>
+
+<ng-container *ngIf="contexto == 'esportes'">
+    <ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}" style="position: relative">
+        <ng-container *ngIf="contexto == 'esportes'">
+            <!--        <div *ngIf="regioesDestaque && !mobileScreen">-->
+            <!--            <span class="group">Destaques</span>-->
+            <!--            <li *ngFor="let regiao of regioesDestaque"-->
+            <!--                (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">-->
+            <!--                <a>-->
+            <!--                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>-->
+            <!--                    <span class="regiao-nome">{{regiao.nome}}</span>-->
+            <!--                </a>-->
+            <!--            </li>-->
+            <!--        </div>-->
+            <!--                <span class="group">Datas</span>-->
+            <!--                <li (click)="goTo('/esportes/' + esporte, {})">-->
+            <!--                    <a>-->
+            <!--                        Jogos de Hoje-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--                <li *ngIf="exibirJogosAmanha()"-->
+            <!--                    (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">-->
+            <!--                    <a>-->
+            <!--                        Jogos de Amanhã-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--                <li *ngFor="let dia of dias" (click)="goTo('/esportes/' + esporte, { data: dia.format })">-->
+            <!--                    <a>-->
+            <!--                        Jogos de {{dia.descricao}}-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
+                <span class="group" *ngIf="!collapsed">Campeonatos</span>
+                <li class="regiao" *ngFor="let regiao of itens">
+                    <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
+                        <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
+                        <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id}}</span>
+                    </a>
+                    <div class="sub-nav-container">
+                        <ul *ngIf="regiao._id == regiaoOpen" [ngClass]="{'sub-nav-out': collapsed}">
+                            <li *ngFor="let campeonato of regiao.campeonatos"
+                                (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
+                                <a>
+                                    {{campeonato.nome.replace(regiao._id + ': ', '')}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ng-container>
+            <ng-template #esporteGenerico>
+                <span class="group">Campeonatos</span>
+                <li class="campeonato" *ngFor="let campeonato of itens"
+                    (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
+                    <a>
+                        <i class="fa fa-certificate icone-generico"></i>
+                        <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{campeonato.nome}}</span>
+                    </a>
+                </li>
+            </ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="contexto == 'desafio'">
+            <span class="group">Desafios</span>
+            <li class="categoria" (click)="goTo('/desafios', {})">
+                <a>
+                    <i class="fa fa-trophy icone-generico"></i>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">TODOS</span>
                 </a>
+            </li>
+            <li class="categoria" *ngFor="let categoria of itens"
+                (click)="goTo('/desafios', { categoria: categoria.id })">
+                <a>
+                    <i class="fa fa-trophy icone-generico"></i>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{categoria.nome}}</span>
+                </a>
+            </li>
+        </ng-container>
+
+        <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
+            <span class="group">Surpresinha</span>
+            <li class="supresinha" *ngFor="let tipoAposta of itens"
+                (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
+                <a *ngIf="contexto == 'seninha'">
+                    <i class="fa fa-certificate icone-generico"></i>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
+                                ( {{tipoAposta.cotacao6 | currency}} )</span>
+                </a>
+                <a *ngIf="contexto == 'quininha'">
+                    <i class="fa fa-certificate icone-generico"></i>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
+                                ( {{tipoAposta.cotacao5 | currency}} )</span>
+                </a>
+            </li>
+        </ng-container>
+
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="contexto == 'cambista'">
+    <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
+        <ul>
+            <li class="cambista-item">
+                <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                    <i class="fa fa-key icone-generico"></i>
+                    <span class="regiao-nome">Alterar senha</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dashboard icone-generico"></i>
+                    <span class="regiao-nome">Dashboard</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-middle">
+            <li class="cambista-item">
+                <a [routerLink]="['/validar-aposta']" routerLinkActive="router-link-active">
+                    <i class="fa fa-calendar-check icone-generico"></i>
+                    <span class="regiao-nome">Validacão</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/apuracao']" routerLinkActive="router-link-active">
+                    <i class="fa fa-calendar-check icone-generico"></i>
+                    <span class="regiao-nome">Apuracao</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/apostas']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">Apostas</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
+                    <i class="fa fa-print icone-generico"></i>
+                    <span class="regiao-nome">Tabela</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-bottom">
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-comments icone-generico"></i>
+                    <span class="regiao-nome">Ajuda</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-sign-out icone-generico"></i>
+                    <span class="regiao-nome">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="contexto == 'cliente'">
+    <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
+        <ul>
+            <li class="cambista-item" routerLinkActive="router-link-active">
+                <a>
+                    <i class="fa fa-user icone-generico"></i>
+                    <span class="regiao-nome">Perfil</span>
+                    <i class="fa fa-angle-down m-0"></i>
+                </a>
+
                 <div class="sub-nav-container">
-                    <ul *ngIf="regiao._id == regiaoOpen" [ngClass]="{'sub-nav-out': collapsed}">
-                        <li *ngFor="let campeonato of regiao.campeonatos"
-                            (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
-                            <a>
-                                {{campeonato.nome.replace(regiao._id + ': ', '')}}
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/perfil']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Dados Pessoais</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">PIX</span>
+                            </a>
+                        </li>
+
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Alterar senha</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-        </ng-container>
-        <ng-template #esporteGenerico>
-            <span class="group">Campeonatos</span>
-            <li class="campeonato" *ngFor="let campeonato of itens"
-                (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
-                <a>
-                    <i class="fa fa-certificate icone-generico"></i>
-                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{campeonato.nome}}</span>
+
+
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Financeiro</span>
                 </a>
             </li>
-        </ng-template>
-    </ng-container>
 
-    <ng-container *ngIf="contexto == 'desafio'">
-        <span class="group">Desafios</span>
-        <li class="categoria" (click)="goTo('/desafios', {})">
-            <a>
-                <i class="fa fa-trophy icone-generico"></i>
-                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">TODOS</span>
-            </a>
-        </li>
-        <li class="categoria" *ngFor="let categoria of itens"
-            (click)="goTo('/desafios', { categoria: categoria.id })">
-            <a>
-                <i class="fa fa-trophy icone-generico"></i>
-                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{categoria.nome}}</span>
-            </a>
-        </li>
-    </ng-container>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Saque</span>
+                </a>
+            </li>
 
-    <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
-        <span class="group">Surpresinha</span>
-        <li class="supresinha" *ngFor="let tipoAposta of itens"
-            (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
-            <a *ngIf="contexto == 'seninha'">
-                <i class="fa fa-certificate icone-generico"></i>
-                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
-                            ( {{tipoAposta.cotacao6 | currency}} )</span>
-            </a>
-            <a *ngIf="contexto == 'quininha'">
-                <i class="fa fa-certificate icone-generico"></i>
-                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
-                            ( {{tipoAposta.cotacao5 | currency}} )</span>
-            </a>
-        </li>
-    </ng-container>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Deposito</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-middle">
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">Apostas</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-bottom">
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-comments icone-generico"></i>
+                    <span class="regiao-nome">Ajuda</span>
+                </a>
+            </li>
 
-    <ng-container *ngIf="contexto == 'cambista'">
-        <li class="cambista-menu">
-            <ul>
-                <li class="cambista-item">
-                    <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
-                        <i class="fa fa-key icone-generico"></i>
-                        <span class="regiao-nome">Alterar senha</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dashboard icone-generico"></i>
-                        <span class="regiao-nome">Dashboard</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-middle">
-                <li class="cambista-item">
-                    <a [routerLink]="['/validar-aposta']" routerLinkActive="router-link-active">
-                        <i class="fa fa-calendar-check icone-generico"></i>
-                        <span class="regiao-nome">Validacão</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/apuracao']" routerLinkActive="router-link-active">
-                        <i class="fa fa-calendar-check icone-generico"></i>
-                        <span class="regiao-nome">Apuracao</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/apostas']" routerLinkActive="router-link-active">
-                        <i class="fa fa-check-square icone-generico"></i>
-                        <span class="regiao-nome">Apostas</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
-                        <i class="fa fa-print icone-generico"></i>
-                        <span class="regiao-nome">Tabela</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-bottom">
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-comments icone-generico"></i>
-                        <span class="regiao-nome">Ajuda</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-sign-out icone-generico"></i>
-                        <span class="regiao-nome">Sair</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ng-container>
-
-    <ng-container *ngIf="contexto == 'cliente'">
-        <li class="cambista-menu">
-            <ul>
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/perfil']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user icone-generico"></i>
-                        <span class="regiao-nome">Perfil</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user icone-generico"></i>
-                        <span class="regiao-nome">PIX</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
-                        <i class="fa fa-user icone-generico"></i>
-                        <span class="regiao-nome">Alterar senha</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Financeiro</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Saque</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Deposito</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-middle">
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
-                        <i class="fa fa-check-square icone-generico"></i>
-                        <span class="regiao-nome">Apostas</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-bottom">
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-comments icone-generico"></i>
-                        <span class="regiao-nome">Ajuda</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-sign-out icone-generico"></i>
-                        <span class="regiao-nome">Sair</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ng-container>
-</ul>
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-sign-out icone-generico"></i>
+                    <span class="regiao-nome">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-container>
 
 
 

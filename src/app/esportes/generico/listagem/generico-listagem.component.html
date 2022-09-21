@@ -1,5 +1,18 @@
 <div class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
+    <app-banners [pagina]="esporte"></app-banners>
     <div class="wrap-sticky">
+
+        <div class="filter">
+            <input type="text" class="form-control inverted-out" [(ngModel)]="term" placeholder="Pesquisar">
+
+            <div class="tabs">
+                <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>
+                <a class="tab" [ngClass]="{'active': tabSelected == 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
+                <a class="tab" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('dddd') | titlecase }}</a>
+                <a class="tab" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('dddd') | titlecase  }}</a>
+            </div>
+        </div>
+
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
         <div *ngIf="!showLoadingIndicator">
@@ -11,7 +24,7 @@
                 </button>
             </div>
 
-            <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
+            <div class="campeonato" *ngFor="let campeonato of campeonatos | filter:term; trackBy: trackById">
                 <div class="campeonato-header">
                     <span class="campeonato-nome">{{campeonato.nome}}</span>
                 </div>
@@ -33,9 +46,11 @@
                                                 <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png"
                                                      class="escudo-img" size="s">
                                             </span>
-                                            <ng-template #defaulImageA class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                     class="escudo-img">
+                                            <ng-template #defaulImageA>
+                                                <span class="escudo">
+                                                    <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                        class="escudo-img">
+                                                </span>
                                             </ng-template>
                                         </div>
                                         {{jogo.time_a_nome}}
@@ -44,11 +59,13 @@
                                         <div *ngIf="exibirEscudo()">
                                             <span *ngIf="jogo.time_b_img; else defaulImageB" class="escudo">
                                                 <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_b_img}}.png"
-                                                     class="escudo-img" size="s">
+                                                    class="escudo-img" size="s">
                                             </span>
-                                            <ng-template #defaulImageB class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                     class="escudo-img">
+                                            <ng-template #defaulImageB>
+                                                <span class="escudo">
+                                                    <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                        class="escudo-img">
+                                                </span>
                                             </ng-template>
                                         </div>
                                         {{jogo.time_b_nome}}

@@ -8,13 +8,15 @@ import { BasqueteJogoComponent } from './basquete-jogo/basquete-jogo.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { JogoService } from '../../services';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
     imports: [
         SharedModule,
         GenericoRoutingModule,
         NgbNavModule,
-        NgbCarouselModule
+        NgbCarouselModule,
+        Ng2SearchPipeModule
     ],
     declarations: [
         GenericoWrapperComponent,

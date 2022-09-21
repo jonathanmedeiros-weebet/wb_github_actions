@@ -1,11 +1,18 @@
 .filtros {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 .filtros input, .filtros select {
     margin-right: 20px;
+}
+
+.filtros > input, .filtros .datepicker-group {
+    max-width: 300px;
+}
+
+.filtros select {
+    max-width: 150px;
 }
 
 .info-resultado {
@@ -16,6 +23,22 @@
 }
 
 
+select {
+    background-image:
+      linear-gradient(45deg, transparent 50%, white 50%),
+      linear-gradient(135deg, white 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    appearance: none;
+}
+
 .table {
    color: #fff;
 }
@@ -24,7 +47,7 @@
     background-color: #0A0A0A;
     border-top: 0;
     border-bottom: 1px solid #0A0A0A;
-    padding: 10px 10px 16px;
+    padding: 15px 10px;
 }
 
 .table thead th:first-child {
@@ -59,13 +82,13 @@
 .datepicker-group i {
     position: absolute;
     z-index: 100;
-    top: 8px;
-    left: 10px;
-    font-size: 20px;
+    top: 12px;
+    right: 32px;
+    font-size: 14px;
 }
 
 .datepicker-group input {
-    padding-left: 35px;
+    padding-right: 35px;
     border-radius: 5px;
 }
 

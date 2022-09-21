@@ -30,11 +30,11 @@
 .search-input i {
     position: absolute;
     top: 14px;
-    left: 10px;
+    left: 20px;
 }
 
 .search-input input {
-    padding-left: 30px;
+    padding-left: 40px;
 }
 
 input[type="checkbox"] {
@@ -122,4 +122,8 @@ ul li ul li:before {
 
 .actions {
     text-align: right;
+}
+
+.input-search {
+    max-width: 365px;
 }

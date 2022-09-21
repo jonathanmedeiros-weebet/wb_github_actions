@@ -8,13 +8,15 @@ import {FutebolJogoComponent} from './jogo/futebol-jogo.component';
 import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import {EsportesModule} from '../../esportes.module';
 import {RegioesDestaqueService} from '../../../services';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
     imports: [
         SharedModule,
         FutebolDefaultRoutingModule,
         NgbNavModule,
-        EsportesModule
+        EsportesModule,
+        Ng2SearchPipeModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,

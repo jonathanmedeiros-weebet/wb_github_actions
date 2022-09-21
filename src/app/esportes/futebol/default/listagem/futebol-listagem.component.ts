@@ -66,6 +66,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     sidebarNavIsCollapsed = false;
     maxOddsSize;
     unsub$ = new Subject();
+    term = '';
+
+    depoisdepoisdeamanha;
+    depoisdeamanha;
+
+    tabSelected;
 
     @HostListener('window:resize', ['$event'])
     onResize() {
@@ -131,6 +137,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     ngOnInit() {
+        this.depoisdeamanha = moment().add(2, 'd');
+        this.depoisdepoisdeamanha = moment().add(3, 'd');
         this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
@@ -438,6 +446,34 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         return result;
+    }
+
+    mudarData(dia) {
+        let data;
+
+        switch (dia) {
+            case 'amanha':
+                this.tabSelected = 'amanha';
+                data = moment().add(1, 'd').format('YYYY-MM-DD');
+                break;
+            case '+2':
+                this.tabSelected = 'doisdias';
+                data = moment().add(2, 'd').format('YYYY-MM-DD');
+                break;
+            case '+3':
+                this.tabSelected = 'tresdias';
+                data = moment().add(3, 'd').format('YYYY-MM-DD');
+                break;
+            default:
+                this.tabSelected = null;
+                data = '';
+                break;
+        }
+
+        const navigationExtras: NavigationExtras = {
+            queryParams: data ? { 'data': data } : {}
+        };
+        this.router.navigate(['/esportes/futebol'], navigationExtras);
     }
 
     proximaData() {

@@ -8,6 +8,9 @@ ul li {
     margin: 0;
     overflow: scroll;
     overflow-x: hidden;
+
+    flex: 1 1 auto;
+    height: 0px;
 }
 
 .sidebar-nav .regiao:last-of-type,
@@ -59,7 +62,6 @@ ul li {
     min-height: 22px;
     clip-path: circle();
     z-index: 1;
-    border: 1px solid var(--foreground-header);
     border-radius: 100%;
 }
 
@@ -143,23 +145,29 @@ ul li {
     }
 }
 
-.collapsed .cambista-menu a {
-    padding-left: 15px !important;
-}
-
 .cambista-menu a {
     transition: 0.15s all ease;
     white-space: nowrap;
     height: 45px;
+
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--foreground-sidebar-left);
 }
 
-.collapsed .cambista-menu a span {
-    display: none;
+.cambista-menu a span {
+    flex: 1;
 }
 
 .cambista-menu {
     display: flex;
     flex-direction: column;
+
+    flex: 1 1 auto;
+    height: 0px;
 }
 
 .cambista-menu ul {
@@ -167,7 +175,16 @@ ul li {
     font-size: 14px;
 }
 
+.collapsed.cambista-menu ul li a span, .collapsed.cambista-menu .sub-nav-container {
+    display: none;
+}
+
+.collapsed.cambista-menu a {
+    padding-left: 15px !important;
+}
+
 .cambista-menu ul.menu-middle {
+    flex-grow: 1;
     margin-top: 30px;
     padding-top: 10px;
     border-top: 1px solid #333;
@@ -175,10 +192,11 @@ ul li {
 
 .cambista-menu a {
     border-left: 3px solid transparent;
-    padding-left: 30px !important;
+    padding-left: 30px;
 }
 
-.cambista-menu a.router-link-active {
+.cambista-menu a.router-link-active,
+li.router-link-active > a {
     color: #35cc95;
     border-left: 3px solid #35cc95;
 }
@@ -193,4 +211,46 @@ ul li {
     width: 20px;
     font-size: 16px;
     margin-right: 10px;
+}
+
+.cambista-menu .cambista-item .sub-nav-container ul .cambista-subitem a {
+    padding: 5px 5px 5px 60px !important;
+    height: auto;
+    font-size: 12px;
+    border: 0;
+}
+
+
+.consulta-bilhete .input-consulta {
+    padding: 20px 12px;
+    display: flex;
+}
+
+.consulta-bilhete .input-consulta input{
+    padding: 10px 15px;
+    border-radius: 5px 0px 0px 5px;
+    flex: 1;
+}
+
+.consulta-bilhete .input-consulta button{
+    background-color: #35cc95;
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    padding: 0 10px;
+}
+
+.regiao .regiao-nome {
+    flex: 1;
+}
+
+.regiao > a::after {
+    content:url('/assets/images/expand.svg');
+    position:relative;
+    /* transition: all 0.5s; */
+}
+
+.regiao > a.selected::after {
+    -webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	transform: rotate(180deg);
 }

@@ -13,12 +13,12 @@
                             <div class="col-md-2">
                                 <label class="label">Nome</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="nome" class="form-control inverted-out">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="sobrenome" class="form-control inverted-out">
                                 </div>
@@ -28,7 +28,7 @@
                             <div class="col-md-2">
                                 <label class="label">CPF</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out">
                                 </div>
@@ -38,7 +38,7 @@
                             <div class="col-md-2">
                                 <label class="label">Data de Nascimento</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" class="form-control inverted-out" formControlName="nascimento">
                                 </div>
@@ -48,7 +48,7 @@
                             <div class="col-md-2">
                                 <label class="label">Sexo</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" class="form-control inverted-out" formControlName="sexo">
                                 </div>
@@ -61,10 +61,10 @@
                             <div class="col-md-2">
                                 <label class="label">Telefone</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" formControlName="telefone" placeholder="(00)00000-0000"
-                                        mask="(00)00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
+                                    <input type="text" formControlName="telefone" placeholder="(00) 00000-0000"
+                                        mask="(00) 00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
                                     <app-error-msg [control]="form.get('telefone')"></app-error-msg>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                             <div class="col-md-2">
                                 <label class="label">Email</label>
                             </div>
-                            <div class="col col-md-5">
+                            <div class="col col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="email" class="form-control inverted-out"
                                         placeholder="exemplo@email.com">
@@ -88,7 +88,7 @@
                             <div class="col-md-2">
                                 <label class="label">CEP</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="cep" placeholder="00000-000" mask="00000-000"
                                         class="form-control inverted-out" (change)="buscarPorCep($event)">
@@ -111,7 +111,7 @@
                             <div class="col-md-2">
                                 <label class="label">Nº</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="numero" class="form-control inverted-out">
                                     <app-error-msg [control]="form.get('numero')"></app-error-msg>
@@ -133,7 +133,7 @@
                             <div class="col-md-2">
                                 <label class="label">Estado</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select formControlName="estado" type="text" class="form-control inverted-out"
                                         (change)="getCidades($event)">
@@ -149,7 +149,7 @@
                             <div class="col-md-2">
                                 <label class="label">Cidade</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <select formControlName="cidade" class="form-control inverted-out">
                                         <option value="0">Selecione a cidade</option>
@@ -166,7 +166,7 @@
                             <div class="col-md-2">
                                 <label class="label">Senha Atual</label>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                      <input type="password" formControlName="senha_atual" class="form-control inverted-out">
                                     <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>

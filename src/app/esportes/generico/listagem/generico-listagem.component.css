@@ -63,3 +63,39 @@
     border-color: var(--event-time);
     color: var(--event-time);
 }
+
+
+.filter {
+    display: flex;
+    margin: 10px 0;
+
+    align-items: center;
+}
+
+.filter .tabs {
+    background: #0A0A0A;
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+}
+
+.filter .tabs .tab {
+    color: #fff;
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    border-bottom: 3px solid transparent;
+}
+
+.filter .tabs .tab.active {
+    border-color: #35cc95;
+    font-weight: 600;
+}

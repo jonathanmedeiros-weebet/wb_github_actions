@@ -18,6 +18,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     unsub$ = new Subject();
     isCliente;
 
+    mostrarSenhaAtual = false;
+    mostrarSenhaNova = false;
+    mostrarSenhaConfirmacao = false;
+
     constructor(
         private messageService: MessageService,
         private auth: AuthService,
@@ -32,6 +36,22 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.createForm();
         this.isCliente = this.auth.isCliente();
         this.menuFooterService.setIsPagina(true);
+    }
+
+    toggleMostrarSenha(reference) {
+        switch (reference) {
+            case 'senhaAtual':
+                this.mostrarSenhaAtual = !this.mostrarSenhaAtual;
+                break;
+            case 'senhaNova':
+                this.mostrarSenhaNova = !this.mostrarSenhaNova;
+                break;
+            case 'senhaConfirmacao':
+                this.mostrarSenhaConfirmacao = !this.mostrarSenhaConfirmacao;
+                break;
+            default:
+                break;
+        }
     }
 
     ngOnDestroy() {
@@ -73,11 +93,19 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }
     }
 
+    resetarForm() {
+        this.form.reset();
+    }
+
     success() {
         this.messageService.success('Alterações realizadas com sucesso!');
     }
 
     handleError(error: string) {
         this.messageService.error(error);
+    }
+
+    mostrarSenha(event: any) {
+
     }
 }

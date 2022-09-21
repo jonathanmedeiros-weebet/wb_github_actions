@@ -9,7 +9,7 @@ import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {Router} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginModalComponent } from '../modals';
+import { CadastroModalComponent, LoginModalComponent } from '../modals';
 
 @Component({
     selector: 'app-header',
@@ -212,11 +212,23 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         };
     }
 
+    abrirCadastro() {
+        this.modalRef = this.modalService.open(
+            CadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+            }
+        );
+    }
+
     abrirLogin() {
         this.modalRef = this.modalService.open(
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
                 centered: true,
             }
         );

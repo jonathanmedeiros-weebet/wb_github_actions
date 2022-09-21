@@ -146,8 +146,10 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
         this.preencherDias();
 
-        const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
-        this.heightSidebarNav = window.innerHeight - (alturaMenuFixo + this.headerHeight);
+        const elSideBar = this.el.nativeElement.querySelector('#sidebar-wrapper');
+        let height =  window.innerHeight - this.headerHeight;
+
+        this.renderer.setStyle(elSideBar, 'height', `${height}px`);
 
         // this.sidebarService.itens
         //     .pipe(takeUntil(this.unsub$))

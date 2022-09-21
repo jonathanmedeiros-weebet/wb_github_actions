@@ -41,6 +41,12 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     total;
     loadingScroll = false;
     unsub$ = new Subject();
+    term = "";
+
+    depoisdepoisdeamanha;
+    depoisdeamanha;
+
+    tabSelected;
 
     constructor(
         private bilheteService: BilheteEsportivoService,
@@ -53,6 +59,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     ) { }
 
     ngOnInit() {
+        this.depoisdeamanha = moment().add(2, 'd');
+        this.depoisdepoisdeamanha = moment().add(3, 'd');
         this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
@@ -203,6 +211,35 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     jogoBloqueado(eventId) {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
+    }
+
+    mudarData(dia) {
+        let data;
+
+        switch (dia) {
+            case 'amanha':
+                this.tabSelected = 'amanha';
+                data = moment().add(1, 'd').format('YYYY-MM-DD');
+                break;
+            case '+2':
+                this.tabSelected = 'doisdias';
+                data = moment().add(2, 'd').format('YYYY-MM-DD');
+                break;
+            case '+3':
+                this.tabSelected = 'tresdias';
+                data = moment().add(3, 'd').format('YYYY-MM-DD');
+                break;
+            default:
+                this.tabSelected = null;
+                data = '';
+                break;
+        }
+
+        const navigationExtras: NavigationExtras = {
+            queryParams: data ? { 'data': data } : {}
+        };
+
+        this.router.navigate([this.router.url.split('?')[0]], navigationExtras);
     }
 
     exibirMais() {

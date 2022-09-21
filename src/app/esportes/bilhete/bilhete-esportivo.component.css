@@ -254,7 +254,7 @@ input {
     position: absolute;
     display: block;
     transform: translate(0, -50%);
-    top: 53%;
+    top: 50%;
     pointer-events: none;
     width: 25px;
     text-align: center;

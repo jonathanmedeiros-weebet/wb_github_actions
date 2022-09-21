@@ -34,7 +34,7 @@ import {
     CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent, RecargaSuccessModalComponent,
-    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent
+    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent, EsqueceuSenhaModalComponent, CadastroModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -46,6 +46,7 @@ import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
 
 import {NgxCurrencyModule} from 'ngx-currency';
 import {BannersComponent} from './banners/banners.component';
+import { ResultadosModalComponent } from './modals/resultados-modal/resultados-modal.component';
 
 @NgModule({
     imports: [
@@ -103,6 +104,9 @@ import {BannersComponent} from './banners/banners.component';
         SidebarNavComponent,
         SidebarMenuComponent,
         LoginModalComponent,
+        EsqueceuSenhaModalComponent,
+        CadastroModalComponent,
+        ResultadosModalComponent,
         BannersComponent
     ],
     exports: [

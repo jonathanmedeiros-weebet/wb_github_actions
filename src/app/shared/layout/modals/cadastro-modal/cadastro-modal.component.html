@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <img src="/assets/images/logo-weebet.svg" alt="">
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="/assets/images/close.svg" alt="fechar" width="15">
+    </a>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <input type="hidden" formControlName="casino" value="true">
+        <h3>Informações pessoais</h3>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" formControlName="nome"
+                        [ngClass]="applyCssInputError('nome')" placeholder="Nome">
+                    <app-error-msg [control]="form.get('nome')" label="Nome" class="text-left"></app-error-msg>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group" [ngClass]="applyCssDivError('sobrenome')">
+                    <input type="text" class="form-control" [ngClass]="applyCssInputError('sobrenome')"
+                        formControlName="sobrenome" placeholder="Sobrenome">
+                    <app-error-msg [control]="form.get('sobrenome')" label="Sobrenome" class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" formControlName="data_nascimento"
+                        [ngClass]="applyCssInputError('data_nascimento')" placeholder="Data de Nascimento">
+                    <app-error-msg [control]="form.get('data_nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group" [ngClass]="applyCssDivError('sexo')">
+                    <input type="text" class="form-control" [ngClass]="applyCssInputError('sexo')"
+                        formControlName="sexo" placeholder="Sexo">
+                    <app-error-msg [control]="form.get('sexo')" label="Sexo" class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" formControlName="cpf"
+                        [ngClass]="applyCssInputError('cpf')" placeholder="CPF">
+                    <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
+        <h3>Informações de contato</h3>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" formControlName="telefone"
+                        [ngClass]="applyCssInputError('telefone')" placeholder="Telefone">
+                    <app-error-msg [control]="form.get('telefone')" label="Telefone" class="text-left"></app-error-msg>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group" [ngClass]="applyCssDivError('email')">
+                    <input type="text" class="form-control" [ngClass]="applyCssInputError('email')"
+                        formControlName="email" placeholder="Email">
+                    <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
+        <h3>Criar login</h3>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" formControlName="username"
+                        [ngClass]="applyCssInputError('username')" placeholder="Usuário">
+                    <app-error-msg [control]="form.get('username')" label="Usuário" class="text-left"></app-error-msg>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group" [ngClass]="applyCssDivError('password')">
+                    <input type="text" class="form-control" [ngClass]="applyCssInputError('password')"
+                        formControlName="password" placeholder="Senha">
+                    <app-error-msg [control]="form.get('password')" label="Senha" class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control" formControlName="confirmar-senha"
+                        [ngClass]="applyCssInputError('confirmar-senha')" placeholder="Confirmar Senha">
+                    <app-error-msg [control]="form.get('confirmar-senha')" label="Confirmar Senha" class="text-left"></app-error-msg>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group" [ngClass]="applyCssDivError('codigo_afiliado')">
+                    <input type="text" class="form-control" [ngClass]="applyCssInputError('codigo_afiliado')"
+                        formControlName="codigo_afiliado" placeholder="Código de afiliação(Opcional)">
+                    <app-error-msg [control]="form.get('codigo_afiliado')" label="Código de afiliação(Opcional)" class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for=""><input type="checkbox"> Certifico que tenho mais de 18 anos de idade e  declaro que li e concordo com os termos de uso</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">Cadastrar</button>
+    </form>
+</div>
+
