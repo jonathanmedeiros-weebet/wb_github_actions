@@ -260,7 +260,9 @@
         "betsmania.live": "gulp betsmania.live",
         "ggdasorte.bet": "gulp ggdasorte.bet",
         "bets2you.com": "gulp bets2you.com",
-        "tigrebet.wee.bet": "gulp tigrebet.wee.bet"
+        "tigrebet.wee.bet": "gulp tigrebet.wee.bet",
+        "bnsapostas.wee.bet": "gulp bnsapostas.wee.bet",
+        "casadeapostas.club": "gulp casadeapostas.club"
     },
     "private": true,
     "dependencies": {

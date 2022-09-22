@@ -2395,3 +2395,21 @@ gulp.task('tigrebet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bnsapostas.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bnsapostas.wee.bet",
+        banca: "BNS APOSTAS",
+        styles: "",
+    });
+});
+
+gulp.task('casadeapostas.club', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "casadeapostas.club",
+        banca: "CASA DE APOSTAS",
+        styles: "",
+    });
+});
