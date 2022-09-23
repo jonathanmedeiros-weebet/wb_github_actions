@@ -1749,6 +1749,8 @@ gulp.task('kbet.wee.bet', function (done) {
         shared_url: "kbet.com.br",
         banca: "Kbet - Jogos Online",
         styles: "",
+        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #jogo-default-wrapper{ background: #5C5C5C!important } .jogos, .eventos{ background: #5C5C5C!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #5C5C5C!important; } .footer{ background-color:#5C5C5C!important; }" +
+            ".jogo-container .indentificacao-mobile, .jogo-container .indentificacao, .jogo-container .campeonato-nome{background: #e1e2e4;} .indentificacao .tempo{color: #fff!important;} .inside-event .tipo-apostas{ background-color: #5C5C5C!important; color: white!important; } #esportes-footer{ color:white; }",
         scripts: "<!-- Global site tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=UA-230643592-1'> </script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-230643592-1'); </script>"
     });
 });
