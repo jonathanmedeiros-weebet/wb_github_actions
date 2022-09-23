@@ -2416,3 +2416,30 @@ gulp.task('casadeapostas.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ster.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ster.wee.bet",
+        banca: "STER.WEE.BET",
+        styles: "",
+    });
+});
+
+gulp.task('ricardo.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "ricardo.wee.bet",
+        banca: "RICARDO.WEE.BET",
+        styles: "",
+    });
+});
+
+gulp.task('vipersports.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "vipersports.bet",
+        banca: "VIPER SPORTS",
+        styles: "",
+    });
+});

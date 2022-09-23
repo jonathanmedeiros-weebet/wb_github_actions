@@ -262,7 +262,10 @@
         "bets2you.com": "gulp bets2you.com",
         "tigrebet.wee.bet": "gulp tigrebet.wee.bet",
         "bnsapostas.wee.bet": "gulp bnsapostas.wee.bet",
-        "casadeapostas.club": "gulp casadeapostas.club"
+        "casadeapostas.club": "gulp casadeapostas.club",
+        "ster.wee.bet": "gulp ster.wee.bet",
+        "ricardo.wee.bet": "gulp ricardo.wee.bet",
+        "vipersports.bet":  "gulp vipersports.bet"
     },
     "private": true,
     "dependencies": {
