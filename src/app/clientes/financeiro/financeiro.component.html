@@ -71,7 +71,13 @@
                                         <ng-template #iconeDebito>
                                             <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
                                         </ng-template>
-                                        {{movimentacao.natureza | formatarNatureza}} <span
+                                        {{movimentacao.natureza | formatarNatureza}}
+                                        <span
+                                            *ngIf="movimentacao.saque &&
+                                            movimentacao.saque.id_psp !== null &&
+                                            movimentacao.saque.status === 'PENDENTE'">(Em Processamento)
+                                        </span>
+                                        <span
                                         *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
                                     </td>
                                     <td class="custom-td" rowspan="2"
