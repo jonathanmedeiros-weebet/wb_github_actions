@@ -50,6 +50,7 @@
                         <th>Detalhes</th>
                         <th width="200">Status</th>
                         <th width="200">Valor</th>
+                        <th width="1"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +59,11 @@
                         <td>Saque - Registrado {{ saque.data }}</td>
                         <td>{{ saque.status }}</td>
                         <td>{{ saque.valor | currency}}</td>
+                        <td>
+                            <a class="btn-cancelar" *ngIf="exibirCancelarSolicitacaoSaque(saque)" (click)="cancelarSolicitacaoSaque(saque.id)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

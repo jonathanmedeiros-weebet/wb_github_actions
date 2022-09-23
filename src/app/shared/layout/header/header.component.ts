@@ -228,7 +228,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                windowClass: 'modal-600',
                 centered: true,
             }
         );

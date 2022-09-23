@@ -25,12 +25,13 @@
 }
 
 .jogo{
-    padding: 5px 10px;
+    padding: 5px 0;
 }
 
 .indentificacao{
     display: flex;
-    align-items: center;
+    align-items: stretch;
+    height: auto;
 }
 
 .indentificacao .horario{
@@ -45,12 +46,18 @@
     display: flex;
     flex-grow: 1;
     font-weight: 700;
+    height: auto;
+}
+
+.indentificacao .mais-opcoes {
+    height: auto;
 }
 
 .indentificacao .time-a{
     display: flex;
     align-items: center;
     width: 50%;
+    max-width: 450px;
     justify-content: flex-start;
 }
 
@@ -58,6 +65,7 @@
     display: flex;
     align-items: center;
     width: 50%;
+    max-width: 450px;
     justify-content: flex-start;
 }
 
@@ -71,6 +79,9 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
+
+    background-color: #0a0a0a;
+    margin-right: 5px;
 }
 
 .indentificacao .tempo {
@@ -213,4 +224,32 @@
 .filter .tabs .tab.active {
     border-color: #35cc95;
     font-weight: 600;
+}
+
+.cotacoes {
+    display: flex;
+    background-color: #0A0A0A;
+    margin-right: 5px;
+}
+
+.cotacoes .cotacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: #181818;
+    padding: 8px 10px;
+    min-width: 80px;
+
+    margin: 10px;
+}
+
+.cotacoes .cotacao.selecionado {
+    background-color: #35cc95;
+    color: #0A0A0A;
+}
+
+.cotacoes .cotacao label {
+    margin: 0;
 }

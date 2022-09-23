@@ -20,7 +20,7 @@ import {
 import {NavigationExtras, Router} from '@angular/router';
 
 import {Campeonato, Jogo} from './../../../../models';
-import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService} from './../../../../services';
+import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService} from './../../../../services';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -86,6 +86,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
+        private jogoService: JogoService,
         private router: Router
     ) {
     }

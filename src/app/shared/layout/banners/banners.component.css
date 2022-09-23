@@ -10,6 +10,10 @@
     object-fit: cover;
 }
 
+.banners.cassino img {
+    max-height: 300px;
+}
+
 .carousel {
     border-radius: 12px;
     overflow: hidden;

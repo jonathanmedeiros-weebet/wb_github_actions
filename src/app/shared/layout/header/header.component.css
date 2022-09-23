@@ -542,3 +542,9 @@ nav::-webkit-scrollbar {
     margin-right: 10px;
     border-radius: 50%;
 }
+
+.modal-header {
+    border-bottom-color: #3b3b3b;
+    padding: 20px 35px;
+    background: #0A0A0A;
+}

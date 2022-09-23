@@ -117,7 +117,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             EsqueceuSenhaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                windowClass: 'modal-600',
                 centered: true,
             }
         );

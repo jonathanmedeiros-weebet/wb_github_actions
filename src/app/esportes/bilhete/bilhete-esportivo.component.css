@@ -182,8 +182,8 @@
 }
 
 #aposta-deslogado .active {
-    background: var(--odds);
-    color: var(--foreground-odds);
+    color: #35cd96;
+    border-bottom: 2px solid #35cd96;
 }
 
 #aposta-deslogado .aposta-item {
@@ -264,7 +264,6 @@ input {
 
 .input-icon > input {
     padding-left: 30px;
-    padding-right: 0;
 }
 
 .hide {
@@ -310,6 +309,23 @@ input {
     animation-name: closeValores;
     animation-duration: 500ms;
     animation-fill-mode: both;
+}
+
+.modal-footer {
+    background-color: #0a0a0a;
+}
+
+.tabs {
+    border-bottom: 2px solid #181818;
+}
+
+.tabs .tab {
+    padding: 20px 10px 10px;
+    display: inline-block;
+    margin-bottom: -2px;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 @keyframes openValores {

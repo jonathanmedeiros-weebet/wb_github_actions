@@ -402,7 +402,6 @@ header {
 
 .input-icon > input {
     padding-left: 30px;
-    padding-right: 0;
 }
 /* Fim Bilhete Redesign */
 
@@ -634,9 +633,17 @@ button {
     z-index: 9002;
 }
 
-.modal-header, .modal-body{
-    background-color: #181818;
+.modal-header, .modal-body, .modal-footer{
+    background-color: #0A0A0a;
     color: #FFFFFF;
+}
+
+.modal-header {
+    border-bottom: 1px solid #3b3b3b;
+}
+
+.modal-footer {
+    border-top: 1px solid #3b3b3b;
 }
 
 /*.indentificacao .horario {*/
@@ -1483,4 +1490,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .w-150 {
     width: 150px;
+}
+
+
+.modal-600 .modal-dialog {
+    max-width: 600px;
 }

@@ -1,3 +1,9 @@
+.jogo-container {
+    height: calc(100vh - 132px);
+    display: flex;
+    flex-direction: column;
+}
+
 .indentificacao, .indentificacao-mobile{
     padding: 10px 10px 0 10px;
 }
@@ -35,9 +41,14 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 10px;
     font-weight: 400;
     max-width: 400px;
+
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-align: center;
+
+    font-size: 15px;
 }
 
 .indentificacao-jogo .nome {
@@ -64,9 +75,22 @@
 }
 
 .div-back{
-    color: red;
-    font-size: 2rem;
+    color: #35CC95;
+    font-size: 1.6rem;
     cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #181818;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 15px;
+    right: 25px;
 }
 
 .indentificacao .div-back{
@@ -105,9 +129,9 @@
 }
 
 .placar{
-    background: red;
     color: #fff;
     padding: 5px 10px;
+    font-size: 18px;
 }
 
 .time-a-placar{
@@ -120,24 +144,33 @@
     margin-right: 15px;
 }
 
-.indentificacao .aovivo-tempo{
+.indentificacao-jogo .aovivo-tempo {
     position: absolute;
-    left: 15px;
-    top: 26px;
+    left: 25px;
+    top: 20px;
 }
 
-.aovivo-tempo{
+.aovivo-tempo {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.aovivo-label{
+.aovivo-label {
     background-color: red;
     border-radius: 5px;
     color: #fff;
     padding: 3px 6px;
     margin-right: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aovivo-label i {
+    font-size: 8px;
+    margin-right: 5px;
 }
 
 .tempo{
@@ -145,32 +178,38 @@
     color: #000;
 }
 
-.campeonato-nome{
-    padding-bottom: 0;
-    margin-bottom: 0;
-    text-align: center;
-}
-
 .time-nome {
     margin-top: 5px;
 }
 
-.tipo-apostas{
-    background-color: #fff;
+.tipo-apostas {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.tipo-aposta{
+.tipo-apostas .tipo-aposta{
+    min-width: 50%;
+    max-width: 50%;
     padding: 10px;
     border-top: 1px solid #ddd;
     text-transform: uppercase;
+}
+
+.header-tipo-aposta {
+    background-color: #0a0a0a;
+    padding: 7px 15px;
+    margin-bottom: 2px;
 }
 
 .odds .odd{
     width: 100%;
 }
 
-.odds-coluna{
+.odds-coluna {
     width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .odds-jogador-coluna{
@@ -205,6 +244,14 @@
 
 .time-b-nome {
     width: 100%;
+}
+
+.odds {
+    height: auto;
+}
+
+.odds > div {
+    flex: 1;
 }
 
 /* Large devices (desktops, 1025px and up) */

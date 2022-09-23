@@ -217,6 +217,7 @@
 .evento-inner .horario {
     font-weight: 550;
     font-size: 11px;
+    text-align: left;
 }
 
 .evento-inner .jogo-nome {

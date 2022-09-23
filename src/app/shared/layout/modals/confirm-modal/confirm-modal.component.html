@@ -1,13 +1,15 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('')">
-    <span aria-hidden="true">&times;</span>
-  </button>
+    <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('')">
+        <img src="/assets/images/close.svg" alt="fechar" width="15">
+    </a>
 </div>
 <div class="modal-body">
-  <p>{{msg}}</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-dark" (click)="activeModal.dismiss('')" data-dismiss="modal">Não</button>
-  <button type="button" class="btn btn-primary" (click)="activeModal.close('')">Sim</button>
+    <p>{{msg}}</p>
+
+    <div class="actions">
+        <button type="button" class="btn btn-custom2" (click)="activeModal.dismiss('')" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-custom" (click)="activeModal.close('')">Sim</button>
+    </div>
 </div>

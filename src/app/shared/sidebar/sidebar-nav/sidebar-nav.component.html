@@ -12,33 +12,17 @@
 <ng-container *ngIf="contexto == 'esportes'">
     <ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}" style="position: relative">
         <ng-container *ngIf="contexto == 'esportes'">
-            <!--        <div *ngIf="regioesDestaque && !mobileScreen">-->
-            <!--            <span class="group">Destaques</span>-->
-            <!--            <li *ngFor="let regiao of regioesDestaque"-->
-            <!--                (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">-->
-            <!--                <a>-->
-            <!--                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>-->
-            <!--                    <span class="regiao-nome">{{regiao.nome}}</span>-->
-            <!--                </a>-->
-            <!--            </li>-->
-            <!--        </div>-->
-            <!--                <span class="group">Datas</span>-->
-            <!--                <li (click)="goTo('/esportes/' + esporte, {})">-->
-            <!--                    <a>-->
-            <!--                        Jogos de Hoje-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--                <li *ngIf="exibirJogosAmanha()"-->
-            <!--                    (click)="goTo('/esportes/' + esporte, { data: amanha.format('YYYY-MM-DD') })">-->
-            <!--                    <a>-->
-            <!--                        Jogos de Amanhã-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--                <li *ngFor="let dia of dias" (click)="goTo('/esportes/' + esporte, { data: dia.format })">-->
-            <!--                    <a>-->
-            <!--                        Jogos de {{dia.descricao}}-->
-            <!--                    </a>-->
-            <!--                </li>-->
+            <div *ngIf="regioesDestaque && !mobileScreen">
+                <span class="group">Destaques</span>
+                <li *ngFor="let regiao of regioesDestaque"
+                    (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
+                    <a>
+                        <img src="/assets/images/futebol.svg">
+                        <span class="regiao-nome">{{regiao.nome}}</span>
+                    </a>
+                </li>
+            </div>
+
             <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
                 <span class="group" *ngIf="!collapsed">Campeonatos</span>
                 <li class="regiao" *ngFor="let regiao of itens">

@@ -14,7 +14,7 @@
      background-color: #0A0A0A;
      border-top: 0;
      border-bottom: 1px solid #0A0A0A;
-     padding: 10px 10px 16px;
+     padding: 15px 10px;
  }
 
  .table thead th:first-child {
@@ -33,4 +33,25 @@
 
  .table td.no-border{
      border-left: 0 !important;
+ }
+
+
+ .btn-cancelar {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 1px;
+
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+ }
+
+ .btn-cancelar i {
+    color: #fff;
+    margin: 0;
  }

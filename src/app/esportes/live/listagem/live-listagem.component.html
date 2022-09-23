@@ -47,8 +47,10 @@
                                                     class="escudo-img" size="s">
                                             </span>
                                             <ng-template #defaulImageA class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                    class="escudo-img">
+                                                <span class="escudo">
+                                                    <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                        class="escudo-img">
+                                                </span>
                                             </ng-template>
                                         </div>
                                         <div class="nome-time">{{jogo.value.time_a_nome}}</div>
@@ -61,8 +63,10 @@
                                                     class="escudo-img" size="s">
                                             </span>
                                             <ng-template #defaulImageB class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/s/default.png"
-                                                    class="escudo-img">
+                                                <span class="escudo">
+                                                    <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                        class="escudo-img">
+                                                </span>
                                             </ng-template>
                                         </div>
                                         <div class="nome-time">{{jogo.value.time_b_nome}}</div>
@@ -70,6 +74,13 @@
                                     </div>
                                 </div>
 
+                                <div class="cotacoes">
+                                    <div class="cotacao" *ngFor="let cotacao of jogo.value.cotacoes"
+                                    (click)="addCotacao(jogo.value, cotacao)" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
+                                        <label>{{ cotacao.nome }}</label>
+                                        <span>{{ cotacao.valor }}</span>
+                                    </div>
+                                </div>
 
                                 <div class="mais-opcoes">
                                     <a (click)="maisCotacoes(jogo.value._id)" href="javascript:void(0)">

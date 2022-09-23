@@ -8,6 +8,8 @@ import { FinanceiroService } from '../../shared/services/financeiro.service';
 import { MenuFooterService } from "../../shared/services/utils/menu-footer.service";
 import { ParametrosLocaisService } from "../../shared/services/parametros-locais.service";
 import { SidebarService, AuthService } from 'src/app/services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -23,6 +25,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     valorMinSaque;
 
+    modalRef;
+
     saldo = 0;
     saques = [];
 
@@ -34,6 +38,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private menuFooterService: MenuFooterService,
         private paramsLocais: ParametrosLocaisService,
         private sidebarService: SidebarService,
+        private modalService: NgbModal,
         private auth: AuthService,
     ) {
         super();
@@ -124,6 +129,32 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.submitting = false;
                 }
             );
+    }
+
+    cancelarSolicitacaoSaque(solicitacaoSaqueId) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Cancelamento';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a solicitação de saque?';
+
+        this.modalRef.result.then(
+            () => {
+                this.financeiroService.cancelarSolicitacaoSaque(solicitacaoSaqueId)
+                    .subscribe(
+                        response => {
+                            this.messageService.success('Solicitação de Saque Cancelada');
+                            this.submit();
+                        },
+                        error => {
+                            this.handleError(error);
+                        }
+                    );
+            }
+        );
+    }
+
+    exibirCancelarSolicitacaoSaque(depositoSaque) {
+        return !depositoSaque.data_pagamento
+            && depositoSaque.status == 'PENDENTE';
     }
 
 }

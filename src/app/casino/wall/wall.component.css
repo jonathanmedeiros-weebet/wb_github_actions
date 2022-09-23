@@ -7,6 +7,8 @@
 .bloco {
     position: relative;
     padding: 5px 120px;
+    max-width: 1910px;
+    margin: 0 auto;
 }
 
 .bloco .bloco-header {
@@ -98,9 +100,8 @@
 }
 
 .game-tile img {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
     border-radius: 5px;
 }
 
@@ -112,6 +113,7 @@
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
+    top: 0;
 }
 
 .game-tile .game-button-play {
@@ -199,7 +201,6 @@
         width: var(--gameTileWidth);
         margin-left: 20px;
         margin-bottom: 20px;
-        height: calc(10vw + 30px);
     }
 
     .game-tile:nth-child(5n+1) {

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { JogoService } from 'src/app/services';
 import { RegioesDestaqueService } from "../../shared/services/regioes-destaque.service";
 
 @Component({
@@ -10,13 +11,14 @@ export class DestaquesComponent implements OnInit {
     @Output() regiaoSelecionada = new EventEmitter();
     regioesDestaque = null;
     exibindoRegiao = false;
-    exibirDestaques = true;
+    exibirDestaques = false;
     menuWidth;
     mobileScreen;
     jogosDestaque = [];
 
     constructor(
         private regioesDestaqueService: RegioesDestaqueService,
+        private jogoService: JogoService,
         private cd: ChangeDetectorRef
     ) { }
 
@@ -37,52 +39,11 @@ export class DestaquesComponent implements OnInit {
             this.menuWidth = window.innerWidth - 10;
         }
 
-        this.regioesDestaqueService.exibirDestaques
-            .subscribe(
-                exibirDestaques => {
-                    this.exibindoRegiao = false;
-                    this.exibirDestaques = exibirDestaques;
-                }
-            );
-
-        this.jogosDestaque = [
-            {
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },{
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },{
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },{
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },{
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },{
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },{
-                campeonato: 'Campeonato Brasileiro', horario: 'Hoje / 16:00',
-                time1: { nome: 'São Paulo', escudo: 'https://cdn.wee.bet/img/times/s/3292.png' },
-                time2: { nome: 'Itaquaquecetuba', escudo: 'https://cdn.wee.bet/img/times/s/1292.png' },
-                odds: [ { nome: 'Casa', cotacao: '2.00' }, { nome: 'Empate', cotacao: '2.00' }, { nome: 'Fora', cotacao: '2.00' } ]
-            },
-        ];
+        this.jogoService.getJogosDestaque()
+            .subscribe(jogos => {
+                console.log('JOGOS DESTA:', jogos);
+                this.jogosDestaque = jogos;
+            })
     }
 
     selecionarRegiao(regiao?) {

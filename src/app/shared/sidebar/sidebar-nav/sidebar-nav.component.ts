@@ -12,6 +12,7 @@ import { ApostaService } from '../../services/aposta.service';
 import { MessageService } from '../../services/utils/message.service';
 import { ApostaModalComponent } from '../../layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -26,6 +27,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     regiaoOpen;
     itens: any[];
     unsub$ = new Subject();
+    regioesDestaque;
 
     constructor(
         private router: Router,
@@ -35,6 +37,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         private supresinhaService: SupresinhaService,
         private messageService: MessageService,
         private modalService: NgbModal,
+        private regioesDestaqueService: RegioesDestaqueService,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
         private renderer: Renderer2
@@ -43,7 +46,18 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.regioesDestaqueService.setExibirDestaques(false);
         this.createForm();
+
+        this.regioesDestaqueService.getRegioesDestaque()
+            .subscribe(
+                res => {
+                    if (res.length > 0) {
+                        this.regioesDestaque = res;
+                        this.cd.detectChanges();
+                    }
+                }
+            );
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
