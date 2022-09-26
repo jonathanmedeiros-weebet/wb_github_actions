@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { InformacoesComponent } from './informacoes.component';
 
 const routes: Routes = [
-    { path: 'deposito', component: InformacoesComponent, data: { pagina: 'deposito' } },
     { path: 'regras', component: InformacoesComponent, data: { pagina: 'regras' } }
 ];
 
