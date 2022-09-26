@@ -19,7 +19,7 @@
                 <label class="label">Digite o código enviado para seu email:</label>
                 <input type="text" class="form-control form-control-lg" formControlName="codigo"
                     [ngClass]="applyCssInputError('codigo')">
-                <app-error-msg [control]="form.get('codigo')" label="Usuário"></app-error-msg>
+                <app-error-msg [control]="form.get('codigo')" label="Código"></app-error-msg>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
