@@ -103,13 +103,8 @@ export class ApostaModalComponent implements OnInit {
 
     compartilhamentoPermitido() {
         const opcoes = this.paramsLocais.getOpcoes();
-        let result = false;
 
-        if (opcoes.habilitar_compartilhamento_comprovante && this.isMobile) {
-            result = true;
-        }
-
-        return result;
+        return opcoes.habilitar_compartilhamento_comprovante;
     }
 
     impressaoPermitida() {
