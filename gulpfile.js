@@ -2443,3 +2443,12 @@ gulp.task('vipersports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportsbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportsbet.wee.bet",
+        banca: "SPORTS BET",
+        styles: "",
+    });
+});

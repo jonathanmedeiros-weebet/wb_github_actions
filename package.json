@@ -265,7 +265,8 @@
         "casadeapostas.club": "gulp casadeapostas.club",
         "ster.wee.bet": "gulp ster.wee.bet",
         "ricardo.wee.bet": "gulp ricardo.wee.bet",
-        "vipersports.bet":  "gulp vipersports.bet"
+        "vipersports.bet":  "gulp vipersports.bet",
+        "sportsbet.wee.bet": "gulp sportsbet.wee.bet"
     },
     "private": true,
     "dependencies": {
