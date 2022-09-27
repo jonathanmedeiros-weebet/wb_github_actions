@@ -135,6 +135,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
 
     submit() {
         const values = this.form.value;
+        const nascimentoTemp = values.nascimento;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
 
         this.submitting = true;
@@ -150,6 +151,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                 },
                 error => {
                     this.messageService.error(error);
+                    values.nascimento = nascimentoTemp;
                     this.submitting = false;
                 }
             );
