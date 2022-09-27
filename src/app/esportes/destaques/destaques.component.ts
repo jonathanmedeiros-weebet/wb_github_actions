@@ -9,12 +9,12 @@ import { RegioesDestaqueService } from "../../shared/services/regioes-destaque.s
 })
 export class DestaquesComponent implements OnInit {
     @Output() regiaoSelecionada = new EventEmitter();
+    @Input() jogosDestaque = [];
     regioesDestaque = null;
     exibindoRegiao = false;
     exibirDestaques = false;
     menuWidth;
     mobileScreen;
-    jogosDestaque = [];
 
     constructor(
         private regioesDestaqueService: RegioesDestaqueService,
@@ -24,26 +24,6 @@ export class DestaquesComponent implements OnInit {
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
-
-        if (this.mobileScreen) {
-            this.regioesDestaqueService.getRegioesDestaque()
-                .subscribe(
-                    regioesDestaque => {
-                        if (regioesDestaque.length > 0) {
-                            this.regioesDestaque = regioesDestaque;
-                            this.cd.detectChanges();
-                        }
-                    }
-                );
-
-            this.menuWidth = window.innerWidth - 10;
-        }
-
-        this.jogoService.getJogosDestaque()
-            .subscribe(jogos => {
-                console.log('JOGOS DESTA:', jogos);
-                this.jogosDestaque = jogos;
-            })
     }
 
     selecionarRegiao(regiao?) {
@@ -65,4 +45,10 @@ export class DestaquesComponent implements OnInit {
 
         return result;
     }
+
+    // maisCotacoes(jogoId) {
+    //     this.jogoIdAtual = jogoId;
+    //     this.jogoSelecionadoId.emit(jogoId);
+    //     this.exibirMaisCotacoes.emit(true);
+    // }
 }

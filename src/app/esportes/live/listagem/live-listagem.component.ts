@@ -62,9 +62,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         const jogos = new Map();
                         let temJogoValido = false;
 
-                        console.log(campeonato);
-                        console.log(campeonato.jogos);
-
                         campeonato.jogos.forEach(jogo => {
                             let valido = true;
 
@@ -240,9 +237,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             mudanca: false,
             cotacao_antiga_valor: null
         };
-
-        console.log('JOGO:', jogo);
-        console.log('ITEM:', item);
 
         if (indexGame >= 0) {
             if (indexOdd >= 0) {

@@ -1207,6 +1207,22 @@ input.inverted-out {
     font-size: 12px
 }
 
+select.inverted-out {
+    background-image:
+      linear-gradient(45deg, transparent 50%, white 50%),
+      linear-gradient(135deg, white 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) calc(1em + 4px),
+      calc(100% - 15px) calc(1em + 4px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    appearance: none;
+}
+
 input.inverted-out:focus {
     color: var(--foreground-header);
     background-color: var(--header);
@@ -1496,3 +1512,8 @@ input[type=number]::-webkit-outer-spin-button {
 .modal-600 .modal-dialog {
     max-width: 600px;
 }
+
+
+.btn.disabled, .btn:disabled {
+    opacity: 0.3;
+  }

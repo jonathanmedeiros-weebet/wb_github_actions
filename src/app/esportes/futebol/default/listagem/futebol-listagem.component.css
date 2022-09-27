@@ -86,8 +86,6 @@
 
     display: flex;
     align-items: center;
-
-    flex: 1;
 }
 
 .filter .tabs .tab {
@@ -104,6 +102,30 @@
 .filter .tabs .tab.active {
     border-color: #35cc95;
     font-weight: 600;
+}
+
+.search-box {
+    flex: 1;
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 30px;
+}
+
+.search-box i.fa-search {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    color: #747474;
+}
+
+.search-box i.fa-close {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    right: 10px;
 }
 
 @media only screen and (max-width: 1024px) {

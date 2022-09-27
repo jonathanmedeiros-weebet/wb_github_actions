@@ -1,26 +1,39 @@
 <ng-container *ngIf="jogosDestaque.length > 0">
     <ng-container>
         <div class="jogos-destaque">
-            <div class="jogo-destaque" *ngFor="let jogoDestaque of jogosDestaque">
+            <div class="jogo-destaque" (click)="maisCotacoes(jogo._id)" *ngFor="let jogoDestaque of jogosDestaque">
                 <div class="header">
                     <span>
-                        <i class="fa fa-flag"></i>
-                        {{ jogoDestaque.campeonato }}
+                        {{ jogoDestaque.campeonato.nome }}
                     </span>
                     <span>
-                        {{ jogoDestaque.horario }}
+                        {{ jogoDestaque.horario | moment: 'DD/MM/YYYY' }}
                     </span>
                 </div>
 
                 <div class="jogo">
                     <div class="time1">
-                        <span>{{ jogoDestaque.time1.nome }}</span>
-                        <img src="{{ jogoDestaque.time1.escudo }}" width="25">
+                        <span class="text-center">{{ jogoDestaque.time_a_nome }}</span>
+                        <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
+                            <img src="https://cdn.wee.bet/img/times/s/{{jogoDestaque.time_a_img}}.png" size="s" class="escudo-img">
+                        </span>
+                        <ng-template #defaulImage>
+                            <span class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/s/default.png" size="s" class="escudo-img">
+                            </span>
+                        </ng-template>
                     </div>
                     <span class="separador-times">-</span>
                     <div class="time2">
-                        <img src="{{ jogoDestaque.time2.escudo }}" width="25">
-                        <span>{{ jogoDestaque.time2.nome }}</span>
+                        <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
+                            <img src="https://cdn.wee.bet/img/times/s/{{jogoDestaque.time_b_img}}.png" size="s" class="escudo-img">
+                        </span>
+                        <ng-template #defaulImage>
+                            <span class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/s/default.png" size="s" class="escudo-img">
+                            </span>
+                        </ng-template>
+                        <span class="text-center flex-grow-1">{{ jogoDestaque.time_b_nome }}</span>
                     </div>
                 </div>
 
@@ -41,13 +54,4 @@
             </div>
         </div>
     </ng-container>
-
-    <div class="back-button" [hidden]="!exibindoRegiao">
-        <div class="menu-camp-destaques">
-            <a class="back" (click)="selecionarRegiao()">
-                <i class="fa fa-arrow-left"></i>
-                Voltar
-            </a>
-        </div>
-    </div>
 </ng-container>

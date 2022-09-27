@@ -1,7 +1,7 @@
-const _host = '//weebet.local';
-// const _host = '//central.demo.wee.bet';
-const _center = '//localhost:3002';
-// const _center = 'https://center6.wee.bet';
+const _host = '//192.168.0.147:8000';
+// const _host = '//central.sandbox.wee.bet';
+// const _center = '//localhost:3002';
+const _center = 'https://hermes.wee.bet';
 // const _live = 'https://streaming.wee.bet';
 const _live = '//localhost:3003';
 const _stats = 'https://stats.wee.bet';
@@ -12,7 +12,7 @@ export const config: any = {
     TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
-    SHARED_URL: '//weebet.local',
+    SHARED_URL: _host,
     CENTER_HOST: _center,
     LIVE_HOST: _live,
     STATS_HOST: _stats,

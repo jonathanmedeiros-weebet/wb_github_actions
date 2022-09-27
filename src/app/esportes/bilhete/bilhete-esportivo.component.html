@@ -126,7 +126,7 @@
                         </button>
                     </ng-container>
                     <ng-template #btnApostar>
-                        <button *ngIf="!disabled; else btnProcessando" class="btn btn-custom btn-block">
+                        <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none" class="btn btn-custom btn-block">
                             Apostar <b>({{itens.length}})</b>
                         </button>
                         <ng-template #btnProcessando>

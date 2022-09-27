@@ -93,7 +93,7 @@
     <section class="content-sports inside-event">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="jogo" *ngIf="!showLoadingIndicator">
-            <div class="tipo-apostas">
+            <div class="tipo-apostas mt-2">
                 <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercados); trackBy">
                     <div class="header-tipo-aposta">
                         <h4>{{mercados[chave].nome}}</h4>

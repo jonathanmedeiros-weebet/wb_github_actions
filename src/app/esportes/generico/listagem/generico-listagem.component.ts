@@ -213,6 +213,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
+    limparPesquisa() {
+        this.term = "";
+    }
+
     mudarData(dia) {
         let data;
 

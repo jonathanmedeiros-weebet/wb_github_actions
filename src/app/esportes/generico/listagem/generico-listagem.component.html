@@ -3,7 +3,11 @@
     <div class="wrap-sticky">
 
         <div class="filter">
-            <input type="text" class="form-control inverted-out" [(ngModel)]="term" placeholder="Pesquisar">
+            <div class="search-box" style="flex: 1">
+                <i class="fa fa-search"></i>
+                <input type="text" [(ngModel)]="term" class="form-control inverted-out" placeholder="Pesquisar">
+                <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
+            </div>
 
             <div class="tabs">
                 <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>

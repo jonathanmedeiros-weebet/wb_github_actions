@@ -62,9 +62,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
             .subscribe(dados => {
-                console.log('ITEMS:', dados)
-
-
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
 
@@ -114,8 +111,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                     modalRef.componentInstance.aposta = aposta;
                     modalRef.componentInstance.primeiraImpressao = true;
                     modalRef.componentInstance.showCancel = true;
-
-                    console.log(aposta);
                 },
                 error => this.messageService.error(error)
             );

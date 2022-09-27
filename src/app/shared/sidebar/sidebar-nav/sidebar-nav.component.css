@@ -106,9 +106,9 @@ ul li {
     padding-left: 19px;
 }
 
-/*.collapsed .regiao-nome {*/
-/*    opacity: 0;*/
-/*}*/
+.collapsed .regiao-nome {
+   display: none;
+}
 
 .hide-item {
     animation-name: hideAnim;
@@ -243,6 +243,10 @@ li.router-link-active > a {
     flex: 1;
 }
 
+.regiao-nome {
+    white-space: nowrap;
+}
+
 .regiao > a::after {
     content:url('/assets/images/expand.svg');
     position:relative;
@@ -253,4 +257,50 @@ li.router-link-active > a {
     -webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
 	transform: rotate(180deg);
+}
+
+.collapsed .regiao > a::after {
+    display: none;
+}
+
+.collapsed .destaques-regiao {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1a1a1a;
+}
+
+.collapsed .destaques-regiao li a {
+    justify-content: center;
+}
+
+.search-collapsed {
+    display: block;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 2px solid #1e1e1e;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.consulta-bilhete-collapsed  form {
+    display: none;
+    margin-top: -75px;
+    left: 50px;
+    padding: 10px;
+    position: absolute;
+    z-index: 900;
+    background: #0a0a0a;
+    border-radius: 4px;
+}
+
+.consulta-bilhete-collapsed  form input {
+    padding: 10px;
+}
+
+.consulta-bilhete-collapsed  form button {
+    padding: 6px 10px;
+    border: 1px solid #35cc95;
+    border-radius: 0 5px 5px 0;
+    background-color: #35cc95;
 }

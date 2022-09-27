@@ -188,7 +188,6 @@ export class ApostaComponent implements OnInit {
     }
 
     handleFiltrar() {
-        console.log('teste');
         this.getApostas();
     }
 

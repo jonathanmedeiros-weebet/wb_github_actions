@@ -68,6 +68,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     unsub$ = new Subject();
     term = '';
 
+    jogosDestaque = [];
+
     depoisdepoisdeamanha;
     depoisdeamanha;
 
@@ -202,6 +204,22 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             this.campeonatosAbertos = [];
             this.exibirMais();
 
+            this.jogoService.getJogosDestaque()
+            .subscribe(jogos => {
+                let jogosDestaquesIds = jogos.map(jogo => jogo.fi);
+                let jogosDestaques = [];
+
+                this.camps.forEach(camp => {
+                    let jogosSele = camp.jogos.filter(jogo => {
+                        return jogosDestaquesIds.includes(jogo._id + '');
+                    });
+
+                    jogosDestaques = jogosDestaques.concat(jogosSele);
+                });
+
+                this.jogosDestaque = jogosDestaques;
+            })
+
             if (this.camps.length > 0) {
                 setTimeout(() => {
                     let altura;
@@ -224,6 +242,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    limparPesquisa() {
+        this.term = "";
     }
 
     exibirMais() {

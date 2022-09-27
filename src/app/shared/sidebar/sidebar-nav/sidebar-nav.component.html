@@ -7,13 +7,25 @@
         </div>
     </form>
 </div>
+
+<div class="consulta-bilhete-collapsed " *ngIf="collapsed">
+    <a class="search-collapsed">
+        <i class="fa fa-search"></i>
+    </a>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" style="postion: absolute">
+        <div class="input-consulta">
+        <input type="text" placeholder="Consultar bilhete" formControlName="codigo">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+</div>
 </ng-container>
 
 <ng-container *ngIf="contexto == 'esportes'">
     <ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}" style="position: relative">
         <ng-container *ngIf="contexto == 'esportes'">
-            <div *ngIf="regioesDestaque && !mobileScreen">
-                <span class="group">Destaques</span>
+            <div class="destaques-regiao" *ngIf="regioesDestaque && !mobileScreen">
+                <span class="group" *ngIf="!collapsed">Destaques</span>
                 <li *ngFor="let regiao of regioesDestaque"
                     (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
                     <a>
@@ -43,7 +55,7 @@
                 </li>
             </ng-container>
             <ng-template #esporteGenerico>
-                <span class="group">Campeonatos</span>
+                <span class="group" *ngIf="!collapsed">Campeonatos</span>
                 <li class="campeonato" *ngFor="let campeonato of itens"
                     (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                     <a>
