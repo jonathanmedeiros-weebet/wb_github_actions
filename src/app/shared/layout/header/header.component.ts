@@ -9,7 +9,7 @@ import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {Router} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CadastroModalComponent, LoginModalComponent } from '../modals';
+import { AuthDoisFatoresModalComponent, CadastroModalComponent, LoginModalComponent } from '../modals';
 
 @Component({
     selector: 'app-header',
@@ -145,27 +145,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     createForm() {
-        this.form = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
-            password: [
-                '',
-                Validators.compose([Validators.required, Validators.minLength(2)])
-            ]
-        });
     }
 
     submit() {
-        this.auth.login(this.form.value)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                () => {
-                    this.getUsuario();
-                    if (this.usuario.tipo_usuario === 'cambista') {
-                        location.reload();
-                    }
-                },
-                error => this.handleError(error)
-            );
     }
 
     handleError(msg) {
@@ -232,5 +214,23 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 centered: true,
             }
         );
+    }
+
+    abrirModalAuthDoisFatores() {
+        this.modalRef = this.modalService.open(
+            AuthDoisFatoresModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+            }
+        );
+
+        this.modalRef.result
+            .then(
+                result => {
+                },
+                reason => {
+                }
+            );
     }
 }

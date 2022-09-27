@@ -43,7 +43,7 @@ export class CasinoApiService {
             );
     }
 
-    getGamesList(){
+    getGamesList() {
 
         return this.http.post(`${this.central_url}/games/`,{},this.header.getRequestOptions(true))
             .pipe(

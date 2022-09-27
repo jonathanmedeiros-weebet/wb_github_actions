@@ -15,3 +15,4 @@ export { ApostaEncerramentoModalComponent } from './aposta-encerramento-modal/ap
 export { LoginModalComponent } from './login-modal/login-modal.component';
 export { CadastroModalComponent } from './cadastro-modal/cadastro-modal.component';
 export { EsqueceuSenhaModalComponent } from './esqueceu-senha-modal/esqueceu-senha-modal.component';
+export { AuthDoisFatoresModalComponent } from './auth-dois-fatores-modal/auth-dois-fatores-modal.component';

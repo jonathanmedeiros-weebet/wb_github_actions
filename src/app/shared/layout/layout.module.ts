@@ -34,7 +34,9 @@ import {
     CartaoCadastroModalComponent, CartaoModalComponent,
     PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
     RecargaCartaoModalComponent, RecargaSuccessModalComponent,
-    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent, EsqueceuSenhaModalComponent, CadastroModalComponent
+    EsqueceuSenhaModalComponent, CadastroModalComponent,
+    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent,
+    AuthDoisFatoresModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -107,7 +109,8 @@ import { ResultadosModalComponent } from './modals/resultados-modal/resultados-m
         EsqueceuSenhaModalComponent,
         CadastroModalComponent,
         ResultadosModalComponent,
-        BannersComponent
+        BannersComponent,
+        AuthDoisFatoresModalComponent,
     ],
     exports: [
         MainLayoutComponent,

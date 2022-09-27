@@ -47,7 +47,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
             const params = new URLSearchParams(location.search);
