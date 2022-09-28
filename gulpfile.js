@@ -2452,3 +2452,12 @@ gulp.task('sportsbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('alphabetbr.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "alphabetbr.com",
+        banca: "ALPHABET BR",
+        styles: "",
+    });
+});
