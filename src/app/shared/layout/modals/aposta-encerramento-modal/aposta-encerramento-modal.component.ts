@@ -218,13 +218,8 @@ export class ApostaEncerramentoModalComponent implements OnInit {
 
     compartilhamentoPermitido() {
         const opcoes = this.paramsLocais.getOpcoes();
-        let result = false;
 
-        if (opcoes.habilitar_compartilhamento_comprovante) {
-            result = true;
-        }
-
-        return result;
+        return opcoes.habilitar_compartilhamento_comprovante;
     }
 
     cancelamentoPermitido() {

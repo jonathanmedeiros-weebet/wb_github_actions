@@ -2443,3 +2443,30 @@ gulp.task('vipersports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportsbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportsbet.wee.bet",
+        banca: "SPORTS BET",
+        styles: "",
+    });
+});
+
+gulp.task('atleticbet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "atleticbet.com",
+        banca: "ATLETIC BET",
+        styles: "",
+    });
+});
+
+gulp.task('nautsports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "nautsports.wee.bet",
+        banca: "NAUTSPORTS",
+        styles: "",
+    });
+});
