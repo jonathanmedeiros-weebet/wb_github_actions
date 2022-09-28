@@ -2461,3 +2461,12 @@ gulp.task('atleticbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nautsports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "nautsports.wee.bet",
+        banca: "NAUTSPORTS",
+        styles: "",
+    });
+});

@@ -267,7 +267,8 @@
         "ricardo.wee.bet": "gulp ricardo.wee.bet",
         "vipersports.bet":  "gulp vipersports.bet",
         "sportsbet.wee.bet": "gulp sportsbet.wee.bet",
-        "atleticbet.com": "gulp atleticbet.com"
+        "atleticbet.com": "gulp atleticbet.com",
+        "nautsports.wee.bet": "gulp nautsports.wee.bet"
     },
     "private": true,
     "dependencies": {
