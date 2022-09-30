@@ -24,6 +24,7 @@ import {CupomModule} from './cupom/cupom.module';
 import {ParametrosLocaisService} from './services';
 
 import {ToastrModule} from 'ngx-toastr';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -52,6 +53,7 @@ export const APP_TOKENS = [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         AppRoutingModule,
 
         LayoutModule,

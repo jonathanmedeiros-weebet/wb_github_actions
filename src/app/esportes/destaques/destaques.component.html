@@ -1,7 +1,7 @@
 <ng-container *ngIf="jogosDestaque.length > 0">
     <ng-container>
         <div class="jogos-destaque">
-            <div class="jogo-destaque" (click)="maisCotacoes(jogo._id)" *ngFor="let jogoDestaque of jogosDestaque">
+            <div class="jogo-destaque" *ngFor="let jogoDestaque of jogosDestaque" (click)="maisCotacoes(jogoDestaque._id)" >
                 <div class="header">
                     <span>
                         {{ jogoDestaque.campeonato.nome }}
@@ -38,17 +38,9 @@
                 </div>
 
                 <div class="jogo-destaque-odds">
-                    <div class="jogo-destaque-odd">
-                        Casa
-                        <span class="cotacao">2.00</span>
-                    </div>
-                    <div class="jogo-destaque-odd">
-                        Empate
-                        <span class="cotacao">2.00</span>
-                    </div>
-                    <div class="jogo-destaque-odd">
-                        Fora
-                        <span class="cotacao">2.00</span>
+                    <div *ngFor="let cotacao of jogoDestaque.cotacoes.slice(0, 3)" class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}" (click)="addCotacao($event, jogoDestaque, cotacao)">
+                        {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
+                        <span class="cotacao">{{ cotacao.valor }}</span>
                     </div>
                 </div>
             </div>

@@ -217,6 +217,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                     jogosDestaques = jogosDestaques.concat(jogosSele);
                 });
 
+                console.log(jogosDestaques);
+
                 this.jogosDestaque = jogosDestaques;
             })
 
@@ -453,6 +455,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     // Exibindo todas as cotações daquele jogo selecionado
     maisCotacoes(jogoId) {
+        console.log("NORMAL", jogoId);
         this.jogoIdAtual = jogoId;
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);

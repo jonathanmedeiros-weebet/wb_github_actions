@@ -3,169 +3,110 @@
         <div class="content-header">
             <h2>Apuração</h2>
             <div class="filters">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                            <div class="form-row">
-                                <div class="col-6 col-md-3">
-                                    <label>Periodo Inicial</label>
-                                    <input type="date" class="inverted-out form-control" formControlName="dataInicial">
-                                    <app-error-msg [control]="form.get('dataInicial')"
-                                                   label="Data inicial"></app-error-msg>
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <label>Periodo Final</label>
-                                    <input type="date" class="inverted-out form-control" formControlName="dataFinal">
-                                    <app-error-msg [control]="form.get('dataFinal')"
-                                                   label="Data inicial"></app-error-msg>
-                                </div>
-                                <div class="col-6 col-md-1">
-                                    <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
-                                </div>
-                            </div>
-                        </form>
+                <form (ngSubmit)="getResultado()" >
+                    <div class="form-row m-0">
+                        <input
+                            name="datepicker"
+                            class="dp-hidden"
+                            ngbDatepicker
+                            #datepicker="ngbDatepicker"
+                            [autoClose]="'outside'"
+                            (dateSelect)="onDateSelection($event, datepicker)"
+                            [displayMonths]="2"
+                            [dayTemplate]="t"
+                            outsideDays="hidden"
+                            [startDate]="fromDate!"
+                            tabindex="-1"
+                            value=""
+                        >
+                        <ng-template #t let-date let-focused="focused">
+                            <span class="custom-day"
+                                    [class.focused]="focused"
+                                    [class.range]="isRange(date)"
+                                    [class.faded]="isHovered(date) || isInside(date)"
+                                    (mouseenter)="hoveredDate = date"
+                                    (mouseleave)="hoveredDate = null">
+                                {{ date.day }}
+                            </span>
+                        </ng-template>
+                        <div class="input-group datepicker-group">
+                            <i class="fa fa-calendar"></i>
+                            <input
+                                type="text"
+                                class="form-control inverted-out"
+                                [(ngModel)]="selectedDate"
+                                (click)="datepicker.toggle()"
+                                [ngModelOptions]="{standalone: true}"
+                            >
+                        </div>
+                        <div class="col-6 col-md-1">
+                            <button class="btn btn-custom" type="submit">Filtrar</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="content-body">
-            <app-spinner *ngIf="showLoading"></app-spinner>
+            <div *ngIf="showLoading" style="max-width: 700px">
+                <ngx-skeleton-loader count="6" appearance="line" animation="progress-dark"></ngx-skeleton-loader>
+            </div>
 
-            <div *ngIf="!showLoading" class="row margin-top-15 margin-bottom-80">
-                <div class="col-12 col-lg-10 col-xl-8">
-                    <table class="table-apuracao col-12 col-lg-10 col-xl-8">
-                        <tbody>
-                        <tr *ngIf="modoContaCorrente">
-                            <th>Saldo em {{dataSaldoAnterior}}</th>
-                            <td>
-                                <div class="value">
-                                    <i class="fa-solid fa-plus"></i>
-                                    {{relatorio['saldo_anterior'] | currency}}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Entradas</th>
-                            <td style="width: 120px" class="border-left-apuracao text-right">
-                                <div class="value d-flex justify-content-end">
-                                    <div class="symbol-container bg-green">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                    {{relatorio['total_entradas'] | currency}}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr (click)="setShowTotalApostadoDetalhado()"
-                            [ngClass]="{'mouse-pointer': detalhamentoHabilitado}">
-                            <td class="p-sub">Total Apostado</td>
-                            <td class="border-left-apuracao text-right">
-                                {{relatorio['total_apostado'] | currency}}
-                            </td>
-                        </tr>
-                        <ng-container *ngIf="showTotalApostadoDetalhado">
-                            <tr>
-                                <td class="p-sub-2"> L Esportivas</td>
-                                <td class="border-left-apuracao text-right">
-                                    <small>{{relatorio['esporte']['apostado'] | currency}}</small>
-                                </td>
-                            </tr>
-                            <tr *ngIf="loteriasHabilitada">
-                                <td class="p-sub-2"> L Loterias</td>
-                                <td class="border-left-apuracao text-right">
-                                    <small>{{relatorio['loteria']['apostado'] | currency}}</small>
-                                </td>
-                            </tr>
-                            <tr *ngIf="acumuladaoHabilitado">
-                                <td class="p-sub-2"> L Acumuladão</td>
-                                <td class="border-left-apuracao text-right">
-                                    <small>{{relatorio['acumuladao']['apostado'] | currency}}</small>
-                                </td>
-                            </tr>
-                            <tr *ngIf="desafioHabilitado">
-                                <td class="p-sub-2"> L Desafio</td>
-                                <td class="border-left-apuracao text-right">
-                                    <small>{{relatorio['desafio']['apostado'] | currency}}</small>
-                                </td>
-                            </tr>
-                        </ng-container>
-                        <tr class="border-bottom-apuracao">
-                            <td class="p-sub">Recargas de Cartão</td>
-                            <td class="border-left-apuracao text-right">
-                                {{relatorio['cartao'] | currency}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="">Saídas</th>
-                            <td class="border-left-apuracao text-right">
-                                <div class="value d-flex justify-content-end">
-                                    <div class="symbol-container bg-red">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </div>
-                                    {{relatorio['total_saidas'] | currency}}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-sub">Comissões</td>
-                            <td class="border-left-apuracao text-right">
-                                {{relatorio['total_comissao'] | currency}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-sub">Prêmios</td>
-                            <td class="border-left-apuracao text-right">
-                                {{relatorio['total_premios'] | currency}}
-                            </td>
-                        </tr>
-                        <tr class="border-bottom-apuracao">
-                            <td class="p-sub">Saques</td>
-                            <td class="border-left-apuracao text-right">
-                                {{relatorio['saque'] | currency}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                Resultado {{queryParams.dataInicial | moment:'DD/MM'}} à
-                                {{queryParams.dataFinal | moment:'DD/MM'}}
-                            </th>
-                            <td class="border-left-apuracao text-right resultado"
-                                [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
-                                <b>{{resultado | currency}}</b>
-                            </td>
-                        </tr>
-                        <ng-container>
-                            <tr>
-                                <th class="">Créditos</th>
-                                <td class="border-left-apuracao text-right">
-                                    <div class="value d-flex justify-content-end">
-                                        <div class="symbol-container bg-green">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </div>
-                                        {{relatorio['creditos'] | currency}}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="">Débitos</th>
-                                <td class="border-left-apuracao text-right">
-                                    <div class="value d-flex justify-content-end">
-                                        <div class="symbol-container bg-red">
-                                            <i class="fa-solid fa-minus"></i>
-                                        </div>
-                                        {{relatorio['debitos'] | currency}}
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Saldo</th>
-                                <td class="border-left-apuracao text-right resultado"
-                                    [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
-                                    <b>{{relatorio['saldo'] | currency}}</b>
-                                </td>
-                            </tr>
-                        </ng-container>
-                        </tbody>
-                    </table>
+            <div class="tabela-apuracao" *ngIf="!showLoading">
+                <tr *ngIf="modoContaCorrente">
+                    <th>Saldo em {{dataSaldoAnterior}}</th>
+                    <td>
+                        <div class="value">
+                            <i class="fa-solid fa-plus"></i>
+                            {{relatorio['saldo_anterior'] | currency}}
+                        </div>
+                    </td>
+                </tr>
+                <div class="entrada linha-apuracao collapsable">
+                    <h2 (click)="setShowEntradas()" [ngClass]="{'collapsed': showEntradas}"><label><i class="fa fa-angle-down"></i>Entradas</label> <span><i class="fa fa-plus"></i> {{relatorio['total_entradas'] | currency}}</span></h2>
+                    <ul *ngIf="showEntradas">
+                        <li class="collapsable">
+                            <h3 (click)="setShowTotalApostadoDetalhado()" [ngClass]="{'collapsed': showTotalApostadoDetalhado}"><label><i class="fa fa-angle-down"></i> Total apostado</label> <span><i class="fa fa-plus"></i> {{relatorio['total_apostado'] | currency}}</span></h3>
+                            <ul *ngIf="showTotalApostadoDetalhado">
+                                <li>Esportivas <span>{{relatorio['esporte']['apostado'] | currency}}</span></li>
+                                <li>Loterias <span>{{relatorio['loteria']['apostado'] | currency}}</span></li>
+                                <li>Acumuladão <span>{{relatorio['acumuladao']['apostado'] | currency}}</span></li>
+                                <li>Desafio <span>{{relatorio['desafio']['apostado'] | currency}}</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Recargas de cartão <span>{{ 0 | currency }}</span></h3>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="saidas linha-apuracao collapsable">
+                    <h2 (click)="setShowSaidas()" [ngClass]="{'collapsed': showSaidas}"><label><i class="fa fa-angle-down"></i> Saídas</label> <span><i class="fa fa-minus"></i> {{relatorio['total_saidas'] | currency}}</span></h2>
+                    <ul *ngIf="showSaidas">
+                        <li><h3>Comissões <span>{{relatorio['total_comissao'] | currency}}</span></h3></li>
+                        <li><h3>Premio <span>{{relatorio['total_premios'] | currency}}</span></h3></li>
+                        <li><h3>Saque <span>{{relatorio['saque'] | currency}}</span></h3></li>
+                    </ul>
+                </div>
+
+                <div class="resultado linha-apuracao"
+                    [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
+                    <h2>
+                        Resultado {{ queryParams.dataInicial | moment:'DD/MM' }} à {{ queryParams.dataFinal | moment:'DD/MM' }}
+                        <span>{{ resultado | currency }}</span>
+                    </h2>
+                </div>
+
+                <div class="credito linha-apuracao">
+                    <h2>Créditos <span><i class="fa fa-plus"></i> {{ relatorio['creditos'] | currency }}</span></h2>
+                </div>
+
+                <div class="debito linha-apuracao">
+                    <h2>Débitos <span><i class="fa fa-minus"></i> {{ relatorio['debitos'] | currency }}</span></h2>
+                </div>
+
+                <div class="saldo linha-apuracao"
+                    [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
+                    <h2>Saldo <span>{{ relatorio['saldo'] | currency }}</span></h2>
                 </div>
             </div>
         </div>

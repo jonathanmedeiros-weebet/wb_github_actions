@@ -1,0 +1,49 @@
+<div id="default-content">
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>Financeiro</h2>
+        </div>
+
+        <div class="content-body">
+            <form (submit)="handleFiltrar()">
+                <div class="filtros">
+                    <select class="inverted-out form-control" [(ngModel)]="periodo" name="" id="" [ngModelOptions]="{standalone: true}">
+                        <option value="">Semana atual</option>
+                        <option value="semana-passada">Samana passada</option>
+                    </select>
+                    <select class="inverted-out form-control" [(ngModel)]="status" name="" id="" [ngModelOptions]="{standalone: true}">
+                        <option value="">Todos</option>
+                        <option value="ganhou">Ganhou</option>
+                        <option value="perdeu">Perdeu</option>
+                        <option value="pendente">Pendente</option>
+                    </select>
+                    <button class="btn btn-custom" type="submit">Filtrar</button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Detalhes</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                    </tr>
+                    <tbody *ngIf="!loading">
+                        <tr *ngFor="let movimentacao of movimentacoes">
+                            <td>{{ movimentacao.data }}</td>
+                            <td>{{ movimentacao.tipo }}</td>
+                            <td>{{ movimentacao.detalhes }}</td>
+                            <td>{{ movimentacao.valor | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

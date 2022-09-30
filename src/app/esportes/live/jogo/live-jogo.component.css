@@ -151,7 +151,9 @@
 }
 
 .aovivo-tempo {
+    color: #fff;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -161,7 +163,6 @@
     border-radius: 5px;
     color: #fff;
     padding: 3px 6px;
-    margin-right: 7px;
 
     display: flex;
     align-items: center;
@@ -175,7 +176,7 @@
 
 .tempo{
     font-size: 1.2rem;
-    color: #000;
+    color: #fff;
 }
 
 .time-nome {
@@ -183,13 +184,12 @@
 }
 
 .tipo-apostas {
-    display: flex;
-    flex-wrap: wrap;
+    column-count: 2;
 }
 
 .tipo-apostas .tipo-aposta{
-    min-width: 50%;
-    max-width: 50%;
+    min-width: 100%;
+    max-width: 100%;
     padding: 0 5px 10px;
     text-transform: uppercase;
 }

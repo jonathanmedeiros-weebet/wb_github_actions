@@ -40,7 +40,7 @@ import {
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
-import {NgbAlertModule, NgbCarouselModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbCarouselModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 import {SubmenuComponent} from './submenu/submenu.component';
@@ -49,6 +49,7 @@ import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
 import {NgxCurrencyModule} from 'ngx-currency';
 import {BannersComponent} from './banners/banners.component';
 import { ResultadosModalComponent } from './modals/resultados-modal/resultados-modal.component';
+import { CodeInputModule } from 'angular-code-input';
 
 @NgModule({
     imports: [
@@ -64,6 +65,10 @@ import { ResultadosModalComponent } from './modals/resultados-modal/resultados-m
         NgbModalModule,
         NgbAlertModule,
         NgbCarouselModule,
+        NgbModule,
+        CodeInputModule.forRoot({
+            codeLength: 6
+        }),
     ],
     declarations: [
         MainLayoutComponent,

@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import { SidebarService } from 'src/app/services';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-apuracao',
@@ -22,21 +23,39 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     acumuladaoHabilitado;
     desafioHabilitado;
     dataSaldoAnterior;
-    showEntradas = false;
-    showSaidas = false;
+    showEntradas = true;
+    showSaidas = true;
     showTotalApostadoDetalhado = false;
     dataInicial;
     dataFinal;
     detalhamentoHabilitado = false;
+
+    hoveredDate: NgbDate | null = null;
+    selectedDate: string = '';
+
+    fromDate: NgbDate | null;
+    toDate: NgbDate | null;
 
     constructor(
         private relatorioService: RelatorioService,
         private messageService: MessageService,
         private params: ParametrosLocaisService,
         private fb: FormBuilder,
+        private calendar: NgbCalendar,
+        public formatter: NgbDateParserFormatter,
         private sidebarService: SidebarService
     ) {
         super();
+
+        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -6);
+        this.toDate = calendar.getToday();
+
+        this.queryParams = {
+            dataInicial: this.formatDate(this.fromDate, 'us'),
+            dataFinal: this.formatDate(this.toDate, 'us')
+        }
+
+        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
     }
 
     ngOnInit() {
@@ -48,39 +67,65 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
         this.desafioHabilitado = this.params.getOpcoes().desafio;
 
         this.detalhamentoHabilitado = this.loteriasHabilitada || this.acumuladaoHabilitado || this.desafioHabilitado;
-
-        if (moment().day() === 0) {
-            const startWeek = moment().startOf('week');
-            this.dataInicial = startWeek.subtract(6, 'days');
-            this.dataFinal = moment();
-
-        } else {
-            this.dataInicial = moment().startOf('week').add('1', 'day');
-            this.dataFinal = moment();
-        }
-
-        this.queryParams = {
-            dataInicial: this.dataInicial.format('YYYY-MM-DD'),
-            dataFinal: this.dataFinal.format('YYYY-MM-DD')
-        };
-
-        this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
+        // this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
 
         this.createForm();
         this.getResultado();
     }
 
     createForm() {
-        this.form = this.fb.group({
-            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required]
-        });
+        // this.form = this.fb.group({
+        //     dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
+        //     dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required]
+        // });
     }
 
     submit() {
     }
 
+    onDateSelection(date: NgbDate, datepicker: any) {
+        if (!this.fromDate && !this.toDate) {
+            this.fromDate = date;
+        } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+            this.toDate = date;
+            this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
+            datepicker.close();
+        } else {
+            this.toDate = null;
+            this.fromDate = date;
+        }
+    }
+
+    formatDate(date, lang = 'br') {
+        if(lang == 'us') {
+            return  date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
+        }
+        return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year
+    }
+
+    isHovered(date: NgbDate) {
+        return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
+            date.before(this.hoveredDate);
+    }
+
+    isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
+
+    isRange(date: NgbDate) {
+        return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
+        this.isHovered(date);
+    }
+
+    validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+        const parsed = this.formatter.parse(input);
+        return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+    }
+
     getResultado(params?) {
+        this.showLoading = true;
+
+        this.queryParams.dataInicial = this.formatDate(this.fromDate, 'us');
+        this.queryParams.dataFinal = this.formatDate(this.toDate, 'us');
+
         const queryParams = {
             'data-inicial': this.queryParams.dataInicial,
             'data-final': this.queryParams.dataFinal
@@ -110,5 +155,13 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
         if (this.detalhamentoHabilitado) {
             this.showTotalApostadoDetalhado = !this.showTotalApostadoDetalhado;
         }
+    }
+
+    setShowEntradas() {
+        this.showEntradas = !this.showEntradas;
+    }
+
+    setShowSaidas() {
+        this.showSaidas = !this.showSaidas;
     }
 }

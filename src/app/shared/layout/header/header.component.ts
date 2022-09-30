@@ -221,16 +221,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             AuthDoisFatoresModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-600',
                 centered: true,
             }
         );
-
-        this.modalRef.result
-            .then(
-                result => {
-                },
-                reason => {
-                }
-            );
     }
 }

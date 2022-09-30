@@ -8,6 +8,7 @@ import { CasinoWrapperComponent } from './wrapper/wrapper.component';
 import { SafeIframePipe } from '../shared/utils/pipes/safe-iframe.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { LiveComponent } from './live/live.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { LiveComponent } from './live/live.component';
   imports: [
     SharedModule,
     CasinoRoutingModule,
+    NgxSkeletonLoaderModule,
   ]
 })
 export class CasinoModule { }

@@ -15,6 +15,8 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     cronometro = 60;
     botaoReenviar = false;
 
+    codigo = "";
+
     constructor(
         public activeModal: NgbActiveModal,
         private fb: FormBuilder,
@@ -83,6 +85,16 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
                 this.botaoReenviar = true;
             }
         }, 1000);
+    }
+
+    onCodeChanged(code: string) {
+        console.log('Change:', code);
+        this.codigo = code;
+    }
+
+    onCodeCompleted(code: string) {
+        console.log('Complete:', code);
+        this.codigo = code;
     }
 
 }

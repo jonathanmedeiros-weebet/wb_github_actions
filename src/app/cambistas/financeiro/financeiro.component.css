@@ -1,6 +1,8 @@
 .filtros {
     display: flex;
     align-items: center;
+
+    margin-bottom: 40px;
 }
 
 .filtros input, .filtros select {
@@ -61,46 +63,6 @@
 
 .table tbody tr.red td:first-child {
     border-left: 10px solid #ED4C5C;
-}
-
-.datepicker-group i {
-    position: absolute;
-    z-index: 100;
-    top: 12px;
-    right: 32px;
-    font-size: 14px;
-}
-
-.datepicker-group input {
-    padding-right: 35px;
-    border-radius: 5px;
-}
-
-.dp-hidden {
-    width: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    padding: 0 !important;
-}
-
-.custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
-}
-
-.custom-day.focused {
-    background-color: #e6e6e6;
-}
-
-.custom-day.range, .custom-day:hover {
-    background-color: #24966c;
-    color: white;
-}
-.custom-day.faded {
-    background-color: #3dc593;
 }
 
 .tabs {

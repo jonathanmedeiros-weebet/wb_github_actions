@@ -640,6 +640,13 @@ button {
 
 .modal-header {
     border-bottom: 1px solid #3b3b3b;
+    padding: 20px 35px;
+    background: #0A0A0A;
+    align-items: center;
+}
+
+.modal-header i, .modal-header span {
+    color: #fff;
 }
 
 .modal-footer {

@@ -5,6 +5,7 @@ import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApostaComponent } from './aposta/aposta.component';
 import { TabelaComponent } from './tabela/tabela.component';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 const routes: Routes = [{
     path: '',
@@ -20,6 +21,16 @@ const routes: Routes = [{
                 {
                     path: '',
                     component: ApuracaoComponent
+                }
+            ]
+        },
+        {
+            path: 'financeiro',
+            component: PagesLayoutComponent,
+            children: [
+                {
+                    path: '',
+                    component: FinanceiroComponent
                 }
             ]
         },

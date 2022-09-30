@@ -273,6 +273,12 @@ li.router-link-active > a {
     justify-content: center;
 }
 
+.collapsed .sub-nav-container {
+    position: absolute;
+    background: #0a0a0a;
+    top: 50%;
+}
+
 .search-collapsed {
     display: block;
     color: #fff;

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ResultadoService } from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 import {Router} from '@angular/router';
@@ -38,6 +38,12 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
 
+    hoveredDate: NgbDate | null = null;
+    selectedDate: string = '';
+
+    fromDate: NgbDate | null;
+    toDate: NgbDate | null;
+
     constructor(
         public activeModal: NgbActiveModal,
         private fb: FormBuilder,
@@ -47,8 +53,13 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
         private auth: AuthService,
         private paramsService: ParametrosLocaisService,
         private router: Router,
+        private calendar: NgbCalendar,
+        public formatter: NgbDateParserFormatter,
     ) {
         super();
+
+        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -6);
+        this.toDate = calendar.getToday();
     }
 
     ngOnInit() {

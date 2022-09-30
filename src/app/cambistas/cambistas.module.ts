@@ -11,19 +11,23 @@ import { ApostaComponent } from './aposta/aposta.component';
 import { TabelaComponent } from './tabela/tabela.component';
 import { DesafioApostaService, AcumuladaoService } from '../services';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
     declarations: [
         ApuracaoComponent,
         DashboardComponent,
         ApostaComponent,
-        TabelaComponent
+        TabelaComponent,
+        FinanceiroComponent
     ],
     imports: [
         SharedModule,
         CambistasRoutingModule,
         NgChartsModule,
         NgbModule,
+        NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         Ng2SearchPipeModule
     ],
     providers: [

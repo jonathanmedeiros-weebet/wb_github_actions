@@ -88,10 +88,11 @@
 }
 
 .jogo-destaque {
+    cursor: pointer;
     background: #0A0A0A;
     border: 1px solid #35cc95;
     width: 280px;
-    height: 120px;
+    height: 135px;
     border-radius: 5px;
     padding: 10px 10px;
 
@@ -174,6 +175,11 @@
     align-items: center;
 
     margin-left: 5px;
+}
+
+.jogos-destaque .jogo-destaque-odds .jogo-destaque-odd.selecionado {
+    background-color: #35cc95;
+    color:#0A0A0A;
 }
 
 .jogos-destaque .jogo-destaque-odds .jogo-destaque-odd:first-child {

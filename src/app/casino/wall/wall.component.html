@@ -3,6 +3,14 @@
     <app-banners pagina="cassino"
                  [ngClass]="{'surgir': !showLoadingIndicator, 'hide': showLoadingIndicator}">
     </app-banners>
+
+    <div class="wall-inner" *ngIf="showLoadingIndicator">
+        <div class="bloco">
+            <ngx-skeleton-loader count="10" appearance="circle"></ngx-skeleton-loader>
+        </div>
+    </div>
+
+
     <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
         <div class="bloco">
             <div class="bloco-header">

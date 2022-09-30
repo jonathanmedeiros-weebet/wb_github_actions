@@ -22,20 +22,38 @@
 </ng-container>
 
 <ng-container *ngIf="contexto == 'esportes'">
-    <ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}" style="position: relative">
+    <ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
+
+
+
         <ng-container *ngIf="contexto == 'esportes'">
+
             <div class="destaques-regiao" *ngIf="regioesDestaque && !mobileScreen">
-                <span class="group" *ngIf="!collapsed">Destaques</span>
-                <li *ngFor="let regiao of regioesDestaque"
-                    (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
+                <span class="group" *ngIf="!collapsed">Cartões</span>
+                <li>
                     <a>
-                        <img src="/assets/images/futebol.svg">
-                        <span class="regiao-nome">{{regiao.nome}}</span>
+                        <span (click)="abrirConsultarCartao()">Consultar cartão</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span (click)="abrirSolicitarSaque()">Solicitar saque</span>
                     </a>
                 </li>
             </div>
 
+
             <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
+                <div class="destaques-regiao" *ngIf="regioesDestaque && !mobileScreen">
+                    <span class="group" *ngIf="!collapsed">Destaques</span>
+                    <li *ngFor="let regiao of regioesDestaque"
+                        (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
+                        <a>
+                            <img src="/assets/images/futebol.svg">
+                            <span class="regiao-nome">{{regiao.nome}}</span>
+                        </a>
+                    </li>
+                </div>
                 <span class="group" *ngIf="!collapsed">Campeonatos</span>
                 <li class="regiao" *ngFor="let regiao of itens">
                     <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
@@ -117,6 +135,13 @@
                 <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
                     <i class="fa fa-dashboard icone-generico"></i>
                     <span class="regiao-nome">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/financeiro']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Financeiro</span>
                 </a>
             </li>
         </ul>

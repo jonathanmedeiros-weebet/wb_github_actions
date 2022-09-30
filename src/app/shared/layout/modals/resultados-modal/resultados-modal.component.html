@@ -8,20 +8,23 @@
     <h3>Resultados</h3>
 
     <div class="filters">
-        <form novalidate>
-            <input type="text" class="form-control inverted-out">
-            <select class="form-control inverted-out">
-                <option value="futebol">Futebol</option>
-                <option value="18">Basquete</option>
-                <option value="13">Tênis</option>
-                <option value="9">Combate</option>
-                <option value="91">Vôlei</option>
-                <option value="12">Futebol Americano</option>
-                <option value="83">Futsal</option>
-                <option value="17">Hóquei no Gelo</option>
-                <option value="151">E-Sports</option>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="input-group datepicker-group">
+                <i class="fa fa-calendar"></i>
+                <input type="date" class="form-control inverted-out" formControlName="data">
+            </div>
+            <select class="form-control inverted-out" formControlName="sport_id">
+                <option value="1">Futebol</option>
+                <option *ngIf="basqueteHabilitado" value="18">Basquete</option>
+                <option *ngIf="tenisHabilitado" value="13">Tênis</option>
+                <option *ngIf="combateHabilitado" value="9">Combate</option>
+                <option *ngIf="voleiHabilitado" value="91">Vôlei</option>
+                <option *ngIf="futebolAmericanoHabilitado" value="12">Futebol Americano</option>
+                <option *ngIf="futsalHabilitado" value="83">Futsal</option>
+                <option *ngIf="hoqueiGeloHabilitado" value="17">Hóquei no Gelo</option>
+                <option *ngIf="esportsHabilitado" value="151">E-Sports</option>
             </select>
-            <button class="btn btn-custom">Filtrar</button>
+            <button class="btn btn-custom" type="submit">Filtrar</button>
         </form>
     </div>
 

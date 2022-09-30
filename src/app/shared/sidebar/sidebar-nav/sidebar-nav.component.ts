@@ -10,7 +10,7 @@ import { BaseFormComponent } from '../../layout/base-form/base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApostaService } from '../../services/aposta.service';
 import { MessageService } from '../../services/utils/message.service';
-import { ApostaModalComponent } from '../../layout/modals';
+import { ApostaModalComponent, AtivarCartaoModalComponent, CartaoCadastroModalComponent, CartaoModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../../layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
 
@@ -162,5 +162,19 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     goTo(url, queryParams) {
         this.router.navigate([url], {queryParams});
+    }
+
+    abrirConsultarCartao() {
+        const modalConsultarCartao = this.modalService.open(PesquisarCartaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+    }
+
+    abrirSolicitarSaque() {
+        const modalConsultarCartao = this.modalService.open(SolicitarSaqueModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
     }
 }
