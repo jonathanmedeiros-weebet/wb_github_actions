@@ -10,7 +10,7 @@ import {MenuFooterService} from "../../shared/services/utils/menu-footer.service
 })
 export class DepositoComponent implements OnInit, OnDestroy {
     whatsapp;
-    hasMpToken;
+    hasApiPagamentos;
     modalidade;
 
     constructor(
@@ -23,9 +23,9 @@ export class DepositoComponent implements OnInit, OnDestroy {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-        this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
+        this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
 
-        if (!this.hasMpToken && this.whatsapp) {
+        if (!this.hasApiPagamentos && this.whatsapp) {
             this.modalidade = "whatsapp";
         } else {
             this.modalidade = "pix";
