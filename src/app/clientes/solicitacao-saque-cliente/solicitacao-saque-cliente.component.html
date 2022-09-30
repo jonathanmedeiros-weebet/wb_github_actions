@@ -17,17 +17,15 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div class="row">
-                            <div class="col col-sm-12 mb-4">
-                                <div class="card p-0">
-                                    <div class="card-header">
-                                        Informações Importantes
-                                    </div>
-                                    <div class="card-body">
-                                        <b>Saque Min.:</b> {{valorMinSaque | currency}} <br>
-                                        <b>Saque Max.:</b> {{valorMaxSaqueDiario | currency}} <br>
-                                        <b>Saque Max. Diário:</b> {{valorMaxSaqueDiario | currency}} <br>
-                                        <b>Saque Max. Mensal:</b> {{valorMaxSaqueMensal | currency}}
-                                    </div>
+                            <div class="col col-sm-12">
+                                <div class="alert alert-warning alert-dismissible fade show">
+                                    <b>Saque Min.:</b> {{valorMinSaque | currency}} <br>
+                                    <b>Saque Max.:</b> {{valorMaxSaqueDiario | currency}} <br>
+                                    <b>Limite de Saque Diário:</b> {{valorMaxSaqueDiario | currency}} <br>
+                                    <b>Limite de Saque Mensal:</b> {{valorMaxSaqueMensal | currency}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-md-12">
