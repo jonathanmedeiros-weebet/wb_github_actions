@@ -2459,6 +2459,7 @@ gulp.task('atleticbet.com', function (done) {
         host: "atleticbet.com",
         banca: "ATLETIC BET",
         styles: "",
+        scripts: "<script src='//code.jivosite.com/widget/miwLijw0c4' async></script>"
     });
 });
 
