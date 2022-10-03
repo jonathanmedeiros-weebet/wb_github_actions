@@ -1774,15 +1774,6 @@ gulp.task('futmoney.net.br', function (done) {
     });
 });
 
-gulp.task('idealbets.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "idealbets.com.br",
-        banca: "IDEAL BETS",
-        styles: "",
-    });
-});
-
 gulp.task('shopbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2222,15 +2213,6 @@ gulp.task('nmbets.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "nmbets.wee.bet",
         banca: "NMBETS",
-        styles: "",
-    });
-});
-
-gulp.task('pagoubet.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "pagoubet.bet",
-        banca: "PAGOU BET",
         styles: "",
     });
 });
