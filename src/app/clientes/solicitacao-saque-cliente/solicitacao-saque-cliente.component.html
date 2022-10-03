@@ -1,42 +1,57 @@
 <div id="default-content">
     <app-spinner *ngIf="showLoading"></app-spinner>
-    
+
     <ng-containe *ngIf="!showLoading">
         <div class="content-header">
             <h2>Solicitar Saque</h2>
         </div>
         <div class="content-body">
             <div class="content">
-                <div *ngIf="cadastroCompleto && !respostaSolicitacao">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                        <app-spinner *ngIf="submitting"></app-spinner>
-                        <div class="row">
-                            <div class="col col-sm-4">
-                                <div class="form-group required">
-                                    <label class="label">Valor do Saque:</label>
-                                    <input currencyMask class="form-control"
-                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                        formControlName="valor">
-                                    <app-error-msg [control]="form.get('valor')"></app-error-msg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-custom" [disabled]="submitting">
-                                        Solicitar Saque
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a [routerLink]="['/clientes/perfil']">Clique aqui para continuar.</a>
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
+                </div>
+                <div *ngIf="cadastroCompleto && !respostaSolicitacao">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <app-spinner *ngIf="submitting"></app-spinner>
+                        <div class="row">
+                            <div class="col col-sm-12">
+                                <div class="alert alert-warning alert-dismissible fade show">
+                                    <b>Saque Min.:</b> {{valorMinSaque | currency}} <br>
+                                    <b>Saque Max.:</b> {{valorMaxSaqueDiario | currency}} <br>
+                                    <b>Limite de Saque Diário:</b> {{valorMaxSaqueDiario | currency}} <br>
+                                    <b>Limite de Saque Mensal:</b> {{valorMaxSaqueMensal | currency}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col col-sm-5">
+                                        <div class="form-group required">
+                                            <label class="label">Valor do Saque:</label>
+                                            <input currencyMask class="form-control"
+                                                   [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                   formControlName="valor">
+                                            <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-md-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-custom" [disabled]="submitting">
+                                                Solicitar Saque
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
