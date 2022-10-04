@@ -2416,3 +2416,12 @@ gulp.task('nautsports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betpixlider.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betpixlider.wee.bet",
+        banca: "BET PIX LIDER",
+        styles: "",
+    });
+});
