@@ -1522,15 +1522,6 @@ gulp.task('amigos.wee.bet', function (done) {
     });
 });
 
-gulp.task('flsesportes.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "flsesportes.wee.bet",
-        banca: "FLS ESPORTES",
-        styles: "",
-    });
-});
-
 gulp.task('dobowxbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2213,15 +2204,6 @@ gulp.task('i7esportes.bet', function (done) {
         server: "front4.wee.bet",
         host: "i7esportes.bet",
         banca: "I7 ESPORTES",
-        styles: "",
-    });
-});
-
-gulp.task('arenasbest.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "arenasbest.com",
-        banca: "ARENAS BEST",
         styles: "",
     });
 });
