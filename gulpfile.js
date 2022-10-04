@@ -2404,8 +2404,7 @@ gulp.task('atleticbet.com', function (done) {
         server: "front1.wee.bet",
         host: "atleticbet.com",
         banca: "ATLETIC BET",
-        styles: "",
-        scripts: "<script src='//code.jivosite.com/widget/miwLijw0c4' async></script>"
+        styles: ""
     });
 });
 
