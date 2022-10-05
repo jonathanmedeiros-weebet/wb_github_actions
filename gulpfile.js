@@ -2407,3 +2407,12 @@ gulp.task('grenbet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('futtop.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "futtop.bet",
+        banca: "FUTTOP",
+        styles: "",
+    });
+});
