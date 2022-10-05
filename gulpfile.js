@@ -2398,3 +2398,12 @@ gulp.task('betpixlider.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('grenbet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "grenbet.net",
+        banca: "GRENBET",
+        styles: "",
+    });
+});
