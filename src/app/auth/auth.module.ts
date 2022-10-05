@@ -14,7 +14,7 @@ import {NgHcaptchaModule} from 'ng-hcaptcha';
         AuthRoutingModule,
         NgxMaskModule.forRoot(),
         NgHcaptchaModule.forRoot({
-            siteKey: '604d5165-30fe-4ed7-8808-cf5fd7fa3057',
+            siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
             languageCode: 'pt'
         })
     ],

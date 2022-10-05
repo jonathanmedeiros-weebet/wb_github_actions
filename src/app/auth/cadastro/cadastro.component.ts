@@ -90,6 +90,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             afiliado: [null, [Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
+            check_1: [''],
+            check_2: ['']
         }, {validator: PasswordValidation.MatchPassword});
     }
 
