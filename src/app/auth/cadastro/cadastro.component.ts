@@ -10,7 +10,7 @@ import {AuthService} from '../../shared/services/auth/auth.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-cadastro',
@@ -42,12 +42,12 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
 
     ngOnInit(): void {
         this.auth.logado.pipe().subscribe(
-                isLoggedIn => {
-                    if (isLoggedIn) {
-                        this.router.navigate(['esportes/futebol']);
-                    }
+            isLoggedIn => {
+                if (isLoggedIn) {
+                    this.router.navigate(['esportes/futebol']);
                 }
-            );
+            }
+        );
         this.createForm();
         this.clientesService.getTermosDeUso().subscribe(
             (termos: Pagina) => {
@@ -60,11 +60,11 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
 
         this.route.queryParams
             .subscribe((params) => {
-            if (params.afiliado) {
-                sessionStorage.setItem('afiliado', params.afiliado);
-            }
-             this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
-        });
+                if (params.afiliado) {
+                    sessionStorage.setItem('afiliado', params.afiliado);
+                }
+                this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
+            });
     }
 
     ngOnDestroy() {
@@ -76,10 +76,10 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             usuario: [null, [
-                    Validators.minLength(3),
-                    Validators.pattern('^[a-zA-Z0-9_]+$'),
-                    Validators.required
-                ], this.validarLoginUnico.bind(this)],
+                Validators.minLength(3),
+                Validators.pattern('^[a-zA-Z0-9_]+$'),
+                Validators.required
+            ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(6)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
@@ -88,7 +88,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             email: [null, [Validators.required]],
             genero: ['', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            aceitar_termos: [null, [Validators.required]]
+            aceitar_termos: [null, [Validators.required]],
+            captcha: [null, [Validators.required]],
         }, {validator: PasswordValidation.MatchPassword});
     }
 
@@ -152,6 +153,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                 error => {
                     this.messageService.error(error);
                     values.nascimento = nascimentoTemp;
+                    this.form.get('captcha').patchValue(null);
                     this.submitting = false;
                 }
             );
