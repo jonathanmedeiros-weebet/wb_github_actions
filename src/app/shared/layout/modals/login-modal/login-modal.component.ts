@@ -80,23 +80,28 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 () => {
                     this.getUsuario();
-
-                    if (this.usuario.tipo_usuario === 'cliente' && this.auth.getCookie(this.usuario.cookie) === '') {
-                        this.abrirModalAuthDoisFatores();
+                    if (this.usuario.validacao_email) {
+                        if (this.usuario.tipo_usuario === 'cliente' && this.auth.getCookie(this.usuario.cookie) === '') {
+                            this.abrirModalAuthDoisFatores();
+                        } else {
+                            this.auth.login(this.form.value)
+                                .pipe(takeUntil(this.unsub$))
+                                .subscribe(
+                                    () => {
+                                        this.getUsuario();
+                                        if (this.usuario.tipo_usuario === 'cambista') {
+                                            location.reload();
+                                        }
+                                        this.activeModal.dismiss();
+                                    },
+                                    error => this.handleError(error)
+                                );
+                        }
                     } else {
-                        this.auth.login(this.form.value)
-                            .pipe(takeUntil(this.unsub$))
-                            .subscribe(
-                                () => {
-                                    this.getUsuario();
-                                    if (this.usuario.tipo_usuario === 'cambista') {
-                                        location.reload();
-                                    }
-                                    this.activeModal.dismiss();
-                                },
-                                error => this.handleError(error)
-                            );
+                        this.activeModal.dismiss();
+                        this.router.navigate(['auth/validar-email']);
                     }
+
                 },
                 error => this.handleError(error)
             );

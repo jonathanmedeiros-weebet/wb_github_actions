@@ -135,21 +135,20 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
 
     submit() {
         const values = this.form.value;
+        const nascimentoTemp = values.nascimento;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
 
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
-                () => {
-                    this.auth.login({username: values.usuario, password: values.senha, etapa: 1}).subscribe(
-                        () => {
-                            this.messageService.success('Cadastro realizado com sucesso!');
-                        },
-                        error => this.messageService.error(error)
-                    );
+                (res) => {
+                    this.messageService.success('Cadastro realizado com sucesso!');
+                    localStorage.setItem('user', JSON.stringify(res.result.user));
+                    this.router.navigate(['auth/validar-email']);
                 },
                 error => {
                     this.messageService.error(error);
+                    values.nascimento = nascimentoTemp;
                     this.submitting = false;
                 }
             );

@@ -54,6 +54,26 @@ export class AuthService {
             );
     }
 
+    enviarLinkAtivacao(data: any): Observable<any> {
+        return this.http.post<any>(`${this.AuthUrl}/enviarLinkAtivacao`, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    ativacaoCadastro(data: any) {
+        return this.http.post<any>(`${this.AuthUrl}/ativacaoCadastro`, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     login(data: any): Observable<any> {
         return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
@@ -186,6 +206,14 @@ export class AuthService {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             return user.tipo_usuario === 'cliente';
+        }
+        return false;
+    }
+
+    isValidacaoEmail(): boolean {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            return user.validacao_email === 1;
         }
         return false;
     }

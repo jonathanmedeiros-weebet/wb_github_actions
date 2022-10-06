@@ -1,0 +1,5 @@
+.required > .label::after {
+    content: "*";
+    color: #ff0000;
+    font-size: 15px;
+}
