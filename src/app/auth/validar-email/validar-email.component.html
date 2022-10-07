@@ -1,0 +1,32 @@
+<div id="default-content">
+    <div class="content-body">
+        <div class="content">
+            <ng-container *ngIf="submitting">
+                <div style="height: 149px">
+                    <app-spinner class="spinner"></app-spinner>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!submitting">
+                <div class="row">
+                    <div class="col col-md-12">
+                        <h2>Ativação de Cadastro</h2>
+                        <span>Use o link na mensagem enviada para o seu e-mail para ativar o seu cadastro.</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12">
+                        <div style="margin-top: 20px">
+                            <span *ngIf="!botaoReenviar">Reenvio disponível em {{cronometro}} segundos</span>
+                            <button *ngIf="botaoReenviar" class="btn btn-custom btn-xs" type="submit"
+                                    (click)="reenviarLinkAtivacao()">
+                                <i class="fa fa-share"></i>
+                                Reenviar Mensagem
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+        </div>
+    </div>
+</div>
