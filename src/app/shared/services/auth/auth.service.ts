@@ -34,13 +34,13 @@ export class AuthService {
         this.cliente = this.clienteSource.asObservable();
     }
 
-    verificaCliente(data: any): Observable<any> {
-        return this.http.post<any>(`${this.AuthUrl}/verificarLogin`, JSON.stringify(data), this.header.getRequestOptions())
+    verificaDadosLogin(data: any): Observable<any> {
+        return this.http.post<any>(`${this.AuthUrl}/verificarDadosLogin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     localStorage.setItem('user', JSON.stringify(res.user));
                 }),
-                catchError(this.errorService.handleError)
+                catchError(this.errorService.handleErrorLogin),
             );
     }
 
@@ -69,6 +69,31 @@ export class AuthService {
             .pipe(
                 map(res => {
                     return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    loginAuthDoisFatores(data: any): Observable<any> {
+        return this.http.post<any>(`${this.AuthUrl}/signinAuthDoisFatores`, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    this.setCookie(res.user.cookie);
+                    const expires = moment().add(1, 'd').valueOf();
+                    localStorage.setItem('expires', `${expires}`);
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    if (res.user.tipo_usuario === 'cambista') {
+                        localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
+                        this.setIsCliente(false);
+                    } else {
+                        localStorage.setItem('tokenCassino', res.tokenCassino);
+                        this.setIsCliente(true);
+                    }
+                    this.logadoSource.next(true);
+                    if (data.casino === undefined) {
+                        this.router.navigate(['esportes/futebol/jogos']);
+                    }
                 }),
                 catchError(this.errorService.handleError)
             );

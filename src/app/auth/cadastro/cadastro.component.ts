@@ -146,7 +146,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             .subscribe(
                 (res) => {
                     this.messageService.success('Cadastro realizado com sucesso!');
-                    localStorage.setItem('user', JSON.stringify(res.result.user));
+                    sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.router.navigate(['auth/validar-email']);
                 },
                 error => {

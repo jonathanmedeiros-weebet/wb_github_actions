@@ -35,17 +35,18 @@ export class ValidarEmailComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getUsuario();
-        if (!this.usuario) {
+        if (!sessionStorage.getItem('user')) {
             this.router.navigate(['esportes/futebol']);
+        } else {
+            this.usuario = sessionStorage.getItem('user');
         }
+        console.log(this.usuario);
     }
 
     reenviarLinkAtivacao() {
         this.cronometro = 60;
         this.submitting = true;
-        this.getUsuario();
-        this.auth.enviarLinkAtivacao({id: this.usuario.id})
+        this.auth.enviarLinkAtivacao({id: this.usuario})
             .subscribe(
                 () => {
                     this.messageService.success('E-mail Enviado.');
@@ -77,9 +78,5 @@ export class ValidarEmailComponent extends BaseFormComponent implements OnInit {
                 this.botaoReenviar = true;
             }
         }, 1000);
-    }
-
-    getUsuario() {
-        this.usuario = this.auth.getUser();
     }
 }
