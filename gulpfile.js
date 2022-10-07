@@ -2421,7 +2421,7 @@ gulp.task('rjbets.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "rjbets.wee.bet",
-        banca: "RJBETS",
+        banca: "RJ BETS",
         styles: "",
     });
 });
