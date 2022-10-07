@@ -33,7 +33,6 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     createForm() {
         const usuario = this.auth.getUser();
         this.form = this.fb.group({
-            etapa: [2],
             codigo: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
             id: [usuario.id],
         });
