@@ -82,15 +82,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 () => {
                     this.getUsuario();
-                    if (this.auth.getCookie(this.usuario.cookie) === '') {
-                        this.cookieCliente = false;
-                    } else {
-                        this.cookieCliente = true;
-                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                    }
-                    if (this.authDoisFatoresHabilitado && this.cookieCliente === false ) {
+                    if (this.usuario.tipo_usuario === 'cliente' &&
+                        this.authDoisFatoresHabilitado &&
+                        this.auth.getCookie(this.usuario.cookie) === '') {
                         this.abrirModalAuthDoisFatores();
                     } else {
+                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
                         this.auth.login(this.form.value)
                             .pipe(takeUntil(this.unsub$))
                             .subscribe(

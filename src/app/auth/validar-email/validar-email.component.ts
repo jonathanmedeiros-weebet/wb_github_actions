@@ -40,7 +40,6 @@ export class ValidarEmailComponent extends BaseFormComponent implements OnInit {
         } else {
             this.usuario = sessionStorage.getItem('user');
         }
-        console.log(this.usuario);
     }
 
     reenviarLinkAtivacao() {
