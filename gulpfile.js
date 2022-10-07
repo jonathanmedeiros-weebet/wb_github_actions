@@ -2416,3 +2416,12 @@ gulp.task('futtop.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('rjbets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "rjbets.wee.bet",
+        banca: "RJBETS",
+        styles: "",
+    });
+});
