@@ -7,7 +7,7 @@
                 <i class="fa fa-times"></i>
             </div>
             <div class="nome">
-                {{acumuladao.nome}} - {{acumuladao.data_encerramento | moment:'DD/MM/YYYY'}}
+                {{acumuladao.nome}}
                 <span>
                     Encerra em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
                 </span>
@@ -64,7 +64,6 @@
             </div>
         </div>
     </section>
-
 
     <ng-template #apostaDeslogadoModal let-modal>
         <div class="modal-body" id="aposta-deslogado">

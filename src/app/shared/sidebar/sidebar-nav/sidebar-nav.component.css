@@ -1,4 +1,4 @@
-ul li {
+ ul li {
     list-style: none;
 }
 
@@ -43,6 +43,7 @@ ul li {
     display: flex;
     text-decoration: none;
     cursor: pointer;
+    line-height: 12px;
 }
 
 .regiao-nome {
@@ -230,6 +231,13 @@ li.router-link-active > a {
     border: 0;
 }
 
+.consulta-bilhete.collapsed {
+    display: none;
+}
+
+:host:hover .consulta-bilhete.collapsed {
+    display: block;
+}
 
 .consulta-bilhete .input-consulta {
     padding: 20px 12px;
@@ -299,6 +307,14 @@ li.router-link-active > a {
     border-bottom: 2px solid #1e1e1e;
     margin-bottom: 20px;
     cursor: pointer;
+}
+
+.consulta-bilhete-collapsed.collapsed {
+    display: block;
+}
+
+:host:hover .consulta-bilhete-collapsed.collapsed {
+    display: none;
 }
 
 .consulta-bilhete-collapsed  form {

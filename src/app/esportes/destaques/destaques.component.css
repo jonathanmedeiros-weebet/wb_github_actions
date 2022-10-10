@@ -200,6 +200,10 @@ span.escudo img {
     .pull {
         display: none;
     }
+
+    .jogos-destaque {
+        padding: 0 10px;
+    }
 }
 
 @media (min-width: 1025px) {

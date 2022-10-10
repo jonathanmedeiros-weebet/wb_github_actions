@@ -76,11 +76,31 @@
         padding-bottom: 44px;
     }
 
-    .odds .odd {
-        width: 100%;
-    }
-
     .wrap-sticky {
         padding-bottom: 50px;
+    }
+
+    .odds {
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+    }
+
+    .odds .odd {
+        flex: 1;
+        max-width: none;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .odds .odd .inner-odd {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 4px;
+    }
+
+    .desafio {
+        padding: 0 10px 10px;
     }
 }

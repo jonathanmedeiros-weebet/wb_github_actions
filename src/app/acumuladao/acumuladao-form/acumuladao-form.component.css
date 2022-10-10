@@ -347,4 +347,51 @@
         height: 100% !important;
         position: fixed !important;
     }
+
+    section.pre-bilhete {
+        height: 0 !important;
+        overflow: hidden;
+    }
+
+    .nome span {
+        margin-top: 20px;
+    }
+
+    .premios {
+        flex-direction: column-reverse;
+    }
+
+    #acumuladao-form .eventos {
+        margin-top: 40px;
+    }
+
+    #acumuladao-form .indentificacao {
+        background-color: transparent;
+    }
+
+    #acumuladao-form .eventos {
+        background-color: transparent;
+        border: 0;
+    }
+
+    #acumuladao-form .eventos .evento {
+        flex-direction: column;
+        margin-bottom: 15px;
+        border: 0;
+    }
+
+    #acumuladao-form .eventos .evento .dados {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: flex-end;
+        border: 0;
+        padding: 0;
+        margin-bottom: 5px;
+    }
+
+    #acumuladao-form .eventos .evento .nome-placar {
+        background-color: #010101;
+        border: 1px solid #35CC95;
+        border-radius: 4px;
+    }
 }

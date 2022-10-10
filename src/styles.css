@@ -1517,9 +1517,20 @@ input[type=number]::-webkit-outer-spin-button {
     width: 150px;
 }
 
+.modal-600 .modal-dialog {
+    max-width: 600px;
+}
+
+.btn.disabled, .btn:disabled {
+    opacity: 0.3;
+}
 
 @media only screen and (max-width: 1024px) {
-    .no-mobile {
+    .odds {
+        padding: 5px 15px;
+    }
+
+    .no-mobile, .hide-mobile {
         display: none;
     }
 
@@ -1555,12 +1566,3 @@ input[type=number]::-webkit-outer-spin-button {
         display: none;
     }
 }
-
-
-.modal-600 .modal-dialog {
-    max-width: 600px;
-}
-
-.btn.disabled, .btn:disabled {
-    opacity: 0.3;
-  }

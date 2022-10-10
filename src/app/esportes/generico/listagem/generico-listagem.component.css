@@ -13,16 +13,6 @@
     }
 }
 
-@media only screen and (max-width: 1024px) {
-    .content-sports {
-        /*padding-bottom: 106px;*/
-    }
-
-    .odds .odd{
-        width: 100%;
-    }
-}
-
 .escudo-container {
     margin-top: 4px;
     margin-bottom: 4px;
@@ -120,4 +110,29 @@
     position: absolute;
     top: 13px;
     right: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .content-sports {
+        /*padding-bottom: 106px;*/
+    }
+
+    .odds {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .odds .odd{
+        width: 100%;
+        margin-left: 0;
+        max-width: none;
+    }
+
+    .odds .odd .inner-odd {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+
 }

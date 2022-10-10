@@ -1,5 +1,5 @@
 <ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' ">
-<div class="consulta-bilhete">
+<div class="consulta-bilhete" [ngClass]="{'collapsed': collapsed}">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-consulta">
             <input type="text" placeholder="Consultar bilhete" formControlName="codigo">
@@ -8,7 +8,7 @@
     </form>
 </div>
 
-<div class="consulta-bilhete-collapsed " *ngIf="collapsed">
+<div class="consulta-bilhete-collapsed" [ngClass]="{'collapsed': collapsed}" *ngIf="collapsed">
     <a class="search-collapsed">
         <i class="fa fa-search"></i>
     </a>
