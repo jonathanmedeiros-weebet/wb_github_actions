@@ -1873,15 +1873,6 @@ gulp.task('topbetgames.wee.bet', function (done) {
     });
 });
 
-gulp.task('brasilsport.online', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "brasilsport.online",
-        banca: "BRASIL SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('spn-sports.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
