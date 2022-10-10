@@ -6,6 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApostaComponent } from './aposta/aposta.component';
 import { TabelaComponent } from './tabela/tabela.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
+import { CartaoComponent } from './cartao/cartao.component';
+import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
 
 const routes: Routes = [{
     path: '',
@@ -51,6 +53,26 @@ const routes: Routes = [{
                 {
                     path: '',
                     component: ApostaComponent
+                }
+            ]
+        },
+        {
+            path: 'cartoes',
+            component: PagesLayoutComponent,
+            children: [
+                {
+                    path: '',
+                    component: CartaoComponent
+                }
+            ]
+        },
+        {
+            path: 'solicitacoes-saque',
+            component: PagesLayoutComponent,
+            children: [
+                {
+                    path: '',
+                    component: SolicitacaoSaqueComponent
                 }
             ]
         },

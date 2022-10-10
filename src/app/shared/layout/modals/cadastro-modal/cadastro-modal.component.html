@@ -9,15 +9,15 @@
         <input type="hidden" formControlName="casino" value="true">
         <h3>Informações pessoais</h3>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" formControlName="nome"
                         [ngClass]="applyCssInputError('nome')" placeholder="Nome">
                     <app-error-msg [control]="form.get('nome')" label="Nome" class="text-left"></app-error-msg>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group" [ngClass]="applyCssDivError('sobrenome')">
+            <div class="col-md-6">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('sobrenome')">
                     <input type="text" class="form-control" [ngClass]="applyCssInputError('sobrenome')"
                         formControlName="sobrenome" placeholder="Sobrenome">
                     <app-error-msg [control]="form.get('sobrenome')" label="Sobrenome" class="text-left"></app-error-msg>
@@ -25,15 +25,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" formControlName="data_nascimento"
                         [ngClass]="applyCssInputError('data_nascimento')" placeholder="Data de Nascimento">
                     <app-error-msg [control]="form.get('data_nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group" [ngClass]="applyCssDivError('sexo')">
+            <div class="col-md-6">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('sexo')">
                     <input type="text" class="form-control" [ngClass]="applyCssInputError('sexo')"
                         formControlName="sexo" placeholder="Sexo">
                     <app-error-msg [control]="form.get('sexo')" label="Sexo" class="text-left"></app-error-msg>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" formControlName="cpf"
                         [ngClass]="applyCssInputError('cpf')" placeholder="CPF">
@@ -51,15 +51,15 @@
         </div>
         <h3>Informações de contato</h3>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" formControlName="telefone"
                         [ngClass]="applyCssInputError('telefone')" placeholder="Telefone">
                     <app-error-msg [control]="form.get('telefone')" label="Telefone" class="text-left"></app-error-msg>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group" [ngClass]="applyCssDivError('email')">
+            <div class="col-md-6">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
                     <input type="text" class="form-control" [ngClass]="applyCssInputError('email')"
                         formControlName="email" placeholder="Email">
                     <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
@@ -68,15 +68,15 @@
         </div>
         <h3>Criar login</h3>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" formControlName="username"
                         [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                     <app-error-msg [control]="form.get('username')" label="Usuário" class="text-left"></app-error-msg>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group" [ngClass]="applyCssDivError('password')">
+            <div class="col-md-6">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('password')">
                     <input type="text" class="form-control" [ngClass]="applyCssInputError('password')"
                         formControlName="password" placeholder="Senha">
                     <app-error-msg [control]="form.get('password')" label="Senha" class="text-left"></app-error-msg>
@@ -84,15 +84,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <input type="text" class="form-control" formControlName="confirmar-senha"
                         [ngClass]="applyCssInputError('confirmar-senha')" placeholder="Confirmar Senha">
                     <app-error-msg [control]="form.get('confirmar-senha')" label="Confirmar Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group" [ngClass]="applyCssDivError('codigo_afiliado')">
+            <div class="col-md-6">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('codigo_afiliado')">
                     <input type="text" class="form-control" [ngClass]="applyCssInputError('codigo_afiliado')"
                         formControlName="codigo_afiliado" placeholder="Código de afiliação(Opcional)">
                     <app-error-msg [control]="form.get('codigo_afiliado')" label="Código de afiliação(Opcional)" class="text-left"></app-error-msg>

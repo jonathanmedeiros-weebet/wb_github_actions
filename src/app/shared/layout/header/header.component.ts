@@ -206,13 +206,23 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirLogin() {
-        this.modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
+
+        let options = {};
+
+        if (this.isMobile) {
+            options = {
+                windowClass: 'modal-fullscreen',
+            }
+        } else {
+            options = {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-600',
                 centered: true,
             }
+        }
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
         );
     }
 

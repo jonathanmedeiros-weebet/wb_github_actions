@@ -5,3 +5,11 @@
 .uncollapsed {
     max-width: calc(100vw - 540px);
 }
+
+
+@media only screen and (max-width: 1024px) {
+    .collapsed, .uncollapsed {
+        width: 100%;
+        max-width: 100%;
+    }
+}

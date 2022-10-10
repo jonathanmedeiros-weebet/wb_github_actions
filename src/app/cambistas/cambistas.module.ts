@@ -13,6 +13,8 @@ import { DesafioApostaService, AcumuladaoService } from '../services';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CartaoComponent } from './cartao/cartao.component';
+import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
         DashboardComponent,
         ApostaComponent,
         TabelaComponent,
-        FinanceiroComponent
+        FinanceiroComponent,
+        CartaoComponent,
+        SolicitacaoSaqueComponent
     ],
     imports: [
         SharedModule,

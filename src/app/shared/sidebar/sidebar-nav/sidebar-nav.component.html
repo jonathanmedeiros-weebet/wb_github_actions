@@ -1,5 +1,5 @@
 <ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' ">
-<div class="consulta-bilhete" *ngIf="!collapsed">
+<div class="consulta-bilhete">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-consulta">
             <input type="text" placeholder="Consultar bilhete" formControlName="codigo">
@@ -24,11 +24,8 @@
 <ng-container *ngIf="contexto == 'esportes'">
     <ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
 
-
-
         <ng-container *ngIf="contexto == 'esportes'">
-
-            <div class="destaques-regiao" *ngIf="regioesDestaque && !mobileScreen">
+            <div class="destaques-regiao" *ngIf="regioesDestaque && !collapsed">
                 <span class="group" *ngIf="!collapsed">Cartões</span>
                 <li>
                     <a>
@@ -41,7 +38,6 @@
                     </a>
                 </li>
             </div>
-
 
             <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
                 <div class="destaques-regiao" *ngIf="regioesDestaque && !mobileScreen">
@@ -167,6 +163,44 @@
                 </a>
             </li>
 
+            <li class="cambista-item" routerLinkActive="router-link-active">
+                <a (click)="toogleSubCartao()">
+                    <i class="fa fa-credit-card icone-generico"></i>
+                    <span class="regiao-nome">Cartão</span>
+                    <i class="fa fa-angle-down m-0"></i>
+                </a>
+
+                <div class="sub-nav-container" *ngIf="subCartao">
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a>
+                                <span class="regiao-nome">Consultar</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a>
+                                <span class="regiao-nome">Criar</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/cambistas/cartoes']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Listagem</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/cambistas/solicitacoes-saque']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Solicitções de saque</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a>
+                                <span class="regiao-nome">Recarga</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li class="cambista-item">
                 <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
                     <i class="fa fa-print icone-generico"></i>
@@ -223,7 +257,6 @@
                     </ul>
                 </div>
             </li>
-
 
             <li class="cambista-item">
                 <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">

@@ -1,12 +1,23 @@
-<app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 <div class="wall-container">
-    <app-banners pagina="cassino"
-                 [ngClass]="{'surgir': !showLoadingIndicator, 'hide': showLoadingIndicator}">
-    </app-banners>
+    <app-banners pagina="cassino" *ngIf="!showLoadingIndicator"></app-banners>
 
-    <div class="wall-inner" *ngIf="showLoadingIndicator">
+    <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
+
+    <div *ngIf="showLoadingIndicator" class="wall-inner">
         <div class="bloco">
-            <ngx-skeleton-loader count="10" appearance="circle"></ngx-skeleton-loader>
+            <div class="ssc-square" style="height: 47px; width: 200px; margin-top: 20px"></div>
+        </div>
+        <div class="bloco" style="display: flex; flex-wrap: wrap;">
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px; margin-right: 15px; border-radius: 5px;"></div>
+            <div class="ssc-square" style="width: 318px; height: 229px; margin-bottom: 10px"></div>
         </div>
     </div>
 

@@ -47,3 +47,18 @@ button {
 .registrar a {
     color: #35CC95;
 }
+
+@media only screen and (max-width: 1024px) {
+
+    .modal-body {
+        padding: 40px 25px 15px;
+        background: #0A0A0A;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-body .modal-body-content {
+        flex: 1;
+    }
+}

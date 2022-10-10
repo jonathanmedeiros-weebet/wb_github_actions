@@ -347,6 +347,12 @@ input {
 }
 
 @media only screen and (max-width: 1024px) {
+    section.pre-bilhete {
+        height: 0 !important;
+        overflow: hidden;
+    }
+
+
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
         position: fixed !important;

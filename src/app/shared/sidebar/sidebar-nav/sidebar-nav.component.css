@@ -110,12 +110,22 @@ ul li {
    display: none;
 }
 
+:host:hover .collapsed .regiao-nome {
+    display: block;
+ }
+
 .hide-item {
     animation-name: hideAnim;
     animation-duration: 500ms;
     animation-fill-mode: both;
     width: 50px;
 }
+
+:host:hover .collapsed .regiao-nome.hide-item {
+    animation-name: showAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+ }
 
 .show-item {
     animation-name: showAnim;
@@ -269,14 +279,16 @@ li.router-link-active > a {
     border-bottom: 2px solid #1a1a1a;
 }
 
-.collapsed .destaques-regiao li a {
-    justify-content: center;
+.collapsed .sub-nav-container a {
+    white-space: nowrap;
 }
 
 .collapsed .sub-nav-container {
-    position: absolute;
-    background: #0a0a0a;
-    top: 50%;
+    display: none;
+}
+
+:host:hover .collapsed .sub-nav-container {
+    display: block;
 }
 
 .search-collapsed {

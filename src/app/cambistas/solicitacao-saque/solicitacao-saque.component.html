@@ -1,0 +1,88 @@
+<div id="default-content">
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>Solicitações de saque</h2>
+        </div>
+
+        <div class="content-body">
+            <form (submit)="handleFiltrar()">
+                <div class="filtros">
+                    <input
+                        name="datepicker"
+                        class="dp-hidden"
+                        ngbDatepicker
+                        #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event, datepicker)"
+                        [displayMonths]="2"
+                        [dayTemplate]="t"
+                        outsideDays="hidden"
+                        [startDate]="fromDate!"
+                        tabindex="-1"
+                        value=""
+                    >
+                    <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day"
+                                [class.focused]="focused"
+                                [class.range]="isRange(date)"
+                                [class.faded]="isHovered(date) || isInside(date)"
+                                (mouseenter)="hoveredDate = date"
+                                (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                        </span>
+                    </ng-template>
+                    <div class="input-group datepicker-group">
+                        <i class="fa fa-calendar"></i>
+                        <input
+                            type="text"
+                            class="form-control inverted-out"
+                            [(ngModel)]="selectedDate"
+                            (click)="datepicker.toggle()"
+                            [ngModelOptions]="{standalone: true}"
+                        >
+                    </div>
+
+                    <select class="inverted-out form-control" [(ngModel)]="status" name="" id="" [ngModelOptions]="{standalone: true}">
+                        <option value="1">Aprovado</option>
+                        <option value="2">Não aprovado</option>
+                    </select>
+                    <button class="btn btn-custom" type="submit">Filtrar</button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Chave</th>
+                            <th>Saldo cartão</th>
+                            <th>Apostador</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Aprovado</th>
+                            <th>Pago</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                    </tr>
+                    <tbody *ngIf="!loading">
+                        <tr *ngFor="let aposta of solicitacoes" class="{{ classNameAposta(aposta.resultado) }}">
+                            <td></td>
+                            <td>{{ aposta.codigo }}</td>
+                            <td>{{ aposta.horario }}</td>
+                            <td>{{ aposta.apostador | uppercase }}</td>
+                            <td>{{ aposta.valor | currency}}</td>
+                            <td>{{ aposta.comissao | currency }}</td>
+                            <td>{{ aposta.premio | currency }}</td>
+                            <td>{{ aposta.pago }}</td>
+                            <td>{{ aposta.pago }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

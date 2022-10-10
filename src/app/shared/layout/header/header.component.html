@@ -117,6 +117,18 @@
                             <i class="fa fa-solid fa-print mb-2"></i>
                             Tabela
                         </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="!isCliente">
+                            <i class="fa fa-solid fa-credit-card mb-2"></i>
+                            Cartão
+                        </a>
+                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
+                           routerLinkActive="router-link-active"
+                           *ngIf="!isCliente">
+                            <i class="fa fa-solid fa-dollar mb-2"></i>
+                            Financeiro
+                        </a>
                     </div>
 
                     <a (click)="logout()" href="#" class="dropdown-btn btn-sair">

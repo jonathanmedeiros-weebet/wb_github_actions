@@ -1,0 +1,81 @@
+<div id="default-content">
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>Cartões de aposta</h2>
+        </div>
+
+        <div class="content-body">
+            <form (submit)="handleFiltrar()">
+                <div class="filtros">
+                    <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="Apostador" [ngModelOptions]="{standalone: true}">
+                    <input
+                        name="datepicker"
+                        class="dp-hidden"
+                        ngbDatepicker
+                        #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event, datepicker)"
+                        [displayMonths]="2"
+                        [dayTemplate]="t"
+                        outsideDays="hidden"
+                        [startDate]="fromDate!"
+                        tabindex="-1"
+                        value=""
+                    >
+                    <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day"
+                                [class.focused]="focused"
+                                [class.range]="isRange(date)"
+                                [class.faded]="isHovered(date) || isInside(date)"
+                                (mouseenter)="hoveredDate = date"
+                                (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                        </span>
+                    </ng-template>
+                    <div class="input-group datepicker-group">
+                        <i class="fa fa-calendar"></i>
+                        <input
+                            type="text"
+                            class="form-control inverted-out"
+                            [(ngModel)]="selectedDate"
+                            (click)="datepicker.toggle()"
+                            [ngModelOptions]="{standalone: true}"
+                        >
+                    </div>
+
+                    <button class="btn btn-custom" type="submit">Filtrar</button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Chave</th>
+                            <th>Data</th>
+                            <th>Apostador</th>
+                            <th>Recarga</th>
+                            <th>Prêmio</th>
+                            <th>Saques</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                    </tr>
+                    <tbody *ngIf="!loading">
+                        <tr *ngFor="let cartao of cartoes">
+                            <td>{{ cartao.chave }}</td>
+                            <td>{{ cartao.data_registro }}</td>
+                            <td>{{ cartao.apostador }}</td>
+                            <td>{{ cartao.total_creditos | currency }}</td>
+                            <td>{{ cartao.premios | currency }}</td>
+                            <td>{{ cartao.total_saques | currency }}</td>
+                            <td>{{ cartao.saldo | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

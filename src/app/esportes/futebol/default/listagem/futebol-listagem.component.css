@@ -128,6 +128,10 @@
     right: 10px;
 }
 
+.mais-cotacao-mobile {
+    display: none;
+}
+
 @media only screen and (max-width: 1024px) {
     .mais-opcoes {
         margin-right: 10px;
@@ -140,4 +144,16 @@
     .mais-opcoes {
         margin: 0;
     }
+
+    .indentificacao .nome {
+        position: relative;
+    }
+
+    .mais-cotacao-mobile {
+        display: block;
+        position: absolute;
+        right: 10px;
+        color: #fff;
+    }
+
 }

@@ -305,6 +305,7 @@
         "ngx-skeleton-loader": "^6.0.0",
         "ngx-toastr": "^13.2.0",
         "rxjs": "~6.6.0",
+        "skeleton-screen-css": "^1.1.0",
         "socket.io-client": "^2.1.1",
         "tslib": "^2.3.0",
         "zone.js": "~0.11.4"

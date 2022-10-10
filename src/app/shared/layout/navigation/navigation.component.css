@@ -7,6 +7,10 @@
     flex-direction: column;
 }
 
+#sidebar-wrapper.collapsed:hover {
+    width: 270px;
+}
+
 app-sidebar-nav {
     flex: 1 1 auto;
     height: 0px;
@@ -30,7 +34,7 @@ app-sidebar-nav {
 
 .collapsed .btn-collapse {
     border-radius: 0;
-    width: 50px;
+    width: 100%;
 }
 
 .collapsed {

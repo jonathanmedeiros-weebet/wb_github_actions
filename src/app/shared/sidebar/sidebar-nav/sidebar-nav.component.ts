@@ -29,6 +29,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     unsub$ = new Subject();
     regioesDestaque;
 
+    subCartao = false;
+
     constructor(
         private router: Router,
         private fb: FormBuilder,
@@ -46,6 +48,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        if(this.router.url == '/cambistas/cartoes' || this.router.url == '/cambistas/solicitacoes-saque') {
+            this.subCartao = true;
+        }
+
         this.regioesDestaqueService.setExibirDestaques(false);
         this.createForm();
 
@@ -80,10 +86,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 //     this.cd.detectChanges();
                 // }, 250);
             });
-    }
-
-    ngAfterViewInit() {
-        console.log(this.el);
     }
 
     createForm() {
@@ -176,5 +178,9 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
+    }
+
+    toogleSubCartao() {
+        this.subCartao = !this.subCartao;
     }
 }
