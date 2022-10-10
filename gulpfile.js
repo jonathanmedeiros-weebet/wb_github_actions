@@ -2416,3 +2416,12 @@ gulp.task('rjbets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('soumaisbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "soumaisbet.com",
+        banca: "SOU MAIS BET",
+        styles: "",
+    });
+});
