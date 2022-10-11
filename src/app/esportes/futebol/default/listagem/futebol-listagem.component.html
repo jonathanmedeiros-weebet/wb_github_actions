@@ -1,4 +1,4 @@
-<div class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
+<div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
     <app-banners></app-banners>
     <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" (regiaoSelecionada)="receptorRegiaoSelecionada($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
     <div class="wrap-sticky">
@@ -13,8 +13,10 @@
             <div class="tabs">
                 <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>
                 <a class="tab" [ngClass]="{'active': tabSelected == 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
-                <a class="tab" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('dddd') | titlecase }}</a>
-                <a class="tab" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('dddd') | titlecase  }}</a>
+                <a class="tab hide-mobile" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('dddd') | titlecase }}</a>
+                <a class="tab show-mobile" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('ddd') | titlecase }}</a>
+                <a class="tab hide-mobile" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('dddd') | titlecase  }}</a>
+                <a class="tab show-mobile" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('ddd') | titlecase  }}</a>
             </div>
         </div>
 
@@ -159,5 +161,5 @@
             </div>
         </div>
     </div>
-    <app-footer></app-footer>
+    <app-footer [container]="listagem"></app-footer>
 </div>

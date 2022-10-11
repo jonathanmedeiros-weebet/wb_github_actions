@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../../config';
 import {AuthService} from '../../services/auth/auth.service';
@@ -11,6 +11,7 @@ import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-
     styleUrls: ['footer.component.css']
 })
 export class FooterComponent implements OnInit {
+    @Input() container;
     BANCA_NOME = '';
     LOGO = config.LOGO;
     isAppMobile;

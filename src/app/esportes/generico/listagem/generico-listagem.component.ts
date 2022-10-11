@@ -32,6 +32,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     itens = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
+    exibirCampeonatosExpandido;
+    campeonatosAbertos = [];
     cotacoesLocais;
     jogosBloqueados;
     dataLimiteTabela;
@@ -66,6 +68,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+        this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -264,6 +267,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
             this.campeonatos = this.campeonatos.concat(splice);
 
+            if (this.exibirCampeonatosExpandido) {
+                const sliceIds = splice.map(campeonato => campeonato._id);
+                this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
+            }
+
             this.start++;
         }
 
@@ -312,5 +320,18 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     exibirTotalOdds() {
         return this.sportId === '18';
+    }
+
+    toggleCampeonato(campeonatoId) {
+        const index = this.campeonatosAbertos.findIndex(id => id === campeonatoId);
+        if (index >= 0) {
+            this.campeonatosAbertos.splice(index, 1);
+        } else {
+            this.campeonatosAbertos.push(campeonatoId);
+        }
+    }
+
+    campeonatoAberto(campeonatoId) {
+        return this.campeonatosAbertos.includes(campeonatoId);
     }
 }

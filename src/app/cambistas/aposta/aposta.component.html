@@ -8,7 +8,7 @@
             <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">Esporte</a>
             <a *ngIf="acumuladaoHabilitado" [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''" (click)="changeTab('acumuladao')">Acumuladão</a>
             <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''" (click)="changeTab('desafio')">Desafio</a>
-            <a *ngIf="cassinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''" (click)="changeTab('cassino')">Cassino</a>
+            <!-- <a *ngIf="cassinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''" (click)="changeTab('cassino')">Cassino</a> -->
         </div>
 
         <div class="content-body">

@@ -1,4 +1,4 @@
-<div class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
+<div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
     <app-banners [pagina]="esporte"></app-banners>
     <div class="wrap-sticky">
 
@@ -29,10 +29,19 @@
             </div>
 
             <div class="campeonato" *ngFor="let campeonato of campeonatos | filter:term; trackBy: trackById">
-                <div class="campeonato-header">
+                <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span class="campeonato-nome">{{campeonato.nome}}</span>
+
+                    <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
+                        <i class="fa fa-angle-up"></i>
+                    </span>
+                    <ng-template #downIcon>
+                        <span>
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </ng-template>
                 </div>
-                <div class="jogos">
+                <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos">
                         <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
                             <div class="indentificacao">
@@ -75,7 +84,7 @@
                                         {{jogo.time_b_nome}}
                                     </div>
                                 </div>
-                                <div style="flex: 1">
+                                <div class="list-odds">
                                     <div class="odds">
                                         <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
                                              [ngClass]="sportId !== '83' ? 'generico' : ''">
@@ -130,5 +139,5 @@
             </div>
         </div>
     </div>
-    <app-footer></app-footer>
+    <app-footer [container]="listagem"></app-footer>
 </div>

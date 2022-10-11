@@ -1,6 +1,8 @@
 .campeonato-header{
     border: none;
     cursor: initial;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .campeonato-header .column-left{
@@ -10,13 +12,6 @@
 
 .campeonato-header .campeonato-nome{
     margin-left: 28px;
-}
-
-.campeonato-header .fa{
-    font-size: 1.5rem;
-    float: right;
-    line-height: 41px;
-    margin-right: 10px;
 }
 
 .jogos{
@@ -136,40 +131,6 @@
     color: #fff;
 }
 
-/* Large devices (desktops, 1025 and up) */
-@media (min-width: 1025px) {
-    .mais-opcoes .fa{
-        margin-right: 3px;
-    }
-
-    .indentificacao{
-        display: flex;
-    }
-
-    .indentificacao-mobile{
-        display: none;
-    }
-}
-
-/* Small devices (1024 and down) */
-@media only screen and (max-width: 1024px) {
-    .content-sports {
-        /*padding-bottom: 106px;*/
-    }
-
-    .mais-opcoes{
-        margin-right: 5px;
-    }
-
-    .indentificacao, .mais-opcoes span{
-        display: none;
-    }
-
-    .indentificacao-mobile{
-        display: block;
-    }
-}
-
 .escudo-container {
     margin-top: 4px;
     margin-bottom: 4px;
@@ -252,4 +213,40 @@
 
 .cotacoes .cotacao label {
     margin: 0;
+}
+
+
+/* Large devices (desktops, 1025 and up) */
+@media (min-width: 1025px) {
+    .mais-opcoes .fa{
+        margin-right: 3px;
+    }
+}
+
+/* Small devices (1024 and down) */
+@media only screen and (max-width: 1024px) {
+    .content-sports {
+        /*padding-bottom: 106px;*/
+    }
+
+    .mais-opcoes{
+        margin-right: 5px;
+    }
+
+    .indentificacao .time-a,
+    .indentificacao .time-b {
+        width: 100%;
+    }
+
+    .cotacoes, .cotacoes .cotacao {
+        flex: 1;
+    }
+
+    .cotacoes {
+        margin-left: 6px;
+    }
+
+    .cotacoes .cotacao {
+        margin: 10px 4px;
+    }
 }

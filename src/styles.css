@@ -1285,7 +1285,7 @@ input.inverted-out:disabled {
 }
 
 .campeonato {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .jogo-selecionado {
@@ -1525,13 +1525,21 @@ input[type=number]::-webkit-outer-spin-button {
     opacity: 0.3;
 }
 
+.show-mobile {
+    display: none !important;
+}
+
 @media only screen and (max-width: 1024px) {
     .odds {
         padding: 5px 15px;
     }
 
     .no-mobile, .hide-mobile {
-        display: none;
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: block !important;
     }
 
     .modal-dialog {

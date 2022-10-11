@@ -22,6 +22,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     temJogoAoVivo = true;
     awaiting = true;
     showLoadingIndicator = true;
+    exibirCampeonatosExpandido;
+    campeonatosAbertos = [];
     contentSportsEl;
     minutoEncerramentoAoVivo = 0;
     jogosBloqueados;
@@ -44,6 +46,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     ngOnInit() {
         this.liveService.entrarSalaEventos();
         this.mobileScreen = window.innerWidth <= 1024;
+        this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
         this.definindoAlturas();
 
@@ -92,6 +95,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                         if (temJogoValido) {
                             this.campeonatos.set(campeonato._id, campeonato);
+
+                            if (this.exibirCampeonatosExpandido) {
+                                this.campeonatosAbertos = this.campeonatosAbertos.concat(campeonato._id);
+                            }
                         }
                     });
 
@@ -255,5 +262,18 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+    }
+
+    toggleCampeonato(campeonatoId) {
+        const index = this.campeonatosAbertos.findIndex(id => id === campeonatoId);
+        if (index >= 0) {
+            this.campeonatosAbertos.splice(index, 1);
+        } else {
+            this.campeonatosAbertos.push(campeonatoId);
+        }
+    }
+
+    campeonatoAberto(campeonatoId) {
+        return this.campeonatosAbertos.includes(campeonatoId);
     }
 }

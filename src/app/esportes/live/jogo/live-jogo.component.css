@@ -303,4 +303,8 @@
     .nome img {
         width: 30px;
     }
+
+    .tipo-apostas {
+        column-count: initial;
+    }
 }
