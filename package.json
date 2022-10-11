@@ -264,7 +264,8 @@
         "grenbet.net": "gulp grenbet.net",
         "futtop.bet": "gulp futtop.bet",
         "rjbets.wee.bet": "gulp rjbets.wee.bet",
-        "soumaisbet.com": "gulp soumaisbet.com"
+        "soumaisbet.com": "gulp soumaisbet.com",
+        "bets12.net": "gulp bets12.net"
     },
     "private": true,
     "dependencies": {

@@ -2425,3 +2425,12 @@ gulp.task('soumaisbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bets12.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bets12.net",
+        banca: "BETS 12",
+        styles: "",
+    });
+});
