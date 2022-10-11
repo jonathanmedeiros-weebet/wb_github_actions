@@ -2434,3 +2434,12 @@ gulp.task('bets12.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet73.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet73.wee.bet",
+        banca: "BET 73",
+        styles: "",
+    });
+});
