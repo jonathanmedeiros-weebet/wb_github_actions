@@ -1270,15 +1270,6 @@ gulp.task('uzzebet.com', function (done) {
     });
 });
 
-gulp.task('wsesportes.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "wsesportes.com",
-        banca: "WS ESPORTES",
-        styles: "",
-    });
-});
-
 gulp.task('bet27.tv', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
