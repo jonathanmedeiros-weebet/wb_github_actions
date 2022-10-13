@@ -126,22 +126,7 @@
                                     {{ apostasRealizadasDesafio.valor_apostas | currency }}
                                  </span>
                             </li>
-                            <li>
-                                 <div class="info">
-                                    <i>
-                                        <img src="/assets/images/diamante.svg" alt="image">
-                                    </i>
-                                    <div class="info-texto">
-                                        <label>Cassino</label>
-                                        <span class="bets">{{ apostasRealizadasCassino.quantidade }} apostas</span>
-                                    </div>
-                                 </div>
-                                 <span class="valor-apostas">
-                                    {{ apostasRealizadasCassino.valor_apostas | currency }}
-                                 </span>
-                            </li>
                         </ul>
-
 
                         <a [routerLink]="['/cambistas/apostas']">Mais Informacões</a>
                     </div>

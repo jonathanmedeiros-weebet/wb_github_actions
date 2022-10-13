@@ -1,41 +1,44 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Detalhes do Cartão</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="/assets/images/close.svg" alt="fechar" width="15">
+    </a>
 </div>
 <div class="modal-body">
     <div class="cartao-aposta">
-        <h3>Cartão {{cartao.chave}}</h3>
+        <div class="box-chave">
+            <label for="">Chave cartão</label>
+            <span>Cartão {{cartao.chave}}</span>
+        </div>
         <div>
             <div>
-                <div>
+                <div class="mb-4">
                     <b>Apostador: </b>
                     <span>{{cartao.apostador}}</span>
                 </div>
-                <div>
+                <div class="mb-4">
                     <b>Recargas: </b>
                     <span>{{cartao.total_creditos | currency}}</span>
                 </div>
-                <div>
+                <div class="mb-4">
                     <b>Prêmios: </b>
                     <span>{{cartao.premios | currency}}</span>
                 </div>
-                <div>
+                <div class="mb-4">
                     <b>Criação: </b>
                     <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
                 </div>
             </div>
             <div>
-                <div>
+                <div class="mb-4">
                     <b>Cambista: </b>
                     <span>{{cartao.passador?.nome}}</span>
                 </div>
-                <div>
+                <div class="mb-4">
                     <b>Saques: </b>
                     <span>{{cartao.total_saques | currency}}</span>
                 </div>
-                <div>
+                <div class="mb-4">
                     <b>Saldo atual: </b>
                     <span>{{cartao.saldo | currency}}</span>
                 </div>
@@ -74,12 +77,12 @@
             </table>
         </div>
     </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
-        Fechar
-    </button>
-    <button type="button" class="btn btn-custom" (click)="print()">
-        Imprimir
-    </button>
+    <div class="actions">
+        <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
+            Fechar
+        </button>
+        <button type="button" class="btn btn-custom" (click)="print()">
+            Imprimir
+        </button>
+    </div>
 </div>

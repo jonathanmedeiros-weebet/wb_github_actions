@@ -9,7 +9,8 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 
 @Component({
     selector: 'app-cartao-cadastro-modal',
-    templateUrl: './cartao-cadastro-modal.component.html'
+    templateUrl: './cartao-cadastro-modal.component.html',
+    styleUrls: ['./cartao-cadastro-modal.component.css']
 })
 export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
     modalRef;

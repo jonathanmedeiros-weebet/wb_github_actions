@@ -7,10 +7,12 @@ import {EsportesWrapperComponent} from './wrapper/esportes-wrapper.component';
 import {PreApostaEsportivaService} from '../services';
 import {NgxMaskModule} from 'ngx-mask';
 import { DestaquesComponent } from './destaques/destaques.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
     imports: [
         SharedModule,
+        CarouselModule,
         EsportesRoutingModule,
         NgxMaskModule.forRoot(),
     ],

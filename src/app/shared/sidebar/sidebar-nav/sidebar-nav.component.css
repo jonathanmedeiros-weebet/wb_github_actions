@@ -156,6 +156,10 @@
     }
 }
 
+.cambista-menu {
+    overflow: auto;
+}
+
 .cambista-menu a {
     transition: 0.15s all ease;
     white-space: nowrap;

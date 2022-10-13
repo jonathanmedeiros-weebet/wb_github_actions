@@ -1,33 +1,35 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Recarga de Cartão</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="/assets/images/close.svg" alt="fechar" width="15">
+    </a>
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="modal-body">
         <div class="form-group">
             <input style="text-transform:uppercase;" type="text" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false"
-                class="form-control" formControlName="chave" placeholder="Chave do cartão"
+                class="form-control inverted-out" formControlName="chave" placeholder="Chave do cartão"
                 [ngClass]="applyCssInputError('chave')">
             <app-error-msg [control]="form.get('chave')"></app-error-msg>
         </div>
         <div class="form-group">
-            <input type="text" mask="dot_separator.2" class="form-control" formControlName="valor" placeholder="Valor"
+            <input type="text" mask="dot_separator.2" class="form-control inverted-out" formControlName="valor" placeholder="Valor"
                 [ngClass]="applyCssInputError('valor')">
             <app-error-msg [control]="form.get('valor')"></app-error-msg>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
-            Cancelar
-        </button>
-        <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">Recarregar</button>
-        <ng-template #btnProcessando>
-            <button disabled class="btn btn-custom">
-                Processando...
-                <i class="fa fa-spinner fa-spin"></i>
+
+        <div class="actions">
+            <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
+                Cancelar
             </button>
-        </ng-template>
+            <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">Recarregar</button>
+            <ng-template #btnProcessando>
+                <button disabled class="btn btn-custom">
+                    Processando...
+                    <i class="fa fa-spinner fa-spin"></i>
+                </button>
+            </ng-template>
+        </div>
+
     </div>
 </form>

@@ -2,6 +2,33 @@
     position: relative;
 }
 
+.wall-container {
+    width: 100%;
+    min-height: 100%;
+    padding: 5px;
+}
+
+.wall-inner {
+    padding: 5px 120px;
+    max-width: 1910px;
+    margin: 0 auto;
+}
+
+.bloco {
+    position: relative;
+}
+
+.bloco .bloco-header {
+    display: flex;
+}
+
+.bloco .titulo {
+    text-align: left;
+    font-size: 18px;
+    color: var(--foreground-header);
+    flex-grow: 1;
+}
+
 .game-list{
     display: flex;
     flex-wrap: wrap;

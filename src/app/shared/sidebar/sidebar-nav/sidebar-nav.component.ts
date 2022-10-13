@@ -30,6 +30,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     regioesDestaque;
 
     subCartao = false;
+    subPerfil = false;
 
     constructor(
         private router: Router,
@@ -50,6 +51,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     ngOnInit() {
         if(this.router.url == '/cambistas/cartoes' || this.router.url == '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
+        }
+
+        if(this.router.url == '/clientes/perfil' || this.router.url == '/clientes/perfil-pix' || this.router.url == '/alterar-senha') {
+            this.subPerfil = true;
         }
 
         this.regioesDestaqueService.setExibirDestaques(false);
@@ -180,7 +185,25 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         });
     }
 
+    abrirRecargaCartao() {
+        const modalConsultarCartao = this.modalService.open(RecargaCartaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+    }
+
+    abrirCriarCartao() {
+        const modalConsultarCartao = this.modalService.open(CartaoCadastroModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+    }
+
     toogleSubCartao() {
         this.subCartao = !this.subCartao;
+    }
+
+    toogleSubPerfil() {
+        this.subPerfil = !this.subPerfil;
     }
 }

@@ -17,12 +17,40 @@
                     <form (ngSubmit)="onSubmit()" [formGroup]="form">
                         <div class="form-row">
                             <div class="col-6 col-md-3">
-                                <input type="date" class="form-control inverted-out" formControlName="dataInicial">
-                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <input type="date" class="form-control inverted-out" formControlName="dataFinal">
-                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
+                                <input
+                                    name="datepicker"
+                                    class="dp-hidden"
+                                    ngbDatepicker
+                                    #datepicker="ngbDatepicker"
+                                    [autoClose]="'outside'"
+                                    (dateSelect)="onDateSelection($event, datepicker)"
+                                    [displayMonths]="2"
+                                    [dayTemplate]="t"
+                                    outsideDays="hidden"
+                                    [startDate]="fromDate!"
+                                    tabindex="-1"
+                                    value=""
+                                >
+                                <ng-template #t let-date let-focused="focused">
+                                    <span class="custom-day"
+                                            [class.focused]="focused"
+                                            [class.range]="isRange(date)"
+                                            [class.faded]="isHovered(date) || isInside(date)"
+                                            (mouseenter)="hoveredDate = date"
+                                            (mouseleave)="hoveredDate = null">
+                                        {{ date.day }}
+                                    </span>
+                                </ng-template>
+                                <div class="input-group datepicker-group">
+                                    <i class="fa fa-calendar"></i>
+                                    <input
+                                        type="text"
+                                        class="form-control inverted-out"
+                                        [(ngModel)]="selectedDate"
+                                        (click)="datepicker.toggle()"
+                                        [ngModelOptions]="{standalone: true}"
+                                    >
+                                </div>
                             </div>
                             <div class="col-6 col-md-2">
                                 <select class="form-control inverted-out" formControlName="status">

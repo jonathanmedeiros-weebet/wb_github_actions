@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+owl-carousel-o {
+    width: 100%;
+}
+
 .back {
     cursor: pointer;
     font-size: 18px;

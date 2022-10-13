@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { JogoService, BilheteEsportivoService, HelperService } from 'src/app/services';
@@ -21,6 +22,18 @@ export class DestaquesComponent implements OnInit {
     mobileScreen;
     itens = [];
     itensSelecionados = {};
+    isDragging = false;
+
+    customOptions: OwlOptions = {
+        loop: true,
+        autoplay: true,
+        margin: 10,
+        nav: true,
+        dots: false,
+        autoHeight: true,
+        autoWidth: true,
+        navText: [ '<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>' ]
+    }
 
     unsub$ = new Subject();
 
@@ -72,47 +85,51 @@ export class DestaquesComponent implements OnInit {
     }
 
     maisCotacoes(jogoId) {
-        this.jogoIdAtual = jogoId;
-        this.maisCotacoesDestaque.emit(jogoId);
+        if(!this.isDragging) {
+            this.jogoIdAtual = jogoId;
+            this.maisCotacoesDestaque.emit(jogoId);
+        }
     }
 
     addCotacao(event, jogo, cotacao) {
         event.stopPropagation();
-        console.log('testeeee');
-        let modificado = false;
-        const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
-        const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
 
-        const item = {
-            ao_vivo: jogo.ao_vivo,
-            jogo_id: jogo._id,
-            jogo_event_id: jogo.event_id,
-            jogo_nome: jogo.nome,
-            cotacao: {
-                chave: cotacao.chave,
-                valor: cotacao.valor,
-                nome: cotacao.nome
-            },
-            jogo: jogo,
-            mudanca: false,
-            cotacao_antiga_valor: null
-        };
+        if(!this.isDragging) {
+            let modificado = false;
+            const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
+            const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
 
-        if (indexGame >= 0) {
-            if (indexOdd >= 0) {
-                this.itens.splice(indexOdd, 1);
+            const item = {
+                ao_vivo: jogo.ao_vivo,
+                jogo_id: jogo._id,
+                jogo_event_id: jogo.event_id,
+                jogo_nome: jogo.nome,
+                cotacao: {
+                    chave: cotacao.chave,
+                    valor: cotacao.valor,
+                    nome: cotacao.nome
+                },
+                jogo: jogo,
+                mudanca: false,
+                cotacao_antiga_valor: null
+            };
+
+            if (indexGame >= 0) {
+                if (indexOdd >= 0) {
+                    this.itens.splice(indexOdd, 1);
+                } else {
+                    this.itens.splice(indexGame, 1, item);
+                }
+
+                modificado = true;
             } else {
-                this.itens.splice(indexGame, 1, item);
+                this.itens.push(item);
+                modificado = true;
             }
 
-            modificado = true;
-        } else {
-            this.itens.push(item);
-            modificado = true;
-        }
-
-        if (modificado) {
-            this.bilheteService.atualizarItens(this.itens);
+            if (modificado) {
+                this.bilheteService.atualizarItens(this.itens);
+            }
         }
     }
 }

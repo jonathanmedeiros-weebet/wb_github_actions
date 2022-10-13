@@ -21,7 +21,7 @@
 </div>
 </ng-container>
 
-<ul id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
+<ul *ngIf="contexto != 'cambista' && contexto != 'cliente'" id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
     <ng-container *ngIf="contexto == 'esportes'">
         <div class="destaques-regiao" *ngIf="regioesDestaque && !collapsed">
             <span class="group" *ngIf="!collapsed">Cartões</span>
@@ -111,191 +111,191 @@
             </a>
         </li>
     </ng-container>
-    <ng-container *ngIf="contexto == 'cambista'">
-        <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
-            <ul>
-                <li class="cambista-item">
-                    <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
-                        <i class="fa fa-key icone-generico"></i>
-                        <span class="regiao-nome">Alterar senha</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dashboard icone-generico"></i>
-                        <span class="regiao-nome">Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/financeiro']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Financeiro</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-middle">
-                <li class="cambista-item">
-                    <a [routerLink]="['/validar-aposta']" routerLinkActive="router-link-active">
-                        <i class="fa fa-calendar-check icone-generico"></i>
-                        <span class="regiao-nome">Validacão</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/apuracao']" routerLinkActive="router-link-active">
-                        <i class="fa fa-calendar-check icone-generico"></i>
-                        <span class="regiao-nome">Apuracao</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/apostas']" routerLinkActive="router-link-active">
-                        <i class="fa fa-check-square icone-generico"></i>
-                        <span class="regiao-nome">Apostas</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item" routerLinkActive="router-link-active">
-                    <a (click)="toogleSubCartao()">
-                        <i class="fa fa-credit-card icone-generico"></i>
-                        <span class="regiao-nome">Cartão</span>
-                        <i class="fa fa-angle-down m-0"></i>
-                    </a>
-
-                    <div class="sub-nav-container" *ngIf="subCartao">
-                        <ul>
-                            <li class="cambista-subitem">
-                                <a>
-                                    <span class="regiao-nome">Consultar</span>
-                                </a>
-                            </li>
-                            <li class="cambista-subitem">
-                                <a>
-                                    <span class="regiao-nome">Criar</span>
-                                </a>
-                            </li>
-                            <li class="cambista-subitem">
-                                <a [routerLink]="['/cambistas/cartoes']" routerLinkActive="router-link-active">
-                                    <span class="regiao-nome">Listagem</span>
-                                </a>
-                            </li>
-                            <li class="cambista-subitem">
-                                <a [routerLink]="['/cambistas/solicitacoes-saque']" routerLinkActive="router-link-active">
-                                    <span class="regiao-nome">Solicitções de saque</span>
-                                </a>
-                            </li>
-                            <li class="cambista-subitem">
-                                <a>
-                                    <span class="regiao-nome">Recarga</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
-                        <i class="fa fa-print icone-generico"></i>
-                        <span class="regiao-nome">Tabela</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-bottom">
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-comments icone-generico"></i>
-                        <span class="regiao-nome">Ajuda</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-sign-out icone-generico"></i>
-                        <span class="regiao-nome">Sair</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </ng-container>
-
-    <ng-container *ngIf="contexto == 'cliente'">
-        <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
-            <ul>
-                <li class="cambista-item" routerLinkActive="router-link-active">
-                    <a>
-                        <i class="fa fa-user icone-generico"></i>
-                        <span class="regiao-nome">Perfil</span>
-                        <i class="fa fa-angle-down m-0"></i>
-                    </a>
-
-                    <div class="sub-nav-container">
-                        <ul>
-                            <li class="cambista-subitem">
-                                <a [routerLink]="['/clientes/perfil']" routerLinkActive="router-link-active">
-                                    <span class="regiao-nome">Dados Pessoais</span>
-                                </a>
-                            </li>
-                            <li class="cambista-subitem">
-                                <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
-                                    <span class="regiao-nome">PIX</span>
-                                </a>
-                            </li>
-
-                            <li class="cambista-subitem">
-                                <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
-                                    <span class="regiao-nome">Alterar senha</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Financeiro</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Saque</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
-                        <i class="fa fa-dollar icone-generico"></i>
-                        <span class="regiao-nome">Deposito</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-middle">
-                <li class="cambista-item">
-                    <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
-                        <i class="fa fa-check-square icone-generico"></i>
-                        <span class="regiao-nome">Apostas</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="menu-bottom">
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-comments icone-generico"></i>
-                        <span class="regiao-nome">Ajuda</span>
-                    </a>
-                </li>
-
-                <li class="cambista-item">
-                    <a>
-                        <i class="fa fa-sign-out icone-generico"></i>
-                        <span class="regiao-nome">Sair</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </ng-container>
 </ul>
+<ng-container *ngIf="contexto == 'cambista'">
+    <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
+        <ul>
+            <li class="cambista-item">
+                <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                    <i class="fa fa-key icone-generico"></i>
+                    <span class="regiao-nome">Alterar senha</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dashboard icone-generico"></i>
+                    <span class="regiao-nome">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/financeiro']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Financeiro</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-middle">
+            <li class="cambista-item">
+                <a [routerLink]="['/validar-aposta']" routerLinkActive="router-link-active">
+                    <i class="fa fa-calendar-check icone-generico"></i>
+                    <span class="regiao-nome">Validacão</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/apuracao']" routerLinkActive="router-link-active">
+                    <i class="fa fa-calendar-check icone-generico"></i>
+                    <span class="regiao-nome">Apuracao</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/apostas']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">Apostas</span>
+                </a>
+            </li>
+
+            <li class="cambista-item" routerLinkActive="router-link-active">
+                <a (click)="toogleSubCartao()">
+                    <i class="fa fa-credit-card icone-generico"></i>
+                    <span class="regiao-nome">Cartão</span>
+                    <i class="fa fa-angle-down m-0"></i>
+                </a>
+
+                <div class="sub-nav-container" *ngIf="subCartao">
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a (click)="abrirConsultarCartao()">
+                                <span class="regiao-nome">Consultar</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a (click)="abrirCriarCartao()">
+                                <span class="regiao-nome">Criar</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/cambistas/cartoes']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Listagem</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/cambistas/solicitacoes-saque']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Solicitções de saque</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a (click)="abrirRecargaCartao()">
+                                <span class="regiao-nome">Recarga</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
+                    <i class="fa fa-print icone-generico"></i>
+                    <span class="regiao-nome">Tabela</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-bottom">
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-comments icone-generico"></i>
+                    <span class="regiao-nome">Ajuda</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-sign-out icone-generico"></i>
+                    <span class="regiao-nome">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="contexto == 'cliente'">
+    <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
+        <ul>
+            <li class="cambista-item" routerLinkActive="router-link-active">
+                <a  (click)="toogleSubPerfil()">
+                    <i class="fa fa-user icone-generico"></i>
+                    <span class="regiao-nome">Perfil</span>
+                    <i class="fa fa-angle-down m-0"></i>
+                </a>
+
+                <div class="sub-nav-container" *ngIf="subPerfil">
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/perfil']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Dados Pessoais</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">PIX</span>
+                            </a>
+                        </li>
+
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">Alterar senha</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- <li class="cambista-item">
+                <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Financeiro</span>
+                </a>
+            </li> -->
+
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Saque</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">Deposito</span>
+                </a>
+            </li>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">Apostas</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-middle" style="border-top: 0">
+        </ul>
+        <ul class="menu-bottom">
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-comments icone-generico"></i>
+                    <span class="regiao-nome">Ajuda</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a>
+                    <i class="fa fa-sign-out icone-generico"></i>
+                    <span class="regiao-nome">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-container>

@@ -8,6 +8,7 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
 import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { forEach } from 'lodash';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -33,6 +34,12 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     tabSelected = 'esporte';
 
+    hoveredDate: NgbDate | null = null;
+    selectedDate: string = '';
+
+    fromDate: NgbDate | null;
+    toDate: NgbDate | null;
+
     apostas = [];
 
     constructor(
@@ -45,22 +52,24 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private acumuladaoService: AcumuladaoService,
         private cassinoService: CasinoApiService,
         public desafioApostaService: DesafioApostaService,
+        public formatter: NgbDateParserFormatter,
+        private calendar: NgbCalendar,
     ) {
         super();
+
+        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -6);
+        this.toDate = calendar.getToday();
+
+        this.queryParams = {
+            dataInicial: this.formatDate(this.fromDate, 'us'),
+            dataFinal: this.formatDate(this.toDate, 'us')
+        }
+
+        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
     }
 
     ngOnInit() {
         this.sidebarService.changeItens({contexto: 'cliente'});
-
-        if (moment().day() === 0) {
-            const startWeek = moment().startOf('week');
-            this.dataInicial = startWeek.subtract(6, 'days');
-            this.dataFinal = moment();
-
-        } else {
-            this.dataInicial = moment().startOf('week').add('1', 'day');
-            this.dataFinal = moment();
-        }
 
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
@@ -126,8 +135,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     createForm() {
         this.form = this.fb.group({
-            dataInicial: [this.dataInicial.format('YYYY-MM-DD'), Validators.required],
-            dataFinal: [this.dataFinal.format('YYYY-MM-DD'), Validators.required],
+            dataInicial: [this.formatDate(this.fromDate, 'us'), Validators.required],
+            dataFinal: [this.formatDate(this.toDate, 'us'), Validators.required],
             status: [''],
         });
 
@@ -159,6 +168,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     submit() {
         this.queryParams = this.form.value;
+        this.getApostas();
     }
 
     changeTab(tab) {
@@ -174,5 +184,46 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             return 'default';
         }
+    }
+
+    onDateSelection(date: NgbDate, datepicker: any) {
+        if (!this.fromDate && !this.toDate) {
+            this.fromDate = date;
+            this.queryParams.dataInicial = this.formatDate(date, 'us');
+        } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+            this.toDate = date;
+            this.queryParams.dataFinal = this.formatDate(date, 'us');
+            this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
+            datepicker.close();
+        } else {
+            this.toDate = null;
+            this.queryParams.dataFinal = null;
+            this.fromDate = date;
+            this.queryParams.dataInicial = this.formatDate(date, 'us');
+        }
+    }
+
+    formatDate(date, lang = 'br') {
+        if(lang == 'us') {
+            return  date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
+        }
+        return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year
+    }
+
+    isHovered(date: NgbDate) {
+        return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
+            date.before(this.hoveredDate);
+    }
+
+    isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
+
+    isRange(date: NgbDate) {
+        return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
+        this.isHovered(date);
+    }
+
+    validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+        const parsed = this.formatter.parse(input);
+        return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     }
 }

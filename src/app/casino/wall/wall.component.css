@@ -241,3 +241,11 @@
         height: 200px;
     }
 }
+
+
+.box-jogo {
+    width: 20%;
+    height: 229px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
