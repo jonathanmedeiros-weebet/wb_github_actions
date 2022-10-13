@@ -23,6 +23,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     isLoggedIn;
     modalRef;
     authDoisFatoresHabilitado;
+    modoClienteHabilitado;
     cookieCliente;
 
     constructor(
@@ -42,6 +43,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
+        this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
