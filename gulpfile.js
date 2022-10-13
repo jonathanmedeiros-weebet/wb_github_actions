@@ -2434,3 +2434,30 @@ gulp.task('bet73.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megasorte.website', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "megasorte.website",
+        banca: "MEGA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('sportsgames.io', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportsgames.io",
+        banca: "SPORTS GAMES",
+        styles: "",
+    });
+});
+
+gulp.task('skoutbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "skoutbet.wee.bet",
+        banca: "SKOUT BET",
+        styles: "",
+    });
+});
