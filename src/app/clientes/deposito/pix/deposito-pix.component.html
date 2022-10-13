@@ -67,6 +67,14 @@
                     </a>
                 </div>
             </ng-container>
+            <ng-container *ngIf="metodoPagamento === 'gerencianet'">
+                <img class="col-md-4" src="{{pix.qr_code_base64}}"/>
+                <div class="align-content-center">
+                    <a class="btn btn-info" (click)="novoPix()">
+                        Gerar novo QRCode para depósito
+                    </a>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>
