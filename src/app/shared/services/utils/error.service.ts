@@ -11,11 +11,11 @@ export class ErrorService {
 
     handleError(error: HttpErrorResponse) {
         let message = '';
-        let code = '';
 
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             message = `Um problema ocorreu: ${error.error.message}`;
+            console.log(error);
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
@@ -28,12 +28,13 @@ export class ErrorService {
         }
 
         let result;
+
         if (error.error.errors && error.error.errors.code) {
-            result = error.error.errors.message;
-            code = error.error.errors.code;
+            result = error.error.errors;
         } else {
             result = message;
         }
+
         // return an observable with a user-facing error message
         return throwError(result);
     }
