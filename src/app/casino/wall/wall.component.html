@@ -1,9 +1,9 @@
 <div class="wall-container">
     <app-banners pagina="cassino" ></app-banners>
 
-    <div  class="ssc-square" style="height: 300px"></div>
+    <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
 
-    <div  class="wall-inner">
+    <div *ngIf="showLoadingIndicator" class="wall-inner">
         <div class="bloco">
             <div class="ssc-square" style="height: 47px; width: 200px; margin-top: 20px"></div>
         </div>

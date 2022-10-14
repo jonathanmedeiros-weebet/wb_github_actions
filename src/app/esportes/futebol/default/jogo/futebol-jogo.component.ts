@@ -45,6 +45,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     altura;
     unicaColuna = false;
     unsub$ = new Subject();
+    oddsAberto = [];
+
+    marcadores = true;
+    cartoes = true;
+    golsCasa = true;
+    golsFora = true;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -118,6 +124,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
+        this.oddsAberto = []
+
         if (this.jogoId) {
             this.showLoadingIndicator = true;
 
@@ -204,6 +212,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
 
                 mercado.odds.push(odd);
+                if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                    this.oddsAberto.push(mercado.nome);
+                }
 
                 if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][odd.chave]) {
                     this.cotacoesLocais[this.jogo.event_id][odd.chave].usou = true;
@@ -259,6 +270,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             };
 
                             mercado.odds.push(cotacao);
+                            if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                                this.oddsAberto.push(mercado.nome);
+                            }
                         }
                     }
                 }
@@ -394,8 +408,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
             });
 
-            console.log(jogadoresMercados);
-
             return jogadoresMercados;
 
         } else {
@@ -495,5 +507,19 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         return retorno;
+    }
+
+    toggleOdd(chave) {
+        const index = this.oddsAberto.findIndex(id => id === chave.nome);
+        if (index >= 0) {
+            this.oddsAberto.splice(index, 1);
+        } else {
+            this.oddsAberto.push(chave.nome);
+        }
+    }
+
+    oddAberto(chave) {
+        return this.oddsAberto.includes(chave.nome);
+
     }
 }

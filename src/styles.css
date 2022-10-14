@@ -1362,7 +1362,7 @@ input.inverted-out:disabled {
 
 .odds {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     height: 60px;
     padding: 5px;
     background-color: var(--header);

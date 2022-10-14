@@ -61,10 +61,11 @@
                                 <div class="tipo-aposta {{chave}}"
                                      *ngFor="let chave of objectKeys(mercados90); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
-                                        <div class="header-tipo-aposta">
+                                        <div class="header-tipo-aposta" (click)="toggleOdd(mercados90[chave])" [ngClass]="{'collapsed' : oddAberto(mercados90[chave])}">
                                             {{mercados90[chave].nome}}
+                                            <i class="fa fa-angle-down"></i>
                                         </div>
-                                        <div class="odds-tipo-aposta">
+                                        <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados90[chave])">
                                             <div class="odds">
                                                 <div class="odds-coluna"
                                                      *ngFor="let odds of mercados90[chave].odds"
@@ -104,10 +105,11 @@
                                 <div class="tipo-aposta {{chave}}"
                                      *ngFor="let chave of objectKeys(mercados90); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
-                                        <div class="header-tipo-aposta">
+                                        <div class="header-tipo-aposta" (click)="toggleOdd(mercados90[chave])" [ngClass]="{'collapsed' : oddAberto(mercados90[chave])}">
                                             {{mercados90[chave].nome}}
+                                            <i class="fa fa-angle-down"></i>
                                         </div>
-                                        <div class="odds-tipo-aposta">
+                                        <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados90[chave])">
                                             <div class="odds">
                                                 <div class="odds-coluna"
                                                      *ngFor="let odds of mercados90[chave].odds"
@@ -157,10 +159,11 @@
                                 <div class="tipo-aposta {{chave}}"
                                      *ngFor="let chave of objectKeys(mercados1T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
-                                        <div class="header-tipo-aposta">
+                                        <div class="header-tipo-aposta" (click)="toggleOdd(mercados1T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados1T[chave])}">
                                             {{mercados1T[chave].nome}}
+                                            <i class="fa fa-angle-down"></i>
                                         </div>
-                                        <div class="odds-tipo-aposta">
+                                        <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados1T[chave])">
                                             <div class="odds">
                                                 <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados1T[chave])"
                                                      *ngFor="let odds of mercados1T[chave].odds">
@@ -199,10 +202,11 @@
                                 <div class="tipo-aposta {{chave}}"
                                      *ngFor="let chave of objectKeys(mercados1T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
-                                        <div class="header-tipo-aposta">
+                                        <div class="header-tipo-aposta" (click)="toggleOdd(mercados1T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados1T[chave])}">
                                             {{mercados1T[chave].nome}}
+                                            <i class="fa fa-angle-down"></i>
                                         </div>
-                                        <div class="odds-tipo-aposta">
+                                        <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados1T[chave])">
                                             <div class="odds">
                                                 <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados1T[chave])"
                                                      *ngFor="let odds of mercados1T[chave].odds">
@@ -251,10 +255,11 @@
                                 <div class="tipo-aposta {{chave}}"
                                      *ngFor="let chave of objectKeys(mercados2T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
-                                        <div class="header-tipo-aposta">
+                                        <div class="header-tipo-aposta" (click)="toggleOdd(mercados2T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados2T[chave])}">
                                             {{mercados2T[chave].nome}}
+                                            <i class="fa fa-angle-down"></i>
                                         </div>
-                                        <div class="odds-tipo-aposta">
+                                        <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados2T[chave])">
                                             <div class="odds">
                                                 <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados2T[chave])"
                                                      *ngFor="let odds of mercados2T[chave].odds">
@@ -293,10 +298,11 @@
                                 <div class="tipo-aposta {{chave}}"
                                      *ngFor="let chave of objectKeys(mercados2T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
-                                        <div class="header-tipo-aposta">
+                                        <div class="header-tipo-aposta" (click)="toggleOdd(mercados2T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados2T[chave])}">
                                             {{mercados2T[chave].nome}}
+                                            <i class="fa fa-angle-down"></i>
                                         </div>
-                                        <div class="odds-tipo-aposta">
+                                        <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados2T[chave])">
                                             <div class="odds">
                                                 <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados2T[chave])"
                                                      *ngFor="let odds of mercados2T[chave].odds">
@@ -344,10 +350,11 @@
                              *ngIf="objectKeys(mercadosPorJogadores).length">
                             <div class="odds-jogador-coluna">
                                 <div class="tipo-aposta">
-                                    <div class="header-tipo-aposta">
+                                    <div class="header-tipo-aposta" (click)="marcadores = !marcadores" [ngClass]="{'collapsed' : marcadores}">
                                         Marcadores de Gols
+                                        <i class="fa fa-angle-down"></i>
                                     </div>
-                                    <div class="odds-tipo-aposta">
+                                    <div class="odds-tipo-aposta" *ngIf="marcadores">
                                         <div class="odds">
                                             <div class="col-3"></div>
                                             <div class="col-3">Marca 1º Gol</div>
@@ -469,10 +476,11 @@
 <!--                                </div>-->
 
                                 <div class="tipo-aposta">
-                                    <div class="header-tipo-aposta">
+                                    <div class="header-tipo-aposta" (click)="cartoes = !cartoes" [ngClass]="{'collapsed' : cartoes}">
                                         Cartões
+                                        <i class="fa fa-angle-down"></i>
                                     </div>
-                                    <div class="odds-tipo-aposta">
+                                    <div class="odds-tipo-aposta" *ngIf="cartoes">
                                         <div class="odds">
                                             <div class="col-3"></div>
                                             <div class="col-3">1º Cartão</div>
@@ -539,10 +547,11 @@
                                 </div>
 
                                 <div class="tipo-aposta">
-                                    <div class="header-tipo-aposta">
+                                    <div class="header-tipo-aposta" (click)="golsCasa = !golsCasa" [ngClass]="{'collapsed' : golsCasa}">
                                         Gols Casa - {{jogo.time_a_nome}}
+                                        <i class="fa fa-angle-down"></i>
                                     </div>
-                                    <div class="odds-tipo-aposta">
+                                    <div class="odds-tipo-aposta" *ngIf="golsCasa">
                                         <div class="odds">
                                             <div class="col-6"></div>
                                             <div class="col-3">1º Gol Casa</div>
@@ -594,10 +603,11 @@
                                 </div>
 
                                 <div class="tipo-aposta">
-                                    <div class="header-tipo-aposta">
+                                    <div class="header-tipo-aposta" (click)="golsFora = !golsFora" [ngClass]="{'collapsed' : golsFora}">
                                         Gols Fora - {{jogo.time_b_nome}}
+                                        <i class="fa fa-angle-down"></i>
                                     </div>
-                                    <div class="odds-tipo-aposta">
+                                    <div class="odds-tipo-aposta" *ngIf="golsFora">
                                         <div class="odds">
                                             <div class="col-6"></div>
                                             <div class="col-3">1º Gol Fora</div>

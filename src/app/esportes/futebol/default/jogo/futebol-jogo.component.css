@@ -92,10 +92,17 @@
 .header-tipo-aposta {
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    justify-content: space-between;
+    padding: 0 20px;
     height: 30px;
     background-color: var(--header);
     margin-bottom: 2px;
+
+    cursor: pointer;
+}
+
+.header-tipo-aposta.collapsed i {
+    transform: rotate(180deg);
 }
 
 .odds-tipo-aposta {
@@ -150,7 +157,7 @@
 .odd {
     margin-left: 0;
     margin-bottom: 8px;
-    max-width: 250px;
+    max-width: 100%;
 }
 
 .odd:last-of-type {
