@@ -2461,3 +2461,12 @@ gulp.task('skoutbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('onbets.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "onbets.bet",
+        banca: "ON BETS",
+        styles: "",
+    });
+});
