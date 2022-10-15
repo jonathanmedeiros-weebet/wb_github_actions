@@ -2219,15 +2219,6 @@ gulp.task('betsesporte.com', function (done) {
     });
 });
 
-gulp.task('bolacerta.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "bolacerta.wee.bet",
-        banca: "BOLA CERTA",
-        styles: "",
-    });
-});
-
 gulp.task('primesport.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
