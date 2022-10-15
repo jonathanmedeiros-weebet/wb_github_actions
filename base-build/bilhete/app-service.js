@@ -56,7 +56,7 @@ function getFormatedDate(date) {
 async function getResults(ids) {
     try {
         paramIds = ids.join(',');
-        const request = await fetch(`https://center6.wee.bet/v1/resultados/detalhado?ids=${paramIds}`)
+        const request = await fetch(`https://center7.wee.bet/v1/resultados/detalhado?ids=${paramIds}`)
         const results = await request.json();
 
         if (request.status == 404 || request.status == 500) {
@@ -83,7 +83,7 @@ function displayError(message) {
 
 async function getLiveItems(items) {
     try {
-        const request = await fetch(`https://center6.wee.bet/v1/resultados/live`, {
+        const request = await fetch(`https://center7.wee.bet/v1/resultados/live`, {
             method: "POST",
             body: JSON.stringify(items),
             headers: { "Content-type": "application/json; charset=UTF-8" }

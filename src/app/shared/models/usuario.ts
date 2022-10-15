@@ -3,4 +3,5 @@ export class Usuario {
   nome: string;
   tipo_usuario: string;
   cookie: string;
+  validacao_email: boolean;
 }

@@ -5,6 +5,7 @@ import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
 import {ParametrosLocaisService} from "../../../shared/services/parametros-locais.service";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-deposito-pix',
@@ -19,18 +20,23 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     clearSetInterval;
     verificacoes = 0;
     valorMinDeposito;
+    metodoPagamento;
+    sautoPayQr;
 
     constructor(
         private fb: FormBuilder,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
         private paramsLocais: ParametrosLocaisService,
-    ) {
+        private domSanitizer: DomSanitizer
+
+) {
         super();
     }
 
     ngOnInit() {
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
     }
 
@@ -54,6 +60,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.pix = res;
+                    const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+                    this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+
                     this.clearSetInterval = setInterval(() => {
                         this.verificarPagamento(res);
                     }, 10000);
