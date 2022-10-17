@@ -342,3 +342,9 @@ li.router-link-active > a {
     border-radius: 0 5px 5px 0;
     background-color: #35cc95;
 }
+
+@media only screen and (max-width: 1024px) {
+    #menu-side-left {
+        height: auto;
+    }
+}

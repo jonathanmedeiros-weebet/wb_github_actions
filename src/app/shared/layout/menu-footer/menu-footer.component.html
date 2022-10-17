@@ -3,6 +3,10 @@
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
         </a>
+
+        <a type="button" class="btn-close" aria-label="Close" (click)="toggleCampeonatos()">
+            <img src="/assets/images/close.svg" alt="fechar" width="15">
+        </a>
     </div>
     <app-sidebar-nav *ngIf="campeonatosIsOpen" [height]="sidebarNavHeight"></app-sidebar-nav>
     <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>

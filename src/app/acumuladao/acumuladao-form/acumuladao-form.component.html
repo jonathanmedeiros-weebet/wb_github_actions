@@ -128,10 +128,15 @@
     <ng-container *ngIf="!encerrado;">
         <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
             <div class="bilhete-container">
-                <a (click)="closeCupom()" class="fechar-pre-bilhete">
-                    <i class="fa fa-times fa-lg"></i>
-                </a>
-                <div class="titulo">BILHETE</div>
+                <div class="titulo-bilhete">
+                    <a (click)="closeCupom()" class="fechar-pre-bilhete">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <div class="titulo">BILHETE</div>
+                    <a [routerLink]="['/esportes/futebol/jogos']" (click)="closeCupom()" class="fechar-pre-bilhete">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </div>
                 <div class="pre-bilhete-acumuladao">
                     <div class="acumuladao">
                         <h3>

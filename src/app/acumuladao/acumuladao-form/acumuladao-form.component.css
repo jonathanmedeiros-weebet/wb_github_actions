@@ -138,15 +138,6 @@
     font-weight: bolder;
 }
 
-.pre-bilhete {
-    max-width: 270px;
-    min-width: 270px;
-    text-align: center;
-    padding: 0;
-    height: 100%;
-    background-color: var(--sidebar-right);
-}
-
 .bilhete-container {
     display: flex;
     flex-direction: column;

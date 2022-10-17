@@ -1608,4 +1608,27 @@ input[type=number]::-webkit-outer-spin-button {
     .indentificacao a.scroll-button {
         display: none;
     }
+
+    .titulo-bilhete {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+    }
+
+    .titulo-bilhete .titulo {
+        font-size: 18px;
+    }
+
+    .fechar-pre-bilhete {
+        color: #fff !important;
+        position: relative;
+        cursor: pointer;
+        right: 0;
+        top: 0;
+    }
+
+    .fechar-pre-bilhete i {
+        font-size: 1.5rem;
+    }
 }

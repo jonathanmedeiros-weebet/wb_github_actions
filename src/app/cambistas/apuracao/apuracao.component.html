@@ -47,10 +47,6 @@
             </div>
         </div>
         <div class="content-body">
-            <div *ngIf="showLoading" style="max-width: 700px">
-                <ngx-skeleton-loader count="6" appearance="line" animation="progress-dark"></ngx-skeleton-loader>
-            </div>
-
             <div class="tabela-apuracao" *ngIf="!showLoading">
                 <tr *ngIf="modoContaCorrente">
                     <th>Saldo em {{dataSaldoAnterior}}</th>

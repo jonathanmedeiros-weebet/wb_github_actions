@@ -1,18 +1,6 @@
 <section #listagem class="content-sports">
     <app-banners></app-banners>
     <div class="wrap-sticky">
-
-        <div class="filter">
-            <input type="text" class="form-control inverted-out" [(ngModel)]="term" placeholder="Pesquisar">
-
-            <div class="tabs">
-                <a class="tab active">Hoje</a>
-                <a class="tab">Amanhã</a>
-                <a class="tab">Sábado</a>
-                <a class="tab">Domingo</a>
-            </div>
-        </div>
-
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
         <div *ngIf="!showLoadingIndicator">

@@ -11,7 +11,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     MenuFooterService,
     MessageService,
-    PreApostaEsportivaService
+    PreApostaEsportivaService,
+    SidebarService,
 } from '../../services';
 import { ApostaModalComponent } from './../../shared/layout/modals';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -33,6 +34,7 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
     constructor(
         private preApostaService: PreApostaEsportivaService,
         private messageService: MessageService,
+        private sidebarService: SidebarService,
         private elRef: ElementRef,
         private modalService: NgbModal,
         private fb: FormBuilder,
@@ -43,6 +45,7 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
 
     ngOnInit() {
         this.createForm();
+        this.sidebarService.changeItens({contexto: 'cambista'});
         this.menuFooterService.setIsPagina(true);
     }
 

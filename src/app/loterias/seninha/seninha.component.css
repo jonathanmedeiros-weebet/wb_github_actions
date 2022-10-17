@@ -106,4 +106,8 @@ input, select {
         padding: 0 5px;
         width: 100%;
     }
+
+    .pre-bilhete-mobile {
+        padding: 0;
+    }
 }

@@ -95,3 +95,25 @@
         display: none;
     }
 }
+
+@media only screen and (max-width: 1024px) {
+    #definir {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #footer-bar {
+        z-index: 999;
+    }
+
+    #definir app-sidebar-nav {
+        flex: 1;
+        overflow: auto;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

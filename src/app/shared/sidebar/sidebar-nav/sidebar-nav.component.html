@@ -1,5 +1,5 @@
 <ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' ">
-<div class="consulta-bilhete" [ngClass]="{'collapsed': collapsed}">
+<div class="consulta-bilhete hide-mobile" [ngClass]="{'collapsed': collapsed}">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-consulta">
             <input type="text" placeholder="Consultar bilhete" formControlName="codigo">
@@ -8,7 +8,7 @@
     </form>
 </div>
 
-<div class="consulta-bilhete-collapsed" [ngClass]="{'collapsed': collapsed}" *ngIf="collapsed">
+<div class="consulta-bilhete-collapsed hide-mobile" [ngClass]="{'collapsed': collapsed}" *ngIf="collapsed">
     <a class="search-collapsed">
         <i class="fa fa-search"></i>
     </a>
@@ -23,7 +23,7 @@
 
 <ul *ngIf="contexto != 'cambista' && contexto != 'cliente'" id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
     <ng-container *ngIf="contexto == 'esportes'">
-        <div class="destaques-regiao" *ngIf="regioesDestaque && !collapsed">
+        <div class="destaques-regiao hide-mobile" *ngIf="regioesDestaque && !collapsed">
             <span class="group" *ngIf="!collapsed">Cartões</span>
             <li>
                 <a>
