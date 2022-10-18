@@ -19,6 +19,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     clearSetInterval;
     verificacoes = 0;
     valorMinDeposito;
+    metodoPagamento;
 
     constructor(
         private fb: FormBuilder,
@@ -31,6 +32,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
     }
 
