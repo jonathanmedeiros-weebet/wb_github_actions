@@ -7,6 +7,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import {RecuperarSenhaComponent} from './recuperar-senha/recuperar-senha.component';
 import {ResetarSenhaComponent} from './resetar-senha/resetar-senha.component';
 import {NgHcaptchaModule} from 'ng-hcaptcha';
+import {ValidarEmailComponent} from './validar-email/validar-email.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import {NgHcaptchaModule} from 'ng-hcaptcha';
     declarations: [
         CadastroComponent,
         RecuperarSenhaComponent,
-        ResetarSenhaComponent
+        ResetarSenhaComponent,
+        ValidarEmailComponent
     ],
     providers: []
 })
