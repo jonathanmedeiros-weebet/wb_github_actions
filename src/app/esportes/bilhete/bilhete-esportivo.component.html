@@ -149,6 +149,16 @@
 
 <ng-template #apostaDeslogadoModal let-modal>
     <div class="modal-body" id="aposta-deslogado">
+        <div class="titulo-bilhete hide-desktop">
+            <a (click)="closeCupomPre()" class="fechar-pre-bilhete">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">BILHETE</div>
+            <a [routerLink]="['/esportes/futebol/jogos']" (click)="closeCupomPre()" class="fechar-pre-bilhete">
+                <i class="fa fa-home"></i>
+            </a>
+        </div>
+
         <div *ngIf="opcoes.cartao_aposta" class="tabs">
             <a class="tab" (click)="trocarTipoApostaDeslogado('preaposta')"
                     [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
@@ -159,7 +169,8 @@
                 Cartão de Aposta
             </a>
         </div>
-        <div *ngIf="itens.length > 0">
+        <h4>Jogos Selecionados</h4>
+        <div class="lista-apostas" *ngIf="itens.length > 0">
             <div *ngFor="let item of itens.value; let i=index" class="aposta-item">
                 <div class="">
                     <div class="horario">
@@ -211,23 +222,24 @@
                         <input type="password" class="form-control inverted-out" formControlName="pin" autocomplete="off">
                     </div>
                 </div>
-                <div class="form-check col-md-6">
-                    <input type="checkbox" class="form-check-input" id="manter-cartao" formControlName="manter_cartao">
-                    <label class="form-check-label" for="manter-cartao">Manter Cartão</label>
+                <div class="check-group">
+                    <input type="checkbox" id="manter-cartao" formControlName="manter_cartao">
+                    <label for="manter-cartao">Manter Cartão</label>
                 </div>
             </form>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-custom2" (click)="modalRef.dismiss()">Fechar</button>
-        <button type="button" class="btn btn-custom" *ngIf="!disabled; else processandoPreAposta"
-                (click)="finalizarApostaDeslogado()">
-            Finalizar {{btnText}}
-        </button>
-        <ng-template #processandoPreAposta>
-            <button disabled class="btn btn-custom">
-                Processando... <i class="fa fa-spinner fa-spin"></i>
+        <div class="buttons mt-4">
+            <button type="button" class="btn btn-custom2" (click)="apostaDeslogadoModal.dismiss('Cross click')">
+                Fechar
             </button>
-        </ng-template>
+            <button type="button" class="btn btn-custom " *ngIf="!disabled; else processandoPreAposta" (click)="finalizarApostaDeslogado()">
+                Finalizar {{btnText}}
+            </button>
+            <ng-template #processandoPreAposta>
+                <button disabled class="btn btn-custom">
+                    Processando... <i class="fa fa-spinner fa-spin"></i>
+                </button>
+            </ng-template>
+        </div>
     </div>
 </ng-template>

@@ -89,6 +89,12 @@
     padding: 0 15px 0 15px;
 }
 
+#aposta-deslogado .buttons {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
 .live-odd {
     display: inline-block;
     background-color: red;
@@ -181,6 +187,10 @@
     font-weight: bold;
 }
 
+#aposta-deslogado {
+    padding: 20px;
+}
+
 #aposta-deslogado .active {
     color: #35cd96;
     border-bottom: 2px solid #35cd96;
@@ -191,19 +201,18 @@
     align-items: center;
     justify-content: space-between;
     margin: 15px 0;
-    border: 1px dashed black;
-    padding: 5px;
+    border-bottom: 1px dashed #35CC95;
+    padding: 5px 5px 20px;
 }
 
-#aposta-deslogado .btn {
-    width: 50%;
-    border: 0;
-    border-radius: 3px 3px 0 0;
+#aposta-deslogado .aposta-item:first-child {
+    border-top: 1px dashed #35CC95;
+    padding-top: 20px;
 }
 
 #aposta-deslogado .remover {
-    color: red;
-    font-size: 25px;
+    color: #35CC95;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -219,6 +228,17 @@
 
 .jogo-selecionado-inner {
     padding-right: 20px;
+}
+
+.check-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.check-group input,
+.check-group label {
+    margin: 0;
 }
 
 .mensagem-mudanca {
@@ -244,6 +264,12 @@
 
 input {
     font-size: 12px;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 15px 0;
 }
 
 .input-icon {
@@ -316,16 +342,30 @@ input {
 }
 
 .tabs {
-    border-bottom: 2px solid #181818;
+    display: flex;
+    border: 0;
+    background: #181818;
+    border-radius: 4px;
 }
 
 .tabs .tab {
-    padding: 20px 10px 10px;
-    display: inline-block;
-    margin-bottom: -2px;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    background: #181818;
     color: #fff;
     cursor: pointer;
     text-decoration: none;
+
+}
+
+#aposta-deslogado .tabs .tab.active,
+.tabs .tab.active {
+    border: 0;
+    background: #35CC95;
+    color: #181818;
+    border-radius: 4px;
 }
 
 @keyframes openValores {
@@ -356,6 +396,38 @@ input {
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
         position: fixed !important;
+    }
+
+    #aposta-deslogado {
+        background: #181818;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lista-apostas {
+        flex: 1;
+    }
+
+    .tabs {
+        display: flex;
+        border: 0;
+        background: #0a0a0a;
+        border-radius: 4px;
+    }
+
+    .tabs .tab {
+        padding: 10px;
+        text-align: center;
+        flex: 1;
+        background: #0a0a0a;
+    }
+
+    #aposta-deslogado .tabs .tab.active,
+    .tabs .tab.active {
+        border: 0;
+        background: #35CC95;
+        color: #181818;
+        border-radius: 4px;
     }
 }
 

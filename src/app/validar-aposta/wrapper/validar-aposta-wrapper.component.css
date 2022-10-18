@@ -6,7 +6,8 @@
 }
 
 .consulta-form input{
-    margin-right: 1rem;
+    margin-right: 1.5rem;
+    width: 270px;
 }
 
 #pre-aposta{

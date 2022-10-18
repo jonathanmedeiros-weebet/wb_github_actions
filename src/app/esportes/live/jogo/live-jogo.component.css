@@ -191,7 +191,6 @@
     min-width: 100%;
     max-width: 100%;
     padding: 0 5px 10px;
-    text-transform: uppercase;
 }
 
 .header-tipo-aposta {
@@ -200,15 +199,31 @@
     margin-bottom: 2px;
 }
 
-.odds > div {
-    margin: 0 5px;
+.header-tipo-aposta h4 {
+    margin: 0;
+    font-size: 12px;
+}
+
+.odds {
+    height: auto;
+    padding: 0;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 .odds .odd {
     width: 100%;
     max-width: none;
     margin-left: 0;
-    margin-bottom: 5px;
+}
+
+.odds > div {
+    flex: 1;
+}
+
+.inner-odd {
+    padding: 8px;
+    margin: 0 10px 10px 0;
 }
 
 .odds-coluna {
@@ -252,19 +267,8 @@
     width: 100%;
 }
 
-.odds {
-    height: auto;
-}
-
-.odds > div {
-    flex: 1;
-}
-
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
-    .jogo, .indentificacao, .nome {
-        max-width: calc(100vw - 525px);
-    }
 
     .indentificacao{
         display: flex;

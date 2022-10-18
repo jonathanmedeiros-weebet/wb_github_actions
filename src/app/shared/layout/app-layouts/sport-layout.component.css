@@ -1,5 +1,6 @@
 .collapsed {
-    max-width: calc(100vw - 320px);
+    max-width: calc(100vw - 270px);
+    padding-left: 50px;
 }
 
 .uncollapsed {
@@ -11,5 +12,6 @@
     .collapsed, .uncollapsed {
         width: 100%;
         max-width: 100%;
+        padding-left: 5px;
     }
 }

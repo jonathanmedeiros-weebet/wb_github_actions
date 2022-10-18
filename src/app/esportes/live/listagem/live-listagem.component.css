@@ -189,8 +189,7 @@
 .cotacoes {
     display: flex;
     background-color: #0A0A0A;
-    margin-right: 5px;
-    padding: 0 2.5px;
+    padding: 7.5px;
 }
 
 .cotacoes .cotacao {
@@ -199,12 +198,13 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border-radius: 2px;
 
     background-color: #181818;
     padding: 8px 10px;
     min-width: 80px;
 
-    margin: 5px 2.5px;
+    margin: 0 2.5px;
 
     font-size: 10px;
 }

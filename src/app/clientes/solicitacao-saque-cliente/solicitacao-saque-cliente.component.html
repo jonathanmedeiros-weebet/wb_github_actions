@@ -34,7 +34,7 @@
                     </form>
                 </div>
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
-                    {{errorMessage}} <a [routerLink]="['/clientes/perfil']">Clique aqui para continuar.</a>
+                    {{errorMessage}} <a [routerLink]="['/clientes/perfil-pix']">Clique aqui para continuar.</a>
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}

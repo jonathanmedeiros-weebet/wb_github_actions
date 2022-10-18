@@ -150,6 +150,7 @@ header {
     overflow: scroll;
     overflow-x: hidden;
     padding: 5px;
+    scroll-behavior: smooth;
 }
 
 .footer {
@@ -172,6 +173,10 @@ header {
 
 .btn-custom:focus {
     box-shadow: 0 0 0 1px var(--highlight);
+}
+
+.btn:focus {
+    box-shadow: none;
 }
 
 
@@ -888,6 +893,15 @@ button {
     .loteria-content .add-palpite {
         margin-top: 24px;
     }
+
+    .odds .odd-enabled:hover {
+        background-color: var(--highlight);
+        border-radius: 2px;
+    }
+
+    .odds .odd-enabled:hover span {
+        color: var(--foreground-selected-odds) !important;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -1362,9 +1376,9 @@ input.inverted-out:disabled {
 
 .odds {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     height: 60px;
-    padding: 5px;
+    padding: 7.5px;
     background-color: var(--header);
     overflow-x: scroll;
     overflow-y: hidden;
@@ -1384,8 +1398,6 @@ input.inverted-out:disabled {
     align-items: center;
     width: 100%;
     min-width: 80px;
-    max-width: 150px;
-    height: 45px;
     margin-left: 5px;
     border-radius: 2px;
 }
@@ -1417,15 +1429,6 @@ input.inverted-out:disabled {
     color: var(--foreground-selected-odds) !important;
 }
 
-.odds .odd-enabled:hover {
-    background-color: var(--highlight);
-    border-radius: 2px;
-}
-
-.odds .odd-enabled:hover span {
-    color: var(--foreground-selected-odds) !important;
-}
-
 .odd .nome-odd,
 .odd .valor-odd {
     color: var(--foreground-odds);
@@ -1442,7 +1445,7 @@ input.inverted-out:disabled {
     justify-content: center;
     width: 50px;
     height: 60px;
-    padding: 5px;
+    padding: 7.5px;
     text-align: right;
     background-color: var(--header);
     color: var(--highlight);
@@ -1459,6 +1462,7 @@ input.inverted-out:disabled {
     text-decoration: none;
     font-size: 10px;
     flex: 1;
+    width: 35px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -1562,6 +1566,16 @@ input[type=number]::-webkit-outer-spin-button {
 
 .show-mobile {
     display: none !important;
+}
+
+.blink_me {
+    animation: blinkerMe 1s linear infinite;
+}
+
+@keyframes blinkerMe {
+    50% {
+        opacity: 0;
+    }
 }
 
 @media only screen and (max-width: 1024px) {

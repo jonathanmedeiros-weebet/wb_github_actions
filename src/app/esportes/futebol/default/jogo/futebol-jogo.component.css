@@ -3,10 +3,6 @@
     padding: 5px;
 }
 
-.inner-odd {
-    margin-bottom: 2px;
-}
-
 .indentificacao-jogo {
     display: flex;
     justify-content: center;
@@ -154,10 +150,18 @@
     padding: 2px 13px;
 }
 
+.odds-tipo-aposta .odds {
+    padding: 10px 0 0 10px;
+}
+
 .odd {
-    margin-left: 0;
-    margin-bottom: 8px;
     max-width: 100%;
+    margin: 0px;
+}
+
+.inner-odd {
+    padding: 8px;
+    margin: 0 10px 10px 0;
 }
 
 .odd:last-of-type {
@@ -165,6 +169,7 @@
 }
 
 .odds-coluna {
+    padding: 0;
     display: flex;
     align-self: start;
     flex-direction: column;

@@ -13,6 +13,7 @@ import { MessageService } from '../../services/utils/message.service';
 import { ApostaModalComponent, AtivarCartaoModalComponent, CartaoCadastroModalComponent, CartaoModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../../layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -28,6 +29,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     itens: any[];
     unsub$ = new Subject();
     regioesDestaque;
+    isNotCambista = true;
 
     subCartao = false;
     subPerfil = false;
@@ -43,7 +45,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         private regioesDestaqueService: RegioesDestaqueService,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private auth: AuthService
     ) {
         super();
     }
@@ -56,6 +59,20 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         if(this.router.url == '/clientes/perfil' || this.router.url == '/clientes/perfil-pix' || this.router.url == '/alterar-senha') {
             this.subPerfil = true;
         }
+
+        this.auth.logado
+        .subscribe(
+            logado => {
+                if(logado) {
+                    this.auth.cliente
+                        .subscribe(
+                            isCliente => {
+                                this.isNotCambista = isCliente;
+                            }
+                        );
+                }
+            }
+        );
 
         this.regioesDestaqueService.setExibirDestaques(false);
         this.createForm();

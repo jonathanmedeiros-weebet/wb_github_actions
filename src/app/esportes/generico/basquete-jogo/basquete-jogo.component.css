@@ -1,20 +1,14 @@
-.inner-odd {
-    margin-bottom: 2px;
-}
-
 .indentificacao {
     padding: 10px;
     position: relative;
+    height: 200px;
+
+    background: var(--header);
 }
 
 .indentificacao .info {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.indentificacao .info {
-    display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
 }
@@ -24,6 +18,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 400px;
+    font-size: 14px;
 }
 
 .indentificacao .nome {
@@ -31,6 +26,7 @@
     align-items: center;
     width: 100%;
     justify-content: center;
+    flex-direction: row;
 }
 
 .indentificacao .nome {
@@ -50,14 +46,15 @@
     margin: 10px 20px;
 }
 
-.tipo-apostas {
-    background-color: #fff;
-}
-
 .tipo-aposta {
     padding: 10px;
-    border-top: 1px solid #ddd;
     text-transform: uppercase;
+}
+
+.header-tipo-aposta {
+    background-color: #0a0a0a;
+    padding: 7px 15px;
+    margin-bottom: 2px;
 }
 
 .div-back {
@@ -81,12 +78,32 @@
     text-align: center;
 }
 
+.odds {
+    height: auto;
+    padding: 0;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
 .odds .odd {
     width: 100%;
+    max-width: none;
+    margin-left: 0;
+}
+
+.odds > div {
+    flex: 1;
+}
+
+.inner-odd {
+    padding: 8px;
+    margin: 0 10px 10px 0;
 }
 
 .odds-coluna {
     width: 100%;
+    padding: 0;
+    flex-wrap: wrap;
 }
 
 .odds-jogador-coluna {

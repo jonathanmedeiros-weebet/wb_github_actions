@@ -272,6 +272,9 @@ li.router-link-active > a {
 .regiao > a::after {
     content:url('/assets/images/expand.svg');
     position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* transition: all 0.5s; */
 }
 
@@ -283,6 +286,10 @@ li.router-link-active > a {
 
 .collapsed .regiao > a::after {
     display: none;
+}
+
+:host:hover .collapsed .regiao > a::after {
+    display: block;
 }
 
 .collapsed .destaques-regiao {

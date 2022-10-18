@@ -23,16 +23,18 @@
 
 <ul *ngIf="contexto != 'cambista' && contexto != 'cliente'" id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
     <ng-container *ngIf="contexto == 'esportes'">
-        <div class="destaques-regiao hide-mobile" *ngIf="regioesDestaque && !collapsed">
+        <div class="destaques-regiao hide-mobile" *ngIf="isNotCambista">
             <span class="group" *ngIf="!collapsed">Cartões</span>
             <li>
-                <a>
-                    <span (click)="abrirConsultarCartao()">Consultar cartão</span>
+                <a (click)="abrirConsultarCartao()">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="regiao-nome">Consultar cartão</span>
                 </a>
             </li>
             <li>
-                <a>
-                    <span (click)="abrirSolicitarSaque()">Solicitar saque</span>
+                <a (click)="abrirSolicitarSaque()">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="regiao-nome">Solicitar saque</span>
                 </a>
             </li>
         </div>

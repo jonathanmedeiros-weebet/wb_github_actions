@@ -398,6 +398,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.menuFooterService.toggleBilhete(false);
     }
 
+    closeCupomPre() {
+        this.modalRef.close();
+    }
+
     disabledSubmit() {
         this.disabled = true;
     }
