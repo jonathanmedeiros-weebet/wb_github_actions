@@ -2,6 +2,7 @@
     height: calc(100vh - 132px);
     display: flex;
     flex-direction: column;
+    background: #181818;
 }
 
 .indentificacao, .indentificacao-mobile{
@@ -21,6 +22,8 @@
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
+    margin: 5px 5px 0;
+    border-radius: 8px;
 }
 
 .indentificacao-jogo .info-jogo {
@@ -128,6 +131,25 @@
     justify-content: flex-start;
 }
 
+.placares {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 45px 0;
+}
+
+.placares span {
+    font-size: 40px;
+    line-height: 35px;
+}
+
+.placares > div {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
 .placar{
     color: #fff;
     padding: 5px 10px;
@@ -185,18 +207,32 @@
 
 .tipo-apostas {
     column-count: 2;
+    column-gap: 5px;
+    margin-top: 0 !important;
 }
 
 .tipo-apostas .tipo-aposta{
     min-width: 100%;
     max-width: 100%;
-    padding: 0 5px 10px;
+    padding: 0 0 5px;
+    break-inside: avoid-column;
 }
 
 .header-tipo-aposta {
     background-color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 7px 15px;
+    height: 30px;
+    background-color: var(--header);
     margin-bottom: 2px;
+
+    cursor: pointer;
+}
+
+.header-tipo-aposta.collapsed i {
+    transform: rotate(180deg);
 }
 
 .header-tipo-aposta h4 {

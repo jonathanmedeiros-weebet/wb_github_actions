@@ -2,15 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { InformacoesComponent } from './informacoes.component';
-import {PagesLayoutComponent} from '../shared/layout/app-layouts';
+import { PagesNoNavLayoutComponent } from '../shared/layout/app-layouts/pages-no-nav-layout.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: PagesLayoutComponent,
+        component: PagesNoNavLayoutComponent,
         children: [
             { path: 'deposito', component: InformacoesComponent, data: { pagina: 'deposito' } },
-            { path: 'regras', component: InformacoesComponent, data: { pagina: 'regras' } }
+            { path: 'regras', component: InformacoesComponent, data: { pagina: 'regras' } },
+            { path: 'quem-somos', component: InformacoesComponent, data: { pagina: 'quem-somos' } },
+            { path: 'jogo-responsavel', component: InformacoesComponent, data: { pagina: 'jogo-responsavel' } },
+            { path: 'termos-condicoes', component: InformacoesComponent, data: { pagina: 'termos-condicoes' } },
+            { path: 'politica-privacidade', component: InformacoesComponent, data: { pagina: 'politica-privacidade' } },
         ]
     }
 ];

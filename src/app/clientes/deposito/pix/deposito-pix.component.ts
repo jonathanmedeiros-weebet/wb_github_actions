@@ -30,7 +30,7 @@ import { HelperService } from 'src/app/services';
 
         <div class="buttons">
             <button class="btn btn-custom2"><i class="fa fa-share"></i> Compartilhar QR Code</button>
-            <button class="btn btn-custom2" (click)="copyCode(qrCode)"><i class="fa fa-copy"></i> Copiar código</button>
+            <button class="btn btn-custom2" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
         </div>
     </div>
     `

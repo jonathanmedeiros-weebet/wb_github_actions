@@ -11,14 +11,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control" formControlName="nome"
+                    <input type="text" class="form-control inverted-out" formControlName="nome"
                         [ngClass]="applyCssInputError('nome')" placeholder="Nome">
                     <app-error-msg [control]="form.get('nome')" label="Nome" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('sobrenome')">
-                    <input type="text" class="form-control" [ngClass]="applyCssInputError('sobrenome')"
+                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('sobrenome')"
                         formControlName="sobrenome" placeholder="Sobrenome">
                     <app-error-msg [control]="form.get('sobrenome')" label="Sobrenome" class="text-left"></app-error-msg>
                 </div>
@@ -27,15 +27,18 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control" formControlName="data_nascimento"
+                    <input type="text" class="form-control inverted-out" mask="d0/M0/0000" formControlName="data_nascimento"
                         [ngClass]="applyCssInputError('data_nascimento')" placeholder="Data de Nascimento">
                     <app-error-msg [control]="form.get('data_nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('sexo')">
-                    <input type="text" class="form-control" [ngClass]="applyCssInputError('sexo')"
-                        formControlName="sexo" placeholder="Sexo">
+                    <select formControlName="sexo" class="form-control inverted-out">
+                        <option value="">Selecione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                    </select>
                     <app-error-msg [control]="form.get('sexo')" label="Sexo" class="text-left"></app-error-msg>
                 </div>
             </div>
@@ -43,7 +46,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control" formControlName="cpf"
+                    <input type="text" class="form-control inverted-out" mask="000.000.000-00" formControlName="cpf"
                         [ngClass]="applyCssInputError('cpf')" placeholder="CPF">
                     <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
                 </div>
@@ -53,14 +56,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control" formControlName="telefone"
+                    <input type="text" class="form-control inverted-out" formControlName="telefone"
                         [ngClass]="applyCssInputError('telefone')" placeholder="Telefone">
                     <app-error-msg [control]="form.get('telefone')" label="Telefone" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
-                    <input type="text" class="form-control" [ngClass]="applyCssInputError('email')"
+                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('email')"
                         formControlName="email" placeholder="Email">
                     <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
                 </div>
@@ -70,14 +73,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control" formControlName="username"
+                    <input type="text" class="form-control inverted-out" formControlName="username"
                         [ngClass]="applyCssInputError('username')" placeholder="Usuário">
                     <app-error-msg [control]="form.get('username')" label="Usuário" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('password')">
-                    <input type="text" class="form-control" [ngClass]="applyCssInputError('password')"
+                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
                         formControlName="password" placeholder="Senha">
                     <app-error-msg [control]="form.get('password')" label="Senha" class="text-left"></app-error-msg>
                 </div>
@@ -86,14 +89,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control" formControlName="confirmar-senha"
+                    <input type="text" class="form-control inverted-out" formControlName="confirmar-senha"
                         [ngClass]="applyCssInputError('confirmar-senha')" placeholder="Confirmar Senha">
                     <app-error-msg [control]="form.get('confirmar-senha')" label="Confirmar Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('codigo_afiliado')">
-                    <input type="text" class="form-control" [ngClass]="applyCssInputError('codigo_afiliado')"
+                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('codigo_afiliado')"
                         formControlName="codigo_afiliado" placeholder="Código de afiliação(Opcional)">
                     <app-error-msg [control]="form.get('codigo_afiliado')" label="Código de afiliação(Opcional)" class="text-left"></app-error-msg>
                 </div>

@@ -520,6 +520,5 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     oddAberto(chave) {
         return this.oddsAberto.includes(chave.nome);
-
     }
 }

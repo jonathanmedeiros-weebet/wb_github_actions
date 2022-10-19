@@ -3,6 +3,7 @@
     cursor: initial;
     font-size: 12px;
     cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .campeonato-header .column-left{
@@ -20,7 +21,7 @@
 }
 
 .jogo{
-    padding: 5px 0;
+    padding: 0 0 5px;
 }
 
 .indentificacao{

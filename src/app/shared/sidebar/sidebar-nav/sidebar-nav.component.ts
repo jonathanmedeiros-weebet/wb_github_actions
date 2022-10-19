@@ -223,4 +223,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     toogleSubPerfil() {
         this.subPerfil = !this.subPerfil;
     }
+
+    logout() {
+        this.auth.logout();
+    }
 }

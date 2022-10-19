@@ -9,7 +9,7 @@
     <p>Informe seu e-mail para receber o link de redefinição de senha.</p>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group mb-4">
-            <input type="text" class="form-control" formControlName="email"
+            <input type="text" class="form-control inverted-out" formControlName="email"
                    [ngClass]="applyCssInputError('email')" placeholder="Email">
             <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
         </div>

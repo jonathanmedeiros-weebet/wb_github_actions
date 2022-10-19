@@ -111,22 +111,12 @@
    display: none;
 }
 
-:host:hover .collapsed .regiao-nome {
-    display: block;
- }
-
 .hide-item {
     animation-name: hideAnim;
     animation-duration: 500ms;
     animation-fill-mode: both;
     width: 50px;
 }
-
-:host:hover .collapsed .regiao-nome.hide-item {
-    animation-name: showAnim;
-    animation-duration: 500ms;
-    animation-fill-mode: both;
- }
 
 .show-item {
     animation-name: showAnim;
@@ -190,10 +180,6 @@
     font-size: 14px;
 }
 
-.collapsed.cambista-menu ul li a span, .collapsed.cambista-menu .sub-nav-container {
-    display: none;
-}
-
 .collapsed.cambista-menu a {
     padding-left: 15px !important;
 }
@@ -235,12 +221,12 @@ li.router-link-active > a {
     border: 0;
 }
 
-.consulta-bilhete.collapsed {
+.collapsed .cambista-item a i.fa-angle-down {
     display: none;
 }
 
-:host:hover .consulta-bilhete.collapsed {
-    display: block;
+.consulta-bilhete.collapsed {
+    display: none;
 }
 
 .consulta-bilhete .input-consulta {
@@ -288,10 +274,6 @@ li.router-link-active > a {
     display: none;
 }
 
-:host:hover .collapsed .regiao > a::after {
-    display: block;
-}
-
 .collapsed .destaques-regiao {
     padding-bottom: 20px;
     margin-bottom: 20px;
@@ -306,8 +288,34 @@ li.router-link-active > a {
     display: none;
 }
 
+:host:hover .collapsed .cambista-item a i.fa-angle-down {
+    display: block;
+}
+
+:host:hover .collapsed .regiao-nome {
+    display: block;
+ }
+
+:host:hover .collapsed .regiao-nome.hide-item {
+    animation-name: showAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+ }
+
+:host:hover .consulta-bilhete.collapsed {
+    display: block;
+}
+
+:host:hover .collapsed .regiao > a::after {
+    display: block;
+}
+
 :host:hover .collapsed .sub-nav-container {
     display: block;
+}
+
+:host:hover .consulta-bilhete-collapsed.collapsed {
+    display: none;
 }
 
 .search-collapsed {
@@ -322,10 +330,6 @@ li.router-link-active > a {
 
 .consulta-bilhete-collapsed.collapsed {
     display: block;
-}
-
-:host:hover .consulta-bilhete-collapsed.collapsed {
-    display: none;
 }
 
 .consulta-bilhete-collapsed  form {

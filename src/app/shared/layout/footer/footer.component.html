@@ -43,20 +43,35 @@
         </div>
 
         <div class="links">
+            <a [routerLink]="['/informacoes/quem-somos']">
+                Quem somos
+            </a>
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!trevoOne && !isAppMobile">
                 Download app
             </a>
             <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la" *ngIf="!isAppMobile && trevoOne">
                 Download app
             </a>
-            <a class="pointer" (click)="abrirResultados()">
-                Resultados
-            </a>
             <a [routerLink]="['/informacoes/regras']">
                 Regras
             </a>
-            <a href="#">
+            <a [routerLink]="['/informacoes/deposito']">
+                Depósitos
+            </a>
+            <a class="pointer" (click)="abrirResultados()">
+                Resultados
+            </a>
+        </div>
+
+        <div class="links mt-3">
+            <a [routerLink]="['/informacoes/politica-privacidade']">
                 Política de privacidade
+            </a>
+            <a [routerLink]="['/informacoes/jogo-responsavel']">
+                Jogo responsável
+            </a>
+            <a [routerLink]="['/informacoes/termos-condicoes']">
+                Termos e condições
             </a>
         </div>
 

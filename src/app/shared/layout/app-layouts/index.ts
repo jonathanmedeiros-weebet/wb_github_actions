@@ -5,6 +5,7 @@ export * from './empty-layout.component';
 export * from './loteria-layout.component';
 export * from './main-layout.component';
 export * from './pages-layout.component';
+export * from './pages-no-nav-layout.component';
 export * from './sport-layout.component';
 export * from './cassino-layout.component';
 export * from './virtuais-layout.component';

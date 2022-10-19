@@ -30,6 +30,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     showLoadingIndicator = true;
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
+    oddsAberto = [];
     unsub$ = new Subject();
 
     constructor(
@@ -159,6 +160,10 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, null, true);
 
                 mercado.odds.push(odd);
+
+                if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                    this.oddsAberto.push(mercado.nome);
+                }
             }
         }
 
@@ -304,5 +309,18 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    toggleOdd(chave) {
+        const index = this.oddsAberto.findIndex(id => id === chave.nome);
+        if (index >= 0) {
+            this.oddsAberto.splice(index, 1);
+        } else {
+            this.oddsAberto.push(chave.nome);
+        }
+    }
+
+    oddAberto(chave) {
+        return this.oddsAberto.includes(chave.nome);
     }
 }

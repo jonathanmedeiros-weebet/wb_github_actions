@@ -229,7 +229,7 @@
             </form>
         </div>
         <div class="buttons mt-4">
-            <button type="button" class="btn btn-custom2" (click)="apostaDeslogadoModal.dismiss('Cross click')">
+            <button type="button" class="btn btn-custom2" (click)="modalRef.dismiss('Cross click')">
                 Fechar
             </button>
             <button type="button" class="btn btn-custom " *ngIf="!disabled; else processandoPreAposta" (click)="finalizarApostaDeslogado()">

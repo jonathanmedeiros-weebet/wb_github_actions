@@ -1,6 +1,6 @@
 <div class="base-container">
     <app-navigation></app-navigation>
-    <main>
+    <main [ngClass]="{'collapsed': navigationIsCollapsed, 'uncollapsed': !navigationIsCollapsed}">
         <router-outlet></router-outlet>
     </main>
 </div>

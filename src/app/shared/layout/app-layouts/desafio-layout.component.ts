@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { SidebarService } from '../../services/utils/sidebar.service';
 
 @Component({
     selector: 'app-desafio-layout',
@@ -7,10 +8,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class DesafioLayoutComponent implements OnInit {
 
-    constructor() {
-    }
+    navigationIsCollapsed = false;
+
+    constructor(
+        private sidebarService: SidebarService
+    ) { }
 
     ngOnInit(): void {
+        this.sidebarService.collapsedSource
+            .subscribe(collapsed => {
+                this.navigationIsCollapsed = collapsed;
+            });
     }
 
 }

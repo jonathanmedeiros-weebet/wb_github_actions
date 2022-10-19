@@ -16,7 +16,7 @@ import {
     PreApostaEsportivaService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 
 @Component({

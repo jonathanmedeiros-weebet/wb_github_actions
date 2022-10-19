@@ -69,7 +69,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
 
     submit() {
         const values = this.form.value;
-        this.clienteService.atualizarDadosCadastrais(values)
+        this.clienteService.atualizarPix(values)
             .subscribe(
                 () => {
                     this.messageService.success('Dados Cadastrais atualizados.');

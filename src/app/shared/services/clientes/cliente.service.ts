@@ -65,6 +65,18 @@ export class ClienteService {
             );
     }
 
+    atualizarPix(dadosCadastrais) {
+        return this.http.post(`${this.clienteUrl}/atualizarChavePix`, JSON.stringify(dadosCadastrais),
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                        return response.results.result;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     alterarSenha(dadosAlteracao) {
         return this.http.post(`${this.clienteUrl}/alterarSenha`, JSON.stringify(dadosAlteracao),
             this.headers.getRequestOptions(true))
