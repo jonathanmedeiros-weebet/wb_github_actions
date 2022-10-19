@@ -4,7 +4,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
-import {ParametrosLocaisService} from "../../../shared/services/parametros-locais.service";
+import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-deposito-pix',
@@ -20,12 +21,14 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     verificacoes = 0;
     valorMinDeposito;
     metodoPagamento;
+    sautoPayQr;
 
     constructor(
         private fb: FormBuilder,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
         private paramsLocais: ParametrosLocaisService,
+        private domSanitizer: DomSanitizer
     ) {
         super();
     }
@@ -56,6 +59,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.pix = res;
+                    if (this.metodoPagamento === 'sauto_pay') {
+                        const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+                        this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+                    }
                     this.clearSetInterval = setInterval(() => {
                         this.verificarPagamento(res);
                     }, 10000);

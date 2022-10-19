@@ -60,8 +60,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.pix = res;
-                    const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
-                    this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+                    if (this.metodoPagamento === 'sauto_pay') {
+                        const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+                        this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+                    }
 
                     this.clearSetInterval = setInterval(() => {
                         this.verificarPagamento(res);
