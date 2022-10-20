@@ -2371,3 +2371,12 @@ gulp.task('onbets.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betei.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betei.bet",
+        banca: "BETEI",
+        styles: "",
+    });
+});

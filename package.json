@@ -258,7 +258,8 @@
         "megasorte.website":  "gulp megasorte.website",
         "sportsgames.io":  "gulp sportsgames.io",
         "skoutbet.wee.bet":  "gulp skoutbet.wee.bet",
-        "onbets.bet": "gulp onbets.bet"
+        "onbets.bet": "gulp onbets.bet",
+        "betei.bet": "gulp betei.bet"
     },
     "private": true,
     "dependencies": {
