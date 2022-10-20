@@ -76,18 +76,18 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            genero: ['', [Validators.required]],
-            cpf: [null, [Validators.required]],
-            telefone: [null, [Validators.required]],
-            email: [null, [Validators.required]],
             usuario: [null, [
                 Validators.minLength(3),
                 Validators.pattern('^[a-zA-Z0-9_]+$'),
                 Validators.required
             ], this.validarLoginUnico.bind(this)],
+            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(6)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
+            cpf: [null, [Validators.required]],
+            telefone: [null, [Validators.required]],
+            email: [null, [Validators.required]],
+            genero: ['', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
@@ -142,13 +142,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             this.submit();
         } else {
             this.checkFormValidations(this.form);
-
-            for (const field of Object.keys(this.form.controls)) {
-                if (this.form.controls[field].invalid) {
-                    const firstInvalidControl = this.el.nativeElement.querySelector(`[formcontrolname="${field}"]`);
-                    firstInvalidControl.focus();
-                    break;
-                }
+            const invalidFields = this.el.nativeElement.getElementsByClassName('ng-invalid form-control');
+            if (invalidFields.length) {
+                invalidFields[0].focus();
             }
         }
     }
