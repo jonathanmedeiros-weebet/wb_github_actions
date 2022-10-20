@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormValidations, PasswordValidation} from '../../shared/utils';
@@ -35,7 +35,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         private menuFooterService: MenuFooterService,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private el: ElementRef
     ) {
         super();
     }
@@ -75,18 +76,18 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
+            genero: ['', [Validators.required]],
+            cpf: [null, [Validators.required]],
+            telefone: [null, [Validators.required]],
+            email: [null, [Validators.required]],
             usuario: [null, [
                 Validators.minLength(3),
                 Validators.pattern('^[a-zA-Z0-9_]+$'),
                 Validators.required
             ], this.validarLoginUnico.bind(this)],
-            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(6)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
-            cpf: [null, [Validators.required]],
-            telefone: [null, [Validators.required]],
-            email: [null, [Validators.required]],
-            genero: ['', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
@@ -134,6 +135,22 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                 });
             }, 1000);
         });
+    }
+
+    onSubmit() {
+        if (this.form.valid) {
+            this.submit();
+        } else {
+            this.checkFormValidations(this.form);
+
+            for (const field of Object.keys(this.form.controls)) {
+                if (this.form.controls[field].invalid) {
+                    const firstInvalidControl = this.el.nativeElement.querySelector(`[formcontrolname="${field}"]`);
+                    firstInvalidControl.focus();
+                    break;
+                }
+            }
+        }
     }
 
     submit() {
