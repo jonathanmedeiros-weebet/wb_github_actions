@@ -23,7 +23,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     isLoggedIn;
     modalRef;
     authDoisFatoresHabilitado;
-    cookieCliente;
+    modoClienteHabilitado;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -42,6 +42,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
+        this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -62,7 +63,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     createForm() {
         this.form = this.fb.group({
-            casino: [true],
             username: ['', Validators.compose([Validators.required])],
             password: [
                 '',

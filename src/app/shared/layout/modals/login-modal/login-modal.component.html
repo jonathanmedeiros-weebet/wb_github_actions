@@ -8,7 +8,6 @@
 </div>
 <div class="modal-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-        <input type="hidden" formControlName="casino" value="true">
         <div class="form-group">
             <input type="text" class="form-control" formControlName="username"
                    [ngClass]="applyCssInputError('username')" placeholder="Usuário">
@@ -21,13 +20,15 @@
         </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
-    <div class="dropdown-divider"></div>
-    <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="dropdown-item">
-        Esqueci minha senha
-    </a>
-    <div class="dropdown-divider"></div>
-    <a (click)="abrirCadastro()" style="cursor: pointer" class="dropdown-item">
-        Não é nosso Cliente? Cadastre-se
-    </a>
+    <ng-container *ngIf="modoClienteHabilitado">
+        <div class="dropdown-divider"></div>
+        <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="dropdown-item">
+            Esqueci minha senha
+        </a>
+        <div class="dropdown-divider"></div>
+        <a (click)="abrirCadastro()" style="cursor: pointer" class="dropdown-item">
+            Não é nosso Cliente? Cadastre-se
+        </a>
+    </ng-container>
 </div>
 

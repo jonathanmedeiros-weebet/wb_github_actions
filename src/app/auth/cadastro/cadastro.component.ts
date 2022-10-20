@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -35,7 +35,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
         private menuFooterService: MenuFooterService,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private el: ElementRef
     ) {
         super();
     }
@@ -134,6 +135,18 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
                 });
             }, 1000);
         });
+    }
+
+    onSubmit() {
+        if (this.form.valid) {
+            this.submit();
+        } else {
+            this.checkFormValidations(this.form);
+            const invalidFields = this.el.nativeElement.getElementsByClassName('ng-invalid form-control');
+            if (invalidFields.length) {
+                invalidFields[0].focus();
+            }
+        }
     }
 
     submit() {

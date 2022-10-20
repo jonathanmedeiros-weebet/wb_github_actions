@@ -51,22 +51,14 @@
                 ou gere um novo QRCode
             </span>
             </div>
-            <ng-container *ngIf="metodoPagamento === 'mercado_pago'">
-                <img class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>
-                <div class="align-content-center">
-                    <a class="btn btn-info" (click)="novoPix()">
-                        Gerar novo QRCode para depósito
-                    </a>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="metodoPagamento === 'sauto_pay'">
-                <img class="col-md-4" [src]="sautoPayQr"/>
-                <div class="align-content-center">
-                    <a class="btn btn-info" (click)="novoPix()">
-                        Gerar novo QRCode para depósito
-                    </a>
-                </div>
-            </ng-container>
+            <img *ngIf="metodoPagamento === 'mercado_pago'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>
+            <img *ngIf="metodoPagamento === 'sauto_pay'" class="col-md-4" [src]="sautoPayQr"/>
+            <img *ngIf="metodoPagamento === 'gerencianet'" class="col-md-4" src="{{pix.qr_code_base64}}"/>
+            <div class="align-content-center">
+                <a class="btn btn-info" (click)="novoPix()">
+                    Gerar novo QRCode para depósito
+                </a>
+            </div>
         </div>
     </div>
 </div>
