@@ -2380,3 +2380,21 @@ gulp.task('betei.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sortepix.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortepix.vip",
+        banca: "SORTE PIX",
+        styles: "",
+    });
+});
+
+gulp.task('betsport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betsport.wee.bet",
+        banca: "BET SPORT",
+        styles: "",
+    });
+});
