@@ -255,11 +255,12 @@
         "soumaisbet.com": "gulp soumaisbet.com",
         "bets12.net": "gulp bets12.net",
         "bet73.wee.bet": "gulp bet73.wee.bet",
-        "megasorte.website":  "gulp megasorte.website",
-        "sportsgames.io":  "gulp sportsgames.io",
-        "skoutbet.wee.bet":  "gulp skoutbet.wee.bet",
+        "megasorte.website": "gulp megasorte.website",
+        "sportsgames.io": "gulp sportsgames.io",
+        "skoutbet.wee.bet": "gulp skoutbet.wee.bet",
         "onbets.bet": "gulp onbets.bet",
-        "betei.bet": "gulp betei.bet"
+        "betei.bet": "gulp betei.bet",
+        "sortepix.vip": "gulp sortepix.vip"
     },
     "private": true,
     "dependencies": {

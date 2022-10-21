@@ -2380,3 +2380,12 @@ gulp.task('betei.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sortepix.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortepix.vip",
+        banca: "SORTE PIX",
+        styles: "",
+    });
+});
