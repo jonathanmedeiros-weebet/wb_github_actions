@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-import { SidebarService, MessageService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ParametrosLocaisService } from 'src/app/services';
+import { takeUntil } from 'rxjs/operators';
+import { ApostaService, SidebarService, MessageService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ParametrosLocaisService } from 'src/app/services';
+import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 
 @Component({
@@ -24,6 +27,10 @@ export class ApostaComponent implements OnInit {
     desafioHabilitado;
     cassinoHabilitado;
 
+    encerramentoPermitido;
+
+    modalRef;
+
     tabSelected = 'esporte';
 
     hoveredDate: NgbDate | null = null;
@@ -31,6 +38,8 @@ export class ApostaComponent implements OnInit {
 
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
+
+    showLoading = false;
 
     totais = {
         valor: 0,
@@ -49,6 +58,9 @@ export class ApostaComponent implements OnInit {
         public desafioApostaService: DesafioApostaService,
         public formatter: NgbDateParserFormatter,
         public messageService: MessageService,
+        private cd: ChangeDetectorRef,
+        private modalService: NgbModal,
+        private apostaService: ApostaService
     ) {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
         this.toDate = calendar.getToday();
@@ -68,6 +80,8 @@ export class ApostaComponent implements OnInit {
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.cassinoHabilitado = this.params.getOpcoes().casino;
+
+        this.encerramentoPermitido = this.params.getOpcoes().permitir_encerrar_aposta;
 
         this.getApostas();
     }
@@ -199,5 +213,113 @@ export class ApostaComponent implements OnInit {
     handleError(error: string) {
         this.loading = false;
         this.messageService.error(error);
+    }
+
+    openModal(aposta) {
+        this.showLoading = true;
+        const params = {};
+
+        if (aposta.id === this.apostas[0].id) {
+            params['verificar-ultima-aposta'] = 1;
+        }
+
+        let modalAposta;
+        if (this.encerramentoPermitido) {
+            modalAposta = ApostaEncerramentoModalComponent;
+        } else {
+            modalAposta = ApostaModalComponent;
+        }
+
+        this.apostaService.getAposta(aposta.id, params)
+            .subscribe(
+                apostaLocalizada => {
+                    this.modalRef = this.modalService.open(modalAposta, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        scrollable: true
+                    });
+                    this.modalRef.componentInstance.aposta = apostaLocalizada;
+                    this.modalRef.componentInstance.showCancel = true;
+                    if (params['verificar-ultima-aposta']) {
+                        this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
+                    }
+
+                    this.modalRef.result.then(
+                        (result) => {
+                            switch (result) {
+                                case 'pagamento':
+                                    this.pagarAposta(apostaLocalizada);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        },
+                        (reason) => {
+                        }
+                    );
+
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => this.handleError(error)
+            );
+    }
+
+    handleCancel(aposta) {
+        this.showLoading = true;
+        const params = {};
+
+        if (aposta.id === this.apostas[0].id) {
+            params['verificar-ultima-aposta'] = 1;
+        }
+
+        this.apostaService.getAposta(aposta.id, params)
+            .subscribe(
+                apostaLocalizada => {
+                    this.cancelar(apostaLocalizada);
+
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => this.handleError(error)
+            );
+    }
+
+    cancelar(aposta) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Cancelar Aposta';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
+
+        console.log("APOSTA", aposta);
+
+        this.modalRef.result.then(
+            (result) => {
+                this.apostaService.cancelar({id: aposta.id, version: aposta.version})
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        () => this.getApostas(),
+                        error => this.handleError(error)
+                    );
+            },
+            (reason) => {
+            }
+        );
+    }
+
+    pagarAposta(aposta) {
+        this.apostaService.pagar(aposta.id)
+            .subscribe(
+                result => {
+                    aposta.pago = result.pago;
+                    this.cd.detectChanges();
+
+                    if (result.pago) {
+                        this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
+                    } else {
+                        this.messageService.success('PAGAMENTO CANCELADO!');
+                    }
+                },
+                error => this.handleError(error)
+            );
     }
 }

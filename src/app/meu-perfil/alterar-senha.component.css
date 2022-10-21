@@ -1,9 +1,32 @@
+.internal-container-out {
+    display: flex;
+    flex-direction: column;
+}
+
 .content-header {
     margin-bottom: 50px;
 }
 
+.content-body {
+    flex: 1;
+    display: flex;
+}
+
+.content-body form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .row {
     margin-bottom: 30px;
+}
+
+.buttons {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
 }
 
 label {

@@ -21,7 +21,7 @@
                 <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
                     <div class="jogo-selecionado-inner">
                         <div class="horario">
-                            {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                            {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}} <span *ngIf="item.jogo.ao_vivo"> - AO VIVO</span>
                         </div>
                         <!-- <div class="campeonato-nome">
                             {{item.jogo.campeonato.nome}}

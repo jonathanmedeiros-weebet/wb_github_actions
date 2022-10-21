@@ -68,6 +68,22 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     unsub$ = new Subject();
     term = '';
 
+    nomesCotacoes = [
+        "",
+        "Casa",
+        "Empate",
+        "Fora",
+        "C+E",
+        "F+E",
+        "C+F",
+        "Amb",
+        "nAmb",
+        "+0.5G",
+        "-0.5G",
+        "+1.5G",
+        "+2.5G",
+    ]
+
     jogosDestaque = [];
 
     depoisdepoisdeamanha;

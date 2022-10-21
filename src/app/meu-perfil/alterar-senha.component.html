@@ -4,69 +4,63 @@
             <h2>Alterar Senha</h2>
         </div>
         <div class="content-body">
-            <div class="content">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-                    <div class="row">
-                        <div class="col-2">
-                            <label for="">
-                                Senha Atual
-                            </label>
-                        </div>
-                        <div class="col-4 align-items-center">
-                            <div class="form-group">
-                                <input type="password" class="inverted-out form-control" placeholder="Digite sua senha" formControlName="senha_atual"
-                                       [ngClass]="applyCssInputError('senha_atual')" [type]="mostrarSenhaAtual ? 'text' : 'password'">
-                                <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }" (click)="toggleMostrarSenha('senhaAtual')"></i>
-                                <app-error-msg [control]="form.get('senha_atual')" label="Senha Atual"></app-error-msg>
-                            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="">
+                            Senha Atual
+                        </label>
+                    </div>
+                    <div class="col-4 align-items-center">
+                        <div class="form-group">
+                            <input type="password" class="inverted-out form-control" placeholder="Digite sua senha" formControlName="senha_atual"
+                                    [ngClass]="applyCssInputError('senha_atual')" [type]="mostrarSenhaAtual ? 'text' : 'password'">
+                            <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }" (click)="toggleMostrarSenha('senhaAtual')"></i>
+                            <app-error-msg [control]="form.get('senha_atual')" label="Senha Atual"></app-error-msg>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <label for="">
-                                Nova Senha
-                            </label>
-                        </div>
-                        <div class="col-4 align-items-center">
-                            <div class="form-group">
-                                <input type="password" class="inverted-out form-control" placeholder="Digite uma nova senha" formControlName="senha_nova"
-                                       [ngClass]="applyCssInputError('senha_nova')" [type]="mostrarSenhaNova ? 'text' : 'password'">
-                                <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }" (click)="toggleMostrarSenha('senhaNova')"></i>
-                                <app-error-msg [control]="form.get('senha_nova')" label="Senha"></app-error-msg>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="">
+                            Nova Senha
+                        </label>
+                    </div>
+                    <div class="col-4 align-items-center">
+                        <div class="form-group">
+                            <input type="password" class="inverted-out form-control" placeholder="Digite uma nova senha" formControlName="senha_nova"
+                                    [ngClass]="applyCssInputError('senha_nova')" [type]="mostrarSenhaNova ? 'text' : 'password'">
+                            <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }" (click)="toggleMostrarSenha('senhaNova')"></i>
+                            <app-error-msg [control]="form.get('senha_nova')" label="Senha"></app-error-msg>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <label for="">
-                                Confirmar nova senha
-                            </label>
-                        </div>
-                        <div class="col-4 align-items-center">
-                            <div class="form-group">
-                                <input class="inverted-out form-control" placeholder="Confirme sua senha" formControlName="senha_confirmacao"
-                                       [ngClass]="applyCssInputError('senha_confirmacao')" [type]="mostrarSenhaConfirmacao ? 'text' : 'password'">
-                                <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaConfirmacao, 'fa-eye': !mostrarSenhaConfirmacao }" (click)="toggleMostrarSenha('senhaConfirmacao')"></i>
-                                <app-error-msg [control]="form.get('senha_confirmacao')"
-                                               label="Confirmar senha"></app-error-msg>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="">
+                            Confirmar nova senha
+                        </label>
+                    </div>
+                    <div class="col-4 align-items-center">
+                        <div class="form-group">
+                            <input class="inverted-out form-control" placeholder="Confirme sua senha" formControlName="senha_confirmacao"
+                                    [ngClass]="applyCssInputError('senha_confirmacao')" [type]="mostrarSenhaConfirmacao ? 'text' : 'password'">
+                            <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaConfirmacao, 'fa-eye': !mostrarSenhaConfirmacao }" (click)="toggleMostrarSenha('senhaConfirmacao')"></i>
+                            <app-error-msg [control]="form.get('senha_confirmacao')"
+                                            label="Confirmar senha"></app-error-msg>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col col-md-12">
-                            <div class="form-group text-right">
-                                <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
-                                    Cancelar
-                                </button>
-                                <button class="btn btn-custom w-150" type="submit">
-                                    Salvar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                <div class="buttons">
+                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-custom w-150" type="submit">
+                        Salvar
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

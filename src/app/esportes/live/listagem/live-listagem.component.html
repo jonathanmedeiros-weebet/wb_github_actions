@@ -71,11 +71,27 @@
                                     </div>
                                 </div>
 
-                                <div class="cotacoes">
+                                <div class="cotacoes" *ngIf="jogo.value.cotacoes.length > 0">
                                     <div class="cotacao" *ngFor="let cotacao of jogo.value.cotacoes"
                                     (click)="addCotacao(jogo.value, cotacao)" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
-                                        <label>{{ cotacao.nome }}</label>
+                                        <label>{{ cotacao.nome}}</label>
                                         <span>{{ cotacao.valor }}</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="cotacoes" *ngIf="jogo.value.cotacoes.length <= 0">
+                                    <div class="cotacao disabled">
+                                        <label>Casa</label>
+                                        <span><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <div class="cotacao disabled">
+                                        <label>Empate</label>
+                                        <span><i class="fa fa-lock"></i></span>
+                                    </div>
+                                    <div class="cotacao disabled">
+                                        <label>Fora</label>
+                                        <span><i class="fa fa-lock"></i></span>
                                     </div>
                                 </div>
 

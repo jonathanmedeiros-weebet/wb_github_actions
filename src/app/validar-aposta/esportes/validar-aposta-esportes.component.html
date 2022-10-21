@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <input type="text" class="inverted form-control" formControlName="apostador"
+                        <input type="text" class="inverted-out form-control" formControlName="apostador"
                                [ngClass]="applyCssInputError('apostador')">
                         <app-error-msg [control]="form.get('apostador')" label="Apostador">
                         </app-error-msg>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <input type="text" class="inverted form-control" formControlName="valor"
+                        <input type="text" class="inverted-out form-control" formControlName="valor"
                                [ngClass]="applyCssInputError('valor')">
                         <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                     </div>

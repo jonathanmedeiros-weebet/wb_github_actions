@@ -219,6 +219,11 @@
     margin: 0;
 }
 
+.cotacoes .cotacao.disabled,
+.cotacoes .cotacao.disabled label {
+    cursor: not-allowed !important;
+    opacity: .7;
+  }
 
 /* Large devices (desktops, 1025 and up) */
 @media (min-width: 1025px) {

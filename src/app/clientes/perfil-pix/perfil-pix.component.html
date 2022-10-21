@@ -6,53 +6,41 @@
             <h2>PIX</h2>
         </div>
         <div class="content-body">
-            <div class="content">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="label">Chave PIX</label>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" formControlName="chave_pix" class="form-control inverted-out"
-                                        placeholder="CPF, E-mail, Telefone ou Aleatória">
-                                    <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
-                                    <small>Obs. Só será realizado saques em chaves pix pertencentes ao titular da
-                                        conta.</small>
-                                </div>
-                            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="label">Chave PIX</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" formControlName="chave_pix" class="form-control inverted-out"
+                                placeholder="CPF, E-mail, Telefone ou Aleatória">
+                            <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
+                            <small>Obs. Só será realizado saques em chaves pix pertencentes ao titular da
+                                conta.</small>
                         </div>
-                    </fieldset>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="label">Senha Atual</label>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="password" formControlName="senha_atual" class="form-control inverted-out">
-                                    <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="label">Senha Atual</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="password" formControlName="senha_atual" class="form-control inverted-out">
+                            <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
                         </div>
-                    </fieldset>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col col-md-12">
-                                <div class="form-group text-right">
-                                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
-                                        Cancelar
-                                    </button>
-                                    <button class="btn btn-custom w-150" type="submit">
-                                        Atualizar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-custom w-150" type="submit">
+                        Atualizar
+                    </button>
+                </div>
+            </form>
         </div>
     </ng-container>
 </div>

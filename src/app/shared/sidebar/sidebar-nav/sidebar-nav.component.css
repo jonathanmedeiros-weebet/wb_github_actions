@@ -288,36 +288,6 @@ li.router-link-active > a {
     display: none;
 }
 
-:host:hover .collapsed .cambista-item a i.fa-angle-down {
-    display: block;
-}
-
-:host:hover .collapsed .regiao-nome {
-    display: block;
- }
-
-:host:hover .collapsed .regiao-nome.hide-item {
-    animation-name: showAnim;
-    animation-duration: 500ms;
-    animation-fill-mode: both;
- }
-
-:host:hover .consulta-bilhete.collapsed {
-    display: block;
-}
-
-:host:hover .collapsed .regiao > a::after {
-    display: block;
-}
-
-:host:hover .collapsed .sub-nav-container {
-    display: block;
-}
-
-:host:hover .consulta-bilhete-collapsed.collapsed {
-    display: none;
-}
-
 .search-collapsed {
     display: block;
     color: #fff;

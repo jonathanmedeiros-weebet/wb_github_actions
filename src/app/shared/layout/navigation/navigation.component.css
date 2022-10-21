@@ -11,6 +11,36 @@
     width: 270px;
 }
 
+#sidebar-wrapper.collapsed:hover ::ng-deep .collapsed .cambista-item a i.fa-angle-down {
+    display: block;
+}
+
+#sidebar-wrapper.collapsed:hover ::ng-deep .collapsed .regiao-nome {
+    display: block;
+}
+
+#sidebar-wrapper.collapsed:hover ::ng-deep .collapsed .regiao-nome.hide-item {
+    animation-name: showAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+#sidebar-wrapper.collapsed:hover ::ng-deep .consulta-bilhete.collapsed {
+    display: block;
+}
+
+#sidebar-wrapper.collapsed:hover ::ng-deep .collapsed .regiao > a::after {
+    display: block;
+}
+
+#sidebar-wrapper.collapsed:hover ::ng-deep .collapsed .sub-nav-container {
+    display: block;
+}
+
+#sidebar-wrapper.collapsed:hover ::ng-deep .consulta-bilhete-collapsed.collapsed {
+    display: none;
+}
+
 app-sidebar-nav {
     flex: 1 1 auto;
     height: 0px;

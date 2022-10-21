@@ -27,19 +27,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" mask="d0/M0/0000" formControlName="data_nascimento"
-                        [ngClass]="applyCssInputError('data_nascimento')" placeholder="Data de Nascimento">
-                    <app-error-msg [control]="form.get('data_nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
+                    <input type="text" class="form-control inverted-out" mask="d0/M0/0000" formControlName="nascimento"
+                        [ngClass]="applyCssInputError('nascimento')" placeholder="Data de Nascimento">
+                    <app-error-msg [control]="form.get('nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group mb-4" [ngClass]="applyCssDivError('sexo')">
-                    <select formControlName="sexo" class="form-control inverted-out">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('genero')">
+                    <select formControlName="genero" class="form-control inverted-out" [ngClass]="applyCssInputError('cpf')">
                         <option value="">Selecione</option>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                     </select>
-                    <app-error-msg [control]="form.get('sexo')" label="Sexo" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('genero')" label="Sexo" class="text-left"></app-error-msg>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" formControlName="telefone"
+                    <input type="text" mask="(00) 00000-0000" class="form-control inverted-out" formControlName="telefone"
                         [ngClass]="applyCssInputError('telefone')" placeholder="Telefone">
                     <app-error-msg [control]="form.get('telefone')" label="Telefone" class="text-left"></app-error-msg>
                 </div>
@@ -73,38 +73,38 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" formControlName="username"
-                        [ngClass]="applyCssInputError('username')" placeholder="Usuário">
-                    <app-error-msg [control]="form.get('username')" label="Usuário" class="text-left"></app-error-msg>
+                    <input type="text" class="form-control inverted-out" formControlName="usuario"
+                        [ngClass]="applyCssInputError('usuario')" placeholder="Usuário">
+                    <app-error-msg [control]="form.get('usuario')" label="Usuário" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group mb-4" [ngClass]="applyCssDivError('password')">
-                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
-                        formControlName="password" placeholder="Senha">
-                    <app-error-msg [control]="form.get('password')" label="Senha" class="text-left"></app-error-msg>
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('senha')">
+                    <input type="password" class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
+                        formControlName="senha" placeholder="Senha">
+                    <app-error-msg [control]="form.get('senha')" label="Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" formControlName="confirmar-senha"
-                        [ngClass]="applyCssInputError('confirmar-senha')" placeholder="Confirmar Senha">
-                    <app-error-msg [control]="form.get('confirmar-senha')" label="Confirmar Senha" class="text-left"></app-error-msg>
+                    <input type="password" class="form-control inverted-out" formControlName="senha_confirmacao"
+                        [ngClass]="applyCssInputError('senha_confirmacao')" placeholder="Confirmar Senha">
+                    <app-error-msg [control]="form.get('senha_confirmacao')" label="Confirmar Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group mb-4" [ngClass]="applyCssDivError('codigo_afiliado')">
-                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('codigo_afiliado')"
-                        formControlName="codigo_afiliado" placeholder="Código de afiliação(Opcional)">
-                    <app-error-msg [control]="form.get('codigo_afiliado')" label="Código de afiliação(Opcional)" class="text-left"></app-error-msg>
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
+                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('afiliado')"
+                        formControlName="afiliado" placeholder="Código de afiliação(Opcional)">
+                    <app-error-msg [control]="form.get('afiliado')" label="Código de afiliação(Opcional)" class="text-left"></app-error-msg>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <label for=""><input type="checkbox"> Certifico que tenho mais de 18 anos de idade e  declaro que li e concordo com os termos de uso</label>
+                <label for=""><input type="checkbox" formControlName="aceitar_termos"> Certifico que tenho mais de 18 anos de idade e  declaro que li e concordo com os termos de uso</label>
             </div>
         </div>
         <button type="submit" class="btn btn-custom btn-block">Cadastrar</button>

@@ -81,7 +81,7 @@
     </ng-container>
 
     <ng-container *ngIf="contexto == 'desafio'">
-        <span class="group">Desafios</span>
+        <span class="group" *ngIf="!collapsed">Desafios</span>
         <li class="categoria" (click)="goTo('/desafios', {})">
             <a>
                 <i class="fa fa-trophy icone-generico"></i>
@@ -98,7 +98,7 @@
     </ng-container>
 
     <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
-        <span class="group">Surpresinha</span>
+        <span class="group" *ngIf="!collapsed">Surpresinha</span>
         <li class="supresinha" *ngFor="let tipoAposta of itens"
             (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
             <a *ngIf="contexto == 'seninha'">

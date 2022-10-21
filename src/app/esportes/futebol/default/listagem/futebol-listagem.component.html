@@ -99,7 +99,7 @@
                                 </a>
                                 <div #scrollOdds class="odds" id="{{jogo.event_id}}"
                                      [ngStyle]="{'width.px': widthOddsScroll}" (scroll)="onScroll(jogo.event_id)">
-                                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes">
+                                    <div class="odd" *ngFor="let cotacao of jogo.cotacoes; let i = index">
                                         <ng-container
                                             *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                             <div
@@ -116,7 +116,7 @@
                                         <ng-template #cotacaoBloqueada>
                                             <div class="inner-odd odd-disabled">
                                             <span class="nome-odd">
-                                                {{cotacao.label}}
+                                                {{cotacao.label ?? nomesCotacoes[i]}}
                                             </span>
                                                 <span class="valor">
                                                 <i class="fa fa-lock"></i>

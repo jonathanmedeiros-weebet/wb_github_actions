@@ -91,6 +91,7 @@
                         <th>Horário</th>
                         <th>Valor</th>
                         <th>Prêmio</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tr *ngIf="loading">
@@ -103,6 +104,15 @@
                         <td>{{ aposta.horario }}</td>
                         <td>{{ aposta.valor | currency}}</td>
                         <td>{{ aposta.premio | currency }}</td>
+                        <td class="acoes-aposta">
+                            <a (click)="handleCancel(aposta)" title="Cancelar">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            <a title="Exibir" (click)="openModal(aposta)">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

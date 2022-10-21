@@ -85,6 +85,7 @@
                             <th>Comissão</th>
                             <th>Prêmio</th>
                             <th width="10">Pagamento</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tr *ngIf="loading">
@@ -100,6 +101,15 @@
                             <td>{{ aposta.comissao | currency }}</td>
                             <td>{{ aposta.premio | currency }}</td>
                             <td>{{ aposta.pago ? 'Pago' : '' }}</td>
+                            <td class="acoes-aposta">
+                                <a (click)="handleCancel(aposta)" title="Cancelar">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+                                <a title="Exibir" (click)="openModal(aposta)">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

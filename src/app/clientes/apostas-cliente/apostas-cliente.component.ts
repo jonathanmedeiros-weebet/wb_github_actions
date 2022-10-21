@@ -1,14 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
-import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService } from 'src/app/services';
+import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { forEach } from 'lodash';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -24,6 +27,12 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     desafioHabilitado;
     casinoHabilitado;
     activeId = 'esporte';
+
+    showLoading = false;
+    encerramentoPermitido;
+
+    modalRef;
+    unsub$ = new Subject();
 
     totais = {
         valor: 0,
@@ -54,6 +63,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         public desafioApostaService: DesafioApostaService,
         public formatter: NgbDateParserFormatter,
         private calendar: NgbCalendar,
+        private cd: ChangeDetectorRef,
+        private modalService: NgbModal,
+        private apostaService: ApostaService
     ) {
         super();
 
@@ -75,6 +87,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.casinoHabilitado = this.params.getOpcoes().casino;
+
+        this.encerramentoPermitido = this.params.getOpcoes().permitir_encerrar_aposta;
 
         this.createForm();
         this.menuFooterService.setIsPagina(true);
@@ -225,5 +239,93 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
         const parsed = this.formatter.parse(input);
         return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+    }
+
+    openModal(aposta) {
+        this.showLoading = true;
+        const params = {};
+
+        if (aposta.id === this.apostas[0].id) {
+            params['verificar-ultima-aposta'] = 1;
+        }
+
+        let modalAposta;
+        if (this.encerramentoPermitido) {
+            modalAposta = ApostaEncerramentoModalComponent;
+        } else {
+            modalAposta = ApostaModalComponent;
+        }
+
+        this.apostaService.getAposta(aposta.id, params)
+            .subscribe(
+                apostaLocalizada => {
+                    this.modalRef = this.modalService.open(modalAposta, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        scrollable: true
+                    });
+                    this.modalRef.componentInstance.aposta = apostaLocalizada;
+                    this.modalRef.componentInstance.showCancel = true;
+                    if (params['verificar-ultima-aposta']) {
+                        this.modalRef.componentInstance.isUltimaAposta = apostaLocalizada.is_ultima_aposta;
+                    }
+
+                    this.modalRef.result.then(
+                        (result) => {
+                            switch (result) {
+                                default:
+                                    break;
+                            }
+                        },
+                        (reason) => {
+                        }
+                    );
+
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => this.handleError(error)
+            );
+    }
+
+    handleCancel(aposta) {
+        this.showLoading = true;
+        const params = {};
+
+        if (aposta.id === this.apostas[0].id) {
+            params['verificar-ultima-aposta'] = 1;
+        }
+
+        this.apostaService.getAposta(aposta.id, params)
+            .subscribe(
+                apostaLocalizada => {
+                    this.cancelar(apostaLocalizada);
+
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => this.handleError(error)
+            );
+    }
+
+    cancelar(aposta) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Cancelar Aposta';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
+
+        console.log("APOSTA", aposta);
+
+        this.modalRef.result.then(
+            (result) => {
+                this.apostaService.cancelar({id: aposta.id, version: aposta.version})
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        () => this.getApostas(),
+                        error => this.handleError(error)
+                    );
+            },
+            (reason) => {
+            }
+        );
     }
 }

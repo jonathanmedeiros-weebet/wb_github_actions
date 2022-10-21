@@ -7,13 +7,14 @@ import {DepositoPix} from '../../../models';
 import {ParametrosLocaisService} from "../../../shared/services/parametros-locais.service";
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'ngbd-modal-content',
     styleUrls: ['./deposito-pix.component.css'],
     template: `
     <div class="modal-body">
-        <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Depósito  PIX</h4>
+        <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Depósito PIX</h4>
         <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <img src="/assets/images/close.svg" alt="fechar">
         </a>
@@ -29,7 +30,7 @@ import { HelperService } from 'src/app/services';
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
         <div class="buttons">
-            <button class="btn btn-custom2"><i class="fa fa-share"></i> Compartilhar QR Code</button>
+            <button class="btn btn-custom2" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
             <button class="btn btn-custom2" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
         </div>
     </div>
@@ -43,7 +44,11 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
-    constructor(public modal: NgbActiveModal) {}
+    constructor(
+        public modal: NgbActiveModal,
+        private _sanitizer: DomSanitizer,
+        private _helper: HelperService
+    ) {}
 
     ngOnInit() {
         let timer = setInterval(() => {
@@ -64,6 +69,11 @@ export class NgbdModalContent {
 
     copyCode(code) {
         console.log('Copiado: ', code);
+    }
+
+    compartilhar() {
+        const imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + this.qrCodeBase64);
+        this._helper.sharedDepositoPix(imagePath);
     }
 }
 
