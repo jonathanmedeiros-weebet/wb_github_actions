@@ -2389,3 +2389,12 @@ gulp.task('sortepix.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betsport.wee.bet",
+        banca: "BET SPORT",
+        styles: "",
+    });
+});

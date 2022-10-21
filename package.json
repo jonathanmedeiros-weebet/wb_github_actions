@@ -260,7 +260,8 @@
         "skoutbet.wee.bet": "gulp skoutbet.wee.bet",
         "onbets.bet": "gulp onbets.bet",
         "betei.bet": "gulp betei.bet",
-        "sortepix.vip": "gulp sortepix.vip"
+        "sortepix.vip": "gulp sortepix.vip",
+        "betsport.wee.bet": "gulp betsport.wee.bet"
     },
     "private": true,
     "dependencies": {
