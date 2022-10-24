@@ -1,27 +1,23 @@
 <div class="modal-header">
+    <a class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-arrow-left"></i>
+    </a>
     <h4 class="modal-title" id="modal-basic-title">Consultar Bilhete</h4>
-    <div class="action-buttons">
-        <button type="button" *ngIf="impressaoPermitida()" (click)="printTicket()">
-            <i class="fa fa-print"></i>
-        </button>
-        <button *ngIf="compartilhamentoPermitido()" type="button" class="" (click)="shareTicket()">
-            <i class="fa fa-share-alt"></i>
-        </button>
-        <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <a class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-home"></i>
+    </a>
 </div>
 <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
-    <form *ngIf="!exibirBilhete" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <input type="text" style="text-transform:uppercase;" placeholder="Código da aposta" class="form-control"
-                   formControlName="codigo"
-                   autocomplete="off" [ngClass]="applyCssInputError('codigo')">
+            <input type="text" style="text-transform:uppercase;" placeholder="Código da aposta"
+                class="form-control inverted-out" formControlName="codigo"
+                autocomplete="off" [ngClass]="applyCssInputError('codigo')">
             <app-error-msg [control]="form.get('codigo')"></app-error-msg>
+            <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
         </div>
-        <button type="submit" class="btn btn-custom">Consultar</button>
     </form>
+
     <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'esportes'">
     </app-exibir-bilhete-esportivo>
     <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'loteria'">
@@ -30,4 +26,10 @@
     </app-bilhete-acumuladao>
     <app-exibir-bilhete-desafio [aposta]="aposta" *ngIf="exibirBilhete && aposta.tipo == 'desafio'">
     </app-exibir-bilhete-desafio>
+
+    <div class="buttons" *ngIf="exibirBilhete">
+        <button type="button" class="btn btn-custom2" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()">Compartilhar</button>
+        <button type="button" class="btn btn-custom" *ngIf="impressaoPermitida()" (click)="printTicket()">Imprimir</button>
+    </div>
 </div>
+

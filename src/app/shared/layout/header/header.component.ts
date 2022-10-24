@@ -236,4 +236,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             }
         );
     }
+
+    changeTheme() {
+        document.body.classList.toggle('dark');
+    }
 }

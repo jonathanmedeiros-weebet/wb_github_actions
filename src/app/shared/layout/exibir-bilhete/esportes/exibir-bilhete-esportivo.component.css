@@ -1,12 +1,13 @@
-#cupom{
+#cupom {
     /* width: 19.27em; */
-    padding: 1em;
     background: #181818;
     /* margin: 2em auto; */
     font-size: 12px;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-img{
+#cupom img{
     max-height: 90px;
     max-width: 150px;
 }
@@ -30,9 +31,8 @@ img{
 }
 
 hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border: 1px dashed black;
+    margin: 15px -10px;
+    border: 1px dashed #35CC95;
 }
 
 .numero{
@@ -48,7 +48,6 @@ hr {
 }
 
 .item .campeonato{
-    text-align: center;
     margin: 1px;
     font-weight: bold;
     font-size: 12px;
@@ -91,4 +90,50 @@ hr {
 
 .encerrado {
     text-decoration-line: line-through;
+}
+
+.separador-bilhete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px -20px;
+}
+
+.separador-bilhete i {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #0a0a0a;
+}
+
+.separador-bilhete i.big.l {
+    width: 19px;
+    height: 38px;
+    border-radius: 0 38px 38px 0;
+}
+
+.separador-bilhete i.big.r {
+    width: 19px;
+    height: 38px;
+    border-radius: 38px 0 0 38px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+
+    h1.numero {
+        text-align: left;
+        font-size: 14px;
+        margin: 40px 0 20px;
+    }
+
+    #cupom {
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    #cupom img {
+        max-height: 20px;
+    }
 }

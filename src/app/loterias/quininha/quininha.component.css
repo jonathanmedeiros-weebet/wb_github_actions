@@ -97,6 +97,11 @@ input, select {
         overflow: hidden;
     }
 
+    .inputs-random {
+        display: flex;
+        gap: 30px;
+    }
+
     .form-palpite {
         background-color: transparent;
         padding: 0;
@@ -104,11 +109,24 @@ input, select {
 
     .form-group {
         margin-left: 0!important;
-        padding: 0 5px;
         width: 100%;
     }
 
     .pre-bilhete-mobile {
         padding: 0;
+        background: #181818;
+    }
+
+    .pre-bilhete-mobile .jogo-selecionado {
+        padding: 20px;
+        background: #0a0a0a;
+        border-radius: 15px;
+    }
+
+    .remover-item {
+        top: 20px;
+        right: 20px;
+
+        line-height: 18px;
     }
 }

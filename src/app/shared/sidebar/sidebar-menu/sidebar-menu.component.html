@@ -1,4 +1,28 @@
-<ul class="sidebar-menu" *ngIf="isLoggedIn">
+
+<div class="header-menu">
+    <label for="">Mais Opções</label>
+    <div class="options">
+        <a (click)="pesqisarTicket()">
+            <i class="fa fa-ticket"></i>
+            Bilhete
+        </a>
+
+        <a href="">
+            <i class="fa fa-credit-card"></i>
+            Cartões
+        </a>
+    </div>
+</div>
+
+<div class="login-area" *ngIf="!isLoggedIn">
+    <label>Já possui uma conta?</label>
+    <a class="btn btn-custom2 btn-block" (click)="abrirLogin()">Entrar</a>
+    <label class="mt-5">Ainda não possui?</label>
+    <a class="btn btn-custom btn-block" (click)="abrirCadastro()">Resgistre-se</a>
+</div>
+
+
+<ul class="sidebar-menu" *ngIf="false">
     <li *ngIf="!isCliente">
         <a (click)="abrirModalTabela()">
             <i class="fa-solid fa-table-list"></i>

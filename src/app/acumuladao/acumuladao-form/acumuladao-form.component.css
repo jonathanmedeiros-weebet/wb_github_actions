@@ -285,20 +285,13 @@
     color: var(--foreground-odds);
 }
 
-#aposta-deslogado .btn {
-    width: 50%;
-    border: 0px;
-    border-radius: 3px 3px 0 0;
-}
-
-
 #aposta-deslogado .evento {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 15px 0;
-    border: 1px dashed black;
-    padding: 5px;
+    padding: 5px 0 15px;
+    border-bottom: 1px dashed #35CC95;
 }
 
 #aposta-deslogado .placar,
@@ -315,6 +308,46 @@
 .cartao-form .form-row input {
     font-size: 1rem;
 }
+
+.tabs {
+    display: flex;
+    border: 0;
+    background: #181818;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.tabs .tab {
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    background: #181818;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+#aposta-deslogado .tabs .active,
+.tabs .active {
+    border: 0;
+    background: #35CC95;
+    color: #181818;
+    border-radius: 4px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#aposta-deslogado {
+    padding: 20px;
+}
+
 
 /* Media */
 @media only screen and (max-width: 1024px) {

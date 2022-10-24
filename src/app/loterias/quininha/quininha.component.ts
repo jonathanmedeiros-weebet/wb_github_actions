@@ -17,6 +17,7 @@ import {
 import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
+import { random } from 'lodash';
 
 @Component({
     selector: 'app-quininha',
@@ -324,5 +325,33 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+    gerarSupresinha() {
+        const numbers = [];
+
+        let qty = this.qtdNumeros;
+
+        for (let index = 0; index < qty; index++) {
+            const number = this.generateRandomNumber(numbers);
+            numbers.push(number);
+        }
+
+        numbers.sort((a, b) => a - b);
+        this.supresinhaService.atualizarSupresinha(numbers);
+    }
+
+    generateRandomNumber(numbers: Number[]) {
+        let number;
+
+        number = random(1, 80);
+
+        const find = numbers.find(n => n === number);
+
+        if (!find) {
+            return number;
+        } else {
+            return this.generateRandomNumber(numbers);
+        }
     }
 }

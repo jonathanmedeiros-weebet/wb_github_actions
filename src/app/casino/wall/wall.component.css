@@ -192,10 +192,14 @@
     }
 
     .game-tile {
-        min-width: 150px;
-        max-width: 150px;
+        min-width: 200px;
+        max-width: 200px;
         margin-top: 10px;
         margin-right: 10px;
+    }
+
+    .ver-todos a {
+        font-size: 12px;
     }
 
     .game-tile a {

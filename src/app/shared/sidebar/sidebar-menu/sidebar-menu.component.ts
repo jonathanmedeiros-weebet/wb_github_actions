@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
-import {TabelaModalComponent} from '../../layout/modals';
+import {CadastroModalComponent, LoginModalComponent, PesquisarApostaModalComponent, TabelaModalComponent} from '../../layout/modals';
 import {SidebarService} from '../../services/utils/sidebar.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {takeUntil} from 'rxjs/operators';
@@ -27,6 +27,12 @@ export class SidebarMenuComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (window.innerWidth > 1025) {
+            this.isAppMobile = false;
+        } else {
+            this.isAppMobile = true;
+        }
+
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -64,5 +70,48 @@ export class SidebarMenuComponent implements OnInit {
 
     closeMenu() {
         this.sidebarService.close();
+    }
+
+    abrirLogin() {
+
+        let options = {};
+
+        if (this.isAppMobile) {
+            options = {
+                windowClass: 'modal-fullscreen',
+            }
+        } else {
+            options = {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-600',
+                centered: true,
+            }
+        }
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
+    }
+
+    abrirCadastro() {
+        this.modalRef = this.modalService.open(
+            CadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+            }
+        );
+    }
+
+    pesqisarTicket() {
+        this.modalRef = this.modalService.open(
+            PesquisarApostaModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+            }
+        );
     }
 }

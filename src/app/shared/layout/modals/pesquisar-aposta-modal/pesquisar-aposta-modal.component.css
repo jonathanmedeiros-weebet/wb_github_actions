@@ -1,0 +1,33 @@
+.modal-header {
+    padding: 10px;
+    border-bottom: 0;
+}
+
+.form-group {
+    position: relative;
+}
+
+.btn-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #35CC95;
+    color: #181818;
+    border: 0;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+
+.buttons {
+    margin: 40px 0 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons button {
+    flex: 1;
+}

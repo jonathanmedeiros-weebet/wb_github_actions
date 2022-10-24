@@ -8,8 +8,8 @@
         <h1 class="numero">
             {{aposta.codigo}}
         </h1>
-        <hr>
-        <hr>
+        <hr class="hide-mobile">
+        <hr class="hide-mobile">
         <div class="informacoes">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
@@ -38,7 +38,6 @@
             </p>
         </div>
         <hr>
-        <hr>
         <ng-container *ngFor="let item of aposta.itens">
             <div class="item">
                 <p class="campeonato">
@@ -64,7 +63,6 @@
                     <span *ngIf="item.resultado && !item.encerrado && !item.removido">{{item.resultado}}</span>
                 </p>
             </div>
-            <hr>
         </ng-container>
         <hr>
         <div class="valores">
@@ -88,8 +86,23 @@
             <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
                 CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
-            <hr>
-            <hr>
+        </div>
+        <div class="separador-bilhete">
+            <i class="big l"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i class="big r"></i>
         </div>
         <p class="rodape">
             {{opcoes.informativo_rodape}}

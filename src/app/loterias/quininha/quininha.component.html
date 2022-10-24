@@ -8,12 +8,15 @@
                             <div class="form-row">
                                 <div class="form-group col-sm-11 col-lg-4">
                                     <label>Quantidade de dezenas da aposta</label>
-                                    <select class="form-control inverted-out" name="qtdNumeros" [(ngModel)]="qtdNumeros"
-                                            style="background-color: var(--header)">
-                                        <option [value]="null" disabled>Selecione a quantidade</option>
-                                        <option [value]="numero" [disabled]="disabledNumber(numero)"
-                                                *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
-                                    </select>
+                                    <div class="inputs-random">
+                                        <select class="form-control inverted-out" name="qtdNumeros" [(ngModel)]="qtdNumeros"
+                                                style="background-color: var(--header)">
+                                            <option [value]="null" disabled>Selecione a quantidade</option>
+                                            <option [value]="numero" [disabled]="disabledNumber(numero)"
+                                                    *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
+                                        </select>
+                                        <a class="hide-desktop btn btn-custom" (click)="gerarSupresinha()"><i class="fa fa-refresh"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -146,7 +149,7 @@
                         <form #apostaForm="ngForm">
                             <div class="div-inputs">
                                 <div class="form-group" *ngIf="!isCliente">
-                                    <input type="text" class="form-control" required [(ngModel)]="aposta.apostador"
+                                    <input type="text" class="form-control inverted-out" required [(ngModel)]="aposta.apostador"
                                            name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
                                            #apostador="ngModel" placeholder="Nome do apostador...">
                                     <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>

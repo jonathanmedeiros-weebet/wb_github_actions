@@ -96,6 +96,11 @@ input, select {
         overflow: hidden;
     }
 
+    .inputs-random {
+        display: flex;
+        gap: 30px;
+    }
+
     .form-palpite {
         background-color: transparent;
         padding: 0;

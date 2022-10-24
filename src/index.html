@@ -30,6 +30,32 @@
 
     <style>
         :root {
+            --header: #ffffff;
+            --foreground-header: #0A0A09;
+
+            --sidebar-right: #fff;
+            --foreground-sidebar-right: #0A0A09;
+
+            --sidebar-left: #fff;
+            --foreground-sidebar-left: #0A0A09;
+
+            --highlight: #35CD96;
+            --foreground-highlight: #fff;
+
+            --odds: #046eef;
+            --foreground-odds: #ffffff;
+            --foreground-selected-odds: #000000;
+
+            --league: #e1e2e4;
+            --foreground-league: #455a64;
+
+            --event-time: #0A0A09;
+            --fg-event-time: #ffffff;
+
+            --wb-warning: #FF0000;
+        }
+
+        :root .dark {
             --header: #0A0A09;
             --foreground-header: #FFFFFF;
 
@@ -58,7 +84,7 @@
     <!-- <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css"> -->
 </head>
 
-<body style="background-color:var(--header);">
+<body class="dark" style="background-color:var(--header);">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6CF4C5" height="0" width="0"

@@ -244,6 +244,19 @@ nav::-webkit-scrollbar {
     }
 }
 
+body .change-theme {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--header);
+    color: var(--foreground-header);
+}
+
 /* .logo-mobile {
     max-width: calc(100% - 140px);
     width: 50%;
