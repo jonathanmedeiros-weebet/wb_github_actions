@@ -2418,3 +2418,12 @@ gulp.task('bravos.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('arena365.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "arena365.wee.bet",
+        banca: "ARENA 365",
+        styles: "",
+    });
+});

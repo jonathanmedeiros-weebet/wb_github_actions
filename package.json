@@ -263,7 +263,8 @@
         "sortepix.vip": "gulp sortepix.vip",
         "betsport.wee.bet": "gulp betsport.wee.bet",
         "betbetix.com":  "gulp betbetix.com",
-        "bravos.bet": "gulp bravos.bet"
+        "bravos.bet": "gulp bravos.bet",
+        "arena365.wee.bet": "gulp arena365.wee.bet"
     },
     "private": true,
     "dependencies": {
