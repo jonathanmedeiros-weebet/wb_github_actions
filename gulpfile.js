@@ -2408,3 +2408,12 @@ gulp.task('betbetix.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bravos.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bravos.bet",
+        banca: "BRAVOS",
+        styles: "",
+    });
+});
