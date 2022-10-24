@@ -2399,3 +2399,13 @@ gulp.task('betsport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+
+gulp.task('betbetix.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betbetix.com",
+        banca: "BETBETIX",
+        styles: "",
+    });
+});

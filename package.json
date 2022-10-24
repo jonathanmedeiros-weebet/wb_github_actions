@@ -261,7 +261,8 @@
         "onbets.bet": "gulp onbets.bet",
         "betei.bet": "gulp betei.bet",
         "sortepix.vip": "gulp sortepix.vip",
-        "betsport.wee.bet": "gulp betsport.wee.bet"
+        "betsport.wee.bet": "gulp betsport.wee.bet",
+        "betbetix.com":  "gulp betbetix.com"
     },
     "private": true,
     "dependencies": {
