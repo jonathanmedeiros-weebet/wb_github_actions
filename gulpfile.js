@@ -1243,15 +1243,6 @@ gulp.task('uzzebet.com', function (done) {
     });
 });
 
-gulp.task('bet27.tv', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bet27.tv",
-        banca: "BET 27",
-        styles: "",
-    });
-});
-
 gulp.task('paratodosbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1389,15 +1380,6 @@ gulp.task('bolanarede.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "bolanarede.wee.bet",
         banca: "BOLA NA REDE",
-        styles: "",
-    });
-});
-
-gulp.task('cityesportes.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "cityesportes.bet",
-        banca: "CITY ESPORTES",
         styles: "",
     });
 });
@@ -2095,15 +2077,6 @@ gulp.task('betsmaniavip.com', function (done) {
         server: "front4.wee.bet",
         host: "betsmaniavip.com",
         banca: "BETS MANIA VIP",
-        styles: "",
-    });
-});
-
-gulp.task('manyville.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "manyville.wee.bet",
-        banca: "MANYVILLE",
         styles: "",
     });
 });
