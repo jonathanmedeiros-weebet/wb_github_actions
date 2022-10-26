@@ -2400,3 +2400,12 @@ gulp.task('arena365.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cityesportes.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "cityesportes.bet",
+        banca: "CITY ESPORTES",
+        styles: "",
+    });
+});

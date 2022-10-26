@@ -261,7 +261,8 @@
         "betsport.wee.bet": "gulp betsport.wee.bet",
         "betbetix.com":  "gulp betbetix.com",
         "bravos.bet": "gulp bravos.bet",
-        "arena365.wee.bet": "gulp arena365.wee.bet"
+        "arena365.wee.bet": "gulp arena365.wee.bet",
+        "cityesportes.bet": "gulp cityesportes.bet"
     },
     "private": true,
     "dependencies": {
