@@ -2378,7 +2378,7 @@ gulp.task('betbetix.com', function (done) {
         host: "betbetix.com",
         banca: "BETBETIX",
         styles: "",
-        scripts: "<script src='//code.jivosite.com/widget/5WSOiOS6b1' async></script>"
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'><script src='//code.jivosite.com/widget/5WSOiOS6b1' async></script>"
     });
 });
 
