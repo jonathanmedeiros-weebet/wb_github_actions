@@ -1,13 +1,12 @@
-
 <div class="header-menu">
     <label for="">Mais Opções</label>
     <div class="options">
-        <a (click)="pesqisarTicket()">
+        <a (click)="pesquisarTicket()">
             <i class="fa fa-ticket"></i>
             Bilhete
         </a>
 
-        <a href="">
+        <a (click)="pesquisarCartao()">
             <i class="fa fa-credit-card"></i>
             Cartões
         </a>
@@ -20,31 +19,3 @@
     <label class="mt-5">Ainda não possui?</label>
     <a class="btn btn-custom btn-block" (click)="abrirCadastro()">Resgistre-se</a>
 </div>
-
-
-<ul class="sidebar-menu" *ngIf="false">
-    <li *ngIf="!isCliente">
-        <a (click)="abrirModalTabela()">
-            <i class="fa-solid fa-table-list"></i>
-            Tabela
-        </a>
-    </li>
-    <li *ngIf="!isCliente">
-        <a [routerLink]="['/validar-aposta']">
-            <i class="fa-solid fa-check"></i>
-            Validação
-        </a>
-    </li>
-    <li *ngIf="!isCliente">
-        <a [routerLink]="['/apuracao']">
-            <i class="fa-solid fa-chart-line"></i>
-            Apuração
-        </a>
-    </li>
-    <li>
-        <a [routerLink]="['/resultados/esportes']">
-            <i class="fa-solid fa-square-poll-vertical"></i>
-            Resultado
-        </a>
-    </li>
-</ul>

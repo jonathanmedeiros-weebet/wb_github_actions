@@ -84,11 +84,11 @@
 }
 
 .pull-right {
-    right: 210px;
+    right: 110px;
 }
 
 .pull-left {
-    left: 210px;
+    left: 110px;
 }
 
 .fa-right {
@@ -108,8 +108,29 @@
     justify-content: center;
 }
 
+@media only screen and (min-width: 1025px) {
+    .submenu {
+        padding-left: 0 !important;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .subcategory a {
         font-size: 12px;
+    }
+
+    .subcategory a:hover {
+        color: #fff;
+        background-color: transparent;
+    }
+
+    .submenu:not(.centered) .subcategory a.active {
+        position: absolute;
+        height: 38px;
+        left: 0;
+        width: auto;
+
+        color: #181818;
+        background-color: var(--highlight);
     }
 }

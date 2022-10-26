@@ -167,6 +167,14 @@
     animation-fill-mode: both;
 }
 
+.box-jogo {
+    width: 20%;
+    height: 229px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+
 @keyframes surgirAnim {
     0% {
         opacity: 0;
@@ -178,7 +186,7 @@
 
 @media only screen and (max-width: 1024px) {
     .bloco {
-        padding: 20px;
+        padding: 10px;
     }
 
     .scroll-button {
@@ -191,11 +199,23 @@
         scroll-behavior: smooth;
     }
 
+    .internal .game-list {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
     .game-tile {
         min-width: 200px;
         max-width: 200px;
         margin-top: 10px;
         margin-right: 10px;
+    }
+
+    .internal .game-tile {
+        max-width: calc(50% - 5px);
+        min-width: auto;
+        margin-right: 0;
+        margin-top: 0;
     }
 
     .ver-todos a {
@@ -208,6 +228,10 @@
 
     .game-tile-buttons:hover a {
         pointer-events: unset;
+    }
+
+    .box-jogo {
+        width: 100%;
     }
 
 }
@@ -247,9 +271,3 @@
 }
 
 
-.box-jogo {
-    width: 20%;
-    height: 229px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}

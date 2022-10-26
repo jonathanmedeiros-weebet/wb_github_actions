@@ -1,10 +1,10 @@
-<div id="definir" [ngClass]="{'hide': !isOpen}">
+<div id="definir" [ngClass]="{'hide': !isOpen, 'opcoes': menuIsOpen}">
     <div class="logo-container">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
         </a>
 
-        <a type="button" class="btn-close" aria-label="Close" (click)="toggleCampeonatos()">
+        <a type="button" class="btn-close" aria-label="Close" (click)="closeMenu()">
             <img src="/assets/images/close.svg" alt="fechar" width="15">
         </a>
     </div>
@@ -12,12 +12,12 @@
     <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>
 </div>
 <div id="footer-bar" [hidden]="hidden">
-    <div class="foot-button" routerLinkActive="active">
+    <div class="foot-button">
         <a class="" (click)="toggleCampeonatos()">
             <i class="fa-solid fa-bars-staggered"></i> Campeonatos
         </a>
     </div>
-    <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active">
+    <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active" [ngClass]="{'menu-open': menuIsOpen}">
         <a class="" [routerLink]="['/esportes/live']">
             <i class="fa-solid fa-play"></i> Ao Vivo
         </a>
@@ -40,7 +40,7 @@
 <!--            <i class="fa fa-check"></i> Validação-->
 <!--        </a>-->
 <!--    </div>-->
-    <div class="foot-button" routerLinkActive="active">
+    <div class="foot-button" [ngClass]="{'active': menuIsOpen}">
         <a class="" (click)="toggleMenu()">
             <i class="uil uil-create-dashboard"></i> Dashboard
 <!--            <i class="fa-solid fa-toolbox"></i> -->

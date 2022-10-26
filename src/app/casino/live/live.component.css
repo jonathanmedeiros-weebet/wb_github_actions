@@ -137,14 +137,17 @@
 
 @media only screen and (max-width: 1024px) {
 
+    .wall-inner {
+        padding: 5px;
+    }
+
     .game-list{
-        padding: 10px 10px 80px 10px;
+        gap: 10px;
     }
 
     .game-rooms{
-        width: 100%;
-        height: 300px;
-        margin-bottom: 10px;
+        width: calc(50% - 5px);
+        height: 140px;
     }
 
     .game-tile {

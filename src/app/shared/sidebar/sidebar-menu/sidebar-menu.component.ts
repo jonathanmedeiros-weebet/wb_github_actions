@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
-import {CadastroModalComponent, LoginModalComponent, PesquisarApostaModalComponent, TabelaModalComponent} from '../../layout/modals';
+import {CadastroModalComponent, CartaoModalComponent, LoginModalComponent, PesquisarApostaModalComponent, PesquisarCartaoMobileModalComponent, PesquisarCartaoModalComponent, TabelaModalComponent} from '../../layout/modals';
 import {SidebarService} from '../../services/utils/sidebar.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {takeUntil} from 'rxjs/operators';
@@ -104,9 +104,20 @@ export class SidebarMenuComponent implements OnInit {
         );
     }
 
-    pesqisarTicket() {
+    pesquisarTicket() {
         this.modalRef = this.modalService.open(
             PesquisarApostaModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+            }
+        );
+    }
+
+    pesquisarCartao() {
+        this.modalRef = this.modalService.open(
+            PesquisarCartaoMobileModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'lg',

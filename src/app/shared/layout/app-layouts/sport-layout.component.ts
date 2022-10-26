@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import {SidebarService} from '../../services/utils/sidebar.service';
 
 @Component({
@@ -10,8 +11,10 @@ export class SportLayoutComponent implements OnInit {
     isMobile = false;
     navigationIsCollapsed = false;
 
-    constructor(private sidebarService: SidebarService) {
-    }
+    constructor(
+        private sidebarService: SidebarService,
+        private router: Router,
+    ) { }
 
     ngOnInit() {
         this.isMobile = window.innerWidth <= 1025;
@@ -20,5 +23,13 @@ export class SportLayoutComponent implements OnInit {
             .subscribe(collapsed => {
                 this.navigationIsCollapsed = collapsed;
             });
+    }
+
+    showSubmenu() {
+        if (this.isMobile && this.router.url == '/esportes/live/jogos') {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -21,6 +21,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     gameType: string;
     private sub: any;
     modalRef;
+    isHome = false;
 
     isHomeCassino = true;
     gameList: GameCasino[];

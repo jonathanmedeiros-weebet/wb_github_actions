@@ -149,9 +149,12 @@
                         <form #apostaForm="ngForm">
                             <div class="div-inputs">
                                 <div class="form-group" *ngIf="!isCliente">
-                                    <input type="text" class="form-control inverted-out" required [(ngModel)]="aposta.apostador"
+                                    <div class="input-md">
+                                        <input type="text" id="nomeApostador" class="form-control inverted-out" required [(ngModel)]="aposta.apostador"
                                            name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"
-                                           #apostador="ngModel" placeholder="Nome do apostador...">
+                                           #apostador="ngModel" placeholder=" ">
+                                        <label for="nomeApostador">Nome do apostador...</label>
+                                    </div>
                                     <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
                                 </div>
                                 <div class="informations">

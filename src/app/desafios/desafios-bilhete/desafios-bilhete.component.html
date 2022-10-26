@@ -52,8 +52,12 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="div-inputs">
                     <div class="form-group" *ngIf="!isCliente">
-                        <input type="text" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
-                               class="form-control inverted-out" placeholder="Nome do apostador...">
+                        <div class="input-md">
+                            <input type="text" id="nomeApostador" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
+                               class="form-control inverted-out" placeholder=" ">
+                            <label for="nomeApostador">Nome do apostador</label>
+                        </div>
+
                         <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
                     </div>
                     <div class="form-group">

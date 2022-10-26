@@ -11,15 +11,21 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" formControlName="nome"
-                        [ngClass]="applyCssInputError('nome')" placeholder="Nome">
+                    <div class="input-md">
+                        <input type="text" id="nome" class="form-control inverted-out" formControlName="nome"
+                            [ngClass]="applyCssInputError('nome')" placeholder=" ">
+                        <label for="nome">Nome</label>
+                    </div>
                     <app-error-msg [control]="form.get('nome')" label="Nome" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('sobrenome')">
-                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('sobrenome')"
-                        formControlName="sobrenome" placeholder="Sobrenome">
+                    <div class="input-md">
+                        <input type="text" id="sobrenome" class="form-control inverted-out" [ngClass]="applyCssInputError('sobrenome')"
+                        formControlName="sobrenome" placeholder=" ">
+                        <label for="sobrenome">Sobrenome</label>
+                    </div>
                     <app-error-msg [control]="form.get('sobrenome')" label="Sobrenome" class="text-left"></app-error-msg>
                 </div>
             </div>
@@ -27,8 +33,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" mask="d0/M0/0000" formControlName="nascimento"
-                        [ngClass]="applyCssInputError('nascimento')" placeholder="Data de Nascimento">
+                    <div class="input-md">
+                        <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000" formControlName="nascimento"
+                        [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
+                        <label for="dataNascimento">Data de Nascimento</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
                 </div>
             </div>
@@ -46,8 +56,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" mask="000.000.000-00" formControlName="cpf"
-                        [ngClass]="applyCssInputError('cpf')" placeholder="CPF">
+                    <div class="input-md">
+                        <input type="text" id="cpf" class="form-control inverted-out" mask="000.000.000-00" formControlName="cpf"
+                        [ngClass]="applyCssInputError('cpf')" placeholder=" ">
+                        <label for="cpf">CPF</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
                 </div>
             </div>
@@ -56,15 +70,23 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" mask="(00) 00000-0000" class="form-control inverted-out" formControlName="telefone"
-                        [ngClass]="applyCssInputError('telefone')" placeholder="Telefone">
+                    <div class="input-md">
+                        <input type="text" id="telefone" mask="(00) 00000-0000" class="form-control inverted-out" formControlName="telefone"
+                        [ngClass]="applyCssInputError('telefone')" placeholder=" ">
+                        <label for="telefone">Telefone</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('telefone')" label="Telefone" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
-                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('email')"
-                        formControlName="email" placeholder="Email">
+                    <div class="input-md">
+                        <input type="text" id="email" class="form-control inverted-out" [ngClass]="applyCssInputError('email')"
+                        formControlName="email" placeholder=" ">
+                        <label for="email">Email</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
                 </div>
             </div>
@@ -73,15 +95,23 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="text" class="form-control inverted-out" formControlName="usuario"
-                        [ngClass]="applyCssInputError('usuario')" placeholder="Usuário">
+                    <div class="input-md">
+                        <input type="text" id="usuario" class="form-control inverted-out" formControlName="usuario"
+                        [ngClass]="applyCssInputError('usuario')" placeholder=" ">
+                        <label for="usuario">Usuário</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('usuario')" label="Usuário" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('senha')">
-                    <input type="password" class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
-                        formControlName="senha" placeholder="Senha">
+                    <div class="input-md">
+                        <input type="password" id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
+                        formControlName="senha" placeholder=" ">
+                        <label for="password">Senha</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('senha')" label="Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
@@ -89,15 +119,23 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
-                    <input type="password" class="form-control inverted-out" formControlName="senha_confirmacao"
-                        [ngClass]="applyCssInputError('senha_confirmacao')" placeholder="Confirmar Senha">
+                    <div class="input-md">
+                        <input type="password" id="confirmarSenha" class="form-control inverted-out" formControlName="senha_confirmacao"
+                        [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" ">
+                        <label for="confirmarSenha">Confirmar Senha</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('senha_confirmacao')" label="Confirmar Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
-                    <input type="text" class="form-control inverted-out" [ngClass]="applyCssInputError('afiliado')"
-                        formControlName="afiliado" placeholder="Código de afiliação(Opcional)">
+                    <div class="input-md">
+                        <input type="text" id="afiliado" class="form-control inverted-out" [ngClass]="applyCssInputError('afiliado')"
+                        formControlName="afiliado" placeholder=" ">
+                        <label for="afiliado">Código de afiliação(Opcional)</label>
+                    </div>
+
                     <app-error-msg [control]="form.get('afiliado')" label="Código de afiliação(Opcional)" class="text-left"></app-error-msg>
                 </div>
             </div>

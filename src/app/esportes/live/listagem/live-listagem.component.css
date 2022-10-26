@@ -247,6 +247,10 @@
         width: 100%;
     }
 
+    .indentificacao .nome {
+        padding-left: 0;
+    }
+
     .cotacoes, .cotacoes .cotacao {
         flex: 1;
     }
@@ -257,5 +261,22 @@
 
     .cotacoes .cotacao {
         margin: 10px 4px;
+    }
+
+    .indentificacao .mais-opcoes {
+        align-items: center;
+    }
+
+    .indentificacao .mais-opcoes a {
+        height: 46px;
+    }
+
+    .aovivo-label {
+        font-size: 9px;
+        padding: 3px;
+    }
+
+    .tempo-box {
+        margin-right: 0;
     }
 }

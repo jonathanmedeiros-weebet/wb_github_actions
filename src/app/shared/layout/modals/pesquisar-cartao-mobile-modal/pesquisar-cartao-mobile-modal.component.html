@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <a class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <h4 class="modal-title" id="modal-basic-title">Consultar Cartão</h4>
+    <a class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-home"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <input style="text-transform:uppercase;" type="text" autocomplete="off" mask="AAA-AAA-AAA"
+                [dropSpecialCharacters]="false" class="form-control inverted-out" formControlName="chave"
+                placeholder="Chave do cartão" [ngClass]="applyCssInputError('chave')">
+            <app-error-msg [control]="form.get('chave')"></app-error-msg>
+        </div>
+        <div class="form-group">
+            <input type="password" autocomplete="off" class="form-control inverted-out " formControlName="pin" placeholder="PIN"
+                [ngClass]="applyCssInputError('pin')">
+            <app-error-msg [control]="form.get('pin')"></app-error-msg>
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">Pesquisar</button>
+    </form>
+
+    <div class="resultado-pesquisa" *ngIf="cartao">
+        <label class="label-resultado">Resultado da pesquisa</label>
+        <div class="cartao">
+            <img src="assets/images/logo-cartao.svg" alt="W" class="logo-cartao">
+            <img src="assets/images/background-cartao.svg" alt="W" class="background-cartao">
+
+            <div class="data">{{ cartao.data_registro }}</div>
+            <div class="apostador">Apostador: {{ cartao.apostador }}</div>
+            <div class="chave">Chave: {{ cartao.chave }}</div>
+
+            <div class="valores">
+                <div class="item">
+                    <label>Recarga</label>
+                    <span>{{ cartao.total_creditos | currency }}</span>
+                </div>
+                <div class="item">
+                    <label>Bônus</label>
+                    <span>{{ cartao.premios | currency }}</span>
+                </div>
+                <div class="item">
+                    <label>Saques</label>
+                    <span>{{ cartao.total_saques | currency }}</span>
+                </div>
+                <div class="item">
+                    <label>Saldo</label>
+                    <span>{{ cartao.saldo | currency }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn btn-custom2 btn-block">Solicitar saque</div>
+    </div>
+</div>

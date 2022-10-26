@@ -1,4 +1,4 @@
-<div class="wall-container">
+<div class="wall-container" [ngClass]="{'internal': !isHomeCassino}">
     <app-banners pagina="cassino" ></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
@@ -9,15 +9,15 @@
         </div>
         <div class="bloco" style="display: flex; flex-wrap: wrap;">
             <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
+            <div class="ssc-square box-jogo hide-mobile" ></div>
         </div>
     </div>
 

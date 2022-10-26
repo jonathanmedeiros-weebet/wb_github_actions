@@ -205,6 +205,10 @@
     padding: 5px 5px 20px;
 }
 
+#aposta-deslogado .aposta-item:last-child {
+    border-bottom: 0;
+}
+
 #aposta-deslogado .remover {
     color: #35CC95;
     font-size: 14px;
@@ -388,6 +392,9 @@ h4 {
         overflow: hidden;
     }
 
+    .valores button {
+        width: auto;
+    }
 
     section.pre-bilhete.pre-bilhete-mobile {
         height: 100% !important;
@@ -424,6 +431,24 @@ h4 {
         background: #35CC95;
         color: #181818;
         border-radius: 4px;
+    }
+
+    @keyframes openValores {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 50px;
+        }
+    }
+
+    @keyframes closeValores {
+        0% {
+            height: 50px;
+        }
+        100% {
+            height: 0;
+        }
     }
 }
 

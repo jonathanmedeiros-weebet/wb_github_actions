@@ -1579,6 +1579,34 @@ input[type=number]::-webkit-outer-spin-button {
     width: 5%;
 }
 
+.input-md {
+    position: relative;
+}
+
+.input-md input {
+    padding: 10px 20px;
+}
+
+.input-md label {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: 10px;
+    padding: 0 5px;
+    color:rgba(255, 255, 255, 0.5);
+
+    transition: top .3s;
+    cursor: text;
+}
+
+.input-md input:not(:placeholder-shown) ~ label,
+.input-md input:focus ~ label {
+    top: -9px;
+    background: #0A0A0A;
+    color: #fff;
+}
+
+
+
 @keyframes blinkerMe {
     50% {
         opacity: 0;
@@ -1655,5 +1683,16 @@ input[type=number]::-webkit-outer-spin-button {
 
     .cupom-ativo {
         font-family: inherit;
+    }
+
+    .form-control, .btn {
+        height: 44px !important;
+        line-height: 44px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .internal-container-out {
+        padding: 10px;
     }
 }

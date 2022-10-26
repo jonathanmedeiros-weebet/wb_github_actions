@@ -1,4 +1,6 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import { Location } from '@angular/common';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
 @Component({
@@ -20,6 +22,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     submenuItems = [];
     submenu = [];
 
+    paddingMenu = 0;
+
     @HostListener('window:resize', ['$event'])
     onResize() {
         this.computeResizeChanges();
@@ -27,18 +31,52 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     constructor(
         private paramsService: ParametrosLocaisService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        public location: Location,
+        private router: Router
     ) {
+        console.log('CONSTRUCT');
+        router.events.subscribe(val => {
+
+            const larguras = {
+                '/esportes/live': 400,
+                '/esportes/futebol': 90,
+                '/esportes/futsal': 81,
+                '/esportes/volei': 75,
+                '/esportes/basquete': 100,
+                '/esportes/combate': 98,
+                '/esportes/hoquei-gelo': 135,
+                '/esportes/futebol-americano': 153,
+                '/esportes/esports': 94,
+                '/esportes/tenis': 77,
+                '/casino/c/wall/todos': 85,
+                '/casino/c/wall/slot': 72,
+                '/casino/c/wall/raspadinha': 116,
+                '/casino/c/wall/roleta': 86,
+                '/casino/c/wall/mesa': 80,
+                '/casino/c/live': 138
+            };
+
+            this.paddingMenu = larguras[this.router.url] ?? 0;
+          });
     }
 
     ngOnInit() {
+        if (window.innerWidth > 1024) {
+            this.menuWidth = window.innerWidth - 280;
+            this.isMobile = false;
+        } else {
+            this.menuWidth = window.innerWidth;
+            this.isMobile = true;
+        }
+
         this.submenu = [
             {
                 name: 'Ao-Vivo',
                 link: '/esportes/live',
                 icon_class: 'wbicon icon-ao-vivo',
                 category: 'esporte',
-                active: this.paramsService.getOpcoes().aovivo
+                active: !this.isMobile ?? this.paramsService.getOpcoes().aovivo
             },
             {
                 name: 'Futebol',
@@ -164,14 +202,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         this.submenuItems = this.submenu.filter((item) => {
             return item.category === this.category && item.active;
         });
-
-        if (window.innerWidth > 1024) {
-            this.menuWidth = window.innerWidth - 480;
-            this.isMobile = false;
-        } else {
-            this.menuWidth = window.innerWidth;
-            this.isMobile = true;
-        }
     }
 
     ngAfterViewInit() {

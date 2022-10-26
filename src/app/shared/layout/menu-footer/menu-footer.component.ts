@@ -93,14 +93,7 @@ export class MenuFooterComponent implements OnInit {
         }
 
         this.campeonatosIsOpen = false;
-        this.menuIsOpen = true;
-
-        // if (this.menuIsOpen || !this.isOpen) {
-        //     this.toggleSidebar();
-        //     this.menuIsOpen = false;
-        // } else {
-        //
-        // }
+        this.menuIsOpen = !this.menuIsOpen;
 
     }
 
@@ -111,15 +104,13 @@ export class MenuFooterComponent implements OnInit {
 
         this.menuIsOpen = false;
         this.campeonatosIsOpen = true;
+    }
 
-        // if (this.campeonatosIsOpen || !this.isOpen) {
-        //     this.toggleSidebar();
-        //     this.campeonatosIsOpen = true;
-        // } else {
-        //     this.menuIsOpen = false;
-        //     this.campeonatosIsOpen = true;
-        // }
+    closeMenu() {
+        this.toggleSidebar();
 
+        this.menuIsOpen = false;
+        this.campeonatosIsOpen = false;
     }
 
     toggleBilhete() {

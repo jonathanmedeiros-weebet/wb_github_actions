@@ -294,6 +294,10 @@
     border-bottom: 1px dashed #35CC95;
 }
 
+#aposta-deslogado .evento:last-child {
+    border-bottom: 0;
+}
+
 #aposta-deslogado .placar,
 #aposta-deslogado .horario {
     font-weight: bolder;
@@ -318,8 +322,8 @@
 }
 
 .tabs .tab {
+    height: 38px;
     border-radius: 4px;
-    padding: 10px;
     text-align: center;
     flex: 1;
     background: #181818;

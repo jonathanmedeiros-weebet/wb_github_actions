@@ -97,13 +97,19 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    #footer-bar {
+        z-index: 999;
+    }
+
     #definir {
         display: flex;
         flex-direction: column;
+        height: 100%;
+        z-index: 1000;
     }
 
-    #footer-bar {
-        z-index: 999;
+    #definir.opcoes {
+        height: calc(100% - 61px);
     }
 
     #definir app-sidebar-nav {
@@ -115,5 +121,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    .active:not(.menu-open) a {
+        color: #35CC95
     }
 }

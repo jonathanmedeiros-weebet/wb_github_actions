@@ -6,12 +6,12 @@
         <div class="content-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-md-2">
                         <label for="">
                             Senha Atual
                         </label>
                     </div>
-                    <div class="col-4 align-items-center">
+                    <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
                             <input type="password" class="inverted-out form-control" placeholder="Digite sua senha" formControlName="senha_atual"
                                     [ngClass]="applyCssInputError('senha_atual')" [type]="mostrarSenhaAtual ? 'text' : 'password'">
@@ -21,12 +21,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-md-2">
                         <label for="">
                             Nova Senha
                         </label>
                     </div>
-                    <div class="col-4 align-items-center">
+                    <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
                             <input type="password" class="inverted-out form-control" placeholder="Digite uma nova senha" formControlName="senha_nova"
                                     [ngClass]="applyCssInputError('senha_nova')" [type]="mostrarSenhaNova ? 'text' : 'password'">
@@ -36,12 +36,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-md-2">
                         <label for="">
                             Confirmar nova senha
                         </label>
                     </div>
-                    <div class="col-4 align-items-center">
+                    <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
                             <input class="inverted-out form-control" placeholder="Confirme sua senha" formControlName="senha_confirmacao"
                                     [ngClass]="applyCssInputError('senha_confirmacao')" [type]="mostrarSenhaConfirmacao ? 'text' : 'password'">

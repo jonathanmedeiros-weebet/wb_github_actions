@@ -340,11 +340,33 @@
         max-width: 240px;
     }
 
+    .indentificacao-jogo .campeonato-nome {
+        font-size: 12px;
+    }
+
     .nome img {
         width: 30px;
     }
 
     .tipo-apostas {
         column-count: initial;
+    }
+
+    .placares {
+        margin: 0;
+    }
+
+    .indentificacao-jogo .nome {
+        margin-top: 50px;
+    }
+
+    .indentificacao-jogo .aovivo-tempo {
+        left: 5px;
+        top: 5px;
+    }
+
+    .indentificacao-jogo .div-back {
+        right: 5px;
+        top: 5px;
     }
 }
