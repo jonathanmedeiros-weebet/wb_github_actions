@@ -26,6 +26,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     isCliente;
     isLoggedIn;
     modalRef;
+    mostrarSenha = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -159,5 +160,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 reason => {
                 }
             );
+    }
+
+    toogleSenha() {
+        this.mostrarSenha = !this.mostrarSenha;
     }
 }

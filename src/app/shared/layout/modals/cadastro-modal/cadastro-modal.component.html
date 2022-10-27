@@ -107,9 +107,10 @@
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('senha')">
                     <div class="input-md">
-                        <input type="password" id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
+                        <input [type]="mostrarSenha ? 'text' : 'password'" id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
                         formControlName="senha" placeholder=" ">
                         <label for="password">Senha</label>
+                        <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
                     </div>
 
                     <app-error-msg [control]="form.get('senha')" label="Senha" class="text-left"></app-error-msg>
@@ -120,9 +121,10 @@
             <div class="col-md-6">
                 <div class="form-group mb-4">
                     <div class="input-md">
-                        <input type="password" id="confirmarSenha" class="form-control inverted-out" formControlName="senha_confirmacao"
+                        <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha" class="form-control inverted-out" formControlName="senha_confirmacao"
                         [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" ">
                         <label for="confirmarSenha">Confirmar Senha</label>
+                        <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
                     </div>
 
                     <app-error-msg [control]="form.get('senha_confirmacao')" label="Confirmar Senha" class="text-left"></app-error-msg>

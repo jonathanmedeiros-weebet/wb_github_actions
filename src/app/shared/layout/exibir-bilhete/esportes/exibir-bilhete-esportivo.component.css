@@ -32,7 +32,7 @@
 
 hr {
     margin: 15px -10px;
-    border: 1px dashed #35CC95;
+    border: 1px dashed #000;
 }
 
 .numero{
@@ -93,34 +93,42 @@ hr {
 }
 
 .separador-bilhete {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 25px -20px;
+    display: none;
 }
-
-.separador-bilhete i {
-    display: block;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background-color: #0a0a0a;
-}
-
-.separador-bilhete i.big.l {
-    width: 19px;
-    height: 38px;
-    border-radius: 0 38px 38px 0;
-}
-
-.separador-bilhete i.big.r {
-    width: 19px;
-    height: 38px;
-    border-radius: 38px 0 0 38px;
-}
-
 
 @media only screen and (max-width: 1024px) {
+
+    .separador-bilhete {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 25px -20px;
+    }
+
+    .separador-bilhete i {
+        display: block;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background-color: #0a0a0a;
+    }
+
+    .separador-bilhete i.big.l {
+        width: 19px;
+        height: 38px;
+        border-radius: 0 38px 38px 0;
+    }
+
+    .separador-bilhete i.big.r {
+        width: 19px;
+        height: 38px;
+        border-radius: 38px 0 0 38px;
+    }
+
+    hr {
+        margin: 15px -10px;
+        border: 1px dashed #35CC95;
+    }
 
     h1.numero {
         text-align: left;

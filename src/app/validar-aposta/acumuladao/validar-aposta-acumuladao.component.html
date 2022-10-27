@@ -36,7 +36,7 @@
             </p>
             <div class="form-group">
                 <label for="">Apostador</label>
-                <input type="text" class="form-control" formControlName="apostador"
+                <input type="text" class="form-control inverted-out" formControlName="apostador"
                     [ngClass]="applyCssInputError('apostador')">
                 <app-error-msg [control]="form.get('apostador')" label="Apostador">
                 </app-error-msg>

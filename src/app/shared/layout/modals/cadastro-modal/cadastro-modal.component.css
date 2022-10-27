@@ -23,6 +23,15 @@ button {
     margin-top: 30px;
 }
 
+.showPassword {
+    position: absolute;
+    top: calc(50% - 16px);;
+    right: 0;
+    color: #424242;
+    cursor: pointer;
+    padding: 10px;
+}
+
 .esqueceu-senha {
     color: #35CC95;
     font-size: 12px;

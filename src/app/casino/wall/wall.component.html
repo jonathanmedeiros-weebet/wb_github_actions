@@ -1,4 +1,4 @@
-<div class="wall-container" [ngClass]="{'internal': !isHomeCassino}">
+<div #listagem class="wall-container" [ngClass]="{'internal': !isHomeCassino}">
     <app-banners pagina="cassino" ></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
@@ -208,7 +208,7 @@
             </div>
         </div>
     </div>
-    <app-footer></app-footer>
+    <app-footer [container]="listagem"></app-footer>
 
     <ng-template #cassinoGameList>
         <div class="bloco">

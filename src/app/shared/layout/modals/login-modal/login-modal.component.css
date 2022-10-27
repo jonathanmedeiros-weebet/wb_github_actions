@@ -45,6 +45,15 @@ button {
     color: #35CC95;
 }
 
+.showPassword {
+    position: absolute;
+    top: calc(50% - 16px);;
+    right: 0;
+    color: #424242;
+    cursor: pointer;
+    padding: 10px;
+}
+
 @media only screen and (max-width: 1024px) {
 
     .logo-mobile {

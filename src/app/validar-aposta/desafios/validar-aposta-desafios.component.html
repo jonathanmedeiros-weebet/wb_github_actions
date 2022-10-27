@@ -33,7 +33,7 @@
             </p>
             <div class="form-group">
                 <label for="">Apostador</label>
-                <input type="text" class="form-control" formControlName="apostador"
+                <input type="text" class="form-control inverted-out" formControlName="apostador"
                     [ngClass]="applyCssInputError('apostador')">
                 <app-error-msg [control]="form.get('apostador')" label="Apostador">
                 </app-error-msg>
@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label for="">Valor da Aposta</label>
-                <input type="text" class="form-control" formControlName="valor" [ngClass]="applyCssInputError('valor')">
+                <input type="text" class="form-control inverted-out" formControlName="valor" [ngClass]="applyCssInputError('valor')">
                 <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
             </div>
         </div>

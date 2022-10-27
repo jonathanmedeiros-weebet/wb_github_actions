@@ -153,6 +153,11 @@ header {
     scroll-behavior: smooth;
 }
 
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    background-image: none;
+}
+
 .footer {
     line-height: 60px;
     text-align: center;
@@ -1690,6 +1695,10 @@ input[type=number]::-webkit-outer-spin-button {
         line-height: 44px;
         padding-top: 0;
         padding-bottom: 0;
+    }
+
+    select.form-control {
+        line-height: normal;
     }
 
     .internal-container-out {

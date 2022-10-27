@@ -38,6 +38,7 @@
             </p>
         </div>
         <hr>
+        <hr class="hide-mobile">
         <ng-container *ngFor="let item of aposta.itens">
             <div class="item">
                 <p class="campeonato">
@@ -65,6 +66,7 @@
             </div>
         </ng-container>
         <hr>
+        <hr class="hide-mobile">
         <div class="valores">
             <p class="total-jogos">
                 QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
@@ -87,7 +89,11 @@
                 CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
         </div>
-        <div class="separador-bilhete">
+
+        <hr class="hide-mobile">
+        <hr class="hide-mobile">
+
+        <div class="separador-bilhete hide-desktop">
             <i class="big l"></i>
             <i></i>
             <i></i>
@@ -104,6 +110,7 @@
             <i></i>
             <i class="big r"></i>
         </div>
+
         <p class="rodape">
             {{opcoes.informativo_rodape}}
         </p>

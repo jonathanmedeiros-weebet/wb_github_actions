@@ -16,4 +16,8 @@
         height: calc(100vh - 132px);
         /*padding: 10px 10px 10px 10px;*/
     }
+
+    .cassino-content.virtual {
+        height: calc(100vh - 92px);
+    }
 }

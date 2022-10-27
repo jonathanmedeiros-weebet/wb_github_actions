@@ -29,6 +29,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     afiliadoHabilitado;
     isCliente;
     isLoggedIn;
+    mostrarSenha;
+    mostrarConfirmarSenha;
 
     constructor(
         public activeModal: NgbActiveModal,

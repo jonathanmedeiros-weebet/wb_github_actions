@@ -40,8 +40,8 @@ export class MenuFooterComponent implements OnInit {
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
 
+        this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
         if (this.mobileScreen) {
-            this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
             this.sidebarNavHeight = window.innerHeight - 125;
 
             this.auth.logado
