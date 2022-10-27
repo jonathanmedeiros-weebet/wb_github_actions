@@ -1,0 +1,64 @@
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        padding-top: 50px;
+    }
+
+    .group-input-valor {
+        text-align: center;
+    }
+
+    .row-input-valor {
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .label-input-valor {
+        font-size: 16px;
+        text-align: center;
+        display: block;
+    }
+
+    .input-valor {
+        border: 0;
+        border-bottom: 2px solid #181818;
+        border-radius: 0;
+
+        text-align: center !important;
+        font-size: 22px;
+        background-color: transparent;
+
+        padding: 5px;
+    }
+
+    .input-valor:focus {
+        border: 0;
+        border-bottom: 2px solid #35CC95;
+        background-color: transparent;
+    }
+
+    .alerta-min {
+        border-radius: 4px;
+        margin-top: 40px !important;
+        margin-bottom: 50px;
+        padding: 10px 15px;
+        font-size: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        text-align: left;
+    }
+
+    .group-buttons {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+    }
+}

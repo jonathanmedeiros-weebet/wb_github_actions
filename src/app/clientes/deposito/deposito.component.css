@@ -84,10 +84,6 @@
      padding: 15px 10px;
  }
 
- .table thead th:first-child {
-     border-left: 10px solid #0A0A0A;
- }
-
  .table .right {
      text-align: right;
  }
@@ -99,4 +95,43 @@
 
  .table td.no-border{
      border-left: 0 !important;
+ }
+
+ @media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 10px 10px 10px 10px;
+        background: #0a0a0a;
+        margin-left: -5px;
+    }
+
+    .uncollapsed {
+        padding: 0;
+    }
+
+    .buttons-container {
+        background-color: #181818;
+        border: 2px solid #181818;
+        border-radius: 4px;
+    }
+
+    .buttons-container a {
+        margin: 0;
+        justify-content: center;
+        border: 0;
+        background-color: #181818;
+    }
+
+    .buttons-container a.active {
+        background-color: #35cc95;
+        color: #181818;
+        fill: #181818;
+    }
+
+    .buttons-container a i.radio{
+        display: none;
+    }
+
+    .table thead th {
+        background-color: #181818;
+    }
  }

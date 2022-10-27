@@ -92,6 +92,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     valorPix = 0;
     metodoPagamento;
     sautoPayQr;
+    isMobile = false;
 
     constructor(
         private fb: FormBuilder,
@@ -106,6 +107,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
+
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
         this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
