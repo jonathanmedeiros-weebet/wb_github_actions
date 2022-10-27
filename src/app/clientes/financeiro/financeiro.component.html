@@ -68,7 +68,75 @@
                     </ngx-charts-area-chart>
                 </div>
             </div>
-            <div class="fin-card col-4">
+        </div>
+    </div>
+    <div class="content-body">
+        <div class="content content-movimentacoes">
+            <app-spinner *ngIf="showLoading"></app-spinner>
+            <div *ngIf="!showLoading" class="margin-top-15">
+                <div>
+                    <p>
+                        <b>Qtd. Movimentações no Período de {{dataInicial}} - {{dataFinal}}:</b> {{totalMovimentacoes}}
+                    </p>
+                </div>
+                <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
+                    Nenhuma movimentação realizada no período.
+                </div>
+                <div *ngIf="movimentacoesFinanceiras.length > 0">
+                    <ng-container>
+                        <table class="table" style="text-align: left">
+                            <thead>
+                            <tr>
+                                <th style="width: 70%">Natureza</th>
+                                <th class="custom-td" style="padding-right: 10px;">Valor</th>
+                                <th class="custom-td">Saldo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
+                                <tr class="tr-1">
+                                    <td>
+                                        <i style="color:green; margin-right: 5px;" class="fa fa-sort-up"
+                                           *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
+                                        <ng-template #iconeDebito>
+                                            <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
+                                        </ng-template>
+                                        {{movimentacao.natureza | formatarNatureza}}
+                                        <span
+                                            *ngIf="movimentacao.saque &&
+                                            movimentacao.saque.status === 'PENDENTE'">(Em Processamento)
+                                        </span>
+                                        <span
+                                            *ngIf="movimentacao.saque &&
+                                            movimentacao.saque.status === 'PAGO'">(Processado)
+                                        </span>
+                                        <span
+                                            *ngIf="movimentacao.saque &&
+                                            movimentacao.natureza === 'SAQUE_CLIENTE' &&
+                                            movimentacao.saque.status === 'REPROVADO'">(Cancelado)
+                                        </span>
+                                        <span
+                                        *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
+                                    </td>
+                                    <td class="custom-td" rowspan="2"
+                                        style="padding-right: 10px;">{{movimentacao.valor | currency}}
+                                        <small *ngIf="movimentacao.is_bonus"><br>bônus</small>
+                                    </td>
+                                    <td class="custom-td" rowspan="2">
+                                        {{movimentacao.saldo | currency}}
+                                        <small *ngIf="movimentacao.is_bonus"><br>bônus</small>
+                                    </td>
+                                </tr>
+                                <tr class="tr-2">
+                                    <td colspan="3">
+                                        Realizado em {{movimentacao.data}}
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                </div>
             </div>
 <!--            <div class="content content-movimentacoes">-->
 <!--                <app-spinner *ngIf="showLoading"></app-spinner>-->

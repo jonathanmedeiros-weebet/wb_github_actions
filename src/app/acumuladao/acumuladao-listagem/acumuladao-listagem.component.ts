@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Acumuladao } from './../../models';
 import { AcumuladaoService, MessageService } from './../../services';
 
+import * as moment from 'moment';
+
 @Component({
     selector: 'app-acumuladao-listagem',
     templateUrl: './acumuladao-listagem.component.html',
@@ -34,5 +36,9 @@ export class AcumuladaoListagemComponent implements OnInit {
 
     gotTo(id) {
         this.router.navigate([`acumuladao/form/${id}`]);
+    }
+
+    verificarEncerramento(dataEncerramento) {
+        return moment().isAfter(dataEncerramento);
     }
 }

@@ -4,7 +4,7 @@ import {AuthService, HelperService, ParametroService, ImagemInicialService, Mess
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
-import {NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -14,6 +14,7 @@ import {NavigationEnd, Router} from '@angular/router';
 export class AppComponent implements OnInit {
     @ViewChild('demoModal', {static: true}) demoModal;
     @ViewChild('inicialModal', {static: true}) inicialModal;
+    @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     imagemInicial;
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
     isEmpty = false;
     SLUG;
     TIMESTAMP;
+    ativacaoCadastro;
 
     constructor(
         private auth: AuthService,
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
         private imagemInicialService: ImagemInicialService,
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
     ) {
     }
 
@@ -47,6 +50,31 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.route.queryParams
+            .subscribe((params) => {
+                if (params.token) {
+                    this.ativacaoCadastro = true;
+                    this.auth.ativacaoCadastro({token: params.token})
+                        .subscribe(
+                            (res) => {
+                                if (res.valid !== false) {
+                                    this.auth.setCookie(res.cookie);
+                                    this.modalService.open(
+                                        this.ativacaoCadastroModal,
+                                        {
+                                            centered: true,
+                                            backdrop: 'static'
+                                        }
+                                    );
+                                    this.router.navigate(['esportes/futebol']);
+                                }
+                            },
+                            error => this.handleError(error)
+                        );
+                } else {
+                    this.ativacaoCadastro = false;
+                }
+            });
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
             const params = new URLSearchParams(location.search);
@@ -66,43 +94,28 @@ export class AppComponent implements OnInit {
 
         this.SLUG = config.SLUG;
         this.TIMESTAMP = new Date().getTime();
-        this.imagemInicialService.getImagens().subscribe(
-            imagem => {
-                if (imagem && imagem['src']) {
-                    this.imagemInicial = imagem;
-                } else {
-                    this.isEmpty = true;
-                }
 
-                this.cd.markForCheck();
+            this.imagemInicialService.getImagens().subscribe(
+                imagem => {
+                    if (imagem && imagem['src']) {
+                        this.imagemInicial = imagem;
+                    } else {
+                        this.isEmpty = true;
+                    }
 
-                if (location.host === 'demo.wee.bet') {
-                    this.modalService.open(
-                        this.demoModal,
-                        {
-                            ariaLabelledBy: 'modal-basic-title',
-                            centered: true
-                        }
-                    );
-                } else if (!this.isEmpty) {
-                    const variavel = localStorage.getItem('imagemInicialData');
-                    if (!variavel) {
+                    this.cd.markForCheck();
+
+                    if (location.host === 'demo.wee.bet') {
                         this.modalService.open(
-                            this.inicialModal,
+                            this.demoModal,
                             {
-                                centered: true,
-                                backdrop: 'static'
+                                ariaLabelledBy: 'modal-basic-title',
+                                centered: true
                             }
                         );
-                        const horario = new Date();
-                        localStorage.setItem('imagemInicialData', String(horario));
-                    } else {
-                        // @ts-ignore
-                        const data1 = new Date(variavel);
-                        const data2 = new Date();
-                        // const data2 = new Date('2022-07-30T03:24:00');
-                        const diffTime = dateDiffInDays(data1, data2);
-                        if (diffTime > 0) {
+                    } else if (!this.isEmpty && this.ativacaoCadastro === false) {
+                        const variavel = localStorage.getItem('imagemInicialData');
+                        if (!variavel) {
                             this.modalService.open(
                                 this.inicialModal,
                                 {
@@ -110,14 +123,30 @@ export class AppComponent implements OnInit {
                                     backdrop: 'static'
                                 }
                             );
-                            const horario = Date();
+                            const horario = new Date();
                             localStorage.setItem('imagemInicialData', String(horario));
+                        } else {
+                            // @ts-ignore
+                            const data1 = new Date(variavel);
+                            const data2 = new Date();
+                            // const data2 = new Date('2022-07-30T03:24:00');
+                            const diffTime = dateDiffInDays(data1, data2);
+                            if (diffTime > 0) {
+                                this.modalService.open(
+                                    this.inicialModal,
+                                    {
+                                        centered: true,
+                                        backdrop: 'static'
+                                    }
+                                );
+                                const horario = Date();
+                                localStorage.setItem('imagemInicialData', String(horario));
+                            }
                         }
                     }
-                }
-            },
-            error => this.handleError(error)
-        );
+                },
+                error => this.handleError(error)
+            );
         this.mobileScreen = window.innerWidth <= 1024;
 
         if (this.auth.isLoggedIn()) {
@@ -125,6 +154,9 @@ export class AppComponent implements OnInit {
                 .subscribe(
                     tiposAposta => {
                         localStorage.setItem('tipos_aposta', JSON.stringify(tiposAposta));
+                        if (!this.auth.isCliente()) {
+                            this.appendGoogleAnalyticsScripts();
+                        }
                     },
                     error => {
                         this.auth.logout();
@@ -162,5 +194,19 @@ export class AppComponent implements OnInit {
 
     handleError(msg) {
         this.messageService.error(msg);
+    }
+
+    private appendGoogleAnalyticsScripts() {
+        const head = document.getElementsByTagName('head')[0];
+        const body = document.getElementsByTagName('body')[0];
+
+        const cambistaAnalyticsHeadScript = document.createElement('script');
+        cambistaAnalyticsHeadScript.append('(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start": new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","GTM-PC2GRL8");');
+
+        const cambistaAnalyticsBodyScript = document.createElement('noscript');
+        cambistaAnalyticsBodyScript.append('<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC2GRL8" height="0" width="0" style="display:none;visibility:hidden"></iframe>');
+
+        head.appendChild(cambistaAnalyticsHeadScript);
+        body.appendChild(cambistaAnalyticsBodyScript);
     }
 }

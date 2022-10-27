@@ -24,7 +24,7 @@ import {
     SolicitarSaqueModalComponent,
     TabelaModalComponent
 } from '../modals';
-import {config} from '../../config';
+import { config } from '../../config';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
@@ -66,6 +66,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
     submitting = false;
     heightSidebarNav = 500;
     collapsed = false;
+    whatsapp = null;
 
     constructor(
         private auth: AuthService,
@@ -172,6 +173,10 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
+        }
+
+        if (this.paramsService.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
         }
     }
 

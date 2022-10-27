@@ -24,6 +24,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     errorMessage;
     cliente: Cliente;
     valorMinSaque;
+    valorMaxSaqueDiario;
+    valorMaxSaqueMensal;
 
     modalRef;
 
@@ -48,6 +50,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.sidebarService.changeItens({contexto: 'cliente'});
 
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
+        this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;
+        this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
         this.createForm();
         this.menuFooterService.setIsPagina(true);
         const user = JSON.parse(localStorage.getItem('user'));
@@ -106,7 +110,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required, Validators.min(this.valorMinSaque)]]
+            valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
         }
         );
     }

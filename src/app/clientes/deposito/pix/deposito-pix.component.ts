@@ -76,7 +76,6 @@ export class NgbdModalContent {
         this._helper.sharedDepositoPix(imagePath);
     }
 }
-
 @Component({
     selector: 'app-deposito-pix',
     templateUrl: './deposito-pix.component.html',
@@ -91,6 +90,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     verificacoes = 0;
     valorMinDeposito;
     valorPix = 0;
+    metodoPagamento;
+    sautoPayQr;
 
     constructor(
         private fb: FormBuilder,
@@ -99,12 +100,14 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private modalService: NgbModal,
         private helperService: HelperService,
+        private domSanitizer: DomSanitizer
     ) {
         super();
     }
 
     ngOnInit() {
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
     }
 
@@ -131,6 +134,12 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
                     modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
                     modalRef.componentInstance.qrCode = res.qr_code;
+
+                    this.pix = res;
+                    if (this.metodoPagamento === 'sauto_pay') {
+                        const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+                        this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+                    }
 
                     this.clearSetInterval = setInterval(() => {
                         this.verificarPagamento(res);

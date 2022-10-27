@@ -339,6 +339,7 @@ body .change-theme {
     padding: 0;
     margin: 5px;
     border-color: var(--foreground-header);
+    color: var(--foreground-header);
 }
 .botao-cadastro {
     height: 30px;

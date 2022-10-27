@@ -4,7 +4,7 @@
     </div>
     <div class="content-body">
         <div class="content">
-            <div *ngIf="hasMpToken || whatsapp">
+            <div *ngIf="hasApiPagamentos || whatsapp">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <label>Selecione uma forma de depósito</label>
@@ -15,7 +15,7 @@
                                 <i class="fa-brands fa-whatsapp" style="font-size: 20px"></i>
                                 <span style="margin-left: 5px">Whatsapp</span>
                             </a>
-                            <a class="opcao-pagamento" *ngIf="hasMpToken" (click)="selecionarModalidade('pix')"
+                            <a class="opcao-pagamento" *ngIf="hasApiPagamentos" (click)="selecionarModalide('pix')"
                                [ngClass]="{'active':modalidade === 'pix'}">
                                 <i class="radio"></i>
                                 <svg width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 194 194" style="enable-background:new 0 0 194 194;" xml:space="preserve">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="!hasMpToken && !whatsapp">
+            <div *ngIf="!hasApiPagamentos && !whatsapp">
                 <div class="row">
                     <div class="col-12">
                         Nenhuma modalidade de depósito disponível. Entre em contato com a banca.

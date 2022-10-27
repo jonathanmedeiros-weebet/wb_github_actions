@@ -130,6 +130,16 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-12">
+                        <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+                        <app-error-msg [control]="form.get('captcha')"></app-error-msg>
+                    </div>
+                </div>
+
+                <input type="hidden" formControlName="check_1">
+                <input type="text" formControlName="check_2" class="d-none">
+
+                <div class="row">
                     <div class="col col-md-12 required">
                         <div class="form-group">
                             <button type="submit" class="btn btn-custom" [disabled]="submitting">

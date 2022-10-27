@@ -13,7 +13,6 @@
     </ng-container>
     <ng-container *ngIf="!submitting">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-            <input type="hidden" formControlName="casino" value="true">
             <div class="form-group">
                 <label class="label">Informe o código de verificação enviado para seu e-mail.</label>
                 <code-input [isCodeHidden]="false" (codeChanged)="onCodeChanged($event)" (codeCompleted)="onCodeCompleted($event)"></code-input>

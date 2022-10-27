@@ -8,4 +8,5 @@ export class DepositoPix {
     validade: string;
     qr_code: string;
     qr_code_base64: string;
+    qr_code_sauto_pay: string;
 }

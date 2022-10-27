@@ -172,6 +172,12 @@
             </ul> -->
 
             <!--            <app-sidebar-menu></app-sidebar-menu>-->
+                <li *ngIf="whatsapp">
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                        <i class="fa fa-whatsapp"></i> Contato
+                    </a>
+                </li>
+            </ul>
         </div>
         <app-sidebar-nav [height]="heightSidebarNav" [collapsed]="collapsed"></app-sidebar-nav>
         <!--        <ul id="menu-side-left" class="sidebar-nav">-->

@@ -8,7 +8,8 @@
             <div class="nome">
                 {{acumuladao.nome}}
                 <div class="data">
-                    Encerra em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
+                    {{verificarEncerramento(acumuladao.data_encerramento) ? 'Encerrado' : 'Encerra'}}
+                    em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
                 </div>
             </div>
             <div class="premios">

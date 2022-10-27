@@ -24,6 +24,9 @@
                     </div>
                 </ng-container>
             </div>
+            <div class="encerramento">
+                {{encerrado ? 'Encerrado' : 'Encerra'}} em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
+            </div>
         </div>
         <div class="eventos">
             <div class="evento" *ngFor="let jogo of acumuladao.jogos; let i=index;">

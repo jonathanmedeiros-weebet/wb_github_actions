@@ -74,11 +74,11 @@
 @media only screen and (max-width: 1024px) {
     .css-hack {
         display: block;
-        padding-bottom: 44px;
+        padding-bottom: 98px;
     }
 
     .wrap-sticky {
-        padding-bottom: 50px;
+        padding-bottom: 98px;
     }
 
     .odds {
