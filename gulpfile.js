@@ -1883,15 +1883,6 @@ gulp.task('futpix.wee.bet', function (done) {
     });
 });
 
-gulp.task('campeoesdobet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "campeoesdobet.com",
-        banca: "CAMPEÕES DO BET",
-        styles: "",
-    });
-});
-
 gulp.task('betshelby.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2214,15 +2205,6 @@ gulp.task('vipersports.bet', function (done) {
         server: "front4.wee.bet",
         host: "vipersports.bet",
         banca: "VIPER SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('sportsbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "sportsbet.wee.bet",
-        banca: "SPORTS BET",
         styles: "",
     });
 });
