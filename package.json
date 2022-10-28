@@ -260,7 +260,9 @@
         "betbetix.com":  "gulp betbetix.com",
         "bravos.bet": "gulp bravos.bet",
         "arena365.wee.bet": "gulp arena365.wee.bet",
-        "cityesportes.bet": "gulp cityesportes.bet"
+        "cityesportes.bet": "gulp cityesportes.bet",
+        "cr7bet.online":  "gulp cr7bet.online",
+        "supremodasorte.wee.bet":  "gulp supremodasorte.wee.bet"
     },
     "private": true,
     "dependencies": {

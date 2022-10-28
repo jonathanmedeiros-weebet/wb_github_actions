@@ -2391,3 +2391,21 @@ gulp.task('cityesportes.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cr7bet.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "cr7bet.online",
+        banca: "CR7 BET",
+        styles: "",
+    });
+});
+
+gulp.task('supremodasorte.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "supremodasorte.wee.bet",
+        banca: "SUPREMO DA SORTE",
+        styles: "",
+    });
+});
