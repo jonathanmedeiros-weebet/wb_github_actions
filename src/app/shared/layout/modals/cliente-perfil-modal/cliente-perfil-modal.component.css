@@ -1,0 +1,36 @@
+.modal-body {
+    padding-top: 55px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btnClose {
+    font-size: 32px;
+    line-height: 32px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    cursor: pointer;
+}

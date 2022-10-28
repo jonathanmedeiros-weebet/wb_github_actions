@@ -1,0 +1,120 @@
+<div class="modal-body">
+    <a class="btnClose" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
+    <div id="default-content">
+        <div class="content-header">
+            <h2>Apostas</h2>
+        </div>
+
+        <div class="content-body">
+            <div class="filters">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="form-row">
+                                <div class="col-6 col-md-3">
+                                    <input
+                                        name="datepicker"
+                                        class="dp-hidden"
+                                        ngbDatepicker
+                                        #datepicker="ngbDatepicker"
+                                        [autoClose]="'outside'"
+                                        (dateSelect)="onDateSelection($event, datepicker)"
+                                        [displayMonths]="2"
+                                        [dayTemplate]="t"
+                                        outsideDays="hidden"
+                                        [startDate]="fromDate!"
+                                        tabindex="-1"
+                                        value=""
+                                    >
+                                    <ng-template #t let-date let-focused="focused">
+                                        <span class="custom-day"
+                                                [class.focused]="focused"
+                                                [class.range]="isRange(date)"
+                                                [class.faded]="isHovered(date) || isInside(date)"
+                                                (mouseenter)="hoveredDate = date"
+                                                (mouseleave)="hoveredDate = null">
+                                            {{ date.day }}
+                                        </span>
+                                    </ng-template>
+                                    <div class="input-group datepicker-group">
+                                        <i class="fa fa-calendar"></i>
+                                        <input
+                                            type="text"
+                                            class="form-control inverted-out"
+                                            [(ngModel)]="selectedDate"
+                                            (click)="datepicker.toggle()"
+                                            [ngModelOptions]="{standalone: true}"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-2">
+                                    <select class="form-control inverted-out" formControlName="status">
+                                        <option value="">Todos</option>
+                                        <option value="ganhou">Ganhou</option>
+                                        <option value="perdeu">Perdeu</option>
+                                        <option value="pendente">Pendente</option>
+                                        <option value="reembolso">Reembolso</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 col-md-1">
+                                    <button class="btn btn-custom btn-line mt-0" type="submit">Filtrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-resultado">
+                <div class="item">
+                        <label>Qtd. apostas:</label> {{ apostas.length }}
+                </div>
+                <div class="item">
+                        <label>Total apostado:</label> {{ totais.valor | currency }}
+                </div>
+                <div class="item">
+                        <label>Total prêmios:</label> {{ totais.premio | currency }}
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th width="100">Código</th>
+                            <th>Horário</th>
+                            <th>Valor</th>
+                            <th>Prêmio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                    </tr>
+                    <tbody *ngIf="!loading">
+                        <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta.resultado) }}">
+                            <td></td>
+                            <td>{{ aposta.codigo }}</td>
+                            <td>{{ aposta.horario }}</td>
+                            <td>{{ aposta.valor | currency}}</td>
+                            <td>{{ aposta.premio | currency }}</td>
+                            <td class="acoes-aposta">
+                                <a (click)="handleCancel(aposta)" title="Cancelar">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+                                <a title="Exibir" (click)="openModal(aposta)">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

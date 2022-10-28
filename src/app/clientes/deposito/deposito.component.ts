@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarService, FinanceiroService, MessageService } from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
@@ -22,6 +23,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
         private siderbarService: SidebarService,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
+        public activeModal: NgbActiveModal
     ) {
     }
 

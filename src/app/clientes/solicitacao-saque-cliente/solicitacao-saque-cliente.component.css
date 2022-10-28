@@ -2,6 +2,16 @@
     padding: 25px 38px;
 }
 
+.btnClose {
+    font-size: 32px;
+    line-height: 32px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
 .table-responsive {
     margin-top: 50px;
 }
@@ -54,4 +64,43 @@
  .btn-cancelar i {
     color: #fff;
     margin: 0;
+ }
+
+ @media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 55px 10px 10px;
+        background: #0a0a0a;
+        height: 100%;
+    }
+
+    .uncollapsed {
+        padding: 0;
+    }
+
+    .buttons-container {
+        background-color: #181818;
+        border: 2px solid #181818;
+        border-radius: 4px;
+    }
+
+    .buttons-container a {
+        margin: 0;
+        justify-content: center;
+        border: 0;
+        background-color: #181818;
+    }
+
+    .buttons-container a.active {
+        background-color: #35cc95;
+        color: #181818;
+        fill: #181818;
+    }
+
+    .buttons-container a i.radio{
+        display: none;
+    }
+
+    .table thead th {
+        background-color: #181818;
+    }
  }

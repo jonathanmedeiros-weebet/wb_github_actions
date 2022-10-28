@@ -1,0 +1,42 @@
+<div class="modal-body">
+    <a class="btnClose" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
+    <ng-container>
+        <div class="content-header">
+            <h2>Alterar senha</h2>
+        </div>
+        <div class="content-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="fields">
+                    <div class="form-group input-md">
+                        <input type="password" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
+                        <label for="nome">Senha Atual</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="password" placeholder=" " formControlName="senha_nova" class="form-control inverted-out">
+                        <label for="nome">Nova senha</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="password" placeholder=" " formControlName="senha_confirmacao" class="form-control inverted-out">
+                        <label for="nome">Confirmar nova senha</label>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-custom w-150" type="submit">
+                        Atualizar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </ng-container>
+
+</div>

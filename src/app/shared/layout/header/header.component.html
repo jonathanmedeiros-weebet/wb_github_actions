@@ -1,3 +1,16 @@
+<ng-template #content let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title">Offcanvas title</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body">
+		<p>One fine body&hellip;</p>
+		<div class="text-end">
+			<button type="button" class="btn btn-outline-dark" (click)="offcanvas.close('Close click')">Close</button>
+		</div>
+	</div>
+</ng-template>
+
 <header>
     <div class="side">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
@@ -19,124 +32,214 @@
                     <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <div class="info-profile" *ngIf="isCliente">
-                        <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" width="40">
-                        <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
-                    </div>
-                    <div class="info-profile" *ngIf="!isCliente">
-                        <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" width="40">
-                        <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
-                    </div>
+                    <div class="hide-desktop" *ngIf="!isCliente">
+                        <div class="info-profile">
+                            <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" width="40">
+                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                        </div>
 
-                    <div class="saldos-container">
-                        <div class="saldos-item" *ngIf="!isCliente">
-                            <span class="">Crédito</span>
-                            <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
-                        </div>
-                        <div  *ngIf="!isCliente" style="align-items: center; justify-content: center; display: flex;">
-                            <i class="separador"></i>
-                        </div>
-                        <div class="saldos-item">
-                            <span class="">Saldo</span>
-                            <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
-                        </div>
-                        <div  *ngIf="isCliente && posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
-                            <i class="separador"></i>
-                        </div>
-                        <div class="saldos-item"
-                              *ngIf="isCliente && posicaoFinanceira.bonus != 0">
-                            <span class="">Bônus</span>
-                            <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
+                        <div class="nav">
+                            <hr />
+                            <a (click)="logout()">
+                                <span></span>
+                                Sair
+                            </a>
                         </div>
                     </div>
+                    <div class="hide-desktop" *ngIf="isCliente">
+                        <div class="info-profile" *ngIf="isCliente">
+                            <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" width="40">
+                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                        </div>
 
-                    <div class="d-flex justify-content-around">
-                        <a class="dropdown-btn w-130" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
-                            Solicitar Depósito
-                        </a>
-                        <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
-                            Solicitar Saque
-                        </a>
+                        <div class="saldos-container">
+                            <div class="saldos-item">
+                                <span class="">Saldo</span>
+                                <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                            </div>
+                            <div *ngIf="posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
+                                <i class="separador"></i>
+                            </div>
+                            <div class="saldos-item"
+                                *ngIf="posicaoFinanceira.bonus != 0">
+                                <span class="">Bônus</span>
+                                <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <a class="dropdown-btn w-150" [routerLink]="['clientes/deposito']">
+                                Solicitar Depósito
+                            </a>
+                            <a class="dropdown-btn w-150" [routerLink]="['clientes/saque']">
+                                Solicitar Saque
+                            </a>
+                        </div>
+
+                        <div class="nav">
+                            <hr />
+                            <label>Minha conta</label>
+                            <a (click)="abrirEditarPerfil(content)">
+                                <span></span>
+                                Editar perfil
+                            </a>
+                            <a (click)="abrirAlterarSenha()">
+                                <span></span>
+                                Alterar senha
+                            </a>
+                            <a (click)="abrirPix()">
+                                <span></span>
+                                Pix
+                            </a>
+                            <hr />
+                            <label>Mias opções</label>
+                            <a (click)="abrirFinanceiro()">
+                                <span></span>
+                                Financeiro
+                            </a>
+                            <a (click)="abrirSaques()">
+                                <span></span>
+                                Saques
+                            </a>
+                            <a (click)="abrirDepositos()">
+                                <span></span>
+                                Depósitos
+                            </a>
+                            <a (click)="abrirApostas()">
+                                <span></span>
+                                Apostas
+                            </a>
+                            <hr />
+                            <a (click)="abrirAjuda()">
+                                <span></span>
+                                Ajuda
+                            </a>
+                            <a (click)="logout()">
+                                <span></span>
+                                Sair
+                            </a>
+                        </div>
                     </div>
+                    <div class="hide-mobile">
+                        <div class="info-profile" *ngIf="isCliente">
+                            <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" width="40">
+                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                        </div>
+                        <div class="info-profile" *ngIf="!isCliente">
+                            <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" width="40">
+                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                        </div>
 
-                    <div class="menu-divider mt-4"></div>
-                    <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
-                        <i class="fa fa-dollar"></i> Liberar Crédito
-                    </a>
+                        <div class="saldos-container">
+                            <div class="saldos-item" *ngIf="!isCliente">
+                                <span class="">Crédito</span>
+                                <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
+                            </div>
+                            <div  *ngIf="!isCliente" style="align-items: center; justify-content: center; display: flex;">
+                                <i class="separador"></i>
+                            </div>
+                            <div class="saldos-item">
+                                <span class="">Saldo</span>
+                                <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                            </div>
+                            <div  *ngIf="isCliente && posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
+                                <i class="separador"></i>
+                            </div>
+                            <div class="saldos-item"
+                                *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                                <span class="">Bônus</span>
+                                <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
+                            </div>
+                        </div>
 
-                    <div class="d-flex flex-wrap container-menu">
-                        <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
-                            <i class="fa fa-user mb-2"></i>
-                            Minha Conta
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
-                            <i class="fa fa-solid fa-dollar mb-2"></i>
-                            Financeiro
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
-                            <i class="fa fa-solid fa-table-columns mb-2"></i>
-                            Apostas
+                        <div class="d-flex justify-content-around">
+                            <a class="dropdown-btn w-130" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                                Solicitar Depósito
+                            </a>
+                            <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                                Solicitar Saque
+                            </a>
+                        </div>
+
+                        <div class="menu-divider mt-4"></div>
+                        <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
+                            <i class="fa fa-dollar"></i> Liberar Crédito
                         </a>
 
-                        <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
-                            <i class="fa fa-key mb-2"></i> Alterar senha
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-dashboard mb-2"></i>
-                            Dashboard
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-solid fa-check mb-2"></i>
-                            Validação
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/apuracao']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-solid fa-table-columns mb-2"></i>
-                            Apuração
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-solid fa-table-columns mb-2"></i>
-                            Apostas
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-solid fa-print mb-2"></i>
-                            Tabela
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-solid fa-credit-card mb-2"></i>
-                            Cartão
-                        </a>
-                        <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="!isCliente">
-                            <i class="fa fa-solid fa-dollar mb-2"></i>
-                            Financeiro
-                        </a>
-                    </div>
+                        <div class="d-flex flex-wrap container-menu">
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-user mb-2"></i>
+                                Minha Conta
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                Financeiro
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-table-columns mb-2"></i>
+                                Apostas
+                            </a>
 
-                    <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
-                        <i class="fa fa-sign-out mr-2"></i>
-                        <span class="dados">Sair</span>
-                    </a>
-                    <div *ngIf="appMobile" class="app-version-info">
-                        App Versão 2.0.{{appVersion}}
+                            <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                <i class="fa fa-key mb-2"></i> Alterar senha
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-dashboard mb-2"></i>
+                                Dashboard
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-check mb-2"></i>
+                                Validação
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/apuracao']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-table-columns mb-2"></i>
+                                Apuração
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-table-columns mb-2"></i>
+                                Apostas
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-print mb-2"></i>
+                                Tabela
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-credit-card mb-2"></i>
+                                Cartão
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                Financeiro
+                            </a>
+                        </div>
+
+                        <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
+                            <i class="fa fa-sign-out mr-2"></i>
+                            <span class="dados">Sair</span>
+                        </a>
+                        <div *ngIf="appMobile" class="app-version-info">
+                            App Versão 2.0.{{appVersion}}
+                        </div>
                     </div>
                 </div>
             </div>

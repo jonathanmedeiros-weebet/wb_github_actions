@@ -9,7 +9,10 @@ import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {Router} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthDoisFatoresModalComponent, CadastroModalComponent, LoginModalComponent } from '../modals';
+import { AuthDoisFatoresModalComponent, CadastroModalComponent, ClienteApostasModalComponent, ClientePerfilModalComponent, ClientePixModalComponent, ClienteSenhaModalComponent, LoginModalComponent } from '../modals';
+import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
+import { SolicitacaoSaqueClienteComponent } from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
+import { ApostasClienteComponent } from 'src/app/clientes/apostas-cliente/apostas-cliente.component';
 
 @Component({
     selector: 'app-header',
@@ -239,5 +242,37 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     changeTheme() {
         document.body.classList.toggle('dark');
+    }
+
+    abrirEditarPerfil() {
+        this.modalService.open(ClientePerfilModalComponent);
+    }
+
+    abrirAlterarSenha() {
+        this.modalService.open(ClienteSenhaModalComponent);
+    }
+
+    abrirPix() {
+        this.modalService.open(ClientePixModalComponent);
+    }
+
+    abrirFinanceiro() {
+
+    }
+
+    abrirSaques() {
+        this.modalService.open(SolicitacaoSaqueClienteComponent);
+    }
+
+    abrirDepositos() {
+        this.modalService.open(DepositoComponent);
+    }
+
+    abrirApostas() {
+        this.modalService.open(ClienteApostasModalComponent);
+    }
+
+    abrirAjuda() {
+
     }
 }

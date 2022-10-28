@@ -8,7 +8,7 @@ import { FinanceiroService } from '../../shared/services/financeiro.service';
 import { MenuFooterService } from "../../shared/services/utils/menu-footer.service";
 import { ParametrosLocaisService } from "../../shared/services/parametros-locais.service";
 import { SidebarService, AuthService } from 'src/app/services';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
@@ -42,6 +42,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private sidebarService: SidebarService,
         private modalService: NgbModal,
         private auth: AuthService,
+        public activeModal: NgbActiveModal,
     ) {
         super();
     }

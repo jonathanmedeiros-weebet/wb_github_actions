@@ -541,6 +541,55 @@ body .change-theme {
         display: flex;
     }
 
+    .saldos-item {
+        text-align: center;
+    }
+
+    .dropdown-menu {
+        height: 100vh;
+        transform: none !important;
+        position: fixed !important;
+        width: 100%;
+        overflow: auto;
+    }
+
+    .dropdown-menu .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin: 24px 0;
+    }
+
+    .dropdown-menu .nav hr {
+        border-bottom: 1px solid #181818;
+        margin: 0 12px;
+    }
+
+    .dropdown-menu .nav label {
+        font-size: 14px;
+        margin: 0 20px;
+    }
+
+    .dropdown-menu .nav a {
+        margin: 0 25px;
+        font-size: 16px;
+        color: #fff;
+
+        display: flex;
+        gap: 15px;
+        align-items: center;
+
+        cursor: pointer;
+    }
+
+    .dropdown-menu .nav a span {
+        width: 28px;
+        height: 28px;
+        background: rgba(53, 204, 149, 0.1);
+
+        border-radius: 3px;
+    }
+
     .logo {
         max-height: 30px;
     }

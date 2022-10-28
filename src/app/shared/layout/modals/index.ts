@@ -17,3 +17,7 @@ export { LoginModalComponent } from './login-modal/login-modal.component';
 export { CadastroModalComponent } from './cadastro-modal/cadastro-modal.component';
 export { EsqueceuSenhaModalComponent } from './esqueceu-senha-modal/esqueceu-senha-modal.component';
 export { AuthDoisFatoresModalComponent } from './auth-dois-fatores-modal/auth-dois-fatores-modal.component';
+export { ClientePerfilModalComponent } from './cliente-perfil-modal/cliente-perfil-modal.component';
+export { ClientePixModalComponent } from './cliente-pix-modal/cliente-pix-modal.component';
+export { ClienteSenhaModalComponent } from './cliente-senha-modal/cliente-senha-modal.component';
+export { ClienteApostasModalComponent } from './cliente-apostas-modal/cliente-apostas-modal.component';
