@@ -2409,3 +2409,12 @@ gulp.task('supremodasorte.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('amesportesbets.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "amesportesbets.com",
+        banca: "AM ESPORTES BETS",
+        styles: "",
+    });
+});
