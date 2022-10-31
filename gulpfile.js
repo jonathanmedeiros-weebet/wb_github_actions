@@ -2418,3 +2418,12 @@ gulp.task('amesportesbets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('narigasports.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "narigasports.com.br",
+        banca: "NARIGA SPORTS",
+        styles: "",
+    });
+});
