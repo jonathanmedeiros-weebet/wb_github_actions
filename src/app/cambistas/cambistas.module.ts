@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {CambistasRoutingModule} from './cambistas-routing.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ApuracaoComponent} from './apuracao/apuracao.component';
 import {RelatorioService} from '../shared/services/relatorio.service';
 import {MessageService} from '../shared/services/utils/message.service';
@@ -38,7 +38,8 @@ import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque
         RelatorioService,
         MessageService,
         DesafioApostaService,
-        AcumuladaoService
+        AcumuladaoService,
+        NgbActiveModal
     ]
 })
 export class CambistasModule {

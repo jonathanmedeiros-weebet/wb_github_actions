@@ -94,6 +94,10 @@ h5 {
     margin-top: 40px;
 }
 
+.form-row {
+    gap: 10px;
+}
+
 .label-input-valor {
     font-size: 16px;
     text-align: center;
@@ -136,6 +140,47 @@ h5 {
 .buttons {
     flex-direction: column;
     gap: 10px;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 12px;
+    right: 15px;
+    font-size: 14px;
+}
+
+.datepicker-group input {
+    padding-right: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    position: absolute;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+    background-color: #24966c;
+    color: white;
+}
+.custom-day.faded {
+    background-color: #3dc593;
 }
 
  @media only screen and (max-width: 1024px) {

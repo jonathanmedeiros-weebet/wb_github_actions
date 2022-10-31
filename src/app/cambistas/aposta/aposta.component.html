@@ -1,10 +1,14 @@
 <div id="default-content">
+    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
     <div class="internal-container-out">
         <div class="content-header">
             <h2>Apostas</h2>
         </div>
 
-        <div class="tabs">
+        <div class="tabs hide-mobile">
             <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">Esporte</a>
             <a *ngIf="acumuladaoHabilitado" [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''" (click)="changeTab('acumuladao')">Acumuladão</a>
             <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''" (click)="changeTab('desafio')">Desafio</a>

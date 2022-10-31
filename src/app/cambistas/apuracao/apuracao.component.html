@@ -1,10 +1,14 @@
 <div id="default-content">
+    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
     <div class="internal-container-out">
         <div class="content-header">
             <h2>Apuração</h2>
             <div class="filters">
                 <form (ngSubmit)="getResultado()" >
-                    <div class="form-row m-0">
+                    <div class="form-row m-0 filtros-container">
                         <input
                             name="datepicker"
                             class="dp-hidden"
@@ -39,7 +43,7 @@
                                 [ngModelOptions]="{standalone: true}"
                             >
                         </div>
-                        <div class="col-6 col-md-1">
+                        <div class="col-12 col-md-1 buttons">
                             <button class="btn btn-custom" type="submit">Filtrar</button>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ import {
 } from 'src/app/services';
 
 import * as moment from 'moment';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-tabela',
   templateUrl: './tabela.component.html',
@@ -23,7 +24,8 @@ export class TabelaComponent implements OnInit {
         private sidebarService: SidebarService,
         private paramsService: ParametrosLocaisService,
         private campeonatoService: CampeonatoService,
-        private printService: PrintService
+        private printService: PrintService,
+        public activeModal: NgbActiveModal
     ) { }
 
     ngOnInit(): void {

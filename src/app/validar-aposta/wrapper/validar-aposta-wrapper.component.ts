@@ -7,7 +7,7 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     MenuFooterService,
     MessageService,
@@ -38,7 +38,8 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
         private elRef: ElementRef,
         private modalService: NgbModal,
         private fb: FormBuilder,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        public activeModal: NgbActiveModal
     ) {
         super();
     }

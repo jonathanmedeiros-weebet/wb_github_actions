@@ -25,6 +25,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
         public formatter: NgbDateParserFormatter,
         private cartaoService: CartaoService,
         private sidebarService: SidebarService,
+        public activeModal: NgbActiveModal
     ) {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
         this.toDate = calendar.getToday();

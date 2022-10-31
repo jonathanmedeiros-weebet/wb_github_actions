@@ -8,6 +8,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { SidebarService, AuthService, CambistaService } from 'src/app/services';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-dashboard',
@@ -71,6 +72,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         }
     };
 
+    isMobile = false;
+
     public apostasRealizadasEsporte = {'quantidade': 0, 'valor_apostas': 0};
     public apostasRealizadasAcumuladao = {'quantidade': 0, 'valor_apostas': 0};
     public apostasRealizadasDesafio = {'quantidade': 0, 'valor_apostas': 0};
@@ -83,7 +86,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         private fb: FormBuilder,
         private sidebarService: SidebarService,
         private auth: AuthService,
-        private cambistaService: CambistaService
+        private cambistaService: CambistaService,
+        public activeModal: NgbActiveModal
     ) {
         super();
     }
@@ -91,6 +95,10 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
     ngOnInit() {
         this.sidebarService.changeItens({contexto: 'cambista'});
         this.showLoading = false;
+
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
 
         this.loadChart('semana-atual');
         this.loadQuantidadeApostas('semana-atual');

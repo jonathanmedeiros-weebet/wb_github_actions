@@ -110,3 +110,82 @@
 .tabs a.active {
     border-bottom: 2px solid #35CC95;
 }
+
+.btnClose {
+    font-size: 32px;
+    line-height: 32px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 55px 10px 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .counts {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .counts .count {
+        margin: 0;
+    }
+
+    .col-graph {
+        margin-bottom: 30px;
+    }
+
+    .apostas-realizadas {
+        height: auto;
+    }
+
+    .card-dashboard h3 {
+        flex-direction: column;
+        align-items: start;
+        gap: 25px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros select,
+    .filtros .datepicker-group,
+    .filtros input {
+        max-width: none;
+        margin: 0;
+    }
+
+    .dp-hidden {
+        height: 0 !important;
+        position: absolute;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros-container .input-group {
+        max-width: none;
+    }
+
+    .buttons {
+        padding: 0;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+}

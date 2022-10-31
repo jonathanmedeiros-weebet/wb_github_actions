@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarService, CartaoService } from 'src/app/services';
 
 @Component({
@@ -26,6 +26,7 @@ export class CartaoComponent implements OnInit {
         private calendar: NgbCalendar,
         public formatter: NgbDateParserFormatter,
         private sidebarService: SidebarService,
+        public activeModal: NgbActiveModal
     ) {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
         this.toDate = calendar.getToday();

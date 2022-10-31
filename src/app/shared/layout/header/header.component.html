@@ -38,8 +38,80 @@
                             <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                         </div>
 
+                        <div class="saldos-container">
+                            <div class="saldos-item">
+                                <span class="">Crédito</span>
+                                <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
+                            </div>
+                            <div style="align-items: center; justify-content: center; display: flex;">
+                                <i class="separador"></i>
+                            </div>
+                            <div class="saldos-item">
+                                <span class="">Saldo</span>
+                                <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                            </div>
+                        </div>
+
                         <div class="nav">
                             <hr />
+                            <label>Minha conta</label>
+                            <a (click)="abrirCambistaDashboard()">
+                                <span></span>
+                                Dashboard
+                            </a>
+                            <a (click)="abrirAlterarSenha()">
+                                <span></span>
+                                Alterar senha
+                            </a>
+                            <a (click)="abrirCambistaFinanceiro()">
+                                <span></span>
+                                Financeiro
+                            </a>
+                            <hr />
+                            <label>Cartão</label>
+                            <a (click)="abrirCambistaCartaoConsultar()">
+                                <span></span>
+                                Consultar
+                            </a>
+                            <a (click)="abrirCambistaCartaoCriar()">
+                                <span></span>
+                                Criar
+                            </a>
+                            <a (click)="abrirCambistaCartaoListagem()">
+                                <span></span>
+                                Listagem
+                            </a>
+                            <a (click)="abrirCambistaCartaoSaque()">
+                                <span></span>
+                                Solicitações de saque
+                            </a>
+                            <a (click)="abrirCambistaCartaoRecarga()">
+                                <span></span>
+                                Recarga
+                            </a>
+                            <hr />
+                            <label>Mais opções</label>
+                            <a (click)="abrirCambistaValidacao()">
+                                <span></span>
+                                Validação
+                            </a>
+                            <a (click)="abrirCambistaApuracao()">
+                                <span></span>
+                                Apuração
+                            </a>
+                            <a (click)="abrirCambistaApostas()">
+                                <span></span>
+                                Apostas
+                            </a>
+                            <a (click)="abrirCambistaTabela()">
+                                <span></span>
+                                Tabela
+                            </a>
+                            <hr />
+                            <a (click)="abrirAjuda()">
+                                <span></span>
+                                Ajuda
+                            </a>
                             <a (click)="logout()">
                                 <span></span>
                                 Sair
@@ -68,10 +140,10 @@
                         </div>
 
                         <div class="d-flex justify-content-around">
-                            <a class="dropdown-btn w-150" [routerLink]="['clientes/deposito']">
+                            <a class="dropdown-btn w-150" (click)="abrirDepositos()">
                                 Solicitar Depósito
                             </a>
-                            <a class="dropdown-btn w-150" [routerLink]="['clientes/saque']">
+                            <a class="dropdown-btn w-150" (click)="abrirSaques()">
                                 Solicitar Saque
                             </a>
                         </div>
@@ -92,7 +164,7 @@
                                 Pix
                             </a>
                             <hr />
-                            <label>Mias opções</label>
+                            <label>Mais opções</label>
                             <a (click)="abrirFinanceiro()">
                                 <span></span>
                                 Financeiro

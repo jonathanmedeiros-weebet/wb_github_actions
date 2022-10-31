@@ -62,6 +62,9 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private modalService: NgbModal,
         private apostaService: ApostaService,
         public activeModal: NgbActiveModal,
+        private acumuladaoService: AcumuladaoService,
+        private desafioApostaService: DesafioApostaService,
+        private cassinoService: CasinoApiService
     ) {
         super();
 
@@ -116,27 +119,27 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                     error => this.handleError(error)
                 );
                 break;
-            // case 'acumuladao':
-            //     this.acumuladaoService.getApostas(queryParams)
-            //     .subscribe(
-            //         apostas => this.handleResponse(apostas),
-            //         error => this.handleError(error)
-            //     );
-            //     break;
-            // case 'desafio':
-            //     this.desafioApostaService.getApostas(queryParams)
-            //     .subscribe(
-            //         apostas => this.handleResponse(apostas),
-            //         error => this.handleError(error)
-            //     );
-            //     break;
-            // case 'cassino':
-            //     this.cassinoService.getApostas(queryParams)
-            //     .subscribe(
-            //         apostas => this.handleResponse(apostas),
-            //         error => this.handleError(error)
-            //     );
-            //     break;
+            case 'acumuladao':
+                this.acumuladaoService.getApostas(queryParams)
+                .subscribe(
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
+                );
+                break;
+            case 'desafio':
+                this.desafioApostaService.getApostas(queryParams)
+                .subscribe(
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
+                );
+                break;
+            case 'cassino':
+                this.cassinoService.getApostas(queryParams)
+                .subscribe(
+                    apostas => this.handleResponse(apostas),
+                    error => this.handleError(error)
+                );
+                break;
             default:
                 this.handleResponse([]);
                 break;

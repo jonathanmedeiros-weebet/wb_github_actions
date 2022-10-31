@@ -27,7 +27,7 @@ import {BilheteAcumuladaoComponent} from './exibir-bilhete/acumuladao/bilhete-ac
 import {BilheteCompartilhamentoComponent} from './bilhete-compartilhamento/bilhete-compartilhamento.component';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {UtilsModule} from '../utils/utils.module';
-import {ApostaService, ApostaEsportivaService, CartaoService, RegioesDestaqueService} from '../../services';
+import {ApostaService, AcumuladaoService, SorteioService, DesafioApostaService, ApostaLoteriaService, RelatorioService, ApostaEsportivaService, CartaoService, RegioesDestaqueService} from '../../services';
 import {
     PesquisaModalComponent, TabelaModalComponent,
     ApostaModalComponent, PreApostaModalComponent,
@@ -144,7 +144,14 @@ import { CodeInputModule } from 'angular-code-input';
         ApostaEsportivaService,
         ApostaService,
         CartaoService,
-        RegioesDestaqueService
+        RegioesDestaqueService,
+        SorteioService,
+        DesafioApostaService,
+        ApostaService,
+        ApostaLoteriaService,
+        ApostaEsportivaService,
+        RelatorioService,
+        AcumuladaoService
     ]
 })
 export class LayoutModule {

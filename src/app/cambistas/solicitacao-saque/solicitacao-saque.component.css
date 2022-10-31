@@ -143,7 +143,11 @@
     #default-content {
         padding: 55px 10px 10px;
         background: #0a0a0a;
-        height: 100%;
+        height: 100vh;
+    }
+
+    .internal-container-out {
+        background-color: transparent;
     }
 
     .uncollapsed {
@@ -175,5 +179,27 @@
 
     .table thead th {
         background-color: #181818;
+    }
+
+    .dp-hidden {
+        position: absolute;
+    }
+
+    .filtros {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros .datepicker-group {
+        max-width: none;
+    }
+
+    .filtros .datepicker-group input {
+        margin: 0;
+    }
+
+    .filtros select {
+        max-width: none;
     }
  }

@@ -9,10 +9,21 @@ import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {Router} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthDoisFatoresModalComponent, CadastroModalComponent, ClienteApostasModalComponent, ClientePerfilModalComponent, ClientePixModalComponent, ClienteSenhaModalComponent, LoginModalComponent } from '../modals';
+import { AuthDoisFatoresModalComponent, CadastroModalComponent, CartaoCadastroModalComponent, ClienteApostasModalComponent, ClientePerfilModalComponent, ClientePixModalComponent, ClienteSenhaModalComponent, LoginModalComponent, PesquisarCartaoMobileModalComponent, RecargaCartaoModalComponent, TabelaModalComponent } from '../modals';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { SolicitacaoSaqueClienteComponent } from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
 import { ApostasClienteComponent } from 'src/app/clientes/apostas-cliente/apostas-cliente.component';
+import { DashboardComponent } from 'src/app/cambistas/dashboard/dashboard.component';
+import { FinanceiroComponent } from 'src/app/cambistas/financeiro/financeiro.component';
+import { CartaoListagemComponent } from 'src/app/cartao/cartao-listagem/cartao-listagem.component';
+import { CartaoSolicitacoesSaqueComponent } from 'src/app/cartao/solicitacoes-saque/cartao-solicitacoes-saque.component';
+import { ValidarApostaModule } from 'src/app/validar-aposta/validar-aposta.module';
+import { ApuracaoComponent } from 'src/app/cambistas/apuracao/apuracao.component';
+import { ValidarApostaWrapperComponent } from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
+import { TabelaComponent } from 'src/app/cambistas/tabela/tabela.component';
+import { SolicitacaoSaqueComponent } from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
+import { CartaoComponent } from 'src/app/cambistas/cartao/cartao.component';
+import { ApostaComponent } from 'src/app/cambistas/aposta/aposta.component';
 
 @Component({
     selector: 'app-header',
@@ -270,6 +281,50 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirApostas() {
         this.modalService.open(ClienteApostasModalComponent);
+    }
+
+    abrirCambistaDashboard() {
+        this.modalService.open(DashboardComponent);
+    }
+
+    abrirCambistaFinanceiro() {
+        this.modalService.open(FinanceiroComponent);
+    }
+
+    abrirCambistaCartaoConsultar() {
+        this.modalService.open(PesquisarCartaoMobileModalComponent);
+    }
+
+    abrirCambistaCartaoCriar() {
+        this.modalService.open(CartaoCadastroModalComponent);
+    }
+
+    abrirCambistaCartaoListagem() {
+        this.modalService.open(CartaoComponent);
+    }
+
+    abrirCambistaCartaoSaque() {
+        this.modalService.open(SolicitacaoSaqueComponent);
+    }
+
+    abrirCambistaCartaoRecarga() {
+        this.modalService.open(RecargaCartaoModalComponent);
+    }
+
+    abrirCambistaValidacao() {
+        this.modalService.open(ValidarApostaWrapperComponent);
+    }
+
+    abrirCambistaApuracao() {
+        this.modalService.open(ApuracaoComponent);
+    }
+
+    abrirCambistaApostas() {
+        this.modalService.open(ApostaComponent);
+    }
+
+    abrirCambistaTabela() {
+        this.modalService.open(TabelaComponent);
     }
 
     abrirAjuda() {

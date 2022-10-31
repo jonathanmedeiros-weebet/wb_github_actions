@@ -26,6 +26,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
+    isMobile = false;
 
     modalRef;
 
@@ -49,6 +50,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     ngOnInit() {
         this.sidebarService.changeItens({contexto: 'cliente'});
+
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
 
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
         this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;

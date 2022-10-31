@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApostaService, SidebarService, MessageService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ParametrosLocaisService } from 'src/app/services';
@@ -60,7 +60,8 @@ export class ApostaComponent implements OnInit {
         public messageService: MessageService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
-        private apostaService: ApostaService
+        private apostaService: ApostaService,
+        public activeModal: NgbActiveModal
     ) {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
         this.toDate = calendar.getToday();

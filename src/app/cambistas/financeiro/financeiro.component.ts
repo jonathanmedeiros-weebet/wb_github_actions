@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarService } from 'src/app/services';
 
 @Component({
@@ -16,6 +17,7 @@ export class FinanceiroComponent implements OnInit {
 
     constructor(
         private sidebarService: SidebarService,
+        public activeModal: NgbActiveModal,
     ) { }
 
     ngOnInit(): void {

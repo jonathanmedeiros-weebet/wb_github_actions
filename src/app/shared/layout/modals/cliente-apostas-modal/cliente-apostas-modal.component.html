@@ -14,69 +14,57 @@
                     <div class="col-xs-12 col-md-12">
                         <form (ngSubmit)="onSubmit()" [formGroup]="form">
                             <div class="form-row">
-                                <div class="col-6 col-md-3">
+                                <select class="form-control inverted-out" formControlName="status">
+                                    <option value="">Futebol</option>
+                                    <option value="ganhou">Acumuladão</option>
+                                    <option value="perdeu">Desafio</option>
+                                    <option value="pendente">Cassino</option>
+                                </select>
+                                <input
+                                    name="datepicker"
+                                    class="dp-hidden"
+                                    ngbDatepicker
+                                    #datepicker="ngbDatepicker"
+                                    [autoClose]="'outside'"
+                                    (dateSelect)="onDateSelection($event, datepicker)"
+                                    [displayMonths]="2"
+                                    [dayTemplate]="t"
+                                    outsideDays="hidden"
+                                    [startDate]="fromDate!"
+                                    tabindex="-1"
+                                    value=""
+                                >
+                                <ng-template #t let-date let-focused="focused">
+                                    <span class="custom-day"
+                                            [class.focused]="focused"
+                                            [class.range]="isRange(date)"
+                                            [class.faded]="isHovered(date) || isInside(date)"
+                                            (mouseenter)="hoveredDate = date"
+                                            (mouseleave)="hoveredDate = null">
+                                        {{ date.day }}
+                                    </span>
+                                </ng-template>
+                                <div class="input-group datepicker-group">
+                                    <i class="fa fa-calendar"></i>
                                     <input
-                                        name="datepicker"
-                                        class="dp-hidden"
-                                        ngbDatepicker
-                                        #datepicker="ngbDatepicker"
-                                        [autoClose]="'outside'"
-                                        (dateSelect)="onDateSelection($event, datepicker)"
-                                        [displayMonths]="2"
-                                        [dayTemplate]="t"
-                                        outsideDays="hidden"
-                                        [startDate]="fromDate!"
-                                        tabindex="-1"
-                                        value=""
+                                        type="text"
+                                        class="form-control inverted-out"
+                                        [(ngModel)]="selectedDate"
+                                        (click)="datepicker.toggle()"
+                                        [ngModelOptions]="{standalone: true}"
                                     >
-                                    <ng-template #t let-date let-focused="focused">
-                                        <span class="custom-day"
-                                                [class.focused]="focused"
-                                                [class.range]="isRange(date)"
-                                                [class.faded]="isHovered(date) || isInside(date)"
-                                                (mouseenter)="hoveredDate = date"
-                                                (mouseleave)="hoveredDate = null">
-                                            {{ date.day }}
-                                        </span>
-                                    </ng-template>
-                                    <div class="input-group datepicker-group">
-                                        <i class="fa fa-calendar"></i>
-                                        <input
-                                            type="text"
-                                            class="form-control inverted-out"
-                                            [(ngModel)]="selectedDate"
-                                            (click)="datepicker.toggle()"
-                                            [ngModelOptions]="{standalone: true}"
-                                        >
-                                    </div>
                                 </div>
-                                <div class="col-6 col-md-2">
-                                    <select class="form-control inverted-out" formControlName="status">
-                                        <option value="">Todos</option>
-                                        <option value="ganhou">Ganhou</option>
-                                        <option value="perdeu">Perdeu</option>
-                                        <option value="pendente">Pendente</option>
-                                        <option value="reembolso">Reembolso</option>
-                                    </select>
-                                </div>
-                                <div class="col-6 col-md-1">
-                                    <button class="btn btn-custom btn-line mt-0" type="submit">Filtrar</button>
-                                </div>
+                                <select class="form-control inverted-out" formControlName="status">
+                                    <option value="">Todos</option>
+                                    <option value="ganhou">Ganhou</option>
+                                    <option value="perdeu">Perdeu</option>
+                                    <option value="pendente">Pendente</option>
+                                    <option value="reembolso">Reembolso</option>
+                                </select>
+                                <button class="btn btn-custom btn-block mt-3" type="submit">Filtrar</button>
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-
-            <div class="info-resultado">
-                <div class="item">
-                        <label>Qtd. apostas:</label> {{ apostas.length }}
-                </div>
-                <div class="item">
-                        <label>Total apostado:</label> {{ totais.valor | currency }}
-                </div>
-                <div class="item">
-                        <label>Total prêmios:</label> {{ totais.premio | currency }}
                 </div>
             </div>
 

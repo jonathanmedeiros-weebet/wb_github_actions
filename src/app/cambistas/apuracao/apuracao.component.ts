@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import { SidebarService } from 'src/app/services';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-apuracao',
@@ -43,7 +43,8 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
         private fb: FormBuilder,
         private calendar: NgbCalendar,
         public formatter: NgbDateParserFormatter,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        public activeModal: NgbActiveModal,
     ) {
         super();
 
