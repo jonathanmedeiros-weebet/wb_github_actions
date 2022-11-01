@@ -45,6 +45,14 @@
     margin-top: 5px;
 }
 
+.indentificacao .horario {
+    margin-top: 10px;
+}
+
+.content-sports {
+    padding: 0;
+}
+
 .nome .time-a,
 .nome .time-b {
     display: flex;
