@@ -139,7 +139,7 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
             altura -= 262;
         }
 
-        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-jogo');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
 
