@@ -93,8 +93,9 @@ owl-carousel-o {
 
 .jogo-destaque {
     cursor: pointer;
-    background: #0A0A0A;
-    border: 1px solid #35cc95;
+    background: var(--game);
+    color: var(--foreground-game);
+    border: 1px solid var(--highlight);
     width: 280px;
     height: 135px;
     border-radius: 5px;
@@ -168,7 +169,8 @@ owl-carousel-o {
 }
 
 .jogos-destaque .jogo-destaque-odds .jogo-destaque-odd {
-    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     border-radius: 2px;
     flex: 1;
     font-size: 8px;
@@ -182,8 +184,8 @@ owl-carousel-o {
 }
 
 .jogos-destaque .jogo-destaque-odds .jogo-destaque-odd.selecionado {
-    background-color: #35cc95;
-    color:#0A0A0A;
+    background-color: var(--highlight);
+    color:var(--foreground-highlight);
 }
 
 .jogos-destaque .jogo-destaque-odds .jogo-destaque-odd:first-child {

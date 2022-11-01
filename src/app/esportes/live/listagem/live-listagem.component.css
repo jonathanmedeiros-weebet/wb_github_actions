@@ -75,12 +75,13 @@
     justify-content: center;
     padding: 10px;
 
-    background-color: #0a0a0a;
+    background-color: var(--game);
+    color: var(--foreground-game);
     margin-right: 5px;
 }
 
 .indentificacao .tempo {
-    color: var(--foreground-header);
+    color: var(--foreground-game);
 }
 
 .aovivo-label {
@@ -189,7 +190,7 @@
 
 .cotacoes {
     display: flex;
-    background-color: #0A0A0A;
+    background-color: var(--game);
     padding: 7.5px;
 }
 
@@ -201,7 +202,8 @@
     cursor: pointer;
     border-radius: 2px;
 
-    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     padding: 8px 10px;
     min-width: 80px;
 
@@ -211,8 +213,8 @@
 }
 
 .cotacoes .cotacao.selecionado {
-    background-color: #35cc95;
-    color: #0A0A0A;
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 .cotacoes .cotacao label {

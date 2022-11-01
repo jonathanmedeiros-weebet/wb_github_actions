@@ -1,5 +1,4 @@
 .jogo-container {
-    background-color: #181818;
     padding: 5px;
 }
 
@@ -65,10 +64,6 @@
     margin: 10px 20px;
 }
 
-.tipo-apostas {
-    background-color: #181818;
-}
-
 .tipo-apostas-container {
     overflow: scroll;
     display: flex;
@@ -91,7 +86,7 @@
     justify-content: space-between;
     padding: 0 20px;
     height: 30px;
-    background-color: var(--header);
+    background-color: var(--game);
     margin-bottom: 2px;
 
     cursor: pointer;
@@ -204,7 +199,7 @@
 
 .nav-tipos {
     height: 40px;
-    background-color: var(--header);
+    background-color: var(--game);
     padding: 0 !important;
     border-radius: 2px;
 }
@@ -216,11 +211,12 @@
     font-size: 12px;
     font-weight: 400;
     height: 40px;
-    color: var(--highlight);
+    color: var(--foreground-game);
     text-decoration: none;
+    border-bottom: 3px solid transparent;
 }
 
-.nav-link.active, .nav-link:hover {
+.nav-tipos .nav-link.active, .nav-tipos .nav-link:hover {
     border-bottom: 3px solid var(--highlight);
 }
 

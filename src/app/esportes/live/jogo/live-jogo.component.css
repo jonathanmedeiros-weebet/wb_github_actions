@@ -2,7 +2,6 @@
     height: calc(100vh - 132px);
     display: flex;
     flex-direction: column;
-    background: #181818;
 }
 
 .indentificacao, .indentificacao-mobile{
@@ -219,13 +218,13 @@
 }
 
 .header-tipo-aposta {
-    background-color: #0a0a0a;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 7px 15px;
     height: 30px;
-    background-color: var(--header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     margin-bottom: 2px;
 
     cursor: pointer;

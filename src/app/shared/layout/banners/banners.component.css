@@ -1,12 +1,10 @@
 .banners{
-    background-color: #181818;
     margin-bottom: 5px;
 }
 
 .banners img{
     width: 100%;
     max-height: 175px;
-    background-color: #181818;
     object-fit: cover;
 }
 

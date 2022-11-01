@@ -82,15 +82,15 @@
 }
 
 .enabled-scroll-button {
-    background-color: #0A0A0A;
-    color: #FFFFFF;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     cursor: pointer;
     transition: 500ms;
 }
 
 .disabled-scroll-button {
-    background-color: #181818;
-    color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--inputs-odds);
     cursor: auto;
     transition: 500ms;
 }

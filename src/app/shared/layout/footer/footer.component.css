@@ -57,7 +57,7 @@ footer {
     top: 20px;
     right: 20px;
 
-    color: #fff;
+    color: var(--foreground-inputs-odds);
     text-decoration: none;
     cursor: pointer;
 
@@ -65,7 +65,7 @@ footer {
     align-items: center;
     justify-content: center;
 
-    background: #181818;
+    background: var(--inputs-odds);
     border-radius: 4px;
 
     height: 45px;
@@ -73,8 +73,8 @@ footer {
 }
 
 .toTop:hover {
-    background-color: #35CD96;
-    color: #181818;
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 @media only screen and (max-width: 1024px) {

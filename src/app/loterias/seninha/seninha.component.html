@@ -9,8 +9,7 @@
                                 <div class="form-group col-xs-12 col-lg-4">
                                     <label>Quantidade de dezenas da aposta</label>
                                     <div class="inputs-random">
-                                        <select class="form-control inverted-out" name="qtdNumeros" [(ngModel)]="qtdNumeros"
-                                                style="background-color: var(--header)">
+                                        <select class="form-control inverted-out" name="qtdNumeros" [(ngModel)]="qtdNumeros">
                                             <option [value]="null" disabled>Selecione a quantidade</option>
                                             <option [value]="numero" [disabled]="disabledNumber(numero)"
                                                     *ngFor="let numero of qtdNumerosLista">{{numero}}</option>

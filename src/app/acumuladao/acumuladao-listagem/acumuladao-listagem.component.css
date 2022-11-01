@@ -14,7 +14,8 @@
     min-height: 90px;
     max-height: 90px;
     justify-content: space-between;
-    background-color: var(--header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     margin-top: 10px;
     padding: 12px 20px;
     cursor: pointer;

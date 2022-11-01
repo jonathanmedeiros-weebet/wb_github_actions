@@ -3,7 +3,8 @@
     text-align: center;
     padding: 0;
     height: 100%;
-    background-color: var(--sidebar-right);
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
 }
 
 .bilhete-container {
@@ -32,7 +33,7 @@
 }
 
 .acoes-bilhete a {
-    color: var(--foreground-header);
+    color: var(--foreground-sidebars);
     height: 15px;
     float: right;
     text-decoration: none;
@@ -40,7 +41,7 @@
 }
 
 .acoes-bilhete a.disabled {
-    color: rgba(255, 255, 255, 0.5);
+    opacity: 0.5;
     pointer-events: none;
     cursor: not-allowed;
 }
@@ -151,7 +152,7 @@
 }
 
 .jogo-selecionado > div:not(.remover-item) {
-    color: var(--foreground-sidebar-right);
+    color: var(--foreground-sidebars);
 }
 
 .jogo-selecionado .horario,
@@ -305,8 +306,8 @@ h4 {
 }
 
 .valores button {
-    background-color: #181818;
-    color: var(--foreground-header);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,7 +320,7 @@ h4 {
 
 .valores button:hover {
     background-color: var(--highlight);
-    color: var(--header);
+    color: var(--foreground-highlight);
 }
 
 .valores.fadeIn {

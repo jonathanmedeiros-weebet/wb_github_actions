@@ -2,6 +2,8 @@ header {
     width: 100%;
     height: 92px;
     display: flex;
+    background-color: var(--header);
+    color: var(--foreground-header);
 }
 
 nav {
@@ -143,9 +145,9 @@ nav::-webkit-scrollbar {
     text-decoration: none;
     font-size: 12px;
     border-radius: 5px;
-    color: #C0C0C0;
+    color: var(--foreground-inputs-odds);
     white-space: nowrap;
-    background-color: #181818;
+    background-color: var(--inputs-odds);
     margin-bottom: 10px;
     margin-left: 10px;
 }
@@ -155,17 +157,17 @@ nav::-webkit-scrollbar {
 }
 
 .dropdown-btn-filled .fa {
-    color: #C0C0C0;
+    color: var(--foreground-inputs-odds);
 }
 
 .dropdown-btn-filled:hover {
-    border: 1px solid var(--highlight);
-    color: #FFFFFF;
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
     transition: 300ms;
 }
 
 .dropdown-btn-filled:hover .fa {
-    color: #FFFFFF;
+    color: var(--foreground-highlight);
     transition: 300ms;
 }
 
@@ -173,7 +175,7 @@ nav::-webkit-scrollbar {
     width: 95%;
     margin: 0 auto;
     height: 0;
-    border-top: 1px solid #181818;
+    border-top: 1px solid var(--foreground-header);
 }
 
 .saldos-container {
@@ -185,7 +187,7 @@ nav::-webkit-scrollbar {
 
 .saldos-container .separador {
     display: block;
-    border-right: 2px solid #181818;
+    border-right: 2px solid var(--foreground-header);
     height: 35px;
     margin: 0 30px;
 }
@@ -531,7 +533,6 @@ body .change-theme {
 .modal-header {
     border-bottom-color: #3b3b3b;
     padding: 20px 35px;
-    background: #0A0A0A;
 }
 
 @media only screen and (max-width: 1024px) {

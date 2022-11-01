@@ -20,7 +20,8 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 19px;
-    background-color: #181818;
+    background-color: transparent;
+    color: var(--foreground);
 }
 
 #acumuladao-form .indentificacao .nome span {
@@ -50,7 +51,6 @@
     padding: 5px;
     cursor: pointer;
     border-radius: 25px;
-    background-color: #181818;
 }
 
 #acumuladao-form .indentificacao .div-back {
@@ -61,7 +61,7 @@
 
 #acumuladao-form .eventos {
     align-self: center;
-    background-color: var(--header);
+    background-color: var(--game);
     width: 100%;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -243,7 +243,7 @@
 /*}*/
 
 /*.desafio-selecionado > div:not(.remover-item) {*/
-/*    color: var(--foreground-sidebar-right);*/
+/*    color: var(--foreground-sidebars);*/
 /*}*/
 
 /*.desafio-selecionado .horario,*/

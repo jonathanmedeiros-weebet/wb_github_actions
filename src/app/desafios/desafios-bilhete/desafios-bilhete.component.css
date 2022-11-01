@@ -3,7 +3,8 @@
     text-align: center;
     padding: 0;
     height: 100%;
-    background-color: var(--sidebar-right);
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
 }
 
 .bilhete-container {
@@ -110,7 +111,7 @@
 }
 
 .desafio-selecionado > div:not(.remover-item) {
-    color: var(--foreground-sidebar-right);
+    color: var(--foreground-sidebars);
 }
 
 .desafio-selecionado .horario,
@@ -221,8 +222,8 @@ input {
 }
 
 .valores button {
-    background-color: #181818;
-    color: var(--foreground-header);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,7 +236,7 @@ input {
 
 .valores button:hover {
     background-color: var(--highlight);
-    color: var(--header);
+    color: var(--foreground-highlight);
 }
 
 .valores.fadeIn {

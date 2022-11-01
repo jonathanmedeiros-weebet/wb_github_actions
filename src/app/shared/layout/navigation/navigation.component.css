@@ -1,6 +1,7 @@
 .sidebar-wrapper {
     width: 270px;
-    background: var(--sidebar-left);
+    background: var(--sidebars);
+    color: var(--foreground-sidebars);
     transition: 500ms;
 
     display: flex;
@@ -142,6 +143,6 @@ app-sidebar-nav {
 
     .sidebar-wrapper {
         width: 100%;
-        background: var(--sidebar-left);
+        background: var(--sidebar);
     }
 }

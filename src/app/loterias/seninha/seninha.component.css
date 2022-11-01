@@ -12,7 +12,8 @@
 .ball {
     width: 40px;
     height: 40px;
-    background-color: var(--header);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     margin: 3px;
     cursor: pointer;
     clip-path: circle();
@@ -23,7 +24,7 @@
 
 .balls-group .active {
     background-color: var(--highlight);
-    color: var(--header);
+    color: var(--foreground-highlight);
 }
 
 .ball .content,
@@ -47,7 +48,7 @@
 }
 
 .form-palpite {
-    background-color: var(--header);
+    background-color: var(--game);
     padding: 15px;
     border-radius: 12px;
 }

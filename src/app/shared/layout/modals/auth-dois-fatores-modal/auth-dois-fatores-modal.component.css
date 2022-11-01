@@ -1,13 +1,11 @@
 .modal-header {
     border-bottom-color: #3b3b3b;
     padding: 20px 35px;
-    background: #0A0A0A;
 }
 
 .modal-body {
     text-align: center;
     padding: 40px 120px 40px;
-    background: #0A0A0A;
 }
 
 
@@ -56,7 +54,6 @@ button {
 
     .modal-body {
         padding: 40px 25px 15px;
-        background: #0A0A0A;
 
         display: flex;
         flex-direction: column;

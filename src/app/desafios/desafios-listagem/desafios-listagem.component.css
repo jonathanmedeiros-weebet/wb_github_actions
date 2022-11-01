@@ -2,10 +2,6 @@
     padding: 5px;
 }
 
-.categoria {
-    background-color: #181818;
-}
-
 .categoria-header {
     padding: 0 15px;
     height: 40px;
@@ -13,8 +9,8 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--header);
-    color: var(--foreground-header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     margin-bottom: 3px;
 }
 
@@ -23,14 +19,14 @@
 }
 
 .desafios {
-    background-color: #181818;
     padding-bottom: 4px;
 }
 
 .desafio {
     padding: 0 10px;
-    background-color: var(--header);
+    background-color: var(--game);
     margin-top: 3px;
+    color: var(--foreground-game);
 }
 
 .desafio:first-of-type {
@@ -57,6 +53,7 @@
 
 .odds {
     justify-content: start;
+    padding: 7.5px 0;
 }
 
 .odd {

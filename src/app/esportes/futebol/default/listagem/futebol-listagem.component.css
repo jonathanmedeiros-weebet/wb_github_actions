@@ -41,8 +41,8 @@
     width: 25px;
     height: 60px;
     cursor: pointer;
-    background-color: var(--header);
-    color: var(--foreground-header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +59,7 @@
 }
 
 .enabled-scroll-button {
-    color: var(--foreground-header);
+    color: var(--foreground-game);
     cursor: pointer;
     transition: 500ms;
 }
@@ -78,7 +78,7 @@
 }
 
 .filter .tabs {
-    background: #0A0A0A;
+    background: var(--game);
     border-radius: 5px;
     margin-left: 10px;
     padding: 0 10px;
@@ -88,7 +88,7 @@
 }
 
 .filter .tabs .tab {
-    color: #fff;
+    color: var(--foreground-game);
     display: block;
     padding: 10px 10px;
     text-decoration: none;
@@ -99,7 +99,7 @@
 }
 
 .filter .tabs .tab.active {
-    border-color: #35cc95;
+    border-color: var(--highlight);
     font-weight: 600;
 }
 

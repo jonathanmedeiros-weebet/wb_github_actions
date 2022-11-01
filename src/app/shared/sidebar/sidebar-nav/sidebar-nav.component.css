@@ -3,7 +3,7 @@
 }
 
 .sidebar-nav {
-    background-color: var(--sidebar-left);
+    background-color: var(--sidebar);
     padding: 0;
     margin: 0;
     overflow: scroll;
@@ -20,7 +20,7 @@
 }
 
 .sidebar-nav a {
-    color: var(--foreground-sidebar-left);
+    color: var(--foreground-sidebars);
 }
 
 .sidebar-nav .group {
@@ -87,7 +87,7 @@
 /*    height: 0;*/
 /*    border-left: 5px solid transparent;*/
 /*    border-right: 5px solid transparent;*/
-/*    border-top: 5px solid var(--foreground-sidebar-left);*/
+/*    border-top: 5px solid var(--foreground-sidebars);*/
 /*    position: absolute;*/
 /*    right: 10px;*/
 /*    top: 13px;*/
@@ -100,7 +100,7 @@
 /*    border-left: 5px solid transparent;*/
 /*    border-right: 5px solid transparent;*/
 /*    border-top: 5px solid transparent;*/
-/*    border-bottom: 5px solid var(--foreground-sidebar-left);*/
+/*    border-bottom: 5px solid var(--foreground-sidebars);*/
 /*}*/
 
 .regiao ul {
@@ -160,7 +160,7 @@
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-    color: var(--foreground-sidebar-left);
+    color: var(--foreground-sidebars);
 }
 
 .cambista-menu a span {
@@ -198,8 +198,8 @@
 
 .cambista-menu a.router-link-active,
 li.router-link-active > a {
-    color: #35cc95;
-    border-left: 3px solid #35cc95;
+    color: var(--highlight);
+    border-left: 3px solid var(--highlight);
 }
 
 .cambista-menu ul.menu-bottom {
@@ -241,7 +241,7 @@ li.router-link-active > a {
 }
 
 .consulta-bilhete .input-consulta button{
-    background-color: #35cc95;
+    background-color: var(--highlight);
     border: 0;
     border-radius: 0 5px 5px 0;
     padding: 0 10px;
@@ -261,6 +261,7 @@ li.router-link-active > a {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #0a0a0a;
     /* transition: all 0.5s; */
 }
 

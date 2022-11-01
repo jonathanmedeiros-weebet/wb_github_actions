@@ -16,9 +16,14 @@ owl-carousel-o:hover .owl-theme .owl-nav [class*="owl-"] {
 
 .owl-theme .owl-nav [class*="owl-"] {
     opacity: 0;
-    background: #181818;
-    color: #35CC95;
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     transition: all 200ms;
+}
+
+.owl-theme .owl-nav [class*="owl-"]:hover {
+    background: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 .owl-next {
@@ -57,8 +62,8 @@ html {
 html,
 body {
     font-family: 'Open Sans', sans-serif;
-    color: var(--foreground-header);
-    background-color: #0A0A09;
+    color: var(--foreground);
+    background-color: var(--background);
     max-height: 100vh;
     height: 100vh;
     /* overflow: hidden; */
@@ -72,7 +77,7 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: #181818;
+    background-color: var(--background);
     /*max-height: calc(100vh - 132px);*/
 }
 
@@ -81,7 +86,7 @@ body {
 /*    max-height: calc(100vh - 132px);*/
 /*}*/
 
-header {
+game {
     background-color: var(--header);
 }
 
@@ -125,7 +130,7 @@ header {
     /*padding: 20px 15px 20px 15px;*/
     padding: 5px;
     height: calc(100vh - 92px);
-    background-color: #181818;
+    background-color: var(--background);
     overflow: scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -140,12 +145,11 @@ header {
 .internal-container-out {
     padding: 25px 40px;
     min-height: 100%;
-    background-color: #181818;
+    background-color: var(--background);
 }
 
 .content-sports {
     width: 100%;
-    background-color: #181818;
     color: var(--foreground-header);
     overflow: scroll;
     overflow-x: hidden;
@@ -168,12 +172,12 @@ header {
 
 .btn-custom {
     background-color: var(--highlight);
-    color: var(--header);
+    color: var(--foreground-highlight);
 }
 
 .btn-custom:hover {
-    /*color: var(--highlight);*/
-    border: 1px solid var(--foreground-header);
+    color: var(--foreground-highlight);
+    border: 1px solid var(--foreground-highlight);
 }
 
 .btn-custom:focus {
@@ -192,7 +196,7 @@ header {
 
 .btn-custom2:hover {
     background: var(--highlight);
-    color: var(--header);
+    color: var(--foreground-highlight);
 }
 
 .btn-custom2:focus {
@@ -291,7 +295,8 @@ header {
     text-align: center;
     padding: 0;
     height: 100%;
-    background-color: var(--sidebar-right);
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
 }
 
 .bilhete-container {
@@ -401,7 +406,7 @@ header {
 }
 
 .jogo-selecionado > div:not(.remover-item) {
-    color: var(--foreground-sidebar-right);
+    color: var(--foreground-sidebars);
 }
 
 .jogo-selecionado .horario,
@@ -458,13 +463,13 @@ header {
 /*    text-align: center;*/
 /*    padding: 0;*/
 /*    height: 100%;*/
-/*    background-color: var(--sidebar-right);*/
+/*    background-color: var(--sidebars);*/
 /*}*/
 
 /*.pre-bilhete {*/
 /*    overflow: auto;*/
 /*    display: none;*/
-/*    background-color: var(--sidebar-right);*/
+/*    background-color: var(--sidebars);*/
 /*    !* position: relative; *!*/
 /*    width: 270px;*/
 /*}*/
@@ -529,14 +534,14 @@ button {
 
 #fixed-bar-bilhete {
     padding: 5px;
-    background: var(--sidebar-right);
+    background: var(--sidebars);
     width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
     flex-direction: row;
-    color: var(--foreground-sidebar-right);
+    color: var(--foreground-sidebars);
     align-items: center;
 }
 
@@ -571,7 +576,7 @@ button {
     width: 100% !important;
     padding-top: 15px;
     padding-bottom: 15px;
-    background: var(--sidebar-right);
+    background: var(--sidebars);
     display: block;
     overflow-y: auto;
 }
@@ -682,19 +687,18 @@ button {
 }
 
 .modal-header, .modal-body, .modal-footer{
-    background-color: #0A0A0a;
-    color: #FFFFFF;
+    background-color: var(--background);
+    color: var(--foreground);
 }
 
 .modal-header {
     border-bottom: 1px solid #3b3b3b;
     padding: 20px 35px;
-    background: #0A0A0A;
     align-items: center;
 }
 
 .modal-header i, .modal-header span {
-    color: #fff;
+    color: var(--foreground);
 }
 
 .modal-footer {
@@ -720,8 +724,8 @@ button {
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: #0A0A09;
-    color: var(--foreground-header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     padding: 5px 15px;
 }
 
@@ -823,7 +827,6 @@ button {
 .content-loteria {
     padding: 5px;
     overflow: auto;
-    background-color: #181818;
 }
 
 .margin-top-30 {
@@ -900,11 +903,12 @@ button {
 
     .odds .odd-enabled:hover {
         background-color: var(--highlight);
+        color: var(--foreground-highlight);
         border-radius: 2px;
     }
 
     .odds .odd-enabled:hover span {
-        color: var(--foreground-selected-odds) !important;
+        color: var(--foreground-highlight);
     }
 
     .hide-desktop {
@@ -1006,7 +1010,7 @@ button {
 
 .value-informations {
     text-transform: uppercase;
-    color: var(--foreground-sidebar-right);
+    color: var(--foreground-sidebars);
     margin: 20px 0;
 }
 
@@ -1193,7 +1197,7 @@ button {
     cursor: not-allowed;
 }
 
-.form-check-style-1 {
+/* .form-check-style-1 {
     color: var(--foreground-odds);
 }
 .form-check-input-style-1{
@@ -1206,7 +1210,7 @@ button {
 }
 .form-check-input-style-1:focus{
     outline: max(2px, 0.15em) solid var(--foreground-odds);
-}
+} */
 
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible {
     -webkit-box-shadow: inset 0 0 0 30px #181818 !important;
@@ -1219,9 +1223,9 @@ input[type=password],
 input[type=date],
 input[currencymask],
 select.form-control{
-    background-color: #181818;
-    color: var(--foreground-header);
-    border: 2px solid #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--foreground-inputs-odds);
     border-radius: 5px;
     outline: 0;
     box-shadow: none;
@@ -1235,8 +1239,8 @@ input[type=password]:focus,
 input[type=date]:focus,
 input[currencymask]:focus,
 select.form-control:focus {
-    background-color: #181818;
-    color: var(--foreground-header);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-oddsr);
     border: 2px solid var(--highlight);
     outline: 0;
     box-shadow: none;
@@ -1246,6 +1250,7 @@ select.form-control:focus {
 
 input.inverted {
     border: 0.5px solid rgba(255, 255, 255, 0.5);
+    background-color: var(--inputs-odds);
     border-radius: 5px;
     box-shadow: none;
     -moz-box-shadow: none;
@@ -1262,9 +1267,9 @@ input.inverted {
 
 select.inverted-out,
 input.inverted-out {
-    border: 0.5px solid rgba(255, 255, 255, 0.5);
-    color: var(--foreground-header);
-    background-color: var(--header);
+    border: 0.5px solid var(--foreground-inputs-odds);
+    color: var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
     border-radius: 5px;
     box-shadow: none;
     -moz-box-shadow: none;
@@ -1291,8 +1296,8 @@ select.inverted-out {
 }
 
 input.inverted-out:focus {
-    color: var(--foreground-header);
-    background-color: var(--header);
+    color: var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
     border: 1px solid var(--highlight);
     box-shadow: none;
     -moz-box-shadow: none;
@@ -1366,13 +1371,15 @@ input.inverted-out:disabled {
     max-width: 60px;
     height: 60px;
     margin-right: 5px;
-    background-color: var(--header);
+    background-color: var(--game);
+    color: var(--foreground-game);
 }
 
 .indentificacao .nome {
     display: flex;
     flex-direction: column;
-    background-color: var(--header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     flex-grow: 1;
     min-width: 250px;
     height: 60px;
@@ -1387,7 +1394,8 @@ input.inverted-out:disabled {
     align-items: stretch;
     height: 60px;
     padding: 7.5px;
-    background-color: var(--header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     overflow-x: scroll;
     overflow-y: hidden;
     scroll-behavior: smooth;
@@ -1422,7 +1430,8 @@ input.inverted-out:disabled {
     width: 100%;
     height: 100%;
     cursor: pointer;
-    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     font-weight: 400;
     font-size: 10px;
     line-height: 14px;
@@ -1431,10 +1440,11 @@ input.inverted-out:disabled {
 
 .odds .selecionado {
     background-color: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 .odds .selecionado span {
-    color: var(--foreground-selected-odds) !important;
+    color: var(--foreground-highlight) !important;
 }
 
 .odd .nome-odd,
@@ -1455,16 +1465,16 @@ input.inverted-out:disabled {
     height: 60px;
     padding: 7.5px;
     text-align: right;
-    background-color: var(--header);
-    color: var(--highlight);
+    background-color: var(--game);
+    color: var(--foreground-game);
 }
 
 .mais-opcoes a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #181818;
-    color: var(--highlight);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds) !important;
     border-radius: 2px;
     cursor: pointer;
     text-decoration: none;
@@ -1589,7 +1599,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .input-md input {
-    padding: 10px 20px;
+    padding: 25px 15px 15px;
 }
 
 .input-md label {
@@ -1597,7 +1607,7 @@ input[type=number]::-webkit-outer-spin-button {
     top: calc(50% - 10px);
     left: 10px;
     padding: 0 5px;
-    color:rgba(255, 255, 255, 0.5);
+    color: var(--foreground);
 
     transition: top .3s;
     cursor: text;
@@ -1606,9 +1616,7 @@ input[type=number]::-webkit-outer-spin-button {
 .input-md input:not(:placeholder-shown) ~ label,
 .input-md select ~ label,
 .input-md input:focus ~ label {
-    top: -9px;
-    background: #0A0A0A;
-    color: #fff;
+    top: 2px;
 }
 
 .input-md label.disabled {
@@ -1645,7 +1653,8 @@ input[type=number]::-webkit-outer-spin-button {
     .modal-dialog .modal-content {
         border: 0;
         height: inherit;
-        background: #0a0a0a;
+        background: var(--background);
+        color: var(--foreground);
     }
 
     .w-130 {
