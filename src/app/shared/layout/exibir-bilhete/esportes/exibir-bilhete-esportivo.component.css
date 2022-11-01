@@ -47,6 +47,14 @@ hr {
     font-size: 12px;
 }
 
+.item {
+    margin-bottom: 8px;
+}
+
+.item:last-of-type {
+    margin-bottom: 1px;
+}
+
 .item .campeonato{
     margin: 1px;
     font-weight: bold;

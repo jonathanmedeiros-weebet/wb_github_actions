@@ -50,7 +50,9 @@
         <div class="jogo" [hidden]="!jogo || showLoadingIndicator">
             <div class="tipo-apostas">
                 <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados)">
-                    <h4>{{mercados[chave].nome}}</h4>
+                    <div class="header-tipo-aposta">
+                        {{mercados[chave].nome}}
+                    </div>
                     <div class="odds">
                         <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados[chave])"
                             *ngFor="let odds of mercados[chave].odds">

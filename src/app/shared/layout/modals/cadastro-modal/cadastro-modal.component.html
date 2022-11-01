@@ -6,7 +6,6 @@
 </div>
 <div class="modal-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-        <input type="hidden" formControlName="casino" value="true">
         <h3>Informações pessoais</h3>
         <div class="row">
             <div class="col-md-6">
@@ -147,7 +146,7 @@
                 <label for=""><input type="checkbox" formControlName="aceitar_termos"> Certifico que tenho mais de 18 anos de idade e  declaro que li e concordo com os termos de uso</label>
             </div>
         </div>
-        <button type="submit" class="btn btn-custom btn-block">Cadastrar</button>
+        <button type="submit" class="btn btn-custom btn-block btn-cadastrar">Cadastrar</button>
     </form>
 </div>
 
