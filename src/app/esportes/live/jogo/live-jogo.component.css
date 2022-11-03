@@ -362,10 +362,19 @@
     .indentificacao-jogo .aovivo-tempo {
         left: 5px;
         top: 5px;
+        font-size: 10px;
     }
 
     .indentificacao-jogo .div-back {
         right: 5px;
         top: 5px;
+    }
+
+    .time-a-placar{
+        margin-left: 8px;
+    }
+
+    .time-b-placar{
+        margin-right: 8px;
     }
 }
