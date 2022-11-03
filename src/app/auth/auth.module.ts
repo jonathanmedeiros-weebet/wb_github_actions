@@ -1,13 +1,14 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {SharedModule} from './../shared/shared.module';
-import {AuthRoutingModule} from './auth-routing.module';
-import {CadastroComponent} from './cadastro/cadastro.component';
-import {NgxMaskModule} from 'ngx-mask';
-import {RecuperarSenhaComponent} from './recuperar-senha/recuperar-senha.component';
-import {ResetarSenhaComponent} from './resetar-senha/resetar-senha.component';
-import {NgHcaptchaModule} from 'ng-hcaptcha';
-import {ValidarEmailComponent} from './validar-email/validar-email.component';
+import { SharedModule } from './../shared/shared.module';
+import { AuthRoutingModule } from './auth-routing.module';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
+import { ResetarSenhaComponent } from './resetar-senha/resetar-senha.component';
+import { NgHcaptchaModule } from 'ng-hcaptcha';
+import { ValidarEmailComponent } from './validar-email/validar-email.component';
+import { ModuloClienteGuard } from '../services';
 
 @NgModule({
     imports: [
@@ -25,7 +26,7 @@ import {ValidarEmailComponent} from './validar-email/validar-email.component';
         ResetarSenhaComponent,
         ValidarEmailComponent
     ],
-    providers: []
+    providers: [ModuloClienteGuard]
 })
 export class AuthModule {
 }
