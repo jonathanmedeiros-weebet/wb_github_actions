@@ -2428,3 +2428,21 @@ gulp.task('narigasports.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('spmaster.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "spmaster.net",
+        banca: "SP MASTER",
+        styles: "",
+    });
+});
+
+gulp.task('redeonline.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "redeonline.bet",
+        banca: "REDEONLINE.BET",
+        styles: "",
+    });
+});

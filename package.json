@@ -264,7 +264,9 @@
         "cr7bet.online":  "gulp cr7bet.online",
         "supremodasorte.wee.bet":  "gulp supremodasorte.wee.bet",
         "amesportesbets.com": "gulp amesportesbets.com",
-        "narigasports.com.br": "gulp narigasports.com.br"
+        "narigasports.com.br": "gulp narigasports.com.br",
+        "spmaster.net":  "gulp spmaster.net",
+        "redeonline.bet": "gulp redeonline.bet"
     },
     "private": true,
     "dependencies": {
