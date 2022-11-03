@@ -82,7 +82,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         "-0.5G",
         "+1.5G",
         "+2.5G",
-    ]
+    ];
 
     jogosDestaque = [];
 
@@ -136,7 +136,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         const scrollRightTemp = this.el.nativeElement.querySelector(`#scroll-right-${event_id}`);
 
         const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
-        const maxOddsSize = window.innerWidth - (sidesSize + this.nomesJogoWidth + 150);
+        let maxOddsSize: number;
+
+        if (this.mobileScreen) {
+            maxOddsSize = window.innerWidth;
+        } else {
+            maxOddsSize = window.innerWidth - (sidesSize + this.nomesJogoWidth + 150);
+        }
 
         if (scrollLeft <= 0) {
             this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
@@ -197,7 +203,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 95 : this.qtdOddsPrincipais * 150;
 
         const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
-        this.maxOddsSize = window.innerWidth - (sidesSize + 250 + 65);
+        if (this.mobileScreen) {
+            this.maxOddsSize = window.innerWidth;
+        } else {
+            this.maxOddsSize = window.innerWidth - (sidesSize + 250 + 65);
+        }
 
         this.enableScrollButtons = this.widthOddsScroll > this.maxOddsSize;
         if (this.enableScrollButtons) {
@@ -233,10 +243,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                     jogosDestaques = jogosDestaques.concat(jogosSele);
                 });
 
-                console.log(jogosDestaques);
-
                 this.jogosDestaque = jogosDestaques;
-            })
+            });
 
             if (this.camps.length > 0) {
                 setTimeout(() => {
