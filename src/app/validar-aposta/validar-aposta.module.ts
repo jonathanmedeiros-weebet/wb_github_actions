@@ -16,6 +16,7 @@ import {
     DesafioApostaService
 } from '../services';
 import {NgxMaskModule} from 'ngx-mask';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [SharedModule, ValidarApostaRoutingModule, NgxMaskModule],
@@ -33,7 +34,8 @@ import {NgxMaskModule} from 'ngx-mask';
         ApostaLoteriaService,
         SorteioService,
         AcumuladaoService,
-        DesafioApostaService
+        DesafioApostaService,
+        NgbActiveModal
     ]
 })
 export class ValidarApostaModule { }
