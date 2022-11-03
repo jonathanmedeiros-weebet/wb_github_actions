@@ -22,6 +22,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     private sub: any;
     modalRef;
     isHome = false;
+    isMobile = false;
 
     isHomeCassino = true;
     gameList: GameCasino[];
@@ -109,6 +110,8 @@ export class WallComponent implements OnInit, AfterViewInit {
                     this.isCliente = isCliente;
                 }
             );
+
+        this.isMobile = window.innerWidth < 1025;
     }
 
     ngAfterViewInit() {
@@ -259,20 +262,22 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     abrirModalLogin() {
-        this.modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true,
-            }
-        );
+        let options = {};
 
-        this.modalRef.result
-            .then(
-                result => {
-                },
-                reason => {
-                }
-            );
+        if (this.isMobile) {
+            options = {
+                windowClass: 'modal-fullscreen',
+            };
+        } else {
+            options = {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-600',
+                centered: true,
+            };
+        }
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 }
