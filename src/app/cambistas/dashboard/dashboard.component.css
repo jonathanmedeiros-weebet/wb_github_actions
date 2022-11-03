@@ -218,13 +218,34 @@
     }
 
     .counts {
-        flex-direction: column;
+        /*flex-direction: column;*/
+        flex-wrap: wrap;
         gap: 10px;
         align-items: stretch;
     }
 
     .counts .count {
         margin: 0;
+        padding: 10px 15px;
+        max-width: calc(50% - 5px);
+    }
+
+    .counts .count .count-value .value {
+        font-size: 18px;
+    }
+
+    .counts .count .count-value label {
+        font-size: 10px;
+    }
+
+    .counts .count i {
+        width: 28px;
+        height: 28px;
+    }
+
+    .counts .count i img{
+        width: 85%;
+        height: 85%;
     }
 
     .col-graph {
