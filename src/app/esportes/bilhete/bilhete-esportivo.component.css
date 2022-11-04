@@ -16,7 +16,7 @@
 
 .titulo {
     padding: 10px 0;
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -47,7 +47,8 @@
 }
 
 #nenhum-jogo {
-    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     text-align: left;
     border-radius: 5px;
     padding: 8px;
@@ -106,7 +107,7 @@
 .pre-bilhete .valor,
 .pre-bilhete .possivel-ganho,
 .pre-bilhete .cotacao {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-weight: bolder;
 }
 
@@ -157,7 +158,7 @@
 
 .jogo-selecionado .horario,
 .jogo-selecionado .odd-bilhete .valor {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
 }
 
 .jogo-selecionado .odd-bilhete {
@@ -251,7 +252,7 @@
 
 #aceitar-mudancas {
     background-color: var(--highlight);
-    color: var(--foreground-selected-odds);
+    color: var(--foreground-highlight);
 }
 
 .mudou {

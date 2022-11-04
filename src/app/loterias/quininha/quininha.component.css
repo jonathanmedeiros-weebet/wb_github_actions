@@ -72,7 +72,7 @@ input, select {
 }
 
 .informations .valor {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-weight: bolder;
 }
 

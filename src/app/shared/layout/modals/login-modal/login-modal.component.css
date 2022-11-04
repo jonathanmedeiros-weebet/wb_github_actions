@@ -27,7 +27,7 @@ button {
 }
 
 .esqueceu-senha {
-    color: #35CC95;
+    color: var(--highlight);
     font-size: 12px;
     display: block;
     margin: 20px 0 30px;
@@ -40,14 +40,14 @@ button {
 }
 
 .registrar a {
-    color: #35CC95;
+    color: var(--highlight);
 }
 
 .showPassword {
     position: absolute;
     top: calc(50% - 16px);;
     right: 0;
-    color: #424242;
+    color: var(--foreground-inputs-odds);
     cursor: pointer;
     padding: 10px;
 }
