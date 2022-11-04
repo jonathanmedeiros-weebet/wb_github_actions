@@ -49,6 +49,7 @@
 .regiao-nome {
     align-self: center;
     margin-left: 5px;
+    white-space: break-spaces;
 }
 
 .sidebar-nav li a:hover {
@@ -249,10 +250,6 @@ li.router-link-active > a {
 
 .regiao .regiao-nome {
     flex: 1;
-}
-
-.regiao-nome {
-    white-space: nowrap;
 }
 
 .regiao > a::after {
