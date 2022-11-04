@@ -114,6 +114,11 @@
 
 .campeonato-nome {
     flex: 1;
+    margin-left: 10px;
+}
+
+.modalidade-icon {
+    font-size: 16px;
 }
 
 .list-odds {
@@ -147,6 +152,4 @@
         flex-direction: row;
         justify-content: space-between;
     }
-
-
 }

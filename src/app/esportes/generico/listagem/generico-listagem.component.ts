@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { Campeonato, Jogo, ItemBilheteEsportivo } from '../../../models';
+import { Campeonato, Jogo } from '../../../models';
 import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from '../../../services';
 
 import { Subject } from 'rxjs';
@@ -43,12 +43,23 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     total;
     loadingScroll = false;
     unsub$ = new Subject();
-    term = "";
+    term = '';
 
     depoisdepoisdeamanha;
     depoisdeamanha;
 
     tabSelected;
+
+    iconesGenericos = {
+        'futsal': 'wbicon icon-futsal',
+        'volei': 'wbicon icon-volei',
+        'basquete': 'wbicon icon-basquete',
+        'combate': 'wbicon icon-luta',
+        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
+        'futebol-americano': 'wbicon icon-futebol-americano',
+        'esports': 'wbicon icon-e-sports',
+        'tenis': 'wbicon icon-tenis'
+    };
 
     constructor(
         private bilheteService: BilheteEsportivoService,
