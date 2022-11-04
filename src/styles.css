@@ -1240,7 +1240,7 @@ input[type=date]:focus,
 input[currencymask]:focus,
 select.form-control:focus {
     background-color: var(--inputs-odds);
-    color: var(--foreground-inputs-oddsr);
+    color: var(--foreground-inputs-odds);
     border: 2px solid var(--highlight);
     outline: 0;
     box-shadow: none;
@@ -1317,20 +1317,28 @@ input.inverted-out:disabled {
     opacity: 0;
 }
 
+::placeholder {
+    color: var(--foreground-inputs-odds)
+}
+
 ::-webkit-input-placeholder { /* Chrome, Safari */
     text-transform: none;
+    color: var(--foreground-inputs-odds)
 }
 
 :-moz-placeholder { /* Firefox 18- */
     text-transform: none;
+    color: var(--foreground-inputs-odds)
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
     text-transform: none;
+    color: var(--foreground-inputs-odds)
 }
 
 :-ms-input-placeholder {  /* IE */
     text-transform: none;
+    color: var(--foreground-inputs-odds)
 }
 
 .campeonato-header .column-left, .column-left {
