@@ -49,7 +49,7 @@
 .regiao-nome {
     align-self: center;
     margin-left: 5px;
-    white-space: break-spaces;
+    white-space: normal;
 }
 
 .sidebar-nav li a:hover {

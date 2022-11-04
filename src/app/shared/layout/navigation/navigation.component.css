@@ -17,6 +17,8 @@
 }
 
 #sidebar-wrapper.collapsed:hover ::ng-deep .collapsed .regiao-nome {
+    white-space: normal;
+    width: 270px;
     display: block;
 }
 
