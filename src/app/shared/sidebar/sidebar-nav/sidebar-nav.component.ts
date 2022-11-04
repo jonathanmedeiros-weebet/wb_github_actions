@@ -34,6 +34,17 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     subCartao = false;
     subPerfil = false;
 
+    iconesGenericos = {
+        'futsal': 'wbicon icon-futsal',
+        'volei': 'wbicon icon-volei',
+        'basquete': 'wbicon icon-basquete',
+        'combate': 'wbicon icon-luta',
+        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
+        'futebol-americano': 'wbicon icon-futebol-americano',
+        'esports': 'wbicon icon-e-sports',
+        'tenis': 'wbicon icon-tenis'
+    };
+
     constructor(
         private router: Router,
         private fb: FormBuilder,
@@ -52,18 +63,18 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.router.url == '/cambistas/cartoes' || this.router.url == '/cambistas/solicitacoes-saque') {
+        if  (this.router.url == '/cambistas/cartoes' || this.router.url == '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
         }
 
-        if(this.router.url == '/clientes/perfil' || this.router.url == '/clientes/perfil-pix' || this.router.url == '/alterar-senha') {
+        if (this.router.url == '/clientes/perfil' || this.router.url == '/clientes/perfil-pix' || this.router.url == '/alterar-senha') {
             this.subPerfil = true;
         }
 
         this.auth.logado
         .subscribe(
             logado => {
-                if(logado) {
+                if (logado) {
                     this.auth.cliente
                         .subscribe(
                             isCliente => {

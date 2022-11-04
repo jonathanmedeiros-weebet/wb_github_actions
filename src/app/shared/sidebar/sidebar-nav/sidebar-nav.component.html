@@ -73,7 +73,7 @@
             <li class="campeonato" *ngFor="let campeonato of itens"
                 (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                 <a>
-                    <i class="fa fa-certificate icone-generico"></i>
+                    <i [ngClass]="[iconesGenericos[esporte], 'icone-generico']"></i>
                     <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{campeonato.nome}}</span>
                 </a>
             </li>
