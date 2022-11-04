@@ -3,7 +3,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { JogoService, BilheteEsportivoService, HelperService } from 'src/app/services';
-import { RegioesDestaqueService } from "../../shared/services/regioes-destaque.service";
+import { RegioesDestaqueService } from '../../shared/services/regioes-destaque.service';
 
 @Component({
     selector: 'app-destaques',
