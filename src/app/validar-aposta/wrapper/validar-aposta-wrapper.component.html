@@ -10,14 +10,16 @@
         <div class="content-body">
             <div class="content">
                 <div class="">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
-                        <div class="form-group">
-                            <input type="number" placeholder="Código da pré-aposta"
-                                   class="inverted-out form-control" formControlName="codigo" autocomplete="off"
-                                   [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
-                            <app-error-msg style="margin-left: 5px;" [control]="form.get('codigo')"></app-error-msg>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
+                        <div class="d-flex flex-row">
+                            <div class="form-group">
+                                <input type="number" placeholder="Código da pré-aposta"
+                                       class="inverted-out form-control" formControlName="codigo" autocomplete="off"
+                                       [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
+                                <app-error-msg [control]="form.get('codigo')"></app-error-msg>
+                            </div>
+                            <button type="submit" class="btn btn-custom">Consultar</button>
                         </div>
-                        <button type="submit" class="btn btn-custom">Consultar</button>
                     </form>
                 </div>
 
