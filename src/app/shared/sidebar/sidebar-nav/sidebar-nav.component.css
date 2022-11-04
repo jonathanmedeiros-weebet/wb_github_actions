@@ -188,7 +188,7 @@
     flex-grow: 1;
     margin-top: 30px;
     padding-top: 10px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--foreground-sidebars);
 }
 
 .cambista-menu a {
@@ -205,7 +205,7 @@ li.router-link-active > a {
 .cambista-menu ul.menu-bottom {
     margin-top: 30px;
     padding-top: 10px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--foreground-sidebars);
 }
 
 .cambista-menu ul li i{
@@ -242,6 +242,7 @@ li.router-link-active > a {
 
 .consulta-bilhete .input-consulta button{
     background-color: var(--highlight);
+    color: var(--foreground-highlight);
     border: 0;
     border-radius: 0 5px 5px 0;
     padding: 0 10px;

@@ -673,6 +673,10 @@ button {
     height: 38px !important;
 }
 
+.form-control::placeholder {
+    color: var(--foreground-inputs-odds)
+}
+
 .btn {
     line-height: 27px;
     padding-left: 20px;

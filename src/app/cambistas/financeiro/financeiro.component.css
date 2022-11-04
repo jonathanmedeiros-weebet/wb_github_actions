@@ -20,24 +20,25 @@
 .info-resultado {
     margin: 20px 0 32px;
     font-size: 14px;
-    color: #fff;
+    color: var(--foreground);
     font-weight: 400;
 }
 
 
 .table {
-   color: #fff;
+   color: var(--foreground);
 }
 
 .table thead th {
-    background-color: #0A0A0A;
+    background-color: var(--game);
+    color: var(--foreground-game);
     border-top: 0;
-    border-bottom: 1px solid #0A0A0A;
+    border-bottom: 1px solid var(--game);
     padding: 15px 10px;
 }
 
 .table thead th:first-child {
-    border-left: 10px solid #0A0A0A;
+    border-left: 10px solid var(--game);
 }
 
 .table .right {
@@ -46,7 +47,7 @@
 
 .table tbody td {
     border-top: 0;
-    border-bottom: 1px solid #0A0A0A;
+    border-bottom: 1px solid var(--game);
 }
 
 .table td.no-border{
@@ -63,30 +64,6 @@
 
 .table tbody tr.red td:first-child {
     border-left: 10px solid #ED4C5C;
-}
-
-.tabs {
-    border-bottom: 2px solid #0A0A0A;
-    margin-bottom: 30px;
-}
-
-.tabs a {
-    font-size: 14px;
-    color: #fff;
-    text-decoration: none;
-    display: inline-block;
-    padding: 15px 30px;
-
-    cursor: pointer;
-    margin-bottom: -2px;
-}
-
-.tabs a:hover {
-    color: #35CC95;
-}
-
-.tabs a.active {
-    border-bottom: 2px solid #35CC95;
 }
 
 .btnClose {

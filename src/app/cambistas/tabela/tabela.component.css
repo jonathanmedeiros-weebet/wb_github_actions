@@ -31,6 +31,7 @@
     position: absolute;
     top: 14px;
     left: 20px;
+    color: var(--foreground-inputs-odds);
 }
 
 .search-input input {
