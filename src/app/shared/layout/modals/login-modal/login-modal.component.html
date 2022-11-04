@@ -1,12 +1,12 @@
 <div class="modal-header">
-    <img src="/assets/images/logo-weebet.svg" alt="">
+    <img class="logo" [src]="LOGO" alt="">
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <img src="/assets/images/close.svg" alt="fechar" width="15">
     </a>
 </div>
 <div class="modal-body">
     <div class="modal-body-content">
-        <img class="logo-mobile" src="/assets/images/logo-weebet.svg" alt="">
+        <img class="logo-mobile" [src]="LOGO" alt="">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
             <div class="form-group mb-4">
                 <div class="input-md">
