@@ -200,7 +200,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     detectScrollOddsWidth() {
         this.cd.detectChanges();
 
-        this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 95 : this.qtdOddsPrincipais * 150;
+        this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 100 : this.qtdOddsPrincipais * 150;
 
         const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
         if (this.mobileScreen) {
