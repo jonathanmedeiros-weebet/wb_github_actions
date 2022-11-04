@@ -40,7 +40,7 @@
         </div>
 
         <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
-            <div class="destaques-regiao" *ngIf="regioesDestaque && !mobileScreen">
+            <div class="destaques-regiao" *ngIf="regioesDestaque">
                 <span class="group" *ngIf="!collapsed">Destaques</span>
                 <li *ngFor="let regiao of regioesDestaque"
                     (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
