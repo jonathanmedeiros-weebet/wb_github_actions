@@ -1589,6 +1589,14 @@ input[type=number]::-webkit-outer-spin-button {
     width: 150px;
 }
 
+.modal-h-350 .modal-body {
+    height: 350px;
+}
+
+.modal-500 .modal-dialog {
+    max-width: 500px;
+}
+
 .modal-600 .modal-dialog {
     max-width: 600px;
 }

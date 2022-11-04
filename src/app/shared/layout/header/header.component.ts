@@ -230,7 +230,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         } else {
             options = {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-600',
+                windowClass: 'modal-600 modal-h-350',
                 centered: true,
             };
         }

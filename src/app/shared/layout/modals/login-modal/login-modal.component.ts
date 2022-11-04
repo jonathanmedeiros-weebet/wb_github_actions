@@ -11,6 +11,7 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
+import {config} from '../../../config';
 
 @Component({
     selector: 'app-login-modal',
@@ -27,6 +28,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     mostrarSenha = false;
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,

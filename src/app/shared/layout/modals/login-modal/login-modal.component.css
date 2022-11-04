@@ -18,6 +18,11 @@
     padding: 40px 130px 15px;
 }
 
+.logo {
+    max-width: 175px;
+    max-height: 140px;
+}
+
 .logo-mobile {
     display: none;
 }
@@ -36,6 +41,7 @@ button {
 
 .registrar {
     font-size: 12px;
+    margin-top: 45px;
     margin-bottom: 30px;
 }
 
@@ -53,7 +59,6 @@ button {
 }
 
 @media only screen and (max-width: 1024px) {
-
     .logo-mobile {
         display: block;
         width: 180px;
