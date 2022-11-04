@@ -147,7 +147,7 @@
 
 .titulo {
     padding: 10px 0;
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -195,7 +195,7 @@
 .pre-bilhete .valor,
 .pre-bilhete .possivel-ganho,
 .pre-bilhete .cotacao {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-weight: bolder;
 }
 

@@ -308,7 +308,7 @@ game {
 
 .titulo {
     padding: 10px 0;
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -325,7 +325,7 @@ game {
 }
 
 .acoes-bilhete a {
-    color: var(--foreground-header);
+    color: var(--foreground-sidebars);
     height: 15px;
     float: right;
     text-decoration: none;
@@ -339,7 +339,8 @@ game {
 }
 
 #nenhum-jogo {
-    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     text-align: left;
     border-radius: 5px;
     padding: 8px;
@@ -368,7 +369,7 @@ game {
 }
 
 .div-jogos-selecionados h3 {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
 }
 
 .div-jogos-selecionados h3 {
@@ -1310,6 +1311,12 @@ input.inverted-out:disabled {
     color: #646464;
 }
 
+input.inverted-out::placeholder,
+input.inverted-out::-moz-placeholder,
+input.inverted-out::-webkit-input-placeholder {
+    color: var(--foreground-inputs-odds) !important;
+}
+
 /* Custom Checkbox */
 
 .hide {
@@ -1619,7 +1626,7 @@ input[type=number]::-webkit-outer-spin-button {
     top: calc(50% - 10px);
     left: 10px;
     padding: 0 5px;
-    color: var(--foreground);
+    color: var(--foreground-inputs-odds);
 
     transition: top .3s;
     cursor: text;

@@ -16,7 +16,7 @@
 
 .titulo {
     padding: 10px 0;
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -33,7 +33,7 @@
 }
 
 .acoes-bilhete a {
-    color: var(--foreground-header);
+    color: var(--foreground-sidebars);
     height: 15px;
     float: right;
     text-decoration: none;
@@ -47,7 +47,8 @@
 }
 
 #nenhum-jogo {
-    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     text-align: left;
     border-radius: 5px;
     padding: 8px;
@@ -87,7 +88,7 @@
 .pre-bilhete .valor,
 .pre-bilhete .possivel-ganho,
 .pre-bilhete .cotacao {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
     font-weight: bolder;
 }
 
@@ -116,7 +117,7 @@
 
 .desafio-selecionado .horario,
 .desafio-selecionado .odd-bilhete .valor {
-    color: var(--foreground-highlight);
+    color: var(--foreground-sidebars);
 }
 
 .desafio-selecionado .odd-bilhete {
@@ -148,8 +149,8 @@
 }
 
 #aposta-deslogado .active {
-    background: var(--odds);
-    color: var(--foreground-odds);
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
 }
 
 #aposta-deslogado .aposta-item {

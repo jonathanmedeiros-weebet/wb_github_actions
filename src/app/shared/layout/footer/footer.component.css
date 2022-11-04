@@ -44,7 +44,7 @@ footer {
 
 .links a {
     font-weight: 400;
-    color: #35CD96;
+    color: var(--highlight);
     text-decoration: none;
 }
 
