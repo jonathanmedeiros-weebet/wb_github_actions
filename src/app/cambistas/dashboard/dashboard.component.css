@@ -77,7 +77,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #0A0A0A;
+    background: var(--game);
+    color: var(--foreground-game);
     padding: 20px 35px;
     border-radius: 12px;
     flex: 1;
@@ -108,7 +109,8 @@
 }
 
 .card-dashboard {
-    background: #0A0A0A;
+    background: var(--game);
+    color: var(--foreground-game);
     padding: 15px 20px;
     height: 440px;
 
@@ -129,7 +131,7 @@
 .apostas-realizadas a {
     align-self: flex-end;
 
-    color: #35CC95;
+    color: var(--highlight);
     font-size: 12px;
     margin-top: 20px;
 }

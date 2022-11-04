@@ -36,7 +36,8 @@
 }
 
 .box-chave {
-    background: #181818;
+    background: var(--game);
+    color: var(--foreground-game);
     padding: 15px;
     border-radius: 4px;
     margin-bottom: 20px;

@@ -18,24 +18,25 @@
 .info-resultado {
     margin: 20px 0 32px;
     font-size: 14px;
-    color: #fff;
+    color: var(--foreground);
     font-weight: 400;
 }
 
 
 .table {
-   color: #fff;
+   color: var(--foreground);
 }
 
 .table thead th {
-    background-color: #0A0A0A;
+    background-color: var(--game);
+    color: var(--foreground-game);
     border-top: 0;
-    border-bottom: 1px solid #0A0A0A;
+    border-bottom: 1px solid var(--game);
     padding: 15px 10px;
 }
 
 .table thead th:first-child {
-    border-left: 10px solid #0A0A0A;
+    border-left: 10px solid var(--game);
 }
 
 .table .right {
@@ -44,7 +45,7 @@
 
 .table tbody td {
     border-top: 0;
-    border-bottom: 1px solid #0A0A0A;
+    border-bottom: 1px solid var(--game);
 }
 
 .table td.no-border{
@@ -104,13 +105,13 @@
 }
 
 .tabs {
-    border-bottom: 2px solid #0A0A0A;
+    border-bottom: 2px solid var(--foreground);
     margin-bottom: 30px;
 }
 
 .tabs a {
     font-size: 14px;
-    color: #fff;
+    color: var(--foreground);
     text-decoration: none;
     display: inline-block;
     padding: 15px 30px;
@@ -120,11 +121,12 @@
 }
 
 .tabs a:hover {
-    color: #35CC95;
+    color: var(--highlight);
 }
 
 .tabs a.active {
-    border-bottom: 2px solid #35CC95;
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
 }
 
 .acoes-aposta {
@@ -141,9 +143,9 @@
     height: 24px;
     width: 24px;
 
-    background: #1f1f1f;
+    background: var(--highlight);
     border-radius: 4px;
-    color: #fff;
+    color: var(--foreground-highlight);
 
     text-decoration: none;
     cursor: pointer;

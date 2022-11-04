@@ -4,7 +4,7 @@
 
 .table-apuracao {
     /*width: 100%;*/
-    color: #FFFFFF;
+    color: var(--background);
     border-radius: 4px;
     border-collapse: collapse;
     box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.2);
@@ -82,14 +82,14 @@ ul, li {
 }
 
 .tabela-apuracao .linha-apuracao {
-    background-color: #010101;
+    background-color: var(--game);
     border-radius: 3px;
     margin-bottom: 1px;
     padding: 1px;
 }
 
 .linha-apuracao ul {
-    background-color: #181818;
+    background-color: var(--game);
     padding: 15px 20px 15px 20px;
 }
 
@@ -236,7 +236,7 @@ label {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #fff;
+    color: var(--highlight);
     cursor: pointer;
 }
 

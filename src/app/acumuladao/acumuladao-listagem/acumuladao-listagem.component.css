@@ -40,7 +40,7 @@
 }
 
 .acumuladao .nome{
-    color: var(--foreground-header);
+    color: var(--foreground-game);
     font-weight: bolder;
 }
 
