@@ -560,10 +560,12 @@ body .change-theme {
         flex-direction: column;
         gap: 24px;
         margin: 24px 0;
+        color: var(--foreground-sidebars);
+        background-color: var(--sidebars);
     }
 
     .dropdown-menu .nav hr {
-        border-bottom: 1px solid #181818;
+        border-bottom: 1px solid var(--foreground-sidebars);
         margin: 0 12px;
     }
 
@@ -575,7 +577,7 @@ body .change-theme {
     .dropdown-menu .nav a {
         margin: 0 25px;
         font-size: 16px;
-        color: #fff;
+        color: var(--foreground-sidebars);
 
         display: flex;
         gap: 15px;

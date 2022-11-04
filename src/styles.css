@@ -452,6 +452,7 @@ game {
     text-align: center;
     font-style: normal;
     margin-left: 5px;
+    color: var(--foreground-inputs-odds);
 }
 
 .input-icon > input {
@@ -1693,7 +1694,7 @@ input[type=number]::-webkit-outer-spin-button {
     .indentificacao {
         height: auto;
         flex-wrap: wrap;
-        background: #0a0a0a;
+        background: var(--game);
     }
 
     .indentificacao a.scroll-button {

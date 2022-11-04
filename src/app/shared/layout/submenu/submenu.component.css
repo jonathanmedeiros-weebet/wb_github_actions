@@ -130,7 +130,7 @@
         left: 0;
         width: auto;
 
-        color: var(--sub-nav);
+        color: var(--foreground-highlight);
         background-color: var(--highlight);
     }
 }
