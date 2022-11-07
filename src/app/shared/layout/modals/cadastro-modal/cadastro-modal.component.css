@@ -17,6 +17,11 @@ h3 {
     padding: 40px 60px;
 }
 
+.logo {
+    max-width: 175px;
+    max-height: 140px;
+}
+
 button {
     /*margin-top: 30px;*/
     margin: 30px auto 0 auto;

@@ -102,12 +102,12 @@
         <li class="supresinha" *ngFor="let tipoAposta of itens"
             (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
             <a *ngIf="contexto == 'seninha'">
-                <i class="fa fa-certificate icone-generico"></i>
+                <i class="fa-solid fa-clover icone-generico"></i>
                 <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
                             ( {{tipoAposta.cotacao6 | currency}} )</span>
             </a>
             <a *ngIf="contexto == 'quininha'">
-                <i class="fa fa-certificate icone-generico"></i>
+                <i class="fa-solid fa-clover icone-generico"></i>
                 <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} Números
                             ( {{tipoAposta.cotacao5 | currency}} )</span>
             </a>

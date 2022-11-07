@@ -209,7 +209,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                             this.cotacoesFaltando[jogo.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, jogo.event_id, jogo.favorito, false),
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal.valor,
+                                    chave,
+                                    jogo.event_id, jogo.favorito,
+                                    false),
                                 label: this.helperService.apostaTipoLabel(chave, 'sigla')
                             });
                         }
@@ -228,7 +232,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     limparPesquisa() {
-        this.term = "";
+        this.term = '';
     }
 
     mudarData(dia) {
@@ -268,8 +272,13 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             splice = splice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
-                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            jogo.favorito,
+                            false);
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
                     });
                 });
 

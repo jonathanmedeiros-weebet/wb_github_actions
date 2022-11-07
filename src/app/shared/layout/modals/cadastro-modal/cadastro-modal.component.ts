@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ClienteService } from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
@@ -12,6 +11,7 @@ import { FormValidations, PasswordValidation } from 'src/app/shared/utils';
 
 import * as moment from 'moment';
 import { Pagina } from 'src/app/models';
+import {config} from '../../../config';
 
 
 @Component({
@@ -31,6 +31,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     isLoggedIn;
     mostrarSenha;
     mostrarConfirmarSenha;
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,
