@@ -29,7 +29,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     jogosBloqueados;
     unsub$ = new Subject();
     mobileScreen = false;
-    term = "";
+    term = '';
     itens;
 
     constructor(
@@ -143,6 +143,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe((jogo: any) => {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
+
+                jogo.cotacoes.map(cotacao => {
+                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    return cotacao;
+                });
 
                 if (!campeonato) {
                     campeonato = {
