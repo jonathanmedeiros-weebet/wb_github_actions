@@ -698,7 +698,7 @@ button {
 }
 
 .modal-header {
-    border-bottom: 1px solid #3b3b3b;
+    border-bottom: 1px solid var(--foreground);
     padding: 20px 35px;
     align-items: center;
 }

@@ -532,7 +532,7 @@ body .change-theme {
 }
 
 .modal-header {
-    border-bottom-color: #3b3b3b;
+    border-bottom-color: var(--foreground);
     padding: 20px 35px;
 }
 
