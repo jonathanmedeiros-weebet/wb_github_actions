@@ -17,6 +17,10 @@ h3 {
     padding: 40px 60px;
 }
 
+.logo {
+    max-width: 175px;
+    max-height: 140px;
+}
 
 table {
     color: var(--foreground);
