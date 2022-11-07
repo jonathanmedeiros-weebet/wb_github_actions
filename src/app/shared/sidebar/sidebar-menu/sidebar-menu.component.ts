@@ -23,7 +23,7 @@ export class SidebarMenuComponent implements OnInit {
     isLoggedIn;
     isCliente;
     isMobileScreen;
-    isAppMobile
+    isAppMobile;
     modalRef;
     trevoOne = false;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();

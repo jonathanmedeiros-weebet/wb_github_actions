@@ -1,12 +1,17 @@
-.casino-content{
+.casino-content {
     flex-grow: 1;
     overflow: scroll;
     background-color: var(--background);
 }
 
 @media only screen and (max-width: 1024px) {
-    .casino-content{
-        height: calc(100vh - 82px);
+    .casino-content {
+        height: calc(100vh - 161px);
+        padding: 0;
+    }
+
+    .casino-content.virtual {
+        height: calc(100vh - 121px);
         padding: 0;
     }
 }
@@ -17,7 +22,7 @@
         /*padding: 10px 10px 10px 10px;*/
     }
 
-    .cassino-content.virtual {
+    .casino-content.virtual {
         height: calc(100vh - 92px);
     }
 }

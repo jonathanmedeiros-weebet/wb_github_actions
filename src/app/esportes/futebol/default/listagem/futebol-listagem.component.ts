@@ -69,19 +69,19 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     term = '';
 
     nomesCotacoes = [
-        "",
-        "Casa",
-        "Empate",
-        "Fora",
-        "C+E",
-        "F+E",
-        "C+F",
-        "Amb",
-        "nAmb",
-        "+0.5G",
-        "-0.5G",
-        "+1.5G",
-        "+2.5G",
+        '',
+        'Casa',
+        'Empate',
+        'Fora',
+        'C+E',
+        'F+E',
+        'C+F',
+        'Amb',
+        'nAmb',
+        '+0.5G',
+        '-0.5G',
+        '+1.5G',
+        '+2.5G',
     ];
 
     jogosDestaque = [];
@@ -110,7 +110,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     ngAfterViewInit(): void {
-
         this.oddsNavs.changes.subscribe((navs) => {
             this.navs = navs.toArray();
         });
@@ -232,11 +231,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
             this.jogoService.getJogosDestaque()
             .subscribe(jogos => {
-                let jogosDestaquesIds = jogos.map(jogo => jogo.fi);
+                const jogosDestaquesIds = jogos.map(jogo => jogo.fi);
                 let jogosDestaques = [];
 
                 this.camps.forEach(camp => {
-                    let jogosSele = camp.jogos.filter(jogo => {
+                    const jogosSele = camp.jogos.filter(jogo => {
                         return jogosDestaquesIds.includes(jogo._id + '');
                     });
 
@@ -271,7 +270,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     limparPesquisa() {
-        this.term = "";
+        this.term = '';
     }
 
     exibirMais() {
@@ -331,7 +330,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     definirAltura() {
-        const headerHeight = this.mobileScreen ? 145 : 132;
+        const headerHeight = this.mobileScreen ? 161 : 132;
         const altura = window.innerHeight - headerHeight;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
@@ -479,7 +478,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     // Exibindo todas as cotações daquele jogo selecionado
     maisCotacoes(jogoId) {
-        console.log("NORMAL", jogoId);
+        console.log('NORMAL', jogoId);
         this.jogoIdAtual = jogoId;
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);

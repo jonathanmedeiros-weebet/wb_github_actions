@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
@@ -35,7 +35,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         public location: Location,
         private router: Router
     ) {
-        console.log('CONSTRUCT');
         router.events.subscribe(val => {
 
             const larguras = {

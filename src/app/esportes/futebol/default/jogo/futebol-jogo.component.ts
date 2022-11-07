@@ -75,7 +75,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
-            const altura = window.innerHeight - 145;
+            const altura = window.innerHeight - 161;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
@@ -124,7 +124,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
-        this.oddsAberto = []
+        this.oddsAberto = [];
 
         if (this.jogoId) {
             this.showLoadingIndicator = true;
