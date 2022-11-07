@@ -7,6 +7,8 @@ import { AuthService, MessageService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Router } from '@angular/router';
 
+import {config} from '../../../config';
+
 @Component({
     selector: 'app-esqueceu-senha-modal',
     templateUrl: './esqueceu-senha-modal.component.html',
@@ -16,6 +18,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
     appMobile;
     unsub$ = new Subject();
     submitting = false;
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,

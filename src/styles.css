@@ -111,6 +111,11 @@ game {
     background-position: center center;
 }
 
+.logo-modal {
+    max-width: 175px;
+    max-height: 140px;
+}
+
 #auth-layout #login .login-box {
     display: flex;
     justify-content: center

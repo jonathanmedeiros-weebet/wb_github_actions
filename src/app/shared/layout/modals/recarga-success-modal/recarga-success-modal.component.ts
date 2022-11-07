@@ -15,6 +15,7 @@ export class RecargaSuccessModalComponent implements OnInit {
     @Input() recarga;
     BANCA_NOME;
     appMobile;
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,
