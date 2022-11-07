@@ -135,21 +135,23 @@
         flex: 1;
     }
 
-
     .odds {
         height: auto;
-        flex-direction: column;
+        padding: 7.5px;
     }
 
     .odds .odd{
-        width: 100%;
-        margin-left: 0;
+        width: 50%;
         max-width: none;
+        height: 45px;
+        margin-left: 5px;
+    }
+
+    .odds .odd:first-of-type {
+        margin-left: 0;
     }
 
     .odds .odd .inner-odd {
         padding: 15px 20px;
-        flex-direction: row;
-        justify-content: space-between;
     }
 }
