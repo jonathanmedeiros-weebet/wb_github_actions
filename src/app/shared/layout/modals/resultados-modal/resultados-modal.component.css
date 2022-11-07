@@ -9,7 +9,7 @@ h3 {
   }
 
 .modal-header {
-    border-bottom-color: #3b3b3b;
+    border-bottom-color: var(--foreground);
     padding: 20px 35px;
 }
 
@@ -19,11 +19,12 @@ h3 {
 
 
 table {
-    color: #fff;
+    color: var(--foreground);
 }
 
 th {
-    background-color: #0A0A0A;
+    background-color: var(--game);
+    color: var(--foreground-game);
     font-size: 14px;
     border: 0;
     padding: 10px 20px;
@@ -31,7 +32,7 @@ th {
 
 td {
     border-bottom: 1px solid;
-    border-color: #0A0A0A;
+    border-color: var(--game);
     padding: 10px 20px;
 }
 

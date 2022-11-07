@@ -186,7 +186,7 @@ h5 {
  @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 10px 10px 10px 10px;
-        background: #0a0a0a;
+        background: var(--background);
         margin-left: -5px;
     }
 
