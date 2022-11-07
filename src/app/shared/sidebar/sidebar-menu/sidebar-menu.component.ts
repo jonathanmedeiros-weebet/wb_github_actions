@@ -1,10 +1,18 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
-import {CadastroModalComponent, CartaoModalComponent, LoginModalComponent, PesquisarApostaModalComponent, PesquisarCartaoMobileModalComponent, PesquisarCartaoModalComponent, TabelaModalComponent} from '../../layout/modals';
+import {
+    CadastroModalComponent,
+    LoginModalComponent,
+    PesquisarApostaModalComponent,
+    PesquisarCartaoMobileModalComponent,
+    TabelaModalComponent
+} from '../../layout/modals';
 import {SidebarService} from '../../services/utils/sidebar.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {ResultadosModalComponent} from '../../layout/modals/resultados-modal/resultados-modal.component';
+import {config} from '../../config';
 
 @Component({
     selector: 'app-sidebar-menu',
@@ -14,8 +22,11 @@ import {Subject} from 'rxjs';
 export class SidebarMenuComponent implements OnInit {
     isLoggedIn;
     isCliente;
-    isAppMobile;
+    isMobileScreen;
+    isAppMobile
     modalRef;
+    trevoOne = false;
+    appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     unsub$ = new Subject();
 
     constructor(
@@ -27,10 +38,11 @@ export class SidebarMenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (window.innerWidth > 1025) {
-            this.isAppMobile = false;
-        } else {
-            this.isAppMobile = true;
+        this.isAppMobile = this.auth.isAppMobile();
+        this.isMobileScreen = window.innerWidth < 1025;
+
+        if (location.host.search(/trevoone/) >= 0) {
+            this.trevoOne = true;
         }
 
         this.auth.logado
@@ -76,16 +88,16 @@ export class SidebarMenuComponent implements OnInit {
 
         let options = {};
 
-        if (this.isAppMobile) {
+        if (this.isMobileScreen) {
             options = {
                 windowClass: 'modal-fullscreen',
-            }
+            };
         } else {
             options = {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-600',
                 centered: true,
-            }
+            };
         }
 
         this.modalRef = this.modalService.open(
@@ -124,5 +136,12 @@ export class SidebarMenuComponent implements OnInit {
                 centered: true,
             }
         );
+    }
+
+    abrirResultados() {
+        this.modalService.open(ResultadosModalComponent, {
+            centered: true,
+            size: 'xl',
+        });
     }
 }

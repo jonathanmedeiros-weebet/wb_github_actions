@@ -1,5 +1,5 @@
 <div class="header-menu">
-    <label for="">Mais Opções</label>
+    <label>Mais Opções</label>
     <div class="options">
         <a (click)="pesquisarTicket()">
             <i class="fa fa-ticket"></i>
@@ -9,6 +9,27 @@
         <a (click)="pesquisarCartao()">
             <i class="fa fa-credit-card"></i>
             Cartões
+        </a>
+
+        <a (click)="abrirResultados()" *ngIf="!isCliente">
+            <i class="fa-solid fa-square-poll-vertical"></i>
+            Resultados
+        </a>
+
+        <a (click)="abrirModalTabela()" *ngIf="!isCliente">
+            <i class="fa fa-print"></i>
+            Tabela
+        </a>
+
+        <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!trevoOne && !isAppMobile">
+            <i class="fa fa-download"></i>
+            Download app
+        </a>
+
+        <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la"
+           *ngIf="!isAppMobile && trevoOne">
+            <i class="fa fa-download"></i>
+            Download app
         </a>
     </div>
 </div>
