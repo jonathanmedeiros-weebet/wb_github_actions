@@ -11,6 +11,7 @@ import {Usuario} from '../../../models/usuario';
 
 import * as moment from 'moment';
 import { Campeonato } from 'src/app/models';
+import {config} from '../../../config';
 
 @Component({
     selector: 'app-resultados-modal',
@@ -43,6 +44,8 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
 
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
+
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,
