@@ -43,7 +43,7 @@ input[type="checkbox"] {
     width: 16px;
     height: 16px;
     color: black;
-    border: 1px solid white;
+    border: 1px solid var(--highlight);
     border-radius: 4px;
     appearance: none;
     outline: 0;
@@ -59,7 +59,7 @@ input[type="checkbox"]:before {
     left: 2px;
     width: 10px;
     height: 10px;
-    background: #fff;
+    background: var(--highlight);
     border-radius: 4px;
     opacity: 0;
 }
@@ -98,7 +98,7 @@ ul i {
     position: absolute;
     height: calc(100% - 10px);
     content: "";
-    border: 0.5px dashed #fff;
+    border: 0.5px dashed var(--highlight);
 }
 
 ul li ul {
@@ -117,7 +117,7 @@ ul li ul li:before {
     content: "";
     display: block;
     margin-top: 10px;
-    border-top: 0.5px dashed #fff;
+    border-top: 0.5px dashed var(--highlight);
 }
 
 

@@ -67,10 +67,10 @@
 }
 
 .header-menu .options a {
-    color: #fff;
     border-radius: 10px;
-    border: 1px solid #35CC95;
-    background-color: #181818;
+    border: 1px solid var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;

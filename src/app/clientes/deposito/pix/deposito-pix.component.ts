@@ -16,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     <div class="modal-body">
         <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Depósito PIX</h4>
         <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <img src="/assets/images/close.svg" alt="fechar">
+            <i class="fa fa-times"></i>
         </a>
 
         <p class="info text-center">Aponte a câmera do seu celular para realizar o depósito ou copie e compartilhe o QR Code</p>
