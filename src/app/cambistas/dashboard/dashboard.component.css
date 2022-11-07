@@ -93,10 +93,14 @@
     display: flex;
     width: 42px;
     height: 42px;
-    background: #181818;
+    background: var(--highlight);
     align-items: center;
     justify-content: center;
     border-radius: 6px;
+}
+
+.counts .count i svg{
+    fill: var(--foreground-highlight);
 }
 
 .counts .count .count-value .value {
@@ -185,11 +189,16 @@
     justify-content: center;
     align-items: center;
 
-    background: #181818;
+    background: var(--highlight);
     border-radius: 4px;
 
     height: 38px;
     width: 38px;
+}
+
+.apostas-realizadas .apostas li .info i {
+    fill: var(--foreground-highlight);
+    stroke: var(--foreground-highlight);
 }
 
 .apostas-realizadas .apostas li .info .info-texto {

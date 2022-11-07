@@ -1,6 +1,7 @@
 #cupom {
     /* width: 19.27em; */
-    background: #181818;
+    background: var(--background);
+    color: var(--foreground);
     /* margin: 2em auto; */
     font-size: 12px;
     border-radius: 10px;
@@ -135,7 +136,7 @@ hr {
 
     hr {
         margin: 15px -10px;
-        border: 1px dashed #35CC95;
+        border: 1px dashed var(--foreground);
     }
 
     h1.numero {
