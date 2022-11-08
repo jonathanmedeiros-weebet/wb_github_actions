@@ -203,7 +203,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 15px 0;
-    border-bottom: 1px dashed #35CC95;
+    border-bottom: 1px dashed var(--highlight);
     padding: 5px 5px 20px;
 }
 
@@ -212,7 +212,7 @@
 }
 
 #aposta-deslogado .remover {
-    color: #35CC95;
+    color: var(--highlight);
     font-size: 14px;
     cursor: pointer;
 }
@@ -245,7 +245,7 @@
 .mensagem-mudanca {
     box-sizing: border-box;
     border-radius: 0.25rem;
-    background-color: #fff;
+    background-color: var(--game);
     margin-bottom: 15px;
     padding: 15px;
 }
@@ -345,7 +345,8 @@ h4 {
 .tabs {
     display: flex;
     border: 0;
-    background: #181818;
+    background: var(--game);
+    color: var(--foreground-game);
     border-radius: 4px;
     padding: 2px;
 }
@@ -355,8 +356,8 @@ h4 {
     padding: 10px;
     text-align: center;
     flex: 1;
-    background: #181818;
-    color: #fff;
+    background: var(--game);
+    color: var(--foreground-game);
     cursor: pointer;
     text-decoration: none;
 
@@ -365,8 +366,8 @@ h4 {
 #aposta-deslogado .tabs .tab.active,
 .tabs .tab.active {
     border: 0;
-    background: #35CC95;
-    color: #181818;
+    background: var(--highlight);
+    color: var(--foreground-highlight);
     border-radius: 4px;
 }
 
@@ -416,7 +417,8 @@ h4 {
     .tabs {
         display: flex;
         border: 0;
-        background: #0a0a0a;
+        background: var(--game);
+        color: var(--foreground-game);
         border-radius: 4px;
     }
 
@@ -424,14 +426,15 @@ h4 {
         padding: 10px;
         text-align: center;
         flex: 1;
-        background: #0a0a0a;
+        background: var(--game);
+        color: var(--foreground-game);
     }
 
     #aposta-deslogado .tabs .tab.active,
     .tabs .tab.active {
         border: 0;
-        background: #35CC95;
-        color: #181818;
+        background: var(--highlight);
+        color: var(--foreground-highlight);
         border-radius: 4px;
     }
 

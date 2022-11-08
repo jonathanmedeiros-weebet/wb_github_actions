@@ -292,7 +292,7 @@
     justify-content: space-between;
     margin: 15px 0;
     padding: 5px 0 15px;
-    border-bottom: 1px dashed #35CC95;
+    border-bottom: 1px dashed var(--highlight);
 }
 
 #aposta-deslogado .evento:last-child {
@@ -317,7 +317,8 @@
 .tabs {
     display: flex;
     border: 0;
-    background: #181818;
+    background: var(--game);
+    color: var(--foreground-game);
     border-radius: 4px;
     padding: 2px;
 }
@@ -327,8 +328,8 @@
     border-radius: 4px;
     text-align: center;
     flex: 1;
-    background: #181818;
-    color: #fff;
+    background: var(--game);
+    color: var(--foreground-game);
     cursor: pointer;
     text-decoration: none;
 
@@ -337,8 +338,8 @@
 #aposta-deslogado .tabs .active,
 .tabs .active {
     border: 0;
-    background: #35CC95;
-    color: #181818;
+    background: var(--highlight);
+    color: var(--foreground-highlight);
     border-radius: 4px;
 }
 
