@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -8,22 +8,29 @@ import {AuthService, MessageService, ParametrosLocaisService, PrintService, Side
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {Router} from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthDoisFatoresModalComponent, CadastroModalComponent, CartaoCadastroModalComponent, ClienteApostasModalComponent, ClientePerfilModalComponent, ClientePixModalComponent, ClienteSenhaModalComponent, LoginModalComponent, PesquisarCartaoMobileModalComponent, RecargaCartaoModalComponent, TabelaModalComponent } from '../modals';
-import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
-import { SolicitacaoSaqueClienteComponent } from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
-import { ApostasClienteComponent } from 'src/app/clientes/apostas-cliente/apostas-cliente.component';
-import { DashboardComponent } from 'src/app/cambistas/dashboard/dashboard.component';
-import { FinanceiroComponent } from 'src/app/cambistas/financeiro/financeiro.component';
-import { CartaoListagemComponent } from 'src/app/cartao/cartao-listagem/cartao-listagem.component';
-import { CartaoSolicitacoesSaqueComponent } from 'src/app/cartao/solicitacoes-saque/cartao-solicitacoes-saque.component';
-import { ValidarApostaModule } from 'src/app/validar-aposta/validar-aposta.module';
-import { ApuracaoComponent } from 'src/app/cambistas/apuracao/apuracao.component';
-import { ValidarApostaWrapperComponent } from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
-import { TabelaComponent } from 'src/app/cambistas/tabela/tabela.component';
-import { SolicitacaoSaqueComponent } from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
-import { CartaoComponent } from 'src/app/cambistas/cartao/cartao.component';
-import { ApostaComponent } from 'src/app/cambistas/aposta/aposta.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {
+    AuthDoisFatoresModalComponent,
+    CadastroModalComponent,
+    CartaoCadastroModalComponent,
+    ClienteApostasModalComponent,
+    ClientePerfilModalComponent,
+    ClientePixModalComponent,
+    ClienteSenhaModalComponent,
+    LoginModalComponent,
+    PesquisarCartaoMobileModalComponent,
+    RecargaCartaoModalComponent
+} from '../modals';
+import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
+import {SolicitacaoSaqueClienteComponent} from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
+import {DashboardComponent} from 'src/app/cambistas/dashboard/dashboard.component';
+import {FinanceiroComponent} from 'src/app/cambistas/financeiro/financeiro.component';
+import {ApuracaoComponent} from 'src/app/cambistas/apuracao/apuracao.component';
+import {ValidarApostaWrapperComponent} from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
+import {TabelaComponent} from 'src/app/cambistas/tabela/tabela.component';
+import {SolicitacaoSaqueComponent} from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
+import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
+import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
 
 @Component({
     selector: 'app-header',

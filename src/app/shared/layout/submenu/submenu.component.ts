@@ -1,6 +1,6 @@
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
 @Component({
@@ -62,7 +62,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         if (window.innerWidth > 1024) {
-            this.menuWidth = window.innerWidth - 280;
+            this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
@@ -212,7 +212,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     computeResizeChanges() {
         this.cd.detectChanges();
         if (window.innerWidth > 1024) {
-            this.menuWidth = window.innerWidth - 480;
+            this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
@@ -242,7 +242,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     }
 
     onScroll(event) {
-        let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
+        const scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
 
         this.leftDisabled = scrollLeft <= 0;
 
