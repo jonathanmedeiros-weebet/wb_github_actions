@@ -25,14 +25,14 @@ h2 {
 }
 
 p {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--foreground);
     margin-bottom: 25px;
 }
 
 
 input {
-    border: 1px solid #3b3b3b;
-    color: #fff;
+    border: 1px solid var(--foreground-inputs-odds);
+    color: var(--foreground-inputs-odds);
     font-size: 14px;
 }
 
@@ -41,7 +41,7 @@ button {
 }
 
 .esqueceu-senha {
-    color: #35CC95;
+    color: var(--highlight);
     font-size: 12px;
     display: block;
     margin: 20px 0 30px;
@@ -54,7 +54,7 @@ button {
 }
 
 .registrar a {
-    color: #35CC95;
+    color: var(--highlight);
 }
 
 @media only screen and (max-width: 1024px) {

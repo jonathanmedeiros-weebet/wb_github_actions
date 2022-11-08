@@ -254,12 +254,14 @@ li.router-link-active > a {
 }
 
 .regiao > a::after {
-    content:url('/assets/images/expand.svg');
+    font-family: var(--fa-style-family, "Font Awesome 6 Free");
+    font-weight: var(--fa-style, 900);
+    content: "\f107";
     position:relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0a0a0a;
+    color: var(--foreground-sidebars);
     /* transition: all 0.5s; */
 }
 
@@ -276,7 +278,7 @@ li.router-link-active > a {
 .collapsed .destaques-regiao {
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-bottom: 2px solid #1a1a1a;
+    border-bottom: 2px solid var(--foreground-sidebars);
 }
 
 .collapsed .sub-nav-container a {
@@ -289,10 +291,10 @@ li.router-link-active > a {
 
 .search-collapsed {
     display: block;
-    color: #fff;
+    color: var(--foreground-sidebars);
     padding: 20px 0;
     text-align: center;
-    border-bottom: 2px solid #1e1e1e;
+    border-bottom: 2px solid var(--foreground-sidebars);
     margin-bottom: 20px;
     cursor: pointer;
 }

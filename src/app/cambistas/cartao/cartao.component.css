@@ -89,13 +89,13 @@
 }
 
 .tabs {
-    border-bottom: 2px solid #0A0A0A;
+    border-bottom: 2px solid var(--foreground);
     margin-bottom: 30px;
 }
 
 .tabs a {
     font-size: 14px;
-    color: #fff;
+    color: var(--foreground);
     text-decoration: none;
     display: inline-block;
     padding: 15px 30px;
@@ -105,11 +105,12 @@
 }
 
 .tabs a:hover {
-    color: #35CC95;
+    color: var(--highlight);
 }
 
 .tabs a.active {
-    border-bottom: 2px solid #35CC95;
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
 }
 
 .btnClose {

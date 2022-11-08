@@ -163,7 +163,7 @@
 }
 
 .filter .tabs {
-    background: #0A0A0A;
+    background: var(--foreground);
     border-radius: 5px;
     margin-left: 10px;
     padding: 0 10px;
@@ -175,7 +175,7 @@
 }
 
 .filter .tabs .tab {
-    color: #fff;
+    color: var(--foreground);
     display: block;
     padding: 10px 10px;
     text-decoration: none;
@@ -184,7 +184,7 @@
 }
 
 .filter .tabs .tab.active {
-    border-color: #35cc95;
+    border-color: var(--highlight);
     font-weight: 600;
 }
 

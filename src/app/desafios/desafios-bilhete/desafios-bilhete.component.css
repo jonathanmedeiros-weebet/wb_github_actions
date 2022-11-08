@@ -159,7 +159,7 @@
     justify-content: space-between;
     margin: 15px 0;
     padding: 5px 0 15px;
-    border-bottom: 1px dashed #35CC95;
+    border-bottom: 1px dashed var(--highlight);
 }
 
 #aposta-deslogado .aposta-item:last-child {
@@ -167,7 +167,7 @@
 }
 
 #aposta-deslogado .remover {
-    color: #35CC95;
+    color: var(--highlight);
     font-size: 14px;
     cursor: pointer;
 }
@@ -256,7 +256,8 @@ input {
 .tabs {
     display: flex;
     border: 0;
-    background: #181818;
+    background: var(--game);
+    color: var(--foreground-game);
     border-radius: 4px;
     padding: 2px;
 }
@@ -265,8 +266,8 @@ input {
     border-radius: 4px;
     text-align: center;
     flex: 1;
-    background: #181818;
-    color: #fff;
+    background: var(--game);
+    color: var(--foreground-game);
     cursor: pointer;
     text-decoration: none;
     height: 38px;
@@ -275,8 +276,8 @@ input {
 #aposta-deslogado .tabs .active,
 .tabs .active {
     border: 0;
-    background: #35CC95;
-    color: #181818;
+    background: var(--highlight);
+    color: var(--foreground-highlight);
     border-radius: 4px;
 }
 
