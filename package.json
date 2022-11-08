@@ -256,7 +256,10 @@
         "amesportesbets.com": "gulp amesportesbets.com",
         "narigasports.com.br": "gulp narigasports.com.br",
         "spmaster.net": "gulp spmaster.net",
-        "redeonline.bet": "gulp redeonline.bet"
+        "redeonline.bet": "gulp redeonline.bet",
+        "betmax.wee.bet": "gulp betmax.wee.bet",
+        "multbet.wee.bet": "gulp multbet.wee.bet",
+        "prowin.bet": "gulp prowin.bet"
     },
     "private": true,
     "dependencies": {

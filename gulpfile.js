@@ -2354,3 +2354,30 @@ gulp.task('redeonline.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betmax.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betmax.wee.bet",
+        banca: "BETMAX",
+        styles: "",
+    });
+});
+
+gulp.task('multbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "multbet.wee.bet",
+        banca: "MULTBET",
+        styles: "",
+    });
+});
+
+gulp.task('prowin.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "prowin.bet",
+        banca: "PROWIN",
+        styles: "",
+    });
+});
