@@ -35,8 +35,8 @@
             <i class="uil uil-ticket"></i> Bilhete
         </a>
     </div>
-    <div class="foot-button">
-        <a class="" (click)="abrirValidarAposta()" *ngIf="isLoggedIn && !isCliente">
+    <div class="foot-button" *ngIf="isLoggedIn && !isCliente">
+        <a class="" (click)="abrirValidarAposta()">
             <i class="fa-solid fa-check"></i> Validação
         </a>
     </div>
