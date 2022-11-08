@@ -6,6 +6,7 @@ import {RecuperarSenhaComponent} from './recuperar-senha/recuperar-senha.compone
 import {ResetarSenhaComponent} from './resetar-senha/resetar-senha.component';
 import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 import {ValidarEmailComponent} from './validar-email/validar-email.component';
+import {ModuloClienteGuard} from '../services';
 
 export const routes: Routes = [
     {
@@ -14,7 +15,8 @@ export const routes: Routes = [
         children: [
             {
                 path: 'cadastro',
-                component: CadastroComponent
+                component: CadastroComponent,
+                canActivate: [ModuloClienteGuard]
             },
             {
                 path: 'recuperar-senha',

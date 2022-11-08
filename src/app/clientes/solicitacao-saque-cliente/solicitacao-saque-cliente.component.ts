@@ -5,8 +5,8 @@ import { ClienteService } from '../../shared/services/clientes/cliente.service';
 import { Cliente } from '../../shared/models/clientes/cliente';
 import { MessageService } from '../../shared/services/utils/message.service';
 import { FinanceiroService } from '../../shared/services/financeiro.service';
-import { MenuFooterService } from "../../shared/services/utils/menu-footer.service";
-import { ParametrosLocaisService } from "../../shared/services/parametros-locais.service";
+import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
+import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { SidebarService, AuthService } from 'src/app/services';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
@@ -26,6 +26,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
+    apiPagamentos;
     isMobile = false;
 
     modalRef;
@@ -58,6 +59,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
         this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;
         this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
+        this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
         this.menuFooterService.setIsPagina(true);
         const user = JSON.parse(localStorage.getItem('user'));
