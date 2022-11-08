@@ -7,6 +7,8 @@ import {AuthService} from '../../services/auth/auth.service';
 import {MenuFooterService} from '../../services/utils/menu-footer.service';
 import {MessageService} from '../../services/utils/message.service';
 import {config} from '../../config';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ValidarApostaWrapperComponent} from '../../../validar-aposta/wrapper/validar-aposta-wrapper.component';
 
 @Component({
     selector: 'app-menu-footer',
@@ -33,7 +35,8 @@ export class MenuFooterComponent implements OnInit {
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
         private menuFooterService: MenuFooterService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -119,6 +122,10 @@ export class MenuFooterComponent implements OnInit {
         } else {
             this.menuFooterService.toggleBilhete();
         }
+    }
+
+    abrirValidarAposta() {
+        this.modalService.open(ValidarApostaWrapperComponent);
     }
 
     svgCss() {

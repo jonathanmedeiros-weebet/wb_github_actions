@@ -35,11 +35,11 @@
             <i class="uil uil-ticket"></i> Bilhete
         </a>
     </div>
-<!--    <div class="foot-button" *ngIf="isLoggedIn && !isCliente">-->
-<!--        <a class="" [routerLink]="['/validar-aposta']" routerLinkActive="active">-->
-<!--            <i class="fa fa-check"></i> Validação-->
-<!--        </a>-->
-<!--    </div>-->
+    <div class="foot-button">
+        <a class="" (click)="abrirValidarAposta()">
+            <i class="fa-solid fa-check"></i> Validação
+        </a>
+    </div>
     <div class="foot-button" [ngClass]="{'active': menuIsOpen}">
         <a class="" (click)="toggleMenu()">
             <i class="uil uil-create-dashboard"></i> Dashboard
