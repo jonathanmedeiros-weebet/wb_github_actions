@@ -1,11 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
-import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ApostaService, SidebarService, MessageService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ParametrosLocaisService } from 'src/app/services';
-import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
-import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {
+    AcumuladaoService,
+    ApostaEsportivaService,
+    ApostaService,
+    DesafioApostaService,
+    MessageService,
+    ParametrosLocaisService,
+    SidebarService
+} from 'src/app/services';
+import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
+import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 
 @Component({
   selector: 'app-aposta',
@@ -19,8 +26,8 @@ export class ApostaComponent implements OnInit {
     queryParams;
 
     loading = false;
-    apostador = "";
-    status = "";
+    apostador = '';
+    status = '';
 
     loteriasHabilitada;
     acumuladaoHabilitado;
@@ -34,7 +41,7 @@ export class ApostaComponent implements OnInit {
     tabSelected = 'esporte';
 
     hoveredDate: NgbDate | null = null;
-    selectedDate: string = '';
+    selectedDate = '';
 
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
@@ -158,7 +165,7 @@ export class ApostaComponent implements OnInit {
         } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
             this.toDate = date;
             this.queryParams.dataFinal = this.formatDate(date, 'us');
-            this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
+            this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(date);
             datepicker.close();
         } else {
             this.toDate = null;
@@ -169,10 +176,10 @@ export class ApostaComponent implements OnInit {
     }
 
     formatDate(date, lang = 'br') {
-        if(lang == 'us') {
-            return  date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
+        if (lang == 'us') {
+            return  date.year + '-' + String(date.month).padStart(2, '0') + '-' + String(date.day).padStart(2, '0');
         }
-        return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year
+        return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + '/' + date.year;
     }
 
     isHovered(date: NgbDate) {
@@ -193,7 +200,7 @@ export class ApostaComponent implements OnInit {
     }
 
     classNameAposta(resultado) {
-        if(resultado == 'perdeu') {
+        if (resultado == 'perdeu') {
             return 'red';
         } else if (resultado == 'ganhou') {
             return 'green';
@@ -291,8 +298,6 @@ export class ApostaComponent implements OnInit {
         this.modalRef.componentInstance.title = 'Cancelar Aposta';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
 
-        console.log("APOSTA", aposta);
-
         this.modalRef.result.then(
             (result) => {
                 this.apostaService.cancelar({id: aposta.id, version: aposta.version})
@@ -308,19 +313,30 @@ export class ApostaComponent implements OnInit {
     }
 
     pagarAposta(aposta) {
-        this.apostaService.pagar(aposta.id)
-            .subscribe(
-                result => {
-                    aposta.pago = result.pago;
-                    this.cd.detectChanges();
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Pagar Aposta';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja pagar a aposta?';
 
-                    if (result.pago) {
-                        this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
-                    } else {
-                        this.messageService.success('PAGAMENTO CANCELADO!');
-                    }
-                },
-                error => this.handleError(error)
-            );
+        this.modalRef.result.then(
+            () => {
+                this.apostaService.pagar(aposta.id)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        result => {
+                            aposta.pago = result.pago;
+                            this.cd.detectChanges();
+
+                            if (result.pago) {
+                                this.messageService.success('Pagamento Registrado com Sucesso!');
+                            } else {
+                                this.messageService.success('Pagamento Cancelado!');
+                            }
+                        },
+                        error => this.handleError(error)
+                    );
+            },
+            reason => {
+            }
+        );
     }
 }
