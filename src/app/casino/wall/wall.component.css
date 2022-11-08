@@ -89,8 +89,8 @@
 }
 
 .disabled-scroll-button {
-    background-color: var(--inputs-odds);
-    color: var(--inputs-odds);
+    background-color: var(--background);
+    color: var(--background);
     cursor: auto;
     transition: 500ms;
 }

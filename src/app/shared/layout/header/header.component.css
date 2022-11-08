@@ -591,6 +591,9 @@ body .change-theme {
     }
 
     .dropdown-menu .nav a span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 28px;
         height: 28px;
         background: rgba(53, 204, 149, 0.1);
