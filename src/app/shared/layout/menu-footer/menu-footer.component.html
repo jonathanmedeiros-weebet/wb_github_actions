@@ -36,7 +36,7 @@
         </a>
     </div>
     <div class="foot-button">
-        <a class="" (click)="abrirValidarAposta()">
+        <a class="" (click)="abrirValidarAposta()" *ngIf="isLoggedIn && !isCliente">
             <i class="fa-solid fa-check"></i> Validação
         </a>
     </div>
