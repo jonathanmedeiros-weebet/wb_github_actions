@@ -44,7 +44,7 @@ export class ApostaComponent implements OnInit {
     totais = {
         valor: 0,
         premio: 0,
-    }
+    };
 
     unsub$ = new Subject();
 
@@ -69,9 +69,9 @@ export class ApostaComponent implements OnInit {
         this.queryParams = {
             dataInicial: this.formatDate(this.fromDate, 'us'),
             dataFinal: this.formatDate(this.toDate, 'us')
-        }
+        };
 
-        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
+        this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
     }
 
     ngOnInit(): void {

@@ -110,6 +110,10 @@
                                     <i class="fa fa-trash"></i>
                                 </a>
 
+                                <a title="Pagar" *ngIf="!aposta.pago && aposta.resultado == 'ganhou'" (click)="pagarAposta(aposta)">
+                                    <i class="fa fa-money-bill-1"></i>
+                                </a>
+
                                 <a title="Exibir" (click)="openModal(aposta)">
                                     <i class="fa fa-eye"></i>
                                 </a>
