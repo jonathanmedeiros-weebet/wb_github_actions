@@ -2381,3 +2381,12 @@ gulp.task('prowin.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsnew.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betsnew.wee.bet",
+        banca: "BETS NEW",
+        styles: "",
+    });
+});
