@@ -601,6 +601,12 @@ body .change-theme {
         border-radius: 3px;
     }
 
+    .dropdown-menu .nav a span.arrow-nav {
+        flex: 1;
+        background-color: var(--sidebars);
+        justify-content: flex-end;
+    }
+
     .logo {
         max-height: 30px;
     }
