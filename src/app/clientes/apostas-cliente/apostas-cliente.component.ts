@@ -288,7 +288,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             );
     }
 
-    handleCancel(aposta) {
+    /*handleCancel(aposta) {
         this.showLoading = true;
         const params = {};
 
@@ -327,5 +327,5 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             (reason) => {
             }
         );
-    }
+    }*/
 }
