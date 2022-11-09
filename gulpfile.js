@@ -2386,7 +2386,7 @@ gulp.task('betsnews.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "betsnews.wee.bet",
-        banca: "BETS NEW",
+        banca: "BETS NEWS",
         styles: "",
     });
 });
