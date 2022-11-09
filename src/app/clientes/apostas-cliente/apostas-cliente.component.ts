@@ -8,7 +8,7 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
 import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { forEach } from 'lodash';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -37,7 +37,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     totais = {
         valor: 0,
         premio: 0,
-    }
+    };
 
     loading = false;
 
@@ -65,7 +65,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private calendar: NgbCalendar,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
-        private apostaService: ApostaService
+        private apostaService: ApostaService,
+        public activeModal: NgbActiveModal
     ) {
         super();
 
@@ -75,9 +76,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.queryParams = {
             dataInicial: this.formatDate(this.fromDate, 'us'),
             dataFinal: this.formatDate(this.toDate, 'us')
-        }
+        };
 
-        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
+        this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
     }
 
     ngOnInit() {

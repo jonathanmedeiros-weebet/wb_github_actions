@@ -1,40 +1,42 @@
-#default-content {
-    padding: 25px 38px;
+.filtros {
+    display: flex;
+    align-items: center;
 }
 
-.btn-line {
-    margin-top: 24px;
+.filtros input, .filtros select {
+    margin-right: 20px;
 }
 
-.nav-pills .nav-link.active {
-    background-color: var(--odds);
+.filtros > input, .filtros .datepicker-group {
+    max-width: 300px;
 }
 
-a {
-    color: var(--odds);
+.filtros select {
+    max-width: 150px;
 }
 
 .info-resultado {
     margin: 20px 0 32px;
     font-size: 14px;
-    color: #fff;
+    color: var(--foreground);
     font-weight: 400;
 }
 
 
 .table {
-   color: #fff;
+    color: var(--foreground);
 }
 
 .table thead th {
-    background-color: #0A0A0A;
+    background-color: var(--game);
+    color: var(--foreground-game);
     border-top: 0;
-    border-bottom: 1px solid #0A0A0A;
+    border-bottom: 1px solid var(--game);
     padding: 15px 10px;
 }
 
 .table thead th:first-child {
-    border-left: 10px solid #0A0A0A;
+    border-left: 10px solid var(--game);
 }
 
 .table .right {
@@ -43,7 +45,7 @@ a {
 
 .table tbody td {
     border-top: 0;
-    border-bottom: 1px solid #0A0A0A;
+    border-bottom: 1px solid var(--game);
 }
 
 .table td.no-border{
@@ -66,7 +68,7 @@ a {
     position: absolute;
     z-index: 100;
     top: 12px;
-    right: 15px;
+    right: 32px;
     font-size: 14px;
 }
 
@@ -80,7 +82,6 @@ a {
     margin: 0 !important;
     border: none !important;
     padding: 0 !important;
-    position: absolute;
 }
 
 .custom-day {
@@ -142,16 +143,90 @@ a {
     height: 24px;
     width: 24px;
 
-    background: #1f1f1f;
+    background: var(--highlight);
     border-radius: 4px;
-    color: #fff;
+    color: var(--foreground-highlight);
 
     text-decoration: none;
     cursor: pointer;
 }
 
+.btnClose {
+    font-size: 32px;
+    line-height: 32px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--highlight);
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
-        padding: 10px;
+        padding: 55px 10px 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .counts {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .counts .count {
+        margin: 0;
+    }
+
+    .col-graph {
+        margin-bottom: 30px;
+    }
+
+    .apostas-realizadas {
+        height: auto;
+    }
+
+    .card-dashboard h3 {
+        flex-direction: column;
+        align-items: start;
+        gap: 25px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros .datepicker-group,
+    .filtros input,
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+
+    .dp-hidden {
+        height: 0 !important;
+        position: absolute;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros-container .input-group {
+        max-width: none;
+    }
+
+    .buttons {
+        padding: 0;
+    }
+
+    .buttons button {
+        width: 100%;
     }
 }
+
