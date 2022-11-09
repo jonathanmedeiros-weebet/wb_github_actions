@@ -259,7 +259,8 @@
         "redeonline.bet": "gulp redeonline.bet",
         "betmax.wee.bet": "gulp betmax.wee.bet",
         "multbet.wee.bet": "gulp multbet.wee.bet",
-        "prowin.bet": "gulp prowin.bet"
+        "prowin.bet": "gulp prowin.bet",
+        "betsnew.wee.bet": "gulp betsnew.wee.bet"
     },
     "private": true,
     "dependencies": {
