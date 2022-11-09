@@ -2382,10 +2382,10 @@ gulp.task('prowin.bet', function (done) {
     });
 });
 
-gulp.task('betsnew.wee.bet', function (done) {
+gulp.task('betsnews.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "betsnew.wee.bet",
+        host: "betsnews.wee.bet",
         banca: "BETS NEW",
         styles: "",
     });
