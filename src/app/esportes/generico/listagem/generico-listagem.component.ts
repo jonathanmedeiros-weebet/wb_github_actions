@@ -45,8 +45,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     unsub$ = new Subject();
     term = '';
 
-    depoisdepoisdeamanha;
-    depoisdeamanha;
+    limiteDiasTabela: number;
+    diaHojeMaisDois;
+    diaHojeMaisTres;
+    diaHojeMaisQuatro;
 
     tabSelected;
 
@@ -72,14 +74,18 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.depoisdeamanha = moment().add(2, 'd');
-        this.depoisdepoisdeamanha = moment().add(3, 'd');
+        this.diaHojeMaisDois = moment().add(2, 'd');
+        this.diaHojeMaisTres = moment().add(3, 'd');
+        this.diaHojeMaisQuatro = moment().add(4, 'd');
+
         this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
+
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).date() - moment().date();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -100,6 +106,16 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
         if (this.contentSportsEl && changes['showLoadingIndicator']) {
             this.contentSportsEl.scrollTop = 0;
+        }
+
+        if (changes['data'] && this.data) {
+            const diferencaDias = (moment(this.data).date() - moment().date());
+
+            if (diferencaDias === 1) {
+                this.mudarData('amanha');
+            } else {
+                this.mudarData('+' + diferencaDias);
+            }
         }
 
         if (changes['camps'] && this.camps) {
@@ -235,7 +251,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.term = '';
     }
 
-    mudarData(dia) {
+    mudarData(dia = 'hoje') {
         let data;
 
         switch (dia) {
@@ -250,6 +266,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             case '+3':
                 this.tabSelected = 'tresdias';
                 data = moment().add(3, 'd').format('YYYY-MM-DD');
+                break;
+            case '+4':
+                this.tabSelected = 'quatrodias';
+                data = moment().add(4, 'd').format('YYYY-MM-DD');
                 break;
             default:
                 this.tabSelected = null;
@@ -311,7 +331,9 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
         if (this.data) {
             const proximaData = moment(this.data).add(1, 'd');
-            if (proximaData.day() !== 0 && proximaData.isSameOrBefore(this.dataLimiteTabela)) {
+
+            const diferencaDias = (proximaData.date() - moment().date());
+            if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
                 result = true;
             }
         }

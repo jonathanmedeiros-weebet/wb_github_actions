@@ -86,8 +86,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     jogosDestaque = [];
 
-    depoisdepoisdeamanha;
-    depoisdeamanha;
+    limiteDiasTabela: number;
+    diaHojeMaisDois;
+    diaHojeMaisTres;
+    diaHojeMaisQuatro;
 
     tabSelected;
 
@@ -161,8 +163,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     ngOnInit() {
-        this.depoisdeamanha = moment().add(2, 'd');
-        this.depoisdepoisdeamanha = moment().add(3, 'd');
+        this.diaHojeMaisDois = moment().add(2, 'd');
+        this.diaHojeMaisTres = moment().add(3, 'd');
+        this.diaHojeMaisQuatro = moment().add(4, 'd');
+
         this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
@@ -172,6 +176,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).date() - moment().date();
 
         this.sidebarService.collapsedSource
             .subscribe(collapsed => {
@@ -218,6 +224,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
         if (this.contentSportsEl && changes['showLoadingIndicator']) {
             this.contentSportsEl.scrollTop = 0;
+        }
+
+        if (changes['data'] && this.data) {
+            const diferencaDias = (moment(this.data).date() - moment().date());
+
+            if (diferencaDias === 1) {
+                this.mudarData('amanha');
+            } else {
+                this.mudarData('+' + diferencaDias);
+            }
         }
 
         if (changes['camps'] && this.camps) {
@@ -478,7 +494,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     // Exibindo todas as cotações daquele jogo selecionado
     maisCotacoes(jogoId) {
-        console.log('NORMAL', jogoId);
         this.jogoIdAtual = jogoId;
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);
@@ -497,7 +512,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         return result;
     }
 
-    mudarData(dia) {
+    mudarData(dia = 'hoje') {
         let data;
 
         switch (dia) {
@@ -512,6 +527,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             case '+3':
                 this.tabSelected = 'tresdias';
                 data = moment().add(3, 'd').format('YYYY-MM-DD');
+                break;
+            case '+4':
+                this.tabSelected = 'quatrodias';
+                data = moment().add(4, 'd').format('YYYY-MM-DD');
                 break;
             default:
                 this.tabSelected = null;

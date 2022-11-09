@@ -134,6 +134,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             switchMap(campeonatos => {
                                 if (campeonatos.length === 0 && isHoje) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
+                                    this.data = queryParams.data;
                                     return this.campeonatoService.getCampeonatos(queryParams);
                                 } else {
                                     const observable = new Observable(subscriber => {

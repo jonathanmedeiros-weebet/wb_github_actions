@@ -12,11 +12,10 @@
 
             <div class="tabs">
                 <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>
-                <a class="tab" [ngClass]="{'active': tabSelected == 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
-                <a class="tab hide-mobile" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('dddd') | titlecase }}</a>
-                <a class="tab show-mobile" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ depoisdeamanha.format('ddd') | titlecase }}</a>
-                <a class="tab hide-mobile" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('dddd') | titlecase  }}</a>
-                <a class="tab show-mobile" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ depoisdepoisdeamanha.format('ddd') | titlecase  }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 0" [ngClass]="{'active': tabSelected == 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 1" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ diaHojeMaisDois.format(mobileScreen ? 'ddd' : 'dddd') | titlecase }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 2" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ diaHojeMaisTres.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 3" [ngClass]="{'active': tabSelected == 'quatrodias'}" (click)="mudarData('+4')">{{ diaHojeMaisQuatro.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
             </div>
         </div>
 
