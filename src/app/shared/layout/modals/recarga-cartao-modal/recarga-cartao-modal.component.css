@@ -27,7 +27,8 @@
 .input-valor {
     border: 0;
     border-radius: 0;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid var(--inputs-odds);
+    color: var(--foreground);
     background-color: transparent;
     text-align: center;
     font-size: 20px;
@@ -37,7 +38,8 @@
 .input-valor:focus {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid #35cd96;
+    border-bottom: 1px solid var(--highlight);
+    color: var(--foreground);
 }
 
 .input-valor.is-invalid {
