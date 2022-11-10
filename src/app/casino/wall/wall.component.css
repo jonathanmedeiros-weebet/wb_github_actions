@@ -88,6 +88,11 @@
     transition: 500ms;
 }
 
+.enabled-scroll-button:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
 .disabled-scroll-button {
     background-color: var(--background);
     color: var(--background);
