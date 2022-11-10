@@ -90,6 +90,9 @@
                                         </div>
                                         {{jogo.time_b_nome}}
                                     </div>
+                                    <a class="mais-cotacao-mobile" (click)="maisCotacoes(jogo._id)">
+                                        <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}
+                                    </a>
                                 </div>
                                 <div class="list-odds">
                                     <div class="odds">
@@ -134,7 +137,7 @@
                                         </ng-container>
                                     </div>
                                 </div>
-                                <div *ngIf="exibirTotalOdds()" class="mais-opcoes">
+                                <div *ngIf="exibirTotalOdds()" class="mais-opcoes hide-mobile">
                                     <a (click)="maisCotacoes(jogo._id)">
                                         <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}
                                     </a>

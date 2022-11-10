@@ -126,6 +126,10 @@
     max-width: 100%;
 }
 
+.mais-cotacao-mobile {
+    display: none;
+}
+
 .ocultar-tab {
     display: none !important;
 }
@@ -158,4 +162,25 @@
     .odds .odd .inner-odd {
         padding: 15px 20px;
     }
+
+    .mais-opcoes {
+        margin-right: 10px;
+    }
+
+    .mais-opcoes span {
+        display: none;
+    }
+
+    .mais-opcoes {
+        margin: 0;
+    }
+
+    .mais-cotacao-mobile {
+        display: block;
+        position: absolute;
+        right: 20px;
+        color: var(--highlight);
+        padding: 20px 0 20px 20px;
+    }
+
 }
