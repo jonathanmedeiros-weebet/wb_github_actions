@@ -112,7 +112,12 @@
     }
 
     .table thead th {
-        background-color: #181818;
+        background-color: var(--game);
+        white-space: nowrap;
+    }
+
+    .table td {
+        white-space: nowrap;
     }
 
     .modal-body {
