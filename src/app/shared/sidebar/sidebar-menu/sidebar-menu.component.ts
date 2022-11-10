@@ -13,6 +13,7 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ResultadosModalComponent} from '../../layout/modals/resultados-modal/resultados-modal.component';
 import {config} from '../../config';
+import {PrintService} from '../../services/utils/print.service';
 
 @Component({
     selector: 'app-sidebar-menu',
@@ -33,7 +34,8 @@ export class SidebarMenuComponent implements OnInit {
         private auth: AuthService,
         private sidebarService: SidebarService,
         private modalService: NgbModal,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private printService: PrintService
     ) {
     }
 
@@ -143,5 +145,9 @@ export class SidebarMenuComponent implements OnInit {
             centered: true,
             size: 'xl',
         });
+    }
+
+    listPrinters() {
+        this.printService.listPrinters();
     }
 }

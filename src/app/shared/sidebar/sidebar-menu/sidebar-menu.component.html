@@ -16,18 +16,23 @@
         </a>
 
         <a (click)="abrirModalTabela()" *ngIf="isLoggedIn && !isCliente">
-            <i class="fa fa-print"></i>
+            <i class="fa fa-solid fa-print"></i>
             Tabela
         </a>
 
+        <a (click)="listPrinters()" *ngIf="isAppMobile">
+            <i class="fa fa-solid fa-cogs"></i>
+            Config.
+        </a>
+
         <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!isAppMobile && !trevoOne">
-            <i class="fa fa-download"></i>
+            <i class="fa fa-solid fa-download"></i>
             Download app
         </a>
 
         <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la"
            *ngIf="!isAppMobile && trevoOne">
-            <i class="fa fa-download"></i>
+            <i class="fa fa-solid fa-download"></i>
             Download app
         </a>
     </div>

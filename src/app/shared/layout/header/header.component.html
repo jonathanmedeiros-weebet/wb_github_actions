@@ -167,6 +167,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="listPrinters()" *ngIf="appMobile">
+                                <span>
+                                    <i class="fa fa-solid fa-cogs"></i>
+                                </span>
+                                Configurações
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <hr />
                             <a (click)="abrirAjuda()">
                                 <span>
@@ -247,10 +256,6 @@
                             </a>
                             <hr />
                             <label>Mais opções</label>
-<!--                            <a (click)="abrirFinanceiro()">-->
-<!--                                <span></span>-->
-<!--                                Financeiro-->
-<!--                            </a>-->
                             <a (click)="abrirSaques()">
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
@@ -274,6 +279,15 @@
                                     <i class="fa fa-solid fa-table-columns"></i>
                                 </span>
                                 Apostas
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
+                            <a (click)="listPrinters()" *ngIf="appMobile">
+                                <span>
+                                    <i class="fa fa-solid fa-cogs"></i>
+                                </span>
+                                Configurações
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -406,6 +420,10 @@
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-dollar mb-2"></i>
                                 Financeiro
+                            </a>
+                            <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
+                                <i class="fa fa-solid fa-cogs"></i>
+                                Configurações
                             </a>
                         </div>
 
