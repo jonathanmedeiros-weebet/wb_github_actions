@@ -116,8 +116,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             'otimizado': true
         };
 
-
-        switch (this.tabSelected) {
+        switch (this.queryParams.tipo) {
             case 'esporte':
                 this.apostaEsportivaService.getApostas(queryParams)
                 .subscribe(
@@ -157,6 +156,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             dataInicial: [this.formatDate(this.fromDate, 'us'), Validators.required],
             dataFinal: [this.formatDate(this.toDate, 'us'), Validators.required],
             status: [''],
+            tipo: ['esporte'],
         });
 
         this.submit();
