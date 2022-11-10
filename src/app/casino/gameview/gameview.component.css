@@ -34,11 +34,13 @@ iframe{
     cursor: pointer;
     color: var(--foreground-inputs-odds);
     background: var(--inputs-odds);
+    transition: 500ms;
 }
 
 .btn-cassino:hover {
     background-color: var(--highlight);
     color: var(--foreground-highlight);
+    transition: 500ms;
 }
 
 .game-close {
