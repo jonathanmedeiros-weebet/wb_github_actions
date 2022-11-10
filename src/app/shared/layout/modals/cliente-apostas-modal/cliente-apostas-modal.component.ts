@@ -1,22 +1,28 @@
-
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import * as moment from 'moment';
-import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService, MessageService, ParametrosLocaisService, MenuFooterService } from 'src/app/services';
-import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import { forEach } from 'lodash';
-import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { BaseFormComponent } from '../../base-form/base-form.component';
+import {
+    AcumuladaoService,
+    ApostaEsportivaService,
+    ApostaService,
+    DesafioApostaService,
+    MenuFooterService,
+    MessageService,
+    ParametrosLocaisService,
+    SidebarService
+} from 'src/app/services';
+import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
+import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {BaseFormComponent} from '../../base-form/base-form.component';
 
 @Component({
     selector: 'app-cliente-apostas-modal',
     templateUrl: './cliente-apostas-modal.component.html',
     styleUrls: ['./cliente-apostas-modal.component.css']
 })
-export class ClienteApostasModalComponent extends BaseFormComponent implements OnInit {
+export class ClienteApostasModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     queryParams;
     dataInicial;
     dataFinal;
@@ -35,7 +41,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     totais = {
         valor: 0,
         premio: 0,
-    }
+    };
 
     loading = false;
 
@@ -74,7 +80,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.queryParams = {
             dataInicial: this.formatDate(this.fromDate, 'us'),
             dataFinal: this.formatDate(this.toDate, 'us')
-        }
+        };
 
         this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
     }
@@ -287,44 +293,44 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             );
     }
 
-    handleCancel(aposta) {
-        this.showLoading = true;
-        const params = {};
+    // handleCancel(aposta) {
+    //     this.showLoading = true;
+    //     const params = {};
+    //
+    //     if (aposta.id === this.apostas[0].id) {
+    //         params['verificar-ultima-aposta'] = 1;
+    //     }
+    //
+    //     this.apostaService.getAposta(aposta.id, params)
+    //         .subscribe(
+    //             apostaLocalizada => {
+    //                 this.cancelar(apostaLocalizada);
+    //
+    //                 this.showLoading = false;
+    //                 this.cd.detectChanges();
+    //             },
+    //             error => this.handleError(error)
+    //         );
+    // }
 
-        if (aposta.id === this.apostas[0].id) {
-            params['verificar-ultima-aposta'] = 1;
-        }
-
-        this.apostaService.getAposta(aposta.id, params)
-            .subscribe(
-                apostaLocalizada => {
-                    this.cancelar(apostaLocalizada);
-
-                    this.showLoading = false;
-                    this.cd.detectChanges();
-                },
-                error => this.handleError(error)
-            );
-    }
-
-    cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
-        this.modalRef.componentInstance.title = 'Cancelar Aposta';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
-        console.log("APOSTA", aposta);
-
-        this.modalRef.result.then(
-            (result) => {
-                this.apostaService.cancelar({id: aposta.id, version: aposta.version})
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        () => this.getApostas(),
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => {
-            }
-        );
-    }
+    // cancelar(aposta) {
+    //     this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+    //     this.modalRef.componentInstance.title = 'Cancelar Aposta';
+    //     this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
+    //
+    //     console.log("APOSTA", aposta);
+    //
+    //     this.modalRef.result.then(
+    //         (result) => {
+    //             this.apostaService.cancelar({id: aposta.id, version: aposta.version})
+    //                 .pipe(takeUntil(this.unsub$))
+    //                 .subscribe(
+    //                     () => this.getApostas(),
+    //                     error => this.handleError(error)
+    //                 );
+    //         },
+    //         (reason) => {
+    //         }
+    //     );
+    // }
 }
