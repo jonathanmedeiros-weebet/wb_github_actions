@@ -54,7 +54,26 @@
                 </div>
             </form>
 
-            <div class="table-responsive">
+
+            <ul *ngIf="isMobile" class="listagem-saque">
+                <li *ngFor="let solicitacao of solicitacoes">
+                    <span class="status">{{statusSolicitacao(solicitacao)}}</span>
+                    <span class="chave">#{{solicitacao.id}}</span>
+                    <span><label>Apostador: </label> {{solicitacao.cartao_aposta.apostador}}</span>
+                    <span><label>Chave: </label> {{solicitacao.cartao_aposta_chave}}</span>
+                    <span><label>Saldo atual: </label> {{solicitacao.cartao_aposta.saldo | currency}}</span>
+                    <span><label>Data solicitação: </label> {{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</span>
+                    <span><label>Valor: </label> {{solicitacao.valor | currency}}</span>
+                    <span class="buttons" *ngIf="solicitacao.aprovado && !solicitacao.pago">
+                        <button type="button"
+                            class="btn btn-custom2" (click)="setPagamento(solicitacao)">
+                            Confirmar Pagamento
+                        </button>
+                    </span>
+                </li>
+            </ul>
+
+            <div *ngIf="!isMobile" class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -73,16 +92,22 @@
                         <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
                     </tr>
                     <tbody *ngIf="!loading">
-                        <tr *ngFor="let aposta of solicitacoes" class="{{ classNameAposta(aposta.resultado) }}">
-                            <td></td>
-                            <td>{{ aposta.codigo }}</td>
-                            <td>{{ aposta.horario }}</td>
-                            <td>{{ aposta.apostador | uppercase }}</td>
-                            <td>{{ aposta.valor | currency}}</td>
-                            <td>{{ aposta.comissao | currency }}</td>
-                            <td>{{ aposta.premio | currency }}</td>
-                            <td>{{ aposta.pago }}</td>
-                            <td>{{ aposta.pago }}</td>
+                        <tr *ngFor="let solicitacao of solicitacoes">
+                            <td class="text-right">{{solicitacao.id}}</td>
+                            <td class="text-right">{{solicitacao.cartao_aposta_chave}}</td>
+                            <td class="text-right">
+                                {{solicitacao.cartao_aposta.saldo | currency}}</td>
+                            <td>{{solicitacao.cartao_aposta.apostador}}</td>
+                            <td>{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td class="text-right">{{solicitacao.valor | currency}}</td>
+                            <td>{{solicitacao.aprovado ? 'SIM' : 'NÃO'}}</td>
+                            <td>{{solicitacao.pago ? 'PAGO' : ''}}</td>
+                            <td>
+                                <button *ngIf="solicitacao.aprovado && !solicitacao.pago" type="button"
+                                    class="btn btn-primary" (click)="setPagamento(solicitacao)">
+                                    <i class="fa fa-money"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

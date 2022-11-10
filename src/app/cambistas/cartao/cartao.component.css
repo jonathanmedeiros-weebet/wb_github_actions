@@ -123,6 +123,39 @@
     cursor: pointer;
 }
 
+.listagem-cartao {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listagem-cartao li {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--highlight);
+    border-radius: 4px;
+
+    background-color: var(--game);
+    color: var(--foreground-game);
+}
+
+.listagem-cartao li label {
+    margin: 0;
+    font-weight: 600;
+}
+
+.listagem-cartao li .chave {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 10px;

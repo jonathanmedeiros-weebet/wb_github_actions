@@ -51,7 +51,19 @@
                 </div>
             </form>
 
-            <div class="table-responsive">
+            <ul *ngIf="isMobile" class="listagem-cartao">
+                <li *ngFor="let cartao of cartoes">
+                    <span class="chave">{{ cartao.chave }}</span>
+                    <span><label>Apostador: </label> {{ cartao.apostador }}</span>
+                    <span><label>Data: </label> {{ cartao.data_registro }}</span>
+                    <span><label>Créditos: </label> {{ cartao.total_creditos | currency }}</span>
+                    <span><label>Prêmio: </label> {{ cartao.premios | currency }}</span>
+                    <span><label>Saques: </label> {{ cartao.total_saques | currency }}</span>
+                    <span><label>Saldo: </label> {{ cartao.saldo | currency }}</span>
+                </li>
+            </ul>
+
+            <div class="table-responsive" *ngIf="!isMobile">
                 <table class="table">
                     <thead>
                         <tr>
