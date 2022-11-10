@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, CartaoService } from 'src/app/services';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarService, CartaoService, MessageService } from 'src/app/services';
+import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
   selector: 'app-solicitacao-saque',
@@ -16,6 +17,8 @@ export class SolicitacaoSaqueComponent implements OnInit {
     status = '1';
     queryParams;
 
+    modalRef;
+
     hoveredDate: NgbDate | null = null;
     selectedDate: string = '';
 
@@ -27,7 +30,9 @@ export class SolicitacaoSaqueComponent implements OnInit {
         public formatter: NgbDateParserFormatter,
         private cartaoService: CartaoService,
         private sidebarService: SidebarService,
-        public activeModal: NgbActiveModal
+        private messageService: MessageService,
+        public activeModal: NgbActiveModal,
+        private modalService: NgbModal,
     ) {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
@@ -73,17 +78,13 @@ export class SolicitacaoSaqueComponent implements OnInit {
     onDateSelection(date: NgbDate, datepicker: any) {
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
-            this.queryParams.dataInicial = this.formatDate(date, 'us');
         } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
             this.toDate = date;
-            this.queryParams.dataFinal = this.formatDate(date, 'us');
             this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
             datepicker.close();
         } else {
             this.toDate = null;
-            this.queryParams.dataFinal = null;
             this.fromDate = date;
-            this.queryParams.dataInicial = this.formatDate(date, 'us');
         }
     }
 
@@ -111,8 +112,40 @@ export class SolicitacaoSaqueComponent implements OnInit {
         return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     }
 
-    handleFiltrar() {
+    setPagamento(solicitacao) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+        this.modalRef.componentInstance.title = 'Pagamento';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirma o pagamento?';
 
+        this.modalRef.result.then(
+            (result) => {
+                this.cartaoService.setPagamento({ id: solicitacao.id, version: solicitacao.version })
+                    .subscribe(
+                        () => {
+                            this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
+                            this.getSolicitacoesSaque();
+                        },
+                        error => this.handleError(error)
+                    );
+            },
+            (reason) => { }
+        );
+    }
+
+    statusSolicitacao(solicitacao) : string {
+        if(solicitacao.pago) {
+            return "PAGO";
+        }
+
+        if(solicitacao.aprovado) {
+            return "APROVADO";
+        }
+
+        return "PENDENTE";
+    }
+
+    handleFiltrar() {
+        this.getSolicitacoesSaque();
     }
 
     handleError(error) {
