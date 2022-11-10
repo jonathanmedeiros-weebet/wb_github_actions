@@ -260,7 +260,8 @@
         "betmax.wee.bet": "gulp betmax.wee.bet",
         "multbet.wee.bet": "gulp multbet.wee.bet",
         "prowin.bet": "gulp prowin.bet",
-        "betsnews.wee.bet": "gulp betsnews.wee.bet"
+        "betsnews.wee.bet": "gulp betsnews.wee.bet",
+        "bet10.wee.bet": "gulp bet10.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -2390,3 +2390,12 @@ gulp.task('betsnews.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet10.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet10.wee.bet",
+        banca: "BET10",
+        styles: "",
+    });
+});
