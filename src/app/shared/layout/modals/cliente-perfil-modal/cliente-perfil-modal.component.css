@@ -27,16 +27,25 @@ h5 {
 
 .btnClose {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 22px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     color:  var(--highlight);
     cursor: pointer;
 }
 
 @media only screen and (max-width: 1024px) {
     .modal-body {
-        padding: 55px 25px 0 25px;
+        padding: 20px;
+    }
+
+    .buttons {
+        gap: 20px;
+    }
+
+    .buttons button {
+        flex: 1;
+        margin: 0 !important;
     }
 }

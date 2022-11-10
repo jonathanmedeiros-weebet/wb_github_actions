@@ -4,10 +4,10 @@
 
 .btnClose {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 22px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     color:  var(--highlight);
     cursor: pointer;
 }
@@ -21,14 +21,15 @@
  }
 
  .table thead th {
-     background-color: #0A0A0A;
+     background-color: var(--game);
+     color: var(--foreground-game);
      border-top: 0;
-     border-bottom: 1px solid #0A0A0A;
+     border-bottom: 1px solid var(--game);
      padding: 15px 10px;
  }
 
  .table thead th:first-child {
-     border-left: 10px solid #0A0A0A;
+     border-left: 10px solid  var(--game);
  }
 
  .table .right {
@@ -37,7 +38,7 @@
 
  .table tbody td {
      border-top: 0;
-     border-bottom: 1px solid #0A0A0A;
+     border-bottom: 1px solid var(--game);
      vertical-align: middle;
  }
 
@@ -72,9 +73,15 @@
 
  @media only screen and (max-width: 1024px) {
     #default-content {
-        padding: 55px 10px 10px;
+        padding: 20px;
         background: var(--background);
+        color: var(--foreground);
         height: 100%;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 25px;
     }
 
     .uncollapsed {
@@ -152,8 +159,8 @@
         margin-top: 40px !important;
         padding: 10px 15px;
         font-size: 10px;
-        background: rgba(255, 255, 255, 0.06);
-        color: #fff;
+        background: var(--game);
+        color: var(--foreground-game);
         text-align: left;
     }
 
@@ -175,8 +182,8 @@
         margin-bottom: 30px;
         padding: 10px 15px;
         font-size: 10px;
-        background: rgba(255, 255, 255, 0.06);
-        color: #fff;
+        background: var(--game);
+        color: var(--foreground-game);
         text-align: left;
      }
 }

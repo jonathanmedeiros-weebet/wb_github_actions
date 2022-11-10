@@ -2,13 +2,6 @@
     flex: 1;
 }
 
-.modal-body {
-    padding-top: 55px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .content-body {
     flex: 1;
 }
@@ -48,10 +41,10 @@ h5 {
 
 .btnClose {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 22px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     color:  var(--highlight);
     cursor: pointer;
 }
@@ -187,36 +180,12 @@ h5 {
 
  @media only screen and (max-width: 1024px) {
     #default-content {
-        padding: 10px 10px 10px 10px;
+        padding: 20px;
         background: var(--background);
-        margin-left: -5px;
     }
 
     .uncollapsed {
         padding: 0;
-    }
-
-    .buttons-container {
-        background-color: #181818;
-        border: 2px solid #181818;
-        border-radius: 4px;
-    }
-
-    .buttons-container a {
-        margin: 0;
-        justify-content: center;
-        border: 0;
-        background-color: #181818;
-    }
-
-    .buttons-container a.active {
-        background-color: #35cc95;
-        color: #181818;
-        fill: #181818;
-    }
-
-    .buttons-container a i.radio{
-        display: none;
     }
 
     .table thead th {

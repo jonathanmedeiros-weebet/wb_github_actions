@@ -98,3 +98,39 @@ td {
 .custom-day.faded {
     background-color: #3dc593;
 }
+
+
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        padding: 20px;
+    }
+
+    .filters form {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .filters form select {
+        max-width: none;
+    }
+
+    .datepicker-group i {
+        right: 16px;
+    }
+
+    .datepicker-group {
+        max-width: none;
+    }
+
+    .filters form input {
+        margin-right: 0;
+        padding-right: 15px;
+    }
+
+    td {
+        white-space: nowrap;
+    }
+}

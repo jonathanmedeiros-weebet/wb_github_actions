@@ -15,8 +15,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: #35CC95;
-    color: #181818;
+    background: var(--highlight);
+    color: var(--foreground-highlight);
     border: 0;
     height: 44px;
     padding: 0 10px;

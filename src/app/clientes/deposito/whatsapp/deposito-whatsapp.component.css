@@ -44,8 +44,8 @@
         margin-bottom: 50px;
         padding: 10px 15px;
         font-size: 10px;
-        background: rgba(255, 255, 255, 0.06);
-        color: #fff;
+        background: var(--game);
+        color: var(--foreground-game);
         text-align: left;
     }
 

@@ -4,17 +4,6 @@
     margin-bottom: 45px;
 }
 
-.btnClose {
-    font-size: 32px;
-    line-height: 32px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color:  var(--highlight);
-    cursor: pointer;
-}
-
-
 .filtros input, .filtros select {
     margin-right: 20px;
 }
@@ -141,9 +130,19 @@
     border-bottom: 2px solid var(--highlight);
 }
 
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--highlight);
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
-        padding: 55px 10px 10px;
+        padding: 10px;
         background: var(--background);
         height: 100vh;
     }
@@ -179,8 +178,8 @@
         display: none;
     }
 
-    .table thead th {
-        background-color: #181818;
+    .table thead th, td {
+        white-space: nowrap;
     }
 
     .dp-hidden {

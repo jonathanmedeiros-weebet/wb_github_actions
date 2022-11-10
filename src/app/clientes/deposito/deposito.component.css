@@ -4,10 +4,10 @@
 
 .btnClose {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 22px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     color:  var(--highlight);
     cursor: pointer;
 }
@@ -23,11 +23,6 @@
     margin-right: 8px;
 }
 
-
-.buttons-container a.active .radio {
-    border: 1px solid #35cc95;
-}
-
 .buttons-container a.active .radio:after {
     display: block;
 }
@@ -35,7 +30,7 @@
 .buttons-container a .radio {
     height: 15px;
     width: 15px;
-    border: 1px solid #8b8b8b;
+    border: 1px solid var(--highlight);
     background-color: transparent;
     border-radius: 50%;
     position: relative;
@@ -51,7 +46,11 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #35cc95;
+    background: var(--highlight);
+}
+
+.buttons-container a.active .radio {
+    border: 1px solid var(--highlight);
 }
 
 .opcao-pagamento {
@@ -61,9 +60,8 @@
     width: 190px;
     padding: 10px;
 
-    border: 1px solid #1f1f1f;
-    background-color: #1f1f1f;
-    color: #fff;
+    border: 1px solid var(--game);
+    color: var(--foreground);
     border-radius: 4px;
     text-decoration: none;
     cursor: pointer;
@@ -76,7 +74,7 @@
 
 .active {
     background-color: transparent;
-    border-color: #35cc95;
+    border-color: var(--highlight);
 }
 
 .table-responsive {
@@ -84,13 +82,14 @@
 }
 
 .table {
-    color: #fff;
+    color: var(--foreground);
  }
 
  .table thead th {
-     background-color: #0A0A0A;
+     background-color: var(--game);
+     color: var(--foreground-game);
      border-top: 0;
-     border-bottom: 1px solid #0A0A0A;
+     border-bottom: 1px solid var(--game);
      padding: 15px 10px;
  }
 
@@ -100,7 +99,7 @@
 
  .table tbody td {
      border-top: 0;
-     border-bottom: 1px solid #0A0A0A;
+     border-bottom: 1px solid var(--foreground-game);
  }
 
  .table td.no-border{
@@ -109,9 +108,14 @@
 
  @media only screen and (max-width: 1024px) {
     #default-content {
-        padding: 55px 10px 10px;
+        padding: 20px;
         background: var(--background);
         height: 100%;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 25px;
     }
 
     .uncollapsed {
@@ -119,8 +123,8 @@
     }
 
     .buttons-container {
-        background-color: #181818;
-        border: 2px solid #181818;
+        background-color: var(--game);
+        border: 2px solid var(--game);
         border-radius: 4px;
     }
 
@@ -128,13 +132,14 @@
         margin: 0;
         justify-content: center;
         border: 0;
-        background-color: #181818;
+        background-color: var(--game);
+        color: var(--foreground-game);
     }
 
     .buttons-container a.active {
-        background-color: #35cc95;
-        color: #181818;
-        fill: #181818;
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        fill: var(--foreground-highlight);
     }
 
     .buttons-container a i.radio{
@@ -142,6 +147,6 @@
     }
 
     .table thead th {
-        background-color: #181818;
+        background-color: var(--game);
     }
  }
