@@ -13,11 +13,11 @@
                 <div class="col-xs-12 col-md-12">
                     <form (ngSubmit)="onSubmit()" [formGroup]="form">
                         <div class="form-row">
-                            <select class="form-control inverted-out" formControlName="status">
-                                <option value="">Futebol</option>
-                                <option value="ganhou">Acumuladão</option>
-                                <option value="perdeu">Desafio</option>
-                                <option value="pendente">Cassino</option>
+                            <select class="form-control inverted-out" formControlName="tipo">
+                                <option value="esporte">Futebol</option>
+                                <option value="acumuladao">Acumuladão</option>
+                                <option value="desafio">Desafio</option>
+                                <option value="cassino">Cassino</option>
                             </select>
                             <input
                                 name="datepicker"

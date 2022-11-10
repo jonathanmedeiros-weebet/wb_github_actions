@@ -18,6 +18,12 @@
         <div class="content-body">
             <form (submit)="handleFiltrar()">
                 <div class="filtros">
+                    <select class="form-control inverted-out hide-desktop" [(ngModel)]="tabSelected" [ngModelOptions]="{standalone: true}">
+                        <option value="esporte">Futebol</option>
+                        <option value="acumuladao" *ngIf="acumuladaoHabilitado">Acumuladão</option>
+                        <option value="desafio" *ngIf="desafioHabilitado">Desafio</option>
+                    </select>
+
                     <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="Apostador" [ngModelOptions]="{standalone: true}">
 
                     <input
