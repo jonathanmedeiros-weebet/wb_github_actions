@@ -55,14 +55,16 @@ h5 {
 }
 
 .table {
-    color: #fff;
+    color: var(--foreground);
  }
 
  .table thead th {
-     background-color: #0A0A0A;
+     background-color: var(--game);
+     color: var(--foreground-game);
      border-top: 0;
-     border-bottom: 1px solid #0A0A0A;
+     border-bottom: 1px solid var(--game);
      padding: 15px 10px;
+     white-space: nowrap;
  }
 
  .table .right {
@@ -71,7 +73,8 @@ h5 {
 
  .table tbody td {
      border-top: 0;
-     border-bottom: 1px solid #0A0A0A;
+     border-bottom: 1px solid var(--game);
+     white-space: nowrap;
  }
 
  .table td.no-border{
@@ -189,6 +192,6 @@ h5 {
     }
 
     .table thead th {
-        background-color: #181818;
+        background-color: var(--game);
     }
  }
