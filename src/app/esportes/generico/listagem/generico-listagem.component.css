@@ -126,6 +126,10 @@
     max-width: 100%;
 }
 
+.ocultar-tab {
+    display: none !important;
+}
+
 @media only screen and (max-width: 1024px) {
     .content-sports {
         /*padding-bottom: 106px;*/

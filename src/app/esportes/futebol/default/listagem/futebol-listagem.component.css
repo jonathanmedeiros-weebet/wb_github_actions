@@ -131,6 +131,10 @@
     display: none;
 }
 
+.ocultar-tab {
+    display: none !important;
+}
+
 @media only screen and (max-width: 1024px) {
     .mais-opcoes {
         margin-right: 10px;

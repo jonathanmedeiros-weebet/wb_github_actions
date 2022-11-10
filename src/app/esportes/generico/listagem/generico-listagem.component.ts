@@ -376,4 +376,19 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     campeonatoAberto(campeonatoId) {
         return this.campeonatosAbertos.includes(campeonatoId);
     }
+
+    focusPesquisa(focus = true) {
+        if (this.mobileScreen) {
+            const inactiveDaysButtons = this.el.nativeElement.getElementsByClassName(`tab inactive`);
+            if (focus) {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.addClass(inactiveDayButton, 'ocultar-tab');
+                }
+            } else {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.removeClass(inactiveDayButton, 'ocultar-tab');
+                }
+            }
+        }
+    }
 }

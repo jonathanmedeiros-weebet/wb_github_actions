@@ -594,6 +594,21 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     }
 
+    focusPesquisa(focus = true) {
+        if (this.mobileScreen) {
+            const inactiveDaysButtons = this.el.nativeElement.getElementsByClassName(`tab inactive`);
+            if (focus) {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.addClass(inactiveDayButton, 'ocultar-tab');
+                }
+            } else {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.removeClass(inactiveDayButton, 'ocultar-tab');
+                }
+            }
+        }
+    }
+
     imageError(event: Event) {
         (event.target as HTMLImageElement).src = '';
     }

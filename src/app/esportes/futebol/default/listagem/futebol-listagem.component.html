@@ -6,16 +6,21 @@
         <div class="filter">
             <div class="search-box" style="flex: 1">
                 <i class="fa fa-search"></i>
-                <input type="text" [(ngModel)]="term" class="form-control inverted-out" placeholder="Pesquisar">
+                <input type="text" [(ngModel)]="term"
+                       class="form-control inverted-out"
+                       placeholder="Pesquisar"
+                       (focusin)="focusPesquisa(true)"
+                       (focusout)="focusPesquisa(false)"
+                >
                 <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
             </div>
 
             <div class="tabs">
                 <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 0" [ngClass]="{'active': tabSelected == 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 1" [ngClass]="{'active': tabSelected == 'doisdias'}" (click)="mudarData('+2')">{{ diaHojeMaisDois.format(mobileScreen ? 'ddd' : 'dddd') | titlecase }}</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 2" [ngClass]="{'active': tabSelected == 'tresdias'}" (click)="mudarData('+3')">{{ diaHojeMaisTres.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 3" [ngClass]="{'active': tabSelected == 'quatrodias'}" (click)="mudarData('+4')">{{ diaHojeMaisQuatro.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 0" [ngClass]="{'active': tabSelected == 'amanha', 'inactive': tabSelected != 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 1" [ngClass]="{'active': tabSelected == 'doisdias', 'inactive': tabSelected != 'doisdias'}" (click)="mudarData('+2')">{{ diaHojeMaisDois.format(mobileScreen ? 'ddd' : 'dddd') | titlecase }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 2" [ngClass]="{'active': tabSelected == 'tresdias', 'inactive': tabSelected != 'tresdias'}" (click)="mudarData('+3')">{{ diaHojeMaisTres.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 3" [ngClass]="{'active': tabSelected == 'quatrodias', 'inactive': tabSelected != 'quatrodias'}" (click)="mudarData('+4')">{{ diaHojeMaisQuatro.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
             </div>
         </div>
 
