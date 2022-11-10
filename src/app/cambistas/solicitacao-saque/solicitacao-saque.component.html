@@ -54,7 +54,33 @@
                 </div>
             </form>
 
-            <div class="table-responsive">
+
+            <ul *ngIf="isMobile" class="listagem-saque">
+                <li *ngFor="let aposta of solicitacoes">
+                    <span class="chave">#{{ aposta.codigo }}</span>
+                    <span>
+                        <label>Apostador:</label> {{ aposta.apostador | uppercase }}
+                    </span>
+                    <span>{{ aposta.horario }}</span>
+                    <span>
+                        <label>Chave:</label> {{ aposta.valor | currency}}
+                    </span>
+                    <span>
+                        {{ aposta.comissao | currency }}
+                    </span>
+                    <span>
+                        {{ aposta.premio | currency }}
+                    </span>
+                    <span>
+                        {{ aposta.pago }}
+                    </span>
+                    <span>
+                        {{ aposta.pago }}
+                    </span>
+                </li>
+            </ul>
+
+            <div *ngIf="!isMobile" class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -82,7 +108,7 @@
                             <td>{{ aposta.comissao | currency }}</td>
                             <td>{{ aposta.premio | currency }}</td>
                             <td>{{ aposta.pago }}</td>
-                            <td>{{ aposta.pago }}</td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

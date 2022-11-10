@@ -5,7 +5,8 @@
 
 .informacoes{
     padding: 2.5em;
-    background: #181818;
+    background: var(--game);
+    color: var(--foreground-game);
     margin-bottom: 30px;
 }
 
@@ -19,7 +20,7 @@
     margin-bottom: 30px;
 }
 
-.informacoes h3{
+.informacoes h3 {
     font-weight: 600;
     font-size: 12px;
 }
@@ -52,4 +53,44 @@
     gap: 1rem;
     justify-content: end;
     align-items: center;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .modal-header {
+        padding: 20px 20px 0;
+        border-bottom: 0;
+        align-items: flex-start;
+    }
+
+    .modal-header a i {
+        color: var(--highlight);
+        font-size: 22px;
+    }
+
+    .modal-body {
+        padding: 0 20px 20px;
+    }
+
+    h4.modal-title {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .buttons {
+        justify-content: space-between;
+    }
+
+    .buttons button {
+        flex: 1;
+    }
+
+    .informacoes h3 {
+        font-size: 14px;
+    }
+
+    .logo-modal {
+        height: 20px;
+        margin-bottom: 15px;
+    }
 }

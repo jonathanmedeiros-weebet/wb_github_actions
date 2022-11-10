@@ -9,6 +9,8 @@ import { SidebarService, CartaoService } from 'src/app/services';
 })
 export class CartaoComponent implements OnInit {
 
+    isMobile = false;
+
     loading = false;
     cartoes = [];
     apostador = '';
@@ -28,6 +30,10 @@ export class CartaoComponent implements OnInit {
         private sidebarService: SidebarService,
         public activeModal: NgbActiveModal
     ) {
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
+
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
         this.toDate = calendar.getToday();
 
