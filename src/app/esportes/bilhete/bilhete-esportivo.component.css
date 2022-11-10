@@ -395,6 +395,14 @@ h4 {
         overflow: hidden;
     }
 
+    .titulo {
+        padding: 10px;
+        color: var(--foreground);
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+    }
+
     .valores button {
         width: auto;
     }

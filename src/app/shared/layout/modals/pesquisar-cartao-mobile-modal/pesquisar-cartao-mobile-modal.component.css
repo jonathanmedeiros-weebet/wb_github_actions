@@ -30,7 +30,8 @@ h4.modal-title {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #181818;
+    background-color: var(--game);
+    color: var(--foreground-game);
     border-radius: 15px;
     padding: 15px;
     overflow: hidden;
@@ -80,5 +81,5 @@ h4.modal-title {
 }
 
 .cartao .valores .item span {
-    color: #35CC95;
+    color: var(--highlight);
 }

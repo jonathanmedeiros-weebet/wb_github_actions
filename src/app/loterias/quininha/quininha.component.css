@@ -116,12 +116,13 @@ input, select {
 
     .pre-bilhete-mobile {
         padding: 0;
-        background: #181818;
+        background: var(--sidebars);
+        color: var(--foreground-sidebars);
     }
 
     .pre-bilhete-mobile .jogo-selecionado {
         padding: 20px;
-        background: #0a0a0a;
+        background: var(--sidebars);
         border-radius: 15px;
     }
 

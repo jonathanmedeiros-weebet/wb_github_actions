@@ -357,6 +357,14 @@
 
 /* Media */
 @media only screen and (max-width: 1024px) {
+    .titulo {
+        padding: 10px;
+        color: var(--foreground);
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+    }
+
     #acumuladao-form .eventos{
         padding-bottom: 75px;
     }
@@ -420,8 +428,9 @@
     }
 
     #acumuladao-form .eventos .evento .nome-placar {
-        background-color: #010101;
-        border: 1px solid #35CC95;
+        background-color: var(--game);
+        color: var(--foreground-game);
+        border: 1px solid var(--highlight);
         border-radius: 4px;
     }
 }
