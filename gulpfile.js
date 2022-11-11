@@ -2411,3 +2411,12 @@ gulp.task('premierbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('trevobet.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "trevobet.net",
+        banca: "TREVO BET",
+        styles: "",
+    });
+});
