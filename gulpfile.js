@@ -2402,3 +2402,12 @@ gulp.task('bet10.wee.bet', function (done) {
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WSNRRPX'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
     });
 });
+
+gulp.task('premierbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "premierbet.wee.bet",
+        banca: "PREMIER BET",
+        styles: "",
+    });
+});
