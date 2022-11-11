@@ -1326,9 +1326,10 @@ input.inverted-out:focus {
 }
 
 input.inverted-out:disabled {
-    border-color: #0A0A0A;
-    background: #212121;
-    color: #646464;
+    border-color: var(--foreground-inputs-odds);
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    opacity: .5;
 }
 
 input.inverted-out::placeholder,
