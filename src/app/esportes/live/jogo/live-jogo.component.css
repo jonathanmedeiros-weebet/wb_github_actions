@@ -77,7 +77,7 @@
 }
 
 .div-back{
-    color: #35CC95;
+    color: var(--highlight);
     font-size: 1.6rem;
     cursor: pointer;
 
