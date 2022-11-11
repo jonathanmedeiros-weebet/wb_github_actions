@@ -22,9 +22,9 @@
 
     <div class="resultado-pesquisa" *ngIf="cartao">
         <label class="label-resultado">Resultado da pesquisa</label>
-        <div class="cartao">
-            <img src="assets/images/logo-cartao.svg" alt="W" class="logo-cartao">
-            <img src="assets/images/background-cartao.svg" alt="W" class="background-cartao">
+        <div class="cartao" (click)="abrirDetalheCartao(cartao)">
+            <!-- <img src="assets/images/logo-cartao.svg" alt="W" class="logo-cartao">
+            <img src="assets/images/background-cartao.svg" alt="W" class="background-cartao"> -->
 
             <div class="data">{{ cartao.data_registro }}</div>
             <div class="apostador">Apostador: {{ cartao.apostador }}</div>
@@ -49,7 +49,5 @@
                 </div>
             </div>
         </div>
-
-        <div class="btn btn-custom2 btn-block">Solicitar saque</div>
     </div>
 </div>

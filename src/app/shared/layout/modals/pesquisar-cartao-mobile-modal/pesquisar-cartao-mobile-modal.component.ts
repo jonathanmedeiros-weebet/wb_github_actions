@@ -52,6 +52,14 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
             );
     }
 
+    abrirDetalheCartao(cartao) {
+        this.modalRef = this.modalService.open(CartaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+        this.modalRef.componentInstance.cartao = cartao;
+    }
+
     handleError(error) {
         this.messageService.error(error);
     }
