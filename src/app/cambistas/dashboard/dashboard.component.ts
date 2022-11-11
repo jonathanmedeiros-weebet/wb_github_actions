@@ -8,7 +8,9 @@ import {FormBuilder, Validators} from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { SidebarService, AuthService, CambistaService } from 'src/app/services';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ApostaComponent} from '../aposta/aposta.component';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -87,6 +89,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         private sidebarService: SidebarService,
         private auth: AuthService,
         private cambistaService: CambistaService,
+        private modalService: NgbModal,
+        private router: Router,
         public activeModal: NgbActiveModal
     ) {
         super();
@@ -179,5 +183,13 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
 
     chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
         console.log(event, active);
+    }
+
+    abrirCambistaApostas() {
+        if (this.isMobile) {
+            this.modalService.open(ApostaComponent);
+        } else {
+            this.router.navigate(['/cambistas/apostas']);
+        }
     }
 }
