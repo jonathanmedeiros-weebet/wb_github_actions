@@ -35,3 +35,18 @@
 .buttons button {
     flex: 1;
 }
+
+@media only screen and (max-width: 1024px) {
+    .modal-header {
+        padding: 20px;
+    }
+
+    .modal-header i {
+        color: var(--highlight);
+        font-size: 22px;
+    }
+
+    .table thead th {
+        background-color: var(--game);
+    }
+ }
