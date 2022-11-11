@@ -38,12 +38,12 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
     };
     public barChartOptions: ChartConfiguration['options'] = {
         responsive: true,
-        borderColor: "#ffffff",
+        borderColor: "#fff",
         maintainAspectRatio: false,
         scales: {
             x: {
                 ticks: {
-                    color: "#fff",
+                    color: "#aaa",
                 },
                 grid: {
                     color: '#535353',
@@ -53,7 +53,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
             y: {
                 min: 10,
                 ticks: {
-                    color: "#fff",
+                    color: "#aaa",
                 },
                 grid: {
                     color: '#535353',
@@ -68,7 +68,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
                 labels: {
                     usePointStyle: true,
                     pointStyle: "rectRounded",
-                    color: '#fff',
+                    color: '#aaa',
                 }
             }
         }
