@@ -22,6 +22,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     estadoSelecionado: number;
     cidadeSelecionada: number;
     showLoading = true;
+    mostrarSenha = false;
 
     constructor(
         private fb: FormBuilder,

@@ -89,8 +89,9 @@
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="password" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
+                        <input [type]="mostrarSenha ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
                         <label for="nome">Senha Atual</label>
+                        <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
                     </div>
 
                     <div class="buttons">

@@ -11,18 +11,21 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="fields">
                     <div class="form-group input-md">
-                        <input type="password" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
+                        <input [type]="mostrarSenhaAtual ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
                         <label for="nome">Senha Atual</label>
+                        <i class="fa showPassword" [ngClass]="mostrarSenhaAtual ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaAtual = !mostrarSenhaAtual"></i>
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="password" placeholder=" " formControlName="senha_nova" class="form-control inverted-out">
+                        <input [type]="mostrarSenhaNova ? 'text' : 'password'" placeholder=" " formControlName="senha_nova" class="form-control inverted-out">
                         <label for="nome">Nova senha</label>
+                        <i class="fa showPassword" [ngClass]="mostrarSenhaNova ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaNova = !mostrarSenhaNova"></i>
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="password" placeholder=" " formControlName="senha_confirmacao" class="form-control inverted-out">
+                        <input [type]="mostrarSenhaConfirmacao ? 'text' : 'password'" placeholder=" " formControlName="senha_confirmacao" class="form-control inverted-out">
                         <label for="nome">Confirmar nova senha</label>
+                        <i class="fa showPassword" [ngClass]="mostrarSenhaConfirmacao ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaConfirmacao = !mostrarSenhaConfirmacao"></i>
                     </div>
                 </div>
 

@@ -168,9 +168,10 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                     <input type="password" formControlName="senha_atual" class="form-control inverted-out">
-                                    <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
+                                    <input [type]="mostrarSenha ? 'text' : 'password'" formControlName="senha_atual" class="form-control inverted-out">
+                                    <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
                                 </div>
+                                <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
                             </div>
                         </div>
                     </fieldset>

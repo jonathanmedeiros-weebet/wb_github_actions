@@ -21,6 +21,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
     estadoSelecionado: number;
     cidadeSelecionada: number;
     showLoading = true;
+    mostrarSenha = false;
 
     constructor(
         private fb: FormBuilder,

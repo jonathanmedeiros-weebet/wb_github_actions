@@ -21,6 +21,7 @@ export class ClientePixModalComponent extends BaseFormComponent implements OnIni
     estadoSelecionado: number;
     cidadeSelecionada: number;
     showLoading = true;
+    mostrarSenha = false;
 
     constructor(
         private fb: FormBuilder,

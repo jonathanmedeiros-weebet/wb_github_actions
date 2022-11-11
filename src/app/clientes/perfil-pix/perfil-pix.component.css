@@ -41,3 +41,7 @@ label {
 .row {
     margin-bottom: 30px;
 }
+
+.form-group {
+    position: relative;
+}
