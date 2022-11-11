@@ -2395,6 +2395,7 @@ gulp.task('bet10.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "bet10.wee.bet",
+        shared_url: "bet10.bet",
         banca: "BET10",
         styles: "",
     });
