@@ -1638,15 +1638,6 @@ gulp.task('goldavirada.bet', function (done) {
     });
 });
 
-gulp.task('megabetmg.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "megabetmg.wee.bet",
-        banca: "MEGA BET MG",
-        styles: "",
-    });
-});
-
 gulp.task('bets60.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1955,15 +1946,6 @@ gulp.task('betcomvoce.com.br', function (done) {
     });
 });
 
-gulp.task('gaveta.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "gaveta.bet",
-        banca: "GAVETA.BET",
-        styles: "",
-    });
-});
-
 gulp.task('nmbets.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2221,15 +2203,6 @@ gulp.task('sportsgames.io', function (done) {
         server: "front3.wee.bet",
         host: "sportsgames.io",
         banca: "SPORTS GAMES",
-        styles: "",
-    });
-});
-
-gulp.task('skoutbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "skoutbet.wee.bet",
-        banca: "SKOUT BET",
         styles: "",
     });
 });
