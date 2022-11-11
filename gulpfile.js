@@ -2382,11 +2382,32 @@ gulp.task('prowin.bet', function (done) {
     });
 });
 
-gulp.task('betsnew.wee.bet', function (done) {
+gulp.task('betsnews.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "betsnew.wee.bet",
-        banca: "BETS NEW",
+        host: "betsnews.wee.bet",
+        banca: "BETS NEWS",
+        styles: "",
+    });
+});
+
+gulp.task('bet10.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet10.wee.bet",
+        shared_url: "bet10.bet",
+        banca: "BET10",
+        styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WSNRRPX');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WSNRRPX'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
+    });
+});
+
+gulp.task('premierbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "premierbet.wee.bet",
+        banca: "PREMIER BET",
         styles: "",
     });
 });
