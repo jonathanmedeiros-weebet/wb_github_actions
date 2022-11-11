@@ -91,12 +91,12 @@ td {
 }
 
 .custom-day.range, .custom-day:hover {
-    background-color: #24966c;
-    color: white;
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 .custom-day.faded {
-    background-color: #3dc593;
+    background-color: var(--highlight);
 }
 
 
