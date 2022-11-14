@@ -260,7 +260,8 @@
         "betsnews.wee.bet": "gulp betsnews.wee.bet",
         "bet10.wee.bet": "gulp bet10.wee.bet",
         "premierbet.wee.bet": "gulp premierbet.wee.bet",
-        "trevobet.net": "gulp trevobet.net"
+        "trevobet.net": "gulp trevobet.net",
+        "easybets.club": "gulp easybets.club"
     },
     "private": true,
     "dependencies": {

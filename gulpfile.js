@@ -2393,3 +2393,12 @@ gulp.task('trevobet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('easybets.club', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "easybets.club",
+        banca: "EASY BETS",
+        styles: "",
+    });
+});
