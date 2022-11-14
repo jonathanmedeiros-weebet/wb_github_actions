@@ -36,43 +36,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
             { data: this.dataSaida, label: 'Saída', backgroundColor: '#ED4C5C', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  }
         ]
     };
-    public barChartOptions: ChartConfiguration['options'] = {
-        responsive: true,
-        borderColor: "#fff",
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                ticks: {
-                    color: "#aaa",
-                },
-                grid: {
-                    color: '#535353',
-                    borderDash: [4, 2],
-                }
-            },
-            y: {
-                min: 10,
-                ticks: {
-                    color: "#aaa",
-                },
-                grid: {
-                    color: '#535353',
-                    borderDash: [4, 2],
-                }
-            },
-        },
-        plugins: {
-            legend: {
-                display: true,
-                position: 'bottom',
-                labels: {
-                    usePointStyle: true,
-                    pointStyle: "rectRounded",
-                    color: '#aaa',
-                }
-            }
-        }
-    };
+    public barChartOptions: ChartConfiguration['options'];
 
     isMobile = false;
 
@@ -103,6 +67,46 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
         }
+
+        var style = getComputedStyle(document.body);
+
+        this.barChartOptions = {
+            responsive: true,
+            borderColor: "#fff",
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    ticks: {
+                        color: style.getPropertyValue('--foreground-game'),
+                    },
+                    grid: {
+                        color: style.getPropertyValue('--foreground-game'),
+                        borderDash: [4, 2],
+                    }
+                },
+                y: {
+                    min: 10,
+                    ticks: {
+                        color: style.getPropertyValue('--foreground-game'),
+                    },
+                    grid: {
+                        color: style.getPropertyValue('--foreground-game'),
+                        borderDash: [4, 2],
+                    }
+                },
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        pointStyle: "rectRounded",
+                        color: style.getPropertyValue('--foreground-game'),
+                    }
+                }
+            }
+        };
 
         this.loadChart('semana-atual');
         this.loadQuantidadeApostas('semana-atual');
