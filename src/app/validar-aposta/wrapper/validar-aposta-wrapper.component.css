@@ -12,7 +12,7 @@
 
 #pre-aposta{
     padding: 10px 14px;
-    border: 1px solid #FFFFFF;
+    border: 1px solid var(--game);
     border-radius: 5px;
 }
 

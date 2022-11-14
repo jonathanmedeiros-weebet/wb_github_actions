@@ -30,7 +30,7 @@
 .item-selecionado{
     padding-bottom: 20px;
     margin-top: 20px;
-    border-bottom: 1px dashed #FFFFFF;
+    border-bottom: 1px dashed var(--game);
     text-align: left;
     position: relative;
 }
@@ -78,5 +78,12 @@
 }
 
 .alteracoes-odds label {
-    color: #fff;
+    color: var(--foreground);
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .btn-custom {
+        width: 100%;
+    }
 }
