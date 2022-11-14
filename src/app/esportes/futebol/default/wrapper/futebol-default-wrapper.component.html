@@ -2,10 +2,12 @@
     <div id="futebol-default-content">
         <div class="lista" [hidden]="exibirMaisCotacoes">
             <app-futebol-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
-                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
-                [showLoadingIndicator]="showLoadingIndicator"
-                [camps]="campeonatos"
-                [data]="data">
+                                  (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
+                                  [showLoadingIndicator]="showLoadingIndicator"
+                                  [camps]="campeonatos"
+                                  [data]="data"
+                                  [campeonatoSelecionado]="campeonatoSelecionado"
+            >
             </app-futebol-listagem>
         </div>
         <div class="jogo" [hidden]="!exibirMaisCotacoes">

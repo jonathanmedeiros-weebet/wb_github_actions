@@ -38,6 +38,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
     @Input() data;
+    @Input() campeonatoSelecionado: boolean;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;

@@ -30,6 +30,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     odds = [];
     data;
     esporte = '';
+    campeonatoSelecionado = false;
     unsub$ = new Subject();
 
     constructor(
@@ -62,6 +63,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 this.showLoadingIndicator = true;
 
                 if (params['campeonato']) {
+                    this.campeonatoSelecionado = true;
+
                     const campeonatoId = params['campeonato'];
                     const queryParams: any = {
                         odds: this.odds,
@@ -78,6 +81,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
+                    this.campeonatoSelecionado = false;
+
                     const queryParams: any = {
                         'sport_id': this.sportId,
                         'campeonatos_bloqueados': this.campeonatosBloqueados,

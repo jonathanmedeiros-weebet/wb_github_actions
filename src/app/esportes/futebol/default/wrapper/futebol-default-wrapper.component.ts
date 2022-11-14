@@ -27,6 +27,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     data;
     campeonato;
+    campeonatoSelecionado = false;
     unsub$ = new Subject();
 
     constructor(
@@ -70,6 +71,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 let isHoje = false;
 
                 if (params['campeonato']) {
+                    this.campeonatoSelecionado = true;
                     const campeonatoId = params['campeonato'];
                     queryParams = {
                         odds: this.oddsPrincipais,
@@ -88,6 +90,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
+                    this.campeonatoSelecionado = false;
                     if (params['regiao_nome']) {
                         queryParams = {
                             odds: this.oddsPrincipais,

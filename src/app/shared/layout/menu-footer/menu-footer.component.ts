@@ -89,7 +89,6 @@ export class MenuFooterComponent implements OnInit {
             this.sidebarService.itens
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(dados => {
-                    console.log(dados.contexto);
                     this.contexto = dados.contexto;
                     switch (this.contexto) {
                         case 'esportes':

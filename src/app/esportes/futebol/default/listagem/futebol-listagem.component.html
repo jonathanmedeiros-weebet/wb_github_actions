@@ -3,7 +3,7 @@
     <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" (regiaoSelecionada)="receptorRegiaoSelecionada($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
     <div class="wrap-sticky">
 
-        <div class="filter">
+        <div class="filter" *ngIf="!campeonatoSelecionado">
             <div class="search-box" style="flex: 1">
                 <i class="fa fa-search"></i>
                 <input type="text" [(ngModel)]="term"

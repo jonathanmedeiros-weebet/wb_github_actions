@@ -25,6 +25,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() data;
     @Input() sportId;
     @Input() esporte;
+    @Input() campeonatoSelecionado: boolean;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;

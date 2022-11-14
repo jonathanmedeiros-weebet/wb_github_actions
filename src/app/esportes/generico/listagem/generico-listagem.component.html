@@ -2,7 +2,7 @@
     <app-banners [pagina]="esporte"></app-banners>
     <div class="wrap-sticky">
 
-        <div class="filter">
+        <div class="filter" *ngIf="!campeonatoSelecionado">
             <div class="search-box" style="flex: 1">
                 <i class="fa fa-search"></i>
                 <input type="text" [(ngModel)]="term"
