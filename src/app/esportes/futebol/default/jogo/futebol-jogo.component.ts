@@ -18,6 +18,7 @@ import {Jogo} from './../../../../models';
 import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -67,7 +68,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private activeModal: NgbActiveModal
     ) {
     }
 
@@ -151,7 +153,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.unicaColuna = window.innerWidth <= 1279;
 
         if (this.isMobile) {
-            this.altura -= 304;
+            this.altura -= 220;
         } else {
             this.altura -= 190 + ((window.innerHeight / 100) * 20);
         }
@@ -161,7 +163,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     back() {
-        this.exibirMaisCotacoes.emit(false);
+        if (this.isMobile) {
+            this.activeModal.close();
+        } else {
+            this.exibirMaisCotacoes.emit(false);
+        }
     }
 
     mapearOdds(odds) {

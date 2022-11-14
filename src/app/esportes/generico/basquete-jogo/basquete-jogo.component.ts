@@ -23,6 +23,7 @@ import {
 } from './../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-basquete-jogo',
@@ -54,7 +55,8 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private activeModal: NgbActiveModal
     ) { }
 
     ngOnInit() {
@@ -134,7 +136,7 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         let altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 254 + ((window.innerHeight / 100) * 20);
+            altura -= 190;
         } else {
             altura -= 150 + ((window.innerHeight / 100) * 20);
         }
@@ -144,7 +146,11 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     back() {
-        this.exibirMaisCotacoes.emit(false);
+        if (this.isMobile) {
+            this.activeModal.close();
+        } else {
+            this.exibirMaisCotacoes.emit(false);
+        }
     }
 
     mapearOdds(odds) {

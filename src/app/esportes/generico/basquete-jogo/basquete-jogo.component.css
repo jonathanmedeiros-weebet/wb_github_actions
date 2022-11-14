@@ -38,6 +38,8 @@
     width: 100%;
     justify-content: center;
     flex-direction: row;
+    background-color: inherit;
+    color: var(--foreground-header);
 }
 
 .indentificacao .nome {

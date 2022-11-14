@@ -11,6 +11,8 @@ import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
+import {BasqueteJogoComponent} from '../basquete-jogo/basquete-jogo.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-generico-listagem',
@@ -45,6 +47,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     loadingScroll = false;
     unsub$ = new Subject();
     term = '';
+    modalRef;
 
     limiteDiasTabela: number;
     diaHojeMaisDois;
@@ -71,7 +74,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
-        private router: Router
+        private router: Router,
+        private modalService: NgbModal
     ) { }
 
     ngOnInit() {
@@ -323,8 +327,14 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     // Exibindo todas as cotações daquele jogo selecionado
     maisCotacoes(jogoId) {
         this.jogoIdAtual = jogoId;
-        this.jogoSelecionadoId.emit(jogoId);
-        this.exibirMaisCotacoes.emit(true);
+
+        if (this.mobileScreen) {
+            this.modalRef = this.modalService.open(BasqueteJogoComponent);
+            this.modalRef.componentInstance.jogoId = this.jogoIdAtual;
+        } else {
+            this.jogoSelecionadoId.emit(jogoId);
+            this.exibirMaisCotacoes.emit(true);
+        }
     }
 
     exibirBtnProximaData() {

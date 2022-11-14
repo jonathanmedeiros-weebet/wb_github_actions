@@ -5,7 +5,7 @@ import {FutebolDefaultRoutingModule} from './futebol-default-routing.module';
 import {FutebolDefaultWrapperComponent} from './wrapper/futebol-default-wrapper.component';
 import {FutebolListagemComponent} from './listagem/futebol-listagem.component';
 import {FutebolJogoComponent} from './jogo/futebol-jogo.component';
-import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import {EsportesModule} from '../../esportes.module';
 import {RegioesDestaqueService} from '../../../services';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -25,7 +25,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
         FutebolListagemComponent,
         FutebolJogoComponent
     ],
-    providers: [RegioesDestaqueService]
+    providers: [
+        RegioesDestaqueService,
+        NgbActiveModal
+    ]
 })
 export class FutebolDefaultModule {
 }
