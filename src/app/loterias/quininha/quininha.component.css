@@ -85,6 +85,19 @@ input, select {
     padding-left: 30px;
 }
 
+.inputs-random {
+    display: flex;
+    gap: 30px;
+}
+
+.btn-surpresinha {
+    display: flex;
+    align-items: center;
+}
+
+.btn-surpresinha i {
+    margin-left: 8px;
+}
 
 /* Media */
 @media only screen and (max-width: 1024px) {
@@ -96,11 +109,6 @@ input, select {
     section.pre-bilhete {
         height: 0 !important;
         overflow: hidden;
-    }
-
-    .inputs-random {
-        display: flex;
-        gap: 30px;
     }
 
     .form-palpite {
@@ -131,5 +139,9 @@ input, select {
         right: 20px;
 
         line-height: 18px;
+    }
+
+    .btn-surpresinha i {
+        margin-left: 0;
     }
 }

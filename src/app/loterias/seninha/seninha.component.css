@@ -85,6 +85,20 @@ input, select {
     padding-left: 30px;
 }
 
+.inputs-random {
+    display: flex;
+    gap: 30px;
+}
+
+.btn-surpresinha {
+    display: flex;
+    align-items: center;
+}
+
+.btn-surpresinha i {
+    margin-left: 8px;
+}
+
 /* Media */
 @media only screen and (max-width: 1024px) {
     section.pre-bilhete.pre-bilhete-mobile {
@@ -95,11 +109,6 @@ input, select {
     section.pre-bilhete {
         height: 0 !important;
         overflow: hidden;
-    }
-
-    .inputs-random {
-        display: flex;
-        gap: 30px;
     }
 
     .form-palpite {
@@ -115,5 +124,9 @@ input, select {
 
     .pre-bilhete-mobile {
         padding: 0;
+    }
+
+    .btn-surpresinha i {
+        margin-left: 0;
     }
 }

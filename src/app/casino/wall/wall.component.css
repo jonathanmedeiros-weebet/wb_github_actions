@@ -247,6 +247,7 @@
     .game-tile {
         --gameTileWidth: calc((100% / 5) - 16px);
         width: var(--gameTileWidth);
+        min-height: 130px;
         margin-left: 20px;
         margin-bottom: 20px;
     }

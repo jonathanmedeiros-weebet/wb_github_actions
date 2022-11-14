@@ -14,7 +14,7 @@
                                             <option [value]="numero" [disabled]="disabledNumber(numero)"
                                                     *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
                                         </select>
-                                        <a class="hide-desktop btn btn-custom" (click)="gerarSupresinha()"><i class="fa fa-refresh"></i></a>
+                                        <a class="btn btn-custom btn-surpresinha" (click)="gerarSupresinha()">{{mobileScreen ? '' : 'Supresinha'}}<i class="fa fa-refresh"></i></a>
                                     </div>
                                 </div>
                             </div>
