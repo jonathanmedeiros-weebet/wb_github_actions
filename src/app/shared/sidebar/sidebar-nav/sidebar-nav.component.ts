@@ -14,6 +14,7 @@ import { ApostaModalComponent, AtivarCartaoModalComponent, CartaoCadastroModalCo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
 import { AuthService } from '../../services/auth/auth.service';
+import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -30,6 +31,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     unsub$ = new Subject();
     regioesDestaque;
     isNotCambista = true;
+    whatsapp;
 
     subCartao = false;
     subPerfil = false;
@@ -57,7 +59,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         private el: ElementRef,
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
-        private auth: AuthService
+        private auth: AuthService,
+        private paramsLocais: ParametrosLocaisService
     ) {
         super();
     }
@@ -119,6 +122,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 //     this.cd.detectChanges();
                 // }, 250);
             });
+
+        if (this.paramsLocais.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
+        }
     }
 
     createForm() {

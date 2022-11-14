@@ -206,8 +206,8 @@
             </li>
         </ul>
         <ul class="menu-bottom">
-            <li class="cambista-item">
-                <a>
+            <li class="cambista-item" *ngIf="whatsapp">
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
                     <i class="fa fa-comments icone-generico"></i>
                     <span class="regiao-nome">Ajuda</span>
                 </a>
@@ -285,8 +285,8 @@
         <ul class="menu-middle" style="border-top: 0">
         </ul>
         <ul class="menu-bottom">
-            <li class="cambista-item">
-                <a>
+            <li class="cambista-item" *ngIf="whatsapp">
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
                     <i class="fa fa-comments icone-generico"></i>
                     <span class="regiao-nome">Ajuda</span>
                 </a>
