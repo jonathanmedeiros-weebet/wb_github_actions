@@ -1245,15 +1245,6 @@ gulp.task('boto-fe.com', function (done) {
     });
 });
 
-gulp.task('chutescerto.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "chutescerto.com",
-        banca: "CHUTES CERTO",
-        styles: "",
-    });
-});
-
 gulp.task('boaesportes.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
