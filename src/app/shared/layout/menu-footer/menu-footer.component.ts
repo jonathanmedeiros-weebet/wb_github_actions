@@ -28,6 +28,8 @@ export class MenuFooterComponent implements OnInit {
     menuIsOpen = false;
     campeonatosIsOpen = false;
     isOpen = false;
+    contexto = '';
+    nomeBotaoExtras = 'Campeonatos';
 
     constructor(
         private auth: AuthService,
@@ -82,6 +84,23 @@ export class MenuFooterComponent implements OnInit {
                 .subscribe(isOpen => {
                     this.isOpen = isOpen;
                     this.cd.detectChanges();
+                });
+
+            this.sidebarService.itens
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(dados => {
+                    console.log(dados.contexto);
+                    this.contexto = dados.contexto;
+                    switch (this.contexto) {
+                        case 'esportes':
+                            this.nomeBotaoExtras = 'Campeonatos';
+                            break;
+                        case 'desafio':
+                            this.nomeBotaoExtras = 'Desafios';
+                            break;
+                        default:
+                            this.nomeBotaoExtras = 'Campeonatos';
+                    }
                 });
         }
     }

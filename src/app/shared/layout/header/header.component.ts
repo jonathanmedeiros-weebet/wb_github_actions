@@ -102,7 +102,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
-        this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
+
+        if (this.paramsService.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
+        }
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -332,9 +335,5 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirCambistaTabela() {
         this.modalService.open(TabelaComponent);
-    }
-
-    abrirAjuda() {
-
     }
 }

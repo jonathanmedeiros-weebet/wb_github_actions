@@ -12,9 +12,9 @@
     <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>
 </div>
 <div id="footer-bar" [hidden]="hidden">
-    <div class="foot-button">
+    <div class="foot-button" *ngIf="!['acumuladao', 'quininha', 'seninha'].includes(contexto)">
         <a class="" (click)="toggleCampeonatos()">
-            <i class="fa-solid fa-bars-staggered"></i> Campeonatos
+            <i class="fa-solid fa-bars-staggered"></i> {{nomeBotaoExtras}}
         </a>
     </div>
     <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active" [ngClass]="{'menu-open': menuIsOpen}">

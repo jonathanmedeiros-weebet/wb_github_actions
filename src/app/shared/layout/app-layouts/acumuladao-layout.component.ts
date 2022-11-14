@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {MenuFooterService} from '../../services/utils/menu-footer.service';
+import {SidebarService} from '../../services/utils/sidebar.service';
 
 @Component({
     selector: 'app-acumuladao-layout',
@@ -7,10 +9,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AcumuladaoLayoutComponent implements OnInit {
 
-    constructor() {
+    constructor(
+        private menuFooterService: MenuFooterService,
+        private sidebarService: SidebarService
+    ) {
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
+        this.menuFooterService.atualizarQuantidade(0);
+        this.menuFooterService.setIsAcumuladao(true);
+        this.sidebarService.changeItens({contexto: 'acumuladao'});
     }
 
 }
