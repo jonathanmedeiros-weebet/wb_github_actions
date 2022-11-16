@@ -129,7 +129,7 @@
                     <app-error-msg [control]="form.get('senha_confirmacao')" label="Confirmar Senha" class="text-left"></app-error-msg>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="afiliadoHabilitado">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
                     <div class="input-md">
                         <input type="text" id="afiliado" class="form-control inverted-out" [ngClass]="applyCssInputError('afiliado')"
@@ -143,10 +143,39 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <label for=""><input type="checkbox" formControlName="aceitar_termos"> Certifico que tenho mais de 18 anos de idade e  declaro que li e concordo com os termos de uso</label>
+                <label><input type="checkbox" formControlName="aceitar_termos"> Certifico que tenho mais de 18 anos de
+                    idade e declaro que li e concordo com os <a (click)="abrirModalTermosUso(termosUsoModal)"
+                                                                id="linkTermos"><b> termos de uso</b>.</a></label>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <ng-hcaptcha formControlName="captcha"></ng-hcaptcha>
+                <app-error-msg [control]="form.get('captcha')"></app-error-msg>
+            </div>
+        </div>
+
+        <input type="hidden" formControlName="check_1">
+        <input type="text" formControlName="check_2" class="d-none">
         <button type="submit" class="btn btn-custom btn-block btn-cadastrar">Cadastrar</button>
     </form>
 </div>
+
+<ng-template #termosUsoModal let-modal id="modal">
+    <div class="modal-header">
+        <img [src]="LOGO" alt="" class="logo-modal">
+        <a type="button" class="btn-close" aria-label="Close" (click)="fecharModalTermos()">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col col-md-12" [innerHTML]="termosDeUso.conteudo"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
 

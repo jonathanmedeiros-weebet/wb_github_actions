@@ -23,7 +23,7 @@
 
 <ul *ngIf="contexto != 'cambista' && contexto != 'cliente'" id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
     <ng-container *ngIf="contexto == 'esportes'">
-        <div class="destaques-regiao hide-mobile" *ngIf="isNotCambista">
+        <div class="destaques-regiao hide-mobile" *ngIf="cartaoApostaHabilitado && isNotCambista">
             <span class="group" *ngIf="!collapsed">Cartões</span>
             <li>
                 <a (click)="abrirConsultarCartao()">
@@ -160,7 +160,7 @@
                 </a>
             </li>
 
-            <li class="cambista-item" routerLinkActive="router-link-active">
+            <li class="cambista-item" routerLinkActive="router-link-active" *ngIf="cartaoApostaHabilitado && isNotCambista">
                 <a (click)="toogleSubCartao()">
                     <i class="fa fa-credit-card icone-generico"></i>
                     <span class="regiao-nome">Cartão</span>

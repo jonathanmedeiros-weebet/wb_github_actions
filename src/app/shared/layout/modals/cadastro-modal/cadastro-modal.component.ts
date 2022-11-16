@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ClienteService } from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -32,6 +32,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     mostrarSenha;
     mostrarConfirmarSenha;
     LOGO = config.LOGO;
+    modalTermosRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -42,7 +43,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private auth: AuthService,
         private route: ActivatedRoute,
         private router: Router,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private modalService: NgbModal
     ) {
         super();
     }
@@ -85,7 +87,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             email: [null, [Validators.required]],
             genero: ['', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            aceitar_termos: [null, [Validators.required]]
+            aceitar_termos: [null, [Validators.required]],
+            captcha: [null, [Validators.required]],
+            check_1: [''],
+            check_2: ['']
         }, {validator: PasswordValidation.MatchPassword});
     }
 
@@ -130,20 +135,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             );
     }
-    getUsuario() {
-        this.usuario = this.auth.getUser();
-    }
+
     handleError(error: string) {
         this.messageService.error(error);
     }
 
-    abrirCadastro() {
-        this.activeModal.dismiss();
-        this.router.navigate(['auth/cadastro']);
+    abrirModalTermosUso(modal: any) {
+        if (this.termosDeUso) {
+            this.modalTermosRef = this.modalService.open(modal);
+        }
     }
 
-    abrirRecuperarSenha() {
-        this.activeModal.dismiss();
-        this.router.navigate(['auth/recuperar-senha']);
+    fecharModalTermos() {
+        if (this.modalTermosRef) {
+            this.modalTermosRef.dismiss();
+        }
     }
 }

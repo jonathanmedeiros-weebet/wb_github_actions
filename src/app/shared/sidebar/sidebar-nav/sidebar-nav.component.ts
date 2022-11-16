@@ -6,14 +6,20 @@ import * as random from 'lodash.random';
 import {SupresinhaService} from '../../services/utils/surpresinha.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import { BaseFormComponent } from '../../layout/base-form/base-form.component';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ApostaService } from '../../services/aposta.service';
-import { MessageService } from '../../services/utils/message.service';
-import { ApostaModalComponent, AtivarCartaoModalComponent, CartaoCadastroModalComponent, CartaoModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../../layout/modals';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
-import { AuthService } from '../../services/auth/auth.service';
+import {BaseFormComponent} from '../../layout/base-form/base-form.component';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ApostaService} from '../../services/aposta.service';
+import {MessageService} from '../../services/utils/message.service';
+import {
+    ApostaModalComponent,
+    CartaoCadastroModalComponent,
+    PesquisarCartaoModalComponent,
+    RecargaCartaoModalComponent,
+    SolicitarSaqueModalComponent
+} from '../../layout/modals';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {RegioesDestaqueService} from '../../services/regioes-destaque.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
 @Component({

@@ -52,6 +52,7 @@ import {NgxCurrencyModule} from 'ngx-currency';
 import {BannersComponent} from './banners/banners.component';
 import { ResultadosModalComponent } from './modals/resultados-modal/resultados-modal.component';
 import { CodeInputModule } from 'angular-code-input';
+import {NgHcaptchaModule} from 'ng-hcaptcha';
 
 @NgModule({
     imports: [
@@ -71,6 +72,10 @@ import { CodeInputModule } from 'angular-code-input';
         CodeInputModule.forRoot({
             codeLength: 6
         }),
+        NgHcaptchaModule.forRoot({
+            siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
+            languageCode: 'pt'
+        })
     ],
     declarations: [
         MainLayoutComponent,

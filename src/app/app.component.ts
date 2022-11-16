@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService} from './services';
+import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService} from './services';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {CadastroModalComponent} from './shared/layout/modals';
 
 @Component({
     selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     SLUG;
     TIMESTAMP;
     ativacaoCadastro;
+    modoClienteHabilitado;
 
     constructor(
         private auth: AuthService,
@@ -34,6 +36,7 @@ export class AppComponent implements OnInit {
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
+        private paramLocais: ParametrosLocaisService
     ) {
     }
 
@@ -50,9 +53,17 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
         this.route.queryParams
             .subscribe((params) => {
-                if (params.token) {
+                if (this.modoClienteHabilitado && params.afiliado) {
+                    this.modalService.open(CadastroModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        size: 'lg',
+                        centered: true,
+                        windowClass: 'modal-700'
+                    });
+                } else if (params.token) {
                     this.ativacaoCadastro = true;
                     this.auth.ativacaoCadastro({token: params.token})
                         .subscribe(

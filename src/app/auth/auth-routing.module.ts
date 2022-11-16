@@ -14,11 +14,6 @@ export const routes: Routes = [
         component: PagesLayoutComponent,
         children: [
             {
-                path: 'cadastro',
-                component: CadastroComponent,
-                canActivate: [ModuloClienteGuard]
-            },
-            {
                 path: 'recuperar-senha',
                 component: RecuperarSenhaComponent
             },
