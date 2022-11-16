@@ -26,10 +26,6 @@ export class SportLayoutComponent implements OnInit {
     }
 
     showSubmenu() {
-        if (this.isMobile && this.router.url == '/esportes/live/jogos') {
-            return false;
-        }
-
         return true;
     }
 }
