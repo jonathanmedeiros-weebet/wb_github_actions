@@ -11,6 +11,7 @@ import {
     SidebarService,
     MenuFooterService
 } from './../../../../services';
+import { Campeonato } from '../../../../models';
 import * as moment from 'moment';
 
 @Component({
@@ -53,7 +54,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 }
             );
 
-        const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+        let dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
 
         if (this.paramsService.getOddsPrincipais()) {
             this.oddsPrincipais = this.paramsService.getOddsPrincipais();
@@ -71,6 +72,20 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
                 if (params['campeonato']) {
                     const campeonatoId = params['campeonato'];
+
+                    // WC 2022
+                    if (campeonatoId == '01003ae97464082295b1ee23564be8bb') {
+                        let fechamentoTabelaDomingo = this.paramsService.getOpcoes().fechamento_tabela_domingo;
+
+                        if (fechamentoTabelaDomingo) {
+                            if (moment().day() != 0) {
+                                dataLimiteTabela = moment().isoWeekday(0).add(7, 'd').format('YYYY-MM-DD');
+                            }
+                        } else {
+                            dataLimiteTabela = '2022-12-19';
+                        }
+                    }
+
                     queryParams = {
                         odds: this.oddsPrincipais,
                         data_final: dataLimiteTabela
@@ -79,8 +94,12 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     this.campeonatoService.getCampeonato(campeonatoId, queryParams)
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(
-                            campeonato => {
-                                this.campeonatos = [campeonato];
+                            (campeonato: Campeonato) => {
+                                if (campeonato instanceof Array) {
+                                    this.campeonatos = [];
+                                } else {
+                                    this.campeonatos = [campeonato];
+                                }
 
                                 this.showLoadingIndicator = false;
                                 this.jogoId = this.extrairJogoId(this.campeonatos);

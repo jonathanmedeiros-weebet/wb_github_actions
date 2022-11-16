@@ -1,14 +1,16 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { IsActiveMatchOptions } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import {AuthDoisFatoresModalComponent, LoginModalComponent} from '../modals';
+
+import { AuthDoisFatoresModalComponent, LoginModalComponent } from '../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
 import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from './../../config';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-header',
@@ -72,6 +74,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     unsub$ = new Subject();
     pixCambista = false;
     modalRef;
+    myMatchOptions: IsActiveMatchOptions = {
+        matrixParams: 'ignored',
+        queryParams: 'ignored',
+        fragment: 'ignored',
+        paths: 'exact'
+    };
+
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
