@@ -67,6 +67,8 @@ button {
 
     .modal-header > img {
         opacity: 0;
+        width: 0;
+        height: 0;
     }
 
     .modal-body {

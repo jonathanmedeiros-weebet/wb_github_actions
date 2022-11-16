@@ -33,7 +33,8 @@ footer {
 }
 
 .logo img {
-    width: 120px;
+    max-height: 80px;
+    max-width: 120px;
 }
 
 .links {

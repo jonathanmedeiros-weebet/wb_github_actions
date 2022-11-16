@@ -32,6 +32,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     regioesDestaque;
     isNotCambista = true;
     whatsapp;
+    cartaoApostaHabilitado;
 
     subCartao = false;
     subPerfil = false;
@@ -66,6 +67,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
+
         if  (this.router.url == '/cambistas/cartoes' || this.router.url == '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
         }

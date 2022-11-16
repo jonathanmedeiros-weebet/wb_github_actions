@@ -5,7 +5,7 @@
             Bilhete
         </a>
 
-        <a (click)="pesquisarCartao()" *ngIf="!isLoggedIn || !isCliente">
+        <a (click)="pesquisarCartao()" *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
             <i class="fa fa-credit-card"></i>
             Cartões
         </a>

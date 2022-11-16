@@ -14,6 +14,7 @@ import {Subject} from 'rxjs';
 import {ResultadosModalComponent} from '../../layout/modals/resultados-modal/resultados-modal.component';
 import {config} from '../../config';
 import {PrintService} from '../../services/utils/print.service';
+import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 
 @Component({
     selector: 'app-sidebar-menu',
@@ -28,6 +29,7 @@ export class SidebarMenuComponent implements OnInit {
     modalRef;
     trevoOne = false;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
+    cartaoApostaHabilitado;
     unsub$ = new Subject();
 
     constructor(
@@ -35,13 +37,15 @@ export class SidebarMenuComponent implements OnInit {
         private sidebarService: SidebarService,
         private modalService: NgbModal,
         private cd: ChangeDetectorRef,
-        private printService: PrintService
+        private printService: PrintService,
+        private paramsService: ParametrosLocaisService
     ) {
     }
 
     ngOnInit() {
         this.isAppMobile = this.auth.isAppMobile();
         this.isMobileScreen = window.innerWidth < 1025;
+        this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
