@@ -67,6 +67,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
     heightSidebarNav = 500;
     collapsed = false;
     whatsapp = null;
+    blockedHover = false;
 
     constructor(
         private auth: AuthService,
@@ -195,6 +196,12 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
 
     collapseSidebar() {
         this.sidebarService.collapseSidebar();
+
+        this.blockedHover = true;
+
+        setTimeout(() => {
+            this.blockedHover = false;
+        }, 1000);
         //
         // this.collapsed = !this.collapsed;
         //

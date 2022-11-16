@@ -8,7 +8,7 @@
     flex-direction: column;
 }
 
-#sidebar-wrapper.collapsed:hover {
+#sidebar-wrapper.collapsed:not(.blockedHover):hover {
     width: 270px;
 }
 

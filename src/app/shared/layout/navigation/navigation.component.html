@@ -2,7 +2,7 @@
 <!--<app-spinner *ngIf="showLoading"></app-spinner>-->
 <!--[ngClass]="{'hide': isOpen}"-->
 <aside id="sidebar-container">
-    <div class="sidebar-wrapper" [ngClass]="{'collapsed': collapsed}" id="sidebar-wrapper">
+    <div class="sidebar-wrapper" [ngClass]="{'collapsed': collapsed, 'blockedHover': blockedHover}" id="sidebar-wrapper">
         <div id="side-fixed-menu">
             <div class="collapse-container">
                 <a class="btn-collapse" (click)="collapseSidebar()">
