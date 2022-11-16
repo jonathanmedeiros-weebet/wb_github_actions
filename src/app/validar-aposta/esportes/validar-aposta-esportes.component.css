@@ -21,7 +21,7 @@
     display: block;
     height: 2px;
     width: 20px;
-    background: red;
+    background: var(--highlight);
     top: 23px;
     left: 108px;
     position: relative;

@@ -65,13 +65,13 @@
     color: var(--foreground-game);
     width: 100%;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--foreground-game);
     font-size: 12px;
 }
 
 #acumuladao-form .evento {
     display: flex;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid var(--foreground-game);
 }
 
 #acumuladao-form .evento:first-of-type {
@@ -81,7 +81,7 @@
 #acumuladao-form .evento .dados {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid var(--foreground-game);
     padding: 15px;
     white-space: nowrap;
     justify-content: center;
@@ -133,8 +133,9 @@
 }
 
 #acumuladao-form .time-a-placar > div, #acumuladao-form .time-b-placar > div {
-    border: 1px solid #fff;
-    padding: 5px 10px;
+    border: 1px solid var(--foreground-game);
+    border-radius: 4px;
+    padding: 5px 20px;
     font-size: 1.2rem;
     font-weight: bolder;
 }
@@ -156,7 +157,8 @@
 }
 
 #nenhum-jogo {
-    background-color: #181818;
+    background-color: var(--game);
+    color: var(--foreground-game);
     text-align: left;
     border-radius: 5px;
     padding: 8px;
@@ -178,7 +180,7 @@
 }
 
 .footer-bilhete {
-    border-top: 2px solid rgba(241, 241, 241, .05);
+    border-top: 2px solid var(--foreground-sidebars);
 }
 
 .div-inputs {

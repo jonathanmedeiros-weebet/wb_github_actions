@@ -17,7 +17,7 @@
     display: block;
     height: 2px;
     width: 20px;
-    background: red;
+    background: var(--highlight);
     top: 23px;
     left: 108px;
     position: relative;
@@ -25,7 +25,7 @@
 
 .item-selecionado{
     padding: 15px 0;
-    border-bottom: 1px dashed #aec3d8;
+    border-bottom: 1px dashed var(--game);
     text-align: left;
     position: relative;
 }
@@ -47,7 +47,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    color: red;
+    color: var(--highlight);
     font-size: 15px;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+    .btn-custom {
+        width: 100%;
+    }
 }
