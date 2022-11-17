@@ -24,7 +24,7 @@ export class MomentPipe implements PipeTransform {
                 nextDay: '[Amanhã]',
                 nextWeek: 'dddd',
                 lastDay: '[Ontem]',
-                lastWeek: '[Last] dddd',
+                lastWeek: '[Último] dddd',
                 sameElse: 'DD/MM/YYYY'
             });
         }
