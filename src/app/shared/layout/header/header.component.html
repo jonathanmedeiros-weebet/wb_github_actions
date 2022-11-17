@@ -10,20 +10,19 @@
             <ng-container *ngIf="isLoggedIn; else loggedOut">
                 <div class="dropdown menu-conta">
                     <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-lg fa-user"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" [routerLink]="['clientes/perfil']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
-                            <h4 class="menu-conta-header"><i
-                                class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
+                            routerLinkActive="router-link-active" *ngIf="isCliente">
+                            <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome |
+                                titlecase}}</h4>
                         </a>
                         <button class="dropdown-item" disabled type="button" *ngIf="!isCliente">
-                            <h4 class="menu-conta-header"><i
-                                class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}</h4>
+                            <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome |
+                                titlecase}}</h4>
                         </button>
                         <div class="dropdown-divider"></div>
 
@@ -34,7 +33,7 @@
                             Saldo: {{posicaoFinanceira.saldo | currency}}
                         </button>
                         <button class="dropdown-item text-center" disabled type="button"
-                                *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                            *ngIf="isCliente && posicaoFinanceira.bonus != 0">
                             Bônus: {{posicaoFinanceira.bonus | currency}}
                         </button>
                         <div class="dropdown-divider"></div>
@@ -47,7 +46,8 @@
                             <i class="fa fa-dollar"></i> Solicitar Saque
                         </a>
 
-                        <a class="dropdown-item" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
+                        <a class="dropdown-item" [routerLink]="['cambistas/deposito']"
+                            *ngIf="!isCliente && pixCambista">
                             <i class="fa fa-dollar"></i> Liberar Crédito
                         </a>
 
@@ -56,8 +56,7 @@
                         </a>
 
                         <a class="dropdown-item" [routerLink]="['clientes/perfil']"
-                           routerLinkActive="router-link-active"
-                           *ngIf="isCliente">
+                            routerLinkActive="router-link-active" *ngIf="isCliente">
                             <i class="fa fa-user"></i> Minha Conta
                         </a>
 
@@ -73,7 +72,7 @@
             <ng-template #loggedOut>
                 <div class="menu-conta dropdown">
                     <button class="botao-cadastro nav-link btn" [routerLink]="['/auth/cadastro']"
-                            *ngIf="modoClienteAtivo">
+                        *ngIf="modoClienteAtivo">
                         Cadastre-se
                     </button>
                     <button (click)="abrirLogin()" class="botao-entrar nav-link btn">
@@ -88,14 +87,21 @@
             <i class="fa fa-angle-left fa-left"></i>
         </div>
         <div class="menu-categories scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
-             [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
+            [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
+            <div class="category" routerLinkActive="active">
+                <a class="" [routerLink]="['/esportes/futebol/copa']"
+                    [queryParams]="{campeonato: '01003ae97464082295b1ee23564be8bb'}">
+                    <svg-icon src="https://cdn.wee.bet/img/world-cup.svg" [svgStyle]="svgCss()"></svg-icon>
+                    <span>COPA 2022</span>
+                </a>
+            </div>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/live']">
                     <i class="wbicon icon-ao-vivo"></i>
                     <span>Ao Vivo</span>
                 </a>
             </div>
-            <div class="category" routerLinkActive="active">
+            <div class="category" routerLinkActive="active" [routerLinkActiveOptions]="myMatchOptions">
                 <a class="" [routerLink]="['/esportes/futebol']">
                     <i class="wbicon icon-futebol"></i>
                     <span>Futebol</span>
@@ -193,13 +199,13 @@
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
                 <a (click)="getPosicaoFinanceira($event)" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-lg fa-user"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right text-muted" aria-labelledby="navbarDropdown">
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="isCliente">
+                        *ngIf="isCliente">
                         <h4 class="menu-conta-header"><i class="fa fa-user-circle-o"></i> {{usuario.nome | titlecase}}
                         </h4>
                     </a>
@@ -216,7 +222,7 @@
                         Saldo: {{posicaoFinanceira.saldo | currency}}
                     </button>
                     <button class="dropdown-item text-center" disabled type="button"
-                            *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                        *ngIf="isCliente && posicaoFinanceira.bonus != 0">
                         Bônus: {{posicaoFinanceira.bonus | currency}}
                     </button>
                     <div class="dropdown-divider"></div>
@@ -238,7 +244,7 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['clientes/perfil']" routerLinkActive="router-link-active"
-                       *ngIf="isCliente">
+                        *ngIf="isCliente">
                         <i class="fa fa-user"></i> Minha Conta
                     </a>
 
