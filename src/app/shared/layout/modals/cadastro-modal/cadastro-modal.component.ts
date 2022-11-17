@@ -122,12 +122,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 () => {
-                    this.auth.login({username: values.usuario, password: values.senha, etapa: 1}).subscribe(
-                        () => {
-                            this.messageService.success('Cadastro realizado com sucesso!');
-                        },
-                        error => this.messageService.error(error)
-                    );
+                    // this.auth.login({username: values.usuario, password: values.senha, etapa: 1}).subscribe(
+                    //     () => {
+                    //         this.messageService.success('Cadastro realizado com sucesso!');
+                    //     },
+                    //     error => this.messageService.error(error)
+                    // );
+                    this.activeModal.dismiss();
+                    this.messageService.success('Cadastro realizado com sucesso! Verifique seu email para ativá-lo.');
                 },
                 error => {
                     this.messageService.error(error);

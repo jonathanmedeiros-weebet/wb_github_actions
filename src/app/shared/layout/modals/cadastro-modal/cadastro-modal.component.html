@@ -157,7 +157,7 @@
 
         <input type="hidden" formControlName="check_1">
         <input type="text" formControlName="check_2" class="d-none">
-        <button type="submit" class="btn btn-custom btn-block btn-cadastrar">Cadastrar</button>
+        <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">Cadastrar</button>
     </form>
 </div>
 
