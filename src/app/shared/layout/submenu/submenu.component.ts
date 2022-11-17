@@ -22,6 +22,25 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     submenuItems = [];
     submenu = [];
 
+    larguras = {
+        '/esportes/live': 400,
+        '/esportes/futebol': 90,
+        '/esportes/futsal': 81,
+        '/esportes/volei': 75,
+        '/esportes/basquete': 100,
+        '/esportes/combate': 98,
+        '/esportes/hoquei-gelo': 135,
+        '/esportes/futebol-americano': 153,
+        '/esportes/esports': 94,
+        '/esportes/tenis': 77,
+        '/casino/c/wall/todos': 85,
+        '/casino/c/wall/slot': 72,
+        '/casino/c/wall/raspadinha': 116,
+        '/casino/c/wall/roleta': 86,
+        '/casino/c/wall/mesa': 80,
+        '/casino/c/live': 138
+    };
+
     paddingMenu = 0;
 
     @HostListener('window:resize', ['$event'])
@@ -36,31 +55,13 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         private router: Router
     ) {
         router.events.subscribe(val => {
-
-            const larguras = {
-                '/esportes/live': 400,
-                '/esportes/futebol': 90,
-                '/esportes/futsal': 81,
-                '/esportes/volei': 75,
-                '/esportes/basquete': 100,
-                '/esportes/combate': 98,
-                '/esportes/hoquei-gelo': 135,
-                '/esportes/futebol-americano': 153,
-                '/esportes/esports': 94,
-                '/esportes/tenis': 77,
-                '/casino/c/wall/todos': 85,
-                '/casino/c/wall/slot': 72,
-                '/casino/c/wall/raspadinha': 116,
-                '/casino/c/wall/roleta': 86,
-                '/casino/c/wall/mesa': 80,
-                '/casino/c/live': 138
-            };
-
-            this.paddingMenu = larguras[this.router.url] ?? 0;
-          });
+            this.paddingMenu = this.larguras[this.router.url] ?? 0;
+        });
     }
 
     ngOnInit() {
+        this.paddingMenu = this.larguras[this.router.url] ?? 0;
+
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
