@@ -13,7 +13,7 @@
                    [ngClass]="applyCssInputError('email')" placeholder="Email">
             <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
         </div>
-        <button type="submit" class="btn btn-custom btn-block">Solicitar código de redefinição</button>
+        <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">Solicitar código de redefinição</button>
     </form>
 </div>
 

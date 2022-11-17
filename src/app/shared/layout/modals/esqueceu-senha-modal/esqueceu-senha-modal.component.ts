@@ -51,7 +51,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
         this.auth.forgot(this.form.value)
             .subscribe(
                 () => {
-                    this.router.navigate(['esportes/futebol/jogos']);
+                    this.activeModal.dismiss();
                     this.messageService.success('O código de verificação foi enviado para o e-mail informado.');
                 },
                 error => {

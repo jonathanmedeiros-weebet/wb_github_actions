@@ -1,5 +1,75 @@
+#default-content {
+    padding: 25px 38px;
+}
+
+.content-body, .content-body .content {
+    height: 100%;
+}
+
+.content-body .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-body .content form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    color: var(--foreground-header);
+    margin-bottom: 50px;
+}
+
 .required > .label::after {
     content: "*";
     color: #ff0000;
     font-size: 15px;
+}
+
+form .inputs {
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+form .inputs .row {
+    margin-bottom: 30px;
+}
+
+form .buttons {
+    text-align: right;
+}
+
+@media only screen and (max-width: 1024px) {
+    h2 {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    h5 {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .btn-custom {
+        width: 100%;
+    }
+
+    #default-content {
+        padding: 10px;
+    }
+
+    .form-group.text-right {
+        text-align: center !important;
+    }
+
+    .row {
+        margin-bottom: 0;
+    }
+
 }

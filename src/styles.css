@@ -98,10 +98,6 @@ game {
     display: contents;
 }
 
-#auth-layout {
-    height: 100%;
-}
-
 #auth-layout #login {
     align-items: center;
     display: flex;
