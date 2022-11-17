@@ -9,7 +9,6 @@ const routes: Routes = [
         path: '',
         component: PagesNoNavLayoutComponent,
         children: [
-            { path: 'deposito', component: InformacoesComponent, data: { pagina: 'deposito' } },
             { path: 'regras', component: InformacoesComponent, data: { pagina: 'regras' } },
             { path: 'quem-somos', component: InformacoesComponent, data: { pagina: 'quem-somos' } },
             { path: 'jogo-responsavel', component: InformacoesComponent, data: { pagina: 'jogo-responsavel' } },
