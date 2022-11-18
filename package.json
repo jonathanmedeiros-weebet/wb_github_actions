@@ -261,7 +261,8 @@
         "premierbet.wee.bet": "gulp premierbet.wee.bet",
         "trevobet.net": "gulp trevobet.net",
         "easybets.club": "gulp easybets.club",
-        "belabets.com": "gulp belabets.com"
+        "belabets.com": "gulp belabets.com",
+        "sportvbet.net": "gulp sportvbet.net"
     },
     "private": true,
     "dependencies": {

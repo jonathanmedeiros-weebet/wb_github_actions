@@ -2402,3 +2402,12 @@ gulp.task('belabets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportvbet.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "sportvbet.net",
+        banca: "SPORTV BET",
+        styles: "",
+    });
+});
