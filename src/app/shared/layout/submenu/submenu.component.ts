@@ -24,6 +24,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     larguras = {
         '/esportes/live': 400,
+        '/esportes/live/jogos': 87,
         '/esportes/futebol': 90,
         '/esportes/futsal': 81,
         '/esportes/volei': 75,
