@@ -68,6 +68,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isMobile = false;
     centered = true;
     pixCambista = false;
+    cartaoApostaHabilitado;
     modalRef;
 
     @HostListener('window:resize', ['$event'])
@@ -102,6 +103,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
+
+        this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
 
         if (this.paramsService.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');

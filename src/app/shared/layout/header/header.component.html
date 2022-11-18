@@ -86,53 +86,55 @@
                                 </span>
                             </a>
                             <hr />
-                            <label>Cartão</label>
-                            <a (click)="abrirCambistaCartaoConsultar()">
+                            <div *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
+                                <label>Cartão</label>
+                                <a (click)="abrirCambistaCartaoConsultar()">
                                 <span>
                                     <i class="fa fa-solid fa-credit-card"></i>
                                 </span>
-                                Consultar
-                                <span class="arrow-nav">
+                                    Consultar
+                                    <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
-                            <a (click)="abrirCambistaCartaoCriar()">
+                                </a>
+                                <a (click)="abrirCambistaCartaoCriar()">
                                 <span>
                                     <i class="fa fa-solid fa-credit-card"></i>
                                 </span>
-                                Criar
-                                <span class="arrow-nav">
+                                    Criar
+                                    <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
-                            <a (click)="abrirCambistaCartaoListagem()">
+                                </a>
+                                <a (click)="abrirCambistaCartaoListagem()">
                                 <span>
                                     <i class="fa fa-solid fa-credit-card"></i>
                                 </span>
-                                Listagem
-                                <span class="arrow-nav">
+                                    Listagem
+                                    <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
-                            <a (click)="abrirCambistaCartaoSaque()">
+                                </a>
+                                <a (click)="abrirCambistaCartaoSaque()">
                                 <span>
                                     <i class="fa fa-solid fa-credit-card"></i>
                                 </span>
-                                Solicitações de saque
-                                <span class="arrow-nav">
+                                    Solicitações de saque
+                                    <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
-                            <a (click)="abrirCambistaCartaoRecarga()">
+                                </a>
+                                <a (click)="abrirCambistaCartaoRecarga()">
                                 <span>
                                     <i class="fa fa-solid fa-credit-card"></i>
                                 </span>
-                                Recarga
-                                <span class="arrow-nav">
+                                    Recarga
+                                    <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
-                            <hr />
+                                </a>
+                                <hr/>
+                            </div>
                             <label>Mais opções</label>
                             <a (click)="abrirCambistaValidacao()">
                                 <span>
