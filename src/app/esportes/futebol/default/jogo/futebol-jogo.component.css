@@ -232,11 +232,17 @@
     }
 
     .indentificacao-jogo .div-back {
-        top: 0;
+        top: 5px;
+    }
+
+    .indentificacao-jogo .horario-jogo {
+        top: 5px;
     }
 
     .indentificacao-jogo .campeonato-nome {
         max-width: 240px;
+        position: initial;
+        margin: 10px 0;
     }
 
     .nome .time-a,
