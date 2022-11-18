@@ -1697,6 +1697,15 @@ input[type=number]::-webkit-outer-spin-button {
         padding: 5px 15px;
     }
 
+    .data-hora {
+        margin-right: 0;
+        padding-right: 5px;
+    }
+
+    .indentificacao .nome {
+        padding-left: 0px;
+    }
+
     .content-header h2 {
         font-size: 18px;
         margin-bottom: 25px;
