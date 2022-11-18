@@ -1,4 +1,4 @@
-<footer>
+<footer *ngIf="!isAppMobile">
     <a class="toTop" (click)="container.scrollTop = 0" *ngIf="container">
         <i class="fa fa-angle-up"></i>
     </a>
@@ -74,3 +74,4 @@
         </div>
     </div>
 </footer>
+<footer *ngIf="isAppMobile" class="footer-app-mobile"></footer>
