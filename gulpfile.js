@@ -2393,3 +2393,12 @@ gulp.task('easybets.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('belabets.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "belabets.com",
+        banca: "BELA BETS",
+        styles: "",
+    });
+});
