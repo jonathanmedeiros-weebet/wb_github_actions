@@ -2396,7 +2396,7 @@ gulp.task('easybets.club', function (done) {
 
 gulp.task('belabets.com', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front3.wee.bet",
         host: "belabets.com",
         banca: "BELA BETS",
         styles: "",
