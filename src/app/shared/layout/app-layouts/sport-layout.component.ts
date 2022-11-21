@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuFooterService } from '../../services/utils/menu-footer.service';
 import {SidebarService} from '../../services/utils/sidebar.service';
 
 @Component({
@@ -14,10 +15,12 @@ export class SportLayoutComponent implements OnInit {
     constructor(
         private sidebarService: SidebarService,
         private router: Router,
+        private menuFooterService: MenuFooterService,
     ) { }
 
     ngOnInit() {
         this.isMobile = window.innerWidth <= 1025;
+        this.menuFooterService.setIsAcumuladao(false);
 
         this.sidebarService.collapsedSource
             .subscribe(collapsed => {
