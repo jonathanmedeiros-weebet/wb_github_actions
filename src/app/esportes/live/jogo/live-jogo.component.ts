@@ -129,7 +129,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     mapearCotacoes(odds) {
-        console.log(odds);
         const mercados = {};
 
         for (let index = 0; index < odds.length; index++) {
