@@ -1,4 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { IsActiveMatchOptions } from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -70,6 +71,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     pixCambista = false;
     cartaoApostaHabilitado;
     modalRef;
+    myMatchOptions: IsActiveMatchOptions = {
+        matrixParams: 'ignored',
+        queryParams: 'ignored',
+        fragment: 'ignored',
+        paths: 'exact'
+    };
+
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {

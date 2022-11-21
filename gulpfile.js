@@ -1153,15 +1153,6 @@ gulp.task('betsmaranhao.wee.bet', function (done) {
     });
 });
 
-gulp.task('premiersport.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "premiersport.wee.bet",
-        banca: "PREMIER SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('megabetrn.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1242,15 +1233,6 @@ gulp.task('boto-fe.com', function (done) {
         banca: "BOTO FÉ",
         styles: "",
         scripts: "<script src='//code-sa1.jivosite.com/widget/qXJV3cn8tQ' async></script>",
-    });
-});
-
-gulp.task('chutescerto.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "chutescerto.com",
-        banca: "CHUTES CERTO",
-        styles: "",
     });
 });
 
@@ -2126,15 +2108,6 @@ gulp.task('nautsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('betpixlider.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betpixlider.wee.bet",
-        banca: "BET PIX LIDER",
-        styles: "",
-    });
-});
-
 gulp.task('grenbet.net', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2376,15 +2349,6 @@ gulp.task('bet10.wee.bet', function (done) {
     });
 });
 
-gulp.task('premierbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "premierbet.wee.bet",
-        banca: "PREMIER BET",
-        styles: "",
-    });
-});
-
 gulp.task('trevobet.net', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2399,6 +2363,24 @@ gulp.task('easybets.club', function (done) {
         server: "front1.wee.bet",
         host: "easybets.club",
         banca: "EASY BETS",
+        styles: "",
+    });
+});
+
+gulp.task('belabets.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "belabets.com",
+        banca: "BELA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('sportvbet.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "sportvbet.net",
+        banca: "SPORTV BET",
         styles: "",
     });
 });

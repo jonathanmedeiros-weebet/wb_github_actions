@@ -126,7 +126,6 @@
         "ilhabet.net": "gulp ilhabet.net",
         "megabetsport.com": "gulp megabetsport.com",
         "betsmaranhao.wee.bet": "gulp betsmaranhao.wee.bet",
-        "premiersport.wee.bet": "gulp premiersport.wee.bet",
         "megabetrn.wee.bet": "gulp megabetrn.wee.bet",
         "nortaobet.com": "gulp nortaobet.com",
         "rodadabets.wee.bet": "gulp rodadabets.wee.bet",
@@ -135,7 +134,6 @@
         "uzzebet.com": "gulp uzzebet.com",
         "paratodosbet.com": "gulp paratodosbet.com",
         "boto-fe.com": "gulp boto-fe.com",
-        "chutescerto.com": "gulp chutescerto.com",
         "boaesportes.com": "gulp boaesportes.com",
         "starbets.online": "gulp starbets.online",
         "betcompany.wee.bet": "gulp betcompany.wee.bet",
@@ -232,7 +230,6 @@
         "vipersports.bet": "gulp vipersports.bet",
         "atleticbet.com": "gulp atleticbet.com",
         "nautsports.wee.bet": "gulp nautsports.wee.bet",
-        "betpixlider.wee.bet": "gulp betpixlider.wee.bet",
         "grenbet.net": "gulp grenbet.net",
         "futtop.bet": "gulp futtop.bet",
         "rjbets.wee.bet": "gulp rjbets.wee.bet",
@@ -259,9 +256,10 @@
         "prowin.bet": "gulp prowin.bet",
         "betsnews.wee.bet": "gulp betsnews.wee.bet",
         "bet10.wee.bet": "gulp bet10.wee.bet",
-        "premierbet.wee.bet": "gulp premierbet.wee.bet",
         "trevobet.net": "gulp trevobet.net",
-        "easybets.club": "gulp easybets.club"
+        "easybets.club": "gulp easybets.club",
+        "belabets.com": "gulp belabets.com",
+        "sportvbet.net": "gulp sportvbet.net"
     },
     "private": true,
     "dependencies": {

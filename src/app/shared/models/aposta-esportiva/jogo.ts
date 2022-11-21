@@ -18,6 +18,7 @@ export class Jogo {
     ao_vivo: boolean;
     campeonato: Campeonato;
     cotacoes: Cotacao[];
+    cotacoes_aovivo: Cotacao[];
     cotacoes_principais: Cotacao[];
     info: JogoInfo;
     favorito: string;
