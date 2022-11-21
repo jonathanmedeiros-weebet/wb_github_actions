@@ -24,6 +24,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     larguras = {
         '/esportes/live': 400,
+        '/esportes/futebol-copa/copa': 108,
         '/esportes/live/jogos': 87,
         '/esportes/futebol': 90,
         '/esportes/futsal': 81,
@@ -56,12 +57,12 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         private router: Router
     ) {
         router.events.subscribe(val => {
-            this.paddingMenu = this.larguras[this.router.url] ?? 0;
+            this.paddingMenu = this.larguras[this.router.url.split('?')[0]] ?? 0;
         });
     }
 
     ngOnInit() {
-        this.paddingMenu = this.larguras[this.router.url] ?? 0;
+        this.paddingMenu = this.larguras[this.router.url.split('?')[0]] ?? 0;
 
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 270;
@@ -82,7 +83,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 routeActive: '/esportes/futebol-copa/copa?campeonato=01003ae97464082295b1ee23564be8bb',
                 queryParams: {campeonato: '01003ae97464082295b1ee23564be8bb'},
                 category: 'esporte',
-                active: !this.isMobile ?? this.paramsService.getOpcoes().aovivo
+                active: true
             },
             {
                 name: 'Ao-Vivo',
