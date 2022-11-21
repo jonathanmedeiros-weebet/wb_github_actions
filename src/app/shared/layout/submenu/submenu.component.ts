@@ -73,6 +73,18 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
         this.submenu = [
             {
+                name: 'Copa 2022',
+                link: '/esportes/futebol-copa/copa',
+                icon_class: 'wbicon icon-ao-vivo',
+                svgIcon: true,
+                svgSrc: 'https://cdn.wee.bet/img/world-cup.svg',
+                svgHover: false,
+                routeActive: '/esportes/futebol-copa/copa?campeonato=01003ae97464082295b1ee23564be8bb',
+                queryParams: {campeonato: '01003ae97464082295b1ee23564be8bb'},
+                category: 'esporte',
+                active: !this.isMobile ?? this.paramsService.getOpcoes().aovivo
+            },
+            {
                 name: 'Ao-Vivo',
                 link: '/esportes/live',
                 icon_class: 'wbicon icon-ao-vivo',
@@ -195,6 +207,9 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 name: 'Cassino Ao Vivo',
                 link: '/casino/c/live',
                 icon_class: 'fa-solid fa-dice',
+                svgIcon: false,
+                svgSrc: '',
+                queryParams: '',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
             }
@@ -249,5 +264,28 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         this.leftDisabled = scrollLeft <= 0;
 
         this.rightDisabled = (this.scrollWidth - (scrollLeft + this.menuWidth)) <= 0;
+    }
+
+    svgByRouteCss(route, hover = false) {
+        console.log(this.router.url);
+        console.log(this.router.url === route);
+
+        let svgCss = {
+            'width.px': 18,
+            'fill': 'var(--foreground-sub-nav)'
+        };
+
+        if (this.router.url === route || hover) {
+            svgCss = {
+                'width.px': 18,
+                'fill': 'var(--foreground-highlight)'
+            };
+        }
+
+        return svgCss;
+    }
+
+    changeSvgHover(index) {
+        this.submenuItems[index].svgHover = !this.submenuItems[index].svgHover;
     }
 }

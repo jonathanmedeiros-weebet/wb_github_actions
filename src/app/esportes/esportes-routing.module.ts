@@ -29,6 +29,10 @@ export const routes: Routes = [
                 loadChildren: () => import('./futebol/futebol.module').then(m => m.FutebolModule),
             },
             {
+                path: 'futebol-copa',
+                loadChildren: () => import('./futebol/futebol.module').then(m => m.FutebolModule),
+            },
+            {
                 path: 'combate',
                 data: { sportId: '9' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
