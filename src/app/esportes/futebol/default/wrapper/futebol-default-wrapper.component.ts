@@ -80,16 +80,9 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     const campeonatoId = params['campeonato'];
 
                     // WC 2022
-                    if (campeonatoId == '01003ae97464082295b1ee23564be8bb') {
-                        let fechamentoTabelaDomingo = this.paramsService.getOpcoes().fechamento_tabela_domingo;
-
-                        if (fechamentoTabelaDomingo) {
-                            if (moment().day() != 0) {
-                                dataLimiteTabela = moment().isoWeekday(0).add(7, 'd').format('YYYY-MM-DD');
-                            }
-                        } else {
-                            dataLimiteTabela = '2022-12-19';
-                        }
+                    let fechamentoTabelaDomingo = this.paramsService.getOpcoes().fechamento_tabela_domingo;
+                    if (campeonatoId == '01003ae97464082295b1ee23564be8bb' && !fechamentoTabelaDomingo) {
+                        dataLimiteTabela = '2022-12-19';
                     }
 
                     queryParams = {
