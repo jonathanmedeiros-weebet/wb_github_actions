@@ -1905,7 +1905,8 @@ gulp.task('superpix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "superpix.bet",
-        banca: "SUPER PIX",
+        shared_url: 'iconebet.com',
+        banca: "ÍconeBet",
         styles: "",
     });
 });
