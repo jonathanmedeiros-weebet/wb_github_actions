@@ -179,6 +179,14 @@
     .content-sports {
         padding-bottom: 100px;
     }
+
+    .large_screen {
+        display: block;
+    }
+
+    .small_screen {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -204,5 +212,13 @@
 
     .nome img {
         width: 30px;
+    }
+
+    .large_screen {
+        display: none;
+    }
+
+    .small_screen {
+        display: block;
     }
 }

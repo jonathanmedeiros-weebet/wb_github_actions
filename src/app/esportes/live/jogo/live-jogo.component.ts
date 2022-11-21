@@ -100,7 +100,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe(
                 jogo => {
                     this.jogo = jogo;
-                    this.mapearCotacoes(jogo.cotacoes);
+                    this.mapearCotacoes(jogo.cotacoes_aovivo);
                     this.live(id);
                 },
                 error => this.handleError(error)
@@ -113,7 +113,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe(
                 (jogo: Jogo) => {
                     this.jogo.info = jogo.info;
-                    this.mapearCotacoes(jogo.cotacoes);
+                    this.mapearCotacoes(jogo.cotacoes_aovivo);
                 }
             );
     }
