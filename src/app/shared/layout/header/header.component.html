@@ -86,7 +86,7 @@
                                 </span>
                             </a>
                             <hr />
-                            <div *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
+                            <ng-container *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
                                 <label>Cartão</label>
                                 <a (click)="abrirCambistaCartaoConsultar()">
                                 <span>
@@ -134,7 +134,7 @@
                                 </span>
                                 </a>
                                 <hr/>
-                            </div>
+                            </ng-container>
                             <label>Mais opções</label>
                             <a (click)="abrirCambistaValidacao()">
                                 <span>
