@@ -119,11 +119,6 @@
         font-size: 12px;
     }
 
-    .subcategory a:hover {
-        color: var(--foreground-sub-nav);
-        background-color: transparent;
-    }
-
     .submenu:not(.centered) .subcategory a.active {
         position: absolute;
         height: 38px;
