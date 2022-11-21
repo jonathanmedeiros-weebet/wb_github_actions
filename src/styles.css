@@ -156,6 +156,9 @@ game {
     overflow-x: hidden;
     padding: 5px;
     scroll-behavior: smooth;
+
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
 }
 
 .was-validated .form-control:invalid,
@@ -840,6 +843,9 @@ button {
 .content-loteria {
     padding: 5px;
     overflow: auto;
+
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
 }
 
 .margin-top-30 {
