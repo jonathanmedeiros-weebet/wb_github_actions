@@ -267,9 +267,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     }
 
     svgByRouteCss(route, hover = false) {
-        console.log(this.router.url);
-        console.log(this.router.url === route);
-
         let svgCss = {
             'width.px': 18,
             'fill': 'var(--foreground-sub-nav)'
