@@ -407,6 +407,11 @@
 
     .premios {
         flex-direction: column-reverse;
+        padding: 0;
+    }
+
+    .premios .encerramento {
+        margin-bottom: .5rem;
     }
 
     #acumuladao-form .eventos {
