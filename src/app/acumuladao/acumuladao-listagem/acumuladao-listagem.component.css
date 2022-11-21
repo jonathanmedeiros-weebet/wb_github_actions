@@ -65,4 +65,27 @@
     #acumuladao-listagem{
         height: calc(100vh - 122px);
     }
+
+    .acumuladao {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .acumuladao .infoAcumuladao {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+
+        font-size: 16px;
+    }
+
+    .acumuladao .infoAcumuladao .premio {
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    .acumuladao .infoAcumuladao .partidas {
+        font-size: 12px;
+    }
 }

@@ -132,6 +132,14 @@
     text-align: center;
 }
 
+#acumuladao-form .time-a-placar  {
+    margin-right: 5px;
+}
+
+#acumuladao-form .time-b-placar {
+    margin-left: 5px;
+}
+
 #acumuladao-form .time-a-placar > div, #acumuladao-form .time-b-placar > div {
     border: 1px solid var(--foreground-game);
     border-radius: 4px;
