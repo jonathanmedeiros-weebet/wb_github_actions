@@ -78,7 +78,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 valido = false;
                             }
 
-                            jogo.cotacoes_aovivo.map(cotacao => {
+                            jogo.cotacoes.map(cotacao => {
                                 cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                                 return cotacao;
                             });
@@ -144,7 +144,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
 
-                jogo.cotacoes_aovivo.map(cotacao => {
+                jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     return cotacao;
                 });
