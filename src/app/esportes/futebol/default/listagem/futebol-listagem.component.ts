@@ -69,21 +69,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     unsub$ = new Subject();
     term = '';
 
-    nomesCotacoes = [
-        '',
-        'Casa',
-        'Empate',
-        'Fora',
-        'C+E',
-        'F+E',
-        'C+F',
-        'Amb',
-        'nAmb',
-        '+0.5G',
-        '-0.5G',
-        '+1.5G',
-        '+2.5G',
-    ];
+    nomesCotacoes = [];
 
     jogosDestaque = [];
 
@@ -177,6 +163,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+
+        this.oddsPrincipais.forEach(oddPrincipal => {
+            this.nomesCotacoes.push(this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'));
+        });
 
         this.limiteDiasTabela = moment(this.dataLimiteTabela).date() - moment().date();
 
