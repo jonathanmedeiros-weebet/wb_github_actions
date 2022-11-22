@@ -2384,3 +2384,12 @@ gulp.task('sportvbet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ingol.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "ingol.wee.bet",
+        banca: "INGOL",
+        styles: "",
+    });
+});
