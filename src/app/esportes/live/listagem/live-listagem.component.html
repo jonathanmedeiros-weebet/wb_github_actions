@@ -71,27 +71,21 @@
                                     </div>
                                 </div>
 
-                                <div class="cotacoes" *ngIf="jogo.value.cotacoes.length > 0">
-                                    <div class="cotacao" *ngFor="let cotacao of jogo.value.cotacoes"
-                                    (click)="addCotacao(jogo.value, cotacao)" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
-                                        <label>{{ cotacao.nome}}</label>
-                                        <span>{{ cotacao.valor }}</span>
-                                    </div>
-                                </div>
+                                <div class="cotacoes">
+                                    <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo.value.cotacoes)">
+                                        <div class="cotacao disabled" *ngIf="cotacao.lock; else noLock">
+                                            <label>{{ cotacao.nome }}</label>
+                                            <span><i class="fa fa-lock"></i></span>
+                                        </div>
 
-                                <div class="cotacoes" *ngIf="jogo.value.cotacoes.length <= 0">
-                                    <div class="cotacao disabled">
-                                        <label>Casa</label>
-                                        <span><i class="fa fa-lock"></i></span>
-                                    </div>
-                                    <div class="cotacao disabled">
-                                        <label>Empate</label>
-                                        <span><i class="fa fa-lock"></i></span>
-                                    </div>
-                                    <div class="cotacao disabled">
-                                        <label>Fora</label>
-                                        <span><i class="fa fa-lock"></i></span>
-                                    </div>
+                                        <ng-template #noLock>
+                                            <div class="cotacao"
+                                            (click)="addCotacao(jogo.value, cotacao)" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
+                                                <label>{{ cotacao.nome }}</label>
+                                                <span>{{ cotacao.valor }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </ng-container>
                                 </div>
 
                                 <div class="mais-opcoes">

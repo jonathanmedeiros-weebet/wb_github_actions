@@ -281,4 +281,12 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     campeonatoAberto(campeonatoId) {
         return this.campeonatosAbertos.includes(campeonatoId);
     }
+
+    cotacoesPorTipo(cotacoes) {
+        const cotacaoCasa = cotacoes.find(k => k.chave == 'casa_90');
+        const cotacaoEmpate = cotacoes.find(k => k.chave == 'empate_90');
+        const cotacaoFora = cotacoes.find(k => k.chave == 'fora_90');
+
+        return [cotacaoCasa ?? {nome: 'Casa', lock: true}, cotacaoEmpate ?? {nome: 'Empate', lock: true}, cotacaoFora ?? {nome: 'Fora', lock: true}];
+    }
 }
