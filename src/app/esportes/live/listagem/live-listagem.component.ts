@@ -289,4 +289,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
         return [cotacaoCasa ?? {nome: 'Casa', lock: true}, cotacaoEmpate ?? {nome: 'Empate', lock: true}, cotacaoFora ?? {nome: 'Fora', lock: true}];
     }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
+    }
 }
