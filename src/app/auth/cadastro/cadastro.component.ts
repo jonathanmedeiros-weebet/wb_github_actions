@@ -84,7 +84,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit, OnDe
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(6)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
-            cpf: [null, [Validators.required]],
+            cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
             genero: ['', [Validators.required]],
