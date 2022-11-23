@@ -2393,3 +2393,12 @@ gulp.task('ingol.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostasmax.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "apostasmax.com",
+        banca: "APOSTAS MAX",
+        styles: "",
+    });
+});
