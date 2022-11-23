@@ -2402,3 +2402,12 @@ gulp.task('apostasmax.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('spacebetsbrasil.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "spacebetsbrasil.com",
+        banca: "SPACE BETS BRASIL",
+        styles: "",
+    });
+});
