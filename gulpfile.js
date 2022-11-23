@@ -2411,3 +2411,12 @@ gulp.task('spacebetsbrasil.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('saoraimundobet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "saoraimundobet.wee.bet",
+        banca: "SÃO RAIMUNDO BET",
+        styles: "",
+    });
+});
