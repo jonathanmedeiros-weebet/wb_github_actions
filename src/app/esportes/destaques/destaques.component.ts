@@ -11,7 +11,6 @@ import { RegioesDestaqueService } from '../../shared/services/regioes-destaque.s
     styleUrls: ['./destaques.component.css']
 })
 export class DestaquesComponent implements OnInit {
-    @Output() regiaoSelecionada = new EventEmitter();
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Input() jogosDestaque = [];
     @Input() jogoIdAtual;
@@ -25,8 +24,9 @@ export class DestaquesComponent implements OnInit {
     isDragging = false;
 
     customOptions: OwlOptions = {
-        loop: true,
+        loop: false,
         autoplay: true,
+        rewind: true,
         margin: 10,
         nav: true,
         dots: false,
@@ -62,26 +62,6 @@ export class DestaquesComponent implements OnInit {
 
                 this.cd.markForCheck();
             });
-    }
-
-    selecionarRegiao(regiao?) {
-        if (this.exibindoRegiao) {
-            this.regiaoSelecionada.emit();
-            this.exibindoRegiao = false;
-        } else {
-            this.regiaoSelecionada.emit(regiao);
-            this.exibindoRegiao = true;
-        }
-    }
-
-    exibirRegioes() {
-        let result = false
-
-        if (this.mobileScreen && this.regioesDestaque && !this.exibindoRegiao) {
-            result = true;
-        }
-
-        return result;
     }
 
     maisCotacoes(jogoId) {

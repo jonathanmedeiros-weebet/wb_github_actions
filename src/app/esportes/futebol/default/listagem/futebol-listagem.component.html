@@ -1,6 +1,6 @@
 <div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
     <app-banners></app-banners>
-    <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" (regiaoSelecionada)="receptorRegiaoSelecionada($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
+    <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
     <div class="wrap-sticky">
 
         <div class="filter" *ngIf="!campeonatoSelecionado">

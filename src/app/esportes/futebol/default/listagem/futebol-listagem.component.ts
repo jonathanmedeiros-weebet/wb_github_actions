@@ -236,22 +236,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             this.campeonatosAbertos = [];
             this.exibirMais();
 
-            this.jogoService.getJogosDestaque()
-            .subscribe(jogos => {
-                const jogosDestaquesIds = jogos.map(jogo => jogo.fi);
-                let jogosDestaques = [];
-
-                this.camps.forEach(camp => {
-                    const jogosSele = camp.jogos.filter(jogo => {
-                        return jogosDestaquesIds.includes(jogo._id + '');
-                    });
-
-                    jogosDestaques = jogosDestaques.concat(jogosSele);
-                });
-
-                this.jogosDestaque = jogosDestaques;
-            });
-
             if (this.camps.length > 0) {
                 setTimeout(() => {
                     let altura;
@@ -269,6 +253,22 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                 }, 1000);
             }
         }
+
+        this.jogoService.getJogosDestaque()
+            .subscribe(jogos => {
+                const jogosDestaquesIds = jogos.map(jogo => jogo.fi);
+                let jogosDestaques = [];
+
+                this.camps.forEach(camp => {
+                    const jogosSele = camp.jogos.filter(jogo => {
+                        return jogosDestaquesIds.includes(jogo._id + '');
+                    });
+
+                    jogosDestaques = jogosDestaques.concat(jogosSele);
+                });
+
+                this.jogosDestaque = jogosDestaques;
+            });
     }
 
     ngOnDestroy() {
