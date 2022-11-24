@@ -1896,6 +1896,7 @@ gulp.task('betsports91.net', function (done) {
         host: "betsports91.net",
         banca: "BETSPORTS91",
         styles: "",
+        google_tag_part_1: "<!-- Google tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=UA-249966588-1'> </script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-249966588-1'); </script>"
     });
 });
 
