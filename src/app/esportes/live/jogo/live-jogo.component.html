@@ -1,7 +1,6 @@
 <div class="jogo-container">
-    <section class="jogo" *ngIf="!showLoadingIndicator" style="display: flex">
-        <iframe *ngIf="theSportUrl" [src]="theSportUrl" frameborder="0" width="320" height="200"></iframe>
-        <div class="indentificacao-jogo" style="flex: 1">
+    <section class="jogo" *ngIf="!showLoadingIndicator">
+        <div *ngIf="!isMobile || (isMobile && !theSportUrl)" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
             <div class="div-back" (click)="back()">
                 <i class="fa fa-times"></i>
             </div>
@@ -50,6 +49,12 @@
                     <div class="tempo">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
                 </div>
             </div>
+        </div>
+        <div *ngIf="theSportUrl" class="iframe-responsive">
+            <div class="div-back back-iframe hide-desktop" (click)="back()">
+                <i class="fa fa-times"></i>
+            </div>
+            <iframe [src]="theSportUrl" frameborder="0" width="320" height="200"></iframe>
         </div>
     </section>
     <section class="content-sports inside-event">

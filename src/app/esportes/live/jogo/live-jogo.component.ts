@@ -50,6 +50,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
+
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
@@ -71,15 +73,17 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             this.getJogo(this.jogoId);
         }
 
-        this.campinhoService.getIdsJogo(this.jogoId)
-        .subscribe(
-            response => {
-                if(response?.thesports_uuid) {
-                    this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
-                }
-            },
-            error =>  this.handleError(error)
-        )
+        if(habilitar_live_tracker) {
+            this.campinhoService.getIdsJogo(this.jogoId)
+            .subscribe(
+                response => {
+                    if(response?.thesports_uuid) {
+                        this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
+                    }
+                },
+                error =>  this.handleError(error)
+            )
+        }
     }
 
     ngOnDestroy() {
