@@ -319,6 +319,15 @@
 }
 
 @media only screen and (max-width: 1024px) {
+
+    section.jogo {
+        flex-direction: column;
+    }
+
+    section.jogo iframe {
+        margin: 0 auto;
+    }
+
     .jogo-container {
         max-width: 100vw;
     }

@@ -34,6 +34,7 @@ export * from './shared/services/aposta-esportiva/stats.service';
 export * from './shared/services/cambistas/cambista.service';
 
 export * from './shared/services/clientes/cliente.service';
+export * from './shared/services/campinho.service';
 
 /* Utils Services */
 export * from './shared/services/utils/error.service';

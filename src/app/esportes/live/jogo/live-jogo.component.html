@@ -1,6 +1,7 @@
 <div class="jogo-container">
-    <section class="jogo" *ngIf="!showLoadingIndicator">
-        <div class="indentificacao-jogo">
+    <section class="jogo" *ngIf="!showLoadingIndicator" style="display: flex">
+        <iframe *ngIf="theSportUrl" [src]="theSportUrl" frameborder="0" width="320" height="200"></iframe>
+        <div class="indentificacao-jogo" style="flex: 1">
             <div class="div-back" (click)="back()">
                 <i class="fa fa-times"></i>
             </div>
