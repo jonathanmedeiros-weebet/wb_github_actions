@@ -1,6 +1,9 @@
 <section class="pre-bilhete"
          [ngClass]="{'pre-bilhete-mobile': displayPreTicker, 'hide': !isEsporte, 'hide-desktop': isPagina}">
     <div class="bilhete-container">
+        <div *ngIf="liveTrackerUrl" class="iframe-responsive">
+            <iframe [src]="liveTrackerUrl" frameborder="0" width="320" height="200"></iframe>
+        </div>
         <div class="titulo-bilhete">
             <div class="titulo">BILHETE</div>
             <a (click)="closeCupom()" class="fechar-pre-bilhete">

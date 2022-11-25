@@ -58,8 +58,27 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
+
+            if(habilitar_live_tracker) {
+                this.campinhoService.getIdsJogo(this.jogoId)
+                .subscribe(
+                    response => {
+                        if(response?.thesports_uuid) {
+                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
+                        }
+                    },
+                    error =>  this.handleError(error)
+                )
+            }
+        } else {
+            if(habilitar_live_tracker) {
+                this.bilheteService.sendId(this.jogoId);
+            }
         }
+
         this.definirAltura();
+
+
 
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
@@ -72,22 +91,11 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             this.liveService.entrarSalaEvento(this.jogoId);
             this.getJogo(this.jogoId);
         }
-
-        if(habilitar_live_tracker) {
-            this.campinhoService.getIdsJogo(this.jogoId)
-            .subscribe(
-                response => {
-                    if(response?.thesports_uuid) {
-                        this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
-                    }
-                },
-                error =>  this.handleError(error)
-            )
-        }
     }
 
     ngOnDestroy() {
         this.liveService.sairSalaEvento(this.jogoId);
+        this.bilheteService.sendId(null);
         this.unsub$.next();
         this.unsub$.complete();
     }
