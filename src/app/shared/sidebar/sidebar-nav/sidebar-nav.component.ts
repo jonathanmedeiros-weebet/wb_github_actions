@@ -100,15 +100,17 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.regioesDestaqueService.setExibirDestaques(false);
         this.createForm();
 
-        this.regioesDestaqueService.getRegioesDestaque()
-            .subscribe(
-                res => {
-                    if (res.length > 0) {
-                        this.regioesDestaque = res;
-                        this.cd.detectChanges();
-                    }
-                }
-            );
+        // this.regioesDestaqueService.getRegioesDestaque()
+        //     .subscribe(
+        //         res => {
+        //             if (res.length > 0) {
+        //                 this.regioesDestaque = res;
+        //                 this.cd.detectChanges();
+        //             }
+        //         }
+        //     );
+
+        this.regioesDestaque = this.paramsLocais.getOpcoes().regioes_destaque;
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -119,17 +121,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 if (dados.esporte) {
                     this.esporte = dados.esporte;
                 }
-
-                // const menuSideLeftEl = this.el.nativeElement.querySelector('.input-consulta');
-
-                // this.renderer.setStyle(menuSideLeftEl, 'height', `${ this.height }px`);
-                // this.cd.detectChanges();
-
-                // setTimeout(e => {
-                //     const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
-                //     this.renderer.setStyle(menuSideLeftEl, 'height', `${this.height}px`);
-                //     this.cd.detectChanges();
-                // }, 250);
             });
 
         if (this.paramsLocais.getOpcoes().whatsapp) {
@@ -168,7 +159,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     handleError(error: string) {
-        this.messageService.error(error)
+        this.messageService.error(error);
     }
 
     abrirRegiao(regiao) {
