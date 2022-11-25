@@ -27,7 +27,7 @@ const routes: Routes = [
                 canActivate: [CasinoGuard]
             },
             {
-                path: 'play/:game_mode/:game_id',
+                path: 'play/:game_mode/:game_id/:game_fornecedor',
                 component: GameviewComponent,
                 canActivate: [CasinoGuard]
             }
