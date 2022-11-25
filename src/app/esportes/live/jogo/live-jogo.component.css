@@ -51,6 +51,7 @@
     text-align: center;
 
     font-size: 15px;
+    color: #FFFFFF;
 }
 
 .indentificacao-jogo .nome {
@@ -58,6 +59,7 @@
     align-items: center;
     width: 100%;
     justify-content: center;
+    color: #FFFFFF;
 }
 
 .indentificacao-jogo .nome {

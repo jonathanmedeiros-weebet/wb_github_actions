@@ -30,6 +30,7 @@
     text-overflow: ellipsis;
     max-width: 400px;
     font-size: 14px;
+    color: #FFFFFF;
 }
 
 .indentificacao .nome {
@@ -39,7 +40,7 @@
     justify-content: center;
     flex-direction: row;
     background-color: inherit;
-    color: var(--foreground-header);
+    color: #FFFFFF;
 }
 
 .indentificacao .nome {
@@ -48,6 +49,7 @@
 
 .indentificacao .horario {
     margin-top: 10px;
+    color: #FFFFFF;
 }
 
 .content-sports {
