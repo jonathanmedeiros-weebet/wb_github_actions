@@ -73,11 +73,6 @@ export class WallComponent implements OnInit {
                                 return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
                             });
                             break;
-                        case 'bingo':
-                            this.gameList = games.filter(function (game) {
-                                return game.gameTypeID === 'bingo';
-                            });
-                            break;
                         case 'destaques':
                             this.gameList = response.destaques;
                             break;
