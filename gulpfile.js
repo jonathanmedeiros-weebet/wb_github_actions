@@ -332,15 +332,6 @@ gulp.task('esportmania.net', function (done) {
     });
 });
 
-gulp.task('akiapostas.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "akiapostas.wee.bet",
-        banca: "AKI Apostas",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #008000; --foreground-odds: #fff;"
-    });
-});
-
 gulp.task('masterbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -394,15 +385,6 @@ gulp.task('imperiosportve.com', function (done) {
         host: "imperiosportve.com",
         banca: "imperio sportve",
         styles: "--header: #42050a; --foreground-header: #fff; --sidebar-right:#42050a; --foreground-sidebar-right: #fff; --sidebar-left: #42050a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#d91c16; --foreground-odds: #fff; --event-time: #d91c16",
-    });
-});
-
-gulp.task('jcapostas.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jcapostas.wee.bet",
-        banca: "JC Apostas",
-        styles: "--header: #292729;--sidebar-right:#292729;--sidebar-left: #292729;--highlight: #e4e4e4;--odds: #15814f;"
     });
 });
 
