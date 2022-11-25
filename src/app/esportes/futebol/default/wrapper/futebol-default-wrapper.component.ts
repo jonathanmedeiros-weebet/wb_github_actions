@@ -1,17 +1,10 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import {
-    CampeonatoService,
-    MessageService,
-    ParametrosLocaisService,
-    RegioesDestaqueService,
-    SidebarService,
-    MenuFooterService
-} from './../../../../services';
-import { Campeonato } from '../../../../models';
+import {Observable, Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {CampeonatoService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService} from './../../../../services';
+import {Campeonato} from '../../../../models';
 import * as moment from 'moment';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FutebolJogoComponent} from '../jogo/futebol-jogo.component';
@@ -39,7 +32,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
-        private regioesDestaqueService: RegioesDestaqueService,
         private menuFooterService: MenuFooterService,
         private modalService: NgbModal,
         private route: ActivatedRoute
@@ -174,8 +166,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 }
-
-                this.regioesDestaqueService.setExibirDestaques(exibirDestaques);
             });
     }
 

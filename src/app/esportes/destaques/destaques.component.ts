@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { JogoService, BilheteEsportivoService, HelperService } from 'src/app/services';
-import { RegioesDestaqueService } from '../../shared/services/regioes-destaque.service';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BilheteEsportivoService, HelperService, JogoService} from 'src/app/services';
 
 @Component({
     selector: 'app-destaques',
@@ -33,12 +32,11 @@ export class DestaquesComponent implements OnInit {
         autoHeight: true,
         autoWidth: true,
         navText: [ '<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>' ]
-    }
+    };
 
     unsub$ = new Subject();
 
     constructor(
-        private regioesDestaqueService: RegioesDestaqueService,
         private jogoService: JogoService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
@@ -74,7 +72,7 @@ export class DestaquesComponent implements OnInit {
     addCotacao(event, jogo, cotacao) {
         event.stopPropagation();
 
-        if(!this.isDragging) {
+        if (!this.isDragging) {
             let modificado = false;
             const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
             const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));

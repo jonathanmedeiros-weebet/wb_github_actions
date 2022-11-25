@@ -4,16 +4,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {
-    MainLayoutComponent,
-    EmptyLayoutComponent,
+    AcumuladaoLayoutComponent,
     AuthLayoutComponent,
-    SportLayoutComponent,
+    CassinoLayoutComponent,
+    DesafioLayoutComponent,
+    EmptyLayoutComponent,
+    LoteriaLayoutComponent,
+    MainLayoutComponent,
     PagesLayoutComponent,
     PagesNoNavLayoutComponent,
-    LoteriaLayoutComponent,
-    DesafioLayoutComponent,
-    AcumuladaoLayoutComponent,
-    CassinoLayoutComponent,
+    SportLayoutComponent,
     VirtuaisLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
@@ -27,18 +27,40 @@ import {BilheteAcumuladaoComponent} from './exibir-bilhete/acumuladao/bilhete-ac
 import {BilheteCompartilhamentoComponent} from './bilhete-compartilhamento/bilhete-compartilhamento.component';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {UtilsModule} from '../utils/utils.module';
-import {ApostaService, AcumuladaoService, SorteioService, DesafioApostaService, ApostaLoteriaService, RelatorioService, ApostaEsportivaService, CartaoService, RegioesDestaqueService} from '../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent,
-    ApostaModalComponent, PreApostaModalComponent,
-    ConfirmModalComponent, PesquisarApostaModalComponent,
-    CartaoCadastroModalComponent, CartaoModalComponent,
-    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
-    RecargaCartaoModalComponent, RecargaSuccessModalComponent,
-    EsqueceuSenhaModalComponent, CadastroModalComponent,
-    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent,
-    AuthDoisFatoresModalComponent, PesquisarCartaoMobileModalComponent, ClientePerfilModalComponent, ClientePixModalComponent, ClienteSenhaModalComponent,
-    ClienteApostasModalComponent
+    AcumuladaoService,
+    ApostaEsportivaService,
+    ApostaLoteriaService,
+    ApostaService,
+    CartaoService,
+    DesafioApostaService,
+    RelatorioService,
+    SorteioService
+} from '../../services';
+import {
+    ApostaEncerramentoModalComponent,
+    ApostaModalComponent,
+    AtivarCartaoModalComponent,
+    AuthDoisFatoresModalComponent,
+    CadastroModalComponent,
+    CartaoCadastroModalComponent,
+    CartaoModalComponent,
+    ClienteApostasModalComponent,
+    ClientePerfilModalComponent,
+    ClientePixModalComponent,
+    ClienteSenhaModalComponent,
+    ConfirmModalComponent,
+    EsqueceuSenhaModalComponent,
+    LoginModalComponent,
+    PesquisaModalComponent,
+    PesquisarApostaModalComponent,
+    PesquisarCartaoMobileModalComponent,
+    PesquisarCartaoModalComponent,
+    PreApostaModalComponent,
+    RecargaCartaoModalComponent,
+    RecargaSuccessModalComponent,
+    SolicitarSaqueModalComponent,
+    TabelaModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -46,12 +68,12 @@ import {NgbAlertModule, NgbCarouselModule, NgbModalModule, NgbModule} from '@ng-
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 import {SubmenuComponent} from './submenu/submenu.component';
-import {SidebarNavComponent, SidebarMenuComponent} from '../sidebar';
+import {SidebarMenuComponent, SidebarNavComponent} from '../sidebar';
 
 import {NgxCurrencyModule} from 'ngx-currency';
 import {BannersComponent} from './banners/banners.component';
-import { ResultadosModalComponent } from './modals/resultados-modal/resultados-modal.component';
-import { CodeInputModule } from 'angular-code-input';
+import {ResultadosModalComponent} from './modals/resultados-modal/resultados-modal.component';
+import {CodeInputModule} from 'angular-code-input';
 import {NgHcaptchaModule} from 'ng-hcaptcha';
 
 @NgModule({
@@ -149,7 +171,6 @@ import {NgHcaptchaModule} from 'ng-hcaptcha';
         ApostaEsportivaService,
         ApostaService,
         CartaoService,
-        RegioesDestaqueService,
         SorteioService,
         DesafioApostaService,
         ApostaService,

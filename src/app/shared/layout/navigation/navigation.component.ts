@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -21,15 +20,13 @@ import {
     PesquisaModalComponent,
     PesquisarCartaoModalComponent,
     RecargaCartaoModalComponent,
-    SolicitarSaqueModalComponent,
-    TabelaModalComponent
+    SolicitarSaqueModalComponent
 } from '../modals';
-import { config } from '../../config';
+import {config} from '../../config';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
-import {RegioesDestaqueService} from '../../services/regioes-destaque.service';
 import {BaseFormComponent} from '../base-form/base-form.component';
 
 @Component({
@@ -80,7 +77,6 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private regioesDestaqueService: RegioesDestaqueService,
         private apostaService: ApostaService,
         private messageService: MessageService,
         private fb: FormBuilder
@@ -95,7 +91,6 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
-        this.regioesDestaqueService.setExibirDestaques(false);
         this.mobileScreen = window.innerWidth <= 1024;
 
         this.sidebarService.collapsedSource
@@ -112,15 +107,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
                 });
         }
 
-        this.regioesDestaqueService.getRegioesDestaque()
-            .subscribe(
-                res => {
-                    if (res.length > 0) {
-                        this.regioesDestaque = res;
-                        this.cd.detectChanges();
-                    }
-                }
-            );
+        this.regioesDestaque = this.paramsService.getOpcoes().regioes_destaque
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
