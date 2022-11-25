@@ -2429,3 +2429,12 @@ gulp.task('ritsbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pixfacil.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pixfacil.bet",
+        banca: "PIX FÁCIL",
+        styles: "",
+    });
+});
