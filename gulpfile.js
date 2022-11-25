@@ -2420,3 +2420,12 @@ gulp.task('saoraimundobet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ritsbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "ritsbet.wee.bet",
+        banca: "RITS BET",
+        styles: "",
+    });
+});

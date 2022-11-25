@@ -263,7 +263,8 @@
         "ingol.wee.bet": "gulp ingol.wee.bet",
         "apostasmax.com": "gulp apostasmax.com",
         "spacebetsbrasil.com": "gulp spacebetsbrasil.com",
-        "saoraimundobet.wee.bet": "gulp saoraimundobet.wee.bet"
+        "saoraimundobet.wee.bet": "gulp saoraimundobet.wee.bet",
+        "ritsbet.wee.bet": "gulp ritsbet.wee.bet"
     },
     "private": true,
     "dependencies": {
