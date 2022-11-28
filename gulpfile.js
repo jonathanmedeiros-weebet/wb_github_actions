@@ -2420,3 +2420,21 @@ gulp.task('pixfacil.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('duplabet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "duplabet.com",
+        banca: "DUPLA BET",
+        styles: "",
+    });
+});
+
+gulp.task('brsports.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brsports.bet",
+        banca: "BR SPORTS",
+        styles: "",
+    });
+});

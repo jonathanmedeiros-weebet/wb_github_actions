@@ -263,7 +263,9 @@
         "spacebetsbrasil.com": "gulp spacebetsbrasil.com",
         "saoraimundobet.wee.bet": "gulp saoraimundobet.wee.bet",
         "ritsbet.wee.bet": "gulp ritsbet.wee.bet",
-        "pixfacil.bet": "gulp pixfacil.bet"
+        "pixfacil.bet": "gulp pixfacil.bet",
+        "duplabet.com": "gulp duplabet.com",
+        "brsports.bet": "gulp brsports.bet"
     },
     "private": true,
     "dependencies": {
