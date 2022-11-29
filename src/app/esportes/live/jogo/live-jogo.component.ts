@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -29,6 +30,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     objectKeys = Object.keys;
     isMobile = false;
     showLoadingIndicator = true;
+    loadedFrame = false;
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
     oddsAberto = [];
@@ -46,7 +48,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         private el: ElementRef,
         private renderer: Renderer2,
         private router: Router,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private activeModal: NgbActiveModal,
     ) { }
 
     ngOnInit() {
@@ -66,9 +69,12 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                         if(response?.thesports_uuid) {
                             this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
                         }
+                        this.loadedFrame = true;
                     },
                     error =>  this.handleError(error)
                 )
+            } else {
+                this.loadedFrame = true;
             }
         } else {
             if(habilitar_live_tracker) {
@@ -348,5 +354,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     oddAberto(chave) {
         return this.oddsAberto.includes(chave.nome);
+    }
+
+    closeModal() {
+        this.activeModal.dismiss();
     }
 }

@@ -6,7 +6,7 @@ import { LiveListagemComponent } from './listagem/live-listagem.component';
 import { LiveWrapperComponent } from './wrapper/live-wrapper.component';
 import { LiveJogoComponent } from './jogo/live-jogo.component';
 import { JogoService, LiveService, CampinhoService } from '../../services';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     providers: [
         LiveService,
         JogoService,
-        CampinhoService
+        CampinhoService,
+        NgbActiveModal
     ]
 })
 export class LiveModule { }
