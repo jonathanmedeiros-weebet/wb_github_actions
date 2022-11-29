@@ -267,7 +267,8 @@
         "duplabet.com": "gulp duplabet.com",
         "brsports.bet": "gulp brsports.bet",
         "brasilbet.net.br": "gulp brasilbet.net.br",
-        "goldsoccervip.net": "gulp goldsoccervip.net"
+        "goldsoccervip.net": "gulp goldsoccervip.net",
+        "serjaobets.com": "gulp serjaobets.com"
     },
     "private": true,
     "dependencies": {

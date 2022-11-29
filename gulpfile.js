@@ -2456,3 +2456,12 @@ gulp.task('goldsoccervip.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('serjaobets.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "serjaobets.com",
+        banca: "SERJÃO BETS",
+        styles: "",
+    });
+});
