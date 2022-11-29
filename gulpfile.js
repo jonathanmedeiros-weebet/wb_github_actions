@@ -2438,3 +2438,21 @@ gulp.task('brsports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brasilbet.net.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brasilbet.net.br",
+        banca: "BRASIL BET",
+        styles: "",
+    });
+});
+
+gulp.task('goldsoccervip.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "goldsoccervip.net",
+        banca: "GOLD SOCCER VIP",
+        styles: "",
+    });
+});

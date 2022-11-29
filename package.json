@@ -265,7 +265,9 @@
         "ritsbet.wee.bet": "gulp ritsbet.wee.bet",
         "pixfacil.bet": "gulp pixfacil.bet",
         "duplabet.com": "gulp duplabet.com",
-        "brsports.bet": "gulp brsports.bet"
+        "brsports.bet": "gulp brsports.bet",
+        "brasilbet.net.br": "gulp brasilbet.net.br",
+        "goldsoccervip.net": "gulp goldsoccervip.net"
     },
     "private": true,
     "dependencies": {
