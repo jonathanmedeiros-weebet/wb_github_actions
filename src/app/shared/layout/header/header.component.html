@@ -21,6 +21,12 @@
         <ng-container *ngTemplateOutlet="menu"></ng-container>
     </nav>
     <div class="side side-right">
+        <a class="m-2" (click)="useLanguage('pt')">
+            <span class="flag-icon flag-icon-br flag-icon-squared" style="font-size: 24px; cursor: pointer"></span>
+        </a>
+        <a class="m-2" (click)="useLanguage('en')">
+            <span class="flag-icon flag-icon-us flag-icon-squared" style="font-size: 24px; cursor: pointer"></span>
+        </a>
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
                 <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle menu-perfil" href="#" id="navbarDropdown"

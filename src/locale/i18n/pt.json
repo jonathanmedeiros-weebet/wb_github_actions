@@ -1,0 +1,32 @@
+{
+    "geral": {
+        "processando": "Processando"
+    },
+    "modais": {
+        "fechar": "Fechar",
+        "finalizar": "Finalizar"
+    },
+    "bilhete": {
+        "titulo": "BILHETE",
+        "jogosSelecionados": "Jogos Selecionados",
+        "eventosSelecionados": "Eventos Selecionados",
+        "removerTodos": "Remover todos",
+        "aoVivo":  "AO VIVO",
+        "nenhumaApostaSelecionada": "Nenhuma aposta selecionada",
+        "selecioneAlgumaAposta": "Selecione alguma aposta clicando nas ODDS para poder finalizar o bilhete.",
+        "nomeDoApostador": "Nome do Apostador",
+        "valorDaAposta": "Valor da Aposta",
+        "possiveisGanhos": "Possíveis Ganhos",
+        "cotacao": "Cotação",
+        "aceitarAlteracoesDeOdds": "Aceitar alterações de odds",
+        "apostar": "Apostar",
+        "utilizarBonus": "Utilizar bônus",
+        "algumasCotacoesMudaram": "Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta",
+        "aceitarAlteracoes": "Aceitar Alterações",
+        "preAposta": "Pré-Aposta",
+        "cartaoDeAposta": "Cartão de Aposta",
+        "chave": "Chave",
+        "pin": "PIN",
+        "manterCartao": "Manter Cartão"
+    }
+}

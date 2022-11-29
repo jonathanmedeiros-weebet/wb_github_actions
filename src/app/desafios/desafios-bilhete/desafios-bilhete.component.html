@@ -1,15 +1,15 @@
 <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
     <div class="bilhete-container">
         <div class="titulo-bilhete">
-            <div class="titulo">BILHETE</div>
+            <div class="titulo">{{'bilhete.titulo' | translate}}</div>
             <a (click)="closeCupom()" class="fechar-pre-bilhete">
                 <i class="fa fa-times"></i>
             </a>
         </div>
         <div class="acoes-bilhete">
-            Eventos Selecionados
+            {{'bilhete.eventosSelecionados' | translate}}
             <a [ngClass]="{'disabled': itens.length == 0}" (click)="removerItens()">
-                <i class="fa-solid fa-trash"></i> Remover todos
+                <i class="fa-solid fa-trash"></i> {{'bilhete.removerTodos' | translate}}
             </a>
         </div>
         <div class="pre-bilhete-desafio">
@@ -36,10 +36,11 @@
                 <div class="div-jogos-selecionados">
                     <div id="nenhum-jogo">
                         <p>
-                            <span><i class="fa-solid fa-circle-info"></i> Nenhuma aposta selecionada!</span>
+                            <span><i
+                                class="fa-solid fa-circle-info"></i> {{'bilhete.nenhumaApostaSelecionada' | translate}}!</span>
                         </p>
                         <p>
-                            Selecione alguma aposta clicando nas ODDS para poder finalizar o bilhete.
+                            {{'bilhete.selecioneAlgumaAposta' | translate}}
                         </p>
                     </div>
                 </div>
@@ -50,9 +51,10 @@
                 <div class="div-inputs">
                     <div class="form-group" *ngIf="!isCliente">
                         <div class="input-md">
-                            <input type="text" id="nomeApostador" formControlName="apostador" [ngClass]="applyCssInputError('apostador')"
-                               class="form-control inverted-out" placeholder=" ">
-                            <label for="nomeApostador">Nome do apostador</label>
+                            <input type="text" id="nomeApostador" formControlName="apostador"
+                                   [ngClass]="applyCssInputError('apostador')"
+                                   class="form-control inverted-out" placeholder=" ">
+                            <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
                         </div>
 
                         <app-error-msg [control]="form.get('apostador')" label="Apostador"></app-error-msg>
@@ -62,7 +64,8 @@
                             <i>R$</i>
                             <input type="number" formControlName="valor" [min]="apostaMinima"
                                    (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
-                                   [ngClass]="applyCssInputError('valor')" class="form-control inverted-out" placeholder="Valor">
+                                   [ngClass]="applyCssInputError('valor')" class="form-control inverted-out"
+                                   placeholder="Valor">
                         </div>
                         <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                     </div>
@@ -73,20 +76,21 @@
                         <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
                     </div>
                     <div class="informations">
-                        Valor da Aposta:
+                        {{'bilhete.valorDaAposta' | translate}}:
                         <span class="valor">{{form.value.valor | currency}}</span>
                         <br>
-                        Possíveis Ganhos:
+                        {{'bilhete.possiveisGanhos' | translate}}:
                         <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
                     </div>
                 </div>
                 <div class="form-group submit-buttons">
-                    <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none" class="btn btn-custom btn-block">
-                        Apostar <b>({{itens.length}})</b>
+                    <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none"
+                            class="btn btn-custom btn-block">
+                        {{'bilhete.apostar' | translate}} <b>({{itens.length}})</b>
                     </button>
                     <ng-template #btnProcessando>
                         <button disabled class="btn btn-custom btn-block">
-                            Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                            {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
                             <i class="fa fa-spinner fa-spin"></i>
                         </button>
                     </ng-template>
@@ -139,7 +143,8 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>PIN</label>
-                        <input type="password" class="form-control inverted-out" formControlName="pin" autocomplete="off">
+                        <input type="password" class="form-control inverted-out" formControlName="pin"
+                               autocomplete="off">
                     </div>
                 </div>
                 <div class="form-check col-md-6">

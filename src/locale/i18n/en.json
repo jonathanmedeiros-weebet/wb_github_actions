@@ -1,0 +1,8 @@
+{
+    "bilhete": {
+        "titulo": "TICKET",
+        "jogosSelecionados": "Selected Games",
+        "removerTodos": "Remove all",
+        "aoVivo":  "LIVE"
+    }
+}

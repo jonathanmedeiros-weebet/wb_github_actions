@@ -7,6 +7,8 @@ import { filter } from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {CadastroModalComponent} from './shared/layout/modals';
 
+import {TranslateService} from '@ngx-translate/core';
+
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
@@ -36,8 +38,11 @@ export class AppComponent implements OnInit {
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
-        private paramLocais: ParametrosLocaisService
+        private paramLocais: ParametrosLocaisService,
+        private translate: TranslateService
     ) {
+        translate.setDefaultLang('pt');
+        translate.use('pt');
     }
 
     @HostListener('window:message', ['$event']) onPostMessage(event) {

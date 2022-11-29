@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { IsActiveMatchOptions } from '@angular/router';
+import {IsActiveMatchOptions} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -8,7 +8,6 @@ import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
-import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {
     AuthDoisFatoresModalComponent,
@@ -32,6 +31,7 @@ import {TabelaComponent} from 'src/app/cambistas/tabela/tabela.component';
 import {SolicitacaoSaqueComponent} from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
 import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
 import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-header',
@@ -102,7 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
-        private router: Router
+        private translate: TranslateService
     ) {
         super();
     }
@@ -346,5 +346,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirCambistaTabela() {
         this.modalService.open(TabelaComponent);
+    }
+
+    useLanguage(language: string): void {
+        this.translate.use(language);
     }
 }

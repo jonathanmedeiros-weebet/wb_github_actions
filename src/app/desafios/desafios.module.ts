@@ -8,6 +8,7 @@ import { DesafiosBilheteComponent } from './desafios-bilhete/desafios-bilhete.co
 import { DesafiosListagemComponent } from './desafios-listagem/desafios-listagem.component';
 import { DesafiosWrapperComponent } from './desafios-wrapper/desafios-wrapper.component';
 import { NgxMaskModule } from 'ngx-mask';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { NgxMaskModule } from 'ngx-mask';
         CommonModule,
         DesafiosRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot()
+        NgxMaskModule.forRoot(),
+        TranslateModule
     ],
     exports: [
         DesafiosBilheteComponent

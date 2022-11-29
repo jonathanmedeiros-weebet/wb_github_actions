@@ -2,7 +2,7 @@ import {NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE} from '@angu
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {environment} from '../environments/environment';
 
 import ptBr from '@angular/common/locales/pt';
@@ -25,6 +25,10 @@ import {ParametrosLocaisService} from './services';
 
 import {ToastrModule} from 'ngx-toastr';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+// Translation Modules
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -53,6 +57,13 @@ export const APP_TOKENS = [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
         NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         AppRoutingModule,
 
@@ -66,4 +77,8 @@ export const APP_TOKENS = [
     bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+    return new TranslateHttpLoader(http, './locale/i18n/', '.json');
 }

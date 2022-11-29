@@ -75,6 +75,7 @@ import {BannersComponent} from './banners/banners.component';
 import {ResultadosModalComponent} from './modals/resultados-modal/resultados-modal.component';
 import {CodeInputModule} from 'angular-code-input';
 import {NgHcaptchaModule} from 'ng-hcaptcha';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -97,7 +98,8 @@ import {NgHcaptchaModule} from 'ng-hcaptcha';
         NgHcaptchaModule.forRoot({
             siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
             languageCode: 'pt'
-        })
+        }),
+        TranslateModule
     ],
     declarations: [
         MainLayoutComponent,
