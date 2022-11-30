@@ -1,8 +1,60 @@
 {
+    "geral": {
+        "processando": "Processing"
+    },
+    "modais": {
+        "fechar": "Close",
+        "finalizar": "Finalize"
+    },
+    "menu": {
+        "esportes": "SPORTS",
+        "cassino": "CASINO",
+        "virtuais": "VIRTUAL",
+        "desafio": "CHALLENGE",
+        "acumuladao": "ACCUMULATED",
+        "loteria": "LOTERY"
+    },
+    "submenu": {
+        "copa22": "Cup 2022",
+        "aoVivo": "Live",
+        "futebol": "Football",
+        "futsal": "Futsal",
+        "volei": "Volleyball",
+        "basquete": "Basketball",
+        "combate": "Combat",
+        "hoquei": "Ice Hockey",
+        "futebolAmericano": "American Football",
+        "esports": "E-sports",
+        "tenis": "Tennis",
+        "quininha": "Quininha",
+        "seninha": "Seninha",
+        "todos": "All",
+        "slot":"Slot",
+        "raspadinha": "Scratchcard",
+        "roleta":"Roulette",
+        "mesa": "Table",
+        "cassinoAoVivo":"Live Casino"
+    },
     "bilhete": {
         "titulo": "TICKET",
         "jogosSelecionados": "Selected Games",
         "removerTodos": "Remove all",
-        "aoVivo":  "LIVE"
+        "aoVivo":  "LIVE",
+        "nenhumaApostaSelecionada": "No bet selected",
+        "selecioneAlgumaAposta": "Select a bet by clicking on the ODDS to finalize the ticket.",
+        "nomeDoApostador": "Better Name",
+        "valorDaAposta": "Bet Amount",
+        "possiveisGanhos": "Possible Gains",
+        "cotacao": "Quotation",
+        "aceitarAlteracoesDeOdds": "Accept odds changes",
+        "apostar": "Bet",
+        "utilizarBonus": "Use bonus",
+        "algumasCotacoesMudaram": "Some odds have changed, check carefully before confirming the bet",
+        "aceitarAlteracoes": "Accept Changes",
+        "preAposta": "PreBet",
+        "cartaoDeAposta": "Betting Card",
+        "chave": "Key",
+        "pin": "PIN",
+        "manterCartao": "Keep Card"
     }
 }

@@ -6,6 +6,35 @@
         "fechar": "Fechar",
         "finalizar": "Finalizar"
     },
+    "menu": {
+        "esportes": "ESPORTES",
+        "cassino": "CASSINO",
+        "virtuais": "VIRTUAIS",
+        "desafio": "DESAFIO",
+        "acumuladao": "ACUMULADÃO",
+        "loteria": "LOTERIA"
+    },
+    "submenu": {
+        "copa22": "Copa 2022",
+        "aoVivo": "Ao-Vivo",
+        "futebol": "Futebol",
+        "futsal": "Futsal",
+        "volei": "Vôlei",
+        "basquete": "Basquete",
+        "combate": "Combate",
+        "hoquei": "Hóquei no Gelo",
+        "futebolAmericano": "Futebol Americano",
+        "esports": "E-sports",
+        "tenis": "Tênis",
+        "quininha": "Quininha",
+        "seninha": "Seninha",
+        "todos": "Todos",
+        "slot":"Slot",
+        "raspadinha": "Raspadinha",
+        "roleta":"Roleta",
+        "mesa": "Mesa",
+        "cassinoAoVivo":"Cassino Ao-Vivo"
+    },
     "bilhete": {
         "titulo": "BILHETE",
         "jogosSelecionados": "Jogos Selecionados",
