@@ -337,16 +337,11 @@ section.jogo {
         color: var(--foreground-game);
 
         padding: 10px;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
     }
 
     .div-back {
-        position: relative;
-        top: 0;
-        right: 0;
+        top: 5px;
+        right: 5px;
     }
 
     .top-bar-mobile-text {
@@ -357,7 +352,7 @@ section.jogo {
     }
 
     .top-bar-mobile-text span {
-        max-width: 50%;
+        max-width: 35%;
         display: block;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -366,7 +361,7 @@ section.jogo {
 
     .iframe-responsive {
         max-width: 100%;
-        padding-top: 58%;
+        padding-top: 60%;
         position: relative;
         width: 100%;
     }
@@ -386,7 +381,7 @@ section.jogo {
 
     .content-sports {
         height: 100vh !important;
-        padding: 0 5px;
+        padding: 0 0 0 5px;
     }
 
     .indentificacao{
