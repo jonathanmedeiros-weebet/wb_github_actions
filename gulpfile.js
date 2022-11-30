@@ -2465,3 +2465,12 @@ gulp.task('serjaobets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('santissports.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "santissports.com",
+        banca: "SANTIS SPORTS",
+        styles: "",
+    });
+});
