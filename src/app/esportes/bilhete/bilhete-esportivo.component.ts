@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
@@ -140,22 +140,29 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(this.form.value.valor);
             });
 
+
         this.bilheteService.idJogo
-            .subscribe(result => {
-                if(this.opcoes.habilitar_live_tracker && result) {
-                    this.campinhoService.getIdsJogo(result)
-                        .subscribe(
-                            response => {
-                                if(response?.thesports_uuid) {
-                                    this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
-                                }
-                            },
-                            error =>  this.handleError(error)
-                        )
-                } else {
-                    this.liveTrackerUrl = null;
-                }
-            })
+            .pipe(switchMap(result => {
+                    if(this.opcoes.habilitar_live_tracker && result) {
+                        return this.campinhoService.getIdsJogo(result);
+                    } else {
+                        return new Observable(subscriber => {
+                            subscriber.next(null);
+                            subscriber.complete();
+                        });
+                    }
+                })
+            )
+            .subscribe(
+                (response: any) => {
+                    if (response?.thesports_uuid) {
+                        this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
+                    } else {
+                        this.liveTrackerUrl = null;
+                    }
+                },
+                error => this.handleError(error)
+            );
 
         this.form.get('valor').valueChanges
             .pipe(takeUntil(this.unsub$))
