@@ -41,8 +41,9 @@ export class AppComponent implements OnInit {
         private paramLocais: ParametrosLocaisService,
         private translate: TranslateService
     ) {
+        const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
-        translate.use('pt');
+        translate.use(linguaEscolhida);
     }
 
     @HostListener('window:message', ['$event']) onPostMessage(event) {

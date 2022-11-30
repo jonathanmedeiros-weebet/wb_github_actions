@@ -43,7 +43,12 @@
         "ganhou": "Ganhou",
         "perdeu": "Perdeu",
         "pendente": "Pendente",
-        "filtrar": "Filtrar"
+        "filtrar": "Filtrar",
+        "data": "Data",
+        "tipo": "Tipo",
+        "detalhes": "Detalhes",
+        "valor": "Valor",
+        "carregando": "Carregando"
     },
     "dias": {
         "ontem": "Ontem",

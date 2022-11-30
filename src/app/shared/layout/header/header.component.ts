@@ -349,6 +349,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     useLanguage(language: string): void {
+        localStorage.setItem('linguagem', language);
         this.translate.use(language);
     }
 }

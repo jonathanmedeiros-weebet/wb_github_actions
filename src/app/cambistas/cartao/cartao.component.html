@@ -68,7 +68,7 @@
                     <thead>
                         <tr>
                             <th>Chave</th>
-                            <th>Data</th>
+                            <th>{{'geral.data' | translate}}</th>
                             <th>Apostador</th>
                             <th>Recarga</th>
                             <th>Prêmio</th>
@@ -77,7 +77,7 @@
                         </tr>
                     </thead>
                     <tr *ngIf="loading">
-                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> {{'geral.carregando' | translate}}</td>
                     </tr>
                     <tbody *ngIf="!loading">
                         <tr *ngFor="let cartao of cartoes">

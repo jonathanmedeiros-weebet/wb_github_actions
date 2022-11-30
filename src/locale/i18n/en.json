@@ -43,12 +43,18 @@
         "ganhou": "Win",
         "perdeu": "Lost",
         "pendente": "Pending",
-        "filtrar": "Filter"
+        "filtrar": "Filter",
+        "data": "Date",
+        "tipo": "Type",
+        "detalhes": "Details",
+        "valor": "Amount",
+        "carregando": "Loading"
     },
     "dias": {
         "ontem": "Yesterday",
         "hoje": "Today",
         "amanha": "Tomorrow",
+        "semana": "Week",
         "semanaAtual": "Current week",
         "semanaPassada": "Last week",
         "semenaAnterior": "Previous week"
