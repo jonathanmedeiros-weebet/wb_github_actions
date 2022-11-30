@@ -85,7 +85,7 @@
         <li class="categoria" (click)="goTo('/desafios', {})">
             <a>
                 <i class="fa fa-trophy icone-generico"></i>
-                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">TODOS</span>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{'geral.todos' | translate}}</span>
             </a>
         </li>
         <li class="categoria" *ngFor="let categoria of itens"

@@ -72,8 +72,8 @@
                         <h3 class="right-options">
                             Fluxo de Caixa
                             <select class="form-control inverted-out" (change)="handleFiltroFluxoCaixa($event)">
-                                <option value="semana-atual">Semana atual</option>
-                                <option value="semana-anterior">Semana passada</option>
+                                <option value="semana-atual">{{'dias.semanaAtual' | translate}}</option>
+                                <option value="semana-anterior">{{'dias.semanaPassada' | translate}}</option>
                             </select>
                         </h3>
                         <canvas baseChart
@@ -91,8 +91,8 @@
                         <h3>Quantidade de apostas realizadas</h3>
 
                         <select class="form-control inverted-out" (change)="handleFiltroApostasRealizadas($event)">
-                            <option value="semana-atual">Semana atual</option>
-                            <option value="semana-anterior">Semana passada</option>
+                            <option value="semana-atual">{{'dias.semanaAtual' | translate}}</option>
+                            <option value="semana-anterior">{{'dias.semanaPassada' | translate}}</option>
                         </select>
 
                         <ul class="apostas">

@@ -3,7 +3,7 @@
         <div class="content">
             <div class="row">
                 <div class="col col-md-12">
-                    <h2>Redefinir Senha</h2>
+                    <h2>{{'senhas.redefinirSenha' | translate}}</h2>
                 </div>
             </div>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col col-sm-2">
                             <div class="form-group required">
-                                <label class="label">Código de Verificação</label>
+                                <label class="label">{{'senhas.codigoDeVerificacao' | translate}}</label>
                                 <input type="text" formControlName="verificacao" class="form-control inverted-out" maxlength="5">
                             </div>
                             <app-error-msg [control]="form.get('verificacao')"></app-error-msg>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="row">
                         <div class="col col-sm-4">
-                            <label class="label">Confirmar Senha</label>
+                            <label class="label">{{'senhas.confirmarSenha' | translate}}</label>
                             <div class="form-group required">
                                 <input [type]="mostrarSenhaConfirmar ? 'text' : 'password'" formControlName="senha_confirmacao" class="form-control inverted-out">
                                 <i class="fa showPassword" [ngClass]="mostrarSenhaConfirmar ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaConfirmar = !mostrarSenhaConfirmar"></i>

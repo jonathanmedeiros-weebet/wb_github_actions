@@ -38,12 +38,20 @@
         "salvar": "Save",
         "cancelar": "Cancel",
         "fechar": "Close",
-        "confirmar": "Confirm"
+        "todos": "All",
+        "confirmar": "Confirm",
+        "ganhou": "Win",
+        "perdeu": "Lost",
+        "pendente": "Pending",
+        "filtrar": "Filter"
     },
     "dias": {
         "ontem": "Yesterday",
         "hoje": "Today",
-        "amanha": "Tomorrow"
+        "amanha": "Tomorrow",
+        "semanaAtual": "Current week",
+        "semanaPassada": "Last week",
+        "semenaAnterior": "Previous week"
     },
     "modais": {
         "fechar": "Close",
@@ -119,6 +127,10 @@
     "senhas": {
         "senhaAtual": "Current password",
         "novaSenha": "New Password",
-        "confirmarNovaSenha": "Confirm new password"
+        "confirmarNovaSenha": "Confirm new password",
+        "confirmarSenha": "Confirm password",
+        "redefinirSenha": "Redefine password",
+        "codigoDeVerificacao": "Verification Code",
+        "reenviaCodigoDeVerificacao": "Código de Verificação"
     }
 }

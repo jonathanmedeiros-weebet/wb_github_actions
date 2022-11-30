@@ -47,7 +47,7 @@
                                     [ngClass]="applyCssInputError('senha_confirmacao')" [type]="mostrarSenhaConfirmacao ? 'text' : 'password'">
                             <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaConfirmacao, 'fa-eye': !mostrarSenhaConfirmacao }" (click)="toggleMostrarSenha('senhaConfirmacao')"></i>
                             <app-error-msg [control]="form.get('senha_confirmacao')"
-                                            label="Confirmar senha"></app-error-msg>
+                                            label="{{'senhas.confirmarSenha' | translate}}"></app-error-msg>
                         </div>
                     </div>
                 </div>

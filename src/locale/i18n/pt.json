@@ -38,12 +38,21 @@
         "salvar": "Salvar",
         "cancelar": "Cancelar",
         "fechar": "Fechar",
-        "confirmar": "Confirmar"
+        "todos": "Todos",
+        "confirmar": "Confirmar",
+        "ganhou": "Ganhou",
+        "perdeu": "Perdeu",
+        "pendente": "Pendente",
+        "filtrar": "Filtrar"
     },
     "dias": {
         "ontem": "Ontem",
         "hoje": "Hoje",
-        "amanha": "Amanhã"
+        "amanha": "Amanhã",
+        "semana": "Semana",
+        "semanaAtual": "Semana atual",
+        "semanaPassada": "Semana passada",
+        "semenaAnterior": "Semana anterior"
     },
     "modais": {
         "fechar": "Fechar",
@@ -119,6 +128,10 @@
     "senhas": {
         "senhaAtual": "Senha atual",
         "novaSenha": "Nova senha",
-        "confirmarNovaSenha": "Confirmar nova senha"
+        "confirmarNovaSenha": "Confirmar nova senha",
+        "confirmarSenha": "Confirmar senha",
+        "redefinirSenha": "Redefinir Senha",
+        "codigoDeVerificacao": "Código de Verificação",
+        "reenviaCodigoDeVerificacao": "Código de Verificação"
     }
 }

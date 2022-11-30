@@ -122,11 +122,11 @@
                     <div class="input-md">
                         <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha" class="form-control inverted-out" formControlName="senha_confirmacao"
                         [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" ">
-                        <label for="confirmarSenha">Confirmar Senha</label>
+                        <label for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
                     </div>
 
-                    <app-error-msg [control]="form.get('senha_confirmacao')" label="Confirmar Senha" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('senha_confirmacao')" label="{{'senhas.confirmarSenha' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6" *ngIf="afiliadoHabilitado">
