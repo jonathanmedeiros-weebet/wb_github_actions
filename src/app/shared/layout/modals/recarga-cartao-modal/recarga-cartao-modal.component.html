@@ -22,7 +22,7 @@
 
         <div class="actions">
             <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
-                Cancelar
+                {{'geral.cancelar' | translate}}
             </button>
             <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">Recarregar</button>
             <ng-template #btnProcessando>

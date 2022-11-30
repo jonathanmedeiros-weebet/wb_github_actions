@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { LayoutModule } from './layout/layout.module';
 import { UtilsModule } from './utils/utils.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     declarations: [],
@@ -16,7 +17,8 @@ import { UtilsModule } from './utils/utils.module';
         RouterModule,
 
         LayoutModule,
-        UtilsModule
+        UtilsModule,
+        TranslateModule
     ]
 })
 export class SharedModule { }

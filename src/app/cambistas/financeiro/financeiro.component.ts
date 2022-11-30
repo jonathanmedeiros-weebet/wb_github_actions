@@ -10,8 +10,8 @@ import { SidebarService } from 'src/app/services';
 
 export class FinanceiroComponent implements OnInit {
     loading = false;
-    status = "";
-    periodo = "";
+    status = '';
+    periodo = '';
 
     movimentacoes: [];
 

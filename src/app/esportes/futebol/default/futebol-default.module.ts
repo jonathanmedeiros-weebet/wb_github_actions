@@ -9,6 +9,7 @@ import {NgbActiveModal, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import {EsportesModule} from '../../esportes.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {CarouselModule} from 'ngx-owl-carousel-o';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
         CarouselModule,
         NgbNavModule,
         EsportesModule,
-        Ng2SearchPipeModule
+        Ng2SearchPipeModule,
+        TranslateModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,

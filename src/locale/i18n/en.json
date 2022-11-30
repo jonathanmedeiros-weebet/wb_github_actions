@@ -31,7 +31,14 @@
         "pix": "PIX",
         "saque": "Withdrawal",
         "deposito": "Deposit",
-        "nenhumEventoDisponivel": "No event available"
+        "nenhumEventoDisponivel": "No event available",
+        "credito": "Credit",
+        "saldo": "Balance",
+        "minhaConta": "My Account",
+        "salvar": "Save",
+        "cancelar": "Cancel",
+        "fechar": "Close",
+        "confirmar": "Confirm"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -108,5 +115,10 @@
         "consultarCartao": "Consult Card",
         "solicitarSaque": "Request Withdrawal",
         "recarga": "Recharge"
+    },
+    "senhas": {
+        "senhaAtual": "Current password",
+        "novaSenha": "New Password",
+        "confirmarNovaSenha": "Confirm new password"
     }
 }

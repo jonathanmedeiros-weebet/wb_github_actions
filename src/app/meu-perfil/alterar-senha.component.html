@@ -1,14 +1,14 @@
 <div id="default-content">
     <div class="internal-container-out">
         <div class="content-header">
-            <h2>Alterar Senha</h2>
+            <h2>{{'geral.alterarSenha' | translate}}</h2>
         </div>
         <div class="content-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
                 <div class="row">
                     <div class="col-md-2">
                         <label for="">
-                            Senha Atual
+                            {{'senhas.senhaAtual' | translate}}
                         </label>
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
@@ -16,14 +16,14 @@
                             <input type="password" class="inverted-out form-control" placeholder="Digite sua senha" formControlName="senha_atual"
                                     [ngClass]="applyCssInputError('senha_atual')" [type]="mostrarSenhaAtual ? 'text' : 'password'">
                             <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }" (click)="toggleMostrarSenha('senhaAtual')"></i>
-                            <app-error-msg [control]="form.get('senha_atual')" label="Senha Atual"></app-error-msg>
+                            <app-error-msg [control]="form.get('senha_atual')" label="{{'senhas.senhaAtual' | translate}}"></app-error-msg>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
                         <label for="">
-                            Nova Senha
+                            {{'senhas.novaSenha' | translate}}
                         </label>
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <label for="">
-                            Confirmar nova senha
+                            {{'senhas.confirmarNovaSenha' | translate}}
                         </label>
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
@@ -54,10 +54,10 @@
 
                 <div class="buttons">
                     <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
-                        Cancelar
+                        {{'geral.cancelar' | translate}}
                     </button>
                     <button class="btn btn-custom w-150" type="submit">
-                        Salvar
+                        {{'geral.salvar' | translate}}
                     </button>
                 </div>
             </form>

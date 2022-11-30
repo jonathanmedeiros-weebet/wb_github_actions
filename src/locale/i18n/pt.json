@@ -32,6 +32,13 @@
         "saque": "Saque",
         "deposito": "Depósito",
         "nenhumEventoDisponivel": "Nenhum evento disponível",
+        "credito": "Crédito",
+        "saldo": "Saldo",
+        "minhaConta": "Minha Conta",
+        "salvar": "Salvar",
+        "cancelar": "Cancelar",
+        "fechar": "Fechar",
+        "confirmar": "Confirmar"
     },
     "dias": {
         "ontem": "Ontem",
@@ -108,5 +115,10 @@
         "consultarCartao": "Consultar cartão",
         "solicitarSaque": "Solicitar saque",
         "recarga": "Recarga"
+    },
+    "senhas": {
+        "senhaAtual": "Senha atual",
+        "novaSenha": "Nova senha",
+        "confirmarNovaSenha": "Confirmar nova senha"
     }
 }

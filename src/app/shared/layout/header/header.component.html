@@ -6,7 +6,7 @@
 	<div class="offcanvas-body">
 		<p>One fine body&hellip;</p>
 		<div class="text-end">
-			<button type="button" class="btn btn-outline-dark" (click)="offcanvas.close('Close click')">Close</button>
+			<button type="button" class="btn btn-outline-dark" (click)="offcanvas.close('Close click')">{{'geral.fechar' | translate}}</button>
 		</div>
 	</div>
 </ng-template>
@@ -49,26 +49,26 @@
 
                         <div class="saldos-container">
                             <div class="saldos-item">
-                                <span class="">Crédito</span>
+                                <span class="">{{'geral.credito' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
                             </div>
                             <div style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
                             <div class="saldos-item">
-                                <span class="">Saldo</span>
+                                <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
                         </div>
 
                         <div class="nav">
                             <hr />
-                            <label>Minha conta</label>
+                            <label>{{'geral.minhaConta' | translate}}</label>
                             <a (click)="abrirCambistaDashboard()">
                                 <span>
                                     <i class="fa fa-dashboard"></i>
                                 </span>
-                                Dashboard
+                                {{'geral.dashboard' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -77,7 +77,7 @@
                                 <span>
                                     <i class="fa fa-key"></i>
                                 </span>
-                                Alterar senha
+                                {{'geral.alterarSenha' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -86,14 +86,14 @@
                                 <span>
                                     <i class="fa fa-solid fa-dollar"></i>
                                 </span>
-                                Financeiro
+                                {{'geral.financeiro' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
                             <hr />
                             <ng-container *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
-                                <label>Cartão</label>
+                                <label>{{'cartoes.cartao' | translate}}</label>
                                 <a (click)="abrirCambistaCartaoConsultar()">
                                 <span>
                                     <i class="fa fa-solid fa-credit-card"></i>
@@ -213,7 +213,7 @@
 
                         <div class="saldos-container">
                             <div class="saldos-item">
-                                <span class="">Saldo</span>
+                                <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
                             <div *ngIf="posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
@@ -237,7 +237,7 @@
 
                         <div class="nav">
                             <hr />
-                            <label>Minha conta</label>
+                            <label>{{'geral.minhaConta' | translate}}</label>
                             <a (click)="abrirEditarPerfil()">
                                 <span>
                                     <i class="fa fa-solid fa-user"></i>
@@ -251,7 +251,7 @@
                                 <span>
                                     <i class="fa fa-key"></i>
                                 </span>
-                                Alterar senha
+                                {{'geral.alterarSenha' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -333,14 +333,14 @@
 
                         <div class="saldos-container">
                             <div class="saldos-item" *ngIf="!isCliente">
-                                <span class="">Crédito</span>
+                                <span class="">{{'geral.credito' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
                             </div>
                             <div  *ngIf="!isCliente" style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
                             <div class="saldos-item">
-                                <span class="">Saldo</span>
+                                <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
                             <div  *ngIf="isCliente && posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
@@ -388,7 +388,7 @@
                             </a>
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
-                                <i class="fa fa-key mb-2"></i> Alterar senha
+                                <i class="fa fa-key mb-2"></i> {{'geral.alterarSenha' | translate}}
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
                             routerLinkActive="router-link-active"
@@ -430,7 +430,7 @@
                             routerLinkActive="router-link-active"
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-dollar mb-2"></i>
-                                Financeiro
+                                {{'geral.financeiro' | translate}}
                             </a>
                             <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
                                 <i class="fa fa-solid fa-cogs"></i>

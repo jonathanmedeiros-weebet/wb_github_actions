@@ -124,7 +124,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Saldo</th>
+                        <th>{{'geral.saldo' | translate}}</th>
                         <td class="text-right resultado"
                             [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
                             <b>{{relatorio['saldo'] | currency}}</b>
