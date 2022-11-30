@@ -30,7 +30,13 @@
         "dadosPessoais": "Dados Pessoais",
         "pix": "PIX",
         "saque": "Saque",
-        "deposito": "Depósito"
+        "deposito": "Depósito",
+        "nenhumEventoDisponivel": "Nenhum evento disponível",
+    },
+    "dias": {
+        "ontem": "Ontem",
+        "hoje": "Hoje",
+        "amanha": "Amanhã"
     },
     "modais": {
         "fechar": "Fechar",

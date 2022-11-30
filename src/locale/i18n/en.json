@@ -30,7 +30,13 @@
         "dadosPessoais": "Personal Data",
         "pix": "PIX",
         "saque": "Withdrawal",
-        "deposito": "Deposit"
+        "deposito": "Deposit",
+        "nenhumEventoDisponivel": "No event available"
+    },
+    "dias": {
+        "ontem": "Yesterday",
+        "hoje": "Today",
+        "amanha": "Tomorrow"
     },
     "modais": {
         "fechar": "Close",
