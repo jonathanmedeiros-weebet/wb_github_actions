@@ -1,6 +1,36 @@
 {
     "geral": {
-        "processando": "Processing"
+        "processando": "Processing",
+        "entrar": "Log in",
+        "registreSe": "Register",
+        "jogar": "Play",
+        "demo": "Demo",
+        "verTodos": "See all",
+        "destaques": "Highlights",
+        "consultarBilhete": "Consult ticket",
+        "campeonatos": "Championships",
+        "desafios": "Challenges",
+        "surpresinha": "Surprise",
+        "numeros": "Numbers",
+        "alterarSenha": "Change password",
+        "consultar": "Consult",
+        "criar": "Create",
+        "listagem": "Listing",
+        "solicitacoesSaque": "Withdrawal requests",
+        "solicitarSaque": "Request Withdrawal",
+        "dashboard": "Dashboard",
+        "financeiro": "Financial",
+        "validacao": "Validation",
+        "apuracao": "Assessment",
+        "apostas": "Bets",
+        "tabela": "Table",
+        "ajuda": "Help",
+        "sair": "Logout",
+        "perfil": "Profile",
+        "dadosPessoais": "Personal Data",
+        "pix": "PIX",
+        "saque": "Withdrawal",
+        "deposito": "Deposit"
     },
     "modais": {
         "fechar": "Close",
@@ -29,17 +59,18 @@
         "quininha": "Quininha",
         "seninha": "Seninha",
         "todos": "All",
-        "slot":"Slot",
+        "slot": "Slot",
         "raspadinha": "Scratchcard",
-        "roleta":"Roulette",
+        "roleta": "Roulette",
         "mesa": "Table",
-        "cassinoAoVivo":"Live Casino"
+        "cassinoAoVivo": "Live Casino"
     },
     "bilhete": {
         "titulo": "TICKET",
         "jogosSelecionados": "Selected Games",
+        "eventosSelecionados": "Selected Events",
         "removerTodos": "Remove all",
-        "aoVivo":  "LIVE",
+        "aoVivo": "LIVE",
         "nenhumaApostaSelecionada": "No bet selected",
         "selecioneAlgumaAposta": "Select a bet by clicking on the ODDS to finalize the ticket.",
         "nomeDoApostador": "Better Name",
@@ -56,5 +87,20 @@
         "chave": "Key",
         "pin": "PIN",
         "manterCartao": "Keep Card"
+    },
+    "cassino": {
+        "maisPopulares": "More Popular",
+        "slot": "Slot",
+        "raspadinha": "Scratchcard",
+        "roleta": "Roulette",
+        "mesa": "Table",
+        "destaques": "Highlights"
+    },
+    "cartoes": {
+        "titulo": "Cards",
+        "cartao": "Card",
+        "consultarCartao": "Consult Card",
+        "solicitarSaque": "Request Withdrawal",
+        "recarga": "Recharge"
     }
 }

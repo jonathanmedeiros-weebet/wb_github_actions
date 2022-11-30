@@ -1,6 +1,36 @@
 {
     "geral": {
-        "processando": "Processando"
+        "processando": "Processando",
+        "entrar": "Entrar",
+        "registreSe": "Registre-se",
+        "jogar": "Jogar",
+        "demo": "Demo",
+        "verTodos": "Ver todos",
+        "destaques": "Destaques",
+        "consultarBilhete": "Consultar bilhete",
+        "campeonatos": "Campeonatos",
+        "desafios": "Desafios",
+        "surpresinha": "Surpresinha",
+        "numeros": "Números",
+        "alterarSenha": "Alterar senha",
+        "consultar": "Consultar",
+        "criar": "Criar",
+        "listagem": "Listagem",
+        "solicitacoesSaque": "Solicitações saque",
+        "solicitarSaque": "Solicitar saque",
+        "dashboard": "Dashboard",
+        "financeiro": "Financeiro",
+        "validacao": "Validação",
+        "apuracao": "Apuração",
+        "apostas": "Apostas",
+        "tabela": "Tabela",
+        "ajuda": "Ajuda",
+        "sair": "Sair",
+        "perfil": "Perfil",
+        "dadosPessoais": "Dados Pessoais",
+        "pix": "PIX",
+        "saque": "Saque",
+        "deposito": "Depósito"
     },
     "modais": {
         "fechar": "Fechar",
@@ -29,18 +59,18 @@
         "quininha": "Quininha",
         "seninha": "Seninha",
         "todos": "Todos",
-        "slot":"Slot",
+        "slot": "Slot",
         "raspadinha": "Raspadinha",
-        "roleta":"Roleta",
+        "roleta": "Roleta",
         "mesa": "Mesa",
-        "cassinoAoVivo":"Cassino Ao-Vivo"
+        "cassinoAoVivo": "Cassino Ao-Vivo"
     },
     "bilhete": {
         "titulo": "BILHETE",
         "jogosSelecionados": "Jogos Selecionados",
         "eventosSelecionados": "Eventos Selecionados",
         "removerTodos": "Remover todos",
-        "aoVivo":  "AO VIVO",
+        "aoVivo": "AO VIVO",
         "nenhumaApostaSelecionada": "Nenhuma aposta selecionada",
         "selecioneAlgumaAposta": "Selecione alguma aposta clicando nas ODDS para poder finalizar o bilhete.",
         "nomeDoApostador": "Nome do Apostador",
@@ -57,5 +87,20 @@
         "chave": "Chave",
         "pin": "PIN",
         "manterCartao": "Manter Cartão"
+    },
+    "cassino": {
+        "maisPopulares": "Mais Populares",
+        "slot": "Slot",
+        "raspadinha": "Raspadinha",
+        "roleta": "Roleta",
+        "mesa": "Mesa",
+        "destaques": "Destaques"
+    },
+    "cartoes": {
+        "titulo": "Cartões",
+        "cartao": "Cartão",
+        "consultarCartao": "Consultar cartão",
+        "solicitarSaque": "Solicitar saque",
+        "recarga": "Recarga"
     }
 }

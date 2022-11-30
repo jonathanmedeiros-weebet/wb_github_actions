@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GameCasino} from '../../shared/models/casino/game-casino';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     isCliente;
     isLoggedIn;
     gameType: string;
+    tituloPagina;
     private sub: any;
     modalRef;
     isHome = false;
@@ -46,7 +48,8 @@ export class WallComponent implements OnInit, AfterViewInit {
         private sideBarService: SidebarService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private translate: TranslateService
     ) {
     }
 
@@ -80,14 +83,19 @@ export class WallComponent implements OnInit, AfterViewInit {
                         dados: {}
                     });
                     if (this.gameType === 'slot') {
+                        this.tituloPagina = this.translate.instant('cassino.slot');
                         this.showSlot();
                     } else if (this.gameType === 'roleta') {
+                        this.tituloPagina = this.translate.instant('cassino.roleta');
                         this.showRoulette();
                     } else if (this.gameType === 'raspadinha') {
+                        this.tituloPagina = this.translate.instant('cassino.raspadinha');
                         this.showRaspadinha();
                     } else if (this.gameType === 'mesa') {
+                        this.tituloPagina = this.translate.instant('cassino.mesa');
                         this.showMesa();
                     } else if (this.gameType === 'destaques') {
+                        this.tituloPagina = this.translate.instant('cassino.destaques');
                         this.showDestaques();
                     } else if (this.isHomeCassino) {
                         this.showAll();

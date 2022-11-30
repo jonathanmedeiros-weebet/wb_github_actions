@@ -25,7 +25,7 @@
     <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
         <div class="bloco">
             <div class="bloco-header">
-                <div class="titulo">Mais Populares</div>
+                <div class="titulo">{{'cassino.maisPopulares' | translate}}</div>
             </div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gamesDestaque">
@@ -34,14 +34,14 @@
                     <div class="game-tile-buttons">
                         <a *ngIf="game.dataType == 'RNG'"
                            [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-                           class="btn btn-xs game-button-demo">Demo</a>
+                           class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                         <ng-container *ngIf="isLoggedIn && isCliente">
                             <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                               class="btn btn-xs game-button-play">Jogar</a>
+                               class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                         </ng-container>
                         <ng-container *ngIf="!isLoggedIn">
-                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                         </ng-container>
                     </div>
                 </div>
@@ -50,10 +50,10 @@
 
         <div class="bloco">
             <div class="bloco-header">
-                <div class="titulo">Slot</div>
+                <div class="titulo">{{'cassino.slot' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesSlot.length > 5">
                     <a [routerLink]="['/casino/c/wall/slot']">
-                        Ver todos <i class="fa fa-solid fa-angle-right ml-2"></i>
+                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
             </div>
@@ -69,14 +69,14 @@
                         <div class="game-tile-buttons">
                             <a *ngIf="game.dataType == 'RNG'"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-                               class="btn btn-xs game-button-demo">Demo</a>
+                               class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                             <ng-container *ngIf="isLoggedIn && isCliente">
                                 <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                                   class="btn btn-xs game-button-play">Jogar</a>
+                                   class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                             <ng-container *ngIf="!isLoggedIn">
-                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                         </div>
                     </div>
@@ -90,10 +90,10 @@
 
         <div class="bloco">
             <div class="bloco-header">
-                <div class="titulo">Raspadinha</div>
+                <div class="titulo">{{'cassino.raspadinha' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesRaspadinha.length > 5">
                     <a [routerLink]="['/casino/c/wall/raspadinha']">
-                        Ver todos <i class="fa fa-solid fa-angle-right ml-2"></i>
+                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
             </div>
@@ -110,14 +110,14 @@
                         <div class="game-tile-buttons">
                             <a *ngIf="game.dataType == 'RNG'"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-                               class="btn btn-xs game-button-demo">Demo</a>
+                               class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                             <ng-container *ngIf="isLoggedIn && isCliente">
                                 <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                                   class="btn btn-xs game-button-play">Jogar</a>
+                                   class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                             <ng-container *ngIf="!isLoggedIn">
-                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                         </div>
                     </div>
@@ -131,10 +131,10 @@
 
         <div class="bloco">
             <div class="bloco-header">
-                <div class="titulo">Mesa</div>
+                <div class="titulo">{{'cassino.mesa' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesMesa.length > 5">
                     <a [routerLink]="['/casino/c/wall/mesa']">
-                        Ver todos <i class="fa fa-solid fa-angle-right ml-2"></i>
+                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
             </div>
@@ -150,14 +150,14 @@
                         <div class="game-tile-buttons">
                             <a *ngIf="game.dataType == 'RNG'"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-                               class="btn btn-xs game-button-demo">Demo</a>
+                               class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                             <ng-container *ngIf="isLoggedIn && isCliente">
                                 <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                                   class="btn btn-xs game-button-play">Jogar</a>
+                                   class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                             <ng-container *ngIf="!isLoggedIn">
-                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                         </div>
                     </div>
@@ -170,10 +170,10 @@
         </div>
         <div class="bloco">
             <div class="bloco-header">
-                <div class="titulo">Roleta</div>
+                <div class="titulo">{{'cassino.roleta' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesRoleta.length > 5">
                     <a [routerLink]="['/casino/c/wall/roleta']">
-                        Ver todos <i class="fa fa-solid fa-angle-right ml-2"></i>
+                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
             </div>
@@ -189,14 +189,14 @@
                         <div class="game-tile-buttons">
                             <a *ngIf="game.dataType == 'RNG'"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-                               class="btn btn-xs game-button-demo">Demo</a>
+                               class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                             <ng-container *ngIf="isLoggedIn && isCliente">
                                 <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                                   class="btn btn-xs game-button-play">Jogar</a>
+                                   class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                             <ng-container *ngIf="!isLoggedIn">
-                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                             </ng-container>
                         </div>
                     </div>
@@ -212,25 +212,24 @@
 
     <ng-template #cassinoGameList>
         <div class="bloco">
-            <div class="titulo">{{gameType | titlecase}}</div>
+            <div class="titulo">{{'cassino.' + gameType | translate}}</div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gameList">
                     <img title="{{game.gameName}}"
                          src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
                     <div class="game-tile-buttons">
                         <a *ngIf="game.dataType == 'RNG'" [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
-                           class="btn btn-xs game-button-demo">Demo</a>
+                           class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                         <ng-container *ngIf="isLoggedIn && isCliente">
                             <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID]"
-                               class="btn btn-xs game-button-play">Jogar</a>
+                               class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                         </ng-container>
                         <ng-container *ngIf="!isLoggedIn">
-                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">Jogar</a>
+                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                         </ng-container>
                     </div>
                 </div>
             </div>
         </div>
     </ng-template>
-
