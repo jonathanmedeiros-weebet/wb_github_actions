@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
@@ -146,10 +146,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     if(this.opcoes.habilitar_live_tracker && result) {
                         return this.campinhoService.getIdsJogo(result);
                     } else {
-                        return new Observable(subscriber => {
-                            subscriber.next(null);
-                            subscriber.complete();
-                        });
+                        return of(null);
                     }
                 })
             )
