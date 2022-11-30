@@ -2474,3 +2474,12 @@ gulp.task('santissports.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vembet.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "vembet.com.br",
+        banca: "VEM BET",
+        styles: "",
+    });
+});

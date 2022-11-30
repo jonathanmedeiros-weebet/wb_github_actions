@@ -269,7 +269,8 @@
         "brasilbet.net.br": "gulp brasilbet.net.br",
         "goldsoccervip.net": "gulp goldsoccervip.net",
         "serjaobets.com": "gulp serjaobets.com",
-        "santissports.com": "gulp santissports.com"
+        "santissports.com": "gulp santissports.com",
+        "vembet.com.br": "gulp vembet.com.br"
     },
     "private": true,
     "dependencies": {
