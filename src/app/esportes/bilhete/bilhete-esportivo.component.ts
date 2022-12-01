@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
@@ -13,11 +13,13 @@ import {
     MenuFooterService,
     MessageService,
     ParametrosLocaisService,
-    PreApostaEsportivaService
+    PreApostaEsportivaService,
+    CampinhoService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -56,9 +58,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     mobileScreen = false;
     utilizarBonus = false;
     valorFocado = false;
+    liveTrackerUrl;
 
 
     constructor(
+        public sanitizer: DomSanitizer,
         private apostaEsportivaService: ApostaEsportivaService,
         private preApostaService: PreApostaEsportivaService,
         private auth: AuthService,
@@ -70,6 +74,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
+        private campinhoService: CampinhoService,
         private menuFooterService: MenuFooterService
     ) {
         super();
@@ -134,6 +139,27 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.setItens(result);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
             });
+
+
+        this.bilheteService.idJogo
+            .pipe(switchMap(result => {
+                    if(this.opcoes.habilitar_live_tracker && result) {
+                        return this.campinhoService.getIdsJogo(result);
+                    } else {
+                        return of(null);
+                    }
+                })
+            )
+            .subscribe(
+                (response: any) => {
+                    if (response?.thesports_uuid) {
+                        this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
+                    } else {
+                        this.liveTrackerUrl = null;
+                    }
+                },
+                error => this.handleError(error)
+            );
 
         this.form.get('valor').valueChanges
             .pipe(takeUntil(this.unsub$))

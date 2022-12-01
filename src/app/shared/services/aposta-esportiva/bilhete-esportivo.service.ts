@@ -13,6 +13,8 @@ export class BilheteEsportivoService {
     bilheteIsOpen = false;
     private openBilheteSource = new BehaviorSubject<boolean>(false);
     openBilhete = this.openBilheteSource.asObservable();
+    private idJogoSource = new BehaviorSubject(0);
+    idJogo = this.idJogoSource.asObservable();
 
     constructor(
         private menuFooterService: MenuFooterService
@@ -40,5 +42,9 @@ export class BilheteEsportivoService {
     toggleBilhete() {
         this.bilheteIsOpen = !this.bilheteIsOpen;
         this.openBilheteSource.next(this.bilheteIsOpen);
+    }
+
+    sendId(idJogo) {
+        this.idJogoSource.next(idJogo)
     }
 }
