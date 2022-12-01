@@ -67,7 +67,7 @@
                             </td>
                             <td>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>
-                                {{aposta.valor | currency}} <small *ngIf="aposta.is_bonus">bônus</small>
+                                {{aposta.valor | currency}} <small *ngIf="aposta.is_bonus">{{'geral.bonus' | translate | lowercase}}</small>
                             </td>
                             <td>
                                 <span

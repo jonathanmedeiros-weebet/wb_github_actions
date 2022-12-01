@@ -3,7 +3,7 @@
 
     <ng-container *ngIf="!showLoading">
         <div class="content-header">
-            <h2>Perfil</h2>
+            <h2>{{'geral.perfil' | translate}}</h2>
         </div>
         <div class="content-body">
             <div class="content">
@@ -11,7 +11,7 @@
                     <fieldset>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Nome</label>
+                                <label class="label">{{'geral.nome' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -26,7 +26,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">CPF</label>
+                                <label class="label">{{'geral.cpf' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Data de Nascimento</label>
+                                <label class="label">{{'geral.dataDeNascimento' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Sexo</label>
+                                <label class="label">{{'geral.sexo' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -55,11 +55,11 @@
                             </div>
                         </div>
                     </fieldset>
-                    <h5>Informações de Contato</h5>
+                    <h5>{{'geral.informacoesDeContato' | translate}}</h5>
                     <fieldset>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Telefone</label>
+                                <label class="label">{{'geral.telefone' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Email</label>
+                                <label class="label">{{'geral.email' | translate}}</label>
                             </div>
                             <div class="col col-md-3">
                                 <div class="form-group">
@@ -82,11 +82,11 @@
                             </div>
                         </div>
                     </fieldset>
-                    <h5>Endereço</h5>
+                    <h5>{{'geral.endereco' | translate}}</h5>
                     <fieldset>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">CEP</label>
+                                <label class="label">{{'geral.cep' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -98,7 +98,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Logradouro</label>
+                                <label class="label">{{'geral.logradouro' | translate}}</label>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -120,7 +120,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Bairro</label>
+                                <label class="label">{{'geral.bairro' | translate}}</label>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -131,13 +131,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Estado</label>
+                                <label class="label">{{'geral.estado' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select formControlName="estado" type="text" class="form-control inverted-out"
                                         (change)="getCidades($event)">
-                                        <option value="0">Selecione</option>
+                                        <option value="0">{{'geral.selecione' | translate}}</option>
                                         <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
                                         </option>
                                     </select>
@@ -147,12 +147,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="label">Cidade</label>
+                                <label class="label">{{'geral.cidade' | translate}}</label>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select formControlName="cidade" class="form-control inverted-out">
-                                        <option value="0">Selecione a cidade</option>
+                                        <option value="0">{{'geral.selecioneACidade' | translate}}</option>
                                         <option *ngFor="let cidade of cidades" [value]="cidade.id"
                                             [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
                                     </select>
@@ -183,7 +183,7 @@
                                         {{'geral.cancelar' | translate}}
                                     </button>
                                     <button class="btn btn-custom w-150" type="submit">
-                                        Atualizar
+                                        {{'geral.atualizar' | translate}}
                                     </button>
                                 </div>
                             </div>

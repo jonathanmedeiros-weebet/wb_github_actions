@@ -13,9 +13,9 @@
                     <div class="input-md">
                         <input type="text" id="nome" class="form-control inverted-out" formControlName="nome"
                             [ngClass]="applyCssInputError('nome')" placeholder=" ">
-                        <label for="nome">Nome</label>
+                        <label for="nome">{{'geral.nome' | translate}}</label>
                     </div>
-                    <app-error-msg [control]="form.get('nome')" label="Nome" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
@@ -35,20 +35,20 @@
                     <div class="input-md">
                         <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000" formControlName="nascimento"
                         [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
-                        <label for="dataNascimento">Data de Nascimento</label>
+                        <label for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
                     </div>
 
-                    <app-error-msg [control]="form.get('nascimento')" label="Data de Nascimento" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('nascimento')" label="{{'geral.dataDeNascimento' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group mb-4" [ngClass]="applyCssDivError('genero')">
                     <select formControlName="genero" class="form-control inverted-out" [ngClass]="applyCssInputError('cpf')">
-                        <option value="">Selecione</option>
+                        <option value="">{{'geral.selecione' | translate}}</option>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                     </select>
-                    <app-error-msg [control]="form.get('genero')" label="Sexo" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('genero')" label="{{'geral.sexo' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
         </div>
@@ -58,24 +58,24 @@
                     <div class="input-md">
                         <input type="text" id="cpf" class="form-control inverted-out" mask="000.000.000-00" formControlName="cpf"
                         [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false" inputmode="numeric">
-                        <label for="cpf">CPF</label>
+                        <label for="cpf">{{'geral.cpf' | translate}}</label>
                     </div>
 
                     <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
                 </div>
             </div>
         </div>
-        <h3>Informações de contato</h3>
+        <h3>{{'geral.informacoesDeContato' | translate}}</h3>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-4">
                     <div class="input-md">
                         <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out" formControlName="telefone"
                         [ngClass]="applyCssInputError('telefone')" placeholder=" " [dropSpecialCharacters]="false" inputmode="numeric">
-                        <label for="telefone">Telefone</label>
+                        <label for="telefone">{{'geral.telefone' | translate}}</label>
                     </div>
 
-                    <app-error-msg [control]="form.get('telefone')" label="Telefone" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
             <div class="col-md-6">
@@ -83,10 +83,10 @@
                     <div class="input-md">
                         <input type="text" id="email" class="form-control inverted-out" [ngClass]="applyCssInputError('email')"
                         formControlName="email" placeholder=" ">
-                        <label for="email">Email</label>
+                        <label for="email">{{'geral.email' | translate}}</label>
                     </div>
 
-                    <app-error-msg [control]="form.get('email')" label="Email" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
         </div>

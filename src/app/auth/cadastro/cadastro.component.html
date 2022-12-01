@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col col-sm-6">
                         <div class="form-group required">
-                            <label class="label">Nome</label>
+                            <label class="label">{{'geral.nome' | translate}}</label>
                             <input class="form-control" type="text" formControlName="nome">
                             <app-error-msg [control]="form.get('nome')"></app-error-msg>
                         </div>
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col col-md-6">
                         <div class="form-group required">
-                            <label class="label">Data de Nascimento</label>
+                            <label class="label">{{'geral.dataDeNascimento' | translate}}</label>
                             <input class="form-control" type="text" mask="d0/M0/0000" formControlName="nascimento"
                                    inputmode="numeric">
                             <app-error-msg [control]="form.get('nascimento')"></app-error-msg>
@@ -36,9 +36,9 @@
                     </div>
                     <div class="col col-md-6">
                         <div class="form-group required">
-                            <label class="label">Sexo</label>
+                            <label class="label">{{'geral.sexo' | translate}}</label>
                             <select formControlName="genero" class="form-control">
-                                <option value="">Selecione</option>
+                                <option value="">{{'geral.selecione' | translate}}</option>
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col col-sm-12">
                         <div class="form-group required">
-                            <label class="label">CPF</label>
+                            <label class="label">{{'geral.cpf' | translate}}</label>
                             <input class="form-control" type="text" mask="000.000.000-00" placeholder="000.000.000-00"
                                    formControlName="cpf" [dropSpecialCharacters]="false" inputmode="numeric">
                             <app-error-msg [control]="form.get('cpf')"></app-error-msg>
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col col-sm-12">
                         <div class="form-group required">
-                            <label class="label">Telefone</label>
+                            <label class="label">{{'geral.telefone' | translate}}</label>
                             <input class="form-control" type="text" mask="(00)00000-0000" formControlName="telefone"
                                    placeholder="(00)00000-0000" [dropSpecialCharacters]="false" inputmode="numeric">
                             <app-error-msg [control]="form.get('telefone')"></app-error-msg>
@@ -69,7 +69,7 @@
                 <div class="row">
                     <div class="col col-sm-12">
                         <div class="form-group required">
-                            <label class="label">Email</label>
+                            <label class="label">{{'geral.email' | translate}}</label>
                             <input class="form-control" type="text" placeholder="exemplo@email.com"
                                    formControlName="email" inputmode="email">
                             <app-error-msg [control]="form.get('email')"></app-error-msg>

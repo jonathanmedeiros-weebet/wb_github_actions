@@ -17,16 +17,24 @@
                         <div class="row">
                             <div class="col col-sm-3">
                                 <div class="form-group required" [ngClass]="{'text-center': isMobile}">
-                                    <span class="alerta-saldo mt-3">Saldo disponivel para saque: {{ saldo | currency }}</span>
-                                    <label class="label" [ngClass]="{'label-input-valor': isMobile}">{{ isMobile ? 'Informe o valor' : 'Informe o valor desejado para saque' }}</label>
-                                    <input currencyMask [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
-                                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                        formControlName="valor">
+                                    <span class="alerta-saldo mt-3">
+                                        {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
+                                    <label class="label"
+                                           [ngClass]="{'label-input-valor': isMobile}">
+                                        {{isMobile ? 'saques.informeOValor' : 'saques.informeValorDesejadoSaque' | translate}}
+                                    </label>
+                                    <input currencyMask
+                                           [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
+                                           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                           formControlName="valor">
                                     <app-error-msg [control]="form.get('valor')"></app-error-msg>
-                                    <span class="hide-mobile mt-3 d-block">Saldo disponivel para saque: {{ saldo | currency }}</span>
+                                    <span
+                                        class="hide-mobile mt-3 d-block">
+                                        {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
                                 </div>
-                                <div *ngIf="apiPagamentos == 'sauto_pay'" class="alert alert-info alert-dismissible fade show">
-                                    <b>{{'geral.atencao' | translate}}! </b>Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil. <br>
+                                <div *ngIf="apiPagamentos == 'sauto_pay'"
+                                     class="alert alert-info alert-dismissible fade show">
+                                    <b>{{'geral.atencao' | translate}}! </b>{{'saques.infoSautoPay' | translate}}. <br>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -36,8 +44,9 @@
                         <div class="row mt-2">
                             <div class="col col-md-12">
                                 <div class="form-group group-buttons">
-                                    <button type="submit" class="btn btn-custom" [ngClass]="{'btn-block': isMobile}" [disabled]="submitting">
-                                        Solicitar Saque
+                                    <button type="submit" class="btn btn-custom" [ngClass]="{'btn-block': isMobile}"
+                                            [disabled]="submitting">
+                                        {{'geral.solicitarSaque' | translate}}
                                     </button>
                                 </div>
                             </div>
@@ -45,7 +54,8 @@
                     </form>
                 </div>
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
-                    {{errorMessage}} <a [routerLink]="['/clientes/perfil-pix']">Clique aqui para continuar.</a>
+                    {{errorMessage}} <a
+                    [routerLink]="['/clientes/perfil-pix']">{{'geral.cliqueAquiPraContinuar' | translate}}.</a>
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
@@ -56,18 +66,18 @@
         <div class="table-responsive">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th width="10"></th>
-                        <th>{{'geral.detalhes' | translate}}</th>
-                        <th width="200">Status</th>
-                        <th width="200">{{'geral.valor' | translate}}</th>
-                        <th width="1"></th>
-                    </tr>
+                <tr>
+                    <th width="10"></th>
+                    <th>{{'geral.detalhes' | translate}}</th>
+                    <th width="200">{{'geral.status' | translate}}</th>
+                    <th width="200">{{'geral.valor' | translate}}</th>
+                    <th width="1"></th>
+                </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let saque of saques">
                         <td><img src="/assets/images/debito.svg" alt="image"></td>
-                        <td>Saque - Registrado {{ saque.data }}</td>
+                        <td>{{'saques.saqueERegistrado' | translate}} {{ saque.data }}</td>
                         <td>{{ saque.status }}</td>
                         <td>{{ saque.valor | currency}}</td>
                         <td>

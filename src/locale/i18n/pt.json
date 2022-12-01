@@ -17,7 +17,8 @@
         "criar": "Criar",
         "listagem": "Listagem",
         "solicitacoesSaque": "Solicitações saque",
-        "solicitarSaque": "Solicitar saque",
+        "solicitacoesDeSaque": "Solicitações de saque",
+        "solicitarSaque": "Solicitar Saque",
         "dashboard": "Dashboard",
         "financeiro": "Financeiro",
         "validacao": "Validação",
@@ -100,7 +101,34 @@
         "atencao": "Atenção",
         "jogos": "Jogos",
         "jogo": "Jogo",
-        "dataDeEncerramento": "Data de Encerramento"
+        "dataDeEncerramento": "Data de Encerramento",
+        "configuracoes": "Configurações",
+        "versao": "Versão",
+        "solicitarDeposito": "Solicitar Depósito",
+        "liberarCredito": "Liberar Crédito",
+        "bonus": "Bônus",
+        "recarga": "Recarga",
+        "recargas": "Recargas",
+        "nome": "Nome",
+        "sobrenome": "Sobrenome",
+        "nomeDeUsuario": "Nome de Usuário",
+        "dataDeNascimento": "Data de nascimento",
+        "cpf": "CPF",
+        "sexo": "Sexo",
+        "informacoesDeContato": "Informações de Contato",
+        "telefone": "Telefone",
+        "email": "E-mail",
+        "endereco": "Endereço",
+        "cep": "CEP",
+        "logradouro": "Logradouro",
+        "bairro": "Bairro",
+        "estado": "Estado",
+        "cidade": "Cidade",
+        "selecione": "Selecione",
+        "selecioneACidade": "Selecione a cidade",
+        "atualizar": "Atualizar",
+        "status": "Status",
+        "cliqueAquiPraContinuar": "Clique aqui para continuar"
     },
     "dias": {
         "ontem": "Ontem",
@@ -195,5 +223,12 @@
         "redefinirSenha": "Redefinir Senha",
         "codigoDeVerificacao": "Código de Verificação",
         "reenviaCodigoDeVerificacao": "Código de Verificação"
+    },
+    "saques": {
+        "informeValorDesejadoSaque": "Informe o valor desejado para saque",
+        "informeOValor": "Informe o valor",
+        "saldoDisponivelParaSaque": "Saldo disponivel para saque",
+        "infoSautoPay": "Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil.",
+        "saqueERegistrado": "Saque - Registrado"
     }
 }

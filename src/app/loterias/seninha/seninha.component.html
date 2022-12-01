@@ -46,7 +46,7 @@
                                         <select class="form-control inverted-out" formControlName="sorteio"
                                                 [compareWith]="compararSorteio"
                                                 [ngClass]="applyCssInputError('sorteio')">
-                                            <option [value]="null">Selecione</option>
+                                            <option [value]="null">{{'geral.selecione' | translate}}</option>
                                             <option *ngFor="let sorteio of sorteios" [ngValue]="sorteio">
                                                 {{sorteio.nome}}
                                             </option>

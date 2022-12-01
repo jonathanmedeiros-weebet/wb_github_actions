@@ -17,6 +17,7 @@
         "criar": "Create",
         "listagem": "Listing",
         "solicitacoesSaque": "Withdrawal requests",
+        "solicitacoesDeSaque": "Withdrawal requests",
         "solicitarSaque": "Request Withdrawal",
         "dashboard": "Dashboard",
         "financeiro": "Financial",
@@ -100,7 +101,34 @@
         "atencao": "Warning",
         "jogos": "Games",
         "jogo": "Game",
-        "dataDeEncerramento": "Closing date"
+        "dataDeEncerramento": "Closing date",
+        "configuracoes": "Settings",
+        "versao": "Version",
+        "solicitarDeposito": "Request Deposit",
+        "liberarCredito": "Release Credit",
+        "bonus": "Bonus",
+        "recarga": "Recharge",
+        "recargas": "Recharges",
+        "nome": "Name",
+        "sobrenome": "Last Name",
+        "nomeDeUsuario": "Username",
+        "dataDeNascimento": "Birth date",
+        "cpf": "CPF",
+        "sexo": "Gender",
+        "informacoesDeContato": "Contact Info",
+        "telefone": "Phone",
+        "email": "Email",
+        "endereco": "Address",
+        "cep": "CEP",
+        "logradouro": "Street",
+        "bairro": "Neighborhood",
+        "estado": "State",
+        "cidade": "City",
+        "selecione": "Select",
+        "selecioneACidade": "Select the city",
+        "atualizar": "Update",
+        "status": "Status",
+        "cliqueAquiParaContinuar": "Click here to continue"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -195,5 +223,12 @@
         "redefinirSenha": "Redefine password",
         "codigoDeVerificacao": "Verification Code",
         "reenviaCodigoDeVerificacao": "Código de Verificação"
+    },
+    "saques": {
+        "informeValorDesejadoSaque": "Enter the amount you want to withdraw",
+        "informeOValor": "Enter the amount",
+        "saldoDisponivelParaSaque": "Balance available for withdrawal",
+        "infoSautoPay": "Withdrawals requested after 2pm will only be transferred on the next business day.",
+        "saqueERegistrado": "Withdrawal - Registered"
     }
 }

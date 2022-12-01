@@ -45,7 +45,7 @@
             <div class="fin-card col-8">
                 <div class="fin-card-header fs-20px fw-600">
                     <div class="titulo-subtitulo">
-                        Dashboard
+                        {{'geral.dashboard' | translate}}
                         <span class="subtitulo fs-12px fw-400">Saques e Depósitos</span>
                     </div>
                 </div>
@@ -120,11 +120,11 @@
                                     </td>
                                     <td class="custom-td" rowspan="2"
                                         style="padding-right: 10px;">{{movimentacao.valor | currency}}
-                                        <small *ngIf="movimentacao.is_bonus"><br>bônus</small>
+                                        <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
                                     </td>
                                     <td class="custom-td" rowspan="2">
                                         {{movimentacao.saldo | currency}}
-                                        <small *ngIf="movimentacao.is_bonus"><br>bônus</small>
+                                        <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
                                     </td>
                                 </tr>
                                 <tr class="tr-2">
@@ -173,11 +173,11 @@
 <!--                                        </td>-->
 <!--                                        <td class="custom-td" rowspan="2"-->
 <!--                                            style="padding-right: 10px;">{{movimentacao.valor | currency}}-->
-<!--                                            <small *ngIf="movimentacao.is_bonus"><br>bônus</small>-->
+<!--                                            <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>-->
 <!--                                        </td>-->
 <!--                                        <td class="custom-td" rowspan="2">-->
 <!--                                            {{movimentacao.saldo | currency}}-->
-<!--                                            <small *ngIf="movimentacao.is_bonus"><br>bônus</small>-->
+<!--                                            <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>-->
 <!--                                        </td>-->
 <!--                                    </tr>-->
 <!--                                    <tr class="tr-2">-->
