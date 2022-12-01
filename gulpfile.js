@@ -770,15 +770,6 @@ gulp.task('superbetplus.club', function (done) {
     });
 });
 
-gulp.task('i9bets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "i9bets.wee.bet",
-        banca: "I9 BETS",
-        styles: "",
-    });
-});
-
 gulp.task('ingamesport.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1087,15 +1078,6 @@ gulp.task('trandbets.com', function (done) {
     });
 });
 
-gulp.task('betmed.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betmed.wee.bet",
-        banca: "Bet Med",
-        styles: "",
-    });
-});
-
 gulp.task('wbets.com.br', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1239,15 +1221,6 @@ gulp.task('betcompany.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "betcompany.wee.bet",
         banca: "BET COMPANY",
-        styles: "",
-    });
-});
-
-gulp.task('futbet7.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "futbet7.com",
-        banca: "FUTBET7",
         styles: "",
     });
 });
@@ -1618,15 +1591,6 @@ gulp.task('premiosbet.net', function (done) {
     });
 });
 
-gulp.task('lincesports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "lincesports.wee.bet",
-        banca: "LINCE SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('pixsportbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1663,15 +1627,6 @@ gulp.task('volpsport.com', function (done) {
     });
 });
 
-gulp.task('uai.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "uai.bet",
-        banca: "UAI BET",
-        styles: "",
-    });
-});
-
 gulp.task('topbetgames.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1704,15 +1659,6 @@ gulp.task('brotherr.bet', function (done) {
         server: "front2.wee.bet",
         host: "brotherr.bet",
         banca: "BROTHERS BET",
-        styles: "",
-    });
-});
-
-gulp.task('paraibapixbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "paraibapixbet.wee.bet",
-        banca: "PB PIX BET",
         styles: "",
     });
 });
@@ -1814,15 +1760,6 @@ gulp.task('camisa12.online', function (done) {
         server: "front3.wee.bet",
         host: "camisa12.online",
         banca: "CAMISA12",
-        styles: "",
-    });
-});
-
-gulp.task('greenway.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "greenway.bet",
-        banca: "GREEN WAY",
         styles: "",
     });
 });
@@ -2018,15 +1955,6 @@ gulp.task('ggdasorte.bet', function (done) {
     });
 });
 
-gulp.task('bets2you.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bets2you.com",
-        banca: "BETS2YOU",
-        styles: "",
-    });
-});
-
 gulp.task('tigrebet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2179,15 +2107,6 @@ gulp.task('betei.bet', function (done) {
         banca: "BETEI",
         styles: "",
         scripts: "<!-- Start of LiveChat (www.livechat.com) code --> <script> window.__lc = window.__lc || {}; window.__lc.license = 14693070; ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:'2.0',on:function(){i(['on',c.call(arguments)])},once:function(){i(['once',c.call(arguments)])},off:function(){i(['off',c.call(arguments)])},get:function(){if(!e._h)throw new Error('[LiveChatWidget] You cant use getters before load.');return i(['get',c.call(arguments)])},call:function(){i(['call',c.call(arguments)])},init:function(){var n=t.createElement('script');n.async=!0,n.type='text/javascript',n.src='https://cdn.livechatinc.com/tracking.js',t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice)) </script> <noscript><a href='https://www.livechat.com/chat-with/14693070/' rel='nofollow'>Chat with us</a>, powered by <a href='https://www.livechat.com/?welcome' rel='noopener nofollow' target='_blank'>LiveChat</a></noscript> <!-- End of LiveChat code -->"
-    });
-});
-
-gulp.task('sortepix.vip', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sortepix.vip",
-        banca: "SORTE PIX",
-        styles: "",
     });
 });
 
