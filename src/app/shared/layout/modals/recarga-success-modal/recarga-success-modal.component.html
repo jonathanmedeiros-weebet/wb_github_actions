@@ -25,7 +25,7 @@
             Fechar
         </button>
         <button type="button" class="btn btn-custom w-130" (click)="printTicket()">
-            Imprimir
+            {{'geral.imprimir' | translate}}
         </button>
         <button *ngIf="appMobile" type="button" class="btn btn-custom w-130" (click)="shareTicket()">
             Compartilhar

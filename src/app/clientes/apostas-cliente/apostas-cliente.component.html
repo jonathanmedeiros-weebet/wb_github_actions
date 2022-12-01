@@ -5,15 +5,15 @@
 
     <div class="internal-container-out">
         <div class="content-header">
-            <h2>Apostas</h2>
+            <h2>{{'geral.apostas' | translate}} </h2>
         </div>
 
         <div class="tabs">
-            <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">Esporte</a>
+            <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">{{'geral.esporte' | translate}} </a>
             <a *ngIf="acumuladaoHabilitado" [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''"
-               (click)="changeTab('acumuladao')">Acumuladão</a>
+               (click)="changeTab('acumuladao')">{{'geral.acumuladao' | translate}}</a>
             <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''"
-               (click)="changeTab('desafio')">Desafio</a>
+               (click)="changeTab('desafio')">{{'geral.desafio' | translate}}</a>
             <a *ngIf="casinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''"
                (click)="changeTab('cassino')">Cassino</a>
         </div>
@@ -68,13 +68,13 @@
 
             <div class="info-resultado">
                 <div class="item">
-                    <label>Qtd. apostas:</label> {{ apostas.length }}
+                    <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
                 </div>
                 <div class="item">
-                    <label>Total apostado:</label> {{ totais.valor | currency }}
+                    <label>{{'geral.totalApostado' | translate}} :</label> {{ totais.valor | currency }}
                 </div>
                 <div class="item">
-                    <label>Total prêmios:</label> {{ totais.premio | currency }}
+                    <label>{{'geral.totalPremios' | translate}}:</label> {{ totais.premio | currency }}
                 </div>
             </div>
 
@@ -83,10 +83,10 @@
                     <thead>
                     <tr>
                         <th width="30"></th>
-                        <th width="100">Código</th>
-                        <th>Horário</th>
+                        <th width="100">{{'geral.codigo' | translate}}</th>
+                        <th>{{'geral.horario' | translate}}</th>
                         <th>{{'geral.valor' | translate}}</th>
-                        <th>Prêmio</th>
+                        <th>{{'geral.premio' | translate}} </th>
                         <th></th>
                     </tr>
                     </thead>
@@ -103,7 +103,7 @@
                         <td>{{ aposta.valor | currency}}</td>
                         <td>{{ aposta.premio | currency }}</td>
                         <td class="acoes-aposta">
-                            <a title="Exibir" (click)="openModal(aposta)">
+                            <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
                                 <i class="fa fa-eye"></i>
                             </a>
                         </td>

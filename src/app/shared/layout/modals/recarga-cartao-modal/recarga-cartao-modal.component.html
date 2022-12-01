@@ -24,10 +24,10 @@
             <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
                 {{'geral.cancelar' | translate}}
             </button>
-            <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">Recarregar</button>
+            <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">{{'geral.recarregar' | translate}}</button>
             <ng-template #btnProcessando>
                 <button disabled class="btn btn-custom">
-                    Processando...
+                    {{'geral.processando' | translate}}...
                     <i class="fa fa-spinner fa-spin"></i>
                 </button>
             </ng-template>

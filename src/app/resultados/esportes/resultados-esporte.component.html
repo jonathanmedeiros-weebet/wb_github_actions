@@ -12,9 +12,9 @@
                                     <input type="date" class="form-control" formControlName="data">
                                 </div>
                                 <div class="col-xs-6 col-lg-3">
-                                    <label>Esporte</label>
+                                    <label>{{'geral.esporte' | translate}} </label>
                                     <select class="form-control" formControlName="sport_id">
-                                        <option value="1">Futebol</option>
+                                        <option value="1">{{'geral.futebol' | translate}} </option>
                                         <option *ngIf="basqueteHabilitado" value="18">Basquete</option>
                                         <option *ngIf="tenisHabilitado" value="13">Tênis</option>
                                         <option *ngIf="combateHabilitado" value="9">Combate</option>

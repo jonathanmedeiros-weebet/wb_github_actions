@@ -27,7 +27,7 @@
 
     <div class="mt-3">
         <a class="btn btn-custom btn-block" *ngIf="isMobile && impressaoPermitida()" (click)="printTicket()">
-            Imprimir
+            {{'geral.imprimir' | translate}}
         </a>
         <a class="btn btn-custom btn-block" *ngIf="isMobile && compartilhamentoPermitido()" (click)="shareTicket()">
             Compartilhar

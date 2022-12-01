@@ -7,13 +7,13 @@
 <div class="modal-body">
     <div class="cartao-aposta">
         <div class="box-chave">
-            <label for="">Chave cartão</label>
+            <label >Chave cartão</label>
             <span>{{'cartoes.cartao' | translate}} {{cartao.chave}}</span>
         </div>
         <div>
             <div>
                 <div class="mb-4">
-                    <b>Apostador: </b>
+                    <b>{{'geral.apostador' | translate}} : </b>
                     <span>{{cartao.apostador}}</span>
                 </div>
                 <div class="mb-4">
@@ -21,7 +21,7 @@
                     <span>{{cartao.total_creditos | currency}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Prêmios: </b>
+                    <b>{{'geral.premios' | translate}} : </b>
                     <span>{{cartao.premios | currency}}</span>
                 </div>
                 <div class="mb-4">
@@ -35,11 +35,11 @@
                     <span>{{cartao.passador?.nome}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Saques: </b>
+                    <b>{{'geral.saques' | translate}} : </b>
                     <span>{{cartao.total_saques | currency}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Saldo atual: </b>
+                    <b>{{'geral.saldoAtual' | translate}}: </b>
                     <span>{{cartao.saldo | currency}}</span>
                 </div>
             </div>
@@ -50,9 +50,9 @@
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
-                    <th>Código</th>
+                    <th>{{'geral.codigo' | translate}}</th>
                     <th>Mod.</th>
-                    <th>Horário</th>
+                    <th>{{'geral.horario' | translate}}</th>
                     <th>{{'geral.valor' | translate}}</th>
                     <th>Possível Retorno</th>
                     <th>Resultado</th>
@@ -82,7 +82,7 @@
             Fechar
         </button>
         <button type="button" class="btn btn-custom" (click)="print()">
-            Imprimir
+            {{'geral.imprimir' | translate}}
         </button>
     </div>
 </div>

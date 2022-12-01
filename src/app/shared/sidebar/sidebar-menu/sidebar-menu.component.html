@@ -17,7 +17,7 @@
 
         <a (click)="abrirModalTabela()" *ngIf="isLoggedIn && !isCliente">
             <i class="fa fa-solid fa-print"></i>
-            Tabela
+            {{'geral.tabela' | translate}}
         </a>
 
         <a (click)="listPrinters()" *ngIf="isAppMobile">

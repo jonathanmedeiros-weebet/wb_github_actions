@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Consultar Bilhete</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{'geral.consultarBilhete' | translate}}</h4>
     <a aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
@@ -26,7 +26,7 @@
 
     <div class="buttons" *ngIf="exibirBilhete">
         <button type="button" class="btn btn-custom2" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()">Compartilhar</button>
-        <button type="button" class="btn btn-custom" *ngIf="impressaoPermitida()" (click)="printTicket()">Imprimir</button>
+        <button type="button" class="btn btn-custom" *ngIf="impressaoPermitida()" (click)="printTicket()">{{'geral.imprimir' | translate}}</button>
     </div>
 </div>
 

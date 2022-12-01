@@ -18,7 +18,7 @@
                                 <select class="form-control" formControlName="tipo">
                                     <option value="">Todos</option>
                                     <option value="depositos">Depósitos</option>
-                                    <option value="saques">Saques</option>
+                                    <option value="saques">{{'geral.saques' | translate}} </option>
                                 </select>
                             </div>
                             <div class="col-6 col-md-1">
@@ -76,7 +76,7 @@
                                         <span *ngIf="depositoSaque.tipo === 'deposito'">Depósito</span>
                                         <ng-template #tipoSaque>
                                             <i style="color:red; margin-right: 5px;" class="fa fa-sort-up"></i>
-                                            <span>Saque</span>
+                                            <span>{{'geral.saque' | translate}} </span>
                                         </ng-template>
                                     </td>
                                     <td>{{depositoSaque.status | depositoStatusPixPipe}}</td>

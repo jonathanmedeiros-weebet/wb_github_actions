@@ -40,7 +40,7 @@ export class TabelaComponent implements OnInit {
             'data': moment().format('YYYY-MM-DD')
         };
 
-        this.dataCampeonatos = moment().format('DD [de] MMMM [de] YYYY')
+        this.dataCampeonatos = moment().format('DD [de] MMMM [de] YYYY');
 
         this.campeonatoService.getCampeonatos(queryParams).subscribe(
             campeonatos => {

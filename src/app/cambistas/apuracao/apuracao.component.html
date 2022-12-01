@@ -5,9 +5,9 @@
 
     <div class="internal-container-out">
         <div class="content-header">
-            <h2>Apuração</h2>
+            <h2>{{'geral.apuracao' | translate}}</h2>
             <div class="filters">
-                <form (ngSubmit)="getResultado()" >
+                <form (ngSubmit)="getResultado()">
                     <div class="form-row m-0 filtros-container">
                         <input
                             name="datepicker"
@@ -25,11 +25,11 @@
                         >
                         <ng-template #t let-date let-focused="focused">
                             <span class="custom-day"
-                                    [class.focused]="focused"
-                                    [class.range]="isRange(date)"
-                                    [class.faded]="isHovered(date) || isInside(date)"
-                                    (mouseenter)="hoveredDate = date"
-                                    (mouseleave)="hoveredDate = null">
+                                  [class.focused]="focused"
+                                  [class.range]="isRange(date)"
+                                  [class.faded]="isHovered(date) || isInside(date)"
+                                  (mouseenter)="hoveredDate = date"
+                                  (mouseleave)="hoveredDate = null">
                                 {{ date.day }}
                             </span>
                         </ng-template>
@@ -53,7 +53,7 @@
         <div class="content-body">
             <div class="tabela-apuracao" *ngIf="!showLoading">
                 <tr *ngIf="modoContaCorrente">
-                    <th>Saldo em {{dataSaldoAnterior}}</th>
+                    <th>{{'geral.saldoEm' | translate}} {{dataSaldoAnterior}}</th>
                     <td>
                         <div class="value">
                             <i class="fa-solid fa-plus"></i>
@@ -62,51 +62,64 @@
                     </td>
                 </tr>
                 <div class="entrada linha-apuracao collapsable">
-                    <h2 (click)="setShowEntradas()" [ngClass]="{'collapsed': showEntradas}"><label><i class="fa fa-angle-down"></i>Entradas</label> <span><i class="fa fa-plus"></i> {{relatorio['total_entradas'] | currency}}</span></h2>
+                    <h2 (click)="setShowEntradas()" [ngClass]="{'collapsed': showEntradas}"><label><i
+                        class="fa fa-angle-down"></i>{{'geral.entradas' | translate}} </label> <span><i
+                        class="fa fa-plus"></i> {{relatorio['total_entradas'] | currency}}</span></h2>
                     <ul *ngIf="showEntradas">
                         <li class="collapsable">
-                            <h3 (click)="setShowTotalApostadoDetalhado()" [ngClass]="{'collapsed': showTotalApostadoDetalhado}"><label><i class="fa fa-angle-down"></i> Total apostado</label> <span><i class="fa fa-plus"></i> {{relatorio['total_apostado'] | currency}}</span></h3>
+                            <h3 (click)="setShowTotalApostadoDetalhado()"
+                                [ngClass]="{'collapsed': showTotalApostadoDetalhado}"><label><i
+                                class="fa fa-angle-down"></i> {{'geral.totalApostado' | translate}} </label> <span><i
+                                class="fa fa-plus"></i> {{relatorio['total_apostado'] | currency}}</span></h3>
                             <ul *ngIf="showTotalApostadoDetalhado">
-                                <li>Esportivas <span>{{relatorio['esporte']['apostado'] | currency}}</span></li>
-                                <li>Loterias <span>{{relatorio['loteria']['apostado'] | currency}}</span></li>
-                                <li>Acumuladão <span>{{relatorio['acumuladao']['apostado'] | currency}}</span></li>
-                                <li>Desafio <span>{{relatorio['desafio']['apostado'] | currency}}</span></li>
+                                <li>{{'geral.esportivas' | translate}}
+                                    <span>{{relatorio['esporte']['apostado'] | currency}}</span></li>
+                                <li>{{'geral.loterias' | translate}}
+                                    <span>{{relatorio['loteria']['apostado'] | currency}}</span></li>
+                                <li>{{'geral.acumuladao' | translate}}
+                                    <span>{{relatorio['acumuladao']['apostado'] | currency}}</span></li>
+                                <li>{{'geral.desafio' | translate}}
+                                    <span>{{relatorio['desafio']['apostado'] | currency}}</span></li>
                             </ul>
                         </li>
                         <li>
-                            <h3>Recargas de cartão <span>{{ 0 | currency }}</span></h3>
+                            <h3>{{'cartoes.recargasDeCartao' | translate}} <span>{{ 0 | currency }}</span></h3>
                         </li>
                     </ul>
                 </div>
 
                 <div class="saidas linha-apuracao collapsable">
-                    <h2 (click)="setShowSaidas()" [ngClass]="{'collapsed': showSaidas}"><label><i class="fa fa-angle-down"></i> Saídas</label> <span><i class="fa fa-minus"></i> {{relatorio['total_saidas'] | currency}}</span></h2>
+                    <h2 (click)="setShowSaidas()" [ngClass]="{'collapsed': showSaidas}"><label><i
+                        class="fa fa-angle-down"></i> {{'geral.saidas' | translate}}</label> <span><i
+                        class="fa fa-minus"></i> {{relatorio['total_saidas'] | currency}}</span></h2>
                     <ul *ngIf="showSaidas">
-                        <li><h3>Comissões <span>{{relatorio['total_comissao'] | currency}}</span></h3></li>
-                        <li><h3>Premio <span>{{relatorio['total_premios'] | currency}}</span></h3></li>
-                        <li><h3>Saque <span>{{relatorio['saque'] | currency}}</span></h3></li>
+                        <li><h3>{{'geral.comissoes' | translate}}
+                            <span>{{relatorio['total_comissao'] | currency}}</span></h3></li>
+                        <li><h3>{{'geral.premio' | translate}}  <span>{{relatorio['total_premios'] | currency}}</span></h3></li>
+                        <li><h3>{{'geral.saque' | translate}}  <span>{{relatorio['saque'] | currency}}</span></h3></li>
                     </ul>
                 </div>
 
                 <div class="resultado linha-apuracao"
-                    [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
+                     [ngClass]="{'saldo-positivo': resultado > 0, 'saldo-negativo': resultado < 0}">
                     <h2>
-                        Resultado {{ queryParams.dataInicial | moment:'DD/MM' }} à {{ queryParams.dataFinal | moment:'DD/MM' }}
+                        {{'geral.resultado' | translate}} {{ queryParams.dataInicial | moment:'DD/MM' }}
+                        {{'geral.aCraseado' | translate}} {{ queryParams.dataFinal | moment:'DD/MM' }}
                         <span>{{ resultado | currency }}</span>
                     </h2>
                 </div>
 
                 <div class="credito linha-apuracao">
-                    <h2>Créditos <span><i class="fa fa-plus"></i> {{ relatorio['creditos'] | currency }}</span></h2>
+                    <h2>{{'geral.creditos' | translate}}  <span><i class="fa fa-plus"></i> {{ relatorio['creditos'] | currency }}</span></h2>
                 </div>
 
                 <div class="debito linha-apuracao">
-                    <h2>Débitos <span><i class="fa fa-minus"></i> {{ relatorio['debitos'] | currency }}</span></h2>
+                    <h2>{{'geral.debitos' | translate}}  <span><i class="fa fa-minus"></i> {{ relatorio['debitos'] | currency }}</span></h2>
                 </div>
 
                 <div class="saldo linha-apuracao"
-                    [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
-                    <h2>Saldo <span>{{ relatorio['saldo'] | currency }}</span></h2>
+                     [ngClass]="{'saldo-positivo': relatorio['saldo'] > 0, 'saldo-negativo': relatorio['saldo'] < 0}">
+                    <h2>{{'geral.saldo' | translate}}  <span>{{ relatorio['saldo'] | currency }}</span></h2>
                 </div>
             </div>
         </div>

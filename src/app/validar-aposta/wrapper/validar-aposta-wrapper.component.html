@@ -5,7 +5,7 @@
 
     <div class="internal-container-out">
         <div class="content-header">
-            <h2>Validar Aposta</h2>
+            <h2>{{'geral.validarAposta' | translate}}</h2>
         </div>
         <div class="content-body">
             <div class="content">
@@ -13,12 +13,12 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
                         <div class="d-flex flex-row">
                             <div class="form-group">
-                                <input type="number" placeholder="Código da pré-aposta"
+                                <input type="number" placeholder="{{'geral.codigoPreAposta' | translate}}"
                                        class="inverted-out form-control" formControlName="codigo" autocomplete="off"
                                        [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
                                 <app-error-msg [control]="form.get('codigo')"></app-error-msg>
                             </div>
-                            <button type="submit" class="btn btn-custom">>{{'dias.semanaPassada' | translate}}<</button>
+                            <button type="submit" class="btn btn-custom">{{'geral.consultar' | translate}}</button>
                         </div>
                     </form>
                 </div>
@@ -27,7 +27,7 @@
 
                 <div *ngIf="exibirPreAposta">
                     <div id="pre-aposta">
-                        <h2>Código Pré-Aposta: {{preAposta.codigo}}</h2>
+                        <h2>{{'geral.codigoPreAposta' | translate}}: {{preAposta.codigo}}</h2>
                         <ng-container [ngSwitch]="preAposta.tipo">
                             <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
                                                          (success)="success($event)">

@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <input type="text" class="form-control" formControlName="apostador"
-                placeholder="Apostador" [ngClass]="applyCssInputError('apostador')">
+                placeholder="{{'geral.apostador' | translate}} " [ngClass]="applyCssInputError('apostador')">
             <app-error-msg [control]="form.get('apostador')"></app-error-msg>
         </div>
         <div class="form-group">

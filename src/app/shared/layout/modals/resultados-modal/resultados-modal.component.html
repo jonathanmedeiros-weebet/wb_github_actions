@@ -14,7 +14,7 @@
                 <input type="date" class="form-control inverted-out" formControlName="data">
             </div>
             <select class="form-control inverted-out" formControlName="sport_id">
-                <option value="1">Futebol</option>
+                <option value="1">{{'geral.futebol' | translate}} </option>
                 <option *ngIf="basqueteHabilitado" value="18">Basquete</option>
                 <option *ngIf="tenisHabilitado" value="13">Tênis</option>
                 <option *ngIf="combateHabilitado" value="9">Combate</option>

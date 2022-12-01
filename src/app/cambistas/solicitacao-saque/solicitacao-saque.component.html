@@ -46,7 +46,7 @@
                         >
                     </div>
 
-                    <select class="inverted-out form-control" [(ngModel)]="status" name="" id="" [ngModelOptions]="{standalone: true}">
+                    <select class="inverted-out form-control" [(ngModel)]="status"  id="" [ngModelOptions]="{standalone: true}">
                         <option value="1">Aprovado</option>
                         <option value="2">Não aprovado</option>
                     </select>
@@ -59,9 +59,9 @@
                 <li *ngFor="let solicitacao of solicitacoes">
                     <span class="status">{{statusSolicitacao(solicitacao)}}</span>
                     <span class="chave">#{{solicitacao.id}}</span>
-                    <span><label>Apostador: </label> {{solicitacao.cartao_aposta.apostador}}</span>
+                    <span><label>{{'geral.apostador' | translate}} : </label> {{solicitacao.cartao_aposta.apostador}}</span>
                     <span><label>Chave: </label> {{solicitacao.cartao_aposta_chave}}</span>
-                    <span><label>Saldo atual: </label> {{solicitacao.cartao_aposta.saldo | currency}}</span>
+                    <span><label>{{'geral.saldoAtual' | translate}}<: </label> {{solicitacao.cartao_aposta.saldo | currency}}</span>
                     <span><label>Data solicitação: </label> {{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</span>
                     <span><label>Valor: </label> {{solicitacao.valor | currency}}</span>
                     <span class="buttons" *ngIf="solicitacao.aprovado && !solicitacao.pago">
@@ -80,7 +80,7 @@
                             <th>#</th>
                             <th>Chave</th>
                             <th>Saldo cartão</th>
-                            <th>Apostador</th>
+                            <th>{{'geral.apostador' | translate}} </th>
                             <th>{{'geral.data' | translate}}</th>
                             <th>{{'geral.valor' | translate}}</th>
                             <th>Aprovado</th>

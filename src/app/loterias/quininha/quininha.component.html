@@ -151,10 +151,10 @@
                                            #apostador="ngModel" placeholder=" ">
                                         <label for="nomeApostador">Nome do apostador...</label>
                                     </div>
-                                    <app-error-msg [control]="apostador" label="Apostador"></app-error-msg>
+                                    <app-error-msg [control]="apostador" label="{{'geral.apostador' | translate}} "></app-error-msg>
                                 </div>
                                 <div class="informations">
-                                    Valor da aposta:
+                                    {{'bilhete.valorDaAposta' | translate}}:
                                     <span class="valor">{{aposta.valor | currency}}</span>
                                 </div>
                             </div>

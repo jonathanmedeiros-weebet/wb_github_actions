@@ -182,11 +182,11 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
     }
 
     chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-        console.log(event, active);
+        // console.log(event, active);
     }
 
     chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-        console.log(event, active);
+        // console.log(event, active);
     }
 
     abrirCambistaApostas() {

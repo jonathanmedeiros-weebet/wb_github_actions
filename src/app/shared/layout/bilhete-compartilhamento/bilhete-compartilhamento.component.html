@@ -79,7 +79,7 @@
                         style="float:right">{{aposta.possibilidade_ganho | currency}}</span>
                 </p>
                 <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-                    PRÊMIO: <span style="float:right">{{aposta.premio | currency}}</span>
+                    {{'geral.premio' | translate | uppercase}}: <span style="float:right">{{aposta.premio | currency}}</span>
                 </p>
                 <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
                     CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>

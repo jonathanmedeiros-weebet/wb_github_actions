@@ -155,7 +155,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-table-columns"></i>
                                 </span>
-                                Apuração
+                                {{'geral.apuracao' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -164,7 +164,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-table-columns"></i>
                                 </span>
-                                Apostas
+                                {{'geral.apostas' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -173,7 +173,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-print"></i>
                                 </span>
-                                Tabela
+                                {{'geral.tabela' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -271,7 +271,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
                                 </span>
-                                Saques
+                                {{'geral.saques' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -289,7 +289,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-table-columns"></i>
                                 </span>
-                                Apostas
+                                {{'geral.apostas' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -384,7 +384,7 @@
                             routerLinkActive="router-link-active"
                             *ngIf="isCliente">
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
-                                Apostas
+                                {{'geral.apostas' | translate}}
                             </a>
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
@@ -406,19 +406,19 @@
                             routerLinkActive="router-link-active"
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
-                                Apuração
+                                {{'geral.apuracao' | translate}}
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
                             routerLinkActive="router-link-active"
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
-                                Apostas
+                                {{'geral.apostas' | translate}}
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
                             routerLinkActive="router-link-active"
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-print mb-2"></i>
-                                Tabela
+                                {{'geral.tabela' | translate}}
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
                             routerLinkActive="router-link-active"

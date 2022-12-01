@@ -34,7 +34,7 @@
                 Resultado: <span [ngClass]="resultadoClass(aposta.resultado)">{{aposta.resultado}}</span>
             </h4>
             <div>
-                <b>Apostador:</b> {{aposta.apostador}}
+                <b>{{'geral.apostador' | translate}} :</b> {{aposta.apostador}}
             </div>
             <div>
                 <b>Cambista:</b> {{aposta.passador.nome}}
@@ -55,7 +55,7 @@
                 <b>Possível Retorno:</b> {{aposta.possibilidade_ganho | currency}}
             </div>
             <div *ngIf="aposta.resultado && aposta.resultado != 'a confirmar'">
-                <b>Prêmio:</b> {{aposta.premio | currency}}
+                <b>{{'geral.premio' | translate}} :</b> {{aposta.premio | currency}}
             </div>
             <div *ngIf="aposta.passador.percentualPremio > 0">
                 <b>Cambista Paga:</b> {{cambistaPaga | currency}}

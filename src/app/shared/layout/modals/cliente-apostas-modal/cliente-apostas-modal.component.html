@@ -4,7 +4,7 @@
     </a>
 
     <div class="content-header">
-        <h2>Apostas</h2>
+        <h2>{{'geral.apostas' | translate}} </h2>
     </div>
 
     <div class="content-body">
@@ -14,9 +14,9 @@
                     <form (ngSubmit)="onSubmit()" [formGroup]="form">
                         <div class="form-row">
                             <select class="form-control inverted-out" formControlName="tipo">
-                                <option value="esporte">Futebol</option>
-                                <option value="acumuladao">Acumuladão</option>
-                                <option value="desafio">Desafio</option>
+                                <option value="esporte">{{'geral.futebol' | translate}} </option>
+                                <option value="acumuladao">{{'geral.acumuladao' | translate}}</option>
+                                <option value="desafio">{{'geral.desafio' | translate}}</option>
                                 <option value="cassino">Cassino</option>
                             </select>
                             <input
@@ -72,10 +72,10 @@
                 <thead>
                     <tr>
                         <th width="30"></th>
-                        <th width="100">Código</th>
-                        <th>Horário</th>
+                        <th width="100">{{'geral.codigo' | translate}}</th>
+                        <th>{{'geral.horario' | translate}}</th>
                         <th>{{'geral.valor' | translate}}</th>
-                        <th>Prêmio</th>
+                        <th>{{'geral.premio' | translate}} </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -90,7 +90,7 @@
                         <td>{{ aposta.valor | currency}}</td>
                         <td>{{ aposta.premio | currency }}</td>
                         <td class="acoes-aposta">
-                            <a title="Exibir" (click)="openModal(aposta)">
+                            <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
                                 <i class="fa fa-eye"></i>
                             </a>
                         </td>
