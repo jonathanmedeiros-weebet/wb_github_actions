@@ -1,5 +1,5 @@
 .pre-bilhete {
-    width: 270px;
+    width: 380px;
     text-align: center;
     padding: 0;
     height: 100%;
@@ -10,6 +10,21 @@
 .bilhete-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.iframe-responsive {
+    max-width: 100%;
+    padding-top: 60%;
+    position: relative;
+    width: 100%;
+}
+
+.iframe-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
 }

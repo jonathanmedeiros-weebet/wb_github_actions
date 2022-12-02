@@ -1,9 +1,66 @@
 <div class="jogo-container">
     <section class="jogo" *ngIf="!showLoadingIndicator">
-        <div class="indentificacao-jogo">
+        <div *ngIf="!isMobile" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
             <div class="div-back" (click)="back()">
                 <i class="fa fa-times"></i>
             </div>
+            <div class="info-jogo">
+                <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
+                <div class="nome">
+                    <div class="time-a">
+                        <div class="time-a-nome">
+                            <span *ngIf="jogo.time_a_img; else defaulImageA">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_a_img}}.png" size="m">
+                            </span>
+                            <ng-template #defaulImageA class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
+                            </ng-template>
+                            <br>
+                            <div class="time-nome">
+                                {{jogo.time_a_nome}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="placares">
+                        <div>
+                            <div class="placar time-a-placar">{{jogo.info?.time_a_resultado}}</div>
+                            -
+                            <div class="placar time-b-placar">{{jogo.info?.time_b_resultado}}</div>
+                        </div>
+                    </div>
+                    <div class="time-b">
+                        <div class="time-b-nome">
+                            <span *ngIf="jogo.time_b_img; else defaulImageB">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_b_img}}.png" size="m">
+                            </span>
+                            <ng-template #defaulImageB class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
+                            </ng-template>
+                            <br>
+                            <div class="time-nome">
+                                {{jogo.time_b_nome}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="aovivo-tempo">
+                    <div class="aovivo-label"><i class="fa fa-circle blink_me"></i> AO VIVO</div>
+                    <div class="tempo">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-bar-mobile hide-desktop">
+            <div class="top-bar-mobile-text">
+                <span>{{jogo.time_a_nome}}</span> x <span>{{jogo.time_b_nome}}</span>
+            </div>
+            <div class="div-back" (click)="closeModal()">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+    </section>
+    <section class="content-sports inside-event">
+        <div *ngIf="loadedFrame && (isMobile && !theSportUrl)" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">
@@ -50,8 +107,9 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="content-sports inside-event">
+        <div *ngIf="loadedFrame && (isMobile && theSportUrl)" class="iframe-responsive hide-desktop">
+            <iframe [src]="theSportUrl" frameborder="0" width="320" height="200"></iframe>
+        </div>
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="jogo" *ngIf="!showLoadingIndicator">
             <div class="tipo-apostas mt-2">

@@ -3,14 +3,16 @@ import {
     Renderer2, DoCheck, EventEmitter, Input,
     Output
 } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Jogo, ItemBilheteEsportivo } from '../../../models';
 import {
     ParametrosLocaisService, MessageService, JogoService,
-    LiveService, BilheteEsportivoService, HelperService
+    LiveService, BilheteEsportivoService, HelperService, CampinhoService
 } from '../../../services';
 
 @Component({
@@ -28,13 +30,17 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     objectKeys = Object.keys;
     isMobile = false;
     showLoadingIndicator = true;
+    loadedFrame = false;
     minutoEncerramentoAoVivo = 0;
     contentSportsEl;
     oddsAberto = [];
     unsub$ = new Subject();
+    theSportUrl: SafeResourceUrl;
 
     constructor(
+        public sanitizer: DomSanitizer,
         private messageService: MessageService,
+        private campinhoService: CampinhoService,
         private jogoService: JogoService,
         private liveService: LiveService,
         private bilheteService: BilheteEsportivoService,
@@ -42,18 +48,43 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         private el: ElementRef,
         private renderer: Renderer2,
         private router: Router,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private activeModal: NgbActiveModal,
     ) { }
 
     ngOnInit() {
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
+
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
             let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
+
+            if(habilitar_live_tracker) {
+                this.campinhoService.getIdsJogo(this.jogoId)
+                .subscribe(
+                    response => {
+                        if(response?.thesports_uuid) {
+                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5jh1j4u6h6pg549k&uuid=' + response?.thesports_uuid)
+                        }
+                        this.loadedFrame = true;
+                    },
+                    error =>  this.handleError(error)
+                )
+            } else {
+                this.loadedFrame = true;
+            }
+        } else {
+            if(habilitar_live_tracker) {
+                this.bilheteService.sendId(this.jogoId);
+            }
         }
+
         this.definirAltura();
+
+
 
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
@@ -70,6 +101,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     ngOnDestroy() {
         this.liveService.sairSalaEvento(this.jogoId);
+        this.bilheteService.sendId(null);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -322,5 +354,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     oddAberto(chave) {
         return this.oddsAberto.includes(chave.nome);
+    }
+
+    closeModal() {
+        this.activeModal.dismiss();
     }
 }

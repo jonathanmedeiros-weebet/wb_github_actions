@@ -1,10 +1,10 @@
 .collapsed {
-    max-width: calc(100vw - 270px);
+    max-width: calc(100vw - 380px);
     padding-left: 50px;
 }
 
 .uncollapsed {
-    max-width: calc(100vw - 540px);
+    max-width: calc(100vw - 650px);
 }
 
 
