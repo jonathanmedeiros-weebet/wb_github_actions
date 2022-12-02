@@ -2405,7 +2405,7 @@ gulp.task('vembet.com.br', function (done) {
 
 gulp.task('bomba.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front2.wee.bet",
         host: "bomba.bet",
         banca: "BOMBA.BET",
         styles: "",
