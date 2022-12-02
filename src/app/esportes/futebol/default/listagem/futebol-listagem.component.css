@@ -65,7 +65,7 @@
 }
 
 .disabled-scroll-button {
-    color: var(--header);
+    color: var(--game);
     cursor: auto;
     transition: 500ms;
 }
