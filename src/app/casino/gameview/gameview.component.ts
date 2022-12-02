@@ -17,6 +17,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
   gameUrl: SafeUrl = '';
   gameId: String = '';
   gameMode: String = '';
+  gameFornecedor: String = '';
   params: any = [];
   mobileScreen;
   fullscreen;
@@ -45,6 +46,7 @@ ngOnInit(): void {
     this.params = params;
     this.gameId = params['game_id'];
     this.gameMode = params['game_mode'];
+    this.gameFornecedor = params['game_fornecedor'];
         this.auth.cliente
             .subscribe(
                 isCliente => {
@@ -65,7 +67,7 @@ ngOnInit(): void {
   }
 
   loadGame() {
-    this.casinoApi.getGameUrl(this.gameId, this.gameMode).subscribe(response => {
+    this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor).subscribe(response => {
       this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
     });
   }
