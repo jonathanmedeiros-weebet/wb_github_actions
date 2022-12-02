@@ -54,10 +54,10 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.blink = this.router.url.split('/')[2];
 
         this.casinoApi.getGamesList().subscribe(response => {
-            this.filterGame(response.gameList);
+            this.gameAllList = response.gameList;
 
-            this.gamesCassino = this.filterAll(this.gameAllList);
-            this.gamesDestaque = this.filterDestaques(this.gameAllList);
+            this.gamesCassino = response.gameList;
+            this.gamesDestaque = response.destaques;
             this.gamesSlot = this.filterSlot(this.gameAllList);
             this.gamesRaspadinha = this.filterRaspadinha(this.gameAllList);
             this.gamesRoleta = this.filterRoleta(this.gameAllList);
@@ -73,24 +73,33 @@ export class WallComponent implements OnInit, AfterViewInit {
                         contexto: 'virtuais',
                         dados: {}
                     });
-                    this.showVirtuais(this.gameAllList);
+                    this.gameList = this.gameAllList.filter(function (game) {
+                        return game.dataType === 'VSB';
+                    });
                 } else {
                     this.sideBarService.changeItens({
                         contexto: 'casino',
                         dados: {}
                     });
-                    if (this.gameType === 'slot') {
-                        this.showSlot();
-                    } else if (this.gameType === 'roleta') {
-                        this.showRoulette();
-                    } else if (this.gameType === 'raspadinha') {
-                        this.showRaspadinha();
-                    } else if (this.gameType === 'mesa') {
-                        this.showMesa();
-                    } else if (this.gameType === 'destaques') {
-                        this.showDestaques();
-                    } else if (this.isHomeCassino) {
-                        this.showAll();
+                    switch (this.gameType) {
+                        case 'slot':
+                            this.gameList =  this.gamesSlot;
+                            break;
+                        case 'roleta':
+                            this.gameList = this.gamesRoleta;
+                            break;
+                        case 'raspadinha':
+                            this.gameList = this.gamesRaspadinha;
+                            break;
+                        case 'mesa':
+                            this.gameList = this.gamesMesa;
+                            break;
+                        case 'destaques':
+                            this.gameList = this.gamesDestaque;
+                            break;
+                        case 'todos':
+                            this.gameList = this.gamesCassino;
+                            break;
                     }
                 }
             });
@@ -156,51 +165,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
         }
-    }
-
-    // REMOVENDO JOGOS
-    filterGame(games) {
-        this.gameAllList = games.filter(function (game) {
-            return game.gameID !== 'vs4096bufking' && game.gameID !== 'vswayswerewolf'
-                && game.gameID !== 'vs25davinci' && game.gameID !== 'vs243dancingpar' && game.gameID !== 'vs1600drago'
-                && game.gameID !== 'vs20eking' && game.gameID !== 'vs20ekingrr' && game.gameID !== 'vs10fruity2'
-                && game.gameID !== 'vs4096jurassic' && game.gameID !== 'vs25peking' && game.gameID !== 'vs40pirate'
-                && game.gameID !== 'vswayshive' && game.gameID !== 'vs1024dtiger' && game.gameID !== 'vs50mightra';
-        });
-    }
-
-    getGamesList() {
-        return this.gameList;
-    }
-
-    showAll() {
-        this.gameList = this.gameAllList;
-    }
-
-    showSlot() {
-        this.gameList = this.gamesSlot;
-    }
-
-    showRaspadinha() {
-        this.gameList = this.gamesRaspadinha;
-    }
-
-    showRoulette() {
-        this.gameList = this.gamesRoleta;
-    }
-
-    showMesa() {
-        this.gameList = this.gamesMesa;
-    }
-
-    showVirtuais(games) {
-        this.gameList = games.filter(function (game) {
-            return game.dataType === 'VSB';
-        });
-    }
-
-    showDestaques() {
-        this.gameList = this.gamesDestaque;
     }
 
     filterAll(games) {
