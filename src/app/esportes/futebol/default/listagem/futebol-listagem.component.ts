@@ -123,29 +123,24 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         const scrollLeftTemp = this.el.nativeElement.querySelector(`#scroll-left-${event_id}`);
         const scrollRightTemp = this.el.nativeElement.querySelector(`#scroll-right-${event_id}`);
 
-        const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
-        let maxOddsSize: number;
-
-        if (this.mobileScreen) {
-            maxOddsSize = window.innerWidth;
-        } else {
-            maxOddsSize = window.innerWidth - (sidesSize + this.nomesJogoWidth + 150);
+        if (scrollLeftTemp) {
+            if (scrollLeft <= 0) {
+                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            } else {
+                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            }
         }
 
-        if (scrollLeft <= 0) {
-            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
-            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
-        } else {
-            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
-            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
-        }
-
-        if ((scrollWidth - (scrollLeft + maxOddsSize)) <= 0) {
-            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
-            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
-        } else {
-            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
-            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+        if (scrollRightTemp) {
+            if ((scrollWidth - (scrollLeft + this.widthOddsScroll)) <= 0) {
+                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            } else {
+                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            }
         }
     }
 
@@ -173,6 +168,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.sidebarService.collapsedSource
             .subscribe(collapsed => {
                 this.sidebarNavIsCollapsed = collapsed;
+                this.detectScrollOddsWidth();
             });
 
         this.detectScrollOddsWidth();
@@ -195,21 +191,21 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     detectScrollOddsWidth() {
         this.cd.detectChanges();
-
         this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 100 : this.qtdOddsPrincipais * 150;
 
-        const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
+        const sidesSize = this.sidebarNavIsCollapsed ? 380 : 650;
         if (this.mobileScreen) {
             this.maxOddsSize = window.innerWidth;
         } else {
-            this.maxOddsSize = window.innerWidth - (sidesSize + 250 + 65);
+            this.maxOddsSize = window.innerWidth - (sidesSize + 380 + 60);
         }
 
         this.enableScrollButtons = this.widthOddsScroll > this.maxOddsSize;
         if (this.enableScrollButtons) {
             this.widthOddsScroll = this.maxOddsSize;
         }
-        this.nomesJogoWidth = window.innerWidth - (sidesSize + 65 + this.widthOddsScroll);
+        this.nomesJogoWidth = window.innerWidth - (sidesSize + 60 + this.widthOddsScroll);
+        this.cd.detectChanges();
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
