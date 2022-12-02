@@ -2402,3 +2402,12 @@ gulp.task('vembet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bomba.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bomba.bet",
+        banca: "BOMBA.BET",
+        styles: "",
+    });
+});
