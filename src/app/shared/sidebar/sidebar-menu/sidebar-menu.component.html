@@ -40,7 +40,7 @@
 
 <div class="login-area" *ngIf="!isLoggedIn">
     <label>Já possui uma conta?</label>
-    <a class="btn btn-custom2 btn-block" (click)="abrirLogin()">Entrar</a>
+    <a class="btn btn-custom2 btn-block" (click)="abrirLogin()">{{'geral.entrar' | translate}}</a>
     <label class="mt-3">Ainda não possui?</label>
     <a class="btn btn-custom btn-block" (click)="abrirCadastro()">Resgistre-se</a>
 </div>

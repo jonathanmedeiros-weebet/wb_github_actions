@@ -11,8 +11,11 @@ import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
+import 'moment/min/locales';
+
 import {BasqueteJogoComponent} from '../basquete-jogo/basquete-jogo.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-generico-listagem',
@@ -54,6 +57,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     diaHojeMaisTres;
     diaHojeMaisQuatro;
 
+    diaHojeMaisDoisStr;
+    diaHojeMaisTresStr;
+    diaHojeMaisQuatroStr;
+
     tabSelected;
 
     iconesGenericos = {
@@ -75,14 +82,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private router: Router,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private translate: TranslateService
     ) { }
 
     ngOnInit() {
-        this.diaHojeMaisDois = moment().add(2, 'd');
-        this.diaHojeMaisTres = moment().add(3, 'd');
-        this.diaHojeMaisQuatro = moment().add(4, 'd');
-
         this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
@@ -91,6 +95,12 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
         this.limiteDiasTabela = moment(this.dataLimiteTabela).date() - moment().date();
+
+        this.atualizarDatasJogosFuturos(this.translate.currentLang);
+
+        this.translate.onLangChange.subscribe((res) => {
+            this.atualizarDatasJogosFuturos(res.lang);
+        });
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -401,5 +411,26 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                 }
             }
         }
+    }
+
+    atualizarDatasJogosFuturos(lang = 'pt') {
+        switch (lang) {
+            case 'pt':
+                moment.locale('pt-br');
+                break;
+            case 'en':
+                moment.locale('en-gb');
+                break;
+            default:
+                moment.locale('pt-br');
+        }
+
+        this.diaHojeMaisDois = moment().add(2, 'd');
+        this.diaHojeMaisTres = moment().add(3, 'd');
+        this.diaHojeMaisQuatro = moment().add(4, 'd');
+
+        this.diaHojeMaisDoisStr = this.diaHojeMaisDois.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisTresStr = this.diaHojeMaisTres.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisQuatroStr = this.diaHojeMaisQuatro.format(this.mobileScreen ? 'ddd' : 'dddd');
     }
 }

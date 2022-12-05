@@ -30,6 +30,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     gameList: GameCasino[];
     gameAllList: GameCasino[];
 
+    gameTitle;
+
     gamesCassino: GameCasino[];
     gamesDestaque: GameCasino[];
     gamesSlot: GameCasino[];
@@ -76,6 +78,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                         contexto: 'virtuais',
                         dados: {}
                     });
+                    this.gameTitle = this.translate.instant('cassino.virtuais');
                     this.gameList = this.gameAllList.filter(function (game) {
                         return game.dataType === 'VSB';
                     });
@@ -87,21 +90,27 @@ export class WallComponent implements OnInit, AfterViewInit {
                     switch (this.gameType) {
                         case 'slot':
                             this.gameList =  this.gamesSlot;
+                            this.gameTitle = this.translate.instant('cassino.slot');
                             break;
                         case 'roleta':
                             this.gameList = this.gamesRoleta;
+                            this.gameTitle = this.translate.instant('cassino.roleta');
                             break;
                         case 'raspadinha':
                             this.gameList = this.gamesRaspadinha;
+                            this.gameTitle = this.translate.instant('cassino.raspadinha');
                             break;
                         case 'mesa':
                             this.gameList = this.gamesMesa;
+                            this.gameTitle = this.translate.instant('cassino.mesa');
                             break;
                         case 'destaques':
                             this.gameList = this.gamesDestaque;
+                            this.gameTitle = this.translate.instant('cassino.destaques');
                             break;
                         case 'todos':
                             this.gameList = this.gamesCassino;
+                            this.gameTitle = this.translate.instant('geral.todos');
                             break;
                     }
                 }

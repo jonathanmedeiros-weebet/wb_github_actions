@@ -128,7 +128,12 @@
         "selecioneACidade": "Selecione a cidade",
         "atualizar": "Atualizar",
         "status": "Status",
-        "cliqueAquiPraContinuar": "Clique aqui para continuar"
+        "cliqueAquiPraContinuar": "Clique aqui para continuar",
+        "proximaData": "Próxima Data",
+        "esqueceuASenha": "Esqueceu a senha?",
+        "naoPossuiUmaConta": "Não possui uma conta?",
+        "usuario": "Usuário",
+        "senha": "Senha"
     },
     "dias": {
         "ontem": "Ontem",
@@ -205,7 +210,8 @@
         "roleta": "Roleta",
         "mesa": "Mesa",
         "destaques": "Destaques",
-        "virtuais": "Virtuais"
+        "virtuais": "Virtuais",
+        "aoVivo": "Ao Vivo"
     },
     "cartoes": {
         "titulo": "Cartões",

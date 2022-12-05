@@ -12,30 +12,30 @@
                 <div class="input-md">
                     <input type="text" id="username" class="form-control inverted-out" formControlName="username" placeholder=" "
                         [ngClass]="applyCssInputError('username')">
-                    <label for="username">Usuário</label>
+                    <label for="username">{{'geral.usuario' | translate}}</label>
                 </div>
-                <app-error-msg [control]="form.get('username')" label="Usuário" class="text-left"></app-error-msg>
+                <app-error-msg [control]="form.get('username')" label="{{'geral.usuario' | translate}}" class="text-left"></app-error-msg>
             </div>
             <div class="form-group" [ngClass]="applyCssDivError('password')">
                 <div class="input-md">
                     <input [type]=" mostrarSenha ? 'text' : 'password' " id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
                         formControlName="password" placeholder=" ">
-                    <label for="password">Senha</label>
+                    <label for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="toogleSenha()"></i>
                 </div>
-                <app-error-msg [control]="form.get('password')" label="Senha" class="text-left"></app-error-msg>
+                <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
             </div>
-            <button type="submit" class="btn btn-custom btn-block">Entrar</button>
+            <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
         </form>
 
         <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha">
-            Esqueceu a senha?
+            {{'geral.esqueceuASenha' | translate}}
         </a>
     </div>
 
     <div class="registrar">
-        Não possui uma conta?
-        <a (click)="abrirCadastro()" style="cursor: pointer" class="">Registre-se</a>
+        {{'geral.naoPossuiUmaConta' | translate}}
+        <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
     </div>
 </div>
 

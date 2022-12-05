@@ -128,7 +128,12 @@
         "selecioneACidade": "Select the city",
         "atualizar": "Update",
         "status": "Status",
-        "cliqueAquiParaContinuar": "Click here to continue"
+        "cliqueAquiParaContinuar": "Click here to continue",
+        "proximaData": "Next Date",
+        "esqueceuASenha": "Forgot password?",
+        "naoPossuiUmaConta": "Don't have an account?",
+        "usuario": "User",
+        "senha": "Password"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -205,7 +210,8 @@
         "roleta": "Roulette",
         "mesa": "Table",
         "destaques": "Highlights",
-        "virtuais": "Virtuals"
+        "virtuais": "Virtuals",
+        "aoVivo": "Live Casino"
     },
     "cartoes": {
         "titulo": "Cards",
