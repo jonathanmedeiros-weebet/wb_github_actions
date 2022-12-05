@@ -416,13 +416,13 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     atualizarDatasJogosFuturos(lang = 'pt') {
         switch (lang) {
             case 'pt':
-                moment.locale('pt-br');
+                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
                 break;
             case 'en':
-                moment.locale('en-gb');
+                    moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
                 break;
             default:
-                moment.locale('pt-br');
+                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
         }
 
         this.diaHojeMaisDois = moment().add(2, 'd');

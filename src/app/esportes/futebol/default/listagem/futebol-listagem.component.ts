@@ -614,13 +614,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     atualizarDatasJogosFuturos(lang = 'pt') {
         switch (lang) {
             case 'pt':
-                moment.updateLocale('pt-br', null);
+                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
                 break;
             case 'en':
-                moment.updateLocale('en-gb', null);
+                moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
                 break;
             default:
-                moment.updateLocale('pt-br', null);
+                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
         }
 
         this.diaHojeMaisDois = moment().add(2, 'd');

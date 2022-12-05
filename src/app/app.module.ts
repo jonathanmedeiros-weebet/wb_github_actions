@@ -10,7 +10,7 @@ import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 
 import * as moment from 'moment';
-moment.locale('pt-BR');
+moment.updateLocale('pt-bt', {parentLocale: 'pt-br'});
 
 // App routing
 import {AppRoutingModule} from './app-routing.module';
