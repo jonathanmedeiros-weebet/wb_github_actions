@@ -262,7 +262,8 @@
         "serjaobets.com": "gulp serjaobets.com",
         "santissports.com": "gulp santissports.com",
         "vembet.com.br": "gulp vembet.com.br",
-        "bomba.bet": "gulp bomba.bet"
+        "bomba.bet": "gulp bomba.bet",
+        "akisports.wee.bet": "gulp akisports.wee.bet"
     },
     "private": true,
     "dependencies": {

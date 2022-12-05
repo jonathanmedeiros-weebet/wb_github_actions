@@ -2411,3 +2411,12 @@ gulp.task('bomba.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('akisports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "akisports.wee.bet",
+        banca: "AKISPORTS",
+        styles: "",
+    });
+});
