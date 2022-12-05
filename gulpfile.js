@@ -2429,3 +2429,12 @@ gulp.task('gatobet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betfut365.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betfut365.bet",
+        banca: "BETFUT365",
+        styles: "",
+    });
+});
