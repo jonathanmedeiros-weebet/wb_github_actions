@@ -2420,3 +2420,12 @@ gulp.task('akisports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gatobet.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "gatobet.net",
+        banca: "GATO BET",
+        styles: "",
+    });
+});
