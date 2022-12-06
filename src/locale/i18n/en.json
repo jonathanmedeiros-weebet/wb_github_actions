@@ -293,5 +293,19 @@
         "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact the bank.",
         "depositoRegistrado": "Deposit - Registered",
         "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}"
+    },
+    "footer": {
+        "mensagem1": "{{BANCA_NOME}} is an online entertainment system that offers its users a unique experience in Sports Betting.",
+        "mensagem2": "By accessing, continuing to use or browsing the {{BANCA_NOME}} website, you accept that we use certain browser cookies in order to improve your experience while using our website. {{BANCA_NOME}} only uses cookies to improve your experience and do not interfere with your privacy.",
+        "jogueComResponsabilidade": "Play responsibly. Prohibited for minors under 18 years old.",
+        "metodosDePagamento": "Payment methods",
+        "quemSomos": "Who we are",
+        "downloadApp": "Download app",
+        "regras": "Rules",
+        "resultados": "Results",
+        "politicaDePrivacidade": "Privacy Policy",
+        "jogoResponsavel": "Responsible Gaming",
+        "termosECondicoes": "Terms and conditions",
+        "todosOsDireitosReservados": "2022 © {{BANCA_NOME}}. All rights reserved."
     }
 }
