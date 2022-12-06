@@ -15,6 +15,7 @@ import {ResultadosModalComponent} from '../../layout/modals/resultados-modal/res
 import {config} from '../../config';
 import {PrintService} from '../../services/utils/print.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-sidebar-menu',
@@ -31,6 +32,7 @@ export class SidebarMenuComponent implements OnInit {
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     cartaoApostaHabilitado;
     unsub$ = new Subject();
+    linguagemSelecionada;
 
     constructor(
         private auth: AuthService,
@@ -38,7 +40,8 @@ export class SidebarMenuComponent implements OnInit {
         private modalService: NgbModal,
         private cd: ChangeDetectorRef,
         private printService: PrintService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private translate: TranslateService
     ) {
     }
 
@@ -68,6 +71,9 @@ export class SidebarMenuComponent implements OnInit {
                     this.cd.detectChanges();
                 }
             );
+
+        this.linguagemSelecionada = this.translate.currentLang;
+        this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
     }
 
     abrirModalTabela() {
@@ -153,5 +159,11 @@ export class SidebarMenuComponent implements OnInit {
 
     listPrinters() {
         this.printService.listPrinters();
+    }
+
+    useLanguage(language: string): void {
+        localStorage.setItem('linguagem', language);
+        this.linguagemSelecionada = language;
+        this.translate.use(language);
     }
 }

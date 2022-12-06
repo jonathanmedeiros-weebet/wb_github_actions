@@ -111,6 +111,31 @@ nav::-webkit-scrollbar {
     padding: 0;
 }
 
+.language-dropdown-menu {
+    min-width: 85px;
+    padding: 5px;
+}
+
+.language-dropdown-menu .dropdown-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: var(--foreground-header);
+    cursor: pointer;
+}
+
+.language-dropdown-menu .dropdown-item span {
+    margin-right: 5px;
+}
+
+.language-dropdown-menu .dropdown-item:hover {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--header);
+    color: var(--highlight);
+}
+
 .dropdown-btn {
     display: flex;
     justify-content: center;

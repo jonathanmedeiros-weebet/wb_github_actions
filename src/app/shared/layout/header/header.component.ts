@@ -71,6 +71,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     pixCambista = false;
     cartaoApostaHabilitado;
     modalRef;
+    linguagemSelecionada = 'pt';
     myMatchOptions: IsActiveMatchOptions = {
         matrixParams: 'ignored',
         queryParams: 'ignored',
@@ -162,6 +163,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.menuWidth = window.innerWidth;
             this.isMobile = true;
         }
+
+        this.linguagemSelecionada = this.translate.currentLang;
+        this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
     }
 
     ngOnDestroy() {
@@ -350,6 +354,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     useLanguage(language: string): void {
         localStorage.setItem('linguagem', language);
+        this.linguagemSelecionada = language;
         this.translate.use(language);
     }
 }

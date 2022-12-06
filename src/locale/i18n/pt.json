@@ -161,7 +161,10 @@
         "aindaNaoPossui": "Ainda não possui?",
         "menu": "Menu",
         "aoVivo": "Ao Vivo",
-        "compartilhar": "Compartilhar"
+        "compartilhar": "Compartilhar",
+        "selecionarIdioma": "Selecionar Idioma",
+        "ingles": "English",
+        "portugues": "Português"
     },
     "dias": {
         "ontem": "Ontem",

@@ -161,7 +161,10 @@
         "aindaNaoPossui": "Still don't have it?",
         "menu": "Menu",
         "aoVivo": "Live",
-        "compartilhar": "Share"
+        "compartilhar": "Share",
+        "selecionarIdioma": "Select Language",
+        "ingles": "English",
+        "portugues": "Português"
     },
     "dias": {
         "ontem": "Yesterday",
