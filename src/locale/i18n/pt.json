@@ -338,5 +338,18 @@
         "golsFora": "Gols Fora - {{timeNome}}",
         "primeiroGolFora": "1º Gol Fora",
         "ultimoGolFora": "Último Gol Fora"
+    },
+    "loteria": {
+        "quantidadeDeDezenasDaAposta": "Quantidade de dezenas da aposta",
+        "selecioneAQuantidade": "Selecione a quantidade",
+        "escolhaSuasDezenas": "Escolha as suas dezenas:",
+        "dezenasSelecionadas": "Dezenas selecionadas",
+        "sorteio": "Sorteio",
+        "supresinha": "Supresinha",
+        "valorDoPalpite": "Valor do Palpite (R$)",
+        "incluirPalpite": "Incluir Palpite",
+        "retorno": "Retorno",
+        "nenhumPalpiteAdicionado": "Nenhuma palpite adicionado!",
+        "selecioneAlgunsNumeros": "Selecione alguns números e adicione seu palpite para poder finalizar o bilhete."
     }
 }

@@ -338,5 +338,18 @@
         "golsFora": "Away Goals - {{timeNome}}",
         "primeiroGolFora": "1st Away Goal",
         "ultimoGolFora": "Last Away Goal"
+    },
+    "loteria": {
+        "quantidadeDeDezenasDaAposta": "Amount of dozens of the bet",
+        "selecioneAQuantidade": "Select quantity",
+        "escolhaSuasDezenas": "Choose your dozens:",
+        "dezenasSelecionadas": "Selected Tens",
+        "sorteio": "Prize draw",
+        "supresinha": "Surprise",
+        "valorDoPalpite": "Value of the Guess (R$)",
+        "incluirPalpite": "Add Guess",
+        "retorno": "Return",
+        "nenhumPalpiteAdicionado": "No guesses added!",
+        "selecioneAlgunsNumeros": "Select some numbers and add your guess to finalize the ticket."
     }
 }
