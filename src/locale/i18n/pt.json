@@ -250,7 +250,8 @@
         "consultarCartao": "Consultar cartão",
         "solicitarSaque": "Solicitar saque",
         "recarga": "Recarga",
-        "recargasDeCartao": "Recargas de cartão"
+        "recargasDeCartao": "Recargas de cartão",
+        "cartoesDeAposta": "Cartões de Aposta"
     },
     "senhas": {
         "senhaAtual": "Senha atual",
@@ -310,5 +311,12 @@
         "jogoResponsavel": "Jogo reponsável",
         "termosECondicoes": "Termos e condições",
         "todosOsDireitosReservados": "2022 © {{BANCA_NOME}}. Todos os direitos reservados."
+    },
+    "paginas": {
+        "quem-somos": "Quem Somos",
+        "regras": "Regras",
+        "politica-privacidade": "Política de privacidade",
+        "jogo-responsavel": "Jogo reponsável",
+        "termos-condicoes": "Termos e condições"
     }
 }

@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {MenuFooterService, PaginaService} from './../services';
 import {Pagina} from './../models';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     templateUrl: './informacoes.component.html',
@@ -16,13 +17,15 @@ export class InformacoesComponent implements OnInit, OnDestroy {
     conteudo;
     unsub$ = new Subject();
     mobileScreen;
+    tituloPagina = '';
 
     constructor(
         private route: ActivatedRoute,
         private paginaService: PaginaService,
         private menuFooterService: MenuFooterService,
         private renderer: Renderer2,
-        private el: ElementRef
+        private el: ElementRef,
+        private translate: TranslateService
     ) {
     }
 
@@ -32,6 +35,8 @@ export class InformacoesComponent implements OnInit, OnDestroy {
         this.route.data
             .pipe(takeUntil(this.unsub$))
             .subscribe(data => {
+                this.tituloPagina = this.translate.instant('paginas.' + data.pagina);
+                this.translate.onLangChange.subscribe(() => this.tituloPagina = this.translate.instant('paginas.' + data.pagina));
                 this.paginaService.getPaginaPorChave(data.pagina)
                     .subscribe(pagina => {
                         this.pagina = pagina;

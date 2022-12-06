@@ -250,7 +250,8 @@
         "consultarCartao": "Consult Card",
         "solicitarSaque": "Request Withdrawal",
         "recarga": "Recharge",
-        "recargasDeCartao": "Card recharges"
+        "recargasDeCartao": "Card recharges",
+        "cartoesDeAposta": "Betting Cards"
     },
     "senhas": {
         "senhaAtual": "Current password",
@@ -310,5 +311,12 @@
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
         "todosOsDireitosReservados": "2022 © {{BANCA_NOME}}. All rights reserved."
+    },
+    "paginas": {
+        "quem-somos": "Who we are",
+        "regras": "Rules",
+        "politica-privacidade": "Privacy Policy",
+        "jogo-responsavel": "Responsible Gaming",
+        "termos-condicoes": "Terms and conditions"
     }
 }
