@@ -276,7 +276,7 @@
 
 .alteracoes-odds, .utilizar-bonus {
     text-align: left;
-    color: var(--foreground-sidebars);;
+    color: var(--foreground-sidebars);
 }
 
 input {
