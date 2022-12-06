@@ -111,6 +111,10 @@ nav::-webkit-scrollbar {
     padding: 0;
 }
 
+.language-dropdown .flag-icon {
+    font-size: 24px;
+}
+
 .language-dropdown-menu {
     min-width: 85px;
     padding: 5px;

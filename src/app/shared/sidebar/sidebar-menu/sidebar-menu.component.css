@@ -100,8 +100,29 @@
     margin-bottom: 16px;
 }
 
+.language-dropdown {
+    font-size: 16px;
+    margin: 8px auto;
+    color: var(--foreground-sidebars);
+    width: 65%;
+}
+
+.language-dropdown .btn {
+    font-size: 16px;
+    color: var(--foreground-sidebars);
+}
+
+.language-dropdown-menu {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    /*margin: 0 auto;*/
+    font-size: 16px;
+}
+
 @media only screen and (max-width: 1024px) {
-    .sidebar-menu{
+    .sidebar-menu {
         flex-wrap: wrap;
         max-width: 100%;
         justify-content: space-between;
