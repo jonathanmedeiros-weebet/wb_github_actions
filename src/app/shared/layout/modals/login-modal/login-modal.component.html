@@ -28,12 +28,12 @@
             <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
         </form>
 
-        <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha">
+        <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
             {{'geral.esqueceuASenha' | translate}}
         </a>
     </div>
 
-    <div class="registrar">
+    <div class="registrar" *ngIf="modoClienteHabilitado">
         {{'geral.naoPossuiUmaConta' | translate}}
         <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
     </div>
