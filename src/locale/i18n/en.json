@@ -8,7 +8,7 @@
         "verTodos": "See all",
         "destaques": "Highlights",
         "consultarBilhete": "Consult ticket",
-        "campeonatos": "Championships",
+        "campeonatos": "Leagues",
         "desafios": "Challenges",
         "surpresinha": "Surprise",
         "numeros": "Numbers",
@@ -35,6 +35,7 @@
         "deposito": "Deposit",
         "depositos": "Deposits",
         "nenhumEventoDisponivel": "No event available",
+        "nenhumEventoAoVivoDisponivel": "No live events available at this time!",
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",
@@ -119,7 +120,7 @@
         "telefone": "Phone",
         "email": "Email",
         "endereco": "Address",
-        "cep": "CEP",
+        "cep": "Zipcode",
         "logradouro": "Street",
         "bairro": "Neighborhood",
         "estado": "State",
@@ -133,7 +134,34 @@
         "esqueceuASenha": "Forgot password?",
         "naoPossuiUmaConta": "Don't have an account?",
         "usuario": "User",
-        "senha": "Password"
+        "senha": "Password",
+        "masculino": "Male",
+        "feminino": "Female",
+        "codigoDeAfiliacao": "Affiliate code(Optional)",
+        "certificoQueTenhoMais": "I certify that I am over 18 years of age and declare that I have read and agree to the",
+        "termosDeUso": "terms of use",
+        "cadastrar": "Register",
+        "cadastroSucedido": "Registration completed successfully! Check your email to activate it.",
+        "informacoesPessoais": "Personal Information",
+        "criarLogin": "Create Login",
+        "sucesso": "Success",
+        "naoAutorizado": "Not authorized",
+        "loginExpirouEntreNovamente": "Login timed out, please login again.",
+        "chavePix": "PIX Key",
+        "cassino": "Casino",
+        "reembolso": "Refund",
+        "editarPerfil": "Edit Profile",
+        "maisOpcoes": "More options",
+        "bilhete": "Ticket",
+        "cartoes": "Cards",
+        "resultados": "Results",
+        "config": "Config.",
+        "downloadApp": "Download app",
+        "jaPossuiConta": "Already have an account?",
+        "aindaNaoPossui": "Still don't have it?",
+        "menu": "Menu",
+        "aoVivo": "Live",
+        "compartilhar": "Share"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -228,13 +256,42 @@
         "confirmarSenha": "Confirm password",
         "redefinirSenha": "Redefine password",
         "codigoDeVerificacao": "Verification Code",
-        "reenviaCodigoDeVerificacao": "Código de Verificação"
+        "reenviaCodigoDeVerificacao": "Resend Verification Code",
+        "informeSeuEmail": "Enter your email to receive the password reset link.",
+        "solicitarCodigoRedefinicao": "Request reset code",
+        "digiteSuaSenha": "Type your password"
     },
     "saques": {
         "informeValorDesejadoSaque": "Enter the amount you want to withdraw",
         "informeOValor": "Enter the amount",
         "saldoDisponivelParaSaque": "Balance available for withdrawal",
         "infoSautoPay": "Withdrawals requested after 2pm will only be transferred on the next business day.",
-        "saqueERegistrado": "Withdrawal - Registered"
+        "saqueERegistrado": "Withdrawal - Registered",
+        "paraProsseguirAtualizeChavePix": "To proceed, update your registration with your PIX key",
+        "preenchaCadastroCompleto": "Please complete your registration completely to make the withdrawal request.",
+        "alertaTitularChave": "Obs. Looting will only be carried out on pix keys belonging to the account holder.",
+        "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random"
+    },
+    "ativacaoEmail": {
+        "ativacaoDeCadastro": "Registration Activation",
+        "mensagemAtivacao": "Use the link in the message sent to your email to activate your registration.",
+        "reenviaMensagem": "Resend Message",
+        "reenvioDisponivelEm": "Resend available in {{cronometro}} seconds",
+        "cadastroAtivadoComSucesso": "Registration activated successfully!!",
+        "realizeSeuLogin": "Log in to have fun with all the options available on our platform!"
+    },
+    "aplicativo": {
+        "versaoDoAplicativoNaoSuportada": "The installed app version is no longer supported, please go to our website and download the new version.",
+        "baixarNovaVersao": "Download new version"
+    },
+    "deposito": {
+        "titulo": "Deposit",
+        "selecioneUmaFormaDeDeposito": "Select a deposit method",
+        "informeOValor": "Enter value",
+        "seuPixFoiCreditado": "Your pix was successfully credited, your new balance is: R$ {{novoSaldo}}",
+        "valorMinimo": "Minimum deposit amount",
+        "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact the bank.",
+        "depositoRegistrado": "Deposit - Registered",
+        "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}"
     }
 }

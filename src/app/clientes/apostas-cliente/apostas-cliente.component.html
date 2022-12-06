@@ -15,7 +15,7 @@
             <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''"
                (click)="changeTab('desafio')">{{'geral.desafio' | translate}}</a>
             <a *ngIf="casinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''"
-               (click)="changeTab('cassino')">Cassino</a>
+               (click)="changeTab('cassino')">{{'geral.cassino' | translate}}</a>
         </div>
 
         <div class="content-body">
@@ -56,11 +56,11 @@
                         >
                     </div>
                     <select class="form-control inverted-out" formControlName="status">
-                        <option value="">Todos</option>
+                        <option value="">{{'geral.todos' | translate}}</option>
                         <option value="ganhou">{{'geral.ganhou' | translate}}</option>
                         <option value="perdeu">{{'geral.perdeu' | translate}}</option>
                         <option value="pendente">{{'geral.pendente' | translate}}</option>
-                        <option value="reembolso">Reembolso</option>
+                        <option value="reembolso">{{'geral.reembolso' | translate}}</option>
                     </select>
                     <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
                 </div>
@@ -92,7 +92,7 @@
                     </thead>
                     <tr *ngIf="loading">
                         <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
-                            Carregando
+                            {{'geral.carregando' | translate}}
                         </td>
                     </tr>
                     <tbody *ngIf="!loading">

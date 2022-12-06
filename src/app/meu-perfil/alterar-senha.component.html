@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
-                            <input type="password" class="inverted-out form-control" placeholder="Digite sua senha" formControlName="senha_atual"
+                            <input type="password" class="inverted-out form-control" placeholder="{{'senhas.digiteSuaSenha' | translate}}" formControlName="senha_atual"
                                     [ngClass]="applyCssInputError('senha_atual')" [type]="mostrarSenhaAtual ? 'text' : 'password'">
                             <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }" (click)="toggleMostrarSenha('senhaAtual')"></i>
                             <app-error-msg [control]="form.get('senha_atual')" label="{{'senhas.senhaAtual' | translate}}"></app-error-msg>

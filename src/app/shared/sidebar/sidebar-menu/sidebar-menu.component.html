@@ -2,17 +2,17 @@
     <div class="options">
         <a (click)="pesquisarTicket()">
             <i class="fa fa-ticket"></i>
-            Bilhete
+            {{'geral.bilhete' | translate}}
         </a>
 
         <a (click)="pesquisarCartao()" *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
             <i class="fa fa-credit-card"></i>
-            Cartões
+            {{'geral.cartoes' | translate}}
         </a>
 
         <a (click)="abrirResultados()" *ngIf="isLoggedIn">
             <i class="fa-solid fa-square-poll-vertical"></i>
-            Resultados
+            {{'geral.resultados' | translate}}
         </a>
 
         <a (click)="abrirModalTabela()" *ngIf="isLoggedIn && !isCliente">
@@ -22,25 +22,25 @@
 
         <a (click)="listPrinters()" *ngIf="isAppMobile">
             <i class="fa fa-solid fa-cogs"></i>
-            Config.
+            {{'geral.config' | translate}}
         </a>
 
         <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!isAppMobile && !trevoOne">
             <i class="fa fa-solid fa-download"></i>
-            Download app
+            {{'geral.downloadApp' | translate}}
         </a>
 
         <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la"
            *ngIf="!isAppMobile && trevoOne">
             <i class="fa fa-solid fa-download"></i>
-            Download app
+            {{'geral.downloadApp' | translate}}
         </a>
     </div>
 </div>
 
 <div class="login-area" *ngIf="!isLoggedIn">
-    <label>Já possui uma conta?</label>
+    <label>{{'geral.jaPossuiConta' | translate}}</label>
     <a class="btn btn-custom2 btn-block" (click)="abrirLogin()">{{'geral.entrar' | translate}}</a>
-    <label class="mt-3">Ainda não possui?</label>
-    <a class="btn btn-custom btn-block" (click)="abrirCadastro()">Resgistre-se</a>
+    <label class="mt-3">{{'geral.aindaNaoPossui' | translate}}</label>
+    <a class="btn btn-custom btn-block" (click)="abrirCadastro()">{{'geral.registreSe' | translate}}</a>
 </div>

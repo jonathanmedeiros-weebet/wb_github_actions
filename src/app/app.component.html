@@ -17,12 +17,12 @@
     </div>
     <div class="modal-body" style="min-height: 80%">
         <h4 style="text-align: center;">
-            A versão do aplicativo instalado não é mais suportada, acesse o nosso site e baixe a nova versão.
+            {{'aplicativo.versaoDoAplicativoNaoSuportada' | translate}}
         </h4>
     </div>
     <div class="modal-footer">
         <a class="btn btn-outline-dark" (click)="downloadApp()">
-            Baixar nova versão
+            {{'aplicativo.baixarNovaVersao' | translate}}
         </a>
     </div>
 </ng-template>
@@ -49,8 +49,8 @@
             <i class="fa fa-times" aria-hidden="true"></i>
         </a>
         <div class="content-modal-ativacao">
-            <h3>Cadastro ativado com sucesso!!</h3>
-            <span>Realize seu login para se divertir com todas as opções disponíveis em nossa plataforma!</span>
+            <h3>{{'ativacaoEmail.cadastroAtivadoComSucesso' | translate}}</h3>
+            <span>{{'ativacaoEmail.realizeSeuLogin' | translate}}</span>
             <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
         </div>
     </div>

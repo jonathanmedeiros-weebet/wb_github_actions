@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -12,6 +12,7 @@ import { FormValidations, PasswordValidation } from 'src/app/shared/utils';
 import * as moment from 'moment';
 import { Pagina } from 'src/app/models';
 import {config} from '../../../config';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     mostrarConfirmarSenha;
     LOGO = config.LOGO;
     modalTermosRef;
+    hCaptchaLanguage;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -44,7 +46,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private route: ActivatedRoute,
         private router: Router,
         private paramsService: ParametrosLocaisService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private translate: TranslateService,
+        private cd: ChangeDetectorRef,
     ) {
         super();
     }
@@ -52,6 +56,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
+
+        this.hCaptchaLanguage = this.translate.currentLang;
+
+        this.translate.onLangChange.subscribe(res => {
+            this.hCaptchaLanguage = res.lang;
+            this.cd.detectChanges();
+        });
 
         this.clientesService.getTermosDeUso().subscribe(
             (termos: Pagina) => {
@@ -70,6 +81,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
              this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
         });
     }
+
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -129,7 +141,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     //     error => this.messageService.error(error)
                     // );
                     this.activeModal.dismiss();
-                    this.messageService.success('Cadastro realizado com sucesso! Verifique seu email para ativá-lo.');
+                    this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
                 },
                 error => {
                     this.messageService.error(error);

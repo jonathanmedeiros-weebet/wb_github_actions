@@ -10,6 +10,7 @@ import { ParametrosLocaisService } from '../../shared/services/parametros-locais
 import { SidebarService, AuthService } from 'src/app/services';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -45,6 +46,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private modalService: NgbModal,
         private auth: AuthService,
         public activeModal: NgbActiveModal,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -97,11 +99,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.cliente = res;
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
-                        this.errorMessage = 'Por favor, preencha seu cadastro por completo para realizar a solictação de saque.';
+                        this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
                     if (!this.cliente.chave_pix) {
                         this.cadastroCompleto = false;
-                        this.errorMessage = 'Para prosseguir, atualize seu cadastro com a sua chave PIX';
+                        this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
                     }
 
                     this.showLoading = false;

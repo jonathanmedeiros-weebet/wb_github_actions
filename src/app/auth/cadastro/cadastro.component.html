@@ -19,7 +19,7 @@
                     </div>
                     <div class="col col-sm-6">
                         <div class="form-group required">
-                            <label class="label">Sobrenome</label>
+                            <label class="label">{{'geral.sobrenome' | translate}}</label>
                             <input class="form-control" type="text" formControlName="sobrenome">
                             <app-error-msg [control]="form.get('sobrenome')"></app-error-msg>
                         </div>
@@ -144,7 +144,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-custom" [disabled]="submitting">
                                 <i class="fa fa-save"></i>
-                                Cadastrar
+                                {{'geral.cadastrar' | translate}}
                             </button>
                         </div>
                     </div>

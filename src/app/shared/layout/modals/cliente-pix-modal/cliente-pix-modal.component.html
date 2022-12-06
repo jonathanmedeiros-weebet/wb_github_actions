@@ -5,14 +5,14 @@
 
     <ng-container>
         <div class="content-header">
-            <h2>PIX</h2>
+            <h2>{{'geral.pix' | translate}}</h2>
         </div>
         <div class="content-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="fields">
                 <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="chave_pix" class="form-control inverted-out">
-                        <label for="nome">Chave PIX</label>
+                        <label for="nome">{{'geral.chavePix' | translate}}</label>
                     </div>
                     <div class="form-group input-md">
                         <input [type]="mostrarSenha ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">

@@ -35,6 +35,7 @@
         "deposito": "Depósito",
         "depositos": "Depósitos",
         "nenhumEventoDisponivel": "Nenhum evento disponível",
+        "nenhumEventoAoVivoDisponivel": "Nenhum evento ao vivo disponível no momento!",
         "saldo": "Saldo",
         "minhaConta": "Minha Conta",
         "salvar": "Salvar",
@@ -128,12 +129,39 @@
         "selecioneACidade": "Selecione a cidade",
         "atualizar": "Atualizar",
         "status": "Status",
-        "cliqueAquiPraContinuar": "Clique aqui para continuar",
+        "cliqueAquiParaContinuar": "Clique aqui para continuar",
         "proximaData": "Próxima Data",
         "esqueceuASenha": "Esqueceu a senha?",
         "naoPossuiUmaConta": "Não possui uma conta?",
         "usuario": "Usuário",
-        "senha": "Senha"
+        "senha": "Senha",
+        "masculino": "Masculino",
+        "feminino": "Feminino",
+        "codigoDeAfiliacao": "Código de afiliação(Opcional)",
+        "certificoQueTenhoMais": "Certifico que tenho mais de 18 anos de idade e declaro que li e concordo com os",
+        "termosDeUso": "termos de uso",
+        "cadastrar": "Cadastrar",
+        "cadastroSucedido": "Cadastro realizado com sucesso! Verifique seu email para ativá-lo.",
+        "informacoesPessoais": "Informações Pessoais",
+        "criarLogin": "Criar Login",
+        "sucesso": "Sucesso",
+        "naoAutorizado": "Não autorizado",
+        "loginExpirouEntreNovamente": "Login expirou, entre novamente.",
+        "chavePix": "Chave PIX",
+        "cassino": "Cassino",
+        "reembolso": "Reembolso",
+        "editarPerfil": "Editar Perfil",
+        "maisOpcoes": "Mais opções",
+        "bilhete": "Bilhete",
+        "cartoes": "Cartões",
+        "resultados": "Resultados",
+        "config": "Config.",
+        "downloadApp": "Download app",
+        "jaPossuiConta": "Já possui uma conta?",
+        "aindaNaoPossui": "Ainda não possui?",
+        "menu": "Menu",
+        "aoVivo": "Ao Vivo",
+        "compartilhar": "Compartilhar"
     },
     "dias": {
         "ontem": "Ontem",
@@ -228,13 +256,42 @@
         "confirmarSenha": "Confirmar senha",
         "redefinirSenha": "Redefinir Senha",
         "codigoDeVerificacao": "Código de Verificação",
-        "reenviaCodigoDeVerificacao": "Código de Verificação"
+        "reenviaCodigoDeVerificacao": "Reenviar Código de Verificação",
+        "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
+        "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
+        "digiteSuaSenha": "Digite sua senha"
     },
     "saques": {
         "informeValorDesejadoSaque": "Informe o valor desejado para saque",
         "informeOValor": "Informe o valor",
         "saldoDisponivelParaSaque": "Saldo disponivel para saque",
         "infoSautoPay": "Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil.",
-        "saqueERegistrado": "Saque - Registrado"
+        "saqueERegistrado": "Saque - Registrado",
+        "paraProsseguirAtualizeChavePix": "Para prosseguir, atualize seu cadastro com a sua chave PIX",
+        "preenchaCadastroCompleto": "Por favor, preencha seu cadastro por completo para realizar a solictação de saque.",
+        "alertaTitularChave": "Obs. Só será realizado saques em chaves pix pertencentes ao titular da conta.",
+        "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória"
+    },
+    "ativacaoEmail": {
+        "ativacaoDeCadastro": "Ativação de Cadastro",
+        "mensagemAtivacao": "Use o link na mensagem enviada para o seu e-mail para ativar o seu cadastro.",
+        "reenviaMensagem": "Reenviar Mensagem",
+        "reenvioDisponivelEm": "Reenvio disponível em {{cronometro}} segundos",
+        "cadastroAtivadoComSucesso": "Cadastro ativado com sucesso!!",
+        "realizeSeuLogin": "Realize seu login para se divertir com todas as opções disponíveis em nossa plataforma!"
+    },
+    "aplicativo": {
+        "versaoDoAplicativoNaoSuportada": "A versão do aplicativo instalado não é mais suportada, acesse o nosso site e baixe a nova versão.",
+        "baixarNovaVersao": "Baixar nova versão"
+    },
+    "deposito": {
+        "titulo": "Depósito",
+        "selecioneUmaFormaDeDeposito": "Selecione uma forma de depósito",
+        "informeOValor": "Informe o valor",
+        "seuPixFoiCreditado": "Seu pix foi creditado com sucesso, seu novo saldo é: R$ {{novoSaldo}}",
+        "valorMinimo": "Valor mínimo para depósito",
+        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com a banca.",
+        "depositoRegistrado": "Depósito - Registrado",
+        "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}"
     }
 }

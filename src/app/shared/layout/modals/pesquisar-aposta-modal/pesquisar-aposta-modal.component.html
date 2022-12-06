@@ -7,7 +7,7 @@
 <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <input type="text" style="text-transform:uppercase;" placeholder="Código da aposta"
+            <input type="text" style="text-transform:uppercase;" placeholder="{{'geral.codigoAposta' | translate}}"
                 class="form-control inverted-out" formControlName="codigo"
                 autocomplete="off" [ngClass]="applyCssInputError('codigo')">
             <app-error-msg [control]="form.get('codigo')"></app-error-msg>
@@ -25,7 +25,7 @@
     </app-exibir-bilhete-desafio>
 
     <div class="buttons" *ngIf="exibirBilhete">
-        <button type="button" class="btn btn-custom2" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()">Compartilhar</button>
+        <button type="button" class="btn btn-custom2" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()">{{'geral.compartilhar' | translate}}</button>
         <button type="button" class="btn btn-custom" *ngIf="impressaoPermitida()" (click)="printTicket()">{{'geral.imprimir' | translate}}</button>
     </div>
 </div>

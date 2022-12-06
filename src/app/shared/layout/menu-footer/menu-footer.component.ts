@@ -9,6 +9,7 @@ import {MessageService} from '../../services/utils/message.service';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ValidarApostaWrapperComponent} from '../../../validar-aposta/wrapper/validar-aposta-wrapper.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-menu-footer',
@@ -38,7 +39,8 @@ export class MenuFooterComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private menuFooterService: MenuFooterService,
         private messageService: MessageService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private translate: TranslateService
     ) {
     }
 
@@ -92,13 +94,13 @@ export class MenuFooterComponent implements OnInit {
                     this.contexto = dados.contexto;
                     switch (this.contexto) {
                         case 'esportes':
-                            this.nomeBotaoExtras = 'Campeonatos';
+                            this.nomeBotaoExtras = this.translate.instant('geral.campeonatos');
                             break;
                         case 'desafio':
-                            this.nomeBotaoExtras = 'Desafios';
+                            this.nomeBotaoExtras = this.translate.instant('geral.desafios');
                             break;
                         default:
-                            this.nomeBotaoExtras = 'Campeonatos';
+                            this.nomeBotaoExtras = this.translate.instant('geral.campeonatos');
                     }
                 });
         }

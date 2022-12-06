@@ -4,14 +4,14 @@
     </a>
 
     <div class="content-header">
-        <h2>Depósito</h2>
+        <h2>{{'deposito.titulo' | translate}}</h2>
     </div>
     <div class="content-body">
         <div class="content">
             <div *ngIf="hasApiPagamentos || whatsapp">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <label class="hide-mobile">Selecione uma forma de depósito</label>
+                        <label class="hide-mobile">{{'deposito.selecioneUmaFormaDeDeposito' | translate}}</label>
                         <div class="buttons-container mt-3">
                             <a class="opcao-pagamento" *ngIf="whatsapp" (click)="selecionarModalidade('whatsapp')"
                                [ngClass]="{'active':modalidade === 'whatsapp'}">
@@ -36,7 +36,7 @@
             <div *ngIf="!hasApiPagamentos && !whatsapp">
                 <div class="row">
                     <div class="col-12">
-                        Nenhuma modalidade de depósito disponível. Entre em contato com a banca.
+                        {{'deposito.nenhumaModalidadeDeDeposito' | translate}}
                     </div>
                 </div>
             </div>
