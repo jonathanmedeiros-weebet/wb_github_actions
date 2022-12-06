@@ -318,5 +318,25 @@
         "politica-privacidade": "Política de privacidade",
         "jogo-responsavel": "Jogo reponsável",
         "termos-condicoes": "Termos e condições"
+    },
+    "jogos": {
+        "tempoCompleto": "Tempo Completo",
+        "primeiroTempo": "Primeiro Tempo",
+        "segundoTempo": "Segundo Tempo",
+        "jogadores": "Jogadores",
+        "semCotacoes": "Sem Cotações",
+        "marcadoresDeGols": "Marcadores de Gols",
+        "marcaPrimeiroGol": "Marca 1º Gol",
+        "marcarUltimoGol": "Marca Último Gol",
+        "marcaGolNaPartida": "Marca Gol na Partida",
+        "cartoes": "Cartões",
+        "recebeCartao": "Recebe Cartão",
+        "seraExpulso": "Será Expulso",
+        "golsCasa": "Gols Casa - {{timeNome}}",
+        "primeiroGolCasa": "1º Gol Casa",
+        "ultimoGolCasa": "Último Gol Casa",
+        "golsFora": "Gols Fora - {{timeNome}}",
+        "primeiroGolFora": "1º Gol Fora",
+        "ultimoGolFora": "Último Gol Fora"
     }
 }
