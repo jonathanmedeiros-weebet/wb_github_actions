@@ -164,7 +164,14 @@
         "compartilhar": "Share",
         "selecionarIdioma": "Select Language",
         "ingles": "English",
-        "portugues": "Português"
+        "portugues": "Português",
+        "criacao": "Creation",
+        "cambista": "Money changer",
+        "cliente": "Client",
+        "possivelRetorno": "Possible Return",
+        "semResultado": "No Result",
+        "resultadosFutebol": "Football Results",
+        "resultadosLoterias": "Lottery Results"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -251,7 +258,9 @@
         "solicitarSaque": "Request Withdrawal",
         "recarga": "Recharge",
         "recargasDeCartao": "Card recharges",
-        "cartoesDeAposta": "Betting Cards"
+        "cartoesDeAposta": "Betting Cards",
+        "chaveCartao": "Card key",
+        "detalhesDoCartao": "Card Details"
     },
     "senhas": {
         "senhaAtual": "Current password",

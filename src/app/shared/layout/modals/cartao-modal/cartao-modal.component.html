@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Detalhes do Cartão</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{'cartoes.detalhesDoCartao' | translate}}</h4>
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
@@ -7,7 +7,7 @@
 <div class="modal-body">
     <div class="cartao-aposta">
         <div class="box-chave">
-            <label >Chave cartão</label>
+            <label >{{'cartoes.chaveCartao' | translate}}</label>
             <span>{{'cartoes.cartao' | translate}} {{cartao.chave}}</span>
         </div>
         <div>
@@ -25,13 +25,13 @@
                     <span>{{cartao.premios | currency}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Criação: </b>
+                    <b>{{'geral.criacao' | translate}}: </b>
                     <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
                 </div>
             </div>
             <div>
                 <div class="mb-4">
-                    <b>Cambista: </b>
+                    <b>{{'geral.cambista' | translate}}: </b>
                     <span>{{cartao.passador?.nome}}</span>
                 </div>
                 <div class="mb-4">
@@ -54,8 +54,8 @@
                     <th>Mod.</th>
                     <th>{{'geral.horario' | translate}}</th>
                     <th>{{'geral.valor' | translate}}</th>
-                    <th>Possível Retorno</th>
-                    <th>Resultado</th>
+                    <th>{{'geral.possivelRetorno' | translate}}</th>
+                    <th>{{'geral.resultado' | translate}}</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let aposta of cartao.apostas" (click)="abrirBilhete(aposta.id)">
@@ -79,7 +79,7 @@
     </div>
     <div class="actions">
         <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
-            Fechar
+            {{'modais.fechar' | translate}}
         </button>
         <button type="button" class="btn btn-custom" (click)="print()">
             {{'geral.imprimir' | translate}}

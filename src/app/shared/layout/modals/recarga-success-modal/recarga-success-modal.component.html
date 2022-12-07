@@ -14,7 +14,7 @@
 
         <ul>
             <li><b> {{'cartoes.cartao' | translate}}:</b> {{recarga.cartao_aposta}}</li>
-            <li><b>Cambista:</b> {{recarga.passador}}</li>
+            <li><b>{{'geral.cambista' | translate}}:</b> {{recarga.passador}}</li>
             <li><b>Valor:</b> {{recarga.valor| currency}}</li>
             <li><b>Data/Hora:</b> {{recarga.data | moment:'DD/MM/YYYY HH:mm'}}</li>
             <li class="autenticacao">{{recarga.autenticacao}}</li>
@@ -22,7 +22,7 @@
     </div>
     <div class="buttons">
         <button type="button" class="btn btn-custom2 w-130" (click)="activeModal.close('Close click')">
-            Fechar
+            {{'modais.fechar' | translate}}
         </button>
         <button type="button" class="btn btn-custom w-130" (click)="printTicket()">
             {{'geral.imprimir' | translate}}

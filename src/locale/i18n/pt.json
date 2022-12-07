@@ -164,7 +164,14 @@
         "compartilhar": "Compartilhar",
         "selecionarIdioma": "Selecionar Idioma",
         "ingles": "English",
-        "portugues": "Português"
+        "portugues": "Português",
+        "criacao": "Criação",
+        "cambista": "Cambista",
+        "cliente": "Cliente",
+        "possivelRetorno": "Possível Retorno",
+        "semResultado": "Sem Resultado",
+        "resultadosFutebol": "Resultados Futebol",
+        "resultadosLoterias": "Resultados Loterias"
     },
     "dias": {
         "ontem": "Ontem",
@@ -251,7 +258,9 @@
         "solicitarSaque": "Solicitar saque",
         "recarga": "Recarga",
         "recargasDeCartao": "Recargas de cartão",
-        "cartoesDeAposta": "Cartões de Aposta"
+        "cartoesDeAposta": "Cartões de Aposta",
+        "chaveCartao": "Chave cartão",
+        "detalhesDoCartao": "Detalhes do Cartão"
     },
     "senhas": {
         "senhaAtual": "Senha atual",

@@ -8,7 +8,7 @@
     <div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group group-valor">
-                <label>Informe o valor</label>
+                <label>{{'saques.informeOValor' | translate}}</label>
                 <input type="text" prefix="R$ " mask="dot_separator.2" class="input-valor" formControlName="valor"
                     placeholder="RS 0,00" [ngClass]="applyCssInputError('valor')">
                 <app-error-msg [control]="form.get('valor')"></app-error-msg>
@@ -27,7 +27,7 @@
                 <app-error-msg [control]="form.get('pin')"></app-error-msg>
             </div>
 
-            <button type="submit" class="btn btn-custom btn-block">Solicitar</button>
+            <button type="submit" class="btn btn-custom btn-block">{{'geral.solicitarSaque' | translate}}</button>
         </form>
     </div>
 </div>

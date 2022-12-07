@@ -34,7 +34,7 @@
         </div>
         <div class="informacoes-aposta">
             <h4 *ngIf="aposta.resultado">
-                Resultado: <span [ngClass]="resultadoClass(aposta.resultado)">{{aposta.resultado}}</span>
+                {{'geral.resultado' | translate}}: <span [ngClass]="resultadoClass(aposta.resultado)">{{aposta.resultado}}</span>
             </h4>
             <div>
                 <b>{{aposta.acumuladao.nome}}</b>
@@ -43,7 +43,7 @@
                 <b>{{'geral.apostador' | translate}} :</b> {{aposta.apostador}}
             </div>
             <div>
-                <b>Cambista:</b> {{aposta.passador.nome}}
+                <b>{{'geral.cambista' | translate}}:</b> {{aposta.passador.nome}}
             </div>
             <div>
                 <b>Data:</b> {{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}
