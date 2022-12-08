@@ -18,6 +18,7 @@ export class FooterComponent implements OnInit {
     trevoOne = false;
     hasMpToken = false;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
+    rodape;
 
     constructor(
         private authService: AuthService,
@@ -29,6 +30,7 @@ export class FooterComponent implements OnInit {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
         this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
+        this.rodape = this.paramsLocais.getOpcoes().rodape;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;

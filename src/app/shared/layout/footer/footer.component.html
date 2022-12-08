@@ -11,21 +11,7 @@
             </p>
         </div>
 
-        <div>
-            <p>
-                O {{BANCA_NOME}} é um sistema de entretenimento online que oferece a seus usuários uma experiência única em
-                Apostas Esportivas.
-            </p>
-
-            <p>
-                Ao acessar, continuar a utilizar ou navegar no website {{BANCA_NOME}}, você aceita que utilizemos certos cookies
-                de navegador com o objetivo de melhorar a sua experiência enquanto utiliza nosso site. {{BANCA_NOME}} apenas usa
-                cookies para melhorar a sua experiência e não interferem com sua privacidade.
-            </p>
-
-            <p>
-                Jogue com responsabilidade. Proibido para menores de 18 anos.
-            </p>
+        <div [innerHTML]="rodape | safeHTML">
         </div>
 
         <div class="info" *ngIf="hasMpToken">
