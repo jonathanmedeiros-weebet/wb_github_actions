@@ -2420,3 +2420,12 @@ gulp.task('betfut365.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('365club.app', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "365club.app",
+        banca: "365 CLUB",
+        styles: "",
+    });
+});

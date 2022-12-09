@@ -263,7 +263,8 @@
         "bomba.bet": "gulp bomba.bet",
         "akisports.wee.bet": "gulp akisports.wee.bet",
         "gatobet.net": "gulp gatobet.net",
-        "betfut365.bet": "gulp betfut365.bet"
+        "betfut365.bet": "gulp betfut365.bet",
+        "365club.app": "gulp 365club.app"
     },
     "private": true,
     "dependencies": {
