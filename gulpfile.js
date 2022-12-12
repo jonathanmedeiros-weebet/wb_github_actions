@@ -2440,3 +2440,12 @@ gulp.task('betbrasil.one', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gmfut.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "gmfut.com",
+        banca: "GM FUT",
+        styles: "",
+    });
+});

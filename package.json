@@ -265,7 +265,8 @@
         "gatobet.net": "gulp gatobet.net",
         "betfut365.bet": "gulp betfut365.bet",
         "365club.app": "gulp 365club.app",
-        "betbrasil.one": "gulp betbrasil.one"
+        "betbrasil.one": "gulp betbrasil.one",
+        "gmfut.com": "gulp gmfut.com"
     },
     "private": true,
     "dependencies": {
