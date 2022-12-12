@@ -2429,3 +2429,12 @@ gulp.task('365club.app', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betbrasil.one', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betbrasil.one",
+        banca: "BET BRASIL",
+        styles: "",
+    });
+});
