@@ -54,15 +54,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.blink = this.router.url.split('/')[2];
 
         this.casinoApi.getGamesList().subscribe(response => {
-            this.gameAllList = response.gameList;
-
-            this.gamesCassino = response.gameList;
-            this.gamesDestaque = response.destaques;
-            this.gamesSlot = this.filterSlot(this.gameAllList);
-            this.gamesRaspadinha = this.filterRaspadinha(this.gameAllList);
-            this.gamesRoleta = this.filterRoleta(this.gameAllList);
-            this.gamesMesa = this.filterMesa(this.gameAllList);
-
+            const games = response.gameList;
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
 
@@ -73,7 +65,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                         contexto: 'virtuais',
                         dados: {}
                     });
-                    this.gameList = this.gameAllList.filter(function (game) {
+                    this.gameList = games.filter(function(game) {
                         return game.dataType === 'VSB';
                     });
                 } else {
@@ -83,29 +75,38 @@ export class WallComponent implements OnInit, AfterViewInit {
                     });
                     switch (this.gameType) {
                         case 'slot':
-                            this.gameList =  this.gamesSlot;
+                            this.gameList = games.filter(function (game) {
+                                return game.gameTypeID === 'vs';
+                            });
                             break;
                         case 'roleta':
-                            this.gameList = this.gamesRoleta;
+                            this.gameList = games.filter(function (game) {
+                                return game.gameTypeID === 'rl';
+                            });
                             break;
                         case 'raspadinha':
-                            this.gameList = this.gamesRaspadinha;
+                            this.gameList = games.filter(function (game) {
+                                return game.gameTypeID === 'sc';
+                            });
                             break;
                         case 'mesa':
-                            this.gameList = this.gamesMesa;
+                            this.gameList = games.filter(function (game) {
+                                return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+                            });
                             break;
                         case 'destaques':
-                            this.gameList = this.gamesDestaque;
+                            this.gameList = response.destaques;
                             break;
                         case 'todos':
-                            this.gameList = this.gamesCassino;
+                            this.gameList = games.filter(function (game) {
+                                return game.dataType !== 'VSB';
+                            });
                             break;
                     }
                 }
             });
             this.showLoadingIndicator = false;
-        }, erro => {
-        });
+        }, erro => {});
         this.auth.logado
             .subscribe(
                 isLoggedIn => {
@@ -167,81 +168,21 @@ export class WallComponent implements OnInit, AfterViewInit {
         }
     }
 
-    filterAll(games) {
-        return games.filter(function (game) {
-            return game.dataType !== 'VSB';
-        });
-    }
-
-    filterSlot(games) {
-        return games.filter(function (game) {
-            return game.gameTypeID === 'vs';
-        });
-    }
-
-    filterRaspadinha(games) {
-        return games.filter(function (game) {
-            return game.gameTypeID === 'sc';
-        });
-    }
-
-    filterRoleta(games) {
-        return games.filter(function (game) {
-            return game.gameTypeID === 'rl';
-        });
-    }
-
-    filterMesa(games) {
-        return games.filter(function (game) {
-            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
-        });
-    }
-
-    filterDestaques(games) {
-        const destaques = [
-            '1301', 'rla', 'vs20olympgate', 'vs20doghouse', 'vs25wolfgold',
-            '1101', 'vs20kraken', 'vs9chen', 'vs20goldfever', 'vs5joker',
-            'vswayszombcarn', 'vs20hburnhs', '422', 'vpa'
-        ];
-        let destaquesFiltrados = games.filter(function (game) {
-            return game.gameID === '1301' || game.gameID === 'rla' || game.gameID === 'vs20olympgate'
-                || game.gameID === 'vs20doghouse' || game.gameID === 'vswayszombcarn' || game.gameID === '1101'
-                || game.gameID === 'vs20kraken' || game.gameID === 'vs9chen' || game.gameID === 'vs20goldfever'
-                || game.gameID === 'vs5joker' || game.gameID === 'vs25wolfgold' || game.gameID === 'vs20hburnhs'
-                || game.gameID === '422' || game.gameID === 'vpa';
-        });
-        for (let cont = 0; cont < destaques.length; cont++) {
-            const posicao = destaquesFiltrados.findIndex((element) => element.gameID === destaques[cont]);
-            if (posicao >= 0) {
-                destaquesFiltrados = mudarPosicao(destaquesFiltrados, posicao, cont);
-            }
-        }
-
-        return destaquesFiltrados;
-
-        function mudarPosicao(array, from, to) {
-            array.splice(to, 0, array.splice(from, 1)[0]);
-            return array;
-        }
-    }
-
     abrirModalLogin() {
-        let options = {};
-
-        if (this.isMobile) {
-            options = {
-                windowClass: 'modal-fullscreen',
-            };
-        } else {
-            options = {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-            };
-        }
-
         this.modalRef = this.modalService.open(
-            LoginModalComponent, options
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+            }
         );
+
+        this.modalRef.result
+            .then(
+                result => {
+                },
+                reason => {
+                }
+            );
     }
 }
