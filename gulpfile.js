@@ -2449,3 +2449,21 @@ gulp.task('gmfut.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pointbet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "pointbet.bet",
+        banca: "POINTBET",
+        styles: "",
+    });
+});
+
+gulp.task('moneysports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "moneysports.wee.bet",
+        banca: "MONEY SPORTS",
+        styles: "",
+    });
+});
