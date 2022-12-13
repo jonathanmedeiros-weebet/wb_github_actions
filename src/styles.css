@@ -759,40 +759,6 @@ button {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-/* ODDS FUTEBOL */
-
-/*.odds {*/
-/*    width: 100%;*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*}*/
-
-/*.odds .inner-odd {*/
-/*    !*background-color: var(--odds);*!*/
-/*    background-color: #181818;*/
-/*    padding: 5px 8px;*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.odds .selecionado {*/
-/*    background-color: var(--highlight);*/
-/*}*/
-
-/*.odds .selecionado span {*/
-/*    color: var(--foreground-selected-odds) !important;*/
-/*}*/
-
-/*.odd .nome,*/
-/*.odd .valor {*/
-/*    color: var(--foreground-odds);*/
-/*}*/
-
-/*.odds .odd {*/
-/*    padding: 1px;*/
-/*}*/
-
 .flag-icon {
     background-color: var(--highlight);
 }

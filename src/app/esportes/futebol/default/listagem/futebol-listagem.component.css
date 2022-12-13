@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.nome {
+    min-width: 200px;
+}
+
 .nome-time {
     max-width: 55vw;
     text-overflow: ellipsis;
@@ -38,7 +42,7 @@
 }
 
 .scroll-button {
-    width: 25px;
+    min-width: 25px;
     height: 60px;
     cursor: pointer;
     background-color: var(--game);
