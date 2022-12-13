@@ -11,18 +11,7 @@
             </p>
         </div>
 
-        <div>
-            <p>
-                {{'footer.mensagem1' | translate:{'BANCA_NOME': BANCA_NOME} }}
-            </p>
-
-            <p>
-                {{'footer.mensagem2' | translate:{'BANCA_NOME': BANCA_NOME} }}
-            </p>
-
-            <p>
-                {{'footer.jogueComResponsabilidade' | translate}}
-            </p>
+        <div [innerHTML]="rodape | safeHTML">
         </div>
 
         <div class="info" *ngIf="hasMpToken">

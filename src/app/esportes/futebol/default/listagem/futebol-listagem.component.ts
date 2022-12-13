@@ -63,12 +63,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     regiaoSelecionada;
     qtdOddsPrincipais = 3;
     oddsPrincipais;
-    widthOddsScroll = 450;
-    nomesJogoWidth = 250;
+    widthOddsScroll = 0;
+    nomesJogoWidth = 200;
     navs: ElementRef[];
     enableScrollButtons = false;
     sidebarNavIsCollapsed = false;
     maxOddsSize;
+    oddSize = 150;
     unsub$ = new Subject();
     term = '';
 
@@ -141,7 +142,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         if (scrollRightTemp) {
-            if ((scrollWidth - (scrollLeft + this.widthOddsScroll)) <= 0) {
+            if ((scrollWidth - (scrollLeft + this.maxOddsSize - 50)) <= 0) {
                 this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
                 this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
             } else {
@@ -200,21 +201,31 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     detectScrollOddsWidth() {
         this.cd.detectChanges();
-        this.widthOddsScroll = this.qtdOddsPrincipais > 3 ? this.qtdOddsPrincipais * 100 : this.qtdOddsPrincipais * 150;
-
         const sidesSize = this.sidebarNavIsCollapsed ? 380 : 650;
+        const centerSize = window.innerWidth - sidesSize;
+
+        this.nomesJogoWidth = ((centerSize / 100) * 30);
+        if (this.nomesJogoWidth < 200) {
+            this.nomesJogoWidth = 200;
+        }
+
         if (this.mobileScreen) {
             this.maxOddsSize = window.innerWidth;
         } else {
-            this.maxOddsSize = window.innerWidth - (sidesSize + 380 + 60);
+            this.maxOddsSize = centerSize - this.nomesJogoWidth - 110;
         }
 
-        this.enableScrollButtons = this.widthOddsScroll > this.maxOddsSize;
-        if (this.enableScrollButtons) {
-            this.widthOddsScroll = this.maxOddsSize;
+        this.oddSize = this.maxOddsSize / this.qtdOddsPrincipais;
+        if (this.oddSize < 95) {
+            this.oddSize = 95;
         }
-        this.nomesJogoWidth = window.innerWidth - (sidesSize + 60 + this.widthOddsScroll);
-        this.cd.detectChanges();
+
+        this.widthOddsScroll = this.maxOddsSize + this.nomesJogoWidth;
+        if ((this.oddSize * this.qtdOddsPrincipais) > this.maxOddsSize) {
+                this.enableScrollButtons = true;
+        } else {
+            this.enableScrollButtons = false;
+        }
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {

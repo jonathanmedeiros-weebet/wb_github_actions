@@ -6,4 +6,5 @@ export class DepositoSaque {
     status: string;
     valor = 0;
     metodo: string;
+    psp: string;
 }

@@ -89,7 +89,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     this.getUsuario();
                     if (this.usuario.tipo_usuario === 'cliente' &&
                         this.authDoisFatoresHabilitado &&
-                        this.auth.getCookie(this.usuario.cookie) === '') {
+                        this.auth.getCookie(this.usuario.cookie) === '' &&
+                        this.usuario.login !== 'weebet') {
                         this.abrirModalAuthDoisFatores();
                     } else {
                         this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
