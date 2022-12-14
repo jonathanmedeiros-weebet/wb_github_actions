@@ -17,6 +17,12 @@ export class FooterComponent implements OnInit {
     isAppMobile;
     trevoOne = false;
     hasMpToken = false;
+    hasRegras = false;
+    hasTermosCondicoes = false;
+    hasPoliticaPrivacidade = false;
+    hasQuemSomos = false;
+    hasJogoResponsavel = false;
+    hasPoliticaAml = false;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     rodape;
 
@@ -30,6 +36,12 @@ export class FooterComponent implements OnInit {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
         this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
+        this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
+        this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;
+        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
+        this.hasQuemSomos = this.paramsLocais.getOpcoes().has_quem_somos;
+        this.hasJogoResponsavel = this.paramsLocais.getOpcoes().has_jogo_responsavel;
+        this.hasPoliticaAml = this.paramsLocais.getOpcoes().has_politica_aml;
         this.rodape = this.paramsLocais.getOpcoes().rodape;
 
         if (location.host.search(/trevoone/) >= 0) {

@@ -29,7 +29,7 @@
 <!--        </div>-->
 
         <div class="links">
-            <a [routerLink]="['/informacoes/quem-somos']">
+            <a [routerLink]="['/informacoes/quem-somos']" *ngIf="hasQuemSomos">
                 {{'footer.quemSomos' | translate}}
             </a>
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!trevoOne && !isAppMobile">
@@ -38,19 +38,22 @@
             <a target="_blank" href="https://play.google.com/store/apps/details?id=trevo.one.la" *ngIf="!isAppMobile && trevoOne">
                 {{'footer.downloadApp' | translate}}
             </a>
-            <a [routerLink]="['/informacoes/regras']">
+            <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
                 {{'footer.regras' | translate}}
             </a>
             <a class="pointer" (click)="abrirResultados()">
                 {{'footer.resultados' | translate}}
             </a>
-            <a [routerLink]="['/informacoes/politica-privacidade']">
+            <a [routerLink]="['/informacoes/politica-privacidade']" *ngIf="hasPoliticaPrivacidade">
                 {{'footer.politicaDePrivacidade' | translate}}
             </a>
-            <a [routerLink]="['/informacoes/jogo-responsavel']">
+            <a [routerLink]="['/informacoes/politica-aml']" *ngIf="hasPoliticaAml">
+                {{'footer.politicaAml' | translate}}
+            </a>
+            <a [routerLink]="['/informacoes/jogo-responsavel']" *ngIf="hasJogoResponsavel">
                 {{'footer.jogoResponsavel' | translate}}
             </a>
-            <a [routerLink]="['/informacoes/termos-condicoes']">
+            <a [routerLink]="['/informacoes/termos-condicoes']" *ngIf="hasTermosCondicoes">
                 {{'footer.termosECondicoes' | translate}}
             </a>
         </div>

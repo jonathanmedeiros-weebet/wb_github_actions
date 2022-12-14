@@ -13,3 +13,14 @@
     padding: 20px 15px;
     margin: 0;
 }
+
+.btn {
+    width: 25px;
+    font-size: 22px;
+    color: var(--foreground-header);
+    margin: 5px;
+}
+
+.btn:hover {
+    color: var(--highlight);
+}

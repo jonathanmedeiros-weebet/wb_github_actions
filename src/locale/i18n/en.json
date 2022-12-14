@@ -317,6 +317,7 @@
         "regras": "Rules",
         "resultados": "Results",
         "politicaDePrivacidade": "Privacy Policy",
+        "politicaAml": "AML Policy",
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
         "todosOsDireitosReservados": "2022 © {{BANCA_NOME}}. All rights reserved."
@@ -325,6 +326,7 @@
         "quem-somos": "Who we are",
         "regras": "Rules",
         "politica-privacidade": "Privacy Policy",
+        "politica-aml": "AML Policy",
         "jogo-responsavel": "Responsible Gaming",
         "termos-condicoes": "Terms and conditions"
     },

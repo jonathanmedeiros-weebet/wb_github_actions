@@ -14,6 +14,7 @@ const routes: Routes = [
             { path: 'jogo-responsavel', component: InformacoesComponent, data: { pagina: 'jogo-responsavel' } },
             { path: 'termos-condicoes', component: InformacoesComponent, data: { pagina: 'termos-condicoes' } },
             { path: 'politica-privacidade', component: InformacoesComponent, data: { pagina: 'politica-privacidade' } },
+            { path: 'politica-aml', component: InformacoesComponent, data: { pagina: 'politica-aml' } },
         ]
     }
 ];
