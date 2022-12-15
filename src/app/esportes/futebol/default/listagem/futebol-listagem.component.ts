@@ -212,7 +212,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         this.widthOddsScroll = this.maxOddsSize + this.nomesJogoWidth;
-        if ((this.oddSize * this.qtdOddsPrincipais) > this.maxOddsSize) {
+        if ((this.oddSize * this.qtdOddsPrincipais) - 28 > this.maxOddsSize) {
                 this.enableScrollButtons = true;
         } else {
             this.enableScrollButtons = false;
