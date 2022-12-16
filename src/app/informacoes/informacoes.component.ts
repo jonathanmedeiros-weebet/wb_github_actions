@@ -7,7 +7,7 @@ import {MenuFooterService, PaginaService} from './../services';
 import {Pagina} from './../models';
 import {TranslateService} from '@ngx-translate/core';
 
-import {pdfMake} from 'pdfmake/build/pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {htmlToPdfmake} from 'html-to-pdfmake';
 
