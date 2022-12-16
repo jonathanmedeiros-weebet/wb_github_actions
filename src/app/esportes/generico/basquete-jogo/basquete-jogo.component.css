@@ -81,7 +81,8 @@
     justify-content: space-between;
     padding: 0 20px;
     height: 30px;
-    background-color: var(--header);
+    background-color: var(--game);
+    color: var(--foreground-game);
     margin-bottom: 2px;
 }
 
