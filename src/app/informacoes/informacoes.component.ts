@@ -9,9 +9,9 @@ import {TranslateService} from '@ngx-translate/core';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import {htmlToPdfmake} from 'html-to-pdfmake';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
 
 @Component({
     templateUrl: './informacoes.component.html',
