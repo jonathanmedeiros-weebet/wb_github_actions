@@ -113,6 +113,7 @@ nav::-webkit-scrollbar {
 
 .language-dropdown .flag-icon {
     font-size: 24px;
+    clip-path: circle();
 }
 
 .language-dropdown-menu {
