@@ -260,7 +260,8 @@
         "betbrasil.one": "gulp betbrasil.one",
         "gmfut.com": "gulp gmfut.com",
         "pointbet.bet": "gulp pointbet.bet",
-        "moneysports.wee.bet": "gulp moneysports.wee.bet"
+        "moneysports.wee.bet": "gulp moneysports.wee.bet",
+        "futmax.wee.bet": "gulp futmax.wee.bet"
     },
     "private": true,
     "dependencies": {
