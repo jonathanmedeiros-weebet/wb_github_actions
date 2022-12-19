@@ -25,7 +25,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     larguras = {
         '/esportes/live': 400,
-        '/esportes/futebol-copa/copa': 108,
         '/esportes/live/jogos': 0,
         '/esportes/futebol': 90,
         '/esportes/futsal': 81,
@@ -155,18 +154,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     atualizarSubmenu() {
         this.submenu = [
-            {
-                name: this.translate.instant('submenu.copa22'),
-                link: '/esportes/futebol-copa/copa',
-                icon_class: 'wbicon icon-ao-vivo',
-                svgIcon: true,
-                svgSrc: 'https://cdn.wee.bet/img/world-cup.svg',
-                svgHover: false,
-                routeActive: '/esportes/futebol-copa/copa?campeonato=01003ae97464082295b1ee23564be8bb',
-                queryParams: {campeonato: '01003ae97464082295b1ee23564be8bb'},
-                category: 'esporte',
-                active: true
-            },
             {
                 name: this.translate.instant('submenu.aoVivo'),
                 link: '/esportes/live',
