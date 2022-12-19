@@ -8,7 +8,7 @@
         <div>
             <p><b>Qtd. Apostas:</b> {{apostas.length}}</p>
             <p><b>Tot. Apostado:</b> {{totais.valor| currency}}</p>
-            <p><b>Tot. Prêmios :</b> {{totais.premio| currency}}</p>
+            <p><b>Tot. {{'geral.premios' | translate}}  :</b> {{totais.premio| currency}}</p>
         </div>
         <ng-container *ngIf="smallScreen; else desktopTable">
             <table class="table">
@@ -16,9 +16,9 @@
                     <tr>
                         <th class="resultado"></th>
                         <th>Cód.</th>
-                        <th>Valor</th>
-                        <th>Comissão</th>
-                        <th>Prêmio</th>
+                        <th>{{'geral.valor' | translate}}</th>
+                        <th>{{'geral.comissao' | translate}}</th>
+                        <th>{{'geral.premio' | translate}} </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,13 +54,13 @@
                 <thead>
                     <tr>
                         <th class="resultado"></th>
-                        <th>Código</th>
-                        <th>Horário</th>
-                        <th>Apostador</th>
-                        <th>Valor</th>
-                        <th>Comissão</th>
-                        <th>Prêmio</th>
-                        <th>Pagamento</th>
+                        <th>{{'geral.codigo' | translate}}</th>
+                        <th>{{'geral.horario' | translate}}</th>
+                        <th>{{'geral.apostador' | translate}} </th>
+                        <th>{{'geral.valor' | translate}}</th>
+                        <th>{{'geral.comissao' | translate}}</th>
+                        <th>{{'geral.premio' | translate}} </th>
+                        <th>{{'geral.pagamento' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>

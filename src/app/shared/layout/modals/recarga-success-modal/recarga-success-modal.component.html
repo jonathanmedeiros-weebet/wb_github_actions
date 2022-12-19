@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Recarga</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{'geral.recarga' | translate}}</h4>
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
@@ -13,8 +13,8 @@
         </div>
 
         <ul>
-            <li><b> Cartão:</b> {{recarga.cartao_aposta}}</li>
-            <li><b>Cambista:</b> {{recarga.passador}}</li>
+            <li><b> {{'cartoes.cartao' | translate}}:</b> {{recarga.cartao_aposta}}</li>
+            <li><b>{{'geral.cambista' | translate}}:</b> {{recarga.passador}}</li>
             <li><b>Valor:</b> {{recarga.valor| currency}}</li>
             <li><b>Data/Hora:</b> {{recarga.data | moment:'DD/MM/YYYY HH:mm'}}</li>
             <li class="autenticacao">{{recarga.autenticacao}}</li>
@@ -22,13 +22,13 @@
     </div>
     <div class="buttons">
         <button type="button" class="btn btn-custom2 w-130" (click)="activeModal.close('Close click')">
-            Fechar
+            {{'modais.fechar' | translate}}
         </button>
         <button type="button" class="btn btn-custom w-130" (click)="printTicket()">
-            Imprimir
+            {{'geral.imprimir' | translate}}
         </button>
         <button *ngIf="appMobile" type="button" class="btn btn-custom w-130" (click)="shareTicket()">
-            Compartilhar
+            {{'geral.compartilhar' | translate}}
         </button>
     </div>
 </div>

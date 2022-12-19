@@ -9,6 +9,7 @@ import {NgbActiveModal, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { JogoService } from '../../services';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
         GenericoRoutingModule,
         NgbNavModule,
         NgbCarouselModule,
-        Ng2SearchPipeModule
+        Ng2SearchPipeModule,
+        TranslateModule
     ],
     declarations: [
         GenericoWrapperComponent,

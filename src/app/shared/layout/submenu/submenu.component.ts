@@ -2,6 +2,7 @@ import {Location} from '@angular/common';
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-submenu',
@@ -54,7 +55,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
         public location: Location,
-        private router: Router
+        private router: Router,
+        private translate: TranslateService
     ) {
         router.events.subscribe(val => {
             this.paddingMenu = this.larguras[this.router.url.split('?')[0]] ?? 0;
@@ -72,159 +74,23 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
             this.isMobile = true;
         }
 
-        this.submenu = [
-            {
-                name: 'Copa 2022',
-                link: '/esportes/futebol-copa/copa',
-                icon_class: 'wbicon icon-ao-vivo',
-                svgIcon: true,
-                svgSrc: 'https://cdn.wee.bet/img/world-cup.svg',
-                svgHover: false,
-                routeActive: '/esportes/futebol-copa/copa?campeonato=01003ae97464082295b1ee23564be8bb',
-                queryParams: {campeonato: '01003ae97464082295b1ee23564be8bb'},
-                category: 'esporte',
-                active: true
-            },
-            {
-                name: 'Ao-Vivo',
-                link: '/esportes/live',
-                icon_class: 'wbicon icon-ao-vivo',
-                category: 'esporte',
-                active: !this.isMobile ?? this.paramsService.getOpcoes().aovivo
-            },
-            {
-                name: 'Futebol',
-                link: '/esportes/futebol',
-                icon_class: 'wbicon icon-futebol',
-                category: 'esporte',
-                active: true
-            },
-            {
-                name: 'Futsal',
-                link: '/esportes/futsal',
-                icon_class: 'wbicon icon-futsal',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().futsal
-            },
-            {
-                name: 'Vôlei',
-                link: '/esportes/volei',
-                icon_class: 'wbicon icon-volei',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().volei
-            },
-            {
-                name: 'Basquete',
-                link: '/esportes/basquete',
-                icon_class: 'wbicon icon-basquete',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().basquete
-            },
-            {
-                name: 'Combate',
-                link: '/esportes/combate',
-                icon_class: 'wbicon icon-luta',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().combate
-            },
-            {
-                name: 'Hóquei no Gelo',
-                link: '/esportes/hoquei-gelo',
-                icon_class: 'wbicon icon-hoquei-no-gelo',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().hoquei_gelo
-            },
-            {
-                name: 'Futebol Americano',
-                link: '/esportes/futebol-americano',
-                icon_class: 'wbicon icon-futebol-americano',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().futebol_americano
-            },
-            {
-                name: 'E-Sports',
-                link: '/esportes/esports',
-                icon_class: 'wbicon icon-e-sports',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().esports
-            },
-            {
-                name: 'Tênis',
-                link: '/esportes/tenis',
-                icon_class: 'wbicon icon-tenis',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().tenis
-            },
-            {
-                name: 'Quininha',
-                link: '/loterias/quininha',
-                icon_class: 'fa-solid fa-clover',
-                category: 'loteria',
-                active: this.paramsService.quininhaAtiva()
-            },
-            {
-                name: 'Seninha',
-                link: '/loterias/seninha',
-                icon_class: 'fa-solid fa-clover',
-                category: 'loteria',
-                active: this.paramsService.seninhaAtiva()
-            },
-            {
-                name: 'Todos',
-                link: '/casino/c/wall/todos',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                name: 'Slot',
-                link: '/casino/c/wall/slot',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                name: 'Raspadinha',
-                link: '/casino/c/wall/raspadinha',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                name: 'Roleta',
-                link: '/casino/c/wall/roleta',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                name: 'Mesa',
-                link: '/casino/c/wall/mesa',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                name: 'Cassino Ao Vivo',
-                link: '/casino/c/live',
-                icon_class: 'fa-solid fa-dice',
-                svgIcon: false,
-                svgSrc: '',
-                queryParams: '',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            }
-        ];
+        this.atualizarSubmenu();
 
-        this.submenuItems = this.submenu.filter((item) => {
-            return item.category === this.category && item.active;
+        this.translate.onLangChange.subscribe(() => {
+            this.atualizarSubmenu();
+            this.cd.detectChanges();
+            this.checkScrollWidth();
+            this.computeResizeChanges();
         });
     }
 
     ngAfterViewInit() {
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
-
+        this.checkScrollWidth();
         this.checkScrollButtons();
+    }
+
+    checkScrollWidth() {
+        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
     }
 
     computeResizeChanges() {
@@ -285,5 +151,155 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     changeSvgHover(index) {
         this.submenuItems[index].svgHover = !this.submenuItems[index].svgHover;
+    }
+
+    atualizarSubmenu() {
+        this.submenu = [
+            {
+                name: this.translate.instant('submenu.copa22'),
+                link: '/esportes/futebol-copa/copa',
+                icon_class: 'wbicon icon-ao-vivo',
+                svgIcon: true,
+                svgSrc: 'https://cdn.wee.bet/img/world-cup.svg',
+                svgHover: false,
+                routeActive: '/esportes/futebol-copa/copa?campeonato=01003ae97464082295b1ee23564be8bb',
+                queryParams: {campeonato: '01003ae97464082295b1ee23564be8bb'},
+                category: 'esporte',
+                active: true
+            },
+            {
+                name: this.translate.instant('submenu.aoVivo'),
+                link: '/esportes/live',
+                icon_class: 'wbicon icon-ao-vivo',
+                category: 'esporte',
+                active: !this.isMobile ?? this.paramsService.getOpcoes().aovivo
+            },
+            {
+                name: this.translate.instant('submenu.futebol'),
+                link: '/esportes/futebol',
+                icon_class: 'wbicon icon-futebol',
+                category: 'esporte',
+                active: true
+            },
+            {
+                name: this.translate.instant('submenu.futsal'),
+                link: '/esportes/futsal',
+                icon_class: 'wbicon icon-futsal',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().futsal
+            },
+            {
+                name: this.translate.instant('submenu.volei'),
+                link: '/esportes/volei',
+                icon_class: 'wbicon icon-volei',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().volei
+            },
+            {
+                name: this.translate.instant('submenu.basquete'),
+                link: '/esportes/basquete',
+                icon_class: 'wbicon icon-basquete',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().basquete
+            },
+            {
+                name: this.translate.instant('submenu.combate'),
+                link: '/esportes/combate',
+                icon_class: 'wbicon icon-luta',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().combate
+            },
+            {
+                name: this.translate.instant('submenu.hoquei'),
+                link: '/esportes/hoquei-gelo',
+                icon_class: 'wbicon icon-hoquei-no-gelo',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().hoquei_gelo
+            },
+            {
+                name: this.translate.instant('submenu.futebolAmericano'),
+                link: '/esportes/futebol-americano',
+                icon_class: 'wbicon icon-futebol-americano',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().futebol_americano
+            },
+            {
+                name: this.translate.instant('submenu.esports'),
+                link: '/esportes/esports',
+                icon_class: 'wbicon icon-e-sports',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().esports
+            },
+            {
+                name: this.translate.instant('submenu.tenis'),
+                link: '/esportes/tenis',
+                icon_class: 'wbicon icon-tenis',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().tenis
+            },
+            {
+                name: this.translate.instant('submenu.quininha'),
+                link: '/loterias/quininha',
+                icon_class: 'fa-solid fa-clover',
+                category: 'loteria',
+                active: this.paramsService.quininhaAtiva()
+            },
+            {
+                name: this.translate.instant('submenu.seninha'),
+                link: '/loterias/seninha',
+                icon_class: 'fa-solid fa-clover',
+                category: 'loteria',
+                active: this.paramsService.seninhaAtiva()
+            },
+            {
+                name: this.translate.instant('submenu.todos'),
+                link: '/casino/c/wall/todos',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: this.translate.instant('submenu.slot'),
+                link: '/casino/c/wall/slot',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: this.translate.instant('submenu.raspadinha'),
+                link: '/casino/c/wall/raspadinha',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: this.translate.instant('submenu.roleta'),
+                link: '/casino/c/wall/roleta',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: this.translate.instant('submenu.mesa'),
+                link: '/casino/c/wall/mesa',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                name: this.translate.instant('submenu.cassinoAoVivo'),
+                link: '/casino/c/live',
+                icon_class: 'fa-solid fa-dice',
+                svgIcon: false,
+                svgSrc: '',
+                queryParams: '',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            }
+        ];
+
+        this.submenuItems = this.submenu.filter((item) => {
+            return item.category === this.category && item.active;
+        });
     }
 }

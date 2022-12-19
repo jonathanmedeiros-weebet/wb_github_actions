@@ -41,20 +41,20 @@
         </div>
         <div class="informacoes">
             <p>
-                Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                {{'geral.horario' | translate}}: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
             </p>
             <p>
                 Total de palpites: {{preAposta.itens.length}}
             </p>
             <div class="form-group">
-                <label for="">Apostador</label>
+                <label >{{'geral.apostador' | translate}} </label>
                 <input type="text" class="form-control inverted-out" formControlName="apostador"
                     [ngClass]="applyCssInputError('apostador')">
-                <app-error-msg [control]="form.get('apostador')" label="Apostador">
+                <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} ">
                 </app-error-msg>
             </div>
         </div>
     </div>
 
-    <button type="submit" [disabled]="disabled" class="btn btn-custom">Validar</button>
+    <button type="submit" [disabled]="disabled" class="btn btn-custom">{{'geral.validar' | translate}}</button>
 </form>

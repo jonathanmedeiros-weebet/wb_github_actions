@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Detalhes do Cartão</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{'cartoes.detalhesDoCartao' | translate}}</h4>
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
@@ -7,39 +7,39 @@
 <div class="modal-body">
     <div class="cartao-aposta">
         <div class="box-chave">
-            <label for="">Chave cartão</label>
-            <span>Cartão {{cartao.chave}}</span>
+            <label >{{'cartoes.chaveCartao' | translate}}</label>
+            <span>{{'cartoes.cartao' | translate}} {{cartao.chave}}</span>
         </div>
         <div>
             <div>
                 <div class="mb-4">
-                    <b>Apostador: </b>
+                    <b>{{'geral.apostador' | translate}} : </b>
                     <span>{{cartao.apostador}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Recargas: </b>
+                    <b>{{'geral.recargas' | translate}}s: </b>
                     <span>{{cartao.total_creditos | currency}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Prêmios: </b>
+                    <b>{{'geral.premios' | translate}} : </b>
                     <span>{{cartao.premios | currency}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Criação: </b>
+                    <b>{{'geral.criacao' | translate}}: </b>
                     <span>{{cartao.data_registro | moment: 'DD/MM/YYYYY HH:mm'}}</span>
                 </div>
             </div>
             <div>
                 <div class="mb-4">
-                    <b>Cambista: </b>
+                    <b>{{'geral.cambista' | translate}}: </b>
                     <span>{{cartao.passador?.nome}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Saques: </b>
+                    <b>{{'geral.saques' | translate}} : </b>
                     <span>{{cartao.total_saques | currency}}</span>
                 </div>
                 <div class="mb-4">
-                    <b>Saldo atual: </b>
+                    <b>{{'geral.saldoAtual' | translate}}: </b>
                     <span>{{cartao.saldo | currency}}</span>
                 </div>
             </div>
@@ -50,12 +50,12 @@
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
-                    <th>Código</th>
+                    <th>{{'geral.codigo' | translate}}</th>
                     <th>Mod.</th>
-                    <th>Horário</th>
-                    <th>Valor</th>
-                    <th>Possível Retorno</th>
-                    <th>Resultado</th>
+                    <th>{{'geral.horario' | translate}}</th>
+                    <th>{{'geral.valor' | translate}}</th>
+                    <th>{{'geral.possivelRetorno' | translate}}</th>
+                    <th>{{'geral.resultado' | translate}}</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let aposta of cartao.apostas" (click)="abrirBilhete(aposta.id)">
@@ -79,10 +79,10 @@
     </div>
     <div class="actions">
         <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
-            Fechar
+            {{'modais.fechar' | translate}}
         </button>
         <button type="button" class="btn btn-custom" (click)="print()">
-            Imprimir
+            {{'geral.imprimir' | translate}}
         </button>
     </div>
 </div>

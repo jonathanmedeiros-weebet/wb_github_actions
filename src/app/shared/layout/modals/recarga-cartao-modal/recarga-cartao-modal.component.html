@@ -7,7 +7,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="modal-body">
         <div class="form-group group-valor">
-            <label>Informe o valor</label>
+            <label>{{'saques.informeOValor' | translate}}</label>
             <input type="text" prefix="R$ " mask="dot_separator.2" class="input-valor" formControlName="valor"
                 placeholder="RS 0,00" [ngClass]="applyCssInputError('valor')">
             <app-error-msg [control]="form.get('valor')"></app-error-msg>
@@ -22,12 +22,12 @@
 
         <div class="actions">
             <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
-                Cancelar
+                {{'geral.cancelar' | translate}}
             </button>
-            <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">Recarregar</button>
+            <button type="submit" class="btn btn-custom" *ngIf="!disabled; else btnProcessando">{{'geral.recarregar' | translate}}</button>
             <ng-template #btnProcessando>
                 <button disabled class="btn btn-custom">
-                    Processando...
+                    {{'geral.processando' | translate}}...
                     <i class="fa fa-spinner fa-spin"></i>
                 </button>
             </ng-template>

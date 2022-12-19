@@ -17,7 +17,7 @@
                 <label class="label">Informe o código de verificação enviado para seu e-mail.</label>
                 <code-input [isCodeHidden]="false" (codeChanged)="onCodeChanged($event)" (codeCompleted)="onCodeCompleted($event)"></code-input>
                 <input type="hidden" [(ngModel)]="codigo" formControlName="codigo" >
-                <app-error-msg [control]="form.get('codigo')" label="Código"></app-error-msg>
+                <app-error-msg [control]="form.get('codigo')" label="{{'geral.codigo' | translate}}"></app-error-msg>
             </div>
             <button type="submit" class="btn btn-custom btn-block">Enviar</button>
         </form>

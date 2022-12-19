@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GameCasino} from '../../shared/models/casino/game-casino';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     isCliente;
     isLoggedIn;
     gameType: string;
+    tituloPagina;
     private sub: any;
     modalRef;
     isHome = false;
@@ -27,6 +29,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     isHomeCassino = true;
     gameList: GameCasino[];
     gameAllList: GameCasino[];
+
+    gameTitle;
 
     gamesCassino: GameCasino[];
     gamesDestaque: GameCasino[];
@@ -46,7 +50,8 @@ export class WallComponent implements OnInit, AfterViewInit {
         private sideBarService: SidebarService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private translate: TranslateService
     ) {
     }
 
@@ -78,29 +83,35 @@ export class WallComponent implements OnInit, AfterViewInit {
                             this.gameList = games.filter(function (game) {
                                 return game.gameTypeID === 'vs';
                             });
+                            this.gameTitle = this.translate.instant('cassino.slot');
                             break;
                         case 'roleta':
                             this.gameList = games.filter(function (game) {
                                 return game.gameTypeID === 'rl';
                             });
+                            this.gameTitle = this.translate.instant('cassino.roleta');
                             break;
                         case 'raspadinha':
                             this.gameList = games.filter(function (game) {
                                 return game.gameTypeID === 'sc';
                             });
+                            this.gameTitle = this.translate.instant('cassino.raspadinha');
                             break;
                         case 'mesa':
                             this.gameList = games.filter(function (game) {
                                 return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
                             });
+                            this.gameTitle = this.translate.instant('cassino.mesa');
                             break;
                         case 'destaques':
                             this.gameList = response.destaques;
+                            this.gameTitle = this.translate.instant('cassino.destaques');
                             break;
                         case 'todos':
                             this.gameList = games.filter(function (game) {
                                 return game.dataType !== 'VSB';
                             });
+                            this.gameTitle = this.translate.instant('geral.todos');
                             break;
                     }
                 }
@@ -169,20 +180,22 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     abrirModalLogin() {
-        this.modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true,
-            }
-        );
+        let options = {};
 
-        this.modalRef.result
-            .then(
-                result => {
-                },
-                reason => {
-                }
-            );
+        if (this.isMobile) {
+            options = {
+                windowClass: 'modal-fullscreen',
+            };
+        } else {
+            options = {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+            };
+        }
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 }

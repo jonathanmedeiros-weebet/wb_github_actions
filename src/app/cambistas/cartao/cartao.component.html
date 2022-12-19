@@ -5,13 +5,13 @@
 
     <div class="internal-container-out">
         <div class="content-header">
-            <h2>Cartões de aposta</h2>
+            <h2>{{'cartoes.cartoesDeAposta' | translate}}</h2>
         </div>
 
         <div class="content-body">
             <form (submit)="handleFiltrar()">
                 <div class="filtros">
-                    <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="Apostador" [ngModelOptions]="{standalone: true}">
+                    <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="{{'geral.apostador' | translate}} " [ngModelOptions]="{standalone: true}">
                     <input
                         name="datepicker"
                         class="dp-hidden"
@@ -47,19 +47,19 @@
                         >
                     </div>
 
-                    <button class="btn btn-custom" type="submit">Filtrar</button>
+                    <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
                 </div>
             </form>
 
             <ul *ngIf="isMobile" class="listagem-cartao">
                 <li *ngFor="let cartao of cartoes">
                     <span class="chave">{{ cartao.chave }}</span>
-                    <span><label>Apostador: </label> {{ cartao.apostador }}</span>
-                    <span><label>Data: </label> {{ cartao.data_registro }}</span>
-                    <span><label>Créditos: </label> {{ cartao.total_creditos | currency }}</span>
-                    <span><label>Prêmio: </label> {{ cartao.premios | currency }}</span>
-                    <span><label>Saques: </label> {{ cartao.total_saques | currency }}</span>
-                    <span><label>Saldo: </label> {{ cartao.saldo | currency }}</span>
+                    <span><label>{{'geral.apostador' | translate}} : </label> {{ cartao.apostador }}</span>
+                    <span><label>{{'geral.data' | translate}}: </label> {{ cartao.data_registro }}</span>
+                    <span><label>{{'geral.creditos' | translate}} : </label> {{ cartao.total_creditos | currency }}</span>
+                    <span><label>{{'geral.premio' | translate}} : </label> {{ cartao.premios | currency }}</span>
+                    <span><label>{{'geral.saques' | translate}} : </label> {{ cartao.total_saques | currency }}</span>
+                    <span><label>{{'geral.saldo' | translate}} : </label> {{ cartao.saldo | currency }}</span>
                 </li>
             </ul>
 
@@ -67,17 +67,17 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Chave</th>
-                            <th>Data</th>
-                            <th>Apostador</th>
-                            <th>Recarga</th>
-                            <th>Prêmio</th>
-                            <th>Saques</th>
-                            <th>Saldo</th>
+                            <th>{{'bilhete.chave' | translate}}</th>
+                            <th>{{'geral.data' | translate}}</th>
+                            <th>{{'geral.apostador' | translate}} </th>
+                            <th>{{'geral.recarga' | translate}}</th>
+                            <th>{{'geral.premio' | translate}} </th>
+                            <th>{{'geral.saques' | translate}} </th>
+                            <th>{{'geral.saldo' | translate}}</th>
                         </tr>
                     </thead>
                     <tr *ngIf="loading">
-                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> Carregando</td>
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> {{'geral.carregando' | translate}}</td>
                     </tr>
                     <tbody *ngIf="!loading">
                         <tr *ngFor="let cartao of cartoes">

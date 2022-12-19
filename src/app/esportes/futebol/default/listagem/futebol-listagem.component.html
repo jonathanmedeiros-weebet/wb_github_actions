@@ -8,7 +8,7 @@
                 <i class="fa fa-search"></i>
                 <input type="text" [(ngModel)]="term"
                        class="form-control inverted-out"
-                       placeholder="Pesquisar"
+                       placeholder="{{'geral.pesquisar' | translate}}"
                        (focusin)="focusPesquisa(true)"
                        (focusout)="focusPesquisa(false)"
                 >
@@ -16,11 +16,11 @@
             </div>
 
             <div class="tabs">
-                <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">Hoje</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 0" [ngClass]="{'active': tabSelected == 'amanha', 'inactive': tabSelected != 'amanha'}" (click)="mudarData('amanha')">Amanhã</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 1" [ngClass]="{'active': tabSelected == 'doisdias', 'inactive': tabSelected != 'doisdias'}" (click)="mudarData('+2')">{{ diaHojeMaisDois.format(mobileScreen ? 'ddd' : 'dddd') | titlecase }}</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 2" [ngClass]="{'active': tabSelected == 'tresdias', 'inactive': tabSelected != 'tresdias'}" (click)="mudarData('+3')">{{ diaHojeMaisTres.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
-                <a class="tab" *ngIf="limiteDiasTabela > 3" [ngClass]="{'active': tabSelected == 'quatrodias', 'inactive': tabSelected != 'quatrodias'}" (click)="mudarData('+4')">{{ diaHojeMaisQuatro.format(mobileScreen ? 'ddd' : 'dddd') | titlecase  }}</a>
+                <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">{{'dias.hoje' | translate}}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 0" [ngClass]="{'active': tabSelected == 'amanha', 'inactive': tabSelected != 'amanha'}" (click)="mudarData('amanha')">{{'dias.amanha' | translate}}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 1" [ngClass]="{'active': tabSelected == 'doisdias', 'inactive': tabSelected != 'doisdias'}" (click)="mudarData('+2')">{{ diaHojeMaisDoisStr | titlecase }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 2" [ngClass]="{'active': tabSelected == 'tresdias', 'inactive': tabSelected != 'tresdias'}" (click)="mudarData('+3')">{{ diaHojeMaisTresStr | titlecase  }}</a>
+                <a class="tab" *ngIf="limiteDiasTabela > 3" [ngClass]="{'active': tabSelected == 'quatrodias', 'inactive': tabSelected != 'quatrodias'}" (click)="mudarData('+4')">{{ diaHojeMaisQuatroStr | titlecase  }}</a>
             </div>
         </div>
 
@@ -28,10 +28,10 @@
 
         <div *ngIf="!showLoadingIndicator">
             <div class="sem-evento" *ngIf="campeonatos && !campeonatos.length">
-                Nenhum evento disponível!
+                {{'geral.nenhumEventoDisponivel' | translate}}!
                 <button *ngIf="exibirBtnProximaData()" type="button" (click)="proximaData()"
                         class="btn btn-custom btn-sm">
-                    Próxima Data
+                    {{'geral.proximaData' | translate}}
                 </button>
             </div>
 

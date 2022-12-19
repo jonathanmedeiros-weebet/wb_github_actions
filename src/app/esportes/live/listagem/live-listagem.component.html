@@ -5,7 +5,7 @@
 
         <div *ngIf="!showLoadingIndicator">
             <div class="sem-evento" *ngIf="!campeonatos.size || !temJogoAoVivo">
-                Nenhum evento ao vivo disponível no momento!
+                {{'geral.nenhumEventoAoVivoDisponivel' | translate}}
             </div>
 
             <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder; trackBy: trackById">
@@ -30,7 +30,7 @@
                             <div class="indentificacao">
                                 <div class="tempo-box">
                                     <div class="aovivo-label">
-                                        <i class="fa fa-circle blink_me"></i> AO VIVO
+                                        <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                     </div>
                                     <div class="tempo">
                                         {{jogo.value.info.minutos}}'

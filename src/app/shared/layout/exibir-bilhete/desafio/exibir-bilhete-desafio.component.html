@@ -65,7 +65,7 @@
                 VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency}}</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado; else possibilidadeGanho">
-                PRÊMIO: <span style="float:right">{{aposta.premio | currency}}</span>
+                {{'geral.premio' | translate | uppercase}}: <span style="float:right">{{aposta.premio | currency}}</span>
             </p>
             <ng-template #possibilidadeGanho>
                 <p class="ganho">

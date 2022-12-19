@@ -15,6 +15,7 @@ import { FinanceiroComponent } from './financeiro/financeiro.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CartaoComponent } from './cartao/cartao.component';
 import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -31,8 +32,9 @@ import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque
         CambistasRoutingModule,
         NgChartsModule,
         NgbModule,
-        NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
-        Ng2SearchPipeModule
+        NgxSkeletonLoaderModule.forRoot({loadingText: 'This item is actually loading...'}),
+        Ng2SearchPipeModule,
+        TranslateModule
     ],
     providers: [
         RelatorioService,

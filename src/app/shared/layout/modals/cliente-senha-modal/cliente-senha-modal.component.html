@@ -5,36 +5,36 @@
 
     <ng-container>
         <div class="content-header">
-            <h2>Alterar senha</h2>
+            <h2>{{'geral.alterarSenha' | translate}}</h2>
         </div>
         <div class="content-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="fields">
                     <div class="form-group input-md">
                         <input [type]="mostrarSenhaAtual ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
-                        <label for="nome">Senha Atual</label>
+                        <label for="nome">{{'senhas.senhaAtual' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarSenhaAtual ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaAtual = !mostrarSenhaAtual"></i>
                     </div>
 
                     <div class="form-group input-md">
                         <input [type]="mostrarSenhaNova ? 'text' : 'password'" placeholder=" " formControlName="senha_nova" class="form-control inverted-out">
-                        <label for="nome">Nova senha</label>
+                        <label for="nome">{{'senhas.novaSenha' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarSenhaNova ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaNova = !mostrarSenhaNova"></i>
                     </div>
 
                     <div class="form-group input-md">
                         <input [type]="mostrarSenhaConfirmacao ? 'text' : 'password'" placeholder=" " formControlName="senha_confirmacao" class="form-control inverted-out">
-                        <label for="nome">Confirmar nova senha</label>
+                        <label for="nome">{{'senhas.confirmarNovaSenha' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarSenhaConfirmacao ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaConfirmacao = !mostrarSenhaConfirmacao"></i>
                     </div>
                 </div>
 
                 <div class="buttons">
                     <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
-                        Cancelar
+                        {{'geral.cancelar' | translate}}
                     </button>
                     <button class="btn btn-custom w-150" type="submit">
-                        Atualizar
+                        {{'geral.atualizar' | translate}}
                     </button>
                 </div>
 

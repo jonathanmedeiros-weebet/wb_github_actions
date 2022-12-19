@@ -9,6 +9,7 @@ import { ResetarSenhaComponent } from './resetar-senha/resetar-senha.component';
 import { NgHcaptchaModule } from 'ng-hcaptcha';
 import { ValidarEmailComponent } from './validar-email/validar-email.component';
 import { ModuloClienteGuard } from '../services';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { ModuloClienteGuard } from '../services';
         NgHcaptchaModule.forRoot({
             siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
             languageCode: 'pt'
-        })
+        }),
+        TranslateModule
     ],
     declarations: [
         CadastroComponent,

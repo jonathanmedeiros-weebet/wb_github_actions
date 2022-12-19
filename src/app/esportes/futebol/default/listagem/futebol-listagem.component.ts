@@ -25,6 +25,9 @@ import {BilheteEsportivoService, HelperService, ParametrosLocaisService, Sidebar
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import * as moment from 'moment';
+import 'moment/min/locales';
+
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -78,6 +81,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     diaHojeMaisDois;
     diaHojeMaisTres;
     diaHojeMaisQuatro;
+    diaHojeMaisDoisStr;
+    diaHojeMaisTresStr;
+    diaHojeMaisQuatroStr;
 
     tabSelected;
 
@@ -95,7 +101,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private jogoService: JogoService,
-        private router: Router
+        private router: Router,
+        private translate: TranslateService
     ) {
     }
 
@@ -146,10 +153,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     ngOnInit() {
-        this.diaHojeMaisDois = moment().add(2, 'd');
-        this.diaHojeMaisTres = moment().add(3, 'd');
-        this.diaHojeMaisQuatro = moment().add(4, 'd');
-
         this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
@@ -159,6 +162,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+
+        this.atualizarDatasJogosFuturos(this.translate.currentLang);
+
+        this.translate.onLangChange.subscribe((res) => {
+            this.atualizarDatasJogosFuturos(res.lang);
+        });
 
         this.oddsPrincipais.forEach(oddPrincipal => {
             this.nomesCotacoes.push(this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'));
@@ -539,7 +548,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         const navigationExtras: NavigationExtras = {
-            queryParams: data ? { 'data': data } : {}
+            queryParams: data ? {'data': data} : {}
         };
         this.router.navigate(['/esportes/futebol'], navigationExtras);
     }
@@ -611,5 +620,26 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     imageError(event: Event) {
         (event.target as HTMLImageElement).src = '';
+    }
+
+    atualizarDatasJogosFuturos(lang = 'pt') {
+        switch (lang) {
+            case 'pt':
+                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                break;
+            case 'en':
+                moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
+                break;
+            default:
+                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+        }
+
+        this.diaHojeMaisDois = moment().add(2, 'd');
+        this.diaHojeMaisTres = moment().add(3, 'd');
+        this.diaHojeMaisQuatro = moment().add(4, 'd');
+
+        this.diaHojeMaisDoisStr = this.diaHojeMaisDois.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisTresStr = this.diaHojeMaisTres.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisQuatroStr = this.diaHojeMaisQuatro.format(this.mobileScreen ? 'ddd' : 'dddd');
     }
 }

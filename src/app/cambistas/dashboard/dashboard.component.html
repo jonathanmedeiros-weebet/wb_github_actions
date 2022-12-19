@@ -5,7 +5,7 @@
 
     <div class="internal-container-out">
         <div class="content-header">
-            <h2>Dashboard</h2>
+            <h2>{{'geral.dashboard' | translate}}</h2>
         </div>
         <div class="content-body">
             <div class="row margin-top-15 margin-bottom-30">
@@ -14,7 +14,7 @@
                         <div class="count">
                             <div class="count-value">
                                 <div class="value">{{ saldo | currency }}</div>
-                                <label for="">Saldo atual</label>
+                                <label >{{'geral.saldoAtual' | translate}}</label>
                             </div>
 
                             <i>
@@ -26,7 +26,7 @@
                         <div class="count">
                             <div class="count-value">
                                 <div class="value">{{ credito | currency }}</div>
-                                <label for="">Crédito atual</label>
+                                <label >{{'geral.creditoAtual' | translate}}</label>
                             </div>
 
                             <i>
@@ -39,7 +39,7 @@
                         <div class="count">
                             <div class="count-value">
                                 <div class="value">R$ 0,00</div>
-                                <label>Comissão</label>
+                                <label>{{'geral.comissao' | translate}}</label>
                             </div>
 
                             <i>
@@ -52,7 +52,7 @@
                         <div class="count">
                             <div class="count-value">
                                 <div class="value">R$ 0,00</div>
-                                <label>Saída</label>
+                                <label>{{'geral.saida' | translate}}</label>
                             </div>
 
                             <i>
@@ -70,10 +70,10 @@
                 <div class="col-12 col-md-8 col-graph">
                     <div class="card-dashboard" style="padding-bottom: {{ isMobile ? '130px' : '85px' }};">
                         <h3 class="right-options">
-                            Fluxo de Caixa
+                            {{'geral.fluxoDeCaixa' | translate}}
                             <select class="form-control inverted-out" (change)="handleFiltroFluxoCaixa($event)">
-                                <option value="semana-atual">Semana atual</option>
-                                <option value="semana-anterior">Semana passada</option>
+                                <option value="semana-atual">{{'dias.semanaAtual' | translate}}</option>
+                                <option value="semana-anterior">{{'dias.semanaPassada' | translate}}</option>
                             </select>
                         </h3>
                         <canvas baseChart
@@ -88,11 +88,11 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="card-dashboard apostas-realizadas">
-                        <h3>Quantidade de apostas realizadas</h3>
+                        <h3>{{'geral.quantidadeDeApostasRealizadas' | translate}}</h3>
 
                         <select class="form-control inverted-out" (change)="handleFiltroApostasRealizadas($event)">
-                            <option value="semana-atual">Semana atual</option>
-                            <option value="semana-anterior">Semana passada</option>
+                            <option value="semana-atual">{{'dias.semanaAtual' | translate}}</option>
+                            <option value="semana-anterior">{{'dias.semanaPassada' | translate}}</option>
                         </select>
 
                         <ul class="apostas">
@@ -113,8 +113,8 @@
                                         </svg>
                                     </i>
                                     <div class="info-texto">
-                                        <label>Esportes</label>
-                                        <span class="bets">{{ apostasRealizadasEsporte.quantidade }} apostas</span>
+                                        <label>{{'geral.esportes' | translate}}</label>
+                                        <span class="bets">{{ apostasRealizadasEsporte.quantidade }} {{'geral.apostas' | translate}}</span>
                                     </div>
                                  </div>
                                  <span class="valor-apostas">
@@ -129,8 +129,8 @@
                                         </svg>
                                     </i>
                                     <div class="info-texto">
-                                        <label>Acumuladão</label>
-                                        <span class="bets">{{ apostasRealizadasAcumuladao.quantidade }} apostas</span>
+                                        <label>{{'geral.acumuladao' | translate}}</label>
+                                        <span class="bets">{{ apostasRealizadasAcumuladao.quantidade }} {{'geral.apostas' | translate}}</span>
                                     </div>
                                  </div>
                                  <span class="valor-apostas">
@@ -145,8 +145,8 @@
                                         </svg>
                                     </i>
                                     <div class="info-texto">
-                                        <label>Desafio</label>
-                                        <span class="bets">{{ apostasRealizadasDesafio.quantidade }} apostas</span>
+                                        <label>{{'geral.desafio' | translate}}</label>
+                                        <span class="bets">{{ apostasRealizadasDesafio.quantidade }} {{'geral.apostas' | translate}}</span>
                                     </div>
                                  </div>
                                  <span class="valor-apostas">
@@ -155,7 +155,7 @@
                             </li>
                         </ul>
 
-                        <a class="mouse-pointer" (click)="abrirCambistaApostas()">Mais Informacões</a>
+                        <a class="mouse-pointer" (click)="abrirCambistaApostas()">{{'geral.maisInformacoes' | translate}}</a>
                     </div>
                 </div>
             </div>

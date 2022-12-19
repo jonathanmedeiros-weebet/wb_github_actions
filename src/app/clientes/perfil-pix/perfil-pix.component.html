@@ -3,27 +3,26 @@
 
     <ng-container *ngIf="!showLoading">
         <div class="content-header">
-            <h2>PIX</h2>
+            <h2>{{'geral.pix' | translate}}</h2>
         </div>
         <div class="content-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <div class="col-md-2">
-                        <label class="label">Chave PIX</label>
+                        <label class="label">{{'geral.chavePix' | translate}}</label>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <input type="text" formControlName="chave_pix" class="form-control inverted-out"
-                                placeholder="CPF, E-mail, Telefone ou Aleatória">
+                                placeholder="{{'saques.cpfEmailTelefoneAleatoria' | translate}}">
                             <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
-                            <small>Obs. Só será realizado saques em chaves pix pertencentes ao titular da
-                                conta.</small>
+                            <small>{{'saques.alertaTitularChave' | translate}}</small>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <label class="label">Senha Atual</label>
+                        <label class="label">{{'senhas.senhaAtual' | translate}}</label>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
@@ -35,10 +34,10 @@
                 </div>
                 <div class="buttons">
                     <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
-                        Cancelar
+                        {{'geral.cancelar' | translate}}
                     </button>
                     <button class="btn btn-custom w-150" type="submit">
-                        Atualizar
+                        {{'geral.atualizar' | translate}}
                     </button>
                 </div>
             </form>

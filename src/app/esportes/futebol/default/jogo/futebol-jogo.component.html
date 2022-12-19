@@ -52,7 +52,7 @@
             <ul ngbNav #nav="ngbNav" class="nav-tipos">
                 <li ngbNavItem>
                     <a ngbNavLink>
-                        <span class="large_screen">Tempo Completo</span>
+                        <span class="large_screen">{{'jogos.tempoCompleto' | translate}}</span>
                         <span class="small_screen">90</span>
                     </a>
                     <ng-template ngbNavContent>
@@ -150,7 +150,7 @@
                 </li>
                 <li ngbNavItem>
                     <a ngbNavLink>
-                        <span class="large_screen">Primeiro Tempo</span>
+                        <span class="large_screen">{{'jogos.primeiroTempo' | translate}}</span>
                         <span class="small_screen">1T</span>
                     </a>
                     <ng-template ngbNavContent>
@@ -246,7 +246,7 @@
                 </li>
                 <li ngbNavItem>
                     <a ngbNavLink>
-                        <span class="large_screen">Segundo Tempo</span>
+                        <span class="large_screen">{{'jogos.segundoTempo' | translate}}</span>
                         <span class="small_screen">2T</span>
                     </a>
                     <ng-template ngbNavContent>
@@ -341,25 +341,25 @@
                     </ng-template>
                 </li>
                 <li ngbNavItem>
-                    <a ngbNavLink>Jogadores</a>
+                    <a ngbNavLink>{{'jogos.jogadores' | translate}}</a>
                     <ng-template ngbNavContent>
                         <div class="div-vazio" *ngIf="!objectKeys(mercadosPorJogadores).length">
-                            Sem Cotações
+                            {{'jogos.semCotacoes' | translate}}
                         </div>
                         <div class="tipo-apostas-container" [ngStyle]="{'height.px': altura}"
                              *ngIf="objectKeys(mercadosPorJogadores).length">
                             <div class="odds-jogador-coluna">
                                 <div class="tipo-aposta">
                                     <div class="header-tipo-aposta" (click)="marcadores = !marcadores" [ngClass]="{'collapsed' : marcadores}">
-                                        Marcadores de Gols
+                                        {{'jogos.marcadoresDeGols' | translate}}
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="odds-tipo-aposta" *ngIf="marcadores">
                                         <div class="odds">
                                             <div class="col-3"></div>
-                                            <div class="col-3">Marca 1º Gol</div>
-                                            <div class="col-3">Marca Último Gol</div>
-                                            <div class="col-3">Marca Gol na Partida</div>
+                                            <div class="col-3">{{'jogos.marcaPrimeiroGol' | translate}}</div>
+                                            <div class="col-3">{{'jogos.marcarUltimoGol' | translate}}</div>
+                                            <div class="col-3">{{'jogos.marcaGolNaPartida' | translate}}</div>
                                         </div>
                                         <div *ngFor="let jogador of mercadosPorJogadores">
                                             <div class="odds"
@@ -477,15 +477,15 @@
 
                                 <div class="tipo-aposta">
                                     <div class="header-tipo-aposta" (click)="cartoes = !cartoes" [ngClass]="{'collapsed' : cartoes}">
-                                        Cartões
+                                        {{'jogos.cartoes' | translate}}
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="odds-tipo-aposta" *ngIf="cartoes">
                                         <div class="odds">
                                             <div class="col-3"></div>
-                                            <div class="col-3">1º Cartão</div>
-                                            <div class="col-3">Recebe Cartão</div>
-                                            <div class="col-3">Será Expulso</div>
+                                            <div class="col-3">1º {{'cartoes.cartao' | translate}}</div>
+                                            <div class="col-3">{{'jogos.recebeCartao' | translate}}</div>
+                                            <div class="col-3">{{'jogos.seraExpulso' | translate}}</div>
                                         </div>
                                         <div *ngFor="let jogador of mercadosPorJogadores">
                                             <div class="odds"
@@ -548,14 +548,14 @@
 
                                 <div class="tipo-aposta">
                                     <div class="header-tipo-aposta" (click)="golsCasa = !golsCasa" [ngClass]="{'collapsed' : golsCasa}">
-                                        Gols Casa - {{jogo.time_a_nome}}
+                                        {{'jogos.golsCasa' | translate:{'timeNome': jogo.time_a_nome} }}
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="odds-tipo-aposta" *ngIf="golsCasa">
                                         <div class="odds">
                                             <div class="col-6"></div>
-                                            <div class="col-3">1º Gol Casa</div>
-                                            <div class="col-3">Último Gol Casa</div>
+                                            <div class="col-3">{{'jogos.primeiroGolCasa' | translate}}</div>
+                                            <div class="col-3">{{'jogos.ultimoGolCasa' | translate}}</div>
                                         </div>
                                         <div *ngFor="let jogador of mercadosPorJogadores">
                                             <div class="odds"
@@ -604,14 +604,14 @@
 
                                 <div class="tipo-aposta">
                                     <div class="header-tipo-aposta" (click)="golsFora = !golsFora" [ngClass]="{'collapsed' : golsFora}">
-                                        Gols Fora - {{jogo.time_b_nome}}
+                                        {{'jogos.golsFora' | translate:{'timeNome': jogo.time_b_nome} }}
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="odds-tipo-aposta" *ngIf="golsFora">
                                         <div class="odds">
                                             <div class="col-6"></div>
-                                            <div class="col-3">1º Gol Fora</div>
-                                            <div class="col-3">Último Gol Fora</div>
+                                            <div class="col-3">{{'jogos.primeiroGolFora' | translate}}</div>
+                                            <div class="col-3">{{'jogos.ultimoGolFora' | translate}}</div>
                                         </div>
                                         <div *ngFor="let jogador of mercadosPorJogadores">
                                             <div class="odds"

@@ -28,6 +28,7 @@
                         "polyfills": "src/polyfills.ts",
                         "assets": [
                             "src/assets",
+                            "src/locale",
                             "src/favicon.ico",
                             "src/param",
                             "src/bilhete",
@@ -104,7 +105,8 @@
                         "karmaConfig": "karma.conf.js",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/locale"
                         ],
                         "styles": [
                             "src/styles.css"

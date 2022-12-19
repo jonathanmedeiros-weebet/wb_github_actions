@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Consultar Cartão</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{'geral.consultarCartao' | translate}}</h4>
     <a class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
@@ -17,7 +17,7 @@
                 [ngClass]="applyCssInputError('pin')">
             <app-error-msg [control]="form.get('pin')"></app-error-msg>
         </div>
-        <button type="submit" class="btn btn-custom btn-block">Pesquisar</button>
+        <button type="submit" class="btn btn-custom btn-block">{{'geral.pesquisar' | translate}}</button>
     </form>
 
     <div class="resultado-pesquisa" *ngIf="cartao">
@@ -27,24 +27,24 @@
             <img src="assets/images/background-cartao.svg" alt="W" class="background-cartao"> -->
 
             <div class="data">{{ cartao.data_registro }}</div>
-            <div class="apostador">Apostador: {{ cartao.apostador }}</div>
+            <div class="apostador">{{'geral.apostador' | translate}} : {{ cartao.apostador }}</div>
             <div class="chave">Chave: {{ cartao.chave }}</div>
 
             <div class="valores">
                 <div class="item">
-                    <label>Recarga</label>
+                    <label>{{'geral.recarga' | translate}}</label>
                     <span>{{ cartao.total_creditos | currency }}</span>
                 </div>
                 <div class="item">
-                    <label>Bônus</label>
+                    <label>{{'geral.bonus' | translate}}</label>
                     <span>{{ cartao.premios | currency }}</span>
                 </div>
                 <div class="item">
-                    <label>Saques</label>
+                    <label>{{'geral.saques' | translate}} </label>
                     <span>{{ cartao.total_saques | currency }}</span>
                 </div>
                 <div class="item">
-                    <label>Saldo</label>
+                    <label>{{'geral.saldo' | translate}}</label>
                     <span>{{ cartao.saldo | currency }}</span>
                 </div>
             </div>
