@@ -43,7 +43,7 @@
                         </div>
                         <ng-container *ngIf="isLoggedIn && isCliente">
                             <div class="game-tile-buttons">
-                                <a [routerLink]="['/casino/play/REAL',room.tableId]" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
+                                <a [routerLink]="['/casino/' + blink + '/play/REAL',room.tableId,'pragmatic']" class="btn btn-xs game-button-play">Jogar</a>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="!isLoggedIn">

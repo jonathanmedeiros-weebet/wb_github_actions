@@ -59,7 +59,12 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.blink = this.router.url.split('/')[2];
 
         this.casinoApi.getGamesList().subscribe(response => {
-            const games = response.gameList;
+            this.gamesCassino = response.gameList;
+            this.gamesDestaque = response.destaques;
+            this.gamesSlot = this.filterSlot(response.gameList);
+            this.gamesRaspadinha = this.filterRaspadinha(response.gameList);
+            this.gamesRoleta = this.filterRoleta(response.gameList);
+            this.gamesMesa = this.filterMesa(response.gameList);
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
 
@@ -70,7 +75,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                         contexto: 'virtuais',
                         dados: {}
                     });
-                    this.gameList = games.filter(function(game) {
+                    this.gameList = response.gameList.filter(function (game) {
                         return game.dataType === 'VSB';
                     });
                 } else {
@@ -78,40 +83,30 @@ export class WallComponent implements OnInit, AfterViewInit {
                         contexto: 'casino',
                         dados: {}
                     });
+                    if (this.isHomeCassino) {
+                        this.gameList = this.gameAllList;
+                        this.gameTitle = this.translate.instant('geral.todos');
+                    }
                     switch (this.gameType) {
                         case 'slot':
-                            this.gameList = games.filter(function (game) {
-                                return game.gameTypeID === 'vs';
-                            });
+                            this.gameList = this.gamesSlot;
                             this.gameTitle = this.translate.instant('cassino.slot');
                             break;
                         case 'roleta':
-                            this.gameList = games.filter(function (game) {
-                                return game.gameTypeID === 'rl';
-                            });
+                            this.gameList = this.gamesRoleta;
                             this.gameTitle = this.translate.instant('cassino.roleta');
                             break;
                         case 'raspadinha':
-                            this.gameList = games.filter(function (game) {
-                                return game.gameTypeID === 'sc';
-                            });
+                            this.gameList = this.gamesRaspadinha;
                             this.gameTitle = this.translate.instant('cassino.raspadinha');
                             break;
                         case 'mesa':
-                            this.gameList = games.filter(function (game) {
-                                return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
-                            });
+                            this.gameList = this.gamesMesa;
                             this.gameTitle = this.translate.instant('cassino.mesa');
                             break;
                         case 'destaques':
-                            this.gameList = response.destaques;
+                            this.gameList = this.gamesDestaque;
                             this.gameTitle = this.translate.instant('cassino.destaques');
-                            break;
-                        case 'todos':
-                            this.gameList = games.filter(function (game) {
-                                return game.dataType !== 'VSB';
-                            });
-                            this.gameTitle = this.translate.instant('geral.todos');
                             break;
                     }
                 }
@@ -133,6 +128,30 @@ export class WallComponent implements OnInit, AfterViewInit {
             );
 
         this.isMobile = window.innerWidth < 1025;
+    }
+
+    filterSlot(games) {
+        return games.filter(function (game) {
+            return game.gameTypeID === 'vs';
+        });
+    }
+
+    filterRaspadinha(games) {
+        return games.filter(function (game) {
+            return game.gameTypeID === 'sc';
+        });
+    }
+
+    filterRoleta(games) {
+        return games.filter(function (game) {
+            return game.gameTypeID === 'rl';
+        });
+    }
+
+    filterMesa(games) {
+        return games.filter(function (game) {
+            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+        });
     }
 
     ngAfterViewInit() {

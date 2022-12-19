@@ -4,6 +4,7 @@ import {AuthService} from './../../services';
 import {interval} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {LoginModalComponent} from '../../shared/layout/modals';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-live',
@@ -23,14 +24,18 @@ export class LiveComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     modalRef;
 
+    blink: string;
+
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
         private modalService: NgbModal,
+        private router: Router,
     ) {
     }
 
     ngOnInit(): void {
+        this.blink = this.router.url.split('/')[2];
         let self = this;
         this.casinoApi.getCasinoLiveKey().subscribe(response => {
             self.connect(response.socket, response.live_token);
