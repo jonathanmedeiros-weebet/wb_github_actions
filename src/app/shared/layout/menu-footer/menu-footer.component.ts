@@ -117,7 +117,6 @@ export class MenuFooterComponent implements OnInit {
 
         this.campeonatosIsOpen = false;
         this.menuIsOpen = !this.menuIsOpen;
-
     }
 
     toggleCampeonatos() {
