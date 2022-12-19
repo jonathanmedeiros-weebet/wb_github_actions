@@ -5,10 +5,6 @@ export const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./default/futebol-default.module').then(m => m.FutebolDefaultModule)
-    },
-    {
-        path: 'copa',
-        loadChildren: () => import('./default/futebol-default.module').then(m => m.FutebolDefaultModule)
     }
 ];
 

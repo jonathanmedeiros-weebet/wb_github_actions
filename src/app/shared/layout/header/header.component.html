@@ -88,13 +88,6 @@
         </div>
         <div class="menu-categories scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
             [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
-            <div class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/futebol/copa']"
-                    [queryParams]="{campeonato: '01003ae97464082295b1ee23564be8bb'}">
-                    <svg-icon src="https://cdn.wee.bet/img/world-cup.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>COPA 2022</span>
-                </a>
-            </div>
             <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
                 <a class="" [routerLink]="['/esportes/live']">
                     <i class="wbicon icon-ao-vivo"></i>
