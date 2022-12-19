@@ -2409,6 +2409,7 @@ gulp.task('moneysports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "moneysports.wee.bet",
+        shared_url: "moneysports.bet",
         banca: "MONEY SPORTS",
         styles: "",
     });
