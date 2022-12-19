@@ -45,7 +45,8 @@
                 </div>
                 <div class="aovivo-tempo">
                     <div class="aovivo-label"><i class="fa fa-circle blink_me"></i> AO VIVO</div>
-                    <div class="tempo">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
+                    <div class="tempo" *ngIf="jogo.info?.tempo != 0">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
+                    <div class="tempo" *ngIf="jogo.info?.tempo == 0">Intervalo</div>
                 </div>
             </div>
         </div>
