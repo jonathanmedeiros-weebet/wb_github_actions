@@ -619,15 +619,6 @@ gulp.task('mssportes.wee.bet', function (done) {
     });
 });
 
-gulp.task('alsports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "alsports.wee.bet",
-        banca: "AL SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('slsports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1056,15 +1047,6 @@ gulp.task('trandbets.com', function (done) {
         server: "front1.wee.bet",
         host: "trandbets.com",
         banca: "TRAND BETS",
-        styles: "",
-    });
-});
-
-gulp.task('wbets.com.br', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "wbets.com.br",
-        banca: "WBETS",
         styles: "",
     });
 });
@@ -1600,15 +1582,6 @@ gulp.task('aposta99.wee.bet', function (done) {
     });
 });
 
-gulp.task('volpsport.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "volpsport.com",
-        banca: "VOLP SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('topbetgames.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1820,24 +1793,6 @@ gulp.task('sportingol.bet', function (done) {
     });
 });
 
-gulp.task('betcomvoce.com.br', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betcomvoce.com.br",
-        banca: "BET COM VOCÊ",
-        styles: "",
-    });
-});
-
-gulp.task('nmbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "nmbets.wee.bet",
-        banca: "NMBETS",
-        styles: "",
-    });
-});
-
 gulp.task('jaesporte.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2014,15 +1969,6 @@ gulp.task('futtop.bet', function (done) {
         server: "front2.wee.bet",
         host: "futtop.bet",
         banca: "FUTTOP",
-        styles: "",
-    });
-});
-
-gulp.task('rjbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "rjbets.wee.bet",
-        banca: "RJ BETS",
         styles: "",
     });
 });
