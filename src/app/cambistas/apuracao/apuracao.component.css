@@ -4,7 +4,7 @@
 
 .table-apuracao {
     /*width: 100%;*/
-    color: var(--background);
+    color: var(--game);
     border-radius: 4px;
     border-collapse: collapse;
     box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.2);
@@ -83,6 +83,7 @@ ul, li {
 
 .tabela-apuracao .linha-apuracao {
     background-color: var(--game);
+    color: var(--foreground-game);
     border-radius: 3px;
     margin-bottom: 1px;
     padding: 1px;
@@ -90,6 +91,7 @@ ul, li {
 
 .linha-apuracao ul {
     background-color: var(--game);
+    color: var(--foreground-game);
     padding: 15px 20px 15px 20px;
 }
 
