@@ -54,6 +54,7 @@
             <img *ngIf="metodoPagamento === 'mercado_pago'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>
             <img *ngIf="metodoPagamento === 'sauto_pay'" class="col-md-4" [src]="sautoPayQr"/>
             <img *ngIf="metodoPagamento === 'gerencianet'" class="col-md-4" src="{{pix.qr_code_base64}}"/>
+            <img *ngIf="metodoPagamento === 'primepag'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>
             <div class="align-content-center">
                 <a class="btn btn-info" (click)="novoPix()">
                     Gerar novo QRCode para depósito
