@@ -127,7 +127,7 @@
                         </div>
                         <div style="margin-left: 10px;">
                             <button class="btn btn-dark"
-                                *ngIf="!item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && !jogoComecou(item) && quantidadeMinimaBilhete()"
+                                *ngIf="podeEncerrar(item, aposta, itemSelecionado)"
                                 (click)="addEncerramento(item, aposta.version)">Encerrar
                             </button>
                             <span *ngIf="item.encerrado">encerrado</span>
