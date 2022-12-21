@@ -2404,3 +2404,21 @@ gulp.task('futmax.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet9.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet9.wee.bet",
+        banca: "BET9",
+        styles: "",
+    });
+});
+
+gulp.task('bigjo.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bigjo.wee.bet",
+        banca: "BIGJO",
+        styles: "",
+    });
+});
