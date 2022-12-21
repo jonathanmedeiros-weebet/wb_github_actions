@@ -2400,6 +2400,7 @@ gulp.task('futmax.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "futmax.wee.bet",
+        shared_url: "futmax.com.br",
         banca: "FUTMAX",
         styles: "",
     });
