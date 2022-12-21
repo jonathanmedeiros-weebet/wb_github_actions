@@ -73,12 +73,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 if (params['campeonato']) {
                     const campeonatoId = params['campeonato'];
 
-                    // WC 2022
-                    let fechamentoTabelaDomingo = this.paramsService.getOpcoes().fechamento_tabela_domingo;
-                    if (campeonatoId == '01003ae97464082295b1ee23564be8bb' && !fechamentoTabelaDomingo) {
-                        dataLimiteTabela = '2022-12-19';
-                    }
-
                     queryParams = {
                         odds: this.oddsPrincipais,
                         data_final: dataLimiteTabela
