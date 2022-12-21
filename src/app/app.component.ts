@@ -155,7 +155,6 @@ export class AppComponent implements OnInit {
                                 this.inicialModal,
                                 {
                                     centered: true,
-                                    backdrop: 'static',
                                     windowClass: 'modal-pop-up'
                                 }
                             );
