@@ -131,15 +131,10 @@ export class AppComponent implements OnInit {
                             }
                         );
                     } else if (!this.isEmpty && this.ativacaoCadastro === false) {
+                        let exibirImagemInicial = false;
                         const variavel = localStorage.getItem('imagemInicialData');
                         if (!variavel) {
-                            this.modalService.open(
-                                this.inicialModal,
-                                {
-                                    centered: true,
-                                    backdrop: 'static'
-                                }
-                            );
+                            exibirImagemInicial = true;
                             const horario = new Date();
                             localStorage.setItem('imagemInicialData', String(horario));
                         } else {
@@ -149,16 +144,21 @@ export class AppComponent implements OnInit {
                             // const data2 = new Date('2022-07-30T03:24:00');
                             const diffTime = dateDiffInDays(data1, data2);
                             if (diffTime > 0) {
-                                this.modalService.open(
-                                    this.inicialModal,
-                                    {
-                                        centered: true,
-                                        backdrop: 'static'
-                                    }
-                                );
+                                exibirImagemInicial = true;
                                 const horario = Date();
                                 localStorage.setItem('imagemInicialData', String(horario));
                             }
+                        }
+
+                        if (exibirImagemInicial) {
+                            this.modalService.open(
+                                this.inicialModal,
+                                {
+                                    centered: true,
+                                    backdrop: 'static',
+                                    windowClass: 'modal-pop-up'
+                                }
+                            );
                         }
                     }
                 },

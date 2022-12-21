@@ -599,11 +599,6 @@ button {
     font-size: 2rem;
 }
 
-/*.pre-bilhete .botoes .col {*/
-/*    margin-top: 5px;*/
-/*    margin-bottom: 5px;*/
-/*}*/
-
 .loteria-content {
     padding: 0;
 }
@@ -615,57 +610,9 @@ button {
     padding-top: 0;
 }
 
-/*.loteria-content .pre-bilhete {*/
-/*    padding: 20px 15px 0 15px;*/
-/*    width: 270px;*/
-/*}*/
-
-/*.loteria-content .pre-bilhete .form-row.inputs {*/
-/*    background-color: var(--odds);*/
-/*    padding: 20px 15px 8px 15px;*/
-/*    border-radius: 0.25rem;*/
-/*    margin: 25px 0 15px;*/
-/*}*/
-
-/*.loteria-content .pre-bilhete h4 {*/
-/*    color: #c9def5;*/
-/*    text-align: center;*/
-/*}*/
-
-/*.loteria-content .pre-bilhete h4::before {*/
-/*    content: '';*/
-/*    display: block;*/
-/*    height: 2px;*/
-/*    width: 20px;*/
-/*    background: var(--highlight);*/
-/*    top: 23px;*/
-/*    position: relative;*/
-/*    left: 50%;*/
-/*    margin-left: -58px;*/
-/*}*/
-
-/*.loteria-content .content-header {*/
-/*    background: var(--header);*/
-/*    color: var(--foreground-header);*/
-/*    text-transform: uppercase;*/
-/*    padding: 15px 10px;*/
-/*    font-size: 1.2rem;*/
-/*    font-weight: bold;*/
-/*}*/
-
 .loteria-content .content-body .content {
     display: flex;
 }
-
-/*.loteria-content .content-body .content .col-lg-9 {*/
-/*    padding: 0;*/
-/*}*/
-
-/*.nopadding {*/
-/*    padding: 0 !important;*/
-/*    margin: 0 !important;*/
-/*}*/
-
 
 /* Override JS Toast*/
 
@@ -714,17 +661,6 @@ button {
 .modal-footer {
     border-top: 1px solid #3b3b3b;
 }
-
-/*.indentificacao .horario {*/
-/*    border-radius: 5px;*/
-/*    padding: 0 5px;*/
-/*    margin-right: 15px;*/
-/*}*/
-
-/*.content-sports-list .indentificacao .horario {*/
-/*    background-color: var(--event-time);*/
-/*    color: var(--fg-event-time);*/
-/*}*/
 
 .campeonato-header {
     /*text-transform: uppercase;*/
@@ -1706,6 +1642,10 @@ input[type=number]::-webkit-outer-spin-button {
         height: inherit;
         background: var(--background);
         color: var(--foreground);
+    }
+
+    .modal-pop-up .modal-content {
+        height: auto;
     }
 
     .w-130 {
