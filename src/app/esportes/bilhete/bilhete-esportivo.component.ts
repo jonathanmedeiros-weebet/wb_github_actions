@@ -20,6 +20,7 @@ import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -75,7 +76,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private campinhoService: CampinhoService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -474,9 +476,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     trocarTipoApostaDeslogado(tipo) {
         this.tipoApostaDeslogado = tipo;
         if (tipo === 'preaposta') {
-            this.btnText = 'Pré-Aposta';
+            this.btnText = this.translate.instant('bilhete.preAposta');
         } else {
-            this.btnText = 'Aposta';
+            this.btnText = this.translate.instant('bilhete.aposta');
         }
     }
 
