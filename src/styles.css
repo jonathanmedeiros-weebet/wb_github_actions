@@ -251,7 +251,7 @@ game {
 }
 
 .square-group .active {
-    background-color: var(--odds);
+    background-color: var(--inputs-odds);
     color: #fff;
 }
 
@@ -271,7 +271,7 @@ game {
 
 .bet-types .active .circle,
 .bet-types .active .price {
-    background-color: var(--odds);
+    background-color: var(--inputs-odds);
     font-weight: bolder;
     color: #fff;
 }
@@ -738,8 +738,8 @@ button {
 
 .tipo-apostas .nav-pills .nav-link.active,
 .tipo-apostas .nav-pills .show>.nav-link {
-    color: var(--foreground-odds);
-    background-color: var(--odds);
+    color: var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
 }
 
 .content-loteria {
@@ -954,8 +954,8 @@ button {
 .value-informations .valores button {
     padding: 0;
     width: 55px;
-    background-color: var(--odds);
-    color: var(--foreground-odds);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
 }
 
 .value-informations .valores button:hover {
@@ -1103,7 +1103,7 @@ button {
     transform: scale(0);
     transform-origin: bottom left;
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--odds);
+    box-shadow: inset 1em 1em var(--inputs-odds);
     /* Windows High Contrast Mode */
     background-color: CanvasText;
 }
@@ -1124,18 +1124,18 @@ button {
 }
 
 /* .form-check-style-1 {
-    color: var(--foreground-odds);
+    color: var(--foreground-inputs-odds);
 }
 .form-check-input-style-1{
-    color: var(--foreground-odds);
-    border-color: var(--foreground-odds);
-    background-color: var(--foreground-odds);
+    color: var(--foreground-inputs-odds);
+    border-color: var(--foreground-inputs-odds);
+    background-color: var(--foreground-inputs-odds);
 }
 .form-check-input-style-1::before{
-    box-shadow: inset 1em 1em var(--odds);
+    box-shadow: inset 1em 1em var(--inputs-odds);
 }
 .form-check-input-style-1:focus{
-    outline: max(2px, 0.15em) solid var(--foreground-odds);
+    outline: max(2px, 0.15em) solid var(--foreground-inputs-odds);
 } */
 
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible {
