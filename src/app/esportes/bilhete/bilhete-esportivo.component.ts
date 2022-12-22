@@ -29,6 +29,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
+    @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
     mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
@@ -142,6 +143,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(result => {
                 this.setItens(result);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
+                this.scrollToBottom();
             });
 
 
@@ -176,6 +178,20 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 res => this.displayPreTicker = res
             );
+    }
+
+    private scrollToBottom(): void {
+        if(this.scrollFrame) {
+            const el = this.scrollFrame.nativeElement;
+
+            setTimeout(() => {
+                el.scroll({
+                    top: el.scrollHeight,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
     }
 
     definirAltura() {

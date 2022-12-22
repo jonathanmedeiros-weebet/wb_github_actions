@@ -1,9 +1,15 @@
 <div class="jogo-container">
+    <div class="top-bar">
+        <span>
+            {{jogo.time_a_nome}} x {{jogo.time_b_nome}}
+        </span>
+        <div class="" (click)="back()">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
     <section class="jogo" *ngIf="!showLoadingIndicator">
         <div *ngIf="!isMobile" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
-            <div class="div-back" (click)="back()">
-                <i class="fa fa-times"></i>
-            </div>
+
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">
@@ -48,15 +54,6 @@
                     <div class="tempo" *ngIf="jogo.info?.tempo != 0">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
                     <div class="tempo" *ngIf="jogo.info?.tempo == 0">Intervalo</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="top-bar-mobile hide-desktop">
-            <div class="top-bar-mobile-text">
-                <span>{{jogo.time_a_nome}}</span> x <span>{{jogo.time_b_nome}}</span>
-            </div>
-            <div class="div-back" (click)="closeModal()">
-                <i class="fa fa-times"></i>
             </div>
         </div>
     </section>

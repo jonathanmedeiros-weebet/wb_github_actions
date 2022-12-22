@@ -2,6 +2,40 @@
     height: calc(100vh - 132px);
     display: flex;
     flex-direction: column;
+
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.top-bar {
+    position: sticky;
+    top: 5px;
+    margin: 5px 5px 0 5px;
+
+    width: calc(100% - 10px);
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    padding: 15px;
+
+    background: var(--game);
+    color: var(--foreground-game);
+}
+
+.top-bar .fa{
+    color: var(--highlight);
+    font-size: 1.6rem;
+    cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+}
+
+.content-sports {
+    overflow: unset;
 }
 
 section.jogo {

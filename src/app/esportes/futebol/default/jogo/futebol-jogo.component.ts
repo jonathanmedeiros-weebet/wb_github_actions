@@ -77,7 +77,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
-            const altura = window.innerHeight - 161;
+            const altura = window.innerHeight;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
