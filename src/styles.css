@@ -1390,7 +1390,7 @@ input.inverted-out::-webkit-input-placeholder {
 
 .odd .nome-odd,
 .odd .valor-odd {
-    color: var(--foreground-odds);
+    color: var(--foreground-inputs-odds);
     text-align: center;
 }
 
