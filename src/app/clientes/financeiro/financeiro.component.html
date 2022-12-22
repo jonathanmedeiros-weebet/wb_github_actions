@@ -47,14 +47,15 @@
                 </thead>
                 <tbody *ngIf="!showLoading">
                 <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
-                    <tr class="tr-1">
+                    <tr>
                         <td>
-                            <i style="color:green; margin-right: 5px;" class="fa fa-sort-up"
+                            <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-sort-up"
                                *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
                             <ng-template #iconeDebito>
-                                <i style="color:red; margin-right: 5px;" class="fa fa-sort-down"></i>
+                                <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-sort-down"></i>
                             </ng-template>
-                            {{movimentacao.natureza | formatarNatureza}}
+                            {{movimentacao.natureza | formatarNatureza}} <br>
+                            <span style="margin-left: 18px">{{'financeiro.realizadoEm' | translate:{'data': movimentacao.data} }}</span>
                             <span
                                 *ngIf="movimentacao.saque && movimentacao.saque.status === 'PENDENTE'">
                                 ({{'financeiro.emProcessamento' | translate}})
@@ -72,18 +73,13 @@
                             <span
                                 *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
                         </td>
-                        <td class="custom-td" rowspan="2"
+                        <td class="custom-td"
                             style="padding-right: 10px;">{{movimentacao.valor | currency}}
                             <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
                         </td>
-                        <td class="custom-td" rowspan="2">
+                        <td class="custom-td">
                             {{movimentacao.saldo | currency}}
                             <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
-                        </td>
-                    </tr>
-                    <tr class="tr-2">
-                        <td colspan="3">
-                            {{'financeiro.realizadoEm' | translate:{'data': movimentacao.data} }}
                         </td>
                     </tr>
                 </ng-container>
