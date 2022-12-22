@@ -275,15 +275,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                 const jogosDestaquesIds = jogos.map(jogo => jogo.fi);
                 let jogosDestaques = [];
 
-                if (this.camps) {
-                    this.camps.forEach(camp => {
-                        const jogosSele = camp.jogos.filter(jogo => {
-                            return jogosDestaquesIds.includes(jogo._id + '');
-                        });
-
-                        jogosDestaques = jogosDestaques.concat(jogosSele);
+                this.camps.forEach(camp => {
+                    const jogosSele = camp.jogos.filter(jogo => {
+                        return jogosDestaquesIds.includes(jogo._id + '');
                     });
-                }
+
+                    jogosDestaques = jogosDestaques.concat(jogosSele);
+                });
 
                 this.jogosDestaque = jogosDestaques;
             });
