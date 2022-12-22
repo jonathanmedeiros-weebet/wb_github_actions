@@ -39,7 +39,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     displayPreTicker = false;
     disabled = false;
     isLoggedIn;
-    btnText = 'Pré-Aposta';
+    btnText;
     tipoApostaDeslogado = 'preaposta';
     cartaoApostaForm: FormGroup;
     apostaAoVivo = false;
@@ -84,6 +84,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
+
+        this.btnText = this.translate.instant('bilhete.preAposta');
 
         this.createForm();
         this.definirAltura();
