@@ -362,5 +362,14 @@
         "retorno": "Return",
         "nenhumPalpiteAdicionado": "No guesses added!",
         "selecioneAlgunsNumeros": "Select some numbers and add your guess to finalize the ticket."
+    },
+    "financeiro": {
+        "emProcessamento": "Processing",
+        "processado": "Processed",
+        "cancelado": "Called off",
+        "realizadoEm": "Held on {{data}}",
+        "qtdMovimentacoesNoPeriodo": "Qty. Movements in the Period from {{de}} - {{ate}}",
+        "nenhumaMovimentacaoNoPeriodo": "No transactions performed in the period and/or with current filter.",
+        "natureza": "Nature"
     }
 }

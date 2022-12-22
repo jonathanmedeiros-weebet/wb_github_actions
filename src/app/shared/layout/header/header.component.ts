@@ -24,7 +24,6 @@ import {
 import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
 import {SolicitacaoSaqueClienteComponent} from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
 import {DashboardComponent} from 'src/app/cambistas/dashboard/dashboard.component';
-import {FinanceiroComponent} from 'src/app/cambistas/financeiro/financeiro.component';
 import {ApuracaoComponent} from 'src/app/cambistas/apuracao/apuracao.component';
 import {ValidarApostaWrapperComponent} from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
 import {TabelaComponent} from 'src/app/cambistas/tabela/tabela.component';
@@ -32,6 +31,7 @@ import {SolicitacaoSaqueComponent} from 'src/app/cambistas/solicitacao-saque/sol
 import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
 import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
 import {TranslateService} from '@ngx-translate/core';
+import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
 
 @Component({
     selector: 'app-header',
@@ -293,6 +293,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirFinanceiro() {
+        this.modalService.open(FinanceiroComponent);
 
     }
 
@@ -310,10 +311,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirCambistaDashboard() {
         this.modalService.open(DashboardComponent);
-    }
-
-    abrirCambistaFinanceiro() {
-        this.modalService.open(FinanceiroComponent);
     }
 
     abrirCambistaCartaoConsultar() {

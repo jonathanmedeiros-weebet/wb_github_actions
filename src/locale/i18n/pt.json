@@ -362,5 +362,14 @@
         "retorno": "Retorno",
         "nenhumPalpiteAdicionado": "Nenhuma palpite adicionado!",
         "selecioneAlgunsNumeros": "Selecione alguns números e adicione seu palpite para poder finalizar o bilhete."
+    },
+    "financeiro": {
+        "emProcessamento": "Em Processamento",
+        "processado": "Procesado",
+        "cancelado": "Cancelado",
+        "realizadoEm": "Realizado em {{data}}",
+        "qtdMovimentacoesNoPeriodo": "Qtd. Movimentações no Período de {{de}} - {{ate}}",
+        "nenhumaMovimentacaoNoPeriodo": "Nenhuma movimentação realizada no período e/ou com filtro atual.",
+        "natureza": "Natureza"
     }
 }

@@ -20,7 +20,6 @@
     <nav class="desktop" *ngIf="!isMobile" #scrollMenu>
         <ng-container *ngTemplateOutlet="menu"></ng-container>
     </nav>
-<<<<<<< HEAD
     <div class="side side-right">
         <div class="btn-group dropdown language-dropdown hide-mobile">
             <button class="btn dropdown-toggle" type="button" id="dropdownLanguage"
@@ -37,113 +36,6 @@
                     {{'geral.ingles' | translate}}
                 </a>
             </div>
-=======
-    <div class="menu-categories margin-categories">
-        <div class="pull" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''">
-            <i class="fa fa-angle-left fa-left"></i>
-        </div>
-        <div class="menu-categories scroll" scrollX="true" [ngClass]="menuCategoriesClasses()"
-            [ngStyle]="{'width.px': menuWidth}" (scroll)="onScroll($event)" #scrollMenu>
-            <div *ngIf="aoVivoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/live']">
-                    <i class="wbicon icon-ao-vivo"></i>
-                    <span>Ao Vivo</span>
-                </a>
-            </div>
-            <div class="category" routerLinkActive="active" [routerLinkActiveOptions]="myMatchOptions">
-                <a class="" [routerLink]="['/esportes/futebol']">
-                    <i class="wbicon icon-futebol"></i>
-                    <span>Futebol</span>
-                </a>
-            </div>
-            <div *ngIf="casinoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/casino/wall/destaques']">
-                    <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>Cassino</span>
-                </a>
-            </div>
-            <div *ngIf="virtuaisHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/casino/wall/virtuais']">
-                    <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>Virtuais</span>
-                </a>
-            </div>
-            <div *ngIf="basqueteHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/basquete']">
-                    <i class="wbicon icon-basquete"></i>
-                    <span>Basquete</span>
-                </a>
-            </div>
-            <div *ngIf="tenisHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/tenis']">
-                    <i class="wbicon icon-tenis"></i>
-                    <span>Tênis</span>
-                </a>
-            </div>
-            <div *ngIf="combateHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/combate']">
-                    <i class="wbicon icon-luta"></i>
-                    <span>Combate</span>
-                </a>
-            </div>
-            <div *ngIf="voleiHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/volei']">
-                    <i class="wbicon icon-volei"></i>
-                    <span>Vôlei</span>
-                </a>
-            </div>
-            <div *ngIf="futebolAmericanoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/futebol-americano']">
-                    <i class="wbicon icon-futebol-americano"></i>
-                    <span>Futebol Americano</span>
-                </a>
-            </div>
-            <div *ngIf="futsalHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/futsal']">
-                    <i class="wbicon icon-futsal"></i>
-                    <span>Futsal</span>
-                </a>
-            </div>
-            <div *ngIf="hoqueiGeloHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/hoquei-gelo']">
-                    <i class="wbicon icon-hoquei-no-gelo"></i><span>Hóquei no Gelo</span>
-                </a>
-            </div>
-            <div *ngIf="esportsHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/esportes/esports']">
-                    <i class="wbicon icon-e-sports"></i>
-                    <span>E-Sports</span>
-                </a>
-            </div>
-            <div *ngIf="desafioHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/desafios']">
-                    <i class="fa fa-trophy"></i>
-                    <span>Desafio</span>
-                </a>
-            </div>
-            <div *ngIf="acumuladaoHabilitado" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/acumuladao/listagem']">
-                    <i class="fa fa-money"></i>
-                    <span>Acumuladão</span>
-                </a>
-            </div>
-            <div *ngIf="loteriasHabilitado && seninhaAtiva" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/loterias/seninha']">
-                    <svg-icon src="https://cdn.wee.bet/img/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>{{'seninha' | sorteioTipo}}</span>
-                </a>
-            </div>
-            <div *ngIf="loteriasHabilitado && quininhaAtiva" class="category" routerLinkActive="active">
-                <a class="" [routerLink]="['/loterias/quininha']">
-                    <svg-icon src="https://cdn.wee.bet/img/clover.svg" [svgStyle]="svgCss()"></svg-icon>
-                    <span>{{'quininha' | sorteioTipo}}</span>
-                </a>
-            </div>
-
-        </div>
-        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''">
-            <i class="fa fa-angle-right fa-right"></i>
->>>>>>> 00df7a76529b22085b8cc044e04cb15ffb3f52f0
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
@@ -201,7 +93,7 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
-                            <a (click)="abrirCambistaFinanceiro()">
+<!--                            <a (click)="abrirCambistaFinanceiro()">
                                 <span>
                                     <i class="fa fa-solid fa-dollar"></i>
                                 </span>
@@ -209,7 +101,7 @@
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
+                            </a>-->
                             <hr />
                             <ng-container *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
                                 <label>{{'cartoes.cartao' | translate}}</label>
@@ -386,6 +278,15 @@
                             </a>
                             <hr />
                             <label>{{'geral.maisOpcoes' | translate}}</label>
+                            <a (click)="abrirFinanceiro()">
+                                <span>
+                                    <i class="fa fa-solid fa-dollar"></i>
+                                </span>
+                                {{'geral.financeiro' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <a (click)="abrirSaques()">
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
@@ -493,12 +394,12 @@
                                 <i class="fa fa-user mb-2"></i>
                                 {{'geral.minhaConta' | translate}}
                             </a>
-<!--                            <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"-->
-<!--                            routerLinkActive="router-link-active"-->
-<!--                            *ngIf="isCliente">-->
-<!--                                <i class="fa fa-solid fa-dollar mb-2"></i>-->
-<!--                                Financeiro-->
-<!--                            </a>-->
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                {{'geral.financeiro' | translate}}
+                            </a>
                             <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
                             routerLinkActive="router-link-active"
                             *ngIf="isCliente">
@@ -545,12 +446,12 @@
                                 <i class="fa fa-solid fa-credit-card mb-2"></i>
                                 {{'cartoes.cartao' | translate}}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
+<!--                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
                             routerLinkActive="router-link-active"
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-dollar mb-2"></i>
                                 {{'geral.financeiro' | translate}}
-                            </a>
+                            </a>-->
                             <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
                                 <i class="fa fa-solid fa-cogs"></i>
                                 {{'geral.configuracoes' | translate}}

@@ -73,11 +73,11 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
 
-        if  (this.router.url == '/cambistas/cartoes' || this.router.url == '/cambistas/solicitacoes-saque') {
+        if  (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
         }
 
-        if (this.router.url == '/clientes/perfil' || this.router.url == '/clientes/perfil-pix' || this.router.url == '/alterar-senha') {
+        if (this.router.url === '/clientes/perfil' || this.router.url === '/clientes/perfil-pix' || this.router.url === '/alterar-senha') {
             this.subPerfil = true;
         }
 

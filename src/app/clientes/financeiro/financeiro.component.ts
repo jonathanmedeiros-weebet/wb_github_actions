@@ -9,6 +9,7 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
 import {curveBumpX} from 'd3-shape';
 import {FinanceiroService} from '../../shared/services/financeiro.service';
 import { SidebarService } from 'src/app/services';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-financeiro',
@@ -69,22 +70,6 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
     view: any[] = [666];
 
-    // options
-    legend = true;
-    showLabels = true;
-    animations = true;
-    xAxis = true;
-    yAxis = true;
-    showYAxisLabel = true;
-    showXAxisLabel = true;
-    xAxisLabel = 'Dias';
-    yAxisLabel = 'Valor';
-    timeline = true;
-
-    colorScheme = {
-        domain: ['#ED4C5C', '#43AA8B']
-    };
-
     constructor(
         private clienteService: ClienteService,
         private fb: FormBuilder,
@@ -95,6 +80,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
         private menuFooterService: MenuFooterService,
         private finairoService: FinanceiroService,
         private sidebarService: SidebarService,
+        public activeModal: NgbActiveModal
     ) {
         super();
     }
@@ -110,26 +96,10 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
         this.createForm();
         this.menuFooterService.setIsPagina(true);
-
-        this.finairoService.getDepositosSaquesGraphData()
-            .subscribe(
-                graphData => {
-                    this.graphData = graphData;
-
-                    console.log(graphData);
-                    console.log(this.multi);
-                    console.log(this.graphData);
-                },
-                error => this.handleError(error)
-            );
     }
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
-    }
-
-    onSelect(event) {
-        console.log(event);
     }
 
     getMovimentacoes(queryParams?: any) {
