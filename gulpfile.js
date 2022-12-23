@@ -48,7 +48,7 @@ function tasks(done, config) {
     var options = {
         continueOnError: false, // default = false, true means don't emit error event
         pipeStdout: false, // default = false, true means stdout is written to file.contents
-        customTemplatingThing: "test" // content passed to lodash.template()
+        customTemplatingThing: "test" // content passed to lodash.template()rep
     };
     var reportOptions = {
         err: true, // default = true, false means don't write err

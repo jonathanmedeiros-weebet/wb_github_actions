@@ -26,7 +26,7 @@
     padding: 0;
 }
 
-.sidebar-menu .fa,  .fa .fa-solid {
+.sidebar-menu .fa,  .fa .fa-solid, .fa .fa-brands {
     font-size: 18px;
     margin-bottom: 4px;
 }

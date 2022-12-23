@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     TIMESTAMP;
     ativacaoCadastro;
     modoClienteHabilitado;
+    whatsapp;
 
     constructor(
         private auth: AuthService,
@@ -202,6 +203,10 @@ export class AppComponent implements OnInit {
                     sessionStorage.clear();
                 }
             });
+
+            if (this.paramLocais.getOpcoes().whatsapp) {
+                this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
+            }
     }
 
     downloadApp() {

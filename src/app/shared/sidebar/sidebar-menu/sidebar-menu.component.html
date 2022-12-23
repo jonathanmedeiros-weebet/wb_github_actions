@@ -35,6 +35,11 @@
             <i class="fa fa-solid fa-download"></i>
             {{'geral.downloadApp' | translate}}
         </a>
+
+        <a target="_blank" *ngIf="whatsapp" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+            <i class="fa fa-brands fa-whatsapp"></i>
+            {{'geral.contato' | translate}}
+        </a>
     </div>
 </div>
 

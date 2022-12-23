@@ -55,3 +55,9 @@
         </div>
     </div>
 </ng-template>
+
+<div class="botao-contato-flutuante" *ngIf="whatsapp && !mobileScreen">
+    <a class="btn btn-custom rounded-circle contato" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+        <i class="fa fa-brands fa-whatsapp"></i>
+    </a>
+</div>

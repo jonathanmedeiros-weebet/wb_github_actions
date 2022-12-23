@@ -33,6 +33,7 @@ export class SidebarMenuComponent implements OnInit {
     cartaoApostaHabilitado;
     unsub$ = new Subject();
     linguagemSelecionada;
+    whatsapp;
 
     constructor(
         private auth: AuthService,
@@ -74,6 +75,10 @@ export class SidebarMenuComponent implements OnInit {
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
+
+        if (this.paramsService.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
+        }
     }
 
     abrirModalTabela() {
