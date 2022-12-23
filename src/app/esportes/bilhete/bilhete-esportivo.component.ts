@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, Observable, of } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
+import { PreApostaModalComponent, ApostaModalComponent, LoginModalComponent } from '../../shared/layout/modals';
 import {
     ApostaEsportivaService,
     AuthService,
@@ -64,7 +64,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     modoCambista = false;
     showCampinho = true;
 
-
     constructor(
         public sanitizer: DomSanitizer,
         private apostaEsportivaService: ApostaEsportivaService,
@@ -86,6 +85,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
 
         this.btnText = this.translate.instant('bilhete.preAposta');
@@ -213,7 +213,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', (this.isCliente) ? '' : [Validators.required]],
+            apostador: ['', (this.isCliente || !this.modoCambista) ? '' : [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima), Validators.max(this.apostaMaximo)]],
             itens: this.fb.array([]),
             aceitar_alteracoes_odds: [false],
@@ -309,61 +309,77 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.valorFocado = focus;
     }
 
+    abrirLogin() {
+        const options = {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-550 modal-h-350',
+            centered: true,
+        };
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
+    }
+
     submit() {
-        this.disabledSubmit();
+        if (!this.isCliente && !this.modoCambista) {
+            this.abrirLogin();
+        } else {
+            this.disabledSubmit();
 
-        let valido = true;
-        let msg = '';
+            let valido = true;
+            let msg = '';
 
-        if (!this.itens.length) {
-            valido = false;
-            msg = 'Por favor, inclua um evento.';
-        }
+            if (!this.itens.length) {
+                valido = false;
+                msg = 'Por favor, inclua um evento.';
+            }
 
-        if (this.itens.length < this.paramsService.quantidadeMinEventosBilhete()) {
-            valido = false;
-            msg = `Por favor, inclua no MÍNIMO ${this.paramsService.quantidadeMinEventosBilhete()} evento(s).`;
-        }
+            if (this.itens.length < this.paramsService.quantidadeMinEventosBilhete()) {
+                valido = false;
+                msg = `Por favor, inclua no MÍNIMO ${this.paramsService.quantidadeMinEventosBilhete()} evento(s).`;
+            }
 
-        if (this.itens.length > this.paramsService.quantidadeMaxEventosBilhete()) {
-            valido = false;
-            msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
-        }
+            if (this.itens.length > this.paramsService.quantidadeMaxEventosBilhete()) {
+                valido = false;
+                msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
+            }
 
-        if (valido) {
-            if (this.isLoggedIn) {
-                const values = this.ajustarDadosParaEnvio();
-                this.salvarAposta(values);
-            } else {
-                this.enableSubmit();
+            if (valido) {
+                if (this.isLoggedIn) {
+                    const values = this.ajustarDadosParaEnvio();
+                    this.salvarAposta(values);
+                } else {
+                    this.enableSubmit();
 
-                const cartaoChave = localStorage.getItem('cartao_chave');
-                if (cartaoChave) {
-                    this.cartaoApostaForm.patchValue({
-                        chave: cartaoChave,
-                        manter_cartao: true
-                    });
-                }
-
-                this.modalRef = this.modalService.open(
-                    this.apostaDeslogadoModal,
-                    {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true
+                    const cartaoChave = localStorage.getItem('cartao_chave');
+                    if (cartaoChave) {
+                        this.cartaoApostaForm.patchValue({
+                            chave: cartaoChave,
+                            manter_cartao: true
+                        });
                     }
-                );
 
-                this.modalRef.result
-                    .then(
-                        result => {
-                        },
-                        reason => {
+                    this.modalRef = this.modalService.open(
+                        this.apostaDeslogadoModal,
+                        {
+                            ariaLabelledBy: 'modal-basic-title',
+                            centered: true
                         }
                     );
+
+                    this.modalRef.result
+                        .then(
+                            result => {
+                            },
+                            reason => {
+                            }
+                        );
+                }
+            } else {
+                this.enableSubmit();
+                this.messageService.warning(msg);
             }
-        } else {
-            this.enableSubmit();
-            this.messageService.warning(msg);
         }
     }
 

@@ -1,4 +1,4 @@
-<ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' ">
+<ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' && modoCambista ">
 <div class="consulta-bilhete hide-mobile" [ngClass]="{'collapsed': collapsed}">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-consulta">
