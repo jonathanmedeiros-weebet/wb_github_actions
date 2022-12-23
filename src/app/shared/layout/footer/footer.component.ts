@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { config } from '../../config';
 import {AuthService} from '../../services/auth/auth.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
@@ -25,6 +27,8 @@ export class FooterComponent implements OnInit {
     hasPoliticaAml = false;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     rodape;
+    unsub$ = new Subject();
+    isLoggedIn = false;
 
     constructor(
         private authService: AuthService,
@@ -47,6 +51,14 @@ export class FooterComponent implements OnInit {
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
         }
+
+        this.authService.logado
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isLoggedIn => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
     }
 
     abrirResultados() {

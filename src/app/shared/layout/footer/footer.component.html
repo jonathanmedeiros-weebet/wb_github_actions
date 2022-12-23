@@ -41,7 +41,7 @@
             <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
                 {{'footer.regras' | translate}}
             </a>
-            <a class="pointer" (click)="abrirResultados()">
+            <a *ngIf="isLoggedIn" class="pointer" (click)="abrirResultados()">
                 {{'footer.resultados' | translate}}
             </a>
             <a [routerLink]="['/informacoes/politica-privacidade']" *ngIf="hasPoliticaPrivacidade">
