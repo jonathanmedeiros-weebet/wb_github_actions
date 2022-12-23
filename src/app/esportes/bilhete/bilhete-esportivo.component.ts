@@ -61,6 +61,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     utilizarBonus = false;
     valorFocado = false;
     liveTrackerUrl;
+    modoCambista = false;
+    showCampinho = true;
 
 
     constructor(
@@ -203,6 +205,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    toogleCampinho() {
+        this.showCampinho = !this.showCampinho;
     }
 
     createForm() {

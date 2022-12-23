@@ -1,157 +1,164 @@
 <section class="pre-bilhete"
          [ngClass]="{'pre-bilhete-mobile': displayPreTicker, 'hide': !isEsporte, 'hide-desktop': isPagina}">
     <div #scrollframe class="bilhete-container">
-        <div *ngIf="liveTrackerUrl" class="iframe-responsive">
-            <iframe [src]="liveTrackerUrl" frameborder="0" width="320" height="200"></iframe>
-        </div>
-        <div class="titulo-bilhete">
-            <div class="titulo">{{'bilhete.titulo' | translate}}</div>
-            <a (click)="closeCupom()" class="fechar-pre-bilhete">
-                <i class="fa fa-times"></i>
-            </a>
-        </div>
-        <div class="acoes-bilhete">
-            {{'bilhete.jogosSelecionados' | translate}}
-            <a [ngClass]="{'disabled': itens.length == 0}" (click)="removerItens()">
-                <i class="fa-solid fa-trash"></i> {{'bilhete.removerTodos' | translate}}
-            </a>
-        </div>
-        <div class="pre-bilhete-esportes">
-            <div *ngIf="itens.length > 0; else semJogosSelecionados" class="div-jogos-selecionados">
-                <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
-                    <div class="jogo-selecionado-inner">
-                        <div class="horario">
-                            {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}} <span
-                            *ngIf="item.jogo.ao_vivo"> - {{'bilhete.aoVivo' | translate}}</span>
-                        </div>
-                        <!-- <div class="campeonato-nome">
-                            {{item.jogo.campeonato.nome}}
-                        </div> -->
-                        <div class="odd-bilhete" [ngClass]="{'mudou': item.mudanca}">
-                        <span *ngIf="item.cotacao.nome; else chave">
-                            {{item.cotacao.nome}}
-                        </span>
-                            <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id == 1">
-                                {{item.cotacao.chave | tipoAposta}}
-                            </span>
-                                <span *ngIf="item.jogo.sport_id != 1;">
-                                {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
-                            </span>
-                            </ng-template>
-                            <span class="valor">
-                            ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
-                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
-                            <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
-                                ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
-                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
-                            </del>
-                        </span>
-                        </div>
-                        <div class="mercado">
-                            {{item.cotacao.chave | oddCategoria}}
-                        </div>
-                        <div class="jogo-nome">
-                            {{item.jogo.nome}}
-                        </div>
-                    </div>
-                    <div class="remover-item" (click)="removerItem(i)">
-                        <i class="fa fa-times"></i>
-                    </div>
+        <ng-container *ngIf="liveTrackerUrl">
+            <div class="campinho">
+                <div class="campinho-toogle" (click)="toogleCampinho()">Acompanhe <i [class]="showCampinho ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i></div>
+                <div class="iframe-responsive" *ngIf="showCampinho">
+                    <iframe [src]="liveTrackerUrl" frameborder="0" width="320" height="200"></iframe>
                 </div>
             </div>
-            <ng-template #semJogosSelecionados>
-                <div class="div-jogos-selecionados">
-                    <div id="nenhum-jogo">
-                        <p>
-                            <span><i
-                                class="fa-solid fa-circle-info"></i> {{'bilhete.nenhumaApostaSelecionada' | translate}}!</span>
-                        </p>
-                        <p>
-                            {{'bilhete.selecioneAlgumaAposta' | translate}}
-                        </p>
+        </ng-container>
+        <div class="blihete">
+            <div class="titulo-bilhete">
+                <div class="titulo">{{'bilhete.titulo' | translate}}</div>
+                <a (click)="closeCupom()" class="fechar-pre-bilhete">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="acoes-bilhete">
+                {{'bilhete.jogosSelecionados' | translate}}
+                <a [ngClass]="{'disabled': itens.length == 0}" (click)="removerItens()">
+                    <i class="fa-solid fa-trash"></i> {{'bilhete.removerTodos' | translate}}
+                </a>
+            </div>
+            <div class="pre-bilhete-esportes">
+                <div *ngIf="itens.length > 0; else semJogosSelecionados" class="div-jogos-selecionados">
+                    <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
+                        <div class="jogo-selecionado-inner">
+                            <div class="horario">
+                                {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}} <span
+                                *ngIf="item.jogo.ao_vivo"> - {{'bilhete.aoVivo' | translate}}</span>
+                            </div>
+                            <!-- <div class="campeonato-nome">
+                                {{item.jogo.campeonato.nome}}
+                            </div> -->
+                            <div class="odd-bilhete" [ngClass]="{'mudou': item.mudanca}">
+                            <span *ngIf="item.cotacao.nome; else chave">
+                                {{item.cotacao.nome}}
+                            </span>
+                                <ng-template #chave>
+                                <span *ngIf="item.jogo.sport_id == 1">
+                                    {{item.cotacao.chave | tipoAposta}}
+                                </span>
+                                    <span *ngIf="item.jogo.sport_id != 1;">
+                                    {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
+                                </span>
+                                </ng-template>
+                                <span class="valor">
+                                ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
+                                    item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
+                                <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
+                                    ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
+                                    item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
+                                </del>
+                            </span>
+                            </div>
+                            <div class="mercado">
+                                {{item.cotacao.chave | oddCategoria}}
+                            </div>
+                            <div class="jogo-nome">
+                                {{item.jogo.nome}}
+                            </div>
+                        </div>
+                        <div class="remover-item" (click)="removerItem(i)">
+                            <i class="fa fa-times"></i>
+                        </div>
                     </div>
                 </div>
-            </ng-template>
-        </div>
-        <div class="footer-bilhete">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="div-inputs">
-                    <div class="form-group" *ngIf="!isCliente">
-                        <div class="input-md">
-                            <input type="text" id="nomeApostador" formControlName="apostador"
-                                   [ngClass]="applyCssInputError('apostador')"
-                                   class="form-control inverted-out" placeholder=" ">
-                            <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
+                <ng-template #semJogosSelecionados>
+                    <div class="div-jogos-selecionados">
+                        <div id="nenhum-jogo">
+                            <p>
+                                <span><i
+                                    class="fa-solid fa-circle-info"></i> {{'bilhete.nenhumaApostaSelecionada' | translate}}!</span>
+                            </p>
+                            <p>
+                                {{'bilhete.selecioneAlgumaAposta' | translate}}
+                            </p>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="footer-bilhete">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="div-inputs">
+                        <div class="form-group" *ngIf="!isCliente">
+                            <div class="input-md">
+                                <input type="text" id="nomeApostador" formControlName="apostador"
+                                    [ngClass]="applyCssInputError('apostador')"
+                                    class="form-control inverted-out" placeholder=" ">
+                                <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
 
+                            </div>
+                            <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} "></app-error-msg>
                         </div>
-                        <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} "></app-error-msg>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-icon">
-                            <i>R$</i>
-                            <input type="number" formControlName="valor" [min]="apostaMinima"
-                                   [max]="apostaMaximo" (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
-                                   [ngClass]="applyCssInputError('valor')" class="form-control inverted-out"
-                                   placeholder="Valor">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i>R$</i>
+                                <input type="number" formControlName="valor" [min]="apostaMinima"
+                                    [max]="apostaMaximo" (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
+                                    [ngClass]="applyCssInputError('valor')" class="form-control inverted-out"
+                                    placeholder="Valor">
+                            </div>
+                            <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
                         </div>
-                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
-                    </div>
-                    <div class="valores" [ngClass]="{'fadeIn': valorFocado, 'fadeOut': !valorFocado}">
-                        <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
-                        <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
-                        <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
-                        <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
-                    </div>
-                    <div class="informations">
-                        {{'bilhete.cotacao' | translate}}:
-                        <span class="cotacao">{{cotacao | cotacao}}</span>
-                        <br>
-                        {{'bilhete.possiveisGanhos' | translate}}:
-                        <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
-                    </div>
-                    <div *ngIf="isLoggedIn" class="form-group form-check-custom form-check-style-1 alteracoes-odds">
-                        <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
-                               id="aceito-alteracoes-odds"
-                               formControlName="aceitar_alteracoes_odds">
-                        <label for="aceito-alteracoes-odds">
-                            {{'bilhete.aceitarAlteracoesDeOdds' | translate}}
-                        </label>
-                    </div>
-                    <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn"
-                         class="form-group form-check-custom form-check-style-1 utilizar-bonus">
-                        <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
-                               id="utilizar-bonus"
-                               formControlName="utilizar_bonus" (click)="toggleUtilizarBonus()">
-                        <label for="utilizar-bonus">
-                            {{'bilhete.utilizarBonus' | translate}}
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group submit-buttons">
-                    <ng-container *ngIf="mudancas;else btnApostar">
-                        <div class="mensagem-mudanca">
-                            {{'bilhete.algumasCotacoesMudaram' | translate}}
+                        <div class="valores" [ngClass]="{'fadeIn': valorFocado, 'fadeOut': !valorFocado}">
+                            <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
+                            <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
+                            <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
+                            <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
                         </div>
-                        <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas"
-                                class="btn btn-custom btn-block">
-                            {{'bilhete.aceitarAlteracoes' | translate}}
-                        </button>
-                    </ng-container>
-                    <ng-template #btnApostar>
-                        <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none"
-                                class="btn btn-custom btn-block">
-                            {{'bilhete.apostar' | translate}} <b>({{itens.length}})</b>
-                        </button>
-                        <ng-template #btnProcessando>
-                            <button disabled class="btn btn-custom btn-block">
-                                {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
-                                <i class="fa fa-spinner fa-spin"></i>
+                        <div class="informations">
+                            {{'bilhete.cotacao' | translate}}:
+                            <span class="cotacao">{{cotacao | cotacao}}</span>
+                            <br>
+                            {{'bilhete.possiveisGanhos' | translate}}:
+                            <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
+                        </div>
+                        <div *ngIf="isLoggedIn" class="form-group form-check-custom form-check-style-1 alteracoes-odds">
+                            <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
+                                id="aceito-alteracoes-odds"
+                                formControlName="aceitar_alteracoes_odds">
+                            <label for="aceito-alteracoes-odds">
+                                {{'bilhete.aceitarAlteracoesDeOdds' | translate}}
+                            </label>
+                        </div>
+                        <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn"
+                            class="form-group form-check-custom form-check-style-1 utilizar-bonus">
+                            <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
+                                id="utilizar-bonus"
+                                formControlName="utilizar_bonus" (click)="toggleUtilizarBonus()">
+                            <label for="utilizar-bonus">
+                                {{'bilhete.utilizarBonus' | translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group submit-buttons">
+                        <ng-container *ngIf="mudancas;else btnApostar">
+                            <div class="mensagem-mudanca">
+                                {{'bilhete.algumasCotacoesMudaram' | translate}}
+                            </div>
+                            <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas"
+                                    class="btn btn-custom btn-block">
+                                {{'bilhete.aceitarAlteracoes' | translate}}
                             </button>
+                        </ng-container>
+                        <ng-template #btnApostar>
+                            <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none"
+                                    class="btn btn-custom btn-block">
+                                {{'bilhete.apostar' | translate}} <b>({{itens.length}})</b>
+                            </button>
+                            <ng-template #btnProcessando>
+                                <button disabled class="btn btn-custom btn-block">
+                                    {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </button>
+                            </ng-template>
                         </ng-template>
-                    </ng-template>
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>
