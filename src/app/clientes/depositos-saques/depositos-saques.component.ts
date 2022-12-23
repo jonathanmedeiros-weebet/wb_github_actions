@@ -101,6 +101,7 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
             && depositoSaque.tipo === 'saque'
             && depositoSaque.status !== 'CANCELADO'
             && depositoSaque.status !== 'REPROVADO'
+            && depositoSaque.psp !== 'PRIMEPAG'
             && depositoSaque.psp !== 'SAUTOPAY';
     }
 }
