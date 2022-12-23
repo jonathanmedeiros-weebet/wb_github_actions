@@ -12,6 +12,8 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+
+    overflow: scroll;
 }
 
 .iframe-responsive {
@@ -80,8 +82,6 @@
 
 .pre-bilhete-esportes {
     flex-grow: 1;
-    overflow: scroll;
-    overflow-x: hidden;
 }
 
 .footer-bilhete {

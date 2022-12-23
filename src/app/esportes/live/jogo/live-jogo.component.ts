@@ -255,7 +255,11 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     back() {
-        this.exibirMaisCotacoes.emit(false);
+        if(this.isMobile) {
+            this.activeModal.dismiss();
+        } else {
+            this.exibirMaisCotacoes.emit(false);
+        }
     }
 
     trackByKey(index: number, cotacao: any): string {
@@ -354,9 +358,5 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     oddAberto(chave) {
         return this.oddsAberto.includes(chave.nome);
-    }
-
-    closeModal() {
-        this.activeModal.dismiss();
     }
 }

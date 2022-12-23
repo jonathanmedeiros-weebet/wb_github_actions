@@ -159,7 +159,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 link: '/esportes/live',
                 icon_class: 'wbicon icon-ao-vivo',
                 category: 'esporte',
-                active: !this.isMobile ?? this.paramsService.getOpcoes().aovivo
+                active: this.isMobile ? false : this.paramsService.getOpcoes().aovivo
             },
             {
                 name: this.translate.instant('submenu.futebol'),

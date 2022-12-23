@@ -2424,3 +2424,12 @@ gulp.task('bigjo.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fmbets.com.br', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "fmbets.com.br",
+        banca: "FM BETS",
+        styles: "",
+    });
+});

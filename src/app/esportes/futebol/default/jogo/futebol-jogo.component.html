@@ -1,11 +1,17 @@
 <div class="jogo-container">
     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
+    <div class="top-bar">
+        <span>
+            {{jogo?.time_a_nome}} x {{jogo?.time_b_nome}}
+        </span>
+        <div (click)="back()">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+
     <section [hidden]="!jogo || showLoadingIndicator">
         <div class="indentificacao-jogo">
-            <div class="div-back" (click)="back()">
-                <i class="fa fa-times"></i>
-            </div>
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">

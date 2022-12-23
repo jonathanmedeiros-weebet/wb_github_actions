@@ -2,6 +2,46 @@
     padding: 5px;
 }
 
+.jogo-container {
+    height: calc(100vh - 132px);
+    display: flex;
+    flex-direction: column;
+
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+    margin-bottom: 5px;
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    padding: 15px;
+
+    background: var(--game);
+    color: var(--foreground-game);
+}
+
+.top-bar .fa{
+    color: var(--highlight);
+    font-size: 1.6rem;
+    cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+}
+
+.content-sports {
+    overflow: unset;
+}
+
 .indentificacao-jogo {
     display: flex;
     justify-content: center;
@@ -67,7 +107,6 @@
 }
 
 .tipo-apostas-container {
-    overflow: scroll;
     display: flex;
     justify-content: space-between;
 }
