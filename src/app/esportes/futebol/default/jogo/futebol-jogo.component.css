@@ -18,10 +18,11 @@
     position: sticky;
     top: 0;
     margin-bottom: 5px;
+    border-radius: 5px;
 
-    width: 100%;
+    width: calc(100%);
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     z-index: 100;
     padding: 15px;
 
@@ -29,13 +30,27 @@
     color: var(--foreground-game);
 }
 
+.top-bar-back {
+    margin-right: 15px;
+    padding: 10px 0;
+    padding-right: 15px;
+    border-right: 1px solid var(--foreground-game);
+}
+
+.top-bar-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar-info .top-camp {
+    font-size: 10px;
+    opacity: .6;
+}
+
 .top-bar .fa{
-    color: var(--highlight);
+    color: var(--foreground-game);
     font-size: 1.6rem;
     cursor: pointer;
-
-    width: 24px;
-    height: 24px;
 }
 
 .content-sports {
