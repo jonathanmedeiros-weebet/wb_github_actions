@@ -2386,3 +2386,13 @@ gulp.task('fmbets.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megasporte.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "megasporte.com",
+        banca: "MEGASPORTE",
+        styles: "",
+    });
+});
+

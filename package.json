@@ -259,7 +259,8 @@
         "moneysports.wee.bet": "gulp moneysports.wee.bet",
         "futmax.wee.bet": "gulp futmax.wee.bet",
         "bigjo.wee.bet": "gulp bigjo.wee.bet",
-        "fmbets.com.br": "gulp fmbets.com.br"
+        "fmbets.com.br": "gulp fmbets.com.br",
+        "megasporte.com": "gulp megasporte.com"
     },
     "private": true,
     "dependencies": {
