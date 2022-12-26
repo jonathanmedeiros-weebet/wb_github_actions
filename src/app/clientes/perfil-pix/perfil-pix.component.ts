@@ -11,6 +11,7 @@ import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.com
 export class PerfilPixComponent extends BaseFormComponent implements OnInit {
 
     showLoading = true;
+    mostrarSenha = false;
 
     constructor(
         private fb: FormBuilder,
