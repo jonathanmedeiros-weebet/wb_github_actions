@@ -151,7 +151,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.bilheteService.idJogo
             .pipe(switchMap(result => {
-                    if(this.opcoes.habilitar_live_tracker && result) {
+                    if (this.opcoes.habilitar_live_tracker && result) {
                         return this.campinhoService.getIdsJogo(result);
                     } else {
                         return of(null);
@@ -183,7 +183,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     private scrollToBottom(): void {
-        if(this.scrollFrame) {
+        if (this.scrollFrame) {
             const el = this.scrollFrame.nativeElement;
 
             setTimeout(() => {
