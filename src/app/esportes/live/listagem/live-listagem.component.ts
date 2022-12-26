@@ -243,7 +243,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             jogo: jogo,
             cotacao: {
                 chave: cotacao.chave,
-                valor: cotacao.valor,
+                valor: this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, null, true),
                 nome: this.helperService.apostaTipoLabel(cotacao.chave, 'sigla'),
             },
             mudanca: false,
@@ -283,11 +283,43 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     cotacoesPorTipo(cotacoes) {
-        const cotacaoCasa = cotacoes.find(k => k.chave == 'casa_90');
-        const cotacaoEmpate = cotacoes.find(k => k.chave == 'empate_90');
-        const cotacaoFora = cotacoes.find(k => k.chave == 'fora_90');
+        let cotacaoCasa = cotacoes.find(k => k.chave === 'casa_90');
+        let cotacaoEmpate = cotacoes.find(k => k.chave === 'empate_90');
+        let cotacaoFora = cotacoes.find(k => k.chave === 'fora_90');
 
-        return [cotacaoCasa ?? {nome: 'Casa', lock: true}, cotacaoEmpate ?? {nome: 'Empate', lock: true}, cotacaoFora ?? {nome: 'Fora', lock: true}];
+        if (cotacaoCasa) {
+            cotacaoCasa.valor = this.helperService.calcularCotacao2String(
+                cotacaoCasa.valor,
+                cotacaoCasa.chave,
+                cotacaoCasa.event_id,
+                null,
+                true
+            );
+        }
+        if (cotacaoEmpate) {
+            cotacaoEmpate.valor = this.helperService.calcularCotacao2String(
+                cotacaoEmpate.valor,
+                cotacaoEmpate.chave,
+                cotacaoEmpate.event_id,
+                null,
+                true
+            );
+        }
+        if (cotacaoFora) {
+            cotacaoFora.valor = this.helperService.calcularCotacao2String(
+                cotacaoFora.valor,
+                cotacaoFora.chave,
+                cotacaoFora.event_id,
+                null,
+                true
+            );
+        }
+
+        return [
+            cotacaoCasa ?? {nome: 'Casa', lock: true},
+            cotacaoEmpate ?? {nome: 'Empate', lock: true},
+            cotacaoFora ?? {nome: 'Fora', lock: true}
+        ];
     }
 
     cotacaoPermitida(cotacao) {
