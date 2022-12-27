@@ -306,30 +306,40 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
             slice = slice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
+                    const cotacoesLocalJogo = this.getCotacaoLocal(jogo);
+
                     jogo.cotacoes.forEach(cotacao => {
+                        const cotacaoLocal = cotacoesLocalJogo[cotacao.chave];
                         cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                            cotacao.valor,
+                            cotacaoLocal ? cotacaoLocal.valor : cotacao.valor,
                             cotacao.chave,
                             jogo.event_id,
                             jogo.favorito,
                             false);
                         cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     });
-                    if (jogo.cotacoes.length < this.qtdOddsPrincipais) {
-                        const diferenca = this.qtdOddsPrincipais - jogo.cotacoes.length;
-                        for (let i = 0; i < diferenca; i++) {
+
+                    this.oddsPrincipais.forEach(oddPrincipal => {
+                        const possuiCotacao = jogo.cotacoes.find(c => c.chave === oddPrincipal);
+                        if (!possuiCotacao) {
+                            const cotacaoLocal = cotacoesLocalJogo[oddPrincipal];
                             jogo.cotacoes.push({
                                 _id: undefined,
-                                chave: '',
+                                chave: oddPrincipal,
                                 jogo: undefined,
-                                jogoId: 0,
-                                label: undefined,
+                                jogoId: undefined,
+                                label: this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'),
                                 nome: '',
-                                valor: 0,
-                                valorFinal: undefined
+                                valor: cotacaoLocal ? cotacaoLocal.valor : 0,
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal ? cotacaoLocal.valor : 0,
+                                    oddPrincipal,
+                                    jogo.event_id,
+                                    jogo.favorito,
+                                    false)
                             });
                         }
-                    }
+                    });
                 });
 
                 return campeonato;
@@ -447,6 +457,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         return result;
+    }
+
+    getCotacaoLocal(jogo) {
+        const cotacoesLocais = this.cotacoesLocais[jogo.event_id];
+
+        if (cotacoesLocais) {
+            return cotacoesLocais;
+        } else {
+            return false;
+        }
     }
 
     jogoBloqueado(eventId) {
