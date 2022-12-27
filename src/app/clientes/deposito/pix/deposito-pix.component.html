@@ -29,38 +29,38 @@
         </div>
     </form>
 
-    <div class="row mt-3 text-center justify-content-center" *ngIf="pix">
-        <div class="col-xs-12 col-md-12">
-            <label class="label"><b>Valor:</b> </label> {{pix.valor | currency}}
-            <br>
-            <label class="label"><b>Beneficiário:</b> </label> {{pix.titular}}
-            <br>
-            <div class="form-group form-inline text-center justify-content-center">
-                <label class="label"><b>QRCode: </b></label>
-                <div class="input-group">
-                    <input class="form-control ml-2" type="text" value="{{pix.qr_code}}" #qrCodeInput>
-                    <div class="input-group-append">
-                        <button (click)="copyInputMessage(qrCodeInput)" class="input-group-text"><i
-                            class="fa fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div  class="col-md-12">
-            <span style="color: red">
-                * Efetue o pagamento até {{pix.validade | date:'d \'de\' MMMM \'de\' y \'às\' H:mm' :'' :'pt-BR'}}
-                ou gere um novo QRCode
-            </span>
-            </div>
-            <img *ngIf="metodoPagamento === 'mercado_pago'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>
-            <img *ngIf="metodoPagamento === 'sauto_pay'" class="col-md-4" [src]="sautoPayQr"/>
-            <img *ngIf="metodoPagamento === 'gerencianet'" class="col-md-4" src="{{pix.qr_code_base64}}"/>
-            <img *ngIf="metodoPagamento === 'primepag'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>
-            <div class="align-content-center">
-                <a class="btn btn-info" (click)="novoPix()">
-                    Gerar novo QRCode para depósito
-                </a>
-            </div>
-        </div>
-    </div>
+<!--    <div class="row mt-3 text-center justify-content-center" *ngIf="pix">-->
+<!--        <div class="col-xs-12 col-md-12">-->
+<!--            <label class="label"><b>Valor:</b> </label> {{pix.valor | currency}}-->
+<!--            <br>-->
+<!--            <label class="label"><b>Beneficiário:</b> </label> {{pix.titular}}-->
+<!--            <br>-->
+<!--            <div class="form-group form-inline text-center justify-content-center">-->
+<!--                <label class="label"><b>QRCode: </b></label>-->
+<!--                <div class="input-group">-->
+<!--                    <input class="form-control ml-2" type="text" value="{{pix.qr_code}}" #qrCodeInput>-->
+<!--                    <div class="input-group-append">-->
+<!--                        <button (click)="copyInputMessage(qrCodeInput)" class="input-group-text"><i-->
+<!--                            class="fa fa-copy"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div  class="col-md-12">-->
+<!--            <span style="color: red">-->
+<!--                * Efetue o pagamento até {{pix.validade | date:'d \'de\' MMMM \'de\' y \'às\' H:mm' :'' :'pt-BR'}}-->
+<!--                ou gere um novo QRCode-->
+<!--            </span>-->
+<!--            </div>-->
+<!--            <img *ngIf="metodoPagamento === 'mercado_pago'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>-->
+<!--            <img *ngIf="metodoPagamento === 'sauto_pay'" class="col-md-4" [src]="sautoPayQr"/>-->
+<!--            <img *ngIf="metodoPagamento === 'gerencianet'" class="col-md-4" src="{{pix.qr_code_base64}}"/>-->
+<!--            <img *ngIf="metodoPagamento === 'primepag'" class="col-md-4" src="data:image/jpeg;base64,{{pix.qr_code_base64}}"/>-->
+<!--            <div class="align-content-center">-->
+<!--                <a class="btn btn-info" (click)="novoPix()">-->
+<!--                    Gerar novo QRCode para depósito-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
