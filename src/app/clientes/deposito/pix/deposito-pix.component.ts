@@ -26,7 +26,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
         <div class="qr-code">
             <img *ngIf="metodoPagamento !== 'sauto_pay'" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
-            <img *ngIf="metodoPagamento === 'sauto_pay'" src="data:image/svg+xml;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
@@ -42,6 +42,7 @@ export class NgbdModalContent {
     qrCodeBase64;
     qrCode;
     metodoPagamento;
+    sautoPayQr;
     minute = 20;
     second = 0;
     secondShow = '00';
@@ -50,10 +51,15 @@ export class NgbdModalContent {
         private _sanitizer: DomSanitizer,
         private _helper: HelperService,
         private paramsLocais: ParametrosLocaisService,
+        private domSanitizer: DomSanitizer,
     ) {}
 
     ngOnInit() {
         this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
+        if (this.metodoPagamento === 'sauto_pay') {
+            const SautoPayUrl = 'data:image/svg+xml;base64,' + this.qrCodeBase64;
+            this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+        }
         let timer = setInterval(() => {
             if (this.second == 0) {
                 this.minute -= 1;
