@@ -25,7 +25,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code">
-            <img src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="metodoPagamento !== 'sauto_pay'" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="metodoPagamento === 'sauto_pay'" src="data:image/svg+xml;base64,{{ qrCodeBase64 }}"/>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
@@ -40,17 +41,19 @@ export class NgbdModalContent {
     valorPix;
     qrCodeBase64;
     qrCode;
-
+    metodoPagamento;
     minute = 20;
     second = 0;
     secondShow = '00';
     constructor(
         public modal: NgbActiveModal,
         private _sanitizer: DomSanitizer,
-        private _helper: HelperService
+        private _helper: HelperService,
+        private paramsLocais: ParametrosLocaisService,
     ) {}
 
     ngOnInit() {
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         let timer = setInterval(() => {
             if (this.second == 0) {
                 this.minute -= 1;
