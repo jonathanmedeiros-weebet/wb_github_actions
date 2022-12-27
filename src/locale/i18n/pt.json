@@ -172,7 +172,8 @@
         "semResultado": "Sem Resultado",
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
-        "contato": "Contato"
+        "contato": "Contato",
+        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres com pelo menos uma letra (maiúscula e minúscula) e um número."
     },
     "dias": {
         "ontem": "Ontem",

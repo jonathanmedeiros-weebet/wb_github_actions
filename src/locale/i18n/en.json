@@ -172,7 +172,8 @@
         "semResultado": "No Result",
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
-        "contato": "Contact"
+        "contato": "Contact",
+        "requisitosSenha": "Password must have at least 6 characters with at least one letter (uppercase and lowercase) and one number."
     },
     "dias": {
         "ontem": "Yesterday",
