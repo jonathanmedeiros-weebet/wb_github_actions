@@ -1,8 +1,4 @@
 .jogo-container {
-    padding: 5px;
-}
-
-.jogo-container {
     height: calc(100vh - 132px);
 
     overflow: scroll;
@@ -15,8 +11,6 @@
 .top-bar {
     position: sticky;
     top: 0;
-    margin-bottom: 5px;
-    border-radius: 5px;
 
     width: calc(100%);
     display: flex;
@@ -225,9 +219,9 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    /* .content-sports {
-        padding-bottom: 57px;
-    } */
+    .jogo-container {
+        padding: 0 5px 5px 5px;
+    }
 
     .indentificacao .div-back {
         top: 0;

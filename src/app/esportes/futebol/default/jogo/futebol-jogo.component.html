@@ -427,61 +427,6 @@
                                     </div>
                                 </div>
 
-<!--                                <div class="tipo-aposta">-->
-<!--                                    <div class="header-tipo-aposta">-->
-<!--                                        Multi Marcadores-->
-<!--                                    </div>-->
-<!--                                    <div class="odds-tipo-aposta">-->
-<!--                                        <div class="odds">-->
-<!--                                            <div class="col-6"></div>-->
-<!--                                            <div class="col-3">2 ou Mais Gols</div>-->
-<!--                                            <div class="col-3">3 ou Mais Gols</div>-->
-<!--                                        </div>-->
-<!--                                        <div *ngFor="let jogador of mercadosPorJogadores">-->
-<!--                                            <div class="odds"-->
-<!--                                                 *ngIf="objectKeys(jogador.m_marcadores).length">-->
-<!--                                                <div class="col-6">{{jogador.nome}}</div>-->
-<!--                                                <div class="col-3">-->
-<!--                                                    <div class="odd">-->
-<!--                                                        <ng-container-->
-<!--                                                            *ngIf="cotacaoPermitida(jogador.m_marcadores.jogador_marca_2_ou_mais_gols.valorFinal); else cotacaoBloqueada">-->
-<!--                                                            <div class="inner-odd odd-enabled"-->
-<!--                                                                 [ngClass]="{'selecionado': itemSelecionado(jogo, jogador.m_marcadores.jogador_marca_2_ou_mais_gols)}"-->
-<!--                                                                 (click)="addCotacao(jogo, jogador.m_marcadores.jogador_marca_2_ou_mais_gols)">-->
-<!--                                                                <span class="valor">-->
-<!--                                                                    {{jogador.m_marcadores.jogador_marca_2_ou_mais_gols.valorFinal}}-->
-<!--                                                                </span>-->
-<!--                                                            </div>-->
-<!--                                                        </ng-container>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-3">-->
-<!--                                                    <div class="odd">-->
-<!--                                                        <ng-container-->
-<!--                                                            *ngIf="cotacaoPermitida(jogador.m_marcadores.jogador_marca_3_ou_mais_gols.valorFinal); else cotacaoBloqueada">-->
-<!--                                                            <div class="inner-odd odd-enabled"-->
-<!--                                                                 [ngClass]="{'selecionado': itemSelecionado(jogo, jogador.m_marcadores.jogador_marca_3_ou_mais_gols)}"-->
-<!--                                                                 (click)="addCotacao(jogo, jogador.m_marcadores.jogador_marca_3_ou_mais_gols)">-->
-<!--                                                                <span class="valor">-->
-<!--                                                                    {{jogador.m_marcadores.jogador_marca_3_ou_mais_gols.valorFinal}}-->
-<!--                                                                </span>-->
-<!--                                                            </div>-->
-<!--                                                        </ng-container>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-
-<!--                                        <ng-template #cotacaoBloqueada>-->
-<!--                                            <div class="inner-odd odd-disabled">-->
-<!--                                                <span class="valor">-->
-<!--                                                    <i class="fa fa-lock"></i>-->
-<!--                                                </span>-->
-<!--                                            </div>-->
-<!--                                        </ng-template>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
                                 <div class="tipo-aposta">
                                     <div class="header-tipo-aposta" (click)="cartoes = !cartoes" [ngClass]="{'collapsed' : cartoes}">
                                         {{'jogos.cartoes' | translate}}

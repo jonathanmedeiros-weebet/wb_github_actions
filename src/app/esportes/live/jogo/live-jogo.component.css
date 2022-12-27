@@ -12,11 +12,9 @@
 
 .top-bar {
     position: sticky;
-    top: 5px;
-    margin: 5px 5px 0 5px;
-    border-radius: 5px;
+    top: 0;
 
-    width: calc(100% - 10px);
+    width: calc(100%);
     display: flex;
     align-items: center;
     z-index: 100;
@@ -74,7 +72,7 @@ section.jogo {
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    margin: 5px 5px 0;
+    margin: 0 0 5px 0;
     border-radius: 8px;
 }
 

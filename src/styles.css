@@ -154,7 +154,6 @@ game {
     color: var(--foreground-header);
     overflow: scroll;
     overflow-x: hidden;
-    padding: 5px;
     scroll-behavior: smooth;
 
     height: -webkit-fill-available;
@@ -886,7 +885,6 @@ button {
 
     .content-sports {
         padding: 0;
-        padding-right: 5px;
     }
 }
 
@@ -922,6 +920,7 @@ button {
 }
 
 .lds-ring div:nth-child(2) {
+
     animation-delay: -0.3s;
 }
 

@@ -54,7 +54,7 @@
                         <tr *ngFor="let deposito of depositos">
                             <td><img src="/assets/images/credito.svg" alt="image"></td>
                             <td>Depósito - Resgistrado {{ deposito.data_registro }}</td>
-                            <td>{{ deposito.status }}</td>
+                            <td>{{ deposito.status | depositoStatusPixPipe}}</td>
                             <td>{{ deposito.valor | currency}}</td>
                         </tr>
                     </tbody>
