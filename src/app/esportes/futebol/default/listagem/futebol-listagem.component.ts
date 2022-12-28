@@ -327,9 +327,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                                 _id: undefined,
                                 chave: oddPrincipal,
                                 jogo: undefined,
-                                jogoId: undefined,
+                                jogoId: jogo._id,
                                 label: this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'),
-                                nome: '',
+                                nome: this.helperService.apostaTipoLabel(oddPrincipal),
                                 valor: cotacaoLocal ? cotacaoLocal.valor : 0,
                                 valorFinal: this.helperService.calcularCotacao2String(
                                     cotacaoLocal ? cotacaoLocal.valor : 0,
