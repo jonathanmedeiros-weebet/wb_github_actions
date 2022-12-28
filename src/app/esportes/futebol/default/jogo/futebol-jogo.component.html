@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <section [hidden]="!jogo || showLoadingIndicator">
+    <section class="jogo-container-interno" [hidden]="!jogo || showLoadingIndicator">
         <div class="indentificacao-jogo">
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
@@ -620,7 +620,7 @@
     <section class="content-sports-jogo inside-event">
         <div class="jogo-detalhes" [hidden]="!jogo || showLoadingIndicator">
             <div class="tipo-apostas">
-                <div [ngbNavOutlet]="nav"></div>
+                <div class="jogo-container-interno" [ngbNavOutlet]="nav"></div>
             </div>
         </div>
     </section>

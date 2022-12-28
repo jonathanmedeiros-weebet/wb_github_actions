@@ -173,7 +173,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             this.nomesCotacoes.push(this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'));
         });
 
-        this.limiteDiasTabela = moment(this.dataLimiteTabela).date() - moment().date();
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
 
         this.sidebarService.collapsedSource
             .subscribe(collapsed => {

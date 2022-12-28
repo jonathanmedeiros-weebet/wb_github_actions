@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.wrap-sticky {
+    padding: 5px;
+}
+
 .nome {
     min-width: 200px;
 }
@@ -140,6 +144,10 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    .wrap-sticky {
+        padding: 0;
+    }
+
     .mais-opcoes {
         margin-right: 10px;
     }

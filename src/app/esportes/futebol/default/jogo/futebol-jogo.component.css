@@ -10,6 +10,10 @@
     position: relative;
 }
 
+.jogo-container-interno {
+    padding: 0 5px;
+}
+
 .top-bar {
     position: sticky;
     top: 0;
@@ -276,9 +280,13 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .jogo-container {
-        padding: 0 5px 5px 5px;
-    }
+    /*.jogo-container {*/
+    /*    padding: 0 5px 5px 5px;*/
+    /*}*/
+
+    /*.jogo-container-interno {*/
+    /*    padding: 0;*/
+    /*}*/
 
     .indentificacao-jogo .div-back {
         top: 5px;

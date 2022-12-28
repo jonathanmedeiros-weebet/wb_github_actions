@@ -128,20 +128,6 @@
                                             </div>
                                         </ng-template>
                                     </div>
-<!--                                    <ng-container *ngIf="cotacaoManualFaltando(jogo, jogo.cotacoes)">-->
-<!--                                        <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"-->
-<!--                                             (click)="addCotacao(jogo, cotacao)">-->
-<!--                                            <div-->
-<!--                                                class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">-->
-<!--                                            <span class="nome-odd">-->
-<!--                                                {{cotacao.label}}-->
-<!--                                            </span>-->
-<!--                                                <span class="valor">-->
-<!--                                                {{cotacao.valorFinal}}-->
-<!--                                            </span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </ng-container>-->
                                 </div>
                                 <a class="scroll-button enabled-scroll-button" *ngIf="enableScrollButtons" id="scroll-right-{{jogo.event_id}}"
                                    (click)="moveRight(jogo.event_id)">

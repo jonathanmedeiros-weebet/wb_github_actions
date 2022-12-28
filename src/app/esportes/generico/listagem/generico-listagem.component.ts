@@ -94,7 +94,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
-        this.limiteDiasTabela = moment(this.dataLimiteTabela).date() - moment().date();
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
 
         this.atualizarDatasJogosFuturos(this.translate.currentLang);
 
