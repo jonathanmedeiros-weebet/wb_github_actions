@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {RelatorioService} from '../../shared/services/relatorio.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import * as moment from 'moment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
-import { SidebarService } from 'src/app/services';
-import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder} from '@angular/forms';
+import {SidebarService} from 'src/app/services';
+import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+
+import * as moment from 'moment';
+import 'moment/min/locales';
 
 @Component({
     selector: 'app-apuracao',
@@ -31,7 +33,7 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     detalhamentoHabilitado = false;
 
     hoveredDate: NgbDate | null = null;
-    selectedDate: string = '';
+    selectedDate = '';
 
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
@@ -48,19 +50,23 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     ) {
         super();
 
-        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -6);
-        this.toDate = calendar.getToday();
+        const monday = moment().clone().isoWeekday(1);
+
+        this.fromDate = NgbDate.from({year: monday.year(), month: monday.month() + 1, day: monday.date()});
+        this.toDate = calendar.getNext(this.fromDate, 'd', 6);
 
         this.queryParams = {
             dataInicial: this.formatDate(this.fromDate, 'us'),
             dataFinal: this.formatDate(this.toDate, 'us')
-        }
+        };
 
-        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
+        this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
     }
 
     ngOnInit() {
-        this.sidebarService.changeItens({contexto: 'cambista'});
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+        }
 
         this.modoContaCorrente = this.params.modoContaCorrente();
         this.loteriasHabilitada = this.params.getOpcoes().loterias;

@@ -13,6 +13,7 @@ import {
 } from 'src/app/services';
 import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'app-aposta',
@@ -70,8 +71,9 @@ export class ApostaComponent implements OnInit {
         private apostaService: ApostaService,
         public activeModal: NgbActiveModal
     ) {
-        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
-        this.toDate = calendar.getToday();
+        const monday = moment().clone().isoWeekday(1);
+        this.fromDate = NgbDate.from({year: monday.year(), month: monday.month() + 1, day: monday.date()});
+        this.toDate = calendar.getNext(this.fromDate, 'd', 6);
 
         this.queryParams = {
             dataInicial: this.formatDate(this.fromDate, 'us'),
@@ -82,7 +84,9 @@ export class ApostaComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.sidebarService.changeItens({contexto: 'cambista'});
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+        }
 
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;

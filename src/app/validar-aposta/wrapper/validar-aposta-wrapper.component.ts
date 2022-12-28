@@ -46,8 +46,10 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
 
     ngOnInit() {
         this.createForm();
-        this.sidebarService.changeItens({contexto: 'cambista'});
-        this.menuFooterService.setIsPagina(true);
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+            this.menuFooterService.setIsPagina(true);
+        }
     }
 
     ngOnDestroy() {

@@ -14,11 +14,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./tabela.component.css']
 })
 export class TabelaComponent implements OnInit {
-
     campeonatosImpressao;
     dataCampeonatos;
-
-    term = "";
+    term = '';
 
     constructor(
         private sidebarService: SidebarService,
@@ -29,7 +27,9 @@ export class TabelaComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.sidebarService.changeItens({contexto: 'cambista'});
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+        }
 
         const odds = this.paramsService.getOddsImpressao();
         const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
