@@ -417,9 +417,9 @@ section.jogo {
 
     .iframe-responsive iframe {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: calc(100%);
+        top: -2px;
+        left: 6px;
+        width: calc(98%);
         height: 100%;
     }
 

@@ -161,7 +161,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 (response: any) => {
                     if (response?.thesports_uuid) {
-                        this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                        this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
                     } else {
                         this.liveTrackerUrl = null;
                     }
