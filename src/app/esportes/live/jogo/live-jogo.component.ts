@@ -67,7 +67,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 .subscribe(
                     response => {
                         if(response?.thesports_uuid) {
-                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/2d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
                         }
                         this.loadedFrame = true;
                     },
