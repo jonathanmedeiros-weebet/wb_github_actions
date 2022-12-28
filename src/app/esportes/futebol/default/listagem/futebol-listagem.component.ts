@@ -234,7 +234,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         if (changes['data'] && this.data) {
-            const diferencaDias = (moment(this.data).date() - moment().date());
+            const diferencaDias = moment(this.data).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
 
             if (diferencaDias === 1) {
                 this.mudarData('amanha');
