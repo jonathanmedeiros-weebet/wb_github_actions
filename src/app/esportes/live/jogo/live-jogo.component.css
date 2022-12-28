@@ -358,6 +358,14 @@ section.jogo {
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
 
+    .iframe-responsive iframe {
+        position: absolute;
+        top: -2px;
+        left: 6px;
+        width: calc(98%);
+        height: 100%;
+    }
+
     .indentificacao{
         display: flex;
     }
