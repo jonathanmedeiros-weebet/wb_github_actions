@@ -26,7 +26,7 @@ function tasks(done, config) {
         .pipe(replace('[PIXEL]', typeof config.pixel == "undefined" ? "" : config.pixel))
         .pipe(replace('[CUSTOM]', config.styles))
         .pipe(replace('[ADITIONAL_STYLE]', typeof config.aditional_styles == "undefined" ? "" : config.aditional_styles))
-        .pipe(replace('[TIMESTAMP]', Date.now()))
+        .pipe(replace('[TIMESTAMP]', (Date.now() / 1000)))
         .pipe(gulp.dest('src/'));
 
     gulp.src(['base-build/bilhete/index.html'])
