@@ -1,8 +1,3 @@
-.iframe-responsive {
-    max-width: 98% !important;
-    left: 6px;
-}
-
 .jogo-container {
     height: calc(100vh - 132px);
     display: flex;
