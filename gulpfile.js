@@ -770,15 +770,6 @@ gulp.task('eisports.club', function (done) {
     });
 });
 
-gulp.task('clubedabola.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "clubedabola.wee.bet",
-        banca: "CLUBE DA BOLA",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --odds: #11192e;--foreground-selected-odds: #fff;--highlight:#d49011;--foreground-highlight:#fff;",
-    });
-});
-
 gulp.task('lbbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1842,6 +1833,7 @@ gulp.task('tigrebet.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "tigrebet.wee.bet",
         banca: "TIGRE BET",
+        shared_url: "tigrebet.bet",
         styles: "",
     });
 });
@@ -2393,6 +2385,24 @@ gulp.task('megasporte.com', function (done) {
         server: "front1.wee.bet",
         host: "megasporte.com",
         banca: "MEGASPORTE",
+        styles: "",
+    });
+});
+
+gulp.task('openbets.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "openbets.vip",
+        banca: "OPEN BETS",
+        styles: "",
+    });
+});
+
+gulp.task('r13.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "r13.bet",
+        banca: "R13.BET",
         styles: "",
     });
 });
