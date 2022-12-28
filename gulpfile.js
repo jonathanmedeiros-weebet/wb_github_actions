@@ -1832,6 +1832,7 @@ gulp.task('tigrebet.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "tigrebet.wee.bet",
         banca: "TIGRE BET",
+        shared_url: "tigrebet.bet",
         styles: "",
     });
 });
