@@ -1644,7 +1644,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .modal-pop-up .modal-content {
+        max-width: 90%;
         height: auto;
+        margin: 0 auto;
     }
 
     .w-130 {
