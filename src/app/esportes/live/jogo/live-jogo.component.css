@@ -1,6 +1,6 @@
-iframe{
-    top: 6px !important;
-    width: 98% !important;
+.iframe-responsive {
+    max-width: 98% !important;
+    left: 6px;
 }
 
 .jogo-container {
