@@ -2387,3 +2387,21 @@ gulp.task('megasporte.com', function (done) {
     });
 });
 
+gulp.task('openbets.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "openbets.vip",
+        banca: "OPEN BETS",
+        styles: "",
+    });
+});
+
+gulp.task('r13.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "r13.bet",
+        banca: "R13.BET",
+        styles: "",
+    });
+});
+
