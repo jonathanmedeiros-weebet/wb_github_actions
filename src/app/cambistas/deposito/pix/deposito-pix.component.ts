@@ -1,12 +1,90 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
 import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HelperService } from 'src/app/services';
+import { DomSanitizer } from '@angular/platform-browser';
 
+@Component({
+    selector: 'ngbd-modal-content',
+    styleUrls: ['./deposito-pix.component.css'],
+    template: `
+    <div class="modal-body">
+        <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Depósito PIX</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+
+        <p class="info text-center">Aponte a câmera do seu celular para realizar o depósito ou copie e compartilhe o QR Code</p>
+
+        <label class="label-tempo">Tempo restante para pagar</label>
+        <span class="tempo">{{ minute }}:{{ secondShow }}</span>
+
+        <div class="qr-code">
+            <img *ngIf="metodoPagamento !== 'sauto_pay'" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
+        </div>
+        <span class="valor">Valor: <b>{{ valorPix }}</b></span>
+
+        <div class="buttons">
+            <button class="btn btn-custom2" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
+            <button class="btn btn-custom2" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
+        </div>
+    </div>
+    `
+})
+export class NgbdModalContent {
+    valorPix;
+    qrCodeBase64;
+    qrCode;
+    metodoPagamento;
+    sautoPayQr;
+    minute = 20;
+    second = 0;
+    secondShow = '00';
+    constructor(
+        public modal: NgbActiveModal,
+        private _sanitizer: DomSanitizer,
+        private _helper: HelperService,
+        private paramsLocais: ParametrosLocaisService,
+        private domSanitizer: DomSanitizer,
+    ) {}
+
+    ngOnInit() {
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
+        if (this.metodoPagamento === 'sauto_pay') {
+            const SautoPayUrl = 'data:image/svg+xml;base64,' + this.qrCodeBase64;
+            this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+        }
+        let timer = setInterval(() => {
+            if (this.second == 0) {
+                this.minute -= 1;
+                this.second = 59;
+            } else {
+                this.second -= 1;
+            }
+
+            this.secondShow = this.second < 10 ? '0' + this.second : String(this.second);
+
+            if (this.minute <= 0 && this.second <= 0) {
+                clearInterval(timer)
+            }
+        }, 1000);
+    }
+
+    copyCode(code) {
+        console.log('Copiado: ', code);
+    }
+
+    compartilhar() {
+        const imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + this.qrCodeBase64);
+        this._helper.sharedDepositoPix(imagePath);
+    }
+}
 @Component({
     selector: 'app-deposito-pix',
     templateUrl: './deposito-pix.component.html',
@@ -20,20 +98,28 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     clearSetInterval;
     verificacoes = 0;
     valorMinDeposito;
+    valorPix = 0;
     metodoPagamento;
     sautoPayQr;
+    isMobile = false;
 
     constructor(
         private fb: FormBuilder,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
         private paramsLocais: ParametrosLocaisService,
+        private modalService: NgbModal,
+        private helperService: HelperService,
         private domSanitizer: DomSanitizer
     ) {
         super();
     }
 
     ngOnInit() {
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
+
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
         this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
@@ -58,14 +144,22 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.financeiroService.processarPagamento(detalhesPagamento)
             .subscribe(
                 res => {
+                    const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
+                    modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
+                    modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
+                    modalRef.componentInstance.qrCode = res.qr_code;
+
                     this.pix = res;
                     if (this.metodoPagamento === 'sauto_pay') {
                         const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
                         this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
                     }
+
                     this.clearSetInterval = setInterval(() => {
                         this.verificarPagamento(res);
                     }, 10000);
+
+                    this.submitting = false;
                 },
                 error => {
                     this.handleError(error);

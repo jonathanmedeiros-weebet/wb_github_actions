@@ -3,18 +3,21 @@ import {CommonModule} from '@angular/common';
 
 import {DepositoRoutingModule} from './deposito-routing.module';
 import {SharedModule} from '../../shared/shared.module';
-import {DepositoComponent} from './deposito.component';
+import {DepositoCambistaComponent} from './deposito-cambista.component';
 import {DepositoPixComponent} from './pix/deposito-pix.component';
 import {NgxCurrencyModule} from 'ngx-currency';
+import {ClipboardModule} from 'ngx-clipboard';
+import {NgbdModalContent} from './pix/deposito-pix.component';
 
 
 @NgModule({
-    declarations: [DepositoComponent, DepositoPixComponent],
+    declarations: [DepositoCambistaComponent, DepositoPixComponent, NgbdModalContent],
     imports: [
         SharedModule,
         CommonModule,
         DepositoRoutingModule,
-        NgxCurrencyModule
+        NgxCurrencyModule,
+        ClipboardModule
     ]
 })
 export class DepositoModule {

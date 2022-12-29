@@ -32,6 +32,7 @@ import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
 import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
 import {TranslateService} from '@ngx-translate/core';
 import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
+import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 
 @Component({
     selector: 'app-header',
@@ -146,6 +147,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
+        this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
@@ -303,6 +305,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirDepositos() {
         this.modalService.open(DepositoComponent);
+    }
+
+    abrirDepositosCambista() {
+        this.modalService.open(DepositoCambistaComponent);
     }
 
     abrirApostas() {

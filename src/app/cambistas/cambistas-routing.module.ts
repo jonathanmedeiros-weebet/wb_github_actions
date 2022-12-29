@@ -14,7 +14,13 @@ const routes: Routes = [{
     children: [
         {
             path: 'deposito',
-            loadChildren: () => import('./deposito/deposito.module').then(a => a.DepositoModule)
+            component: PagesLayoutComponent,
+            children: [
+                {
+                    path: '',
+                    loadChildren: () => import('./deposito/deposito.module').then(a => a.DepositoModule)
+                }
+            ],
         },
         {
             path: 'apuracao',

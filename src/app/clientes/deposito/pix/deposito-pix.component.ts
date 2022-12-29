@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
-import {ParametrosLocaisService} from "../../../shared/services/parametros-locais.service";
+import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';

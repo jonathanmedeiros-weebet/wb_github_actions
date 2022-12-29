@@ -28,7 +28,10 @@ export class DepositoComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.siderbarService.changeItens({contexto: 'cliente'});
+        if (window.innerWidth >= 1025) {
+            this.siderbarService.changeItens({contexto: 'cliente'});
+            this.menuFooterService.setIsPagina(true);
+        }
 
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
@@ -36,7 +39,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
         this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
 
         if (!this.hasApiPagamentos && this.whatsapp) {
-            this.modalidade = "whatsapp";
+            this.modalidade = 'whatsapp';
         } else {
             this.modalidade = 'pix';
         }
@@ -54,8 +57,6 @@ export class DepositoComponent implements OnInit, OnDestroy {
                     this.handleError(error);
                 }
             );
-
-        this.menuFooterService.setIsPagina(true);
     }
 
     selecionarModalidade(modalide) {

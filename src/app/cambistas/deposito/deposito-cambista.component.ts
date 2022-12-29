@@ -2,38 +2,41 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {SidebarService} from '../../shared/services/utils/sidebar.service';
 
 @Component({
     selector: 'app-deposito',
-    templateUrl: './deposito.component.html',
-    styleUrls: ['./deposito.component.css']
+    templateUrl: './deposito-cambista.component.html',
+    styleUrls: ['./deposito-cambista.component.css']
 })
-export class DepositoComponent implements OnInit, OnDestroy {
+export class DepositoCambistaComponent implements OnInit, OnDestroy {
     whatsapp;
-    hasMpToken;
     modalidade;
     pixCambista = false;
+    hasApiPagamentos;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private router: Router,
+        public activeModal: NgbActiveModal,
+        private siderbarService: SidebarService,
     ) {
     }
 
     ngOnInit() {
+        if (window.innerWidth >= 1025) {
+            this.siderbarService.changeItens({contexto: 'cambista'});
+            this.menuFooterService.setIsPagina(true);
+        }
+
         this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
         if (!this.pixCambista) {
             this.router.navigate(['esportes/futebol']);
         }
-        this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
-        this.modalidade = "pix";
-
-        this.menuFooterService.setIsPagina(true);
-    }
-
-    selecionarModalide(modalide){
-        this.modalidade = modalide;
+        this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.modalidade = 'pix';
     }
 
     ngOnDestroy() {
