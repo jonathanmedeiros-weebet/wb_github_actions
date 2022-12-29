@@ -113,7 +113,7 @@ export class ApuracaoAcumuladaoComponent implements OnInit, OnDestroy, OnChanges
 
         this.modalRef.result.then(
             (result) => {
-                this.apostaServive.cancelar(aposta.id)
+                this.apostaServive.cancelar(aposta)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         () => this.getApostas(),
