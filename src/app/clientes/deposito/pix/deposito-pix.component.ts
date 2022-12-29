@@ -192,6 +192,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 .subscribe(
                     res => {
                         if (res.deposito_status === 'approved') {
+                            this.modalService.dismissAll();
                             this.novoSaldo = res.novo_saldo;
                             this.exibirMensagemPagamento = true;
                             this.novoPix();
