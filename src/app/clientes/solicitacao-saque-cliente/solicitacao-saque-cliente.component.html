@@ -21,7 +21,8 @@
                                         {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
                                     <label class="label"
                                            [ngClass]="{'label-input-valor': isMobile}">
-                                        {{isMobile ? 'saques.informeOValor' : 'saques.informeValorDesejadoSaque' | translate}}
+                                        <span *ngIf="isMobile">{{'saques.informeOValor' | translate}}</span>
+                                        <span *ngIf="!isMobile">{{'saques.informeValorDesejadoSaque' | translate}}</span>
                                     </label>
                                     <input currencyMask
                                            [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
@@ -54,8 +55,7 @@
                     </form>
                 </div>
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
-                    {{errorMessage}} <a
-                    [routerLink]="['/clientes/perfil-pix']">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
+                    {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}

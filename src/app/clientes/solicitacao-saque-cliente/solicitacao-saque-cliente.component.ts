@@ -1,16 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ClienteService } from '../../shared/services/clientes/cliente.service';
-import { Cliente } from '../../shared/models/clientes/cliente';
-import { MessageService } from '../../shared/services/utils/message.service';
-import { FinanceiroService } from '../../shared/services/financeiro.service';
-import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
-import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
-import { SidebarService, AuthService } from 'src/app/services';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ClienteService} from '../../shared/services/clientes/cliente.service';
+import {Cliente} from '../../shared/models/clientes/cliente';
+import {MessageService} from '../../shared/services/utils/message.service';
+import {FinanceiroService} from '../../shared/services/financeiro.service';
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
+import {AuthService, SidebarService} from 'src/app/services';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -21,6 +22,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     submitting;
     showLoading = true;
     cadastroCompleto = true;
+    rotaCompletarCadastro: string;
     respostaSolicitacao;
     errorMessage;
     cliente: Cliente;
@@ -29,7 +31,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMaxSaqueMensal;
     apiPagamentos;
     isMobile = false;
-
     modalRef;
 
     saldo = 0;
@@ -46,16 +47,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private modalService: NgbModal,
         private auth: AuthService,
         public activeModal: NgbActiveModal,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private router: Router
     ) {
         super();
     }
 
     ngOnInit() {
-        this.sidebarService.changeItens({contexto: 'cliente'});
-
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
+        } else {
+            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.menuFooterService.setIsPagina(true);
         }
 
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
@@ -63,12 +66,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
         this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
-        this.menuFooterService.setIsPagina(true);
         const user = JSON.parse(localStorage.getItem('user'));
 
         const queryParams: any = {
             'periodo': '',
-            'tipo':  'saques',
+            'tipo': 'saques',
         };
         this.financeiroService.getDepositosSaques(queryParams)
             .subscribe(
@@ -99,10 +101,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.cliente = res;
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
+                        this.rotaCompletarCadastro = '/clientes/perfil';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
                     if (!this.cliente.chave_pix) {
                         this.cadastroCompleto = false;
+                        this.rotaCompletarCadastro = '/clientes/perfil-pix';
                         this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
                     }
 
@@ -120,8 +124,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
-        }
+                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
+            }
         );
     }
 
@@ -171,4 +175,17 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             && depositoSaque.status == 'PENDENTE';
     }
 
+    completarCadatro() {
+        if (this.isMobile) {
+            if (this.rotaCompletarCadastro === '/clientes/perfil-pix') {
+                this.modalService.open(ClientePixModalComponent);
+            }
+            if (this.rotaCompletarCadastro === '/clientes/perfil') {
+                this.modalService.open(ClientePerfilModalComponent);
+            }
+            this.activeModal.close();
+        } else {
+            this.router.navigate([this.rotaCompletarCadastro]);
+        }
+    }
 }
