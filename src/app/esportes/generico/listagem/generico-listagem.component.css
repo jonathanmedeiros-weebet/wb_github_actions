@@ -191,4 +191,8 @@
         padding: 20px 0 20px 20px;
     }
 
+    .indentificacao .nome {
+        width: calc(100% - 65px);
+        min-width: 250px;
+    }
 }

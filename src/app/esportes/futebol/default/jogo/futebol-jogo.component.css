@@ -31,7 +31,6 @@
     margin-right: 15px;
     padding: 10px 0;
     padding-right: 15px;
-    border-right: 1px solid var(--foreground-game);
 }
 
 .top-bar-info {
@@ -48,6 +47,14 @@
     color: var(--foreground-game);
     font-size: 1.6rem;
     cursor: pointer;
+}
+
+.v-divider {
+    background: var(--foreground-game);
+    margin-right: 8px;
+    width: 1px;
+    height: 100%;
+    opacity: 25%;
 }
 
 .content-sports {

@@ -28,7 +28,14 @@
     margin-right: 15px;
     padding: 10px 0;
     padding-right: 15px;
-    border-right: 1px solid var(--foreground-game);
+}
+
+.v-divider {
+    background: var(--foreground-game);
+    margin-right: 8px;
+    width: 1px;
+    height: 100%;
+    opacity: 25%;
 }
 
 .top-bar-info {
