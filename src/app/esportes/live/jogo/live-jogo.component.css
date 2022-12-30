@@ -10,6 +10,10 @@
     position: relative;
 }
 
+.content-sports {
+    padding: 5px;
+}
+
 .top-bar {
     position: sticky;
     top: 0;
@@ -79,7 +83,7 @@ section.jogo {
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    margin: 0 0 5px 0;
+    margin: 5px;
     border-radius: 8px;
 }
 
@@ -379,6 +383,9 @@ section.jogo {
 }
 
 @media only screen and (max-width: 1024px) {
+    .indentificacao-jogo {
+        margin: 0 0 5px 0;
+    }
 
     section.jogo {
         flex-direction: column;
@@ -437,7 +444,7 @@ section.jogo {
 
     .content-sports {
         height: 100vh !important;
-        padding: 0 0 0 5px;
+        padding: 5px;
     }
 
     .indentificacao{

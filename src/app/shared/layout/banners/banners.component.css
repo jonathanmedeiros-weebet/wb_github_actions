@@ -1,5 +1,5 @@
 .banners{
-    margin-bottom: 5px;
+    padding: 5px 5px 0 5px;
 }
 
 .banners img{
@@ -17,12 +17,12 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .banners {
-        margin-top: 5px;
+    .banners{
+        padding: 5px 0 0 0;
     }
 
     .banners img{
         width: auto;
-        max-height: 175px;
+        max-width: 100vw;
     }
 }

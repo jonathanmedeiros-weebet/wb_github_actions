@@ -8,6 +8,10 @@
     position: relative;
 }
 
+.wrap-sticky {
+    padding: 5px;
+}
+
 .top-bar {
     position: sticky;
     top: 0;
@@ -29,7 +33,7 @@
 }
 
 .v-divider {
-    background: var(--foreground-game);
+    background: var(--foreground-game) !important;
     margin-right: 8px;
     width: 1px;
     height: 100%;
@@ -69,7 +73,8 @@
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
+    border-radius: 5px;
 }
 
 .indentificacao .info {
@@ -108,7 +113,7 @@
 }
 
 .content-sports {
-    padding: 0;
+    padding: 5px;
 }
 
 .nome .time-a,
@@ -227,10 +232,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .jogo-container {
-        padding: 0 5px 5px 5px;
-    }
-
     .indentificacao .div-back {
         top: 0;
     }

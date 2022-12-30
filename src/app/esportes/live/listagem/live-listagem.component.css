@@ -1,9 +1,12 @@
 .campeonato-header{
     border: none;
-    cursor: initial;
     font-size: 12px;
     cursor: pointer;
     margin-bottom: 5px;
+}
+
+.wrap-sticky {
+    padding: 10px 5px 5px 5px;
 }
 
 .campeonato-header .column-left{
@@ -16,7 +19,6 @@
 }
 
 .jogos{
-    /*background-color: #fff;*/
     color: var(--foreground-header);
 }
 
@@ -232,8 +234,8 @@
 
 /* Small devices (1024 and down) */
 @media only screen and (max-width: 1024px) {
-    .content-sports {
-        /*padding-bottom: 106px;*/
+    .wrap-sticky {
+        padding: 10px 0 0 0;
     }
 
     .mais-opcoes{
