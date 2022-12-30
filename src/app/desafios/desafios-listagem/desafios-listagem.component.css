@@ -54,6 +54,7 @@
 .odds {
     justify-content: start;
     padding: 7.5px 0;
+    width: calc(100vw - 560px);
 }
 
 .odd {

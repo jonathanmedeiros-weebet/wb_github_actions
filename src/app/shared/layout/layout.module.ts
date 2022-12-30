@@ -76,6 +76,8 @@ import {ResultadosModalComponent} from './modals/resultados-modal/resultados-mod
 import {CodeInputModule} from 'angular-code-input';
 import {NgHcaptchaModule} from 'ng-hcaptcha';
 import {TranslateModule} from '@ngx-translate/core';
+import {DesafiosModule} from '../../desafios/desafios.module';
+import {DesafiosBilheteComponent} from '../../desafios/desafios-bilhete/desafios-bilhete.component';
 
 @NgModule({
     imports: [
@@ -153,6 +155,7 @@ import {TranslateModule} from '@ngx-translate/core';
         ClientePixModalComponent,
         ClienteSenhaModalComponent,
         ClienteApostasModalComponent,
+        DesafiosBilheteComponent
     ],
     exports: [
         MainLayoutComponent,

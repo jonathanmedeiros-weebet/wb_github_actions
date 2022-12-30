@@ -1,6 +1,8 @@
 #desafios-wrapper {
     display: flex;
     flex-direction: row;
+    max-height: calc(100vh - 92px);
+    overflow: scroll;
 }
 
 .desafios-content{

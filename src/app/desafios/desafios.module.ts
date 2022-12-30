@@ -12,7 +12,7 @@ import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
-        DesafiosBilheteComponent,
+        // DesafiosBilheteComponent,
         DesafiosListagemComponent,
         DesafiosWrapperComponent
     ],
@@ -24,7 +24,7 @@ import {TranslateModule} from '@ngx-translate/core';
         TranslateModule
     ],
     exports: [
-        DesafiosBilheteComponent
+        // DesafiosBilheteComponent
     ],
     providers: [
         DesafioService,
