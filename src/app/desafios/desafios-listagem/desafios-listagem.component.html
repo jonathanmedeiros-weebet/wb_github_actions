@@ -26,18 +26,31 @@
                                         {{desafio.nome}}
                                     </div>
                                 </div>
-                                <div class="odds">
-                                    <div class="odd" *ngFor="let odd of desafio.odds"
-                                        (click)="addCotacao(desafio, odd)">
-                                        <div class="inner-odd odd-enabled {{itensSelecionados[odd.id] ? 'selecionado' : ''}}">
+                                <div class="d-flex">
+                                    <a class="scroll-button disabled-scroll-button" id="scroll-left-{{desafio.id}}"
+                                       *ngIf="enableScrollButtons[desafio.id]" (click)="moveLeft(desafio.id)">
+                                        <i class="fa-solid fa-angle-left"></i>
+                                    </a>
+                                    <div #scrollOdds class="odds" id="{{desafio.id}}"
+                                         [ngClass]="{'scroll-buttons-ativos': enableScrollButtons[desafio.id]}"
+                                         (scroll)="onScroll(desafio.id)">
+                                        <div class="odd" *ngFor="let odd of desafio.odds"
+                                             (click)="addCotacao(desafio, odd)">
+                                            <div
+                                                class="inner-odd odd-enabled {{itensSelecionados[odd.id] ? 'selecionado' : ''}}">
                                             <span class="nome">
                                                 {{odd.nome}}
                                             </span>
-                                            <span class="valor">
+                                                <span class="valor">
                                                 {{odd.cotacao}}
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <a class="scroll-button enabled-scroll-button" *ngIf="enableScrollButtons[desafio.id]" id="scroll-right-{{desafio.id}}"
+                                       (click)="moveRight(desafio.id)">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </ng-container>

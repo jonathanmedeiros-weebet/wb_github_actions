@@ -1,7 +1,3 @@
-.content-list {
-    padding: 5px;
-}
-
 .categoria-header {
     padding: 0 15px;
     height: 40px;
@@ -12,6 +8,10 @@
     background-color: var(--game);
     color: var(--foreground-game);
     margin-bottom: 3px;
+}
+
+.wrap-sticky {
+    padding: 5px;
 }
 
 .categoria-header > span {
@@ -52,14 +52,48 @@
 }
 
 .odds {
+    flex-grow: 1;
     justify-content: start;
-    padding: 7.5px 0;
-    width: calc(100vw - 560px);
+    padding: 8px 0;
+    max-width: calc(100vw - 540px);
+}
+
+.scroll-buttons-ativos {
+    max-width: calc(100vw - 590px);
 }
 
 .odd {
     flex-grow: 1;
-    max-width: 135px;
+    min-width: 100px;
+}
+
+.scroll-button {
+    min-width: 25px;
+    height: 60px;
+    cursor: pointer;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.scroll-button i {
+    padding: 0;
+    margin: 0;
+}
+
+.enabled-scroll-button {
+    color: var(--foreground-game);
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.disabled-scroll-button {
+    color: var(--game);
+    cursor: auto;
+    transition: 500ms;
 }
 
 /* Large devices (desktops, 1025px and up) */
@@ -70,6 +104,10 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    .scroll-button {
+        display: none;
+    }
+
     .css-hack {
         display: block;
         padding-bottom: 98px;
@@ -83,6 +121,8 @@
         flex-direction: column;
         padding: 0;
         height: auto;
+        max-width: none;
+        overflow: scroll;
     }
 
     .odds .odd {
