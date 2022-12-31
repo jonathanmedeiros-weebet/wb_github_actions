@@ -7,7 +7,7 @@ import {
     ChangeDetectionStrategy,
     OnDestroy,
     ViewChildren,
-    QueryList, AfterViewInit
+    QueryList, AfterViewInit, HostListener
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -35,7 +35,12 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
     sidebarNavIsCollapsed: boolean;
     enableScrollButtons: {} = {};
     maxOddsSize: number;
+    desafios;
 
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.detectScrollOddsWidth(this.desafios);
+    }
     constructor(
         private renderer: Renderer2,
         private el: ElementRef,
@@ -66,12 +71,13 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
                 } else {
                     this.getDesafios();
                 }
+                this.detectScrollOddsWidth(this.desafios);
             });
 
         this.sidebarService.collapsedSource
             .subscribe(collapsed => {
                 this.sidebarNavIsCollapsed = collapsed;
-                // this.detectScrollOddsWidth();
+                this.detectScrollOddsWidth(this.desafios);
             });
     }
 
@@ -137,14 +143,16 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
             this.maxOddsSize = centerSize;
         }
 
-        desafios.forEach(desafio => {
-            let oddSize = this.maxOddsSize / desafio.odds.length;
-            if (oddSize < 100) {
-                oddSize = 100;
-            }
+        if (desafios) {
+            desafios.forEach(desafio => {
+                let oddSize = this.maxOddsSize / desafio.odds.length;
+                if (oddSize < 100) {
+                    oddSize = 100;
+                }
 
-            this.enableScrollButtons[desafio.id] = (oddSize * desafio.odds.length) > this.maxOddsSize;
-        });
+                this.enableScrollButtons[desafio.id] = (oddSize * desafio.odds.length) > this.maxOddsSize;
+            });
+        }
     }
 
     subscribeItens() {
@@ -179,6 +187,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
             .subscribe(
                 desafios => {
                     this.agruparPorCategoria(desafios);
+                    this.desafios = desafios;
                     this.detectScrollOddsWidth(desafios);
                 },
                 error => this.handleError(error)
@@ -220,6 +229,8 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
     agruparPorCategoria(desafios) {
         const categorias = {};
         this.categorias = [];
+
+        this.detectScrollOddsWidth(desafios);
 
         desafios.forEach(desafio => {
             if (!desafio.odd_correta) {
