@@ -424,9 +424,10 @@ section.jogo {
 
     .iframe-responsive {
         max-width: 100%;
-        padding-top: 87%;
+        padding-top: 64%;
         position: relative;
         width: 100%;
+        margin-bottom: 5px;
     }
 
     .iframe-responsive iframe {
