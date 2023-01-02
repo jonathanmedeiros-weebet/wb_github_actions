@@ -1088,15 +1088,6 @@ gulp.task('betfut.net', function (done) {
     });
 });
 
-gulp.task('betclub.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betclub.wee.bet",
-        banca: "BET CLUB",
-        styles: "",
-    });
-});
-
 gulp.task('jmxbet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
