@@ -172,6 +172,10 @@
         padding: 20px 0 20px 20px;
     }
 
+    .nome-time {
+        max-width: 80%;
+    }
+
     .filter {
         margin: 5px 0;
     }
