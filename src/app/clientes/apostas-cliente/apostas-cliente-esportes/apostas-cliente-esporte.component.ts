@@ -46,7 +46,7 @@ export class ApostasClienteEsporteComponent implements OnInit, OnDestroy, OnChan
         } else {
             this.smallScreen = false;
         }
-        this.encerramentoPermitido = this.paramsLocais.getOpcoes().permitir_encerrar_aposta;
+        this.encerramentoPermitido = (['cliente', 'todos'].includes(this.paramsLocais.getOpcoes().permitir_encerrar_aposta));
     }
 
     ngOnChanges() {

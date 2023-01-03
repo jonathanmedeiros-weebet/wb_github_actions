@@ -239,6 +239,10 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         return result;
     }
 
+    podeEncerrar(item, aposta, itemSelecionado) {
+        return !item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && !this.jogoComecou(item) && this.quantidadeMinimaBilhete()
+    }
+
     handleError(msg) {
         this.messageService.error(msg);
     }

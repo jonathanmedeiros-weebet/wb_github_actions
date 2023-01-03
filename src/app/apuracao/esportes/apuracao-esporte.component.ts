@@ -49,7 +49,7 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         } else {
             this.smallScreen = false;
         }
-        this.encerramentoPermitido = this.paramsLocais.getOpcoes().permitir_encerrar_aposta;
+        this.encerramentoPermitido = (['cambista', 'todos'].includes(this.paramsLocais.getOpcoes().permitir_encerrar_aposta));
     }
 
     ngOnChanges() {
