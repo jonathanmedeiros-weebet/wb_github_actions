@@ -130,10 +130,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     definirAltura() {
         const headerHeight = this.mobileScreen ? 161 : 132;
         const altura = window.innerHeight - headerHeight;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.renderer.setStyle(contentLoteriaEl, 'height', `${altura}px`);
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }

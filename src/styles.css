@@ -156,8 +156,10 @@ game {
     overflow-x: hidden;
     scroll-behavior: smooth;
 
-    height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .was-validated .form-control:invalid,
@@ -747,6 +749,9 @@ button {
 
     height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .margin-top-30 {

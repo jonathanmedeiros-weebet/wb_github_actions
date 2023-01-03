@@ -5,8 +5,13 @@
     margin-bottom: 5px;
 }
 
+app-footer {
+  margin: 5px;
+}
+
 .wrap-sticky {
     padding: 10px 5px 5px 5px;
+    flex: 1;
 }
 
 .campeonato-header .column-left{

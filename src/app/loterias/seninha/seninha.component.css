@@ -1,5 +1,6 @@
 .wrap-sticky {
     padding: 10px;
+    flex: 1;
 }
 
 .balls-group {

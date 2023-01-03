@@ -176,8 +176,6 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
     definirAltura() {
         const headerHeight = this.mobileScreen ? 145 : 92;
         const altura = window.innerHeight - headerHeight;
-        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.contentEl = this.el.nativeElement.querySelector('.content-list');
         this.renderer.setStyle(this.contentEl, 'min-height', `${altura}px`);
     }

@@ -7,6 +7,11 @@
 
 .wrap-sticky {
     padding: 0 5px;
+    flex: 1;
+}
+
+app-footer {
+  margin: 5px;
 }
 
 .nome {

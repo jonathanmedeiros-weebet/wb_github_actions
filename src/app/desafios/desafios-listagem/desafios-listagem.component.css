@@ -10,8 +10,18 @@
     margin-bottom: 3px;
 }
 
+app-footer {
+  margin: 5px;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+}
+
 .wrap-sticky {
     padding: 5px;
+    flex: 1;
 }
 
 .categoria-header > span {

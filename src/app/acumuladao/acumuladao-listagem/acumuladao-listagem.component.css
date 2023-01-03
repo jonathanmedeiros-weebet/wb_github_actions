@@ -3,13 +3,13 @@
     height: calc(100vh - 92px);
     overflow: scroll;
 
-    height: -webkit-fill-available;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
 }
 
 .wrap-acumuladao {
     padding: 10px;
-    min-height: 100%;
+    flex: 1;
 }
 
 .acumuladao{
@@ -63,7 +63,9 @@
 
 @media only screen and (max-width: 1024px) {
     #acumuladao-listagem{
+        height: -webkit-fill-available;
         height: calc(100vh - 122px);
+        -webkit-overflow-scrolling: touch;
     }
 
     .acumuladao {
