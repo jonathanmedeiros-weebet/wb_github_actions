@@ -67,7 +67,7 @@ export class InformacoesComponent implements OnInit, OnDestroy {
     }
 
     savePDF() {
-        const content = this.content.nativeElement.innerHTML.replace(/(style=".+?")/gm, '');
+        const content = this.content.nativeElement.innerHTML.replace(/(style="[^\"]*")/gm, '');
         const html = htmlToPdfmake(`<h2>${this.tituloPagina}</h2>` + content);
 
         const documentDefinition = {content: html};
