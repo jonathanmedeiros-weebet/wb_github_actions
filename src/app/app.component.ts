@@ -128,6 +128,7 @@ export class AppComponent implements OnInit {
                             this.demoModal,
                             {
                                 ariaLabelledBy: 'modal-basic-title',
+                                windowClass: 'modal-pop-up',
                                 centered: true
                             }
                         );
