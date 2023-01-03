@@ -9,7 +9,8 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 
 @Component({
     selector: 'app-pesquisar-cartao-modal',
-    templateUrl: './pesquisar-cartao-modal.component.html'
+    templateUrl: './pesquisar-cartao-modal.component.html',
+    styleUrls: ['./pesquisar-cartao-modal.component.css']
 })
 export class PesquisarCartaoModalComponent extends BaseFormComponent implements OnInit {
     modalRef;

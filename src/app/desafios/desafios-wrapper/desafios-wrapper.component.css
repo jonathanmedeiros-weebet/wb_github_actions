@@ -1,19 +1,23 @@
 #desafios-wrapper {
-    background-color: #e1e2e4;
     display: flex;
     flex-direction: row;
+    max-height: calc(100vh - 92px);
+    overflow: scroll;
 }
 
 .desafios-content{
     flex-grow: 1;
-    padding: 0 0 0 255px;
+    padding: 0;
     overflow: auto;
-    height: calc(100vh - 45px);
+    height: calc(100vh - 92px);
+
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
 }
 
 @media only screen and (max-width: 1024px) {
     .desafios-content{
         padding: 0;
-        height: calc(100vh - 98px);
+        height: calc(100vh - 121px);
     }
 }

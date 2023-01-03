@@ -15,6 +15,10 @@ export class QuininhaGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (!this.paramsService.quininhaAtiva()) {
+            if (this.paramsService.seninhaAtiva()) {
+                this.router.navigate(['/loterias/seninha']);
+                return true;
+            }
             this.router.navigate(['/']);
             return false;
         }

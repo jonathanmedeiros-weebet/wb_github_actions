@@ -7,13 +7,18 @@ import {
     HoqueiGeloGuard, TenisGuard, TenisMesaGuard,
     VoleiGuard
 } from '../services';
-import { EsportesWrapperComponent } from './wrapper/esportes-wrapper.component';
+import {SportLayoutComponent} from '../shared/layout/app-layouts';
 
 export const routes: Routes = [
     {
         path: '',
-        component: EsportesWrapperComponent,
+        component: SportLayoutComponent,
         children: [
+            {
+                path: '',
+                redirectTo: 'futebol',
+                pathMatch: 'full'
+            },
             {
                 path: 'live',
                 loadChildren: () => import('./live/live.module').then(m => m.LiveModule),

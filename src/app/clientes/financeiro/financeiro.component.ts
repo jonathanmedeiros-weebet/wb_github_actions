@@ -6,6 +6,10 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import {curveBumpX} from 'd3-shape';
+import {FinanceiroService} from '../../shared/services/financeiro.service';
+import { SidebarService } from 'src/app/services';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-financeiro',
@@ -13,6 +17,8 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
     styleUrls: ['./financeiro.component.css']
 })
 export class FinanceiroComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    curveFunction = curveBumpX;
+
     movimentacoesFinanceiras: MovimentacaoFinanceira[] = [];
     totalMovimentacoes;
     queryParams;
@@ -25,6 +31,45 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     saldo;
     whatsapp;
 
+    graphData;
+
+    multi = [
+        {
+        'name': 'Depósito',
+        'series': [
+            {
+                'name': 'Seg',
+                'value': 25
+            },
+            {
+                'name': 'Ter',
+                'value': 100
+            },
+            {
+                'name': 'Quar',
+                'value': 80
+            }
+        ]},
+        {
+            'name': 'Saque',
+            'series': [
+                {
+                    'name': 'Seg',
+                    'value': 60
+                },
+                {
+                    'name': 'Ter',
+                    'value': 33
+                },
+                {
+                    'name': 'Quar',
+                    'value': 50
+                }
+            ]}
+    ];
+
+    view: any[] = [666];
+
     constructor(
         private clienteService: ClienteService,
         private fb: FormBuilder,
@@ -32,19 +77,20 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
         private el: ElementRef,
         private renderer: Renderer2,
         private paramsLocais: ParametrosLocaisService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private finairoService: FinanceiroService,
+        private sidebarService: SidebarService,
+        public activeModal: NgbActiveModal
     ) {
         super();
     }
 
     ngOnInit(): void {
+        this.sidebarService.changeItens({contexto: 'cliente'});
+
         this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
 
-        if (window.innerWidth < 669) {
-            this.smallScreen = true;
-        } else {
-            this.smallScreen = false;
-        }
+        this.smallScreen = window.innerWidth < 669;
 
         this.definirAltura();
 
@@ -78,8 +124,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
     definirAltura() {
         const altura = window.innerHeight - 46;
-        this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
-        this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
+        // this.movimentacoesContent = this.el.nativeElement.querySelector('.content-movimentacoes');
+        // this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
     }
 
     createForm() {

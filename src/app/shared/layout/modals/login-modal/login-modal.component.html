@@ -1,34 +1,41 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Login</h4>
-    <div class="action-buttons">
-        <button type="button" class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <img class="logo-modal" [src]="LOGO" alt="">
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-times"></i>
+    </a>
 </div>
 <div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-4 py-3" novalidate>
-        <div class="form-group">
-            <input type="text" class="form-control" formControlName="username"
-                   [ngClass]="applyCssInputError('username')" placeholder="Usuário">
-            <app-error-msg [control]="form.get('username')" label="Usuário"></app-error-msg>
-        </div>
-        <div class="form-group" [ngClass]="applyCssDivError('password')">
-            <input type="password" class="form-control" [ngClass]="applyCssInputError('password')"
-                   formControlName="password" placeholder="Senha">
-            <app-error-msg [control]="form.get('password')" label="Senha"></app-error-msg>
-        </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
-    <ng-container *ngIf="modoClienteHabilitado">
-        <div class="dropdown-divider"></div>
-        <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="dropdown-item">
-            Esqueci minha senha
+    <div class="modal-body-content">
+        <img class="logo-mobile" [src]="LOGO" alt="">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-group mb-4">
+                <div class="input-md">
+                    <input type="text" id="username" class="form-control inverted-out" formControlName="username" placeholder=" "
+                        [ngClass]="applyCssInputError('username')">
+                    <label for="username">{{'geral.usuario' | translate}}</label>
+                </div>
+                <app-error-msg [control]="form.get('username')" label="{{'geral.usuario' | translate}}" class="text-left"></app-error-msg>
+            </div>
+            <div class="form-group" [ngClass]="applyCssDivError('password')">
+                <div class="input-md">
+                    <input [type]=" mostrarSenha ? 'text' : 'password' " id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
+                        formControlName="password" placeholder=" ">
+                    <label for="password">{{'geral.senha' | translate}}</label>
+                    <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="toogleSenha()"></i>
+                </div>
+                <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
+            </div>
+            <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
+        </form>
+
+        <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
+            {{'geral.esqueceuASenha' | translate}}
         </a>
-        <div class="dropdown-divider"></div>
-        <a (click)="abrirCadastro()" style="cursor: pointer" class="dropdown-item">
-            Não é nosso Cliente? Cadastre-se
-        </a>
-    </ng-container>
+    </div>
+
+    <div class="registrar" *ngIf="modoClienteHabilitado">
+        {{'geral.naoPossuiUmaConta' | translate}}
+        <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
+    </div>
 </div>
 

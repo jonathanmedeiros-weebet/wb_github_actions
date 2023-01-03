@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
-import { getCurrencySymbol } from '@angular/common';
-import { FormBuilder, FormArray, Validators } from '@angular/forms';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef} from '@angular/core';
+import {getCurrencySymbol} from '@angular/common';
+import {FormBuilder, FormArray, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { environment } from './../../../environments/environment';
-import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import { ApostaModalComponent, PreApostaModalComponent } from '../../shared/layout/modals';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
+import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
@@ -14,13 +14,15 @@ import {
     AuthService, PreApostaLoteriaService,
     ParametrosLocaisService, MenuFooterService
 } from '../../services';
-import { TipoAposta, Aposta, Sorteio } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {TipoAposta, Aposta, Sorteio} from '../../models';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
+import { random } from 'lodash';
 
 @Component({
     selector: 'app-seninha',
-    templateUrl: 'seninha.component.html'
+    templateUrl: 'seninha.component.html',
+    styleUrls: ['seninha.component.css']
 })
 export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
@@ -38,6 +40,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     modalRef;
     unsub$ = new Subject();
     isCliente;
+    mobileScreen = false;
 
     constructor(
         private sidebarService: SidebarService,
@@ -62,10 +65,11 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.isCliente = this.auth.isCliente();
+        this.mobileScreen = window.innerWidth <= 1024;
         this.createForm();
         this.definirAltura();
 
-        this.tipoApostaService.getTiposAposta({ tipo: 'seninha' }).subscribe(
+        this.tipoApostaService.getTiposAposta({tipo: 'seninha'}).subscribe(
             tiposAposta => {
                 this.tiposAposta = tiposAposta;
                 this.tiposAposta.forEach(tipoAposta => {
@@ -85,7 +89,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             error => this.messageService.error(error)
         );
 
-        this.sorteioService.getSorteios({ tipo: 'seninha', sort: 'data' }).subscribe(
+        this.sorteioService.getSorteios({tipo: 'seninha', sort: 'data'}).subscribe(
             sorteios => this.sorteios = sorteios,
             error => this.messageService.error(error)
         );
@@ -122,11 +126,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const headerHeight = this.mobileScreen ? 161 : 132;
+        const altura = window.innerHeight - headerHeight;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.renderer.setStyle(contentLoteriaEl, 'height', `${altura}px`);
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
@@ -184,8 +189,15 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     /* Remover palpite */
-    removeGuess(index) {
+    removerItem(index) {
+        this.aposta.valor -= this.aposta.itens[index].valor;
         this.aposta.itens.splice(index, 1);
+        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
+    }
+
+    removerItens() {
+        this.aposta.valor = 0;
+        this.aposta.itens = [];
         this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
     }
 
@@ -316,5 +328,34 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     enableSubmit() {
         this.disabled = false;
+    }
+
+
+    gerarSupresinha() {
+        const numbers = [];
+
+        let qty = this.qtdNumeros;
+
+        for (let index = 0; index < qty; index++) {
+            const number = this.generateRandomNumber(numbers);
+            numbers.push(number);
+        }
+
+        numbers.sort((a, b) => a - b);
+        this.supresinhaService.atualizarSupresinha(numbers);
+    }
+
+    generateRandomNumber(numbers: Number[]) {
+        let number;
+
+        number = random(1, 80);
+
+        const find = numbers.find(n => n === number);
+
+        if (!find) {
+            return number;
+        } else {
+            return this.generateRandomNumber(numbers);
+        }
     }
 }

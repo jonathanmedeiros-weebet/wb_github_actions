@@ -1,7 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarService, FinanceiroService, MessageService } from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {MenuFooterService} from "../../shared/services/utils/menu-footer.service";
+import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 
 @Component({
     selector: 'app-deposito',
@@ -13,32 +15,59 @@ export class DepositoComponent implements OnInit, OnDestroy {
     hasApiPagamentos;
     modalidade;
 
+    depositos = [];
+
     constructor(
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
+        private siderbarService: SidebarService,
+        private financeiroService: FinanceiroService,
+        private messageService: MessageService,
+        public activeModal: NgbActiveModal
     ) {
     }
 
     ngOnInit() {
+        if (window.innerWidth >= 1025) {
+            this.siderbarService.changeItens({contexto: 'cliente'});
+            this.menuFooterService.setIsPagina(true);
+        }
+
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
         this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
 
         if (!this.hasApiPagamentos && this.whatsapp) {
-            this.modalidade = "whatsapp";
+            this.modalidade = 'whatsapp';
         } else {
-            this.modalidade = "pix";
+            this.modalidade = 'pix';
         }
 
-        this.menuFooterService.setIsPagina(true);
+        const queryParams: any = {
+            'periodo': '',
+            'tipo':  'depositos',
+        };
+        this.financeiroService.getDepositosSaques(queryParams)
+            .subscribe(
+                response => {
+                    this.depositos = response;
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
     }
 
-    selecionarModalide(modalide){
+    selecionarModalidade(modalide) {
         this.modalidade = modalide;
     }
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+    }
+
+    handleError(error: string) {
+        this.messageService.error(error);
     }
 }

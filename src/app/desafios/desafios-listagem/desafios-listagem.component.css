@@ -1,71 +1,145 @@
-.categoria-header{
-    text-transform: uppercase;
-    padding: 0 10px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-bottom: 4px solid white;
+.categoria-header {
+    padding: 0 15px;
+    height: 40px;
+    font-size: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--league);
-    color: var(--foreground-league);
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 3px;
 }
 
-.categoria-header > span{
+.wrap-sticky {
+    padding: 5px;
+}
+
+.categoria-header > span {
     line-height: 29px;
 }
 
-.desafios{
-    background-color: #fff;
+.desafios {
     padding-bottom: 4px;
 }
 
-.desafio{
-    padding: 0px 10px;
+.desafio {
+    padding: 0 10px;
+    background-color: var(--game);
+    margin-top: 3px;
+    color: var(--foreground-game);
 }
 
-.indentificacao{
+.desafio:first-of-type {
+    margin-top: 0;
+}
+
+.indentificacao {
     display: flex;
     align-items: center;
     padding: 5px 0;
 }
 
-.indentificacao .horario{
-    background-color: var(--event-time);
-    color: var(--fg-event-time);
-}
-
-.indentificacao .nome{
+.indentificacao .nome {
+    justify-content: center;
     flex-grow: 1;
+    font-size: 12px;
+    padding-left: 20px;
 }
 
-.css-hack{
+.css-hack {
     display: none;
     padding: 0;
 }
 
+.odds {
+    flex-grow: 1;
+    justify-content: start;
+    padding: 8px 0;
+    max-width: calc(100vw - 540px);
+}
+
+.scroll-buttons-ativos {
+    max-width: calc(100vw - 590px);
+}
+
+.odd {
+    flex-grow: 1;
+    min-width: 100px;
+}
+
+.scroll-button {
+    min-width: 25px;
+    height: 60px;
+    cursor: pointer;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.scroll-button i {
+    padding: 0;
+    margin: 0;
+}
+
+.enabled-scroll-button {
+    color: var(--foreground-game);
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.disabled-scroll-button {
+    color: var(--game);
+    cursor: auto;
+    transition: 500ms;
+}
+
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
-    .indentificacao .nome{
-        display: block;
-    }
-
-    .odds .odd {
-        width: 50%;
-    }
+    /*.odds .odd {*/
+    /*    width: 50%;*/
+    /*}*/
 }
 
 @media only screen and (max-width: 1024px) {
-    .css-hack{
-        display: block;
-        padding-bottom: 98px;
+    .scroll-button {
+        display: none;
     }
 
-    .odds .odd {
-        width: 100%;
+    .css-hack {
+        display: block;
+        padding-bottom: 98px;
     }
 
     .wrap-sticky {
         padding-bottom: 98px;
+    }
+
+    .odds {
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+        max-width: none;
+        overflow: scroll;
+    }
+
+    .odds .odd {
+        flex: 1;
+        max-width: none;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .odds .odd .inner-odd {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 4px;
+    }
+
+    .desafio {
+        padding: 0 10px 10px;
     }
 }

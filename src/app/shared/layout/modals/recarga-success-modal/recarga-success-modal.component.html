@@ -1,35 +1,34 @@
-<div class="modal-body">
-    <div class="alert alert-success" role="alert">
-        Sua recarga foi realizada com sucesso!
-    </div>
-    <div class="informacoes" #cupom>
-        <h3>Comprovante de Recarga</h3>
-        <h4 class="banca-nome">{{BANCA_NOME}}</h4>
-        <div>
-            <b> Cartão:</b> {{recarga.cartao_aposta}}
-        </div>
-        <div>
-            <b>Cambista:</b> {{recarga.passador}}
-        </div>
-        <div>
-            <b>Valor:</b> {{recarga.valor| currency}}
-        </div>
-        <div>
-            <b>Data/Hora:</b> {{recarga.data | moment:'DD/MM/YYYY HH:mm'}}
-        </div>
-        <div class="autenticacao">
-            {{recarga.autenticacao}}
-        </div>
-    </div>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{'geral.recarga' | translate}}</h4>
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-times"></i>
+    </a>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
-        Fechar
-    </button>
-    <button type="button" class="btn btn-custom" (click)="printTicket()">
-        Imprimir
-    </button>
-    <button *ngIf="appMobile" type="button" class="btn btn-custom" (click)="shareTicket()">
-        Compartilhar
-    </button>
+
+<div class="modal-body">
+    <div class="informacoes" #cupom>
+        <div class="title">
+            <img class="logo-modal" [src]="LOGO"  alt="">
+            <h3>Comprovante de Recarga</h3>
+        </div>
+
+        <ul>
+            <li><b> {{'cartoes.cartao' | translate}}:</b> {{recarga.cartao_aposta}}</li>
+            <li><b>{{'geral.cambista' | translate}}:</b> {{recarga.passador}}</li>
+            <li><b>Valor:</b> {{recarga.valor| currency}}</li>
+            <li><b>Data/Hora:</b> {{recarga.data | moment:'DD/MM/YYYY HH:mm'}}</li>
+            <li class="autenticacao">{{recarga.autenticacao}}</li>
+        </ul>
+    </div>
+    <div class="buttons">
+        <button type="button" class="btn btn-custom2 w-130" (click)="activeModal.close('Close click')">
+            {{'modais.fechar' | translate}}
+        </button>
+        <button type="button" class="btn btn-custom w-130" (click)="printTicket()">
+            {{'geral.imprimir' | translate}}
+        </button>
+        <button *ngIf="appMobile" type="button" class="btn btn-custom w-130" (click)="shareTicket()">
+            {{'geral.compartilhar' | translate}}
+        </button>
+    </div>
 </div>

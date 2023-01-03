@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {FinanceiroRoutingModule} from './financeiro-routing.module';
 import {FinanceiroComponent} from './financeiro.component';
 import {SharedModule} from '../../shared/shared.module';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {SharedModule} from '../../shared/shared.module';
     imports: [
         SharedModule,
         CommonModule,
-        FinanceiroRoutingModule
+        FinanceiroRoutingModule,
+        NgxChartsModule
     ]
 })
 export class FinanceiroModule {

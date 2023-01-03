@@ -1,12 +1,13 @@
 #sport-wrapper{
     display: flex;
     flex-direction: row;
-    min-height: 800px;
+    max-height: calc(100vh - 132px);
+    /*min-height: 800px;*/
 }
 
 .sport-content{
     flex-grow: 1;
-    padding: 0 0 0 255px;
+    /*padding: 0 0 0 255px;*/
 }
 
 @media only screen and (max-width: 1024px) {
@@ -18,8 +19,8 @@
     }
 }
 
-@media (min-width: 1025px) {
-    #sport-wrapper {
-        padding-right: 270px;
-    }
-}
+/*@media (min-width: 1025px) {*/
+/*    #sport-wrapper {*/
+/*        padding-right: 270px;*/
+/*    }*/
+/*}*/

@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 
 const routes: Routes = [{
     path: '',
+    component: PagesLayoutComponent,
     children: [
         {
             path: '',
@@ -12,6 +14,10 @@ const routes: Routes = [{
         {
             path: 'perfil',
             loadChildren: () => import('./perfil/cliente-perfil.module').then(p => p.ClientePerfilModule)
+        },
+        {
+            path: 'perfil-pix',
+            loadChildren: () => import('./perfil-pix/perfil-pix.module').then(p => p.PerfilPixModule)
         },
         {
             path: 'financeiro',

@@ -7,11 +7,12 @@ import {
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     MenuFooterService,
     MessageService,
-    PreApostaEsportivaService
+    PreApostaEsportivaService,
+    SidebarService,
 } from '../../services';
 import { ApostaModalComponent } from './../../shared/layout/modals';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -33,17 +34,22 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
     constructor(
         private preApostaService: PreApostaEsportivaService,
         private messageService: MessageService,
+        private sidebarService: SidebarService,
         private elRef: ElementRef,
         private modalService: NgbModal,
         private fb: FormBuilder,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        public activeModal: NgbActiveModal
     ) {
         super();
     }
 
     ngOnInit() {
         this.createForm();
-        this.menuFooterService.setIsPagina(true);
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+            this.menuFooterService.setIsPagina(true);
+        }
     }
 
     ngOnDestroy() {

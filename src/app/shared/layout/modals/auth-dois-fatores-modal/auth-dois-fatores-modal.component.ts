@@ -5,6 +5,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, MessageService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 
+import {config} from '../../../config';
+
 @Component({
     selector: 'app-auth-dois-fatores-modal',
     templateUrl: './auth-dois-fatores-modal.component.html',
@@ -14,6 +16,10 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     submitting = false;
     cronometro = 60;
     botaoReenviar = false;
+
+    codigo = '';
+
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -84,6 +90,16 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
                 this.botaoReenviar = true;
             }
         }, 1000);
+    }
+
+    onCodeChanged(code: string) {
+        console.log('Change:', code);
+        this.codigo = code;
+    }
+
+    onCodeCompleted(code: string) {
+        console.log('Complete:', code);
+        this.codigo = code;
     }
 
 }

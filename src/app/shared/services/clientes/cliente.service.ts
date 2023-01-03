@@ -30,7 +30,7 @@ export class ClienteService {
     }
 
     cadastrarCliente(values: any) {
-        return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values))
+        return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values), this.headers.getRequestOptions())
             .pipe(
                 map((response: any) => {
                         return response.results;
@@ -54,6 +54,18 @@ export class ClienteService {
 
     atualizarDadosCadastrais(dadosCadastrais) {
         return this.http.post(`${this.clienteUrl}/atualizarDadosCadastrais`, JSON.stringify(dadosCadastrais),
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                        return response.results.result;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    atualizarPix(dadosCadastrais) {
+        return this.http.post(`${this.clienteUrl}/atualizarChavePix`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {

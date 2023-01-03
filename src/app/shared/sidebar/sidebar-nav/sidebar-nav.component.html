@@ -1,0 +1,310 @@
+<ng-container *ngIf="contexto != 'cambista' && contexto != 'cliente' ">
+<div class="consulta-bilhete hide-mobile" [ngClass]="{'collapsed': collapsed}">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input-consulta">
+            <input type="text" placeholder="{{'geral.consultarBilhete' | translate}}" formControlName="codigo">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+</div>
+
+<div class="consulta-bilhete-collapsed hide-mobile" [ngClass]="{'collapsed': collapsed}" *ngIf="collapsed">
+    <a class="search-collapsed">
+        <i class="fa fa-search"></i>
+    </a>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" style="postion: absolute">
+        <div class="input-consulta">
+        <input type="text" placeholder="{{'geral.consultarBilhete' | translate}}" formControlName="codigo">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+</div>
+</ng-container>
+
+<ul *ngIf="contexto != 'cambista' && contexto != 'cliente'" id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
+    <ng-container *ngIf="contexto == 'esportes'">
+        <div class="destaques-regiao hide-mobile" *ngIf="cartaoApostaHabilitado && isNotCambista">
+            <span class="group" *ngIf="!collapsed">{{'cartoes.titulo' | translate}}</span>
+            <li>
+                <a (click)="abrirConsultarCartao()">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="regiao-nome">{{'cartoes.consultarCartao' | translate}}</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="abrirSolicitarSaque()">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="regiao-nome">{{'cartoes.solicitarSaque' | translate}}</span>
+                </a>
+            </li>
+        </div>
+
+        <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
+            <div class="destaques-regiao" *ngIf="regioesDestaque">
+                <span class="group" *ngIf="!collapsed">{{'geral.destaques' | translate}}</span>
+                <li *ngFor="let regiao of regioesDestaque"
+                    (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
+                    <a>
+                        <i class="icon-futebol wbicon"></i>
+                        <span class="regiao-nome">{{regiao.nome}}</span>
+                    </a>
+                </li>
+            </div>
+            <span class="group" *ngIf="!collapsed">{{'geral.campeonatos' | translate}}</span>
+            <li class="regiao" *ngFor="let regiao of itens">
+                <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
+                    <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id}}</span>
+                </a>
+                <div class="sub-nav-container">
+                    <ul *ngIf="regiao._id == regiaoOpen" [ngClass]="{'sub-nav-out': collapsed}">
+                        <li *ngFor="let campeonato of regiao.campeonatos"
+                            (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
+                            <a>
+                                {{campeonato.nome.replace(regiao._id + ': ', '')}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ng-container>
+        <ng-template #esporteGenerico>
+            <span class="group" *ngIf="!collapsed">{{'geral.campeonatos' | translate}}</span>
+            <li class="campeonato" *ngFor="let campeonato of itens"
+                (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
+                <a>
+                    <i [ngClass]="[iconesGenericos[esporte], 'icone-generico']"></i>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{campeonato.nome}}</span>
+                </a>
+            </li>
+        </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="contexto == 'desafio'">
+        <span class="group" *ngIf="!collapsed">{{'geral.desafios' | translate}}</span>
+        <li class="categoria" (click)="goTo('/desafios', {})">
+            <a>
+                <i class="fa fa-trophy icone-generico"></i>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{'geral.todos' | translate}}</span>
+            </a>
+        </li>
+        <li class="categoria" *ngFor="let categoria of itens"
+            (click)="goTo('/desafios', { categoria: categoria.id })">
+            <a>
+                <i class="fa fa-trophy icone-generico"></i>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{categoria.nome}}</span>
+            </a>
+        </li>
+    </ng-container>
+
+    <ng-container *ngIf="contexto == 'seninha' || contexto == 'quininha'">
+        <span class="group" *ngIf="!collapsed">{{'geral.surpresinha' | translate}}</span>
+        <li class="supresinha" *ngFor="let tipoAposta of itens"
+            (click)="gerarSupresinha(tipoAposta.qtdNumeros, contexto)">
+            <a *ngIf="contexto == 'seninha'">
+                <i class="fa-solid fa-clover icone-generico"></i>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} {{'geral.numeros' | translate}}
+                            ( {{tipoAposta.cotacao6 | currency}} )</span>
+            </a>
+            <a *ngIf="contexto == 'quininha'">
+                <i class="fa-solid fa-clover icone-generico"></i>
+                <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{tipoAposta.qtdNumeros}} {{'geral.numeros' | translate}}
+                            ( {{tipoAposta.cotacao5 | currency}} )</span>
+            </a>
+        </li>
+    </ng-container>
+</ul>
+<ng-container *ngIf="contexto == 'cambista'">
+    <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
+        <ul>
+            <li class="cambista-item">
+                <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                    <i class="fa fa-key icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.alterarSenha' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/dashboard']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dashboard icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.dashboard' | translate}}</span>
+                </a>
+            </li>
+
+            <!--<li class="cambista-item">
+                <a [routerLink]="['/cambistas/financeiro']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.financeiro' | translate}}</span>
+                </a>
+            </li>-->
+        </ul>
+        <ul class="menu-middle">
+            <li class="cambista-item">
+                <a [routerLink]="['/validar-aposta']" routerLinkActive="router-link-active">
+                    <i class="fa fa-calendar-check icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.validacao' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/apuracao']" routerLinkActive="router-link-active">
+                    <i class="fa fa-calendar-check icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.apuracao' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/apostas']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.apostas' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/deposito']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">{{'deposito.titulo' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item" routerLinkActive="router-link-active" *ngIf="cartaoApostaHabilitado && isNotCambista">
+                <a (click)="toogleSubCartao()">
+                    <i class="fa fa-credit-card icone-generico"></i>
+                    <span class="regiao-nome">{{'cartoes.cartao' | translate}}</span>
+                    <i class="fa fa-angle-down m-0"></i>
+                </a>
+
+                <div class="sub-nav-container" *ngIf="subCartao">
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a (click)="abrirConsultarCartao()">
+                                <span class="regiao-nome">{{'geral.consultar' | translate}}</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a (click)="abrirCriarCartao()">
+                                <span class="regiao-nome">{{'geral.criar' | translate}}</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/cambistas/cartoes']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.listagem' | translate}}</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/cambistas/solicitacoes-saque']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.solicitacoesSaque' | translate}}</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a (click)="abrirRecargaCartao()">
+                                <span class="regiao-nome">{{'cartoes.recarga' | translate}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/cambistas/tabela']" routerLinkActive="router-link-active">
+                    <i class="fa fa-print icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.tabela' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-bottom">
+            <li class="cambista-item" *ngIf="whatsapp">
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                    <i class="fa fa-comments icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.ajuda' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a (click)="logout()">
+                    <i class="fa fa-sign-out icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.sair' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="contexto == 'cliente'">
+    <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
+        <ul>
+            <li class="cambista-item" routerLinkActive="router-link-active">
+                <a  (click)="toogleSubPerfil()">
+                    <i class="fa fa-user icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.perfil' | translate}}</span>
+                    <i class="fa fa-angle-down m-0"></i>
+                </a>
+
+                <div class="sub-nav-container" *ngIf="subPerfil">
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/perfil']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.dadosPessoais' | translate}}</span>
+                            </a>
+                        </li>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.pix' | translate}}</span>
+                            </a>
+                        </li>
+
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.alterarSenha' | translate}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+             <li class="cambista-item">
+                <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.financeiro' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.saque' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
+                    <i class="fa fa-dollar icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.deposito' | translate}}</span>
+                </a>
+            </li>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
+                    <i class="fa fa-check-square icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.apostas' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu-middle" style="border-top: 0">
+        </ul>
+        <ul class="menu-bottom">
+            <li class="cambista-item" *ngIf="whatsapp">
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                    <i class="fa fa-comments icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.ajuda' | translate}}</span>
+                </a>
+            </li>
+
+            <li class="cambista-item">
+                <a (click)="logout()">
+                    <i class="fa fa-sign-out icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.sair' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-container>

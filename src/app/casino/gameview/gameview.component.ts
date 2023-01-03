@@ -14,7 +14,7 @@ import {interval} from 'rxjs';
   styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
-  gameUrl: SafeUrl;
+  gameUrl: SafeUrl = '';
   gameId: String = '';
   gameMode: String = '';
   gameFornecedor: String = '';
@@ -39,7 +39,7 @@ constructor(
 
 ngOnInit(): void {
     this.elem = document.documentElement;
-    this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+    this.mobileScreen = window.innerWidth <= 1024;
     this.fullscreen = false;
     this.menuFooterService.setIsPagina(true);
     this.route.params.subscribe(params => {
@@ -74,7 +74,9 @@ ngOnInit(): void {
 
     back(): void {
         this.location.back();
-        this.closeFullscreen();
+        if (this.fullscreen) {
+            this.closeFullscreen();
+        }
     }
 
     ngOnDestroy() {

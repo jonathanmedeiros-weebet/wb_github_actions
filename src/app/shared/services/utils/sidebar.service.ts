@@ -15,11 +15,18 @@ export class SidebarService {
     });
     itens = this.itensSource.asObservable();
 
+    private collapsed;
+    collapsedSource;
+
     constructor() {
         const width = window.innerWidth;
-        this.open = width > 667 ? true : false;
+        this.open = width > 1024;
         this.isOpenSource = new BehaviorSubject<boolean>(this.open);
         this.isOpen = this.isOpenSource.asObservable();
+
+        this.collapsed = !!localStorage.getItem('navigation_callapsed');
+
+        this.collapsedSource = new BehaviorSubject<boolean>(this.collapsed);
     }
 
     toggle(): void {
@@ -34,5 +41,17 @@ export class SidebarService {
 
     changeItens(dados) {
         this.itensSource.next(dados);
+    }
+
+    collapseSidebar() {
+        this.collapsed = !this.collapsed;
+
+        this.collapsedSource.next(this.collapsed);
+
+        if (this.collapsed) {
+            localStorage.setItem('navigation_callapsed', 'collapsed');
+        } else {
+            localStorage.removeItem('navigation_callapsed');
+        }
     }
 }

@@ -23,6 +23,7 @@ import {
 } from './../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-basquete-jogo',
@@ -54,14 +55,15 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private activeModal: NgbActiveModal
     ) { }
 
     ngOnInit() {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
-            let altura = window.innerHeight - 97;
+            let altura = window.innerHeight;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
@@ -134,9 +136,9 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         let altura = window.innerHeight;
 
         if (this.isMobile) {
-            altura -= 252;
+            altura -= 190;
         } else {
-            altura -= 46;
+            altura -= 150 + ((window.innerHeight / 100) * 20);
         }
 
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
@@ -144,7 +146,11 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     back() {
-        this.exibirMaisCotacoes.emit(false);
+        if (this.isMobile) {
+            this.activeModal.close();
+        } else {
+            this.exibirMaisCotacoes.emit(false);
+        }
     }
 
     mapearOdds(odds) {

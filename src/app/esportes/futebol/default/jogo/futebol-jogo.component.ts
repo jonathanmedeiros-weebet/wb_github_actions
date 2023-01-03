@@ -4,6 +4,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -13,16 +14,11 @@ import {
 } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
-import {ItemBilheteEsportivo, Jogo} from './../../../../models';
-import {
-    BilheteEsportivoService,
-    HelperService,
-    JogoService,
-    MessageService,
-    ParametrosLocaisService
-} from './../../../../services';
+import {Jogo} from './../../../../models';
+import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -39,6 +35,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     mercados1T: any = {};
     mercados2T: any = {};
     mercadosJogadores: any = {};
+    mercadosPorJogadores: any = {};
     itens = [];
     itensSelecionados = {};
     tiposAposta;
@@ -46,7 +43,21 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     objectKeys = Object.keys;
     showLoadingIndicator = true;
     contentSportsEl;
+    altura;
+    unicaColuna = false;
     unsub$ = new Subject();
+    oddsAberto = [];
+
+    marcadores = true;
+    cartoes = true;
+    golsCasa = true;
+    golsFora = true;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.definirAltura();
+        this.cd.detectChanges();
+    }
 
     constructor(
         private jogoService: JogoService,
@@ -57,14 +68,16 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
-        private cd: ChangeDetectorRef
-    ) { }
+        private cd: ChangeDetectorRef,
+        private activeModal: NgbActiveModal
+    ) {
+    }
 
     ngOnInit() {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
-            let altura = window.innerHeight - 97;
+            const altura = window.innerHeight;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
@@ -113,6 +126,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
+        this.oddsAberto = [];
+
         if (this.jogoId) {
             this.showLoadingIndicator = true;
 
@@ -134,20 +149,25 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     definirAltura() {
-        let altura = window.innerHeight;
+        this.altura = window.innerHeight;
+        this.unicaColuna = window.innerWidth <= 1279;
 
         if (this.isMobile) {
-            altura -= 257;
+            this.altura -= 220;
         } else {
-            altura -= 46;
+            this.altura -= 190 + ((window.innerHeight / 100) * 20);
         }
 
-        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
-        this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
+        this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports-jogo');
+        this.renderer.setStyle(this.contentSportsEl, 'height', `${this.altura}px`);
     }
 
     back() {
-        this.exibirMaisCotacoes.emit(false);
+        if (this.isMobile) {
+            this.activeModal.close();
+        } else {
+            this.exibirMaisCotacoes.emit(false);
+        }
     }
 
     mapearOdds(odds) {
@@ -177,7 +197,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 let mercado = obj[tipoAposta.cat_chave];
 
                 if (!mercado) {
-                    //categoria
+                    // categoria
                     mercado = {
                         'nome': tipoAposta.cat_nome,
                         'tempo': tipoAposta.tempo,
@@ -198,6 +218,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
 
                 mercado.odds.push(odd);
+                if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                    this.oddsAberto.push(mercado.nome);
+                }
 
                 if (this.cotacoesLocais[this.jogo.event_id] && this.cotacoesLocais[this.jogo.event_id][odd.chave]) {
                     this.cotacoesLocais[this.jogo.event_id][odd.chave].usou = true;
@@ -250,9 +273,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                 posicaoY: tipoAposta.posicao_x_mobile,
                                 posicaoXMobile: tipoAposta.posicao_x_mobile,
                                 posicaoYMobile: tipoAposta.posicao_x_mobile,
-                            }
+                            };
 
                             mercado.odds.push(cotacao);
+                            if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                                this.oddsAberto.push(mercado.nome);
+                            }
                         }
                     }
                 }
@@ -262,7 +288,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         this.mercados90 = this.organizarMercados(mercados90);
         this.mercados1T = this.organizarMercados(mercados1T);
         this.mercados2T = this.organizarMercados(mercados2T);
-        this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
+        // this.mercadosJogadores = this.organizarMercados(mercadosJogadores);
+        this.mercadosPorJogadores = this.organizarMercados(mercadosJogadores, true);
 
         this.showLoadingIndicator = false;
         this.cd.detectChanges();
@@ -318,7 +345,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     showOdd(odd) {
-        return this.tiposAposta[odd] ? true : false;
+        return !!this.tiposAposta[odd];
     }
 
     itemSelecionado(jogo, cotacao) {
@@ -334,64 +361,122 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return result;
     }
 
-    private organizarMercados(mercados) {
+    private organizarMercados(mercados, mercadoJogadores = false) {
         const mercadosOrganizados = {};
 
-        const aux = [];
-        for (const chave in mercados) {
-            aux.push([mercados[chave].posicao, chave, mercados[chave]]);
-        }
-        aux.sort((a, b) => a[0] - b[0]);
-        aux.forEach(element => {
-            mercadosOrganizados[element[1]] = element[2];
-        });
+        if (mercadoJogadores) {
+            const jogadoresMercados = [];
+            for (const chave in mercados) {
+                mercados[chave].odds.forEach((odd) => {
+                    const verificacaoJogador = jogadoresMercados.some((item) => {
+                        return item.nome === odd.nome;
+                    });
 
-        for (const chave in mercadosOrganizados) {
-            const mercado = mercadosOrganizados[chave];
-            //cria a estrutura para organizar os odds
-            const colunas = [];
-
-            let numeroColunas;
-            if (this.isMobile) {
-                numeroColunas = mercado.colunasMobile;
-            } else {
-                numeroColunas = mercado.colunas;
-            }
-
-            for (let i = 0; i < numeroColunas; i++) {
-                colunas.push([]);
-            }
-
-            //popula as colunas com as cotacaoes
-            for (const odd of mercado.odds) {
-                let posicaoX;
-                if (this.isMobile) {
-                    posicaoX = odd.posicaoXMobile
-                } else {
-                    posicaoX = odd.posicaoX;
-                }
-
-                const odds = colunas[posicaoX];
-                odds.push(odd);
-            }
-
-            //Ordena os odds de cada coluna com base na posicao vertical de cada um
-            //Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
-
-            for (const coluna of colunas) {
-                coluna.sort((a, b) => {
-                    if (this.isMobile) {
-                        return a.posicaoYMobile - b.posicaoYMobile;
-                    } else {
-                        return a.posicaoY - b.posicaoY;
+                    if (!verificacaoJogador) {
+                        const temp = {
+                            nome: odd.nome,
+                            m_gols: {},
+                            m_marcadores: {},
+                            m_cartoes: {},
+                            m_gols_casa: {},
+                            m_gols_fora: {},
+                        };
+                        jogadoresMercados.push(temp);
                     }
                 });
             }
 
-            mercado.odds = colunas;
+            jogadoresMercados.forEach((jogador) => {
+                const mercadosJogador = {};
+                for (const chave in mercados) {
+                    const mercadoTemp = mercados[chave].odds.filter((odd) => {
+                        return (odd.nome === jogador.nome && odd.nome !== 'No Bookings');
+                    });
+
+                    mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : {};
+                }
+
+                jogador['m_gols']['jogador_marca_primeiro'] = this.checkEmpty(mercadosJogador['jogador_marca_primeiro']);
+                jogador['m_gols']['jogador_marca_ultimo'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo']);
+                jogador['m_gols']['jogador_marca_qualquer_momento'] = this.checkEmpty(mercadosJogador['jogador_marca_qualquer_momento']);
+
+                jogador['m_marcadores']['jogador_marca_2_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_2_ou_mais_gols']);
+                jogador['m_marcadores']['jogador_marca_3_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_3_ou_mais_gols']);
+
+                jogador['m_cartoes']['jogador_recebera_primeiro_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_primeiro_cartao']);
+                jogador['m_cartoes']['jogador_recebera_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_cartao']);
+                jogador['m_cartoes']['jogador_sera_expulso'] = this.checkEmpty(mercadosJogador['jogador_sera_expulso']);
+
+                jogador['m_gols_casa']['jogador_marca_1st_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_casa']);
+                jogador['m_gols_casa']['jogador_marca_ultimo_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_casa']);
+
+                jogador['m_gols_fora']['jogador_marca_1st_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_fora']);
+                jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
+            });
+
+            return jogadoresMercados;
+
+        } else {
+            const aux = [];
+            for (const chave in mercados) {
+                aux.push([mercados[chave].posicao, chave, mercados[chave]]);
+            }
+            aux.sort((a, b) => a[0] - b[0]);
+            aux.forEach(element => {
+                mercadosOrganizados[element[1]] = element[2];
+            });
+
+            for (const chave in mercadosOrganizados) {
+                const mercado = mercadosOrganizados[chave];
+                // cria a estrutura para organizar os odds
+                const colunas = [];
+
+                let numeroColunas;
+                if (this.isMobile) {
+                    numeroColunas = mercado.colunasMobile;
+                } else {
+                    numeroColunas = mercado.colunas;
+                }
+
+                for (let i = 0; i < numeroColunas; i++) {
+                    colunas.push([]);
+                }
+
+                // popula as colunas com as cotacaoes
+                for (const odd of mercado.odds) {
+                    let posicaoX;
+                    if (this.isMobile) {
+                        posicaoX = odd.posicaoXMobile;
+                    } else {
+                        posicaoX = odd.posicaoX;
+                    }
+
+                    const odds = colunas[posicaoX];
+                    odds.push(odd);
+                }
+
+                // Ordena os odds de cada coluna comgul base na posicao vertical de cada um
+                // Caso nao haja poicao vertical ele adiciona com base na ordem de associacao
+
+                for (const coluna of colunas) {
+                    coluna.sort((a, b) => {
+                        if (this.isMobile) {
+                            return a.posicaoYMobile - b.posicaoYMobile;
+                        } else {
+                            return a.posicaoY - b.posicaoY;
+                        }
+                    });
+                }
+
+                mercado.odds = colunas;
+            }
         }
 
         return mercadosOrganizados;
+    }
+
+    checkEmpty(values) {
+        return values ? values : {};
     }
 
     cssTamanhoColuna(mercado) {
@@ -413,5 +498,33 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    verificarColunaMercado(index, right = false) {
+        let retorno: boolean;
+        if (window.innerWidth >= 1280) {
+            if (right) {
+                retorno = index % 2 !== 0;
+            } else {
+                retorno = index % 2 === 0;
+            }
+        } else {
+            retorno = !right;
+        }
+
+        return retorno;
+    }
+
+    toggleOdd(chave) {
+        const index = this.oddsAberto.findIndex(id => id === chave.nome);
+        if (index >= 0) {
+            this.oddsAberto.splice(index, 1);
+        } else {
+            this.oddsAberto.push(chave.nome);
+        }
+    }
+
+    oddAberto(chave) {
+        return this.oddsAberto.includes(chave.nome);
     }
 }

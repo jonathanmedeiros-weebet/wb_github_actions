@@ -1,27 +1,55 @@
 <div id="acumuladao-listagem">
-    <div>
+    <h2 class="m-3 mt-4">{{'geral.acumuladao' | translate}}</h2>
+    <div class="wrap-acumuladao">
         <div class="sem-evento" *ngIf="acumuladoes ? acumuladoes.length == 0 : false">
             Nenhum acumuladão disponível!
         </div>
-        <div class="acumuladao" (click)="gotTo(acumuladao.id)" *ngFor="let acumuladao of acumuladoes">
-            <div class="line-1">
-                <div class="nome">{{acumuladao.nome}}</div>
-                <div class="premios">
-                    <div class="premio" *ngFor="let premio of acumuladao.premios">
-                        <span *ngIf="acumuladao.premios.length > 1">{{premio.quantidade_acertos}}:</span>
-                        {{premio.valor | currency}}
+
+        <ng-container *ngIf="!isMobile; else listItemMobile">
+            <div class="acumuladao" (click)="gotTo(acumuladao.id)" *ngFor="let acumuladao of acumuladoes">
+                <div class="nome">
+                    {{acumuladao.nome}}
+                    <div class="data">
+                        {{verificarEncerramento(acumuladao.data_encerramento) ? 'Encerrado' : 'Encerra'}}
+                        em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
                     </div>
                 </div>
-            </div>
-            <div class="line-2">
-                <div class="data">
-                    {{verificarEncerramento(acumuladao.data_encerramento) ? 'Encerrado' : 'Encerra'}}
-                    em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}
+                <div class="premios">
+                    <div class="premio" *ngFor="let premio of acumuladao.premios; let i = index">
+                        <span *ngIf="acumuladao.premios.length > 1 && i < 3">
+                            {{'geral.premio' | translate}} {{premio.quantidade_acertos}} {{premio.quantidade_acertos > 1 ? 'acertos' : 'acerto'}}:
+                        </span>
+                        <span *ngIf="i < 3"> {{premio.valor | currency}}</span>
+                        <span *ngIf="i === 4">e mais...</span>
+                    </div>
                 </div>
-                <div class="qtd-evenos">
+                <div class="qtd-eventos">
                     {{acumuladao.jogos.length}} partidas
                 </div>
             </div>
-        </div>
+        </ng-container>
+
+        <ng-template #listItemMobile>
+            <div class="acumuladao" (click)="gotTo(acumuladao.id)" *ngFor="let acumuladao of acumuladoes">
+                <div class="mb-3">{{verificarEncerramento(acumuladao.data_encerramento) ? 'Encerrado' : 'Encerra'}} em {{acumuladao.data_encerramento | moment:'DD/MM/YYYY [às] HH:mm'}}</div>
+
+                <div class="infoAcumuladao">
+                    <div class="info">
+                        <div>{{acumuladao.nome}}</div>
+                        <div class="partidas">{{acumuladao.jogos.length}} partidas</div>
+                    </div>
+                    <div class="premios">
+                        <div class="premio" *ngFor="let premio of acumuladao.premios; let i = index">
+                            <span *ngIf="acumuladao.premios.length > 1 && i < 3">
+                                {{premio.quantidade_acertos}}:
+                            </span>
+                            <span *ngIf="i < 3"> {{premio.valor | currency}}</span>
+                            <span *ngIf="i === 4">e mais...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
     </div>
+    <app-footer></app-footer>
 </div>

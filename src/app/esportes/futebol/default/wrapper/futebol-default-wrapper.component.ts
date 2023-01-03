@@ -1,18 +1,13 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import {
-    CampeonatoService,
-    MessageService,
-    ParametrosLocaisService,
-    RegioesDestaqueService,
-    SidebarService,
-    MenuFooterService
-} from './../../../../services';
-import { Campeonato } from '../../../../models';
+import {Observable, Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {CampeonatoService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService} from './../../../../services';
+import {Campeonato} from '../../../../models';
 import * as moment from 'moment';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FutebolJogoComponent} from '../jogo/futebol-jogo.component';
 
 @Component({
     selector: 'app-futebol-default-wrapper',
@@ -28,6 +23,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     oddsPrincipais = ['casa_90', 'empate_90', 'fora_90'];
     data;
     campeonato;
+    campeonatoSelecionado = false;
+    modalRef;
     unsub$ = new Subject();
 
     constructor(
@@ -35,14 +32,14 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private messageService: MessageService,
         private paramsService: ParametrosLocaisService,
-        private regioesDestaqueService: RegioesDestaqueService,
         private menuFooterService: MenuFooterService,
+        private modalService: NgbModal,
         private route: ActivatedRoute
     ) {
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
@@ -71,6 +68,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 let isHoje = false;
 
                 if (params['campeonato']) {
+                    this.campeonatoSelecionado = true;
                     const campeonatoId = params['campeonato'];
 
                     queryParams = {
@@ -94,6 +92,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
+                    this.campeonatoSelecionado = false;
                     if (params['regiao_nome']) {
                         queryParams = {
                             odds: this.oddsPrincipais,
@@ -140,6 +139,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             switchMap(campeonatos => {
                                 if (campeonatos.length === 0 && isHoje) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
+                                    this.data = queryParams.data;
                                     return this.campeonatoService.getCampeonatos(queryParams);
                                 } else {
                                     const observable = new Observable(subscriber => {
@@ -160,14 +160,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 }
-
-                this.regioesDestaqueService.setExibirDestaques(exibirDestaques);
             });
     }
 
     ngOnDestroy() {
-        this.setIsPagina(false);
-
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -202,8 +198,12 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.setIsPagina(exibirMaisCotacoes);
-        this.exibirMaisCotacoes = exibirMaisCotacoes;
+        if (this.mobileScreen) {
+            this.modalRef = this.modalService.open(FutebolJogoComponent);
+            this.modalRef.componentInstance.jogoId = this.jogoId;
+        } else {
+            this.exibirMaisCotacoes = exibirMaisCotacoes;
+        }
     }
 
     // Extrai id do primeiro jogo do primeiro campeonato
@@ -239,11 +239,5 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
         this.jogoId = jogoId;
         return jogoId;
-    }
-
-    setIsPagina(isPage) {
-        if (this.mobileScreen) {
-            this.menuFooterService.setIsPagina(isPage);
-        }
     }
 }

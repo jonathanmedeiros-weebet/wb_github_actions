@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {AuthLayoutComponent} from './shared/layout/app-layouts/auth-layout.component';
-import {MainLayoutComponent} from './shared/layout/app-layouts/main-layout.component';
+import {MainLayoutComponent, AuthLayoutComponent} from './shared/layout/app-layouts';
 
 import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
 import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
+import {CambistaGuard} from './shared/services/guards/cambista.guard';
 
 const appRoutes: Routes = [
     {
@@ -67,7 +67,7 @@ const appRoutes: Routes = [
             {
                 path: 'validar-aposta',
                 loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, CambistaGuard]
             },
             {
                 path: 'auth',
@@ -81,7 +81,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'cambistas',
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard, CambistaGuard],
                 loadChildren: () => import('./cambistas/cambistas.module').then(c => c.CambistasModule)
             }
         ]

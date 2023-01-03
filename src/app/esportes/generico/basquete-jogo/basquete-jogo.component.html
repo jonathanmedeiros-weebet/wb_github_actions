@@ -1,13 +1,21 @@
 <div class="jogo-container">
     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-    <section [hidden]="!jogo || showLoadingIndicator">
+    <div class="top-bar">
+        <div class="top-bar-back" (click)="back()">
+            <i class="fa fa-arrow-left"></i>
+        </div>
+        <div class="v-divider"></div>
+        <div class="top-bar-info">
+            <span class="top-times">{{jogo?.time_a_nome}} x {{jogo?.time_b_nome}}</span>
+            <span class="top-camp">{{jogo?.campeonato?.nome}}</span>
+        </div>
+    </div>
+
+    <section class="wrap-sticky" [hidden]="!jogo || showLoadingIndicator">
         <div class="indentificacao">
-            <div class="div-back" (click)="back()">
-                <i class="fa fa-times"></i>
-            </div>
             <div class="info">
-                <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
+                <div class="campeonato-nome">{{jogo?.campeonato?.nome}}</div>
                 <div class="nome">
                     <div class="time-a">
                         <div *ngIf="!showLoadingIndicator">
@@ -50,7 +58,9 @@
         <div class="jogo" [hidden]="!jogo || showLoadingIndicator">
             <div class="tipo-apostas">
                 <div class="tipo-aposta {{chave}}" *ngFor="let chave of objectKeys(mercados)">
-                    <h4>{{mercados[chave].nome}}</h4>
+                    <div class="header-tipo-aposta">
+                        {{mercados[chave].nome}}
+                    </div>
                     <div class="odds">
                         <div class="odds-coluna" [ngClass]="cssTamanhoColuna(mercados[chave])"
                             *ngFor="let odds of mercados[chave].odds">

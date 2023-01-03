@@ -1,56 +1,48 @@
-<div *ngIf="contexto != 'casino'" id="footer-bar" [hidden]="hidden">
-    <div class="foot-button" routerLinkActive="active">
-        <a class="" (click)="toggleSidebar()">
-            <i class="fa fa-bars"></i> Menu
+<div id="definir" [ngClass]="{'hide': !isOpen}">
+    <div class="logo-container">
+        <a class="" [routerLink]="['/esportes/futebol/jogos']">
+            <img [src]="LOGO" class="logo">
+        </a>
+
+        <a type="button" class="btn-close" aria-label="Close" (click)="closeMenu()">
+            <i class="fa fa-times"></i>
         </a>
     </div>
-    <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active">
+    <app-sidebar-nav *ngIf="campeonatosIsOpen" [height]="sidebarNavHeight"></app-sidebar-nav>
+    <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>
+</div>
+<div id="footer-bar" [hidden]="hidden">
+    <div class="foot-button" *ngIf="!['acumuladao', 'quininha', 'seninha'].includes(contexto)">
+        <a class="" (click)="toggleCampeonatos()">
+            <i class="fa-solid fa-bars-staggered"></i> {{nomeBotaoExtras}}
+        </a>
+    </div>
+    <div *ngIf="aoVivoHabilitado" class="foot-button" routerLinkActive="active" [ngClass]="{'menu-open': menuIsOpen}">
         <a class="" [routerLink]="['/esportes/live']">
-            <i class="wbicon icon-ao-vivo"></i> Ao Vivo
+            <i class="fa-solid fa-play"></i> {{'geral.aoVivo' | translate}}
         </a>
     </div>
     <div *ngIf="!aoVivoHabilitado" class="foot-button" routerLinkActive="active">
         <a class="" [routerLink]="['/esportes/futebol']">
-            <i class="wbicon icon-futebol"></i> Futebol
+            <i class="wbicon icon-futebol"></i> {{'submenu.futebol' | translate}}
         </a>
     </div>
-    <div class="foot-button cupom">
+    <div class="foot-button">
         <a class="" (click)="toggleBilhete()">
             <div class="badge-container" *ngIf="quantidadeItens > 0">
                 <span class="cupom-badge">{{quantidadeItens}}</span>
             </div>
-            <i class="fa fa-ticket"></i> Cupom
+            <i class="uil uil-ticket"></i> {{'geral.bilhete' | translate}}
         </a>
     </div>
     <div class="foot-button" *ngIf="isLoggedIn && !isCliente">
-        <a class="" [routerLink]="['/validar-aposta']" routerLinkActive="active">
-            <i class="fa fa-check"></i> Validação
+        <a class="" (click)="abrirValidarAposta()">
+            <i class="fa-solid fa-check"></i> {{'geral.validacao' | translate}}
+        </a>
+    </div>
+    <div class="foot-button" [ngClass]="{'active': menuIsOpen}">
+        <a class="" (click)="toggleMenu()">
+            <i class="fa-solid fa-ellipsis-vertical"></i> {{'geral.menu' | translate}}
         </a>
     </div>
 </div>
-
-<div *ngIf="contexto == 'casino' || contexto == 'virtuais'" id="footer-bar-casino" [hidden]="hidden">
-    <div class="foot-button" routerLinkActive="active">
-        <a class="" (click)="toggleSidebar()">
-            <i class="fa fa-bars"></i> Menu
-        </a>
-    </div>
-    <div class="foot-button" routerLinkActive="active">
-        <a class="" [routerLink]="['/casino/wall/destaques']">
-            <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon> Destaques
-        </a>
-    </div>
-    <div class="foot-button" routerLinkActive="active">
-        <a class="" [routerLink]="['/casino/wall/todos']">
-            <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon> Todos
-        </a>
-    </div>
-    <div class="foot-button" routerLinkActive="active">
-        <a class="" [routerLink]="['/casino/live']">
-            <svg-icon src="https://cdn.wee.bet/img/casino2.svg" [svgStyle]="svgCss()"></svg-icon> Ao Vivo
-        </a>
-    </div>
-
-</div>
-
-<app-bilhete-esportivo></app-bilhete-esportivo>

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import {
     ParametrosLocaisService, CampeonatoService, SidebarService,
     MessageService, LiveService, MenuFooterService
 } from '../../../services';
+import { LiveJogoComponent } from '../jogo/live-jogo.component';
 
 @Component({
     selector: 'app-live-wrapper',
@@ -17,6 +19,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     jogoId;
     mobileScreen = false;
     unsub$ = new Subject();
+    modalRef;
 
     constructor(
         private campeonatoService: CampeonatoService,
@@ -25,6 +28,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private liveService: LiveService,
+        private modalServices: NgbModal,
     ) { }
 
     ngOnInit() {
@@ -79,8 +83,14 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeExibirMaisCotacoes(exibirMaisCotacoes) {
-        this.setIsPagina(exibirMaisCotacoes);
-        this.exibirMaisCotacoes = exibirMaisCotacoes;
+
+        if(this.mobileScreen) {
+            this.modalRef = this.modalServices.open(LiveJogoComponent);
+            this.modalRef.componentInstance.jogoId = this.jogoId;
+        } else {
+            this.setIsPagina(exibirMaisCotacoes);
+            this.exibirMaisCotacoes = exibirMaisCotacoes;
+        }
     }
 
     setIsPagina(isPage) {

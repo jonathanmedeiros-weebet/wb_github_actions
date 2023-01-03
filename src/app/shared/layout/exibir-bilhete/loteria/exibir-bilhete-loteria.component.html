@@ -14,7 +14,7 @@
             </ng-template>
             <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
             <p class="informacoes-gerais">MODALIDADE: {{aposta.modalidade | sorteioTipo}}</p>
-            ----------------------------<br>
+            <hr />
             <ng-container *ngFor="let item of aposta.itens">
                 <p class="informacoes-item">
                     {{sorteioNome(item.sorteio_id)}}
@@ -43,7 +43,7 @@
                         <strong>{{item.status}} {{item.tipo_premio}}</strong>
                     </ng-template>
                 </p>
-                ----------------------------<br>
+                <hr />
             </ng-container>
             <p class="valor-aposta">
                 VALOR TOTAL: {{aposta.valor | currency}}

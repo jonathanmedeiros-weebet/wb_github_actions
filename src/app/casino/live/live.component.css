@@ -2,6 +2,33 @@
     position: relative;
 }
 
+.wall-container {
+    width: 100%;
+    min-height: 100%;
+    padding: 5px;
+}
+
+.wall-inner {
+    padding: 5px 120px;
+    max-width: 1910px;
+    margin: 0 auto;
+}
+
+.bloco {
+    position: relative;
+}
+
+.bloco .bloco-header {
+    display: flex;
+}
+
+.bloco .titulo {
+    text-align: left;
+    font-size: 18px;
+    color: var(--foreground-header);
+    flex-grow: 1;
+}
+
 .game-list{
     display: flex;
     flex-wrap: wrap;
@@ -110,14 +137,17 @@
 
 @media only screen and (max-width: 1024px) {
 
+    .wall-inner {
+        padding: 5px;
+    }
+
     .game-list{
-        padding: 10px 10px 80px 10px;
+        gap: 10px;
     }
 
     .game-rooms{
-        width: 100%;
-        height: 300px;
-        margin-bottom: 10px;
+        width: calc(50% - 5px);
+        height: 140px;
     }
 
     .game-tile {

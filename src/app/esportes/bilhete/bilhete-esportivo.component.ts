@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent } from '../../shared/layout/modals';
@@ -13,11 +13,14 @@ import {
     MenuFooterService,
     MessageService,
     ParametrosLocaisService,
-    PreApostaEsportivaService
+    PreApostaEsportivaService,
+    CampinhoService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
+import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -26,6 +29,7 @@ import * as clone from 'clone';
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
+    @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
     mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
@@ -36,7 +40,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     displayPreTicker = false;
     disabled = false;
     isLoggedIn;
-    btnText = 'Pré-Aposta';
+    btnText;
     tipoApostaDeslogado = 'preaposta';
     cartaoApostaForm: FormGroup;
     apostaAoVivo = false;
@@ -55,8 +59,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     };
     mobileScreen = false;
     utilizarBonus = false;
+    valorFocado = false;
+    liveTrackerUrl;
+    modoCambista = false;
+    showCampinho = true;
+
 
     constructor(
+        public sanitizer: DomSanitizer,
         private apostaEsportivaService: ApostaEsportivaService,
         private preApostaService: PreApostaEsportivaService,
         private auth: AuthService,
@@ -68,13 +78,17 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
-        private menuFooterService: MenuFooterService
+        private campinhoService: CampinhoService,
+        private menuFooterService: MenuFooterService,
+        private translate: TranslateService
     ) {
         super();
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
+
+        this.btnText = this.translate.instant('bilhete.preAposta');
 
         this.createForm();
         this.definirAltura();
@@ -131,7 +145,29 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(result => {
                 this.setItens(result);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
+                this.scrollToBottom();
             });
+
+
+        this.bilheteService.idJogo
+            .pipe(switchMap(result => {
+                    if (this.opcoes.habilitar_live_tracker && result) {
+                        return this.campinhoService.getIdsJogo(result);
+                    } else {
+                        return of(null);
+                    }
+                })
+            )
+            .subscribe(
+                (response: any) => {
+                    if (response?.thesports_uuid) {
+                        this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                    } else {
+                        this.liveTrackerUrl = null;
+                    }
+                },
+                error => this.handleError(error)
+            );
 
         this.form.get('valor').valueChanges
             .pipe(takeUntil(this.unsub$))
@@ -146,8 +182,22 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             );
     }
 
+    private scrollToBottom(): void {
+        if (this.scrollFrame) {
+            const el = this.scrollFrame.nativeElement;
+
+            setTimeout(() => {
+                el.scroll({
+                    top: el.scrollHeight,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const altura = window.innerHeight - 132;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
@@ -155,6 +205,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    toogleCampinho() {
+        this.showCampinho = !this.showCampinho;
     }
 
     createForm() {
@@ -197,6 +251,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             this.aceitarMudancas();
         }
 
+        this.bilheteService.atualizarItens(this.itens.value);
+    }
+
+    removerItens() {
+        this.itens.clear();
         this.bilheteService.atualizarItens(this.itens.value);
     }
 
@@ -244,6 +303,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     toggleUtilizarBonus() {
         this.utilizarBonus = !this.utilizarBonus;
         this.calcularPossibilidadeGanho(this.form.value.valor);
+    }
+
+    setFocoValor(focus: boolean) {
+        this.valorFocado = focus;
     }
 
     submit() {
@@ -387,6 +450,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.menuFooterService.toggleBilhete(false);
     }
 
+    closeCupomPre() {
+        this.modalRef.close();
+    }
+
     disabledSubmit() {
         this.disabled = true;
     }
@@ -433,9 +500,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     trocarTipoApostaDeslogado(tipo) {
         this.tipoApostaDeslogado = tipo;
         if (tipo === 'preaposta') {
-            this.btnText = 'Pré-Aposta';
+            this.btnText = this.translate.instant('bilhete.preAposta');
         } else {
-            this.btnText = 'Aposta';
+            this.btnText = this.translate.instant('bilhete.aposta');
         }
     }
 

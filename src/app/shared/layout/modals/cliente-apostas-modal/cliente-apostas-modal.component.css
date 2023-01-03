@@ -1,0 +1,197 @@
+:host {
+    flex: 1;
+}
+
+.content-body {
+    flex: 1;
+}
+
+.content-body form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content-body form .fields {
+    flex: 1;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color:  var(--highlight);
+    cursor: pointer;
+}
+
+
+.table-responsive {
+    margin-top: 50px;
+}
+
+.table {
+    color: var(--foreground);
+ }
+
+ .table thead th {
+     background-color: var(--game);
+     color: var(--foreground-game);
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     padding: 15px 10px;
+     white-space: nowrap;
+ }
+
+ .table .right {
+     text-align: right;
+ }
+
+ .table tbody td {
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     white-space: nowrap;
+ }
+
+ .table td.no-border{
+     border-left: 0 !important;
+ }
+
+ .group-input-valor {
+    text-align: center;
+}
+
+.row-input-valor {
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.form-row {
+    gap: 10px;
+}
+
+.label-input-valor {
+    font-size: 16px;
+    text-align: center;
+    display: block;
+}
+
+.input-valor {
+    border: 0;
+    border-bottom: 2px solid var(--inputs-odds);
+    color: var(--foreground);
+    border-radius: 0;
+
+    text-align: center !important;
+    font-size: 22px;
+    background-color: transparent;
+
+    padding: 5px;
+}
+
+.input-valor:focus {
+    border: 0;
+    border-bottom: 2px solid var(--highlight);
+    color: var(--foreground);
+    background-color: transparent;
+}
+
+.alerta-min {
+    border-radius: 4px;
+    margin-top: 40px !important;
+    padding: 10px 15px;
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    text-align: left;
+}
+
+.group-buttons {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.buttons {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 12px;
+    right: 15px;
+    font-size: 14px;
+}
+
+.datepicker-group input {
+    padding-right: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    position: absolute;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+.custom-day.faded {
+    background-color: var(--highlight);
+}
+
+ @media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 20px;
+        background: var(--background);
+    }
+
+    .uncollapsed {
+        padding: 0;
+    }
+
+    .table thead th {
+        background-color: var(--game);
+    }
+ }

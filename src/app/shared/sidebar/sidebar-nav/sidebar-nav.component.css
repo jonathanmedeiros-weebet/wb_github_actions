@@ -1,0 +1,332 @@
+ ul li {
+    list-style: none;
+}
+
+.sidebar-nav {
+    background-color: var(--sidebar);
+    padding: 0;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+
+    flex: 1 1 auto;
+    height: 0px;
+}
+
+.sidebar-nav .regiao:last-of-type,
+.sidebar-nav .campeonato:last-of-type,
+.sidebar-nav .supresinha:last-of-type {
+    margin-bottom: 15px;
+}
+
+.sidebar-nav a {
+    color: var(--foreground-sidebars);
+}
+
+.sidebar-nav .group {
+    display: inline-block;
+    padding-left: 15px;
+    color: var(--highlight);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 36px;
+}
+
+.sidebar-nav li {
+    padding: 0;
+    cursor: pointer;
+}
+
+.sidebar-nav li a {
+    padding: 10px 15px;
+    display: flex;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 12px;
+}
+
+.regiao-nome {
+    align-self: center;
+    margin-left: 5px;
+    white-space: normal;
+}
+
+.sidebar-nav li a:hover {
+    color: var(--highlight) !important;
+}
+
+.regiao .flag-icon {
+    float: left;
+    margin-top: 0;
+    margin-right: 4px;
+    min-width: 22px;
+    min-height: 22px;
+    clip-path: circle();
+    z-index: 1;
+    border-radius: 100%;
+}
+
+.regiao ul li a {
+    padding-left: 30px;
+}
+
+.icone-generico {
+    align-self: center;
+    font-size: 13px;
+}
+
+.regiao > a {
+    position: relative;
+    display: flex;
+    vertical-align: center;
+}
+
+/*.regiao > a:after {*/
+/*    content: "";*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-left: 5px solid transparent;*/
+/*    border-right: 5px solid transparent;*/
+/*    border-top: 5px solid var(--foreground-sidebars);*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    top: 13px;*/
+/*}*/
+
+/*.regiao > a.selected:after {*/
+/*    content: "";*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-left: 5px solid transparent;*/
+/*    border-right: 5px solid transparent;*/
+/*    border-top: 5px solid transparent;*/
+/*    border-bottom: 5px solid var(--foreground-sidebars);*/
+/*}*/
+
+.regiao ul {
+    padding-left: 19px;
+}
+
+.collapsed .regiao-nome {
+   display: none;
+}
+
+.hide-item {
+    animation-name: hideAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+    width: 50px;
+}
+
+.show-item {
+    animation-name: showAnim;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+@keyframes showAnim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+@keyframes hideAnim {
+    0% {
+        opacity: 100;
+    }
+    99%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.cambista-menu {
+    overflow: auto;
+}
+
+.cambista-menu a {
+    transition: 0.15s all ease;
+    white-space: nowrap;
+    height: 45px;
+
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--foreground-sidebars);
+}
+
+.cambista-menu a span {
+    flex: 1;
+}
+
+.cambista-menu {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1 1 auto;
+    height: 0px;
+}
+
+.cambista-menu ul {
+    padding-left: 0;
+    font-size: 14px;
+}
+
+.collapsed.cambista-menu a {
+    padding-left: 15px !important;
+}
+
+.cambista-menu ul.menu-middle {
+    flex-grow: 1;
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid var(--foreground-sidebars);
+}
+
+.cambista-menu a {
+    border-left: 3px solid transparent;
+    padding-left: 30px;
+}
+
+.cambista-menu a.router-link-active,
+li.router-link-active > a {
+    color: var(--highlight);
+    border-left: 3px solid var(--highlight);
+}
+
+.cambista-menu ul.menu-bottom {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid var(--foreground-sidebars);
+}
+
+.cambista-menu ul li i{
+    width: 20px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.cambista-menu .cambista-item .sub-nav-container ul .cambista-subitem a {
+    padding: 5px 5px 5px 60px !important;
+    height: auto;
+    font-size: 12px;
+    border: 0;
+}
+
+.collapsed .cambista-item a i.fa-angle-down {
+    display: none;
+}
+
+.consulta-bilhete.collapsed {
+    display: none;
+}
+
+.consulta-bilhete .input-consulta {
+    padding: 20px 12px;
+    display: flex;
+}
+
+.consulta-bilhete .input-consulta input{
+    padding: 10px 15px;
+    border-radius: 5px 0px 0px 5px;
+    flex: 1;
+}
+
+.consulta-bilhete .input-consulta button{
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    padding: 0 10px;
+}
+
+.regiao .regiao-nome {
+    flex: 1;
+}
+
+.regiao > a::after {
+    font-family: var(--fa-style-family, "Font Awesome 6 Free");
+    font-weight: var(--fa-style, 900);
+    content: "\f107";
+    position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--foreground-sidebars);
+    /* transition: all 0.5s; */
+}
+
+.regiao > a.selected::after {
+    -webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.collapsed .regiao > a::after {
+    display: none;
+}
+
+.collapsed .destaques-regiao {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--foreground-sidebars);
+}
+
+.collapsed .sub-nav-container a {
+    white-space: nowrap;
+}
+
+.collapsed .sub-nav-container {
+    display: none;
+}
+
+.search-collapsed {
+    display: block;
+    color: var(--foreground-sidebars);
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 2px solid var(--foreground-sidebars);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.consulta-bilhete-collapsed.collapsed {
+    display: block;
+}
+
+.consulta-bilhete-collapsed  form {
+    display: none;
+    margin-top: -75px;
+    left: 50px;
+    padding: 10px;
+    position: absolute;
+    z-index: 900;
+    background: #0a0a0a;
+    border-radius: 4px;
+}
+
+.consulta-bilhete-collapsed  form input {
+    padding: 10px;
+}
+
+.consulta-bilhete-collapsed  form button {
+    padding: 6px 10px;
+    border: 1px solid #35cc95;
+    border-radius: 0 5px 5px 0;
+    background-color: #35cc95;
+}
+
+@media only screen and (max-width: 1024px) {
+    #menu-side-left {
+        height: auto;
+    }
+}

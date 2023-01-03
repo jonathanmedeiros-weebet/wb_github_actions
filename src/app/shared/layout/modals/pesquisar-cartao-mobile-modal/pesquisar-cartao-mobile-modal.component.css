@@ -1,0 +1,85 @@
+.modal-header {
+    padding: 20px 20px 0;
+    border-bottom: 0;
+    align-items: flex-start;
+}
+
+.modal-header a i {
+    color: var(--highlight);
+    font-size: 22px;
+}
+
+.modal-body {
+    padding: 0 20px 20px;
+}
+
+h4.modal-title {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.label-resultado {
+    margin: 30px 0 20px;
+}
+
+.cartao {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-radius: 15px;
+    padding: 15px;
+    overflow: hidden;
+
+    margin-bottom: 20px;
+}
+
+.cartao .logo-cartao {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.cartao .background-cartao {
+    position: absolute;
+    top: 5px;
+    right: -10px;
+}
+
+.cartao .valores {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartao .data {
+    margin-bottom: 20px;
+}
+
+.cartao .apostador {
+    margin-bottom: 5px;
+}
+
+.cartao .chave {
+    margin-bottom: 20px;
+}
+
+
+.cartao .valores .item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartao .valores .item label {
+    margin: 0;
+}
+
+.cartao .valores .item span {
+    color: var(--highlight);
+}

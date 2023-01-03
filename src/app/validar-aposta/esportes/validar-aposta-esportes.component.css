@@ -2,6 +2,10 @@
     margin-bottom: 15px;
 }
 
+.jogos {
+    margin-bottom: 35px;
+}
+
 .div-jogos-selecionados .item-selecionado-inner{
     margin: 0px 30px;
 }
@@ -17,17 +21,26 @@
     display: block;
     height: 2px;
     width: 20px;
-    background: red;
+    background: var(--highlight);
     top: 23px;
     left: 108px;
     position: relative;
 }
 
 .item-selecionado{
-    padding: 15px 0;
-    border-bottom: 1px dashed #aec3d8;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    border-bottom: 1px dashed var(--game);
     text-align: left;
     position: relative;
+}
+
+.item-selecionado .item-selecionado-inner > div {
+    margin-bottom: 5px;
+}
+
+.item-selecionado .item-selecionado-inner > div:last-child {
+    margin-bottom: 0;
 }
 
 .item-selecionado:first-of-type{
@@ -50,10 +63,11 @@
 .remover-item{
     position: absolute;
     top: 0;
-    right: 0;
-    color: red;
-    font-size: 15px;
+    right: 15px;
+    color: var(--highlight);
+    font-size: 22px;
     cursor: pointer;
+    line-height: 22px;
 }
 
 .item-mensagem{
@@ -61,4 +75,15 @@
     color: red;
     border: 1px solid red;
     padding: 5px;
+}
+
+.alteracoes-odds label {
+    color: var(--foreground);
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .btn-custom {
+        width: 100%;
+    }
 }

@@ -1,0 +1,252 @@
+.filtros {
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+}
+
+.filtros input, .filtros select {
+    margin-right: 20px;
+}
+
+.filtros > input, .filtros .datepicker-group {
+    max-width: 300px;
+}
+
+.filtros select {
+    max-width: 150px;
+}
+
+.info-resultado {
+    margin: 20px 0 32px;
+    font-size: 14px;
+    color: var(--foreground);
+    font-weight: 400;
+}
+
+
+.table {
+   color: var(--foreground);
+}
+
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid  var(--game);
+    padding: 15px 10px;
+}
+
+.table thead th:first-child {
+    border-left: 10px solid var(--game);
+}
+
+.table .right {
+    text-align: right;
+}
+
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid  var(--game);
+}
+
+.table td.no-border{
+    border-left: 0 !important;
+}
+
+.table tbody td:first-child {
+    border-left: 10px solid #808080;
+}
+
+.table tbody tr.green td:first-child {
+    border-left: 10px solid #309E3A;
+}
+
+.table tbody tr.red td:first-child {
+    border-left: 10px solid #ED4C5C;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 12px;
+    right: 32px;
+    font-size: 14px;
+}
+
+.datepicker-group input {
+    padding-right: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+.custom-day.faded {
+    background-color: var(--highlight);
+}
+
+.tabs {
+    border-bottom: 2px solid var(--foreground);
+    margin-bottom: 30px;
+}
+
+.tabs a {
+    font-size: 14px;
+    color: var(--foreground);
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 30px;
+
+    cursor: pointer;
+    margin-bottom: -2px;
+}
+
+.tabs a:hover {
+    color: var(--highlight);
+}
+
+.tabs a.active {
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+}
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--highlight);
+    cursor: pointer;
+}
+
+.listagem-saque {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listagem-saque li {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--highlight);
+    border-radius: 4px;
+
+    background-color: var(--game);
+    color: var(--foreground-game);
+}
+
+.listagem-saque li label {
+    margin: 0;
+    font-weight: 600;
+}
+
+.listagem-saque li .chave {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.listagem-saque .status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    padding: 2px 10px;
+
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 10px;
+        background: var(--background);
+        height: 100vh;
+    }
+
+    .internal-container-out {
+        background-color: transparent;
+    }
+
+    .uncollapsed {
+        padding: 0;
+    }
+
+    .buttons-container {
+        background-color: #181818;
+        border: 2px solid #181818;
+        border-radius: 4px;
+    }
+
+    .buttons-container a {
+        margin: 0;
+        justify-content: center;
+        border: 0;
+        background-color: #181818;
+    }
+
+    .buttons-container a.active {
+        background-color: #35cc95;
+        color: #181818;
+        fill: #181818;
+    }
+
+    .buttons-container a i.radio{
+        display: none;
+    }
+
+    .table thead th, td {
+        white-space: nowrap;
+    }
+
+    .dp-hidden {
+        position: absolute;
+    }
+
+    .filtros {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros .datepicker-group {
+        max-width: none;
+    }
+
+    .filtros .datepicker-group input {
+        margin: 0;
+    }
+
+    .filtros select {
+        max-width: none;
+    }
+ }

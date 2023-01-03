@@ -1,0 +1,31 @@
+.modal-body {
+    padding: 30px 35px 40px;
+}
+
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .modal-header {
+        padding: 20px 20px 0;
+        border-bottom: 0;
+        align-items: flex-start;
+    }
+
+    .modal-header a i {
+        color: var(--highlight);
+        font-size: 22px;
+    }
+
+    .modal-body {
+        padding: 0 20px 20px;
+    }
+
+    h4.modal-title {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+}

@@ -1,5 +1,20 @@
 .table tr td{
     cursor: pointer;
+    color: var(--foreground-header);
+}
+
+thead {
+    background-color: var(--header);
+    color: var(--foreground-header);
+}
+
+thead tr th {
+    border-top: 2px solid var(--highlight);
+    border-bottom: none;
+}
+
+tbody tr td {
+    border: none;
 }
 
 thead .resultado{

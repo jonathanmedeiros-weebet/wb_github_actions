@@ -1,31 +1,39 @@
-import { NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { environment } from './../environments/environment';
+import {NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {registerLocaleData} from '@angular/common';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {environment} from '../environments/environment';
+
 import ptBr from '@angular/common/locales/pt';
+
 registerLocaleData(ptBr);
 
 import * as moment from 'moment';
-moment.locale('pt-BR');
+moment.updateLocale('pt-bt', {parentLocale: 'pt-br'});
 
 // App routing
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
 // App is our top level component
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 
 // Core providers
-import { LayoutModule } from './shared/layout/layout.module';
-import { CupomModule } from './cupom/cupom.module';
-import { ParametrosLocaisService } from './services';
+import {LayoutModule} from './shared/layout/layout.module';
+import {CupomModule} from './cupom/cupom.module';
+import {ParametrosLocaisService} from './services';
 
-import { ToastrModule } from 'ngx-toastr';
+import {ToastrModule} from 'ngx-toastr';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+// Translation Modules
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
 }
+
 export const APP_TOKENS = [
     {
         provide: APP_INITIALIZER,
@@ -44,13 +52,19 @@ export const APP_TOKENS = [
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         AppRoutingModule,
 
         LayoutModule,
@@ -62,4 +76,9 @@ export const APP_TOKENS = [
     providers: [APP_TOKENS],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+    return new TranslateHttpLoader(http, './locale/i18n/', '.json');
+}

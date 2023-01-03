@@ -39,6 +39,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     refreshIntervalId;
     unsub$ = new Subject();
     isCliente;
+    valorFocado = false;
 
     constructor(
         private apostaService: DesafioApostaService,
@@ -95,7 +96,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const altura = window.innerHeight - 92;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
@@ -151,6 +152,15 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     removerItem(index) {
         this.itens.removeAt(index);
         this.bilheteService.atualizarItens(this.itens.value);
+    }
+
+    removerItens() {
+        this.itens.clear();
+        this.bilheteService.atualizarItens(this.itens.value);
+    }
+
+    setFocoValor(focus: boolean) {
+        this.valorFocado = focus;
     }
 
     calcularPossibilidadeGanho(valor) {

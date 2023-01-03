@@ -3,12 +3,12 @@ import {
     Input, OnChanges
 } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from '../../shared/layout/modals';
-import { ApostaEsportivaService, ApostaService, MessageService, AuthService, ParametrosLocaisService } from './../../services';
-import { ApostaEsportiva } from './../../models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from '../../shared/layout/modals';
+import {ApostaEsportivaService, ApostaService, MessageService, AuthService, ParametrosLocaisService} from './../../services';
+import {ApostaEsportiva} from './../../models';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-apuracao-esporte',
@@ -40,7 +40,8 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
         private authService: AuthService,
         private paramsLocais: ParametrosLocaisService,
         private modalService: NgbModal
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         if (window.innerWidth < 669) {
@@ -153,7 +154,8 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
                                     break;
                             }
                         },
-                        (reason) => { }
+                        (reason) => {
+                        }
                     );
 
                     this.showLoading = false;
@@ -164,20 +166,21 @@ export class ApuracaoEsporteComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
         this.modalRef.componentInstance.title = 'Cancelar Aposta';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
 
         this.modalRef.result.then(
             (result) => {
-                this.apostaService.cancelar({ id: aposta.id, version: aposta.version })
+                this.apostaService.cancelar({id: aposta.id, version: aposta.version})
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         () => this.getApostas(),
                         error => this.handleError(error)
                     );
             },
-            (reason) => { }
+            (reason) => {
+            }
         );
     }
 

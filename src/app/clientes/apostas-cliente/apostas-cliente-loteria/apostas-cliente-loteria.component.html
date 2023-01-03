@@ -17,15 +17,15 @@
                 </button>
             </div>
             <div>
-                <label>Código: </label>
+                <label>{{'geral.codigo' | translate}}: </label>
                 <em>{{aposta.codigo}}</em>
             </div>
             <div>
-                <label>Apostador: </label>
+                <label>{{'geral.apostador' | translate}} : </label>
                 <em>{{aposta.apostador}}</em>
             </div>
             <div>
-                <label>Horário: </label>
+                <label>{{'geral.horario' | translate}}: </label>
                 <em>{{aposta.horario | moment:'DD/MM/YYYY HH:mm'}}</em>
             </div>
             <div>
@@ -62,7 +62,7 @@
                             <span>{{(item.cotacao3 * item.valor) | currency}}</span>
                         </div>
                         <div>
-                            <label>Prêmio</label>
+                            <label>{{'geral.premio' | translate}} </label>
                             <span>{{(item.premio) | currency}}</span>
                         </div>
                         <div>
@@ -70,7 +70,7 @@
                             <span>{{item.numeros.length}}</span>
                         </div>
                         <div>
-                            <label>Status</label>
+                            <label>{{'geral.status' | translate}}</label>
                             <span>{{item.status | uppercase}}</span>
                         </div>
                     </div>

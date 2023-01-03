@@ -1,0 +1,72 @@
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.modal-dialog {
+    max-width: 600px;
+  }
+
+.modal-header {
+    border-bottom-color: var(--foreground);
+    padding: 20px 35px;
+}
+
+.modal-body {
+    padding: 40px 60px;
+}
+
+.logo {
+    max-width: 175px;
+    max-height: 140px;
+}
+
+button {
+    /*margin-top: 30px;*/
+    margin: 30px auto 0 auto;
+    width: 100%;
+}
+
+.showPassword {
+    position: absolute;
+    top: calc(50% - 16px);;
+    right: 0;
+    color: var(--foreground-inputs-odds);
+    cursor: pointer;
+    padding: 10px;
+}
+
+.esqueceu-senha {
+    color: var(--highlight);
+    font-size: 12px;
+    display: block;
+    margin: 20px 0 30px;
+    text-decoration: none;
+}
+
+.registrar {
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.registrar a {
+    color: var(--highlight);
+}
+
+#linkTermos {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        padding: 40px 25px 15px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-body .modal-body-content {
+        flex: 1;
+    }
+}

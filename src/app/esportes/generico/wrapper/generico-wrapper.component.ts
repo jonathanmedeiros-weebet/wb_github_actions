@@ -21,6 +21,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     campeonatosBloqueados = [];
     contexto = null;
     sportId;
+    pagina;
     jogoId;
     exibirMaisCotacoes = false;
     mobileScreen = false;
@@ -29,6 +30,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     odds = [];
     data;
     esporte = '';
+    campeonatoSelecionado = false;
     unsub$ = new Subject();
 
     constructor(
@@ -61,6 +63,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 this.showLoadingIndicator = true;
 
                 if (params['campeonato']) {
+                    this.campeonatoSelecionado = true;
+
                     const campeonatoId = params['campeonato'];
                     const queryParams: any = {
                         odds: this.odds,
@@ -77,6 +81,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             error => this.messageService.error(error)
                         );
                 } else {
+                    this.campeonatoSelecionado = false;
+
                     const queryParams: any = {
                         'sport_id': this.sportId,
                         'campeonatos_bloqueados': this.campeonatosBloqueados,
@@ -108,6 +114,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                             switchMap(campeonatos => {
                                 if (campeonatos.length === 0 && isHoje) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
+                                    this.data = queryParams.data;
                                     return this.campeonatoService.getCampeonatos(queryParams);
                                 } else {
                                     const observable = new Observable(subscriber => {

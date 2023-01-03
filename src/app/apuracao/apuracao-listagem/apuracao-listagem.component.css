@@ -1,3 +1,7 @@
 .btn-line{
     margin-top: 24px;
 }
+
+input, select.form-control {
+    border: 1px solid #FFFFFF;
+}

@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SharedModule } from './../shared/shared.module';
-import { DesafiosRoutingModule } from './desafios-routing.module';
-import { DesafioService, DesafioCategoriaService, DesafioBilheteService, DesafioApostaService, DesafioPreApostaService } from '../services';
-import { DesafiosBilheteComponent } from './desafios-bilhete/desafios-bilhete.component';
-import { DesafiosListagemComponent } from './desafios-listagem/desafios-listagem.component';
-import { DesafiosWrapperComponent } from './desafios-wrapper/desafios-wrapper.component';
-import { NgxMaskModule } from 'ngx-mask';
+import {SharedModule} from './../shared/shared.module';
+import {DesafiosRoutingModule} from './desafios-routing.module';
+import {DesafioApostaService, DesafioBilheteService, DesafioCategoriaService, DesafioPreApostaService, DesafioService} from '../services';
+import {DesafiosListagemComponent} from './desafios-listagem/desafios-listagem.component';
+import {DesafiosWrapperComponent} from './desafios-wrapper/desafios-wrapper.component';
+import {NgxMaskModule} from 'ngx-mask';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
-        DesafiosBilheteComponent,
         DesafiosListagemComponent,
         DesafiosWrapperComponent
     ],
@@ -19,7 +18,10 @@ import { NgxMaskModule } from 'ngx-mask';
         CommonModule,
         DesafiosRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot()
+        NgxMaskModule.forRoot(),
+        TranslateModule
+    ],
+    exports: [
     ],
     providers: [
         DesafioService,

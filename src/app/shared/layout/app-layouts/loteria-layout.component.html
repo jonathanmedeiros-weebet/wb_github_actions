@@ -1,0 +1,8 @@
+<app-submenu category="loteria"></app-submenu>
+<div class="base-container">
+<!--    <app-navigation [headerHeight]="132"></app-navigation>-->
+    <main [ngClass]="{'collapsed': navigationIsCollapsed, 'uncollapsed': !navigationIsCollapsed}">
+        <router-outlet></router-outlet>
+    </main>
+    <app-menu-footer></app-menu-footer>
+</div>

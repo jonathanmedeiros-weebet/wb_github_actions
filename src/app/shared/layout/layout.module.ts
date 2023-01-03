@@ -1,38 +1,83 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
-import { MainLayoutComponent } from './app-layouts/main-layout.component';
-import { EmptyLayoutComponent } from './app-layouts/empty-layout.component';
-import { AuthLayoutComponent } from './app-layouts/auth-layout.component';
-import { HeaderComponent } from './header/header.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { FooterComponent } from './footer/footer.component';
-import { ErrorMsgComponent } from './error-msg/error-msg.component';
-import { ExibirBilheteDesafioComponent } from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
-import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
-import { BilheteCompartilhamentoComponent } from './bilhete-compartilhamento/bilhete-compartilhamento.component';
-import { SpinnerComponent } from './spinner/spinner.component';
-import { UtilsModule } from './../utils/utils.module';
-import { ApostaService, ApostaEsportivaService, CartaoService, RegioesDestaqueService } from '../../services';
 import {
-    PesquisaModalComponent, TabelaModalComponent,
-    ApostaModalComponent, PreApostaModalComponent,
-    ConfirmModalComponent, PesquisarApostaModalComponent,
-    CartaoCadastroModalComponent, CartaoModalComponent,
-    PesquisarCartaoModalComponent, SolicitarSaqueModalComponent,
-    RecargaCartaoModalComponent, RecargaSuccessModalComponent,
-    AtivarCartaoModalComponent, ApostaEncerramentoModalComponent, LoginModalComponent,
-    AuthDoisFatoresModalComponent
+    AcumuladaoLayoutComponent,
+    AuthLayoutComponent,
+    CassinoLayoutComponent,
+    DesafioLayoutComponent,
+    EmptyLayoutComponent,
+    LoteriaLayoutComponent,
+    MainLayoutComponent,
+    PagesLayoutComponent,
+    PagesNoNavLayoutComponent,
+    SportLayoutComponent,
+    VirtuaisLayoutComponent
+} from './app-layouts';
+import {HeaderComponent} from './header/header.component';
+import {NavigationComponent} from './navigation/navigation.component';
+import {FooterComponent} from './footer/footer.component';
+import {ErrorMsgComponent} from './error-msg/error-msg.component';
+import {ExibirBilheteDesafioComponent} from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import {ExibirBilheteEsportivoComponent} from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import {ExibirBilheteLoteriaComponent} from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import {BilheteAcumuladaoComponent} from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import {BilheteCompartilhamentoComponent} from './bilhete-compartilhamento/bilhete-compartilhamento.component';
+import {SpinnerComponent} from './spinner/spinner.component';
+import {UtilsModule} from '../utils/utils.module';
+import {
+    AcumuladaoService,
+    ApostaEsportivaService,
+    ApostaLoteriaService,
+    ApostaService,
+    CartaoService,
+    DesafioApostaService,
+    RelatorioService,
+    SorteioService
+} from '../../services';
+import {
+    ApostaEncerramentoModalComponent,
+    ApostaModalComponent,
+    AtivarCartaoModalComponent,
+    AuthDoisFatoresModalComponent,
+    CadastroModalComponent,
+    CartaoCadastroModalComponent,
+    CartaoModalComponent,
+    ClienteApostasModalComponent,
+    ClientePerfilModalComponent,
+    ClientePixModalComponent,
+    ClienteSenhaModalComponent,
+    ConfirmModalComponent,
+    EsqueceuSenhaModalComponent,
+    LoginModalComponent,
+    PesquisaModalComponent,
+    PesquisarApostaModalComponent,
+    PesquisarCartaoMobileModalComponent,
+    PesquisarCartaoModalComponent,
+    PreApostaModalComponent,
+    RecargaCartaoModalComponent,
+    RecargaSuccessModalComponent,
+    SolicitarSaqueModalComponent,
+    TabelaModalComponent
 } from './modals';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { NgxMaskModule } from 'ngx-mask';
-import { NgbAlertModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { MenuFooterComponent } from './menu-footer/menu-footer.component';
-import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esportivo.component';
+import {AngularSvgIconModule} from 'angular-svg-icon';
+import {NgxMaskModule} from 'ngx-mask';
+import {NgbAlertModule, NgbCarouselModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MenuFooterComponent} from './menu-footer/menu-footer.component';
+import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
+import {SubmenuComponent} from './submenu/submenu.component';
+import {SidebarMenuComponent, SidebarNavComponent} from '../sidebar';
+
+import {NgxCurrencyModule} from 'ngx-currency';
+import {BannersComponent} from './banners/banners.component';
+import {ResultadosModalComponent} from './modals/resultados-modal/resultados-modal.component';
+import {CodeInputModule} from 'angular-code-input';
+import {NgHcaptchaModule} from 'ng-hcaptcha';
+import {TranslateModule} from '@ngx-translate/core';
+import {DesafiosModule} from '../../desafios/desafios.module';
+import {DesafiosBilheteComponent} from '../../desafios/desafios-bilhete/desafios-bilhete.component';
 
 @NgModule({
     imports: [
@@ -44,8 +89,19 @@ import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esport
         UtilsModule,
         AngularSvgIconModule,
         NgxMaskModule.forRoot(),
+        NgxCurrencyModule,
         NgbModalModule,
-        NgbAlertModule
+        NgbAlertModule,
+        NgbCarouselModule,
+        NgbModule,
+        CodeInputModule.forRoot({
+            codeLength: 6
+        }),
+        NgHcaptchaModule.forRoot({
+            siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
+            languageCode: 'pt'
+        }),
+        TranslateModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -77,8 +133,29 @@ import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esport
         ApostaEncerramentoModalComponent,
         MenuFooterComponent,
         BilheteEsportivoComponent,
+        SportLayoutComponent,
+        PagesLayoutComponent,
+        PagesNoNavLayoutComponent,
+        CassinoLayoutComponent,
+        VirtuaisLayoutComponent,
+        SubmenuComponent,
+        LoteriaLayoutComponent,
+        DesafioLayoutComponent,
+        AcumuladaoLayoutComponent,
+        SidebarNavComponent,
+        SidebarMenuComponent,
         LoginModalComponent,
+        EsqueceuSenhaModalComponent,
+        CadastroModalComponent,
+        ResultadosModalComponent,
+        BannersComponent,
         AuthDoisFatoresModalComponent,
+        PesquisarCartaoMobileModalComponent,
+        ClientePerfilModalComponent,
+        ClientePixModalComponent,
+        ClienteSenhaModalComponent,
+        ClienteApostasModalComponent,
+        DesafiosBilheteComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -92,13 +169,21 @@ import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esport
         ExibirBilheteLoteriaComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
-        BilheteEsportivoComponent
+        BilheteEsportivoComponent,
+        BannersComponent
     ],
     providers: [
         ApostaEsportivaService,
         ApostaService,
         CartaoService,
-        RegioesDestaqueService
+        SorteioService,
+        DesafioApostaService,
+        ApostaService,
+        ApostaLoteriaService,
+        ApostaEsportivaService,
+        RelatorioService,
+        AcumuladaoService
     ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}

@@ -5,12 +5,17 @@ import {
 } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { Campeonato, Jogo, ItemBilheteEsportivo } from '../../../models';
+import { Campeonato, Jogo } from '../../../models';
 import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from '../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
+import 'moment/min/locales';
+
+import {BasqueteJogoComponent} from '../basquete-jogo/basquete-jogo.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-generico-listagem',
@@ -25,6 +30,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     @Input() data;
     @Input() sportId;
     @Input() esporte;
+    @Input() campeonatoSelecionado: boolean;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
@@ -32,6 +38,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     itens = [];
     itensSelecionados = {};
     cotacoesFaltando = {};
+    exibirCampeonatosExpandido;
+    campeonatosAbertos = [];
     cotacoesLocais;
     jogosBloqueados;
     dataLimiteTabela;
@@ -41,6 +49,30 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     total;
     loadingScroll = false;
     unsub$ = new Subject();
+    term = '';
+    modalRef;
+
+    limiteDiasTabela: number;
+    diaHojeMaisDois;
+    diaHojeMaisTres;
+    diaHojeMaisQuatro;
+
+    diaHojeMaisDoisStr;
+    diaHojeMaisTresStr;
+    diaHojeMaisQuatroStr;
+
+    tabSelected;
+
+    iconesGenericos = {
+        'futsal': 'wbicon icon-futsal',
+        'volei': 'wbicon icon-volei',
+        'basquete': 'wbicon icon-basquete',
+        'combate': 'wbicon icon-luta',
+        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
+        'futebol-americano': 'wbicon icon-futebol-americano',
+        'esports': 'wbicon icon-e-sports',
+        'tenis': 'wbicon icon-tenis'
+    };
 
     constructor(
         private bilheteService: BilheteEsportivoService,
@@ -49,15 +81,26 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
-        private router: Router
+        private router: Router,
+        private modalService: NgbModal,
+        private translate: TranslateService
     ) { }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+        this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
+
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+
+        this.atualizarDatasJogosFuturos(this.translate.currentLang);
+
+        this.translate.onLangChange.subscribe((res) => {
+            this.atualizarDatasJogosFuturos(res.lang);
+        });
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -80,6 +123,16 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             this.contentSportsEl.scrollTop = 0;
         }
 
+        if (changes['data'] && this.data) {
+            const diferencaDias = moment(this.data).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+
+            if (diferencaDias === 1) {
+                this.mudarData('amanha');
+            } else {
+                this.mudarData('+' + diferencaDias);
+            }
+        }
+
         if (changes['camps'] && this.camps) {
             this.start = 0;
             this.total = Math.ceil(this.camps.length / this.offset);
@@ -93,7 +146,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                     altura = window.innerHeight - 98;
                     scrollHeight = this.contentSportsEl.scrollHeight - 90;
                 } else {
-                    altura = window.innerHeight - 46;
+                    altura = window.innerHeight - 132;
                     scrollHeight = this.contentSportsEl.scrollHeight;
                 }
                 if (scrollHeight <= altura) {
@@ -113,7 +166,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const headerHeight = this.mobileScreen ? 161 : 132;
+        const altura = window.innerHeight - headerHeight;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
@@ -184,7 +240,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                             this.cotacoesFaltando[jogo.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, jogo.event_id, jogo.favorito, false),
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal.valor,
+                                    chave,
+                                    jogo.event_id, jogo.favorito,
+                                    false),
                                 label: this.helperService.apostaTipoLabel(chave, 'sigla')
                             });
                         }
@@ -202,6 +262,43 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
+    limparPesquisa() {
+        this.term = '';
+    }
+
+    mudarData(dia = 'hoje') {
+        let data;
+
+        switch (dia) {
+            case 'amanha':
+                this.tabSelected = 'amanha';
+                data = moment().add(1, 'd').format('YYYY-MM-DD');
+                break;
+            case '+2':
+                this.tabSelected = 'doisdias';
+                data = moment().add(2, 'd').format('YYYY-MM-DD');
+                break;
+            case '+3':
+                this.tabSelected = 'tresdias';
+                data = moment().add(3, 'd').format('YYYY-MM-DD');
+                break;
+            case '+4':
+                this.tabSelected = 'quatrodias';
+                data = moment().add(4, 'd').format('YYYY-MM-DD');
+                break;
+            default:
+                this.tabSelected = null;
+                data = '';
+                break;
+        }
+
+        const navigationExtras: NavigationExtras = {
+            queryParams: data ? { 'data': data } : {}
+        };
+
+        this.router.navigate([this.router.url.split('?')[0]], navigationExtras);
+    }
+
     exibirMais() {
         this.loadingScroll = true;
 
@@ -210,8 +307,13 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             splice = splice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
-                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome)
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            jogo.favorito,
+                            false);
+                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
                     });
                 });
 
@@ -219,6 +321,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             });
 
             this.campeonatos = this.campeonatos.concat(splice);
+
+            if (this.exibirCampeonatosExpandido) {
+                const sliceIds = splice.map(campeonato => campeonato._id);
+                this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
+            }
 
             this.start++;
         }
@@ -230,8 +337,14 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     // Exibindo todas as cotações daquele jogo selecionado
     maisCotacoes(jogoId) {
         this.jogoIdAtual = jogoId;
-        this.jogoSelecionadoId.emit(jogoId);
-        this.exibirMaisCotacoes.emit(true);
+
+        if (this.mobileScreen) {
+            this.modalRef = this.modalService.open(BasqueteJogoComponent);
+            this.modalRef.componentInstance.jogoId = this.jogoIdAtual;
+        } else {
+            this.jogoSelecionadoId.emit(jogoId);
+            this.exibirMaisCotacoes.emit(true);
+        }
     }
 
     exibirBtnProximaData() {
@@ -239,7 +352,9 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
         if (this.data) {
             const proximaData = moment(this.data).add(1, 'd');
-            if (proximaData.day() !== 0 && proximaData.isSameOrBefore(this.dataLimiteTabela)) {
+
+            const diferencaDias = (proximaData.date() - moment().date());
+            if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
                 result = true;
             }
         }
@@ -263,10 +378,59 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirEscudo() {
-        return (this.sportId != 13 && this.sportId != 9 && this.sportId != 151);
+        return (this.sportId !== '13' && this.sportId !== '9' && this.sportId !== '151');
     }
 
     exibirTotalOdds() {
-        return this.sportId == 18;
+        return this.sportId === '18';
+    }
+
+    toggleCampeonato(campeonatoId) {
+        const index = this.campeonatosAbertos.findIndex(id => id === campeonatoId);
+        if (index >= 0) {
+            this.campeonatosAbertos.splice(index, 1);
+        } else {
+            this.campeonatosAbertos.push(campeonatoId);
+        }
+    }
+
+    campeonatoAberto(campeonatoId) {
+        return this.campeonatosAbertos.includes(campeonatoId);
+    }
+
+    focusPesquisa(focus = true) {
+        if (this.mobileScreen) {
+            const inactiveDaysButtons = this.el.nativeElement.getElementsByClassName(`tab inactive`);
+            if (focus) {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.addClass(inactiveDayButton, 'ocultar-tab');
+                }
+            } else {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.removeClass(inactiveDayButton, 'ocultar-tab');
+                }
+            }
+        }
+    }
+
+    atualizarDatasJogosFuturos(lang = 'pt') {
+        switch (lang) {
+            case 'pt':
+                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                break;
+            case 'en':
+                    moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
+                break;
+            default:
+                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+        }
+
+        this.diaHojeMaisDois = moment().add(2, 'd');
+        this.diaHojeMaisTres = moment().add(3, 'd');
+        this.diaHojeMaisQuatro = moment().add(4, 'd');
+
+        this.diaHojeMaisDoisStr = this.diaHojeMaisDois.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisTresStr = this.diaHojeMaisTres.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisQuatroStr = this.diaHojeMaisQuatro.format(this.mobileScreen ? 'ddd' : 'dddd');
     }
 }

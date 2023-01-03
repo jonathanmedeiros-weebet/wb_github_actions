@@ -1,29 +1,33 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Solicitar Saque</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    <h4 class="modal-title" id="modal-basic-title">{{'geral.solicitarSaque' | translate}}</h4>
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-times"></i>
+    </a>
 </div>
 <div class="modal-body">
     <div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group group-valor">
+                <label>{{'saques.informeOValor' | translate}}</label>
+                <input type="text" prefix="R$ " mask="dot_separator.2" class="input-valor" formControlName="valor"
+                    placeholder="RS 0,00" [ngClass]="applyCssInputError('valor')">
+                <app-error-msg [control]="form.get('valor')"></app-error-msg>
+            </div>
+
             <div class="form-group">
                 <input style="text-transform:uppercase;" type="text" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false"
-                    class="form-control" formControlName="chave" placeholder="Chave do cartão"
+                    class="form-control inverted-out" formControlName="chave" placeholder="Chave do cartão"
                     [ngClass]="applyCssInputError('chave')">
                 <app-error-msg [control]="form.get('chave')"></app-error-msg>
             </div>
+
             <div class="form-group">
-                <input type="password" class="form-control" formControlName="pin" placeholder="PIN"
+                <input type="password" class="form-control inverted-out" formControlName="pin" placeholder="PIN"
                     [ngClass]="applyCssInputError('pin')">
                 <app-error-msg [control]="form.get('pin')"></app-error-msg>
             </div>
-            <div class="form-group">
-                <input type="text" mask="dot_separator.2" class="form-control" formControlName="valor"
-                    placeholder="Valor" [ngClass]="applyCssInputError('valor')">
-                <app-error-msg [control]="form.get('valor')"></app-error-msg>
-            </div>
-            <button type="submit" class="btn btn-custom">Solicitar</button>
+
+            <button type="submit" class="btn btn-custom btn-block">{{'geral.solicitarSaque' | translate}}</button>
         </form>
     </div>
 </div>

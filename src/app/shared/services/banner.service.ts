@@ -21,8 +21,8 @@ export class BannerService {
         private errorService: ErrorService
     ) { }
 
-    getBanners(): Observable<any> {
-        return this.http.get(this.BannerUrl, this.header.getRequestOptions(true))
+    getBanners(pagina = 'futebol'): Observable<any> {
+        return this.http.get(`${this.BannerUrl}?pagina=${pagina}`, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),

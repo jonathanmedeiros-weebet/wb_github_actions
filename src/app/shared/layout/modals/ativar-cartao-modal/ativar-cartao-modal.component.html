@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <input type="text" class="form-control" formControlName="apostador"
-                placeholder="Apostador" [ngClass]="applyCssInputError('apostador')">
+                placeholder="{{'geral.apostador' | translate}} " [ngClass]="applyCssInputError('apostador')">
             <app-error-msg [control]="form.get('apostador')"></app-error-msg>
         </div>
         <div class="form-group">
@@ -30,7 +30,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
-            Cancelar
+            {{'geral.cancelar' | translate}}
         </button>
         <button type="submit" class="btn btn-custom">Ativar</button>
     </div>

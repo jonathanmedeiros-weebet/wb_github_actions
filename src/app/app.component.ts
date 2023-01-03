@@ -1,10 +1,13 @@
 import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService} from './services';
+import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService} from './services';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {CadastroModalComponent} from './shared/layout/modals';
+
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-root',
@@ -23,6 +26,8 @@ export class AppComponent implements OnInit {
     SLUG;
     TIMESTAMP;
     ativacaoCadastro;
+    modoClienteHabilitado;
+    whatsapp;
 
     constructor(
         private auth: AuthService,
@@ -34,7 +39,12 @@ export class AppComponent implements OnInit {
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
+        private paramLocais: ParametrosLocaisService,
+        private translate: TranslateService
     ) {
+        const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
+        translate.setDefaultLang('pt');
+        translate.use(linguaEscolhida);
     }
 
     @HostListener('window:message', ['$event']) onPostMessage(event) {
@@ -50,9 +60,17 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
         this.route.queryParams
             .subscribe((params) => {
-                if (params.token) {
+                if (this.modoClienteHabilitado && params.afiliado) {
+                    this.modalService.open(CadastroModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        size: 'lg',
+                        centered: true,
+                        windowClass: 'modal-700'
+                    });
+                } else if (params.token) {
                     this.ativacaoCadastro = true;
                     this.auth.ativacaoCadastro({token: params.token})
                         .subscribe(
@@ -114,15 +132,10 @@ export class AppComponent implements OnInit {
                             }
                         );
                     } else if (!this.isEmpty && this.ativacaoCadastro === false) {
+                        let exibirImagemInicial = false;
                         const variavel = localStorage.getItem('imagemInicialData');
                         if (!variavel) {
-                            this.modalService.open(
-                                this.inicialModal,
-                                {
-                                    centered: true,
-                                    backdrop: 'static'
-                                }
-                            );
+                            exibirImagemInicial = true;
                             const horario = new Date();
                             localStorage.setItem('imagemInicialData', String(horario));
                         } else {
@@ -132,16 +145,20 @@ export class AppComponent implements OnInit {
                             // const data2 = new Date('2022-07-30T03:24:00');
                             const diffTime = dateDiffInDays(data1, data2);
                             if (diffTime > 0) {
-                                this.modalService.open(
-                                    this.inicialModal,
-                                    {
-                                        centered: true,
-                                        backdrop: 'static'
-                                    }
-                                );
+                                exibirImagemInicial = true;
                                 const horario = Date();
                                 localStorage.setItem('imagemInicialData', String(horario));
                             }
+                        }
+
+                        if (exibirImagemInicial) {
+                            this.modalService.open(
+                                this.inicialModal,
+                                {
+                                    centered: true,
+                                    windowClass: 'modal-pop-up'
+                                }
+                            );
                         }
                     }
                 },
@@ -186,6 +203,10 @@ export class AppComponent implements OnInit {
                     sessionStorage.clear();
                 }
             });
+
+            if (this.paramLocais.getOpcoes().whatsapp) {
+                this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
+            }
     }
 
     downloadApp() {

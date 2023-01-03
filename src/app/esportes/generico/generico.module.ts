@@ -5,16 +5,20 @@ import { GenericoRoutingModule } from './generico-routing.module';
 import { GenericoWrapperComponent } from './wrapper/generico-wrapper.component';
 import { GenericoListagemComponent } from './listagem/generico-listagem.component';
 import { BasqueteJogoComponent } from './basquete-jogo/basquete-jogo.component';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { JogoService } from '../../services';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         SharedModule,
         GenericoRoutingModule,
         NgbNavModule,
-        NgbCarouselModule
+        NgbCarouselModule,
+        Ng2SearchPipeModule,
+        TranslateModule
     ],
     declarations: [
         GenericoWrapperComponent,
@@ -23,6 +27,7 @@ import { JogoService } from '../../services';
     ],
     providers: [
         JogoService,
+        NgbActiveModal
     ]
 })
 export class GenericoModule { }

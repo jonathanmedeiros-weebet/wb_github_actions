@@ -1,13 +1,19 @@
-#cupom-center {
-    width: 19.27em;
-    margin: 0 auto;
+#cupom {
+    /* width: 19.27em; */
+    background: #f3f5d3;
+    color: #1e282c;
+    /* margin: 2em auto; */
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-#cupom{
-    width: 19.27em;
-    padding: 1em;
-    background: #fff;
+hr {
+    display: block;
+    width: 100%;
+    border: 1px dashed var(--foreground);
 }
+
 #cupom img{
     max-height: 90px;
     max-width: 150px;

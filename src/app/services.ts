@@ -14,7 +14,6 @@ export * from './shared/services/parametros.service';
 export * from './shared/services/parametros-locais.service';
 export * from './shared/services/relatorio.service';
 export * from './shared/services/financeiro.service';
-export * from './shared/services/regioes-destaque.service';
 
 export * from './shared/services/loteria/aposta-loteria.service';
 export * from './shared/services/loteria/preaposta-loteria.service';
@@ -31,7 +30,10 @@ export * from './shared/services/aposta-esportiva/preaposta-esportiva.service';
 export * from './shared/services/aposta-esportiva/resultado.service';
 export * from './shared/services/aposta-esportiva/stats.service';
 
+export * from './shared/services/cambistas/cambista.service';
+
 export * from './shared/services/clientes/cliente.service';
+export * from './shared/services/campinho.service';
 
 /* Utils Services */
 export * from './shared/services/utils/error.service';

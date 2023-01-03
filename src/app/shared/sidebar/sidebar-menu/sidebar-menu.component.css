@@ -1,0 +1,143 @@
+:host {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    margin: 0;
+    list-style: none;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sidebar-menu li {
+    width: 55px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-menu .fa,  .fa .fa-solid, .fa .fa-brands {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.sidebar-menu a {
+    background-color: #181818;
+    color: var(--foreground-header);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 10px;
+    transition: 200ms;
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--highlight);
+    color: var(--header);
+}
+
+.header-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-menu label {
+    font-size: 16px;
+    margin-bottom: 40px
+}
+
+.header-menu .options {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.header-menu .options a {
+    border-radius: 10px;
+    border: 1px solid var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 20px;
+    width: 120px;
+    height: 120px;
+}
+
+.login-area {
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.login-area label {
+    margin-bottom: 16px;
+}
+
+.language-dropdown {
+    font-size: 16px;
+    margin: 8px auto;
+    color: var(--foreground-sidebars);
+    width: 65%;
+}
+
+.language-dropdown .btn {
+    font-size: 16px;
+    color: var(--foreground-sidebars);
+}
+
+.language-dropdown-menu {
+    width: 100%;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .sidebar-menu {
+        flex-wrap: wrap;
+        max-width: 100%;
+        justify-content: space-between;
+    }
+
+    .sidebar-menu li {
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
+
+    .sidebar-menu a {
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+    }
+
+    .sidebar-menu .fa, .fa .fa-solid {
+        font-size: 25px;
+        margin-bottom: 4px;
+    }
+}

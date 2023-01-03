@@ -1,51 +1,41 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { Event as NavigationEvent, NavigationEnd, Router } from '@angular/router';
-import { state, style, trigger } from '@angular/animations';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import {
+    ApostaService,
     AuthService,
+    MessageService,
     ParametrosLocaisService,
     PrintService,
     SidebarService,
     SupresinhaService
 } from './../../../services';
 import {
+    ApostaModalComponent,
     AtivarCartaoModalComponent,
     CartaoCadastroModalComponent,
     PesquisaModalComponent,
-    PesquisarApostaModalComponent,
     PesquisarCartaoModalComponent,
     RecargaCartaoModalComponent,
-    SolicitarSaqueModalComponent,
-    TabelaModalComponent
+    SolicitarSaqueModalComponent
 } from '../modals';
-import { config } from '../../config';
+import {config} from '../../config';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as random from 'lodash.random';
 import * as moment from 'moment';
-import { RegioesDestaqueService } from '../../services/regioes-destaque.service';
+import {BaseFormComponent} from '../base-form/base-form.component';
 
 @Component({
     selector: 'app-navigation',
     templateUrl: 'navigation.component.html',
-    styleUrls: ['navigation.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('openClose', [
-            state('open', style({
-                'margin-left': '0px',
-            })),
-            state('closed', style({
-                'margin-left': '-255px',
-                visibility: 'hidden'
-            }))
-        ])
-    ]
+    styleUrls: ['navigation.component.css']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent extends BaseFormComponent implements OnInit {
+    @Input() headerHeight = 92;
     hoje = moment();
     amanha = moment().add(1, 'd');
     dias = [];
@@ -69,7 +59,12 @@ export class NavigationComponent implements OnInit {
     LOGO = config.LOGO;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     trevoOne = false;
+    showLoading = false;
+    submitting = false;
+    heightSidebarNav = 500;
+    collapsed = false;
     whatsapp = null;
+    blockedHover = false;
 
     constructor(
         private auth: AuthService,
@@ -82,8 +77,11 @@ export class NavigationComponent implements OnInit {
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private regioesDestaqueService: RegioesDestaqueService,
+        private apostaService: ApostaService,
+        private messageService: MessageService,
+        private fb: FormBuilder
     ) {
+        super();
         router.events.forEach((event: NavigationEvent) => {
             if (event instanceof NavigationEnd) {
                 this.closeMenu();
@@ -92,8 +90,13 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.regioesDestaqueService.setExibirDestaques(false);
+        this.createForm();
         this.mobileScreen = window.innerWidth <= 1024;
+
+        this.sidebarService.collapsedSource
+            .subscribe(collapse => {
+                this.collapsed = collapse;
+            });
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
@@ -104,15 +107,7 @@ export class NavigationComponent implements OnInit {
                 });
         }
 
-        this.regioesDestaqueService.getRegioesDestaque()
-            .subscribe(
-                res => {
-                    if (res.length > 0) {
-                        this.regioesDestaque = res;
-                        this.cd.detectChanges();
-                    }
-                }
-            );
+        this.regioesDestaque = this.paramsService.getOpcoes().regioes_destaque
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -140,24 +135,29 @@ export class NavigationComponent implements OnInit {
         this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
         this.preencherDias();
 
-        this.sidebarService.itens
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(dados => {
-                this.contexto = dados.contexto;
-                this.itens = dados.itens;
+        const elSideBar = this.el.nativeElement.querySelector('#sidebar-wrapper');
+        let height =  window.innerHeight - this.headerHeight;
 
-                if (dados.esporte) {
-                    this.esporte = dados.esporte;
-                }
+        this.renderer.setStyle(elSideBar, 'height', `${height}px`);
 
-                setTimeout(e => {
-                    const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
-                    const altura = window.innerHeight - (alturaMenuFixo + 15);
-                    const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
-                    this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
-                    this.cd.detectChanges();
-                }, 500);
-            });
+        // this.sidebarService.itens
+        //     .pipe(takeUntil(this.unsub$))
+        //     .subscribe(dados => {
+        //         this.contexto = dados.contexto;
+        //         this.itens = dados.itens;
+        //
+        //         if (dados.esporte) {
+        //             this.esporte = dados.esporte;
+        //         }
+        //
+        //         setTimeout(e => {
+        //             const alturaMenuFixo = this.el.nativeElement.querySelector('#side-fixed-menu').offsetHeight;
+        //             this.maxHeightSidebarNav = alturaMenuFixo + this.headerHeight;
+        //             // const menuSideLeftEl = this.el.nativeElement.querySelector('#menu-side-left');
+        //             // this.renderer.setStyle(menuSideLeftEl, 'height', `${altura}px`);
+        //             // this.cd.detectChanges();
+        //         }, 500);
+        //     });
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
@@ -168,8 +168,35 @@ export class NavigationComponent implements OnInit {
         }
     }
 
+    createForm() {
+        this.form = this.fb.group({
+            'codigo': [null, [Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(8)
+            ]]
+        });
+    }
+
     closeMenu() {
         this.sidebarService.close();
+    }
+
+    collapseSidebar() {
+        this.sidebarService.collapseSidebar();
+
+        this.blockedHover = true;
+
+        setTimeout(() => {
+            this.blockedHover = false;
+        }, 1000);
+        //
+        // this.collapsed = !this.collapsed;
+        //
+        // if (this.collapsed) {
+        //     localStorage.setItem('navigation_callapsed', 'collapsed');
+        // } else {
+        //     localStorage.removeItem('navigation_callapsed');
+        // }
     }
 
     onSwipeLeft(event) {
@@ -234,7 +261,7 @@ export class NavigationComponent implements OnInit {
                 result => {
                     if (result.input) {
                         this.closeMenu();
-                        this.router.navigate(['/esportes/futebol/jogos'], { queryParams: { nome: result.input } });
+                        this.router.navigate(['/esportes/futebol/jogos'], {queryParams: {nome: result.input}});
                     }
                 },
                 reason => {
@@ -242,36 +269,23 @@ export class NavigationComponent implements OnInit {
             );
     }
 
-    abrirModalTabela() {
-        this.modalRef = this.modalService.open(
-            TabelaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-
-        this.modalRef.result
-            .then(result => {
-                this.closeMenu();
-            }, reason => {
-            });
-    }
-
-    abrirModalAposta() {
-        this.modalRef = this.modalService.open(
-            PesquisarApostaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-
-        this.modalRef.result
-            .then(
-                result => {
+    abrirModalAposta(codigo) {
+        this.submitting = true;
+        this.apostaService.getApostaByCodigo(codigo)
+            .subscribe(
+                apostaLocalizada => {
+                    this.modalRef = this.modalService.open(ApostaModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        scrollable: true
+                    });
+                    this.modalRef.componentInstance.aposta = apostaLocalizada;
+                    this.showLoading = false;
+                    this.submitting = false;
                 },
-                reason => {
+                error => {
+                    this.handleError(error);
+                    this.submitting = false;
                 }
             );
     }
@@ -364,7 +378,7 @@ export class NavigationComponent implements OnInit {
     }
 
     goTo(url, queryParams) {
-        this.router.navigate([url], { queryParams });
+        this.router.navigate([url], {queryParams});
     }
 
     exibirJogosAmanha() {
@@ -376,7 +390,7 @@ export class NavigationComponent implements OnInit {
     }
 
     abrirRegiao(regiao) {
-        if (regiao == this.regiaoOpen) { // fechando
+        if (regiao === this.regiaoOpen) { // fechando
             this.regiaoOpen = null;
         } else { // abrindo
             this.regiaoOpen = regiao;
@@ -387,8 +401,8 @@ export class NavigationComponent implements OnInit {
         const dtInicial = moment().add(2, 'day');
         const dataLimiteTabela = moment(this.dataLimiteTabela);
 
-        //let temDomingo = false;
-        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) { //&& !temDomingo
+        // let temDomingo = false;
+        while (dtInicial.isSameOrBefore(dataLimiteTabela, 'day')) { // && !temDomingo
             /* if (dtInicial.day() === 0) {
                 temDomingo = true;
             }*/
@@ -406,6 +420,14 @@ export class NavigationComponent implements OnInit {
     }
 
     permitirAtivacaoCartao() {
-        return location.origin.match(/mjrsports.com/g) ? true : false;
+        return !!location.origin.match(/mjrsports.com/g);
+    }
+
+    handleError(error) {
+        this.messageService.error(error);
+    }
+
+    submit() {
+        this.abrirModalAposta(this.form.get('codigo').value);
     }
 }

@@ -1,5 +1,131 @@
+.jogo-container {
+    height: calc(100vh - 132px);
+    display: flex;
+    flex-direction: column;
+
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.content-sports {
+    padding: 5px;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+
+    width: calc(100%);
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    padding: 15px;
+
+    background: var(--game);
+    color: var(--foreground-game);
+}
+
+.top-bar-back {
+    margin-right: 15px;
+    padding: 10px 0;
+    padding-right: 15px;
+}
+
+.v-divider {
+    background: var(--foreground-game);
+    margin-right: 8px;
+    width: 1px;
+    height: 100%;
+    opacity: 25%;
+}
+
+.top-bar-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar-info .top-camp {
+    font-size: 10px;
+    opacity: .6;
+}
+
+.top-bar .fa{
+    color: var(--foreground-game);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.content-sports {
+    overflow: unset;
+}
+
+section.jogo {
+    display: flex;
+}
+
 .indentificacao, .indentificacao-mobile{
     padding: 10px 10px 0 10px;
+}
+
+.indentificacao-jogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    height: 20vh;
+    max-height: 300px;
+    background-color: #181818;
+    background-image: url("https://cdn.wee.bet/img/stadium-background.png");
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.indentificacao-jogo .info-jogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.indentificacao-jogo .info-jogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.indentificacao-jogo .campeonato-nome {
+    position: absolute;
+    top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    max-width: 400px;
+
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-align: center;
+
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+.indentificacao-jogo .nome {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.indentificacao-jogo .nome {
+    margin-top: 5px;
 }
 
 .indentificacao .nome, .indentificacao-mobile .nome{
@@ -15,9 +141,22 @@
 }
 
 .div-back{
-    color: red;
-    font-size: 2rem;
+    color: var(--highlight);
+    font-size: 1.6rem;
     cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #181818;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 15px;
+    right: 25px;
 }
 
 .indentificacao .div-back{
@@ -55,10 +194,29 @@
     justify-content: flex-start;
 }
 
+.placares {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 45px 0;
+}
+
+.placares span {
+    font-size: 40px;
+    line-height: 35px;
+}
+
+.placares > div {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
 .placar{
-    background: red;
     color: #fff;
     padding: 5px 10px;
+    font-size: 18px;
 }
 
 .time-a-placar{
@@ -71,57 +229,107 @@
     margin-right: 15px;
 }
 
-.indentificacao .aovivo-tempo{
+.indentificacao-jogo .aovivo-tempo {
     position: absolute;
-    left: 15px;
-    top: 26px;
+    left: 25px;
+    top: 20px;
 }
 
-.aovivo-tempo{
+.aovivo-tempo {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.aovivo-label {
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+    padding: 3px 6px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.aovivo-label{
-    background-color: red;
-    border-radius: 5px;
-    color: #fff;
-    padding: 3px 6px;
-    margin-right: 7px;
+.aovivo-label i {
+    font-size: 8px;
+    margin-right: 5px;
 }
 
 .tempo{
     font-size: 1.2rem;
-    color: #000;
-}
-
-.campeonato-nome{
-    padding-bottom: 0;
-    margin-bottom: 0;
-    text-align: center;
+    color: #fff;
 }
 
 .time-nome {
     margin-top: 5px;
 }
 
-.tipo-apostas{
-    background-color: #fff;
+.tipo-apostas {
+    column-count: 2;
+    column-gap: 5px;
+    margin-top: 0 !important;
 }
 
-.tipo-aposta{
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    text-transform: uppercase;
+.tipo-apostas .tipo-aposta{
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0 0 5px;
+    break-inside: avoid-column;
 }
 
-.odds .odd{
+.header-tipo-aposta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 15px;
+    height: 30px;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 2px;
+
+    cursor: pointer;
+}
+
+.header-tipo-aposta.collapsed i {
+    transform: rotate(180deg);
+}
+
+.header-tipo-aposta h4 {
+    margin: 0;
+    font-size: 12px;
+}
+
+.odds {
+    height: auto;
+    padding: 0;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.odds .odd {
     width: 100%;
+    max-width: none;
+    margin-left: 0;
 }
 
-.odds-coluna{
+.odds > div {
+    flex: 1;
+}
+
+.inner-odd {
+    padding: 8px;
+    margin: 0 10px 10px 0;
+}
+
+.odds-coluna {
     width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .odds-jogador-coluna{
@@ -160,9 +368,6 @@
 
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
-    .jogo, .indentificacao, .nome {
-        max-width: calc(100vw - 525px);
-    }
 
     .indentificacao{
         display: flex;
@@ -175,27 +380,72 @@
     .nome img {
         width: 40px;
     }
-
-    .content-sports {
-        padding-bottom: 100px;
-    }
-
-    .large_screen {
-        display: block;
-    }
-
-    .small_screen {
-        display: none;
-    }
 }
 
 @media only screen and (max-width: 1024px) {
+    .indentificacao-jogo {
+        margin: 0 0 5px 0;
+    }
+
+    section.jogo {
+        flex-direction: column;
+    }
+
+    section.jogo iframe {
+        margin: 0 auto;
+    }
+
+    .top-bar-mobile {
+        background: var(--game);
+        color: var(--foreground-game);
+
+        padding: 10px;
+    }
+
+    .div-back {
+        top: 5px;
+        right: 5px;
+    }
+
+    .top-bar-mobile-text {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 400px;
+    }
+
+    .top-bar-mobile-text span {
+        max-width: 35%;
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .iframe-responsive {
+        max-width: 100%;
+        padding-top: 64%;
+        position: relative;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .iframe-responsive iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100%);
+        height: 100%;
+    }
+
     .jogo-container {
         max-width: 100vw;
+        height: 100vh !important;
     }
 
     .content-sports {
-        padding-bottom: 57px;
+        height: 100vh !important;
+        padding: 5px;
     }
 
     .indentificacao{
@@ -210,15 +460,38 @@
         max-width: 240px;
     }
 
+    .indentificacao-jogo .campeonato-nome {
+        font-size: 12px;
+        right: 10px;
+    }
+
     .nome img {
         width: 30px;
     }
 
-    .large_screen {
-        display: none;
+    .tipo-apostas {
+        column-count: initial;
     }
 
-    .small_screen {
-        display: block;
+    .placares {
+        margin: 0;
+    }
+
+    .indentificacao-jogo .nome {
+        margin-top: 50px;
+    }
+
+    .indentificacao-jogo .aovivo-tempo {
+        left: 5px;
+        top: 5px;
+        font-size: 8px;
+    }
+
+    .time-a-placar{
+        margin-left: 8px;
+    }
+
+    .time-b-placar{
+        margin-right: 8px;
     }
 }

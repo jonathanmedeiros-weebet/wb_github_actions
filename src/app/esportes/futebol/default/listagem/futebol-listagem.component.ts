@@ -1,20 +1,33 @@
 import {
-    Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, EventEmitter, Output, ChangeDetectionStrategy,
-    ChangeDetectorRef, Input, OnChanges, SimpleChange
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    QueryList,
+    Renderer2,
+    SimpleChange,
+    ViewChildren
 } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
 
-import { Campeonato, Jogo, ItemBilheteEsportivo } from './../../../../models';
-import {
-    ParametrosLocaisService,
-    BilheteEsportivoService,
-    HelperService,
-} from './../../../../services';
+import {NavigationExtras, Router} from '@angular/router';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Campeonato, Jogo} from './../../../../models';
+import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService} from './../../../../services';
+
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import * as moment from 'moment';
+import 'moment/min/locales';
+
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -22,11 +35,13 @@ import * as moment from 'moment';
     templateUrl: 'futebol-listagem.component.html',
     styleUrls: ['futebol-listagem.component.css']
 })
-export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
+export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+    @ViewChildren('scrollOdds') private oddsNavs: QueryList<ElementRef>;
     @Input() showLoadingIndicator;
     @Input() jogoIdAtual;
     @Input() camps: Campeonato[];
     @Input() data;
+    @Input() campeonatoSelecionado: boolean;
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     mobileScreen = true;
@@ -46,27 +61,127 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     exibirCampeonatosExpandido;
     loadingScroll = false;
     regiaoSelecionada;
+    qtdOddsPrincipais = 3;
+    oddsPrincipais;
+    widthOddsScroll = 0;
+    nomesJogoWidth = 200;
+    navs: ElementRef[];
+    enableScrollButtons = false;
+    sidebarNavIsCollapsed = false;
+    maxOddsSize;
+    oddSize = 150;
     unsub$ = new Subject();
+    term = '';
+
+    nomesCotacoes = [];
+
+    jogosDestaque = [];
+
+    limiteDiasTabela: number;
+    diaHojeMaisDois;
+    diaHojeMaisTres;
+    diaHojeMaisQuatro;
+    diaHojeMaisDoisStr;
+    diaHojeMaisTresStr;
+    diaHojeMaisQuatroStr;
+
+    tabSelected;
+
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.detectScrollOddsWidth();
+    }
 
     constructor(
         private bilheteService: BilheteEsportivoService,
+        private sidebarService: SidebarService,
         private renderer: Renderer2,
         private el: ElementRef,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
-        private router: Router
+        private jogoService: JogoService,
+        private router: Router,
+        private translate: TranslateService
     ) {
     }
 
+    ngAfterViewInit(): void {
+        this.oddsNavs.changes.subscribe((navs) => {
+            this.navs = navs.toArray();
+        });
+    }
+
+    moveLeft(event_id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
+        scrollTemp.nativeElement.scrollLeft -= 150;
+    }
+
+    moveRight(event_id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
+        scrollTemp.nativeElement.scrollLeft += 150;
+    }
+
+    onScroll(event_id) {
+        this.cd.detectChanges();
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
+        const scrollLeft = scrollTemp.nativeElement.scrollLeft;
+        const scrollWidth = scrollTemp.nativeElement.scrollWidth;
+
+        const scrollLeftTemp = this.el.nativeElement.querySelector(`#scroll-left-${event_id}`);
+        const scrollRightTemp = this.el.nativeElement.querySelector(`#scroll-right-${event_id}`);
+
+        if (scrollLeftTemp) {
+            if (scrollLeft <= 0) {
+                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            } else {
+                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            }
+        }
+
+        if (scrollRightTemp) {
+            if ((scrollWidth - (scrollLeft + this.maxOddsSize - 50)) <= 0) {
+                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            } else {
+                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            }
+        }
+    }
+
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
+        this.oddsPrincipais = this.paramsService.getOddsPrincipais();
+        this.qtdOddsPrincipais = this.oddsPrincipais.length;
+
+        this.atualizarDatasJogosFuturos(this.translate.currentLang);
+
+        this.translate.onLangChange.subscribe((res) => {
+            this.atualizarDatasJogosFuturos(res.lang);
+        });
+
+        this.oddsPrincipais.forEach(oddPrincipal => {
+            this.nomesCotacoes.push(this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'));
+        });
+
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+
+        this.sidebarService.collapsedSource
+            .subscribe(collapsed => {
+                this.sidebarNavIsCollapsed = collapsed;
+                this.detectScrollOddsWidth();
+            });
+
+        this.detectScrollOddsWidth();
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -84,9 +199,48 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
             });
     }
 
+    detectScrollOddsWidth() {
+        this.cd.detectChanges();
+        const sidesSize = this.sidebarNavIsCollapsed ? 380 : 650;
+        const centerSize = window.innerWidth - sidesSize;
+
+        this.nomesJogoWidth = ((centerSize / 100) * 30);
+        if (this.nomesJogoWidth < 200) {
+            this.nomesJogoWidth = 200;
+        }
+
+        if (this.mobileScreen) {
+            this.maxOddsSize = window.innerWidth;
+        } else {
+            this.maxOddsSize = centerSize - this.nomesJogoWidth - 110;
+        }
+
+        this.oddSize = this.maxOddsSize / this.qtdOddsPrincipais;
+        if (this.oddSize < 95) {
+            this.oddSize = 95;
+        }
+
+        this.widthOddsScroll = this.maxOddsSize + this.nomesJogoWidth;
+        if ((this.oddSize * this.qtdOddsPrincipais) - 28 > this.maxOddsSize) {
+                this.enableScrollButtons = true;
+        } else {
+            this.enableScrollButtons = false;
+        }
+    }
+
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
         if (this.contentSportsEl && changes['showLoadingIndicator']) {
             this.contentSportsEl.scrollTop = 0;
+        }
+
+        if (changes['data'] && this.data) {
+            const diferencaDias = moment(this.data).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+
+            if (diferencaDias === 1) {
+                this.mudarData('amanha');
+            } else {
+                this.mudarData('+' + diferencaDias);
+            }
         }
 
         if (changes['camps'] && this.camps) {
@@ -115,11 +269,33 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                 }, 1000);
             }
         }
+
+        this.jogoService.getJogosDestaque()
+            .subscribe(jogos => {
+                const jogosDestaquesIds = jogos.map(jogo => jogo.fi);
+                let jogosDestaques = [];
+
+                if (this.camps) {
+                    this.camps.forEach(camp => {
+                        const jogosSele = camp.jogos.filter(jogo => {
+                            return jogosDestaquesIds.includes(jogo._id + '');
+                        });
+
+                        jogosDestaques = jogosDestaques.concat(jogosSele);
+                    });
+                }
+
+                this.jogosDestaque = jogosDestaques;
+            });
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    limparPesquisa() {
+        this.term = '';
     }
 
     exibirMais() {
@@ -130,9 +306,39 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
 
             slice = slice.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
+                    const cotacoesLocalJogo = this.getCotacaoLocal(jogo);
+
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        const cotacaoLocal = cotacoesLocalJogo[cotacao.chave];
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacaoLocal ? cotacaoLocal.valor : cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            jogo.favorito,
+                            false);
                         cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    });
+
+                    this.oddsPrincipais.forEach(oddPrincipal => {
+                        const possuiCotacao = jogo.cotacoes.find(c => c.chave === oddPrincipal);
+                        if (!possuiCotacao) {
+                            const cotacaoLocal = cotacoesLocalJogo[oddPrincipal];
+                            jogo.cotacoes.push({
+                                _id: undefined,
+                                chave: oddPrincipal,
+                                jogo: undefined,
+                                jogoId: jogo._id,
+                                label: this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'),
+                                nome: this.helperService.apostaTipoLabel(oddPrincipal),
+                                valor: cotacaoLocal ? cotacaoLocal.valor : 0,
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal ? cotacaoLocal.valor : 0,
+                                    oddPrincipal,
+                                    jogo.event_id,
+                                    jogo.favorito,
+                                    false)
+                            });
+                        }
                     });
                 });
 
@@ -159,7 +365,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const headerHeight = this.mobileScreen ? 161 : 132;
+        const altura = window.innerHeight - headerHeight;
+        const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
     }
@@ -230,7 +439,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
                             this.cotacoesFaltando[jogo.event_id].push({
                                 chave: chave,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, jogo.event_id, jogo.favorito, false),
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal.valor,
+                                    chave,
+                                    jogo.event_id,
+                                    jogo.favorito,
+                                    false
+                                ),
                                 label: this.helperService.apostaTipoLabel(chave, 'sigla')
                             });
                         }
@@ -244,8 +459,18 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return result;
     }
 
+    getCotacaoLocal(jogo) {
+        const cotacoesLocais = this.cotacoesLocais[jogo.event_id];
+
+        if (cotacoesLocais) {
+            return cotacoesLocais;
+        } else {
+            return false;
+        }
+    }
+
     jogoBloqueado(eventId) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
+        return this.jogosBloqueados ? (!!this.jogosBloqueados.includes(eventId)) : false;
     }
 
     toggleCampeonato(campeonatoId) {
@@ -316,10 +541,42 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         return result;
     }
 
+    mudarData(dia = 'hoje') {
+        let data;
+
+        switch (dia) {
+            case 'amanha':
+                this.tabSelected = 'amanha';
+                data = moment().add(1, 'd').format('YYYY-MM-DD');
+                break;
+            case '+2':
+                this.tabSelected = 'doisdias';
+                data = moment().add(2, 'd').format('YYYY-MM-DD');
+                break;
+            case '+3':
+                this.tabSelected = 'tresdias';
+                data = moment().add(3, 'd').format('YYYY-MM-DD');
+                break;
+            case '+4':
+                this.tabSelected = 'quatrodias';
+                data = moment().add(4, 'd').format('YYYY-MM-DD');
+                break;
+            default:
+                this.tabSelected = null;
+                data = '';
+                break;
+        }
+
+        const navigationExtras: NavigationExtras = {
+            queryParams: data ? {'data': data} : {}
+        };
+        this.router.navigate(['/esportes/futebol'], navigationExtras);
+    }
+
     proximaData() {
         const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
         const navigationExtras: NavigationExtras = {
-            queryParams: { 'data': proximaData }
+            queryParams: {'data': proximaData}
         };
         this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
     }
@@ -332,11 +589,17 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
         if (regiaoSelecionada) {
             this.regiaoSelecionada = regiaoSelecionada;
 
-            let filteredCamps = this.camps.filter(camp => camp.nome.substring(0, camp.nome.indexOf(':')) === regiaoSelecionada);
+            const filteredCamps = this.camps.filter(camp => camp.nome.substring(0, camp.nome.indexOf(':')) === regiaoSelecionada);
             filteredCamps.map(campeonato => {
                 campeonato.jogos.forEach(jogo => {
                     jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(cotacao.valor, cotacao.chave, jogo.event_id, jogo.favorito, false);
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            jogo.favorito,
+                            false
+                        );
                         cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     });
                 });
@@ -360,7 +623,43 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     }
 
+    focusPesquisa(focus = true) {
+        if (this.mobileScreen) {
+            const inactiveDaysButtons = this.el.nativeElement.getElementsByClassName(`tab inactive`);
+            if (focus) {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.addClass(inactiveDayButton, 'ocultar-tab');
+                }
+            } else {
+                for (const inactiveDayButton of inactiveDaysButtons) {
+                    this.renderer.removeClass(inactiveDayButton, 'ocultar-tab');
+                }
+            }
+        }
+    }
+
     imageError(event: Event) {
-        (event.target as HTMLImageElement).src = "";
+        (event.target as HTMLImageElement).src = '';
+    }
+
+    atualizarDatasJogosFuturos(lang = 'pt') {
+        switch (lang) {
+            case 'pt':
+                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                break;
+            case 'en':
+                moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
+                break;
+            default:
+                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+        }
+
+        this.diaHojeMaisDois = moment().add(2, 'd');
+        this.diaHojeMaisTres = moment().add(3, 'd');
+        this.diaHojeMaisQuatro = moment().add(4, 'd');
+
+        this.diaHojeMaisDoisStr = this.diaHojeMaisDois.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisTresStr = this.diaHojeMaisTres.format(this.mobileScreen ? 'ddd' : 'dddd');
+        this.diaHojeMaisQuatroStr = this.diaHojeMaisQuatro.format(this.mobileScreen ? 'ddd' : 'dddd');
     }
 }

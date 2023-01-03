@@ -1,80 +1,16 @@
-.campeonato-header .column-left{
-    flex-grow: 1;
-    position: relative;
-}
-
-.campeonato-header .campeonato-nome{
-    margin-left: 28px;
-}
-
-.campeonato-header .fa{
-    /* font-size: 1.5rem; */
-    float: right;
-    line-height: 30px;
-    margin-right: 10px;
-}
-
-.jogos{
-    background-color: #fff;
-    padding-bottom: 4px;
-}
-
-.jogo{
-    padding: 0 10px 4px 10px;
-    /* cursor: pointer; */
-}
-
-.jogo-selecionado{
-    background: var(--selected-event);
-    color: var(--foreground-selected-event)!important;
-    cursor: auto;
-}
-
-.indentificacao{
-    display: flex;
-    align-items: center;
-}
-
-.indentificacao .nome{
-    flex-grow: 1;
-}
-
-.mais-opcoes{
-    color: var(--odds);
-    padding: 6px 4px 6px 6px;
-    min-width: 50px;
-    text-align: right;
-    cursor: pointer;
-}
-
-.exibir-mais{
-    text-align: center;
-    margin-top: 15px;
-}
-
-@media only screen and (max-width: 1024px) {
-    .content-sports {
-        padding-bottom: 106px;
-    }
-
-    .mais-opcoes{
-        margin-right: 10px;
-    }
-
-    .mais-opcoes span{
-        display: none;
-    }
-
-    .mais-opcoes{
-        margin: 0;
-    }
-}
-
 .escudo-container {
     margin-top: 4px;
     margin-bottom: 4px;
     display: flex;
     align-items: center;
+}
+
+.wrap-sticky {
+    padding: 0 5px;
+}
+
+.nome {
+    min-width: 200px;
 }
 
 .nome-time {
@@ -89,8 +25,15 @@
 }
 
 .escudo-img {
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 16px;
+    max-height: 16px;
+}
+
+.flag-icon {
+    font-size: 16px;
+    margin-top: 5px;
+    clip-path: circle();
+    border-radius: 100%;
 }
 
 .horario-listagem {
@@ -98,12 +41,142 @@
     padding: 0 5px;
     margin-right: 15px;
     border: 1px solid;
-    /*background-color: var(--event-time);
-    color: var(--fg-event-time);*/
     border-color: var(--event-time);
     color: var(--event-time);
 }
 
-.flag-icon{
-    margin-top: 5px;
+.scroll-button {
+    min-width: 25px;
+    height: 60px;
+    cursor: pointer;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.scroll-button i {
+    padding: 0;
+    margin: 0;
+}
+
+.jogo {
+    padding-top: 5px;
+}
+
+.enabled-scroll-button {
+    color: var(--foreground-game);
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.disabled-scroll-button {
+    color: var(--game);
+    cursor: auto;
+    transition: 500ms;
+}
+
+.filter {
+    display: flex;
+    margin: 10px 0;
+
+    align-items: center;
+}
+
+.filter .tabs {
+    background: var(--game);
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.filter .tabs .tab {
+    color: var(--foreground-game);
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    border-bottom: 3px solid transparent;
+}
+
+.filter .tabs .tab.active {
+    border-color: var(--highlight);
+    font-weight: 600;
+}
+
+.search-box {
+    flex: 1;
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 30px;
+}
+
+.search-box i.fa-search {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    color: var(--foreground-inputs-odds);
+}
+
+.search-box i.fa-close {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    right: 10px;
+}
+
+.mais-cotacao-mobile {
+    display: none;
+}
+
+.ocultar-tab {
+    display: none !important;
+}
+
+@media only screen and (max-width: 1024px) {
+    .wrap-sticky {
+        padding: 0;
+    }
+
+    .mais-opcoes {
+        margin-right: 10px;
+    }
+
+    .mais-opcoes span {
+        display: none;
+    }
+
+    .mais-opcoes {
+        margin: 0;
+    }
+
+    .indentificacao .nome {
+        position: relative;
+    }
+
+    .mais-cotacao-mobile {
+        display: block;
+        position: absolute;
+        right: 10px;
+        color: var(--highlight);
+        padding: 20px 0 20px 20px;
+    }
+
+    .nome-time {
+        max-width: 80%;
+    }
+
+    .filter {
+        margin: 5px 0;
+    }
 }

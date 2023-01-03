@@ -1,22 +1,31 @@
-.casino-content{
+.casino-content {
     flex-grow: 1;
-    overflow: auto;
+    overflow: scroll;
+    background-color: var(--background);
 
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
 }
 
 @media only screen and (max-width: 1024px) {
-    .casino-content{
-        height: calc(100vh - 82px);
-        background-color: white;
+    .casino-content {
+        height: calc(100vh - 161px);
+        padding: 0;
+    }
+
+    .casino-content.virtual {
+        height: calc(100vh - 121px);
         padding: 0;
     }
 }
 
 @media (min-width: 1025px) {
     .casino-content {
-        height: calc(100vh - 47px);
-        background-color: white;
-        margin-left: 255px;
-        padding: 10px 10px 10px 10px;
+        height: calc(100vh - 132px);
+        /*padding: 10px 10px 10px 10px;*/
+    }
+
+    .casino-content.virtual {
+        height: calc(100vh - 92px);
     }
 }

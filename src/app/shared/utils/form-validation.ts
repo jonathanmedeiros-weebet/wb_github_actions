@@ -72,6 +72,25 @@ export class FormValidations {
         return null;
     }
 
+    static cpfValidator(control: FormControl)  {
+        let cpf = control.value
+        if (typeof cpf !== 'string') {
+            return { cpfInvalido: true }
+        }
+
+        cpf = cpf.replace(/[^\d]+/g, '')
+        if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) {
+            return { cpfInvalido: true }
+        }
+
+        cpf = cpf.split('').map(el => +el)
+        const rest = (count) => (cpf.slice(0, count-12)
+            .reduce( (soma, el, index) => (soma + el * (count-index)), 0 )*10) % 11 % 10
+
+        const check = rest(10) === cpf[9] && rest(11) === cpf[10];
+        return check ? null : { cpfInvalido: true };
+    }
+
     static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any) {
         if (!fieldName) {
             fieldName = 'Campo';
@@ -90,7 +109,8 @@ export class FormValidations {
             'loginEmUso': 'Nome de usuário indisponível. Por favor escolha outro',
             'MatchPassword': 'Senhas diferentes. Digite a mesma senha em ambos os campos de senha.',
             'dataNascimentoInvalida': 'Data de Nascimento Inválida.',
-            'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.'
+            'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.',
+            'cpfInvalido': 'CPF Inválido!'
         };
         return config[validatorName];
     }

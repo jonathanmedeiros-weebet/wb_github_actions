@@ -1,0 +1,136 @@
+h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.modal-dialog {
+    max-width: 600px;
+  }
+
+.modal-header {
+    border-bottom-color: var(--foreground);
+    padding: 20px 35px;
+}
+
+.modal-body {
+    padding: 40px 60px;
+}
+
+.logo {
+    max-width: 175px;
+    max-height: 140px;
+}
+
+table {
+    color: var(--foreground);
+}
+
+th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    font-size: 14px;
+    border: 0;
+    padding: 10px 20px;
+}
+
+td {
+    border-bottom: 1px solid;
+    border-color: var(--game);
+    padding: 10px 20px;
+}
+
+.filters form {
+    display: flex;
+    margin-bottom: 35px;
+}
+
+.filters form input {
+    margin-right: 25px;
+}
+
+.filters form select {
+    max-width: 200px;
+    margin-right: 25px;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 12px;
+    right: 35px;
+    font-size: 14px;
+}
+
+.datepicker-group {
+    max-width: 250px;
+}
+
+.datepicker-group input {
+    padding-right: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.custom-day.faded {
+    background-color: var(--highlight);
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        padding: 20px;
+    }
+
+    .filters form {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .filters form select {
+        max-width: none;
+    }
+
+    .datepicker-group i {
+        right: 16px;
+    }
+
+    .datepicker-group {
+        max-width: none;
+    }
+
+    .filters form input {
+        margin-right: 0;
+        padding-right: 15px;
+    }
+
+    td {
+        white-space: nowrap;
+    }
+}

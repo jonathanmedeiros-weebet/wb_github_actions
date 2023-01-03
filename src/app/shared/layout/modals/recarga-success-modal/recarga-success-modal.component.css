@@ -1,17 +1,28 @@
 .modal-body{
     font-size: 1.2rem;
+    padding: 2.5rem;
 }
 
 .informacoes{
-    padding: 1em;
-    background: #f3f5d3;
-    margin: 1.5em auto;
+    padding: 2.5em;
+    background: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 30px;
 }
 
-.informacoes h3{
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.5rem;
+.informacoes .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    margin-bottom: 30px;
+}
+
+.informacoes h3 {
+    font-weight: 600;
+    font-size: 12px;
 }
 
 .banca-nome{
@@ -20,11 +31,66 @@
     font-size: 1.2rem;
 }
 
-.informacoes > div{
-    margin-bottom: 3px;
+.informacoes ul {
+    margin:0;
+    padding: 0;
+    list-style: none;
+}
+
+.informacoes ul li{
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .informacoes .autenticacao{
-    font-size: 0.9rem;
+    font-weight: 300;
+    font-size: 12px;
     font-style: italic;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+    align-items: center;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .modal-header {
+        padding: 20px 20px 0;
+        border-bottom: 0;
+        align-items: flex-start;
+    }
+
+    .modal-header a i {
+        color: var(--highlight);
+        font-size: 22px;
+    }
+
+    .modal-body {
+        padding: 0 20px 20px;
+    }
+
+    h4.modal-title {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .buttons {
+        justify-content: space-between;
+    }
+
+    .buttons button {
+        flex: 1;
+    }
+
+    .informacoes h3 {
+        font-size: 14px;
+    }
+
+    .logo-modal {
+        height: 20px;
+        margin-bottom: 15px;
+    }
 }

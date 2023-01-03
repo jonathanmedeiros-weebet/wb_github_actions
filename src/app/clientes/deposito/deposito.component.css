@@ -1,23 +1,153 @@
+#default-content {
+    padding: 25px 38px;
+}
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color:  var(--highlight);
+    cursor: pointer;
+}
+
 .buttons-container {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
     color: var(--foreground-header);
     margin-bottom: 15px;
 }
 
+.buttons-container a * {
+    margin-right: 8px;
+}
+
+.buttons-container a.active .radio:after {
+    display: block;
+}
+
+.buttons-container a .radio {
+    height: 15px;
+    width: 15px;
+    border: 1px solid var(--highlight);
+    background-color: transparent;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--highlight);
+}
+
+.buttons-container a.active .radio {
+    border: 1px solid var(--highlight);
+}
+
 .opcao-pagamento {
-    width: 50%;
-    height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border: 0.1pt solid #000000;
+
+    width: 190px;
+    padding: 10px;
+
+    border: 1px solid var(--game);
+    color: var(--foreground);
+    border-radius: 4px;
     text-decoration: none;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+.opcao-pagamento svg {
+    fill: #fff;
 }
 
 .active {
-    background-color: var(--header);
-    color: var(--foreground-header);
+    background-color: transparent;
+    border-color: var(--highlight);
 }
+
+.table-responsive {
+    margin-top: 50px;
+}
+
+.table {
+    color: var(--foreground);
+ }
+
+ .table thead th {
+     background-color: var(--game);
+     color: var(--foreground-game);
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     padding: 15px 10px;
+ }
+
+ .table .right {
+     text-align: right;
+ }
+
+ .table tbody td {
+     border-top: 0;
+     border-bottom: 1px solid var(--foreground-game);
+ }
+
+ .table td.no-border{
+     border-left: 0 !important;
+ }
+
+ @media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 20px;
+        background: var(--background);
+        height: 100%;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .uncollapsed {
+        padding: 0;
+    }
+
+    .buttons-container {
+        background-color: var(--game);
+        border: 2px solid var(--game);
+        border-radius: 4px;
+    }
+
+    .buttons-container a {
+        flex: 1;
+        margin: 0;
+        justify-content: center;
+        border: 0;
+        background-color: var(--game);
+        color: var(--foreground-game);
+    }
+
+    .buttons-container a.active {
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        fill: var(--foreground-highlight);
+    }
+
+    .buttons-container a i.radio{
+        display: none;
+    }
+
+    .table thead th {
+        background-color: var(--game);
+    }
+ }

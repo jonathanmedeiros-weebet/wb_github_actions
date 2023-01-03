@@ -2,13 +2,16 @@ import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
-import {AuthDoisFatoresModalComponent} from '../../modals';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AuthService, ApostaService, MessageService, ParametrosLocaisService} from './../../../../services';
-import {BaseFormComponent} from '../../base-form/base-form.component';
-import {Usuario} from '../../../models/usuario';
+import { AuthDoisFatoresModalComponent } from '../../modals';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { BaseFormComponent } from '../../base-form/base-form.component';
+import { Usuario } from '../../../models/usuario';
+import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
+import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
+import {config} from '../../../config';
 
 @Component({
     selector: 'app-login-modal',
@@ -22,8 +25,10 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     isCliente;
     isLoggedIn;
     modalRef;
+    mostrarSenha = false;
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
+    LOGO = config.LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -124,12 +129,28 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     abrirCadastro() {
         this.activeModal.dismiss();
-        this.router.navigate(['auth/cadastro']);
+
+        this.modalRef = this.modalService.open(
+            CadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+            }
+        );
     }
 
     abrirRecuperarSenha() {
         this.activeModal.dismiss();
-        this.router.navigate(['auth/recuperar-senha']);
+
+        this.modalRef = this.modalService.open(
+            EsqueceuSenhaModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-600',
+                centered: true,
+            }
+        );
     }
 
     abrirModalAuthDoisFatores() {
@@ -140,6 +161,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true,
                 backdrop: 'static',
+                windowClass: 'modal-600'
             }
         );
 
@@ -150,5 +172,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 reason => {
                 }
             );
+    }
+
+    toogleSenha() {
+        this.mostrarSenha = !this.mostrarSenha;
     }
 }

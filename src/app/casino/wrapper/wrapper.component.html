@@ -1,6 +1,5 @@
-
 <section id="casino-wrapper" class="overflow-auto">
-    <div class="casino-content">
+    <div class="casino-content" [ngClass]="{'virtual': isVirtuais}">
         <router-outlet></router-outlet>
     </div>
 </section>

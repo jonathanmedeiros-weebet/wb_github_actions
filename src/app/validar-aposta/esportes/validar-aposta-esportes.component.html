@@ -48,59 +48,76 @@
         </div>
         <div class="informacoes">
             <p>
-                Horário: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
+                {{'geral.horario' | translate}}: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
             </p>
             <p>
-                Total de jogos: {{preAposta.itens.length}}
+                {{'geral.totalDeJogos' | translate}}: {{preAposta.itens.length}}
             </p>
             <p>
-                Estimativa de ganho: {{estimativaGanho | currency}}
+                {{'geral.estimativaDeGanho' | translate}}: {{estimativaGanho | currency}}
             </p>
-            <div class="form-group">
-                <label for="">Apostador</label>
-                <input type="text" class="form-control" formControlName="apostador"
-                    [ngClass]="applyCssInputError('apostador')">
-                <app-error-msg [control]="form.get('apostador')" label="Apostador">
-                </app-error-msg>
+            <div class="row">
+                <div class="col-md-2">
+                    {{'geral.apostador' | translate}}
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="inverted-out form-control" formControlName="apostador"
+                               [ngClass]="applyCssInputError('apostador')">
+                        <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} ">
+                        </app-error-msg>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="">Valor da Aposta</label>
-                <input type="text" class="form-control" formControlName="valor" [ngClass]="applyCssInputError('valor')">
-                <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+            <div class="row">
+                <div class="col-md-2">
+                    {{'bilhete.valorDaAposta' | translate}}
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="inverted-out form-control" formControlName="valor"
+                               [ngClass]="applyCssInputError('valor')">
+                        <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="form-group form-check-custom alteracoes-odds">
+                        <input type="checkbox" class="form-check-input-custom" id="aceito-alteracoes-odds"
+                               formControlName="aceitar_alteracoes_odds">
+                        <label for="aceito-alteracoes-odds">
+                            {{'bilhete.aceitarAlteracoesDeOdds' | translate}}
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="alert alert-warning" *ngIf="cotacoesVinheramDifentes">
-        <b>Atenção <i class="fa fa-warning"></i></b>
+        <b>{{'geral.atencao' | translate}} <i class="fa fa-warning"></i></b>
         <br>
         <br>
-        Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.
+        {{'bilhete.algumasCotacoesMudaramPreAposta' | translate}}
     </div>
 
     <div class="alert alert-warning" *ngIf="cotacoesMudaram">
-        <b>Atenção <i class="fa fa-warning"></i></b>
+        <b>{{'geral.atencao' | translate}} <i class="fa fa-warning"></i></b>
         <br>
         <br>
-        <b>A PRÉ-APOSTA AINDA NÃO FOI CONCLUÍDA!</b> Algumas cotações mudaram, verifique com atenção antes de validar a
-        pré-aposta.
-    </div>
-
-    <div class="form-group form-check-custom alteracoes-odds">
-        <input type="checkbox" class="form-check-input-custom" id="aceito-alteracoes-odds"
-            formControlName="aceitar_alteracoes_odds">
-        <label for="aceito-alteracoes-odds">
-            Aceitar alterações de odds
-        </label>
+        <b>{{'bilhete.preApostaNaoConcluida' | translate}}!</b> {{'bilhete.algumasCotacoesMudaramPreAposta2' | translate}}
     </div>
 
     <button [disabled]="disabled" *ngIf="!process; else btnProcessando" class="btn btn-custom">
-        Validar
+        {{'geral.validar' | translate}}
     </button>
     <ng-template #btnProcessando>
         <button disabled class="btn btn-custom">
-            Processando... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+            {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
             <i class="fa fa-spinner fa-spin"></i>
         </button>
     </ng-template>

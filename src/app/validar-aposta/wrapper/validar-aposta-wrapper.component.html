@@ -1,43 +1,51 @@
 <div id="default-content">
-    <div class="content-header">
-        <h2>Validar Aposta</h2>
-    </div>
-    <div class="content-body">
-        <div class="content">
-            <div class="">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form form-inline">
-                    <div class="form-group">
-                        <input type="text" style="text-transform:uppercase;" placeholder="Código da pré-aposta"
-                               class="form-control" formControlName="codigo" autocomplete="off"
-                               [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
+    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>{{'geral.validarAposta' | translate}}</h2>
+        </div>
+        <div class="content-body">
+            <div class="content">
+                <div class="">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
+                        <div class="d-flex flex-row">
+                            <div class="form-group">
+                                <input type="number" placeholder="{{'geral.codigoPreAposta' | translate}}"
+                                       class="inverted-out form-control" formControlName="codigo" autocomplete="off"
+                                       [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
+                                <app-error-msg [control]="form.get('codigo')"></app-error-msg>
+                            </div>
+                            <button type="submit" class="btn btn-custom">{{'geral.consultar' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+                <div *ngIf="exibirPreAposta">
+                    <div id="pre-aposta">
+                        <h2>{{'geral.codigoPreAposta' | translate}}: {{preAposta.codigo}}</h2>
+                        <ng-container [ngSwitch]="preAposta.tipo">
+                            <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
+                                                         (success)="success($event)">
+                            </app-validar-aposta-esportes>
+
+                            <app-validar-aposta-loterias *ngSwitchCase="'loteria'" [preAposta]="preAposta"
+                                                         (success)="success($event)">
+                            </app-validar-aposta-loterias>
+
+                            <app-validar-aposta-acumuladao *ngSwitchCase="'acumuladao'" [preAposta]="preAposta"
+                                                           (success)="success($event)">
+                            </app-validar-aposta-acumuladao>
+
+                            <app-validar-aposta-desafios *ngSwitchCase="'desafio'" [preAposta]="preAposta"
+                                                         (success)="success($event)">
+                            </app-validar-aposta-desafios>
+                        </ng-container>
                     </div>
-                    <button type="submit" class="btn btn-custom">Consultar</button>
-                    <app-error-msg style="margin-left: 5px;" [control]="form.get('codigo')"></app-error-msg>
-                </form>
-            </div>
-
-            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-
-            <div *ngIf="exibirPreAposta">
-                <div id="pre-aposta">
-                    <h1>{{preAposta.codigo}}</h1>
-                    <ng-container [ngSwitch]="preAposta.tipo">
-                        <app-validar-aposta-esportes *ngSwitchCase="'esportes'" [preAposta]="preAposta"
-                                                     (success)="success($event)">
-                        </app-validar-aposta-esportes>
-
-                        <app-validar-aposta-loterias *ngSwitchCase="'loteria'" [preAposta]="preAposta"
-                                                     (success)="success($event)">
-                        </app-validar-aposta-loterias>
-
-                        <app-validar-aposta-acumuladao *ngSwitchCase="'acumuladao'" [preAposta]="preAposta"
-                                                       (success)="success($event)">
-                        </app-validar-aposta-acumuladao>
-
-                        <app-validar-aposta-desafios *ngSwitchCase="'desafio'" [preAposta]="preAposta"
-                                                     (success)="success($event)">
-                        </app-validar-aposta-desafios>
-                    </ng-container>
                 </div>
             </div>
         </div>

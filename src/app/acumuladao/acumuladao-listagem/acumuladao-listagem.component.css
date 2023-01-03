@@ -1,38 +1,59 @@
 #acumuladao-listagem{
-    padding: 15px;
+    padding: 5px;
+    height: calc(100vh - 92px);
+    overflow: scroll;
+
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
+}
+
+.wrap-acumuladao {
+    padding: 10px;
+    min-height: 100%;
 }
 
 .acumuladao{
-    background-color: #fff;
-    margin-bottom: 15px;
-    padding: 15px;
+    display: flex;
+    min-height: 90px;
+    max-height: 90px;
+    justify-content: space-between;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-top: 10px;
+    padding: 12px 20px;
     cursor: pointer;
     border: 1px solid transparent;
+    border-radius: 5px;
+    position: relative;
+    transition: 250ms;
+}
+
+.acumuladao:first-of-type {
+    margin-top: 0;
 }
 
 .acumuladao:hover{
-    border-color: var(--header);
+    border-color: var(--highlight);
 }
 
-.acumuladao .line-1, .acumuladao .line-2{
-    display: flex;
-    justify-content: space-between;
-}
-
-.acumuladao .line-1{
-    margin-bottom: 5px;
-    font-size: 1.2rem;
+.qtd-eventos {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
 }
 
 .acumuladao .nome{
-    color: var(--header);
+    color: var(--foreground-game);
     font-weight: bolder;
 }
 
+.data {
+    font-weight: normal;
+}
+
 .acumuladao .premio{
-    font-weight: bolder;
-    color: #000;
     text-align: right;
+    font-size: 12px;
 }
 
 .sem-evento{
@@ -42,6 +63,29 @@
 
 @media only screen and (max-width: 1024px) {
     #acumuladao-listagem{
-        padding-bottom: 50px;
+        height: calc(100vh - 122px);
+    }
+
+    .acumuladao {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .acumuladao .infoAcumuladao {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+
+        font-size: 16px;
+    }
+
+    .acumuladao .infoAcumuladao .premio {
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    .acumuladao .infoAcumuladao .partidas {
+        font-size: 12px;
     }
 }

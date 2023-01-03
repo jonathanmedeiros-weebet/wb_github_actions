@@ -1,39 +1,114 @@
-.inner-odd {
-    margin-bottom: 2px;
-}
+.jogo-container {
+    height: calc(100vh - 132px);
+    display: flex;
+    flex-direction: column;
 
-.indentificacao {
-    padding: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     position: relative;
 }
 
-.indentificacao .info {
+.jogo-container-interno {
+    padding: 0 5px;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+    width: calc(100%);
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    padding: 15px;
+
+    background: var(--game);
+    color: var(--foreground-game);
+}
+
+.top-bar-back {
+    margin-right: 15px;
+    padding: 10px 0;
+    padding-right: 15px;
+}
+
+.top-bar-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar-info .top-camp {
+    font-size: 10px;
+    opacity: .6;
+}
+
+.top-bar .fa{
+    color: var(--foreground-game);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.v-divider {
+    background: var(--foreground-game);
+    margin-right: 8px;
+    width: 1px;
+    height: 100%;
+    opacity: 25%;
+}
+
+.content-sports {
+    overflow: unset;
+}
+
+.indentificacao-jogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    height: 20vh;
+    max-height: 300px;
+    background-image: url("https://cdn.wee.bet/img/stadium-background.png");
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.indentificacao-jogo .info-jogo {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.indentificacao .info {
+.indentificacao-jogo .info-jogo {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.indentificacao .campeonato-nome {
+.indentificacao-jogo .campeonato-nome {
+    position: absolute;
+    top: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 10px;
+    font-weight: 400;
     max-width: 400px;
+    color: #FFFFFF;
 }
 
-.indentificacao .nome {
+.indentificacao-jogo .nome {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: center;
 }
 
-.indentificacao .nome {
+.indentificacao-jogo .nome {
     margin-top: 5px;
 }
 
@@ -43,36 +118,80 @@
     flex-direction: column;
     align-items: center;
     width: 150px;
+    color: #FFFFFF;
 }
 
 .times-separador {
-    font-size: 35px;
+    font-size: 60px;
     margin: 10px 20px;
 }
 
-.tipo-apostas {
-    background-color: #fff;
+.tipo-apostas-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.coluna-apostas-tipo {
+    width: calc(50% - 2px);
 }
 
 .tipo-aposta {
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    text-transform: uppercase;
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
 }
 
-.div-back {
-    color: red;
-    font-size: 2rem;
+.header-tipo-aposta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 30px;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 2px;
     cursor: pointer;
 }
 
-.indentificacao .div-back {
+.header-tipo-aposta.collapsed i {
+    transform: rotate(180deg);
+}
+
+.odds-tipo-aposta {
+    background-color: var(--header);
+}
+
+.div-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--highlight);
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: #181818;
+}
+
+.indentificacao-jogo .div-back {
     position: absolute;
     right: 20px;
     top: 10px;
 }
 
-.indentificacao .nome, h4 {
+.indentificacao-jogo .horario-jogo {
+    position: absolute;
+    left: 20px;
+    top: 12px;
+    padding: 5px 10px;
+    background-color: #181818;
+    border-radius: 25px;
+    color: var(--highlight);
+}
+
+.indentificacao-jogo .nome, h4 {
     font-size: 1.2rem;
 }
 
@@ -81,18 +200,42 @@
     text-align: center;
 }
 
-.odds .odd {
-    width: 100%;
+.odds-tipo-aposta .odds {
+    height: auto;
+    overflow: hidden;
+    padding: 2px 13px;
+}
+
+.odds-tipo-aposta .odds {
+    padding: 10px 0 0 10px;
+}
+
+.odd {
+    max-width: 100%;
+    margin: 0px;
+}
+
+.inner-odd {
+    padding: 8px;
+    margin: 0 10px 10px 0;
+}
+
+.odd:last-of-type {
+    margin-bottom: 0;
 }
 
 .odds-coluna {
+    padding: 0;
+    display: flex;
+    align-self: start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
 .odds-jogador-coluna {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .odd-jogador {
@@ -115,17 +258,56 @@
     width: 100%;
 }
 
+.nav-tipos {
+    height: 40px;
+    background-color: var(--game);
+    padding: 0 !important;
+    border-radius: 2px;
+}
+
+.nav-tipos .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 400;
+    height: 40px;
+    color: var(--foreground-game);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-tipos .nav-link.active, .nav-tipos .nav-link:hover {
+    border-bottom: 3px solid var(--highlight);
+}
+
+@media only screen and (max-width: 1279px) {
+    .coluna-apostas-tipo {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
-    .content-sports {
-        padding-bottom: 57px;
+    /*.jogo-container {*/
+    /*    padding: 0 5px 5px 5px;*/
+    /*}*/
+
+    /*.jogo-container-interno {*/
+    /*    padding: 0;*/
+    /*}*/
+
+    .indentificacao-jogo .div-back {
+        top: 5px;
     }
 
-    .indentificacao .div-back {
-        top: 0;
+    .indentificacao-jogo .horario-jogo {
+        top: 5px;
     }
 
-    .indentificacao .campeonato-nome {
+    .indentificacao-jogo .campeonato-nome {
         max-width: 240px;
+        position: initial;
+        margin: 10px 0;
     }
 
     .nome .time-a,
@@ -164,10 +346,7 @@
     }
 
     .nome img {
-        width: 40px;
-    }
-
-    .content-sports {
-        padding-bottom: 200px;
+        width: 6.5vh;
+        margin-bottom: 8px;
     }
 }

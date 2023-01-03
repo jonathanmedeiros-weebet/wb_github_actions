@@ -1,7 +1,7 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange} from '@angular/core';
-import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {SidebarService} from '../../shared/services/utils/sidebar.service';
 import {MenuFooterService} from '../../services';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-wrapper',
@@ -9,15 +9,24 @@ import {MenuFooterService} from '../../services';
     styleUrls: ['./wrapper.component.css']
 })
 export class CasinoWrapperComponent implements OnInit, OnDestroy {
-
     @Input() showLoadingIndicator;
     mobileScreen = false;
+    isVirtuais = false;
 
     constructor(
+        private sideBarService: SidebarService,
         private menuFooterService: MenuFooterService,
+        private router: Router
     ) {}
+
     ngOnInit(): void {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.isVirtuais = this.router.url.split('/')[2] === 'v';
+
+        this.mobileScreen = window.innerWidth <= 1024;
+        this.sideBarService.changeItens({
+            contexto: 'casino',
+            dados: {}
+        });
         if (this.mobileScreen) {
             this.menuFooterService.setIsPagina(false);
         } else {

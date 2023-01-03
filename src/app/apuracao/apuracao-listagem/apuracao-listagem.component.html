@@ -1,84 +1,90 @@
 <div id="default-content">
-    <div class="content-header">
-        <h2>Apuração</h2>
-        <div class="filters">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                        <div class="form-row">
-                            <div class="col-12 col-md-3">
-                                <label>Apostador</label>
-                                <input type="text" class="form-control" formControlName="apostador">
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>{{'geral.apuracao' | translate}}</h2>
+            <div class="filters">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="form-row">
+                                <div class="col-12 col-md-3">
+                                    <label>{{'geral.apostador' | translate}} </label>
+                                    <input type="text" class="form-control" formControlName="apostador">
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label>Periodo Inicial</label>
+                                    <input type="date" class="form-control" formControlName="dataInicial">
+                                    <app-error-msg [control]="form.get('dataInicial')"
+                                                   label="Data inicial"></app-error-msg>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <label>Periodo Final</label>
+                                    <input type="date" class="form-control" formControlName="dataFinal">
+                                    <app-error-msg [control]="form.get('dataFinal')"
+                                                   label="Data inicial"></app-error-msg>
+                                </div>
+                                <div class="col-6 col-md-2">
+                                    <label>{{'geral.status' | translate}}</label>
+                                    <select class="form-control" formControlName="status">
+                                        <option value="">{{'geral.todos' | translate}}</option>
+                                        <option value="ganhou">{{'geral.ganhou' | translate}}</option>
+                                        <option value="perdeu">{{'geral.perdeu' | translate}}</option>
+                                        <option value="pendente">{{'geral.pendente' | translate}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 col-md-1">
+                                    <button class="btn btn-custom btn-line" type="submit">{{'geral.filtrar' | translate}}</button>
+                                </div>
                             </div>
-                            <div class="col-6 col-md-3">
-                                <label>Periodo Inicial</label>
-                                <input type="date" class="form-control" formControlName="dataInicial">
-                                <app-error-msg [control]="form.get('dataInicial')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <label>Periodo Final</label>
-                                <input type="date" class="form-control" formControlName="dataFinal">
-                                <app-error-msg [control]="form.get('dataFinal')" label="Data inicial"></app-error-msg>
-                            </div>
-                            <div class="col-6 col-md-2">
-                                <label>Status</label>
-                                <select class="form-control" formControlName="status">
-                                    <option value="">Todos</option>
-                                    <option value="ganhou">Ganhou</option>
-                                    <option value="perdeu">Perdeu</option>
-                                    <option value="pendente">Pendente</option>
-                                </select>
-                            </div>
-                            <div class="col-6 col-md-1">
-                                <button class="btn btn-custom btn-line" type="submit">Filtrar</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="content-body">
-        <div class="content">
-            <div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <ul ngbNav #nav="ngbNav" [activeId]="activeId" class="nav-pills">
-                            <li [ngbNavItem]="'esporte'">
-                                <a ngbNavLink>Esporte</a>
-                                <ng-template ngbNavContent>
-                                    <app-apuracao-esporte [queryParams]="queryParams"></app-apuracao-esporte>
-                                </ng-template>
-                            </li>
-                            <li [ngbNavItem]="'consolidado'">
-                                <a ngbNavLink>Consolidado</a>
-                                <ng-template ngbNavContent>
-                                    <app-apuracao-consolidada [queryParams]="queryParams"></app-apuracao-consolidada>
-                                </ng-template>
-                            </li>
-                            <li [ngbNavItem]="'acumuladao'" *ngIf="acumuladaoHabilitado">
-                                <a ngbNavLink>Acumuladão</a>
-                                <ng-template ngbNavContent>
-                                    <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>
-                                </ng-template>
-                            </li>
-                            <li [ngbNavItem]="'desafio'" *ngIf="desafioHabilitado">
-                                <a ngbNavLink>Desafio</a>
-                                <ng-template ngbNavContent>
-                                    <app-apuracao-desafio [queryParams]="queryParams"></app-apuracao-desafio>
-                                </ng-template>
-                            </li>
-                            <li [ngbNavItem]="'loteria'" *ngIf="loteriasHabilitada">
-                                <a ngbNavLink>Loteria</a>
-                                <ng-template ngbNavContent>
-                                    <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>
-                                </ng-template>
-                            </li>
-                        </ul>
-                        <div [ngbNavOutlet]="nav"></div>
+        <div class="content-body">
+            <div class="content">
+                <div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <ul ngbNav #nav="ngbNav" [activeId]="activeId" class="nav-pills">
+                                <li [ngbNavItem]="'esporte'">
+                                    <a ngbNavLink>{{'geral.esporte' | translate}} </a>
+                                    <ng-template ngbNavContent>
+                                        <app-apuracao-esporte [queryParams]="queryParams"></app-apuracao-esporte>
+                                    </ng-template>
+                                </li>
+                                <li [ngbNavItem]="'consolidado'">
+                                    <a ngbNavLink>Consolidado</a>
+                                    <ng-template ngbNavContent>
+                                        <app-apuracao-consolidada
+                                            [queryParams]="queryParams"></app-apuracao-consolidada>
+                                    </ng-template>
+                                </li>
+                                <li [ngbNavItem]="'acumuladao'" *ngIf="acumuladaoHabilitado">
+                                    <a ngbNavLink>{{'geral.acumuladao' | translate}}</a>
+                                    <ng-template ngbNavContent>
+                                        <app-apuracao-acumuladao [queryParams]="queryParams"></app-apuracao-acumuladao>
+                                    </ng-template>
+                                </li>
+                                <li [ngbNavItem]="'desafio'" *ngIf="desafioHabilitado">
+                                    <a ngbNavLink>{{'geral.desafio' | translate}}</a>
+                                    <ng-template ngbNavContent>
+                                        <app-apuracao-desafio [queryParams]="queryParams"></app-apuracao-desafio>
+                                    </ng-template>
+                                </li>
+                                <li [ngbNavItem]="'loteria'" *ngIf="loteriasHabilitada">
+                                    <a ngbNavLink>Loteria</a>
+                                    <ng-template ngbNavContent>
+                                        <app-apuracao-loteria [queryParams]="queryParams"></app-apuracao-loteria>
+                                    </ng-template>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <app-footer></app-footer>
 </div>

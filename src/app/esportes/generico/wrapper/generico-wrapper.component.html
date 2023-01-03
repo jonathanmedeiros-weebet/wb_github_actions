@@ -2,14 +2,16 @@
     <div id="jogo-default-content">
         <div class="lista" [hidden]="exibirMaisCotacoes">
             <app-generico-listagem [showLoadingIndicator]="showLoadingIndicator"
-                (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
-                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [camps]="campeonatos" [data]="data"
-                [sportId]="sportId" [esporte]="esporte">
+                                   (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
+                                   (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [camps]="campeonatos"
+                                   [data]="data"
+                                   [sportId]="sportId" [esporte]="esporte"
+                                   [campeonatoSelecionado]="campeonatoSelecionado">
             </app-generico-listagem>
         </div>
         <div class="jogo" [hidden]="!exibirMaisCotacoes">
             <app-basquete-jogo *ngIf="sportId == '18'" [jogoId]="jogoId"
-                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+                               (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
             </app-basquete-jogo>
         </div>
     </div>

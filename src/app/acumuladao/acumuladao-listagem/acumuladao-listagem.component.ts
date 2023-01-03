@@ -13,6 +13,7 @@ import * as moment from 'moment';
 })
 export class AcumuladaoListagemComponent implements OnInit {
     acumuladoes: Acumuladao[];
+    isMobile = false;
 
     constructor(
         private router: Router,
@@ -21,6 +22,10 @@ export class AcumuladaoListagemComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        if (window.innerWidth <= 1024) {
+            this.isMobile = true;
+        }
+
         this.acumuladaoService.getAcumuladoes()
             .subscribe(
                 acumuladoes => {

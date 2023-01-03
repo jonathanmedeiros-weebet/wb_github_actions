@@ -9,6 +9,7 @@ import {MessageService} from '../../shared/services/utils/message.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmModalComponent} from '../../shared/layout/modals';
 import {result} from 'lodash';
+import { SidebarService } from 'src/app/services';
 
 @Component({
     selector: 'app-depositos-saques',
@@ -30,12 +31,15 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
         private financeiroService: FinanceiroService,
         private menuFooterService: MenuFooterService,
         private messageService: MessageService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private sidebarService: SidebarService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.sidebarService.changeItens({contexto: 'cliente'});
+
         this.createForm();
         this.menuFooterService.setIsPagina(true);
     }

@@ -1,20 +1,85 @@
-.inner-odd {
-    margin-bottom: 2px;
-}
+.jogo-container {
+    height: calc(100vh - 132px);
 
-.indentificacao {
-    padding: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     position: relative;
 }
 
-.indentificacao .info {
+.wrap-sticky {
+    padding: 5px;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+
+    width: calc(100%);
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    padding: 15px;
+
+    background: var(--game);
+    color: var(--foreground-game);
+}
+
+.top-bar-back {
+    margin-right: 15px;
+    padding: 10px 0;
+    padding-right: 15px;
+}
+
+.v-divider {
+    background: var(--foreground-game) !important;
+    margin-right: 8px;
+    width: 1px;
+    height: 100%;
+    opacity: 25%;
+}
+
+.top-bar-info {
     display: flex;
     flex-direction: column;
+}
+
+.top-bar-info .top-camp {
+    font-size: 10px;
+    opacity: .6;
+}
+
+.top-bar .fa{
+    color: var(--foreground-game);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.content-sports {
+    overflow: unset;
+    padding: 0 5px;
+}
+
+.indentificacao {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 10px;
+    position: relative;
+    height: 20vh;
+    max-height: 300px;
+    background-image: url("https://cdn.wee.bet/img/stadium-background.png");
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    /*margin-bottom: 5px;*/
+    border-radius: 5px;
 }
 
 .indentificacao .info {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
 }
@@ -24,6 +89,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 400px;
+    font-size: 14px;
+    color: #FFFFFF;
 }
 
 .indentificacao .nome {
@@ -31,10 +98,22 @@
     align-items: center;
     width: 100%;
     justify-content: center;
+    flex-direction: row;
+    background-color: inherit;
+    color: #FFFFFF;
 }
 
 .indentificacao .nome {
     margin-top: 5px;
+}
+
+.indentificacao .horario {
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+.content-sports {
+    padding: 5px;
 }
 
 .nome .time-a,
@@ -50,20 +129,35 @@
     margin: 10px 20px;
 }
 
-.tipo-apostas {
-    background-color: #fff;
+.tipo-aposta {
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
 }
 
-.tipo-aposta {
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    text-transform: uppercase;
+.header-tipo-aposta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 30px;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 2px;
 }
 
 .div-back {
-    color: red;
-    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--highlight);
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
     cursor: pointer;
+    border-radius: 25px;
+    background-color: #181818;
 }
 
 .indentificacao .div-back {
@@ -81,11 +175,33 @@
     text-align: center;
 }
 
+.odds {
+    height: auto;
+    padding: 10px 0 0 10px;
+}
+
 .odds .odd {
     width: 100%;
+    max-width: none;
+    margin-left: 0;
+}
+
+.odds > div {
+    flex: 1;
+}
+
+.inner-odd {
+    padding: 8px;
+    margin: 0 10px 10px 0;
 }
 
 .odds-coluna {
+    padding: 0;
+    display: flex;
+    align-self: start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
@@ -116,10 +232,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    /* .content-sports {
-        padding-bottom: 57px;
-    } */
-
     .indentificacao .div-back {
         top: 0;
     }

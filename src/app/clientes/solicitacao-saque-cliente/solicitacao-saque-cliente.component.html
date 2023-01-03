@@ -1,65 +1,93 @@
 <div id="default-content">
+    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
     <app-spinner *ngIf="showLoading"></app-spinner>
 
-    <ng-containe *ngIf="!showLoading">
+    <ng-container *ngIf="!showLoading">
         <div class="content-header">
-            <h2>Solicitar Saque</h2>
+            <h2>{{'geral.saques' | translate}} </h2>
         </div>
         <div class="content-body">
             <div class="content">
-                <div class="alert alert-danger" *ngIf="!cadastroCompleto">
-                    {{errorMessage}} <a [routerLink]="['/clientes/perfil']">Clique aqui para continuar.</a>
-                </div>
-                <div class="alert alert-info" *ngIf="respostaSolicitacao">
-                    {{respostaSolicitacao}}
-                </div>
                 <div *ngIf="cadastroCompleto && !respostaSolicitacao">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div class="row">
-                            <div class="col col-sm-12">
-                                <div class="alert alert-warning alert-dismissible fade show">
-                                    <b>Saque Min.:</b> {{valorMinSaque | currency}} <br>
-                                    <b>Saque Max.:</b> {{valorMaxSaqueDiario | currency}} <br>
-                                    <b>Limite de Saque Diário:</b> {{valorMaxSaqueDiario | currency}} <br>
-                                    <b>Limite de Saque Mensal:</b> {{valorMaxSaqueMensal | currency}}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            <div class="col col-sm-3">
+                                <div class="form-group required" [ngClass]="{'text-center': isMobile}">
+                                    <span class="alerta-saldo mt-3">
+                                        {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
+                                    <label class="label"
+                                           [ngClass]="{'label-input-valor': isMobile}">
+                                        <span *ngIf="isMobile">{{'saques.informeOValor' | translate}}</span>
+                                        <span *ngIf="!isMobile">{{'saques.informeValorDesejadoSaque' | translate}}</span>
+                                    </label>
+                                    <input currencyMask
+                                           [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
+                                           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                           formControlName="valor">
+                                    <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                                    <span
+                                        class="hide-mobile mt-3 d-block">
+                                        {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
                                 </div>
-                                <div *ngIf="apiPagamentos == 'sauto_pay'" class="alert alert-info alert-dismissible fade show">
-                                    <b>Atenção! </b>Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil. <br>
+                                <div *ngIf="apiPagamentos == 'sauto_pay'"
+                                     class="alert alert-info alert-dismissible fade show">
+                                    <b>{{'geral.atencao' | translate}}! </b>{{'saques.infoSautoPay' | translate}}. <br>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col col-sm-5">
-                                        <div class="form-group required">
-                                            <label class="label">Valor do Saque:</label>
-                                            <input currencyMask class="form-control"
-                                                   [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                                   formControlName="valor">
-                                            <app-error-msg [control]="form.get('valor')"></app-error-msg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col col-md-12">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-custom" [disabled]="submitting">
-                                                Solicitar Saque
-                                            </button>
-                                        </div>
-                                    </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col col-md-12">
+                                <div class="form-group group-buttons">
+                                    <button type="submit" class="btn btn-custom" [ngClass]="{'btn-block': isMobile}"
+                                            [disabled]="submitting">
+                                        {{'geral.solicitarSaque' | translate}}
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+                <div class="alert alert-danger" *ngIf="!cadastroCompleto">
+                    {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
+                </div>
+                <div class="alert alert-info" *ngIf="respostaSolicitacao">
+                    {{respostaSolicitacao}}
+                </div>
             </div>
         </div>
-    </ng-containe>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="10"></th>
+                    <th>{{'geral.detalhes' | translate}}</th>
+                    <th width="200">{{'geral.status' | translate}}</th>
+                    <th width="200">{{'geral.valor' | translate}}</th>
+                    <th width="1"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let saque of saques">
+                        <td><img src="/assets/images/debito.svg" alt="image"></td>
+                        <td>{{'saques.saqueERegistrado' | translate}} {{ saque.data }}</td>
+                        <td>{{ saque.status }}</td>
+                        <td>{{ saque.valor | currency}}</td>
+                        <td>
+                            <a class="btn-cancelar" *ngIf="exibirCancelarSolicitacaoSaque(saque)" (click)="cancelarSolicitacaoSaque(saque.id)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
 </div>

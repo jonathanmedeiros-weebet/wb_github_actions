@@ -57,6 +57,22 @@ export class FinanceiroService {
             );
     }
 
+    getDepositosSaquesGraphData(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${this.financeiroUrl}/graph-depositos-saques`, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     verificarPagamento(queryParams?: any): Observable<any> {
         let requestOptions;
 

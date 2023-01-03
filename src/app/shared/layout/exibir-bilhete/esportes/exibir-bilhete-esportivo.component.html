@@ -8,8 +8,8 @@
         <h1 class="numero">
             {{aposta.codigo}}
         </h1>
-        <hr>
-        <hr>
+        <hr class="hide-mobile">
+        <hr class="hide-mobile">
         <div class="informacoes">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
@@ -28,7 +28,7 @@
                 <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
             </p>
             <p>
-                <b>STATUS: </b>
+                <b>{{'geral.status' | translate | uppercase}}: </b>
                 <span>{{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}</span>
             </p>
             <p>
@@ -38,7 +38,7 @@
             </p>
         </div>
         <hr>
-        <hr>
+        <hr class="hide-mobile">
         <ng-container *ngFor="let item of aposta.itens">
             <div class="item">
                 <p class="campeonato">
@@ -64,9 +64,9 @@
                     <span *ngIf="item.resultado && !item.encerrado && !item.removido">{{item.resultado}}</span>
                 </p>
             </div>
-            <hr>
         </ng-container>
         <hr>
+        <hr class="hide-mobile">
         <div class="valores">
             <p class="total-jogos">
                 QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
@@ -76,21 +76,41 @@
                     style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
             </p>
             <p class="aposta">
-                VALOR APOSTADO: <span style="float:right"> <span *ngIf="aposta.is_bonus">(bônus)</span> {{aposta.valor | currency}}</span>
+                VALOR APOSTADO: <span style="float:right"> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
             </p>
             <p class="ganho">
                 POSSÍVEL RETORNO: <span
                     style="float:right">{{aposta.possibilidade_ganho | currency}}</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-                PRÊMIO: <span style="float:right">{{aposta.premio | currency}}</span>
+                {{'geral.premio' | translate | uppercase}}: <span style="float:right">{{aposta.premio | currency}}</span>
             </p>
             <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
                 CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
-            <hr>
-            <hr>
         </div>
+
+        <hr class="hide-mobile">
+        <hr class="hide-mobile">
+
+        <div class="separador-bilhete hide-desktop">
+            <i class="big l"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i class="big r"></i>
+        </div>
+
         <p class="rodape">
             {{opcoes.informativo_rodape}}
         </p>

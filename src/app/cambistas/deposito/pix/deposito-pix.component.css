@@ -1,0 +1,127 @@
+.btn-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.info {
+    margin: 15px 25px 30px;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons button {
+    width: 230px;
+}
+
+.buttons button i {
+    margin-right: 10px;
+}
+
+label.label-tempo {
+    display: block;
+    text-align: center;
+    margin: 0;
+}
+
+.tempo {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+
+.valor {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0 70px;
+}
+
+.qr-code {
+    display: inline-block;
+    padding: 15px;
+    margin: 20px 0 10px;
+    border: 1px solid var(--highlight);
+    border-radius: 5px;
+}
+
+.qr-code img {
+    width: 170px;
+}
+
+.modal-header, .modal-body {
+    border-radius: 5px;
+    text-align: center;
+}
+
+.modal-dialog .modal-content {
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        padding-top: 50px;
+    }
+
+    .group-input-valor {
+        text-align: center;
+    }
+
+    .row-input-valor {
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .label-input-valor {
+        font-size: 16px;
+        text-align: center;
+        display: block;
+    }
+
+    .input-valor {
+        border: 0;
+        border-bottom: 2px solid var(--inputs-odds);
+        color: var(--foreground);
+        border-radius: 0;
+
+        text-align: center !important;
+        font-size: 22px;
+        background-color: transparent;
+
+        padding: 5px;
+    }
+
+    .input-valor:focus {
+        border: 0;
+        border-bottom: 2px solid var(--highlight);
+        color: var(--foreground);
+        background-color: transparent;
+    }
+
+    .alerta-min {
+        border-radius: 4px;
+        margin-top: 40px !important;
+        padding: 10px 15px;
+        font-size: 10px;
+        background: var(--game);
+        color: var(--foreground-game);
+        text-align: left;
+    }
+
+    .group-buttons {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

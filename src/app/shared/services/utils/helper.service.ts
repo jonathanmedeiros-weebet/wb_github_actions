@@ -285,6 +285,16 @@ export class HelperService {
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
+    sharedDepositoPix(file) {
+        let dataToSend = {
+            message: `Deposito PIX`,
+            file: file,
+            data: `Qrcode para deposito PIX`,
+            action: 'shareURL'
+        };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
+    }
+
     sharedRecargaCartao(recarga, file) {
         let dataToSend = {
             message: `Comprovante de Recarga`,

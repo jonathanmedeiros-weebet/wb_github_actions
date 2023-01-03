@@ -1,0 +1,111 @@
+<div class="modal-body">
+    <a class="btnClose" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
+    <ng-container>
+        <div class="content-header">
+            <h2>{{'geral.perfil' | translate}}</h2>
+        </div>
+        <div class="content-body">
+            <div class="content">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group input-md">
+                        <input id="nome" type="text" placeholder=" " formControlName="nome" class="form-control inverted-out">
+                        <label class="disabled" for="nome">{{'geral.nome' | translate}}</label>
+                    </div>
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " formControlName="sobrenome" class="form-control inverted-out">
+                        <label class="disabled" for="nome">{{'geral.sobrenome' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out">
+                        <label class="disabled" for="nome">{{'geral.cpf' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " class="form-control inverted-out" formControlName="nascimento">
+                        <label class="disabled" for="nome">{{'geral.dataDeNascimento' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " class="form-control inverted-out" formControlName="sexo">
+                        <label class="disabled" for="nome">{{'geral.sexo' | translate}}</label>
+                    </div>
+                    <h5>{{'geral.informacoesDeContato' | translate}}</h5>
+
+                    <div class="form-group input-md">
+                        <input type="text" formControlName="telefone" placeholder=" "
+                            mask="(00) 00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
+                        <label for="nome">{{'geral.telefone' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " formControlName="email" class="form-control inverted-out">
+                        <label class="disabled" for="nome">{{'geral.email' | translate}}</label>
+                    </div>
+
+                    <h5>{{'geral.endereco' | translate}}</h5>
+
+                    <div class="form-group input-md">
+                        <input type="text" formControlName="cep" placeholder=" " mask="00000-000"
+                            class="form-control inverted-out" (change)="buscarPorCep($event)">
+                        <label for="nome">{{'geral.cep' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " formControlName="logradouro" class="form-control inverted-out">
+                        <label for="nome">{{'geral.logradouro' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " formControlName="numero" class="form-control inverted-out">
+                        <label for="nome">Nª</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input type="text" placeholder=" " formControlName="bairro" class="form-control inverted-out">
+                        <label for="nome">{{'geral.bairro' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <select formControlName="estado" type="text" class="form-control inverted-out"
+                            (change)="getCidades($event)">
+                            <option value="0">{{'geral.selecione' | translate}}</option>
+                            <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
+                            </option>
+                        </select>
+                        <label for="nome">{{'geral.estado' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <select formControlName="cidade" class="form-control inverted-out">
+                            <option value="0">{{'geral.selecioneACidade' | translate}}</option>
+                            <option *ngFor="let cidade of cidades" [value]="cidade.id"
+                                [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
+                        </select>
+                        <label for="nome">{{'geral.cidade' | translate}}</label>
+                    </div>
+
+                    <div class="form-group input-md">
+                        <input [type]="mostrarSenha ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
+                        <label for="nome">{{'senhas.senhaAtual' | translate}}</label>
+                        <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                            {{'geral.cancelar' | translate}}
+                        </button>
+                        <button class="btn btn-custom w-150" type="submit">
+                            {{'geral.atualizar' | translate}}
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

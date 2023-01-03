@@ -1,0 +1,79 @@
+:host {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-dialog {
+    max-width: 600px;
+  }
+
+.modal-header {
+    border-bottom-color: var(--foreground);
+    padding: 20px 35px;
+}
+
+.modal-body {
+    text-align: center;
+    padding: 40px 130px 40px;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+p {
+    color: var(--foreground);
+    margin-bottom: 25px;
+}
+
+
+input {
+    border: 1px solid var(--foreground-inputs-odds);
+    color: var(--foreground-inputs-odds);
+    font-size: 14px;
+}
+
+button {
+    margin-top: 30px;
+}
+
+.esqueceu-senha {
+    color: var(--highlight);
+    font-size: 12px;
+    display: block;
+    margin: 20px 0 30px;
+    text-decoration: none;
+}
+
+.registrar {
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.registrar a {
+    color: var(--highlight);
+}
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        text-align: center;
+        padding: 40px 25px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-body form {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .modal-body form > div {
+        flex: 1;
+    }
+}
+

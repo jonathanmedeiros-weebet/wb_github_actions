@@ -1,10 +1,20 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, Renderer2, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectorRef,
+    ElementRef,
+    Renderer2,
+    ChangeDetectionStrategy,
+    OnDestroy,
+    ViewChildren,
+    QueryList, AfterViewInit, HostListener
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Desafio, DesafioCategoria } from './../../models';
-import { DesafioService, MessageService, DesafioBilheteService } from './../../services';
+import {DesafioService, MessageService, DesafioBilheteService, SidebarService} from './../../services';
 
 @Component({
     selector: 'app-desafios-listagem',
@@ -12,14 +22,25 @@ import { DesafioService, MessageService, DesafioBilheteService } from './../../s
     templateUrl: './desafios-listagem.component.html',
     styleUrls: ['./desafios-listagem.component.css']
 })
-export class DesafiosListagemComponent implements OnInit, OnDestroy {
+export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewInit {
+    @ViewChildren('scrollOdds') private oddsNavs: QueryList<ElementRef>;
     showLoadingIndicator;
     categorias: DesafioCategoria[];
     itens: any[] = [];
     itensSelecionados = {};
     contentEl;
     unsub$ = new Subject();
+    mobileScreen = true;
+    navs: ElementRef[];
+    sidebarNavIsCollapsed: boolean;
+    enableScrollButtons: {} = {};
+    maxOddsSize: number;
+    desafios;
 
+    @HostListener('window:resize', ['$event'])
+    onResize() {
+        this.detectScrollOddsWidth(this.desafios);
+    }
     constructor(
         private renderer: Renderer2,
         private el: ElementRef,
@@ -28,9 +49,11 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
         private desafioService: DesafioService,
         private bilheteService: DesafioBilheteService,
         private messageService: MessageService,
+        private sidebarService: SidebarService
     ) { }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1024;
         this.definirAltura();
         this.subscribeItens();
 
@@ -48,12 +71,88 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
                 } else {
                     this.getDesafios();
                 }
+                this.detectScrollOddsWidth(this.desafios);
+            });
+
+        this.sidebarService.collapsedSource
+            .subscribe(collapsed => {
+                this.sidebarNavIsCollapsed = collapsed;
+                this.detectScrollOddsWidth(this.desafios);
             });
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    ngAfterViewInit() {
+        this.oddsNavs.changes.subscribe((navs) => {
+            this.navs = navs.toArray();
+        });
+    }
+
+    moveLeft(event_id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === event_id.toString());
+        scrollTemp.nativeElement.scrollLeft -= 150;
+    }
+
+    moveRight(id) {
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
+        scrollTemp.nativeElement.scrollLeft += 150;
+    }
+
+    onScroll(id) {
+        this.cd.detectChanges();
+        const scrollTemp = this.navs.find((nav) => nav.nativeElement.id === id.toString());
+        const scrollLeft = scrollTemp.nativeElement.scrollLeft;
+        const scrollWidth = scrollTemp.nativeElement.scrollWidth;
+
+        const scrollLeftTemp = this.el.nativeElement.querySelector(`#scroll-left-${id}`);
+        const scrollRightTemp = this.el.nativeElement.querySelector(`#scroll-right-${id}`);
+
+        if (scrollLeftTemp) {
+            if (scrollLeft <= 0) {
+                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            } else {
+                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            }
+        }
+
+        if (scrollRightTemp) {
+            if ((scrollWidth - (scrollLeft + this.maxOddsSize - 50)) <= 0) {
+                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            } else {
+                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            }
+        }
+    }
+
+    detectScrollOddsWidth(desafios) {
+        this.cd.detectChanges();
+        const sidesSize = this.sidebarNavIsCollapsed ? 270 : 540;
+        const centerSize = window.innerWidth - sidesSize;
+
+        if (this.mobileScreen) {
+            this.maxOddsSize = window.innerWidth;
+        } else {
+            this.maxOddsSize = centerSize;
+        }
+
+        if (desafios) {
+            desafios.forEach(desafio => {
+                let oddSize = this.maxOddsSize / desafio.odds.length;
+                if (oddSize < 100) {
+                    oddSize = 100;
+                }
+
+                this.enableScrollButtons[desafio.id] = (oddSize * desafio.odds.length) > this.maxOddsSize;
+            });
+        }
     }
 
     subscribeItens() {
@@ -75,17 +174,22 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 46;
+        const headerHeight = this.mobileScreen ? 145 : 92;
+        const altura = window.innerHeight - headerHeight;
         const wrapStickyEl = this.el.nativeElement.querySelector('.wrap-sticky');
-        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura - 60}px`);
+        this.renderer.setStyle(wrapStickyEl, 'min-height', `${altura}px`);
         this.contentEl = this.el.nativeElement.querySelector('.content-list');
-        this.renderer.setStyle(this.contentEl, 'height', `${altura}px`);
+        this.renderer.setStyle(this.contentEl, 'min-height', `${altura}px`);
     }
 
     getDesafios(queryParams?) {
         this.desafioService.getDesafios(queryParams)
             .subscribe(
-                desafios => this.agruparPorCategoria(desafios),
+                desafios => {
+                    this.agruparPorCategoria(desafios);
+                    this.desafios = desafios;
+                    this.detectScrollOddsWidth(desafios);
+                },
                 error => this.handleError(error)
             );
     }
@@ -125,6 +229,8 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy {
     agruparPorCategoria(desafios) {
         const categorias = {};
         this.categorias = [];
+
+        this.detectScrollOddsWidth(desafios);
 
         desafios.forEach(desafio => {
             if (!desafio.odd_correta) {

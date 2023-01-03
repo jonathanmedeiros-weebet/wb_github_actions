@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ApostasClienteRoutingModule} from './apostas-cliente-routing.module';
 import {ApostasClienteComponent} from './apostas-cliente.component';
 import {SharedModule} from '../../shared/shared.module';
-import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import {ApostasClienteEsporteComponent} from './apostas-cliente-esportes/apostas-cliente-esporte.component';
 import {ApostasClienteAcumuladaoComponent} from './apostas-cliente-acumuladao/apostas-cliente-acumuladao.component';
 import {AcumuladaoService} from '../../shared/services/acumuladao.service';
@@ -28,7 +28,8 @@ import {ApostasClienteCasinoComponent} from './apostas-cliente-casino/apostas-cl
         SharedModule,
         CommonModule,
         ApostasClienteRoutingModule,
-        NgbNavModule
+        NgbNavModule,
+        NgbModule
     ],
     providers: [
         AcumuladaoService,

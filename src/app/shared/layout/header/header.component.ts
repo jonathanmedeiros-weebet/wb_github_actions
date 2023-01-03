@@ -1,54 +1,49 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { IsActiveMatchOptions } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {IsActiveMatchOptions} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
 
-import { AuthDoisFatoresModalComponent, LoginModalComponent } from '../modals';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService } from './../../../services';
-import { Usuario } from './../../../models';
-import { config } from './../../config';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseFormComponent} from '../base-form/base-form.component';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
+import {Usuario} from './../../../models';
+import {config} from '../../config';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {
+    AuthDoisFatoresModalComponent,
+    CadastroModalComponent,
+    CartaoCadastroModalComponent,
+    ClienteApostasModalComponent,
+    ClientePerfilModalComponent,
+    ClientePixModalComponent,
+    ClienteSenhaModalComponent,
+    LoginModalComponent,
+    PesquisarCartaoMobileModalComponent,
+    RecargaCartaoModalComponent
+} from '../modals';
+import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
+import {SolicitacaoSaqueClienteComponent} from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
+import {DashboardComponent} from 'src/app/cambistas/dashboard/dashboard.component';
+import {ApuracaoComponent} from 'src/app/cambistas/apuracao/apuracao.component';
+import {ValidarApostaWrapperComponent} from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
+import {TabelaComponent} from 'src/app/cambistas/tabela/tabela.component';
+import {SolicitacaoSaqueComponent} from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
+import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
+import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
+import {TranslateService} from '@ngx-translate/core';
+import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
+import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 
 @Component({
     selector: 'app-header',
     templateUrl: 'header.component.html',
-    styleUrls: ['header.component.css'],
-    animations: [
-        trigger('openClose', [
-            state('open', style({
-                'left': '0',
-            })),
-            state('closed', style({
-                'left': '0',
-            })),
-            transition('open => closed', [
-                animate('400ms ease-in')
-            ]),
-            transition('closed => open', [
-                animate('400ms ease-out')
-            ])
-        ]),
-    ]
+    styleUrls: ['header.component.css']
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
-    basqueteHabilitado = false;
-    combateHabilitado = false;
-    esportsHabilitado = false;
     loteriasHabilitado = false;
-    aoVivoHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
-    futsalHabilitado = false;
-    voleiHabilitado = false;
-    tenisHabilitado = false;
-    futebolAmericanoHabilitado = false;
-    hoqueiGeloHabilitado = false;
-    casinoHabilitado = false;
-    virtuaisHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
@@ -61,6 +56,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
+    cassinoAtivo;
+    virtuaisAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -69,11 +66,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     menuWidth;
     clienteWidth;
     scrollWidth;
-    rightDisabled = false;
-    leftDisabled = true;
     unsub$ = new Subject();
+    isMobile = false;
+    centered = true;
     pixCambista = false;
+    cartaoApostaHabilitado;
     modalRef;
+    linguagemSelecionada = 'pt';
     myMatchOptions: IsActiveMatchOptions = {
         matrixParams: 'ignored',
         queryParams: 'ignored',
@@ -85,14 +84,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (window.innerWidth > 1025) {
-            this.menuWidth = window.innerWidth - (250 + 280);
+            this.menuWidth = window.innerWidth - 500;
+            this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
+            this.isMobile = true;
         }
-
         this.cd.detectChanges();
 
-        this.checkScrollButtons();
+        this.checkCentering();
     }
 
     constructor(
@@ -104,6 +104,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -112,7 +113,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
-        this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
+
+        this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
+
+        if (this.paramsService.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
+        }
 
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
@@ -121,6 +127,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     this.isLoggedIn = isLoggedIn;
                     if (isLoggedIn) {
                         this.getUsuario();
+                        this.getPosicaoFinanceira();
                     }
                 }
             );
@@ -131,22 +138,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
-        this.basqueteHabilitado = this.paramsService.getOpcoes().basquete;
-        this.combateHabilitado = this.paramsService.getOpcoes().combate;
-        this.esportsHabilitado = this.paramsService.getOpcoes().esports;
-        this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
-        this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
-        this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
-        this.futsalHabilitado = this.paramsService.getOpcoes().futsal;
-        this.voleiHabilitado = this.paramsService.getOpcoes().volei;
-        this.tenisHabilitado = this.paramsService.getOpcoes().tenis;
-        this.futebolAmericanoHabilitado = this.paramsService.getOpcoes().futebol_americano;
-        this.hoqueiGeloHabilitado = this.paramsService.getOpcoes().hoquei_gelo;
-        this.casinoHabilitado = this.paramsService.getOpcoes().casino;
-        this.virtuaisHabilitado = this.paramsService.getOpcoes().virtuais;
+        this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
+        this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.cassinoAtivo = this.paramsService.getOpcoes().casino;
+        this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
 
@@ -160,10 +159,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.createForm();
 
         if (window.innerWidth > 1025) {
-            this.menuWidth = window.innerWidth - (250 + 280);
+            this.menuWidth = window.innerWidth - (350 + 350);
+            this.isMobile = false;
         } else {
             this.menuWidth = window.innerWidth;
+            this.isMobile = true;
         }
+
+        this.linguagemSelecionada = this.translate.currentLang;
+        this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
     }
 
     ngOnDestroy() {
@@ -172,45 +176,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngAfterViewInit() {
-        this.clienteWidth = this.scrollMenu.nativeElement.clientWidth;
         this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
-
-        this.checkScrollButtons();
+        this.checkCentering();
     }
 
-    checkScrollButtons() {
-        if (this.menuWidth >= this.scrollWidth) {
-            this.rightDisabled = true;
-            this.leftDisabled = true;
-        } else {
-            this.rightDisabled = false;
-        }
-
+    checkCentering() {
+        this.centered = this.menuWidth >= this.scrollWidth;
         this.cd.detectChanges();
-    }
-
-    scrollLeft() {
-        this.scrollMenu.nativeElement.scrollLeft -= 200;
-    }
-
-    scrollRight() {
-        this.scrollMenu.nativeElement.scrollLeft += 200;
-    }
-
-    onScroll(event) {
-        let scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
-
-        if (scrollLeft <= 0) {
-            this.leftDisabled = true;
-        } else {
-            this.leftDisabled = false;
-        }
-
-        if ((this.scrollWidth - (scrollLeft + this.clienteWidth)) <= 0) {
-            this.rightDisabled = true;
-        } else {
-            this.rightDisabled = false;
-        }
     }
 
     createForm() {
@@ -263,29 +235,36 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         };
     }
 
-    menuCategoriesClasses() {
-        return {
-            'justify-center': this.leftDisabled && this.rightDisabled && this.menuWidth <= window.innerWidth,
-            'justify-normal': window.innerWidth <= 1025 && this.menuWidth > window.innerWidth
-        };
+    abrirCadastro() {
+        this.modalRef = this.modalService.open(
+            CadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+                windowClass: 'modal-700'
+            }
+        );
     }
 
     abrirLogin() {
-        this.modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true,
-            }
-        );
+        let options = {};
 
-        this.modalRef.result
-            .then(
-                result => {
-                },
-                reason => {
-                }
-            );
+        if (this.isMobile) {
+            options = {
+                windowClass: 'modal-fullscreen',
+            };
+        } else {
+            options = {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+            };
+        }
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 
     abrirModalAuthDoisFatores() {
@@ -293,16 +272,92 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             AuthDoisFatoresModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-600',
                 centered: true,
             }
         );
+    }
 
-        this.modalRef.result
-            .then(
-                result => {
-                },
-                reason => {
-                }
-            );
+    changeTheme() {
+        document.body.classList.toggle('dark');
+    }
+
+    abrirEditarPerfil() {
+        this.modalService.open(ClientePerfilModalComponent);
+    }
+
+    abrirAlterarSenha() {
+        this.modalService.open(ClienteSenhaModalComponent);
+    }
+
+    abrirPix() {
+        this.modalService.open(ClientePixModalComponent);
+    }
+
+    abrirFinanceiro() {
+        this.modalService.open(FinanceiroComponent);
+
+    }
+
+    abrirSaques() {
+        this.modalService.open(SolicitacaoSaqueClienteComponent);
+    }
+
+    abrirDepositos() {
+        this.modalService.open(DepositoComponent);
+    }
+
+    abrirDepositosCambista() {
+        this.modalService.open(DepositoCambistaComponent);
+    }
+
+    abrirApostas() {
+        this.modalService.open(ClienteApostasModalComponent);
+    }
+
+    abrirCambistaDashboard() {
+        this.modalService.open(DashboardComponent);
+    }
+
+    abrirCambistaCartaoConsultar() {
+        this.modalService.open(PesquisarCartaoMobileModalComponent);
+    }
+
+    abrirCambistaCartaoCriar() {
+        this.modalService.open(CartaoCadastroModalComponent);
+    }
+
+    abrirCambistaCartaoListagem() {
+        this.modalService.open(CartaoComponent);
+    }
+
+    abrirCambistaCartaoSaque() {
+        this.modalService.open(SolicitacaoSaqueComponent);
+    }
+
+    abrirCambistaCartaoRecarga() {
+        this.modalService.open(RecargaCartaoModalComponent);
+    }
+
+    abrirCambistaValidacao() {
+        this.modalService.open(ValidarApostaWrapperComponent);
+    }
+
+    abrirCambistaApuracao() {
+        this.modalService.open(ApuracaoComponent);
+    }
+
+    abrirCambistaApostas() {
+        this.modalService.open(ApostaComponent);
+    }
+
+    abrirCambistaTabela() {
+        this.modalService.open(TabelaComponent);
+    }
+
+    useLanguage(language: string): void {
+        localStorage.setItem('linguagem', language);
+        this.linguagemSelecionada = language;
+        this.translate.use(language);
     }
 }

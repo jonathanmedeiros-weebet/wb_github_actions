@@ -1,0 +1,120 @@
+.filtros {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.filtros input, .filtros select {
+    margin-right: 20px;
+}
+
+.filtros > input, .filtros .datepicker-group {
+    max-width: 300px;
+}
+
+.filtros select {
+    max-width: 150px;
+}
+
+.info-resultado {
+    margin: 20px 0 32px;
+    font-size: 14px;
+    color: var(--foreground);
+    font-weight: 400;
+}
+
+.table {
+   color: var(--foreground);
+}
+
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    padding: 15px 10px;
+}
+
+.table thead th:first-child {
+    border-left: 10px solid var(--game);
+}
+
+.table .right {
+    text-align: right;
+}
+
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+}
+
+.table td.no-border{
+    border-left: 0 !important;
+}
+
+.table tbody td:first-child {
+    border-left: 10px solid #808080;
+}
+
+.table tbody tr.green td:first-child {
+    border-left: 10px solid #309E3A;
+}
+
+.table tbody tr.red td:first-child {
+    border-left: 10px solid #ED4C5C;
+}
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--highlight);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .counts {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .counts .count {
+        margin: 0;
+    }
+
+    .col-graph {
+        margin-bottom: 30px;
+    }
+
+    .apostas-realizadas {
+        height: auto;
+    }
+
+    .card-dashboard h3 {
+        flex-direction: column;
+        align-items: start;
+        gap: 25px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+}

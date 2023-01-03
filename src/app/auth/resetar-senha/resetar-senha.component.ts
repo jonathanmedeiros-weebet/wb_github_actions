@@ -18,6 +18,9 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     LOGO = config.LOGO;
     submitting = false;
 
+    mostrarSenha = false;
+    mostrarSenhaConfirmar = false;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,

@@ -1,0 +1,232 @@
+.filtros {
+    display: flex;
+    align-items: center;
+}
+
+.filtros input, .filtros select {
+    margin-right: 20px;
+}
+
+.filtros > input, .filtros .datepicker-group {
+    max-width: 300px;
+}
+
+.filtros select {
+    max-width: 150px;
+}
+
+.info-resultado {
+    margin: 20px 0 32px;
+    font-size: 14px;
+    color: var(--foreground);
+    font-weight: 400;
+}
+
+
+.table {
+   color: var(--foreground);
+}
+
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    padding: 15px 10px;
+}
+
+.table thead th:first-child {
+    border-left: 10px solid var(--game);
+}
+
+.table .right {
+    text-align: right;
+}
+
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+}
+
+.table td.no-border{
+    border-left: 0 !important;
+}
+
+.table tbody td:first-child {
+    border-left: 10px solid #808080;
+}
+
+.table tbody tr.green td:first-child {
+    border-left: 10px solid #309E3A;
+}
+
+.table tbody tr.red td:first-child {
+    border-left: 10px solid #ED4C5C;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 12px;
+    right: 32px;
+    font-size: 14px;
+}
+
+.datepicker-group input {
+    padding-right: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range, .custom-day:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+.custom-day.faded {
+    background-color: var(--highlight);
+}
+
+.tabs {
+    border-bottom: 2px solid var(--foreground);
+    margin-bottom: 30px;
+}
+
+.tabs a {
+    font-size: 14px;
+    color: var(--foreground);
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 30px;
+
+    cursor: pointer;
+    margin-bottom: -2px;
+}
+
+.tabs a:hover {
+    color: var(--highlight);
+}
+
+.tabs a.active {
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+}
+
+.acoes-aposta {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.acoes-aposta a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 24px;
+    width: 24px;
+
+    background: var(--highlight);
+    border-radius: 4px;
+    color: var(--foreground-highlight);
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--highlight);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .counts {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .counts .count {
+        margin: 0;
+    }
+
+    .col-graph {
+        margin-bottom: 30px;
+    }
+
+    .apostas-realizadas {
+        height: auto;
+    }
+
+    .card-dashboard h3 {
+        flex-direction: column;
+        align-items: start;
+        gap: 25px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros .datepicker-group,
+    .filtros input,
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+
+    .dp-hidden {
+        height: 0 !important;
+        position: absolute;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros-container .input-group {
+        max-width: none;
+    }
+
+    .buttons {
+        padding: 0;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+}
+

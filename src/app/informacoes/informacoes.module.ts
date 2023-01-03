@@ -5,9 +5,11 @@ import { InformacoesRoutingModule } from './informacoes-routing.module';
 import { InformacoesComponent } from './informacoes.component';
 import { PaginaService } from './../services';
 
+import {NgxPrintModule} from 'ngx-print';
+
 @NgModule({
     declarations: [InformacoesComponent],
-    imports: [SharedModule, InformacoesRoutingModule],
+    imports: [SharedModule, InformacoesRoutingModule, NgxPrintModule],
     providers: [PaginaService]
 })
 export class InformacoesModule { }

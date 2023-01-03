@@ -1,0 +1,46 @@
+<div id="default-content">
+    <app-spinner *ngIf="showLoading"></app-spinner>
+
+    <ng-container *ngIf="!showLoading">
+        <div class="content-header">
+            <h2>{{'geral.pix' | translate}}</h2>
+        </div>
+        <div class="content-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="label">{{'geral.chavePix' | translate}}</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" formControlName="chave_pix" class="form-control inverted-out"
+                                placeholder="{{'saques.cpfEmailTelefoneAleatoria' | translate}}">
+                            <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
+                            <small>{{'saques.alertaTitularChave' | translate}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="label">{{'senhas.senhaAtual' | translate}}</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input [type]="mostrarSenha ? 'text' : 'password'" formControlName="senha_atual" class="form-control inverted-out">
+                            <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
+                        </div>
+                        <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                        {{'geral.cancelar' | translate}}
+                    </button>
+                    <button class="btn btn-custom w-150" type="submit">
+                        {{'geral.atualizar' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </ng-container>
+</div>

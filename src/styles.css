@@ -1,3 +1,46 @@
+@import "skeleton-screen-css";
+@import '~ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default';
+
+.owl-carousel .owl-item img {
+    width: auto;
+}
+
+.owl-theme .owl-nav {
+    margin-top: 0;
+}
+
+owl-carousel-o:hover .owl-theme .owl-nav [class*="owl-"] {
+    opacity: 1;
+}
+
+.owl-theme .owl-nav [class*="owl-"] {
+    opacity: 0;
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    transition: all 200ms;
+}
+
+.owl-theme .owl-nav [class*="owl-"]:hover {
+    background: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.owl-next {
+    position: absolute;
+    z-index: 999;
+    top: 43px;
+    right: 10px;
+}
+
+.owl-prev {
+    position: absolute;
+    z-index: 999;
+    top: 43px;
+    left: 10px;
+}
+
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -11,18 +54,39 @@
 }
 
 html {
-    position: relative;
     font-size: 12px;
-    overflow: hidden !important;
+    width: 100vw;
+    height: 100vh;
 }
 
 html,
 body {
-    color: #1e282c;
-    overflow: hidden !important;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--foreground);
+    background-color: var(--background);
+    max-height: 100vh;
+    height: 100vh;
+    /* overflow: hidden; */
 }
 
-header {
+.base-container {
+    display: flex;
+}
+
+.base-container main {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: var(--background);
+    /*max-height: calc(100vh - 132px);*/
+}
+
+/*.base-container main .sport {*/
+/*    width: 100%;*/
+/*    max-height: calc(100vh - 132px);*/
+/*}*/
+
+game {
     background-color: var(--header);
 }
 
@@ -34,10 +98,6 @@ header {
     display: contents;
 }
 
-#auth-layout {
-    height: 100%;
-}
-
 #auth-layout #login {
     align-items: center;
     display: flex;
@@ -45,6 +105,11 @@ header {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+.logo-modal {
+    max-width: 150px;
+    max-height: 60px;
 }
 
 #auth-layout #login .login-box {
@@ -63,15 +128,41 @@ header {
 }
 
 #default-content {
-    padding: 20px 15px 20px 270px;
-    height: calc(100vh - 45px);
-    background: #fff;
+    /*padding: 20px 15px 20px 15px;*/
+    padding: 5px;
+    height: calc(100vh - 92px);
+    background-color: var(--background);
     overflow: scroll;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
+.internal-container {
+    padding: 20px 15px 20px 15px;
+    min-height: 100%;
+    background-color: var(--header);
+}
+
+.internal-container-out {
+    padding: 25px 40px;
+    min-height: 100%;
+    background-color: var(--background);
+}
+
 .content-sports {
-    overflow: auto;
+    width: 100%;
+    color: var(--foreground-header);
+    overflow: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    background-image: none;
 }
 
 .footer {
@@ -83,23 +174,42 @@ header {
 }
 
 .btn-custom {
-    background-color: var(--odds);
-    color: var(--foreground-odds);
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 .btn-custom:hover {
-    color: var(--highlight);
-    border: 1px solid var(--highlight);
+    color: var(--foreground-highlight);
+    border: 1px solid var(--foreground-highlight);
 }
 
 .btn-custom:focus {
-    box-shadow: 0 0 0 0.5px var(--highlight);
+    box-shadow: 0 0 0 1px var(--highlight);
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+
+.btn-custom2 {
+    border: 1px solid var(--highlight);
+    color: var(--highlight);
+}
+
+.btn-custom2:hover {
+    background: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.btn-custom2:focus {
+    box-shadow: 0 0 0 1px var(--highlight);
 }
 
 .card {
     border: 1px solid #d7dfe3;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    background: #181818;
     border-radius: 4px;
     padding: 20px;
 }
@@ -109,7 +219,7 @@ header {
 }
 
 .content-header h2 {
-    color: var(--sidebar-right);
+    color: var(--foreground-header);
     margin-bottom: 15px;
 }
 
@@ -120,23 +230,6 @@ header {
 .circle-group {
     display: flex;
     flex-wrap: wrap;
-}
-
-.circle {
-    border: 1px solid #455a64;
-    height: 42px;
-    width: 42px;
-    border-radius: 50%;
-    background-color: whitesmoke;
-    margin-right: 10px;
-}
-
-.circle .content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .square-group {
@@ -157,7 +250,7 @@ header {
 }
 
 .square-group .active {
-    background-color: var(--odds);
+    background-color: var(--inputs-odds);
     color: #fff;
 }
 
@@ -177,7 +270,7 @@ header {
 
 .bet-types .active .circle,
 .bet-types .active .price {
-    background-color: var(--odds);
+    background-color: var(--inputs-odds);
     font-weight: bolder;
     color: #fff;
 }
@@ -199,27 +292,196 @@ header {
     margin: 0 0 3px 0;
 }
 
-.circle {
-    border: 1px solid black;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: whitesmoke;
-    margin-bottom: 15px;
+/* Início Bilhete Redesign */
+.pre-bilhete {
+    width: 270px;
+    text-align: center;
+    padding: 0;
+    height: 100%;
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
+}
+
+.bilhete-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    padding: 10px 0;
+    color: var(--foreground-sidebars);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.acoes-bilhete {
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.acoes-bilhete a {
+    color: var(--foreground-sidebars);
+    height: 15px;
+    float: right;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.pre-bilhete {
-    overflow: auto;
-    display: none;
-    background-color: var(--sidebar-right);
-    /* position: relative; */
-    width: 270px;
+.acoes-bilhete a.disabled {
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
-.pre-bilhete .form-row {
-    margin-top: 12px;
+#nenhum-jogo {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
 }
+
+#nenhum-jogo span {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pre-bilhete-loteria {
+    flex-grow: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.div-jogos-selecionados {
+    padding: 0 15px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.div-jogos-selecionados h3 {
+    color: var(--foreground-sidebars);
+}
+
+.div-jogos-selecionados h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.div-jogos-selecionados h3::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.jogo-selecionado {
+    padding: 15px 0;
+    border-top: 1px dashed var(--highlight);
+    text-align: left;
+    position: relative;
+}
+
+.jogo-selecionado:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.horario {
+    font-size: 0.9rem;
+}
+
+.jogo-selecionado > div:not(.remover-item) {
+    color: var(--foreground-sidebars);
+}
+
+.jogo-selecionado .horario,
+.jogo-selecionado .odd-bilhete .valor {
+    color: var(--foreground-highlight);
+}
+
+.jogo-selecionado .odd-bilhete {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
+}
+
+.div-jogos-selecionados .remover-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--highlight);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.jogo-selecionado-inner {
+    padding-right: 20px;
+}
+
+.submit-buttons {
+    padding: 0 15px 0 15px;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon > i {
+    position: absolute;
+    display: block;
+    transform: translate(0, -50%);
+    top: 50%;
+    pointer-events: none;
+    width: 25px;
+    text-align: center;
+    font-style: normal;
+    margin-left: 5px;
+    color: var(--foreground-inputs-odds);
+}
+
+.input-icon > input {
+    padding-left: 30px;
+}
+/* Fim Bilhete Redesign */
+
+/*.pre-bilhete {*/
+/*    width: 270px;*/
+/*    text-align: center;*/
+/*    padding: 0;*/
+/*    height: 100%;*/
+/*    background-color: var(--sidebars);*/
+/*}*/
+
+/*.pre-bilhete {*/
+/*    overflow: auto;*/
+/*    display: none;*/
+/*    background-color: var(--sidebars);*/
+/*    !* position: relative; *!*/
+/*    width: 270px;*/
+/*}*/
+
+/*.pre-bilhete .form-row {*/
+/*    margin-top: 12px;*/
+/*}*/
 
 .form-row select,
 .form-row input {
@@ -231,61 +493,60 @@ button {
     line-height: 27px;
 }
 
-.pre-bilhete .aposta-item {
-    border: 1px solid #d7dfe3;
-    background: #eef5f9;
-    border-radius: 4px;
-    padding: 10px 5px 10px 10px;
-    margin-top: 15px;
-}
+/*.pre-bilhete .aposta-item {*/
+/*    border: 1px solid #d7dfe3;*/
+/*    background: #eef5f9;*/
+/*    border-radius: 4px;*/
+/*    padding: 10px 5px 10px 10px;*/
+/*    margin-top: 15px;*/
+/*}*/
 
-.pre-bilhete .aposta-item .circle {
-    height: 25px;
-    width: 25px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-}
+/*.pre-bilhete .aposta-item .circle {*/
+/*    height: 25px;*/
+/*    width: 25px;*/
+/*    margin-bottom: 5px;*/
+/*    margin-right: 5px;*/
+/*}*/
 
-.pre-bilhete .item-header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    position: relative;
-    padding-right: 22px;
-}
+/*.pre-bilhete .item-header {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    position: relative;*/
+/*    padding-right: 22px;*/
+/*}*/
 
-.pre-bilhete .remover-palpite {
-    font-size: 18px;
-    color: red;
-    position: absolute;
-    right: 5px;
-    top: -5px;
-}
+/*.pre-bilhete .remover-palpite {*/
+/*    font-size: 18px;*/
+/*    color: red;*/
+/*    position: absolute;*/
+/*    right: 5px;*/
+/*    top: -5px;*/
+/*}*/
 
-.pre-bilhete .item-header>div {
-    flex-grow: 1;
-    text-transform: capitalize;
-}
+/*.pre-bilhete .item-header>div {*/
+/*    flex-grow: 1;*/
+/*    text-transform: capitalize;*/
+/*}*/
 
-.pre-bilhete .item-header>div label {
-    margin-right: 3px;
-}
+/*.pre-bilhete .item-header>div label {*/
+/*    margin-right: 3px;*/
+/*}*/
 
-.pre-bilhete .item-header>div span {
-    font-weight: bold;
-}
+/*.pre-bilhete .item-header>div span {*/
+/*    font-weight: bold;*/
+/*}*/
 
 #fixed-bar-bilhete {
     padding: 5px;
-    background: var(--sidebar-right);
+    background: var(--sidebars);
     width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
     flex-direction: row;
-    color: var(--foreground-sidebar-right);
-    display: flex;
+    color: var(--foreground-sidebars);
     align-items: center;
 }
 
@@ -320,7 +581,7 @@ button {
     width: 100% !important;
     padding-top: 15px;
     padding-bottom: 15px;
-    background: var(--sidebar-right);
+    background: var(--sidebars);
     display: block;
     overflow-y: auto;
 }
@@ -328,7 +589,7 @@ button {
 .fechar-pre-bilhete {
     right: 10px;
     top: 9px;
-    padding: 9px;
+    padding: 10px;
     position: absolute;
     color: red !important;
 }
@@ -337,13 +598,8 @@ button {
     font-size: 2rem;
 }
 
-.pre-bilhete .botoes .col {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
 .loteria-content {
-    padding: 0 0 0 255px;
+    padding: 0;
 }
 
 .loteria-content .card {
@@ -353,61 +609,9 @@ button {
     padding-top: 0;
 }
 
-.loteria-content .pre-bilhete {
-    padding: 20px 15px 0 15px;
-    width: 270px;
-}
-
-.loteria-content .pre-bilhete .form-row.inputs {
-    background-color: var(--odds);
-    padding: 20px 15px 8px 15px;
-    border-radius: 0.25rem;
-    margin-bottom: 15px;
-    margin-top: 25px;
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
-.loteria-content .pre-bilhete h4 {
-    color: #c9def5;
-    text-align: center;
-}
-
-.loteria-content .pre-bilhete h4::before {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 20px;
-    background: var(--highlight);
-    top: 23px;
-    left: 108px;
-    position: relative;
-    left: 50%;
-    margin-left: -58px;
-}
-
-.loteria-content .content-header {
-    background: #E1E2E4;
-    color: #455a64;
-    text-transform: uppercase;
-    padding: 15px 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
 .loteria-content .content-body .content {
     display: flex;
 }
-
-.loteria-content .content-body .content .col-lg-9 {
-    padding: 0px;
-}
-
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
 
 /* Override JS Toast*/
 
@@ -418,6 +622,10 @@ button {
 .form-control {
     font-size: 1.5rem;
     height: 38px !important;
+}
+
+.form-control::placeholder {
+    color: var(--foreground-inputs-odds)
 }
 
 .btn {
@@ -434,31 +642,36 @@ button {
     z-index: 9002;
 }
 
-button[aria-label="Close"]:focus {
-    outline: none;
+.modal-header, .modal-body, .modal-footer{
+    background-color: var(--background);
+    color: var(--foreground);
 }
 
-.indentificacao .horario {
-    border-radius: 5px;
-    padding: 0 5px;
-    margin-right: 15px;
+.modal-header {
+    border-bottom: 1px solid var(--foreground);
+    padding: 20px 35px;
+    align-items: center;
 }
 
-.content-sports-list .indentificacao .horario {
-    background-color: var(--event-time);
-    color: var(--fg-event-time);
+.modal-header i, .modal-header span {
+    color: var(--foreground);
+}
+
+.modal-footer {
+    border-top: 1px solid #3b3b3b;
 }
 
 .campeonato-header {
-    text-transform: uppercase;
-    padding: 0px 10px;
+    /*text-transform: uppercase;*/
+    padding: 0 10px;
     font-size: 0.9rem;
-    border-bottom: 4px solid white;
+    /*border-bottom: 4px solid #0A0A09;*/
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--league);
-    color: var(--foreground-league);
+    background-color: var(--game);
+    color: var(--foreground-game);
+    padding: 5px 15px;
 }
 
 .campeonato-header>span {
@@ -471,38 +684,14 @@ button[aria-label="Close"]:focus {
     position: absolute;
 }
 
-
-/* ODDS FUTEBOL */
-
-.odds {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.odds .inner-odd {
-    background-color: var(--odds);
-    padding: 5px 8px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-}
-
-.odds .selecionado {
-    background-color: var(--highlight);
-}
-
-.odds .selecionado span {
-    color: var(--foreground-selected-odds) !important;
-}
-
-.odd .nome,
-.odd .valor {
-    color: var(--foreground-odds);
-}
-
-.odds .odd {
-    padding: 1px;
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .flag-icon {
@@ -512,12 +701,12 @@ button[aria-label="Close"]:focus {
 .cupom-ativo {
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 15px;
-    background: #333;
     margin: 0;
 }
 
 .action-buttons {
     margin: -1rem -1rem -1rem auto;
+    display: flex;
 }
 
 .action-buttons button {
@@ -529,7 +718,12 @@ button[aria-label="Close"]:focus {
     line-height: 1;
     color: #000;
     text-shadow: 0 1px 0 #fff;
-    opacity: .5;
+    opacity: .8;
+}
+
+.action-buttons button span {
+    color: var(--highlight);
+    font-size: 28px;
 }
 
 .tipo-apostas .nav {
@@ -543,14 +737,16 @@ button[aria-label="Close"]:focus {
 
 .tipo-apostas .nav-pills .nav-link.active,
 .tipo-apostas .nav-pills .show>.nav-link {
-    color: var(--foreground-odds);
-    background-color: var(--odds);
-    ;
+    color: var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
 }
 
 .content-loteria {
+    padding: 5px;
     overflow: auto;
-    background-color: #fff;
+
+    height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
 }
 
 .margin-top-30 {
@@ -593,6 +789,10 @@ button[aria-label="Close"]:focus {
     text-align: center;
 }
 
+.datepicker-group i {
+    color: var(--foreground-inputs-odds);
+}
+
 
 /* Large devices (desktops, 1025px and up) */
 
@@ -605,24 +805,38 @@ button[aria-label="Close"]:focus {
         display: none;
     }
 
-    .pre-bilhete {
-        display: block;
-    }
+    /*.pre-bilhete {*/
+    /*    display: block;*/
+    /*}*/
 
-    .odds .odd {
-        width: 33.33%;
+    /*.odds .odd {*/
+    /*    width: 33.33%;*/
+    /*}*/
+
+    /*.odds .odd-enabled:hover {*/
+    /*    background-color: var(--highlight);*/
+    /*}*/
+
+    /*.odds .odd-enabled:hover span {*/
+    /*    color: var(--foreground-selected-odds) !important;*/
+    /*}*/
+
+    .loteria-content .add-palpite {
+        margin-top: 24px;
     }
 
     .odds .odd-enabled:hover {
         background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        border-radius: 2px;
     }
 
     .odds .odd-enabled:hover span {
-        color: var(--foreground-selected-odds) !important;
+        color: var(--foreground-highlight);
     }
 
-    .loteria-content .add-palpite {
-        margin-top: 24px;
+    .hide-desktop {
+        display: none;
     }
 }
 
@@ -632,24 +846,21 @@ button[aria-label="Close"]:focus {
     }
 
     #default-content {
-        padding: 10px 15px 54px;
-        height: calc(100vh - 98px);
-    }
-
-    .loteria-content {
         padding: 0;
+        /*padding: 10px 15px 54px;*/
+        height: calc(100vh - 105px);
     }
 
-    .loteria-content .pre-bilhete {
+    .base-container main {
+        max-width: 100%;
+    }
+
+    .loteria-content .kpre-bilhete {
         padding: 40px 15px 0;
         position: absolute !important;
         top: 0;
         height: 100% !important;
         width: 100% !important;
-    }
-
-    .content-loteria {
-        padding-bottom: 106px !important;
     }
 
     .odds .odd {
@@ -670,6 +881,10 @@ button[aria-label="Close"]:focus {
     .add-palpite {
         display: block;
         width: 100%
+    }
+
+    .content-sports {
+        padding: 0;
     }
 }
 
@@ -705,6 +920,7 @@ button[aria-label="Close"]:focus {
 }
 
 .lds-ring div:nth-child(2) {
+
     animation-delay: -0.3s;
 }
 
@@ -719,7 +935,7 @@ button[aria-label="Close"]:focus {
 
 .value-informations {
     text-transform: uppercase;
-    color: var(--foreground-sidebar-right);
+    color: var(--foreground-sidebars);
     margin: 20px 0;
 }
 
@@ -737,8 +953,8 @@ button[aria-label="Close"]:focus {
 .value-informations .valores button {
     padding: 0;
     width: 55px;
-    background-color: var(--odds);
-    color: var(--foreground-odds);
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
 }
 
 .value-informations .valores button:hover {
@@ -747,7 +963,7 @@ button[aria-label="Close"]:focus {
 }
 
 .value-informations .valores button:focus {
-    box-shadow: 0 0 0 0.5px var(--highlight);
+    box-shadow: 0 0 0 1px var(--highlight);
 }
 
 .odd-disabled {
@@ -779,7 +995,7 @@ button[aria-label="Close"]:focus {
 
 [class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
+    font-family: 'icomoon', serif !important;
     speak: never;
     font-style: normal;
     font-weight: normal;
@@ -886,7 +1102,7 @@ button[aria-label="Close"]:focus {
     transform: scale(0);
     transform-origin: bottom left;
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--odds);
+    box-shadow: inset 1em 1em var(--inputs-odds);
     /* Windows High Contrast Mode */
     background-color: CanvasText;
 }
@@ -906,19 +1122,603 @@ button[aria-label="Close"]:focus {
     cursor: not-allowed;
 }
 
-.form-check-style-1 {
-    color: var(--foreground-odds);
+/* .form-check-style-1 {
+    color: var(--foreground-inputs-odds);
 }
 .form-check-input-style-1{
-    color: var(--foreground-odds);
-    border-color: var(--foreground-odds);
-    background-color: var(--foreground-odds);
+    color: var(--foreground-inputs-odds);
+    border-color: var(--foreground-inputs-odds);
+    background-color: var(--foreground-inputs-odds);
 }
 .form-check-input-style-1::before{
-    box-shadow: inset 1em 1em var(--odds);
+    box-shadow: inset 1em 1em var(--inputs-odds);
 }
 .form-check-input-style-1:focus{
-    outline: max(2px, 0.15em) solid var(--foreground-odds);
+    outline: max(2px, 0.15em) solid var(--foreground-inputs-odds);
+} */
+
+input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible {
+    -webkit-box-shadow: inset 0 0 0 30px #181818 !important;
+    -webkit-text-fill-color: var(--foreground-header);
+}
+
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=date],
+input[currencymask],
+select.form-control{
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--foreground-inputs-odds);
+    border-radius: 5px;
+    outline: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none
+}
+
+input[type=text]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=date]:focus,
+input[currencymask]:focus,
+select.form-control:focus {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    border: 2px solid var(--highlight);
+    outline: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none
+}
+
+input.inverted {
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    background-color: var(--inputs-odds);
+    border-radius: 5px;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none
+}
+
+ input.inverted:focus {
+    color: var(--foreground-header);
+    border: 1px solid var(--highlight);
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none
+}
+
+select.inverted-out,
+input.inverted-out {
+    border: 0.5px solid var(--foreground-inputs-odds);
+    color: var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
+    border-radius: 5px;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+
+    padding: 10px 15px;
+    font-size: 12px
+}
+
+select.inverted-out {
+    background-image:
+      linear-gradient(45deg, transparent 50%, white 50%),
+      linear-gradient(135deg, white 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) calc(1em + 4px),
+      calc(100% - 15px) calc(1em + 4px),
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    appearance: none;
+}
+
+input.inverted-out:focus {
+    color: var(--foreground-inputs-odds);
+    background-color: var(--inputs-odds);
+    border: 1px solid var(--highlight);
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none
+}
+
+input.inverted-out:disabled {
+    border-color: var(--foreground-inputs-odds);
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    opacity: .5;
+}
+
+input.inverted-out::placeholder,
+input.inverted-out::-moz-placeholder,
+input.inverted-out::-webkit-input-placeholder {
+    color: var(--foreground-inputs-odds) !important;
 }
 
 /* Custom Checkbox */
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+::placeholder {
+    color: var(--foreground-inputs-odds)
+}
+
+::-webkit-input-placeholder { /* Chrome, Safari */
+    text-transform: none;
+    color: var(--foreground-inputs-odds)
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-transform: none;
+    color: var(--foreground-inputs-odds)
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    text-transform: none;
+    color: var(--foreground-inputs-odds)
+}
+
+:-ms-input-placeholder {  /* IE */
+    text-transform: none;
+    color: var(--foreground-inputs-odds)
+}
+
+.campeonato-header .column-left, .column-left {
+    flex-grow: 1;
+    position: relative;
+}
+
+.campeonato-header .campeonato-nome {
+    margin-left: 28px;
+}
+
+.campeonato-header .fa {
+    float: right;
+    line-height: 30px;
+}
+
+.campeonato {
+    margin-bottom: 5px;
+}
+
+.jogo-selecionado {
+    background: var(--selected-event);
+    color: var(--foreground-selected-event) !important;
+    cursor: auto;
+}
+
+.indentificacao {
+    display: flex;
+    height: 60px;
+}
+
+.data-hora {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    min-width: 60px;
+    max-width: 60px;
+    height: 60px;
+    margin-right: 5px;
+    background-color: var(--game);
+    color: var(--foreground-game);
+}
+
+.indentificacao .nome {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    flex-grow: 1;
+    /*min-width: 250px;*/
+    height: 60px;
+    justify-content: center;
+    padding: 0 10px;
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.odds {
+    display: flex;
+    align-items: stretch;
+    height: 60px;
+    padding: 7.5px;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.odds::-webkit-scrollbar {
+    display: none;
+}
+
+.odd {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 80px;
+    margin-left: 5px;
+    border-radius: 2px;
+}
+
+.odd:first-of-type {
+    margin-left: 0;
+}
+
+.odds .inner-odd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    border-radius: 2px;
+}
+
+.odds .selecionado {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.odds .selecionado span {
+    color: var(--foreground-highlight) !important;
+}
+
+.odd .nome-odd,
+.odd .valor-odd {
+    color: var(--foreground-inputs-odds);
+    text-align: center;
+}
+
+.odds-coluna {
+    padding: 5px;
+}
+
+.mais-opcoes {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 50px;
+    height: 60px;
+    padding: 7.5px;
+    text-align: right;
+    background-color: var(--game);
+    color: var(--foreground-game);
+}
+
+.mais-opcoes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds) !important;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 10px;
+    flex: 1;
+    width: 35px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.fs-8px {
+    font-size: 8px;
+}
+
+.fs-10px {
+    font-size: 10px;
+}
+
+.fs-12px {
+    font-size: 12px;
+}
+
+.fs-14px {
+    font-size: 14px;
+}
+
+.fs-16px {
+    font-size: 16px;
+}
+
+.fs-18px {
+    font-size: 18px;
+}
+
+.fs-20px {
+    font-size: 20px;
+}
+
+.fs-22px {
+    font-size: 22px;
+}
+
+.fs-24px {
+    font-size: 24px;
+}
+
+.fs-28px {
+    font-size: 28px;
+}
+
+.fs-32px {
+    font-size: 32px;
+}
+
+.fs-36px {
+    font-size: 36px;
+}
+
+.fs-38px {
+    font-size: 38px;
+}
+
+.fw-150 {
+    font-weight: 150;
+}
+
+.fw-200 {
+    font-weight: 200;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.w-130 {
+    width: 130px;
+}
+
+.w-150 {
+    width: 150px;
+}
+
+.modal-h-350 .modal-body {
+    height: 350px;
+}
+
+.modal-500 .modal-dialog {
+    max-width: 500px;
+}
+
+.modal-550 .modal-dialog {
+    max-width: 550px;
+}
+
+.modal-600 .modal-dialog {
+    max-width: 600px;
+}
+
+.modal-700 .modal-dialog {
+    max-width: 700px;
+}
+
+.btn.disabled, .btn:disabled {
+    opacity: 0.3;
+}
+
+.show-mobile {
+    display: none !important;
+}
+
+.blink_me {
+    animation: blinkerMe 1s linear infinite;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+
+.input-md {
+    position: relative;
+}
+
+.input-md input {
+    padding: 25px 15px 15px;
+}
+
+.input-md label {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: 10px;
+    padding: 0 5px;
+    color: var(--foreground-inputs-odds);
+
+    transition: top .3s;
+    cursor: text;
+}
+
+.input-md input:not(:placeholder-shown) ~ label,
+.input-md select ~ label,
+.input-md input:focus ~ label {
+    top: 2px;
+}
+
+.input-md label.disabled {
+    background: transparent !important;
+}
+
+.btn-close i {
+    font-size: 22px;
+    color: var(--highlight);
+}
+
+.showPassword {
+    position: absolute;
+    top: calc(50% - 16px);;
+    right: 0;
+    color: var(--foreground-inputs-odds);
+    cursor: pointer;
+    padding: 10px;
+}
+
+@keyframes blinkerMe {
+    50% {
+        opacity: 0;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    *::-webkit-scrollbar{
+        display: none;
+    }
+    .odds {
+        padding: 5px 15px;
+    }
+
+    .data-hora {
+        margin-right: 0;
+        padding-right: 5px;
+    }
+
+    .indentificacao .nome {
+        padding-left: 0px;
+    }
+
+    .content-header h2 {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .content-header {
+        margin-bottom: 0;
+    }
+
+    .no-mobile, .hide-mobile {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: block !important;
+    }
+
+    .modal-dialog {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    .modal-dialog .modal-content {
+        border: 0;
+        height: inherit;
+        background: var(--background);
+        color: var(--foreground);
+    }
+
+    .modal-pop-up .modal-content {
+        max-width: 90%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .w-130 {
+        width: auto;
+    }
+
+    .pre-bilhete {
+        height: 0;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    .indentificacao {
+        height: auto;
+        flex-wrap: wrap;
+        background: var(--game);
+    }
+
+    .indentificacao a.scroll-button {
+        display: none;
+    }
+
+    .titulo-bilhete {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+    }
+
+    .titulo-bilhete .titulo {
+        padding: 10px;
+        color: var(--foreground);
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+    }
+
+    .fechar-pre-bilhete {
+        color: var(--highlight) !important;
+        position: relative;
+        cursor: pointer;
+        right: 0;
+        top: 0;
+    }
+
+    .fechar-pre-bilhete i {
+        font-size: 22px;
+    }
+
+    .cupom-ativo {
+        font-family: inherit;
+    }
+
+    .form-control, .btn {
+        height: 44px !important;
+        line-height: 44px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    select.form-control {
+        line-height: normal;
+    }
+
+    .internal-container-out {
+        padding: 10px;
+    }
+
+    .odd {
+        min-width: 100px;
+    }
+}

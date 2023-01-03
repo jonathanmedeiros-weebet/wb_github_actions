@@ -37,6 +37,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     apostaVersion;
     showLoading = false;
     isCliente;
+    isMobile;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -51,6 +52,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.isMobile = window.innerWidth <= 1025;
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;

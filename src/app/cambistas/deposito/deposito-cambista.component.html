@@ -1,0 +1,22 @@
+<div id="default-content">
+    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
+    <div class="content-header">
+        <h2>{{'deposito.titulo' | translate}}</h2>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <div *ngIf="hasApiPagamentos">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="mt-2">
+                            <app-deposito-pix *ngIf="modalidade === 'pix'"></app-deposito-pix>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
