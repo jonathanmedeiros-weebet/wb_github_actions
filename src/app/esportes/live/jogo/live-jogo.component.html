@@ -108,7 +108,7 @@
             </div>
         </div>
         <div *ngIf="loadedFrame && (isMobile && theSportUrl)" class="iframe-responsive hide-desktop">
-            <iframe [src]="theSportUrl" frameborder="0" width="320" height="200"></iframe>
+            <iframe [src]="theSportUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
         </div>
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="jogo" *ngIf="!showLoadingIndicator">

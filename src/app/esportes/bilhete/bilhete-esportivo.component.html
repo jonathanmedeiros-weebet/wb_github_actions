@@ -5,7 +5,7 @@
             <div class="campinho">
                 <div class="campinho-toogle" (click)="toogleCampinho()">Acompanhe <i [class]="showCampinho ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i></div>
                 <div class="iframe-responsive" *ngIf="showCampinho">
-                    <iframe [src]="liveTrackerUrl" frameborder="0" width="320" height="200"></iframe>
+                    <iframe [src]="liveTrackerUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
                 </div>
             </div>
         </ng-container>
