@@ -78,7 +78,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
     onDateSelection(date: NgbDate, datepicker: any) {
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
-        } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+        } else if (this.fromDate && !this.toDate && date && (date.after(this.fromDate) || date.equals(this.fromDate))) {
             this.toDate = date;
             this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
             datepicker.close();

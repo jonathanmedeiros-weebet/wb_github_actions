@@ -93,7 +93,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.casinoHabilitado = this.params.getOpcoes().casino;
 
-        this.encerramentoPermitido = this.params.getOpcoes().permitir_encerrar_aposta;
+        this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
         this.createForm();
         this.menuFooterService.setIsPagina(true);
@@ -209,7 +209,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
             this.queryParams.dataInicial = this.formatDate(date, 'us');
-        } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+        } else if (this.fromDate && !this.toDate && date && (date.after(this.fromDate) || date.equals(this.fromDate))) {
             this.toDate = date;
             this.queryParams.dataFinal = this.formatDate(date, 'us');
             this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
