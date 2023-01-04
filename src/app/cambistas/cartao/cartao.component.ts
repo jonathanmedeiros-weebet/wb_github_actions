@@ -34,7 +34,7 @@ export class CartaoComponent implements OnInit {
             this.isMobile = true;
         }
 
-        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -60);
+        this.fromDate = calendar.getNext(calendar.getToday(), 'd', -7);
         this.toDate = calendar.getToday();
 
         this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);

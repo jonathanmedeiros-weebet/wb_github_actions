@@ -36,6 +36,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     unsub$ = new Subject();
     regioesDestaque;
     isNotCambista = true;
+    isLogado = false;
     whatsapp;
     cartaoApostaHabilitado;
 
@@ -84,6 +85,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.auth.logado
         .subscribe(
             logado => {
+                this.isLogado = logado;
                 if (logado) {
                     this.auth.cliente
                         .subscribe(
@@ -91,6 +93,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                                 this.isNotCambista = isCliente;
                             }
                         );
+                } else {
+                  this.isNotCambista = false;
                 }
             }
         );
