@@ -39,6 +39,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     isLogado = false;
     whatsapp;
     cartaoApostaHabilitado;
+    pixCambista = false;
 
     subCartao = false;
     subPerfil = false;
@@ -73,6 +74,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
+        this.pixCambista = this.paramsLocais.getOpcoes().pixCambista;
 
         if  (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
