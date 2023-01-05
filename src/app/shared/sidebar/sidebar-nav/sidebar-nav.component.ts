@@ -74,7 +74,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
-        this.pixCambista = this.paramsLocais.getOpcoes().pixCambista;
+        this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
 
         if  (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
