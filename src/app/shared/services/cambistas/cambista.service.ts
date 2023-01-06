@@ -43,4 +43,15 @@ export class CambistaService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    financeiro(params) {
+        return this.http.get(`${this.cambistaUrl}/financeiro`,
+          this.headers.getRequestOptions(true, params)
+        ).pipe(
+            map((response: any) => {
+                return response.results;
+            }),
+            catchError(this.errorService.handleError)
+        );
+    }
 }
