@@ -260,7 +260,11 @@
         "fmbets.com.br": "gulp fmbets.com.br",
         "megasporte.com": "gulp megasporte.com",
         "openbets.vip": "gulp openbets.vip",
-        "r13.bet": "gulp r13.bet"
+        "r13.bet": "gulp r13.bet",
+        "arenabet.bet": "gulp arenabet.bet",
+        "winup.casino": "gulp winup.casino",
+        "imperiopix.bet": "gulp imperiopix.bet",
+        "s10sports.bet": "gulp s10sports.bet"
     },
     "private": true,
     "dependencies": {

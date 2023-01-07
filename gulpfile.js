@@ -2390,3 +2390,38 @@ gulp.task('r13.bet', function (done) {
     });
 });
 
+gulp.task('arenabet.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "arenabet.bet",
+        banca: "ARENA BET",
+        styles: "",
+    });
+});
+
+gulp.task('winup.casino', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "winup.casino",
+        banca: "WINUP",
+        styles: "",
+    });
+});
+
+gulp.task('imperiopix.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "imperiopix.bet",
+        banca: "IMPÉRIO PIX",
+        styles: "",
+    });
+});
+
+gulp.task('s10sports.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "s10sports.bet",
+        banca: "S10 SPORTS",
+        styles: "",
+    });
+});
