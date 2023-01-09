@@ -2428,3 +2428,12 @@ gulp.task('s10sports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('winbets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "winbets.wee.bet",
+        banca: "WINBETS",
+        styles: "",
+    });
+});
