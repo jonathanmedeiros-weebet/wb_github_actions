@@ -173,7 +173,8 @@
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
         "contato": "Contato",
-        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres com pelo menos uma letra (maiúscula e minúscula) e um número."
+        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres com pelo menos uma letra (maiúscula e minúscula) e um número.",
+        "nomeJogoCassino": "Jogo"
     },
     "dias": {
         "ontem": "Ontem",

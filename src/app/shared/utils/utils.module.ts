@@ -15,6 +15,7 @@ import {
     CotacaoPipe,
     SplitCodigoPipe,
     FormatarNaturezaPipe,
+    FormatarNomeJogoCassinoPipe,
     DepositoStatusPixPipePipe,
     SafeIframePipe
 } from './index';
@@ -34,6 +35,7 @@ import {
         InfiniteScrollDirective,
         SplitCodigoPipe,
         FormatarNaturezaPipe,
+        FormatarNomeJogoCassinoPipe,
         SanitizeCampNamePipe,
         DepositoStatusPixPipePipe,
         CotacaoPipe,
@@ -52,6 +54,7 @@ import {
         InfiniteScrollDirective,
         SplitCodigoPipe,
         FormatarNaturezaPipe,
+        FormatarNomeJogoCassinoPipe,
         DepositoStatusPixPipePipe,
         SanitizeCampNamePipe,
         CotacaoPipe,
