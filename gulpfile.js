@@ -2429,11 +2429,11 @@ gulp.task('s10sports.bet', function (done) {
     });
 });
 
-gulp.task('winbets.wee.bet', function (done) {
+gulp.task('apostafacil.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "winbets.wee.bet",
-        banca: "WINBETS",
+        host: "apostafacil.wee.bet",
+        banca: "APOSTA FÁCIL",
         styles: "",
     });
 });
