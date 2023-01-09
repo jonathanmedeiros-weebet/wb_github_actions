@@ -74,7 +74,7 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
         this.desafioHabilitado = this.params.getOpcoes().desafio;
 
         this.detalhamentoHabilitado = this.loteriasHabilitada || this.acumuladaoHabilitado || this.desafioHabilitado;
-        // this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
+        this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
 
         this.createForm();
         this.getResultado();
@@ -144,6 +144,7 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
                 this.resultado = parseFloat(result['total_apostado']) + parseFloat(result['cartao']) - parseFloat(result['saque'])
                     - parseFloat(result['total_comissao']) - parseFloat(result['total_premios']);
                 this.showLoading = false;
+                this.dataSaldoAnterior = moment(this.queryParams.dataInicial).subtract(1, 'day').format('DD/MM');
             },
             error => {
                 this.relatorio = [];
