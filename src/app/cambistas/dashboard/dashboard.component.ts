@@ -87,7 +87,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
                     }
                 },
                 y: {
-                    min: 10,
+                    min: 0,
                     ticks: {
                         color: style.getPropertyValue('--foreground-game'),
                     },
