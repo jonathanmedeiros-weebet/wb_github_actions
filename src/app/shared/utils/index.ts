@@ -15,8 +15,9 @@ export { SanitizeCampNamePipe } from './pipes/sanitize-camp-name.pipe';
 export { CotacaoPipe } from './pipes/cotacao.pipe';
 export { SplitCodigoPipe } from './pipes/split-codigo.pipe';
 export { FormatarNaturezaPipe } from './pipes/formatar-natureza.pipe';
-export { DepositoStatusPixPipePipe } from "./pipes/depositos-status-pix.pipe";
-export { SafeIframePipe } from "./pipes/safe-iframe.pipe";
+export { FormatarNomeJogoCassinoPipe } from './pipes/formatar-nome-jogo-cassino.pipe';
+export { DepositoStatusPixPipePipe } from './pipes/depositos-status-pix.pipe';
+export { SafeIframePipe } from './pipes/safe-iframe.pipe';
 //
 export { CustomEncoder } from './custom-encoder';
 export { FormValidations } from './form-validation';
