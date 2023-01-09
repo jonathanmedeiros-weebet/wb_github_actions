@@ -45,4 +45,4 @@ testem.log
 Thumbs.db
 
 #param
-/src/param/parametros.json
+#/src/param/parametros.json
