@@ -25,7 +25,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code">
-            <img *ngIf="metodoPagamento !== 'sauto_pay'" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="!['sauto_pay', 'gerencianet'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="metodoPagamento === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
             <img *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
