@@ -20,8 +20,10 @@ import {Router} from '@angular/router';
 export class DashboardComponent extends BaseFormComponent implements OnInit {
     @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-    public saldo;
-    public credito;
+    public saldo = 0;
+    public credito = 0;
+    public comissao = 0;
+    public saida = 0;
 
     public dataEntrada = [];
     public dataSaida = [];
@@ -85,7 +87,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
                     }
                 },
                 y: {
-                    min: 10,
+                    min: 0,
                     ticks: {
                         color: style.getPropertyValue('--foreground-game'),
                     },
@@ -111,11 +113,13 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         this.loadChart('semana-atual');
         this.loadQuantidadeApostas('semana-atual');
 
-        this.auth.getPosicaoFinanceira()
+        this.cambistaService.financeiro({})
             .subscribe(
-                posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo
-                    this.credito = posicaoFinanceira.credito
+                result => {
+                    this.saldo = result.saldo
+                    this.credito = result.credito
+                    this.comissao = result.comissao
+                    this.saida = result.saida
                 },
                 error => {
                     if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
