@@ -265,7 +265,9 @@
         "winup.casino": "gulp winup.casino",
         "imperiopix.bet": "gulp imperiopix.bet",
         "s10sports.bet": "gulp s10sports.bet",
-        "apostafacil.wee.bet": "gulp apostafacil.wee.bet"
+        "apostafacil.wee.bet": "gulp apostafacil.wee.bet",
+        "reidabet.wee.bet": "gulp reidabet.wee.bet",
+        "primoos.bet": "gulp primoos.bet"
     },
     "private": true,
     "dependencies": {

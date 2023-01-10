@@ -2437,3 +2437,21 @@ gulp.task('apostafacil.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('reidabet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "reidabet.wee.bet",
+        banca: "REI DA BET",
+        styles: "",
+    });
+});
+
+gulp.task('primoos.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "primoos.bet",
+        banca: "PRIMOOS.BET",
+        styles: "",
+    });
+});
