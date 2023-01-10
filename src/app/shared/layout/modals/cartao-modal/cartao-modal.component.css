@@ -15,6 +15,7 @@
 
 .table{
     cursor: pointer;
+    color: var(--foreground);
 }
 
 .codigo{
