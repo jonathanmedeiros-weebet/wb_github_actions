@@ -175,7 +175,9 @@
         "contato": "Contato",
         "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres com pelo menos uma letra (maiúscula e minúscula) e um número.",
         "nomeJogoCassino": "Jogo",
-        "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}"
+        "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
+        "historicoDeApostas": "Histórico de Apostas",
+        "modalidade": "Modalidade"
     },
     "dias": {
         "ontem": "Ontem",

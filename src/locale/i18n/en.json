@@ -175,7 +175,9 @@
         "contato": "Contact",
         "requisitosSenha": "Password must have at least 6 characters with at least one letter (uppercase and lowercase) and one number.",
         "nomeJogoCassino": "Game",
-        "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}"
+        "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
+        "historicoDeApostas": "Betting History",
+        "modalidade": "Modality"
     },
     "dias": {
         "ontem": "Yesterday",

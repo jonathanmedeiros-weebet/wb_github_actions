@@ -17,6 +17,8 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
 
     cartao;
 
+    apostasCollapsed = false;
+
     constructor(
         public activeModal: NgbActiveModal,
         private fb: FormBuilder,
@@ -45,7 +47,6 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
         this.cartaoService.getCartao(this.form.value)
             .subscribe(
                 cartao => {
-                    console.log(cartao)
                     this.cartao = cartao;
                 },
                 error => this.messageService.error(error)
@@ -62,5 +63,9 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
 
     handleError(error) {
         this.messageService.error(error);
+    }
+
+    changeCollapseApostas() {
+        this.apostasCollapsed = !this.apostasCollapsed;
     }
 }

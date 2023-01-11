@@ -22,10 +22,7 @@
 
     <div class="resultado-pesquisa" *ngIf="cartao">
         <label class="label-resultado">Resultado da pesquisa</label>
-        <div class="cartao" (click)="abrirDetalheCartao(cartao)">
-            <!-- <img src="assets/images/logo-cartao.svg" alt="W" class="logo-cartao">
-            <img src="assets/images/background-cartao.svg" alt="W" class="background-cartao"> -->
-
+        <div class="cartao">
             <div class="data">{{ cartao.data_registro }}</div>
             <div class="apostador">{{'geral.apostador' | translate}} : {{ cartao.apostador }}</div>
             <div class="chave">Chave: {{ cartao.chave }}</div>
@@ -47,6 +44,21 @@
                     <label>{{'geral.saldo' | translate}}</label>
                     <span>{{ cartao.saldo | currency }}</span>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="cartao">
+        <div class="apostas-header" (click)="changeCollapseApostas()">
+            <i class="fa fa-solid {{apostasCollapsed ? 'fa-angle-down' : 'fa-angle-up'}}"></i> Histórico de Apostas
+        </div>
+        <div *ngIf="!apostasCollapsed" class="apostas">
+            <div class="aposta" *ngFor="let aposta of cartao.apostas">
+                {{aposta.codigo}} <br>
+                {{'geral.horario' | translate}}: {{aposta.horario | moment: 'DD/MM/YYYY H:m'}} <br>
+                {{'geral.modalidade'| translate}}: {{aposta.tipo | titlecase}} <br>
+                {{'geral.valor'| translate}}: {{aposta.valor | currency}} <br>
+                {{'geral.possivelRetorno'| translate}}: {{aposta.possibilidade_ganho | currency}} <br>
+                {{'geral.resultado'| translate}}: {{aposta.resultado ? aposta.resultado : 'pendente' | titlecase}}
             </div>
         </div>
     </div>

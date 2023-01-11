@@ -66,6 +66,25 @@
     font-size: 16px;
 }
 
+.apostas {
+    overflow: scroll;
+    height: 350px;
+}
+
+.apostas-header {
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.aposta {
+    cursor: pointer;
+    padding: 10px 0;
+    border-top: var(--highlight) dashed 1px;
+}
+
+.aposta:first-of-type {
+    border-top: none;
+}
 
 @media only screen and (max-width: 1024px) {
     .modal-header {

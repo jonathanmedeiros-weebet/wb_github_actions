@@ -83,3 +83,16 @@ h4.modal-title {
 .cartao .valores .item span {
     color: var(--highlight);
 }
+
+.apostas-header {
+    padding: 8px;
+}
+
+.aposta {
+    padding: 10px;
+    border-top: var(--highlight) dashed 1px;
+}
+
+.aposta:first-of-type {
+    border-top: none;
+}

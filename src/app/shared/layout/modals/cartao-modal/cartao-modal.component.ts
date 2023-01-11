@@ -14,6 +14,7 @@ export class CartaoModalComponent implements OnInit {
     @Input() cartao: CartaoAposta = new CartaoAposta();
     appMobile;
     modalRef;
+    apostasCollapsed = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -53,5 +54,9 @@ export class CartaoModalComponent implements OnInit {
 
     handleError(error) {
         this.messageService.error(error);
+    }
+
+    changeCollapseApostas() {
+        this.apostasCollapsed = !this.apostasCollapsed;
     }
 }
