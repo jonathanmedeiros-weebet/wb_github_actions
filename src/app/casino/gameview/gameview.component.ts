@@ -1,76 +1,86 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService} from '../../services';
+import {AuthService, MenuFooterService, MessageService} from '../../services';
 import {interval} from 'rxjs';
 
 
 @Component({
-  selector: 'app-gameview',
-  templateUrl: './gameview.component.html',
-  styleUrls: ['./gameview.component.css']
+    selector: 'app-gameview',
+    templateUrl: './gameview.component.html',
+    styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
-  gameUrl: SafeUrl = '';
-  gameId: String = '';
-  gameMode: String = '';
-  gameFornecedor: String = '';
-  params: any = [];
-  mobileScreen;
-  fullscreen;
-  elem: any;
-  showLoadingIndicator = true;
-  isCliente;
+    gameUrl: SafeUrl = '';
+    gameId: String = '';
+    gameMode: String = '';
+    gameFornecedor: String = '';
+    params: any = [];
+    mobileScreen;
+    fullscreen;
+    elem: any;
+    showLoadingIndicator = true;
+    isCliente;
 
-constructor(
-    private casinoApi: CasinoApiService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private location: Location,
-    private auth: AuthService,
-    private menuFooterService: MenuFooterService,
-    @Inject(DOCUMENT) private document: any
-) {
-}
+    constructor(
+        private casinoApi: CasinoApiService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private sanitizer: DomSanitizer,
+        private location: Location,
+        private auth: AuthService,
+        private menuFooterService: MenuFooterService,
+        private messageService: MessageService,
+        @Inject(DOCUMENT) private document: any
+    ) {
+    }
 
-ngOnInit(): void {
-    this.elem = document.documentElement;
-    this.mobileScreen = window.innerWidth <= 1024;
-    this.fullscreen = false;
-    this.menuFooterService.setIsPagina(true);
-    this.route.params.subscribe(params => {
-    this.params = params;
-    this.gameId = params['game_id'];
-    this.gameMode = params['game_mode'];
-    this.gameFornecedor = params['game_fornecedor'];
-        this.auth.cliente
+    ngOnInit(): void {
+        this.elem = document.documentElement;
+        this.mobileScreen = window.innerWidth <= 1024;
+        this.fullscreen = false;
+        this.menuFooterService.setIsPagina(true);
+        this.route.params.subscribe(params => {
+            this.params = params;
+            this.gameId = params['game_id'];
+            this.gameMode = params['game_mode'];
+            this.gameFornecedor = params['game_fornecedor'];
+            this.auth.cliente
+                .subscribe(
+                    isCliente => {
+                        this.isCliente = isCliente;
+                    }
+                );
+            if (this.gameMode === 'REAL' && !this.isCliente) {
+                this.router.navigate(['casino/wall']);
+            } else {
+                this.loadGame();
+            }
+            interval(3000)
+                .subscribe(() => {
+                    this.showLoadingIndicator = false;
+                });
+        });
+
+    }
+
+    loadGame() {
+        this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor)
             .subscribe(
-                isCliente => {
-                    this.isCliente = isCliente;
-                }
-            );
-        if (this.gameMode === 'REAL' && !this.isCliente) {
-          this.router.navigate(['casino/wall']);
-        } else {
-            this.loadGame();
-        }
-        interval(3000)
-            .subscribe(() => {
-                this.showLoadingIndicator = false;
-            });
-    });
+                response => {
+                    this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                },
+                error => {
+                    this.handleError(error);
+                });
+    }
 
-  }
-
-  loadGame() {
-    this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor).subscribe(response => {
-      this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-    });
-  }
+    handleError(error: string) {
+        this.messageService.error(error);
+    }
 
     back(): void {
         this.location.back();
