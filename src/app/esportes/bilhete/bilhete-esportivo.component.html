@@ -116,7 +116,7 @@
                             <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
                         </div>
                         <div *ngIf="isLoggedIn" class="form-group form-check-custom form-check-style-1 alteracoes-odds">
-                            <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
+                            <input type="checkbox" class=""
                                 id="aceito-alteracoes-odds"
                                 formControlName="aceitar_alteracoes_odds">
                             <label for="aceito-alteracoes-odds">
@@ -125,7 +125,7 @@
                         </div>
                         <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn"
                             class="form-group form-check-custom form-check-style-1 utilizar-bonus">
-                            <input type="checkbox" class="form-check-input-custom form-check-input-style-1"
+                            <input type="checkbox" class=""
                                 id="utilizar-bonus"
                                 formControlName="utilizar_bonus" (click)="toggleUtilizarBonus()">
                             <label for="utilizar-bonus">
