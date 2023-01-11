@@ -1,11 +1,11 @@
 <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
     <div class="bilhete-container">
         <div class="titulo-bilhete">
-            <a (click)="closeCupom()" class="botao-esquerdo">
+            <a (click)="closeCupom()" class="botao-esquerdo" *ngIf="mobileScreen">
                 <i class="fa fa-arrow-left"></i>
             </a>
             <div class="titulo">{{'bilhete.titulo' | translate}}</div>
-            <div class="botao-direito"></div>
+            <div class="botao-direito" *ngIf="mobileScreen"></div>
         </div>
         <div class="acoes-bilhete">
             {{'bilhete.eventosSelecionados' | translate}}

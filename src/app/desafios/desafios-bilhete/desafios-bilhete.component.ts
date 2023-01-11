@@ -40,6 +40,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     unsub$ = new Subject();
     isCliente;
     valorFocado = false;
+    mobileScreen;
 
     constructor(
         private apostaService: DesafioApostaService,
@@ -58,6 +59,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.createForm();
         this.auth.logado
             .subscribe(

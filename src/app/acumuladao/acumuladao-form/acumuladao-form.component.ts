@@ -32,6 +32,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     isCliente;
     isLoggedIn;
     unsub$ = new Subject();
+    mobileScreen;
 
     constructor(
         private router: Router,
@@ -48,6 +49,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.opcoes = this.paramsService.getOpcoes();
         this.auth.logado
             .subscribe(
