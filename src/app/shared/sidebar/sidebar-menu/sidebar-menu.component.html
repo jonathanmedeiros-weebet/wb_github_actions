@@ -7,7 +7,12 @@
 
         <a (click)="pesquisarCartao()" *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
             <i class="fa fa-credit-card"></i>
-            {{'geral.cartoes' | translate}}
+            {{'cartoes.consultarCartao' | translate}}
+        </a>
+
+        <a (click)="abrirSolicitacaoSaqueCartao()" *ngIf="cartaoApostaHabilitado && !isLoggedIn">
+            <i class="fa fa-credit-card"></i>
+            {{'cartoes.solicitarSaque' | translate}}
         </a>
 
         <a (click)="abrirResultados()" *ngIf="isLoggedIn">

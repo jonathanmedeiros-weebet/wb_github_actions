@@ -132,10 +132,11 @@
         <section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
             <div class="bilhete-container">
                 <div class="titulo-bilhete">
-                    <div class="titulo">BILHETE</div>
-                    <a (click)="closeCupom()" class="fechar-pre-bilhete">
-                        <i class="fa fa-times"></i>
+                    <a (click)="closeCupom()" class="botao-esquerdo">
+                        <i class="fa fa-arrow-left"></i>
                     </a>
+                    <div class="titulo">{{'bilhete.titulo' | translate}}</div>
+                    <div class="botao-direito"></div>
                 </div>
                 <div class="pre-bilhete-acumuladao">
                     <div class="acumuladao">

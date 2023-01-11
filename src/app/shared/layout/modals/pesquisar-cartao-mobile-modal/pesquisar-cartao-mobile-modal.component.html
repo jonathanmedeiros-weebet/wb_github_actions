@@ -58,7 +58,7 @@
                 {{'geral.modalidade'| translate}}: {{aposta.tipo | titlecase}} <br>
                 {{'geral.valor'| translate}}: {{aposta.valor | currency}} <br>
                 {{'geral.possivelRetorno'| translate}}: {{aposta.possibilidade_ganho | currency}} <br>
-                {{'geral.resultado'| translate}}: {{aposta.resultado ? aposta.resultado : 'pendente' | titlecase}}
+                {{'geral.resultado'| translate}}: {{(aposta.resultado ? aposta.resultado : 'pendente') | titlecase}}
             </div>
         </div>
     </div>

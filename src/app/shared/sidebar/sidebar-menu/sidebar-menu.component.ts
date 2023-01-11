@@ -5,6 +5,7 @@ import {
     LoginModalComponent,
     PesquisarApostaModalComponent,
     PesquisarCartaoMobileModalComponent,
+    SolicitarSaqueModalComponent,
     TabelaModalComponent
 } from '../../layout/modals';
 import {SidebarService} from '../../services/utils/sidebar.service';
@@ -164,6 +165,10 @@ export class SidebarMenuComponent implements OnInit {
 
     listPrinters() {
         this.printService.listPrinters();
+    }
+
+    abrirSolicitacaoSaqueCartao() {
+        this.modalService.open(SolicitarSaqueModalComponent);
     }
 
     useLanguage(language: string): void {

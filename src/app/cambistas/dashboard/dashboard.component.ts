@@ -2,12 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RelatorioService} from '../../shared/services/relatorio.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import * as moment from 'moment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import { SidebarService, AuthService, CambistaService } from 'src/app/services';
+import {FormBuilder} from '@angular/forms';
+import {BaseChartDirective} from 'ng2-charts';
+import {ChartConfiguration, ChartData, ChartEvent, ChartType} from 'chart.js';
+import {AuthService, CambistaService, SidebarService} from 'src/app/services';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ApostaComponent} from '../aposta/aposta.component';
 import {Router} from '@angular/router';
@@ -63,11 +62,12 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.sidebarService.changeItens({contexto: 'cambista'});
         this.showLoading = false;
 
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
+        } else {
+            this.sidebarService.changeItens({contexto: 'cambista'});
         }
 
         var style = getComputedStyle(document.body);

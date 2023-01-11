@@ -86,7 +86,10 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnInit(): void {
-        this.sidebarService.changeItens({contexto: 'cliente'});
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.menuFooterService.setIsPagina(true);
+        }
 
         this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
 
@@ -95,7 +98,6 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
         this.definirAltura();
 
         this.createForm();
-        this.menuFooterService.setIsPagina(true);
     }
 
     ngOnDestroy() {

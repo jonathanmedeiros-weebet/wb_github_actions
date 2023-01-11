@@ -40,10 +40,12 @@
 
 .fa-plus {
     color: var(--highlight);
+    opacity: 20%;
 }
 
 .fa-minus {
     color: #ED4C5C;
+    opacity: 20%;
 }
 
 .bg-green {

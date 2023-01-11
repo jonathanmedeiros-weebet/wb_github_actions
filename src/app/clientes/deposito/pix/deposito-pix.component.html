@@ -12,12 +12,18 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!pix">
         <app-spinner *ngIf="submitting"></app-spinner>
         <div class="row">
-            <div class="form-group required">
-                <label class="label">{{'deposito.informeOValor' | translate}}</label>
-                <input currencyMask class="form-control" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                       formControlName="valor">
-                <app-error-msg [control]="form.get('valor')"></app-error-msg>
-                <span class="mt-3 d-block alerta-min">{{'deposito.valorMinimo' | translate}} {{ valorMinDeposito | currency }}</span>
+            <div class="col col-sm-3">
+                <div class="form-group required">
+                    <span class="mt-3 d-block alerta-min">
+                        {{'deposito.valorMinimo' | translate}} {{ valorMinDeposito | currency }}
+                    </span>
+                    <label class="label">{{'deposito.informeOValor' | translate}}</label>
+                    <input currencyMask
+                           [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
+                           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                           formControlName="valor">
+                    <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                </div>
             </div>
         </div>
         <div class="row">

@@ -1696,8 +1696,28 @@ input[type=number]::-webkit-outer-spin-button {
         color: var(--highlight) !important;
         position: relative;
         cursor: pointer;
+        left: 0;
+        top: 0;
+    }
+
+    .botao-direito {
+        color: var(--highlight) !important;
+        position: relative;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+        width: 45px;
+        font-size: 22px;
+    }
+
+    .botao-esquerdo {
+        color: var(--highlight) !important;
+        position: relative;
+        cursor: pointer;
         right: 0;
         top: 0;
+        width: 45px;
+        font-size: 22px;
     }
 
     .fechar-pre-bilhete i {

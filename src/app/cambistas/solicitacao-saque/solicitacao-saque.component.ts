@@ -41,11 +41,13 @@ export class SolicitacaoSaqueComponent implements OnInit {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -7);
         this.toDate = calendar.getToday();
 
-        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
+        this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
     }
 
     ngOnInit(): void {
-        this.sidebarService.changeItens({contexto: 'cambista'});
+        if (window.innerWidth >= 1025) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+        }
 
         this.getSolicitacoesSaque();
     }
