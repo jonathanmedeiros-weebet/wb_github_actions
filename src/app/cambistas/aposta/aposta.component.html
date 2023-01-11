@@ -112,7 +112,7 @@
                     </tr>
                     <tbody *ngIf="!loading">
                     <ng-container *ngFor="let aposta of apostas">
-                        <tr class="{{ classNameAposta(aposta.resultado) }} mobile-tds" (click)="openModal(aposta)">
+                        <tr class="{{ classNameAposta(aposta.resultado) }} mobile-tds">
                             <td class="status-aposta"></td>
                             <td class="codigo">{{ aposta.codigo }}</td>
                             <td *ngIf="!mobileScreen">{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</td>
