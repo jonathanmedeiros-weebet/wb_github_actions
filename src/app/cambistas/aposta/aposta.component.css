@@ -161,6 +161,14 @@
     cursor: pointer;
 }
 
+.codigo {
+    white-space: nowrap;
+}
+
+.status-aposta {
+    padding: 0 !important;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 10px;
@@ -227,6 +235,11 @@
 
     .buttons button {
         width: 100%;
+    }
+
+    .mobile-tds td {
+        border-bottom: 0 !important;
+        padding-bottom: 5px;
     }
 }
 

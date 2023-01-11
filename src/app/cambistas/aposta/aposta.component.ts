@@ -53,6 +53,7 @@ export class ApostaComponent implements OnInit {
         valor: 0,
         premio: 0,
     };
+    mobileScreen: boolean;
 
     unsub$ = new Subject();
 
@@ -84,7 +85,8 @@ export class ApostaComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (window.innerWidth >= 1025) {
+        this.mobileScreen = window.innerWidth <= 1025;
+        if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cambista'});
         }
 
@@ -342,5 +344,9 @@ export class ApostaComponent implements OnInit {
             reason => {
             }
         );
+    }
+
+    getDataFormatada(value, format) {
+        return moment(value).format(format);;
     }
 }
