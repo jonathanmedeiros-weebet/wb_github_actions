@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -23,13 +23,10 @@ import * as moment from 'moment/moment';
 export class ApostaComponent implements OnInit {
 
     apostas = [];
-
     queryParams;
-
     loading = false;
     apostador = '';
     status = '';
-
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
@@ -86,9 +83,9 @@ export class ApostaComponent implements OnInit {
 
     ngOnInit(): void {
         this.mobileScreen = window.innerWidth <= 1025;
-        // if (!this.mobileScreen) {
-        //     this.sidebarService.changeItens({contexto: 'cambista'});
-        // }
+        if (!this.mobileScreen) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+        }
 
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;

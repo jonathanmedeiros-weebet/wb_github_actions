@@ -10,12 +10,10 @@ import { SidebarService, CartaoService } from 'src/app/services';
 export class CartaoComponent implements OnInit {
 
     isMobile = false;
-
     loading = false;
     cartoes = [];
     apostador = '';
     queryParams;
-
     hoveredDate: NgbDate | null = null;
     selectedDate: string = '';
 
@@ -37,6 +35,11 @@ export class CartaoComponent implements OnInit {
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -7);
         this.toDate = calendar.getToday();
 
+        this.queryParams = {
+            dataInicial: this.formatDate(this.fromDate, 'us'),
+            dataFinal: this.formatDate(this.toDate, 'us')
+        };
+
         this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
     }
 
@@ -47,21 +50,12 @@ export class CartaoComponent implements OnInit {
         this.getCartoes();
     }
 
-    getCartoes(params?) {
-        let queryParams: any = {
-            'data-inicial': this.formatDate(this.fromDate, 'us'),
-            'data-final': this.formatDate(this.toDate, 'us'),
+    getCartoes() {
+        const queryParams: any = {
+            'data-inicial': this.queryParams.dataInicial,
+            'data-final': this.queryParams.dataFinal,
             'sort': '-id'
         };
-
-        if (params) {
-            queryParams = {
-                'data-inicial': params.dataInicial,
-                'data-final': params.dataFinal,
-                'apostador': params.apostador,
-                'sort': '-id'
-            };
-        }
 
         this.cartaoService.getCartoes(queryParams)
             .subscribe(
@@ -115,13 +109,13 @@ export class CartaoComponent implements OnInit {
     }
 
     handleFiltrar() {
-        const params = {
-            dataInicial: this.formatDate(this.fromDate, 'us'),
-            dataFinal: this.formatDate(this.toDate, 'us'),
-            apostador: this.apostador,
-        }
+        // const params = {
+        //     dataInicial: this.formatDate(this.fromDate, 'us'),
+        //     dataFinal: this.formatDate(this.toDate, 'us'),
+        //     apostador: this.apostador,
+        // }
 
-        this.getCartoes(params);
+        this.getCartoes();
     }
 
     handleError(error) {
