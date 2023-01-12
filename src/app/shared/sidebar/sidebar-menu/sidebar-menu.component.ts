@@ -17,6 +17,7 @@ import {config} from '../../config';
 import {PrintService} from '../../services/utils/print.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 import {TranslateService} from '@ngx-translate/core';
+import {TabelaComponent} from '../../../cambistas/tabela/tabela.component';
 
 @Component({
     selector: 'app-sidebar-menu',
@@ -83,19 +84,7 @@ export class SidebarMenuComponent implements OnInit {
     }
 
     abrirModalTabela() {
-        this.modalRef = this.modalService.open(
-            TabelaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true
-            }
-        );
-
-        this.modalRef.result
-            .then(result => {
-                this.closeMenu();
-            }, reason => {
-            });
+        this.modalRef = this.modalService.open(TabelaComponent);
     }
 
     closeMenu() {

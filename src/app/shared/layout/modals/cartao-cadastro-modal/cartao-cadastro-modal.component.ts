@@ -15,6 +15,7 @@ import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 export class CartaoCadastroModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
     disabled = false;
+    mobileScreen;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -27,6 +28,7 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.createForm();
     }
 

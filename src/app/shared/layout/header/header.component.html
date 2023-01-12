@@ -71,7 +71,7 @@
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around">
+                        <div class="d-flex justify-content-around" *ngIf="pixCambista">
                             <a class="dropdown-btn w-150" (click)="abrirDepositosCambista()">
                                 {{'geral.liberarCredito' | translate}}
                             </a>

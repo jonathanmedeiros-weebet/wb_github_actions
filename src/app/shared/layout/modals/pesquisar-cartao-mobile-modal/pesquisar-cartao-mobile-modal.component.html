@@ -1,8 +1,9 @@
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{'cartoes.consultarCartao' | translate}}</h4>
-    <a class="" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <i class="fa fa-times"></i>
+<div class="mobile-modal-header margin-10" *ngIf="mobileScreen">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
     </a>
+    <div class="titulo">{{'cartoes.consultarCartao' | translate}}</div>
+    <div class="botao-direito"></div>
 </div>
 <div class="modal-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -52,7 +53,7 @@
             <i class="fa fa-solid {{apostasCollapsed ? 'fa-angle-down' : 'fa-angle-up'}}"></i> Histórico de Apostas
         </div>
         <div *ngIf="!apostasCollapsed" class="apostas">
-            <div class="aposta" *ngFor="let aposta of cartao.apostas">
+            <div class="aposta" *ngFor="let aposta of cartao.apostas" (click)="abrirBilhete(aposta.id)">
                 {{aposta.codigo}} <br>
                 {{'geral.horario' | translate}}: {{aposta.horario | moment: 'DD/MM/YYYY H:m'}} <br>
                 {{'geral.modalidade'| translate}}: {{aposta.tipo | titlecase}} <br>

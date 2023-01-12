@@ -181,4 +181,8 @@ ul li ul li:before {
         max-width: none;
         margin: 0;
     }
+
+    .btn-custom {
+        width: 100%;
+    }
 }

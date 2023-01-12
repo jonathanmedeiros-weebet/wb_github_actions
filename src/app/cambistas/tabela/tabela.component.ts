@@ -17,6 +17,7 @@ export class TabelaComponent implements OnInit {
     campeonatosImpressao;
     dataCampeonatos;
     term = '';
+    mobileScreen = false;
 
     constructor(
         private sidebarService: SidebarService,
@@ -29,6 +30,8 @@ export class TabelaComponent implements OnInit {
     ngOnInit(): void {
         if (window.innerWidth >= 1025) {
             this.sidebarService.changeItens({contexto: 'cambista'});
+        } else {
+            this.mobileScreen = true;
         }
 
         const odds = this.paramsService.getOddsImpressao();
@@ -52,7 +55,7 @@ export class TabelaComponent implements OnInit {
                 this.campeonatosImpressao = campeonatos;
             },
             err => {
-                console.log(err);
+                // console.log(err);
             }
         );
     }

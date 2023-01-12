@@ -267,7 +267,8 @@
         "recargasDeCartao": "Recargas de cartão",
         "cartoesDeAposta": "Cartões de Aposta",
         "chaveCartao": "Chave cartão",
-        "detalhesDoCartao": "Detalhes do Cartão"
+        "detalhesDoCartao": "Detalhes do Cartão",
+        "criarCartao": "Criar Cartão"
     },
     "senhas": {
         "senhaAtual": "Senha atual",

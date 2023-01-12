@@ -267,7 +267,8 @@
         "recargasDeCartao": "Card recharges",
         "cartoesDeAposta": "Betting Cards",
         "chaveCartao": "Card key",
-        "detalhesDoCartao": "Card Details"
+        "detalhesDoCartao": "Card Details",
+        "criarCartao": "Create Card"
     },
     "senhas": {
         "senhaAtual": "Current password",

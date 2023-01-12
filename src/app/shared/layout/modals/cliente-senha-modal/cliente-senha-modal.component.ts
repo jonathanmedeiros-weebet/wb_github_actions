@@ -1,16 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClienteService, MessageService, UtilsService, AuthService, SidebarService } from 'src/app/services';
-import { Cidade } from 'src/app/shared/models/endereco/cidade';
-import { Estado } from 'src/app/shared/models/endereco/estado';
-import { BaseFormComponent } from '../../base-form/base-form.component';
-
-import * as moment from 'moment';
-import { Endereco } from 'src/app/shared/models/endereco/endereco';
-import { Subject } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService, ClienteService, MessageService, SidebarService, UtilsService} from 'src/app/services';
+import {BaseFormComponent} from '../../base-form/base-form.component';
+import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import { PasswordValidation } from 'src/app/shared/utils';
+import {PasswordValidation} from 'src/app/shared/utils';
 
 
 @Component({
@@ -26,6 +21,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     mostrarSenhaAtual = false;
     mostrarSenhaNova = false;
     mostrarSenhaConfirmacao = false;
+    mobileScreen;
 
     constructor(
         private fb: FormBuilder,
@@ -40,6 +36,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.createForm();
         this.isCliente = this.auth.isCliente();
     }

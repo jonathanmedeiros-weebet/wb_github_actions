@@ -3,9 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CartaoService, MessageService } from '../../../../services';
+import {ApostaService, CartaoService, MessageService} from '../../../../services';
 import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 import { BaseFormComponent } from '../../base-form/base-form.component';
+import {ApostaModalComponent} from '../aposta-modal/aposta-modal.component';
 
 @Component({
     selector: 'app-pesquisar-cartao-mobile-modal',
@@ -14,22 +15,23 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 })
 export class PesquisarCartaoMobileModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
-
     cartao;
-
     apostasCollapsed = false;
+    mobileScreen;
 
     constructor(
         public activeModal: NgbActiveModal,
         private fb: FormBuilder,
         private modalService: NgbModal,
         private cartaoService: CartaoService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private apostaService: ApostaService
     ) {
         super();
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.createForm();
     }
 
@@ -67,5 +69,24 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
 
     changeCollapseApostas() {
         this.apostasCollapsed = !this.apostasCollapsed;
+    }
+
+    abrirBilhete(id) {
+        this.apostaService.getAposta(id)
+            .subscribe(
+                aposta_localizada => {
+                    this.modalRef = this.modalService.open(ApostaModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true
+                    });
+                    this.modalRef.componentInstance.aposta = aposta_localizada;
+                    this.modalRef.componentInstance.showCancel = true;
+                    this.modalRef.result.then(
+                        (result) => { },
+                        (reason) => { }
+                    );
+                },
+                error => this.handleError(error)
+            );
     }
 }
