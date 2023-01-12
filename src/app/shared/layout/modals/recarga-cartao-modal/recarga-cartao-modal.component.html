@@ -1,8 +1,15 @@
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Recarga de Cartão</h4>
+<div class="modal-header" *ngIf="!mobileScreen">
+    <h4 class="modal-title" id="modal-basic-title">{{'cartoes.recargasDeCartao' | translate}}</h4>
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
+</div>
+<div class="mobile-modal-header margin-10" *ngIf="mobileScreen">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <div class="titulo">{{'cartoes.recargasDeCartao' | translate}}</div>
+    <div class="botao-direito"></div>
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="modal-body">

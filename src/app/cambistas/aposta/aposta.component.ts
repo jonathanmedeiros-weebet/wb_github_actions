@@ -20,7 +20,7 @@ import * as moment from 'moment/moment';
   templateUrl: './aposta.component.html',
   styleUrls: ['./aposta.component.css']
 })
-export class ApostaComponent implements OnInit, AfterContentChecked {
+export class ApostaComponent implements OnInit {
 
     apostas = [];
 
@@ -99,9 +99,6 @@ export class ApostaComponent implements OnInit, AfterContentChecked {
 
         this.getApostas();
     }
-
-    ngAfterContentChecked() {
-        this.sidebarService.changeItens({contexto: 'cambista'});    }
 
     getApostas() {
         this.loading = true;

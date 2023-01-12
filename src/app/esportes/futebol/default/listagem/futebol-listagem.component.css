@@ -10,10 +10,6 @@
     flex: 1;
 }
 
-app-footer {
-  margin: 5px;
-}
-
 .nome {
     min-width: 200px;
 }

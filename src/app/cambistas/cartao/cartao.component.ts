@@ -41,8 +41,9 @@ export class CartaoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.sidebarService.changeItens({contexto: 'cambista'});
-
+        if (!this.isMobile) {
+            this.sidebarService.changeItens({contexto: 'cambista'});
+        }
         this.getCartoes();
     }
 

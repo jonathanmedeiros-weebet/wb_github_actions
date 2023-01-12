@@ -14,7 +14,7 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 export class RecargaCartaoModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
     disabled = false;
-
+    mobileScreen;
     constructor(
         public activeModal: NgbActiveModal,
         private modalService: NgbModal,
@@ -26,6 +26,7 @@ export class RecargaCartaoModalComponent extends BaseFormComponent implements On
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.createForm();
     }
 
