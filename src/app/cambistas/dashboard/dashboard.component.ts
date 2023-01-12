@@ -33,8 +33,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
     public barChartData: ChartData<'bar'> = {
         labels: [ 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom' ],
         datasets: [
-            { data: this.dataEntrada, label: 'Entrada', backgroundColor: '#35CC95', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  },
-            { data: this.dataSaida, label: 'Saída', backgroundColor: '#ED4C5C', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  }
+            { data: this.dataEntrada, label: 'Entrada', backgroundColor: '#35CC95', hoverBackgroundColor: '#2eb885', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  },
+            { data: this.dataSaida, label: 'Saída', backgroundColor: '#ED4C5C', hoverBackgroundColor: '#ea2e41', borderRadius: 2, maxBarThickness: 20, categoryPercentage: 0.4  }
         ]
     };
     public barChartOptions: ChartConfiguration['options'];
