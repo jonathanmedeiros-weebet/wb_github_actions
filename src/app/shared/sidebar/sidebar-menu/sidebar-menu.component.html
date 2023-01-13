@@ -2,7 +2,7 @@
     <div class="options">
         <a (click)="pesquisarTicket()">
             <i class="fa fa-ticket"></i>
-            {{'geral.bilhete' | translate}}
+            {{'geral.consultarBilhete' | translate}}
         </a>
 
         <a (click)="pesquisarCartao()" *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
