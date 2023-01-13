@@ -1762,6 +1762,10 @@ input[type=number]::-webkit-outer-spin-button {
         align-items: center;
     }
 
+    .btn-100w {
+        width: 100%;
+    }
+
     .fechar-pre-bilhete i {
         font-size: 22px;
     }
