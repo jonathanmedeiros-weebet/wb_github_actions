@@ -26,7 +26,7 @@ export class RecargaCartaoModalComponent extends BaseFormComponent implements On
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.createForm();
     }
 

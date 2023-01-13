@@ -54,6 +54,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     toDate: NgbDate | null;
 
     apostas = [];
+    mobileScreen;
 
     constructor(
         private messageService: MessageService,
@@ -82,21 +83,24 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             dataFinal: this.formatDate(this.toDate, 'us')
         };
 
-        this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(this.toDate);
+        this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
     }
 
     ngOnInit() {
-        this.sidebarService.changeItens({contexto: 'cliente'});
+        this.mobileScreen = window.innerWidth <= 1024;
+        if (!this.mobileScreen) {
+            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.menuFooterService.setIsPagina(true);
+        }
 
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
+
         this.casinoHabilitado = this.params.getOpcoes().casino;
 
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
-
         this.createForm();
-        this.menuFooterService.setIsPagina(true);
 
         this.getApostas();
     }

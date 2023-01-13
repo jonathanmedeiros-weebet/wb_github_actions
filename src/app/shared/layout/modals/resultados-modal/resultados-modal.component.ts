@@ -67,7 +67,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
 

@@ -63,7 +63,7 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cambista'});
         }

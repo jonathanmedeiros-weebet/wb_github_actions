@@ -12,6 +12,7 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 })
 export class SolicitarSaqueModalComponent extends BaseFormComponent implements OnInit {
     modalRef;
+    mobileScreen;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -23,6 +24,7 @@ export class SolicitarSaqueModalComponent extends BaseFormComponent implements O
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1024;
         this.createForm();
     }
 

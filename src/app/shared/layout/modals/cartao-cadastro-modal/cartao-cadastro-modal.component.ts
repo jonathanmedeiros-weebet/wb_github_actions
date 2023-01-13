@@ -28,7 +28,7 @@ export class CartaoCadastroModalComponent extends BaseFormComponent implements O
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.createForm();
     }
 

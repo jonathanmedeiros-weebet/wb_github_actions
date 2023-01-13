@@ -16,6 +16,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
     modalidade;
 
     depositos = [];
+    mobileScreen;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -28,7 +29,8 @@ export class DepositoComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (window.innerWidth >= 1025) {
+        this.mobileScreen = window.innerWidth <= 1024;
+        if (!this.mobileScreen) {
             this.siderbarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
         }

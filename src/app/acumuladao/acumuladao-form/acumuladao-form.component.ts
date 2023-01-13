@@ -49,7 +49,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.opcoes = this.paramsService.getOpcoes();
         this.auth.logado
             .subscribe(

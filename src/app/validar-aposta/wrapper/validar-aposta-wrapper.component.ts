@@ -46,7 +46,7 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.createForm();
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cambista'});

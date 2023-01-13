@@ -1,9 +1,12 @@
-<div id="default-content">
-    <a class="btnClose" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
+<div class="mobile-modal-header margin-10">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
     </a>
-
-    <div class="content-header">
+    <div class="titulo">{{'geral.apostas' | translate}}</div>
+    <div class="botao-direito"></div>
+</div>
+<div id="default-content">
+    <div class="content-header hide-mobile">
         <h2>{{'geral.apostas' | translate}} </h2>
     </div>
 

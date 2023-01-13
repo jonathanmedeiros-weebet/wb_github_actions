@@ -31,7 +31,7 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.createForm();
     }
 

@@ -19,7 +19,7 @@ export class SportLayoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.isMobile = window.innerWidth <= 1025;
+        this.isMobile = window.innerWidth <=1024;
         this.menuFooterService.setIsAcumuladao(false);
 
         this.sidebarService.collapsedSource

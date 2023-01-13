@@ -36,7 +36,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1025;
+        this.mobileScreen = window.innerWidth <=1024;
         this.createForm();
         this.isCliente = this.auth.isCliente();
     }

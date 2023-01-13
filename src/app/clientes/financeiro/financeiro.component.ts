@@ -30,6 +30,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     movimentacoesContent;
     saldo;
     whatsapp;
+    mobileScreen;
 
     graphData;
 
@@ -86,7 +87,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnInit(): void {
-        if (window.innerWidth >= 1025) {
+        this.mobileScreen = window.innerWidth <= 1024;
+        if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
         }
