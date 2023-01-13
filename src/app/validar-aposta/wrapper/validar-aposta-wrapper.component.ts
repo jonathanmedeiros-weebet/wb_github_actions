@@ -30,6 +30,7 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
     preAposta: any;
     modalRef;
     unsub$ = new Subject();
+    mobileScreen;
 
     constructor(
         private preApostaService: PreApostaEsportivaService,
@@ -45,8 +46,9 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.createForm();
-        if (window.innerWidth >= 1025) {
+        if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cambista'});
             this.menuFooterService.setIsPagina(true);
         }

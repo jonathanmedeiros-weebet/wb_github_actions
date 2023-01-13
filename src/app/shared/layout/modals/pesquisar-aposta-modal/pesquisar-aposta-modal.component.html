@@ -1,8 +1,15 @@
-<div class="modal-header">
+<div class="modal-header" *ngIf="!isMobile">
     <h4 class="modal-title" id="modal-basic-title">{{'geral.consultarBilhete' | translate}}</h4>
     <a aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
+</div>
+<div class="mobile-modal-header margin-10" *ngIf="isMobile">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <div class="titulo">{{'geral.consultarBilhete' | translate}}</div>
+    <div class="botao-direito"></div>
 </div>
 <div class="modal-body" [ngClass]="{'cupom-ativo': exibirBilhete}">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">

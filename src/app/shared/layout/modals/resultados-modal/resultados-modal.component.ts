@@ -46,6 +46,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     toDate: NgbDate | null;
 
     LOGO = config.LOGO;
+    mobileScreen;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -66,6 +67,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
+        this.mobileScreen = window.innerWidth <= 1025;
         this.appMobile = this.auth.isAppMobile();
         this.createForm();
 

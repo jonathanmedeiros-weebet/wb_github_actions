@@ -31,12 +31,11 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     dataInicial;
     dataFinal;
     detalhamentoHabilitado = false;
-
     hoveredDate: NgbDate | null = null;
     selectedDate = '';
-
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
+    mobileScreen;
 
     constructor(
         private relatorioService: RelatorioService,
@@ -64,7 +63,8 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (window.innerWidth >= 1025) {
+        this.mobileScreen = window.innerWidth <= 1025;
+        if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cambista'});
         }
 

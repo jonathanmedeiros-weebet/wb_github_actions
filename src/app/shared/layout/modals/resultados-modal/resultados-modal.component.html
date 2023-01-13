@@ -1,12 +1,17 @@
-<div class="modal-header">
-    <img [src]="LOGO" class="logo-modal" alt="">
+<div class="modal-header" *ngIf="!mobileScreen">
+    <h4>{{'geral.resultados' | translate}}</h4>
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
 </div>
+<div class="mobile-modal-header margin-10" *ngIf="mobileScreen">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <div class="titulo">{{'geral.resultados' | translate}}</div>
+    <div class="botao-direito"></div>
+</div>
 <div class="modal-body">
-    <h3>{{'geral.resultados' | translate}}</h3>
-
     <div class="filters">
         <form (ngSubmit)="onSubmit()" [formGroup]="form">
             <div class="input-group datepicker-group">

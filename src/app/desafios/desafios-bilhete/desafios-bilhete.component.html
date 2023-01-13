@@ -156,7 +156,7 @@
             <button type="button" class="btn btn-custom2" (click)="modalRef.dismiss()">{{'modais.fechar' | translate}}</button>
             <button type="button" class="btn btn-custom" *ngIf="!disabled; else processandoPreAposta"
                     (click)="finalizarApostaDeslogado()">
-                {{'modais.fechar' | translate}}
+                {{'modais.finalizar' | translate}}
             </button>
             <ng-template #processandoPreAposta>
                 <button disabled class="btn btn-custom">
