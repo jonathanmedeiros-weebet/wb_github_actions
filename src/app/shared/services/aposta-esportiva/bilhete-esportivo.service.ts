@@ -34,7 +34,11 @@ export class BilheteEsportivoService {
         let maxItems = this.paramsService.getOpcoes().quantidade_max_jogos_bilhete;
 
         if (itens.length > maxItems) {
+            let oldItems = this.getItens();
             this.messageService.warning(`Por favor, inclua no MÁXIMO ${maxItems} eventos.`);
+
+            this.menuFooterService.atualizarQuantidade(oldItems.length);
+            this.itensSource.next(oldItems);
         } else {
             const itensSerializado = JSON.stringify(itens);
             localStorage.setItem('itens-bilhete-esportivo', itensSerializado);
