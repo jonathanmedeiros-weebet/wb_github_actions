@@ -1,5 +1,5 @@
 <div class="submenu-container">
-    <nav class="submenu scroll" scrollX="true" *ngIf="active" style="padding-left: {{paddingMenu}}px" [ngStyle]="{'width.px': menuWidth}"
+    <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth, 'padding-left.px': paddingMenu}"
          [ngClass]="{'centered': centered}"
          (scroll)="onScroll($event)" #scrollMenu>
         <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''" *ngIf="!isMobile">
@@ -7,7 +7,8 @@
         </div>
         <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
             <a routerLink="{{item.link}}" routerLinkActive="active" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
-                <i class="{{item.icon_class}}"></i>
+                <i class="fa fa-circle blink_me" *ngIf="item.link === '/esportes/live'"></i>
+                <i class="{{item.icon_class}}" *ngIf="item.link !== '/esportes/live'"></i>
                 <span>{{item.name}}</span>
             </a>
             <a routerLink="{{item.link}}" routerLinkActive="active" *ngIf="item.svgIcon" [queryParams]="item.queryParams" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">

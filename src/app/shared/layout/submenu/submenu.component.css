@@ -108,6 +108,11 @@
     justify-content: center;
 }
 
+.blink_me {
+    animation: blinkerMe 1.5s linear infinite;
+    font-size: 12px;
+}
+
 @media only screen and (min-width: 1025px) {
     .submenu {
         padding-left: 0 !important;
