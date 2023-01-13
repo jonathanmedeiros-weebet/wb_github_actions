@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    font-size: 10px;
+    font-size: 11px; /* ajuste fonte */
     transition: 200ms;
 }
 

@@ -96,7 +96,7 @@ app-footer {
     border-radius: 5px;
     color: #fff;
     padding: 3px 6px;
-    font-size: 10px;
+    font-size: 11px; /* ajuste fonte */
 
     display: flex;
     align-items: center;
@@ -212,7 +212,7 @@ app-footer {
 
     margin: 0 2.5px;
 
-    font-size: 10px;
+    font-size: 11px; /* ajuste fonte */
 }
 
 .cotacoes .cotacao.selecionado {

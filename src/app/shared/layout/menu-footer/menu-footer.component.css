@@ -59,7 +59,7 @@
 }
 
 .foot-button .cupom-badge {
-    font-size: 10px;
+    font-size: 11px; /* ajuste fonte */
     padding: 4px;
     clip-path: circle();
     background-color: var(--foreground-sidebars);

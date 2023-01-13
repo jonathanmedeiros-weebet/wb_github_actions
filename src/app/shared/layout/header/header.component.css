@@ -428,7 +428,7 @@ body .change-theme {
     }
 
     .category a {
-        font-size: 10px;
+        font-size: 11px; /* ajuste fonte */
     }
 
     .side-right {

@@ -44,7 +44,7 @@
 .circle {
     height: 25px;
     width: 25px;
-    font-size: 10px;
+    font-size: 11px; /* ajuste fonte */
     margin-right: 5px;
     margin-bottom: 5px;
     background-color: var(--highlight);

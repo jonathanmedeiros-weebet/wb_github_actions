@@ -109,7 +109,7 @@ label.label-tempo {
         border-radius: 4px;
         margin-top: 40px !important;
         padding: 10px 15px;
-        font-size: 10px;
+        font-size: 11px; /* ajuste fonte */
         background: var(--game);
         color: var(--foreground-game);
         text-align: left;

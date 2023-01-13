@@ -94,7 +94,7 @@ footer {
 
 @media only screen and (max-width: 1024px) {
     .container{
-        font-size: 10px;
+        font-size: 11px; /* ajuste fonte */
     }
 
     .title {

@@ -248,7 +248,7 @@
     }
 
     .counts .count .count-value label {
-        font-size: 10px;
+        font-size: 11px; /* ajuste fonte */
     }
 
     .counts .count i {
