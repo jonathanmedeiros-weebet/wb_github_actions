@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { ItemBilheteEsportivo } from '../../../models';
 import { BehaviorSubject } from 'rxjs';
 import {MenuFooterService} from '../utils/menu-footer.service';
-import { ParametrosLocaisService } from '../parametros-locais.service';
-import { MessageService } from '../utils/message.service';
 
 @Injectable({
     providedIn: 'root'
@@ -19,9 +17,7 @@ export class BilheteEsportivoService {
     idJogo = this.idJogoSource.asObservable();
 
     constructor(
-        private menuFooterService: MenuFooterService,
-        private messageService: MessageService,
-        private paramsService: ParametrosLocaisService
+        private menuFooterService: MenuFooterService
     ) {
         const itens = this.getItens();
 
@@ -31,17 +27,12 @@ export class BilheteEsportivoService {
     }
 
     atualizarItens(itens): void {
-        let maxItems = this.paramsService.getOpcoes().quantidade_max_jogos_bilhete;
+        const itensSerializado = JSON.stringify(itens);
+        localStorage.setItem('itens-bilhete-esportivo', itensSerializado);
 
-        if (itens.length > maxItems) {
-            this.messageService.warning(`Por favor, inclua no MÁXIMO ${maxItems} eventos.`);
-        } else {
-            const itensSerializado = JSON.stringify(itens);
-            localStorage.setItem('itens-bilhete-esportivo', itensSerializado);
+        this.menuFooterService.atualizarQuantidade(itens.length);
 
-            this.menuFooterService.atualizarQuantidade(itens.length);
-            this.itensSource.next(itens);
-        }
+        this.itensSource.next(itens);
     }
 
     getItens() {
