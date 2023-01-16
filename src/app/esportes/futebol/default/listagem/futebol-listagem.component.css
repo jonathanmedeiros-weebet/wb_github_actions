@@ -144,6 +144,10 @@
     display: none !important;
 }
 
+app-destaques {
+    margin: 0 5px;
+}
+
 @media only screen and (max-width: 1024px) {
     .wrap-sticky {
         padding: 0;
@@ -179,5 +183,9 @@
 
     .filter {
         margin: 5px 0;
+    }
+
+    app-destaques {
+        margin: 0;
     }
 }
