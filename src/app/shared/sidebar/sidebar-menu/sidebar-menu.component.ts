@@ -36,7 +36,7 @@ export class SidebarMenuComponent implements OnInit {
     unsub$ = new Subject();
     linguagemSelecionada;
     whatsapp;
-    isModoCambista = false;
+    modoCambista = false;
 
     constructor(
         private auth: AuthService,
@@ -53,7 +53,7 @@ export class SidebarMenuComponent implements OnInit {
         this.isAppMobile = this.auth.isAppMobile();
         this.isMobileScreen = window.innerWidth < 1025;
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
-        this.isModoCambista = this.paramsService.getOpcoes().modo_cambista;
+        this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
