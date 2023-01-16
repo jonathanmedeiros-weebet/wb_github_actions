@@ -267,7 +267,8 @@
         "s10sports.bet": "gulp s10sports.bet",
         "apostafacil.wee.bet": "gulp apostafacil.wee.bet",
         "reidabet.wee.bet": "gulp reidabet.wee.bet",
-        "primoos.bet": "gulp primoos.bet"
+        "primoos.bet": "gulp primoos.bet",
+        "realsport.wee.bet": "gulp realsport.wee.bet"
     },
     "private": true,
     "dependencies": {

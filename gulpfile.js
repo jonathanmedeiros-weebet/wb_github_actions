@@ -2455,3 +2455,12 @@ gulp.task('primoos.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('realsport.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "realsport.wee.bet",
+        banca: "REAL SPORT",
+        styles: "",
+    });
+});
