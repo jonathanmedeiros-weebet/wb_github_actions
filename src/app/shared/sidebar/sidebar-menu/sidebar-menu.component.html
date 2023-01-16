@@ -1,19 +1,21 @@
 <div class="header-menu">
     <div class="options">
-        <a (click)="pesquisarTicket()">
-            <i class="fa fa-ticket"></i>
-            {{'geral.consultarBilhete' | translate}}
-        </a>
+        <ng-container *ngIf="modoCambista">
+            <a (click)="pesquisarTicket()">
+                <i class="fa fa-ticket"></i>
+                {{'geral.consultarBilhete' | translate}}
+            </a>
 
-        <a (click)="pesquisarCartao()" *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
-            <i class="fa fa-credit-card"></i>
-            {{'cartoes.consultarCartao' | translate}}
-        </a>
+            <a (click)="pesquisarCartao()" *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
+                <i class="fa fa-credit-card"></i>
+                {{'cartoes.consultarCartao' | translate}}
+            </a>
 
-        <a (click)="abrirSolicitacaoSaqueCartao()" *ngIf="cartaoApostaHabilitado && !isLoggedIn">
-            <i class="fa fa-credit-card"></i>
-            {{'cartoes.solicitarSaque' | translate}}
-        </a>
+            <a (click)="abrirSolicitacaoSaqueCartao()" *ngIf="cartaoApostaHabilitado && !isLoggedIn">
+                <i class="fa fa-credit-card"></i>
+                {{'cartoes.solicitarSaque' | translate}}
+            </a>
+        </ng-container>
 
         <a (click)="abrirResultados()" *ngIf="isLoggedIn">
             <i class="fa-solid fa-square-poll-vertical"></i>
