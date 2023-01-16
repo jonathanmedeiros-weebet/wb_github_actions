@@ -29,10 +29,10 @@
             </div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gamesDestaque">
-                    <img title="{{game.gameName}}"
-                         src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                    <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                    <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
                     <div class="game-tile-buttons">
-                        <a *ngIf="game.dataType == 'RNG'"
+                        <a *ngIf="game.gameDemo"
                            [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                            class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
@@ -64,10 +64,10 @@
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot">
-                        <img title="{{game.gameName}}"
-                             src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
-                            <a *ngIf="game.dataType == 'RNG'"
+                            <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
@@ -105,10 +105,10 @@
                 <div class="game-list game-list-inline" #scrollGames id="raspadinha-scroll"
                      (scroll)="onScroll('raspadinha')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha">
-                        <img title="{{game.gameName}}"
-                             src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
-                            <a *ngIf="game.dataType == 'RNG'"
+                            <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
                                class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
@@ -145,10 +145,10 @@
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa">
-                        <img title="{{game.gameName}}"
-                             src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
-                            <a *ngIf="game.dataType == 'RNG'"
+                            <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
@@ -184,10 +184,10 @@
                 </div>
                 <div class="game-list game-list-inline">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
-                        <img title="{{game.gameName}}"
-                             src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
-                            <a *ngIf="game.dataType == 'RNG'"
+                            <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
@@ -215,10 +215,11 @@
             <div class="titulo">{{gameTitle | titlecase}}</div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gameList">
-                    <img title="{{game.gameName}}"
-                         src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                    <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                    <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
                     <div class="game-tile-buttons">
-                        <a *ngIf="game.dataType == 'RNG'" [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                        <a *ngIf="game.gameDemo"
+                           [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                            class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
 
                         <ng-container *ngIf="isLoggedIn && isCliente">

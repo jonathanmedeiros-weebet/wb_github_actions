@@ -274,6 +274,13 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                name: 'Bingo',
+                link: '/casino/c/wall/bingo',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
                 name: this.translate.instant('submenu.cassinoAoVivo'),
                 link: '/casino/c/live',
                 icon_class: 'fa-solid fa-dice',
