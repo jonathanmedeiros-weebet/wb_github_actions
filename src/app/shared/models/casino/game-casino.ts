@@ -3,4 +3,6 @@ export class GameCasino {
     gameID: any;
     dataType: any;
     gameTypeID: any;
+    fornecedor: any;
+    gameDemo: any;
 }
