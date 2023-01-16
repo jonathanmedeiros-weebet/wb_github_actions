@@ -207,6 +207,45 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="gamesBingo.length > 0" class="bloco">
+            <div class="bloco-header">
+                <div class="titulo">Bingo</div>
+                <div class="ver-todos" *ngIf="gamesBingo.length > 5">
+                    <a [routerLink]="['/casino/c/wall/bingo']">
+                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="games-container">
+                <div class="scroll-button scroll-left disabled-scroll-button" id="bingo-left"
+                     (click)="scrollLeft('bingo')"  *ngIf="gamesBingo.length > 5">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="game-list game-list-inline">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
+                        <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <div class="game-tile-buttons">
+                            <a *ngIf="game.gameDemo"
+                               [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                               class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
+
+                            <ng-container *ngIf="isLoggedIn && isCliente">
+                                <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
+                                   class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
+                            </ng-container>
+                            <ng-container *ngIf="!isLoggedIn">
+                                <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-button scroll-right enabled-scroll-button" id="bingo-right"
+                     (click)="scrollRight('bingo')" *ngIf="gamesBingo.length > 5">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
     </div>
     <app-footer [container]="listagem"></app-footer>
 
