@@ -23,7 +23,7 @@
 
 <ul *ngIf="contexto != 'cambista' && contexto != 'cliente'" id="menu-side-left" class="sidebar-nav" [ngClass]="{'collapsed': collapsed}">
     <ng-container *ngIf="contexto == 'esportes'">
-        <div class="destaques-regiao hide-mobile" *ngIf="cartaoApostaHabilitado && !isNotCambista">
+        <div class="destaques-regiao hide-mobile" *ngIf="cartaoApostaHabilitado && !isNotCambista && modoCambista">
             <span class="group" *ngIf="!collapsed">{{'cartoes.titulo' | translate}}</span>
             <li>
                 <a (click)="abrirConsultarCartao()">
