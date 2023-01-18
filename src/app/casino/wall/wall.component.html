@@ -221,7 +221,7 @@
                      (click)="scrollLeft('bingo')"  *ngIf="gamesBingo.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
-                <div class="game-list game-list-inline">
+                <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
                         <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
