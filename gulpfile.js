@@ -2465,3 +2465,12 @@ gulp.task('realsport.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsplay.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsplay.bet",
+        banca: "BETS PLAY",
+        styles: "",
+    });
+});
