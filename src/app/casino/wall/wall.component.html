@@ -207,7 +207,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="gamesBingo.length > 0" class="bloco">
+        <div *ngIf="salsaCassino" class="bloco">
             <div class="bloco-header">
                 <div class="titulo">Bingo</div>
                 <div class="ver-todos" *ngIf="gamesBingo.length > 5">
@@ -248,7 +248,7 @@
         </div>
         <div class="bloco">
             <div class="bloco-header">
-                <div class="titulo">Ao Vivo</div>
+                <div class="titulo">{{'cassino.aoVivo' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesLive.length > 5">
                     <a [routerLink]="['/casino/c/wall/live']">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
@@ -312,4 +312,4 @@
             </div>
         </div>
     </ng-template>
-
+</div>
