@@ -40,7 +40,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         '/casino/c/wall/raspadinha': 116,
         '/casino/c/wall/roleta': 86,
         '/casino/c/wall/mesa': 80,
-        '/casino/c/live': 138
+        '/casino/c/wall/live': 138
     };
 
     paddingMenu = 0;
@@ -282,7 +282,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
             },
             {
                 name: this.translate.instant('submenu.cassinoAoVivo'),
-                link: '/casino/c/live',
+                link: '/casino/c/wall/live',
                 icon_class: 'fa-solid fa-dice',
                 svgIcon: false,
                 svgSrc: '',
