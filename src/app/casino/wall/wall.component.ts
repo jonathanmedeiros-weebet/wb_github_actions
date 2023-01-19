@@ -39,6 +39,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesRoleta: GameCasino[];
     gamesMesa: GameCasino[];
     gamesBingo: GameCasino[];
+    gamesLive: GameCasino[];
 
     blink: string;
 
@@ -67,6 +68,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesRoleta = this.filterRoleta(response.gameList);
             this.gamesMesa = this.filterMesa(response.gameList);
             this.gamesBingo = this.filterBingo(response.gameList);
+            this.gamesLive = this.filterLive(response.gameList);
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
 
@@ -113,6 +115,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                         case 'bingo':
                             this.gameList = this.gamesBingo;
                             this.gameTitle = 'Bingo';
+                            break;
+                        case 'live':
+                            this.gameList = this.gamesLive;
+                            this.gameTitle = this.translate.instant('cassino.aoVivo');
                             break;
                     }
                 }
@@ -163,6 +169,12 @@ export class WallComponent implements OnInit, AfterViewInit {
     filterBingo(games) {
         return games.filter(function (game) {
             return game.gameTypeID === 'bingo';
+        });
+    }
+
+    filterLive(games) {
+        return games.filter(function (game) {
+            return game.gameTypeID === 'lg';
         });
     }
 
