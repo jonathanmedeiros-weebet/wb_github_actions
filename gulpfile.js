@@ -2474,3 +2474,12 @@ gulp.task('betsplay.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ecobets.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "ecobets.wee.bet",
+        banca: "ECO BETS",
+        styles: "",
+    });
+});
