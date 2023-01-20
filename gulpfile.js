@@ -2484,3 +2484,21 @@ gulp.task('ecobets.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pointbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "pointbet.wee.bet",
+        banca: "POINT BET",
+        styles: "",
+    });
+});
+
+gulp.task('3tbet.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "3tbet.com.br",
+        banca: "3T BET",
+        styles: "",
+    });
+});

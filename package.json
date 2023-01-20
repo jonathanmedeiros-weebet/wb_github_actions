@@ -270,7 +270,9 @@
         "primoos.bet": "gulp primoos.bet",
         "realsport.wee.bet": "gulp realsport.wee.bet",
         "betsplay.bet": "gulp betsplay.bet",
-        "ecobets.wee.bet": "gulp ecobets.wee.bet"
+        "ecobets.wee.bet": "gulp ecobets.wee.bet",
+        "pointbet.wee.bet": "gulp pointbet.wee.bet",
+        "3tbet.com.br": "gulp 3tbet.com.br"
     },
     "private": true,
     "dependencies": {
