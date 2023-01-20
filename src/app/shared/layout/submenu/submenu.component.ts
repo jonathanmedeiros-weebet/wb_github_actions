@@ -225,14 +225,14 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().tenis
             },
             {
-                name: this.translate.instant('submenu.quininha'),
+                name: this.paramsService.getQuininhaNome(),
                 link: '/loterias/quininha',
                 icon_class: 'fa-solid fa-clover',
                 category: 'loteria',
                 active: this.paramsService.quininhaAtiva()
             },
             {
-                name: this.translate.instant('submenu.seninha'),
+                name: this.paramsService.getSeninhaNome(),
                 link: '/loterias/seninha',
                 icon_class: 'fa-solid fa-clover',
                 category: 'loteria',
