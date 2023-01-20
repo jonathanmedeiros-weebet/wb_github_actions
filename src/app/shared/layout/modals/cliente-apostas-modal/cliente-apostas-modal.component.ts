@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {
     AcumuladaoService,
     ApostaEsportivaService,
+    ApostaLoteriaService,
     ApostaService,
     DesafioApostaService,
     MenuFooterService,
@@ -71,7 +72,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         public activeModal: NgbActiveModal,
         private acumuladaoService: AcumuladaoService,
         private desafioApostaService: DesafioApostaService,
-        private cassinoService: CasinoApiService
+        private cassinoService: CasinoApiService,
+        private loteriaService: ApostaLoteriaService
     ) {
         super();
 
@@ -148,6 +150,13 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                     apostas => this.handleResponse(apostas),
                     error => this.handleError(error)
                 );
+                break;
+            case 'loteria':
+                this.loteriaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             default:
                 this.handleResponse([]);

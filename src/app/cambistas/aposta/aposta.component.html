@@ -18,7 +18,8 @@
                (click)="changeTab('acumuladao')">{{'geral.acumuladao' | translate}} </a>
             <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''"
                (click)="changeTab('desafio')">{{'geral.desafio' | translate}}</a>
-            <!-- <a *ngIf="cassinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''" (click)="changeTab('cassino')">{{'geral.cassino' | translate}}</a> -->
+            <a *ngIf="loteriasHabilitada" [ngClass]="tabSelected == 'loteria' ? 'active' : ''"
+               (click)="changeTab('loteria')">{{'geral.loteria' | translate}}</a>
         </div>
 
         <div class="content-body">
@@ -30,6 +31,7 @@
                         <option value="acumuladao"
                                 *ngIf="acumuladaoHabilitado">{{'geral.acumuladao' | translate}}</option>
                         <option value="desafio" *ngIf="desafioHabilitado">{{'geral.desafio' | translate}}</option>
+                        <option value="loteria" *ngIf="loteriasHabilitada">{{'geral.loteria' | translate}}</option>
                     </select>
 
                     <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="{{'geral.apostador' | translate}} "

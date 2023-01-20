@@ -58,6 +58,7 @@
 }
 
 .odds {
+    text-align: center;
     flex-grow: 1;
     justify-content: start;
     padding: 8px 0;

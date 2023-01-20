@@ -16,6 +16,8 @@
                (click)="changeTab('desafio')">{{'geral.desafio' | translate}}</a>
             <a *ngIf="casinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''"
                (click)="changeTab('cassino')">{{'geral.cassino' | translate}}</a>
+            <a *ngIf="loteriasHabilitada" [ngClass]="tabSelected == 'loteria' ? 'active' : ''"
+               (click)="changeTab('loteria')">{{'geral.loteria' | translate}}</a>
         </div>
 
         <div class="content-body">

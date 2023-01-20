@@ -5,7 +5,7 @@ import {MessageService} from '../../shared/services/utils/message.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
-import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService } from 'src/app/services';
+import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService, ApostaLoteriaService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { forEach } from 'lodash';
 import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -60,6 +60,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private apostaEsportivaService: ApostaEsportivaService,
         private acumuladaoService: AcumuladaoService,
         private cassinoService: CasinoApiService,
+        private loteriaServie: ApostaLoteriaService,
         public desafioApostaService: DesafioApostaService,
         public formatter: NgbDateParserFormatter,
         private calendar: NgbCalendar,
@@ -141,6 +142,13 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                     apostas => this.handleResponse(apostas),
                     error => this.handleError(error)
                 );
+                break;
+            case 'loteria':
+                this.loteriaServie.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             default:
                 this.handleResponse([]);

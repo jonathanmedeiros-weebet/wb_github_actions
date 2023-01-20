@@ -5,6 +5,7 @@ import {takeUntil} from 'rxjs/operators';
 import {
     AcumuladaoService,
     ApostaEsportivaService,
+    ApostaLoteriaService,
     ApostaService,
     DesafioApostaService,
     MessageService,
@@ -61,6 +62,7 @@ export class ApostaComponent implements OnInit {
         private apostaEsportivaService: ApostaEsportivaService,
         private acumuladaoService: AcumuladaoService,
         private cassinoService: CasinoApiService,
+        private loteriaService: ApostaLoteriaService,
         public desafioApostaService: DesafioApostaService,
         public formatter: NgbDateParserFormatter,
         public messageService: MessageService,
@@ -136,6 +138,13 @@ export class ApostaComponent implements OnInit {
                     apostas => this.handleResponse(apostas),
                     error => this.handleError(error)
                 );
+                break;
+            case 'loteria':
+                this.loteriaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             default:
                 this.handleResponse([]);
