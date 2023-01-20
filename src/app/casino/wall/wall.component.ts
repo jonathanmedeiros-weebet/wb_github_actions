@@ -61,7 +61,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.blink = this.router.url.split('/')[2];
-        this.salsaCassino = this.paramsService.getOpcoes().salsaCassino;
+        this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList().subscribe(response => {
             this.gamesCassino = response.gameList;
             this.gamesDestaque = response.destaques;

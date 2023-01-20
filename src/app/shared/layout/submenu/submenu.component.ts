@@ -278,7 +278,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 link: '/casino/c/wall/bingo',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
-                active: this.paramsService.getOpcoes().salsaCassino
+                active: this.paramsService.getOpcoes().salsa_cassino
             },
             {
                 name: this.translate.instant('submenu.cassinoAoVivo'),
