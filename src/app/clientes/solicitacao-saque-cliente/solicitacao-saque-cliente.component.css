@@ -141,7 +141,7 @@
 
     .input-valor {
         border: 0;
-        border-bottom: 2px solid var(--inputs-odds);
+        border-bottom: 2px solid var(--game);
         color: var(--foreground);
         border-radius: 0;
 

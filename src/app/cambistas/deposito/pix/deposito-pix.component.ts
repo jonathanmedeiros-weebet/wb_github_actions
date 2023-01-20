@@ -32,8 +32,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
         <div class="buttons">
-            <button class="btn btn-custom2" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
-            <button class="btn btn-custom2" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
+            <button class="btn btn-custom2 btn-w-100" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
+            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
         </div>
     </div>
     `
