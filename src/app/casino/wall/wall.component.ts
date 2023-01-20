@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren} from '@angular/core';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
-import {AuthService, SidebarService} from './../../services';
+import {AuthService, ParametrosLocaisService, SidebarService} from './../../services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +25,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     modalRef;
     isHome = false;
     isMobile = false;
+    salsaCassino;
 
     isHomeCassino = true;
     gameList: GameCasino[];
@@ -53,13 +54,14 @@ export class WallComponent implements OnInit, AfterViewInit {
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private paramsService: ParametrosLocaisService
     ) {
     }
 
     ngOnInit(): void {
         this.blink = this.router.url.split('/')[2];
-
+        this.salsaCassino = this.paramsService.getOpcoes().salsaCassino;
         this.casinoApi.getGamesList().subscribe(response => {
             this.gamesCassino = response.gameList;
             this.gamesDestaque = response.destaques;
