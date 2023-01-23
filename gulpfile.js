@@ -711,15 +711,6 @@ gulp.task('moralbets.com', function (done) {
     });
 });
 
-gulp.task('osascosportsbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "osascosportsbet.wee.bet",
-        banca: "OSASCO SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('globoesporte.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -798,15 +789,6 @@ gulp.task('esportepremium.wee.bet', function (done) {
         host: "esportepremium.wee.bet",
         banca: "ESPORTE PREMIUM",
         styles: "",
-    });
-});
-
-gulp.task('acsportsbets.site', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "acsportsbets.site",
-        banca: "AC SPORTS BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #0000ff; --foreground-highlight: #fff; --odds: #191970; --foreground-odds: #fff;--foreground-selected-odds: #fff;",
     });
 });
 
@@ -1041,16 +1023,6 @@ gulp.task('megabetsport.com', function (done) {
         server: "front4.wee.bet",
         host: "megabetsport.com",
         banca: "MEGA BET SPORT",
-        styles: "",
-    });
-});
-
-gulp.task('betsmaranhao.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betsmaranhao.wee.bet",
-        shared_url: "betsmaranhao.com",
-        banca: "BETS MARANHÃO",
         styles: "",
     });
 });
@@ -1371,24 +1343,6 @@ gulp.task('lancesports.wee.bet', function (done) {
     });
 });
 
-gulp.task('betceara.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betceara.net",
-        banca: "BET CEARÁ",
-        styles: "",
-    });
-});
-
-gulp.task('betes98.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betes98.wee.bet",
-        banca: "BETES98",
-        styles: "",
-    });
-});
-
 gulp.task('betimperativo.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1418,16 +1372,6 @@ gulp.task('vencedorbet.bet', function (done) {
         host: "vencedorbet.bet",
         banca: "VENCEDOR BET",
         styles: "",
-    });
-});
-
-gulp.task('mundialsport.com.br', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "mundialsport.com.br",
-        banca: "MUNDIAL SPORT",
-        styles: "",
-        pixel: "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '664481668577874'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=664481668577874&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->"
     });
 });
 
@@ -2026,24 +1970,6 @@ gulp.task('supremodasorte.wee.bet', function (done) {
     });
 });
 
-gulp.task('amesportesbets.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "amesportesbets.com",
-        banca: "AM ESPORTES BETS",
-        styles: "",
-    });
-});
-
-gulp.task('narigasports.com.br', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "narigasports.com.br",
-        banca: "NARIGA SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('spmaster.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2179,15 +2105,6 @@ gulp.task('ritsbet.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "ritsbet.wee.bet",
         banca: "RITS BET",
-        styles: "",
-    });
-});
-
-gulp.task('pixfacil.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "pixfacil.bet",
-        banca: "PIX FÁCIL",
         styles: "",
     });
 });
