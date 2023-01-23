@@ -133,6 +133,6 @@ gulp.task('debug-build', function (done) {
         nome: "DEBUG WEEBET",
         slug: "weebet.local",
         splash_color: "#000000",
-        pkg_folder: (process.env.APP_ID).split('.').join('/')
+        pkg_folder: ('bet.wee.debug.app').split('.').join('/')
     });
 });
