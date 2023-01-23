@@ -125,3 +125,14 @@ gulp.task('custom-build', function (done) {
         pkg_folder: (process.env.APP_ID).split('.').join('/')
     });
 });
+
+gulp.task('debug-build', function (done) {
+    tasks(done, {
+        app_id: "bet.wee.debug.app",
+        url: "http://192.168.0.87:4200",
+        nome: "DEBUG WEEBET",
+        slug: "weebet.local",
+        splash_color: "#000000",
+        pkg_folder: (process.env.APP_ID).split('.').join('/')
+    });
+});
