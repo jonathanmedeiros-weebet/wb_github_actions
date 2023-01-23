@@ -2419,3 +2419,12 @@ gulp.task('3tbet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('startbet.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "startbet.com.br",
+        banca: "START BET",
+        styles: "",
+    });
+});
