@@ -2428,3 +2428,12 @@ gulp.task('startbet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nacionalbets.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "nacionalbets.com",
+        banca: "NACIONAL BETS",
+        styles: "",
+    });
+});
