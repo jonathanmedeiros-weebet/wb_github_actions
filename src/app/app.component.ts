@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {CadastroModalComponent} from './shared/layout/modals';
+import {CadastroModalComponent, ValidarEmailModalComponent} from './shared/layout/modals';
 
 import {TranslateService} from '@ngx-translate/core';
 

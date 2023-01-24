@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{'ativacaoEmail.ativacaoDeCadastro' | translate}}</h4>
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-times"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <ng-container *ngIf="submitting">
+        <app-spinner class="spinner"></app-spinner>
+    </ng-container>
+    <ng-container *ngIf="!submitting">
+        <div class="row">
+            <div class="col-12">
+                {{'ativacaoEmail.mensagemAtivacao' | translate}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <span
+                    *ngIf="!botaoReenviarAtivo">{{'ativacaoEmail.reenvioDisponivelEm' | translate:{'cronometro': cronometro} }}</span>
+                <button *ngIf="botaoReenviarAtivo" class="mt-3 btn btn-custom btn-w-100" type="submit"
+                        (click)="reenviarLinkAtivacao()">
+                    <i class="fa fa-share"></i>
+                    {{'ativacaoEmail.reenviaMensagem' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>

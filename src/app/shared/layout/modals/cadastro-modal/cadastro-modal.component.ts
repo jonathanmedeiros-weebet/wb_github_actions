@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import { Pagina } from 'src/app/models';
 import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
+import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
+import {NgHcaptchaService} from 'ng-hcaptcha';
 
 
 @Component({
@@ -133,18 +135,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
-                () => {
-                    // this.auth.login({username: values.usuario, password: values.senha, etapa: 1}).subscribe(
-                    //     () => {
-                    //         this.messageService.success('Cadastro realizado com sucesso!');
-                    //     },
-                    //     error => this.messageService.error(error)
-                    // );
+                (res) => {
+                    sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.activeModal.dismiss();
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
+                    this.modalService.open(ValidarEmailModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        windowClass: 'modal-pop-up',
+                        centered: true,
+                        backdrop: 'static'
+                    });
                 },
                 error => {
                     this.messageService.error(error);
+                    this.form.patchValue({captcha: null});
                     this.submitting = false;
                 }
             );

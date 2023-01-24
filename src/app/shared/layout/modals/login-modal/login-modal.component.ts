@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
-import { AuthDoisFatoresModalComponent } from '../../modals';
+import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -113,7 +113,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     if (error.code === 'cadastro_inativo') {
                         sessionStorage.setItem('user', JSON.stringify(error.user));
                         this.activeModal.dismiss();
-                        this.router.navigate(['auth/validar-email']);
+                        this.modalService.open(ValidarEmailModalComponent, {
+                            ariaLabelledBy: 'modal-basic-title',
+                            windowClass: 'modal-pop-up',
+                            centered: true,
+                            backdrop: 'static'
+                        });
                     }
                 }
             );

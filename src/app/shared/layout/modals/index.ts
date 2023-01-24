@@ -21,3 +21,4 @@ export { ClientePerfilModalComponent } from './cliente-perfil-modal/cliente-perf
 export { ClientePixModalComponent } from './cliente-pix-modal/cliente-pix-modal.component';
 export { ClienteSenhaModalComponent } from './cliente-senha-modal/cliente-senha-modal.component';
 export { ClienteApostasModalComponent } from './cliente-apostas-modal/cliente-apostas-modal.component';
+export { ValidarEmailModalComponent } from './validar-email-modal/validar-email-modal.component';
