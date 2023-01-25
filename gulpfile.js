@@ -2442,7 +2442,7 @@ gulp.task('betnazebra.com.br', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "betnazebra.com.br",
-        banca: "BET NA ZEBRA",
+        banca: "BETNAZEBRA",
         styles: "",
     });
 });
