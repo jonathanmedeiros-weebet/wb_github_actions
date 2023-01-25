@@ -27,11 +27,11 @@ function tasks(done, config) {
 
     // Flutter Build commands
     gulp.src(['/'])
-        .pipe(exec('flutter doctor', options))
-        .pipe(exec('flutter pub get', options))
-        .pipe(exec('flutter pub run flutter_launcher_icons:main', options))
-        .pipe(exec('flutter pub run flutter_native_splash:create', options))
-        .pipe(exec('flutter build apk --split-per-abi', options))
+        // .pipe(exec('flutter doctor', options))
+        // .pipe(exec('flutter pub get', options))
+        // .pipe(exec('flutter pub run flutter_launcher_icons:main', options))
+        // .pipe(exec('flutter pub run flutter_native_splash:create', options))
+        // .pipe(exec('flutter build apk --split-per-abi', options))
         .pipe(exec.reporter(reportOptions));
 
 
