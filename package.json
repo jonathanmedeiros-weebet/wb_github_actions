@@ -1,0 +1,12 @@
+{
+  "name": "weebet_mobile",
+  "version": "1.0.0",
+  "description": "Weebet Mobile App.",
+  "author": "SportiveData",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-exec": "^5.0.0",
+    "gulp-remote-src": "^0.4.4",
+    "gulp-replace": "^1.1.3"
+  }
+}
