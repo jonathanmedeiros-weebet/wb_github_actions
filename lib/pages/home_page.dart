@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:weebet_mobile/pages/printer_settings_page.dart';
 import 'package:weebet_mobile/services/printer_service.dart';
@@ -65,7 +66,8 @@ class _HomePageState extends State<HomePage> {
           onMessageReceived: (JavaScriptMessage weebetMessage) {
         _executePostMessageAction(jsonDecode(weebetMessage.message));
       })
-      ..enableZoom(false);
+      ..enableZoom(false)
+      ..setBackgroundColor(Color(widget.bgColor));
 
     _webViewController = webViewController;
 
@@ -76,6 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return Scaffold(
       backgroundColor: Color(widget.bgColor),
       appBar: const EmptyAppBar(),
