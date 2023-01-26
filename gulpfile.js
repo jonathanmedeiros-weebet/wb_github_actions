@@ -2447,3 +2447,12 @@ gulp.task('betnazebra.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cashsportes.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "cashsportes.bet",
+        banca: "CASH SPORTES",
+        styles: "",
+    });
+});

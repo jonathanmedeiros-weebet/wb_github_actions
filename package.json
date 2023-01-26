@@ -266,7 +266,8 @@
         "3tbet.com.br": "gulp 3tbet.com.br",
         "startbet.com.br": "gulp startbet.com.br",
         "nacionalbets.com": "gulp nacionalbets.com",
-        "betnazebra.com.br": "gulp betnazebra.com.br"
+        "betnazebra.com.br": "gulp betnazebra.com.br",
+        "cashsportes.bet": "gulp cashsportes.bet"
     },
     "private": true,
     "dependencies": {
