@@ -59,7 +59,8 @@ class _HomePageState extends State<HomePage> {
       ..addJavaScriptChannel('WeebetMessage',
           onMessageReceived: (JavaScriptMessage weebetMessage) {
         _executePostMessageAction(jsonDecode(weebetMessage.message));
-      });
+      })
+      ..enableZoom(false);
 
     _webViewController = webViewController;
 
