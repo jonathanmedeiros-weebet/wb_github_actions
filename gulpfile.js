@@ -55,6 +55,27 @@ async function prepare(config) {
             base: 'https://weebet.s3.amazonaws.com/' + config.slug + '/logos/'
         })
             .pipe(gulp.dest('assets/'));
+
+        var options = {
+            continueOnError: false, // default = false, true means don't emit error event
+            pipeStdout: false, // default = false, true means stdout is written to file.contents
+            customTemplatingThing: "test" // content passed to lodash.template()
+        };
+        var reportOptions = {
+            err: true, // default = true, false means don't write err
+            stderr: true, // default = true, false means don't write stderr
+            stdout: true // default = true, false means don't write stdout
+        };
+
+        gulp.src('/')
+            .pipe(exec('rm -Rvf android/app/src/main/kotlin/*', options))
+            .pipe(exec('mkdir -p android/app/src/main/kotlin/' + config.pkg_folder), options)
+            .pipe(exec.reporter(reportOptions));
+
+        gulp.src(['gulp/MainActivity.kt'])
+            .pipe(replace('[PKG_NAME]', config.app_id))
+            .pipe(gulp.dest('android/app/src/main/kotlin/' + config.pkg_folder + '/'));
+            
     } catch (err) {
         console.error(err)
         process.exit(1)
@@ -62,7 +83,7 @@ async function prepare(config) {
 }
 
 /* Gulp Build */
-gulp.task('prepare-build', function(){
+gulp.task('prepare-build', function () {
     return prepare({
         app_id: process.env.APP_ID,
         url: process.env.CLIENT_URL,
