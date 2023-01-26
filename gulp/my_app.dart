@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       home: const HomePage(
         title: '[NOME_BANCA]',
         host: '[HOST]',
+        bgColor: 0xFF[SPLASH_COLOR],
       ),
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),

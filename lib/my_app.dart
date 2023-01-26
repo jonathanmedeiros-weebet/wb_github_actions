@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       home: const HomePage(
         title: 'Demo Weebet',
         host: 'https://demo.wee.bet',
+        bgColor: 0xFF000000,
       ),
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),

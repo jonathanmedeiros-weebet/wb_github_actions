@@ -13,8 +13,13 @@ import 'package:weebet_mobile/services/storage_service.dart';
 class HomePage extends StatefulWidget {
   final String host;
   final String title;
+  final int bgColor;
 
-  const HomePage({super.key, required this.title, required this.host});
+  const HomePage(
+      {super.key,
+      required this.title,
+      required this.host,
+      required this.bgColor});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -72,6 +77,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(widget.bgColor),
       appBar: const EmptyAppBar(),
       body: WebViewWidget(controller: _webViewController),
     );

@@ -31,6 +31,7 @@ async function prepare(config) {
         gulp.src(['gulp/my_app.dart'])
             .pipe(replace('[HOST]', config.url))
             .pipe(replace('[NOME_BANCA]', config.nome))
+            .pipe(replace('[SPLASH_COLOR]', config.splash_color.replace('#', '')))
             .pipe(gulp.dest('lib/'));
 
         gulp.src(['gulp/AndroidManifest.xml'])
