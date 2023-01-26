@@ -48,6 +48,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     unsub$ = new Subject();
     oddsAberto = [];
 
+    multiMarcadores = true;
     marcadores = true;
     cartoes = true;
     golsCasa = true;

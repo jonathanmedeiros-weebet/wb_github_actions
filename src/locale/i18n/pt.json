@@ -356,7 +356,10 @@
         "ultimoGolCasa": "Último Gol Casa",
         "golsFora": "Gols Fora - {{timeNome}}",
         "primeiroGolFora": "1º Gol Fora",
-        "ultimoGolFora": "Último Gol Fora"
+        "ultimoGolFora": "Último Gol Fora",
+        "multiMarcadores": "Multi Marcadores",
+        "doisOuMais": "2 ou Mais",
+        "tresOuMais": "3 ou Mais"
     },
     "loteria": {
         "quantidadeDeDezenasDaAposta": "Quantidade de dezenas da aposta",
