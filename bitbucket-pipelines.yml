@@ -22,7 +22,6 @@ pipelines:
             - flutter pub run flutter_launcher_icons:main
             - flutter pub run flutter_native_splash:create
             - flutter build apk --split-per-abi
-            - cp build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk build/app/outputs/flutter-apk/app.apk
             - aws s3 cp $APP_FILE $S3_BUCKET$APP_OUT --acl public-read
           services:
             - docker
