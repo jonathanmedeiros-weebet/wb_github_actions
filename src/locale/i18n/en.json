@@ -356,7 +356,10 @@
         "ultimoGolCasa": "Last Home Goal",
         "golsFora": "Away Goals - {{timeNome}}",
         "primeiroGolFora": "1st Away Goal",
-        "ultimoGolFora": "Last Away Goal"
+        "ultimoGolFora": "Last Away Goal",
+        "multiMarcadores": "Multi Scorers",
+        "doisOuMais": "2 or More",
+        "tresOuMais": "3 or More"
     },
     "loteria": {
         "quantidadeDeDezenasDaAposta": "Amount of dozens of the bet",
