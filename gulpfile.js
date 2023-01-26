@@ -75,7 +75,7 @@ async function prepare(config) {
         gulp.src(['gulp/MainActivity.kt'])
             .pipe(replace('[PKG_NAME]', config.app_id))
             .pipe(gulp.dest('android/app/src/main/kotlin/' + config.pkg_folder + '/'));
-            
+
     } catch (err) {
         console.error(err)
         process.exit(1)
@@ -102,5 +102,16 @@ gulp.task('debug-build', function (done) {
         slug: "weebet.local",
         splash_color: "#000000",
         pkg_folder: ('bet.wee.debug.app').split('.').join('/')
+    });
+});
+
+gulp.task('build-betnazebra', function (done) {
+    return prepare({
+        app_id: "br.com.betnazebra.app",
+        url: "https://betnazebra.com.br",
+        nome: "BetNaZebra",
+        slug: "betnazebra.com.br",
+        splash_color: "#000000",
+        pkg_folder: ('br.com.betnazebra.app').split('.').join('/')
     });
 });
