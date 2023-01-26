@@ -1929,7 +1929,7 @@ gulp.task('betbetix.com', function (done) {
         host: "betbetix.com",
         banca: "BETBETIX",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'><!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '568106641840572');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=568106641840572&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'><!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '568106641840572'); fbq('track', 'PageView'); fbq('track', 'ViewContect'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=568106641840572&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/5WSOiOS6b1' async></script>"
     });
 });
@@ -2004,6 +2004,7 @@ gulp.task('prowin.bet', function (done) {
         banca: "PROWIN",
         pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1336990900485810');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1336990900485810&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
         styles: "",
+        scripts: "<script data-cfasync='false' type='text/javascript' id='clever-core'>/ <![CDATA[ /(function (document, window) {var a, c = document.createElement('script'), f = window.frameElement;c.id = 'CleverCoreLoader66149';c.src = 'https://scripts.cleverwebserver.com/d3a732629f63f06541000b0f84e3070a.js';c.async = !0;c.type = 'text/javascript';c.setAttribute('data-target', window.name || (f && f.getAttribute('id')));c.setAttribute('data-callback', 'put-your-callback-function-here');c.setAttribute('data-callback-url-click', 'put-your-click-macro-here');c.setAttribute('data-callback-url-view', 'put-your-view-macro-here');try {a = parent.document.getElementsByTagName('script')[0] || document.getElementsByTagName('script')[0];} catch (e) {a = !1;}a || (a = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]);a.parentNode.insertBefore(c, a);})(document, window);/ ]]> /</script>",
     });
 });
 
@@ -2369,7 +2370,7 @@ gulp.task('primoos.bet', function (done) {
         server: "front2.wee.bet",
         host: "primoos.bet",
         banca: "PRIMOOS.BET",
-        pixel: "<!-- Meta Pixel Code --><script>    !function(f,b,e,v,n,t,s)    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?    n.callMethod.apply(n,arguments):n.queue.push(arguments)};    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';    n.queue=[];t=b.createElement(e);t.async=!0;    t.src=v;s=b.getElementsByTagName(e)[0];    s.parentNode.insertBefore(t,s)}(window, document,'script',    'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '2468428439977041');    fbq('track', 'PageView');    </script>    <noscript><img height='1' width='1' style='display:none'    src='https://www.facebook.com/tr?id=2468428439977041&ev=PageView&noscript=1'    /></noscript>    <!-- End Meta Pixel Code -->",
+        pixel: "<!-- Meta Pixel Code --><script>    !function(f,b,e,v,n,t,s)    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?    n.callMethod.apply(n,arguments):n.queue.push(arguments)};    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';    n.queue=[];t=b.createElement(e);t.async=!0;    t.src=v;s=b.getElementsByTagName(e)[0];    s.parentNode.insertBefore(t,s)}(window, document,'script',    'https://connect.facebook.net/en_US/fbevents.js');    fbq('init', '2468428439977041');    fbq('track', 'PageView');    </script>    <noscript><img height='1' width='1' style='display:none'    src='https://www.facebook.com/tr?id=2468428439977041&ev=PageView&noscript=1'    /></noscript>    <!-- End Meta Pixel Code --><!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '794852214719146');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=794852214719146&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
         styles: "",
     });
 });
@@ -2425,6 +2426,7 @@ gulp.task('startbet.com.br', function (done) {
         host: "startbet.com.br",
         banca: "START BET",
         styles: "",
+        google_tag_part_1: "<!-- Google tag (gtag.js) --><script async src=''></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-CL4H2K1W87');</script>",
     });
 });
 
