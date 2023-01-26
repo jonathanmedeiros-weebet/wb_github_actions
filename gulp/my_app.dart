@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '[NOME_BANCA]',
+      color: const Color(0xFF[SPLASH_COLOR]),
       home: const HomePage(
         title: '[NOME_BANCA]',
         host: '[HOST]',
