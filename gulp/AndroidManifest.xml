@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bet.wee.app.weebet_mobile">
+    package="[PKG_NAME]">
    <application
         android:label="[NOME_BANCA]"
         android:name="${applicationName}"

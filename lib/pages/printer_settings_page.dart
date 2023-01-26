@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
+import 'package:image/image.dart' as img;
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
 import 'package:flutter/services.dart';
-import 'package:image/image.dart' as img;
-import 'package:weebet_mobile/services/printer_service.dart';
 
+import 'package:weebet_mobile/services/printer_service.dart';
 import 'package:weebet_mobile/services/storage_service.dart';
 
 class PrinterSettingsPage extends StatefulWidget {
@@ -84,7 +84,8 @@ class _PrinterSettingsPageState extends State<PrinterSettingsPage> {
 
     if (printGraphics == false) {
       bytes += generator.text("Lorem ipsum",
-          styles: const PosStyles(
+          // ignore: prefer_const_constructors
+          styles: PosStyles(
             align: PosAlign.center,
             height: PosTextSize.size2,
             width: PosTextSize.size2,
@@ -101,7 +102,8 @@ class _PrinterSettingsPageState extends State<PrinterSettingsPage> {
 
     bytes += generator.text(
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada turpis eget turpis fermentum, ac.',
-        styles: const PosStyles(align: PosAlign.center, bold: false),
+        // ignore: prefer_const_constructors
+        styles: PosStyles(align: PosAlign.center, bold: false),
         linesAfter: 5);
     return bytes;
   }

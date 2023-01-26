@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         host: 'https://demo.wee.bet',
       ),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
+      theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
     );
   }
