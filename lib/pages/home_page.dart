@@ -54,7 +54,10 @@ class _HomePageState extends State<HomePage> {
       ..loadRequest(Uri.parse('${widget.host}/?app=TRUE&app_version=4'))
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (NavigationRequest request) {
-          if (request.url.startsWith(widget.host)) {
+          final sanitizedHost =
+              widget.host.replaceAll(RegExp('^(?:https?://)'), '');
+          if (request.url.startsWith('http://$sanitizedHost') ||
+              request.url.startsWith('https://$sanitizedHost')) {
             return NavigationDecision.navigate;
           } else {
             _utilitiesService.launchInBrowser(request.url);
