@@ -2483,3 +2483,12 @@ gulp.task('betpixnacional.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lutbet.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "lutbet.net",
+        banca: "LUTBET",
+        styles: "",
+    });
+});
