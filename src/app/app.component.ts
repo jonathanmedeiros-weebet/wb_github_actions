@@ -61,6 +61,15 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
+        if (this.modoClienteHabilitado && this.router.url === '/cadastro') {
+            this.modalService.open(CadastroModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+                windowClass: 'modal-700'
+            });
+            this.router.navigate(['esportes/futebol']);
+        }
         this.route.queryParams
             .subscribe((params) => {
                 if (this.modoClienteHabilitado && params.afiliado) {

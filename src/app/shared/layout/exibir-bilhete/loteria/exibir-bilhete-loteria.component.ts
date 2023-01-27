@@ -22,7 +22,7 @@ newNavigator = window.navigator;
 export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     @ViewChild('cupom', { static: false }) cupom: ElementRef;
     @Input() aposta: any;
-    LOGO = config.LOGO;
+    LOGO;
     informativoRodape;
     sorteios = [];
     unsub$ = new Subject();
@@ -41,6 +41,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+        this.LOGO = this.imagensService.logo;
         const opcoes = this.paramsService.getOpcoes();
         this.informativoRodape = opcoes.informativoRodape;
         this.appMobile = this.authService.isAppMobile();
