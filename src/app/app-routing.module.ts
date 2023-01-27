@@ -7,6 +7,7 @@ import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
 import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
 import {CambistaGuard} from './shared/services/guards/cambista.guard';
+import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
     {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
                 path: '',
                 redirectTo: 'esportes/futebol',
                 pathMatch: 'full'
+            },
+            {
+                path: 'cadastro',
+                component: AppComponent
             },
             {
                 path: 'acumuladao',
