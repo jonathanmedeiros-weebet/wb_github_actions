@@ -267,7 +267,9 @@
         "startbet.com.br": "gulp startbet.com.br",
         "nacionalbets.com": "gulp nacionalbets.com",
         "betnazebra.com.br": "gulp betnazebra.com.br",
-        "cashsportes.bet": "gulp cashsportes.bet"
+        "cashsportes.bet": "gulp cashsportes.bet",
+        "cisper.bet": "gulp cisper.bet",
+        "popularbet.com.br": "gulp popularbet.com.br"
     },
     "private": true,
     "dependencies": {

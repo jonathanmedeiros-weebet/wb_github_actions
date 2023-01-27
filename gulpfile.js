@@ -2456,3 +2456,21 @@ gulp.task('cashsportes.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cisper.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "cisper.bet",
+        banca: "CISPER.BET",
+        styles: "",
+    });
+});
+
+gulp.task('popularbet.com.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "popularbet.com.br",
+        banca: "POPULAR BET",
+        styles: "",
+    });
+});
