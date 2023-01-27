@@ -672,8 +672,8 @@ button {
     cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--game);
-    color: var(--foreground-game);
+    background-color: var(--league);
+    color: var(--foreground-league);
     padding: 5px 15px;
 }
 
