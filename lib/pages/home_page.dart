@@ -54,11 +54,11 @@ class _HomePageState extends State<HomePage> {
       ..loadRequest(Uri.parse('${widget.host}/?app=TRUE&app_version=4'))
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (NavigationRequest request) {
-          if (request.url.startsWith("https://api.whatsapp.com")) {
+          if (request.url.startsWith(widget.host)) {
+            return NavigationDecision.navigate;
+          } else {
             _utilitiesService.launchInBrowser(request.url);
             return NavigationDecision.prevent;
-          } else {
-            return NavigationDecision.navigate;
           }
         },
       ))
