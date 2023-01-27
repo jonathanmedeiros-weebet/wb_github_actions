@@ -269,7 +269,8 @@
         "betnazebra.com.br": "gulp betnazebra.com.br",
         "cashsportes.bet": "gulp cashsportes.bet",
         "cisper.bet": "gulp cisper.bet",
-        "popularbet.com.br": "gulp popularbet.com.br"
+        "popularbet.com.br": "gulp popularbet.com.br",
+        "betpixnacional.com": "gulp betpixnacional.com"
     },
     "private": true,
     "dependencies": {

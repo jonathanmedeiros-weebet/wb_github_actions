@@ -2474,3 +2474,12 @@ gulp.task('popularbet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betpixnacional.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betpixnacional.com",
+        banca: "BET PIX NACIONAL",
+        styles: "",
+    });
+});
