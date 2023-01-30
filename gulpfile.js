@@ -1444,6 +1444,8 @@ gulp.task('pixsportbet.com', function (done) {
         host: "pixsportbet.com",
         banca: "PIX SPORT BET",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MLPCJ56');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-MLPCJ56'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
     });
 });
 
@@ -2004,7 +2006,7 @@ gulp.task('prowin.bet', function (done) {
         banca: "PROWIN",
         pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1336990900485810');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1336990900485810&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
         styles: "",
-        scripts: "<script data-cfasync='false' type='text/javascript' id='clever-core'>/ <![CDATA[ /(function (document, window) {var a, c = document.createElement('script'), f = window.frameElement;c.id = 'CleverCoreLoader66149';c.src = 'https://scripts.cleverwebserver.com/d3a732629f63f06541000b0f84e3070a.js';c.async = !0;c.type = 'text/javascript';c.setAttribute('data-target', window.name || (f && f.getAttribute('id')));c.setAttribute('data-callback', 'put-your-callback-function-here');c.setAttribute('data-callback-url-click', 'put-your-click-macro-here');c.setAttribute('data-callback-url-view', 'put-your-view-macro-here');try {a = parent.document.getElementsByTagName('script')[0] || document.getElementsByTagName('script')[0];} catch (e) {a = !1;}a || (a = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]);a.parentNode.insertBefore(c, a);})(document, window);/ ]]> /</script>",
+        scripts: "<script data-cfasync='false' type='text/javascript' id='clever-core'> /* <![CDATA[ */ (function (document, window) { var a, c = document.createElement('script'), f = window.frameElement; c.id = 'CleverCoreLoader66149'; c.src = 'https://scripts.cleverwebserver.com/d3a732629f63f06541000b0f84e3070a.js'; c.async = !0; c.type = 'text/javascript'; c.setAttribute('data-target', window.name || (f && f.getAttribute('id'))); c.setAttribute('data-callback', 'put-your-callback-function-here'); c.setAttribute('data-callback-url-click', 'put-your-click-macro-here'); c.setAttribute('data-callback-url-view', 'put-your-view-macro-here'); try { a = parent.document.getElementsByTagName('script')[0] || document.getElementsByTagName('script')[0]; } catch (e) { a = !1; } a || (a = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]); a.parentNode.insertBefore(c, a); })(document, window); /* ]]> */ </script>",
     });
 });
 
