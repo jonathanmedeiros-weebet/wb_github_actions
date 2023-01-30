@@ -2492,3 +2492,21 @@ gulp.task('lutbet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gooldeplaca.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gooldeplaca.com.br",
+        banca: "GOOL DE PLACA",
+        styles: "",
+    });
+});
+
+gulp.task('onepro.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "onepro.bet",
+        banca: "ONEPRO.BET",
+        styles: "",
+    });
+});

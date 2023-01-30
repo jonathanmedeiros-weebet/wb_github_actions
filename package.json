@@ -271,7 +271,9 @@
         "cisper.bet": "gulp cisper.bet",
         "popularbet.com.br": "gulp popularbet.com.br",
         "betpixnacional.com": "gulp betpixnacional.com",
-        "lutbet.net": "gulp lutbet.net"
+        "lutbet.net": "gulp lutbet.net",
+        "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
+        "onepro.bet": "gulp onepro.bet"
     },
     "private": true,
     "dependencies": {
