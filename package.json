@@ -273,7 +273,8 @@
         "betpixnacional.com": "gulp betpixnacional.com",
         "lutbet.net": "gulp lutbet.net",
         "gooldeplaca.com.br": "gulp gooldeplaca.com.br",
-        "onepro.bet": "gulp onepro.bet"
+        "onepro.bet": "gulp onepro.bet",
+        "betfa.wee.bet": "gulp betfa.wee.bet"
     },
     "private": true,
     "dependencies": {

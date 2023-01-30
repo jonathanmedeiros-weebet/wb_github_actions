@@ -2510,3 +2510,12 @@ gulp.task('onepro.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betfa.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betfa.wee.bet",
+        banca: "BET FA",
+        styles: "",
+    });
+});
