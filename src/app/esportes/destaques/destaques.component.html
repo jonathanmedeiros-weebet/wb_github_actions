@@ -43,7 +43,7 @@
                             <div class="jogo-destaque-odds">
                                 <div *ngFor="let cotacao of jogoDestaque.cotacoes.slice(0, 3)" class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}" (click)="addCotacao($event, jogoDestaque, cotacao)">
                                     {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
-                                    <span class="cotacao">{{ cotacao.valor | calcularCotacao }}</span>
+                                    <span class="cotacao">{{ cotacao.valorFinal }}</span>
                                 </div>
                             </div>
                         </div>
