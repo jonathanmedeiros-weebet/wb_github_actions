@@ -2535,7 +2535,7 @@ gulp.task('surebetclub.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "surebetclub.wee.bet",
-        banca: "BET FA",
+        banca: "SURE BET CLUB",
         styles: "",
     });
 });
@@ -2544,7 +2544,7 @@ gulp.task('shoppix.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "shoppix.wee.bet",
-        banca: "BET FA",
+        banca: "SHOPPIX",
         styles: "",
     });
 });
