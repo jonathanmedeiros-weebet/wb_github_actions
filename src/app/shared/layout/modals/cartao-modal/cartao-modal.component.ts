@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { HelperService } from 'src/app/services';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, PrintService, ApostaService, MessageService } from './../../../../services';
 import { CartaoAposta } from './../../../../models';
 import { ApostaModalComponent } from '../../../layout/modals/aposta-modal/aposta-modal.component';
+
+import { toPng } from 'html-to-image';
 
 @Component({
     selector: 'app-cartao-modal',
@@ -11,6 +14,7 @@ import { ApostaModalComponent } from '../../../layout/modals/aposta-modal/aposta
     styleUrls: ['./cartao-modal.component.css']
 })
 export class CartaoModalComponent implements OnInit {
+    @ViewChild('cartaoAposta', {static: false}) cartaoAposta: ElementRef;
     @Input() cartao: CartaoAposta = new CartaoAposta();
     appMobile;
     modalRef;
@@ -22,7 +26,8 @@ export class CartaoModalComponent implements OnInit {
         private auth: AuthService,
         private printService: PrintService,
         private apostaService: ApostaService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private helperService: HelperService
     ) { }
 
     ngOnInit() {
@@ -58,5 +63,11 @@ export class CartaoModalComponent implements OnInit {
 
     changeCollapseApostas() {
         this.apostasCollapsed = !this.apostasCollapsed;
+    }
+
+    shareCartao() {
+        toPng(this.cartaoAposta.nativeElement).then((dataUrl) => {
+            this.helperService.sharedRecargaCartao('Cartão Aposta', dataUrl);
+        });
     }
 }

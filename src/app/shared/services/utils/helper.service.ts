@@ -305,6 +305,16 @@ export class HelperService {
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
+    shareFile(message, file) {
+        let dataToSend = {
+            message: message,
+            file: file,
+            data: message,
+            action: 'shareURL'
+        };
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
+    }
+
     sendExternalUrl(url) {
         let dataToSend = {
             message: `URL Externa`,
