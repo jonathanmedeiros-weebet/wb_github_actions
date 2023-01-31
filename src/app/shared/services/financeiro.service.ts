@@ -97,4 +97,13 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    bonusPrimeiroDepositoPermitido(): Observable<any> {
+        const requestOptions = this.header.getRequestOptions(true);
+        return this.http.get(`${this.financeiroUrl}/permitir-bonus-primeiro-deposito`, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

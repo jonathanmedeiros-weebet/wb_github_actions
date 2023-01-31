@@ -26,11 +26,30 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-3" *ngIf="permitirBonusPrimeiroDeposito">
+            <div class="col col-sm-6">
+                <label class="">Deseja receber Bônus de primeiro depósito?</label>
+                <div class="buttons-container mt-3">
+                    <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
+                        <i class="radio"></i>
+                        <i class="fa-solid fa-coins" style="font-size: 20px"></i>
+                        <span style="margin-left: 5px">Receber Bônus</span>
+                    </a>
+                    <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
+                        <i class="radio"></i>
+                        <i class="fa-solid fa-square-xmark" style="font-size: 20px"></i>
+                        <span style="margin-left: 5px">Não quero Bônus</span>
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="row">
-            <div class="form-group group-buttons">
-                <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">
-                    {{'geral.solicitarDeposito' | translate}}
-                </button>
+            <div class="col col-sm-3">
+                <div class="form-group group-buttons">
+                    <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">
+                        {{'geral.solicitarDeposito' | translate}}
+                    </button>
+                </div>
             </div>
         </div>
     </form>
