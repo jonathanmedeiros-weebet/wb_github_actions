@@ -116,3 +116,14 @@ gulp.task('build-betnazebra', function (done) {
         pkg_folder: ('br.com.betnazebra.app').split('.').join('/')
     });
 });
+
+gulp.task('build-lite-alfa', function (done) {
+    return prepare({
+        app_id: "net.alfasports.app.lite",
+        url: "https://alfasports.net",
+        nome: "Alfa Sports Lite",
+        slug: "alfasports.net",
+        splash_color: "#002458",
+        pkg_folder: ('net.alfasports.app.lite').split('.').join('/')
+    });
+});
