@@ -2521,3 +2521,30 @@ gulp.task('betfa.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostafacil123.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "apostafacil123.com",
+        banca: "APOSTA FÁCIL 123",
+        styles: "",
+    });
+});
+
+gulp.task('surebetclub.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "surebetclub.wee.bet",
+        banca: "BET FA",
+        styles: "",
+    });
+});
+
+gulp.task('shoppix.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "shoppix.wee.bet",
+        banca: "BET FA",
+        styles: "",
+    });
+});
