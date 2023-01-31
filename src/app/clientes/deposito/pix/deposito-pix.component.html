@@ -28,17 +28,17 @@
         </div>
         <div class="row mt-3" *ngIf="permitirBonusPrimeiroDeposito">
             <div class="col col-sm-6">
-                <label class="">Deseja receber Bônus de primeiro depósito?</label>
+                <label class="">{{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate}}</label>
                 <div class="buttons-container mt-3">
                     <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
                         <i class="radio"></i>
                         <i class="fa-solid fa-coins" style="font-size: 20px"></i>
-                        <span style="margin-left: 5px">Receber Bônus</span>
+                        <span style="margin-left: 5px">{{'financeiro.receberBonus' | translate}}</span>
                     </a>
                     <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
                         <i class="radio"></i>
                         <i class="fa-solid fa-square-xmark" style="font-size: 20px"></i>
-                        <span style="margin-left: 5px">Não quero Bônus</span>
+                        <span style="margin-left: 5px">{{'financeiro.naoQueroBonus' | translate}}</span>
                     </a>
                 </div>
             </div>
