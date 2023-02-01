@@ -5,7 +5,7 @@
     </a>
 </div>
 <div class="modal-body">
-    <div class="cartao-aposta">
+    <div class="cartao-aposta" #cartaoAposta>
         <div class="box-chave">
             <label >{{'cartoes.chaveCartao' | translate}}</label>
             <span>{{'cartoes.cartao' | translate}} {{cartao.chave}}</span>
@@ -91,11 +91,14 @@
 <!--        </div>-->
     </div>
     <div class="actions">
-        <button type="button" class="btn btn-custom2" (click)="activeModal.close('Close click')">
+        <button type="button" class="btn btn-custom2 btn-w-100" (click)="activeModal.close('Close click')">
             {{'modais.fechar' | translate}}
         </button>
         <button type="button" class="btn btn-custom" (click)="print()">
             {{'geral.imprimir' | translate}}
+        </button>
+        <button type="button" class="btn btn-custom" (click)="shareCartao()">
+            {{'geral.compartilhar' | translate}}
         </button>
     </div>
 </div>

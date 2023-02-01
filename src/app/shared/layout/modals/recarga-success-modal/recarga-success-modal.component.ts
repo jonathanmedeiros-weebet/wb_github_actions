@@ -1,3 +1,4 @@
+import { ImagensService } from './../../../services/utils/imagens.service';
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,18 +16,20 @@ export class RecargaSuccessModalComponent implements OnInit {
     @Input() recarga;
     BANCA_NOME;
     appMobile;
-    LOGO = config.LOGO;
+    LOGO;
 
     constructor(
         public activeModal: NgbActiveModal,
         private auth: AuthService,
         private printService: PrintService,
-        private helper: HelperService
+        private helper: HelperService,
+        private imagensService: ImagensService
     ) { }
 
     ngOnInit() {
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
+        this.LOGO = this.imagensService.logo;
     }
 
     printTicket() {
