@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {FormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
@@ -103,6 +103,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     metodoPagamento;
     sautoPayQr;
     isMobile = false;
+    permitirBonusPrimeiroDeposito = false;
+    opcaoBonus = 'esportivo';
 
     constructor(
         private fb: FormBuilder,
@@ -124,11 +126,23 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
         this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
+
+        this.financeiroService.bonusPrimeiroDepositoPermitido()
+            .subscribe(
+                res => {
+                    this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
+                    if (!res.permitir_bonificacao) {
+                        this.opcaoBonus = 'nenhum';
+                    }
+                },
+                error => this.handleError(error)
+            );
     }
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito)]]
+            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito)]],
+            bonus: [this.opcaoBonus, Validators.required]
         });
     }
 
@@ -205,5 +219,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 );
             this.verificacoes++;
         }
+    }
+
+    selecionarOpcaoBonus(opcaoBonus) {
+        this.opcaoBonus = opcaoBonus;
+        this.form.get('bonus').patchValue(opcaoBonus);
     }
 }

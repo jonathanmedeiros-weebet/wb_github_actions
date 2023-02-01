@@ -381,6 +381,9 @@
         "realizadoEm": "Realizado em {{data}}",
         "qtdMovimentacoesNoPeriodo": "Qtd. Movimentações no Período de {{de}} - {{ate}}",
         "nenhumaMovimentacaoNoPeriodo": "Nenhuma movimentação realizada no período e/ou com filtro atual.",
-        "natureza": "Natureza"
+        "natureza": "Natureza",
+        "desejaReceberBonusPrimeiroDeposito": "Deseja receber Bônus de primeiro depósito?",
+        "receberBonus": "Receber Bônus",
+        "naoQueroBonus": "Não quero Bônus"
     }
 }

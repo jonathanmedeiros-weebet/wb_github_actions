@@ -64,6 +64,66 @@ label.label-tempo {
 .modal-dialog .modal-content {
     border-radius: 10px;
 }
+.buttons-container {
+    width: 100%;
+    display: flex;
+    color: var(--foreground-header);
+    margin-bottom: 15px;
+}
+
+.buttons-container a * {
+    margin-right: 8px;
+}
+
+.buttons-container a.active .radio:after {
+    display: block;
+}
+
+.buttons-container a .radio {
+    height: 15px;
+    width: 15px;
+    border: 1px solid var(--highlight);
+    background-color: transparent;
+    border-radius: 50%;
+    position: relative;
+}
+
+.radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--highlight);
+}
+
+.buttons-container a.active .radio {
+    border: 1px solid var(--highlight);
+}
+
+.opcao-bonus {
+    display: flex;
+    align-items: center;
+
+    width: 190px;
+    padding: 10px;
+
+    border: 1px solid var(--game);
+    color: var(--foreground);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.active {
+    background-color: transparent;
+    border-color: var(--highlight);
+}
 
 @media only screen and (max-width: 1024px) {
     .modal-body {
@@ -124,5 +184,30 @@ label.label-tempo {
     .buttons {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .buttons-container {
+        background-color: var(--game);
+        border: 2px solid var(--game);
+        border-radius: 4px;
+    }
+
+    .buttons-container a {
+        flex: 1;
+        margin: 0;
+        justify-content: center;
+        border: 0;
+        background-color: var(--game);
+        color: var(--foreground-game);
+    }
+
+    .buttons-container a.active {
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        fill: var(--foreground-highlight);
+    }
+
+    .buttons-container a i.radio{
+        display: none;
     }
 }
