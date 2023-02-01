@@ -104,7 +104,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     sautoPayQr;
     isMobile = false;
     permitirBonusPrimeiroDeposito = false;
-    opcaoBonus = '';
+    opcaoBonus = 'nenhum';
 
     constructor(
         private fb: FormBuilder,
@@ -131,8 +131,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
-                    if (!res.permitir_bonificacao) {
-                        this.opcaoBonus = 'nenhum';
+                    if (res.permitir_bonificacao) {
+                        this.form.get('bonus').patchValue('esportivo');
+                        this.opcaoBonus = 'esportivo';
                     }
                 },
                 error => this.handleError(error)
