@@ -2551,3 +2551,12 @@ gulp.task('shoppix.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet22.site', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bet22.site",
+        banca: "BET 22",
+        styles: "",
+    });
+});
