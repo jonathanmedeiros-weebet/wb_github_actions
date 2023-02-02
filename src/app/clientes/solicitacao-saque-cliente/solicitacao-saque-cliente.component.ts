@@ -32,6 +32,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     apiPagamentos;
     isMobile = false;
     modalRef;
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST'];
 
     saldo = 0;
     saques = [];
@@ -171,8 +172,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     exibirCancelarSolicitacaoSaque(depositoSaque) {
-        return !depositoSaque.data_pagamento
-            && depositoSaque.status == 'PENDENTE';
+        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)){
+            return false;
+        }
+
+        return !depositoSaque.data_pagamento && depositoSaque.status == 'PENDENTE';
     }
 
     completarCadatro() {

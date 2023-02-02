@@ -25,9 +25,10 @@ import { DomSanitizer } from '@angular/platform-browser';
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code">
-            <img *ngIf="!['sauto_pay', 'gerencianet'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img *ngIf="!['sauto_pay', 'gerencianet', 'pagfast'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
             <img *ngIf="metodoPagamento === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
             <img *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
+            <img *ngIf="metodoPagamento === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
@@ -104,7 +105,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     sautoPayQr;
     isMobile = false;
     permitirBonusPrimeiroDeposito = false;
-    opcaoBonus = 'nenhum';
+    opcaoBonus = '';
 
     constructor(
         private fb: FormBuilder,
@@ -131,9 +132,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
-                    if (res.permitir_bonificacao) {
-                        this.form.get('bonus').patchValue('esportivo');
-                        this.opcaoBonus = 'esportivo';
+                    if (!res.permitir_bonificacao) {
+                        this.form.get('bonus').patchValue('nenhum');
+                        this.opcaoBonus = 'nenhum';
                     }
                 },
                 error => this.handleError(error)
