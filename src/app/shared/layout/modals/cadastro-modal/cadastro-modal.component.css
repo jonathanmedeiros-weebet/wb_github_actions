@@ -58,6 +58,11 @@ button {
     cursor: pointer;
 }
 
+.text-muted {
+    color: var(--foreground) !important;
+    opacity: 65%;
+}
+
 @media only screen and (max-width: 1024px) {
     .modal-body {
         padding: 40px 25px 15px;
