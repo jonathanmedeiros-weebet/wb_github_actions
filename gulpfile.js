@@ -1769,12 +1769,11 @@ gulp.task('ggdasorte.bet', function (done) {
     });
 });
 
-gulp.task('tigrebet.wee.bet', function (done) {
+gulp.task('tigre.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "tigrebet.wee.bet",
+        host: "tigre.bet",
         banca: "TIGRE BET",
-        shared_url: "tigrebet.bet",
         styles: "",
     });
 });
