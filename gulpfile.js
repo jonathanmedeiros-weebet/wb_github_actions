@@ -2560,3 +2560,30 @@ gulp.task('bet22.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cassinomania.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "cassinomania.com",
+        banca: "CASSINO MANIA",
+        styles: "",
+    });
+});
+
+gulp.task('riobetpix.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "riobetpix.com",
+        banca: "RIO BET PIX",
+        styles: "",
+    });
+});
+
+gulp.task('mzsports.pro', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "mzsports.pro",
+        banca: "MZ SPORTS",
+        styles: "",
+    });
+});
