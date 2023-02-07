@@ -14,6 +14,10 @@ pipelines:
           - name: APP_OUT
       - step:
           size: 2x
+          caches:
+            - docker
+            - node
+            - gradle
           script:
             - npm install
             - gulp prepare-build
@@ -25,6 +29,4 @@ pipelines:
             - mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app.apk -f
             - aws s3 cp $APP_FILE $S3_BUCKET$APP_OUT --acl public-read
           services:
-            - docker
-          caches:
             - docker
