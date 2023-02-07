@@ -18,6 +18,7 @@ pipelines:
             - docker
             - node
             - gradle
+            - androidsdk
           script:
             - npm install
             - gulp prepare-build
@@ -30,3 +31,6 @@ pipelines:
             - aws s3 cp $APP_FILE $S3_BUCKET$APP_OUT --acl public-read
           services:
             - docker
+definitions:
+  caches:
+    androidsdk: /opt/android-sdk-linux
