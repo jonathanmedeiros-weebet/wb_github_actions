@@ -76,6 +76,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     nomesCotacoes = [];
 
     jogosDestaque = [];
+    jogosDestaquesIds;
 
     limiteDiasTabela: number;
     diaHojeMaisDois;
@@ -197,6 +198,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
                 this.cd.markForCheck();
             });
+
+        this.getJogosDestaquesIds();
     }
 
     detectScrollOddsWidth() {
@@ -268,30 +271,43 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                     }
                 }, 1000);
             }
+
+            this.getJogosDestaquesIds();
         }
 
-        this.jogoService.getJogosDestaque()
-            .subscribe(jogos => {
-                const jogosDestaquesIds = jogos.map(jogo => jogo.fi);
-                let jogosDestaques = [];
-
-                if (this.camps) {
-                    this.camps.forEach(camp => {
-                        const jogosSele = camp.jogos.filter(jogo => {
-                            return jogosDestaquesIds.includes(jogo._id + '');
-                        });
-
-                        jogosDestaques = jogosDestaques.concat(jogosSele);
-                    });
-                }
-
-                this.jogosDestaque = jogosDestaques;
-            });
+        if (changes['jogosDestaquesIds'] && this.jogosDestaquesIds) {
+            this.mapJogosDestaque();
+        }
     }
 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    getJogosDestaquesIds() {
+        this.jogoService.getJogosDestaque()
+            .subscribe(jogos => {
+                this.jogosDestaquesIds = jogos.map(jogo => jogo.fi);
+                this.mapJogosDestaque();
+            });
+    }
+
+    mapJogosDestaque() {
+        let jogosDestaques = [];
+
+        if (this.camps.length > 0) {
+            this.camps.forEach(camp => {
+                const jogosSele = camp.jogos.filter(jogo => {
+                    return this.jogosDestaquesIds.includes(jogo._id + '');
+                });
+
+                jogosDestaques = jogosDestaques.concat(jogosSele);
+            });
+        }
+
+        this.jogosDestaque = jogosDestaques;
+        this.cd.detectChanges();
     }
 
     limparPesquisa() {
