@@ -107,6 +107,9 @@
                         <td>{{ aposta.valor | currency}}</td>
                         <td>{{ aposta.premio | currency }}</td>
                         <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino'">
+                            <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{location}}/bilhete/{{aposta.codigo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
+                                <i class="fa fa-external-link"></i>
+                            </a>
                             <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
                                 <i class="fa fa-eye"></i>
                             </a>
