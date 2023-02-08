@@ -281,7 +281,9 @@
         "bet22.site": "gulp bet22.site",
         "cassinomania.com": "gulp cassinomania.com",
         "riobetpix.com": "gulp riobetpix.com",
-        "mzsports.pro": "gulp mzsports.pro"
+        "mzsports.pro": "gulp mzsports.pro",
+        "golplays.com": "gulp golplays.com",
+        "wizz.bet": "gulp wizz.bet"
     },
     "private": true,
     "dependencies": {

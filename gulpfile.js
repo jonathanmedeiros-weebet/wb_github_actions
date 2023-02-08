@@ -2587,3 +2587,21 @@ gulp.task('mzsports.pro', function (done) {
         styles: "",
     });
 });
+
+gulp.task('golplays.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "golplays.com",
+        banca: "GOL PLAYS",
+        styles: "",
+    });
+});
+
+gulp.task('wizz.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "wizz.bet",
+        banca: "WIZZ.BET",
+        styles: "",
+    });
+});
