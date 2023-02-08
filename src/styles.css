@@ -712,7 +712,7 @@ button {
     display: flex;
 }
 
-.action-buttons button {
+.action-buttons button, .action-buttons a {
     background-color: transparent;
     border: 0;
     padding: 1rem 1rem;
@@ -722,6 +722,13 @@ button {
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .8;
+}
+
+.action-buttons a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .action-buttons button span {
