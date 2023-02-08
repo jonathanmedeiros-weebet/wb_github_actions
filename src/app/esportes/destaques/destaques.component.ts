@@ -1,4 +1,5 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { forEach } from 'lodash';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -9,7 +10,7 @@ import {BilheteEsportivoService, HelperService, JogoService} from 'src/app/servi
     templateUrl: './destaques.component.html',
     styleUrls: ['./destaques.component.css']
 })
-export class DestaquesComponent implements OnInit {
+export class DestaquesComponent implements OnInit, OnChanges {
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Input() jogosDestaque = [];
     @Input() jogoIdAtual;
@@ -60,6 +61,34 @@ export class DestaquesComponent implements OnInit {
 
                 this.cd.markForCheck();
             });
+
+            this.remapJogosDestaque();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['jogosDestaque']) {
+            this.remapJogosDestaque();
+        }
+    }
+
+    remapJogosDestaque() {
+        this.jogosDestaque.forEach((jogo) => {
+            jogo.cotacoes.slice(0, 3).forEach((cotacao) => {
+                if (!cotacao.valorFinal) {
+                    cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                        cotacao.valor,
+                        cotacao.chave,
+                        jogo.event_id,
+                        jogo.favorito,
+                        false);
+                }
+            });
+        });
+        this.cd.detectChanges();
+    }
+
+    cotacaoPermitida(cotacao) {
+        return this.helperService.cotacaoPermitida(cotacao);
     }
 
     maisCotacoes(jogoId) {

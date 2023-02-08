@@ -1769,12 +1769,11 @@ gulp.task('ggdasorte.bet', function (done) {
     });
 });
 
-gulp.task('tigrebet.wee.bet', function (done) {
+gulp.task('tigre.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "tigrebet.wee.bet",
+        host: "tigre.bet",
         banca: "TIGRE BET",
-        shared_url: "tigrebet.bet",
         styles: "",
     });
 });
@@ -2228,6 +2227,7 @@ gulp.task('betbrasil.one', function (done) {
         host: "betbrasil.one",
         banca: "BET BRASIL",
         styles: "",
+        script: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/1890e981-6951-4a28-81e3-6aaa5495e35f-loader.js' ></script>"
     });
 });
 
@@ -2548,6 +2548,42 @@ gulp.task('shoppix.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "shoppix.wee.bet",
         banca: "SHOPPIX",
+        styles: "",
+    });
+});
+
+gulp.task('bet22.site', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bet22.site",
+        banca: "BET 22",
+        styles: "",
+    });
+});
+
+gulp.task('cassinomania.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "cassinomania.com",
+        banca: "CASSINO MANIA",
+        styles: "",
+    });
+});
+
+gulp.task('riobetpix.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "riobetpix.com",
+        banca: "RIO BET PIX",
+        styles: "",
+    });
+});
+
+gulp.task('mzsports.pro', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "mzsports.pro",
+        banca: "MZ SPORTS",
         styles: "",
     });
 });

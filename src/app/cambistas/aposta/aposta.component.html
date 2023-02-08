@@ -119,7 +119,10 @@
                     <ng-container *ngFor="let aposta of apostas">
                         <tr class="{{ classNameAposta(aposta.resultado) }} mobile-tds">
                             <td class="status-aposta"></td>
-                            <td class="codigo">{{ aposta.codigo }}</td>
+                            <td class="codigo">
+                                {{ aposta.codigo }}
+                                <span class="ml-1" *ngIf="aposta.cartao_aposta"><i class="fa fa-solid fa-credit-card"></i></span>
+                            </td>
                             <td *ngIf="!mobileScreen">{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</td>
                             <td *ngIf="!mobileScreen">{{ aposta.apostador | uppercase }}</td>
                             <td>{{ aposta.valor | currency}}</td>

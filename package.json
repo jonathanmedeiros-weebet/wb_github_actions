@@ -193,7 +193,7 @@
         "brlesportiva.bet": "gulp brlesportiva.bet",
         "betsmania.live": "gulp betsmania.live",
         "ggdasorte.bet": "gulp ggdasorte.bet",
-        "tigrebet.wee.bet": "gulp tigrebet.wee.bet",
+        "tigre.bet": "gulp tigre.bet",
         "casadeapostas.club": "gulp casadeapostas.club",
         "ster.wee.bet": "gulp ster.wee.bet",
         "ricardo.wee.bet": "gulp ricardo.wee.bet",
@@ -277,7 +277,11 @@
         "betfa.wee.bet": "gulp betfa.wee.bet",
         "apostafacil123.com": "gulp apostafacil123.com",
         "surebetclub.wee.bet": "gulp surebetclub.wee.bet",
-        "shoppix.wee.bet": "gulp shoppix.wee.bet"
+        "shoppix.wee.bet": "gulp shoppix.wee.bet",
+        "bet22.site": "gulp bet22.site",
+        "cassinomania.com": "gulp cassinomania.com",
+        "riobetpix.com": "gulp riobetpix.com",
+        "mzsports.pro": "gulp mzsports.pro"
     },
     "private": true,
     "dependencies": {
