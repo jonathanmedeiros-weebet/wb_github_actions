@@ -253,7 +253,6 @@ export class ApostaComponent implements OnInit {
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(
                 apostaLocalizada => {
-                    console.log(apostaLocalizada);
                     this.modalRef = this.modalService.open(modalAposta, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true,
