@@ -38,6 +38,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     showLoading = false;
     isCliente;
     isMobile;
+    urlBilheteAoVivo ;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -57,6 +58,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
+        this.urlBilheteAoVivo = `${location.origin}/bilhete/${this.aposta.codigo}`;
 
         this.opcoes = this.paramsLocais.getOpcoes();
 

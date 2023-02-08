@@ -2,6 +2,9 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
     <div class="action-buttons">
+        <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
+            <i class="fa fa-external-link"></i>
+        </a>
         <button type="button" *ngIf="impressaoPermitida()" (click)="print()" title="IMPRIMIR">
             <i class="fa fa-print"></i>
         </button>

@@ -26,6 +26,7 @@ export class ApostaModalComponent implements OnInit {
     isLoggedIn;
     isCliente;
     isMobile = false;
+    urlBilheteAoVivo ;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -40,6 +41,7 @@ export class ApostaModalComponent implements OnInit {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
+        this.urlBilheteAoVivo = `${location.origin}/bilhete/${this.aposta.codigo}`;
     }
 
     printTicket() {
