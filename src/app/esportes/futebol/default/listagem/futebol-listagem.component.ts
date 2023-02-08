@@ -296,7 +296,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     mapJogosDestaque() {
         let jogosDestaques = [];
 
-        if (this.camps.length > 0) {
+        if (this.camps && this.camps.length > 0) {
             this.camps.forEach(camp => {
                 const jogosSele = camp.jogos.filter(jogo => {
                     return this.jogosDestaquesIds.includes(jogo._id + '');
