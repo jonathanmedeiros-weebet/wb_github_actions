@@ -6,6 +6,7 @@ import { ExibirBilheteDesafioComponent } from '../../exibir-bilhete/desafio/exib
 import { ExibirBilheteLoteriaComponent } from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
+import { config } from '../../../config';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -27,6 +28,7 @@ export class ApostaModalComponent implements OnInit {
     isCliente;
     isMobile = false;
     urlBilheteAoVivo ;
+    slug ;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -41,7 +43,7 @@ export class ApostaModalComponent implements OnInit {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
-        this.urlBilheteAoVivo = `${location.origin}/bilhete/${this.aposta.codigo}`;
+        this.urlBilheteAoVivo = `https://${config.SLUG}/bilhete/${this.aposta.codigo}`;
     }
 
     printTicket() {

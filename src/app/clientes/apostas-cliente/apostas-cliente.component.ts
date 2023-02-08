@@ -13,6 +13,7 @@ import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalCom
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../services'
+import { config } from '../../shared/config';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -53,6 +54,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     apostas = [];
 
     isCliente ;
+    slug;
     
     constructor(
         private messageService: MessageService,
@@ -102,6 +104,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.getApostas();
 
         this.isCliente = this.auth.isCliente();
+        this.slug = config.SLUG;
     }
 
     ngOnDestroy() {
