@@ -2249,11 +2249,10 @@ gulp.task('pointbet.bet', function (done) {
     });
 });
 
-gulp.task('moneysports.wee.bet', function (done) {
+gulp.task('moneysports.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "moneysports.wee.bet",
-        shared_url: "moneysports.bet",
+        host: "moneysports.bet",
         banca: "MONEY SPORTS",
         styles: "",
     });
