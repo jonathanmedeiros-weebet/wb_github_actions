@@ -30,7 +30,7 @@
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gamesDestaque">
                     <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                    <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                    <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                     <div class="game-tile-buttons">
                         <a *ngIf="game.gameDemo"
                            [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -65,7 +65,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -106,7 +106,7 @@
                      (scroll)="onScroll('raspadinha')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
@@ -146,7 +146,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -185,7 +185,7 @@
                 <div class="game-list game-list-inline">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -224,7 +224,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -263,7 +263,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="live-scroll" (scroll)="onScroll('live')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesLive">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                        <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                        <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -294,7 +294,7 @@
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gameList">
                     <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
-                    <img *ngIf="game.fornecedor == 'salsa'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/salsa/{{game.gameID}}.png">
+                    <img *ngIf="game.fornecedor !== 'pragmatic'" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                     <div class="game-tile-buttons">
                         <a *ngIf="game.gameDemo"
                            [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
