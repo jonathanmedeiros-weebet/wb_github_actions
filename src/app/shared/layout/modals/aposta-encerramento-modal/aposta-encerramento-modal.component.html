@@ -125,7 +125,7 @@
                             </p>
                         </div>
                         <div style="margin-left: 10px;">
-                            <button class="btn btn-dark"
+                            <button class="btn btn-custom"
                                 *ngIf="podeEncerrar(item, aposta, itemSelecionado)"
                                 (click)="addEncerramento(item, aposta.version)">Encerrar
                             </button>
@@ -147,7 +147,7 @@
     </div>
 </div>
 <div class="rodape" *ngIf="itemSelecionado">
-    <button class="btn btn-outline-dark w-50" style="border-radius: 0" *ngIf="itemSelecionado" (click)="descartar()">
+    <button class="btn btn-outline-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado" (click)="descartar()">
         Descartar
     </button>
     <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="!falhaSimulacao"
