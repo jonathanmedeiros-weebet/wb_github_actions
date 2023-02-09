@@ -2605,3 +2605,12 @@ gulp.task('wizz.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('jogomilionario.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "jogomilionario.com",
+        banca: "JOGO MILIONÁRIO",
+        styles: "",
+    });
+});
