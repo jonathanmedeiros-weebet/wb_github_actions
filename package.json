@@ -284,7 +284,10 @@
         "mzsports.pro": "gulp mzsports.pro",
         "golplays.com": "gulp golplays.com",
         "wizz.bet": "gulp wizz.bet",
-        "jogomilionario.com": "gulp jogomilionario.com"
+        "jogomilionario.com": "gulp jogomilionario.com",
+        "brasilbet.bet": "gulp brasilbet.bet",
+        "primeesportes.club": "gulp primeesportes.club",
+        "betlance.wee.bet": "gulp betlance.wee.bet"
     },
     "private": true,
     "dependencies": {

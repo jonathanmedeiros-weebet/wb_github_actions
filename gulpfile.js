@@ -2614,3 +2614,30 @@ gulp.task('jogomilionario.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brasilbet.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "brasilbet.bet",
+        banca: "BRASIL BET",
+        styles: "",
+    });
+});
+
+gulp.task('primeesportes.club', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "primeesportes.club",
+        banca: "PRIME ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('betlance.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betlance.wee.bet",
+        banca: "BET LANCE",
+        styles: "",
+    });
+});
