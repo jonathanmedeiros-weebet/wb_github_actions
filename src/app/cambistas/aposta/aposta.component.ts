@@ -244,7 +244,7 @@ export class ApostaComponent implements OnInit {
         }
 
         let modalAposta;
-        if (this.encerramentoPermitido) {
+        if (this.encerramentoPermitido && aposta.tipo == 'esportes') {
             modalAposta = ApostaEncerramentoModalComponent;
         } else {
             modalAposta = ApostaModalComponent;

@@ -12,6 +12,8 @@ import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} 
 import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from '../../services'
+import { config } from '../../shared/config';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -51,6 +53,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     apostas = [];
 
+    isCliente ;
+    slug;
+    
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,
@@ -67,7 +72,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
         private apostaService: ApostaService,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private auth: AuthService
     ) {
         super();
 
@@ -96,6 +102,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.menuFooterService.setIsPagina(true);
 
         this.getApostas();
+
+        this.isCliente = this.auth.isCliente();
+        this.slug = config.SLUG;
     }
 
     ngOnDestroy() {

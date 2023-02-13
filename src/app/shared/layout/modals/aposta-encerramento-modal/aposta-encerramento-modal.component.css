@@ -109,3 +109,14 @@ hr {
 .dados-simulacao {
     color: red;
 }
+
+.btn-outline-custom:hover {
+    color: var(--foreground-highlight);
+    background-color: var(--highlight); 
+    border-color: var(--foreground-highlight);
+}
+
+.btn-outline-custom {
+    border-color: var(--highlight);
+    color: var(--highlight);
+}

@@ -164,7 +164,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     filterMesa(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'vp' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+            return game.gameTypeID === 'tb' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
         });
     }
 
