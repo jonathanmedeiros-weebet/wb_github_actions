@@ -2553,3 +2553,21 @@ gulp.task('betlance.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('winbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "winbet.wee.bet",
+        banca: "WINBET",
+        styles: "",
+    });
+});
+
+gulp.task('betsmilionaria.com.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betsmilionaria.com.br",
+        banca: "BETS MILIONÁRIA",
+        styles: "",
+    });
+});

@@ -277,7 +277,9 @@
         "jogomilionario.com": "gulp jogomilionario.com",
         "brasilbet.bet": "gulp brasilbet.bet",
         "primeesportes.club": "gulp primeesportes.club",
-        "betlance.wee.bet": "gulp betlance.wee.bet"
+        "betlance.wee.bet": "gulp betlance.wee.bet",
+        "winbet.wee.bet": "gulp winbet.wee.bet",
+        "betsmilionaria.com.br": "gulp betsmilionaria.com.br"
     },
     "private": true,
     "dependencies": {
