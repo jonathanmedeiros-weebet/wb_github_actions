@@ -279,7 +279,8 @@
         "primeesportes.club": "gulp primeesportes.club",
         "betlance.wee.bet": "gulp betlance.wee.bet",
         "winbet.wee.bet": "gulp winbet.wee.bet",
-        "betsmilionaria.com.br": "gulp betsmilionaria.com.br"
+        "betsmilionaria.com.br": "gulp betsmilionaria.com.br",
+        "r2bet.wee.bet": "gulp r2bet.wee.bet"
     },
     "private": true,
     "dependencies": {

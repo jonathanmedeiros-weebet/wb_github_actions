@@ -2572,3 +2572,12 @@ gulp.task('betsmilionaria.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('r2bet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "r2bet.wee.bet",
+        banca: "R2 BET",
+        styles: "",
+    });
+});
