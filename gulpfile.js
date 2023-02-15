@@ -2515,6 +2515,7 @@ gulp.task('wizz.bet', function (done) {
         host: "wizz.bet",
         banca: "WIZZ.BET",
         styles: "",
+        google_tag_part_1: "<!-- Google tag (gtag.js) --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-9P3GHF5XD9'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9P3GHF5XD9'); </script>"
     });
 });
 
