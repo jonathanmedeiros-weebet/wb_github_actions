@@ -113,7 +113,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     createForm() {
         this.form = this.fb.group({
                 valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
-                accept: [null, this.apiPagamentos === 'pagfast' ? Validators.required : null]
+                accept: [false, this.apiPagamentos === 'pagfast' ? Validators.requiredTrue : null]
             }
         );
     }
