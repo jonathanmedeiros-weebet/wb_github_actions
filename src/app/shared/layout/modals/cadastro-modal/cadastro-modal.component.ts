@@ -15,12 +15,12 @@ import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
 import {NgHcaptchaService} from 'ng-hcaptcha';
-
+import { RecaptchaErrorParameters } from "ng-recaptcha";
 
 @Component({
     selector: 'app-cadastro-modal',
     templateUrl: './cadastro-modal.component.html',
-    styleUrls: ['./cadastro-modal.component.css']
+    styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     appMobile;
@@ -37,7 +37,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     LOGO = config.LOGO;
     modalTermosRef;
     hCaptchaLanguage;
-
+    formModel
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -131,7 +131,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     submit() {
         const values = this.form.value;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
-
+        values.recaptch = grecaptcha.getResponse();
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
@@ -168,5 +168,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.modalTermosRef) {
             this.modalTermosRef.dismiss();
         }
+    }
+
+    resolved(captchaResponse: string) {
+        
+        console.log(`Captcha resolvido com resposta: ${captchaResponse}`);
+      }
+    
+    errored() {
+        console.warn(`erro reCAPTCHA encontrado`);
     }
 }
