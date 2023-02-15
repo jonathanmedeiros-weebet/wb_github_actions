@@ -69,20 +69,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.createForm();
         const user = JSON.parse(localStorage.getItem('user'));
 
-        const queryParams: any = {
-            'periodo': '',
-            'tipo': 'saques',
-        };
-        this.financeiroService.getDepositosSaques(queryParams)
-            .subscribe(
-                response => {
-                    this.saques = response;
-                },
-                error => {
-                    this.handleError(error);
-                    this.showLoading = false;
-                }
-            );
+        this.getSaques();
 
         this.auth.getPosicaoFinanceira()
             .subscribe(
@@ -125,7 +112,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
+                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
+                accept: [null, this.apiPagamentos === 'pagfast' ? Validators.required : null]
             }
         );
     }
@@ -142,6 +130,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.respostaSolicitacao = res;
                     this.submitting = false;
+                    this.getSaques();
                 },
                 error => {
                     this.handleError(error);
@@ -191,5 +180,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         } else {
             this.router.navigate([this.rotaCompletarCadastro]);
         }
+    }
+
+    getSaques() {
+        const queryParams: any = {
+            'periodo': '',
+            'tipo': 'saques',
+        };
+
+        this.financeiroService.getDepositosSaques(queryParams)
+            .subscribe(
+                response => {
+                    this.saques = response;
+                },
+                error => {
+                    this.handleError(error);
+                    this.showLoading = false;
+                }
+            );
     }
 }
