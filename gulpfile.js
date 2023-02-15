@@ -2581,3 +2581,12 @@ gulp.task('r2bet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('aguiasport.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "aguiasport.bet",
+        banca: "ÁGUIA SPORT",
+        styles: "",
+    });
+});

@@ -280,7 +280,8 @@
         "betlance.wee.bet": "gulp betlance.wee.bet",
         "winbet.wee.bet": "gulp winbet.wee.bet",
         "betsmilionaria.com.br": "gulp betsmilionaria.com.br",
-        "r2bet.wee.bet": "gulp r2bet.wee.bet"
+        "r2bet.wee.bet": "gulp r2bet.wee.bet",
+        "aguiasport.bet": "gulp aguiasport.bet"
     },
     "private": true,
     "dependencies": {
