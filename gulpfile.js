@@ -2590,3 +2590,12 @@ gulp.task('aguiasport.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megasports.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "megasports.bet",
+        banca: "MEGA SPORTS",
+        styles: "",
+    });
+});
