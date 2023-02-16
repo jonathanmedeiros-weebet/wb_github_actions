@@ -37,7 +37,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     LOGO = config.LOGO;
     modalTermosRef;
     hCaptchaLanguage;
-    formModel
+    formModel;
+    displayhcaptcha;
+    displayrecaptcha;
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -82,6 +84,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             }
              this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
         });
+
+        if(this.paramsService.getOpcoes().provedor_captcha ==  'hcaptcha'){
+            this.displayhcaptcha = 'block';
+            this.displayrecaptcha = 'none';
+        }else{
+            this.displayrecaptcha = 'block';
+            this.displayhcaptcha = 'none';
+        }
     }
 
     createForm() {
@@ -131,7 +141,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     submit() {
         const values = this.form.value;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
-        values.recaptch = grecaptcha.getResponse();
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
