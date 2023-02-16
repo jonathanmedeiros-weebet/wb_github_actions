@@ -178,9 +178,12 @@
             </div>
         </div>
         <div class="row" [ngStyle]="{'display': displayrecaptcha}">
-            <div class="col-12" style="transform:scale(0.7);transform-origin:0;">
-                <re-captcha formControlName="captcha" #captchaRef="reCaptcha" siteKey="6Lc6r4QkAAAAANbQnxdDfm5heZR89g7wUupEFK4W" (resolved)="$event && submit()" errored="onError($event)"
+            <div class="col-12" style="text-align:center ">
+                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" siteKey="6Lc6r4QkAAAAANbQnxdDfm5heZR89g7wUupEFK4W" (resolved)="$event && submit()" errored="onError($event)"
                 errorMode="handled" size="invisible" ></re-captcha>
+                Este site é protegido por reCAPTCHA e a 
+                <a href="https://policies.google.com/privacy">Política de Privacidade</a> do google e os 
+                <a href="https://policies.google.com/terms">Termos de Serviço</a> se aplicam.
             </div>
         </div>
         <input type="hidden" formControlName="check_1">
