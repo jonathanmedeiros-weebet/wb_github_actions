@@ -171,24 +171,29 @@
                     id="linkTermos"><b> {{'geral.termosDeUso' | translate}}</b>.</a></label>
             </div>
         </div>
-        <div class="row captcha" [ngStyle]="{'display': displayhcaptcha}">
+
+        <input type="hidden" formControlName="check_1">
+        <input type="text" formControlName="check_2" class="d-none">
+
+        <div class="row captcha" *ngIf="provedorCaptcha == 'hcaptcha'">
             <div class="col-12">
                 <ng-hcaptcha formControlName="captcha" [languageCode]="hCaptchaLanguage"></ng-hcaptcha>
                 <app-error-msg [control]="form.get('captcha')"></app-error-msg>
             </div>
+
+            <button type="submit" *ngIf="provedorCaptcha == 'hcaptcha'" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
         </div>
-        <div class="row" [ngStyle]="{'display': displayrecaptcha}">
+        
+        <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
             <div class="col-12" style="text-align:center ">
-                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" siteKey="6Lc6r4QkAAAAANbQnxdDfm5heZR89g7wUupEFK4W" (resolved)="$event && submit()" errored="onError($event)"
-                errorMode="handled" size="invisible" ></re-captcha>
+                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="submit()" errorMode="handled" size="invisible" ></re-captcha>
                 Este site é protegido por reCAPTCHA e a 
-                <a href="https://policies.google.com/privacy">Política de Privacidade</a> do google e os 
-                <a href="https://policies.google.com/terms">Termos de Serviço</a> se aplicam.
+                <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidade</a> do Google e os 
+                <a href="https://policies.google.com/terms" target="_blank">Termos de Serviço</a> se aplicam.
             </div>
-        </div>
-        <input type="hidden" formControlName="check_1">
-        <input type="text" formControlName="check_2" class="d-none">
-        <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+
+            <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+        </div>      
     </form>
 </div>
 

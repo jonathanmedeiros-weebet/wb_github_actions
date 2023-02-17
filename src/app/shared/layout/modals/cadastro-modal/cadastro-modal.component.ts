@@ -37,9 +37,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     LOGO = config.LOGO;
     modalTermosRef;
     hCaptchaLanguage;
-    formModel;
-    displayhcaptcha;
-    displayrecaptcha;
+    provedorCaptcha;
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -76,7 +75,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         );
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
-
+        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
+    
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
@@ -84,14 +84,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             }
              this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
         });
-
-        if(this.paramsService.getOpcoes().provedor_captcha ==  'hcaptcha'){
-            this.displayhcaptcha = 'block';
-            this.displayrecaptcha = 'none';
-        }else{
-            this.displayrecaptcha = 'block';
-            this.displayhcaptcha = 'none';
-        }
     }
 
     createForm() {
@@ -177,14 +169,5 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.modalTermosRef) {
             this.modalTermosRef.dismiss();
         }
-    }
-
-    resolved(captchaResponse: string) {
-        
-        console.log(`Captcha resolvido com resposta: ${captchaResponse}`);
-      }
-    
-    errored() {
-        console.warn(`erro reCAPTCHA encontrado`);
     }
 }

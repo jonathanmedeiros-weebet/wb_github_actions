@@ -189,7 +189,8 @@ import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SET
         AcumuladaoService,
         {
             provide: RECAPTCHA_SETTINGS,
-            useValue: { siteKey: "<YOUR_KEY>" } as RecaptchaSettings, 
+            
+            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings, 
         }
     ]
 })
