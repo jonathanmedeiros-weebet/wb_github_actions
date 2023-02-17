@@ -78,6 +78,7 @@ import {NgHcaptchaModule} from 'ng-hcaptcha';
 import {TranslateModule} from '@ngx-translate/core';
 import {DesafiosBilheteComponent} from '../../desafios/desafios-bilhete/desafios-bilhete.component';
 import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-email-modal.component';
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 
 @NgModule({
     imports: [
@@ -101,7 +102,9 @@ import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-e
             siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
             languageCode: 'pt'
         }),
-        TranslateModule
+        TranslateModule,
+        RecaptchaModule,
+        RecaptchaFormsModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -183,7 +186,12 @@ import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-e
         ApostaLoteriaService,
         ApostaEsportivaService,
         RelatorioService,
-        AcumuladaoService
+        AcumuladaoService,
+        {
+            provide: RECAPTCHA_SETTINGS,
+            
+            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings, 
+        }
     ]
 })
 export class LayoutModule {

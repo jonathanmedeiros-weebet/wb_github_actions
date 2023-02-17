@@ -15,12 +15,12 @@ import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
 import {NgHcaptchaService} from 'ng-hcaptcha';
-
+import { RecaptchaErrorParameters } from "ng-recaptcha";
 
 @Component({
     selector: 'app-cadastro-modal',
     templateUrl: './cadastro-modal.component.html',
-    styleUrls: ['./cadastro-modal.component.css']
+    styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     appMobile;
@@ -37,6 +37,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     LOGO = config.LOGO;
     modalTermosRef;
     hCaptchaLanguage;
+    provedorCaptcha;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -74,7 +75,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         );
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
-
+        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
+    
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
@@ -131,7 +133,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     submit() {
         const values = this.form.value;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
-
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
