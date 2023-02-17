@@ -165,10 +165,11 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <label><input type="checkbox"
-                              formControlName="aceitar_termos">{{'geral.certificoQueTenhoMais' | translate}}<a
-                    (click)="abrirModalTermosUso(termosUsoModal)"
-                    id="linkTermos"><b> {{'geral.termosDeUso' | translate}}</b>.</a></label>
+                <label><input type="checkbox" formControlName="aceitar_termos">{{'geral.certificoQueTenhoMais' | translate}}<a
+                        (click)="abrirModalTermosUso(termosUsoModal)" id="linkTermos"><b> {{'geral.termosDeUso' |
+                            translate}}</b>.</a></label>
+                <app-error-msg [control]="form.get('aceitar_termos')" label="Termos de Uso"
+                    class="text-left"></app-error-msg>
             </div>
         </div>
 
@@ -181,12 +182,12 @@
                 <app-error-msg [control]="form.get('captcha')"></app-error-msg>
             </div>
 
-            <button type="submit" *ngIf="provedorCaptcha == 'hcaptcha'" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+            <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
         </div>
         
         <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
             <div class="col-12" style="text-align:center ">
-                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="submit()" errorMode="handled" size="invisible" ></re-captcha>
+                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
                 Este site é protegido por reCAPTCHA e a 
                 <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidade</a> do Google e os 
                 <a href="https://policies.google.com/terms" target="_blank">Termos de Serviço</a> se aplicam.
