@@ -32,6 +32,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     apiPagamentos;
     isMobile = false;
     modalRef;
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST'];
 
     saldo = 0;
     saques = [];
@@ -68,20 +69,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.createForm();
         const user = JSON.parse(localStorage.getItem('user'));
 
-        const queryParams: any = {
-            'periodo': '',
-            'tipo': 'saques',
-        };
-        this.financeiroService.getDepositosSaques(queryParams)
-            .subscribe(
-                response => {
-                    this.saques = response;
-                },
-                error => {
-                    this.handleError(error);
-                    this.showLoading = false;
-                }
-            );
+        this.getSaques();
 
         this.auth.getPosicaoFinanceira()
             .subscribe(
@@ -99,15 +87,17 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
-                    if (!this.cliente.endereco) {
-                        this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil';
-                        this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
-                    }
-                    if (!this.cliente.chave_pix) {
-                        this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil-pix';
-                        this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
+                    if (this.apiPagamentos != 'pagfast') {
+                        if (!this.cliente.endereco) {
+                            this.cadastroCompleto = false;
+                            this.rotaCompletarCadastro = '/clientes/perfil';
+                            this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
+                        }
+                        if (!this.cliente.chave_pix) {
+                            this.cadastroCompleto = false;
+                            this.rotaCompletarCadastro = '/clientes/perfil-pix';
+                            this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
+                        }
                     }
 
                     this.showLoading = false;
@@ -124,7 +114,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
+                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
+                accept: [false, this.apiPagamentos === 'pagfast' ? Validators.requiredTrue : null]
             }
         );
     }
@@ -141,6 +132,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.respostaSolicitacao = res;
                     this.submitting = false;
+                    this.getSaques();
                 },
                 error => {
                     this.handleError(error);
@@ -171,8 +163,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     exibirCancelarSolicitacaoSaque(depositoSaque) {
-        return !depositoSaque.data_pagamento
-            && depositoSaque.status == 'PENDENTE';
+        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)){
+            return false;
+        }
+
+        return !depositoSaque.data_pagamento && depositoSaque.status == 'PENDENTE';
     }
 
     completarCadatro() {
@@ -187,5 +182,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         } else {
             this.router.navigate([this.rotaCompletarCadastro]);
         }
+    }
+
+    getSaques() {
+        const queryParams: any = {
+            'periodo': '',
+            'tipo': 'saques',
+        };
+
+        this.financeiroService.getDepositosSaques(queryParams)
+            .subscribe(
+                response => {
+                    this.saques = response;
+                },
+                error => {
+                    this.handleError(error);
+                    this.showLoading = false;
+                }
+            );
     }
 }

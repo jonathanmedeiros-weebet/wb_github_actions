@@ -177,7 +177,8 @@
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
-        "modalidade": "Modality"
+        "modalidade": "Modality",
+        "estouCiente": "I know"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -291,7 +292,8 @@
         "paraProsseguirAtualizeChavePix": "To proceed, update your registration with your PIX key",
         "preenchaCadastroCompleto": "Please complete your registration completely to make the withdrawal request.",
         "alertaTitularChave": "Obs. Looting will only be carried out on pix keys belonging to the account holder.",
-        "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random"
+        "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random",
+        "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",

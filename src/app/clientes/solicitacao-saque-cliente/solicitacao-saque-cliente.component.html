@@ -46,6 +46,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngIf="apiPagamentos == 'pagfast'">
+                            <b>{{'geral.atencao' | translate}}! </b>{{'saques.pagamentoExclusivoChaveCPF' | translate}}<br>
+                            <div class="form-group form-check-custom form-check-style-1 wb-checkbox">
+                                <input type="checkbox" id="accept"
+                                    formControlName="accept">
+                                <label for="accept">
+                                    {{'geral.estouCiente' | translate}}
+                                </label>
+                            </div>
+                            <app-error-msg [control]="form.get('accept')"></app-error-msg>
+                        </div>
                         <div class="row mt-2">
                             <div class="col col-md-12">
                                 <div class="form-group group-buttons">

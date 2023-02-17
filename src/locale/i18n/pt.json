@@ -177,7 +177,8 @@
         "nomeJogoCassino": "Jogo",
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
-        "modalidade": "Modalidade"
+        "modalidade": "Modalidade",
+        "estouCiente": "Estou ciente"
     },
     "dias": {
         "ontem": "Ontem",
@@ -291,7 +292,8 @@
         "paraProsseguirAtualizeChavePix": "Para prosseguir, atualize seu cadastro com a sua chave PIX",
         "preenchaCadastroCompleto": "Por favor, preencha seu cadastro por completo para realizar a solictação de saque.",
         "alertaTitularChave": "Obs. Só será realizado saques em chaves pix pertencentes ao titular da conta.",
-        "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória"
+        "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
+        "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
