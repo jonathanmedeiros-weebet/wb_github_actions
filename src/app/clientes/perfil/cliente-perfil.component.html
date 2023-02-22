@@ -15,12 +15,12 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" formControlName="nome" class="form-control inverted-out">
+                                    <input type="text" formControlName="nome" class="form-control inverted-out" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" formControlName="sobrenome" class="form-control inverted-out">
+                                    <input type="text" formControlName="sobrenome" class="form-control inverted-out" readonly>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out">
+                                    <input type="text" formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out" readonly>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" class="form-control inverted-out" formControlName="nascimento">
+                                    <input type="text" class="form-control inverted-out" formControlName="nascimento" readonly>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" class="form-control inverted-out" formControlName="sexo">
+                                    <input type="text" class="form-control inverted-out" formControlName="sexo" readonly>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                             <div class="col col-md-3">
                                 <div class="form-group">
                                     <input type="text" formControlName="email" class="form-control inverted-out"
-                                        placeholder="exemplo@email.com">
+                                        placeholder="exemplo@email.com" readonly>
                                     <app-error-msg [control]="form.get('email')"></app-error-msg>
                                 </div>
                             </div>
