@@ -2546,3 +2546,12 @@ gulp.task('teambets.net.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('moneyville.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "moneyville.wee.bet",
+        banca: "MONEY VILLE",
+        styles: "",
+    });
+});

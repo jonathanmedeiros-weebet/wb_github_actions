@@ -276,7 +276,8 @@
         "aguiasport.bet": "gulp aguiasport.bet",
         "megasports.bet": "gulp megasports.bet",
         "bestgame.games": "gulp bestgame.games",
-        "teambets.net.br": "gulp teambets.net.br"
+        "teambets.net.br": "gulp teambets.net.br",
+        "moneyville.wee.bet": "gulp moneyville.wee.bet"
     },
     "private": true,
     "dependencies": {
