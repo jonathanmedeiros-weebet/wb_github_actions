@@ -26,7 +26,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     campeonatoSelecionado = false;
     modalRef;
     unsub$ = new Subject();
-    regiaoDestaqueSelecionada;
+    regiaoDestaqueSelecionada = false;
     
     constructor(
         private campeonatoService: CampeonatoService,
