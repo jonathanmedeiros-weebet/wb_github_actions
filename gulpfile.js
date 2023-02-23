@@ -2528,3 +2528,12 @@ gulp.task('megasports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bestgame.games', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bestgame.games",
+        banca: "BEST GAME",
+        styles: "",
+    });
+});

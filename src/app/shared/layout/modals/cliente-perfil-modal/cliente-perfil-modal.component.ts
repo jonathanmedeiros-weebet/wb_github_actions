@@ -49,13 +49,13 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
 
     createForm() {
         this.form = this.fb.group({
-            nome: [{value: '', disabled: true}],
-            sobrenome: [{value: '', disabled: true}],
-            nascimento: [{value: '', disabled: true}],
-            sexo: [{value: '', disabled: true}],
-            cpf: [{value: '', disabled: true}],
+            nome: [''],
+            sobrenome: [''],
+            nascimento: [''],
+            sexo: [''],
+            cpf: [''],
             telefone: ['', Validators.required],
-            email: [{value: '', disabled: true}, Validators.required],
+            email: [''],
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
             bairro: ['', Validators.required],

@@ -1316,7 +1316,7 @@ input.inverted-out:focus {
     -webkit-box-shadow: none
 }
 
-input.inverted-out:disabled {
+input.inverted-out:disabled, input.inverted-out:read-only {
     border-color: var(--foreground-inputs-odds);
     background: var(--inputs-odds);
     color: var(--foreground-inputs-odds);

@@ -11,26 +11,26 @@
             <div class="content">
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group input-md">
-                        <input id="nome" type="text" placeholder=" " formControlName="nome" class="form-control inverted-out">
+                        <input id="nome" type="text" placeholder=" " formControlName="nome" class="form-control inverted-out" readonly>
                         <label class="disabled" for="nome">{{'geral.nome' | translate}}</label>
                     </div>
                     <div class="form-group input-md">
-                        <input type="text" placeholder=" " formControlName="sobrenome" class="form-control inverted-out">
+                        <input type="text" placeholder=" " formControlName="sobrenome" class="form-control inverted-out" readonly>
                         <label class="disabled" for="nome">{{'geral.sobrenome' | translate}}</label>
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="text" placeholder=" " formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out">
+                        <input type="text" placeholder=" " formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out" readonly>
                         <label class="disabled" for="nome">{{'geral.cpf' | translate}}</label>
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="text" placeholder=" " class="form-control inverted-out" formControlName="nascimento">
+                        <input type="text" placeholder=" " class="form-control inverted-out" formControlName="nascimento" readonly>
                         <label class="disabled" for="nome">{{'geral.dataDeNascimento' | translate}}</label>
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="text" placeholder=" " class="form-control inverted-out" formControlName="sexo">
+                        <input type="text" placeholder=" " class="form-control inverted-out" formControlName="sexo" readonly>
                         <label class="disabled" for="nome">{{'geral.sexo' | translate}}</label>
                     </div>
                     <h5>{{'geral.informacoesDeContato' | translate}}</h5>
@@ -39,10 +39,11 @@
                         <input type="text" formControlName="telefone" placeholder=" "
                             mask="(00) 00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
                         <label for="nome">{{'geral.telefone' | translate}}</label>
+                        <app-error-msg [control]="form.get('telefone')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
-                        <input type="text" placeholder=" " formControlName="email" class="form-control inverted-out">
+                        <input type="text" placeholder=" " formControlName="email" class="form-control inverted-out" readonly>
                         <label class="disabled" for="nome">{{'geral.email' | translate}}</label>
                     </div>
 
@@ -52,21 +53,25 @@
                         <input type="text" formControlName="cep" placeholder=" " mask="00000-000"
                             class="form-control inverted-out" (change)="buscarPorCep($event)">
                         <label for="nome">{{'geral.cep' | translate}}</label>
+                        <app-error-msg [control]="form.get('cep')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="logradouro" class="form-control inverted-out">
                         <label for="nome">{{'geral.logradouro' | translate}}</label>
+                        <app-error-msg [control]="form.get('logradouro')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="numero" class="form-control inverted-out">
                         <label for="nome">Nª</label>
+                        <app-error-msg [control]="form.get('numero')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="bairro" class="form-control inverted-out">
                         <label for="nome">{{'geral.bairro' | translate}}</label>
+                        <app-error-msg [control]="form.get('bairro')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
@@ -77,6 +82,7 @@
                             </option>
                         </select>
                         <label for="nome">{{'geral.estado' | translate}}</label>
+                        <app-error-msg [control]="form.get('estado')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
@@ -86,12 +92,14 @@
                                 [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
                         </select>
                         <label for="nome">{{'geral.cidade' | translate}}</label>
+                        <app-error-msg [control]="form.get('cidade')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input [type]="mostrarSenha ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
                         <label for="nome">{{'senhas.senhaAtual' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
+                        <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
                     </div>
 
                     <div class="buttons">

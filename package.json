@@ -274,7 +274,8 @@
         "betsmilionaria.com.br": "gulp betsmilionaria.com.br",
         "r2bet.wee.bet": "gulp r2bet.wee.bet",
         "aguiasport.bet": "gulp aguiasport.bet",
-        "megasports.bet": "gulp megasports.bet"
+        "megasports.bet": "gulp megasports.bet",
+        "bestgame.games": "gulp bestgame.games"
     },
     "private": true,
     "dependencies": {
