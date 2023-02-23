@@ -15,7 +15,7 @@
                 <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
             </div>
 
-            <div class="tabs" *ngIf="regiao == null ">
+            <div class="tabs" *ngIf="regiaoDestaqueSelecionada == null">
                 <a class="tab" [ngClass]="{'active': !tabSelected}" (click)="mudarData('hoje')">{{'dias.hoje' | translate}}</a>
                 <a class="tab" *ngIf="limiteDiasTabela > 0" [ngClass]="{'active': tabSelected == 'amanha', 'inactive': tabSelected != 'amanha'}" (click)="mudarData('amanha')">{{'dias.amanha' | translate}}</a>
                 <a class="tab" *ngIf="limiteDiasTabela > 1" [ngClass]="{'active': tabSelected == 'doisdias', 'inactive': tabSelected != 'doisdias'}" (click)="mudarData('+2')">{{ diaHojeMaisDoisStr | titlecase }}</a>

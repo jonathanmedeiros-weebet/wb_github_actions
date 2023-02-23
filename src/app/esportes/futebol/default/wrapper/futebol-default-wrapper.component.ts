@@ -26,7 +26,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     campeonatoSelecionado = false;
     modalRef;
     unsub$ = new Subject();
-    regiaoSelecionada;
+    regiaoDestaqueSelecionada;
     
     constructor(
         private campeonatoService: CampeonatoService,
@@ -101,8 +101,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             data_final: dataLimiteTabela,
                             regiao_nome: params['regiao_nome']
                         };
-                        this.regiaoSelecionada = params['regiao_nome'];
-                       
                     } else {
                         queryParams = {
                             'sport_id': 1,
@@ -136,6 +134,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             this.data = queryParams.data;
                         }
                     }
+
+                    this.regiaoDestaqueSelecionada = params['regiao_nome'];
 
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(
