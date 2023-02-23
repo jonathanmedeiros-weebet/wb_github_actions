@@ -2537,3 +2537,12 @@ gulp.task('bestgame.games', function (done) {
         styles: "",
     });
 });
+
+gulp.task('teambets.net.br', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "teambets.net.br",
+        banca: "TEAM BETS",
+        styles: "",
+    });
+});
