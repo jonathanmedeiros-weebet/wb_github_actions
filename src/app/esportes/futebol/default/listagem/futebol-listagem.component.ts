@@ -246,6 +246,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             } else {
                 this.mudarData('+' + diferencaDias);
             }
+
+            this.campeonatosFiltrados = [];
+            this.campeonatosTemp = [];
         }
 
         if (changes['camps'] && this.camps) {
