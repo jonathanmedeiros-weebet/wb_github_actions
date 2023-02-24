@@ -2555,3 +2555,21 @@ gulp.task('moneyville.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('superbetonline.com.br', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "superbetonline.com.br",
+        banca: "SUPER BET ONLINE",
+        styles: "",
+    });
+});
+
+gulp.task('bet101.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet101.bet",
+        banca: "BET 101",
+        styles: "",
+    });
+});
