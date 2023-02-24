@@ -52,7 +52,7 @@
                     </ng-template>
                 </div>
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
-                    <ng-container *ngFor="let jogo of campeonato.jogos | filter: term; let i = index">
+                    <ng-container *ngFor="let jogo of campeonato.jogos; let i = index">
                         <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
                             <div class="indentificacao">
                                 <div class="data-hora">

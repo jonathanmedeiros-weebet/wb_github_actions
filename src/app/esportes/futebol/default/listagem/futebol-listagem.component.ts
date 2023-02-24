@@ -324,9 +324,19 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                 this.campeonatosTemp = this.campeonatos;
             }
 
-            this.campeonatosFiltrados = this.camps.filter(camp => camp.jogos.some(jogo => jogo.nome.includes(this.term.toUpperCase())));
+            this.campeonatosFiltrados = this.camps.filter(camp => {
+                if (camp.jogos.some(jogo => jogo.nome.includes(this.term.toUpperCase()))) {
+                    return true;
+                }
+                return false;
+            }).map(camp => Object.assign({}, camp));
+
             if (this.campeonatosFiltrados.length) {
                 this.campeonatosFiltrados.map(camp => {
+                    let jogosTemp;
+                    jogosTemp = camp.jogos.filter(jogo => jogo.nome.includes(this.term.toUpperCase()));
+
+                    camp.jogos = jogosTemp;
                     return this.calcularCotacoes(camp);
                 });
             }
@@ -351,7 +361,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     exibirMais() {
-        if (!this.regiaoSelecionada && this.camps && (this.page <= this.totalPages)) {
+        if ((!this.regiaoSelecionada && !this.term) && this.camps && (this.page <= this.totalPages)) {
             this.loadingScroll = true;
 
             let slice = this.camps.slice(this.start, (this.page * this.offset));
