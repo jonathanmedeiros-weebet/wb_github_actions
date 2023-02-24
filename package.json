@@ -279,7 +279,8 @@
         "teambets.net.br": "gulp teambets.net.br",
         "moneyville.wee.bet": "gulp moneyville.wee.bet",
         "superbetonline.com.br": "gulp superbetonline.com.br",
-        "bet101.bet": "gulp bet101.bet"
+        "bet101.bet": "gulp bet101.bet",
+        "carajasbet.com": "gulp carajasbet.com"
     },
     "private": true,
     "dependencies": {

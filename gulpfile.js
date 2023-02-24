@@ -2573,3 +2573,12 @@ gulp.task('bet101.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('carajasbet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "carajasbet.com",
+        banca: "CARAJÁS BET",
+        styles: "",
+    });
+});
