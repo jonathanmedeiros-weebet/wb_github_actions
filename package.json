@@ -280,7 +280,8 @@
         "moneyville.wee.bet": "gulp moneyville.wee.bet",
         "superbetonline.com.br": "gulp superbetonline.com.br",
         "bet101.bet": "gulp bet101.bet",
-        "carajasbet.com": "gulp carajasbet.com"
+        "carajasbet.com": "gulp carajasbet.com",
+        "facilbets.site": "gulp facilbets.site"
     },
     "private": true,
     "dependencies": {

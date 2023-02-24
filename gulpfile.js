@@ -2582,3 +2582,12 @@ gulp.task('carajasbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('facilbets.site', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "facilbets.site",
+        banca: "FÁCIL BETS",
+        styles: "",
+    });
+});
