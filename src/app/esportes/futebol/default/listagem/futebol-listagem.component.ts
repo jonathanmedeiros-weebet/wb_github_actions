@@ -251,6 +251,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
             this.campeonatosFiltrados = [];
             this.campeonatosTemp = [];
+            this.term = '';
         }
 
         if (changes['camps'] && this.camps) {
