@@ -276,7 +276,8 @@
         "superbetonline.com.br": "gulp superbetonline.com.br",
         "bet101.bet": "gulp bet101.bet",
         "carajasbet.com": "gulp carajasbet.com",
-        "facilbets.site": "gulp facilbets.site"
+        "facilbets.site": "gulp facilbets.site",
+        "mrsports.vip": "gulp mrsports.vip"
     },
     "private": true,
     "dependencies": {

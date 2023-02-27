@@ -2543,3 +2543,12 @@ gulp.task('facilbets.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mrsports.vip', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "mrsports.vip",
+        banca: "MR SPORTS",
+        styles: "",
+    });
+});
