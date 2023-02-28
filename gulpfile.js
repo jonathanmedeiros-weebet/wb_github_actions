@@ -2570,3 +2570,21 @@ gulp.task('winsbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('grenalbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "grenalbet.wee.bet",
+        banca: "GRENAL BET",
+        styles: "",
+    });
+});
+
+gulp.task('goldsports.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "goldsports.bet",
+        banca: "GOLD SPORTS",
+        styles: "",
+    });
+});

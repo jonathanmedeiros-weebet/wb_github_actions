@@ -279,7 +279,9 @@
         "facilbets.site": "gulp facilbets.site",
         "mrsports.vip": "gulp mrsports.vip",
         "a2bet.top": "gulp a2bet.top",
-        "winsbet.wee.bet": "gulp winsbet.wee.bet"
+        "winsbet.wee.bet": "gulp winsbet.wee.bet",
+        "grenalbet.wee.bet": "gulp grenalbet.wee.bet",
+        "goldsports.bet": "gulp goldsports.bet"
     },
     "private": true,
     "dependencies": {
