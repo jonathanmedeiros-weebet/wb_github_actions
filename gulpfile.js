@@ -2561,3 +2561,12 @@ gulp.task('a2bet.top', function (done) {
         styles: "",
     });
 });
+
+gulp.task('winsbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "winsbet.wee.bet",
+        banca: "WINS BET",
+        styles: "",
+    });
+});
