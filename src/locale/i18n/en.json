@@ -293,7 +293,8 @@
         "preenchaCadastroCompleto": "Please complete your registration completely to make the withdrawal request.",
         "alertaTitularChave": "Obs. Looting will only be carried out on pix keys belonging to the account holder.",
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random",
-        "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key."
+        "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key.",
+        "solicitacoesRecentes": "Recent withdrawal requests"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -309,13 +310,15 @@
     },
     "deposito": {
         "titulo": "Deposit",
+        "depositoERegistrado": "Deposit - Registered",
         "selecioneUmaFormaDeDeposito": "Select a deposit method",
         "informeOValor": "Enter value",
         "seuPixFoiCreditado": "Your pix was successfully credited, your new balance is: R$ {{novoSaldo}}",
         "valorMinimo": "Minimum deposit amount",
         "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact the bank.",
         "depositoRegistrado": "Deposit - Registered",
-        "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}"
+        "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}",
+        "depositosRecentes": "Recent deposits"
     },
     "footer": {
         "mensagem1": "{{BANCA_NOME}} is an online entertainment system that offers its users a unique experience in Sports Betting.",
