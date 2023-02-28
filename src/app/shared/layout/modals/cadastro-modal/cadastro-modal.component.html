@@ -47,20 +47,6 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group mb-4" [ngClass]="applyCssDivError('genero')">
-                    <select formControlName="genero" class="form-control inverted-out"
-                            [ngClass]="applyCssInputError('cpf')">
-                        <option value="">{{'geral.sexo' | translate}}</option>
-                        <option value="masculino">{{'geral.masculino' | translate}}</option>
-                        <option value="feminino">{{'geral.feminino' | translate}}</option>
-                    </select>
-                    <app-error-msg [control]="form.get('genero')" label="{{'geral.sexo' | translate}}"
-                                   class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
                 <div class="form-group mb-4">
                     <div class="input-md">
                         <input type="text" id="cpf" class="form-control inverted-out" mask="000.000.000-00"
