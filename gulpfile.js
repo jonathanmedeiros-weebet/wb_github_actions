@@ -2552,3 +2552,12 @@ gulp.task('mrsports.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('a2bet.top', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "a2bet.top",
+        banca: "A2 BET",
+        styles: "",
+    });
+});
