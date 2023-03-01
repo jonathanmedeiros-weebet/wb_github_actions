@@ -2588,3 +2588,12 @@ gulp.task('goldsports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('propixx.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "propixx.bet",
+        banca: "PROPIXX.BET",
+        styles: "",
+    });
+});
