@@ -45,6 +45,9 @@
                 </div>
             </div>
             <div class="table-responsive">
+                <label class="label">
+                    <span>{{'deposito.depositosRecentes' | translate}}</span>
+                </label>
                 <table class="table">
                     <thead>
                         <tr>
@@ -57,7 +60,7 @@
                     <tbody>
                         <tr *ngFor="let deposito of depositos">
                             <td><img src="/assets/images/credito.svg" alt="image"></td>
-                            <td>Depósito - Resgistrado {{ deposito.data_registro }}</td>
+                            <td>{{'deposito.depositoERegistrado' | translate}} {{ deposito.data_registro }}</td>
                             <td>{{ deposito.status | depositoStatusPixPipe}}</td>
                             <td>{{ deposito.valor | currency}}</td>
                         </tr>
