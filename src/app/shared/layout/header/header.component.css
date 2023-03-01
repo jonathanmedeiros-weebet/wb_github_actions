@@ -440,3 +440,15 @@ body .change-theme {
         margin-right: 10px;
     }
 }
+
+.ocultarSaldo{
+    background: #151515;
+    color: #151515; 
+}
+
+.olhinho{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-top: 12%;
+}

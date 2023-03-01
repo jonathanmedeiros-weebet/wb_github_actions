@@ -79,7 +79,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         fragment: 'ignored',
         paths: 'exact'
     };
-
+    classOcultarSaldo;
+    mostrarSaldo;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -168,6 +169,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
+        
+        this.classOcultarSaldo = ['ocultarSaldo'];
+
+        if(localStorage.getItem('exibirSaldo') == null || JSON.parse(localStorage.getItem('exibirSaldo')) == false  ){
+            this.mostrarSaldo = false;
+        }else{ 
+            this.mostrarSaldo = true;
+        }
     }
 
     ngOnDestroy() {
@@ -359,5 +368,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         localStorage.setItem('linguagem', language);
         this.linguagemSelecionada = language;
         this.translate.use(language);
+    }
+
+    ExibirSaldo() {
+        if(!this.mostrarSaldo){
+            this.mostrarSaldo = true;
+            localStorage.setItem('exibirSaldo', 'true');
+        }else{
+            this.mostrarSaldo = false;
+            localStorage.setItem('exibirSaldo', 'false');
+        }
     }
 }
