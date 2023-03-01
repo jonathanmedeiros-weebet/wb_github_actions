@@ -40,7 +40,7 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <i class="fa olhinho" (click)="ExibirSaldo()"  [ngClass]=" mostrarSaldo ? 'fa-eye' : 'fa-eye-slash'"></i> 
+                <i class="fa olhinho" (click)="ExibirSaldo()"  [ngClass]=" mostrarSaldo ? 'fa-eye-slash' : 'fa-eye' "></i> 
                 <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle menu-perfil" href="#" id="navbarDropdown"
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div>
