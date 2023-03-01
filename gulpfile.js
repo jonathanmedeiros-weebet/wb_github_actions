@@ -2597,3 +2597,12 @@ gulp.task('propixx.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('p1x.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "p1x.bet",
+        banca: "P1X.BET",
+        styles: "",
+    });
+});

@@ -282,7 +282,8 @@
         "winsbet.wee.bet": "gulp winsbet.wee.bet",
         "grenalbet.wee.bet": "gulp grenalbet.wee.bet",
         "goldsports.bet": "gulp goldsports.bet",
-        "propixx.bet": "gulp propixx.bet"
+        "propixx.bet": "gulp propixx.bet",
+        "p1x.bet": "gulp p1x.bet"
     },
     "private": true,
     "dependencies": {
