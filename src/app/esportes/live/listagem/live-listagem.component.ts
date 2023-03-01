@@ -243,6 +243,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         const indexGame = this.itens.findIndex(i => i.jogo._id === jogo._id);
         const indexOdd = this.itens.findIndex(i => (i.jogo._id === jogo._id) && (i.cotacao.chave === cotacao.chave));
 
+        jogo.nome = `${jogo.time_a_nome} x ${jogo.time_b_nome}`;
+
         const item = {
             ao_vivo: true,
             jogo_id: jogo._id,
