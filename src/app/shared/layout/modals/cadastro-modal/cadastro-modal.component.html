@@ -165,7 +165,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <label><input type="checkbox" formControlName="aceitar_termos">{{'geral.certificoQueTenhoMais' | translate}}<a
+                <label class="label-termo-uso"><input class="checkbox-aceitar-termos" type="checkbox" formControlName="aceitar_termos">{{'geral.certificoQueTenhoMais' | translate}}<a
                         (click)="abrirModalTermosUso(termosUsoModal)" id="linkTermos"><b> {{'geral.termosDeUso' |
                             translate}}</b>.</a></label>
                 <app-error-msg [control]="form.get('aceitar_termos')" label="Termos de Uso"
@@ -186,7 +186,7 @@
         </div>
         
         <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
-            <div class="col-12" style="text-align:center ">
+            <div class="col-12" [ngStyle]="{'text-align': 'left'}">
                 <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
                 Este site é protegido por reCAPTCHA e a 
                 <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidade</a> do Google e os 
