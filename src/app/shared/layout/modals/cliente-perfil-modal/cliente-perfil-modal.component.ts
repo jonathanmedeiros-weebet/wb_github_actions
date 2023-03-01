@@ -52,7 +52,6 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
             nome: [''],
             sobrenome: [''],
             nascimento: [''],
-            sexo: [''],
             cpf: [''],
             telefone: ['', Validators.required],
             email: [''],
@@ -90,7 +89,6 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                             nome: cliente.nome.toUpperCase(),
                             sobrenome: cliente.sobrenome.toUpperCase(),
                             nascimento: moment(cliente.dataNascimento.date).format('DD/MM/YYYY'),
-                            sexo: cliente.genero.toUpperCase(),
                             cpf: cliente.cpf,
                             telefone: cliente.telefone,
                             email: cliente.email
