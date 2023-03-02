@@ -320,8 +320,7 @@ body .change-theme {
 }
 
 .saldoOculto{
-    background: var(--foreground-league);
-    color: var(--foreground-league);
+    background: var(--league);
     min-width: 50px ;
     min-height:19px; 
     border-radius: 3px;
