@@ -319,6 +319,21 @@ body .change-theme {
     cursor: pointer;
 }
 
+.saldoOculto{
+    background: var(--foreground-league);
+    color: var(--foreground-league);
+    min-width: 50px ;
+    min-height:19px; 
+    border-radius: 3px;
+}
+
+.olhinho{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-top: 12%;
+}
+
 @media only screen and (max-width: 1024px) {
     .header {
         width: 100%;
@@ -439,16 +454,4 @@ body .change-theme {
     .side-right .btn-custom2 {
         margin-right: 10px;
     }
-}
-
-.ocultarSaldo{
-    background: #151515;
-    color: #151515; 
-}
-
-.olhinho{
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding-top: 12%;
 }
