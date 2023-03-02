@@ -319,13 +319,6 @@ body .change-theme {
     cursor: pointer;
 }
 
-.saldoOculto{
-    background: var(--league);
-    min-width: 50px ;
-    min-height:19px; 
-    border-radius: 3px;
-}
-
 .olhinho{
     cursor: pointer;
     display: flex;

@@ -45,8 +45,9 @@
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div>
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
-                        <span class="saldo-usuario" [ngClass]="{'saldoOculto' : !mostrarSaldo}"> 
-                            <span id="olhinho" *ngIf="mostrarSaldo"> {{ posicaoFinanceira.saldo | currency }}</span>
+                        <span class="saldo-usuario"> 
+                            <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
+                            <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                         </span>
                     </div>
                     <img src="https://cdn.wee.bet/img/blank-profile-picture.png" alt="">
