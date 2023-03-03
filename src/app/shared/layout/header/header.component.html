@@ -40,11 +40,15 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
+                <i class="fa olhinho" (click)="alternarExibirSaldo()" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i> 
                 <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle menu-perfil" href="#" id="navbarDropdown"
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div>
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
-                        <span class="saldo-usuario">{{ posicaoFinanceira.saldo | currency }}</span>
+                        <span class="saldo-usuario"> 
+                            <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
+                            <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
+                        </span>
                     </div>
                     <img src="https://cdn.wee.bet/img/blank-profile-picture.png" alt="">
                 </a>

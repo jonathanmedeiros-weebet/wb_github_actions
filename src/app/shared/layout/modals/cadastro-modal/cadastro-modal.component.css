@@ -77,3 +77,25 @@ button {
 }
 
 .grecaptcha-badge { visibility: hidden; }
+
+.checkbox-aceitar-termos{
+    margin-right: 5px
+}
+
+.label-termo-uso{
+    display: flex;
+}
+
+#linkTermos{
+    margin-left: 3px;
+}
+
+@media only screen and (max-width: 610px) {
+    .label-termo-uso {
+        display: block;
+    }
+
+    #linkTermos{
+        margin-left: 0;
+    }
+}
