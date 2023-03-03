@@ -89,8 +89,8 @@ export class AppComponent implements OnInit {
                                     this.modalService.open(
                                         this.ativacaoCadastroModal,
                                         {
+                                            ariaLabelledBy: 'modal-basic-title',
                                             centered: true,
-                                            backdrop: 'static'
                                         }
                                     );
                                     this.router.navigate(['esportes/futebol']);
