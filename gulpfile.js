@@ -2617,3 +2617,12 @@ gulp.task('pagbet.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betbrazilian.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betbrazilian.com",
+        banca: "BET BRAZILIAN",
+        styles: "",
+    });
+});

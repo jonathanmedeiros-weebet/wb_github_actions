@@ -284,7 +284,8 @@
         "goldsports.bet": "gulp goldsports.bet",
         "propixx.bet": "gulp propixx.bet",
         "p1x.bet": "gulp p1x.bet",
-        "pagbet.club": "gulp pagbet.club"
+        "pagbet.club": "gulp pagbet.club",
+        "betbrazilian.com": "gulp betbrazilian.com"
     },
     "private": true,
     "dependencies": {
