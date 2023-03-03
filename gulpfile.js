@@ -2608,3 +2608,12 @@ gulp.task('p1x.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pagbet.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pagbet.club",
+        banca: "PAGBET",
+        styles: "",
+    });
+});
