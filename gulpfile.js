@@ -2426,6 +2426,7 @@ gulp.task('primeesportes.club', function (done) {
         host: "primeesportes.club",
         banca: "PRIME ESPORTES",
         styles: "",
+        pixel: "<meta name='facebook-domain-verification' content='jd42i0o4bghfq9lji5tlb54mexsmes' />"
     });
 });
 
