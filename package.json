@@ -285,7 +285,8 @@
         "propixx.bet": "gulp propixx.bet",
         "p1x.bet": "gulp p1x.bet",
         "pagbet.club": "gulp pagbet.club",
-        "betbrazilian.com": "gulp betbrazilian.com"
+        "betbrazilian.com": "gulp betbrazilian.com",
+        "81betpix.wee.bet": "gulp 81betpix.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -2627,3 +2627,12 @@ gulp.task('betbrazilian.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('81betpix.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "81betpix.wee.bet",
+        banca: "81 BET PIX",
+        styles: "",
+    });
+});
