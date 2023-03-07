@@ -17,6 +17,9 @@ import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComp
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {BaseFormComponent} from '../../base-form/base-form.component';
+import * as moment from 'moment/moment';
+import { config } from '../../../../shared/config';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-cliente-apostas-modal',
@@ -55,7 +58,11 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     toDate: NgbDate | null;
 
     apostas = [];
-    mobileScreen;
+    mobileScreen: boolean;
+    slug;
+
+    pronomesCliente = {'pt': 'Você ', 'en': 'You '};
+    pronomeCliente;
 
     constructor(
         private messageService: MessageService,
@@ -73,7 +80,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private acumuladaoService: AcumuladaoService,
         private desafioApostaService: DesafioApostaService,
         private cassinoService: CasinoApiService,
-        private loteriaService: ApostaLoteriaService
+        private loteriaService: ApostaLoteriaService,
+        private translate: TranslateService
     ) {
         super();
 
@@ -89,6 +97,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     }
 
     ngOnInit() {
+        this.slug = config.SLUG;
         this.mobileScreen = window.innerWidth <= 1024;
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cliente'});
@@ -105,6 +114,9 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.createForm();
 
         this.getApostas();
+
+        this.pronomeCliente = this.pronomesCliente[this.translate.currentLang];
+        this.translate.onLangChange.subscribe(change => this.pronomeCliente = this.pronomesCliente[change.lang]);
     }
 
     ngOnDestroy() {
@@ -304,6 +316,10 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                 },
                 error => this.handleError(error)
             );
+    }
+
+    getDataFormatada(value, format) {
+        return moment(value).format(format);;
     }
 
     // handleCancel(aposta) {
