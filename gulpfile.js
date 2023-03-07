@@ -726,15 +726,6 @@ gulp.task('chutebets.wee.bet', function (done) {
     });
 });
 
-gulp.task('superbetplus.club', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "superbetplus.club",
-        banca: "SUPER BET PLUS",
-        styles: "--league: yellow;",
-    });
-});
-
 gulp.task('ingamesport.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1263,15 +1254,6 @@ gulp.task('i2bets.com', function (done) {
         server: "front2.wee.bet",
         host: "i2bets.com",
         banca: "I2 BETS",
-        styles: "",
-    });
-});
-
-gulp.task('ltbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "ltbets.wee.bet",
-        banca: "LT BETS",
         styles: "",
     });
 });
@@ -1856,15 +1838,6 @@ gulp.task('supremodasorte.wee.bet', function (done) {
     });
 });
 
-gulp.task('spmaster.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "spmaster.net",
-        banca: "SP MASTER",
-        styles: "",
-    });
-});
-
 gulp.task('betmax.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2256,15 +2229,6 @@ gulp.task('nacionalbets.com', function (done) {
     });
 });
 
-gulp.task('betnazebra.com.br', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betnazebra.com.br",
-        banca: "BETNAZEBRA",
-        styles: "",
-    });
-});
-
 gulp.task('cisper.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2543,15 +2507,6 @@ gulp.task('facilbets.site', function (done) {
         server: "front1.wee.bet",
         host: "facilbets.site",
         banca: "FÁCIL BETS",
-        styles: "",
-    });
-});
-
-gulp.task('mrsports.vip', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "mrsports.vip",
-        banca: "MR SPORTS",
         styles: "",
     });
 });
