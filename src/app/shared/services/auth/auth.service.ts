@@ -225,6 +225,7 @@ export class AuthService {
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
+        localStorage.removeItem('exibirSaldo');
     }
 
     isCliente(): boolean {
