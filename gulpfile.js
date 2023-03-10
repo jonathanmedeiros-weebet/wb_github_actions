@@ -2591,3 +2591,21 @@ gulp.task('81betpix.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportpix.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportpix.vip",
+        banca: "SPORT PIX",
+        styles: "",
+    });
+});
+
+gulp.task('valebet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "valebet.wee.bet",
+        banca: "VALE BET",
+        styles: "",
+    });
+});
