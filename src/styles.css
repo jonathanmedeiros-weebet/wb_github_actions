@@ -1678,6 +1678,11 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 10px;
 }
 
+ngb-datepicker-month {
+    background-color: var(--header);
+    color: var(--foreground-header);
+}
+
 @keyframes blinkerMe {
     50% {
         opacity: 0;
