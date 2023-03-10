@@ -1071,15 +1071,6 @@ gulp.task('starbets.online', function (done) {
     });
 });
 
-gulp.task('betcompany.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betcompany.wee.bet",
-        banca: "BET COMPANY",
-        styles: "",
-    });
-});
-
 gulp.task('dfsportsbet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1617,15 +1608,6 @@ gulp.task('eshowdebola.bet', function (done) {
     });
 });
 
-gulp.task('brlesportiva.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "brlesportiva.bet",
-        banca: "BRL ESPORTIVA",
-        styles: "",
-    });
-});
-
 gulp.task('betsmania.live', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1678,15 +1660,6 @@ gulp.task('vipersports.bet', function (done) {
         host: "vipersports.bet",
         banca: "VIPER SPORTS",
         styles: "",
-    });
-});
-
-gulp.task('atleticbet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "atleticbet.com",
-        banca: "ATLETIC BET",
-        styles: ""
     });
 });
 
@@ -2143,15 +2116,6 @@ gulp.task('s10sports.bet', function (done) {
     });
 });
 
-gulp.task('apostafacil.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "apostafacil.wee.bet",
-        banca: "APOSTA FÁCIL",
-        styles: "",
-    });
-});
-
 gulp.task('reidabet.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2281,15 +2245,6 @@ gulp.task('onepro.bet', function (done) {
         banca: "ONEPRO.BET",
         styles: "",
         scripts: "<!--Start of Tawk.to Script--><script type='text/javascript'>var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0];s1.async=true;s1.src='https://embed.tawk.to/63e56ddbc2f1ac1e20326ad6/1gpdmj5sp';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->"
-    });
-});
-
-gulp.task('betfa.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betfa.wee.bet",
-        banca: "BET FA",
-        styles: "",
     });
 });
 
