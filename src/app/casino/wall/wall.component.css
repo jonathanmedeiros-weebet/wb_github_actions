@@ -258,7 +258,7 @@
     }
     
     .game-list{
-        width: 90%;
+        width: calc(90% - 90px);
     }
 
     .scroll-right{
@@ -287,17 +287,6 @@
         justify-content: center;
         align-items: center;
     }
-
-    .esconderBotaoLeft{
-        visibility: hidden;
-    }
-
-    .esconderBotaoRight{
-        visibility: hidden;
-    }
-
-
-
 }
 
 @media only screen and (min-width: 1025px) {
@@ -337,14 +326,6 @@
     
     #destaques-left{
         display: none;
-    }
-
-    .esconderBotaoLeft{
-        visibility: hidden;
-    }
-
-    .esconderBotaoRight{
-        visibility: hidden;
     }
 }
 

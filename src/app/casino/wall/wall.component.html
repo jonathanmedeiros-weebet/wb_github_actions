@@ -188,15 +188,9 @@
             </div>
             <div class="games-container">
                 <div class="scroll-button scroll-left disabled-scroll-button" id="roleta-left"
-                     (click)="scrollLeft('roleta')"  *ngIf="gamesRoleta.length > 5; else elseEsconderBotaoLeft">
+                     (click)="scrollLeft('roleta')"  *ngIf="gamesRoleta.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
-                <ng-template #elseEsconderBotaoLeft>
-                    <div class="scroll-button scroll-left disabled-scroll-button esconderBotaoLeft" id="roleta-left"
-                     (click)="scrollLeft('roleta')">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                </ng-template>
                 <div class="game-list game-list-inline">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
                         <img *ngIf="game.fornecedor == 'pragmatic'" title="{{game.gameName}}" src="https://weebet.prerelease-env.biz/game_pic/rec/325/{{game.gameID}}.png">
@@ -217,15 +211,9 @@
                     </div>
                 </div>
                 <div class="scroll-button scroll-right enabled-scroll-button" id="roleta-right"
-                     (click)="scrollRight('roleta')" *ngIf="gamesRoleta.length > 5; else elseEsconderBotaoRight">
+                     (click)="scrollRight('roleta')" *ngIf="gamesRoleta.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
-                <ng-template #elseEsconderBotaoRight>
-                    <div class="scroll-button scroll-right enabled-scroll-button esconderBotaoRight" id="roleta-right"
-                        (click)="scrollRight('roleta')">
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                </ng-template>
             </div>
         </div>
         <div *ngIf="salsaCassino" class="bloco">
