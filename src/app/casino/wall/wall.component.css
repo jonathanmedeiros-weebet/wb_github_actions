@@ -286,6 +286,8 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        grid-gap: 16px;
+        gap: 16px;
     }
 }
 
