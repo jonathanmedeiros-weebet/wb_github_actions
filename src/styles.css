@@ -1406,7 +1406,7 @@ input.inverted-out::-webkit-input-placeholder {
     background-color: var(--game);
     color: var(--foreground-game);
     flex-grow: 1;
-    /*min-width: 250px;*/
+    min-width: 250px;
     height: 60px;
     justify-content: center;
     padding: 0 10px;
@@ -1476,6 +1476,10 @@ input.inverted-out::-webkit-input-placeholder {
 .odd .valor-odd {
     color: var(--foreground-inputs-odds);
     text-align: center;
+    max-width: 6vw;
+    max-height: 20vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .odds-coluna {
