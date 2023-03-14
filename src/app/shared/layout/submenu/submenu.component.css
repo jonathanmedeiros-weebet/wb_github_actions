@@ -125,12 +125,10 @@
     }
 
     .submenu:not(.centered) .subcategory a.active {
-        position: absolute;
-        height: 38px;
-        left: 0;
-        width: auto;
+        display: none;
+    }
 
-        color: var(--foreground-highlight);
-        background-color: var(--highlight);
+    .fixed-submenu {
+        white-space: nowrap;
     }
 }

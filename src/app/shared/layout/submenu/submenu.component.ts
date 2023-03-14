@@ -22,28 +22,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     submenuItems = [];
     submenu = [];
-
-    larguras = {
-        '/esportes/live': 400,
-        '/esportes/live/jogos': 0,
-        '/esportes/futebol': 90,
-        '/esportes/futsal': 81,
-        '/esportes/volei': 75,
-        '/esportes/basquete': 100,
-        '/esportes/combate': 98,
-        '/esportes/hoquei-gelo': 135,
-        '/esportes/futebol-americano': 153,
-        '/esportes/esports': 94,
-        '/esportes/tenis': 77,
-        '/casino/c/wall/todos': 85,
-        '/casino/c/wall/slot': 72,
-        '/casino/c/wall/raspadinha': 116,
-        '/casino/c/wall/roleta': 86,
-        '/casino/c/wall/mesa': 80,
-        '/casino/c/wall/live': 138
-    };
-
-    paddingMenu = 0;
+    submenuAtivo;
 
     @HostListener('window:resize', ['$event'])
     onResize() {
@@ -57,14 +36,10 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         private router: Router,
         private translate: TranslateService
     ) {
-        router.events.subscribe(val => {
-            this.paddingMenu = this.larguras[this.router.url.split('?')[0]] ?? 0;
-        });
+        router.events.subscribe(() => this.atualizarSubmenuAtivo());
     }
 
     ngOnInit() {
-        this.paddingMenu = this.larguras[this.router.url.split('?')[0]] ?? 0;
-
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
@@ -74,6 +49,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         }
 
         this.atualizarSubmenu();
+        this.atualizarSubmenuAtivo();
 
         this.translate.onLangChange.subscribe(() => {
             this.atualizarSubmenu();
@@ -294,6 +270,13 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
         this.submenuItems = this.submenu.filter((item) => {
             return item.category === this.category && item.active;
+        });
+        this.atualizarSubmenuAtivo();
+    }
+
+    atualizarSubmenuAtivo() {
+        this.submenuAtivo = this.submenu.find(submenu => {
+            return submenu.link == this.router.url.split('?')[0];
         });
     }
 }

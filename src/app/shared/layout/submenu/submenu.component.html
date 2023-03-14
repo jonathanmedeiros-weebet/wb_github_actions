@@ -1,5 +1,11 @@
 <div class="submenu-container">
-    <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth, 'padding-left.px': paddingMenu}"
+    <div class="subcategory fixed-submenu" *ngIf="isMobile && submenuAtivo && !centered">
+        <a routerLink="{{submenuAtivo.link}}" routerLinkActive="active" [queryParams]="submenuAtivo.queryParams">
+            <i class="{{submenuAtivo.icon_class}}"></i>
+            <span>{{submenuAtivo.name}}</span>
+        </a>
+    </div>
+    <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
          [ngClass]="{'centered': centered}"
          (scroll)="onScroll($event)" #scrollMenu>
         <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''" *ngIf="!isMobile">
