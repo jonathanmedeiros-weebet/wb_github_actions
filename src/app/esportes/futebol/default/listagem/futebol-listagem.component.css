@@ -15,7 +15,7 @@
 }
 
 .nome-time {
-    max-width: 55vw;
+    width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -177,8 +177,8 @@ app-destaques {
         padding: 20px 0 20px 20px;
     }
 
-    .nome-time {
-        max-width: 80%;
+    .escudo-container {
+        max-width: 85%;
     }
 
     .filter {
