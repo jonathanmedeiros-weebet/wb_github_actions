@@ -2569,7 +2569,7 @@ gulp.task('vegasbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "vegasbet.wee.bet",
-        banca: "VALE BET",
+        banca: "VEGAS BET",
         styles: "",
     });
 });
