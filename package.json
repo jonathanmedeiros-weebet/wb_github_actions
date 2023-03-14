@@ -278,7 +278,8 @@
         "betbrazilian.com": "gulp betbrazilian.com",
         "81betpix.wee.bet": "gulp 81betpix.wee.bet",
         "sportpix.vip": "gulp sportpix.vip",
-        "valebet.wee.bet": "gulp valebet.wee.bet"
+        "valebet.wee.bet": "gulp valebet.wee.bet",
+        "vegasbet.wee.bet": "gulp vegasbet.wee.bet"
     },
     "private": true,
     "dependencies": {

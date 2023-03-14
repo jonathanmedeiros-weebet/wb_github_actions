@@ -2564,3 +2564,12 @@ gulp.task('valebet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vegasbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "vegasbet.wee.bet",
+        banca: "VALE BET",
+        styles: "",
+    });
+});
