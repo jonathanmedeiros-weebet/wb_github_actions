@@ -5,6 +5,7 @@ import {
     ApostaEsportivaService,
     ApostaLoteriaService,
     ApostaService,
+    AuthService,
     DesafioApostaService,
     MenuFooterService,
     MessageService,
@@ -64,6 +65,9 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     pronomesCliente = {'pt': 'Você ', 'en': 'You '};
     pronomeCliente;
 
+    origin;
+    appMobile;
+
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,
@@ -81,7 +85,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private desafioApostaService: DesafioApostaService,
         private cassinoService: CasinoApiService,
         private loteriaService: ApostaLoteriaService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private auth: AuthService
     ) {
         super();
 
@@ -117,6 +122,9 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
         this.pronomeCliente = this.pronomesCliente[this.translate.currentLang];
         this.translate.onLangChange.subscribe(change => this.pronomeCliente = this.pronomesCliente[change.lang]);
+
+        this.appMobile = this.auth.isAppMobile();
+        this.origin = this.appMobile ? '?origin=app':''; 
     }
 
     ngOnDestroy() {

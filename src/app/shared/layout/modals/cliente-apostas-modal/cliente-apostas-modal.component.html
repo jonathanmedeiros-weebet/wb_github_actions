@@ -92,7 +92,7 @@
                             <td class="codigo">{{ aposta.codigo }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td class="acoes-aposta">
-                                <a *ngIf="aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
+                                <a *ngIf="aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
                                     <i class="fa fa-external-link"></i>
                                 </a>
                                 <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
