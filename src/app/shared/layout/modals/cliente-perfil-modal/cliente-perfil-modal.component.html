@@ -32,8 +32,8 @@
                     <h5>{{'geral.informacoesDeContato' | translate}}</h5>
 
                     <div class="form-group input-md">
-                        <input type="text" formControlName="telefone" placeholder=" "
-                            mask="(00) 00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
+                        <input type="text" formControlName="telefone" placeholder="(00)00000-0000"
+                            mask="(00)00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
                         <label for="nome">{{'geral.telefone' | translate}}</label>
                         <app-error-msg [control]="form.get('telefone')"></app-error-msg>
                     </div>
