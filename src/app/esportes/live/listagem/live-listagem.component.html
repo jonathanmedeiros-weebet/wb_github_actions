@@ -27,7 +27,7 @@
                     </div>
                     <div class="jogos" [hidden]="!campeonatoAberto(campeonato.value._id)">
                         <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
-                            <div class="indentificacao">
+                            <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
                                 <div class="tempo-box">
                                     <div class="aovivo-label">
                                         <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
@@ -36,7 +36,7 @@
                                         {{jogo.value.info.minutos}}'
                                     </div>
                                 </div>
-                                <div class="nome" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
+                                <div class="nome">
                                     <div class="time-a">
                                         <div class="escudo-container">
                                             <span *ngIf="jogo.value.time_a_img; else defaulImageA" class="escudo">

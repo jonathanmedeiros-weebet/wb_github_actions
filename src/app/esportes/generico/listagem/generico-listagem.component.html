@@ -50,8 +50,8 @@
                 </div>
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos">
-                      <div class="jogo" [ngStyle]="{'cursor': exibirTotalOdds() ? 'pointer' : 'auto'}" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
-                            <div class="indentificacao">
+                      <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
+                            <div class="indentificacao" [ngStyle]="{'cursor': exibirTotalOdds() ? 'pointer' : 'auto'}" (click)="exibirTotalOdds() && maisCotacoes(jogo._id)">
                                 <div class="data-hora">
                                     <div class="horario">
                                         {{jogo.horario | moment: 'DD/MM'}}
@@ -59,7 +59,7 @@
                                         {{jogo.horario | moment: 'HH:mm'}}
                                     </div>
                                 </div>
-                                <div class="nome" (click)="exibirTotalOdds() && maisCotacoes(jogo._id)">
+                                <div class="nome">
                                     <div class="escudo-container">
                                         <div *ngIf="exibirEscudo()">
                                             <span *ngIf="jogo.time_a_img; else defaulImageA" class="escudo">
