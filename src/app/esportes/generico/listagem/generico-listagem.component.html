@@ -50,7 +50,7 @@
                 </div>
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos">
-                      <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
+                        <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
                             <div class="indentificacao" [ngStyle]="{'cursor': exibirTotalOdds() ? 'pointer' : 'auto'}" (click)="exibirTotalOdds() && maisCotacoes(jogo._id)">
                                 <div class="data-hora">
                                     <div class="horario">

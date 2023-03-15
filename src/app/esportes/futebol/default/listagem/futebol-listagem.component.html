@@ -62,7 +62,7 @@
                                         {{jogo.horario | moment: 'HH:mm'}}
                                     </div>
                                 </div>
-                                <div class="nome" [ngStyle]="{'width.px': nomesJogoWidth}" >
+                                <div class="nome" [ngStyle]="{'width.px': nomesJogoWidth}">
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
                                             <img src="https://cdn.wee.bet/img/times/s/{{jogo.time_a_img}}.png" size="s"
