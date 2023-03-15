@@ -215,6 +215,7 @@
     .internal .game-list {
         flex-wrap: wrap;
         gap: 10px;
+        justify-content: center;
     }
 
     .game-tile {
@@ -248,47 +249,49 @@
         width: 100%;
     }
 
-    .games-container{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-
+    .scroll-left {
+        top: calc(50% - 15px);
+        left: 0px;
     }
     
-    .game-list{
-        width: calc(90% - 90px);
+    .scroll-right {
+        top: calc(50% - 15px);
+        right: 0px;
+    }
+
+    .enabled-scroll-button {
+        background-color: var(--background);
+        color: var(--foreground-inputs-odds);
+        cursor: pointer;
+        transition: 500ms;
+        z-index: 1;
+        border-radius: 25px;
+        height: 40px;
+        margin-right: 1%;
+    }    
+    .enabled-scroll-button:hover {
+        background-color: var(--highlight);
+    }
+
+    .disabled-scroll-button {
+        background-color: var(--highlight);
+        color: var(--background);
+        cursor: auto;
+        transition: 500ms;
+    } 
+    .scroll-left {
+        border-radius: 25px;
+        height: 40px;
+        margin-left: 1%;
     }
 
     .scroll-right{
-        position: initial;
+        border-radius: 25px;
+        height: 40px;
+        margin-right: 1%;
     }
-
-    .scroll-left{
-        position: initial;
-    }
-
-    .scroll-button{
-        display: flex;
-    }
-
-    .game-list-inline-destaque {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow: scroll;
-        scroll-behavior: smooth;
-    }
-
-    .games-container-destaque{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        grid-gap: 16px;
-        gap: 16px;
-    }
+    
+    
 }
 
 @media only screen and (min-width: 1025px) {
