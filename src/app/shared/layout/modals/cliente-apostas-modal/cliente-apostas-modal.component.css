@@ -56,30 +56,44 @@ h5 {
 
 .table {
     color: var(--foreground);
- }
+}
 
- .table thead th {
-     background-color: var(--game);
-     color: var(--foreground-game);
-     border-top: 0;
-     border-bottom: 1px solid var(--game);
-     padding: 15px 10px;
-     white-space: nowrap;
- }
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    padding: 15px 10px;
+}
 
- .table .right {
-     text-align: right;
- }
+.table thead th:first-child {
+    border-left: 10px solid var(--game);
+}
 
- .table tbody td {
-     border-top: 0;
-     border-bottom: 1px solid var(--game);
-     white-space: nowrap;
- }
+.table .right {
+    text-align: right;
+}
 
- .table td.no-border{
-     border-left: 0 !important;
- }
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+}
+
+.table td.no-border{
+    border-left: 0 !important;
+}
+
+.table tbody td:first-child {
+    border-left: 10px solid #808080;
+}
+
+.table tbody tr.green td:first-child {
+    border-left: 10px solid #309E3A;
+}
+
+.table tbody tr.red td:first-child {
+    border-left: 10px solid #ED4C5C;
+}
 
  .group-input-valor {
     text-align: center;
