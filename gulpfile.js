@@ -2582,3 +2582,12 @@ gulp.task('bet04.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betgain.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betgain.club",
+        banca: "BET GAIN",
+        styles: "",
+    });
+});

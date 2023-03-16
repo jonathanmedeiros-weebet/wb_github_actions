@@ -280,7 +280,8 @@
         "sportpix.vip": "gulp sportpix.vip",
         "valebet.wee.bet": "gulp valebet.wee.bet",
         "vegasbet.wee.bet": "gulp vegasbet.wee.bet",
-        "bet04.club": "gulp bet04.club"
+        "bet04.club": "gulp bet04.club",
+        "betgain.club": "gulp betgain.club"
     },
     "private": true,
     "dependencies": {
