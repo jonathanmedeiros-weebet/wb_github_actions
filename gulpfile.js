@@ -2573,3 +2573,12 @@ gulp.task('vegasbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet04.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet04.club",
+        banca: "BET 04",
+        styles: "",
+    });
+});
