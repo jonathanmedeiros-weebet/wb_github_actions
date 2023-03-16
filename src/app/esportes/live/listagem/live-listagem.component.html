@@ -27,7 +27,7 @@
                     </div>
                     <div class="jogos" [hidden]="!campeonatoAberto(campeonato.value._id)">
                         <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
-                            <div class="indentificacao">
+                            <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
                                 <div class="tempo-box">
                                     <div class="aovivo-label">
                                         <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
@@ -80,7 +80,7 @@
 
                                         <ng-template #noLock>
                                             <div class="cotacao"
-                                            (click)="addCotacao(jogo.value, cotacao)" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
+                                            (click)="addCotacao(jogo.value, cotacao); $event.stopPropagation()" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
                                                 <label>{{ cotacao.nome }}</label>
                                                 <span>{{ cotacao.valorFinal}}</span>
                                             </div>

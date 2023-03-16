@@ -51,7 +51,7 @@
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos">
                         <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
-                            <div class="indentificacao">
+                            <div class="indentificacao" [ngStyle]="{'cursor': exibirTotalOdds() ? 'pointer' : 'auto'}" (click)="exibirTotalOdds() && maisCotacoes(jogo._id)">
                                 <div class="data-hora">
                                     <div class="horario">
                                         {{jogo.horario | moment: 'DD/MM'}}
@@ -101,7 +101,7 @@
                                             <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                                 <div
                                                     class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
-                                                    (click)="addCotacao(jogo, cotacao)">
+                                                    (click)="addCotacao(jogo, cotacao); $event.stopPropagation()">
                                             <span class="nome-odd">
                                                 {{cotacao.label}}
                                             </span>
@@ -123,7 +123,7 @@
                                         </div>
                                         <ng-container *ngIf="cotacaoManualFaltando(jogo, jogo.cotacoes)">
                                             <div class="odd" *ngFor="let cotacao of cotacoesFaltando[jogo.event_id]"
-                                                 (click)="addCotacao(jogo, cotacao)">
+                                                 (click)="addCotacao(jogo, cotacao); $event.stopPropagation()">
                                                 <div
                                                     class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}">
                                             <span class="nome-odd">

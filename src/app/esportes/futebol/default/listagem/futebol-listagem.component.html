@@ -54,7 +54,7 @@
                 <div class="jogos" [hidden]="!campeonatoAberto(campeonato._id)">
                     <ng-container *ngFor="let jogo of campeonato.jogos; let i = index">
                         <div class="jogo" *ngIf="jogo.cotacoes.length && !jogoBloqueado(jogo.event_id)">
-                            <div class="indentificacao">
+                            <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo._id)">
                                 <div class="data-hora">
                                     <div class="horario">
                                         {{jogo.horario | moment: 'DD/MM'}}
@@ -99,7 +99,7 @@
                                     </a>
                                 </div>
                                 <a class="scroll-button disabled-scroll-button" id="scroll-left-{{jogo.event_id}}"
-                                   *ngIf="enableScrollButtons" (click)="moveLeft(jogo.event_id)">
+                                   *ngIf="enableScrollButtons" (click)="moveLeft(jogo.event_id); $event.stopPropagation()">
                                     <i class="fa-solid fa-angle-left"></i>
                                 </a>
                                 <div #scrollOdds class="odds" id="{{jogo.event_id}}"
@@ -109,7 +109,7 @@
                                             *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                             <div
                                                 class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
-                                                (click)="addCotacao(jogo, cotacao)">
+                                                (click)="addCotacao(jogo, cotacao); $event.stopPropagation()">
                                             <span class="nome-odd">
                                                 {{cotacao.label}}
                                             </span>
@@ -131,7 +131,7 @@
                                     </div>
                                 </div>
                                 <a class="scroll-button enabled-scroll-button" *ngIf="enableScrollButtons" id="scroll-right-{{jogo.event_id}}"
-                                   (click)="moveRight(jogo.event_id)">
+                                   (click)="moveRight(jogo.event_id); $event.stopPropagation()">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </a>
                                 <div class="mais-opcoes hide-mobile">
