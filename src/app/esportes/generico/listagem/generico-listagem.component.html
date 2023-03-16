@@ -73,7 +73,7 @@
                                                 </span>
                                             </ng-template>
                                         </div>
-                                        {{jogo.time_a_nome}}
+                                        <div class="nome-time"> {{jogo.time_a_nome}}</div>
                                     </div>
                                     <div class="escudo-container">
                                         <div *ngIf="exibirEscudo()">
@@ -88,7 +88,7 @@
                                                 </span>
                                             </ng-template>
                                         </div>
-                                        {{jogo.time_b_nome}}
+                                        <div class="nome-time">{{jogo.time_b_nome}}</div>
                                     </div>
                                     <a *ngIf="exibirTotalOdds()" class="mais-cotacao-mobile" (click)="maisCotacoes(jogo._id)">
                                         <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}
