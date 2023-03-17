@@ -2600,11 +2600,11 @@ gulp.task('sportspremium.club', function (done) {
     });
 });
 
-gulp.task('profit2.bet', function (done) {
+gulp.task('nogol.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "profit2.bet",
-        banca: "PROFIT2.BET",
+        host: "nogol.bet",
+        banca: "NOGOL.BET",
         styles: "",
     });
 });
