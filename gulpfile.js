@@ -1034,13 +1034,12 @@ gulp.task('jmxbet.com', function (done) {
     });
 });
 
-gulp.task('paratodosbet.com', function (done) {
+gulp.task('saqbet.tv', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "paratodosbet.com",
-        banca: "PARATODOS.BET",
-        styles: "",
-        scripts: "<!-- Global site tag (gtag.js) - Google Analytics --> <script async src='https://www.googletagmanager.com/gtag/js?id=UA-225184552-1'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-225184552-1'); </script>",
+        host: "saqbet.tv",
+        banca: "SAQBET.TV",
+        styles: ""
     });
 });
 
