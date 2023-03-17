@@ -48,7 +48,11 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
 
     submit() {
         this.submitting = true;
-        this.auth.forgot(this.form.value)
+        let emailSemEspaco = this.form.value['email'].trim();
+        let email = {
+            "email": emailSemEspaco
+        }
+        this.auth.forgot(email)
             .subscribe(
                 () => {
                     this.activeModal.dismiss();
