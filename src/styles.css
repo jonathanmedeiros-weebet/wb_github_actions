@@ -1406,12 +1406,13 @@ input.inverted-out::-webkit-input-placeholder {
     background-color: var(--game);
     color: var(--foreground-game);
     flex-grow: 1;
-    /*min-width: 250px;*/
     height: 60px;
     justify-content: center;
     padding: 0 10px;
     font-size: 11px; /* ajuste fonte */
     margin-right: 5px;
+    overflow: hidden;
+    width: 30%;
 }
 
 .odds {
@@ -1476,6 +1477,10 @@ input.inverted-out::-webkit-input-placeholder {
 .odd .valor-odd {
     color: var(--foreground-inputs-odds);
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 85%;
 }
 
 .odds-coluna {
@@ -1676,6 +1681,13 @@ input[type=number]::-webkit-outer-spin-button {
     color: var(--foreground-inputs-odds);
     cursor: pointer;
     padding: 10px;
+}
+
+.nome-time{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 ngb-datepicker-month {
