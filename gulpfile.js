@@ -2591,3 +2591,21 @@ gulp.task('betgain.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportspremium.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportspremium.club",
+        banca: "SPORTS PREMIUM",
+        styles: "",
+    });
+});
+
+gulp.task('profit2.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "profit2.bet",
+        banca: "PROFIT2.BET",
+        styles: "",
+    });
+});

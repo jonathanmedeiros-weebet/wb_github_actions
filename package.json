@@ -281,7 +281,9 @@
         "valebet.wee.bet": "gulp valebet.wee.bet",
         "vegasbet.wee.bet": "gulp vegasbet.wee.bet",
         "bet04.club": "gulp bet04.club",
-        "betgain.club": "gulp betgain.club"
+        "betgain.club": "gulp betgain.club",
+        "sportspremium.club": "gulp sportspremium.club",
+        "profit2.bet": "gulp profit2.bet"
     },
     "private": true,
     "dependencies": {
