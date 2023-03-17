@@ -131,7 +131,6 @@
 }
 
 .list-odds {
-    /* width: 330px; */
     width: 40%;
     max-width: 100%;
 }
@@ -168,10 +167,6 @@
     .odds .odd:first-of-type {
         margin-left: 0;
     }
-
-    /* .odds .odd .inner-odd {
-        padding: 15px 20px;
-    } */
 
     .mais-opcoes {
         margin-right: 10px;
