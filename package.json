@@ -284,7 +284,8 @@
         "betgain.club": "gulp betgain.club",
         "sportspremium.club": "gulp sportspremium.club",
         "profit2.bet": "gulp profit2.bet",
-        "nogol.bet": "gulp nogol.bet"
+        "nogol.bet": "gulp nogol.bet",
+        "gigantesbet.com": "gulp gigantesbet.com"
     },
     "private": true,
     "dependencies": {

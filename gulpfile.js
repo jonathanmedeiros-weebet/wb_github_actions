@@ -2608,3 +2608,12 @@ gulp.task('nogol.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gigantesbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gigantesbet.com",
+        banca: "GIGANTES BET",
+        styles: "",
+    });
+});
