@@ -363,15 +363,6 @@ gulp.task('vitoriasports.bet', function (done) {
     });
 });
 
-gulp.task('amigosdabola.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "amigosdabola.wee.bet",
-        banca: "Amigos da Bola",
-        styles: "--header: red; --foreground-header: #fff; --sidebar-right:red; --foreground-sidebar-right: #fff; --sidebar-left: #373435; --foreground-sidebar-left: #fff; --highlight: #ffc107; --foreground-highlight: #fff; --odds: #373435; --foreground-odds: #fff; --event-time: red;",
-    });
-});
-
 gulp.task('footbets.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1388,15 +1379,6 @@ gulp.task('sm7.wee.bet', function (done) {
     });
 });
 
-gulp.task('brotherr.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "brotherr.bet",
-        banca: "BROTHERS BET",
-        styles: "",
-    });
-});
-
 gulp.task('visabet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1411,16 +1393,6 @@ gulp.task('infinitybet.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "infinitybet.wee.bet",
         banca: "INFINITY BET",
-        styles: "",
-    });
-});
-
-gulp.task('xbetpix.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "xbetpix.wee.bet",
-        shared_url: "xbetpix.com.br",
-        banca: "X BETPIX",
         styles: "",
     });
 });
@@ -1778,15 +1750,6 @@ gulp.task('betbetix.com', function (done) {
     });
 });
 
-gulp.task('bravos.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "bravos.bet",
-        banca: "Bravos Bet - Apostas Esportivas",
-        styles: "",
-    });
-});
-
 gulp.task('arena365.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2092,15 +2055,6 @@ gulp.task('arenabet.bet', function (done) {
     });
 });
 
-gulp.task('winup.casino', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "winup.casino",
-        banca: "WINUP",
-        styles: "",
-    });
-});
-
 gulp.task('imperiopix.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2318,16 +2272,6 @@ gulp.task('golplays.com', function (done) {
         host: "golplays.com",
         banca: "GOL PLAYS",
         styles: "",
-    });
-});
-
-gulp.task('wizz.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "wizz.bet",
-        banca: "WIZZ.BET",
-        styles: "",
-        google_tag_part_1: "<!-- Google tag (gtag.js) --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-9P3GHF5XD9'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9P3GHF5XD9'); </script>"
     });
 });
 
