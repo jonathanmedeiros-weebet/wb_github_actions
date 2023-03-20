@@ -13,7 +13,7 @@
     </div>
 
     <section class="jogo-container-interno" [hidden]="!jogo || showLoadingIndicator">
-        <div class="indentificacao-jogo">
+        <div *ngIf="(loadedFrame && (isMobile && !theSportUrl)) || !isMobile" class="indentificacao-jogo">
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">
@@ -55,6 +55,9 @@
                     <div>{{jogo?.horario | moment: '' : true}} / {{jogo?.horario | moment: 'HH:mm'}}</div>
                 </div>
             </div>
+        </div>
+        <div *ngIf="loadedFrame && (isMobile && theSportUrl)" class="iframe-responsive hide-desktop">
+            <iframe [src]="theSportUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
         </div>
         <div class="tipo-apostas">
             <ul ngbNav #nav="ngbNav" class="nav-tipos">
