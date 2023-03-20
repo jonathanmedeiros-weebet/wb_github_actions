@@ -2565,3 +2565,12 @@ gulp.task('gigantesbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megaa.bet.rb', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "megaa.bet.rb",
+        banca: "MEGAA.BET",
+        styles: "",
+    });
+});
