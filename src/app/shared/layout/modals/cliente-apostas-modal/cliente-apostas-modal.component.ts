@@ -280,7 +280,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         }
 
         let modalAposta;
-        if (this.encerramentoPermitido) {
+        if (this.encerramentoPermitido && aposta.tipo == 'esportes') {
             modalAposta = ApostaEncerramentoModalComponent;
         } else {
             modalAposta = ApostaModalComponent;
