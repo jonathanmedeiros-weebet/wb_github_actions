@@ -12,7 +12,7 @@
             </app-futebol-listagem>
         </div>
         <div class="jogo" [hidden]="!exibirMaisCotacoes">
-            <app-futebol-jogo [jogoId]="jogoId" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            <app-futebol-jogo [jogoId]="jogoId" [exibindoMaisCotacoes]="exibirMaisCotacoes" (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
             </app-futebol-jogo>
         </div>
     </div>

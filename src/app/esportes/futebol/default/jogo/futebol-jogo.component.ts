@@ -30,6 +30,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
+    @Input() exibindoMaisCotacoes: boolean;
     @Output() exibirMaisCotacoes = new EventEmitter();
     isMobile = false;
     mercados90: any = {};
@@ -81,36 +82,13 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
-        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
-
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
             const altura = window.innerHeight;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
-
-            if(this.jogoId) {
-                if(habilitar_live_tracker) {
-                    this.campinhoService.getIdsJogo(this.jogoId)
-                    .subscribe(
-                        response => {
-                            if(response?.thesports_uuid) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
-                            }
-                            this.loadedFrame = true;
-                        },
-                        error =>  this.handleError(error)
-                    )
-                } else {
-                    this.loadedFrame = true;
-                }
-            }
-        } else {
-            if(habilitar_live_tracker && this.jogoId) {
-                this.bilheteService.sendId(this.jogoId);
-            }
-        }
+        } 
 
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
@@ -186,7 +164,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     error =>  this.handleError(error)
                 )
             } else {
-                this.bilheteService.sendId(this.jogoId);
+                if (this.exibindoMaisCotacoes) {
+                    this.bilheteService.sendId(this.jogoId);
+                } else {
+                    this.bilheteService.sendId(null);
+                }
             }
         }
     }
@@ -577,7 +559,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         return this.oddsAberto.includes(chave.nome);
     }
 
-    handleError(msg) {
+    handleError(msg: any) {
         this.messageService.error(msg);
     }
 }
