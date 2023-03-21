@@ -56,6 +56,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     isCliente ;
     slug;
     
+    appMobile;
+    origin;
+
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,
@@ -105,6 +108,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
         this.isCliente = this.auth.isCliente();
         this.slug = config.SLUG;
+
+        this.appMobile = this.auth.isAppMobile();
+        this.origin = this.appMobile ? '?origin=app':''; 
     }
 
     ngOnDestroy() {
