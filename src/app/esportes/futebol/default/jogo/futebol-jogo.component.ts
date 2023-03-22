@@ -135,7 +135,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
         if(habilitar_live_tracker && this.jogoId) {
             if (window.innerWidth <= 1024) {
-                this.loadedFrame = true;
+                this.loadedFrame = false;
                 this.campinhoService.getIdsJogo(this.jogoId)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
@@ -144,6 +144,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
                         }
                         this.loadedFrame = true;
+                        this.cd.markForCheck();
                     },
                     error => this.handleError(error)
                 )
