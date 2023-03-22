@@ -1861,3 +1861,13 @@ ngb-datepicker-month {
         font-weight: 600;
     }
 }
+
+@media only screen and (max-width: 992px) {
+    .modal-dialog {
+        max-width: 100%;
+    }
+
+    .modal-700 .modal-dialog {
+        max-width: 100%;
+    }
+}
