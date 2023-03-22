@@ -57,7 +57,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     golsFora = true;
 
     theSportUrl: SafeResourceUrl;
-    loadedFrame = false;
+    loadedFrame: boolean;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -82,6 +82,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
@@ -131,6 +132,29 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     error => this.messageService.error(error)
                 );
         }
+
+        if(habilitar_live_tracker && this.jogoId) {
+            if (window.innerWidth <= 1024) {
+                this.loadedFrame = true;
+                this.campinhoService.getIdsJogo(this.jogoId)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    response => {
+                        if(response?.thesports_uuid) {
+                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                        }
+                        this.loadedFrame = true;
+                    },
+                    error => this.handleError(error)
+                )
+            } else {
+                if (this.exibindoMaisCotacoes) {
+                    this.bilheteService.sendId(this.jogoId);
+                } else {
+                    this.bilheteService.sendId(null);
+                }
+            }
+        }
     }
 
     ngOnChanges() {
@@ -152,23 +176,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         if(habilitar_live_tracker && this.jogoId) {
-            if (window.innerWidth <= 1024) {
-                this.campinhoService.getIdsJogo(this.jogoId)
-                .subscribe(
-                    response => {
-                        if(response?.thesports_uuid) {
-                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
-                        }
-                        this.loadedFrame = true;
-                    },
-                    error =>  this.handleError(error)
-                )
+            if (this.exibindoMaisCotacoes) {
+                this.bilheteService.sendId(this.jogoId);
             } else {
-                if (this.exibindoMaisCotacoes) {
-                    this.bilheteService.sendId(this.jogoId);
-                } else {
-                    this.bilheteService.sendId(null);
-                }
+                this.bilheteService.sendId(null);
             }
         }
     }
