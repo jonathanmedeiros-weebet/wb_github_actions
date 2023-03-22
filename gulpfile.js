@@ -2583,3 +2583,30 @@ gulp.task('betsampa.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('alfasports.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "alfasports.online",
+        banca: "ALFA SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('grilobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "grilobet.com",
+        banca: "GRILO BET",
+        styles: "",
+    });
+});
+
+gulp.task('uaibet.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "uaibet.club",
+        banca: "UAI BET",
+        styles: "",
+    });
+});

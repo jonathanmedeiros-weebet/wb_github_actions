@@ -281,7 +281,10 @@
         "nogol.bet": "gulp nogol.bet",
         "gigantesbet.com": "gulp gigantesbet.com",
         "megaa.bet": "gulp megaa.bet",
-        "betsampa.wee.bet": "gulp betsampa.wee.bet"
+        "betsampa.wee.bet": "gulp betsampa.wee.bet",
+        "alfasports.online": "gulp alfasports.online",
+        "grilobet.com": "gulp grilobet.com",
+        "uaibet.club": "gulp uaibet.club"
     },
     "private": true,
     "dependencies": {
