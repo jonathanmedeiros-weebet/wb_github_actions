@@ -282,8 +282,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                 return false;
             }).map(camp => Object.assign({}, camp));
 
-            console.log(this.campeonatosFiltrados)
-
             if (this.campeonatosFiltrados.length) {
                 this.campeonatosFiltrados.map(camp => {
                     let jogosTemp;
