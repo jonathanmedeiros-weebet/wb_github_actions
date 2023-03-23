@@ -2611,3 +2611,12 @@ gulp.task('uaibet.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vipbet.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "vipbet.com.br",
+        banca: "VIP BET",
+        styles: "",
+    });
+});

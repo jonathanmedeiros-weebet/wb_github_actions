@@ -284,7 +284,8 @@
         "betsampa.wee.bet": "gulp betsampa.wee.bet",
         "alfasports.online": "gulp alfasports.online",
         "grilobet.com": "gulp grilobet.com",
-        "uaibet.club": "gulp uaibet.club"
+        "uaibet.club": "gulp uaibet.club",
+        "vipbet.com.br": "gulp vipbet.com.br"
     },
     "private": true,
     "dependencies": {
