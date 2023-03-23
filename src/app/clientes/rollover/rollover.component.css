@@ -1,0 +1,194 @@
+#default-content {
+    padding: 25px 38px;
+}
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color:  var(--highlight);
+    cursor: pointer;
+}
+
+.table-responsive {
+    margin-top: 50px;
+}
+
+.table {
+    color: #fff;
+ }
+
+ .table thead th {
+     background-color: var(--game);
+     color: var(--foreground-game);
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     padding: 15px 10px;
+ }
+
+ .table thead th:first-child {
+     border-left: 10px solid  var(--game);
+ }
+
+ .table .right {
+     text-align: right;
+ }
+
+ .table tbody td {
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     vertical-align: middle;
+ }
+
+ .table td.no-border{
+     border-left: 0 !important;
+ }
+
+
+ .btn-cancelar {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 1px;
+
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+ }
+
+ .btn-cancelar i {
+    color: #fff;
+    margin: 0;
+ }
+
+ .alerta-saldo {
+    display: none;
+ }
+
+ @media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 20px;
+        background: var(--background);
+        color: var(--foreground);
+        height: 100%;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .uncollapsed {
+        padding: 0;
+    }
+
+    .buttons-container {
+        background-color: #181818;
+        border: 2px solid #181818;
+        border-radius: 4px;
+    }
+
+    .buttons-container a {
+        margin: 0;
+        justify-content: center;
+        border: 0;
+        background-color: #181818;
+    }
+
+    .buttons-container a.active {
+        background-color: #35cc95;
+        color: #181818;
+        fill: #181818;
+    }
+
+    .buttons-container a i.radio{
+        display: none;
+    }
+
+    .table thead th {
+        background-color: var(--game);
+        white-space: nowrap;
+    }
+
+    .table td {
+        white-space: nowrap;
+    }
+
+    .modal-body {
+        padding-top: 50px;
+    }
+
+    .group-input-valor {
+        text-align: center;
+    }
+
+    .row-input-valor {
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .label-input-valor {
+        font-size: 16px;
+        text-align: center;
+        display: block;
+    }
+
+    .input-valor {
+        border: 0;
+        border-bottom: 2px solid var(--game);
+        color: var(--foreground);
+        border-radius: 0;
+
+        text-align: center !important;
+        font-size: 22px;
+        background-color: transparent;
+
+        padding: 5px;
+    }
+
+    .input-valor:focus {
+        border: 0;
+        border-bottom: 2px solid var(--highlight);
+        color: var(--foreground);
+        background-color: transparent;
+    }
+
+    .alerta-min {
+        border-radius: 4px;
+        margin-top: 40px !important;
+        padding: 10px 15px;
+        font-size: 11px; /* ajuste fonte */
+        background: var(--game);
+        color: var(--foreground-game);
+        text-align: left;
+    }
+
+    .group-buttons {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .alerta-saldo {
+        display: block;
+
+        border-radius: 4px;
+        margin-top: 15px !important;
+        margin-bottom: 30px;
+        padding: 10px 15px;
+        font-size: 11px; /* ajuste fonte */
+        background: var(--game);
+        color: var(--foreground-game);
+        text-align: left;
+     }
+}

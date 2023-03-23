@@ -106,4 +106,16 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    getRollovers(): Observable<any> {
+        return this.http.get(`${this.financeiroUrl}/rollovers`, this.header.getRequestOptions(true))
+        .pipe(
+            map(
+                (response: any) => {
+                    return response.results;
+                }
+            ),
+            catchError(this.errorService.handleError)
+        );
+}
 }

@@ -178,7 +178,8 @@
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
         "modalidade": "Modality",
-        "estouCiente": "I know"
+        "estouCiente": "I know",
+        "rollover": "Rollover"
     },
     "dias": {
         "ontem": "Yesterday",

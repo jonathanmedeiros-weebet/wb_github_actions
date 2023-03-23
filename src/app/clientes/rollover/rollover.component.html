@@ -1,0 +1,53 @@
+<div class="mobile-modal-header margin-10" *ngIf="mobileScreen">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <div class="titulo">{{'geral.saques' | translate}}</div>
+    <div class="botao-direito"></div>
+</div>
+<div id="default-content">
+
+    <app-spinner *ngIf="showLoading"></app-spinner>
+
+    <ng-container *ngIf="!showLoading">
+        <div class="content-header hide-mobile">
+            <h2>Rollovers</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Valor Meta</th>
+                    <th>Valor Gasto</th>
+                    <th>Status</th>
+                    <th>Modalidade</th>
+                    <th>Data de Vencimento</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let rollover of $rollovers">
+                        <tr>
+                            <td></td>
+                            <td>
+                            {{rollover.valorMeta | currency}}
+                            </td>
+                            <td>
+                            {{rollover.valorGasto | currency}}
+                            </td>
+                            <td>
+                            {{rollover.status}}
+                            </td>
+                            <td>
+                            {{rollover.modalidade}}
+                            </td>
+                            <td>
+                            {{rollover.dataVencimento}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+</div>
