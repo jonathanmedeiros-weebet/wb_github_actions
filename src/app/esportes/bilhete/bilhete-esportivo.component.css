@@ -29,7 +29,7 @@
 .campinho .campinho-toogle{
     border-radius: 5px 5px 0 0;
     font-size: 14px;
-    padding: 15px 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,13 +41,11 @@
 
 .campinho .campinho-toogle .options {
     display: flex;
+    gap: 10px;
 }
 
 
 .campinho .campinho-toogle a {
-    padding: 4px 10px;
-    border-radius: 5px;
-    margin-right: 5px;
     cursor: pointer;
 
     display: flex;
@@ -63,13 +61,12 @@
 }
 
 .campinho .campinho-toogle a:hover, .campinho .campinho-toogle a.active {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
+    color: var(--highlight);
 }
 
 .campinho .campinho-toogle a:hover svg, .campinho .campinho-toogle a.active svg {
-    fill: var(--foreground-highlight);
-    stroke: var(--foreground-highlight);
+    fill: var(--highlight);
+    stroke: var(--highlight);
 }
 
 .iframe-responsive {
