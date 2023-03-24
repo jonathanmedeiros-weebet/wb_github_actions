@@ -2620,3 +2620,12 @@ gulp.task('vipbet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fullhouse.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "fullhouse.bet",
+        banca: "FULLHOUSE.BET",
+        styles: "",
+    });
+});

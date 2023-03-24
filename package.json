@@ -285,7 +285,8 @@
         "alfasports.online": "gulp alfasports.online",
         "grilobet.com": "gulp grilobet.com",
         "uaibet.club": "gulp uaibet.club",
-        "vipbet.com.br": "gulp vipbet.com.br"
+        "vipbet.com.br": "gulp vipbet.com.br",
+        "fullhouse.bet": "gulp fullhouse.bet"
     },
     "private": true,
     "dependencies": {
