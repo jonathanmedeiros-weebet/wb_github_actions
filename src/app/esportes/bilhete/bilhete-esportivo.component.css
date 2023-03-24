@@ -33,7 +33,43 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.campinho .campinho-toogle i{
     cursor: pointer;
+}
+
+.campinho .campinho-toogle .options {
+    display: flex;
+}
+
+
+.campinho .campinho-toogle a {
+    padding: 4px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.campinho .campinho-toogle a svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--foreground-sidebars);
+    stroke: var(--foreground-sidebars);
+}
+
+.campinho .campinho-toogle a:hover, .campinho .campinho-toogle a.active {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.campinho .campinho-toogle a:hover svg, .campinho .campinho-toogle a.active svg {
+    fill: var(--foreground-highlight);
+    stroke: var(--foreground-highlight);
 }
 
 .iframe-responsive {

@@ -36,6 +36,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     oddsAberto = [];
     unsub$ = new Subject();
     theSportUrl: SafeResourceUrl;
+    theSportStreamUrl: SafeResourceUrl;
+    showCampinho = true;
+    showStream = false;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -53,7 +56,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
-        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
+        const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
 
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
@@ -62,12 +65,20 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
 
-            if(habilitar_live_tracker) {
+            if(habilitar_live_tracker || habilitar_live_stream) {
                 this.campinhoService.getIdsJogo(this.jogoId)
                 .subscribe(
                     response => {
                         if(response?.thesports_uuid) {
-                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                            if(habilitar_live_stream) {
+                                this.theSportStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
+                                this.showStreamFrame();
+                            }
+
+                            if(habilitar_live_tracker) {
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
+                                this.showCampinhoFrame();
+                            }
                         }
                         this.loadedFrame = true;
                     },
@@ -83,8 +94,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         }
 
         this.definirAltura();
-
-
 
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
@@ -104,6 +113,16 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         this.bilheteService.sendId(null);
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    showCampinhoFrame() {
+        this.showCampinho = true;
+        this.showStream = false;
+    }
+
+    showStreamFrame() {
+        this.showCampinho = false;
+        this.showStream = true;
     }
 
     ngDoCheck() {
