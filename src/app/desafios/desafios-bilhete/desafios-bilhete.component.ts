@@ -33,8 +33,6 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     btnText = 'Pré-Aposta';
     tipoApostaDeslogado = 'preaposta';
     cartaoApostaForm: FormGroup;
-    apostaAoVivo = false;
-    delay = 20;
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
