@@ -344,16 +344,6 @@ gulp.task('masterbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('placardarodada.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "placardarodada.wee.bet",
-        banca: "Placar da Rodada",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#019934; --foreground-sidebar-right: #fff; --sidebar-left: #019934; --foreground-sidebar-left: #fff; --highlight:#019934; --foreground-highlight: #fff; --odds: #000; --foreground-odds: #fff; --foreground-selected-odds:#fff;",
-        // aditional_styles: ".sidebar-brand{ margin-top: 0!important; } .sidebar-brand img{ max-width: 100%!important; max-height: none!important; }"
-    });
-});
-
 gulp.task('vitoriasports.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -935,15 +925,6 @@ gulp.task('ligabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('pernambucoesportes.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "pernambucoesportes.wee.bet",
-        banca: "PE ESPORTES",
-        styles: "",
-    });
-});
-
 gulp.task('futsport.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1041,15 +1022,6 @@ gulp.task('boto-fe.com', function (done) {
         banca: "BOTO FÉ",
         styles: "",
         scripts: "<script src='//code-sa1.jivosite.com/widget/qXJV3cn8tQ' async></script>",
-    });
-});
-
-gulp.task('boaesportes.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "boaesportes.com",
-        banca: "BOA ESPORTES",
-        styles: "",
     });
 });
 
@@ -1397,15 +1369,6 @@ gulp.task('infinitybet.wee.bet', function (done) {
     });
 });
 
-gulp.task('facbet.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "facbet.net",
-        banca: "FACBET",
-        styles: "",
-    });
-});
-
 gulp.task('futpix.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1695,15 +1658,6 @@ gulp.task('megasorte.website', function (done) {
         server: "front3.wee.bet",
         host: "megasorte.website",
         banca: "MEGA SORTE",
-        styles: "",
-    });
-});
-
-gulp.task('sportsgames.io', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "sportsgames.io",
-        banca: "SPORTS GAMES",
         styles: "",
     });
 });
