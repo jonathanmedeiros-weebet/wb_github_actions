@@ -2584,3 +2584,12 @@ gulp.task('fullhouse.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('clubcariri.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "clubcariri.vip",
+        banca: "CLUB CARIRI",
+        styles: "",
+    });
+});
