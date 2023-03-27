@@ -211,13 +211,26 @@ export class ApostaComponent implements OnInit {
         return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
     }
 
-    classNameAposta(resultado) {
-        if (resultado == 'perdeu') {
-            return 'red';
-        } else if (resultado == 'ganhou') {
-            return 'green';
+    classNameAposta(aposta) {
+        let resultado;
+
+        if (['seninha', 'quininha'].includes(aposta.modalidade)) {
+            if (aposta.itens.some(loteriaItem => loteriaItem.status == 'ganhou')) {
+                resultado = 'ganhou';
+            } else if (aposta.itens.some(loteriaItem => loteriaItem.status == 'perdeu')) {
+                resultado = 'perdeu';
+            }
         } else {
-            return 'default';
+            resultado = aposta.resultado;
+        }
+
+        switch (resultado) {
+            case 'ganhou':
+                return 'green';
+            case 'perdeu':
+                return 'red';
+            default:
+                return 'default';
         }
     }
 
