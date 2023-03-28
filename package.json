@@ -282,7 +282,8 @@
         "uaibet.club": "gulp uaibet.club",
         "vipbet.com.br": "gulp vipbet.com.br",
         "fullhouse.bet": "gulp fullhouse.bet",
-        "clubcariri.vip": "gulp clubcariri.vip"
+        "clubcariri.vip": "gulp clubcariri.vip",
+        "cassinodosorte.com": "gulp cassinodosorte.com"
     },
     "private": true,
     "dependencies": {

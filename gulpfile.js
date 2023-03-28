@@ -2593,3 +2593,12 @@ gulp.task('clubcariri.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cassinodosorte.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "cassinodosorte.com",
+        banca: "CASSINO DO SORTE",
+        styles: "",
+    });
+});
