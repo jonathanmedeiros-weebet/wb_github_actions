@@ -284,7 +284,8 @@
         "fullhouse.bet": "gulp fullhouse.bet",
         "clubcariri.vip": "gulp clubcariri.vip",
         "cassinodosorte.com": "gulp cassinodosorte.com",
-        "novabet.site": "gulp novabet.site"
+        "novabet.site": "gulp novabet.site",
+        "jocabet.com": "gulp jocabet.com"
     },
     "private": true,
     "dependencies": {

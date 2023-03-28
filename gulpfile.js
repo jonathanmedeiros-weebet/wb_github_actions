@@ -2612,3 +2612,12 @@ gulp.task('novabet.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('jocabet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "jocabet.com",
+        banca: "JOCA BET",
+        styles: "",
+    });
+});
