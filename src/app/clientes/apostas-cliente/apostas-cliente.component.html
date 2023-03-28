@@ -99,7 +99,7 @@
                         </td>
                     </tr>
                     <tbody *ngIf="!loading">
-                    <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta.resultado) }}">
+                    <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
                         <td></td>
                         <td>{{ aposta.codigo }}</td>
                         <td *ngIf="tabSelected == 'cassino'">{{ aposta.game | formatarNomeJogoCassino }}</td>
