@@ -37,6 +37,13 @@
                                         class="hide-mobile mt-3 d-block">
                                         {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
                                 </div>
+                                <div *ngIf="qtdRolloverAtivos > 0"
+                                        class="alert alert-danger alert-dismissible fade show">
+                                    <b>{{'geral.atencao' | translate}}! </b>{{'saques.avisoRollover' | translate}}<br>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                                 <div *ngIf="apiPagamentos == 'sauto_pay'"
                                      class="alert alert-info alert-dismissible fade show">
                                     <b>{{'geral.atencao' | translate}}! </b>{{'saques.infoSautoPay' | translate}}. <br>

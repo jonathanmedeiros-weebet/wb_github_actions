@@ -1,3 +1,4 @@
+import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
@@ -168,7 +169,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
-        
+
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
     }
 
@@ -317,6 +318,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClienteApostasModalComponent);
     }
 
+    abrirRollovers() {
+        this.modalService.open(RolloverComponent);
+    }
+
     abrirCambistaDashboard() {
         this.modalService.open(DashboardComponent);
     }
@@ -364,7 +369,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     alternarExibirSaldo() {
-        this.mostrarSaldo = !this.mostrarSaldo; 
+        this.mostrarSaldo = !this.mostrarSaldo;
         localStorage.setItem('exibirSaldo', this.mostrarSaldo);
     }
 }

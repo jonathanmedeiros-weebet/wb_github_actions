@@ -1,3 +1,5 @@
+import { FormBuilder } from '@angular/forms';
+import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
@@ -11,14 +13,15 @@ import {Rollover} from '../../models';
     templateUrl: './rollover.component.html',
     styleUrls: ['./rollover.component.css']
 })
-export class RolloverComponent implements OnInit, OnDestroy {
+export class RolloverComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
-    $rollovers: Rollover[] = [];
+    rollovers: Rollover[] = [];
     showLoading = true;
     smallScreen = false;
     page = 1;
     whatsapp;
     mobileScreen;
+    queryParams;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -27,7 +30,8 @@ export class RolloverComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         public activeModal: NgbActiveModal,
         private messageService: MessageService,
-    ) { }
+        private fb: FormBuilder,
+    ) { super();}
 
     ngOnInit(): void {
         this.mobileScreen = window.innerWidth <= 1024;
@@ -35,16 +39,18 @@ export class RolloverComponent implements OnInit, OnDestroy {
             this.sidebarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
         }
-
-
         this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
-
         this.smallScreen = window.innerWidth < 669;
+        this.getRollovers();
+        this.createForm();
+    }
 
-        this.financeiroService.getRollovers()
+    getRollovers(queryParams?: any) {
+        this.showLoading = true;
+        this.financeiroService.getRollovers(queryParams)
         .subscribe(
             response => {
-                this.$rollovers = response;
+                this.rollovers = response;
                 this.showLoading = false;
             },
             error => {
@@ -63,6 +69,21 @@ export class RolloverComponent implements OnInit, OnDestroy {
         this.menuFooterService.setIsPagina(false);
     }
 
+    createForm() {
+        this.form = this.fb.group({
+            status: ['ativo'],
+        });
+
+        this.submit();
+    }
+
+    submit() {
+        this.queryParams = this.form.value;
+        const queryParams: any = {
+            'status': this.queryParams.status,
+        };
+        this.getRollovers(queryParams);
+    }
 
 
 }

@@ -295,7 +295,8 @@
         "alertaTitularChave": "Obs. Looting will only be carried out on pix keys belonging to the account holder.",
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random",
         "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key.",
-        "solicitacoesRecentes": "Recent withdrawal requests"
+        "solicitacoesRecentes": "Recent withdrawal requests",
+        "avisoRollover": "We inform you that when requesting a withdrawal with an active rollover, it will be canceled and the entire bonus will be permanently lost."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -391,5 +392,13 @@
         "desejaReceberBonusPrimeiroDeposito": "Do you want to receive First Deposit Bonus?",
         "receberBonus": "Receive Bonus - Sport",
         "naoQueroBonus": "I don't want bonus"
+    },
+    "rollover":{
+        "nenhumRollover": "No rollover.",
+        "qtdRollovers": "Amount of Rollovers",
+        "ativo": "Active",
+        "completado": "Completed",
+        "cancelado": "Canceled",
+        "vencido": "Vanquished"
     }
 }

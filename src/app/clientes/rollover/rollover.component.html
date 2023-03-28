@@ -1,53 +1,157 @@
-<div class="mobile-modal-header margin-10" *ngIf="mobileScreen">
-    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
-        <i class="fa fa-arrow-left"></i>
-    </a>
-    <div class="titulo">{{'geral.saques' | translate}}</div>
-    <div class="botao-direito"></div>
-</div>
 <div id="default-content">
+    <div class="mobile-modal-header" *ngIf="mobileScreen">
+        <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'geral.rollover' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
 
-    <app-spinner *ngIf="showLoading"></app-spinner>
-
-    <ng-container *ngIf="!showLoading">
+    <div class="internal-container-out">
         <div class="content-header hide-mobile">
-            <h2>Rollovers</h2>
+            <h2>{{'geral.rollover' | translate}}</h2>
         </div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Valor Meta</th>
-                    <th>Valor Gasto</th>
-                    <th>Status</th>
-                    <th>Modalidade</th>
-                    <th>Data de Vencimento</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let rollover of $rollovers">
+
+        <div class="content-body">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                <div class="filtros">
+                    <select class="inverted-out form-control" formControlName="status">
+                        <option value="">{{'geral.todos' | translate}}</option>
+                        <option value="ativo">{{'rollover.ativo' | translate}}</option>
+                        <option value="completado">{{'rollover.completado' | translate}}</option>
+                        <option value="cancelado">{{'rollover.cancelado' | translate}}</option>
+                         <option value="vencido">{{'rollover.vencido' | translate}}</option>
+                    </select>
+                    <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="!rollovers.length" class="alert alert-warning text-center" role="alert">
+            {{'rollover.nenhumBonus' | translate}}
+        </div>
+
+        <div class="table-responsive" *ngIf="rollovers.length">
+            <div>
+                <p>
+                    <b>{{'rollover.qtdBonus' | translate}}
+                        :</b> {{rollovers.length}}
+                </p>
+            </div>
+            <ng-container *ngIf="!mobileScreen">
+                <table class="table" >
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th style="width:20%">Progresso</th>
+                        <th class="custom-td">Valor Gasto</th>
+                        <th class="custom-td">Valor Meta</th>
+                        <th class="custom-td">Modalidade</th>
+                        <th class="custom-td">Data de Vencimento</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="!showLoading">
+                    <ng-container *ngFor="let rollover of rollovers">
                         <tr>
-                            <td></td>
                             <td>
-                            {{rollover.valorMeta | currency}}
+                                <i style="color:orange; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'ativo'"></i>
+                                   <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'completado'"></i>
+                                   <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'cancelado'"></i>
+                                   <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'vencido'"></i>
+                                <span
+                                    *ngIf="rollover.status === 'ativo'">
+                                   {{'rollover.ativo' | translate}}
+                                </span>
+                                <span
+                                    *ngIf="rollover.status === 'completado'">
+                                    {{'rollover.completado' | translate}}
+                                </span>
+                                <span
+                                    *ngIf="rollover.status === 'cancelado'">
+                                    {{'rollover.cancelado' | translate}}
+                                </span>
+                                <span
+                                    *ngIf="rollover.status === 'vencido'">
+                                    {{'rollover.vencido' | translate}}
+                                </span>
                             </td>
-                            <td>
-                            {{rollover.valorGasto | currency}}
+                            <td class="custom-td">
+                                <div class="progress" style="height: 20px; width: 100%">
+                                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': rollover.valorGasto*100/rollover.valorMeta}" aria-valuenow="{{rollover.valorGasto}}" aria-valuemin="0" aria-valuemax=" {{rollover.valorMeta}}"></div>
+                                  </div>
                             </td>
-                            <td>
-                            {{rollover.status}}
+                            <td class="custom-td">
+                                {{rollover.valorGasto | currency}}
                             </td>
-                            <td>
-                            {{rollover.modalidade}}
+                            <td class="custom-td">
+                                {{rollover.valorMeta | currency}}
                             </td>
-                            <td>
-                            {{rollover.dataVencimento}}
+                            <td class="custom-td">
+                                {{rollover.modalidade}}
+                            </td>
+                            <td class="custom-td">
+                                {{rollover.dataVencimento}}
                             </td>
                         </tr>
                     </ng-container>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+             </ng-container>
+            <ng-container *ngIf="mobileScreen">
+                <table class="table" >
+                    <thead>
+                    <tr>
+
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="!showLoading">
+                    <ng-container *ngFor="let rollover of rollovers">
+                        <tr>
+                            <td>
+                                <i style="color:orange; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'ativo'"></i>
+                                   <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'completado'"></i>
+                                   <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'cancelado'"></i>
+                                   <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                   *ngIf="rollover.status === 'vencido'"></i>
+                                <span
+                                    *ngIf="rollover.status === 'ativo'">
+                                   {{'rollover.ativo' | translate}}
+                                </span>
+                                <span
+                                    *ngIf="rollover.status === 'completado'">
+                                    {{'rollover.completado' | translate}}
+                                </span>
+                                <span
+                                    *ngIf="rollover.status === 'cancelado'">
+                                    {{'rollover.cancelado' | translate}}
+                                </span>
+                                <span
+                                    *ngIf="rollover.status === 'vencido'">
+                                    {{'rollover.vencido' | translate}}
+                                </span>
+                                <div class="progress" style="height: 20px; width: 100%">
+                                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': rollover.valorGasto*100/rollover.valorMeta}" aria-valuenow="{{rollover.valorGasto}}" aria-valuemin="0" aria-valuemax=" {{rollover.valorMeta}}"></div>
+                                    </div>
+                                <br>
+                                <span>
+                                Valor Gasto: {{rollover.valorGasto | currency}}<br>
+                                Valor Meta: {{rollover.valorMeta | currency}}<br>
+                                Modalidade: {{rollover.modalidade}}<br>
+                                Data de Vencimento: {{rollover.dataVencimento}}
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </ng-container>
         </div>
-    </ng-container>
+    </div>
 </div>
