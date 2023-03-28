@@ -2603,3 +2603,12 @@ gulp.task('cassinodosorte.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('novabet.site', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "novabet.site",
+        banca: "NOVA BET",
+        styles: "",
+    });
+});
