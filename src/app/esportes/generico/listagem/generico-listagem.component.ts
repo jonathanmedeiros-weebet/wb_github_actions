@@ -45,11 +45,15 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     dataLimiteTabela;
     contentSportsEl;
     start;
-    offset = 20;
-    total;
+    page = 1;
+    offset = 7;
+    totalPages;
     loadingScroll = false;
     unsub$ = new Subject();
     term = '';
+    campeonatosTemp = [];
+    campeonatosFiltrados = [];
+
     modalRef;
 
     limiteDiasTabela: number;
@@ -131,11 +135,16 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             } else {
                 this.mudarData('+' + diferencaDias);
             }
+
+            this.campeonatosFiltrados = [];
+            this.campeonatosTemp = [];
+            this.term = '';
         }
 
         if (changes['camps'] && this.camps) {
             this.start = 0;
-            this.total = Math.ceil(this.camps.length / this.offset);
+            this.page = 1;
+            this.totalPages = Math.ceil(this.camps.length / this.offset);
             this.campeonatos = [];
             this.exibirMais();
 
@@ -260,6 +269,43 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
+    filtrarCampeonatos() {
+        if (this.term) {
+            if (!this.campeonatosTemp.length && !this.campeonatosFiltrados.length) {
+                this.campeonatosTemp = this.campeonatos;
+            }
+
+            this.campeonatosFiltrados = this.camps.filter(camp => {
+                if (camp.jogos.some(jogo => jogo.nome.includes(this.term.toUpperCase()))) {
+                    return true;
+                }
+                return false;
+            }).map(camp => Object.assign({}, camp));
+
+            if (this.campeonatosFiltrados.length) {
+                this.campeonatosFiltrados.map(camp => {
+                    let jogosTemp;
+                    jogosTemp = camp.jogos.filter(jogo => jogo.nome.includes(this.term.toUpperCase()));
+
+                    camp.jogos = jogosTemp;
+                    return this.calcularCotacoes(camp);
+                });
+            }
+            this.campeonatos = this.campeonatosFiltrados;
+        } else {
+            if (this.campeonatosTemp.length) {
+                this.campeonatos = this.campeonatosTemp;
+                this.campeonatosTemp = [];
+                this.campeonatosFiltrados = [];
+            }
+        }
+
+        if (this.exibirCampeonatosExpandido) {
+            const sliceIds = this.campeonatos.map(campeonato => campeonato._id);
+            this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
+        }
+    }
+
     limparPesquisa() {
         this.term = '';
     }
@@ -298,38 +344,43 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirMais() {
-        this.loadingScroll = true;
+        if (!this.term && this.camps && (this.page <= this.totalPages)) {
+            this.loadingScroll = true;
+            let slice = this.camps.slice(this.start, (this.page * this.offset));
 
-        if (this.start < this.total) {
-            let splice = this.camps.splice(0, this.offset);
-            splice = splice.map(campeonato => {
-                campeonato.jogos.forEach(jogo => {
-                    jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                            cotacao.valor,
-                            cotacao.chave,
-                            jogo.event_id,
-                            jogo.favorito,
-                            false);
-                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
-                    });
-                });
-
-                return campeonato;
+            slice = slice.map(campeonato => {
+                return this.calcularCotacoes(campeonato);
             });
 
-            this.campeonatos = this.campeonatos.concat(splice);
+            this.campeonatos = this.campeonatos.concat(slice);
 
             if (this.exibirCampeonatosExpandido) {
-                const sliceIds = splice.map(campeonato => campeonato._id);
+                const sliceIds = slice.map(campeonato => campeonato._id);
                 this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
             }
 
-            this.start++;
-        }
+            this.start = (this.page * this.offset);
+            this.page++;
 
-        this.loadingScroll = false;
-        this.cd.markForCheck();
+            this.loadingScroll = false;
+            this.cd.markForCheck();
+        }
+    }
+
+    calcularCotacoes(campeonato: Campeonato) {
+        campeonato.jogos.forEach(jogo => {
+            jogo.cotacoes.forEach(cotacao => {
+                cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                    cotacao.valor,
+                    cotacao.chave,
+                    jogo.event_id,
+                    jogo.favorito,
+                    false);
+                cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
+            });
+        });
+
+        return campeonato;
     }
 
     // Exibindo todas as cotações daquele jogo selecionado
