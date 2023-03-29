@@ -33,6 +33,18 @@ export class CambistaService {
             );
     }
 
+    movimentacao(params) {
+        return this.http.get(`${this.cambistaUrl}/listar-movimentacoes`,
+            this.headers.getRequestOptions(true, params))
+            .pipe(
+                map((response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     quantidadeApostas(params) {
         return this.http.get(`${this.cambistaUrl}/quantidadeApostas`,
             this.headers.getRequestOptions(true, params))
