@@ -178,7 +178,8 @@
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
         "modalidade": "Modalidade",
-        "estouCiente": "Estou ciente"
+        "estouCiente": "Estou ciente",
+        "movimentacao":"Movimentações"
     },
     "dias": {
         "ontem": "Ontem",
