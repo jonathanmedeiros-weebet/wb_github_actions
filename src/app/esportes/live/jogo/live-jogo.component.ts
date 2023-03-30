@@ -5,10 +5,12 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoginModalComponent } from 'src/app/shared/layout/modals';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { Jogo, ItemBilheteEsportivo } from '../../../models';
 import {
     ParametrosLocaisService, MessageService, JogoService,
@@ -23,6 +25,8 @@ import {
 export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     @Input() jogoId;
     @Output() exibirMaisCotacoes = new EventEmitter();
+    isLoggedIn: boolean;
+    modalRef: any;
     jogo;
     mercados: any = {};
     itens = [];
@@ -53,6 +57,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         private router: Router,
         private paramsService: ParametrosLocaisService,
         private activeModal: NgbActiveModal,
+        private auth: AuthService,
+        private modalService: NgbModal,
     ) { }
 
     ngOnInit() {
@@ -60,6 +66,13 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
+
+            this.auth.logado
+            .subscribe(
+                (isLoggedIn: any) => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
 
             let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
@@ -88,7 +101,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 this.loadedFrame = true;
             }
         } else {
-            if(habilitar_live_tracker) {
+            if(habilitar_live_tracker || habilitar_live_stream) {
                 this.bilheteService.sendId(this.jogoId);
             }
         }
@@ -377,5 +390,15 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     oddAberto(chave) {
         return this.oddsAberto.includes(chave.nome);
+    }
+
+    abrirLogin() {
+        const options = {
+            windowClass: 'modal-fullscreen',
+        };
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 }

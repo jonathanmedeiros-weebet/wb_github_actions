@@ -152,10 +152,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.scrollToBottom();
             });
 
-
         this.bilheteService.idJogo
             .pipe(switchMap(result => {
-                    if (this.opcoes.habilitar_live_tracker && result) {
+                    if (result) {
                         return this.campinhoService.getIdsJogo(result);
                     } else {
                         return of(null);

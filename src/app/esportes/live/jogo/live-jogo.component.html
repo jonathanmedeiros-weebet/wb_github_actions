@@ -120,9 +120,15 @@
         <div *ngIf="loadedFrame && showCampinho && (isMobile && theSportUrl)" class="iframe-responsive hide-desktop">
             <iframe [src]="theSportUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
         </div>
-        <div *ngIf="loadedFrame && showStream && (isMobile && theSportStreamUrl)" class="iframe-responsive hide-desktop">
-            <iframe [src]="theSportStreamUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
-        </div>
+        <ng-container *ngIf="loadedFrame && showStream && (isMobile && theSportStreamUrl)">
+            <div *ngIf="isLoggedIn" class="iframe-responsive hide-desktop">
+                <iframe [src]="theSportStreamUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
+            </div>
+            <div *ngIf="!isLoggedIn" class="no-login">
+                <p>Precisa entrar para poder assistir.</p>
+                <a class="btn btn-custom" (click)="abrirLogin()">Entrar</a>
+            </div>
+        </ng-container>
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="jogo" *ngIf="!showLoadingIndicator">
             <div class="tipo-apostas mt-2">
