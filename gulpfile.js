@@ -2622,3 +2622,12 @@ gulp.task('jocabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('profit2.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "profit2.bet",
+        banca: "PROFIT2.BET",
+        styles: "",
+    });
+});
