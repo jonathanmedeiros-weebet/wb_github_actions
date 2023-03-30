@@ -5,8 +5,9 @@ import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { SidebarService, FinanceiroService } from 'src/app/services';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Rollover} from '../../models';
+import {ConfirmModalComponent} from 'src/app/shared/layout/modals';
 
 @Component({
     selector: 'app-rollover',
@@ -22,6 +23,7 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
     whatsapp;
     mobileScreen;
     queryParams;
+     modalRef;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -31,6 +33,7 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
         public activeModal: NgbActiveModal,
         private messageService: MessageService,
         private fb: FormBuilder,
+        private modalService: NgbModal
     ) { super();}
 
     ngOnInit(): void {
@@ -73,7 +76,7 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
 
     createForm() {
         this.form = this.fb.group({
-            status: ['ativo'],
+            status: [''],
         });
 
         this.submit();
@@ -85,6 +88,27 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
             'status': this.queryParams.status,
         };
         this.getRollovers(queryParams);
+    }
+
+    converterBonus(rolloverId){
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Converter Bônus';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja converter seu bônus em saldo real?';
+
+        this.modalRef.result.then(
+            () => {
+                this.financeiroService.converterBonus(rolloverId)
+                    .subscribe(
+                        response => {
+                            this.messageService.success('Bônus Convertido');
+                            this.submit();
+                        },
+                        error => {
+                            this.handleError(error);
+                        }
+                    );
+            }
+        );
     }
 
 

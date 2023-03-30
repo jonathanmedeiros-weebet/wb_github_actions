@@ -5,4 +5,5 @@ export class Rollover {
     status: string;
     valorGasto: number;
     valorMeta: number;
+    convertido: number;
 }

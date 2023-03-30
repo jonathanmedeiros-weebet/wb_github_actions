@@ -16,6 +16,7 @@
             <form (ngSubmit)="onSubmit()" [formGroup]="form">
                 <div class="filtros">
                     <select class="inverted-out form-control" formControlName="status">
+                        <option value="">{{'geral.todos' | translate}}</option>
                         <option value="ativo">{{'rollover.ativo' | translate}}</option>
                         <option value="completado">{{'rollover.completado' | translate}}</option>
                         <option value="cancelado">{{'rollover.cancelado' | translate}}</option>
@@ -47,6 +48,7 @@
                         <th class="custom-td">Valor Meta</th>
                         <th class="custom-td">Modalidade</th>
                         <th class="custom-td">Data de Vencimento</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody *ngIf="!showLoading">
@@ -79,8 +81,8 @@
                                 </span>
                             </td>
                             <td class="custom-td">
-                                <div class="progress" style="height: 20px; width: 100%">
-                                    <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': rollover.valorGasto*100/rollover.valorMeta}" aria-valuenow="{{rollover.valorGasto}}" aria-valuemin="0" aria-valuemax=" {{rollover.valorMeta}}"></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width.%': rollover.valorGasto*100/rollover.valorMeta}" aria-valuenow="{{rollover.valorGasto}}" aria-valuemin="0" aria-valuemax=" {{rollover.valorMeta}}"></div>
                                   </div>
                             </td>
                             <td class="custom-td">
@@ -94,6 +96,9 @@
                             </td>
                             <td class="custom-td">
                                 {{rollover.dataVencimento}}
+                            </td>
+                            <td class="custom-td">
+                                <button *ngIf="rollover.status == 'completado'  && !rollover.convertido"  class="btn btn-converterBonus" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
                             </td>
                         </tr>
                     </ng-container>
@@ -145,6 +150,8 @@
                                 Modalidade: {{rollover.modalidade}}<br>
                                 Data de Vencimento: {{rollover.dataVencimento}}
                                 </span>
+                                <br><br>
+                                <button *ngIf="rollover.status == 'completado' && !rollover.convertido" class="btn btn-custom" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
                             </td>
                         </tr>
                     </ng-container>

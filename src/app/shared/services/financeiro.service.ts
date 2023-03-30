@@ -124,5 +124,14 @@ export class FinanceiroService {
             ),
             catchError(this.errorService.handleError)
         );
-}
+    }
+
+    converterBonus(rolloverId): Observable<any> {
+        return this.http.post(`${this.financeiroUrl}/converter-bonus`,
+            {id: rolloverId}, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                catchError(this.errorService.handleError)
+            );
+    }
 }
