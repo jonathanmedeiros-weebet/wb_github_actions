@@ -325,7 +325,7 @@
                             </a>
                             <a (click)="abrirRollovers()">
                                 <span>
-                                    <i class="fa fa-solid fa-table-columns"></i>
+                                    <i class="fa fa-solid fa-dollar"></i>
                                 </span>
                                 {{'geral.rollover' | translate}}
                                 <span class="arrow-nav">
@@ -423,6 +423,13 @@
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
                                 {{'geral.apostas' | translate}}
                             </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rollover']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                {{'geral.bonus' | translate}}
+                            </a>
+
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
                                 <i class="fa fa-key mb-2"></i> {{'geral.alterarSenha' | translate}}
