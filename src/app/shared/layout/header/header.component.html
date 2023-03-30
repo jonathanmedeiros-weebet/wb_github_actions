@@ -495,7 +495,7 @@
 </nav>
 
 <ng-template #menu>
-    <div class="category">
+    <div class="category" *ngIf="esporteAtivo">
         <a [routerLink]="['/esportes']" routerLinkActive="active">
             <span>{{'menu.esportes' | translate}}</span>
         </a>
