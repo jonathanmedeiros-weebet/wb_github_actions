@@ -16,7 +16,6 @@
             <form (ngSubmit)="onSubmit()" [formGroup]="form">
                 <div class="filtros">
                     <select class="inverted-out form-control" formControlName="status">
-                        <option value="">{{'geral.todos' | translate}}</option>
                         <option value="ativo">{{'rollover.ativo' | translate}}</option>
                         <option value="completado">{{'rollover.completado' | translate}}</option>
                         <option value="cancelado">{{'rollover.cancelado' | translate}}</option>

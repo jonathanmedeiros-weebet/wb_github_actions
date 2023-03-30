@@ -43,6 +43,8 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
         this.smallScreen = window.innerWidth < 669;
         this.getRollovers();
         this.createForm();
+        this.submit();
+
     }
 
     getRollovers(queryParams?: any) {
