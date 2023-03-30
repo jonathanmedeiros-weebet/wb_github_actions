@@ -8,12 +8,12 @@ import { ParametrosLocaisService } from '../parametros-locais.service';
 export class HomeGuard implements CanActivate {
 
     pages = {
-        esporte: 'esportes/futebol',
-        cassino: 'casino/c/wall/todos',
-        virtual: 'casino/v/wall/virtuais',
+        esporte: 'esportes',
+        cassino: 'casino/c',
+        virtual: 'casino/v',
         desafio: 'desafios',
-        acumuladao: 'acumuladao/listagem',
-        loteria: 'loterias/quininha'
+        acumuladao: 'acumuladao',
+        loteria: 'loterias'
     }
 
     constructor(
