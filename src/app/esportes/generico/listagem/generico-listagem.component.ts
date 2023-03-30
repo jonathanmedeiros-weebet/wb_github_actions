@@ -13,9 +13,9 @@ import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import 'moment/min/locales';
 
-import {BasqueteJogoComponent} from '../basquete-jogo/basquete-jogo.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TranslateService} from '@ngx-translate/core';
+import { BasqueteJogoComponent } from '../basquete-jogo/basquete-jogo.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-generico-listagem',
@@ -68,14 +68,14 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     tabSelected;
 
     iconesGenericos = {
-        'futsal': 'wbicon icon-futsal',
-        'volei': 'wbicon icon-volei',
         'basquete': 'wbicon icon-basquete',
+        'volei': 'wbicon icon-volei',
+        'tenis': 'wbicon icon-tenis',
         'combate': 'wbicon icon-luta',
-        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
+        'futsal': 'wbicon icon-futsal',
         'futebol-americano': 'wbicon icon-futebol-americano',
         'esports': 'wbicon icon-e-sports',
-        'tenis': 'wbicon icon-tenis'
+        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
     };
 
     constructor(
@@ -98,7 +98,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
-        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
         this.atualizarDatasJogosFuturos(this.translate.currentLang);
 
@@ -128,7 +128,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['data'] && this.data) {
-            const diferencaDias = moment(this.data).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+            const diferencaDias = moment(this.data).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
             if (diferencaDias === 1) {
                 this.mudarData('amanha');
@@ -465,13 +465,13 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     atualizarDatasJogosFuturos(lang = 'pt') {
         switch (lang) {
             case 'pt':
-                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                moment.updateLocale('pt-br', { parentLocale: 'pt-br' });
                 break;
             case 'en':
-                    moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
+                moment.updateLocale('en-gb', { parentLocale: 'en-gb' });
                 break;
             default:
-                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                moment.updateLocale('pt-br', { parentLocale: 'pt-br' });
         }
 
         this.diaHojeMaisDois = moment().add(2, 'd');
