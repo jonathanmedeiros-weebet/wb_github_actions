@@ -8,6 +8,7 @@ import {
     VoleiGuard
 } from '../services';
 import {SportLayoutComponent} from '../shared/layout/app-layouts';
+import { EsporteGuard } from '../shared/services/guards/esporte.guard';
 
 export const routes: Routes = [
     {
@@ -22,65 +23,66 @@ export const routes: Routes = [
             {
                 path: 'live',
                 loadChildren: () => import('./live/live.module').then(m => m.LiveModule),
-                canActivate: [AoVivoGuard]
+                canActivate: [AoVivoGuard, EsporteGuard]
             },
             {
                 path: 'futebol',
                 loadChildren: () => import('./futebol/futebol.module').then(m => m.FutebolModule),
+                canActivate: [EsporteGuard],
             },
             {
                 path: 'combate',
                 data: { sportId: '9' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [CombateGuard]
+                canActivate: [CombateGuard, EsporteGuard]
             },
             {
                 path: 'futebol-americano',
                 data: { sportId: '12' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [FutebolAmericanoGuard]
+                canActivate: [FutebolAmericanoGuard, EsporteGuard]
             },
             {
                 path: 'tenis',
                 data: { sportId: '13' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [TenisGuard]
+                canActivate: [TenisGuard, EsporteGuard]
             },
             {
                 path: 'hoquei-gelo',
                 data: { sportId: '17' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [HoqueiGeloGuard]
+                canActivate: [HoqueiGeloGuard, EsporteGuard]
             },
             {
                 path: 'basquete',
                 data: { sportId: '18' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [BasqueteGuard]
+                canActivate: [BasqueteGuard, EsporteGuard]
             },
             {
                 path: 'futsal',
                 data: { sportId: '83' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [FutsalGuard]
+                canActivate: [FutsalGuard, EsporteGuard]
             },
             {
                 path: 'volei',
                 data: { sportId: '91' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [VoleiGuard]
+                canActivate: [VoleiGuard, EsporteGuard]
             },
             {
                 path: 'tenis-mesa',
                 data: { sportId: '92' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [TenisMesaGuard]
+                canActivate: [TenisMesaGuard, EsporteGuard]
             },
             {
                 path: 'esports',
                 data: { sportId: '151' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
-                canActivate: [EsportsGuard]
+                canActivate: [EsportsGuard, EsporteGuard]
             }
         ]
     }
