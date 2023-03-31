@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+
 import {SidebarService } from 'src/app/services';
 import {CambistaService} from '../../shared/services/cambistas/cambista.service';
 import {MessageService} from '../../shared/services/utils/message.service';
@@ -7,12 +8,12 @@ import {InformativoModalComponent } from '../../shared/layout/modals/informativo
 import * as moment from 'moment';
 import 'moment/min/locales';
 @Component({
-  selector: 'app-financeiro',
-  templateUrl: './financeiro.component.html',
-  styleUrls: ['./financeiro.component.css']
+  selector: 'app-movimentacao',
+  templateUrl: './movimentacao.component.html',
+  styleUrls: ['./movimentacao.component.css']
 })
 
-export class FinanceiroComponent{
+export class MovimentacaoComponent{
     status = '';
     periodo = '';
     movimentacoes: [];

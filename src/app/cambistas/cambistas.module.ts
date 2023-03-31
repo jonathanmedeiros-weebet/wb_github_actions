@@ -11,7 +11,7 @@ import { ApostaComponent } from './aposta/aposta.component';
 import { TabelaComponent } from './tabela/tabela.component';
 import { DesafioApostaService, AcumuladaoService } from '../services';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FinanceiroComponent } from './financeiro/financeiro.component';
+import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CartaoComponent } from './cartao/cartao.component';
 import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
@@ -23,7 +23,7 @@ import {TranslateModule} from '@ngx-translate/core';
         DashboardComponent,
         ApostaComponent,
         TabelaComponent,
-        FinanceiroComponent,
+        MovimentacaoComponent,
         CartaoComponent,
         SolicitacaoSaqueComponent
     ],
