@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import { SidebarService } from 'src/app/services';
+import {Component} from '@angular/core';
+import {SidebarService } from 'src/app/services';
 import {CambistaService} from '../../shared/services/cambistas/cambista.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {NgbActiveModal, NgbModal, NgbCalendar, NgbDate} from '@ng-bootstrap/ng-bootstrap';
-import {InformativoModalComponent } from 'src/app/shared/layout/modals/informativo-modal/informativo-modal.component';
+import {InformativoModalComponent } from '../../shared/layout/modals/informativo-modal/informativo-modal.component';
 import * as moment from 'moment';
 import 'moment/min/locales';
 @Component({
@@ -37,7 +37,6 @@ export class FinanceiroComponent{
         private calendar: NgbCalendar,
         private cambistaService: CambistaService,
         private messageService: MessageService,
-        private cd: ChangeDetectorRef,
         private modalService: NgbModal,
     ) { 
         const monday = moment().clone().isoWeekday(1);
@@ -166,8 +165,6 @@ export class FinanceiroComponent{
                         (reason) => {
                         }
                     );
-
-                    this.cd.detectChanges();
                 },
                 error => {
                     this.handleError(error)
