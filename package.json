@@ -281,7 +281,9 @@
         "clubcariri.vip": "gulp clubcariri.vip",
         "cassinodosorte.com": "gulp cassinodosorte.com",
         "novabet.site": "gulp novabet.site",
-        "jocabet.com": "gulp jocabet.com"
+        "jocabet.com": "gulp jocabet.com",
+        "lfbets.io": "gulp lfbets.io",
+        "generalbet.net": "gulp generalbet.net"
     },
     "private": true,
     "dependencies": {
