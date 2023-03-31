@@ -46,18 +46,6 @@
     border-left: 0 !important;
 }
 
-.table tbody td:first-child {
-    border-left: 10px solid #808080;
-}
-
-.table tbody tr.green td:first-child {
-    border-left: 10px solid #309E3A;
-}
-
-.table tbody tr.red td:first-child {
-    border-left: 10px solid #ED4C5C;
-}
-
 .tr-1 td {
     padding: 5px 0;
 }
@@ -93,7 +81,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
+    height: 20px;
     cursor: pointer;
 }
 
@@ -118,5 +106,17 @@
     .filtros select {
         max-width: none;
         margin: 0;
+    }
+
+    .btn-converterBonus{
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 30px;
+        cursor: pointer;
+        border-radius: 5px;
     }
 }
