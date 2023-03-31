@@ -2598,7 +2598,7 @@ gulp.task('profit2.bet', function (done) {
 
 gulp.task('lfbets.io', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front2.wee.bet",
         host: "lfbets.io",
         banca: "LF BETS",
         styles: "",
@@ -2607,7 +2607,7 @@ gulp.task('lfbets.io', function (done) {
 
 gulp.task('generalbet.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front2.wee.bet",
         host: "generalbet.net",
         banca: "GENERAL BET",
         styles: "",
