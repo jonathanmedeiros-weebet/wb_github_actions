@@ -13,7 +13,6 @@ import 'moment/min/locales';
 })
 
 export class FinanceiroComponent{
-    loading = false;
     status = '';
     periodo = '';
     movimentacoes: [];
@@ -26,7 +25,7 @@ export class FinanceiroComponent{
     queryParams;
     relatorio;
     resultado = 0;
-    showLoading = true;
+    showLoading = false;
     dataSaldoAnterior;
     cambista = '';
     modalRef;
@@ -62,28 +61,24 @@ export class FinanceiroComponent{
     }
 
     handleFiltrar() {
-        
-        this.loading = true;
+        this.showLoading = true;
         const queryParams: any = {
             'periodoDe': this.queryParams.periodoDe,
             'periodoAte': this.queryParams.periodoAte,
         };
 
-        this.cambistaService.movimentacao(this.queryParams).subscribe(
+        this.cambistaService.listarMovimentacoes(this.queryParams).subscribe(
             result => {
                 this.relatorio = result;
                 this.movimentacoes = this.relatorio['movimentacoes'];
+                this.showLoading = false;
             },
             error => {
-             
-                this.relatorio = [];
-                this.resultado = 0;
+                this.movimentacoes = [];
                 this.showLoading = false;
                 this.handleError(error);
             }
         );
-
-        this.loading = false; 
     }
 
     onDateSelection(date: NgbDate, datepicker: any) {
@@ -143,7 +138,6 @@ export class FinanceiroComponent{
     }
 
     openModal(movimentacao) {
-        this.showLoading = true;
         const params = {};
 
         let modalInformativo = InformativoModalComponent;
@@ -152,8 +146,7 @@ export class FinanceiroComponent{
             'movimentacaoId': movimentacao
         };
     
-        this.cambistaService.buscarMovimentacaoId(this.params)
-            .subscribe(
+        this.cambistaService.buscarMovimentacaoId(this.params).subscribe(
                 movimentacaoLocalizada => {
                     this.modalRef = this.modalService.open(modalInformativo, {
                         ariaLabelledBy: 'modal-basic-title',
@@ -174,10 +167,11 @@ export class FinanceiroComponent{
                         }
                     );
 
-                    this.showLoading = false;
                     this.cd.detectChanges();
                 },
-                error => this.handleError(error)
+                error => {
+                    this.handleError(error)
+                }
             );
     }
 }

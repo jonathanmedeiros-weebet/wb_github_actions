@@ -61,10 +61,10 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tr *ngIf="loading">
+                    <tr *ngIf="showLoading">
                         <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i> {{'geral.carregando' | translate}}</td>
                     </tr>
-                    <tbody *ngIf="!loading">
+                    <tbody *ngIf="!showLoading">
                         <ng-container *ngFor="let movimentacao of movimentacoes">
                             <tr class="{{ classNameCorTipoMovimentacao(movimentacao.tipo) }} mobile-tds" >
                                 <td>{{ movimentacao.data }}</td>
@@ -72,7 +72,7 @@
                                 <td>
                                     {{ movimentacao.valor | currency }}
                                 </td>
-                                <td class="acoes-aposta">
+                                <td class="acoes-financeiro">
                                     <a title="{{'geral.exibir' | translate}}" (click)="openModal(movimentacao.id)">
                                         <i class="fa fa-info"></i>
                                     </a>

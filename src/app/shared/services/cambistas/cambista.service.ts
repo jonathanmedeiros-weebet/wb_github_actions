@@ -33,7 +33,7 @@ export class CambistaService {
             );
     }
 
-    movimentacao(params) {
+    listarMovimentacoes(params) {
         return this.http.get(`${this.cambistaUrl}/listar-movimentacoes`,
             this.headers.getRequestOptions(true, params))
             .pipe(
