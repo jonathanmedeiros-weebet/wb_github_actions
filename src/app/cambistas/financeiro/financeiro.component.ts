@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import { SidebarService } from 'src/app/services';
 import {CambistaService} from '../../shared/services/cambistas/cambista.service';
 import {MessageService} from '../../shared/services/utils/message.service';
-import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal, NgbCalendar, NgbDate} from '@ng-bootstrap/ng-bootstrap';
+import {InformativoModalComponent } from 'src/app/shared/layout/modals/informativo-modal/informativo-modal.component';
 import * as moment from 'moment';
 import 'moment/min/locales';
 @Component({
@@ -15,20 +16,21 @@ export class FinanceiroComponent{
     loading = false;
     status = '';
     periodo = '';
-
     movimentacoes: [];
     hoveredDate: NgbDate | null = null;
     selectedDate = '';
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
-    dataInicial;
-    dataFinal;
+    periodoDe;
+    periodoAte;
     queryParams;
     relatorio;
     resultado = 0;
     showLoading = true;
     dataSaldoAnterior;
     cambista = '';
+    modalRef;
+    params;
 
     constructor(
         private sidebarService: SidebarService,
@@ -36,14 +38,16 @@ export class FinanceiroComponent{
         private calendar: NgbCalendar,
         private cambistaService: CambistaService,
         private messageService: MessageService,
+        private cd: ChangeDetectorRef,
+        private modalService: NgbModal,
     ) { 
         const monday = moment().clone().isoWeekday(1);
         this.fromDate = NgbDate.from({year: monday.year(), month: monday.month() + 1, day: monday.date()});
         this.toDate = calendar.getNext(this.fromDate, 'd', 6);
 
         this.queryParams = {
-            dataInicial: this.formatDate(this.fromDate, 'us'),
-            dataFinal: this.formatDate(this.toDate, 'us')
+            periodoDe: this.formatDate(this.fromDate, 'us'),
+            periodoAte: this.formatDate(this.toDate, 'us')
         };
 
         this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
@@ -61,8 +65,8 @@ export class FinanceiroComponent{
         
         this.loading = true;
         const queryParams: any = {
-            'data-inicial': this.queryParams.dataInicial,
-            'data-final': this.queryParams.dataFinal,
+            'periodoDe': this.queryParams.periodoDe,
+            'periodoAte': this.queryParams.periodoAte,
         };
 
         this.cambistaService.movimentacao(this.queryParams).subscribe(
@@ -85,17 +89,17 @@ export class FinanceiroComponent{
     onDateSelection(date: NgbDate, datepicker: any) {
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
-            this.queryParams.dataInicial = this.formatDate(date, 'us');
+            this.queryParams.periodoDe = this.formatDate(date, 'us');
         } else if (this.fromDate && !this.toDate && date && (date.after(this.fromDate) || date.equals(this.fromDate))) {
             this.toDate = date;
-            this.queryParams.dataFinal = this.formatDate(date, 'us');
+            this.queryParams.periodoAte = this.formatDate(date, 'us');
             this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(date);
             datepicker.close();
         } else {
             this.toDate = null;
-            this.queryParams.dataFinal = null;
+            this.queryParams.periodoAte = null;
             this.fromDate = date;
-            this.queryParams.dataInicial = this.formatDate(date, 'us');
+            this.queryParams.periodoDe = this.formatDate(date, 'us');
         }
     }
 
@@ -136,5 +140,44 @@ export class FinanceiroComponent{
         } else {
             return 'default';
         }
+    }
+
+    openModal(movimentacao) {
+        this.showLoading = true;
+        const params = {};
+
+        let modalInformativo = InformativoModalComponent;
+
+        this.params = {
+            'movimentacaoId': movimentacao
+        };
+    
+        this.cambistaService.buscarMovimentacaoId(this.params)
+            .subscribe(
+                movimentacaoLocalizada => {
+                    this.modalRef = this.modalService.open(modalInformativo, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        scrollable: true
+                    });
+                    this.modalRef.componentInstance.movimentacao = movimentacaoLocalizada;
+                    this.modalRef.componentInstance.showCancel = true;
+
+                    this.modalRef.result.then(
+                        (result) => {
+                            switch (result) {
+                                default:
+                                    break;
+                            }
+                        },
+                        (reason) => {
+                        }
+                    );
+
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => this.handleError(error)
+            );
     }
 }

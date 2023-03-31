@@ -363,6 +363,28 @@ label {
     cursor: pointer;
 }
 
+.acoes-aposta {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.acoes-aposta a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 24px;
+    width: 24px;
+
+    background: var(--highlight);
+    border-radius: 4px;
+    color: var(--foreground-highlight);
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 10px;

@@ -79,6 +79,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {DesafiosBilheteComponent} from '../../desafios/desafios-bilhete/desafios-bilhete.component';
 import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-email-modal.component';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { InformativoModalComponent } from './modals/informativo-modal/informativo-modal.component';
 
 @NgModule({
     imports: [
@@ -159,7 +160,8 @@ import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SET
         ClienteSenhaModalComponent,
         ClienteApostasModalComponent,
         DesafiosBilheteComponent,
-        ValidarEmailModalComponent
+        ValidarEmailModalComponent,
+        InformativoModalComponent
     ],
     exports: [
         MainLayoutComponent,
