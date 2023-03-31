@@ -1149,15 +1149,6 @@ gulp.task('sportbrasilvip.com', function (done) {
     });
 });
 
-gulp.task('dobowxbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "dobowxbet.wee.bet",
-        banca: "DOBOW XBET",
-        styles: "",
-    });
-});
-
 gulp.task('bets084.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1617,15 +1608,6 @@ gulp.task('grenbet.net', function (done) {
     });
 });
 
-gulp.task('futtop.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "futtop.bet",
-        banca: "FUTTOP",
-        styles: "",
-    });
-});
-
 gulp.task('soumaisbet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1832,15 +1814,6 @@ gulp.task('ritsbet.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "ritsbet.wee.bet",
         banca: "RITS BET",
-        styles: "",
-    });
-});
-
-gulp.task('duplabet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "duplabet.com",
-        banca: "DUPLA BET",
         styles: "",
     });
 });
@@ -2502,15 +2475,6 @@ gulp.task('sportspremium.club', function (done) {
         server: "front3.wee.bet",
         host: "sportspremium.club",
         banca: "SPORTS PREMIUM",
-        styles: "",
-    });
-});
-
-gulp.task('nogol.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "nogol.bet",
-        banca: "NOGOL.BET",
         styles: "",
     });
 });
