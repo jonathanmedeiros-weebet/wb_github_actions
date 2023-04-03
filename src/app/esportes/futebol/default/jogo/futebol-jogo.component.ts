@@ -15,7 +15,7 @@ import {
 import {ActivatedRoute} from '@angular/router';
 
 import {Jogo} from './../../../../models';
-import {BilheteEsportivoService, CampinhoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
+import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
@@ -68,7 +68,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     constructor(
         private jogoService: JogoService,
         public sanitizer: DomSanitizer,
-        private campinhoService: CampinhoService,
         private bilheteService: BilheteEsportivoService,
         private helperService: HelperService,
         private messageService: MessageService,
@@ -128,33 +127,23 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     jogo => {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
+
+                        if (habilitar_live_tracker && jogo.thesports_uuid) {
+                            if (window.innerWidth <= 1024) {
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo?.thesports_uuid);
+                                this.loadedFrame = true;
+                                this.cd.markForCheck();
+                            } else {
+                                if (this.exibindoMaisCotacoes) {
+                                    this.bilheteService.sendId(jogo.thesports_uuid);
+                                } else {
+                                    this.bilheteService.sendId(null);
+                                }
+                            }
+                        }
                     },
                     error => this.messageService.error(error)
                 );
-        }
-
-        if(habilitar_live_tracker && this.jogoId) {
-            if (window.innerWidth <= 1024) {
-                this.loadedFrame = false;
-                this.campinhoService.getIdsJogo(this.jogoId)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    response => {
-                        if(response?.thesports_uuid) {
-                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
-                        }
-                        this.loadedFrame = true;
-                        this.cd.markForCheck();
-                    },
-                    error => this.handleError(error)
-                )
-            } else {
-                if (this.exibindoMaisCotacoes) {
-                    this.bilheteService.sendId(this.jogoId);
-                } else {
-                    this.bilheteService.sendId(null);
-                }
-            }
         }
     }
 
@@ -171,6 +160,14 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     jogo => {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
+
+                        if(habilitar_live_tracker && jogo.thesports_uuid) {
+                            if (this.exibindoMaisCotacoes) {
+                                this.bilheteService.sendId(jogo.thesports_uuid);
+                            } else {
+                                this.bilheteService.sendId(null);
+                            }
+                        }
                     },
                     error => this.messageService.error(error)
                 );

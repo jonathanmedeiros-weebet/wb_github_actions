@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { Jogo, ItemBilheteEsportivo } from '../../../models';
 import {
     ParametrosLocaisService, MessageService, JogoService,
-    LiveService, BilheteEsportivoService, HelperService, CampinhoService
+    LiveService, BilheteEsportivoService, HelperService
 } from '../../../services';
 
 @Component({
@@ -47,7 +47,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     constructor(
         public sanitizer: DomSanitizer,
         private messageService: MessageService,
-        private campinhoService: CampinhoService,
         private jogoService: JogoService,
         private liveService: LiveService,
         private bilheteService: BilheteEsportivoService,
@@ -62,8 +61,6 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
-        const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
-
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
@@ -77,34 +74,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
-
-            if(habilitar_live_tracker || habilitar_live_stream) {
-                this.campinhoService.getIdsJogo(this.jogoId)
-                .subscribe(
-                    response => {
-                        if(response?.thesports_uuid) {
-                            if(habilitar_live_stream) {
-                                this.theSportStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
-                                this.showStreamFrame();
-                            }
-
-                            if(habilitar_live_tracker) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
-                                this.showCampinhoFrame();
-                            }
-                        }
-                        this.loadedFrame = true;
-                    },
-                    error =>  this.handleError(error)
-                )
-            } else {
-                this.loadedFrame = true;
-            }
-        } else {
-            if(habilitar_live_tracker || habilitar_live_stream) {
-                this.bilheteService.sendId(this.jogoId);
-            }
-        }
+        } 
 
         this.definirAltura();
 
@@ -164,9 +134,34 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 jogo => {
+                    const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
                     this.jogo = jogo;
                     this.mapearCotacoes(jogo.cotacoes_aovivo);
                     this.live(id);
+
+                    if (window.innerWidth <= 1024) {
+                        if(jogo?.thesports_uuid) {
+                            if(habilitar_live_stream) {
+                                this.theSportStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + jogo.thesports_uuid);
+                                this.showStreamFrame();
+                            }
+
+                            if(habilitar_live_tracker) {
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo.thesports_uuid);
+                                this.showCampinhoFrame();
+                            }
+                        } else {
+                            this.theSportUrl = null;
+                            this.theSportStreamUrl = null;
+                        }
+                        this.loadedFrame = true;
+                    } else {
+                        if(habilitar_live_tracker || habilitar_live_stream) {
+                            this.bilheteService.sendId(jogo.thesports_uuid);
+                        }
+                    }
+
+
                 },
                 error => this.handleError(error)
             );

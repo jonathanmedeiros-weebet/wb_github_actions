@@ -14,7 +14,6 @@ import {
     MessageService,
     ParametrosLocaisService,
     PreApostaEsportivaService,
-    CampinhoService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -80,7 +79,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
-        private campinhoService: CampinhoService,
         private menuFooterService: MenuFooterService,
         private translate: TranslateService
     ) {
@@ -153,24 +151,17 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             });
 
         this.bilheteService.idJogo
-            .pipe(switchMap(result => {
-                    if (result) {
-                        return this.campinhoService.getIdsJogo(result);
-                    } else {
-                        return of(null);
-                    }
-                })
-            )
+            .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (response: any) => {
-                    if (response?.thesports_uuid) {
+                    if (response) {
                         if(habilitar_live_stream) {
-                            this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
+                            this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response);
                             this.showStreamFrame();
                         }
 
                         if(habilitar_live_tracker) {
-                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
+                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response);
                             this.showCampinhoFrame();
                         }
                     } else {
