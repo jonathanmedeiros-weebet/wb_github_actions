@@ -8,16 +8,18 @@ import {
     VoleiGuard
 } from '../services';
 import {SportLayoutComponent} from '../shared/layout/app-layouts';
+import { EsporteGuard } from '../shared/services/guards/esporte.guard';
 
 export const routes: Routes = [
     {
         path: '',
         component: SportLayoutComponent,
+        canActivateChild: [EsporteGuard],
         children: [
             {
                 path: '',
                 redirectTo: 'futebol',
-                pathMatch: 'full'
+                pathMatch: 'full',
             },
             {
                 path: 'live',
