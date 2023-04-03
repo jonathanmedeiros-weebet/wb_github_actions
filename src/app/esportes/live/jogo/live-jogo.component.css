@@ -66,6 +66,15 @@ section.jogo {
     display: flex;
 }
 
+.no-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 215px;
+    padding: 75px 0;
+}
 .indentificacao, .indentificacao-mobile{
     padding: 10px 10px 0 10px;
 }
@@ -364,6 +373,41 @@ section.jogo {
 
 .time-b-nome {
     width: 100%;
+}
+
+.header-frame .options {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+}
+
+
+.header-frame a {
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-frame a svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--foreground-sidebars);
+    stroke: var(--foreground-sidebars);
+}
+
+.header-frame a:hover, .header-frame a.active {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.header-frame a:hover svg, .header-frame a.active svg {
+    fill: var(--foreground-highlight);
+    stroke: var(--foreground-highlight);
 }
 
 /* Large devices (desktops, 1025px and up) */

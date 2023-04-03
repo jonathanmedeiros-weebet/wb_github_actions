@@ -70,6 +70,12 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
 
     submit() {
         const values = this.form.value;
+        let chavePix = this.form.value['chave_pix'];
+
+        if(chavePix.match(/@/)){
+            this.form.value['chave_pix'] = chavePix.toLowerCase().trim();
+        }
+
         this.clienteService.atualizarPix(values)
             .subscribe(
                 () => {

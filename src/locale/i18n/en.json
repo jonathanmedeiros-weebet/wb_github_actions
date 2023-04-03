@@ -179,6 +179,7 @@
         "historicoDeApostas": "Betting History",
         "modalidade": "Modality",
         "estouCiente": "I know",
+        "movimentacao":"Transactions",
         "rollover": "Rollover"
     },
     "dias": {

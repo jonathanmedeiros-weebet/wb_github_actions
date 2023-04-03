@@ -22,18 +22,56 @@
     color: var(--foreground-sidebars);
 }
 
-.campinho a {
-    color: #fff;
-}
-
 .campinho .campinho-toogle{
     border-radius: 5px 5px 0 0;
     font-size: 14px;
-    padding: 15px 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.campinho .campinho-toogle i{
     cursor: pointer;
+}
+
+.campinho .campinho-toogle .options {
+    display: flex;
+    gap: 10px;
+}
+
+
+.campinho .campinho-toogle a {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.campinho .campinho-toogle a svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--foreground-sidebars);
+    stroke: var(--foreground-sidebars);
+}
+
+.campinho .campinho-toogle a:hover, .campinho .campinho-toogle a.active {
+    color: var(--highlight);
+}
+
+.campinho .campinho-toogle a:hover svg, .campinho .campinho-toogle a.active svg {
+    fill: var(--highlight);
+    stroke: var(--highlight);
+}
+
+.no-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 215px;
 }
 
 .iframe-responsive {
@@ -41,6 +79,10 @@
     padding-top: 64%;
     position: relative;
     width: 100%;
+}
+
+.iframe-responsive.stream {
+    padding-top: 57%;
 }
 
 .iframe-responsive iframe {

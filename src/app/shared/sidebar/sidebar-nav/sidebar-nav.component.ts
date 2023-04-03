@@ -1,15 +1,15 @@
-import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
-import {Router} from '@angular/router';
-import {SidebarService} from '../../services/utils/sidebar.service';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { SidebarService } from '../../services/utils/sidebar.service';
 
 import * as random from 'lodash.random';
-import {SupresinhaService} from '../../services/utils/surpresinha.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {BaseFormComponent} from '../../layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ApostaService} from '../../services/aposta.service';
-import {MessageService} from '../../services/utils/message.service';
+import { SupresinhaService } from '../../services/utils/surpresinha.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { BaseFormComponent } from '../../layout/base-form/base-form.component';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApostaService } from '../../services/aposta.service';
+import { MessageService } from '../../services/utils/message.service';
 import {
     ApostaModalComponent,
     CartaoCadastroModalComponent,
@@ -17,9 +17,9 @@ import {
     RecargaCartaoModalComponent,
     SolicitarSaqueModalComponent
 } from '../../layout/modals';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AuthService} from '../../services/auth/auth.service';
-import {ParametrosLocaisService} from '../../services/parametros-locais.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth/auth.service';
+import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -46,14 +46,14 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     subPerfil = false;
 
     iconesGenericos = {
-        'futsal': 'wbicon icon-futsal',
-        'volei': 'wbicon icon-volei',
         'basquete': 'wbicon icon-basquete',
+        'volei': 'wbicon icon-volei',
+        'tenis': 'wbicon icon-tenis',
         'combate': 'wbicon icon-luta',
-        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
+        'futsal': 'wbicon icon-futsal',
         'futebol-americano': 'wbicon icon-futebol-americano',
         'esports': 'wbicon icon-e-sports',
-        'tenis': 'wbicon icon-tenis'
+        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
     };
 
     constructor(
@@ -78,7 +78,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
 
-        if  (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
+        if (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
         }
 
@@ -87,21 +87,21 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         }
 
         this.auth.logado
-        .subscribe(
-            logado => {
-                this.isLogado = logado;
-                if (logado) {
-                    this.auth.cliente
-                        .subscribe(
-                            isCliente => {
-                                this.isNotCambista = isCliente;
-                            }
-                        );
-                } else {
-                  this.isNotCambista = false;
+            .subscribe(
+                logado => {
+                    this.isLogado = logado;
+                    if (logado) {
+                        this.auth.cliente
+                            .subscribe(
+                                isCliente => {
+                                    this.isNotCambista = isCliente;
+                                }
+                            );
+                    } else {
+                        this.isNotCambista = false;
+                    }
                 }
-            }
-        );
+            );
 
         this.regioesDestaque = this.paramsLocais.getOpcoes().regioes_destaque;
 
@@ -198,7 +198,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     goTo(url, queryParams) {
-        this.router.navigate([url], {queryParams});
+        this.router.navigate([url], { queryParams });
     }
 
     abrirConsultarCartao() {

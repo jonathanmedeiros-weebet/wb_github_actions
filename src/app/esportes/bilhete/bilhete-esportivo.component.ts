@@ -44,8 +44,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     tipoApostaDeslogado = 'preaposta';
     cartaoApostaForm: FormGroup;
     apostaAoVivo = false;
-    delay = 20;
-    delayReal = 20;
+    delay = 10;
+    delayReal = 10;
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
@@ -61,8 +61,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     utilizarBonus = false;
     valorFocado = false;
     liveTrackerUrl;
+    liveStreamUrl;
     modoCambista = false;
     showCampinho = true;
+    showStream = false;
+    showFrame = true;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -87,6 +90,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     ngOnInit() {
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
+        const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
 
         this.btnText = this.translate.instant('bilhete.preAposta');
 
@@ -148,10 +152,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.scrollToBottom();
             });
 
-
         this.bilheteService.idJogo
             .pipe(switchMap(result => {
-                    if (this.opcoes.habilitar_live_tracker && result) {
+                    if (result) {
                         return this.campinhoService.getIdsJogo(result);
                     } else {
                         return of(null);
@@ -161,9 +164,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 (response: any) => {
                     if (response?.thesports_uuid) {
-                        this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                        if(habilitar_live_stream) {
+                            this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
+                            this.showStreamFrame();
+                        }
+
+                        if(habilitar_live_tracker) {
+                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid);
+                            this.showCampinhoFrame();
+                        }
                     } else {
                         this.liveTrackerUrl = null;
+                        this.liveStreamUrl = null;
                     }
                 },
                 error => this.handleError(error)
@@ -207,8 +219,20 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.unsub$.complete();
     }
 
-    toogleCampinho() {
-        this.showCampinho = !this.showCampinho;
+    showCampinhoFrame() {
+        this.showFrame = true;
+        this.showCampinho = true;
+        this.showStream = false;
+    }
+
+    showStreamFrame() {
+        this.showFrame = true;
+        this.showStream = true;
+        this.showCampinho = false;
+    }
+
+    toggleFrame() {
+        this.showFrame = !this.showFrame;
     }
 
     createForm() {
@@ -555,10 +579,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     setDelay() {
-        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
+        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 10;
 
-        if (this.delay < 20) {
-            this.delayReal = 20;
+        if (this.delay < 10) {
+            this.delayReal = 10;
         } else {
             this.delayReal = this.delay;
         }

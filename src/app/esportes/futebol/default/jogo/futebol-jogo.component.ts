@@ -15,10 +15,11 @@ import {
 import {ActivatedRoute} from '@angular/router';
 
 import {Jogo} from './../../../../models';
-import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
+import {BilheteEsportivoService, CampinhoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -29,6 +30,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
+    @Input() exibindoMaisCotacoes: boolean;
     @Output() exibirMaisCotacoes = new EventEmitter();
     isMobile = false;
     mercados90: any = {};
@@ -54,6 +56,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     golsCasa = true;
     golsFora = true;
 
+    theSportUrl: SafeResourceUrl;
+    loadedFrame: boolean;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         this.definirAltura();
@@ -62,6 +67,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     constructor(
         private jogoService: JogoService,
+        public sanitizer: DomSanitizer,
+        private campinhoService: CampinhoService,
         private bilheteService: BilheteEsportivoService,
         private helperService: HelperService,
         private messageService: MessageService,
@@ -75,13 +82,14 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
             const altura = window.innerHeight;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
-        }
+        } 
 
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
@@ -124,9 +132,34 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     error => this.messageService.error(error)
                 );
         }
+
+        if(habilitar_live_tracker && this.jogoId) {
+            if (window.innerWidth <= 1024) {
+                this.loadedFrame = false;
+                this.campinhoService.getIdsJogo(this.jogoId)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    response => {
+                        if(response?.thesports_uuid) {
+                            this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response?.thesports_uuid)
+                        }
+                        this.loadedFrame = true;
+                        this.cd.markForCheck();
+                    },
+                    error => this.handleError(error)
+                )
+            } else {
+                if (this.exibindoMaisCotacoes) {
+                    this.bilheteService.sendId(this.jogoId);
+                } else {
+                    this.bilheteService.sendId(null);
+                }
+            }
+        }
     }
 
     ngOnChanges() {
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         this.oddsAberto = [];
 
         if (this.jogoId) {
@@ -142,9 +175,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     error => this.messageService.error(error)
                 );
         }
+
+        if(habilitar_live_tracker && this.jogoId) {
+            if (this.exibindoMaisCotacoes) {
+                this.bilheteService.sendId(this.jogoId);
+            } else {
+                this.bilheteService.sendId(null);
+            }
+        }
     }
 
     ngOnDestroy() {
+        this.bilheteService.sendId(null)
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -527,5 +569,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     oddAberto(chave) {
         return this.oddsAberto.includes(chave.nome);
+    }
+
+    handleError(msg: any) {
+        this.messageService.error(msg);
     }
 }

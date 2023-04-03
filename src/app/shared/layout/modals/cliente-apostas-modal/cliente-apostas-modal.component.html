@@ -87,12 +87,12 @@
                 </tr>
                 <tbody *ngIf="!loading">
                     <ng-container *ngFor="let aposta of apostas">
-                        <tr class="{{ classNameAposta(aposta.resultado) }} mobile-tds">
+                        <tr class="{{ classNameAposta(aposta) }} mobile-tds">
                             <td></td>
                             <td class="codigo">{{ aposta.codigo }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td class="acoes-aposta">
-                                <a *ngIf="aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
+                                <a *ngIf="aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
                                     <i class="fa fa-external-link"></i>
                                 </a>
                                 <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
@@ -100,7 +100,7 @@
                                 </a>
                             </td>
                         </tr>
-                        <tr *ngIf="mobileScreen" class="{{ classNameAposta(aposta.resultado) }}">
+                        <tr *ngIf="mobileScreen" class="{{ classNameAposta(aposta) }}">
                             <td colspan="5" class="info-apostador">
                                 {{'geral.apostouEmAs' | translate: {
                                 apostador: pronomeCliente,

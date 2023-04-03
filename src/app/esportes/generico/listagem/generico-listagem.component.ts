@@ -13,9 +13,9 @@ import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import 'moment/min/locales';
 
-import {BasqueteJogoComponent} from '../basquete-jogo/basquete-jogo.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TranslateService} from '@ngx-translate/core';
+import { BasqueteJogoComponent } from '../basquete-jogo/basquete-jogo.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-generico-listagem',
@@ -45,11 +45,15 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     dataLimiteTabela;
     contentSportsEl;
     start;
-    offset = 20;
-    total;
+    page = 1;
+    offset = 7;
+    totalPages;
     loadingScroll = false;
     unsub$ = new Subject();
     term = '';
+    campeonatosTemp = [];
+    campeonatosFiltrados = [];
+
     modalRef;
 
     limiteDiasTabela: number;
@@ -64,14 +68,14 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     tabSelected;
 
     iconesGenericos = {
-        'futsal': 'wbicon icon-futsal',
-        'volei': 'wbicon icon-volei',
         'basquete': 'wbicon icon-basquete',
+        'volei': 'wbicon icon-volei',
+        'tenis': 'wbicon icon-tenis',
         'combate': 'wbicon icon-luta',
-        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
+        'futsal': 'wbicon icon-futsal',
         'futebol-americano': 'wbicon icon-futebol-americano',
         'esports': 'wbicon icon-e-sports',
-        'tenis': 'wbicon icon-tenis'
+        'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
     };
 
     constructor(
@@ -94,7 +98,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
-        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
         this.atualizarDatasJogosFuturos(this.translate.currentLang);
 
@@ -124,18 +128,23 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (changes['data'] && this.data) {
-            const diferencaDias = moment(this.data).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+            const diferencaDias = moment(this.data).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
             if (diferencaDias === 1) {
                 this.mudarData('amanha');
             } else {
                 this.mudarData('+' + diferencaDias);
             }
+
+            this.campeonatosFiltrados = [];
+            this.campeonatosTemp = [];
+            this.term = '';
         }
 
         if (changes['camps'] && this.camps) {
             this.start = 0;
-            this.total = Math.ceil(this.camps.length / this.offset);
+            this.page = 1;
+            this.totalPages = Math.ceil(this.camps.length / this.offset);
             this.campeonatos = [];
             this.exibirMais();
 
@@ -260,6 +269,43 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
+    filtrarCampeonatos() {
+        if (this.term) {
+            if (!this.campeonatosTemp.length && !this.campeonatosFiltrados.length) {
+                this.campeonatosTemp = this.campeonatos;
+            }
+
+            this.campeonatosFiltrados = this.camps.filter(camp => {
+                if (camp.jogos.some(jogo => jogo.nome.includes(this.term.toUpperCase()))) {
+                    return true;
+                }
+                return false;
+            }).map(camp => Object.assign({}, camp));
+
+            if (this.campeonatosFiltrados.length) {
+                this.campeonatosFiltrados.map(camp => {
+                    let jogosTemp;
+                    jogosTemp = camp.jogos.filter(jogo => jogo.nome.includes(this.term.toUpperCase()));
+
+                    camp.jogos = jogosTemp;
+                    return this.calcularCotacoes(camp);
+                });
+            }
+            this.campeonatos = this.campeonatosFiltrados;
+        } else {
+            if (this.campeonatosTemp.length) {
+                this.campeonatos = this.campeonatosTemp;
+                this.campeonatosTemp = [];
+                this.campeonatosFiltrados = [];
+            }
+        }
+
+        if (this.exibirCampeonatosExpandido) {
+            const sliceIds = this.campeonatos.map(campeonato => campeonato._id);
+            this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
+        }
+    }
+
     limparPesquisa() {
         this.term = '';
     }
@@ -298,38 +344,43 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirMais() {
-        this.loadingScroll = true;
+        if (!this.term && this.camps && (this.page <= this.totalPages)) {
+            this.loadingScroll = true;
+            let slice = this.camps.slice(this.start, (this.page * this.offset));
 
-        if (this.start < this.total) {
-            let splice = this.camps.splice(0, this.offset);
-            splice = splice.map(campeonato => {
-                campeonato.jogos.forEach(jogo => {
-                    jogo.cotacoes.forEach(cotacao => {
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                            cotacao.valor,
-                            cotacao.chave,
-                            jogo.event_id,
-                            jogo.favorito,
-                            false);
-                        cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
-                    });
-                });
-
-                return campeonato;
+            slice = slice.map(campeonato => {
+                return this.calcularCotacoes(campeonato);
             });
 
-            this.campeonatos = this.campeonatos.concat(splice);
+            this.campeonatos = this.campeonatos.concat(slice);
 
             if (this.exibirCampeonatosExpandido) {
-                const sliceIds = splice.map(campeonato => campeonato._id);
+                const sliceIds = slice.map(campeonato => campeonato._id);
                 this.campeonatosAbertos = this.campeonatosAbertos.concat(sliceIds);
             }
 
-            this.start++;
-        }
+            this.start = (this.page * this.offset);
+            this.page++;
 
-        this.loadingScroll = false;
-        this.cd.markForCheck();
+            this.loadingScroll = false;
+            this.cd.markForCheck();
+        }
+    }
+
+    calcularCotacoes(campeonato: Campeonato) {
+        campeonato.jogos.forEach(jogo => {
+            jogo.cotacoes.forEach(cotacao => {
+                cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                    cotacao.valor,
+                    cotacao.chave,
+                    jogo.event_id,
+                    jogo.favorito,
+                    false);
+                cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
+            });
+        });
+
+        return campeonato;
     }
 
     // Exibindo todas as cotações daquele jogo selecionado
@@ -414,13 +465,13 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     atualizarDatasJogosFuturos(lang = 'pt') {
         switch (lang) {
             case 'pt':
-                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                moment.updateLocale('pt-br', { parentLocale: 'pt-br' });
                 break;
             case 'en':
-                    moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
+                moment.updateLocale('en-gb', { parentLocale: 'en-gb' });
                 break;
             default:
-                    moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                moment.updateLocale('pt-br', { parentLocale: 'pt-br' });
         }
 
         this.diaHojeMaisDois = moment().add(2, 'd');

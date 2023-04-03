@@ -164,7 +164,7 @@ export class PrintService {
                         printContents += `
                         <div class="cotacao">
                             <span class="aposta-tipo-sigla">${this.getSigla(cotacao.chave)}</span>
-                            <span class="valor pull-right"><b>${cotacao.valor}</b></span>
+                            <span class="valor pull-right"><b>${cotacao.valorFinal}</b></span>
                         </div>`;
                     });
 

@@ -56,6 +56,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     isCliente ;
     slug;
     
+    appMobile;
+    origin;
+
     constructor(
         private messageService: MessageService,
         private fb: FormBuilder,
@@ -105,6 +108,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
         this.isCliente = this.auth.isCliente();
         this.slug = config.SLUG;
+
+        this.appMobile = this.auth.isAppMobile();
+        this.origin = this.appMobile ? '?origin=app':''; 
     }
 
     ngOnDestroy() {
@@ -208,13 +214,26 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.getApostas();
     }
 
-    classNameAposta(resultado) {
-        if(resultado == 'perdeu') {
-            return 'red';
-        } else if (resultado == 'ganhou') {
-            return 'green';
+    classNameAposta(aposta) {
+        let resultado;
+
+        if (['seninha', 'quininha'].includes(aposta.modalidade)) {
+            if (aposta.itens.some(loteriaItem => loteriaItem.status == 'ganhou')) {
+                resultado = 'ganhou';
+            } else if (aposta.itens.some(loteriaItem => loteriaItem.status == 'perdeu')) {
+                resultado = 'perdeu';
+            }
         } else {
-            return 'default';
+            resultado = aposta.resultado;
+        }
+
+        switch (resultado) {
+            case 'ganhou':
+                return 'green';
+            case 'perdeu':
+                return 'red';
+            default:
+                return 'default';
         }
     }
 
@@ -268,7 +287,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         }
 
         let modalAposta;
-        if (this.encerramentoPermitido) {
+        if (this.encerramentoPermitido && aposta.tipo == 'esportes') {
             modalAposta = ApostaEncerramentoModalComponent;
         } else {
             modalAposta = ApostaModalComponent;

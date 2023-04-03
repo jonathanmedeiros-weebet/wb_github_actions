@@ -8,6 +8,7 @@
                 <input type="text" [(ngModel)]="term"
                        class="form-control inverted-out"
                        placeholder="{{'geral.pesquisar' | translate}}"
+                       (keyup)="filtrarCampeonatos()"
                        (focusin)="focusPesquisa(true)"
                        (focusout)="focusPesquisa(false)"
                 >
@@ -34,7 +35,7 @@
                 </button>
             </div>
 
-            <div class="campeonato" *ngFor="let campeonato of campeonatos | filter:term; trackBy: trackById">
+            <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span [ngClass]="['modalidade-icon', iconesGenericos[esporte]]"></span>
                     <span class="campeonato-nome">{{campeonato.nome}}</span>
@@ -73,7 +74,7 @@
                                                 </span>
                                             </ng-template>
                                         </div>
-                                        {{jogo.time_a_nome}}
+                                        <div class="nome-time"> {{jogo.time_a_nome}}</div>
                                     </div>
                                     <div class="escudo-container">
                                         <div *ngIf="exibirEscudo()">
@@ -88,7 +89,7 @@
                                                 </span>
                                             </ng-template>
                                         </div>
-                                        {{jogo.time_b_nome}}
+                                        <div class="nome-time">{{jogo.time_b_nome}}</div>
                                     </div>
                                     <a *ngIf="exibirTotalOdds()" class="mais-cotacao-mobile">
                                         <i class="fa fa-plus"></i>{{jogo.total_cotacoes}}

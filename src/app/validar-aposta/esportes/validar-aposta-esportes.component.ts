@@ -28,8 +28,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     @Output() success = new EventEmitter();
     @Input() preAposta: any;
     preApostaItens = [];
-    delay = 20;
-    delayReal = 20;
+    delay = 10;
+    delayReal = 10;
     refreshIntervalId;
     apostaAoVivo = false;
     cotacoesVinheramDifentes = false;
@@ -224,10 +224,10 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     }
 
     setDelay() {
-        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 20;
+        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 10;
 
-        if (this.delay < 20) {
-            this.delayReal = 20;
+        if (this.delay < 10) {
+            this.delayReal = 10;
         } else {
             this.delayReal = this.delay;
         }
