@@ -14,7 +14,6 @@ import {
     MessageService,
     ParametrosLocaisService,
     PreApostaEsportivaService,
-    CampinhoService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -80,7 +79,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
-        private campinhoService: CampinhoService,
         private menuFooterService: MenuFooterService,
         private translate: TranslateService
     ) {
