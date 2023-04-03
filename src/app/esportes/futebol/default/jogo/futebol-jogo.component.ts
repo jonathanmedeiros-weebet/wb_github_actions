@@ -131,8 +131,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         if (habilitar_live_tracker && jogo.thesports_uuid) {
                             if (window.innerWidth <= 1024) {
                                 this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo?.thesports_uuid);
-                                this.loadedFrame = true;
-                                this.cd.markForCheck();
                             } else {
                                 if (this.exibindoMaisCotacoes) {
                                     this.bilheteService.sendId(jogo.thesports_uuid);
@@ -141,6 +139,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                 }
                             }
                         }
+                        this.loadedFrame = true;
+                        this.cd.markForCheck();
                     },
                     error => this.messageService.error(error)
                 );
