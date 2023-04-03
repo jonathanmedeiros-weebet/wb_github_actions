@@ -75,6 +75,13 @@
     background-color: var(--highlight);
 }
 
+.btn-regras-bonus{
+    margin-left: 20px;
+    color: var(--highlight);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 .btn-converterBonus {
     display: flex;
@@ -119,6 +126,13 @@
         height: 24px !important;
         width: 150px;
 
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-regras-bonus{
+        margin-left: 0px;
+        color: var(--highlight);
         text-decoration: none;
         cursor: pointer;
     }

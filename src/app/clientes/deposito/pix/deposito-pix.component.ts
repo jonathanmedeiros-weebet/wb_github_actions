@@ -8,6 +8,7 @@ import {ParametrosLocaisService} from '../../../shared/services/parametros-locai
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 
 @Component({
     selector: 'ngbd-modal-content',
@@ -227,4 +228,12 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.opcaoBonus = opcaoBonus;
         this.form.get('bonus').patchValue(opcaoBonus);
     }
+
+    abrirRegrasBonus() {
+        this.modalService.open(RegrasBonusModalComponent, {
+            centered: true,
+            size: 'xl',
+        });
+    }
+
 }
