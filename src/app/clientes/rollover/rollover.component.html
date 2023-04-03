@@ -98,7 +98,7 @@
                                 {{rollover.dataVencimento}}
                             </td>
                             <td class="custom-td">
-                                <button *ngIf="rollover.status == 'completado'  && !rollover.convertido"  class="btn btn-converterBonus" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
+                                <button *ngIf="rollover.status == 'completado'  && !rollover.convertido"  class="btn btn-custom btn-converterBonus" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
                             </td>
                         </tr>
                     </ng-container>
@@ -151,7 +151,7 @@
                                 Data de Vencimento: {{rollover.dataVencimento}}
                                 </span>
                                 <br><br>
-                                <button *ngIf="rollover.status == 'completado' && !rollover.convertido" class="btn btn-custom" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
+                                <button *ngIf="rollover.status == 'completado' && !rollover.convertido" class="btn btn-custom btn-converterBonus" (click)="converterBonus(rollover.id)"><span>Converter Bônus</span></button>
                             </td>
                         </tr>
                     </ng-container>

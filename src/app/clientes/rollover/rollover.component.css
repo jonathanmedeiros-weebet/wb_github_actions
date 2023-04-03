@@ -75,18 +75,21 @@
     background-color: var(--highlight);
 }
 
-.btn-converterBonus{
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
+
+.btn-converterBonus {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 20px;
+    justify-content: center;
+
+    height: 24px;
+    width: 150px;
+
+    text-decoration: none;
     cursor: pointer;
 }
 
 .progress{
-    height: 30px;
+    height: 24px;
     width: 100%;
 }
 @media only screen and (max-width: 1024px) {
@@ -109,14 +112,14 @@
     }
 
     .btn-converterBonus{
-        background-color: var(--highlight);
-        color: var(--foreground-highlight);
         display: flex;
-        justify-content: center;
         align-items: center;
-        width: 200px;
-        height: 30px;
+        justify-content: center;
+
+        height: 24px !important;
+        width: 150px;
+
+        text-decoration: none;
         cursor: pointer;
-        border-radius: 5px;
     }
 }
