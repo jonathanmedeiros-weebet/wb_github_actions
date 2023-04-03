@@ -32,6 +32,7 @@ import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
 import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
 import {TranslateService} from '@ngx-translate/core';
 import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
+import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 
 @Component({
@@ -301,6 +302,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     abrirFinanceiro() {
         this.modalService.open(FinanceiroComponent);
 
+    }
+
+    abrirCambistaMovimentacao(){
+        this.modalService.open(MovimentacaoComponent);
     }
 
     abrirSaques() {
