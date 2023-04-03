@@ -2613,3 +2613,12 @@ gulp.task('generalbet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('2xbettin.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "2xbettin.com",
+        banca: "2XBETTIN",
+        styles: "",
+    });
+});

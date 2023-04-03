@@ -283,7 +283,8 @@
         "novabet.site": "gulp novabet.site",
         "jocabet.com": "gulp jocabet.com",
         "lfbets.io": "gulp lfbets.io",
-        "generalbet.net": "gulp generalbet.net"
+        "generalbet.net": "gulp generalbet.net",
+        "2xbettin.com": "gulp 2xbettin.com"
     },
     "private": true,
     "dependencies": {
