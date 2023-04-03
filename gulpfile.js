@@ -2548,6 +2548,8 @@ gulp.task('fullhouse.bet', function (done) {
         host: "fullhouse.bet",
         banca: "FULLHOUSE.BET",
         styles: "",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/QJSFxLp3rT' async></script>"
     });
 });
 
@@ -2584,6 +2586,7 @@ gulp.task('jocabet.com', function (done) {
         host: "jocabet.com",
         banca: "JOCA BET",
         styles: "",
+        scripts: ""
     });
 });
 
