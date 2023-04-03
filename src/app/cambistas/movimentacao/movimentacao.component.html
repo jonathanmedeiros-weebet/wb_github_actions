@@ -1,8 +1,11 @@
 <div id="default-content">
-    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </a>
-
+    <div class="mobile-modal-header" *ngIf="mobileScreen">
+        <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'geral.movimentacao' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
     <div class="internal-container-out">
         <div class="content-body">
             <div class="content-header">

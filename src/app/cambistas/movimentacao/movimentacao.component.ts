@@ -31,6 +31,7 @@ export class MovimentacaoComponent{
     cambista = '';
     modalRef;
     params;
+    mobileScreen: boolean;
 
     constructor(
         private sidebarService: SidebarService,
@@ -50,10 +51,12 @@ export class MovimentacaoComponent{
         };
 
         this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
+    
+        this.handleFiltrar();        
     }
 
     ngOnInit(): void {
-        this.sidebarService.changeItens({contexto: 'cambista'});
+        this.mobileScreen = window.innerWidth <=1024;
     }
 
     handleError(error: string) {
