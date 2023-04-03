@@ -8,6 +8,7 @@ import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
 import {CambistaGuard} from './shared/services/guards/cambista.guard';
 import { AppComponent } from './app.component';
+import { HomeGuard } from './shared/services/guards/home.guard';
 
 const appRoutes: Routes = [
     {
@@ -16,8 +17,9 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'esportes/futebol',
-                pathMatch: 'full'
+                pathMatch: 'full',
+                component: AppComponent,
+                canActivate: [HomeGuard]
             },
             {
                 path: 'cadastro',

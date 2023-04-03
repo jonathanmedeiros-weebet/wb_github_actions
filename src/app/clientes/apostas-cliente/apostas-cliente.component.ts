@@ -24,6 +24,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     queryParams;
     dataInicial;
     dataFinal;
+    esporteHabilitado;
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
@@ -94,6 +95,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     ngOnInit() {
         this.sidebarService.changeItens({contexto: 'cliente'});
 
+        this.esporteHabilitado = this.params.getOpcoes().esporte;
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;

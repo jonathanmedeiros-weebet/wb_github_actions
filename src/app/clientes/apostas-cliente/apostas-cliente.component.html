@@ -9,7 +9,7 @@
         </div>
 
         <div class="tabs">
-            <a [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">{{'geral.esporte' | translate}} </a>
+            <a *ngIf="esporteHabilitado" [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">{{'geral.esporte' | translate}} </a>
             <a *ngIf="acumuladaoHabilitado" [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''"
                (click)="changeTab('acumuladao')">{{'geral.acumuladao' | translate}}</a>
             <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''"

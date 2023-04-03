@@ -2550,6 +2550,8 @@ gulp.task('fullhouse.bet', function (done) {
         host: "fullhouse.bet",
         banca: "FULLHOUSE.BET",
         styles: "",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/QJSFxLp3rT' async></script>"
     });
 });
 
@@ -2613,6 +2615,15 @@ gulp.task('generalbet.net', function (done) {
         server: "front2.wee.bet",
         host: "generalbet.net",
         banca: "GENERAL BET",
+        styles: "",
+    });
+});
+
+gulp.task('2xbettin.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "2xbettin.com",
+        banca: "2XBETTIN",
         styles: "",
     });
 });
