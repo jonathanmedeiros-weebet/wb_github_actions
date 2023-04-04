@@ -167,18 +167,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             } else {
                                 this.bilheteService.sendId(null);
                             }
+                        } else {
+                            this.bilheteService.sendId(null);
                         }
                     },
                     error => this.messageService.error(error)
                 );
-        }
-
-        if(habilitar_live_tracker && this.jogoId) {
-            if (this.exibindoMaisCotacoes) {
-                this.bilheteService.sendId(this.jogoId);
-            } else {
-                this.bilheteService.sendId(null);
-            }
         }
     }
 
