@@ -88,7 +88,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             const altura = window.innerHeight;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
-        } 
+        }
 
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
@@ -128,12 +128,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
 
-                        if (habilitar_live_tracker && jogo.thesports_uuid) {
+                        if (habilitar_live_tracker && jogo.live_track_id) {
                             if (window.innerWidth <= 1024) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo?.thesports_uuid);
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo?.live_track_id);
                             } else {
                                 if (this.exibindoMaisCotacoes) {
-                                    this.bilheteService.sendId(jogo.thesports_uuid);
+                                    this.bilheteService.sendId(jogo.live_track_id);
                                 } else {
                                     this.bilheteService.sendId(null);
                                 }
@@ -161,9 +161,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
 
-                        if(habilitar_live_tracker && jogo.thesports_uuid) {
+                        if(habilitar_live_tracker && jogo.live_track_id) {
                             if (this.exibindoMaisCotacoes) {
-                                this.bilheteService.sendId(jogo.thesports_uuid);
+                                this.bilheteService.sendId(jogo.live_track_id);
                             } else {
                                 this.bilheteService.sendId(null);
                             }

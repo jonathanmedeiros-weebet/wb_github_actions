@@ -74,7 +74,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
-        } 
+        }
 
         this.definirAltura();
 
@@ -140,14 +140,14 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                     this.live(id);
 
                     if (window.innerWidth <= 1024) {
-                        if(jogo?.thesports_uuid) {
+                        if(jogo?.live_track_id) {
                             if(habilitar_live_stream) {
-                                this.theSportStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + jogo.thesports_uuid);
+                                this.theSportStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + jogo.live_track_id);
                                 this.showStreamFrame();
                             }
 
                             if(habilitar_live_tracker) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo.thesports_uuid);
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo.live_track_id);
                                 this.showCampinhoFrame();
                             }
                         } else {
@@ -157,7 +157,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                         this.loadedFrame = true;
                     } else {
                         if(habilitar_live_tracker || habilitar_live_stream) {
-                            this.bilheteService.sendId(jogo.thesports_uuid);
+                            this.bilheteService.sendId(jogo.live_track_id);
                         }
                     }
 
