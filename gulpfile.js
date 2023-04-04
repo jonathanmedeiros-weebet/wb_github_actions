@@ -2630,3 +2630,21 @@ gulp.task('2xbettin.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('menbet7.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "menbet7.wee.bet",
+        banca: "MEN BET 7",
+        styles: "",
+    });
+});
+
+gulp.task('vemprabet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "vemprabet.com",
+        banca: "VEM PRA BET",
+        styles: "",
+    });
+});
