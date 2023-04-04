@@ -25,11 +25,11 @@ export class HomeGuard implements CanActivate {
         const { pagina_inicial } = this.paramsService.getOpcoes();
     
         if (pagina_inicial) {
-            this.router.navigate([this.pages[pagina_inicial]]);
+            this.router.navigate([this.pages[pagina_inicial]], {queryParams: route.queryParams});
             return false;
         }
 
-        this.router.navigate([this.pages['esporte']]);
+        this.router.navigate([this.pages['esporte']], {queryParams: route.queryParams});
         return false;
     }
 }
