@@ -330,7 +330,7 @@ body .change-theme {
 @media only screen and (max-width: 1024px) {
     .header {
         width: 100%;
-        height: 65px;
+        height: 64px;
         display: flex;
     }
 
