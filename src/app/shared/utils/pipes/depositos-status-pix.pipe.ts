@@ -14,6 +14,9 @@ export class DepositoStatusPixPipePipe implements PipeTransform {
             case 'pending':
                 statusFormatado = 'Pendente';
                 break;
+            case 'Pendente':
+                statusFormatado = 'Pendente';
+                break;
             case 'PAGO':
                 statusFormatado = 'Pago';
                 break;
