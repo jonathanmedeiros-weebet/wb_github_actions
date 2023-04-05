@@ -32,11 +32,11 @@
     color: var(--foreground-game);
     border-top: 0;
     border-bottom: 1px solid var(--game);
-    padding: 15px 10px;
+    padding: 8px;
 }
 
 .table thead th:first-child {
-    border-left: 10px solid var(--game);
+    border-left: 5px solid var(--game);
 }
 
 .table .right {
@@ -53,15 +53,15 @@
 }
 
 .table tbody td:first-child {
-    border-left: 10px solid #808080;
+    border-left: 5px solid #808080;
 }
 
 .table tbody tr.green td:first-child {
-    border-left: 10px solid #309E3A;
+    border-left: 5px solid #309E3A;
 }
 
 .table tbody tr.red td:first-child {
-    border-left: 10px solid #ED4C5C;
+    border-left: 5px solid #ED4C5C;
 }
 
 .datepicker-group i {
@@ -131,7 +131,7 @@
 
 .acoes-aposta {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     justify-content: flex-end;
 }
 
