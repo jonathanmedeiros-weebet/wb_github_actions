@@ -125,6 +125,12 @@ label.label-tempo {
     border-color: var(--highlight);
 }
 
+.btn-regras-bonus{
+    color: var(--highlight);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1024px) {
     .modal-body {
         padding-top: 50px;
@@ -209,5 +215,10 @@ label.label-tempo {
 
     .buttons-container a i.radio{
         display: none;
+    }
+
+    .btn-converterBonus{
+        text-decoration: none;
+        cursor: pointer;
     }
 }

@@ -39,6 +39,10 @@ const routes: Routes = [{
         {
             path: 'depositos-saques',
             loadChildren: () => import('./depositos-saques/depositos-saques.module').then(m => m.DepositosSaquesModule)
+        },
+        {
+            path: 'rollover',
+            loadChildren: () => import('./rollover/rollover.module').then(f => f.RolloverModule)
         }
     ]
 }];

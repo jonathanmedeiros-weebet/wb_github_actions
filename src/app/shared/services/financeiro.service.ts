@@ -106,4 +106,32 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    getRollovers(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+        return this.http.get(`${this.financeiroUrl}/rollovers`, requestOptions)
+        .pipe(
+            map(
+                (response: any) => {
+                    return response.results;
+                }
+            ),
+            catchError(this.errorService.handleError)
+        );
+    }
+
+    converterBonus(rolloverId): Observable<any> {
+        return this.http.post(`${this.financeiroUrl}/converter-bonus`,
+            {id: rolloverId}, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

@@ -40,12 +40,12 @@
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="dropdown menu-conta">
-                <i class="fa olhinho" (click)="alternarExibirSaldo()" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i> 
+                <i class="fa olhinho" (click)="alternarExibirSaldo()" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
                 <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle menu-perfil" href="#" id="navbarDropdown"
                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div>
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
-                        <span class="saldo-usuario"> 
+                        <span class="saldo-usuario">
                             <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
                             <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                         </span>
@@ -323,6 +323,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="abrirRollovers()">
+                                <span>
+                                    <i class="fa fa-solid fa-dollar"></i>
+                                </span>
+                                {{'geral.rollover' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <a (click)="listPrinters()" *ngIf="appMobile">
                                 <span>
                                     <i class="fa fa-solid fa-cogs"></i>
@@ -414,6 +423,13 @@
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
                                 {{'geral.apostas' | translate}}
                             </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rollover']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                {{'geral.bonus' | translate}}
+                            </a>
+
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
                                 <i class="fa fa-key mb-2"></i> {{'geral.alterarSenha' | translate}}

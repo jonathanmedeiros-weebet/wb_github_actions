@@ -33,7 +33,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     modalRef;
     pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST'];
-
+    qtdRolloverAtivos = 0;
     saldo = 0;
     saques = [];
 
@@ -61,6 +61,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.sidebarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
         }
+
+        this.getRollovers();
 
         this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
         this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;
@@ -200,5 +202,21 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.showLoading = false;
                 }
             );
+    }
+
+    getRollovers() {
+        const queryParams: any = {
+            'status': 'ativo',
+        };
+        this.financeiroService.getRollovers(queryParams)
+        .subscribe(
+            response => {
+                this.qtdRolloverAtivos = response.length;
+            },
+            error => {
+                this.handleError(error);
+            }
+        );
+
     }
 }

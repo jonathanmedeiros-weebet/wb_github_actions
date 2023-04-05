@@ -28,7 +28,8 @@
         </div>
         <div class="row mt-3" *ngIf="permitirBonusPrimeiroDeposito">
             <div class="col col-sm-6">
-                <label class="">{{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate}}</label>
+                <label class="">{{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate}}</label><br>
+                <a class="btn-regras-bonus" (click)="abrirRegrasBonus()">Regras do Bônus</a>
                 <div class="buttons-container mt-3">
                     <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
                         <i class="radio"></i>

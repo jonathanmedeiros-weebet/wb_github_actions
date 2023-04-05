@@ -179,7 +179,8 @@
         "historicoDeApostas": "Histórico de Apostas",
         "modalidade": "Modalidade",
         "estouCiente": "Estou ciente",
-        "movimentacao":"Movimentações"
+        "movimentacao":"Movimentações",
+        "rollover": "Bônus"
     },
     "dias": {
         "ontem": "Ontem",
@@ -295,7 +296,8 @@
         "alertaTitularChave": "Obs. Só será realizado saques em chaves pix pertencentes ao titular da conta.",
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
         "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta.",
-        "solicitacoesRecentes": "Solicitações de saque recentes"
+        "solicitacoesRecentes": "Solicitações de saque recentes",
+        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
@@ -382,7 +384,7 @@
     },
     "financeiro": {
         "emProcessamento": "Em Processamento",
-        "processado": "Procesado",
+        "processado": "Processado",
         "cancelado": "Cancelado",
         "realizadoEm": "Realizado em {{data}}",
         "qtdMovimentacoesNoPeriodo": "Qtd. Movimentações no Período de {{de}} - {{ate}}",
@@ -391,5 +393,13 @@
         "desejaReceberBonusPrimeiroDeposito": "Deseja receber Bônus de primeiro depósito?",
         "receberBonus": "Receber Bônus - Esporte",
         "naoQueroBonus": "Não quero Bônus"
+    },
+    "rollover":{
+        "nenhumBonus": "Nenhum bônus.",
+        "qtdBonus": "Quantidade de Bônus",
+        "ativo": "Ativo",
+        "completado": "Completado",
+        "cancelado": "Cancelado",
+        "vencido": "Vencido"
     }
 }

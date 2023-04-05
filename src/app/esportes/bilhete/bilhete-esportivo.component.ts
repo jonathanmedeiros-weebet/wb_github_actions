@@ -304,10 +304,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const premio = valor * cotacao;
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
 
-        if (this.utilizarBonus && this.possibilidadeGanho > 0) {
-            this.possibilidadeGanho -= valor;
-        }
-
         if (this.itens.value.length == 0) {
             this.cotacao = 0;
         } else {
