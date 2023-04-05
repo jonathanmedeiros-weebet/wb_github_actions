@@ -2634,7 +2634,7 @@ gulp.task('2xbettin.com', function (done) {
 gulp.task('metabet7.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "menbet7.wee.bet",
+        host: "metabet7.wee.bet",
         banca: "META BET 7",
         styles: "",
     });
