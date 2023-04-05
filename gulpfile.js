@@ -2648,3 +2648,12 @@ gulp.task('vemprabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('esportenetreipele.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "esportenetreipele.com",
+        banca: "ESPORTE NET REI PELÉ",
+        styles: "",
+    });
+});

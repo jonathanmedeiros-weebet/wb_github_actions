@@ -286,7 +286,8 @@
         "generalbet.net": "gulp generalbet.net",
         "2xbettin.com": "gulp 2xbettin.com",
         "menbet7.wee.bet": "gulp menbet7.wee.bet",
-        "vemprabet.com": "gulp vemprabet.com"
+        "vemprabet.com": "gulp vemprabet.com",
+        "esportenetreipele.com": "gulp esportenetreipele.com"
     },
     "private": true,
     "dependencies": {
