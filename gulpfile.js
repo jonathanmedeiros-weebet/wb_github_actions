@@ -2631,11 +2631,11 @@ gulp.task('2xbettin.com', function (done) {
     });
 });
 
-gulp.task('menbet7.wee.bet', function (done) {
+gulp.task('metabet7.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "menbet7.wee.bet",
-        banca: "MEN BET 7",
+        banca: "META BET 7",
         styles: "",
     });
 });
