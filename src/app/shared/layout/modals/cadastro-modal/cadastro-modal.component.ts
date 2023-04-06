@@ -23,6 +23,7 @@ import { RecaptchaErrorParameters } from "ng-recaptcha";
     styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
     unsub$ = new Subject();
     usuario = new Usuario();
@@ -38,6 +39,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     modalTermosRef;
     hCaptchaLanguage;
     provedorCaptcha;
+    validacaoEmailObrigatoria;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -58,6 +60,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
+
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -76,7 +80,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
-    
+
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
@@ -138,13 +142,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.activeModal.dismiss();
+                    if(this.validacaoEmailObrigatoria){
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                    this.modalService.open(ValidarEmailModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        windowClass: 'modal-pop-up',
-                        centered: true,
-                        backdrop: 'static'
-                    });
+                        this.modalService.open(ValidarEmailModalComponent, {
+                            ariaLabelledBy: 'modal-basic-title',
+                            windowClass: 'modal-pop-up',
+                            centered: true,
+                            backdrop: 'static'
+                        });
+                    }else{
+                        this.modalService.open(this.ativacaoCadastroModal,{
+                            ariaLabelledBy: 'modal-basic-title',
+                            centered: true,
+                            }
+                        );
+                    }
                 },
                 error => {
                     this.messageService.error(error);
