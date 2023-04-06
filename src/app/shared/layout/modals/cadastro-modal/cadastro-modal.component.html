@@ -170,17 +170,17 @@
 
             <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
         </div>
-        
+
         <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
             <div class="col-12" [ngStyle]="{'text-align': 'left'}">
                 <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
-                Este site é protegido por reCAPTCHA e a 
-                <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidade</a> do Google e os 
+                Este site é protegido por reCAPTCHA e a
+                <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidade</a> do Google e os
                 <a href="https://policies.google.com/terms" target="_blank">Termos de Serviço</a> se aplicam.
             </div>
 
             <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
-        </div>      
+        </div>
     </form>
 </div>
 
@@ -200,6 +200,19 @@
                 </div>
             </div>
         </form>
+    </div>
+</ng-template>
+
+<ng-template #ativacaoCadastroModal let-modal>
+    <div class="modal-header" style="display: flex; justify-content: end;">
+        <a class="close-imagem-inicial-demo" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <div class="content-modal-ativacao">
+            <h3>{{'ativacaoEmail.cadastroAtivadoComSucesso' | translate}}</h3>
+            <span>{{'ativacaoEmail.realizeSeuLogin' | translate}}</span>
+            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
+        </div>
     </div>
 </ng-template>
 
