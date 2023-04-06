@@ -23,6 +23,7 @@ import { RecaptchaErrorParameters } from "ng-recaptcha";
     styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
     unsub$ = new Subject();
     usuario = new Usuario();
@@ -38,6 +39,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     modalTermosRef;
     hCaptchaLanguage;
     provedorCaptcha;
+    emailObrigatorio;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -58,6 +60,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.emailObrigatorio = this.paramsService.getOpcoes().habilitar_ativacao_cadastro_email;
+
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -76,7 +80,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
-    
+
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
@@ -100,7 +104,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
-            email: [null, [Validators.required]],
+            email: [null, (this.emailObrigatorio) ? [Validators.required] : ''],
             afiliado: [null, [Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
@@ -138,13 +142,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.activeModal.dismiss();
+                    if(this.emailObrigatorio){
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                    this.modalService.open(ValidarEmailModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        windowClass: 'modal-pop-up',
-                        centered: true,
-                        backdrop: 'static'
-                    });
+                        this.modalService.open(ValidarEmailModalComponent, {
+                            ariaLabelledBy: 'modal-basic-title',
+                            windowClass: 'modal-pop-up',
+                            centered: true,
+                            backdrop: 'static'
+                        });
+                    }else{
+                        this.modalService.open(this.ativacaoCadastroModal,{
+                            ariaLabelledBy: 'modal-basic-title',
+                            centered: true,
+                            }
+                        );
+                    }
                 },
                 error => {
                     this.messageService.error(error);
