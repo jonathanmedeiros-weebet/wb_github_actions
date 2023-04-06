@@ -39,7 +39,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     modalTermosRef;
     hCaptchaLanguage;
     provedorCaptcha;
-    emailObrigatorio;
+    habilitarAtivacaoCadastroEmail;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -60,7 +60,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
-        this.emailObrigatorio = this.paramsService.getOpcoes().habilitar_ativacao_cadastro_email;
+        this.habilitarAtivacaoCadastroEmail = this.paramsService.getOpcoes().habilitar_ativacao_cadastro_email;
 
         this.createForm();
 
@@ -104,7 +104,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
-            email: [null, (this.emailObrigatorio) ? [Validators.required] : ''],
+            email: [null, [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
@@ -142,7 +142,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.activeModal.dismiss();
-                    if(this.emailObrigatorio){
+                    if(this.habilitarAtivacaoCadastroEmail){
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
                         this.modalService.open(ValidarEmailModalComponent, {
                             ariaLabelledBy: 'modal-basic-title',
