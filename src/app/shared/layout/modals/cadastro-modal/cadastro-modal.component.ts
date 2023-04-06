@@ -60,7 +60,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
-        this.habilitarAtivacaoCadastroEmail = this.paramsService.getOpcoes().habilitar_ativacao_cadastro_email;
+        this.habilitarAtivacaoCadastroEmail = this.paramsService.getOpcoes().validacao_email_obrigatoria;
 
         this.createForm();
 
