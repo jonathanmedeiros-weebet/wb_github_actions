@@ -1,8 +1,8 @@
-import {Location} from '@angular/common';
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {ParametrosLocaisService} from '../../services/parametros-locais.service';
-import {TranslateService} from '@ngx-translate/core';
+import { Location } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ParametrosLocaisService } from '../../services/parametros-locais.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-submenu',
@@ -145,20 +145,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: true
             },
             {
-                name: this.translate.instant('submenu.futsal'),
-                link: '/esportes/futsal',
-                icon_class: 'wbicon icon-futsal',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().futsal
-            },
-            {
-                name: this.translate.instant('submenu.volei'),
-                link: '/esportes/volei',
-                icon_class: 'wbicon icon-volei',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().volei
-            },
-            {
                 name: this.translate.instant('submenu.basquete'),
                 link: '/esportes/basquete',
                 icon_class: 'wbicon icon-basquete',
@@ -173,25 +159,11 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().combate
             },
             {
-                name: this.translate.instant('submenu.hoquei'),
-                link: '/esportes/hoquei-gelo',
-                icon_class: 'wbicon icon-hoquei-no-gelo',
+                name: this.translate.instant('submenu.volei'),
+                link: '/esportes/volei',
+                icon_class: 'wbicon icon-volei',
                 category: 'esporte',
-                active: this.paramsService.getOpcoes().hoquei_gelo
-            },
-            {
-                name: this.translate.instant('submenu.futebolAmericano'),
-                link: '/esportes/futebol-americano',
-                icon_class: 'wbicon icon-futebol-americano',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().futebol_americano
-            },
-            {
-                name: this.translate.instant('submenu.esports'),
-                link: '/esportes/esports',
-                icon_class: 'wbicon icon-e-sports',
-                category: 'esporte',
-                active: this.paramsService.getOpcoes().esports
+                active: this.paramsService.getOpcoes().volei
             },
             {
                 name: this.translate.instant('submenu.tenis'),
@@ -201,11 +173,32 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().tenis
             },
             {
-                name: this.paramsService.getQuininhaNome(),
-                link: '/loterias/quininha',
-                icon_class: 'fa-solid fa-clover',
-                category: 'loteria',
-                active: this.paramsService.quininhaAtiva()
+                name: this.translate.instant('submenu.futebolAmericano'),
+                link: '/esportes/futebol-americano',
+                icon_class: 'wbicon icon-futebol-americano',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().futebol_americano
+            },
+            {
+                name: this.translate.instant('submenu.futsal'),
+                link: '/esportes/futsal',
+                icon_class: 'wbicon icon-futsal',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().futsal
+            },
+            {
+                name: this.translate.instant('submenu.hoquei'),
+                link: '/esportes/hoquei-gelo',
+                icon_class: 'wbicon icon-hoquei-no-gelo',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().hoquei_gelo
+            },
+            {
+                name: this.translate.instant('submenu.esports'),
+                link: '/esportes/esports',
+                icon_class: 'wbicon icon-e-sports',
+                category: 'esporte',
+                active: this.paramsService.getOpcoes().esports
             },
             {
                 name: this.paramsService.getSeninhaNome(),
@@ -213,6 +206,13 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-clover',
                 category: 'loteria',
                 active: this.paramsService.seninhaAtiva()
+            },
+            {
+                name: this.paramsService.getQuininhaNome(),
+                link: '/loterias/quininha',
+                icon_class: 'fa-solid fa-clover',
+                category: 'loteria',
+                active: this.paramsService.quininhaAtiva()
             },
             {
                 name: this.translate.instant('submenu.todos'),
