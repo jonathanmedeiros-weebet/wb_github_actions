@@ -280,7 +280,8 @@
         "2xbettin.com": "gulp 2xbettin.com",
         "metabet7.wee.bet": "gulp metabet7.wee.bet",
         "vemprabet.com": "gulp vemprabet.com",
-        "esportenetreipele.com": "gulp esportenetreipele.com"
+        "esportenetreipele.com": "gulp esportenetreipele.com",
+        "goldeplacasport.com": "gulp goldeplacasport.com"
     },
     "private": true,
     "dependencies": {
