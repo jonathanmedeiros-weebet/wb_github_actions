@@ -146,12 +146,16 @@
         </div>
     </div>
 </div>
-<div class="rodape" *ngIf="itemSelecionado">
+<div class="rodape" *ngIf="itemSelecionado || process">
     <button class="btn btn-outline-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado" (click)="descartar()">
         Descartar
     </button>
-    <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="!falhaSimulacao"
+    <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="!falhaSimulacao && !process"
             (click)="confirmarEncerramento()">
         Confirmar
+    </button>
+    <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && process;">
+        {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+        <i class="fa fa-spinner fa-spin"></i>
     </button>
 </div>

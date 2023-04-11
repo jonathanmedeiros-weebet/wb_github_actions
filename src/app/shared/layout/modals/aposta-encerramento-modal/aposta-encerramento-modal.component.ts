@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -12,13 +12,16 @@ import {
 } from '../../../../services';
 import { config } from '../../../config';
 import * as moment from 'moment';
+import { ApostaEsportivaService } from 'src/app/shared/services/aposta-esportiva/aposta-esportiva.service';
+import { switchMap, takeUntil, delay, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
     templateUrl: './aposta-encerramento-modal.component.html',
     styleUrls: ['./aposta-encerramento-modal.component.css']
 })
-export class ApostaEncerramentoModalComponent implements OnInit {
+export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     LOGO = config.LOGO;
     @Input() primeiraImpressao = false;
     @Input() isUltimaAposta = false;
@@ -32,6 +35,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     novaCotacao;
     novaPossibilidadeGanho;
     itemSelecionado;
+    itemSelecionadoAoVivo;
     falhaSimulacao;
     cambistaPaga;
     apostaVersion;
@@ -40,6 +44,12 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     isMobile;
     urlBilheteAoVivo ;
     origin;
+    process = false;
+    delay = 0;
+    delayReal = 0;
+    apostaAoVivo = false;
+    refreshIntervalId: any;
+    unsub$ = new Subject();
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -47,6 +57,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private messageService: MessageService,
         private apostaService: ApostaService,
+        private apostaEsportivaService: ApostaEsportivaService,
         private utilsService: UtilsService,
         private printService: PrintService,
         private auth: AuthService
@@ -71,6 +82,23 @@ export class ApostaEncerramentoModalComponent implements OnInit {
                 this.cambistaPaga = this.aposta.possibilidade_ganho * ((100 - this.aposta.passador.percentualPremio) / 100);
             }
         }
+
+        this.setDelay();
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
+    setDelay() {
+        this.delay = this.opcoes.delay_aposta_aovivo ? this.opcoes.delay_aposta_aovivo : 10;
+
+        if (this.delay < 10) {
+            this.delayReal = 10;
+        } else {
+            this.delayReal = this.delay;
+        }
     }
 
     resultadoClass(item) {
@@ -93,9 +121,11 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     }
 
     addEncerramento(item, apostaVersion) {
-        if (!this.jogoComecou(item)) {
+        if (!this.jogoComecou(item) || (this.jogoComecou(item) && item.ao_vivo)) {
+            this.itemSelecionadoAoVivo = item.ao_vivo;
             this.itemSelecionado = item.id;
             this.apostaVersion = apostaVersion;
+            this.apostaAoVivo = this.itemSelecionadoAoVivo;
             this.simularEncerramento(this.itemSelecionado);
         }
     }
@@ -129,21 +159,61 @@ export class ApostaEncerramentoModalComponent implements OnInit {
 
     confirmarEncerramento() {
         if (this.itemSelecionado != null) {
-            this.apostaService.encerrarItem({ itemId: this.itemSelecionado, version: this.apostaVersion })
-                .subscribe(
-                    result => {
-                        this.messageService.success(result, 'Sucesso');
-                        this.atualizarAposta(this.aposta);
-                        this.descartar();
-                    },
-                    error => {
-                        this.novaCotacao = null;
-                        this.novaPossibilidadeGanho = null;
-                        this.handleError(error);
-                    }
-                );
-        }
+            if(this.itemSelecionadoAoVivo) {
+                this.setDelay();
+               
+                let token_aovivo = null;
+                const item = this.itemSelecionado;
+                const version = this.apostaVersion;
 
+                this.process = true;
+                this.apostaEsportivaService.tokenAoVivoEncerramento(this.itemSelecionado)
+                    .pipe(
+                        tap(token => {
+                            this.refreshIntervalId = setInterval(() => {
+                                if (this.delay > 0) {
+                                    this.delay--;
+                                }
+                            }, 1000);
+
+                            token_aovivo = token;
+                        }),
+                        delay(this.delayReal * 1000),
+                        switchMap(() => {
+                            return this.apostaService.encerrarItem({token: token_aovivo, itemId: item, version: version});
+                        }),
+                        takeUntil(this.unsub$)
+                    )
+                    .subscribe(
+                        resp => {
+                            this.messageService.success(resp, 'Sucesso');
+                            this.atualizarAposta(this.aposta);
+                            this.descartar();
+                            
+                            this.process = false;
+                        }, error => {
+                            this.novaCotacao = null;
+                            this.novaPossibilidadeGanho = null;
+                            this.process = false;
+                            this.handleError(error);
+                        }
+                    )
+            } else {
+                this.apostaService.encerrarItem({ itemId: this.itemSelecionado, version: this.apostaVersion })
+                    .subscribe(
+                        result => {
+                            this.messageService.success(result, 'Sucesso');
+                            this.atualizarAposta(this.aposta);
+                            this.descartar();
+                        },
+                        error => {
+                            this.novaCotacao = null;
+                            this.novaPossibilidadeGanho = null;
+                            this.handleError(error);
+                        }
+                    );
+            }
+        }
         this.itemSelecionado = null;
         this.apostaVersion = null;
     }
@@ -244,7 +314,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     }
 
     podeEncerrar(item, aposta, itemSelecionado) {
-        return !item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && !this.jogoComecou(item) && this.quantidadeMinimaBilhete()
+        return !item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && (!this.jogoComecou(item) || (this.jogoComecou(item) && item.ao_vivo)) && this.quantidadeMinimaBilhete() && !this.process
     }
 
     handleError(msg) {
