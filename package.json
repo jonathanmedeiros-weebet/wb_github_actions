@@ -282,7 +282,8 @@
         "vemprabet.com": "gulp vemprabet.com",
         "esportenetreipele.com": "gulp esportenetreipele.com",
         "goldeplacasport.com": "gulp goldeplacasport.com",
-        "betszero21.net": "gulp betszero21.net"
+        "betszero21.net": "gulp betszero21.net",
+        "betselecao.com": "gulp betselecao.com"
     },
     "private": true,
     "dependencies": {

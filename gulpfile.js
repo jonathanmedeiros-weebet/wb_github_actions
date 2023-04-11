@@ -2614,3 +2614,12 @@ gulp.task('betszero21.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betselecao.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betselecao.com",
+        banca: "BET SELEÇÃO",
+        styles: "",
+    });
+});
