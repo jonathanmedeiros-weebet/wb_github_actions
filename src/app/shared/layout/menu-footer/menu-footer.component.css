@@ -1,6 +1,6 @@
-#footer-bar {
-    background: var(--sidebars);
-    color: var(--foreground-sidebars);
+#bottom-bar {
+    background: var(--bottom-bar);
+    color: var(--foreground-bottom-bar);
     width: 100%;
     height: 62px;
     position: fixed;
@@ -14,7 +14,7 @@
     border-radius:  1em 1em 0 0;
 }
 
-#footer-bar-casino{
+#bottom-bar-casino{
     z-index: 999;
 }
 
@@ -27,11 +27,11 @@
     color: var(--foreground-sidebars);
 }
 
-.foot-button {
+.bottom-bar-button {
     min-height: 50px;
 }
 
-.foot-button a {
+.bottom-bar-button a {
     height: 50px;
     width: 70px;
     justify-content: center;
@@ -40,7 +40,7 @@
     align-items: center;
     white-space: nowrap;
     text-decoration: none;
-    color: var(--foreground-sidebars);
+    color: var(--foreground-bottom-bar);
     cursor: pointer;
     font-style: normal;
     font-weight: 400;
@@ -53,16 +53,16 @@
     margin-bottom: 4px;
 }
 
-.foot-button .badge-container {
+.bottom-bar-button .badge-container {
     position: relative;
     width: 100%;
 }
 
-.foot-button .cupom-badge {
+.bottom-bar-button .cupom-badge {
     font-size: 11px; /* ajuste fonte */
     padding: 4px;
     clip-path: circle();
-    background-color: var(--foreground-sidebars);
+    background-color: var(--foreground-bottom-bar);
     color: var(--sidebars);
     position: absolute;
     top: -8px;
@@ -97,13 +97,13 @@
 }
 
 @media (min-width: 1025px) {
-    #footer-bar {
+    #bottom-bar {
         display: none;
     }
 }
 
 @media only screen and (max-width: 1024px) {
-    #footer-bar {
+    #bottom-bar {
         z-index: 999;
     }
 
