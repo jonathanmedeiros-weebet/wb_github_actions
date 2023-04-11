@@ -2605,3 +2605,12 @@ gulp.task('goldeplacasport.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betszero21.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betszero21.net",
+        banca: "BETS ZERO 21",
+        styles: "",
+    });
+});
