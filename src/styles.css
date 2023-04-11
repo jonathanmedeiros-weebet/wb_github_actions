@@ -1873,3 +1873,8 @@ ngb-datepicker-month {
         font-weight: 600;
     }
 }
+
+.tooltip-custom .tooltip-inner {
+    font-size: 14px;
+}
+
