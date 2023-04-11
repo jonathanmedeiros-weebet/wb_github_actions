@@ -1329,6 +1329,13 @@ input.inverted-out::-webkit-input-placeholder {
     color: var(--foreground-inputs-odds) !important;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-text-fill-color: var(--foreground-inputs-odds) !important;
+}
+
 .hide {
     visibility: hidden;
     opacity: 0;
