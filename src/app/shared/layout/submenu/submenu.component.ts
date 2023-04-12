@@ -131,10 +131,17 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     atualizarSubmenu() {
         this.submenu = [
             {
-                name: this.translate.instant('submenu.aoVivo'),
-                link: '/esportes/live',
-                icon_class: 'fa fa-circle blink_me',
-                category: 'esporte',
+                name: this.translate.instant('submenu.futebol'),
+                link: '/live/futebol',
+                icon_class: 'wbicon icon-futebol blink_me',
+                category: 'live',
+                active: this.isMobile ? false : this.paramsService.getOpcoes().aovivo
+            },
+            {
+                name: this.translate.instant('submenu.basquete'),
+                link: '/live/basquete',
+                icon_class: 'wbicon icon-basquete blink_me',
+                category: 'live',
                 active: this.isMobile ? false : this.paramsService.getOpcoes().aovivo
             },
             {

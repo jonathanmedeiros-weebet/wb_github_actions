@@ -1,6 +1,6 @@
 import {
     Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, DoCheck, Output, EventEmitter
+    ElementRef, DoCheck, Output, EventEmitter, Input, OnChanges, SimpleChanges
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
@@ -13,9 +13,10 @@ import { Jogo } from '../../../models';
     templateUrl: 'live-listagem.component.html',
     styleUrls: ['live-listagem.component.css']
 })
-export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
+export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
+    @Input() sportId;
     jogos = {};
     campeonatos = new Map();
     idsCampeonatosLiberados = this.paramsService.getCampeonatosAoVivo();
@@ -44,7 +45,17 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     ) { }
 
     ngOnInit() {
-        this.liveService.entrarSalaEventos();
+        switch (this.sportId) {
+            case 1:
+                this.liveService.entrarSalaEventosFutebol();
+                break;
+            case 18:
+                this.liveService.entrarSalaEventosBasquete();
+                break;
+            default:
+                this.liveService.entrarSalaEventosFutebol();
+        }
+
         this.mobileScreen = window.innerWidth <= 1024;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
@@ -57,7 +68,50 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
 
-        this.jogoService.getJogosAoVivo()
+        this.getJogosAoVivo();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if(changes['sportId']) {
+            if(!changes['sportId'].firstChange){
+                if(changes['sportId'].currentValue != changes['sportId'].previousValue){
+                    this.changeLive(this.sportId);
+                }
+            }
+        }
+    }
+
+    changeLive(sportId) {
+        switch (sportId) {
+            case 1:
+                this.liveService.sairSalaEventosBasquete();
+                this.liveService.entrarSalaEventosFutebol();
+                break;
+            case 18:
+                this.liveService.sairSalaEventosFutebol();
+                this.liveService.entrarSalaEventosBasquete();
+                break;
+        }
+
+        this.getJogosAoVivo();
+    }
+
+    ngDoCheck() {
+        if (!this.awaiting) {
+            const jogosEl = this.el.nativeElement.querySelector('.jogos');
+            this.temJogoAoVivo = jogosEl ? true : false;
+        }
+    }
+
+    ngOnDestroy() {
+        this.liveService.sairSalaEventosFutebol();
+        this.liveService.sairSalaEventosBasquete();
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
+    getJogosAoVivo() {
+        this.jogoService.getJogosAoVivo(this.sportId)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
@@ -120,19 +174,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 },
                 error => this.handleError(error)
             );
-    }
-
-    ngDoCheck() {
-        if (!this.awaiting) {
-            const jogosEl = this.el.nativeElement.querySelector('.jogos');
-            this.temJogoAoVivo = jogosEl ? true : false;
-        }
-    }
-
-    ngOnDestroy() {
-        this.liveService.sairSalaEventos();
-        this.unsub$.next();
-        this.unsub$.complete();
     }
 
     definindoAlturas() {

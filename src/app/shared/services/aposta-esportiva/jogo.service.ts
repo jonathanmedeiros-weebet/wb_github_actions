@@ -40,8 +40,8 @@ export class JogoService {
             );
     }
 
-    getJogosAoVivo() {
-        const url = `${this.JogoUrl}/ao-vivo`;
+    getJogosAoVivo(sportId = 1) {
+        const url = `${this.JogoUrl}/ao-vivo/${sportId}`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(

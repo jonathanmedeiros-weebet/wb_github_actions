@@ -59,6 +59,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     seninhaAtiva;
     quininhaAtiva;
     esporteAtivo;
+    aoVivoAtivo;
     cassinoAtivo;
     virtuaisAtivo;
     LOGO = config.LOGO;
@@ -141,6 +142,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
+        this.aoVivoAtivo = this.paramsService.getOpcoes().aovivo;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;

@@ -39,6 +39,7 @@ nav a {
     font-weight: 600;
     font-size: 14px;
     transition: 300ms;
+    white-space: nowrap;
 }
 
 .category a.active, .category a:hover {

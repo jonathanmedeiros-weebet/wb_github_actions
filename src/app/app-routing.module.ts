@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {MainLayoutComponent, AuthLayoutComponent} from './shared/layout/app-layouts';
 
-import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
+import {AoVivoGuard, AuthGuard, DesafioGuard, LoteriaGuard} from './services';
 import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
 import {CambistaGuard} from './shared/services/guards/cambista.guard';
@@ -51,6 +51,11 @@ const appRoutes: Routes = [
             {
                 path: 'esportes',
                 loadChildren: () => import('./esportes/esportes.module').then(m => m.EsportesModule)
+            },
+            {
+                path: 'live',
+                loadChildren: () => import('./esportes/live/live.module').then(m => m.LiveModule),
+                canActivate: [AoVivoGuard]
             },
             {
                 path: 'informacoes',

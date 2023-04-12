@@ -2,7 +2,7 @@
     <div id="futebol-live-content">
         <div class="lista" [hidden]="exibirMaisCotacoes">
             <app-live-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
-                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+                (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [sportId]="sportId">
             </app-live-listagem>
         </div>
         <div class="jogo" *ngIf="exibirMaisCotacoes">

@@ -8,6 +8,7 @@ import {
     MessageService, LiveService, MenuFooterService
 } from '../../../services';
 import { LiveJogoComponent } from '../jogo/live-jogo.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-live-wrapper',
@@ -20,6 +21,9 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     mobileScreen = false;
     unsub$ = new Subject();
     modalRef;
+    subEsporte: any;
+    esporte = 'futebol';
+    sportId = 1;
 
     constructor(
         private campeonatoService: CampeonatoService,
@@ -29,21 +33,17 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
         private menuFooterService: MenuFooterService,
         private liveService: LiveService,
         private modalServices: NgbModal,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        this.subEsporte = this.route.params.subscribe(params => {
+            this.changeSport(params['esporte']);
+            this.getJogos();
+        });
+
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
         this.liveService.connect();
-
-        this.sidebarService.itens
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                dados => {
-                    if (dados.esporte !== 'futebol') {
-                        this.getJogos();
-                    }
-                }
-            );
     }
 
     ngOnDestroy() {
@@ -51,31 +51,59 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
         this.liveService.disconnect();
         this.unsub$.next();
         this.unsub$.complete();
+        this.subEsporte.unsubscribe();
+    }
+
+    changeSport(esporte) {
+        if (esporte == 'futebol') {
+            this.sportId = 1;
+            this.esporte = esporte;
+        } else {
+            this.sportId = 18;
+            this.esporte = esporte;
+        }
     }
 
     getJogos() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(1);
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportId);
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            'sport_id': 1,
+            'sport_id': this.sportId,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };
 
-        this.campeonatoService.getCampeonatosPorRegioes(params)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                campeonatos => {
-                    const dados = {
-                        itens: campeonatos,
-                        contexto: 'esportes',
-                        esporte: 'futebol'
-                    };
+        if (this.sportId == 1) {
+            this.campeonatoService.getCampeonatosPorRegioes(params)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    campeonatos => {
+                        const dados = {
+                            itens: campeonatos,
+                            contexto: 'esportes',
+                            esporte: this.esporte
+                        };
 
-                    this.sidebarService.changeItens(dados);
-                },
-                error => this.messageService.error(error)
-            );
+                        this.sidebarService.changeItens(dados);
+                    },
+                    error => this.messageService.error(error)
+                );
+        } else {
+            this.campeonatoService.getCampeonatos(params)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    campeonatos => {
+                        const dados = {
+                            itens: campeonatos,
+                            contexto: 'esportes',
+                            esporte: this.esporte
+                        };
+
+                        this.sidebarService.changeItens(dados);
+                    },
+                    error => this.messageService.error(error)
+                );
+        }
     }
 
     receptorJogoSelecionadoId(jogoId) {

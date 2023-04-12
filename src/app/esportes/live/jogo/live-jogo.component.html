@@ -132,7 +132,7 @@
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="jogo" *ngIf="!showLoadingIndicator">
             <div class="tipo-apostas mt-2">
-                <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercados); trackBy">
+                <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercados);">
                     <div class="header-tipo-aposta" (click)="toggleOdd(mercados[chave])" [ngClass]="{'collapsed' : oddAberto(mercados[chave])}">
                         <h4>{{mercados[chave].nome}}</h4>
                         <i class="fa fa-angle-down"></i>
