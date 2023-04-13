@@ -220,7 +220,6 @@ export class ApostaEncerramentoModalComponent implements OnInit {
             });
             this.modalCompartilhamentoRef.result.then(
                 (result) => {
-                    console.log(result);
                     switch (result) {
                         case 'imagem':
                             this.bilheteCompartilhamento.shared(true);

@@ -105,7 +105,6 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
             });
             this.modalCompartilhamentoRef.result.then(
                 (result) => {
-                    console.log(result);
                     switch (result) {
                         case 'imagem':
                             this.openModalCarregamento();
