@@ -2623,3 +2623,12 @@ gulp.task('betselecao.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betvibra.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betvibra.com",
+        banca: "BET VIBRA",
+        styles: "",
+    });
+});
