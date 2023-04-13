@@ -104,7 +104,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
                 newNavigator.share({
                     title: config.BANCA_NOME,
                     text: `${config.BANCA_NOME}: ${this.aposta.codigo}`,
-                    url: `http://${config.HOST}/aposta/${this.aposta.codigo}`,
+                    url: `${location.origin}/bilhete/${this.aposta.codigo}`,
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
