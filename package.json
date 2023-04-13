@@ -283,7 +283,8 @@
         "esportenetreipele.com": "gulp esportenetreipele.com",
         "goldeplacasport.com": "gulp goldeplacasport.com",
         "betszero21.net": "gulp betszero21.net",
-        "betselecao.com": "gulp betselecao.com"
+        "betselecao.com": "gulp betselecao.com",
+        "betvibra.com": "gulp betvibra.com"
     },
     "private": true,
     "dependencies": {
