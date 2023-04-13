@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { toPng } from 'html-to-image';
 import { config } from './../../../config';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CarregamentoModalComponent, CompatilhamentoBilheteModal } from '../../modals';
 
 let newNavigator: any;
 newNavigator = window.navigator;
@@ -29,6 +31,8 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     isCliente;
     isLoggedIn;
     appMobile;
+    modalCompartilhamentoRef;
+    modalCarregamentoRef;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -37,7 +41,8 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         private helperService: HelperService,
         private authService: AuthService,
         private imagensService: ImagensService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private modalService: NgbModal
     ) { }
 
     ngOnInit() {
@@ -91,9 +96,32 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
 
     shared() {
         if (this.appMobile) {
-            toPng(this.cupom.nativeElement).then((dataUrl) => {
-                this.helperService.sharedTicket(this.aposta, dataUrl);
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+                animation: true,
+                backdrop: 'static',
             });
+            this.modalCompartilhamentoRef.result.then(
+                (result) => {
+                    console.log(result);
+                    switch (result) {
+                        case 'imagem':
+                            this.openModalCarregamento();
+                            toPng(this.cupom.nativeElement).then((dataUrl) => {
+                                this.closeModalCarregamento();
+                                this.helperService.sharedTicket(this.aposta, dataUrl);
+                            });
+                            break;
+                        case 'link':
+                        default:
+                            this.helperService.sharedTicket(this.aposta, null);
+                            break;
+                    }
+                },
+                (reason) => { }
+            );           
         } else {
             if (newNavigator.share) {
                 newNavigator.share({
@@ -105,7 +133,22 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
             }
         }
+    }
 
+    openModalCarregamento() {
+        this.modalCarregamentoRef = this.modalService.open(CarregamentoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+        this.modalCarregamentoRef.componentInstance.msg = 'Processando Imagem...';
+    }
+
+    closeModalCarregamento() {
+        if (this.modalCarregamentoRef) {
+            this.modalCarregamentoRef.dismiss();
+        }
     }
 
     print() {

@@ -7,6 +7,8 @@ import {
 } from '../../../../services';
 import * as moment from 'moment';
 import { ApostaEsportiva, ItemApostaEsportiva} from '../../../../models';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CompatilhamentoBilheteModal } from '../../modals';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -25,13 +27,15 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     appMobile;
     isCliente;
     isLoggedIn;
+    modalCompartilhamentoRef;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private printService: PrintService,
         private utilsService: UtilsService,
         private messageService: MessageService,
-        private auth: AuthService
+        private auth: AuthService,
+        private modalService: NgbModal
     ) { }
 
     ngOnInit() {
@@ -73,7 +77,32 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     }
 
     shared() {
-        this.bilheteCompartilhamento.shared();
+        if (this.appMobile) {
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+                animation: true,
+                backdrop: 'static',
+            });
+            this.modalCompartilhamentoRef.result.then(
+                (result) => {
+                    console.log(result);
+                    switch (result) {
+                        case 'imagem':
+                            this.bilheteCompartilhamento.shared(true);
+                            break;
+                        case 'link':
+                        default:
+                            this.bilheteCompartilhamento.shared(false);
+                            break;
+                    }
+                },
+                (reason) => { }
+            );
+        } else {
+            this.bilheteCompartilhamento.shared(false);
+        }
     }
 
     print() {

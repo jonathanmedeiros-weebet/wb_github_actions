@@ -6,6 +6,8 @@ import {
     AuthService, MessageService, ImagensService
 } from '../../../../services';
 import { toPng } from 'html-to-image';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CarregamentoModalComponent, CompatilhamentoBilheteModal } from '../../modals';
 
 let newNavigator: any;
 newNavigator = window.navigator;
@@ -26,6 +28,8 @@ export class BilheteAcumuladaoComponent implements OnInit {
     appMobile;
     isCliente;
     isLoggedIn;
+    modalCompartilhamentoRef;
+    modalCarregamentoRef;
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -33,7 +37,8 @@ export class BilheteAcumuladaoComponent implements OnInit {
         private printService: PrintService,
         private auth: AuthService,
         private messageService: MessageService,
-        private imagensService: ImagensService
+        private imagensService: ImagensService,
+        private modalService: NgbModal
     ) { }
 
     ngOnInit() {
@@ -69,19 +74,58 @@ export class BilheteAcumuladaoComponent implements OnInit {
 
     shared() {
         if (this.appMobile) {
-            toPng(this.cupom.nativeElement).then((dataUrl) => {
-                this.helperService.sharedTicket(this.aposta, dataUrl);
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+                animation: true,
+                backdrop: 'static',
             });
+            this.modalCompartilhamentoRef.result.then(
+                (result) => {
+                    console.log(result);
+                    switch (result) {
+                        case 'imagem':
+                            this.openModalCarregamento();
+                            toPng(this.cupom.nativeElement).then((dataUrl) => {
+                                this.closeModalCarregamento();
+                                this.helperService.sharedTicket(this.aposta, dataUrl);
+                            });
+                            break;
+                        case 'link':
+                        default:
+                            this.helperService.sharedTicket(this.aposta, null);
+                            break;
+                    }
+                },
+                (reason) => { }
+            );           
         } else {
             if (newNavigator.share) {
                 newNavigator.share({
                     title: config.BANCA_NOME,
                     text: `${config.BANCA_NOME}: ${this.aposta.codigo}`,
-                    url: `${location.origin}/bilhete/${this.aposta.codigo}`,
+                    url: `http://${config.HOST}/aposta/${this.aposta.codigo}`,
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
             }
+        }
+    }
+
+    openModalCarregamento() {
+        this.modalCarregamentoRef = this.modalService.open(CarregamentoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+        this.modalCarregamentoRef.componentInstance.msg = 'Processando Imagem...';
+    }
+
+    closeModalCarregamento() {
+        if (this.modalCarregamentoRef) {
+            this.modalCarregamentoRef.dismiss();
         }
     }
 
