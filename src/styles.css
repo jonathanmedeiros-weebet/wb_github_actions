@@ -724,7 +724,7 @@ button {
     opacity: .8;
 }
 
-.action-buttons a{
+.action-buttons a {
     display: flex;
     justify-content: center;
     align-items: center;

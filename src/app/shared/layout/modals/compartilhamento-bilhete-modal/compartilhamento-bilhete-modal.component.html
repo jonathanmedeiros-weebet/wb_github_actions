@@ -1,0 +1,9 @@
+<div class="modal-body">
+    <p>Como deseja compartilhar</p>
+
+    <div class="actions">
+        <button type="button" class="btn btn-custom" (click)="activeModal.close('imagem')" data-dismiss="modal"><i class="fa fa-solid fa-image mr-2"></i> Imagem</button>
+        <button type="button" class="btn btn-custom" (click)="activeModal.close('link')"><i class="fa fa-solid fa-link mr-2"></i> Link</button>
+        <button type="button" class="btn btn-custom w-100" (click)="activeModal.dismiss()">Cancelar</button>
+    </div>
+</div>

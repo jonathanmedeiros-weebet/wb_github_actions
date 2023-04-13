@@ -22,3 +22,5 @@ export { ClientePixModalComponent } from './cliente-pix-modal/cliente-pix-modal.
 export { ClienteSenhaModalComponent } from './cliente-senha-modal/cliente-senha-modal.component';
 export { ClienteApostasModalComponent } from './cliente-apostas-modal/cliente-apostas-modal.component';
 export { ValidarEmailModalComponent } from './validar-email-modal/validar-email-modal.component';
+export { CarregamentoModalComponent } from './carregamento-modal/carregamento-modal.component';
+export { CompatilhamentoBilheteModal } from './compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component'
