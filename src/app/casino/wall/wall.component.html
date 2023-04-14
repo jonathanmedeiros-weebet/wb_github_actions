@@ -20,9 +20,28 @@
             <div class="ssc-square box-jogo hide-mobile" ></div>
         </div>
     </div>
+    <div class="filter" *ngIf="!showLoadingIndicator">
+        <div class="search-box">
+            <i class="fa fa-search"></i>
+                <input type="text" [(ngModel)]="term"
+                       class="form-control inverted-out"
+                       placeholder="Digite o nome de um jogo"
+                       (keyup)="filtrarJogos()"
+                >
+                <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
+        </div>
+        <div class="search-box" *ngIf="!isMobile">
+            <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
+                <option value="" selected>Todos os Provedores</option>
+                <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">{{fornecedor.gameFornecedor}}</option>
+            </select>
+        </div>
+        <div class="search-box-mobile" *ngIf="isMobile">
+            <a (click)="openFiltroFornecedores()"><i class="fa fa-filter" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="wall-inner" *ngIf="!term && !termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
 
-
-    <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
         <div class="bloco">
             <div class="bloco-header">
                 <div class="titulo">{{'cassino.maisPopulares' | translate}}</div>
@@ -314,3 +333,19 @@
         </div>
     </ng-template>
 </div>
+
+<ng-template #fornecedorModal let-modal>
+    <div class="modal-header">
+        <h4>Fornecedores</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body-content">
+            <ng-container *ngFor="let fornecedor of cassinoFornecedores">
+                <a (click)="filtroJogos()">{{fornecedor.gameFornecedor}}</a><br>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>

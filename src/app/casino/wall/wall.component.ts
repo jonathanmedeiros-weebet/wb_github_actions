@@ -1,12 +1,12 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren} from '@angular/core';
+import { GameCasino } from './../../shared/models/casino/game-casino';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, Input, ViewChild} from '@angular/core';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {AuthService, ParametrosLocaisService, SidebarService} from './../../services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {GameCasino} from '../../shared/models/casino/game-casino';
 import {TranslateService} from '@ngx-translate/core';
-
+import {config} from '../../shared/config';
 
 @Component({
     selector: 'app-wall',
@@ -15,6 +15,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
+    @Input() games: GameCasino[];
+    @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
     scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
@@ -26,13 +28,15 @@ export class WallComponent implements OnInit, AfterViewInit {
     isHome = false;
     isMobile = false;
     salsaCassino;
-
+    cassinoFornecedores;
     isHomeCassino = true;
     gameList: GameCasino[];
     gameAllList: GameCasino[];
-
+    term = '';
+    termFornecedor = '';
     gameTitle;
-
+    gamesCassinoTemp = [];
+    gamesCassinoFiltrados = [];
     gamesCassino: GameCasino[];
     gamesDestaque: GameCasino[];
     gamesSlot: GameCasino[];
@@ -41,7 +45,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesMesa: GameCasino[];
     gamesBingo: GameCasino[];
     gamesLive: GameCasino[];
-
+    LOGO = config.LOGO;
     blink: string;
 
     constructor(
@@ -63,8 +67,11 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList().subscribe(response => {
-            this.gamesCassino = response.gameList;
+            this.gamesCassino = response.gameList.filter(function (game) {
+                return game.dataType !== 'VSB';
+            });;
             this.gamesDestaque = response.destaques;
+            this.cassinoFornecedores = response.fornecedores;
             this.gamesSlot = this.filterSlot(response.gameList);
             this.gamesRaspadinha = this.filterRaspadinha(response.gameList);
             this.gamesRoleta = this.filterRoleta(response.gameList);
@@ -90,7 +97,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                         dados: {}
                     });
                     if (this.isHomeCassino) {
-                        this.gameList = this.gameAllList;
+                        this.gameList =  this.gamesCassino;
                         this.gameTitle = this.translate.instant('geral.todos');
                     }
                     switch (this.gameType) {
@@ -123,6 +130,11 @@ export class WallComponent implements OnInit, AfterViewInit {
                             this.gameTitle = this.translate.instant('cassino.aoVivo');
                             break;
                     }
+
+                    this.gamesCassinoTemp = [];
+                    this.gamesCassinoFiltrados = [];
+                    this.term = '';
+                    this.termFornecedor = '';
                 }
             });
             this.showLoadingIndicator = false;
@@ -241,6 +253,61 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.modalRef = this.modalService.open(
             LoginModalComponent, options
+        );
+    }
+
+    filtrarJogos() {
+        if (this.term || this.termFornecedor) {
+
+            if(!this.gamesCassinoTemp.length){
+                this.gamesCassinoTemp = this.gameList;
+            }else{
+                this.gameList = this.gamesCassinoTemp;
+            }
+
+            this.gamesCassinoFiltrados =  this.gameList.filter(jogo => {
+                if(this.term && this.termFornecedor){
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
+                        return true;
+                    }
+                    return false;
+                }else if(this.term){
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
+                        return true;
+                    }
+                    return false;
+                }else{
+                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
+                        return true;
+                    }
+                    return false;
+                }
+
+            }).map(jogo => Object.assign({}, jogo));
+
+            this.gameList = this.gamesCassinoFiltrados;
+
+        } else {
+            if (this.gamesCassinoTemp.length)   {
+                this.gameList = this.gamesCassinoTemp;
+                this.gamesCassinoTemp = [];
+                this.gamesCassinoFiltrados = [];
+            }
+        }
+    }
+
+    limparPesquisa() {
+        this.term = '';
+        this.filtrarJogos();
+    }
+
+    openFiltroFornecedores(){
+        this.modalService.open(
+            this.fornecedorModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+            }
         );
     }
 }
