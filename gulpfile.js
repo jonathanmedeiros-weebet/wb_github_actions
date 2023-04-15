@@ -1205,15 +1205,6 @@ gulp.task('betimperativo.wee.bet', function (done) {
     });
 });
 
-gulp.task('vencedorbet.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "vencedorbet.bet",
-        banca: "VENCEDOR BET",
-        styles: "",
-    });
-});
-
 gulp.task('futebets.net', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2081,25 +2072,6 @@ gulp.task('lutbet.net', function (done) {
     });
 });
 
-gulp.task('gooldeplaca.com.br', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "gooldeplaca.com.br",
-        banca: "GOOL DE PLACA",
-        styles: "",
-    });
-});
-
-gulp.task('onepro.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "onepro.bet",
-        banca: "ONEPRO.BET",
-        styles: "",
-        scripts: "<!--Start of Tawk.to Script--><script type='text/javascript'>var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();(function(){var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0];s1.async=true;s1.src='https://embed.tawk.to/63e56ddbc2f1ac1e20326ad6/1gpdmj5sp';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script><!--End of Tawk.to Script-->"
-    });
-});
-
 gulp.task('apostafacil123.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2374,15 +2346,6 @@ gulp.task('sportpix.vip', function (done) {
         server: "front3.wee.bet",
         host: "sportpix.vip",
         banca: "SPORT PIX",
-        styles: "",
-    });
-});
-
-gulp.task('valebet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "valebet.wee.bet",
-        banca: "VALE BET",
         styles: "",
     });
 });
