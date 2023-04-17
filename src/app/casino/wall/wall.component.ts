@@ -47,6 +47,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesLive: GameCasino[];
     LOGO = config.LOGO;
     blink: string;
+    modalFiltro;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -256,7 +257,9 @@ export class WallComponent implements OnInit, AfterViewInit {
         );
     }
 
-    filtrarJogos() {
+    filtrarJogos(fornecedor = null) {
+        console.log("teste");
+        fornecedor ? this.termFornecedor = fornecedor : '';
         if (this.term || this.termFornecedor) {
 
             if(!this.gamesCassinoTemp.length){
@@ -287,6 +290,10 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gameList = this.gamesCassinoFiltrados;
 
+            if(this.modalFiltro){
+                this.modalFiltro.close();
+            }
+
         } else {
             if (this.gamesCassinoTemp.length)   {
                 this.gameList = this.gamesCassinoTemp;
@@ -302,7 +309,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     openFiltroFornecedores(){
-        this.modalService.open(
+        this.modalFiltro = this.modalService.open(
             this.fornecedorModal,
             {
                 ariaLabelledBy: 'modal-basic-title',

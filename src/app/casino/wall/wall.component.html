@@ -33,7 +33,7 @@
         <div class="search-box" *ngIf="!isMobile">
             <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
                 <option value="" selected>Todos os Provedores</option>
-                <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">{{fornecedor.gameFornecedor}}</option>
+                <option value="{{fornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">{{fornecedor}}</option>
             </select>
         </div>
         <div class="search-box-mobile" *ngIf="isMobile">
@@ -343,9 +343,36 @@
     </div>
     <div class="modal-body">
         <div class="modal-body-content">
-            <ng-container *ngFor="let fornecedor of cassinoFornecedores">
-                <a (click)="filtroJogos()">{{fornecedor.gameFornecedor}}</a><br>
-            </ng-container>
+            <div class="search-box search-fornecedores">
+                <i class="fa fa-search"></i>
+                    <input type="text" [(ngModel)]="term"
+                           class="form-control inverted-out"
+                           placeholder="Pesquisar Fornecedor"
+                           (keyup)="filtrarJogos()"
+                    >
+                    <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
+            </div>
+            <div class="fornecedores-menu">
+            <ul>
+                <li class="fornecedor">
+                    <div class="fornecedor-imagem">
+                    </div>
+                    <div class="fornecedor-nome">
+                        <span><a (click)="filtrarJogos(fornecedor)">Todos os Fornecedores</a></span>
+                    </div>
+                </li>
+                <ng-container *ngFor="let fornecedor of cassinoFornecedores">
+                    <li class="fornecedor">
+                        <div class="fornecedor-imagem">
+                            <img src="http://localhost:8080/uploads/logos/{{fornecedor.toLowerCase()}}.png">
+                        </div>
+                        <div class="fornecedor-nome">
+                            <span><a (click)="filtrarJogos(fornecedor)">{{fornecedor}}</a></span>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+            </div>
         </div>
     </div>
 </ng-template>
