@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
+import {ApostaModalComponent, LoginModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
     AuthService,
     DesafioApostaService,
@@ -38,6 +38,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     unsub$ = new Subject();
     isCliente;
     valorFocado = false;
+    modoCambista = false;
     mobileScreen;
 
     constructor(
@@ -57,6 +58,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
+        this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <=1024;
         this.createForm();
         this.auth.logado
@@ -103,7 +105,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', (this.isCliente) ? '' : [Validators.required]],
+            apostador: ['', (this.isCliente || !this.modoCambista) ? '' : [Validators.required]],
             valor: [0, [Validators.required, Validators.min(this.apostaMinima)]],
             itens: this.fb.array([])
         });
@@ -175,65 +177,69 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     submit() {
-        this.disabledSubmit();
+        if (!this.isCliente && !this.modoCambista) {
+            this.abrirLogin();
+        } else {
+            this.disabledSubmit();
 
-        let valido = true;
-        let msg = '';
+            let valido = true;
+            let msg = '';
 
-        if (!this.itens.length) {
-            valido = false;
-            msg = 'Por favor, inclua um evento.';
-        }
+            if (!this.itens.length) {
+                valido = false;
+                msg = 'Por favor, inclua um evento.';
+            }
 
-        if (this.itens.length < this.paramsService.quantidadeMinEventosBilhete()) {
-            valido = false;
-            msg = `Por favor, inclua no MÍNIMO ${this.paramsService.quantidadeMinEventosBilhete()} evento(s).`;
-        }
+            if (this.itens.length < this.paramsService.quantidadeMinEventosBilhete()) {
+                valido = false;
+                msg = `Por favor, inclua no MÍNIMO ${this.paramsService.quantidadeMinEventosBilhete()} evento(s).`;
+            }
 
-        if (this.itens.length > this.paramsService.quantidadeMaxEventosBilhete()) {
-            valido = false;
-            msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
-        }
+            if (this.itens.length > this.paramsService.quantidadeMaxEventosBilhete()) {
+                valido = false;
+                msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
+            }
 
-        if (valido) {
-            if (this.isLoggedIn) {
-                const values = clone(this.form.value);
-                values.itens.map(item => {
-                    delete item.desafio;
-                    delete item.odd;
-                });
-
-                this.salvarAposta(values);
-            } else {
-                this.enableSubmit();
-
-                const cartaoChave = localStorage.getItem('cartao_chave');
-                if (cartaoChave) {
-                    this.cartaoApostaForm.patchValue({
-                        chave: cartaoChave,
-                        manter_cartao: true
+            if (valido) {
+                if (this.isLoggedIn) {
+                    const values = clone(this.form.value);
+                    values.itens.map(item => {
+                        delete item.desafio;
+                        delete item.odd;
                     });
-                }
 
-                this.modalRef = this.modalService.open(
-                    this.apostaDeslogadoModal,
-                    {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true
+                    this.salvarAposta(values);
+                } else {
+                    this.enableSubmit();
+
+                    const cartaoChave = localStorage.getItem('cartao_chave');
+                    if (cartaoChave) {
+                        this.cartaoApostaForm.patchValue({
+                            chave: cartaoChave,
+                            manter_cartao: true
+                        });
                     }
-                );
 
-                this.modalRef.result
-                    .then(
-                        result => {
-                        },
-                        reason => {
+                    this.modalRef = this.modalService.open(
+                        this.apostaDeslogadoModal,
+                        {
+                            ariaLabelledBy: 'modal-basic-title',
+                            centered: true
                         }
                     );
+
+                    this.modalRef.result
+                        .then(
+                            result => {
+                            },
+                            reason => {
+                            }
+                        );
+                }
+            } else {
+                this.enableSubmit();
+                this.messageService.warning(msg);
             }
-        } else {
-            this.enableSubmit();
-            this.messageService.warning(msg);
         }
     }
 
@@ -355,5 +361,17 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 this.enableSubmit();
             }
         }
+    }
+
+    abrirLogin() {
+        const options = {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-550 modal-h-350',
+            centered: true,
+        };
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 }
