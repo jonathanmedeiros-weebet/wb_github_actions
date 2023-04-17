@@ -48,6 +48,9 @@ export class WallComponent implements OnInit, AfterViewInit {
     LOGO = config.LOGO;
     blink: string;
     modalFiltro;
+    termFornecedorMobile;
+    cassinoFornecedoresTemp = [];
+    cassinoFornecedoresFiltrados = [];
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -258,8 +261,13 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     filtrarJogos(fornecedor = null) {
-        console.log("teste");
-        fornecedor ? this.termFornecedor = fornecedor : '';
+        if(fornecedor){
+            if(fornecedor == 'todos'){
+                this.termFornecedor = null
+            }else{
+                this.termFornecedor = fornecedor;
+            }
+        }
         if (this.term || this.termFornecedor) {
 
             if(!this.gamesCassinoTemp.length){
@@ -290,10 +298,6 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gameList = this.gamesCassinoFiltrados;
 
-            if(this.modalFiltro){
-                this.modalFiltro.close();
-            }
-
         } else {
             if (this.gamesCassinoTemp.length)   {
                 this.gameList = this.gamesCassinoTemp;
@@ -301,11 +305,49 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.gamesCassinoFiltrados = [];
             }
         }
+
+        if(this.modalFiltro){
+            this.modalFiltro.close();
+        }
+    }
+
+    filtrarFornecedor() {
+        if (this.termFornecedorMobile) {
+            if(!this.cassinoFornecedoresTemp.length){
+                this.cassinoFornecedoresTemp = this.cassinoFornecedores;
+            }else{
+                this.cassinoFornecedores = this.cassinoFornecedoresTemp;
+            }
+
+            this.cassinoFornecedoresFiltrados =  this.cassinoFornecedores.filter(fornecedor => {
+              if(this.termFornecedorMobile){
+                    if (fornecedor.gameFornecedor.includes(this.termFornecedorMobile)) {
+                        return true;
+                    }
+                    return false;
+                }
+            }).map(fornecedor => Object.assign({}, fornecedor));
+
+            this.cassinoFornecedores = this.cassinoFornecedoresFiltrados;
+
+        } else {
+            if (this.cassinoFornecedoresTemp.length)   {
+                this.cassinoFornecedores = this.cassinoFornecedoresTemp;
+                this.cassinoFornecedoresTemp = [];
+                this.cassinoFornecedoresFiltrados = [];
+            }
+        }
     }
 
     limparPesquisa() {
-        this.term = '';
-        this.filtrarJogos();
+        if(this.term){
+            this.term = '';
+            this.filtrarJogos();
+        }else{
+            this.termFornecedorMobile = '';
+            this.filtrarFornecedor();
+        }
+
     }
 
     openFiltroFornecedores(){

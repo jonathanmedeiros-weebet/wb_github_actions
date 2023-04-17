@@ -369,6 +369,10 @@
         align-items: center;
     }
 
+    .search-box{
+        width: 80%;
+    }
+
     .search-box i.fa-search {
         top: 14px;
         font-size: medium;

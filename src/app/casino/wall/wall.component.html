@@ -33,14 +33,16 @@
         <div class="search-box" *ngIf="!isMobile">
             <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
                 <option value="" selected>Todos os Provedores</option>
-                <option value="{{fornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">{{fornecedor}}</option>
+                <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
+                    {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                </option>
             </select>
         </div>
         <div class="search-box-mobile" *ngIf="isMobile">
             <a (click)="openFiltroFornecedores()"><i class="fa fa-filter" aria-hidden="true"></i></a>
         </div>
     </div>
-    <div class="wall-inner" *ngIf="!term && !termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
+    <div class="wall-inner" *ngIf="!this.term && !this.termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
 
         <div class="bloco">
             <div class="bloco-header">
@@ -345,12 +347,12 @@
         <div class="modal-body-content">
             <div class="search-box search-fornecedores">
                 <i class="fa fa-search"></i>
-                    <input type="text" [(ngModel)]="term"
+                    <input type="text" [(ngModel)]="termFornecedorMobile"
                            class="form-control inverted-out"
                            placeholder="Pesquisar Fornecedor"
-                           (keyup)="filtrarJogos()"
+                           (keyup)="filtrarFornecedor()"
                     >
-                    <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
+                    <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="termFornecedorMobile"></i>
             </div>
             <div class="fornecedores-menu">
             <ul>
@@ -358,16 +360,20 @@
                     <div class="fornecedor-imagem">
                     </div>
                     <div class="fornecedor-nome">
-                        <span><a (click)="filtrarJogos(fornecedor)">Todos os Fornecedores</a></span>
+                        <span><a (click)="filtrarJogos('todos')">Todos os Fornecedores</a></span>
                     </div>
                 </li>
                 <ng-container *ngFor="let fornecedor of cassinoFornecedores">
                     <li class="fornecedor">
                         <div class="fornecedor-imagem">
-                            <img src="http://localhost:8080/uploads/logos/{{fornecedor.toLowerCase()}}.png">
+                            <img src="http://localhost:8080/uploads/logos/{{fornecedor.gameFornecedor.toLowerCase()}}.png">
                         </div>
                         <div class="fornecedor-nome">
-                            <span><a (click)="filtrarJogos(fornecedor)">{{fornecedor}}</a></span>
+                            <span>
+                                <a (click)="filtrarJogos(fornecedor.gameFornecedor)">
+                                {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                                </a>
+                            </span>
                         </div>
                     </li>
                 </ng-container>
