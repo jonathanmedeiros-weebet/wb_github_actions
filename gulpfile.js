@@ -2601,3 +2601,12 @@ gulp.task('betvibra.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('powerbets.vip', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "powerbets.vip",
+        banca: "POWER BETS",
+        styles: "",
+    });
+});
