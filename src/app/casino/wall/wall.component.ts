@@ -51,6 +51,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     termFornecedorMobile;
     cassinoFornecedoresTemp = [];
     cassinoFornecedoresFiltrados = [];
+    totalJogos = 0;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -76,6 +77,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             });;
             this.gamesDestaque = response.destaques;
             this.cassinoFornecedores = response.fornecedores;
+            this.totalJogos = this.gamesCassino.length;
             this.gamesSlot = this.filterSlot(response.gameList);
             this.gamesRaspadinha = this.filterRaspadinha(response.gameList);
             this.gamesRoleta = this.filterRoleta(response.gameList);

@@ -383,9 +383,13 @@
         font-size: medium;
     }
 
+    .fornecedores-menu{
+        margin: 20px;
+    }
+
     .fornecedores-menu ul{
         list-style: none;
-        padding-left: 20px;
+        padding-left: 0;
     }
 
     .fornecedores-menu li{
@@ -407,18 +411,26 @@
     }
 
     .fornecedor-imagem{
-        width: 25px;
+        width: 10%;
         height: 25px;
     }
 
     .fornecedor-imagem img{
-        width: 100%;
+        width: auto;
         height: 100%;
     }
 
     .fornecedor-nome{
         margin-left: 10px;
         font-size: large;
+        width: 80%;
+    }
+
+    .fornecedor-qtd {
+        width: 10%;
+        display: flex;
+        justify-content: end;
+        opacity: 50%;
     }
 
     .search-fornecedores{

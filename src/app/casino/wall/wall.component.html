@@ -357,10 +357,14 @@
             <div class="fornecedores-menu">
             <ul>
                 <li class="fornecedor">
-                    <div class="fornecedor-imagem">
-                    </div>
+                     <div class="fornecedor-imagem">
+
+                        </div>
                     <div class="fornecedor-nome">
                         <span><a (click)="filtrarJogos('todos')">Todos os Fornecedores</a></span>
+                    </div>
+                    <div class="fornecedor-qtd">
+                        <span>{{totalJogos}}</span>
                     </div>
                 </li>
                 <ng-container *ngFor="let fornecedor of cassinoFornecedores">
@@ -374,6 +378,9 @@
                                 {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
                                 </a>
                             </span>
+                        </div>
+                        <div class="fornecedor-qtd">
+                            <span>{{fornecedor.qtd_jogos}}</span>
                         </div>
                     </li>
                 </ng-container>
