@@ -2610,3 +2610,12 @@ gulp.task('powerbets.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ragnar.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "ragnar.bet",
+        banca: "RAGNAR.BET",
+        styles: "",
+    });
+});

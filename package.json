@@ -281,7 +281,8 @@
         "betszero21.net": "gulp betszero21.net",
         "betselecao.com": "gulp betselecao.com",
         "betvibra.com": "gulp betvibra.com",
-        "powerbets.vip": "gulp powerbets.vip"
+        "powerbets.vip": "gulp powerbets.vip",
+        "ragnar.bet": "gulp ragnar.bet"
     },
     "private": true,
     "dependencies": {
