@@ -1,4 +1,4 @@
-<div #listagem class="wall-container" [ngClass]="{'internal': !isHomeCassino}">
+<div #listagem class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
     <app-banners pagina="cassino" ></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
@@ -23,24 +23,24 @@
     <div class="filter" *ngIf="!showLoadingIndicator">
         <div class="search-box">
             <i class="fa fa-search"></i>
-                <input type="text" [(ngModel)]="term"
-                       class="form-control inverted-out"
-                       placeholder="Digite o nome de um jogo"
-                       (keyup)="filtrarJogos()"
-                >
-                <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
+            <input type="text" [(ngModel)]="term"class="form-control inverted-out" placeholder="Digite o nome de um jogo" (keyup)="filtrarJogos()">
+            <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
         </div>
-        <div class="search-box" *ngIf="!isMobile">
-            <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
-                <option value="" selected>Todos os Provedores</option>
-                <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
-                    {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
-                </option>
-            </select>
-        </div>
-        <div class="search-box-mobile" *ngIf="isMobile">
-            <a (click)="openFiltroFornecedores()"><i class="fa fa-filter" aria-hidden="true"></i></a>
-        </div>
+        <ng-container *ngIf="!isMobile">
+            <div class="search-box">
+                <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
+                    <option value="" selected>Todos os Provedores</option>
+                    <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
+                        {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                    </option>
+                </select>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isMobile">
+            <div class="search-box-mobile">
+                <a (click)="openFiltroFornecedores()"><i class="fa fa-filter" aria-hidden="true"></i></a>
+            </div>
+         </ng-container>
     </div>
     <div class="wall-inner" *ngIf="!this.term && !this.termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
 
