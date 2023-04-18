@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
-        if (this.modoClienteHabilitado && this.router.url === '/cadastro') {
+        if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.modalService.open(CadastroModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'lg',
@@ -70,18 +70,12 @@ export class AppComponent implements OnInit {
             });
             this.router.navigate(['esportes/futebol']);
         }
+
         this.route.queryParams
             .subscribe((params) => {
-                if (this.modoClienteHabilitado && params.afiliado) {
-                    this.modalService.open(CadastroModalComponent, {
-                        ariaLabelledBy: 'modal-basic-title',
-                        size: 'lg',
-                        centered: true,
-                        windowClass: 'modal-700'
-                    });
-                } else if (params.token) {
+                if (params.token) {
                     this.ativacaoCadastro = true;
-                    this.auth.ativacaoCadastro({token: params.token})
+                    this.auth.ativacaoCadastro({ token: params.token })
                         .subscribe(
                             (res) => {
                                 if (res.valid !== false) {
@@ -102,6 +96,7 @@ export class AppComponent implements OnInit {
                     this.ativacaoCadastro = false;
                 }
             });
+
         if (location.search.indexOf('app') >= 0) {
             this.auth.setAppMobile();
             const params = new URLSearchParams(location.search);
@@ -122,58 +117,58 @@ export class AppComponent implements OnInit {
         this.SLUG = config.SLUG;
         this.TIMESTAMP = new Date().getTime();
 
-            this.imagemInicialService.getImagens().subscribe(
-                imagem => {
-                    if (imagem && imagem['src']) {
-                        this.imagemInicial = imagem;
+        this.imagemInicialService.getImagens().subscribe(
+            imagem => {
+                if (imagem && imagem['src']) {
+                    this.imagemInicial = imagem;
+                } else {
+                    this.isEmpty = true;
+                }
+
+                this.cd.markForCheck();
+
+                if (location.host === 'demo.wee.bet') {
+                    this.modalService.open(
+                        this.demoModal,
+                        {
+                            ariaLabelledBy: 'modal-basic-title',
+                            windowClass: 'modal-pop-up',
+                            centered: true
+                        }
+                    );
+                } else if (!this.isEmpty && this.ativacaoCadastro === false) {
+                    let exibirImagemInicial = false;
+                    const variavel = localStorage.getItem('imagemInicialData');
+                    if (!variavel) {
+                        exibirImagemInicial = true;
+                        const horario = new Date();
+                        localStorage.setItem('imagemInicialData', String(horario));
                     } else {
-                        this.isEmpty = true;
+                        // @ts-ignore
+                        const data1 = new Date(variavel);
+                        const data2 = new Date();
+                        // const data2 = new Date('2022-07-30T03:24:00');
+                        const diffTime = dateDiffInDays(data1, data2);
+                        if (diffTime > 0) {
+                            exibirImagemInicial = true;
+                            const horario = Date();
+                            localStorage.setItem('imagemInicialData', String(horario));
+                        }
                     }
 
-                    this.cd.markForCheck();
-
-                    if (location.host === 'demo.wee.bet') {
+                    if (exibirImagemInicial) {
                         this.modalService.open(
-                            this.demoModal,
+                            this.inicialModal,
                             {
-                                ariaLabelledBy: 'modal-basic-title',
-                                windowClass: 'modal-pop-up',
-                                centered: true
+                                centered: true,
+                                windowClass: 'modal-pop-up'
                             }
                         );
-                    } else if (!this.isEmpty && this.ativacaoCadastro === false) {
-                        let exibirImagemInicial = false;
-                        const variavel = localStorage.getItem('imagemInicialData');
-                        if (!variavel) {
-                            exibirImagemInicial = true;
-                            const horario = new Date();
-                            localStorage.setItem('imagemInicialData', String(horario));
-                        } else {
-                            // @ts-ignore
-                            const data1 = new Date(variavel);
-                            const data2 = new Date();
-                            // const data2 = new Date('2022-07-30T03:24:00');
-                            const diffTime = dateDiffInDays(data1, data2);
-                            if (diffTime > 0) {
-                                exibirImagemInicial = true;
-                                const horario = Date();
-                                localStorage.setItem('imagemInicialData', String(horario));
-                            }
-                        }
-
-                        if (exibirImagemInicial) {
-                            this.modalService.open(
-                                this.inicialModal,
-                                {
-                                    centered: true,
-                                    windowClass: 'modal-pop-up'
-                                }
-                            );
-                        }
                     }
-                },
-                error => this.handleError(error)
-            );
+                }
+            },
+            error => this.handleError(error)
+        );
         this.mobileScreen = window.innerWidth <= 1024;
 
         if (this.auth.isLoggedIn()) {
@@ -214,9 +209,9 @@ export class AppComponent implements OnInit {
                 }
             });
 
-            if (this.paramLocais.getOpcoes().whatsapp) {
-                this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
-            }
+        if (this.paramLocais.getOpcoes().whatsapp) {
+            this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
+        }
     }
 
     downloadApp() {

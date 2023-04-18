@@ -5,6 +5,7 @@ import {SolicitacaoSaqueClienteRoutingModule} from './solicitacao-saque-cliente-
 import {SolicitacaoSaqueClienteComponent} from './solicitacao-saque-cliente.component';
 import {SharedModule} from '../../shared/shared.module';
 import {NgxCurrencyModule} from 'ngx-currency';
+import { NgbModule, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -13,8 +14,9 @@ import {NgxCurrencyModule} from 'ngx-currency';
         SharedModule,
         CommonModule,
         SolicitacaoSaqueClienteRoutingModule,
-        NgxCurrencyModule
-    ]
+        NgxCurrencyModule,
+        NgbModule,
+    ],
 })
 export class SolicitacaoSaqueClienteModule {
 }

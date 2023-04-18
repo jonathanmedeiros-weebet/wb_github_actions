@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AcumuladaoService, AuthService, MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
 import {Acumuladao} from './../../models';
-import {PreApostaModalComponent, ApostaModalComponent} from '../../shared/layout/modals';
+import {PreApostaModalComponent, ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -23,6 +23,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     acumuladao = new Acumuladao();
     disabled = false;
     displayPreTicker = false;
+    modoCambista = false;
     modalRef;
     btnText = 'Pré-Aposta';
     tipoApostaDeslogado = 'preaposta';
@@ -49,6 +50,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     ngOnInit() {
+        this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <=1024;
         this.opcoes = this.paramsService.getOpcoes();
         this.auth.logado
@@ -99,7 +101,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
     createForm() {
         this.form = this.fb.group({
-            apostador: ['', (this.isCliente) ? '' : Validators.required]
+            apostador: ['', (this.isCliente || !this.modoCambista) ? '' : Validators.required]
         });
 
         this.cartaoApostaForm = this.fb.group({
@@ -113,56 +115,72 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     }
 
     submit() {
-        let msg = '';
-        let valid = true;
-        this.dados = {
-            apostador: this.form.value.apostador,
-            acumuladao_id: this.acumuladao.id,
-            jogos: [],
+        if (!this.isCliente && !this.modoCambista) {
+            this.abrirLogin();
+        } else {
+            let msg = '';
+            let valid = true;
+            this.dados = {
+                apostador: this.form.value.apostador,
+                acumuladao_id: this.acumuladao.id,
+                jogos: [],
+            };
+
+            this.acumuladao.jogos.forEach(j => {
+                if ((j.time_a_resultado != null) && (j.time_b_resultado != null)) {
+                    this.dados.jogos.push({
+                        id: j.id,
+                        time_a_resultado: j.time_a_resultado,
+                        time_b_resultado: j.time_b_resultado
+                    });
+                } else {
+                    valid = false;
+                    msg = 'Por favor, preencha todos os placares';
+                }
+            });
+
+            if (valid) {
+                if (this.auth.isLoggedIn()) {
+                    this.finalizarAposta();
+                } else {
+                    const cartaoChave = localStorage.getItem('cartao_chave');
+                    if (cartaoChave) {
+                        this.cartaoApostaForm.patchValue({
+                            chave: cartaoChave,
+                            manter_cartao: true
+                        });
+                    }
+
+                    this.modalRef = this.modalService.open(
+                        this.apostaDeslogadoModal,
+                        {
+                            ariaLabelledBy: 'modal-basic-title',
+                            centered: true
+                        }
+                    );
+
+                    this.modalRef.result
+                        .then(
+                            result => { },
+                            reason => { }
+                        );
+                }
+            } else {
+                this.messageService.error(msg);
+            }
+        }
+    }
+
+    abrirLogin() {
+        const options = {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-550 modal-h-350',
+            centered: true,
         };
 
-        this.acumuladao.jogos.forEach(j => {
-            if ((j.time_a_resultado != null) && (j.time_b_resultado != null)) {
-                this.dados.jogos.push({
-                    id: j.id,
-                    time_a_resultado: j.time_a_resultado,
-                    time_b_resultado: j.time_b_resultado
-                });
-            } else {
-                valid = false;
-                msg = 'Por favor, preencha todos os placares';
-            }
-        });
-
-        if (valid) {
-            if (this.auth.isLoggedIn()) {
-                this.finalizarAposta();
-            } else {
-                const cartaoChave = localStorage.getItem('cartao_chave');
-                if (cartaoChave) {
-                    this.cartaoApostaForm.patchValue({
-                        chave: cartaoChave,
-                        manter_cartao: true
-                    });
-                }
-
-                this.modalRef = this.modalService.open(
-                    this.apostaDeslogadoModal,
-                    {
-                        ariaLabelledBy: 'modal-basic-title',
-                        centered: true
-                    }
-                );
-
-                this.modalRef.result
-                    .then(
-                        result => { },
-                        reason => { }
-                    );
-            }
-        } else {
-            this.messageService.error(msg);
-        }
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 
     back() {

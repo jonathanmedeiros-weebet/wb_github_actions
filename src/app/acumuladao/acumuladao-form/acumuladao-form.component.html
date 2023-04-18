@@ -170,7 +170,7 @@
                 </div>
                 <div class="footer-bilhete">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                        <div class="div-inputs" *ngIf="!isCliente">
+                        <div class="div-inputs" *ngIf="!isCliente && modoCambista">
                             <div class="form-group">
                                 <div class="input-md">
                                     <input type="text" id="nomeApostador" formControlName="apostador"

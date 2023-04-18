@@ -103,7 +103,12 @@
                     <tr *ngFor="let saque of saques">
                         <td><img src="/assets/images/debito.svg" alt="image"></td>
                         <td>{{'saques.saqueERegistrado' | translate}} {{ saque.data }}</td>
-                        <td>{{ saque.status }}</td>
+                        <td>
+                          {{ saque.status }}
+                          <a class="info" *ngIf="saque.observacao" placement="top" [ngbTooltip]="saque.observacao" tooltipClass="tooltip-custom">
+                            <i class="fa fa-info"></i>
+                          </a>
+                        </td>
                         <td>{{ saque.valor | currency}}</td>
                         <td>
                             <a class="btn-cancelar" *ngIf="exibirCancelarSolicitacaoSaque(saque)" (click)="cancelarSolicitacaoSaque(saque.id)">

@@ -13,29 +13,8 @@
     <div class="content-body">
         <div class="content">
             <div *ngIf="hasApiPagamentos || whatsapp">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <label class="hide-mobile">{{'deposito.selecioneUmaFormaDeDeposito' | translate}}</label>
-                        <div class="buttons-container mt-3">
-                            <a class="opcao-pagamento" *ngIf="whatsapp" (click)="selecionarModalidade('whatsapp')"
-                               [ngClass]="{'active':modalidade === 'whatsapp'}">
-                                <i class="radio"></i>
-                                <i class="fa-brands fa-whatsapp" style="font-size: 20px"></i>
-                                <span style="margin-left: 5px">Whatsapp</span>
-                            </a>
-                            <a class="opcao-pagamento" *ngIf="hasApiPagamentos" (click)="selecionarModalidade('pix')"
-                               [ngClass]="{'active':modalidade === 'pix'}">
-                                <i class="radio"></i>
-                                <i class="fa-brands fa-pix" style="font-size: 20px"></i>
-                                <span style="margin-left: 5px">PIX</span>
-                            </a>
-                        </div>
-                        <div class="mt-3">
-                            <app-deposito-pix *ngIf="modalidade === 'pix'"></app-deposito-pix>
-                            <app-deposito-whatsapp *ngIf="modalidade === 'whatsapp'"></app-deposito-whatsapp>
-                        </div>
-                    </div>
-                </div>
+                <app-deposito-pix *ngIf="modalidade === 'pix'"></app-deposito-pix>
+                <app-deposito-whatsapp *ngIf="modalidade === 'whatsapp'"></app-deposito-whatsapp>
             </div>
             <div *ngIf="!hasApiPagamentos && !whatsapp">
                 <div class="row">
