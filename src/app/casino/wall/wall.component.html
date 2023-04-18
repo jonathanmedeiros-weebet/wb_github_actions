@@ -313,7 +313,12 @@
 
     <ng-template #cassinoGameList>
         <div class="bloco">
-            <div class="titulo">{{gameTitle | titlecase}}</div>
+            <div class="titulo" *ngIf="gameList.length">
+                {{gameTitle | titlecase}}
+            </div>
+            <div class="sem-evento" *ngIf="!gameList.length">
+                {{'geral.nenhumJogoEncontrado' | translate}}!
+            </div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gameList">
                     <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
