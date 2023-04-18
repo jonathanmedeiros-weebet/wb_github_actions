@@ -2092,11 +2092,11 @@ gulp.task('surebetclub.wee.bet', function (done) {
     });
 });
 
-gulp.task('shoppix.wee.bet', function (done) {
+gulp.task('fnbetpix.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "shoppix.wee.bet",
-        banca: "SHOPPIX",
+        host: "fnbetpix.wee.bet",
+        banca: "FNBETPIX",
         styles: "",
     });
 });
