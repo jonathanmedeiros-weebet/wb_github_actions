@@ -341,7 +341,31 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     podeEncerrar(item, aposta, itemSelecionado) {
-        return !item.removido && item.resultado == null && !aposta.resultado && !item.encerrado && itemSelecionado == null && (!this.jogoComecou(item) || (this.jogoComecou(item) && item.ao_vivo)) && this.quantidadeMinimaBilhete() && !this.process
+        if(itemSelecionado != null) {
+            return false;
+        }
+
+        if(item.removido || item.resultado != null || item.encerrado) {
+            return false;
+        }
+
+        if(aposta.resultado) {
+            return false;
+        }
+
+        if(this.jogoComecou(item) && !item.ao_vivo) {
+            return false;
+        }
+
+        if(!this.quantidadeMinimaBilhete()) {
+            return false;
+        }
+
+        if(this.process) {
+            return false;
+        }
+
+        return true;
     }
 
     handleError(msg) {
