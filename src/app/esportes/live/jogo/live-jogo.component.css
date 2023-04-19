@@ -505,10 +505,10 @@ section.jogo {
     }
 
     .indentificacao-jogo .campeonato-nome {
+        position: initial;
         font-size: 12px;
         right: 10px;
     }
-
     .nome img {
         width: 30px;
     }
@@ -526,8 +526,8 @@ section.jogo {
     }
 
     .indentificacao-jogo .aovivo-tempo {
-        left: 5px;
-        top: 5px;
+        left: 18px;
+        top: 12px;
         font-size: 8px;
     }
 
