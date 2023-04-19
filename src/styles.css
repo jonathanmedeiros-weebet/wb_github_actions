@@ -724,7 +724,7 @@ button {
     opacity: .8;
 }
 
-.action-buttons a{
+.action-buttons a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1873,3 +1873,8 @@ ngb-datepicker-month {
         font-weight: 600;
     }
 }
+
+.tooltip-custom .tooltip-inner {
+    font-size: 14px;
+}
+

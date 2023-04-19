@@ -47,6 +47,21 @@
  }
 
 
+.table a.info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+  
+    cursor: pointer;
+
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
  .btn-cancelar {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 1px;

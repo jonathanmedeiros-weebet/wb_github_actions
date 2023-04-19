@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     HelperService,
     AuthService,
@@ -15,6 +15,7 @@ import * as moment from 'moment';
 import { ApostaEsportivaService } from 'src/app/shared/services/aposta-esportiva/aposta-esportiva.service';
 import { switchMap, takeUntil, delay, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CompatilhamentoBilheteModal } from '../compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -50,6 +51,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     apostaAoVivo = false;
     refreshIntervalId: any;
     unsub$ = new Subject();
+    modalCompartilhamentoRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -60,7 +62,8 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         private apostaEsportivaService: ApostaEsportivaService,
         private utilsService: UtilsService,
         private printService: PrintService,
-        private auth: AuthService
+        private auth: AuthService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -70,7 +73,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
-        this.origin = this.appMobile ? '?origin=app':''; 
+        this.origin = this.appMobile ? '?origin=app':'';
         this.urlBilheteAoVivo = `https://${config.SLUG}/bilhete/${this.aposta.codigo}${this.origin}`;
 
         this.opcoes = this.paramsLocais.getOpcoes();
@@ -161,7 +164,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         if (this.itemSelecionado != null) {
             if(this.itemSelecionadoAoVivo) {
                 this.setDelay();
-               
+
                 let token_aovivo = null;
                 const item = this.itemSelecionado;
                 const version = this.apostaVersion;
@@ -189,7 +192,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                             this.messageService.success(resp, 'Sucesso');
                             this.atualizarAposta(this.aposta);
                             this.descartar();
-                            
+
                             this.process = false;
                         }, error => {
                             this.novaCotacao = null;
@@ -277,7 +280,31 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     shared() {
-        this.bilheteCompartilhamento.shared();
+        if (this.appMobile) {
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+                animation: true,
+                backdrop: 'static',
+            });
+            this.modalCompartilhamentoRef.result.then(
+                (result) => {
+                    switch (result) {
+                        case 'imagem':
+                            this.bilheteCompartilhamento.shared(true);
+                            break;
+                        case 'link':
+                        default:
+                            this.bilheteCompartilhamento.shared(false);
+                            break;
+                    }
+                },
+                (reason) => { }
+            );
+        } else {
+            this.bilheteCompartilhamento.shared(false);
+        }
     }
 
     cancel() {

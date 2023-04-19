@@ -60,7 +60,9 @@ import {
     RecargaCartaoModalComponent,
     RecargaSuccessModalComponent,
     SolicitarSaqueModalComponent,
-    TabelaModalComponent
+    TabelaModalComponent,
+    CarregamentoModalComponent,
+    CompatilhamentoBilheteModal
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -161,7 +163,9 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
         ClienteApostasModalComponent,
         DesafiosBilheteComponent,
         ValidarEmailModalComponent,
-        InformativoModalComponent
+        InformativoModalComponent,
+        CarregamentoModalComponent,
+        CompatilhamentoBilheteModal
     ],
     exports: [
         MainLayoutComponent,

@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
     LOGO = config.LOGO;
     isAppMobile;
     trevoOne = false;
-    hasMpToken = false;
+    hasApiPagamentos = false;
     hasRegras = false;
     hasTermosCondicoes = false;
     hasPoliticaPrivacidade = false;
@@ -39,7 +39,7 @@ export class FooterComponent implements OnInit {
     ngOnInit() {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
-        this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
+        this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
         this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;
         this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
