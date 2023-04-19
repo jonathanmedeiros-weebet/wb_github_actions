@@ -592,19 +592,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.exibirMaisCotacoes.emit(true);
     }
 
-    exibirBtnProximaData() {
-        let result = false;
-
-        if (this.data && !this.regiaoSelecionada) {
-            const proximaData = moment(this.data);
-            if (proximaData.day() !== 0) {
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
     mudarData(dia = 'hoje') {
         let data;
 
@@ -635,14 +622,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             queryParams: data ? {'data': data} : {}
         };
         this.router.navigate(['/esportes/futebol'], navigationExtras);
-    }
-
-    proximaData() {
-        const proximaData = moment(this.data).add(1, 'd').format('YYYY-MM-DD');
-        const navigationExtras: NavigationExtras = {
-            queryParams: {'data': proximaData}
-        };
-        this.router.navigate(['/esportes/futebol/jogos'], navigationExtras);
     }
 
     cotacaoPermitida(cotacao) {
