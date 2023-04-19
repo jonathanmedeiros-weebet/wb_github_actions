@@ -83,7 +83,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 cotacao.valorFinal = this.helperService.calcularCotacao2String(
                                     cotacao.valor,
                                     cotacao.chave,
-                                    cotacao.event_id,
+                                    jogo.event_id,
                                     null,
                                     true
                                 );
@@ -154,7 +154,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
                         cotacao.valor,
                         cotacao.chave,
-                        cotacao.event_id,
+                        jogo.event_id,
                         null,
                         true);
                     return cotacao;
