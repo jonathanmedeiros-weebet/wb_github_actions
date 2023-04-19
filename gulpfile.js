@@ -2367,8 +2367,7 @@ gulp.task('bet04.club', function (done) {
         host: "bet04.club",
         banca: "BET 04",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='https://code.jivosite.com/widget/SrsZN451Hc' async></script><!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-1ZFFCQSL6D'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-1ZFFCQSL6D');</script>",
+        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-1ZFFCQSL6D'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-1ZFFCQSL6D');</script>",
     });
 });
 
