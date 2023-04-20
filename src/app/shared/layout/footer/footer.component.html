@@ -58,6 +58,24 @@
             </a>
         </div>
 
+        <div class="btn-group dropdown language-dropdown hide-desktop">
+            <button class="btn dropdown-toggle" type="button" id="dropdownLanguage"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
+                {{'geral.selecionarIdioma' | translate}}
+            </button>
+            <div class="dropdown-menu language-dropdown-menu" aria-labelledby="dropdownLanguage">
+                <a class="m-2 p-0 dropdown-item" (click)="alterarLinguagem('pt')">
+                    <span class="flag-icon flag-icon-br flag-icon-squared"></span>
+                    {{'geral.portugues' | translate}}
+                </a>
+                <a class="m-2 p-0 dropdown-item" (click)="alterarLinguagem('en')">
+                    <span class="flag-icon flag-icon-us flag-icon-squared"></span>
+                    {{'geral.ingles' | translate}}
+                </a>
+            </div>
+        </div>
+
         <div class="info">
             <small>{{'footer.todosOsDireitosReservados' | translate:{'BANCA_NOME': BANCA_NOME} }}</small>
         </div>

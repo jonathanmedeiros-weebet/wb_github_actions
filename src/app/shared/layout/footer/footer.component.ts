@@ -6,6 +6,7 @@ import { config } from '../../config';
 import {AuthService} from '../../services/auth/auth.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-footer',
@@ -29,11 +30,13 @@ export class FooterComponent implements OnInit {
     rodape;
     unsub$ = new Subject();
     isLoggedIn = false;
+    linguagemSelecionada;
 
     constructor(
         private authService: AuthService,
         private paramsLocais: ParametrosLocaisService,
         private modalService: NgbModal,
+        private translate: TranslateService
     ) { }
 
     ngOnInit() {
@@ -47,6 +50,9 @@ export class FooterComponent implements OnInit {
         this.hasJogoResponsavel = this.paramsLocais.getOpcoes().has_jogo_responsavel;
         this.hasPoliticaAml = this.paramsLocais.getOpcoes().has_politica_aml;
         this.rodape = this.paramsLocais.getOpcoes().rodape;
+
+        this.linguagemSelecionada = this.translate.currentLang;
+        this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
@@ -66,5 +72,11 @@ export class FooterComponent implements OnInit {
             centered: true,
             size: 'xl',
         });
+    }
+
+    alterarLinguagem(linguagem) {
+        localStorage.setItem('linguagem', linguagem);
+        this.linguagemSelecionada = linguagem;
+        this.translate.use(linguagem);
     }
 }
