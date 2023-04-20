@@ -2618,3 +2618,12 @@ gulp.task('ragnar.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betpixcariri.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betpixcariri.bet",
+        banca: "BET PIX CARIRI",
+        styles: "",
+    });
+});
