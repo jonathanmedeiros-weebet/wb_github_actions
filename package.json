@@ -282,7 +282,9 @@
         "betselecao.com": "gulp betselecao.com",
         "betvibra.com": "gulp betvibra.com",
         "powerbets.vip": "gulp powerbets.vip",
-        "ragnar.bet": "gulp ragnar.bet"
+        "ragnar.bet": "gulp ragnar.bet",
+        "betpixcariri.bet": "gulp betpixcariri.bet",
+        "genialsistemas.online": "gulp genialsistemas.online"
     },
     "private": true,
     "dependencies": {
