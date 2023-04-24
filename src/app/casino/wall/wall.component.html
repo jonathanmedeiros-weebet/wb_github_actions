@@ -56,9 +56,11 @@
                 <div class="game-list game-list-inline-destaque" #scrollGames id="destaques-scroll" (scroll)="onScroll('destaques')">
                     <div class="game-tile" *ngFor="let game of gamesDestaque">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
+
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                             [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -97,6 +99,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
@@ -140,6 +143,7 @@
                      (scroll)="onScroll('raspadinha')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
@@ -182,6 +186,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
@@ -223,6 +228,7 @@
                 <div class="game-list game-list-inline">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
@@ -264,6 +270,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
@@ -305,6 +312,7 @@
                 <div class="game-list game-list-inline" #scrollGames id="live-scroll" (scroll)="onScroll('live')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesLive">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
                         <div class="logo-game">
                             <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
@@ -343,9 +351,10 @@
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gameList">
                     <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                    <div class="logo-game">
-                        <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                    </div>
+                    <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                     <div class="game-tile-buttons">
                         <a *ngIf="game.gameDemo"
                            [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
