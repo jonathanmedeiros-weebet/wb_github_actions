@@ -2627,3 +2627,12 @@ gulp.task('betpixcariri.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('genialsistemas.online', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "genialsistemas.online",
+        banca: "GENIAL SISTEMAS",
+        styles: "",
+    });
+});
