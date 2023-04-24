@@ -2636,3 +2636,12 @@ gulp.task('genialsistemas.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('cassinoaovivo.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "cassinoaovivo.bet",
+        banca: "CASSINO AO VIVO",
+        styles: "",
+    });
+});

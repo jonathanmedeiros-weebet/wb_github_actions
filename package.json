@@ -284,7 +284,8 @@
         "powerbets.vip": "gulp powerbets.vip",
         "ragnar.bet": "gulp ragnar.bet",
         "betpixcariri.bet": "gulp betpixcariri.bet",
-        "genialsistemas.online": "gulp genialsistemas.online"
+        "genialsistemas.online": "gulp genialsistemas.online",
+        "cassinoaovivo.bet": "gulp cassinoaovivo.bet"
     },
     "private": true,
     "dependencies": {
