@@ -78,6 +78,7 @@
 }
 
 .indentificacao .info {
+    width: 100%;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -91,6 +92,8 @@
     max-width: 400px;
     font-size: 14px;
     color: #FFFFFF;
+    position: absolute;
+    top: 10px;
 }
 
 .indentificacao .nome {
@@ -108,8 +111,14 @@
 }
 
 .indentificacao .horario {
-    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+    font-size: 14px;
     color: #FFFFFF;
+    position: absolute;
+    bottom: 1px;
 }
 
 .content-sports {
@@ -121,7 +130,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 150px;
+    width: 40%;
 }
 
 .times-separador {
@@ -237,16 +246,24 @@
     }
 
     .indentificacao .campeonato-nome {
-        max-width: 240px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 400px;
+        font-size: 14px;
+        color: #FFFFFF;
+        position: absolute;
+        top: 6px;
     }
 
     .nome .time-a,
     .nome .time-b {
-        width: 100px;
+        width: 40%;
     }
 
     .nome img {
-        width: 30px;
+        width: 40px;
+        margin-bottom: 5px;
     }
 
     .times-separador {
@@ -264,6 +281,14 @@
     .small_screen {
         display: block;
     }
+
+    .indentificacao .info {
+        width: 100%;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
@@ -277,6 +302,7 @@
 
     .nome img {
         width: 40px;
+        margin-bottom: 5px;
     }
 
     /* .content-sports {
