@@ -2645,3 +2645,21 @@ gulp.task('cassinoaovivo.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('blackpix.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "blackpix.bet",
+        banca: "BLACKPIX.BET",
+        styles: "",
+    });
+});
+
+gulp.task('n7futmix.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "n7futmix.com",
+        banca: "N7 FUTMIX",
+        styles: "",
+    });
+});

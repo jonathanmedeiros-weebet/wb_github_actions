@@ -285,7 +285,9 @@
         "ragnar.bet": "gulp ragnar.bet",
         "betpixcariri.bet": "gulp betpixcariri.bet",
         "genialsistemas.online": "gulp genialsistemas.online",
-        "cassinoaovivo.bet": "gulp cassinoaovivo.bet"
+        "cassinoaovivo.bet": "gulp cassinoaovivo.bet",
+        "blackpix.bet": "gulp blackpix.bet",
+        "n7futmix.com": "gulp n7futmix.com"
     },
     "private": true,
     "dependencies": {
