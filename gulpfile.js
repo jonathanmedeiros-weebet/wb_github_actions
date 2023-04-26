@@ -2643,6 +2643,7 @@ gulp.task('cassinoaovivo.bet', function (done) {
         host: "cassinoaovivo.bet",
         banca: "CASSINO AO VIVO",
         styles: "",
+        pixel: "<meta name='google-site-verification' content='8hcSk8ilek9Xlj8OwxRXOARr-ka3PMWJtS_z85FedNY' />",
     });
 });
 
