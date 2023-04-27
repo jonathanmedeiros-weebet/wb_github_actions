@@ -2644,6 +2644,7 @@ gulp.task('cassinoaovivo.bet', function (done) {
         banca: "CASSINO AO VIVO",
         styles: "",
         pixel: "<meta name='google-site-verification' content='8hcSk8ilek9Xlj8OwxRXOARr-ka3PMWJtS_z85FedNY' />",
+        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-69QY0X8SYT'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-69QY0X8SYT');</script>"
     });
 });
 
