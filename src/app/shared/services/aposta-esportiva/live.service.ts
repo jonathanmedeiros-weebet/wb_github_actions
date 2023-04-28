@@ -19,20 +19,12 @@ export class LiveService {
         this.socket.disconnect();
     }
 
-    entrarSalaEventosFutebol() {
+    entrarSalaEventos() {
         this.socket.emit('sala-eventos-entrar');
     }
 
-    sairSalaEventosFutebol() {
+    sairSalaEventos() {
         this.socket.emit('sala-eventos-sair');
-    }
-
-    entrarSalaEventosBasquete() {
-        this.socket.emit('sala-eventos-basquete-entrar');
-    }
-
-    sairSalaEventosBasquete() {
-        this.socket.emit('sala-eventos-basquete-sair');
     }
 
     entrarSalaEvento(eventId) {
