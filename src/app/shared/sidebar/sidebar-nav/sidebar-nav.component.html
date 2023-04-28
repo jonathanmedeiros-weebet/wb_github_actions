@@ -40,13 +40,12 @@
         </div>
 
         <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
-            <div class="destaques-regiao" *ngIf="regioesDestaque">
-                <span class="group" *ngIf="!collapsed">{{'geral.destaques' | translate}}</span>
-                <li *ngFor="let regiao of regioesDestaque"
-                    (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
+            <div class="destaques-regiao" *ngIf="ligasPopulares">
+                <span class="group" *ngIf="!collapsed">{{'geral.ligasPopulares' | translate}}</span>
+                <li *ngFor="let ligaPopular of ligasPopulares">
                     <a>
-                        <i class="icon-futebol wbicon"></i>
-                        <span class="regiao-nome">{{regiao.nome}}</span>
+                        <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
+                        <span class="regiao-nome">{{ligaPopular.nome}}</span>
                     </a>
                 </li>
             </div>
