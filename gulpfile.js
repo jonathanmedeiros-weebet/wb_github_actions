@@ -2665,3 +2665,12 @@ gulp.task('n7futmix.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nossabets.net', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "nossabets.net",
+        banca: "NOSSA BETS",
+        styles: "",
+    });
+});

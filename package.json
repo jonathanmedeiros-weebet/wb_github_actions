@@ -287,7 +287,8 @@
         "genialsistemas.online": "gulp genialsistemas.online",
         "cassinoaovivo.bet": "gulp cassinoaovivo.bet",
         "blackpix.bet": "gulp blackpix.bet",
-        "n7futmix.com": "gulp n7futmix.com"
+        "n7futmix.com": "gulp n7futmix.com",
+        "nossabets.net": "gulp nossabets.net"
     },
     "private": true,
     "dependencies": {
