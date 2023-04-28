@@ -508,15 +508,6 @@ gulp.task('jrsports.bet', function (done) {
     });
 });
 
-gulp.task('jardimbets.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "jardimbets.com",
-        banca: "JARDIM BETS",
-        styles: "--header: #326038; --foreground-header: #fff; --sidebar-right:#2c5432; --foreground-sidebar-right: #fff; --sidebar-left: #2c5432; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #4d812a; --foreground-odds: #fff; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;"
-    });
-});
-
 gulp.task('apremiada.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
