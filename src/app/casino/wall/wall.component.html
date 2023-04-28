@@ -1,4 +1,4 @@
-<div #listagem class="wall-container" [ngClass]="{'internal': !isHomeCassino}">
+<div #listagem class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
     <app-banners pagina="cassino" ></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
@@ -20,9 +20,30 @@
             <div class="ssc-square box-jogo hide-mobile" ></div>
         </div>
     </div>
+    <div class="filter" *ngIf="!showLoadingIndicator">
+        <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" [(ngModel)]="term"class="form-control inverted-out" placeholder="Digite o nome de um jogo" (keyup)="filtrarJogos()">
+            <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
+        </div>
+        <ng-container *ngIf="!isMobile">
+            <div class="search-box">
+                <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
+                    <option value="" selected>Todos os Provedores</option>
+                    <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
+                        {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                    </option>
+                </select>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isMobile">
+            <div class="search-box-mobile">
+                <a (click)="openFiltroFornecedores()"><i class="fa fa-filter" aria-hidden="true"></i></a>
+            </div>
+         </ng-container>
+    </div>
+    <div class="wall-inner" *ngIf="!this.term && !this.termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
 
-
-    <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
         <div class="bloco">
             <div class="bloco-header">
                 <div class="titulo">{{'cassino.maisPopulares' | translate}}</div>
@@ -35,6 +56,11 @@
                 <div class="game-list game-list-inline-destaque" #scrollGames id="destaques-scroll" (scroll)="onScroll('destaques')">
                     <div class="game-tile" *ngFor="let game of gamesDestaque">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
+
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                             [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -73,6 +99,10 @@
                 <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -113,6 +143,10 @@
                      (scroll)="onScroll('raspadinha')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID]"
@@ -152,6 +186,10 @@
                 <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -190,6 +228,10 @@
                 <div class="game-list game-list-inline">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -228,6 +270,10 @@
                 <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -266,6 +312,10 @@
                 <div class="game-list game-list-inline" #scrollGames id="live-scroll" (scroll)="onScroll('live')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesLive">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                         <div class="game-tile-buttons">
                             <a *ngIf="game.gameDemo"
                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -292,10 +342,19 @@
 
     <ng-template #cassinoGameList>
         <div class="bloco">
-            <div class="titulo">{{gameTitle | titlecase}}</div>
+            <div class="titulo" *ngIf="gameList && gameList.length">
+                {{gameTitle | titlecase}}
+            </div>
+            <div class="sem-evento" *ngIf="gameList && !gameList.length">
+                {{'geral.nenhumJogoEncontrado' | translate}}!
+            </div>
             <div class="game-list">
                 <div class="game-tile" *ngFor="let game of gameList">
                     <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                    <div class="logo-game-background"></div>
+                        <div class="logo-game">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                        </div>
                     <div class="game-tile-buttons">
                         <a *ngIf="game.gameDemo"
                            [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -314,3 +373,48 @@
         </div>
     </ng-template>
 </div>
+
+<ng-template #fornecedorModal let-modal>
+    <div class="modal-header">
+        <h4>Fornecedores</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body-content">
+            <div class="search-box search-fornecedores">
+                <i class="fa fa-search"></i>
+                    <input type="text" [(ngModel)]="termFornecedorMobile"
+                           class="form-control inverted-out"
+                           placeholder="Pesquisar Fornecedor"
+                           (keyup)="filtrarFornecedor()"
+                    >
+                    <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="termFornecedorMobile"></i>
+            </div>
+            <div class="fornecedores-menu">
+            <ul>
+                <li class="fornecedor">
+                    <div class="fornecedor-nome" style="margin-left: 0">
+                        <span><a (click)="filtrarJogos('todos')">Todos os Fornecedores</a></span>
+                    </div>
+                </li>
+                <ng-container *ngFor="let fornecedor of cassinoFornecedores">
+                    <li class="fornecedor">
+                        <div class="fornecedor-imagem">
+                            <img src="https://cdn.wee.bet/img/cassino/logos/{{fornecedor.gameFornecedor.toLowerCase()}}.png">
+                        </div>
+                        <div class="fornecedor-nome">
+                            <span>
+                                <a (click)="filtrarJogos(fornecedor.gameFornecedor)">
+                                {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                                </a>
+                            </span>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>

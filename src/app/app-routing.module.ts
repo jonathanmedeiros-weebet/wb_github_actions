@@ -26,6 +26,10 @@ const appRoutes: Routes = [
                 component: AppComponent
             },
             {
+                path: 'auth/cadastro',
+                component: AppComponent
+            },
+            {
                 path: 'acumuladao',
                 loadChildren: () => import('./acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
             },

@@ -4,13 +4,13 @@
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
             <i class="fa fa-external-link"></i>
         </a>
-        <button type="button" *ngIf="impressaoPermitida()" (click)="printTicket()" title="IMPRIMIR">
+        <button type="button" *ngIf="!isMobile && impressaoPermitida()" (click)="printTicket()" title="IMPRIMIR">
             <i class="fa fa-print"></i>
         </button>
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
+        <button type="button" *ngIf="!isMobile && compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">

@@ -81,6 +81,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width:100%;
 }
 
 .indentificacao-jogo .info-jogo {
@@ -117,12 +118,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 150px;
+    width: 40%;
     color: #FFFFFF;
 }
 
 .times-separador {
-    font-size: 60px;
+    font-size: 2.9rem;
     margin: 10px 20px;
 }
 
@@ -312,15 +313,16 @@
 
     .nome .time-a,
     .nome .time-b {
-        width: 100px;
+        width: 40%;
     }
 
     .nome img {
-        width: 30px;
+        width: 100%;
+        margin-bottom: 4px;
     }
 
     .times-separador {
-        font-size: 20px;
+        font-size: 2.5rem;
     }
 
     .odds .odd {
@@ -349,6 +351,10 @@
         left: 0;
         width: calc(100%);
         height: 100%;
+    }
+
+    .indentificacao-jogo .nome, h4 {
+        font-size: 1rem;
     }
 }
 

@@ -123,7 +123,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                                 cotacao.valorFinal = this.helperService.calcularCotacao2String(
                                     cotacao.valor,
                                     cotacao.chave,
-                                    cotacao.event_id,
+                                    jogo.event_id,
                                     null,
                                     true
                                 );
@@ -175,16 +175,16 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                     let campeonato = this.campeonatos.get(jogo.campeonato._id);
                     let inserirCampeonato = false;
 
-                    jogo.cotacoes.map(cotacao => {
-                        cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                            cotacao.valor,
-                            cotacao.chave,
-                            cotacao.event_id,
-                            null,
-                            true);
-                        return cotacao;
-                    });
+                jogo.cotacoes.map(cotacao => {
+                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                        cotacao.valor,
+                        cotacao.chave,
+                        jogo.event_id,
+                        null,
+                        true);
+                    return cotacao;
+                });
 
                     if (!campeonato) {
                         campeonato = {

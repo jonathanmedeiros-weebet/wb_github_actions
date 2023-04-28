@@ -149,7 +149,7 @@
                     <div class="footer-bilhete">
                         <form #apostaForm="ngForm">
                             <div class="div-inputs">
-                                <div class="form-group" *ngIf="!isCliente">
+                                <div class="form-group" *ngIf="!isCliente && modoCambista">
                                     <div class="input-md">
                                         <input type="text" id="nomeApostador" class="form-control inverted-out" required [(ngModel)]="aposta.apostador"
                                            name="apostador" [ngClass]="{'is-invalid': controlInvalid(apostador)}"

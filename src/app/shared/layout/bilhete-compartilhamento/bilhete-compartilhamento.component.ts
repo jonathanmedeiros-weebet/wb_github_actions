@@ -7,6 +7,8 @@ import {
 } from '../../../services';
 
 import { toPng } from 'html-to-image';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CarregamentoModalComponent } from '../modals';
 
 let newNavigator: any;
 newNavigator = window.navigator;
@@ -24,13 +26,15 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     cambistaPaga;
     appMobile;
     LOGO;
+    modalCarregamentoRef;
 
     constructor(
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private auth: AuthService,
         private messageService: MessageService,
-        private imagensService: ImagensService
+        private imagensService: ImagensService,
+        private modalService: NgbModal
     ) {
         this.LOGO = this.imagensService.logo;
     }
@@ -56,11 +60,17 @@ export class BilheteCompartilhamentoComponent implements OnInit {
         };
     }
 
-    shared() {
+    shared(compartilharComImagem = false) {
         if (this.appMobile) {
-            toPng(this.bilhete.nativeElement).then((dataUrl) => {
-                this.helperService.sharedTicket(this.aposta, dataUrl);
-            });
+            if (compartilharComImagem) {
+                this.openModalCarregamento();
+                toPng(this.bilhete.nativeElement).then((dataUrl) => {
+                    this.closeModalCarregamento();
+                    this.helperService.sharedTicket(this.aposta, dataUrl);
+                });
+            } else {
+                this.helperService.sharedTicket(this.aposta, null);
+            }
         } else {
             if (newNavigator.share) {
                 newNavigator.share({
@@ -71,6 +81,22 @@ export class BilheteCompartilhamentoComponent implements OnInit {
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
             }
+        }
+    }
+
+    openModalCarregamento() {
+        this.modalCarregamentoRef = this.modalService.open(CarregamentoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+        this.modalCarregamentoRef.componentInstance.msg = 'Processando Imagem...';
+    }
+
+    closeModalCarregamento() {
+        if (this.modalCarregamentoRef) {
+            this.modalCarregamentoRef.dismiss();
         }
     }
 

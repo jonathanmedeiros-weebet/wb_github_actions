@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
     LOGO = config.LOGO;
     isAppMobile;
     trevoOne = false;
-    hasMpToken = false;
+    hasApiPagamentos = false;
     hasRegras = false;
     hasTermosCondicoes = false;
     hasPoliticaPrivacidade = false;
@@ -29,6 +29,7 @@ export class FooterComponent implements OnInit {
     rodape;
     unsub$ = new Subject();
     isLoggedIn = false;
+    esporteHabilitado: boolean;
 
     constructor(
         private authService: AuthService,
@@ -39,7 +40,7 @@ export class FooterComponent implements OnInit {
     ngOnInit() {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
-        this.hasMpToken = this.paramsLocais.getOpcoes().has_mp_token;
+        this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
         this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;
         this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
@@ -47,6 +48,7 @@ export class FooterComponent implements OnInit {
         this.hasJogoResponsavel = this.paramsLocais.getOpcoes().has_jogo_responsavel;
         this.hasPoliticaAml = this.paramsLocais.getOpcoes().has_politica_aml;
         this.rodape = this.paramsLocais.getOpcoes().rodape;
+        this.esporteHabilitado = this.paramsLocais.getOpcoes().esporte;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;

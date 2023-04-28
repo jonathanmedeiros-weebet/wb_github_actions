@@ -35,6 +35,7 @@
         "deposito": "Deposit",
         "depositos": "Deposits",
         "nenhumEventoDisponivel": "No event available",
+        "nenhumJogoEncontrado": "No game found",
         "nenhumEventoAoVivoDisponivel": "No live events available at this time!",
         "saldo": "Balance",
         "minhaConta": "My Account",

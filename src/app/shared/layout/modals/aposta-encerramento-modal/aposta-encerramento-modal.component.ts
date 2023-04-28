@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     HelperService,
     AuthService,
@@ -12,6 +12,7 @@ import {
 } from '../../../../services';
 import { config } from '../../../config';
 import * as moment from 'moment';
+import { CompatilhamentoBilheteModal } from '../compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -40,6 +41,7 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     isMobile;
     urlBilheteAoVivo ;
     origin;
+    modalCompartilhamentoRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -49,7 +51,8 @@ export class ApostaEncerramentoModalComponent implements OnInit {
         private apostaService: ApostaService,
         private utilsService: UtilsService,
         private printService: PrintService,
-        private auth: AuthService
+        private auth: AuthService,
+        private modalService: NgbModal
     ) {
     }
 
@@ -207,7 +210,31 @@ export class ApostaEncerramentoModalComponent implements OnInit {
     }
 
     shared() {
-        this.bilheteCompartilhamento.shared();
+        if (this.appMobile) {
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+                animation: true,
+                backdrop: 'static',
+            });
+            this.modalCompartilhamentoRef.result.then(
+                (result) => {
+                    switch (result) {
+                        case 'imagem':
+                            this.bilheteCompartilhamento.shared(true);
+                            break;
+                        case 'link':
+                        default:
+                            this.bilheteCompartilhamento.shared(false);
+                            break;
+                    }
+                },
+                (reason) => { }
+            );
+        } else {
+            this.bilheteCompartilhamento.shared(false);
+        }        
     }
 
     cancel() {

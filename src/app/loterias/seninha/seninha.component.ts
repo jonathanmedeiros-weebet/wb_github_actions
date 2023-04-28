@@ -6,7 +6,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {ApostaModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
+import {ApostaModalComponent, LoginModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
 import {
     TipoApostaLoteriaService, MessageService,
     SorteioService, ApostaLoteriaService,
@@ -41,6 +41,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     unsub$ = new Subject();
     isCliente;
     mobileScreen = false;
+    modoCambista = false;
 
     constructor(
         private sidebarService: SidebarService,
@@ -62,6 +63,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     ngOnInit() {
+        this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.isLoggedIn = this.auth.isLoggedIn();
         this.opcoes = this.paramsService.getOpcoes();
         this.isCliente = this.auth.isCliente();
@@ -147,43 +149,59 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Incluir palpite */
     submit() {
-        const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
-
-        if (tipoAPosta) {
-            const item = this.form.value;
-            item.sorteio_id = this.form.value.sorteio.id;
-            if ((item.valor * this.tipoAposta.cotacao6) < this.opcoes.valor_max_premio_loterias) {
-                item.premio6 = item.valor * this.tipoAposta.cotacao6;
-            } else {
-                item.premio6 = this.opcoes.valor_max_premio_loterias;
-            }
-            if ((item.valor * this.tipoAposta.cotacao5) < this.opcoes.valor_max_premio_loterias) {
-                item.premio5 = item.valor * this.tipoAposta.cotacao5;
-            } else {
-                item.premio5 = this.opcoes.valor_max_premio_loterias;
-            }
-            if ((item.valor * this.tipoAposta.cotacao4) < this.opcoes.valor_max_premio_loterias) {
-                item.premio4 = item.valor * this.tipoAposta.cotacao4;
-            } else {
-                item.premio4 = this.opcoes.valor_max_premio_loterias;
-            }
-            if ((item.valor * this.tipoAposta.cotacao3) < this.opcoes.valor_max_premio_loterias) {
-                item.premio3 = item.valor * this.tipoAposta.cotacao3;
-            } else {
-                item.premio3 = this.opcoes.valor_max_premio_loterias;
-            }
-            this.aposta.itens.push(item);
-
-            this.aposta.valor += item.valor;
-            this.aposta.premio += item.premio6;
-
-            this.form.reset();
-            this.setNumeros([]);
+        if (!this.isCliente && !this.modoCambista) {
+            this.abrirLogin()
         } else {
-            this.messageService.warning('Quantidade de dezenas insuficiente.');
-        }
+            const tipoAPosta = this.tiposAposta.find(tipoAposta => tipoAposta.qtdNumeros === this.numeros.length);
 
-        this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
+            if (tipoAPosta) {
+                const item = this.form.value;
+                item.sorteio_id = this.form.value.sorteio.id;
+                if ((item.valor * this.tipoAposta.cotacao6) < this.opcoes.valor_max_premio_loterias) {
+                    item.premio6 = item.valor * this.tipoAposta.cotacao6;
+                } else {
+                    item.premio6 = this.opcoes.valor_max_premio_loterias;
+                }
+                if ((item.valor * this.tipoAposta.cotacao5) < this.opcoes.valor_max_premio_loterias) {
+                    item.premio5 = item.valor * this.tipoAposta.cotacao5;
+                } else {
+                    item.premio5 = this.opcoes.valor_max_premio_loterias;
+                }
+                if ((item.valor * this.tipoAposta.cotacao4) < this.opcoes.valor_max_premio_loterias) {
+                    item.premio4 = item.valor * this.tipoAposta.cotacao4;
+                } else {
+                    item.premio4 = this.opcoes.valor_max_premio_loterias;
+                }
+                if ((item.valor * this.tipoAposta.cotacao3) < this.opcoes.valor_max_premio_loterias) {
+                    item.premio3 = item.valor * this.tipoAposta.cotacao3;
+                } else {
+                    item.premio3 = this.opcoes.valor_max_premio_loterias;
+                }
+                this.aposta.itens.push(item);
+
+                this.aposta.valor += item.valor;
+                this.aposta.premio += item.premio6;
+
+                this.form.reset();
+                this.setNumeros([]);
+            } else {
+                this.messageService.warning('Quantidade de dezenas insuficiente.');
+            }
+
+            this.menuFooterService.atualizarQuantidade(this.aposta.itens.length);
+        }
+    }
+
+    abrirLogin() {
+        const options = {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-550 modal-h-350',
+            centered: true,
+        };
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent, options
+        );
     }
 
     /* Remover palpite */
