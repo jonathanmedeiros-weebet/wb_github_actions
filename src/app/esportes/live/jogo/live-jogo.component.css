@@ -96,8 +96,8 @@ section.jogo {
     border-radius: 8px;
 }
 
-.jogo-basquete {
-    background-image: url("https://cdn.wee.bet/img/stadium-background.png");
+.indentificacao-jogo-basquete {
+    background-image: url("https://cdn.wee.bet/img/quadra-basquete-background.png");
 }
 
 .indentificacao-jogo .info-jogo {
