@@ -24,6 +24,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     elem: any;
     showLoadingIndicator = true;
     isCliente;
+    sessionId = '';
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -72,6 +73,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             .subscribe(
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                    this.gameUrl = response.sessionId;
                 },
                 error => {
                     this.handleError(error);
@@ -83,6 +85,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
+
+        if(this.gameFornecedor == 'tomhorn'){
+            console.log(this.gameFornecedor);
+            this.casinoApi.closeSessionTomHorn(this.sessionId)
+        }
+       
         this.location.back();
         if (this.fullscreen) {
             this.closeFullscreen();

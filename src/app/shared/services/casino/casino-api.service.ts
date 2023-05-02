@@ -95,4 +95,25 @@ export class CasinoApiService {
         );
 
     }
+
+    closeSessionTomHorn(sessionId) {
+        let requestOptions;
+        let queryParams = {};
+        queryParams['token'] = localStorage.getItem('tokenCassino');
+        queryParams['sessionId'] = sessionId;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${this.central_url}/games/closeSessionTomHorn`, requestOptions).pipe(
+            map((res: any) => {
+                return res;
+            }),
+            catchError(this.errorService.handleError)
+        );
+
+    }
 }
