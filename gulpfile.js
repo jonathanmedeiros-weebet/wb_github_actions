@@ -2601,3 +2601,39 @@ gulp.task('nossabets.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sortebet777.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "sortebet777.com",
+        banca: "SORTE BET 777",
+        styles: "",
+    });
+});
+
+gulp.task('fizabet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "fizabet.com",
+        banca: "FIZ A BET",
+        styles: "",
+    });
+});
+
+gulp.task('sorteesportiva.app', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "sorteesportiva.app",
+        banca: "SORTE ESPORTIVA",
+        styles: "",
+    });
+});
+
+gulp.task('nacionalbet.online', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "nacionalbet.online",
+        banca: "NACIONAL BET",
+        styles: "",
+    });
+});
