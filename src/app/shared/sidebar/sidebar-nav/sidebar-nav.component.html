@@ -39,7 +39,7 @@
             </li>
         </div>
 
-        <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
+        <ng-container>
             <div class="" *ngIf="ligasPopulares">
                 <span class="group" *ngIf="!collapsed">{{'geral.ligasPopulares' | translate}}</span>
                 <li *ngFor="let ligaPopular of ligasPopulares">
@@ -49,7 +49,7 @@
                     </a>
                 </li>
             </div>
-            <span class="group" *ngIf="!collapsed">{{'geral.campeonatos' | translate}}</span>
+            <span class="group" *ngIf="!collapsed">{{'geral.esportes' | translate}}</span>
             <li class="regiao" *ngFor="let regiao of itens">
                 <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
@@ -67,16 +67,6 @@
                 </div>
             </li>
         </ng-container>
-        <ng-template #esporteGenerico>
-            <span class="group" *ngIf="!collapsed">{{'geral.campeonatos' | translate}}</span>
-            <li class="campeonato" *ngFor="let campeonato of itens"
-                (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
-                <a>
-                    <i [ngClass]="[iconesGenericos[esporte], 'icone-generico']"></i>
-                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{campeonato.nome}}</span>
-                </a>
-            </li>
-        </ng-template>
     </ng-container>
 
     <ng-container *ngIf="contexto == 'desafio'">
