@@ -148,11 +148,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return result;
     }
 
-
     closeSessionGameTomHorn(){
-        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(
-            response => {},
-            error => {}
-            );
+        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {},error => {});
     }
 }
