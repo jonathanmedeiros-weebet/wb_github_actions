@@ -236,11 +236,10 @@
                                 <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
-                            <div *ngIf="posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
+                            <div style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
-                            <div class="saldos-item"
-                                *ngIf="posicaoFinanceira.bonus != 0">
+                            <div class="saldos-item">
                                 <span class="">{{'geral.bonus' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
                             </div>
@@ -381,11 +380,11 @@
                                 <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
-                            <div  *ngIf="isCliente && posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
+                            <div  *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
                             <div class="saldos-item"
-                                *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                                *ngIf="isCliente">
                                 <span class="">{{'geral.bonus' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
                             </div>

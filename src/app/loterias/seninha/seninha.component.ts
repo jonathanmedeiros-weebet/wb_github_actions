@@ -364,7 +364,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     generateRandomNumber(numbers: Number[]) {
         let number;
 
-        number = random(1, 80);
+        number = random(1, 60);
 
         const find = numbers.find(n => n === number);
 

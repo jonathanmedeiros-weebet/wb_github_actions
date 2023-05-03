@@ -29,6 +29,7 @@ export class FooterComponent implements OnInit {
     rodape;
     unsub$ = new Subject();
     isLoggedIn = false;
+    esporteHabilitado: boolean;
 
     constructor(
         private authService: AuthService,
@@ -47,6 +48,7 @@ export class FooterComponent implements OnInit {
         this.hasJogoResponsavel = this.paramsLocais.getOpcoes().has_jogo_responsavel;
         this.hasPoliticaAml = this.paramsLocais.getOpcoes().has_politica_aml;
         this.rodape = this.paramsLocais.getOpcoes().rodape;
+        this.esporteHabilitado = this.paramsLocais.getOpcoes().esporte;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
