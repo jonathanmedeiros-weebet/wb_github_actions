@@ -2593,3 +2593,12 @@ gulp.task('nacionalbet.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('iasports.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "iasports.wee.bet",
+        banca: "IA SPORTS",
+        styles: "",
+    });
+});
