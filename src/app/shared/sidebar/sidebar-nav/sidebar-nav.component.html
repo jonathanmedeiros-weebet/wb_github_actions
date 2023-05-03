@@ -40,10 +40,10 @@
         </div>
 
         <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
-            <div class="destaques-regiao" *ngIf="ligasPopulares">
+            <div class="" *ngIf="ligasPopulares">
                 <span class="group" *ngIf="!collapsed">{{'geral.ligasPopulares' | translate}}</span>
                 <li *ngFor="let ligaPopular of ligasPopulares">
-                    <a>
+                    <a (click)="goTo(getRotaPorEsporteId(ligaPopular.sport_id), { campeonato: ligaPopular.api_id })">
                         <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
                         <span class="regiao-nome">{{ligaPopular.nome}}</span>
                     </a>

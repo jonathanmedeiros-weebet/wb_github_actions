@@ -294,4 +294,20 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
         return className;
     }
+
+    getRotaPorEsporteId(sportId) {
+        const rotaPorSporteId = {
+            1: '/esportes/futebol',
+            9: '/esportes/combate',
+            12: '/esportes/futebol-americano',
+            13: '/esportes/tenis',
+            17: '/esportes/hoquei-gelo',
+            18: '/esportes/basquete',
+            83: '/esportes/futsal',
+            91: '/esportes/volei',
+            151: '/esportes/esports',
+        };
+
+        return rotaPorSporteId[sportId] ?? '/esportes/futebol';        
+    }
 }
