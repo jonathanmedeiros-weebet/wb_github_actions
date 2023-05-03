@@ -99,7 +99,6 @@ export class CasinoApiService {
     closeSessionTomHorn(sessionId) {
         let requestOptions;
         let queryParams = {};
-        queryParams['token'] = localStorage.getItem('tokenCassino');
         queryParams['sessionId'] = sessionId;
 
         if (queryParams) {
@@ -114,6 +113,5 @@ export class CasinoApiService {
             }),
             catchError(this.errorService.handleError)
         );
-
     }
 }

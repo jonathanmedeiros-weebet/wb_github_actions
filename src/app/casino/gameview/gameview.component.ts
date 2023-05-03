@@ -73,7 +73,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             .subscribe(
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                    this.gameUrl = response.sessionId;
+                    this.sessionId = response.sessionId;
                 },
                 error => {
                     this.handleError(error);
@@ -85,12 +85,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
-
         if(this.gameFornecedor == 'tomhorn'){
-            console.log(this.gameFornecedor);
-            this.casinoApi.closeSessionTomHorn(this.sessionId)
+            this.closeSessionGameTomHorn();
         }
-       
+
         this.location.back();
         if (this.fullscreen) {
             this.closeFullscreen();
@@ -98,6 +96,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        if(this.gameFornecedor == 'tomhorn'){
+            this.closeSessionGameTomHorn();
+        }
+
         if (this.mobileScreen) {
             this.menuFooterService.setIsPagina(false);
         } else {
@@ -147,4 +149,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
 
+    closeSessionGameTomHorn(){
+        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(
+            response => {},
+            error => {}
+            );
+    }
 }
