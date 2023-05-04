@@ -14,7 +14,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
     whatsapp;
     hasApiPagamentos;
     modalidade;
-
+    showLoading = true;
     depositos = [];
     mobileScreen;
 
@@ -54,10 +54,12 @@ export class DepositoComponent implements OnInit, OnDestroy {
             .subscribe(
                 response => {
                     this.depositos = response;
+                    this.showLoading = false;
                 },
                 error => {
                     this.handleError(error);
                 }
+
             );
     }
 
@@ -71,5 +73,6 @@ export class DepositoComponent implements OnInit, OnDestroy {
 
     handleError(error: string) {
         this.messageService.error(error);
+        this.showLoading = false;
     }
 }
