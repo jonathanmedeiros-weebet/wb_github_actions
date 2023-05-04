@@ -124,13 +124,13 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     addEncerramento(item, apostaVersion) {
-        if (!this.jogoComecou(item) || (this.jogoComecou(item) && item.ao_vivo)) {
+        // if (!this.jogoComecou(item) || (this.jogoComecou(item) && item.ao_vivo)) {
             this.itemSelecionadoAoVivo = item.ao_vivo;
             this.itemSelecionado = item.id;
             this.apostaVersion = apostaVersion;
             this.apostaAoVivo = this.itemSelecionadoAoVivo;
             this.simularEncerramento(this.itemSelecionado);
-        }
+        // }
     }
 
     jogoComecou(item) {
@@ -353,9 +353,9 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             return false;
         }
 
-        if(this.jogoComecou(item) && !item.ao_vivo) {
-            return false;
-        }
+        // if(this.jogoComecou(item) && !item.ao_vivo) {
+        //     return false;
+        // }
 
         if(!this.quantidadeMinimaBilhete()) {
             return false;
