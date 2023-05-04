@@ -2602,3 +2602,21 @@ gulp.task('iasports.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betplusbr.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betplusbr.com",
+        banca: "BET PLUS BR",
+        styles: "",
+    });
+});
+
+gulp.task('betasso.io', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betasso.io",
+        banca: "BETASSO",
+        styles: "",
+    });
+});

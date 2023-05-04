@@ -280,7 +280,9 @@
         "fizabet.com": "gulp fizabet.com",
         "sorteesportiva.app": "gulp sorteesportiva.app",
         "nacionalbet.online": "gulp nacionalbet.online",
-        "iasports.wee.bet": "gulp iasports.wee.bet"
+        "iasports.wee.bet": "gulp iasports.wee.bet",
+        "betplusbr.com": "gulp betplusbr.com",
+        "betasso.io": "gulp betasso.io"
     },
     "private": true,
     "dependencies": {
