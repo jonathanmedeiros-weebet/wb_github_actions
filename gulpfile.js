@@ -1792,11 +1792,11 @@ gulp.task('betfut365.bet', function (done) {
     });
 });
 
-gulp.task('betbrasil.one', function (done) {
+gulp.task('betnews.one', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "betbrasil.one",
-        banca: "BET BRASIL",
+        host: "betnews.one",
+        banca: "BET NEWS",
         styles: "",
         scripts: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/1890e981-6951-4a28-81e3-6aaa5495e35f-loader.js' ></script>"
     });
@@ -2598,7 +2598,26 @@ gulp.task('iasports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "iasports.wee.bet",
+        shared_url: "iasport.bet",
         banca: "IA SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('betplusbr.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betplusbr.com",
+        banca: "BET PLUS BR",
+        styles: "",
+    });
+});
+
+gulp.task('betasso.io', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betasso.io",
+        banca: "BETASSO",
         styles: "",
     });
 });
