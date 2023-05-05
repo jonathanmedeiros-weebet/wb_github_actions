@@ -110,8 +110,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))
             .subscribe(dados => {
-                console.log(dados);
-                
                 this.contexto = dados.contexto;
                 this.itens = dados.itens;
 
