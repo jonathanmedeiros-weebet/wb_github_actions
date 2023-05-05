@@ -2598,6 +2598,7 @@ gulp.task('iasports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "iasports.wee.bet",
+        shared_url: "iasport.bet",
         banca: "IA SPORTS",
         styles: "",
     });
