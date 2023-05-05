@@ -24,7 +24,7 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
     whatsapp;
     mobileScreen;
     queryParams;
-     modalRef;
+    modalRef;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
