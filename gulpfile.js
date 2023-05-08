@@ -2621,3 +2621,12 @@ gulp.task('betasso.io', function (done) {
         styles: "",
     });
 });
+
+gulp.task('paybett.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "paybett.com",
+        banca: "PAYBETT",
+        styles: "",
+    });
+});
