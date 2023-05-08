@@ -70,7 +70,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                 if (changes['sportId'].currentValue != changes['sportId'].previousValue) {
                     this.canalLive = this.sportId;
                     this.getJogosAoVivo();
-
                 }
             }
         }
@@ -93,6 +92,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     getJogosAoVivo() {
+        this.showLoadingIndicator = true;
         this.jogoService.getJogosAoVivo(this.sportId)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -108,10 +108,10 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                                 if (this.sportId == 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
                                 }
+                            }
 
-                                if (this.sportId == 18 && jogo.info.tempo == 4 && jogo.info.minutos < this.minutoEncerramentoAoVivo) {
-                                    valido = false;
-                                }
+                            if (this.sportId == 18 && jogo.info.minutos == 0 && jogo.info.tempo == 4) {
+                                valido = false;
                             }
 
                             if (this.jogoBloqueado(jogo.event_id)) {
@@ -175,16 +175,16 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                     let campeonato = this.campeonatos.get(jogo.campeonato._id);
                     let inserirCampeonato = false;
 
-                jogo.cotacoes.map(cotacao => {
-                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                    cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                        cotacao.valor,
-                        cotacao.chave,
-                        jogo.event_id,
-                        null,
-                        true);
-                    return cotacao;
-                });
+                    jogo.cotacoes.map(cotacao => {
+                        cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                            cotacao.valor,
+                            cotacao.chave,
+                            jogo.event_id,
+                            null,
+                            true);
+                        return cotacao;
+                    });
 
                     if (!campeonato) {
                         campeonato = {
@@ -202,10 +202,10 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                         if (this.sportId == 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                             valido = false;
                         }
+                    }
 
-                        if (this.sportId == 18 && jogo.info.tempo == 4 && jogo.info.minutos < this.minutoEncerramentoAoVivo) {
-                            valido = false;
-                        }
+                    if (this.sportId == 18 && jogo.info.minutos == 0 && jogo.info.tempo == 4) {
+                        valido = false;
                     }
 
                     if (this.jogoBloqueado(jogo.event_id)) {
