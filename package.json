@@ -284,7 +284,7 @@
         "betplusbr.com": "gulp betplusbr.com",
         "betasso.io": "gulp betasso.io",
         "paybett.com": "gulp paybett.com",
-        "ganhefacil.bet": "gulp ganhefacil.bet"
+        "ganhafacil.bet": "gulp ganhafacil.bet"
     },
     "private": true,
     "dependencies": {

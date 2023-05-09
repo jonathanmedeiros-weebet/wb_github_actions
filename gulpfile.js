@@ -2635,10 +2635,10 @@ gulp.task('paybett.com', function (done) {
     });
 });
 
-gulp.task('ganhefacil.bet', function (done) {
+gulp.task('ganhafacil.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "ganhefacil.bet",
+        host: "ganhafacil.bet",
         banca: "GANHE FÁCIL",
         styles: "",
     });
