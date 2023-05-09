@@ -32,6 +32,7 @@ export class FooterComponent implements OnInit {
     isLoggedIn = false;
     linguagemSelecionada;
     esporteHabilitado: boolean;
+    hasApk;
 
     constructor(
         private authService: AuthService,
@@ -44,6 +45,7 @@ export class FooterComponent implements OnInit {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
         this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.hasApk = this.paramsLocais.getOpcoes().has_aplicativo;
         this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
         this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;
         this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
