@@ -2639,7 +2639,7 @@ gulp.task('ganhafacil.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "ganhafacil.bet",
-        banca: "GANHE FÁCIL",
+        banca: "GANHA FÁCIL",
         styles: "",
     });
 });
