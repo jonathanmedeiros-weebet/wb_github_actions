@@ -22,7 +22,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
     submenuItems = [];
     submenu = [];
-    submenuAtivo;
 
     @HostListener('window:resize', ['$event'])
     onResize() {
@@ -34,9 +33,9 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         private cd: ChangeDetectorRef,
         public location: Location,
         private router: Router,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private el: ElementRef
     ) {
-        router.events.subscribe(() => this.atualizarSubmenuAtivo());
     }
 
     ngOnInit() {
@@ -49,7 +48,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         }
 
         this.atualizarSubmenu();
-        this.atualizarSubmenuAtivo();
 
         this.translate.onLangChange.subscribe(() => {
             this.atualizarSubmenu();
@@ -62,6 +60,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.checkScrollWidth();
         this.checkScrollButtons();
+        this.scrollToActiveButton();
     }
 
     checkScrollWidth() {
@@ -108,6 +107,19 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         this.rightDisabled = (this.scrollWidth - (scrollLeft + this.menuWidth)) <= 0;
     }
 
+    scrollToActiveButton() {
+        if (this.isMobile) {
+            const submenuAtivo = this.submenu.find(submenu => {
+                return submenu.link == this.router.url.split('?')[0];
+            });
+
+            const activeButtonElement = this.el.nativeElement.querySelector(`#${submenuAtivo.id}`);
+            if (activeButtonElement) {
+                this.scrollMenu.nativeElement.scrollLeft = activeButtonElement.offsetLeft - 35;
+            }
+        }
+    }
+
     svgByRouteCss(route, hover = false) {
         let svgCss = {
             'width.px': 18,
@@ -131,6 +143,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
     atualizarSubmenu() {
         this.submenu = [
             {
+                id: 'aovivo',
                 name: this.translate.instant('submenu.aoVivo'),
                 link: '/esportes/live',
                 icon_class: 'fa fa-circle blink_me',
@@ -138,6 +151,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.isMobile ? false : this.paramsService.getOpcoes().aovivo
             },
             {
+                id: 'futebol',
                 name: this.translate.instant('submenu.futebol'),
                 link: '/esportes/futebol',
                 icon_class: 'wbicon icon-futebol',
@@ -145,6 +159,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: true
             },
             {
+                id: 'basquete',
                 name: this.translate.instant('submenu.basquete'),
                 link: '/esportes/basquete',
                 icon_class: 'wbicon icon-basquete',
@@ -152,6 +167,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().basquete
             },
             {
+                id: 'combate',
                 name: this.translate.instant('submenu.combate'),
                 link: '/esportes/combate',
                 icon_class: 'wbicon icon-luta',
@@ -159,6 +175,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().combate
             },
             {
+                id: 'volei',
                 name: this.translate.instant('submenu.volei'),
                 link: '/esportes/volei',
                 icon_class: 'wbicon icon-volei',
@@ -166,6 +183,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().volei
             },
             {
+                id: 'tenis',
                 name: this.translate.instant('submenu.tenis'),
                 link: '/esportes/tenis',
                 icon_class: 'wbicon icon-tenis',
@@ -173,6 +191,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().tenis
             },
             {
+                id: 'futebol-americano',
                 name: this.translate.instant('submenu.futebolAmericano'),
                 link: '/esportes/futebol-americano',
                 icon_class: 'wbicon icon-futebol-americano',
@@ -180,6 +199,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().futebol_americano
             },
             {
+                id: 'futsal',
                 name: this.translate.instant('submenu.futsal'),
                 link: '/esportes/futsal',
                 icon_class: 'wbicon icon-futsal',
@@ -187,6 +207,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().futsal
             },
             {
+                id: 'hoquei',
                 name: this.translate.instant('submenu.hoquei'),
                 link: '/esportes/hoquei-gelo',
                 icon_class: 'wbicon icon-hoquei-no-gelo',
@@ -194,6 +215,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().hoquei_gelo
             },
             {
+                id: 'esports',
                 name: this.translate.instant('submenu.esports'),
                 link: '/esportes/esports',
                 icon_class: 'wbicon icon-e-sports',
@@ -201,6 +223,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().esports
             },
             {
+                id: 'seninha',
                 name: this.paramsService.getSeninhaNome(),
                 link: '/loterias/seninha',
                 icon_class: 'fa-solid fa-clover',
@@ -208,6 +231,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.seninhaAtiva()
             },
             {
+                id: 'quininha',
                 name: this.paramsService.getQuininhaNome(),
                 link: '/loterias/quininha',
                 icon_class: 'fa-solid fa-clover',
@@ -215,6 +239,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.quininhaAtiva()
             },
             {
+                id: 'cassino',
                 name: this.translate.instant('submenu.todos'),
                 link: '/casino/c/wall/todos',
                 icon_class: 'fa-solid fa-dice',
@@ -222,6 +247,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'slot',
                 name: this.translate.instant('submenu.slot'),
                 link: '/casino/c/wall/slot',
                 icon_class: 'fa-solid fa-dice',
@@ -229,6 +255,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'raspadinha',
                 name: this.translate.instant('submenu.raspadinha'),
                 link: '/casino/c/wall/raspadinha',
                 icon_class: 'fa-solid fa-dice',
@@ -236,6 +263,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'roleta',
                 name: this.translate.instant('submenu.roleta'),
                 link: '/casino/c/wall/roleta',
                 icon_class: 'fa-solid fa-dice',
@@ -243,6 +271,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'mesa',
                 name: this.translate.instant('submenu.mesa'),
                 link: '/casino/c/wall/mesa',
                 icon_class: 'fa-solid fa-dice',
@@ -250,6 +279,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'bingo',
                 name: 'Bingo',
                 link: '/casino/c/wall/bingo',
                 icon_class: 'fa-solid fa-dice',
@@ -257,6 +287,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().salsa_cassino
             },
             {
+                id: 'live-cassino',
                 name: this.translate.instant('submenu.cassinoAoVivo'),
                 link: '/casino/c/wall/live',
                 icon_class: 'fa-solid fa-dice',
@@ -270,13 +301,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
 
         this.submenuItems = this.submenu.filter((item) => {
             return item.category === this.category && item.active;
-        });
-        this.atualizarSubmenuAtivo();
-    }
-
-    atualizarSubmenuAtivo() {
-        this.submenuAtivo = this.submenu.find(submenu => {
-            return submenu.link == this.router.url.split('?')[0];
         });
     }
 }

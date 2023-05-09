@@ -1,15 +1,17 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {SidebarService} from '../../services/utils/sidebar.service';
-import {ParametrosLocaisService} from '../../services/parametros-locais.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {AuthService} from '../../services/auth/auth.service';
-import {MenuFooterService} from '../../services/utils/menu-footer.service';
-import {MessageService} from '../../services/utils/message.service';
-import {config} from '../../config';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ValidarApostaWrapperComponent} from '../../../validar-aposta/wrapper/validar-aposta-wrapper.component';
-import {TranslateService} from '@ngx-translate/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ApostaComponent } from 'src/app/cambistas/aposta/aposta.component';
+import { ValidarApostaWrapperComponent } from '../../../validar-aposta/wrapper/validar-aposta-wrapper.component';
+import { config } from '../../config';
+import { AuthService } from '../../services/auth/auth.service';
+import { ParametrosLocaisService } from '../../services/parametros-locais.service';
+import { MenuFooterService } from '../../services/utils/menu-footer.service';
+import { MessageService } from '../../services/utils/message.service';
+import { SidebarService } from '../../services/utils/sidebar.service';
+import { ClienteApostasModalComponent, LoginModalComponent, PesquisarApostaModalComponent } from '../modals';
 
 @Component({
     selector: 'app-menu-footer',
@@ -18,6 +20,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class MenuFooterComponent implements OnInit {
     aoVivoHabilitado = false;
+    modoCambistaHabilitado = false;
     isCliente;
     isLoggedIn;
     quantidadeItens = 0;
@@ -47,7 +50,9 @@ export class MenuFooterComponent implements OnInit {
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
 
+        this.modoCambistaHabilitado = this.paramsService.getOpcoes().modo_cambista;
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
+
         if (this.mobileScreen) {
             this.sidebarNavHeight = window.innerHeight - 125;
 
@@ -110,13 +115,33 @@ export class MenuFooterComponent implements OnInit {
         this.sidebarService.toggle();
     }
 
-    toggleMenu() {
-        if (!this.campeonatosIsOpen && this.menuIsOpen || !this.isOpen) {
-            this.toggleSidebar();
+    toggleApostas() {
+        if (this.isLoggedIn) {
+            this.abrirApostas();
+        } else {
+            if (this.modoCambistaHabilitado) {
+                this.abrirPesquisarAposta();
+            } else {
+                this.abrirLogin();
+            }
         }
 
-        this.campeonatosIsOpen = false;
-        this.menuIsOpen = !this.menuIsOpen;
+    }
+
+    abrirLogin() {
+        this.modalService.open(LoginModalComponent, {windowClass: 'modal-fullscreen',});
+    }
+
+    abrirApostas() {
+        if (this.isCliente) {
+            this.modalService.open(ClienteApostasModalComponent);
+        } else {
+            this.modalService.open(ApostaComponent)
+        }
+    }
+
+    abrirPesquisarAposta() {
+        this.modalService.open(PesquisarApostaModalComponent);
     }
 
     toggleCampeonatos() {
@@ -124,14 +149,12 @@ export class MenuFooterComponent implements OnInit {
             this.toggleSidebar();
         }
 
-        this.menuIsOpen = false;
         this.campeonatosIsOpen = true;
     }
 
     closeMenu() {
         this.toggleSidebar();
 
-        this.menuIsOpen = false;
         this.campeonatosIsOpen = false;
     }
 

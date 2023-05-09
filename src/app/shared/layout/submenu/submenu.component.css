@@ -124,10 +124,6 @@
         font-size: 12px;
     }
 
-    .submenu:not(.centered) .subcategory a.active {
-        display: none;
-    }
-
     .fixed-submenu {
         white-space: nowrap;
     }
