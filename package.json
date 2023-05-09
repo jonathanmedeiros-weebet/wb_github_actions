@@ -282,7 +282,9 @@
         "nacionalbet.online": "gulp nacionalbet.online",
         "iasports.wee.bet": "gulp iasports.wee.bet",
         "betplusbr.com": "gulp betplusbr.com",
-        "betasso.io": "gulp betasso.io"
+        "betasso.io": "gulp betasso.io",
+        "paybett.com": "gulp paybett.com",
+        "ganhefacil.bet": "gulp ganhefacil.bet"
     },
     "private": true,
     "dependencies": {
