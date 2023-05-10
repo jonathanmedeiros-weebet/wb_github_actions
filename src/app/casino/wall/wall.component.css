@@ -312,7 +312,7 @@
 
     .internal .game-tile {
         max-width: calc(50% - 5px);
-        min-width: auto;
+        min-width: calc(50% - 5px);
         margin-right: 0;
         margin-top: 0;
     }
