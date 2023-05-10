@@ -29,11 +29,7 @@
 
         <div *ngIf="!showLoadingIndicator">
             <div class="sem-evento" *ngIf="campeonatos && !campeonatos.length">
-                {{'geral.nenhumEventoDisponivel' | translate}}!
-                <button *ngIf="exibirBtnProximaData()" type="button" (click)="proximaData()"
-                        class="btn btn-custom btn-sm">
-                    {{'geral.proximaData' | translate}}
-                </button>
+                {{'geral.nenhumEventoDisponivelNesteDia' | translate}}!
             </div>
 
             <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
