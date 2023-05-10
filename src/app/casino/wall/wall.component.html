@@ -225,7 +225,7 @@
                      (click)="scrollLeft('roleta')"  *ngIf="gamesRoleta.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
-                <div class="game-list game-list-inline">
+                <div class="game-list game-list-inline"  #scrollGames id="roleta-scroll" (scroll)="onScroll('roleta')">
                     <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
                         <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         <div class="logo-game-background"></div>
