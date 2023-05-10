@@ -304,7 +304,6 @@
 
     .game-tile {
         min-width: 200px;
-        max-width: auto;
         height: 145px;
         margin-top: 10px;
         margin-right: 10px;
