@@ -112,6 +112,27 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
         );
     }
 
+    cancelarBonus(rolloverId){
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Cancelar Bônus';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar seu bônus?';
+
+        this.modalRef.result.then(
+            () => {
+                this.financeiroService.cancelarBonus(rolloverId)
+                    .subscribe(
+                        response => {
+                            this.messageService.success('Bônus Cancelado');
+                            this.submit();
+                        },
+                        error => {
+                            this.handleError(error);
+                        }
+                    );
+            }
+        );
+    }
+
     abrirRegrasBonus() {
         this.modalService.open(RegrasBonusModalComponent, {
             centered: true,
