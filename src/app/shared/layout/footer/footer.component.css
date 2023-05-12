@@ -23,6 +23,13 @@ footer {
     margin-bottom: 15px;
 }
 
+.title-cartao {
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
 .image {
     max-width: 70px;
     max-height: 40px;
@@ -61,6 +68,7 @@ footer {
     color: var(--highlight);
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 footer {

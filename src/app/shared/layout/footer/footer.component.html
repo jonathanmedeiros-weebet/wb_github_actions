@@ -58,6 +58,26 @@
             </a>
         </div>
 
+        <div class="info mt-3">
+            <h4 class="title-cartao">Cartão de Aposta</h4>
+            <div class="links mt-0" *ngIf="cartaoApostaHabilitado">
+                <ng-container *ngIf="isLoggedIn && !isCliente">
+                    <a (click)="abrirCriarCartao()">
+                        Criar
+                    </a>
+                    <a (click)="abrirRecargaCartao()">
+                        Recarregar
+                    </a>
+                </ng-container>
+                <a (click)="abrirConsultarCartao()">
+                    Consultar
+                </a>
+                <a (click)="abrirSolicitarSaque()">
+                    Solicitar Saque
+                </a>                
+            </div>
+        </div>
+
         <div class="btn-group dropdown language-dropdown hide-desktop">
             <button class="btn dropdown-toggle" type="button" id="dropdownLanguage"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -7,6 +7,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
 
 @Component({
     selector: 'app-footer',
@@ -32,6 +33,8 @@ export class FooterComponent implements OnInit {
     isLoggedIn = false;
     linguagemSelecionada;
     esporteHabilitado: boolean;
+    cartaoApostaHabilitado: boolean;
+    isCliente;
     hasApk;
 
     constructor(
@@ -54,6 +57,7 @@ export class FooterComponent implements OnInit {
         this.hasPoliticaAml = this.paramsLocais.getOpcoes().has_politica_aml;
         this.rodape = this.paramsLocais.getOpcoes().rodape;
         this.esporteHabilitado = this.paramsLocais.getOpcoes().esporte;
+        this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
@@ -69,6 +73,14 @@ export class FooterComponent implements OnInit {
                     this.isLoggedIn = isLoggedIn;
                 }
             );
+
+        this.authService.cliente
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                isCliente => {
+                    this.isCliente = isCliente;
+                }
+            );
     }
 
     abrirResultados() {
@@ -82,5 +94,33 @@ export class FooterComponent implements OnInit {
         localStorage.setItem('linguagem', linguagem);
         this.linguagemSelecionada = linguagem;
         this.translate.use(linguagem);
+    }
+
+    abrirConsultarCartao() {
+        const modalConsultarCartao = this.modalService.open(PesquisarCartaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+    }
+
+    abrirSolicitarSaque() {
+        const modalConsultarCartao = this.modalService.open(SolicitarSaqueModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+    }
+
+    abrirRecargaCartao() {
+        const modalConsultarCartao = this.modalService.open(RecargaCartaoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
+    }
+
+    abrirCriarCartao() {
+        const modalConsultarCartao = this.modalService.open(CartaoCadastroModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true
+        });
     }
 }
