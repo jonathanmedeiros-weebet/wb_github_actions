@@ -284,7 +284,10 @@
         "betplusbr.com": "gulp betplusbr.com",
         "betasso.io": "gulp betasso.io",
         "paybett.com": "gulp paybett.com",
-        "ganhafacil.bet": "gulp ganhafacil.bet"
+        "ganhafacil.bet": "gulp ganhafacil.bet",
+        "gollbet.bet": "gulp gollbet.bet",
+        "futvale.net": "gulp futvale.net",
+        "chutedasorte.bet": "gulp chutedasorte.bet"
     },
     "private": true,
     "dependencies": {

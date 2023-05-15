@@ -2645,3 +2645,30 @@ gulp.task('ganhafacil.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gollbet.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "gollbet.bet",
+        banca: "GOLL BET",
+        styles: "",
+    });
+});
+
+gulp.task('futvale.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "futvale.net",
+        banca: "FUTVALE",
+        styles: "",
+    });
+});
+
+gulp.task('chutedasorte.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "chutedasorte.bet",
+        banca: "CHUTE DA SORTE",
+        styles: "",
+    });
+});
