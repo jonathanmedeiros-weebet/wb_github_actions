@@ -15,7 +15,7 @@
                                                     *ngFor="let numero of qtdNumerosLista">{{numero}}</option>
                                         </select>
                                         <a class="btn btn-custom btn-surpresinha" (click)="gerarSupresinha()">
-                                            <span *ngIf="!mobileScreen">{{'loteria.supresinha' | translate}}</span><i class="fa fa-refresh"></i>
+                                            <span *ngIf="!mobileScreen">{{'loteria.surpresinha' | translate}}</span><i class="fa fa-refresh"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                                     <div class="horario">{{item.sorteio.nome}}</div>
                                     <div class="detalhes">
                                         <div>
-                                            {{'bilhete.valor' | translate}}:
+                                            {{'loteria.valorDoPalpite' | translate}}:
                                             <span>{{item.valor | currency}}</span>
                                         </div>
                                         <div *ngIf="item.premio5">
