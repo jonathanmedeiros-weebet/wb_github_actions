@@ -282,10 +282,6 @@
     border-bottom: 3px solid var(--highlight);
 }
 
-.loading-template {
-
-}
-
 .loading-template .header {
     display: flex;
     align-items: center;
