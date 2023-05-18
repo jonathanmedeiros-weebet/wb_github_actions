@@ -143,6 +143,64 @@
     display: none !important;
 }
 
+.loading-listagem {
+    padding: 5px;
+}
+
+.loading-listagem .banner {
+    border-radius: 4px;
+    height: 240px;
+    margin-bottom: 10px;
+}
+
+.loading-listagem .ld-search {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.loading-listagem .ld-campeonato .header {
+    background: var(--league);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    gap: 10px;
+    padding: 0 20px;
+    margin-bottom: 5px;
+}
+
+.loading-listagem .ld-campeonato .ld-jogo {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.loading-listagem .ld-campeonato .ld-jogo .ld-data {
+    background: var(--game);
+    margin-right: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+.loading-listagem .ld-campeonato .ld-jogo .ld-times {
+    background: var(--game);
+    margin-right: 5px;
+    flex: 1;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loading-listagem .ld-campeonato .ld-jogo .ld-odds {
+    background: var(--game);
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+}
+
 @media only screen and (max-width: 1024px) {
     .wrap-sticky {
         padding: 0;

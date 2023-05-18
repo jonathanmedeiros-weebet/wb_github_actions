@@ -1,6 +1,89 @@
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="ssc-square banner"></div>
+    <div class="ld-search">
+        <div class="ssc-square" style="height: 40px;"></div>
+        <div class="ssc-square"style="height: 40px; width: 200px;"></div>
+    </div>
+    <div class="ld-campeonato">
+        <div class="header">
+           <div class="ssc-square" style="width: 12px; height: 12px;"></div>
+           <div class="ssc-square" style="width: 130px; height: 12px;"></div>
+        </div>
+        <div class="ld-jogo">
+            <div class="ld-data">
+                <div class="ssc-square" style="width: 50px; height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 50px; height: 12px;"></div>
+            </div>
+            <div class="ld-times">
+                <div class="ssc-square" style="width: 200px;height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 200px;height: 12px;"></div>
+            </div>
+            <div class="ld-odds">
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+            </div>
+        </div>
+        <div class="ld-jogo">
+            <div class="ld-data">
+                <div class="ssc-square" style="width: 50px; height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 50px; height: 12px;"></div>
+            </div>
+            <div class="ld-times">
+                <div class="ssc-square" style="width: 200px;height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 200px;height: 12px;"></div>
+            </div>
+            <div class="ld-odds">
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+            </div>
+        </div>
+        <div class="ld-jogo">
+            <div class="ld-data">
+                <div class="ssc-square" style="width: 50px; height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 50px; height: 12px;"></div>
+            </div>
+            <div class="ld-times">
+                <div class="ssc-square" style="width: 200px;height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 200px;height: 12px;"></div>
+            </div>
+            <div class="ld-odds">
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+            </div>
+        </div>
+        <div class="ld-jogo">
+            <div class="ld-data">
+                <div class="ssc-square" style="width: 50px; height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 50px; height: 12px;"></div>
+            </div>
+            <div class="ld-times">
+                <div class="ssc-square" style="width: 200px;height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 200px;height: 12px;"></div>
+            </div>
+            <div class="ld-odds">
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+            </div>
+        </div>
+        <div class="ld-jogo">
+            <div class="ld-data">
+                <div class="ssc-square" style="width: 50px; height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 50px; height: 12px;"></div>
+            </div>
+            <div class="ld-times">
+                <div class="ssc-square" style="width: 200px;height: 12px; margin-bottom: 5px;"></div>
+                <div class="ssc-square" style="width: 200px;height: 12px;"></div>
+            </div>
+            <div class="ld-odds">
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+                <div class="ssc-square" style="height: 45px; width: 150px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-    <app-banners [pagina]="esporte"></app-banners>
-    <div class="wrap-sticky">
+    <app-banners [pagina]="esporte" *ngIf="!showLoadingIndicator"></app-banners>
+    <div class="wrap-sticky" *ngIf="!showLoadingIndicator">
 
         <div class="filter" *ngIf="!campeonatoSelecionado">
             <div class="search-box" style="flex: 1">
@@ -23,8 +106,6 @@
                 <a class="tab" *ngIf="limiteDiasTabela > 3" [ngClass]="{'active': tabSelected == 'quatrodias', 'inactive': tabSelected != 'quatrodias'}" (click)="mudarData('+4')">{{ diaHojeMaisQuatroStr | titlecase  }}</a>
             </div>
         </div>
-
-        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
         <div *ngIf="!showLoadingIndicator">
             <div class="sem-evento" *ngIf="campeonatos && !campeonatos.length">
