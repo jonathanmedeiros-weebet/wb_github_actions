@@ -282,6 +282,67 @@
     border-bottom: 3px solid var(--highlight);
 }
 
+.loading-template {
+
+}
+
+.loading-template .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--game);
+    padding: 15px;
+}
+
+.loading-template .header .titles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.loading-template .banner {
+    height: 185px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.loading-template .tab-nav {
+    display:flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--game);
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.loading-template .ld-odds .item-odd {
+    margin-bottom: 5px;
+}
+
+.loading-template .ld-odds .item-odd .item-header {
+    background: var(--game);
+    padding: 15px;
+    margin-bottom: 2px;
+}
+
+.loading-template .ld-odds .item-opcoes {
+    display: flex;
+    background: var(--game);
+    padding: 10px;
+    gap: 5px;
+}
+
+.loading-template .cols {
+    display: flex;
+    gap: 5px;
+}
+
+.loading-template .cols .ld-odds {
+    width: 50%;
+}
+
 @media only screen and (max-width: 1279px) {
     .coluna-apostas-tipo {
         width: 100%;
