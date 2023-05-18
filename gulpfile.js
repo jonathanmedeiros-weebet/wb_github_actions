@@ -2628,3 +2628,12 @@ gulp.task('chutedasorte.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('treinamento.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "treinamento.wee.bet",
+        banca: "Treinamento Weebet",
+        styles: "",
+    });
+});

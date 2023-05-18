@@ -282,7 +282,8 @@
         "ganhafacil.bet": "gulp ganhafacil.bet",
         "gollbet.bet": "gulp gollbet.bet",
         "futvale.net": "gulp futvale.net",
-        "chutedasorte.bet": "gulp chutedasorte.bet"
+        "chutedasorte.bet": "gulp chutedasorte.bet",
+        "treinamento.wee.bet": "gulp treinamento.wee.bet"
     },
     "private": true,
     "dependencies": {
