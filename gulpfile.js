@@ -2637,3 +2637,12 @@ gulp.task('treinamento.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('casadopalpite.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "casadopalpite.com",
+        banca: "CASA DO PALPITE",
+        styles: "",
+    });
+});
