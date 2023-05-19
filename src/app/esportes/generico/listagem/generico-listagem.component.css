@@ -172,6 +172,7 @@
 .loading-listagem .ld-campeonato .ld-jogo {
     display: flex;
     margin-bottom: 5px;
+    overflow: hidden;
 }
 
 .loading-listagem .ld-campeonato .ld-jogo .ld-data {
