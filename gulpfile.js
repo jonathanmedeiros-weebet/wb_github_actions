@@ -1693,15 +1693,6 @@ gulp.task('apostasmax.com', function (done) {
     });
 });
 
-gulp.task('saoraimundobet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "saoraimundobet.wee.bet",
-        banca: "SÃO RAIMUNDO BET",
-        styles: "",
-    });
-});
-
 gulp.task('ritsbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2107,15 +2098,6 @@ gulp.task('teambets.net.br', function (done) {
         banca: "TEAM BETS",
         styles: "",
         scripts: "<!-- Google tag (gtag.js) --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-NCBRN97KTE'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-NCBRN97KTE'); </script>"
-    });
-});
-
-gulp.task('moneyville.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "moneyville.wee.bet",
-        banca: "MONEY VILLE",
-        styles: "",
     });
 });
 
