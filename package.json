@@ -282,7 +282,9 @@
         "futvale.net": "gulp futvale.net",
         "chutedasorte.bet": "gulp chutedasorte.bet",
         "treinamento.wee.bet": "gulp treinamento.wee.bet",
-        "casadopalpite.com": "gulp casadopalpite.com"
+        "casadopalpite.com": "gulp casadopalpite.com",
+        "arena-esportiva.com": "gulp arena-esportiva.com",
+        "betlance.wee.bet": "gulp betlance.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -2628,3 +2628,21 @@ gulp.task('casadopalpite.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('arena-esportiva.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "arena-esportiva.com",
+        banca: "ARENA ESPORTIVA",
+        styles: "",
+    });
+});
+
+gulp.task('betlance.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betlance.wee.bet",
+        banca: "BET LANCE",
+        styles: "",
+    });
+});
