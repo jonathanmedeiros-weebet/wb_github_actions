@@ -52,6 +52,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     cassinoFornecedoresTemp = [];
     cassinoFornecedoresFiltrados = [];
     totalJogos = 0;
+    isDemo = false;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -158,6 +159,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                     this.isCliente = isCliente;
                 }
             );
+
+        if (location.host === 'demo.wee.bet') {
+           this.isDemo = true;
+        }
 
         this.isMobile = window.innerWidth < 1025;
     }
