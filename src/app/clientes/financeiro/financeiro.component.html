@@ -1,93 +1,97 @@
 <div id="default-content">
-    <div class="mobile-modal-header" *ngIf="mobileScreen">
-        <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
-            <i class="fa fa-arrow-left"></i>
-        </a>
-        <div class="titulo">{{'geral.financeiro' | translate}}</div>
-        <div class="botao-direito"></div>
-    </div>
+    <app-spinner *ngIf="showLoading"></app-spinner>
 
-    <div class="internal-container-out">
-        <div class="content-header hide-mobile">
-            <h2>{{'geral.financeiro' | translate}}</h2>
+    <ng-container *ngIf="!showLoading">
+        <div class="mobile-modal-header" *ngIf="mobileScreen">
+            <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">{{'geral.financeiro' | translate}}</div>
+            <div class="botao-direito"></div>
         </div>
 
-        <div class="content-body">
-            <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                <div class="filtros">
-                    <select class="inverted-out form-control">
-                        <option value="semana_atual">{{'dias.semanaAtual' | translate}}</option>
-                        <option value="semana_anterior">{{'dias.semanaPassada' | translate}}</option>
-                    </select>
-                    <select class="inverted-out form-control" formControlName="tipo">
-                        <option value="">{{'geral.todos' | translate}}</option>
-                        <option value="C">{{'geral.credito' | translate}}</option>
-                        <option value="D">{{'geral.debito' | translate}}</option>
-                    </select>
-                    <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
-                </div>
-            </form>
-        </div>
-
-        <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
-            {{'financeiro.nenhumaMovimentacaoNoPeriodo' | translate}}
-        </div>
-
-        <div class="table-responsive" *ngIf="movimentacoesFinanceiras.length">
-            <div>
-                <p>
-                    <b>{{'financeiro.qtdMovimentacoesNoPeriodo' | translate:{'de': dataInicial, 'ate': dataFinal} }}
-                        :</b> {{totalMovimentacoes}}
-                </p>
+        <div class="internal-container-out">
+            <div class="content-header hide-mobile">
+                <h2>{{'geral.financeiro' | translate}}</h2>
             </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th style="width: 70%">{{'financeiro.natureza' | translate}}</th>
-                    <th class="custom-td">{{'geral.valor' | translate}}</th>
-                    <th class="custom-td">{{'geral.saldo' | translate}}</th>
-                </tr>
-                </thead>
-                <tbody *ngIf="!showLoading">
-                <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
+
+            <div class="content-body">
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                    <div class="filtros">
+                        <select class="inverted-out form-control">
+                            <option value="semana_atual">{{'dias.semanaAtual' | translate}}</option>
+                            <option value="semana_anterior">{{'dias.semanaPassada' | translate}}</option>
+                        </select>
+                        <select class="inverted-out form-control" formControlName="tipo">
+                            <option value="">{{'geral.todos' | translate}}</option>
+                            <option value="C">{{'geral.credito' | translate}}</option>
+                            <option value="D">{{'geral.debito' | translate}}</option>
+                        </select>
+                        <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+
+            <div *ngIf="!movimentacoesFinanceiras.length" class="alert alert-warning text-center" role="alert">
+                {{'financeiro.nenhumaMovimentacaoNoPeriodo' | translate}}
+            </div>
+
+            <div class="table-responsive" *ngIf="movimentacoesFinanceiras.length">
+                <div>
+                    <p>
+                        <b>{{'financeiro.qtdMovimentacoesNoPeriodo' | translate:{'de': dataInicial, 'ate': dataFinal} }}
+                            :</b> {{totalMovimentacoes}}
+                    </p>
+                </div>
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>
-                            <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-sort-up"
-                               *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
-                            <ng-template #iconeDebito>
-                                <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-sort-down"></i>
-                            </ng-template>
-                            {{movimentacao.natureza | formatarNatureza}} <br>
-                            <span style="margin-left: 18px">{{'financeiro.realizadoEm' | translate:{'data': movimentacao.data} }}</span>
-                            <span
-                                *ngIf="movimentacao.saque && movimentacao.saque.status === 'PENDENTE'">
-                                ({{'financeiro.emProcessamento' | translate}})
-                            </span>
-                            <span
-                                *ngIf="movimentacao.saque && movimentacao.saque.status === 'PAGO'">
-                                ({{'financeiro.processado' | translate}})
-                            </span>
-                            <span
-                                *ngIf="movimentacao.saque &&
-                                            movimentacao.natureza === 'SAQUE_CLIENTE' &&
-                                            movimentacao.saque.status === 'REPROVADO'">
-                                ({{'financeiro.cancelado' | translate}})
-                            </span>
-                            <span
-                                *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
-                        </td>
-                        <td class="custom-td"
-                            style="padding-right: 10px;">{{movimentacao.valor | currency}}
-                            <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
-                        </td>
-                        <td class="custom-td">
-                            {{movimentacao.saldo | currency}}
-                            <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
-                        </td>
+                        <th style="width: 70%">{{'financeiro.natureza' | translate}}</th>
+                        <th class="custom-td">{{'geral.valor' | translate}}</th>
+                        <th class="custom-td">{{'geral.saldo' | translate}}</th>
                     </tr>
-                </ng-container>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody *ngIf="!showLoading">
+                    <ng-container *ngFor="let movimentacao of movimentacoesFinanceiras">
+                        <tr>
+                            <td>
+                                <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-sort-up"
+                                *ngIf="movimentacao.tipo === 'C'; else iconeDebito"></i>
+                                <ng-template #iconeDebito>
+                                    <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-sort-down"></i>
+                                </ng-template>
+                                {{movimentacao.natureza | formatarNatureza}} <br>
+                                <span style="margin-left: 18px">{{'financeiro.realizadoEm' | translate:{'data': movimentacao.data} }}</span>
+                                <span
+                                    *ngIf="movimentacao.saque && movimentacao.saque.status === 'PENDENTE'">
+                                    ({{'financeiro.emProcessamento' | translate}})
+                                </span>
+                                <span
+                                    *ngIf="movimentacao.saque && movimentacao.saque.status === 'PAGO'">
+                                    ({{'financeiro.processado' | translate}})
+                                </span>
+                                <span
+                                    *ngIf="movimentacao.saque &&
+                                                movimentacao.natureza === 'SAQUE_CLIENTE' &&
+                                                movimentacao.saque.status === 'REPROVADO'">
+                                    ({{'financeiro.cancelado' | translate}})
+                                </span>
+                                <span
+                                    *ngIf="movimentacao.deposito"> - {{movimentacao.deposito.metodo | uppercase}}</span>
+                            </td>
+                            <td class="custom-td"
+                                style="padding-right: 10px;">{{movimentacao.valor | currency}}
+                                <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
+                            </td>
+                            <td class="custom-td">
+                                {{movimentacao.saldo | currency}}
+                                <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </ng-container>
 </div>

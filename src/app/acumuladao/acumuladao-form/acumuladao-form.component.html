@@ -1,5 +1,73 @@
+
 <div class="content">
-    <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+    <div class="loading-template" *ngIf="showLoadingIndicator">
+        <div class="ssc-square title" style="width: 230px;"></div>
+        <div class="ssc-square" style="width: 170px"></div>
+        <div class="options">
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+        </div>
+        <div class="eventos">
+            <div class="evento">
+                <div class="dados">
+                    <div class="ssc-square" style="width: 50px; margin-bottom: 10px;"></div>
+                    <div class="ssc-square" style="width: 50px"></div>
+                </div>
+                <div class="nome-placar">
+                    <div class="ssc-square time-a-nome"></div>
+                    <div class="placar">
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                    </div>
+                    <div class="ssc-square time-b-nome"></div>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="dados">
+                    <div class="ssc-square" style="width: 50px; margin-bottom: 10px;"></div>
+                    <div class="ssc-square" style="width: 50px"></div>
+                </div>
+                <div class="nome-placar">
+                    <div class="ssc-square time-a-nome"></div>
+                    <div class="placar">
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                    </div>
+                    <div class="ssc-square time-b-nome"></div>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="dados">
+                    <div class="ssc-square" style="width: 50px; margin-bottom: 10px;"></div>
+                    <div class="ssc-square" style="width: 50px"></div>
+                </div>
+                <div class="nome-placar">
+                    <div class="ssc-square time-a-nome"></div>
+                    <div class="placar">
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                    </div>
+                    <div class="ssc-square time-b-nome"></div>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="dados">
+                    <div class="ssc-square" style="width: 50px; margin-bottom: 10px;"></div>
+                    <div class="ssc-square" style="width: 50px"></div>
+                </div>
+                <div class="nome-placar">
+                    <div class="ssc-square time-a-nome"></div>
+                    <div class="placar">
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                        <div class="ssc-square" style="width: 50px; height: 40px;"></div>
+                    </div>
+                    <div class="ssc-square time-b-nome"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="acumuladao-form" *ngIf="!showLoadingIndicator">
         <div class="indentificacao">

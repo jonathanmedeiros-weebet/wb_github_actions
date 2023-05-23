@@ -1,7 +1,114 @@
+<div class="loading-template" *ngIf="showLoadingIndicator">
+    <div class="header">
+        <div class="ssc-square" style="height: 30px; width: 30px;"></div>
+        <div class="titles">
+            <div class="ssc-square" style="width: 200px; height: 13px;"></div>
+            <div class="ssc-square" style="width: 170px; height: 13px;"></div>
+        </div>
+    </div>
+
+    <div style="padding: 5px">
+        <div class="ssc-square banner"></div>
+
+        <div class="tab-nav">
+            <div class="ssc-square" style="width: 100px; height: 13px;"></div>
+            <div class="ssc-square" style="width: 100px; height: 13px;"></div>
+            <div class="ssc-square" style="width: 100px; height: 13px;"></div>
+            <div class="ssc-square" style="width: 100px; height: 13px;"></div>
+        </div>
+
+        <div class="cols">
+            <div class="ld-odds">
+                <div class="item-odd">
+                    <div class="item-header">
+                        <div class="ssc-square" style="width: 150px; height: 13px;"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                </div>
+                <div class="item-odd">
+                    <div class="item-header">
+                        <div class="ssc-square" style="width: 150px; height: 13px;"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                </div>
+                <div class="item-odd">
+                    <div class="item-header">
+                        <div class="ssc-square" style="width: 150px; height: 13px;"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ld-odds" *ngIf="!isMobile">
+                <div class="item-odd">
+                    <div class="item-header">
+                        <div class="ssc-square" style="width: 150px; height: 13px;"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                </div>
+                <div class="item-odd">
+                    <div class="item-header">
+                        <div class="ssc-square" style="width: 150px; height: 13px;"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                    <div class="item-opcoes">
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                        <div class="ssc-square" style="height: 33px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="jogo-container">
     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-    <div class="top-bar">
+    <div class="top-bar" [hidden]="showLoadingIndicator">
         <div class="top-bar-back" (click)="back()">
             <i class="fa fa-arrow-left"></i>
         </div>

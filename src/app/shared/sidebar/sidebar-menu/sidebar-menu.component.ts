@@ -34,9 +34,9 @@ export class SidebarMenuComponent implements OnInit {
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     cartaoApostaHabilitado;
     unsub$ = new Subject();
-    linguagemSelecionada;
     whatsapp;
     modoCambista = false;
+    hasApk;
 
     constructor(
         private auth: AuthService,
@@ -54,6 +54,7 @@ export class SidebarMenuComponent implements OnInit {
         this.isMobileScreen = window.innerWidth < 1025;
         this.cartaoApostaHabilitado = this.paramsService.getOpcoes().cartao_aposta;
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
+        this.hasApk = this.paramsService.getOpcoes().has_aplicativo;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
@@ -76,9 +77,6 @@ export class SidebarMenuComponent implements OnInit {
                     this.cd.detectChanges();
                 }
             );
-
-        this.linguagemSelecionada = this.translate.currentLang;
-        this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
 
         if (this.paramsService.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
@@ -160,11 +158,5 @@ export class SidebarMenuComponent implements OnInit {
 
     abrirSolicitacaoSaqueCartao() {
         this.modalService.open(SolicitarSaqueModalComponent);
-    }
-
-    useLanguage(language: string): void {
-        localStorage.setItem('linguagem', language);
-        this.linguagemSelecionada = language;
-        this.translate.use(language);
     }
 }

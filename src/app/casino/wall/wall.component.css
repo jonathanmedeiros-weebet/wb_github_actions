@@ -144,6 +144,18 @@
     margin-bottom: 20px;
 }
 
+.game-tile .game-button-lock {
+    /* color: var(--header);
+    background-color: var(--highlight); */
+    width: 60%;
+    height: 35%;
+    font-size: 50px;
+}
+
+.gameBloqueado{
+    color: var(--highlight);
+}
+
 .game-tile:hover .game-tile-buttons {
     display: flex;
     border-radius: 5px;
@@ -196,6 +208,90 @@
     }
 }
 
+.filter {
+    display: flex;
+    padding-top: 30px;
+    padding-right: 120px;
+    justify-content: end;
+    margin: 0 auto;
+    max-width: 1910px;
+    width: 100%;
+}
+
+.filter .tabs {
+    background: var(--game);
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.filter .tabs .tab {
+    color: var(--foreground-game);
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    border-bottom: 3px solid transparent;
+}
+
+.filter .tabs .tab.active {
+    border-color: var(--highlight);
+    font-weight: 600;
+}
+
+.search-box {
+    position: relative;
+    margin-left: 10px;
+    width: 300px;
+}
+
+.search-box input {
+    padding-left: 30px;
+}
+
+.search-box i.fa-search {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    color: var(--foreground-inputs-odds);
+}
+
+.search-box i.fa-close {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    right: 10px;
+}
+
+.logo-game{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    top: 0px;
+    right: 10px;
+    backdrop-filter: blur(10px);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.logo-game-background{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 0px;
+    right:10px;
+    background: white;
+    opacity: 20%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 @media only screen and (max-width: 1024px) {
     .wall-container {
         height: -webkit-fill-available;
@@ -228,7 +324,7 @@
 
     .internal .game-tile {
         max-width: calc(50% - 5px);
-        min-width: auto;
+        min-width: calc(50% - 5px);
         margin-right: 0;
         margin-top: 0;
     }
@@ -253,7 +349,7 @@
         top: calc(50% - 15px);
         left: 0px;
     }
-    
+
     .scroll-right {
         top: calc(50% - 15px);
         right: 0px;
@@ -268,7 +364,7 @@
         border-radius: 25px;
         height: 40px;
         margin-right: 1%;
-    }    
+    }
     .enabled-scroll-button:hover {
         background-color: var(--highlight);
     }
@@ -278,7 +374,7 @@
         color: var(--background);
         cursor: auto;
         transition: 500ms;
-    } 
+    }
     .scroll-left {
         border-radius: 25px;
         height: 40px;
@@ -290,8 +386,93 @@
         height: 40px;
         margin-right: 1%;
     }
-    
-    
+
+    .filter{
+        justify-content: unset;
+        padding-right: 0;
+        width: 100%;
+    }
+    h4{
+        padding-top: 5px;
+    }
+
+    .search-box-mobile{
+        width: 20%;
+        font-size: 23px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-box{
+        width: 80%;
+    }
+
+    .search-box i.fa-search {
+        top: 14px;
+        font-size: medium;
+    }
+
+    .search-box i.fa-close {
+        top: 14px;
+        font-size: medium;
+    }
+
+    .fornecedores-menu{
+        margin: 20px;
+    }
+
+    .fornecedores-menu ul{
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .fornecedores-menu li{
+        display: flex;
+        justify-content: left;
+        margin-bottom: 15px;
+    }
+
+    .fornecedores-menu a{
+        text-decoration: none;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+
+    .fornecedor span{
+        font-size: 14px;
+        color: var(--foreground-header);
+    }
+
+    .fornecedor-imagem{
+        width: 25px;
+        height: 25px;
+    }
+
+    .fornecedor-imagem img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .fornecedor-nome{
+        margin-left: 10px;
+        font-size: large;
+    }
+
+    .fornecedor-qtd {
+        width: 10%;
+        display: flex;
+        justify-content: end;
+        opacity: 50%;
+    }
+
+    .search-fornecedores{
+        margin: 20px !important;
+        width: auto !important;
+    }
+
+
 }
 
 @media only screen and (min-width: 1025px) {
@@ -328,9 +509,16 @@
     #destaques-right{
         display: none;
     }
-    
+
     #destaques-left{
         display: none;
+    }
+
+    .content-modal-fornecedores{
+        display: flex;
+        flex-direction: column;
+        margin: 25px;
+        text-align: center;
     }
 }
 

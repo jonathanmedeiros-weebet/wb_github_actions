@@ -9,7 +9,6 @@
         </a>
     </div>
     <app-sidebar-nav *ngIf="campeonatosIsOpen" [height]="sidebarNavHeight"></app-sidebar-nav>
-    <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>
 </div>
 <div id="bottom-bar" [hidden]="hidden">
     <div class="bottom-bar-button" *ngIf="!['acumuladao', 'quininha', 'seninha'].includes(contexto)">
@@ -40,9 +39,9 @@
             <i class="fa-solid fa-check"></i> {{'geral.validacao' | translate}}
         </a>
     </div>
-    <div class="bottom-bar-button" [ngClass]="{'active': menuIsOpen}">
-        <a class="" (click)="toggleMenu()">
-            <i class="fa-solid fa-ellipsis-vertical"></i> {{'geral.menu' | translate}}
+    <div class="bottom-bar-button">
+        <a class="" (click)="toggleApostas()">
+            <i class="ri ri-file-list-3-line"></i> {{'geral.apostas' | translate}}
         </a>
     </div>
 </div>

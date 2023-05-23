@@ -62,6 +62,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? Object.assign([], this.parametrosLocais.odds_principais) : null;
     }
 
+    getLigasPopulares() {
+        return this.parametrosLocais ? Object.assign([], this.parametrosLocais.ligas_populares) : null;
+    }
+
     getTiposAposta() {
         let result = null;
         const isLoggedIn = !!localStorage.getItem('token');

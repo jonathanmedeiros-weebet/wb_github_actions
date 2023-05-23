@@ -14,6 +14,7 @@ import * as moment from 'moment';
 export class AcumuladaoListagemComponent implements OnInit {
     acumuladoes: Acumuladao[];
     isMobile = false;
+    isLoading = true;
 
     constructor(
         private router: Router,
@@ -30,6 +31,7 @@ export class AcumuladaoListagemComponent implements OnInit {
             .subscribe(
                 acumuladoes => {
                     this.acumuladoes = acumuladoes;
+                    this.isLoading = false;
                 },
                 error => this.handleError(error)
             );

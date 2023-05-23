@@ -1,8 +1,68 @@
-<div class="content-list">
-    <app-banners pagina="desafio"></app-banners>
-    <div class="wrap-sticky">
-        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="ssc-square banner"></div>
 
+    <div class="desafio-loading">
+        <div class="titulo">
+            <div class="ssc-square" style="height: 16px; width: 230px;"></div>
+        </div>
+        <div class="info">
+            <div class="header">
+                <div class="data">
+                   <div class="ssc-square" style="height: 9px; width: 50px; margin-bottom: 5px;"></div>
+                   <div class="ssc-square" style="height: 9px; width: 50px;"></div>
+                </div>
+                <div class="ssc-square" style="height: 12px; width: 300px;"></div>
+            </div>
+            <div class="opcoes">
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="desafio-loading">
+        <div class="titulo">
+            <div class="ssc-square" style="height: 16px; width: 230px;"></div>
+        </div>
+        <div class="info">
+            <div class="header">
+                <div class="data">
+                   <div class="ssc-square" style="height: 9px; width: 50px; margin-bottom: 5px;"></div>
+                   <div class="ssc-square" style="height: 9px; width: 50px;"></div>
+                </div>
+                <div class="ssc-square" style="height: 12px; width: 300px;"></div>
+            </div>
+            <div class="opcoes">
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="desafio-loading">
+        <div class="titulo">
+            <div class="ssc-square" style="height: 16px; width: 230px;"></div>
+        </div>
+        <div class="info">
+            <div class="header">
+                <div class="data">
+                   <div class="ssc-square" style="height: 9px; width: 50px; margin-bottom: 5px;"></div>
+                   <div class="ssc-square" style="height: 9px; width: 50px;"></div>
+                </div>
+                <div class="ssc-square" style="height: 12px; width: 300px;"></div>
+            </div>
+            <div class="opcoes">
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+                <div class="ssc-square" style="height: 44px; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-list">
+    <app-banners pagina="desafio" *ngIf="!showLoadingIndicator"></app-banners>
+    <div class="wrap-sticky">
         <div class="sem-evento" *ngIf="categorias && !categorias.length">
             {{'geral.nenhumEventoDisponivel' | translate}}!
         </div>

@@ -12,7 +12,7 @@
 </ng-template>
 
 <div class="header">
-    <div class="side">
+    <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
         </a>
@@ -236,11 +236,10 @@
                                 <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
-                            <div *ngIf="posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
+                            <div style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
-                            <div class="saldos-item"
-                                *ngIf="posicaoFinanceira.bonus != 0">
+                            <div class="saldos-item">
                                 <span class="">{{'geral.bonus' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
                             </div>
@@ -325,7 +324,7 @@
                             </a>
                             <a (click)="abrirRollovers()">
                                 <span>
-                                    <i class="fa fa-solid fa-dollar"></i>
+                                    <i class="fa fa-solid fa-gift"></i>
                                 </span>
                                 {{'geral.rollover' | translate}}
                                 <span class="arrow-nav">
@@ -381,11 +380,11 @@
                                 <span class="">{{'geral.saldo' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
                             </div>
-                            <div  *ngIf="isCliente && posicaoFinanceira.bonus != 0" style="align-items: center; justify-content: center; display: flex;">
+                            <div  *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
                             <div class="saldos-item"
-                                *ngIf="isCliente && posicaoFinanceira.bonus != 0">
+                                *ngIf="isCliente">
                                 <span class="">{{'geral.bonus' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
                             </div>
@@ -426,7 +425,7 @@
                             <a class="dropdown-btn-filled" [routerLink]="['clientes/rollover']"
                             routerLinkActive="router-link-active"
                             *ngIf="isCliente">
-                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                <i class="fa fa-solid fa-gift mb-2"></i>
                                 {{'geral.bonus' | translate}}
                             </a>
 

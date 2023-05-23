@@ -32,7 +32,7 @@
             {{'geral.config' | translate}}
         </a>
 
-        <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="!isAppMobile && !trevoOne">
+        <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !isAppMobile && !trevoOne">
             <i class="fa fa-solid fa-download"></i>
             {{'geral.downloadApp' | translate}}
         </a>
@@ -55,22 +55,4 @@
     <a class="btn btn-custom2 btn-block" (click)="abrirLogin()">{{'geral.entrar' | translate}}</a>
     <label class="mt-3">{{'geral.aindaNaoPossui' | translate}}</label>
     <a class="btn btn-custom btn-block" (click)="abrirCadastro()">{{'geral.registreSe' | translate}}</a>
-</div>
-
-<div class="btn-group dropdown language-dropdown hide-desktop">
-    <button class="btn dropdown-toggle" type="button" id="dropdownLanguage"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
-        {{'geral.selecionarIdioma' | translate}}
-    </button>
-    <div class="dropdown-menu language-dropdown-menu" aria-labelledby="dropdownLanguage">
-        <a class="m-2 p-0 dropdown-item" (click)="useLanguage('pt')">
-            <span class="flag-icon flag-icon-br flag-icon-squared"></span>
-            {{'geral.portugues' | translate}}
-        </a>
-        <a class="m-2 p-0 dropdown-item" (click)="useLanguage('en')">
-            <span class="flag-icon flag-icon-us flag-icon-squared"></span>
-            {{'geral.ingles' | translate}}
-        </a>
-    </div>
 </div>
