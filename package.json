@@ -284,7 +284,8 @@
         "treinamento.wee.bet": "gulp treinamento.wee.bet",
         "casadopalpite.com": "gulp casadopalpite.com",
         "arena-esportiva.com": "gulp arena-esportiva.com",
-        "betlance.wee.bet": "gulp betlance.wee.bet"
+        "betlance.wee.bet": "gulp betlance.wee.bet",
+        "faithbets.bet": "gulp faithbets.bet"
     },
     "private": true,
     "dependencies": {
