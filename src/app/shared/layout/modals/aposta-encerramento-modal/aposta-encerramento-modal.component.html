@@ -52,7 +52,7 @@
     </div>
     <p *ngIf="falhaSimulacao">
         <ngb-alert [dismissible]="false" type='danger'>
-            <strong>O Item {{falhaSimulacao}} não pode ser encerrado, Remova-o da lista de encerramento.</strong>
+            <strong>O Item {{falhaSimulacao}} não pode ser encerrado.</strong>
         </ngb-alert>
     </p>
     <hr>
@@ -106,13 +106,13 @@
                             <p class="horario">
                                 {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                             </p>
-                            <p class="nome {{itemSelecionado == item.id || item.encerrado ? 'encerrado' : ''}}"
+                            <p class="nome {{itemSelecionado && !item.resultado ? 'encerrado' : ''}}"
                                [ngClass]="resultadoClass(item)">
                                 {{item.time_a_nome}}
                                 {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                 {{item.time_b_nome}}
                             </p>
-                            <p class="cotacao {{itemSelecionado == item.id || item.encerrado ? 'encerrado' : ''}}"
+                            <p class="cotacao {{itemSelecionado && !item.resultado ? 'encerrado' : ''}}"
                                [ngClass]="resultadoClass(item)">
                                 {{item.categoria_nome}}:
                                 {{item.odd_nome}}
@@ -125,10 +125,6 @@
                             </p>
                         </div>
                         <div style="margin-left: 10px;">
-                            <button class="btn btn-custom"
-                                *ngIf="podeEncerrar(item, aposta, itemSelecionado)"
-                                (click)="addEncerramento(item, aposta.version)">Encerrar
-                            </button>
                             <span *ngIf="item.encerrado">encerrado</span>
                         </div>
                     </div>
@@ -146,13 +142,20 @@
         </div>
     </div>
 </div>
-<div class="rodape" *ngIf="itemSelecionado || process">
-    <button class="btn btn-outline-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado" (click)="descartar()">
+<div class="rodape">
+    <button class="btn btn-custom btn-block" style="border-radius: 0" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
+        {{ simulando ? 'Calculando Nova Cotação...' : 'Encerrar Aposta' }}
+    </button>
+    <button class="btn btn-outline-custom {{!falhaSimulacao ? 'w-50' : 'btn-block'}}" style="border-radius: 0" *ngIf="itemSelecionado && !simulando" (click)="descartar()">
         Descartar
     </button>
-    <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="!falhaSimulacao && !process"
+    <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
             (click)="confirmarEncerramento()">
         Confirmar
+    </button>
+    <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && encerrando;">
+        Encerrando...
+        <i class="fa fa-spinner fa-spin"></i>
     </button>
     <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && process;">
         {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>

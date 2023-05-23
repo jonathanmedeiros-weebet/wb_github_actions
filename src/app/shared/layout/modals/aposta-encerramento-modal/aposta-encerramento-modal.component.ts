@@ -16,6 +16,7 @@ import { ApostaEsportivaService } from 'src/app/shared/services/aposta-esportiva
 import { switchMap, takeUntil, delay, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CompatilhamentoBilheteModal } from '../compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
+import { JogoService } from 'src/app/shared/services/aposta-esportiva/jogo.service';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -41,6 +42,8 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     cambistaPaga;
     apostaVersion;
     showLoading = false;
+    simulando = false;
+    encerrando = false;
     isCliente;
     isMobile;
     urlBilheteAoVivo ;
@@ -63,6 +66,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         private utilsService: UtilsService,
         private printService: PrintService,
         private auth: AuthService,
+        private jogoService: JogoService,
         private modalService: NgbModal
     ) {
     }
@@ -123,14 +127,11 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    addEncerramento(item, apostaVersion) {
-        // if (!this.jogoComecou(item) || (this.jogoComecou(item) && item.ao_vivo)) {
-            this.itemSelecionadoAoVivo = item.ao_vivo;
-            this.itemSelecionado = item.id;
-            this.apostaVersion = apostaVersion;
-            this.apostaAoVivo = this.itemSelecionadoAoVivo;
-            this.simularEncerramento(this.itemSelecionado);
-        // }
+    encerrarAposta(aposta) {
+        this.simulando = true;
+        this.itemSelecionado = aposta;
+        this.apostaVersion = aposta.version;
+        this.simularEncerramento(aposta);
     }
 
     jogoComecou(item) {
@@ -144,11 +145,11 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         return false;
     }
 
-    simularEncerramento(itensSimulacao) {
-        this.showLoading = true;
-        this.apostaService.simularEncerramento(itensSimulacao)
+    simularEncerramento(aposta) {
+        this.apostaService.simularEncerramento(aposta.id)
             .subscribe(
                 simulacao => {
+                    this.simulando = false;
                     this.novaCotacao = simulacao.nova_cotacao;
                     this.novaPossibilidadeGanho = simulacao.nova_possibilidade_ganho;
                     this.falhaSimulacao = simulacao.falha_simulacao;
@@ -160,9 +161,10 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         this.showLoading = false;
     }
 
-    confirmarEncerramento() {
+    async confirmarEncerramento() {
         if (this.itemSelecionado != null) {
-            if(this.itemSelecionadoAoVivo) {
+            const aovivo = await this.temAoVivo(this.itemSelecionado);
+            if(aovivo) {
                 this.setDelay();
 
                 let token_aovivo = null;
@@ -170,7 +172,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                 const version = this.apostaVersion;
 
                 this.process = true;
-                this.apostaEsportivaService.tokenAoVivoEncerramento(this.itemSelecionado)
+                this.apostaEsportivaService.tokenAoVivoEncerramento(this.itemSelecionado.id)
                     .pipe(
                         tap(token => {
                             this.refreshIntervalId = setInterval(() => {
@@ -183,7 +185,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                         }),
                         delay(this.delayReal * 1000),
                         switchMap(() => {
-                            return this.apostaService.encerrarItem({token: token_aovivo, itemId: item, version: version});
+                            return this.apostaService.encerrarItem({token: token_aovivo, itemId: item.id, version: version});
                         }),
                         takeUntil(this.unsub$)
                     )
@@ -202,12 +204,14 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                         }
                     )
             } else {
-                this.apostaService.encerrarItem({ itemId: this.itemSelecionado, version: this.apostaVersion })
+                this.encerrando = true;
+                this.apostaService.encerrarItem({ itemId: this.itemSelecionado.id, version: this.apostaVersion })
                     .subscribe(
                         result => {
                             this.messageService.success(result, 'Sucesso');
                             this.atualizarAposta(this.aposta);
                             this.descartar();
+                            this.encerrando = false;
                         },
                         error => {
                             this.novaCotacao = null;
@@ -219,6 +223,26 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         }
         this.itemSelecionado = null;
         this.apostaVersion = null;
+    }
+
+    async temAoVivo(aposta: any): Promise<boolean> {
+        let result = false;
+
+        const found = aposta.itens.find((item: any) => item.ao_vivo);
+        if(found) {
+            return true;
+        }
+
+        for (let item of aposta.itens) {
+            if(!item.resultado) {
+                const retorno = await this.jogoService.getJogo(item.jogo_api_id).toPromise();
+                if(retorno.ao_vivo) {
+                    result = true;
+                }
+            }
+        }
+
+        return result;
     }
 
     atualizarAposta(aposta) {
@@ -340,12 +364,9 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    podeEncerrar(item, aposta, itemSelecionado) {
-        if(itemSelecionado != null) {
-            return false;
-        }
-
-        if(item.removido || item.resultado != null || item.encerrado) {
+    podeEncerrar(aposta) {
+        const found = aposta.itens.find((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
+        if(!found) {
             return false;
         }
 
@@ -353,11 +374,15 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             return false;
         }
 
-        // if(this.jogoComecou(item) && !item.ao_vivo) {
-        //     return false;
-        // }
-
         if(!this.quantidadeMinimaBilhete()) {
+            return false;
+        }
+
+        if(this.encerrando) {
+            return false;
+        }
+
+        if(this.itemSelecionado && !this.simulando) {
             return false;
         }
 

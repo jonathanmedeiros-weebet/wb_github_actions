@@ -16,6 +16,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CartaoComponent } from './cartao/cartao.component';
 import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
 import {TranslateModule} from '@ngx-translate/core';
+import { JogoService } from '../shared/services/aposta-esportiva/jogo.service';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import {TranslateModule} from '@ngx-translate/core';
         MessageService,
         DesafioApostaService,
         AcumuladaoService,
-        NgbActiveModal
+        NgbActiveModal,
+        JogoService
     ]
 })
 export class CambistasModule {
