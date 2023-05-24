@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {ClientesRoutingModule} from './clientes-routing.module';
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { JogoService } from '../shared/services/aposta-esportiva/jogo.service';
 
 @NgModule({
     declarations: [],
@@ -13,7 +14,8 @@ import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
         NgbModule
     ],
     providers: [
-        NgbActiveModal
+        NgbActiveModal,
+        JogoService
     ]
 })
 export class ClientesModule {
