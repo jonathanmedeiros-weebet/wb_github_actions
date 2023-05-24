@@ -53,7 +53,7 @@
         </div>
         <p *ngIf="falhaSimulacao">
             <ngb-alert [dismissible]="false" type='danger'>
-                <strong>O Item {{falhaSimulacao}} não pode ser encerrado.</strong>
+                <strong>Essa aposta não pode ser encerrada.</strong>
             </ngb-alert>
         </p>
         <hr>
@@ -64,9 +64,9 @@
             </p>
             <p class="aposta">
                 COTAÇÃO: <span style="float: right">
-                    <span class="{{!novaCotacao ? '' : 'cancelado'}}">
+                    <span class="{{!novaCotacao || falhaSimulacao ? '' : 'cancelado'}}">
                         {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}</span>
-                    <span class="dados-simulacao"> {{novaCotacao | number:'1.0-3' }}</span>
+                    <span class="dados-simulacao" *ngIf="!falhaSimulacao"> {{novaCotacao | number:'1.0-3' }}</span>
                 </span>
             </p>
             <p class="aposta">
@@ -75,9 +75,9 @@
             <p class="ganho">
                 POSSÍVEL RETORNO:
                 <span style="float: right">
-                    <span class="{{!novaPossibilidadeGanho ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho |
+                    <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho |
                         currency}}</span>
-                    <span class="dados-simulacao"> {{novaPossibilidadeGanho | currency}}</span>
+                    <span class="dados-simulacao" *ngIf="!falhaSimulacao"> {{novaPossibilidadeGanho | currency}}</span>
                 </span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
@@ -87,7 +87,7 @@
                 CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
         </div>
-        <div class="rodape dados-simulacao" *ngIf="novaCotacao && novaPossibilidadeGanho">
+        <div class="rodape dados-simulacao" *ngIf="novaCotacao && novaPossibilidadeGanho && !falhaSimulacao">
             Atenção: Confira como ficarão os novos valores <br>
             Essa operação não poderá ser desfeita
         </div>
@@ -106,13 +106,13 @@
                             <p class="horario">
                                 {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                             </p>
-                            <p class="nome {{itemSelecionado && !item.resultado ? 'encerrado' : ''}}"
+                            <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
                                [ngClass]="resultadoClass(item)">
                                 {{item.time_a_nome}}
                                 {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                 {{item.time_b_nome}}
                             </p>
-                            <p class="cotacao {{itemSelecionado && !item.resultado ? 'encerrado' : ''}}"
+                            <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
                                [ngClass]="resultadoClass(item)">
                                 {{item.categoria_nome}}:
                                 {{item.odd_nome}}
@@ -138,7 +138,7 @@
     <button class="btn btn-custom btn-block" style="border-radius: 0" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
         {{ simulando ? 'Calculando Nova Cotação...' : 'Encerrar Aposta' }}
     </button>
-    <button class="btn btn-outline-custom {{!falhaSimulacao ? 'w-50' : 'btn-block'}}" style="border-radius: 0" *ngIf="itemSelecionado && !simulando" (click)="descartar()">
+    <button class="btn btn-outline-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado && !simulando && !falhaSimulacao" (click)="descartar()">
         Descartar
     </button>
     <button class="btn btn-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
