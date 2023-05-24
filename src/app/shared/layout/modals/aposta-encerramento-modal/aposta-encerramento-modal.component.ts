@@ -374,10 +374,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             return false;
         }
 
-        if(!this.quantidadeMinimaBilhete()) {
-            return false;
-        }
-
         if(this.encerrando) {
             return false;
         }
