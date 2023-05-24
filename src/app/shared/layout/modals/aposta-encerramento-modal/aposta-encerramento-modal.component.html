@@ -53,7 +53,7 @@
         </div>
         <p *ngIf="falhaSimulacao">
             <ngb-alert [dismissible]="false" type='danger'>
-                <strong>O Item {{falhaSimulacao}} não pode ser encerrado, Remova-o da lista de encerramento.</strong>
+                <strong>O Item {{falhaSimulacao}} não pode ser encerrado.</strong>
             </ngb-alert>
         </p>
         <hr>
@@ -94,50 +94,6 @@
         <hr>
         <hr>
     </div>
-    <p *ngIf="falhaSimulacao">
-        <ngb-alert [dismissible]="false" type='danger'>
-            <strong>O Item {{falhaSimulacao}} não pode ser encerrado.</strong>
-        </ngb-alert>
-    </p>
-    <hr>
-    <hr>
-    <div class="valores">
-        <p class="total-jogos">
-            QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
-        </p>
-        <p class="aposta">
-            COTAÇÃO: <span style="float: right">
-                <span class="{{!novaCotacao ? '' : 'cancelado'}}">
-                    {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}</span>
-                <span class="dados-simulacao"> {{novaCotacao | number:'1.0-3' }}</span>
-            </span>
-        </p>
-        <p class="aposta">
-            VALOR APOSTADO: <span style="float:right"> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
-        </p>
-        <p class="ganho">
-            POSSÍVEL RETORNO:
-            <span style="float: right">
-                <span class="{{!novaPossibilidadeGanho ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho |
-                    currency}}</span>
-                <span class="dados-simulacao"> {{novaPossibilidadeGanho | currency}}</span>
-            </span>
-        </p>
-        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-            {{'geral.premio' | translate | uppercase}}: <span style="float:right">{{aposta.premio | currency}}</span>
-        </p>
-        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-            CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
-        </p>
-    </div>
-    <div class="rodape dados-simulacao" *ngIf="novaCotacao && novaPossibilidadeGanho">
-        Atenção: Confira como ficarão os novos valores <br>
-        Essa operação não poderá ser desfeita
-    </div>
-    <hr>
-    <hr>
-</div>
-<div class="modal-body cupom-ativo">
     <div id="cupom">
         <div class="conteudo">
             <ng-container *ngFor="let item of aposta.itens">
