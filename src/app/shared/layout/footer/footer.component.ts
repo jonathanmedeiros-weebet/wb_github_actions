@@ -36,6 +36,12 @@ export class FooterComponent implements OnInit {
     cartaoApostaHabilitado: boolean;
     isCliente;
     hasApk;
+    linkTwitter;
+    linkTelegram;
+    linkTikTok;
+    linkFacebook;
+    linkInstagram;
+    linkLinkedin;
 
     constructor(
         private authService: AuthService,
@@ -58,6 +64,13 @@ export class FooterComponent implements OnInit {
         this.rodape = this.paramsLocais.getOpcoes().rodape;
         this.esporteHabilitado = this.paramsLocais.getOpcoes().esporte;
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
+
+        this.linkTwitter = this.paramsLocais.getOpcoes().linkTwitter;
+        this.linkTikTok = this.paramsLocais.getOpcoes().linkTikTok;
+        this.linkTelegram = this.paramsLocais.getOpcoes().linkTelegram;
+        this.linkFacebook = this.paramsLocais.getOpcoes().linkFacebook;
+        this.linkInstagram = this.paramsLocais.getOpcoes().linkInstagram;
+        this.linkLinkedin = this.paramsLocais.getOpcoes().linkLinkedin;
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);

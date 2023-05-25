@@ -14,6 +14,42 @@
         <div [innerHTML]="rodape | safeHTML">
         </div>
 
+        <div class="info-jogo">
+            <h4 class="title">Jogue com responsabilidade. Proibido para menores de 18 anos.</h4>
+            <div class="icons">
+                <a href="https://www.gamblingtherapy.org/pt-br/" target="_blank">
+                    <img src="assets/images/game_terapia.svg" />
+                </a>
+                <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
+                    <img src="assets/images/mais_18.svg" />
+                </a>
+            </div>
+        </div>
+
+        <div class="redes-sociais" >
+            <h4 class="title">Nos encontre nas redes sociais</h4>
+            <div class="links-redes">
+                <a [href]="linkTwitter" target="_blank" *ngIf="linkTwitter">
+                    <img src="assets/images/twitter.svg" />
+                </a>
+                <a [href]="linkTikTok" target="_blank" *ngIf="linkTikTok">
+                    <img src="assets/images/tiktok.svg" />
+                </a>
+                <a [href]="linkFacebook" target="_blank" *ngIf="linkFacebook">
+                    <img src="assets/images/facebook.svg" />
+                </a>
+                <a [href]="linkTelegram" target="_blank" *ngIf="linkTelegram">
+                    <img src="assets/images/telegram.svg" />
+                </a>
+                <a [href]="linkInstagram" target="_blank" *ngIf="linkInstagram">
+                    <img src="assets/images/instagram.svg" />
+                </a>
+                <a [href]="linkLinkedin" target="_blank" *ngIf="linkLinkedin">
+                    <img src="assets/images/linkedin.svg" />
+                </a>
+            </div>
+        </div>
+
         <div class="info" *ngIf="hasApiPagamentos">
             <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
             <p>

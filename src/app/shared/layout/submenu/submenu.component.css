@@ -32,6 +32,10 @@
     white-space: nowrap;
 }
 
+.submenu svg-icon {
+    margin-right: 5px;
+}
+
 .subcategory {
     margin: 0;
     display: flex;
@@ -48,7 +52,7 @@
     align-items: center;
     font-style: normal;
     font-size: 14px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .subcategory a i {
