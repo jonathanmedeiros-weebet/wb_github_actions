@@ -71,10 +71,10 @@ export class ApostaEsportivaService {
             );
     }
 
-    tokenAoVivoEncerramento(item: any): Observable<Number> {
+    tokenAoVivoEncerramento(aposta: any): Observable<Number> {
         let url = this.ApostaEsportivaUrl + '/token-aovivo-encerramento';
 
-        return this.http.post(url, { item }, this.header.getRequestOptions(true))
+        return this.http.post(url, { aposta }, this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

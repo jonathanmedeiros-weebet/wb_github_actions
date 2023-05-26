@@ -136,7 +136,7 @@
 </div>
 <div class="rodape">
     <button class="btn btn-custom btn-block" style="border-radius: 0" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
-        {{ simulando ? 'Calculando Nova Cotação...' : 'Encerrar Aposta' }}
+        {{ simulando ? 'Calculando...' : 'Encerrar Aposta' }}
     </button>
     <button class="btn btn-outline-custom w-50" style="border-radius: 0" *ngIf="itemSelecionado && !simulando && !falhaSimulacao" (click)="descartar()">
         Descartar

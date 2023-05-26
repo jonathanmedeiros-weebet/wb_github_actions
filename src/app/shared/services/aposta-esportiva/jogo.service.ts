@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -28,6 +28,20 @@ export class JogoService {
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    verficarAoVivo(jogos): Observable<any> {
+        const url = `${this.JogoUrl}/verificar-ao-vivo`;
+
+        let params = new HttpParams({
+            fromObject: { 'jogos[]': jogos }
+        });
+
+        return this.http.get(url, { params })
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            )
     }
 
     getCotacoes(id: number): Observable<Cotacao[]> {

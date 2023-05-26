@@ -168,7 +168,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                 this.setDelay();
 
                 let token_aovivo = null;
-                const item = this.itemSelecionado;
+                const aposta = this.itemSelecionado;
                 const version = this.apostaVersion;
 
                 this.process = true;
@@ -185,7 +185,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                         }),
                         delay(this.delayReal * 1000),
                         switchMap(() => {
-                            return this.apostaService.encerrarItem({token: token_aovivo, itemId: item.id, version: version});
+                            return this.apostaService.encerrarAposta({token: token_aovivo, apostaId: aposta.id, version: version});
                         }),
                         takeUntil(this.unsub$)
                     )
@@ -205,7 +205,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                     )
             } else {
                 this.encerrando = true;
-                this.apostaService.encerrarItem({ itemId: this.itemSelecionado.id, version: this.apostaVersion })
+                this.apostaService.encerrarAposta({ apostaId: this.itemSelecionado.id, version: this.apostaVersion })
                     .subscribe(
                         result => {
                             this.messageService.success(result, 'Sucesso');
@@ -233,13 +233,14 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             return true;
         }
 
-        for (let item of aposta.itens) {
-            if(!item.resultado) {
-                const retorno = await this.jogoService.getJogo(item.jogo_api_id).toPromise();
-                if(retorno.ao_vivo) {
-                    result = true;
-                }
-            }
+        const itensID = aposta.itens.map((item: any) => {
+            return item.jogo_api_id;
+        })
+
+        const retorno = await this.jogoService.verficarAoVivo(itensID).toPromise();
+
+        if(retorno) {
+            result = true;
         }
 
         return result;
