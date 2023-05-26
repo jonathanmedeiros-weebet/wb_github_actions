@@ -285,7 +285,9 @@
         "casadopalpite.com": "gulp casadopalpite.com",
         "arena-esportiva.com": "gulp arena-esportiva.com",
         "betlance.wee.bet": "gulp betlance.wee.bet",
-        "faithbets.bet": "gulp faithbets.bet"
+        "faithbets.bet": "gulp faithbets.bet",
+        "bet10k.com": "gulp bet10k.com",
+        "chama.bet": "gulp chama.bet"
     },
     "private": true,
     "dependencies": {

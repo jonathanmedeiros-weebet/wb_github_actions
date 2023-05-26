@@ -2658,3 +2658,21 @@ gulp.task('faithbets.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet10k.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bet10k.com",
+        banca: "BET 10K",
+        styles: "",
+    });
+});
+
+gulp.task('chama.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "chama.bet",
+        banca: "CHAMA.BET",
+        styles: "",
+    });
+});
