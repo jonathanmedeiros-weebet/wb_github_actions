@@ -262,7 +262,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 category: 'cassino',
                 svgIcon: true,
                 svgStroke: true,
-                svgSrc: 'assets/images/todos.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/todos.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -272,7 +272,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 svgIcon: true,
-                svgSrc: 'assets/images/slot.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/slot.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -282,7 +282,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 svgIcon: true,
-                svgSrc: 'assets/images/raspadinha.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/raspadinha.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -292,7 +292,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 svgIcon: true,
-                svgSrc: 'assets/images/roleta.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/roleta.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -302,7 +302,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 svgIcon: true,
-                svgSrc: 'assets/images/mesa.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/mesa.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -312,7 +312,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 svgIcon: true,
-                svgSrc: 'assets/images/bingo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
                 active: this.paramsService.getOpcoes().salsa_cassino
             },
             {
@@ -321,7 +321,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 link: '/casino/c/wall/live',
                 icon_class: 'fa-solid fa-dice',
                 svgIcon: true,
-                svgSrc: 'assets/images/cassino_ao_vivo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/cassino_ao_vivo.svg',
                 queryParams: '',
                 category: 'cassino',
                 active: this.paramsService.getOpcoes().casino
