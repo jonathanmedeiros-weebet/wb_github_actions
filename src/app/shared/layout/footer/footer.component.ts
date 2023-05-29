@@ -96,6 +96,10 @@ export class FooterComponent implements OnInit {
             );
     }
 
+    temRedesSociais() {
+        return this.linkTelegram || this.linkFacebook || this.linkTikTok || this.linkTwitter || this.linkLinkedin || this.linkInstagram;
+    }
+
     abrirResultados() {
         this.modalService.open(ResultadosModalComponent, {
             centered: true,
