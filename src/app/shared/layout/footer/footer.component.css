@@ -50,8 +50,33 @@ footer {
 }
 
 .logo img {
-    max-height: 80px;
-    max-width: 120px;
+    max-height: 100px;
+    max-width: 250px;
+}
+
+.info-jogo {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.info-jogo .icons {
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.redes-sociais {
+    margin-bottom: 30px;
+}
+
+.redes-sociais .links-redes {
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
 
 .links {
