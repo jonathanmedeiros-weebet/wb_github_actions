@@ -68,6 +68,9 @@
             <a [routerLink]="['/informacoes/quem-somos']" *ngIf="hasQuemSomos">
                 {{'footer.quemSomos' | translate}}
             </a>
+            <a href="https://afiliados.{{slug}}" target="_blank" *ngIf="exibirLinkAfiliado">
+                {{'footer.afiliados' | translate}}
+            </a>
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !trevoOne && !isAppMobile">
                 {{'footer.downloadApp' | translate}}
             </a>
