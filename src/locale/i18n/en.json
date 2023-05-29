@@ -183,7 +183,8 @@
         "modalidade": "Modality",
         "estouCiente": "I know",
         "movimentacao":"Transactions",
-        "rollover": "Rollover"
+        "rollover": "Rollover",
+        "suporte": "Support"
     },
     "dias": {
         "ontem": "Yesterday",

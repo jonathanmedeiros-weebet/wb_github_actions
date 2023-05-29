@@ -183,7 +183,8 @@
         "modalidade": "Modalidade",
         "estouCiente": "Estou ciente",
         "movimentacao":"Movimentações",
-        "rollover": "Bônus"
+        "rollover": "Bônus",
+        "suporte": "Suporte"
     },
     "dias": {
         "ontem": "Ontem",
