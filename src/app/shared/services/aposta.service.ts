@@ -76,7 +76,7 @@ export class ApostaService {
     }
 
     simularEncerramento(item): Observable<any> {
-        const url = `${this.ApostaUrl}/simular-encerramento?item=` + JSON.stringify(item);
+        const url = `${this.ApostaUrl}/simular-encerramento?aposta=` + JSON.stringify(item);
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
@@ -85,8 +85,8 @@ export class ApostaService {
             );
     }
 
-    encerrarItem(dados): Observable<any> {
-        const url = `${this.ApostaUrl}/encerrar-item`;
+    encerrarAposta(dados): Observable<any> {
+        const url = `${this.ApostaUrl}/encerrar-aposta`;
 
         return this.http.post(url, dados, this.header.getRequestOptions(true))
             .pipe(

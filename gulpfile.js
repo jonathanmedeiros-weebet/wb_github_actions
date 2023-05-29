@@ -314,6 +314,15 @@ gulp.task('bet5.wee.bet', function (done) {
     });
 });
 
+gulp.task('bet9.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet9.wee.bet",
+        banca: "WEEBET",
+        styles: ""
+    });
+});
+
 gulp.task('topbets.me', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
