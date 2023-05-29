@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="redes-sociais" >
+        <div class="redes-sociais" *ngIf="temRedesSociais()">
             <h4 class="title">Nos encontre nas redes sociais</h4>
             <div class="links-redes">
                 <a [href]="linkTwitter" target="_blank" *ngIf="linkTwitter">
