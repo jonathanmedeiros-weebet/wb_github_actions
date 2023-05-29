@@ -46,6 +46,10 @@ nav a {
     color: var(--highlight);
 }
 
+.category a span {
+    white-space: nowrap;
+}
+
 .side {
     width: 100%;
     display: flex;
