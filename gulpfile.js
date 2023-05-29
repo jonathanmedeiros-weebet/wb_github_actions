@@ -2676,3 +2676,12 @@ gulp.task('chama.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportilha.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportilha.online",
+        banca: "SPORTILHA",
+        styles: "",
+    });
+});

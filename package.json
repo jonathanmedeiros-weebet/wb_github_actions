@@ -287,7 +287,8 @@
         "betlance.wee.bet": "gulp betlance.wee.bet",
         "faithbets.bet": "gulp faithbets.bet",
         "bet10k.com": "gulp bet10k.com",
-        "chama.bet": "gulp chama.bet"
+        "chama.bet": "gulp chama.bet",
+        "sportilha.online": "gulp sportilha.online"
     },
     "private": true,
     "dependencies": {
