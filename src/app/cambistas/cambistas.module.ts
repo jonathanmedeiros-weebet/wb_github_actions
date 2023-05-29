@@ -16,6 +16,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CartaoComponent } from './cartao/cartao.component';
 import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import {TranslateModule} from '@ngx-translate/core';
         NgbModule,
         NgxSkeletonLoaderModule.forRoot({loadingText: 'This item is actually loading...'}),
         Ng2SearchPipeModule,
-        TranslateModule
+        TranslateModule,
+        NgxMaskModule
     ],
     providers: [
         RelatorioService,

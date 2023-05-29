@@ -34,7 +34,11 @@
                         <option value="loteria" *ngIf="loteriasHabilitada">{{'geral.loteria' | translate}}</option>
                     </select>
 
-                    <input class="inverted-out form-control" [(ngModel)]="apostador" type="text" placeholder="{{'geral.apostador' | translate}} "
+                    <input class="inverted-out form-control" [(ngModel)]="apostador" type="text"
+                           placeholder="{{'geral.apostador' | translate}}" [ngModelOptions]="{standalone: true}">
+
+                    <input class="inverted-out form-control text-uppercase" [(ngModel)]="codigo" type="text" mask="AAAA-AAAA"
+                           [dropSpecialCharacters]="true" placeholder="{{'geral.codigo' | translate}}"
                            [ngModelOptions]="{standalone: true}">
 
                     <input
