@@ -2685,3 +2685,21 @@ gulp.task('sportilha.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betpop.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betpop.bet",
+        banca: "BETPOP",
+        styles: "",
+    });
+});
+
+gulp.task('ccaesportes.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "ccaesportes.club",
+        banca: "CCA ESPORTES",
+        styles: "",
+    });
+});

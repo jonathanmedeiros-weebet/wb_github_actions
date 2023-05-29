@@ -288,7 +288,9 @@
         "faithbets.bet": "gulp faithbets.bet",
         "bet10k.com": "gulp bet10k.com",
         "chama.bet": "gulp chama.bet",
-        "sportilha.online": "gulp sportilha.online"
+        "sportilha.online": "gulp sportilha.online",
+        "betpop.bet": "gulp betpop.bet",
+        "ccaesportes.club": "gulp ccaesportes.club"
     },
     "private": true,
     "dependencies": {
