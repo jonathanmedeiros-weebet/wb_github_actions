@@ -31,6 +31,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     data;
     esporte = '';
     campeonatoSelecionado = false;
+    ligasPopulares;
     unsub$ = new Subject();
 
     constructor(
@@ -46,6 +47,10 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     ngOnInit() {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+
+        this.ligasPopulares = this.paramsService.getLigasPopulares().map((ligaPopular) => {
+            return ligaPopular.api_id;
+        });
 
         this.route.data
             .pipe(
@@ -86,6 +91,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                     const queryParams: any = {
                         'sport_id': this.sportId,
                         'campeonatos_bloqueados': this.campeonatosBloqueados,
+                        'ligas_populares': this.ligasPopulares,
                         'odds': this.odds
                     };
                     let isHoje = false;
