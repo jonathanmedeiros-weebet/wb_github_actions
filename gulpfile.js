@@ -2712,3 +2712,12 @@ gulp.task('ccaesportes.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lucromaster.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "lucromaster.net",
+        banca: "LUCRO MASTER",
+        styles: "",
+    });
+});

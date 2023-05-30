@@ -291,7 +291,8 @@
         "chama.bet": "gulp chama.bet",
         "sportilha.online": "gulp sportilha.online",
         "betpop.bet": "gulp betpop.bet",
-        "ccaesportes.club": "gulp ccaesportes.club"
+        "ccaesportes.club": "gulp ccaesportes.club",
+        "lucromaster.net": "gulp lucromaster.net"
     },
     "private": true,
     "dependencies": {
