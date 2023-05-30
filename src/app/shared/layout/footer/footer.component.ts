@@ -19,6 +19,7 @@ export class FooterComponent implements OnInit {
     BANCA_NOME = '';
     LOGO = config.LOGO;
     isAppMobile;
+    isMobile;
     trevoOne = false;
     hasApiPagamentos = false;
     hasRegras = false;
@@ -74,6 +75,8 @@ export class FooterComponent implements OnInit {
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
+
+        this.isMobile = window.innerWidth < 1025;
 
         if (location.host.search(/trevoone/) >= 0) {
             this.trevoOne = true;
@@ -139,5 +142,35 @@ export class FooterComponent implements OnInit {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
+    }
+
+    svgStyleGameTerapia() {
+        if (this.isMobile) {
+            return {
+                width: '100px',
+                fill: 'var(--foreground-header)',
+            }
+        }
+
+        return {
+            width: '150px',
+            fill: 'var(--foreground-header)',
+        }
+    }
+
+    svgStyleMaiorIdade() {
+        if (this.isMobile) {
+            return {
+                width: '30px',
+                fill: 'var(--foreground-header)',
+                stroke: 'var(--foreground-header)',
+            }
+        }
+
+        return {
+            width: '50px',
+            fill: 'var(--foreground-header)',
+            stroke: 'var(--foreground-header)',
+        }
     }
 }

@@ -4,7 +4,7 @@ footer {
     background-color: var(--header);
     min-height: 250px;
     padding: 25px 0 35px 0;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .footer-app-mobile{
@@ -19,7 +19,7 @@ footer {
 
 .title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 15px;
 }
 
@@ -56,27 +56,34 @@ footer {
 
 .info-jogo {
     margin-top: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+}
+
+.info-jogo h4 {
+    font-weight: normal;
 }
 
 .info-jogo .icons {
     margin-top: 30px;
     display: flex;
-    gap: 30px;
+    gap: 50px;
     align-items: center;
     justify-content: center;
 }
 
 .redes-sociais {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .redes-sociais .links-redes {
-    margin-top: 30px;
     display: flex;
-    gap: 30px;
+    gap: 15px;
     align-items: center;
     justify-content: center;
+}
+
+.redes-sociais .links-redes svg {
+    height: 20px;
 }
 
 .links {
@@ -158,5 +165,17 @@ footer {
 
     .info {
         margin: 25px 0;
+    }
+
+    .info-jogo {
+        margin-bottom: 15px;
+    }
+
+    .info-jogo .icons {
+        gap: 25px;
+    }
+
+    .info.pagamento h4 {
+        margin-bottom: 5px;
     }
 }
