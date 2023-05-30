@@ -2726,7 +2726,7 @@ gulp.task('brasileiraobet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "brasileiraobet.com",
-        banca: "LUCRO MASTER",
+        banca: "BRASILEIRÃO.BET",
         styles: "",
     });
 });
