@@ -168,7 +168,7 @@ export class FooterComponent implements OnInit {
         }
 
         return {
-            width: '50px',
+            width: '45px',
             fill: 'var(--foreground-header)',
             stroke: 'var(--foreground-header)',
         }
