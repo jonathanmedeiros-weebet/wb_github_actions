@@ -292,7 +292,8 @@
         "sportilha.online": "gulp sportilha.online",
         "betpop.bet": "gulp betpop.bet",
         "ccaesportes.club": "gulp ccaesportes.club",
-        "lucromaster.net": "gulp lucromaster.net"
+        "lucromaster.net": "gulp lucromaster.net",
+        "brasileraobet.com": "gulp brasileraobet.com"
     },
     "private": true,
     "dependencies": {
