@@ -43,6 +43,7 @@ export class FooterComponent implements OnInit {
     linkFacebook;
     linkInstagram;
     linkLinkedin;
+    linkYoutube;
 
     constructor(
         private authService: AuthService,
@@ -72,6 +73,7 @@ export class FooterComponent implements OnInit {
         this.linkFacebook = this.paramsLocais.getOpcoes().linkFacebook;
         this.linkInstagram = this.paramsLocais.getOpcoes().linkInstagram;
         this.linkLinkedin = this.paramsLocais.getOpcoes().linkLinkedin;
+        this.linkYoutube = this.paramsLocais.getOpcoes().linkYoutube;
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
@@ -168,7 +170,7 @@ export class FooterComponent implements OnInit {
         }
 
         return {
-            width: '50px',
+            width: '45px',
             fill: 'var(--foreground-header)',
             stroke: 'var(--foreground-header)',
         }
