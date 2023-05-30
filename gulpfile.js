@@ -2722,10 +2722,10 @@ gulp.task('lucromaster.net', function (done) {
     });
 });
 
-gulp.task('brasileraobet.com', function (done) {
+gulp.task('brasileiraobet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "brasileraobet.com",
+        host: "brasileiraobet.com",
         banca: "LUCRO MASTER",
         styles: "",
     });
