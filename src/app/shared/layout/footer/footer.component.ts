@@ -43,6 +43,8 @@ export class FooterComponent implements OnInit {
     linkFacebook;
     linkInstagram;
     linkLinkedin;
+    exibirLinkAfiliado = false;
+    slug: string;
     linkYoutube;
 
     constructor(
@@ -66,6 +68,8 @@ export class FooterComponent implements OnInit {
         this.rodape = this.paramsLocais.getOpcoes().rodape;
         this.esporteHabilitado = this.paramsLocais.getOpcoes().esporte;
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
+        this.exibirLinkAfiliado = this.paramsLocais.getOpcoes().exibir_link_afiliado;
+        this.slug = config.SLUG;
 
         this.linkTwitter = this.paramsLocais.getOpcoes().linkTwitter;
         this.linkTikTok = this.paramsLocais.getOpcoes().linkTikTok;

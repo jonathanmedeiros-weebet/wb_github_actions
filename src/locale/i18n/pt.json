@@ -329,6 +329,7 @@
         "depositosRecentes": "Depósitos recentes"
     },
     "footer": {
+        "afiliados": "Afiliados",
         "mensagem1": "O {{BANCA_NOME}} é um sistema de entretenimento online que oferece a seus usuários uma experiência única em Apostas Esportivas.",
         "mensagem2": "Ao acessar, continuar a utilizar ou navegar no website {{BANCA_NOME}}, você aceita que utilizemos certos cookies de navegador com o objetivo de melhorar a sua experiência enquanto utiliza nosso site. {{BANCA_NOME}} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.",
         "jogueComResponsabilidade": "Jogue com responsabilidade. Proibido para menores de 18 anos.",
