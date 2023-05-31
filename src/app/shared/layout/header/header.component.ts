@@ -1,6 +1,6 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions} from '@angular/router';
+import {IsActiveMatchOptions, Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -107,7 +107,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private router: Router,
     ) {
         super();
     }
@@ -378,5 +379,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     alternarExibirSaldo() {
         this.mostrarSaldo = !this.mostrarSaldo;
         localStorage.setItem('exibirSaldo', this.mostrarSaldo);
+    }
+
+    activeMenuCassino() {
+        if (this.router.url.includes('/casino/c') && this.router.url != '/casino/c/wall/live') {
+            return 'active';
+        }
+
+        return '';
     }
 }
