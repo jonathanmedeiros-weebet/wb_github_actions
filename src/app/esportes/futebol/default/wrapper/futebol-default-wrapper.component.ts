@@ -27,7 +27,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     modalRef;
     unsub$ = new Subject();
     regiaoDestaqueSelecionada = false;
-    ligasPopulares;
+    ligasPopulares = '';
+    ordemExibicaoCampeonatos = 'alfabetica';
 
     constructor(
         private campeonatoService: CampeonatoService,
@@ -43,9 +44,13 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
 
-        this.ligasPopulares = this.paramsService.getLigasPopulares().map((ligaPopular) => {
-            return ligaPopular.api_id;
-        });
+        this.ordemExibicaoCampeonatos = this.paramsService.getOpcoes().ordem_exibicao_campeonatos;
+
+        if (this.ordemExibicaoCampeonatos === 'populares') {
+            this.ligasPopulares = this.paramsService.getLigasPopulares().map((ligaPopular) => {
+                return ligaPopular.api_id;
+            });
+        }
 
         this.sidebarService.itens
             .pipe(takeUntil(this.unsub$))

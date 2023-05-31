@@ -31,7 +31,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     data;
     esporte = '';
     campeonatoSelecionado = false;
-    ligasPopulares;
+    ligasPopulares = '';
+    ordemExibicaoCampeonatos = 'alfabetica';
     unsub$ = new Subject();
 
     constructor(
@@ -48,9 +49,13 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         // this.mobileScreen = window.innerWidth <= 668 ? true : false;
         const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
 
-        this.ligasPopulares = this.paramsService.getLigasPopulares().map((ligaPopular) => {
-            return ligaPopular.api_id;
-        });
+        this.ordemExibicaoCampeonatos = this.paramsService.getOpcoes().ordem_exibicao_campeonatos;
+
+        if (this.ordemExibicaoCampeonatos === 'populares') {
+            this.ligasPopulares = this.paramsService.getLigasPopulares().map((ligaPopular) => {
+                return ligaPopular.api_id;
+            });
+        }
 
         this.route.data
             .pipe(
