@@ -1360,10 +1360,10 @@ gulp.task('costabets.wee.bet', function (done) {
     });
 });
 
-gulp.task('betnordestesports.wee.bet', function (done) {
+gulp.task('betnordeste.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "betnordestesports.wee.bet",
+        host: "betnordeste.net",
         banca: "BET NORDESTE SPORTS",
         styles: "",
     });
