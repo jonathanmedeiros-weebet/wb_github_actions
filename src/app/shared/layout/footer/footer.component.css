@@ -3,7 +3,7 @@ footer {
     margin-bottom: 0;
     background-color: var(--header);
     min-height: 250px;
-    padding: 25px 0 35px 0;
+    padding: 25px 0 25px 0;
     font-size: 12px;
 }
 
@@ -51,20 +51,21 @@ footer {
 
 .logo img {
     max-height: 100px;
-    max-width: 250px;
+    max-width: 150px;
 }
 
 .info-jogo {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 .info-jogo h4 {
     font-weight: normal;
+    margin-bottom: 0;
 }
 
 .info-jogo .icons {
-    margin-top: 30px;
+    margin-top: 0;
     display: flex;
     gap: 50px;
     align-items: center;
@@ -72,7 +73,8 @@ footer {
 }
 
 .redes-sociais {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .redes-sociais .links-redes {
@@ -87,7 +89,7 @@ footer {
 }
 
 .links {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -149,7 +151,19 @@ footer {
     font-size: 12px;
 }
 
+.info.pagamento h4 {
+    margin-bottom: 4px;
+}
+
 @media only screen and (max-width: 1024px) {
+    footer {
+        padding-bottom: 60px;
+    }
+
+    .info.copyright {
+        margin-top: 5px !important;
+    }
+
     .container{
         font-size: 11px; /* ajuste fonte */
     }
@@ -167,15 +181,11 @@ footer {
         margin: 25px 0;
     }
 
-    .info-jogo {
-        margin-bottom: 15px;
-    }
-
     .info-jogo .icons {
         gap: 25px;
     }
 
     .info.pagamento h4 {
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
 }
