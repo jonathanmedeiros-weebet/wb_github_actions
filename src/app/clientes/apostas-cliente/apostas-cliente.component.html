@@ -86,7 +86,6 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th width="30"></th>
                             <th width="100">{{'geral.codigo' | translate}}</th>
                             <th *ngIf="tabSelected == 'cassino'">{{'geral.nomeJogoCassino' | translate}}</th>
                             <th>{{'geral.horario' | translate}}</th>
@@ -102,7 +101,6 @@
                         </tr>
                         <tbody *ngIf="!loading">
                         <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
-                            <td></td>
                             <td>{{ aposta.codigo }}</td>
                             <td *ngIf="tabSelected == 'cassino'">{{ aposta.game | formatarNomeJogoCassino }}</td>
                             <td>{{ aposta.horario }}</td>

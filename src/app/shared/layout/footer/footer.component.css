@@ -3,8 +3,8 @@ footer {
     margin-bottom: 0;
     background-color: var(--header);
     min-height: 250px;
-    padding: 25px 0 35px 0;
-    font-size: 14px;
+    padding: 25px 0 25px 0;
+    font-size: 12px;
 }
 
 .footer-app-mobile{
@@ -19,7 +19,7 @@ footer {
 
 .title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 15px;
 }
 
@@ -51,36 +51,45 @@ footer {
 
 .logo img {
     max-height: 100px;
-    max-width: 250px;
+    max-width: 150px;
 }
 
 .info-jogo {
-    margin-top: 30px;
-    margin-bottom: 60px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.info-jogo h4 {
+    font-weight: normal;
+    margin-bottom: 0;
 }
 
 .info-jogo .icons {
-    margin-top: 30px;
+    margin-top: 0;
     display: flex;
-    gap: 30px;
+    gap: 50px;
     align-items: center;
     justify-content: center;
 }
 
 .redes-sociais {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .redes-sociais .links-redes {
-    margin-top: 30px;
     display: flex;
-    gap: 30px;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 }
 
+.redes-sociais .links-redes svg {
+    height: 20px;
+}
+
 .links {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -142,7 +151,19 @@ footer {
     font-size: 12px;
 }
 
+.info.pagamento h4 {
+    margin-bottom: 4px;
+}
+
 @media only screen and (max-width: 1024px) {
+    footer {
+        padding-bottom: 60px;
+    }
+
+    .info.copyright {
+        margin-top: 5px !important;
+    }
+
     .container{
         font-size: 11px; /* ajuste fonte */
     }
@@ -158,5 +179,13 @@ footer {
 
     .info {
         margin: 25px 0;
+    }
+
+    .info-jogo .icons {
+        gap: 25px;
+    }
+
+    .info.pagamento h4 {
+        margin-bottom: 4px;
     }
 }

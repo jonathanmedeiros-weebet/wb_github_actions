@@ -1360,10 +1360,10 @@ gulp.task('costabets.wee.bet', function (done) {
     });
 });
 
-gulp.task('betnordestesports.wee.bet', function (done) {
+gulp.task('betnordeste.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "betnordestesports.wee.bet",
+        host: "betnordeste.net",
         banca: "BET NORDESTE SPORTS",
         styles: "",
     });
@@ -2575,6 +2575,8 @@ gulp.task('betasso.io', function (done) {
         host: "betasso.io",
         banca: "BETASSO",
         styles: "",
+        pixel:"<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '108122072301633');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=108122072301633&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '169020856139161');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=169020856139161&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->"
     });
 });
 
@@ -2709,6 +2711,24 @@ gulp.task('ccaesportes.club', function (done) {
         server: "front3.wee.bet",
         host: "ccaesportes.club",
         banca: "CCA ESPORTES",
+        styles: "",
+    });
+});
+
+gulp.task('lucromaster.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "lucromaster.net",
+        banca: "LUCRO MASTER",
+        styles: "",
+    });
+});
+
+gulp.task('brasileiraobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brasileiraobet.com",
+        banca: "BRASILEIRÃO.BET",
         styles: "",
     });
 });

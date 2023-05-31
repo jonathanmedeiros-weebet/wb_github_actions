@@ -146,7 +146,7 @@
         "bet83.wee.bet": "gulp bet83.wee.bet",
         "camisa12.online": "gulp camisa12.online",
         "costabets.wee.bet": "gulp costabets.wee.bet",
-        "betnordestesports.wee.bet": "gulp betnordestesports.wee.bet",
+        "betnordeste.net": "gulp betnordeste.net",
         "betboladavez.wee.bet": "gulp betboladavez.wee.bet",
         "betsports91.net": "gulp betsports91.net",
         "superpix.bet": "gulp superpix.bet",
@@ -291,7 +291,9 @@
         "chama.bet": "gulp chama.bet",
         "sportilha.online": "gulp sportilha.online",
         "betpop.bet": "gulp betpop.bet",
-        "ccaesportes.club": "gulp ccaesportes.club"
+        "ccaesportes.club": "gulp ccaesportes.club",
+        "lucromaster.net": "gulp lucromaster.net",
+        "brasileiraobet.com": "gulp brasileiraobet.com"
     },
     "private": true,
     "dependencies": {

@@ -82,6 +82,7 @@ import {DesafiosBilheteComponent} from '../../desafios/desafios-bilhete/desafios
 import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-email-modal.component';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { InformativoModalComponent } from './modals/informativo-modal/informativo-modal.component';
+import { JogoService } from '../services/aposta-esportiva/jogo.service';
 
 @NgModule({
     imports: [
@@ -192,11 +193,12 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
         ApostaLoteriaService,
         ApostaEsportivaService,
         RelatorioService,
+        JogoService,
         AcumuladaoService,
         {
             provide: RECAPTCHA_SETTINGS,
-            
-            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings, 
+
+            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings,
         }
     ]
 })
