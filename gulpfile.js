@@ -2733,11 +2733,11 @@ gulp.task('brasileiraobet.com', function (done) {
     });
 });
 
-gulp.task('demo.devconnection.bet', function (done) {
+gulp.task('devconnection.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "demo.devconnection.bet",
-        banca: "DEMO DEV CONNECTION",
+        host: "devconnection.bet",
+        banca: "DEV CONNECTION",
         styles: "",
     });
 });
