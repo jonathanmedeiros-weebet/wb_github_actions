@@ -293,7 +293,8 @@
         "betpop.bet": "gulp betpop.bet",
         "ccaesportes.club": "gulp ccaesportes.club",
         "lucromaster.net": "gulp lucromaster.net",
-        "brasileiraobet.com": "gulp brasileiraobet.com"
+        "brasileiraobet.com": "gulp brasileiraobet.com",
+        "demo.devconnection.bet": "gulp demo.devconnection.bet"
     },
     "private": true,
     "dependencies": {
