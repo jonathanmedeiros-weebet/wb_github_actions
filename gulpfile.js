@@ -2741,3 +2741,30 @@ gulp.task('devconnection.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('playbet153.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "playbet153.com",
+        banca: "PLAY BET 153",
+        styles: "",
+    });
+});
+
+gulp.task('goltop.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "goltop.bet",
+        banca: "GOL TOP",
+        styles: "",
+    });
+});
+
+gulp.task('arenamiami.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "arenamiami.net",
+        banca: "ARENA MIAMI",
+        styles: "",
+    });
+});

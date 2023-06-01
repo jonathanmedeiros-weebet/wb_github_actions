@@ -294,7 +294,10 @@
         "ccaesportes.club": "gulp ccaesportes.club",
         "lucromaster.net": "gulp lucromaster.net",
         "brasileiraobet.com": "gulp brasileiraobet.com",
-        "devconnection.bet": "gulp devconnection.bet"
+        "devconnection.bet": "gulp devconnection.bet",
+        "playbet153.com": "gulp playbet153.com",
+        "goltop.bet": "gulp goltop.bet",
+        "arenamiami.net": "gulp arenamiami.net"
     },
     "private": true,
     "dependencies": {
