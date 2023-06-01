@@ -46,7 +46,7 @@
                     <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
                     <span class="regiao-nome">
                         <span *ngIf="ligaPopular.sport_id === 1 && ligaPopular.sigla"
-                              class="flag-icon flag-icon-{{ligaPopular.sigla}} flag-icon-squared">
+                              class="flag-icon flag-icon-{{ligaPopular.sigla}}">
                         </span>
                         {{ligaPopular.nome}}
                     </span>
