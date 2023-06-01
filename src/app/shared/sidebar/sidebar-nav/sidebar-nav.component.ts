@@ -103,7 +103,12 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 }
             );
 
-        this.ligasPopulares = this.paramsLocais.getLigasPopulares();
+        this.ligasPopulares = this.paramsLocais.getLigasPopulares().map((ligaPopular) => {
+            if (ligaPopular.sport_id === 1) {
+                ligaPopular.nome = ligaPopular.nome.substr(ligaPopular.nome.indexOf(':') + 1);
+            }
+            return ligaPopular;
+        });
 
         this.createForm();
 

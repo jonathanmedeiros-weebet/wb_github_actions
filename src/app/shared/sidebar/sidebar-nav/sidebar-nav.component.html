@@ -44,7 +44,12 @@
             <li *ngFor="let ligaPopular of ligasPopulares">
                 <a (click)="goTo(getRotaPorEsporteId(ligaPopular.sport_id), { campeonato: ligaPopular.api_id })">
                     <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
-                    <span class="regiao-nome">{{ligaPopular.nome}}</span>
+                    <span class="regiao-nome">
+                        <span *ngIf="ligaPopular.sport_id === 1"
+                              class="flag-icon flag-icon-{{ligaPopular.sigla}} flag-icon-squared">
+                        </span>
+                        {{ligaPopular.nome}}
+                    </span>
                 </a>
             </li>
         </div>
