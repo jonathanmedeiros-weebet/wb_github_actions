@@ -14,11 +14,48 @@
         <div [innerHTML]="rodape | safeHTML">
         </div>
 
-        <div class="info" *ngIf="hasApiPagamentos">
-            <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
-            <p>
-                <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png" class="image">
-            </p>
+        <div class="info-jogo">
+            <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
+            <div class="icons">
+                <a href="https://www.gamblingtherapy.org/pt-br/" target="_blank">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/game_terapia.svg'" [svgStyle]="svgStyleGameTerapia()"></svg-icon>
+                </a>
+                <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/mais_18.svg'" [svgStyle]="svgStyleMaiorIdade()"></svg-icon>
+                </a>
+                <div class="info pagamento" *ngIf="hasApiPagamentos">
+                    <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
+                    <p>
+                        <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png" class="image">
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="redes-sociais" *ngIf="temRedesSociais()">
+            <div class="links-redes">
+                <a [href]="linkTwitter" target="_blank" *ngIf="linkTwitter">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/twitter.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkYoutube" target="_blank" *ngIf="linkYoutube">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/youtube.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkTikTok" target="_blank" *ngIf="linkTikTok">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/tiktok.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkFacebook" target="_blank" *ngIf="linkFacebook">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/facebook.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkTelegram" target="_blank" *ngIf="linkTelegram">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/telegram.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkInstagram" target="_blank" *ngIf="linkInstagram">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/instagram.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkLinkedin" target="_blank" *ngIf="linkLinkedin">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/linkedin.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+            </div>
         </div>
 
 <!--        <div class="info">-->
@@ -31,6 +68,9 @@
         <div class="links">
             <a [routerLink]="['/informacoes/quem-somos']" *ngIf="hasQuemSomos">
                 {{'footer.quemSomos' | translate}}
+            </a>
+            <a href="https://afiliados.{{slug}}" target="_blank" *ngIf="exibirLinkAfiliado">
+                {{'footer.afiliados' | translate}}
             </a>
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !trevoOne && !isAppMobile">
                 {{'footer.downloadApp' | translate}}
@@ -93,7 +133,7 @@
             </div>
         </div>
 
-        <div class="info">
+        <div class="info copyright" style="margin-top: 20px; margin-bottom: 0">
             <small>{{'footer.todosOsDireitosReservados' | translate:{'BANCA_NOME': BANCA_NOME} }}</small>
         </div>
     </div>
