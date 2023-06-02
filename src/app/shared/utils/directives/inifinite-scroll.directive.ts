@@ -12,7 +12,7 @@ export class InfiniteScrollDirective implements OnInit {
         const nativeElement = this.el.nativeElement;
 
         nativeElement.addEventListener('scroll', () => {
-            const point = nativeElement.scrollHeight * 0.9;
+            const point = nativeElement.scrollHeight * 0.75;
             if (nativeElement.offsetHeight + nativeElement.scrollTop >= point) {
                 this.scrolled.emit();
             }
