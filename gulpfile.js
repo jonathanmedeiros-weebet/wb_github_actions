@@ -733,15 +733,6 @@ gulp.task('esportepremium.wee.bet', function (done) {
     });
 });
 
-gulp.task('7bet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "7bet.wee.bet",
-        banca: "7 BET",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #fff; --odds: #008000;",
-    });
-});
-
 gulp.task('garanhunsbet.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2368,15 +2359,6 @@ gulp.task('2xbettin.com', function (done) {
     });
 });
 
-gulp.task('metabet7.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "metabet7.wee.bet",
-        banca: "META BET 7",
-        styles: "",
-    });
-});
-
 gulp.task('vemprabet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2402,15 +2384,6 @@ gulp.task('goldeplacasport.com', function (done) {
         server: "front3.wee.bet",
         host: "goldeplacasport.com",
         banca: "GOL DE PLACA SPORT",
-        styles: "",
-    });
-});
-
-gulp.task('betszero21.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betszero21.net",
-        banca: "BETS ZERO 21",
         styles: "",
     });
 });
