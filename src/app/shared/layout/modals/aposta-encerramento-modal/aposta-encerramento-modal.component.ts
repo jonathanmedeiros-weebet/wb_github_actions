@@ -34,7 +34,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     casaDasApostasId;
     isLoggedIn;
     opcoes;
-    novaCotacao;
     novaPossibilidadeGanho;
     itemSelecionado;
     itemSelecionadoAoVivo;
@@ -150,7 +149,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             .subscribe(
                 simulacao => {
                     this.simulando = false;
-                    this.novaCotacao = simulacao.nova_cotacao;
                     this.novaPossibilidadeGanho = simulacao.nova_possibilidade_ganho;
                     this.falhaSimulacao = simulacao.falha_simulacao;
                 },
@@ -197,7 +195,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
 
                             this.process = false;
                         }, error => {
-                            this.novaCotacao = null;
                             this.novaPossibilidadeGanho = null;
                             this.process = false;
                             this.handleError(error);
@@ -214,7 +211,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                             this.encerrando = false;
                         },
                         error => {
-                            this.novaCotacao = null;
                             this.novaPossibilidadeGanho = null;
                             this.handleError(error);
                         }
@@ -259,7 +255,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     descartar() {
         this.itemSelecionado = null;
         this.falhaSimulacao = null;
-        this.novaCotacao = null;
         this.novaPossibilidadeGanho = null;
     }
 
