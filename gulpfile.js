@@ -2743,3 +2743,12 @@ gulp.task('arenamiami.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsbolabrasil.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsbolabrasil.com",
+        banca: "BETS BOLA BRASIL",
+        styles: "",
+    });
+});
