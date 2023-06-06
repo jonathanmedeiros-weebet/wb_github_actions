@@ -31,7 +31,7 @@
                 <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
                     <option value="" selected>Todos os Provedores</option>
                     <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
-                        {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                        {{fornecedor.gameFornecedor | formatarFornecedores}}
                     </option>
                 </select>
             </div>
@@ -86,7 +86,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -97,7 +97,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -156,7 +156,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -167,7 +167,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -228,7 +228,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -239,7 +239,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -299,7 +299,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -310,7 +310,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -369,7 +369,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -380,7 +380,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -439,7 +439,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -450,7 +450,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -509,7 +509,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -520,7 +520,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -576,7 +576,7 @@
                                             <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">  
+                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
                                             <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
@@ -587,7 +587,7 @@
                                         </ng-container>
                                     </ng-container>
                                     <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a> 
+                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
                                     </ng-container>
                             </ng-container>
                         </div>
@@ -630,7 +630,7 @@
                         <div class="fornecedor-nome">
                             <span>
                                 <a (click)="filtrarJogos(fornecedor.gameFornecedor)">
-                                {{fornecedor.gameFornecedor[0].toUpperCase() + fornecedor.gameFornecedor.substring(1)}}
+                                 {{fornecedor.gameFornecedor | formatarFornecedores}}
                                 </a>
                             </span>
                         </div>
