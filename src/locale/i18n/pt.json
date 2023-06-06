@@ -184,7 +184,8 @@
         "estouCiente": "Estou ciente",
         "movimentacao":"Movimentações",
         "rollover": "Bônus",
-        "suporte": "Suporte"
+        "suporte": "Suporte",
+        "EmailOuUsuario": "E-mail ou usuário"
     },
     "dias": {
         "ontem": "Ontem",

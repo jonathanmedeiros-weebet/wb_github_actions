@@ -184,7 +184,8 @@
         "estouCiente": "I know",
         "movimentacao":"Transactions",
         "rollover": "Rollover",
-        "suporte": "Support"
+        "suporte": "Support",
+        "EmailOuUsuario": "E-mail or username"
     },
     "dias": {
         "ontem": "Yesterday",
