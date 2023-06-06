@@ -31,7 +31,7 @@
                 <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
                     <option value="" selected>Todos os Provedores</option>
                     <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
-                        {{fornecedor.gameFornecedor | formatarFornecedores}} <br>
+                        {{fornecedor.gameFornecedor | formatarFornecedores}}
                     </option>
                 </select>
             </div>
@@ -630,7 +630,7 @@
                         <div class="fornecedor-nome">
                             <span>
                                 <a (click)="filtrarJogos(fornecedor.gameFornecedor)">
-                                 {{fornecedor.gameFornecedor | formatarFornecedores}} <br>
+                                 {{fornecedor.gameFornecedor | formatarFornecedores}}
                                 </a>
                             </span>
                         </div>
