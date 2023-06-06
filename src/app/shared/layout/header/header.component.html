@@ -284,6 +284,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="abrirConfiguracoes()">
+                                <span>
+                                     <i class="fa fa-cogs"></i>
+                                </span>
+                                {{'geral.cofiguracoes' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <hr />
                             <label>{{'geral.maisOpcoes' | translate}}</label>
                             <a (click)="abrirFinanceiro()">
@@ -428,7 +437,12 @@
                                 <i class="fa fa-solid fa-gift mb-2"></i>
                                 {{'geral.bonus' | translate}}
                             </a>
-
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/configuracoes']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-cogs mb-2"></i>
+                                {{'geral.configuracoes' | translate}}
+                            </a>
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
                                 <i class="fa fa-key mb-2"></i> {{'geral.alterarSenha' | translate}}
