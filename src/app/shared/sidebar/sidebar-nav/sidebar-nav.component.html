@@ -45,8 +45,8 @@
                 <a (click)="goTo(getRotaPorEsporteId(ligaPopular.sport_id), { campeonato: ligaPopular.api_id })">
                     <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
                     <span class="regiao-nome">
-                        <span *ngIf="ligaPopular.sport_id === 1 && ligaPopular.sigla"
-                              class="flag-icon flag-icon-{{ligaPopular.sigla}}">
+                        <span *ngIf="ligaPopular.sport_id === 1 && ligaPopular.regiao_sigla"
+                              class="flag-icon flag-icon-{{ligaPopular.regiao_sigla}}">
                         </span>
                         {{ligaPopular.nome}}
                     </span>

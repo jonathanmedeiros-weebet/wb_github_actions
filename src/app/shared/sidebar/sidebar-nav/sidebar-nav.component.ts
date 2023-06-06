@@ -103,12 +103,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 }
             );
 
-        this.ligasPopulares = this.paramsLocais.getLigasPopulares().map((ligaPopular) => {
-            if (ligaPopular.sport_id === 1) {
-                ligaPopular.nome = ligaPopular.nome.substr(ligaPopular.nome.indexOf(':') + 1);
-            }
-            return ligaPopular;
-        });
+        this.ligasPopulares = this.getLigasPopulares();
 
         this.createForm();
 
@@ -126,6 +121,28 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+    }
+
+    private getLigasPopulares() {
+        return this.paramsLocais.getLigasPopulares().map((ligaPopular) => {
+            if (ligaPopular.sport_id === 1) {
+                ligaPopular.nome = ligaPopular.nome.substring(ligaPopular.nome.indexOf(':') + 1);
+            }
+            return ligaPopular;
+        }).sort((a, b) => a.sport_id - b.sport_id).sort((a, b) => {
+            const nomeA = a.nome.toUpperCase();
+            const nomeB = b.nome.toUpperCase();
+
+            if (nomeA < nomeB) {
+                return -1;
+            }
+
+            if (nomeA > nomeB) {
+                return 1;
+            }
+
+            return 0;
+        });
     }
 
     createForm() {
