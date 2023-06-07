@@ -2754,3 +2754,12 @@ gulp.task('betsbolabrasil.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('7pix.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "7pix.bet",
+        banca: "7PIX.BET",
+        styles: "",
+    });
+});

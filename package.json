@@ -295,7 +295,8 @@
         "playbet153.com": "gulp playbet153.com",
         "goltop.bet": "gulp goltop.bet",
         "arenamiami.net": "gulp arenamiami.net",
-        "betsbolabrasil.com": "gulp betsbolabrasil.com"
+        "betsbolabrasil.com": "gulp betsbolabrasil.com",
+        "7pix.bet": "gulp 7pix.bet"
     },
     "private": true,
     "dependencies": {
