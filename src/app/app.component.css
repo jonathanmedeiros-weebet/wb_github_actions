@@ -18,7 +18,8 @@ a{
     font-size: 20px;
 }
 .close-imagem-inicial-demo i{
-    color: var(--header);
+    margin: 10px;
+    color: var(--highlight);
     font-size: 20px;
 }
 

@@ -205,13 +205,13 @@
 
 <ng-template #ativacaoCadastroModal let-modal>
     <div class="modal-header" style="display: flex; justify-content: end;">
-        <a class="close-imagem-inicial-demo" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <a class="close-modal-ativacao" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <i class="fa fa-times" aria-hidden="true"></i>
         </a>
         <div class="content-modal-ativacao">
             <h3>{{'ativacaoEmail.cadastroAtivadoComSucesso' | translate}}</h3>
             <span>{{'ativacaoEmail.realizeSeuLogin' | translate}}</span>
-            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
+            <img src="{{LOGO}}">
         </div>
     </div>
 </ng-template>
