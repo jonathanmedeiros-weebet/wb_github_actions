@@ -55,6 +55,9 @@ export class AppComponent implements OnInit {
             case 'printGraphics':
                 localStorage.setItem('print_graphics', event.data.print_graphics);
                 break;
+            case 'apkVersion':
+                localStorage.setItem('apk_version', event.data.version);
+                break;
             default:
         }
     }
