@@ -21,7 +21,7 @@ export class FormatarFornecedoresPipe implements PipeTransform {
                 fornecedorFormatado = 'Caleta';
                 break;
             case 'crazybillions':
-                fornecedorFormatado = 'Crazzy Billions';
+                fornecedorFormatado = 'Crazy Billions';
                 break;
             case 'dragongaming':
                 fornecedorFormatado = 'Dragon Gaming';
