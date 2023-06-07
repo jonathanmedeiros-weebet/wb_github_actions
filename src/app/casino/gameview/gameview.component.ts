@@ -85,18 +85,22 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
-        if(this.gameFornecedor == 'tomhorn'){
+        if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         }
 
-        this.location.back();
+        if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
+            this.router.navigate(['casino/c/wall/live']);
+        } else {
+            this.location.back();
+        }
         if (this.fullscreen) {
             this.closeFullscreen();
         }
     }
 
     ngOnDestroy() {
-        if(this.gameFornecedor == 'tomhorn'){
+        if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         }
 
@@ -148,7 +152,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    closeSessionGameTomHorn(){
+    closeSessionGameTomHorn() {
         this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {},error => {});
     }
 }

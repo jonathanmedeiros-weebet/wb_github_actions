@@ -294,7 +294,8 @@
         "devconnection.bet": "gulp devconnection.bet",
         "playbet153.com": "gulp playbet153.com",
         "goltop.bet": "gulp goltop.bet",
-        "arenamiami.net": "gulp arenamiami.net"
+        "arenamiami.net": "gulp arenamiami.net",
+        "betsbolabrasil.com": "gulp betsbolabrasil.com"
     },
     "private": true,
     "dependencies": {

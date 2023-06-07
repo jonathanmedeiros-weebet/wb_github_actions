@@ -64,9 +64,7 @@
             </p>
             <p class="aposta">
                 COTAÇÃO: <span style="float: right">
-                    <span class="{{!novaCotacao || falhaSimulacao ? '' : 'cancelado'}}">
-                        {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}</span>
-                    <span class="dados-simulacao" *ngIf="!falhaSimulacao"> {{novaCotacao | number:'1.0-3' }}</span>
+                    {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}
                 </span>
             </p>
             <p class="aposta">
@@ -87,7 +85,7 @@
                 CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
         </div>
-        <div class="rodape dados-simulacao" *ngIf="novaCotacao && novaPossibilidadeGanho && !falhaSimulacao">
+        <div class="rodape dados-simulacao" *ngIf="novaPossibilidadeGanho && !falhaSimulacao">
             Atenção: Confira como ficarão os novos valores <br>
             Essa operação não poderá ser desfeita
         </div>
