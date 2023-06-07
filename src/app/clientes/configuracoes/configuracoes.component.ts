@@ -1,19 +1,45 @@
-import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MovimentacaoFinanceira} from '../../shared/models/clientes/movimentacao-financeira';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { SidebarService } from 'src/app/services';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+
+/**
+ * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
+ */
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+	readonly DELIMITER = '/';
+
+	parse(value: string): NgbDateStruct | null {
+		if (value) {
+			const date = value.split(this.DELIMITER);
+			return {
+				day: parseInt(date[0], 10),
+				month: parseInt(date[1], 10),
+				year: parseInt(date[2], 10),
+			};
+		}
+		return null;
+	}
+
+	format(date: NgbDateStruct | null): string {
+		return date ? String(date.day).padStart(2, '0') + this.DELIMITER + String(date.month).padStart(2, '0') + this.DELIMITER + date.year : '';
+	}
+}
+
 
 @Component({
     selector: 'app-configuracoes',
     templateUrl: './configuracoes.component.html',
-    styleUrls: ['./configuracoes.component.css']
+    styleUrls: ['./configuracoes.component.css'],
+    providers: [
+		{ provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+	],
 })
 export class ConfiguracoesComponent implements OnInit, OnDestroy {
     queryParams: any;
@@ -31,6 +57,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     sectionExclusaoConta = false;
 
     showMotivoExclusaoConta = false;
+    showDataFinalPausa = false;
 
     formLimiteApostas: FormGroup;
     formLimiteDeposito: FormGroup;
@@ -98,7 +125,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
         this.formPeriodoPausa = this.fb.group({
             opcaoPausa: [''],
-            dataFinal: [''],
+            dataFinalPausa: [''],
         });
 
         this.formExclusaoConta = this.fb.group({
@@ -106,15 +133,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             opcao: [''],
         });
 
-        this.submit();
-    }
-
-    submit() {
-        this.queryParams = this.formLimiteApostas.value;
-        const queryParams: any = {
-            'periodo': this.queryParams.periodo,
-            'tipo': this.queryParams.tipo,
-        };
     }
 
     onSubmitLimiteApostas() {
@@ -202,7 +220,17 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         }
     }
 
-    changeOpcaoExclusao(event: Event) {
+    changeOpcaoPausa() {
+        const { opcaoPausa } = this.formPeriodoPausa.value;
+
+        if(opcaoPausa == 'custom') {
+            this.showDataFinalPausa = true;
+        } else {
+            this.showDataFinalPausa = false;
+        }
+    }
+
+    changeOpcaoExclusao() {
         const { opcao } = this.formExclusaoConta.value;
 
         if(opcao == '6') {

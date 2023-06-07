@@ -102,7 +102,7 @@
                                     <option value="">Desativado</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-custom">Salvar alteraçoes</button>
+                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
                         </form>
                     </div>
                 </section>
@@ -114,17 +114,33 @@
                     <div class="section-body" *ngIf="sectionPeriodoPausa">
                         <p class="descricao">A funcionalidade de período de pausa de conta permite que você suspendam temporariamente o uso da sua conta na plataforma. Durante esse período, a conta fica inativa, impedindo o acesso e a realização de atividades como apostas, saques e depósitos. Essa opção é útil para fazer uma pausa temporária, sem excluir permanentemente a conta, preservando os dados e configurações para posterior reativação.</p>
                         <form [formGroup]="formPeriodoPausa" (ngSubmit)="onSubmitPeriodoPausa()">
-                            <div class="field">
-                                <label for="">Definir período de pausa</label>
-                                <select class="form-control inverted-out" formControlName="opcaoPausa">
-                                    <option value="6horas">6 horas</option>
-                                    <option value="12horas">12 horas</option>
-                                    <option value="24horas">24 horas</option>
-                                    <option value="36horas">36 horas</option>
-                                    <option value="48horas">48 horas</option>
-                                    <option value="72horas">72 horas</option>
-                                    <option value="custom">Customizar</option>
-                                </select>
+                            <div class="fields-row">
+                                <div class="field">
+                                    <label for="">Definir período de pausa</label>
+                                    <select class="form-control inverted-out" formControlName="opcaoPausa" (change)="changeOpcaoPausa()">
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="6horas">6 horas</option>
+                                        <option value="12horas">12 horas</option>
+                                        <option value="24horas">24 horas</option>
+                                        <option value="36horas">36 horas</option>
+                                        <option value="48horas">48 horas</option>
+                                        <option value="72horas">72 horas</option>
+                                        <option value="custom">Customizar</option>
+                                    </select>
+                                </div>
+                                <div class="field" style="position: relative" *ngIf="showDataFinalPausa">
+                                    <i class="fa fa-calendar" (click)="d.toggle()"></i>
+                                    <input
+                                        class="inverted-out"
+                                        readonly
+                                        placeholder="dd/mm/aaaa"
+                                        formControlName="dataFinalPausa"
+                                        ngbDatepicker
+                                        #d="ngbDatepicker"
+                                        [autoClose]="'outside'"
+                                        (click)="d.toggle()"
+                                    />
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-custom">Salvar alterações</button>
                         </form>
@@ -136,11 +152,12 @@
                         <i class="fa {{sectionExclusaoConta ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionExclusaoConta">
-                        <p class="descricao">Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, o você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.</p>
+                        <p class="descricao">Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.</p>
                         <form [formGroup]="formExclusaoConta" (ngSubmit)="onSubmitExclusaoConta()">
                             <div class="field w-500">
                                 <label for="">Informe por qual motivo você deseja excluir sua conta permanentemente:</label>
-                                <select class="form-control inverted-out" (change)="changeOpcaoExclusao($event)" formControlName="opcao">
+                                <select class="form-control inverted-out" (change)="changeOpcaoExclusao()" formControlName="opcao">
+                                    <option value="">Selecione uma opção</option>
                                     <option value="1">Uma segunda conta foi criada</option>
                                     <option value="2">Ocupa muito meu tempo/desvia muito minha atenção</option>
                                     <option value="3">Não tenho mais interesse em realizar apostas nesta banca</option>
@@ -152,7 +169,7 @@
                             <div class="field w-full" *ngIf="showMotivoExclusaoConta">
                                 <textarea rows="3" class="inverted-out" placeholder="Explique sobre quais motivos você está excluindo a conta..." formControlName="motivoExclusao"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-custom">Salvar alteraçoes</button>
+                            <button type="submit" class="btn btn-custom">Excluir conta permanentemente</button>
                         </form>
                     </div>
                 </section>

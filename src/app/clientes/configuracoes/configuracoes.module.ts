@@ -6,6 +6,7 @@ import {ConfiguracoesComponent} from './configuracoes.component';
 import {SharedModule} from '../../shared/shared.module';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
         CommonModule,
         ConfiguracoesRoutingModule,
         NgxChartsModule,
-        NgxCurrencyModule
+        NgxCurrencyModule,
+        NgbModule
     ]
 })
 export class ConfiguracoesModule {
