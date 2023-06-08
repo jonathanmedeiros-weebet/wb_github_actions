@@ -2766,3 +2766,12 @@ gulp.task('7pix.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('favelabett.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "favelabett.com",
+        banca: "FAVELA BET",
+        styles: "",
+    });
+});
