@@ -7,6 +7,8 @@ import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {config} from '../../shared/config';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'app-wall',
@@ -17,6 +19,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
     @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
+    @ViewChild('campoBusca', { static: true }) campoBusca: ElementRef;
     scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
@@ -53,7 +56,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     cassinoFornecedoresFiltrados = [];
     totalJogos = 0;
     isDemo = false;
-
+    limparCampoSearch;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -207,6 +210,11 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gamesScrolls.changes.subscribe((scrolls) => {
             this.scrolls = scrolls.toArray();
         });
+
+        fromEvent(this.campoBusca.nativeElement, 'keyup').pipe(debounceTime(1500)).subscribe(() => {
+            this.term = this.campoBusca.nativeElement.value
+            this.filtrarJogos();
+        });
     }
 
     scrollLeft(scrollId) {
@@ -349,6 +357,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparPesquisa() {
         if(this.term){
             this.term = '';
+            this.limparCampoSearch = '';
             this.filtrarJogos();
         }else{
             this.termFornecedorMobile = '';
