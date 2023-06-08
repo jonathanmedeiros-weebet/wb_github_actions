@@ -2570,6 +2570,7 @@ gulp.task('ganhafacil.bet', function (done) {
         host: "ganhafacil.bet",
         banca: "GANHA FÁCIL",
         styles: "",
+        pixel:"<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '950171356302607');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=950171356302607&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
     });
 });
 
@@ -2707,6 +2708,8 @@ gulp.task('brasileiraobet.com', function (done) {
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T23HZD3');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T23HZD3'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/dooKHPMUIy' async></script>",
     });
 });
 
@@ -2751,6 +2754,24 @@ gulp.task('betsbolabrasil.com', function (done) {
         server: "front3.wee.bet",
         host: "betsbolabrasil.com",
         banca: "BETS BOLA BRASIL",
+        styles: "",
+    });
+});
+
+gulp.task('7pix.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "7pix.bet",
+        banca: "7PIX.BET",
+        styles: "",
+    });
+});
+
+gulp.task('favelabett.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "favelabett.com",
+        banca: "FAVELA BET",
         styles: "",
     });
 });

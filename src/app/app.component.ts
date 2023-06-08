@@ -87,6 +87,7 @@ export class AppComponent implements OnInit {
                                         this.ativacaoCadastroModal,
                                         {
                                             ariaLabelledBy: 'modal-basic-title',
+                                            windowClass: 'modal-pop-up',
                                             centered: true,
                                         }
                                     );

@@ -13,6 +13,20 @@ h3 {
     padding: 20px 35px;
 }
 
+.close-modal-ativacao{
+    border-radius: 100%;
+    position: absolute;
+    display: flex;
+    top: 4px;
+    right: 5px;
+    cursor: pointer;
+}
+.close-modal-ativacao i{
+    margin: 10px;
+    color: var(--highlight);
+    font-size: 20px;
+}
+
 .modal-body {
     padding: 40px 60px;
 }

@@ -17,7 +17,7 @@
 }
 
 .table {
-    color: #fff;
+    color: var(--foreground);
  }
 
  .table thead th {
@@ -55,7 +55,7 @@
     width: 17px;
     height: 17px;
     border-radius: 50%;
-  
+
     cursor: pointer;
 
     background-color: var(--highlight);
