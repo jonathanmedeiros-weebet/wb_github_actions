@@ -62,7 +62,7 @@ export class PrintService {
         if (savedPrintGraphics == null) {
             this.printGraphics = true;
         } else {
-            this.printGraphics = savedPrintGraphics === 'true';
+            this.printGraphics = (savedPrintGraphics === 'true' || savedPrintGraphics === '1');
         }
 
         if (savedPrinterWidth && savedPrinterWidth === '58') {
