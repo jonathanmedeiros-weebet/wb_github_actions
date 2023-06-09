@@ -19,7 +19,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
     @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
-    @ViewChild('campoBusca', { static: true }) campoBusca: ElementRef;
+    @ViewChild('campoFiltroGames', { static: true }) campoFiltroGames: ElementRef;
     scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
@@ -56,7 +56,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     cassinoFornecedoresFiltrados = [];
     totalJogos = 0;
     isDemo = false;
-    limparCampoSearch;
+    filtroGames;
     filtros;
     constructor(
         private casinoApi: CasinoApiService,
@@ -215,8 +215,8 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.scrolls = scrolls.toArray();
         });
 
-        fromEvent(this.campoBusca.nativeElement, 'keyup').pipe(debounceTime(2000)).subscribe(() => {
-            this.term = this.campoBusca.nativeElement.value
+        fromEvent(this.campoFiltroGames.nativeElement, 'keyup').pipe(debounceTime(2000)).subscribe(() => {
+            this.term = this.campoFiltroGames.nativeElement.value
             this.filtrarJogos();
         });
     }
@@ -361,8 +361,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparPesquisa() {
         if(this.term){
             this.term = '';
-            this.limparCampoSearch = document.getElementById('limparCampoSearch');
-            this.limparCampoSearch.value = '';
+            this.filtroGames = document.getElementById('filtroGames');
+            this.filtroGames.value = '';
             this.filtrarJogos();
         }else{
             this.termFornecedorMobile = '';
