@@ -57,6 +57,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     totalJogos = 0;
     isDemo = false;
     limparCampoSearch;
+    filtros;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -73,6 +74,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.filtros = document.getElementById('filtros');
+        this.filtros.style.display="none";
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList().subscribe(response => {
@@ -148,6 +151,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                 }
             });
             this.showLoadingIndicator = false;
+            this.filtros.style.display="";
         }, erro => {});
         this.auth.logado
             .subscribe(
@@ -211,7 +215,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.scrolls = scrolls.toArray();
         });
 
-        fromEvent(this.campoBusca.nativeElement, 'keyup').pipe(debounceTime(1500)).subscribe(() => {
+        fromEvent(this.campoBusca.nativeElement, 'keyup').pipe(debounceTime(2000)).subscribe(() => {
             this.term = this.campoBusca.nativeElement.value
             this.filtrarJogos();
         });
@@ -357,7 +361,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparPesquisa() {
         if(this.term){
             this.term = '';
-            this.limparCampoSearch = '';
+            this.limparCampoSearch = document.getElementById('limparCampoSearch');
+            this.limparCampoSearch.value = '';
             this.filtrarJogos();
         }else{
             this.termFornecedorMobile = '';

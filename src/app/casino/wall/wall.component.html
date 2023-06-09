@@ -21,13 +21,12 @@
         </div>
     </div>
 
-    <div class="filter" *ngIf="!showLoadingIndicator">
-        <div class="search-box">
+    <div class="filter" id="filtros">
+        <div class="search-box" >
             <i class="fa fa-search"></i>
-            <input #campoBusca type="text"
+            <input  id="limparCampoSearch" #campoBusca type="text"
                 class="form-control inverted-out"
                 placeholder="Digite o nome de um jogo"
-                [(ngModel)]="limparCampoSearch"
             >
             <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
         </div>
