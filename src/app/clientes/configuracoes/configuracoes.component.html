@@ -1,0 +1,179 @@
+<div id="default-content">
+
+    <ng-container>
+        <div class="mobile-modal-header" *ngIf="mobileScreen">
+            <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">{{'geral.configuracoes' | translate}}</div>
+            <div class="botao-direito"></div>
+        </div>
+
+        <div class="internal-container-out">
+            <div class="content-header hide-mobile">
+                <h2>{{'geral.configuracoes' | translate}}</h2>
+            </div>
+
+            <div class="content-body">
+                <section class="limite-apostas">
+                    <div class="section-header" (click)="toggleSections('limiteApostas')">
+                        <h3>Limite de apostas</h3>
+                        <i class="fa {{sectionLimiteApostas ? 'fa-chevron-up' : 'fa-chevron-down'}}" ></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionLimiteApostas">
+                        <p class="descricao">A configuração de limite de apostas é uma funcionalidade que permite você definir um valor máximo para as suas apostas. Essa configuração ajuda a controlar e limitar o valor que pode ser apostado, evitando gastos excessivos e comportamentos de jogo irresponsáveis. Pode ser configurado limite diário, semanal e mensal para apostas.</p>
+                        <form [formGroup]="formLimiteApostas" (ngSubmit)="onSubmitLimiteApostas()">
+                            <div class="field">
+                                <label for="">Definir limite diário de apostas</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', nullable: true, allowZero: true }"
+                                    formControlName="limiteDiario"
+                                    placeholder="R$ 0,00"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">Definir limite semanal de apostas</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteSemanal"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">Definir limite mensal de apostas</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteMensal"
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                        </form>
+                    </div>
+                </section>
+                <section class="limite-depositos">
+                    <div class="section-header" (click)="toggleSections('limiteDeposito')">
+                        <h3>Limite de depósitos</h3>
+                        <i class="fa {{sectionLimiteDeposito ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionLimiteDeposito">
+                        <p class="descricao">A configuração de limite de depósito é uma funcionalidade que permite você definir um valor máximo para os depósitos que podem ser feitos em sua conta. Essa configuração visa ajudar a controlar o valor de dinheiro investido, prevenindo gastos excessivos e promovendo um jogo responsável. O limite de depósito estabelecido impede que você deposite valores acima desse limite durante um determinado período de tempo (diário, semanal e mensal).</p>
+                        <form [formGroup]="formLimiteDeposito" (ngSubmit)="onSubmitLimiteDeposito()">
+                            <div class="field">
+                                <label for="">Definir limite diário de depósito</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteDiario"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">Definir limite semanal de depósito</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteSemanal"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">Definir limite mensal de depósito</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteMensal"
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                        </form>
+                    </div>
+                </section>
+                <section class="limite-apostas" *ngIf="blocked">
+                    <div class="section-header" (click)="toggleSections('temporizadorSessao')">
+                        <h3>Temporizador de sessão</h3>
+                        <i class="fa {{sectionTemporizadorSessao ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionTemporizadorSessao">
+                        <p class="descricao">O temporizador de sessão é uma configuração no qual permite você definir um limite de tempo para o uso da plataforma. Ela ajuda a controlar o tempo gasto, alertando  você quando o limite é atingido e encerrando a sua sessão automaticamente, promovendo um uso equilibrado e consciente.  Por exemplo, você pode escolher limitar suas sessões a 30 minutos, 1 hora ou qualquer outro intervalo adequado para você e também desativar essa funcionalidade assim que desejar. Quando o limite de tempo da sessão for atingido, nosso sistema encerrará automaticamente sua sessão e fará o logout de sua conta. Isso ajuda a garantir que você respeite seus limites de tempo predefinidos.</p>
+                        <form>
+                            <div class="field">
+                                <label for="">Definir tempo de sessão</label>
+                                <select class="form-control inverted-out">
+                                    <option value="">Desativado</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                        </form>
+                    </div>
+                </section>
+                <section class="limite-apostas">
+                    <div class="section-header" (click)="toggleSections('periodoPausa')">
+                        <h3>Período de pausa</h3>
+                        <i class="fa {{sectionPeriodoPausa ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionPeriodoPausa">
+                        <p class="descricao">A funcionalidade de período de pausa de conta permite que você suspendam temporariamente o uso da sua conta na plataforma. Durante esse período, a conta fica inativa, impedindo o acesso e a realização de atividades como apostas, saques e depósitos. Essa opção é útil para fazer uma pausa temporária, sem excluir permanentemente a conta, preservando os dados e configurações para posterior reativação.</p>
+                        <form [formGroup]="formPeriodoPausa" (ngSubmit)="onSubmitPeriodoPausa()">
+                            <div class="fields-row">
+                                <div class="field">
+                                    <label for="">Definir período de pausa</label>
+                                    <select class="form-control inverted-out" formControlName="opcaoPausa" (change)="changeOpcaoPausa()">
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="6horas">6 horas</option>
+                                        <option value="12horas">12 horas</option>
+                                        <option value="24horas">24 horas</option>
+                                        <option value="36horas">36 horas</option>
+                                        <option value="48horas">48 horas</option>
+                                        <option value="72horas">72 horas</option>
+                                        <option value="custom">Customizar</option>
+                                    </select>
+                                </div>
+                                <div class="field" style="position: relative" *ngIf="showDataFinalPausa">
+                                    <i class="fa fa-calendar" (click)="d.toggle()"></i>
+                                    <input
+                                        class="inverted-out"
+                                        readonly
+                                        placeholder="dd/mm/aaaa"
+                                        formControlName="dataFinalPausa"
+                                        ngbDatepicker
+                                        #d="ngbDatepicker"
+                                        [autoClose]="'outside'"
+                                        (click)="d.toggle()"
+                                    />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                        </form>
+                    </div>
+                </section>
+                <section class="exclusao-conta">
+                    <div class="section-header" (click)="toggleSections('exclusaoConta')">
+                        <h3>Exclusão de conta</h3>
+                        <i class="fa {{sectionExclusaoConta ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionExclusaoConta">
+                        <p class="descricao">Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.</p>
+                        <form [formGroup]="formExclusaoConta" (ngSubmit)="onSubmitExclusaoConta()">
+                            <div class="field w-500">
+                                <label for="">Informe por qual motivo você deseja excluir sua conta permanentemente:</label>
+                                <select class="form-control inverted-out" (change)="changeOpcaoExclusao()" formControlName="opcao">
+                                    <option value="">Selecione uma opção</option>
+                                    <option value="1">Uma segunda conta foi criada</option>
+                                    <option value="2">Ocupa muito meu tempo/desvia muito minha atenção</option>
+                                    <option value="3">Não tenho mais interesse em realizar apostas nesta banca</option>
+                                    <option value="4">Não estou mais usando está conta</option>
+                                    <option value="5">Problemas ao utilizar o sistema</option>
+                                    <option value="6">Outros motivos</option>
+                                </select>
+                            </div>
+                            <div class="field w-full" *ngIf="showMotivoExclusaoConta">
+                                <textarea rows="3" class="inverted-out" placeholder="Explique sobre quais motivos você está excluindo a conta..." formControlName="motivoExclusao"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-custom">Excluir conta permanentemente</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </ng-container>
+</div>

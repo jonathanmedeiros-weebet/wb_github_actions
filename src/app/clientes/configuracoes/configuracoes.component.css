@@ -1,0 +1,93 @@
+.btnClose {
+    font-size: 32px;
+    line-height: 32px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--highlight);
+    cursor: pointer;
+}
+
+.content-body section {
+    background-color: var(--header);
+    color: var(--foreground-header);
+    margin-bottom: 3px;
+}
+
+.content-body section .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+    cursor: pointer;
+}
+
+.content-body section .section-header h3 {
+    margin: 0;
+    font-size: 12px;
+}
+
+.content-body section .section-body {
+    padding: 0 25px 25px;
+}
+
+.content-body section .section-body p.descricao {
+    margin-bottom: 30px;
+}
+
+.content-body section .section-body form .fields-row {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.content-body section .section-body form .fields-row  .field {
+    width: 100%;
+}
+
+.content-body section .section-body form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 35px;
+    max-width: 400px;
+}
+
+.content-body section .section-body form .field .fa.fa-calendar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.content-body section .section-body form .field input {
+    opacity: 1 !important;
+}
+
+.content-body section .section-body form .field.w-500 {
+    max-width: 500px;
+}
+
+.content-body section .section-body form .field.w-full {
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .content-body section .section-body form button {
+        width: 100%;
+    }
+
+    .content-body section .section-body form .fields-row {
+        flex-wrap: wrap;
+    }
+}
