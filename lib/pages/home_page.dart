@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
 
     _webViewController = webViewController;
 
-    _saveLogoBytes(widget.host);
+    _saveLogoBytes(widget.host.replaceAll(RegExp('^(?:https?://)'), ''));
     _getConfiguredPrinter();
     _sendApkVersion();
     _sendRollWidth(printerRollWidth);
