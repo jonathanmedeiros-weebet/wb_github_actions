@@ -2784,3 +2784,12 @@ gulp.task('kwbet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vitoriasports.vip', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "vitoriasports.vip",
+        banca: "VITÓRIA SPORTS",
+        styles: "",
+    });
+});

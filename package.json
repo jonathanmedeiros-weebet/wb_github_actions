@@ -298,7 +298,8 @@
         "betsbolabrasil.com": "gulp betsbolabrasil.com",
         "7pix.bet": "gulp 7pix.bet",
         "favelabett.com": "gulp favelabett.com",
-        "kwbet.bet": "gulp kwbet.bet"
+        "kwbet.bet": "gulp kwbet.bet",
+        "vitoriasports.vip": "gulp vitoriasports.vip"
     },
     "private": true,
     "dependencies": {
