@@ -510,7 +510,7 @@
 </nav>
 
 <ng-template #menuTemplate>
-    <div #menu style="display: flex">
+    <div #menu class="d-flex">
         <div class="category" *ngIf="esporteAtivo">
             <a [routerLink]="['/esportes']" routerLinkActive="active">
                 <span>{{'menu.esportes' | translate}}</span>
