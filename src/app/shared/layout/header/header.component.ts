@@ -43,6 +43,7 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
 })
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    @ViewChild('menu') menu: ElementRef;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -167,7 +168,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.menuWidth = window.innerWidth - (350 + 350);
             this.isMobile = false;
         } else {
-            this.menuWidth = window.innerWidth - 25;
+            this.menuWidth = window.innerWidth;
             this.isMobile = true;
         }
 
@@ -183,7 +184,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngAfterViewInit() {
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+        this.scrollWidth = this.menu.nativeElement.scrollWidth;
         this.checkCentering();
     }
 
