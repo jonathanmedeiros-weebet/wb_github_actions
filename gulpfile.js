@@ -2775,3 +2775,12 @@ gulp.task('favelabett.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('kwbet.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "kwbet.bet",
+        banca: "KW BET",
+        styles: "",
+    });
+});
