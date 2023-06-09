@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
 
     _webViewController = webViewController;
 
-    _saveLogoBytes();
+    _saveLogoBytes(widget.host);
     _getConfiguredPrinter();
     _sendApkVersion();
     _sendRollWidth(printerRollWidth);
@@ -141,9 +141,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  _saveLogoBytes() async {
-    const logoUrl =
-        'https://weebet.s3.amazonaws.com/casadinha.com/logos/logo_banca.png';
+  _saveLogoBytes(slug) async {
+    final logoUrl =
+        'https://weebet.s3.amazonaws.com/$slug/logos/logo_banca.png';
     Uint8List remoteLogoBytes =
         (await NetworkAssetBundle(Uri.parse(logoUrl)).load(logoUrl))
             .buffer
