@@ -21,6 +21,7 @@ class _PrinterSettingsPageState extends State<PrinterSettingsPage> {
   String? printerName;
   String? printerMAC;
   int printerRollWidth = 0;
+  int frontVersion = 2;
   bool? printGraphics;
   late Map printer;
   List availableBluetoothDevices = [];
@@ -52,6 +53,7 @@ class _PrinterSettingsPageState extends State<PrinterSettingsPage> {
 
   _getConfiguredPrinter() async {
     printer = await _storageService.getConfiguredPrinter();
+    frontVersion = await _storageService.getFrontVersion() ?? 2;
 
     setState(() {
       printerName = printer['printerName'];
@@ -283,7 +285,22 @@ class _PrinterSettingsPageState extends State<PrinterSettingsPage> {
                         });
                       },
                     );
-                  }))
+                  })),
+          // Text('System Version: ', style: const TextStyle(color: Color.fromARGB(255, 34, 36, 38)),),
+          RichText(
+              text: TextSpan(
+                  style:
+                      const TextStyle(color: Color.fromARGB(255, 34, 36, 38)),
+                  children: [
+                const TextSpan(
+                    text: 'System Version: ',
+                    style: TextStyle(fontWeight: FontWeight.w600)),
+                TextSpan(text: frontVersion.toString()),
+                const TextSpan(
+                    text: ' APK Version:',
+                    style: TextStyle(fontWeight: FontWeight.w600)),
+                const TextSpan(text: '3')
+              ]))
         ],
       ),
     );

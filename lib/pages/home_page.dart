@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:weebet_mobile/pages/printer_settings_page.dart';
@@ -74,7 +76,9 @@ class _HomePageState extends State<HomePage> {
 
     _webViewController = webViewController;
 
+    _saveLogoBytes(widget.host);
     _getConfiguredPrinter();
+    _sendApkVersion();
     _sendRollWidth(printerRollWidth);
     _sendPrintGraphics(printGraphics);
   }
@@ -118,6 +122,16 @@ class _HomePageState extends State<HomePage> {
           await _printBytes(bytesToPrint);
         }
         break;
+      case 'frontVersion':
+        {
+          await _setFrontVersion(postMessage['data']);
+          break;
+        }
+      case 'getApkConfigs':
+        {
+          await _sendApkConfigs();
+          break;
+        }
       default:
         {
           List<int> bytesToPrint = List<int>.from(postMessage['data']);
@@ -125,6 +139,17 @@ class _HomePageState extends State<HomePage> {
         }
         break;
     }
+  }
+
+  _saveLogoBytes(slug) async {
+    final logoUrl =
+        'https://weebet.s3.amazonaws.com/$slug/logos/logo_banca.png';
+    Uint8List remoteLogoBytes =
+        (await NetworkAssetBundle(Uri.parse(logoUrl)).load(logoUrl))
+            .buffer
+            .asUint8List();
+
+    await _storageService.saveLogoBase64(base64.encode(remoteLogoBytes));
   }
 
   _printBytes(bytesToPrint) async {
@@ -138,6 +163,11 @@ class _HomePageState extends State<HomePage> {
       _noPrinterConfiguredDialog();
     }
     _sendExecutionInfo(false);
+  }
+
+  _sendApkVersion() {
+    _webViewController.runJavaScript(
+        'window.postMessage({action: "apkVersion", "version": 3}, "*");');
   }
 
   _sendRollWidth(int rollWidth) {
@@ -170,7 +200,19 @@ class _HomePageState extends State<HomePage> {
     _utilitiesService.handleAndroidPermissions();
     await Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const PrinterSettingsPage()));
-    _getConfiguredPrinter();
+
+    await _sendApkConfigs();
+  }
+
+  _sendApkConfigs() async {
+    await _getConfiguredPrinter();
+    await _sendRollWidth(printerRollWidth);
+    await _sendPrintGraphics(printGraphics);
+    await _sendApkVersion();
+  }
+
+  _setFrontVersion(version) async {
+    await _storageService.setFrontVersion(version);
   }
 
   _printFailedDialog() {

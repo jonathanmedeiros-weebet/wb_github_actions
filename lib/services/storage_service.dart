@@ -27,4 +27,24 @@ class StorageService {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('print_graphics', printGraphics!);
   }
+
+  setFrontVersion(int frontVersion) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('front_version', frontVersion);
+  }
+
+  getFrontVersion() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('front_version');
+  }
+
+  saveLogoBase64(logoBytes) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('logo_base64', logoBytes);
+  }
+
+  getLogoBase64() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('logo_base64');
+  }
 }
