@@ -34,7 +34,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     regiaoOpen;
     itens: any[];
     unsub$ = new Subject();
-    regioesDestaque;
+    ligasPopulares;
     isNotCambista = true;
     isLogado = false;
     whatsapp;
@@ -103,7 +103,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 }
             );
 
-        this.regioesDestaque = this.paramsLocais.getOpcoes().regioes_destaque;
+        this.ligasPopulares = this.getLigasPopulares();
 
         this.createForm();
 
@@ -121,6 +121,28 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+    }
+
+    private getLigasPopulares() {
+        return this.paramsLocais.getLigasPopulares().map((ligaPopular) => {
+            if (ligaPopular.sport_id === 1) {
+                ligaPopular.nome = ligaPopular.nome.substring(ligaPopular.nome.indexOf(':') + 1);
+            }
+            return ligaPopular;
+        }).sort((a, b) => a.sport_id - b.sport_id).sort((a, b) => {
+            const nomeA = a.nome.toUpperCase();
+            const nomeB = b.nome.toUpperCase();
+
+            if (nomeA < nomeB) {
+                return -1;
+            }
+
+            if (nomeA > nomeB) {
+                return 1;
+            }
+
+            return 0;
+        });
     }
 
     createForm() {
@@ -239,5 +261,75 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     logout() {
         this.auth.logout();
+    }
+
+    getIconClassLigasPopulares(sportId) {
+        let className = 'icon-futebol wbicon';
+
+        switch (sportId) {
+            case 1: {
+                // Futebol
+                className = 'wbicon icon-futebol';
+                break;
+            }
+            case 9: {
+                // Combate
+                className = 'wbicon icon-luta';
+                break;
+            }
+            case 12: {
+                // Futebol Americano
+                className = 'wbicon icon-futebol-americano';
+                break;
+            }
+            case 13: {
+                // Tennis
+                className = 'wbicon icon-tenis';
+                break;
+            }
+            case 17: {
+                // Ice Hockey
+                className = 'wbicon icon-hoquei-no-gelo';
+                break;
+            }
+            case 18: {
+                // Basquetebol
+                className = 'wbicon icon-basquete';
+                break;
+            }
+            case 83: {
+                // Futsal
+                className = 'wbicon icon-futsal';
+                break;
+            }
+            case 91: {
+                // Volleyball
+                className = 'wbicon icon-volei';
+                break;
+            }
+            case 151: {
+                // Esports
+                className = 'wbicon icon-e-sports';
+                break;
+            }
+        }
+
+        return className;
+    }
+
+    getRotaPorEsporteId(sportId) {
+        const rotaPorSporteId = {
+            1: '/esportes/futebol',
+            9: '/esportes/combate',
+            12: '/esportes/futebol-americano',
+            13: '/esportes/tenis',
+            17: '/esportes/hoquei-gelo',
+            18: '/esportes/basquete',
+            83: '/esportes/futsal',
+            91: '/esportes/volei',
+            151: '/esportes/esports',
+        };
+
+        return rotaPorSporteId[sportId] ?? '/esportes/futebol';
     }
 }

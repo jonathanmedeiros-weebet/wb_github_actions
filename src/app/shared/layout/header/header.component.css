@@ -47,6 +47,10 @@ nav a {
     color: var(--highlight);
 }
 
+.category a span {
+    white-space: nowrap;
+}
+
 .side {
     width: 100%;
     display: flex;
@@ -59,12 +63,18 @@ nav a {
     padding-right: 20px;
 }
 
+.side-left {
+    justify-content: left;
+    padding-left: 20px;
+}
+
 .menu-conta {
     display: flex;
 }
 
 .logo {
     max-height: 80px;
+    max-width: 250px;
 }
 
 nav::-webkit-scrollbar {
@@ -402,6 +412,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
+        max-width: calc(50vw - 25px);
     }
 
     .btn {
@@ -413,14 +424,6 @@ body .change-theme {
 
     .btn.mr-4 {
         margin-right: 10px !important;
-    }
-
-    .side {
-        justify-content: start;
-    }
-
-    .side .logo {
-        margin-left: 10px;
     }
 
     nav {
@@ -440,6 +443,10 @@ body .change-theme {
         font-size: 11px; /* ajuste fonte */
     }
 
+    .side {
+        justify-content: start;
+    }
+
     .side-right {
         padding-right: 0;
         justify-content: flex-end;
@@ -448,4 +455,9 @@ body .change-theme {
     .side-right .btn-custom2 {
         margin-right: 10px;
     }
+
+    .side-left {
+        padding-left: 10px;
+    }
 }
+

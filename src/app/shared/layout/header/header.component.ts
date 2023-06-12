@@ -1,6 +1,6 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions} from '@angular/router';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {IsActiveMatchOptions, Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -33,6 +33,7 @@ import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
 import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
 import {TranslateService} from '@ngx-translate/core';
 import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
+import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configuracoes.component';
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 
@@ -41,8 +42,9 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.css']
 })
-export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewChecked {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    @ViewChild('menu') menu: ElementRef;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -108,7 +110,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private paramsService: ParametrosLocaisService,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private router: Router,
     ) {
         super();
     }
@@ -183,14 +186,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.unsub$.complete();
     }
 
-    ngAfterViewInit() {
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+    ngAfterViewChecked() {
         this.checkCentering();
+        this.cd.detectChanges();
     }
 
     checkCentering() {
-        this.centered = this.menuWidth >= this.scrollWidth;
-        this.cd.detectChanges();
+        const scrollWidth = this.menu.nativeElement.scrollWidth;
+        this.centered = scrollWidth <= window.innerWidth;
     }
 
     createForm() {
@@ -302,6 +305,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClientePixModalComponent);
     }
 
+    abrirConfiguracoes() {
+        this.modalService.open(ConfiguracoesComponent);
+    }
+
     abrirFinanceiro() {
         this.modalService.open(FinanceiroComponent);
 
@@ -380,5 +387,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     alternarExibirSaldo() {
         this.mostrarSaldo = !this.mostrarSaldo;
         localStorage.setItem('exibirSaldo', this.mostrarSaldo);
+    }
+
+    activeMenuCassino() {
+        if (this.router.url.includes('/casino/c') && this.router.url != '/casino/c/wall/live') {
+            return 'active';
+        }
+
+        return '';
     }
 }

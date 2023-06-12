@@ -32,6 +32,10 @@
     white-space: nowrap;
 }
 
+.submenu svg-icon {
+    margin-right: 5px;
+}
+
 .subcategory {
     margin: 0;
     display: flex;
@@ -48,7 +52,7 @@
     align-items: center;
     font-style: normal;
     font-size: 14px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .subcategory a i {
@@ -122,10 +126,6 @@
 @media only screen and (max-width: 1024px) {
     .subcategory a {
         font-size: 12px;
-    }
-
-    .submenu:not(.centered) .subcategory a.active {
-        display: none;
     }
 
     .fixed-submenu {

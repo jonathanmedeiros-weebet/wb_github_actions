@@ -28,6 +28,7 @@ export class ApostaComponent implements OnInit {
     loading = false;
     apostador = '';
     status = '';
+    codigo = '';
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
@@ -84,7 +85,7 @@ export class ApostaComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.mobileScreen = window.innerWidth <=1024;
+        this.mobileScreen = window.innerWidth <= 1024;
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cambista'});
         }
@@ -102,6 +103,7 @@ export class ApostaComponent implements OnInit {
     getApostas() {
         this.loading = true;
         const queryParams: any = {
+            'codigo': this.codigo,
             'data-inicial': this.queryParams.dataInicial,
             'data-final': this.queryParams.dataFinal,
             'status': this.status,
@@ -366,6 +368,6 @@ export class ApostaComponent implements OnInit {
     }
 
     getDataFormatada(value, format) {
-        return moment(value).format(format);;
+        return moment(value).format(format);
     }
 }

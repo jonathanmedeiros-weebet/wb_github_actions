@@ -27,13 +27,12 @@
     </app-bilhete-acumuladao>
     <app-exibir-bilhete-desafio [aposta]="aposta" *ngIf="aposta.tipo == 'desafio'">
     </app-exibir-bilhete-desafio>
-
-    <div class="mt-3">
-        <a class="btn btn-custom btn-block" *ngIf="isMobile && impressaoPermitida()" (click)="printTicket()">
-            {{'geral.imprimir' | translate}}
-        </a>
-        <a class="btn btn-custom btn-block" *ngIf="isMobile && compartilhamentoPermitido()" (click)="shareTicket()">
-            {{'geral.compartilhar' | translate}}
-        </a>
-    </div>
+</div>
+<div class="p-3" *ngIf="isMobile && (impressaoPermitida() || compartilhamentoPermitido())">
+    <a class="btn btn-custom btn-block" *ngIf="impressaoPermitida()" (click)="printTicket()">
+        {{'geral.imprimir' | translate}}
+    </a>
+    <a class="btn btn-custom btn-block" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()">
+        {{'geral.compartilhar' | translate}}
+    </a>
 </div>

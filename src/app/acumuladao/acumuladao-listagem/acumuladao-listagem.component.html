@@ -1,4 +1,79 @@
-<div id="acumuladao-listagem">
+<div class="loading-listagem" *ngIf="isLoading">
+    <div class="ssc-square title"></div>
+    <div class="item-sample">
+        <div class="item-left">
+            <div class="ssc-square" style="width: 170px"></div>
+            <div class="ssc-square" style="width: 200px"></div>
+            <div class="ssc-square" style="margin-top: 20px; width: 100px"></div>
+        </div>
+        <div class="item-right">
+            <div class="ssc-square" style="width: 160px"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 140px;"></div>
+        </div>
+    </div>
+    <div class="item-sample">
+        <div class="item-left">
+            <div class="ssc-square" style="width: 170px"></div>
+            <div class="ssc-square" style="width: 200px"></div>
+            <div class="ssc-square" style="margin-top: 20px; width: 100px"></div>
+        </div>
+        <div class="item-right">
+            <div class="ssc-square" style="width: 160px"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 140px;"></div>
+        </div>
+    </div>
+    <div class="item-sample">
+        <div class="item-left">
+            <div class="ssc-square" style="width: 170px"></div>
+            <div class="ssc-square" style="width: 200px"></div>
+            <div class="ssc-square" style="margin-top: 20px; width: 100px"></div>
+        </div>
+        <div class="item-right">
+            <div class="ssc-square" style="width: 160px"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 140px;"></div>
+        </div>
+    </div>
+    <div class="item-sample">
+        <div class="item-left">
+            <div class="ssc-square" style="width: 170px"></div>
+            <div class="ssc-square" style="width: 200px"></div>
+            <div class="ssc-square" style="margin-top: 20px; width: 100px"></div>
+        </div>
+        <div class="item-right">
+            <div class="ssc-square" style="width: 160px"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 140px;"></div>
+        </div>
+    </div>
+    <div class="item-sample">
+        <div class="item-left">
+            <div class="ssc-square" style="width: 170px"></div>
+            <div class="ssc-square" style="width: 200px"></div>
+            <div class="ssc-square" style="margin-top: 20px; width: 100px"></div>
+        </div>
+        <div class="item-right">
+            <div class="ssc-square" style="width: 160px"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 140px;"></div>
+        </div>
+    </div>
+    <div class="item-sample">
+        <div class="item-left">
+            <div class="ssc-square" style="width: 170px"></div>
+            <div class="ssc-square" style="width: 200px"></div>
+            <div class="ssc-square" style="margin-top: 20px; width: 100px"></div>
+        </div>
+        <div class="item-right">
+            <div class="ssc-square" style="width: 160px"></div>
+            <div class="ssc-square" style="width: 150px;"></div>
+            <div class="ssc-square" style="width: 140px;"></div>
+        </div>
+    </div>
+</div>
+<div id="acumuladao-listagem" *ngIf="!isLoading">
     <h2 class="m-3 mt-4">{{'geral.acumuladao' | translate}}</h2>
     <div class="wrap-acumuladao">
         <div class="sem-evento" *ngIf="acumuladoes ? acumuladoes.length == 0 : false">

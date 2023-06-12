@@ -301,7 +301,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         }
 
         let modalAposta;
-        if (this.encerramentoPermitido && aposta.tipo == 'esportes') {
+        if (this.encerramentoPermitido && aposta.tipo == 'esportes' && !aposta.is_bonus) {
             modalAposta = ApostaEncerramentoModalComponent;
         } else {
             modalAposta = ApostaModalComponent;
@@ -342,45 +342,4 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     getDataFormatada(value, format) {
         return moment(value).format(format);;
     }
-
-    // handleCancel(aposta) {
-    //     this.showLoading = true;
-    //     const params = {};
-    //
-    //     if (aposta.id === this.apostas[0].id) {
-    //         params['verificar-ultima-aposta'] = 1;
-    //     }
-    //
-    //     this.apostaService.getAposta(aposta.id, params)
-    //         .subscribe(
-    //             apostaLocalizada => {
-    //                 this.cancelar(apostaLocalizada);
-    //
-    //                 this.showLoading = false;
-    //                 this.cd.detectChanges();
-    //             },
-    //             error => this.handleError(error)
-    //         );
-    // }
-
-    // cancelar(aposta) {
-    //     this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
-    //     this.modalRef.componentInstance.title = 'Cancelar Aposta';
-    //     this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-    //
-    //     console.log("APOSTA", aposta);
-    //
-    //     this.modalRef.result.then(
-    //         (result) => {
-    //             this.apostaService.cancelar({id: aposta.id, version: aposta.version})
-    //                 .pipe(takeUntil(this.unsub$))
-    //                 .subscribe(
-    //                     () => this.getApostas(),
-    //                     error => this.handleError(error)
-    //                 );
-    //         },
-    //         (reason) => {
-    //         }
-    //     );
-    // }
 }

@@ -1,6 +1,6 @@
 <div id="definir" [ngClass]="{'hide': !isOpen}">
     <div class="logo-container">
-        <a class="" [routerLink]="['/esportes/futebol/jogos']">
+        <a [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
         </a>
 
@@ -9,26 +9,25 @@
         </a>
     </div>
     <app-sidebar-nav *ngIf="campeonatosIsOpen" [height]="sidebarNavHeight"></app-sidebar-nav>
-    <app-sidebar-menu *ngIf="menuIsOpen"></app-sidebar-menu>
 </div>
 <div id="bottom-bar" [hidden]="hidden">
     <div class="bottom-bar-button" *ngIf="!['acumuladao', 'quininha', 'seninha'].includes(contexto)">
-        <a class="" (click)="toggleCampeonatos()">
+        <a (click)="toggleCampeonatos()">
             <i class="fa-solid fa-bars-staggered"></i> {{nomeBotaoExtras}}
         </a>
     </div>
     <div *ngIf="aoVivoHabilitado" class="bottom-bar-button" routerLinkActive="active" [ngClass]="{'menu-open': menuIsOpen}">
-        <a class="" [routerLink]="['/esportes/live']">
+        <a [routerLink]="['/esportes/live']">
             <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate}}
         </a>
     </div>
     <div *ngIf="!aoVivoHabilitado" class="bottom-bar-button" routerLinkActive="active">
-        <a class="" [routerLink]="['/esportes/futebol']">
+        <a [routerLink]="['/esportes/futebol']">
             <i class="wbicon icon-futebol"></i> {{'submenu.futebol' | translate}}
         </a>
     </div>
     <div class="bottom-bar-button">
-        <a class="" (click)="toggleBilhete()">
+        <a (click)="toggleBilhete()">
             <div class="badge-container" *ngIf="quantidadeItens > 0">
                 <span class="cupom-badge">{{quantidadeItens}}</span>
             </div>
@@ -36,13 +35,20 @@
         </a>
     </div>
     <div class="bottom-bar-button" *ngIf="isLoggedIn && !isCliente">
-        <a class="" (click)="abrirValidarAposta()">
+        <a (click)="abrirValidarAposta()">
             <i class="fa-solid fa-check"></i> {{'geral.validacao' | translate}}
         </a>
     </div>
-    <div class="bottom-bar-button" [ngClass]="{'active': menuIsOpen}">
-        <a class="" (click)="toggleMenu()">
-            <i class="fa-solid fa-ellipsis-vertical"></i> {{'geral.menu' | translate}}
+    <div class="bottom-bar-button">
+        <a (click)="toggleApostas()">
+            <i class="ri ri-file-list-3-line"></i> {{'geral.apostas' | translate}}
+        </a>
+    </div>
+    <div *ngIf="whatsapp && (!isLoggedIn || isCliente)"
+         class="bottom-bar-button" routerLinkActive="active"
+         [ngClass]="{'menu-open': menuIsOpen}">
+        <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+            <i class="fa fa-brands fa-whatsapp"></i> {{'geral.suporte' | translate}}
         </a>
     </div>
 </div>

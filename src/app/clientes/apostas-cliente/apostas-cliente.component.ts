@@ -31,7 +31,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     casinoHabilitado;
     activeId = 'esporte';
 
-    showLoading = false;
+    showLoading = true;
+    showLoadingModal = true;
     encerramentoPermitido;
 
     modalRef;
@@ -56,7 +57,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     isCliente ;
     slug;
-    
+
     appMobile;
     origin;
 
@@ -112,7 +113,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.slug = config.SLUG;
 
         this.appMobile = this.auth.isAppMobile();
-        this.origin = this.appMobile ? '?origin=app':''; 
+        this.origin = this.appMobile ? '?origin=app':'';
     }
 
     ngOnDestroy() {
@@ -199,11 +200,13 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         });
 
         this.loading = false;
+        this.showLoading = false;
     }
 
     handleError(error: string) {
         this.messageService.error(error);
         this.loading = false;
+        this.showLoading = false;
     }
 
     submit() {

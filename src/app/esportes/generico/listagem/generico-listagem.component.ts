@@ -396,32 +396,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         }
     }
 
-    exibirBtnProximaData() {
-        let result = false;
-
-        if (this.data) {
-            const proximaData = moment(this.data).add(1, 'd');
-
-            const diferencaDias = (proximaData.date() - moment().date());
-            if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
-                result = true;
-            }
-        }
-
-        return result;
-    }
-
-    proximaData() {
-        const proximaData = moment(this.data).add(1, 'd');
-
-        if (proximaData.isSameOrBefore(this.dataLimiteTabela)) {
-            const navigationExtras: NavigationExtras = {
-                queryParams: { 'data': proximaData.format('YYYY-MM-DD') }
-            };
-            this.router.navigate([`/esportes/${this.esporte}`], navigationExtras);
-        }
-    }
-
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
     }

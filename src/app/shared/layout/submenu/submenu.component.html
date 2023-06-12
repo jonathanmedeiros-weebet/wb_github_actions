@@ -1,10 +1,4 @@
 <div class="submenu-container">
-    <div class="subcategory fixed-submenu" *ngIf="isMobile && submenuAtivo && !centered">
-        <a routerLink="{{submenuAtivo.link}}" routerLinkActive="active" [queryParams]="submenuAtivo.queryParams">
-            <i class="{{submenuAtivo.icon_class}}"></i>
-            <span>{{submenuAtivo.name}}</span>
-        </a>
-    </div>
     <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
          [ngClass]="{'centered': centered}"
          (scroll)="onScroll($event)" #scrollMenu>
@@ -12,12 +6,12 @@
             <i class="fa fa-angle-left fa-left"></i>
         </div>
         <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
-            <a routerLink="{{item.link}}" routerLinkActive="active" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
+            <a routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
                 <i class="{{item.icon_class}}"></i>
                 <span>{{item.name}}</span>
             </a>
-            <a routerLink="{{item.link}}" routerLinkActive="active" *ngIf="item.svgIcon" [queryParams]="item.queryParams" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">
-                <svg-icon [src]="item.svgSrc" [svgStyle]="svgByRouteCss(item.routeActive, item.svgHover)"></svg-icon>
+            <a routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="item.svgIcon" [queryParams]="item.queryParams" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">
+                <svg-icon [src]="item.svgSrc" [svgStyle]="item.svgStroke ? svgByRouteCssStroke(item.link, item.svgHover) : svgByRouteCss(item.link, item.svgHover)"></svg-icon>
                 <span>{{item.name}}</span>
             </a>
         </div>

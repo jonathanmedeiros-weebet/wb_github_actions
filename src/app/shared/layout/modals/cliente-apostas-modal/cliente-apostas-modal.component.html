@@ -75,7 +75,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th></th>
                         <th *ngIf="mobileScreen">Cod.</th>
                         <th *ngIf="!mobileScreen">{{'geral.horario' | translate}}</th>
                         <th>{{'geral.valor' | translate}}</th>
@@ -88,7 +87,6 @@
                 <tbody *ngIf="!loading">
                     <ng-container *ngFor="let aposta of apostas">
                         <tr class="{{ classNameAposta(aposta) }} mobile-tds">
-                            <td></td>
                             <td class="codigo">{{ aposta.codigo }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td class="acoes-aposta">
@@ -101,7 +99,7 @@
                             </td>
                         </tr>
                         <tr *ngIf="mobileScreen" class="{{ classNameAposta(aposta) }}">
-                            <td colspan="5" class="info-apostador">
+                            <td colspan="3" class="info-apostador">
                                 {{'geral.apostouEmAs' | translate: {
                                 apostador: pronomeCliente,
                                 data: getDataFormatada(aposta.horario, 'DD/MM/YYYY'),

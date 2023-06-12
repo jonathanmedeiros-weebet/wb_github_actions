@@ -39,17 +39,21 @@
             </li>
         </div>
 
+        <div class="" *ngIf="ligasPopulares && ligasPopulares.length">
+            <span class="group" *ngIf="!collapsed">{{'geral.ligasPopulares' | translate}}</span>
+            <li *ngFor="let ligaPopular of ligasPopulares">
+                <a (click)="goTo(getRotaPorEsporteId(ligaPopular.sport_id), { campeonato: ligaPopular.api_id })">
+                    <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
+                    <span class="regiao-nome">
+                        <span *ngIf="ligaPopular.sport_id === 1 && ligaPopular.regiao_sigla"
+                              class="flag-icon flag-icon-{{ligaPopular.regiao_sigla}}">
+                        </span>
+                        {{ligaPopular.nome}}
+                    </span>
+                </a>
+            </li>
+        </div>
         <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
-            <div class="destaques-regiao" *ngIf="regioesDestaque">
-                <span class="group" *ngIf="!collapsed">{{'geral.destaques' | translate}}</span>
-                <li *ngFor="let regiao of regioesDestaque"
-                    (click)="goTo('/esportes/futebol', { regiao_nome: regiao.nome })">
-                    <a>
-                        <i class="icon-futebol wbicon"></i>
-                        <span class="regiao-nome">{{regiao.nome}}</span>
-                    </a>
-                </li>
-            </div>
             <span class="group" *ngIf="!collapsed">{{'geral.campeonatos' | translate}}</span>
             <li class="regiao" *ngFor="let regiao of itens">
                 <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
@@ -263,6 +267,13 @@
             </li>
 
              <li class="cambista-item">
+                <a [routerLink]="['/clientes/configuracoes']" routerLinkActive="router-link-active">
+                    <i class="fa fa-cogs icone-generico"></i>
+                    <span class="regiao-nome">{{'geral.configuracoes' | translate}}</span>
+                </a>
+            </li>
+
+             <li class="cambista-item">
                 <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
                     <i class="fa fa-dollar icone-generico"></i>
                     <span class="regiao-nome">{{'geral.financeiro' | translate}}</span>
@@ -290,7 +301,7 @@
             </li>
             <li class="cambista-item">
                 <a [routerLink]="['/clientes/rollover']" routerLinkActive="router-link-active">
-                    <i class="fa fa-dollar icone-generico"></i>
+                    <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'geral.rollover' | translate}}</span>
                 </a>
             </li>

@@ -153,7 +153,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }else{
                         this.modalService.open(this.ativacaoCadastroModal,{
                             ariaLabelledBy: 'modal-basic-title',
-                            centered: true,
+                            windowClass: 'modal-pop-up',
+                            centered: true
                             }
                         );
                     }

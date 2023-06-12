@@ -70,4 +70,14 @@ export class ApostaEsportivaService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    tokenAoVivoEncerramento(aposta: any): Observable<Number> {
+        let url = this.ApostaEsportivaUrl + '/token-aovivo-encerramento';
+
+        return this.http.post(url, { aposta }, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

@@ -415,7 +415,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
-            centered: true
+            centered: true,
+            scrollable: true
         });
 
         this.modalRef.componentInstance.aposta = aposta;

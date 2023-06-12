@@ -107,4 +107,48 @@ export class ClienteService {
     verificarLogin(login) {
         return this.http.get(`${this.clienteUrl}/validarLogin/` + login.toLowerCase()).pipe(map(res => res));
     }
+
+    getConfigs() {
+        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
+    }
+
+    excluirConta(motivo: string) {
+        return this.http.post(`${this.clienteUrl}/excluir-conta`, { motivo }, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    configLimiteAposta(limites: any) {
+        return this.http.post(`${this.clienteUrl}/limites-apostas`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
+    configLimiteDesposito(limites: any) {
+        return this.http.post(`${this.clienteUrl}/limites-depositos`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
+    configPeriodoPausa(data: any) {
+        return this.http.post(`${this.clienteUrl}/periodo-pausa`, data, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
 }

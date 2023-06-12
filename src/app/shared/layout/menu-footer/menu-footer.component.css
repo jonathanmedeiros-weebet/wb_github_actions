@@ -23,6 +23,15 @@
     margin-bottom: 5px;
 }
 
+.fa, .fa-solid, .uil, .ri {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+}
+
+.ri {
+    line-height: 1;
+}
+
 .navbar-toggler {
     color: var(--foreground-sidebars);
 }
@@ -46,11 +55,6 @@
     font-weight: 400;
     font-size: 9px;
     line-height: 12px;
-}
-
-.fa, .fa-solid, .uil {
-    font-size: 1.8rem;
-    margin-bottom: 4px;
 }
 
 .bottom-bar-button .badge-container {

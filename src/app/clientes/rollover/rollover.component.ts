@@ -24,7 +24,7 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
     whatsapp;
     mobileScreen;
     queryParams;
-     modalRef;
+    modalRef;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -102,6 +102,27 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
                     .subscribe(
                         response => {
                             this.messageService.success('Bônus Convertido');
+                            this.submit();
+                        },
+                        error => {
+                            this.handleError(error);
+                        }
+                    );
+            }
+        );
+    }
+
+    cancelarBonus(rolloverId){
+        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef.componentInstance.title = 'Cancelar Bônus';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar seu bônus?';
+
+        this.modalRef.result.then(
+            () => {
+                this.financeiroService.cancelarBonus(rolloverId)
+                    .subscribe(
+                        response => {
+                            this.messageService.success('Bônus Cancelado');
                             this.submit();
                         },
                         error => {

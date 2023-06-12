@@ -134,4 +134,13 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+   cancelarBonus(rolloverId): Observable<any> {
+        return this.http.post(`${this.financeiroUrl}/cancelar-bonus`,
+            {id: rolloverId}, this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

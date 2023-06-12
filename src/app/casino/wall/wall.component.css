@@ -144,6 +144,18 @@
     margin-bottom: 20px;
 }
 
+.game-tile .game-button-lock {
+    /* color: var(--header);
+    background-color: var(--highlight); */
+    width: 60%;
+    height: 35%;
+    font-size: 50px;
+}
+
+.gameBloqueado{
+    color: var(--highlight);
+}
+
 .game-tile:hover .game-tile-buttons {
     display: flex;
     border-radius: 5px;
@@ -312,7 +324,7 @@
 
     .internal .game-tile {
         max-width: calc(50% - 5px);
-        min-width: auto;
+        min-width: calc(50% - 5px);
         margin-right: 0;
         margin-top: 0;
     }
