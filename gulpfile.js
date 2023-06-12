@@ -497,15 +497,6 @@ gulp.task('sportbet7.net', function (done) {
     });
 });
 
-gulp.task('masterjogos.club', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "masterjogos.club",
-        banca: "MASTER JOGOS",
-        styles: ""
-    });
-});
-
 gulp.task('jrsports.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1293,15 +1284,6 @@ gulp.task('futpix.wee.bet', function (done) {
         host: "futpix.wee.bet",
         shared_url: "futpix.com.br",
         banca: "FUTPIX",
-        styles: "",
-    });
-});
-
-gulp.task('betshelby.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betshelby.net",
-        banca: "BET SHELBY",
         styles: "",
     });
 });
@@ -2246,15 +2228,6 @@ gulp.task('megaa.bet', function (done) {
         server: "3.211.93.31",
         host: "megaa.bet",
         banca: "MEGAA.BET",
-        styles: "",
-    });
-});
-
-gulp.task('betsampa.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betsampa.wee.bet",
-        banca: "BET SAMPA",
         styles: "",
     });
 });
