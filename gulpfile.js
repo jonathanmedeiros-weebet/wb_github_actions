@@ -2766,3 +2766,12 @@ gulp.task('vitoriasports.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('favoritao.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "favoritao.com",
+        banca: "FAVORITÃO",
+        styles: "",
+    });
+});
