@@ -21,12 +21,13 @@
         </div>
     </div>
 
-    <div class="filter" id="filtros">
+    <div class="filter" *ngIf="!showLoadingIndicator">
         <div class="search-box" >
             <i class="fa fa-search"></i>
-            <input  id="filtroGames" #campoFiltroGames type="text"
+            <input id="limparCampoSearch" type="text"
                 class="form-control inverted-out"
                 placeholder="Digite o nome de um jogo"
+                (keyup)="search($event)"
             >
             <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
         </div>

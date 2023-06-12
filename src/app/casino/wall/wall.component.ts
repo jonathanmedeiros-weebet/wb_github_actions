@@ -7,8 +7,8 @@ import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {config} from '../../shared/config';
-import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subject} from 'rxjs';
+import { debounceTime} from 'rxjs/operators';
 
 @Component({
     selector: 'app-wall',
@@ -19,7 +19,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
     @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
-    @ViewChild('campoFiltroGames', { static: true }) campoFiltroGames: ElementRef;
     scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
@@ -56,8 +55,9 @@ export class WallComponent implements OnInit, AfterViewInit {
     cassinoFornecedoresFiltrados = [];
     totalJogos = 0;
     isDemo = false;
-    filtroGames;
-    filtros;
+    pesquisarTextoAlterado = new Subject<string>();
+    textoAlterado;
+    limparCampoSearch;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -74,8 +74,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.filtros = document.getElementById('filtros');
-        this.filtros.style.display="none";
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList().subscribe(response => {
@@ -150,8 +148,13 @@ export class WallComponent implements OnInit, AfterViewInit {
                     this.termFornecedor = '';
                 }
             });
+
             this.showLoadingIndicator = false;
-            this.filtros.style.display="";
+            this.pesquisarTextoAlterado.pipe(debounceTime(1500)).subscribe(() => {
+                this.term = this.textoAlterado;
+                this.filtrarJogos();
+            });
+
         }, erro => {});
         this.auth.logado
             .subscribe(
@@ -172,6 +175,11 @@ export class WallComponent implements OnInit, AfterViewInit {
         }
 
         this.isMobile = window.innerWidth < 1025;
+    }
+
+    search($event) {
+        this.pesquisarTextoAlterado.next($event.target.value);
+        this.textoAlterado = $event.target.value;
     }
 
     filterSlot(games) {
@@ -213,11 +221,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.gamesScrolls.changes.subscribe((scrolls) => {
             this.scrolls = scrolls.toArray();
-        });
-
-        fromEvent(this.campoFiltroGames.nativeElement, 'keyup').pipe(debounceTime(2000)).subscribe(() => {
-            this.term = this.campoFiltroGames.nativeElement.value
-            this.filtrarJogos();
         });
     }
 
@@ -361,8 +364,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparPesquisa() {
         if(this.term){
             this.term = '';
-            this.filtroGames = document.getElementById('filtroGames');
-            this.filtroGames.value = '';
+            this.limparCampoSearch = document.getElementById('limparCampoSearch');
+            this.limparCampoSearch.value = '';
             this.filtrarJogos();
         }else{
             this.termFornecedorMobile = '';
