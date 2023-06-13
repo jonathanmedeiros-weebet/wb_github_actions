@@ -2259,15 +2259,6 @@ gulp.task('uaibet.club', function (done) {
     });
 });
 
-gulp.task('clubcariri.vip', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "clubcariri.vip",
-        banca: "CLUB CARIRI",
-        styles: "",
-    });
-});
-
 gulp.task('cassinodosorte.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
