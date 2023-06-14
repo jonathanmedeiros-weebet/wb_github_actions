@@ -7,6 +7,8 @@ import {LoginModalComponent} from '../../shared/layout/modals';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
 import {config} from '../../shared/config';
+import { Subject} from 'rxjs';
+import { debounceTime} from 'rxjs/operators';
 
 @Component({
     selector: 'app-wall',
@@ -53,7 +55,9 @@ export class WallComponent implements OnInit, AfterViewInit {
     cassinoFornecedoresFiltrados = [];
     totalJogos = 0;
     isDemo = false;
-
+    pesquisarTextoAlterado = new Subject<string>();
+    textoAlterado;
+    limparCampoSearch;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -144,7 +148,13 @@ export class WallComponent implements OnInit, AfterViewInit {
                     this.termFornecedor = '';
                 }
             });
+
             this.showLoadingIndicator = false;
+            this.pesquisarTextoAlterado.pipe(debounceTime(1500)).subscribe(() => {
+                this.term = this.textoAlterado;
+                this.filtrarJogos();
+            });
+
         }, erro => {});
         this.auth.logado
             .subscribe(
@@ -165,6 +175,11 @@ export class WallComponent implements OnInit, AfterViewInit {
         }
 
         this.isMobile = window.innerWidth < 1025;
+    }
+
+    search($event) {
+        this.pesquisarTextoAlterado.next($event.target.value);
+        this.textoAlterado = $event.target.value;
     }
 
     filterSlot(games) {
@@ -349,6 +364,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparPesquisa() {
         if(this.term){
             this.term = '';
+            this.limparCampoSearch = document.getElementById('limparCampoSearch');
+            this.limparCampoSearch.value = '';
             this.filtrarJogos();
         }else{
             this.termFornecedorMobile = '';
