@@ -124,7 +124,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.translate.onLangChange.subscribe(change => this.pronomeCliente = this.pronomesCliente[change.lang]);
 
         this.appMobile = this.auth.isAppMobile();
-        this.origin = this.appMobile ? '?origin=app':''; 
+        this.origin = this.appMobile ? '?origin=app':'';
     }
 
     ngOnDestroy() {
@@ -220,6 +220,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     submit() {
         this.queryParams = this.form.value;
+        this.tabSelected = this.queryParams.tipo;
         this.getApostas();
     }
 
