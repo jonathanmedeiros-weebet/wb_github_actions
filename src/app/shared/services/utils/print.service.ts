@@ -7,9 +7,8 @@ import {ParametrosLocaisService} from './../parametros-locais.service';
 import {config} from './../../config';
 import * as moment from 'moment';
 
-import EscPosEncoder from 'esc-pos-encoder';
+import EscPosEncoder from 'node_modules/esc-pos-encoder/dist/esc-pos-encoder.esm.js';
 import {ImagensService} from './imagens.service';
-import {tick} from "@angular/core/testing";
 
 declare var WeebetMessage: any;
 
@@ -21,6 +20,8 @@ export class PrintService {
     private separatorLine;
     private printerWidth = '58';
     private printGraphics = true;
+    private apkVersion: number;
+    private logoToPrint;
     LOGO_IMPRESSAO;
 
     constructor(
@@ -34,16 +35,34 @@ export class PrintService {
             .subscribe(
                 logoImpressao => this.LOGO_IMPRESSAO = `data:image/png;base64,${logoImpressao}`
             );
+
+        if (this.auth.isAppMobile()) {
+            this.sendFrontVersion();
+            this.getApkConfigs();
+            this.saveLogoToPrint().then(r => console.log('imageLoaded'));
+        }
+    }
+
+    private async saveLogoToPrint() {
+        this.logoToPrint = new Image();
+        this.logoToPrint.crossOrigin = 'anonymous';
+        this.logoToPrint.src = this.LOGO_IMPRESSAO;
+
+        this.logoToPrint.onload = () => {
+            return this;
+        };
     }
 
     getPrinterSettings() {
-        let savedPrinterWidth = localStorage.getItem('printer_width');
-        let savedPrintGraphics = localStorage.getItem('print_graphics');
+        const savedPrinterWidth = localStorage.getItem('printer_width');
+        const savedPrintGraphics = localStorage.getItem('print_graphics');
+
+        this.apkVersion = Number(localStorage.getItem('apk_version') ?? 2);
 
         if (savedPrintGraphics == null) {
             this.printGraphics = true;
         } else {
-            this.printGraphics = savedPrintGraphics === '1';
+            this.printGraphics = (savedPrintGraphics === 'true' || savedPrintGraphics === '1');
         }
 
         if (savedPrinterWidth && savedPrinterWidth === '58') {
@@ -56,6 +75,8 @@ export class PrintService {
             this.printerWidth = '58';
             this.separatorLine = '================================';
         }
+
+        this.saveLogoToPrint().then(r => console.log('imageLoaded'));
     }
 
     // Tabela Esportiva
@@ -200,86 +221,81 @@ export class PrintService {
         const linhas = Math.ceil(odds.length / cols);
 
         this.getPrinterSettings();
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const jogosEscPos = encoder
-                .initialize();
-            if (this.printGraphics) {
-                jogosEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                jogosEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
-
+        const jogosEscPos = encoder
+            .initialize();
+        if (this.printGraphics) {
+            jogosEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+        } else {
             jogosEscPos
-                .newline()
-                .bold(true)
                 .align('center')
-                .raw([0x1d, 0x21, 0x10]) // Large Font Size
-                .raw([0x1d, 0x21, 0x00])
-                .size('normal')
-                .newline()
-                .line(this.separatorLine)
-                .newline();
+                .raw([0x1d, 0x21, 0x10])
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
 
-            dias.forEach(dia => {
+        jogosEscPos
+            .newline()
+            .bold(true)
+            .align('center')
+            .raw([0x1d, 0x21, 0x10]) // Large Font Size
+            .raw([0x1d, 0x21, 0x00])
+            .size('normal')
+            .newline()
+            .line(this.separatorLine)
+            .newline();
+
+        dias.forEach(dia => {
+            jogosEscPos
+                .align('center')
+                .bold(true)
+                .text(dia.data_grupo);
+
+            dia.camps.forEach(camp => {
                 jogosEscPos
-                    .align('center')
+                    .newline()
                     .bold(true)
-                    .text(dia.data_grupo);
+                    .text(this.helperService.removerAcentos(camp.nome));
 
-                dia.camps.forEach(camp => {
+                camp.jogos.forEach(jogo => {
+                    const horario = moment(jogo.horario).format('HH:mm');
                     jogosEscPos
                         .newline()
-                        .bold(true)
-                        .text(this.helperService.removerAcentos(camp.nome));
+                        .bold(false)
+                        .text(horario + ' ' + this.helperService.removerAcentos(jogo.nome));
 
-                    camp.jogos.forEach(jogo => {
-                        const horario = moment(jogo.horario).format('HH:mm');
+                    for (let i = 0; i < linhas; i++) {
+                        let start = i * cols;
+
+                        const oddPos1 = odds[start];
+                        const oddPos2 = odds[++start];
+                        const oddPos3 = odds[++start];
+                        const oddPos4 = odds[++start];
+                        const oddPos5 = odds[++start];
+
                         jogosEscPos
                             .newline()
+                            .bold(true)
+                            .text(this.helperService.removerAcentos(`${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)}`))
+                            .newline()
                             .bold(false)
-                            .text(horario + ' ' + this.helperService.removerAcentos(jogo.nome));
-
-                        for (let i = 0; i < linhas; i++) {
-                            let start = i * cols;
-
-                            const oddPos1 = odds[start];
-                            const oddPos2 = odds[++start];
-                            const oddPos3 = odds[++start];
-                            const oddPos4 = odds[++start];
-                            const oddPos5 = odds[++start];
-
-                            jogosEscPos
-                                .newline()
-                                .bold(true)
-                                .text(this.helperService.removerAcentos(`${this.getSigla(oddPos1)} ${this.getSigla(oddPos2)} ${this.getSigla(oddPos3)} ${this.getSigla(oddPos4)} ${this.getSigla(oddPos5)}`))
-                                .newline()
-                                .bold(false)
-                                .text(`${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)}`)
-                                .newline();
-                        }
-                    });
+                            .text(`${this.getValor(oddPos1, jogo.cotacoes)} ${this.getValor(oddPos2, jogo.cotacoes)} ${this.getValor(oddPos3, jogo.cotacoes)} ${this.getValor(oddPos4, jogo.cotacoes)} ${this.getValor(oddPos5, jogo.cotacoes)}`)
+                            .newline();
+                    }
                 });
             });
-            jogosEscPos
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
+        });
+        jogosEscPos
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
 
-            let dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+        const dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     // Bilhete Loteria
@@ -525,136 +541,132 @@ export class PrintService {
     }
 
     private lotteryTicketAppMobile(aposta) {
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
+        this.getPrinterSettings();
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const ticketEscPos = encoder
-                .initialize();
-            if (this.printGraphics) {
-                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                ticketEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
-
+        const ticketEscPos = encoder
+            .initialize();
+        if (this.printGraphics) {
+            ticketEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+        } else {
             ticketEscPos
-                .newline()
-                .bold(true)
                 .align('center')
-                .raw([0x1d, 0x21, 0x10]) // Large Font Size
-                .line(aposta.codigo)
-                .raw([0x1d, 0x21, 0x00])
-                .align('left')
-                .size('normal')
+                .raw([0x1d, 0x21, 0x10])
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
+
+        ticketEscPos
+            .newline()
+            .bold(true)
+            .align('center')
+            .raw([0x1d, 0x21, 0x10]) // Large Font Size
+            .line(aposta.codigo)
+            .raw([0x1d, 0x21, 0x00])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('Data: ')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'));
+
+        if (aposta.is_cliente) {
+            ticketEscPos
+                .newline()
+                .bold(true)
+                .text('CLIENTE: ')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
+                .newline();
+        } else {
+            ticketEscPos
+                .newline()
+                .bold(true)
+                .text('CAMBISTA: ')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
+                .newline()
+                .bold(true)
+                .text('APOSTADOR: ')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.apostador))
+                .newline();
+        }
+
+        ticketEscPos
+            .bold(true)
+            .text('MODALIDADE: ')
+            .bold(false)
+            .text(this.getNomeModalidadeLoteria(aposta.modalidade))
+            .newline()
+            .bold(true)
+            .text('VALOR TOTAL: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.valor))
+            .newline();
+
+        aposta.itens.forEach(item => {
+            ticketEscPos
+                .newline()
                 .line(this.separatorLine)
+                .align('center')
                 .bold(true)
-                .text('Data: ')
+                .line(this.helperService.removerAcentos(item.sorteio_nome))
+                .align('left')
+                .line('DEZENAS: ')
                 .bold(false)
-                .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'));
+                .line(item.numeros.join('-'))
+                .bold(true)
+                .newline()
+                .text('VALOR: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(item.valor));
 
-            if (aposta.is_cliente) {
+            if (item.tipo === 'seninha' && item.cotacao6 > 0) {
                 ticketEscPos
                     .newline()
                     .bold(true)
-                    .text('CLIENTE: ')
+                    .text('RETORNO 6: ')
                     .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline()
-            } else {
-                ticketEscPos
-                    .newline()
-                    .bold(true)
-                    .text('CAMBISTA: ')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline()
-                    .bold(true)
-                    .text('APOSTADOR: ')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.apostador))
-                    .newline()
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao6));
             }
-
-            ticketEscPos
-                .bold(true)
-                .text('MODALIDADE: ')
-                .bold(false)
-                .text(this.getNomeModalidadeLoteria(aposta.modalidade))
-                .newline()
-                .bold(true)
-                .text('VALOR TOTAL: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.valor))
-                .newline();
-
-            aposta.itens.forEach(item => {
+            if (item.cotacao5 > 0) {
                 ticketEscPos
                     .newline()
-                    .line(this.separatorLine)
-                    .align('center')
                     .bold(true)
-                    .line(this.helperService.removerAcentos(item.sorteio_nome))
-                    .align('left')
-                    .line('DEZENAS: ')
+                    .text('RETORNO 5: ')
                     .bold(false)
-                    .line(item.numeros.join('-'))
-                    .bold(true)
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao5));
+            }
+            if (item.cotacao4 > 0) {
+                ticketEscPos
                     .newline()
-                    .text('VALOR: ')
+                    .bold(true)
+                    .text('RETORNO 4: ')
                     .bold(false)
-                    .text(this.helperService.moneyFormat(item.valor));
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao4));
+            }
+            if (item.cotacao3 > 0) {
+                ticketEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO 3: ')
+                    .bold(false)
+                    .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao3));
+            }
+        });
 
-                if (item.tipo === 'seninha' && item.cotacao6 > 0) {
-                    ticketEscPos
-                        .newline()
-                        .bold(true)
-                        .text('RETORNO 6: ')
-                        .bold(false)
-                        .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao6));
-                }
-                if (item.cotacao5 > 0) {
-                    ticketEscPos
-                        .newline()
-                        .bold(true)
-                        .text('RETORNO 5: ')
-                        .bold(false)
-                        .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao5));
-                }
-                if (item.cotacao4 > 0) {
-                    ticketEscPos
-                        .newline()
-                        .bold(true)
-                        .text('RETORNO 4: ')
-                        .bold(false)
-                        .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao4));
-                }
-                if (item.cotacao3 > 0) {
-                    ticketEscPos
-                        .newline()
-                        .bold(true)
-                        .text('RETORNO 3: ')
-                        .bold(false)
-                        .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao3));
-                }
-            });
+        ticketEscPos
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
 
-            ticketEscPos
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
-
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     // Bilhete Esportivo
@@ -894,144 +906,143 @@ export class PrintService {
 
     private sportsTicketAppMobile(aposta, dateTime?) {
         this.getPrinterSettings();
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const ticketEscPos = encoder
-                .initialize();
-            if (this.printGraphics) {
-                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                ticketEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
+        const ticketEscPos = encoder
+            .initialize();
 
+        if (this.printGraphics) {
+            if (this.apkVersion < 3) {
+                ticketEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+            }
+        } else {
             ticketEscPos
-                .newline()
-                .bold(true)
                 .align('center')
                 .raw([0x1d, 0x21, 0x10])
-                .line(aposta.codigo)
-                .raw([0x1d, 0x21, 0x00])
-                .align('left')
-                .size('normal')
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
+
+        ticketEscPos
+            .newline()
+            .bold(true)
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(aposta.codigo)
+            .raw([0x1d, 0x21, 0x00])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true);
+
+        if (aposta.is_cliente) {
+            ticketEscPos
+                .text('CLIENTE:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome));
+        } else {
+            ticketEscPos
+                .text('CAMBISTA:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
+                .newline()
+                .bold(true)
+                .text('APOSTADOR:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.apostador));
+        }
+
+        ticketEscPos
+            .newline()
+            .bold(true)
+            .text('HORARIO:')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'));
+
+        aposta.itens.forEach(item => {
+            ticketEscPos
+                .newline()
                 .line(this.separatorLine)
-                .bold(true);
-
-            if (aposta.is_cliente) {
-                ticketEscPos
-                    .text('CLIENTE:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome));
-            } else {
-                ticketEscPos
-                    .text('CAMBISTA:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline()
-                    .bold(true)
-                    .text('APOSTADOR:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.apostador));
-            }
-
-            ticketEscPos
-                .newline()
-                .bold(true)
-                .text('HORARIO:')
-                .bold(false)
-                .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'));
-
-            aposta.itens.forEach(item => {
-                ticketEscPos
-                    .newline()
-                    .line(this.separatorLine)
-                    .align('center')
-                    .bold(true)
-                    .line(this.helperService.removerAcentos(item.campeonato_nome))
-                    .bold(false)
-                    .align('left')
-                    .line(this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm'))
-                    .line(this.helperService.removerAcentos(item.time_a_nome + ' x ' + item.time_b_nome))
-                    .line(this.helperService.removerAcentos(item.categoria_nome) + ': ' + this.helperService.removerAcentos(item.odd_nome) + '(' + item.cotacao.toFixed(2) + ')');
-
-                if (item.ao_vivo) {
-                    ticketEscPos
-                        .text(' | AO VIVO');
-                }
-            });
-
-            ticketEscPos
-                .newline()
-                .align('left')
-                .line(this.separatorLine)
-                .bold(true)
-                .text('QUANTIDADE DE JOGOS: ')
-                .bold(false)
-                .text(aposta.itens.length)
-                .newline()
-                .bold(true)
-                .text('COTACAOO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false))
-                .newline()
-                .bold(true)
-                .text('VALOR APOSTADO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.valor))
-                .newline()
-                .bold(true)
-                .text('POSSIVEL RETORNO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.possibilidade_ganho))
-                .newline()
-                .bold(true)
-                .text('PREMIO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.premio))
-                .newline();
-
-            if (aposta.passador.percentualPremio > 0) {
-                let cambistaPaga = 0;
-
-                if (aposta.resultado) {
-                    cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
-                } else {
-                    cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
-                }
-
-                ticketEscPos
-                    .newline()
-                    .bold(true)
-                    .text('CAMBISTA PAGA: ')
-                    .bold(false)
-                    .text(this.helperService.moneyFormat(cambistaPaga));
-            }
-
-            ticketEscPos
-                .newline()
                 .align('center')
-                .line(this.helperService.removerAcentos(this.opcoes.informativo_rodape))
-                .newline()
+                .bold(true)
+                .line(this.helperService.removerAcentos(item.campeonato_nome))
+                .bold(false)
                 .align('left')
-                .size('small')
-                .line('impresso em ' + dateTime)
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
+                .line(this.helperService.dateFormat(item.jogo_horario, 'DD/MM/YYYY HH:mm'))
+                .line(this.helperService.removerAcentos(item.time_a_nome + ' x ' + item.time_b_nome))
+                .line(this.helperService.removerAcentos(item.categoria_nome) + ': ' + this.helperService.removerAcentos(item.odd_nome)
+                    + '(' + item.cotacao.toFixed(2) + ')');
 
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+            if (item.ao_vivo) {
+                ticketEscPos
+                    .text(' | AO VIVO');
+            }
+        });
+
+        ticketEscPos
+            .newline()
+            .align('left')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('QUANTIDADE DE JOGOS: ')
+            .bold(false)
+            .text(aposta.itens.length)
+            .newline()
+            .bold(true)
+            .text('COTACAOO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false))
+            .newline()
+            .bold(true)
+            .text('VALOR APOSTADO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.valor))
+            .newline()
+            .bold(true)
+            .text('POSSIVEL RETORNO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho))
+            .newline()
+            .bold(true)
+            .text('PREMIO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.premio))
+            .newline();
+
+        if (aposta.passador.percentualPremio > 0) {
+            let cambistaPaga = 0;
+
+            if (aposta.resultado) {
+                cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
+            } else {
+                cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
+            }
+
+            ticketEscPos
+                .newline()
+                .bold(true)
+                .text('CAMBISTA PAGA: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(cambistaPaga));
+        }
+
+        ticketEscPos
+            .newline()
+            .align('center')
+            .line(this.helperService.removerAcentos(this.opcoes.informativo_rodape))
+            .newline()
+            .align('left')
+            .size('small')
+            .line('impresso em ' + dateTime)
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
+
+        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     // Bilhete Acumuladão
@@ -1045,120 +1056,115 @@ export class PrintService {
 
     private bilheteAcumuladaoMobile(aposta) {
         this.getPrinterSettings();
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const ticketEscPos = encoder
-                .initialize();
-            if (this.printGraphics) {
-                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                ticketEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
-
+        const ticketEscPos = encoder
+            .initialize();
+        if (this.printGraphics) {
+            ticketEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+        } else {
             ticketEscPos
-                .newline()
-                .bold(true)
                 .align('center')
-                .raw([0x1d, 0x21, 0x10]) // Large Font Size
-                .line(aposta.codigo)
-                .raw([0x1d, 0x21, 0x00])
-                .align('left')
-                .size('normal')
-                .line(this.separatorLine);
+                .raw([0x1d, 0x21, 0x10])
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
 
-            if (aposta.is_cliente) {
-                ticketEscPos
-                    .bold(true)
-                    .text('CLIENTE:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline()
-            } else {
-                ticketEscPos
-                    .bold(true)
-                    .text('CAMBISTA:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline()
-                    .bold(true)
-                    .text('APOSTADOR:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.apostador))
-                    .newline();
-            }
+        ticketEscPos
+            .newline()
+            .bold(true)
+            .align('center')
+            .raw([0x1d, 0x21, 0x10]) // Large Font Size
+            .line(aposta.codigo)
+            .raw([0x1d, 0x21, 0x00])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine);
 
+        if (aposta.is_cliente) {
             ticketEscPos
                 .bold(true)
-                .text('HORARIO:')
+                .text('CLIENTE:')
                 .bold(false)
-                .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
-                .newline()
-                .text(this.separatorLine)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
+                .newline();
+        } else {
+            ticketEscPos
+                .bold(true)
+                .text('CAMBISTA:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
                 .newline()
                 .bold(true)
-                .text(this.helperService.removerAcentos(aposta.acumuladao.nome))
+                .text('APOSTADOR:')
                 .bold(false)
+                .text(this.helperService.removerAcentos(aposta.apostador))
+                .newline();
+        }
+
+        ticketEscPos
+            .bold(true)
+            .text('HORARIO:')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .text(this.separatorLine)
+            .newline()
+            .bold(true)
+            .text(this.helperService.removerAcentos(aposta.acumuladao.nome))
+            .bold(false)
+            .newline()
+            .text(this.separatorLine);
+
+        if (aposta.resultado) {
+            ticketEscPos
                 .newline()
-                .text(this.separatorLine);
-
-            if (aposta.resultado) {
+                .bold(true)
+                .text('TOTAL DE ACERTOS: ')
+                .bold(false)
+                .text(aposta.quantidade_acertos)
+                .newline()
+                .bold(true)
+                .text('PREMIO RECEBIDO: ')
+                .bold(false)
+                .text(this.helperService.moneyFormat(aposta.premio));
+        } else {
+            aposta.acumuladao.premios.forEach(premio => {
                 ticketEscPos
                     .newline()
                     .bold(true)
-                    .text('TOTAL DE ACERTOS: ')
-                    .bold(false)
-                    .text(aposta.quantidade_acertos)
-                    .newline()
-                    .bold(true)
-                    .text('PREMIO RECEBIDO: ')
-                    .bold(false)
-                    .text(this.helperService.moneyFormat(aposta.premio));
-            } else {
-                aposta.acumuladao.premios.forEach(premio => {
-                    ticketEscPos
-                        .newline()
-                        .bold(true)
-                        .text('POSSIVEL PREMIO ' + premio.quantidade_acertos)
-                        .text(' ACERTOS: ' + this.helperService.moneyFormat(premio.valor))
-                        .bold(false);
-                });
-            }
-
-            aposta.itens.forEach(item => {
-                ticketEscPos
-                    .newline()
-                    .line(this.separatorLine)
-                    .line(this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm'))
-                    .line(this.helperService.removerAcentos(item.jogo.time_a_nome + ' x ' + item.jogo.time_b_nome))
-                    .bold(true)
-                    .text('PALPITE: ')
-                    .bold(false)
-                    .text(item.time_a_resultado + ' x ' + item.time_b_resultado);
+                    .text('POSSIVEL PREMIO ' + premio.quantidade_acertos)
+                    .text(' ACERTOS: ' + this.helperService.moneyFormat(premio.valor))
+                    .bold(false);
             });
+        }
 
+        aposta.itens.forEach(item => {
             ticketEscPos
                 .newline()
                 .line(this.separatorLine)
-                .align('center')
-                .text('Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes iguais entre todos os vencedores.')
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
+                .line(this.helperService.dateFormat(item.jogo.horario, 'DD/MM/YYYY HH:mm'))
+                .line(this.helperService.removerAcentos(item.jogo.time_a_nome + ' x ' + item.jogo.time_b_nome))
+                .bold(true)
+                .text('PALPITE: ')
+                .bold(false)
+                .text(item.time_a_resultado + ' x ' + item.time_b_resultado);
+        });
 
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+        ticketEscPos
+            .newline()
+            .line(this.separatorLine)
+            .align('center')
+            .text('Caso o ACUMULADAO tenha mais de um ganhador, o premio sera dividido em partes iguais entre todos os vencedores.')
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
+
+        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     private bilheteAcumuladaoDesktop(aposta) {
@@ -1579,132 +1585,128 @@ export class PrintService {
     }
 
     private desafioTicketAppMobile(aposta) {
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
+        this.getPrinterSettings();
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const ticketEscPos = encoder
-                .initialize();
-            if (this.printGraphics) {
-                ticketEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                ticketEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
-
+        const ticketEscPos = encoder
+            .initialize();
+        if (this.printGraphics) {
+            ticketEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+        } else {
             ticketEscPos
+                .align('center')
+                .raw([0x1d, 0x21, 0x10])
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
+
+        ticketEscPos
+            .newline()
+            .bold(true)
+            .align('center')
+            .raw([0x1d, 0x21, 0x10]) // Large Font Size
+            .line(aposta.codigo)
+            .raw([0x1d, 0x21, 0x00])
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine);
+
+        if (aposta.is_cliente) {
+            ticketEscPos
+                .bold(true)
+                .text('CLIENTE:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
+                .newline();
+        } else {
+            ticketEscPos
+                .bold(true)
+                .text('CAMBISTA:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.passador.nome))
                 .newline()
+                .bold(true)
+                .text('APOSTADOR:')
+                .bold(false)
+                .text(this.helperService.removerAcentos(aposta.apostador))
+                .newline();
+        }
+
+        ticketEscPos
+            .bold(true)
+            .text('HORARIO:')
+            .bold(false)
+            .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
+            .newline();
+
+        aposta.itens.forEach(item => {
+            ticketEscPos
+                .line(this.separatorLine)
                 .bold(true)
                 .align('center')
-                .raw([0x1d, 0x21, 0x10]) // Large Font Size
-                .line(aposta.codigo)
-                .raw([0x1d, 0x21, 0x00])
+                .line(this.helperService.removerAcentos(item.odd.desafio.categoria.nome))
+                .bold(false)
                 .align('left')
-                .size('normal')
-                .line(this.separatorLine);
+                .text(item.odd.desafio.nome)
+                .bold(true)
+                .newline()
+                .text('RESPOSTA: ')
+                .bold(false)
+                .text(this.helperService.removerAcentos(item.odd_nome) + ' (' + item.cotacao.toFixed(2) + ')');
+        });
 
-            if (aposta.is_cliente) {
-                ticketEscPos
-                    .bold(true)
-                    .text('CLIENTE:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline();
+        ticketEscPos
+            .newline()
+            .line(this.separatorLine)
+            .bold(true)
+            .text('QUANTIDADE DE DESAFIOS: ')
+            .bold(false)
+            .text(aposta.itens.length)
+            .newline()
+            .bold(true)
+            .text('COTACAO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false))
+            .newline()
+            .bold(true)
+            .text('VALOR APOSTADO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.valor))
+            .newline()
+            .bold(true)
+            .text('POSSIVEL RETORNO: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(aposta.possibilidade_ganho));
+
+        if (aposta.passador.percentualPremio > 0) {
+            let cambistaPaga = 0;
+
+            if (aposta.resultado) {
+                cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
             } else {
-                ticketEscPos
-                    .bold(true)
-                    .text('CAMBISTA:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.passador.nome))
-                    .newline()
-                    .bold(true)
-                    .text('APOSTADOR:')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(aposta.apostador))
-                    .newline();
+                cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
             }
-
-            ticketEscPos
-                .bold(true)
-                .text('HORARIO:')
-                .bold(false)
-                .text(this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY HH:mm'))
-                .newline();
-
-            aposta.itens.forEach(item => {
-                ticketEscPos
-                    .line(this.separatorLine)
-                    .bold(true)
-                    .align('center')
-                    .line(this.helperService.removerAcentos(item.odd.desafio.categoria.nome))
-                    .bold(false)
-                    .align('left')
-                    .text(item.odd.desafio.nome)
-                    .bold(true)
-                    .newline()
-                    .text('RESPOSTA: ')
-                    .bold(false)
-                    .text(this.helperService.removerAcentos(item.odd_nome) + ' (' + item.cotacao.toFixed(2) + ')');
-            });
-
             ticketEscPos
                 .newline()
-                .line(this.separatorLine)
                 .bold(true)
-                .text('QUANTIDADE DE DESAFIOS: ')
+                .text('CAMBISTA PAGA: ')
                 .bold(false)
-                .text(aposta.itens.length)
-                .newline()
-                .bold(true)
-                .text('COTACAO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.possibilidade_ganho / aposta.valor, false))
-                .newline()
-                .bold(true)
-                .text('VALOR APOSTADO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.valor))
-                .newline()
-                .bold(true)
-                .text('POSSIVEL RETORNO: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(aposta.possibilidade_ganho));
+                .text(this.helperService.moneyFormat(cambistaPaga));
+        }
 
-            if (aposta.passador.percentualPremio > 0) {
-                let cambistaPaga = 0;
+        ticketEscPos
+            .newline()
+            .line(this.separatorLine)
+            .text(this.helperService.removerAcentos(this.opcoes.informativo_rodape))
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
 
-                if (aposta.resultado) {
-                    cambistaPaga = aposta.premio * ((100 - aposta.passador.percentualPremio) / 100);
-                } else {
-                    cambistaPaga = aposta.possibilidade_ganho * ((100 - aposta.passador.percentualPremio) / 100);
-                }
-                ticketEscPos
-                    .newline()
-                    .bold(true)
-                    .text('CAMBISTA PAGA: ')
-                    .bold(false)
-                    .text(this.helperService.moneyFormat(cambistaPaga));
-            }
-
-            ticketEscPos
-                .newline()
-                .line(this.separatorLine)
-                .text(this.helperService.removerAcentos(this.opcoes.informativo_rodape))
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
-
-            let dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     // Cartão
@@ -1717,70 +1719,66 @@ export class PrintService {
     }
 
     private cardMobile(card) {
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
+        this.getPrinterSettings();
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const cardPrintEscPos = encoder
-                .initialize()
-                .bold(true);
-            if (this.printGraphics) {
-                cardPrintEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                cardPrintEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
-
+        const cardPrintEscPos = encoder
+            .initialize()
+            .bold(true);
+        if (this.printGraphics) {
+            cardPrintEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+        } else {
             cardPrintEscPos
-                .newline()
                 .align('center')
-                .align('left')
-                .size('normal')
-                .line(this.separatorLine)
-                .bold(true)
-                .text('Cartao: ')
-                .bold(false)
-                .text(card.chave)
-                .newline()
-                .bold(true)
-                .text('Criacao: ')
-                .bold(false)
-                .text(this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm'))
-                .newline()
-                .bold(true)
-                .text('Cambista: ')
-                .bold(false)
-                .text(this.helperService.removerAcentos(card.passador.nome))
-                .newline()
-                .bold(true)
-                .text('Apostador: ')
-                .bold(false)
-                .text(this.helperService.removerAcentos(card.apostador))
-                .newline()
-                .bold(true)
-                .text('Premios: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(card.premios))
-                .newline()
-                .bold(true)
-                .text('Saldo: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(card.saldo))
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
+                .raw([0x1d, 0x21, 0x10])
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
 
-            let dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+        cardPrintEscPos
+            .newline()
+            .align('center')
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('Cartao: ')
+            .bold(false)
+            .text(card.chave)
+            .newline()
+            .bold(true)
+            .text('Criacao: ')
+            .bold(false)
+            .text(this.helperService.dateFormat(card.data_registro, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .bold(true)
+            .text('Cambista: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(card.passador.nome))
+            .newline()
+            .bold(true)
+            .text('Apostador: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(card.apostador))
+            .newline()
+            .bold(true)
+            .text('Premios: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(card.premios))
+            .newline()
+            .bold(true)
+            .text('Saldo: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(card.saldo))
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
+
+        const dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     private cardDesktop(card) {
@@ -1897,64 +1895,60 @@ export class PrintService {
     }
 
     private comprovanteRecargaMobile(recarga) {
-        const logoImg = new Image();
-        logoImg.crossOrigin = 'anonymous';
-        logoImg.src = this.LOGO_IMPRESSAO;
+        this.getPrinterSettings();
         const encoder = new EscPosEncoder();
 
-        logoImg.onload = () => {
-            const cardRecargaEscPos = encoder
-                .initialize();
-            if (this.printGraphics) {
-                cardRecargaEscPos.image(logoImg, 376, 136, 'atkinson');
-            } else {
-                cardRecargaEscPos
-                    .align('center')
-                    .raw([0x1d, 0x21, 0x10])
-                    .line(config.BANCA_NOME)
-                    .raw([0x1d, 0x21, 0x00]);
-            }
-
+        const cardRecargaEscPos = encoder
+            .initialize();
+        if (this.printGraphics) {
+            cardRecargaEscPos.image(this.logoToPrint, 376, 136, 'atkinson');
+        } else {
             cardRecargaEscPos
-                .newline()
-                .bold(true)
-                .align('left')
-                .size('normal')
-                .line(this.separatorLine)
-                .bold(true)
-                .text('Cartao: ')
-                .bold(false)
-                .text(recarga.cartao_aposta)
-                .newline()
-                .bold(true)
-                .text('Cambista: ')
-                .bold(false)
-                .text(this.helperService.removerAcentos(recarga.passador))
-                .newline()
-                .bold(true)
-                .text('Valor: ')
-                .bold(false)
-                .text(this.helperService.moneyFormat(recarga.valor))
-                .newline()
-                .bold(true)
-                .text('Data/Hora: ')
-                .bold(false)
-                .text(this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm'))
-                .newline()
                 .align('center')
-                .size('small')
-                .bold(true)
-                .text(recarga.autenticacao)
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline()
-                .newline();
+                .raw([0x1d, 0x21, 0x10])
+                .line(config.BANCA_NOME)
+                .raw([0x1d, 0x21, 0x00]);
+        }
 
-            let dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
-            WeebetMessage.postMessage(JSON.stringify(dataToSend));
-        };
+        cardRecargaEscPos
+            .newline()
+            .bold(true)
+            .align('left')
+            .size('normal')
+            .line(this.separatorLine)
+            .bold(true)
+            .text('Cartao: ')
+            .bold(false)
+            .text(recarga.cartao_aposta)
+            .newline()
+            .bold(true)
+            .text('Cambista: ')
+            .bold(false)
+            .text(this.helperService.removerAcentos(recarga.passador))
+            .newline()
+            .bold(true)
+            .text('Valor: ')
+            .bold(false)
+            .text(this.helperService.moneyFormat(recarga.valor))
+            .newline()
+            .bold(true)
+            .text('Data/Hora: ')
+            .bold(false)
+            .text(this.helperService.dateFormat(recarga.data, 'DD/MM/YYYY HH:mm'))
+            .newline()
+            .align('center')
+            .size('small')
+            .bold(true)
+            .text(recarga.autenticacao)
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
+
+        const dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
     private comprovanteRecargaDesktop(recarga) {
@@ -2064,7 +2058,7 @@ export class PrintService {
 
     // Utils
     listPrinters() {
-        let dataToSend = {
+        const dataToSend = {
             data: '',
             action: 'listPrinters',
         };
@@ -2112,5 +2106,14 @@ export class PrintService {
             }
         }
         return result;
+    }
+
+    private sendFrontVersion() {
+        const dataToSend = {data: 3, action: 'frontVersion'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
+    }
+    private getApkConfigs() {
+        const dataToSend = {data: true, action: 'getApkConfigs'};
+        WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 }

@@ -1,5 +1,5 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 
@@ -33,6 +33,7 @@ import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
 import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
 import {TranslateService} from '@ngx-translate/core';
 import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
+import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configuracoes.component';
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 
@@ -41,8 +42,9 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.css']
 })
-export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewChecked {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    @ViewChild('menu') menu: ElementRef;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -182,14 +184,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.unsub$.complete();
     }
 
-    ngAfterViewInit() {
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
+    ngAfterViewChecked() {
         this.checkCentering();
+        this.cd.detectChanges();
     }
 
     checkCentering() {
-        this.centered = this.menuWidth >= this.scrollWidth;
-        this.cd.detectChanges();
+        const scrollWidth = this.menu.nativeElement.scrollWidth;
+        this.centered = scrollWidth <= window.innerWidth;
     }
 
     createForm() {
@@ -299,6 +301,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirPix() {
         this.modalService.open(ClientePixModalComponent);
+    }
+
+    abrirConfiguracoes() {
+        this.modalService.open(ConfiguracoesComponent);
     }
 
     abrirFinanceiro() {
