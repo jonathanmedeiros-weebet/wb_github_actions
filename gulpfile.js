@@ -2768,3 +2768,30 @@ gulp.task('favoritao.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('x1fortbet.vip', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "x1fortbet.vip",
+        banca: "X1 FORT BET",
+        styles: "",
+    });
+});
+
+gulp.task('085.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "085.bet",
+        banca: "085.BET",
+        styles: "",
+    });
+});
+
+gulp.task('bis.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bis.wee.bet",
+        banca: "BIS Weebet",
+        styles: "",
+    });
+});
