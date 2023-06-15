@@ -62,6 +62,12 @@ export class FormatarFornecedoresPipe implements PipeTransform {
             case 'evolution':
                 fornecedorFormatado = 'Evolution';
                 break;
+            case 'pgsoft':
+                fornecedorFormatado = 'PG Soft';
+                break;
+            case 'blueprint':
+                fornecedorFormatado = 'Blueprint';
+                break;
         }
         return fornecedorFormatado;
     }

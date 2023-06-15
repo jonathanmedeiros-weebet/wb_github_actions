@@ -244,7 +244,6 @@
         "alfasports.online": "gulp alfasports.online",
         "grilobet.com": "gulp grilobet.com",
         "uaibet.club": "gulp uaibet.club",
-        "clubcariri.vip": "gulp clubcariri.vip",
         "cassinodosorte.com": "gulp cassinodosorte.com",
         "novabet.site": "gulp novabet.site",
         "jocabet.com": "gulp jocabet.com",
@@ -296,7 +295,8 @@
         "7pix.bet": "gulp 7pix.bet",
         "favelabett.com": "gulp favelabett.com",
         "kwbet.bet": "gulp kwbet.bet",
-        "vitoriasports.vip": "gulp vitoriasports.vip"
+        "vitoriasports.vip": "gulp vitoriasports.vip",
+        "favoritao.com": "gulp favoritao.com"
     },
     "private": true,
     "dependencies": {

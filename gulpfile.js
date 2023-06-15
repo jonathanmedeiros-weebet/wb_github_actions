@@ -2259,15 +2259,6 @@ gulp.task('uaibet.club', function (done) {
     });
 });
 
-gulp.task('clubcariri.vip', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "clubcariri.vip",
-        banca: "CLUB CARIRI",
-        styles: "",
-    });
-});
-
 gulp.task('cassinodosorte.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2422,9 +2413,9 @@ gulp.task('cassinoaovivo.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "cassinoaovivo.bet",
-        banca: "CASSINO AO VIVO",
+        banca: "Cassino Ao Vivo – Cassino Online e Aposta Esportiva com Cashback!",
         styles: "",
-        pixel: "<meta name='google-site-verification' content='8hcSk8ilek9Xlj8OwxRXOARr-ka3PMWJtS_z85FedNY' />",
+        pixel: "<meta name='description' content='No Cassino Ao Vivo você se diverte com o melhor do cassino online e apostas esportivas com cashback e bônus de primeiro deposito.'><meta name='google-site-verification' content='8hcSk8ilek9Xlj8OwxRXOARr-ka3PMWJtS_z85FedNY' />",
         scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-69QY0X8SYT'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-69QY0X8SYT');</script>",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5B2BHPD');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-5B2BHPD'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
@@ -2571,6 +2562,8 @@ gulp.task('chutedasorte.bet', function (done) {
         host: "chutedasorte.bet",
         banca: "CHUTE DA SORTE",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N3CNV6Q');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-N3CNV6Q'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
     });
 });
 
@@ -2763,6 +2756,15 @@ gulp.task('vitoriasports.vip', function (done) {
         server: "front4.wee.bet",
         host: "vitoriasports.vip",
         banca: "VITÓRIA SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('favoritao.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "favoritao.com",
+        banca: "FAVORITÃO",
         styles: "",
     });
 });
