@@ -27,7 +27,7 @@
             <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
         </div>
         <ng-container *ngIf="!isMobile">
-            <div class="search-box">
+            <div class="search-box box-web">
                 <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
                     <option value="" selected>Todos os Provedores</option>
                     <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
