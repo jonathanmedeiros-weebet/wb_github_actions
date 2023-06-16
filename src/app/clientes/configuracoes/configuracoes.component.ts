@@ -64,6 +64,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     formPeriodoPausa: FormGroup;
     formExclusaoConta: FormGroup;
 
+    infoPeriodoPausa = '';
+
     configuracoes: any;
 
     constructor(
@@ -98,6 +100,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                     limiteSemanal: resp.limiteDepositoSemanal ?? 0,
                     limiteMensal: resp.limiteDepositoMensal ?? 0,
                 });
+
+                if(resp.infoPeriodoPausa) {
+                    this.infoPeriodoPausa = resp.infoPeriodoPausa;
+                }
             },
             error =>  {
                 this.handleError(error);
