@@ -332,7 +332,7 @@
     "lodash.range": "^3.2.0",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.13",
-    "ng-hcaptcha": "^1.1.0",
+    "ng-hcaptcha": "^2.0.0",
     "ng-recaptcha": "^10.0.0",
     "ng2-charts": "^3.1.2",
     "ng2-search-filter": "^0.5.1",
