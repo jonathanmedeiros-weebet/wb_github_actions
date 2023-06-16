@@ -184,6 +184,7 @@ game {
 .btn-custom:hover {
     color: var(--foreground-highlight);
     border: 1px solid var(--foreground-highlight);
+    background-color: var(--highlight);
 }
 
 .btn-custom:focus {
