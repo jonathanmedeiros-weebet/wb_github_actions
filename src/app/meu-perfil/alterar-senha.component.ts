@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 
 import {AuthService, ClienteService, MenuFooterService, MessageService, SidebarService} from './../services';
 import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
@@ -25,7 +25,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     constructor(
         private messageService: MessageService,
         private auth: AuthService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService

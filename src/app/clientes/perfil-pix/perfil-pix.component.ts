@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ClienteService, MenuFooterService, MessageService, SidebarService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 
@@ -14,7 +14,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
     mostrarSenha = false;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private messageService: MessageService,
         private menuFooterService: MenuFooterService,

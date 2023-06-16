@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {
     AcumuladaoService,
     ApostaEsportivaService,
@@ -70,7 +70,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     constructor(
         private messageService: MessageService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private params: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,

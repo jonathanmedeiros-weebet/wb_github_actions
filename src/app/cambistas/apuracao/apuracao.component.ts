@@ -3,7 +3,7 @@ import {RelatorioService} from '../../shared/services/relatorio.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {SidebarService} from 'src/app/services';
 import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
@@ -41,7 +41,7 @@ export class ApuracaoComponent extends BaseFormComponent implements OnInit {
         private relatorioService: RelatorioService,
         private messageService: MessageService,
         private params: ParametrosLocaisService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private calendar: NgbCalendar,
         public formatter: NgbDateParserFormatter,
         private sidebarService: SidebarService,

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -50,7 +50,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
 
     constructor(
         public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private resultadoService: ResultadoService,
         private apostaService: ApostaService,
         private messageService: MessageService,

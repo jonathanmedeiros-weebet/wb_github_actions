@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,7 @@ export class PesquisarCartaoMobileModalComponent extends BaseFormComponent imple
 
     constructor(
         public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private modalService: NgbModal,
         private cartaoService: CartaoService,
         private messageService: MessageService,

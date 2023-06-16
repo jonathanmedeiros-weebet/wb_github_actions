@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {SorteioService, MessageService, MenuFooterService} from './../../services';
@@ -22,7 +22,7 @@ export class ResultadosLoteriasComponent extends BaseFormComponent implements On
     constructor(
         private messageService: MessageService,
         private sorteioService: SorteioService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private menuFooterService: MenuFooterService
     ) {
         super();

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
@@ -41,7 +41,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     isLoggedIn;
     btnText;
     tipoApostaDeslogado = 'preaposta';
-    cartaoApostaForm: FormGroup;
+    cartaoApostaForm: UntypedFormGroup;
     apostaAoVivo = false;
     delay = 10;
     delayReal = 10;
@@ -75,7 +75,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private messageService: MessageService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
@@ -250,7 +250,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     get itens() {
-        return this.form.get('itens') as FormArray;
+        return this.form.get('itens') as UntypedFormArray;
     }
 
     setItens(itens: ItemBilheteEsportivo[]) {

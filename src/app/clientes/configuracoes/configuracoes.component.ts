@@ -1,5 +1,5 @@
 import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
@@ -59,15 +59,15 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     showMotivoExclusaoConta = false;
     showDataFinalPausa = false;
 
-    formLimiteApostas: FormGroup;
-    formLimiteDeposito: FormGroup;
-    formPeriodoPausa: FormGroup;
-    formExclusaoConta: FormGroup;
+    formLimiteApostas: UntypedFormGroup;
+    formLimiteDeposito: UntypedFormGroup;
+    formPeriodoPausa: UntypedFormGroup;
+    formExclusaoConta: UntypedFormGroup;
 
     configuracoes: any;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private authService: AuthService,
         private clienteService: ClienteService,

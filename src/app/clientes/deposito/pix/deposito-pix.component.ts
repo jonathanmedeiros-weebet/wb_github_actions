@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
@@ -109,7 +109,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     opcaoBonus = '';
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
         private paramsLocais: ParametrosLocaisService,

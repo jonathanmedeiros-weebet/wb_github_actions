@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,13 +8,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './pesquisa-modal.component.html'
 })
 export class PesquisaModalComponent implements OnInit {
-    pesquisarForm: FormGroup = this.fb.group({
+    pesquisarForm: UntypedFormGroup = this.fb.group({
         input: ['']
     });
 
     constructor(
         public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
     ) { }
 
     ngOnInit() { }
