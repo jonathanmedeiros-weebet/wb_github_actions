@@ -2832,6 +2832,15 @@ gulp.task('26sports.bet', function (done) {
     });
 });
 
+gulp.task('futebet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "futebet.com",
+        banca: "FUTEBET",
+        styles: "",
+    });
+});
+
 gulp.task('blubet.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
