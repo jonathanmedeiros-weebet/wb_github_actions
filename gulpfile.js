@@ -2805,11 +2805,11 @@ gulp.task('fortunebet.app', function (done) {
     });
 });
 
-gulp.task('spacecassino.com', function (done) {
+gulp.task('magiadasorte.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "spacecassino.com",
-        banca: "SPACE CASSINO",
+        host: "magiadasorte.bet",
+        banca: "MAGIA DA SORTE",
         styles: "",
     });
 });
