@@ -2795,3 +2795,39 @@ gulp.task('bis.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fortunebet.app', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "fortunebet.app",
+        banca: "FORTUNE BET",
+        styles: "",
+    });
+});
+
+gulp.task('spacecassino.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "spacecassino.com",
+        banca: "SPACE CASSINO",
+        styles: "",
+    });
+});
+
+gulp.task('vencedorbets.com.br', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "vencedorbets.com.br",
+        banca: "VENCEDOR BETS",
+        styles: "",
+    });
+});
+
+gulp.task('26sports.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "26sports.bet",
+        banca: "26 SPORTS",
+        styles: "",
+    });
+});

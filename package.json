@@ -299,7 +299,11 @@
         "favoritao.com": "gulp favoritao.com",
         "x1fortbet.vip": "gulp x1fortbet.vip",
         "085.bet": "gulp 085.bet",
-        "bis.wee.bet": "gulp bis.wee.bet"
+        "bis.wee.bet": "gulp bis.wee.bet",
+        "fortunebet.app": "gulp fortunebet.app",
+        "spacecassino.com": "gulp spacecassino.com",
+        "vencedorbets.com.br": "gulp vencedorbets.com.br",
+        "26sports.bet": "gulp 26sports.bet"
     },
     "private": true,
     "dependencies": {
