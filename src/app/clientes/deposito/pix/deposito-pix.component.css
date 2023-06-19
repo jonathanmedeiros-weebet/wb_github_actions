@@ -221,4 +221,10 @@ label.label-tempo {
         text-decoration: none;
         cursor: pointer;
     }
+
+    .deposito-pix{
+        justify-content: center;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
 }

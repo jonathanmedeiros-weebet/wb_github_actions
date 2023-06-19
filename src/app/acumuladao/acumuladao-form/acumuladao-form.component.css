@@ -187,10 +187,6 @@
     overflow-x: hidden;
 }
 
-.footer-bilhete {
-    border-top: 2px solid var(--foreground-sidebars);
-}
-
 .div-inputs {
     padding: 20px 15px 8px 15px;
 }
