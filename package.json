@@ -303,7 +303,8 @@
         "fortunebet.app": "gulp fortunebet.app",
         "spacecassino.com": "gulp spacecassino.com",
         "vencedorbets.com.br": "gulp vencedorbets.com.br",
-        "26sports.bet": "gulp 26sports.bet"
+        "26sports.bet": "gulp 26sports.bet",
+        "blubet.site": "gulp blubet.site"
     },
     "private": true,
     "dependencies": {

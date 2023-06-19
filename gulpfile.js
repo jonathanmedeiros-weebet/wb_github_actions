@@ -2831,3 +2831,12 @@ gulp.task('26sports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('blubet.site', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "blubet.site",
+        banca: "BLUEBET",
+        styles: "",
+    });
+});
