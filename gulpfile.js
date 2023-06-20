@@ -1980,15 +1980,6 @@ gulp.task('apostafacil123.com', function (done) {
     });
 });
 
-gulp.task('surebetclub.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "surebetclub.wee.bet",
-        banca: "SURE BET CLUB",
-        styles: "",
-    });
-});
-
 gulp.task('fnbetpix.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2145,15 +2136,6 @@ gulp.task('p1x.bet', function (done) {
         server: "front1.wee.bet",
         host: "p1x.bet",
         banca: "P1X.BET",
-        styles: "",
-    });
-});
-
-gulp.task('pagbet.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "pagbet.club",
-        banca: "PAGBET",
         styles: "",
     });
 });
