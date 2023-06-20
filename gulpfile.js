@@ -2849,3 +2849,12 @@ gulp.task('blubet.site', function (done) {
         styles: "",
     });
 });
+
+gulp.task('playgreen.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "playgreen.bet",
+        banca: "PLAY GREEN",
+        styles: "",
+    });
+});
