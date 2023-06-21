@@ -49,7 +49,6 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
-    widthQR = '170px';
     constructor(
         public modal: NgbActiveModal,
         private _sanitizer: DomSanitizer,
