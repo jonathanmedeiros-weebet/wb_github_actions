@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, FormGroup, Validators, ValidatorFn} from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +16,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
 import {NgHcaptchaService} from 'ng-hcaptcha';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -41,6 +42,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     provedorCaptcha;
     validacaoEmailObrigatoria;
 
+    user: any;
+    formSocial = false;
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -54,6 +58,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private modalService: NgbModal,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
+        private socialAuth: SocialAuthService,
     ) {
         super();
     }
@@ -88,20 +93,33 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             }
              this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
         });
+
+        this.socialAuth.authState.subscribe((user) => {
+            console.log('Social LOG: ', user);
+
+            if(user) {
+                this.formSocial = true;
+                this.form.patchValue({
+                    nome: user.firstName,
+                    sobrenome: user.lastName,
+                    email: user.email,
+                    googleId: user.id,
+                    googleIdToken: user.idToken,
+                })
+            }
+
+            this.user = user;
+        });
     }
 
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            usuario: [null, [
-                    Validators.minLength(3),
-                    Validators.pattern('^[a-zA-Z0-9_]+$'),
-                    Validators.required
-                ], this.validarLoginUnico.bind(this)],
-            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
+            usuario: [null],
+            nascimento: [null],
+            senha: [null],
+            senha_confirmacao: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
@@ -109,8 +127,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
             check_1: [''],
-            check_2: ['']
-        }, {validator: PasswordValidation.MatchPassword});
+            check_2: [''],
+            googleId:[''],
+            googleIdToken:['']
+        });
     }
 
     validarLoginUnico(control: AbstractControl) {
@@ -135,6 +155,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     submit() {
         const values = this.form.value;
+        console.log('UGAUGA');
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)

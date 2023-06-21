@@ -12,6 +12,7 @@ import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'app-login-modal',
@@ -37,6 +38,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private messageService: MessageService,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
+        private socialAuth: SocialAuthService,
         private router: Router,
         private modalService: NgbModal
     ) {
@@ -64,15 +66,22 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 isCliente => this.isCliente = isCliente
             );
+
+        this.socialAuth.authState.subscribe((user) => {
+            this.form.patchValue({
+                googleId: user.id,
+                googleIdToken: user.idToken
+            });
+            this.submit();
+        });
     }
 
     createForm() {
         this.form = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
-            password: [
-                '',
-                Validators.compose([Validators.required, Validators.minLength(2)])
-            ]
+            username: [''],
+            password: [''],
+            googleId: [''],
+            googleIdToken: ['']
         });
     }
 

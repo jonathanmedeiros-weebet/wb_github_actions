@@ -11,7 +11,7 @@
             <div class="col-md-6">
                 <div class="form-group mb-4">
                     <div class="input-md">
-                        <input type="text" id="nome" class="form-control inverted-out" formControlName="nome"
+                        <input type="text" id="nome" class="form-control inverted-out" [readonly]="formSocial" formControlName="nome"
                                [ngClass]="applyCssInputError('nome')" placeholder=" ">
                         <label for="nome">{{'geral.nome' | translate}}</label>
                     </div>
@@ -24,6 +24,7 @@
                     <div class="input-md">
                         <input type="text" id="sobrenome" class="form-control inverted-out"
                                [ngClass]="applyCssInputError('sobrenome')"
+                               [readonly]="formSocial"
                                formControlName="sobrenome" placeholder=" ">
                         <label for="sobrenome">{{'geral.sobrenome' | translate}}</label>
                     </div>
@@ -81,6 +82,7 @@
                     <div class="input-md">
                         <input type="text" id="email" class="form-control inverted-out"
                                [ngClass]="applyCssInputError('email')"
+                               [readonly]="formSocial"
                                formControlName="email" placeholder=" ">
                         <label for="email">{{'geral.email' | translate}}</label>
                     </div>
@@ -90,8 +92,8 @@
                 </div>
             </div>
         </div>
-        <h3>{{'geral.criarLogin' | translate}}</h3>
-        <div class="row">
+        <h3>{{formSocial ? '' : 'geral.criarLogin' | translate}}</h3>
+        <div class="row" *ngIf="!formSocial">
             <div class="col-md-6">
                 <div class="form-group mb-4">
                     <div class="input-md">
@@ -120,7 +122,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="!formSocial">
                 <div class="form-group mb-4">
                     <div class="input-md">
                         <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
@@ -180,6 +182,7 @@
             </div>
 
             <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+            <asl-google-signin-button type='standard' size='medium' text='signup_with'></asl-google-signin-button>
         </div>
     </form>
 </div>
