@@ -2843,3 +2843,12 @@ gulp.task('playgreen.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostacerta.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "apostacerta.bet",
+        banca: "APOSTA CERTA",
+        styles: "",
+    });
+});
