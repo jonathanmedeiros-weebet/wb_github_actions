@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SportLayoutComponent } from 'src/app/shared/layout/app-layouts';
+import {LiveSportLayoutComponent, SportLayoutComponent} from 'src/app/shared/layout/app-layouts';
 import { LiveWrapperComponent } from './wrapper/live-wrapper.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: SportLayoutComponent,
+        component: LiveSportLayoutComponent,
         children: [
             {
                 path: '',

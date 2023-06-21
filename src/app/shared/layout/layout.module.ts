@@ -14,7 +14,8 @@ import {
     PagesLayoutComponent,
     PagesNoNavLayoutComponent,
     SportLayoutComponent,
-    VirtuaisLayoutComponent
+    VirtuaisLayoutComponent,
+    LiveSportLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -149,6 +150,7 @@ import { JogoService } from '../services/aposta-esportiva/jogo.service';
         LoteriaLayoutComponent,
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
+        LiveSportLayoutComponent,
         SidebarNavComponent,
         SidebarMenuComponent,
         LoginModalComponent,
@@ -198,7 +200,7 @@ import { JogoService } from '../services/aposta-esportiva/jogo.service';
         {
             provide: RECAPTCHA_SETTINGS,
 
-            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings,
+            useValue: { siteKey: '6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun' } as RecaptchaSettings,
         }
     ]
 })

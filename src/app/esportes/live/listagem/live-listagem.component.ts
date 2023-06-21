@@ -1,12 +1,21 @@
 import {
-    Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, DoCheck, Output, EventEmitter, Input, OnChanges, SimpleChanges, ChangeDetectorRef
+    ChangeDetectorRef,
+    Component,
+    DoCheck,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2,
+    SimpleChanges
 } from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, MessageService, JogoService, LiveService, BilheteEsportivoService, HelperService } from '../../../services';
-import { Jogo } from '../../../models';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BilheteEsportivoService, HelperService, JogoService, LiveService, MessageService, ParametrosLocaisService} from '../../../services';
 
 @Component({
     selector: 'app-live-listagem',
@@ -32,7 +41,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     mobileScreen = false;
     term = '';
     itens;
-    canalLive = null;
 
     constructor(
         private messageService: MessageService,
@@ -67,8 +75,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['sportId']) {
             if (!changes['sportId'].firstChange) {
-                if (changes['sportId'].currentValue != changes['sportId'].previousValue) {
-                    this.canalLive = this.sportId;
+                if (changes['sportId'].currentValue !== changes['sportId'].previousValue) {
                     this.getJogosAoVivo();
                 }
             }
@@ -81,7 +88,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     ngDoCheck() {
         if (!this.awaiting) {
             const jogosEl = this.el.nativeElement.querySelector('.jogos');
-            this.temJogoAoVivo = jogosEl ? true : false;
+            this.temJogoAoVivo = !!jogosEl;
         }
     }
 
@@ -92,6 +99,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     getJogosAoVivo() {
+        console.log('entrando');
         this.showLoadingIndicator = true;
         this.jogoService.getJogosAoVivo(this.sportId)
             .pipe(takeUntil(this.unsub$))
@@ -160,7 +168,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     definindoAlturas() {
-        const headerHeight = this.mobileScreen ? 145 : 132;
+        const headerHeight = this.mobileScreen ? 145 : 140;
         const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);

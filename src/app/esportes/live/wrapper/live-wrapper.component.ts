@@ -38,11 +38,12 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subEsporte = this.route.params.subscribe(params => {
+            console.log(params);
             this.changeSport(params['esporte']);
             this.getJogos();
         });
 
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.liveService.connect();
     }
 
@@ -55,7 +56,7 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     changeSport(esporte) {
-        if (esporte == 'futebol') {
+        if (esporte === 'futebol') {
             this.sportId = 1;
             this.esporte = esporte;
         } else {

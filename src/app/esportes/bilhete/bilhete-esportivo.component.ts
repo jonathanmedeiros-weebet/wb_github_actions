@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of } from 'rxjs';
@@ -65,6 +65,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showCampinho = true;
     showStream = false;
     showFrame = true;
+
+    @Input() subtracaoAltura = 132;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -200,7 +202,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 132;
+        console.log(this.subtracaoAltura);
+        const altura = window.innerHeight - this.subtracaoAltura;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }

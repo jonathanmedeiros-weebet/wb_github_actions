@@ -9,3 +9,4 @@ export * from './pages-no-nav-layout.component';
 export * from './sport-layout.component';
 export * from './cassino-layout.component';
 export * from './virtuais-layout.component';
+export * from './live-sport-layout.component';

@@ -307,6 +307,7 @@
 
     .indentificacao .nome {
         padding-left: 0;
+        width: calc(100% - 85px);
     }
 
     .cotacoes, .cotacoes .cotacao {

@@ -138,12 +138,19 @@
                         <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
                             <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
                                 <div class="tempo-box">
-                                    <div class="aovivo-label">
+                                    <div class="aovivo-label" *ngIf="sportId == 1">
                                         <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                     </div>
+                                    <div class="tempo" *ngIf="sportId == 18">
+                                        {{jogo.value.info.minutos}}"
+                                    </div>
                                     <div class="tempo">
-                                        <span *ngIf="sportId == 18">Q{{jogo.value.info.tempo}}</span>
-                                        {{jogo.value.info.minutos}}'
+                                        <span *ngIf="sportId == 18">
+                                            {{jogo.value.info.tempo}}ª Tempo
+                                        </span>
+                                        <span *ngIf="sportId == 1">
+                                            {{jogo.value.info.minutos}}"
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="nome">

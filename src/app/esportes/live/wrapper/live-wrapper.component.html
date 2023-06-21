@@ -1,5 +1,19 @@
 <div id="futebol-live-wrapper">
     <div id="futebol-live-content">
+        <div class="live-menu-container">
+            <div class="live-menu">
+                <div class="category">
+                    <a [routerLink]="['/live/futebol']" routerLinkActive="active">
+                        <i class="wbicon icon-futebol"></i><span>{{'submenu.futebol' | translate}}</span>
+                    </a>
+                </div>
+                <div class="category">
+                    <a [routerLink]="['/live/basquete']" routerLinkActive="active">
+                        <i class="wbicon icon-basquete"></i><span>{{'submenu.basquete' | translate}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="lista" [hidden]="exibirMaisCotacoes">
             <app-live-listagem (jogoSelecionadoId)="receptorJogoSelecionadoId($event)"
                 (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)" [sportId]="sportId">
