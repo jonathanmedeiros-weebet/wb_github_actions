@@ -135,9 +135,11 @@
                             <td *ngIf="!mobileScreen">{{ aposta.pago ? 'Pago' : '' }}</td>
                             <td>
                                 <div class="acoes-aposta">
-                                    <a (click)="handleCancel(aposta)" title="{{'geral.cancelar' | translate}}">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                    <ng-container *ngIf="habilitar_cancelar_aposta && habilitar_cancelar_aposta">
+                                        <a (click)="handleCancel(aposta)" title="{{'geral.cancelar' | translate}}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </ng-container>
 
                                     <a title="{{'geral.pagar' | translate}}" *ngIf="!aposta.pago && aposta.resultado == 'ganhou'"
                                        (click)="pagarAposta(aposta)">
