@@ -135,7 +135,7 @@
                             <td *ngIf="!mobileScreen">{{ aposta.pago ? 'Pago' : '' }}</td>
                             <td>
                                 <div class="acoes-aposta">
-                                    <ng-container *ngIf="habilitar_cancelar_aposta && habilitar_cancelar_aposta">
+                                    <ng-container *ngIf="habilitar_cancelar_aposta || habilitar_cancelar_aposta">
                                         <a (click)="handleCancel(aposta)" title="{{'geral.cancelar' | translate}}">
                                             <i class="fa fa-trash"></i>
                                         </a>
