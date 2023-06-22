@@ -2854,3 +2854,12 @@ gulp.task('apostacerta.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betgol.website', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betgol.website",
+        banca: "BET GOL",
+        styles: "",
+    });
+});

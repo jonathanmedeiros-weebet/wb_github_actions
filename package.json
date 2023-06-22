@@ -305,7 +305,8 @@
         "futebet.com": "gulp futebet.com",
         "blubet.site": "gulp blubet.site",
         "playgreen.bet": "gulp playgreen.bet",
-        "apostacerta.bet": "gulp apostacerta.bet"
+        "apostacerta.bet": "gulp apostacerta.bet",
+        "betgol.website": "gulp betgol.website"
     },
     "private": true,
     "dependencies": {
