@@ -99,7 +99,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     getJogosAoVivo() {
-        console.log('entrando');
+        this.campeonatos = new Map();
         this.showLoadingIndicator = true;
         this.jogoService.getJogosAoVivo(this.sportId)
             .pipe(takeUntil(this.unsub$))
@@ -160,7 +160,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                     }, 2000);
 
                     this.showLoadingIndicator = false;
-
                     this.live();
                 },
                 error => this.handleError(error)
@@ -175,11 +174,10 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     live() {
-        this.campeonatos = new Map();
         this.liveService.getEventos()
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: any) => {
-                if (jogo.sport_id == this.sportId) {
+                if (jogo.sport_id === this.sportId) {
                     let campeonato = this.campeonatos.get(jogo.campeonato._id);
                     let inserirCampeonato = false;
 
@@ -207,12 +205,12 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
 
                     let valido = true;
                     if (this.minutoEncerramentoAoVivo > 0) {
-                        if (this.sportId == 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                        if (this.sportId === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                             valido = false;
                         }
                     }
 
-                    if (this.sportId == 18 && jogo.info.minutos == 0 && jogo.info.tempo == 4) {
+                    if (this.sportId === 18 && jogo.info.minutos == 0 && jogo.info.tempo == 4) {
                         valido = false;
                     }
 
@@ -264,7 +262,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     jogoBloqueado(eventId) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
+        return this.jogosBloqueados ? (!!this.jogosBloqueados.includes(eventId)) : false;
     }
 
     oddSelecionada(jogoId, chave) {
@@ -355,7 +353,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         }
         mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[this.sportId]['fora']) ?? { nome: 'Fora', lock: true });
 
-        return mercadosPrincipais
+        return mercadosPrincipais;
     }
 
     cotacaoPermitida(cotacao) {
