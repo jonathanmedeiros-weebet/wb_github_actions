@@ -21,6 +21,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 })
 export class LoginModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     appMobile;
+    isMobile = false;
     unsub$ = new Subject();
     usuario = new Usuario();
     isCliente;
@@ -47,6 +48,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.isMobile = window.innerWidth <= 1024;
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;

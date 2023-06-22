@@ -26,8 +26,8 @@
                 <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
             </div>
             <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
-            <span>Ou</span>
-            <asl-google-signin-button type='standard' size='larger' text='signin_with' width="{{ appMobile ? '388' : '288'}}"></asl-google-signin-button>
+            <span class="space-buttons">Ou</span>
+            <asl-google-signin-button type='standard' size='larger' text='signin_with' width="{{ isMobile ? '288' : '388'}}"></asl-google-signin-button>
         </form>
 
         <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">

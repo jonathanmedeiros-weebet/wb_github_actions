@@ -26,6 +26,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
+    isMobile = false;
     unsub$ = new Subject();
     usuario = new Usuario();
     termosDeUso: Pagina;
@@ -65,6 +66,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
 
         this.createForm();
@@ -155,7 +157,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     submit() {
         const values = this.form.value;
-        console.log('UGAUGA');
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
@@ -202,5 +203,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.modalTermosRef) {
             this.modalTermosRef.dismiss();
         }
+    }
+
+    clearSocialForm() {
+        this.formSocial = false;
+        this.form.patchValue({
+            googleId: '',
+            googleIdToken: '',
+        })
     }
 }
