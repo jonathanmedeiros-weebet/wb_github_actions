@@ -33,7 +33,8 @@ export class ApostaComponent implements OnInit {
     acumuladaoHabilitado;
     desafioHabilitado;
     cassinoHabilitado;
-
+    habilitar_cancelar_ultima_aposta;
+    habilitar_cancelar_aposta;
     encerramentoPermitido;
 
     modalRef;
@@ -94,7 +95,8 @@ export class ApostaComponent implements OnInit {
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.cassinoHabilitado = this.params.getOpcoes().casino;
-
+        this.habilitar_cancelar_aposta = this.params.getOpcoes().habilitar_cancelar_aposta;
+        this.habilitar_cancelar_ultima_aposta = this.params.getOpcoes().habilitar_cancelar_ultima_aposta;
         this.encerramentoPermitido = (['cambista', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
         this.getApostas();

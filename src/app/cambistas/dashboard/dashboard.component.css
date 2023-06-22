@@ -222,6 +222,10 @@
     cursor: pointer;
 }
 
+.apostas-realizadas{
+    margin-top: 10px;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 10px;
