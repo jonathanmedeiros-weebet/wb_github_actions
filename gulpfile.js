@@ -2864,3 +2864,21 @@ gulp.task('betgol.website', function (done) {
         styles: "",
     });
 });
+
+gulp.task('playmillion.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "playmillion.bet",
+        banca: "PLAY MILLION",
+        styles: "",
+    });
+});
+
+gulp.task('24horas.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "24horas.bet",
+        banca: "24HORAS.BET",
+        styles: "",
+    });
+});
