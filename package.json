@@ -307,7 +307,8 @@
         "playgreen.bet": "gulp playgreen.bet",
         "apostacerta.bet": "gulp apostacerta.bet",
         "betgol.website": "gulp betgol.website",
-        "playmillion.bet": "gulp playmillion.bet"
+        "playmillion.bet": "gulp playmillion.bet",
+        "24horas.bet": "gulp 24horas.bet"
       },
       "private": true,
       "dependencies": {
