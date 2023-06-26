@@ -52,10 +52,6 @@ label.label-tempo {
     border-radius: 5px;
 }
 
-.qr-code img {
-    width: 170px;
-}
-
 .modal-header, .modal-body {
     border-radius: 5px;
     text-align: center;
