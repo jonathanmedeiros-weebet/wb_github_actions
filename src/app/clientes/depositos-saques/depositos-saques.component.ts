@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {DepositoSaque} from '../../models';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {FinanceiroService} from '../../shared/services/financeiro.service';
@@ -26,7 +26,7 @@ export class DepositosSaquesComponent extends BaseFormComponent implements OnIni
     modalRef;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private financeiroService: FinanceiroService,
         private menuFooterService: MenuFooterService,

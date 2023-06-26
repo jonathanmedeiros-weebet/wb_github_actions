@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {FormValidations, PasswordValidation} from '../../shared/utils';
@@ -24,7 +24,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private messageService: MessageService,
         private authService: AuthService

@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -79,7 +79,7 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private apostaService: ApostaService,
         private messageService: MessageService,
-        private fb: FormBuilder
+        private fb: UntypedFormBuilder
     ) {
         super();
         router.events.forEach((event: NavigationEvent) => {

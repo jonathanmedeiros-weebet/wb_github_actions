@@ -7,7 +7,7 @@ import { SupresinhaService } from '../../services/utils/surpresinha.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { BaseFormComponent } from '../../layout/base-form/base-form.component';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ApostaService } from '../../services/aposta.service';
 import { MessageService } from '../../services/utils/message.service';
 import {
@@ -58,7 +58,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private apostaService: ApostaService,
         private sidebarService: SidebarService,
         private supresinhaService: SupresinhaService,

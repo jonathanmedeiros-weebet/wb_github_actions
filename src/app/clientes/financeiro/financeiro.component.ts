@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {MovimentacaoFinanceira} from '../../shared/models/clientes/movimentacao-financeira';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -73,7 +73,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
 
     constructor(
         private clienteService: ClienteService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private el: ElementRef,
         private renderer: Renderer2,

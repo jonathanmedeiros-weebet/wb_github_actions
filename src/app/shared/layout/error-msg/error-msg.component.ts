@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { FormValidations } from './../../utils/form-validation';
@@ -9,7 +9,7 @@ import { FormValidations } from './../../utils/form-validation';
     styleUrls: ['error-msg.component.css'],
 })
 export class ErrorMsgComponent implements OnInit {
-    @Input() control: FormControl;
+    @Input() control: UntypedFormControl;
     @Input() label: string;
 
     constructor() { }

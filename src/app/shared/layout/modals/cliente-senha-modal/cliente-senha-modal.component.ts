@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService, ClienteService, MessageService, SidebarService, UtilsService} from 'src/app/services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
@@ -24,7 +24,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     mobileScreen;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private utilsService: UtilsService,
         private messageService: MessageService,

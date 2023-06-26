@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
@@ -33,7 +33,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     constructor(
         public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private apostaService: ApostaService,
         private messageService: MessageService,
         private auth: AuthService,

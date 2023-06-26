@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, Renderer2, ElementRef} from '@angular/core';
 import {getCurrencySymbol} from '@angular/common';
-import {FormBuilder, FormArray, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormArray, Validators} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -51,7 +51,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private tipoApostaService: TipoApostaLoteriaService,
         private sorteioService: SorteioService,
         private messageService: MessageService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private supresinhaService: SupresinhaService,
         private renderer: Renderer2,
         private el: ElementRef,
@@ -278,7 +278,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     get numeros() {
-        return this.form.get('numeros') as FormArray;
+        return this.form.get('numeros') as UntypedFormArray;
     }
 
     setNumeros(numeros: Number[]) {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {ResultadoService, MessageService, MenuFooterService, ParametrosLocaisService} from './../../services';
@@ -31,7 +31,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     constructor(
         private messageService: MessageService,
         private resultadoService: ResultadoService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private menuFooterService: MenuFooterService,
         private paramsService: ParametrosLocaisService,
     ) {

@@ -2,7 +2,7 @@ import {
     Component, OnInit, OnDestroy,
     Input, Output, EventEmitter
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -28,7 +28,7 @@ export class ValidarApostaAcumuladaoComponent extends BaseFormComponent implemen
     constructor(
         private acumuladaoService: AcumuladaoService,
         private messageService: MessageService,
-        private fb: FormBuilder
+        private fb: UntypedFormBuilder
     ) {
         super();
     }

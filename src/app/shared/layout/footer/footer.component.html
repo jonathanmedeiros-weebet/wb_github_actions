@@ -116,13 +116,12 @@
             </a>
         </div>
 
-        <div class="btn-group dropdown language-dropdown hide-desktop">
-            <button class="btn dropdown-toggle" type="button" id="dropdownLanguage"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="btn-group language-dropdown hide-desktop" ngbDropdown>
+            <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
                 <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
                 {{'geral.selecionarIdioma' | translate}}
             </button>
-            <div class="dropdown-menu language-dropdown-menu" aria-labelledby="dropdownLanguage">
+            <div class="language-dropdown-menu" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
                 <a class="m-2 p-0 dropdown-item" (click)="alterarLinguagem('pt')">
                     <span class="flag-icon flag-icon-br flag-icon-squared"></span>
                     {{'geral.portugues' | translate}}

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {MessageService} from '../../shared/services/utils/message.service';
@@ -16,7 +16,7 @@ export class RecuperarSenhaComponent extends BaseFormComponent implements OnInit
     submitting = false;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private clienteService: ClienteService,
         private authService: AuthService,

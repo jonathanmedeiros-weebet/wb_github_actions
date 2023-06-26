@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
@@ -21,7 +21,7 @@ export class ApuracaoListagemComponent extends BaseFormComponent implements OnIn
 
     constructor(
         private messageService: MessageService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private params: ParametrosLocaisService,
         private menuFooterService: MenuFooterService
     ) {

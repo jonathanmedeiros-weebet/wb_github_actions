@@ -82,7 +82,7 @@
 .loading-listagem .item-sample .item-right{
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .loading-listagem .item-sample .ssc-square {
