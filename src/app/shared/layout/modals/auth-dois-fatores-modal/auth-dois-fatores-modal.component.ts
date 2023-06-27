@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, MessageService } from './../../../../services';
@@ -23,7 +23,7 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
 
     constructor(
         public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private auth: AuthService,
     ) {

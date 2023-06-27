@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
 import {Cliente} from '../../shared/models/clientes/cliente';
 import {MessageService} from '../../shared/services/utils/message.service';
@@ -38,7 +38,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     saques = [];
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private clienteService: ClienteService,
         private financeiroService: FinanceiroService,

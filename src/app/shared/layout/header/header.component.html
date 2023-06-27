@@ -21,12 +21,11 @@
         <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
     </nav>
     <div class="side side-right">
-        <div class="btn-group dropdown language-dropdown hide-mobile">
-            <button class="btn dropdown-toggle" type="button" id="dropdownLanguage"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="btn-group language-dropdown hide-mobile" ngbDropdown>
+            <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
                 <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
             </button>
-            <div class="dropdown-menu language-dropdown-menu position-absolute" aria-labelledby="dropdownLanguage">
+            <div class="language-dropdown-menu position-absolute" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
                 <a class="m-2 p-0 dropdown-item" (click)="useLanguage('pt')">
                     <span class="flag-icon flag-icon-br flag-icon-squared"></span>
                     {{'geral.portugues' | translate}}
@@ -39,10 +38,10 @@
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <div class="dropdown menu-conta">
+            <div class="menu-conta" ngbDropdown>
                 <i class="fa olhinho" (click)="alternarExibirSaldo()" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
-                <a (click)="getPosicaoFinanceira()" class="nav-link dropdown-toggle menu-perfil" href="#" id="navbarDropdown"
-                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="getPosicaoFinanceira()" class="nav-link menu-perfil" id="navbarDropdown"
+                   role="button" ngbDropdownToggle>
                     <div>
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
                         <span class="saldo-usuario">
@@ -52,7 +51,7 @@
                     </div>
                     <img src="https://cdn.wee.bet/img/blank-profile-picture.png" alt="">
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu-right" aria-labelledby="navbarDropdown" ngbDropdownMenu>
                     <a class="btnClose hide-desktop" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
                     </a>

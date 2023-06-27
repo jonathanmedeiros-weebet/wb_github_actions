@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartaoService, MessageService } from './../../../../services';
@@ -18,7 +18,7 @@ export class RecargaCartaoModalComponent extends BaseFormComponent implements On
     constructor(
         public activeModal: NgbActiveModal,
         private modalService: NgbModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private cartaoService: CartaoService,
         private message: MessageService
     ) {

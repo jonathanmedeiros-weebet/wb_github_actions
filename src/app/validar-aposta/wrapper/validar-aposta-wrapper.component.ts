@@ -16,7 +16,7 @@ import {
 } from '../../services';
 import { ApostaModalComponent } from './../../shared/layout/modals';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-validar-aposta-wrapper',
@@ -38,7 +38,7 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
         private sidebarService: SidebarService,
         private elRef: ElementRef,
         private modalService: NgbModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private menuFooterService: MenuFooterService,
         public activeModal: NgbActiveModal
     ) {

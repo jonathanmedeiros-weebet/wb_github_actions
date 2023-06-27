@@ -212,7 +212,7 @@
     display: flex;
     padding-top: 30px;
     padding-right: 120px;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 0 auto;
     max-width: 1910px;
     width: 100%;
@@ -467,7 +467,7 @@
     .fornecedor-qtd {
         width: 10%;
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         opacity: 50%;
     }
 

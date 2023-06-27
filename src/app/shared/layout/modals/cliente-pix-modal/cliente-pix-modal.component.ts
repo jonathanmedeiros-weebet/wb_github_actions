@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService, MessageService, UtilsService, MenuFooterService, SidebarService } from 'src/app/services';
 import { Cidade } from 'src/app/shared/models/endereco/cidade';
@@ -24,7 +24,7 @@ export class ClientePixModalComponent extends BaseFormComponent implements OnIni
     mostrarSenha = false;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private utilsService: UtilsService,
         private messageService: MessageService,

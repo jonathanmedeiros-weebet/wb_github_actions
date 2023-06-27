@@ -1,7 +1,7 @@
-import { FormGroup, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormArray } from '@angular/forms';
 
 export abstract class BaseFormComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     constructor() { }
 
@@ -21,13 +21,13 @@ export abstract class BaseFormComponent {
         this.form.reset();
     }
 
-    checkFormValidations(formGroup: FormGroup | FormArray) {
+    checkFormValidations(formGroup: UntypedFormGroup | UntypedFormArray) {
         Object.keys(formGroup.controls).forEach(field => {
             const controle = formGroup.get(field);
             controle.markAsDirty();
             controle.markAsTouched();
 
-            if (controle instanceof FormGroup || controle instanceof FormArray) {
+            if (controle instanceof UntypedFormGroup || controle instanceof UntypedFormArray) {
                 this.checkFormValidations(controle);
             }
         });

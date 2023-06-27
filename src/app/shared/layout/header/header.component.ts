@@ -1,7 +1,7 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -102,7 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private auth: AuthService,
         private sidebarService: SidebarService,

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
@@ -32,7 +32,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     isLoggedIn;
     btnText = 'Pré-Aposta';
     tipoApostaDeslogado = 'preaposta';
-    cartaoApostaForm: FormGroup;
+    cartaoApostaForm: UntypedFormGroup;
     cotacoesAlteradas = [];
     refreshIntervalId;
     unsub$ = new Subject();
@@ -48,7 +48,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private messageService: MessageService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private bilheteService: DesafioBilheteService,
         private paramsService: ParametrosLocaisService,
         private modalService: NgbModal,
@@ -142,7 +142,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     }
 
     get itens() {
-        return this.form.get('itens') as FormArray;
+        return this.form.get('itens') as UntypedFormArray;
     }
 
     setItens(itens: any[]) {

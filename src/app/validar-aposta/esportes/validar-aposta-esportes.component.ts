@@ -6,7 +6,7 @@ import {
     Output,
     EventEmitter
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
@@ -43,7 +43,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private helper: HelperService,
         private paramsService: ParametrosLocaisService
     ) {

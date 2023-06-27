@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
@@ -21,7 +21,7 @@ export class CartaoSolicitacoesSaqueComponent extends BaseFormComponent implemen
     modalRef;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private cd: ChangeDetectorRef,
         private modalService: NgbModal,
         private messageService: MessageService,

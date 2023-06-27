@@ -3,7 +3,7 @@ import {RelatorioService} from '../../shared/services/relatorio.service';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {BaseChartDirective} from 'ng2-charts';
 import {ChartConfiguration, ChartData, ChartEvent, ChartType} from 'chart.js';
 import {AuthService, CambistaService, SidebarService} from 'src/app/services';
@@ -50,7 +50,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit {
         private relatorioService: RelatorioService,
         private messageService: MessageService,
         private params: ParametrosLocaisService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private sidebarService: SidebarService,
         private auth: AuthService,
         private cambistaService: CambistaService,

@@ -67,7 +67,7 @@ import {
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
-import {NgbAlertModule, NgbCarouselModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 import {SubmenuComponent} from './submenu/submenu.component';
@@ -99,6 +99,7 @@ import { JogoService } from '../services/aposta-esportiva/jogo.service';
         NgbModalModule,
         NgbAlertModule,
         NgbCarouselModule,
+        NgbDropdownModule,
         NgbModule,
         CodeInputModule.forRoot({
             codeLength: 6

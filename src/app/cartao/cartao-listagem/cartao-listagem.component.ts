@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {MessageService, CartaoService, MenuFooterService} from './../../services';
@@ -19,7 +19,7 @@ export class CartaoListagemComponent extends BaseFormComponent implements OnInit
     cartoes: CartaoAposta[];
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private cd: ChangeDetectorRef,
         private messageService: MessageService,
         private cartaoService: CartaoService,

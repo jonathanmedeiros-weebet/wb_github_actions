@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import {AcumuladaoService, AuthService, MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
 import {Acumuladao} from './../../models';
@@ -27,7 +27,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     modalRef;
     btnText = 'Pré-Aposta';
     tipoApostaDeslogado = 'preaposta';
-    cartaoApostaForm: FormGroup;
+    cartaoApostaForm: UntypedFormGroup;
     opcoes;
     dados;
     isCliente;
@@ -42,7 +42,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private acumuladaoService: AcumuladaoService,
         private messageService: MessageService,
         public modalService: NgbModal,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService
     ) {

@@ -1,5 +1,5 @@
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {MessageService} from '../../shared/services/utils/message.service';
@@ -33,7 +33,7 @@ export class RolloverComponent extends BaseFormComponent implements OnInit, OnDe
         private sidebarService: SidebarService,
         public activeModal: NgbActiveModal,
         private messageService: MessageService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private modalService: NgbModal
     ) { super();}
 

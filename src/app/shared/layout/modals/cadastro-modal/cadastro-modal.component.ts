@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -44,7 +44,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private apostaService: ApostaService,
         private messageService: MessageService,
         private auth: AuthService,
