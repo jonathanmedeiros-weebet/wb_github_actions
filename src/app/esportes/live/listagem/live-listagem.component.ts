@@ -25,7 +25,6 @@ import {BilheteEsportivoService, HelperService, JogoService, LiveService, Messag
 export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
-    @Input() sportId;
     jogos = {};
     campeonatos = new Map();
     idsCampeonatosLiberados = this.paramsService.getCampeonatosAoVivo();
@@ -41,6 +40,9 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     mobileScreen = false;
     term = '';
     itens;
+    esportesAbertos = [1, 18];
+    qtdJogosFutebol = 0;
+    qtdJogosBasquete = 0;
 
     constructor(
         private messageService: MessageService,
@@ -82,9 +84,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         }
     }
 
-    changeLive() {
-    }
-
     ngDoCheck() {
         if (!this.awaiting) {
             const jogosEl = this.el.nativeElement.querySelector('.jogos');
@@ -101,7 +100,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     getJogosAoVivo() {
         this.campeonatos = new Map();
         this.showLoadingIndicator = true;
-        this.jogoService.getJogosAoVivo(this.sportId)
+        this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
@@ -113,17 +112,25 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                             let valido = true;
 
                             if (this.minutoEncerramentoAoVivo > 0) {
-                                if (this.sportId == 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                if (jogo.sport_id === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
                                 }
                             }
 
-                            if (this.sportId == 18 && jogo.info.minutos == 0 && jogo.info.tempo == 4) {
+                            if (jogo.sport_id === 18 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
                                 valido = false;
                             }
 
                             if (this.jogoBloqueado(jogo.event_id)) {
                                 valido = false;
+                            }
+
+                            if (jogo.sport_id === 1 && valido) {
+                                this.qtdJogosFutebol++;
+                            }
+
+                            if (jogo.sport_id === 18 && valido) {
+                                this.qtdJogosBasquete++;
                             }
 
                             jogo.cotacoes.map(cotacao => {
@@ -177,7 +184,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         this.liveService.getEventos()
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: any) => {
-                if (jogo.sport_id === this.sportId) {
                     let campeonato = this.campeonatos.get(jogo.campeonato._id);
                     let inserirCampeonato = false;
 
@@ -204,15 +210,15 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                     }
 
                     let valido = true;
-                    if (this.minutoEncerramentoAoVivo > 0) {
-                        if (this.sportId === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
-                            valido = false;
-                        }
-                    }
-
-                    if (this.sportId === 18 && jogo.info.minutos == 0 && jogo.info.tempo == 4) {
-                        valido = false;
-                    }
+                    // if (this.minutoEncerramentoAoVivo > 0) {
+                    //     if (this.sportId === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                    //         valido = false;
+                    //     }
+                    // }
+                    //
+                    // if (this.sportId === 18 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                    //     valido = false;
+                    // }
 
                     if (this.jogoBloqueado(jogo.event_id)) {
                         valido = false;
@@ -235,7 +241,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                             }
                         }
                     }
-                }
             });
     }
 
@@ -332,6 +337,19 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         return this.campeonatosAbertos.includes(campeonatoId);
     }
 
+    esporteAberto(sportId) {
+        return this.esportesAbertos.includes(sportId);
+    }
+
+    toggleEsporte(sportId) {
+        const index = this.esportesAbertos.findIndex(id => id === sportId);
+        if (index >= 0) {
+            this.esportesAbertos.splice(index, 1);
+        } else {
+            this.esportesAbertos.push(sportId);
+        }
+    }
+
     cotacoesPorTipo(cotacoes) {
         const chavesMercadosPrincipais = {
             1: {
@@ -347,11 +365,22 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
 
         const mercadosPrincipais = [];
 
-        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[this.sportId]['casa']) ?? { nome: 'Casa', lock: true });
-        if (this.sportId == 1) {
-            mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[this.sportId]['empate']) ?? { nome: 'Empate', lock: true });
-        }
-        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[this.sportId]['fora']) ?? { nome: 'Fora', lock: true });
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['casa']) ?? {
+            nome: 'Casa',
+            lock: true
+        });
+
+        // if (this.sportId === 1) {
+            mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['empate']) ?? {
+                nome: 'Empate',
+                lock: true
+            });
+        // }
+
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['fora']) ?? {
+            nome: 'Fora',
+            lock: true
+        });
 
         return mercadosPrincipais;
     }

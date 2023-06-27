@@ -1,8 +1,38 @@
-.campeonato-header{
+.esporte .campeonatos {
+    padding: 0 5px;
+}
+
+.esporte-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--league);
+    color: var(--foreground-league);
+    padding: 5px 15px;
+    border-radius: 2px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    height: 45px;
+}
+
+.esporte-header>span {
+    line-height: 29px;
+}
+
+.esporte-header .wbicon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.campeonato-header {
     border: none;
     font-size: 12px;
     cursor: pointer;
     margin-bottom: 5px;
+    border-radius: 2px;
 }
 
 .wrap-sticky {
@@ -10,12 +40,12 @@
     flex: 1;
 }
 
-.campeonato-header .column-left{
+.campeonato-header .column-left, .esporte-header .column-left  {
     flex-grow: 1;
     position: relative;
 }
 
-.campeonato-header .campeonato-nome{
+.campeonato-header .campeonato-nome, .esporte-header .campeonato-nome{
     margin-left: 28px;
 }
 
