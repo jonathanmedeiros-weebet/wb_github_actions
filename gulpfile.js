@@ -2891,3 +2891,30 @@ gulp.task('apostenasorte.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betmaniapix.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betmaniapix.com",
+        banca: "BET MANIA PIX",
+        styles: "",
+    });
+});
+
+gulp.task('brinkbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brinkbet.com",
+        banca: "BRINK BET",
+        styles: "",
+    });
+});
+
+gulp.task('jogue.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jogue.bet",
+        banca: "JOGUE.BET",
+        styles: "",
+    });
+});
