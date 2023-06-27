@@ -2882,3 +2882,12 @@ gulp.task('24horas.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostenasorte.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "apostenasorte.bet",
+        banca: "APOSTE NA SORTE",
+        styles: "",
+    });
+});

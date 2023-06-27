@@ -308,7 +308,8 @@
         "apostacerta.bet": "gulp apostacerta.bet",
         "betgol.website": "gulp betgol.website",
         "playmillion.bet": "gulp playmillion.bet",
-        "24horas.bet": "gulp 24horas.bet"
+        "24horas.bet": "gulp 24horas.bet",
+        "apostenasorte.bet": "gulp apostenasorte.bet"
       },
       "private": true,
       "dependencies": {
