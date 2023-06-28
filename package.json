@@ -309,7 +309,10 @@
         "betgol.website": "gulp betgol.website",
         "playmillion.bet": "gulp playmillion.bet",
         "24horas.bet": "gulp 24horas.bet",
-        "apostenasorte.bet": "gulp apostenasorte.bet"
+        "apostenasorte.bet": "gulp apostenasorte.bet",
+        "betmaniapix.com": "gulp betmaniapix.com",
+        "brinkbet.com": "gulp brinkbet.com",
+        "jogue.bet": "gulp jogue.bet"
       },
       "private": true,
       "dependencies": {
