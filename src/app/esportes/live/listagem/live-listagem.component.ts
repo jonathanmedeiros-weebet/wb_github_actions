@@ -1,17 +1,4 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    DoCheck,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    Output,
-    Renderer2,
-    SimpleChanges
-} from '@angular/core';
+import {Component, DoCheck, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges} from '@angular/core';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -52,8 +39,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         private helperService: HelperService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
-        private paramsService: ParametrosLocaisService,
-        private cd: ChangeDetectorRef
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
@@ -104,6 +90,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
+                    let qtdJogosValidos = 0;
                     campeonatos.forEach(campeonato => {
                         const jogos = new Map();
                         let temJogoValido = false;
@@ -125,14 +112,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                                 valido = false;
                             }
 
-                            if (jogo.sport_id === 1 && valido) {
-                                this.qtdJogosFutebol++;
-                            }
-
-                            if (jogo.sport_id === 18 && valido) {
-                                this.qtdJogosBasquete++;
-                            }
-
                             jogo.cotacoes.map(cotacao => {
                                 cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                                 cotacao.valorFinal = this.helperService.calcularCotacao2String(
@@ -148,10 +127,21 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
                             if (valido) {
                                 jogos.set(jogo._id, jogo);
                                 temJogoValido = true;
+                                qtdJogosValidos++;
                             }
                         });
 
                         campeonato.jogos = jogos;
+
+                        if (campeonato.sport_id === 1 || !campeonato.sport_id) {
+                            this.qtdJogosFutebol += qtdJogosValidos;
+                        }
+
+                        if (campeonato.sport_id === 18) {
+                            this.qtdJogosBasquete += qtdJogosValidos;
+                        }
+
+                        qtdJogosValidos = 0;
 
                         if (temJogoValido) {
                             this.campeonatos.set(campeonato._id, campeonato);
@@ -174,7 +164,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     definindoAlturas() {
-        const headerHeight = this.mobileScreen ? 145 : 140;
+        const headerHeight = this.mobileScreen ? 145 : 92;
         const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
@@ -184,63 +174,63 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         this.liveService.getEventos()
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: any) => {
-                    let campeonato = this.campeonatos.get(jogo.campeonato._id);
-                    let inserirCampeonato = false;
+                let campeonato = this.campeonatos.get(jogo.campeonato._id);
+                let inserirCampeonato = false;
 
-                    jogo.cotacoes.map(cotacao => {
-                        cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                            cotacao.valor,
-                            cotacao.chave,
-                            jogo.event_id,
-                            null,
-                            true);
-                        return cotacao;
-                    });
+                jogo.cotacoes.map(cotacao => {
+                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                        cotacao.valor,
+                        cotacao.chave,
+                        jogo.event_id,
+                        null,
+                        true);
+                    return cotacao;
+                });
 
-                    if (!campeonato) {
-                        campeonato = {
-                            _id: jogo.campeonato._id,
-                            nome: jogo.campeonato.nome,
-                            regiao_sigla: jogo.campeonato.regiao_sigla,
-                            jogos: new Map()
-                        };
+                if (!campeonato) {
+                    campeonato = {
+                        _id: jogo.campeonato._id,
+                        nome: jogo.campeonato.nome,
+                        regiao_sigla: jogo.campeonato.regiao_sigla,
+                        jogos: new Map()
+                    };
 
-                        inserirCampeonato = true;
-                    }
+                    inserirCampeonato = true;
+                }
 
-                    let valido = true;
-                    // if (this.minutoEncerramentoAoVivo > 0) {
-                    //     if (this.sportId === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
-                    //         valido = false;
-                    //     }
-                    // }
-                    //
-                    // if (this.sportId === 18 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
-                    //     valido = false;
-                    // }
-
-                    if (this.jogoBloqueado(jogo.event_id)) {
+                let valido = true;
+                if (this.minutoEncerramentoAoVivo > 0) {
+                    if (jogo.sport_id === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                         valido = false;
                     }
+                }
 
-                    if (valido && !jogo.finalizado) {
-                        campeonato.jogos.set(jogo._id, jogo);
+                if (jogo.sport_id === 18 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                    valido = false;
+                }
 
-                        if (inserirCampeonato) {
-                            this.campeonatos.set(jogo.campeonato._id, campeonato);
-                        }
-                    } else {
-                        const eventoEncontrado = campeonato.jogos.get(jogo._id);
+                if (this.jogoBloqueado(jogo.event_id)) {
+                    valido = false;
+                }
 
-                        if (eventoEncontrado) {
-                            campeonato.jogos.delete(jogo._id);
+                if (valido && !jogo.finalizado) {
+                    campeonato.jogos.set(jogo._id, jogo);
 
-                            if (!campeonato.jogos.size) {
-                                this.campeonatos.delete(campeonato._id);
-                            }
+                    if (inserirCampeonato) {
+                        this.campeonatos.set(jogo.campeonato._id, campeonato);
+                    }
+                } else {
+                    const eventoEncontrado = campeonato.jogos.get(jogo._id);
+
+                    if (eventoEncontrado) {
+                        campeonato.jogos.delete(jogo._id);
+
+                        if (!campeonato.jogos.size) {
+                            this.campeonatos.delete(campeonato._id);
                         }
                     }
+                }
             });
     }
 
@@ -350,7 +340,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         }
     }
 
-    cotacoesPorTipo(cotacoes) {
+    cotacoesPorTipo(cotacoes, sportId = 1) {
         const chavesMercadosPrincipais = {
             1: {
                 casa: 'casa_90',
@@ -365,19 +355,19 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
 
         const mercadosPrincipais = [];
 
-        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['casa']) ?? {
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[sportId]['casa']) ?? {
             nome: 'Casa',
             lock: true
         });
 
-        // if (this.sportId === 1) {
+        if (sportId === 1) {
             mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['empate']) ?? {
                 nome: 'Empate',
                 lock: true
             });
-        // }
+        }
 
-        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['fora']) ?? {
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[sportId]['fora']) ?? {
             nome: 'Fora',
             lock: true
         });
