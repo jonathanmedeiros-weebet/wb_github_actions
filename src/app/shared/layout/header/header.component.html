@@ -38,7 +38,7 @@
         </div>
 
         <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <div class="menu-conta" ngbDropdown>
+            <div class="menu-conta" ngbDropdown #dropDownConta="ngbDropdown">
                 <i class="fa olhinho" (click)="alternarExibirSaldo()" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
                 <a (click)="getPosicaoFinanceira()" class="nav-link menu-perfil" id="navbarDropdown"
                    role="button" ngbDropdownToggle>
@@ -52,7 +52,7 @@
                     <img src="https://cdn.wee.bet/img/blank-profile-picture.png" alt="">
                 </a>
                 <div class="dropdown-menu-right" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-                    <a class="btnClose hide-desktop" aria-label="Close" >
+                    <a class="btnClose hide-desktop" aria-label="Close" (click)="dropDownConta.close()">
                         <span aria-hidden="true">&times;</span>
                     </a>
                     <div class="hide-desktop" *ngIf="!isCliente">
