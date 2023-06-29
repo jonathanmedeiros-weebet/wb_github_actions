@@ -2884,3 +2884,12 @@ gulp.task('jogue.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('amazoniasports.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "amazoniasports.bet",
+        banca: "AMAZÔNIA SPORTS",
+        styles: "",
+    });
+});

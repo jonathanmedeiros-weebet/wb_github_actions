@@ -308,7 +308,8 @@
         "apostenasorte.bet": "gulp apostenasorte.bet",
         "betmaniapix.com": "gulp betmaniapix.com",
         "brinkbet.com": "gulp brinkbet.com",
-        "jogue.bet": "gulp jogue.bet"
+        "jogue.bet": "gulp jogue.bet",
+        "amazoniasports.bet": "gulp amazoniasports.bet"
       },
       "private": true,
       "dependencies": {
