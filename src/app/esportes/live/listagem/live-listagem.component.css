@@ -30,9 +30,9 @@
     align-self: center;
 }
 
-.esporte .campeonatos {
+.esporte.campeonatos {
     padding: 5px;
-    background-color: var(--background-live)!important;
+    background-color: var(--background-live);
 }
 
 .campeonato-header {
