@@ -2093,15 +2093,6 @@ gulp.task('winsbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('propixx.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "propixx.bet",
-        banca: "PROPIXX.BET",
-        styles: "",
-    });
-});
-
 gulp.task('p1x.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
