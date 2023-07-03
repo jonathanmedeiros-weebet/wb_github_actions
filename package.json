@@ -306,7 +306,11 @@
         "betmaniapix.com": "gulp betmaniapix.com",
         "brinkbet.com": "gulp brinkbet.com",
         "jogue.bet": "gulp jogue.bet",
-        "amazoniasports.bet": "gulp amazoniasports.bet"
+        "amazoniasports.bet": "gulp amazoniasports.bet",
+        "ultrabetss.com": "gulp ultrabetss.com",
+        "10xbet.to": "gulp 10xbet.to",
+        "rivabet.io": "gulp rivabet.io",
+        "gamegol.bet": "gulp gamegol.bet"
       },
       "private": true,
       "dependencies": {

@@ -2871,3 +2871,39 @@ gulp.task('amazoniasports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('ultrabetss.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "ultrabetss.com",
+        banca: "ULTRA BETSS",
+        styles: "",
+    });
+});
+
+gulp.task('10xbet.to', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "10xbet.to",
+        banca: "10XBET",
+        styles: "",
+    });
+});
+
+gulp.task('rivabet.io', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "rivabet.io",
+        banca: "RIVABET",
+        styles: "",
+    });
+});
+
+gulp.task('gamegol.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "gamegol.bet",
+        banca: "GAMEGOL.BET",
+        styles: "",
+    });
+});
