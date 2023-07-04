@@ -182,8 +182,8 @@
             </div>
 
             <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
-            <span class="space-buttons" *ngIf="!formSocial">Ou</span>
-            <asl-google-signin-button type='standard' size='larger' text='signup_with' width="{{ isMobile ? '288' : '340'}}" *ngIf="!formSocial"></asl-google-signin-button>
+            <span class="space-buttons" *ngIf="!formSocial && loginGoogleAtivo">Ou</span>
+            <asl-google-signin-button type='standard' size='larger' text='signup_with' width="{{ isMobile ? '288' : '340'}}" *ngIf="!formSocial && loginGoogleAtivo"></asl-google-signin-button>
             <a *ngIf="formSocial" class="limpar-social-form" (click)="clearSocialForm()">Voltar para a tela inicial de cadastro</a>
         </div>
     </form>

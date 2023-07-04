@@ -44,6 +44,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validacaoEmailObrigatoria;
 
     user: any;
+    loginGoogleAtivo = false;
     formSocial = false;
 
     constructor(
@@ -96,22 +97,23 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
              this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
         });
 
-        this.socialAuth.authState.subscribe((user) => {
-            console.log('Social LOG: ', user);
+        if (this.paramsService.getOpcoes().habilitar_login_google) {
+            this.loginGoogleAtivo = true;
+            this.socialAuth.authState.subscribe((user) => {
+                if(user) {
+                    this.formSocial = true;
+                    this.form.patchValue({
+                        nome: user.firstName,
+                        sobrenome: user.lastName,
+                        email: user.email,
+                        googleId: user.id,
+                        googleIdToken: user.idToken,
+                    })
+                }
 
-            if(user) {
-                this.formSocial = true;
-                this.form.patchValue({
-                    nome: user.firstName,
-                    sobrenome: user.lastName,
-                    email: user.email,
-                    googleId: user.id,
-                    googleIdToken: user.idToken,
-                })
-            }
-
-            this.user = user;
-        });
+                this.user = user;
+            });
+        }
     }
 
     createForm() {

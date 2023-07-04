@@ -31,6 +31,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
     LOGO = config.LOGO;
+    loginGoogle = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -73,13 +74,17 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 isCliente => this.isCliente = isCliente
             );
 
-        this.socialAuth.authState.subscribe((user) => {
-            this.form.patchValue({
-                googleId: user.id,
-                googleIdToken: user.idToken
+        if(this.paramsLocais.getOpcoes().habilitar_login_google) {
+            this.loginGoogle = true;
+            this.socialAuth.authState.subscribe((user) => {
+                this.form.patchValue({
+                    googleId: user.id,
+                    googleIdToken: user.idToken
+                });
+                this.submit();
             });
-            this.submit();
-        });
+        }
+
     }
 
     createForm() {
