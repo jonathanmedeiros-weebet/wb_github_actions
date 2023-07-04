@@ -48,7 +48,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
-        this.isMobile = window.innerWidth <= 1024;
+        if (window.innerWidth > 1025) {
+            this.isMobile = false;
+        } else {
+            this.isMobile = true;
+        }
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
@@ -158,14 +162,22 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     abrirRecuperarSenha() {
         this.activeModal.dismiss();
+        let options = {};
+
+        if (this.isMobile) {
+            options = {
+                windowClass: 'modal-fullscreen',
+            };
+        } else {
+            options = {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+            };
+        }
 
         this.modalRef = this.modalService.open(
-            EsqueceuSenhaModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-600',
-                centered: true,
-            }
+            EsqueceuSenhaModalComponent, options
         );
     }
 

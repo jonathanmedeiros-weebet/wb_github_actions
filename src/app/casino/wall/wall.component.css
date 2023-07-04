@@ -246,12 +246,15 @@
 
 .search-box {
     position: relative;
-    margin-left: 10px;
     width: 300px;
 }
 
 .search-box input {
     padding-left: 30px;
+}
+
+.box-web{
+    margin-left: 10px;
 }
 
 .search-box i.fa-search {
@@ -314,19 +317,19 @@
         justify-content: center;
     }
 
-    .game-tile {
-        min-width: 200px;
-        max-width: 200px;
-        height: 145px;
-        margin-top: 10px;
-        margin-right: 10px;
-    }
-
     .internal .game-tile {
         max-width: calc(50% - 5px);
         min-width: calc(50% - 5px);
         margin-right: 0;
         margin-top: 0;
+    }
+
+    .game-tile {
+        min-width: 200px;
+        max-width: 200px;
+        min-height: 145px;
+        margin-top: 10px;
+        margin-right: 10px;
     }
 
     .ver-todos a {
@@ -388,8 +391,8 @@
     }
 
     .filter{
-        justify-content: unset;
-        padding-right: 0;
+        margin-top: 10px;
+        padding: 10px;
         width: 100%;
     }
     h4{
@@ -397,15 +400,16 @@
     }
 
     .search-box-mobile{
-        width: 20%;
-        font-size: 23px;
-        display: flex;
+        width: auto;
         justify-content: center;
         align-items: center;
+        font-size: 23px;
+        display: flex;
+        margin-left:  10px;
     }
 
     .search-box{
-        width: 80%;
+        width: 100%;
     }
 
     .search-box i.fa-search {

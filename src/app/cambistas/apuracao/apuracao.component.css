@@ -2,6 +2,33 @@
     margin-bottom: 40px;
 }
 
+.filters form{
+    display: flex;
+}
+
+.form-row{
+    flex-wrap: nowrap !important;
+}
+
+.filtros-container {
+    position: relative;
+    width: 300px;
+}
+
+.filtros-container .input-group {
+    max-width: none;
+}
+
+.buttons {
+    width: 100px;
+    position: relative;
+    padding: 0;
+}
+
+.buttons button {
+    width: 100%;
+}
+
 .table-apuracao {
     /*width: 100%;*/
     color: var(--game);
@@ -291,20 +318,10 @@ label {
     }
 
     .filtros-container {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
+        width: calc(100% - 100px);
     }
 
-    .filtros-container .input-group {
+    .tabela-apuracao {
         max-width: none;
-    }
-
-    .buttons {
-        padding: 0;
-    }
-
-    .buttons button {
-        width: 100%;
     }
 }

@@ -16,7 +16,7 @@
                 <div class="">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
                         <div class="d-flex flex-row">
-                            <div class="form-group">
+                            <div class="form-group filtro">
                                 <input type="number" placeholder="{{'geral.codigoPreAposta' | translate}}"
                                        class="inverted-out form-control" formControlName="codigo" autocomplete="off"
                                        [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">

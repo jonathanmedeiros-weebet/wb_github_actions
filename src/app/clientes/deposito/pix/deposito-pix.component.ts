@@ -26,10 +26,10 @@ import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code">
-            <img *ngIf="!['sauto_pay', 'gerencianet', 'pagfast'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
-            <img *ngIf="metodoPagamento === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
-            <img *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
-            <img *ngIf="metodoPagamento === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
