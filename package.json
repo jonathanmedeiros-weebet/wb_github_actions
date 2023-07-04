@@ -310,7 +310,9 @@
         "ultrabetss.com": "gulp ultrabetss.com",
         "10xbet.to": "gulp 10xbet.to",
         "rivabet.io": "gulp rivabet.io",
-        "gamegol.bet": "gulp gamegol.bet"
+        "gamegol.bet": "gulp gamegol.bet",
+        "fortebets.bet": "gulp fortebets.bet",
+        "vegasbrasilbet.com": "gulp vegasbrasilbet.com"
       },
       "private": true,
       "dependencies": {

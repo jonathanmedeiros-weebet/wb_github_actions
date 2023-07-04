@@ -2909,3 +2909,21 @@ gulp.task('gamegol.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fortebets.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "fortebets.bet",
+        banca: "FORTE BETS",
+        styles: "",
+    });
+});
+
+gulp.task('vegasbrasilbet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "vegasbrasilbet.com",
+        banca: "VEGAS BRASIL BET",
+        styles: "",
+    });
+});
