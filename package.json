@@ -312,7 +312,10 @@
         "rivabet.io": "gulp rivabet.io",
         "gamegol.bet": "gulp gamegol.bet",
         "fortebets.bet": "gulp fortebets.bet",
-        "vegasbrasilbet.com": "gulp vegasbrasilbet.com"
+        "vegasbrasilbet.com": "gulp vegasbrasilbet.com",
+        "ello.bet": "gulp ello.bet",
+        "bet165.bet": "gulp bet165.bet",
+        "palpitei.bet": "gulp palpitei.bet"
       },
       "private": true,
       "dependencies": {
