@@ -109,7 +109,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
             check_1: [''],
-            check_2: ['']
+            check_2: [''],
+            btag: [this.route.snapshot.queryParams.btag]
         }, {validator: PasswordValidation.MatchPassword});
     }
 
