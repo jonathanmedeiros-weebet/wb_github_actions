@@ -2947,3 +2947,21 @@ gulp.task('palpitei.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostai.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostai.net",
+        banca: "APOSTAI",
+        styles: "",
+    });
+});
+
+gulp.task('sortegrande.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sortegrande.bet",
+        banca: "SORTE GRANDE",
+        styles: "",
+    });
+});
