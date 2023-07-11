@@ -1946,15 +1946,6 @@ gulp.task('lutbet.net', function (done) {
     });
 });
 
-gulp.task('apostafacil123.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "apostafacil123.com",
-        banca: "APOSTA FÁCIL 123",
-        styles: "",
-    });
-});
-
 gulp.task('fnbetpix.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
