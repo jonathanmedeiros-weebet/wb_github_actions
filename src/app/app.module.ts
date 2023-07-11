@@ -85,7 +85,7 @@ export const APP_TOKENS = [
                     {
                         id: GoogleLoginProvider.PROVIDER_ID,
                         provider: new GoogleLoginProvider(
-                          '835064645070-lor4b9o7hgulffj5hdd8aq6fa00ujtrm.apps.googleusercontent.com'
+                          '728944938218-2j3ci3bdujvr545vm06qqp1s2nptuu21.apps.googleusercontent.com'
                         )
                     }
                 ],
