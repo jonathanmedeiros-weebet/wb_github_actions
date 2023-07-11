@@ -1626,7 +1626,7 @@ gulp.task('prowin.bet', function (done) {
         banca: "PROWIN",
         pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1336990900485810');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1336990900485810&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
         styles: "",
-        scripts: "",
+        scripts: "<script id='b_prowinbet' src='https://scripts.mediamathrdrt.com/scripts/b_prowinbet.js' async> </script>",
     });
 });
 
@@ -1657,15 +1657,6 @@ gulp.task('belabets.com', function (done) {
         server: "front3.wee.bet",
         host: "belabets.com",
         banca: "BELA BETS",
-        styles: "",
-    });
-});
-
-gulp.task('sportvbet.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "sportvbet.net",
-        banca: "SPORTV BET",
         styles: "",
     });
 });
@@ -1952,15 +1943,6 @@ gulp.task('lutbet.net', function (done) {
         "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '586943919882415');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=586943919882415&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->"+
         "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1177052002968035');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1177052002968035&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->"+
         "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '963641168110553');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=963641168110553&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->"
-    });
-});
-
-gulp.task('apostafacil123.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "apostafacil123.com",
-        banca: "APOSTA FÁCIL 123",
-        styles: "",
     });
 });
 
@@ -2520,15 +2502,6 @@ gulp.task('arena-esportiva.com', function (done) {
     });
 });
 
-gulp.task('betlance.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betlance.wee.bet",
-        banca: "BET LANCE",
-        styles: "",
-    });
-});
-
 gulp.task('faithbets.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2571,6 +2544,7 @@ gulp.task('betpop.bet', function (done) {
         host: "betpop.bet",
         banca: "BETPOP",
         styles: "",
+        pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '273665878691940');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=273665878691940&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
     });
 });
 
@@ -2743,7 +2717,17 @@ gulp.task('magiadasorte.bet', function (done) {
         styles: "",
         pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1575231426298406');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1575231426298406&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
         "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '759154265994556');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=759154265994556&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
-        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '648031430245118');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=648031430245118&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '648031430245118');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=648031430245118&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '287118943877190');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=287118943877190&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '239186595562418');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=239186595562418&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '657011996332632');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=657011996332632&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1012940379717745');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1012940379717745&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1341568439791135');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1341568439791135&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1640436619714315');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1640436619714315&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '208613821705987');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=208613821705987&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '656921779309882');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=656921779309882&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/X6VDYUqf41' async></script>",
     });
 });
 
@@ -2906,6 +2890,69 @@ gulp.task('gamegol.bet', function (done) {
         server: "front5.wee.bet",
         host: "gamegol.bet",
         banca: "GAMEGOL.BET",
+        styles: "",
+    });
+});
+
+gulp.task('fortebets.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "fortebets.bet",
+        banca: "FORTE BETS",
+        styles: "",
+    });
+});
+
+gulp.task('vegasbrasilbet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "vegasbrasilbet.com",
+        banca: "VEGAS BRASIL BET",
+        styles: "",
+    });
+});
+
+gulp.task('ello.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "ello.bet",
+        banca: "ELLO.BET",
+        styles: "",
+    });
+});
+
+gulp.task('bet165.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet165.bet",
+        banca: "BET 165",
+        styles: "",
+    });
+});
+
+gulp.task('palpitei.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "palpitei.bet",
+        banca: "PALPITEI.BET",
+        styles: "",
+    });
+});
+
+gulp.task('apostai.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostai.net",
+        banca: "APOSTAI",
+        styles: "",
+    });
+});
+
+gulp.task('sortegrande.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sortegrande.bet",
+        banca: "SORTE GRANDE",
         styles: "",
     });
 });

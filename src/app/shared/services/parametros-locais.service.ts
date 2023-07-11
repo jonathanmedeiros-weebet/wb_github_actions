@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+import {config} from '../config';
+
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +20,8 @@ export class ParametrosLocaisService {
     load() {
         return new Promise((resolve, reject) => {
             const time = + new Date();
-            return this.http.get(`./param/parametros.json?${time}`)
+            const paramUri = `https://weebet.s3.amazonaws.com/${config.SLUG}/param/parametros.json?${time}`;
+            return this.http.get(paramUri)
                 .subscribe(response => {
                     this.parametrosLocais = response;
                     resolve(true);
@@ -28,7 +31,8 @@ export class ParametrosLocaisService {
 
     getParametros(): Observable<any> {
         const time = + new Date();
-        return this.http.get(`./param/parametros.json?${time}`)
+        const paramUri = `https://weebet.s3.amazonaws.com/${config.SLUG}/param/parametros.json?${time}`;
+        return this.http.get(paramUri)
             .pipe(
                 tap(parametrosLocais => this.parametrosLocais = parametrosLocais)
             );
