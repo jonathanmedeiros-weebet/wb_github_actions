@@ -2969,3 +2969,12 @@ gulp.task('betbras.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('reidogreen.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "reidogreen.bet",
+        banca: "REI DO GREEN",
+        styles: "",
+    });
+});
