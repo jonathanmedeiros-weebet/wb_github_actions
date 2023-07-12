@@ -52,6 +52,18 @@ export class ClienteService {
             );
     }
 
+    validarCpf(cpf: any) {
+        return this.http.get(`${this.clienteUrl}/consultar-cpf`, this.headers.getRequestOptions(true, { cpf }))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     atualizarDadosCadastrais(dadosCadastrais) {
         return this.http.post(`${this.clienteUrl}/atualizarDadosCadastrais`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))

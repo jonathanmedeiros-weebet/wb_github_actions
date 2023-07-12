@@ -40,6 +40,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     hCaptchaLanguage;
     provedorCaptcha;
     validacaoEmailObrigatoria;
+    autoPreenchimento = true;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -93,7 +94,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+            nomeCompleto: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
             usuario: [null, [
                     Validators.minLength(3),
                     Validators.pattern('^[a-zA-Z0-9_]+$'),
@@ -181,5 +182,27 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.modalTermosRef) {
             this.modalTermosRef.dismiss();
         }
+    }
+
+    validarCpf() {
+        const { cpf } = this.form.value;
+
+        this.clientesService.validarCpf(cpf).subscribe(
+            res => {
+                if (res.validarCpfAtivado) {
+                    this.autoPreenchimento = true;
+                    this.form.patchValue({
+                        nascimento: res.dataNascimento,
+                        nome: res.nome?.split(' ')[0] + ' *** ***',
+                        nomeCompleto: res.nome
+                    });
+                } else {
+                    this.autoPreenchimento = false;
+                }
+            },
+            error => {
+                this.messageService.error(error);
+            }
+        );
     }
 }
