@@ -2960,11 +2960,21 @@ gulp.task('sortegrande.bet', function (done) {
         styles: "",
     });
 });
+
 gulp.task('winsport.vip', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "winsport.vip",
         banca: "WIN SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('betbras.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betbras.com",
+        banca: "BET BRAS",
         styles: "",
     });
 });

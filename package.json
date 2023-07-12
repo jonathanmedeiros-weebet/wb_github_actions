@@ -315,7 +315,8 @@
         "palpitei.bet": "gulp palpitei.bet",
         "apostai.net": "gulp apostai.net",
         "sortegrande.bet": "gulp sortegrande.bet",
-        "winsport.vip": "gulp winsport.vip"
+        "winsport.vip": "gulp winsport.vip",
+        "betbras.com": "gulp betbras.com"
       },
       "private": true,
       "dependencies": {
