@@ -2684,15 +2684,6 @@ gulp.task('085.bet', function (done) {
     });
 });
 
-gulp.task('bis.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "bis.wee.bet",
-        banca: "BIS Weebet",
-        styles: "",
-    });
-});
-
 gulp.task('fortunebet.app', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
