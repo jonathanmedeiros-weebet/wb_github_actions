@@ -1948,15 +1948,6 @@ gulp.task('lutbet.net', function (done) {
     });
 });
 
-gulp.task('fnbetpix.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "fnbetpix.wee.bet",
-        banca: "FNBETPIX",
-        styles: "",
-    });
-});
-
 gulp.task('cassinomania.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
