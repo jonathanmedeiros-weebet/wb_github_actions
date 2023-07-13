@@ -140,7 +140,7 @@
                     <div class="input-md">
                         <input type="text" id="afiliado" class="form-control inverted-out"
                                [ngClass]="applyCssInputError('afiliado')"
-                               formControlName="afiliado" placeholder=" ">
+                               formControlName="afiliado" placeholder=" " [readonly]="possuiCodigoAfiliado">
                         <label for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
                     </div>
 

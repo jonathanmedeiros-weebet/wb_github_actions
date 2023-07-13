@@ -1,21 +1,19 @@
-import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ClienteService } from './../../../../services';
+import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Usuario} from '../../../models/usuario';
-import { FormValidations, PasswordValidation } from 'src/app/shared/utils';
+import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
 
 import * as moment from 'moment';
-import { Pagina } from 'src/app/models';
+import {Pagina} from 'src/app/models';
 import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
-import {NgHcaptchaService} from 'ng-hcaptcha';
-import { RecaptchaErrorParameters } from "ng-recaptcha";
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -40,6 +38,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     hCaptchaLanguage;
     provedorCaptcha;
     validacaoEmailObrigatoria;
+    possuiCodigoAfiliado = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -84,9 +83,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
-                sessionStorage.setItem('afiliado', params.afiliado);
+                this.clientesService.codigoFiliacaoCadastroTemp = params.afiliado;
+                this.possuiCodigoAfiliado = true;
             }
-             this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
+
+            if (this.clientesService.codigoFiliacaoCadastroTemp) {
+                this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
+                this.possuiCodigoAfiliado = true;
+            }
         });
     }
 
@@ -150,7 +154,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             centered: true,
                             backdrop: 'static'
                         });
-                    }else{
+                    } else {
                         this.modalService.open(this.ativacaoCadastroModal,{
                             ariaLabelledBy: 'modal-basic-title',
                             windowClass: 'modal-pop-up',
