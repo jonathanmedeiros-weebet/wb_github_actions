@@ -1,5 +1,9 @@
 @import "skeleton-screen-css";
 
+a {
+     text-decoration: none;
+}
+
 .owl-carousel .owl-item img {
     width: auto;
 }
