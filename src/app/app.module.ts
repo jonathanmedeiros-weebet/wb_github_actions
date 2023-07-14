@@ -52,6 +52,25 @@ export const APP_TOKENS = [
     }
 ];
 
+export function googleFactory(service: ParametrosLocaisService) {
+    const googleClientId = service.getOpcoes().login_google_client_id;
+
+    return {
+        autoLogin: false,
+        providers: [
+            {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider(
+                    googleClientId
+                )
+            }
+        ],
+        onError: (err) => {
+            console.error(err);
+        }
+    } as SocialAuthServiceConfig
+}
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -79,20 +98,8 @@ export const APP_TOKENS = [
         APP_TOKENS,
         {
             provide: 'SocialAuthServiceConfig',
-            useValue: {
-                autoLogin: false,
-                providers: [
-                    {
-                        id: GoogleLoginProvider.PROVIDER_ID,
-                        provider: new GoogleLoginProvider(
-                          '728944938218-2j3ci3bdujvr545vm06qqp1s2nptuu21.apps.googleusercontent.com'
-                        )
-                    }
-                ],
-                onError: (err) => {
-                    console.error(err);
-                }
-            } as SocialAuthServiceConfig,
+            useFactory: googleFactory,
+            deps: [ParametrosLocaisService]
         }
     ],
     bootstrap: [AppComponent]
