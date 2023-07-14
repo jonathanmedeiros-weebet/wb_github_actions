@@ -2858,7 +2858,7 @@ gulp.task('10xbet.to', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "10xbet.to",
-        banca: "10XBET",
+        banca: "10xBet - Casa de Apostas Esportivas e Cassino",
         styles: "",
     });
 });
