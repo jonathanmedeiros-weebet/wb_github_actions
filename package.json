@@ -314,7 +314,9 @@
         "sortegrande.bet": "gulp sortegrande.bet",
         "winsport.vip": "gulp winsport.vip",
         "betbras.com": "gulp betbras.com",
-        "reidogreen.bet": "gulp reidogreen.bet"
+        "reidogreen.bet": "gulp reidogreen.bet",
+        "betei7.com": "gulp betei7.com",
+        "cassinowin.bet": "gulp cassinowin.bet"
       },
       "private": true,
       "dependencies": {

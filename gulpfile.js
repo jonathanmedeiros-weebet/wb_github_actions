@@ -2970,3 +2970,21 @@ gulp.task('reidogreen.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betei7.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betei7.com",
+        banca: "BETEI 7",
+        styles: "",
+    });
+});
+
+gulp.task('cassinowin.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "cassinowin.bet",
+        banca: "CASSINO WIN",
+        styles: "",
+    });
+});
