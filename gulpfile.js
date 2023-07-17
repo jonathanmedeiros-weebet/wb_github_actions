@@ -2975,7 +2975,7 @@ gulp.task('betei7.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "betei7.com",
-        banca: "BETEI 7",
+        banca: "Betei7",
         styles: "",
     });
 });
@@ -2985,6 +2985,42 @@ gulp.task('cassinowin.bet', function (done) {
         server: "front5.wee.bet",
         host: "cassinowin.bet",
         banca: "CASSINO WIN",
+        styles: "",
+    });
+});
+
+gulp.task('capitalbets.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "capitalbets.bet",
+        banca: "CAPITAL BETS",
+        styles: "",
+    });
+});
+
+gulp.task('77games.vip', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "77games.vip",
+        banca: "77 GAMES",
+        styles: "",
+    });
+});
+
+gulp.task('seg.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "seg.bet",
+        banca: "SEG.BET",
+        styles: "",
+    });
+});
+
+gulp.task('playnabet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "playnabet.com",
+        banca: "PLAY NA BET",
         styles: "",
     });
 });

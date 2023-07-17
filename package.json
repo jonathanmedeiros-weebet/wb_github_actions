@@ -316,7 +316,11 @@
         "betbras.com": "gulp betbras.com",
         "reidogreen.bet": "gulp reidogreen.bet",
         "betei7.com": "gulp betei7.com",
-        "cassinowin.bet": "gulp cassinowin.bet"
+        "cassinowin.bet": "gulp cassinowin.bet",
+        "capitalbets.bet": "gulp capitalbets.bet",
+        "77games.vip": "gulp 77games.vip",
+        "seg.bet": "gulp seg.bet",
+        "playnabet.com": "gulp playnabet.com"
       },
       "private": true,
       "dependencies": {
