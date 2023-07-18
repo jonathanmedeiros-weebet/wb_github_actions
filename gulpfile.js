@@ -853,15 +853,6 @@ gulp.task('betsgames.net', function (done) {
     });
 });
 
-gulp.task('mdsports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "mdsports.wee.bet",
-        banca: "MD SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('jbrbets.net', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2129,15 +2120,6 @@ gulp.task('betgain.club', function (done) {
     });
 });
 
-gulp.task('sportspremium.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "sportspremium.club",
-        banca: "SPORTS PREMIUM",
-        styles: "",
-    });
-});
-
 gulp.task('alfasports.online', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2209,15 +2191,6 @@ gulp.task('generalbet.net', function (done) {
         server: "front2.wee.bet",
         host: "generalbet.net",
         banca: "GENERAL BET",
-        styles: "",
-    });
-});
-
-gulp.task('2xbettin.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "2xbettin.com",
-        banca: "2XBETTIN",
         styles: "",
     });
 });
