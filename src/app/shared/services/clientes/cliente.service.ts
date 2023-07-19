@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
+    codigoFiliacaoCadastroTemp;
 
     constructor(
         private http: HttpClient,

@@ -87,7 +87,8 @@ export class ValidarApostaWrapperComponent extends BaseFormComponent implements 
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
-            centered: true
+            centered: true,
+            scrollable: true
         });
 
         this.modalRef.componentInstance.aposta = aposta;

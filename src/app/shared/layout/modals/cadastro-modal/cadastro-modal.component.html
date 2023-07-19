@@ -131,7 +131,7 @@
                     <div class="input-md">
                         <input type="text" id="afiliado" class="form-control inverted-out"
                                [ngClass]="applyCssInputError('afiliado')"
-                               formControlName="afiliado" placeholder=" ">
+                               formControlName="afiliado" placeholder=" " [readonly]="possuiCodigoAfiliado">
                         <label for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
                     </div>
 
@@ -152,6 +152,8 @@
 
         <input type="hidden" formControlName="check_1">
         <input type="text" formControlName="check_2" class="d-none">
+
+        <input type="hidden" formControlName="btag">
 
         <div class="row captcha" *ngIf="provedorCaptcha == 'hcaptcha'">
             <div class="col-12">

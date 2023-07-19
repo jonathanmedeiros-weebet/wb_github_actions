@@ -333,7 +333,8 @@ body .change-theme {
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding-top: 12%;
+    padding-top: 16%;
+    margin-right: 5px;
 }
 
 @media only screen and (max-width: 1024px) {
