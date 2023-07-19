@@ -14,8 +14,6 @@ import {Pagina} from 'src/app/models';
 import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
-import {NgHcaptchaService} from 'ng-hcaptcha';
-import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
