@@ -318,7 +318,8 @@
         "77games.vip": "gulp 77games.vip",
         "seg.bet": "gulp seg.bet",
         "playnabet.com": "gulp playnabet.com",
-        "betinvestidor.com": "gulp betinvestidor.com"
+        "betinvestidor.com": "gulp betinvestidor.com",
+        "smartek777.com": "gulp smartek777.com"
     },
     "private": true,
     "dependencies": {
