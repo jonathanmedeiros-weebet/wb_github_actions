@@ -317,7 +317,8 @@
         "capitalbets.bet": "gulp capitalbets.bet",
         "77games.vip": "gulp 77games.vip",
         "seg.bet": "gulp seg.bet",
-        "playnabet.com": "gulp playnabet.com"
+        "playnabet.com": "gulp playnabet.com",
+        "betinvestidor.com": "gulp betinvestidor.com"
     },
     "private": true,
     "dependencies": {

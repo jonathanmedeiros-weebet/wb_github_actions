@@ -2998,3 +2998,12 @@ gulp.task('playnabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betinvestidor.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betinvestidor.com",
+        banca: "BET INVESTIDOR",
+        styles: "",
+    });
+});

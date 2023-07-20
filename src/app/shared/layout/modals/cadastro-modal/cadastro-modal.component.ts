@@ -40,6 +40,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     hCaptchaLanguage;
     provedorCaptcha;
     validacaoEmailObrigatoria;
+    autoPreenchimento = true;
     possuiCodigoAfiliado = false;
 
     user: any;
@@ -123,11 +124,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             usuario: [null],
             nascimento: [null],
             senha: [null],
             senha_confirmacao: [null],
+            nomeCompleto: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
@@ -218,5 +219,27 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             googleId: '',
             googleIdToken: '',
         })
+    }
+
+    validarCpf() {
+        const { cpf } = this.form.value;
+
+        this.clientesService.validarCpf(cpf).subscribe(
+            res => {
+                if (res.validarCpfAtivado) {
+                    this.autoPreenchimento = true;
+                    this.form.patchValue({
+                        nascimento: res.dataNascimento,
+                        nome: res.nome?.split(' ')[0] + ' *** ***',
+                        nomeCompleto: res.nome
+                    });
+                } else {
+                    this.autoPreenchimento = false;
+                }
+            },
+            error => {
+                this.messageService.error(error);
+            }
+        );
     }
 }
