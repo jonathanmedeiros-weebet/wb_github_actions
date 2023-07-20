@@ -83,6 +83,7 @@ import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-e
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { InformativoModalComponent } from './modals/informativo-modal/informativo-modal.component';
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
     imports: [
@@ -90,6 +91,7 @@ import { JogoService } from '../services/aposta-esportiva/jogo.service';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+        GoogleSigninButtonModule,
 
         UtilsModule,
         AngularSvgIconModule,

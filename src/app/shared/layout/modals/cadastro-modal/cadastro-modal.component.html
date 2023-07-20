@@ -72,6 +72,7 @@
                     <div class="input-md">
                         <input type="text" id="email" class="form-control inverted-out"
                                [ngClass]="applyCssInputError('email')"
+                               [readonly]="formSocial"
                                formControlName="email" placeholder=" ">
                         <label for="email">{{'geral.email' | translate}}</label>
                     </div>
@@ -81,8 +82,8 @@
                 </div>
             </div>
         </div>
-        <h3>{{'geral.criarLogin' | translate}}</h3>
-        <div class="row">
+        <h3>{{formSocial ? '' : 'geral.criarLogin' | translate}}</h3>
+        <div class="row" *ngIf="!formSocial">
             <div class="col-md-6">
                 <div class="form-group mb-4">
                     <div class="input-md">
@@ -111,7 +112,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="!formSocial">
                 <div class="form-group mb-4">
                     <div class="input-md">
                         <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
@@ -173,6 +174,9 @@
             </div>
 
             <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+            <span class="space-buttons" *ngIf="!formSocial && loginGoogleAtivo">Ou</span>
+            <asl-google-signin-button type='standard' size='larger' text='signup_with' width="{{ isMobile ? '288' : '340'}}" *ngIf="!formSocial && loginGoogleAtivo"></asl-google-signin-button>
+            <a *ngIf="formSocial" class="limpar-social-form" (click)="clearSocialForm()">Voltar para a tela inicial de cadastro</a>
         </div>
     </form>
 </div>

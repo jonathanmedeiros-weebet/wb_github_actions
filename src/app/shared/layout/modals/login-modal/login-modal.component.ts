@@ -12,6 +12,7 @@ import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'app-login-modal',
@@ -20,6 +21,7 @@ import {config} from '../../../config';
 })
 export class LoginModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     appMobile;
+    isMobile = false;
     unsub$ = new Subject();
     usuario = new Usuario();
     isCliente;
@@ -29,7 +31,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
     LOGO = config.LOGO;
-    isMobile;
+    loginGoogle = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -38,6 +40,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private messageService: MessageService,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
+        private socialAuth: SocialAuthService,
         private router: Router,
         private modalService: NgbModal
     ) {
@@ -70,15 +73,26 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 isCliente => this.isCliente = isCliente
             );
+
+        if(this.paramsLocais.getOpcoes().habilitar_login_google) {
+            this.loginGoogle = true;
+            this.socialAuth.authState.subscribe((user) => {
+                this.form.patchValue({
+                    googleId: user.id,
+                    googleIdToken: user.idToken
+                });
+                this.submit();
+            });
+        }
+
     }
 
     createForm() {
         this.form = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
-            password: [
-                '',
-                Validators.compose([Validators.required, Validators.minLength(2)])
-            ]
+            username: [''],
+            password: [''],
+            googleId: [''],
+            googleIdToken: ['']
         });
     }
 

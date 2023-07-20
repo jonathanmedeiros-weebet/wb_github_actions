@@ -15,7 +15,8 @@
 
 .modal-body {
     text-align: center;
-    padding: 40px 130px 15px;
+    padding: 40px 80px 15px;
+    height: auto;
 }
 
 .logo {
@@ -29,6 +30,17 @@
 
 button {
     margin-top: 30px;
+}
+
+.space-buttons {
+    display: block;
+    text-align: center;
+    margin: 15px 0;
+}
+
+asl-google-signin-button {
+    display: flex;
+    justify-content: center;
 }
 
 .esqueceu-senha {

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -14,6 +14,7 @@ import {Pagina} from 'src/app/models';
 import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -23,6 +24,7 @@ import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-m
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
+    isMobile = false;
     unsub$ = new Subject();
     usuario = new Usuario();
     termosDeUso: Pagina;
@@ -41,6 +43,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     autoPreenchimento = true;
     possuiCodigoAfiliado = false;
 
+    user: any;
+    loginGoogleAtivo = false;
+    formSocial = false;
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -54,12 +60,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private modalService: NgbModal,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
+        private socialAuth: SocialAuthService,
     ) {
         super();
     }
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
 
         this.createForm();
@@ -93,20 +101,34 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.possuiCodigoAfiliado = true;
             }
         });
+
+        if (this.paramsService.getOpcoes().habilitar_login_google) {
+            this.loginGoogleAtivo = true;
+            this.socialAuth.authState.subscribe((user) => {
+                if(user) {
+                    this.formSocial = true;
+                    this.form.patchValue({
+                        nome: user.firstName,
+                        sobrenome: user.lastName,
+                        email: user.email,
+                        googleId: user.id,
+                        googleIdToken: user.idToken,
+                    })
+                }
+
+                this.user = user;
+            });
+        }
     }
 
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+            usuario: [null],
+            nascimento: [null],
+            senha: [null],
+            senha_confirmacao: [null],
             nomeCompleto: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-            usuario: [null, [
-                    Validators.minLength(3),
-                    Validators.pattern('^[a-zA-Z0-9_]+$'),
-                    Validators.required
-                ], this.validarLoginUnico.bind(this)],
-            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
@@ -115,8 +137,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             captcha: [null, [Validators.required]],
             check_1: [''],
             check_2: [''],
+            googleId:[''],
+            googleIdToken:[''],
             btag: [this.route.snapshot.queryParams.btag]
-        }, {validator: PasswordValidation.MatchPassword});
+        });
     }
 
     validarLoginUnico(control: AbstractControl) {
@@ -187,6 +211,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.modalTermosRef) {
             this.modalTermosRef.dismiss();
         }
+    }
+
+    clearSocialForm() {
+        this.formSocial = false;
+        this.form.patchValue({
+            googleId: '',
+            googleIdToken: '',
+        })
     }
 
     validarCpf() {
