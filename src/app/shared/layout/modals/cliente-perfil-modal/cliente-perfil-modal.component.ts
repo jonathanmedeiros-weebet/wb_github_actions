@@ -125,16 +125,6 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
             );
     }
 
-    resetarForm() {
-        this.showLoading = true;
-
-        this.cidades = [];
-        this.estadoSelecionado = 0;
-        this.cidadeSelecionada = 0;
-
-        this.loadCliente();
-    }
-
     getCidades(event: any) {
         let estadoId = event.target.value;
 

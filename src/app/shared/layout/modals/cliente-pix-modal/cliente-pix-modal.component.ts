@@ -1,13 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClienteService, MessageService, UtilsService, MenuFooterService, SidebarService } from 'src/app/services';
-import { Cidade } from 'src/app/shared/models/endereco/cidade';
-import { Estado } from 'src/app/shared/models/endereco/estado';
-import { BaseFormComponent } from '../../base-form/base-form.component';
-
-import * as moment from 'moment';
-import { Endereco } from 'src/app/shared/models/endereco/endereco';
+import {Component, OnInit} from '@angular/core';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {ClienteService, MessageService, UtilsService} from 'src/app/services';
+import {BaseFormComponent} from '../../base-form/base-form.component';
 
 
 @Component({
@@ -16,10 +11,6 @@ import { Endereco } from 'src/app/shared/models/endereco/endereco';
     styleUrls: ['./cliente-pix-modal.component.css']
 })
 export class ClientePixModalComponent extends BaseFormComponent implements OnInit {
-    estados: Array<Estado>;
-    cidades: Array<Cidade>;
-    estadoSelecionado: number;
-    cidadeSelecionada: number;
     showLoading = true;
     mostrarSenha = false;
 
@@ -28,8 +19,6 @@ export class ClientePixModalComponent extends BaseFormComponent implements OnIni
         private clienteService: ClienteService,
         private utilsService: UtilsService,
         private messageService: MessageService,
-        private menuFooterService: MenuFooterService,
-        private sidebarService: SidebarService,
         public activeModal: NgbActiveModal
     ) {
         super();
