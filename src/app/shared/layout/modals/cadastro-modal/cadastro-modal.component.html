@@ -30,8 +30,7 @@
                         <label for="nome">{{'geral.nome' | translate}}</label>
                     </div>
                     <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
-                    <app-error-msg [control]="form.get('nascimento')" label="{{'geral.nascimento' | translate}}" class="text-left"></app-error-msg>
-                    <app-error-msg [control]="form.get('nomeCompleto')" label="{{'geral.sobrenome' | translate}}" class="text-left"></app-error-msg>
+                    <app-error-msg [control]="form.get('nascimento')" label="{{'geral.dataDeNascimento' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
             <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
