@@ -125,10 +125,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
             usuario: [null],
-            nascimento: [null],
+            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null],
             senha_confirmacao: [null],
-            nomeCompleto: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+            nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
@@ -166,6 +166,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     submit() {
         const values = this.form.value;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
+        if (!this.autoPreenchimento) {
+            values.nomeCompleto = values.nome;
+        }
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
