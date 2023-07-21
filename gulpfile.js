@@ -2988,8 +2988,6 @@ gulp.task('seg.bet', function (done) {
         host: "seg.bet",
         banca: "SEG.BET",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/khWnFbjMsg' async></script>",
     });
 });
 
