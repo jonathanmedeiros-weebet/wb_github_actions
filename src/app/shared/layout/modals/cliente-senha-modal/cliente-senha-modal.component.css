@@ -34,10 +34,14 @@ h5 {
     margin: 10px 0 30px;
 }
 
-.form-group {
-    margin-bottom: 25px;
+.form-group:first-of-type {
+    margin-top: 0;
 }
 
+.form-group {
+    margin-top: 25px;
+    margin-bottom: 0;
+}
 
 .buttons {
     display: flex;

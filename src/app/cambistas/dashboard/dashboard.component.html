@@ -70,7 +70,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12  col-graph">
+                <div [ngClass]="{'col-12': isMobile, 'col-8': !isMobile}" class="col-graph">
                     <div class="card-dashboard" style="padding-bottom: {{ isMobile ? '130px' : '85px' }};">
                         <h3 class="right-options">
                             {{'geral.fluxoDeCaixa' | translate}}
@@ -89,7 +89,7 @@
                         </canvas>
                     </div>
                 </div>
-                <div class="col-12">
+                <div [ngClass]="{'col-12': isMobile, 'col-4': !isMobile}">
                     <div class="card-dashboard apostas-realizadas">
                         <h3>{{'geral.quantidadeDeApostasRealizadas' | translate}}</h3>
 
