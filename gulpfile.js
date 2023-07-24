@@ -2952,6 +2952,7 @@ gulp.task('betei7.com', function (done) {
         host: "betei7.com",
         banca: "Betei7",
         styles: "",
+        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-01DFJHWG0L'></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-01DFJHWG0L');</script>"
     });
 });
 
@@ -2979,6 +2980,8 @@ gulp.task('77games.vip', function (done) {
         host: "77games.vip",
         banca: "77 GAMES",
         styles: "",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/aOGdmOhIno' async></script>",
     });
 });
 
