@@ -319,7 +319,8 @@
         "seg.bet": "gulp seg.bet",
         "playnabet.com": "gulp playnabet.com",
         "betinvestidor.com": "gulp betinvestidor.com",
-        "smartek777.com": "gulp smartek777.com"
+        "smartek777.com": "gulp smartek777.com",
+        "a7bet.fun": "gulp a7bet.fun"
     },
     "private": true,
     "dependencies": {

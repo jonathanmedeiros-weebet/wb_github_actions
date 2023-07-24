@@ -3022,3 +3022,12 @@ gulp.task('smartek777.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('a7bet.fun', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "a7bet.fun",
+        banca: "A7 BET",
+        styles: "",
+    });
+});
