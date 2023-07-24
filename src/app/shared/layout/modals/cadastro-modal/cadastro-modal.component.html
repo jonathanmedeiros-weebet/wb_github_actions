@@ -12,7 +12,7 @@
                 <div class="form-group mb-4">
                     <div class="input-md">
                         <input type="text" id="cpf" class="form-control inverted-out" mask="000.000.000-00"
-                                (change)="validarCpf()"
+                               (change)="validarCpf()"
                                formControlName="cpf"
                                [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
                                inputmode="numeric">
@@ -30,7 +30,6 @@
                         <label for="nome">{{'geral.nome' | translate}}</label>
                     </div>
                     <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
-                    <app-error-msg [control]="form.get('nascimento')" label="{{'geral.dataDeNascimento' | translate}}" class="text-left"></app-error-msg>
                 </div>
             </div>
             <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">

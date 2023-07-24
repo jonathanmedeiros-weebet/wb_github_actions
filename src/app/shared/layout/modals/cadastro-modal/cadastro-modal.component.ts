@@ -74,6 +74,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
+        this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
+
         this.translate.onLangChange.subscribe(res => {
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
@@ -227,22 +229,28 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validarCpf() {
         const { cpf } = this.form.value;
 
-        this.clientesService.validarCpf(cpf).subscribe(
-            res => {
-                if (res.validarCpfAtivado) {
-                    this.autoPreenchimento = true;
-                    this.form.patchValue({
-                        nascimento: res.dataNascimento,
-                        nome: res.nome?.split(' ')[0] + ' *** ***',
-                        nomeCompleto: res.nome
-                    });
-                } else {
-                    this.autoPreenchimento = false;
+        if(this.autoPreenchimento) {
+            this.form.patchValue({nome: 'Pesquisando...'});
+            this.clientesService.validarCpf(cpf).subscribe(
+                res => {
+                    if (res.validarCpfAtivado) {
+                        this.autoPreenchimento = true;
+                        this.form.patchValue({
+                            nascimento: res.dataNascimento,
+                            nome: res.nome?.split(' ')[0] + ' *** ***',
+                            nomeCompleto: res.nome
+                        });
+                    } else {
+                        this.form.patchValue({nome: ''});
+                        this.autoPreenchimento = false;
+                    }
+                },
+                error => {
+                    this.form.patchValue({nome: ''});
+                    this.messageService.error(error);
                 }
-            },
-            error => {
-                this.messageService.error(error);
-            }
-        );
+            );
+        }
+
     }
 }
