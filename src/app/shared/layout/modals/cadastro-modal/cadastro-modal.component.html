@@ -27,7 +27,7 @@
                     <div class="input-md">
                         <input type="text" id="nome" class="form-control inverted-out" formControlName="nome"
                                [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
-                        <label for="nome">{{'geral.nome' | translate}}</label>
+                        <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
                     </div>
                     <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
                 </div>
