@@ -3073,3 +3073,12 @@ gulp.task('pbpixbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostatotal.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostatotal.bet",
+        banca: "APOSTA TOTAL",
+        styles: "",
+    });
+});
