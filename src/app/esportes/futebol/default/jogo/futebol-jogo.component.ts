@@ -249,10 +249,16 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
                 odd.label = tipoAposta.nome;
-                odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
+                odd.valorFinal = this.helperService.calcularCotacao2String(
+                    odd.valor,
+                    odd.chave,
+                    this.jogo.event_id,
+                    this.jogo.favorito,
+                    false
+                );
 
                 mercado.odds.push(odd);
-                if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                if (this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
                     this.oddsAberto.push(mercado.nome);
                 }
 
@@ -302,7 +308,12 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                                 chave: chave,
                                 label: tipoAposta.nome,
                                 valor: cotacaoLocal.valor,
-                                valorFinal: this.helperService.calcularCotacao2String(cotacaoLocal.valor, chave, this.jogo.event_id, this.jogo.favorito, false),
+                                valorFinal: this.helperService.calcularCotacao2String(
+                                    cotacaoLocal.valor,
+                                    chave, this.jogo.event_id,
+                                    this.jogo.favorito,
+                                    false
+                                ),
                                 posicaoX: tipoAposta.posicao_x_mobile,
                                 posicaoY: tipoAposta.posicao_x_mobile,
                                 posicaoXMobile: tipoAposta.posicao_x_mobile,
@@ -310,7 +321,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             };
 
                             mercado.odds.push(cotacao);
-                            if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                            if (this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
                                 this.oddsAberto.push(mercado.nome);
                             }
                         }
@@ -402,7 +413,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             const jogadoresMercados = [];
             for (const chave in mercados) {
                 mercados[chave].odds.forEach((odd) => {
-                    const verificacaoJogador = jogadoresMercados.some((item) => {
+                    const casaFora = chave.includes('casa') ? 'casa' : chave.includes('fora') ? 'fora' : null;
+                    let chaveJogador = null;
+
+                    const verificacaoJogador = jogadoresMercados.some((item, key) => {
+                        chaveJogador = key;
                         return item.nome === odd.nome;
                     });
 
@@ -414,8 +429,13 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             m_cartoes: {},
                             m_gols_casa: {},
                             m_gols_fora: {},
+                            casa_fora: casaFora
                         };
                         jogadoresMercados.push(temp);
+                    } else {
+                        if (!jogadoresMercados[chaveJogador].casa_fora) {
+                            jogadoresMercados[chaveJogador].casa_fora = casaFora;
+                        }
                     }
                 });
             }
@@ -441,15 +461,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 jogador['m_cartoes']['jogador_recebera_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_cartao']);
                 jogador['m_cartoes']['jogador_sera_expulso'] = this.checkEmpty(mercadosJogador['jogador_sera_expulso']);
 
-                jogador['m_gols_casa']['jogador_marca_1st_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_casa']);
-                jogador['m_gols_casa']['jogador_marca_ultimo_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_casa']);
+                if (jogador.casa_fora === 'casa') {
+                    jogador['m_gols_casa']['jogador_marca_1st_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_casa']);
+                    jogador['m_gols_casa']['jogador_marca_ultimo_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_casa']);
+                }
 
-                jogador['m_gols_fora']['jogador_marca_1st_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_fora']);
-                jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
+                if (jogador.casa_fora === 'fora') {
+                    jogador['m_gols_fora']['jogador_marca_1st_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_fora']);
+                    jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
+                }
             });
 
             return jogadoresMercados;
-
         } else {
             const aux = [];
             for (const chave in mercados) {
