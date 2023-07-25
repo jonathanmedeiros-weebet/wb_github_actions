@@ -320,7 +320,11 @@
         "playnabet.com": "gulp playnabet.com",
         "betinvestidor.com": "gulp betinvestidor.com",
         "smartek777.com": "gulp smartek777.com",
-        "a7bet.fun": "gulp a7bet.fun"
+        "a7bet.fun": "gulp a7bet.fun",
+        "doonebet.com": "gulp doonebet.com",
+        "winvegas.bet": "gulp winvegas.bet",
+        "esportemix.com": "gulp esportemix.com",
+        "pbpixbet.com": "gulp pbpixbet.com"
     },
     "private": true,
     "dependencies": {
