@@ -56,3 +56,22 @@
         </div>
     </form>
 </div>
+
+<ng-template #verificarPromocaoModal let-modal>
+    <div class="modal-body">
+        <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Aviso Promoção</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+        <div class="conteudo">
+            <p>Atualmente você possui a seguinte promoção ativa:</p>
+            <div class="promocao-tipo">
+                <h3>{{rolloverAtivo[0].tipo | formatarPromocao}}</h3>
+            </div>
+            <p>Se você optar pelo bônus, essa será sua nova promoção: </p>
+            <div class="promocao-tipo">
+                <h3>Bônus Primeiro Depósito</h3>
+            </div>
+        </div>
+    </div>
+</ng-template>

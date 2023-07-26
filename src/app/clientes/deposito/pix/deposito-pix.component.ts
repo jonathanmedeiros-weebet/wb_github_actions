@@ -1,14 +1,15 @@
-import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
 import {MessageService} from '../../../shared/services/utils/message.service';
-import {DepositoPix} from '../../../models';
+import {DepositoPix, Rollover} from '../../../models';
 import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
+
 
 @Component({
     selector: 'ngbd-modal-content',
@@ -49,6 +50,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
+
     constructor(
         public modal: NgbActiveModal,
         private _sanitizer: DomSanitizer,
@@ -74,7 +76,7 @@ export class NgbdModalContent {
             this.secondShow = this.second < 10 ? '0' + this.second : String(this.second);
 
             if (this.minute <= 0 && this.second <= 0) {
-                clearInterval(timer)
+                clearInterval(timer);
             }
         }, 1000);
     }
@@ -94,6 +96,7 @@ export class NgbdModalContent {
     styleUrls: ['./deposito-pix.component.css']
 })
 export class DepositoPixComponent extends BaseFormComponent implements OnInit {
+    @ViewChild('verificarPromocaoModal', {static: true}) verificarPromocaoModal;
     submitting = false;
     pix: DepositoPix;
     exibirMensagemPagamento = false;
@@ -107,6 +110,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     isMobile = false;
     permitirBonusPrimeiroDeposito = false;
     opcaoBonus = '';
+    rolloverAtivo: Rollover[] = [];
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -115,7 +119,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private modalService: NgbModal,
         private helperService: HelperService,
-        private domSanitizer: DomSanitizer
+        private domSanitizer: DomSanitizer,
     ) {
         super();
     }
@@ -128,7 +132,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
         this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
         this.createForm();
-
         this.financeiroService.bonusPrimeiroDepositoPermitido()
             .subscribe(
                 res => {
@@ -136,6 +139,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
                         this.opcaoBonus = 'nenhum';
+                    } else {
+                        this.getRollovers();
                     }
                 },
                 error => this.handleError(error)
@@ -154,36 +159,46 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     submit() {
-        this.submitting = true;
-        this.novoSaldo = 0;
-        this.exibirMensagemPagamento = false;
-        const detalhesPagamento = this.form.value;
-        detalhesPagamento.metodo = 'pix';
-        this.financeiroService.processarPagamento(detalhesPagamento)
-            .subscribe(
-                res => {
-                    const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
-                    modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
-                    modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
-                    modalRef.componentInstance.qrCode = res.qr_code;
-
-                    this.pix = res;
-                    if (this.metodoPagamento === 'sauto_pay') {
-                        const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
-                        this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
-                    }
-
-                    this.clearSetInterval = setInterval(() => {
-                        this.verificarPagamento(res);
-                    }, 10000);
-
-                    this.submitting = false;
-                },
-                error => {
-                    this.handleError(error);
-                    this.submitting = false;
-                }
-            );
+        if (this.rolloverAtivo.length > 0 && this.opcaoBonus === 'esportivo') {
+            this.modalService.open(this.verificarPromocaoModal, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+                windowClass: 'modal-700'
+            });
+        } else {
+            console.log('pagamento');
+            // this.submitting = true;
+            // this.novoSaldo = 0;
+            // this.exibirMensagemPagamento = false;
+            // const detalhesPagamento = this.form.value;
+            // detalhesPagamento.metodo = 'pix';
+            // this.financeiroService.processarPagamento(detalhesPagamento)
+            //     .subscribe(
+            //         res => {
+            //             const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
+            //             modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
+            //             modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
+            //             modalRef.componentInstance.qrCode = res.qr_code;
+            //
+            //             this.pix = res;
+            //             if (this.metodoPagamento === 'sauto_pay') {
+            //                 const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+            //                 this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+            //             }
+            //
+            //             this.clearSetInterval = setInterval(() => {
+            //                 this.verificarPagamento(res);
+            //             }, 10000);
+            //
+            //             this.submitting = false;
+            //         },
+            //         error => {
+            //             this.handleError(error);
+            //             this.submitting = false;
+            //         }
+            //     );
+        }
     }
 
     copyInputMessage(inputElement) {
@@ -234,6 +249,22 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             centered: true,
             size: 'xl',
         });
+    }
+
+    getRollovers() {
+        const queryParams: any = {
+            'status': 'ativo',
+        };
+        this.financeiroService.getRollovers(queryParams)
+            .subscribe(
+                response => {
+                    this.rolloverAtivo = response;
+                    console.log(this.rolloverAtivo);
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
     }
 
 }
