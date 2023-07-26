@@ -68,6 +68,9 @@ export class FormatarFornecedoresPipe implements PipeTransform {
             case 'blueprint':
                 fornecedorFormatado = 'Blueprint';
                 break;
+            case 'rubyplay':
+                fornecedorFormatado = 'Ruby Play';
+                break;
         }
         return fornecedorFormatado;
     }
