@@ -2859,8 +2859,7 @@ gulp.task('gamegol.bet', function (done) {
         banca: "GAMEGOL.BET",
         styles: "",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-01DFJHWG0L'></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-01DFJHWG0L');</script>" +
-        "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/EbO2qGOScc' async></script>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/EbO2qGOScc' async></script>",
     });
 });
 
@@ -2971,8 +2970,7 @@ gulp.task('cassinowin.bet', function (done) {
         banca: "CASSINO WIN",
         styles: "",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-01DFJHWG0L'></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-01DFJHWG0L');</script>" +
-        "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/4Vmbcr2Ir7' async></script>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/4Vmbcr2Ir7' async></script>",
     });
 });
 
