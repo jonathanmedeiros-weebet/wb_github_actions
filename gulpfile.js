@@ -3083,3 +3083,66 @@ gulp.task('apostatotal.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('veteranobet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "veteranobet.com",
+        banca: "VETERANO BET",
+        styles: "",
+    });
+});
+
+gulp.task('betfy.club', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betfy.club",
+        banca: "BET FY",
+        styles: "",
+    });
+});
+
+gulp.task('gamebet85.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "gamebet85.net",
+        banca: "GAME BET 85",
+        styles: "",
+    });
+});
+
+gulp.task('suabetonline.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "suabetonline.com",
+        banca: "SUA BET ONLINE",
+        styles: "",
+    });
+});
+
+gulp.task('condecassinos.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "condecassinos.com",
+        banca: "CONDE CASSINOS",
+        styles: "",
+    });
+});
+
+gulp.task('pixcassino999.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "pixcassino999.com",
+        banca: "PIX CASSINO 99",
+        styles: "",
+    });
+});
+
+gulp.task('fullbet.app', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "fullbet.app",
+        banca: "FULL BET",
+        styles: "",
+    });
+});
