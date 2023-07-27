@@ -9,7 +9,7 @@
     </div>
 </div>
 <div class="content">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!pix">
+    <form [formGroup]="form" (ngSubmit)="solicitarDeposito()" *ngIf="!pix">
         <app-spinner *ngIf="submitting"></app-spinner>
         <div class="row">
             <div class="col col-sm-3 deposito-pix">
@@ -71,6 +71,18 @@
             <p>Se você optar pelo bônus, essa será sua nova promoção: </p>
             <div class="promocao-tipo">
                 <h3>Bônus Primeiro Depósito</h3>
+            </div>
+            <p>Atenção!<br>
+                Quando o depósito for confirmado, seu saldo de bônus será resetado e um novo processo de rollover será iniciado.<br>
+                Se alguma aposta relacionada a essa promoção ainda estiver pendente, ela não será mais válida.
+            </p>
+            <div class="form-group group-buttons">
+                <button type="submit" class="btn btn-custom btn-block" (click)="modal.dismiss('Cross click')">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-custom btn-block" (click)="confirmarPromocao()">
+                   Confirmar
+                </button>
             </div>
         </div>
     </div>

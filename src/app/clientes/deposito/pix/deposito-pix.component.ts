@@ -111,6 +111,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     permitirBonusPrimeiroDeposito = false;
     opcaoBonus = '';
     rolloverAtivo: Rollover[] = [];
+    modalPromocao;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -158,47 +159,59 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.messageService.error(error);
     }
 
-    submit() {
+    solicitarDeposito() {
         if (this.rolloverAtivo.length > 0 && this.opcaoBonus === 'esportivo') {
-            this.modalService.open(this.verificarPromocaoModal, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
-                centered: true,
-                windowClass: 'modal-700'
-            });
+            this.avisoPromocao();
         } else {
-            console.log('pagamento');
-            // this.submitting = true;
-            // this.novoSaldo = 0;
-            // this.exibirMensagemPagamento = false;
-            // const detalhesPagamento = this.form.value;
-            // detalhesPagamento.metodo = 'pix';
-            // this.financeiroService.processarPagamento(detalhesPagamento)
-            //     .subscribe(
-            //         res => {
-            //             const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
-            //             modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
-            //             modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
-            //             modalRef.componentInstance.qrCode = res.qr_code;
-            //
-            //             this.pix = res;
-            //             if (this.metodoPagamento === 'sauto_pay') {
-            //                 const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
-            //                 this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
-            //             }
-            //
-            //             this.clearSetInterval = setInterval(() => {
-            //                 this.verificarPagamento(res);
-            //             }, 10000);
-            //
-            //             this.submitting = false;
-            //         },
-            //         error => {
-            //             this.handleError(error);
-            //             this.submitting = false;
-            //         }
-            //     );
+            this.onSubmit();
         }
+    }
+
+    avisoPromocao() {
+        this.modalPromocao = this.modalService.open(this.verificarPromocaoModal, {
+            ariaLabelledBy: 'modal-basic-title',
+            size: 'lg',
+            centered: true,
+            windowClass: 'modal-700'
+        });
+    }
+
+    confirmarPromocao() {
+        this.modalPromocao.close();
+        this.onSubmit();
+    }
+
+    submit() {
+            this.submitting = true;
+            this.novoSaldo = 0;
+            this.exibirMensagemPagamento = false;
+            const detalhesPagamento = this.form.value;
+            detalhesPagamento.metodo = 'pix';
+            this.financeiroService.processarPagamento(detalhesPagamento)
+                .subscribe(
+                    res => {
+                        const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
+                        modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
+                        modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
+                        modalRef.componentInstance.qrCode = res.qr_code;
+
+                        this.pix = res;
+                        if (this.metodoPagamento === 'sauto_pay') {
+                            const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+                            this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+                        }
+
+                        this.clearSetInterval = setInterval(() => {
+                            this.verificarPagamento(res);
+                        }, 10000);
+
+                        this.submitting = false;
+                    },
+                    error => {
+                        this.handleError(error);
+                        this.submitting = false;
+                    }
+                );
     }
 
     copyInputMessage(inputElement) {
@@ -259,12 +272,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 response => {
                     this.rolloverAtivo = response;
-                    console.log(this.rolloverAtivo);
                 },
                 error => {
                     this.handleError(error);
                 }
             );
     }
-
 }
