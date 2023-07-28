@@ -289,7 +289,7 @@ gulp.task('bet1.wee.bet', function (done) {
 
 gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front5.wee.bet",
         host: "bet2.wee.bet",
         banca: "WEEBET",
         styles: ""
