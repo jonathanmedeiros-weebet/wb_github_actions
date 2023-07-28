@@ -27,7 +27,7 @@
             </div>
             <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
             <span class="space-buttons" *ngIf="loginGoogle">Ou</span>
-            <asl-google-signin-button type='standard' size='larger' text='signin_with' width="{{ isMobile ? '288' : '388'}}" *ngIf="loginGoogle"></asl-google-signin-button>
+            <asl-google-signin-button type='standard' size='larger' text='signin_with' *ngIf="loginGoogle"></asl-google-signin-button>
         </form>
 
         <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
