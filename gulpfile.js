@@ -3146,3 +3146,12 @@ gulp.task('fullbet.app', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsnordeste.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betsnordeste.bet",
+        banca: "BET NORDESTE",
+        styles: "",
+    });
+});
