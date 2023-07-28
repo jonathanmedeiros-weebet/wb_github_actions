@@ -3174,7 +3174,7 @@ gulp.task('suasortebet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "suasortebet.com",
-        banca: "BELO GOL SPORTS",
+        banca: "SUA SORTE BET",
         styles: "",
     });
 });
