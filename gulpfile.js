@@ -3155,3 +3155,12 @@ gulp.task('betsnordeste.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('belogolsports.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "belogolsports.com",
+        banca: "BET GOL SPORTS",
+        styles: "",
+    });
+});

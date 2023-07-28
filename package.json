@@ -333,7 +333,8 @@
         "condecassinos.com": "gulp condecassinos.com",
         "pixcassino999.com": "gulp pixcassino999.com",
         "fullbet.app": "gulp fullbet.app",
-        "betsnordeste.bet": "gulp betsnordeste.bet"
+        "betsnordeste.bet": "gulp betsnordeste.bet",
+        "belogolsports.com": "gulp belogolsports.com"
     },
     "private": true,
     "dependencies": {
