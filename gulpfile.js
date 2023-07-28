@@ -3160,7 +3160,44 @@ gulp.task('belogolsports.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "belogolsports.com",
-        banca: "BET GOL SPORTS",
+        banca: "BELO GOL SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('suasortebet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "suasortebet.com",
+        banca: "BELO GOL SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('betsstarks.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betsstarks.com",
+        banca: "BETS STARKS",
+        styles: "",
+    });
+});
+
+gulp.task('betsrio.online', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betsrio.online",
+        banca: "BETS RIO",
+        styles: "",
+    });
+});
+
+
+gulp.task('rc.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "rc.wee.bet",
+        banca: "Weebet RC",
         styles: "",
     });
 });
