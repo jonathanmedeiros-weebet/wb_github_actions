@@ -3182,12 +3182,29 @@ gulp.task('betsrio.online', function (done) {
     });
 });
 
-
 gulp.task('rc.wee.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "rc.wee.bet",
         banca: "Weebet RC",
+        styles: "",
+    });
+});
+
+gulp.task('exclusiva.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "exclusiva.bet",
+        banca: "Exclusiva.bet",
+        styles: "",
+    });
+});
+
+gulp.task('bet771.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet771.bet",
+        banca: "BET 771",
         styles: "",
     });
 });

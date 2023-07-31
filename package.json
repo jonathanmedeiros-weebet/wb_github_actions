@@ -336,7 +336,9 @@
         "suasortebet.com": "gulp suasortebet.com",
         "betsstarks.com": "gulp betsstarks.com",
         "betsrio.online": "gulp betsrio.online",
-        "rc.wee.bet": "gulp rc.wee.bet"
+        "rc.wee.bet": "gulp rc.wee.bet",
+        "exclusiva.bet": "gulp exclusiva.bet",
+        "bet771.bet": "gulp bet771.bet"
     },
     "private": true,
     "dependencies": {
