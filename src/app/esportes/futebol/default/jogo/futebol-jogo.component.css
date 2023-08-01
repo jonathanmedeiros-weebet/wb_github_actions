@@ -354,6 +354,14 @@
     /*    padding: 0;*/
     /*}*/
 
+    .loading-template .cols .ld-odds {
+        width: 100%;
+    }
+
+    .loading-template .banner {
+        height: 260px;
+    }
+
     .indentificacao-jogo .div-back {
         top: 5px;
     }
