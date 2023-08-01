@@ -4,6 +4,28 @@
     right: 10px;
 }
 
+.promocao-tipo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--highlight);
+    padding: 15px;
+}
+
+.btn-custom{
+    margin: 20px;
+}
+
+.group-buttons {
+   display: flex;
+}
+
+.btn-cancelar{
+    background-color: var(--foreground-highlight);
+    color: var(--highlight);
+    border-color: var(--highlight);
+}
+
 .info {
     margin: 15px 25px 30px;
     font-weight: 600;
