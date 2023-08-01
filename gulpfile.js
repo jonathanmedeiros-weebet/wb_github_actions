@@ -1046,7 +1046,6 @@ gulp.task('esportcampeao.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "esportcampeao.wee.bet",
         banca: "ESPORT CAMPEÃO",
-        shared_url: "esportcampeao.com",
         styles: "",
     });
 });
@@ -3211,6 +3210,51 @@ gulp.task('bet771.bet', function (done) {
         server: "front5.wee.bet",
         host: "bet771.bet",
         banca: "BET 771",
+        styles: "",
+    });
+});
+
+gulp.task('partida.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "partida.bet",
+        banca: "PARTIDA.BET",
+        styles: "",
+    });
+});
+
+gulp.task('bet77k.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet77k.com",
+        banca: "BET 77K",
+        styles: "",
+    });
+});
+
+gulp.task('valebets.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "valebets.bet",
+        banca: "VALE BETS",
+        styles: "",
+    });
+});
+
+gulp.task('betsortefacil.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "betsortefacil.wee.bet",
+        banca: "BET SORTE FÁCIL",
+        styles: "",
+    });
+});
+
+gulp.task('jogateka.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "jogateka.com",
+        banca: "JOGATEKA",
         styles: "",
     });
 });

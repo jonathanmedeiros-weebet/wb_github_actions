@@ -338,7 +338,12 @@
         "betsrio.online": "gulp betsrio.online",
         "rc.wee.bet": "gulp rc.wee.bet",
         "exclusiva.bet": "gulp exclusiva.bet",
-        "bet771.bet": "gulp bet771.bet"
+        "bet771.bet": "gulp bet771.bet",
+        "partida.bet": "gulp partida.bet",
+        "bet77k.com": "gulp bet77k.com",
+        "valebets.bet": "gulp valebets.bet",
+        "betsortefacil.wee.bet": "gulp betsortefacil.wee.bet",
+        "jogateka.com": "gulp jogateka.com"
     },
     "private": true,
     "dependencies": {
