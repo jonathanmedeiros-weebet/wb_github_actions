@@ -1,6 +1,7 @@
 export class Rollover {
     id: number;
     modalidade: string;
+    tipo: string;
     dataVencimento: string;
     status: string;
     valorGasto: number;

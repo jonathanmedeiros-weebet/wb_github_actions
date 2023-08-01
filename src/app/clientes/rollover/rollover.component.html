@@ -51,6 +51,7 @@
                             <th class="custom-td">Valor Gasto</th>
                             <th class="custom-td">Valor Meta</th>
                             <th class="custom-td">Modalidade</th>
+                            <th class="custom-td">Tipo</th>
                             <th class="custom-td">Data de Vencimento</th>
                             <th></th>
                         </tr>
@@ -97,6 +98,9 @@
                                 </td>
                                 <td class="custom-td">
                                     {{rollover.modalidade}}
+                                </td>
+                                <td class="custom-td">
+                                    {{rollover.tipo | formatarPromocao}}
                                 </td>
                                 <td class="custom-td">
                                     {{rollover.dataVencimento}}
