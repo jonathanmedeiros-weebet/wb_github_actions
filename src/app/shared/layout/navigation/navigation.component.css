@@ -73,7 +73,7 @@ app-sidebar-nav {
 .collapsed {
     width: 50px;
     position: absolute;
-    z-index: 100;
+    z-index: 999;
 }
 
 .collapse-container {
