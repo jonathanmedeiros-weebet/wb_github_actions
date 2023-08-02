@@ -3260,3 +3260,12 @@ gulp.task('jogateka.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('acheibet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "acheibet.com",
+        banca: "ACHEI BET",
+        styles: "",
+    });
+});
