@@ -3027,6 +3027,8 @@ gulp.task('a7bet.fun', function (done) {
         host: "a7bet.fun",
         banca: "A7 BET",
         styles: "",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/7HdsXw7HgD' async></script>",
     });
 });
 
