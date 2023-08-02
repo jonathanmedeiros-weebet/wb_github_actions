@@ -655,7 +655,8 @@ button {
 
 .modal-header {
     border-bottom: 1px solid var(--foreground);
-    padding: 20px 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     align-items: center;
 }
 
@@ -711,14 +712,16 @@ button {
 }
 
 .action-buttons {
-    margin: -1rem -1rem -1rem auto;
     display: flex;
+    width: 15%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .action-buttons button, .action-buttons a {
     background-color: transparent;
     border: 0;
-    padding: 1rem 1rem;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
