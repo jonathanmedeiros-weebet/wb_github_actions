@@ -3052,11 +3052,11 @@ gulp.task('winvegas.bet', function (done) {
     });
 });
 
-gulp.task('sportingpix.bet', function (done) {
+gulp.task('esportemix.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "sportingpix.bet",
-        banca: "SPORTING PIX",
+        host: "esportemix.com",
+        banca: "ESPORTE MIX",
         styles: "",
     });
 });
