@@ -168,12 +168,16 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     avisoPromocao() {
-        this.modalPromocao = this.modalService.open(this.verificarPromocaoModal, {
-            ariaLabelledBy: 'modal-basic-title',
-            size: 'lg',
-            centered: true,
-            windowClass: 'modal-700'
-        });
+        if (this.form.valid) {
+            this.modalPromocao = this.modalService.open(this.verificarPromocaoModal, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'lg',
+                centered: true,
+                windowClass: 'modal-700'
+            });
+        } else {
+            this.checkFormValidations(this.form);
+        }
     }
 
     confirmarPromocao() {
