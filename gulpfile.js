@@ -3271,3 +3271,21 @@ gulp.task('acheibet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vitoriabet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "vitoriabet.bet",
+        banca: "VITÓRIA BET",
+        styles: "",
+    });
+});
+
+gulp.task('amazonsport.io', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "amazonsport.io",
+        banca: "AMAZON SPORT",
+        styles: "",
+    });
+});
