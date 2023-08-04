@@ -2657,7 +2657,7 @@ gulp.task('fortunebet.app', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "fortunebet.app",
-        banca: "FORTUNE BET",
+        banca: "FORTUNEBET",
         styles: "",
     });
 });
