@@ -62,7 +62,8 @@ import {
     SolicitarSaqueModalComponent,
     TabelaModalComponent,
     CarregamentoModalComponent,
-    CompatilhamentoBilheteModal
+    CompatilhamentoBilheteModal,
+    RegrasBonusModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -138,6 +139,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
+        RegrasBonusModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,

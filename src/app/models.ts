@@ -4,6 +4,7 @@ export * from './shared/models/clientes/solicitacao-saque';
 export * from './shared/models/pagina';
 export * from './shared/models/passador';
 export * from './shared/models/clientes/rollover';
+export * from './shared/models/clientes/promocao';
 // Loteria
 export * from './shared/models/loteria/aposta';
 export * from './shared/models/loteria/item';

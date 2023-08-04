@@ -1,7 +1,9 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {ParametrosLocaisService} from './../../../services/parametros-locais.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import {FinanceiroService} from '../../../services/financeiro.service';
+import {MessageService} from '../../../services/utils/message.service';
+import {Promocao} from '../../../../models';
 @Component({
   selector: 'app-regras-bonus-modal',
   templateUrl: './regras-bonus-modal.component.html',
@@ -16,13 +18,17 @@ export class RegrasBonusModalComponent implements OnInit {
     valor_maximo_bonus_primeiro_deposito;
     resultado_multiplicador_bonus;
     vencimento_bonus;
+    promocoes: Promocao[] = [];
 
 	constructor(
 		public activeModal: NgbActiveModal,
-        private paramsLocais: ParametrosLocaisService
-	) { }
+        private paramsLocais: ParametrosLocaisService,
+        private financeiroService: FinanceiroService,
+        private messageService: MessageService,
+    ) { }
 
     ngOnInit(): void {
+        this.getPromocoes();
 
         this.multiplicador_rollover_esportivo = this.paramsLocais.getOpcoes().multiplicador_rollover_esportivo;
         this.cotacao_minima_aposta_bonus = this.paramsLocais.getOpcoes().cotacao_minima_aposta_bonus;
@@ -31,5 +37,22 @@ export class RegrasBonusModalComponent implements OnInit {
         this.valor_maximo_bonus_primeiro_deposito = this.paramsLocais.getOpcoes().valor_maximo_bonus_primeiro_deposito;
         this.vencimento_bonus = this.paramsLocais.getOpcoes().vencimento_bonus;
         this.resultado_multiplicador_bonus = this.multiplicador_rollover_esportivo*50;
+    }
+
+    getPromocoes(queryParams?: any) {
+        this.financeiroService.getPromocoes(queryParams)
+            .subscribe(
+                response => {
+                    this.promocoes = response;
+                    console.log(this.promocoes);
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+    }
+
+    handleError(error: string) {
+        this.messageService.error(error);
     }
 }
