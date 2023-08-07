@@ -117,6 +117,17 @@ gulp.task('build-betnazebra', function (done) {
     });
 });
 
+gulp.task('build-a7bet.fun', function (done) {
+    return prepare({
+        app_id: "com.a7bet.app",
+        url: "https://a7bet.fun",
+        nome: "A7bet",
+        slug: "a7bet.fun",
+        splash_color: "#222d32",
+        pkg_folder: ('com.a7bet.app').split('.').join('/')
+    });
+});
+
 gulp.task('build-lite-alfa', function (done) {
     return prepare({
         app_id: "net.alfasports.app.lite",

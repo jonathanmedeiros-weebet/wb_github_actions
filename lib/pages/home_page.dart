@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
 
   _saveLogoBytes(slug) async {
     final logoUrl =
-        'https://weebet.s3.amazonaws.com/$slug/logos/logo_banca.png';
+        'https://weebet.s3.amazonaws.com/$slug/logos/logo_impressao.png';
     Uint8List remoteLogoBytes =
         (await NetworkAssetBundle(Uri.parse(logoUrl)).load(logoUrl))
             .buffer
