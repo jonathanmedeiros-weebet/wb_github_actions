@@ -10,7 +10,7 @@ h3 {
 
 .modal-header {
     border-bottom-color: var(--foreground);
-    padding: 20px 35px;
+    padding: 20px 60px;
 }
 
 .close-modal-ativacao{
@@ -121,6 +121,11 @@ img{
 
         display: flex;
         flex-direction: column;
+    }
+
+    .modal-header {
+        border-bottom-color: var(--foreground);
+        padding: 20px 25px;
     }
 
     .modal-body .modal-body-content {
