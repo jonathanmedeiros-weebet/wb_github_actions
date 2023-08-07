@@ -3248,3 +3248,12 @@ gulp.task('amazonsport.io', function (done) {
         styles: "",
     });
 });
+
+gulp.task('federalsports.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "federalsports.bet",
+        banca: "FEDERAL SPORTS",
+        styles: "",
+    });
+});
