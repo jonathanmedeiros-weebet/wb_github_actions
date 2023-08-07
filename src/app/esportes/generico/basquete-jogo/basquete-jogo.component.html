@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="horario">
-                    <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
+                    <div>{{jogo?.horario | moment: '' : true}} / {{jogo?.horario | moment: 'HH:mm'}}</div>
                 </div>
             </div>
         </div>

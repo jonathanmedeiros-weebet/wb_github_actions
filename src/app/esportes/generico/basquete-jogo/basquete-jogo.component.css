@@ -107,18 +107,17 @@
 }
 
 .indentificacao .nome {
-    margin-top: 5px;
+    margin-top: 45px;
 }
 
 .indentificacao .horario {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 400px;
-    font-size: 14px;
-    color: #FFFFFF;
     position: absolute;
-    bottom: 1px;
+    left: 20px;
+    top: 12px;
+    padding: 5px 10px;
+    background-color: #181818;
+    border-radius: 25px;
+    color: var(--highlight);
 }
 
 .content-sports {
@@ -318,7 +317,7 @@
         font-size: 14px;
         color: #FFFFFF;
         position: absolute;
-        top: 6px;
+        top: 41px;
     }
 
     .nome .time-a,
