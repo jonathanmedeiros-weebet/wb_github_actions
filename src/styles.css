@@ -713,10 +713,10 @@ button {
 
 .action-buttons {
     display: flex;
-    width: 63px;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    width: 30%;
 }
 
 .action-buttons button, .action-buttons a {
@@ -728,6 +728,7 @@ button {
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .8;
+    padding-left: 14px;
 }
 
 .action-buttons a {
@@ -735,6 +736,7 @@ button {
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    padding-right: 7px;
 }
 
 .action-buttons button span {
