@@ -728,7 +728,7 @@ button {
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .8;
-    padding-right: 7px;
+    padding-left: 14px;
 }
 
 .action-buttons a {
@@ -736,6 +736,7 @@ button {
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    padding-right: 7px;
 }
 
 .action-buttons button span {
