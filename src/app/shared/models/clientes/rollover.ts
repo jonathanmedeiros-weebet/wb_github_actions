@@ -7,4 +7,6 @@ export class Rollover {
     valorGasto: number;
     valorMeta: number;
     convertido: number;
+    cotacaoMinSimples: number;
+    cotacaoMinMultipla: number;
 }
