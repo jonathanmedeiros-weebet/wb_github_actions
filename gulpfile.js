@@ -3254,3 +3254,12 @@ gulp.task('federalsports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('goldvegas.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "goldvegas.net",
+        banca: "GOLD VEGAS",
+        styles: "",
+    });
+});
