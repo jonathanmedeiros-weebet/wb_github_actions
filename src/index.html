@@ -86,7 +86,9 @@
 
 
 		if (parseInt(getAndroidVersion()) < 7) {
-			window.location.href = 'http://192.168.0.25:4201?config=true&host=192.168.0.25&slug=weebet.eme&nome=teste'
+            if (location.search.indexOf('app') >= 0) {
+                window.location.href = 'http://192.168.0.25:4201?config=true&host=192.168.0.25&slug=weebet.eme&nome=teste';
+            }
 		}
     </script>
 </head>

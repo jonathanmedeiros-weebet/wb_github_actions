@@ -98,7 +98,9 @@
 
 
         if (parseInt(getAndroidVersion()) < 7) {
-            window.location.href = 'https://light.weebet.tech?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
+            if (location.search.indexOf('app') >= 0) {
+                window.location.href = 'https://light.weebet.tech?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
+            }
         }
     </script>
 </head>
