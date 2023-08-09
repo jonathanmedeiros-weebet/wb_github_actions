@@ -3265,3 +3265,30 @@ gulp.task('goldvegas.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('valebet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "valebet.bet",
+        banca: "VALE BET",
+        styles: "",
+    });
+});
+
+gulp.task('torcidabet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "torcidabet.com.br",
+        banca: "TORCIDA BET",
+        styles: "",
+    });
+});
+
+gulp.task('bet24horas.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet24horas.com",
+        banca: "BET 24 HORAS",
+        styles: "",
+    });
+});
