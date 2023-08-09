@@ -76,6 +76,19 @@
         }
     </style>
     <!-- <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css"> -->
+    <script>
+        function getAndroidVersion(ua) {
+			ua = (ua || navigator.userAgent).toLowerCase();
+			var match = ua.match(/android\s([0-9\.]*)/i);
+
+			return match ? match[1] : undefined;
+		}
+
+
+		if (parseInt(getAndroidVersion()) < 7) {
+			window.location.href = 'http://192.168.0.25:4201?config=true&host=192.168.0.25&slug=weebet.eme&nome=teste'
+		}
+    </script>
 </head>
 
 <body class="dark">
