@@ -63,8 +63,9 @@
 
 .indentificacao {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     padding: 10px;
     position: relative;
     height: 20vh;
@@ -73,7 +74,6 @@
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    /*margin-bottom: 5px;*/
     border-radius: 5px;
 }
 
@@ -92,8 +92,10 @@
     max-width: 400px;
     font-size: 14px;
     color: #FFFFFF;
-    position: absolute;
-    top: 10px;
+    height: 33%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
 }
 
 .indentificacao .nome {
@@ -106,14 +108,8 @@
     color: #FFFFFF;
 }
 
-.indentificacao .nome {
-    margin-top: 45px;
-}
 
 .indentificacao .horario {
-    position: absolute;
-    left: 20px;
-    top: 12px;
     padding: 5px 10px;
     background-color: #181818;
     border-radius: 25px;
@@ -296,6 +292,19 @@
     width: 50%;
 }
 
+.ajusta-nome-campeonato{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 320px) {
+    .indentificacao {
+        height: 29vh;
+    }
+}
 @media only screen and (max-width: 1024px) {
     .loading-template .cols .ld-odds {
         width: 100%;
@@ -309,15 +318,22 @@
         top: 0;
     }
 
+    .campeonato-nome{
+        height: 45px;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+    }
     .indentificacao .campeonato-nome {
+        width: 100%;
+        text-align: center;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 400px;
         font-size: 14px;
         color: #FFFFFF;
-        position: absolute;
-        top: 41px;
+        padding-left: 5px;
     }
 
     .nome .time-a,
