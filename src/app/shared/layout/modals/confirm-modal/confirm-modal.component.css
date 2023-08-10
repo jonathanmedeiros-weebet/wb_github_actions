@@ -6,6 +6,9 @@
 .modal-body {
     text-align: center;
     padding: 40px 130px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .actions {
@@ -17,4 +20,14 @@
 
 button {
     width: 100px;
+    margin-right: 10px;
 }
+
+
+
+
+
+
+
+
+
