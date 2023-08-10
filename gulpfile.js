@@ -3280,3 +3280,12 @@ gulp.task('bet24horas.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pixstars.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "pixstars.bet",
+        banca: "PIX STARS",
+        styles: "",
+    });
+});

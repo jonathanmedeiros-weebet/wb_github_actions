@@ -346,7 +346,8 @@
         "goldvegas.net": "gulp goldvegas.net",
         "valebet.bet": "gulp valebet.bet",
         "torcidabet.com.br": "gulp torcidabet.com.br",
-        "bet24horas.com": "gulp bet24horas.com"
+        "bet24horas.com": "gulp bet24horas.com",
+        "pixstars.bet": "gulp pixstars.bet"
     },
     "private": true,
     "dependencies": {
