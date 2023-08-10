@@ -322,7 +322,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
                 svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/slot.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/crash.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
