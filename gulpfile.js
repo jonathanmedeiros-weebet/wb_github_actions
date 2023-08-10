@@ -3243,6 +3243,8 @@ gulp.task('amazonsport.io', function (done) {
         host: "amazonsport.io",
         banca: "AMAZON SPORT",
         styles: "",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/hy3iY8gO2E' async></script>",
     });
 });
 
@@ -3251,6 +3253,42 @@ gulp.task('federalsports.bet', function (done) {
         server: "front5.wee.bet",
         host: "federalsports.bet",
         banca: "FEDERAL SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('goldvegas.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "goldvegas.net",
+        banca: "GOLD VEGAS",
+        styles: "",
+    });
+});
+
+gulp.task('valebet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "valebet.bet",
+        banca: "VALE BET",
+        styles: "",
+    });
+});
+
+gulp.task('torcidabet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "torcidabet.com.br",
+        banca: "TORCIDA BET",
+        styles: "",
+    });
+});
+
+gulp.task('bet24horas.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet24horas.com",
+        banca: "BET 24 HORAS",
         styles: "",
     });
 });

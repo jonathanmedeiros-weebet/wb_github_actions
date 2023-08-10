@@ -343,7 +343,11 @@
         "acheibet.com": "gulp acheibet.com",
         "vitoriabet.bet": "gulp vitoriabet.bet",
         "amazonsport.io": "gulp amazonsport.io",
-        "federalsports.bet": "gulp federalsports.bet"
+        "federalsports.bet": "gulp federalsports.bet",
+        "goldvegas.net": "gulp goldvegas.net",
+        "valebet.bet": "gulp valebet.bet",
+        "torcidabet.com.br": "gulp torcidabet.com.br",
+        "bet24horas.com": "gulp bet24horas.com"
     },
     "private": true,
     "dependencies": {
