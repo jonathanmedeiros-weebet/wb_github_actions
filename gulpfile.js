@@ -3037,3 +3037,48 @@ gulp.task('a7bet.fun', function (done) {
         styles: "",
     });
 });
+
+gulp.task('doonebet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "doonebet.com",
+        banca: "DO ONE BET",
+        styles: "",
+    });
+});
+
+gulp.task('winvegas.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "winvegas.bet",
+        banca: "WIN VEGAS",
+        styles: "",
+    });
+});
+
+gulp.task('sportingpix.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sportingpix.bet",
+        banca: "SPORTING PIX",
+        styles: "",
+    });
+});
+
+gulp.task('pbpixbet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "pbpixbet.com",
+        banca: "PB PIX BET",
+        styles: "",
+    });
+});
+
+gulp.task('apostatotal.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostatotal.bet",
+        banca: "APOSTA TOTAL",
+        styles: "",
+    });
+});
