@@ -325,7 +325,8 @@
         "winvegas.bet": "gulp winvegas.bet",
         "sportingpix.bet": "gulp sportingpix.bet",
         "pbpixbet.com": "gulp pbpixbet.com",
-        "apostatotal.bet": "gulp apostatotal.bet"
+        "apostatotal.bet": "gulp apostatotal.bet",
+        "rc.wee.bet": "gulp rc.wee.bet"
     },
     "private": true,
     "dependencies": {

@@ -3082,3 +3082,12 @@ gulp.task('apostatotal.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('rc.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "rc.wee.bet",
+        banca: "Weebet RC",
+        styles: "",
+    });
+});
