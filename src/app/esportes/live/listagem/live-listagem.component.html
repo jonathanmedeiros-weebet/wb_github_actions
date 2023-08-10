@@ -1,5 +1,4 @@
 <div class="loading-listagem" *ngIf="showLoadingIndicator">
-    <div class="ssc-square banner"></div>
     <div class="ld-campeonato">
         <div class="header">
            <div class="ssc-square" style="width: 12px; height: 12px;"></div>
@@ -110,7 +109,6 @@
     </div>
 </div>
 <section #listagem class="content-sports">
-    <app-banners  *ngIf="!showLoadingIndicator"></app-banners>
     <div class="wrap-sticky">
         <div *ngIf="!showLoadingIndicator">
             <div class="sem-evento" *ngIf="!campeonatos.size || !temJogoAoVivo">
