@@ -1146,15 +1146,6 @@ gulp.task('bets60.wee.bet', function (done) {
     });
 });
 
-gulp.task('premiosbet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "premiosbet.net",
-        banca: "PRÊMIOS BET",
-        styles: "",
-    });
-});
-
 gulp.task('pixsportbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1517,17 +1508,6 @@ gulp.task('betsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('betbetix.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betbetix.com",
-        banca: "BETBETIX",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'><!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '568106641840572'); fbq('track', 'PageView'); fbq('track', 'ViewContect'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=568106641840572&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/5WSOiOS6b1' async></script>"
-    });
-});
-
 gulp.task('arena365.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1631,15 +1611,6 @@ gulp.task('brsports.bet', function (done) {
         server: "front3.wee.bet",
         host: "brsports.bet",
         banca: "BR SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('serjaobets.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "serjaobets.com",
-        banca: "SERJÃO BETS",
         styles: "",
     });
 });
@@ -2163,15 +2134,6 @@ gulp.task('goldeplacasport.com', function (done) {
     });
 });
 
-gulp.task('betselecao.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betselecao.com",
-        banca: "SELEÇÃOBET - Apostas Esportivas",
-        styles: "",
-    });
-});
-
 gulp.task('betvibra.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2383,15 +2345,6 @@ gulp.task('treinamento.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "treinamento.wee.bet",
         banca: "Treinamento Weebet",
-        styles: "",
-    });
-});
-
-gulp.task('casadopalpite.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "casadopalpite.com",
-        banca: "CASA DO PALPITE",
         styles: "",
     });
 });
