@@ -1278,7 +1278,8 @@ gulp.task('betnordeste.net', function (done) {
 gulp.task('betboladavez.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "betboladavez.online",
+        host: "betboladavez.wee.bet",
+        shared_url: "betboladavez.online",
         banca: "BET BOLA DA VEZ",
         styles: "",
     });
