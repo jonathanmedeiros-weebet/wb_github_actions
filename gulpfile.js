@@ -3226,3 +3226,21 @@ gulp.task('pixstars.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('weelbet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "weelbet.com",
+        banca: "WEEL BET",
+        styles: "",
+    });
+});
+
+gulp.task('showbets21.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "showbets21.com",
+        banca: "SHOW BETS 21",
+        styles: "",
+    });
+});

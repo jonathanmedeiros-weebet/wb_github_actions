@@ -340,7 +340,9 @@
         "valebet.bet": "gulp valebet.bet",
         "torcidabet.com.br": "gulp torcidabet.com.br",
         "bet24horas.com": "gulp bet24horas.com",
-        "pixstars.bet": "gulp pixstars.bet"
+        "pixstars.bet": "gulp pixstars.bet",
+        "weelbet.com": "gulp weelbet.com",
+        "showbets21.com": "gulp showbets21.com"
     },
     "private": true,
     "dependencies": {
