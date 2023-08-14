@@ -1,19 +1,20 @@
 <app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
 <div class="modal-header">
     <div>
-        <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
-    </div> 
+        <h5 class="modal-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
+        <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
+    </div>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
             <i class="fa fa-external-link"></i>
         </a>
-        <button type="button" *ngIf="!isMobile && impressaoPermitida()" (click)="print()" title="IMPRIMIR">
+        <button type="button" *ngIf="impressaoPermitida()" (click)="print()" title="IMPRIMIR">
             <i class="fa fa-print"></i>
         </button>
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="!isMobile && compartilhamentoPermitido()" (click)="shared()" class="shared-ticket" title="COMPARTILHAR">
+        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shared()" class="shared-ticket" title="COMPARTILHAR">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -23,9 +24,9 @@
 </div>
 <div class="modal-body cupom-ativo">
     <div class="cupom-header">
-        <h1 class="numero">
+        <!-- <h1 class="numero">
             {{aposta.codigo}}
-        </h1>
+        </h1> -->
         <div class="informacoes">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
@@ -58,8 +59,6 @@
                 <strong>Essa aposta não pode ser encerrada.</strong>
             </ngb-alert>
         </p>
-        <hr>
-        <hr>
         <div class="valores">
             <p class="total-jogos">
                 QUANTIDADE DE JOGOS: <span style="float:right">{{aposta.itens.length}}</span>
@@ -91,10 +90,51 @@
             Atenção: Confira como ficarão os novos valores <br>
             Essa operação não poderá ser desfeita
         </div>
-        <hr>
-        <hr>
+        <!-- <hr>
+        <hr> -->
+        <br>
     </div>
-    <div id="cupom">
+
+    <ng-container *ngFor="let item of aposta.itens">
+        <div id="cupom">
+            <div class="conteudo">
+                <div class="item">
+                    <p class="campeonato">
+                        {{item.campeonato_nome}}
+                    </p>
+                    <div style="display: flex; align-items: center; justify-content: space-between">
+                        <div>
+                            <p class="horario">
+                                {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
+                            </p>
+                            <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
+                               [ngClass]="resultadoClass(item)">
+                                {{item.time_a_nome}}
+                                {{item.time_a_resultado}} x {{item.time_b_resultado}}
+                                {{item.time_b_nome}}
+                            </p>
+                            <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
+                               [ngClass]="resultadoClass(item)">
+                                {{item.categoria_nome}}:
+                                {{item.odd_nome}}
+                                ( {{item.cotacao}} )
+                                <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                            </p>
+                            <p class="jogo-resultado">
+                                <span *ngIf="item.removido; else resultado">cancelado</span>
+                                <ng-template #resultado>{{item.resultado}}</ng-template>
+                            </p>
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <span *ngIf="item.encerrado">encerrado</span>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- <div id="cupom">
         <div class="conteudo">
             <ng-container *ngFor="let item of aposta.itens">
                 <div class="item">
@@ -132,7 +172,7 @@
                 <hr>
             </ng-container>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="rodape">
     <button class="btn btn-custom btn-block" style="border-radius: 0" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
@@ -154,7 +194,7 @@
         <i class="fa fa-spinner fa-spin"></i>
     </button>
 </div>
-<div class="rodape" *ngIf="!itemSelecionado && (isMobile && (impressaoPermitida() || compartilhamentoPermitido()))">
+<!-- <div class="rodape" *ngIf="!itemSelecionado && (isMobile && (impressaoPermitida() || compartilhamentoPermitido()))">
     <div class="p-3">
         <a class="btn btn-custom btn-block" *ngIf="impressaoPermitida()" (click)="print()">
             {{'geral.imprimir' | translate}}
@@ -163,4 +203,4 @@
             {{'geral.compartilhar' | translate}}
         </a>
     </div>
-</div>
+</div> -->

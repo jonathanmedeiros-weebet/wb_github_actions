@@ -1,22 +1,24 @@
 #cupom{
     /* width: 19.27em; */
     padding: 0 1em;
-    background: #f3f5d3;
-    color: #1e282c;
+    background: #363636;
+    /* color: #1e282c; */
     /* margin: 2em auto; */
     font-size: 12px;
+    border-radius: 5px;
+    margin-bottom: 4px;
 }
 
 .cupom-header {
     padding: 0 2em;
-    background: #f3f5d3;
-    color: #1e282c;
+    background: #1C1C1C;
+    color: white;
     /* margin: 2em auto; */
     font-size: 12px;
 }
 
 .cupom-ativo{
-    background: #f3f5d3;
+    background: #1C1C1C;
 }
 
 img{
@@ -56,8 +58,9 @@ hr {
 }
 
 .informacoes p{
-    margin: 1px;
+    /* margin: 1px; */
     font-size: 12px;
+    width: 100%;
 }
 
 .item .campeonato{
@@ -93,6 +96,7 @@ hr {
     margin: 3px 1px 1px 1px;
     font-weight: bold;
     font-size: 12px;
+    /* width: 100%; */
 }
 
 .rodape{
@@ -119,4 +123,8 @@ hr {
 .btn-outline-custom {
     border-color: var(--highlight);
     color: var(--highlight);
+}
+
+.info-horario {
+    color: #A9A9A9;
 }
