@@ -565,19 +565,6 @@ gulp.task('dolarbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('mssportes.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "mssportes.wee.bet",
-        banca: "MS Sportes",
-        styles: "--highlight: #008ef6; --foreground-highlight: #fff; --odds: #ffb701; --foreground-odds: #011e46; --foreground-selected-odds:#fff",
-        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #jogo-default-wrapper{ background: #0f0f11!important } .jogos, .eventos{ background: #0f0f11!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #0f0f11!important; } .footer{ background-color:#0f0f11!important; }" +
-            ".jogo-container .indentificacao-mobile, .jogo-container .indentificacao, .jogo-container .campeonato-nome{background: #e1e2e4;} .indentificacao .tempo{color: #fff!important;} .inside-event .tipo-apostas{ background-color: #0f0f11!important; color: white!important; } #esportes-footer{ color:white; } ",
-        scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/5f6b3ee6f0e7167d001303f3/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"+
-        "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-V8VVFKES6F'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-V8VVFKES6F');</script>"
-    });
-});
-
 gulp.task('slsports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1123,15 +1110,6 @@ gulp.task('betimperativo.wee.bet', function (done) {
     });
 });
 
-gulp.task('futebets.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "futebets.net",
-        banca: "FUTEBETS",
-        styles: "",
-    });
-});
-
 gulp.task('rondobet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1155,15 +1133,6 @@ gulp.task('bets60.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "bets60.wee.bet",
         banca: "BETS 60",
-        styles: "",
-    });
-});
-
-gulp.task('premiosbet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "premiosbet.net",
-        banca: "PRÊMIOS BET",
         styles: "",
     });
 });
@@ -1530,17 +1499,6 @@ gulp.task('betsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('betbetix.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betbetix.com",
-        banca: "BETBETIX",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'><!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '568106641840572'); fbq('track', 'PageView'); fbq('track', 'ViewContect'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=568106641840572&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/5WSOiOS6b1' async></script>"
-    });
-});
-
 gulp.task('arena365.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1598,7 +1556,8 @@ gulp.task('bet10.wee.bet', function (done) {
         styles: "",
         scripts: "<script type='application/javascript'>(function (d, b, t) {'use strict';var s = document.createElement(t), c = (d.getElementsByTagName(t)[0]);s.setAttribute('src', 'https://adscool.net/resources/content/bet10.js');s.setAttribute('async', true);if (c) {var n = c.parentNode; n.insertBefore(s, c);} else {b.appendChild(s);}})(document, document.body, 'SCRIPT');</script>",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WSNRRPX');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WSNRRPX'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WSNRRPX'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+        pixel: "<meta name='facebook-domain-verification' content='dqaih79tqgg7qs7flk9pkz7fhovx1v' />",
     });
 });
 
@@ -1643,15 +1602,6 @@ gulp.task('brsports.bet', function (done) {
         server: "front3.wee.bet",
         host: "brsports.bet",
         banca: "BR SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('serjaobets.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "serjaobets.com",
-        banca: "SERJÃO BETS",
         styles: "",
     });
 });
@@ -1939,15 +1889,6 @@ gulp.task('betsmilionaria.com.br', function (done) {
     });
 });
 
-gulp.task('r2bet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "r2bet.wee.bet",
-        banca: "R2 BET",
-        styles: "",
-    });
-});
-
 gulp.task('aguiasport.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2101,6 +2042,7 @@ gulp.task('novabet.site', function (done) {
         host: "novabet.site",
         banca: "NOVA BET",
         styles: "",
+        pixel: "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '991527785504009'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=991527785504009&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->",
     });
 });
 
@@ -2170,15 +2112,6 @@ gulp.task('goldeplacasport.com', function (done) {
         server: "front3.wee.bet",
         host: "goldeplacasport.com",
         banca: "GOL DE PLACA SPORT",
-        styles: "",
-    });
-});
-
-gulp.task('betselecao.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betselecao.com",
-        banca: "SELEÇÃOBET - Apostas Esportivas",
         styles: "",
     });
 });
@@ -2398,15 +2331,6 @@ gulp.task('treinamento.wee.bet', function (done) {
     });
 });
 
-gulp.task('casadopalpite.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "casadopalpite.com",
-        banca: "CASA DO PALPITE",
-        styles: "",
-    });
-});
-
 gulp.task('arena-esportiva.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2489,8 +2413,6 @@ gulp.task('brasileiraobet.com', function (done) {
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T23HZD3');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T23HZD3'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/dooKHPMUIy' async></script>",
     });
 });
 
@@ -2564,7 +2486,8 @@ gulp.task('kwbet.bet', function (done) {
         banca: "KW BET",
         styles: "",
         pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1818189268575540');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1818189268575540&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
-        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1353080865331087');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1353080865331087&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
+        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1353080865331087');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=1353080865331087&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
+        "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '834407621330608'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=834407621330608&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->",
         scripts: "<script type='text/javascript' src='//tags.fulllab.com.br/scripts/produto_kwbet.js' async></script>",
     });
 });
@@ -2916,8 +2839,6 @@ gulp.task('cassinowin.bet', function (done) {
         host: "cassinowin.bet",
         banca: "CASSINO WIN",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/4Vmbcr2Ir7' async></script>",
     });
 });
 
@@ -3198,6 +3119,8 @@ gulp.task('valebets.bet', function (done) {
         host: "valebets.bet",
         banca: "VALE BETS",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KSGZT37L');</script> <!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --> <noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-KSGZT37L ' height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript> <!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -3262,6 +3185,60 @@ gulp.task('goldvegas.net', function (done) {
         server: "front5.wee.bet",
         host: "goldvegas.net",
         banca: "GOLD VEGAS",
+        styles: "",
+    });
+});
+
+gulp.task('valebet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "valebet.bet",
+        banca: "VALE BET",
+        styles: "",
+    });
+});
+
+gulp.task('torcidabet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "torcidabet.com.br",
+        banca: "TORCIDA BET",
+        styles: "",
+    });
+});
+
+gulp.task('bet24horas.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet24horas.com",
+        banca: "BET 24 HORAS",
+        styles: "",
+    });
+});
+
+gulp.task('pixstars.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "pixstars.bet",
+        banca: "PIX STARS",
+        styles: "",
+    });
+});
+
+gulp.task('weelbet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "weelbet.com",
+        banca: "WEEL BET",
+        styles: "",
+    });
+});
+
+gulp.task('showbets21.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "showbets21.com",
+        banca: "SHOW BETS 21",
         styles: "",
     });
 });
