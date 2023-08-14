@@ -54,12 +54,13 @@
                 <div class="titulo">{{'cassino.maisPopulares' | translate}}</div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="destaques-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="destaques-left"
                      (click)="scrollLeft('destaques')" *ngIf="gamesDestaque.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline-destaque" #scrollGames id="destaques-scroll" (scroll)="onScroll('destaques')">
-                    <div class="game-tile" *ngFor="let game of gamesDestaque">
+                    <div class="game-tile game-tile-inline-destaque" *ngFor="let game of gamesDestaque">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -114,6 +115,7 @@
                     (click)="scrollRight('destaques')" *ngIf="gamesDestaque.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="destaques-fade-right" *ngIf="gamesDestaque.length > 2"></div>
             </div>
         </div>
         <div class="bloco">
@@ -126,6 +128,7 @@
                 </div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="slot-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="slot-left"
                      (click)="scrollLeft('slot')" *ngIf="gamesSlot.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
@@ -186,6 +189,7 @@
                      (click)="scrollRight('slot')" *ngIf="gamesSlot.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="slot-fade-right" *ngIf="gamesSlot.length > 2"></div>
             </div>
         </div>
 
@@ -199,6 +203,7 @@
                 </div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="raspadinha-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="raspadinha-left"
                      (click)="scrollLeft('raspadinha')" *ngIf="gamesRaspadinha.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
@@ -260,6 +265,7 @@
                      (click)="scrollRight('raspadinha')" *ngIf="gamesRaspadinha.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="raspadinha-fade-right" *ngIf="gamesRaspadinha.length > 2"></div>
             </div>
         </div>
 
@@ -273,6 +279,7 @@
                 </div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="mesa-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="mesa-left"
                      (click)="scrollLeft('mesa')" *ngIf="gamesMesa.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
@@ -333,6 +340,7 @@
                     (click)="scrollRight('mesa')" *ngIf="gamesMesa.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="mesa-fade-right" *ngIf="gamesMesa.length > 2"></div>
             </div>
         </div>
         <div class="bloco">
@@ -345,6 +353,7 @@
                 </div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="roleta-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="roleta-left"
                      (click)="scrollLeft('roleta')"  *ngIf="gamesRoleta.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
@@ -405,6 +414,7 @@
                      (click)="scrollRight('roleta')" *ngIf="gamesRoleta.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="roleta-fade-right" *ngIf="gamesRoleta.length > 2"></div>
             </div>
         </div>
         <div *ngIf="salsaCassino" class="bloco">
@@ -417,6 +427,7 @@
                 </div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="bingo-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="bingo-left"
                      (click)="scrollLeft('bingo')"  *ngIf="gamesBingo.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
@@ -477,6 +488,7 @@
                      (click)="scrollRight('bingo')" *ngIf="gamesBingo.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="bingo-fade-right" *ngIf="gamesBingo.length > 2"></div>
             </div>
         </div>
         <div class="bloco">
@@ -489,6 +501,7 @@
                 </div>
             </div>
             <div class="games-container">
+                <div class="more-games-fade more-games-fade-left" id="live-fade-left"></div>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="live-left"
                      (click)="scrollLeft('live')"  *ngIf="gamesLive.length > 5">
                     <i class="fa-solid fa-angle-left"></i>
@@ -549,6 +562,7 @@
                      (click)="scrollRight('live')" *ngIf="gamesLive.length > 5">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
+                <div class="more-games-fade more-games-fade-right" id="live-fade-right" *ngIf="gamesLive.length > 2"></div>
             </div>
         </div>
     </div>
