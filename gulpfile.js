@@ -1110,15 +1110,6 @@ gulp.task('betimperativo.wee.bet', function (done) {
     });
 });
 
-gulp.task('futebets.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "futebets.net",
-        banca: "FUTEBETS",
-        styles: "",
-    });
-});
-
 gulp.task('rondobet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1895,15 +1886,6 @@ gulp.task('betsmilionaria.com.br', function (done) {
         styles: "",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/ZJxAw9E4Ei' async></script>",
-    });
-});
-
-gulp.task('r2bet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "r2bet.wee.bet",
-        banca: "R2 BET",
-        styles: "",
     });
 });
 
