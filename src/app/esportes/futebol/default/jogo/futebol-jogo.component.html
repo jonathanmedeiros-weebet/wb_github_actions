@@ -119,8 +119,15 @@
 
     <section class="jogo-container-interno" [hidden]="!jogo || showLoadingIndicator">
         <div *ngIf="(loadedFrame && (isMobile && !theSportUrl)) || !isMobile" class="indentificacao-jogo">
+            <div>
+                <div class="horario-jogo">
+                    <div>{{jogo?.horario | moment: '' : true}} / {{jogo?.horario | moment: 'HH:mm'}}</div>
+                </div>
+            </div>
             <div class="info-jogo">
-                <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
+                <div class="campeonato-nome">
+                    <div class="ajusta-nome-campeonato">{{jogo?.campeonato?.nome}}</div>
+                </div>
                 <div class="nome">
                     <div class="time-a">
                         <div *ngIf="!showLoadingIndicator">
@@ -155,9 +162,6 @@
                             {{jogo?.time_b_nome}}
                         </div>
                     </div>
-                </div>
-                <div class="horario-jogo">
-                    <div>{{jogo?.horario | moment: '' : true}} / {{jogo?.horario | moment: 'HH:mm'}}</div>
                 </div>
             </div>
         </div>

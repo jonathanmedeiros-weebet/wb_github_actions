@@ -63,11 +63,12 @@
 
 .indentificacao-jogo {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 10px;
     position: relative;
-    height: 20vh;
+    height: 77%;
     max-height: 300px;
     background-image: url("https://cdn.wee.bet/img/stadium-background.png");
     background-size: cover;
@@ -91,12 +92,10 @@
 }
 
 .indentificacao-jogo .campeonato-nome {
-    position: absolute;
-    top: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 11px; /* ajuste fonte */
+    font-size: 14px; /* ajuste fonte */
     font-weight: 400;
     max-width: 400px;
     color: #FFFFFF;
@@ -183,7 +182,6 @@
 }
 
 .indentificacao-jogo .horario-jogo {
-    position: absolute;
     left: 20px;
     top: 12px;
     padding: 5px 10px;
@@ -339,6 +337,14 @@
     width: 50%;
 }
 
+.ajusta-nome-campeonato{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
 @media only screen and (max-width: 1279px) {
     .coluna-apostas-tipo {
         width: 100%;
@@ -371,7 +377,7 @@
     }
 
     .indentificacao-jogo .campeonato-nome {
-        max-width: 240px;
+        width: 100%;
         position: initial;
         margin: 10px 0;
     }

@@ -130,8 +130,13 @@
 
     <section class="wrap-sticky" [hidden]="!jogo || showLoadingIndicator">
         <div class="indentificacao">
+            <div class="horario">
+                <div>{{jogo?.horario | moment: '' : true}} / {{jogo?.horario | moment: 'HH:mm'}}</div>
+            </div>
             <div class="info">
-                <div class="campeonato-nome">{{jogo?.campeonato?.nome}}</div>
+                <div class="campeonato-nome">
+                    <div class="ajusta-nome-campeonato">{{jogo?.campeonato?.nome}}</div>
+                </div>
                 <div class="nome">
                     <div class="time-a">
                         <div *ngIf="!showLoadingIndicator">
@@ -162,9 +167,6 @@
                             {{jogo?.time_b_nome}}
                         </div>
                     </div>
-                </div>
-                <div class="horario">
-                    <div>{{jogo?.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</div>
                 </div>
             </div>
         </div>
