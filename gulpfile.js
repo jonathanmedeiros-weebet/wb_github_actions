@@ -1279,6 +1279,7 @@ gulp.task('betboladavez.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "betboladavez.wee.bet",
+        shared_url: "betboladavez.online",
         banca: "BET BOLA DA VEZ",
         styles: "",
     });
@@ -3243,11 +3244,11 @@ gulp.task('showbets21.com', function (done) {
     });
 });
 
-gulp.task('rc.wee.bet', function (done) {
+gulp.task('agorabets.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "rc.wee.bet",
-        banca: "Weebet RC",
+        host: "agorabets.com",
+        banca: "AGORA BETS",
         styles: "",
     });
 });
