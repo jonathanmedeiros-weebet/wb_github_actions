@@ -106,7 +106,7 @@
 
 .more-games-fade {
     position: absolute;
-    width: 36px;
+    width: 26px;
     height: calc(100% + 10px);
     top: 0;
     filter: blur(7px);
@@ -414,6 +414,9 @@
         height: 40px;
         margin-right: 1%;
     }
+    .scroll-button {
+        display: none !important;
+    }
 
     .filter{
         margin-top: 10px;
@@ -562,10 +565,6 @@
     .game-tile-inline, .game-tile-inline-destaque {
         min-width: 115px;
         min-height: 119px;
-    }
-
-    .scroll-button {
-        display: none;
     }
 
     #destaques-fade-right {

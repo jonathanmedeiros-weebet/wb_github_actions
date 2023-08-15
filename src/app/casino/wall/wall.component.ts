@@ -249,22 +249,30 @@ export class WallComponent implements OnInit, AfterViewInit {
         const maxScrollSize = scrollTemp.nativeElement.clientWidth;
 
         if (scrollLeft <= 0) {
-            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
-            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            }
             this.renderer.setStyle(fadeLeftTemp, 'display', 'none');
         } else {
-            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
-            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            }
             this.renderer.setStyle(fadeLeftTemp, 'display', 'block');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 0) {
-            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
-            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            }
             this.renderer.setStyle(fadeRightTemp, 'display', 'none');
         } else {
-            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
-            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            }
             this.renderer.setStyle(fadeRightTemp, 'display', 'block');
         }
     }
