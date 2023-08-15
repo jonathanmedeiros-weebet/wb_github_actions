@@ -3243,3 +3243,12 @@ gulp.task('showbets21.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('agorabets.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "agorabets.com",
+        banca: "AGORA BETS",
+        styles: "",
+    });
+});
