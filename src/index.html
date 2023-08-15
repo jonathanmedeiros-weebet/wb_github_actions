@@ -78,18 +78,18 @@
     <!-- <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css"> -->
     <script>
         function getAndroidVersion(ua) {
-			ua = (ua || navigator.userAgent).toLowerCase();
-			var match = ua.match(/android\s([0-9\.]*)/i);
+            ua = (ua || navigator.userAgent).toLowerCase();
+            var match = ua.match(/android\s([0-9\.]*)/i);
 
-			return match ? match[1] : undefined;
-		}
+            return match ? match[1] : undefined;
+        }
 
 
-		if (parseInt(getAndroidVersion()) < 7) {
+        if (parseInt(getAndroidVersion()) < 7) {
             if (location.search.indexOf('app') >= 0) {
-                window.location.href = 'http://192.168.0.25:4201?config=true&host=192.168.0.25&slug=weebet.eme&nome=teste';
+                window.location.href = 'https://[S3_FOLDER]/client-light/?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
             }
-		}
+        }
     </script>
 </head>
 
