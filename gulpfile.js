@@ -3228,10 +3228,10 @@ gulp.task('pixstars.bet', function (done) {
     });
 });
 
-gulp.task('weelbet.com', function (done) {
+gulp.task('eskybet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "weelbet.com",
+        host: "eskybet.com",
         banca: "WEEL BET",
         styles: "",
     });
