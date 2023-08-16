@@ -2730,6 +2730,8 @@ gulp.task('gamegol.bet', function (done) {
         server: "front5.wee.bet",
         host: "gamegol.bet",
         banca: "GAMEGOL.BET",
+        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
+        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'><script src='//code.jivosite.com/widget/EbO2qGOScc' async></script>",
         styles: "",
     });
 });
