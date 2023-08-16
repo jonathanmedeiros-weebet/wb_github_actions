@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, DoCheck} from '@angular/core';
 import {SidebarService} from '../../shared/services/utils/sidebar.service';
 import {MenuFooterService} from '../../services';
 import {Router} from '@angular/router';
@@ -8,10 +8,11 @@ import {Router} from '@angular/router';
     templateUrl: './wrapper.component.html',
     styleUrls: ['./wrapper.component.css']
 })
-export class CasinoWrapperComponent implements OnInit, OnDestroy {
+export class CasinoWrapperComponent implements OnInit, OnDestroy, DoCheck {
     @Input() showLoadingIndicator;
     mobileScreen = false;
     isVirtuais = false;
+    isGameView = false;
 
     constructor(
         private sideBarService: SidebarService,
@@ -34,6 +35,11 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy {
         }
 
     }
+
+    ngDoCheck(): void {
+        this.isGameView = this.router.url.split('/')[3] === 'play';
+    }
+
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
     }

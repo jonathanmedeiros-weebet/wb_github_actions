@@ -16,12 +16,22 @@ iframe{
 }
 
 .buttons-game-view {
-    display: flex;
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    border: 1px solid #1B1B1B;
+}
+
+.buttons-game-view span {
+    display: inline-flex;
+    height: 100%;
     align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    width: 45px;
+    font-size: 16px;
+    margin-left: 16px;
+}
+
+.buttons-game-view a {
+    margin: 2px 2px 2px 0;
 }
 
 .btn-cassino {
@@ -83,7 +93,6 @@ iframe{
 
 @media (min-width: 1025px) {
     .game-view {
-        background-color: var(--header);
         height: 100%;
     }
 
