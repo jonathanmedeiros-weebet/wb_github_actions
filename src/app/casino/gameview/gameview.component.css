@@ -65,7 +65,7 @@ iframe{
 @media only screen and (max-width: 1024px) {
     .game-view {
         position: fixed;
-        background-color: var(--background);
+        background-color: #000;
         width: 100%;
         height: 100%;
         z-index: 9999;
@@ -73,7 +73,7 @@ iframe{
     }
 
     .game-frame {
-        margin-top: 48px;
+        width: 100%;
         height: calc(100% - 50px);
     }
 
@@ -87,7 +87,7 @@ iframe{
     }
 
     .buttons-game-view {
-        right: 8px;
+        margin: 7px 0 0;
     }
 }
 
