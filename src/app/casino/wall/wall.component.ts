@@ -190,43 +190,43 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     filterSlot(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'vs';
+            return game.category === 'slot';
         });
     }
 
     filterCrash(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'ch';
+            return game.category === 'crash';
         });
     }
 
     filterRaspadinha(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'sc';
+            return game.category === 'scratchcard';
         });
     }
 
     filterRoleta(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'rl';
+            return game.category === 'roulette';
         });
     }
 
     filterMesa(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'tb' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+            return game.category === 'table';
         });
     }
 
     filterBingo(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'bingo';
+            return game.category === 'bingo';
         });
     }
 
     filterLive(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'lg';
+            return game.category === 'live';
         });
     }
 
