@@ -15,6 +15,13 @@
         </div>
         <div class="content-body">
             <div class="content">
+                <div style="width: 400px" class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <strong>Atenção!</strong> <br>
+                    Valor mínimo de saque: <strong>R$ {{valorMinSaque | currency}}</strong><br>
+                    Valor máximo de saque diário: <strong>R$ {{valorMaxSaqueDiario | currency}}</strong><br>
+                    Valor máximo de saque mensal: <strong> R$ {{valorMaxSaqueMensal | currency}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 <div *ngIf="cadastroCompleto && !respostaSolicitacao">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
