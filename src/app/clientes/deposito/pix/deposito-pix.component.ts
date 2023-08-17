@@ -109,6 +109,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     sautoPayQr;
     isMobile = false;
     permitirBonusPrimeiroDeposito = false;
+    bonusEsportivo = false;
+    bonusCassino = false;
     opcaoBonus = '';
     rolloverAtivo: Rollover[] = [];
     modalPromocao;
@@ -137,6 +139,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
+                    this.bonusEsportivo = res.bonus_esportivo;
+                    this.bonusCassino = res.bonus_cassino;
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
                         this.opcaoBonus = 'nenhum';

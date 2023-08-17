@@ -31,12 +31,17 @@
                 <label class="">{{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate}}</label><br>
                 <a class="btn-regras-bonus" (click)="abrirRegrasBonus()">Regras do Bônus</a>
                 <div class="buttons-container mt-3">
-                    <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
+                    <a *ngIf="bonusEsportivo" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
                         <i class="radio"></i>
                         <i class="fa-solid fa-coins" style="font-size: 20px"></i>
                         <span style="margin-left: 5px">{{'financeiro.receberBonus' | translate}}</span>
                     </a>
-                    <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
+                    <a *ngIf="bonusCassino" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'cassino'}" (click)="selecionarOpcaoBonus('cassino')">
+                        <i class="radio"></i>
+                        <i class="fa-solid fa-coins" style="font-size: 20px"></i>
+                        <span style="margin-left: 5px">{{'financeiro.receberBonusCassino' | translate}}</span>
+                    </a>
+                    <a  class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
                         <i class="radio"></i>
                         <i class="fa-solid fa-square-xmark" style="font-size: 20px"></i>
                         <span style="margin-left: 5px">{{'financeiro.naoQueroBonus' | translate}}</span>
