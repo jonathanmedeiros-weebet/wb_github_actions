@@ -3234,7 +3234,7 @@ gulp.task('eskybet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "eskybet.com",
-        banca: "WEEL BET",
+        banca: "ESKY BET",
         styles: "",
     });
 });
