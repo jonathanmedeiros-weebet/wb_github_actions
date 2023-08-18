@@ -1,21 +1,20 @@
 import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
 
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ClienteService } from './../../../../services';
+import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Usuario} from '../../../models/usuario';
-import { FormValidations, PasswordValidation } from 'src/app/shared/utils';
+import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
 
 import * as moment from 'moment';
-import { Pagina } from 'src/app/models';
+import {Pagina} from 'src/app/models';
 import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
-import {NgHcaptchaService} from 'ng-hcaptcha';
-import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -25,6 +24,7 @@ import { RecaptchaErrorParameters } from "ng-recaptcha";
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
+    isMobile = false;
     unsub$ = new Subject();
     usuario = new Usuario();
     termosDeUso: Pagina;
@@ -40,6 +40,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     hCaptchaLanguage;
     provedorCaptcha;
     validacaoEmailObrigatoria;
+    autoPreenchimento = true;
+    possuiCodigoAfiliado = false;
+
+    user: any;
+    loginGoogleAtivo = false;
+    formSocial = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -54,17 +60,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private modalService: NgbModal,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
+        private socialAuth: SocialAuthService,
     ) {
         super();
     }
 
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
+        this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
 
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
+
+        this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
 
         this.translate.onLangChange.subscribe(res => {
             this.hCaptchaLanguage = res.lang;
@@ -84,24 +94,43 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.route.queryParams
             .subscribe((params) => {
             if (params.afiliado) {
-                sessionStorage.setItem('afiliado', params.afiliado);
+                this.clientesService.codigoFiliacaoCadastroTemp = params.afiliado;
+                this.possuiCodigoAfiliado = true;
             }
-             this.form.get('afiliado').patchValue(sessionStorage.getItem('afiliado'));
+
+            if (this.clientesService.codigoFiliacaoCadastroTemp) {
+                this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
+                this.possuiCodigoAfiliado = true;
+            }
         });
+
+        if (this.paramsService.getOpcoes().habilitar_login_google) {
+            this.loginGoogleAtivo = true;
+            this.socialAuth.authState.subscribe((user) => {
+                if(user) {
+                    this.formSocial = true;
+                    this.form.patchValue({
+                        nome: user.firstName,
+                        sobrenome: user.lastName,
+                        email: user.email,
+                        googleId: user.id,
+                        googleIdToken: user.idToken,
+                    })
+                }
+
+                this.user = user;
+            });
+        }
     }
 
     createForm() {
         this.form = this.fb.group({
-            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            sobrenome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-            usuario: [null, [
-                    Validators.minLength(3),
-                    Validators.pattern('^[a-zA-Z0-9_]+$'),
-                    Validators.required
-                ], this.validarLoginUnico.bind(this)],
+            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            usuario: [null],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6)]],
+            senha: [null],
+            senha_confirmacao: [null],
+            nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
@@ -109,8 +138,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
             check_1: [''],
-            check_2: ['']
-        }, {validator: PasswordValidation.MatchPassword});
+            check_2: [''],
+            googleId:[''],
+            googleIdToken:[''],
+            btag: [this.route.snapshot.queryParams.btag]
+        });
     }
 
     validarLoginUnico(control: AbstractControl) {
@@ -136,6 +168,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     submit() {
         const values = this.form.value;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
+        if (!this.autoPreenchimento) {
+            values.nomeCompleto = values.nome;
+        }
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
@@ -150,7 +185,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             centered: true,
                             backdrop: 'static'
                         });
-                    }else{
+                    } else {
                         this.modalService.open(this.ativacaoCadastroModal,{
                             ariaLabelledBy: 'modal-basic-title',
                             windowClass: 'modal-pop-up',
@@ -181,5 +216,41 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.modalTermosRef) {
             this.modalTermosRef.dismiss();
         }
+    }
+
+    clearSocialForm() {
+        this.formSocial = false;
+        this.form.patchValue({
+            googleId: '',
+            googleIdToken: '',
+        })
+    }
+
+    validarCpf() {
+        const { cpf } = this.form.value;
+
+        if(this.autoPreenchimento) {
+            this.form.patchValue({nome: 'Pesquisando...'});
+            this.clientesService.validarCpf(cpf).subscribe(
+                res => {
+                    if (res.validarCpfAtivado) {
+                        this.autoPreenchimento = true;
+                        this.form.patchValue({
+                            nascimento: res.dataNascimento,
+                            nome: res.nome?.split(' ')[0] + ' *** ***',
+                            nomeCompleto: res.nome
+                        });
+                    } else {
+                        this.form.patchValue({nome: ''});
+                        this.autoPreenchimento = false;
+                    }
+                },
+                error => {
+                    this.form.patchValue({nome: ''});
+                    this.messageService.error(error);
+                }
+            );
+        }
+
     }
 }

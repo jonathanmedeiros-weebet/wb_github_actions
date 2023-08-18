@@ -1,5 +1,9 @@
 @import "skeleton-screen-css";
 
+a {
+     text-decoration: none;
+}
+
 .owl-carousel .owl-item img {
     width: auto;
 }
@@ -651,7 +655,8 @@ button {
 
 .modal-header {
     border-bottom: 1px solid var(--foreground);
-    padding: 20px 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     align-items: center;
 }
 
@@ -706,20 +711,23 @@ button {
 }
 
 .action-buttons {
-    margin: -1rem -1rem -1rem auto;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
 }
 
 .action-buttons button, .action-buttons a {
     background-color: transparent;
     border: 0;
-    padding: 1rem 1rem;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .8;
+    padding-left: 14px;
 }
 
 .action-buttons a {
@@ -727,6 +735,7 @@ button {
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    padding-right: 7px;
 }
 
 .action-buttons button span {
@@ -1673,6 +1682,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .input-md label.disabled {
     background: transparent !important;
+}
+
+.btn-close{
+    background: #00000000;
 }
 
 .btn-close i {

@@ -29,6 +29,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 // Translation Modules
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -51,6 +52,25 @@ export const APP_TOKENS = [
     }
 ];
 
+export function googleFactory(service: ParametrosLocaisService) {
+    const googleClientId = service.getOpcoes().login_google_client_id;
+
+    return {
+        autoLogin: false,
+        providers: [
+            {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider(
+                    googleClientId
+                )
+            }
+        ],
+        onError: (err) => {
+            console.error(err);
+        }
+    } as SocialAuthServiceConfig
+}
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -66,6 +86,7 @@ export const APP_TOKENS = [
         }),
         NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         AppRoutingModule,
+        SocialLoginModule,
 
         LayoutModule,
         CupomModule,
@@ -73,7 +94,14 @@ export const APP_TOKENS = [
             timeOut: 7000
         }),
     ],
-    providers: [APP_TOKENS],
+    providers: [
+        APP_TOKENS,
+        {
+            provide: 'SocialAuthServiceConfig',
+            useFactory: googleFactory,
+            deps: [ParametrosLocaisService]
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

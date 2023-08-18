@@ -20,7 +20,6 @@ export class FooterComponent implements OnInit {
     LOGO = config.LOGO;
     isAppMobile;
     isMobile;
-    trevoOne = false;
     hasApiPagamentos = false;
     hasRegras = false;
     hasTermosCondicoes = false;
@@ -45,6 +44,7 @@ export class FooterComponent implements OnInit {
     linkLinkedin;
     exibirLinkAfiliado = false;
     slug: string;
+    sharedUrl: string;
     linkYoutube;
 
     constructor(
@@ -70,6 +70,7 @@ export class FooterComponent implements OnInit {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
         this.exibirLinkAfiliado = this.paramsLocais.getOpcoes().exibir_link_afiliado;
         this.slug = config.SLUG;
+        this.sharedUrl = config.SHARED_URL;
 
         this.linkTwitter = this.paramsLocais.getOpcoes().linkTwitter;
         this.linkTikTok = this.paramsLocais.getOpcoes().linkTikTok;
@@ -83,10 +84,6 @@ export class FooterComponent implements OnInit {
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
 
         this.isMobile = window.innerWidth < 1025;
-
-        if (location.host.search(/trevoone/) >= 0) {
-            this.trevoOne = true;
-        }
 
         this.authService.logado
             .pipe(takeUntil(this.unsub$))

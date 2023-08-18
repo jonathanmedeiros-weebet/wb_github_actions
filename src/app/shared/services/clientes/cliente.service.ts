@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
+    codigoFiliacaoCadastroTemp;
 
     constructor(
         private http: HttpClient,
@@ -42,6 +43,18 @@ export class ClienteService {
 
     getCliente(id) {
         return this.http.get(`${this.clienteUrl}/getCliente/${id}`, this.headers.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    validarCpf(cpf: any) {
+        return this.http.get(`${this.clienteUrl}/consultar-cpf`, this.headers.getRequestOptions(true, { cpf }))
             .pipe(
                 map(
                     (response: any) => {

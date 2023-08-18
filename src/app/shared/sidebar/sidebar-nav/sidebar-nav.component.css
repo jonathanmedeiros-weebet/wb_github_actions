@@ -49,7 +49,9 @@
 .regiao-nome {
     align-self: center;
     margin-left: 5px;
-    white-space: normal;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
 }
 
 .sidebar-nav li a:hover {

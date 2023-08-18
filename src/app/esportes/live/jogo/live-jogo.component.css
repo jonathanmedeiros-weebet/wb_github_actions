@@ -488,6 +488,14 @@ section.jogo {
 }
 
 @media only screen and (max-width: 1024px) {
+    .loading-template .cols .ld-odds {
+        width: 100%;
+    }
+
+    .loading-template .banner {
+        height: 260px;
+    }
+
     .indentificacao-jogo {
         margin: 0 0 5px 0;
     }

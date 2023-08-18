@@ -6,10 +6,13 @@
     </a>
 </div>
 <div class="modal-body">
-    <p>{{msg}}</p>
 
-    <div class="actions">
-        <button type="button" class="btn btn-custom2" (click)="activeModal.dismiss('')" data-dismiss="modal">Não</button>
-        <button type="button" class="btn btn-custom" (click)="activeModal.close('')">Sim</button>
+    <div style="min-width: 143px;">
+        <div><p>{{msg}}</p></div>
+
+        <div class="actions">
+            <button type="button" class="btn btn-custom2" (click)="activeModal.dismiss('')" data-dismiss="modal">Não</button>
+            <button type="button" class="btn btn-custom" (click)="activeModal.close('')">Sim</button>
+        </div>
     </div>
 </div>

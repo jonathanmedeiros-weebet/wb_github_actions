@@ -68,6 +68,24 @@ export class FormatarFornecedoresPipe implements PipeTransform {
             case 'blueprint':
                 fornecedorFormatado = 'Blueprint';
                 break;
+            case 'rubyplay':
+                fornecedorFormatado = 'Ruby Play';
+                break;
+            case 'cassinomobi':
+                fornecedorFormatado = 'Cassino Mobi';
+                break;
+            case 'mga':
+                fornecedorFormatado = 'MGA';
+                break;
+            case 'espressogames':
+                fornecedorFormatado = 'Espresso Games';
+                break;
+            case 'beterlive':
+                fornecedorFormatado = 'Beter Live';
+                break;
+            case 'hacksaw':
+                fornecedorFormatado = 'Hacksaw';
+                break;
         }
         return fornecedorFormatado;
     }

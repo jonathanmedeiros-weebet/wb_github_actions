@@ -63,8 +63,9 @@
 
 .indentificacao {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     padding: 10px;
     position: relative;
     height: 20vh;
@@ -73,7 +74,6 @@
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    /*margin-bottom: 5px;*/
     border-radius: 5px;
 }
 
@@ -92,8 +92,10 @@
     max-width: 400px;
     font-size: 14px;
     color: #FFFFFF;
-    position: absolute;
-    top: 10px;
+    height: 33%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
 }
 
 .indentificacao .nome {
@@ -106,19 +108,12 @@
     color: #FFFFFF;
 }
 
-.indentificacao .nome {
-    margin-top: 5px;
-}
 
 .indentificacao .horario {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 400px;
-    font-size: 14px;
-    color: #FFFFFF;
-    position: absolute;
-    bottom: 1px;
+    padding: 5px 10px;
+    background-color: #181818;
+    border-radius: 25px;
+    color: var(--highlight);
 }
 
 .content-sports {
@@ -240,20 +235,105 @@
     width: 100%;
 }
 
+.loading-template .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--game);
+    padding: 15px;
+}
+
+.loading-template .header .titles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.loading-template .banner {
+    height: 185px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.loading-template .tab-nav {
+    display:flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--game);
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.loading-template .ld-odds .item-odd {
+    margin-bottom: 5px;
+}
+
+.loading-template .ld-odds .item-odd .item-header {
+    background: var(--game);
+    padding: 15px;
+    margin-bottom: 2px;
+}
+
+.loading-template .ld-odds .item-opcoes {
+    display: flex;
+    background: var(--game);
+    padding: 10px;
+    gap: 5px;
+}
+
+.loading-template .cols {
+    display: flex;
+    gap: 5px;
+}
+
+.loading-template .cols .ld-odds {
+    width: 50%;
+}
+
+.ajusta-nome-campeonato{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 320px), screen and (max-height: 740px) {
+    .indentificacao {
+        height: 29vh;
+    }
+}
 @media only screen and (max-width: 1024px) {
+    .loading-template .cols .ld-odds {
+        width: 100%;
+    }
+
+    .loading-template .banner {
+        height: 200px;
+    }
+
     .indentificacao .div-back {
         top: 0;
     }
 
+    .campeonato-nome{
+        height: 45px;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+    }
     .indentificacao .campeonato-nome {
+        width: 100%;
+        text-align: center;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 400px;
         font-size: 14px;
         color: #FFFFFF;
-        position: absolute;
-        top: 6px;
+        padding-left: 5px;
     }
 
     .nome .time-a,

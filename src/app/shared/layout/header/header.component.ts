@@ -86,6 +86,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         paths: 'exact'
     };
     mostrarSaldo;
+    firstLoggedIn;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -131,10 +132,19 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 isLoggedIn => {
+                    if (!this.firstLoggedIn) {
+                        this.firstLoggedIn = isLoggedIn;
+                    }
+
                     this.isLoggedIn = isLoggedIn;
                     if (isLoggedIn) {
                         this.getUsuario();
-                        this.getPosicaoFinanceira();
+
+                        if (this.usuario.tipo_usuario === 'cambista' && this.firstLoggedIn) {
+                            this.getPosicaoFinanceira();
+                        } else {
+                            this.getPosicaoFinanceira();
+                        }
                     }
                 }
             );

@@ -18,7 +18,7 @@
             <div class="content-body">
                 <form (ngSubmit)="onSubmit()" [formGroup]="form">
                     <div class="filtros">
-                        <select class="inverted-out form-control">
+                        <select class="inverted-out form-control" formControlName="periodo">
                             <option value="semana_atual">{{'dias.semanaAtual' | translate}}</option>
                             <option value="semana_anterior">{{'dias.semanaPassada' | translate}}</option>
                         </select>
