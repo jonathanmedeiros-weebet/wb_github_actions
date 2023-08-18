@@ -287,6 +287,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.showLoading = true;
         const params = {};
 
+        console.log("Aqui");
+
         if (aposta.id === this.apostas[0].id) {
             params['verificar-ultima-aposta'] = 1;
         }
@@ -303,8 +305,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                 apostaLocalizada => {
                     this.modalRef = this.modalService.open(modalAposta, {
                         ariaLabelledBy: 'modal-basic-title',
+                        size: 'lg',
                         centered: true,
-                        scrollable: true
+                        windowClass: 'modal-700'
                     });
                     this.modalRef.componentInstance.aposta = apostaLocalizada;
                     this.modalRef.componentInstance.showCancel = true;
