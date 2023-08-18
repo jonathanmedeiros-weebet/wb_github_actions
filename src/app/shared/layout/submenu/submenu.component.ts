@@ -266,6 +266,27 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: "crash",
+                name: this.translate.instant('submenu.crash'),
+                link: '/casino/c/wall/crash',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/crash.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            // {
+            //     id: 'live-cassino',
+            //     name: this.translate.instant('submenu.cassinoAoVivo'),
+            //     link: '/casino/c/wall/live',
+            //     icon_class: 'fa-solid fa-dice',
+            //     svgIcon: true,
+            //     svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/cassino_ao_vivo.svg',
+            //     queryParams: '',
+            //     category: 'cassino',
+            //     active: this.paramsService.getOpcoes().casino
+            // },
+            {
                 id: 'slot',
                 name: this.translate.instant('submenu.slot'),
                 link: '/casino/c/wall/slot',
@@ -273,16 +294,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 category: 'cassino',
                 svgIcon: true,
                 svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/slot.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'raspadinha',
-                name: this.translate.instant('submenu.raspadinha'),
-                link: '/casino/c/wall/raspadinha',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/raspadinha.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -306,6 +317,16 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'raspadinha',
+                name: this.translate.instant('submenu.raspadinha'),
+                link: '/casino/c/wall/raspadinha',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/raspadinha.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
                 id: 'bingo',
                 name: 'Bingo',
                 link: '/casino/c/wall/bingo',
@@ -315,27 +336,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
                 active: this.paramsService.getOpcoes().salsa_cassino
             },
-            {
-                id: "crash",
-                name: this.translate.instant('submenu.crash'),
-                link: '/casino/c/wall/crash',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/crash.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'live-cassino',
-                name: this.translate.instant('submenu.cassinoAoVivo'),
-                link: '/casino/c/wall/live',
-                icon_class: 'fa-solid fa-dice',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/cassino_ao_vivo.svg',
-                queryParams: '',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            }
         ];
 
         this.submenuItems = this.submenu.filter((item) => {
