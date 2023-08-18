@@ -228,6 +228,7 @@
         "seninha": "Seninha",
         "todos": "Todos",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
@@ -263,6 +264,7 @@
     "cassino": {
         "maisPopulares": "Mais Populares",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
