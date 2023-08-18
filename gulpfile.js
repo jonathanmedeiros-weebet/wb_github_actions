@@ -3234,7 +3234,7 @@ gulp.task('eskybet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "eskybet.com",
-        banca: "WEEL BET",
+        banca: "ESKY BET",
         styles: "",
     });
 });
@@ -3253,6 +3253,33 @@ gulp.task('agorabets.com', function (done) {
         server: "front5.wee.bet",
         host: "agorabets.com",
         banca: "AGORA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('brasilplay.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "brasilplay.com",
+        banca: "BRASIL PLAY",
+        styles: "",
+    });
+});
+
+gulp.task('fortalezabets.online', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "fortalezabets.online",
+        banca: "FORTALEZA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('apostabrasil.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostabrasil.com",
+        banca: "APOSTA BRASIL",
         styles: "",
     });
 });
