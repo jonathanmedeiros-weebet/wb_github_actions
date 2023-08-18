@@ -19,6 +19,7 @@
 
 .bloco .bloco-header {
     display: flex;
+    font-size: 16px;
 }
 
 .bloco .titulo {
@@ -107,8 +108,8 @@
 .more-games-fade {
     position: absolute;
     width: 26px;
-    height: calc(100% + 10px);
-    top: 0;
+    height: calc(100% + 20px);
+    top: -10px;
     filter: blur(7px);
     z-index: 1;
 }
@@ -154,19 +155,25 @@
 }
 
 .game-tile .game-button-play {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
     color: var(--header);
     background-color: var(--highlight);
-    width: 60%;
-    height: 35px;
+    width: 70%;
+    height: 42px;
 }
 
 .game-tile .game-button-demo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
     background-color: var(--header);
     border-color: var(--foreground-header);
     color: var(--foreground-header);
-    width: 60%;
-    height: 35px;
-    margin-bottom: 20px;
+    width: 70%;
+    height: 42px;
+    margin-bottom: 18px;
 }
 
 .game-tile .game-button-lock {
@@ -193,11 +200,11 @@
 }
 
 .game-tile:hover .game-button-play {
-    display: block;
+    display: flex;
 }
 
 .game-tile:hover .game-button-demo {
-    display: block;
+    display: flex;
 }
 
 .hide {
@@ -365,6 +372,10 @@
         pointer-events: none;
     }
 
+    .game-tile .game-button-demo {
+        margin-bottom: 10px;
+    }
+
     .game-tile-buttons:hover a {
         pointer-events: unset;
     }
@@ -431,9 +442,9 @@
         width: auto;
         justify-content: center;
         align-items: center;
-        font-size: 23px;
+        font-size: 21px;
         display: flex;
-        margin-left:  10px;
+        margin-left:  18px;
     }
 
     .search-box{
@@ -504,7 +515,14 @@
         width: auto !important;
     }
 
+    .more-games-fade {
+        height: calc(100% + 10px);
+        top: 0;
+    }
 
+    #destaques-fade-right {
+        display: block;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
@@ -561,13 +579,19 @@
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 450px) {
     .game-tile-inline, .game-tile-inline-destaque {
-        min-width: 115px;
-        min-height: 119px;
+        min-width: 138px;
+        min-height: 120px;
     }
 
-    #destaques-fade-right {
-        display: block;
+    .game-tile .game-button-play, .game-tile .game-button-demo {
+        height: 35px !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .game-tile-inline, .game-tile-inline-destaque {
+        min-width: 130px;
     }
 }
