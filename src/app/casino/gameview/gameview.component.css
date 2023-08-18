@@ -16,12 +16,22 @@ iframe{
 }
 
 .buttons-game-view {
-    display: flex;
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    border: 1px solid #1B1B1B;
+}
+
+.buttons-game-view span {
+    display: inline-flex;
+    height: 100%;
     align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    width: 45px;
+    font-size: 16px;
+    margin-left: 16px;
+}
+
+.buttons-game-view a {
+    margin: 2px 2px 2px 0;
 }
 
 .btn-cassino {
@@ -55,7 +65,7 @@ iframe{
 @media only screen and (max-width: 1024px) {
     .game-view {
         position: fixed;
-        background-color: var(--background);
+        background-color: #000;
         width: 100%;
         height: 100%;
         z-index: 9999;
@@ -63,7 +73,7 @@ iframe{
     }
 
     .game-frame {
-        margin-top: 48px;
+        width: 100%;
         height: calc(100% - 50px);
     }
 
@@ -77,13 +87,12 @@ iframe{
     }
 
     .buttons-game-view {
-        right: 8px;
+        margin: 7px 0 0;
     }
 }
 
 @media (min-width: 1025px) {
     .game-view {
-        background-color: var(--header);
         height: 100%;
     }
 
