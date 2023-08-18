@@ -343,7 +343,10 @@
         "pixstars.bet": "gulp pixstars.bet",
         "eskybet.com": "gulp eskybet.com",
         "showbets21.com": "gulp showbets21.com",
-        "agorabets.com": "gulp agorabets.com"
+        "agorabets.com": "gulp agorabets.com",
+        "brasilplay.com": "gulp brasilplay.com",
+        "fortalezabets.online": "gulp fortalezabets.online",
+        "apostabrasil.com": "gulp apostabrasil.com"
     },
     "private": true,
     "dependencies": {

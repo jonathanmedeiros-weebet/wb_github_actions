@@ -3256,3 +3256,30 @@ gulp.task('agorabets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brasilplay.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "brasilplay.com",
+        banca: "BRASIL PLAY",
+        styles: "",
+    });
+});
+
+gulp.task('fortalezabets.online', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "fortalezabets.online",
+        banca: "FORTALEZA BETS",
+        styles: "",
+    });
+});
+
+gulp.task('apostabrasil.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostabrasil.com",
+        banca: "APOSTA BRASIL",
+        styles: "",
+    });
+});
