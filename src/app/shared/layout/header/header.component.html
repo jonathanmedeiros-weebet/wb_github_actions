@@ -394,16 +394,8 @@
                             </div>
                             <div class="saldos-item"
                                 *ngIf="isCliente">
-                                <span class="">{{'geral.bonus' | translate}} Esportivo</span>
+                                <span class="">{{'geral.bonus' | translate}}</span>
                                 <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
-                            </div>
-                            <div  *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
-                                <i class="separador"></i>
-                            </div>
-                            <div class="saldos-item"
-                                 *ngIf="isCliente">
-                                <span class="">{{'geral.bonus' | translate}} Cassino</span>
-                                <span class="dados">{{posicaoFinanceira.bonusCassino | currency}}</span>
                             </div>
                         </div>
 
