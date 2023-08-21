@@ -79,14 +79,30 @@
         }
     </style>
     <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/[S3_FOLDER]/param/cores.css?v=[TIMESTAMP]">
-    
+
     <meta property="og:type" content="website">
     <meta property="og:title" content="[BANCA]">
     <meta property="og:description" content="[BANCA]">
     <meta property="og:url" content="[HOST]">
     <meta property="og:image" content="https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/icone_app.png">
     <meta property="og:image:alt" content="LOGO [BANCA]">
-    <meta name="description" content="[BANCA]"> 
+    <meta name="description" content="[BANCA]">
+
+    <script>
+        function getAndroidVersion(ua) {
+            ua = (ua || navigator.userAgent).toLowerCase();
+            var match = ua.match(/android\s([0-9\.]*)/i);
+
+            return match ? match[1] : undefined;
+        }
+
+
+        if (parseInt(getAndroidVersion()) < 7) {
+            if (location.search.indexOf('app') >= 0) {
+                window.location.href = 'https://[S3_FOLDER]/client-light/?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
+            }
+        }
+    </script>
 </head>
 
 <body class="dark">
