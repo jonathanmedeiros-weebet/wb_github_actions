@@ -23,8 +23,8 @@
     </div>
 </div>
 <div class="modal-body cupom-ativo">
-    <div class="cupom-header row">
-        <div class="informacoes" [class.col-sm-4]="!isMobile">
+    <div class="cupom-header">
+        <div class="informacoes">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
                     <b>Cliente: </b><span>{{aposta.apostador}}</span>
@@ -43,29 +43,29 @@
                 <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
             </p>
         </div>
-        <div class="valores" [class.col-sm-4]="!isMobile">
+        <div class="valores" >
             <p *ngIf="falhaSimulacao">
                 <ngb-alert [dismissible]="false" type='danger'>
                     <strong>Essa aposta não pode ser encerrada.</strong>
                 </ngb-alert>
             </p>
             <p class="total-jogos">
-                Quantidade de jogos: <span [ngStyle]="isMobile ? {'float': 'right'} : {}">{{aposta.itens.length}}</span>
+                Quantidade de jogos: <span>{{aposta.itens.length}}</span>
             </p>
             <p class="aposta">
                 Cotação: 
-                <span [ngStyle]="isMobile ? {'float': 'right'} : {}">
+                <span>
                     {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}
                 </span>
             </p>
             <p class="aposta">
-                Valor apostado: <span [ngStyle]="isMobile ? {'float': 'right'} : {}"> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
+                Valor apostado: <span> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
             </p>
         </div>
-        <div class="valores" [class.col-sm-4]="!isMobile">
+        <div class="valores">
             <p class="ganho">
                 Possível retorno:
-                <span [ngStyle]="isMobile ? {'float': 'right'} : {}">
+                <span >
                     <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho |
                         currency}}</span>
                     <span class="dados-simulacao" *ngIf="!falhaSimulacao"> {{novaPossibilidadeGanho | currency}}</span>
@@ -73,19 +73,19 @@
             </p>
             <p class="resultado">
                 <b>Resultados: </b>
-                <span *ngIf="aposta.resultado" [ngStyle]="isMobile ? {'float': 'right'} : {}">{{aposta.resultado | titlecase}}</span>
-                <span *ngIf="!aposta.resultado" [ngStyle]="isMobile ? {'float': 'right'} : {}">aguardando</span>
+                <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
+                <span *ngIf="!aposta.resultado">aguardando</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-                {{'geral.premio' | translate}}: <span [ngStyle]="isMobile ? {'float': 'right'} : {}">{{aposta.premio | currency}}</span>
+                {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
             </p>
             <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-                Cambista paga: <span [ngStyle]="isMobile ? {'float': 'right'} : {}">{{cambistaPaga | currency}}</span>
+                Cambista paga: <span>{{cambistaPaga | currency}}</span>
             </p>
         </div>
         <br>
     </div>
-    <div *ngIf="!isMobile; else modalMobile">
+    <div>
         <table class="table">
             <thead>
                 <tr>
@@ -136,7 +136,7 @@
         </table>
     </div>
 
-    <ng-template #modalMobile>
+    <!-- <ng-template #modalMobile>
         <ng-container *ngFor="let item of aposta.itens">
             <div id="cupom">
                 <div class="conteudo">
@@ -173,15 +173,15 @@
                                     </ng-template>
                                 </p>
                             </div>
-                            <!-- <div style="margin-left: 10px;">
+                            <div style="margin-left: 10px;">
                                 <span *ngIf="item.encerrado">encerrado</span>
-                            </div> -->
+                            </div>
                         </div>                    
                     </div>
                 </div>
             </div>
         </ng-container>
-    </ng-template>
+    </ng-template> -->
 </div>
 
 <div class="modal-footer">

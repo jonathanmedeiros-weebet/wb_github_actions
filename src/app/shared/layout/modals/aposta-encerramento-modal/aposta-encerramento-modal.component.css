@@ -30,9 +30,10 @@
     /* padding: 0 2em; */
     background: #1C1C1C;
     color: white;
-    /* margin: 2em auto; */
     font-size: 12px;
     margin-bottom: 13px;
+    max-height: 91px;
+    column-count: 3;
 }
 
 .cupom-ativo{
@@ -216,5 +217,17 @@ tbody tr:last-child td:first-child {
     width: 100%;
     border-radius: 5;
     margin: 6px auto;
+ }
+
+ @media only screen and (max-width: 500px) {
+    .table thead {
+        display: none;
+    }
+    .cupom-header {
+        max-height: none; /* Remove a restrição de altura */
+        column-count: 1; /* Define uma coluna única */
+    }
+
+
  }
  
