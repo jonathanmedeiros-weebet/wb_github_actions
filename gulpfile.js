@@ -3276,3 +3276,12 @@ gulp.task('apostabrasil.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lottomaster.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "lottomaster.bet",
+        banca: "LOTTO MASTER",
+        styles: "",
+    });
+});
