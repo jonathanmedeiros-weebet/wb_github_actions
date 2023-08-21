@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            <ng-template #campeonatoTemplate let-sportId>
+            <ng-template #campeonatoTemplate let-sportId="sportId">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder; trackBy: trackById">
                     <ng-container *ngIf="campeonatoPermitido(campeonato.value._id)">
                         <div class="campeonato-header" (click)="toggleCampeonato(campeonato.value._id)">
@@ -183,23 +183,26 @@
                             <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
                                 <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
                                     <div class="tempo-box">
-                                        <div class="aovivo-label">
+                                        <div class="aovivo-label" *ngIf="sportId == 1">
                                             <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                         </div>
                                         <div class="tempo">
                                             {{jogo.value.info.minutos}}"
+                                        </div>
+                                        <div class="tempo" *ngIf="sportId == 18">
+                                            {{jogo.value.info.tempo}}ª Parte
                                         </div>
                                     </div>
                                     <div class="nome">
                                         <div class="time-a">
                                             <div class="escudo-container">
                                             <span *ngIf="jogo.value.time_a_img; else defaulImageA" class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_a_img}}.png"
+                                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.value.time_a_img}}.png"
                                                      class="escudo-img" size="s">
                                             </span>
                                                 <ng-template #defaulImageA class="escudo">
                                                 <span class="escudo">
-                                                    <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                    <img src="https://cdn.wee.bet/img/times/v2/default.png"
                                                          class="escudo-img">
                                                 </span>
                                                 </ng-template>
@@ -210,12 +213,12 @@
                                         <div class="time-b">
                                             <div class="escudo-container">
                                             <span *ngIf="jogo.value.time_b_img; else defaulImageB" class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_b_img}}.png"
+                                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.value.time_b_img}}.png"
                                                      class="escudo-img" size="s">
                                             </span>
                                                 <ng-template #defaulImageB class="escudo">
                                                 <span class="escudo">
-                                                    <img src="https://cdn.wee.bet/img/times/s/default.png"
+                                                    <img src="https://cdn.wee.bet/img/times/v2/default.png"
                                                          class="escudo-img">
                                                 </span>
                                                 </ng-template>

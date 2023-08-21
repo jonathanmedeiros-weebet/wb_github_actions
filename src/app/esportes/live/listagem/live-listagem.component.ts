@@ -1,4 +1,4 @@
-import {Component, DoCheck, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges} from '@angular/core';
+import {Component, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2, SimpleChanges} from '@angular/core';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -9,7 +9,7 @@ import {BilheteEsportivoService, HelperService, JogoService, LiveService, Messag
     templateUrl: 'live-listagem.component.html',
     styleUrls: ['live-listagem.component.css']
 })
-export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
+export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     @Output() jogoSelecionadoId = new EventEmitter();
     @Output() exibirMaisCotacoes = new EventEmitter();
     jogos = {};
@@ -40,7 +40,8 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
@@ -58,16 +59,6 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
 
         this.liveService.entrarSalaEventos();
         this.getJogosAoVivo();
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['sportId']) {
-            if (!changes['sportId'].firstChange) {
-                if (changes['sportId'].currentValue !== changes['sportId'].previousValue) {
-                    this.getJogosAoVivo();
-                }
-            }
-        }
     }
 
     ngDoCheck() {
@@ -332,6 +323,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
     }
 
     toggleEsporte(sportId) {
+        console.log(sportId);
         const index = this.esportesAbertos.findIndex(id => id === sportId);
         if (index >= 0) {
             this.esportesAbertos.splice(index, 1);
@@ -357,7 +349,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
 
         mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[sportId]['casa']) ?? {
             nome: 'Casa',
-            lock: true
+            lock: false
         });
 
         if (sportId === 1) {
@@ -369,7 +361,7 @@ export class LiveListagemComponent implements OnInit, OnChanges, OnDestroy, DoCh
 
         mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[sportId]['fora']) ?? {
             nome: 'Fora',
-            lock: true
+            lock: false
         });
 
         return mercadosPrincipais;
