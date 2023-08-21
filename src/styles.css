@@ -1769,6 +1769,10 @@ ngb-datepicker-month {
         color: var(--foreground);
     }
 
+    .modal-fill-screen .modal-dialog {
+        max-width: 100%;
+    }
+
     .modal-pop-up .modal-content {
         max-width: 90%;
         height: auto;
@@ -1919,3 +1923,6 @@ label {
     width: 100%;
 }
 
+asl-google-signin-button > div{
+    width: 100%;
+}

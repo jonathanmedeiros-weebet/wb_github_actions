@@ -128,8 +128,9 @@ export class SidebarMenuComponent implements OnInit {
             PesquisarApostaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
+                windowClass: 'modal-550 modal-fill-screen'
             }
         );
     }

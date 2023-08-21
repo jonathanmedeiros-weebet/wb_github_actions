@@ -143,6 +143,8 @@
         "feminino": "Female",
         "codigoDeAfiliacao": "Affiliate code(Optional)",
         "certificoQueTenhoMais": "I certify that I am over 18 years of age and declare that I have read and agree to the",
+        "deAcordoComOsTermos1": "By registering, you agree to our",
+        "deAcordoComOsTermos2": "and our",
         "termosDeUso": "terms of use",
         "cadastrar": "Register",
         "cadastroSucedido": "Registration completed successfully! Check your email to activate it.",

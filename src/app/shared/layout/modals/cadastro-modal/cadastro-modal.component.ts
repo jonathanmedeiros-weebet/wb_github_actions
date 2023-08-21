@@ -41,10 +41,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     provedorCaptcha;
     validacaoEmailObrigatoria;
     autoPreenchimento = true;
+    cpfValidado = false;
     possuiCodigoAfiliado = false;
 
     user: any;
-    loginGoogleAtivo = false;
+    loginGoogleAtivo = true;
     formSocial = false;
 
     constructor(
@@ -74,7 +75,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
-        this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
+        // this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
 
         this.translate.onLangChange.subscribe(res => {
             this.hCaptchaLanguage = res.lang;
@@ -230,26 +231,37 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if(this.autoPreenchimento) {
-            this.form.patchValue({nome: 'Pesquisando...'});
-            this.clientesService.validarCpf(cpf).subscribe(
-                res => {
-                    if (res.validarCpfAtivado) {
-                        this.autoPreenchimento = true;
-                        this.form.patchValue({
-                            nascimento: res.dataNascimento,
-                            nome: res.nome?.split(' ')[0] + ' *** ***',
-                            nomeCompleto: res.nome
-                        });
-                    } else {
-                        this.form.patchValue({nome: ''});
-                        this.autoPreenchimento = false;
-                    }
-                },
-                error => {
-                    this.form.patchValue({nome: ''});
-                    this.messageService.error(error);
-                }
-            );
+            this.cpfValidado = true;
+            // this.form.patchValue({nome: 'Pesquisando...'});
+            // this.clientesService.validarCpf(cpf).subscribe(
+            //     res => {
+            //         if (res.validarCpfAtivado) {
+            //             this.autoPreenchimento = true;
+            //             this.cpfValidado = true;
+            //             let splittedName = res.nome?.split(' ');
+            //             let nome = "";
+            //             if (splittedName) {
+            //                 nome = splittedName.shift();
+            //                 for (let i = 0; i < splittedName.length; i++) {
+            //                     nome += " " + "*".repeat(splittedName[i].length);
+            //                 }
+            //             }
+            //             this.form.patchValue({
+            //                 nascimento: res.dataNascimento,
+            //                 nome: nome,
+            //                 nomeCompleto: res.nome
+            //             });
+            //         } else {
+            //             this.form.patchValue({nome: ''});
+            //             this.autoPreenchimento = false;
+            //             this.cpfValidado = false;
+            //         }
+            //     },
+            //     error => {
+            //         this.form.patchValue({nome: ''});
+            //         this.messageService.error(error);
+            //     }
+            // );
         }
 
     }

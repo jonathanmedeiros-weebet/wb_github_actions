@@ -159,8 +159,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             CadastroModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
+                windowClass: 'modal-550 modal-fill-screen'
             }
         );
     }
