@@ -164,7 +164,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     solicitarDeposito() {
-        if (this.rolloverAtivo.length > 0 && this.opcaoBonus === 'esportivo') {
+        if (this.rolloverAtivo.length > 0 && this.opcaoBonus !== 'nenhum') {
             this.avisoPromocao();
         } else {
             this.onSubmit();
