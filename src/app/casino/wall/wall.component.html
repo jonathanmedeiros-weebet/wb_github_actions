@@ -85,18 +85,10 @@
                                         <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -158,18 +150,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -231,18 +215,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -304,18 +280,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -377,18 +345,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -450,18 +410,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -597,18 +549,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
@@ -666,18 +610,10 @@
                                     <a *ngIf="game.gameDemo"
                                         [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
                                     </ng-container>
                                     <ng-container *ngIf="game.fornecedor == 'spribe'">
                                         <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
+                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
                                         class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
                                         </ng-container>
                                         <ng-container *ngIf="!isLoggedIn">
