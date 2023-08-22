@@ -3294,3 +3294,21 @@ gulp.task('gorilabet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vegaz.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "vegaz.bet",
+        banca: "VEGAZ.BET",
+        styles: "",
+    });
+});
+
+gulp.task('betpixmais.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betpixmais.bet",
+        banca: "BET PIX MAIS",
+        styles: "",
+    });
+});
