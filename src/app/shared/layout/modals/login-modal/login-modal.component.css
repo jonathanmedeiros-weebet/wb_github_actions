@@ -10,7 +10,13 @@
 
 .modal-header {
     border-bottom-color: var(--foreground);
-    padding: 20px 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-close {
+    margin-right: 10px;
+    background: none;
 }
 
 .modal-body {

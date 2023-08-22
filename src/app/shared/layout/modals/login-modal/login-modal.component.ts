@@ -161,7 +161,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
-                windowClass: 'modal-550 modal-fill-screen'
+                windowClass: 'modal-500 modal-fill-mobile-screen'
             }
         );
     }

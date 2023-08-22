@@ -11,6 +11,7 @@
         <div class="text-line" *ngIf="!formSocial && loginGoogleAtivo">
             <span>OU</span>
         </div>
+        <span class="space-buttons" *ngIf="!loginGoogleAtivo || formSocial">Preencha os campos para realizar o seu cadastro</span>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group mb-4">
@@ -28,7 +29,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" [hidden]="autoPreenchimento && !cpfValidado">
+            <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || formSocial">
                 <div class="form-group mb-4">
                     <div class="input-md">
                         <input type="text" id="nome" class="form-control inverted-out" formControlName="nome"
@@ -151,15 +152,18 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <!-- <input class="checkbox-aceitar-termos" type="checkbox" formControlName="aceitar_termos"> -->
                 <label class="label-termo-uso">
                     {{'geral.deAcordoComOsTermos1' | translate}}
-                    <a (click)="abrirModalTermosUso(termosUsoModal)" id="linkTermos" class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
+                    <a id="linkTermos"
+                        target="_blank"
+                        [routerLink]="['/informacoes/termos-condicoes']"
+                        class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
                     {{'geral.deAcordoComOsTermos2' | translate}}
-                    <a id="linkPolitica" class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}.</a>
+                    <a id="linkPolitica" 
+                        target="_blank"
+                        [routerLink]="['/informacoes/politica-privacidade']" 
+                        class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
                 </label>
-                <app-error-msg [control]="form.get('aceitar_termos')" label="Termos de Uso"
-                    class="text-left"></app-error-msg>
             </div>
         </div>
 
@@ -174,7 +178,9 @@
                 <app-error-msg [control]="form.get('captcha')"></app-error-msg>
             </div>
 
-            <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+            <div class="col-12">
+                <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+            </div>
         </div>
 
         <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
@@ -192,25 +198,6 @@
         </div>
     </form>
 </div>
-
-<ng-template #termosUsoModal let-modal id="modal">
-    <div class="modal-header">
-        <img [src]="LOGO" alt="" class="logo-modal">
-        <a type="button" class="btn-close" aria-label="Close" (click)="fecharModalTermos()">
-            <i class="fa fa-times"></i>
-        </a>
-    </div>
-    <div class="modal-body">
-        <h3>{{'geral.termosDeUso' | translate | titlecase}}</h3>
-        <form>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col col-md-12" [innerHTML]="termosDeUso.conteudo"></div>
-                </div>
-            </div>
-        </form>
-    </div>
-</ng-template>
 
 <ng-template #ativacaoCadastroModal let-modal>
     <div class="modal-header" style="display: flex; justify-content: end;">

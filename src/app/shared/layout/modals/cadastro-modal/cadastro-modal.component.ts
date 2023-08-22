@@ -27,7 +27,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     isMobile = false;
     unsub$ = new Subject();
     usuario = new Usuario();
-    termosDeUso: Pagina;
     debouncer: any;
     submitting = false;
     afiliadoHabilitado;
@@ -45,7 +44,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     possuiCodigoAfiliado = false;
 
     user: any;
-    loginGoogleAtivo = true;
+    loginGoogleAtivo = false;
     formSocial = false;
 
     constructor(
@@ -75,19 +74,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
-        // this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
+        this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
 
         this.translate.onLangChange.subscribe(res => {
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
         });
-
-        this.clientesService.getTermosDeUso().subscribe(
-            (termos: Pagina) => {
-                this.termosDeUso = termos ? termos : new Pagina();
-            },
-            error => this.handleError(error)
-        );
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
@@ -111,8 +103,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 if(user) {
                     this.formSocial = true;
                     this.form.patchValue({
-                        nome: user.firstName,
-                        sobrenome: user.lastName,
+                        nome: user.name,
                         email: user.email,
                         googleId: user.id,
                         googleIdToken: user.idToken,
@@ -136,7 +127,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            aceitar_termos: [null, [Validators.required]],
             captcha: [null, [Validators.required]],
             check_1: [''],
             check_2: [''],
@@ -207,18 +197,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.messageService.error(error);
     }
 
-    abrirModalTermosUso(modal: any) {
-        if (this.termosDeUso) {
-            this.modalTermosRef = this.modalService.open(modal);
-        }
-    }
-
-    fecharModalTermos() {
-        if (this.modalTermosRef) {
-            this.modalTermosRef.dismiss();
-        }
-    }
-
     clearSocialForm() {
         this.formSocial = false;
         this.form.patchValue({
@@ -231,37 +209,37 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if(this.autoPreenchimento) {
-            this.cpfValidado = true;
-            // this.form.patchValue({nome: 'Pesquisando...'});
-            // this.clientesService.validarCpf(cpf).subscribe(
-            //     res => {
-            //         if (res.validarCpfAtivado) {
-            //             this.autoPreenchimento = true;
-            //             this.cpfValidado = true;
-            //             let splittedName = res.nome?.split(' ');
-            //             let nome = "";
-            //             if (splittedName) {
-            //                 nome = splittedName.shift();
-            //                 for (let i = 0; i < splittedName.length; i++) {
-            //                     nome += " " + "*".repeat(splittedName[i].length);
-            //                 }
-            //             }
-            //             this.form.patchValue({
-            //                 nascimento: res.dataNascimento,
-            //                 nome: nome,
-            //                 nomeCompleto: res.nome
-            //             });
-            //         } else {
-            //             this.form.patchValue({nome: ''});
-            //             this.autoPreenchimento = false;
-            //             this.cpfValidado = false;
-            //         }
-            //     },
-            //     error => {
-            //         this.form.patchValue({nome: ''});
-            //         this.messageService.error(error);
-            //     }
-            // );
+            this.form.patchValue({nome: 'Pesquisando...'});
+            this.clientesService.validarCpf(cpf).subscribe(
+                res => {
+                    if (res.validarCpfAtivado) {
+                        this.autoPreenchimento = true;
+                        this.cpfValidado = true;
+                        let splittedName = res.nome?.split(' ');
+                        let nome = "";
+                        if (splittedName) {
+                            nome = splittedName.shift();
+                            for (let i = 0; i < splittedName.length; i++) {
+                                nome += " " + "*".repeat(splittedName[i].length);
+                            }
+                        }
+                        this.form.patchValue({
+                            nascimento: res.dataNascimento,
+                            nome: nome,
+                            nomeCompleto: res.nome
+                        });
+                    } else {
+                        this.form.patchValue({nome: ''});
+                        this.autoPreenchimento = false;
+                        this.cpfValidado = false;
+                    }
+                },
+                error => {
+                    this.cpfValidado = false;
+                    this.form.patchValue({nome: ''});
+                    this.messageService.error(error);
+                }
+            );
         }
 
     }
