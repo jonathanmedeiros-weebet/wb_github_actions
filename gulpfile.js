@@ -2056,8 +2056,8 @@ gulp.task('profit2.bet', function (done) {
         host: "profit2.bet",
         banca: "PROFIT2.BET",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/YzMhFv1ZZJ' async></script>",
+        pixel: "",
+        scripts: "",
     });
 });
 
