@@ -404,7 +404,10 @@
         "natureza": "Nature",
         "desejaReceberBonusPrimeiroDeposito": "Do you want to receive First Deposit Bonus?",
         "receberBonus": "Receive Bonus - Sport",
-        "naoQueroBonus": "I don't want bonus"
+        "naoQueroBonus": "I don't want bonus",
+        "valorMinimoSaque": "Minimum withdrawal amount",
+        "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
+        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",

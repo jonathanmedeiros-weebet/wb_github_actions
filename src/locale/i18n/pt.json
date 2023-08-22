@@ -404,7 +404,10 @@
         "natureza": "Natureza",
         "desejaReceberBonusPrimeiroDeposito": "Deseja receber Bônus de primeiro depósito?",
         "receberBonus": "Receber Bônus - Esporte",
-        "naoQueroBonus": "Não quero Bônus"
+        "naoQueroBonus": "Não quero Bônus",
+        "valorMinimoSaque": "Valor mínimo de saque",
+        "valorMaximoSaqueDiario": "Valor máximo de saque diário",
+        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
