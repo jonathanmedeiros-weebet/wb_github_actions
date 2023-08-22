@@ -54,7 +54,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
-        bonus: 0
+        bonus: 0,
+        bonusModalidade: 'nenhum'
     };
     mobileScreen = false;
     utilizarBonus = false;
