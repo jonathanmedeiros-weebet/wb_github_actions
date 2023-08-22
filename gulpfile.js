@@ -3285,3 +3285,12 @@ gulp.task('lottomaster.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('gorilabet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gorilabet.wee.bet",
+        banca: "GORILA BET",
+        styles: "",
+    });
+});

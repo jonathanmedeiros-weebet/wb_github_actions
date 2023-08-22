@@ -346,7 +346,8 @@
         "brasilplay.com": "gulp brasilplay.com",
         "fortalezabets.online": "gulp fortalezabets.online",
         "apostabrasil.com": "gulp apostabrasil.com",
-        "lottomaster.bet": "gulp lottomaster.bet"
+        "lottomaster.bet": "gulp lottomaster.bet",
+        "gorilabet.wee.bet": "gulp gorilabet.wee.bet"
     },
     "private": true,
     "dependencies": {
