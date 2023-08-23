@@ -120,6 +120,19 @@ img{
     margin: 20px
 }
 
+.login {
+    font-size: 12px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.login a {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--highlight);
+}
+
 @media only screen and (max-width: 1024px) {
     .modal-body {
         padding: 40px 25px 15px;

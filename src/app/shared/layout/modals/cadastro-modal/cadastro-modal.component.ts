@@ -10,11 +10,11 @@ import {Usuario} from '../../../models/usuario';
 import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
 
 import * as moment from 'moment';
-import {Pagina} from 'src/app/models';
 import {config} from '../../../config';
 import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -32,6 +32,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     afiliadoHabilitado;
     isCliente;
     isLoggedIn;
+    modalRef;
     mostrarSenha;
     mostrarConfirmarSenha;
     LOGO = config.LOGO;
@@ -152,6 +153,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnDestroy() {
+        this.socialAuth.signOut();
+        this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -197,12 +200,25 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.messageService.error(error);
     }
 
+    abrirLogin() {
+        this.activeModal.dismiss();
+
+        this.modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+            }
+        );
+    }
+
     clearSocialForm() {
         this.formSocial = false;
         this.form.patchValue({
             googleId: '',
             googleIdToken: '',
-        })
+        });
     }
 
     validarCpf() {
