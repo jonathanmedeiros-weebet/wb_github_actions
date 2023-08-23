@@ -33,6 +33,7 @@
         "pix": "PIX",
         "saque": "Withdrawal",
         "saques": "Withdrawals",
+        "sacar": "Withdrawal",
         "deposito": "Deposit",
         "depositos": "Deposits",
         "nenhumEventoDisponivel": "No event available",
@@ -82,6 +83,7 @@
         "creditos": "Credits",
         "debito": "Debit",
         "debitos": "Debits",
+        "depositar": "Depositar",
         "aCraseado": "to",
         "apostador": "Better",
         "codigo": "Code",
@@ -108,7 +110,7 @@
         "dataDeEncerramento": "Closing date",
         "configuracoes": "Settings",
         "versao": "Version",
-        "solicitarDeposito": "Request Deposit",
+        "solicitarDeposidto": "Request Deposit",
         "liberarCredito": "Release Credit",
         "bonus": "Bonus",
         "recarga": "Recharge",
@@ -401,7 +403,10 @@
         "natureza": "Nature",
         "desejaReceberBonusPrimeiroDeposito": "Do you want to receive First Deposit Bonus?",
         "receberBonus": "Receive Bonus - Sport",
-        "naoQueroBonus": "I don't want bonus"
+        "naoQueroBonus": "I don't want bonus",
+        "valorMinimoSaque": "Minimum withdrawal amount",
+        "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
+        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",

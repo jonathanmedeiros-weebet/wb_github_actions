@@ -246,10 +246,10 @@
 
                         <div class="d-flex justify-content-around">
                             <a class="dropdown-btn w-150" (click)="abrirDepositos()">
-                                {{'geral.solicitarDeposito' | translate}}
+                                {{'geral.depositar' | translate}}
                             </a>
                             <a class="dropdown-btn w-150" (click)="abrirSaques()">
-                                {{'geral.solicitarSaque' | translate}}
+                                {{'geral.sacar' | translate}}
                             </a>
                         </div>
 
@@ -400,10 +400,10 @@
 
                         <div class="d-flex justify-content-around">
                             <a class="dropdown-btn w-130" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
-                                {{'geral.solicitarDeposito' | translate}}
+                                {{'geral.depositar' | translate}}
                             </a>
                             <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
-                                {{'geral.solicitarSaque' | translate}}
+                                {{'geral.sacar' | translate}}
                             </a>
                             <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
                                 {{'geral.liberarCredito' | translate}}
