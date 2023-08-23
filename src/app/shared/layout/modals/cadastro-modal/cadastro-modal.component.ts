@@ -15,6 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -100,19 +101,22 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
-            this.socialAuth.authState.subscribe((user) => {
-                if(user) {
-                    this.formSocial = true;
-                    this.form.patchValue({
-                        nome: user.name,
-                        email: user.email,
-                        googleId: user.id,
-                        googleIdToken: user.idToken,
-                    })
-                }
+            this.socialAuth.authState
+                .pipe(takeUntil(this.unsub$))
+                .subscribe((user) => {
+                    if(user) {
+                        this.formSocial = true;
+                        this.form.patchValue({
+                            nome: user.name,
+                            email: user.email,
+                            googleId: user.id,
+                            googleIdToken: user.idToken,
+                        })
+                    }
 
-                this.user = user;
-            });
+                    this.user = user;
+                    }
+                );
         }
     }
 
@@ -153,7 +157,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnDestroy() {
-        this.socialAuth.signOut();
         this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
@@ -214,6 +217,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     clearSocialForm() {
+        if (this.formSocial) {
+            this.socialAuth.signOut();
+        }
         this.formSocial = false;
         this.form.patchValue({
             googleId: '',
@@ -225,7 +231,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if(this.autoPreenchimento) {
-            this.form.patchValue({nome: 'Pesquisando...'});
             this.clientesService.validarCpf(cpf).subscribe(
                 res => {
                     if (res.validarCpfAtivado) {
@@ -245,7 +250,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             nomeCompleto: res.nome
                         });
                     } else {
-                        this.form.patchValue({nome: ''});
+                        if (!this.formSocial) {
+                            this.form.patchValue({nome: ''});
+                        }
                         this.autoPreenchimento = false;
                         this.cpfValidado = false;
                     }
