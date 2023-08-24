@@ -174,7 +174,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350',
+            windowClass: 'modal-550 modal-h-350 modal-login',
             centered: true,
         };
 

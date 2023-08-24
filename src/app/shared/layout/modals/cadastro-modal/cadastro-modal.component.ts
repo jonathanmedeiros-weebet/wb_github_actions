@@ -104,17 +104,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                    if(user) {
-                        this.formSocial = true;
-                        this.form.patchValue({
-                            nome: user.name,
-                            email: user.email,
-                            googleId: user.id,
-                            googleIdToken: user.idToken,
-                        })
-                    }
+                        if(user) {
+                            this.formSocial = true;
+                            this.form.patchValue({
+                                nome: user.name,
+                                email: user.email,
+                                googleId: user.id,
+                                googleIdToken: user.idToken,
+                            })
+                        }
 
-                    this.user = user;
+                        this.user = user;
                     }
                 );
         }
@@ -210,7 +210,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
+                windowClass: 'modal-550 modal-h-350 modal-login',
                 centered: true,
             }
         );

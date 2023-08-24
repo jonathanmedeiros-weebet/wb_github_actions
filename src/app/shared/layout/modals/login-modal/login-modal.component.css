@@ -91,18 +91,6 @@ asl-google-signin-button {
 }
 
 @media only screen and (max-width: 1024px) {
-    .logo-mobile {
-        display: block;
-        width: 180px;
-        margin: 80px auto 70px;
-    }
-
-    .modal-header > img {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
     .modal-body {
         text-align: center;
         padding: 40px 25px 15px;

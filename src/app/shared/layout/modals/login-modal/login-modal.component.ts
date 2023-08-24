@@ -80,16 +80,16 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                    if (user) {
-                        this.form.patchValue({
-                            googleId: user.id,
-                            googleIdToken: user.idToken
-                        });
-                        this.submit();
-                    }
+                        if (user) {
+                            this.form.patchValue({
+                                googleId: user.id,
+                                googleIdToken: user.idToken
+                            });
+                            this.submit();
+                        }
 
-                    this.googleUser = user;
-                }
+                        this.googleUser = user;
+                    }
                 );
         }
 
@@ -172,7 +172,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
-                windowClass: 'modal-500 modal-fill-mobile-screen'
+                windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
     }

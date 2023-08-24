@@ -6,7 +6,6 @@
 </div>
 <div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '40px'}">
     <div class="modal-body-content">
-        <img class="logo-mobile" [src]="LOGO" alt="">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
             <span class="space-buttons" *ngIf="loginGoogle">Realize o login com a conta do google</span>
             <asl-google-signin-button type='standard' size='large' text='signin_with' logo_alignment='center' *ngIf="loginGoogle"></asl-google-signin-button>
