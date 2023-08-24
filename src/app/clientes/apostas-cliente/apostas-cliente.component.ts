@@ -287,8 +287,6 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.showLoading = true;
         const params = {};
 
-        console.log("Aqui");
-
         if (aposta.id === this.apostas[0].id) {
             params['verificar-ultima-aposta'] = 1;
         }

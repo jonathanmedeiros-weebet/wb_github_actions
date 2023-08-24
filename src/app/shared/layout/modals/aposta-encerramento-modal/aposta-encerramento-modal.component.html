@@ -1,6 +1,7 @@
 <app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
 <div class="modal-header">
     <div>
+        <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
         <h5 class="modal-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
         <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
     </div>
@@ -25,30 +26,31 @@
 <div class="modal-body cupom-ativo">
     <div class="cupom-header">
         <div class="informacoes">
+            <p class="codigo-aposta">
+                <b>Código da aposta:</b><span> {{aposta.codigo}}</span>
+            </p>
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
-                    <b>Cliente: </b><span>{{aposta.apostador}}</span>
+                    <b>Cliente:</b><span>{{aposta.apostador}}</span>
                 </p>
             </div>
             <ng-template #exibicaoPadrao>
                 <p>
-                    <b>Cambista:</b> {{aposta.passador.nome}}
+                    <b>Cambista:</b><span>{{aposta.passador.nome}}</span>
                 </p>
                 <p>
-                    <b>Apostador: </b><span>{{aposta.apostador}}</span>
+                    <b>Apostador:</b><span>{{aposta.apostador}}</span>
                 </p>
             </ng-template>
             <p>
                 <b>{{'geral.status' | translate}}: </b>
                 <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
             </p>
-        </div>
-        <div class="valores" >
-            <p *ngIf="falhaSimulacao">
-                <ngb-alert [dismissible]="false" type='danger'>
-                    <strong>Essa aposta não pode ser encerrada.</strong>
-                </ngb-alert>
+            <p class="aposta-horario">
+                <b>Horário:</b><span> {{aposta.horario | moment: 'DD/MM HH:mm'}}</span>
             </p>
+        </div>
+        <div class="valores">
             <p class="total-jogos">
                 Quantidade de jogos: <span>{{aposta.itens.length}}</span>
             </p>
@@ -59,13 +61,11 @@
                 </span>
             </p>
             <p class="aposta">
-                Valor apostado: <span> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
+                Valor apostado:  <span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
             </p>
-        </div>
-        <div class="valores">
             <p class="ganho">
                 Possível retorno:
-                <span >
+                <span style="white-space: nowrap;">
                     <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho |
                         currency}}</span>
                     <span class="dados-simulacao" *ngIf="!falhaSimulacao"> {{novaPossibilidadeGanho | currency}}</span>
@@ -74,7 +74,7 @@
             <p class="resultado">
                 <b>Resultados: </b>
                 <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-                <span *ngIf="!aposta.resultado">aguardando</span>
+                <span *ngIf="!aposta.resultado">Aguardando</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                 {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
@@ -85,11 +85,11 @@
         </div>
         <br>
     </div>
-    <div>
+    <div class="table-container">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Data/Horário</th>
+                    <th style="padding-left: 14px;">Data/Horário</th>
                     <th>Evento/Mercado</th>
                     <th>Status</th>
                 </tr>
@@ -97,9 +97,9 @@
             <tbody>
                 <ng-container *ngFor="let item of aposta.itens">
                     <tr class="cupom">
-                        <td class="item"><p class="info-cupom" style="margin-left: 10px;">{{item.jogo_horario | moment: 'DD/MM HH:mm'}}</p></td>
+                        <td class="item"><p class="info-cupom" style="padding-left: 10px;">{{item.jogo_horario | moment: 'DD/MM HH:mm'}}</p></td>
                         <td class="item">
-                            <div>
+                            <div style="max-width: 97%;">
                                 <p class="campeonato info-cupom">
                                     {{item.campeonato_nome}}
                                 </p>
@@ -121,27 +121,34 @@
                             </div>
                         </td>
                         <td class="item">
-                            <p class="jogo-resultado">
-                                <span *ngIf="item.removido; else resultado" style="text-transform: uppercase;">cancelado</span>
-                                <ng-template #resultado>
-                                    <span [ngClass]="resultadoClass(item)">
+                            <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
+                                Encerrado 
+                                <span [ngClass]="resultadoClass(item)">
+                                    <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
+                                        ( {{item.resultado}} )
+                                    </ng-container>
+                                </span>
+                            </p>
+                            <ng-template #resultado>
+                                <p class="jogo-resultado">
+                                    <span *ngIf="item.removido" style="text-transform: uppercase;">Cancelado</span>
+                                    <span *ngIf="!item.removido && !item.encerrado" [ngClass]="resultadoClass(item)">
                                         {{item.resultado}}
                                     </span>
-                                </ng-template>
-                            </p>
+                                </p>
+                            </ng-template>
                         </td>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
     </div>
-
-    <!-- <ng-template #modalMobile>
-        <ng-container *ngFor="let item of aposta.itens">
+    <ng-container *ngFor="let item of aposta.itens">
+        <div class="cupom-container">
             <div id="cupom">
                 <div class="conteudo">
                     <div class="item">
-                        <div style="display: flex; align-items: center; justify-content: space-between">
+                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                             <div>
                                 <p class="horario info-cupom">
                                     {{item.jogo_horario | moment: 'DD/MM HH:mm'}}
@@ -164,29 +171,38 @@
                                     </span>
                                     <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                                 </p>
-                                <p class="jogo-resultado">
-                                    <span *ngIf="item.removido; else resultado" style="text-transform: uppercase;">cancelado</span>
-                                    <ng-template #resultado>
-                                        <span [ngClass]="resultadoClass(item)">
+                                <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
+                                    Encerrado
+                                    <span [ngClass]="resultadoClass(item)">
+                                        <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
+                                            ( {{item.resultado}} )
+                                        </ng-container>
+                                    </span>
+                                </p>
+                                <ng-template #resultado>
+                                    <p class="jogo-resultado">
+                                        <span *ngIf="item.removido" style="text-transform: uppercase;">Cancelado</span>
+                                        <span *ngIf="!item.removido && !item.encerrado" [ngClass]="resultadoClass(item)">
                                             {{item.resultado}}
                                         </span>
-                                    </ng-template>
-                                </p>
-                            </div>
-                            <div style="margin-left: 10px;">
-                                <span *ngIf="item.encerrado">encerrado</span>
+                                    </p>
+                                </ng-template>
                             </div>
                         </div>                    
                     </div>
                 </div>
             </div>
-        </ng-container>
-    </ng-template> -->
+        </div>    
+    </ng-container>
 </div>
-
 <div class="modal-footer">
     <div class="rodape dados-simulacao" *ngIf="novaPossibilidadeGanho && !falhaSimulacao">
-        Atenção: Confira como ficarão os novos valores, ao confirmar essa operação não poderá ser desfeita
+        <p *ngIf="novaPossibilidadeGanho && !falhaSimulacao">Atenção: Confira como ficarão os novos valores, ao confirmar essa operação não poderá ser desfeita</p>
+    </div>
+    <div class="rodape">
+        <p *ngIf="falhaSimulacao">
+            <span class="dados-simulacao">Essa aposta não pode ser encerrada.</span>
+        </p>
     </div>
     <div class="button-container">
         <button class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
