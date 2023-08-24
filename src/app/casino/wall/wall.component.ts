@@ -275,22 +275,13 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     abrirModalLogin() {
-        let options = {};
-
-        if (this.isMobile) {
-            options = {
-                windowClass: 'modal-fullscreen',
-            };
-        } else {
-            options = {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-            };
-        }
-
         this.modalRef = this.modalService.open(
-            LoginModalComponent, options
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
         );
     }
 

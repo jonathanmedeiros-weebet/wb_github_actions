@@ -102,7 +102,7 @@ export class SidebarMenuComponent implements OnInit {
         } else {
             options = {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-600',
+                windowClass: 'modal-550 modal-h-350 modal-login',
                 centered: true,
             };
         }
@@ -119,6 +119,7 @@ export class SidebarMenuComponent implements OnInit {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'lg',
                 centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
     }
@@ -128,8 +129,9 @@ export class SidebarMenuComponent implements OnInit {
             PesquisarApostaModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
+                windowClass: 'modal-500'
             }
         );
     }

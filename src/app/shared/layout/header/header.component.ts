@@ -259,30 +259,21 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             CadastroModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
-                windowClass: 'modal-700'
+                windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
     }
 
     abrirLogin() {
-        let options = {};
-
-        if (this.isMobile) {
-            options = {
-                windowClass: 'modal-fullscreen',
-            };
-        } else {
-            options = {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-            };
-        }
-
         this.modalRef = this.modalService.open(
-            LoginModalComponent, options
+            LoginModalComponent, 
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
         );
     }
 
