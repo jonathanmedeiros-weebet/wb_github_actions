@@ -2845,6 +2845,7 @@ gulp.task('cassinowin.bet', function (done) {
         host: "cassinowin.bet",
         banca: "CASSINO WIN",
         styles: "",
+        pixel: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-B8HFJV5MHV'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-B8HFJV5MHV');</script>"
     });
 });
 
@@ -3173,8 +3174,8 @@ gulp.task('amazonsport.io', function (done) {
         host: "amazonsport.io",
         banca: "AMAZON SPORT",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/hy3iY8gO2E' async></script>",
+        pixel: "",
+        scripts: "",
     });
 });
 
