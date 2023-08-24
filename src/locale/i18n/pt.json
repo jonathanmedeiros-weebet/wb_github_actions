@@ -33,8 +33,10 @@
         "pix": "PIX",
         "saque": "Saque",
         "saques": "Saques",
+        "sacar": "Sacar",
         "deposito": "Depósito",
         "depositos": "Depósitos",
+        "depositar": "Depositar",
         "nenhumEventoDisponivel": "Nenhum evento disponível",
         "nenhumEventoDisponivelNesteDia": "Nenhum evento disponível neste dia",
         "nenhumJogoEncontrado": "Nenhum jogo encontrado",
@@ -226,6 +228,7 @@
         "seninha": "Seninha",
         "todos": "Todos",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
@@ -261,6 +264,7 @@
     "cassino": {
         "maisPopulares": "Mais Populares",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
@@ -400,7 +404,10 @@
         "natureza": "Natureza",
         "desejaReceberBonusPrimeiroDeposito": "Deseja receber Bônus de primeiro depósito?",
         "receberBonus": "Receber Bônus - Esporte",
-        "naoQueroBonus": "Não quero Bônus"
+        "naoQueroBonus": "Não quero Bônus",
+        "valorMinimoSaque": "Valor mínimo de saque",
+        "valorMaximoSaqueDiario": "Valor máximo de saque diário",
+        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",

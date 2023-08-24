@@ -95,7 +95,6 @@
         "novobetsamericabr.com": "gulp novobetsamericabr.com",
         "trandbets.com": "gulp trandbets.com",
         "ilhabet.net": "gulp ilhabet.net",
-        "megabetsport.com": "gulp megabetsport.com",
         "nortaobet.com": "gulp nortaobet.com",
         "rodadabets.wee.bet": "gulp rodadabets.wee.bet",
         "saqbet.tv": "gulp saqbet.tv",
@@ -341,8 +340,14 @@
         "torcidabet.com.br": "gulp torcidabet.com.br",
         "bet24horas.com": "gulp bet24horas.com",
         "pixstars.bet": "gulp pixstars.bet",
-        "weelbet.com": "gulp weelbet.com",
-        "showbets21.com": "gulp showbets21.com"
+        "eskybet.com": "gulp eskybet.com",
+        "showbets21.com": "gulp showbets21.com",
+        "agorabets.com": "gulp agorabets.com",
+        "brasilplay.com": "gulp brasilplay.com",
+        "fortalezabets.online": "gulp fortalezabets.online",
+        "apostabrasil.com": "gulp apostabrasil.com",
+        "lottomaster.bet": "gulp lottomaster.bet",
+        "gorilabet.wee.bet": "gulp gorilabet.wee.bet"
     },
     "private": true,
     "dependencies": {

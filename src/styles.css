@@ -1685,6 +1685,10 @@ input[type=number]::-webkit-outer-spin-button {
     background: transparent !important;
 }
 
+.btn-close{
+    background: #00000000;
+}
+
 .btn-close i {
     font-size: 22px;
     color: var(--highlight);
