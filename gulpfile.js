@@ -894,15 +894,6 @@ gulp.task('nortaobet.com', function (done) {
     });
 });
 
-gulp.task('rodadabets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "rodadabets.wee.bet",
-        banca: "RODADA BETS",
-        styles: "",
-    });
-});
-
 gulp.task('jmxbet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
