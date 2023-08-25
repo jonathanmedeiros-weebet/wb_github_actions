@@ -102,7 +102,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                         dados: {}
                     });
                     this.gameList = response.gameList.filter(function (game) {
-                        return game.dataType === 'VSB';
+                        return game.category === 'virtual';
                     });
                 } else {
                     this.sideBarService.changeItens({
