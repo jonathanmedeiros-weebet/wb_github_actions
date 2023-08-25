@@ -19,14 +19,11 @@
 #cupom{
     padding: 0 1em;
     background: #363636;
-    /* margin: 2em auto; */
-    /* margin: auto 7px; */
     font-size: 12px;
     border-radius: 5px;
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
-    /* padding: 0 2em; */
     background: #1C1C1C;
     color: white;
     font-size: 12px;
@@ -79,9 +76,7 @@ hr {
     font-weight: normal;
 }
 .item .campeonato{
-    /* text-align: center; */
     margin: 1px;
-    /* font-weight: bold; */
     font-size: 12px;
 }
 .item .horario{

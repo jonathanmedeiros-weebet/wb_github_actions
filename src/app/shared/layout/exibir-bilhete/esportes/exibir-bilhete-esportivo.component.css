@@ -10,6 +10,7 @@
 }
 .modal-body {
     max-height: 400px;
+    height: 100vh;
     overflow: auto;
 }
 .modal-header {
@@ -72,14 +73,6 @@ hr {
     margin-bottom: 5px;
     margin-top:15px;
 }
-/* .informacoes p{
-    margin: 1px;
-    font-size: 12px;
-    width: 100%;
-} */
-/* .total-jogos span, .aposta span, .ganho span, .cambista-paga span, .resultado span {
-    margin-left: 1%;
-} */
 .item .campeonato{
     margin: 1px;
     font-size: 12px;
@@ -220,7 +213,7 @@ table tr td:nth-child(3) {
 }
  @media only screen and (max-width: 532px) {
     .cupom-container:last-of-type #cupom {
-        margin-bottom: 100px;
+        margin-bottom: 115px;
     }
     .cupom-header {
         margin: 0 5px;
@@ -270,9 +263,11 @@ table tr td:nth-child(3) {
         min-height: 5px;
     }
  }
- @media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 532px) and (max-width: 1024px) {
     .modal-body {
+        max-height: 100vh;
         height: 100vh;
+        overflow: auto;
     }
- }
+}
 

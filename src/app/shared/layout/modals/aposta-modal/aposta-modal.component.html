@@ -39,12 +39,12 @@
 </ng-template>
 
 
-<!-- <div class="p-3" *ngIf="isMobile && (impressaoPermitida() || compartilhamentoPermitido())">
-    <a class="btn btn-custom btn-block" *ngIf="impressaoPermitida() && aposta.tipo != 'esportes'" (click)="printTicket()">
+<div class="p-3" *ngIf="aposta.tipo != 'esportes' && isMobile && (impressaoPermitida() || compartilhamentoPermitido())">
+    <a class="btn btn-custom btn-block" *ngIf="impressaoPermitida()" (click)="printTicket()">
         {{'geral.imprimir' | translate}}
     </a>
     <a class="btn btn-custom btn-block" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()">
         {{'geral.compartilhar' | translate}}
     </a>
-</div> -->
+</div>
 
