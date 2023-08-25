@@ -69,17 +69,14 @@ hr {
     margin-bottom: 5px;
     margin-top:15px;
 }
-.informacoes p{
-    margin: 1px;
+.cupom-header p {
     font-size: 12px;
     width: 100%;
+    margin-bottom: 4px;
+    font-weight: 600;
 }
-.valores .total-jogos span,
-.valores .aposta span,
-.valores .ganho span,
-.valores .cambista-paga span,
-.valores .resultado span {
-    margin-left: 1%;
+.cupom-header span {
+    font-weight: normal;
 }
 .item .campeonato{
     /* text-align: center; */
@@ -87,7 +84,6 @@ hr {
     /* font-weight: bold; */
     font-size: 12px;
 }
-
 .item .horario{
     margin: 1px;
     font-size: 10px;
@@ -105,20 +101,10 @@ hr {
     margin: 1px;
     font-size: 12px;
 }
-.valores .total-jogos, .valores .aposta, .valores .ganho, .valores .cambista-paga, .valores .resultado {
-    margin: 4px 1px 1px 1px;
-    font-weight: bold;
-    font-size: 12px;
-    display: flex;
+.cupom-header span {
+    margin-left: 3px;
 }
-.informacoes p {
-    margin: 4px 1px 1px 1px;
-}
-.informacoes span {
-    margin-left: 4px;
-}
-.informacoes .codigo-aposta,
-.informacoes .aposta-horario {
+.codigo-aposta, .aposta-horario {
     display: none;
 }
 .modal-title-mobile {
@@ -250,16 +236,11 @@ table tr td:nth-child(3) {
         max-height: 100vh;
         height: 100vh;
     }
-    .valores .total-jogos,
-    .valores .aposta,
-    .valores .ganho,
-    .valores .cambista-paga,
-    .valores .resultado {
+    .total-jogos, .aposta, .ganho, .cambista-paga, .resultado {
         display: flex;
         justify-content: space-between;
     }
-    .informacoes .codigo-aposta,
-    .informacoes .aposta-horario {
+    .codigo-aposta, .aposta-horario {
         display: flex;
     }
     .modal-title {
