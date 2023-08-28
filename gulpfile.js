@@ -2956,6 +2956,7 @@ gulp.task('apostatotal.bet', function (done) {
         host: "apostatotal.bet",
         banca: "APOSTA TOTAL",
         styles: "",
+        scripts: "<scriptsrc='//fw-cdn.com/10788619/3569924.js'chat='true'></script>",
     });
 });
 
