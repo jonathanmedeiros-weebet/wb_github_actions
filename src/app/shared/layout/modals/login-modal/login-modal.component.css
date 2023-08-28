@@ -10,12 +10,18 @@
 
 .modal-header {
     border-bottom-color: var(--foreground);
-    padding: 20px 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-close {
+    margin-right: 10px;
+    background: none;
 }
 
 .modal-body {
     text-align: center;
-    padding: 40px 80px 15px;
+    padding: 10px 80px 15px;
     height: auto;
 }
 
@@ -38,6 +44,20 @@ button {
     margin: 15px 0;
 }
 
+.text-line {
+    height: 1px;
+    margin: 30px 0;
+    background-color: var(--foreground);
+    text-align: center;
+}
+
+.text-line span {
+    background-color: var(--background);
+    position: relative;
+    top: -0.65em;
+    padding: 0 10px;
+}
+
 asl-google-signin-button {
     display: flex;
     justify-content: center;
@@ -47,14 +67,14 @@ asl-google-signin-button {
     color: var(--highlight);
     font-size: 12px;
     display: block;
-    margin: 20px 0 30px;
+    margin: 26px 0 20px;
     text-decoration: none;
 }
 
 .registrar {
     font-size: 12px;
-    margin-top: 45px;
-    margin-bottom: 30px;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 .registrar a {
@@ -71,18 +91,6 @@ asl-google-signin-button {
 }
 
 @media only screen and (max-width: 1024px) {
-    .logo-mobile {
-        display: block;
-        width: 180px;
-        margin: 80px auto 70px;
-    }
-
-    .modal-header > img {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
     .modal-body {
         text-align: center;
         padding: 40px 25px 15px;

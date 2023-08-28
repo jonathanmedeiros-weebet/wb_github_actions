@@ -15,11 +15,11 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <div style="width: 400px" class="alert alert-secondary alert-dismissible fade show" role="alert">
-                    <strong>Atenção!</strong> <br>
-                    Valor mínimo de saque: <strong>R$ {{valorMinSaque | currency}}</strong><br>
-                    Valor máximo de saque diário: <strong>R$ {{valorMaxSaqueDiario | currency}}</strong><br>
-                    Valor máximo de saque mensal: <strong> R$ {{valorMaxSaqueMensal | currency}}</strong>
+                <div class="alert alert-secondary" role="alert">
+                    <strong>{{'geral.atencao' | translate}}!</strong> <br>
+                    {{'financeiro.valorMinimoSaque' | translate}}: <strong>{{valorMinSaque | currency}}</strong><br>
+                    {{'financeiro.valorMaximoSaqueDiario' | translate}}: <strong>{{valorMaxSaqueDiario | currency}}</strong><br>
+                    {{'financeiro.valorMaximoSaqueMensal' | translate}}: <strong> {{valorMaxSaqueMensal | currency}}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <div *ngIf="cadastroCompleto && !respostaSolicitacao">
@@ -92,11 +92,11 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th width="10"></th>
+                    <th></th>
                     <th>{{'geral.detalhes' | translate}}</th>
-                    <th width="200">{{'geral.status' | translate}}</th>
-                    <th width="200">{{'geral.valor' | translate}}</th>
-                    <th width="1"></th>
+                    <th>{{'geral.status' | translate}}</th>
+                    <th>{{'geral.valor' | translate}}</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -105,7 +105,7 @@
                         <td>{{'saques.saqueERegistrado' | translate}} {{ saque.data }}</td>
                         <td>
                           {{ saque.status }}
-                          <a class="info" *ngIf="saque.observacao" placement="top" [ngbTooltip]="saque.observacao" tooltipClass="tooltip-custom">
+                          <a class="info" *ngIf="saque.observacao" placement="top" [ngbPopover]="saque.observacao">
                             <i class="fa fa-info"></i>
                           </a>
                         </td>
