@@ -348,7 +348,8 @@
         "lottomaster.bet": "gulp lottomaster.bet",
         "gorilabet.wee.bet": "gulp gorilabet.wee.bet",
         "vegaz.bet": "gulp vegaz.bet",
-        "betpixmais.bet": "gulp betpixmais.bet"
+        "betpixmais.bet": "gulp betpixmais.bet",
+        "jbnacional.bet": "gulp jbnacional.bet"
     },
     "private": true,
     "dependencies": {
