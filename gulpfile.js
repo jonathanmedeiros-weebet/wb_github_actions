@@ -3330,7 +3330,7 @@ gulp.task('jbnacional.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "jbnacional.bet",
-        banca: "BET PIX MAIS",
+        banca: "JB NACIONAL",
         styles: "",
     });
 });
