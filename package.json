@@ -349,7 +349,9 @@
         "gorilabet.wee.bet": "gulp gorilabet.wee.bet",
         "vegaz.bet": "gulp vegaz.bet",
         "betpixmais.bet": "gulp betpixmais.bet",
-        "jbnacional.bet": "gulp jbnacional.bet"
+        "jbnacional.bet": "gulp jbnacional.bet",
+        "leaoesporte.bet": "gulp leaoesporte.bet",
+        "jetbet365.com": "gulp jetbet365.com"
     },
     "private": true,
     "dependencies": {

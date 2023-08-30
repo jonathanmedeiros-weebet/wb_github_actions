@@ -3334,3 +3334,21 @@ gulp.task('jbnacional.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('leaoesporte.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "leaoesporte.bet",
+        banca: "LEÃO ESPORTE",
+        styles: "",
+    });
+});
+
+gulp.task('jetbet365.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "jetbet365.com",
+        banca: "JET BET 365",
+        styles: "",
+    });
+});
