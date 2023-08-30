@@ -1,8 +1,15 @@
-import {Component, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2, SimpleChanges} from '@angular/core';
+import { Component, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2, SimpleChanges } from '@angular/core';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {BilheteEsportivoService, HelperService, JogoService, LiveService, MessageService, ParametrosLocaisService} from '../../../services';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import {
+    BilheteEsportivoService,
+    HelperService,
+    JogoService,
+    LiveService,
+    MessageService,
+    ParametrosLocaisService
+} from '../../../services';
 
 @Component({
     selector: 'app-live-listagem',
@@ -30,6 +37,18 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     esportesAbertos = [1, 18];
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
+
+    chavesMercadosPrincipais = {
+        1: {
+            casa: 'casa_90',
+            empate: 'empate_90',
+            fora: 'fora_90'
+        },
+        18: {
+            casa: 'bkt_casa',
+            fora: 'bkt_fora'
+        }
+    };
 
     constructor(
         private messageService: MessageService,
@@ -169,7 +188,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let inserirCampeonato = false;
 
                 jogo.cotacoes.map(cotacao => {
-                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    cotacao.nome = this.helperService.apostaTipoLabelCustom(
+                        cotacao.chave,
+                        jogo.time_a_nome,
+                        jogo.time_b_nome
+                    );
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
                         cotacao.valor,
                         cotacao.chave,
@@ -280,7 +303,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             cotacao: {
                 chave: cotacao.chave,
                 valor: cotacao.valor,
-                nome: this.helperService.apostaTipoLabel(cotacao.chave, 'sigla'),
+                nome: this.helperService.apostaTipoLabelCustom(
+                    cotacao.chave,
+                    jogo.time_a_nome,
+                    jogo.time_b_nome
+                ),
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -332,35 +359,34 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         }
     }
 
-    cotacoesPorTipo(cotacoes, sportId = 1) {
-        const chavesMercadosPrincipais = {
-            1: {
-                casa: 'casa_90',
-                empate: 'empate_90',
-                fora: 'fora_90'
-            },
-            18: {
-                casa: 'bkt_casa',
-                fora: 'bkt_fora'
-            }
-        };
+    cotacoesPorTipo(jogo) {
+        const cotacoes = jogo.value.cotacoes;
+        const sportId = jogo.value.sport_id;
 
         const mercadosPrincipais = [];
 
-        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[sportId]['casa']) ?? {
-            nome: 'Casa',
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['casa']) ?? {
+            nome: this.helperService.apostaTipoLabelCustom(
+                    this.chavesMercadosPrincipais[sportId]['casa'],
+                jogo.value.time_a_nome,
+                jogo.value.time_b_nome
+            ),
             lock: false
         });
 
         if (sportId === 1) {
-            mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[1]['empate']) ?? {
+            mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[1]['empate']) ?? {
                 nome: 'Empate',
                 lock: true
             });
         }
 
-        mercadosPrincipais.push(cotacoes.find(k => k.chave === chavesMercadosPrincipais[sportId]['fora']) ?? {
-            nome: 'Fora',
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['fora']) ?? {
+            nome: this.helperService.apostaTipoLabelCustom(
+                this.chavesMercadosPrincipais[sportId]['fora'],
+                jogo.value.time_a_nome,
+                jogo.value.time_b_nome
+            ),
             lock: false
         });
 

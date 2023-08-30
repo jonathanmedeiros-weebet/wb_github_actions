@@ -114,11 +114,12 @@
             <div class="sem-evento" *ngIf="!campeonatos.size || !temJogoAoVivo">
                 {{'geral.nenhumEventoAoVivoDisponivel' | translate}}
             </div>
+
             <div class="esporte" *ngIf="qtdJogosFutebol > 0">
                 <div class="esporte-header" (click)="toggleEsporte(1)">
                     <span class="column-left">
                         <span class="wbicon icon-futebol"></span>
-                        <span class="esporte-nome">{{'submenu.futebol' | translate}} ({{qtdJogosFutebol}})</span>
+                        <span class="esporte-nome">{{'submenu.futebol' | translate}}</span>
                     </span>
 
                     <span *ngIf="esporteAberto(1); else downIcon">
@@ -141,7 +142,7 @@
                 <div class="esporte-header" (click)="toggleEsporte(18)">
                     <span class="column-left">
                         <span class="wbicon icon-futebol"></span>
-                        <span class="campeonato-nome">{{'submenu.basquete' | translate}} ({{qtdJogosBasquete}})</span>
+                        <span class="campeonato-nome">{{'submenu.basquete' | translate}}</span>
                     </span>
 
                     <span *ngIf="esporteAberto(18); else downIcon">
@@ -167,7 +168,10 @@
                         <span class="column-left">
                             <span
                                 class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
-                            <span class="campeonato-nome">{{campeonato.value.nome}}</span>
+                            <span class="campeonato-nome">
+                                <ng-template *ngIf="sportId == 1">{{campeonato.value.regiao}}: </ng-template>
+                                {{campeonato.value.nome}}
+                            </span>
                         </span>
 
                             <span *ngIf="campeonatoAberto(campeonato.value._id); else downIcon">
@@ -186,10 +190,13 @@
                                         <div class="aovivo-label" *ngIf="sportId == 1">
                                             <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                         </div>
-                                        <div class="tempo">
+                                        <div *ngIf="jogo.value.info.tempo == 0">
+                                            Intervalo
+                                        </div>
+                                        <div class="tempo" *ngIf="jogo.value.info.tempo != 0">
                                             {{jogo.value.info.minutos}}"
                                         </div>
-                                        <div class="tempo" *ngIf="sportId == 18">
+                                        <div class="tempo" *ngIf="sportId == 18 && jogo.value.info.tempo != 0">
                                             {{jogo.value.info.tempo}}ª Parte
                                         </div>
                                     </div>
@@ -229,7 +236,7 @@
                                     </div>
 
                                     <div class="cotacoes">
-                                        <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo.value.cotacoes, jogo.value.sport_id)">
+                                        <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo)">
                                             <div class="cotacao disabled"
                                                  *ngIf="cotacao.lock || !cotacaoPermitida(cotacao.valorFinal); else noLock">
                                                 <label>{{ cotacao.nome }}</label>

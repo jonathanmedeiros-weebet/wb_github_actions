@@ -62,7 +62,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 }
             );
 
-        let dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
+        const dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
 
         if (this.paramsService.getOddsPrincipais()) {
             this.oddsPrincipais = this.paramsService.getOddsPrincipais();
@@ -170,6 +170,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 this.campeonatos = campeonatos;
                                 this.showLoadingIndicator = false;
                                 this.jogoId = this.extrairJogoId(this.campeonatos);
+                                console.log(campeonatos);
                             },
                             error => this.messageService.error(error)
                         );

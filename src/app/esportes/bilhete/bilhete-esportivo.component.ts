@@ -202,7 +202,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     definirAltura() {
-        console.log(this.subtracaoAltura);
         const altura = window.innerHeight - this.subtracaoAltura;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
