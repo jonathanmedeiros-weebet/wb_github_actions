@@ -96,7 +96,6 @@
         "trandbets.com": "gulp trandbets.com",
         "ilhabet.net": "gulp ilhabet.net",
         "nortaobet.com": "gulp nortaobet.com",
-        "rodadabets.wee.bet": "gulp rodadabets.wee.bet",
         "saqbet.tv": "gulp saqbet.tv",
         "starbets.online": "gulp starbets.online",
         "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
@@ -349,7 +348,8 @@
         "lottomaster.bet": "gulp lottomaster.bet",
         "gorilabet.wee.bet": "gulp gorilabet.wee.bet",
         "vegaz.bet": "gulp vegaz.bet",
-        "betpixmais.bet": "gulp betpixmais.bet"
+        "betpixmais.bet": "gulp betpixmais.bet",
+        "jbnacional.bet": "gulp jbnacional.bet"
     },
     "private": true,
     "dependencies": {
