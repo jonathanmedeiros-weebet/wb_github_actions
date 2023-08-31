@@ -411,8 +411,8 @@
         "naoQueroBonus": "I don't want bonus",
         "valorMinimoSaque": "Minimum withdrawal amount",
         "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
-        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount"
-        "receberBonusCassino": "Receive Bonus - Casino",
+        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
+        "receberBonusCassino": "Receive Bonus - Casino"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
