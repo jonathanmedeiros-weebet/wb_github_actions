@@ -5,6 +5,7 @@ import { SeninhaComponent } from './seninha/seninha.component';
 import { QuininhaComponent } from './quininha/quininha.component';
 import { QuininhaGuard, SeninhaGuard } from './../services';
 import { LoteriaLayoutComponent } from '../shared/layout/app-layouts';
+import { LoteriaPopularComponent } from './loteria-popular/loteria-popular.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,11 @@ export const routes: Routes = [
             {
                 path: 'seninha',
                 component: SeninhaComponent,
+                canActivate: [SeninhaGuard]
+            },
+            {
+                path: 'loteria-popular',
+                component: LoteriaPopularComponent,
                 canActivate: [SeninhaGuard]
             }
         ]

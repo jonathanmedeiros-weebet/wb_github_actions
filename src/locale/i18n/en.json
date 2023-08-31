@@ -236,7 +236,8 @@
         "raspadinha": "Scratchcard",
         "roleta": "Roulette",
         "mesa": "Table",
-        "cassinoAoVivo": "Live Casino"
+        "cassinoAoVivo": "Live Casino",
+        "loteriaPopular": "Popular Lottery"
     },
     "bilhete": {
         "titulo": "TICKET",

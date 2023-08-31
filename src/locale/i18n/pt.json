@@ -236,7 +236,8 @@
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
-        "cassinoAoVivo": "Cassino Ao Vivo"
+        "cassinoAoVivo": "Cassino Ao Vivo",
+        "loteriaPopular": "Loteria Popular"
     },
     "bilhete": {
         "titulo": "BILHETE",
