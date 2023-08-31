@@ -297,14 +297,18 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             modalAposta = ApostaModalComponent;
         }
+        
+        let size = aposta.tipo == 'esportes' ? 'lg' : '';
+        let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(
                 apostaLocalizada => {
                     this.modalRef = this.modalService.open(modalAposta, {
                         ariaLabelledBy: 'modal-basic-title',
+                        size: size,
                         centered: true,
-                        scrollable: true
+                        windowClass: typeWindow
                     });
                     this.modalRef.componentInstance.aposta = apostaLocalizada;
                     this.modalRef.componentInstance.showCancel = true;

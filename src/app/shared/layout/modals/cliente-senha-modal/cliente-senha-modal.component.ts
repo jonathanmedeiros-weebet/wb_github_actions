@@ -52,15 +52,27 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     submit() {
         const values = this.form.value;
 
-        this.clienteService.alterarSenha(values)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                res => {
-                    this.form.reset();
-                    this.handleSuccess();
-                },
-                error => this.handleError(error)
-            );
+        if (this.isCliente) {
+            this.clienteService.alterarSenha(values)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    res => {
+                        this.form.reset();
+                        this.handleSuccess();
+                    },
+                    error => this.handleError(error)
+                );
+        } else {
+            this.auth.changePassword(values)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    res => {
+                        this.form.reset();
+                        this.handleSuccess();
+                    },
+                    error => this.handleError(error)
+                );
+        }
     }
 
     resetarForm() {
