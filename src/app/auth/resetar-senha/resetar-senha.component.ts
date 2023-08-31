@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {ClienteService} from '../../shared/services/clientes/cliente.service';
-import {FormValidations, PasswordValidation} from '../../shared/utils';
-import {config} from '../../shared/config';
-import {AuthService} from '../../shared/services/auth/auth.service';
-import {MessageService} from '../../shared/services/utils/message.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { PasswordValidation } from '../../shared/utils';
+import { config } from '../../shared/config';
+import { AuthService } from '../../shared/services/auth/auth.service';
+import { MessageService } from '../../shared/services/utils/message.service';
 
 @Component({
     selector: 'app-resetar-senha',
@@ -25,7 +24,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private fb: UntypedFormBuilder,
-        private clienteService: ClienteService,
         private messageService: MessageService,
         private authService: AuthService
     ) {
