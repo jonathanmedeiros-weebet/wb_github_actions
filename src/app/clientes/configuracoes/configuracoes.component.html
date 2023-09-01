@@ -155,7 +155,8 @@
                         <i class="fa {{sectionExclusaoConta ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionExclusaoConta">
-                        <p class="descricao">Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.</p>
+                        <p class="descricao">Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro. 
+                        <br><b>Além disso, ressaltamos que essa ação também implicará na impossibilidade de criar uma nova conta na plataforma.</b></p>
                         <form [formGroup]="formExclusaoConta" (ngSubmit)="onSubmitExclusaoConta()">
                             <div class="field w-500">
                                 <label for="">Informe por qual motivo você deseja excluir sua conta permanentemente:</label>
@@ -171,7 +172,7 @@
                             </div>
                             <div class="field w-500" *ngIf="showConfirmarExclusao">
                                 <div>
-                                    <label class="label">Digite "EXCLUIR PERMANENTEMENTE" para confirmar a ação de exclusão.</label>
+                                    <label class="label">Digite "<b>EXCLUIR PERMANENTEMENTE</b>" para confirmar a ação de exclusão.</label>
                                 </div>
                                 <div>
                                     <div class="form-group">

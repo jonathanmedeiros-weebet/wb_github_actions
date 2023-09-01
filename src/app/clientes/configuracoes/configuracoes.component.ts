@@ -177,11 +177,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     onSubmitExclusaoConta() {
-        const { motivoExclusao } = this.formExclusaoConta.value;
-        let textCorrect = this.validarExclusao(this.formExclusaoConta.value.confirmarExclusao);
+        const { motivoExclusao, confirmarExclusao, opcao} = this.formExclusaoConta.value;
 
-        if (textCorrect || this.formExclusaoConta.value.opcao == '') {
-            this.clienteService.excluirConta(motivoExclusao, this.formExclusaoConta.value.confirmarExclusao).subscribe(
+        if (this.validarExclusao(confirmarExclusao) || opcao == '') {
+            this.clienteService.excluirConta(motivoExclusao, confirmarExclusao).subscribe(
                 result => {
                     this.messageService.success(result.message);
                     this.authService.logout();
@@ -191,7 +190,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 }
             )
         } else {
-            this.handleError('Digite "EXCLUIR PERMANENTEMENTE" para confirmar o processo de exclusão da conta.');
+            this.handleError('Digite exatamente a frase "EXCLUIR PERMANENTEMENTE" para confirmar a exclusão da conta.');
         }
     }
 
