@@ -11,19 +11,12 @@
 }
 
 @media only screen and (max-width: 532px) {
-    .modal-header .info-horario {
-        display: none;
-    }
-    .modal-title {
+    .modal-header .info-horario,
+    .modal-header .modal-esportes-title {
         display: none;
     }
     .modal-title-mobile {
         margin-left: 7px;
         display: block;
-    }
-    .modal-body {
-        /* max-height: 100vh; */
-        height: 80vh;
-        overflow: scroll;
     }
 }
