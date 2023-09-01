@@ -3338,3 +3338,12 @@ gulp.task('jetbet365.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('primebet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "primebet.com",
+        banca: "PRIME BET",
+        styles: "",
+    });
+});

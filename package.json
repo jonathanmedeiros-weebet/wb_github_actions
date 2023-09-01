@@ -349,7 +349,8 @@
         "betpixmais.bet": "gulp betpixmais.bet",
         "jbnacional.bet": "gulp jbnacional.bet",
         "leaoesporte.bet": "gulp leaoesporte.bet",
-        "jetbet365.com": "gulp jetbet365.com"
+        "jetbet365.com": "gulp jetbet365.com",
+        "primebet.com": "gulp primebet.com"
     },
     "private": true,
     "dependencies": {
