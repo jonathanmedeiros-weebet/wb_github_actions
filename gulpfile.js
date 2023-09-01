@@ -787,15 +787,6 @@ gulp.task('reallbet.site', function (done) {
     });
 });
 
-gulp.task('olimpobetsvip.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "olimpobetsvip.wee.bet",
-        banca: "OLIMPO BETS VIP",
-        styles: "",
-    });
-});
-
 gulp.task('maranhaobets.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2345,15 +2336,6 @@ gulp.task('faithbets.bet', function (done) {
         server: "front4.wee.bet",
         host: "faithbets.bet",
         banca: "FAITH BETS",
-        styles: "",
-    });
-});
-
-gulp.task('bet10k.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "bet10k.com",
-        banca: "BET 10K",
         styles: "",
     });
 });
