@@ -3348,3 +3348,12 @@ gulp.task('primebet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('tenbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "tenbet.wee.bet",
+        banca: "TEN BET",
+        styles: "",
+    });
+});
