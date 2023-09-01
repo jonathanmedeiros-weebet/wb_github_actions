@@ -2,7 +2,7 @@
     <h4 class="modal-title" id="modal-basic-title" *ngIf="aposta.tipo != 'esportes'">Aposta</h4>
     <div>
         <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
-        <h5 class="modal-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
+        <h5 class="modal-esportes-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
         <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
     </div>
     <div class="action-buttons">
@@ -37,8 +37,6 @@
 <ng-template #bilheteEsporte>
     <app-exibir-bilhete-esportivo [aposta]="aposta"></app-exibir-bilhete-esportivo>
 </ng-template>
-
-
 <div class="p-3" *ngIf="aposta.tipo != 'esportes' && isMobile && (impressaoPermitida() || compartilhamentoPermitido())">
     <a class="btn btn-custom btn-block" *ngIf="impressaoPermitida()" (click)="printTicket()">
         {{'geral.imprimir' | translate}}

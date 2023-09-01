@@ -219,6 +219,7 @@ table tr td:nth-child(3) {
         margin: 0 5px;
         max-height: none;
         column-count: 1;
+        margin-bottom: 15px;
     }
     .table-container,
     .modal-header .info-horario {

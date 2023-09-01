@@ -87,7 +87,7 @@
                         </td>
                         <td class="item">
                             <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
-                                Encerrado 
+                                Encerrado <br />
                                 <span [ngClass]="resultadoClass(item)">
                                     <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
                                         ( {{item.resultado}} )
