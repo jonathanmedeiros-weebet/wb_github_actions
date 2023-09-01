@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SeninhaComponent } from './seninha/seninha.component';
 import { QuininhaComponent } from './quininha/quininha.component';
-import { QuininhaGuard, SeninhaGuard } from './../services';
+import { LoteriaPopularGuard, QuininhaGuard, SeninhaGuard } from './../services';
 import { LoteriaLayoutComponent } from '../shared/layout/app-layouts';
 import { LoteriaPopularComponent } from './loteria-popular/loteria-popular.component';
 
@@ -30,7 +30,7 @@ export const routes: Routes = [
             {
                 path: 'loteria-popular',
                 component: LoteriaPopularComponent,
-                canActivate: [SeninhaGuard]
+                canActivate: [LoteriaPopularGuard]
             }
         ]
     }
