@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 import { LoteriaPopularService } from 'src/app/shared/services/loteria/loteria-popular.service';
-import { AuthService, MenuFooterService, MessageService } from 'src/app/services';
+import { AuthService, MenuFooterService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
@@ -32,7 +32,8 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private auth: AuthService,
         private messageService: MessageService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private paramsService: ParametrosLocaisService
     ) {}
 
     ngOnInit(): void {
@@ -53,10 +54,18 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
                 );
             if (!this.isLoggedIn) {
                 this.abrirModalLogin();
-                this.router.navigate(['loterias']);
+                if (this.paramsService.quininhaAtiva() || this.paramsService.seninhaAtiva()) {
+                    this.router.navigate(['loterias']);
+                } else {
+                    this.router.navigate(['/']);
+                }
             } else if (!this.isCliente) {
                 this.handleError(this.translate.instant('geral.semPermissaoAcesso'));
-                this.router.navigate(['loterias']);
+                if (this.paramsService.quininhaAtiva() || this.paramsService.seninhaAtiva()) {
+                    this.router.navigate(['loterias']);
+                } else {
+                    this.router.navigate(['/']);
+                }
             } else {
                 this.loadGame();
             }
