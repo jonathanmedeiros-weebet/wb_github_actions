@@ -13,7 +13,7 @@
     overflow: auto;
 }
 .modal-header {
-    background-color: var(--game);
+    background-color: var(--header);
     border: none;
 }
 #cupom{
@@ -116,7 +116,7 @@ hr {
     font-weight: normal;
     font-size: 12px;
     text-align: center;
-    
+
 }
 .encerrado {
     text-decoration-line: line-through;
@@ -128,7 +128,7 @@ hr {
 .btn-outline-custom:hover {
     text-align: center;
     color: var(--foreground-highlight);
-    background-color: var(--highlight); 
+    background-color: var(--highlight);
     border-color: var(--foreground-highlight);
 }
 .btn-outline-custom {
