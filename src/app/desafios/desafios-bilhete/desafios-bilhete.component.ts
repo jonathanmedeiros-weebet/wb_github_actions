@@ -366,7 +366,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350',
+            windowClass: 'modal-550 modal-h-350 modal-login',
             centered: true,
         };
 

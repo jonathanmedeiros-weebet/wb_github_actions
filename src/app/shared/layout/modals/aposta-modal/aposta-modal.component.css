@@ -1,0 +1,22 @@
+.classe-esportes {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--game);
+    border: none;
+}
+.modal-title-mobile {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 16px;
+    display: none;
+}
+
+@media only screen and (max-width: 532px) {
+    .modal-header .info-horario,
+    .modal-header .modal-esportes-title {
+        display: none;
+    }
+    .modal-title-mobile {
+        margin-left: 7px;
+        display: block;
+    }
+}

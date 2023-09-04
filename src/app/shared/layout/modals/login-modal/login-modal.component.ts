@@ -32,6 +32,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     modoClienteHabilitado;
     LOGO = config.LOGO;
     loginGoogle = false;
+    googleUser;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -76,13 +77,20 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
         if(this.paramsLocais.getOpcoes().habilitar_login_google) {
             this.loginGoogle = true;
-            this.socialAuth.authState.subscribe((user) => {
-                this.form.patchValue({
-                    googleId: user.id,
-                    googleIdToken: user.idToken
-                });
-                this.submit();
-            });
+            this.socialAuth.authState
+                .pipe(takeUntil(this.unsub$))
+                .subscribe((user) => {
+                        if (user) {
+                            this.form.patchValue({
+                                googleId: user.id,
+                                googleIdToken: user.idToken
+                            });
+                            this.submit();
+                        }
+
+                        this.googleUser = user;
+                    }
+                );
         }
 
     }
@@ -97,6 +105,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnDestroy() {
+        if (this.googleUser) {
+            this.socialAuth.signOut();
+        }
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -162,8 +173,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             CadastroModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
     }

@@ -323,7 +323,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350',
+            windowClass: 'modal-550 modal-h-350 modal-login',
             centered: true,
         };
 
@@ -413,10 +413,15 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             this.getPosicaoFinanceira();
         }
 
+        let size = aposta.tipo == 'esportes' ? 'lg' : '';
+        let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
+        
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true,
-            scrollable: true
+            scrollable: true,
+            size: size,
+            windowClass: typeWindow
         });
 
         this.modalRef.componentInstance.aposta = aposta;

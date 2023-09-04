@@ -42,6 +42,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesCassino: GameCasino[];
     gamesDestaque: GameCasino[];
     gamesSlot: GameCasino[];
+    gamesCrash: GameCasino[];
     gamesRaspadinha: GameCasino[];
     gamesRoleta: GameCasino[];
     gamesMesa: GameCasino[];
@@ -84,6 +85,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.cassinoFornecedores = response.fornecedores;
             this.totalJogos = this.gamesCassino.length;
             this.gamesSlot = this.filterSlot(response.gameList);
+            this.gamesCrash = this.filterCrash(response.gameList);
             this.gamesRaspadinha = this.filterRaspadinha(response.gameList);
             this.gamesRoleta = this.filterRoleta(response.gameList);
             this.gamesMesa = this.filterMesa(response.gameList);
@@ -100,7 +102,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                         dados: {}
                     });
                     this.gameList = response.gameList.filter(function (game) {
-                        return game.dataType === 'VSB';
+                        return game.category === 'virtual';
                     });
                 } else {
                     this.sideBarService.changeItens({
@@ -115,6 +117,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                         case 'slot':
                             this.gameList = this.gamesSlot;
                             this.gameTitle = this.translate.instant('cassino.slot');
+                            break;
+                        case 'crash':
+                            this.gameList = this.gamesCrash;
+                            this.gameTitle = this.translate.instant('cassino.crash');
                             break;
                         case 'roleta':
                             this.gameList = this.gamesRoleta;
@@ -184,37 +190,43 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     filterSlot(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'vs';
+            return game.category === 'slot';
+        });
+    }
+
+    filterCrash(games) {
+        return games.filter(function (game) {
+            return game.category === 'crash';
         });
     }
 
     filterRaspadinha(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'sc';
+            return game.category === 'scratchcard';
         });
     }
 
     filterRoleta(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'rl';
+            return game.category === 'roulette';
         });
     }
 
     filterMesa(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'tb' || game.gameTypeID === 'bj' || game.gameTypeID === 'bc';
+            return game.category === 'table';
         });
     }
 
     filterBingo(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'bingo';
+            return game.category === 'bingo';
         });
     }
 
     filterLive(games) {
         return games.filter(function (game) {
-            return game.gameTypeID === 'lg';
+            return game.category === 'live';
         });
     }
 
@@ -243,42 +255,48 @@ export class WallComponent implements OnInit, AfterViewInit {
         const scrollLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-left`);
         const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
 
-        const maxScrollSize = window.innerWidth - 240;
+        const fadeLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-left`);
+        const fadeRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-right`);
+
+        const maxScrollSize = scrollTemp.nativeElement.clientWidth;
 
         if (scrollLeft <= 0) {
-            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
-            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            }
+            this.renderer.setStyle(fadeLeftTemp, 'display', 'none');
         } else {
-            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
-            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            }
+            this.renderer.setStyle(fadeLeftTemp, 'display', 'block');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 0) {
-            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
-            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            }
+            this.renderer.setStyle(fadeRightTemp, 'display', 'none');
         } else {
-            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
-            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            if (!this.isMobile) {
+                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            }
+            this.renderer.setStyle(fadeRightTemp, 'display', 'block');
         }
     }
 
     abrirModalLogin() {
-        let options = {};
-
-        if (this.isMobile) {
-            options = {
-                windowClass: 'modal-fullscreen',
-            };
-        } else {
-            options = {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-            };
-        }
-
         this.modalRef = this.modalService.open(
-            LoginModalComponent, options
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
         );
     }
 

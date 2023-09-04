@@ -18,6 +18,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     gameId: String = '';
     gameMode: String = '';
     gameFornecedor: String = '';
+    gameName: String = '';
     params: any = [];
     mobileScreen;
     fullscreen;
@@ -74,6 +75,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
+                    this.gameName = response.gameName || "";
                 },
                 error => {
                     this.handleError(error);
