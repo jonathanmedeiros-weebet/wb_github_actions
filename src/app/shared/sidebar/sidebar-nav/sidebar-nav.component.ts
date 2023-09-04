@@ -162,9 +162,14 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 aposta => {
                     this.form.reset();
 
+                    let size = aposta.tipo == 'esportes' ? 'lg' : '';
+                    let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
+                    
                     const modalRef = this.modalService.open(ApostaModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
-                        centered: true
+                        centered: true,
+                        size: size,
+                        windowClass: typeWindow
                     });
 
                     modalRef.componentInstance.aposta = aposta;
