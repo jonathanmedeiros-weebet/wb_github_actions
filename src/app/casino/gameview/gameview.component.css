@@ -94,8 +94,6 @@ iframe{
 @media (min-width: 1025px) {
     .game-view {
         height: 100%;
-        position: relative;
-        z-index: 2147483647;
     }
 
     .game-frame {
