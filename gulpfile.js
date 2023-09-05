@@ -3363,3 +3363,12 @@ gulp.task('tenbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('olimpico.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "olimpico.bet",
+        banca: "OLÍMPICO BET",
+        styles: "",
+    });
+});

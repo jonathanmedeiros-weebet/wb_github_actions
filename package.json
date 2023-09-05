@@ -351,7 +351,8 @@
         "leaoesporte.bet": "gulp leaoesporte.bet",
         "jetbet365.com": "gulp jetbet365.com",
         "prymebet.com": "gulp prymebet.com",
-        "tenbet.wee.bet": "gulp tenbet.wee.bet"
+        "tenbet.wee.bet": "gulp tenbet.wee.bet",
+        "olimpico.bet": "gulp olimpico.bet"
     },
     "private": true,
     "dependencies": {
