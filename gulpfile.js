@@ -3372,3 +3372,21 @@ gulp.task('olimpico.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vipouro.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "vipouro.com",
+        banca: "VIP OURO",
+        styles: "",
+    });
+});
+
+gulp.task('crewbet.io', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "crewbet.io",
+        banca: "CREW BET",
+        styles: "",
+    });
+});
