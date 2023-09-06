@@ -18,14 +18,14 @@
 }
 #cupom{
     padding: 0 1em;
-    background: #363636;
+    background: var(--game);
     font-size: 12px;
     border-radius: 5px;
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
-    background: #1C1C1C;
-    color: white;
+    background: var(--game);
+    color: var(--foreground-game);
     font-size: 12px;
     margin-bottom: 13px;
     max-height: 91px;
@@ -42,7 +42,7 @@
     font-weight: normal;
 }
 .cupom-ativo{
-    background: #1C1C1C;
+    background: var(--game);
     margin-bottom: 0;
 }
 .ganhou{
@@ -142,9 +142,10 @@ hr {
 }
 .info-cupom {
     font-size: 12px;
-    color: #A9A9A9;
+    color: var(--foreground);
 }
 .info-priority-cupom {
+    color: var(--foreground);
     font-size: 14px;
     font-weight: 650;
 }
@@ -163,12 +164,12 @@ hr {
     padding: 8px;
  }
 .table tbody td {
-    background: #363636;
+    background: var(--game);
     border-top: 0;
-    border-bottom: 1px solid var(--game);
+    border-bottom: 1px solid var(--foreground-game);
 }
 .table thead {
-    background-color: #f8f9fa;
+    background-color: var(--game);
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
@@ -193,8 +194,8 @@ table tr td:nth-child(3) {
 }
 .modal-footer {
     justify-content: center;
-    background: #1C1C1C;
-    border-top: black;
+    background: var(--game);
+    border-top: none;
 }
 .button-container {
     display: flex;
@@ -255,12 +256,6 @@ table tr td:nth-child(3) {
         padding-top: 10px;
         padding-bottom: 10px;
     }
-    /* .modal-footer {
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        min-height: 40px;
-    } */
  }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
     .modal-body {
