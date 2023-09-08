@@ -353,7 +353,10 @@
         "prymebet.com": "gulp prymebet.com",
         "tenbet.wee.bet": "gulp tenbet.wee.bet",
         "olimpico.bet": "gulp olimpico.bet",
-        "crewbet.io": "gulp crewbet.io"
+        "crewbet.io": "gulp crewbet.io",
+        "bet4fun.io": "gulp bet4fun.io",
+        "betsu.com": "gulp betsu.com",
+        "zeuspay.bet": "gulp zeuspay.bet"
     },
     "private": true,
     "dependencies": {

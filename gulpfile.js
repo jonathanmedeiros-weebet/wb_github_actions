@@ -3392,3 +3392,30 @@ gulp.task('crewbet.io', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet4fun.io', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet4fun.io",
+        banca: "BET4FUN",
+        styles: "",
+    });
+});
+
+gulp.task('betsu.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betsu.com",
+        banca: "BET SU",
+        styles: "",
+    });
+});
+
+gulp.task('zeuspay.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "zeuspay.bet",
+        banca: "ZEUS PAY",
+        styles: "",
+    });
+});
