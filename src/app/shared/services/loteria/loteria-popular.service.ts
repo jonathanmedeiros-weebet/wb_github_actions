@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from '../utils/headers.service';
@@ -26,6 +27,22 @@ export class LoteriaPopularService {
                 map((res: any) => {
                     return res;
                 }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getApostas(queryParams?: any): Observable<any> {
+        let requestOptions;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(`${this.loteria_popular_url}/bets`, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }
