@@ -672,15 +672,6 @@ gulp.task('ingamesport.com', function (done) {
     });
 });
 
-gulp.task('eisports.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "eisports.club",
-        banca: "EI SPORTS",
-        styles: "--header: #60a443; --foreground-header: #fff; --sidebar-right:#60a443; --foreground-sidebar-right: #fff; --sidebar-left: #60a443; --foreground-sidebar-left: #fff; --odds: #000;--foreground-odds:#fff;--highlight:#7dd856;--foreground-highlight:#fff;",
-    });
-});
-
 gulp.task('lbbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1982,15 +1973,6 @@ gulp.task('bet04.club', function (done) {
     });
 });
 
-gulp.task('betgain.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betgain.club",
-        banca: "BET GAIN",
-        styles: "",
-    });
-});
-
 gulp.task('alfasports.online', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2431,15 +2413,6 @@ gulp.task('arenamiami.net', function (done) {
         server: "front3.wee.bet",
         host: "arenamiami.net",
         banca: "ARENA MIAMI",
-        styles: "",
-    });
-});
-
-gulp.task('betsbolabrasil.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betsbolabrasil.com",
-        banca: "BETS BOLA BRASIL",
         styles: "",
     });
 });
