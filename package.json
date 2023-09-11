@@ -353,7 +353,8 @@
         "crewbet.io": "gulp crewbet.io",
         "bet4fun.io": "gulp bet4fun.io",
         "betsu.com": "gulp betsu.com",
-        "zeuspay.bet": "gulp zeuspay.bet"
+        "zeuspay.bet": "gulp zeuspay.bet",
+        "vipouro.com": "gulp vipouro.com"
     },
     "private": true,
     "dependencies": {
