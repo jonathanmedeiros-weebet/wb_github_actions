@@ -3379,11 +3379,11 @@ gulp.task('bet4fun.io', function (done) {
     });
 });
 
-gulp.task('betsu.com', function (done) {
+gulp.task('betssu.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "betsu.com",
-        banca: "BET SU",
+        host: "betssu.com",
+        banca: "BETSSU",
         styles: "",
     });
 });
