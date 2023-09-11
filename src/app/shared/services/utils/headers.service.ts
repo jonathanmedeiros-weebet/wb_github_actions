@@ -10,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class HeadersService {
     currentLanguage = 'pt';
     constructor(private translate: TranslateService) {
-        this.currentLanguage = this.translate.currentLang ?? 'pt';
+        this.currentLanguage = this.translate.currentLang ?? localStorage.getItem('linguagem') ?? 'pt';
         this.translate.onLangChange.subscribe(res => {
             this.currentLanguage = res.lang;
         });

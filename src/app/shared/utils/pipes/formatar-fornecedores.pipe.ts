@@ -86,6 +86,9 @@ export class FormatarFornecedoresPipe implements PipeTransform {
             case 'hacksaw':
                 fornecedorFormatado = 'Hacksaw';
                 break;
+            case 'aviatrix':
+                fornecedorFormatado = 'Aviatrix';
+                break;
         }
         return fornecedorFormatado;
     }
