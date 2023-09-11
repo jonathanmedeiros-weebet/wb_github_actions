@@ -90,7 +90,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             .subscribe((params) => {
             if (params.afiliado) {
                 this.clientesService.codigoFiliacaoCadastroTemp = params.afiliado;
-                this.possuiCodigoAfiliado = true;
+                localStorage.setItem('codigoAfiliado', params.afiliado);
+            } else {
+                const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
+                if (storagedCodigoAfiliado) {
+                    this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                }
+            }
+
+            if(params.btag) {
+                localStorage.setItem('btag', params.btag);
+            } else {
+                const storagedBtag = localStorage.getItem('btag');
+                if (storagedBtag) {
+                    this.form.patchValue({btag: storagedBtag});
+                }
             }
 
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
@@ -174,8 +188,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.activeModal.dismiss();
-                    if(this.validacaoEmailObrigatoria){
-                    this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
+                    localStorage.removeItem('codigoAfiliado');
+                    if(this.validacaoEmailObrigatoria) {
+                        this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
                         this.modalService.open(ValidarEmailModalComponent, {
                             ariaLabelledBy: 'modal-basic-title',
                             windowClass: 'modal-pop-up',
@@ -183,7 +198,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             backdrop: 'static'
                         });
                     } else {
-                        this.modalService.open(this.ativacaoCadastroModal,{
+                        this.modalService.open(this.ativacaoCadastroModal, {
                             ariaLabelledBy: 'modal-basic-title',
                             windowClass: 'modal-pop-up',
                             centered: true
