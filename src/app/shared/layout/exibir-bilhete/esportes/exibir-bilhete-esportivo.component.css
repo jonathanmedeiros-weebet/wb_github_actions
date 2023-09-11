@@ -15,6 +15,7 @@
 .modal-header {
     background-color: var(--game);
     border: none;
+    color: var(--foreground-game);
 }
 #cupom{
     padding: 0 1em;
@@ -24,7 +25,7 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
-    background: var(--game);
+    background: var(--background);
     color: var(--foreground-game);
     font-size: 12px;
     margin-bottom: 13px;
@@ -42,15 +43,16 @@
     font-weight: normal;
 }
 .cupom-ativo{
-    background: var(--game);
+    background: var(--background);
     margin-bottom: 0;
+    color: var(--foreground-game);
 }
 .ganhou{
-    color: #008000;
+    color: #0C9F19;
     text-transform: uppercase;
 }
 .perdeu{
-    color: #e61919;
+    color: #E9283B;
     text-transform: uppercase;
 }
 .cancelado{
@@ -123,7 +125,7 @@ hr {
 }
 .dados-simulacao {
     text-align: center;
-    color: red;
+    color: #E9283B;
 }
 .btn-outline-custom:hover {
     text-align: center;
@@ -142,7 +144,7 @@ hr {
 }
 .info-cupom {
     font-size: 12px;
-    color: var(--foreground);
+    color: var(--foreground-game);
 }
 .info-priority-cupom {
     color: var(--foreground);
@@ -150,7 +152,7 @@ hr {
     font-weight: 650;
 }
 .table {
-    color: var(--foreground);
+    color: var(--foreground-game);
     margin-top: 10px;
     margin-bottom: -11px;
     border-collapse: collapse;
@@ -160,13 +162,13 @@ hr {
     background-color: var(--game);
     color: var(--foreground-game);
     border-top: 0;
-    border-bottom: 1px solid var(--game);
+    border-bottom: 3px solid var(--background);
     padding: 8px;
  }
 .table tbody td {
     background: var(--game);
     border-top: 0;
-    border-bottom: 1px solid var(--foreground-game);
+    border-bottom: 1px solid var(--background);
 }
 .table thead {
     background-color: var(--game);
@@ -194,7 +196,7 @@ table tr td:nth-child(3) {
 }
 .modal-footer {
     justify-content: center;
-    background: var(--game);
+    background: var(--background);
     border-top: none;
 }
 .button-container {
@@ -255,6 +257,9 @@ table tr td:nth-child(3) {
     .modal-header {
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+    #cupom {
+        background-color: var(--game);
     }
  }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
