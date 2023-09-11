@@ -13,8 +13,9 @@
     overflow: auto;
 }
 .modal-header {
-    background-color: var(--header);
+    background-color: var(--game);
     border: none;
+    color: var(--foreground-game);
 }
 #cupom{
     padding: 0 1em;
@@ -24,7 +25,7 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
-    background: var(--inputs-odds);
+    background: var(--background);
     color: var(--foreground-game);
     font-size: 12px;
     margin-bottom: 13px;
@@ -32,8 +33,9 @@
     column-count: 3;
 }
 .cupom-ativo{
-    background: var(--inputs-odds);
+    background: var(--background);
     margin-bottom: 0;
+    color: var(--foreground-game);
 }
 img{
     max-height: 90px;
@@ -142,7 +144,7 @@ hr {
 }
 .info-cupom {
     font-size: 12px;
-    color: var(--foreground);
+    color: var(--foreground-game);
 }
 
 .info-priority-cupom {
@@ -151,7 +153,7 @@ hr {
     font-weight: 650;
 }
 .table {
-    color: var(--foreground);
+    color: var(--foreground-game);
     margin-top: 10px;
     margin-bottom: -11px;
     border-collapse: collapse;
@@ -161,13 +163,13 @@ hr {
     background-color: var(--game);
     color: var(--foreground-game);
     border-top: 0;
-    border-bottom: 3px solid var(--inputs-odds);
+    border-bottom: 3px solid var(--background);
     padding: 8px;
  }
 .table tbody td {
     background: var(--game);
     border-top: 0;
-    border-bottom: 1px solid var(--inputs-odds);
+    border-bottom: 1px solid var(--background);
 }
 .table thead {
     background-color: var(--game);
@@ -195,7 +197,7 @@ table tr td:nth-child(3) {
 }
 .modal-footer {
     justify-content: center;
-    background: var(--inputs-odds);
+    background: var(--background);
     border-top: none;
 }
 .button-container {

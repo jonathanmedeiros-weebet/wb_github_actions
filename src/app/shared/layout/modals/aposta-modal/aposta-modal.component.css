@@ -1,7 +1,9 @@
 .classe-esportes {
     font-family: 'Open Sans', sans-serif;
-    background-color: var(--header);
     border: none;
+    background-color: var(--game);
+    border: none;
+    color: var(--foreground-game);
 }
 .modal-title-mobile {
     font-weight: 600;
