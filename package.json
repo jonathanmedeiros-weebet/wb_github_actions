@@ -354,7 +354,10 @@
         "bet4fun.io": "gulp bet4fun.io",
         "betssu.com": "gulp betssu.com",
         "zeuspay.bet": "gulp zeuspay.bet",
-        "vipouro.com": "gulp vipouro.com"
+        "vipouro.com": "gulp vipouro.com",
+        "betbetix.com": "gulp betbetix.com",
+        "pix777.bet": "gulp pix777.bet",
+        "granluck.com": "gulp granluck.com"
     },
     "private": true,
     "dependencies": {

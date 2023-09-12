@@ -3396,3 +3396,30 @@ gulp.task('zeuspay.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betbetix.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betbetix.com",
+        banca: "BET BETIX",
+        styles: "",
+    });
+});
+
+gulp.task('pix777.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pix777.bet",
+        banca: "PIX 777",
+        styles: "",
+    });
+});
+
+gulp.task('granluck.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "granluck.com",
+        banca: "GRAN LUCK",
+        styles: "",
+    });
+});
