@@ -3269,10 +3269,10 @@ gulp.task('lottomaster.bet', function (done) {
     });
 });
 
-gulp.task('gorilabet.wee.bet', function (done) {
+gulp.task('gorilabet.io', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "gorilabet.wee.bet",
+        host: "gorilabet.io",
         banca: "GORILA BET",
         styles: "",
     });
