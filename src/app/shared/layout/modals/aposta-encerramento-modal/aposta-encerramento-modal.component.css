@@ -14,8 +14,14 @@
 }
 .modal-header {
     border: none;
-    color: var(--foreground);
+    background: var(--header);
+    color: var(--foreground-header);
 }
+
+.modal-header i{
+    color: var(--foreground-header) !important;
+}
+
 #cupom{
     padding: 0 1em;
     background: #363636;
