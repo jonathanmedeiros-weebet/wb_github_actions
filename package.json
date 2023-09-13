@@ -358,7 +358,9 @@
         "betbetix.com": "gulp betbetix.com",
         "pix777.bet": "gulp pix777.bet",
         "granluck.com": "gulp granluck.com",
-        "starplayer.bet": "gulp starplayer.bet"
+        "starplayer.bet": "gulp starplayer.bet",
+        "sportmilionario.com": "gulp sportmilionario.com",
+        "moneybets.net": "gulp moneybets.net"
     },
     "private": true,
     "dependencies": {

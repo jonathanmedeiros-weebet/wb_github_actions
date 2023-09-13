@@ -3432,3 +3432,21 @@ gulp.task('starplayer.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sportmilionario.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sportmilionario.com",
+        banca: "STAR PLAYER",
+        styles: "",
+    });
+});
+
+gulp.task('moneybets.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "moneybets.net",
+        banca: "MONEY BETS",
+        styles: "",
+    });
+});
