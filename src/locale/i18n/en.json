@@ -192,7 +192,9 @@
         "movimentacao":"Transactions",
         "rollover": "Rollover",
         "suporte": "Support",
-        "EmailOuUsuario": "E-mail or username"
+        "EmailOuUsuario": "E-mail or username",
+        "promocoes": "Promotions",
+        "indiqueGanhe": "Refer and Earn"
     },
     "dias": {
         "ontem": "Yesterday",

@@ -69,3 +69,4 @@ export * from './shared/services/guards/tenis-mesa.guard';
 export * from './shared/services/guards/futebol-americano.guard';
 export * from './shared/services/guards/hoquei-gelo.guard';
 export * from './shared/services/guards/modulo-cliente.guard';
+export * from './shared/services/guards/indique-ganhe.guard';

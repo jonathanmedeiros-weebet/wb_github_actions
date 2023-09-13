@@ -1,0 +1,27 @@
+.link-indicacao-container {
+    background-color: black;
+    padding: 22px 28px;
+}
+
+.link-indicacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.6);
+}
+
+.link-indicacao i {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.link-indicacao span {
+    flex-grow: 7;
+}
+
+.link-indicacao a {
+    flex-grow: 2;
+    text-align: right;
+}

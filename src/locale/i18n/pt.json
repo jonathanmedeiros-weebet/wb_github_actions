@@ -192,7 +192,9 @@
         "movimentacao":"Movimentações",
         "rollover": "Bônus",
         "suporte": "Suporte",
-        "EmailOuUsuario": "E-mail ou usuário"
+        "EmailOuUsuario": "E-mail ou usuário",
+        "promocoes": "Promoções",
+        "indiqueGanhe": "Indique e Ganhe"
     },
     "dias": {
         "ontem": "Ontem",

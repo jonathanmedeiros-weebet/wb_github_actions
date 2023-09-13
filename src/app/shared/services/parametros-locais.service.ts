@@ -175,5 +175,9 @@ export class ParametrosLocaisService {
 
         return oddsBasqueteAtivas;
     }
+
+    indiqueGanheHabilitado() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.indique_ganhe_habilitado : null;
+    }
 }
 
