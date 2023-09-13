@@ -3437,7 +3437,7 @@ gulp.task('sportmilionario.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "sportmilionario.com",
-        banca: "STAR PLAYER",
+        banca: "SPORT MILIONÁRIO",
         styles: "",
     });
 });
