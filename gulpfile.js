@@ -3423,3 +3423,12 @@ gulp.task('granluck.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('starplayer.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "starplayer.bet",
+        banca: "STAR PLAYER",
+        styles: "",
+    });
+});
