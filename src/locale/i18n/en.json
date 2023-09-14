@@ -194,7 +194,14 @@
         "suporte": "Support",
         "EmailOuUsuario": "E-mail or username",
         "promocoes": "Promotions",
-        "indiqueGanhe": "Refer and Earn"
+        "indiqueGanhe": "Refer and Earn",
+        "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
+        "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
+        "regrasCondicoes": "Rules and conditions",
+        "copiarLink": "Copy link",
+        "seuLinkIndicacao": "Your referral link:",
+        "compartilheSeuLink": "Share your link on social media:",
+        "linkCopiado": "Link copied!"
     },
     "dias": {
         "ontem": "Yesterday",

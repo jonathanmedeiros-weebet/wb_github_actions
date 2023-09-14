@@ -3,25 +3,48 @@
         <div class="content-header hide-mobile">
             <h2>{{'geral.indiqueGanhe' | translate}}</h2>
         </div>
-        <br>
         <div class="content-body">
-            <h4>
-                Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado
-            </h4>
-            <p>
-                Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas Regras e condições.
-            </p>
+            <div class="indique-ganhe-info">
+                <h4>
+                    {{'geral.indiqueGanheInfo1' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                </h4>
+                <p>
+                    {{'geral.indiqueGanheInfo2' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                    <a (click)="abrirModalRegras()" style="cursor: pointer;">{{'geral.regrasCondicoes' | translate}}</a>
+                </p>
+            </div>
             <div class="link-indicacao-container">
-                <p>Seu link de indicação:</p>
+                <p>{{'geral.seuLinkIndicacao' | translate}}</p>
                 <div class="link-indicacao">
-                    <i class="fa fa-link"></i>
-                    <span>{{linkIndicacao}}</span>
-                    <a>Copiar Link</a>
+                    <div class="link">
+                        <i class="fa fa-link"></i>
+                        <span>{{linkIndicacao}}</span>
+                    </div>
+                    <a class="copy-button" (click)="copiarLink()">{{'geral.copiarLink' | translate}}</a>
                 </div>
-                <br>
-                <p>Compartilhe seu link pelas redes sociais:</p>
-                <p>Facebook Whatsapp E-mail Instagram</p>
+                <div class="social-share">
+                    <p>{{'geral.compartilheSeuLink' | translate}}</p>
+                    <div class="social-buttons-container">
+                        <a href="{{linkFacebook}}" target="_blank" class="fa-brands fa-facebook social-buttons"></a><span>Facebook</span>
+                        <a href="{{linkWhatsapp}}" target="_blank" class="fa-brands fa-whatsapp social-buttons"></a><span>Whatsapp</span>
+                        <a href="{{linkTelegram}}" target="_blank" class="fa-brands fa-telegram social-buttons"></a><span>Telegram</span>
+                        <a href="{{linkEmail}}" target="_blank" class="fa-regular fa-envelope social-buttons"></a><span>E-mail</span>
+                        <a href="{{linkInstagram}}" target="_blank" class="fa-brands fa-instagram social-buttons"></a><span>Instagram</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #regrasCondicoesModal style="min-height: 80%">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'geral.regrasCondicoes' | translate}}</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div class="modal-body" style="min-height: 80%">
+        <p></p>
+    </div>
+</ng-template>
