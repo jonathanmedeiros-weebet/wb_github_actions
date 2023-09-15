@@ -360,7 +360,8 @@
         "granluck.com": "gulp granluck.com",
         "starplayer.bet": "gulp starplayer.bet",
         "sportmilionario.com": "gulp sportmilionario.com",
-        "moneybets.net": "gulp moneybets.net"
+        "moneybets.net": "gulp moneybets.net",
+        "ciaaonline.com": "gulp ciaaonline.com"
     },
     "private": true,
     "dependencies": {
