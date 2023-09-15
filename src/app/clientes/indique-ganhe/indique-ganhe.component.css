@@ -35,12 +35,8 @@
 }
 
 .link i {
-    flex-grow: 1;
+    margin-right: 6px;
     text-align: center;
-}
-
-.link span {
-    flex-grow: 9;
 }
 
 .link-indicacao a {
@@ -101,17 +97,41 @@
     background-color: #ff3c2e;
 }
 
-.fa-instagram {
-    color: #ffffff;
-    background-color: #ec0075;
-}
-
 .modal-header, .modal-body {
     padding: 15px 25px;
 }
 
-@media only screen and (min-width: 1024px) {
-    
+@media only screen and (max-width: 480px) {
+    .link-indicacao {
+        flex-direction: column;
+    }
+
+    .link-indicacao .link {
+        width: 100%;
+    }
+
+    .link span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    #indique-ganhe-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .indique-ganhe-info {
+        margin-top: 15px;
+    }
+
+    .link-indicacao {
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 1260px) {

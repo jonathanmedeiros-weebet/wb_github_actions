@@ -165,8 +165,8 @@ export class ClienteService {
             )
     }
 
-    getLinkIndicacao() {
-        return this.http.get(`${this.clienteUrl}/getLinkIndicacao`, this.headers.getRequestOptions(true))
+    getCodigoIndicacao() {
+        return this.http.get(`${this.clienteUrl}/getCodigoIndicacao`, this.headers.getRequestOptions(true))
             .pipe(
                 map(
                     (response: any) => {

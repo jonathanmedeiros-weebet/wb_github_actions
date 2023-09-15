@@ -36,6 +36,7 @@ import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.compo
 import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configuracoes.component';
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
+import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 
 @Component({
     selector: 'app-header',
@@ -48,6 +49,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    indiqueGanheHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
@@ -162,6 +164,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
@@ -335,6 +338,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirRollovers() {
         this.modalService.open(RolloverComponent);
+    }
+
+    abrirIndiqueGanhe() {
+        this.modalService.open(IndiqueGanheComponent);
     }
 
     abrirCambistaDashboard() {

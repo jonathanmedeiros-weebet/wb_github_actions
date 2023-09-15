@@ -339,6 +339,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="abrirIndiqueGanhe()">
+                                <span>
+                                    <i class="fa fa-solid fa-gift"></i>
+                                </span>
+                                {{'geral.indiqueGanhe' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <a (click)="listPrinters()" *ngIf="appMobile">
                                 <span>
                                     <i class="fa fa-solid fa-cogs"></i>
@@ -441,6 +450,12 @@
                             *ngIf="isCliente">
                                 <i class="fa fa-solid fa-cogs mb-2"></i>
                                 {{'geral.configuracoes' | translate}}
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente && indiqueGanheHabilitado">
+                                <i class="fa fa-solid fa-gift mb-2"></i>
+                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{'geral.indiqueGanhe' | translate}}</span>
                             </a>
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
