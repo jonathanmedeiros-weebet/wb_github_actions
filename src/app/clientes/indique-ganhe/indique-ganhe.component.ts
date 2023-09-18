@@ -47,11 +47,13 @@ export class IndiqueGanheComponent implements OnInit {
             .subscribe(
                 response => {
                     this.linkIndicacao = `${location.origin}/cadastro?refId=${response.codigoIndicacao}`;
-                    let urlEncodedLinkIndicacao = this.linkIndicacao.replace(/\//g, "%2F").replace(/\:/g, "%3A").replace(/\?/g, "%3F").replace(/\=/, "%3D");
-                    this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${urlEncodedLinkIndicacao}`;
-                    this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${urlEncodedLinkIndicacao}&type=custom_url&app_absent=0`;
-                    this.linkTelegram = `https://telegram.me/share/url?url=${urlEncodedLinkIndicacao}&text=Cadastre-se%20na%20%21`;
-                    this.linkEmail = `mailto:info@example.com?&subject=&cc=&bcc=&body=${urlEncodedLinkIndicacao}%0A`;
+
+                    let indicacaoMsg = encodeURIComponent("Quer ganhar uma graninha extra e se divertir?\nÉ só criar uma conta através deste link e aproveitar!");
+
+                    this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.linkIndicacao)}`;
+                    this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${indicacaoMsg}%0A${encodeURIComponent(this.linkIndicacao)}&type=custom_url&app_absent=0`;
+                    this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.linkIndicacao)}&text=${indicacaoMsg}`;
+                    this.linkEmail = `mailto:?&subject=&cc=&bcc=&body=${encodeURIComponent(this.linkIndicacao)}%0A`;
                 },
                 error => {
                     this.messageService.error(error);
