@@ -117,8 +117,6 @@ export class AppComponent implements OnInit {
                     }
                 );
             }
-        } else {
-            this.auth.unsetAppMobile();
         }
 
         this.SLUG = config.SLUG;
