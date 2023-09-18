@@ -101,9 +101,10 @@ export class AppComponent implements OnInit {
                 }
             });
 
-        if (location.search.indexOf('app') >= 0) {
+        const params = new URLSearchParams(location.search);
+
+        if (params.get('app')) {
             this.auth.setAppMobile();
-            const params = new URLSearchParams(location.search);
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
             if (appVersion < 2) {
@@ -116,6 +117,8 @@ export class AppComponent implements OnInit {
                     }
                 );
             }
+        } else {
+            this.auth.unsetAppMobile();
         }
 
         this.SLUG = config.SLUG;
