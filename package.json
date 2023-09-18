@@ -361,7 +361,8 @@
         "starplayer.bet": "gulp starplayer.bet",
         "sportmilionario.com": "gulp sportmilionario.com",
         "moneybets.net": "gulp moneybets.net",
-        "ciaaonline.com": "gulp ciaaonline.com"
+        "ciaaonline.com": "gulp ciaaonline.com",
+        "pgbet.net.br": "gulp pgbet.net.br"
     },
     "private": true,
     "dependencies": {

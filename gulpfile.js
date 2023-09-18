@@ -3464,3 +3464,12 @@ gulp.task('ciaaonline.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pgbet.net.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pgbet.net.br",
+        banca: "PG BET",
+        styles: "",
+    });
+});
