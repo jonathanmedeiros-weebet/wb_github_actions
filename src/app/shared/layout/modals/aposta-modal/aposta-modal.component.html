@@ -15,7 +15,7 @@
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="aposta.tipo === 'esportes' ||  !isMobile && compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
+        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
