@@ -44,10 +44,10 @@
             <span *ngIf="!aposta.resultado">Aguardando</span>
         </p>
         <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-            {{'geral.premio' | translate}}: <span style="float:right">{{aposta.premio | currency}}</span>
+            {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
         </p>
         <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-            Cambista paga: <span style="float:right">{{cambistaPaga | currency}}</span>
+            Cambista paga: <span>{{cambistaPaga | currency}}</span>
         </p>
     </div>
     <div class="table-container">
@@ -81,7 +81,7 @@
                                         {{item.odd_nome}}
                                         ({{item.cotacao}})
                                     </span>
-                                    <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                                    <span *ngIf="item.ao_vivo" class="info-priority-cupom"> | AO VIVO</span>
                                 </p>
                             </div>
                         </td>

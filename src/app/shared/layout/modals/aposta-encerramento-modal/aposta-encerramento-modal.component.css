@@ -13,9 +13,15 @@
     overflow: auto;
 }
 .modal-header {
-    background-color: var(--game);
     border: none;
+    background: var(--header);
+    color: var(--foreground-header);
 }
+
+.modal-header i{
+    color: var(--foreground-header) !important;
+}
+
 #cupom{
     padding: 0 1em;
     background: #363636;
@@ -24,27 +30,27 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
-    background: #1C1C1C;
-    color: white;
+    color: var(--foreground);
     font-size: 12px;
     margin-bottom: 13px;
     max-height: 91px;
     column-count: 3;
 }
 .cupom-ativo{
-    background: #1C1C1C;
+    background: var(--background);
     margin-bottom: 0;
+    color: var(--foreground-game);
 }
 img{
     max-height: 90px;
     max-width: 150px;
 }
 .ganhou{
-    color: #008000;
+    color: #0C9F19;
     text-transform: uppercase;
 }
 .perdeu{
-    color: #e61919;
+    color: #E9283B;
     text-transform: uppercase;
 }
 .cancelado{
@@ -116,19 +122,19 @@ hr {
     font-weight: normal;
     font-size: 12px;
     text-align: center;
-    
+
 }
 .encerrado {
     text-decoration-line: line-through;
 }
 .dados-simulacao {
     text-align: center;
-    color: red;
+    color: #E9283B;
 }
 .btn-outline-custom:hover {
     text-align: center;
     color: var(--foreground-highlight);
-    background-color: var(--highlight); 
+    background-color: var(--highlight);
     border-color: var(--foreground-highlight);
 }
 .btn-outline-custom {
@@ -142,15 +148,16 @@ hr {
 }
 .info-cupom {
     font-size: 12px;
-    color: #A9A9A9;
+    color: var(--foreground-game);
 }
 
 .info-priority-cupom {
+    color: var(--highlight);
     font-size: 14px;
     font-weight: 650;
 }
 .table {
-    color: var(--foreground);
+    color: var(--foreground-game);
     margin-top: 10px;
     margin-bottom: -11px;
     border-collapse: collapse;
@@ -160,16 +167,16 @@ hr {
     background-color: var(--game);
     color: var(--foreground-game);
     border-top: 0;
-    border-bottom: 1px solid var(--game);
+    border-bottom: 3px solid var(--background);
     padding: 8px;
  }
 .table tbody td {
-    background: #363636;
+    background: var(--game);
     border-top: 0;
-    border-bottom: 1px solid var(--game);
+    border-bottom: 1px solid var(--background);
 }
 .table thead {
-    background-color: #f8f9fa;
+    background-color: var(--game);
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
@@ -194,8 +201,8 @@ table tr td:nth-child(3) {
 }
 .modal-footer {
     justify-content: center;
-    background: #1C1C1C;
-    border-top: black;
+    background: var(--background);
+    border-top: none;
 }
 .button-container {
     display: flex;
@@ -255,6 +262,9 @@ table tr td:nth-child(3) {
     .modal-header {
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+    #cupom {
+        background-color: var(--game);
     }
  }
  @media only screen and (max-width: 1024px) {
