@@ -362,7 +362,9 @@
         "sportmilionario.com": "gulp sportmilionario.com",
         "moneybets.net": "gulp moneybets.net",
         "ciaaonline.com": "gulp ciaaonline.com",
-        "pgbet.net.br": "gulp pgbet.net.br"
+        "pgbet.net.br": "gulp pgbet.net.br",
+        "fourbet.com": "gulp fourbet.com",
+        "fourbet.bet": "gulp fourbet.bet"
     },
     "private": true,
     "dependencies": {

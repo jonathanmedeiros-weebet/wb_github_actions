@@ -3475,3 +3475,21 @@ gulp.task('pgbet.net.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fourbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fourbet.com",
+        banca: "FOURBET",
+        styles: "",
+    });
+});
+
+gulp.task('fourbet.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fourbet.bet",
+        banca: "FOURBET",
+        styles: "",
+    });
+});
