@@ -206,6 +206,10 @@ export class AuthService {
         localStorage.setItem('app-mobile', 'true');
     }
 
+    unsetAppMobile() {
+        localStorage.removeItem('app-mobile');
+    }
+
     isExpired() {
         const expires = localStorage.getItem('expires');
         // +expired converte a string para inteiro
