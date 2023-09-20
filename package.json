@@ -364,7 +364,9 @@
         "ciaaonline.com": "gulp ciaaonline.com",
         "pgbet.net.br": "gulp pgbet.net.br",
         "fourbet.com": "gulp fourbet.com",
-        "fourbet.bet": "gulp fourbet.bet"
+        "fourbet.bet": "gulp fourbet.bet",
+        "playmasters.bet": "gulp playmasters.bet",
+        "betmidy.com": "gulp betmidy.com"
     },
     "private": true,
     "dependencies": {

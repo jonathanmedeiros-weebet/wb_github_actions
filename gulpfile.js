@@ -3493,3 +3493,21 @@ gulp.task('fourbet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('playmasters.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "playmasters.bet",
+        banca: "PLAY MASTERS",
+        styles: "",
+    });
+});
+
+gulp.task('betmidy.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betmidy.com",
+        banca: "BET MIDY",
+        styles: "",
+    });
+});
