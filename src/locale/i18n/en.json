@@ -195,13 +195,15 @@
         "EmailOuUsuario": "E-mail or username",
         "promocoes": "Promotions",
         "indiqueGanhe": "Refer and earn",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} balance in your account",
         "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
         "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
         "regrasCondicoes": "Rules and conditions",
         "copiarLink": "Copy link",
         "seuLinkIndicacao": "Your referral link:",
         "compartilheSeuLink": "Share your link on social media:",
-        "linkCopiado": "Link copied!"
+        "linkCopiado": "Link copied!",
+        "cliqueAqui": "Click here"
     },
     "dias": {
         "ontem": "Yesterday",

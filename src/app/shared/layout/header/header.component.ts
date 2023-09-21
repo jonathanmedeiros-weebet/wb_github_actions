@@ -1,5 +1,5 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
-import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
@@ -46,6 +46,7 @@ import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ga
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewChecked {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
+    @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -88,6 +89,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     };
     mostrarSaldo;
     firstLoggedIn;
+    valorGanhoPorIndicacao;
+    removendoIndiqueGanheCard = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -114,6 +117,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private renderer: Renderer2,
+        private host: ElementRef
     ) {
         super();
     }
@@ -165,6 +170,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
+
+        this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
@@ -401,5 +408,34 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
 
         return '';
+    }
+
+    redirectIndiqueGanhe() {
+        if (!this.isLoggedIn) {
+            this.abrirLogin();
+        } else {
+            if (this.isMobile) {
+                this.abrirIndiqueGanhe();
+            } else {
+                this.router.navigate(['clientes/indique-ganhe']);
+            }
+            this.removerIndiqueGanheCard();
+        }
+    }
+
+    removerIndiqueGanheCard() {
+        this.removendoIndiqueGanheCard = true;
+        let card = this.indiqueGanheCard.nativeElement;
+        this.renderer.setStyle(card, 'height', '0');
+        this.renderer.setStyle(card, 'padding', '0 20px');
+        setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
+    }
+
+    btnCardOnMouseOver() {
+        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
+    }
+
+    btnCardOnMouseOut() {
+        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
     }
 }

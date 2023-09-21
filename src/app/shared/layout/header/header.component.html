@@ -11,6 +11,20 @@
 	</div>
 </ng-template>
 
+<div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || (isCliente))">
+    <div class="indique-ganhe-card-content">
+        {{'geral.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+        <a (click)="redirectIndiqueGanhe()" 
+            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()" 
+            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()" 
+            class="btn btn-indique-ganhe-card"
+        >{{'geral.cliqueAqui' | translate}}</a>
+    </div>
+    <a (click)="removerIndiqueGanheCard()" type="button" class="btn-close" aria-label="Close">
+        <i class="fa fa-times"></i>
+    </a>
+</div>
+
 <div class="header">
     <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
