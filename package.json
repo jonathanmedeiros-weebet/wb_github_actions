@@ -366,7 +366,9 @@
         "fourbet.com": "gulp fourbet.com",
         "fourbet.net": "gulp fourbet.net",
         "playmasters.bet": "gulp playmasters.bet",
-        "betmidy.com": "gulp betmidy.com"
+        "betmidy.com": "gulp betmidy.com",
+        "bnrbet.com": "gulp bnrbet.com",
+        "camaraobet.com": "gulp camaraobet.com"
     },
     "private": true,
     "dependencies": {

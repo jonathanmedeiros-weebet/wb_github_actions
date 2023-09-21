@@ -3513,3 +3513,21 @@ gulp.task('betmidy.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bnrbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bnrbet.com",
+        banca: "BNR BET",
+        styles: "",
+    });
+});
+
+gulp.task('camaraobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "camaraobet.com",
+        banca: "CAMARÃO BET",
+        styles: "",
+    });
+});
