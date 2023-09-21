@@ -3487,10 +3487,10 @@ gulp.task('fourbet.com', function (done) {
     });
 });
 
-gulp.task('fourbet.bet', function (done) {
+gulp.task('fourbet.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "fourbet.bet",
+        host: "fourbet.net",
         banca: "FOURBET",
         styles: "",
     });
