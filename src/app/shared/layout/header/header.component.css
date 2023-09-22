@@ -23,7 +23,7 @@
 .btn-indique-ganhe-card {
     background-color: var(--header);
     color: var(--highlight);
-    width: 80px;
+    width: 60px;
     height: 25px !important;
     margin-left: 6px;
     padding: 4px 7px !important;
@@ -394,7 +394,7 @@ body .change-theme {
 
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
-        width: 100px;
+        width: 80px;
         height: 33px !important;
         font-size: 15px;
     }
