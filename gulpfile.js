@@ -3464,7 +3464,7 @@ gulp.task('ciaaonline.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "ciaaonline.com",
-        banca: "CIAAONLINE",
+        banca: "CIA A ONLINE",
         styles: "",
     });
 });
