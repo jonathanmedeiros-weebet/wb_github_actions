@@ -108,16 +108,17 @@
 
 .more-games-fade {
     position: absolute;
-    width: 26px;
+    width: 50px;
     height: calc(100% + 20px);
     top: -10px;
-    filter: blur(7px);
     z-index: 1;
+    transition: opacity 0.5s;
 }
 
 .more-games-fade-right {
-    background-image: linear-gradient(to right, rgba(24, 24, 24, 0.7), #181818);
-    right: -10px;
+    background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
+    right: 0;
+    opacity: 1;
 }
 
 #destaques-fade-right {
@@ -125,9 +126,9 @@
 }
 
 .more-games-fade-left {
-    background-image: linear-gradient(to left, rgba(24, 24, 24, 0.7), #181818);
-    left: -10px;
-    display: none;
+    background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
+    left: 0;
+    opacity: 0;
 }
 
 .game-tile {
@@ -428,6 +429,14 @@
     }
     .scroll-button {
         display: none !important;
+    }
+
+    .more-games-fade-right {
+        background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+    }
+
+    .more-games-fade-left {
+        background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
     }
 
     .filter{
