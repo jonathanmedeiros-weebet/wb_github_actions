@@ -368,7 +368,8 @@
         "playmasters.bet": "gulp playmasters.bet",
         "betmidy.com": "gulp betmidy.com",
         "bnrbet.com": "gulp bnrbet.com",
-        "camaraobet.com": "gulp camaraobet.com"
+        "camaraobet.com": "gulp camaraobet.com",
+        "slotdasorte.bet": "gulp slotdasorte.bet"
     },
     "private": true,
     "dependencies": {

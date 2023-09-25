@@ -3531,3 +3531,12 @@ gulp.task('camaraobet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('slotdasorte.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "slotdasorte.bet",
+        banca: "SLOT DA SORTE",
+        styles: "",
+    });
+});
