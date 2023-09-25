@@ -192,7 +192,8 @@
         "movimentacao":"Movimentações",
         "rollover": "Bônus",
         "suporte": "Suporte",
-        "EmailOuUsuario": "E-mail ou usuário"
+        "EmailOuUsuario": "E-mail ou usuário",
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
     },
     "dias": {
         "ontem": "Ontem",
