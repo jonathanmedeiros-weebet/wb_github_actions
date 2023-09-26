@@ -2077,15 +2077,6 @@ gulp.task('esportenetreipele.com', function (done) {
     });
 });
 
-gulp.task('goldeplacasport.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "goldeplacasport.com",
-        banca: "GOL DE PLACA SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('betvibra.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
