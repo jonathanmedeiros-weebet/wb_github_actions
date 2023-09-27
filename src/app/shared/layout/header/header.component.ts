@@ -245,7 +245,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     }
                 }
             );
-        console.log(this.posicaoFinanceira);
     }
 
     svgCss() {
@@ -269,7 +268,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirLogin() {
         this.modalRef = this.modalService.open(
-            LoginModalComponent, 
+            LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-550 modal-h-350 modal-login',
