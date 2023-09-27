@@ -368,7 +368,11 @@
         "betmidy.com": "gulp betmidy.com",
         "bnrbet.com": "gulp bnrbet.com",
         "camaraobet.com": "gulp camaraobet.com",
-        "slotdasorte.bet": "gulp slotdasorte.bet"
+        "slotdasorte.bet": "gulp slotdasorte.bet",
+        "valeno.bet": "gulp valeno.bet",
+        "malybet.com": "gulp malybet.com",
+        "dentrodaaposta.com": "gulp dentrodaaposta.com",
+        "xico.bet": "gulp xico.bet"
     },
     "private": true,
     "dependencies": {

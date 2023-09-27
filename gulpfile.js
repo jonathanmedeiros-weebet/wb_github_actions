@@ -3531,3 +3531,39 @@ gulp.task('slotdasorte.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('valeno.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "valeno.bet",
+        banca: "VALENO.BET",
+        styles: "",
+    });
+});
+
+gulp.task('malybet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "malybet.com",
+        banca: "MALYBET",
+        styles: "",
+    });
+});
+
+gulp.task('dentrodaaposta.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dentrodaaposta.com",
+        banca: "DENTRO DA APOSTA",
+        styles: "",
+    });
+});
+
+gulp.task('xico.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "xico.bet",
+        banca: "XICO.BET",
+        styles: "",
+    });
+});
