@@ -219,7 +219,6 @@
         "generalbet.net": "gulp generalbet.net",
         "vemprabet.com": "gulp vemprabet.com",
         "esportenetreipele.com": "gulp esportenetreipele.com",
-        "goldeplacasport.com": "gulp goldeplacasport.com",
         "betvibra.com": "gulp betvibra.com",
         "powerbets.vip": "gulp powerbets.vip",
         "ragnar.bet": "gulp ragnar.bet",
@@ -368,7 +367,8 @@
         "playmasters.bet": "gulp playmasters.bet",
         "betmidy.com": "gulp betmidy.com",
         "bnrbet.com": "gulp bnrbet.com",
-        "camaraobet.com": "gulp camaraobet.com"
+        "camaraobet.com": "gulp camaraobet.com",
+        "slotdasorte.bet": "gulp slotdasorte.bet"
     },
     "private": true,
     "dependencies": {
