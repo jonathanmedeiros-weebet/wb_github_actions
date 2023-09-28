@@ -3564,3 +3564,12 @@ gulp.task('xico.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('arena365.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "arena365.bet",
+        banca: "ARENA 365",
+        styles: "",
+    });
+});

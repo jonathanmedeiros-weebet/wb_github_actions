@@ -372,7 +372,8 @@
         "valeno.bet": "gulp valeno.bet",
         "malybet.com": "gulp malybet.com",
         "dentrodaaposta.com": "gulp dentrodaaposta.com",
-        "xico.bet": "gulp xico.bet"
+        "xico.bet": "gulp xico.bet",
+        "arena365.bet": "gulp arena365.bet"
     },
     "private": true,
     "dependencies": {
