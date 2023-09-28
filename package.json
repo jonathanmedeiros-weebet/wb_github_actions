@@ -373,7 +373,10 @@
         "malybet.com": "gulp malybet.com",
         "dentrodaaposta.com": "gulp dentrodaaposta.com",
         "xico.bet": "gulp xico.bet",
-        "arena365.bet": "gulp arena365.bet"
+        "arena365.bet": "gulp arena365.bet",
+        "nortedasorte.bet": "gulp nortedasorte.bet",
+        "faturabet.com": "gulp faturabet.com",
+        "mczbet.com": "gulp mczbet.com"
     },
     "private": true,
     "dependencies": {

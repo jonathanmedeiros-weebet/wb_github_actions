@@ -3573,3 +3573,30 @@ gulp.task('arena365.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('nortedasorte.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "nortedasorte.bet",
+        banca: "NORTE DA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('faturabet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "faturabet.com",
+        banca: "FATURA BET",
+        styles: "",
+    });
+});
+
+gulp.task('mczbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "mczbet.com",
+        banca: "MCZ BET",
+        styles: "",
+    });
+});
