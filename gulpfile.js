@@ -1622,15 +1622,6 @@ gulp.task('betnews.one', function (done) {
     });
 });
 
-gulp.task('gmfut.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "gmfut.com",
-        banca: "GM FUT",
-        styles: "",
-    });
-});
-
 gulp.task('pointbet.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2269,17 +2260,6 @@ gulp.task('futvale.net', function (done) {
     });
 });
 
-gulp.task('chutedasorte.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "chutedasorte.bet",
-        banca: "CHUTE DA SORTE",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N3CNV6Q');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-N3CNV6Q'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
-    });
-});
-
 gulp.task('treinamento.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2765,15 +2745,6 @@ gulp.task('betbras.com', function (done) {
         server: "front5.wee.bet",
         host: "betbras.com",
         banca: "BET BRAS",
-        styles: "",
-    });
-});
-
-gulp.task('reidogreen.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "reidogreen.bet",
-        banca: "REI DO GREEN",
         styles: "",
     });
 });
