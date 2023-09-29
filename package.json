@@ -376,7 +376,8 @@
         "mczbet.com": "gulp mczbet.com",
         "vamobet.com.br": "gulp vamobet.com.br",
         "smartbet.cash": "gulp smartbet.cash",
-        "supertop3.bet": "gulp supertop3.bet"
+        "supertop3.bet": "gulp supertop3.bet",
+        "r5sports.bet": "gulp r5sports.bet"
     },
     "private": true,
     "dependencies": {

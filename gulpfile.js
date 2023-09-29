@@ -3600,3 +3600,12 @@ gulp.task('supertop3.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('r5sports.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "r5sports.bet",
+        banca: "R5 SPORTS",
+        styles: "",
+    });
+});
