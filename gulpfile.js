@@ -105,7 +105,6 @@ gulp.task('demo.wee.bet', function (done) {
         host: "demo.wee.bet",
         banca: "DEMO",
         styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-        scripts: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/461a435f-209e-4fb8-a5c8-df0209f9f3d6-loader.js' ></script>"
     });
 });
 
