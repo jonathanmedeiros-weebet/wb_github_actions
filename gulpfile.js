@@ -3573,3 +3573,30 @@ gulp.task('mczbet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('vamobet.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "vamobet.com.br",
+        banca: "VAMO BET",
+        styles: "",
+    });
+});
+
+gulp.task('smartbet.cash', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "smartbet.cash",
+        banca: "SMART BET",
+        styles: "",
+    });
+});
+
+gulp.task('supertop3.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "supertop3.bet",
+        banca: "SUPERTOP3.BET",
+        styles: "",
+    });
+});
