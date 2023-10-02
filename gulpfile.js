@@ -499,8 +499,8 @@ gulp.task('sportbet7.net', function (done) {
         host: "sportbet7.net",
         banca: "SPORT BET 7",
         styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NJVJ8GK');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-NJVJ8GK'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WTVCW394');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WTVCW394'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/L0YexFmj0M' async></script>",
     });
@@ -2077,15 +2077,6 @@ gulp.task('esportenetreipele.com', function (done) {
     });
 });
 
-gulp.task('goldeplacasport.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "goldeplacasport.com",
-        banca: "GOL DE PLACA SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('betvibra.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2192,6 +2183,8 @@ gulp.task('fizabet.com', function (done) {
         host: "fizabet.com",
         banca: "FIZ A BET",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N2RZCF5S');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-N2RZCF5S'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -2220,8 +2213,6 @@ gulp.task('iasports.wee.bet', function (done) {
         shared_url: "iasport.bet",
         banca: "IA SPORTS",
         styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/Zx3pZhzn06' async></script>",
     });
 });
 
@@ -2959,6 +2950,8 @@ gulp.task('gamebet85.net', function (done) {
         host: "gamebet85.net",
         banca: "GAME BET 85",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T85LHPW9');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T85LHPW9'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -3462,7 +3455,7 @@ gulp.task('ciaaonline.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "ciaaonline.com",
-        banca: "CIAAONLINE",
+        banca: "CIA A ONLINE",
         styles: "",
     });
 });
@@ -3472,6 +3465,69 @@ gulp.task('pgbet.net.br', function (done) {
         server: "front3.wee.bet",
         host: "pgbet.net.br",
         banca: "PG BET",
+        styles: "",
+    });
+});
+
+gulp.task('fourbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fourbet.com",
+        banca: "FOURBET",
+        styles: "",
+    });
+});
+
+gulp.task('fourbet.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fourbet.net",
+        banca: "FOURBET",
+        styles: "",
+    });
+});
+
+gulp.task('playmasters.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "playmasters.bet",
+        banca: "PLAY MASTERS",
+        styles: "",
+    });
+});
+
+gulp.task('betmidy.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betmidy.com",
+        banca: "BET MIDY",
+        styles: "",
+    });
+});
+
+gulp.task('bnrbet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bnrbet.com",
+        banca: "BNR BET",
+        styles: "",
+    });
+});
+
+gulp.task('camaraobet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "camaraobet.com",
+        banca: "CAMARÃO BET",
+        styles: "",
+    });
+});
+
+gulp.task('slotdasorte.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "slotdasorte.bet",
+        banca: "SLOT DA SORTE",
         styles: "",
     });
 });

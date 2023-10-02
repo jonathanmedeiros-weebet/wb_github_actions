@@ -193,7 +193,8 @@
         "rollover": "Rollover",
         "suporte": "Support",
         "EmailOuUsuario": "E-mail or username",
-        "semPermissaoAcesso": "No access permission"
+        "semPermissaoAcesso": "No access permission",
+        "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age."
     },
     "dias": {
         "ontem": "Yesterday",

@@ -265,27 +265,27 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
                 this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
             }
-            this.renderer.setStyle(fadeLeftTemp, 'display', 'none');
+            this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
         } else {
             if (!this.isMobile) {
                 this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
                 this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
             }
-            this.renderer.setStyle(fadeLeftTemp, 'display', 'block');
+            this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
         }
 
-        if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 0) {
+        if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
             if (!this.isMobile) {
                 this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
                 this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
             }
-            this.renderer.setStyle(fadeRightTemp, 'display', 'none');
+            this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
         } else {
             if (!this.isMobile) {
                 this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
                 this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
             }
-            this.renderer.setStyle(fadeRightTemp, 'display', 'block');
+            this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
         }
     }
 

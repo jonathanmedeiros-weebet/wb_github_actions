@@ -193,7 +193,8 @@
         "rollover": "Bônus",
         "suporte": "Suporte",
         "EmailOuUsuario": "E-mail ou usuário",
-        "semPermissaoAcesso": "Sem permissão de acesso"
+        "semPermissaoAcesso": "Sem permissão de acesso",
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
     },
     "dias": {
         "ontem": "Ontem",
