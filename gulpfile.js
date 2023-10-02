@@ -3615,3 +3615,21 @@ gulp.task('r5sports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fiel.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fiel.bet",
+        banca: "FIEL.BET",
+        styles: "",
+    });
+});
+
+gulp.task('bullbets.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bullbets.online",
+        banca: "BULL BETS",
+        styles: "",
+    });
+});

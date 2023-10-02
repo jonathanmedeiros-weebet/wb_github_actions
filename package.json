@@ -377,7 +377,9 @@
         "vamobet.com.br": "gulp vamobet.com.br",
         "smartbet.cash": "gulp smartbet.cash",
         "supertop3.bet": "gulp supertop3.bet",
-        "r5sports.bet": "gulp r5sports.bet"
+        "r5sports.bet": "gulp r5sports.bet",
+        "fiel.bet": "gulp fiel.bet",
+        "bullbets.online": "gulp bullbets.online"
     },
     "private": true,
     "dependencies": {
