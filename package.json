@@ -372,7 +372,13 @@
         "arena365.bet": "gulp arena365.bet",
         "nortedasorte.bet": "gulp nortedasorte.bet",
         "faturabet.com": "gulp faturabet.com",
-        "mczbet.com": "gulp mczbet.com"
+        "mczbet.com": "gulp mczbet.com",
+        "vamobet.com.br": "gulp vamobet.com.br",
+        "smartbet.cash": "gulp smartbet.cash",
+        "supertop3.bet": "gulp supertop3.bet",
+        "r5sports.bet": "gulp r5sports.bet",
+        "fiel.bet": "gulp fiel.bet",
+        "bullbets.online": "gulp bullbets.online"
     },
     "private": true,
     "dependencies": {
