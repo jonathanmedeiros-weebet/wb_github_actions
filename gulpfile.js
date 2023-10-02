@@ -2100,15 +2100,6 @@ gulp.task('betpixcariri.bet', function (done) {
     });
 });
 
-gulp.task('genialsistemas.online', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "genialsistemas.online",
-        banca: "GENIAL SISTEMAS",
-        styles: "",
-    });
-});
-
 gulp.task('cassinoaovivo.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
