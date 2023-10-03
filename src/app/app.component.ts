@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService} from './services';
+import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, ConnectionCheckService} from './services';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
@@ -41,7 +41,8 @@ export class AppComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private paramLocais: ParametrosLocaisService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private connectionCheck: ConnectionCheckService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -218,6 +219,12 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+
+        this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
+            if (!isOnline) {
+              this.handleError('Sem conexão com a internet.');
+            }
+          });
     }
 
     downloadApp() {
