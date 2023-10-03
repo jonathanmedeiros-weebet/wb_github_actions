@@ -378,7 +378,8 @@
         "supertop3.bet": "gulp supertop3.bet",
         "r5sports.bet": "gulp r5sports.bet",
         "fiel.bet": "gulp fiel.bet",
-        "bullbets.online": "gulp bullbets.online"
+        "bullbets.online": "gulp bullbets.online",
+        "passira.bet": "gulp passira.bet"
     },
     "private": true,
     "dependencies": {

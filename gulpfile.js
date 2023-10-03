@@ -3624,3 +3624,12 @@ gulp.task('bullbets.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('passira.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "passira.bet",
+        banca: "PASSIRA.BET",
+        styles: "",
+    });
+});
