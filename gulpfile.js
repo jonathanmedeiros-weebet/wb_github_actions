@@ -93,10 +93,8 @@ gulp.task('casadinha.com', function (done) {
         server: "front3.wee.bet",
         host: "casadinha.com",
         banca: "Casadinha.com",
-        styles: "--header: #e1e1e1; --foreground-header: #fff; --sidebar-right:#e1e1e1; --foreground-sidebar-right: #555555; --sidebar-left: #e1e1e1; --foreground-sidebar-left: #555555; --highlight: #67ad5a; --foreground-highlight: #24415f; --odds: #67ad5a; --foreground-odds: #fff; --league: #e1e1e1; --foreground-league: #002458;",
-        aditional_styles: "#footer-bar{background-color: #24415f!important;} .foot-button .cupom-badge{color: #24415f!important;} .loading-app{color:#8c8c8c;} .menu-categories{background-color: #24415f;} .navbar-mobile{ background-color: #e1e1e1; } .odds .selecionado{ background: #24415f!important; } .odds .selecionado span{ color: #fff!important; } #fixed-bar-bilhete{ background: #24415f!important;color:#fff; } .navbar-mobile .menu-conta > a{color:#8c8c8c!important;}" +
-            ".lds-ring div{border-color:#24415f transparent transparent transparent!important;}.btn-custom:hover,.value-informations .valores button:hover{color:var(--foreground-highlight)!important;border-color:var(--foreground-highlight);}"
-    });
+        styles: "",
+       });
 });
 
 gulp.task('demo.wee.bet', function (done) {
@@ -487,8 +485,7 @@ gulp.task('recifeesportes.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "recifeesportes.wee.bet",
         banca: "RECIFE ESPORTES",
-        styles: "--header:#f26225;--foreground-header:#fff;--sidebar-right:#f26225;--sidebar-left:#f26225;--odds:#828282;--highlight:#390051;--foreground-highlight: #fff;--foreground-selected-odds: #fff;--selected-odds: #f26225; --event-time:#390051; --league: #390051; --foreground-league: #fff;",
-        aditional_styles: "body{ background-color: #390051!important;  } .mais-opcoes{ color: #390051!important; } .indentificacao .nome, .indentificacao .nome-mobile{ color: #390051!important; } .sidebar-brand{ margin-top: 0!important; padding-top: 15px; padding-bottom: 20px; background-color: #390051; } .sidebar-menu{ background-color: #390051; margin-top: 0!important; } .navbar-mobile{ background-color: #390051; } .pre-bilhete .div-inputs, .pre-bilhete .valores button, .pre-bilhete .form-group button { background-color: #390051!important; } .pre-bilhete .form-group button:hover { color:#fff!important; } .odds .selecionado{ background-color: #f26225!important; } .jogo-selecionado .fa-times{color:#390051!important;} .fechar-pre-bilhete .fa-times{color:#390051!important;}"
+        styles:""
     });
 });
 
