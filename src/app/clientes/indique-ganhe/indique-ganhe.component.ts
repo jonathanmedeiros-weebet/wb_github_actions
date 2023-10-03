@@ -16,6 +16,12 @@ export class IndiqueGanheComponent implements OnInit {
     @ViewChild('regrasCondicoesModal', {static: true}) regrasCondicoesModal;
     linkIndicacao: string = "";
     valorGanhoPorIndicacao;
+    limiteIndicacoes;
+    valorMinDepositado;
+    valorMinApostado;
+    qtdDiasRequisitos;
+
+    nomeBanca;
 
     linkFacebook;
     linkWhatsapp;
@@ -40,6 +46,11 @@ export class IndiqueGanheComponent implements OnInit {
 
     ngOnInit(): void {
         this.valorGanhoPorIndicacao = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_por_indicacao;
+        this.limiteIndicacoes = this.paramsLocaisService.getOpcoes().indique_ganhe_limite;
+        this.valorMinDepositado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_depositado;
+        this.valorMinApostado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_apostado;
+        this.qtdDiasRequisitos = this.paramsLocaisService.getOpcoes().indique_ganhe_qtd_dias_max;
+        this.nomeBanca = this.paramsLocaisService.getOpcoes().banca_nome;
         this.mobileScreen = window.innerWidth <= 1024;
         this.isAppMobile = this.authService.isAppMobile();
 
