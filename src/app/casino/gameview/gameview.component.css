@@ -15,23 +15,36 @@ iframe{
     border:none;
 }
 
-.buttons-game-view {
-    display: block;
+.header-game-view {
+    display: flex;
+    justify-content: center;
     width: 100%;
+    height: 51px;
     margin-bottom: 12px;
     border: 1px solid #1B1B1B;
 }
 
-.buttons-game-view span {
-    display: inline-flex;
-    height: 100%;
+.header-game-view > div {
+    flex-grow: 1;
+    display: flex;
     align-items: center;
+}
+
+.header-game-view .game-name {
+    justify-content: left;
+}
+
+.header-game-view .buttons-game-view {
+    justify-content: right;
+}
+
+.game-name span {
     font-size: 16px;
     margin-left: 16px;
 }
 
 .buttons-game-view a {
-    margin: 2px 2px 2px 0;
+    margin-right: 2px;
 }
 
 .btn-cassino {
@@ -61,6 +74,19 @@ iframe{
     font-size: 20px;
 }
 
+.desktop-fullscreen {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: auto !important;
+    background-color: black;
+}
+
+.desktop-fullscreen .game-frame {
+    width:100%;
+    height: calc(100vh - 63px);
+    margin: 0;
+}
 
 @media only screen and (max-width: 1024px) {
     .game-view {
@@ -86,8 +112,8 @@ iframe{
         padding: 5px;
     }
 
-    .buttons-game-view {
-        margin: 7px 0 0;
+    .header-game-view {
+        margin: 14px 0 0;
     }
 }
 
@@ -97,7 +123,7 @@ iframe{
     }
 
     .game-frame {
-        height: calc(100vh - 180px);
+        height: calc(100vh - 195px);
     }
 
     iframe {

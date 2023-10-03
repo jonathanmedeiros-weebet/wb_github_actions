@@ -192,7 +192,8 @@
         "movimentacao":"Transactions",
         "rollover": "Rollover",
         "suporte": "Support",
-        "EmailOuUsuario": "E-mail or username"
+        "EmailOuUsuario": "E-mail or username",
+        "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age."
     },
     "dias": {
         "ontem": "Yesterday",
