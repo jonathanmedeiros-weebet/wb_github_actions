@@ -3630,3 +3630,21 @@ gulp.task('passira.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betganha.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betganha.vip",
+        banca: "BET GANHA",
+        styles: "",
+    });
+});
+
+gulp.task('starbetfc.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "starbetfc.com",
+        banca: "STAR BET FC",
+        styles: "",
+    });
+});

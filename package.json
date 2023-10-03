@@ -379,7 +379,9 @@
         "r5sports.bet": "gulp r5sports.bet",
         "fiel.bet": "gulp fiel.bet",
         "bullbets.online": "gulp bullbets.online",
-        "passira.bet": "gulp passira.bet"
+        "passira.bet": "gulp passira.bet",
+        "betganha.vip": "gulp betganha.vip",
+        "starbetfc.com": "gulp starbetfc.com"
     },
     "private": true,
     "dependencies": {
