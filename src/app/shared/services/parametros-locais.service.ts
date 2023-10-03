@@ -139,6 +139,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.quininha_ativa : null;
     }
 
+    loteriaPopularAtiva() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.loteriaPopular : null;
+    }
+
     getBancaNome() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.banca_nome : null;
     }

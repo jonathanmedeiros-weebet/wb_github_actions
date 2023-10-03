@@ -193,6 +193,7 @@
         "rollover": "Rollover",
         "suporte": "Support",
         "EmailOuUsuario": "E-mail or username",
+        "semPermissaoAcesso": "No access permission",
         "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age."
     },
     "dias": {
@@ -237,7 +238,8 @@
         "raspadinha": "Scratchcard",
         "roleta": "Roulette",
         "mesa": "Table",
-        "cassinoAoVivo": "Live Casino"
+        "cassinoAoVivo": "Live Casino",
+        "loteriaPopular": "Popular Lottery"
     },
     "bilhete": {
         "titulo": "TICKET",

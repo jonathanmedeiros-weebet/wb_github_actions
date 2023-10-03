@@ -193,6 +193,7 @@
         "rollover": "Bônus",
         "suporte": "Suporte",
         "EmailOuUsuario": "E-mail ou usuário",
+        "semPermissaoAcesso": "Sem permissão de acesso",
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
     },
     "dias": {
@@ -237,7 +238,8 @@
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
-        "cassinoAoVivo": "Cassino Ao Vivo"
+        "cassinoAoVivo": "Cassino Ao Vivo",
+        "loteriaPopular": "Loteria Popular"
     },
     "bilhete": {
         "titulo": "BILHETE",

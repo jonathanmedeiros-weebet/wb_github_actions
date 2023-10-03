@@ -19,6 +19,7 @@ export * from './shared/services/loteria/aposta-loteria.service';
 export * from './shared/services/loteria/preaposta-loteria.service';
 export * from './shared/services/loteria/sorteio.service';
 export * from './shared/services/loteria/tipo-aposta-loteria.service';
+export * from './shared/services/loteria/loteria-popular.service';
 
 export * from './shared/services/aposta-esportiva/aposta-esportiva.service';
 export * from './shared/services/aposta-esportiva/bilhete-esportivo.service';
@@ -69,3 +70,4 @@ export * from './shared/services/guards/tenis-mesa.guard';
 export * from './shared/services/guards/futebol-americano.guard';
 export * from './shared/services/guards/hoquei-gelo.guard';
 export * from './shared/services/guards/modulo-cliente.guard';
+export * from './shared/services/guards/loteria-popular.guard';
