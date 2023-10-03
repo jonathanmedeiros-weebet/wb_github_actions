@@ -3498,7 +3498,7 @@ gulp.task('valeno.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "valeno.bet",
-        banca: "VALENO.BET",
+        banca: "VALENO",
         styles: "",
     });
 });
