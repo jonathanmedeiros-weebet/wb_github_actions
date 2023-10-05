@@ -381,7 +381,11 @@
         "bullbets.online": "gulp bullbets.online",
         "passira.bet": "gulp passira.bet",
         "betganha.vip": "gulp betganha.vip",
-        "starbetfc.com": "gulp starbetfc.com"
+        "starbetfc.com": "gulp starbetfc.com",
+        "jamesbets.com": "gulp jamesbets.com",
+        "horadaaposta.bet": "gulp horadaaposta.bet",
+        "betypix.bet": "gulp betypix.bet",
+        "laelebet.com": "gulp laelebet.com"
     },
     "private": true,
     "dependencies": {
