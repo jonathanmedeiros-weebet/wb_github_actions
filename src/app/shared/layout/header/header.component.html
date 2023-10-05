@@ -10,7 +10,11 @@
 		</div>
 	</div>
 </ng-template>
-
+<div class="info-connection-card hide">
+    <div class="info-connection-card-content">
+        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i></span> {{ mensageConnection }}
+    </div>
+</div>
 <div class="header">
     <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">

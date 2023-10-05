@@ -1,12 +1,12 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
-import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -86,6 +86,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     };
     mostrarSaldo;
     firstLoggedIn;
+    mensageConnection;
+    isConnected;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -112,6 +114,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private connectionCheck: ConnectionCheckService,
+        private renderer: Renderer2,
+        private host: ElementRef
     ) {
         super();
     }
@@ -187,6 +192,35 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
 
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+
+        this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
+            let element = this.host.nativeElement.querySelector('.info-connection-card');
+            let icon = this.host.nativeElement.querySelector('.fa-exclamation-triangle');
+
+            if (!isOnline) {
+                this.isConnected = false;
+                this.mensageConnection = 'Sem conexão com a internet';
+                this.renderer.removeClass(element, 'online');
+                this.renderer.addClass(element, 'offline');
+                this.renderer.removeClass(element, 'hide');
+                this.renderer.removeClass(icon, 'icon-hidden');
+                setTimeout(() => {
+                    this.renderer.addClass(element, 'show');
+                }, 100);
+            } else if (isOnline && this.mensageConnection === 'Sem conexão com a internet') {
+                this.isConnected = true
+                this.mensageConnection = 'Conexão restabelecida';
+                this.renderer.removeClass(element, 'offline');
+                this.renderer.addClass(element, 'online');
+                this.renderer.addClass(icon, 'icon-hidden');
+                setTimeout(() => {
+                    this.renderer.removeClass(element, 'show');
+                    setTimeout(() => {
+                        this.renderer.addClass(element, 'hide');
+                    }, 1000);
+                }, 1000);
+            }
+        });
     }
 
     ngOnDestroy() {
