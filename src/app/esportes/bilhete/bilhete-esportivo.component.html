@@ -142,7 +142,7 @@
                                 {{'bilhete.aceitarAlteracoesDeOdds' | translate}}
                             </label>
                         </div>
-                        <div *ngIf="posicaoFinanceira.bonus != 0 && isCliente && isLoggedIn"
+                        <div *ngIf="posicaoFinanceira.bonus != 0 && posicaoFinanceira.bonusModalidade === 'esportivo' && isCliente && isLoggedIn"
                             class="form-group form-check-custom form-check-style-1 utilizar-bonus">
                             <input type="checkbox" class=""
                                 id="utilizar-bonus"
