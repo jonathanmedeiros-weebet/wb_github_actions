@@ -35,6 +35,7 @@ export class MenuFooterComponent implements OnInit {
     contexto = '';
     nomeBotaoExtras = 'Campeonatos';
     whatsapp;
+    isDemo = location.host === 'demo.wee.bet';
 
     constructor(
         private auth: AuthService,

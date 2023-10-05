@@ -67,7 +67,7 @@
     padding: 4px;
     clip-path: circle();
     background-color: var(--foreground-bottom-bar);
-    color: var(--sidebars);
+    color: var(--bottom-bar);
     position: absolute;
     top: -8px;
     right: 6px;
