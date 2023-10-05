@@ -86,7 +86,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     };
     mostrarSaldo;
     firstLoggedIn;
-    mensageConnection;
+    messageConnection;
     isConnected;
 
     @HostListener('window:resize', ['$event'])
@@ -199,7 +199,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
             if (!isOnline) {
                 this.isConnected = false;
-                this.mensageConnection = 'Sem conexão com a internet';
+                this.messageConnection = 'Sem conexão com a internet';
                 this.renderer.removeClass(element, 'online');
                 this.renderer.addClass(element, 'offline');
                 this.renderer.removeClass(element, 'hide');
@@ -207,9 +207,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 setTimeout(() => {
                     this.renderer.addClass(element, 'show');
                 }, 100);
-            } else if (isOnline && this.mensageConnection === 'Sem conexão com a internet') {
+            } else if (isOnline && this.messageConnection === 'Sem conexão com a internet') {
                 this.isConnected = true
-                this.mensageConnection = 'Conexão restabelecida';
+                this.messageConnection = 'Conexão restabelecida';
                 this.renderer.removeClass(element, 'offline');
                 this.renderer.addClass(element, 'online');
                 this.renderer.addClass(icon, 'icon-hidden');
