@@ -3657,3 +3657,40 @@ gulp.task('starbetfc.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('jamesbets.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "jamesbets.com",
+        banca: "JAES BETS",
+        styles: "",
+    });
+});
+
+gulp.task('horadaaposta.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "horadaaposta.bet",
+        banca: "HORA DA APOSTA",
+        styles: "",
+    });
+});
+
+gulp.task('betypix.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betypix.bet",
+        banca: "BETYPIX",
+        styles: "",
+    });
+});
+
+
+gulp.task('laelebet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "laelebet.com",
+        banca: "LÁ ELE BET",
+        styles: "",
+    });
+});
