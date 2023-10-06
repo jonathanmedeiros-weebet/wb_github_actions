@@ -203,7 +203,9 @@
         "seuLinkIndicacao": "Seu link de indicação:",
         "compartilheSeuLink": "Compartilhe seu link nas redes sociais:",
         "linkCopiado": "Link copiado!",
-        "indicar": "Indicar"
+        "indicar": "Indicar",
+        "semPermissaoAcesso": "Sem permissão de acesso",
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
     },
     "dias": {
         "ontem": "Ontem",
@@ -247,7 +249,8 @@
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
-        "cassinoAoVivo": "Cassino Ao Vivo"
+        "cassinoAoVivo": "Cassino Ao Vivo",
+        "loteriaPopular": "Loteria Popular"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -422,7 +425,8 @@
         "naoQueroBonus": "Não quero Bônus",
         "valorMinimoSaque": "Valor mínimo de saque",
         "valorMaximoSaqueDiario": "Valor máximo de saque diário",
-        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal"
+        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
+        "receberBonusCassino": "Receber Bônus - Cassino"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",

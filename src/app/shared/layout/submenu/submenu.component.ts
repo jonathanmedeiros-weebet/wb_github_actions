@@ -255,6 +255,14 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.quininhaAtiva()
             },
             {
+                id: 'loteria-popular',
+                name: this.translate.instant('submenu.loteriaPopular'),
+                link: '/loterias/loteria-popular',
+                icon_class: 'fa-solid fa-clover',
+                category: 'loteria',
+                active: this.paramsService.loteriaPopularAtiva()
+            },
+            {
                 id: 'cassino',
                 name: this.translate.instant('submenu.todos'),
                 link: '/casino/c/wall/todos',

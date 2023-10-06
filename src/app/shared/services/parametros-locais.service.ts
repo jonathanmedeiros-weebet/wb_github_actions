@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import {config} from '../config';
+import { DOCUMENT } from '@angular/common';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class ParametrosLocaisService {
     parametrosLocais;
 
     constructor(
+        @Inject(DOCUMENT) private document: Document,
         private http: HttpClient
     ) { }
 
@@ -22,8 +24,33 @@ export class ParametrosLocaisService {
             const time = + new Date();
             const paramUri = `https://weebet.s3.amazonaws.com/${config.SLUG}/param/parametros.json?${time}`;
             return this.http.get(paramUri)
-                .subscribe(response => {
+                .subscribe((response: any) => {
                     this.parametrosLocais = response;
+
+                    const GTM_ID = response?.opcoes?.gtm_id_site
+                    if (GTM_ID) {
+                        const head = this.document.getElementsByTagName('head')[0];
+                        const body = this.document.getElementsByTagName('body')[0];
+
+                        const GTMScriptHead = this.document.createElement('script');
+                        GTMScriptHead.innerHTML = `
+                            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                            })(window,document,'script','dataLayer','${GTM_ID}');
+                        `;
+
+                        const GTMScriptBody = this.document.createElement('noscript');
+                        GTMScriptBody.innerHTML = `
+                            <iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+                            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+                        `;
+
+                        head.appendChild(GTMScriptHead);
+                        body.prepend(GTMScriptBody);
+                    }
+
                     resolve(true);
                 });
         });
@@ -110,6 +137,10 @@ export class ParametrosLocaisService {
 
     quininhaAtiva() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.quininha_ativa : null;
+    }
+
+    loteriaPopularAtiva() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.loteriaPopular : null;
     }
 
     getBancaNome() {

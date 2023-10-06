@@ -54,7 +54,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
-        bonus: 0
+        bonus: 0,
+        bonusModalidade: 'nenhum'
     };
     usuario = new Usuario();
     isLoggedIn;
@@ -63,6 +64,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
+    loteriaPopularAtiva;
     esporteAtivo;
     cassinoAtivo;
     virtuaisAtivo;
@@ -166,6 +168,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.loteriaPopularAtiva = this.paramsService.loteriaPopularAtiva();
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
@@ -195,7 +198,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
-
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
     }
 
@@ -278,7 +280,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirLogin() {
         this.modalRef = this.modalService.open(
-            LoginModalComponent, 
+            LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-550 modal-h-350 modal-login',

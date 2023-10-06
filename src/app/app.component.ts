@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
     ativacaoCadastro;
     modoClienteHabilitado;
     whatsapp;
+    isDemo = location.host === 'demo.wee.bet';
 
     constructor(
         private auth: AuthService,
@@ -132,7 +133,7 @@ export class AppComponent implements OnInit {
 
                 this.cd.markForCheck();
 
-                if (location.host === 'demo.wee.bet') {
+                if (this.isDemo) {
                     this.modalService.open(
                         this.demoModal,
                         {

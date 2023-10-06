@@ -203,7 +203,9 @@
         "seuLinkIndicacao": "Your referral link:",
         "compartilheSeuLink": "Share your link on social media:",
         "linkCopiado": "Link copied!",
-        "indicar": "Indicate"
+        "indicar": "Indicate",
+        "semPermissaoAcesso": "No access permission",
+        "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age."
     },
     "dias": {
         "ontem": "Yesterday",
@@ -247,7 +249,8 @@
         "raspadinha": "Scratchcard",
         "roleta": "Roulette",
         "mesa": "Table",
-        "cassinoAoVivo": "Live Casino"
+        "cassinoAoVivo": "Live Casino",
+        "loteriaPopular": "Popular Lottery"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -422,7 +425,8 @@
         "naoQueroBonus": "I don't want bonus",
         "valorMinimoSaque": "Minimum withdrawal amount",
         "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
-        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount"
+        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
+        "receberBonusCassino": "Receive Bonus - Casino"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
