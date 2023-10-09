@@ -3446,7 +3446,7 @@ gulp.task('fourbet.com', function (done) {
 gulp.task('fourbet.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "fourbet.net",
+        host: "fourbet.wee.bet",
         banca: "FOURBET",
         styles: "",
     });
