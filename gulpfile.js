@@ -3624,7 +3624,7 @@ gulp.task('jamesbets.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "jamesbets.com",
-        banca: "JAES BETS",
+        banca: "JAMES BETS",
         styles: "",
     });
 });
