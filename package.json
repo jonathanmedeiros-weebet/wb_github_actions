@@ -385,7 +385,8 @@
         "jamesbets.com": "gulp jamesbets.com",
         "horadaaposta.bet": "gulp horadaaposta.bet",
         "betypix.bet": "gulp betypix.bet",
-        "laelebet.com": "gulp laelebet.com"
+        "laelebet.com": "gulp laelebet.com",
+        "betpix3r.online": "gulp betpix3r.online"
     },
     "private": true,
     "dependencies": {

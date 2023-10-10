@@ -3685,12 +3685,20 @@ gulp.task('betypix.bet', function (done) {
     });
 });
 
-
 gulp.task('laelebet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "laelebet.com",
         banca: "LÁ ELE BET",
+        styles: "",
+    });
+});
+
+gulp.task('betpix3r.online', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betpix3r.online",
+        banca: "BETPIX3R",
         styles: "",
     });
 });
