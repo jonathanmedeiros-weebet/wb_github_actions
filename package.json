@@ -382,7 +382,8 @@
         "horadaaposta.bet": "gulp horadaaposta.bet",
         "betypix.bet": "gulp betypix.bet",
         "laelebet.com": "gulp laelebet.com",
-        "betpix3r.online": "gulp betpix3r.online"
+        "betpix3r.online": "gulp betpix3r.online",
+        "apostaminas.com": "gulp apostaminas.com"
     },
     "private": true,
     "dependencies": {

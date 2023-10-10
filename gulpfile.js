@@ -3666,3 +3666,12 @@ gulp.task('betpix3r.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostaminas.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "apostaminas.com",
+        banca: "APOSTA MINAS",
+        styles: "",
+    });
+});
