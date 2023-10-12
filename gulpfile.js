@@ -3541,10 +3541,10 @@ gulp.task('mczbet.com', function (done) {
     });
 });
 
-gulp.task('vamobet.com.br', function (done) {
+gulp.task('vamobet.io', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "vamobet.com.br",
+        host: "vamobet.io",
         banca: "VAMO BET",
         styles: "",
     });
