@@ -35,7 +35,7 @@ export class DepositoCambistaComponent implements OnInit, OnDestroy {
         if (!this.pixCambista) {
             this.router.navigate(['esportes/futebol']);
         }
-        this.hasApiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.hasApiPagamentos = !this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado && this.paramsLocais.getOpcoes().api_pagamentos;
         this.modalidade = 'pix';
     }
 
