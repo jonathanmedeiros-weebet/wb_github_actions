@@ -161,7 +161,6 @@
         "supremodasorte.wee.bet": "gulp supremodasorte.wee.bet",
         "betmax.wee.bet": "gulp betmax.wee.bet",
         "prowin.io": "gulp prowin.io",
-        "bet10.wee.bet": "gulp bet10.wee.bet",
         "easybets.club": "gulp easybets.club",
         "belabets.com": "gulp belabets.com",
         "apostasmax.com": "gulp apostasmax.com",
@@ -384,7 +383,9 @@
         "betypix.bet": "gulp betypix.bet",
         "laelebet.com": "gulp laelebet.com",
         "betpix3r.online": "gulp betpix3r.online",
-        "apostaminas.com": "gulp apostaminas.com"
+        "apostaminas.com": "gulp apostaminas.com",
+        "betgate.fun": "gulp betgate.fun",
+        "trevocassino.vip": "gulp trevocassino.vip"
     },
     "private": true,
     "dependencies": {
