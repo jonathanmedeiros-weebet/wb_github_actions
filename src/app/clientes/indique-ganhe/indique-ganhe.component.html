@@ -1,0 +1,106 @@
+<div id="indique-ganhe-content">
+    <div class="mobile-modal-header" *ngIf="mobileScreen">
+        <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'geral.indiqueGanhe' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
+    <div class="internal-container-out">
+        <div class="content-header hide-mobile">
+            <h2>{{'geral.indiqueGanhe' | translate}}</h2>
+        </div>
+        <div class="content-body">
+            <div class="indique-ganhe-info">
+                <h4>
+                    {{'geral.indiqueGanheInfo1' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                </h4>
+                <p>
+                    {{'geral.indiqueGanheInfo2' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                    <a (click)="abrirModalRegras()" style="cursor: pointer;">{{'geral.regrasCondicoes' | translate}}</a>
+                </p>
+            </div>
+            <div class="link-indicacao-container">
+                <p>{{'geral.seuLinkIndicacao' | translate}}</p>
+                <ng-container *ngIf="mobileScreen">
+                    <div class="link-indicacao" (click)="copiarLink()">
+                        <div class="link">
+                            <i class="fa fa-link"></i>
+                            <span>{{linkIndicacao}}</span>
+                        </div>
+                        <a class="copy-button">{{'geral.copiarLink' | translate}}</a>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!mobileScreen">
+                    <div class="link-indicacao">
+                        <div class="link">
+                            <i class="fa fa-link"></i>
+                            <span>{{linkIndicacao}}</span>
+                        </div>
+                        <a class="copy-button" (click)="copiarLink()">{{'geral.copiarLink' | translate}}</a>
+                    </div>
+                </ng-container>
+                <div class="social-share">
+                    <p>{{'geral.compartilheSeuLink' | translate}}</p>
+                    <ng-container *ngIf="!mobileScreen">
+                        <div class="social-buttons-container">
+                            <a href="{{linkFacebook}}" target="_blank" class="fa-brands fa-facebook social-buttons"></a><span>Facebook</span>
+                            <a href="{{linkWhatsapp}}" target="_blank" class="fa-brands fa-whatsapp social-buttons"></a><span>Whatsapp</span>
+                            <a href="{{linkTelegram}}" target="_blank" class="fa-brands fa-telegram social-buttons"></a><span>Telegram</span>
+                            <a href="{{linkEmail}}" target="_blank" class="fa-regular fa-envelope social-buttons"></a><span>E-mail</span>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="mobileScreen">
+                        <button type="button" class="btn btn-custom btn-block" (click)="compartilharLink()">
+                            <i class="fa fa-share-alt"></i>&nbsp;&nbsp;{{'geral.compartilhar' | translate}} Link
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #regrasCondicoesModal style="min-height: 80%">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'geral.regrasCondicoes' | translate}}</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="activeRulesModal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div class="modal-body" style="min-height: 80%">
+        <p>
+            Indique seus amigos e ganhe R${{valorGanhoPorIndicacao}} em saldo real!!<br>
+            Ficou interessado? Então veja abaixo todas as regras e condições
+        </p>
+        <ul style="padding-left: 1.5rem;">
+            <li>
+                <b>Elegibilidade:</b> Para participar do programa de Indique e Ganhe você deve ser um membro registrado do site. Ao indicar usuários,
+                você estará concordando com estes termos e condições.
+            </li>
+            <li>
+                <b>Como indicar:</b> Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção "Indique e ganhe" da sua conta,
+                localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de
+                {{limiteIndicacoes}} indicações ao qual serão legíveis de comissionamento as demais que ultrapassarem essa quantidade não serão comissionadas.
+            </li>
+            <li>
+                <b>Bônus para o Indicador:</b> A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas
+                de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dias, você ganhará R${{valorGanhoPorIndicacao}} em saldo real (sacável). Este saldo será automaticamente
+                adicionado à sua conta em até 24 horas após o INDICADO cumprir as regras da promoção.
+            </li>
+            <li>
+                <b>Depósito do Indicado:</b> O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer
+                uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.
+            </li>
+            <li>
+                <b>Prevenção de fraudes:</b> A {{nomeBanca}} monitora ativamente o uso do sistema de Indique e Ganhe para prevenir fraudes. Qualquer tentativa
+                de fraude, como a criação de múltiplas contas a partir do mesmo endereço IP, será considerada apenas o primeiro cadastro legível para ganho
+                do saldo as demais serão desconsideradas.
+            </li>
+        </ul>
+        <p>
+            Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador
+            garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}.
+        </p>
+    </div>
+</ng-template>

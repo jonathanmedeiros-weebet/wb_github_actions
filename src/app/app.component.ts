@@ -68,9 +68,9 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.modalService.open(CadastroModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
-                windowClass: 'modal-700'
+                windowClass: 'modal-500 modal-cadastro-cliente'
             });
             this.router.navigate(['esportes/futebol']);
         }

@@ -164,4 +164,16 @@ export class ClienteService {
                 catchError(this.errorService.handleError)
             )
     }
+
+    getCodigoIndicacao() {
+        return this.http.get(`${this.clienteUrl}/getCodigoIndicacao`, this.headers.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
 }
