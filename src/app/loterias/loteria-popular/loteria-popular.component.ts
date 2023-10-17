@@ -77,11 +77,8 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.mobileScreen) {
-            this.menuFooterService.setIsPagina(false);
-        } else {
-            this.menuFooterService.setIsPagina(true);
-        }
+        this.menuFooterService.setOutraModalidade(false);
+        this.menuFooterService.setIsPagina(false);
     }
 
     loadGame() {

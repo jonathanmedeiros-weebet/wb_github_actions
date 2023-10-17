@@ -6,7 +6,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -93,6 +93,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     firstLoggedIn;
     valorGanhoPorIndicacao;
     removendoIndiqueGanheCard = false;
+    messageConnection;
+    isConnected = true;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -119,6 +121,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef
     ) {
@@ -199,6 +202,35 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+
+        this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
+            let element = this.host.nativeElement.querySelector('.info-connection-card');
+            let icon = this.host.nativeElement.querySelector('.fa-exclamation-triangle');
+
+            if (!isOnline) {
+                this.isConnected = false;
+                this.messageConnection = 'Sem conexão com a internet';
+                this.renderer.removeClass(element, 'online');
+                this.renderer.addClass(element, 'offline');
+                this.renderer.removeClass(element, 'hide');
+                this.renderer.removeClass(icon, 'icon-hidden');
+                setTimeout(() => {
+                    this.renderer.addClass(element, 'show');
+                }, 100);
+            } else if (isOnline && this.messageConnection === 'Sem conexão com a internet') {
+                this.isConnected = true
+                this.messageConnection = 'Conexão restabelecida';
+                this.renderer.removeClass(element, 'offline');
+                this.renderer.addClass(element, 'online');
+                this.renderer.addClass(icon, 'icon-hidden');
+                setTimeout(() => {
+                    this.renderer.removeClass(element, 'show');
+                    setTimeout(() => {
+                        this.renderer.addClass(element, 'hide');
+                    }, 1000);
+                }, 1000);
+            }
+        });
     }
 
     ngOnDestroy() {

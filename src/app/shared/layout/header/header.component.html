@@ -11,10 +11,16 @@
 	</div>
 </ng-template>
 
+<div class="info-connection-card hide">
+    <div class="info-connection-card-content">
+        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i></span> {{ messageConnection }}
+    </div>
+</div>
+
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || (isCliente))">
     <div class="indique-ganhe-card-content">
         {{'geral.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
-        <a (click)="redirectIndiqueGanhe()" 
+        <a (click)="isConnected && redirectIndiqueGanhe()" 
             (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()" 
             (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()" 
             class="btn btn-indique-ganhe-card"
