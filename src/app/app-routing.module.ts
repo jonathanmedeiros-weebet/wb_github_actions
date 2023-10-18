@@ -32,6 +32,10 @@ const appRoutes: Routes = [
                 component: AppComponent
             },
             {
+                path: 'login',
+                component: AppComponent
+            },
+            {
                 path: 'acumuladao',
                 loadChildren: () => import('./acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
             },
