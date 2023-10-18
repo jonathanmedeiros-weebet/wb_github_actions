@@ -12,9 +12,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 export class WelcomePageComponent {
     nomeCliente = '';
-    slug;
-    soCassino = true;
+    SLUG;
+    soCassino = false;
     validEmail;
+    bancaNome;
+
 
     constructor(
         private route: ActivatedRoute,
@@ -23,7 +25,8 @@ export class WelcomePageComponent {
         private params: ParametrosLocaisService) {}
 
     ngOnInit() {
-        this.slug = this.params.getOpcoes().banca_nome;
+        this.SLUG = config.SLUG;
+        this.bancaNome = this.params.getOpcoes().banca_nome;
         this.route.queryParams.subscribe(params => {
             this.nomeCliente = params['nomeCliente'];
             this.validEmail = params['valid'] === 'true';

@@ -1,11 +1,11 @@
 <div class="welcome-container" [ngClass]="{'background-cassino':soCassino, 'background-esporte':!soCassino}">
     <section class="overlay">
         <div class="logo">
-            <img src="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png">
+            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
         </div>
         <div class="info-emphasis">
             <p>Olá, {{ nomeCliente }} <span style="transform: scaleX(-1); display: inline-block;">👋</span>
-            <br /> Seja bem-vindo(a) à {{ slug }}!</p>
+            <br /> Seja bem-vindo(a) à {{ bancaNome }}!</p>
         </div>
         <div style="font-size: 14px; font-weight: 400; margin-top: 32px;">
             <div *ngIf="!validEmail; else textValid">
