@@ -41,7 +41,6 @@
     height: 48px;
     align-items: center;
     gap: 10px;
-    /* padding: 10px 51px; */
     font-size: 14px;
     font-weight: 600;
     color: var(--foreground-highlight);
@@ -95,11 +94,9 @@ svg {
     max-width: 200px;
 }
 @media screen and (max-width: 973px) {
-
     .tutorial-title {
         flex-wrap: nowrap;
     }
-
     .box {
         width: 33%;
     }
