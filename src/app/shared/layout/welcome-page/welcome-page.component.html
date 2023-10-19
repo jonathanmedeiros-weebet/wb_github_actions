@@ -20,9 +20,9 @@
             </ng-template>
         </div>
         <div class="container-redirect" style="margin-top: 32px; margin-bottom: 45px;">
-            <a *ngIf="!validEmail; else buttonValid" [routerLink]="['/login']" class="btn btn-custom">Deposite agora</a>
+            <a *ngIf="!validEmail; else buttonValid"  (click)="depositeAgora()" class="btn btn-custom">Deposite agora</a>
             <ng-template #buttonValid>
-                <a class="btn btn-custom" [routerLink]="['/']">Confirmar e-mail</a>
+                <a class="btn btn-custom" [routerLink]="['/']">Ir para a página de login</a>
             </ng-template>
         </div>
         <div class="tutorial-title" style="margin-bottom: 32px;">

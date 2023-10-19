@@ -33,6 +33,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     LOGO = config.LOGO;
     loginGoogle = false;
     googleUser;
+    returnUrl;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -133,6 +134,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             .subscribe(
                                 () => {
                                     this.getUsuario();
+                                    if (this.returnUrl !== "" && this.returnUrl !== undefined) {
+                                        this.router.navigate([this.returnUrl]);
+                                    }
                                     if (this.usuario.tipo_usuario === 'cambista') {
                                         location.reload();
                                     }

@@ -40,4 +40,7 @@ export class WelcomePageComponent {
             this.soCassino = true;
         }
     }
+    depositeAgora() {
+        this.router.navigate(['/clientes/deposito']);
+    }
 }
