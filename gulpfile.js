@@ -3698,3 +3698,12 @@ gulp.task('trevocassino.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('goldbet.games', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "goldbet.games",
+        banca: "GOLD BET",
+        styles: "",
+    });
+});

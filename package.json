@@ -385,7 +385,8 @@
         "betpix3r.online": "gulp betpix3r.online",
         "apostaminas.com": "gulp apostaminas.com",
         "betgate.fun": "gulp betgate.fun",
-        "trevocassino.vip": "gulp trevocassino.vip"
+        "trevocassino.vip": "gulp trevocassino.vip",
+        "goldbet.games": "gulp goldbet.games"
     },
     "private": true,
     "dependencies": {
