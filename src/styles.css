@@ -69,7 +69,7 @@ body {
     background-color: var(--background);
     max-height: 100%;
     height: 100vh;
-    /* overflow: hidden; */
+    overflow-x: hidden;
 }
 
 .base-container {

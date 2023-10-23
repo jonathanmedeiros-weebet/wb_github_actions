@@ -1,3 +1,58 @@
+.indique-ganhe-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 37px;
+    padding: 6px 20px;
+    background-color: var(--highlight);
+    overflow: hidden;
+    transition: height 0.3s, padding 0.3s;
+}
+
+.indique-ganhe-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.indique-ganhe-card-content:not(button) {
+    font-weight: 600;
+    color: var(--header);
+}
+
+.btn-indique-ganhe-card {
+    background-color: var(--header);
+    color: var(--highlight);
+    width: 60px;
+    height: 25px !important;
+    margin-left: 6px;
+    padding: 4px 7px !important;
+    transition: width 0.3s, height 0.3s, font-size 0.3s;
+}
+
+.btn-indique-ganhe-card:active {
+    background-color: var(--header);
+    color: var(--highlight);
+    border: none;
+}
+
+.btn-indique-ganhe-card:focus {
+    box-shadow: 0 0 0 1px var(--highlight);
+}
+
+.indique-ganhe-card .btn-close {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.indique-ganhe-card .btn-close i {
+    color: var(--header);
+}
+
 .header {
     width: 100%;
     height: 92px;
@@ -337,7 +392,25 @@ body .change-theme {
     margin-right: 5px;
 }
 
+@media only screen and (min-width: 1025px) {
+    .btn-indique-ganhe-card:hover {
+        width: 80px;
+        height: 33px !important;
+        font-size: 15px;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
+    .indique-ganhe-card {
+        height: 50px;
+    }
+
+    .indique-ganhe-card .btn-close {
+        right: 20px;
+        top: 12px;
+        align-items: normal;
+    }
+
     .header {
         width: 100%;
         height: 64px;
@@ -461,3 +534,53 @@ body .change-theme {
     }
 }
 
+@media only screen and (max-width: 480px) {
+    .indique-ganhe-card-content {
+        width: 88%;
+    }
+}
+
+.info-connection-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 32px;
+    padding: 6px 20px;
+    background-color: #FFA500;
+    overflow: hidden;
+    transition: height 0.7s, padding 0.7s;
+    font-size: 14px;
+}
+.info-connection-card-content {
+    margin-top: -1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info-connection-card-content:not(button) {
+    font-weight: 400;
+}
+.info-connection-card.online {
+    color: white;
+    background-color: #18662F;
+}
+.info-connection-card.offline {
+    color: black;
+    background-color: #E34E42;
+}
+.info-connection-card.show {
+    opacity: 1;
+    height: 30px;
+    padding: 6px 20px;
+    transition: all 1s ease-in-out;
+}
+.hide {
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+}
+.icon-hidden {
+    display: none;
+}

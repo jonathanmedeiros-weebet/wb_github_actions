@@ -192,7 +192,20 @@
         "movimentacao":"Movimentações",
         "rollover": "Bônus",
         "suporte": "Suporte",
-        "EmailOuUsuario": "E-mail ou usuário"
+        "EmailOuUsuario": "E-mail ou usuário",
+        "promocoes": "Promoções",
+        "indiqueGanhe": "Indique e ganhe",
+        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}} de saldo na sua conta",
+        "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
+        "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
+        "regrasCondicoes": "Regras e condições",
+        "copiarLink": "Copiar link",
+        "seuLinkIndicacao": "Seu link de indicação:",
+        "compartilheSeuLink": "Compartilhe seu link nas redes sociais:",
+        "linkCopiado": "Link copiado!",
+        "indicar": "Indicar",
+        "semPermissaoAcesso": "Sem permissão de acesso",
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
     },
     "dias": {
         "ontem": "Ontem",
@@ -236,7 +249,8 @@
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
-        "cassinoAoVivo": "Cassino Ao Vivo"
+        "cassinoAoVivo": "Cassino Ao Vivo",
+        "loteriaPopular": "Loteria Popular"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -411,7 +425,8 @@
         "naoQueroBonus": "Não quero Bônus",
         "valorMinimoSaque": "Valor mínimo de saque",
         "valorMaximoSaqueDiario": "Valor máximo de saque diário",
-        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal"
+        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
+        "receberBonusCassino": "Receber Bônus - Cassino"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",

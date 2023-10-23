@@ -27,10 +27,11 @@ import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code">
-            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="metodoPagamento === 'paag'" src="{{ qrCodeBase64 }}"/>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
@@ -109,6 +110,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     sautoPayQr;
     isMobile = false;
     permitirBonusPrimeiroDeposito = false;
+    bonusEsportivo = false;
+    bonusCassino = false;
     opcaoBonus = '';
     rolloverAtivo: Rollover[] = [];
     modalPromocao;
@@ -137,6 +140,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
+                    this.bonusEsportivo = res.bonus_esportivo;
+                    this.bonusCassino = res.bonus_cassino;
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
                         this.opcaoBonus = 'nenhum';
@@ -160,7 +165,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     solicitarDeposito() {
-        if (this.rolloverAtivo.length > 0 && this.opcaoBonus === 'esportivo') {
+        if (this.rolloverAtivo.length > 0 && this.opcaoBonus !== 'nenhum') {
             this.avisoPromocao();
         } else {
             this.onSubmit();

@@ -5,6 +5,7 @@ import { LoteriasRoutingModule } from './loterias-routing.module';
 import { QuininhaComponent } from './quininha/quininha.component';
 import { SeninhaComponent } from './seninha/seninha.component';
 import { ApostaLoteriaService, PreApostaLoteriaService, SorteioService, TipoApostaLoteriaService } from './../services';
+import { LoteriaPopularComponent } from './loteria-popular/loteria-popular.component';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { ApostaLoteriaService, PreApostaLoteriaService, SorteioService, TipoApos
     ],
     declarations: [
         SeninhaComponent,
-        QuininhaComponent
+        QuininhaComponent,
+        LoteriaPopularComponent
     ],
     providers: [
         ApostaLoteriaService,

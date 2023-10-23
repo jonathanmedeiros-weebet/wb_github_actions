@@ -43,6 +43,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validacaoEmailObrigatoria;
     autoPreenchimento = true;
     cpfValidado = false;
+    menorDeIdade = false;
     possuiCodigoAfiliado = false;
 
     user: any;
@@ -107,6 +108,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
+            if (params.refId) {
+                localStorage.setItem('refId', params.refId);
+            } else {
+                const storagedRefId = localStorage.getItem('refId');
+                if (storagedRefId) {
+                    this.form.patchValue({refId: storagedRefId});
+                }
+            }
+
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
@@ -151,7 +161,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             check_2: [''],
             googleId:[''],
             googleIdToken:[''],
-            btag: [this.route.snapshot.queryParams.btag]
+            btag: [this.route.snapshot.queryParams.btag],
+            refId: [this.route.snapshot.queryParams.refId],
+            dadosCriptografados: [null]
         });
     }
 
@@ -177,6 +189,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     submit() {
+        if (this.menorDeIdade) {
+            this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
+            return;
+        }
         const values = this.form.value;
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
@@ -251,24 +267,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     if (res.validarCpfAtivado) {
                         this.autoPreenchimento = true;
                         this.cpfValidado = true;
-                        let splittedName = res.nome?.split(' ');
-                        let nome = "";
-                        if (splittedName) {
-                            nome = splittedName.shift();
-                            for (let i = 0; i < splittedName.length; i++) {
-                                nome += " " + "*".repeat(splittedName[i].length);
-                            }
-                        }
+                        this.menorDeIdade = res.menorDeIdade;
+                        this.form.controls['nascimento'].clearValidators();
+                        this.form.controls['nascimento'].updateValueAndValidity();
                         this.form.patchValue({
-                            nascimento: res.dataNascimento,
-                            nome: nome,
-                            nomeCompleto: res.nome
+                            nome: res.nome,
+                            dadosCriptografados: res.dados
                         });
                     } else {
                         if (!this.formSocial) {
                             this.form.patchValue({nome: ''});
                         }
                         this.autoPreenchimento = false;
+                        this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
+                        this.form.controls['nascimento'].updateValueAndValidity();
                         this.cpfValidado = false;
                     }
                 },
