@@ -259,7 +259,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                     this.formExclusaoConta.setValue({ motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '3':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não tenho mais interesse em realizar apostas nesta banca", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ motivoExclusao: "Não tenho mais interesse em realizar apostas neste site", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '4':
                     this.formExclusaoConta.setValue({ motivoExclusao: "Não estou mais usando está conta", opcao: opcao, confirmarExclusao: ""});

@@ -347,7 +347,7 @@
         "informeOValor": "Enter value",
         "seuPixFoiCreditado": "Your pix was successfully credited, your new balance is: R$ {{novoSaldo}}",
         "valorMinimo": "Minimum deposit amount",
-        "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact the bank.",
+        "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact support.",
         "depositoRegistrado": "Deposit - Registered",
         "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Recent deposits"

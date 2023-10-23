@@ -23,7 +23,7 @@ export class ErrorService {
             if (error.error.errors) {
                 message = error.error.errors.message;
             } else {
-                message = 'Ocorreu um problema inesperado, entre em contato com a banca.';
+                message = 'Ocorreu um problema inesperado, entre em contato com o suporte.';
             }
         }
 

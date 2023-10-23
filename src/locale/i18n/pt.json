@@ -347,7 +347,7 @@
         "informeOValor": "Informe o valor",
         "seuPixFoiCreditado": "Seu pix foi creditado com sucesso, seu novo saldo é: R$ {{novoSaldo}}",
         "valorMinimo": "Valor mínimo para depósito",
-        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com a banca.",
+        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com suporte.",
         "depositoRegistrado": "Depósito - Registrado",
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recentes"
