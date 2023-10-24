@@ -3648,3 +3648,12 @@ gulp.task('bbwins.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('triobet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "triobet.wee.bet",
+        banca: "TRIO BET",
+        styles: "",
+    });
+});
