@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LiveComponent } from './live/live.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {TranslateModule} from '@ngx-translate/core';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {TranslateModule} from '@ngx-translate/core';
         CasinoRoutingModule,
         NgxSkeletonLoaderModule,
         TranslateModule,
+        NgxPaginationModule,
     ]
 })
 export class CasinoModule { }
