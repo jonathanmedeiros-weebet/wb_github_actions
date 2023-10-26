@@ -3632,3 +3632,12 @@ gulp.task('betsampa.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('reidocassino.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "reidocassino.net",
+        banca: "REI DO CASSINO",
+        styles: "",
+    });
+});
