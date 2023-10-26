@@ -1909,15 +1909,6 @@ gulp.task('uaibet.club', function (done) {
     });
 });
 
-gulp.task('cassinodosorte.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "cassinodosorte.com",
-        banca: "CASSINO DO SORTE",
-        styles: "",
-    });
-});
-
 gulp.task('novabet.site', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
