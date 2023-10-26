@@ -536,10 +536,6 @@
 }
 
 @media only screen and (min-width: 1025px) {
-    app-banners {
-        margin: 0 auto;
-    }
-
     .game-tile {
         --gameTileWidth: calc((100% / 5) - 16px);
         width: var(--gameTileWidth);
