@@ -382,7 +382,8 @@
         "trevocassino.vip": "gulp trevocassino.vip",
         "goldbet.games": "gulp goldbet.games",
         "bbwins.bet": "gulp bbwins.bet",
-        "triobet.wee.bet": "gulp triobet.wee.bet"
+        "triobet.wee.bet": "gulp triobet.wee.bet",
+        "betsampa.wee.bet": "gulp betsampa.wee.bet"
     },
     "private": true,
     "dependencies": {

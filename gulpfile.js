@@ -3655,3 +3655,12 @@ gulp.task('triobet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betsampa.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betsampa.wee.bet",
+        banca: "BET SAMPA",
+        styles: "",
+    });
+});
