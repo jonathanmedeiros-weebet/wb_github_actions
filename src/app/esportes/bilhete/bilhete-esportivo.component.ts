@@ -91,8 +91,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
 
-        this.btnText = this.translate.instant('bilhete.preAposta');
-
         this.createForm();
         this.definirAltura();
         this.opcoes = this.paramsService.getOpcoes();
