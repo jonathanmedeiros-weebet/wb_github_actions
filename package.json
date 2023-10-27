@@ -123,7 +123,6 @@
         "infinitybet.wee.bet": "gulp infinitybet.wee.bet",
         "futpix.wee.bet": "gulp futpix.wee.bet",
         "betminas.wee.bet": "gulp betminas.wee.bet",
-        "xomanobet.com.br": "gulp xomanobet.com.br",
         "sandbox.wee.bet": "gulp sandbox.wee.bet",
         "bet83.wee.bet": "gulp bet83.wee.bet",
         "camisa12.online": "gulp camisa12.online",
@@ -248,7 +247,6 @@
         "x1fortbet.vip": "gulp x1fortbet.vip",
         "085.bet": "gulp 085.bet",
         "fortunebet.app": "gulp fortunebet.app",
-        "vencedorbets.com.br": "gulp vencedorbets.com.br",
         "26sports.bet": "gulp 26sports.bet",
         "futebet.com": "gulp futebet.com",
         "blubet.site": "gulp blubet.site",
@@ -381,7 +379,9 @@
         "bbwins.bet": "gulp bbwins.bet",
         "triobet.wee.bet": "gulp triobet.wee.bet",
         "betsampa.wee.bet": "gulp betsampa.wee.bet",
-        "reidocassino.net": "gulp reidocassino.net"
+        "reidocassino.net": "gulp reidocassino.net",
+        "beton.club": "gulp beton.club",
+        "maxbet.wee.bet": "gulp maxbet.wee.bet"
     },
     "private": true,
     "dependencies": {
