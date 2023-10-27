@@ -1162,15 +1162,6 @@ gulp.task('betminas.wee.bet', function (done) {
     });
 });
 
-gulp.task('xomanobet.com.br', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "xomanobet.com.br",
-        banca: "XOMANOBET",
-        styles: "",
-    });
-});
-
 gulp.task('bet83.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1909,15 +1900,6 @@ gulp.task('uaibet.club', function (done) {
     });
 });
 
-gulp.task('cassinodosorte.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "cassinodosorte.com",
-        banca: "CASSINO DO SORTE",
-        styles: "",
-    });
-});
-
 gulp.task('novabet.site', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2374,15 +2356,6 @@ gulp.task('fortunebet.app', function (done) {
         banca: "FORTUNEBET",
         styles: "",
         scripts: "<!-- Start of LiveChat (www.livechat.com) code --><script>window.__lc = window.__lc || {};window.__lc.license = 15967662;;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:'2.0',on:function(){i(['on',c.call(arguments)])},once:function(){i(['once',c.call(arguments)])},off:function(){i(['off',c.call(arguments)])},get:function(){if(!e._h)throw new Error('[LiveChatWidget] You cant use getters before load.');return i(['get',c.call(arguments)])},call:function(){i(['call',c.call(arguments)])},init:function(){var n=t.createElement('script');n.async=!0,n.type='text/javascript',n.src='https://cdn.livechatinc.com/tracking.js',t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))</script><noscript><a href='https://www.livechat.com/chat-with/15967662/' rel='nofollow'>Chat with us</a>, powered by <a href='https://www.livechat.com/?welcome' rel='noopener nofollow' target='_blank'>LiveChat</a></noscript><!-- End of LiveChat code -->",
-    });
-});
-
-gulp.task('vencedorbets.com.br', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "vencedorbets.com.br",
-        banca: "VENCEDOR BETS",
-        styles: "",
     });
 });
 
@@ -2844,14 +2817,12 @@ gulp.task('suasortebet.com', function (done) {
     });
 });
 
-gulp.task('betsstarks.com', function (done) {
+gulp.task('brabet.app', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "betsstarks.com",
-        banca: "BETS STARKS",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/bwW3zlaKcy' async></script>",
+        host: "brabet.app",
+        banca: "BRABET",
+        styles: ""
     });
 });
 
@@ -3640,6 +3611,33 @@ gulp.task('betsampa.wee.bet', function (done) {
         server: "front2.wee.bet",
         host: "betsampa.wee.bet",
         banca: "BET SAMPA",
+        styles: "",
+    });
+});
+
+gulp.task('reidocassino.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "reidocassino.net",
+        banca: "REI DO CASSINO",
+        styles: "",
+    });
+});
+
+gulp.task('beton.club', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "beton.club",
+        banca: "BETON",
+        styles: "",
+    });
+});
+
+gulp.task('maxbet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "maxbet.wee.bet",
+        banca: "MAX BET",
         styles: "",
     });
 });
