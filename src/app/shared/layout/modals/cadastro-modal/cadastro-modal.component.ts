@@ -108,6 +108,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
+            if (params.refId) {
+                localStorage.setItem('refId', params.refId);
+            } else {
+                const storagedRefId = localStorage.getItem('refId');
+                if (storagedRefId) {
+                    this.form.patchValue({refId: storagedRefId});
+                }
+            }
+
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
@@ -153,6 +162,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             googleId:[''],
             googleIdToken:[''],
             btag: [this.route.snapshot.queryParams.btag],
+            refId: [this.route.snapshot.queryParams.refId],
             dadosCriptografados: [null]
         });
     }

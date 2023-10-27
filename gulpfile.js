@@ -489,16 +489,25 @@ gulp.task('recifeesportes.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportbet7.net', function (done) {
+gulp.task('esportebets.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "sportbet7.net",
-        banca: "SPORT BET 7",
+        host: "esportebets.bet",
+        banca: "ESPORTE BETS",
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WTVCW394');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WTVCW394'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/L0YexFmj0M' async></script>",
+    });
+});
+
+gulp.task('sportbets7.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "sportbets7.net",
+        banca: "SPORT BETS 7",
+        styles: "",
     });
 });
 
@@ -1493,20 +1502,6 @@ gulp.task("prowin.io", function (done) {
         host: "prowin.io",
         banca: "PROWIN",
         styles: "",
-    });
-});
-
-gulp.task('bet10.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "bet10.wee.bet",
-        shared_url: "bet10.bet",
-        banca: "BET10",
-        styles: "",
-        scripts: "<script type='application/javascript'>(function (d, b, t) {'use strict';var s = document.createElement(t), c = (d.getElementsByTagName(t)[0]);s.setAttribute('src', 'https://adscool.net/resources/content/bet10.js');s.setAttribute('async', true);if (c) {var n = c.parentNode; n.insertBefore(s, c);} else {b.appendChild(s);}})(document, document.body, 'SCRIPT');</script>",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WSNRRPX');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WSNRRPX'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-        pixel: "<meta name='facebook-domain-verification' content='dqaih79tqgg7qs7flk9pkz7fhovx1v' />",
     });
 });
 
@@ -3245,6 +3240,8 @@ gulp.task('jetbet365.com', function (done) {
         host: "jetbet365.com",
         banca: "JET BET 365",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P65H9KK8');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P65H9KK8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -3402,15 +3399,17 @@ gulp.task('fourbet.com', function (done) {
         host: "fourbet.com",
         banca: "FOURBET",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDX2BLKM');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TDX2BLKM'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
 gulp.task('fourbet.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "fourbet.wee.bet",
+        host: "fourbet.net",
         banca: "FOURBET",
-        styles: "",
+        styles: ""
     });
 });
 
@@ -3420,6 +3419,8 @@ gulp.task('playmasters.bet', function (done) {
         host: "playmasters.bet",
         banca: "PLAY MASTERS",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P87LZNCR');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P87LZNCR'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -3480,6 +3481,8 @@ gulp.task('malybet.com', function (done) {
         host: "malybet.com",
         banca: "MALYBET",
         styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N4VFPHTJ');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-N4VFPHTJ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -3541,10 +3544,10 @@ gulp.task('mczbet.com', function (done) {
     });
 });
 
-gulp.task('vamobet.com.br', function (done) {
+gulp.task('vamobet.io', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "vamobet.com.br",
+        host: "vamobet.io",
         banca: "VAMO BET",
         styles: "",
     });
@@ -3663,6 +3666,35 @@ gulp.task('betpix3r.online', function (done) {
         server: "front2.wee.bet",
         host: "betpix3r.online",
         banca: "BETPIX3R",
+        styles: "",
+    });
+});
+
+gulp.task('apostaminas.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "apostaminas.com",
+        banca: "APOSTA MINAS",
+        styles: "",
+    });
+});
+
+gulp.task('betgate.fun', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betgate.fun",
+        banca: "BET GATE",
+        styles: "",
+        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TN2NDJKP');</script><!-- End Google Tag Manager -->",
+        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TN2NDJKP'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+    });
+});
+
+gulp.task('trevocassino.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "trevocassino.vip",
+        banca: "TREVO CASSINO",
         styles: "",
     });
 });

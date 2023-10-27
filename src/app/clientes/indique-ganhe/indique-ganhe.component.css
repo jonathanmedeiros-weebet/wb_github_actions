@@ -1,0 +1,151 @@
+.indique-ganhe-info {
+    margin: 30px 0;
+}
+
+.indique-ganhe-info > p {
+    margin-top: 10px;
+}
+
+.indique-ganhe-info a {
+    color: var(--highlight);
+}
+
+.link-indicacao-container {
+    background-color: var(--header);
+    padding: 22px 28px;
+}
+
+.link-indicacao-container > p {
+    margin-bottom: 8px;
+}
+
+.link-indicacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    padding: 12px;
+    border: 1px solid;
+}
+
+.link-indicacao .link {
+    flex-grow: 9;
+    display: flex;
+    align-items: center;
+}
+
+.link i {
+    margin-right: 6px;
+    text-align: center;
+}
+
+.link-indicacao a {
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+    color: var(--highlight);
+}
+
+.social-share > p {
+    margin-top: 30px;
+}
+
+.social-share span {
+    font-size: 11px;
+}
+
+.social-buttons-container {
+    display: flex;
+    align-items: center;
+}
+
+.social-buttons {
+    padding: 8px;
+    font-size: 19px;
+    width: 36px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.social-buttons:hover {
+    opacity: 0.7;
+}
+
+.social-buttons-container span {
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.fa-facebook {
+    color: #ffffff;
+    background-color: #3b5998;
+}
+
+.fa-whatsapp {
+    color: #ffffff;
+    background-color: #25d366;
+}
+
+.fa-telegram {
+    color: #ffffff;
+    background-color: #229ED9;
+}
+
+.fa-envelope {
+    color: #ffffff;
+    background-color: #ff3c2e;
+}
+
+.modal-header, .modal-body {
+    padding: 15px 25px;
+}
+
+.modal-body li {
+    margin-bottom: 12px;
+}
+
+@media only screen and (max-width: 480px) {
+    .link-indicacao {
+        flex-direction: column;
+    }
+
+    .link-indicacao .link {
+        width: 100%;
+    }
+
+    .link span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    #indique-ganhe-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .indique-ganhe-info {
+        margin-top: 15px;
+    }
+
+    .link-indicacao {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1260px) {
+    .link-indicacao {
+        width: 41vw;
+    }
+}
+
+@media only screen and (min-width: 1830px) {
+    .link-indicacao {
+        width: 28vw;
+    }
+}

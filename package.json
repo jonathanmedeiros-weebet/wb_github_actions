@@ -52,7 +52,8 @@
         "megasports.club": "gulp megasports.club",
         "alfasports.net": "gulp alfasports.net",
         "recifeesportes.wee.bet": "gulp recifeesportes.wee.bet",
-        "sportbet7.net": "gulp sportbet7.net",
+        "esportebets.bet": "gulp esportebets.bet",
+        "sportbets7.net": "gulp sportbets7.net",
         "jrsports.bet": "gulp jrsports.bet",
         "apremiada.bet": "gulp apremiada.bet",
         "betsports.wee.bet": "gulp betsports.wee.bet",
@@ -160,7 +161,6 @@
         "supremodasorte.wee.bet": "gulp supremodasorte.wee.bet",
         "betmax.wee.bet": "gulp betmax.wee.bet",
         "prowin.io": "gulp prowin.io",
-        "bet10.wee.bet": "gulp bet10.wee.bet",
         "easybets.club": "gulp easybets.club",
         "belabets.com": "gulp belabets.com",
         "apostasmax.com": "gulp apostasmax.com",
@@ -369,7 +369,7 @@
         "nortedasorte.bet": "gulp nortedasorte.bet",
         "faturabet.com": "gulp faturabet.com",
         "mczbet.com": "gulp mczbet.com",
-        "vamobet.com.br": "gulp vamobet.com.br",
+        "vamobet.io": "gulp vamobet.io",
         "smartbet.cash": "gulp smartbet.cash",
         "supertop3.bet": "gulp supertop3.bet",
         "r5sports.bet": "gulp r5sports.bet",
@@ -382,7 +382,10 @@
         "horadaaposta.bet": "gulp horadaaposta.bet",
         "betypix.bet": "gulp betypix.bet",
         "laelebet.com": "gulp laelebet.com",
-        "betpix3r.online": "gulp betpix3r.online"
+        "betpix3r.online": "gulp betpix3r.online",
+        "apostaminas.com": "gulp apostaminas.com",
+        "betgate.fun": "gulp betgate.fun",
+        "trevocassino.vip": "gulp trevocassino.vip"
     },
     "private": true,
     "dependencies": {

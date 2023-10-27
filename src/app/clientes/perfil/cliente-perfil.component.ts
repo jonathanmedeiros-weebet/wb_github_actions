@@ -9,7 +9,7 @@ import {UtilsService} from '../../shared/services/utils/utils.service';
 import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
-import { SidebarService } from 'src/app/services';
+import { AuthService, SidebarService } from 'src/app/services';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -23,6 +23,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     cidadeSelecionada: number;
     showLoading = true;
     mostrarSenha = false;
+    googleLogin = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -31,6 +32,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         private messageService: MessageService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
+        private auth: AuthService
     ) {
         super();
         this.cidades = [];
@@ -39,6 +41,9 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
+        const user = this.auth.getUser();
+        this.googleLogin = user?.google_login ?? false;
+
         this.sidebarService.changeItens({contexto: 'cliente'});
 
         this.createForm();
@@ -118,7 +123,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             cidade: ['0', Validators.required],
             estado: ['0', Validators.required],
             cep: ['', Validators.required],
-            senha_atual: [null, Validators.required]
+            senha_atual: [null, this.googleLogin ? [] : Validators.required]
         });
     }
 
