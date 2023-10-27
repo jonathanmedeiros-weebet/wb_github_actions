@@ -3624,10 +3624,10 @@ gulp.task('reidocassino.net', function (done) {
     });
 });
 
-gulp.task('beton.club ', function (done) {
+gulp.task('beton.club', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "beton.club ",
+        host: "beton.club",
         banca: "BETON",
         styles: "",
     });
