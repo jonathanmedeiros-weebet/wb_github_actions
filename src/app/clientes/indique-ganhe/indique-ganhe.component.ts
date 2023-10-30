@@ -97,14 +97,13 @@ export class IndiqueGanheComponent implements OnInit {
         if (this.linkIndicacao) {
             if (this.isAppMobile) {
                 WeebetMessage.postMessage(JSON.stringify({
-                    message: "Quer ganhar uma graninha extra e se divertir?\nÉ só criar uma conta através deste link e aproveitar!",
-                    data: this.linkIndicacao,
+                    message: `Quer ganhar uma graninha extra e se divertir?\nÉ só criar uma conta através deste link e aproveitar!\n${this.linkIndicacao}`,
                     action: 'shareURL'
                 }));
             } else {
                 if (window.navigator.share) {
                     window.navigator.share({
-                        text: "Quer ganhar uma graninha extra e se divertir?\nÉ só criar uma conta através deste link e aproveitar!",
+                        text: "Quer ganhar uma graninha extra e se divertir?\nÉ só criar uma conta através deste link e aproveitar!\n",
                         url: this.linkIndicacao
                     })
                 } else {
