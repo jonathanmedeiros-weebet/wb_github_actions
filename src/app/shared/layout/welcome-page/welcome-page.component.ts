@@ -25,7 +25,7 @@ export class WelcomePageComponent {
         private params: ParametrosLocaisService) {}
 
     ngOnInit() {
-        this.SLUG = config.SLUG;
+        this.SLUG = 'demo.wee.bet';
         this.bancaNome = this.params.getOpcoes().banca_nome;
         this.route.queryParams.subscribe(params => {
             this.nomeCliente = params['nomeCliente'];
@@ -40,7 +40,10 @@ export class WelcomePageComponent {
             this.soCassino = true;
         }
     }
+
     depositeAgora() {
-        this.router.navigate(['/clientes/deposito']);
+        this.router.navigate(['/clientes/deposito']).then(() => {
+            window.location.reload();
+          });
     }
 }

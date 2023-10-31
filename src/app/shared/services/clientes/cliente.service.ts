@@ -17,6 +17,7 @@ export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
     codigoFiliacaoCadastroTemp;
     logadoSource;
+    logado;
     clienteSource;
 
     constructor(
@@ -26,6 +27,8 @@ export class ClienteService {
         private router: Router
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
+        this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+        this.logado = this.logadoSource.asObservable();
     }
 
     getTermosDeUso() {
@@ -40,16 +43,15 @@ export class ClienteService {
     cadastrarCliente(values: any) {
         return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values), this.headers.getRequestOptions())
             .pipe(
-                map((response: any) => {
-
+                map((response: any) => {                    
                     const dataUser = response.results.dataUser;
-                
+            
                     if (dataUser && Object.keys(dataUser).length > 0) {
                         this.setCookie(dataUser.user.cookie);
                         const expires = moment().add(1, 'd').valueOf();
                         localStorage.setItem('expires', `${expires}`);
                         localStorage.setItem('token', dataUser.token);
-                        localStorage.setItem('user', JSON.stringify(dataUser.user.id));
+                        localStorage.setItem('user', JSON.stringify(dataUser.user));
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
                         this.logadoSource.next(true);
@@ -185,15 +187,6 @@ export class ClienteService {
             )
     }
 
-    limparStorage() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('tokenCassino');
-        localStorage.removeItem('user');
-        localStorage.removeItem('expires');
-        localStorage.removeItem('tipos_aposta');
-        localStorage.removeItem('exibirSaldo');
-    }
-
     setCookie(valor) {
         const d = new Date();
         d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
@@ -212,4 +205,9 @@ export class ClienteService {
     setIsCliente(value: boolean) {
         this.clienteSource.next(value);
     }
+
+    isLoggedIn(): boolean {
+        return !!localStorage.getItem('token');
+    }
+
 }

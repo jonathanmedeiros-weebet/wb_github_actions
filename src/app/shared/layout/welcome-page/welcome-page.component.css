@@ -51,7 +51,7 @@
 .my-custom-svg {
     fill: var(--highlight);
 }
-.container {
+.container-instructions {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -85,10 +85,12 @@ svg {
     margin: 0 auto;
 }
 .tutorial-title {
+    flex-wrap: nowrap;
     font-size: 14px;
     font-weight: 600;
 }
 .tutorial-body {
+    flex-wrap: nowrap;
     font-size: 12px;
     font-weight: 400;
     max-width: 200px;
@@ -135,4 +137,12 @@ svg {
         width: 200px;
     }
 }
+
+@media (max-width: 544px) {
+    .tutorial-title .tutorial-title {
+        width: 250px;
+        white-space: nowrap;
+    }
+}
+
   
