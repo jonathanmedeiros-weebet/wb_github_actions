@@ -25,7 +25,7 @@ export class WelcomePageComponent {
         private params: ParametrosLocaisService) {}
 
     ngOnInit() {
-        this.SLUG = 'demo.wee.bet';
+        this.SLUG = config.SLUG;
         this.bancaNome = this.params.getOpcoes().banca_nome;
         this.route.queryParams.subscribe(params => {
             this.nomeCliente = params['nomeCliente'];

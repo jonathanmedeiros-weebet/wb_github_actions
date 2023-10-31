@@ -25,13 +25,11 @@ export class AppComponent implements OnInit {
     mobileScreen = false;
     isEmpty = false;
     SLUG;
-    modalRef;
     TIMESTAMP;
     ativacaoCadastro;
     modoClienteHabilitado;
     whatsapp;
     isDemo = location.host === 'demo.wee.bet';
-    returnUrl: string = '';
 
     constructor(
         private auth: AuthService,
@@ -79,21 +77,12 @@ export class AppComponent implements OnInit {
         }
         if (this.router.url.includes('/login')) {
 
-            this.route.queryParams.subscribe(params => {
-                const returnUrl = params['returnUrl'];
-                if (returnUrl) {
-                  const decodedReturnUrl = decodeURIComponent(returnUrl);
-                  this.returnUrl = decodedReturnUrl;
-                }
-            });
-
-            this.modalRef = this.modalService.open(LoginModalComponent, {
+            this.modalService.open(LoginModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
-            });
-            this.modalRef.componentInstance.returnUrl = this.returnUrl;
+            });            
 
             this.router.navigate(['esportes/futebol']);
         }

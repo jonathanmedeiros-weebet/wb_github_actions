@@ -12,7 +12,7 @@ export class ClientGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (!this.auth.isCliente()) {
-            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+            this.router.navigate(['/']);
             return false;
         }
         return true;

@@ -8,7 +8,6 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
-import { set } from 'lodash';
 
 @Injectable({
     providedIn: 'root'
