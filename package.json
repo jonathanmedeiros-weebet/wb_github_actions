@@ -381,7 +381,9 @@
         "betsampa.wee.bet": "gulp betsampa.wee.bet",
         "reidocassino.net": "gulp reidocassino.net",
         "beton.club": "gulp beton.club",
-        "maxbet.wee.bet": "gulp maxbet.wee.bet"
+        "maxbet.wee.bet": "gulp maxbet.wee.bet",
+        "greenp1x.com": "gulp greenp1x.com",
+        "strikebet.bet": "gulp strikebet.bet"
     },
     "private": true,
     "dependencies": {

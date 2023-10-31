@@ -3641,3 +3641,21 @@ gulp.task('maxbet.wee.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('greenp1x.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "greenp1x.com",
+        banca: "GREEN P1X",
+        styles: "",
+    });
+});
+
+gulp.task('strikebet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "strikebet.bet",
+        banca: "STRIKE BET",
+        styles: "",
+    });
+});
