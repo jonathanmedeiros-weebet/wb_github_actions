@@ -3614,3 +3614,12 @@ gulp.task('strikebet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lidersport.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "lidersport.bet",
+        banca: "LÍDER SPORT",
+        styles: "",
+    });
+});
