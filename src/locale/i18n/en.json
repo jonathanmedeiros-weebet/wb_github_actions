@@ -192,7 +192,20 @@
         "movimentacao":"Transactions",
         "rollover": "Rollover",
         "suporte": "Support",
-        "EmailOuUsuario": "E-mail or username"
+        "EmailOuUsuario": "E-mail or username",
+        "promocoes": "Promotions",
+        "indiqueGanhe": "Refer and earn",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} balance in your account",
+        "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
+        "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
+        "regrasCondicoes": "Rules and conditions",
+        "copiarLink": "Copy link",
+        "seuLinkIndicacao": "Your referral link:",
+        "compartilheSeuLink": "Share your link on social media:",
+        "linkCopiado": "Link copied!",
+        "indicar": "Indicate",
+        "semPermissaoAcesso": "No access permission",
+        "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age."
     },
     "dias": {
         "ontem": "Yesterday",
@@ -236,7 +249,8 @@
         "raspadinha": "Scratchcard",
         "roleta": "Roulette",
         "mesa": "Table",
-        "cassinoAoVivo": "Live Casino"
+        "cassinoAoVivo": "Live Casino",
+        "loteriaPopular": "Popular Lottery"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -411,7 +425,8 @@
         "naoQueroBonus": "I don't want bonus",
         "valorMinimoSaque": "Minimum withdrawal amount",
         "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
-        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount"
+        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
+        "receberBonusCassino": "Receive Bonus - Casino"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",

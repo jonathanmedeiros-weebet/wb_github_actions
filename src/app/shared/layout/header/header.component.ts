@@ -36,6 +36,7 @@ import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.compo
 import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configuracoes.component';
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
+import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 
 @Component({
     selector: 'app-header',
@@ -45,13 +46,16 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewChecked {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
+    @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    indiqueGanheHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
-        bonus: 0
+        bonus: 0,
+        bonusModalidade: 'nenhum'
     };
     usuario = new Usuario();
     isLoggedIn;
@@ -60,6 +64,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
+    loteriaPopularAtiva;
     esporteAtivo;
     cassinoAtivo;
     virtuaisAtivo;
@@ -86,8 +91,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     };
     mostrarSaldo;
     firstLoggedIn;
+    valorGanhoPorIndicacao;
+    removendoIndiqueGanheCard = false;
     messageConnection;
-    isConnected;
+    isConnected = true;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -164,9 +171,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.loteriaPopularAtiva = this.paramsService.loteriaPopularAtiva();
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
+
+        this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
@@ -190,7 +201,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
-
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
 
         this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
@@ -302,7 +312,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirLogin() {
         this.modalRef = this.modalService.open(
-            LoginModalComponent, 
+            LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-550 modal-h-350 modal-login',
@@ -371,6 +381,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(RolloverComponent);
     }
 
+    abrirIndiqueGanhe() {
+        this.modalService.open(IndiqueGanheComponent);
+    }
+
     abrirCambistaDashboard() {
         this.modalService.open(DashboardComponent);
     }
@@ -428,5 +442,34 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
 
         return '';
+    }
+
+    redirectIndiqueGanhe() {
+        if (!this.isLoggedIn) {
+            this.abrirLogin();
+        } else {
+            if (this.isMobile) {
+                this.abrirIndiqueGanhe();
+            } else {
+                this.router.navigate(['clientes/indique-ganhe']);
+            }
+            this.removerIndiqueGanheCard();
+        }
+    }
+
+    removerIndiqueGanheCard() {
+        this.removendoIndiqueGanheCard = true;
+        let card = this.indiqueGanheCard.nativeElement;
+        this.renderer.setStyle(card, 'height', '0');
+        this.renderer.setStyle(card, 'padding', '0 20px');
+        setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
+    }
+
+    btnCardOnMouseOver() {
+        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
+    }
+
+    btnCardOnMouseOut() {
+        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
     }
 }

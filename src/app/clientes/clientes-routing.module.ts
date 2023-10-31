@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PagesLayoutComponent} from '../shared/layout/app-layouts';
+import { IndiqueGanheGuard } from './../services';
 
 const routes: Routes = [{
     path: '',
@@ -47,6 +48,11 @@ const routes: Routes = [{
         {
             path: 'rollover',
             loadChildren: () => import('./rollover/rollover.module').then(f => f.RolloverModule)
+        },
+        {
+            path: 'indique-ganhe',
+            loadChildren: () => import('./indique-ganhe/indique-ganhe.module').then(i => i.IndiqueGanheModule),
+            canActivate: [IndiqueGanheGuard]
         }
     ]
 }];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { ClienteService, MenuFooterService, MessageService, SidebarService } from 'src/app/services';
+import { ClienteService, MenuFooterService, MessageService, SidebarService, AuthService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 
 @Component({
@@ -12,6 +12,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
 
     showLoading = true;
     mostrarSenha = false;
+    googleLogin = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -19,11 +20,15 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         private messageService: MessageService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
+        private auth: AuthService
     ) {
         super();
      }
 
     ngOnInit(): void {
+        const user = this.auth.getUser();
+        this.googleLogin = user?.google_login ?? false;
+
         this.sidebarService.changeItens({contexto: 'cliente'});
 
         this.createForm();
@@ -58,7 +63,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
     createForm() {
         this.form = this.fb.group({
             chave_pix: [''],
-            senha_atual: [null, Validators.required]
+            senha_atual: [null, this.googleLogin ? [] : Validators.required]
         });
     }
 
