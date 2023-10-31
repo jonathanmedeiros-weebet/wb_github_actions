@@ -359,7 +359,7 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
-                            <a (click)="abrirIndiqueGanhe()">
+                            <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">
                                 <span>
                                     <i class="fa fa-solid fa-gift"></i>
                                 </span>
