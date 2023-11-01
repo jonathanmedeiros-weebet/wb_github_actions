@@ -33,3 +33,9 @@
         margin: 0;
     }
 }
+
+@media only screen and (min-width: 1920px) {
+    .banners.cassino {
+        margin: 0 auto;
+    }
+}

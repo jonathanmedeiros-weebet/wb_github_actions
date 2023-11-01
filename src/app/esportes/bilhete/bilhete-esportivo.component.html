@@ -266,7 +266,7 @@
             </button>
             <button type="button" class="btn btn-custom " *ngIf="!disabled; else processandoPreAposta"
                     (click)="finalizarApostaDeslogado()">
-                {{'modais.finalizar' | translate}} {{btnText}}
+                {{'modais.finalizar' | translate}} <span>{{ btnText || ('bilhete.preAposta' | translate) }}</span> 
             </button>
             <ng-template #processandoPreAposta>
                 <button disabled class="btn btn-custom">

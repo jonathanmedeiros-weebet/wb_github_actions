@@ -183,7 +183,7 @@
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
         "contato": "Contato",
-        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres com pelo menos uma letra (maiúscula e minúscula) e um número.",
+        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres.",
         "nomeJogoCassino": "Jogo",
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
@@ -347,7 +347,7 @@
         "informeOValor": "Informe o valor",
         "seuPixFoiCreditado": "Seu pix foi creditado com sucesso, seu novo saldo é: R$ {{novoSaldo}}",
         "valorMinimo": "Valor mínimo para depósito",
-        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com a banca.",
+        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com suporte.",
         "depositoRegistrado": "Depósito - Registrado",
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recentes"
