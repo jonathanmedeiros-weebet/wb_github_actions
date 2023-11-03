@@ -3635,7 +3635,7 @@ gulp.task('betrapida.com', function (done) {
 
 gulp.task('bruxo888.com', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front2.wee.bet",
         host: "bruxo888.com",
         banca: "BRUXO 888T",
         styles: "",
