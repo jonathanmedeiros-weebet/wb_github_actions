@@ -379,7 +379,9 @@
         "maxbet.wee.bet": "gulp maxbet.wee.bet",
         "greenp1x.com": "gulp greenp1x.com",
         "strikebet.bet": "gulp strikebet.bet",
-        "lidersport.bet": "gulp lidersport.bet"
+        "lidersport.bet": "gulp lidersport.bet",
+        "betrapida.com": "gulp betrapida.com",
+        "bruxo888.com": "gulp bruxo888.com"
     },
     "private": true,
     "dependencies": {

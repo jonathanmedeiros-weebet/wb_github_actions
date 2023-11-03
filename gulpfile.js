@@ -3623,3 +3623,21 @@ gulp.task('lidersport.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betrapida.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betrapida.com",
+        banca: "BET RÁPIDA",
+        styles: "",
+    });
+});
+
+gulp.task('bruxo888.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bruxo888.com",
+        banca: "BRUXO 888T",
+        styles: "",
+    });
+});
