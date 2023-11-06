@@ -9,8 +9,13 @@
 <div class="modal-body cupom-ativo">
     <div class="mt-3">
         <ng-container *ngFor="let promocao of promocoes">
-           <span *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
-               <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{upperCase(promocao.bonusModalidade)}}</p>
+           <span>
+               <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
+                    <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{upperCase(promocao.bonusModalidade)}}</p>
+               </ng-container>
+               <ng-container *ngIf="promocao.tipo === 'cadastro_bonus'">
+                    <p>BÔNUS DE CADASTRO - APOSTAS {{upperCase(promocao.bonusModalidade)}}</p>
+               </ng-container>
                <ul>
                    <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
                         <li>
@@ -20,7 +25,7 @@
                         </li>
                         <li>
                         O bônus será ativado diretamente na sua conta de cliente após o primeiro depósito. Para usar seu bônus de primeiro depósito de Apostas na modalidade {{promocao.bonusModalidade}}
-                           , você deve cumprir as condições estabelecidas nos seguintes pontos:
+                            , você deve cumprir as condições estabelecidas nos seguintes pontos:
                         </li>
                    </ng-container>
                    <ng-container *ngIf="promocao.tipo === 'cadastro_bonus'">
@@ -33,7 +38,8 @@
                         </li>
                    </ng-container>
                     <li>
-                        O valor total de bônus deve ser apostado {{promocao.multiplicador}} vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}}
+                        O valor total de bônus deve ser apostado {{promocao.multiplicador}}
+                        vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}}
                         em apostas na modalidade {{promocao.bonusModalidade}}.
                     </li>
                     <li>
