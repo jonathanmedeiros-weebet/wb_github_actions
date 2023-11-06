@@ -1,4 +1,4 @@
-<div #listagem class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
+<div #listagem infiniteScroll (scrolled)="exibirMais()" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
     <app-banners pagina="cassino" ></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
@@ -600,13 +600,13 @@
                 {{'geral.nenhumJogoEncontrado' | translate}}!
             </div>
             <div class="game-list">
-                <div class="game-tile" *ngFor="let game of gameList">
+                <div class="game-tile" *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }">
                     <ng-container>
-                        <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+                        <img title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                     </ng-container>
                     <div class="logo-game-background"></div>
                         <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
                         </div>
                         <div class="game-tile-buttons">
                             <ng-container *ngIf="!isDemo">
