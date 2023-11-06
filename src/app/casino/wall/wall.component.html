@@ -127,7 +127,7 @@
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="crash-scroll" (scroll)="onScroll('crash')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesCrash | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesCrash">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -194,7 +194,7 @@
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="live-scroll" (scroll)="onScroll('live')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesLive | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesLive">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -261,7 +261,7 @@
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -328,7 +328,7 @@
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline"  #scrollGames id="roleta-scroll" (scroll)="onScroll('roleta')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -395,7 +395,7 @@
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -463,7 +463,7 @@
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="raspadinha-scroll"
                      (scroll)="onScroll('raspadinha')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
@@ -538,7 +538,7 @@
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo | slice:0:20">
+                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
                         <ng-container>
                             <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                         </ng-container>
