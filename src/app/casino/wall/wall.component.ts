@@ -19,6 +19,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
     @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
+    @ViewChild('listagem') listagemJogos;
     scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
@@ -54,11 +55,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     termFornecedorMobile;
     cassinoFornecedoresTemp = [];
     cassinoFornecedoresFiltrados = [];
-    totalJogos = 0;
     isDemo = false;
     pesquisarTextoAlterado = new Subject<string>();
     textoAlterado;
     limparCampoSearch;
+    qtdItens = 20;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -81,16 +82,16 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = response.gameList.filter(function (game) {
                 return game.dataType !== 'VSB';
             });;
-            this.gamesDestaque = response.destaques;
             this.cassinoFornecedores = response.fornecedores;
-            this.totalJogos = this.gamesCassino.length;
-            this.gamesSlot = this.filterSlot(response.gameList);
-            this.gamesCrash = this.filterCrash(response.gameList);
-            this.gamesRaspadinha = this.filterRaspadinha(response.gameList);
-            this.gamesRoleta = this.filterRoleta(response.gameList);
-            this.gamesMesa = this.filterMesa(response.gameList);
-            this.gamesBingo = this.filterBingo(response.gameList);
-            this.gamesLive = this.filterLive(response.gameList);
+            this.gamesDestaque = this.filterDestaques(response.destaques, 'populares');
+            this.gamesSlot = this.filterDestaques(response.destaques, 'slot');
+            this.gamesCrash = this.filterDestaques(response.destaques, 'crash');
+            this.gamesRaspadinha = this.filterDestaques(response.destaques, 'scratchcard');
+            this.gamesRoleta = this.filterDestaques(response.destaques, 'roulette');
+            this.gamesMesa = this.filterDestaques(response.destaques, 'table');
+            this.gamesBingo = this.filterDestaques(response.destaques, 'bingo');
+            this.gamesLive = this.filterDestaques(response.destaques, 'live');
+
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
 
@@ -112,38 +113,37 @@ export class WallComponent implements OnInit, AfterViewInit {
                     if (this.isHomeCassino) {
                         this.gameList =  this.gamesCassino;
                         this.gameTitle = this.translate.instant('geral.todos');
+                    }else{
+                        this.qtdItens = 20;
                     }
+                    this.listagemJogos.nativeElement.scrollTo( 0, 0 );
                     switch (this.gameType) {
                         case 'slot':
-                            this.gameList = this.gamesSlot;
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
                             this.gameTitle = this.translate.instant('cassino.slot');
                             break;
                         case 'crash':
-                            this.gameList = this.gamesCrash;
+                            this.gameList =this.filterModalidades(this.gamesCassino, 'crash');
                             this.gameTitle = this.translate.instant('cassino.crash');
                             break;
                         case 'roleta':
-                            this.gameList = this.gamesRoleta;
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
                             this.gameTitle = this.translate.instant('cassino.roleta');
                             break;
                         case 'raspadinha':
-                            this.gameList = this.gamesRaspadinha;
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'scratchcard');
                             this.gameTitle = this.translate.instant('cassino.raspadinha');
                             break;
                         case 'mesa':
-                            this.gameList = this.gamesMesa;
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'table');
                             this.gameTitle = this.translate.instant('cassino.mesa');
                             break;
-                        case 'destaques':
-                            this.gameList = this.gamesDestaque;
-                            this.gameTitle = this.translate.instant('cassino.destaques');
-                            break;
                         case 'bingo':
-                            this.gameList = this.gamesBingo;
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
                             this.gameTitle = 'Bingo';
                             break;
                         case 'live':
-                            this.gameList = this.gamesLive;
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'live');
                             this.gameTitle = this.translate.instant('cassino.aoVivo');
                             break;
                     }
@@ -187,49 +187,6 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.pesquisarTextoAlterado.next($event.target.value);
         this.textoAlterado = $event.target.value;
     }
-
-    filterSlot(games) {
-        return games.filter(function (game) {
-            return game.category === 'slot';
-        });
-    }
-
-    filterCrash(games) {
-        return games.filter(function (game) {
-            return game.category === 'crash';
-        });
-    }
-
-    filterRaspadinha(games) {
-        return games.filter(function (game) {
-            return game.category === 'scratchcard';
-        });
-    }
-
-    filterRoleta(games) {
-        return games.filter(function (game) {
-            return game.category === 'roulette';
-        });
-    }
-
-    filterMesa(games) {
-        return games.filter(function (game) {
-            return game.category === 'table';
-        });
-    }
-
-    filterBingo(games) {
-        return games.filter(function (game) {
-            return game.category === 'bingo';
-        });
-    }
-
-    filterLive(games) {
-        return games.filter(function (game) {
-            return game.category === 'live';
-        });
-    }
-
     ngAfterViewInit() {
         this.gamesScrolls.changes.subscribe((scrolls) => {
             this.scrolls = scrolls.toArray();
@@ -400,5 +357,20 @@ export class WallComponent implements OnInit, AfterViewInit {
                 centered: true,
             }
         );
+    }
+
+    filterDestaques(games, modalidade) {
+        return games.filter(function (game) {
+            return game.destaqueModalidade === modalidade;
+        });
+    }
+    filterModalidades(games, modalidade) {
+        return games.filter(function (game) {
+            return game.category === modalidade;
+        });
+    }
+
+    exibirMais() {
+       this.qtdItens += 3;
     }
 }
