@@ -4,7 +4,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {FinanceiroService} from '../../../services/financeiro.service';
 import {MessageService} from '../../../services/utils/message.service';
 import {Promocao} from '../../../../models';
-import {upperCase} from "lodash";
 @Component({
   selector: 'app-regras-bonus-modal',
   templateUrl: './regras-bonus-modal.component.html',
@@ -56,6 +55,4 @@ export class RegrasBonusModalComponent implements OnInit {
     handleError(error: string) {
         this.messageService.error(error);
     }
-
-    protected readonly upperCase = upperCase;
 }
