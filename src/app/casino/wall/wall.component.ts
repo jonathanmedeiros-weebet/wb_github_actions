@@ -19,6 +19,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
     @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
+    @ViewChild('listagem') listagemJogos;
     scrolls: ElementRef[];
     showLoadingIndicator = true;
     isCliente;
@@ -58,6 +59,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     pesquisarTextoAlterado = new Subject<string>();
     textoAlterado;
     limparCampoSearch;
+    qtdItens = 20;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -111,7 +113,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                     if (this.isHomeCassino) {
                         this.gameList =  this.gamesCassino;
                         this.gameTitle = this.translate.instant('geral.todos');
+                    }else{
+                        this.qtdItens = 20;
                     }
+                    this.listagemJogos.nativeElement.scrollTo( 0, 0 );
                     switch (this.gameType) {
                         case 'slot':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
@@ -363,5 +368,9 @@ export class WallComponent implements OnInit, AfterViewInit {
         return games.filter(function (game) {
             return game.category === modalidade;
         });
+    }
+
+    exibirMais() {
+       this.qtdItens += 3;
     }
 }

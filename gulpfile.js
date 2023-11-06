@@ -751,15 +751,6 @@ gulp.task('techbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('reallbet.site', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "reallbet.site",
-        banca: "REALLBET",
-        styles: "",
-    });
-});
-
 gulp.task('maranhaobets.net', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -965,15 +956,6 @@ gulp.task('xbetsports.net', function (done) {
         server: "front1.wee.bet",
         host: "xbetsports.net",
         banca: "XBETSPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('realbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "realbets.wee.bet",
-        banca: "REAL BETS",
         styles: "",
     });
 });
@@ -2135,15 +2117,6 @@ gulp.task('ganhafacil.bet', function (done) {
     });
 });
 
-gulp.task('gollbet.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "gollbet.bet",
-        banca: "GOLL BET",
-        styles: "",
-    });
-});
-
 gulp.task('futvale.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2817,15 +2790,6 @@ gulp.task('suasortebet.com', function (done) {
     });
 });
 
-gulp.task('brabet.app', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "brabet.app",
-        banca: "BRABET",
-        styles: ""
-    });
-});
-
 gulp.task('betsrio.online', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -3063,15 +3027,6 @@ gulp.task('lottomaster.bet', function (done) {
         server: "front5.wee.bet",
         host: "lottomaster.bet",
         banca: "LOTTO MASTER",
-        styles: "",
-    });
-});
-
-gulp.task('gorilabet.io', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "gorilabet.io",
-        banca: "GORILA BET",
         styles: "",
     });
 });
@@ -3638,6 +3593,51 @@ gulp.task('maxbet.wee.bet', function (done) {
         server: "front1.wee.bet",
         host: "maxbet.wee.bet",
         banca: "MAX BET",
+        styles: "",
+    });
+});
+
+gulp.task('greenp1x.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "greenp1x.com",
+        banca: "GREEN P1X",
+        styles: "",
+    });
+});
+
+gulp.task('strikebet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "strikebet.bet",
+        banca: "STRIKE BET",
+        styles: "",
+    });
+});
+
+gulp.task('lidersport.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "lidersport.bet",
+        banca: "LÍDER SPORT",
+        styles: "",
+    });
+});
+
+gulp.task('betrapida.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "betrapida.com",
+        banca: "BET RÁPIDA",
+        styles: "",
+    });
+});
+
+gulp.task('bruxo888.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bruxo888.com",
+        banca: "BRUXO 888T",
         styles: "",
     });
 });
