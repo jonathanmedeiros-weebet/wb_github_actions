@@ -11,10 +11,10 @@
         <ng-container *ngFor="let promocao of promocoes">
            <span>
                <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
-                    <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{upperCase(promocao.bonusModalidade)}}</p>
+                    <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
                </ng-container>
                <ng-container *ngIf="promocao.tipo === 'cadastro_bonus'">
-                    <p>BÔNUS DE CADASTRO - APOSTAS {{upperCase(promocao.bonusModalidade)}}</p>
+                    <p>BÔNUS DE CADASTRO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
                </ng-container>
                <ul>
                    <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
