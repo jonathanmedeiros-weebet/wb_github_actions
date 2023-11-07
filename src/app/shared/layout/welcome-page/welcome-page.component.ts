@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ParametrosLocaisService } from './../../services/parametros-locais.service';
 import { config } from './../../../shared/config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
 
 @Component({
   selector: 'app-welcome-page',
@@ -42,8 +43,13 @@ export class WelcomePageComponent {
     }
 
     depositeAgora() {
-        this.router.navigate(['/clientes/deposito']).then(() => {
-            window.location.reload();
-          });
+        if (window.innerWidth < 1025) {
+            this.modalService.open(DepositoComponent);
+            this.router.navigate(['/']);
+        } else {
+            this.router.navigate(['/clientes/deposito']).then(() => {
+                window.location.reload();
+            });
+        }        
     }
 }
