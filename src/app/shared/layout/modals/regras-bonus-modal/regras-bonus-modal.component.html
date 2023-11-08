@@ -1,4 +1,3 @@
-
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Regras de Bônus</h4>
     <div class="action-buttons">
@@ -10,35 +9,65 @@
 <div class="modal-body cupom-ativo">
     <div class="mt-3">
         <ng-container *ngFor="let promocao of promocoes">
-           <span *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
-               <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS ESPORTIVAS</p>
+           <span *ngIf="promocao.tipo !== 'manual_bonus'">
+               <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
+                    <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
+               </ng-container>
+               <ng-container *ngIf="promocao.tipo === 'cadastro_bonus'">
+                    <p>BÔNUS DE CADASTRO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
+               </ng-container>
                <ul>
+                   <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
+                        <li>
+                        Faça seu primeiro depósito e receba 100% extra até um máximo de R${{promocao.valorBonus}} em bônus (com um depósito de R${{promocao.valorBonus}}
+                            ). Para receber seu Bônus de Primeiro Depósito para apostas na modalidade {{promocao.bonusModalidade}}
+                            , você deve escolher este bônus no momento em que fizer seu Primeiro Depósito.
+                        </li>
+                        <li>
+                        O bônus será ativado diretamente na sua conta de cliente após o primeiro depósito. Para usar seu bônus de primeiro depósito de Apostas na modalidade {{promocao.bonusModalidade}}
+                            , você deve cumprir as condições estabelecidas nos seguintes pontos:
+                        </li>
+                   </ng-container>
+                   <ng-container *ngIf="promocao.tipo === 'cadastro_bonus'">
+                         <li>
+                        Faça seu cadastro e receba R${{promocao.valorBonus}} em bônus.
+                        </li>
+                        <li>
+                        O bônus será ativado diretamente na sua conta de cliente após a ativação do cadastro. Para usar seu bônus de cadastro em Apostas na modalidade {{promocao.bonusModalidade}}
+                            , você deve cumprir as condições estabelecidas nos seguintes pontos:
+                        </li>
+                   </ng-container>
                     <li>
-                        Faça seu primeiro depósito e receba 100% extra até um máximo de R${{promocao.valorBonus}} em bônus (com um depósito de R${{promocao.valorBonus}}). Para receber seu Bônus de Primeiro Depósito para Apostas Esportivas, você deve escolher este bônus no momento em que fizer seu Primeiro Depósito.
-                    </li>
-                    <li>
-                        O bônus será ativado diretamente na sua conta de cliente após o primeiro depósito. Para usar seu bônus de primeiro depósito de Apostas Esportivas, você deve cumprir as condições estabelecidas nos seguintes pontos:
-                    </li>
-                    <li>
-                        O valor total de bônus deve ser apostado {{promocao.multiplicador}} vezes em Esportes. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}} em apostas esportivas.
+                        O valor total de bônus deve ser apostado {{promocao.multiplicador}}
+                        vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}}
+                        em apostas na modalidade {{promocao.bonusModalidade}}.
                     </li>
                     <li>
                         Quaisquer ganhos provenientes de apostas com bônus serão contabilizados em seu saldo de bônus.
                     </li>
                     <li>
-                        O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}}, todo o valor restante será descartado.
+                        O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}}
+                        , todo o valor restante será descartado.
+                    </li>
+                   <ng-container *ngIf="promocao.bonusModalidade === 'esportivo'">
+                    <li>
+                        Para efeitos de cumprimento dos requisitos de liberação, apenas as apostas realizadas com cotações iguais ou superiores a {{promocao.cotacaoMinimaApostaSimples}}
+                        para apostas simples, e {{promocao.cotacaoMinimaApostaMultipla}} para apostas múltiplas, contribuem para o Bônus em Apostas na modalidade esportivo
+                        .
                     </li>
                     <li>
-                        Para efeitos de cumprimento dos requisitos de liberação, apenas as apostas realizadas com cotações iguais ou superiores a {{promocao.cotacaoMinimaApostaSimples}} para apostas simples, e {{promocao.cotacaoMinimaApostaMultipla}} para apostas múltiplas, contribuem para o Bônus de Primeiro Depósito em Apostas Esportivas. Para acompanhar seu valor gasto e meta de gasto, basta clicar na opção "Bônus" em sua conta.
+                        O Bônus para Apostas na modalidade esportivo não está disponível em nenhum tipo de jogo de cassino.
                     </li>
+                   </ng-container>
+                   <li>
+                       Para acompanhar seu valor gasto e meta de gasto, basta clicar na opção "Bônus" em sua conta.
+                   </li>
                     <li>
                         O valor gasto de bônus é calculado no momento em que as apostas são liquidadas, não no momento em que são realizadas.
                     </li>
                     <li>
-                        O Bônus de Primeiro Depósito para Apostas Esportivas não está disponível em nenhum tipo de jogo de Cassino.
-                    </li>
-                    <li>
-                        A partir do momento da ativação do bônus, cada cliente tem um período de {{promocao.diasVencimento}} dias para completar os requisitos de liberação. Caso os {{promocao.diasVencimento}} dias tenham se passado, qualquer valor do bônus será automaticamente perdido.
+                        A partir do momento da ativação do bônus, cada cliente tem um período de {{promocao.diasVencimento}}
+                        dias para completar os requisitos de liberação. Caso os {{promocao.diasVencimento}} dias tenham se passado, qualquer valor do bônus será automaticamente perdido.
                     </li>
                     <li>
                         A empresa se reserva o direito de alterar a promoção sem aviso prévio.
@@ -48,50 +77,6 @@
                     </li>
                     <li>
                         Todo o valor depositado será bloqueado para saques enquanto houver bônus ativo.
-                    </li>
-                    <li>
-                        Os jogadores podem cancelar sua participação nesta promoção e liberar o saque do saldo real. Se isso acontecer, todo o dinheiro do bônus recebido e quaisquer ganhos com dinheiro do bônus serão perdidos. Todo o valor gasto em apostas com bônus será descontado do saldo disponível.
-                    </li>
-                    <li>
-                        Ao cancelar um bônus ativo, todas as apostas pendentes de resultado serão consideradas inválidas.
-                    </li>
-                </ul>
-           </span>
-            <span *ngIf="promocao.tipo === 'cadastro_bonus'">
-               <p>BÔNUS DE CADASTRO - APOSTAS ESPORTIVAS</p>
-               <ul>
-                    <li>
-                        Faça seu cadastro e receba R${{promocao.valorBonus}} em bônus.
-                    </li>
-                    <li>
-                        O bônus será ativado diretamente na sua conta de cliente após a ativação do cadastro. Para usar seu bônus de cadastro em Apostas Esportivas, você deve cumprir as condições estabelecidas nos seguintes pontos:
-                    </li>
-                    <li>
-                        O valor total de bônus deve ser apostado {{promocao.multiplicador}} vezes em Esportes. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus.
-                    </li>
-                    <li>
-                        Quaisquer ganhos provenientes de apostas com bônus serão contabilizados em seu saldo de bônus.
-                    </li>
-                    <li>
-                        O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}}, todo o valor restante será descartado.
-                    </li>
-                    <li>
-                        Para efeitos de cumprimento dos requisitos de liberação, apenas as apostas realizadas com cotações iguais ou superiores a {{promocao.cotacaoMinimaApostaSimples}} para apostas simples, e {{promocao.cotacaoMinimaApostaMultipla}} para apostas múltiplas, contribuem para o Bônus de Cadastro em Apostas Esportivas. Para acompanhar seu valor gasto e meta de gasto, basta clicar na opção "Bônus" em sua conta.
-                    </li>
-                    <li>
-                        O valor gasto de bônus é calculado no momento em que as apostas são liquidadas, não no momento em que são realizadas.
-                    </li>
-                    <li>
-                        O Bônus deCadastro para Apostas Esportivas não está disponível em nenhum tipo de jogo de Cassino.
-                    </li>
-                    <li>
-                        A partir do momento da ativação do bônus, cada cliente tem um período de {{promocao.diasVencimento}} dias para completar os requisitos de liberação. Caso os {{promocao.diasVencimento}} dias tenham se passado, qualquer valor do bônus será automaticamente perdido.
-                    </li>
-                    <li>
-                        A empresa se reserva o direito de alterar a promoção sem aviso prévio.
-                    </li>
-                    <li>
-                        Em caso de atividade fraudulenta suspeita, a empresa se reserva ao direito de suspender sua conta e confiscar os valores. Atividades como abuso de bônus podem ser incluídas, tais como criar múltiplas contas com apostas similares.
                     </li>
                     <li>
                         Os jogadores podem cancelar sua participação nesta promoção e liberar o saque do saldo real. Se isso acontecer, todo o dinheiro do bônus recebido e quaisquer ganhos com dinheiro do bônus serão perdidos. Todo o valor gasto em apostas com bônus será descontado do saldo disponível.
