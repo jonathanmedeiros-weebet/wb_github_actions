@@ -7,7 +7,6 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import { config } from '../../config';
 import { UrlSerializer } from '@angular/router';
-
 @Injectable({
     providedIn: 'root'
 })
@@ -43,9 +42,13 @@ export class CasinoApiService {
             );
     }
 
-    getGamesList() {
-
-        return this.http.post(`${this.central_url}/games/`,{},this.header.getRequestOptions(true))
+    getGamesList(aoVivo: any) {
+        if(aoVivo){
+            var endpoint = this.central_url+"/games/gamesAoVivo";
+        }else{
+            var endpoint = this.central_url+"/games/";
+        }
+        return this.http.post(String(endpoint),{},this.header.getRequestOptions(true))
             .pipe(
                 map(
                     (response: any) => {
@@ -54,7 +57,6 @@ export class CasinoApiService {
                 ),
                 catchError(this.errorService.handleError)
             );
-
     }
 
 

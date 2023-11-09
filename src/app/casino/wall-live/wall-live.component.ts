@@ -11,11 +11,11 @@ import { Subject} from 'rxjs';
 import { debounceTime} from 'rxjs/operators';
 
 @Component({
-    selector: 'app-wall',
-    templateUrl: './wall.component.html',
-    styleUrls: ['./wall.component.css']
+    selector: 'app-wall-live',
+    templateUrl: './wall-live.component.html',
+    styleUrls: ['./wall-live.component.css']
 })
-export class WallComponent implements OnInit, AfterViewInit {
+export class WallLiveComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
     @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
@@ -42,13 +42,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesCassinoFiltrados = [];
     gamesCassino: GameCasino[];
     gamesDestaque: GameCasino[];
-    gamesSlot: GameCasino[];
-    gamesCrash: GameCasino[];
-    gamesRaspadinha: GameCasino[];
+    gamesBlackjack: GameCasino[];
+    gamesBaccarat: GameCasino[];
+    gamesPoker: GameCasino[];
     gamesRoleta: GameCasino[];
-    gamesMesa: GameCasino[];
-    gamesBingo: GameCasino[];
-    gamesLive: GameCasino[];
+    gamesGameshow: GameCasino[];
     LOGO = config.LOGO;
     blink: string;
     modalFiltro;
@@ -78,19 +76,18 @@ export class WallComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
-        this.casinoApi.getGamesList(false).subscribe(response => {
+        this.casinoApi.getGamesList(true).subscribe(response => {
             this.gamesCassino = response.gameList.filter(function (game) {
                 return game.dataType !== 'VSB';
             });;
             this.cassinoFornecedores = response.fornecedores;
             this.gamesDestaque = this.filterDestaques(response.destaques, 'populares');
-            this.gamesSlot = this.filterDestaques(response.destaques, 'slot');
-            this.gamesCrash = this.filterDestaques(response.destaques, 'crash');
-            this.gamesRaspadinha = this.filterDestaques(response.destaques, 'scratchcard');
+            this.gamesBlackjack = this.filterDestaques(response.destaques, 'blackjack');
+            this.gamesBaccarat = this.filterDestaques(response.destaques, 'baccarat');
+            this.gamesPoker = this.filterDestaques(response.destaques, 'poker');
             this.gamesRoleta = this.filterDestaques(response.destaques, 'roulette');
-            this.gamesMesa = this.filterDestaques(response.destaques, 'table');
-            this.gamesBingo = this.filterDestaques(response.destaques, 'bingo');
-            this.gamesLive = this.filterDestaques(response.destaques, 'live');
+            this.gamesGameshow = this.filterDestaques(response.destaques, 'gameshow');
+            console.log(this.gamesBlackjack);
 
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
@@ -118,33 +115,25 @@ export class WallComponent implements OnInit, AfterViewInit {
                     }
                     this.listagemJogos.nativeElement.scrollTo( 0, 0 );
                     switch (this.gameType) {
-                        case 'slot':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
-                            this.gameTitle = this.translate.instant('cassino.slot');
+                        case 'blackjack':
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'blackjack');
+                            this.gameTitle = "Blackjack";
                             break;
-                        case 'crash':
-                            this.gameList =this.filterModalidades(this.gamesCassino, 'crash');
-                            this.gameTitle = this.translate.instant('cassino.crash');
+                        case 'baccarat':
+                            this.gameList =this.filterModalidades(this.gamesCassino, 'baccarat');
+                            this.gameTitle = "Baccarat";
+                            break;
+                        case 'poker':
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'poker');
+                            this.gameTitle = "Poker";
+                            break;
+                        case 'gameshow':
+                            this.gameList = this.filterModalidades(this.gamesCassino, 'gameshow');
+                            this.gameTitle = "Game Show";
                             break;
                         case 'roleta':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
                             this.gameTitle = this.translate.instant('cassino.roleta');
-                            break;
-                        case 'raspadinha':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'scratchcard');
-                            this.gameTitle = this.translate.instant('cassino.raspadinha');
-                            break;
-                        case 'mesa':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'table');
-                            this.gameTitle = this.translate.instant('cassino.mesa');
-                            break;
-                        case 'bingo':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
-                            this.gameTitle = 'Bingo';
-                            break;
-                        case 'live':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'live');
-                            this.gameTitle = this.translate.instant('cassino.aoVivo');
                             break;
                     }
 
@@ -177,7 +166,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             );
 
         if (location.host === 'demo.wee.bet') {
-           this.isDemo = true;
+            this.isDemo = true;
         }
 
         this.isMobile = window.innerWidth < 1025;
@@ -317,7 +306,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
 
             this.cassinoFornecedoresFiltrados =  this.cassinoFornecedores.filter(fornecedor => {
-              if(this.termFornecedorMobile){
+                if(this.termFornecedorMobile){
                     if (fornecedor.gameFornecedor.includes(this.termFornecedorMobile)) {
                         return true;
                     }
@@ -371,6 +360,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     exibirMais() {
-       this.qtdItens += 3;
+        this.qtdItens += 3;
     }
 }

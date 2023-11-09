@@ -344,6 +344,67 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
                 active: this.paramsService.getOpcoes().salsa_cassino
             },
+            {
+                id: 'cassino-live',
+                name: this.translate.instant('submenu.todos'),
+                link: '/casino/cl/wall-live/todos',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgStroke: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/todos.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'blackjack',
+                name: 'Blackjack',
+                link: '/casino/cl/wall-live/blackjack',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'baccarat',
+                name: 'Baccarat',
+                link: '/casino/cl/wall-live/baccarat',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'poker',
+                name: 'Poker',
+                link: '/casino/cl/wall-live/poker',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'gameshow',
+                name: 'Game Show',
+                link: '/casino/cl/wall-live/gameshow',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'roleta',
+                name: 'Roleta',
+                link: '/casino/cl/wall-live/roleta',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
         ];
 
         this.submenuItems = this.submenu.filter((item) => {
