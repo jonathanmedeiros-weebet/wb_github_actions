@@ -221,4 +221,7 @@ export class ClienteService {
         return !!localStorage.getItem('token');
     }
 
+    getUser() {
+        return JSON.parse(localStorage.getItem('user'));
+    }
 }
