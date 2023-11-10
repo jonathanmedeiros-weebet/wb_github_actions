@@ -242,7 +242,7 @@ export class AppComponent implements OnInit {
         body.appendChild(cambistaAnalyticsBodyScript);
     }
 
-    showSubmenu() {
+    showBotaoWhatspp() {
         
         if (this.mobileScreen && (this.router.url.includes('/casino/c/wall/') || this.router.url.includes('/casino/v/wall/virtuais')) ) {
           return true;
