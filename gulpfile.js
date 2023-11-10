@@ -3639,3 +3639,12 @@ gulp.task('bruxo888.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bosscassino.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bosscassino.bet",
+        banca: "BOSS CASSINO",
+        styles: "",
+    });
+});
