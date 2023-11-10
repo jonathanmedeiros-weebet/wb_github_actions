@@ -386,18 +386,6 @@ gulp.task('sportingnet.bet', function (done) {
     });
 });
 
-gulp.task('betsplacar.club', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betsplacar.club",
-        banca: "Bets Placar - Ganhou, Sacou!",
-        styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--league: #fc6402;--foreground-league: #fff;",
-        pixel: "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '742608140916654'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=742608140916654&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->"+
-        "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '742608140916654');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=742608140916654&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
-        "<meta name='keywords' content='cassino online, apostas esportivas, poker, roleta, blackjack, caça-níqueis, bingo apostas esportivas ao vivo, jogos de mesa, jogos de cartas, jogos de cassino ao vivo, bônus de boas-vindas, rodadas grátis, cashback, promoções de recarga,programa de fidelidade, plataforma de apostas online, apostas móveis, apostas ao vivo, transmissão ao vivo de jogos,suporte ao cliente, métodos de pagamento, termos relacionados a esportes específicos, jogos de cassino populares, estratégias de apostas, dicas para jogadores' />"
-    });
-});
-
 gulp.task('bet358.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1522,15 +1510,6 @@ gulp.task('akisports.wee.bet', function (done) {
     });
 });
 
-gulp.task('gatobet.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "gatobet.net",
-        banca: "GATO BET",
-        styles: "",
-    });
-});
-
 gulp.task('betnews.one', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1780,16 +1759,6 @@ gulp.task('megasports.bet', function (done) {
     });
 });
 
-gulp.task('teambets.net.br', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "teambets.net.br",
-        banca: "TEAM BETS",
-        styles: "",
-        scripts: "<!-- Google tag (gtag.js) --> <script async src='https://www.googletagmanager.com/gtag/js?id=G-NCBRN97KTE'></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-NCBRN97KTE'); </script>"
-    });
-});
-
 gulp.task('bet101.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1813,15 +1782,6 @@ gulp.task('a2bet.top', function (done) {
         server: "front1.wee.bet",
         host: "a2bet.top",
         banca: "A2 BET",
-        styles: "",
-    });
-});
-
-gulp.task('p1x.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "p1x.bet",
-        banca: "P1X.BET",
         styles: "",
     });
 });
