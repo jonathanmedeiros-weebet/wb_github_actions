@@ -68,6 +68,12 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         campeonato.jogos.forEach(jogo => {
                             let valido = true;
 
+                            console.log(jogo.sport_id);
+
+                            if (jogo.sport_id !== 1) {
+                                valido = false;
+                            }
+
                             if (this.minutoEncerramentoAoVivo > 0) {
                                 if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
