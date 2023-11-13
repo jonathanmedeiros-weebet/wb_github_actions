@@ -32,6 +32,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     modoClienteHabilitado;
     LOGO = config.LOGO;
     loginGoogle = false;
+    googleUser;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -76,13 +77,20 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
         if(this.paramsLocais.getOpcoes().habilitar_login_google) {
             this.loginGoogle = true;
-            this.socialAuth.authState.subscribe((user) => {
-                this.form.patchValue({
-                    googleId: user.id,
-                    googleIdToken: user.idToken
-                });
-                this.submit();
-            });
+            this.socialAuth.authState
+                .pipe(takeUntil(this.unsub$))
+                .subscribe((user) => {
+                        if (user) {
+                            this.form.patchValue({
+                                googleId: user.id,
+                                googleIdToken: user.idToken
+                            });
+                            this.submit();
+                        }
+
+                        this.googleUser = user;
+                    }
+                );
         }
 
     }
@@ -97,6 +105,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnDestroy() {
+        if (this.googleUser) {
+            this.socialAuth.signOut();
+        }
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -105,13 +116,16 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.auth.verificaDadosLogin(this.form.value)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                () => {
+                (res) => {
                     this.getUsuario();
-                    if (this.usuario.tipo_usuario === 'cliente' &&
+                    if (this.usuario && this.usuario.tipo_usuario === 'cliente' &&
                         this.authDoisFatoresHabilitado &&
                         this.auth.getCookie(this.usuario.cookie) === '' &&
                         this.usuario.login !== 'weebet') {
                         this.abrirModalAuthDoisFatores();
+                    } else if (res && res.migracao) {
+                        this.router.navigate([`/auth/resetar-senha/${res.migracao.token}/${res.migracao.codigo}`]);
+                        this.activeModal.dismiss();
                     } else {
                         this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
                         this.auth.login(this.form.value)
@@ -159,8 +173,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             CadastroModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
     }

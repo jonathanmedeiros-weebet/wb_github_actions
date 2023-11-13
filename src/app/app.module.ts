@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import ptBr from '@angular/common/locales/pt';
 
@@ -93,6 +94,7 @@ export function googleFactory(service: ParametrosLocaisService) {
         ToastrModule.forRoot({
             timeOut: 7000
         }),
+        NgxPaginationModule,
     ],
     providers: [
         APP_TOKENS,

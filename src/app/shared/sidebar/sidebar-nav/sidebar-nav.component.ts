@@ -41,9 +41,11 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     cartaoApostaHabilitado;
     pixCambista = false;
     modoCambista = true;
+    indiqueGanheHabilitado = false;
 
     subCartao = false;
     subPerfil = false;
+    subPromocoes = false;
 
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
@@ -77,6 +79,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
         this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
+        this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
 
         if (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
@@ -84,6 +87,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
         if (this.router.url === '/clientes/perfil' || this.router.url === '/clientes/perfil-pix' || this.router.url === '/alterar-senha') {
             this.subPerfil = true;
+        }
+
+        if (this.router.url === '/clientes/rollover' || this.router.url === '/clientes/indique-ganhe') {
+            this.subPromocoes = true;
         }
 
         this.auth.logado
@@ -162,9 +169,14 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 aposta => {
                     this.form.reset();
 
+                    let size = aposta.tipo == 'esportes' ? 'lg' : '';
+                    let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
+                    
                     const modalRef = this.modalService.open(ApostaModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
-                        centered: true
+                        centered: true,
+                        size: size,
+                        windowClass: typeWindow
                     });
 
                     modalRef.componentInstance.aposta = aposta;
@@ -257,6 +269,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     toogleSubPerfil() {
         this.subPerfil = !this.subPerfil;
+    }
+
+    toogleSubPromocoes() {
+        this.subPromocoes = !this.subPromocoes;
     }
 
     logout() {

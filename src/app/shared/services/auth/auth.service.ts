@@ -38,7 +38,11 @@ export class AuthService {
         return this.http.post<any>(`${this.AuthUrl}/verificarDadosLogin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    localStorage.setItem('user', JSON.stringify(res.user));
+                    if (res.migracao) {
+                        return res;
+                    } else {
+                        localStorage.setItem('user', JSON.stringify(res.user));
+                    }
                 }),
                 catchError(this.errorService.handleErrorLogin),
             );
@@ -200,6 +204,10 @@ export class AuthService {
 
     setAppMobile() {
         localStorage.setItem('app-mobile', 'true');
+    }
+
+    unsetAppMobile() {
+        localStorage.removeItem('app-mobile');
     }
 
     isExpired() {

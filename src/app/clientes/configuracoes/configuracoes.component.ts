@@ -56,6 +56,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     sectionPeriodoPausa = false;
     sectionExclusaoConta = false;
 
+    showConfirmarExclusao = false;
     showMotivoExclusaoConta = false;
     showDataFinalPausa = false;
 
@@ -137,6 +138,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         this.formExclusaoConta = this.fb.group({
             motivoExclusao: [''],
             opcao: [''],
+            confirmarExclusao: [''],
         });
 
     }
@@ -175,17 +177,21 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     onSubmitExclusaoConta() {
-        const { motivoExclusao } = this.formExclusaoConta.value;
+        const { motivoExclusao, confirmarExclusao, opcao} = this.formExclusaoConta.value;
 
-        this.clienteService.excluirConta(motivoExclusao).subscribe(
-            result => {
-                this.messageService.success(result.message);
-                this.authService.logout();
-            },
-            error => {
-                this.handleError(error);
-            }
-        )
+        if (this.validarExclusao(confirmarExclusao) || opcao == '') {
+            this.clienteService.excluirConta(motivoExclusao, confirmarExclusao).subscribe(
+                result => {
+                    this.messageService.success(result.message);
+                    this.authService.logout();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            )
+        } else {
+            this.handleError('Digite exatamente a frase "EXCLUIR PERMANENTEMENTE" para confirmar a exclusão da conta.');
+        }
     }
 
     toggleSections(section: string) {
@@ -238,32 +244,39 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     changeOpcaoExclusao() {
         const { opcao } = this.formExclusaoConta.value;
+        this.showConfirmarExclusao = true;
 
         if(opcao == '6') {
-            this.formExclusaoConta.setValue({ motivoExclusao: "", opcao: opcao});
+            this.formExclusaoConta.setValue({ motivoExclusao: "", opcao: opcao, confirmarExclusao: ""});
             this.showMotivoExclusaoConta = true;
         } else {
             this.showMotivoExclusaoConta = false;
             switch (opcao) {
                 case '1':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Uma segunda conta foi criada", opcao: opcao});
+                    this.formExclusaoConta.setValue({ motivoExclusao: "Uma segunda conta foi criada", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '2':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao});
+                    this.formExclusaoConta.setValue({ motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '3':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não tenho mais interesse em realizar apostas nesta banca", opcao: opcao});
+                    this.formExclusaoConta.setValue({ motivoExclusao: "Não tenho mais interesse em realizar apostas neste site", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '4':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não estou mais usando está conta", opcao: opcao});
+                    this.formExclusaoConta.setValue({ motivoExclusao: "Não estou mais usando está conta", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '5':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Problemas ao utilizar o sistema", opcao: opcao});
+                    this.formExclusaoConta.setValue({ motivoExclusao: "Problemas ao utilizar o sistema", opcao: opcao, confirmarExclusao: ""});
                     break;
                 default:
+                    this.showConfirmarExclusao = false;
                     break;
             }
         }
+    }
+
+    validarExclusao(input: string): boolean {
+        const textoEsperado = "EXCLUIR PERMANENTEMENTE";
+        return input === textoEsperado;
     }
 
     handleError(error: string) {

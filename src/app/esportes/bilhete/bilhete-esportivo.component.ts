@@ -54,7 +54,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
-        bonus: 0
+        bonus: 0,
+        bonusModalidade: 'nenhum'
     };
     mobileScreen = false;
     utilizarBonus = false;
@@ -91,8 +92,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
-
-        this.btnText = this.translate.instant('bilhete.preAposta');
 
         this.createForm();
         this.definirAltura();
@@ -325,7 +324,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350',
+            windowClass: 'modal-550 modal-h-350 modal-login',
             centered: true,
         };
 
@@ -415,10 +414,15 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             this.getPosicaoFinanceira();
         }
 
+        let size = aposta.tipo == 'esportes' ? 'lg' : '';
+        let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
+        
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true,
-            scrollable: true
+            scrollable: true,
+            size: size,
+            windowClass: typeWindow
         });
 
         this.modalRef.componentInstance.aposta = aposta;

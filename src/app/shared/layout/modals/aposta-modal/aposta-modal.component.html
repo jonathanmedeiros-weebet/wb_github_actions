@@ -1,16 +1,21 @@
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
+<div class="modal-header" [ngClass]="{'classe-esportes': aposta.tipo === 'esportes'}">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="aposta.tipo != 'esportes'">Aposta</h4>
+    <div>
+        <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
+        <h5 class="modal-esportes-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
+        <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
+    </div>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
             <i class="fa fa-external-link"></i>
         </a>
-        <button type="button" *ngIf="!isMobile && impressaoPermitida()" (click)="printTicket()" title="IMPRIMIR">
+        <button type="button" *ngIf="impressaoPermitida()" (click)="printTicket()" title="IMPRIMIR">
             <i class="fa fa-print"></i>
         </button>
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="!isMobile && compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
+        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -18,7 +23,8 @@
         </button>
     </div>
 </div>
-<div class="modal-body cupom-ativo">
+
+<div class="modal-body cupom-ativo" *ngIf="aposta.tipo != 'esportes'; else bilheteEsporte">
     <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="aposta.tipo == 'esportes'">
     </app-exibir-bilhete-esportivo>
     <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="aposta.tipo == 'loteria'">
@@ -28,7 +34,10 @@
     <app-exibir-bilhete-desafio [aposta]="aposta" *ngIf="aposta.tipo == 'desafio'">
     </app-exibir-bilhete-desafio>
 </div>
-<div class="p-3" *ngIf="isMobile && (impressaoPermitida() || compartilhamentoPermitido())">
+<ng-template #bilheteEsporte>
+    <app-exibir-bilhete-esportivo [aposta]="aposta"></app-exibir-bilhete-esportivo>
+</ng-template>
+<div class="p-3" *ngIf="aposta.tipo != 'esportes' && isMobile && (impressaoPermitida() || compartilhamentoPermitido())">
     <a class="btn btn-custom btn-block" *ngIf="impressaoPermitida()" (click)="printTicket()">
         {{'geral.imprimir' | translate}}
     </a>
@@ -36,3 +45,4 @@
         {{'geral.compartilhar' | translate}}
     </a>
 </div>
+

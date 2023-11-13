@@ -126,6 +126,24 @@ export class FinanceiroService {
         );
     }
 
+    getPromocoes(queryParams?: any): Observable<any> {
+        let requestOptions;
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+        return this.http.get(`${this.financeiroUrl}/regras-promocoes`, requestOptions)
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     converterBonus(rolloverId): Observable<any> {
         return this.http.post(`${this.financeiroUrl}/converter-bonus`,
             {id: rolloverId}, this.header.getRequestOptions(true))

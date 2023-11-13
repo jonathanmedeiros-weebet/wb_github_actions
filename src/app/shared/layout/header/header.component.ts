@@ -1,12 +1,12 @@
 import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
-import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -36,6 +36,7 @@ import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.compo
 import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configuracoes.component';
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
+import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 
 @Component({
     selector: 'app-header',
@@ -45,13 +46,16 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewChecked {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
+    @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    indiqueGanheHabilitado = false;
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
-        bonus: 0
+        bonus: 0,
+        bonusModalidade: 'nenhum'
     };
     usuario = new Usuario();
     isLoggedIn;
@@ -60,6 +64,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isOpen = false;
     seninhaAtiva;
     quininhaAtiva;
+    loteriaPopularAtiva;
     esporteAtivo;
     aoVivoAtivo;
     cassinoAtivo;
@@ -87,6 +92,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     };
     mostrarSaldo;
     firstLoggedIn;
+    valorGanhoPorIndicacao;
+    removendoIndiqueGanheCard = false;
+    messageConnection;
+    isConnected = true;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -113,6 +122,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private connectionCheck: ConnectionCheckService,
+        private renderer: Renderer2,
+        private host: ElementRef
     ) {
         super();
     }
@@ -161,9 +173,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
         this.quininhaAtiva = this.paramsService.quininhaAtiva();
+        this.loteriaPopularAtiva = this.paramsService.loteriaPopularAtiva();
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
+
+        this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
@@ -187,8 +203,36 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
-
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+
+        this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
+            let element = this.host.nativeElement.querySelector('.info-connection-card');
+            let icon = this.host.nativeElement.querySelector('.fa-exclamation-triangle');
+
+            if (!isOnline) {
+                this.isConnected = false;
+                this.messageConnection = 'Sem conexão com a internet';
+                this.renderer.removeClass(element, 'online');
+                this.renderer.addClass(element, 'offline');
+                this.renderer.removeClass(element, 'hide');
+                this.renderer.removeClass(icon, 'icon-hidden');
+                setTimeout(() => {
+                    this.renderer.addClass(element, 'show');
+                }, 100);
+            } else if (isOnline && this.messageConnection === 'Sem conexão com a internet') {
+                this.isConnected = true
+                this.messageConnection = 'Conexão restabelecida';
+                this.renderer.removeClass(element, 'offline');
+                this.renderer.addClass(element, 'online');
+                this.renderer.addClass(icon, 'icon-hidden');
+                setTimeout(() => {
+                    this.renderer.removeClass(element, 'show');
+                    setTimeout(() => {
+                        this.renderer.addClass(element, 'hide');
+                    }, 1000);
+                }, 1000);
+            }
+        });
     }
 
     ngOnDestroy() {
@@ -261,30 +305,21 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             CadastroModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
-                windowClass: 'modal-700'
+                windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
     }
 
     abrirLogin() {
-        let options = {};
-
-        if (this.isMobile) {
-            options = {
-                windowClass: 'modal-fullscreen',
-            };
-        } else {
-            options = {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-            };
-        }
-
         this.modalRef = this.modalService.open(
-            LoginModalComponent, options
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
         );
     }
 
@@ -348,6 +383,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(RolloverComponent);
     }
 
+    abrirIndiqueGanhe() {
+        this.modalService.open(IndiqueGanheComponent);
+    }
+
     abrirCambistaDashboard() {
         this.modalService.open(DashboardComponent);
     }
@@ -405,5 +444,34 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
 
         return '';
+    }
+
+    redirectIndiqueGanhe() {
+        if (!this.isLoggedIn) {
+            this.abrirLogin();
+        } else {
+            if (this.isMobile) {
+                this.abrirIndiqueGanhe();
+            } else {
+                this.router.navigate(['clientes/indique-ganhe']);
+            }
+            this.removerIndiqueGanheCard();
+        }
+    }
+
+    removerIndiqueGanheCard() {
+        this.removendoIndiqueGanheCard = true;
+        let card = this.indiqueGanheCard.nativeElement;
+        this.renderer.setStyle(card, 'height', '0');
+        this.renderer.setStyle(card, 'padding', '0 20px');
+        setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
+    }
+
+    btnCardOnMouseOver() {
+        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
+    }
+
+    btnCardOnMouseOut() {
+        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
     }
 }

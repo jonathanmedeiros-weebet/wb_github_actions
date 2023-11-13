@@ -393,7 +393,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
     abrirLogin() {
         const options = {
-            windowClass: 'modal-fullscreen',
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
         };
 
         this.modalRef = this.modalService.open(

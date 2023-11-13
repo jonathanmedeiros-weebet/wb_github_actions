@@ -1,0 +1,18 @@
+.loteria-popular-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.loteria-frame {
+    width: 100%;
+    margin: 0 auto;
+    height: calc(100vh - 140px);
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

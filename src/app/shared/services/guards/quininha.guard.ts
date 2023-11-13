@@ -19,6 +19,10 @@ export class QuininhaGuard implements CanActivate {
                 this.router.navigate(['/loterias/seninha']);
                 return true;
             }
+            if (this.paramsService.loteriaPopularAtiva()) {
+                this.router.navigate(['/loterias/loteria-popular']);
+                return true;
+            }
             this.router.navigate(['/']);
             return false;
         }

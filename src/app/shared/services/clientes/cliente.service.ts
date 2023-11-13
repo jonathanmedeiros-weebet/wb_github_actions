@@ -125,8 +125,8 @@ export class ClienteService {
         return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
     }
 
-    excluirConta(motivo: string) {
-        return this.http.post(`${this.clienteUrl}/excluir-conta`, { motivo }, this.headers.getRequestOptions(true))
+    excluirConta(motivo: string, confirmarExclusao: string) {
+        return this.http.post(`${this.clienteUrl}/excluir-conta`, { motivo, confirmarExclusao }, this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
                     return response.results;
@@ -163,5 +163,17 @@ export class ClienteService {
                 }),
                 catchError(this.errorService.handleError)
             )
+    }
+
+    getCodigoIndicacao() {
+        return this.http.get(`${this.clienteUrl}/getCodigoIndicacao`, this.headers.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
     }
 }

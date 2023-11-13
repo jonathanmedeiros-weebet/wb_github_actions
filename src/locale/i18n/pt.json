@@ -3,6 +3,7 @@
         "processando": "Processando",
         "entrar": "Entrar",
         "registreSe": "Registre-se",
+        "entrarNaConta": "Entre na sua conta",
         "jogar": "Jogar",
         "demo": "Demo",
         "verTodos": "Ver todos",
@@ -139,12 +140,15 @@
         "proximaData": "Próxima Data",
         "esqueceuASenha": "Esqueceu a senha?",
         "naoPossuiUmaConta": "Não possui uma conta?",
+        "jaPossuiUmaConta": "Já possui uma conta?",
         "usuario": "Usuário",
         "senha": "Senha",
         "masculino": "Masculino",
         "feminino": "Feminino",
         "codigoDeAfiliacao": "Código de afiliação(Opcional)",
         "certificoQueTenhoMais": "Certifico que tenho mais de 18 anos de idade e declaro que li e concordo com os",
+        "deAcordoComOsTermos1": "Ao cadastra-se você estará de acordo com os nossos",
+        "deAcordoComOsTermos2": "e nossa",
         "termosDeUso": "termos de uso",
         "cadastrar": "Cadastrar",
         "cadastroSucedido": "Cadastro realizado com sucesso! Verifique seu email para ativá-lo.",
@@ -179,7 +183,7 @@
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
         "contato": "Contato",
-        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres com pelo menos uma letra (maiúscula e minúscula) e um número.",
+        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres.",
         "nomeJogoCassino": "Jogo",
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
@@ -188,7 +192,20 @@
         "movimentacao":"Movimentações",
         "rollover": "Bônus",
         "suporte": "Suporte",
-        "EmailOuUsuario": "E-mail ou usuário"
+        "EmailOuUsuario": "E-mail ou usuário",
+        "promocoes": "Promoções",
+        "indiqueGanhe": "Indique e ganhe",
+        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}} de saldo na sua conta",
+        "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
+        "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
+        "regrasCondicoes": "Regras e condições",
+        "copiarLink": "Copiar link",
+        "seuLinkIndicacao": "Seu link de indicação:",
+        "compartilheSeuLink": "Compartilhe seu link nas redes sociais:",
+        "linkCopiado": "Link copiado!",
+        "indicar": "Indicar",
+        "semPermissaoAcesso": "Sem permissão de acesso",
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
     },
     "dias": {
         "ontem": "Ontem",
@@ -229,10 +246,12 @@
         "seninha": "Seninha",
         "todos": "Todos",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
-        "cassinoAoVivo": "Cassino Ao Vivo"
+        "cassinoAoVivo": "Cassino Ao Vivo",
+        "loteriaPopular": "Loteria Popular"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -264,6 +283,7 @@
     "cassino": {
         "maisPopulares": "Mais Populares",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Raspadinha",
         "roleta": "Roleta",
         "mesa": "Mesa",
@@ -328,7 +348,7 @@
         "informeOValor": "Informe o valor",
         "seuPixFoiCreditado": "Seu pix foi creditado com sucesso, seu novo saldo é: R$ {{novoSaldo}}",
         "valorMinimo": "Valor mínimo para depósito",
-        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com a banca.",
+        "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com suporte.",
         "depositoRegistrado": "Depósito - Registrado",
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recentes"
@@ -406,7 +426,8 @@
         "naoQueroBonus": "Não quero Bônus",
         "valorMinimoSaque": "Valor mínimo de saque",
         "valorMaximoSaqueDiario": "Valor máximo de saque diário",
-        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal"
+        "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
+        "receberBonusCassino": "Receber Bônus - Cassino"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",

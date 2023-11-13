@@ -17,9 +17,9 @@
             <div class="content">
                 <div class="alert alert-secondary" role="alert">
                     <strong>{{'geral.atencao' | translate}}!</strong> <br>
-                    {{'financeiro.valorMinimoSaque' | translate}}: <strong>R$ {{valorMinSaque | currency}}</strong><br>
-                    {{'financeiro.valorMaximoSaqueDiario' | translate}}: <strong>R$ {{valorMaxSaqueDiario | currency}}</strong><br>
-                    {{'financeiro.valorMaximoSaqueMensal' | translate}}: <strong> R$ {{valorMaxSaqueMensal | currency}}</strong>
+                    {{'financeiro.valorMinimoSaque' | translate}}: <strong>{{valorMinSaque | currency}}</strong><br>
+                    {{'financeiro.valorMaximoSaqueDiario' | translate}}: <strong>{{valorMaxSaqueDiario | currency}}</strong><br>
+                    {{'financeiro.valorMaximoSaqueMensal' | translate}}: <strong> {{valorMaxSaqueMensal | currency}}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <div *ngIf="cadastroCompleto && !respostaSolicitacao">
@@ -44,7 +44,7 @@
                                         class="hide-mobile mt-3 d-block">
                                         {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
                                 </div>
-                                <div *ngIf="apiPagamentos == 'sauto_pay'"
+                                <div *ngIf="apiPagamentos == 'sauto_pay' && !metodoPagamentoDesabilitado"
                                      class="alert alert-info alert-dismissible fade show">
                                     <b>{{'geral.atencao' | translate}}! </b>{{'saques.infoSautoPay' | translate}}. <br>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -52,17 +52,6 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        <div *ngIf="apiPagamentos == 'pagfast'">
-                            <b>{{'geral.atencao' | translate}}! </b>{{'saques.pagamentoExclusivoChaveCPF' | translate}}<br>
-                            <div class="form-group form-check-custom form-check-style-1 wb-checkbox">
-                                <input type="checkbox" id="accept"
-                                    formControlName="accept">
-                                <label for="accept">
-                                    {{'geral.estouCiente' | translate}}
-                                </label>
-                            </div>
-                            <app-error-msg [control]="form.get('accept')"></app-error-msg>
                         </div>
                         <div class="row">
                             <div class="col col-sm-3 saque-pix">

@@ -19,6 +19,7 @@
 
 .bloco .bloco-header {
     display: flex;
+    font-size: 16px;
 }
 
 .bloco .titulo {
@@ -73,6 +74,7 @@
     cursor: pointer;
     margin: 0;
     padding: 0;
+    z-index: 2;
 }
 
 .scroll-left {
@@ -104,6 +106,31 @@
     transition: 500ms;
 }
 
+.more-games-fade {
+    position: absolute;
+    width: 50px;
+    height: calc(100% + 20px);
+    top: -10px;
+    z-index: 1;
+    transition: opacity 0.5s;
+}
+
+.more-games-fade-right {
+    background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
+    right: 0;
+    opacity: 1;
+}
+
+#destaques-fade-right {
+    display: none;
+}
+
+.more-games-fade-left {
+    background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
+    left: 0;
+    opacity: 0;
+}
+
 .game-tile {
     background-color: var(--header);
     position: relative;
@@ -115,6 +142,7 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .game-tile .game-tile-buttons {
@@ -129,19 +157,25 @@
 }
 
 .game-tile .game-button-play {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
     color: var(--header);
     background-color: var(--highlight);
-    width: 60%;
-    height: 35px;
+    width: 70%;
+    height: 42px;
 }
 
 .game-tile .game-button-demo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
     background-color: var(--header);
     border-color: var(--foreground-header);
     color: var(--foreground-header);
-    width: 60%;
-    height: 35px;
-    margin-bottom: 20px;
+    width: 70%;
+    height: 42px;
+    margin-bottom: 18px;
 }
 
 .game-tile .game-button-lock {
@@ -168,11 +202,11 @@
 }
 
 .game-tile:hover .game-button-play {
-    display: block;
+    display: flex;
 }
 
 .game-tile:hover .game-button-demo {
-    display: block;
+    display: flex;
 }
 
 .hide {
@@ -340,6 +374,10 @@
         pointer-events: none;
     }
 
+    .game-tile .game-button-demo {
+        margin-bottom: 10px;
+    }
+
     .game-tile-buttons:hover a {
         pointer-events: unset;
     }
@@ -389,6 +427,17 @@
         height: 40px;
         margin-right: 1%;
     }
+    .scroll-button {
+        display: none !important;
+    }
+
+    .more-games-fade-right {
+        background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+    }
+
+    .more-games-fade-left {
+        background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+    }
 
     .filter{
         margin-top: 10px;
@@ -403,9 +452,9 @@
         width: auto;
         justify-content: center;
         align-items: center;
-        font-size: 23px;
+        font-size: 21px;
         display: flex;
-        margin-left:  10px;
+        margin-left:  18px;
     }
 
     .search-box{
@@ -476,14 +525,17 @@
         width: auto !important;
     }
 
+    .more-games-fade {
+        height: calc(100% + 10px);
+        top: 0;
+    }
 
+    #destaques-fade-right {
+        display: block;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
-    app-banners {
-        margin: 0 auto;
-    }
-
     .game-tile {
         --gameTileWidth: calc((100% / 5) - 16px);
         width: var(--gameTileWidth);
@@ -533,4 +585,19 @@
     }
 }
 
+@media only screen and (max-width: 450px) {
+    .game-tile-inline, .game-tile-inline-destaque {
+        min-width: 170px;
+        min-height: 120px;
+    }
 
+    .game-tile .game-button-play, .game-tile .game-button-demo {
+        height: 35px !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .game-tile-inline, .game-tile-inline-destaque {
+        min-width: 162px;
+    }
+}

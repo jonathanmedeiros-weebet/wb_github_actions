@@ -30,6 +30,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
     apiPagamentos;
+    metodoPagamentoDesabilitado;
     isMobile = false;
     modalRef;
     pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST'];
@@ -68,6 +69,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;
         this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
         this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.metodoPagamentoDesabilitado = this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado;
         this.createForm();
         const user = JSON.parse(localStorage.getItem('user'));
 
@@ -89,7 +91,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
-                    if (this.apiPagamentos != 'pagfast') {
+                    if (this.apiPagamentos != 'pagfast' || this.metodoPagamentoDesabilitado) {
                         if (!this.cliente.endereco) {
                             this.cadastroCompleto = false;
                             this.rotaCompletarCadastro = '/clientes/perfil';
@@ -116,8 +118,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
-                accept: [false, this.apiPagamentos === 'pagfast' ? Validators.requiredTrue : null]
+                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
             }
         );
     }

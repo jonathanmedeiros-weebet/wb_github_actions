@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
     ativacaoCadastro;
     modoClienteHabilitado;
     whatsapp;
+    isDemo = location.host === 'demo.wee.bet';
 
     constructor(
         private auth: AuthService,
@@ -67,9 +68,9 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.modalService.open(CadastroModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
+                size: 'md',
                 centered: true,
-                windowClass: 'modal-700'
+                windowClass: 'modal-500 modal-cadastro-cliente'
             });
             this.router.navigate(['esportes/futebol']);
         }
@@ -101,9 +102,10 @@ export class AppComponent implements OnInit {
                 }
             });
 
-        if (location.search.indexOf('app') >= 0) {
+        const params = new URLSearchParams(location.search);
+
+        if (params.get('app')) {
             this.auth.setAppMobile();
-            const params = new URLSearchParams(location.search);
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
             if (appVersion < 2) {
@@ -131,7 +133,7 @@ export class AppComponent implements OnInit {
 
                 this.cd.markForCheck();
 
-                if (location.host === 'demo.wee.bet') {
+                if (this.isDemo) {
                     this.modalService.open(
                         this.demoModal,
                         {

@@ -3,6 +3,7 @@
         "processando": "Processing",
         "entrar": "Log in",
         "registreSe": "Register",
+        "entrarNaConta": "Log in to your account",
         "jogar": "Play",
         "demo": "Demo",
         "verTodos": "See all",
@@ -139,12 +140,15 @@
         "proximaData": "Next Date",
         "esqueceuASenha": "Forgot password?",
         "naoPossuiUmaConta": "Don't have an account?",
+        "jaPossuiUmaConta": "Already have an account?",
         "usuario": "User",
         "senha": "Password",
         "masculino": "Male",
         "feminino": "Female",
         "codigoDeAfiliacao": "Affiliate code(Optional)",
         "certificoQueTenhoMais": "I certify that I am over 18 years of age and declare that I have read and agree to the",
+        "deAcordoComOsTermos1": "By registering, you agree to our",
+        "deAcordoComOsTermos2": "and our",
         "termosDeUso": "terms of use",
         "cadastrar": "Register",
         "cadastroSucedido": "Registration completed successfully! Check your email to activate it.",
@@ -179,7 +183,7 @@
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
         "contato": "Contact",
-        "requisitosSenha": "Password must have at least 6 characters with at least one letter (uppercase and lowercase) and one number.",
+        "requisitosSenha": "Password must have at least 6 characters.",
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
@@ -188,7 +192,20 @@
         "movimentacao":"Transactions",
         "rollover": "Rollover",
         "suporte": "Support",
-        "EmailOuUsuario": "E-mail or username"
+        "EmailOuUsuario": "E-mail or username",
+        "promocoes": "Promotions",
+        "indiqueGanhe": "Refer and earn",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} balance in your account",
+        "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
+        "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
+        "regrasCondicoes": "Rules and conditions",
+        "copiarLink": "Copy link",
+        "seuLinkIndicacao": "Your referral link:",
+        "compartilheSeuLink": "Share your link on social media:",
+        "linkCopiado": "Link copied!",
+        "indicar": "Indicate",
+        "semPermissaoAcesso": "No access permission",
+        "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age."
     },
     "dias": {
         "ontem": "Yesterday",
@@ -229,10 +246,12 @@
         "seninha": "Seninha",
         "todos": "All",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Scratchcard",
         "roleta": "Roulette",
         "mesa": "Table",
-        "cassinoAoVivo": "Live Casino"
+        "cassinoAoVivo": "Live Casino",
+        "loteriaPopular": "Popular Lottery"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -264,6 +283,7 @@
     "cassino": {
         "maisPopulares": "More Popular",
         "slot": "Slot",
+        "crash": "Crash",
         "raspadinha": "Scratchcard",
         "roleta": "Roulette",
         "mesa": "Table",
@@ -328,7 +348,7 @@
         "informeOValor": "Enter value",
         "seuPixFoiCreditado": "Your pix was successfully credited, your new balance is: R$ {{novoSaldo}}",
         "valorMinimo": "Minimum deposit amount",
-        "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact the bank.",
+        "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact support.",
         "depositoRegistrado": "Deposit - Registered",
         "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Recent deposits"
@@ -406,7 +426,8 @@
         "naoQueroBonus": "I don't want bonus",
         "valorMinimoSaque": "Minimum withdrawal amount",
         "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
-        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount"
+        "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
+        "receberBonusCassino": "Receive Bonus - Casino"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",

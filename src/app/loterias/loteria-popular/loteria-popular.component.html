@@ -1,0 +1,6 @@
+<div class="loteria-popular-content">
+    <div class="loteria-frame">
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+        <iframe *ngIf="gameUrl!=''" [src]="gameUrl"></iframe>
+    </div>
+</div>

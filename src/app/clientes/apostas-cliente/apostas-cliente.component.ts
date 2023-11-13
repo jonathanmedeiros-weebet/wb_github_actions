@@ -5,7 +5,7 @@ import {MessageService} from '../../shared/services/utils/message.service';
 import * as moment from 'moment';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
-import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService, ApostaLoteriaService } from 'src/app/services';
+import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService, ApostaLoteriaService, LoteriaPopularService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { forEach } from 'lodash';
 import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -29,6 +29,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     acumuladaoHabilitado;
     desafioHabilitado;
     casinoHabilitado;
+    loteriaPopularHabilitada;
     activeId = 'esporte';
 
     showLoading = true;
@@ -72,6 +73,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private cassinoService: CasinoApiService,
         private loteriaServie: ApostaLoteriaService,
         public desafioApostaService: DesafioApostaService,
+        private loteriaPopularService: LoteriaPopularService,
         public formatter: NgbDateParserFormatter,
         private calendar: NgbCalendar,
         private cd: ChangeDetectorRef,
@@ -101,6 +103,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.casinoHabilitado = this.params.getOpcoes().casino;
+        this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
 
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
@@ -168,6 +171,12 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                         error => this.handleError(error)
                     );
                 break;
+            case 'loteria-popular':
+                this.loteriaPopularService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
             default:
                 this.handleResponse([]);
                 break;
@@ -297,14 +306,18 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             modalAposta = ApostaModalComponent;
         }
+        
+        let size = aposta.tipo == 'esportes' ? 'lg' : '';
+        let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(
                 apostaLocalizada => {
                     this.modalRef = this.modalService.open(modalAposta, {
                         ariaLabelledBy: 'modal-basic-title',
+                        size: size,
                         centered: true,
-                        scrollable: true
+                        windowClass: typeWindow
                     });
                     this.modalRef.componentInstance.aposta = apostaLocalizada;
                     this.modalRef.componentInstance.showCancel = true;

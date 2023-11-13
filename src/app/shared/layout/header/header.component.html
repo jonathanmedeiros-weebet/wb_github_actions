@@ -11,6 +11,26 @@
 	</div>
 </ng-template>
 
+<div class="info-connection-card hide">
+    <div class="info-connection-card-content">
+        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i></span> {{ messageConnection }}
+    </div>
+</div>
+
+<div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || (isCliente))">
+    <div class="indique-ganhe-card-content">
+        {{'geral.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+        <a (click)="isConnected && redirectIndiqueGanhe()" 
+            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()" 
+            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()" 
+            class="btn btn-indique-ganhe-card"
+        >{{'geral.indicar' | translate}}</a>
+    </div>
+    <a (click)="removerIndiqueGanheCard()" type="button" class="btn-close" aria-label="Close">
+        <i class="fa fa-times"></i>
+    </a>
+</div>
+
 <div class="header">
     <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
@@ -339,6 +359,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">
+                                <span>
+                                    <i class="fa fa-solid fa-gift"></i>
+                                </span>
+                                {{'geral.indiqueGanhe' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <a (click)="listPrinters()" *ngIf="appMobile">
                                 <span>
                                     <i class="fa fa-solid fa-cogs"></i>
@@ -441,6 +470,12 @@
                             *ngIf="isCliente">
                                 <i class="fa fa-solid fa-cogs mb-2"></i>
                                 {{'geral.configuracoes' | translate}}
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente && indiqueGanheHabilitado">
+                                <i class="fa fa-solid fa-gift mb-2"></i>
+                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{'geral.indiqueGanhe' | translate}}</span>
                             </a>
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
@@ -559,7 +594,7 @@
                 <span>{{'menu.acumuladao' | translate}}</span>
             </a>
         </div>
-        <div class="category" *ngIf="loteriasHabilitado && (seninhaAtiva || quininhaAtiva)">
+        <div class="category" *ngIf="(loteriasHabilitado && (seninhaAtiva || quininhaAtiva)) || loteriaPopularAtiva">
             <a [routerLink]="['/loterias']" routerLinkActive="active">
                 <span>{{'menu.loteria' | translate}}</span>
             </a>

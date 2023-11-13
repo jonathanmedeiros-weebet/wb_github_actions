@@ -69,7 +69,7 @@ body {
     background-color: var(--background);
     max-height: 100%;
     height: 100vh;
-    /* overflow: hidden; */
+    overflow-x: hidden;
 }
 
 .base-container {
@@ -1772,6 +1772,12 @@ ngb-datepicker-month {
         color: var(--foreground);
     }
 
+    .modal-cadastro-cliente .modal-dialog,
+    .modal-login .modal-dialog {
+        margin: 0 auto;
+        height: auto;
+    }
+
     .modal-pop-up .modal-content {
         max-width: 90%;
         height: auto;
@@ -1922,3 +1928,11 @@ label {
     width: 100%;
 }
 
+@media only screen and (max-width: 480px) {
+    .modal-cadastro-cliente .modal-dialog,
+    .modal-login .modal-dialog {
+        max-width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+}
