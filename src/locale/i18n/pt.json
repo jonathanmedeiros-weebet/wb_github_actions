@@ -25,6 +25,7 @@
         "financeiro": "Financeiro",
         "validacao": "Validação",
         "apuracao": "Apuração",
+        "aposta": "Aposta",
         "apostas": "Apostas",
         "tabela": "Tabela",
         "ajuda": "Ajuda",
@@ -52,6 +53,8 @@
         "ganhou": "Ganhou",
         "perdeu": "Perdeu",
         "pendente": "Pendente",
+        "depositado": "Depositado",
+        "cancelado": "Cancelado",
         "filtrar": "Filtrar",
         "data": "Data",
         "tipo": "Tipo",
@@ -194,18 +197,10 @@
         "suporte": "Suporte",
         "EmailOuUsuario": "E-mail ou usuário",
         "promocoes": "Promoções",
-        "indiqueGanhe": "Indique e ganhe",
-        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}} de saldo na sua conta",
-        "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
-        "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
         "regrasCondicoes": "Regras e condições",
-        "copiarLink": "Copiar link",
-        "seuLinkIndicacao": "Seu link de indicação:",
-        "compartilheSeuLink": "Compartilhe seu link nas redes sociais:",
-        "linkCopiado": "Link copiado!",
-        "indicar": "Indicar",
         "semPermissaoAcesso": "Sem permissão de acesso",
-        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
+        "cadastro": "Cadastro"
     },
     "dias": {
         "ontem": "Ontem",
@@ -435,5 +430,24 @@
         "completado": "Completado",
         "cancelado": "Cancelado",
         "vencido": "Vencido"
+    },
+    "indique_ganhe":{
+        "indiqueGanhe": "Indique e ganhe",
+        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}} de saldo na sua conta",
+        "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
+        "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
+        "seuLinkIndicacao": "Seu link de indicação:",
+        "copiarLink": "Copiar link",
+        "compartilheSeuLink": "Compartilhe seu link nas redes sociais:",
+        "linkCopiado": "Link copiado!",
+        "indicar": "Indicar",
+        "linkDeCompartilhamento": "Link de compartilhamento",
+        "minhasIndicacoes": "Minhas indicações",
+        "voceJaGanhou": "Você já ganhou",
+        "pendenteAReceber": "Valores pendentes a receber",
+        "indicacoes": "Indicações",
+        "dataIndicacao": "Data da indicação",
+        "progresso": "Progresso",
+        "voceIndicou": "Você indicou"
     }
 }

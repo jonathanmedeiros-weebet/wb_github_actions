@@ -3,60 +3,173 @@
         <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
             <i class="fa fa-arrow-left"></i>
         </a>
-        <div class="titulo">{{'geral.indiqueGanhe' | translate}}</div>
+        <div class="titulo">{{'indique_ganhe.indiqueGanhe' | translate}}</div>
         <div class="botao-direito"></div>
     </div>
     <div class="internal-container-out">
         <div class="content-header hide-mobile">
-            <h2>{{'geral.indiqueGanhe' | translate}}</h2>
+            <h2>{{'indique_ganhe.indiqueGanhe' | translate}}</h2>
         </div>
+
+        <div class="tabs">
+            <a [ngClass]="tabSelected == 'link_compartilhamento' ? 'active' : ''"
+            (click)="changeTab('link_compartilhamento')">{{'indique_ganhe.linkDeCompartilhamento' | translate}} </a>
+            <a [ngClass]="tabSelected == 'minhas_indicacoes' ? 'active' : ''"
+            (click)="changeTab('minhas_indicacoes')">{{'indique_ganhe.minhasIndicacoes' | translate}} </a>
+        </div>
+
         <div class="content-body">
-            <div class="indique-ganhe-info">
-                <h4>
-                    {{'geral.indiqueGanheInfo1' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
-                </h4>
-                <p>
-                    {{'geral.indiqueGanheInfo2' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
-                    <a (click)="abrirModalRegras()" style="cursor: pointer;">{{'geral.regrasCondicoes' | translate}}</a>
-                </p>
-            </div>
-            <div class="link-indicacao-container">
-                <p>{{'geral.seuLinkIndicacao' | translate}}</p>
-                <ng-container *ngIf="mobileScreen">
-                    <div class="link-indicacao" (click)="copiarLink()">
-                        <div class="link">
-                            <i class="fa fa-link"></i>
-                            <span>{{linkIndicacao}}</span>
-                        </div>
-                        <a class="copy-button">{{'geral.copiarLink' | translate}}</a>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="!mobileScreen">
-                    <div class="link-indicacao">
-                        <div class="link">
-                            <i class="fa fa-link"></i>
-                            <span>{{linkIndicacao}}</span>
-                        </div>
-                        <a class="copy-button" (click)="copiarLink()">{{'geral.copiarLink' | translate}}</a>
-                    </div>
-                </ng-container>
-                <div class="social-share">
-                    <p>{{'geral.compartilheSeuLink' | translate}}</p>
-                    <ng-container *ngIf="!mobileScreen">
-                        <div class="social-buttons-container">
-                            <a href="{{linkFacebook}}" target="_blank" class="fa-brands fa-facebook social-buttons"></a><span>Facebook</span>
-                            <a href="{{linkWhatsapp}}" target="_blank" class="fa-brands fa-whatsapp social-buttons"></a><span>Whatsapp</span>
-                            <a href="{{linkTelegram}}" target="_blank" class="fa-brands fa-telegram social-buttons"></a><span>Telegram</span>
-                            <a href="{{linkEmail}}" target="_blank" class="fa-regular fa-envelope social-buttons"></a><span>E-mail</span>
-                        </div>
-                    </ng-container>
-                    <ng-container *ngIf="mobileScreen">
-                        <button type="button" class="btn btn-custom btn-block" (click)="compartilharLink()">
-                            <i class="fa fa-share-alt"></i>&nbsp;&nbsp;{{'geral.compartilhar' | translate}} Link
-                        </button>
-                    </ng-container>
+            <ng-container *ngIf="tabSelected == 'link_compartilhamento'">
+                <div class="indique-ganhe-info">
+                    <h4>
+                        {{'indique_ganhe.indiqueGanheInfo1' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                    </h4>
+                    <p>
+                        {{'indique_ganhe.indiqueGanheInfo2' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                        <a (click)="abrirModalRegras()" style="cursor: pointer;">{{'geral.regrasCondicoes' | translate}}</a>
+                    </p>
                 </div>
-            </div>
+                <div class="link-indicacao-container">
+                    <p>{{'indique_ganhe.seuLinkIndicacao' | translate}}</p>
+                    <ng-container *ngIf="mobileScreen">
+                        <div class="link-indicacao" (click)="copiarLink()">
+                            <div class="link">
+                                <i class="fa fa-link"></i>
+                                <span>{{linkIndicacao}}</span>
+                            </div>
+                            <a class="copy-button">{{'indique_ganhe.copiarLink' | translate}}</a>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!mobileScreen">
+                        <div class="link-indicacao">
+                            <div class="link">
+                                <i class="fa fa-link"></i>
+                                <span>{{linkIndicacao}}</span>
+                            </div>
+                            <a class="copy-button" (click)="copiarLink()">{{'indique_ganhe.copiarLink' | translate}}</a>
+                        </div>
+                    </ng-container>
+                    <div class="social-share">
+                        <p>{{'indique_ganhe.compartilheSeuLink' | translate}}</p>
+                        <ng-container *ngIf="!mobileScreen">
+                            <div class="social-buttons-container">
+                                <a href="{{linkFacebook}}" target="_blank" class="fa-brands fa-facebook social-buttons"></a><span>Facebook</span>
+                                <a href="{{linkWhatsapp}}" target="_blank" class="fa-brands fa-whatsapp social-buttons"></a><span>Whatsapp</span>
+                                <a href="{{linkTelegram}}" target="_blank" class="fa-brands fa-telegram social-buttons"></a><span>Telegram</span>
+                                <a href="{{linkEmail}}" target="_blank" class="fa-regular fa-envelope social-buttons"></a><span>E-mail</span>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="mobileScreen">
+                            <button type="button" class="btn btn-custom btn-block" (click)="compartilharLink()">
+                                <i class="fa fa-share-alt"></i>&nbsp;&nbsp;{{'geral.compartilhar' | translate}} Link
+                            </button>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="tabSelected == 'minhas_indicacoes'">
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                    <div class="filtros">
+                        <input
+                            name="datepicker"
+                            class="dp-hidden"
+                            ngbDatepicker
+                            #datepicker="ngbDatepicker"
+                            [autoClose]="'outside'"
+                            (dateSelect)="onDateSelection($event, datepicker)"
+                            [displayMonths]="2"
+                            [dayTemplate]="t"
+                            outsideDays="hidden"
+                            [startDate]="fromDate!"
+                            tabindex="-1"
+                            value=""
+                        >
+                        <ng-template #t let-date let-focused="focused">
+                            <span class="custom-day"
+                                [class.focused]="focused"
+                                [class.range]="isRange(date)"
+                                [class.faded]="isHovered(date) || isInside(date)"
+                                (mouseenter)="hoveredDate = date"
+                                (mouseleave)="hoveredDate = null">
+                                {{ date.day }}
+                            </span>
+                        </ng-template>
+                        <div class="input-group datepicker-group">
+                            <i class="fa fa-calendar"></i>
+                            <input
+                                type="text"
+                                class="form-control inverted-out"
+                                [(ngModel)]="selectedDate"
+                                (click)="datepicker.toggle()"
+                                [ngModelOptions]="{standalone: true}"
+                                style="border-radius: 5px"
+                            >
+                        </div>
+                        <select class="form-control inverted-out" formControlName="status">
+                            <option value="">{{'geral.todos' | translate}}</option>
+                            <option value="depositado">{{'geral.depositado' | translate}}</option>
+                            <option value="pendente">{{'geral.pendente' | translate}}</option>
+                            <option value="cancelado">{{'geral.cancelado' | translate}}</option>
+                        </select>
+                        <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
+                    </div>
+                </form>
+                <div class="info-resultado">
+                    <div class="item">
+                        <label>{{'indique_ganhe.voceJaGanhou' | translate}}: {{ total.recebido | currency }}</label>
+                    </div>
+                    <div class="item">
+                        <label>{{'indique_ganhe.pendenteAReceber' | translate}}: {{ total.pendente | currency }}</label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50"></th>
+                                <th width="200">{{'indique_ganhe.indicacoes' | translate}}</th>
+                                <th width="200">{{'indique_ganhe.dataIndicacao' | translate}}</th>
+                                <th width="200">{{'indique_ganhe.progresso' | translate}}</th>
+                                <th width="100">{{'geral.status' | translate}} </th>
+                                <th width="100" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
+                                <th width="30"></th>
+                            </tr>
+                        </thead>
+                        <tr *ngIf="loading">
+                            <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+                                {{'geral.carregando' | translate}}
+                            </td>
+                        </tr>
+                        <tbody *ngIf="!loading">
+                            <tr *ngFor="let indicado of indicados">
+                                <td>
+                                    <span>
+                                        <i
+                                            [ngClass]="setStatusIcon(indicado.status)"
+                                            [ngStyle]="{'font-size': '14px'}"
+                                        ></i>
+                                    </span>
+                                </td>
+                                <td>{{ 'indique_ganhe.voceIndicou' | translate }} {{ indicado.nome_indicado }}</td>
+                                <td>{{ indicado.indicado_em.data }} às {{ indicado.indicado_em.horario }}</td>
+                                <td>
+                                    <div 
+                                        class="progress-container"
+                                        [ngClass]="setProgressFillClass(indicado)"
+                                    >
+                                        <span placement="bottom" ngbTooltip="{{'geral.cadastro' | translate}}"></span>
+                                        <span placement="bottom" ngbTooltip="{{'geral.deposito' | translate}}"></span>
+                                        <span placement="bottom" ngbTooltip="{{'geral.aposta' | translate}}"></span>
+                                    </div>
+                                </td>
+                                <td>{{ translateStatus(indicado.status) }}</td>
+                                <td [ngStyle]="{'text-align': 'right'}">{{ indicado.valor_comissao | currency }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-container>
         </div>
     </div>
 </div>
