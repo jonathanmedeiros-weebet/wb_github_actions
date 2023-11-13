@@ -90,7 +90,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesRoleta = this.filterDestaques(response.destaques, 'roulette');
             this.gamesMesa = this.filterDestaques(response.destaques, 'table');
             this.gamesBingo = this.filterDestaques(response.destaques, 'bingo');
-            this.gamesLive = this.filterDestaques(response.destaques, 'live');
 
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
@@ -141,10 +140,6 @@ export class WallComponent implements OnInit, AfterViewInit {
                         case 'bingo':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
                             this.gameTitle = 'Bingo';
-                            break;
-                        case 'live':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'live');
-                            this.gameTitle = this.translate.instant('cassino.aoVivo');
                             break;
                     }
 
