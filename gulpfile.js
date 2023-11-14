@@ -1319,15 +1319,6 @@ gulp.task('ricardo.wee.bet', function (done) {
     });
 });
 
-gulp.task('vipersports.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "vipersports.bet",
-        banca: "VIPER SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('nautsports.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
