@@ -3541,6 +3541,7 @@ gulp.task('maxbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "maxbet.wee.bet",
+        shared_url: "maxbetbrasil.com",
         banca: "MAX BET",
         styles: "",
     });
