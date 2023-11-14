@@ -168,6 +168,7 @@
         "bilhete": "Ticket",
         "cartoes": "Cards",
         "resultados": "Results",
+        "resultadosEncontrados": "results found",
         "config": "Config.",
         "downloadApp": "Download app",
         "jaPossuiConta": "Already have an account?",
@@ -448,6 +449,7 @@
         "indicacoes": "Referrals",
         "dataIndicacao": "Referral date",
         "progresso": "Progress",
-        "voceIndicou": "You referred"
+        "voceIndicou": "You referred",
+        "dataDeCadastro": "Registration date"
     }
 }

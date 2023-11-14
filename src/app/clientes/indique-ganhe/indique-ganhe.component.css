@@ -22,7 +22,6 @@
     font-weight: 400;
 }
 
-
 .table {
     color: var(--foreground);
 }
@@ -126,7 +125,7 @@
 }
 
 .tabs a {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--foreground);
     text-decoration: none;
     display: inline-block;
@@ -252,7 +251,50 @@
     margin-bottom: 12px;
 }
 
+.lista-indicados-container > div {
+    border-bottom: 1px solid #000;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+
+.lista-indicados {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lista-indicados-icon {
+    flex-grow: 2;
+    align-self: normal;
+    text-align: center;
+}
+
+.lista-indicados-info {
+    flex-grow: 7;
+}
+
+.lista-indicados-info p {
+    margin: unset;
+}
+
+.lista-indicados-arrow {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.only-mobile {
+    display: none;
+}
+
 @media only screen and (max-width: 480px) {
+    .only-mobile {
+        display: block;
+    }
+
+    .only-desktop {
+        display: none;
+    }
+
     .link-indicacao {
         flex-direction: column;
     }
@@ -269,6 +311,11 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    .tabs a {
+        width: 50%;
+        text-align: center;
+    }
+
     #indique-ganhe-content {
         padding: 10px;
         height: 100vh;
@@ -281,6 +328,42 @@
     }
 
     .link-indicacao {
+        width: 100%;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros .datepicker-group,
+    .filtros input,
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+
+    .dp-hidden {
+        height: 0 !important;
+        position: absolute;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros-container .input-group {
+        max-width: none;
+    }
+
+    .buttons {
+        padding: 0;
+    }
+
+    .buttons button {
         width: 100%;
     }
 }

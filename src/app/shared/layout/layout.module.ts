@@ -37,6 +37,7 @@ import {
     RelatorioService,
     SorteioService
 } from '../../services';
+import { IndiqueGanheService } from '../services/clientes/indique-ganhe.service';
 import {
     ApostaEncerramentoModalComponent,
     ApostaModalComponent,
@@ -200,6 +201,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         RelatorioService,
         JogoService,
         AcumuladaoService,
+        IndiqueGanheService,
         {
             provide: RECAPTCHA_SETTINGS,
 

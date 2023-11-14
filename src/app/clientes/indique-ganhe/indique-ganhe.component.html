@@ -122,7 +122,7 @@
                         <label>{{'indique_ganhe.pendenteAReceber' | translate}}: {{ total.pendente | currency }}</label>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive only-desktop">
                     <table class="table">
                         <thead>
                             <tr>
@@ -163,11 +163,38 @@
                                     </div>
                                 </td>
                                 <td>{{ translateStatus(indicado.status) }}</td>
-                                <td [ngStyle]="{'text-align': 'right'}">{{ indicado.valor_comissao | currency }}</td>
+                                <td
+                                    [ngStyle]="{
+                                        'text-align': 'right',
+                                        'color': setAmountColor(indicado.status)
+                                    }"
+                                >{{ indicado.valor_comissao | currency }}</td>
                                 <td></td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="lista-indicados-container only-mobile">
+                    <div [ngStyle]="{'color': '#AEAEAE'}">{{ indicados.length }} {{ 'geral.resultadosEncontrados' | translate }}</div>
+                    <div class="lista-indicados" *ngFor="let indicado of indicados" (click)="abrirModalMinhasIndicacoes()">
+                        <div class="lista-indicados-icon">
+                            <span>
+                                <i
+                                    [ngClass]="setStatusIcon(indicado.status)"
+                                    [ngStyle]="{'font-size': '14px'}"
+                                ></i>
+                            </span>
+                        </div>
+                        <div class="lista-indicados-info">
+                            <p>{{ 'indique_ganhe.dataDeCadastro' | translate }} {{ indicado.indicado_em.data }} às {{ indicado.indicado_em.horario }}</p>
+                            <p [ngStyle]="{'font-size': '14px'}">{{ 'indique_ganhe.voceIndicou' | translate }} {{ indicado.nome_indicado }}</p>
+                            <p [ngStyle]="{'color': setAmountColor(indicado.status)}">{{ indicado.valor_comissao | currency }}</p>
+                            <p>{{ translateStatus(indicado.status) }}</p>
+                        </div>
+                        <div class="lista-indicados-arrow">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
                 </div>
             </ng-container>
         </div>
@@ -215,5 +242,17 @@
             Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador
             garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}.
         </p>
+    </div>
+</ng-template>
+
+<ng-template #minhasIndicacoesModal style="min-height: 80%">
+    <div class="modal-header">
+        <a (click)="activeReferralsModalh.dismiss('Cross click')" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'indique_ganhe.minhasIndicacoes' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
+    <div class="modal-body" style="min-height: 80%">
     </div>
 </ng-template>

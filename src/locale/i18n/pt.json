@@ -168,6 +168,7 @@
         "bilhete": "Bilhete",
         "cartoes": "Cartões",
         "resultados": "Resultados",
+        "resultadosEncontrados": "resultados encontrados",
         "config": "Config.",
         "downloadApp": "Download app",
         "jaPossuiConta": "Já possui uma conta?",
@@ -448,6 +449,7 @@
         "indicacoes": "Indicações",
         "dataIndicacao": "Data da indicação",
         "progresso": "Progresso",
-        "voceIndicou": "Você indicou"
+        "voceIndicou": "Você indicou",
+        "dataDeCadastro": "Data de cadastro"
     }
 }

@@ -19,6 +19,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     tabSelected = 'link_compartilhamento';
 
     @ViewChild('regrasCondicoesModal', {static: true}) regrasCondicoesModal;
+    @ViewChild('minhasIndicacoesModal', {static: true}) minhasIndicacoesModal;
     linkIndicacao: string = "";
     valorGanhoPorIndicacao;
     limiteIndicacoes;
@@ -58,6 +59,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     constructor(
         private activeModal: NgbActiveModal,
         private activeRulesModal: NgbActiveModal,
+        private activeReferralsModal: NgbActiveModal,
         private authService: AuthService,
         private calendar: NgbCalendar,
         private clienteService: ClienteService,
@@ -129,6 +131,17 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     {
         this.activeRulesModal = this.modalService.open(
             this.regrasCondicoesModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+    }
+
+    abrirModalMinhasIndicacoes()
+    {
+        this.activeReferralsModal = this.modalService.open(
+            this.minhasIndicacoesModal,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true
@@ -210,6 +223,19 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
                 return this.translateService.instant('geral.pendente');
             case 'anulado':
                 return this.translateService.instant('geral.cancelado');
+        }
+    }
+
+    setAmountColor(status) {
+        switch (status) {
+            case 'pago':
+                return "#0C9F19";
+            case 'pendente':
+                return "#6A6868";
+            case 'anulado':
+                return "#FF3E32";
+            default:
+                return "#FF3E32";
         }
     }
 
