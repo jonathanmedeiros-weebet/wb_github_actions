@@ -7,8 +7,10 @@ import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
 import {CupomComponent} from './cupom/cupom.component';
 import {ClientGuard} from './shared/services/guards/client.guard';
 import {CambistaGuard} from './shared/services/guards/cambista.guard';
+import { WelcomeGuard } from './shared/services/guards/welcome.guard';
 import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
+import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 
 const appRoutes: Routes = [
     {
@@ -27,6 +29,10 @@ const appRoutes: Routes = [
             },
             {
                 path: 'auth/cadastro',
+                component: AppComponent
+            },
+            {
+                path: 'login',
                 component: AppComponent
             },
             {
@@ -100,6 +106,11 @@ const appRoutes: Routes = [
     {
         path: 'bilhete/:codigo',
         component: CupomComponent
+    },
+    {
+        path:'welcome',
+        component: WelcomePageComponent,
+        canActivate: [WelcomeGuard]
     },
     {
         path: '**',

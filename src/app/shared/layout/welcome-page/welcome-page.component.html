@@ -1,0 +1,72 @@
+<div class="welcome-container" [ngClass]="{'background-cassino':soCassino, 'background-esporte':!soCassino}">
+    <section class="overlay">
+        <div class="logo">
+            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
+        </div>
+        <div class="info-emphasis">
+            <p>Olá, {{ nomeCliente }} <span style="transform: scaleX(-1); display: inline-block;">👋</span>
+            <br />Seja bem-vindo(a) à {{ bancaNome }}!</p>
+        </div>
+        <div style="font-size: 14px; font-weight: 400; margin-top: 32px;">
+            <div *ngIf="!validEmail; else textValid">
+                <p>Seu cadastro foi realizado com sucesso! <span class="emoji-icon">🎉🎉</span></p>
+                <p style="display: inline-block; max-width: 440px; padding: 0 16px;">Faça seu depósito agora mesmo e não perca a oportunidade 
+                de ganhar bônus de 100% no seu primeiro depósito</p>
+            </div>
+            <ng-template #textValid>
+                <div>
+                    <p style="display: inline-block; max-width: 500px; padding: 0 16px; text-align: center;">Agora falta pouco para ativar sua conta. Para concluir, basta acessar seu e-mail informado no cadastro e validar sua conta.</p>
+                </div>
+            </ng-template>
+        </div>
+        <div class="container-redirect" style="margin-top: 32px; margin-bottom: 45px;">
+            <a *ngIf="!validEmail; else buttonValid" (click)="depositeAgora()" class="btn btn-custom">Deposite agora</a>
+            <ng-template #buttonValid>
+                <a class="btn btn-custom" [routerLink]="['/login']">Ir para a página de login</a>
+            </ng-template>
+        </div>
+        <div class="tutorial-title" style="margin-bottom: 32px;">
+            <p>Comece a apostar em apenas 3 passos</p>
+        </div>
+        <div class="container-instructions">
+            <div class="box" *ngIf="!validEmail; else validacao">
+                <div class="circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25">
+                      <path d="M12 21.9258V19.9258H19V5.92578H12V3.92578H19C19.55 3.92578 20.021 4.12178 20.413 4.51378C20.805 4.90578 21.0007 5.37645 21 5.92578V19.9258C21 20.4758 20.804 20.9468 20.412 21.3388C20.02 21.7308 19.5493 21.9264 19 21.9258H12ZM10 17.9258L8.625 16.4758L11.175 13.9258H3V11.9258H11.175L8.625 9.37578L10 7.92578L15 12.9258L10 17.9258Z" class="my-custom-svg"/>
+                    </svg>
+                </div>
+                <p class="tutorial-title">1. Login</p>
+                <p class="tutorial-body">Acesse a nossa plataforma e realize seu login para ter acesso</p>
+            </div>
+            <ng-template #validacao>
+                <div class="box">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+                            <path d="M9.86157 13.5301C9.86157 13.2373 9.89602 12.953 9.93909 12.6688H2.10942V4.05526L9.00022 8.36201L15.891 4.05526V8.43954C16.5112 8.5429 17.0883 8.75824 17.6137 9.05971V2.33256C17.6137 1.38508 16.8385 0.609863 15.891 0.609863H2.10942C1.16193 0.609863 0.386719 1.38508 0.386719 2.33256V12.6688C0.386719 13.6163 1.16193 14.3915 2.10942 14.3915H9.93909C9.89602 14.1072 9.86157 13.823 9.86157 13.5301ZM15.891 2.33256L9.00022 6.63931L2.10942 2.33256H15.891ZM13.953 16.252L11.5843 13.6679L12.5834 12.6688L13.953 14.0383L17.0452 10.9461L18.0444 12.1606L13.953 16.252Z" class="my-custom-svg"/>
+                        </svg>
+                    </div>
+                    <p class="tutorial-title">1. Valide seu e-mail</p>
+                    <p class="tutorial-body">Verifique sua caixa de e-mail e realize a validação para ativar a sua conta</p>
+                </div>
+            </ng-template>
+            <div class="box">
+                <div class="circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M8.36816 17.8027H10.6206C10.6206 19.0191 12.1635 20.0552 13.9993 20.0552C15.835 20.0552 17.3779 19.0191 17.3779 17.8027C17.3779 16.5639 16.2067 16.1134 13.729 15.5165C11.3414 14.9196 8.36816 14.1763 8.36816 11.0454C8.36816 9.02948 10.0237 7.31762 12.3099 6.74325V4.28809H15.6886V6.74325C17.9748 7.31762 19.6304 9.02948 19.6304 11.0454H17.3779C17.3779 9.82909 15.835 8.79297 13.9993 8.79297C12.1635 8.79297 10.6206 9.82909 10.6206 11.0454C10.6206 12.2843 11.7919 12.7347 14.2696 13.3316C16.6571 13.9285 19.6304 14.6718 19.6304 17.8027C19.6304 19.8187 17.9748 21.5305 15.6886 22.1049V24.5601H12.3099V22.1049C10.0237 21.5305 8.36816 19.8187 8.36816 17.8027Z" class="my-custom-svg"/>
+                    </svg>
+                </div>
+                <p class="tutorial-title">2. Primeiro depósito</p>
+                <p class="tutorial-body">Faça seu login, vá em depositar e informe o valor desejado para depósito</p>
+            </div>
+            <div class="box">
+                <div class="circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                        <path d="M13.26 21.1658L12 22.4258L10.5 20.9258L9 22.4258L7.5 20.9258L6 22.4258L4.5 20.9258L3 22.4258V2.42578L4.5 3.92578L6 2.42578L7.5 3.92578L9 2.42578L10.5 3.92578L12 2.42578L13.5 3.92578L15 2.42578L16.5 3.92578L18 2.42578L19.5 3.92578L21 2.42578V13.7758C20.37 13.5558 19.7 13.4258 19 13.4258V5.42578H5V19.4258H13C13 19.9958 13.1 20.6458 13.26 21.1658ZM6 15.4258V17.4258H13.35C13.61 16.6758 14 16.0058 14.54 15.4258H6ZM6 13.4258H18V11.4258H6V13.4258ZM6 9.42578H18V7.42578H6V9.42578ZM23 17.6558L21.84 16.2458L18.25 19.8358L16.66 18.2458L15.5 19.4258L18.25 22.4258" class="my-custom-svg"/>
+                    </svg>
+                </div>
+                <p class="tutorial-title">3. E pronto!</p>
+                <p class="tutorial-body">Agora é só aproveitar o que a nossa banca tem de melhor a oferecer</p>
+            </div>
+        </div>
+    </section>
+</div>

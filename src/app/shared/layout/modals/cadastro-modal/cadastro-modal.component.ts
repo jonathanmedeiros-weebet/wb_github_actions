@@ -206,20 +206,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     this.activeModal.dismiss();
                     localStorage.removeItem('codigoAfiliado');
                     if(this.validacaoEmailObrigatoria) {
+                        localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
                         this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                        this.modalService.open(ValidarEmailModalComponent, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true,
-                            backdrop: 'static'
+                        let nome = values.nome.split(" ")[0];
+                        this.router.navigate(
+                            ['/welcome'], 
+                            { queryParams: { nomeCliente: nome, valid: true }
                         });
                     } else {
-                        this.modalService.open(this.ativacaoCadastroModal, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true
-                            }
-                        );
+                        localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
+                        let nome = values.nome.split(" ")[0];
+                        this.router.navigate(
+                            ['/welcome'], 
+                            { queryParams: { nomeCliente: nome, valid: false }
+                        });
                     }
                 },
                 error => {

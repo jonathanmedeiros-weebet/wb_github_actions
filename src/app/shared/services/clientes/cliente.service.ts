@@ -5,7 +5,9 @@ import {config} from '../../config';
 import {ErrorService} from '../utils/error.service';
 import {HeadersService} from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, BehaviorSubject} from 'rxjs';
+import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +15,19 @@ import {Observable} from 'rxjs';
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
     codigoFiliacaoCadastroTemp;
+    logadoSource;
+    logado;
+    clienteSource;
 
     constructor(
         private http: HttpClient,
         private errorService: ErrorService,
-        private headers: HeadersService
+        private headers: HeadersService,
+        private router: Router
     ) {
+        this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
+        this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
+        this.logado = this.logadoSource.asObservable();
     }
 
     getTermosDeUso() {
@@ -33,10 +42,22 @@ export class ClienteService {
     cadastrarCliente(values: any) {
         return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values), this.headers.getRequestOptions())
             .pipe(
-                map((response: any) => {
-                        return response.results;
+                map((response: any) => {                    
+                    const dataUser = response.results.dataUser;
+            
+                    if (dataUser && Object.keys(dataUser).length > 0) {
+                        this.setCookie(dataUser.user.cookie);
+                        const expires = moment().add(1, 'd').valueOf();
+                        localStorage.setItem('expires', `${expires}`);
+                        localStorage.setItem('token', dataUser.token);
+                        localStorage.setItem('user', JSON.stringify(dataUser.user));
+                        this.setIsCliente(true);
+                        localStorage.setItem('tokenCassino', dataUser.tokenCassino);
+                        this.logadoSource.next(true);
                     }
-                ),
+
+                    return response.results;
+                }),
                 catchError(this.errorService.handleError)
             );
     }
@@ -175,5 +196,32 @@ export class ClienteService {
                 ),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    setCookie(valor) {
+        const d = new Date();
+        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+        const expires = 'expires=' + d.toUTCString();
+        document.cookie = valor + '=' + valor + ';' + expires + ';';
+    }
+
+    isCliente(): boolean {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            return user.tipo_usuario === 'cliente';
+        }
+        return false;
+    }
+
+    setIsCliente(value: boolean) {
+        this.clienteSource.next(value);
+    }
+
+    isLoggedIn(): boolean {
+        return !!localStorage.getItem('token');
+    }
+
+    getUser() {
+        return JSON.parse(localStorage.getItem('user'));
     }
 }
