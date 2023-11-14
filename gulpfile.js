@@ -9,6 +9,8 @@ function tasks(done, config) {
         sharedUrl = config.shared_url;
     }
 
+    const defaultDescription = `O ${config.banca} é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website ${config.banca}, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. ${config.banca} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.`;
+
     gulp.src(['base-build/config.ts'])
         .pipe(replace('[HOST]', 'central.' + config.host))
         .pipe(replace('[S3_FOLDER]', config.host))
@@ -20,6 +22,7 @@ function tasks(done, config) {
         .pipe(replace('[HOST]', 'central.' + config.host))
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
+        .pipe(replace('[DESCRIPTION]', config.description ?? defaultDescription))
         .pipe(replace('[SCRIPTS]', typeof config.scripts == "undefined" ? "" : config.scripts))
         .pipe(replace('[GOOGLE_TAG_PART_1]', typeof config.google_tag_part_1 == "undefined" ? "" : config.google_tag_part_1))
         .pipe(replace('[GOOGLE_TAG_PART_2]', typeof config.google_tag_part_2 == "undefined" ? "" : config.google_tag_part_2))
@@ -68,7 +71,7 @@ function tasks(done, config) {
         .pipe(exec.reporter(reportOptions));
 
     done();
-};
+}
 
 gulp.task('vipsports.wee.bet', function (done) {
     tasks(done, {
