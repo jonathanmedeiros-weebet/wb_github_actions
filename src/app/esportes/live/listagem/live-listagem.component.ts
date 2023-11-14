@@ -108,10 +108,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         campeonato.jogos.forEach(jogo => {
                             let valido = true;
 
-                            if (jogo.sport_id !== 1) {
-                                valido = false;
-                            }
-
                             if (this.minutoEncerramentoAoVivo > 0) {
                                 if (jogo.sport_id === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
@@ -166,6 +162,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         }
                     });
 
+                    console.log(this.campeonatos);
+                    console.log(this.qtdJogosFutebol);
+
                     setTimeout(() => {
                         this.awaiting = false;
                     }, 2000);
@@ -195,7 +194,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     cotacao.nome = this.helperService.apostaTipoLabelCustom(
                         cotacao.chave,
                         jogo.time_a_nome,
-                        jogo.time_b_nome
+                        jogo.time_b_nome,
+                        jogo.sport_id
                     );
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
                         cotacao.valor,
@@ -218,10 +218,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 }
 
                 let valido = true;
-
-                if (jogo.sport_id && jogo.sport_id !== 1) {
-                    valido = false;
-                }
 
                 if (this.minutoEncerramentoAoVivo > 0) {
                     if (jogo.sport_id === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
