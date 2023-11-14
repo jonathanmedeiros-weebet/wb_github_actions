@@ -386,15 +386,6 @@ gulp.task('sportingnet.bet', function (done) {
     });
 });
 
-gulp.task('bet358.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "bet358.wee.bet",
-        banca: "Bet 358",
-        styles: "--header:#016534;--foreground-header:#fff;--sidebar-right:#016534;--foreground-sidebar-right:#fff;--sidebar-left:#016534;--foreground-sidebar-left:#fff;--foreground-highlight:#fff;--odds:#000;--foreground-odds:#fff;--foreground-selected-odds:#000;"
-    });
-});
-
 gulp.task('esportebetsvip.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2833,15 +2824,6 @@ gulp.task('acheibet.com', function (done) {
         host: "acheibet.com",
         banca: "ACHEI BET",
         styles: ""
-    });
-});
-
-gulp.task('vitoriabet.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "vitoriabet.bet",
-        banca: "VITÓRIA BET",
-        styles: "",
     });
 });
 
