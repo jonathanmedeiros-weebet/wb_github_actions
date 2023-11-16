@@ -450,6 +450,37 @@
         "dataIndicacao": "Data da indicação",
         "progresso": "Progresso",
         "voceIndicou": "Você indicou",
-        "dataDeCadastro": "Data de cadastro"
+        "dataDeCadastro": "Data de cadastro",
+        "saldoLiberado": "Saldo liberado",
+        "seuSaldoDepositado": "Seu saldo foi depositado",
+        "apostaRealizada": "Aposta realizada",
+        "indicadoRealizouAposta": "Seu indicado realizou a primeira aposta",
+        "depositoRealizado": "Depósito realizado",
+        "indicadoRealizouDepsito": "Seu indicado realizou o primeiro depósito",
+        "indicacaoRecebida": "Indicação recebida",
+        "cadastroRealizado": "Cadastro foi realizado"
+    },
+    "data":{
+        "dataHora": "{{data}} às {{hora}}",
+        "diaDeNomeMes": "{{dia}} de {{nomeMes}}",
+        "domingo": "Domingo",
+        "segunda": "Segunda-feira",
+        "terca": "Terça-feira",
+        "quarta": "Quarta-feira",
+        "quinta": "Quinta-feira",
+        "sexta": "Sexta-feira",
+        "sabado": "Sábado",
+        "janeiro": "Janeiro",
+        "fevereiro": "Fevereiro",
+        "marco": "Março",
+        "abril": "Abril",
+        "maio": "Maio",
+        "junho": "Junho",
+        "julho": "Julho",
+        "agosto": "Agosto",
+        "setembro": "Setembro",
+        "outubro": "Outubro",
+        "novembro": "Novembro",
+        "dezembro": "Dezembro"
     }
 }

@@ -282,6 +282,75 @@
     text-align: right;
 }
 
+.vertical-progress-container {
+    position: relative;
+    width: 300px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.vertical-progress {
+    position: relative;
+    padding: 0 1rem 0 3.5rem;
+    margin: 2rem 0 0;
+    list-style: none;
+}
+
+.vertical-progress-item {
+    position: relative;
+    min-height: 75px;
+    counter-increment: list;
+    padding-left: 0.5rem;
+}
+
+.vertical-progress-item::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 26px;
+    height: 81%;
+    width: 1px;
+    border-left: 1px solid #6A6868;
+}
+
+.vertical-progress-item-current-pending::before {
+    border-color: #0C9F19;
+}
+
+.vertical-progress-item::after {
+    content: counter(list);
+    position: absolute;
+    top: 0;
+    left: -2.5rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: transparent;
+    color: #6A6868;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 2rem;
+    text-align: center;
+    border: 1px solid #6A6868;
+}
+
+.vertical-progress-item-completed::after {
+    color: #0C9F19;
+    border-color: #0C9F19;
+}
+
+.vertical-progress-item:last-child::before {
+    border: none;
+}
+
+.vertical-progress-info span {
+    display: block;
+}
+
+.vertical-progress-info span:first-of-type {
+    font-weight: 600;
+}
+
 .only-mobile {
     display: none;
 }

@@ -450,6 +450,37 @@
         "dataIndicacao": "Referral date",
         "progresso": "Progress",
         "voceIndicou": "You referred",
-        "dataDeCadastro": "Registration date"
+        "dataDeCadastro": "Registration date",
+        "saldoLiberado": "Released balance",
+        "seuSaldoDepositado": "Your balance has been deposited",
+        "apostaRealizada": "Bet placed",
+        "indicadoRealizouAposta": "Your referral made the first bet",
+        "depositoRealizado": "Deposit made",
+        "indicadoRealizouDepsito": "Your referral made the first deposit",
+        "indicacaoRecebida": "Indication received",
+        "cadastroRealizado": "Registration was completed"
+    },
+    "data":{
+        "dataHora": "{{data}} at {{hora}}",
+        "diaDeNomeMes": "{{nomeMes}} {{dia}}",
+        "domingo": "Sunday",
+        "segunda": "Monday",
+        "terca": "Tuesday",
+        "quarta": "Wednesday",
+        "quinta": "Thursday",
+        "sexta": "Friday",
+        "sabado": "Saturday",
+        "janeiro": "January",
+        "fevereiro": "February",
+        "marco": "March",
+        "abril": "April",
+        "maio": "May",
+        "junho": "June",
+        "julho": "July",
+        "agosto": "August",
+        "setembro": "September",
+        "outubro": "October",
+        "novembro": "November",
+        "dezembro": "December"
     }
 }

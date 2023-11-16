@@ -50,6 +50,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     toDate: NgbDate | null;
 
     indicados = [];
+    indicadoSelecionado;
 
     total = {
         recebido: 0,
@@ -138,8 +139,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         );
     }
 
-    abrirModalMinhasIndicacoes()
+    abrirModalMinhasIndicacoes(indicadoSelecionado)
     {
+        this.indicadoSelecionado = indicadoSelecionado;
         this.activeReferralsModal = this.modalService.open(
             this.minhasIndicacoesModal,
             {
@@ -237,6 +239,17 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             default:
                 return "#FF3E32";
         }
+    }
+
+    formatDateModal(referral_date) {
+        const date = new Date(referral_date);
+        const days_of_week = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+        const months = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+        const nomeMes = this.translateService.instant(`data.${months[date.getMonth()]}`).toLowerCase();
+
+        return this.translateService.instant(`data.${days_of_week[date.getDay()]}`) +
+            ", " +
+            this.translateService.instant('data.diaDeNomeMes', {'dia': date.getDate(), 'nomeMes': nomeMes}); 
     }
 
     createForm() {
