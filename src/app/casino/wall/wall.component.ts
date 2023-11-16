@@ -83,14 +83,14 @@ export class WallComponent implements OnInit, AfterViewInit {
                 return game.dataType !== 'VSB';
             });;
             this.cassinoFornecedores = response.fornecedores;
-            this.gamesDestaque = this.filterDestaques(response.destaques, 'populares');
-            this.gamesSlot = this.filterDestaques(response.destaques, 'slot');
-            this.gamesCrash = this.filterDestaques(response.destaques, 'crash');
-            this.gamesRaspadinha = this.filterDestaques(response.destaques, 'scratchcard');
-            this.gamesRoleta = this.filterDestaques(response.destaques, 'roulette');
-            this.gamesMesa = this.filterDestaques(response.destaques, 'table');
-            this.gamesBingo = this.filterDestaques(response.destaques, 'bingo');
-            this.gamesLive = this.filterDestaques(response.destaques, 'live');
+            this.gamesDestaque = this.filterDestaques(this.gamesCassino, 'populares');
+            this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
+            this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
+            this.gamesRaspadinha = this.filterDestaques(this.gamesCassino, 'scratchcard');
+            this.gamesRoleta = this.filterDestaques(this.gamesCassino, 'roulette');
+            this.gamesMesa = this.filterDestaques(this.gamesCassino, 'table');
+            this.gamesBingo = this.filterDestaques(this.gamesCassino, 'bingo');
+            this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
 
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
@@ -275,17 +275,17 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gamesCassinoFiltrados =  this.gameList.filter(jogo => {
                 if(this.term && this.termFornecedor){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())  && jogo.modalidade != 'populares') {
                         return true;
                     }
                     return false;
                 }else if(this.term){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.modalidade != 'populares') {
                         return true;
                     }
                     return false;
                 }else{
-                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
+                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase()) && jogo.modalidade != 'populares') {
                         return true;
                     }
                     return false;
@@ -361,12 +361,12 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     filterDestaques(games, modalidade) {
         return games.filter(function (game) {
-            return game.destaqueModalidade === modalidade;
+            return game.modalidade === modalidade;
         });
     }
     filterModalidades(games, modalidade) {
         return games.filter(function (game) {
-            return game.category === modalidade;
+            return game.category === modalidade && game.modalidade != 'populares';
         });
     }
 
