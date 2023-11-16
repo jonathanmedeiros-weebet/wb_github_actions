@@ -2628,15 +2628,12 @@ gulp.task('pbpixbet.com', function (done) {
     });
 });
 
-gulp.task('apostatotal.bet', function (done) {
+gulp.task('deupixbet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "apostatotal.bet",
-        banca: "APOSTA TOTAL | SAQUE EM SEGUNDOS",
-        styles: "",
-        scripts: "<script src='//fw-cdn.com/10788619/3569924.js'chat='true'></script>",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PCWKNDB4');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-PCWKNDB4'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+        host: "deupixbet.com",
+        banca: "DEU PIX",
+        styles: ""
     });
 });
 
