@@ -104,6 +104,15 @@ input, select {
     margin-left: 8px;
 }
 
+.jogo-selecionado > div:not(.remover-item) {
+    color: var(--foreground-sidebars);
+}
+
+.jogo-selecionado .horario,
+.jogo-selecionado .odd-bilhete .valor {
+    color: var(--foreground-sidebars);
+}
+
 /* Media */
 @media only screen and (max-width: 1024px) {
     section.pre-bilhete.pre-bilhete-mobile {
