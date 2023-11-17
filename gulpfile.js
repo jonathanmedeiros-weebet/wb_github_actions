@@ -2870,11 +2870,11 @@ gulp.task('valebet.bet', function (done) {
     });
 });
 
-gulp.task('torcidabet.com.br', function (done) {
+gulp.task('wavebet.io', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
-        host: "torcidabet.com.br",
-        banca: "TORCIDA BET",
+        server: "front1.wee.bet",
+        host: "wavebet.io",
+        banca: "Wave Bet",
         styles: "",
     });
 });
