@@ -5,4 +5,5 @@ export class GameCasino {
     gameTypeID: any;
     fornecedor: any;
     gameDemo: any;
+    modalidade: any;
 }
