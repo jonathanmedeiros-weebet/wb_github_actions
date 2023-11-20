@@ -221,15 +221,6 @@ gulp.task('trevodasorte.me', function (done) {
     });
 });
 
-gulp.task('jvsports.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "jvsports.bet",
-        banca: "JV Sports",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #da251c; --odds: #da251c; --foreground-odds: #fff;"
-    });
-});
-
 gulp.task('esportbets.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -767,15 +758,6 @@ gulp.task('betsgames.net', function (done) {
         banca: "BETS GAMES",
         styles: "",
         scripts: "",
-    });
-});
-
-gulp.task('jbrbets.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "jbrbets.net",
-        banca: "JBR BETS",
-        styles: "",
     });
 });
 
@@ -1799,16 +1781,6 @@ gulp.task('sportpix.vip', function (done) {
     });
 });
 
-gulp.task('bet04.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bet04.club",
-        banca: "BET 04",
-        styles: "",
-        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-1ZFFCQSL6D'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-1ZFFCQSL6D');</script>",
-    });
-});
-
 gulp.task('alfasports.online', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2758,15 +2730,6 @@ gulp.task('exclusiva.bet', function (done) {
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TKVQXSX8');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TKVQXSX8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         scripts: "<!-- Start of LiveChat (www.livechat.com) code --> <script> window.__lc = window.__lc || {}; window.__lc.license = 15919224;; (function (n, t, c) { function i(n) { return e._h ? e._h.apply(null, n) : e._q.push(n) } var e = { _q: [], _h: null, _v: '2.0', on: function () { i(['on', c.call(arguments)]) }, once: function () { i(['once', c.call(arguments)]) }, off: function () { i(['off', c.call(arguments)]) }, get: function () { if (!e._h) throw new Error('[LiveChatWidget] You cant use getters before load.'); return i(['get', c.call(arguments)]) }, call: function () { i(['call', c.call(arguments)]) }, init: function () { var n = t.createElement('script'); n.async = !0, n.type = 'text/javascript', n.src = 'https://cdn.livechatinc.com/tracking.js', t.head.appendChild(n) } }; !n.__lc.asyncInit && e.init(), n.LiveChatWidget = n.LiveChatWidget || e }(window, document, [].slice)) </script> <noscript><a href='https://www.livechat.com/chat-with/15919224/' rel='nofollow'>Chat with us</a>, powered by <a href='https://www.livechat.com/?welcome' rel='noopener nofollow' target='_blank'>LiveChat</a></noscript> <!-- End of LiveChat code -->",
-    });
-});
-
-gulp.task('bet771.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bet771.bet",
-        banca: "BET 771",
-        styles: "",
     });
 });
 
