@@ -80,6 +80,7 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
             this.gamesCassino = response.gameList;
             this.cassinoFornecedores = response.fornecedores;
             this.gamesDestaque = this.filterDestaques(this.gamesCassino, 'populares');
+            console.log(this.gamesDestaque);
             this.gamesBlackjack = this.filterDestaques(this.gamesCassino, 'blackjack');
             this.gamesBaccarat = this.filterDestaques(this.gamesCassino, 'baccarat');
             this.gamesPoker = this.filterDestaques(this.gamesCassino, 'poker');
@@ -251,17 +252,17 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
 
             this.gamesCassinoFiltrados =  this.gameList.filter(jogo => {
                 if(this.term && this.termFornecedor){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())  && jogo.modalidade != 'populares') {
                         return true;
                     }
                     return false;
                 }else if(this.term){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.modalidade != 'populares') {
                         return true;
                     }
                     return false;
                 }else{
-                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
+                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase()) && jogo.modalidade != 'populares') {
                         return true;
                     }
                     return false;
@@ -337,12 +338,12 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
 
     filterDestaques(games, modalidade) {
         return games.filter(function (game) {
-            return game.destaqueModalidade === modalidade;
+            return game.modalidade === modalidade;
         });
     }
     filterModalidades(games, modalidade) {
         return games.filter(function (game) {
-            return game.category === modalidade;
+            return game.category === modalidade && game.modalidade != 'populares';;
         });
     }
 
