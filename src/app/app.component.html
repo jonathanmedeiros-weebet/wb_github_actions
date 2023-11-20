@@ -56,7 +56,7 @@
     </div>
 </ng-template>
 
-<div class="botao-contato-flutuante" *ngIf="!mobileScreen && (isDemo || whatsapp)">
+<div class="botao-contato-flutuante" *ngIf="(isDemo || whatsapp) && showBotaoWhatspp()">
     <a *ngIf="isDemo" class="btn btn-custom rounded-circle contato" target="_blank"
        href="https://materiais.wee.bet/demo-weebet">
         <i class="fa fa-brands fa-whatsapp"></i>
