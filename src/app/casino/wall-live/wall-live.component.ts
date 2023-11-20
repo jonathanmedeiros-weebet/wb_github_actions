@@ -77,71 +77,58 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList(true).subscribe(response => {
-            this.gamesCassino = response.gameList.filter(function (game) {
-                return game.dataType !== 'VSB';
-            });;
+            this.gamesCassino = response.gameList;
             this.cassinoFornecedores = response.fornecedores;
-            this.gamesDestaque = this.filterDestaques(response.destaques, 'populares');
-            this.gamesBlackjack = this.filterDestaques(response.destaques, 'blackjack');
-            this.gamesBaccarat = this.filterDestaques(response.destaques, 'baccarat');
-            this.gamesPoker = this.filterDestaques(response.destaques, 'poker');
-            this.gamesRoleta = this.filterDestaques(response.destaques, 'roulette');
-            this.gamesGameshow = this.filterDestaques(response.destaques, 'gameshow');
-            console.log(this.gamesBlackjack);
+            this.gamesDestaque = this.filterDestaques(this.gamesCassino, 'populares');
+            this.gamesBlackjack = this.filterDestaques(this.gamesCassino, 'blackjack');
+            this.gamesBaccarat = this.filterDestaques(this.gamesCassino, 'baccarat');
+            this.gamesPoker = this.filterDestaques(this.gamesCassino, 'poker');
+            this.gamesRoleta = this.filterDestaques(this.gamesCassino, 'roulette');
+            this.gamesGameshow = this.filterDestaques(this.gamesCassino, 'gameshow');
 
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
 
                 this.isHomeCassino = this.gameType === 'todos' || this.gameType === '';
 
-                if (this.gameType === 'virtuais') {
-                    this.sideBarService.changeItens({
-                        contexto: 'virtuais',
-                        dados: {}
-                    });
-                    this.gameList = response.gameList.filter(function (game) {
-                        return game.category === 'virtual';
-                    });
-                } else {
-                    this.sideBarService.changeItens({
-                        contexto: 'casino',
-                        dados: {}
-                    });
-                    if (this.isHomeCassino) {
-                        this.gameList =  this.gamesCassino;
-                        this.gameTitle = this.translate.instant('geral.todos');
-                    }else{
-                        this.qtdItens = 20;
-                    }
-                    this.listagemJogos.nativeElement.scrollTo( 0, 0 );
-                    switch (this.gameType) {
-                        case 'blackjack':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'blackjack');
-                            this.gameTitle = "Blackjack";
-                            break;
-                        case 'baccarat':
-                            this.gameList =this.filterModalidades(this.gamesCassino, 'baccarat');
-                            this.gameTitle = "Baccarat";
-                            break;
-                        case 'poker':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'poker');
-                            this.gameTitle = "Poker";
-                            break;
-                        case 'gameshow':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'gameshow');
-                            this.gameTitle = "Game Show";
-                            break;
-                        case 'roleta':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
-                            this.gameTitle = this.translate.instant('cassino.roleta');
-                            break;
-                    }
-
-                    this.gamesCassinoTemp = [];
-                    this.gamesCassinoFiltrados = [];
-                    this.term = '';
-                    this.termFornecedor = '';
+                this.sideBarService.changeItens({
+                    contexto: 'casino',
+                    dados: {}
+                });
+                if (this.isHomeCassino) {
+                    this.gameList =  this.gamesCassino;
+                    this.gameTitle = this.translate.instant('geral.todos');
+                }else{
+                    this.qtdItens = 20;
                 }
+                this.listagemJogos.nativeElement.scrollTo( 0, 0 );
+                switch (this.gameType) {
+                    case 'blackjack':
+                        this.gameList = this.filterModalidades(this.gamesCassino, 'blackjack');
+                        this.gameTitle = "Blackjack";
+                        break;
+                    case 'baccarat':
+                        this.gameList =this.filterModalidades(this.gamesCassino, 'baccarat');
+                        this.gameTitle = "Baccarat";
+                        break;
+                    case 'poker':
+                        this.gameList = this.filterModalidades(this.gamesCassino, 'poker');
+                        this.gameTitle = "Poker";
+                        break;
+                    case 'gameshow':
+                        this.gameList = this.filterModalidades(this.gamesCassino, 'gameshow');
+                        this.gameTitle = "Game Show";
+                        break;
+                    case 'roleta':
+                        this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
+                        this.gameTitle = this.translate.instant('cassino.roleta');
+                        break;
+                }
+
+                this.gamesCassinoTemp = [];
+                this.gamesCassinoFiltrados = [];
+                this.term = '';
+                this.termFornecedor = '';
             });
 
             this.showLoadingIndicator = false;
