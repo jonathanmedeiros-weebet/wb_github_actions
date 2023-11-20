@@ -246,14 +246,14 @@
 </ng-template>
 
 <ng-template #minhasIndicacoesModal style="min-height: 80%">
-    <div class="modal-header" [ngStyle]="{'border': 'none'}">
+    <div class="modal-header" [ngStyle]="{'border': 'none', 'padding': '15px 10px'}">
         <a (click)="activeReferralsModal.dismiss('Cross click')" class="botao-esquerdo">
-            <i class="fa fa-arrow-left"></i>
+            <i class="fa fa-arrow-left" [ngStyle]="{'color': 'var(--highlight)'}"></i>
         </a>
         <div class="titulo">{{'indique_ganhe.minhasIndicacoes' | translate}}</div>
         <div class="botao-direito"></div>
     </div>
-    <div class="modal-body" style="min-height: 80%">
+    <div class="modal-body" style="min-height: 80%; padding: 15px 10px;">
         <div [ngStyle]="{'padding-bottom': '30px', 'margin-bottom': '20px', 'border-bottom': '1px dashed #3d3d3d'}">
             <h2 [ngStyle]="{'font-size': '32px', 'font-weight': '600', 'text-align': 'center'}">{{ indicadoSelecionado.valor_comissao | currency }}</h2>
             <h2 [ngStyle]="{'font-size': '14px', 'text-align': 'center'}">{{ 'geral.saldo' | translate }} {{ translateStatus(indicadoSelecionado.status) | lowercase }}</h2>
@@ -268,7 +268,7 @@
                     <p class="vertical-progress-info">
                         <span>{{ 'indique_ganhe.saldoLiberado' | translate }}</span>
                         <span *ngIf="indicadoSelecionado.status == 'pago'">
-                            {{ formatDateModal(indicadoSelecionado.indicado_em.data_hora) }}
+                            {{ formatDateModal(indicadoSelecionado.comissionado_em.data_hora) }}
                         </span>
                         <span *ngIf="indicadoSelecionado.status == 'pago'">{{ 'indique_ganhe.seuSaldoDepositado' | translate }}</span>
                         <span 
@@ -285,7 +285,7 @@
                     <p class="vertical-progress-info">
                         <span>{{ 'indique_ganhe.apostaRealizada' | translate }}</span>
                         <span *ngIf="indicadoSelecionado.status != 'anulado' && indicadoSelecionado.progresso.aposta_cumprida">
-                            {{ formatDateModal(indicadoSelecionado.indicado_em.data_hora) }}
+                            {{ formatDateModal(indicadoSelecionado.apostado_em.data_hora) }}
                         </span>
                         <span *ngIf="indicadoSelecionado.status != 'anulado' && indicadoSelecionado.progresso.aposta_cumprida">{{ 'indique_ganhe.indicadoRealizouAposta' | translate }}</span>
                     </p>
@@ -298,7 +298,7 @@
                     <p class="vertical-progress-info">
                         <span>{{ 'indique_ganhe.depositoRealizado' | translate }}</span>
                         <span *ngIf="indicadoSelecionado.status != 'anulado' && indicadoSelecionado.progresso.deposito_cumprido">
-                            {{ formatDateModal(indicadoSelecionado.indicado_em.data_hora) }}
+                            {{ formatDateModal(indicadoSelecionado.depositado_em.data_hora) }}
                         </span>
                         <span *ngIf="indicadoSelecionado.status != 'anulado' && indicadoSelecionado.progresso.deposito_cumprido">{{ 'indique_ganhe.indicadoRealizouDepsito' | translate }}</span>
                     </p>

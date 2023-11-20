@@ -235,9 +235,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             case 'pendente':
                 return "#6A6868";
             case 'anulado':
-                return "#FF3E32";
+                return "#E9283B";
             default:
-                return "#FF3E32";
+                return "#6A6868";
         }
     }
 

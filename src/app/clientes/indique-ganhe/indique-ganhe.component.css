@@ -318,7 +318,8 @@
 }
 
 .vertical-progress-item::after {
-    content: counter(list);
+    font-family: "FontAwesome";
+    content: "\f00c";
     position: absolute;
     top: 0;
     left: -2.5rem;
