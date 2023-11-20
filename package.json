@@ -275,7 +275,7 @@
         "winvegas.bet": "gulp winvegas.bet",
         "esportemix.com": "gulp esportemix.com",
         "pbpixbet.com": "gulp pbpixbet.com",
-        "apostatotal.bet": "gulp apostatotal.bet",
+        "deupixbet.com": "gulp deupixbet.com",
         "veteranobet.com": "gulp veteranobet.com",
         "betfy.club": "gulp betfy.club",
         "gamebet85.net": "gulp gamebet85.net",
@@ -300,7 +300,7 @@
         "federalsports.bet": "gulp federalsports.bet",
         "goldvegas.net": "gulp goldvegas.net",
         "valebet.bet": "gulp valebet.bet",
-        "torcidabet.com.br": "gulp torcidabet.com.br",
+        "wavebet.io": "gulp wavebet.io",
         "bet24horas.com": "gulp bet24horas.com",
         "pixstars.bet": "gulp pixstars.bet",
         "eskybet.com": "gulp eskybet.com",
@@ -375,7 +375,8 @@
         "lidersport.bet": "gulp lidersport.bet",
         "betrapida.com": "gulp betrapida.com",
         "bruxo888.com": "gulp bruxo888.com",
-        "bosscassino.bet": "gulp bosscassino.bet"
+        "bosscassino.bet": "gulp bosscassino.bet",
+        "x1esporte.com": "gulp x1esporte.com"
     },
     "private": true,
     "dependencies": {
