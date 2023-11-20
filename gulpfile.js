@@ -2870,11 +2870,11 @@ gulp.task('valebet.bet', function (done) {
     });
 });
 
-gulp.task('torcidabet.com.br', function (done) {
+gulp.task('wavebet.io', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
-        host: "torcidabet.com.br",
-        banca: "TORCIDA BET",
+        server: "front1.wee.bet",
+        host: "wavebet.io",
+        banca: "Wave Bet",
         styles: "",
     });
 });
@@ -3581,6 +3581,15 @@ gulp.task('bosscassino.bet', function (done) {
         server: "front1.wee.bet",
         host: "bosscassino.bet",
         banca: "BOSS CASSINO",
+        styles: "",
+    });
+});
+
+gulp.task('x1esporte.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "x1esporte.com",
+        banca: "X1 Esporte",
         styles: "",
     });
 });
