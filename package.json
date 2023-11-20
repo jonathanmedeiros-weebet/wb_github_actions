@@ -375,7 +375,8 @@
         "lidersport.bet": "gulp lidersport.bet",
         "betrapida.com": "gulp betrapida.com",
         "bruxo888.com": "gulp bruxo888.com",
-        "bosscassino.bet": "gulp bosscassino.bet"
+        "bosscassino.bet": "gulp bosscassino.bet",
+        "x1esporte.com": "gulp x1esporte.com"
     },
     "private": true,
     "dependencies": {

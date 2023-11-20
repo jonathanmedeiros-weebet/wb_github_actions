@@ -3584,3 +3584,12 @@ gulp.task('bosscassino.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('x1esporte.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "x1esporte.com",
+        banca: "X1 Esporte",
+        styles: "",
+    });
+});
