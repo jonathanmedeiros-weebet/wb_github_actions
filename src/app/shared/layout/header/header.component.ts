@@ -457,7 +457,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeMenuCassino() {
-        if (this.router.url.includes('/casino/c') && this.router.url != '/casino/c/wall/live') {
+        if (this.router.url.includes('/casino/c/')) {
+            return 'active';
+        }
+
+        return '';
+    }
+
+    activeMenuCassinoLive() {
+        if (this.router.url.includes('/casino/cl/')) {
             return 'active';
         }
 
