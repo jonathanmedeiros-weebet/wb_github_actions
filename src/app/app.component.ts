@@ -6,6 +6,7 @@ import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {CadastroModalComponent, ValidarEmailModalComponent} from './shared/layout/modals';
+import {LoginModalComponent} from './shared/layout/modals';
 
 import {TranslateService} from '@ngx-translate/core';
 
@@ -72,6 +73,17 @@ export class AppComponent implements OnInit {
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
             });
+            this.router.navigate(['esportes/futebol']);
+        }
+        if (this.router.url.includes('/login')) {
+
+            this.modalService.open(LoginModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });            
+
             this.router.navigate(['esportes/futebol']);
         }
 

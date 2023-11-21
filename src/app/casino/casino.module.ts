@@ -11,11 +11,13 @@ import { LiveComponent } from './live/live.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxPaginationModule} from "ngx-pagination";
+import {WallLiveComponent} from "./wall-live/wall-live.component";
 
 
 @NgModule({
   declarations: [
     WallComponent,
+      WallLiveComponent,
     GameviewComponent,
     CasinoWrapperComponent,
     LiveComponent
