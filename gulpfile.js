@@ -733,15 +733,6 @@ gulp.task('maranhaobets.net', function (done) {
     });
 });
 
-gulp.task('ligavip.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "ligavip.wee.bet",
-        banca: "LIGA VIP",
-        styles: "",
-    });
-});
-
 gulp.task('aeapostas.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2813,15 +2804,6 @@ gulp.task('federalsports.bet', function (done) {
     });
 });
 
-gulp.task('goldvegas.net', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "goldvegas.net",
-        banca: "GOLD VEGAS",
-        styles: "",
-    });
-});
-
 gulp.task('valebet.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -3002,15 +2984,6 @@ gulp.task('olimpico.bet', function (done) {
     });
 });
 
-gulp.task('vipouro.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "vipouro.com",
-        banca: "VIP OURO",
-        styles: "",
-    });
-});
-
 gulp.task('crewbet.io', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -3108,15 +3081,6 @@ gulp.task('ciaaonline.com', function (done) {
         server: "front3.wee.bet",
         host: "ciaaonline.com",
         banca: "CIA A ONLINE",
-        styles: "",
-    });
-});
-
-gulp.task('pgbet.net.br', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "pgbet.net.br",
-        banca: "PG BET",
         styles: "",
     });
 });
