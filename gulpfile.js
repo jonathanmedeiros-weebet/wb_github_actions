@@ -2620,26 +2620,6 @@ gulp.task('betfy.club', function (done) {
     });
 });
 
-gulp.task('gamebet85.net', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "gamebet85.net",
-        banca: "GAME BET 85",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T85LHPW9');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T85LHPW9'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
-gulp.task('suabetonline.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "suabetonline.com",
-        banca: "SUA BET ONLINE",
-        styles: "",
-    });
-});
-
 gulp.task('condecassinos.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
