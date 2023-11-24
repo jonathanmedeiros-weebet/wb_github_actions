@@ -1,4 +1,4 @@
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import * as moment from 'moment';
 
 export class FormValidations {
@@ -72,6 +72,20 @@ export class FormValidations {
         return null;
     }
 
+    static loginValidator(control: UntypedFormControl) {
+        const login = control.value;
+
+        if (typeof login !== 'string') {
+            return { nomeDeUsuarioInvalido: true };
+        }
+
+        if (!login.match(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)) {
+            return { nomeDeUsuarioInvalido: true };
+        }
+
+        return null;
+    }
+
     static cpfValidator(control: UntypedFormControl)  {
         let cpf = control.value;
         if (typeof cpf !== 'string') {
@@ -107,7 +121,7 @@ export class FormValidations {
             'maxlength': `${fieldName} pode ter no máximo ${validatorValue.requiredLength} caracteres.`,
             'cepInvalido': 'CEP inválido.',
             'emailInvalido': 'Email já cadastrado!',
-            'email': 'Email Inválido´!',
+            'email': 'Email Inválido!',
             'equalsTo': 'Campos não são iguais',
             'pattern': 'Campo inválido',
             'matchPin': 'Confirmação diferente do PIN.',
@@ -115,7 +129,8 @@ export class FormValidations {
             'MatchPassword': 'Senhas diferentes. Digite a mesma senha em ambos os campos de senha.',
             'dataNascimentoInvalida': 'Data de Nascimento Inválida.',
             'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.',
-            'cpfInvalido': 'CPF Inválido!'
+            'cpfInvalido': 'CPF Inválido!',
+            'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)'
         };
         return config[validatorName];
     }
