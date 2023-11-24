@@ -99,7 +99,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
-            if(params.btag) {
+            if (params.btag) {
                 localStorage.setItem('btag', params.btag);
             } else {
                 const storagedBtag = localStorage.getItem('btag');
@@ -137,9 +137,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                                 googleIdToken: user.idToken,
                             });
 
-                            this.form.controls['usuario'].patchValue('');
-                            this.form.controls['usuario'].clearValidators();
-                            this.form.controls['usuario'].updateValueAndValidity();
+                            this.clearValidators();
                         }
 
                         this.user = user;
@@ -150,14 +148,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     createForm() {
         this.form = this.fb.group({
-            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             usuario: [null, [
                 Validators.required,
                 Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
             ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null],
-            senha_confirmacao: [null],
+            senha: [null, [Validators.required, Validators.minLength(6)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
             nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
@@ -201,6 +199,31 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.unsub$.complete();
     }
 
+    clearValidators() {
+        this.form.controls['usuario'].patchValue('');
+        this.form.controls['usuario'].clearValidators();
+        this.form.controls['usuario'].updateValueAndValidity();
+        this.form.controls['senha'].patchValue('');
+        this.form.controls['senha'].clearValidators();
+        this.form.controls['senha'].updateValueAndValidity();
+        this.form.controls['confirmacao_senha'].patchValue('');
+        this.form.controls['confirmacao_senha'].clearValidators();
+        this.form.controls['confirmacao_senha'].updateValueAndValidity();
+    }
+
+    restoreValidators() {
+        this.form.controls['usuario'].setValidators([[
+            Validators.required,
+            Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+        ], this.validarLoginUnico.bind(this)]);
+        this.form.controls['senha'].setValidators([Validators.required, Validators.minLength(6)]);
+        this.form.controls['confirmacao_senha'].setValidators([Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]);
+
+        this.form.controls['usuario'].updateValueAndValidity();
+        this.form.controls['senha'].updateValueAndValidity();
+        this.form.controls['confirmacao_senha'].updateValueAndValidity();
+    }
+
     submit() {
         if (this.menorDeIdade) {
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
@@ -218,7 +241,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
                     this.activeModal.dismiss();
                     localStorage.removeItem('codigoAfiliado');
-                    if(this.validacaoEmailObrigatoria) {
+                    if (this.validacaoEmailObrigatoria) {
                         this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
                         this.modalService.open(ValidarEmailModalComponent, {
                             ariaLabelledBy: 'modal-basic-title',
@@ -266,11 +289,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
         this.formSocial = false;
 
-        this.form.controls['usuario'].setValidators([[
-            Validators.required,
-            Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
-        ], this.validarLoginUnico.bind(this)]);
-        this.form.controls['usuario'].updateValueAndValidity();
+        this.restoreValidators();
 
         this.form.patchValue({
             googleId: '',
