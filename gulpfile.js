@@ -3509,3 +3509,12 @@ gulp.task('clarabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('spy.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "spy.bet",
+        banca: "SPY.BET",
+        styles: "",
+    });
+});
