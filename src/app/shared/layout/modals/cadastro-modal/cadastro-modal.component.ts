@@ -128,14 +128,19 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                        if(user) {
+                    console.log('chegou aqui');
+                        if (user) {
                             this.formSocial = true;
                             this.form.patchValue({
                                 nome: user.name,
                                 email: user.email,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
-                            })
+                            });
+
+                            this.form.controls['usuario'].patchValue('');
+                            this.form.controls['usuario'].clearValidators();
+                            this.form.controls['usuario'].updateValueAndValidity();
                         }
 
                         this.user = user;
@@ -147,7 +152,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-            usuario: [null],
+            usuario: [null, [
+                Validators.required,
+                Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+            ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null],
             senha_confirmacao: [null],
@@ -159,8 +167,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             captcha: [null, [Validators.required]],
             check_1: [''],
             check_2: [''],
-            googleId:[''],
-            googleIdToken:[''],
+            googleId: [''],
+            googleIdToken: [''],
             btag: [this.route.snapshot.queryParams.btag],
             refId: [this.route.snapshot.queryParams.refId],
             dadosCriptografados: [null]
@@ -171,13 +179,19 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         clearTimeout(this.debouncer);
         return new Promise(resolve => {
             this.debouncer = setTimeout(() => {
-                this.clientesService.verificarLogin(control.value).subscribe((res) => {
-                    if (res) {
-                        resolve(null);
-                    }
-                }, () => {
-                    resolve({'loginEmUso': true});
-                });
+                if (this.form.get('googleIdToken').value) {
+                    resolve(null);
+                }
+
+                if (control.value) {
+                    this.clientesService.verificarLogin(control.value).subscribe((res) => {
+                        if (res) {
+                            resolve(null);
+                        }
+                    }, () => {
+                        resolve({'loginEmUso': true});
+                    });
+                }
             }, 1000);
         });
     }
@@ -252,6 +266,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.socialAuth.signOut();
         }
         this.formSocial = false;
+
+        this.form.controls['usuario'].setValidators([[
+            Validators.required,
+            Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+        ], this.validarLoginUnico.bind(this)]);
+        this.form.controls['usuario'].updateValueAndValidity();
+
         this.form.patchValue({
             googleId: '',
             googleIdToken: '',
@@ -261,7 +282,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validarCpf() {
         const { cpf } = this.form.value;
 
-        if(this.autoPreenchimento) {
+        if (this.autoPreenchimento) {
             this.clientesService.validarCpf(cpf).subscribe(
                 res => {
                     if (res.validarCpfAtivado) {
