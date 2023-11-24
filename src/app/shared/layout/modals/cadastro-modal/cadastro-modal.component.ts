@@ -151,7 +151,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             usuario: [null, [
                 Validators.required,
-                Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+                FormValidations.loginValidator
             ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(6)]],
@@ -206,22 +206,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form.controls['senha'].patchValue('');
         this.form.controls['senha'].clearValidators();
         this.form.controls['senha'].updateValueAndValidity();
-        this.form.controls['confirmacao_senha'].patchValue('');
-        this.form.controls['confirmacao_senha'].clearValidators();
-        this.form.controls['confirmacao_senha'].updateValueAndValidity();
+        this.form.controls['senha_confirmacao'].patchValue('');
+        this.form.controls['senha_confirmacao'].clearValidators();
+        this.form.controls['senha_confirmacao'].updateValueAndValidity();
     }
 
     restoreValidators() {
         this.form.controls['usuario'].setValidators([[
             Validators.required,
-            Validators.pattern(/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/)
+            FormValidations.loginValidator
         ], this.validarLoginUnico.bind(this)]);
         this.form.controls['senha'].setValidators([Validators.required, Validators.minLength(6)]);
-        this.form.controls['confirmacao_senha'].setValidators([Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]);
+        this.form.controls['senha_confirmacao'].setValidators([Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]);
 
-        this.form.controls['usuario'].updateValueAndValidity();
-        this.form.controls['senha'].updateValueAndValidity();
-        this.form.controls['confirmacao_senha'].updateValueAndValidity();
+        this.form.updateValueAndValidity();
     }
 
     submit() {
@@ -286,10 +284,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     clearSocialForm() {
         if (this.formSocial) {
             this.socialAuth.signOut();
+            this.restoreValidators();
         }
-        this.formSocial = false;
 
-        this.restoreValidators();
+        this.formSocial = false;
 
         this.form.patchValue({
             googleId: '',
