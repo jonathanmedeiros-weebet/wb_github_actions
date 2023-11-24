@@ -128,7 +128,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                    console.log('chegou aqui');
                         if (user) {
                             this.formSocial = true;
                             this.form.patchValue({
