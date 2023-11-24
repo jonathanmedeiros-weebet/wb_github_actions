@@ -3500,3 +3500,12 @@ gulp.task('x1esporte.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('clarabet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "clarabet.com",
+        banca: "CLARA BET",
+        styles: "",
+    });
+});
