@@ -11,7 +11,7 @@
             <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
         </div>
     </div>
-    <div class="game-frame">
+    <div *ngIf="!bloquearGame" class="game-frame">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <ng-container *ngIf="mobileScreen">
             <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
@@ -20,6 +20,9 @@
             <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
         </ng-container>
 
+    </div>
+    <div *ngIf="bloquearGame" class="game-frame">
+        <span>JOGO BLOQUEADO</span>
     </div>
 </div>
 

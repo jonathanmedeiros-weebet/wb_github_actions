@@ -23,6 +23,12 @@
                             ). Para receber seu Bônus de Primeiro Depósito para apostas na modalidade {{promocao.bonusModalidade}}
                             , você deve escolher este bônus no momento em que fizer seu Primeiro Depósito.
                         </li>
+                        <ng-container *ngIf="promocao.bonusModalidade === 'cassino'">
+                            <li>
+                            Ao escolher o bônus na modalidade cassino, todo o valor depositado será transformado em saldo bônus. Por exemplo, se for realizado um depósito de R$10 e o valor a ser recebido
+                                de bônus for R$10 então seu saldo bônus será R$20 e seu saldo real será R$0
+                            </li>
+                        </ng-container>
                         <li>
                         O bônus será ativado diretamente na sua conta de cliente após o primeiro depósito. Para usar seu bônus de primeiro depósito de Apostas na modalidade {{promocao.bonusModalidade}}
                             , você deve cumprir as condições estabelecidas nos seguintes pontos:

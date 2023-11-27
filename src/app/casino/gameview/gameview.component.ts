@@ -26,6 +26,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     isCliente;
     sessionId = '';
+    bloquearGame;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -73,6 +74,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor)
             .subscribe(
                 response => {
+                    this.bloquearGame = response.bloquearGame;
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
                     this.gameName = response.gameName || "";
