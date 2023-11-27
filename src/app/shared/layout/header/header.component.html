@@ -20,9 +20,9 @@
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || (isCliente))">
     <div class="indique-ganhe-card-content">
         {{'geral.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
-        <a (click)="isConnected && redirectIndiqueGanhe()" 
-            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()" 
-            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()" 
+        <a (click)="isConnected && redirectIndiqueGanhe()"
+            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"
+            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()"
             class="btn btn-indique-ganhe-card"
         >{{'geral.indicar' | translate}}</a>
     </div>
@@ -570,7 +570,7 @@
             </a>
         </div>
         <div class="category" *ngIf="cassinoAtivo">
-            <a [routerLink]="['/casino/c/wall/live']" routerLinkActive="active">
+            <a [ngClass]="activeMenuCassinoLive()" [routerLink]="['/casino/cl']">
                 <span>{{'menu.cassino-aovivo' | translate}}</span>
             </a>
         </div>
