@@ -356,9 +356,29 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'roleta',
+                name: 'Roleta',
+                link: '/casino/cl/wall-live/roleta',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
                 id: 'blackjack',
                 name: 'Blackjack',
                 link: '/casino/cl/wall-live/blackjack',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino-live',
+                svgIcon: true,
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'gameshow',
+                name: 'Game Show',
+                link: '/casino/cl/wall-live/gameshow',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
@@ -379,26 +399,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 id: 'poker',
                 name: 'Poker',
                 link: '/casino/cl/wall-live/poker',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino-live',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'gameshow',
-                name: 'Game Show',
-                link: '/casino/cl/wall-live/gameshow',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino-live',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'roleta',
-                name: 'Roleta',
-                link: '/casino/cl/wall-live/roleta',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
