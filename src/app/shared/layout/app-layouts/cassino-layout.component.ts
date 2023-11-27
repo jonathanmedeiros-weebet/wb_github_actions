@@ -14,12 +14,4 @@ export class CassinoLayoutComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  showSubmenu() {
-    if (this.router.url == '/casino/c/wall/live') {
-      return false;
-    }
-
-    return true;
-  }
 }
