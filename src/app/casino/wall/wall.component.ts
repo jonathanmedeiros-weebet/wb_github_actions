@@ -81,9 +81,9 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.casinoApi.getGamesList().subscribe(response => {
             this.gamesCassino = response.gameList.filter(function (game) {
                 return game.dataType !== 'VSB';
-            });;
+            });
             this.cassinoFornecedores = response.fornecedores;
-            this.gamesDestaque = this.filterDestaques(this.gamesCassino, 'populares');
+            this.gamesDestaque = response.populares;
             this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
             this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
             this.gamesRaspadinha = this.filterDestaques(this.gamesCassino, 'scratchcard');
@@ -275,17 +275,17 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gamesCassinoFiltrados =  this.gameList.filter(jogo => {
                 if(this.term && this.termFornecedor){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())  && jogo.modalidade != 'populares') {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
                         return true;
                     }
                     return false;
                 }else if(this.term){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.modalidade != 'populares') {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
                         return true;
                     }
                     return false;
                 }else{
-                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase()) && jogo.modalidade != 'populares') {
+                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
                         return true;
                     }
                     return false;
@@ -366,7 +366,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
     filterModalidades(games, modalidade) {
         return games.filter(function (game) {
-            return game.category === modalidade && game.modalidade != 'populares';
+            return game.category === modalidade;
         });
     }
 
