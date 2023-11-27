@@ -369,8 +369,8 @@
         "x1esporte.com": "gulp x1esporte.com",
         "clarabet.com": "gulp clarabet.com",
         "spy.bet": "gulp spy.bet",
-        "betagora.io": "gullp betagora.io",
-        "foxplay.bet": "gullp foxplay.bet"
+        "betagora.io": "gulp betagora.io",
+        "foxplay.bet": "gulp foxplay.bet"
     },
     "private": true,
     "dependencies": {
