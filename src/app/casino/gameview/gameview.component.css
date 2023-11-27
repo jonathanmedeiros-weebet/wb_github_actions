@@ -22,6 +22,17 @@
     margin: 20px;
 }
 
+.game-button-play {
+    margin: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    color: var(--header);
+    background-color: var(--highlight);
+    width: 150px;
+    height: 42px;
+}
+
 iframe{
     width: 100%;
     border:none;
