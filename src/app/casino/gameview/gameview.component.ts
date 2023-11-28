@@ -78,9 +78,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
             .subscribe(
                 response => {
                     this.bloquearGame = response.bloquearGame;
-                    this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                    this.sessionId = response.sessionId;
-                    this.gameName = response.gameName || "";
+                    if(!this.bloquearGame){
+                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        this.sessionId = response.sessionId;
+                        this.gameName = response.gameName || "";
+                    }
+
                 },
                 error => {
                     this.handleError(error);
