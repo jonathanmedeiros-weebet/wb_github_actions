@@ -362,7 +362,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/roleta.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -372,7 +372,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/blackjack.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -382,7 +382,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/game-show.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -392,7 +392,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/baccarat.svg',
                 active: this.paramsService.getOpcoes().casino
             },
             {
@@ -402,7 +402,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
                 svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
+                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/poker.svg',
                 active: this.paramsService.getOpcoes().casino
             },
         ];
