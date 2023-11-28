@@ -20,6 +20,7 @@ import {Router} from '@angular/router';
 })
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
     submitting;
+    disableButtom = false;
     showLoading = true;
     cadastroCompleto = true;
     rotaCompletarCadastro: string;
@@ -77,7 +78,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.auth.getPosicaoFinanceira()
             .subscribe(
-                posicaoFinanceira => this.saldo = posicaoFinanceira.saldo,
+                posicaoFinanceira => {
+                    this.saldo = posicaoFinanceira.saldo;
+                    if(posicaoFinanceira.saldo == 0){
+                        this.disableButtom = true;
+                    }
+                },
                 error => {
                     if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();
