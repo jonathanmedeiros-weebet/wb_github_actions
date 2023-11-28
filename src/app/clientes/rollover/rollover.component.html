@@ -50,8 +50,7 @@
                             <th style="width:20%">Progresso</th>
                             <th class="custom-td">Valor Gasto</th>
                             <th class="custom-td">Valor Meta</th>
-                            <th class="custom-td">Cotação Min. (Aposta Simples)</th>
-                            <th class="custom-td">Cotação Min. (Aposta Múltipla)</th>
+                            <th class="custom-td">Cotação Min. Aposta</th>
                             <th class="custom-td">Modalidade</th>
                             <th class="custom-td">Tipo</th>
                             <th class="custom-td">Vencimento</th>
@@ -62,7 +61,7 @@
                         <ng-container *ngFor="let rollover of rollovers">
                             <tr>
                                 <td>
-                                    <i style="color:orange; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                    <i style="color:orange; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"ú
                                     *ngIf="rollover.status === 'ativo'"></i>
                                     <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
                                     *ngIf="rollover.status === 'completado'"></i>
@@ -96,13 +95,10 @@
                                     {{rollover.valorGasto | currency}}
                                 </td>
                                 <td class="custom-td">
-                                    {{rollover.valorMeta | currency}}
+                                    {{rollover.valorMeta | currency}}ú
                                 </td>
                                 <td class="custom-td">
-                                    {{rollover.cotacaoMinSimples}}
-                                </td>
-                                <td class="custom-td">
-                                    {{rollover.cotacaoMinMultipla}}
+                                    {{rollover.cotacaoMinSimples}} (Simples) / {{rollover.cotacaoMinMultipla}} (Múltipla)
                                 </td>
                                 <td class="custom-td">
                                     {{rollover.modalidade}}
