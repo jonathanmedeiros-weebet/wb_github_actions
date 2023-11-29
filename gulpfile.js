@@ -3537,3 +3537,12 @@ gulp.task('foxplay.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('baraocassino.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "baraocassino.com",
+        banca: "BARÃO CASSINO",
+        styles: "",
+    });
+});
