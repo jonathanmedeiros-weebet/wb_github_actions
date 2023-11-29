@@ -26,6 +26,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     isCliente;
     sessionId = '';
+    isMobile = 0;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -41,6 +42,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        
+        if (window.innerWidth <= 1024) {
+            this.isMobile = 1;
+        }
+
         this.elem = document.documentElement;
         this.mobileScreen = window.innerWidth <= 1024;
         this.fullscreen = false;
@@ -70,7 +76,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     loadGame() {
-        this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor)
+        this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);

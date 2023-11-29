@@ -58,7 +58,7 @@ export class CasinoApiService {
     }
 
 
-    getGameUrl(gameId, gameMode, $gameFornecedor) {
+    getGameUrl(gameId, gameMode, $gameFornecedor, isMobile) {
         let requestOptions;
         let queryParams = {};
         queryParams['token'] = localStorage.getItem('tokenCassino');
@@ -69,6 +69,8 @@ export class CasinoApiService {
         queryParams['cashierUr'] = `https://${config.SHARED_URL}/clientes/deposito`;
         queryParams['lobbyUrl'] = `https://${config.SHARED_URL}/casino/wall`;
         queryParams['fornecedor'] = $gameFornecedor;
+        queryParams['isMobile'] = isMobile;
+
 
         if (queryParams) {
             requestOptions = this.header.getRequestOptions(true, queryParams);
