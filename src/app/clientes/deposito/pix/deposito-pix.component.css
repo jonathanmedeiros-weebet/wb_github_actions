@@ -1,7 +1,11 @@
 .btn-close {
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: -6px;
+    right: 0px;
+}
+
+.close-x{
+    font-size: 20px;
 }
 
 .promocao-tipo{
@@ -195,6 +199,8 @@ label.label-tempo {
         color: var(--foreground-game);
         text-align: left;
     }
+
+
 
     .group-buttons {
         width: 100%;
