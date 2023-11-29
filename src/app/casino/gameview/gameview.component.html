@@ -1,7 +1,12 @@
 <div class="game-view" [ngClass]="{'desktop-fullscreen':fullscreen && !mobileScreen}">
     <div class="header-game-view">
         <div class="game-name">
-            <span>{{ gameName }}</span>
+            <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
+                <span> Cassino Galaxsys </span>
+            </ng-container>
+            <ng-template #nomeOficialGame>
+                <span>{{ gameName }}</span>
+            </ng-template>
         </div>
         <div class="buttons-game-view">
             <ng-container *ngIf="!isAppMobile()">
