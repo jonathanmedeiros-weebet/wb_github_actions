@@ -81,7 +81,8 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
 
         this.queryParams = {
             dataInicial: this.formatDate(this.fromDate, 'us'),
-            dataFinal: this.formatDate(this.toDate, 'us')
+            dataFinal: this.formatDate(this.toDate, 'us'),
+            status: ''
         }
 
         this.selectedDate = this.formatDate(this.fromDate) + ' - ' + this.formatDate(this.toDate);
@@ -292,17 +293,17 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     onDateSelection(date: NgbDate, datepicker: any) {
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
-            this.queryParams.dataInicial = this.formatDate(date, 'us');
+            this.form.value.dataInicial = this.formatDate(date, 'us');
         } else if (this.fromDate && !this.toDate && date && (date.after(this.fromDate) || date.equals(this.fromDate))) {
             this.toDate = date;
-            this.queryParams.dataFinal = this.formatDate(date, 'us');
+            this.form.value.dataFinal = this.formatDate(date, 'us');
             this.selectedDate = this.formatDate(this.fromDate) + " - " + this.formatDate(date);
             datepicker.close();
         } else {
             this.toDate = null;
-            this.queryParams.dataFinal = null;
+            this.form.value.dataFinal = null;
             this.fromDate = date;
-            this.queryParams.dataInicial = this.formatDate(date, 'us');
+            this.form.value.dataInicial = this.formatDate(date, 'us');
         }
     }
 

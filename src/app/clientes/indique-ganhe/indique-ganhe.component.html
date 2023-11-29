@@ -60,9 +60,9 @@
                             </div>
                         </ng-container>
                         <ng-container *ngIf="mobileScreen">
-                            <button type="button" class="btn btn-custom btn-block" (click)="compartilharLink()">
+                            <a class="btn btn-custom btn-block" (click)="compartilharLink()">
                                 <i class="fa fa-share-alt"></i>&nbsp;&nbsp;{{'geral.compartilhar' | translate}} Link
-                            </button>
+                            </a>
                         </ng-container>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                             <tr>
                                 <th width="50"></th>
                                 <th width="200">{{'indique_ganhe.indicacoes' | translate}}</th>
-                                <th width="200">{{'indique_ganhe.dataIndicacao' | translate}}</th>
+                                <th width="200">{{'indique_ganhe.dataDeCadastro' | translate}}</th>
                                 <th width="200">{{'indique_ganhe.progresso' | translate}}</th>
                                 <th width="100">{{'geral.status' | translate}} </th>
                                 <th width="100" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
