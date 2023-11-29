@@ -79,8 +79,7 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
         this.casinoApi.getGamesList(true).subscribe(response => {
             this.gamesCassino = response.gameList;
             this.cassinoFornecedores = response.fornecedores;
-            this.gamesDestaque = this.filterDestaques(this.gamesCassino, 'populares');
-            console.log(this.gamesDestaque);
+            this.gamesDestaque = response.populares;
             this.gamesBlackjack = this.filterDestaques(this.gamesCassino, 'blackjack');
             this.gamesBaccarat = this.filterDestaques(this.gamesCassino, 'baccarat');
             this.gamesPoker = this.filterDestaques(this.gamesCassino, 'poker');
