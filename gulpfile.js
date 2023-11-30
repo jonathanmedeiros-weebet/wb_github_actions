@@ -3546,3 +3546,12 @@ gulp.task('baraocassino.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brotanabet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "brotanabet.com",
+        banca: "BROTA NA NET",
+        styles: "",
+    });
+});
