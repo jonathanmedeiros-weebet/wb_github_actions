@@ -38,6 +38,7 @@ import {
     RelatorioService,
     SorteioService
 } from '../../services';
+import { IndiqueGanheService } from '../services/clientes/indique-ganhe.service';
 import {
     ApostaEncerramentoModalComponent,
     ApostaModalComponent,
@@ -205,6 +206,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         RelatorioService,
         JogoService,
         AcumuladaoService,
+        IndiqueGanheService,
         {
             provide: RECAPTCHA_SETTINGS,
 
