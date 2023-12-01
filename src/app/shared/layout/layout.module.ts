@@ -64,7 +64,8 @@ import {
     TabelaModalComponent,
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
-    RegrasBonusModalComponent
+    RegrasBonusModalComponent,
+    JogosLiberadosBonusModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -142,6 +143,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
         RegrasBonusModalComponent,
+        JogosLiberadosBonusModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,

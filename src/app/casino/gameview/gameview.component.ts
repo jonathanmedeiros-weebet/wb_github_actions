@@ -8,6 +8,7 @@ import {AuthService, MenuFooterService, MessageService} from '../../services';
 import {interval} from 'rxjs';
 import {RolloverComponent} from "../../clientes/rollover/rollover.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 
 
 @Component({
@@ -168,5 +169,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     abrirRollovers() {
         this.modalService.open(RolloverComponent);
+    }
+
+    exibirJogosLiberadosBonus(){
+        this.location.back();
+        this.modalService.open(JogosLiberadosBonusModalComponent, {
+            centered: true,
+            size: 'xl',
+        });
     }
 }
