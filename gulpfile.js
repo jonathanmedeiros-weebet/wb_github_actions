@@ -3555,3 +3555,12 @@ gulp.task('brotanabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('caminhobet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "caminhobet.com",
+        banca: "CAMINHO BET",
+        styles: "",
+    });
+});

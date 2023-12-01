@@ -372,7 +372,8 @@
         "betagora.io": "gulp betagora.io",
         "foxplay.bet": "gulp foxplay.bet",
         "baraocassino.com": "gulp baraocassino.com",
-        "brotanabet.com": "gulp brotanabet.com"
+        "brotanabet.com": "gulp brotanabet.com",
+        "caminhobet.com": "gulp caminhobet.com"
     },
     "private": true,
     "dependencies": {
