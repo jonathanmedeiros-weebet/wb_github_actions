@@ -1387,15 +1387,6 @@ gulp.task('betmax.wee.bet', function (done) {
     });
 });
 
-gulp.task("prowin.io", function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "prowin.io",
-        banca: "PROWIN",
-        styles: "",
-    });
-});
-
 gulp.task('easybets.club', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -3217,15 +3208,6 @@ gulp.task('mczbet.com', function (done) {
         host: "mczbet.com",
         banca: "MCZ BET",
         styles: ""
-    });
-});
-
-gulp.task('vamobet.io', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "vamobet.io",
-        banca: "VAMO BET",
-        styles: "",
     });
 });
 
