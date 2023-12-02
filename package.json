@@ -148,7 +148,6 @@
         "cr7bet.online": "gulp cr7bet.online",
         "supremodasorte.wee.bet": "gulp supremodasorte.wee.bet",
         "betmax.wee.bet": "gulp betmax.wee.bet",
-        "prowin.io": "gulp prowin.io",
         "easybets.club": "gulp easybets.club",
         "belabets.com": "gulp belabets.com",
         "apostasmax.com": "gulp apostasmax.com",
@@ -336,7 +335,6 @@
         "nortedasorte.bet": "gulp nortedasorte.bet",
         "faturabet.com": "gulp faturabet.com",
         "mczbet.com": "gulp mczbet.com",
-        "vamobet.io": "gulp vamobet.io",
         "smartbet.cash": "gulp smartbet.cash",
         "supertop3.bet": "gulp supertop3.bet",
         "r5sports.bet": "gulp r5sports.bet",
@@ -370,7 +368,10 @@
         "clarabet.com": "gulp clarabet.com",
         "spy.bet": "gulp spy.bet",
         "betagora.io": "gulp betagora.io",
-        "foxplay.bet": "gulp foxplay.bet"
+        "foxplay.bet": "gulp foxplay.bet",
+        "baraocassino.com": "gulp baraocassino.com",
+        "brotanabet.com": "gulp brotanabet.com",
+        "caminhobet.com": "gulp caminhobet.com"
     },
     "private": true,
     "dependencies": {

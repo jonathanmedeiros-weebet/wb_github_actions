@@ -1387,15 +1387,6 @@ gulp.task('betmax.wee.bet', function (done) {
     });
 });
 
-gulp.task("prowin.io", function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "prowin.io",
-        banca: "PROWIN",
-        styles: "",
-    });
-});
-
 gulp.task('easybets.club', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -3220,15 +3211,6 @@ gulp.task('mczbet.com', function (done) {
     });
 });
 
-gulp.task('vamobet.io', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "vamobet.io",
-        banca: "VAMO BET",
-        styles: "",
-    });
-});
-
 gulp.task('smartbet.cash', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -3534,6 +3516,33 @@ gulp.task('foxplay.bet', function (done) {
         server: "front1.wee.bet",
         host: "foxplay.bet",
         banca: "FOX PLAY",
+        styles: "",
+    });
+});
+
+gulp.task('baraocassino.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "baraocassino.com",
+        banca: "BARÃO CASSINO",
+        styles: "",
+    });
+});
+
+gulp.task('brotanabet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "brotanabet.com",
+        banca: "BROTA NA NET",
+        styles: "",
+    });
+});
+
+gulp.task('caminhobet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "caminhobet.com",
+        banca: "CAMINHO BET",
         styles: "",
     });
 });
