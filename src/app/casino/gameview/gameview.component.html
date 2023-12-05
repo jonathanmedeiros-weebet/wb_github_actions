@@ -11,7 +11,7 @@
             <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
         </div>
     </div>
-    <ng-container  *ngIf="!bloquearGame">
+    <ng-container>
         <div class="game-frame">
             <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
             <ng-container *ngIf="mobileScreen">
@@ -21,16 +21,6 @@
                 <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
             </ng-container>
 
-        </div>
-    </ng-container>
-    <ng-container *ngIf="bloquearGame">
-        <div  class="game-frame aviso">
-            <h2><i style="font-size: 100px; color: red" class="fa fa-exclamation-triangle fa-6" aria-hidden="true"></i></h2>
-            <h4>Atenção!! Você possui um bônus de cassino ativo, para apostar nesse jogo será necessário cancelar o bônus. </h4>
-            <div class="acoes">
-                <a (click)="exibirJogosLiberadosBonus()" class="btn btn-xs ver-bonus">Jogos Liberados</a>
-                <a [routerLink]="['/clientes/rollover']"  class="btn btn-xs ver-jogos">Ver Bônus</a>
-            </div>
         </div>
     </ng-container>
 </div>

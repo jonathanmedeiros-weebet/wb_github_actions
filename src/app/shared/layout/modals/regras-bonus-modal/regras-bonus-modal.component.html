@@ -90,6 +90,12 @@
                     <li>
                         Ao cancelar um bônus ativo, todas as apostas pendentes de resultado serão consideradas inválidas.
                     </li>
+                   <ng-container *ngIf="promocao.bonusModalidade === 'cassino'">
+                       <li>
+                           Confira a lista de jogos de cassino liberados para apostas com bônus:
+                            <a (click)="exibirJogosLiberadosBonus()" class="btn btn-xs ver-jogos">Jogos Liberados</a>
+                       </li>
+                   </ng-container>
                 </ul>
            </span>
         </ng-container>

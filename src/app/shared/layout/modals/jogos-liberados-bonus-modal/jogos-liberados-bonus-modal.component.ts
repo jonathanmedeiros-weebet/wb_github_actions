@@ -8,6 +8,7 @@ import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.servic
 import {AuthService} from "../../../services/auth/auth.service";
 import {LoginModalComponent} from "../login-modal/login-modal.component";
 import {Router} from "@angular/router";
+import {RegrasBonusModalComponent} from "../regras-bonus-modal/regras-bonus-modal.component";
 
 
 @Component({
@@ -77,7 +78,12 @@ export class JogosLiberadosBonusModalComponent implements OnInit {
         this.qtdItens += 3;
     }
 
-    fecharModal(){
+
+    voltarModalRegras(){
         this.activeModal.close();
+        this.modalService.open(RegrasBonusModalComponent, {
+            centered: true,
+            size: 'xl',
+        });
     }
 }

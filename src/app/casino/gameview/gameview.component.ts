@@ -29,7 +29,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     isCliente;
     sessionId = '';
-    bloquearGame;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -78,13 +77,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor)
             .subscribe(
                 response => {
-                    this.bloquearGame = response.bloquearGame;
-                    if(!this.bloquearGame){
-                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                        this.sessionId = response.sessionId;
-                        this.gameName = response.gameName || "";
-                    }
-
+                    this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                    this.sessionId = response.sessionId;
+                    this.gameName = response.gameName || "";
                 },
                 error => {
                     this.handleError(error);
@@ -164,14 +159,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     closeSessionGameTomHorn() {
-        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {},error => {});
+        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {
+        }, error => {
+        });
     }
 
     abrirRollovers() {
         this.modalService.open(RolloverComponent);
     }
 
-    exibirJogosLiberadosBonus(){
+    exibirJogosLiberadosBonus() {
         this.location.back();
         this.modalService.open(JogosLiberadosBonusModalComponent, {
             centered: true,
