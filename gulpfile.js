@@ -3497,7 +3497,8 @@ gulp.task('spy.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "spy.bet",
-        banca: "SPY.BET",
+        banca: "SpyBet - Cassino Online e Apostas Esportivas",
+        description: "Cassino SpyBet Oficial: Entre agora no Cassino SpyBet e comece agora mesmo a fazer as suas apostas em roletas, slots e vários outros jogos. Aproveite o nosso Super Bônus de Primeiro Depósito e se divirta!",
         styles: "",
     });
 });
@@ -3543,6 +3544,15 @@ gulp.task('caminhobet.com', function (done) {
         server: "front2.wee.bet",
         host: "caminhobet.com",
         banca: "CAMINHO BET",
+        styles: "",
+    });
+});
+
+gulp.task('dorebet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dorebet.net",
+        banca: "DORE BET",
         styles: "",
     });
 });
