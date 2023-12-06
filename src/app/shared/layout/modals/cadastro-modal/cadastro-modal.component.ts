@@ -99,7 +99,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
-            if(params.btag) {
+            if (params.btag) {
                 localStorage.setItem('btag', params.btag);
             } else {
                 const storagedBtag = localStorage.getItem('btag');
@@ -128,14 +128,16 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                        if(user) {
+                        if (user) {
                             this.formSocial = true;
                             this.form.patchValue({
                                 nome: user.name,
                                 email: user.email,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
-                            })
+                            });
+
+                            this.clearValidators();
                         }
 
                         this.user = user;
@@ -146,21 +148,24 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     createForm() {
         this.form = this.fb.group({
-            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-            usuario: [null],
+            nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
+            usuario: [null, [
+                Validators.required,
+                FormValidations.loginValidator
+            ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null],
-            senha_confirmacao: [null],
+            senha: [null, [Validators.required, Validators.minLength(6)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
             nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
-            email: [null, [Validators.required]],
+            email: [null, [Validators.required, Validators.email]],
             afiliado: [null, [Validators.maxLength(50)]],
             captcha: [null, [Validators.required]],
             check_1: [''],
             check_2: [''],
-            googleId:[''],
-            googleIdToken:[''],
+            googleId: [''],
+            googleIdToken: [''],
             btag: [this.route.snapshot.queryParams.btag],
             refId: [this.route.snapshot.queryParams.refId],
             dadosCriptografados: [null]
@@ -171,13 +176,19 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         clearTimeout(this.debouncer);
         return new Promise(resolve => {
             this.debouncer = setTimeout(() => {
-                this.clientesService.verificarLogin(control.value).subscribe((res) => {
-                    if (res) {
-                        resolve(null);
-                    }
-                }, () => {
-                    resolve({'loginEmUso': true});
-                });
+                if (this.form.get('googleIdToken').value) {
+                    resolve(null);
+                }
+
+                if (control.value) {
+                    this.clientesService.verificarLogin(control.value).subscribe((res) => {
+                        if (res) {
+                            resolve(null);
+                        }
+                    }, () => {
+                        resolve({'loginEmUso': true});
+                    });
+                }
             }, 1000);
         });
     }
@@ -186,6 +197,29 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    clearValidators() {
+        this.form.controls['usuario'].patchValue('');
+        this.form.controls['usuario'].clearValidators();
+        this.form.controls['usuario'].updateValueAndValidity();
+        this.form.controls['senha'].patchValue('');
+        this.form.controls['senha'].clearValidators();
+        this.form.controls['senha'].updateValueAndValidity();
+        this.form.controls['senha_confirmacao'].patchValue('');
+        this.form.controls['senha_confirmacao'].clearValidators();
+        this.form.controls['senha_confirmacao'].updateValueAndValidity();
+    }
+
+    restoreValidators() {
+        this.form.controls['usuario'].setValidators([[
+            Validators.required,
+            FormValidations.loginValidator
+        ], this.validarLoginUnico.bind(this)]);
+        this.form.controls['senha'].setValidators([Validators.required, Validators.minLength(6)]);
+        this.form.controls['senha_confirmacao'].setValidators([Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]);
+
+        this.form.updateValueAndValidity();
     }
 
     submit() {
@@ -206,20 +240,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     this.activeModal.dismiss();
                     localStorage.removeItem('codigoAfiliado');
                     if(this.validacaoEmailObrigatoria) {
+                        localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
                         this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                        this.modalService.open(ValidarEmailModalComponent, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true,
-                            backdrop: 'static'
+                        let nome = values.nome.split(" ")[0];
+                        this.router.navigate(
+                            ['/welcome'],
+                            { queryParams: { nomeCliente: nome, valid: true }
                         });
                     } else {
-                        this.modalService.open(this.ativacaoCadastroModal, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true
-                            }
-                        );
+                        localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
+                        let nome = values.nome.split(" ")[0];
+                        this.router.navigate(
+                            ['/welcome'],
+                            { queryParams: { nomeCliente: nome, valid: false }
+                        });
                     }
                 },
                 error => {
@@ -250,8 +284,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     clearSocialForm() {
         if (this.formSocial) {
             this.socialAuth.signOut();
+            this.restoreValidators();
         }
+
         this.formSocial = false;
+
         this.form.patchValue({
             googleId: '',
             googleIdToken: '',
@@ -261,7 +298,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validarCpf() {
         const { cpf } = this.form.value;
 
-        if(this.autoPreenchimento) {
+        if (this.autoPreenchimento) {
             this.clientesService.validarCpf(cpf).subscribe(
                 res => {
                     if (res.validarCpfAtivado) {

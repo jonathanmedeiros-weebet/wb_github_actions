@@ -29,6 +29,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     regiaoDestaqueSelecionada = false;
     ligasPopulares = '';
     ordemExibicaoCampeonatos = 'alfabetica';
+    jogosBloqueados;
 
     constructor(
         private campeonatoService: CampeonatoService,
@@ -43,6 +44,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
+
+        this.jogosBloqueados = this.paramsService.getJogosBloqueados();
 
         this.ordemExibicaoCampeonatos = this.paramsService.getOpcoes().ordem_exibicao_campeonatos;
 
@@ -168,6 +171,13 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                         .subscribe(
                             campeonatos => {
                                 this.campeonatos = campeonatos;
+
+                                this.campeonatos = this.campeonatos.filter(campeonato => {
+                                    const jogosAtivos = campeonato.jogos.filter(jogo => !this.jogosBloqueados.includes(jogo.event_id));
+                                    if (jogosAtivos.length > 0) {
+                                        return campeonato;
+                                    }
+                                });
                                 this.showLoadingIndicator = false;
                                 this.jogoId = this.extrairJogoId(this.campeonatos);
                                 console.log(campeonatos);

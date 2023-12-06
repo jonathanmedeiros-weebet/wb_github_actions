@@ -6,7 +6,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -124,7 +124,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private router: Router,
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
-        private host: ElementRef
+        private host: ElementRef,
+        private clienteService: ClienteService
     ) {
         super();
     }
@@ -140,7 +141,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
         }
 
-        this.auth.logado
+        this.clienteService.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 isLoggedIn => {
@@ -149,17 +150,36 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     }
 
                     this.isLoggedIn = isLoggedIn;
+
                     if (isLoggedIn) {
                         this.getUsuario();
-
-                        if (this.usuario.tipo_usuario === 'cambista' && this.firstLoggedIn) {
-                            this.getPosicaoFinanceira();
-                        } else {
-                            this.getPosicaoFinanceira();
-                        }
+                        this.getPosicaoFinanceira();
                     }
                 }
             );
+
+        if (!this.isLoggedIn) {
+            this.auth.logado
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    isLoggedIn => {
+                        if (!this.firstLoggedIn) {
+                            this.firstLoggedIn = isLoggedIn;
+                        }
+
+                        this.isLoggedIn = isLoggedIn;
+                        if (isLoggedIn) {
+                            this.getUsuario();
+
+                            if (this.usuario.tipo_usuario === 'cambista' && this.firstLoggedIn) {
+                                this.getPosicaoFinanceira();
+                            } else {
+                                this.getPosicaoFinanceira();
+                            }
+                        }
+                    }
+                );
+        }
 
         this.auth.cliente
             .pipe(takeUntil(this.unsub$))
@@ -439,11 +459,26 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeMenuCassino() {
-        if (this.router.url.includes('/casino/c') && this.router.url != '/casino/c/wall/live') {
+        if (this.router.url.includes('/casino/c/')) {
             return 'active';
         }
 
         return '';
+    }
+
+    activeMenuCassinoLive() {
+        if (this.router.url.includes('/casino/cl/')) {
+            return 'active';
+        }
+
+        return '';
+    }
+
+    activeGameCassinoMobile() {
+        return (
+            this.isMobile
+            && (this.router.url.includes('/casino/c/play') || this.router.url.includes('/casino/cl/play'))
+        );
     }
 
     redirectIndiqueGanhe() {
