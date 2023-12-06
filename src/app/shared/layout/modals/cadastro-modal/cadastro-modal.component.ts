@@ -89,9 +89,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.route.queryParams
             .subscribe((params) => {
-            if (params.ref) {
-                this.clientesService.codigoFiliacaoCadastroTemp = params.ref;
-                localStorage.setItem('codigoAfiliado', params.ref);
+            if (params.ref || params.afiliado) {
+                const codigoAfiliado = params.ref ?? params.afiliado;
+
+                this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+                localStorage.setItem('codigoAfiliado', codigoAfiliado);
             } else {
                 const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
                 if (storagedCodigoAfiliado) {
