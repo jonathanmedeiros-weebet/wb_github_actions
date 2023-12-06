@@ -3509,3 +3509,12 @@ gulp.task('dorebet.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mdsports.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "mdsports.bet",
+        banca: "MD SPORTS",
+        styles: "",
+    });
+});
