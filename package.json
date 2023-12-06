@@ -371,7 +371,8 @@
         "foxplay.bet": "gulp foxplay.bet",
         "baraocassino.com": "gulp baraocassino.com",
         "brotanabet.com": "gulp brotanabet.com",
-        "caminhobet.com": "gulp caminhobet.com"
+        "caminhobet.com": "gulp caminhobet.com",
+        "dorebet.net": "gulp dorebet.net"
     },
     "private": true,
     "dependencies": {

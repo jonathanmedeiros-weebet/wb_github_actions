@@ -3547,3 +3547,12 @@ gulp.task('caminhobet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('dorebet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dorebet.net",
+        banca: "DORE BET",
+        styles: "",
+    });
+});
