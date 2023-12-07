@@ -44,14 +44,4 @@
             <i class="ri ri-file-list-3-line"></i> {{'geral.apostas' | translate}}
         </a>
     </div>
-    <div *ngIf="(whatsapp || isDemo) && (!isLoggedIn || isCliente)"
-         class="bottom-bar-button" routerLinkActive="active"
-         [ngClass]="{'menu-open': menuIsOpen}">
-        <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
-            <i class="fa fa-brands fa-whatsapp"></i> {{'geral.suporte' | translate}}
-        </a>
-        <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
-            <i class="fa fa-brands fa-whatsapp"></i> {{'geral.suporte' | translate}}
-        </a>
-    </div>
 </div>
