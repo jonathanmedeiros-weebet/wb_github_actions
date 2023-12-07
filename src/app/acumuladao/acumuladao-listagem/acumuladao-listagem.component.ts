@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Acumuladao } from './../../models';
-import { AcumuladaoService, MessageService } from './../../services';
+import { AcumuladaoService, HeadersService, LayoutService, MessageService } from './../../services';
 
 import * as moment from 'moment';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-acumuladao-listagem',
@@ -15,11 +17,16 @@ export class AcumuladaoListagemComponent implements OnInit {
     acumuladoes: Acumuladao[];
     isMobile = false;
     isLoading = true;
+    headerHeight = 92;
+    currentHeight = window.innerHeight - this.headerHeight;
+    unsub$ = new Subject();
 
     constructor(
         private router: Router,
         private acumuladaoService: AcumuladaoService,
         private messageService: MessageService,
+        private cd: ChangeDetectorRef,
+        private layoutService: LayoutService
     ) { }
 
     ngOnInit() {
@@ -35,6 +42,14 @@ export class AcumuladaoListagemComponent implements OnInit {
                 },
                 error => this.handleError(error)
             );
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.currentHeight = window.innerHeight - this.headerHeight;
+                this.cd.detectChanges();
+            });
     }
 
     handleError(msg) {
