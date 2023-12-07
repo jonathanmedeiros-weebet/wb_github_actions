@@ -91,14 +91,23 @@
                         <div class="saldos-container">
                             <div class="saldos-item">
                                 <span class="">{{'geral.credito' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
+                                <span>
+                                    <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                                    <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.credito | currency}}</span>
+                                    <ng-template #elseSaldoOculto>
+                                        <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                    </ng-template>
+                                </span>
                             </div>
                             <div style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
                             <div class="saldos-item">
                                 <span class="">{{'geral.saldo' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.saldo | currency}}</span>
+                                <ng-template #elseSaldoOculto>
+                                    <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                </ng-template>
                             </div>
                         </div>
                         <div class="d-flex justify-content-around" *ngIf="pixCambista">
@@ -424,7 +433,8 @@
                         <div class="saldos-container">
                             <div class="saldos-item" *ngIf="!isCliente">
                                 <span class="">{{'geral.credito' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.credito | currency}}</span>
+                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.credito | currency}}</span>
+                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                             </div>
                             <div  *ngIf="!isCliente" style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
