@@ -95,6 +95,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     removendoIndiqueGanheCard = false;
     messageConnection;
     isConnected = true;
+    isDemo = location.host === 'demo.wee.bet';
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -451,7 +452,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.translate.use(language);
     }
 
-    alternarExibirSaldo() {
+    alternarExibirSaldo(event) {
+        event.stopPropagation();
         this.mostrarSaldo = !this.mostrarSaldo;
         localStorage.setItem('exibirSaldo', this.mostrarSaldo);
     }

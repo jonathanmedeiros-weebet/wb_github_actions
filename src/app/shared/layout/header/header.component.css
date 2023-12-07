@@ -114,12 +114,12 @@ nav a {
 
 .side-right {
     justify-content: right;
-    padding-right: 20px;
+    padding-right: 16px;
 }
 
 .side-left {
     justify-content: left;
-    padding-left: 20px;
+    padding-left: 16px;
 }
 
 .menu-conta {
@@ -322,6 +322,16 @@ body .change-theme {
     color: var(--foreground-header);
 }
 
+.support-btn i {
+    margin-right: 12px;
+    font-size: 16px;
+    color: var(--highlight);
+}
+
+.deposit-shortcut a {
+    padding: 23px 11px;
+}
+
 .menu-perfil {
     display: flex;
     align-items: center;
@@ -368,6 +378,9 @@ body .change-theme {
     font-size: 14px;
 }
 
+.menu-perfil .saldo-usuario {
+    font-size: 14px;
+}
 
 .menu-conta .info-profile {
     padding: 15px 25px;
@@ -496,7 +509,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
-        max-width: calc(50vw - 25px);
+        max-width: calc(40vw - 25px);
     }
 
     .btn {
@@ -583,6 +596,12 @@ body .change-theme {
 @media only screen and (max-width: 480px) {
     .indique-ganhe-card-content {
         width: 88%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .logo {
+        max-width: calc(32vw - 25px);
     }
 }
 

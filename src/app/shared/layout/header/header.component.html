@@ -42,10 +42,26 @@
     </nav>
     <div class="side side-right">
         <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
-                <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']" [ngStyle]="{'height': '38px'}">
-                    {{'geral.depositar' | translate | uppercase}}
+            <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo) && (!isLoggedIn || isCliente)">
+                <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
+                    <i class="fa-solid fa-headset"></i>
                 </a>
+                <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                    <i class="fa-solid fa-headset"></i>
+                </a>
+            </div>
+            <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
+                <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
+                <ng-template #depositShortCutDesktop>
+                    <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']" [ngStyle]="{'height': '38px'}">
+                        {{'geral.depositar' | translate | uppercase}}
+                    </a>
+                </ng-template>
+                <ng-template #depositShortCutMobile>
+                    <a class="btn btn-custom mr-4" (click)="abrirDepositos()" [ngStyle]="{'height': '38px'}">
+                        {{'geral.depositar' | translate | uppercase}}
+                    </a>
+                </ng-template>
             </div>
             <div class="menu-conta" ngbDropdown #dropDownConta="ngbDropdown">
                 <a (click)="getPosicaoFinanceira()" class="nav-link menu-perfil" id="navbarDropdown"
@@ -53,7 +69,7 @@
                     <div class="user-card">
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
                         <span class="saldo-usuario">
-                            <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo()" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                            <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
                             <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
                             <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                         </span>
@@ -244,14 +260,23 @@
                         <div class="saldos-container">
                             <div class="saldos-item">
                                 <span class="">{{'geral.saldo' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                                <span>
+                                    <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                                    <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.saldo | currency}}</span>
+                                    <ng-template #elseSaldoOculto>
+                                        <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                    </ng-template>
+                                </span>
                             </div>
                             <div style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
                             <div class="saldos-item">
                                 <span class="">{{'geral.bonus' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
+                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.bonus | currency}}</span>
+                                <ng-template #elseSaldoOculto>
+                                    <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                </ng-template>
                             </div>
                         </div>
 
@@ -406,7 +431,8 @@
                             </div>
                             <div class="saldos-item">
                                 <span class="">{{'geral.saldo' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.saldo | currency}}</span>
+                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.saldo | currency}}</span>
+                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                             </div>
                             <div  *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
@@ -414,7 +440,8 @@
                             <div class="saldos-item"
                                 *ngIf="isCliente">
                                 <span class="">{{'geral.bonus' | translate}}</span>
-                                <span class="dados">{{posicaoFinanceira.bonus | currency}}</span>
+                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.bonus | currency}}</span>
+                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                             </div>
                         </div>
 
