@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Desafio, DesafioCategoria } from './../../models';
-import {DesafioService, MessageService, DesafioBilheteService, SidebarService} from './../../services';
+import {DesafioService, MessageService, DesafioBilheteService, SidebarService, LayoutService} from './../../services';
 
 @Component({
     selector: 'app-desafios-listagem',
@@ -36,6 +36,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
     enableScrollButtons: {} = {};
     maxOddsSize: number;
     desafios;
+    headerHeight = 92;
 
     @HostListener('window:resize', ['$event'])
     onResize() {
@@ -49,12 +50,12 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
         private desafioService: DesafioService,
         private bilheteService: DesafioBilheteService,
         private messageService: MessageService,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private layoutService: LayoutService
     ) { }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
-        this.definirAltura();
         this.subscribeItens();
 
         this.route.queryParams
@@ -78,6 +79,14 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
             .subscribe(collapsed => {
                 this.sidebarNavIsCollapsed = collapsed;
                 this.detectScrollOddsWidth(this.desafios);
+            });
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
             });
     }
 
@@ -174,7 +183,7 @@ export class DesafiosListagemComponent implements OnInit, OnDestroy, AfterViewIn
     }
 
     definirAltura() {
-        const headerHeight = this.mobileScreen ? 145 : 92;
+        const headerHeight = this.mobileScreen ? 145 : this.headerHeight;
         const altura = window.innerHeight - headerHeight;
         this.contentEl = this.el.nativeElement.querySelector('.content-list');
         this.renderer.setStyle(this.contentEl, 'min-height', `${altura}px`);

@@ -57,6 +57,8 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy, DoCheck {
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     definirAltura() {

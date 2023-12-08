@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 
@@ -35,7 +35,7 @@ import {BaseFormComponent} from '../base-form/base-form.component';
     templateUrl: 'navigation.component.html',
     styleUrls: ['navigation.component.css']
 })
-export class NavigationComponent extends BaseFormComponent implements OnInit {
+export class NavigationComponent extends BaseFormComponent implements OnInit, OnDestroy {
     headerHeight = 92;
     hoje = moment();
     amanha = moment().add(1, 'd');
@@ -171,6 +171,11 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
                 this.definirAltura();
                 this.cd.detectChanges();
             });
+    }
+
+    ngOnDestroy(): void {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {

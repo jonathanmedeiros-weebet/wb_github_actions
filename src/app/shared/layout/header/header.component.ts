@@ -506,14 +506,16 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.renderer.setStyle(card, 'height', '0');
         this.renderer.setStyle(card, 'padding', '0 20px');
         setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
-        this.layoutService.changeIndiqueGanheCardHeight(0);
+        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(0); }, 300);
     }
 
     btnCardOnMouseOver() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
+        this.layoutService.changeIndiqueGanheCardHeight(45);
     }
 
     btnCardOnMouseOut() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
+        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(37); }, 300);
     }
 }

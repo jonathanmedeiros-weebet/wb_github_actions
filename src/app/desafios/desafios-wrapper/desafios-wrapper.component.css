@@ -1,7 +1,6 @@
 #desafios-wrapper {
     display: flex;
     flex-direction: row;
-    max-height: calc(100vh - 92px);
     overflow: hidden;
 }
 
@@ -9,7 +8,6 @@
     flex-grow: 1;
     padding: 0;
     overflow: auto;
-    height: calc(100vh - 92px);
 }
 
 @media only screen and (max-width: 1024px) {

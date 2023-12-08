@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Acumuladao } from './../../models';
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
     templateUrl: './acumuladao-listagem.component.html',
     styleUrls: ['./acumuladao-listagem.component.css']
 })
-export class AcumuladaoListagemComponent implements OnInit {
+export class AcumuladaoListagemComponent implements OnInit, OnDestroy {
     acumuladoes: Acumuladao[];
     isMobile = false;
     isLoading = true;
@@ -50,6 +50,11 @@ export class AcumuladaoListagemComponent implements OnInit {
                 this.currentHeight = window.innerHeight - this.headerHeight;
                 this.cd.detectChanges();
             });
+    }
+
+    ngOnDestroy(): void {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     handleError(msg) {
