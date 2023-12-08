@@ -3518,3 +3518,12 @@ gulp.task('mdsports.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('kobabet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "kobabet.com",
+        banca: "KOBA BET",
+        styles: "",
+    });
+});

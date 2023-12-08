@@ -368,7 +368,8 @@
         "brotanabet.com": "gulp brotanabet.com",
         "caminhobet.com": "gulp caminhobet.com",
         "dorebet.net": "gulp dorebet.net",
-        "mdsports.bet": "gulp mdsports.bet"
+        "mdsports.bet": "gulp mdsports.bet",
+        "kobabet.com": "gulp kobabet.com"
     },
     "private": true,
     "dependencies": {
