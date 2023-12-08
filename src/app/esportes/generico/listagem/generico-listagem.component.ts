@@ -405,7 +405,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirTotalOdds() {
-        return this.sportId === '18';
+        return this.sportId === '48242';
     }
 
     toggleCampeonato(campeonatoId) {
