@@ -1295,15 +1295,6 @@ gulp.task('nautsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('grenbet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "grenbet.net",
-        banca: "GRENBET",
-        styles: "",
-    });
-});
-
 gulp.task('soumaisbet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1446,15 +1437,6 @@ gulp.task('bomba.bet', function (done) {
         server: "front2.wee.bet",
         host: "bomba.bet",
         banca: "BOMBA.BET",
-        styles: "",
-    });
-});
-
-gulp.task('akisports.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "akisports.wee.bet",
-        banca: "AKISPORTS",
         styles: "",
     });
 });
@@ -1864,16 +1846,6 @@ gulp.task('ragnar.bet', function (done) {
     });
 });
 
-gulp.task('betpixcariri.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betpixcariri.bet",
-        banca: "BET PIX CARIRI",
-        styles: "",
-        pixel:"<!-- Meta Pixel Code --><script>  !function(f,b,e,v,n,t,s)  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?  n.callMethod.apply(n,arguments):n.queue.push(arguments)};  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';  n.queue=[];t=b.createElement(e);t.async=!0;  t.src=v;s=b.getElementsByTagName(e)[0];  s.parentNode.insertBefore(t,s)}(window, document,'script',  'https://connect.facebook.net/en_US/fbevents.js');  fbq('init', '1952710788441843');  fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'  src='https://www.facebook.com/tr?id=1952710788441843&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
-    });
-});
-
 gulp.task('cassinoaovivo.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2114,15 +2086,6 @@ gulp.task('goltop.bet', function (done) {
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TBWH2RNR');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TBWH2RNR'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         description: "Acesse a GolTop, Site de Apostas Esportivas, Bônus de Cadastro de R$ 5,00 reais, Bônus de deposito de 100%, Site de Cassino, Cassino Ao Vivo, Fortune Tiger, Fortune Ox, Fortune Rabbit, Fortune Mouse, Aviator, Mines e Spaceman - Jogue com Facilidade."
-    });
-});
-
-gulp.task('arenamiami.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "arenamiami.net",
-        banca: "ARENA MIAMI",
-        styles: "",
     });
 });
 
@@ -3324,15 +3287,6 @@ gulp.task('bbwins.bet', function (done) {
         server: "front4.wee.bet",
         host: "bbwins.bet",
         banca: "BB WINS",
-        styles: "",
-    });
-});
-
-gulp.task('triobet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "triobet.wee.bet",
-        banca: "TRIO BET",
         styles: "",
     });
 });
