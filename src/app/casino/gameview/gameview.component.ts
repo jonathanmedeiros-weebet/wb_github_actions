@@ -27,6 +27,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     isCliente;
     sessionId = '';
     isMobile = 0;
+    removerBotaoFullscreen = false;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -45,6 +46,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
         
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
+        }
+
+        if(this.getMobileOperatingSystem() == 'ios'){
+            this.removerBotaoFullscreen = true;
         }
 
         this.elem = document.documentElement;
@@ -164,5 +169,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     closeSessionGameTomHorn() {
         this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {},error => {});
+    }
+
+    getMobileOperatingSystem() {
+        let userAgent = navigator.userAgent ;
+        
+        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
+            return 'ios';
+        }
+        else if( userAgent.match( /Android/i ) ){
+            return 'android';
+        }
+        else{
+            return 'unknown';
+        }
     }
 }

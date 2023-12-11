@@ -9,7 +9,7 @@
             </ng-template>
         </div>
         <div class="buttons-game-view">
-            <ng-container *ngIf="!isAppMobile()">
+            <ng-container *ngIf="!isAppMobile() && !removerBotaoFullscreen">
                 <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
                 <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
             </ng-container>
