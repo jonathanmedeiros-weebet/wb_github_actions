@@ -68,6 +68,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     esporteAtivo;
     cassinoAtivo;
     virtuaisAtivo;
+    parlaybayAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -196,6 +197,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
 
         this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
