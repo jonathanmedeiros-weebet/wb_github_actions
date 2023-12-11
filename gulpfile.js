@@ -3473,11 +3473,20 @@ gulp.task('mdsports.bet', function (done) {
     });
 });
 
-gulp.task('kobabet.com', function (done) {
+gulp.task('vyperbet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "kobabet.com",
-        banca: "KOBA BET",
+        host: "vyperbet.com",
+        banca: "VYPER BET",
+        styles: "",
+    });
+});
+
+gulp.task('chavesbets.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "chavesbets.com",
+        banca: "CHAVES BETS",
         styles: "",
     });
 });
