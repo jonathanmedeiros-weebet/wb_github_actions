@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {Event as NavigationEvent, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 
@@ -7,6 +7,7 @@ import {takeUntil} from 'rxjs/operators';
 import {
     ApostaService,
     AuthService,
+    LayoutService,
     MessageService,
     ParametrosLocaisService,
     PrintService,
@@ -34,8 +35,8 @@ import {BaseFormComponent} from '../base-form/base-form.component';
     templateUrl: 'navigation.component.html',
     styleUrls: ['navigation.component.css']
 })
-export class NavigationComponent extends BaseFormComponent implements OnInit {
-    @Input() headerHeight = 92;
+export class NavigationComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    headerHeight = 92;
     hoje = moment();
     amanha = moment().add(1, 'd');
     dias = [];
@@ -79,7 +80,8 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private apostaService: ApostaService,
         private messageService: MessageService,
-        private fb: UntypedFormBuilder
+        private fb: UntypedFormBuilder,
+        private layoutService: LayoutService
     ) {
         super();
         router.events.forEach((event: NavigationEvent) => {
@@ -135,11 +137,6 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         this.exibirPaginaDeposito = this.paramsService.getOpcoes().exibir_pagina_deposito;
         this.preencherDias();
 
-        const elSideBar = this.el.nativeElement.querySelector('#sidebar-wrapper');
-        let height =  window.innerHeight - this.headerHeight;
-
-        this.renderer.setStyle(elSideBar, 'height', `${height}px`);
-
         // this.sidebarService.itens
         //     .pipe(takeUntil(this.unsub$))
         //     .subscribe(dados => {
@@ -166,6 +163,19 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
         if (this.paramsService.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -413,6 +423,12 @@ export class NavigationComponent extends BaseFormComponent implements OnInit {
             });
             dtInicial.add('1', 'day');
         }
+    }
+
+    definirAltura() {
+        const elSideBar = this.el.nativeElement.querySelector('#sidebar-wrapper');
+        let height =  window.innerHeight - this.headerHeight;
+        this.renderer.setStyle(elSideBar, 'height', `${height}px`);
     }
 
     refresh() {

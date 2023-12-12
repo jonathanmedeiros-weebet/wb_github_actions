@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Renderer2, ElementRef} from '@angular/core';
+import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ChangeDetectorRef} from '@angular/core';
 import {getCurrencySymbol} from '@angular/common';
 import {UntypedFormBuilder, UntypedFormArray, Validators} from '@angular/forms';
 
@@ -12,7 +12,7 @@ import {
     SorteioService, ApostaLoteriaService,
     SidebarService, SupresinhaService,
     AuthService, PreApostaLoteriaService,
-    ParametrosLocaisService, MenuFooterService
+    ParametrosLocaisService, MenuFooterService, LayoutService
 } from '../../services';
 import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +42,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     isCliente;
     mobileScreen = false;
     modoCambista = false;
+    headerHeight = 92;
 
     constructor(
         private sidebarService: SidebarService,
@@ -57,7 +58,9 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private el: ElementRef,
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -69,7 +72,6 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.isCliente = this.auth.isCliente();
         this.mobileScreen = window.innerWidth <= 1024;
         this.createForm();
-        this.definirAltura();
 
         this.tipoApostaService.getTiposAposta({tipo: 'quininha'}).subscribe(
             tiposAposta => {
@@ -121,6 +123,14 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             );
         this.menuFooterService.setOutraModalidade(true);
         this.menuFooterService.atualizarQuantidade(0);
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
     }
 
     ngOnDestroy() {
@@ -130,7 +140,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     definirAltura() {
-        const headerHeight = this.mobileScreen ? 161 : 132;
+        const headerHeight = this.mobileScreen ? 161 : this.headerHeight;
         const altura = window.innerHeight - headerHeight;
         const contentLoteriaEl = this.el.nativeElement.querySelector('.content-loteria');
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
