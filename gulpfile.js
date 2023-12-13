@@ -3490,3 +3490,12 @@ gulp.task('chavesbets.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('sortepix.io', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortepix.io",
+        banca: "SORTE PIX",
+        styles: "",
+    });
+});
