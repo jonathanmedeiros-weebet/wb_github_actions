@@ -77,6 +77,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.showLoadingIndicator = false;
                 });
         });
+
+        if(this.gameFornecedor === 'galaxsys'){
+            this.appendScriptGalaxsys();
+        }
     }
 
     loadGame() {
@@ -122,6 +126,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(false);
         } else {
             this.menuFooterService.setIsPagina(true);
+        }
+
+        let scriptGalaxsys= document.getElementById("galaxsysScript");
+
+        if(scriptGalaxsys){
+            scriptGalaxsys.remove();
         }
     }
 
@@ -182,5 +192,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
         else{
             return 'unknown';
         }
+    }
+
+    appendScriptGalaxsys(){
+        let body = document.getElementsByTagName('body')[0];
+        let bodyScript = document.createElement('script');
+
+        bodyScript.append('window.addEventListener("message",(e) => {const { type, mainDomain } = e.data; if(type === "rgs-backToHome") {window.location.href = mainDomain;}});');
+        bodyScript.id = 'galaxsysScript';
+        body.appendChild(bodyScript);
     }
 }
