@@ -34,7 +34,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     metodoPagamentoDesabilitado;
     isMobile = false;
     modalRef;
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST'];
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
     qtdRolloverAtivos = 0;
     saldo = 0;
     saques = [];

@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
             });
-            this.router.navigate(['esportes/futebol']);
+            this.router.navigate(['/']);
         }
         if (this.router.url.includes('/login')) {
 

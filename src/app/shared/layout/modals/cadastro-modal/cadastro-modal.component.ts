@@ -239,8 +239,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             .subscribe(
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
+                    
                     this.activeModal.dismiss();
+                    
                     localStorage.removeItem('codigoAfiliado');
+
                     if(this.validacaoEmailObrigatoria) {
                         localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
                         this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
@@ -250,6 +253,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             { queryParams: { nomeCliente: nome, valid: true }
                         });
                     } else {
+                        this.auth.setIsCliente(true);
+                        
                         localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
                         let nome = values.nome.split(" ")[0];
                         this.router.navigate(
