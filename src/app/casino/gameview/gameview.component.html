@@ -29,4 +29,11 @@
 </div>
 
 
-
+<script>
+    window.addEventListener('message', (e) => {
+    const { type, mainDomain } = e.data;
+        if (type === 'rgs-backToHome') {
+            window.location.href = mainDomain;
+        }
+    });
+</script>

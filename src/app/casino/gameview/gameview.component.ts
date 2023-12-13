@@ -77,13 +77,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.showLoadingIndicator = false;
                 });
         });
-
-        window.addEventListener('message', (e) => {
-        const { type, mainDomain } = e.data;
-            if (type === 'rgs-backToHome') {
-                window.location.href = mainDomain;
-            }
-        });
     }
 
     loadGame() {
