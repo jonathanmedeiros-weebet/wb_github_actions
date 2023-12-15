@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
     modoClienteHabilitado;
     whatsapp;
     isDemo = location.host === 'demo.wee.bet';
+    isCadastro = false;
 
     constructor(
         private auth: AuthService,
@@ -109,6 +110,8 @@ export class AppComponent implements OnInit {
                             },
                             error => this.handleError(error)
                         );
+                } else if (this.router.url.includes('/cadastro')) {
+                    this.isCadastro = true;
                 } else {
                     this.ativacaoCadastro = false;
                 }
@@ -154,7 +157,7 @@ export class AppComponent implements OnInit {
                             centered: true
                         }
                     );
-                } else if (!this.isEmpty && this.ativacaoCadastro === false) {
+                } else if (!this.isEmpty && this.ativacaoCadastro === false && !this.isCadastro) {
                     let exibirImagemInicial = false;
                     const variavel = localStorage.getItem('imagemInicialData');
                     if (!variavel) {
