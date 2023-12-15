@@ -45,7 +45,7 @@
                         </a>
                     </div>
                     <div class="links-bonus">
-                        <a *ngIf="true" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'cassino'}" (click)="selecionarOpcaoBonus('cassino')">
+                        <a *ngIf="bonusCassino" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'cassino'}" (click)="selecionarOpcaoBonus('cassino')">
                             <div class="bonus">
                                 <i class="radio"></i>
                             </div>
