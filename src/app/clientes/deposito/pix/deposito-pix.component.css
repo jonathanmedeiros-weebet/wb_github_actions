@@ -97,6 +97,21 @@ label.label-tempo {
     display: block;
 }
 
+.bonus{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.icone-bonus{
+    display: flex;
+}
+
+.permitirBonusPrimeiroDeposito{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .buttons-container a .radio {
     height: 15px;
     width: 15px;
@@ -147,6 +162,9 @@ label.label-tempo {
     color: var(--highlight);
     text-decoration: none;
     cursor: pointer;
+}
+.links-bonus{
+    display: flex;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -213,9 +231,8 @@ label.label-tempo {
     }
 
     .buttons-container {
-        background-color: var(--game);
-        border: 2px solid var(--game);
         border-radius: 4px;
+        flex-wrap: wrap;
     }
 
     .buttons-container a {
@@ -246,5 +263,10 @@ label.label-tempo {
         justify-content: center;
         max-width: 100% !important;
         flex: 0 0 100% !important;
+    }
+
+    .links-bonus{
+        flex-grow: 1;
+        margin: 0 1% 1% 0;
     }
 }
