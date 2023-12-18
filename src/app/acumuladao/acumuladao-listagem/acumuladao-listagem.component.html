@@ -73,7 +73,7 @@
         </div>
     </div>
 </div>
-<div id="acumuladao-listagem" *ngIf="!isLoading">
+<div id="acumuladao-listagem" *ngIf="!isLoading" [ngStyle]="{'height': currentHeight + 'px'}">
     <h2 class="m-3 mt-4">{{'geral.acumuladao' | translate}}</h2>
     <div class="wrap-acumuladao">
         <div class="sem-evento" *ngIf="acumuladoes ? acumuladoes.length == 0 : false">

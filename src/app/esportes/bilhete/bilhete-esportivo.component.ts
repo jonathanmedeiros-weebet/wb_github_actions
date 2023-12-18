@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { ChangeDetectorRef,Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of } from 'rxjs';
@@ -10,6 +10,7 @@ import {
     AuthService,
     BilheteEsportivoService,
     HelperService,
+    LayoutService,
     MenuFooterService,
     MessageService,
     ParametrosLocaisService,
@@ -27,6 +28,7 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @Input() subtracaoAltura = 132;
     @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
     @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
     mudancas = false;
@@ -66,8 +68,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showCampinho = true;
     showStream = false;
     showFrame = true;
-
-    @Input() subtracaoAltura = 132;
+    headerHeight = 92;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -83,7 +84,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private menuFooterService: MenuFooterService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private cd: ChangeDetectorRef,
+        private layoutService: LayoutService
     ) {
         super();
     }
@@ -184,6 +187,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 res => this.displayPreTicker = res
             );
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
     }
 
     private scrollToBottom(): void {

@@ -6,7 +6,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -94,8 +94,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     firstLoggedIn;
     valorGanhoPorIndicacao;
     removendoIndiqueGanheCard = false;
+    showIndiqueGanheCard = false;
     messageConnection;
     isConnected = true;
+    isDemo = location.host === 'demo.wee.bet';
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -125,7 +127,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private layoutService: LayoutService
     ) {
         super();
     }
@@ -253,6 +256,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 }, 1000);
             }
         });
+
+        this.showIndiqueGanheCard = this.indiqueGanheHabilitado && (!this.isLoggedIn || (this.isCliente)) && !this.activeGameCassinoMobile();
+
+        if (this.showIndiqueGanheCard) {
+            this.layoutService.changeIndiqueGanheCardHeight(37);
+        }
     }
 
     ngOnDestroy() {
@@ -453,7 +462,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.translate.use(language);
     }
 
-    alternarExibirSaldo() {
+    alternarExibirSaldo(event) {
+        event.stopPropagation();
         this.mostrarSaldo = !this.mostrarSaldo;
         localStorage.setItem('exibirSaldo', this.mostrarSaldo);
     }
@@ -500,13 +510,16 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.renderer.setStyle(card, 'height', '0');
         this.renderer.setStyle(card, 'padding', '0 20px');
         setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
+        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(0); }, 300);
     }
 
     btnCardOnMouseOver() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
+        this.layoutService.changeIndiqueGanheCardHeight(45);
     }
 
     btnCardOnMouseOut() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
+        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(37); }, 300);
     }
 }

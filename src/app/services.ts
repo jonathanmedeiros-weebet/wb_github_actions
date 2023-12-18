@@ -47,6 +47,7 @@ export * from './shared/services/utils/sidebar.service';
 export * from './shared/services/utils/surpresinha.service';
 export * from './shared/services/utils/utils.service';
 export * from './shared/services/utils/menu-footer.service';
+export * from './shared/services/utils/layout.service';
 
 /* Authentication Services */
 export * from './shared/services/auth/auth.service';

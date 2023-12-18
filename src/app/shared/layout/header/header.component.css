@@ -115,12 +115,12 @@ nav a {
 
 .side-right {
     justify-content: right;
-    padding-right: 20px;
+    padding-right: 16px;
 }
 
 .side-left {
     justify-content: left;
-    padding-left: 20px;
+    padding-left: 16px;
 }
 
 .menu-conta {
@@ -323,9 +323,23 @@ body .change-theme {
     color: var(--foreground-header);
 }
 
+.support-btn i {
+    margin-right: 12px;
+    font-size: 16px;
+    color: var(--highlight);
+}
+
+.deposit-shortcut a {
+    padding: 23px 11px;
+}
+
 .menu-perfil {
     display: flex;
     align-items: center;
+    height: 38px;
+    background-color: var(--background);
+    border-radius: 4px;
+    padding: 24px 12px;
 }
 
 .menu-perfil::after {
@@ -346,15 +360,28 @@ body .change-theme {
     align-items: flex-end;
 }
 
+.menu-perfil div.user-card {
+    line-height: 1.3;
+    padding-right: 20px;
+}
+
+.menu-perfil div.user-icon i {
+    font-size: 25px;
+}
+
 .menu-perfil .nome-usuario {
     font-size: 12px;
     color: var(--foreground-header);
+    font-weight: 600;
 }
 
 .menu-perfil .saldo-usuario {
     font-size: 14px;
 }
 
+.menu-perfil .saldo-usuario {
+    font-size: 14px;
+}
 
 .menu-conta .info-profile {
     padding: 15px 25px;
@@ -387,9 +414,6 @@ body .change-theme {
 
 .olhinho{
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding-top: 16%;
     margin-right: 5px;
 }
 
@@ -486,7 +510,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
-        max-width: calc(50vw - 25px);
+        max-width: calc(40vw - 25px);
     }
 
     .btn {
@@ -533,11 +557,52 @@ body .change-theme {
     .side-left {
         padding-left: 10px;
     }
+
+    .deposit-shortcut a {
+        height: 30px !important;
+        padding: 6px 11px;
+        font-size: 10px;
+    }
+
+    .menu-conta {
+        margin-right: 8px;
+    }
+
+    .menu-perfil {
+        height: 30px;
+        padding: 0 9px;
+    }
+
+    .menu-perfil div.user-card {
+        padding-right: 8px;
+    }
+
+    .menu-perfil .nome-usuario {
+        display: none;
+    }
+
+    .menu-perfil .saldo-usuario .olhinho {
+        display: none;
+    }
+
+    .menu-perfil .saldo-usuario span {
+        font-size: 10px;
+    }
+
+    .menu-perfil div.user-icon i {
+        font-size: 20px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
     .indique-ganhe-card-content {
         width: 88%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .logo {
+        max-width: calc(32vw - 25px);
     }
 }
 

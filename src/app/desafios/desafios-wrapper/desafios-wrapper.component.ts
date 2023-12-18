@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import { SidebarService, DesafioCategoriaService, MessageService } from '../../services';
+import { SidebarService, DesafioCategoriaService, MessageService, LayoutService } from '../../services';
 
 @Component({
     selector: 'app-desafios-wrapper',
@@ -11,11 +11,16 @@ import { SidebarService, DesafioCategoriaService, MessageService } from '../../s
 })
 export class DesafiosWrapperComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
+    headerHeight = 92;
 
     constructor(
         private desafioCategoriaService: DesafioCategoriaService,
         private sidebarService: SidebarService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private el: ElementRef,
+        private renderer: Renderer2,
+        private cd: ChangeDetectorRef,
+        private layoutService: LayoutService
     ) { }
 
     ngOnInit() {
@@ -28,6 +33,14 @@ export class DesafiosWrapperComponent implements OnInit, OnDestroy {
                     }
                 }
             );
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
     }
 
     ngOnDestroy() {
@@ -49,6 +62,13 @@ export class DesafiosWrapperComponent implements OnInit, OnDestroy {
                 },
                 error => this.messageService.error(error)
             );
+    }
+
+    definirAltura() {
+        const desafiosWrapper = this.el.nativeElement.querySelector('#desafios-wrapper');
+        const desafiosContent = this.el.nativeElement.querySelector('.desafios-content');
+        this.renderer.setStyle(desafiosWrapper, 'max-height', `calc(100vh - ${this.headerHeight}px)`);
+        this.renderer.setStyle(desafiosContent, 'height', `calc(100vh - ${this.headerHeight}px)`);
     }
 
 }

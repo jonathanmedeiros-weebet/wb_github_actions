@@ -34,8 +34,6 @@ export class MenuFooterComponent implements OnInit {
     isOpen = false;
     contexto = '';
     nomeBotaoExtras = 'Campeonatos';
-    whatsapp;
-    isDemo = location.host === 'demo.wee.bet';
 
     constructor(
         private auth: AuthService,
@@ -54,10 +52,6 @@ export class MenuFooterComponent implements OnInit {
 
         this.modoCambistaHabilitado = this.paramsService.getOpcoes().modo_cambista;
         this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
-
-        if (this.paramsService.getOpcoes().whatsapp) {
-            this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
-        }
 
         if (this.mobileScreen) {
             this.sidebarNavHeight = window.innerHeight - 125;
