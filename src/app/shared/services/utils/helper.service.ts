@@ -38,7 +38,7 @@ export class HelperService {
             const nome = this.tiposAposta[value].nome;
             result = nome;
 
-            if (sportId === 18) {
+            if (sportId !== 1) {
                 if (nome.search(/casa/ig) >= 0) {
                     result = nome.replace(/casa/ig, timeA);
                 }

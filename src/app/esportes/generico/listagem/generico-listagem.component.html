@@ -115,7 +115,7 @@
             <div class="campeonato" *ngFor="let campeonato of campeonatos; trackBy: trackById">
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span [ngClass]="['modalidade-icon', iconesGenericos[esporte]]"></span>
-                    <span class="campeonato-nome" *ngIf="sportId == 48242">{{campeonato.regiao}} - {{campeonato.nome}}</span>
+                    <span class="campeonato-nome" *ngIf="sportId == 48242">{{campeonato.regiao + ' - ' + campeonato.nome | uppercase}}</span>
                     <span class="campeonato-nome" *ngIf="sportId != 48242">{{campeonato.nome}}</span>
 
                     <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">

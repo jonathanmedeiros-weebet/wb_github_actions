@@ -376,7 +376,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                     jogo.event_id,
                     jogo.favorito,
                     false);
-                cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
+                cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome, jogo.sport_id);
+                
             });
         });
 
