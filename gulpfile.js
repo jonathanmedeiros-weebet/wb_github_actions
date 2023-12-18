@@ -3449,3 +3449,12 @@ gulp.task('sortepix.io', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betbolt.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betbolt.net",
+        banca: "BET BOLT",
+        styles: "",
+    });
+});

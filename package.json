@@ -362,7 +362,8 @@
         "kobabet.com": "gulp kobabet.com",
         "vyperbet.com": "gulp vyperbet.com",
         "chavesbets.com": "gulp chavesbets.com",
-        "sortepix.io": "gulp sortepix.io"
+        "sortepix.io": "gulp sortepix.io",
+        "betbolt.net": "gulp betbolt.net"
     },
     "private": true,
     "dependencies": {
