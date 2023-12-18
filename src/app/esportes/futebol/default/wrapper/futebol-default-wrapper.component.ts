@@ -180,7 +180,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                                 });
                                 this.showLoadingIndicator = false;
                                 this.jogoId = this.extrairJogoId(this.campeonatos);
-                                console.log(campeonatos);
                             },
                             error => this.messageService.error(error)
                         );

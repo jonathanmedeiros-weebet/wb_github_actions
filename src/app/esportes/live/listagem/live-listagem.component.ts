@@ -34,7 +34,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
-    esportesAbertos = [1, 18];
+    esportesAbertos = [1, 48242];
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
 
@@ -44,7 +44,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             empate: 'empate_90',
             fora: 'fora_90'
         },
-        18: {
+        48242: {
             casa: 'bkt_casa',
             fora: 'bkt_fora'
         }
@@ -114,7 +114,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 }
                             }
 
-                            if (jogo.sport_id === 18 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                            if (jogo.sport_id === 48242 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
                                 valido = false;
                             }
 
@@ -147,7 +147,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             this.qtdJogosFutebol += qtdJogosValidos;
                         }
 
-                        if (campeonato.sport_id === 18) {
+                        if (campeonato.sport_id === 48242) {
                             this.qtdJogosBasquete += qtdJogosValidos;
                         }
 
@@ -161,9 +161,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             }
                         }
                     });
-
-                    console.log(this.campeonatos);
-                    console.log(this.qtdJogosFutebol);
 
                     setTimeout(() => {
                         this.awaiting = false;
@@ -225,7 +222,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     }
                 }
 
-                if (jogo.sport_id === 18 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                if (jogo.sport_id === 48242 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
                     valido = false;
                 }
 
@@ -355,7 +352,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     toggleEsporte(sportId) {
-        console.log(sportId);
         const index = this.esportesAbertos.findIndex(id => id === sportId);
         if (index >= 0) {
             this.esportesAbertos.splice(index, 1);
@@ -366,7 +362,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     cotacoesPorTipo(jogo) {
         const cotacoes = jogo.value.cotacoes;
-        const sportId = jogo.value.sport_id;
+        const sportId = jogo.value.sport_id ?? 1;
 
         const mercadosPrincipais = [];
 
