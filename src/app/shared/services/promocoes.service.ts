@@ -5,7 +5,7 @@ import { ErrorService } from './utils/error.service';
 import {HeadersService} from './utils/headers.service';
 import { catchError, map, take } from 'rxjs/operators';
 
-import {Observable} from 'rxjs';
+import {Observable, pipe} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,16 @@ export class PromocoesService {
         return this.http.get(this.promocarUrl)
             .pipe(
                 map((response: any) => response.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getPromocaoById(id) {
+        const url = `${this.promocarUrl}/${id}`;
+
+        return this.http.get(url, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }

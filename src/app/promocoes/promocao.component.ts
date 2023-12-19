@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, PromocoesService } from '../services';
 import { Router } from '@angular/router';
-
+import { config } from '../shared/config';
 @Component({
   selector: 'app-promocao',
   templateUrl: './promocao.component.html',
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class PromocaoComponent implements OnInit {
     promocoes: any;
     isLoading = true;
+    TIMESTAMP;
+    SLUG;
 
     constructor(
         private promocoesService: PromocoesService,
@@ -19,13 +21,14 @@ export class PromocaoComponent implements OnInit {
 
     ngOnInit() {
         this.getPromocoes()
+        this.TIMESTAMP = new Date().getTime();
+        this.SLUG = config.SLUG;
     }
 
     getPromocoes(){
         this.promocoesService.getPromocoes().subscribe((data) => {
             this.promocoes = data;
             this.isLoading = false;
-            console.log('Promocções: ', this.promocoes);
         }, (error) => this.handleError(error))
     }
 
@@ -33,9 +36,13 @@ export class PromocaoComponent implements OnInit {
         this.messageService.error(msg);
     }
 
-    goTo() {
-        this.router.navigate(['promocao/list/2']);
-        // this.router.navigate(['list', id], { relativeTo: this.route });
+    goToDetails(id: any, verify: boolean) {
+        if (!verify || this.isClickable()) {
+          this.router.navigate([`promocao/list/${id}`]);
+        }
     }
-      
+
+    isClickable(): boolean {
+        return window.innerWidth <= 768;
+    }
 }
