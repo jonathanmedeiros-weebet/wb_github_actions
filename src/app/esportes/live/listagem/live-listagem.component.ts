@@ -362,7 +362,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     cotacoesPorTipo(jogo) {
         const cotacoes = jogo.value.cotacoes;
-        const sportId = jogo.value.sport_id ?? 1;
+        const sportId = jogo.value.sport_id;
 
         const mercadosPrincipais = [];
 

@@ -139,13 +139,13 @@
             </div>
 
             <div class="esporte" *ngIf="qtdJogosBasquete > 0">
-                <div class="esporte-header" (click)="toggleEsporte(18)">
+                <div class="esporte-header" (click)="toggleEsporte(48242)">
                     <span class="column-left">
                         <span class="wbicon icon-futebol"></span>
                         <span class="campeonato-nome">{{'submenu.basquete' | translate}}</span>
                     </span>
 
-                    <span *ngIf="esporteAberto(18); else downIcon">
+                    <span *ngIf="esporteAberto(48242); else downIcon">
                             <i class="fa fa-angle-up"></i>
                         </span>
                     <ng-template #downIcon>
@@ -204,7 +204,7 @@
                                         <div class="time-a">
                                             <div class="escudo-container">
                                             <span *ngIf="jogo.value.time_a_img; else defaulImageA" class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.value.time_a_img}}.png"
+                                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.value.time_a_img}}.png"
                                                      class="escudo-img" size="s">
                                             </span>
                                                 <ng-template #defaulImageA class="escudo">
@@ -220,7 +220,7 @@
                                         <div class="time-b">
                                             <div class="escudo-container">
                                             <span *ngIf="jogo.value.time_b_img; else defaulImageB" class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.value.time_b_img}}.png"
+                                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.value.time_b_img}}.png"
                                                      class="escudo-img" size="s">
                                             </span>
                                                 <ng-template #defaulImageB class="escudo">
